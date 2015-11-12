@@ -1,0 +1,7507 @@
+VERSION 5.00
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
+Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Begin VB.Form frmConfParamAplic 
+   BorderStyle     =   3  'Fixed Dialog
+   Caption         =   "Parámetros de la Aplicación"
+   ClientHeight    =   6870
+   ClientLeft      =   45
+   ClientTop       =   735
+   ClientWidth     =   9435
+   Icon            =   "frmConfParamAplic.frx":0000
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   ScaleHeight     =   6870
+   ScaleWidth      =   9435
+   ShowInTaskbar   =   0   'False
+   StartUpPosition =   2  'CenterScreen
+   Begin TabDlg.SSTab SSTab1 
+      Height          =   5580
+      Left            =   210
+      TabIndex        =   91
+      Top             =   600
+      Width           =   9120
+      _ExtentX        =   16087
+      _ExtentY        =   9843
+      _Version        =   393216
+      Tabs            =   13
+      Tab             =   4
+      TabsPerRow      =   7
+      TabHeight       =   520
+      ForeColor       =   8388608
+      TabCaption(0)   =   "Contabilidad"
+      TabPicture(0)   =   "frmConfParamAplic.frx":000C
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Frame6"
+      Tab(0).Control(1)=   "Frame2"
+      Tab(0).ControlCount=   2
+      TabCaption(1)   =   "Internet"
+      TabPicture(1)   =   "frmConfParamAplic.frx":0028
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "Frame7"
+      Tab(1).Control(1)=   "Frame21"
+      Tab(1).Control(2)=   "Frame17"
+      Tab(1).Control(3)=   "Frame4"
+      Tab(1).ControlCount=   4
+      TabCaption(2)   =   "Entradas"
+      TabPicture(2)   =   "frmConfParamAplic.frx":0044
+      Tab(2).ControlEnabled=   0   'False
+      Tab(2).Control(0)=   "Label11"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "Label14"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label19"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "Label20"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "Label21"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "Label22"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "Label1(101)"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "imgAyuda(2)"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "Frame3"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).Control(9)=   "chkTaraTractor"
+      Tab(2).Control(9).Enabled=   0   'False
+      Tab(2).Control(10)=   "chkTraza"
+      Tab(2).Control(10).Enabled=   0   'False
+      Tab(2).Control(11)=   "Text1(24)"
+      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(12)=   "Text1(31)"
+      Tab(2).Control(12).Enabled=   0   'False
+      Tab(2).Control(13)=   "chkAgruparNotas"
+      Tab(2).Control(13).Enabled=   0   'False
+      Tab(2).Control(14)=   "Text1(64)"
+      Tab(2).Control(14).Enabled=   0   'False
+      Tab(2).Control(15)=   "Text1(65)"
+      Tab(2).Control(15).Enabled=   0   'False
+      Tab(2).Control(16)=   "Text1(66)"
+      Tab(2).Control(16).Enabled=   0   'False
+      Tab(2).Control(17)=   "chkRespetarNroNota"
+      Tab(2).Control(17).Enabled=   0   'False
+      Tab(2).Control(18)=   "chkNotaManual"
+      Tab(2).Control(18).Enabled=   0   'False
+      Tab(2).Control(19)=   "Text1(109)"
+      Tab(2).Control(19).Enabled=   0   'False
+      Tab(2).Control(20)=   "chkCoopro"
+      Tab(2).Control(20).Enabled=   0   'False
+      Tab(2).ControlCount=   21
+      TabCaption(3)   =   "Aridoc"
+      TabPicture(3)   =   "frmConfParamAplic.frx":0060
+      Tab(3).ControlEnabled=   0   'False
+      Tab(3).Control(0)=   "Label1(28)"
+      Tab(3).Control(0).Enabled=   0   'False
+      Tab(3).Control(1)=   "imgBuscar(9)"
+      Tab(3).Control(1).Enabled=   0   'False
+      Tab(3).Control(2)=   "SSTab2"
+      Tab(3).Control(2).Enabled=   0   'False
+      Tab(3).Control(3)=   "Text1(13)"
+      Tab(3).Control(3).Enabled=   0   'False
+      Tab(3).Control(4)=   "Text2(13)"
+      Tab(3).Control(4).Enabled=   0   'False
+      Tab(3).ControlCount=   5
+      TabCaption(4)   =   "Otros"
+      TabPicture(4)   =   "frmConfParamAplic.frx":007C
+      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).Control(0)=   "Label12"
+      Tab(4).Control(0).Enabled=   0   'False
+      Tab(4).Control(1)=   "Label13"
+      Tab(4).Control(1).Enabled=   0   'False
+      Tab(4).Control(2)=   "imgBuscar(0)"
+      Tab(4).Control(2).Enabled=   0   'False
+      Tab(4).Control(3)=   "Label1(0)"
+      Tab(4).Control(3).Enabled=   0   'False
+      Tab(4).Control(4)=   "Label1(58)"
+      Tab(4).Control(4).Enabled=   0   'False
+      Tab(4).Control(5)=   "Label1(4)"
+      Tab(4).Control(5).Enabled=   0   'False
+      Tab(4).Control(6)=   "Label15"
+      Tab(4).Control(6).Enabled=   0   'False
+      Tab(4).Control(7)=   "imgZoom(0)"
+      Tab(4).Control(7).Enabled=   0   'False
+      Tab(4).Control(8)=   "imgZoom(1)"
+      Tab(4).Control(8).Enabled=   0   'False
+      Tab(4).Control(9)=   "Label16"
+      Tab(4).Control(9).Enabled=   0   'False
+      Tab(4).Control(10)=   "Label17"
+      Tab(4).Control(10).Enabled=   0   'False
+      Tab(4).Control(11)=   "Label1(102)"
+      Tab(4).Control(11).Enabled=   0   'False
+      Tab(4).Control(12)=   "Text1(25)"
+      Tab(4).Control(12).Enabled=   0   'False
+      Tab(4).Control(13)=   "Text1(26)"
+      Tab(4).Control(13).Enabled=   0   'False
+      Tab(4).Control(14)=   "Text1(27)"
+      Tab(4).Control(14).Enabled=   0   'False
+      Tab(4).Control(15)=   "Text2(27)"
+      Tab(4).Control(15).Enabled=   0   'False
+      Tab(4).Control(16)=   "Text1(28)"
+      Tab(4).Control(16).Enabled=   0   'False
+      Tab(4).Control(17)=   "Frame5"
+      Tab(4).Control(17).Enabled=   0   'False
+      Tab(4).Control(18)=   "Text1(37)"
+      Tab(4).Control(18).Enabled=   0   'False
+      Tab(4).Control(19)=   "Text1(38)"
+      Tab(4).Control(19).Enabled=   0   'False
+      Tab(4).Control(20)=   "Text1(39)"
+      Tab(4).Control(20).Enabled=   0   'False
+      Tab(4).Control(21)=   "Text1(41)"
+      Tab(4).Control(21).Enabled=   0   'False
+      Tab(4).Control(22)=   "Text1(110)"
+      Tab(4).Control(22).Enabled=   0   'False
+      Tab(4).ControlCount=   23
+      TabCaption(5)   =   "Terc/Trans"
+      TabPicture(5)   =   "frmConfParamAplic.frx":0098
+      Tab(5).ControlEnabled=   0   'False
+      Tab(5).Control(0)=   "Frame18"
+      Tab(5).Control(1)=   "Frame19"
+      Tab(5).ControlCount=   2
+      TabCaption(6)   =   "Almazara"
+      TabPicture(6)   =   "frmConfParamAplic.frx":00B4
+      Tab(6).ControlEnabled=   0   'False
+      Tab(6).Control(0)=   "Text1(116)"
+      Tab(6).Control(1)=   "Text1(115)"
+      Tab(6).Control(2)=   "Frame16"
+      Tab(6).Control(3)=   "Text1(48)"
+      Tab(6).Control(4)=   "Text2(48)"
+      Tab(6).Control(5)=   "Frame10"
+      Tab(6).Control(6)=   "imgAyuda(1)"
+      Tab(6).Control(7)=   "Label1(108)"
+      Tab(6).Control(8)=   "Label1(107)"
+      Tab(6).Control(9)=   "imgBuscar(3)"
+      Tab(6).Control(10)=   "Label1(34)"
+      Tab(6).ControlCount=   11
+      TabCaption(7)   =   "ADV"
+      TabPicture(7)   =   "frmConfParamAplic.frx":00D0
+      Tab(7).ControlEnabled=   0   'False
+      Tab(7).Control(0)=   "Text1(114)"
+      Tab(7).Control(1)=   "Text2(114)"
+      Tab(7).Control(2)=   "Text1(58)"
+      Tab(7).Control(3)=   "Text2(58)"
+      Tab(7).Control(4)=   "Text2(57)"
+      Tab(7).Control(5)=   "Text1(57)"
+      Tab(7).Control(6)=   "Text1(56)"
+      Tab(7).Control(7)=   "Text2(56)"
+      Tab(7).Control(8)=   "imgBuscar(23)"
+      Tab(7).Control(9)=   "Label1(106)"
+      Tab(7).Control(10)=   "imgBuscar(58)"
+      Tab(7).Control(11)=   "Label1(44)"
+      Tab(7).Control(12)=   "Label1(42)"
+      Tab(7).Control(13)=   "imgBuscar(5)"
+      Tab(7).Control(14)=   "imgBuscar(4)"
+      Tab(7).Control(15)=   "Label1(36)"
+      Tab(7).ControlCount=   16
+      TabCaption(8)   =   "Suministros"
+      TabPicture(8)   =   "frmConfParamAplic.frx":00EC
+      Tab(8).ControlEnabled=   0   'False
+      Tab(8).Control(0)=   "Text1(62)"
+      Tab(8).Control(1)=   "Text1(60)"
+      Tab(8).Control(2)=   "Text2(60)"
+      Tab(8).Control(3)=   "Label1(52)"
+      Tab(8).Control(4)=   "imgBuscar(60)"
+      Tab(8).Control(5)=   "Label1(46)"
+      Tab(8).ControlCount=   6
+      TabCaption(9)   =   "Bodega"
+      TabPicture(9)   =   "frmConfParamAplic.frx":0108
+      Tab(9).ControlEnabled=   0   'False
+      Tab(9).Control(0)=   "Text1(128)"
+      Tab(9).Control(1)=   "Frame15"
+      Tab(9).Control(2)=   "Text1(76)"
+      Tab(9).Control(3)=   "Text2(76)"
+      Tab(9).Control(4)=   "Text1(75)"
+      Tab(9).Control(5)=   "Text1(69)"
+      Tab(9).Control(6)=   "Text2(69)"
+      Tab(9).Control(7)=   "Text1(59)"
+      Tab(9).Control(8)=   "Text2(59)"
+      Tab(9).Control(9)=   "ChkContadorManual"
+      Tab(9).Control(10)=   "Text2(63)"
+      Tab(9).Control(11)=   "Text1(63)"
+      Tab(9).Control(12)=   "imgAyuda(3)"
+      Tab(9).Control(13)=   "Label1(120)"
+      Tab(9).Control(14)=   "imgBuscar(16)"
+      Tab(9).Control(15)=   "Label1(76)"
+      Tab(9).Control(16)=   "Label1(75)"
+      Tab(9).Control(17)=   "imgBuscar(69)"
+      Tab(9).Control(18)=   "Label1(65)"
+      Tab(9).Control(19)=   "imgBuscar(59)"
+      Tab(9).Control(20)=   "Label1(45)"
+      Tab(9).Control(21)=   "Label1(53)"
+      Tab(9).Control(22)=   "imgBuscar(10)"
+      Tab(9).ControlCount=   23
+      TabCaption(10)  =   "Telefonia"
+      TabPicture(10)  =   "frmConfParamAplic.frx":0124
+      Tab(10).ControlEnabled=   0   'False
+      Tab(10).Control(0)=   "Text1(71)"
+      Tab(10).Control(1)=   "Text2(70)"
+      Tab(10).Control(2)=   "Text1(70)"
+      Tab(10).Control(3)=   "Label1(67)"
+      Tab(10).Control(4)=   "Label1(66)"
+      Tab(10).Control(5)=   "imgBuscar(70)"
+      Tab(10).ControlCount=   6
+      TabCaption(11)  =   "Nóminas"
+      TabPicture(11)  =   "frmConfParamAplic.frx":0140
+      Tab(11).ControlEnabled=   0   'False
+      Tab(11).Control(0)=   "Text1(108)"
+      Tab(11).Control(1)=   "Text1(101)"
+      Tab(11).Control(2)=   "Text1(100)"
+      Tab(11).Control(3)=   "Text1(99)"
+      Tab(11).Control(4)=   "Text1(98)"
+      Tab(11).Control(5)=   "Text1(97)"
+      Tab(11).Control(6)=   "Text1(72)"
+      Tab(11).Control(7)=   "Text2(72)"
+      Tab(11).Control(8)=   "Label1(100)"
+      Tab(11).Control(9)=   "Label1(97)"
+      Tab(11).Control(10)=   "Label1(96)"
+      Tab(11).Control(11)=   "Label1(95)"
+      Tab(11).Control(12)=   "Label1(94)"
+      Tab(11).Control(13)=   "Label31"
+      Tab(11).Control(14)=   "imgBuscar(13)"
+      Tab(11).Control(15)=   "Label1(68)"
+      Tab(11).ControlCount=   16
+      TabCaption(12)  =   "Pozos"
+      TabPicture(12)  =   "frmConfParamAplic.frx":015C
+      Tab(12).ControlEnabled=   0   'False
+      Tab(12).Control(0)=   "Label24"
+      Tab(12).Control(1)=   "Label25"
+      Tab(12).Control(2)=   "Label27"
+      Tab(12).Control(3)=   "imgBuscar(17)"
+      Tab(12).Control(4)=   "Label1(85)"
+      Tab(12).Control(5)=   "Label28"
+      Tab(12).Control(6)=   "Label26"
+      Tab(12).Control(7)=   "Label29"
+      Tab(12).Control(8)=   "Label1(113)"
+      Tab(12).Control(9)=   "imgBuscar(25)"
+      Tab(12).Control(10)=   "Label1(114)"
+      Tab(12).Control(11)=   "imgBuscar(122)"
+      Tab(12).Control(12)=   "imgBuscar(123)"
+      Tab(12).Control(13)=   "Label1(115)"
+      Tab(12).Control(14)=   "imgBuscar(124)"
+      Tab(12).Control(15)=   "Label1(116)"
+      Tab(12).Control(16)=   "Label1(118)"
+      Tab(12).Control(17)=   "imgBuscar(126)"
+      Tab(12).Control(18)=   "Label1(119)"
+      Tab(12).Control(19)=   "imgBuscar(127)"
+      Tab(12).Control(20)=   "imgBuscar(129)"
+      Tab(12).Control(21)=   "Label1(121)"
+      Tab(12).Control(22)=   "imgBuscar(130)"
+      Tab(12).Control(23)=   "Label1(122)"
+      Tab(12).Control(24)=   "Label1(131)"
+      Tab(12).Control(25)=   "imgBuscar(131)"
+      Tab(12).Control(26)=   "Label1(123)"
+      Tab(12).Control(27)=   "Label1(124)"
+      Tab(12).Control(28)=   "Label1(125)"
+      Tab(12).Control(29)=   "imgBuscar(134)"
+      Tab(12).Control(30)=   "Text1(88)"
+      Tab(12).Control(31)=   "Text1(86)"
+      Tab(12).Control(32)=   "Text1(89)"
+      Tab(12).Control(33)=   "Text1(87)"
+      Tab(12).Control(34)=   "Text1(90)"
+      Tab(12).Control(35)=   "Text2(90)"
+      Tab(12).Control(36)=   "Text1(92)"
+      Tab(12).Control(37)=   "Text1(91)"
+      Tab(12).Control(38)=   "Text2(121)"
+      Tab(12).Control(39)=   "Text1(121)"
+      Tab(12).Control(40)=   "Text2(122)"
+      Tab(12).Control(41)=   "Text1(122)"
+      Tab(12).Control(42)=   "Text1(123)"
+      Tab(12).Control(43)=   "Text2(123)"
+      Tab(12).Control(44)=   "Text1(124)"
+      Tab(12).Control(45)=   "Text2(124)"
+      Tab(12).Control(46)=   "Text2(126)"
+      Tab(12).Control(47)=   "Text1(126)"
+      Tab(12).Control(48)=   "Text2(127)"
+      Tab(12).Control(49)=   "Text1(127)"
+      Tab(12).Control(50)=   "Text1(129)"
+      Tab(12).Control(51)=   "Text2(129)"
+      Tab(12).Control(52)=   "Text1(130)"
+      Tab(12).Control(53)=   "Text2(130)"
+      Tab(12).Control(54)=   "Text2(131)"
+      Tab(12).Control(55)=   "Text1(131)"
+      Tab(12).Control(56)=   "Text1(132)"
+      Tab(12).Control(57)=   "Text1(133)"
+      Tab(12).Control(58)=   "Text2(134)"
+      Tab(12).Control(59)=   "Text1(134)"
+      Tab(12).ControlCount=   60
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   134
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   238
+         Tag             =   "Cta Contable Ventas Manta Pozos|T|S|||rparam|ctaventasmantapoz|||"
+         Top             =   4800
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   134
+         Left            =   -71160
+         TabIndex        =   419
+         Top             =   4800
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   133
+         Left            =   -67530
+         MaxLength       =   9
+         TabIndex        =   320
+         Tag             =   "Consumo Máximo Pozos|N|N|||rparam|consumomaxpoz|000000000||"
+         Top             =   1530
+         Width           =   1215
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   132
+         Left            =   -67530
+         MaxLength       =   9
+         TabIndex        =   319
+         Tag             =   "Consumo Mínimo Pozos|N|N|||rparam|consumominpoz|000000000||"
+         Top             =   1200
+         Width           =   1215
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   131
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   326
+         Tag             =   "Carta Reclamación Pozos|T|S|||rparam|codcartapoz|||"
+         Top             =   3150
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   315
+         Index           =   131
+         Left            =   -71160
+         TabIndex        =   415
+         Top             =   3150
+         Width           =   3690
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   130
+         Left            =   -71160
+         TabIndex        =   413
+         Top             =   4500
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   130
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   237
+         Tag             =   "Cta Contable Ventas Mto. Pozos|T|S|||rparam|ctaventasmtopoz|||"
+         Top             =   4500
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   129
+         Left            =   -71160
+         TabIndex        =   411
+         Top             =   4170
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   129
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   236
+         Tag             =   "Cta Contable Ventas Talla Pozos|T|S|||rparam|ctaventastalpoz|||"
+         Top             =   4170
+         Width           =   1215
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   128
+         Left            =   -72510
+         MaxLength       =   10
+         TabIndex        =   187
+         Tag             =   "Porcentaje Incr.kilos entrada|N|S|||rparam|porckilosbod|##0.00||"
+         Top             =   3840
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   127
+         Left            =   -73200
+         MaxLength       =   10
+         TabIndex        =   323
+         Tag             =   "FP Recibo Pozos|N|S|||rparam|forparecpoz|000||"
+         Top             =   2490
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   127
+         Left            =   -72570
+         TabIndex        =   408
+         Top             =   2490
+         Width           =   4350
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   126
+         Left            =   -73200
+         MaxLength       =   10
+         TabIndex        =   322
+         Tag             =   "FP contado Pozos|N|S|||rparam|forpaconpoz|000||"
+         Top             =   2190
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   126
+         Left            =   -72570
+         TabIndex        =   406
+         Top             =   2190
+         Width           =   4350
+      End
+      Begin VB.Frame Frame7 
+         Height          =   1635
+         Left            =   -74595
+         TabIndex        =   100
+         Top             =   750
+         Width           =   8010
+         Begin VB.CheckBox chkOutlook 
+            Caption         =   "Enviar desde Outlook"
+            Height          =   375
+            Left            =   5250
+            TabIndex        =   14
+            Tag             =   "Outlook|N|N|||rparam|EnvioDesdeOutlook|||"
+            Top             =   1200
+            Width           =   2175
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Index           =   125
+            Left            =   2730
+            MaxLength       =   30
+            TabIndex        =   13
+            Tag             =   "LanzaMailOutlook|T|S|||rparam|arigesmail|||"
+            Text            =   "3"
+            Top             =   1230
+            Width           =   1620
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   5
+            Left            =   1260
+            MaxLength       =   50
+            TabIndex        =   9
+            Tag             =   "Direccion e-mail|T|S|||rparam|diremail|||"
+            Text            =   "3"
+            Top             =   240
+            Width           =   6210
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   6
+            Left            =   1260
+            MaxLength       =   50
+            TabIndex        =   10
+            Tag             =   "Servidor SMTP|T|S|||rparam|smtpHost|||"
+            Text            =   "3"
+            Top             =   570
+            Width           =   6210
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   7
+            Left            =   1260
+            MaxLength       =   50
+            TabIndex        =   11
+            Tag             =   "Usuario SMTP|T|S|||rparam|smtpUser|||"
+            Text            =   "3"
+            Top             =   900
+            Width           =   3090
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Index           =   8
+            Left            =   5250
+            MaxLength       =   15
+            PasswordChar    =   "*"
+            TabIndex        =   12
+            Tag             =   "Password SMTP|T|S|||rparam|smtpPass|||"
+            Text            =   "3"
+            Top             =   900
+            Width           =   2220
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Lanza pantalla mail outlook"
+            Height          =   195
+            Index           =   117
+            Left            =   120
+            TabIndex        =   405
+            Top             =   1260
+            Width           =   2040
+         End
+         Begin VB.Label Label1 
+            Caption         =   "E-Mail"
+            Height          =   195
+            Index           =   20
+            Left            =   120
+            TabIndex        =   105
+            Top             =   270
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Servidor SMTP"
+            Height          =   195
+            Index           =   21
+            Left            =   120
+            TabIndex        =   104
+            Top             =   630
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Usuario"
+            Height          =   195
+            Index           =   22
+            Left            =   120
+            TabIndex        =   103
+            Top             =   960
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Password"
+            Height          =   195
+            Index           =   23
+            Left            =   4440
+            TabIndex        =   102
+            Top             =   960
+            Width           =   840
+         End
+         Begin VB.Label Label8 
+            Caption         =   "Envio E-Mail"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   0
+            Left            =   360
+            TabIndex        =   101
+            Top             =   0
+            Width           =   1320
+         End
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   315
+         Index           =   124
+         Left            =   -71160
+         TabIndex        =   397
+         Top             =   5100
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   124
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   329
+         Tag             =   "Centro Coste Pozos|T|S|||rparam|codccostpoz|||"
+         Top             =   5100
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   123
+         Left            =   -71160
+         TabIndex        =   395
+         Top             =   3840
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   123
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   328
+         Tag             =   "Cta Contable Ventas Cuotas Pozos|T|S|||rparam|ctaventascuopoz|||"
+         Top             =   3840
+         Width           =   1215
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   122
+         Left            =   -72390
+         MaxLength       =   10
+         TabIndex        =   327
+         Tag             =   "Cta Contable Ventas Consumo Pozos|T|S|||rparam|ctaventasconspoz|||"
+         Top             =   3510
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   122
+         Left            =   -71160
+         TabIndex        =   393
+         Top             =   3510
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   121
+         Left            =   -72600
+         MaxLength       =   10
+         TabIndex        =   314
+         Tag             =   "Sección Pozos|N|S|||rparam|seccionpozos|000||"
+         Top             =   750
+         Width           =   525
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   121
+         Left            =   -71970
+         TabIndex        =   391
+         Top             =   750
+         Width           =   3660
+      End
+      Begin VB.Frame Frame21 
+         Caption         =   "Envio SMS"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   1275
+         Left            =   -74580
+         TabIndex        =   387
+         Top             =   2400
+         Width           =   8025
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   120
+            Left            =   1230
+            MaxLength       =   11
+            TabIndex        =   17
+            Tag             =   "Remitente SMS|T|S|||rparam|smsremitente|||"
+            Text            =   "3"
+            Top             =   930
+            Width           =   3090
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Index           =   119
+            Left            =   1230
+            MaxLength       =   50
+            PasswordChar    =   "*"
+            TabIndex        =   16
+            Tag             =   "Clave SMS|T|S|||rparam|smsclave|||"
+            Text            =   "3"
+            Top             =   600
+            Width           =   6210
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   118
+            Left            =   1230
+            MaxLength       =   50
+            TabIndex        =   15
+            Tag             =   "Direccion e-mail SMS|T|S|||rparam|smsemail|||"
+            Text            =   "3"
+            Top             =   270
+            Width           =   6210
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Remitente"
+            Height          =   195
+            Index           =   112
+            Left            =   120
+            TabIndex        =   390
+            Top             =   960
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Clave"
+            Height          =   195
+            Index           =   111
+            Left            =   120
+            TabIndex        =   389
+            Top             =   630
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "E-Mail"
+            Height          =   195
+            Index           =   110
+            Left            =   120
+            TabIndex        =   388
+            Top             =   300
+            Width           =   1380
+         End
+      End
+      Begin VB.CheckBox chkCoopro 
+         Caption         =   "Desdoble Coopropietarios "
+         Height          =   375
+         Left            =   -71610
+         TabIndex        =   51
+         Tag             =   "Desdoble Coopropietarios Entradas|N|S|||rparam|cooproentradas|0||"
+         Top             =   4800
+         Width           =   2145
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   116
+         Left            =   -67470
+         MaxLength       =   10
+         TabIndex        =   376
+         Tag             =   "Precio por litro Gto.Envasado|N|S|||rparam|gtoenvasado||#,##0.0000|"
+         Top             =   4950
+         Width           =   945
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   115
+         Left            =   -67470
+         MaxLength       =   10
+         TabIndex        =   375
+         Tag             =   "Precio por Kilo Gto.Molturación|N|S|||rparam|gtomoltura||#,##0.0000|"
+         Top             =   4530
+         Width           =   945
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   114
+         Left            =   -72510
+         MaxLength       =   10
+         TabIndex        =   84
+         Tag             =   "Cod.Iva Pozos|N|S|||rparam|codivaexeadv|000||"
+         Top             =   2820
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   114
+         Left            =   -71910
+         TabIndex        =   381
+         Top             =   2820
+         Width           =   4860
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   110
+         Left            =   1830
+         MaxLength       =   10
+         TabIndex        =   55
+         Tag             =   "Faneca|N|N|||rparam|faneca|0.0000||"
+         Top             =   1140
+         Width           =   1185
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   109
+         Left            =   -66990
+         MaxLength       =   10
+         TabIndex        =   52
+         Tag             =   "Porc.Incr/Decr.Aforo|N|N|||rparam|porcincreaforo||##0.00|"
+         Top             =   4830
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   108
+         Left            =   -72600
+         MaxLength       =   4
+         TabIndex        =   280
+         Tag             =   "Nro.Maximo Jornadas|N|S|0|1000|rparam|nromaxjornadas||###0|"
+         Top             =   3930
+         Width           =   585
+      End
+      Begin VB.CheckBox chkNotaManual 
+         Caption         =   "Nro.Nota manual"
+         Height          =   375
+         Left            =   -74520
+         TabIndex        =   46
+         Tag             =   "Nro Nota Manual|N|S|||rparam|nronotamanual|0||"
+         Top             =   5100
+         Width           =   2145
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   101
+         Left            =   -72600
+         MaxLength       =   10
+         TabIndex        =   276
+         Tag             =   "Porcentaje Jornadas|N|S|0|100|rparam|porcjornada||##0.00|"
+         Top             =   2100
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   100
+         Left            =   -72600
+         MaxLength       =   10
+         TabIndex        =   279
+         Tag             =   "Porcentaje IRPF|N|S|0|100|rparam|porcirpf||##0.00|"
+         Top             =   3450
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   99
+         Left            =   -72600
+         MaxLength       =   10
+         TabIndex        =   278
+         Tag             =   "Porcentaje Seg.Social 2|N|S|0|100|rparam|porcsegso2||##0.00|"
+         Top             =   3000
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   98
+         Left            =   -72600
+         MaxLength       =   10
+         TabIndex        =   277
+         Tag             =   "Porcentaje Seg.Social 1|N|S|0|100|rparam|porcsegso1||##0.00|"
+         Top             =   2550
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   97
+         Left            =   -73320
+         MaxLength       =   8
+         TabIndex        =   275
+         Tag             =   "Euros Trabajador/dia|N|N|||rparam|eurostrabdia|#,##0.00||"
+         Text            =   "cost.h"
+         Top             =   1530
+         Width           =   1170
+      End
+      Begin VB.Frame Frame19 
+         Caption         =   "Terceros"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   1185
+         Left            =   -74790
+         TabIndex        =   344
+         Top             =   810
+         Width           =   8205
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   42
+            Left            =   3600
+            TabIndex        =   346
+            Top             =   690
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   42
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   62
+            Tag             =   "Cta Contable Retencion|T|S|||rparam|ctaterreten|||"
+            Top             =   690
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   40
+            Left            =   2940
+            TabIndex        =   345
+            Top             =   330
+            Width           =   4350
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   40
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   61
+            Tag             =   "Cod.Iva Extranjero|N|N|||rparam|codivaintracom|000||"
+            Top             =   330
+            Width           =   585
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Retención"
+            Height          =   195
+            Index           =   13
+            Left            =   330
+            TabIndex        =   348
+            Top             =   750
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   2
+            Left            =   2040
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cod.IVA Extranjero"
+            Height          =   195
+            Index           =   5
+            Left            =   330
+            TabIndex        =   347
+            Top             =   390
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   1
+            Left            =   2040
+            ToolTipText     =   "Buscar Iva"
+            Top             =   360
+            Width           =   240
+         End
+      End
+      Begin VB.Frame Frame18 
+         Caption         =   "Transporte"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   3315
+         Left            =   -74790
+         TabIndex        =   338
+         Top             =   2070
+         Width           =   8205
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   117
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   70
+            Tag             =   "Cta Contable Retencion|T|S|||rparam|ctatrareten|||"
+            Top             =   2880
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   117
+            Left            =   3600
+            TabIndex        =   385
+            Top             =   2880
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   113
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   65
+            Tag             =   "Tarifa transporte local|N|S|||rparam|tracodtarif2|00||"
+            Top             =   1050
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   113
+            Left            =   3000
+            TabIndex        =   379
+            Top             =   1050
+            Width           =   4260
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   111
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   68
+            Tag             =   "Precio por Kilo Transportado|N|S|||rparam|preciotra||#,##0.0000|"
+            Top             =   2130
+            Width           =   945
+         End
+         Begin VB.ComboBox Combo1 
+            Height          =   315
+            Index           =   29
+            Left            =   2310
+            Style           =   2  'Dropdown List
+            TabIndex        =   69
+            Tag             =   "Tipo contador Factura Transporte|N|N|||rparam|tratipocontador||N|"
+            Top             =   2490
+            Width           =   2730
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   102
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   67
+            Tag             =   "Porcentaje Retención Transportista|N|S|||rparam|porcretenfactra||##0.00|"
+            Top             =   1770
+            Width           =   555
+         End
+         Begin VB.ComboBox Combo1 
+            Height          =   315
+            Index           =   0
+            Left            =   2310
+            Style           =   2  'Dropdown List
+            TabIndex        =   63
+            Tag             =   "Tipo de Transporte|N|N|||rparam|tratipoportes||N|"
+            Top             =   300
+            Width           =   2730
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   94
+            Left            =   3000
+            TabIndex        =   340
+            Top             =   1410
+            Width           =   4230
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   94
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   66
+            Tag             =   "Concepto Gasto Transporte|N|S|||rparam|tracodgasto|00||"
+            Top             =   1410
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   93
+            Left            =   3000
+            TabIndex        =   339
+            Top             =   690
+            Width           =   4260
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   93
+            Left            =   2310
+            MaxLength       =   10
+            TabIndex        =   64
+            Tag             =   "Tarifa transporte local|N|S|||rparam|tracodtarif|00||"
+            Top             =   690
+            Width           =   585
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   24
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   2910
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Retención"
+            Height          =   195
+            Index           =   109
+            Left            =   300
+            TabIndex        =   386
+            Top             =   2910
+            Width           =   1650
+         End
+         Begin VB.Image imgAyuda 
+            Height          =   240
+            Index           =   0
+            Left            =   7470
+            MousePointer    =   4  'Icon
+            Tag             =   "-1"
+            ToolTipText     =   "Ayuda"
+            Top             =   690
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   22
+            Left            =   2010
+            ToolTipText     =   "Buscar Tarifa"
+            Top             =   1080
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Tarifa 2 Local "
+            Height          =   195
+            Index           =   105
+            Left            =   300
+            TabIndex        =   380
+            Top             =   1080
+            Width           =   1140
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Precio por Kilo Transportado"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   103
+            Left            =   300
+            TabIndex        =   373
+            Top             =   2175
+            Width           =   2040
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Tipo Contador Factura "
+            Height          =   195
+            Index           =   99
+            Left            =   300
+            TabIndex        =   369
+            Top             =   2520
+            Width           =   1620
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Porcentaje Retención"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   98
+            Left            =   300
+            TabIndex        =   367
+            Top             =   1815
+            Width           =   2040
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Se trabaja con "
+            Height          =   195
+            Index           =   88
+            Left            =   300
+            TabIndex        =   343
+            Top             =   300
+            Width           =   1620
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Concepto Gasto"
+            Height          =   195
+            Index           =   87
+            Left            =   300
+            TabIndex        =   342
+            Top             =   1440
+            Width           =   1170
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   19
+            Left            =   2010
+            ToolTipText     =   "Buscar Concepto"
+            Top             =   1440
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Tarifa 1 Local "
+            Height          =   195
+            Index           =   86
+            Left            =   300
+            TabIndex        =   341
+            Top             =   720
+            Width           =   1140
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   18
+            Left            =   2010
+            ToolTipText     =   "Buscar Tarifa"
+            Top             =   720
+            Width           =   240
+         End
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   91
+         Left            =   -73200
+         MaxLength       =   8
+         TabIndex        =   324
+         Tag             =   "Importe Cuota Pozos|N|S|||rparam|imporcuotapoz|###,##0.00||"
+         Text            =   "cuota"
+         Top             =   2820
+         Width           =   1560
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   92
+         Left            =   -70620
+         MaxLength       =   8
+         TabIndex        =   325
+         Tag             =   "Importe Derrama Pozos|N|S|||rparam|imporderramapoz|###,##0.00||"
+         Text            =   "derrama"
+         Top             =   2820
+         Width           =   1560
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   90
+         Left            =   -72570
+         TabIndex        =   333
+         Top             =   1890
+         Width           =   4350
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   90
+         Left            =   -73200
+         MaxLength       =   10
+         TabIndex        =   321
+         Tag             =   "Cod.Iva Pozos|N|S|||rparam|codivapoz|000||"
+         Top             =   1890
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   87
+         Left            =   -71370
+         MaxLength       =   8
+         TabIndex        =   316
+         Tag             =   "Precio 1|N|S|||rparam|precio1poz|#,##0.00||"
+         Text            =   "precio1"
+         Top             =   1260
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   89
+         Left            =   -71370
+         MaxLength       =   8
+         TabIndex        =   318
+         Tag             =   "Precio 2|N|S|||rparam|precio2poz|#,##0.00||"
+         Text            =   "precio2"
+         Top             =   1560
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   86
+         Left            =   -73200
+         MaxLength       =   8
+         TabIndex        =   315
+         Tag             =   "Consumo 1|N|S|||rparam|hastametcub1poz|0000000||"
+         Text            =   "m3"
+         Top             =   1260
+         Width           =   1560
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   88
+         Left            =   -73200
+         MaxLength       =   8
+         TabIndex        =   317
+         Tag             =   "Consumo 2|N|S|||rparam|hastametcub2poz|0000000||"
+         Text            =   "m3"
+         Top             =   1560
+         Width           =   1560
+      End
+      Begin VB.Frame Frame17 
+         Caption         =   "Direcciones"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   1035
+         Left            =   -74580
+         TabIndex        =   312
+         Top             =   4380
+         Width           =   8025
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   95
+            Left            =   1260
+            MaxLength       =   250
+            TabIndex        =   20
+            Tag             =   "Goolzoom|T|S|||rparam|goolzoom|||"
+            Top             =   630
+            Width           =   6210
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   85
+            Left            =   1260
+            MaxLength       =   250
+            TabIndex        =   19
+            Tag             =   "Sigpac|T|S|||rparam|sigpac|||"
+            Top             =   300
+            Width           =   6210
+         End
+         Begin VB.Label Label30 
+            Caption         =   "GoolZoom"
+            Height          =   255
+            Left            =   180
+            TabIndex        =   349
+            Top             =   630
+            Width           =   885
+         End
+         Begin VB.Label Label23 
+            Caption         =   "Sigpac"
+            Height          =   255
+            Left            =   180
+            TabIndex        =   313
+            Top             =   300
+            Width           =   885
+         End
+      End
+      Begin VB.Frame Frame16 
+         Caption         =   "Última Facturación"
+         Height          =   1095
+         Left            =   -74775
+         TabIndex        =   303
+         Top             =   4365
+         Width           =   4845
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   84
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   307
+            Tag             =   "Ult.Fact.Liquidación almazara|N|S|||rparam|ultfactliqalmz|0000000||"
+            Top             =   735
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   83
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   306
+            Tag             =   "Prim.Fact.Liquidación Almazara|N|S|||rparam|primfactliqalmz|0000000||"
+            Top             =   735
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   81
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   305
+            Tag             =   "Prim.Fact.Anticipo Almazara|N|S|||rparam|primfactantalmz|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   82
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   304
+            Tag             =   "Ult.Fact.Anticipo Almazara|N|S|||rparam|ultfactantalmz|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Liquidación:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   84
+            Left            =   330
+            TabIndex        =   311
+            Top             =   735
+            Width           =   1830
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Anticipos:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   83
+            Left            =   330
+            TabIndex        =   310
+            Top             =   450
+            Width           =   810
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Desde"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   79
+            Left            =   2430
+            TabIndex        =   309
+            Top             =   150
+            Width           =   630
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Hasta"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   77
+            Left            =   3570
+            TabIndex        =   308
+            Top             =   150
+            Width           =   630
+         End
+      End
+      Begin VB.Frame Frame15 
+         Caption         =   "Última Facturación"
+         Height          =   1095
+         Left            =   -74610
+         TabIndex        =   294
+         Top             =   4170
+         Width           =   4845
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   78
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   298
+            Tag             =   "Ult.Fact.Anticipo Bodega|N|S|||rparam|ultfactantbod|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   77
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   297
+            Tag             =   "Prim.Fact.Anticipo Bodega|N|S|||rparam|primfactantbod|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   79
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   296
+            Tag             =   "Prim.Fact.Liquidación Bodega|N|S|||rparam|primfactliqbod|0000000||"
+            Top             =   735
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   80
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   295
+            Tag             =   "Ult.Fact.Liquidación bodega|N|S|||rparam|ultfactliqbod|0000000||"
+            Top             =   735
+            Width           =   915
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Hasta"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   82
+            Left            =   3570
+            TabIndex        =   302
+            Top             =   150
+            Width           =   630
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Desde"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   81
+            Left            =   2430
+            TabIndex        =   301
+            Top             =   150
+            Width           =   630
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Anticipos:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   80
+            Left            =   330
+            TabIndex        =   300
+            Top             =   450
+            Width           =   810
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Liquidación:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   78
+            Left            =   330
+            TabIndex        =   299
+            Top             =   735
+            Width           =   1830
+         End
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   76
+         Left            =   -72525
+         MaxLength       =   3
+         TabIndex        =   186
+         Tag             =   "Codigo Gasto|N|S|||rparam|codgastobod|00||"
+         Top             =   3450
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   76
+         Left            =   -71895
+         TabIndex        =   292
+         Top             =   3450
+         Width           =   4365
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   75
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   185
+         Tag             =   "Porcentaje Gasto Mant|N|N|||rparam|bodporcenmant|##0.00||"
+         Top             =   3030
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   72
+         Left            =   -73335
+         MaxLength       =   10
+         TabIndex        =   274
+         Tag             =   "Almacen Nominas|N|N|||rparam|codalmacnomi|000||"
+         Top             =   1035
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   72
+         Left            =   -72705
+         TabIndex        =   273
+         Top             =   1035
+         Width           =   4890
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   71
+         Left            =   -72570
+         MaxLength       =   1
+         TabIndex        =   269
+         Tag             =   "Letra Serie Almazara|T|S|||rparam|letraserietel|||"
+         Top             =   1395
+         Width           =   465
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   70
+         Left            =   -71310
+         TabIndex        =   270
+         Top             =   1035
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   70
+         Left            =   -72570
+         MaxLength       =   10
+         TabIndex        =   268
+         Tag             =   "Cta Contable Ventas Telefonia|T|S|||rparam|ctaventastel|||"
+         Top             =   1035
+         Width           =   1215
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   69
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   184
+         Tag             =   "Cta Contable Ventas Bodega|T|S|||rparam|ctaventasbod|||"
+         Top             =   2565
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   69
+         Left            =   -71235
+         TabIndex        =   266
+         Top             =   2595
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   59
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   183
+         Tag             =   "Cta Contable Banco|T|S|||rparam|ctabancobod|||"
+         Top             =   2190
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   59
+         Left            =   -71235
+         TabIndex        =   194
+         Top             =   2190
+         Width           =   3690
+      End
+      Begin VB.CheckBox ChkContadorManual 
+         Caption         =   "Contador de Albarán de Retirada manual "
+         Height          =   375
+         Left            =   -74595
+         TabIndex        =   182
+         Tag             =   "Contador albaran Retirada Manual|N|S|||rparam|albretiradabodman|0||"
+         Top             =   1620
+         Width           =   3405
+      End
+      Begin VB.CheckBox chkRespetarNroNota 
+         Caption         =   "Se respeta Nro.de Nota"
+         Height          =   375
+         Left            =   -74520
+         TabIndex        =   44
+         Tag             =   "Se Respeta Nro.Notas|N|N|0|1|rparam|serespetanota|0||"
+         Top             =   4485
+         Width           =   2175
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   66
+         Left            =   -67560
+         MaxLength       =   6
+         TabIndex        =   48
+         Tag             =   "Peso Caja Llena|N|S|||rparam|pesocajallena|##0.00||"
+         Text            =   "KgCajo"
+         Top             =   3900
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   65
+         Left            =   -68850
+         MaxLength       =   6
+         TabIndex        =   50
+         Tag             =   "Kilos Caja Máximo|N|N|||rparam|kiloscajamax|##0.00||"
+         Text            =   "kgmax"
+         Top             =   4470
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   64
+         Left            =   -70110
+         MaxLength       =   6
+         TabIndex        =   49
+         Tag             =   "Kilos Caja Mínimo|N|N|||rparam|kiloscajamin|##0.00||"
+         Text            =   "kgmin"
+         Top             =   4470
+         Width           =   1170
+      End
+      Begin VB.CheckBox chkAgruparNotas 
+         Caption         =   "Se agrupan notas"
+         Height          =   375
+         Left            =   -74520
+         TabIndex        =   43
+         Tag             =   "Se Agrupan Notas|N|S|||rparam|agruparnotas|0||"
+         Top             =   4170
+         Width           =   2175
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   63
+         Left            =   -71940
+         TabIndex        =   188
+         Top             =   1050
+         Width           =   4365
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   63
+         Left            =   -72570
+         MaxLength       =   3
+         TabIndex        =   181
+         Tag             =   "Sección Bodega|N|S|||rparam|seccionbodega|000||"
+         Top             =   1050
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Height          =   285
+         Index           =   62
+         Left            =   -72570
+         MaxLength       =   10
+         TabIndex        =   178
+         Tag             =   "BD Ariges|T|S|||rparam|bdariges|||"
+         Top             =   1470
+         Width           =   1155
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   60
+         Left            =   -72570
+         MaxLength       =   3
+         TabIndex        =   177
+         Tag             =   "Sección Suministros|N|S|||rparam|seccionsumi|000||"
+         Top             =   1050
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   60
+         Left            =   -71940
+         TabIndex        =   176
+         Top             =   1050
+         Width           =   3690
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   58
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   83
+         Tag             =   "Cta Contable Banco|T|S|||rparam|ctabancoadv|||"
+         Top             =   2340
+         Width           =   1215
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   58
+         Left            =   -71220
+         TabIndex        =   174
+         Top             =   2340
+         Width           =   4185
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   57
+         Left            =   -71895
+         TabIndex        =   172
+         Top             =   1410
+         Width           =   4890
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   57
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   82
+         Tag             =   "Almacen ADV|N|N|||rparam|codalmacadv|000||"
+         Top             =   1410
+         Width           =   585
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   56
+         Left            =   -72525
+         MaxLength       =   10
+         TabIndex        =   81
+         Tag             =   "Sección ADV|N|S|||rparam|seccionadv|000||"
+         Top             =   1020
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   56
+         Left            =   -71895
+         TabIndex        =   170
+         Top             =   1020
+         Width           =   4890
+      End
+      Begin VB.TextBox Text1 
+         Height          =   285
+         Index           =   41
+         Left            =   2640
+         MaxLength       =   50
+         TabIndex        =   72
+         Tag             =   "Path Traza|T|S|||rparam|directoriotraza|||"
+         Top             =   5100
+         Width           =   5325
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   48
+         Left            =   -72480
+         MaxLength       =   10
+         TabIndex        =   73
+         Tag             =   "Sección Almazara|N|S|||rparam|seccionalmaz|000||"
+         Top             =   1020
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   48
+         Left            =   -71850
+         TabIndex        =   167
+         Top             =   1020
+         Width           =   3690
+      End
+      Begin VB.Frame Frame10 
+         Caption         =   "Liquidaciones Socio"
+         Height          =   3030
+         Left            =   -74760
+         TabIndex        =   153
+         Top             =   1335
+         Width           =   8205
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   112
+            Left            =   2940
+            TabIndex        =   377
+            Top             =   2640
+            Width           =   4365
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   112
+            Left            =   2280
+            MaxLength       =   3
+            TabIndex        =   374
+            Tag             =   "Codigo Gasto|N|S|||rparam|codgastoalmz|00||"
+            Top             =   2640
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   49
+            Left            =   3570
+            TabIndex        =   159
+            Top             =   1590
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   50
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   79
+            Tag             =   "Cta Contable Gastos Almazara|T|S|||rparam|ctagastosalmz|||"
+            Top             =   1935
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   50
+            Left            =   3570
+            TabIndex        =   158
+            Top             =   1935
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   49
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   78
+            Tag             =   "Cta Contable Ventas Almazara|T|S|||rparam|ctaventasalmz|||"
+            Top             =   1590
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   54
+            Left            =   3570
+            TabIndex        =   157
+            Top             =   1275
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   54
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   77
+            Tag             =   "Cta Contable Banco|T|S|||rparam|ctabancoalmz|||"
+            Top             =   1275
+            Width           =   1215
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   51
+            Left            =   2280
+            MaxLength       =   3
+            TabIndex        =   74
+            Tag             =   "Forma Pago Positivas|N|S|||rparam|codforpaposalmz|000||"
+            Top             =   240
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   51
+            Left            =   2910
+            TabIndex        =   156
+            Top             =   240
+            Width           =   4350
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   52
+            Left            =   2280
+            MaxLength       =   3
+            TabIndex        =   75
+            Tag             =   "Forma de Pago Negativas|N|S|||rparam|codforpanegalmz|000||"
+            Top             =   555
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   52
+            Left            =   2910
+            TabIndex        =   155
+            Top             =   555
+            Width           =   4350
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   53
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   76
+            Tag             =   "Cta Contable Retencion Socio|T|S|||rparam|ctaretenalmz|||"
+            Top             =   900
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   315
+            Index           =   53
+            Left            =   3570
+            TabIndex        =   154
+            Top             =   900
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   315
+            Index           =   55
+            Left            =   2280
+            MaxLength       =   1
+            TabIndex        =   80
+            Tag             =   "Letra Serie Almazara|T|S|||rparam|letraseriealmz|||"
+            Top             =   2280
+            Width           =   465
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Código Gasto para Liq."
+            Height          =   195
+            Index           =   104
+            Left            =   300
+            TabIndex        =   378
+            Top             =   2640
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   21
+            Left            =   2010
+            ToolTipText     =   "Buscar Concepto Gasto"
+            Top             =   2640
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Ventas"
+            Height          =   195
+            Index           =   37
+            Left            =   300
+            TabIndex        =   166
+            Top             =   1650
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   50
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1965
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Gastos"
+            Height          =   195
+            Index           =   38
+            Left            =   300
+            TabIndex        =   165
+            Top             =   1965
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   49
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1620
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Banco Prevista"
+            Height          =   195
+            Index           =   39
+            Left            =   300
+            TabIndex        =   164
+            Top             =   1305
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   54
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1305
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   51
+            Left            =   2010
+            ToolTipText     =   "Buscar forma Pago"
+            Top             =   270
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Forma Pago Positivas"
+            Height          =   195
+            Index           =   40
+            Left            =   300
+            TabIndex        =   163
+            Top             =   300
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   52
+            Left            =   2010
+            ToolTipText     =   "Buscar forma pago"
+            Top             =   585
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Forma Pago Negativas"
+            Height          =   195
+            Index           =   41
+            Left            =   300
+            TabIndex        =   162
+            Top             =   615
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   53
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   930
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Retención"
+            Height          =   195
+            Index           =   43
+            Left            =   300
+            TabIndex        =   161
+            Top             =   960
+            Width           =   1650
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Letra Serie Clientes"
+            Height          =   195
+            Index           =   35
+            Left            =   300
+            TabIndex        =   160
+            Top             =   2310
+            Width           =   1650
+         End
+      End
+      Begin VB.Frame Frame6 
+         Caption         =   "Anticipos / Liquidaciones Socio"
+         Height          =   2505
+         Left            =   -74520
+         TabIndex        =   142
+         Top             =   2520
+         Width           =   7665
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   47
+            Left            =   3570
+            TabIndex        =   151
+            Top             =   1920
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   47
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   8
+            Tag             =   "Cta Contable Banco|T|S|||rparam|ctabanco|||"
+            Top             =   1920
+            Width           =   1215
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   43
+            Left            =   2280
+            MaxLength       =   3
+            TabIndex        =   4
+            Tag             =   "Forma Pago Positivas|N|S|||rparam|codforpaposi|000||"
+            Top             =   390
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   43
+            Left            =   2910
+            TabIndex        =   149
+            Top             =   390
+            Width           =   4350
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   44
+            Left            =   2280
+            MaxLength       =   3
+            TabIndex        =   5
+            Tag             =   "Forma de Pago Negativas|N|S|||rparam|codforpanega|000||"
+            Top             =   750
+            Width           =   585
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   44
+            Left            =   2910
+            TabIndex        =   146
+            Top             =   750
+            Width           =   4350
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   46
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   7
+            Tag             =   "Cta Contable Aportacion|T|S|||rparam|ctaaportasoc|||"
+            Top             =   1530
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   46
+            Left            =   3570
+            TabIndex        =   145
+            Top             =   1530
+            Width           =   3690
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   45
+            Left            =   2280
+            MaxLength       =   10
+            TabIndex        =   6
+            Tag             =   "Cta Contable Retencion Socio|T|S|||rparam|ctaretensoc|||"
+            Top             =   1140
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   45
+            Left            =   3570
+            TabIndex        =   143
+            Top             =   1140
+            Width           =   3690
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Banco Prevista"
+            Height          =   195
+            Index           =   33
+            Left            =   300
+            TabIndex        =   152
+            Top             =   1950
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   47
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1950
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   43
+            Left            =   2010
+            ToolTipText     =   "Buscar forma Pago"
+            Top             =   420
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Forma Pago Positivas"
+            Height          =   195
+            Index           =   29
+            Left            =   300
+            TabIndex        =   150
+            Top             =   450
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   44
+            Left            =   2010
+            ToolTipText     =   "Buscar forma pago"
+            Top             =   780
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Forma Pago Negativas"
+            Height          =   195
+            Index           =   32
+            Left            =   300
+            TabIndex        =   148
+            Top             =   810
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   46
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1560
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Aportación"
+            Height          =   195
+            Index           =   30
+            Left            =   300
+            TabIndex        =   147
+            Top             =   1560
+            Width           =   1650
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   45
+            Left            =   2010
+            ToolTipText     =   "Buscar cuenta"
+            Top             =   1170
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cuenta Retención"
+            Height          =   195
+            Index           =   24
+            Left            =   300
+            TabIndex        =   144
+            Top             =   1200
+            Width           =   1650
+         End
+      End
+      Begin VB.TextBox Text1 
+         Height          =   585
+         Index           =   39
+         Left            =   420
+         MaxLength       =   1000
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   71
+         Tag             =   "Texto Pie Toma Datos|T|S|||rparam|pietomadatos|||"
+         Top             =   4440
+         Width           =   7545
+      End
+      Begin VB.TextBox Text1 
+         Height          =   1125
+         Index           =   38
+         Left            =   420
+         MaxLength       =   1000
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   60
+         Tag             =   "Texto Toma Datos|T|S|||rparam|texttomadatos|||"
+         Top             =   3030
+         Width           =   7545
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   37
+         Left            =   2400
+         MaxLength       =   10
+         TabIndex        =   59
+         Tag             =   "Porcentaje AFO|N|S|||rparam|porcenafo|##0.00||"
+         Top             =   2400
+         Width           =   585
+      End
+      Begin VB.Frame Frame5 
+         Caption         =   "Última Facturación"
+         Height          =   1725
+         Left            =   3510
+         TabIndex        =   131
+         Top             =   1230
+         Width           =   4845
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   12
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   124
+            Tag             =   "Ult.Fact.Liquidación VC|N|S|||rparam|ultfactliqvc|0000000||"
+            Top             =   1380
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   36
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   123
+            Tag             =   "Prim.Fact.Liquidación VC|N|S|||rparam|primfactliqvc|0000000||"
+            Top             =   1380
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   35
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   122
+            Tag             =   "Ult.Fact.Liquidación|N|S|||rparam|ultfactliq|0000000||"
+            Top             =   1050
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   34
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   121
+            Tag             =   "Prim.Fact.Liquidación|N|S|||rparam|primfactliq|0000000||"
+            Top             =   1050
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   33
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   120
+            Tag             =   "Ult.Fact.Anticipo VC|N|S|||rparam|ultfactantvc|0000000||"
+            Top             =   720
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   32
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   119
+            Tag             =   "Prim.Fact.Anticipo VC|N|S|||rparam|primfactantvc|0000000||"
+            Top             =   720
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   29
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   117
+            Tag             =   "Prim.Fact.Anticipo|N|S|||rparam|primfactant|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   30
+            Left            =   3570
+            MaxLength       =   10
+            TabIndex        =   118
+            Tag             =   "Ult.Fact.Anticipo|N|S|||rparam|ultfactant|0000000||"
+            Top             =   390
+            Width           =   915
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Liquidación Ventas Campo:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   31
+            Left            =   330
+            TabIndex        =   137
+            Top             =   1380
+            Width           =   1980
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Liquidación:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   27
+            Left            =   330
+            TabIndex        =   136
+            Top             =   1050
+            Width           =   1830
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Anticipos Ventas Campo:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   11
+            Left            =   330
+            TabIndex        =   135
+            Top             =   750
+            Width           =   1830
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Anticipos:"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   1
+            Left            =   330
+            TabIndex        =   134
+            Top             =   450
+            Width           =   810
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Desde"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   2
+            Left            =   2430
+            TabIndex        =   133
+            Top             =   150
+            Width           =   630
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Hasta"
+            ForeColor       =   &H00000000&
+            Height          =   195
+            Index           =   3
+            Left            =   3570
+            TabIndex        =   132
+            Top             =   150
+            Width           =   630
+         End
+      End
+      Begin VB.TextBox Text1 
+         Height          =   285
+         Index           =   31
+         Left            =   -72720
+         MaxLength       =   50
+         TabIndex        =   41
+         Tag             =   "Impresora Entradas|T|N|||rparam|impresoraentradas|||"
+         Top             =   3510
+         Width           =   4995
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   28
+         Left            =   2400
+         MaxLength       =   10
+         TabIndex        =   58
+         Tag             =   "Porcentaje Retención|N|S|||rparam|porcretenfacsoc||##0.00|"
+         Top             =   2085
+         Width           =   585
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   27
+         Left            =   3120
+         TabIndex        =   127
+         Top             =   780
+         Width           =   3660
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   27
+         Left            =   2490
+         MaxLength       =   10
+         TabIndex        =   54
+         Tag             =   "Sección Hortofrutícola|N|S|||rparam|seccionhorto|000||"
+         Top             =   780
+         Width           =   525
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   26
+         Left            =   1830
+         MaxLength       =   8
+         TabIndex        =   57
+         Tag             =   "Coste seg.soc|N|N|||rparam|costesegso|0.0000||"
+         Text            =   "cost.s"
+         Top             =   1770
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   25
+         Left            =   1830
+         MaxLength       =   8
+         TabIndex        =   56
+         Tag             =   "Coste Horas|N|N|||rparam|costehora|0.0000||"
+         Text            =   "cost.h"
+         Top             =   1440
+         Width           =   1170
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   24
+         Left            =   -70110
+         MaxLength       =   6
+         TabIndex        =   47
+         Tag             =   "Cajas por Palet|N|N|||rparam|cajasporpalet|###,##0||"
+         Text            =   "ncajas"
+         Top             =   3900
+         Width           =   1170
+      End
+      Begin VB.CheckBox chkTraza 
+         Caption         =   "Hay Trazabilidad"
+         Height          =   375
+         Left            =   -74520
+         TabIndex        =   45
+         Tag             =   "Hay Trazabilidad|N|S|||rparam|haytraza|0||"
+         Top             =   4800
+         Width           =   2145
+      End
+      Begin VB.CheckBox chkTaraTractor 
+         Caption         =   "Se tara tractor de entrada"
+         Height          =   375
+         Left            =   -74520
+         TabIndex        =   42
+         Tag             =   "Se Tara Tractor|N|S|||rparam|setaratractor|0||"
+         Top             =   3840
+         Width           =   2775
+      End
+      Begin VB.Frame Frame3 
+         Height          =   2775
+         Left            =   -74865
+         TabIndex        =   108
+         Top             =   690
+         Width           =   8700
+         Begin VB.CheckBox ChkVtaFruta 
+            Height          =   225
+            Index           =   4
+            Left            =   8220
+            TabIndex        =   404
+            Tag             =   "Es VtaFruta 5|N|S|||rparam|esvtafruta5|||"
+            Top             =   2340
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkVtaFruta 
+            Height          =   225
+            Index           =   3
+            Left            =   8220
+            TabIndex        =   403
+            Tag             =   "Es VtaFruta 4|N|S|||rparam|esvtafruta4|||"
+            Top             =   1950
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkVtaFruta 
+            Height          =   225
+            Index           =   2
+            Left            =   8220
+            TabIndex        =   402
+            Tag             =   "Es VtaFruta 3|N|S|||rparam|esvtafruta3|||"
+            Top             =   1530
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkVtaFruta 
+            Height          =   225
+            Index           =   1
+            Left            =   8220
+            TabIndex        =   401
+            Tag             =   "Es VtaFruta 2|N|S|||rparam|esvtafruta2|||"
+            Top             =   1110
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkVtaFruta 
+            Height          =   225
+            Index           =   0
+            Left            =   8220
+            TabIndex        =   400
+            Tag             =   "Es VtaFruta 1|N|S|||rparam|esvtafruta1|||"
+            Top             =   690
+            Width           =   285
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   103
+            Left            =   6210
+            MaxLength       =   6
+            TabIndex        =   23
+            Tag             =   "Peso Caja 1|N|S|||rparam|pesocaja11|##0.00||"
+            Text            =   "peso 1"
+            Top             =   675
+            Width           =   1020
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   104
+            Left            =   6210
+            MaxLength       =   6
+            TabIndex        =   27
+            Tag             =   "Peso Caja 2|N|S|||rparam|pesocaja12|##0.00||"
+            Text            =   "peso 2"
+            Top             =   1080
+            Width           =   1020
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   105
+            Left            =   6210
+            MaxLength       =   6
+            TabIndex        =   31
+            Tag             =   "Peso Caja 3|N|S|||rparam|pesocaja13|##0.00||"
+            Text            =   "peso 3"
+            Top             =   1485
+            Width           =   1020
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   106
+            Left            =   6210
+            MaxLength       =   6
+            TabIndex        =   35
+            Tag             =   "Peso Caja 4|N|S|||rparam|pesocaja14|##0.00||"
+            Text            =   "peso 4"
+            Top             =   1890
+            Width           =   1020
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   107
+            Left            =   6210
+            MaxLength       =   6
+            TabIndex        =   39
+            Tag             =   "Peso Caja 5|N|S|||rparam|pesocaja15|##0.00||"
+            Text            =   "peso 5"
+            Top             =   2295
+            Width           =   1020
+         End
+         Begin VB.CheckBox ChkCajas 
+            Height          =   225
+            Index           =   4
+            Left            =   7560
+            TabIndex        =   40
+            Tag             =   "Son Cajas 5|N|S|||rparam|escaja5|||"
+            Top             =   2340
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkCajas 
+            Height          =   225
+            Index           =   3
+            Left            =   7560
+            TabIndex        =   36
+            Tag             =   "Son Cajas 4|N|S|||rparam|escaja4|||"
+            Top             =   1950
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkCajas 
+            Height          =   225
+            Index           =   2
+            Left            =   7560
+            TabIndex        =   32
+            Tag             =   "Son Cajas 3|N|S|||rparam|escaja3|||"
+            Top             =   1530
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkCajas 
+            Height          =   225
+            Index           =   1
+            Left            =   7560
+            TabIndex        =   28
+            Tag             =   "Son Cajas 2|N|S|||rparam|escaja2|||"
+            Top             =   1110
+            Width           =   285
+         End
+         Begin VB.CheckBox ChkCajas 
+            Height          =   225
+            Index           =   0
+            Left            =   7560
+            TabIndex        =   24
+            Tag             =   "Son Cajas 1|N|S|||rparam|escaja1|||"
+            Top             =   690
+            Width           =   285
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   23
+            Left            =   5070
+            MaxLength       =   6
+            TabIndex        =   38
+            Tag             =   "Peso Caja 5|N|S|||rparam|pesocaja5|##0.00||"
+            Text            =   "peso 5"
+            Top             =   2295
+            Width           =   1050
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   22
+            Left            =   5070
+            MaxLength       =   6
+            TabIndex        =   34
+            Tag             =   "Peso Caja 4|N|S|||rparam|pesocaja4|##0.00||"
+            Text            =   "peso 4"
+            Top             =   1890
+            Width           =   1050
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   21
+            Left            =   5070
+            MaxLength       =   6
+            TabIndex        =   30
+            Tag             =   "Peso Caja 3|N|S|||rparam|pesocaja3|##0.00||"
+            Text            =   "peso 3"
+            Top             =   1485
+            Width           =   1050
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   20
+            Left            =   5070
+            MaxLength       =   6
+            TabIndex        =   26
+            Tag             =   "Peso Caja 2|N|S|||rparam|pesocaja2|##0.00||"
+            Text            =   "peso 2"
+            Top             =   1080
+            Width           =   1050
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   19
+            Left            =   5070
+            MaxLength       =   6
+            TabIndex        =   22
+            Tag             =   "Peso Caja 1|N|S|||rparam|pesocaja1|##0.00||"
+            Text            =   "peso 1"
+            Top             =   675
+            Width           =   1050
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   18
+            Left            =   420
+            MaxLength       =   20
+            TabIndex        =   37
+            Tag             =   "Tipo Caja 5|T|S|||rparam|tipocaja5|||"
+            Text            =   "tipo 5"
+            Top             =   2295
+            Width           =   4485
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   17
+            Left            =   420
+            MaxLength       =   20
+            TabIndex        =   33
+            Tag             =   "Tipo Caja 4|T|S|||rparam|tipocaja4|||"
+            Text            =   "tipo 4"
+            Top             =   1890
+            Width           =   4485
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   16
+            Left            =   420
+            MaxLength       =   20
+            TabIndex        =   29
+            Tag             =   "Tipo Caja 3|T|S|||rparam|tipocaja3|||"
+            Text            =   "tipo 3"
+            Top             =   1485
+            Width           =   4485
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   15
+            Left            =   420
+            MaxLength       =   20
+            TabIndex        =   25
+            Tag             =   "Tipo Caja 2|T|S|||rparam|tipocaja2|||"
+            Text            =   "tipo 2"
+            Top             =   1080
+            Width           =   4485
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   14
+            Left            =   420
+            MaxLength       =   20
+            TabIndex        =   21
+            Tag             =   "Tipo Caja 1|T|S|||rparam|tipocaja1|||"
+            Text            =   "tipo 1"
+            Top             =   675
+            Width           =   4485
+         End
+         Begin VB.Label Label33 
+            Caption         =   "VtaFr."
+            Height          =   285
+            Left            =   8130
+            TabIndex        =   399
+            Top             =   330
+            Width           =   540
+         End
+         Begin VB.Label Label32 
+            Caption         =   "PesoTransp."
+            Height          =   285
+            Left            =   6270
+            TabIndex        =   368
+            Top             =   315
+            Width           =   990
+         End
+         Begin VB.Label Label18 
+            Caption         =   "Son Cajas"
+            Height          =   285
+            Left            =   7260
+            TabIndex        =   141
+            Top             =   330
+            Width           =   780
+         End
+         Begin VB.Label Label3 
+            Caption         =   "Tipo Caja "
+            Height          =   285
+            Left            =   420
+            TabIndex        =   115
+            Top             =   315
+            Width           =   1095
+         End
+         Begin VB.Label Label10 
+            Caption         =   "5.-"
+            Height          =   285
+            Left            =   105
+            TabIndex        =   114
+            Top             =   2295
+            Width           =   240
+         End
+         Begin VB.Label Label9 
+            Caption         =   "4.-"
+            Height          =   285
+            Left            =   105
+            TabIndex        =   113
+            Top             =   1890
+            Width           =   240
+         End
+         Begin VB.Label Label7 
+            Caption         =   "3.-"
+            Height          =   285
+            Left            =   105
+            TabIndex        =   112
+            Top             =   1485
+            Width           =   285
+         End
+         Begin VB.Label Label6 
+            Caption         =   "2.-"
+            Height          =   285
+            Left            =   105
+            TabIndex        =   111
+            Top             =   1080
+            Width           =   285
+         End
+         Begin VB.Label Label5 
+            Caption         =   "1.-"
+            Height          =   285
+            Left            =   105
+            TabIndex        =   110
+            Top             =   675
+            Width           =   285
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Peso de Caja"
+            Height          =   285
+            Left            =   5070
+            TabIndex        =   109
+            Top             =   315
+            Width           =   1590
+         End
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   13
+         Left            =   -71370
+         TabIndex        =   107
+         Top             =   870
+         Width           =   4470
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   13
+         Left            =   -72660
+         MaxLength       =   10
+         TabIndex        =   53
+         Tag             =   "Extension|N|N|||rparam|codextension|000||"
+         Top             =   870
+         Width           =   1215
+      End
+      Begin VB.Frame Frame4 
+         Caption         =   "Soporte"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   675
+         Left            =   -74580
+         TabIndex        =   98
+         Top             =   3690
+         Width           =   8025
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   9
+            Left            =   1260
+            MaxLength       =   100
+            TabIndex        =   18
+            Tag             =   "Web Soporte|T|S|||rparam|websoporte|||"
+            Top             =   300
+            Width           =   6210
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Web soporte"
+            Height          =   255
+            Left            =   180
+            TabIndex        =   99
+            Top             =   300
+            Width           =   1575
+         End
+      End
+      Begin VB.Frame Frame2 
+         Height          =   1575
+         Left            =   -74520
+         TabIndex        =   92
+         Top             =   720
+         Width           =   7665
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   1
+            Left            =   2235
+            MaxLength       =   20
+            TabIndex        =   0
+            Tag             =   "Servidor Contabilidad|T|S|||rparam|serconta|||"
+            Text            =   "3wwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+            Top             =   210
+            Width           =   4875
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   0
+            Left            =   4230
+            MaxLength       =   15
+            TabIndex        =   97
+            Tag             =   "Código Parámetros Aplic|N|N|||sparam|codparam||S|"
+            Text            =   "1"
+            Top             =   240
+            Width           =   645
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            IMEMode         =   3  'DISABLE
+            Index           =   3
+            Left            =   2235
+            MaxLength       =   20
+            PasswordChar    =   "*"
+            TabIndex        =   2
+            Tag             =   "Password Contabilidad|T|S|||rparam|pasconta|||"
+            Text            =   "3"
+            Top             =   840
+            Width           =   4875
+         End
+         Begin VB.TextBox Text1 
+            Height          =   285
+            Index           =   2
+            Left            =   2235
+            MaxLength       =   20
+            TabIndex        =   1
+            Tag             =   "Usuario Contabilidad|T|S|||rparam|usuconta|||"
+            Text            =   "3wwwwwwwwwwwwwwwwwww"
+            Top             =   525
+            Width           =   4875
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   4
+            Left            =   2235
+            MaxLength       =   2
+            TabIndex        =   3
+            Tag             =   "Nº Contabilidad|N|S|||rparam|numconta|||"
+            Text            =   "3"
+            Top             =   1185
+            Width           =   780
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Password"
+            Height          =   195
+            Index           =   15
+            Left            =   300
+            TabIndex        =   96
+            Top             =   870
+            Width           =   840
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Usuario"
+            Height          =   195
+            Index           =   17
+            Left            =   300
+            TabIndex        =   95
+            Top             =   570
+            Width           =   780
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Nº conta"
+            Height          =   195
+            Index           =   18
+            Left            =   300
+            TabIndex        =   94
+            Top             =   1200
+            Width           =   900
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Servidor"
+            Height          =   195
+            Index           =   19
+            Left            =   300
+            TabIndex        =   93
+            Top             =   240
+            Width           =   900
+         End
+      End
+      Begin TabDlg.SSTab SSTab2 
+         Height          =   4245
+         Left            =   -74910
+         TabIndex        =   196
+         Top             =   1305
+         Width           =   8700
+         _ExtentX        =   15346
+         _ExtentY        =   7488
+         _Version        =   393216
+         Tabs            =   4
+         Tab             =   1
+         TabsPerRow      =   4
+         TabHeight       =   520
+         ForeColor       =   8388608
+         TabCaption(0)   =   "Anticipos / Liquid."
+         TabPicture(0)   =   "frmConfParamAplic.frx":0178
+         Tab(0).ControlEnabled=   0   'False
+         Tab(0).Control(0)=   "Frame9"
+         Tab(0).Control(1)=   "Frame8"
+         Tab(0).Control(2)=   "Text1(11)"
+         Tab(0).Control(3)=   "Text2(11)"
+         Tab(0).Control(4)=   "Text1(10)"
+         Tab(0).Control(5)=   "Text2(10)"
+         Tab(0).Control(6)=   "imgBuscar(7)"
+         Tab(0).Control(7)=   "Label1(7)"
+         Tab(0).Control(8)=   "imgBuscar(6)"
+         Tab(0).Control(9)=   "Label1(6)"
+         Tab(0).ControlCount=   10
+         TabCaption(1)   =   "ADV / Recibos Campo"
+         TabPicture(1)   =   "frmConfParamAplic.frx":0194
+         Tab(1).ControlEnabled=   -1  'True
+         Tab(1).Control(0)=   "imgBuscar(8)"
+         Tab(1).Control(0).Enabled=   0   'False
+         Tab(1).Control(1)=   "Label1(47)"
+         Tab(1).Control(1).Enabled=   0   'False
+         Tab(1).Control(2)=   "imgBuscar(14)"
+         Tab(1).Control(2).Enabled=   0   'False
+         Tab(1).Control(3)=   "Label1(69)"
+         Tab(1).Control(3).Enabled=   0   'False
+         Tab(1).Control(4)=   "Label1(70)"
+         Tab(1).Control(4).Enabled=   0   'False
+         Tab(1).Control(5)=   "imgBuscar(15)"
+         Tab(1).Control(5).Enabled=   0   'False
+         Tab(1).Control(6)=   "Text1(61)"
+         Tab(1).Control(6).Enabled=   0   'False
+         Tab(1).Control(7)=   "Text2(61)"
+         Tab(1).Control(7).Enabled=   0   'False
+         Tab(1).Control(8)=   "Frame11"
+         Tab(1).Control(8).Enabled=   0   'False
+         Tab(1).Control(9)=   "Text1(73)"
+         Tab(1).Control(9).Enabled=   0   'False
+         Tab(1).Control(10)=   "Text2(74)"
+         Tab(1).Control(10).Enabled=   0   'False
+         Tab(1).Control(11)=   "Text2(73)"
+         Tab(1).Control(11).Enabled=   0   'False
+         Tab(1).Control(12)=   "Text1(74)"
+         Tab(1).Control(12).Enabled=   0   'False
+         Tab(1).Control(13)=   "Frame14"
+         Tab(1).Control(13).Enabled=   0   'False
+         Tab(1).ControlCount=   14
+         TabCaption(2)   =   "Almazara / Bodega"
+         TabPicture(2)   =   "frmConfParamAplic.frx":01B0
+         Tab(2).ControlEnabled=   0   'False
+         Tab(2).Control(0)=   "Frame13"
+         Tab(2).Control(1)=   "Frame12"
+         Tab(2).Control(2)=   "Text1(68)"
+         Tab(2).Control(3)=   "Text2(68)"
+         Tab(2).Control(4)=   "Text1(67)"
+         Tab(2).Control(5)=   "Text2(67)"
+         Tab(2).Control(6)=   "imgBuscar(12)"
+         Tab(2).Control(7)=   "Label1(64)"
+         Tab(2).Control(8)=   "imgBuscar(11)"
+         Tab(2).Control(9)=   "Label1(63)"
+         Tab(2).ControlCount=   10
+         TabCaption(3)   =   "Transporte"
+         TabPicture(3)   =   "frmConfParamAplic.frx":01CC
+         Tab(3).ControlEnabled=   0   'False
+         Tab(3).Control(0)=   "Text2(96)"
+         Tab(3).Control(1)=   "Text1(96)"
+         Tab(3).Control(2)=   "Frame20"
+         Tab(3).Control(3)=   "Label1(93)"
+         Tab(3).Control(4)=   "imgBuscar(20)"
+         Tab(3).ControlCount=   5
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   96
+            Left            =   -71505
+            TabIndex        =   360
+            Top             =   690
+            Width           =   4470
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   96
+            Left            =   -72780
+            MaxLength       =   10
+            TabIndex        =   355
+            Tag             =   "Carpeta Facturas|N|N|||rparam|codcarpetatran|000||"
+            Top             =   690
+            Width           =   1215
+         End
+         Begin VB.Frame Frame20 
+            Caption         =   "Transporte"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   -74730
+            TabIndex        =   350
+            Top             =   1170
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   25
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   356
+               Tag             =   "C1 Liquidacion|N|N|||rparam|c1tranaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   26
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   357
+               Tag             =   "C2 Liquidación|N|N|||rparam|c2tranaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   27
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   358
+               Tag             =   "C3 Liquidación|N|N|||rparam|c3tranaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   28
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   359
+               Tag             =   "C4 Liquidación|N|N|||rparam|c4tranaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   92
+               Left            =   5805
+               TabIndex        =   354
+               Top             =   315
+               Width           =   1305
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   91
+               Left            =   3915
+               TabIndex        =   353
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   90
+               Left            =   1980
+               TabIndex        =   352
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   89
+               Left            =   90
+               TabIndex        =   351
+               Top             =   315
+               Width           =   1620
+            End
+         End
+         Begin VB.Frame Frame14 
+            Caption         =   "Recibos"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   315
+            TabIndex        =   286
+            Top             =   2970
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   24
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   207
+               Tag             =   "C4 Recibo|N|N|||sparam|c4recaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   23
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   206
+               Tag             =   "C3 Recibo|N|N|||sparam|c3recaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   22
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   205
+               Tag             =   "C2 Recibo|N|N|||sparam|c2recaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   21
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   204
+               Tag             =   "C1 Recibo|N|N|||sparam|c1recaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   74
+               Left            =   90
+               TabIndex        =   290
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   73
+               Left            =   1980
+               TabIndex        =   289
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   72
+               Left            =   3915
+               TabIndex        =   288
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   71
+               Left            =   5805
+               TabIndex        =   287
+               Top             =   315
+               Width           =   1305
+            End
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   74
+            Left            =   2385
+            MaxLength       =   10
+            TabIndex        =   199
+            Tag             =   "Carpeta Recibos Almacen|N|N|||sparam|codcarpetareccamp|000||"
+            Top             =   1350
+            Width           =   1080
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   73
+            Left            =   3510
+            TabIndex        =   283
+            Top             =   990
+            Width           =   4470
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   74
+            Left            =   3510
+            TabIndex        =   282
+            Top             =   1350
+            Width           =   4470
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   73
+            Left            =   2385
+            MaxLength       =   10
+            TabIndex        =   198
+            Tag             =   "Carpeta Recibos Campo|N|N|||sparam|codcarpetarecalm|000||"
+            Top             =   990
+            Width           =   1080
+         End
+         Begin VB.Frame Frame13 
+            Caption         =   "Bodega"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   -74685
+            TabIndex        =   259
+            Top             =   2835
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   17
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   249
+               Tag             =   "C1 Liquidacion|N|N|||rparam|c1bodearidoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   18
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   250
+               Tag             =   "C2 Liquidación|N|N|||rparam|c2bodearidoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   19
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   251
+               Tag             =   "C3 Liquidación|N|N|||rparam|c3bodearidoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   20
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   252
+               Tag             =   "C4 Liquidación|N|N|||rparam|c4bodearidoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   62
+               Left            =   5805
+               TabIndex        =   263
+               Top             =   315
+               Width           =   1305
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   61
+               Left            =   3915
+               TabIndex        =   262
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   60
+               Left            =   1980
+               TabIndex        =   261
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   59
+               Left            =   90
+               TabIndex        =   260
+               Top             =   315
+               Width           =   1620
+            End
+         End
+         Begin VB.Frame Frame12 
+            Caption         =   "Almazara"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   -74685
+            TabIndex        =   254
+            Top             =   1575
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   14
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   246
+               Tag             =   "C2 Anticipo|N|N|||rparam|c2almzaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   13
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   245
+               Tag             =   "C1 Almazara|N|N|||rparam|c1almzaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   15
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   247
+               Tag             =   "C3 Anticipo|N|N|||rparam|c3almzaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   16
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   248
+               Tag             =   "C4 Anticipo|N|N|||rparam|c4almzaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   57
+               Left            =   90
+               TabIndex        =   258
+               Top             =   315
+               Width           =   1665
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   56
+               Left            =   1980
+               TabIndex        =   257
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   55
+               Left            =   3915
+               TabIndex        =   256
+               Top             =   315
+               Width           =   1575
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   54
+               Left            =   5805
+               TabIndex        =   255
+               Top             =   315
+               Width           =   1305
+            End
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   68
+            Left            =   -72735
+            MaxLength       =   10
+            TabIndex        =   244
+            Tag             =   "Carpeta Bodega|N|N|||rparam|codcarpetabode|000||"
+            Top             =   1080
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   68
+            Left            =   -71460
+            TabIndex        =   253
+            Top             =   1080
+            Width           =   4470
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   67
+            Left            =   -72735
+            MaxLength       =   10
+            TabIndex        =   243
+            Tag             =   "Carpeta Almazara|N|N|||rparam|codcarpetaalmz|000||"
+            Top             =   630
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   67
+            Left            =   -71460
+            TabIndex        =   242
+            Top             =   630
+            Width           =   4470
+         End
+         Begin VB.Frame Frame9 
+            Caption         =   "Liquidaciones"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   -74685
+            TabIndex        =   231
+            Top             =   2835
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   8
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   224
+               Tag             =   "C4 Liquidación|N|N|||rparam|c4liquaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   7
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   223
+               Tag             =   "C3 Liquidación|N|N|||rparam|c3liquaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   6
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   222
+               Tag             =   "C2 Liquidación|N|N|||rparam|c2liquaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   5
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   221
+               Tag             =   "C1 Liquidacion|N|N|||rparam|c1liquaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   26
+               Left            =   90
+               TabIndex        =   235
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   25
+               Left            =   1980
+               TabIndex        =   234
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   16
+               Left            =   3915
+               TabIndex        =   233
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   14
+               Left            =   5805
+               TabIndex        =   232
+               Top             =   315
+               Width           =   1305
+            End
+         End
+         Begin VB.Frame Frame8 
+            Caption         =   "Anticipos"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   -74685
+            TabIndex        =   226
+            Top             =   1575
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   4
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   220
+               Tag             =   "C4 Anticipo|N|N|||rparam|c4antiaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   3
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   219
+               Tag             =   "C3 Anticipo|N|N|||rparam|c3antiaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   1
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   217
+               Tag             =   "C1 Anticipo|N|N|||rparam|c1antiaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   2
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   218
+               Tag             =   "C2 Anticipo|N|N|||rparam|c2antiaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   12
+               Left            =   5805
+               TabIndex        =   230
+               Top             =   315
+               Width           =   1305
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   10
+               Left            =   3915
+               TabIndex        =   229
+               Top             =   315
+               Width           =   1575
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   8
+               Left            =   1980
+               TabIndex        =   228
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   9
+               Left            =   90
+               TabIndex        =   227
+               Top             =   315
+               Width           =   1665
+            End
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   11
+            Left            =   -72735
+            MaxLength       =   10
+            TabIndex        =   216
+            Tag             =   "Carpeta Facturas|N|N|||rparam|codcarpetaliqu|000||"
+            Top             =   1080
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   11
+            Left            =   -71460
+            TabIndex        =   225
+            Top             =   1080
+            Width           =   4470
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   10
+            Left            =   -72735
+            MaxLength       =   10
+            TabIndex        =   215
+            Tag             =   "Carpeta Albaranes|N|N|||rparam|codcarpetaanti|000||"
+            Top             =   630
+            Width           =   1215
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   10
+            Left            =   -71460
+            TabIndex        =   214
+            Top             =   630
+            Width           =   4470
+         End
+         Begin VB.Frame Frame11 
+            Caption         =   "ADV"
+            BeginProperty Font 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   1050
+            Left            =   315
+            TabIndex        =   209
+            Top             =   1800
+            Width           =   7710
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   12
+               Left            =   5805
+               Style           =   2  'Dropdown List
+               TabIndex        =   203
+               Tag             =   "C4 ADV|N|N|||rparam|c4advaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   11
+               Left            =   3915
+               Style           =   2  'Dropdown List
+               TabIndex        =   202
+               Tag             =   "C3 ADV|N|N|||rparam|c3advaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   10
+               Left            =   1980
+               Style           =   2  'Dropdown List
+               TabIndex        =   201
+               Tag             =   "C2 ADV|N|N|||rparam|c2advaridoc||N|"
+               Top             =   585
+               Width           =   1710
+            End
+            Begin VB.ComboBox Combo1 
+               Height          =   315
+               Index           =   9
+               Left            =   90
+               Style           =   2  'Dropdown List
+               TabIndex        =   200
+               Tag             =   "C1 ADV|N|N|||rparam|c1advaridoc||N|"
+               Top             =   600
+               Width           =   1710
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 1"
+               Height          =   195
+               Index           =   48
+               Left            =   90
+               TabIndex        =   213
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 2"
+               Height          =   195
+               Index           =   49
+               Left            =   1980
+               TabIndex        =   212
+               Top             =   315
+               Width           =   1755
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 3"
+               Height          =   195
+               Index           =   50
+               Left            =   3915
+               TabIndex        =   211
+               Top             =   315
+               Width           =   1620
+            End
+            Begin VB.Label Label1 
+               Caption         =   "Campo 4"
+               Height          =   195
+               Index           =   51
+               Left            =   5805
+               TabIndex        =   210
+               Top             =   315
+               Width           =   1305
+            End
+         End
+         Begin VB.TextBox Text2 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   61
+            Left            =   3510
+            TabIndex        =   208
+            Top             =   630
+            Width           =   4470
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   61
+            Left            =   2385
+            MaxLength       =   10
+            TabIndex        =   197
+            Tag             =   "Carpeta Facturas|N|N|||rparam|codcarpetaADV|000||"
+            Top             =   630
+            Width           =   1080
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Transporte"
+            Height          =   195
+            Index           =   93
+            Left            =   -74625
+            TabIndex        =   361
+            Top             =   735
+            Width           =   1500
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   20
+            Left            =   -73110
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   690
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   15
+            Left            =   2115
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   1350
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carp.Recibos Almacén"
+            Height          =   195
+            Index           =   70
+            Left            =   360
+            TabIndex        =   285
+            Top             =   1035
+            Width           =   1650
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Recibos Campo"
+            Height          =   195
+            Index           =   69
+            Left            =   360
+            TabIndex        =   284
+            Top             =   1395
+            Width           =   1740
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   14
+            Left            =   2115
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   990
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   12
+            Left            =   -73065
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   1080
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Bodega"
+            Height          =   195
+            Index           =   64
+            Left            =   -74580
+            TabIndex        =   265
+            Top             =   1125
+            Width           =   1530
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   11
+            Left            =   -73050
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   675
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Almazara"
+            Height          =   195
+            Index           =   63
+            Left            =   -74580
+            TabIndex        =   264
+            Top             =   720
+            Width           =   1380
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta ADV"
+            Height          =   195
+            Index           =   47
+            Left            =   360
+            TabIndex        =   241
+            Top             =   675
+            Width           =   1200
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   7
+            Left            =   -73065
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   1080
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Liquidacion"
+            Height          =   195
+            Index           =   7
+            Left            =   -74580
+            TabIndex        =   240
+            Top             =   1125
+            Width           =   1530
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   6
+            Left            =   -73065
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   675
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Carpeta Anticipos"
+            Height          =   195
+            Index           =   6
+            Left            =   -74580
+            TabIndex        =   239
+            Top             =   720
+            Width           =   1380
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   8
+            Left            =   2115
+            ToolTipText     =   "Buscar Carpeta"
+            Top             =   630
+            Width           =   240
+         End
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   134
+         Left            =   -72690
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   4830
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cta.Ventas Manta"
+         Height          =   195
+         Index           =   125
+         Left            =   -74340
+         TabIndex        =   420
+         Top             =   4830
+         Width           =   1740
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Consumo Máximo"
+         Height          =   195
+         Index           =   124
+         Left            =   -68880
+         TabIndex        =   418
+         Top             =   1545
+         Width           =   1290
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Consumo Mínimo"
+         Height          =   195
+         Index           =   123
+         Left            =   -68880
+         TabIndex        =   417
+         Top             =   1215
+         Width           =   1290
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   131
+         Left            =   -72690
+         ToolTipText     =   "Buscar carta"
+         Top             =   3180
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Carta Reclamación "
+         Height          =   195
+         Index           =   131
+         Left            =   -74340
+         TabIndex        =   416
+         Top             =   3180
+         Width           =   1560
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cta.Ventas Mto."
+         Height          =   195
+         Index           =   122
+         Left            =   -74340
+         TabIndex        =   414
+         Top             =   4530
+         Width           =   1560
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   130
+         Left            =   -72690
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   4530
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cta.Ventas Talla"
+         Height          =   195
+         Index           =   121
+         Left            =   -74340
+         TabIndex        =   412
+         Top             =   4200
+         Width           =   1560
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   129
+         Left            =   -72690
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   4200
+         Width           =   240
+      End
+      Begin VB.Image imgAyuda 
+         Height          =   240
+         Index           =   3
+         Left            =   -71850
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   3870
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porc.Increm.Kilos Entrada"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   120
+         Left            =   -74490
+         TabIndex        =   410
+         Top             =   3870
+         Width           =   2040
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   127
+         Left            =   -73470
+         ToolTipText     =   "Buscar forma pago"
+         Top             =   2520
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "FP Recibo"
+         Height          =   195
+         Index           =   119
+         Left            =   -74340
+         TabIndex        =   409
+         Top             =   2550
+         Width           =   810
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   126
+         Left            =   -73470
+         ToolTipText     =   "Buscar forma pago"
+         Top             =   2220
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "FP Contado"
+         Height          =   195
+         Index           =   118
+         Left            =   -74340
+         TabIndex        =   407
+         Top             =   2250
+         Width           =   840
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Centro de Coste"
+         Height          =   195
+         Index           =   116
+         Left            =   -74340
+         TabIndex        =   398
+         Top             =   5130
+         Width           =   1560
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   124
+         Left            =   -72690
+         ToolTipText     =   "Buscar centro coste"
+         Top             =   5130
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cta.Ventas Cuota"
+         Height          =   195
+         Index           =   115
+         Left            =   -74340
+         TabIndex        =   396
+         Top             =   3870
+         Width           =   1560
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   123
+         Left            =   -72690
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   3870
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   122
+         Left            =   -72690
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   3540
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cta.Ventas Consumo"
+         Height          =   195
+         Index           =   114
+         Left            =   -74340
+         TabIndex        =   394
+         Top             =   3540
+         Width           =   1560
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   25
+         Left            =   -72870
+         ToolTipText     =   "Buscar Sección"
+         Top             =   780
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección de Pozos"
+         Height          =   195
+         Index           =   113
+         Left            =   -74340
+         TabIndex        =   392
+         Top             =   810
+         Width           =   1380
+      End
+      Begin VB.Image imgAyuda 
+         Height          =   240
+         Index           =   2
+         Left            =   -69360
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   4860
+         Width           =   240
+      End
+      Begin VB.Image imgAyuda 
+         Height          =   240
+         Index           =   1
+         Left            =   -66420
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   4560
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Precio por litro Gtos.Envasado"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   108
+         Left            =   -69780
+         TabIndex        =   384
+         Top             =   4995
+         Width           =   2340
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Precio por Kilo Gtos.Molturación"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   107
+         Left            =   -69780
+         TabIndex        =   383
+         Top             =   4575
+         Width           =   2340
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   23
+         Left            =   -72780
+         ToolTipText     =   "Buscar Iva"
+         Top             =   2850
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Código IVA Fact.Internas"
+         Height          =   195
+         Index           =   106
+         Left            =   -74610
+         TabIndex        =   382
+         Top             =   2880
+         Width           =   1875
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Constante Faneca"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   102
+         Left            =   450
+         TabIndex        =   372
+         Top             =   1170
+         Width           =   2040
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Inc/Dec.Aforo"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   101
+         Left            =   -68850
+         TabIndex        =   371
+         Top             =   4860
+         Width           =   1890
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Nro.Máximo Jornadas"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   100
+         Left            =   -74430
+         TabIndex        =   370
+         Top             =   3960
+         Width           =   2040
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Jornadas"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   97
+         Left            =   -74430
+         TabIndex        =   366
+         Top             =   2130
+         Width           =   1620
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje IRPF"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   96
+         Left            =   -74430
+         TabIndex        =   365
+         Top             =   3480
+         Width           =   2040
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Seg.Social 2"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   95
+         Left            =   -74430
+         TabIndex        =   364
+         Top             =   3030
+         Width           =   2040
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Seg.Social 1"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   94
+         Left            =   -74430
+         TabIndex        =   363
+         Top             =   2580
+         Width           =   2040
+      End
+      Begin VB.Label Label31 
+         Caption         =   "Euros Trab/dia"
+         Height          =   285
+         Left            =   -74460
+         TabIndex        =   362
+         Top             =   1530
+         Width           =   1095
+      End
+      Begin VB.Label Label29 
+         Caption         =   "Cuota"
+         Height          =   285
+         Left            =   -74340
+         TabIndex        =   337
+         Top             =   2850
+         Width           =   1635
+      End
+      Begin VB.Label Label26 
+         Caption         =   "Derrama"
+         Height          =   285
+         Left            =   -71370
+         TabIndex        =   336
+         Top             =   2850
+         Width           =   1590
+      End
+      Begin VB.Label Label28 
+         Caption         =   "Hasta Metros Cúbicos"
+         Height          =   285
+         Left            =   -73200
+         TabIndex        =   335
+         Top             =   1050
+         Width           =   1635
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Código IVA"
+         Height          =   195
+         Index           =   85
+         Left            =   -74340
+         TabIndex        =   334
+         Top             =   1950
+         Width           =   810
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   17
+         Left            =   -73470
+         ToolTipText     =   "Buscar Iva"
+         Top             =   1920
+         Width           =   240
+      End
+      Begin VB.Label Label27 
+         Caption         =   "Precio"
+         Height          =   285
+         Left            =   -71370
+         TabIndex        =   332
+         Top             =   1050
+         Width           =   1095
+      End
+      Begin VB.Label Label25 
+         Caption         =   "Rango 1"
+         Height          =   285
+         Left            =   -74340
+         TabIndex        =   331
+         Top             =   1260
+         Width           =   1635
+      End
+      Begin VB.Label Label24 
+         Caption         =   "Rango 2"
+         Height          =   285
+         Left            =   -74340
+         TabIndex        =   330
+         Top             =   1590
+         Width           =   1590
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   16
+         Left            =   -72795
+         ToolTipText     =   "Buscar Concepto Gasto"
+         Top             =   3480
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Código Gasto para Liq."
+         Height          =   195
+         Index           =   76
+         Left            =   -74505
+         TabIndex        =   293
+         Top             =   3450
+         Width           =   1650
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Gasto Mto."
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   75
+         Left            =   -74505
+         TabIndex        =   291
+         Top             =   3060
+         Width           =   2040
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   13
+         Left            =   -73605
+         ToolTipText     =   "Buscar Almacén"
+         Top             =   1065
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Almacén"
+         Height          =   195
+         Index           =   68
+         Left            =   -74460
+         TabIndex        =   281
+         Top             =   1050
+         Width           =   825
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Letra Serie Clientes"
+         Height          =   195
+         Index           =   67
+         Left            =   -74505
+         TabIndex        =   272
+         Top             =   1425
+         Width           =   1650
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cuenta Ventas"
+         Height          =   195
+         Index           =   66
+         Left            =   -74505
+         TabIndex        =   271
+         Top             =   1050
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   70
+         Left            =   -72840
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   1050
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   69
+         Left            =   -72795
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   2595
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cuenta Ventas"
+         Height          =   195
+         Index           =   65
+         Left            =   -74505
+         TabIndex        =   267
+         Top             =   2625
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   59
+         Left            =   -72795
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   2190
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cuenta Banco Prevista"
+         Height          =   195
+         Index           =   45
+         Left            =   -74505
+         TabIndex        =   195
+         Top             =   2220
+         Width           =   1650
+      End
+      Begin VB.Label Label22 
+         Caption         =   "Peso Caja Llena"
+         Height          =   285
+         Left            =   -68850
+         TabIndex        =   193
+         Top             =   3930
+         Width           =   1320
+      End
+      Begin VB.Label Label21 
+         Caption         =   "Mínimo"
+         Height          =   285
+         Left            =   -70110
+         TabIndex        =   192
+         Top             =   4260
+         Width           =   570
+      End
+      Begin VB.Label Label20 
+         Caption         =   "Máximo"
+         Height          =   285
+         Left            =   -68850
+         TabIndex        =   191
+         Top             =   4260
+         Width           =   570
+      End
+      Begin VB.Label Label19 
+         Caption         =   "Límites Kilos Caja"
+         Height          =   285
+         Left            =   -71610
+         TabIndex        =   190
+         Top             =   4500
+         Width           =   1950
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección Bodega"
+         Height          =   195
+         Index           =   53
+         Left            =   -74550
+         TabIndex        =   189
+         Top             =   1050
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   10
+         Left            =   -72840
+         ToolTipText     =   "Buscar Sección"
+         Top             =   1050
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Base Datos Ariges"
+         Height          =   195
+         Index           =   52
+         Left            =   -74550
+         TabIndex        =   180
+         Top             =   1470
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   60
+         Left            =   -72840
+         ToolTipText     =   "Buscar Sección"
+         Top             =   1050
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección Suministros"
+         Height          =   195
+         Index           =   46
+         Left            =   -74550
+         TabIndex        =   179
+         Top             =   1050
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   58
+         Left            =   -72780
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   2370
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Cuenta Banco Prevista"
+         Height          =   195
+         Index           =   44
+         Left            =   -74610
+         TabIndex        =   175
+         Top             =   2370
+         Width           =   1650
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Almacén"
+         Height          =   195
+         Index           =   42
+         Left            =   -74580
+         TabIndex        =   173
+         Top             =   1440
+         Width           =   1140
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   5
+         Left            =   -72795
+         ToolTipText     =   "Buscar Almacén"
+         Top             =   1440
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   4
+         Left            =   -72795
+         ToolTipText     =   "Buscar Sección"
+         Top             =   1050
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección ADV"
+         Height          =   195
+         Index           =   36
+         Left            =   -74580
+         TabIndex        =   171
+         Top             =   1050
+         Width           =   1140
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Path Ficheros clasificación"
+         Height          =   285
+         Left            =   450
+         TabIndex        =   169
+         Top             =   5100
+         Width           =   1890
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   3
+         Left            =   -72750
+         ToolTipText     =   "Buscar Sección"
+         Top             =   1050
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección Almazara"
+         Height          =   195
+         Index           =   34
+         Left            =   -74490
+         TabIndex        =   168
+         Top             =   1050
+         Width           =   1650
+      End
+      Begin VB.Label Label16 
+         Caption         =   "Texto Pie de Toma de Datos"
+         Height          =   225
+         Left            =   420
+         TabIndex        =   140
+         Top             =   4200
+         Width           =   2565
+      End
+      Begin VB.Image imgZoom 
+         Height          =   240
+         Index           =   1
+         Left            =   3060
+         ToolTipText     =   "Zoom descripción"
+         Top             =   4200
+         Width           =   240
+      End
+      Begin VB.Image imgZoom 
+         Height          =   240
+         Index           =   0
+         Left            =   3030
+         ToolTipText     =   "Zoom descripción"
+         Top             =   2700
+         Width           =   240
+      End
+      Begin VB.Label Label15 
+         Caption         =   "Texto Cabecera de Toma de Datos"
+         Height          =   225
+         Left            =   420
+         TabIndex        =   139
+         Top             =   2730
+         Width           =   2565
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje AFO"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   4
+         Left            =   450
+         TabIndex        =   138
+         Top             =   2430
+         Width           =   2040
+      End
+      Begin VB.Label Label14 
+         Caption         =   "Impresora de Entradas"
+         Height          =   285
+         Left            =   -74520
+         TabIndex        =   130
+         Top             =   3540
+         Width           =   1890
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Porcentaje Retención"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   58
+         Left            =   450
+         TabIndex        =   129
+         Top             =   2130
+         Width           =   2040
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Sección Hortofrutícola"
+         Height          =   195
+         Index           =   0
+         Left            =   450
+         TabIndex        =   128
+         Top             =   840
+         Width           =   1650
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   0
+         Left            =   2220
+         ToolTipText     =   "Buscar Sección"
+         Top             =   810
+         Width           =   240
+      End
+      Begin VB.Label Label13 
+         Caption         =   "Coste Seg.Social"
+         Height          =   285
+         Left            =   450
+         TabIndex        =   126
+         Top             =   1800
+         Width           =   1590
+      End
+      Begin VB.Label Label12 
+         Caption         =   "Coste Horas"
+         Height          =   285
+         Left            =   450
+         TabIndex        =   125
+         Top             =   1470
+         Width           =   1095
+      End
+      Begin VB.Label Label11 
+         Caption         =   "Cajas por Palet"
+         Height          =   285
+         Left            =   -71610
+         TabIndex        =   116
+         Top             =   3930
+         Width           =   1590
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   9
+         Left            =   -72960
+         ToolTipText     =   "Buscar Extensión"
+         Top             =   900
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Extensión"
+         Height          =   195
+         Index           =   28
+         Left            =   -74490
+         TabIndex        =   106
+         Top             =   915
+         Width           =   1380
+      End
+   End
+   Begin VB.CommandButton cmdCancelar 
+      Cancel          =   -1  'True
+      Caption         =   "&Cancelar"
+      Height          =   375
+      Left            =   8145
+      TabIndex        =   86
+      Top             =   6330
+      Width           =   1035
+   End
+   Begin VB.Frame Frame1 
+      Height          =   540
+      Left            =   240
+      TabIndex        =   89
+      Top             =   6225
+      Width           =   3000
+      Begin VB.Label lblIndicador 
+         Alignment       =   2  'Center
+         Caption         =   "Label2"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   120
+         TabIndex        =   90
+         Top             =   210
+         Width           =   2760
+      End
+   End
+   Begin VB.CommandButton cmdAceptar 
+      Caption         =   "&Aceptar"
+      Height          =   375
+      Left            =   6870
+      TabIndex        =   85
+      Top             =   6330
+      Visible         =   0   'False
+      Width           =   1035
+   End
+   Begin VB.CommandButton cmdSalir 
+      Caption         =   "&Salir"
+      Height          =   375
+      Left            =   8160
+      TabIndex        =   87
+      Top             =   6330
+      Width           =   1035
+   End
+   Begin MSComctlLib.Toolbar Toolbar1 
+      Align           =   1  'Align Top
+      Height          =   420
+      Left            =   0
+      TabIndex        =   88
+      Top             =   0
+      Width           =   9435
+      _ExtentX        =   16642
+      _ExtentY        =   741
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      AllowCustomize  =   0   'False
+      Appearance      =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   5
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Enabled         =   0   'False
+            Object.Visible         =   0   'False
+            Object.ToolTipText     =   "Añadir"
+            Object.Tag             =   "1"
+         EndProperty
+         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Modificar"
+            Object.Tag             =   "2"
+         EndProperty
+         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Salir"
+         EndProperty
+      EndProperty
+   End
+   Begin MSAdodcLib.Adodc Data1 
+      Height          =   330
+      Left            =   3630
+      Top             =   5250
+      Visible         =   0   'False
+      Width           =   1455
+      _ExtentX        =   2566
+      _ExtentY        =   582
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "Adodc1"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin VB.Menu mnOpciones 
+      Caption         =   "&Opciones"
+      Begin VB.Menu mnAñadir 
+         Caption         =   "&Añadir"
+         Shortcut        =   ^A
+      End
+      Begin VB.Menu mnModificar 
+         Caption         =   "&Modificar"
+         HelpContextID   =   1
+         Shortcut        =   ^M
+      End
+      Begin VB.Menu mnBarra1 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnSalir 
+         Caption         =   "&Salir"
+         Shortcut        =   ^S
+      End
+   End
+End
+Attribute VB_Name = "frmConfParamAplic"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = True
+Attribute VB_Exposed = False
+' ### [Monica] 06/09/2006
+' procedimiento nuevo introducido de la gestion
+
+Option Explicit
+
+Private WithEvents frmCtas As frmCtasConta
+Attribute frmCtas.VB_VarHelpID = -1
+Private WithEvents frmIva As frmTipIVAConta
+Attribute frmIva.VB_VarHelpID = -1
+Private WithEvents frmDoc As frmCarpetaAridoc
+Attribute frmDoc.VB_VarHelpID = -1
+Private WithEvents frmExt As frmExtAridoc
+Attribute frmExt.VB_VarHelpID = -1
+Private WithEvents frmAri As frmCarpAridoc
+Attribute frmAri.VB_VarHelpID = -1
+Private WithEvents frmSec As frmManSeccion
+Attribute frmSec.VB_VarHelpID = -1
+Private WithEvents frmFpa As frmForpaConta
+Attribute frmFpa.VB_VarHelpID = -1
+Private WithEvents frmAlm As frmComercial
+Attribute frmAlm.VB_VarHelpID = -1
+Private WithEvents frmAlm2 As frmComercial
+Attribute frmAlm2.VB_VarHelpID = -1
+Private WithEvents frmZ As frmZoom  'Zoom para campos Text
+Attribute frmZ.VB_VarHelpID = -1
+Private WithEvents frmConGasto As frmManConcepGasto
+Attribute frmConGasto.VB_VarHelpID = -1
+Private WithEvents frmTar As frmManTarTra
+Attribute frmTar.VB_VarHelpID = -1
+Private WithEvents frmCCos As frmCCosConta 'centros de coste
+Attribute frmCCos.VB_VarHelpID = -1
+Private WithEvents frmArtADV As frmADVArticulos 'articulos de adv
+Attribute frmArtADV.VB_VarHelpID = -1
+Private WithEvents frmCarSocio As frmCartasSocio 'cartas de socio
+Attribute frmCarSocio.VB_VarHelpID = -1
+
+
+Private NombreTabla As String  'Nombre de la tabla o de la
+Private Ordenacion As String
+Private CadenaConsulta As String
+
+Dim indice As Byte
+Dim Encontrado As Boolean
+Dim Modo As Byte
+'0: Inicial
+'2: Visualizacion
+'3: Añadir
+'4: Modificar
+
+Dim vSeccion As CSeccion
+Dim indCodigo As Integer
+
+
+Private Sub chkAgruparNotas_Click()
+    If (chkAgruparNotas.Value = 1) Then
+        Me.chkRespetarNroNota.Enabled = False
+        Me.chkRespetarNroNota.Value = 0
+    Else
+        Me.chkRespetarNroNota.Enabled = True
+    End If
+End Sub
+
+Private Sub chkOutlook_GotFocus()
+    ConseguirfocoChk Modo
+End Sub
+
+Private Sub chkOutlook_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkTaraTractor_GotFocus()
+    PonerFocoChk chkTaraTractor
+End Sub
+
+Private Sub chkTaraTractor_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub chkTraza_GotFocus()
+    PonerFocoChk chkTraza
+End Sub
+
+Private Sub chkTraza_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub chkNotaManual_GotFocus()
+    PonerFocoChk chkNotaManual
+End Sub
+
+Private Sub chkNotaManual_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub chkCoopro_GotFocus()
+    PonerFocoChk chkCoopro
+End Sub
+
+Private Sub chkCoopro_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+
+Private Sub cmdAceptar_Click()
+Dim actualiza As Boolean
+Dim kms As Currency
+
+    
+'    If Modo = 3 Then
+'        If DatosOk Then
+'            'Cambiamos el path
+'            'CambiaPath True
+'            If InsertarDesdeForm(Me) Then
+'                PonerModo 0
+''                ActualizaNombreEmpresa
+'                MsgBox "Debe salir de la aplicacion para que los cambios tengan efecto", vbExclamation
+'            End If
+'
+'        End If
+'    End If
+
+
+    If Modo = 4 Then 'MODIFICAR
+        If DatosOk Then
+            If Not vParamAplic Is Nothing Then
+                'Datos contabilidad
+                vParamAplic.ServidorConta = Text1(1).Text
+                vParamAplic.UsuarioConta = Text1(2).Text
+                vParamAplic.PasswordConta = Text1(3).Text
+                vParamAplic.NumeroConta = ComprobarCero(Text1(4).Text)
+                
+                vParamAplic.WebSoporte = Text1(9).Text
+                vParamAplic.DireMail = Text1(5).Text
+                vParamAplic.Smtphost = Text1(6).Text
+                vParamAplic.SmtpUser = Text1(7).Text
+                vParamAplic.Smtppass = Text1(8).Text
+                
+                ' envio de email por outlook
+                vParamAplic.EnvioDesdeOutlook = Me.chkOutlook.Value
+            
+                ' Para utilizar el arigesmail
+                vParamAplic.ExeEnvioMail = Trim(Text1(125).Text)
+                
+                
+                ' SMS
+                vParamAplic.SMSemail = Text1(118).Text
+                vParamAplic.SMSclave = Text1(119).Text
+                vParamAplic.SMSremitente = Text1(120).Text
+               
+                ' entradas de almacen
+                vParamAplic.SeTaraTractor = Me.chkTaraTractor.Value
+                vParamAplic.HayTraza = Me.chkTraza.Value
+                vParamAplic.CajasporPalet = ComprobarCero(Text1(24).Text)
+                vParamAplic.SeAgrupanNotas = Me.chkAgruparNotas.Value
+                vParamAplic.SeRespetaNota = Me.chkRespetarNroNota.Value
+                vParamAplic.NroNotaManual = Me.chkNotaManual.Value
+                vParamAplic.CooproenEntradas = Me.chkCoopro.Value
+                
+                
+                vParamAplic.TipoCaja1 = Text1(14).Text
+                vParamAplic.TipoCaja2 = Text1(15).Text
+                vParamAplic.TipoCaja3 = Text1(16).Text
+                vParamAplic.TipoCaja4 = Text1(17).Text
+                vParamAplic.TipoCaja5 = Text1(18).Text
+                vParamAplic.PesoCaja1 = ComprobarCero(Text1(19).Text)
+                vParamAplic.PesoCaja2 = ComprobarCero(Text1(20).Text)
+                vParamAplic.PesoCaja3 = ComprobarCero(Text1(21).Text)
+                vParamAplic.PesoCaja4 = ComprobarCero(Text1(22).Text)
+                vParamAplic.PesoCaja5 = ComprobarCero(Text1(23).Text)
+                
+                vParamAplic.PesoCaja11 = ComprobarCero(Text1(103).Text)
+                vParamAplic.PesoCaja12 = ComprobarCero(Text1(104).Text)
+                vParamAplic.PesoCaja13 = ComprobarCero(Text1(105).Text)
+                vParamAplic.PesoCaja14 = ComprobarCero(Text1(106).Text)
+                vParamAplic.PesoCaja15 = ComprobarCero(Text1(107).Text)
+                
+                vParamAplic.EsCaja1 = Me.ChkCajas(0).Value
+                vParamAplic.EsCaja2 = Me.ChkCajas(1).Value
+                vParamAplic.EsCaja3 = Me.ChkCajas(2).Value
+                vParamAplic.EsCaja4 = Me.ChkCajas(3).Value
+                vParamAplic.EsCaja5 = Me.ChkCajas(4).Value
+                vParamAplic.KilosCajaMin = ComprobarCero(Text1(64).Text)
+                vParamAplic.KilosCajaMax = ComprobarCero(Text1(65).Text)
+                vParamAplic.PesoCajaLLena = ComprobarCero(Text1(66).Text)
+                
+                
+                vParamAplic.EsVtaFruta1 = Me.ChkVtaFruta(0).Value
+                vParamAplic.EsVtaFruta2 = Me.ChkVtaFruta(1).Value
+                vParamAplic.EsVtaFruta3 = Me.ChkVtaFruta(2).Value
+                vParamAplic.EsVtaFruta4 = Me.ChkVtaFruta(3).Value
+                vParamAplic.EsVtaFruta5 = Me.ChkVtaFruta(4).Value
+                
+                vParamAplic.PorcIncreAforo = ComprobarCero(Text1(109).Text)
+                
+                vParamAplic.ImpresoraEntradas = Replace(Text1(31).Text, "\", "\\")
+                
+                vParamAplic.SigPac = Text1(85).Text
+                vParamAplic.GoolZoom = Text1(95).Text
+                
+                'aridoc
+                vParamAplic.CarpetaAnt = ComprobarCero(Text1(10))
+                vParamAplic.CarpetaLiq = ComprobarCero(Text1(11))
+                vParamAplic.CarpetaADV = ComprobarCero(Text1(61))
+                vParamAplic.CarpetaRecAlmacen = ComprobarCero(Text1(73))
+                vParamAplic.CarpetaRecCampo = ComprobarCero(Text1(74))
+                vParamAplic.CarpetaAlmz = ComprobarCero(Text1(67))
+                vParamAplic.CarpetaBOD = ComprobarCero(Text1(68))
+                vParamAplic.CarpetaTra = ComprobarCero(Text1(96))
+
+                vParamAplic.Extension = Text1(13)
+                
+                vParamAplic.C1Anticipo = Combo1(1).ListIndex
+                vParamAplic.C2Anticipo = Combo1(2).ListIndex
+                vParamAplic.C3Anticipo = Combo1(3).ListIndex
+                vParamAplic.C4Anticipo = Combo1(4).ListIndex
+                vParamAplic.C1Liquidacion = Combo1(5).ListIndex
+                vParamAplic.C2Liquidacion = Combo1(6).ListIndex
+                vParamAplic.C3Liquidacion = Combo1(7).ListIndex
+                vParamAplic.C4Liquidacion = Combo1(8).ListIndex
+                vParamAplic.C1ADV = Combo1(9).ListIndex
+                vParamAplic.C2ADV = Combo1(10).ListIndex
+                vParamAplic.C3ADV = Combo1(11).ListIndex
+                vParamAplic.C4ADV = Combo1(12).ListIndex
+                
+                vParamAplic.C1Recibo = Combo1(21).ListIndex
+                vParamAplic.C2Recibo = Combo1(22).ListIndex
+                vParamAplic.C3Recibo = Combo1(23).ListIndex
+                vParamAplic.C4Recibo = Combo1(24).ListIndex
+                
+                vParamAplic.C1Almz = Combo1(13).ListIndex
+                vParamAplic.C2Almz = Combo1(14).ListIndex
+                vParamAplic.C3Almz = Combo1(15).ListIndex
+                vParamAplic.C4Almz = Combo1(16).ListIndex
+                
+                vParamAplic.C1BOD = Combo1(17).ListIndex
+                vParamAplic.C2BOD = Combo1(18).ListIndex
+                vParamAplic.C3BOD = Combo1(19).ListIndex
+                vParamAplic.C4BOD = Combo1(20).ListIndex
+                
+                vParamAplic.C1Transporte = Combo1(25).ListIndex
+                vParamAplic.C2Transporte = Combo1(26).ListIndex
+                vParamAplic.C3Transporte = Combo1(27).ListIndex
+                vParamAplic.C4Transporte = Combo1(28).ListIndex
+                
+                
+                vParamAplic.Faneca = ComprobarCero(Text1(110).Text)
+                vParamAplic.CosteHora = ComprobarCero(Text1(25).Text)
+                vParamAplic.CosteSegSo = ComprobarCero(Text1(26).Text)
+                vParamAplic.Seccionhorto = Text1(27).Text ' ComprobarCero(Text1(27).Text)
+                vParamAplic.SeccionAlmaz = Text1(48).Text 'ComprobarCero(Text1(48).Text)
+                vParamAplic.SeccionADV = Text1(56).Text 'ComprobarCero(Text1(56).Text)
+                vParamAplic.PorcreteFacSoc = ComprobarCero(Text1(28).Text)
+                vParamAplic.SeccionPOZOS = Text1(121).Text ' seccion de pozos
+                
+                vParamAplic.PrimFactAnt = ComprobarCero(Text1(29).Text)
+                vParamAplic.UltFactAnt = ComprobarCero(Text1(30).Text)
+                vParamAplic.PrimFactAntVC = ComprobarCero(Text1(32).Text)
+                vParamAplic.UltFactAntVC = ComprobarCero(Text1(33).Text)
+                vParamAplic.PrimFactLiq = ComprobarCero(Text1(34).Text)
+                vParamAplic.UltFactLiq = ComprobarCero(Text1(35).Text)
+                vParamAplic.PrimFactLiqVC = ComprobarCero(Text1(36).Text)
+                vParamAplic.UltFactLiqVC = ComprobarCero(Text1(12).Text)
+                
+                vParamAplic.PorcenAFO = ComprobarCero(Text1(37).Text)
+                vParamAplic.TTomaDatos = Text1(38).Text
+                vParamAplic.PieTomaDatos = Text1(39).Text
+                vParamAplic.CodIvaIntra = ComprobarCero(Text1(40).Text)
+                vParamAplic.CtaTerReten = Text1(42).Text
+                
+                vParamAplic.CtaTraReten = Text1(117).Text ' cuenta de retencion de transporte
+                
+                vParamAplic.PathTraza = Text1(41).Text
+                
+                vParamAplic.ForpaPosi = ComprobarCero(Text1(43).Text)
+                vParamAplic.ForpaNega = ComprobarCero(Text1(44).Text)
+                vParamAplic.CtaRetenSoc = Text1(45).Text
+                vParamAplic.CtaAportaSoc = Text1(46).Text
+                vParamAplic.CtaBancoSoc = Text1(47).Text
+                
+                ' ALMAZARA
+                vParamAplic.ForpaPosiAlmz = ComprobarCero(Text1(51).Text)
+                vParamAplic.ForpaNegaAlmz = ComprobarCero(Text1(52).Text)
+                vParamAplic.CtaRetenAlmz = Text1(53).Text
+                vParamAplic.CtaBancoAlmz = Text1(54).Text
+                vParamAplic.CtaVentasAlmz = Text1(49).Text
+                vParamAplic.CtaGastosAlmz = Text1(50).Text
+                vParamAplic.LetraSerieAlmz = Text1(55).Text
+                vParamAplic.CodGastoAlmz = ComprobarCero(Text1(112).Text)
+                vParamAplic.GtoMoltura = ComprobarCero(Text1(115).Text)
+                vParamAplic.GtoEnvasado = ComprobarCero(Text1(116).Text)
+                
+                vParamAplic.PrimFactAntAlmz = ComprobarCero(Text1(81).Text)
+                vParamAplic.UltFactAntAlmz = ComprobarCero(Text1(82).Text)
+                vParamAplic.PrimFactLiqAlmz = ComprobarCero(Text1(83).Text)
+                vParamAplic.UltFactLiqAlmz = ComprobarCero(Text1(84).Text)
+                
+                
+                ' ADV
+                vParamAplic.AlmacenADV = ComprobarCero(Text1(57).Text)
+                vParamAplic.CtaBancoADV = Text1(58).Text
+                vParamAplic.CodIvaExeADV = ComprobarCero(Text1(114).Text)
+                
+                
+                ' Suministros
+                vParamAplic.SeccionSumi = Text1(60).Text 'ComprobarCero(Text1(60).Text)
+                vParamAplic.BDAriges = Text1(62).Text
+                
+                ' Bodega
+                vParamAplic.SeccionBodega = Text1(63).Text ' ComprobarCero(Text1(63).Text)
+                vParamAplic.AlbRetiradaManual = Me.ChkContadorManual.Value
+                vParamAplic.CtaBancoBOD = Text1(59).Text
+                vParamAplic.CtaVentasBOD = Text1(69).Text
+                vParamAplic.PorcGtoMantBOD = ComprobarCero(Text1(75).Text)
+                vParamAplic.CodGastoBOD = ComprobarCero(Text1(76).Text)
+                
+                vParamAplic.PrimFactAntBOD = ComprobarCero(Text1(77).Text)
+                vParamAplic.UltFactAntBOD = ComprobarCero(Text1(78).Text)
+                vParamAplic.PrimFactLiqBOD = ComprobarCero(Text1(79).Text)
+                vParamAplic.UltFactLiqBOD = ComprobarCero(Text1(80).Text)
+                '[Monica]27/08/2012: incremento de kilos de entrada
+                vParamAplic.PorcKilosBOD = ComprobarCero(Text1(128).Text)
+                
+                ' Telefonia
+                vParamAplic.CtaVentasTel = Text1(70).Text
+                vParamAplic.LetraSerieTel = Text1(71).Text
+                
+                ' NOMinas
+                vParamAplic.AlmacenNOMI = ComprobarCero(Text1(72).Text)
+                vParamAplic.EurosTrabdiaNOMI = ComprobarCero(Text1(97).Text)
+                vParamAplic.PorcSegSo1NOMI = ComprobarCero(Text1(98).Text)
+                vParamAplic.PorcSegSo2NOMI = ComprobarCero(Text1(99).Text)
+                vParamAplic.PorcIRPFNOMI = ComprobarCero(Text1(100).Text)
+                vParamAplic.PorcJornadaNOMI = ComprobarCero(Text1(101).Text)
+                vParamAplic.NroMaxJornadasNOMI = ComprobarCero(Text1(108).Text)
+                
+                ' POZOS
+                vParamAplic.Consumo1POZ = ComprobarCero(Text1(86).Text)
+                vParamAplic.Precio1POZ = ComprobarCero(Text1(87).Text)
+                vParamAplic.Consumo2POZ = ComprobarCero(Text1(88).Text)
+                vParamAplic.Precio2POZ = ComprobarCero(Text1(89).Text)
+                vParamAplic.CodIvaPOZ = ComprobarCero(Text1(90).Text)
+                vParamAplic.CuotaPOZ = ComprobarCero(Text1(91).Text)
+                vParamAplic.DerramaPOZ = ComprobarCero(Text1(92).Text)
+                vParamAplic.CtaVentasConsPOZ = Text1(122).Text
+                vParamAplic.CtaVentasCuoPOZ = Text1(123).Text
+                vParamAplic.CtaVentasTalPOZ = Text1(129).Text
+                vParamAplic.CtaVentasMtoPOZ = Text1(130).Text
+                vParamAplic.CtaVentasMantaPOZ = Text1(134).Text
+                
+                vParamAplic.CodCCostPOZ = Text1(124).Text
+                vParamAplic.ForpaConPOZ = ComprobarCero(Text1(126).Text)
+                vParamAplic.ForpaRecPOZ = ComprobarCero(Text1(127).Text)
+                vParamAplic.CartaPOZ = ComprobarCero(Text1(131).Text)
+                
+                ' transporte
+                vParamAplic.TipoPortesTRA = Combo1(0).ListIndex
+                vParamAplic.TarifaTRA = ComprobarCero(Text1(93).Text)
+                vParamAplic.TarifaTRA2 = ComprobarCero(Text1(113).Text)
+                vParamAplic.CodGastoTRA = ComprobarCero(Text1(94).Text)
+                vParamAplic.PorcreteFacTra = ComprobarCero(Text1(102).Text)
+                vParamAplic.PrecioKgTra = ComprobarCero(Text1(111).Text)
+                vParamAplic.TipoContadorTRA = Combo1(29).ListIndex
+                
+                vParamAplic.ConsumoMinPOZ = ComprobarCero(Text1(132).Text)
+                vParamAplic.ConsumoMaxPOZ = ComprobarCero(Text1(133).Text)
+                
+                
+                actualiza = vParamAplic.Modificar()
+                TerminaBloquear
+    
+                If actualiza Then  'Inserta o Modifica
+                    'Abrir la conexion a la conta q hemos modificado
+                    CerrarConexionConta
+                    If vParamAplic.NumeroConta <> 0 Then
+                        If Not AbrirConexionConta() Then End
+                        LeerNivelesEmpresa
+                    End If
+                    BloqueoMenusSegunCooperativa
+                    PonerModo 2
+                    PonerFocoBtn Me.cmdSalir
+                End If
+           End If
+        End If
+    End If
+End Sub
+
+Private Sub cmdCancelar_Click()
+    TerminaBloquear
+    If Data1.Recordset.EOF Then
+        PonerModo 0
+    Else
+        PonerCampos
+        PonerModo 2
+    End If
+End Sub
+
+Private Sub cmdSalir_Click()
+    Screen.MousePointer = vbDefault
+    Unload Me
+End Sub
+
+' *** si n'hi han combos a la capçalera ***
+Private Sub Combo1_GotFocus(Index As Integer)
+    If Modo = 1 Then Combo1(Index).BackColor = vbYellow
+End Sub
+
+Private Sub Combo1_LostFocus(Index As Integer)
+    If Combo1(Index).BackColor = vbYellow Then Combo1(Index).BackColor = vbWhite
+End Sub
+
+Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+Private Sub Form_Activate()
+    Screen.MousePointer = vbDefault
+    If Modo = 0 Then PonerCadenaBusqueda
+    PonerFoco Text1(0)
+End Sub
+
+Private Sub Form_KeyPress(KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
+
+Private Sub Form_Load()
+Dim I As Byte
+'    'Icono del formulario
+'    Me.Icon = frmPpal.Icon
+
+    ' ICONITOS DE LA BARRA
+    With Me.Toolbar1
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 3   'Anyadir
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(5).Image = 11  'Salir
+    End With
+    
+    'IMAGES para zoom
+    For I = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next I
+ 
+    LimpiarCampos   'Limpia los campos TextBox
+   
+   'cargar IMAGES de busqueda
+    For I = 0 To 25
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 43 To 47
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 49 To 50
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    
+    For I = 51 To 54
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 58 To 60
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 69 To 70
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 122 To 124
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 126 To 127
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 129 To 131
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 134 To 134
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    
+    
+    For I = 0 To imgAyuda.Count - 1
+        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next I
+
+    
+    ' el codigo de cartas de pozos solo es visible para utxera y escalona
+    Me.Label1(131).visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+    Text1(131).Enabled = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+    Text1(131).visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+    Text2(131).Enabled = False
+    Text2(131).visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+
+
+    SSTab1.Tab = 0
+
+    NombreTabla = "rparam"
+    Ordenacion = " ORDER BY codparam"
+    'ASignamos un SQL al DATA1
+    Data1.ConnectionString = conn
+    CadenaConsulta = "Select * from " & NombreTabla & Ordenacion
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
+    
+    Encontrado = True
+    If Data1.Recordset.EOF Then
+        'No hay registro de datos de parametros
+        'quitar###
+        Encontrado = False
+    End If
+    
+    CargaCombo
+        
+    Me.SSTab1.TabEnabled(3) = (vParamAplic.HayAridoc = 1)
+    Me.SSTab1.TabVisible(3) = (vParamAplic.HayAridoc = 1)
+    If (vParamAplic.HayAridoc = 1) Then
+        Me.SSTab1.TabsPerRow = 7
+        AbrirConexionAridoc "root", "aritel"
+        Me.SSTab2.Tab = 0
+    Else
+        Me.SSTab1.TabsPerRow = 6
+    End If
+    
+    PonerModo 0
+
+End Sub
+
+
+Private Sub PonerCadenaBusqueda()
+On Error GoTo EEPonerBusq
+    Screen.MousePointer = vbHourglass
+
+    Data1.RecordSource = CadenaConsulta
+    Data1.Refresh
+    If Data1.Recordset.RecordCount <= 0 Then
+        LimpiarCampos
+        MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
+        Screen.MousePointer = vbDefault
+'        Me.Toolbar1.Buttons(1).Enabled = False 'Modificar
+    Else
+        Data1.Recordset.MoveFirst
+        PonerCampos
+    End If
+    
+    Screen.MousePointer = vbDefault
+    Exit Sub
+EEPonerBusq:
+    MuestraError Err.Number, "PonerCadenaBusqueda"
+    Screen.MousePointer = vbDefault
+End Sub
+
+
+Private Sub Form_Unload(Cancel As Integer)
+    CerrarConexionAridoc
+End Sub
+
+Private Sub frmAlm_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(57).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    FormateaCampo Text1(57)
+    Text2(57).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+' Almacen de la gesion de nominas
+Private Sub frmAlm2_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(72).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    FormateaCampo Text1(72)
+    Text2(72).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+
+Private Sub frmArtADV_DatoSeleccionado(CadenaSeleccion As String)
+'Articulo de mano de obra de adv para quatretonda
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmCarSocio_DatoSeleccionado(CadenaSeleccion As String)
+'Carta de reclamacion de pozos
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmCCos_DatoSeleccionado(CadenaSeleccion As String)
+'Centro de Coste de la contabilidad
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmConGasto_DatoSeleccionado(CadenaSeleccion As String)
+'Concepto de gasto de bodega
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codgasto
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomgasto
+End Sub
+
+Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
+'Cuentas contables de la Contabilidad
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
+End Sub
+
+Private Sub frmDoc_DatoSeleccionado(CadenaSeleccion As String)
+'Carpetas de Aridoc
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nombre carpeta
+End Sub
+
+Private Sub frmExt_DatoSeleccionado(CadenaSeleccion As String)
+'Extension de Aridoc
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmAri_DatoSeleccionado(CadenaSeleccion As String)
+Dim Cad As String
+    Cad = RecuperaValor(CadenaSeleccion, 1)
+    Text1(indice).Text = Mid(Cad, 2, Len(Cad))
+    Text1(indice).Text = Format(Text1(indice).Text, "000")
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 3)
+End Sub
+
+Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
+'Form de Consulta de formas de pago de contabilidad
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1)
+    Text1(indice).Text = Format(Text1(indice).Text, "000")
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2)
+End Sub
+
+Private Sub frmIva_DatoSeleccionado(CadenaSeleccion As String)
+'Tipo de iva de la contabilidad
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigiva
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Porceiva
+End Sub
+
+Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmTar_DatoSeleccionado(CadenaSeleccion As String)
+' tarifa de transporte
+    Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+End Sub
+
+Private Sub frmZ_Actualizar(vCampo As String)
+     Text1(indice).Text = vCampo
+End Sub
+
+
+Private Sub imgAyuda_Click(Index As Integer)
+Dim vCadena As String
+    Select Case Index
+        Case 0
+           ' "____________________________________________________________"
+            vCadena = "Éstas son las tarifas base, dependiendo del tipo de Tarifas en el  " & vbCrLf & _
+                      "mantenimiento de Tarifas de Transporte. " & vbCrLf & vbCrLf & _
+                      "Para el cálculo del canon de caminos, en algunas cooperativas se " & vbCrLf & _
+                      "utiliza el tipo de tarifa en función de que la variedad sea de un " & vbCrLf & _
+                      "producto o no lo sea." & vbCrLf & vbCrLf
+                                            
+        Case 1
+           ' "____________________________________________________________"
+            vCadena = "Precio por kilo de gastos de molturación y precio por litros de   " & vbCrLf & _
+                      "gastos de envasado que se aplican en la liquidación de Almazara. " & vbCrLf & vbCrLf & _
+                      "Los kilos / litros utilizados para realizar el cálculo son " & vbCrLf & _
+                      "únicamente los de autoconsumo." & vbCrLf & vbCrLf
+                      
+        Case 2
+           ' "____________________________________________________________"
+            vCadena = "Si está marcado se desdoblan las entradas, según sus coopropietarios," & vbCrLf & _
+                      "cuando se actualizan las entradas y pasan a entradas clasificadas. " & vbCrLf & vbCrLf & _
+                      "Si no está marcado las entradas se desdoblarán cuando actualicen las" & vbCrLf & _
+                      "entradas clasificadas y pasen al Histórico de Entradas." & vbCrLf & vbCrLf
+        
+        Case 3
+           ' "____________________________________________________________"
+            vCadena = "Porcentaje de incremento de kilos netos de las entradas de bodega. " & vbCrLf & vbCrLf & _
+                      "Se incrementará el resultado de kilos brutos menos la tara, en el " & vbCrLf & _
+                      "porcentaje indicado sólo en el caso de que sea una entrada de tipo" & vbCrLf & _
+                      "Producto Integrado" & vbCrLf & _
+                      vbCrLf
+                      
+                      
+                      
+    End Select
+    MsgBox vCadena, vbInformation, "Descripción de Ayuda"
+    
+End Sub
+
+Private Sub imgBuscar_Click(Index As Integer)
+Dim numnivel As Byte
+
+TerminaBloquear
+    
+    If vParamAplic.NumeroConta = 0 Then Exit Sub
+    
+    Select Case Index
+        Case 0, 3, 4, 60, 10, 25
+            Select Case Index
+                Case 0 ' Seccion hortofrutícola
+                    indice = Index + 27
+                Case 3 ' seccion de Almazara
+                    indice = 48
+                Case 4 ' seccion de Adv
+                    indice = 56
+                Case 60 ' seccion de suministros
+                    indice = Index
+                Case 10 ' seccion de bodega
+                    indice = 63
+                Case 25 ' seccion de pozos
+                    indice = 121
+            End Select
+            
+            Set frmSec = New frmManSeccion
+            frmSec.DatosADevolverBusqueda = "0|1|2|"
+            frmSec.CodigoActual = Text1(indice).Text
+            frmSec.Show vbModal
+            Set frmSec = Nothing
+            PonerFoco Text1(indice)
+        
+        Case 1  'Porcentaje iva de factura de terceros de extranjero
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index + 39
+                    Set frmIva = New frmTipIVAConta
+                    frmIva.DatosADevolverBusqueda = "0|1|2|"
+                    frmIva.CodigoActual = Text1(indice).Text
+                    frmIva.Show vbModal
+                    Set frmIva = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+    
+        Case 2  'Cuenta Contable Retencion facturas terceros
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index + 40
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+         Case 24 'Cuenta Contable Retencion facturas transporte
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = 117
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+
+         Case 6, 7, 8, 11, 12, 14, 15, 20 'carpetas de aridoc
+            Select Case Index
+                Case 8
+                    indice = 61
+                Case 6, 7
+                    indice = Index + 4
+                Case 11, 12
+                    indice = Index + 56
+                Case 14, 15
+                    indice = Index + 59
+                Case 20
+                    indice = Index + 76
+            End Select
+            
+            Set frmAri = New frmCarpAridoc
+            frmAri.Opcion = 20
+            frmAri.Show vbModal
+            Set frmAri = Nothing
+            PonerFoco Text1(indice)
+        
+         Case 9 'extesion de fichero de aridoc
+            indice = Index + 4
+            Set frmExt = New frmExtAridoc
+            frmExt.DatosADevolverBusqueda = "0|1|"
+            frmExt.CodigoActual = Text1(indice).Text
+            frmExt.Show vbModal
+            Set frmExt = Nothing
+            PonerFoco Text1(indice)
+                
+        Case 43, 44 ' forma de pago de facturas de anticipos / liquidaciones socios
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    AbrirFrmForpaConta (Index)
+                End If
+            End If
+        
+        Case 45, 46, 47, 70 ' cuenta de retencion y de aportacion de facturas anti / liqui de socios
+                        ' 47 cta de banco prevista
+                        ' 70 cta de ventas de telefonia
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+        
+
+        '53,54 cta de retencion de almazara y cta banco almazara
+        '49,50 cuenta de ventas y de gastos de la almazara
+        Case 53, 54, 49, 50
+            If Text1(48).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(48).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+
+        Case 51, 52 ' forma de pago de facturas de almazara
+            If Text1(48).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(48).Text) Then
+                If vSeccion.AbrirConta Then
+                    AbrirFrmForpaConta (Index)
+                End If
+            End If
+            
+        Case 5 ' almacen de adv
+            Set frmAlm = New frmComercial
+            
+            AyudaAlmacenCom frmAlm, Text1(57).Text
+            
+            Set frmAlm = Nothing
+
+        '58 cta banco prevista adv
+        Case 58
+            If Text1(48).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(56).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        Case 23 ' codigo de iva de facturas internas de adv
+            If Text1(56).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(56).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = 114
+                    Set frmIva = New frmTipIVAConta
+                    frmIva.DatosADevolverBusqueda = "0|1|2|"
+                    frmIva.CodigoActual = Text1(indice).Text
+                    frmIva.Show vbModal
+                    Set frmIva = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        Case 59, 69 ' Cta.banco prevista y cta de ventas de bodega
+            If Text1(63).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(63).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+        
+        
+        Case 16 ' concepto de gasto para liquidacion
+            indice = Index + 60
+            
+            Set frmConGasto = New frmManConcepGasto
+            frmConGasto.DatosADevolverBusqueda = "0|1|"
+            frmConGasto.CodigoActual = Text1(indice).Text
+            frmConGasto.Show vbModal
+            Set frmConGasto = Nothing
+            PonerFoco Text1(indice)
+        
+        Case 21 ' concepto de gasto para liquidacion
+            indice = Index + 91
+            
+            Set frmConGasto = New frmManConcepGasto
+            frmConGasto.DatosADevolverBusqueda = "0|1|"
+            frmConGasto.CodigoActual = Text1(indice).Text
+            frmConGasto.Show vbModal
+            Set frmConGasto = Nothing
+            PonerFoco Text1(indice)
+        
+        ' Nominas
+        Case 13 ' almacen de nominas
+            Set frmAlm2 = New frmComercial
+            
+            AyudaAlmacenCom frmAlm2, Text1(72).Text
+            
+            Set frmAlm2 = Nothing
+        
+        
+        ' pozos
+        Case 17 ' codigo de iva de pozos
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = 90
+                    Set frmIva = New frmTipIVAConta
+                    frmIva.DatosADevolverBusqueda = "0|1|2|"
+                    frmIva.CodigoActual = Text1(indice).Text
+                    frmIva.Show vbModal
+                    Set frmIva = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+        
+        Case 126, 127 ' forma de pago de facturas de contado y recibos de pozos
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    AbrirFrmForpaConta (Index)
+                End If
+            End If
+            
+       Case 18, 22  ' 18 = codigo de tarifa 1
+                ' 22 = codigo de tarifa 2
+            If Index = 18 Then
+                indCodigo = 93
+            Else
+                indCodigo = 113
+            End If
+            Set frmTar = New frmManTarTra
+            frmTar.DatosADevolverBusqueda = "0|1|"
+            frmTar.CodigoActual = Text1(indCodigo).Text
+            frmTar.Show vbModal
+            Set frmTar = Nothing
+            PonerFoco Text1(indCodigo)
+        
+       Case 22  ' codigo de tarifa 2
+            Set frmTar = New frmManTarTra
+            frmTar.DatosADevolverBusqueda = "0|1|"
+            frmTar.CodigoActual = Text1(93).Text
+            frmTar.Show vbModal
+            Set frmTar = Nothing
+            PonerFoco Text1(93)
+        
+        
+       Case 19 ' concepto de gasto para transporte
+            indice = 94
+            
+            Set frmConGasto = New frmManConcepGasto
+            frmConGasto.DatosADevolverBusqueda = "0|1|"
+            frmConGasto.CodigoActual = Text1(indice).Text
+            frmConGasto.Show vbModal
+            Set frmConGasto = Nothing
+            PonerFoco Text1(indice)
+ 
+        
+        
+        '122 cuenta de ventas consumo de pozos
+        '123 cuenta de ventas cuota pozos
+        Case 122, 123, 129, 130, 134
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCtas = New frmCtasConta
+                    frmCtas.NumDigit = 0
+                    frmCtas.DatosADevolverBusqueda = "0|1|"
+                    frmCtas.CodigoActual = Text1(indice).Text
+                    frmCtas.Show vbModal
+                    Set frmCtas = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        ' centro de coste de ventas
+        Case 124
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    indice = Index
+                    Set frmCCos = New frmCCosConta
+                    frmCCos.DatosADevolverBusqueda = "0|1|"
+                    frmCCos.CodigoActual = Text1(indice).Text
+                    frmCCos.Show vbModal
+                    Set frmCCos = Nothing
+                    PonerFoco Text1(indice)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        
+        Case 26 ' codigo de articulo de adv
+            indice = Index + 100
+            
+            Set frmArtADV = New frmADVArticulos
+            frmArtADV.DatosADevolverBusqueda = "0|1|"
+            frmArtADV.CodigoActual = Text1(indice).Text
+            frmArtADV.Show vbModal
+            Set frmArtADV = Nothing
+            PonerFoco Text1(indice)
+        
+        Case 131 ' codigo de carta de reclamacion (solo utxera y escalona)
+            indice = Index
+            
+            Set frmCarSocio = New frmCartasSocio
+            frmCarSocio.DatosADevolverBusqueda = "0|1|"
+            frmCarSocio.CodigoActual = Text1(131).Text
+            frmCarSocio.Show vbModal
+            Set frmCarSocio = Nothing
+            PonerFoco Text1(indice)
+        
+        
+    End Select
+
+    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.Data1, 1
+
+End Sub
+
+Private Sub imgZoom_Click(Index As Integer)
+    
+    Set frmZ = New frmZoom
+
+    Select Case Index
+        Case 0
+            indice = 38
+            frmZ.pTitulo = "Texto para Cabecera de Toma de Datos"
+            frmZ.pValor = Text1(indice).Text
+            frmZ.pModo = Modo
+        
+            frmZ.Show vbModal
+            Set frmZ = Nothing
+                
+            PonerFoco Text1(indice)
+        Case 1
+            indice = 39
+            frmZ.pTitulo = "Texto para Pie de Toma de Datos"
+            frmZ.pValor = Text1(indice).Text
+            frmZ.pModo = Modo
+        
+            frmZ.Show vbModal
+            Set frmZ = Nothing
+                
+            PonerFoco Text1(indice)
+            
+    End Select
+    
+End Sub
+
+
+'Private Sub mnAñadir_Click()
+'    If BLOQUEADesdeFormulario(Me) Then BotonAnyadir
+'End Sub
+
+Private Sub mnModificar_Click()
+    If BLOQUEADesdeFormulario(Me) Then BotonModificar
+End Sub
+
+Private Sub mnSalir_Click()
+    Screen.MousePointer = vbDefault
+    Unload Me
+End Sub
+
+
+
+Private Sub Text1_GotFocus(Index As Integer)
+    ConseguirFoco Text1(Index), Modo
+End Sub
+
+Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
+    KEYdown KeyCode
+End Sub
+
+Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
+'14/02/2007 antes estaba esto
+'    KEYpress (KeyAscii)
+' ahora
+    If KeyAscii = teclaBuscar Then
+        Select Case Index
+            Case 5: KEYBusqueda KeyAscii, 0 'tipo de iva transporte
+            Case 16: KEYBusqueda KeyAscii, 1 'cuenta de diferencias negativas
+            Case 17: KEYBusqueda KeyAscii, 2 'cuenta de diferencias positivas
+            Case 43: KEYBusqueda KeyAscii, 43 'forma de pago positiva
+            Case 44: KEYBusqueda KeyAscii, 44 'forma de pago negativa
+            Case 45: KEYBusqueda KeyAscii, 43 'cuenta de retencion
+            Case 46: KEYBusqueda KeyAscii, 44 'cuenta de aportacion
+            Case 47: KEYBusqueda KeyAscii, 45 'cuenta de banco prevista
+            ' **** almazara
+            Case 51: KEYBusqueda KeyAscii, 51 'forma de pago positiva almazara
+            Case 52: KEYBusqueda KeyAscii, 52 'forma de pago negativa almazara
+            Case 53: KEYBusqueda KeyAscii, 43 'cuenta de retencion almazara
+            Case 54: KEYBusqueda KeyAscii, 54 'cuenta de banco prevista almazara
+            Case 49: KEYBusqueda KeyAscii, 49 'cuenta de ventas almazara
+            Case 50: KEYBusqueda KeyAscii, 50 'cuenta de gastos almazara
+            Case 58: KEYBusqueda KeyAscii, 58 'cuenta de banco prevista adv
+            Case 59: KEYBusqueda KeyAscii, 59 'cuenta de banco prevista bodega
+            Case 69: KEYBusqueda KeyAscii, 69 'cuenta de ventas de bodega
+            Case 70: KEYBusqueda KeyAscii, 70 'cuenta de ventas de telefonia
+        
+            Case 60: KEYBusqueda KeyAscii, 60 'seccion de suministros
+            
+            Case 63: KEYBusqueda KeyAscii, 10 'seccion de bodega
+            
+            Case 10:  KEYBusqueda KeyAscii, 6 'carpeta aridoc anticipos
+            Case 11: KEYBusqueda KeyAscii, 7 'carpeta aridoc liquidacion
+            Case 61: KEYBusqueda KeyAscii, 8 'carpeta aridoc adv
+            Case 67: KEYBusqueda KeyAscii, 11 'carpeta aridoc almazara
+            Case 68: KEYBusqueda KeyAscii, 12 'carpeta aridoc bodega
+            Case 73: KEYBusqueda KeyAscii, 14 'carpeta aridoc recibos almacen
+            Case 74: KEYBusqueda KeyAscii, 15 'carpeta aridoc recibos campo
+        
+            Case 72: KEYBusqueda KeyAscii, 13 'codigo de almacen de nominas
+            Case 76: KEYBusqueda KeyAscii, 16 'codigo de concepto de gasto de nominas
+            
+            Case 112: KEYBusqueda KeyAscii, 21 'codigo de concepto de gasto
+            
+            ' pozos
+            Case 90: KEYBusqueda KeyAscii, 17 'codigo de iva de pozos
+            Case 122: KEYBusqueda KeyAscii, 122 'cuenta de ventas consumo pozos
+            Case 123: KEYBusqueda KeyAscii, 123 'cuenta de ventas cuotas pozos
+            Case 129: KEYBusqueda KeyAscii, 129 'cuenta de ventas talla pozos
+            Case 130: KEYBusqueda KeyAscii, 130 'cuenta de ventas mto pozos
+            Case 134: KEYBusqueda KeyAscii, 134 'cuenta de ventas mto pozos
+            Case 126: KEYBusqueda KeyAscii, 126 'forma de pago contado pozos
+            Case 127: KEYBusqueda KeyAscii, 127 'forma de pago recibo pozos
+            
+            Case 93: KEYBusqueda KeyAscii, 18 ' tarifa local 1 de transportes
+            Case 113: KEYBusqueda KeyAscii, 22 ' tarifa local 2 de transportes
+            Case 94: KEYBusqueda KeyAscii, 19 ' cod.gasto de transportes
+            
+            Case 96: KEYBusqueda KeyAscii, 20 'carpeta aridoc transporte
+            
+            Case 114: KEYBusqueda KeyAscii, 23 'codigo de iva de facturas internas de adv
+            
+            Case 131: KEYBusqueda KeyAscii, 131 'codigo de cartas reclamacion de socio (solo utxera y escalona)
+            
+        End Select
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+    KeyAscii = 0
+    imgBuscar_Click (indice)
+End Sub
+
+Private Sub Text1_LostFocus(Index As Integer)
+Dim cadMen As String
+Dim Cad As String
+
+    If Text1(Index).Text = "" Then Exit Sub
+    
+    If Screen.ActiveForm.Name <> Me.Name Then Exit Sub
+
+    'Quitar espacios en blanco
+    Text1(Index).Text = Trim(Text1(Index).Text)
+    
+    Select Case Index
+        Case 4 'numero de contabilidad
+            If Not EsNumerico(Text1(Index).Text) Then
+                Text1(Index).Text = ""
+                PonerFoco Text1(Index)
+            Else
+                cmdAceptar_Click
+            End If
+            
+            
+        Case 10, 11, 61, 67, 68, 73, 74, 96
+            If Text1(Index).Text = "" Then Exit Sub
+            Text1(Index).Text = Format(Text1(Index).Text, "000")
+            If ComprobarCero(Text1(Index)) <> 0 Then
+                Cad = CargaPath(Text1(Index))
+                Text2(Index).Text = Mid(Cad, 2, Len(Cad))
+            End If
+        
+        Case 13
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "extension", "descripcion", "codext", "N", cAridoc)
+        
+        Case 14, 15, 16, 17, 18
+            If Text1(Index).Text = "" Then Exit Sub
+            Text1(Index).Text = UCase(Text1(Index).Text)
+        
+        
+        Case 19, 20, 21, 22, 23 'peso cajas
+            If Text1(Index).Text = "" Then Exit Sub
+            PonerFormatoDecimal Text1(Index), 4
+       
+        Case 103, 104, 105, 106, 107 'peso cajas transportistas
+            If Text1(Index).Text = "" Then Exit Sub
+            PonerFormatoDecimal Text1(Index), 4
+       
+       
+        Case 64, 65, 66 ' limite inferior y superior de kilos caja
+                        ' 66 peso caja llena
+            If Text1(Index).Text = "" Then Exit Sub
+            PonerFormatoDecimal Text1(Index), 4
+       
+        Case 109 ' porcentaje de incremento / decremento de aforo
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+        
+        Case 25, 26 'coste hora y coste seguridad social
+            If Text1(Index).Text = "" Then Exit Sub
+            PonerFormatoDecimal Text1(Index), 8
+        
+        Case 27 ' codigo de seccion hortofruticola
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N", cAgro)
+        
+        Case 48 ' codigo de seccion almazara
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N", cAgro)
+        
+        Case 56 ' codigo de seccion adv
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N", cAgro)
+        
+        
+        Case 28, 37 ' porcentaje de retencion de facturas socios
+                    ' porcentaje de aportacion de fondo operativo
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+            
+        Case 110 ' constante faneca
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 6
+            
+        Case 38 ' texto de toma de datos
+            
+        
+        Case 40 ' codigo iva intracomunitario
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        Case 43, 44 ' forma de pago en positivo y en negativo
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+            
+        Case 45, 46, 47, 70, 42, 117 ' cuentas contables de retencion aportacion y banco
+                            ' para contabilizacion de facturas de socio
+                            ' 70 cta de ventas de telefonia
+                            ' 42 cta de retencion de terceros
+                            ' 117 cta de retencion de transporte
+            If Text1(27).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(27).Text) Then
+                If vSeccion.AbrirConta Then
+                    Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+                    If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+' antes
+'                    If PonerFormatoEntero(Text1(Index)) Then
+'                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(Index), "T")
+'                    Else
+'                        Text2(Index).Text = ""
+'                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+       Case 71 ' letra de serie de telefonia
+            If Text1(Index).Text <> "" Then Text1(Index).Text = UCase(Text1(Index).Text)
+            
+    ' ***********ALMAZARA*********
+        Case 51, 52 ' forma de pago en positivo y en negativo
+            If Text1(48).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(48).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+            
+        Case 53, 54, 49, 50
+            ' 53 cuenta contable de retencion almazara
+            ' 54 cuenta banco almazara
+            ' 49 cuenta ventas almazara
+            ' 50 cuenta gastos almazara
+            ' para contabilizacion de facturas de socio
+            
+            If Text1(48).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(48).Text) Then
+                If vSeccion.AbrirConta Then
+                    Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+                    If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+' antes
+'                    If PonerFormatoEntero(Text1(Index)) Then
+'                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(Index), "T")
+'                    Else
+'                        Text2(Index).Text = ""
+'                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+       Case 112 ' concepto de gasto para el reparto de gastos de la liquidacion
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rconcepgasto", "nomgasto", "codgasto", "N", cAgro)
+            
+            
+       Case 115 ' precio por kilo de gto de molturacion
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 7
+            
+       Case 116 ' precio por litro de gto de envasado
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 7
+            
+    ' ***********END ALMAZARA*********
+        
+        
+    ' ***********ADV*********
+       Case 57 ' almacen de adv
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "salmpr", "nomalmac", "codalmac", "N", cAgro)
+        
+        Case 58
+            ' 58 cuenta contable de banco adv
+            ' para contabilizacion de facturas de adv
+            If Text1(56).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(56).Text) Then
+                If vSeccion.AbrirConta Then
+                    Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+                    If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+    
+    
+       Case 114 ' codigo de iva de exento factura de adv
+            If Text1(56).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(56).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+    
+            
+    
+    ' ***********END ADV*********
+        
+    ' ***********BODEGA*********
+        Case 59, 69
+            ' 59 cuenta contable de banco bodega
+            ' 69 cuenta contable VENTAS bodega
+            ' para contabilizacion de facturas de bodega
+            If Text1(63).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(63).Text) Then
+                If vSeccion.AbrirConta Then
+                    Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+                    If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+       
+       Case 75 ' porcentaje de gastos de mantenimiento en liqudiacion de bodega
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+       
+       Case 60 ' seccion de suministros
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N", cAgro)
+    
+       Case 63 ' seccion de bodega
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N", cAgro)
+    
+       Case 76 ' concepto de gasto para el reparto de gastos de la liquidacion
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rconcepgasto", "nomgasto", "codgasto", "N", cAgro)
+        
+       Case 128 ' porcentaje de incremento de kilos de entrada e bodega
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+    
+    
+    ' ***********END BODEGA*********
+       
+    
+    ' ***********NOMINAS*********
+       Case 72 ' almacen de nominas
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "salmpr", "nomalmac", "codalmac", "N", cAgro)
+    
+       Case 97 'euros trabajador dia
+            If Text1(Index).Text = "" Then Exit Sub
+            PonerFormatoDecimal Text1(Index), 3
+    
+       Case 98, 99, 100, 101 ' porcentajes de seguridad social irpf y de jornada
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+    
+       Case 108
+            If Text1(Index).Text <> "" Then PonerFormatoEntero Text1(Index)
+    
+    ' ***********POZOS***********
+       Case 86, 88 ' hasta rangos m3
+            PonerFormatoEntero Text1(Index)
+            
+       Case 87, 89  ' precio rangos
+            PonerFormatoDecimal Text1(Index), 10
+            
+       Case 90 ' codigo de iva de pozos
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+       Case 91, 92 ' cuota y derrama de pozos
+            PonerFormatoDecimal Text1(Index), 3
+    
+        Case 122, 123, 129, 130, 134
+            ' 122 cuenta contable de ventas consumo pozo
+            ' 123 cuenta contable de ventas cuotas pozos
+            ' 129 cuenta contable de ventas talla pozos
+            ' 130 cuenta contable de ventas mantenimiento pozos
+            ' 134 cuenta contable de ventas de consumo a manta
+            
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+                    If Text2(Index).Text = "" Then PonerFoco Text1(Index)
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+        
+        Case 126, 127 ' forma de pago contado y recibo de pozos
+            If Text1(121).Text = "" Then Exit Sub ' si no hemos indicado la seccion
+                                                 ' no sabemos a que contabilidad va
+            Set vSeccion = New CSeccion
+            If vSeccion.LeerDatos(Text1(121).Text) Then
+                If vSeccion.AbrirConta Then
+                    If PonerFormatoEntero(Text1(Index)) Then
+                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                    Else
+                        Text2(Index).Text = ""
+                    End If
+                End If
+                vSeccion.CerrarConta
+            End If
+            Set vSeccion = Nothing
+            
+        Case 131 ' codigo de carta de reclamacion
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "scartas", "descarta", "codcarta", "N", cAgro)
+            
+        '[Monica]11/06/2013:
+        Case 132, 133 ' consumo minimo y consumo maximo
+            PonerFormatoEntero Text1(Index)
+            
+    ' ***********TRANSPORTE***********
+        Case 93, 113 ' 93= tarifa local 1 de transporte
+                     ' 113= tarifa local 2 de transporte
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rtarifatra", "nomtarif", "codtarif", "N", cAgro)
+        
+        Case 94 ' concepto de transporte
+            If Text1(Index).Text = "" Then Exit Sub
+            Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rconcepgasto", "nomgasto", "codgasto", "N", cAgro)
+    
+        Case 102 ' porcentaje de retencion de modulo transportista
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 4
+    
+        Case 111 ' precio por kilo de transporte
+            If Text1(Index).Text <> "" Then PonerFormatoDecimal Text1(Index), 7
+            
+    End Select
+End Sub
+
+
+Private Sub Text1_Validate(Index As Integer, Cancel As Boolean)
+'    Select Case Index
+'        Case 6, 7
+'            If Text1(Index).Text <> "" Then
+'                If Not EsNumerico(Text1(Index).Text) Then
+'                    Cancel = True
+'                    ConseguirFoco Text1(Index), Modo
+'                End If
+'            End If
+'    End Select
+    
+End Sub
+
+Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+'        Case 1  'Anyadir
+'            BotonAnyadir
+        Case 2  'Modificar
+            mnModificar_Click
+        Case 5 'Salir
+            mnSalir_Click
+    End Select
+End Sub
+
+
+'Private Sub BotonAnyadir()
+'    LimpiarCampos
+'    PonerModo 3
+'    Text1(0).Text = 1
+'    PonerFoco Text1(1)
+'End Sub
+
+
+Private Sub BotonModificar()
+    PonerModo 4
+    PonerFoco Text1(1)
+End Sub
+
+
+Private Function DatosOk() As Boolean
+Dim b As Boolean
+Dim I As Integer
+Dim NumTaras As Integer
+
+    DatosOk = False
+    b = CompForm(Me)
+    
+    '[Monica]19/12/2011: solo pueden haber 2 y solo 2 taras de esvtafruta marcadas
+    If b Then
+        NumTaras = 0
+        For I = 0 To 4
+            If Me.ChkVtaFruta(I).Value Then NumTaras = NumTaras + 1
+        Next I
+        
+        If NumTaras <> 2 Then
+            MsgBox "Debe haber marcadas 2 y sólo 2 tipos de caja de Venta Fruta. Revise.", vbExclamation
+            b = False
+        End If
+    End If
+    
+    DatosOk = b
+End Function
+
+
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+End Sub
+
+
+Private Sub PonerBotonCabecera(b As Boolean)
+    Me.cmdAceptar.visible = Not b
+    Me.cmdCancelar.visible = Not b
+    Me.cmdSalir.visible = b
+'    If b Then Me.lblIndicador.Caption = ""
+End Sub
+
+
+Private Sub PonerCampos()
+Dim I As Byte
+Dim Cad As String
+
+
+On Error GoTo EPonerCampos
+
+    If Data1.Recordset.EOF Then Exit Sub
+    PonerCamposForma Me, Data1
+    
+    ' ************* si hay aridoc **************
+    If vParamAplic.HayAridoc = 1 Then
+         If ComprobarCero(Text1(10).Text) <> 0 Then
+            Cad = CargaPath(Text1(10))
+            Text2(10).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(11).Text) <> 0 Then
+            Cad = CargaPath(Text1(11))
+            Text2(11).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(61).Text) <> 0 Then
+            Cad = CargaPath(Text1(61))
+            Text2(61).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(67)) <> 0 Then
+            Cad = CargaPath(Text1(67))
+            Text2(67).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(68)) <> 0 Then
+            Cad = CargaPath(Text1(68))
+            Text2(68).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(73)) <> 0 Then
+            Cad = CargaPath(Text1(73))
+            Text2(73).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(74)) <> 0 Then
+            Cad = CargaPath(Text1(74))
+            Text2(74).Text = Mid(Cad, 2, Len(Cad))
+         End If
+         If ComprobarCero(Text1(96)) <> 0 Then
+            Cad = CargaPath(Text1(96))
+            Text2(96).Text = Mid(Cad, 2, Len(Cad))
+         End If
+
+         Text2(13).Text = DevuelveDesdeBDNew(cAridoc, "extension", "descripcion", "codext", Text1(13).Text, "N")
+    End If
+    
+    ' ************* configurar els camps de les descripcions de les comptes *************
+    If Text1(27).Text <> "" Then  ' si no hemos indicado la seccion
+                                  ' no sabemos a que contabilidad va
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(27).Text) Then
+            If vSeccion.AbrirConta Then
+                ' porcentaje de iva de terceros
+                If PonerFormatoEntero(Text1(40)) Then
+                    Text2(40).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(40), "N")
+                Else
+                    Text2(40).Text = ""
+                End If
+                ' cuenta de retencion de terceros
+                If Text1(42).Text <> "" Then
+                    Text2(42).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(42), "T")
+                End If
+                
+                ' cuenta de retencion de transportista
+                If Text1(117).Text <> "" Then
+                    Text2(117).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(117), "T")
+                End If
+                
+                ' cuenta de retencion de facturas de socios
+                If Text1(45).Text <> "" Then
+                    Text2(45).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(45), "T")
+                End If
+                ' cuenta de aportacion de facturas de socios
+                If Text1(46).Text <> "" Then
+                    Text2(46).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(46), "T")
+                End If
+                ' cuenta de prevista de banco de facturas de socios
+                If Text1(47).Text <> "" Then
+                    Text2(47).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(47), "T")
+                End If
+                
+                ' forma de pago de facturas anticipos / liquidaciones de socios positivas
+                If Text1(43).Text <> "" Then
+                    Text2(43).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(43), "N")
+                End If
+                ' forma de pago de facturas anticipos / liquidaciones de socios negativas
+                If Text1(44).Text <> "" Then
+                    Text2(44).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(44), "N")
+                End If
+                
+                ' telefonia de valsur
+                ' cuenta de ventas de telefonia
+                If Text1(70).Text <> "" Then
+                    Text2(70).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(70), "T")
+                End If
+                
+                
+            End If
+            vSeccion.CerrarConta
+        End If
+        Set vSeccion = Nothing
+    
+        Text2(27).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(27).Text, "N")
+    End If
+    
+    
+    If Text1(121).Text <> "" Then  ' si no hemos indicado la seccion
+                                  ' no sabemos a que contabilidad va
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(121).Text) Then
+            If vSeccion.AbrirConta Then
+                ' pozos
+                ' codigo de iva de pozos
+                If Text1(90).Text <> "" Then
+                    Text2(90).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(90), "N")
+                End If
+                ' cuenta de consumo de pozos
+                If Text1(122).Text <> "" Then
+                    Text2(122).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(122), "T")
+                End If
+                ' cuenta de cuotas de pozos
+                If Text1(123).Text <> "" Then
+                    Text2(123).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(123), "T")
+                End If
+                ' cuenta de talla de pozos
+                If Text1(129).Text <> "" Then
+                    Text2(129).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(129), "T")
+                End If
+                ' cuenta de mantenimiento de pozos
+                If Text1(130).Text <> "" Then
+                    Text2(130).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(130), "T")
+                End If
+                ' cuenta de ventas de consumo a manta de pozos
+                If Text1(134).Text <> "" Then
+                    Text2(134).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(134), "T")
+                End If
+                ' centro de coste de pozos
+                If Text1(124).Text <> "" Then
+                    Text2(124).Text = DevuelveDesdeBDNew(cConta, "cabccost", "nomccost", "codccost", Text1(124), "T")
+                End If
+                ' forma de pago de contado de pozos
+                If Text1(126).Text <> "" Then
+                    Text2(126).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(126), "N")
+                End If
+                ' forma de pago de recibos de pozos
+                If Text1(127).Text <> "" Then
+                    Text2(127).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(127), "N")
+                End If
+            End If
+            vSeccion.CerrarConta
+        End If
+        Set vSeccion = Nothing
+    
+        Text2(121).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(121).Text, "N")
+        Text2(131).Text = DevuelveDesdeBDNew(cAgro, "scartas", "descarta", "codcarta", Text1(131).Text, "N")
+    End If
+    
+    
+    
+    If Text1(48).Text <> "" Then ' si no hemos indicado la seccion
+                                 ' no sabemos a que contabilidad va
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(48).Text) Then
+            If vSeccion.AbrirConta Then
+                ' cuenta de retencion de facturas de almazara
+                If Text1(53).Text <> "" Then
+                    Text2(53).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(53), "T")
+                End If
+                ' cuenta de prevista de banco de facturas de almazara
+                If Text1(54).Text <> "" Then
+                    Text2(54).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(54), "T")
+                End If
+                
+                ' forma de pago de facturas almazara positivas y negativas
+                If Text1(51).Text <> "" Then
+                    Text2(51).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(51), "N")
+                End If
+                ' forma de pago de facturas anticipos / liquidaciones de socios negativas
+                If Text1(52).Text <> "" Then
+                    Text2(52).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(52), "N")
+                End If
+                
+                ' cuenta de ventas de facturas de almazara
+                If Text1(49).Text <> "" Then
+                    Text2(49).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(49), "T")
+                End If
+                ' cuenta de gastos de facturas de almazara
+                If Text1(50).Text <> "" Then
+                    Text2(50).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(50), "T")
+                End If
+            
+            End If
+            vSeccion.CerrarConta
+        End If
+        Set vSeccion = Nothing
+        Text2(48).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(48).Text, "N")
+    End If
+    
+    If Text1(56).Text <> "" Then ' si no hemos indicado la seccion
+                                 ' no sabemos a que contabilidad va
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(56).Text) Then
+            If vSeccion.AbrirConta Then
+                ' codigo de iva de facturas internas de adv
+                If Text1(114).Text <> "" Then
+                    Text2(114).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(114), "N")
+                End If
+            End If
+        End If
+    End If
+    
+    
+    ' almacen de adv
+    Text2(57).Text = DevuelveDesdeBDNew(cAgro, "salmpr", "nomalmac", "codalmac", Text1(57).Text, "N")
+        
+    
+    
+    If Text1(56).Text <> "" Then  ' si no hemos indicado la seccion
+                                  ' no sabemos a que contabilidad va
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(56).Text) Then
+            If vSeccion.AbrirConta Then
+                ' cuenta de prevista de banco de facturas de adv
+                If Text1(58).Text <> "" Then
+                    Text2(58).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(58), "T")
+                End If
+            End If
+            vSeccion.CerrarConta
+        End If
+        Set vSeccion = Nothing
+    
+        Text2(56).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(56).Text, "N")
+    End If
+    
+    ' seccion de suministros
+    Text2(60).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(60).Text, "N")
+    
+    ' seccion de bodega
+    
+    If Text1(63).Text <> "" Then
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Text1(63).Text) Then
+            If vSeccion.AbrirConta Then
+                ' cuenta de banco prevista
+                If Text1(59).Text <> "" Then
+                    Text2(59).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(59), "T")
+                End If
+                ' cuenta de ventas de bodega
+                If Text1(69).Text <> "" Then
+                    Text2(69).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(69), "T")
+                End If
+            End If
+        End If
+        
+        Text2(63).Text = DevuelveDesdeBDNew(cAgro, "rseccion", "nomsecci", "codsecci", Text1(63).Text, "N")
+    End If
+    
+    If Text1(76).Text <> "" Then ' codigo de gasto para el reparto de gasto de liquidacion bodega
+        Text2(76).Text = DevuelveDesdeBDNew(cAgro, "rconcepgasto", "nomgasto", "codgasto", Text1(76).Text, "N")
+    End If
+    
+    ' codigo de almacen de gestion de nominas
+    If Text1(72).Text <> "" Then
+        Text2(72).Text = DevuelveDesdeBDNew(cAgro, "salmpr", "nomalmac", "codalmac", Text1(72).Text, "N")
+    End If
+    
+    ' TRASNPORTE
+    
+    ' codigo de tarifa de transporte local
+    If Text1(93).Text <> "" Then
+        Text2(93).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", Text1(93).Text, "N")
+    End If
+    ' codigo de tarifa 2 de transporte local
+    If Text1(113).Text <> "" Then
+        Text2(113).Text = DevuelveDesdeBDNew(cAgro, "rtarifatra", "nomtarif", "codtarif", Text1(113).Text, "N")
+    End If
+        
+    
+    ' concepto de gasto de transporte
+    If Text1(94).Text <> "" Then
+        Text2(94).Text = DevuelveDesdeBDNew(cAgro, "rconcepgasto", "nomgasto", "codgasto", Text1(94).Text, "N")
+    End If
+    
+    ' concepto de gasto de almazara
+    If Text1(112).Text <> "" Then ' codigo de gasto para el reparto de gasto de liquidacion bodega
+        Text2(112).Text = DevuelveDesdeBDNew(cAgro, "rconcepgasto", "nomgasto", "codgasto", Text1(112).Text, "N")
+    End If
+    
+    
+EPonerCampos:
+    If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo Campos", Err.Description
+End Sub
+
+
+Private Sub PonerOpcionesMenu()
+    PonerOpcionesMenuGeneral Me
+End Sub
+
+
+Private Sub LimpiarCampos()
+Dim I As Integer
+
+    limpiar Me   'Metodo general: Limpia los controles TextBox
+    lblIndicador.Caption = ""
+    'Aqui va el especifico de cada form es
+    For I = 1 To Combo1.Count - 1
+        Combo1(I).ListIndex = -1
+    Next I
+    '### a mano
+End Sub
+
+
+'----------------------------------------------------------------
+'   En PONERMODO se habilitan, o no, los diverso campos del
+'   formulario en funcion del modo en k vayamos a trabajar
+Private Sub PonerModo(Kmodo As Byte)
+Dim b As Boolean
+Dim I As Byte
+Dim vtag As CTag
+
+    Modo = Kmodo
+    PonerIndicador lblIndicador, Modo
+      
+    '------------------------------------------------------
+    'Modo insertar o modificar
+    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
+    If cmdCancelar.visible Then
+        cmdCancelar.Cancel = True
+    Else
+        cmdCancelar.Cancel = False
+    End If
+    PonerBotonCabecera Not b
+       
+    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
+    'Si estamos en Insertar además limpia los campos Text1 y bloquea la clave primaria
+    BloquearText1 Me, Modo
+'    BloquearCombo Me, Modo
+    
+    For I = 0 To 29
+            Set vtag = New CTag
+            vtag.Cargar Me.Combo1(I)
+            If vtag.Cargado Then
+                If vtag.EsClave And (Modo = 4 Or Modo = 5) Then
+                    Me.Combo1(I).Enabled = False
+                    Me.Combo1(I).BackColor = &H80000018 'groc
+                Else
+                    Me.Combo1(I).Enabled = b
+                    If b Then
+                        Me.Combo1(I).BackColor = vbWhite
+                    Else
+                        Me.Combo1(I).BackColor = &H80000018 'Amarillo Claro
+                    End If
+                    If Modo = 3 Then Me.Combo1(I).ListIndex = 0 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+                End If
+            End If
+     Next I
+
+    ' no se pueden modificar la primera y ultima factura de ultima facturaciones
+    Frame5.Enabled = False
+    Frame15.Enabled = False
+    Frame16.Enabled = False
+    
+    'Bloquear imagen de Busqueda
+    For I = 6 To 8
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 9 To 25
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 0 To 5
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 43 To 47
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 49 To 54
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 58 To 60
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 69 To 70
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 122 To 124
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 126 To 127
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    For I = 129 To 131
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    
+    For I = 134 To 134
+        Me.imgBuscar(I).Enabled = (Modo >= 3)
+        Me.imgBuscar(I).visible = (Modo >= 3)
+    Next I
+    
+    
+'    BloquearImgBuscar Me, Modo
+    'Bloquear los checkbox
+    BloquearChecks Me, Modo
+    
+    PonerModoOpcionesMenu 'Activar opciones de menu según el Modo
+    PonerOpcionesMenu   'Activar opciones de menu según nivel
+                        'de permisos del usuario
+End Sub
+
+
+Private Sub PonerModoOpcionesMenu()
+Dim b As Boolean
+    b = (Modo = 3) Or (Modo = 4)
+    Me.Toolbar1.Buttons(1).Enabled = Not Encontrado And Not b  'Añadir
+    Me.Toolbar1.Buttons(2).Enabled = Encontrado And Not b 'Modificar
+    Me.mnAñadir.Enabled = Not Encontrado And Not b
+    Me.mnModificar.Enabled = Encontrado And Not b
+'    Me.Toolbar1.Buttons(2).Enabled = (Not b) 'Modificar
+End Sub
+
+
+' ********* si n'hi han combos a la capçalera ************
+Private Sub CargaCombo()
+Dim Ini As Integer
+Dim Fin As Integer
+Dim I As Integer
+
+    ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
+    
+    ' combo de tipo de transporte
+    Combo1(0).AddItem "Portes por Población"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
+    Combo1(0).AddItem "Tarifas de Transporte"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
+    
+    ' combo de tipo de transporte
+    Combo1(29).AddItem "Contador Global"
+    Combo1(29).ItemData(Combo1(29).NewIndex) = 0
+    Combo1(29).AddItem "Contador por Transportista"
+    Combo1(29).ItemData(Combo1(29).NewIndex) = 1
+    
+    'combos de anticipos
+    For I = 1 To 4
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Variedad"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    'combos de liquidacion
+    For I = 5 To 8
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Variedad"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    'combos de adv
+    For I = 9 To 12
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Procedencia"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    'combos de almazara
+    For I = 13 To 16
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Variedad"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    'combos de bodega
+    For I = 17 To 20
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Socio"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Variedad"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    'combos de recibos de campo
+    For I = 21 To 24
+        Combo1(I).AddItem "Cod.Trabajador"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Nom.Trabajador"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Procedencia"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+    Next I
+    
+    'combos de bodega
+    For I = 25 To 28
+        Combo1(I).AddItem "Nro.Factura"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 0
+        Combo1(I).AddItem "Cod.Trans"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 1
+        Combo1(I).AddItem "Nom.Trans"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 2
+        Combo1(I).AddItem "Variedad"
+        Combo1(I).ItemData(Combo1(I).NewIndex) = 3
+    Next I
+    
+    
+    
+End Sub
+
+Private Function CargaPath(Codigo As Integer) As String
+Dim Nod As Node
+Dim J As Integer
+Dim I As Integer
+Dim c As String
+Dim campo1 As String
+Dim padre As String
+Dim A As String
+
+    'Primero copiamos la carpeta
+    c = "\" & DevuelveDesdeBDNew(cAridoc, "carpetas", "nombre", "codcarpeta", CInt(Codigo), "N")
+    campo1 = "nombre"
+    padre = DevuelveDesdeBDNew(cAridoc, "carpetas", "padre", "codcarpeta", CStr(Codigo), "N", campo1)
+    If CInt(ComprobarCero(padre)) > 0 Then
+        c = CargaPath(CInt(padre)) & c
+    End If
+'
+'    If No.Children > 0 Then
+'        J = No.Children
+'        Set Nod = No.Child
+'        For i = 1 To J
+'           C = C & CopiaArchivosCarpetaRecursiva(Nod)
+'           If i <> J Then Set Nod = Nod.Next
+'        Next i
+'    End If
+    CargaPath = c
+End Function
+
+
+Private Sub AbrirFrmForpaConta(indice1 As Integer)
+    indice = indice1
+    Set frmFpa = New frmForpaConta
+    frmFpa.DatosADevolverBusqueda = "0|1|"
+    frmFpa.CodigoActual = Text1(indice)
+    frmFpa.Show vbModal
+    Set frmFpa = Nothing
+End Sub
+

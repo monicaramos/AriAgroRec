@@ -1,0 +1,5 @@
+Línea 19: la clase MSComDlg.CommonDialog del control CommonDialog1 no era una clase de control cargada.
+Línea 26: la clase MSComDlg.CommonDialog del control cd1 no era una clase de control cargada.
+Línea 459: la clase MSComctlLib.ProgressBar del control Pb2 no era una clase de control cargada.
+Línea 794: la clase MSComctlLib.ProgressBar del control Pb1 no era una clase de control cargada.
+Línea 1199: la clase MSComctlLib.ListView del control ListView1 no era una clase de control cargada.

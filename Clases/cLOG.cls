@@ -1,0 +1,113 @@
+VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
+END
+Attribute VB_Name = "cLOG"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
+Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
+Option Explicit
+
+'ACCIONES DISPONIBLES
+'
+'       1 .- Eliminar facturas
+'       2 .- Facturacion
+'       3 .- Contabilizar facturas
+'       4 .- Correccion precios
+'       5 .- Facturacion desde hasta COMPRAS
+'       6 .- Abocamiento manual de trazabilidad de una entrada sin abocar
+'       7 .- Lectura de contadores de pozos de Escalona
+'       8 .- Facturacion Talla de pozos de Escalona
+'       9 .- Modificacion Campos
+'       10.- Insertar contador pozos
+'       11.- Modificar contador pozos
+'       12.- Modificar factura de socios
+'       13.- Modificar factura varias
+'       14.- Modificacion registros BD
+'       15.- Insertamos los albaranes en las facturas de terceros
+
+
+Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
+Dim SQL As String
+
+    On Error GoTo EI
+    Insertar = False
+    
+    SQL = "insert into `slog` (`fecha`,`accion`,`usuario`,`pc`,`descripcion`,`procedencia`) values ( "
+    SQL = SQL & " now()," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
+    SQL = SQL & DevNombreSQL(ElUsuario.PC) & "',"
+    If Descripcion = "" Then
+        SQL = SQL & "NULL,1)"
+    Else
+        SQL = SQL & "'" & DevNombreSQL(Descripcion) & "',1)"
+    End If
+    conn.Execute SQL
+    
+    
+    Insertar = True
+    Exit Function
+EI:
+    MuestraError Err.Number, Err.Description
+
+End Function
+
+
+Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
+ On Error GoTo EDevuelveAcciones
+    ListaAcciones.Add "1|Eliminar facturas|"
+    ListaAcciones.Add "2|Facturación|"
+    ListaAcciones.Add "3|Contabilizar facturas|"
+    ListaAcciones.Add "4|Corrección precios|"
+    ListaAcciones.Add "5|Facturacion COMPRAS|"
+    ListaAcciones.Add "6|Abocamiento Manual TRAZA|"
+    ListaAcciones.Add "7|Lectura Contadores|"
+    ListaAcciones.Add "8|Facturación Talla|"
+    ListaAcciones.Add "9|Modificación Campos|"
+    ListaAcciones.Add "10|Insertar Contador|"
+    ListaAcciones.Add "11|Modificar Contador|"
+    ListaAcciones.Add "12|Modificar Factura|"
+    ListaAcciones.Add "13|Modificar Fra.Varias|"
+    ListaAcciones.Add "14|Modificar Registros BD|"
+    ListaAcciones.Add "15|Insertar Albaranes|"
+    DevuelveAcciones = True
+    Exit Function
+EDevuelveAcciones:
+    MuestraError Err.Number
+End Function
+
+Public Sub InsertarCambiosRegistros(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String, Tabla As String, CP As String)
+Dim SQL As String
+Dim Sql2 As String
+
+    '[Monica]15/11/2013: meto el replace
+    SQL = Replace(CadenaCambio, "\'", " ")
+
+    Sql2 = "insert into slog (fecha, accion, usuario, pc, descripcion, procedencia, tabla, cp, cadena, valorant) values ("
+    Sql2 = Sql2 & DBSet(Now, "FH") & "," & Accion & " ,'" & DevNombreSQL(ElUsuario.Login) & "','"
+    Sql2 = Sql2 & DevNombreSQL(ElUsuario.PC) & "',"
+    If Descripcion = "" Then
+        Sql2 = Sql2 & "NULL,1,"
+    Else
+        Sql2 = Sql2 & "'" & DevNombreSQL(Descripcion) & "',1,"
+    End If
+    
+    Sql2 = Sql2 & DBSet(Tabla, "T") & ","
+    Sql2 = Sql2 & DBSet(CP, "T") & ","
+    Sql2 = Sql2 & DBSet(SQL, "T") & ","
+    If ValorAnterior = ValorNulo Then
+        Sql2 = Sql2 & ValorNulo & ")"
+    Else
+        '[Monica]15/11/2013: meto el replace
+        Sql2 = Sql2 & DBSet(Replace(ValorAnterior, "\'", " "), "T", "S") & ")"
+    End If
+
+    conn.Execute Sql2
+
+End Sub

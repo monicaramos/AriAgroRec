@@ -1,0 +1,179 @@
+================= Logging started at 6/15/2011 07:44:14 ==================
+Calculating size of cabinet files...
+Copying uncompressed setup files...
+Preprocessing data for data1.hdr...
+Feature: <Support>
+Feature: <Support>\Engine
+Feature: <Support>\Engine\Log
+Feature: <Support>\Engine\Kernel
+   Component: <Engine>Kernel Placeholder
+   Component: <Engine>EngineCommonPlaceHolder
+Feature: <Support>\Main Installation
+Feature: <Data>
+Feature: Script
+   Component: <Support>Script
+Feature: Setup
+   Component: <Support>Language Independent OS Independent Files
+   Component: <Support>Spanish OS Independent Files
+   Component: <Support>Misc Support Files
+Feature: StrTbl
+   Component: <Support>Spanish String Tables
+Feature: RunTime
+   Component: <Support>Non-SelfRegistering
+Feature: Resource
+   Component: <Support>Spanish Files
+Feature: Disk<1>
+   Component: <Disk1>Disk1 Files(1)
+   Component: <Disk1>Disk1 Files(2)
+   Component: <Disk1>Disk1 Files(3)
+   Component: <Disk1>Disk1 Files(4)
+Feature: DefaultFeature
+   Component: DefaultComponent
+   Component: Files
+   Component: NewComponent1
+   Component: SelfRegFiles
+Feature: ScannedProject1
+   Component: TARGETDIRSelfRegFiles
+   Component: COMMONFILESSelfRegFiles
+   Component: TARGETDIRFiles
+   Component: WINSYSDIRSharedFiles
+   Component: WINSYSDIRSharedSelfRegFiles
+Adding Object: ScannedProject1\Visual Basic 6 Runtime Files Object1.
+   Feature: ScannedProject1\Visual Basic 6 Runtime Files Object1.
+   Feature: VB6 Runtime.
+   Feature: ee686137-8ab8-437f-8045-47740fb83a9c.
+Processing registries...
+Building cabinet file data1.hdr...
+Building cabinet file data1.cab...
+Feature: <Support>
+Feature: <Support>\Engine
+Feature: <Support>\Engine\Log
+Feature: <Support>\Engine\Kernel
+   Component: <Engine>Kernel Placeholder
+   Component: <Engine>EngineCommonPlaceHolder
+Feature: <Support>\Main Installation
+Feature: <Support>\Main Installation\Script
+   Component: <Support>Script
+Feature: <Support>\Main Installation\Setup
+   Component: <Support>Language Independent OS Independent Files
+   Component: <Support>Spanish OS Independent Files
+   Component: <Support>Misc Support Files
+Feature: <Support>\Main Installation\StrTbl
+   Component: <Support>Spanish String Tables
+Feature: <Support>\Main Installation\RunTime
+   Component: <Support>Non-SelfRegistering
+Feature: <Support>\Main Installation\Resource
+   Component: <Support>Spanish Files
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Script
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___1
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Setup
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_0__1
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__1
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___2
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Japanese
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Korean
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Arabic
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Catalan
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Croatian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Thai
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Russian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Indonesian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Turkish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Basque
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Czech
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Danish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Dutch
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Finnish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\French (Standard)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\French (Canadian)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\German
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Greek
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Hungarian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Italian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Norwegian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Polish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Portuguese (Brazilian)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Portuguese (Standard)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Slovenian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Vietnamese
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Slovak
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Spanish
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__2
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Swedish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Chinese (Simplified)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Chinese (Traditional)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\English
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Serbian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Romanian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\StrTbl\Bulgarian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\RunTime
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___3
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___4
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Croatian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Basque
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Czech
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Danish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Dutch
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Finnish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\French (Standard)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\French (Canadian)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\German
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Greek
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Hungarian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Italian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Norwegian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Polish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Portuguese (Brazilian)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Portuguese (Standard)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Slovenian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Vietnamese
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Slovak
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Spanish
+   Component: [Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__3
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Swedish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Chinese (Simplified)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Chinese (Traditional)
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Thai
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Russian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Indonesian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Turkish
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Japanese
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Korean
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Arabic
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Catalan
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\English
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Serbian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Romanian
+Feature: <Support>\ee686137-8ab8-437f-8045-47740fb83a9c\Resource\Bulgarian
+Feature: <Data>
+Building cabinet file data2.cab...
+Feature: <Data>\Disk<1>
+   Component: <Disk1>Disk1 Files(1)
+   Component: <Disk1>Disk1 Files(2)
+   Component: <Disk1>Disk1 Files(3)
+   Component: <Disk1>Disk1 Files(4)
+Feature: <Data>\DefaultFeature
+   Component: DefaultComponent
+   Component: Files
+   Component: NewComponent1
+   Component: SelfRegFiles
+Feature: <Data>\ScannedProject1
+   Component: TARGETDIRSelfRegFiles
+   Component: COMMONFILESSelfRegFiles
+   Component: TARGETDIRFiles
+   Component: WINSYSDIRSharedFiles
+   Component: WINSYSDIRSharedSelfRegFiles
+Feature: <Data>\ScannedProject1\Visual Basic 6 Runtime Files Object1
+Feature: <Data>\ScannedProject1\Visual Basic 6 Runtime Files Object1\VB6 Runtime
+   Component: [Visual Basic 6 Runtime Files Object1]S_NSR_PL_544___<WINSYSDIR>_1
+   Component: [Visual Basic 6 Runtime Files Object1]S_SR_PL_544___<WINSYSDIR>_1
+Creating disk layout file 'layout.bin'...
+Creating self-extracting exe...
+Build finished at 06/15/11 19:44:26.
+SINGLE_EXE_IMAGE - 0 error(s), 0 warning(s)
+================= Logging stopped at 6/15/2011 07:44:26 ==================
+Log file has been created: <file:C:\programas\AriAgroRec\instalacion\Nueva Instalacion\Ariagrorec\Media\SINGLE_EXE_IMAGE\Log Files\6-15-2011 07-44-14.txt>
+

@@ -1,0 +1,1759 @@
+CREATE TABLE agencias (
+  codtrans smallint(3) unsigned NOT NULL default '0',
+  nomtrans varchar(40) NOT NULL default '0',
+  domtrans varchar(35) default '0',
+  codpobla varchar(6) default '0',
+  pobtrans varchar(30) default '0',
+  protrans varchar(30) default '0',
+  ciftrans varchar(9) NOT NULL default '0',
+  wwwtrans varchar(40) default '0',
+  teltrans varchar(10) default '0' COMMENT 'Datos Admin.',
+  faxtrans varchar(10) default '0',
+  movtrans varchar(10) default '0',
+  pertrans varchar(35) default NULL,
+  maitrans varchar(40) default '0',
+  teltrans1 varchar(10) default '0' COMMENT 'Datos Comercial',
+  faxtrans1 varchar(10) default '0',
+  movtrans1 varchar(10) default '0',
+  pertrans1 varchar(35) default NULL,
+  maitrans1 varchar(40) default '0',
+  obstrans varchar(250) default NULL,
+  codforpa smallint(3) unsigned NOT NULL,
+  codbanpr smallint(5) unsigned NOT NULL,
+  codbanco smallint(5) unsigned default NULL,
+  codsucur smallint(5) unsigned default NULL,
+  digcontr char(2) default NULL,
+  cuentaba varchar(10) default NULL,
+  codmacta varchar(10) default NULL,
+  porcereten decimal(4,2) default NULL,
+  PRIMARY KEY  (codtrans)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Agencias Transporte';     
+
+CREATE TABLE albaran (
+  numalbar int(6) unsigned NOT NULL,
+  fechaalb date NOT NULL,
+  codclien int(6) unsigned NOT NULL,
+  coddesti smallint(3) unsigned NOT NULL,
+  codtrans smallint(3) unsigned NOT NULL,
+  matriveh varchar(12) default NULL,
+  matrirem varchar(12) default NULL,
+  refclien varchar(12) default NULL,
+  codtimer smallint(3) unsigned NOT NULL,
+  totpalet int(3) default NULL,
+  portespre decimal(8,2) default NULL,
+  nrocontra varchar(15) default NULL,
+  nroactas smallint(4) default NULL,
+  numpedid int(6) default NULL,
+  fechaped date default NULL,
+  observac varchar(200) default NULL,
+  pasaridoc tinyint(1) NOT NULL COMMENT 'Pasado a ARIDOC',
+  codalmac smallint(3) unsigned NOT NULL,
+  portespag decimal(8,2) default NULL,
+  PRIMARY KEY  (numalbar),
+  KEY FK_albaran (codclien,coddesti),
+  KEY FK_albaran1 (codtrans),
+  KEY FK_albaran2 (codtimer),
+  KEY FK_albaran3 (codalmac),
+  CONSTRAINT albaran_ibfk_1 FOREIGN KEY (codclien, coddesti) REFERENCES destinos (codclien, coddesti) ON UPDATE CASCADE,
+  CONSTRAINT albaran_ibfk_2 FOREIGN KEY (codtrans) REFERENCES agencias (codtrans) ON UPDATE CASCADE,
+  CONSTRAINT albaran_ibfk_3 FOREIGN KEY (codtimer) REFERENCES tipomer (codtimer) ON UPDATE CASCADE,
+  CONSTRAINT albaran_ibfk_4 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE albaran_calibre (
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  numline1 smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codcalib smallint(2) unsigned NOT NULL,
+  numcajas int(4) default NULL,
+  pesobrut int(6) default NULL,
+  pesoneto int(6) NOT NULL,
+  unidades int(4) default NULL,
+  PRIMARY KEY  (numalbar,numlinea,numline1),
+  KEY FK_pedidos_calibre (codvarie,codcalib),
+  CONSTRAINT albaran_calibre_ibfk_1 FOREIGN KEY (numalbar, numlinea) REFERENCES albaran_variedad (numalbar, numlinea),
+  CONSTRAINT albaran_calibre_ibfk_2 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT albaran_calibre_ibfk_3 FOREIGN KEY (codvarie, codcalib) REFERENCES calibres (codvarie, codcalib)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE albaran_costes (
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  tipogasto tinyint(1) unsigned NOT NULL COMMENT '0=Costes 1=Mat. 2=Portes',
+  codcoste smallint(2) default NULL,
+  impcoste decimal(10,4) NOT NULL,
+  importes decimal(8,4) NOT NULL,
+  unidades int(6) NOT NULL,
+  codartic varchar(16) default NULL,
+  KEY FK_albaran_costes (codcoste),
+  KEY FK_albaran_costes4 (codartic),
+  KEY albaran_costes_ibfk_3 (numalbar,numlinea),
+  CONSTRAINT albaran_costes_ibfk_1 FOREIGN KEY (codcoste) REFERENCES nombcoste (codcoste),
+  CONSTRAINT albaran_costes_ibfk_2 FOREIGN KEY (numalbar) REFERENCES albaran (numalbar),
+  CONSTRAINT albaran_costes_ibfk_3 FOREIGN KEY (numalbar, numlinea) REFERENCES albaran_variedad (numalbar, numlinea),
+  CONSTRAINT albaran_costes_ibfk_4 FOREIGN KEY (codartic) REFERENCES sartic (codartic) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE albaran_envase (
+  numalbar int(6) unsigned NOT NULL,
+  numlinea int(6) unsigned NOT NULL,
+  fechamov date NOT NULL,
+  codartic varchar(16) NOT NULL,
+  tipomovi tinyint(1) NOT NULL,
+  cantidad int(3) NOT NULL,
+  PRIMARY KEY  (numalbar,numlinea),
+  KEY FK_albaran_envase (codartic),
+  CONSTRAINT albaran_envase_ibfk_1 FOREIGN KEY (numalbar) REFERENCES albaran (numalbar),
+  CONSTRAINT albaran_envase_ibfk_2 FOREIGN KEY (codartic) REFERENCES sartic (codartic)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE albaran_palets (
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  numpalet int(6) unsigned NOT NULL,
+  PRIMARY KEY  (numalbar,numlinea),
+  KEY FK_albaran_palets (numpalet),
+  CONSTRAINT albaran_palets_ibfk_1 FOREIGN KEY (numalbar) REFERENCES albaran (numalbar),
+  CONSTRAINT albaran_palets_ibfk_2 FOREIGN KEY (numpalet) REFERENCES palets (numpalet)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE albaran_variedad (
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codvarco int(6) unsigned NOT NULL,
+  codforfait varchar(16) NOT NULL,
+  codmarca smallint(3) unsigned NOT NULL,
+  categori varchar(3) default NULL,
+  totpalet int(3) default NULL,
+  numcajas int(4) default NULL,
+  pesobrut int(6) default NULL,
+  pesoneto int(6) default NULL,
+  preciopro decimal(6,4) default NULL,
+  preciodef decimal(6,4) default NULL,
+  codincid smallint(3) NOT NULL,
+  impcomis decimal(6,2) default NULL,
+  observac varchar(70) default NULL,
+  unidades int(4) default NULL,
+  PRIMARY KEY  (numalbar,numlinea),
+  KEY FK_pedidos_lineas1 (codvarie),
+  KEY FK_pedidos_lineas (codvarco),
+  KEY FK_pedidos_lineas4 (codforfait),
+  KEY FK_pedidos_lineas5 (codmarca),
+  KEY FK_albaran_variedad (codincid),
+  CONSTRAINT albaran_variedad_ibfk_1 FOREIGN KEY (numalbar) REFERENCES albaran (numalbar),
+  CONSTRAINT albaran_variedad_ibfk_2 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT albaran_variedad_ibfk_3 FOREIGN KEY (codvarco) REFERENCES variedades (codvarie),
+  CONSTRAINT albaran_variedad_ibfk_4 FOREIGN KEY (codmarca) REFERENCES marcas (codmarca),
+  CONSTRAINT albaran_variedad_ibfk_5 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait),
+  CONSTRAINT albaran_variedad_ibfk_6 FOREIGN KEY (codincid) REFERENCES inciden (codincid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE banpropi (
+  codbanpr smallint(5) unsigned NOT NULL default '0',
+  nombanpr varchar(30) NOT NULL default '',
+  dombanpr varchar(30) default NULL,
+  codpopr varchar(5) default NULL,
+  pobbanpr varchar(30) default NULL,
+  probanpr varchar(30) default NULL,
+  telbanpr varchar(10) default NULL,
+  faxbanpr varchar(10) default NULL,
+  codbanco smallint(5) unsigned NOT NULL default '0',
+  codsucur smallint(5) unsigned NOT NULL default '0',
+  digcontr char(2) NOT NULL default '',
+  cuentaba varchar(10) NOT NULL default '',
+  sufijoem varchar(3) default NULL,
+  codmacta varchar(10) default NULL,
+  perbanpr varchar(30) default NULL,
+  maibanpr varchar(40) default NULL,
+  wwwbanpr varchar(30) default NULL,
+  PRIMARY KEY  (codbanpr)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Bancos Propios';     
+
+CREATE TABLE cadenas (
+  codcaden smallint(3) unsigned NOT NULL default '0',
+  nomcaden varchar(30) NOT NULL default '0',
+  PRIMARY KEY  (codcaden)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cadenas';     
+
+CREATE TABLE calibres (
+  codvarie int(6) unsigned NOT NULL default '0',
+  codcalib smallint(2) unsigned NOT NULL,
+  nomcalib varchar(12) NOT NULL,
+  nomcalab varchar(3) NOT NULL,
+  calbaneco varchar(10) default NULL,
+  PRIMARY KEY  (codvarie,codcalib),
+  CONSTRAINT calibres_ibfk_1 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE capacida (
+  codcapac smallint(3) unsigned NOT NULL default '0',
+  nomcapac varchar(25) NOT NULL default '0',
+  PRIMARY KEY  (codcapac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='Capacidad Envases';     
+
+CREATE TABLE clases (
+  codclase smallint(3) unsigned NOT NULL default '0',
+  nomclase varchar(15) NOT NULL default '0',
+  PRIMARY KEY  (codclase)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Clases Variedades';     
+
+CREATE TABLE clientes (
+  codclien int(6) unsigned NOT NULL default '0',
+  nomclien varchar(40) NOT NULL default '0',
+  domclien varchar(35) default '0',
+  codpobla varchar(6) default '0',
+  pobclien varchar(30) default '0',
+  proclien varchar(30) default '0',
+  codpaise smallint(3) unsigned default '0',
+  wwwclien varchar(40) default NULL,
+  cifclien varchar(15) default '0',
+  telclie1 varchar(10) default '0',
+  faxclie1 varchar(10) default '0',
+  movclie1 varchar(10) default '0',
+  maiclie1 varchar(40) default NULL,
+  perclie1 varchar(35) default '0',
+  telclie2 varchar(10) default NULL,
+  faxclie2 varchar(10) default NULL,
+  movclie2 varchar(10) default NULL,
+  maiclie2 varchar(40) default NULL,
+  perclie2 varchar(35) default NULL,
+  observac varchar(250) default NULL,
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  tipoiva tinyint(1) NOT NULL default '0' COMMENT '0=Normal 1=Exento 2=Con Recargo Equiv.',
+  porccom1 decimal(4,2) default NULL,
+  porccom2 decimal(4,2) default NULL,
+  tipodtos tinyint(1) unsigned NOT NULL,
+  codmacta varchar(10) default NULL,
+  cliabono tinyint(1) unsigned NOT NULL default '0',
+  tipofact tinyint(1) unsigned NOT NULL default '0' COMMENT '0=Automática  1=Manual',
+  codtipom varchar(3) default NULL,
+  codbanco smallint(5) unsigned default NULL,
+  codsucur smallint(5) unsigned default NULL,
+  digcontr char(2) default NULL,
+  cuentaba varchar(10) default NULL,
+  codigoedi varchar(17) default NULL COMMENT 'Codigo Edi',
+  nrocopias smallint(2) unsigned NOT NULL default '1',
+  nrodecprec smallint(2) NOT NULL default '4',
+  destedi tinyint(1) NOT NULL default '0' COMMENT '0=cliente 1=destino',
+  PRIMARY KEY  (codclien),
+  KEY FK_clientes3 (codpaise),
+  KEY FK_clientes4 (codforpa),
+  KEY FK_clientes (codtipom),
+  CONSTRAINT clientes_ibfk_1 FOREIGN KEY (codpaise) REFERENCES paises (codpaise),
+  CONSTRAINT clientes_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa),
+  CONSTRAINT clientes_ibfk_3 FOREIGN KEY (codtipom) REFERENCES stipom (codtipom) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Clientes';     
+
+CREATE TABLE codigoean (
+  codclien int(6) unsigned NOT NULL,
+  codforfait varchar(16) NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codigoean varchar(13) NOT NULL,
+  refclien int(8) default NULL,
+  PRIMARY KEY  (codclien,codforfait,codvarie),
+  KEY FK_codigoean (codforfait),
+  KEY FK_codigoean1 (codvarie),
+  CONSTRAINT codigoean_ibfk_1 FOREIGN KEY (codclien) REFERENCES clientes (codclien) ON UPDATE CASCADE,
+  CONSTRAINT codigoean_ibfk_2 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait) ON UPDATE CASCADE,
+  CONSTRAINT codigoean_ibfk_3 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE confenva (
+  codtipen smallint(3) unsigned NOT NULL default '0',
+  nomtipen varchar(25) NOT NULL default '0',
+  PRIMARY KEY  (codtipen)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos envase Conf.';     
+
+CREATE TABLE confmedi (
+  codmedid smallint(3) unsigned NOT NULL default '0',
+  nommedid varchar(25) NOT NULL default '0',
+  PRIMARY KEY  (codmedid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Medidas Conf.';     
+
+CREATE TABLE confpale (
+  codpalet smallint(3) unsigned NOT NULL default '0',
+  nompalet varchar(25) NOT NULL default '0',
+  pesopale decimal(4,2) default NULL,
+  PRIMARY KEY  (codpalet)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipo paletización Conf.';     
+
+CREATE TABLE confpres (
+  codprese smallint(3) unsigned NOT NULL default '0',
+  nomprese varchar(25) NOT NULL default '0',
+  PRIMARY KEY  (codprese)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos presentación Conf.';     
+
+CREATE TABLE conftipo (
+  codtipco smallint(3) unsigned NOT NULL default '0',
+  nomtipco varchar(25) NOT NULL default '0',
+  PRIMARY KEY  (codtipco)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos Confeccion';     
+
+CREATE TABLE destinos (
+  codclien int(6) unsigned NOT NULL default '0',
+  coddesti smallint(3) unsigned NOT NULL default '0',
+  nomdesti varchar(40) NOT NULL default '0',
+  domdesti varchar(35) default '0',
+  codpobla varchar(6) default '0',
+  pobdesti varchar(30) default '0',
+  prodesti varchar(30) default '0',
+  codpaise smallint(3) unsigned NOT NULL default '0',
+  codtimer smallint(3) unsigned NOT NULL default '0',
+  teldesti varchar(10) default '0',
+  faxdesti varchar(10) default '0',
+  movdesti varchar(10) default '0',
+  maidesti varchar(40) default '0',
+  perdesti varchar(35) default '0',
+  codcajas int(9) default NULL,
+  codpalet int(9) unsigned default NULL,
+  codcaden smallint(3) unsigned NOT NULL,
+  codigoedi varchar(17) default NULL,
+  PRIMARY KEY  (codclien,coddesti),
+  KEY FK_destinos (codpaise),
+  KEY FK_destinos1 (codcaden),
+  KEY FK_destinos2 (codclien),
+  CONSTRAINT destinos_ibfk_1 FOREIGN KEY (codpaise) REFERENCES paises (codpaise),
+  CONSTRAINT destinos_ibfk_2 FOREIGN KEY (codcaden) REFERENCES cadenas (codcaden),
+  CONSTRAINT destinos_ibfk_3 FOREIGN KEY (codclien) REFERENCES clientes (codclien)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Destinos clientes';     
+
+CREATE TABLE empresas (
+  codempre tinyint(3) unsigned NOT NULL default '0',
+  nomempre char(40) NOT NULL default '',
+  domempre char(35) NOT NULL default '',
+  codpobla char(6) NOT NULL default '0',
+  pobempre char(30) NOT NULL default '',
+  proempre char(30) NOT NULL default '',
+  cifempre char(9) NOT NULL default '0',
+  telempre char(10) default NULL,
+  faxempre char(10) default NULL,
+  wwwempre char(40) default NULL,
+  maiempre char(40) default NULL,
+  fechaini date NOT NULL COMMENT 'Fecha inicio campaña',
+  fechafin date NOT NULL COMMENT 'fecha final campaña',
+  PRIMARY KEY  (codempre)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;     
+
+CREATE TABLE facturas (
+  codtipom varchar(3) NOT NULL,
+  numfactu int(7) unsigned NOT NULL,
+  fecfactu date NOT NULL,
+  codclien int(6) unsigned NOT NULL,
+  codforpa smallint(3) unsigned NOT NULL,
+  tipoivac tinyint(1) NOT NULL COMMENT '0=Normal 1=Exento',
+  dtocom1 decimal(4,2) default NULL,
+  dtocom2 decimal(4,2) default NULL,
+  impdtoc decimal(8,2) default NULL,
+  observac varchar(200) default NULL,
+  baseimp1 decimal(10,2) default NULL,
+  baseimp2 decimal(10,2) default NULL,
+  baseimp3 decimal(10,2) default NULL,
+  impoiva1 decimal(10,2) default NULL,
+  impoiva2 decimal(10,2) default NULL,
+  impoiva3 decimal(10,2) default NULL,
+  imporec1 decimal(10,2) default NULL,
+  imporec2 decimal(10,2) default NULL,
+  imporec3 decimal(10,2) default NULL,
+  codiiva1 smallint(2) default NULL,
+  codiiva2 smallint(2) default NULL,
+  codiiva3 smallint(2) default NULL,
+  porciva1 decimal(4,2) default NULL,
+  porciva2 decimal(4,2) default NULL,
+  porciva3 decimal(4,2) default NULL,
+  porcrec1 decimal(4,2) default NULL,
+  porcrec2 decimal(4,2) default NULL,
+  porcrec3 decimal(4,2) default NULL,
+  brutofac decimal(10,2) default NULL,
+  impordto decimal(10,2) default NULL,
+  totalfac decimal(10,2) default NULL,
+  intconta tinyint(1) NOT NULL,
+  pasaridoc tinyint(1) NOT NULL,
+  pasedicom tinyint(1) NOT NULL,
+  PRIMARY KEY  (codtipom,numfactu,fecfactu)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE facturas_envases (
+  codtipom varchar(3) NOT NULL,
+  numfactu int(7) unsigned NOT NULL,
+  fecfactu date NOT NULL,
+  numlinea smallint(3) NOT NULL,
+  codalmac smallint(3) unsigned NOT NULL,
+  codartic varchar(16) NOT NULL,
+  cantidad decimal(8,2) NOT NULL,
+  precioar decimal(10,4) NOT NULL,
+  dtolinea decimal(4,2) default NULL,
+  importel decimal(10,2) NOT NULL,
+  ampliaci varchar(60) default NULL,
+  codigiva smallint(2) NOT NULL,
+  PRIMARY KEY  (codtipom,numfactu,fecfactu,numlinea),
+  KEY FK_facturas_envases (codalmac),
+  KEY FK_facturas_envases1 (codartic,codalmac),
+  CONSTRAINT facturas_envases_ibfk_1 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac) ON UPDATE CASCADE,
+  CONSTRAINT facturas_envases_ibfk_2 FOREIGN KEY (codtipom, numfactu, fecfactu) REFERENCES facturas (codtipom, numfactu, fecfactu) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE facturas_variedad (
+  codtipom varchar(3) NOT NULL,
+  numfactu int(7) unsigned NOT NULL,
+  fecfactu date NOT NULL,
+  numlinea smallint(3) NOT NULL,
+  numalbar int(6) unsigned NOT NULL,
+  numlinealbar smallint(2) unsigned NOT NULL,
+  cantreal int(6) NOT NULL,
+  cantfact int(6) NOT NULL,
+  precibru decimal(10,4) NOT NULL,
+  precinet decimal(10,4) NOT NULL,
+  dtocom1 decimal(4,2) default NULL,
+  dtocom2 decimal(4,2) default NULL,
+  imporbru decimal(10,2) NOT NULL,
+  impornet decimal(10,2) NOT NULL,
+  codigiva smallint(2) NOT NULL,
+  unidades int(4) default NULL,
+  PRIMARY KEY  (codtipom,numfactu,fecfactu,numlinea),
+  KEY numalbar (numalbar,numlinealbar),
+  CONSTRAINT facturas_variedad_ibfk_1 FOREIGN KEY (codtipom, numfactu, fecfactu) REFERENCES facturas (codtipom, numfactu, fecfactu) ON UPDATE CASCADE,
+  CONSTRAINT facturas_variedad_ibfk_2 FOREIGN KEY (numalbar, numlinealbar) REFERENCES albaran_variedad (numalbar, numlinea) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE forfaits (
+  codforfait varchar(16) NOT NULL,
+  nomconfe varchar(40) NOT NULL COMMENT 'Nombre Confeccion',
+  observac varchar(40) default NULL COMMENT 'Observaciones',
+  cajakilo tinyint(1) NOT NULL COMMENT '0 = Caja / 1= Kilo',
+  facturar tinyint(1) NOT NULL COMMENT '0 = Unidad / 1= Kilo',
+  kiloscaj decimal(5,2) unsigned default NULL COMMENT 'Kilos/caja',
+  kilosuni decimal(5,2) unsigned default NULL COMMENT 'Kilos/unidad',
+  codvarie int(6) unsigned default NULL COMMENT 'Cod. Variedad',
+  codtipen smallint(3) unsigned NOT NULL COMMENT 'Cod. Tipo Envase',
+  codcapac smallint(3) unsigned NOT NULL COMMENT 'Cod. Capacidad',
+  codmedid smallint(3) unsigned NOT NULL COMMENT 'Cod. Medida',
+  codtipco smallint(3) unsigned NOT NULL COMMENT 'Cod. Confecc.',
+  codprese smallint(3) unsigned NOT NULL COMMENT 'Cod. Presentacion',
+  codmarca smallint(3) unsigned default NULL COMMENT 'Cod. Marcas',
+  codpalet smallint(3) unsigned NOT NULL COMMENT 'Cod. Paletizacion',
+  pesocaja decimal(4,2) default NULL COMMENT 'Peso Caja',
+  PRIMARY KEY  (codforfait),
+  KEY FK_forfaits (codvarie),
+  KEY FK_forfaits1 (codtipen),
+  KEY FK_forfaits2 (codcapac),
+  KEY FK_forfaits3 (codmedid),
+  KEY FK_forfaits4 (codtipco),
+  KEY FK_forfaits5 (codprese),
+  KEY FK_forfaits6 (codmarca),
+  KEY FK_forfaits7 (codpalet),
+  CONSTRAINT forfaits_ibfk_10 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT forfaits_ibfk_11 FOREIGN KEY (codtipen) REFERENCES confenva (codtipen),
+  CONSTRAINT forfaits_ibfk_12 FOREIGN KEY (codcapac) REFERENCES capacida (codcapac),
+  CONSTRAINT forfaits_ibfk_13 FOREIGN KEY (codmedid) REFERENCES confmedi (codmedid),
+  CONSTRAINT forfaits_ibfk_14 FOREIGN KEY (codtipco) REFERENCES conftipo (codtipco),
+  CONSTRAINT forfaits_ibfk_15 FOREIGN KEY (codprese) REFERENCES confpres (codprese),
+  CONSTRAINT forfaits_ibfk_16 FOREIGN KEY (codmarca) REFERENCES marcas (codmarca),
+  CONSTRAINT forfaits_ibfk_17 FOREIGN KEY (codpalet) REFERENCES confpale (codpalet)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Forfaits';     
+
+CREATE TABLE forfaits_costes (
+  codforfait varchar(16) NOT NULL COMMENT 'Cod. Forfait',
+  codcoste smallint(2) NOT NULL COMMENT 'Cod. Coste',
+  importes decimal(8,4) default '0.0000' COMMENT 'Importe coste',
+  PRIMARY KEY  (codforfait,codcoste),
+  KEY FK_costeconfe1 (codcoste),
+  CONSTRAINT forfaits_costes_ibfk_2 FOREIGN KEY (codcoste) REFERENCES nombcoste (codcoste),
+  CONSTRAINT forfaits_costes_ibfk_3 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Costes por confeccion';     
+
+CREATE TABLE forfaits_envases (
+  codforfait varchar(16) NOT NULL COMMENT 'Cod. Forfait',
+  numlinea smallint(2) unsigned NOT NULL,
+  codartic varchar(16) NOT NULL COMMENT 'Cod. Articulo',
+  cantidad decimal(8,4) unsigned NOT NULL COMMENT 'Cantidad',
+  PRIMARY KEY  (codforfait,numlinea),
+  CONSTRAINT forfaits_envases_ibfk_1 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas de forfaits';     
+
+CREATE TABLE forpago (
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  nomforpa varchar(30) NOT NULL default '0',
+  tipoforp tinyint(1) unsigned NOT NULL default '0',
+  numerove tinyint(2) unsigned NOT NULL default '0',
+  primerve tinyint(2) unsigned NOT NULL default '0',
+  restoven tinyint(2) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Formas de Pago';     
+
+CREATE TABLE grupopro (
+  codgrupo smallint(3) unsigned NOT NULL default '0',
+  nomgrupo varchar(15) NOT NULL default '0',
+  PRIMARY KEY  (codgrupo)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Grupos Productos';     
+
+CREATE TABLE horas (
+  codtraba int(6) NOT NULL,
+  fechahora date NOT NULL,
+  horasdia decimal(5,2) NOT NULL,
+  compleme decimal(8,2) default NULL,
+  horasini datetime default NULL,
+  horasfin datetime default NULL,
+  anticipo decimal(8,2) default NULL,
+  horasext decimal(5,2) default NULL,
+  fecharec date default NULL,
+  intconta tinyint(4) unsigned NOT NULL,
+  pasaridoc tinyint(4) unsigned NOT NULL,
+  PRIMARY KEY  (codtraba,fechahora),
+  CONSTRAINT horas_ibfk_1 FOREIGN KEY (codtraba) REFERENCES straba (codtraba) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE inciden (
+  codincid smallint(3) NOT NULL default '0',
+  nomincid varchar(30) default '0',
+  PRIMARY KEY  (codincid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Incidencias';     
+
+CREATE TABLE marcas (
+  codmarca smallint(3) unsigned NOT NULL default '0',
+  nommarca varchar(25) NOT NULL default '0',
+  tipmarca tinyint(1) NOT NULL default '0' COMMENT '0 = Propia / 1 = Ajena',
+  PRIMARY KEY  (codmarca)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Marcas comerciales';     
+
+CREATE TABLE nombcoste (
+  codcoste smallint(2) NOT NULL COMMENT 'Cod.Coste Confección',
+  denominacion varchar(40) default NULL,
+  PRIMARY KEY  (codcoste)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;     
+
+CREATE TABLE paises (
+  codpaise smallint(3) unsigned NOT NULL default '0',
+  nompaise varchar(30) NOT NULL default '0',
+  intracom tinyint(1) NOT NULL default '0',
+  restituc tinyint(1) NOT NULL default '0',
+  nommoned varchar(5) default '0',
+  simmoned char(3) default '0',
+  letraspais char(2) NOT NULL,
+  PRIMARY KEY  (codpaise)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Maestro de Paises';     
+
+CREATE TABLE palets (
+  numpalet int(6) unsigned NOT NULL,
+  fechaini date NOT NULL,
+  horaini datetime NOT NULL,
+  fechafin date default NULL,
+  horafin datetime default NULL,
+  codpalet smallint(3) unsigned NOT NULL,
+  linconfe smallint(2) NOT NULL,
+  tipmercan tinyint(1) NOT NULL COMMENT '0=cooperativa 1=terceros 2=mezclado 3=otros',
+  observac varchar(100) default NULL,
+  numpedid int(6) default NULL,
+  PRIMARY KEY  (numpalet),
+  KEY FK_palets2 (codpalet),
+  CONSTRAINT palets_ibfk_3 FOREIGN KEY (codpalet) REFERENCES confpale (codpalet)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE palets_calibre (
+  numpalet int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  numline1 smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codcalib smallint(2) NOT NULL,
+  numcajas int(4) NOT NULL,
+  PRIMARY KEY  (numpalet,numlinea,numline1),
+  KEY FK_palets_lineas (codvarie),
+  CONSTRAINT palets_calibre_ibfk_1 FOREIGN KEY (numpalet) REFERENCES palets (numpalet),
+  CONSTRAINT palets_calibre_ibfk_2 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT palets_calibre_ibfk_3 FOREIGN KEY (numpalet, numlinea) REFERENCES palets_variedad (numpalet, numlinea)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE palets_variedad (
+  numpalet int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codvarco int(6) unsigned NOT NULL,
+  codmarca smallint(3) unsigned NOT NULL,
+  codforfait varchar(16) NOT NULL,
+  categori varchar(3) default NULL,
+  pesobrut int(6) default NULL,
+  pesoneto int(6) NOT NULL,
+  PRIMARY KEY  (numpalet,numlinea),
+  KEY FK_palets_variedad (codvarie),
+  KEY FK_palets_variedad1 (codvarco),
+  KEY FK_palets_variedad2 (codmarca),
+  KEY FK_palets_variedad3 (codforfait),
+  CONSTRAINT palets_variedad_ibfk_1 FOREIGN KEY (numpalet) REFERENCES palets (numpalet),
+  CONSTRAINT palets_variedad_ibfk_2 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT palets_variedad_ibfk_3 FOREIGN KEY (codvarco) REFERENCES variedades (codvarie),
+  CONSTRAINT palets_variedad_ibfk_4 FOREIGN KEY (codmarca) REFERENCES marcas (codmarca),
+  CONSTRAINT palets_variedad_ibfk_5 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE pedidos (
+  numpedid int(6) unsigned NOT NULL,
+  fechaped date NOT NULL,
+  fechacar date NOT NULL,
+  situacio tinyint(1) NOT NULL COMMENT '0=Original 1=Modificado 2=Anulado',
+  codclien int(6) unsigned NOT NULL,
+  coddesti smallint(3) unsigned NOT NULL,
+  codtrans smallint(3) unsigned NOT NULL,
+  matriveh varchar(12) default NULL,
+  matrirem varchar(12) default NULL,
+  refclien varchar(12) default NULL,
+  codtimer smallint(3) unsigned NOT NULL,
+  totpalet int(3) default NULL,
+  nrocontra varchar(15) default NULL,
+  nroactas smallint(4) default NULL,
+  numalbar int(6) default NULL,
+  fechaalb date default NULL,
+  observac varchar(200) default NULL,
+  impresor tinyint(1) NOT NULL COMMENT 'Impresa orden de confeccion?',
+  codalmac smallint(3) unsigned NOT NULL,
+  PRIMARY KEY  (numpedid),
+  KEY FK_pedidos (codclien,coddesti),
+  KEY FK_pedidos1 (codtrans),
+  KEY FK_pedidos2 (codtimer),
+  KEY FK_pedidos3 (codalmac),
+  CONSTRAINT pedidos_ibfk_1 FOREIGN KEY (codclien, coddesti) REFERENCES destinos (codclien, coddesti) ON UPDATE CASCADE,
+  CONSTRAINT pedidos_ibfk_2 FOREIGN KEY (codtrans) REFERENCES agencias (codtrans) ON UPDATE CASCADE,
+  CONSTRAINT pedidos_ibfk_3 FOREIGN KEY (codtimer) REFERENCES tipomer (codtimer) ON UPDATE CASCADE,
+  CONSTRAINT pedidos_ibfk_4 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE pedidos_calibre (
+  numpedid int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  numline1 smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codcalib smallint(2) unsigned NOT NULL,
+  numcajas int(4) default NULL,
+  pesoneto int(6) NOT NULL,
+  unidades int(4) default NULL,
+  PRIMARY KEY  (numpedid,numlinea,numline1),
+  KEY FK_pedidos_calibre (codvarie,codcalib),
+  CONSTRAINT pedidos_calibre_ibfk_1 FOREIGN KEY (codvarie, codcalib) REFERENCES calibres (codvarie, codcalib),
+  CONSTRAINT pedidos_calibre_ibfk_2 FOREIGN KEY (numpedid, numlinea) REFERENCES pedidos_variedad (numpedid, numlinea)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE pedidos_variedad (
+  numpedid int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  codvarie int(6) unsigned NOT NULL,
+  codvarco int(6) unsigned NOT NULL,
+  codforfait varchar(16) NOT NULL,
+  codmarca smallint(3) unsigned NOT NULL,
+  categori varchar(3) default NULL,
+  totpalet int(3) default NULL,
+  numcajas int(4) default NULL,
+  pesobrut int(6) default NULL,
+  pesoneto int(6) default NULL,
+  preciopro decimal(6,4) default NULL,
+  unidades int(4) default NULL,
+  PRIMARY KEY  (numpedid,numlinea),
+  KEY FK_pedidos_lineas1 (codvarie),
+  KEY FK_pedidos_lineas (codvarco),
+  KEY FK_pedidos_lineas4 (codforfait),
+  KEY FK_pedidos_lineas5 (codmarca),
+  CONSTRAINT pedidos_variedad_ibfk_1 FOREIGN KEY (numpedid) REFERENCES pedidos (numpedid),
+  CONSTRAINT pedidos_variedad_ibfk_2 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie),
+  CONSTRAINT pedidos_variedad_ibfk_3 FOREIGN KEY (codvarco) REFERENCES variedades (codvarie),
+  CONSTRAINT pedidos_variedad_ibfk_4 FOREIGN KEY (codforfait) REFERENCES forfaits (codforfait),
+  CONSTRAINT pedidos_variedad_ibfk_5 FOREIGN KEY (codmarca) REFERENCES marcas (codmarca)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE productos (
+  codprodu smallint(3) unsigned NOT NULL default '0',
+  nomprodu varchar(15) NOT NULL default '0',
+  codgrupo smallint(3) unsigned NOT NULL default '0',
+  codsigpa smallint(3) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codprodu),
+  KEY codgrupo (codgrupo),
+  CONSTRAINT productos_ibfk_1 FOREIGN KEY (codgrupo) REFERENCES grupopro (codgrupo)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Productos';     
+
+CREATE TABLE proveedor (
+  codprove int(6) unsigned NOT NULL default '0',
+  nomprove varchar(40) NOT NULL default '',
+  nomcomer varchar(30) NOT NULL default '',
+  domprove varchar(35) default NULL,
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  tipprove tinyint(1) NOT NULL default '0',
+  nifprove varchar(15) NOT NULL default '',
+  telprov1 varchar(15) default NULL,
+  faxprov1 varchar(15) default NULL,
+  perprov1 varchar(40) default NULL,
+  maiprov1 varchar(40) default NULL,
+  telprov2 varchar(15) default NULL,
+  faxprov2 varchar(15) default NULL,
+  perprov2 varchar(40) default NULL,
+  maiprov2 varchar(40) default NULL,
+  wwwprove varchar(40) default NULL,
+  fecprove date NOT NULL default '0000-00-00',
+  provario tinyint(1) unsigned NOT NULL default '0',
+  codmacta varchar(10) default NULL,
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  tipodtos tinyint(1) unsigned NOT NULL default '0',
+  dtoppago decimal(4,2) default NULL,
+  dtognral decimal(4,2) default NULL,
+  fechamov date default '0000-00-00',
+  codbanpr smallint(5) unsigned NOT NULL default '0',
+  codbanco smallint(5) unsigned default NULL,
+  codsucur smallint(5) unsigned default NULL,
+  digcontr char(2) default NULL,
+  cuentaba varchar(10) default NULL,
+  observac varchar(200) default NULL,
+  PRIMARY KEY  (codprove),
+  KEY FK_proveedor (codbanpr),
+  KEY FK_proveedor1 (codforpa),
+  CONSTRAINT proveedor_ibfk_1 FOREIGN KEY (codbanpr) REFERENCES banpropi (codbanpr),
+  CONSTRAINT proveedor_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Proveedores';     
+
+CREATE TABLE salarios (
+  codcateg smallint(2) NOT NULL,
+  nomcateg varchar(15) NOT NULL,
+  impsalar decimal(6,4) default NULL,
+  imphorae decimal(6,4) default NULL,
+  dtosirpf decimal(4,2) default NULL,
+  dtosegso decimal(4,2) default NULL,
+  basescot decimal(6,2) default NULL,
+  basesilt decimal(6,2) default NULL,
+  tiposala tinyint(4) default NULL,
+  imphorafest decimal(6,4) default NULL,
+  PRIMARY KEY  (codcateg)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE salmac (
+  codartic varchar(16) NOT NULL default '0',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  canstock decimal(12,2) NOT NULL default '0.00',
+  stockmin decimal(12,2) default '0.00',
+  puntoped decimal(12,2) default '0.00',
+  stockmax decimal(12,2) default '0.00',
+  stockinv decimal(12,2) default '0.00',
+  fechainv date default NULL,
+  horainve datetime default NULL,
+  statusin tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codartic,codalmac),
+  KEY fkcodartic (codartic),
+  KEY fkcodalmac (codalmac),
+  CONSTRAINT salmac_ibfk_1 FOREIGN KEY (codartic) REFERENCES sartic (codartic),
+  CONSTRAINT salmac_ibfk_2 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Articulos x Almacen';     
+
+CREATE TABLE salmpr (
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  nomalmac varchar(25) NOT NULL default '',
+  nrocheps bigint(10) NOT NULL default '1',
+  PRIMARY KEY  (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Almacenes Propios';     
+
+CREATE TABLE sartic (
+  codartic varchar(16) NOT NULL default '',
+  nomartic varchar(40) NOT NULL default '',
+  codigoea varchar(13) default NULL,
+  codprove int(6) unsigned NOT NULL default '0',
+  codfamia smallint(3) unsigned NOT NULL default '0',
+  codunida smallint(2) unsigned NOT NULL default '0',
+  codtipar char(2) NOT NULL COMMENT 'Tipos Envases: Ifcos, cheps, etc.',
+  codigiva tinyint(1) unsigned NOT NULL default '0',
+  preciomp decimal(10,4) default NULL,
+  preciouc decimal(10,4) default NULL,
+  preciove decimal(10,4) NOT NULL default '0.0000',
+  ultfecco date default NULL,
+  fecaltas date NOT NULL default '0000-00-00',
+  textoven varchar(200) default NULL,
+  textocom varchar(200) default NULL,
+  ctrstock tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codartic),
+  KEY fkcodfamia (codfamia),
+  KEY fkcodunida (codunida),
+  KEY fkcodtipar (codtipar),
+  KEY iartic1 (nomartic),
+  KEY iartic3 (codigoea),
+  KEY FK_sartic (codprove),
+  CONSTRAINT sartic_ibfk_2 FOREIGN KEY (codfamia) REFERENCES sfamia (codfamia),
+  CONSTRAINT sartic_ibfk_4 FOREIGN KEY (codunida) REFERENCES sunida (codunida),
+  CONSTRAINT sartic_ibfk_5 FOREIGN KEY (codtipar) REFERENCES stipar (codtipar),
+  CONSTRAINT sartic_ibfk_6 FOREIGN KEY (codprove) REFERENCES proveedor (codprove)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Artículos';     
+
+CREATE TABLE scaalp (
+  numalbar varchar(10) NOT NULL default '',
+  fechaalb date NOT NULL default '0000-00-00',
+  codprove int(6) unsigned NOT NULL default '0',
+  nomprove varchar(30) NOT NULL default '',
+  domprove varchar(35) NOT NULL,
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  nifprove varchar(15) NOT NULL default '',
+  telprove varchar(15) default NULL,
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  observa1 varchar(80) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  numpedpr mediumint(9) default NULL,
+  fecpedpr date default NULL,
+  PRIMARY KEY  (numalbar,fechaalb,codprove),
+  KEY indCodprove (codprove),
+  KEY indCodforpa (codforpa),
+  KEY indNumalbar (numalbar),
+  CONSTRAINT scaalp_ibfk_1 FOREIGN KEY (codprove) REFERENCES proveedor (codprove),
+  CONSTRAINT scaalp_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Albaranes Compras';     
+
+CREATE TABLE scafpa (
+  codprove int(6) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL default '',
+  fecfactu date NOT NULL default '0000-00-00',
+  numalbar varchar(10) NOT NULL default '',
+  fechaalb date NOT NULL default '0000-00-00',
+  numpedpr mediumint(7) unsigned default NULL,
+  fecpedpr date default NULL,
+  observa1 varchar(80) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  PRIMARY KEY  (codprove,numfactu,fecfactu,numalbar),
+  KEY fk_factura (codprove,numfactu,fecfactu),
+  CONSTRAINT scafpa_ibfk_1 FOREIGN KEY (codprove, numfactu, fecfactu) REFERENCES scafpc (codprove, numfactu, fecfactu)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Albaranes Factura Proveedor';     
+
+CREATE TABLE scafpc (
+  codprove int(6) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL default '',
+  fecfactu date NOT NULL default '0000-00-00',
+  fecrecep date NOT NULL default '0000-00-00',
+  nomprove varchar(40) NOT NULL default '',
+  domprove varchar(40) NOT NULL default '',
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  nifprove varchar(15) NOT NULL default '',
+  telprove varchar(15) NOT NULL default '',
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  brutofac decimal(12,2) NOT NULL default '0.00',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  impppago decimal(12,2) NOT NULL default '0.00',
+  impgnral decimal(12,2) NOT NULL default '0.00',
+  baseiva1 decimal(12,2) NOT NULL default '0.00',
+  baseiva2 decimal(12,2) default NULL,
+  baseiva3 decimal(12,2) default NULL,
+  tipoiva1 tinyint(1) unsigned default NULL,
+  tipoiva2 tinyint(1) unsigned default NULL,
+  tipoiva3 tinyint(1) unsigned default NULL,
+  porciva1 decimal(4,2) default NULL,
+  porciva2 decimal(4,2) default NULL,
+  porciva3 decimal(4,2) default NULL,
+  porcrec1 decimal(4,2) NOT NULL default '0.00',
+  porcrec2 decimal(4,2) NOT NULL default '0.00',
+  porcrec3 decimal(4,2) NOT NULL default '0.00',
+  impoiva1 decimal(12,2) NOT NULL default '0.00',
+  impoiva2 decimal(12,2) default NULL,
+  impoiva3 decimal(12,2) default NULL,
+  imporec1 decimal(12,2) NOT NULL default '0.00',
+  imporec2 decimal(12,2) NOT NULL default '0.00',
+  imporec3 decimal(12,2) NOT NULL default '0.00',
+  totalfac decimal(12,2) NOT NULL default '0.00',
+  intconta tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codprove,numfactu,fecfactu),
+  KEY fk_codprove (codprove),
+  KEY fk_codforpa (codforpa),
+  CONSTRAINT scafpc_ibfk_1 FOREIGN KEY (codprove) REFERENCES proveedor (codprove),
+  CONSTRAINT scafpc_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Factura Proveedor';     
+
+CREATE TABLE scamov (
+  codmovim int(7) unsigned NOT NULL default '0',
+  codalmac smallint(4) unsigned NOT NULL default '0',
+  fecmovim date NOT NULL default '0000-00-00',
+  observa1 varchar(200) default NULL,
+  situacio tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (codmovim),
+  KEY fkMovCodalmac (codalmac),
+  CONSTRAINT scamov_ibfk_1 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cab. Movimientos Almacen;';     
+
+CREATE TABLE scappr (
+  numpedpr mediumint(7) unsigned NOT NULL default '0',
+  fecpedpr date NOT NULL default '0000-00-00',
+  codprove int(6) unsigned NOT NULL default '0',
+  nomprove varchar(30) NOT NULL default '',
+  domprove varchar(35) NOT NULL default '',
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  nifprove varchar(15) NOT NULL default '',
+  telprove varchar(15) default NULL,
+  coddirea tinyint(3) unsigned default '0',
+  coddiref tinyint(3) unsigned default '0',
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  restoped tinyint(1) unsigned NOT NULL default '0',
+  codclien int(6) unsigned default NULL,
+  observa1 varchar(80) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  tipoporte varchar(25) default NULL,
+  PRIMARY KEY  (numpedpr),
+  KEY IndFecha (fecpedpr),
+  KEY codprove (codprove),
+  KEY coddirea (coddirea),
+  KEY coddiref (coddiref),
+  KEY codforpa (codforpa),
+  CONSTRAINT scappr_ibfk_1 FOREIGN KEY (codprove) REFERENCES proveedor (codprove),
+  CONSTRAINT scappr_ibfk_2 FOREIGN KEY (coddirea) REFERENCES sdirpr (coddirec),
+  CONSTRAINT scappr_ibfk_3 FOREIGN KEY (coddiref) REFERENCES sdirpr (coddirec),
+  CONSTRAINT scappr_ibfk_4 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Pedidos Compras';     
+
+CREATE TABLE scartas (
+  codCarta smallint(3) unsigned NOT NULL default '0',
+  descarta varchar(50) default NULL,
+  saludos varchar(80) default NULL,
+  parrafo1 varchar(255) default NULL,
+  parrafo2 varchar(255) default NULL,
+  parrafo3 varchar(255) default NULL,
+  desped varchar(110) default NULL,
+  PRIMARY KEY  (codCarta)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Cartas para Informes';     
+
+CREATE TABLE scatra (
+  codtrasp int(7) unsigned NOT NULL default '0',
+  fechatra date NOT NULL default '0000-00-00',
+  almaorig smallint(3) unsigned NOT NULL default '0',
+  almadest smallint(3) unsigned NOT NULL default '0',
+  situacio tinyint(1) unsigned NOT NULL default '0',
+  observa1 varchar(200) default NULL,
+  PRIMARY KEY  (codtrasp),
+  KEY fkTrasAlmaorig (almaorig),
+  KEY fkTrasAlmadest (almadest),
+  CONSTRAINT scatra_ibfk_1 FOREIGN KEY (almaorig) REFERENCES salmpr (codalmac),
+  CONSTRAINT scatra_ibfk_2 FOREIGN KEY (almadest) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cab. Traspaso Almacenes';     
+
+CREATE TABLE schalp (
+  numalbar varchar(10) NOT NULL default '',
+  fechaalb date NOT NULL default '0000-00-00',
+  codprove int(6) unsigned NOT NULL default '0',
+  codigusu smallint(3) unsigned NOT NULL default '0',
+  fechelim date NOT NULL default '0000-00-00',
+  codincid smallint(3) NOT NULL default '0',
+  nomprove varchar(30) NOT NULL default '',
+  domprove varchar(35) NOT NULL,
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  nifprove varchar(15) NOT NULL default '',
+  telprove varchar(15) default NULL,
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  observa1 varchar(80) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  numpedpr mediumint(9) default NULL,
+  fecpedpr date default NULL,
+  PRIMARY KEY  (numalbar,fechaalb,codprove),
+  KEY indCodprove (codprove),
+  KEY indCodforpa (codforpa),
+  KEY fkCodIncid (codincid),
+  KEY indNumalbar (numalbar),
+  CONSTRAINT schalp_ibfk_2 FOREIGN KEY (codprove) REFERENCES proveedor (codprove),
+  CONSTRAINT schalp_ibfk_3 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa),
+  CONSTRAINT schalp_ibfk_5 FOREIGN KEY (codincid) REFERENCES inciden (codincid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Historico Albaranes Compras';     
+
+CREATE TABLE schmov (
+  codmovim int(7) unsigned NOT NULL default '0',
+  fecmovim date NOT NULL default '0000-00-00',
+  hormovim datetime NOT NULL default '2000-00-00 00:00:00',
+  codalmac smallint(4) unsigned NOT NULL default '0',
+  observa1 varchar(200) default NULL,
+  PRIMARY KEY  (codmovim,fecmovim),
+  KEY fkMovCodalmac (codalmac),
+  CONSTRAINT schmov_ibfk_1 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Cab. Movimientos Almacen; InnoDB free: 21504 kB; (';     
+
+CREATE TABLE schppr (
+  numpedpr mediumint(7) unsigned NOT NULL default '0',
+  fecpedpr date NOT NULL default '0000-00-00',
+  codigusu smallint(3) unsigned NOT NULL default '0',
+  fechelim date NOT NULL default '0000-00-00',
+  codincid smallint(3) NOT NULL default '0',
+  codprove int(6) unsigned NOT NULL default '0',
+  nomprove varchar(30) NOT NULL default '',
+  domprove varchar(35) NOT NULL default '',
+  codpobla varchar(6) NOT NULL default '',
+  pobprove varchar(30) NOT NULL default '',
+  proprove varchar(30) NOT NULL default '',
+  nifprove varchar(15) NOT NULL default '',
+  telprove varchar(15) default NULL,
+  coddirea tinyint(3) unsigned default '0',
+  coddiref tinyint(3) unsigned default '0',
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  restoped tinyint(1) unsigned NOT NULL default '0',
+  codclien int(6) unsigned default NULL,
+  observa1 varchar(80) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  tipoporte varchar(25) default NULL,
+  PRIMARY KEY  (numpedpr,fecpedpr),
+  KEY IndFecha (fecpedpr),
+  KEY codprove (codprove),
+  KEY coddirea (coddirea),
+  KEY coddiref (coddiref),
+  KEY codforpa (codforpa),
+  KEY fkCodIncid (codincid),
+  CONSTRAINT schppr_ibfk_1 FOREIGN KEY (codprove) REFERENCES proveedor (codprove),
+  CONSTRAINT schppr_ibfk_2 FOREIGN KEY (coddirea) REFERENCES sdirpr (coddirec),
+  CONSTRAINT schppr_ibfk_3 FOREIGN KEY (coddiref) REFERENCES sdirpr (coddirec),
+  CONSTRAINT schppr_ibfk_4 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa),
+  CONSTRAINT schppr_ibfk_5 FOREIGN KEY (codincid) REFERENCES inciden (codincid)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Historico Pedidos Compras';     
+
+CREATE TABLE schtra (
+  codtrasp int(7) unsigned NOT NULL default '0',
+  fechatra date NOT NULL default '0000-00-00',
+  hormovim datetime NOT NULL default '2000-00-00 00:00:00',
+  almaorig smallint(3) unsigned NOT NULL default '0',
+  almadest smallint(3) unsigned NOT NULL default '0',
+  observa1 varchar(200) default NULL,
+  PRIMARY KEY  (codtrasp,fechatra),
+  KEY fkHTrasAlmaorig (almaorig),
+  KEY fkHTrasAlmadest (almadest),
+  CONSTRAINT schtra_ibfk_1 FOREIGN KEY (almaorig) REFERENCES salmpr (codalmac),
+  CONSTRAINT schtra_ibfk_2 FOREIGN KEY (almadest) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Cab. Traspaso Almacenes';     
+
+CREATE TABLE scryst (
+  codcryst smallint(4) unsigned NOT NULL default '0',
+  nomcryst varchar(30) NOT NULL default '',
+  documrpt varchar(100) NOT NULL default '',
+  codigiso varchar(10) default NULL,
+  codigrev tinyint(2) unsigned default NULL,
+  lineapi1 varchar(140) default NULL,
+  lineapi2 varchar(140) default NULL,
+  lineapi3 varchar(140) default NULL,
+  lineapi4 varchar(140) default NULL,
+  lineapi5 varchar(140) default NULL,
+  PRIMARY KEY  (codcryst)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos de Documentos';     
+
+CREATE TABLE sdirpr (
+  coddirec tinyint(3) unsigned NOT NULL default '0',
+  tipodire tinyint(1) unsigned NOT NULL default '0',
+  nomdirec varchar(40) NOT NULL default '',
+  domdirec varchar(35) NOT NULL default '',
+  codpobla varchar(6) NOT NULL default '',
+  pobdirec varchar(30) NOT NULL default '',
+  prodirec varchar(30) NOT NULL default '',
+  responsa varchar(35) default NULL,
+  PRIMARY KEY  (coddirec)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Direcciones Compras';     
+
+CREATE TABLE sfamia (
+  codfamia smallint(4) unsigned NOT NULL default '0',
+  nomfamia varchar(25) NOT NULL default '',
+  ctaventa varchar(10) NOT NULL default '',
+  ctacompr varchar(10) NOT NULL default '',
+  aboventa varchar(10) NOT NULL default '',
+  abocompr varchar(10) NOT NULL default '',
+  ctavent1 varchar(10) NOT NULL default '',
+  abovent1 varchar(10) NOT NULL default '',
+  codccost char(4) default NULL,
+  PRIMARY KEY  (codfamia)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Familias de Articulos';     
+
+CREATE TABLE shinve (
+  codartic varchar(16) NOT NULL default '0',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  fechainv date NOT NULL default '0000-00-00',
+  horainve datetime NOT NULL default '0000-00-00 00:00:00',
+  existenc decimal(12,2) NOT NULL default '0.00',
+  PRIMARY KEY  (codartic,codalmac,fechainv,horainve),
+  KEY fkInvenCodartic (codartic),
+  KEY fkInvenCodalmac (codalmac),
+  CONSTRAINT shinve_ibfk_1 FOREIGN KEY (codartic) REFERENCES sartic (codartic),
+  CONSTRAINT shinve_ibfk_2 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Inventario';     
+
+CREATE TABLE sinven (
+  codartic varchar(16) NOT NULL default '0',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  codfamia smallint(4) unsigned NOT NULL default '0',
+  codprove int(6) unsigned NOT NULL default '0',
+  fechainv date NOT NULL default '0000-00-00',
+  horainve datetime NOT NULL default '0000-00-00 00:00:00',
+  existenc decimal(12,2) NOT NULL default '0.00',
+  PRIMARY KEY  (codartic,codalmac),
+  KEY fkInvenCodartic (codartic),
+  KEY fkInvenCodalmac (codalmac),
+  KEY fkInvenCodfamia (codfamia),
+  KEY fkInvenCodprove (codprove),
+  CONSTRAINT sinven_ibfk_1 FOREIGN KEY (codartic) REFERENCES sartic (codartic),
+  CONSTRAINT sinven_ibfk_2 FOREIGN KEY (codalmac) REFERENCES salmpr (codalmac),
+  CONSTRAINT sinven_ibfk_3 FOREIGN KEY (codfamia) REFERENCES sfamia (codfamia),
+  CONSTRAINT sinven_ibfk_4 FOREIGN KEY (codprove) REFERENCES proveedor (codprove)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Inventario Real';     
+
+CREATE TABLE slhalp (
+  numalbar varchar(10) NOT NULL default '',
+  fechaalb date NOT NULL default '0000-00-00',
+  codprove int(6) unsigned NOT NULL default '0',
+  numlinea smallint(5) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  nomartic varchar(40) NOT NULL default '',
+  ampliaci varchar(60) default NULL,
+  cantidad decimal(12,2) default NULL,
+  precioar decimal(10,4) NOT NULL default '0.0000',
+  dtoline1 decimal(4,2) NOT NULL default '0.00',
+  dtoline2 decimal(4,2) NOT NULL default '0.00',
+  importel decimal(12,2) NOT NULL default '0.00',
+  PRIMARY KEY  (numalbar,fechaalb,codprove,numlinea),
+  KEY indCodalmac (codalmac),
+  KEY indCodartic (codartic),
+  KEY codartic (codartic,codalmac),
+  KEY numalbar (numalbar,fechaalb,codprove),
+  CONSTRAINT slhalp_ibfk_1 FOREIGN KEY (numalbar, fechaalb, codprove) REFERENCES schalp (numalbar, fechaalb, codprove),
+  CONSTRAINT slhalp_ibfk_2 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Lineas Albaranes Compras';     
+
+CREATE TABLE slhmov (
+  codmovim int(7) unsigned NOT NULL default '0',
+  fecmovim date NOT NULL default '0000-00-00',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  cantidad decimal(10,2) NOT NULL default '0.00',
+  tipomovi tinyint(1) unsigned NOT NULL default '0',
+  motimovi varchar(50) default NULL,
+  PRIMARY KEY  (codmovim,fecmovim,numlinea),
+  KEY fkCabMov (codmovim),
+  KEY fkMovCodartic (codartic),
+  CONSTRAINT slhmov_ibfk_1 FOREIGN KEY (codmovim) REFERENCES schmov (codmovim),
+  CONSTRAINT slhmov_ibfk_2 FOREIGN KEY (codartic) REFERENCES sartic (codartic)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Lineas Movimientos Almacen';     
+
+CREATE TABLE slhppr (
+  numpedpr mediumint(7) unsigned NOT NULL default '0',
+  fecpedpr date NOT NULL default '0000-00-00',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  nomartic varchar(40) default NULL,
+  ampliaci varchar(60) default NULL,
+  cantidad decimal(12,2) NOT NULL default '0.00',
+  recibida decimal(12,2) default NULL,
+  precioar decimal(10,4) NOT NULL default '0.0000',
+  dtoline1 decimal(4,2) NOT NULL default '0.00',
+  dtoline2 decimal(4,2) NOT NULL default '0.00',
+  importel decimal(12,2) default NULL,
+  PRIMARY KEY  (numpedpr,fecpedpr,numlinea),
+  KEY fkNumPed (numpedpr,fecpedpr),
+  KEY codartic (codartic,codalmac),
+  CONSTRAINT slhppr_ibfk_1 FOREIGN KEY (numpedpr, fecpedpr) REFERENCES schppr (numpedpr, fecpedpr),
+  CONSTRAINT slhppr_ibfk_2 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Historico Pedidos Compras';     
+
+CREATE TABLE slhtra (
+  codtrasp int(7) unsigned NOT NULL default '0',
+  fechamov date NOT NULL default '0000-00-00',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  cantidad decimal(12,2) NOT NULL default '0.00',
+  observa2 varchar(50) default NULL,
+  PRIMARY KEY  (codtrasp,fechamov,numlinea),
+  KEY fkCabHTras (codtrasp),
+  KEY fkCodartic (codartic),
+  CONSTRAINT slhtra_ibfk_1 FOREIGN KEY (codtrasp) REFERENCES schtra (codtrasp),
+  CONSTRAINT slhtra_ibfk_2 FOREIGN KEY (codartic) REFERENCES sartic (codartic)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Historico Lineas Traspaso Almacenes';     
+
+CREATE TABLE slialp (
+  numalbar varchar(10) NOT NULL default '',
+  fechaalb date NOT NULL default '0000-00-00',
+  codprove int(6) unsigned NOT NULL default '0',
+  numlinea smallint(5) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  nomartic varchar(40) NOT NULL default '',
+  ampliaci varchar(60) default NULL,
+  cantidad decimal(12,2) default NULL,
+  precioar decimal(10,4) NOT NULL default '0.0000',
+  dtoline1 decimal(4,2) NOT NULL default '0.00',
+  dtoline2 decimal(4,2) NOT NULL default '0.00',
+  importel decimal(12,2) NOT NULL default '0.00',
+  PRIMARY KEY  (numalbar,fechaalb,codprove,numlinea),
+  KEY indCodalmac (codalmac),
+  KEY indCodartic (codartic),
+  KEY codartic (codartic,codalmac),
+  KEY numalbar (numalbar,fechaalb,codprove),
+  CONSTRAINT slialp_ibfk_1 FOREIGN KEY (numalbar, fechaalb, codprove) REFERENCES scaalp (numalbar, fechaalb, codprove),
+  CONSTRAINT slialp_ibfk_2 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE slifpc (
+  codprove int(6) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL default '',
+  fecfactu date NOT NULL default '0000-00-00',
+  numalbar varchar(10) NOT NULL default '',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  nomartic varchar(40) NOT NULL default '',
+  ampliaci varchar(60) default NULL,
+  cantidad decimal(12,2) NOT NULL default '0.00',
+  precioar decimal(10,4) NOT NULL default '0.0000',
+  dtoline1 decimal(4,2) NOT NULL default '0.00',
+  dtoline2 decimal(4,2) NOT NULL default '0.00',
+  importel decimal(12,2) NOT NULL default '0.00',
+  numlotes varchar(15) default NULL,
+  PRIMARY KEY  (codprove,numfactu,fecfactu,numalbar,numlinea),
+  KEY fk_AlbFactura (codprove,numfactu,fecfactu,numalbar),
+  KEY fk_salmac (codartic,codalmac),
+  CONSTRAINT slifpc_ibfk_1 FOREIGN KEY (codprove, numfactu, fecfactu, numalbar) REFERENCES scafpa (codprove, numfactu, fecfactu, numalbar),
+  CONSTRAINT slifpc_ibfk_2 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Factura Proveedor';     
+
+CREATE TABLE slimov (
+  codmovim int(7) unsigned NOT NULL default '0',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  cantidad decimal(10,2) NOT NULL default '0.00',
+  tipomovi tinyint(1) unsigned NOT NULL default '0',
+  motimovi varchar(50) default NULL,
+  PRIMARY KEY  (codmovim,numlinea),
+  KEY fkCabMovim (codmovim),
+  KEY fkMovCodartic (codartic),
+  CONSTRAINT slimov_ibfk_1 FOREIGN KEY (codmovim) REFERENCES scamov (codmovim),
+  CONSTRAINT slimov_ibfk_2 FOREIGN KEY (codartic) REFERENCES sartic (codartic)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Movimientos Almacen';     
+
+CREATE TABLE slippr (
+  numpedpr mediumint(7) unsigned NOT NULL default '0',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  nomartic varchar(40) default NULL,
+  ampliaci varchar(60) default NULL,
+  cantidad decimal(12,2) NOT NULL default '0.00',
+  recibida decimal(12,2) default NULL,
+  precioar decimal(10,4) NOT NULL default '0.0000',
+  dtoline1 decimal(4,2) NOT NULL default '0.00',
+  dtoline2 decimal(4,2) NOT NULL default '0.00',
+  importel decimal(12,2) default NULL,
+  PRIMARY KEY  (numpedpr,numlinea),
+  KEY codalmac (codalmac,codartic),
+  KEY codartic (codartic,codalmac),
+  CONSTRAINT slippr_ibfk_1 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Pedidos Compras';     
+
+CREATE TABLE slisp1 (
+  codartic varchar(16) NOT NULL default '',
+  codprove int(6) unsigned NOT NULL default '0',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  fechacam date NOT NULL default '0000-00-00',
+  precioac decimal(10,4) NOT NULL default '0.0000',
+  PRIMARY KEY  (codartic,codprove,numlinea),
+  CONSTRAINT slisp1_ibfk_1 FOREIGN KEY (codartic, codprove) REFERENCES slispr (codartic, codprove)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Precios Proveedor';     
+
+CREATE TABLE slispr (
+  codartic varchar(16) NOT NULL default '',
+  codprove int(6) unsigned NOT NULL default '0',
+  precioac decimal(10,4) NOT NULL default '0.0000',
+  fechanue date default NULL,
+  precionu decimal(10,4) default NULL,
+  dtopermi tinyint(1) unsigned NOT NULL default '0',
+  cantfija decimal(8,2) default NULL,
+  cantmini decimal(8,2) default NULL,
+  fechaini date default NULL,
+  fechafin date default NULL,
+  preciopr decimal(10,4) default NULL,
+  dtoperm1 tinyint(1) unsigned NOT NULL default '0',
+  dtoline1 decimal(4,2) default NULL,
+  dtoline2 decimal(4,2) default NULL,
+  PRIMARY KEY  (codartic,codprove),
+  KEY codartic (codartic),
+  KEY codprove (codprove),
+  CONSTRAINT slispr_ibfk_1 FOREIGN KEY (codartic) REFERENCES sartic (codartic),
+  CONSTRAINT slispr_ibfk_2 FOREIGN KEY (codprove) REFERENCES proveedor (codprove)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Cabecera Precios Proveedor';     
+
+CREATE TABLE slitra (
+  codtrasp int(7) unsigned NOT NULL default '0',
+  numlinea smallint(4) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  cantidad decimal(12,2) NOT NULL default '0.00',
+  observa2 varchar(50) default NULL,
+  PRIMARY KEY  (codtrasp,numlinea),
+  KEY fkCabTras (codtrasp),
+  KEY fkCodartic (codartic),
+  CONSTRAINT slitra_ibfk_1 FOREIGN KEY (codtrasp) REFERENCES scatra (codtrasp),
+  CONSTRAINT slitra_ibfk_2 FOREIGN KEY (codartic) REFERENCES sartic (codartic)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Lineas Traspaso Almacenes';     
+
+CREATE TABLE slog (
+  fecha datetime NOT NULL,
+  accion tinyint(3) unsigned NOT NULL default '0',
+  usuario varchar(30) default NULL,
+  pc varchar(30) default NULL,
+  descripcion varchar(255) default NULL,
+  PRIMARY KEY  (accion,fecha)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;     
+
+CREATE TABLE smoval (
+  codartic varchar(16) NOT NULL default '0',
+  codalmac smallint(3) unsigned NOT NULL default '0',
+  fechamov date NOT NULL default '0000-00-00',
+  horamovi datetime NOT NULL default '0000-00-00 00:00:00',
+  tipomovi tinyint(1) unsigned NOT NULL default '0',
+  detamovi char(3) NOT NULL default '',
+  cantidad decimal(10,2) NOT NULL default '0.00',
+  impormov decimal(12,2) NOT NULL default '0.00',
+  codigope int(6) unsigned NOT NULL default '0',
+  letraser char(1) default NULL,
+  document varchar(10) NOT NULL default '0',
+  numlinea smallint(5) unsigned NOT NULL default '0',
+  KEY fkCodArtic (codartic),
+  KEY fkCodAlmac (codartic,codalmac),
+  KEY fkDetaMovi (detamovi),
+  CONSTRAINT smoval_ibfk_1 FOREIGN KEY (codartic) REFERENCES sartic (codartic),
+  CONSTRAINT smoval_ibfk_2 FOREIGN KEY (codartic, codalmac) REFERENCES salmac (codartic, codalmac),
+  CONSTRAINT smoval_ibfk_3 FOREIGN KEY (detamovi) REFERENCES stipom (codtipom)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Movimientos Articulos';     
+
+CREATE TABLE sparam (
+  codparam tinyint(1) unsigned NOT NULL default '0',
+  diremail varchar(50) default NULL,
+  smtphost varchar(50) default NULL,
+  smtpuser varchar(50) default NULL,
+  smtppass varchar(50) default NULL,
+  websoporte varchar(100) default NULL,
+  serconta varchar(30) default NULL,
+  usuconta varchar(20) default NULL,
+  pasconta varchar(20) default NULL,
+  numconta tinyint(2) unsigned default NULL,
+  tipoprecio tinyint(1) default NULL COMMENT '0 = Precio Medio Ponderado/ 1 = Ultimo precio compra',
+  inventar tinyint(1) unsigned NOT NULL default '0',
+  ctrstock tinyint(1) unsigned NOT NULL default '0',
+  diapago1 tinyint(2) unsigned default NULL,
+  diapago2 tinyint(2) unsigned default NULL,
+  diapago3 tinyint(2) unsigned default NULL,
+  mesnogir tinyint(2) unsigned default NULL,
+  limpesobrutcmr int(7) unsigned NOT NULL default '0' COMMENT 'Limite Peso Bruto CMR',
+  codivatrans tinyint(1) unsigned NOT NULL COMMENT 'Iva Factura Portes ',
+  ctatrareten varchar(10) default NULL,
+  ctaabotrans varchar(10) default NULL,
+  codivanormal tinyint(1) unsigned NOT NULL COMMENT 'Iva Normal Cliente ',
+  codivaexento tinyint(1) unsigned NOT NULL COMMENT 'Iva Exento Cliente',
+  codivarecargo tinyint(1) unsigned NOT NULL COMMENT 'Iva Recargo Equiv.Cliente',
+  hayaridoc tinyint(1) unsigned NOT NULL default '0',
+  codcarpetaalb smallint(3) unsigned NOT NULL default '0',
+  codcarpetafac smallint(3) unsigned NOT NULL default '0',
+  codcarpetarec smallint(3) unsigned NOT NULL default '0',
+  c1albaridoc tinyint(1) unsigned NOT NULL default '0',
+  c2albaridoc tinyint(1) unsigned NOT NULL default '0',
+  c3albaridoc tinyint(1) unsigned NOT NULL default '0',
+  c4albaridoc tinyint(1) unsigned NOT NULL default '0',
+  c1facaridoc tinyint(1) unsigned NOT NULL default '0',
+  c2facaridoc tinyint(1) unsigned NOT NULL default '0',
+  c3facaridoc tinyint(1) unsigned NOT NULL default '0',
+  c4facaridoc tinyint(1) unsigned NOT NULL default '0',
+  c1recaridoc tinyint(1) unsigned NOT NULL default '0',
+  c2recaridoc tinyint(1) unsigned NOT NULL default '0',
+  c3recaridoc tinyint(1) unsigned NOT NULL default '0',
+  c4recaridoc tinyint(1) unsigned NOT NULL default '0',
+  codextension smallint(3) unsigned NOT NULL default '0',
+  nrolote int(4) unsigned NOT NULL default '0' COMMENT 'nro lote grab.f¡ch.chep',
+  nrocheps bigint(10) default NULL COMMENT 'nro.chep comunicador',
+  nrofiche int(4) default '1112' COMMENT 'nro.fichero chep',
+  codigoedi varchar(17) default NULL COMMENT 'cod.edi vendedor',
+  regmercantil varchar(70) default NULL COMMENT 'registro mercantil',
+  pathedicom varchar(70) default NULL,
+  PRIMARY KEY  (codparam)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE sprvar (
+  nifprove varchar(9) NOT NULL default '',
+  nomprove varchar(40) NOT NULL default '',
+  domprove varchar(30) default NULL,
+  codpobla varchar(6) default NULL,
+  pobprove varchar(30) default NULL,
+  proprove varchar(30) default NULL,
+  telprov2 varchar(15) default NULL,
+  PRIMARY KEY  (nifprove)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Proveedores Varios';     
+
+CREATE TABLE stipar (
+  codtipar char(2) NOT NULL default '',
+  nomtipar varchar(25) NOT NULL default '',
+  PRIMARY KEY  (codtipar)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos de Articulos';     
+
+CREATE TABLE stipom (
+  codtipom char(3) NOT NULL default '0',
+  nomtipom varchar(30) NOT NULL default '',
+  muevesto tinyint(1) unsigned NOT NULL default '0',
+  contador mediumint(7) NOT NULL default '0',
+  letraser char(1) default NULL,
+  tipodocu tinyint(1) unsigned default NULL,
+  PRIMARY KEY  (codtipom)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos de Movimiento';     
+
+CREATE TABLE straba (
+  codtraba int(6) NOT NULL,
+  nomtraba varchar(40) NOT NULL,
+  domtraba varchar(35) default NULL,
+  codpobla varchar(6) default NULL,
+  pobtraba varchar(30) default NULL,
+  protraba varchar(30) default NULL,
+  mailtraba varchar(40) default NULL,
+  niftraba varchar(15) NOT NULL,
+  segsocial varchar(15) default NULL,
+  fechaalta datetime default NULL,
+  codsecci tinyint(1) NOT NULL,
+  codcateg smallint(2) NOT NULL,
+  codbanco smallint(5) unsigned default NULL,
+  codsucur smallint(5) unsigned default NULL,
+  digcontr char(2) default NULL,
+  cuentaba varchar(10) default NULL,
+  fecantig datetime default NULL,
+  teltraba varchar(10) default NULL,
+  faxtraba varchar(10) default NULL,
+  movtraba varchar(10) default NULL,
+  grupocot int(3) NOT NULL,
+  contrato tinyint(1) unsigned default NULL,
+  tipotraba tinyint(1) unsigned default NULL COMMENT '0=Socio 1=trabajador',
+  fechabaja datetime default NULL,
+  codmacta varchar(10) default NULL,
+  codforpa smallint(3) unsigned NOT NULL,
+  observac varchar(250) default NULL,
+  PRIMARY KEY  (codtraba),
+  KEY FK_straba (codcateg),
+  KEY FK_straba1 (codforpa),
+  CONSTRAINT straba_ibfk_1 FOREIGN KEY (codcateg) REFERENCES salarios (codcateg) ON UPDATE CASCADE,
+  CONSTRAINT straba_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE sunida (
+  codunida smallint(2) unsigned NOT NULL default '0',
+  nomunida varchar(10) NOT NULL default '',
+  nomunbre char(3) NOT NULL default '',
+  PRIMARY KEY  (codunida)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos de Unidad';     
+
+CREATE TABLE tarifas (
+  codtarif smallint(3) NOT NULL,
+  tarifatr decimal(5,4) default '0.0000',
+  PRIMARY KEY  (codtarif)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC COMMENT='Tarifas Transporte';     
+
+CREATE TABLE tcafpa (
+  codtrans smallint(3) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL,
+  fecfactu date NOT NULL default '0000-00-00',
+  numalbar int(6) NOT NULL,
+  fechaalb date NOT NULL default '0000-00-00',
+  importel decimal(10,2) NOT NULL,
+  observa1 varchar(200) default NULL,
+  observa2 varchar(80) default NULL,
+  observa3 varchar(80) default NULL,
+  observa4 varchar(80) default NULL,
+  observa5 varchar(80) default NULL,
+  PRIMARY KEY  (codtrans,numfactu,fecfactu,numalbar),
+  CONSTRAINT tcafpa_ibfk_1 FOREIGN KEY (codtrans) REFERENCES agencias (codtrans),
+  CONSTRAINT tcafpa_ibfk_2 FOREIGN KEY (codtrans, numfactu, fecfactu) REFERENCES tcafpc (codtrans, numfactu, fecfactu) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tcafpc (
+  codtrans smallint(3) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL,
+  fecfactu date NOT NULL default '0000-00-00',
+  fecrecep date NOT NULL default '0000-00-00',
+  nomtrans varchar(40) NOT NULL,
+  domtrans varchar(40) NOT NULL,
+  codpobla varchar(6) NOT NULL default '',
+  pobtrans varchar(30) NOT NULL,
+  protrans varchar(30) NOT NULL,
+  niftrans varchar(15) NOT NULL,
+  teltrans varchar(15) NOT NULL,
+  codforpa smallint(3) unsigned NOT NULL default '0',
+  brutofac decimal(12,2) NOT NULL default '0.00',
+  dtoppago decimal(4,2) NOT NULL default '0.00',
+  dtognral decimal(4,2) NOT NULL default '0.00',
+  impppago decimal(12,2) NOT NULL default '0.00',
+  impgnral decimal(12,2) NOT NULL default '0.00',
+  baseiva1 decimal(12,2) NOT NULL default '0.00',
+  baseiva2 decimal(12,2) default NULL,
+  baseiva3 decimal(12,2) default NULL,
+  tipoiva1 tinyint(1) unsigned default NULL,
+  tipoiva2 tinyint(1) unsigned default NULL,
+  tipoiva3 tinyint(1) unsigned default NULL,
+  porciva1 decimal(4,2) default NULL,
+  porciva2 decimal(4,2) default NULL,
+  porciva3 decimal(4,2) default NULL,
+  porcrec1 decimal(4,2) NOT NULL default '0.00',
+  porcrec2 decimal(4,2) NOT NULL default '0.00',
+  porcrec3 decimal(4,2) NOT NULL default '0.00',
+  impoiva1 decimal(12,2) NOT NULL default '0.00',
+  impoiva2 decimal(12,2) default NULL,
+  impoiva3 decimal(12,2) default NULL,
+  imporec1 decimal(12,2) NOT NULL default '0.00',
+  imporec2 decimal(12,2) NOT NULL default '0.00',
+  imporec3 decimal(12,2) NOT NULL default '0.00',
+  retfacpr decimal(6,2) default NULL,
+  trefacpr decimal(12,2) default NULL,
+  totalfac decimal(12,2) NOT NULL default '0.00',
+  intconta tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codtrans,numfactu,fecfactu),
+  KEY FK_tcafpc (codforpa),
+  CONSTRAINT tcafpc_ibfk_1 FOREIGN KEY (codtrans) REFERENCES agencias (codtrans),
+  CONSTRAINT tcafpc_ibfk_2 FOREIGN KEY (codforpa) REFERENCES forpago (codforpa)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tcafpv (
+  codtrans smallint(3) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL,
+  fecfactu date NOT NULL default '0000-00-00',
+  codmacta varchar(10) NOT NULL,
+  importel decimal(10,2) NOT NULL,
+  PRIMARY KEY  (codtrans,numfactu,fecfactu,codmacta),
+  CONSTRAINT tcafpv_ibfk_1 FOREIGN KEY (codtrans) REFERENCES agencias (codtrans),
+  CONSTRAINT tcafpv_ibfk_2 FOREIGN KEY (codtrans, numfactu, fecfactu) REFERENCES tcafpc (codtrans, numfactu, fecfactu) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tipomer (
+  codtimer smallint(3) unsigned NOT NULL default '0',
+  nomtimer varchar(25) NOT NULL default '0',
+  tiptimer tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codtimer)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tipos Mercado';     
+
+CREATE TABLE tiposiva (
+  codigiva tinyint(1) unsigned NOT NULL default '0',
+  nombriva char(15) NOT NULL default '',
+  tipodiva tinyint(1) unsigned NOT NULL default '0',
+  porceiva decimal(4,2) NOT NULL default '0.00',
+  porcerec decimal(4,2) default NULL,
+  cuentare char(10) default NULL,
+  cuentarr char(10) default NULL,
+  cuentaso char(10) default NULL,
+  cuentasr char(10) default NULL,
+  cuentasn char(10) default NULL,
+  PRIMARY KEY  (codigiva),
+  KEY cl_repercutido (cuentare),
+  KEY cl_repercutidorec (cuentarr),
+  KEY cl_soportado (cuentaso),
+  KEY cl_soportadore (cuentasr),
+  KEY cl_soportadoNded (cuentasn)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tlifpc (
+  codtrans smallint(3) unsigned NOT NULL default '0',
+  numfactu varchar(10) NOT NULL,
+  fecfactu date NOT NULL default '0000-00-00',
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL default '0',
+  importel decimal(10,2) NOT NULL default '0.00',
+  PRIMARY KEY  (codtrans,numfactu,fecfactu,numalbar,numlinea)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpcmr (
+  numlinea smallint(1) NOT NULL,
+  codusu smallint(3) NOT NULL,
+  numalbar int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpcopiascmr (
+  numlinea smallint(1) NOT NULL,
+  texto varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpinfcostes (
+  codusu smallint(6) NOT NULL,
+  codcoste smallint(6) default NULL,
+  denominacion varchar(40) default NULL,
+  importe decimal(12,4) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpinformes (
+  codusu smallint(3) unsigned NOT NULL default '0',
+  codigo1 int(6) unsigned NOT NULL default '0',
+  campo1 smallint(4) unsigned default NULL,
+  campo2 smallint(4) unsigned default NULL,
+  nombre1 varchar(40) default NULL,
+  nombre2 varchar(40) default NULL,
+  importe1 decimal(12,2) default NULL,
+  importe2 decimal(12,2) default NULL,
+  importe3 decimal(12,2) default NULL,
+  importe4 decimal(12,2) default NULL,
+  importe5 decimal(12,2) default NULL,
+  porcen1 decimal(5,2) default NULL,
+  porcen2 decimal(5,2) default NULL,
+  importeb1 decimal(12,2) default NULL,
+  importeb2 decimal(12,2) default NULL,
+  importeb3 decimal(12,2) default NULL,
+  importeb4 decimal(12,2) default NULL,
+  importeb5 decimal(12,2) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Temporal para informes';     
+
+CREATE TABLE tmpinfventas (
+  codusu smallint(3) NOT NULL,
+  fecalbar date NOT NULL,
+  numalbar int(6) unsigned NOT NULL,
+  numlinea smallint(2) unsigned NOT NULL,
+  numcajas int(4) default NULL,
+  pesoreal decimal(12,2) default NULL,
+  pesoneto int(6) default NULL,
+  gastos decimal(12,2) default NULL,
+  impventa decimal(12,2) default NULL,
+  facturado tinyint(1) default NULL COMMENT '0 = No / 1 = Si',
+  cobrado tinyint(1) default NULL COMMENT '0 = No / 1 = Si',
+  codigo1 smallint(6) default NULL,
+  gastos1 decimal(12,2) default NULL,
+  codigo2 smallint(6) default NULL,
+  gastos2 decimal(12,2) default NULL,
+  codigo3 smallint(6) default NULL,
+  gastos3 decimal(12,2) default NULL,
+  codigo4 smallint(6) default NULL,
+  gastos4 decimal(12,2) default NULL,
+  gastosportes decimal(12,2) default NULL,
+  gastosenvases decimal(12,2) default NULL,
+  neto1 int(9) default NULL,
+  neto2 int(9) default NULL,
+  neto3 int(9) default NULL,
+  neto4 int(9) default NULL,
+  neto5 int(9) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpportesv (
+  codusu smallint(3) unsigned NOT NULL,
+  codtrans smallint(3) NOT NULL,
+  numfactu varchar(10) NOT NULL,
+  fecfactu date NOT NULL,
+  codmacta varchar(10) NOT NULL,
+  importel decimal(12,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE tmpscapla (
+  codusu smallint(3) unsigned NOT NULL default '0',
+  codplant smallint(3) unsigned NOT NULL default '0',
+  cantidad decimal(12,2) default NULL,
+  PRIMARY KEY  (codusu,codplant)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Temporal Cabecera Plantillas';     
+
+CREATE TABLE tmpstockfec (
+  codusu smallint(3) unsigned NOT NULL default '0',
+  codartic varchar(16) NOT NULL default '',
+  codalmac int(6) unsigned NOT NULL default '0',
+  stock decimal(12,2) NOT NULL default '0.00',
+  PRIMARY KEY  (codusu,codartic,codalmac)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='Temporal Stocks a una Fecha';     
+
+CREATE TABLE variane (
+  codvarie int(6) unsigned NOT NULL default '0',
+  numlinea smallint(3) NOT NULL default '0',
+  codvaane varchar(4) default '0',
+  PRIMARY KEY  (codvarie,numlinea),
+  KEY codvarie (codvarie),
+  CONSTRAINT variane_ibfk_1 FOREIGN KEY (codvarie) REFERENCES variedades (codvarie)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Variedades Anecoop';     
+
+CREATE TABLE variedades (
+  codvarie int(6) unsigned NOT NULL default '0',
+  nomvarie varchar(20) NOT NULL default '0',
+  codprodu smallint(3) unsigned NOT NULL default '0',
+  codclase smallint(3) unsigned NOT NULL default '0',
+  codconse int(6) NOT NULL default '0' COMMENT 'Cod. Conselleria',
+  kgscajon decimal(5,2) default '0.00' COMMENT 'Kilos/cajon',
+  minkgcaj decimal(5,2) default '0.00' COMMENT 'Min. Kgs/cajon',
+  maxkgcaj decimal(5,2) default '0.00' COMMENT 'Max. Kgs/cajon',
+  facorrde decimal(5,2) default '0.00' COMMENT 'Factor corrector destrio',
+  facorrme decimal(5,2) default '0.00' COMMENT 'Factor corrector mermas',
+  arrobjor decimal(5,2) default '0.00' COMMENT '@/jornal',
+  porcindu decimal(5,2) default '0.00' COMMENT '% para industria',
+  porcmerm decimal(5,2) default '0.00' COMMENT '% mermas',
+  porcdest decimal(5,2) default '0.00' COMMENT '% destrio',
+  eurdesta decimal(5,4) default '0.0000' COMMENT 'euros/kg destajo',
+  eurecole decimal(5,4) default '0.0000' COMMENT 'euros/kg recoleccion',
+  eurmanob decimal(5,4) default '0.0000' COMMENT 'euros/kg mano de obra',
+  eursegsoc decimal(5,4) default '0.0000' COMMENT 'euros/kg seg.social',
+  eurotria decimal(5,4) default '0.0000' COMMENT 'euros/kg tria',
+  eurhaneg decimal(5,4) default '0.0000' COMMENT 'euros/kg hanegada',
+  codunida smallint(2) unsigned default NULL,
+  ctavtasinterior varchar(10) default NULL COMMENT 'raiz cta contable vtas',
+  ctavtasexportacion varchar(10) default NULL,
+  ctavtasindustria varchar(10) default NULL,
+  ctavtasretirada varchar(10) default NULL,
+  ctavtasotros varchar(10) default NULL,
+  codigiva tinyint(1) unsigned NOT NULL default '0',
+  codccost char(4) default NULL,
+  ctatrainterior varchar(10) default NULL,
+  ctatraexporta varchar(10) default NULL,
+  PRIMARY KEY  (codvarie),
+  KEY FK_variedades (codclase),
+  KEY FK_variedades1 (codprodu),
+  KEY FK_variedades2 (codunida),
+  CONSTRAINT variedades_ibfk_1 FOREIGN KEY (codclase) REFERENCES clases (codclase),
+  CONSTRAINT variedades_ibfk_2 FOREIGN KEY (codprodu) REFERENCES productos (codprodu),
+  CONSTRAINT variedades_ibfk_3 FOREIGN KEY (codunida) REFERENCES sunida (codunida)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Variedades';     
+
+CREATE TABLE variedades_copy (
+  codvarie int(6) unsigned NOT NULL default '0',
+  nomvarie varchar(20) NOT NULL default '0',
+  codprodu smallint(3) unsigned NOT NULL default '0',
+  codclase smallint(3) unsigned NOT NULL default '0',
+  codconse int(6) NOT NULL default '0' COMMENT 'Cod. Conselleria',
+  kgscajon decimal(5,2) default '0.00' COMMENT 'Kilos/cajon',
+  minkgcaj decimal(5,2) default '0.00' COMMENT 'Min. Kgs/cajon',
+  maxkgcaj decimal(5,2) default '0.00' COMMENT 'Max. Kgs/cajon',
+  facorrde decimal(5,2) default '0.00' COMMENT 'Factor corrector destrio',
+  facorrme decimal(5,2) default '0.00' COMMENT 'Factor corrector mermas',
+  arrobjor decimal(5,2) default '0.00' COMMENT '@/jornal',
+  porcindu decimal(5,2) default '0.00' COMMENT '% para industria',
+  porcmerm decimal(5,2) default '0.00' COMMENT '% mermas',
+  porcdest decimal(5,2) default '0.00' COMMENT '% destrio',
+  eurdesta decimal(5,4) default '0.0000' COMMENT 'euros/kg destajo',
+  eurecole decimal(5,4) default '0.0000' COMMENT 'euros/kg recoleccion',
+  eurmanob decimal(5,4) default '0.0000' COMMENT 'euros/kg mano de obra',
+  eursegsoc decimal(5,4) default '0.0000' COMMENT 'euros/kg seg.social',
+  eurotria decimal(5,4) default '0.0000' COMMENT 'euros/kg tria',
+  eurhaneg decimal(5,4) default '0.0000' COMMENT 'euros/kg hanegada',
+  codunida smallint(2) unsigned default NULL,
+  ctavtasinterior varchar(10) default NULL COMMENT 'raiz cta contable vtas',
+  ctavtasexportacion varchar(10) default NULL,
+  ctavtasindustria varchar(10) default NULL,
+  ctavtasretirada varchar(10) default NULL,
+  ctavtasotros varchar(10) default NULL,
+  codigiva tinyint(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (codvarie),
+  KEY FK_variedades (codclase),
+  KEY FK_variedades1 (codprodu),
+  KEY FK_variedades2 (codunida)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;     
+
+CREATE TABLE zbloqueos (
+  codusu smallint(1) unsigned NOT NULL default '0',
+  tabla char(20) NOT NULL default '',
+  clave char(30) NOT NULL default '',
+  PRIMARY KEY  (tabla,clave)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;     
+

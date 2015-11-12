@@ -1,0 +1,6 @@
+Per a fer els iconos en blanc i negre:
+- Obrir el icono en el Paint Express
+- Deixar només els formats de XP (si vols)
+- Per a cada format de l'icono anar en el menú a Draw - Effects - Grayscale
+- Si la image te molts colors, baixar-li el brillo, seleccionar 
+  Brightness al mateix punt de menú i posar-li 50

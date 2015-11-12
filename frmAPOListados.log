@@ -1,0 +1,14 @@
+Línea 470: la clase MSComctlLib.ProgressBar del control pb2 no era una clase de control cargada.
+Línea 671: la clase MSComctlLib.ProgressBar del control pb1 no era una clase de control cargada.
+Línea 1366: la clase MSComctlLib.ProgressBar del control pb12 no era una clase de control cargada.
+Línea 1794: la clase MSComctlLib.ProgressBar del control Pb5 no era una clase de control cargada.
+Línea 2062: la clase MSComctlLib.ProgressBar del control Pb11 no era una clase de control cargada.
+Línea 2956: la clase MSComctlLib.ProgressBar del control Pb10 no era una clase de control cargada.
+Línea 2998: la clase MSComDlg.CommonDialog del control cd1 no era una clase de control cargada.
+Línea 3284: la clase MSComctlLib.ProgressBar del control Pb7 no era una clase de control cargada.
+Línea 3888: la clase MSComctlLib.ProgressBar del control Pb3 no era una clase de control cargada.
+Línea 4312: la clase MSComctlLib.ProgressBar del control Pb6 no era una clase de control cargada.
+Línea 4410: la clase MSComctlLib.ProgressBar del control Pb8 no era una clase de control cargada.
+Línea 4643: la clase MSComctlLib.ListView del control ListView1 no era una clase de control cargada.
+Línea 5384: la clase MSComctlLib.ProgressBar del control Pb4 no era una clase de control cargada.
+Línea 5511: la clase MSComctlLib.ProgressBar del control Pb9 no era una clase de control cargada.

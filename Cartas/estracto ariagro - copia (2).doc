@@ -1,0 +1,608 @@
+{\rtf1\adeflang1025\ansi\ansicpg1252\uc1\adeff0\deff0\stshfdbch12\stshfloch0\stshfhich0\stshfbi0\deflang3082\deflangfe1042{\fonttbl{\f0\froman\fcharset0\fprq2{\*\panose 02020603050405020304}Times New Roman;}{\f12\froman\fcharset129\fprq2{\*\panose 02030600000101010101}Batang{\*\falt \'b9\'d9\'c5\'c1};}
+{\f36\fswiss\fcharset0\fprq2{\*\panose 020b0604030504040204}Tahoma;}{\f37\fswiss\fcharset0\fprq2{\*\panose 020b0604030504040204}Verdana;}{\f38\froman\fcharset129\fprq2{\*\panose 02030600000101010101}@Batang;}
+{\f39\froman\fcharset238\fprq2 Times New Roman CE;}{\f40\froman\fcharset204\fprq2 Times New Roman Cyr;}{\f42\froman\fcharset161\fprq2 Times New Roman Greek;}{\f43\froman\fcharset162\fprq2 Times New Roman Tur;}
+{\f44\fbidi \froman\fcharset177\fprq2 Times New Roman (Hebrew);}{\f45\fbidi \froman\fcharset178\fprq2 Times New Roman (Arabic);}{\f46\froman\fcharset186\fprq2 Times New Roman Baltic;}{\f47\froman\fcharset163\fprq2 Times New Roman (Vietnamese);}
+{\f161\froman\fcharset0\fprq2 Batang Western{\*\falt \'b9\'d9\'c5\'c1};}{\f159\froman\fcharset238\fprq2 Batang CE{\*\falt \'b9\'d9\'c5\'c1};}{\f160\froman\fcharset204\fprq2 Batang Cyr{\*\falt \'b9\'d9\'c5\'c1};}
+{\f162\froman\fcharset161\fprq2 Batang Greek{\*\falt \'b9\'d9\'c5\'c1};}{\f163\froman\fcharset162\fprq2 Batang Tur{\*\falt \'b9\'d9\'c5\'c1};}{\f166\froman\fcharset186\fprq2 Batang Baltic{\*\falt \'b9\'d9\'c5\'c1};}
+{\f399\fswiss\fcharset238\fprq2 Tahoma CE;}{\f400\fswiss\fcharset204\fprq2 Tahoma Cyr;}{\f402\fswiss\fcharset161\fprq2 Tahoma Greek;}{\f403\fswiss\fcharset162\fprq2 Tahoma Tur;}{\f404\fbidi \fswiss\fcharset177\fprq2 Tahoma (Hebrew);}
+{\f405\fbidi \fswiss\fcharset178\fprq2 Tahoma (Arabic);}{\f406\fswiss\fcharset186\fprq2 Tahoma Baltic;}{\f407\fswiss\fcharset163\fprq2 Tahoma (Vietnamese);}{\f408\fswiss\fcharset222\fprq2 Tahoma (Thai);}{\f409\fswiss\fcharset238\fprq2 Verdana CE;}
+{\f410\fswiss\fcharset204\fprq2 Verdana Cyr;}{\f412\fswiss\fcharset161\fprq2 Verdana Greek;}{\f413\fswiss\fcharset162\fprq2 Verdana Tur;}{\f416\fswiss\fcharset186\fprq2 Verdana Baltic;}{\f417\fswiss\fcharset163\fprq2 Verdana (Vietnamese);}
+{\f421\froman\fcharset0\fprq2 @Batang Western;}{\f419\froman\fcharset238\fprq2 @Batang CE;}{\f420\froman\fcharset204\fprq2 @Batang Cyr;}{\f422\froman\fcharset161\fprq2 @Batang Greek;}{\f423\froman\fcharset162\fprq2 @Batang Tur;}
+{\f426\froman\fcharset186\fprq2 @Batang Baltic;}}{\colortbl;\red0\green0\blue0;\red0\green0\blue255;\red0\green255\blue255;\red0\green255\blue0;\red255\green0\blue255;\red255\green0\blue0;\red255\green255\blue0;\red255\green255\blue255;
+\red0\green0\blue128;\red0\green128\blue128;\red0\green128\blue0;\red128\green0\blue128;\red128\green0\blue0;\red128\green128\blue0;\red128\green128\blue128;\red192\green192\blue192;}{\stylesheet{
+\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs24\alang1025 \ltrch\fcs0 \fs24\lang3082\langfe1042\loch\f0\hich\af0\dbch\af12\cgrid\langnp3082\langfenp1042 \snext0 Normal;}{\*\cs10 \additive 
+\ssemihidden Default Paragraph Font;}{\*
+\ts11\tsrowd\trftsWidthB3\trpaddl108\trpaddr108\trpaddfl3\trpaddft3\trpaddfb3\trpaddfr3\trcbpat1\trcfpat1\tblind0\tblindtype3\tscellwidthfts0\tsvertalt\tsbrdrt\tsbrdrl\tsbrdrb\tsbrdrr\tsbrdrdgl\tsbrdrdgr\tsbrdrh\tsbrdrv 
+\ql \li0\ri0\widctlpar\wrapdefault\aspalpha\aspnum\faauto\adjustright\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs20 \ltrch\fcs0 \fs20\lang1024\langfe1024\cgrid\langnp1024\langfenp1024 \snext11 \ssemihidden Normal Table;}}
+{\*\latentstyles\lsdstimax156\lsdlockeddef0}{\*\rsidtbl \rsid7299585\rsid9062493\rsid10582978}{\*\generator Microsoft Word 11.0.0000;}{\info{\author Crystal Reports}{\doccomm Powered By Crystal}{\operator Coop.Moixent}{\creatim\yr2012\mo7\dy19\hr9\min33}
+{\revtim\yr2012\mo7\dy19\hr9\min45}{\version2}{\edmins12}{\nofpages2}{\nofwords547}{\nofchars3011}{\*\company Crystal Decisions}{\nofcharsws3551}{\vern24615}{\*\password 00000000}}{\*\xmlnstbl {\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}
+{\xmlns2 urn:schemas-microsoft-com:office:smarttags}}\paperw12240\paperh16560\margl465\margr465\margt0\margb408\gutter0\ltrsect 
+\widowctrl\ftnbj\aenddoc\hyphhotz425\donotembedsysfont0\donotembedlingdata1\grfdocevents0\validatexml0\showplaceholdtext0\ignoremixedcontent0\saveinvalidxml0\showxmlerrors0\horzdoc\dghspace120\dgvspace120\dghorigin1701\dgvorigin1984\dghshow0\dgvshow3
+\jcompress\viewkind1\viewscale100\rsidroot7299585 \fet0{\*\wgrffmtfilter 013f}\ilfomacatclnup0\ltrpar \sectd \ltrsect\sbknone\linex0\sectdefaultcl\sectrsid7299585\sftnbj {\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl2
+\pnucltr\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl3\pndec\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl4\pnlcltr\pnstart1\pnindent720\pnhang {\pntxta )}}{\*\pnseclvl5\pndec\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl6
+\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl7\pnlcrm\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl8\pnlcltr\pnstart1\pnindent720\pnhang {\pntxtb (}{\pntxta )}}{\*\pnseclvl9\pnlcrm\pnstart1\pnindent720\pnhang 
+{\pntxtb (}{\pntxta )}}\pard\plain \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\pvpg\phpg\posx9105\posy888\absh-240\absw2160\wrapdefault\faauto\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs24\alang1025 \ltrch\fcs0 
+\fs24\lang3082\langfe1042\loch\af0\hich\af0\dbch\af12\cgrid\langnp3082\langfenp1042 {\rtlch\fcs1 \af36\afs15 \ltrch\fcs0 \f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 P\loch\af36\dbch\af12\hich\f36 \'e1\hich\af36\dbch\af12\loch\f36 
+gina:  1 de 2}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\pvpg\phpg\posx9105\posy648\absh-240\absw2160\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs15 \ltrch\fcs0 \f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 
+Fecha :  19-jul-2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\pvpg\phpg\posx705\posy1008\absh-360\absw7680\wrapdefault
+\faauto\rin0\lin0\itap0\pararsid7299585 {\rtlch\fcs1 \af37\afs27 \ltrch\fcs0 \f37\fs27\cf1\insrsid10582978 \hich\af37\dbch\af12\loch\f37 Coop.Moixent 11/12}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\pvpg\phpg\posx705\posy528\absh-480\absw8280\wrapdefault
+\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af37\afs31 \ltrch\fcs0 \b\f37\fs31\cf1\insrsid10582978 \hich\af37\dbch\af12\loch\f37 Ventas por Destinos}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\pvpg\phpg\posx1425
+\posy1844\absh-221\absw10080\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ai\af36\afs17 \ltrch\fcs0 \i\f36\fs17\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 DESDE: 003005 - PRATS GARCIA CARMEN  HASTA: 003005 - PRATS GARCIA CARMEN}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx585\posy1844\absh-221\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ai\af36\afs17 \ltrch\fcs0 \i\f36\fs17\ul\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Socio: }{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\pvpg\phpg\posx475\posy2290\absh-286\absw1500\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Cod. Art.}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\pvpg\phpg\posx1875\posy2290\absh-286\absw3300\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 
+Nombre Art\loch\af36\dbch\af12\hich\f36 \'ed\hich\af36\dbch\af12\loch\f36 culo}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6795\posy2290\absh-286\absw2460\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Socio}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\pvpg\phpg\posx10275\posy2290\absh-286\absw1130\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Cantidad}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\pvpg\phpg\posx5835\posy2290\absh-286\absw1020\wrapdefault\faauto\rin0\lin0\itap0 
+\cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Fecha }{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\pvpg\phpg\posx5115\posy2290\absh-286\absw780\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 
+{\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Albar\loch\af36\dbch\af12\hich\f36 \'e1\hich\af36\dbch\af12\loch\f36 n}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\tx1080\pvpg\phpg\posx9195\posy2290\absh-286\absw1140\wrapdefault\faauto\rin0\lin0\itap0 
+\cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Bultos}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy2601\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36  0  SALIDA DE MATERIALES}{\rtlch\fcs1 \ab\af36\afs15 
+\ltrch\fcs0 \b\f36\fs15\cf1\insrsid7299585 \hich\af36\dbch\af12\loch\f36      }{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf6\insrsid10582978 \hich\af36\dbch\af12\loch\f36 ESTOS ARTICULOS SE LE CARGARA}{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 
+\b\f36\fs18\cf6\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36  AL SOCIO POR\hich\af36\dbch\af12\loch\f36  }{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\ul\cf13\insrsid7299585\charrsid10582978 {\*\xmlopen\xmlns2{\factoidname 
+PersonName}{\xmlattr\xmlattrns0{\xmlattrname ProductID}{\xmlattrvalue LA  CANTIDAD}}}\hich\af36\dbch\af12\loch\f36 LA \hich\af36\dbch\af12\loch\f36  CANTIDAD}{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\ul\cf13\insrsid10582978 {\*\xmlclose}
+\hich\af36\dbch\af12\loch\f36  (U)}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\cf6\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy2601\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 3.868,00}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy2973\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 33}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy2973\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 MALLAS PLASTICO}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy2973\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 400,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy2973\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200004}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy2973\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 25/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy2973\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy3224\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 1.600,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy3224\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200049}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy3224\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 30/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy3224\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy3475\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 44}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy3475\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PAPEL FONDO GRIS}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy3475\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 10,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy3475\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200004}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy3475\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 25/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy3475\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy3726\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 30,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy3726\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200041}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy3726\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 29/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy3726\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy3977\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 30,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy3977\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200195}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy3977\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 04/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy3977\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy4228\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 55}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy4228\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 CAJA GRAPAS 5000 UDS.}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy4228\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 1,00}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy4228\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200004}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy4228\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 25/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy4228\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy4479\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 1,00}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy4479\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200049}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy4479\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 30/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy4479\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy4730\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 88}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy4730\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 CAJAS MADERA  {\*\xmlopen\xmlns2{\factoidname PersonName}{\xmlattr\xmlattrns0{\xmlattrname ProductID}{\xmlattrvalue CARLOS GOMEZ}}}8 KG{\*\xmlclose}..}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy4730\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 330,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy4730\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200004}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy4730\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 25/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy4730\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy4981\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 160,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy4981\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200034}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy4981\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 29/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy4981\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy5232\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 180,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy5232\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200049}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy5232\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 30/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy5232\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy5483\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 176,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy5483\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200078}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy5483\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy5734\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 176,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy5734\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200087}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy5734\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 31/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy5734\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy5985\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 176,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy5985\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200111}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy5985\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy6236\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 132,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy6236\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200124}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy6236\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy6236\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy6487\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 176,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy6487\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200154}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy6487\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy6738\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 176,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy6738\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200195}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy6738\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 04/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy6738\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy6989\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 114,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy6989\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200237}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy6989\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy7350\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36  B  COOP. BELGIDA COFRUDECA}{\rtlch\fcs1 \ab\af36\afs15 
+\ltrch\fcs0 \b\f36\fs15\cf1\insrsid7299585 \hich\af36\dbch\af12\loch\f36  \hich\af36\dbch\af12\loch\f36   }{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf6\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ESTO}{\rtlch\fcs1 
+\ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf6\insrsid10582978 \hich\af36\dbch\af12\loch\f36 S GASTOS SE LE CARGARA}{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf6\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36  ALA SOCIO }{\rtlch\fcs1 
+\ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\ul\cf13\insrsid7299585\charrsid10582978 \hich\af36\dbch\af12\loch\f36 POR {\*\xmlopen\xmlns2{\factoidname PersonName}{\xmlattr\xmlattrns0{\xmlattrname ProductID}{\xmlattrvalue CARLOS GOMEZ}}}LA CANTIDAD}{\rtlch\fcs1 
+\ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf6\insrsid7299585\charrsid7299585 {\*\xmlclose}\hich\af36\dbch\af12\loch\f36  (KG)}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\cf6\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy7350\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 27.353,00}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy7722\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy7722\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy7722\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 1.951,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy7722\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200289}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy7722\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 04/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy7722\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy7722\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy7973\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 4.889,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy7973\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200350}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy7973\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 05/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy7973\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy7973\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 216}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy8224\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 3.876,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy8224\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200388}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy8224\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy8224\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 171}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy8475\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 6.450,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy8475\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200433}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy8475\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 06/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy8475\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy8475\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 288}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy8726\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 3.106,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy8726\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200491}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy8726\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy8726\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 142}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy8977\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 4.909,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy8977\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200564}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy8977\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 07/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy8977\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy8977\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 226}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy9228\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 801,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy9228\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200623}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy9228\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 08/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy9228\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy9228\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 36}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy9479\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 821,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy9479\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200658}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy9479\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy9479\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 37}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy9730\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 550,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy9730\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200669}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy9730\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 09/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy9730\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy9730\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 25}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy10091\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36  C  CENTRIMERCA   C-16/18}{\rtlch\fcs1 \ab\af36\afs15 
+\ltrch\fcs0 \b\f36\fs15\cf1\insrsid7299585 \hich\af36\dbch\af12\loch\f36    }{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\cf1\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36  }{\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 
+\b\f36\fs18\cf6\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36 DE LA \hich\af36\dbch\af12\loch\f36  \loch\af36\dbch\af12\hich\f36 \'93\hich\af36\dbch\af12\loch\f36 C \hich\af36\dbch\af12\loch\f36  \loch\af36\dbch\af12\hich\f36 \'93
+\hich\af36\dbch\af12\loch\f36 A LA\hich\af36\dbch\af12\loch\f36  \hich\af36\dbch\af12\loch\f36  \loch\af36\dbch\af12\hich\f36 \'93\hich\af36\dbch\af12\loch\f36  P\loch\af36\dbch\af12\hich\f36 \'94\hich\af36\dbch\af12\loch\f36   SE LE CARGARA AL SOCIO }{
+\rtlch\fcs1 \ab\af36\afs18 \ltrch\fcs0 \b\f36\fs18\ul\cf13\insrsid7299585\charrsid10582978 \hich\af36\dbch\af12\loch\f36 POR BULTOS}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\cf6\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy10091\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 4.293,00}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy10463\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy10463\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy10463\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 45,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy10463\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200019}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy10463\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 28/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy10463\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy10463\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 6}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy10714\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 888,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy10714\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200051}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy10714\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 30/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy10714\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy10714\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy10965\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 640,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy10965\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200121}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy10965\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 31/05/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy10965\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy10965\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 80}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy11216\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy11216\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200173}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy11216\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy11216\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy11216\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy11467\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 11}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy11467\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 ALBARICOQUE MITJER DE CASTELLO}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy11467\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy11467\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200123}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy11467\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy11467\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy11467\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~}{\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy11718\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 928,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy11718\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200234}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy11718\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 04/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy11718\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy11718\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 116}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy12079\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 
+ E  CENTRIMERCA   E-51/53}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy12079\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 
+\b\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~\hich\af36\dbch\af12\loch\f36 1.760,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy12451\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy12451\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy12451\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 864,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy12451\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200086}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy12451\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 31/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy12451\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy12451\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy12702\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 0,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy12702\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200179}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy12702\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy12702\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy12702\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 120}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy12953\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 11}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy12953\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ALBARICOQUE MITJER DE CASTELLO}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy12953\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy12953\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200042}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy12953\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 29/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy12953\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy12953\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy13314\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 
+ F  FRU&VER   A-20/22/24}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy13314\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 
+\b\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~\hich\af36\dbch\af12\loch\f36 2.688,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy13686\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy13686\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy13686\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy13686\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200018}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy13686\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 28/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy13686\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy13686\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy13937\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy13937\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200076}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy13937\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 30/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy13937\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy13937\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy14188\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 896,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy14188\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200105}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy14188\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 31/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy14188\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy14188\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy14549\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36  G  
+{\*\xmlopen\xmlns2{\factoidname PersonName}{\xmlattr\xmlattrns0{\xmlattrname ProductID}{\xmlattrvalue CARLOS GOMEZ}}}CARLOS GOMEZ{\*\xmlclose}, S.L.U.   B-26/28}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy14549\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 
+\b\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~\hich\af36\dbch\af12\loch\f36 4.611,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy14921\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy14921\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy14921\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 181,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy14921\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200180}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy14921\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy14921\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy14921\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 24}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy15172\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 880,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy15172\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200194}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy15172\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 04/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy15172\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy15172\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy15423\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 885,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy15423\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200483}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy15423\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 06/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy15423\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy15423\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy15674\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 892,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy15674\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200506}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy15674\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 07/06/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy15674\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy15674\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 113}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy15925\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 11}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy15925\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 ALBARICOQUE MITJER DE CASTELLO}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy15925\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 892,00}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy15925\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 1200033}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy15925\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 29/05/2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy15925\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 
+\f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy15925\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \~
+\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 \page \sect }\sectd \ltrsect\margtsxn408\sbknone\linex0\sectdefaultcl\sftnbj 
+\pard\plain \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\pvpg\phpg\posx9105\posy888\absh-240\absw2160\wrapdefault\faauto\rin0\lin0\itap0 \rtlch\fcs1 \af0\afs24\alang1025 \ltrch\fcs0 
+\fs24\lang3082\langfe1042\loch\af0\hich\af0\dbch\af12\cgrid\langnp3082\langfenp1042 {\rtlch\fcs1 \af0 \ltrch\fcs0 \lang1024\langfe1024\noproof\insrsid10582978 
+{\shp{\*\shpinst\shpleft465\shptop3770\shpright11386\shpbottom3770\shpfhdr0\shpbxpage\shpbxignore\shpbypage\shpbyignore\shpwr3\shpwrk0\shpfblwtxt1\shpz0\shplid1026{\sp{\sn shapeType}{\sv 20}}{\sp{\sn fFlipH}{\sv 0}}{\sp{\sn fFlipV}{\sv 0}}
+{\sp{\sn lineWidth}{\sv 12700}}{\sp{\sn fLine}{\sv 1}}{\sp{\sn posrelh}{\sv 1}}{\sp{\sn posrelv}{\sv 1}}{\sp{\sn fLayoutInCell}{\sv 0}}{\sp{\sn fBehindDocument}{\sv 1}}{\sp{\sn fLayoutInCell}{\sv 0}}}{\shprslt{\*\do\dobxpage\dobypage\dodhgt0
+\dpline\dpptx0\dppty0\dpptx10921\dppty0\dpx465\dpy3770\dpxsize10921\dpysize0\dplinew20\dplinecor0\dplinecog0\dplinecob0}}}}{\rtlch\fcs1 \af36\afs15 \ltrch\fcs0 \f36\fs15\cf1\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\hich\af36\dbch\af12\loch\f36 P\loch\af36\dbch\af12\hich\f36 \'e1\hich\af36\dbch\af12\loch\f36 gina:  2 de 2}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\lang1046\langfe1042\langnp1046\insrsid10582978\charrsid7299585 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\pvpg\phpg\posx9105\posy648\absh-240\absw2160\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs15 \ltrch\fcs0 \f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 
+Fecha :  19-jul-2012}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\pvpg\phpg\posx705\posy1008\absh-360\absw7680\wrapdefault
+\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af37\afs27 \ltrch\fcs0 \f37\fs27\cf1\insrsid10582978 \hich\af37\dbch\af12\loch\f37 Coop.Moixent 11/12}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\pvpg\phpg\posx705\posy528\absh-480\absw8280\wrapdefault
+\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af37\afs31 \ltrch\fcs0 \b\f37\fs31\cf1\insrsid10582978 \hich\af37\dbch\af12\loch\f37 Ventas por Destinos}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\pvpg\phpg\posx1425
+\posy1844\absh-221\absw10080\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ai\af36\afs17 \ltrch\fcs0 \i\f36\fs17\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 DESDE: 003005 - PRATS GARCIA CARMEN  HASTA: 003005 - PRATS GARCIA CARMEN}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx585\posy1844\absh-221\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ai\af36\afs17 \ltrch\fcs0 \i\f36\fs17\ul\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Socio: }{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\pvpg\phpg\posx475\posy2290\absh-286\absw1500\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Cod. Art.}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\pvpg\phpg\posx1875\posy2290\absh-286\absw3300\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 
+Nombre Art\loch\af36\dbch\af12\hich\f36 \'ed\hich\af36\dbch\af12\loch\f36 culo}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6795\posy2290\absh-286\absw2460\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Socio}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 
+\tx360\tx720\tx1080\pvpg\phpg\posx10275\posy2290\absh-286\absw1130\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Cantidad}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\pvpg\phpg\posx5835\posy2290\absh-286\absw1020\wrapdefault\faauto\rin0\lin0\itap0 
+\cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Fecha }{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\pvpg\phpg\posx5115\posy2290\absh-286\absw780\wrapdefault\faauto\rin0\lin0\itap0 \cbpat8 
+{\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Albar\loch\af36\dbch\af12\hich\f36 \'e1\hich\af36\dbch\af12\loch\f36 n}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\brdrt\brdrs\brdrw20\brdrcf1 \brdrl\brdrs\brdrw20\brdrcf1 \brdrb\brdrs\brdrw20\brdrcf1 \brdrr\brdrs\brdrw20\brdrcf1 \tx360\tx720\tx1080\pvpg\phpg\posx9195\posy2290\absh-286\absw1140\wrapdefault\faauto\rin0\lin0\itap0 
+\cbpat8 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 Bultos}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy2601\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 881,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy2601\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200304}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy2601\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 05/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy2601\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy2601\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\tx3240\tx3600\tx3960\tx4320\tx4680\tx5040\tx5400\tx5760\tx6120\tx6480\tx6840\tx7200\tx7560\tx7920\tx8280\tx8640\tx9000\tx9360\tx9720\tx10080\tx10440\tx10800
+\pvpg\phpg\posx465\posy2962\absh-312\absw10920\wrapdefault\faauto\rin0\lin0\itap0 \cbpat16 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36  P  EL PROYECTIL   B-37/39}{\rtlch\fcs1 \af36 \ltrch\fcs0 
+\f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx10185\posy2962\absh-168\absw1159\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 869,00}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx465\posy3334\absh-221\absw1350\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 10}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\tx2880\pvpg\phpg\posx1905\posy3334\absh-221\absw3240\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 ALBARICOQUE GALTA ROJA}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10425\posy3334\absh-168\absw950\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 869,00}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5145\posy3334\absh-221\absw795\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 1200152}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qc \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx5985\posy3334\absh-168\absw794\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 01/06/2012}{\rtlch\fcs1 
+\af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\pvpg\phpg\posx6825\posy3334\absh-221\absw2430\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 
+\hich\af36\dbch\af12\loch\f36 PRATS GARCIA CARMEN}{\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx9345\posy3334\absh-168\absw840\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36\afs13 \ltrch\fcs0 \f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 112}{\rtlch\fcs1 \af36 
+\ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\tx360\tx720\tx1080\tx1440\tx1800\tx2160\tx2520\pvpg\phpg\posx465\posy3815\absh-3335\absw11077\wrapdefault\faauto\rin0\lin0\itap0\pararsid7299585 {\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 
+\b\f36\fs15\cf1\insrsid10582978 \hich\af36\dbch\af12\loch\f36 TOTAL GLOBAL
+\par }{\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf1\insrsid7299585 
+\par 
+\par 
+\par }{\rtlch\fcs1 \ab\af36\afs15 \ltrch\fcs0 \b\f36\fs15\cf6\insrsid7299585 \hich\af36\dbch\af12\loch\f36     }{\rtlch\fcs1 \ab\af36\afs20 \ltrch\fcs0 \b\f36\fs20\cf6\insrsid7299585\charrsid7299585 \hich\af36\dbch\af12\loch\f36 HOLA 
+\hich\af36\dbch\af12\loch\f36 M\loch\af36\dbch\af12\hich\f36 \'d3\loch\f36 NICA\hich\af36\dbch\af12\loch\f36 :
+\par \hich\af36\dbch\af12\loch\f36   
+\par \hich\af36\dbch\af12\loch\f36 COMO VER\loch\af36\dbch\af12\hich\f36 \'c1\loch\f36 S TE HE PUESTO \hich\af36\dbch\af12\loch\f36 \hich\f36 DETR\'c1\loch\f36 S\hich\af36\dbch\af12\loch\f36  \hich\af36\dbch\af12\loch\f36 
+DE CADA ARTICULO COMO SE LE VA A CARGAR AL SOCIO. 
+\par 
+\par \hich\af36\dbch\af12\loch\f36 UN SALUDO}{\rtlch\fcs1 \af36\afs20 \ltrch\fcs0 \f36\fs20\cf6\insrsid7299585\charrsid7299585 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\pvpg\phpg\posx10305\posy3815\absh-168\absw1070\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 45.442,00}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\qr \li0\ri0\nowidctlpar\tx360\tx720\tx1080\pvpg\phpg\posx8985\posy3815\absh-168\absw1200\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \ab\af36\afs13 \ltrch\fcs0 \b\f36\fs13\cf1\insrsid10582978 \~\hich\af36\dbch\af12\loch\f36 3.168}{
+\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }\pard \ltrpar\ql \li0\ri0\nowidctlpar\wrapdefault\faauto\rin0\lin0\itap0 {\rtlch\fcs1 \af36 \ltrch\fcs0 \f36\insrsid10582978 
+\par }}

@@ -1,0 +1,1248 @@
+//////////////////////////////////////////////////////////////////////
+/////////////////////////////// Summary //////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+		Features:  			        92
+		Components:			        32
+		Number of Files:		       373
+		Size of Files:   		      82099019
+		Size in Library:		      24990239
+
+
+		<Support>
+			Engine
+				Log
+				Kernel
+			Main Installation
+				Script
+				Setup
+				StrTbl
+				RunTime
+				Resource
+			cc46019f-20df-40e0-b88f-2ba0ce55463e
+				Script
+				Setup
+				StrTbl
+					Japanese
+					Korean
+					Arabic
+					Catalan
+					Croatian
+					Thai
+					Russian
+					Indonesian
+					Turkish
+					Basque
+					Czech
+					Danish
+					Dutch
+					Finnish
+					French (Standard)
+					French (Canadian)
+					German
+					Greek
+					Hungarian
+					Italian
+					Norwegian
+					Polish
+					Portuguese (Brazilian)
+					Portuguese (Standard)
+					Slovenian
+					Vietnamese
+					Slovak
+					Spanish
+					Swedish
+					Chinese (Simplified)
+					Chinese (Traditional)
+					English
+					Serbian
+					Romanian
+					Bulgarian
+				RunTime
+				Resource
+					Croatian
+					Basque
+					Czech
+					Danish
+					Dutch
+					Finnish
+					French (Standard)
+					French (Canadian)
+					German
+					Greek
+					Hungarian
+					Italian
+					Norwegian
+					Polish
+					Portuguese (Brazilian)
+					Portuguese (Standard)
+					Slovenian
+					Vietnamese
+					Slovak
+					Spanish
+					Swedish
+					Chinese (Simplified)
+					Chinese (Traditional)
+					Thai
+					Russian
+					Indonesian
+					Turkish
+					Japanese
+					Korean
+					Arabic
+					Catalan
+					English
+					Serbian
+					Romanian
+					Bulgarian
+		<Data>
+			Disk<1>
+			DefaultFeature
+			ScannedProject1
+				Visual Basic 6 Runtime Files Object1
+					VB6 Runtime
+
+
+//////////////////////////////////////////////////////////////////////
+///////////////////////////// Features ///////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+*<Support>*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\Engine*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\Engine\Log*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\Engine\Kernel*
+
+		Component
+		------------------------------------------------------
+		"<Engine>Kernel Placeholder"
+		"<Engine>EngineCommonPlaceHolder"
+
+*<Support>\Main Installation*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\Main Installation\Script*
+
+		Component
+		------------------------------------------------------
+		"<Support>Script"
+
+*<Support>\Main Installation\Setup*
+
+		Component
+		------------------------------------------------------
+		"<Support>Language Independent OS Independent Files"
+		"<Support>Spanish OS Independent Files"
+		"<Support>Misc Support Files"
+
+*<Support>\Main Installation\StrTbl*
+
+		Component
+		------------------------------------------------------
+		"<Support>Spanish String Tables"
+
+*<Support>\Main Installation\RunTime*
+
+		Component
+		------------------------------------------------------
+		"<Support>Non-SelfRegistering"
+
+*<Support>\Main Installation\Resource*
+
+		Component
+		------------------------------------------------------
+		"<Support>Spanish Files"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Script*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___1"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Setup*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_0__1"
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__1"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___2"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Japanese*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Korean*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Arabic*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Catalan*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Croatian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Thai*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Russian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Indonesian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Turkish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Basque*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Czech*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Danish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Dutch*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Finnish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\French (Standard)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\French (Canadian)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\German*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Greek*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Hungarian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Italian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Norwegian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Polish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Portuguese (Brazilian)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Portuguese (Standard)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Slovenian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Vietnamese*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Slovak*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Spanish*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__2"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Swedish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Chinese (Simplified)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Chinese (Traditional)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\English*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Serbian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Romanian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\StrTbl\Bulgarian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\RunTime*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___3"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___4"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Croatian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Basque*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Czech*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Danish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Dutch*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Finnish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\French (Standard)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\French (Canadian)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\German*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Greek*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Hungarian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Italian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Norwegian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Polish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Portuguese (Brazilian)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Portuguese (Standard)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Slovenian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Vietnamese*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Slovak*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Spanish*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__3"
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Swedish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Chinese (Simplified)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Chinese (Traditional)*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Thai*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Russian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Indonesian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Turkish*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Japanese*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Korean*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Arabic*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Catalan*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\English*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Serbian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Romanian*
+
+		Component
+		------------------------------------------------------
+
+*<Support>\cc46019f-20df-40e0-b88f-2ba0ce55463e\Resource\Bulgarian*
+
+		Component
+		------------------------------------------------------
+
+*<Data>*
+
+		Component
+		------------------------------------------------------
+
+*<Data>\Disk<1>*
+
+		Component
+		------------------------------------------------------
+		"<Disk1>Disk1 Files(1)"
+		"<Disk1>Disk1 Files(2)"
+		"<Disk1>Disk1 Files(3)"
+		"<Disk1>Disk1 Files(4)"
+
+*<Data>\DefaultFeature*
+
+		Component
+		------------------------------------------------------
+		"DefaultComponent"
+		"Files"
+		"NewComponent1"
+		"SelfRegFiles"
+
+*<Data>\ScannedProject1*
+
+		Component
+		------------------------------------------------------
+		"TARGETDIRSelfRegFiles"
+		"COMMONFILESSelfRegFiles"
+		"TARGETDIRFiles"
+		"WINSYSDIRSharedFiles"
+		"WINSYSDIRSharedSelfRegFiles"
+
+*<Data>\ScannedProject1\Visual Basic 6 Runtime Files Object1*
+
+		Component
+		------------------------------------------------------
+
+*<Data>\ScannedProject1\Visual Basic 6 Runtime Files Object1\VB6 Runtime*
+
+		Component
+		------------------------------------------------------
+		"[Visual Basic 6 Runtime Files Object1]S_NSR_PL_544___<WINSYSDIR>_1"
+		"[Visual Basic 6 Runtime Files Object1]S_SR_PL_544___<WINSYSDIR>_1"
+
+
+//////////////////////////////////////////////////////////////////////
+///////////////////////////// Components ////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+><Engine>Kernel Placeholder<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"ikernel.dll"                                           26/04/2002     20:48:38            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\ikernel.dll"
+		"setup.dll"                                             25/03/2002     18:11:12            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\setup.dll"
+		"dotnetinstaller.exe"                                   25/03/2002     18:11:28            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\dotnetinstaller.exe"
+		"iscript.dll"                                           09/04/2002     23:24:12            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\iscript.dll"
+		"ctor.dll"                                              09/04/2002     23:24:40            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\ctor.dll"
+		"iuser.dll"                                             09/04/2002     23:24:54            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\iuser.dll"
+		"igdi.dll"                                              25/04/2002     22:21:50            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\igdi.dll"
+
+><Engine>EngineCommonPlaceHolder<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"isprobe.tlb"                                           26/11/2001     11:13:10            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\isprobe.tlb"
+		"objectps.dll"                                          12/07/1999     14:45:30            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\objectps.dll"
+
+><Support>Script<
+
+		Size of Files:   		        186310
+		Size in Library:		        186310
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.inx"                                             15/06/2011     19:33:30       186310  ""                 "A"           "27e954c2-23a3-6278-82a5-78e704bf569a"  "c:\programas\ariagrorec\instalacion\nueva instalacion\ariagrorec\script files\setup.inx"
+
+><Support>Language Independent OS Independent Files<
+
+		Size of Files:   		           255
+		Size in Library:		           181
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"license.txt"                                           08/08/2003     17:18:42          255  ""                 ""            "c658b6c3-8f70-7326-0127-3549e52ff73d"  "c:\program files\installshield\devstudio 9\redist\0409\license.txt"
+
+><Support>Spanish OS Independent Files<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+><Support>Misc Support Files<
+
+		Size of Files:   		         65503
+		Size in Library:		         12414
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"corecomp.ini"                                          15/04/2002     18:04:36        65503  ""                 ""            "ec8cd309-a0a6-f412-ce5b-54f03db9b21a"  "c:\program files\installshield\devstudio 9\redist\compressed files\language independent\os independent\corecomp.ini"
+
+><Support>Spanish String Tables<
+
+		Size of Files:   		           298
+		Size in Library:		           165
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"stringtable-000a-spanish.ips"                          15/06/2011     19:33:30          298  ""                 "A"           "bf11702c-7cec-c46f-6f51-797aa8946fc0"  "c:\programas\ariagrorec\instalacion\nueva instalacion\ariagrorec\string tables\stringtable-000a-spanish.ips"
+
+><Support>Non-SelfRegistering<
+
+		Size of Files:   		        402576
+		Size in Library:		        197528
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"isrt.dll"                                              03/09/2003     03:29:28       401408  "9.0.0.333"        ""            "f548fc59-1b4a-462b-aa78-4ffc16495d52"  "c:\program files\installshield\devstudio 9\redist\compressed files\language independent\intel 32\isrt.dll"
+		"default.pal"                                           16/09/1999     11:24:10         1168  ""                 ""            "3ffeba0a-d069-4953-4405-061de2629c82"  "c:\program files\installshield\devstudio 9\redist\compressed files\language independent\intel 32\default.pal"
+
+><Support>Spanish Files<
+
+		Size of Files:   		        311296
+		Size in Library:		         80833
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"_isres.dll"                                            03/09/2003     05:54:22       311296  "9.0.0.333"        "A"           "fe2ffdc5-081b-6b48-9a95-12b82be95af6"  "c:\program files\installshield\devstudio 9\redist\040a\i386\_isres.dll"
+
+><Disk1>Disk1 Files(1)<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"layout.bin"                                            28/06/1999     19:30:10            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\layout.bin"
+		"data1.hdr"                                             28/06/1999     19:30:10            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\data1.hdr"
+		"data1.cab"                                             28/06/1999     19:30:10            0  ""                 ""            "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\program files\installshield\devstudio 9\support\build\data1.cab"
+
+><Disk1>Disk1 Files(2)<
+
+		Size of Files:   		        109712
+		Size in Library:		        109712
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.exe"                                             03/09/2003     06:18:16       109712  "9.0.0.333"        "A"           "bb984777-d9ff-11d7-c3b8-c9eeb5e074f7"  "c:\programas\ariagrorec\instalacion\nueva instalacion\ariagrorec\media\single_exe_image\disk images\disk1\setup.exe"
+
+><Disk1>Disk1 Files(3)<
+
+		Size of Files:   		        186310
+		Size in Library:		        186310
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.inx"                                             15/06/2011     19:33:30       186310  ""                 "A"           "27e954c2-23a3-6278-82a5-78e704bf569a"  "c:\programas\ariagrorec\instalacion\nueva instalacion\ariagrorec\script files\setup.inx"
+
+><Disk1>Disk1 Files(4)<
+
+		Size of Files:   		           415
+		Size in Library:		           415
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.ini"                                             15/06/2011     19:33:30          415  ""                 "A"           "64d9093c-a573-e0a7-0792-f89ef43051cb"  "c:\programas\ariagrorec\instalacion\nueva instalacion\ariagrorec\media\single_exe_image\disk images\disk1\setup.ini"
+
+>DefaultComponent<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+>Files<
+
+		Size of Files:   		      16974551
+		Size in Library:		       4858554
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"ariagrorec.exe"                                        15/06/2011     17:55:22     16932864  "4.2.0.6"          "A"           "e05d5aa4-c576-e040-1b38-56d40225de4b"  "c:\programas\ariagrorec\ariagrorec.exe"
+		"configagrorec.ini"                                     11/03/2010     19:55:12          231  ""                 "RA"          "4ea3ed3c-21b6-2403-de98-c358200f8b94"  "c:\programas\ariagrorec\configagrorec.ini"
+		"actua.avi"                                             11/03/2010     19:55:12         9484  ""                 "RA"          "08bcb534-daac-5098-686b-42c869e631a3"  "c:\programas\ariagrorec\actua.avi"
+		"entrada.dat"                                           24/12/2009     12:06:04        29631  ""                 "RA"          "763750a0-0e5f-7367-9a9e-149a5bd9c0d1"  "c:\programas\ariagrorec\entrada.dat"
+		"impre.dat"                                             17/06/2010     10:00:56            0  ""                 "RA"          "d98c1dd4-008f-04b2-e980-0998ecf8427e"  "c:\programas\ariagrorec\impre.dat"
+		"lanzaexp.dat"                                          24/12/2009     12:06:26           54  ""                 "RA"          "264fc989-7bc8-d468-4b29-6a5a2154c741"  "c:\programas\ariagrorec\lanzaexp.dat"
+		"logo.jpg"                                              11/03/2010     19:55:32         2244  ""                 "RA"          "5d16ee6c-48b0-5fbf-cc8a-700f74779741"  "c:\programas\ariagrorec\logo.jpg"
+		"ultempre.dat"                                          15/06/2011     17:48:58           31  ""                 "A"           "15302573-cfae-2d79-30a1-96b2438cbc99"  "c:\programas\ariagrorec\ultempre.dat"
+		"ultusu.dat"                                            11/03/2010     19:55:34            6  ""                 "RA"          "41d315c7-fa97-ad6e-42de-60a743e3df8e"  "c:\programas\ariagrorec\ultusu.dat"
+		"ultusut.dat"                                           18/06/2010     13:56:42            6  ""                 "RA"          "41d315c7-fa97-ad6e-42de-60a743e3df8e"  "c:\programas\ariagrorec\ultusut.dat"
+
+>NewComponent1<
+
+		Size of Files:   		      15712641
+		Size in Library:		       6263878
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"alzalbclasif.rpt"                                      11/03/2010     19:55:38        52224  ""                 "RA"          "e6c4a1ce-13fe-274e-68dd-384f6fa922db"  "c:\programas\ariagrorec\informes\alzalbclasif.rpt"
+		"alzaltacampo.rpt"                                      11/03/2010     19:55:38        43520  ""                 "RA"          "24b47560-9f2b-74b6-3cda-5f49deef1be8"  "c:\programas\ariagrorec\informes\alzaltacampo.rpt"
+		"alzaltasocio.rpt"                                      11/03/2010     19:55:38        44032  ""                 "RA"          "fa8c4092-4c41-49fc-c2b7-b1172be63f63"  "c:\programas\ariagrorec\informes\alzaltasocio.rpt"
+		"alzanticipos.rpt"                                      11/03/2010     19:55:38        46592  ""                 "RA"          "c6788e26-d621-0239-f896-9961007a8d9c"  "c:\programas\ariagrorec\informes\alzanticipos.rpt"
+		"alzbajacampo.rpt"                                      11/03/2010     19:55:38        43008  ""                 "RA"          "8ee5ec4a-f006-1620-f370-374367657c77"  "c:\programas\ariagrorec\informes\alzbajacampo.rpt"
+		"alzbajasocio.rpt"                                      11/03/2010     19:55:38        43008  ""                 "RA"          "f3f5926f-32af-49e3-3543-77a2088c4c89"  "c:\programas\ariagrorec\informes\alzbajasocio.rpt"
+		"alzcamposzonas.rpt"                                    26/11/2010     18:29:22        24576  ""                 "RA"          "d3695dfa-f07c-846d-597d-904752ec0b42"  "c:\programas\ariagrorec\informes\alzcamposzonas.rpt"
+		"alzcertificreten.rpt"                                  04/03/2011     12:34:14        83456  ""                 "RA"          "bf09f36b-1a6a-dcae-6367-900b993b7126"  "c:\programas\ariagrorec\informes\alzcertificreten.rpt"
+		"alzcertificreten_ant.rpt"                              03/03/2011     18:37:22        63488  ""                 "RA"          "13357e4d-4f7d-8561-fef9-b105c1d05185"  "c:\programas\ariagrorec\informes\alzcertificreten_ant.rpt"
+		"alzentradassocios.rpt"                                 13/12/2010     18:26:56        14336  ""                 "RA"          "6e218136-5644-9a01-e0b6-2b2e8bd5d652"  "c:\programas\ariagrorec\informes\alzentradassocios.rpt"
+		"alzentradassocios1.rpt"                                27/05/2011     09:49:56        14336  ""                 "RA"          "949a83cf-2622-af0e-1d71-994c83f1950f"  "c:\programas\ariagrorec\informes\alzentradassocios1.rpt"
+		"alzentradastrans.rpt"                                  25/10/2010     08:56:06        15872  ""                 "RA"          "dfc50792-9afb-0303-76ee-daa67d1d4414"  "c:\programas\ariagrorec\informes\alzentradastrans.rpt"
+		"alzfactadv.rpt"                                        23/02/2011     12:26:54        53248  ""                 "RA"          "2eb007d2-f01f-15d1-87b7-6bc90b3e3445"  "c:\programas\ariagrorec\informes\alzfactadv.rpt"
+		"alzfactalmz.rpt"                                       11/03/2010     19:55:38        45056  ""                 "RA"          "4796c749-10f1-aa18-5925-3e7ed9337070"  "c:\programas\ariagrorec\informes\alzfactalmz.rpt"
+		"alzfactindustria.rpt"                                  29/03/2010     19:05:42        49152  ""                 "RA"          "ba331e04-c55a-1a0b-b4f5-88d18c0bf1af"  "c:\programas\ariagrorec\informes\alzfactindustria.rpt"
+		"alzfactsocios-correcto.rpt"                            11/03/2010     19:55:38        90112  ""                 "RA"          "167d6d97-1e25-7fd7-78c4-100b6895d535"  "c:\programas\ariagrorec\informes\alzfactsocios-correcto.rpt"
+		"alzfactsocios.rpt"                                     15/04/2011     17:29:44        98816  ""                 "RA"          "4b2ba7ba-09b3-629b-88a3-072390e20872"  "c:\programas\ariagrorec\informes\alzfactsocios.rpt"
+		"alzfacttransporte.rpt"                                 22/10/2010     17:28:32        50176  ""                 "RA"          "0e2620d8-9e76-6eab-7674-194cd1a720b2"  "c:\programas\ariagrorec\informes\alzfacttransporte.rpt"
+		"alzimprecibos.rpt"                                     23/03/2010     14:18:44        14336  ""                 "RA"          "404bb385-3506-7c56-4414-e80d9ec10b2d"  "c:\programas\ariagrorec\informes\alzimprecibos.rpt"
+		"alzliquidacion.rpt"                                    11/03/2010     19:55:38        56320  ""                 "RA"          "8dc103d9-9517-f4ec-9f3a-0521c0b679ad"  "c:\programas\ariagrorec\informes\alzliquidacion.rpt"
+		"alzpartes.rpt"                                         21/03/2011     11:50:32        51712  ""                 "RA"          "e7cc6c89-9bc8-9a94-4676-caa589af4718"  "c:\programas\ariagrorec\informes\alzpartes.rpt"
+		"alzprevpagosliq.rpt"                                   11/03/2010     19:55:38        14848  ""                 "RA"          "753c0a24-98fb-4791-f056-ee4012df87ad"  "c:\programas\ariagrorec\informes\alzprevpagosliq.rpt"
+		"alzprevpagosliqind.rpt"                                11/03/2010     19:55:40        16384  ""                 "RA"          "51a77cb7-ba62-b9a2-96da-df29453c3067"  "c:\programas\ariagrorec\informes\alzprevpagosliqind.rpt"
+		"alztransmision.rpt"                                    11/03/2010     19:55:40        43520  ""                 "RA"          "54b5bf2b-2ce3-56e0-382e-b8a61046a858"  "c:\programas\ariagrorec\informes\alztransmision.rpt"
+		"casalbclasif.rpt"                                      02/06/2010     14:03:14        21504  ""                 "RA"          "be9bc746-32a8-bb54-693c-7ebb2969dd31"  "c:\programas\ariagrorec\informes\casalbclasif.rpt"
+		"casalmzalbaran.rpt"                                    07/10/2010     17:59:00        14848  ""                 "RA"          "9ed171e3-2a2e-df6c-5820-7ae3331941d7"  "c:\programas\ariagrorec\informes\casalmzalbaran.rpt"
+		"casalmzinfentradas.rpt"                                19/04/2011     17:10:12        15360  ""                 "RA"          "b00e32c3-3f1b-5222-1121-e2607c81618d"  "c:\programas\ariagrorec\informes\casalmzinfentradas.rpt"
+		"casalmzinfentradasdiario.rpt"                          19/04/2011     18:14:34        13824  ""                 "RA"          "b8a09229-32d1-8cb5-36c1-40ec2f638fd4"  "c:\programas\ariagrorec\informes\casalmzinfentradasdiario.rpt"
+		"casaltacampo.rpt"                                      26/05/2010     12:00:34        12800  ""                 "RA"          "50a1e0ef-019d-9361-228c-69da10ed4ff4"  "c:\programas\ariagrorec\informes\casaltacampo.rpt"
+		"casaltasocio.rpt"                                      26/05/2010     12:02:10        12800  ""                 "RA"          "5ac81a05-99e0-ec87-2917-a7b26708207f"  "c:\programas\ariagrorec\informes\casaltasocio.rpt"
+		"casanticipos.rpt"                                      02/09/2010     12:40:46        18432  ""                 "RA"          "3bfff916-a332-944e-0c1a-d04887c4d940"  "c:\programas\ariagrorec\informes\casanticipos.rpt"
+		"casbajacampo.rpt"                                      26/05/2010     12:11:54        12288  ""                 "RA"          "aae52fc6-da92-41e0-061f-ce5c0a2a5782"  "c:\programas\ariagrorec\informes\casbajacampo.rpt"
+		"casbajasocio.rpt"                                      26/05/2010     12:12:48        12288  ""                 "RA"          "3600ea7e-ffa8-f059-bf25-3da588e2b0ab"  "c:\programas\ariagrorec\informes\casbajasocio.rpt"
+		"casbodalbaran.rpt"                                     16/07/2010     10:25:40        14336  ""                 "RA"          "4e0685a5-a85a-ac31-75c4-ca73db8fa783"  "c:\programas\ariagrorec\informes\casbodalbaran.rpt"
+		"cascertificreten.rpt"                                  26/05/2010     12:13:08        19968  ""                 "RA"          "5fb39807-26bc-ecec-8810-ed659dbe1b0f"  "c:\programas\ariagrorec\informes\cascertificreten.rpt"
+		"casfactadv.rpt"                                        26/05/2010     12:13:56        19456  ""                 "RA"          "d0a9cd40-30f6-6ad5-d8a4-c0f89fe87be7"  "c:\programas\ariagrorec\informes\casfactadv.rpt"
+		"casfactalmz.rpt"                                       26/05/2010     12:14:22        14336  ""                 "RA"          "09965dc5-e800-70dc-dccb-c6526d4b6997"  "c:\programas\ariagrorec\informes\casfactalmz.rpt"
+		"casfactbod.rpt"                                        09/05/2011     10:48:50        17920  ""                 "RA"          "c62426e0-37aa-2231-3c9b-5ec361070030"  "c:\programas\ariagrorec\informes\casfactbod.rpt"
+		"casfactindustria.rpt"                                  26/05/2010     12:14:52        17920  ""                 "RA"          "74ce1393-f9c3-19c9-cb86-62aa6c3b537d"  "c:\programas\ariagrorec\informes\casfactindustria.rpt"
+		"casfactsocios.rpt"                                     27/10/2010     10:26:08        48128  ""                 "RA"          "729ac801-3a1a-b95d-f757-24599276cd7b"  "c:\programas\ariagrorec\informes\casfactsocios.rpt"
+		"casfactsociosbod.rpt"                                  21/01/2011     20:08:10        49664  ""                 "RA"          "cdf05d52-b4db-c2a7-2e1c-b4353dc705c3"  "c:\programas\ariagrorec\informes\casfactsociosbod.rpt"
+		"casinfhcoentclas2.rpt"                                 27/07/2010     14:33:56        25600  ""                 "RA"          "2ae34acb-6658-0198-5091-5343981e5c8e"  "c:\programas\ariagrorec\informes\casinfhcoentclas2.rpt"
+		"casinfhcoentclas3.rpt"                                 27/07/2010     14:31:22        25088  ""                 "RA"          "823c5ad4-7a41-9914-a9ad-5657c7946487"  "c:\programas\ariagrorec\informes\casinfhcoentclas3.rpt"
+		"casinftomadatos.rpt"                                   30/03/2011     12:31:00        19456  ""                 "RA"          "ba3826f6-ac8d-181f-2391-492795d9be24"  "c:\programas\ariagrorec\informes\casinftomadatos.rpt"
+		"casliquidacion.rpt"                                    27/10/2010     09:52:10        54272  ""                 "RA"          "56f958ac-6b6d-9eaa-ed11-0a0a433042d5"  "c:\programas\ariagrorec\informes\casliquidacion.rpt"
+		"caspartes.rpt"                                         26/05/2010     12:16:12        15872  ""                 "RA"          "b509eaf5-5071-42e7-24d3-2fe8a0bb5bb1"  "c:\programas\ariagrorec\informes\caspartes.rpt"
+		"casresumdocsoc.rpt"                                    26/05/2010     12:17:18        39424  ""                 "RA"          "43cf67b6-3276-58a2-7cfb-90c02304a71f"  "c:\programas\ariagrorec\informes\casresumdocsoc.rpt"
+		"castransmision.rpt"                                    26/05/2010     12:19:26        12288  ""                 "RA"          "8526f3b9-4637-15d2-cfc2-ba701697b778"  "c:\programas\ariagrorec\informes\castransmision.rpt"
+		"catalbclasif.rpt"                                      11/03/2010     19:55:40        75264  ""                 "RA"          "97a392a8-9b4e-0139-ebba-96aae343ac6a"  "c:\programas\ariagrorec\informes\catalbclasif.rpt"
+		"cataltacampo.rpt"                                      11/03/2010     19:55:40        67072  ""                 "RA"          "89448a06-88e0-87b4-9da6-063c498773ab"  "c:\programas\ariagrorec\informes\cataltacampo.rpt"
+		"cataltasocio.rpt"                                      11/03/2010     19:55:40        67072  ""                 "RA"          "d8e3ce52-7891-9bd6-798e-7e159f90fa67"  "c:\programas\ariagrorec\informes\cataltasocio.rpt"
+		"catanticipos.rpt"                                      11/03/2010     19:55:40        70144  ""                 "RA"          "dd0818e2-ca5a-3920-545f-b6b906177330"  "c:\programas\ariagrorec\informes\catanticipos.rpt"
+		"catbajacampo.rpt"                                      11/03/2010     19:55:40        66048  ""                 "RA"          "46f12ea0-49b4-aabf-9ec4-7d2135785e29"  "c:\programas\ariagrorec\informes\catbajacampo.rpt"
+		"catbajasocio.rpt"                                      11/03/2010     19:55:40        66048  ""                 "RA"          "0eba1c37-8355-8f6d-d7d0-ba3a3370feb7"  "c:\programas\ariagrorec\informes\catbajasocio.rpt"
+		"catcertificreten.rpt"                                  10/06/2010     16:53:50        75264  ""                 "RA"          "8b5f6ccb-8dd0-637a-f33e-093318f2efd7"  "c:\programas\ariagrorec\informes\catcertificreten.rpt"
+		"catfactadv.rpt"                                        11/03/2010     19:55:40       127488  ""                 "RA"          "ceb1fdbb-a83d-7e25-5863-5259e1910dc1"  "c:\programas\ariagrorec\informes\catfactadv.rpt"
+		"catfactalmz.rpt"                                       11/03/2010     19:55:40       122880  ""                 "RA"          "e832b740-323c-b6a2-f456-7b4d9c502155"  "c:\programas\ariagrorec\informes\catfactalmz.rpt"
+		"catfactindustria.rpt"                                  11/03/2010     19:55:40        72192  ""                 "RA"          "641b8b8b-227f-e010-0095-b4252e592c8b"  "c:\programas\ariagrorec\informes\catfactindustria.rpt"
+		"catfactsocios.rpt"                                     11/03/2010     19:55:40       155648  ""                 "RA"          "2163feb2-f0bc-1bf7-3642-6c835315e230"  "c:\programas\ariagrorec\informes\catfactsocios.rpt"
+		"catliquidacion.rpt"                                    11/03/2010     19:55:40       108544  ""                 "RA"          "867fe744-e204-924e-b336-b5b9fed96fa0"  "c:\programas\ariagrorec\informes\catliquidacion.rpt"
+		"catmansocios.rpt"                                      21/07/2010     11:44:36         9728  ""                 "RA"          "75e6d04d-c108-efcb-efd9-5ee9fb73acee"  "c:\programas\ariagrorec\informes\catmansocios.rpt"
+		"catpartes.rpt"                                         21/03/2011     12:01:50        74752  ""                 "RA"          "9a396282-0743-3db6-2db1-fa403530353c"  "c:\programas\ariagrorec\informes\catpartes.rpt"
+		"catprevpagosliq.rpt"                                   11/03/2010     19:55:40        14336  ""                 "RA"          "adb7de7e-0ba8-fb16-c477-5989f0014d2c"  "c:\programas\ariagrorec\informes\catprevpagosliq.rpt"
+		"catprevpagosliq1.rpt"                                  11/03/2010     19:55:40        14848  ""                 "RA"          "a317ede2-62a1-87f8-eec4-1a6094f65674"  "c:\programas\ariagrorec\informes\catprevpagosliq1.rpt"
+		"catresumdocsoc.rpt"                                    08/11/2010     10:50:18        94720  ""                 "RA"          "266493d5-1c89-37a3-5cda-3fe306a7e2be"  "c:\programas\ariagrorec\informes\catresumdocsoc.rpt"
+		"catsocioetiq.rpt"                                      11/03/2010     19:55:40         8192  ""                 "RA"          "9cfbda4a-1f29-4904-c5bb-97fef417ee3d"  "c:\programas\ariagrorec\informes\catsocioetiq.rpt"
+		"cattransmision.rpt"                                    11/03/2010     19:55:40        67072  ""                 "RA"          "5b94e970-cf78-ac54-6cdf-9b2f78bcd23d"  "c:\programas\ariagrorec\informes\cattransmision.rpt"
+		"macfactadv.rpt"                                        28/10/2010     13:16:42       177664  ""                 "RA"          "9d74c17b-e603-9914-09b8-c62947eab574"  "c:\programas\ariagrorec\informes\macfactadv.rpt"
+		"macfactsocios.rpt"                                     28/10/2010     13:14:14       196096  ""                 "RA"          "085e64fd-7f41-4b5c-b08c-141619f81f5c"  "c:\programas\ariagrorec\informes\macfactsocios.rpt"
+		"macfactsociosbod.rpt"                                  28/10/2010     13:13:32       225280  ""                 "RA"          "597e1b88-4ba9-9d5c-919e-f5c66fa82d7f"  "c:\programas\ariagrorec\informes\macfactsociosbod.rpt"
+		"macpartes.rpt"                                         21/03/2011     12:18:14       178688  ""                 "RA"          "f5039778-663b-3f71-74c7-4ae8959f8305"  "c:\programas\ariagrorec\informes\macpartes.rpt"
+		"macsociocarta.rpt"                                     03/11/2010     13:54:00       171520  ""                 "RA"          "9be9281b-6424-b625-336a-f9b5e9d84044"  "c:\programas\ariagrorec\informes\macsociocarta.rpt"
+		"moialbclasif.rpt"                                      06/08/2010     08:42:42       459264  ""                 "RA"          "573d0525-7e10-7fd2-725d-f7c88ea99742"  "c:\programas\ariagrorec\informes\moialbclasif.rpt"
+		"moialmzextsocentradas.rpt"                             11/03/2010     19:55:42       452608  ""                 "RA"          "78042bcf-10ae-2be7-9c50-b3ed424fd193"  "c:\programas\ariagrorec\informes\moialmzextsocentradas.rpt"
+		"moiapocertificado.rpt"                                 20/05/2011     11:31:50       456704  ""                 "RA"          "e2d0ff34-e67b-860d-a434-a371366734fc"  "c:\programas\ariagrorec\informes\moiapocertificado.rpt"
+		"moibodalbaran.rpt"                                     11/03/2010     19:55:42       452096  ""                 "RA"          "c2989853-bbb2-759d-2191-5740fbe2c3cc"  "c:\programas\ariagrorec\informes\moibodalbaran.rpt"
+		"moibodextsocentradas.rpt"                              24/11/2010     11:10:54       453632  ""                 "RA"          "70b80bdf-5808-78db-f274-3ca872a12e5b"  "c:\programas\ariagrorec\informes\moibodextsocentradas.rpt"
+		"moicertificreten.rpt"                                  10/03/2011     11:31:38       460288  ""                 "RA"          "a9e0557d-24b4-a4cf-cfa7-d779c06edec8"  "c:\programas\ariagrorec\informes\moicertificreten.rpt"
+		"moifactadv.rpt"                                        30/09/2010     10:49:34       457728  ""                 "RA"          "85dbee5d-903e-6e0c-c7d3-a7374e8b0db3"  "c:\programas\ariagrorec\informes\moifactadv.rpt"
+		"moifactadv_old.rpt"                                    06/08/2010     08:38:22       460288  ""                 "RA"          "7cfcacdf-ef61-e2d4-5c27-135a144f752f"  "c:\programas\ariagrorec\informes\moifactadv_old.rpt"
+		"moifactbod.rpt"                                        29/10/2010     13:03:44       455680  ""                 "RA"          "d3e5445e-d2d0-a56b-b331-a3ee4ee71ee9"  "c:\programas\ariagrorec\informes\moifactbod.rpt"
+		"moifactbod_old.rpt"                                    11/03/2010     19:55:42       456192  ""                 "RA"          "493141c8-d6a6-8603-0374-ebbd96c0dbe5"  "c:\programas\ariagrorec\informes\moifactbod_old.rpt"
+		"moifactsocios.rpt"                                     28/10/2010     13:17:34       476672  ""                 "RA"          "8941909d-da23-83dc-7287-4765e21dc635"  "c:\programas\ariagrorec\informes\moifactsocios.rpt"
+		"moifactsociosbod.rpt"                                  12/11/2010     12:03:42       510976  ""                 "RA"          "7d364fb2-24c4-5330-9234-dd95802df9eb"  "c:\programas\ariagrorec\informes\moifactsociosbod.rpt"
+		"moiliquidacion.rpt"                                    11/03/2010     19:55:44       458240  ""                 "RA"          "85592b36-9956-43fc-4524-e4658cfcf6d6"  "c:\programas\ariagrorec\informes\moiliquidacion.rpt"
+		"moiprevpagosliqbod.rpt"                                11/03/2010     19:55:44        14848  ""                 "RA"          "22593d1b-178d-d894-bab3-b4445aafd07b"  "c:\programas\ariagrorec\informes\moiprevpagosliqbod.rpt"
+		"moisociocarta.rpt"                                     20/12/2010     13:33:44       451584  ""                 "RA"          "eac7d444-f5ea-784f-d4d1-b7e741a54c6b"  "c:\programas\ariagrorec\informes\moisociocarta.rpt"
+		"natalbclasif.rpt"                                      10/11/2010     18:06:18        41984  ""                 "RA"          "d962a93b-94d7-e3ac-aa5d-a2e94bcb5f45"  "c:\programas\ariagrorec\informes\natalbclasif.rpt"
+		"natimprecibos.rpt"                                     29/06/2010     08:56:58        15360  ""                 "RA"          "8358fee1-e94e-71e6-d91d-6b264c50cd5c"  "c:\programas\ariagrorec\informes\natimprecibos.rpt"
+		"picalbclasif.rpt"                                      29/10/2010     16:37:58        26112  ""                 "RA"          "a927c493-5ac0-4d12-0314-75dcbeae2eb7"  "c:\programas\ariagrorec\informes\picalbclasif.rpt"
+		"picaltacampo.rpt"                                      25/10/2010     18:14:14        12288  ""                 "RA"          "b855f3f7-4006-1e9b-e54f-2d9b584d3770"  "c:\programas\ariagrorec\informes\picaltacampo.rpt"
+		"picaltasocio.rpt"                                      25/10/2010     18:15:54        12800  ""                 "RA"          "e003747d-6477-7e96-0128-44417dadb338"  "c:\programas\ariagrorec\informes\picaltasocio.rpt"
+		"picbajacampo.rpt"                                      25/10/2010     18:20:08        12288  ""                 "RA"          "82f777ca-c989-1bbd-9e56-b85e20bc4e34"  "c:\programas\ariagrorec\informes\picbajacampo.rpt"
+		"picbajasocio.rpt"                                      25/10/2010     18:17:46        12288  ""                 "RA"          "e4f9aef1-7cf0-5cb7-dc4f-3a26ed62cbc4"  "c:\programas\ariagrorec\informes\picbajasocio.rpt"
+		"picentrada.rpt"                                        26/10/2010     10:27:04        20992  ""                 "RA"          "06d71d2c-6c37-6ac6-af3c-34819963db60"  "c:\programas\ariagrorec\informes\picentrada.rpt"
+		"picentradassocios.rpt"                                 13/12/2010     18:16:38        14336  ""                 "RA"          "3dff703d-67e4-282c-1196-ce9c25fd1331"  "c:\programas\ariagrorec\informes\picentradassocios.rpt"
+		"picentradassocios1.rpt"                                27/05/2011     09:56:04        14336  ""                 "RA"          "98e9bacc-fe5c-9163-7d2a-b89c9d90827c"  "c:\programas\ariagrorec\informes\picentradassocios1.rpt"
+		"picentradastrans.rpt"                                  21/10/2010     10:55:08        19968  ""                 "RA"          "72fad97b-86a5-92a2-252d-71e1728fa86a"  "c:\programas\ariagrorec\informes\picentradastrans.rpt"
+		"picfactsocios.rpt"                                     28/01/2011     18:52:36        54272  ""                 "RA"          "d634481a-ccfb-047a-3daa-8b3793c4a256"  "c:\programas\ariagrorec\informes\picfactsocios.rpt"
+		"picfacttransporte.rpt"                                 21/10/2010     10:29:36        17408  ""                 "RA"          "114c7bfa-d0ce-cac4-d5b7-c6c852dad71e"  "c:\programas\ariagrorec\informes\picfacttransporte.rpt"
+		"picimprecibos.rpt"                                     24/09/2010     09:38:44        18432  ""                 "RA"          "7a8a3e70-c48b-0e3a-0e02-5968fef3f4f9"  "c:\programas\ariagrorec\informes\picimprecibos.rpt"
+		"picinfasesorianomimes.rpt"                             04/11/2010     12:48:26        13824  ""                 "RA"          "4745d896-03bb-42bc-8660-c4e8123dc8ca"  "c:\programas\ariagrorec\informes\picinfasesorianomimes.rpt"
+		"picinfasesorianomimes1.rpt"                            04/11/2010     12:47:40        11264  ""                 "RA"          "5a2aee79-5a30-f4d6-c201-b2047bad8b49"  "c:\programas\ariagrorec\informes\picinfasesorianomimes1.rpt"
+		"picinfcampos.rpt"                                      14/12/2010     19:16:08        69632  ""                 "RA"          "4d1fe5d0-0cd3-9c25-21eb-f4d6de9f0bed"  "c:\programas\ariagrorec\informes\picinfcampos.rpt"
+		"picinfcamposrecintos.rpt"                              03/06/2011     13:05:52        20992  ""                 "RA"          "fb314f8f-717b-4d41-72bd-f831de11be38"  "c:\programas\ariagrorec\informes\picinfcamposrecintos.rpt"
+		"picinfentradasclas.rpt"                                15/10/2010     09:09:40        14848  ""                 "RA"          "8eb1105a-503e-8d74-90b6-8b2cc0a876b1"  "c:\programas\ariagrorec\informes\picinfentradasclas.rpt"
+		"picinfentradasclas1.rpt"                               15/10/2010     09:11:44        19968  ""                 "RA"          "1695acba-2572-00bf-9107-2b8744c9a170"  "c:\programas\ariagrorec\informes\picinfentradasclas1.rpt"
+		"picinfgtosconcep.rpt"                                  01/03/2011     11:10:12        14848  ""                 "RA"          "326cf17a-1d43-af52-93fb-6459ec74e460"  "c:\programas\ariagrorec\informes\picinfgtosconcep.rpt"
+		"picinfhorasmens.rpt"                                   07/09/2010     16:50:18        12800  ""                 "RA"          "8fa31896-00bf-433f-4733-421034ed2260"  "c:\programas\ariagrorec\informes\picinfhorasmens.rpt"
+		"picinfkilossocio.rpt"                                  09/12/2010     12:20:22        11776  ""                 "RA"          "bbee1b2b-9eaa-a157-9189-9a46bb937907"  "c:\programas\ariagrorec\informes\picinfkilossocio.rpt"
+		"picinftomadatos.rpt"                                   06/05/2011     08:36:48        30720  ""                 "RA"          "426872d4-ab36-283e-9430-fb2c35e849e6"  "c:\programas\ariagrorec\informes\picinftomadatos.rpt"
+		"picliquidacion.rpt"                                    03/03/2011     14:07:16        61440  ""                 "RA"          "382e33db-b947-2ab6-9455-8c8779d41888"  "c:\programas\ariagrorec\informes\picliquidacion.rpt"
+		"picprevpagosliq.rpt"                                   01/03/2011     19:28:02        15360  ""                 "RA"          "0c738d29-7ad9-b161-12a0-ab19d35f817f"  "c:\programas\ariagrorec\informes\picprevpagosliq.rpt"
+		"picresumdocsoc.rpt"                                    08/11/2010     10:58:10        39936  ""                 "RA"          "a01ebad4-bcdf-62da-82b3-e287e6c7c2a8"  "c:\programas\ariagrorec\informes\picresumdocsoc.rpt"
+		"picsociocarta.rpt"                                     13/01/2011     18:25:08        13824  ""                 "RA"          "2bbd692d-756c-d4e3-08f5-c61a16e25b8a"  "c:\programas\ariagrorec\informes\picsociocarta.rpt"
+		"pictransmision.rpt"                                    25/10/2010     18:21:12        12288  ""                 "RA"          "d812ac1e-f093-062f-2703-f164f359ade9"  "c:\programas\ariagrorec\informes\pictransmision.rpt"
+		"quaalbclasif.rpt"                                      11/05/2011     19:50:22      1258496  ""                 "RA"          "fa9cbfca-01ea-b28b-e1bf-34c53ecab00d"  "c:\programas\ariagrorec\informes\quaalbclasif.rpt"
+		"quaentradassocios.rpt"                                 03/06/2011     13:54:44        14336  ""                 "RA"          "f2506f47-fb83-6b6f-2069-11d4bae3a07b"  "c:\programas\ariagrorec\informes\quaentradassocios.rpt"
+		"quaentradassocios1.rpt"                                03/06/2011     14:07:06        13824  ""                 "RA"          "e9e1767e-9a31-4f89-5e63-49095ad8790e"  "c:\programas\ariagrorec\informes\quaentradassocios1.rpt"
+		"radvlistarticulos.rpt"                                 11/03/2010     19:55:44        12288  ""                 "RA"          "9ad541a4-c0b2-8438-e7a3-004ec72d4dab"  "c:\programas\ariagrorec\informes\radvlistarticulos.rpt"
+		"radvlistfamilias.rpt"                                  11/03/2010     19:55:44         8704  ""                 "RA"          "39afc3df-cac7-4192-6c3f-7b0d43ee75ea"  "c:\programas\ariagrorec\informes\radvlistfamilias.rpt"
+		"radvmatactiva.rpt"                                     14/02/2011     17:04:44         8704  ""                 "RA"          "96aad850-fac0-91f9-dc22-5875a88f8144"  "c:\programas\ariagrorec\informes\radvmatactiva.rpt"
+		"radvrdtoarticulo.rpt"                                  07/10/2010     10:13:26        11776  ""                 "RA"          "8a133dd1-6388-1052-3b41-cf223da02539"  "c:\programas\ariagrorec\informes\radvrdtoarticulo.rpt"
+		"radvtratamientos.rpt"                                  11/03/2010     19:55:44        10240  ""                 "RA"          "69afa856-58f3-1931-3381-044c1a938b85"  "c:\programas\ariagrorec\informes\radvtratamientos.rpt"
+		"ralbaranesterc.rpt"                                    11/03/2010     19:55:44        12288  ""                 "RA"          "6fb9c8bf-fc29-cc99-7aab-9331b0caa927"  "c:\programas\ariagrorec\informes\ralbaranesterc.rpt"
+		"ralbfactuterc.rpt"                                     11/03/2010     19:55:44        12288  ""                 "RA"          "c89598bf-f5cd-9700-195e-1959f69456a4"  "c:\programas\ariagrorec\informes\ralbfactuterc.rpt"
+		"ralbpdtesterc.rpt"                                     11/03/2010     19:55:44        11776  ""                 "RA"          "91d89774-0bce-ca8f-7da6-3b5dddbdee31"  "c:\programas\ariagrorec\informes\ralbpdtesterc.rpt"
+		"ralmzextentradas.rpt"                                  22/09/2010     11:51:48        22016  ""                 "RA"          "affeeb46-9f67-dc89-d635-c8d0bebe35b4"  "c:\programas\ariagrorec\informes\ralmzextentradas.rpt"
+		"ralmzextsocentradas.rpt"                               11/03/2010     19:55:44        12800  ""                 "RA"          "c906843f-912d-11f9-6bf7-6a3cb106c217"  "c:\programas\ariagrorec\informes\ralmzextsocentradas.rpt"
+		"ralmzinfentradas.rpt"                                  11/03/2010     19:55:44        14848  ""                 "RA"          "76782c91-50dd-96de-28fc-60b787b89de7"  "c:\programas\ariagrorec\informes\ralmzinfentradas.rpt"
+		"ralmzinfentradasdiario.rpt"                            11/03/2010     19:55:44        13312  ""                 "RA"          "b3c0475e-1856-5c1d-2898-e462e1cc2fc2"  "c:\programas\ariagrorec\informes\ralmzinfentradasdiario.rpt"
+		"rapocertificado.rpt"                                   20/05/2011     11:31:50       456704  ""                 "RA"          "e2d0ff34-e67b-860d-a434-a371366734fc"  "c:\programas\ariagrorec\informes\rapocertificado.rpt"
+		"rapoinforme.rpt"                                       29/03/2011     18:55:34        10240  ""                 "RA"          "ba930563-febd-573d-0559-4e7ca970bc5b"  "c:\programas\ariagrorec\informes\rapoinforme.rpt"
+		"rbodextentradas.rpt"                                   24/11/2010     11:12:14        22016  ""                 "RA"          "868e2740-712d-c823-cfe7-85ee52fb73eb"  "c:\programas\ariagrorec\informes\rbodextentradas.rpt"
+		"rbodextsocentradas.rpt"                                24/11/2010     11:10:12        13824  ""                 "RA"          "b6315ee4-f88a-9c33-fdcb-6d09b84f5543"  "c:\programas\ariagrorec\informes\rbodextsocentradas.rpt"
+		"rbodinfentradas.rpt"                                   24/11/2010     11:01:58        14848  ""                 "RA"          "019bddbb-d9f6-5e3a-f83c-1717d74f2e96"  "c:\programas\ariagrorec\informes\rbodinfentradas.rpt"
+		"rbodinfentradasvariedad.rpt"                           24/11/2010     11:04:58        14336  ""                 "RA"          "0e096842-a609-b062-9106-d6857ada14d8"  "c:\programas\ariagrorec\informes\rbodinfentradasvariedad.rpt"
+		"rbodliqautoconsumo.rpt"                                15/04/2011     13:51:50        15872  ""                 "RA"          "c6ebaf2a-d69d-5765-e079-b3872dc8d7c8"  "c:\programas\ariagrorec\informes\rbodliqautoconsumo.rpt"
+		"rbodlistconsumo.rpt"                                   06/04/2010     09:48:00        13312  ""                 "RA"          "590ce9f7-bf2e-2929-5958-021d979890cd"  "c:\programas\ariagrorec\informes\rbodlistconsumo.rpt"
+		"rbodlistdiferencia.rpt"                                07/05/2010     13:15:22        11264  ""                 "RA"          "fad32843-123e-0300-dc68-a299179b6c76"  "c:\programas\ariagrorec\informes\rbodlistdiferencia.rpt"
+		"rbodlistdiferenciares.rpt"                             29/04/2011     10:09:26        11264  ""                 "RA"          "b683fcf7-1acd-638d-4a6c-d4ae9ded1ed0"  "c:\programas\ariagrorec\informes\rbodlistdiferenciares.rpt"
+		"rchequenomina.rpt"                                     01/06/2010     09:36:34        31232  ""                 "RA"          "b90a2f57-9b5b-66c6-26d2-ec5891e1bb8e"  "c:\programas\ariagrorec\informes\rchequenomina.rpt"
+		"rcontabfaz.rpt"                                        11/03/2010     19:55:44         9216  ""                 "RA"          "902f2d49-8662-68cd-b7e8-28a8bf1844cf"  "c:\programas\ariagrorec\informes\rcontabfaz.rpt"
+		"rcontabsoc.rpt"                                        11/03/2010     19:55:44         9216  ""                 "RA"          "c05ee2e2-3a0e-3368-523b-30e4b305cf31"  "c:\programas\ariagrorec\informes\rcontabsoc.rpt"
+		"rcontabter.rpt"                                        11/03/2010     19:55:44         9216  ""                 "RA"          "3554efc3-a918-2a67-405a-c3e73760294c"  "c:\programas\ariagrorec\informes\rcontabter.rpt"
+		"rcontabtra.rpt"                                        19/05/2010     10:59:58         9216  ""                 "RA"          "15d27327-ef5a-9814-6862-cdb973e8c21a"  "c:\programas\ariagrorec\informes\rcontabtra.rpt"
+		"rcontroldestrio.rpt"                                   17/11/2010     19:17:32        13312  ""                 "RA"          "f9538533-d4f1-7338-db29-12f4d238b6a7"  "c:\programas\ariagrorec\informes\rcontroldestrio.rpt"
+		"rerrorescampos.rpt"                                    11/03/2010     19:55:46        14848  ""                 "RA"          "8538ef84-2e35-533a-a10a-7a3848fad2bb"  "c:\programas\ariagrorec\informes\rerrorescampos.rpt"
+		"rerrorestrasbascula.rpt"                               11/03/2010     19:55:46         9216  ""                 "RA"          "a4c9e31b-d9b0-74d9-4fe7-c2be4120a455"  "c:\programas\ariagrorec\informes\rerrorestrasbascula.rpt"
+		"rerrorestraspaso.rpt"                                  11/03/2010     19:55:46        10752  ""                 "RA"          "de0c8b23-c2ae-5d42-0580-de6e0204d56a"  "c:\programas\ariagrorec\informes\rerrorestraspaso.rpt"
+		"rerrorestrasrdto.rpt"                                  11/03/2010     19:55:46         8704  ""                 "RA"          "d18e0050-bdbb-9a3e-bd8b-8480409485c0"  "c:\programas\ariagrorec\informes\rerrorestrasrdto.rpt"
+		"rerrorestrastel.rpt"                                   11/03/2010     19:55:46         8704  ""                 "RA"          "88e3cf1a-15c5-c8fb-dafc-215a2ed6c42b"  "c:\programas\ariagrorec\informes\rerrorestrastel.rpt"
+		"rerrorestrastraza.rpt"                                 23/04/2010     12:50:24         9216  ""                 "RA"          "57e95632-2631-b321-9890-bf9d83c1e2b7"  "c:\programas\ariagrorec\informes\rerrorestrastraza.rpt"
+		"rerrorestraza.rpt"                                     11/03/2010     19:55:46         8704  ""                 "RA"          "fc1dccdf-a033-54ba-24b4-9323c57e9436"  "c:\programas\ariagrorec\informes\rerrorestraza.rpt"
+		"rfacprevfactretdetalle.rpt"                            31/03/2011     10:35:26        12800  ""                 "RA"          "09f19ed5-cd89-ea38-36c9-9b19848bf211"  "c:\programas\ariagrorec\informes\rfacprevfactretdetalle.rpt"
+		"rfacprevfactretresum.rpt"                              31/03/2011     10:36:06        11264  ""                 "RA"          "83f383b3-34da-619b-f04b-3c5a5923b988"  "c:\programas\ariagrorec\informes\rfacprevfactretresum.rpt"
+		"rinfalbdestrios.rpt"                                   27/04/2011     10:43:42        13824  ""                 "RA"          "7382f4f7-5b92-ab74-e4a4-87cdca6df042"  "c:\programas\ariagrorec\informes\rinfalbdestrios.rpt"
+		"rinfalbdestrios1.rpt"                                  19/04/2011     16:09:44        13824  ""                 "RA"          "1b66faa8-d3ba-f340-9612-f182334dc725"  "c:\programas\ariagrorec\informes\rinfalbdestrios1.rpt"
+		"rinfasesorianomi.rpt"                                  13/09/2010     18:09:30        11264  ""                 "RA"          "49bd6b34-32e2-cd65-3058-9eb8c7010b78"  "c:\programas\ariagrorec\informes\rinfasesorianomi.rpt"
+		"rinfasesorianomimes.rpt"                               03/11/2010     11:39:26        12800  ""                 "RA"          "e4669c03-f984-6db7-f02a-25f543ea5835"  "c:\programas\ariagrorec\informes\rinfasesorianomimes.rpt"
+		"rinfasesorianomimes1.rpt"                              03/11/2010     11:39:52        10752  ""                 "RA"          "c3053956-7d13-f850-eb12-271f3900186f"  "c:\programas\ariagrorec\informes\rinfasesorianomimes1.rpt"
+		"rinfcampos.rpt"                                        14/12/2010     19:29:34        67584  ""                 "RA"          "19be9536-29b7-711a-f496-e8db1c9dbfd6"  "c:\programas\ariagrorec\informes\rinfcampos.rpt"
+		"rinfcamposrecintos.rpt"                                03/06/2011     13:05:12        19968  ""                 "RA"          "cdc0b3ae-8e53-66b8-ec82-147676fe0281"  "c:\programas\ariagrorec\informes\rinfcamposrecintos.rpt"
+		"rinfclassocios.rpt"                                    11/03/2010     19:55:46        25088  ""                 "RA"          "9b282ccb-c595-547b-35d6-325d34f73dd5"  "c:\programas\ariagrorec\informes\rinfclassocios.rpt"
+		"rinfcomprobnomi.rpt"                                   02/11/2010     17:10:28        15360  ""                 "RA"          "ca81582d-9392-fa05-3cd1-7d9eb1e4ae99"  "c:\programas\ariagrorec\informes\rinfcomprobnomi.rpt"
+		"rinfdesvafo.rpt"                                       25/08/2010     14:25:06        75264  ""                 "RA"          "fb69f222-24a6-75f6-5268-0ab4bc69bb36"  "c:\programas\ariagrorec\informes\rinfdesvafo.rpt"
+		"rinfentradas.rpt"                                      17/05/2011     13:05:10        23040  ""                 "RA"          "09f5bfb7-55c2-e546-241c-5565f79fbd6f"  "c:\programas\ariagrorec\informes\rinfentradas.rpt"
+		"rinfentradascapataz.rpt"                               15/10/2010     13:23:50        25088  ""                 "RA"          "95fc8023-786f-08c1-4e9f-ff31813925b0"  "c:\programas\ariagrorec\informes\rinfentradascapataz.rpt"
+		"rinfentradasclas.rpt"                                  07/06/2011     11:46:06        14848  ""                 "RA"          "ecdbff26-3432-6301-03e2-0cd1f25b2951"  "c:\programas\ariagrorec\informes\rinfentradasclas.rpt"
+		"rinfentradasclas1.rpt"                                 11/03/2010     19:55:46        17920  ""                 "RA"          "e80a07e7-39f5-e491-686d-0d30ae6afce9"  "c:\programas\ariagrorec\informes\rinfentradasclas1.rpt"
+		"rinfentradassocios.rpt"                                13/12/2010     18:26:56        14336  ""                 "RA"          "6e218136-5644-9a01-e0b6-2b2e8bd5d652"  "c:\programas\ariagrorec\informes\rinfentradassocios.rpt"
+		"rinfentradassocios1.rpt"                               27/05/2011     09:45:10        14336  ""                 "RA"          "4488bc98-a66a-b3be-3255-8fb2d78b5fc7"  "c:\programas\ariagrorec\informes\rinfentradassocios1.rpt"
+		"rinfentradastrans.rpt"                                 18/10/2010     09:57:04        19968  ""                 "RA"          "9316e88b-dcf0-dba2-5819-b10f2d22e71c"  "c:\programas\ariagrorec\informes\rinfentradastrans.rpt"
+		"rinffactterc.rpt"                                      11/03/2010     19:55:46        16896  ""                 "RA"          "b26f889d-cc97-93f2-d72f-bb9bb0e61399"  "c:\programas\ariagrorec\informes\rinffactterc.rpt"
+		"rinfgtosconcep.rpt"                                    01/03/2011     10:36:16        12800  ""                 "RA"          "66132ee5-2418-f4af-380e-53f82ef36ae7"  "c:\programas\ariagrorec\informes\rinfgtosconcep.rpt"
+		"rinfhcoentclas.rpt"                                    11/03/2010     19:55:46        23552  ""                 "RA"          "dd2b3def-5d30-af72-7b4f-2fe94adc69d8"  "c:\programas\ariagrorec\informes\rinfhcoentclas.rpt"
+		"rinfhcoentclas1.rpt"                                   11/03/2010     19:55:46        18432  ""                 "RA"          "3c02a6ec-5e36-a810-e313-bfb6e7efeef9"  "c:\programas\ariagrorec\informes\rinfhcoentclas1.rpt"
+		"rinfhcoentclas2.rpt"                                   27/07/2010     10:41:18        25600  ""                 "RA"          "ba9d8227-5b4b-0527-dcb8-e742574f81d7"  "c:\programas\ariagrorec\informes\rinfhcoentclas2.rpt"
+		"rinfhcoentclas3.rpt"                                   27/07/2010     10:42:26        25088  ""                 "RA"          "0adb6188-ffa7-7aa3-2358-4c49292d49d9"  "c:\programas\ariagrorec\informes\rinfhcoentclas3.rpt"
+		"rinfhcoentclas4.rpt"                                   01/02/2011     19:26:02        27648  ""                 "RA"          "408fb52a-2643-92ee-98be-cf90b7609bed"  "c:\programas\ariagrorec\informes\rinfhcoentclas4.rpt"
+		"rinfhorasmens.rpt"                                     13/10/2010     16:16:52        14336  ""                 "RA"          "80090991-6f9a-a320-d868-e7b79c849c82"  "c:\programas\ariagrorec\informes\rinfhorasmens.rpt"
+		"rinfhorasmens1.rpt"                                    13/10/2010     16:20:20        13312  ""                 "RA"          "74c76c5c-3d46-fc73-d2a1-35e425f139b7"  "c:\programas\ariagrorec\informes\rinfhorasmens1.rpt"
+		"rinfhorasmensdetalle.rpt"                              15/06/2010     16:39:56        19968  ""                 "RA"          "7e71c8c2-5c2c-9168-337d-1712a45f970b"  "c:\programas\ariagrorec\informes\rinfhorasmensdetalle.rpt"
+		"rinfhorasmensnatural.rpt"                              28/07/2010     08:11:06        13824  ""                 "RA"          "498b9285-00df-2d1c-5313-f97f7b37a1fa"  "c:\programas\ariagrorec\informes\rinfhorasmensnatural.rpt"
+		"rinfhorasmensnue.rpt"                                  23/03/2010     15:03:42        16384  ""                 "RA"          "01055aef-e2e8-6df1-111b-4beea576f931"  "c:\programas\ariagrorec\informes\rinfhorasmensnue.rpt"
+		"rinfkilosprod.rpt"                                     11/03/2010     19:55:46        12288  ""                 "RA"          "ad460071-9d52-2103-90d4-1f0bfd6b0907"  "c:\programas\ariagrorec\informes\rinfkilosprod.rpt"
+		"rinfkilossocio.rpt"                                    23/04/2010     14:00:32        11776  ""                 "RA"          "86b3f401-1a1c-3aa2-26cd-5a3f7676ed58"  "c:\programas\ariagrorec\informes\rinfkilossocio.rpt"
+		"rinformeafo.rpt"                                       07/06/2011     18:30:10        15872  ""                 "RA"          "ef921457-6e5e-508d-9f6b-b09179bd2298"  "c:\programas\ariagrorec\informes\rinformeafo.rpt"
+		"rinfpesadas.rpt"                                       29/09/2010     10:30:04        37888  ""                 "RA"          "fbd7dd3e-c696-855f-c35c-b733058feba7"  "c:\programas\ariagrorec\informes\rinfpesadas.rpt"
+		"rinfresultados.rpt"                                    10/03/2011     14:48:30        18432  ""                 "RA"          "6a76edee-18ae-bbb5-afc7-84a175873511"  "c:\programas\ariagrorec\informes\rinfresultados.rpt"
+		"rinfretenciones.rpt"                                   10/03/2011     14:55:40        33792  ""                 "RA"          "a5bf451f-fd61-5c8c-8113-62dfc51c16dc"  "c:\programas\ariagrorec\informes\rinfretenciones.rpt"
+		"rinfsuperficies.rpt"                                   11/03/2010     19:55:46        15872  ""                 "RA"          "7c47c6fd-5043-3cf1-b01a-ff7e85dfb0ae"  "c:\programas\ariagrorec\informes\rinfsuperficies.rpt"
+		"rinftomadatos.rpt"                                     30/07/2010     13:18:36        18944  ""                 "RA"          "ee89c312-a50c-1446-3c39-dadece639b2d"  "c:\programas\ariagrorec\informes\rinftomadatos.rpt"
+		"rinftomadatos1.rpt"                                    30/07/2010     14:29:32        17408  ""                 "RA"          "6225198a-0867-b80d-2152-255a557f0e94"  "c:\programas\ariagrorec\informes\rinftomadatos1.rpt"
+		"rlistadopagos.rpt"                                     13/12/2010     14:19:34        11264  ""                 "RA"          "32adecc8-1adc-7d26-f807-f65795bda339"  "c:\programas\ariagrorec\informes\rlistadopagos.rpt"
+		"rmanaportacion.rpt"                                    22/10/2010     18:18:06        11264  ""                 "RA"          "98726c62-a1c7-4d10-d3f8-d4922b3b4a21"  "c:\programas\ariagrorec\informes\rmanaportacion.rpt"
+		"rmanbonifent.rpt"                                      30/06/2010     12:40:58         9216  ""                 "RA"          "f0dd8c2a-d254-51ab-1f7d-5db90fecbbe0"  "c:\programas\ariagrorec\informes\rmanbonifent.rpt"
+		"rmanbonifica.rpt"                                      11/03/2010     19:55:46         9728  ""                 "RA"          "49574bc1-d25c-f41c-6aad-dfdbbb8df3b2"  "c:\programas\ariagrorec\informes\rmanbonifica.rpt"
+		"rmancalibrador.rpt"                                    11/03/2010     19:55:46        10752  ""                 "RA"          "32f8c551-35ed-0133-3f84-22a88d927ebf"  "c:\programas\ariagrorec\informes\rmancalibrador.rpt"
+		"rmancalidades.rpt"                                     11/03/2010     19:55:46        11776  ""                 "RA"          "8629d8e6-0e1a-6a11-ae4d-8435f926ebc8"  "c:\programas\ariagrorec\informes\rmancalidades.rpt"
+		"rmancampos.rpt"                                        11/03/2010     19:55:46        11264  ""                 "RA"          "bd05a6c1-151c-3c3e-6457-95a302792351"  "c:\programas\ariagrorec\informes\rmancampos.rpt"
+		"rmancapataz.rpt"                                       26/08/2010     13:10:54         9216  ""                 "RA"          "4136d7fe-0421-a2f8-2354-42987e09c242"  "c:\programas\ariagrorec\informes\rmancapataz.rpt"
+		"rmancgastosnom.rpt"                                    11/03/2010     19:55:46         8704  ""                 "RA"          "c0e154b3-ad0e-470d-1d24-62b4c91c60c5"  "c:\programas\ariagrorec\informes\rmancgastosnom.rpt"
+		"rmanconcepgasto.rpt"                                   11/03/2010     19:55:46         8704  ""                 "RA"          "35db54ec-d9aa-1d2b-f900-c1b70e24714f"  "c:\programas\ariagrorec\informes\rmanconcepgasto.rpt"
+		"rmancoope.rpt"                                         11/03/2010     19:55:46         8704  ""                 "RA"          "5f79a857-4330-9420-1fdc-fcc704230781"  "c:\programas\ariagrorec\informes\rmancoope.rpt"
+		"rmancooprop.rpt"                                       03/05/2010     11:01:54        11776  ""                 "RA"          "a905ba81-ba94-59df-2123-dea446461138"  "c:\programas\ariagrorec\informes\rmancooprop.rpt"
+		"rmancuadrilla.rpt"                                     11/03/2010     19:55:46        10240  ""                 "RA"          "5eca7054-ceee-0d7b-8987-23f27ae58699"  "c:\programas\ariagrorec\informes\rmancuadrilla.rpt"
+		"rmandeposito.rpt"                                      11/03/2010     19:55:46         8704  ""                 "RA"          "767dba9f-ea8d-8920-9438-264032fdefd0"  "c:\programas\ariagrorec\informes\rmandeposito.rpt"
+		"rmandesarrollo.rpt"                                    11/03/2010     19:55:46         8704  ""                 "RA"          "c86ce5e1-9f7b-0d3f-c9df-bdea520e65f8"  "c:\programas\ariagrorec\informes\rmandesarrollo.rpt"
+		"rmanhorasdestajo.rpt"                                  01/07/2010     13:44:58        12288  ""                 "RA"          "29283602-9be4-c4ea-9056-3a2897ed455a"  "c:\programas\ariagrorec\informes\rmanhorasdestajo.rpt"
+		"rmanhorastrab.rpt"                                     11/03/2010     19:55:46        13312  ""                 "RA"          "eb831e7e-29e9-157a-c2ab-71c674e6acb6"  "c:\programas\ariagrorec\informes\rmanhorastrab.rpt"
+		"rmanhorastrabdestajo.rpt"                              01/07/2010     13:45:46        12288  ""                 "RA"          "d7e5dbe8-b707-7b8f-05aa-4ac0149bc0ec"  "c:\programas\ariagrorec\informes\rmanhorastrabdestajo.rpt"
+		"rmanincidencia.rpt"                                    11/03/2010     19:55:46         8704  ""                 "RA"          "9be2e81d-b53d-329b-df01-622dfe1d9240"  "c:\programas\ariagrorec\informes\rmanincidencia.rpt"
+		"rmanpartidas.rpt"                                      11/03/2010     19:55:46         9216  ""                 "RA"          "b587e9ca-5b73-e3b6-9df8-aa635715188f"  "c:\programas\ariagrorec\informes\rmanpartidas.rpt"
+		"rmanpatronapie.rpt"                                    27/04/2010     10:30:42         8704  ""                 "RA"          "f86c4f32-e604-cf93-c9fd-c12501a1af23"  "c:\programas\ariagrorec\informes\rmanpatronapie.rpt"
+		"rmanplagas.rpt"                                        20/09/2010     18:30:10         8704  ""                 "RA"          "7a5f209a-720a-3358-6fb3-ea4c7fa57694"  "c:\programas\ariagrorec\informes\rmanplagas.rpt"
+		"rmanplantacion.rpt"                                    11/03/2010     19:55:46         8704  ""                 "RA"          "042fa674-d9df-1ada-5538-b23dcfd7c1a6"  "c:\programas\ariagrorec\informes\rmanplantacion.rpt"
+		"rmanportespobla.rpt"                                   11/03/2010     19:55:46         9216  ""                 "RA"          "fe7237fd-82df-7bcd-447c-72682ca91fb7"  "c:\programas\ariagrorec\informes\rmanportespobla.rpt"
+		"rmanprecios.rpt"                                       11/03/2010     19:55:48        15872  ""                 "RA"          "7c242ac3-b9a8-ad54-c482-c233c1263f8f"  "c:\programas\ariagrorec\informes\rmanprecios.rpt"
+		"rmanproceriego.rpt"                                    27/04/2010     10:28:28         8704  ""                 "RA"          "7865be48-15e3-aa1c-7121-e9caa67e6152"  "c:\programas\ariagrorec\informes\rmanproceriego.rpt"
+		"rmanpueblos.rpt"                                       11/03/2010     19:55:48         8704  ""                 "RA"          "58be08a2-5e03-2eca-4d9e-d48e48b954ac"  "c:\programas\ariagrorec\informes\rmanpueblos.rpt"
+		"rmansalarios.rpt"                                      31/08/2010     11:09:38         9216  ""                 "RA"          "fea2439f-233d-d3fe-09d6-181cfb0f2612"  "c:\programas\ariagrorec\informes\rmansalarios.rpt"
+		"rmanseccion.rpt"                                       11/03/2010     19:55:48         9216  ""                 "RA"          "c4f47488-6c7f-3bd4-65a4-0d174399b331"  "c:\programas\ariagrorec\informes\rmanseccion.rpt"
+		"rmanseguroopcion.rpt"                                  13/12/2010     19:08:08         8704  ""                 "RA"          "c4a8f8db-a69f-b7f2-42b4-e52754faf489"  "c:\programas\ariagrorec\informes\rmanseguroopcion.rpt"
+		"rmansituacion.rpt"                                     11/03/2010     19:55:48         8704  ""                 "RA"          "90e0fef2-278f-2e67-4dc8-6df1be9b2eb0"  "c:\programas\ariagrorec\informes\rmansituacion.rpt"
+		"rmansitucamp.rpt"                                      11/03/2010     19:55:48         8704  ""                 "RA"          "7900ee82-dc0c-c80d-18e5-a47e10b9db5f"  "c:\programas\ariagrorec\informes\rmansitucamp.rpt"
+		"rmansocios.rpt"                                        21/07/2010     11:44:36         9728  ""                 "RA"          "75e6d04d-c108-efcb-efd9-5ee9fb73acee"  "c:\programas\ariagrorec\informes\rmansocios.rpt"
+		"rmansociosporfases.rpt"                                07/10/2010     16:13:22        10752  ""                 "RA"          "5dd339a3-de08-f464-6921-6c1537906038"  "c:\programas\ariagrorec\informes\rmansociosporfases.rpt"
+		"rmansocseccion.rpt"                                    23/09/2010     18:39:14        11264  ""                 "RA"          "e7e9c0aa-c0dc-7d6f-be82-61caf9567a7a"  "c:\programas\ariagrorec\informes\rmansocseccion.rpt"
+		"rmansocseccion.zip"                                    23/09/2010     18:33:46         8657  ""                 "RA"          "ab3db7d9-0994-aae1-f1e5-10bfd21d69ff"  "c:\programas\ariagrorec\informes\rmansocseccion.zip"
+		"rmantarifaett.rpt"                                     26/07/2010     14:55:00         9216  ""                 "RA"          "a3205f7b-01e6-b687-5122-56b68ca7a21d"  "c:\programas\ariagrorec\informes\rmantarifaett.rpt"
+		"rmantarifatra.rpt"                                     11/03/2010     19:55:48         8704  ""                 "RA"          "0f5da0da-a1cc-dd2f-ab96-944dfdfe747e"  "c:\programas\ariagrorec\informes\rmantarifatra.rpt"
+		"rmantelef.rpt"                                         11/03/2010     19:55:48         9216  ""                 "RA"          "d17a8490-6204-e34e-c268-609a75866de6"  "c:\programas\ariagrorec\informes\rmantelef.rpt"
+		"rmantierra.rpt"                                        11/03/2010     19:55:48         8704  ""                 "RA"          "950d82d0-a8e8-5a70-1c63-5fd8e6829b65"  "c:\programas\ariagrorec\informes\rmantierra.rpt"
+		"rmantipoaportacion.rpt"                                22/10/2010     10:55:48         8704  ""                 "RA"          "30e30c86-481e-8f17-cc1f-112d0508c223"  "c:\programas\ariagrorec\informes\rmantipoaportacion.rpt"
+		"rmantipopozos.rpt"                                     24/05/2011     16:38:06         9216  ""                 "RA"          "2ca9fb86-bb3a-86b8-6b48-a4eea4e3d461"  "c:\programas\ariagrorec\informes\rmantipopozos.rpt"
+		"rmantraba.rpt"                                         10/05/2011     18:25:38         9216  ""                 "RA"          "f968663b-9e2d-4a40-fd23-7f90c1c45a5d"  "c:\programas\ariagrorec\informes\rmantraba.rpt"
+		"rmantranspor.rpt"                                      28/04/2010     13:35:34         9216  ""                 "RA"          "ff1866f5-1d63-2b13-2d46-961e5e524a64"  "c:\programas\ariagrorec\informes\rmantranspor.rpt"
+		"rmanvarcalidad.rpt"                                    11/03/2010     19:55:48        12288  ""                 "RA"          "cc5d03c1-67fc-d5e7-fc7c-7614227dbb20"  "c:\programas\ariagrorec\informes\rmanvarcalidad.rpt"
+		"rmanzonas.rpt"                                         11/03/2010     19:55:48         8704  ""                 "RA"          "38fe986d-174c-0ab2-c69a-a93ca606b549"  "c:\programas\ariagrorec\informes\rmanzonas.rpt"
+		"rpozhidrantes.rpt"                                     21/07/2010     11:54:18         9728  ""                 "RA"          "436d3e8a-acb9-a36b-7dd8-bf5d338ca161"  "c:\programas\ariagrorec\informes\rpozhidrantes.rpt"
+		"rprevpagosant.rpt"                                     28/01/2011     17:08:58        15872  ""                 "RA"          "b943bb60-d239-3297-3a4b-e5851d02a07e"  "c:\programas\ariagrorec\informes\rprevpagosant.rpt"
+		"rprevpagosant1.rpt"                                    28/01/2011     17:11:40        15872  ""                 "RA"          "9e575292-0eca-d965-f298-c87250c9883f"  "c:\programas\ariagrorec\informes\rprevpagosant1.rpt"
+		"rprevpagosant2.rpt"                                    02/03/2011     11:17:20        15360  ""                 "RA"          "6f267c40-8c3c-727c-c1c5-21aa7515f017"  "c:\programas\ariagrorec\informes\rprevpagosant2.rpt"
+		"rprevpagosantbod.rpt"                                  11/11/2010     18:01:22        13824  ""                 "RA"          "64d7a863-302b-02f8-8afc-26b94561b87e"  "c:\programas\ariagrorec\informes\rprevpagosantbod.rpt"
+		"rprevpagosantbod1.rpt"                                 11/11/2010     18:00:48        13824  ""                 "RA"          "de49c0bb-c555-8927-cd66-b5a24bd09743"  "c:\programas\ariagrorec\informes\rprevpagosantbod1.rpt"
+		"rprevpagosantgastos.rpt"                               11/03/2010     19:55:48        14336  ""                 "RA"          "0574023f-9753-764a-b151-7e41fb585245"  "c:\programas\ariagrorec\informes\rprevpagosantgastos.rpt"
+		"rprevpagosliq.rpt"                                     11/03/2010     19:55:48        14336  ""                 "RA"          "e4cadd48-1ec5-cb0d-4740-ea072663d7b5"  "c:\programas\ariagrorec\informes\rprevpagosliq.rpt"
+		"rprevpagosliq1.rpt"                                    11/03/2010     19:55:48        14848  ""                 "RA"          "a317ede2-62a1-87f8-eec4-1a6094f65674"  "c:\programas\ariagrorec\informes\rprevpagosliq1.rpt"
+		"rrdtocapataz.rpt"                                      15/10/2010     16:45:52        12800  ""                 "RA"          "f90aacce-41fc-74b5-81d5-61fac9b0e436"  "c:\programas\ariagrorec\informes\rrdtocapataz.rpt"
+		"rresumfacturas.rpt"                                    03/01/2011     18:13:24        13312  ""                 "RA"          "0d6e0128-c5d1-d768-0486-451a6eb64200"  "c:\programas\ariagrorec\informes\rresumfacturas.rpt"
+		"rresumfacturaspoz.rpt"                                 09/09/2010     13:09:30        12800  ""                 "RA"          "4863bb91-59a9-8197-1bb0-48e942b91db0"  "c:\programas\ariagrorec\informes\rresumfacturaspoz.rpt"
+		"rresumfacturastrans.rpt"                               03/01/2011     18:13:48        12288  ""                 "RA"          "8b6a23d5-ebf3-84f7-3d36-35ea35195577"  "c:\programas\ariagrorec\informes\rresumfacturastrans.rpt"
+		"rsociocarta.rpt"                                       11/03/2010     19:55:48        12800  ""                 "RA"          "f1db818b-85e5-d39b-8d4b-2093f9118d53"  "c:\programas\ariagrorec\informes\rsociocarta.rpt"
+		"rsocioetiq.rpt"                                        11/03/2010     19:55:48         8192  ""                 "RA"          "ec8e6192-8b8f-82d8-7c66-f5f1bec73c91"  "c:\programas\ariagrorec\informes\rsocioetiq.rpt"
+		"rsubrep.rpt"                                           11/03/2010     19:55:48         9728  ""                 "RA"          "6796ee7a-0a9d-b478-1139-9ab624c66082"  "c:\programas\ariagrorec\informes\rsubrep.rpt"
+		"rtrzareas.rpt"                                         11/03/2010     19:55:48         8704  ""                 "RA"          "fe59cd36-ce33-b074-5532-64fb8d4a9984"  "c:\programas\ariagrorec\informes\rtrzareas.rpt"
+		"rtrzcargasfechaprod.rpt"                               27/05/2011     11:08:52        10752  ""                 "RA"          "2c9d0fc7-727e-5ad6-4206-9c7ff87ea05e"  "c:\programas\ariagrorec\informes\rtrzcargasfechaprod.rpt"
+		"rtrzcargaslineas.rpt"                                  11/03/2010     19:55:48        19456  ""                 "RA"          "f5807450-a022-171f-09a2-75eab7d75eae"  "c:\programas\ariagrorec\informes\rtrzcargaslineas.rpt"
+		"rtrzdesalbent.rpt"                                     11/03/2010     19:55:48        18944  ""                 "RA"          "86527626-860b-b652-55e4-7f314df0bd2f"  "c:\programas\ariagrorec\informes\rtrzdesalbent.rpt"
+		"rtrzorigenpaletconf.rpt"                               11/03/2010     19:55:48        12288  ""                 "RA"          "87d50023-a45e-710c-1a35-718f22587e85"  "c:\programas\ariagrorec\informes\rtrzorigenpaletconf.rpt"
+		"rtrzorigenpaletconf1.rpt"                              24/05/2010     13:03:32        11776  ""                 "RA"          "3598a76f-79a5-1764-0482-ac8395bbc947"  "c:\programas\ariagrorec\informes\rtrzorigenpaletconf1.rpt"
+		"rtrzpaletsentrados.rpt"                                11/03/2010     19:55:48        11264  ""                 "RA"          "4fafc6fa-252f-35d5-8558-cd999c0d211f"  "c:\programas\ariagrorec\informes\rtrzpaletsentrados.rpt"
+		"rtrzpaletsstock.rpt"                                   11/03/2010     19:55:48        11264  ""                 "RA"          "c652002e-6592-a1f1-a1fc-f88fbc070ef6"  "c:\programas\ariagrorec\informes\rtrzpaletsstock.rpt"
+		"rtrztipos.rpt"                                         11/03/2010     19:55:48         8704  ""                 "RA"          "fe59cd36-ce33-b074-5532-64fb8d4a9984"  "c:\programas\ariagrorec\informes\rtrztipos.rpt"
+		"turmansocios.rpt"                                      26/07/2010     12:57:54        13824  ""                 "RA"          "dd97bb01-f9fb-8600-e925-88e46473fdd8"  "c:\programas\ariagrorec\informes\turmansocios.rpt"
+		"turpozcomprlecturas.rpt"                               22/03/2010     17:34:20        10752  ""                 "RA"          "6c14794a-5ac5-4765-6fb9-31f6e7c0d0b8"  "c:\programas\ariagrorec\informes\turpozcomprlecturas.rpt"
+		"turpozetiqcontador.rpt"                                01/06/2010     18:52:10         7680  ""                 "RA"          "81aceefa-c795-d9af-1642-faaa5530e97b"  "c:\programas\ariagrorec\informes\turpozetiqcontador.rpt"
+		"turpozrecibhidrante.rpt"                               06/10/2010     09:03:30        12288  ""                 "RA"          "35f9901c-f016-28ed-1c6f-84a314359368"  "c:\programas\ariagrorec\informes\turpozrecibhidrante.rpt"
+		"turpozreciboscons.rpt"                                 13/12/2010     14:54:58        16384  ""                 "RA"          "9b1acbd3-c99d-eacd-66f7-393bcbae3cdd"  "c:\programas\ariagrorec\informes\turpozreciboscons.rpt"
+		"turpozrecibosmto.rpt"                                  04/06/2010     14:15:20        14336  ""                 "RA"          "1cb64a7f-237a-4ea2-f9aa-450a2a0a5507"  "c:\programas\ariagrorec\informes\turpozrecibosmto.rpt"
+		"turpoztomalectura.rpt"                                 11/06/2010     12:47:24        10752  ""                 "RA"          "cba6da5b-636b-0c64-c791-1f6af3c368ce"  "c:\programas\ariagrorec\informes\turpoztomalectura.rpt"
+		"tursocioetiq.rpt"                                      01/06/2010     12:22:16         8192  ""                 "RA"          "2e041316-8687-71b7-afa1-48acb80a0359"  "c:\programas\ariagrorec\informes\tursocioetiq.rpt"
+		"valalbclasif.rpt"                                      11/03/2010     19:55:48       125440  ""                 "RA"          "28f72b10-e99f-f1b2-ce35-67a58bf3f0f3"  "c:\programas\ariagrorec\informes\valalbclasif.rpt"
+		"valanticipos.rpt"                                      11/03/2010     19:55:48       121856  ""                 "RA"          "d1cbfdfe-adda-1c22-5bc7-d50e9b02485a"  "c:\programas\ariagrorec\informes\valanticipos.rpt"
+		"valentrada.rpt"                                        11/03/2010     19:55:48        15872  ""                 "RA"          "77b362f1-2e29-d3fd-4818-70fdc099f33e"  "c:\programas\ariagrorec\informes\valentrada.rpt"
+		"valfactbod.rpt"                                        12/07/2010     14:25:12        17920  ""                 "RA"          "f92adbee-6d00-f7c3-d1ea-63528fda5579"  "c:\programas\ariagrorec\informes\valfactbod.rpt"
+		"valfactindustria.rpt"                                  11/03/2010     19:55:48       122368  ""                 "RA"          "5e690ad2-4d4b-197f-b598-9be0942692f9"  "c:\programas\ariagrorec\informes\valfactindustria.rpt"
+		"valfactsocios.rpt"                                     11/03/2010     19:55:48        36864  ""                 "RA"          "e2cd3253-427c-cb7d-8b23-54e495a70061"  "c:\programas\ariagrorec\informes\valfactsocios.rpt"
+		"valfactsociosbod.rpt"                                  15/04/2011     13:43:06        51200  ""                 "RA"          "d38168c4-b2c6-3c04-8939-2ed3730d453f"  "c:\programas\ariagrorec\informes\valfactsociosbod.rpt"
+		"valimprecibos.rpt"                                     11/03/2010     19:55:48        15360  ""                 "RA"          "1db1a16a-1e8d-a858-a650-5c341c9be33b"  "c:\programas\ariagrorec\informes\valimprecibos.rpt"
+		"valliquidacion.rpt"                                    11/03/2010     19:55:50       144896  ""                 "RA"          "73d85d58-18db-3fc6-c7b1-5ecf2b12910a"  "c:\programas\ariagrorec\informes\valliquidacion.rpt"
+		"valpartes.rpt"                                         11/03/2010     19:55:50       118272  ""                 "RA"          "2db6ce3f-4195-f1e4-7bc8-64a499be94cc"  "c:\programas\ariagrorec\informes\valpartes.rpt"
+		"valprevpagosliq.rpt"                                   11/03/2010     19:55:50        15360  ""                 "RA"          "33eef3cf-3a96-5be9-4836-c859cbe8d8f8"  "c:\programas\ariagrorec\informes\valprevpagosliq.rpt"
+		"valprevpagosliq1.rpt"                                  11/03/2010     19:55:50        14848  ""                 "RA"          "88490d58-299f-64f0-c20a-acebef3478dd"  "c:\programas\ariagrorec\informes\valprevpagosliq1.rpt"
+		"vssver.scc"                                            07/06/2011     19:15:06          432  ""                 "A"           "e76aa6c1-a31b-1e12-e1ec-c3853ea15231"  "c:\programas\ariagrorec\informes\vssver.scc"
+
+>SelfRegFiles<
+
+		Size of Files:   		       3801088
+		Size in Library:		       1555641
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"iconos.dll"                                            15/04/2010     16:59:22       970752  "1.0.0.0"          "RA"          "3959b5d4-17f0-799f-7ef4-0aaf7510e06b"  "c:\programas\ariagrorec\iconos.dll"
+		"iconosariagrorec.dll"                                  11/03/2010     19:55:32      1052672  "1.0.0.0"          "RA"          "ac8064c8-a580-c39d-f11a-802e6a393e85"  "c:\programas\ariagrorec\iconosariagrorec.dll"
+		"iconos_bn.dll"                                         15/04/2010     17:00:04       884736  "1.0.0.0"          "RA"          "60df2882-c061-440b-ece6-db3fac570d03"  "c:\programas\ariagrorec\iconos_bn.dll"
+		"iconos_om.dll"                                         15/04/2010     17:00:50       892928  "1.0.0.0"          "RA"          "57d1ee6f-8a54-7d9e-0b41-cd3d8ebb0482"  "c:\programas\ariagrorec\iconos_om.dll"
+
+>TARGETDIRSelfRegFiles<
+
+		Size of Files:   		       7360577
+		Size in Library:		       3127083
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"chilkatmail.dll"                                       26/09/2003     09:21:02      1060864  "5.3.1.0"          "A"           "abf66d9b-43f5-e9d3-b41d-677a3ca22a32"  "c:\program files\chilkat software inc\chilkat mail\chilkatmail.dll"
+		"craxdrt9.dll"                                          11/02/2005     07:59:10      6197313  "9.2.3.1368"       ""            "0ffd03a8-d1b0-6131-acdf-62a8942bec5b"  "c:\program files\crystal decisions\report designer component\craxdrt9.dll"
+		"nslock15vb6.ocx"                                       24/03/1999     13:10:32       102400  "1.5.0.5"          "A"           "fc459e69-b402-57d2-bf7b-6e571df2dc03"  "c:\windows\system\nslock15vb6.ocx"
+
+>COMMONFILESSelfRegFiles<
+
+		Size of Files:   		      11595538
+		Size in Library:		       4715955
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"crystal decisions\2.0\crystalreportviewers\activexviewer\crviewer9.dll"09/07/2004     10:35:22       802512  "9.2.2.716"        ""            "26465baf-3275-01c9-734c-19b328922617"  "c:\program files\common files\crystal decisions\2.0\crystalreportviewers\activexviewer\crviewer9.dll"
+		"crystal decisions\2.0\bin\craxddrt9.dll"               28/01/2005     06:54:30     10793026  "9.2.3.1355"       ""            "553d73a4-f835-c215-94f6-2b6982327cb8"  "c:\program files\common files\crystal decisions\2.0\bin\craxddrt9.dll"
+
+>TARGETDIRFiles<
+
+		Size of Files:   		      16932864
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"ariagrorec.exe"                                        15/06/2011     17:55:22     16932864  "4.2.0.6"          "A"           "e05d5aa4-c576-e040-1b38-56d40225de4b"  "c:\programas\ariagrorec\ariagrorec.exe"
+
+>WINSYSDIRSharedFiles<
+
+		Size of Files:   		        574040
+		Size in Library:		        111264
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"cmct2es.dll"                                           28/07/1998     01:00:00        23552  "6.0.80.22"        "A"           "99fe4f6a-6578-608f-5010-3d36ad5b032f"  "c:\windows\system32\cmct2es.dll"
+		"cmctles.dll"                                           28/07/1998     01:00:00       100352  "6.0.80.22"        "A"           "a2f26017-1335-0dcd-059c-d81ec04e7f29"  "c:\windows\system32\cmctles.dll"
+		"cmdlges.dll"                                           28/07/1998     01:00:00        33280  "6.0.81.63"        "A"           "b1fa77de-9f90-bac1-db75-905f4bc45039"  "c:\windows\system32\cmdlges.dll"
+		"datgdes.dll"                                           28/07/1998     01:00:00        30208  "6.0.81.63"        "A"           "c2d9530a-0217-6138-d978-2107e4e8b34f"  "c:\windows\system32\datgdes.dll"
+		"inetes.dll"                                            28/07/1998     01:00:00        15872  "6.0.81.63"        "A"           "af582b1a-9a2a-7bdf-5798-ea338287dcea"  "c:\windows\system32\inetes.dll"
+		"mscc2es.dll"                                           28/07/1998     01:00:00        60928  "6.0.81.63"        "A"           "0f5cc390-eb4c-ffe5-c65f-c605ba51f907"  "c:\windows\system32\mscc2es.dll"
+		"msch2es.dll"                                           28/07/1998     01:00:00       108032  "6.0.81.63"        "A"           "cdad3958-387e-9950-0cb7-04a22819b881"  "c:\windows\system32\msch2es.dll"
+		"mscmces.dll"                                           28/07/1998     01:00:00       140800  "6.0.81.63"        "A"           "5405d65e-6fe9-ad0a-3c63-e31e95f38e91"  "c:\windows\system32\mscmces.dll"
+		"scrrnes.dll"                                           15/07/2000     01:00:00        16984  "5.0.0.3715"       "A"           "df4a4f4b-a7e3-f4dd-40c0-22fa9cda2178"  "c:\windows\system32\scrrnes.dll"
+		"stdftes.dll"                                           31/07/1998     01:00:00         6656  "6.0.81.63"        "A"           "b6d2280e-8d44-3a19-5946-7d504d193a81"  "c:\windows\system32\stdftes.dll"
+		"tabctes.dll"                                           28/07/1998     01:00:00        21504  "6.0.81.63"        "A"           "430c4bbe-af60-d3ed-e517-f37432e9414c"  "c:\windows\system32\tabctes.dll"
+		"adodces.dll"                                           28/07/1998     01:00:00        15872  "6.0.81.63"        "A"           "3f43a4b7-660b-e927-db51-a1101e37479a"  "c:\windows\system32\adodces.dll"
+
+>WINSYSDIRSharedSelfRegFiles<
+
+		Size of Files:   		       4644064
+		Size in Library:		       2177117
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"comdlg32.ocx"                                          09/03/2004     01:00:00       152848  "6.1.97.82"        "A"           "292441ab-e5f1-97fb-08a8-cdea07479099"  "c:\windows\system32\comdlg32.ocx"
+		"msadodc.ocx"                                           09/03/2004     01:00:00       131856  "6.1.97.82"        "A"           "03a09e38-f48e-b00f-742f-117f512f0b90"  "c:\windows\system32\msadodc.ocx"
+		"msbind.dll"                                            23/02/2004     01:00:00        78848  "6.1.97.82"        "A"           "c7f50da3-23f2-a3be-e201-0feb97438c63"  "c:\windows\system32\msbind.dll"
+		"mschrt20.ocx"                                          09/03/2004     01:00:00      1010720  "6.0.88.4"         "A"           "8f0cce38-78cd-0fd0-d717-ce3a91214cbc"  "c:\windows\system32\mschrt20.ocx"
+		"mscomct2.ocx"                                          09/03/2004     01:00:00       662288  "6.1.97.82"        "A"           "a5a847ae-81fe-bb93-84ff-cd338115d8ef"  "c:\windows\system32\mscomct2.ocx"
+		"mscomctl.ocx"                                          09/03/2004     01:00:00      1081616  "6.1.97.82"        "A"           "f0d7c7ec-44d3-e36d-6045-d1d9e964fafe"  "c:\windows\system32\mscomctl.ocx"
+		"msdatgrd.ocx"                                          09/03/2004     01:00:00       275216  "6.1.97.82"        "A"           "b16cfa01-5635-51e9-fadb-ab8ff009b631"  "c:\windows\system32\msdatgrd.ocx"
+		"msinet.ocx"                                            09/03/2004     01:00:00       132880  "6.1.97.82"        "A"           "4693a390-b6e9-137f-2ef1-33725c487ff6"  "c:\windows\system32\msinet.ocx"
+		"msstdfmt.dll"                                          23/02/2004     01:00:00       119808  "6.1.97.82"        "A"           "4d0f9e71-1411-00f7-f564-e9ae47f0e3ee"  "c:\windows\system32\msstdfmt.dll"
+		"tabctl32.ocx"                                          09/03/2004     01:00:00       224016  "6.1.97.82"        "A"           "6d5b92dc-ba77-cb9e-532e-2f6750be943b"  "c:\windows\system32\tabctl32.ocx"
+		"comct232.ocx"                                          03/04/2000     18:52:22       164144  "6.0.80.22"        "A"           "25af631b-fe2c-52ff-0871-f0ae37c80c5e"  "c:\windows\system32\comct232.ocx"
+		"comctl32.ocx"                                          09/03/2004     01:00:00       609824  "6.0.81.5"         "A"           "35d3bee2-6b44-2173-ff38-a138b3962e8a"  "c:\windows\system32\comctl32.ocx"
+
+>[Visual Basic 6 Runtime Files Object1]S_NSR_PL_544___<WINSYSDIR>_1<
+
+		Size of Files:   		        237088
+		Size in Library:		        114905
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"asycfilt.dll"                                          31/08/1999     16:55:18       147728  "2.40.4277.1"      "A"           "efe769ed-f2aa-fe0a-0258-f3c46d572a99"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\asycfilt.dll"
+		"vb5db.dll"                                             18/06/1998     01:00:00        89360  "6.0.81.69"        "A"           "2c2d6f4c-63e8-3330-5801-f2982b26223e"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\vb5db.dll"
+
+>[Visual Basic 6 Runtime Files Object1]S_SR_PL_544___<WINSYSDIR>_1<
+
+		Size of Files:   		       2191152
+		Size in Library:		       1132627
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"comcat.dll"                                            31/05/1998     01:00:00        22288  "4.71.1460.1"      "A"           "a20d183b-0bb5-4a95-55fe-37afba58d428"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\comcat.dll"
+		"oleaut32.dll"                                          31/08/1999     16:55:18       598288  "2.40.4277.1"      "A"           "8834300d-e0cc-2054-4c32-3c37657afa34"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\oleaut32.dll"
+		"olepro32.dll"                                          31/08/1999     16:55:18       164112  "5.0.4277.1"       "A"           "4acb6865-a8dc-20e0-88b4-b5f37f9e938e"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\olepro32.dll"
+		"stdole2.tlb"                                           31/08/1999     16:55:18        17920  "2.40.4277.1"      "A"           "5846475d-9862-c17f-d3c3-6f380b7f4d47"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\stdole2.tlb"
+		"msvbvm60.dll"                                          21/08/2000     12:22:54      1388544  "6.0.89.64"        "A"           "47c71b35-981a-ac74-acf7-d386fa8be227"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\msvbvm60.dll"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___1<
+
+		Size of Files:   		        109859
+		Size in Library:		         79857
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"setup.inx"                                             04/09/2003     16:53:06       109859  ""                 "A"           "f84ef40f-6016-83a2-f3ec-7b6058b3ddb2"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\setup.inx"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_0__1<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__1<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___2<
+
+		Size of Files:   		           899
+		Size in Library:		           487
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"stringtable-0009-english.ips"                          04/09/2003     16:53:06          899  ""                 "A"           "ea1bc290-0118-8f26-51fe-45080d436dd7"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\stringtable-0009-english.ips"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__2<
+
+		Size of Files:   		           399
+		Size in Library:		           273
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"stringtable-000a-spanish.ips"                          04/09/2003     16:53:06          399  ""                 "A"           "6b87502d-491e-4b81-dbe4-bf11c3f3dbfa"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\spanish\stringtable-000a-spanish.ips"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___3<
+
+		Size of Files:   		        402576
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"isrt.dll"                                              03/09/2003     03:29:28       401408  "9.0.0.333"        "A"           "f548fc59-1b4a-462b-aa78-4ffc16495d52"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\isrt.dll"
+		"default.pal"                                           16/09/1999     11:24:10         1168  ""                 "A"           "3ffeba0a-d069-4953-4405-061de2629c82"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\default.pal"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1___4<
+
+		Size of Files:   		        299008
+		Size in Library:		         78730
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------
+		"_isres.dll"                                            03/09/2003     05:53:48       299008  "9.0.0.333"        "A"           "2353183b-b04f-d554-0282-89be3d47bcbc"  "c:\program files\installshield\devstudio 9\objectspro\vb6 runtime object\data\_isres.dll"
+
+>[Visual Basic 6 Runtime Files Object1]NS_NSR_NPL_1_000a__3<
+
+		Size of Files:   		             0
+
+
+		File                                                    Date        Time         Size         Version            Attributes    MD5                                     Source file
+		------------------------------------------------------  ----------  -----------  -----------  -----------------  ------------  --------------------------------------  ------------------------------------------------

@@ -1,0 +1,88 @@
+' Version 4.2.24 de RECOLECCION 
+===============================
+- Modificacion del informe de toma de datos: quitamos el control de que el socio debe de ser de la seccion de horto QUATRETONDA
+- Modificacion de la impresion de la entrada de bascula para Quatretonda: no salian las taras de salida de las entradas de bascula
+impresas.
+- Nuevo mantenimiento de venta de fruta en bascula: dentro de las entradas de bascula ALZIRA
+- Impresion personalizada para alzira del albaran de venta fruta.
+- Informe de comprobacion dentro del mantenimiento.
+- Modificacion de parametros: indicamos que CAJAS son las de venta fruta, unicamente pueden ser 2 y solo deben de ser 2. Modificacion de la
+clase de parametros de la aplicacion.
+- Modificacion del envio de sms: tras poner el codigo de carta si pincho el check sms, no taria el cuerpo del mensaje. CORREGIDO.
+- Personalizacion de la factura de anticipo de bodega para Quatretonda. QuaFactSociosBod.rpt
+	En los anticipos, liquidaciones de bodega si no eras Castelduc, me salia un doble boton. CORREGIDO
+- Modificacion del informe rAlmzExtEntradas.rpt: fallo division por cero CORREGIDO
+- Nuevo informe que faltaba personalizar CasInfHcoEntClas1.rpt
+- Nuevo check Hectareas en el informe de campos/huertos que solo ve Picassent, en sus informes sacaba hanegadas, pero ahora si lo marca
+salen las hectareas.
+- Modificacion en el proceso de traspaso de bascula de almazara, damos error cuando la entrada sea de un socio que este dado de baja
+en la ficha o en la seccion. MOIXENT
+
+
+' Version 4.2.23 de RECOLECCION 
+===============================
+- Modificacion del proceso de liquidacion para Alzira, si hay albaranes que ya estan liquidados cuando pregunta tenemos tres opciones
+liquidar todos, liquidar solo los que faltan o cancelar, salimos sin hacer nada.
+
+' Version 4.2.22 DE RECOLECCION 
+===============================
+- Modificacion de las liquidaciones para quatretonda: nuevo proceso que parte de proceso catadau con mezcla de procesovalsur.
+
+
+' Version 4.2.21 DE RECOLECCION 
+===============================
+- Modificacion del mantenimiento de socios y de campos si modificamos y ponemos globagap, luego no dejamos quitarlo. CORREGIDO.
+
+- Modificacion del informe de clasificacion (del hco) informe de kilos/gastos. Pueden puntear que campos quieren, por defecto todos
+ Personalizados todos los informes : rInfHcoEntClas.rpt,rInfHcoEntClas1.rpt,rInfHcoEntClas2.rpt,rInfHcoEntClas3.rpt,rInfHcoEntClas4.rpt.
+ para Picassent sale el nro de orden en lugar del codigo de campo. PICASSENT
+
+- Modificacion del informe de clasificacion, tambien pueden seleccionar los campos que quieren. QUATRETRONDA
+
+- Modificacion de la salida del informe mensual de asesoria cuando no exporta a Excel para Picassent, ponemos delante el codigo 
+de asesoria del trabajador y lo ordenamos por él. PicInfAsesoriaNomiMes.rpt.  PICCASENT
+
+- Modificacion del mantenimiento de control de destrio, nueva plaga pixat que funciona como la de otros. Insercion de resumen en la impresion
+de control de destrio. rControlDestrioRes.rpt PICASSENT.
+
+- Modificacion del mantenimiento de campos, hemos incluido el codigo de cliente de ariges, que en caso de que tenga el parametro bdariges
+cargado podra utilizarse (no es requerido).  
+
+
+' Version 4.2.20 DE RECOLECCION 
+===============================
+- Modificacion del informe de kilos socio/cooperativa, introducimos un listview para seleccionar que tipo de entradas queremos 
+que salgan en el informe. Por defecto todas
+
+- Error en la impresion de facturas de transporte, cuando le da a reimprimir facturas de un transportista sale solo una cabecera
+CORREGIDO
+
+
+' VERSION 4.2.19 DE RECOLECCION
+===============================
+- Modificacion del programa de cartas a socio y etiquetas a socio, que no me saque los socios con fecha de baja en la ficha, 
+no en la seccion.
+
+- Modificacion del informe de entradas por socio, sacamos conversion a arrobas: AlzEntradasSocios.rpt y AlzEntradasSocios1.rpt
+
+- Nuevo punto de menu de mantenimiento de globalgap impresion printnou : rManGlobalGap.rpt
+
+- Modificacion del mantenimiento de campos, nuevo campo de codigo globalgap en la solapa segunda.
+
+- Modificacion del mantenimiento de socios, nuevo campo de codigo de globalgap. Añado control de que el codigo de globalgap no 
+esté asignado a ningun otro socio.
+
+- Modificado formulario frmListTrazabilidad: en los frames en donde el report aparece el socio ponemos un check de globalgap
+para que me enlace por el campo y el codigo de socio gap.
+  He duplicado los informes: rTrzPaletsEntradasGGap.rpt, rTrzCargasLineasGGap.rpt, rTrzOrigenPaletConfGGap.rpt,
+rTrzOrigenPaletConf1GGap.rpt, rTrzDesAlbEntGGap.rpt.
+
+- Modificacion de la carga temporal para el calculo de recibos de nominas de picassent, fallaba cuando el trabajador que esta
+asociado al capataz tiene plus de capataz nulo. CORREGIDO.
+
+- Nuevo informe de entradas socio: incluimos un check que me marca si queremos sacar las entradas por tipo de entrada
+ AlzEntradasSocios2.rpt.
+
+- Modificacion de la funcion cargaruncampo si es Alzira la tabla es SCAMP1 sino es SCAMPO 
+
+

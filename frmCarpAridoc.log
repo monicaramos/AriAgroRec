@@ -1,0 +1,3 @@
+Línea 18: la clase MSComDlg.CommonDialog del control cd1 no era una clase de control cargada.
+Línea 31: la clase MSComctlLib.TreeView del control TreeView1 no era una clase de control cargada.
+Línea 63: la clase MSComctlLib.ImageList del control ImageList3 no era una clase de control cargada.

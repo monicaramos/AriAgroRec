@@ -1,0 +1,10 @@
+Línea 14: la clase MSComctlLib.ImageList del control imgListPpal no era una clase de control cargada.
+Línea 23: la clase MSComctlLib.ImageList del control imgListComun no era una clase de control cargada.
+Línea 32: la clase MSComctlLib.ImageList del control imgListComun_BN no era una clase de control cargada.
+Línea 41: la clase MSComctlLib.ImageList del control imgListComun_OM no era una clase de control cargada.
+Línea 50: la clase MSComctlLib.ImageList del control imgListComun16 no era una clase de control cargada.
+Línea 59: la clase MSComctlLib.ImageList del control imgListComun_BN16 no era una clase de control cargada.
+Línea 68: la clase MSComctlLib.ImageList del control imgListComun_OM16 no era una clase de control cargada.
+Línea 77: la clase MSComctlLib.ImageList del control imgListImages16 no era una clase de control cargada.
+Línea 127: la clase MSComctlLib.ImageList del control imgListComun32 no era una clase de control cargada.
+Línea 136: la clase MSComctlLib.ImageList del control ImageListB no era una clase de control cargada.

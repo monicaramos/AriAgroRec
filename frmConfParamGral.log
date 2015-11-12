@@ -1,0 +1,3 @@
+Línea 20: la clase TabDlg.SSTab del control SSTab1 no era una clase de control cargada.
+Línea 446: la clase MSComctlLib.Toolbar del control Toolbar1 no era una clase de control cargada.
+Línea 477: la clase MSAdodcLib.Adodc del control Data1 no era una clase de control cargada.

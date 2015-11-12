@@ -1,0 +1,6 @@
+open 212.227.101.222
+USER ariadna 4rfEd3Ws
+bin
+lcd C:\INDEFA
+put *.csv
+bye

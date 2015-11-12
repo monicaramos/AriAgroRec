@@ -1,0 +1,151 @@
+================= Logging started at 1/3/2013 01:03:51 ==================
+Created release folders
+AdminExecuteSequence table successfully built
+AdminUISequence table successfully built
+AdvtExecuteSequence table successfully built
+AdvtUISequence table successfully built
+InstallExecuteSequence table successfully built
+InstallUISequence table successfully built
+Directory table successfully built
+Feature table successfully built
+FeatureComponents table successfully built
+Component table successfully built
+Loading File table
+Building File table
+Merging modules...
+Merging ATL Module for Windows: C:\Program Files\Common Files\Merge Modules\ATL.MSM
+Merging Microsoft Component Category Manager Library: C:\Program Files\Common Files\Merge Modules\COMCAT.MSM
+Merging Microsoft Common Controls 2 ActiveX Control DLL: C:\Program Files\Common Files\Merge Modules\COMCT232.MSM
+Merging Windows Common Controls ActiveX Control DLL: C:\Program Files\Common Files\Merge Modules\COMCTL32.MSM
+Merging CMDialog ActiveX Control DLL: C:\Program Files\Common Files\Merge Modules\COMDLG32.MSM
+Merging DCOM95: C:\Program Files\InstallShield\DevStudio 9\Objects\DCOM95.Msm
+Merging MDAC 2.5 Sp3 (English): C:\Program Files\InstallShield\DevStudio 9\Objects\MDAC25.Msm
+Merging Microsoft ADO Data Control: C:\Program Files\Common Files\Merge Modules\MSADODC.MSM
+Merging Microsoft Data Binding Collection Object DLL: C:\Program Files\Common Files\Merge Modules\MSBIND.MSM
+Merging Microsoft Chart ActiveX Control: C:\Program Files\Common Files\Merge Modules\MSCHRT20.MSM
+Merging Microsoft Common Controls 2 ActiveX Control DLL: C:\Program Files\Common Files\Merge Modules\MSCOMCT2.MSM
+Merging Windows Common Controls ActiveX Control DLL: C:\Program Files\Common Files\Merge Modules\MSCOMCTL.MSM
+Merging MSDatGrd.OCX: C:\Program Files\Common Files\Merge Modules\MSDATGRD.MSM
+Merging Microsoft Internet Transfer Control DLL: C:\Program Files\Common Files\Merge Modules\MSINET.MSM
+Merging Microsoft Standard Data Formating Object DLL: C:\Program Files\Common Files\Merge Modules\MSSTDFMT.MSM
+Merging Visual Basic Virtual Machine: C:\Program Files\Common Files\Merge Modules\MSVBVM60.MSM
+Merging Microsoft (R) C Runtime Library: C:\Program Files\Common Files\Merge Modules\MSVCRT.MSM
+Merging Microsoft OLE 2.40  for Windows NT(TM) and Windows 95(TM) Operating Systems: C:\Program Files\Common Files\Merge Modules\OLEAUT32.MSM
+Merging TABCTL32 OLE Control DLL: C:\Program Files\Common Files\Merge Modules\TABCTL32.MSM
+Merging rdcdesigntime: C:\Program Files\Common Files\Merge Modules\rdcdesigntime.msm
+Merging rdcruntime: C:\Program Files\Common Files\Merge Modules\rdcruntime.msm
+Merging reportengine: C:\Program Files\Common Files\Merge Modules\reportengine.msm
+File table successfully built
+Building MsiFileHash table
+MsiFileHash table successfully built
+Class table successfully built
+Extension table successfully built
+ODBCDataSource table successfully built
+ODBCDriver table successfully built
+ActionText table successfully built
+AppSearch table successfully built
+BindImage table successfully built
+CCPSearch table successfully built
+Condition table successfully built
+AppId table successfully built
+Property table successfully built
+BBControl table successfully built
+Billboard table successfully built
+Binary table successfully built
+CompLocator table successfully built
+Complus table successfully built
+ControlCondition table successfully built
+ControlEvent table successfully built
+CreateFolder table successfully built
+CustomAction table successfully built
+Error table successfully built
+DrLocator table successfully built
+DuplicateFile table successfully built
+Environment table successfully built
+EventMapping table successfully built
+FileSFPCatalog table successfully built
+Font table successfully built
+IniFile table successfully built
+IniLocator table successfully built
+IsolatedComponent table successfully built
+ISSelfReg table successfully built
+Verb table successfully built
+LaunchCondition table successfully built
+LockPermissions table successfully built
+MIME table successfully built
+MoveFile table successfully built
+MsiAssembly table successfully built
+MsiAssemblyName table successfully built
+MsiDigitalCertificate table successfully built
+MsiDigitalSignature table successfully built
+ODBCAttribute table successfully built
+ODBCSourceAttribute table successfully built
+ODBCTranslator table successfully built
+PatchPackage table successfully built
+ProgId table successfully built
+PublishComponent table successfully built
+Registry table successfully built
+RegLocator table successfully built
+RemoveFile table successfully built
+RemoveIniFile table successfully built
+RemoveRegistry table successfully built
+ReserveCost table successfully built
+SelfReg table successfully built
+ServiceControl table successfully built
+ServiceInstall table successfully built
+SFPCatalog table successfully built
+Shortcut table successfully built
+Signature table successfully built
+TextStyle table successfully built
+TypeLib table successfully built
+UIText table successfully built
+Upgrade table successfully built
+_Validation table successfully built
+Searching project for extract-at-build components...
+Extracting COM data from 6 component(s)
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\Program Files\chilkat software inc\chilkat mail\ChilkatMail.dll in component ChilkatMail.dll. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\programas\AriAgroRec\iconos.dll in component iconos.dll. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\programas\AriAgroRec\iconosAriagroRec.dll in component iconosAriagroRec.dll. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\programas\AriAgroRec\iconos_BN.dll in component iconos_BN.dll. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\programas\AriAgroRec\iconos_OM.dll in component iconos_OM.dll. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+ISDEV : warning -4354: The build was unable to extract COM information from the file C:\windows\system\nslock15vb6.ocx in component nslock15vb6.ocx. Please ensure that the file is self-registering and verify that the self-registration process does not fail.
+Validating Custom Action sequencing
+Dialog AdminChangeFolder for language Spanish built
+Dialog AdminNetworkLocation for language Spanish built
+Dialog AdminWelcome for language Spanish built
+Dialog CancelSetup for language Spanish built
+Dialog CustomSetup for language Spanish built
+Dialog CustomSetupTips for language Spanish built
+Dialog CustomerInformation for language Spanish built
+Dialog DatabaseFolder for language Spanish built
+Dialog DestinationFolder for language Spanish built
+Dialog DiskSpaceRequirements for language Spanish built
+Dialog FilesInUse for language Spanish built
+Dialog InstallChangeFolder for language Spanish built
+Dialog InstallWelcome for language Spanish built
+Dialog LicenseAgreement for language Spanish built
+Dialog MaintenanceType for language Spanish built
+Dialog MaintenanceWelcome for language Spanish built
+Dialog OutOfSpace for language Spanish built
+Dialog PatchWelcome for language Spanish built
+Dialog ReadyToInstall for language Spanish built
+Dialog ReadyToRemove for language Spanish built
+Dialog SetupCompleteError for language Spanish built
+Dialog SetupCompleteSuccess for language Spanish built
+Dialog SetupError for language Spanish built
+Dialog SetupInitialization for language Spanish built
+Dialog SetupInterrupted for language Spanish built
+Dialog SetupProgress for language Spanish built
+Dialog SetupResume for language Spanish built
+Dialog SetupType for language Spanish built
+Dialog SplashBitmap for language Spanish built
+Resolving strings...
+Language Spanish built
+Files built
+Media table successfully built
+Performing Upgrading and Patching Validation
+Setup.exe created
+PROJECT_ASSISTANT\CDROM_IMAGE - 0 error(s), 6 warning(s)
+================= Logging stopped at 1/3/2013 01:05:11 ==================
+Log file has been created: <file:C:\programas\AriAgroRec\instalacion\Definitiva\Ariagrorec\PROJECT_ASSISTANT\CDROM_IMAGE\LogFiles\1-3-2013 01-03-51.txt>
+

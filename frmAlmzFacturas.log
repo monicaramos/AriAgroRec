@@ -1,0 +1,7 @@
+Línea 549: la clase MSComctlLib.Toolbar del control ToolAux no era una clase de control cargada.
+Línea 580: la clase MSDataGridLib.DataGrid del control DataGrid2 no era una clase de control cargada.
+Línea 693: la clase MSComctlLib.Toolbar del control Toolbar1 no era una clase de control cargada.
+Línea 799: la clase MSAdodcLib.Adodc del control Data3 no era una clase de control cargada.
+Línea 846: la clase MSAdodcLib.Adodc del control Data1 no era una clase de control cargada.
+Línea 893: la clase MSAdodcLib.Adodc del control Data2 no era una clase de control cargada.
+Línea 940: la clase MSAdodcLib.Adodc del control Data4 no era una clase de control cargada.
