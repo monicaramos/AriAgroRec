@@ -300,6 +300,7 @@ Form=frmPOZListado.frm
 Form=frmTRAFactAlb.frm
 Form=frmListAnticipos.frm
 Form=frmVisReport.frm
+Form=frmPOZFraRecargo.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""
