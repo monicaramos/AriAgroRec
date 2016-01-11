@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:41"
+            TextSave        =   "12:40"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1554,6 +1554,10 @@ Begin VB.MDIForm MDIppal
          Index           =   31
          Visible         =   0   'False
       End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "Recibos Pendientes con Recargo"
+         Index           =   32
+      End
    End
    Begin VB.Menu mnAportaciones 
       Caption         =   "&Aportaciones"
@@ -1821,14 +1825,16 @@ Dim Cad As String
     
     PonerDatosFormulario
     
-    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
-    If vParamAplic.Cooperativa = 10 Then
-        If Dir("c:\indefa", vbDirectory) <> "" Then
-            LanzaVisorMimeDocumento Me.hwnd, "c:\indefa\ftpINDEFA.bat"
-        Else
-            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
-        End If
-    End If
+    Stop
+    
+'    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
+'    If vParamAplic.Cooperativa = 10 Then
+'        If Dir("c:\indefa", vbDirectory) <> "" Then
+'            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
+'        Else
+'            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
+'        End If
+'    End If
     
     
     

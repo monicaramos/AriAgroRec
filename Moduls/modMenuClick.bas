@@ -952,6 +952,8 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
         
         Case 31: frmPOZIndefa.Show vbModal  ' prueba de indefa
                  
+        '[Monica]11/01/2016: facturas de recargo solo para escalona
+        Case 32: frmPOZFraRecargo.Show vbModal
     
     End Select
 End Sub
@@ -1106,7 +1108,9 @@ Dim I As Integer
     MDIppal.mnRec_Pozos(27).Enabled = (vParamAplic.Cooperativa = 10)
     MDIppal.mnRec_Pozos(27).visible = (vParamAplic.Cooperativa = 10)
 
-
+    '[Monica]11/01/2016: las facturas de recargo solo las ve Escalona
+    MDIppal.mnRec_Pozos(32).Enabled = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(32).visible = (vParamAplic.Cooperativa = 10)
 
 
     '[Monica]29/10/2012: la preclasificacion es solo para Anna/Castelduc [Monica]24/10/2013: tambien para bolbaite
