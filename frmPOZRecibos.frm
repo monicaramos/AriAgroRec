@@ -17,6 +17,96 @@ Begin VB.Form frmPOZRecibos
    ScaleWidth      =   9630
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameRectifica 
+      Caption         =   "Factura Rectificativa "
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   1095
+      Left            =   180
+      TabIndex        =   144
+      Top             =   3000
+      Width           =   9165
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   45
+         Left            =   180
+         MaxLength       =   3
+         TabIndex        =   147
+         Tag             =   "Tipo Movimiento Fra Rectifica|T|S|||rrecibpozos|codtipomrec|||"
+         Top             =   540
+         Width           =   1350
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   47
+         Left            =   2880
+         MaxLength       =   10
+         TabIndex        =   146
+         Tag             =   "Fecha Factura Rectificativa|F|N|||rrecibpozos|fecfacturec|dd/mm/yyyy||"
+         Text            =   "123"
+         Top             =   540
+         Width           =   1155
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   315
+         Index           =   46
+         Left            =   1800
+         MaxLength       =   7
+         TabIndex        =   145
+         Tag             =   "Nº Factura Rectifica|N|S|||rrecibpozos|numfacturec|0000000||"
+         Text            =   "Text1"
+         Top             =   540
+         Width           =   930
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Tipo Recibo"
+         Height          =   255
+         Index           =   17
+         Left            =   180
+         TabIndex        =   150
+         Top             =   300
+         Width           =   1455
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Nº Recibo"
+         Height          =   255
+         Index           =   14
+         Left            =   1800
+         TabIndex        =   149
+         Top             =   300
+         Width           =   885
+      End
+      Begin VB.Label Label22 
+         Caption         =   "Fecha"
+         Height          =   255
+         Left            =   2940
+         TabIndex        =   148
+         Top             =   300
+         Width           =   495
+      End
+   End
+   Begin VB.PictureBox cmdRectificativa 
+      BorderStyle     =   0  'None
+      Height          =   435
+      Left            =   5730
+      ScaleHeight     =   435
+      ScaleWidth      =   525
+      TabIndex        =   143
+      ToolTipText     =   "Rectificativa"
+      Top             =   510
+      Width           =   525
+   End
    Begin VB.CheckBox Check1 
       Caption         =   "Es Contado"
       Height          =   195
@@ -188,7 +278,7 @@ Begin VB.Form frmPOZRecibos
       Left            =   210
       Style           =   2  'Dropdown List
       TabIndex        =   1
-      Top             =   960
+      Top             =   990
       Width           =   1650
    End
    Begin VB.TextBox Text1 
@@ -3017,6 +3107,11 @@ End Sub
 
 
 
+Private Sub cmdRectificativa_Click()
+    Me.FrameRectifica.visible = Not (Me.FrameRectifica.visible)
+    Me.Frame5(0).visible = Not Me.FrameRectifica.visible
+End Sub
+
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
 Dim Cad As String
@@ -3120,6 +3215,7 @@ Dim I As Integer
     Me.cmdParticipa.Picture = frmPpal.imgListPpal.ListImages(24).Picture
     Me.cmdHidrantes.Picture = frmPpal.imgListPpal.ListImages(24).Picture
     Me.cmdCampos.Picture = frmPpal.imgListPpal.ListImages(24).Picture
+    Me.cmdRectificativa.Picture = frmPpal.imgListPpal.ListImages(24).Picture
 
     Me.FrameConceptos.visible = False
     Me.FrameConceptos.Enabled = False
@@ -3141,6 +3237,10 @@ Dim I As Integer
     Me.FrameCampos.Enabled = False
     Me.cmdCampos.visible = False
     Me.cmdCampos.Enabled = False
+    
+    Me.FrameRectifica.visible = False
+    Me.FrameRectifica.Enabled = False
+    
     
     
     LimpiarCampos   'Limpia los campos TextBox
@@ -3577,7 +3677,7 @@ Dim Rs As ADODB.Recordset
                     Set Rs = New ADODB.Recordset
                     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     If Not Rs.EOF Then
-                        Text1(36).Text = DBLet(Rs!poligono, "T")
+                        Text1(36).Text = DBLet(Rs!Poligono, "T")
                         Text1(37).Text = DBLet(Rs!parcelas, "T")
                         Text1(38).Text = DBLet(Rs!nroorden, "N")
                     End If

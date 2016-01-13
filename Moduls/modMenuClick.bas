@@ -1112,6 +1112,11 @@ Dim I As Integer
     MDIppal.mnRec_Pozos(32).Enabled = (vParamAplic.Cooperativa = 10)
     MDIppal.mnRec_Pozos(32).visible = (vParamAplic.Cooperativa = 10)
 
+    '[Monica]12/01/2016: la rectificacion de lectura no la ve ni Escalona ni Utxera
+    MDIppal.mnRec_Pozos(30).Enabled = (vParamAplic.Cooperativa = 7)
+    MDIppal.mnRec_Pozos(30).visible = (vParamAplic.Cooperativa = 7)
+
+
 
     '[Monica]29/10/2012: la preclasificacion es solo para Anna/Castelduc [Monica]24/10/2013: tambien para bolbaite
     MDIppal.mnRec_Entradas(8).Enabled = (vParamAplic.Cooperativa = 5 Or vParamAplic.Cooperativa = 14)

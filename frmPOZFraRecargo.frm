@@ -207,6 +207,7 @@ Begin VB.Form frmPOZFraRecargo
          _ExtentX        =   12462
          _ExtentY        =   6271
          View            =   3
+         LabelEdit       =   1
          MultiSelect     =   -1  'True
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
@@ -242,6 +243,22 @@ Begin VB.Form frmPOZFraRecargo
             Text            =   "Importe"
             Object.Width           =   3706
          EndProperty
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   0
+         Left            =   6540
+         Picture         =   "frmPOZFraRecargo.frx":0A99
+         Top             =   210
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   1
+         Left            =   6900
+         Picture         =   "frmPOZFraRecargo.frx":0BE3
+         Top             =   210
+         Width           =   240
       End
       Begin VB.Label Label2 
          Caption         =   "Facturas Pendientes de Pago"
@@ -365,7 +382,7 @@ Begin VB.Form frmPOZFraRecargo
       Height          =   240
       Index           =   1
       Left            =   1845
-      Picture         =   "frmPOZFraRecargo.frx":0A99
+      Picture         =   "frmPOZFraRecargo.frx":0D2D
       ToolTipText     =   "Buscar trabajador"
       Top             =   1125
       Width           =   240
@@ -722,10 +739,10 @@ Private Sub Text1_LostFocus(Index As Integer)
             
         Case 0 ' porcentaje
             PonerFormatoDecimal Text1(Index), 4
-            
+          
         Case 2 ' importe recargo
             PonerFormatoDecimal Text1(Index), 3
-        
+            PonerFoco Text1(3)
     End Select
 End Sub
 
@@ -822,15 +839,33 @@ Dim vSeccion As CSeccion
                 Set vtag = Nothing
             End If
             If (I = 0 And ComprobarCero(Text1(2).Text) = "0") Or (I = 2 And ComprobarCero(Text1(0).Text) = "0") Then
-            MsgBox Cad & " no puede estar vacio. Reintroduzca", vbExclamation
-            PonerModo 3
-            PonerFoco Text1(I)
-            Exit Function
+                MsgBox Cad & " no puede estar vacio. Reintroduzca", vbExclamation
+                PonerModo 3
+                PonerFoco Text1(I)
+                Exit Function
+            End If
         End If
     Next I
         
-    'comprobar que la fecha de la factura sea anterior a la fecha de recepcion
-    If Not DeFechaIgualoPosterior(Text1(1).Text) Then
+    'comprobamos que no me hayan puesto ambos valores
+    If ComprobarCero(Text1(0).Text) <> "0" And ComprobarCero(Text1(2).Text) <> "0" Then
+        MsgBox "Es incorrecto introducir ambos valores, porcentaje e importe. Revise.", vbExclamation
+        PonerFoco Text1(0)
+        Exit Function
+    End If
+        
+'++monica:03/12/2008
+    'comprobamos que hay lineas para facturar: facturas
+    If Not HayFacturas Then
+        MsgBox "No hay facturas para realizar una factura con recargo. Revise.", vbExclamation
+        Exit Function
+    End If
+    
+    
+    
+    'comprobar que la fecha de la factura sea anterior a la fecha de la rectificativa y nueva factura con recargo
+    If Not DeFechaIgualoPosterior() Then
+        MsgBox "Hay facturas seleccionadas de fecha superior a las que vamos a generar. Revise.", vbExclamation
         Exit Function
     End If
     
@@ -851,12 +886,6 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
 
     
-'++monica:03/12/2008
-    'comprobamos que hay lineas para facturar: facturas
-    If Not HayFacturas Then
-        MsgBox "No hay facturas para realizar una factura con recargo. Revise.", vbExclamation
-        Exit Function
-    End If
     
     
     
@@ -912,6 +941,7 @@ End Function
 
 Private Function HayFacturas() As Boolean
 Dim Sql As String
+Dim I As Integer
 
     HayFacturas = False
     For I = 1 To Me.ListView1.ListItems.Count
@@ -926,6 +956,7 @@ End Function
 
 Private Function DeFechaIgualoPosterior() As Boolean
 Dim Sql As String
+Dim I As Integer
 
     DeFechaIgualoPosterior = True
 
@@ -1013,7 +1044,7 @@ Private Sub CargarFacturas(Socio As String)
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim RSFact As ADODB.Recordset
-Dim it As ListItem
+Dim It As ListItem
 Dim TotalArray As Integer
 Dim HayReg As Boolean
 Dim Codmacta As String
@@ -1040,6 +1071,9 @@ On Error GoTo ECargar
     
             Codmacta = DevuelveDesdeBDNew(cAgro, "rsocios_seccion", "codmaccli", "codsocio", Socio, "N", , "codsecci", vParamAplic.Seccionhorto, "N")
                 
+                
+            ListView1.ListItems.Clear
+                
             While Not RSFact.EOF
                 Sql = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
                 Sql = Sql & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
@@ -1049,21 +1083,30 @@ On Error GoTo ECargar
                 Sql = Sql & " and scobro.codmacta = " & DBSet(Codmacta, "T")
                 Set Rs = New ADODB.Recordset
                 Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+                
                 If Not Rs.EOF Then
                     If DBLet(Rs.Fields(0).Value, "N") <> 0 Then
                     
                         HayReg = True
                     
-                        Set it = ListView1.ListItems.Add
+                        Set It = ListView1.ListItems.Add
                         
                         'It.Tag = DevNombreSQL(RS!codCampo)
-                        it.Text = DBLet(RSFact!CodTipom, "T")
-                        it.SubItems(1) = RSFact!nomtipom
-                        it.SubItems(2) = Format(DBLet(RSFact!Numfactu, "N"), "0000000")
-                        it.SubItems(3) = RSFact!fecfactu
-                        it.SubItems(4) = Format(DBLet(Rs!Importe, "N"), "###,###,##0.00")
+                        It.Text = DBLet(RSFact!CodTipom, "T")
+                        It.SubItems(1) = RSFact!nomtipom
+                        It.SubItems(2) = Format(DBLet(RSFact!Numfactu, "N"), "0000000")
+                        It.SubItems(3) = RSFact!fecfactu
+                        'It.SubItems(4) = Format(DBLet(Rs!Importe, "N"), "###,###,##0.00")
                         
-                        it.Checked = True
+                        ' de momento saco el importe del totalfact
+                        Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+                        Sql = Sql & " where codtipom = " & DBSet(RSFact!CodTipom, "T")
+                        Sql = Sql & " and numfactu = " & DBSet(RSFact!Numfactu, "N")
+                        Sql = Sql & " and fecfactu = " & DBSet(RSFact!fecfactu, "F")
+                        It.SubItems(4) = Format(DevuelveValor(Sql), "###,###,##0.00")
+                        
+                        
+                        It.Checked = True
                         
                         Rs.MoveNext
                         TotalArray = TotalArray + 1
@@ -1123,6 +1166,8 @@ End Function
 Private Sub BotonFacturar()
 Dim vFactu As CFacturaTer
 Dim Cad As String
+Dim I As Integer
+Dim b As Boolean
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -1132,7 +1177,7 @@ Dim Cad As String
     
     Set vSocio = New cSocio
     
-    'Tiene que ller los datos del socio
+    'Tiene que llevar los datos del socio
     If Not vSocio.LeerDatos(Text1(3).Text) Then Exit Sub
     
     If Not DatosOk Then
@@ -1142,6 +1187,7 @@ Dim Cad As String
 
     conn.BeginTrans
     
+    b = True
     I = 1
     While I <= Me.ListView1.ListItems.Count And b
         If Me.ListView1.ListItems(I).Checked Then
@@ -1157,7 +1203,8 @@ Dim Cad As String
     conn.CommitTrans
     MsgBox "Proceso realizado correctamente.", vbExclamation
     Screen.MousePointer = vbDefault
-
+    Exit Sub
+    
 Error1:
     conn.RollbackTrans
     Screen.MousePointer = vbDefault
@@ -1165,30 +1212,189 @@ Error1:
 End Sub
 
 
-Private Function CrearFactura(CodTipom As String, NumFact As String, FecFact As String, EsRectificativa As Boolean)
+Private Function CrearFactura(vTipom As String, NumFact As String, FecFact As String, EsRectificativa As Boolean) As Boolean
 Dim Sql As String
+Dim vTipoMov As CTiposMov
+Dim CodTipom As String
+Dim Numfactu As Long
+Dim devuelve As String
+Dim Existe As Boolean
+Dim Mens As String
+Dim vImpRecargo As Currency
+Dim SqlInsert As String
+Dim SqlValues As String
 
-    Sql = "select * from rrecibpozos where codtipom = " & DBSet(CodTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfact = " & DBSet(FecFact, "F")
+
+    On Error GoTo eCrearFactura
+
+
+    CrearFactura = False
+
     
+    If EsRectificativa Then
+        Select Case vTipom
+            Case "RCP"
+                CodTipom = "RRC"
+            Case "RMP"
+                CodTipom = "RRM"
+            Case "RMT"
+                CodTipom = "RRT"
+            Case "RVP"
+                CodTipom = "RRV"
+        End Select
+    Else
+        CodTipom = vTipom
+    End If
+    
+    Set vTipoMov = New CTiposMov
+    If vTipoMov.Leer(CodTipom) Then
+        'Comprobar si mientras tanto se incremento el contador de albaranes
+        Do
+            Numfactu = vTipoMov.ConseguirContador(CodTipom)
+            devuelve = DevuelveDesdeBDNew(cAgro, "rrecibpozos", "numfactu", "numfactu", CStr(Numfactu), "N", , "codtipom", CodTipom, "T")
+            If devuelve <> "" Then
+                'Ya existe el contador incrementarlo
+                Existe = True
+                vTipoMov.IncrementarContador (CodTipom)
+                Numfactu = vTipoMov.ConseguirContador(CodTipom)
+            Else
+                Existe = False
+            End If
+        Loop Until Not Existe
+            
+    Else 'No existe el tipo de Movimiento
+        Set vTipoMov = Nothing
+        Exit Function
+    End If
+    
+    Mens = "Insertando rrecibpozos"
+    
+    ' cabecera de factura
     SqlInsert = "insert into rrecibpozos (codtipom,numfactu,fecfactu,numlinea,codsocio,hidrante,baseimpo,tipoiva,porc_iva,imporiva,totalfact,"
     SqlInsert = SqlInsert & "consumo,impcuota,lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1,consumo2,precio2,concepto,"
-    SqlInsert = SqlInsert & "contabilizado,impreso,conceptomo,importemo,conceptoar1,importear1conceptoar2,importear2,"
+    SqlInsert = SqlInsert & "contabilizado,impreso,conceptomo,importemo,conceptoar1,importear1,conceptoar2,importear2,"
     SqlInsert = SqlInsert & "conceptoar3,importear3,conceptoar4,importear4,difdias,codparti,calibre,codpozo,porcdto,impdto,"
     SqlInsert = SqlInsert & "precio,pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
-    SqlInsert = SqlInsert & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir) values ("
-
+    SqlInsert = SqlInsert & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir "
+    
     If EsRectificativa Then
-    
-    
+        vImpRecargo = 0
+        SqlInsert = SqlInsert & ",codtipomrec, numfacturec, fecfacturec, imprecargo) "
     Else
-    
-    
+        vImpRecargo = CalculoImpRecargo(vTipom, NumFact, FecFact)
+        SqlInsert = SqlInsert & ",imprecargo) "
     End If
+
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codsocio,hidrante, "
+    If EsRectificativa Then
+        SqlValues = SqlValues & "baseimpo * (-1),tipoiva,porc_iva,imporiva*(-1), totalfact * (-1),"
+        SqlValues = SqlValues & "consumo,impcuota * (-1),lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1 * (-1),consumo2,precio2 * (-1),concepto,"
+        SqlValues = SqlValues & "0,0,conceptomo,importemo *(-1),conceptoar1,importear1 * (-1),conceptoar2,importear2 * (-1),"
+        SqlValues = SqlValues & "conceptoar3,importear3 * (-1),conceptoar4,importear4 * (-1),difdias,codparti,calibre,codpozo,porcdto,impdto * (-1),"
+        SqlValues = SqlValues & "precio * (-1),pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
+        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir "
+    Else
+        SqlValues = SqlValues & "baseimpo,tipoiva,porc_iva,imporiva,totalfact, "
+        SqlValues = SqlValues & "consumo,impcuota,lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1,consumo2,precio2,concepto,"
+        SqlValues = SqlValues & "0,0,conceptomo,importemo,conceptoar1,importear1,conceptoar2,importear2,"
+        SqlValues = SqlValues & "conceptoar3,importear3,conceptoar4,importear4,difdias,codparti,calibre,codpozo,porcdto,impdto,"
+        SqlValues = SqlValues & "precio,pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
+        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir "
+    End If
+    
+    ' grabamos la factura a la que rectifica
+    If EsRectificativa Then
+        SqlValues = SqlValues & "," & DBSet(vTipom, "T") & "," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & ",0 "
+    Else
+        SqlValues = SqlValues & "," & DBSet(vImpRecargo, "N")
+    End If
+    SqlValues = SqlValues & " from rrecibpozos where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    
+    conn.Execute SqlInsert & SqlValues
+    
+    
+    ' lineas de factura rrecibpozos_acc
+    Mens = "Insertando rrecibpozos_acc"
+    
+    SqlInsert = "insert into rrecibpozos_acc (CodTipom , numfactu, fecfactu, numlinea, numfases, Acciones, observac) "
+    
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ",numlinea, numfases, Acciones, observac "
+    SqlValues = SqlValues & " from rrecibpozos_acc where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    
+    conn.Execute SqlInsert & SqlValues
+    
+    ' lineas de factura rrecibpozos_cam
+    Mens = "Insertando rrecibpozos_cam"
+    
+    SqlInsert = "insert into rrecibpozos_cam (codTipom , numfactu, fecfactu, numlinea, codcampo, hanegada, precio1, precio2, codzonas, poligono, parcela, subparce) "
+    
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
+    SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    
+    conn.Execute SqlInsert & SqlValues
+    
+    ' lineas de factura rrecibpozos_hid
+    Mens = "Insertando rrecibpozos_hid"
+    
+    SqlInsert = "insert into rrecibpozos_hid (codTipom , numfactu, fecfactu, numlinea, Hidrante, hanegada, nroorden) "
+    
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, Hidrante, hanegada, nroorden "
+    SqlValues = SqlValues & " from rrecibpozos_hid where  codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    
+    conn.Execute SqlInsert & SqlValues
+    
+    CrearFactura = True
+    Exit Function
+
+eCrearFactura:
+    MuestraError Err.Number, "Crear Factura", Mens & vbCrLf & Err.Description
+End Function
+
+Private Function CalculoImpRecargo(Tipom As String, NumFact As String, FecFact As String) As Currency
+Dim Sql As String
+Dim vImporte As Currency
+Dim vSeccion As CSeccion
+Dim Rs As ADODB.Recordset
+
+    vImporte = 0
+
+' de momento comentado pq lo vamos a calcular sobre el importe de factura
+'    Set vSeccion = New CSeccion
+'    If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
+'        If vSeccion.AbrirConta Then
+'            Sql = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
+'            Sql = Sql & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
+'            Sql = Sql & " WHERE stipom.codtipom = " & DBSet(Tipom, "T")
+'            Sql = Sql & " and scobro.codfaccl = " & DBSet(NumFact, "N")
+'            Sql = Sql & " and scobro.fecfaccl = " & DBSet(FecFact, "F")
+'
+'            Set Rs = New ADODB.Recordset
+'            Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+'            If Not Rs.EOF Then
+'                vImporte = DBLet(Rs.Fields(0).Value, "N")
+'            End If
+'        End If
+'    End If
+'    Set vSeccion = Nothing
+
+    Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+    Sql = Sql & " where codtipom = " & DBSet(Tipom, "T")
+    Sql = Sql & " and numfactu = " & DBSet(NumFact, "N")
+    Sql = Sql & " and fecfactu = " & DBSet(FecFact, "F")
+    
+    vImporte = DevuelveValor(Sql)
+    
+
+    If ComprobarCero(Text1(0).Text) <> "0" Then
+        vImporte = Round2(vImporte * ImporteFormateado(Text1(0).Text) / 100, 2)
+    Else
+        vImporte = ImporteFormateado(Text1(2).Text)
+    End If
+
+    CalculoImpRecargo = vImporte
 
 
 End Function
-
-
 
 Private Function ExisteFacturaEnHco() As Boolean
 'Comprobamos si la factura ya existe en la tabla de Facturas a Proveedor: scafpc
@@ -1254,3 +1460,19 @@ Private Sub InicializarListView()
     ListView1.ColumnHeaders.Add , , "Importe", 1600, 1
     
 End Sub
+
+
+
+Private Sub imgCheck_Click(Index As Integer)
+Dim b As Boolean
+Dim TotalArray As Long
+
+    'En el listview3
+    b = Index = 1
+    For TotalArray = 1 To ListView1.ListItems.Count
+        ListView1.ListItems(TotalArray).Checked = b
+        If (TotalArray Mod 50) = 0 Then DoEvents
+    Next TotalArray
+End Sub
+
+
