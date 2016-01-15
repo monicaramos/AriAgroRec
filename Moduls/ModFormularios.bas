@@ -826,6 +826,13 @@ Public Sub PonerFocoGrid(ByRef DGrid As DataGrid)
 End Sub
 
 
+Public Sub PonerFocoListView(ByRef LView As ListView)
+    On Error Resume Next
+    LView.SetFocus
+    If Err.Number <> 0 Then Err.Clear
+End Sub
+
+
 
 
 Public Sub ConseguirFoco(ByRef Text As TextBox, Modo As Byte)

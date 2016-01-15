@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMensajes 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Mensajes"
@@ -15,6 +15,103 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameImpFrasPozos 
+      Height          =   5790
+      Left            =   0
+      TabIndex        =   135
+      Top             =   0
+      Width           =   10260
+      Begin VB.CommandButton CmdAcepImpFras 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   7080
+         TabIndex        =   138
+         Top             =   5130
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdcancel 
+         Caption         =   "Cancelar"
+         Height          =   375
+         Index           =   4
+         Left            =   8520
+         TabIndex        =   137
+         Top             =   5130
+         Width           =   1215
+      End
+      Begin MSComctlLib.ListView ListView19 
+         Height          =   4155
+         Left            =   240
+         TabIndex        =   136
+         Top             =   750
+         Width           =   9585
+         _ExtentX        =   16907
+         _ExtentY        =   7329
+         View            =   3
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Código"
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Variedad"
+            Object.Width           =   3881
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Clase "
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Descripcion"
+            Object.Width           =   3706
+         EndProperty
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Facturas"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Left            =   270
+         TabIndex        =   139
+         Top             =   270
+         Width           =   5145
+      End
+      Begin VB.Image imgCheck4 
+         Height          =   240
+         Index           =   1
+         Left            =   600
+         Picture         =   "frmMensajes.frx":000C
+         Top             =   5160
+         Width           =   240
+      End
+      Begin VB.Image imgCheck4 
+         Height          =   240
+         Index           =   0
+         Left            =   240
+         Picture         =   "frmMensajes.frx":0156
+         Top             =   5160
+         Width           =   240
+      End
+   End
    Begin VB.Frame FrameVisualizaEntradas 
       Height          =   5790
       Left            =   0
@@ -314,103 +411,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   141
          Top             =   330
          Width           =   5565
-      End
-   End
-   Begin VB.Frame FrameImpFrasPozos 
-      Height          =   5790
-      Left            =   0
-      TabIndex        =   135
-      Top             =   0
-      Width           =   10260
-      Begin VB.CommandButton CmdAcepImpFras 
-         Caption         =   "Aceptar"
-         Height          =   375
-         Left            =   7080
-         TabIndex        =   138
-         Top             =   5130
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdcancel 
-         Caption         =   "Cancelar"
-         Height          =   375
-         Index           =   4
-         Left            =   8520
-         TabIndex        =   137
-         Top             =   5130
-         Width           =   1215
-      End
-      Begin MSComctlLib.ListView ListView19 
-         Height          =   4155
-         Left            =   240
-         TabIndex        =   136
-         Top             =   750
-         Width           =   9585
-         _ExtentX        =   16907
-         _ExtentY        =   7329
-         View            =   3
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   4
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Código"
-            Object.Width           =   1764
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Variedad"
-            Object.Width           =   3881
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Clase "
-            Object.Width           =   1411
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "Descripcion"
-            Object.Width           =   3706
-         EndProperty
-      End
-      Begin VB.Label Label17 
-         Caption         =   "Facturas"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   375
-         Left            =   270
-         TabIndex        =   139
-         Top             =   270
-         Width           =   5145
-      End
-      Begin VB.Image imgCheck4 
-         Height          =   240
-         Index           =   1
-         Left            =   600
-         Picture         =   "frmMensajes.frx":000C
-         Top             =   5160
-         Width           =   240
-      End
-      Begin VB.Image imgCheck4 
-         Height          =   240
-         Index           =   0
-         Left            =   240
-         Picture         =   "frmMensajes.frx":0156
-         Top             =   5160
-         Width           =   240
       End
    End
    Begin VB.Frame FramePago 
@@ -3383,7 +3383,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3484,13 +3484,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3538,7 +3538,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3556,7 +3556,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3600,7 +3600,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID Cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.cmdSalir
+            PonerFocoBtn Me.CmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -3777,7 +3777,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -3858,47 +3858,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.CmdAceptarCobros.Top = 4000
-            Me.CmdAceptarCobros.Left = 4200
+            Me.cmdAceptarCobros.Top = 4000
+            Me.cmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.CmdAceptarCobros.Left = 4000
+            Me.cmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.CmdAceptarCobros.Top = 5400
-            Me.CmdAceptarCobros.Left = 4600
+            Me.cmdAceptarCobros.Top = 5400
+            Me.cmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.CmdCancelarCobros.Top = 5300
-                Me.CmdCancelarCobros.Left = 4600
-                Me.CmdAceptarCobros.Left = 3300
+                Me.cmdCancelarCobros.Top = 5300
+                Me.cmdCancelarCobros.Left = 4600
+                Me.cmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.CmdAceptarCobros.Caption = "&SI"
-                Me.CmdCancelarCobros.Caption = "&NO"
+                Me.cmdAceptarCobros.Caption = "&SI"
+                Me.cmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             
-            Me.CmdCancelarCobros.Top = 5300
-            Me.CmdCancelarCobros.Left = 4600
-            Me.CmdAceptarCobros.Left = 3300
+            Me.cmdCancelarCobros.Top = 5300
+            Me.cmdCancelarCobros.Left = 4600
+            Me.cmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.CmdAceptarCobros.Caption = "&SI"
-            Me.CmdCancelarCobros.Caption = "&NO"
+            Me.cmdAceptarCobros.Caption = "&SI"
+            Me.cmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -3907,7 +3907,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -4518,7 +4518,7 @@ Dim SQL As String
             ItmX.SubItems(2) = RS!codtrata
             ItmX.SubItems(3) = Format(RS!Codsocio, "000000")
             ItmX.SubItems(4) = RS!nomsocio
-            ItmX.SubItems(5) = RS!CodCampo
+            ItmX.SubItems(5) = RS!codcampo
             
             RS.MoveNext
         Wend
@@ -5123,10 +5123,10 @@ Dim It As ListItem
             It.Text = DBLet(RS!nroorden, "N")
         Else
             If Opcion = 7 Then
-                It.Text = DBLet(RS!CodCampo, "N")
+                It.Text = DBLet(RS!codcampo, "N")
             Else
                 If Opcion <> 5 Then
-                    It.Text = DBLet(RS!CodCampo, "N")
+                    It.Text = DBLet(RS!codcampo, "N")
                 Else
                     It.Text = DBLet(RS!NroCampo, "N")
                 End If
@@ -5137,7 +5137,7 @@ Dim It As ListItem
             It.SubItems(1) = Format(RS!codvarie, "000000")
             It.SubItems(2) = RS!nomvarie
             It.SubItems(3) = RS!nomparti
-            It.SubItems(4) = RS!poligono
+            It.SubItems(4) = RS!Poligono
             It.SubItems(5) = RS!Parcela
             It.SubItems(6) = RS!NroCampo
         Else
@@ -5161,16 +5161,16 @@ Dim It As ListItem
                     Else
                         If Opcion = 7 Then
                             It.SubItems(1) = RS!nomparti
-                            It.SubItems(2) = DBLet(RS!poligono, "N")
+                            It.SubItems(2) = DBLet(RS!Poligono, "N")
                             It.SubItems(3) = DBLet(RS!Parcela, "N")
                             It.SubItems(4) = DBLet(RS!SubParce, "T")
                             It.SubItems(5) = RS!nomvarie
                             It.SubItems(6) = RS!nomsocio
                         Else
                             It.SubItems(1) = RS!nomparti
-                            It.SubItems(2) = DBLet(RS!codPobla, "T")
+                            It.SubItems(2) = DBLet(RS!CodPobla, "T")
                             It.SubItems(3) = DBLet(RS!desPobla, "T")
-                            It.SubItems(4) = RS!poligono
+                            It.SubItems(4) = RS!Poligono
                             It.SubItems(5) = RS!Parcela
                             It.SubItems(6) = DBLet(RS!SubParce, "T")
                             It.SubItems(7) = RS!NroCampo
@@ -5417,7 +5417,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Hidrante, "T")
         It.SubItems(1) = Format(RS!codparti, "000000")
         It.SubItems(2) = RS!nomparti
-        It.SubItems(3) = DBLet(RS!poligono, "T")
+        It.SubItems(3) = DBLet(RS!Poligono, "T")
         It.SubItems(4) = DBLet(RS!parcelas, "T")
         It.Checked = False
         
@@ -5465,7 +5465,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Hidrante, "T")
         It.SubItems(1) = Format(RS!codparti, "000000")
         It.SubItems(2) = RS!nomparti
-        It.SubItems(3) = DBLet(RS!poligono, "T")
+        It.SubItems(3) = DBLet(RS!Poligono, "T")
         It.SubItems(4) = DBLet(RS!parcelas, "T")
         It.Checked = True
         
@@ -5518,7 +5518,7 @@ Dim It As ListItem
         It.SubItems(1) = Format(RS!Codsocio, "000000")
         It.SubItems(2) = RS!nomsocio
         It.SubItems(3) = RS!nomparti
-        It.SubItems(4) = DBLet(RS!poligono, "T")
+        It.SubItems(4) = DBLet(RS!Poligono, "T")
         It.SubItems(5) = DBLet(RS!parcelas, "T")
         It.Checked = True
         
@@ -5602,7 +5602,7 @@ Dim NomFic As String
         It.Text = DBLet(RS!Numalbar, "T")
         It.SubItems(1) = Format(RS!codvarie, "000000")
         It.SubItems(2) = Format(RS!Codsocio, "000000")
-        It.SubItems(3) = Format(RS!CodCampo, "00000000")
+        It.SubItems(3) = Format(RS!codcampo, "00000000")
         Select Case DBLet(RS!TipoEntr, "N")
             Case 0
                 It.SubItems(4) = "Ya existe la nota de campo en el histórico"
@@ -5826,7 +5826,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Numalbar, "N")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = RS!nomvarie
-        It.SubItems(3) = Format(DBLet(RS!CodCampo, "N"), "00000000")
+        It.SubItems(3) = Format(DBLet(RS!codcampo, "N"), "00000000")
         It.SubItems(4) = Format(DBLet(RS!numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(RS!KilosNet, "N")
         It.SubItems(6) = DBLet(RS!ImpTrans, "N")
@@ -5891,7 +5891,7 @@ Dim It As ListItem
         It.SubItems(2) = RS!nomvarie
         It.SubItems(3) = Format(DBLet(RS!NroCampo, "N"), "000000")
         It.SubItems(4) = RS!nomparti
-        It.SubItems(5) = RS!poligono
+        It.SubItems(5) = RS!Poligono
         It.SubItems(6) = RS!Parcela
         It.SubItems(7) = DBLet(RS!KilosNet, "N")
         
@@ -5943,7 +5943,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Numalbar, "N")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = RS!nomvarie
-        It.SubItems(3) = Format(DBLet(RS!CodCampo, "N"), "00000000")
+        It.SubItems(3) = Format(DBLet(RS!codcampo, "N"), "00000000")
         It.SubItems(4) = DBLet(RS!KilosNet, "N")
         
         It.Checked = False
@@ -6407,7 +6407,7 @@ Dim Nregs As Integer
     SQL = SQL & " and fechabaja is null order by 1 "
     
     Nregs = TotalRegistrosConsulta(SQL)
-    CargarProgres pb1, Nregs
+    CargarProgres Pb1, Nregs
 
     
     Set RS = New ADODB.Recordset
@@ -6416,7 +6416,7 @@ Dim Nregs As Integer
     CadContadores = ""
     
     While Not RS.EOF And Not PulsadoSalir
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         Label13.Caption = "Procesando contador: " & DBLet(RS!Hidrante, "T")
         DoEvents
@@ -6435,7 +6435,7 @@ Dim Nregs As Integer
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql2, ConnIndefa, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not Rs2.EOF Then
-            If Trim(DBLet(RS!poligono, "T")) <> Trim(DBLet(Rs2!poligono, "T")) Or _
+            If Trim(DBLet(RS!Poligono, "T")) <> Trim(DBLet(Rs2!Poligono, "T")) Or _
                Mid(Trim(DBLet(RS!parcelas, "T")), 1, 25) <> Mid(Trim(DBLet(Rs2!parcelas, "T")), 1, 25) Or _
                Int(ComprobarCero(DBLet(RS!hanegada, "N"))) <> Int(Round2(ComprobarCero(DBLet(Rs2!Hanegadas, "N")), 4)) Or _
                (DBLet(RS!Codsocio, "N") <> ComprobarCero(DBLet(Rs2!socio_revisado, "N")) And DBLet(Rs2!socio_revisado, "N") <> 0) Or _

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmPOZFraRecargo 
    BorderStyle     =   3  'Fixed Dialog
@@ -446,7 +446,7 @@ Private Modo As Byte
 
 'cadena donde se almacena la WHERE para la seleccion de los albaranes
 'marcados para facturar
-Dim cadWHERE As String
+Dim cadwhere As String
 
 'Cuando vuelve del formulario de ver los albaranes seleccionados hay que volver
 'a cargar los datos de los albaranes
@@ -475,6 +475,17 @@ Dim ModificaDescuento As Boolean
 
 Dim vSeccion As CSeccion
 
+'GENERALES PARA PASARLE A CRYSTAL REPORT
+Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadTitulo As String 'Titulo para la ventana frmImprimir
+Private cadNombreRPT As String 'Nombre del informe
+Private Titulo As String 'Titulo informe que se pasa a frmImprimir
+Private nomRPT As String 'nombre del fichero .rpt a imprimir
+Private conSubRPT As Boolean 'si tiene subinformes para enlazarlos a las tablas correctas
+'-------------------------------------
 
 
 Private Sub Form_Activate()
@@ -551,8 +562,8 @@ End Sub
 
 
 Private Sub Form_Unload(Cancel As Integer)
-    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
-    DesBloqueoManual "FACTRA"
+'    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
+'    DesBloqueoManual "FACTRA"
     TerminaBloquear
 '    DesBloqueoManual ("scaalp")
 End Sub
@@ -742,7 +753,7 @@ Private Sub Text1_LostFocus(Index As Integer)
           
         Case 2 ' importe recargo
             PonerFormatoDecimal Text1(Index), 3
-            PonerFoco Text1(3)
+            PonerFocoListView Me.ListView1
     End Select
 End Sub
 
@@ -762,8 +773,8 @@ On Error GoTo EPonerModo
     '=========================================
     b = (Modo = 2)
         
-    cmdAceptar.visible = (ModoLineas = 2)
-    cmdAceptar.Enabled = (ModoLineas = 2)
+    CmdAceptar.visible = (ModoLineas = 2)
+    CmdAceptar.Enabled = (ModoLineas = 2)
     cmdCancelar.visible = (ModoLineas = 2)
     cmdCancelar.Enabled = (ModoLineas = 2)
     
@@ -940,7 +951,7 @@ EDatosOK:
 End Function
 
 Private Function HayFacturas() As Boolean
-Dim Sql As String
+Dim sql As String
 Dim I As Integer
 
     HayFacturas = False
@@ -955,7 +966,7 @@ Dim I As Integer
 End Function
 
 Private Function DeFechaIgualoPosterior() As Boolean
-Dim Sql As String
+Dim sql As String
 Dim I As Integer
 
     DeFechaIgualoPosterior = True
@@ -1018,7 +1029,7 @@ Dim Nombre As String
     InicializarListView
 
     'Como no habrá albaranes seleccionados vaciamos la cadwhere
-    cadWHERE = ""
+    cadwhere = ""
     
     PonerModo 3
     
@@ -1041,7 +1052,7 @@ End Sub
 Private Sub CargarFacturas(Socio As String)
 'Recupera de la BD y muestra en el Listview todos los albaranes de compra
 'que tiene el proveedor introducido.
-Dim Sql As String
+Dim sql As String
 Dim Rs As ADODB.Recordset
 Dim RSFact As ADODB.Recordset
 Dim It As ListItem
@@ -1057,13 +1068,18 @@ On Error GoTo ECargar
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
     
-            Sql = "select uuu.codtipom, uuu.nomtipom, numfactu, fecfactu from rrecibpozos inner join usuarios.stipom uuu on rrecibpozos.codtipom = uuu.codtipom where codsocio = " & DBSet(Socio, "N")
-            Sql = Sql & " and fecfactu "
-            Sql = Sql & " and contabilizado = 1 "
-            Sql = Sql & " order by 1, 4 desc "
+            sql = "select uuu.codtipom, uuu.nomtipom, numfactu, fecfactu from rrecibpozos inner join usuarios.stipom uuu on rrecibpozos.codtipom = uuu.codtipom where codsocio = " & DBSet(Socio, "N")
+            sql = sql & " and fecfactu "
+            sql = sql & " and contabilizado = 1  "
+            '[Monica]15/01/2016: no se muestran para poder rectificar ni las facturas rectifcativas ni
+            '                   LAS DE RIEGO A MANTA --> SOBRARIA EL TIPO RRT(RECT.CONSUMO MANTA)
+            sql = sql & " and not rrecibpozos.codtipom in ('RRC','RRM','RRT','RRV','RTA','RMT') "
+            
+            
+            sql = sql & " order by 1, 4 desc "
             
             Set RSFact = New ADODB.Recordset
-            RSFact.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RSFact.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
             HayReg = False
     
@@ -1075,14 +1091,14 @@ On Error GoTo ECargar
             ListView1.ListItems.Clear
                 
             While Not RSFact.EOF
-                Sql = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
-                Sql = Sql & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
-                Sql = Sql & " WHERE stipom.codtipom = " & DBSet(RSFact!CodTipom, "T")
-                Sql = Sql & " and scobro.codfaccl = " & DBSet(RSFact!Numfactu, "N")
-                Sql = Sql & " and scobro.fecfaccl = " & DBSet(RSFact!fecfactu, "F")
-                Sql = Sql & " and scobro.codmacta = " & DBSet(Codmacta, "T")
+                sql = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
+                sql = sql & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
+                sql = sql & " WHERE stipom.codtipom = " & DBSet(RSFact!CodTipom, "T")
+                sql = sql & " and scobro.codfaccl = " & DBSet(RSFact!numfactu, "N")
+                sql = sql & " and scobro.fecfaccl = " & DBSet(RSFact!fecfactu, "F")
+                sql = sql & " and scobro.codmacta = " & DBSet(Codmacta, "T")
                 Set Rs = New ADODB.Recordset
-                Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
                 If Not Rs.EOF Then
                     If DBLet(Rs.Fields(0).Value, "N") <> 0 Then
@@ -1094,16 +1110,16 @@ On Error GoTo ECargar
                         'It.Tag = DevNombreSQL(RS!codCampo)
                         It.Text = DBLet(RSFact!CodTipom, "T")
                         It.SubItems(1) = RSFact!nomtipom
-                        It.SubItems(2) = Format(DBLet(RSFact!Numfactu, "N"), "0000000")
+                        It.SubItems(2) = Format(DBLet(RSFact!numfactu, "N"), "0000000")
                         It.SubItems(3) = RSFact!fecfactu
                         'It.SubItems(4) = Format(DBLet(Rs!Importe, "N"), "###,###,##0.00")
                         
                         ' de momento saco el importe del totalfact
-                        Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
-                        Sql = Sql & " where codtipom = " & DBSet(RSFact!CodTipom, "T")
-                        Sql = Sql & " and numfactu = " & DBSet(RSFact!Numfactu, "N")
-                        Sql = Sql & " and fecfactu = " & DBSet(RSFact!fecfactu, "F")
-                        It.SubItems(4) = Format(DevuelveValor(Sql), "###,###,##0.00")
+                        sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+                        sql = sql & " where codtipom = " & DBSet(RSFact!CodTipom, "T")
+                        sql = sql & " and numfactu = " & DBSet(RSFact!numfactu, "N")
+                        sql = sql & " and fecfactu = " & DBSet(RSFact!fecfactu, "F")
+                        It.SubItems(4) = Format(DevuelveValor(sql), "###,###,##0.00")
                         
                         
                         It.Checked = True
@@ -1145,16 +1161,16 @@ Private Function SeleccionaRegistros() As Boolean
 'Comprueba que se seleccionan albaranes en la base de datos
 'es decir que hay albaranes marcados
 'cuando se van marcando albaranes se van añadiendo el la cadena cadWhere
-Dim Sql As String
+Dim sql As String
 
     On Error GoTo ESel
     SeleccionaRegistros = False
     
-    If cadWHERE = "" Then Exit Function
+    If cadwhere = "" Then Exit Function
     
-    Sql = "Select count(*) FROM rhisfruta"
-    Sql = Sql & " WHERE " & cadWHERE
-    If RegistrosAListar(Sql) <> 0 Then SeleccionaRegistros = True
+    sql = "Select count(*) FROM rhisfruta"
+    sql = sql & " WHERE " & cadwhere
+    If RegistrosAListar(sql) <> 0 Then SeleccionaRegistros = True
     Exit Function
     
 ESel:
@@ -1168,6 +1184,7 @@ Dim vFactu As CFacturaTer
 Dim Cad As String
 Dim I As Integer
 Dim b As Boolean
+Dim sql As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -1187,36 +1204,52 @@ Dim b As Boolean
 
     conn.BeginTrans
     
+    ' desmarcamos todas las facturas de ese socio
+    sql = "update rrecibpozos set imprimir = '' where codsocio = " & DBSet(Text1(3).Text, "N")
+    conn.Execute sql
+    
+    
     b = True
     I = 1
     While I <= Me.ListView1.ListItems.Count And b
         If Me.ListView1.ListItems(I).Checked Then
             'creamos la factura rectificativa
             b = CrearFactura(Me.ListView1.ListItems(I).Text, Me.ListView1.ListItems(I).SubItems(2), Me.ListView1.ListItems(I).SubItems(3), True)
-            
+
             'creamos la nueva factura con recargo
             If b Then b = CrearFactura(Me.ListView1.ListItems(I), Me.ListView1.ListItems(I).SubItems(2), Me.ListView1.ListItems(I).SubItems(3), False)
         End If
         I = I + 1
     Wend
 
-    conn.CommitTrans
+    If b Then
+        conn.CommitTrans
+    Else
+        conn.RollbackTrans
+    End If
+        
     MsgBox "Proceso realizado correctamente.", vbExclamation
     Screen.MousePointer = vbDefault
+    
+    'impresion de facturas
+    BotonImprimir
+    
+    Unload Me
+    
     Exit Sub
     
 Error1:
-    conn.RollbackTrans
     Screen.MousePointer = vbDefault
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
 
 
 Private Function CrearFactura(vTipom As String, NumFact As String, FecFact As String, EsRectificativa As Boolean) As Boolean
-Dim Sql As String
+Dim sql As String
 Dim vTipoMov As CTiposMov
+Dim vSeccion As CSeccion
 Dim CodTipom As String
-Dim Numfactu As Long
+Dim numfactu As Long
 Dim devuelve As String
 Dim Existe As Boolean
 Dim Mens As String
@@ -1224,12 +1257,15 @@ Dim vImpRecargo As Currency
 Dim SqlInsert As String
 Dim SqlValues As String
 
+Dim vGastoDevol As Currency
+Dim RsGastos As ADODB.Recordset
+Dim SqlGastos As String
+
+Dim b As Boolean
 
     On Error GoTo eCrearFactura
 
-
     CrearFactura = False
-
     
     If EsRectificativa Then
         Select Case vTipom
@@ -1241,6 +1277,8 @@ Dim SqlValues As String
                 CodTipom = "RRT"
             Case "RVP"
                 CodTipom = "RRV"
+            Case "TAL"
+                CodTipom = "RTA"
         End Select
     Else
         CodTipom = vTipom
@@ -1250,13 +1288,13 @@ Dim SqlValues As String
     If vTipoMov.Leer(CodTipom) Then
         'Comprobar si mientras tanto se incremento el contador de albaranes
         Do
-            Numfactu = vTipoMov.ConseguirContador(CodTipom)
-            devuelve = DevuelveDesdeBDNew(cAgro, "rrecibpozos", "numfactu", "numfactu", CStr(Numfactu), "N", , "codtipom", CodTipom, "T")
+            numfactu = vTipoMov.ConseguirContador(CodTipom)
+            devuelve = DevuelveDesdeBDNew(cAgro, "rrecibpozos", "numfactu", "numfactu", CStr(numfactu), "N", , "codtipom", CodTipom, "T")
             If devuelve <> "" Then
                 'Ya existe el contador incrementarlo
                 Existe = True
                 vTipoMov.IncrementarContador (CodTipom)
-                Numfactu = vTipoMov.ConseguirContador(CodTipom)
+                numfactu = vTipoMov.ConseguirContador(CodTipom)
             Else
                 Existe = False
             End If
@@ -1279,34 +1317,56 @@ Dim SqlValues As String
     
     If EsRectificativa Then
         vImpRecargo = 0
-        SqlInsert = SqlInsert & ",codtipomrec, numfacturec, fecfacturec, imprecargo) "
+        SqlInsert = SqlInsert & ",codtipomrec, numfacturec, fecfacturec, imprecargo, gastodedevol, porcrecargo) "
     Else
         vImpRecargo = CalculoImpRecargo(vTipom, NumFact, FecFact)
-        SqlInsert = SqlInsert & ",imprecargo) "
+        SqlInsert = SqlInsert & ",imprecargo, porcrecargo) "
     End If
 
-    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codsocio,hidrante, "
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codsocio,hidrante, "
     If EsRectificativa Then
         SqlValues = SqlValues & "baseimpo * (-1),tipoiva,porc_iva,imporiva*(-1), totalfact * (-1),"
         SqlValues = SqlValues & "consumo,impcuota * (-1),lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1 * (-1),consumo2,precio2 * (-1),concepto,"
         SqlValues = SqlValues & "0,0,conceptomo,importemo *(-1),conceptoar1,importear1 * (-1),conceptoar2,importear2 * (-1),"
         SqlValues = SqlValues & "conceptoar3,importear3 * (-1),conceptoar4,importear4 * (-1),difdias,codparti,calibre,codpozo,porcdto,impdto * (-1),"
         SqlValues = SqlValues & "precio * (-1),pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
-        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir "
+        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, " & DBSet(vUsu.PC, "T")
     Else
         SqlValues = SqlValues & "baseimpo,tipoiva,porc_iva,imporiva,totalfact, "
         SqlValues = SqlValues & "consumo,impcuota,lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1,consumo2,precio2,concepto,"
         SqlValues = SqlValues & "0,0,conceptomo,importemo,conceptoar1,importear1,conceptoar2,importear2,"
         SqlValues = SqlValues & "conceptoar3,importear3,conceptoar4,importear4,difdias,codparti,calibre,codpozo,porcdto,impdto,"
         SqlValues = SqlValues & "precio,pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
-        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, imprimir "
+        SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, " & DBSet(vUsu.PC, "T")
     End If
     
     ' grabamos la factura a la que rectifica
     If EsRectificativa Then
-        SqlValues = SqlValues & "," & DBSet(vTipom, "T") & "," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & ",0 "
+        vGastoDevol = 0
+'???? si tenemos que imprimir en la factura rectificativa los gastos de la original
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
+            If vSeccion.AbrirConta Then
+                
+                SqlGastos = "SELECT sum(coalesce(gastos,0)) gastos "
+                SqlGastos = SqlGastos & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
+                SqlGastos = SqlGastos & " WHERE stipom.codtipom = " & DBSet(vTipom, "T")
+                SqlGastos = SqlGastos & " and scobro.codfaccl = " & DBSet(NumFact, "N")
+                SqlGastos = SqlGastos & " and scobro.fecfaccl = " & DBSet(FecFact, "F")
+                
+                Set RsGastos = New ADODB.Recordset
+                RsGastos.Open SqlGastos, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Not RsGastos.EOF Then
+                    vGastoDevol = DBLet(RsGastos!Gastos, "N")
+                End If
+                Set RsGastos = Nothing
+            End If
+        End If
+        Set vSeccion = Nothing
+'????
+        SqlValues = SqlValues & "," & DBSet(vTipom, "T") & "," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & ",0, " & DBSet(vGastoDevol, "N") & ",0 "
     Else
-        SqlValues = SqlValues & "," & DBSet(vImpRecargo, "N")
+        SqlValues = SqlValues & "," & DBSet(vImpRecargo, "N") & "," & DBSet(Text1(0).Text, "N")
     End If
     SqlValues = SqlValues & " from rrecibpozos where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
@@ -1318,7 +1378,7 @@ Dim SqlValues As String
     
     SqlInsert = "insert into rrecibpozos_acc (CodTipom , numfactu, fecfactu, numlinea, numfases, Acciones, observac) "
     
-    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ",numlinea, numfases, Acciones, observac "
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ",numlinea, numfases, Acciones, observac "
     SqlValues = SqlValues & " from rrecibpozos_acc where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
@@ -1328,7 +1388,7 @@ Dim SqlValues As String
     
     SqlInsert = "insert into rrecibpozos_cam (codTipom , numfactu, fecfactu, numlinea, codcampo, hanegada, precio1, precio2, codzonas, poligono, parcela, subparce) "
     
-    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
     SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
@@ -1338,20 +1398,22 @@ Dim SqlValues As String
     
     SqlInsert = "insert into rrecibpozos_hid (codTipom , numfactu, fecfactu, numlinea, Hidrante, hanegada, nroorden) "
     
-    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(Numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, Hidrante, hanegada, nroorden "
+    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, Hidrante, hanegada, nroorden "
     SqlValues = SqlValues & " from rrecibpozos_hid where  codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
     
-    CrearFactura = True
+    b = vTipoMov.IncrementarContador(CodTipom)
+    
+    CrearFactura = b
     Exit Function
 
 eCrearFactura:
     MuestraError Err.Number, "Crear Factura", Mens & vbCrLf & Err.Description
 End Function
 
-Private Function CalculoImpRecargo(Tipom As String, NumFact As String, FecFact As String) As Currency
-Dim Sql As String
+Private Function CalculoImpRecargo(TipoM As String, NumFact As String, FecFact As String) As Currency
+Dim sql As String
 Dim vImporte As Currency
 Dim vSeccion As CSeccion
 Dim Rs As ADODB.Recordset
@@ -1377,12 +1439,12 @@ Dim Rs As ADODB.Recordset
 '    End If
 '    Set vSeccion = Nothing
 
-    Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
-    Sql = Sql & " where codtipom = " & DBSet(Tipom, "T")
-    Sql = Sql & " and numfactu = " & DBSet(NumFact, "N")
-    Sql = Sql & " and fecfactu = " & DBSet(FecFact, "F")
+    sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+    sql = sql & " where codtipom = " & DBSet(TipoM, "T")
+    sql = sql & " and numfactu = " & DBSet(NumFact, "N")
+    sql = sql & " and fecfactu = " & DBSet(FecFact, "F")
     
-    vImporte = DevuelveValor(Sql)
+    vImporte = DevuelveValor(sql)
     
 
     If ComprobarCero(Text1(0).Text) <> "0" Then
@@ -1475,4 +1537,142 @@ Dim TotalArray As Long
     Next TotalArray
 End Sub
 
+
+Private Sub BotonImprimir()
+Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
+Dim nomDocu As String 'Nombre de Informe rpt de crystal
+Dim devuelve As String
+    
+Dim sql As String
+Dim Rs As ADODB.Recordset
+    
+    
+    sql = "select codtipom from rrecibpozos where imprimir = " & DBSet(vUsu.PC, "T")
+    sql = sql & " and fecfactu = " & DBSet(Text1(1).Text, "F") & " group by 1 order by 1"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        
+        
+        cadFormula = ""
+        cadParam = ""
+        cadSelect = ""
+        numParam = 0
+        
+        '===================================================
+        '============ PARAMETROS ===========================
+        Select Case DBLet(Rs!CodTipom)
+            Case "RCP"
+                indRPT = 46 'Impresion de recibos de consumo de pozos
+                cadTitulo = "Reimpresión de Recibos Consumo"
+            Case "RMP"
+                indRPT = 47 'Impresion de recibos de mantenimiento de pozos
+                cadTitulo = "Reimpresión de Recibos Mantenimiento"
+            Case "RVP"
+                indRPT = 47 'Impresion de recibos de contadores pozos
+                cadTitulo = "Reimpresión de Recibos Contadores"
+            Case "TAL"
+                indRPT = 47 'Impresion de recibos de talla
+                cadTitulo = "Reimpresión de Recibos Talla"
+            Case "RMT"
+                indRPT = 47 'Impresion de recibos de consumo a manta
+                cadTitulo = "Reimpresión de Recibos Consumo Manta"
+                
+            '[Monica]14/01/2016: las rectificativas
+            Case "RRC"
+                indRPT = 46 ' impresion de recibos de consumo
+                cadTitulo = "Reimpresión de Recibos Rect.Consumo"
+            Case "RRM"
+                indRPT = 47 'Impresion de recibos de mantenimiento de pozos
+                cadTitulo = "Reimpresión de Recibos Rect.Mantenimiento"
+            Case "RRV"
+                indRPT = 47 'Impresion de recibos de contadores pozos
+                cadTitulo = "Reimpresión de Recibos Rect.Contadores"
+            Case "RTA"
+                indRPT = 47 'Impresion de recibos de talla
+                cadTitulo = "Reimpresión de Recibos Rect.Talla"
+            Case "RRT"
+                indRPT = 47 'Impresion de recibos de consumo a manta
+                cadTitulo = "Reimpresión de Recibos Rect.Consumo Manta"
+        End Select
+        
+        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        
+        If DBLet(Rs!CodTipom) = "TAL" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
+        If DBLet(Rs!CodTipom) = "RVP" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
+        If DBLet(Rs!CodTipom) = "RMT" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
+          
+        '[Monica]14/01/2016: las rectificativas
+        If DBLet(Rs!CodTipom) = "RTA" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
+        If DBLet(Rs!CodTipom) = "RRV" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
+        If DBLet(Rs!CodTipom) = "RRM" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
+          
+          
+        'Nombre fichero .rpt a Imprimir
+        frmImprimir.NombreRPT = nomDocu
+            
+        '===================================================
+        '================= FORMULA =========================
+        'Cadena para seleccion Nº de recibo
+        '---------------------------------------------------
+            
+        'Fecha Factura
+        devuelve = "{" & NombreTabla & ".fecfactu}=Date(" & Year(Text1(1).Text) & "," & Month(Text1(1).Text) & "," & Day(Text1(1).Text) & ")"
+        If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
+        devuelve = "fecfactu = " & DBSet(Text1(1).Text, "F")
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+        
+        'Socio
+        devuelve = "{" & NombreTabla & ".codsocio}=" & Val(Text1(3).Text)
+        If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
+        devuelve = "codsocio = " & Val(Text1(3).Text)
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
+        
+        ' quien ha generado las facturas
+        If Not AnyadirAFormula(cadSelect, "rrecibpozos.imprimir=" & DBSet(vUsu.PC, "T")) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rrecibpozos.imprimir} = """ & vUsu.PC & """") Then Exit Sub
+        
+        If Not AnyadirAFormula(cadSelect, "rrecibpozos.codtipom=" & DBSet(Rs!CodTipom, "T")) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rrecibpozos.codtipom} = """ & Rs!CodTipom & """") Then Exit Sub
+        
+        
+        
+        
+        If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
+         
+        With frmImprimir
+              '[Monica]06/02/2012: añadido la siguientes 3 lineas para el envio por el outlook
+                .outClaveNombreArchiv = "" 'Mid(Combo1(0).Text, 1, 3) & Format(Text1(0).Text, "0000000")
+                .outCodigoCliProv = 0
+                .outTipoDocumento = 100
+                
+                .FormulaSeleccion = cadFormula
+                .OtrosParametros = cadParam
+                .NumeroParametros = numParam
+                .SoloImprimir = False
+                .EnvioEMail = False
+                .Opcion = 0
+                .Titulo = cadTitulo '"Impresión de Recibos de Socios"
+                
+                '[Monica]11/09/2015: pasamos la contabilidad que es pq tenemos que imprimir que gastos de cobros tiene.
+                If vParamAplic.Cooperativa = 10 Then
+                    vParamAplic.NumeroConta = DevuelveValor("Select empresa_conta from rseccion where codsecci = " & vParamAplic.Seccionhorto)
+                End If
+                .ConSubInforme = True
+                .Show vbModal
+        End With
+    
+        If frmVisReport.EstaImpreso Then
+            ActualizarRegistros "rrecibpozos", cadSelect
+        End If
+    
+        Rs.MoveNext
+   Wend
+   Set Rs = Nothing
+    
+    
+    
+End Sub
 
