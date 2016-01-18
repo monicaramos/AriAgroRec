@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmAlmzTrasBascula 
    BorderStyle     =   3  'Fixed Dialog
@@ -228,7 +228,7 @@ Dim I As Byte
 Dim cadWhere As String
 Dim b As Boolean
 Dim NomFic As String
-Dim Cadena As String
+Dim CADENA As String
 Dim cadena1 As String
 
 On Error GoTo eError
@@ -347,7 +347,7 @@ Dim I As Byte
 Dim cadWhere As String
 Dim b As Boolean
 Dim NomFic As String
-Dim Cadena As String
+Dim CADENA As String
 Dim cadena1 As String
 
 On Error GoTo eError
@@ -658,7 +658,7 @@ Dim NomFic As String
         Me.Refresh
         
         Cad = Cad & ";"
-        b = InsertarLineaPreviaABN(Cad)
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaPreviaABN(Cad)
         
         If b Then
             If I > 20 Then
@@ -677,7 +677,7 @@ Dim NomFic As String
     
     If Cad <> "" And b Then
         Cad = Cad & ";"
-        b = InsertarLineaPreviaABN(Cad)
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaPreviaABN(Cad)
     End If
     
     
@@ -696,7 +696,7 @@ End Function
 
 Private Function InsertarLineaPreviaABN(Cad As String) As Boolean
 Dim Sql As String
-Dim Cadena As String
+Dim CADENA As String
 
     On Error GoTo eInsertarLineaPreviaABN
 
@@ -705,11 +705,11 @@ Dim Cadena As String
     CargarVariables Cad
     
     ' insertamos la entrada
-    Cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
-    Cadena = Cadena & "," & DBSet(ComprobarCero(Bruto) - ComprobarCero(Tara), "N")
+    CADENA = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
+    CADENA = CADENA & "," & DBSet(ComprobarCero(Bruto) - ComprobarCero(Tara), "N")
     
     Sql = "insert into tmpinformes (codusu, importe1, fecha1, importe2, importe3, importe4, importe5, nombre1, importeb1) values "
-    Sql = Sql & "(" & Cadena & ")"
+    Sql = Sql & "(" & CADENA & ")"
     conn.Execute Sql
     
     Exit Function
@@ -790,7 +790,7 @@ Dim NomFic As String
         Me.Refresh
         
         Cad = Cad & ";"
-        b = InsertarLineaABN(Cad)
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaABN(Cad)
         
         Line Input #NF, Cad
     Wend
@@ -798,7 +798,7 @@ Dim NomFic As String
     
     If Cad <> "" And b Then
         Cad = Cad & ";"
-        b = InsertarLineaABN(Cad)
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaABN(Cad)
     End If
     
     ProcesarFicheroABN = b
@@ -976,7 +976,7 @@ End Function
 Private Function ComprobarRegistro(Cad As String) As Boolean
 Dim Sql As String
 Dim Mens As String
-Dim Cadena As String
+Dim CADENA As String
 
     On Error GoTo eComprobarRegistro
 
@@ -1231,7 +1231,7 @@ Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
-Dim Cadena As String
+Dim CADENA As String
 
     On Error GoTo EInsertarLinea
 
@@ -1242,19 +1242,19 @@ Dim Cadena As String
     HayError = False
     
      ' comprobaciones para poder insertar la entrada
-    Cadena = ""
+    CADENA = ""
     ' comprobamos que me han puesto los datos de busqueda de parcela
     If poligono = "" Or Parcela = "" Or Subparcela = "" Then
         Mens = "No hay datos de campo"
         Sql = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
-        Sql = Sql & "0," & DBSet(Cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        Sql = Sql & "0," & DBSet(CADENA, "T") & "," & DBSet(Mens, "T") & ")"
         
         conn.Execute Sql
         
     Else
-        Cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+        CADENA = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
     End If
     
 ' de momento lo quito pq hay una comprobacion previa que impide hacer nada si no existen los socios y variedades
@@ -1299,7 +1299,7 @@ Dim Cadena As String
         'si no existe el campo lo creamos
         If DevuelveValor(Sql) = 0 Then
             Set frmMens = New frmMensajes
-            frmMens.Cadena = Socio & "|" & Variedad & "|" & poligono & "|" & Parcela & "|" & Subparcela & "|"
+            frmMens.CADENA = Socio & "|" & Variedad & "|" & poligono & "|" & Parcela & "|" & Subparcela & "|"
             frmMens.OpcionMensaje = 62
             frmMens.Show vbModal
             Set frmMens = Nothing
@@ -1504,18 +1504,18 @@ Private Sub CargarVariables(Cad As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Cadena As String
+Dim CADENA As String
 Dim Mens As String
 Dim Sql As String
 
     If CadenaSeleccion = "" Then
-        Cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+        CADENA = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
     
         Mens = "No se creó el Campo "
         Sql = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(Cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        Sql = Sql & "0," & DBSet(CADENA, "T") & "," & DBSet(Mens, "T") & ")"
         
         conn.Execute Sql
         
@@ -1548,7 +1548,7 @@ Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
-Dim Cadena As String
+Dim CADENA As String
 
 
     CompruebaSociosVariedades = True

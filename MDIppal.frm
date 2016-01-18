@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm MDIppal 
    BackColor       =   &H8000000C&
    Caption         =   "AriagroRec - Recolección"
@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:11"
+            TextSave        =   "10:32"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1764,7 +1764,7 @@ Private Sub MDIForm_Activate()
 End Sub
 
 Private Sub MDIForm_Load()
-Dim Cad As String
+Dim cad As String
 
     PrimeraVez = True
     CargarImagen
@@ -1774,7 +1774,7 @@ Dim Cad As String
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
                   " - Campaña: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -  Usuario: " & vUsu.Nombre
     End If
 
@@ -1825,16 +1825,16 @@ Dim Cad As String
     
     PonerDatosFormulario
     
-    Stop
+'    Stop
     
-'    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
-'    If vParamAplic.Cooperativa = 10 Then
-'        If Dir("c:\indefa", vbDirectory) <> "" Then
-'            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
-'        Else
-'            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
-'        End If
-'    End If
+    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
+    If vParamAplic.Cooperativa = 10 Then
+        If Dir("c:\indefa", vbDirectory) <> "" Then
+            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
+        Else
+            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
+        End If
+    End If
     
     
     
@@ -2186,11 +2186,11 @@ End Sub
 ' ### [Monica] 05/09/2006
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim Cad As String
+Dim cad As String
 
     On Error Resume Next
     For Each T In Me
-        Cad = T.Name
+        cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             'If LCase(Mid(T.Name, 1, 8)) <> "mn_b" Then
                 T.Enabled = Habilitar
@@ -2214,14 +2214,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim Sql As String
+Dim sql As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2240,33 +2240,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim Sql As String
+Dim sql As String
 Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    sql = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            Sql = Sql & miRsAux.Fields(3) & "·"
+            sql = sql & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If Sql <> "" Then
-        Sql = "·" & Sql
+    If sql <> "" Then
+        sql = "·" & sql
         For Each T In Me.Controls
             If TypeOf T Is menu Then
                 c = DevuelveCadenaMenu(T)
                 c = "·" & c & "·"
-                If InStr(1, Sql, c) > 0 Then T.visible = False
+                If InStr(1, sql, c) > 0 Then T.visible = False
            
             End If
         Next
@@ -2289,7 +2289,7 @@ End Function
 
 Private Sub LanzaHome(Opcion As String)
     Dim I As Integer
-    Dim Cad As String
+    Dim cad As String
     On Error GoTo ELanzaHome
     
     'Obtenemos la pagina web de los parametros
@@ -2300,16 +2300,16 @@ Private Sub LanzaHome(Opcion As String)
     End If
         
     I = FreeFile
-    Cad = ""
+    cad = ""
     Open App.Path & "\lanzaexp.dat" For Input As #I
-    Line Input #I, Cad
+    Line Input #I, cad
     Close #I
     
     'Lanzamos
-    If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
+    If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
     
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -2403,13 +2403,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim Cad As String
-    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    Cad = Cad & ", " & Format(Now, "d")
-    Cad = Cad & " de " & Format(Now, "mmmm")
-    Cad = Cad & " de " & Format(Now, "yyyy")
-    Cad = "    " & Cad & "    "
-    Me.StatusBar1.Panels(7).Text = Cad
+Dim cad As String
+    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    cad = cad & ", " & Format(Now, "d")
+    cad = cad & " de " & Format(Now, "mmmm")
+    cad = cad & " de " & Format(Now, "yyyy")
+    cad = "    " & cad & "    "
+    Me.StatusBar1.Panels(7).Text = cad
     
     '
     Me.StatusBar1.Panels(2).Text = vUsu.CadenaConexion
@@ -2420,11 +2420,11 @@ Dim Cad As String
     End If
     
     
-    Cad = ""
+    cad = ""
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
                   "   -   " & vEmpresa.nomresum & "   -   Fechas: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -   Usuario: " & vUsu.Nombre
     End If
 End Sub

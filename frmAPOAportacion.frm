@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmAPOAportacion 
@@ -581,7 +581,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 Private WithEvents frmSoc As frmManSocios 'mantenimiento de socios
 Attribute frmSoc.VB_VarHelpID = -1
@@ -606,7 +606,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 Dim SobreCampanya As String
 
 
@@ -621,23 +621,23 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not b
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not b
+    Next I
     
     txtAux2(0).visible = Not b
     txtAux2(6).visible = Not b
     
-    For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).visible = Not b
-    Next i
+    For I = 0 To btnBuscar.Count - 1
+        btnBuscar(I).visible = Not b
+    Next I
     
-    cmdAceptar.visible = Not b
+    CmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -720,7 +720,7 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-    CargaGrid cadB, True 'primer de tot carregue tot el grid
+    CargaGrid CadB, True 'primer de tot carregue tot el grid
 '    CadB = ""
    
 '    '******************** canviar taula i camp **************************
@@ -739,9 +739,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux2(0).Text = ""
     txtAux2(6).Text = ""
@@ -762,7 +762,7 @@ Private Sub BotonTraspasoAportaciones()
 End Sub
 
 Private Sub BotonVerTodos()
-    cadB = ""
+    CadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -772,9 +772,9 @@ Private Sub BotonBuscar()
     CargaGrid "raportacion.codsocio = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     Me.txtAux2(0).Text = ""
     Me.txtAux2(6).Text = ""
     
@@ -785,13 +785,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -829,21 +829,21 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
     txtAux2(6).Top = alto
-    For i = 0 To btnBuscar.Count - 1
-        btnBuscar(i).Top = alto - 15
-    Next i
+    For I = 0 To btnBuscar.Count - 1
+        btnBuscar(I).Top = alto - 15
+    Next I
     
 End Sub
 
 Private Sub BotonEliminar()
-Dim sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -858,21 +858,21 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    sql = "¿Seguro que desea eliminar el Registro?"
-    sql = sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    sql = sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    sql = sql & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
+    SQL = "¿Seguro que desea eliminar el Registro?"
+    SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
     
     
-    If MsgBox(sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
-        sql = sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
-        sql = sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
+        SQL = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
+        SQL = SQL & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
+        SQL = SQL & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
         
-        conn.Execute sql
-        CargaGrid cadB
+        conn.Execute SQL
+        CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -958,13 +958,13 @@ Private Sub btnBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim I As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda2(Me, BuscaChekc, 1) ' ObtenerBusqueda3(Me, False, BuscaChekc)
-            If cadB <> "" Then
-                CargaGrid cadB
+            CadB = ObtenerBusqueda2(Me, BuscaChekc, 1) ' ObtenerBusqueda3(Me, False, BuscaChekc)
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -973,7 +973,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid cadB
+                    CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -984,7 +984,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -993,9 +993,9 @@ Private Sub cmdAceptar_Click()
                 If ModificaDesdeFormulario(Me) Then
 '                If ModificaDesdeForm Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
 '                    If CadB <> "" Then
 '                        CargaGrid CadB
 '                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -1003,7 +1003,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1015,7 +1015,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
@@ -1038,7 +1038,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1047,16 +1047,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1070,7 +1070,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, cadB
+    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, CadB
 End Sub
 
 Private Sub Form_Activate()
@@ -1125,10 +1125,18 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " FROM  raportacion, rsocios, rtipoapor  "
     CadenaConsulta = CadenaConsulta & " WHERE raportacion.codsocio = rsocios.codsocio and  "
     CadenaConsulta = CadenaConsulta & " raportacion.codaport = rtipoapor.codaport "
-    '************************************************************************
     
-    cadB = ""
-    CargaGrid "raportacion.codsocio = -1"
+    '[Monica]18/01/2016: si viene de socios cargamos la tabla
+    If CodigoActual <> "" Then CadenaConsulta = CadenaConsulta & " and raportacion.codsocio = " & DBSet(CodigoActual, "N")
+    '************************************************************************
+    '[Monica]18/01/2016: si viene de socios cargamos la tabla
+    If CodigoActual <> "" Then
+        CadB = ""
+        CargaGrid ""
+    Else
+        CadB = ""
+        CargaGrid "raportacion.codsocio = -1"
+    End If
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
 '        BotonAnyadir
@@ -1165,7 +1173,7 @@ Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Function ProcesoCargaKilos(Campaña As String) As Boolean
-Dim sql As String
+Dim SQL As String
 Dim vCampAnt As CCampAnt
 Dim Sql2 As String
 Dim Campanya As String
@@ -1182,9 +1190,9 @@ Dim vFecha As Date
     conn.BeginTrans
 
 
-    sql = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
-    sql = sql & " inner join productos on variedades.codprodu = productos.codprodu "
-    sql = sql & " where productos.codgrupo = 5 group by 1 order by 1 "
+    SQL = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
+    SQL = SQL & " inner join productos on variedades.codprodu = productos.codprodu "
+    SQL = SQL & " where productos.codgrupo = 5 group by 1 order by 1 "
     
 '    Campanya = Mid(CStr(Year(vParam.FecIniCam) - 1), 3, 2) & "/" & Mid(CStr(Year(vParam.FecFinCam) - 1), 3, 2)
     
@@ -1202,7 +1210,7 @@ Dim vFecha As Date
     
     
         Set Rs = New ADODB.Recordset
-        Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF And b
             Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1231,7 +1239,7 @@ Dim vFecha As Date
         If vCampAnt.Leer = 0 Then
             If AbrirConexionCampAnterior(vCampAnt.BaseDatos) Then
                 Set Rs = New ADODB.Recordset
-                Rs.Open sql, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open SQL, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
             
                 While Not Rs.EOF And b
                     Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1255,9 +1263,9 @@ Dim vFecha As Date
 
     If b And CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
-        sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
+        SQL = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
         
-        conn.Execute sql
+        conn.Execute SQL
     End If
 
 eCargaKilos:
@@ -1397,18 +1405,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
-    sql = sql & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
+    SQL = SQL & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|730|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2700|;"
@@ -1425,7 +1433,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales sql
+    CalcularTotales SQL
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
 '    DataGrid1.Columns(12).Alignment = dbgCenter
@@ -1494,7 +1502,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1502,10 +1510,10 @@ Dim Mens As String
     If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        sql = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
-        sql = sql & " and fecha = " & DBSet(txtAux(1).Text, "F")
-        sql = sql & " and codaport = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(sql) <> 0 Then
+        SQL = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
+        SQL = SQL & " and fecha = " & DBSet(txtAux(1).Text, "F")
+        SQL = SQL & " and codaport = " & DBSet(txtAux(6).Text, "N")
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El socio existe para esta fecha, tipo de aportación. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             b = False
@@ -1532,9 +1540,9 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "raportacion"
         .Informe2 = "rManAportacion.rpt"
-        If cadB <> "" Then
+        If CadB <> "" Then
             '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(cadB)
+            .cadRegSelec = SQL2SF(CadB)
         Else
             .cadRegSelec = ""
         End If
@@ -1626,22 +1634,22 @@ Private Sub AbrirFrmSocio(indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim sql As String
+Dim SQL As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    sql = "update raportacion set "
-    sql = sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    sql = sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    sql = sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    sql = sql & " where codcapat = " & DBSet(txtAux(0).Text, "N")
-    sql = sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    sql = sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-    sql = sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+    SQL = "update raportacion set "
+    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    SQL = SQL & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    SQL = SQL & " where codcapat = " & DBSet(txtAux(0).Text, "N")
+    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+    SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
     
-    conn.Execute sql
+    conn.Execute SQL
     
     ModificaDesdeForm = True
     Exit Function
@@ -1650,25 +1658,25 @@ eModificaDesdeForm:
     MuestraError Err.Number, "Modificando registro", Err.Description
 End Function
 
-Private Sub CalcularTotales(cadena As String)
+Private Sub CalcularTotales(Cadena As String)
 Dim Importe  As Currency
 Dim Kilos As Long
 Dim Rs As ADODB.Recordset
-Dim sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    sql = "select sum(kilos) kilos , sum(importe) importe from (" & cadena & ") aaaaa"
+    SQL = "select sum(kilos) kilos , sum(importe) importe from (" & Cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Kilos = 0
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     
-    If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(Cadena) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
         If Rs.Fields(0).Value <> 0 Then Kilos = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar

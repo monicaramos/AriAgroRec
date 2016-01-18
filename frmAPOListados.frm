@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmAPOListados 
    BorderStyle     =   3  'Fixed Dialog
@@ -16,6 +16,373 @@ Begin VB.Form frmAPOListados
    ScaleWidth      =   6690
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameInforme 
+      Height          =   6300
+      Left            =   0
+      TabIndex        =   61
+      Top             =   30
+      Width           =   6555
+      Begin VB.CheckBox chkResumen 
+         Caption         =   "Resumen"
+         Height          =   315
+         Index           =   0
+         Left            =   5010
+         TabIndex        =   69
+         Tag             =   "Correo|N|N|||rsocios|correo||N|"
+         Top             =   4380
+         Width           =   1245
+      End
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         Index           =   1
+         Left            =   1710
+         Style           =   2  'Dropdown List
+         TabIndex        =   68
+         Tag             =   "Tipo Relacion|N|N|0|2|rsocios|tiporelacion||N|"
+         Top             =   4380
+         Width           =   1590
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   19
+         Left            =   2775
+         Locked          =   -1  'True
+         TabIndex        =   83
+         Text            =   "Text5"
+         Top             =   3645
+         Width           =   3285
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   13
+         Left            =   2775
+         Locked          =   -1  'True
+         TabIndex        =   82
+         Text            =   "Text5"
+         Top             =   3270
+         Width           =   3285
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   19
+         Left            =   1710
+         MaxLength       =   16
+         TabIndex        =   67
+         Top             =   3645
+         Width           =   1035
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   13
+         Left            =   1710
+         MaxLength       =   16
+         TabIndex        =   66
+         Top             =   3270
+         Width           =   1035
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   24
+         Left            =   2805
+         Locked          =   -1  'True
+         TabIndex        =   73
+         Text            =   "Text5"
+         Top             =   1590
+         Width           =   3285
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   23
+         Left            =   2805
+         Locked          =   -1  'True
+         TabIndex        =   72
+         Text            =   "Text5"
+         Top             =   1215
+         Width           =   3285
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   24
+         Left            =   1725
+         MaxLength       =   16
+         TabIndex        =   63
+         Top             =   1590
+         Width           =   1035
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   23
+         Left            =   1725
+         MaxLength       =   16
+         TabIndex        =   62
+         Top             =   1215
+         Width           =   1035
+      End
+      Begin VB.CommandButton CmdAcepListado 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3810
+         TabIndex        =   70
+         Top             =   5535
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   2
+         Left            =   4980
+         TabIndex        =   71
+         Top             =   5535
+         Width           =   975
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   21
+         Left            =   1725
+         MaxLength       =   10
+         TabIndex        =   64
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2265
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   22
+         Left            =   1725
+         MaxLength       =   10
+         TabIndex        =   65
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2625
+         Width           =   1050
+      End
+      Begin MSComctlLib.ProgressBar Pb3 
+         Height          =   255
+         Left            =   420
+         TabIndex        =   74
+         Top             =   5100
+         Visible         =   0   'False
+         Width           =   5625
+         _ExtentX        =   9922
+         _ExtentY        =   450
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Relación Cooperativa"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   108
+         Left            =   420
+         TabIndex        =   410
+         Top             =   4080
+         Width           =   1530
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   10
+         Left            =   1395
+         MouseIcon       =   "frmAPOListados.frx":000C
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar aportacion"
+         Top             =   3645
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   8
+         Left            =   1410
+         MouseIcon       =   "frmAPOListados.frx":015E
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar aportacion"
+         Top             =   3270
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Tipo Aportación"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   21
+         Left            =   450
+         TabIndex        =   86
+         Top             =   2970
+         Width           =   1125
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   20
+         Left            =   810
+         TabIndex        =   85
+         Top             =   3645
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   19
+         Left            =   795
+         TabIndex        =   84
+         Top             =   3270
+         Width           =   465
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   7
+         Left            =   1425
+         MouseIcon       =   "frmAPOListados.frx":02B0
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1590
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   6
+         Left            =   1440
+         MouseIcon       =   "frmAPOListados.frx":0402
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1215
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   27
+         Left            =   480
+         TabIndex        =   81
+         Top             =   975
+         Width           =   375
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   26
+         Left            =   840
+         TabIndex        =   80
+         Top             =   1590
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   25
+         Left            =   825
+         TabIndex        =   79
+         Top             =   1215
+         Width           =   465
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   9
+         Left            =   1455
+         Picture         =   "frmAPOListados.frx":0554
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2625
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   8
+         Left            =   1455
+         Picture         =   "frmAPOListados.frx":05DF
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2265
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   24
+         Left            =   795
+         TabIndex        =   78
+         Top             =   2625
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   23
+         Left            =   795
+         TabIndex        =   77
+         Top             =   2265
+         Width           =   465
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   22
+         Left            =   435
+         TabIndex        =   76
+         Top             =   1965
+         Width           =   1815
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Informe de Aportaciones"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   3
+         Left            =   495
+         TabIndex        =   75
+         Top             =   315
+         Width           =   5160
+      End
+   End
    Begin VB.Frame FrameRegularizacion 
       Height          =   7530
       Left            =   0
@@ -138,7 +505,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   5
             Left            =   1710
-            Picture         =   "frmAPOListados.frx":000C
+            Picture         =   "frmAPOListados.frx":066A
             ToolTipText     =   "Buscar fecha"
             Top             =   360
             Width           =   240
@@ -320,7 +687,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   4
             Left            =   1770
-            Picture         =   "frmAPOListados.frx":0097
+            Picture         =   "frmAPOListados.frx":06F5
             ToolTipText     =   "Buscar fecha"
             Top             =   3000
             Width           =   240
@@ -329,7 +696,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   3
             Left            =   1710
-            MouseIcon       =   "frmAPOListados.frx":0122
+            MouseIcon       =   "frmAPOListados.frx":0780
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar socio"
             Top             =   885
@@ -339,7 +706,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   2
             Left            =   1725
-            MouseIcon       =   "frmAPOListados.frx":0274
+            MouseIcon       =   "frmAPOListados.frx":08D2
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar socio"
             Top             =   510
@@ -387,7 +754,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   1
             Left            =   1740
-            Picture         =   "frmAPOListados.frx":03C6
+            Picture         =   "frmAPOListados.frx":0A24
             ToolTipText     =   "Buscar fecha"
             Top             =   1890
             Width           =   240
@@ -396,7 +763,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   0
             Left            =   1740
-            Picture         =   "frmAPOListados.frx":0451
+            Picture         =   "frmAPOListados.frx":0AAF
             ToolTipText     =   "Buscar fecha"
             Top             =   1530
             Width           =   240
@@ -520,7 +887,7 @@ Begin VB.Form frmAPOListados
          Enabled         =   0   'False
          Height          =   225
          Left            =   4560
-         TabIndex        =   407
+         TabIndex        =   409
          Top             =   3390
          Visible         =   0   'False
          Width           =   1545
@@ -547,7 +914,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   6
             Left            =   1050
-            Picture         =   "frmAPOListados.frx":04DC
+            Picture         =   "frmAPOListados.frx":0B3A
             ToolTipText     =   "Buscar fecha"
             Top             =   540
             Width           =   240
@@ -751,7 +1118,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   2
          Left            =   1455
-         Picture         =   "frmAPOListados.frx":0567
+         Picture         =   "frmAPOListados.frx":0BC5
          ToolTipText     =   "Buscar fecha"
          Top             =   2265
          Width           =   240
@@ -760,7 +1127,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   3
          Left            =   1455
-         Picture         =   "frmAPOListados.frx":05F2
+         Picture         =   "frmAPOListados.frx":0C50
          ToolTipText     =   "Buscar fecha"
          Top             =   2625
          Width           =   240
@@ -807,7 +1174,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   0
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":067D
+         MouseIcon       =   "frmAPOListados.frx":0CDB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1215
@@ -817,7 +1184,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   1
          Left            =   1425
-         MouseIcon       =   "frmAPOListados.frx":07CF
+         MouseIcon       =   "frmAPOListados.frx":0E2D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1590
@@ -827,7 +1194,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameListAporQua 
       Height          =   5850
       Left            =   30
-      TabIndex        =   115
+      TabIndex        =   117
       Top             =   30
       Width           =   6555
       Begin VB.CheckBox Check2 
@@ -835,7 +1202,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00000000&
          Height          =   195
          Left            =   3720
-         TabIndex        =   184
+         TabIndex        =   186
          Top             =   4740
          Width           =   1995
       End
@@ -844,7 +1211,7 @@ Begin VB.Form frmAPOListados
          Index           =   0
          Left            =   1200
          Style           =   2  'Dropdown List
-         TabIndex        =   183
+         TabIndex        =   185
          Tag             =   "Recolectado|N|N|0|1|rcampos|recolect||N|"
          Top             =   4800
          Width           =   1650
@@ -854,7 +1221,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00972E0B&
          Height          =   780
          Left            =   3480
-         TabIndex        =   139
+         TabIndex        =   141
          Top             =   3360
          Width           =   2460
          Begin VB.OptionButton Opcion1 
@@ -862,7 +1229,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   1
             Left            =   1290
-            TabIndex        =   141
+            TabIndex        =   143
             Top             =   300
             Width           =   930
          End
@@ -871,7 +1238,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   0
             Left            =   300
-            TabIndex        =   140
+            TabIndex        =   142
             Top             =   300
             Width           =   1290
          End
@@ -881,7 +1248,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00000000&
          Height          =   195
          Left            =   3720
-         TabIndex        =   138
+         TabIndex        =   140
          Top             =   4350
          Width           =   1815
       End
@@ -891,7 +1258,7 @@ Begin VB.Form frmAPOListados
          Index           =   41
          Left            =   1770
          MaxLength       =   10
-         TabIndex        =   121
+         TabIndex        =   123
          Tag             =   "Código Postal|T|S|||clientes|codposta|0000||"
          Top             =   4080
          Width           =   1050
@@ -902,7 +1269,7 @@ Begin VB.Form frmAPOListados
          Index           =   39
          Left            =   1785
          MaxLength       =   10
-         TabIndex        =   119
+         TabIndex        =   121
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2850
          Width           =   1050
@@ -913,7 +1280,7 @@ Begin VB.Form frmAPOListados
          Index           =   38
          Left            =   1785
          MaxLength       =   10
-         TabIndex        =   118
+         TabIndex        =   120
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2460
          Width           =   1050
@@ -923,7 +1290,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   4
          Left            =   5040
-         TabIndex        =   127
+         TabIndex        =   129
          Top             =   5265
          Width           =   975
       End
@@ -931,7 +1298,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3870
-         TabIndex        =   122
+         TabIndex        =   124
          Top             =   5280
          Width           =   975
       End
@@ -941,7 +1308,7 @@ Begin VB.Form frmAPOListados
          Index           =   37
          Left            =   1785
          MaxLength       =   16
-         TabIndex        =   117
+         TabIndex        =   119
          Top             =   1725
          Width           =   1035
       End
@@ -951,7 +1318,7 @@ Begin VB.Form frmAPOListados
          Index           =   36
          Left            =   1785
          MaxLength       =   16
-         TabIndex        =   116
+         TabIndex        =   118
          Top             =   1320
          Width           =   1035
       End
@@ -962,7 +1329,7 @@ Begin VB.Form frmAPOListados
          Index           =   36
          Left            =   2835
          Locked          =   -1  'True
-         TabIndex        =   126
+         TabIndex        =   128
          Text            =   "Text5"
          Top             =   1335
          Width           =   3285
@@ -974,7 +1341,7 @@ Begin VB.Form frmAPOListados
          Index           =   37
          Left            =   2835
          Locked          =   -1  'True
-         TabIndex        =   125
+         TabIndex        =   127
          Text            =   "Text5"
          Top             =   1710
          Width           =   3285
@@ -986,7 +1353,7 @@ Begin VB.Form frmAPOListados
          Index           =   38
          Left            =   2850
          Locked          =   -1  'True
-         TabIndex        =   124
+         TabIndex        =   126
          Text            =   "Text5"
          Top             =   2460
          Width           =   3285
@@ -998,7 +1365,7 @@ Begin VB.Form frmAPOListados
          Index           =   39
          Left            =   2850
          Locked          =   -1  'True
-         TabIndex        =   123
+         TabIndex        =   125
          Text            =   "Text5"
          Top             =   2835
          Width           =   3285
@@ -1009,7 +1376,7 @@ Begin VB.Form frmAPOListados
          Index           =   35
          Left            =   1770
          MaxLength       =   10
-         TabIndex        =   120
+         TabIndex        =   122
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3690
          Width           =   1050
@@ -1030,7 +1397,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   59
          Left            =   480
-         TabIndex        =   182
+         TabIndex        =   184
          Top             =   4560
          Width           =   1185
       End
@@ -1039,7 +1406,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   50
          Left            =   840
-         TabIndex        =   137
+         TabIndex        =   139
          Top             =   4080
          Width           =   465
       End
@@ -1047,7 +1414,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   11
          Left            =   1470
-         Picture         =   "frmAPOListados.frx":0921
+         Picture         =   "frmAPOListados.frx":0F7F
          ToolTipText     =   "Buscar fecha"
          Top             =   4080
          Width           =   240
@@ -1057,7 +1424,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   48
          Left            =   840
-         TabIndex        =   136
+         TabIndex        =   138
          Top             =   3690
          Width           =   465
       End
@@ -1067,7 +1434,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   49
          Left            =   480
-         TabIndex        =   135
+         TabIndex        =   137
          Top             =   3390
          Width           =   1815
       End
@@ -1086,7 +1453,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   6
          Left            =   495
-         TabIndex        =   134
+         TabIndex        =   136
          Top             =   315
          Width           =   5160
       End
@@ -1096,7 +1463,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   47
          Left            =   465
-         TabIndex        =   133
+         TabIndex        =   135
          Top             =   2145
          Width           =   1815
       End
@@ -1105,7 +1472,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   46
          Left            =   825
-         TabIndex        =   132
+         TabIndex        =   134
          Top             =   2445
          Width           =   465
       End
@@ -1114,7 +1481,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   45
          Left            =   825
-         TabIndex        =   131
+         TabIndex        =   133
          Top             =   2805
          Width           =   420
       End
@@ -1123,7 +1490,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   44
          Left            =   855
-         TabIndex        =   130
+         TabIndex        =   132
          Top             =   1335
          Width           =   465
       End
@@ -1132,7 +1499,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   43
          Left            =   870
-         TabIndex        =   129
+         TabIndex        =   131
          Top             =   1710
          Width           =   420
       End
@@ -1152,7 +1519,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   42
          Left            =   510
-         TabIndex        =   128
+         TabIndex        =   130
          Top             =   1095
          Width           =   375
       End
@@ -1160,7 +1527,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   19
          Left            =   1470
-         MouseIcon       =   "frmAPOListados.frx":09AC
+         MouseIcon       =   "frmAPOListados.frx":100A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1725
@@ -1170,7 +1537,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   16
          Left            =   1470
-         MouseIcon       =   "frmAPOListados.frx":0AFE
+         MouseIcon       =   "frmAPOListados.frx":115C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1320
@@ -1180,7 +1547,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   18
          Left            =   1470
-         MouseIcon       =   "frmAPOListados.frx":0C50
+         MouseIcon       =   "frmAPOListados.frx":12AE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2850
@@ -1190,7 +1557,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   17
          Left            =   1470
-         MouseIcon       =   "frmAPOListados.frx":0DA2
+         MouseIcon       =   "frmAPOListados.frx":1400
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2490
@@ -1200,7 +1567,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   10
          Left            =   1470
-         Picture         =   "frmAPOListados.frx":0EF4
+         Picture         =   "frmAPOListados.frx":1552
          ToolTipText     =   "Buscar fecha"
          Top             =   3690
          Width           =   240
@@ -1209,7 +1576,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameDevolAporQua 
       Height          =   7140
       Left            =   0
-      TabIndex        =   379
+      TabIndex        =   381
       Top             =   0
       Width           =   6555
       Begin VB.TextBox txtcodigo 
@@ -1218,7 +1585,7 @@ Begin VB.Form frmAPOListados
          Index           =   112
          Left            =   1800
          MaxLength       =   10
-         TabIndex        =   391
+         TabIndex        =   393
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   5280
          Width           =   1050
@@ -1229,7 +1596,7 @@ Begin VB.Form frmAPOListados
          Index           =   111
          Left            =   1800
          MaxLength       =   10
-         TabIndex        =   389
+         TabIndex        =   391
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3960
          Width           =   1050
@@ -1240,7 +1607,7 @@ Begin VB.Form frmAPOListados
          Index           =   110
          Left            =   1785
          MaxLength       =   3
-         TabIndex        =   387
+         TabIndex        =   389
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2820
          Width           =   1050
@@ -1251,7 +1618,7 @@ Begin VB.Form frmAPOListados
          Index           =   109
          Left            =   1800
          MaxLength       =   3
-         TabIndex        =   386
+         TabIndex        =   388
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2460
          Width           =   1050
@@ -1261,7 +1628,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   13
          Left            =   4980
-         TabIndex        =   395
+         TabIndex        =   397
          Top             =   6435
          Width           =   975
       End
@@ -1269,7 +1636,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3810
-         TabIndex        =   393
+         TabIndex        =   395
          Top             =   6450
          Width           =   975
       End
@@ -1279,7 +1646,7 @@ Begin VB.Form frmAPOListados
          Index           =   108
          Left            =   1785
          MaxLength       =   16
-         TabIndex        =   385
+         TabIndex        =   387
          Top             =   1650
          Width           =   1035
       End
@@ -1289,7 +1656,7 @@ Begin VB.Form frmAPOListados
          Index           =   107
          Left            =   1785
          MaxLength       =   16
-         TabIndex        =   384
+         TabIndex        =   386
          Top             =   1260
          Width           =   1035
       End
@@ -1300,7 +1667,7 @@ Begin VB.Form frmAPOListados
          Index           =   107
          Left            =   2865
          Locked          =   -1  'True
-         TabIndex        =   383
+         TabIndex        =   385
          Text            =   "Text5"
          Top             =   1275
          Width           =   3285
@@ -1312,7 +1679,7 @@ Begin VB.Form frmAPOListados
          Index           =   108
          Left            =   2865
          Locked          =   -1  'True
-         TabIndex        =   382
+         TabIndex        =   384
          Text            =   "Text5"
          Top             =   1650
          Width           =   3285
@@ -1324,7 +1691,7 @@ Begin VB.Form frmAPOListados
          Index           =   109
          Left            =   2880
          Locked          =   -1  'True
-         TabIndex        =   381
+         TabIndex        =   383
          Text            =   "Text5"
          Top             =   2460
          Width           =   3285
@@ -1336,7 +1703,7 @@ Begin VB.Form frmAPOListados
          Index           =   110
          Left            =   2880
          Locked          =   -1  'True
-         TabIndex        =   380
+         TabIndex        =   382
          Text            =   "Text5"
          Top             =   2835
          Width           =   3285
@@ -1347,7 +1714,7 @@ Begin VB.Form frmAPOListados
          Index           =   106
          Left            =   1800
          MaxLength       =   10
-         TabIndex        =   388
+         TabIndex        =   390
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3570
          Width           =   1050
@@ -1358,7 +1725,7 @@ Begin VB.Form frmAPOListados
          Index           =   98
          Left            =   1800
          MaxLength       =   10
-         TabIndex        =   390
+         TabIndex        =   392
          Tag             =   "Código Postal|T|S|||clientes|codposta|0000||"
          Top             =   4560
          Width           =   1050
@@ -1366,7 +1733,7 @@ Begin VB.Form frmAPOListados
       Begin MSComctlLib.ProgressBar pb12 
          Height          =   255
          Left            =   420
-         TabIndex        =   392
+         TabIndex        =   394
          Top             =   6030
          Visible         =   0   'False
          Width           =   5745
@@ -1380,7 +1747,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   129
          Left            =   840
-         TabIndex        =   406
+         TabIndex        =   408
          Top             =   3600
          Width           =   465
       End
@@ -1389,7 +1756,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   127
          Left            =   840
-         TabIndex        =   405
+         TabIndex        =   407
          Top             =   3960
          Width           =   420
       End
@@ -1408,7 +1775,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   120
          Left            =   510
-         TabIndex        =   404
+         TabIndex        =   406
          Top             =   4980
          Width           =   1815
       End
@@ -1416,7 +1783,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   34
          Left            =   1530
-         Picture         =   "frmAPOListados.frx":0F7F
+         Picture         =   "frmAPOListados.frx":15DD
          ToolTipText     =   "Buscar fecha"
          Top             =   5280
          Width           =   240
@@ -1425,7 +1792,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   33
          Left            =   1530
-         Picture         =   "frmAPOListados.frx":100A
+         Picture         =   "frmAPOListados.frx":1668
          ToolTipText     =   "Buscar fecha"
          Top             =   3960
          Width           =   240
@@ -1445,7 +1812,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   128
          Left            =   510
-         TabIndex        =   403
+         TabIndex        =   405
          Top             =   3270
          Width           =   1815
       End
@@ -1464,7 +1831,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   28
          Left            =   495
-         TabIndex        =   402
+         TabIndex        =   404
          Top             =   315
          Width           =   5160
       End
@@ -1483,7 +1850,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   126
          Left            =   540
-         TabIndex        =   401
+         TabIndex        =   403
          Top             =   2145
          Width           =   1815
       End
@@ -1492,7 +1859,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   125
          Left            =   855
-         TabIndex        =   400
+         TabIndex        =   402
          Top             =   2445
          Width           =   465
       End
@@ -1501,7 +1868,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   124
          Left            =   855
-         TabIndex        =   399
+         TabIndex        =   401
          Top             =   2805
          Width           =   420
       End
@@ -1510,7 +1877,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   123
          Left            =   885
-         TabIndex        =   398
+         TabIndex        =   400
          Top             =   1275
          Width           =   465
       End
@@ -1519,7 +1886,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   122
          Left            =   900
-         TabIndex        =   397
+         TabIndex        =   399
          Top             =   1650
          Width           =   420
       End
@@ -1539,7 +1906,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   121
          Left            =   540
-         TabIndex        =   396
+         TabIndex        =   398
          Top             =   1035
          Width           =   375
       End
@@ -1547,7 +1914,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   57
          Left            =   1500
-         MouseIcon       =   "frmAPOListados.frx":1095
+         MouseIcon       =   "frmAPOListados.frx":16F3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -1557,7 +1924,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   56
          Left            =   1500
-         MouseIcon       =   "frmAPOListados.frx":11E7
+         MouseIcon       =   "frmAPOListados.frx":1845
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1260
@@ -1567,7 +1934,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   55
          Left            =   1500
-         MouseIcon       =   "frmAPOListados.frx":1339
+         MouseIcon       =   "frmAPOListados.frx":1997
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2820
@@ -1577,7 +1944,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   54
          Left            =   1500
-         MouseIcon       =   "frmAPOListados.frx":148B
+         MouseIcon       =   "frmAPOListados.frx":1AE9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2475
@@ -1587,7 +1954,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   32
          Left            =   1530
-         Picture         =   "frmAPOListados.frx":15DD
+         Picture         =   "frmAPOListados.frx":1C3B
          ToolTipText     =   "Buscar fecha"
          Top             =   3570
          Width           =   240
@@ -1607,7 +1974,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   119
          Left            =   510
-         TabIndex        =   394
+         TabIndex        =   396
          Top             =   4560
          Width           =   1815
       End
@@ -1615,7 +1982,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameCalculoAporQua 
       Height          =   7140
       Left            =   30
-      TabIndex        =   85
+      TabIndex        =   87
       Top             =   -30
       Width           =   6555
       Begin VB.TextBox txtNombre 
@@ -1625,7 +1992,7 @@ Begin VB.Form frmAPOListados
          Index           =   32
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   113
+         TabIndex        =   115
          Text            =   "Text5"
          Top             =   1200
          Width           =   3285
@@ -1636,7 +2003,7 @@ Begin VB.Form frmAPOListados
          Index           =   32
          Left            =   1725
          MaxLength       =   16
-         TabIndex        =   86
+         TabIndex        =   88
          Top             =   1200
          Width           =   1035
       End
@@ -1646,7 +2013,7 @@ Begin VB.Form frmAPOListados
          Index           =   31
          Left            =   1740
          MaxLength       =   10
-         TabIndex        =   98
+         TabIndex        =   100
          Tag             =   "Código Postal|T|S|||clientes|codposta|0000||"
          Top             =   5400
          Width           =   1050
@@ -1657,7 +2024,7 @@ Begin VB.Form frmAPOListados
          Index           =   20
          Left            =   1740
          MaxLength       =   10
-         TabIndex        =   95
+         TabIndex        =   97
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   4470
          Width           =   1050
@@ -1669,7 +2036,7 @@ Begin VB.Form frmAPOListados
          Index           =   28
          Left            =   2820
          Locked          =   -1  'True
-         TabIndex        =   110
+         TabIndex        =   112
          Text            =   "Text5"
          Top             =   3285
          Width           =   3285
@@ -1681,7 +2048,7 @@ Begin VB.Form frmAPOListados
          Index           =   27
          Left            =   2820
          Locked          =   -1  'True
-         TabIndex        =   109
+         TabIndex        =   111
          Text            =   "Text5"
          Top             =   2910
          Width           =   3285
@@ -1693,7 +2060,7 @@ Begin VB.Form frmAPOListados
          Index           =   30
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   91
+         TabIndex        =   93
          Text            =   "Text5"
          Top             =   2190
          Width           =   3285
@@ -1705,7 +2072,7 @@ Begin VB.Form frmAPOListados
          Index           =   29
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   89
+         TabIndex        =   91
          Text            =   "Text5"
          Top             =   1815
          Width           =   3285
@@ -1716,7 +2083,7 @@ Begin VB.Form frmAPOListados
          Index           =   30
          Left            =   1725
          MaxLength       =   16
-         TabIndex        =   88
+         TabIndex        =   90
          Top             =   2190
          Width           =   1035
       End
@@ -1726,7 +2093,7 @@ Begin VB.Form frmAPOListados
          Index           =   29
          Left            =   1725
          MaxLength       =   16
-         TabIndex        =   87
+         TabIndex        =   89
          Top             =   1815
          Width           =   1035
       End
@@ -1734,7 +2101,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3810
-         TabIndex        =   100
+         TabIndex        =   102
          Top             =   6450
          Width           =   975
       End
@@ -1743,7 +2110,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   3
          Left            =   4980
-         TabIndex        =   102
+         TabIndex        =   104
          Top             =   6435
          Width           =   975
       End
@@ -1753,7 +2120,7 @@ Begin VB.Form frmAPOListados
          Index           =   28
          Left            =   1740
          MaxLength       =   3
-         TabIndex        =   92
+         TabIndex        =   94
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3270
          Width           =   1050
@@ -1764,7 +2131,7 @@ Begin VB.Form frmAPOListados
          Index           =   27
          Left            =   1755
          MaxLength       =   3
-         TabIndex        =   90
+         TabIndex        =   92
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2910
          Width           =   1050
@@ -1775,7 +2142,7 @@ Begin VB.Form frmAPOListados
          Index           =   26
          Left            =   1740
          MaxLength       =   10
-         TabIndex        =   94
+         TabIndex        =   96
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3750
          Width           =   1050
@@ -1786,7 +2153,7 @@ Begin VB.Form frmAPOListados
          Index           =   25
          Left            =   1740
          MaxLength       =   10
-         TabIndex        =   97
+         TabIndex        =   99
          Tag             =   "Código Postal|T|S|||clientes|codposta|0000||"
          Top             =   4980
          Width           =   1050
@@ -1794,7 +2161,7 @@ Begin VB.Form frmAPOListados
       Begin MSComctlLib.ProgressBar Pb5 
          Height          =   255
          Left            =   420
-         TabIndex        =   93
+         TabIndex        =   95
          Top             =   6030
          Visible         =   0   'False
          Width           =   5745
@@ -1807,7 +2174,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   15
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":1668
+         MouseIcon       =   "frmAPOListados.frx":1CC6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar seccion"
          Top             =   1200
@@ -1829,7 +2196,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   38
          Left            =   510
-         TabIndex        =   114
+         TabIndex        =   116
          Top             =   960
          Width           =   540
       End
@@ -1848,7 +2215,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   37
          Left            =   450
-         TabIndex        =   112
+         TabIndex        =   114
          Top             =   5400
          Width           =   1815
       End
@@ -1867,7 +2234,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   28
          Left            =   450
-         TabIndex        =   111
+         TabIndex        =   113
          Top             =   4980
          Width           =   1815
       End
@@ -1875,7 +2242,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   7
          Left            =   1470
-         Picture         =   "frmAPOListados.frx":17BA
+         Picture         =   "frmAPOListados.frx":1E18
          ToolTipText     =   "Buscar fecha"
          Top             =   4470
          Width           =   240
@@ -1884,7 +2251,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   14
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":1845
+         MouseIcon       =   "frmAPOListados.frx":1EA3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3285
@@ -1894,7 +2261,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   13
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":1997
+         MouseIcon       =   "frmAPOListados.frx":1FF5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2910
@@ -1904,7 +2271,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   12
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":1AE9
+         MouseIcon       =   "frmAPOListados.frx":2147
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2190
@@ -1914,7 +2281,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   11
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":1C3B
+         MouseIcon       =   "frmAPOListados.frx":2299
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1815
@@ -1936,7 +2303,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   36
          Left            =   480
-         TabIndex        =   108
+         TabIndex        =   110
          Top             =   1575
          Width           =   375
       End
@@ -1945,7 +2312,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   35
          Left            =   840
-         TabIndex        =   107
+         TabIndex        =   109
          Top             =   2190
          Width           =   420
       End
@@ -1954,7 +2321,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   34
          Left            =   825
-         TabIndex        =   106
+         TabIndex        =   108
          Top             =   1815
          Width           =   465
       End
@@ -1963,7 +2330,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   33
          Left            =   795
-         TabIndex        =   105
+         TabIndex        =   107
          Top             =   3255
          Width           =   420
       End
@@ -1972,7 +2339,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   32
          Left            =   795
-         TabIndex        =   104
+         TabIndex        =   106
          Top             =   2895
          Width           =   465
       End
@@ -1991,7 +2358,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   31
          Left            =   435
-         TabIndex        =   103
+         TabIndex        =   105
          Top             =   2595
          Width           =   1815
       End
@@ -2010,7 +2377,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   5
          Left            =   495
-         TabIndex        =   101
+         TabIndex        =   103
          Top             =   315
          Width           =   5160
       End
@@ -2029,7 +2396,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   30
          Left            =   450
-         TabIndex        =   99
+         TabIndex        =   101
          Top             =   3750
          Width           =   1305
       End
@@ -2048,7 +2415,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   29
          Left            =   450
-         TabIndex        =   96
+         TabIndex        =   98
          Top             =   4170
          Width           =   1815
       End
@@ -2056,13 +2423,13 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameDevolAporBol 
       Height          =   6870
       Left            =   0
-      TabIndex        =   350
+      TabIndex        =   352
       Top             =   0
       Width           =   6555
       Begin MSComctlLib.ProgressBar Pb11 
          Height          =   255
          Left            =   360
-         TabIndex        =   378
+         TabIndex        =   380
          Top             =   5820
          Visible         =   0   'False
          Width           =   5715
@@ -2078,7 +2445,7 @@ Begin VB.Form frmAPOListados
          Index           =   96
          Left            =   2775
          Locked          =   -1  'True
-         TabIndex        =   375
+         TabIndex        =   377
          Text            =   "Text5"
          Top             =   4080
          Width           =   3285
@@ -2089,7 +2456,7 @@ Begin VB.Form frmAPOListados
          Index           =   96
          Left            =   1710
          MaxLength       =   3
-         TabIndex        =   356
+         TabIndex        =   358
          Top             =   4050
          Width           =   1035
       End
@@ -2100,7 +2467,7 @@ Begin VB.Form frmAPOListados
          Index           =   105
          Left            =   2775
          Locked          =   -1  'True
-         TabIndex        =   363
+         TabIndex        =   365
          Text            =   "Text5"
          Top             =   3270
          Width           =   3285
@@ -2111,7 +2478,7 @@ Begin VB.Form frmAPOListados
          Index           =   105
          Left            =   1710
          MaxLength       =   3
-         TabIndex        =   355
+         TabIndex        =   357
          Top             =   3270
          Width           =   1035
       End
@@ -2122,7 +2489,7 @@ Begin VB.Form frmAPOListados
          Index           =   104
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   361
+         TabIndex        =   363
          Text            =   "Text5"
          Top             =   1590
          Width           =   3285
@@ -2134,7 +2501,7 @@ Begin VB.Form frmAPOListados
          Index           =   103
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   359
+         TabIndex        =   361
          Text            =   "Text5"
          Top             =   1215
          Width           =   3285
@@ -2145,7 +2512,7 @@ Begin VB.Form frmAPOListados
          Index           =   104
          Left            =   1710
          MaxLength       =   16
-         TabIndex        =   352
+         TabIndex        =   354
          Top             =   1590
          Width           =   1035
       End
@@ -2155,7 +2522,7 @@ Begin VB.Form frmAPOListados
          Index           =   103
          Left            =   1710
          MaxLength       =   16
-         TabIndex        =   351
+         TabIndex        =   353
          Top             =   1200
          Width           =   1035
       End
@@ -2163,7 +2530,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3870
-         TabIndex        =   360
+         TabIndex        =   362
          Top             =   6135
          Width           =   975
       End
@@ -2172,7 +2539,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   12
          Left            =   5040
-         TabIndex        =   362
+         TabIndex        =   364
          Top             =   6135
          Width           =   975
       End
@@ -2182,7 +2549,7 @@ Begin VB.Form frmAPOListados
          Index           =   102
          Left            =   1710
          MaxLength       =   10
-         TabIndex        =   354
+         TabIndex        =   356
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2580
          Width           =   1050
@@ -2193,7 +2560,7 @@ Begin VB.Form frmAPOListados
          Index           =   101
          Left            =   1710
          MaxLength       =   10
-         TabIndex        =   353
+         TabIndex        =   355
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2220
          Width           =   1050
@@ -2204,7 +2571,7 @@ Begin VB.Form frmAPOListados
          Index           =   100
          Left            =   1710
          MaxLength       =   10
-         TabIndex        =   357
+         TabIndex        =   359
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   4800
          Width           =   1050
@@ -2214,7 +2581,7 @@ Begin VB.Form frmAPOListados
          Index           =   99
          Left            =   1710
          MaxLength       =   30
-         TabIndex        =   358
+         TabIndex        =   360
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   5370
          Width           =   4320
@@ -2223,7 +2590,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   52
          Left            =   1410
-         MouseIcon       =   "frmAPOListados.frx":1D8D
+         MouseIcon       =   "frmAPOListados.frx":23EB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar aportacion"
          Top             =   4050
@@ -2245,7 +2612,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   107
          Left            =   360
-         TabIndex        =   377
+         TabIndex        =   379
          Top             =   3750
          Width           =   1635
       End
@@ -2254,7 +2621,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   106
          Left            =   795
-         TabIndex        =   376
+         TabIndex        =   378
          Top             =   4050
          Width           =   465
       End
@@ -2262,7 +2629,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   51
          Left            =   1410
-         MouseIcon       =   "frmAPOListados.frx":1EDF
+         MouseIcon       =   "frmAPOListados.frx":253D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar aportacion"
          Top             =   3270
@@ -2284,7 +2651,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   118
          Left            =   360
-         TabIndex        =   374
+         TabIndex        =   376
          Top             =   2970
          Width           =   1125
       End
@@ -2293,7 +2660,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   117
          Left            =   795
-         TabIndex        =   373
+         TabIndex        =   375
          Top             =   3270
          Width           =   465
       End
@@ -2301,7 +2668,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   50
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":2031
+         MouseIcon       =   "frmAPOListados.frx":268F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1560
@@ -2311,7 +2678,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   46
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":2183
+         MouseIcon       =   "frmAPOListados.frx":27E1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1230
@@ -2333,7 +2700,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   116
          Left            =   360
-         TabIndex        =   372
+         TabIndex        =   374
          Top             =   975
          Width           =   375
       End
@@ -2342,7 +2709,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   115
          Left            =   840
-         TabIndex        =   371
+         TabIndex        =   373
          Top             =   1590
          Width           =   420
       End
@@ -2351,7 +2718,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   114
          Left            =   825
-         TabIndex        =   370
+         TabIndex        =   372
          Top             =   1215
          Width           =   465
       End
@@ -2359,7 +2726,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   31
          Left            =   1440
-         Picture         =   "frmAPOListados.frx":22D5
+         Picture         =   "frmAPOListados.frx":2933
          ToolTipText     =   "Buscar fecha"
          Top             =   2550
          Width           =   240
@@ -2368,7 +2735,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   30
          Left            =   1440
-         Picture         =   "frmAPOListados.frx":2360
+         Picture         =   "frmAPOListados.frx":29BE
          ToolTipText     =   "Buscar fecha"
          Top             =   2250
          Width           =   240
@@ -2378,7 +2745,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   113
          Left            =   795
-         TabIndex        =   369
+         TabIndex        =   371
          Top             =   2625
          Width           =   420
       End
@@ -2387,7 +2754,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   112
          Left            =   795
-         TabIndex        =   368
+         TabIndex        =   370
          Top             =   2265
          Width           =   465
       End
@@ -2406,7 +2773,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   111
          Left            =   360
-         TabIndex        =   367
+         TabIndex        =   369
          Top             =   1965
          Width           =   1815
       End
@@ -2425,7 +2792,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   27
          Left            =   360
-         TabIndex        =   366
+         TabIndex        =   368
          Top             =   315
          Width           =   5160
       End
@@ -2433,7 +2800,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   29
          Left            =   1410
-         Picture         =   "frmAPOListados.frx":23EB
+         Picture         =   "frmAPOListados.frx":2A49
          ToolTipText     =   "Buscar fecha"
          Top             =   4800
          Width           =   240
@@ -2453,7 +2820,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   110
          Left            =   360
-         TabIndex        =   365
+         TabIndex        =   367
          Top             =   4560
          Width           =   1815
       End
@@ -2472,7 +2839,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   109
          Left            =   360
-         TabIndex        =   364
+         TabIndex        =   366
          Top             =   5250
          Width           =   1815
       End
@@ -2480,14 +2847,14 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameIntTesorBol 
       Height          =   7530
       Left            =   0
-      TabIndex        =   286
+      TabIndex        =   288
       Top             =   0
       Width           =   6555
       Begin VB.CommandButton CmdAcepIntTesBol 
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4230
-         TabIndex        =   300
+         TabIndex        =   302
          Top             =   6705
          Width           =   975
       End
@@ -2505,7 +2872,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   2085
          Left            =   120
-         TabIndex        =   307
+         TabIndex        =   309
          Top             =   3810
          Width           =   6315
          Begin VB.TextBox txtcodigo 
@@ -2514,7 +2881,7 @@ Begin VB.Form frmAPOListados
             Index           =   83
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   298
+            TabIndex        =   300
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1530
             Width           =   1050
@@ -2526,7 +2893,7 @@ Begin VB.Form frmAPOListados
             Index           =   83
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   310
+            TabIndex        =   312
             Top             =   1530
             Width           =   3195
          End
@@ -2536,7 +2903,7 @@ Begin VB.Form frmAPOListados
             Index           =   86
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   295
+            TabIndex        =   297
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   450
             Width           =   1050
@@ -2548,7 +2915,7 @@ Begin VB.Form frmAPOListados
             Index           =   85
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   309
+            TabIndex        =   311
             Top             =   810
             Width           =   3195
          End
@@ -2558,7 +2925,7 @@ Begin VB.Form frmAPOListados
             Index           =   85
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   296
+            TabIndex        =   298
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   810
             Width           =   1050
@@ -2569,7 +2936,7 @@ Begin VB.Form frmAPOListados
             Index           =   84
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   297
+            TabIndex        =   299
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1170
             Width           =   1050
@@ -2581,7 +2948,7 @@ Begin VB.Form frmAPOListados
             Index           =   84
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   308
+            TabIndex        =   310
             Top             =   1170
             Width           =   3195
          End
@@ -2608,7 +2975,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   23
             Left            =   180
-            TabIndex        =   314
+            TabIndex        =   316
             Top             =   1575
             Width           =   1395
          End
@@ -2616,7 +2983,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   26
             Left            =   1590
-            Picture         =   "frmAPOListados.frx":2476
+            Picture         =   "frmAPOListados.frx":2AD4
             ToolTipText     =   "Buscar fecha"
             Top             =   450
             Width           =   240
@@ -2636,7 +3003,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   95
             Left            =   180
-            TabIndex        =   313
+            TabIndex        =   315
             Top             =   495
             Width           =   1395
          End
@@ -2655,7 +3022,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   22
             Left            =   180
-            TabIndex        =   312
+            TabIndex        =   314
             Top             =   855
             Width           =   1275
          End
@@ -2690,7 +3057,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   21
             Left            =   180
-            TabIndex        =   311
+            TabIndex        =   313
             Top             =   1215
             Width           =   1365
          End
@@ -2709,7 +3076,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   2865
          Left            =   120
-         TabIndex        =   287
+         TabIndex        =   289
          Top             =   780
          Width           =   6315
          Begin VB.TextBox txtNombre 
@@ -2719,7 +3086,7 @@ Begin VB.Form frmAPOListados
             Index           =   75
             Left            =   2970
             Locked          =   -1  'True
-            TabIndex        =   318
+            TabIndex        =   320
             Text            =   "Text5"
             Top             =   2310
             Width           =   3285
@@ -2730,7 +3097,7 @@ Begin VB.Form frmAPOListados
             Index           =   75
             Left            =   1860
             MaxLength       =   3
-            TabIndex        =   294
+            TabIndex        =   296
             Top             =   2310
             Width           =   1035
          End
@@ -2741,7 +3108,7 @@ Begin VB.Form frmAPOListados
             Index           =   82
             Left            =   2940
             Locked          =   -1  'True
-            TabIndex        =   292
+            TabIndex        =   294
             Text            =   "Text5"
             Top             =   975
             Width           =   3165
@@ -2753,7 +3120,7 @@ Begin VB.Form frmAPOListados
             Index           =   81
             Left            =   2940
             Locked          =   -1  'True
-            TabIndex        =   290
+            TabIndex        =   292
             Text            =   "Text5"
             Top             =   600
             Width           =   3165
@@ -2764,7 +3131,7 @@ Begin VB.Form frmAPOListados
             Index           =   82
             Left            =   1860
             MaxLength       =   16
-            TabIndex        =   289
+            TabIndex        =   291
             Top             =   960
             Width           =   1050
          End
@@ -2774,7 +3141,7 @@ Begin VB.Form frmAPOListados
             Index           =   81
             Left            =   1860
             MaxLength       =   16
-            TabIndex        =   288
+            TabIndex        =   290
             Top             =   600
             Width           =   1050
          End
@@ -2784,7 +3151,7 @@ Begin VB.Form frmAPOListados
             Index           =   80
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   293
+            TabIndex        =   295
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1860
             Width           =   1050
@@ -2795,7 +3162,7 @@ Begin VB.Form frmAPOListados
             Index           =   79
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   291
+            TabIndex        =   293
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1530
             Width           =   1050
@@ -2816,7 +3183,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   82
             Left            =   210
-            TabIndex        =   319
+            TabIndex        =   321
             Top             =   2130
             Width           =   1125
          End
@@ -2824,7 +3191,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   40
             Left            =   1560
-            MouseIcon       =   "frmAPOListados.frx":2501
+            MouseIcon       =   "frmAPOListados.frx":2B5F
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar aportación"
             Top             =   2340
@@ -2834,7 +3201,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   43
             Left            =   1560
-            MouseIcon       =   "frmAPOListados.frx":2653
+            MouseIcon       =   "frmAPOListados.frx":2CB1
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar socio"
             Top             =   960
@@ -2844,7 +3211,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   42
             Left            =   1560
-            MouseIcon       =   "frmAPOListados.frx":27A5
+            MouseIcon       =   "frmAPOListados.frx":2E03
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar socio"
             Top             =   600
@@ -2866,7 +3233,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   93
             Left            =   225
-            TabIndex        =   306
+            TabIndex        =   308
             Top             =   360
             Width           =   375
          End
@@ -2875,7 +3242,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   92
             Left            =   915
-            TabIndex        =   305
+            TabIndex        =   307
             Top             =   975
             Width           =   420
          End
@@ -2884,7 +3251,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   91
             Left            =   930
-            TabIndex        =   304
+            TabIndex        =   306
             Top             =   600
             Width           =   465
          End
@@ -2892,7 +3259,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   24
             Left            =   1560
-            Picture         =   "frmAPOListados.frx":28F7
+            Picture         =   "frmAPOListados.frx":2F55
             ToolTipText     =   "Buscar fecha"
             Top             =   1860
             Width           =   240
@@ -2901,7 +3268,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   23
             Left            =   1560
-            Picture         =   "frmAPOListados.frx":2982
+            Picture         =   "frmAPOListados.frx":2FE0
             ToolTipText     =   "Buscar fecha"
             Top             =   1530
             Width           =   240
@@ -2911,7 +3278,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   90
             Left            =   900
-            TabIndex        =   303
+            TabIndex        =   305
             Top             =   1890
             Width           =   420
          End
@@ -2920,7 +3287,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   89
             Left            =   900
-            TabIndex        =   301
+            TabIndex        =   303
             Top             =   1560
             Width           =   465
          End
@@ -2939,7 +3306,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   85
             Left            =   210
-            TabIndex        =   299
+            TabIndex        =   301
             Top             =   1260
             Width           =   1815
          End
@@ -2949,14 +3316,14 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   10
          Left            =   5370
-         TabIndex        =   302
+         TabIndex        =   304
          Top             =   6705
          Width           =   975
       End
       Begin MSComctlLib.ProgressBar Pb10 
          Height          =   255
          Left            =   210
-         TabIndex        =   315
+         TabIndex        =   317
          Top             =   6270
          Visible         =   0   'False
          Width           =   6255
@@ -2971,7 +3338,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   25
          Left            =   270
-         TabIndex        =   317
+         TabIndex        =   319
          Top             =   5940
          Visible         =   0   'False
          Width           =   6105
@@ -2990,7 +3357,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   180
-         TabIndex        =   316
+         TabIndex        =   318
          Top             =   270
          Width           =   5160
       End
@@ -3005,7 +3372,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameRegBajaSocios 
       Height          =   5400
       Left            =   0
-      TabIndex        =   206
+      TabIndex        =   208
       Top             =   0
       Width           =   6555
       Begin VB.Frame Frame11 
@@ -3022,7 +3389,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   1935
          Left            =   120
-         TabIndex        =   208
+         TabIndex        =   210
          Top             =   2130
          Width           =   6315
          Begin VB.TextBox txtcodigo 
@@ -3031,7 +3398,7 @@ Begin VB.Form frmAPOListados
             Index           =   58
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   222
+            TabIndex        =   224
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1440
             Width           =   1050
@@ -3043,7 +3410,7 @@ Begin VB.Form frmAPOListados
             Index           =   58
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   211
+            TabIndex        =   213
             Top             =   1440
             Width           =   3045
          End
@@ -3053,7 +3420,7 @@ Begin VB.Form frmAPOListados
             Index           =   57
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   219
+            TabIndex        =   221
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   360
             Width           =   1050
@@ -3065,7 +3432,7 @@ Begin VB.Form frmAPOListados
             Index           =   56
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   210
+            TabIndex        =   212
             Top             =   720
             Width           =   3045
          End
@@ -3075,7 +3442,7 @@ Begin VB.Form frmAPOListados
             Index           =   56
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   220
+            TabIndex        =   222
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   720
             Width           =   1050
@@ -3086,7 +3453,7 @@ Begin VB.Form frmAPOListados
             Index           =   55
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   221
+            TabIndex        =   223
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1080
             Width           =   1050
@@ -3098,7 +3465,7 @@ Begin VB.Form frmAPOListados
             Index           =   55
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   209
+            TabIndex        =   211
             Top             =   1080
             Width           =   3045
          End
@@ -3116,7 +3483,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   17
             Left            =   180
-            TabIndex        =   215
+            TabIndex        =   217
             Top             =   1485
             Width           =   1395
          End
@@ -3124,7 +3491,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   17
             Left            =   1710
-            Picture         =   "frmAPOListados.frx":2A0D
+            Picture         =   "frmAPOListados.frx":306B
             ToolTipText     =   "Buscar fecha"
             Top             =   360
             Width           =   240
@@ -3135,7 +3502,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   62
             Left            =   180
-            TabIndex        =   214
+            TabIndex        =   216
             Top             =   405
             Width           =   1425
          End
@@ -3145,7 +3512,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   16
             Left            =   180
-            TabIndex        =   213
+            TabIndex        =   215
             Top             =   765
             Width           =   1515
          End
@@ -3171,7 +3538,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   15
             Left            =   180
-            TabIndex        =   212
+            TabIndex        =   214
             Top             =   1125
             Width           =   1485
          End
@@ -3190,7 +3557,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   1245
          Left            =   120
-         TabIndex        =   207
+         TabIndex        =   209
          Top             =   780
          Width           =   6315
          Begin VB.TextBox txtcodigo 
@@ -3199,7 +3566,7 @@ Begin VB.Form frmAPOListados
             Index           =   59
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   217
+            TabIndex        =   219
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   360
             Width           =   1050
@@ -3211,7 +3578,7 @@ Begin VB.Form frmAPOListados
             Index           =   59
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   227
+            TabIndex        =   229
             Top             =   360
             Width           =   3045
          End
@@ -3221,7 +3588,7 @@ Begin VB.Form frmAPOListados
             Index           =   54
             Left            =   2010
             MaxLength       =   10
-            TabIndex        =   218
+            TabIndex        =   220
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   810
             Width           =   1050
@@ -3240,7 +3607,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   18
             Left            =   180
-            TabIndex        =   228
+            TabIndex        =   230
             Top             =   405
             Width           =   1515
          End
@@ -3248,7 +3615,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   18
             Left            =   1710
-            Picture         =   "frmAPOListados.frx":2A98
+            Picture         =   "frmAPOListados.frx":30F6
             ToolTipText     =   "Buscar fecha"
             Top             =   780
             Width           =   240
@@ -3259,7 +3626,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   61
             Left            =   180
-            TabIndex        =   225
+            TabIndex        =   227
             Top             =   765
             Width           =   1425
          End
@@ -3268,7 +3635,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4200
-         TabIndex        =   223
+         TabIndex        =   225
          Top             =   4755
          Width           =   975
       End
@@ -3277,14 +3644,14 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   7
          Left            =   5370
-         TabIndex        =   224
+         TabIndex        =   226
          Top             =   4755
          Width           =   975
       End
       Begin MSComctlLib.ProgressBar Pb7 
          Height          =   255
          Left            =   210
-         TabIndex        =   226
+         TabIndex        =   228
          Top             =   4320
          Visible         =   0   'False
          Width           =   6255
@@ -3307,7 +3674,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   180
-         TabIndex        =   216
+         TabIndex        =   218
          Top             =   270
          Width           =   5160
       End
@@ -3315,7 +3682,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameCertificadoBol 
       Height          =   7530
       Left            =   0
-      TabIndex        =   320
+      TabIndex        =   322
       Top             =   0
       Width           =   6555
       Begin VB.TextBox txtcodigo 
@@ -3325,7 +3692,7 @@ Begin VB.Form frmAPOListados
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   333
+         TabIndex        =   335
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   5640
          Width           =   4320
@@ -3335,7 +3702,7 @@ Begin VB.Form frmAPOListados
          Index           =   94
          Left            =   1710
          MaxLength       =   30
-         TabIndex        =   332
+         TabIndex        =   334
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   5220
          Width           =   4320
@@ -3345,7 +3712,7 @@ Begin VB.Form frmAPOListados
          Index           =   93
          Left            =   1710
          MaxLength       =   30
-         TabIndex        =   331
+         TabIndex        =   333
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   4830
          Width           =   4320
@@ -3355,7 +3722,7 @@ Begin VB.Form frmAPOListados
          Index           =   92
          Left            =   1710
          MaxLength       =   30
-         TabIndex        =   330
+         TabIndex        =   332
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   4440
          Width           =   4320
@@ -3366,7 +3733,7 @@ Begin VB.Form frmAPOListados
          Index           =   76
          Left            =   1740
          MaxLength       =   10
-         TabIndex        =   329
+         TabIndex        =   331
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   3930
          Width           =   1050
@@ -3377,7 +3744,7 @@ Begin VB.Form frmAPOListados
          Index           =   91
          Left            =   1725
          MaxLength       =   10
-         TabIndex        =   327
+         TabIndex        =   329
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2625
          Width           =   1050
@@ -3388,7 +3755,7 @@ Begin VB.Form frmAPOListados
          Index           =   90
          Left            =   1725
          MaxLength       =   10
-         TabIndex        =   326
+         TabIndex        =   328
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2265
          Width           =   1050
@@ -3398,7 +3765,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   11
          Left            =   4980
-         TabIndex        =   335
+         TabIndex        =   337
          Top             =   6855
          Width           =   975
       End
@@ -3406,7 +3773,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3810
-         TabIndex        =   334
+         TabIndex        =   336
          Top             =   6855
          Width           =   975
       End
@@ -3416,7 +3783,7 @@ Begin VB.Form frmAPOListados
          Index           =   89
          Left            =   1710
          MaxLength       =   16
-         TabIndex        =   325
+         TabIndex        =   327
          Top             =   1590
          Width           =   1035
       End
@@ -3426,7 +3793,7 @@ Begin VB.Form frmAPOListados
          Index           =   88
          Left            =   1710
          MaxLength       =   16
-         TabIndex        =   324
+         TabIndex        =   326
          Top             =   1200
          Width           =   1035
       End
@@ -3437,7 +3804,7 @@ Begin VB.Form frmAPOListados
          Index           =   88
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   323
+         TabIndex        =   325
          Text            =   "Text5"
          Top             =   1215
          Width           =   3285
@@ -3449,7 +3816,7 @@ Begin VB.Form frmAPOListados
          Index           =   89
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   322
+         TabIndex        =   324
          Text            =   "Text5"
          Top             =   1590
          Width           =   3285
@@ -3460,7 +3827,7 @@ Begin VB.Form frmAPOListados
          Index           =   87
          Left            =   1710
          MaxLength       =   3
-         TabIndex        =   328
+         TabIndex        =   330
          Top             =   3270
          Width           =   1035
       End
@@ -3471,7 +3838,7 @@ Begin VB.Form frmAPOListados
          Index           =   87
          Left            =   2775
          Locked          =   -1  'True
-         TabIndex        =   321
+         TabIndex        =   323
          Text            =   "Text5"
          Top             =   3270
          Width           =   3285
@@ -3491,7 +3858,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   105
          Left            =   480
-         TabIndex        =   349
+         TabIndex        =   351
          Top             =   5640
          Width           =   1815
       End
@@ -3510,7 +3877,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   104
          Left            =   480
-         TabIndex        =   348
+         TabIndex        =   350
          Top             =   5220
          Width           =   1815
       End
@@ -3529,7 +3896,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   103
          Left            =   480
-         TabIndex        =   347
+         TabIndex        =   349
          Top             =   4830
          Width           =   1815
       End
@@ -3548,7 +3915,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   102
          Left            =   480
-         TabIndex        =   346
+         TabIndex        =   348
          Top             =   4440
          Width           =   1815
       End
@@ -3567,7 +3934,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   84
          Left            =   450
-         TabIndex        =   345
+         TabIndex        =   347
          Top             =   3630
          Width           =   1815
       End
@@ -3575,7 +3942,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   28
          Left            =   1470
-         Picture         =   "frmAPOListados.frx":2B23
+         Picture         =   "frmAPOListados.frx":3181
          ToolTipText     =   "Buscar fecha"
          Top             =   3930
          Width           =   240
@@ -3595,7 +3962,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   26
          Left            =   495
-         TabIndex        =   344
+         TabIndex        =   346
          Top             =   315
          Width           =   5160
       End
@@ -3614,7 +3981,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   101
          Left            =   435
-         TabIndex        =   343
+         TabIndex        =   345
          Top             =   1965
          Width           =   1815
       End
@@ -3623,7 +3990,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   100
          Left            =   795
-         TabIndex        =   342
+         TabIndex        =   344
          Top             =   2265
          Width           =   465
       End
@@ -3632,7 +3999,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   99
          Left            =   795
-         TabIndex        =   341
+         TabIndex        =   343
          Top             =   2625
          Width           =   420
       End
@@ -3640,7 +4007,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   27
          Left            =   1440
-         Picture         =   "frmAPOListados.frx":2BAE
+         Picture         =   "frmAPOListados.frx":320C
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -3649,7 +4016,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   25
          Left            =   1440
-         Picture         =   "frmAPOListados.frx":2C39
+         Picture         =   "frmAPOListados.frx":3297
          ToolTipText     =   "Buscar fecha"
          Top             =   2250
          Width           =   240
@@ -3659,7 +4026,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   98
          Left            =   825
-         TabIndex        =   340
+         TabIndex        =   342
          Top             =   1215
          Width           =   465
       End
@@ -3668,7 +4035,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   97
          Left            =   840
-         TabIndex        =   339
+         TabIndex        =   341
          Top             =   1590
          Width           =   420
       End
@@ -3688,7 +4055,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   96
          Left            =   480
-         TabIndex        =   338
+         TabIndex        =   340
          Top             =   975
          Width           =   375
       End
@@ -3696,7 +4063,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   49
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":2CC4
+         MouseIcon       =   "frmAPOListados.frx":3322
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1590
@@ -3706,7 +4073,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   48
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":2E16
+         MouseIcon       =   "frmAPOListados.frx":3474
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1230
@@ -3717,7 +4084,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   94
          Left            =   795
-         TabIndex        =   337
+         TabIndex        =   339
          Top             =   3270
          Width           =   465
       End
@@ -3737,7 +4104,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   83
          Left            =   450
-         TabIndex        =   336
+         TabIndex        =   338
          Top             =   2970
          Width           =   1125
       End
@@ -3745,344 +4112,17 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   47
          Left            =   1410
-         MouseIcon       =   "frmAPOListados.frx":2F68
+         MouseIcon       =   "frmAPOListados.frx":35C6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar aportacion"
          Top             =   3270
          Width           =   240
-      End
-   End
-   Begin VB.Frame FrameInforme 
-      Height          =   5790
-      Left            =   0
-      TabIndex        =   61
-      Top             =   30
-      Width           =   6555
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   19
-         Left            =   2775
-         Locked          =   -1  'True
-         TabIndex        =   81
-         Text            =   "Text5"
-         Top             =   3645
-         Width           =   3285
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   13
-         Left            =   2775
-         Locked          =   -1  'True
-         TabIndex        =   80
-         Text            =   "Text5"
-         Top             =   3270
-         Width           =   3285
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   19
-         Left            =   1710
-         MaxLength       =   16
-         TabIndex        =   67
-         Top             =   3645
-         Width           =   1035
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   13
-         Left            =   1710
-         MaxLength       =   16
-         TabIndex        =   66
-         Top             =   3270
-         Width           =   1035
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   24
-         Left            =   2805
-         Locked          =   -1  'True
-         TabIndex        =   71
-         Text            =   "Text5"
-         Top             =   1590
-         Width           =   3285
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   23
-         Left            =   2805
-         Locked          =   -1  'True
-         TabIndex        =   70
-         Text            =   "Text5"
-         Top             =   1215
-         Width           =   3285
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   24
-         Left            =   1725
-         MaxLength       =   16
-         TabIndex        =   63
-         Top             =   1590
-         Width           =   1035
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   23
-         Left            =   1725
-         MaxLength       =   16
-         TabIndex        =   62
-         Top             =   1215
-         Width           =   1035
-      End
-      Begin VB.CommandButton CmdAcepListado 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3810
-         TabIndex        =   68
-         Top             =   4965
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   2
-         Left            =   4980
-         TabIndex        =   69
-         Top             =   4965
-         Width           =   975
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   21
-         Left            =   1725
-         MaxLength       =   10
-         TabIndex        =   64
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2265
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   22
-         Left            =   1725
-         MaxLength       =   10
-         TabIndex        =   65
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2625
-         Width           =   1050
-      End
-      Begin MSComctlLib.ProgressBar Pb3 
-         Height          =   255
-         Left            =   420
-         TabIndex        =   72
-         Top             =   4530
-         Visible         =   0   'False
-         Width           =   5625
-         _ExtentX        =   9922
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   10
-         Left            =   1395
-         MouseIcon       =   "frmAPOListados.frx":30BA
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar aportacion"
-         Top             =   3645
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   8
-         Left            =   1410
-         MouseIcon       =   "frmAPOListados.frx":320C
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar aportacion"
-         Top             =   3270
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Tipo Aportación"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   21
-         Left            =   450
-         TabIndex        =   84
-         Top             =   2970
-         Width           =   1125
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   20
-         Left            =   810
-         TabIndex        =   83
-         Top             =   3645
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   19
-         Left            =   795
-         TabIndex        =   82
-         Top             =   3270
-         Width           =   465
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   7
-         Left            =   1425
-         MouseIcon       =   "frmAPOListados.frx":335E
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1590
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   6
-         Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":34B0
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1215
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   27
-         Left            =   480
-         TabIndex        =   79
-         Top             =   975
-         Width           =   375
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   26
-         Left            =   840
-         TabIndex        =   78
-         Top             =   1590
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   25
-         Left            =   825
-         TabIndex        =   77
-         Top             =   1215
-         Width           =   465
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   9
-         Left            =   1455
-         Picture         =   "frmAPOListados.frx":3602
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2625
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   8
-         Left            =   1455
-         Picture         =   "frmAPOListados.frx":368D
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2265
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   24
-         Left            =   795
-         TabIndex        =   76
-         Top             =   2625
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   23
-         Left            =   795
-         TabIndex        =   75
-         Top             =   2265
-         Width           =   465
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Fecha"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   22
-         Left            =   435
-         TabIndex        =   74
-         Top             =   1965
-         Width           =   1815
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Informe de Aportaciones"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   3
-         Left            =   495
-         TabIndex        =   73
-         Top             =   315
-         Width           =   5160
       End
    End
    Begin VB.Frame FrameRegAltaSocios 
       Height          =   5400
       Left            =   0
-      TabIndex        =   185
+      TabIndex        =   187
       Top             =   0
       Width           =   6555
       Begin VB.CommandButton CmdCancel 
@@ -4090,7 +4130,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   6
          Left            =   5370
-         TabIndex        =   201
+         TabIndex        =   203
          Top             =   4755
          Width           =   975
       End
@@ -4098,7 +4138,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4200
-         TabIndex        =   200
+         TabIndex        =   202
          Top             =   4755
          Width           =   975
       End
@@ -4116,7 +4156,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   1005
          Left            =   120
-         TabIndex        =   194
+         TabIndex        =   196
          Top             =   840
          Width           =   6315
          Begin VB.TextBox txtcodigo 
@@ -4125,7 +4165,7 @@ Begin VB.Form frmAPOListados
             Index           =   60
             Left            =   2010
             MaxLength       =   10
-            TabIndex        =   195
+            TabIndex        =   197
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   450
             Width           =   1050
@@ -4136,7 +4176,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   68
             Left            =   195
-            TabIndex        =   202
+            TabIndex        =   204
             Top             =   465
             Width           =   1815
          End
@@ -4155,7 +4195,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   1935
          Left            =   120
-         TabIndex        =   186
+         TabIndex        =   188
          Top             =   1890
          Width           =   6315
          Begin VB.TextBox txtNombre 
@@ -4165,7 +4205,7 @@ Begin VB.Form frmAPOListados
             Index           =   53
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   189
+            TabIndex        =   191
             Top             =   1080
             Width           =   3045
          End
@@ -4175,7 +4215,7 @@ Begin VB.Form frmAPOListados
             Index           =   53
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   198
+            TabIndex        =   200
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1080
             Width           =   1050
@@ -4186,7 +4226,7 @@ Begin VB.Form frmAPOListados
             Index           =   52
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   197
+            TabIndex        =   199
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   720
             Width           =   1050
@@ -4198,7 +4238,7 @@ Begin VB.Form frmAPOListados
             Index           =   52
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   188
+            TabIndex        =   190
             Top             =   720
             Width           =   3045
          End
@@ -4208,7 +4248,7 @@ Begin VB.Form frmAPOListados
             Index           =   51
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   196
+            TabIndex        =   198
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   360
             Width           =   1050
@@ -4220,7 +4260,7 @@ Begin VB.Form frmAPOListados
             Index           =   50
             Left            =   3075
             Locked          =   -1  'True
-            TabIndex        =   187
+            TabIndex        =   189
             Top             =   1440
             Width           =   3045
          End
@@ -4230,7 +4270,7 @@ Begin VB.Form frmAPOListados
             Index           =   50
             Left            =   1980
             MaxLength       =   10
-            TabIndex        =   199
+            TabIndex        =   201
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1440
             Width           =   1050
@@ -4241,7 +4281,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   13
             Left            =   180
-            TabIndex        =   193
+            TabIndex        =   195
             Top             =   1125
             Width           =   1485
          End
@@ -4267,7 +4307,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   12
             Left            =   180
-            TabIndex        =   192
+            TabIndex        =   194
             Top             =   765
             Width           =   1515
          End
@@ -4277,7 +4317,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   60
             Left            =   180
-            TabIndex        =   191
+            TabIndex        =   193
             Top             =   405
             Width           =   1425
          End
@@ -4296,7 +4336,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   11
             Left            =   180
-            TabIndex        =   190
+            TabIndex        =   192
             Top             =   1485
             Width           =   1395
          End
@@ -4312,7 +4352,7 @@ Begin VB.Form frmAPOListados
       Begin MSComctlLib.ProgressBar Pb6 
          Height          =   255
          Left            =   210
-         TabIndex        =   203
+         TabIndex        =   205
          Top             =   4320
          Visible         =   0   'False
          Width           =   6255
@@ -4335,7 +4375,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   180
-         TabIndex        =   205
+         TabIndex        =   207
          Top             =   270
          Width           =   5160
       End
@@ -4345,7 +4385,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   14
          Left            =   270
-         TabIndex        =   204
+         TabIndex        =   206
          Top             =   3990
          Visible         =   0   'False
          Width           =   6105
@@ -4354,14 +4394,14 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameInsertarApoBol 
       Height          =   7470
       Left            =   0
-      TabIndex        =   229
+      TabIndex        =   231
       Top             =   60
       Width           =   6555
       Begin VB.Frame Frame5 
          BorderStyle     =   0  'None
          Height          =   2505
          Left            =   150
-         TabIndex        =   254
+         TabIndex        =   256
          Top             =   4080
          Width           =   6165
          Begin VB.TextBox txtNombre 
@@ -4371,7 +4411,7 @@ Begin VB.Form frmAPOListados
             Index           =   68
             Left            =   2640
             Locked          =   -1  'True
-            TabIndex        =   262
+            TabIndex        =   264
             Text            =   "Text5"
             Top             =   300
             Width           =   3285
@@ -4382,7 +4422,7 @@ Begin VB.Form frmAPOListados
             Index           =   68
             Left            =   1560
             MaxLength       =   3
-            TabIndex        =   261
+            TabIndex        =   263
             Top             =   285
             Width           =   1035
          End
@@ -4391,7 +4431,7 @@ Begin VB.Form frmAPOListados
             Index           =   63
             Left            =   1560
             MaxLength       =   30
-            TabIndex        =   247
+            TabIndex        =   249
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   840
             Width           =   4350
@@ -4402,7 +4442,7 @@ Begin VB.Form frmAPOListados
             Index           =   69
             Left            =   1560
             MaxLength       =   30
-            TabIndex        =   248
+            TabIndex        =   250
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1470
             Width           =   1020
@@ -4410,7 +4450,7 @@ Begin VB.Form frmAPOListados
          Begin MSComctlLib.ProgressBar Pb8 
             Height          =   255
             Left            =   210
-            TabIndex        =   255
+            TabIndex        =   257
             Top             =   1890
             Visible         =   0   'False
             Width           =   6045
@@ -4435,7 +4475,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   73
             Left            =   240
-            TabIndex        =   263
+            TabIndex        =   265
             Top             =   0
             Width           =   1125
          End
@@ -4464,7 +4504,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   65
             Left            =   270
-            TabIndex        =   257
+            TabIndex        =   259
             Top             =   630
             Width           =   1815
          End
@@ -4483,7 +4523,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   76
             Left            =   270
-            TabIndex        =   256
+            TabIndex        =   258
             Top             =   1200
             Width           =   1875
          End
@@ -4492,7 +4532,7 @@ Begin VB.Form frmAPOListados
          BorderStyle     =   0  'None
          Height          =   765
          Left            =   390
-         TabIndex        =   258
+         TabIndex        =   260
          Top             =   4080
          Width           =   3135
          Begin VB.TextBox txtcodigo 
@@ -4501,7 +4541,7 @@ Begin VB.Form frmAPOListados
             Index           =   70
             Left            =   1290
             MaxLength       =   10
-            TabIndex        =   259
+            TabIndex        =   261
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   315
             Width           =   1050
@@ -4521,7 +4561,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   77
             Left            =   0
-            TabIndex        =   260
+            TabIndex        =   262
             Top             =   60
             Width           =   1815
          End
@@ -4541,7 +4581,7 @@ Begin VB.Form frmAPOListados
          Index           =   62
          Left            =   1680
          MaxLength       =   7
-         TabIndex        =   242
+         TabIndex        =   244
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
          Top             =   1500
          Width           =   830
@@ -4552,7 +4592,7 @@ Begin VB.Form frmAPOListados
          Index           =   61
          Left            =   1680
          MaxLength       =   7
-         TabIndex        =   241
+         TabIndex        =   243
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
          Top             =   1110
          Width           =   830
@@ -4564,7 +4604,7 @@ Begin VB.Form frmAPOListados
          Index           =   67
          Left            =   2790
          Locked          =   -1  'True
-         TabIndex        =   231
+         TabIndex        =   233
          Text            =   "Text5"
          Top             =   3510
          Width           =   3285
@@ -4576,7 +4616,7 @@ Begin VB.Form frmAPOListados
          Index           =   66
          Left            =   2775
          Locked          =   -1  'True
-         TabIndex        =   230
+         TabIndex        =   232
          Text            =   "Text5"
          Top             =   3135
          Width           =   3285
@@ -4587,7 +4627,7 @@ Begin VB.Form frmAPOListados
          Index           =   67
          Left            =   1680
          MaxLength       =   6
-         TabIndex        =   246
+         TabIndex        =   248
          Top             =   3510
          Width           =   1035
       End
@@ -4597,7 +4637,7 @@ Begin VB.Form frmAPOListados
          Index           =   66
          Left            =   1680
          MaxLength       =   6
-         TabIndex        =   245
+         TabIndex        =   247
          Top             =   3135
          Width           =   1035
       End
@@ -4605,7 +4645,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3840
-         TabIndex        =   249
+         TabIndex        =   251
          Top             =   6660
          Width           =   975
       End
@@ -4614,7 +4654,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   8
          Left            =   4980
-         TabIndex        =   250
+         TabIndex        =   252
          Top             =   6645
          Width           =   975
       End
@@ -4624,7 +4664,7 @@ Begin VB.Form frmAPOListados
          Index           =   65
          Left            =   1680
          MaxLength       =   10
-         TabIndex        =   244
+         TabIndex        =   246
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2640
          Width           =   1050
@@ -4635,7 +4675,7 @@ Begin VB.Form frmAPOListados
          Index           =   64
          Left            =   1680
          MaxLength       =   10
-         TabIndex        =   243
+         TabIndex        =   245
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2280
          Width           =   1050
@@ -4644,7 +4684,7 @@ Begin VB.Form frmAPOListados
          Height          =   1110
          Index           =   0
          Left            =   2940
-         TabIndex        =   239
+         TabIndex        =   241
          Top             =   1110
          Width           =   3135
          _ExtentX        =   5530
@@ -4665,7 +4705,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   75
          Left            =   810
-         TabIndex        =   253
+         TabIndex        =   255
          Top             =   1500
          Width           =   420
       End
@@ -4674,7 +4714,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   64
          Left            =   810
-         TabIndex        =   252
+         TabIndex        =   254
          Top             =   1140
          Width           =   465
       End
@@ -4694,7 +4734,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   63
          Left            =   390
-         TabIndex        =   251
+         TabIndex        =   253
          Top             =   870
          Width           =   870
       End
@@ -4713,7 +4753,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   74
          Left            =   2970
-         TabIndex        =   240
+         TabIndex        =   242
          Top             =   870
          Width           =   1815
       End
@@ -4771,7 +4811,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   72
          Left            =   390
-         TabIndex        =   238
+         TabIndex        =   240
          Top             =   2895
          Width           =   375
       End
@@ -4780,7 +4820,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   71
          Left            =   810
-         TabIndex        =   237
+         TabIndex        =   239
          Top             =   3510
          Width           =   420
       End
@@ -4789,7 +4829,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   70
          Left            =   810
-         TabIndex        =   236
+         TabIndex        =   238
          Top             =   3135
          Width           =   465
       End
@@ -4816,7 +4856,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   69
          Left            =   795
-         TabIndex        =   235
+         TabIndex        =   237
          Top             =   2625
          Width           =   420
       End
@@ -4825,7 +4865,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   67
          Left            =   810
-         TabIndex        =   234
+         TabIndex        =   236
          Top             =   2265
          Width           =   465
       End
@@ -4844,7 +4884,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   66
          Left            =   390
-         TabIndex        =   233
+         TabIndex        =   235
          Top             =   1965
          Width           =   1815
       End
@@ -4863,7 +4903,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   19
          Left            =   375
-         TabIndex        =   232
+         TabIndex        =   234
          Top             =   315
          Width           =   5160
       End
@@ -4871,7 +4911,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameIntTesorQua 
       Height          =   7530
       Left            =   0
-      TabIndex        =   142
+      TabIndex        =   144
       Top             =   0
       Width           =   6555
       Begin VB.CommandButton CmdCancel 
@@ -4879,7 +4919,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   5
          Left            =   5370
-         TabIndex        =   166
+         TabIndex        =   168
          Top             =   7005
          Width           =   975
       End
@@ -4887,7 +4927,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4230
-         TabIndex        =   165
+         TabIndex        =   167
          Top             =   7005
          Width           =   975
       End
@@ -4905,7 +4945,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   3315
          Left            =   120
-         TabIndex        =   151
+         TabIndex        =   153
          Top             =   780
          Width           =   6315
          Begin VB.TextBox txtNombre 
@@ -4915,7 +4955,7 @@ Begin VB.Form frmAPOListados
             Index           =   48
             Left            =   2925
             Locked          =   -1  'True
-            TabIndex        =   177
+            TabIndex        =   179
             Text            =   "Text5"
             Top             =   1950
             Width           =   3165
@@ -4927,7 +4967,7 @@ Begin VB.Form frmAPOListados
             Index           =   43
             Left            =   2925
             Locked          =   -1  'True
-            TabIndex        =   176
+            TabIndex        =   178
             Text            =   "Text5"
             Top             =   1575
             Width           =   3165
@@ -4938,7 +4978,7 @@ Begin VB.Form frmAPOListados
             Index           =   48
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   157
+            TabIndex        =   159
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1935
             Width           =   1050
@@ -4949,7 +4989,7 @@ Begin VB.Form frmAPOListados
             Index           =   43
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   156
+            TabIndex        =   158
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1575
             Width           =   1050
@@ -4960,7 +5000,7 @@ Begin VB.Form frmAPOListados
             Index           =   47
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   159
+            TabIndex        =   161
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   2880
             Width           =   1050
@@ -4971,7 +5011,7 @@ Begin VB.Form frmAPOListados
             Index           =   46
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   158
+            TabIndex        =   160
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   2520
             Width           =   1050
@@ -4982,7 +5022,7 @@ Begin VB.Form frmAPOListados
             Index           =   45
             Left            =   1860
             MaxLength       =   16
-            TabIndex        =   155
+            TabIndex        =   157
             Top             =   930
             Width           =   1050
          End
@@ -4992,7 +5032,7 @@ Begin VB.Form frmAPOListados
             Index           =   44
             Left            =   1860
             MaxLength       =   16
-            TabIndex        =   154
+            TabIndex        =   156
             Top             =   570
             Width           =   1050
          End
@@ -5003,7 +5043,7 @@ Begin VB.Form frmAPOListados
             Index           =   44
             Left            =   2940
             Locked          =   -1  'True
-            TabIndex        =   153
+            TabIndex        =   155
             Text            =   "Text5"
             Top             =   570
             Width           =   3165
@@ -5015,7 +5055,7 @@ Begin VB.Form frmAPOListados
             Index           =   45
             Left            =   2940
             Locked          =   -1  'True
-            TabIndex        =   152
+            TabIndex        =   154
             Text            =   "Text5"
             Top             =   945
             Width           =   3165
@@ -5036,7 +5076,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   40
             Left            =   240
-            TabIndex        =   180
+            TabIndex        =   182
             Top             =   1260
             Width           =   390
          End
@@ -5065,7 +5105,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   57
             Left            =   900
-            TabIndex        =   179
+            TabIndex        =   181
             Top             =   1920
             Width           =   420
          End
@@ -5074,7 +5114,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   56
             Left            =   900
-            TabIndex        =   178
+            TabIndex        =   180
             Top             =   1560
             Width           =   465
          End
@@ -5084,7 +5124,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   55
             Left            =   210
-            TabIndex        =   172
+            TabIndex        =   174
             Top             =   2250
             Width           =   1815
          End
@@ -5093,7 +5133,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   54
             Left            =   900
-            TabIndex        =   171
+            TabIndex        =   173
             Top             =   2550
             Width           =   465
          End
@@ -5102,7 +5142,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   53
             Left            =   900
-            TabIndex        =   170
+            TabIndex        =   172
             Top             =   2880
             Width           =   420
          End
@@ -5129,7 +5169,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   52
             Left            =   930
-            TabIndex        =   169
+            TabIndex        =   171
             Top             =   570
             Width           =   465
          End
@@ -5138,7 +5178,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   51
             Left            =   915
-            TabIndex        =   168
+            TabIndex        =   170
             Top             =   945
             Width           =   420
          End
@@ -5158,7 +5198,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   41
             Left            =   225
-            TabIndex        =   167
+            TabIndex        =   169
             Top             =   330
             Width           =   375
          End
@@ -5197,7 +5237,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   2235
          Left            =   120
-         TabIndex        =   143
+         TabIndex        =   145
          Top             =   4110
          Width           =   6315
          Begin VB.TextBox txtcodigo 
@@ -5206,7 +5246,7 @@ Begin VB.Form frmAPOListados
             Index           =   49
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   160
+            TabIndex        =   162
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   390
             Width           =   1050
@@ -5218,7 +5258,7 @@ Begin VB.Form frmAPOListados
             Index           =   42
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   146
+            TabIndex        =   148
             Top             =   1470
             Width           =   3195
          End
@@ -5228,7 +5268,7 @@ Begin VB.Form frmAPOListados
             Index           =   42
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   163
+            TabIndex        =   165
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1470
             Width           =   1050
@@ -5239,7 +5279,7 @@ Begin VB.Form frmAPOListados
             Index           =   40
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   162
+            TabIndex        =   164
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1110
             Width           =   1050
@@ -5251,7 +5291,7 @@ Begin VB.Form frmAPOListados
             Index           =   40
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   145
+            TabIndex        =   147
             Top             =   1110
             Width           =   3195
          End
@@ -5261,7 +5301,7 @@ Begin VB.Form frmAPOListados
             Index           =   34
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   161
+            TabIndex        =   163
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   750
             Width           =   1050
@@ -5273,7 +5313,7 @@ Begin VB.Form frmAPOListados
             Index           =   33
             Left            =   2955
             Locked          =   -1  'True
-            TabIndex        =   144
+            TabIndex        =   146
             Top             =   1830
             Width           =   3195
          End
@@ -5283,7 +5323,7 @@ Begin VB.Form frmAPOListados
             Index           =   33
             Left            =   1860
             MaxLength       =   10
-            TabIndex        =   164
+            TabIndex        =   166
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   1830
             Width           =   1050
@@ -5303,7 +5343,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   58
             Left            =   180
-            TabIndex        =   181
+            TabIndex        =   183
             Top             =   435
             Width           =   1395
          End
@@ -5313,7 +5353,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   9
             Left            =   180
-            TabIndex        =   150
+            TabIndex        =   152
             Top             =   1515
             Width           =   1365
          End
@@ -5339,7 +5379,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   8
             Left            =   180
-            TabIndex        =   149
+            TabIndex        =   151
             Top             =   1155
             Width           =   1275
          End
@@ -5349,7 +5389,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   39
             Left            =   180
-            TabIndex        =   148
+            TabIndex        =   150
             Top             =   795
             Width           =   1395
          End
@@ -5368,7 +5408,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   7
             Left            =   180
-            TabIndex        =   147
+            TabIndex        =   149
             Top             =   1875
             Width           =   1395
          End
@@ -5384,7 +5424,7 @@ Begin VB.Form frmAPOListados
       Begin MSComctlLib.ProgressBar Pb4 
          Height          =   255
          Left            =   120
-         TabIndex        =   173
+         TabIndex        =   175
          Top             =   6720
          Visible         =   0   'False
          Width           =   6255
@@ -5407,7 +5447,7 @@ Begin VB.Form frmAPOListados
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   180
-         TabIndex        =   175
+         TabIndex        =   177
          Top             =   270
          Width           =   5160
       End
@@ -5417,7 +5457,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   10
          Left            =   180
-         TabIndex        =   174
+         TabIndex        =   176
          Top             =   6390
          Visible         =   0   'False
          Width           =   6105
@@ -5426,7 +5466,7 @@ Begin VB.Form frmAPOListados
    Begin VB.Frame FrameAporObligatoria 
       Height          =   6330
       Left            =   -30
-      TabIndex        =   264
+      TabIndex        =   266
       Top             =   30
       Width           =   6555
       Begin VB.TextBox txtcodigo 
@@ -5435,7 +5475,7 @@ Begin VB.Form frmAPOListados
          Index           =   74
          Left            =   1680
          MaxLength       =   10
-         TabIndex        =   277
+         TabIndex        =   279
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   1245
          Width           =   1050
@@ -5445,7 +5485,7 @@ Begin VB.Form frmAPOListados
          Height          =   375
          Index           =   9
          Left            =   4980
-         TabIndex        =   285
+         TabIndex        =   287
          Top             =   5415
          Width           =   975
       End
@@ -5453,7 +5493,7 @@ Begin VB.Form frmAPOListados
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3840
-         TabIndex        =   284
+         TabIndex        =   286
          Top             =   5430
          Width           =   975
       End
@@ -5463,7 +5503,7 @@ Begin VB.Form frmAPOListados
          Index           =   78
          Left            =   1710
          MaxLength       =   6
-         TabIndex        =   280
+         TabIndex        =   282
          Top             =   2220
          Width           =   1035
       End
@@ -5473,7 +5513,7 @@ Begin VB.Form frmAPOListados
          Index           =   77
          Left            =   1710
          MaxLength       =   6
-         TabIndex        =   279
+         TabIndex        =   281
          Top             =   1860
          Width           =   1035
       End
@@ -5484,7 +5524,7 @@ Begin VB.Form frmAPOListados
          Index           =   77
          Left            =   2805
          Locked          =   -1  'True
-         TabIndex        =   272
+         TabIndex        =   274
          Text            =   "Text5"
          Top             =   1875
          Width           =   3285
@@ -5496,7 +5536,7 @@ Begin VB.Form frmAPOListados
          Index           =   78
          Left            =   2820
          Locked          =   -1  'True
-         TabIndex        =   271
+         TabIndex        =   273
          Text            =   "Text5"
          Top             =   2250
          Width           =   3285
@@ -5505,13 +5545,13 @@ Begin VB.Form frmAPOListados
          BorderStyle     =   0  'None
          Height          =   2565
          Left            =   150
-         TabIndex        =   265
+         TabIndex        =   267
          Top             =   2730
          Width           =   6165
          Begin MSComctlLib.ProgressBar Pb9 
             Height          =   255
             Left            =   150
-            TabIndex        =   267
+            TabIndex        =   269
             Top             =   1980
             Visible         =   0   'False
             Width           =   6045
@@ -5526,7 +5566,7 @@ Begin VB.Form frmAPOListados
             Index           =   73
             Left            =   1560
             MaxLength       =   12
-            TabIndex        =   283
+            TabIndex        =   285
             Top             =   1500
             Width           =   1020
          End
@@ -5535,7 +5575,7 @@ Begin VB.Form frmAPOListados
             Index           =   72
             Left            =   1560
             MaxLength       =   30
-            TabIndex        =   282
+            TabIndex        =   284
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   840
             Width           =   4380
@@ -5546,7 +5586,7 @@ Begin VB.Form frmAPOListados
             Index           =   71
             Left            =   1560
             MaxLength       =   3
-            TabIndex        =   281
+            TabIndex        =   283
             Top             =   270
             Width           =   1035
          End
@@ -5557,7 +5597,7 @@ Begin VB.Form frmAPOListados
             Index           =   71
             Left            =   2670
             Locked          =   -1  'True
-            TabIndex        =   266
+            TabIndex        =   268
             Text            =   "Text5"
             Top             =   270
             Width           =   3285
@@ -5577,7 +5617,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   80
             Left            =   300
-            TabIndex        =   270
+            TabIndex        =   272
             Top             =   1200
             Width           =   1875
          End
@@ -5596,7 +5636,7 @@ Begin VB.Form frmAPOListados
             Height          =   255
             Index           =   79
             Left            =   300
-            TabIndex        =   269
+            TabIndex        =   271
             Top             =   630
             Width           =   1815
          End
@@ -5626,7 +5666,7 @@ Begin VB.Form frmAPOListados
             Height          =   195
             Index           =   78
             Left            =   300
-            TabIndex        =   268
+            TabIndex        =   270
             Top             =   0
             Width           =   1125
          End
@@ -5655,7 +5695,7 @@ Begin VB.Form frmAPOListados
          Height          =   255
          Index           =   81
          Left            =   450
-         TabIndex        =   278
+         TabIndex        =   280
          Top             =   990
          Width           =   1815
       End
@@ -5674,7 +5714,7 @@ Begin VB.Form frmAPOListados
          Height          =   345
          Index           =   20
          Left            =   375
-         TabIndex        =   276
+         TabIndex        =   278
          Top             =   315
          Width           =   5160
       End
@@ -5683,7 +5723,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   88
          Left            =   840
-         TabIndex        =   275
+         TabIndex        =   277
          Top             =   1875
          Width           =   465
       End
@@ -5692,7 +5732,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   87
          Left            =   840
-         TabIndex        =   274
+         TabIndex        =   276
          Top             =   2250
          Width           =   420
       End
@@ -5712,7 +5752,7 @@ Begin VB.Form frmAPOListados
          Height          =   195
          Index           =   86
          Left            =   420
-         TabIndex        =   273
+         TabIndex        =   275
          Top             =   1635
          Width           =   375
       End
@@ -6595,7 +6635,7 @@ Dim Existe As Boolean
                 Loop Until Not Existe
                 
                 CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-                CadValues = CadValues & DBSet(RS!poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
+                CadValues = CadValues & DBSet(RS!Poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
                 CadValues = CadValues & DBSet(RS!codvarie, "N") & "," & DBSet(Importe, "N") & "," & DBSet(txtcodigo(20).Text, "F") & ","
                 CadValues = CadValues & DBSet(RS!anoplant, "N") & "," & ValorNulo & "," & DBSet(RS!supcoope, "N") & ","
                 CadValues = CadValues & DBSet(txtcodigo(31).Text, "N") & ",0)"
@@ -6888,6 +6928,19 @@ InicializarVbles
     frmMens.Show vbModal
     
     Set frmMens = Nothing
+    
+    '[Monica]18/01/2016: añadimos la relacion con cooperativa
+    Select Case Combo1(1).ListIndex
+        Case 0 ' todos
+            
+        Case Else
+            If Not AnyadirAFormula(cadFormula, "{rsocios.tiporelacion} = " & Combo1(1).ListIndex - 1) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "rsocios.tiporelacion=" & Combo1(1).ListIndex - 1) Then Exit Sub
+            cadParam = cadParam & "pRelacion=" & Combo1(1).ListIndex & "|"
+            numParam = numParam + 1
+    End Select
+    cadParam = cadParam & "pResumen=" & chkResumen(0).Value & "|"
+    numParam = numParam + 1
     
     
     Tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio and rsocios.fechabaja is null "
@@ -7716,6 +7769,8 @@ Private Sub Form_Activate()
                 txtcodigo(12).Text = Format(Now, "dd/mm/yyyy")
             Case 4 ' Informe de Aportaciones en el mantenimiento
                 PonerFoco txtcodigo(23)
+                '[Monica]18/01/2016: Añadimos la relacion con la cooperativa
+                Combo1(1).ListIndex = 0
             Case 5 ' calculo de aportaciones de quatretonda
                 PonerFoco txtcodigo(32)
             Case 6 ' listado de aportaciones para quatretonda
@@ -7858,12 +7913,13 @@ Dim List As Collection
             Me.Check3.Enabled = (vParamAplic.Cooperativa = 3)
             Me.Check3.visible = (vParamAplic.Cooperativa = 3)
             
-    
         Case 4 ' Informe de aportaciones
             FrameInformesVisible True, h, W
             Tabla = "raportacion"
             Me.Pb1.visible = False
             Label1(0).Caption = "Certificado de Aportaciones"
+            
+            CargaCombo
                 
         Case 5 ' Cálculo de Aportaciones de Quatretonda
             FrameCalculoAporQuaVisible True, h, W
@@ -7956,7 +8012,7 @@ Dim List As Collection
             
             ConexionConta vParamAplic.Seccionhorto
             Tabla = "raportacion"
-            Me.Pb10.visible = False
+            Me.pb10.visible = False
             
         Case 15 ' certificado de aportacion bolbaite
             FrameCertificadoBolVisible True, h, W
@@ -8609,7 +8665,7 @@ Private Sub FrameInformesVisible(visible As Boolean, ByRef h As Integer, ByRef W
     If visible = True Then
         Me.FrameInforme.Top = -90
         Me.FrameInforme.Left = 0
-        Me.FrameInforme.Height = 5790
+        Me.FrameInforme.Height = 6300
         Me.FrameInforme.Width = 6555
         W = Me.FrameInforme.Width
         h = Me.FrameInforme.Height
@@ -9466,7 +9522,7 @@ Dim CC As String
 Dim vrefer As String
 Dim letraser As String
 Dim Rsx As ADODB.Recordset
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim Seccion As Integer
 Dim FecVen As String
 Dim ForpaNeg As String
@@ -9486,7 +9542,7 @@ Dim numfactu As String
     Seccion = vParamAplic.SeccionAlmaz
     
     
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     If vSocio.LeerDatos(CStr(Socio)) Then
         If vSocio.LeerDatosSeccion(CStr(Socio), CStr(Seccion)) Then
             
@@ -9828,7 +9884,7 @@ Dim CC As String
 Dim vrefer As String
 Dim letraser As String
 Dim Rsx As ADODB.Recordset
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim Seccion As Integer
 Dim FecVen As String
 Dim ForpaNeg As String
@@ -9850,7 +9906,7 @@ Dim Text2csb As String
     Seccion = vParamAplic.Seccionhorto
     
     
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     If vSocio.LeerDatos(CStr(Socio)) Then
         If vSocio.LeerDatosSeccion(CStr(Socio), CStr(Seccion)) Then
             FecVen = txtcodigo(34).Text
@@ -10041,6 +10097,20 @@ Private Sub CargaCombo()
     Combo1(0).ItemData(Combo1(0).NewIndex) = 1
     Combo1(0).AddItem "Ambas"
     Combo1(0).ItemData(Combo1(0).NewIndex) = 2
+
+
+    'tipo de relacion con la cooperativa
+    Combo1(1).AddItem "Todos"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 0
+    Combo1(1).AddItem "Socio"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 1
+    Combo1(1).AddItem "Asociado"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+    Combo1(1).AddItem "Tercero"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 3
+
+
+
 
 End Sub
 
@@ -10669,12 +10739,12 @@ Dim SqlExiste As String
 
     b = True
 
-    Pb10.visible = True
-    Pb10.Max = TotalRegistrosConsulta(sql)
-    Pb10.Value = 0
+    pb10.visible = True
+    pb10.Max = TotalRegistrosConsulta(sql)
+    pb10.Value = 0
     
     While Not RS.EOF And b
-        IncrementarProgresNew Pb10, 1
+        IncrementarProgresNew pb10, 1
     
         MensError = "Insertando cobro en tesoreria" & vbCrLf & vbCrLf
         b = InsertarEnTesoreriaAPOBol(MensError, RS)  'Rs!Codsocio, DBLet(Rs!Importe, "N"))
@@ -10764,7 +10834,7 @@ Dim CC As String
 Dim vrefer As String
 Dim letraser As String
 Dim Rsx As ADODB.Recordset
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim Seccion As Integer
 Dim FecVen As String
 Dim ForpaNeg As String
@@ -10787,7 +10857,7 @@ Dim Text2csb As String
     
     Seccion = vParamAplic.Seccionhorto
     
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     If vSocio.LeerDatos(CStr(RS!Codsocio)) Then
         If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), CStr(Seccion)) Then
             FecVen = txtcodigo(86).Text
@@ -10985,7 +11055,7 @@ Dim Existe As Boolean
         Loop Until Not Existe
                 
         CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-        CadValues = CadValues & DBSet(RS!poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
+        CadValues = CadValues & DBSet(RS!Poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
         CadValues = CadValues & DBSet(RS!codvarie, "N") & "," & DBSet(RS!ImpAport * (-1), "N") & "," & DBSet(txtcodigo(112).Text, "F") & ","
         CadValues = CadValues & DBSet(RS!anoplant, "N") & "," & ValorNulo & "," & DBSet(RS!supcoope, "N") & ","
         CadValues = CadValues & DBSet(txtcodigo(98).Text, "N") & ",0)"
