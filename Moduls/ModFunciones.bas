@@ -4650,3 +4650,13 @@ Dim RS As ADODB.Recordset
 End Function
 
 
+Public Function HayXML() As Boolean
+Dim Sql As String
+
+    Sql = "select xml from rparam "
+    HayXML = (DevuelveValor(Sql) = 1)
+
+
+End Function
+
+

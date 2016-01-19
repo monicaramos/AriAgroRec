@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmPagoRecibos 
    BorderStyle     =   3  'Fixed Dialog
@@ -808,7 +808,11 @@ On Error GoTo eProcesarCambios
         End If
     End If
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
-        b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        If HayXML Then
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        Else
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        End If
     Else
         b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     End If
@@ -1096,7 +1100,11 @@ On Error GoTo eProcesarCambios
     End If
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
         '[Monica]29/01/2014: hay que pasarle el CodigoOrden34
-        b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        If HayXML Then
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        Else
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        End If
     Else
         b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(2).ListIndex)
     End If
@@ -1266,7 +1274,11 @@ On Error GoTo eRepetirNormaNatural
     End If
     
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
-        b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        If HayXML Then
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        Else
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, "", "Pago Nómina", Combo1(2).ListIndex, CodigoOrden34)
+        End If
     Else
         b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(2).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(2).ListIndex)
     End If
@@ -1420,7 +1432,11 @@ On Error GoTo eRepetirNormaPicassent
     End If
     
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
-        b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        If HayXML Then
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        Else
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        End If
     Else
         b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     End If
@@ -2546,7 +2562,11 @@ On Error GoTo eProcesarCambiosPicassent
     End If
     
     If vEmpresa.AplicarNorma19_34Nueva = 1 Then
-        b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        If HayXML Then
+            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        Else
+            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+        End If
     Else
         b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     End If
