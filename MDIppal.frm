@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "12:08"
+            TextSave        =   "10:49"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1501,62 +1501,66 @@ Begin VB.MDIForm MDIppal
          Index           =   18
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "&Reimpresión Recibos"
+         Caption         =   "-"
          Index           =   19
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "&Carta Reclamación Pago"
+         Caption         =   "&Reimpresión Recibos"
          Index           =   20
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "-"
+         Caption         =   "&Carta Reclamación Pago"
          Index           =   21
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "&Integración Contable"
+         Caption         =   "Generación Recibos con Recargo"
          Index           =   22
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Integración &Aridoc"
+         Caption         =   "-"
          Index           =   23
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "-"
+         Caption         =   "&Integración Contable"
          Index           =   24
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Informe &Facturado por Hidrante"
+         Caption         =   "Integración &Aridoc"
          Index           =   25
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Informe Recibos Pendientes &Cobro"
+         Caption         =   "-"
          Index           =   26
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Recibos Consumo Pdtes Cobro"
+         Caption         =   "Informe &Facturado por Hidrante"
          Index           =   27
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Etiquetas de &Contadores"
+         Caption         =   "Informe Recibos Pendientes &Cobro"
          Index           =   28
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "-"
+         Caption         =   "Recibos Consumo Pdtes Cobro"
          Index           =   29
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "&Rectificación de Lecturas"
+         Caption         =   "Etiquetas de &Contadores"
          Index           =   30
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "-"
+         Index           =   31
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "&Rectificación de Lecturas"
+         Index           =   32
       End
       Begin VB.Menu mnRec_Pozos 
          Caption         =   "Prueba Indefa"
          Enabled         =   0   'False
-         Index           =   31
+         Index           =   33
          Visible         =   0   'False
-      End
-      Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Generación Recibos con Recargo"
-         Index           =   32
       End
    End
    Begin VB.Menu mnAportaciones 
@@ -1710,7 +1714,7 @@ Private PrimeraVez As Boolean
 Dim TieneEditorDeMenus As Boolean
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim I As Integer
+    Dim i As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -1764,7 +1768,7 @@ Private Sub MDIForm_Activate()
 End Sub
 
 Private Sub MDIForm_Load()
-Dim cad As String
+Dim Cad As String
 
     PrimeraVez = True
     CargarImagen
@@ -1774,7 +1778,7 @@ Dim cad As String
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
                   " - Campaña: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -  Usuario: " & vUsu.Nombre
     End If
 
@@ -1825,16 +1829,16 @@ Dim cad As String
     
     PonerDatosFormulario
     
-    Stop
+'    Stop
     
-'    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
-'    If vParamAplic.Cooperativa = 10 Then
-'        If Dir("c:\indefa", vbDirectory) <> "" Then
-'            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
-'        Else
-'            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
-'        End If
-'    End If
+    '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
+    If vParamAplic.Cooperativa = 10 Then
+        If Dir("c:\indefa", vbDirectory) <> "" Then
+            LanzaVisorMimeDocumento Me.hwnd, "c:\indefa\ftpINDEFA.bat"
+        Else
+            If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
+        End If
+    End If
     
     
     
@@ -2156,7 +2160,7 @@ Dim Config As Boolean
     Me.mnRec_Almaz(9).Enabled = vParamAplic.HayAridoc
     Me.mnRec_Bod1(9).Enabled = vParamAplic.HayAridoc
     Me.mnRec_ADV(14).Enabled = vParamAplic.HayAridoc
-    Me.mnRec_Pozos(23).Enabled = vParamAplic.HayAridoc
+    Me.mnRec_Pozos(25).Enabled = vParamAplic.HayAridoc
     Me.mnRec_FacturasVarias(8).Enabled = vParamAplic.HayAridoc
     Me.mnRec_FacturasVariasPr(5).Enabled = vParamAplic.HayAridoc
     
@@ -2186,11 +2190,11 @@ End Sub
 ' ### [Monica] 05/09/2006
 Private Sub HabilitarSoloPrametros_o_Empresas(Habilitar As Boolean)
 Dim T As Control
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
     For Each T In Me
-        cad = T.Name
+        Cad = T.Name
         If Mid(T.Name, 1, 2) = "mn" Then
             'If LCase(Mid(T.Name, 1, 8)) <> "mn_b" Then
                 T.Enabled = Habilitar
@@ -2288,8 +2292,8 @@ EDevuelveCadenaMenu:
 End Function
 
 Private Sub LanzaHome(Opcion As String)
-    Dim I As Integer
-    Dim cad As String
+    Dim i As Integer
+    Dim Cad As String
     On Error GoTo ELanzaHome
     
     'Obtenemos la pagina web de los parametros
@@ -2299,17 +2303,17 @@ Private Sub LanzaHome(Opcion As String)
         Exit Sub
     End If
         
-    I = FreeFile
-    cad = ""
-    Open App.Path & "\lanzaexp.dat" For Input As #I
-    Line Input #I, cad
-    Close #I
+    i = FreeFile
+    Cad = ""
+    Open App.Path & "\lanzaexp.dat" For Input As #i
+    Line Input #i, Cad
+    Close #i
     
     'Lanzamos
-    If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
+    If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus
     
 ELanzaHome:
-    If Err.Number <> 0 Then MuestraError Err.Number, cad & vbCrLf & Err.Description
+    If Err.Number <> 0 Then MuestraError Err.Number, Cad & vbCrLf & Err.Description
     CadenaDesdeOtroForm = ""
 End Sub
 
@@ -2403,13 +2407,13 @@ End Sub
 
 Private Sub PonerDatosVisiblesForm()
 'Escribe texto de la barra de la aplicación
-Dim cad As String
-    cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
-    cad = cad & ", " & Format(Now, "d")
-    cad = cad & " de " & Format(Now, "mmmm")
-    cad = cad & " de " & Format(Now, "yyyy")
-    cad = "    " & cad & "    "
-    Me.StatusBar1.Panels(7).Text = cad
+Dim Cad As String
+    Cad = UCase(Mid(Format(Now, "dddd"), 1, 1)) & Mid(Format(Now, "dddd"), 2)
+    Cad = Cad & ", " & Format(Now, "d")
+    Cad = Cad & " de " & Format(Now, "mmmm")
+    Cad = Cad & " de " & Format(Now, "yyyy")
+    Cad = "    " & Cad & "    "
+    Me.StatusBar1.Panels(7).Text = Cad
     
     '
     Me.StatusBar1.Panels(2).Text = vUsu.CadenaConexion
@@ -2420,11 +2424,11 @@ Dim cad As String
     End If
     
     
-    cad = ""
+    Cad = ""
     If vParam Is Nothing Then
         Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & " FALTA CONFIGURAR"
     Else
-        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & cad & _
+        Caption = "AriAgro - Recolección   " & " v." & App.Major & "." & App.Minor & "." & App.Revision & "   -  " & vParam.NombreEmpresa & Cad & _
                   "   -   " & vEmpresa.nomresum & "   -   Fechas: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -   Usuario: " & vUsu.Nombre
     End If
 End Sub

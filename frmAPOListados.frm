@@ -16,879 +16,28 @@ Begin VB.Form frmAPOListados
    ScaleWidth      =   6690
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameInforme 
-      Height          =   6300
-      Left            =   0
-      TabIndex        =   61
-      Top             =   30
-      Width           =   6555
-      Begin VB.CheckBox chkResumen 
-         Caption         =   "Resumen"
-         Height          =   315
-         Index           =   0
-         Left            =   5010
-         TabIndex        =   69
-         Tag             =   "Correo|N|N|||rsocios|correo||N|"
-         Top             =   4380
-         Width           =   1245
-      End
-      Begin VB.ComboBox Combo1 
-         Height          =   315
-         Index           =   1
-         Left            =   1710
-         Style           =   2  'Dropdown List
-         TabIndex        =   68
-         Tag             =   "Tipo Relacion|N|N|0|2|rsocios|tiporelacion||N|"
-         Top             =   4380
-         Width           =   1590
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   19
-         Left            =   2775
-         Locked          =   -1  'True
-         TabIndex        =   83
-         Text            =   "Text5"
-         Top             =   3645
-         Width           =   3285
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   13
-         Left            =   2775
-         Locked          =   -1  'True
-         TabIndex        =   82
-         Text            =   "Text5"
-         Top             =   3270
-         Width           =   3285
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   19
-         Left            =   1710
-         MaxLength       =   16
-         TabIndex        =   67
-         Top             =   3645
-         Width           =   1035
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   13
-         Left            =   1710
-         MaxLength       =   16
-         TabIndex        =   66
-         Top             =   3270
-         Width           =   1035
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   24
-         Left            =   2805
-         Locked          =   -1  'True
-         TabIndex        =   73
-         Text            =   "Text5"
-         Top             =   1590
-         Width           =   3285
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   23
-         Left            =   2805
-         Locked          =   -1  'True
-         TabIndex        =   72
-         Text            =   "Text5"
-         Top             =   1215
-         Width           =   3285
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   24
-         Left            =   1725
-         MaxLength       =   16
-         TabIndex        =   63
-         Top             =   1590
-         Width           =   1035
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   23
-         Left            =   1725
-         MaxLength       =   16
-         TabIndex        =   62
-         Top             =   1215
-         Width           =   1035
-      End
-      Begin VB.CommandButton CmdAcepListado 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3810
-         TabIndex        =   70
-         Top             =   5535
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   2
-         Left            =   4980
-         TabIndex        =   71
-         Top             =   5535
-         Width           =   975
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   21
-         Left            =   1725
-         MaxLength       =   10
-         TabIndex        =   64
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2265
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   22
-         Left            =   1725
-         MaxLength       =   10
-         TabIndex        =   65
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2625
-         Width           =   1050
-      End
-      Begin MSComctlLib.ProgressBar Pb3 
-         Height          =   255
-         Left            =   420
-         TabIndex        =   74
-         Top             =   5100
-         Visible         =   0   'False
-         Width           =   5625
-         _ExtentX        =   9922
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Relación Cooperativa"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   108
-         Left            =   420
-         TabIndex        =   410
-         Top             =   4080
-         Width           =   1530
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   10
-         Left            =   1395
-         MouseIcon       =   "frmAPOListados.frx":000C
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar aportacion"
-         Top             =   3645
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   8
-         Left            =   1410
-         MouseIcon       =   "frmAPOListados.frx":015E
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar aportacion"
-         Top             =   3270
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Tipo Aportación"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   21
-         Left            =   450
-         TabIndex        =   86
-         Top             =   2970
-         Width           =   1125
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   20
-         Left            =   810
-         TabIndex        =   85
-         Top             =   3645
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   19
-         Left            =   795
-         TabIndex        =   84
-         Top             =   3270
-         Width           =   465
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   7
-         Left            =   1425
-         MouseIcon       =   "frmAPOListados.frx":02B0
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1590
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   6
-         Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":0402
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1215
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   27
-         Left            =   480
-         TabIndex        =   81
-         Top             =   975
-         Width           =   375
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   26
-         Left            =   840
-         TabIndex        =   80
-         Top             =   1590
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   25
-         Left            =   825
-         TabIndex        =   79
-         Top             =   1215
-         Width           =   465
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   9
-         Left            =   1455
-         Picture         =   "frmAPOListados.frx":0554
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2625
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   8
-         Left            =   1455
-         Picture         =   "frmAPOListados.frx":05DF
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2265
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   24
-         Left            =   795
-         TabIndex        =   78
-         Top             =   2625
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   23
-         Left            =   795
-         TabIndex        =   77
-         Top             =   2265
-         Width           =   465
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Fecha"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   22
-         Left            =   435
-         TabIndex        =   76
-         Top             =   1965
-         Width           =   1815
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Informe de Aportaciones"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   3
-         Left            =   495
-         TabIndex        =   75
-         Top             =   315
-         Width           =   5160
-      End
-   End
-   Begin VB.Frame FrameRegularizacion 
-      Height          =   7530
-      Left            =   0
-      TabIndex        =   34
-      Top             =   0
-      Width           =   6555
-      Begin VB.Frame Frame3 
-         Caption         =   "Datos para la contabilización"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   1935
-         Left            =   120
-         TabIndex        =   48
-         Top             =   4350
-         Width           =   6315
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   18
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   10
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   1440
-            Width           =   1050
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   18
-            Left            =   3075
-            Locked          =   -1  'True
-            TabIndex        =   51
-            Top             =   1440
-            Width           =   3045
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   15
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   7
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   360
-            Width           =   1050
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   16
-            Left            =   3075
-            Locked          =   -1  'True
-            TabIndex        =   50
-            Top             =   720
-            Width           =   3045
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   16
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   8
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   720
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   17
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   9
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   1080
-            Width           =   1050
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   17
-            Left            =   3075
-            Locked          =   -1  'True
-            TabIndex        =   49
-            Top             =   1080
-            Width           =   3045
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   5
-            Left            =   1710
-            ToolTipText     =   "Buscar Cuenta Contable"
-            Top             =   1440
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Cta.Banco Prevista"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   24
-            Left            =   180
-            TabIndex        =   55
-            Top             =   1485
-            Width           =   1395
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   5
-            Left            =   1710
-            Picture         =   "frmAPOListados.frx":066A
-            ToolTipText     =   "Buscar fecha"
-            Top             =   360
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Fecha Vencimiento"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   17
-            Left            =   180
-            TabIndex        =   54
-            Top             =   405
-            Width           =   1425
-         End
-         Begin VB.Label Label1 
-            Caption         =   "F.Pago Positivas"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   4
-            Left            =   180
-            TabIndex        =   53
-            Top             =   765
-            Width           =   1515
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   4
-            Left            =   1710
-            ToolTipText     =   "Buscar Forma Pago"
-            Top             =   720
-            Width           =   240
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   9
-            Left            =   1710
-            ToolTipText     =   "Buscar Forma Pago"
-            Top             =   1080
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "F.Pago Negativas"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   2
-            Left            =   180
-            TabIndex        =   52
-            Top             =   1125
-            Width           =   1485
-         End
-      End
-      Begin VB.Frame Frame2 
-         Caption         =   "Datos de Selección"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   3495
-         Left            =   120
-         TabIndex        =   37
-         Top             =   840
-         Width           =   6315
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   14
-            Left            =   2040
-            MaxLength       =   10
-            TabIndex        =   6
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   3000
-            Width           =   1050
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   11
-            Left            =   3090
-            Locked          =   -1  'True
-            TabIndex        =   39
-            Text            =   "Text5"
-            Top             =   885
-            Width           =   2955
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   10
-            Left            =   3090
-            Locked          =   -1  'True
-            TabIndex        =   38
-            Text            =   "Text5"
-            Top             =   510
-            Width           =   2955
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   11
-            Left            =   2010
-            MaxLength       =   16
-            TabIndex        =   1
-            Top             =   885
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   10
-            Left            =   2010
-            MaxLength       =   16
-            TabIndex        =   0
-            Top             =   510
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   9
-            Left            =   2040
-            MaxLength       =   10
-            TabIndex        =   3
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   1890
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   8
-            Left            =   2040
-            MaxLength       =   10
-            TabIndex        =   2
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   1530
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   5
-            Left            =   4560
-            MaxLength       =   10
-            TabIndex        =   5
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   2490
-            Width           =   1050
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   4
-            Left            =   2040
-            MaxLength       =   10
-            TabIndex        =   4
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   2490
-            Width           =   1050
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Fecha Regularización"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   10
-            Left            =   210
-            TabIndex        =   57
-            Top             =   3000
-            Width           =   1545
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   4
-            Left            =   1770
-            Picture         =   "frmAPOListados.frx":06F5
-            ToolTipText     =   "Buscar fecha"
-            Top             =   3000
-            Width           =   240
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   3
-            Left            =   1710
-            MouseIcon       =   "frmAPOListados.frx":0780
-            MousePointer    =   4  'Icon
-            ToolTipText     =   "Buscar socio"
-            Top             =   885
-            Width           =   240
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   2
-            Left            =   1725
-            MouseIcon       =   "frmAPOListados.frx":08D2
-            MousePointer    =   4  'Icon
-            ToolTipText     =   "Buscar socio"
-            Top             =   510
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            AutoSize        =   -1  'True
-            Caption         =   "Socio"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   9
-            Left            =   255
-            TabIndex        =   47
-            Top             =   300
-            Width           =   375
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Hasta"
-            Height          =   195
-            Index           =   8
-            Left            =   1125
-            TabIndex        =   46
-            Top             =   885
-            Width           =   420
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Desde"
-            Height          =   195
-            Index           =   7
-            Left            =   1140
-            TabIndex        =   45
-            Top             =   510
-            Width           =   465
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   1
-            Left            =   1740
-            Picture         =   "frmAPOListados.frx":0A24
-            ToolTipText     =   "Buscar fecha"
-            Top             =   1890
-            Width           =   240
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   0
-            Left            =   1740
-            Picture         =   "frmAPOListados.frx":0AAF
-            ToolTipText     =   "Buscar fecha"
-            Top             =   1530
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Hasta"
-            Height          =   195
-            Index           =   6
-            Left            =   1080
-            TabIndex        =   44
-            Top             =   1890
-            Width           =   420
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Desde"
-            Height          =   195
-            Index           =   5
-            Left            =   1080
-            TabIndex        =   43
-            Top             =   1530
-            Width           =   465
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Fecha Factura"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   4
-            Left            =   210
-            TabIndex        =   42
-            Top             =   1200
-            Width           =   1815
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Precio Aumento Kilos"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   3
-            Left            =   225
-            TabIndex        =   41
-            Top             =   2235
-            Width           =   1815
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Precio Disminución Kilos"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   2
-            Left            =   3195
-            TabIndex        =   40
-            Top             =   2235
-            Width           =   1815
-         End
-      End
-      Begin VB.CommandButton CmdAcepRegul 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4200
-         TabIndex        =   11
-         Top             =   6915
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   0
-         Left            =   5370
-         TabIndex        =   12
-         Top             =   6915
-         Width           =   975
-      End
-      Begin MSComctlLib.ProgressBar pb2 
-         Height          =   255
-         Left            =   120
-         TabIndex        =   35
-         Top             =   6630
-         Visible         =   0   'False
-         Width           =   6255
-         _ExtentX        =   11033
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label1 
-         Caption         =   "lb1"
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   1
-         Left            =   180
-         TabIndex        =   56
-         Top             =   6300
-         Visible         =   0   'False
-         Width           =   6105
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Regularización de Aportaciones"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   180
-         TabIndex        =   36
-         Top             =   300
-         Width           =   5160
-      End
-   End
    Begin VB.Frame FrameCobros 
       Height          =   5790
       Left            =   0
       TabIndex        =   21
       Top             =   30
       Width           =   6555
+      Begin VB.CheckBox chkNegativas 
+         Caption         =   "Sólo Negativas"
+         Height          =   315
+         Left            =   4560
+         TabIndex        =   411
+         Tag             =   "Correo|N|N|||rsocios|correo||N|"
+         Top             =   3450
+         Width           =   1425
+      End
       Begin VB.CheckBox Check3 
          Caption         =   "Imprimir resumen"
          Enabled         =   0   'False
          Height          =   225
          Left            =   4560
          TabIndex        =   409
-         Top             =   3390
+         Top             =   3180
          Visible         =   0   'False
          Width           =   1545
       End
@@ -914,7 +63,7 @@ Begin VB.Form frmAPOListados
             Height          =   240
             Index           =   6
             Left            =   1050
-            Picture         =   "frmAPOListados.frx":0B3A
+            Picture         =   "frmAPOListados.frx":000C
             ToolTipText     =   "Buscar fecha"
             Top             =   540
             Width           =   240
@@ -1118,7 +267,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   2
          Left            =   1455
-         Picture         =   "frmAPOListados.frx":0BC5
+         Picture         =   "frmAPOListados.frx":0097
          ToolTipText     =   "Buscar fecha"
          Top             =   2265
          Width           =   240
@@ -1127,7 +276,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   3
          Left            =   1455
-         Picture         =   "frmAPOListados.frx":0C50
+         Picture         =   "frmAPOListados.frx":0122
          ToolTipText     =   "Buscar fecha"
          Top             =   2625
          Width           =   240
@@ -1174,7 +323,7 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   0
          Left            =   1440
-         MouseIcon       =   "frmAPOListados.frx":0CDB
+         MouseIcon       =   "frmAPOListados.frx":01AD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1215
@@ -1184,11 +333,871 @@ Begin VB.Form frmAPOListados
          Height          =   240
          Index           =   1
          Left            =   1425
-         MouseIcon       =   "frmAPOListados.frx":0E2D
+         MouseIcon       =   "frmAPOListados.frx":02FF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1590
          Width           =   240
+      End
+   End
+   Begin VB.Frame FrameInforme 
+      Height          =   6300
+      Left            =   0
+      TabIndex        =   61
+      Top             =   30
+      Width           =   6555
+      Begin VB.CheckBox chkResumen 
+         Caption         =   "Resumen"
+         Height          =   315
+         Index           =   0
+         Left            =   4890
+         TabIndex        =   69
+         Tag             =   "Correo|N|N|||rsocios|correo||N|"
+         Top             =   4380
+         Width           =   1425
+      End
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         Index           =   1
+         Left            =   1710
+         Style           =   2  'Dropdown List
+         TabIndex        =   68
+         Tag             =   "Tipo Relacion|N|N|0|2|rsocios|tiporelacion||N|"
+         Top             =   4380
+         Width           =   1590
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   19
+         Left            =   2775
+         Locked          =   -1  'True
+         TabIndex        =   83
+         Text            =   "Text5"
+         Top             =   3645
+         Width           =   3285
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   13
+         Left            =   2775
+         Locked          =   -1  'True
+         TabIndex        =   82
+         Text            =   "Text5"
+         Top             =   3270
+         Width           =   3285
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   19
+         Left            =   1710
+         MaxLength       =   16
+         TabIndex        =   67
+         Top             =   3645
+         Width           =   1035
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   13
+         Left            =   1710
+         MaxLength       =   16
+         TabIndex        =   66
+         Top             =   3270
+         Width           =   1035
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   24
+         Left            =   2805
+         Locked          =   -1  'True
+         TabIndex        =   73
+         Text            =   "Text5"
+         Top             =   1590
+         Width           =   3285
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   23
+         Left            =   2805
+         Locked          =   -1  'True
+         TabIndex        =   72
+         Text            =   "Text5"
+         Top             =   1215
+         Width           =   3285
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   24
+         Left            =   1725
+         MaxLength       =   16
+         TabIndex        =   63
+         Top             =   1590
+         Width           =   1035
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   23
+         Left            =   1725
+         MaxLength       =   16
+         TabIndex        =   62
+         Top             =   1215
+         Width           =   1035
+      End
+      Begin VB.CommandButton CmdAcepListado 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3810
+         TabIndex        =   70
+         Top             =   5535
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   2
+         Left            =   4980
+         TabIndex        =   71
+         Top             =   5535
+         Width           =   975
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   21
+         Left            =   1725
+         MaxLength       =   10
+         TabIndex        =   64
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2265
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   22
+         Left            =   1725
+         MaxLength       =   10
+         TabIndex        =   65
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2625
+         Width           =   1050
+      End
+      Begin MSComctlLib.ProgressBar Pb3 
+         Height          =   255
+         Left            =   420
+         TabIndex        =   74
+         Top             =   5100
+         Visible         =   0   'False
+         Width           =   5625
+         _ExtentX        =   9922
+         _ExtentY        =   450
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Relación Cooperativa"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   108
+         Left            =   420
+         TabIndex        =   410
+         Top             =   4080
+         Width           =   1530
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   10
+         Left            =   1395
+         MouseIcon       =   "frmAPOListados.frx":0451
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar aportacion"
+         Top             =   3645
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   8
+         Left            =   1410
+         MouseIcon       =   "frmAPOListados.frx":05A3
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar aportacion"
+         Top             =   3270
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Tipo Aportación"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   21
+         Left            =   450
+         TabIndex        =   86
+         Top             =   2970
+         Width           =   1125
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   20
+         Left            =   810
+         TabIndex        =   85
+         Top             =   3645
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   19
+         Left            =   795
+         TabIndex        =   84
+         Top             =   3270
+         Width           =   465
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   7
+         Left            =   1425
+         MouseIcon       =   "frmAPOListados.frx":06F5
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1590
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   6
+         Left            =   1440
+         MouseIcon       =   "frmAPOListados.frx":0847
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1215
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   27
+         Left            =   480
+         TabIndex        =   81
+         Top             =   975
+         Width           =   375
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   26
+         Left            =   840
+         TabIndex        =   80
+         Top             =   1590
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   25
+         Left            =   825
+         TabIndex        =   79
+         Top             =   1215
+         Width           =   465
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   9
+         Left            =   1455
+         Picture         =   "frmAPOListados.frx":0999
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2625
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   8
+         Left            =   1455
+         Picture         =   "frmAPOListados.frx":0A24
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2265
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   24
+         Left            =   795
+         TabIndex        =   78
+         Top             =   2625
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   23
+         Left            =   795
+         TabIndex        =   77
+         Top             =   2265
+         Width           =   465
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   22
+         Left            =   435
+         TabIndex        =   76
+         Top             =   1965
+         Width           =   1815
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Informe de Aportaciones"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   3
+         Left            =   495
+         TabIndex        =   75
+         Top             =   315
+         Width           =   5160
+      End
+   End
+   Begin VB.Frame FrameRegularizacion 
+      Height          =   7530
+      Left            =   0
+      TabIndex        =   34
+      Top             =   0
+      Width           =   6555
+      Begin VB.Frame Frame3 
+         Caption         =   "Datos para la contabilización"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   1935
+         Left            =   120
+         TabIndex        =   48
+         Top             =   4350
+         Width           =   6315
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   18
+            Left            =   1980
+            MaxLength       =   10
+            TabIndex        =   10
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   1440
+            Width           =   1050
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   18
+            Left            =   3075
+            Locked          =   -1  'True
+            TabIndex        =   51
+            Top             =   1440
+            Width           =   3045
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   15
+            Left            =   1980
+            MaxLength       =   10
+            TabIndex        =   7
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   360
+            Width           =   1050
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   16
+            Left            =   3075
+            Locked          =   -1  'True
+            TabIndex        =   50
+            Top             =   720
+            Width           =   3045
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   16
+            Left            =   1980
+            MaxLength       =   10
+            TabIndex        =   8
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   720
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   17
+            Left            =   1980
+            MaxLength       =   10
+            TabIndex        =   9
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   1080
+            Width           =   1050
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   17
+            Left            =   3075
+            Locked          =   -1  'True
+            TabIndex        =   49
+            Top             =   1080
+            Width           =   3045
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   5
+            Left            =   1710
+            ToolTipText     =   "Buscar Cuenta Contable"
+            Top             =   1440
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cta.Banco Prevista"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   24
+            Left            =   180
+            TabIndex        =   55
+            Top             =   1485
+            Width           =   1395
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   5
+            Left            =   1710
+            Picture         =   "frmAPOListados.frx":0AAF
+            ToolTipText     =   "Buscar fecha"
+            Top             =   360
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Fecha Vencimiento"
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   17
+            Left            =   180
+            TabIndex        =   54
+            Top             =   405
+            Width           =   1425
+         End
+         Begin VB.Label Label1 
+            Caption         =   "F.Pago Positivas"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   4
+            Left            =   180
+            TabIndex        =   53
+            Top             =   765
+            Width           =   1515
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   4
+            Left            =   1710
+            ToolTipText     =   "Buscar Forma Pago"
+            Top             =   720
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   9
+            Left            =   1710
+            ToolTipText     =   "Buscar Forma Pago"
+            Top             =   1080
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "F.Pago Negativas"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   2
+            Left            =   180
+            TabIndex        =   52
+            Top             =   1125
+            Width           =   1485
+         End
+      End
+      Begin VB.Frame Frame2 
+         Caption         =   "Datos de Selección"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   3495
+         Left            =   120
+         TabIndex        =   37
+         Top             =   840
+         Width           =   6315
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   14
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   6
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   3000
+            Width           =   1050
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   11
+            Left            =   3090
+            Locked          =   -1  'True
+            TabIndex        =   39
+            Text            =   "Text5"
+            Top             =   885
+            Width           =   2955
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            Height          =   285
+            Index           =   10
+            Left            =   3090
+            Locked          =   -1  'True
+            TabIndex        =   38
+            Text            =   "Text5"
+            Top             =   510
+            Width           =   2955
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   11
+            Left            =   2010
+            MaxLength       =   16
+            TabIndex        =   1
+            Top             =   885
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   10
+            Left            =   2010
+            MaxLength       =   16
+            TabIndex        =   0
+            Top             =   510
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   9
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   3
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   1890
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   8
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   2
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   1530
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   5
+            Left            =   4560
+            MaxLength       =   10
+            TabIndex        =   5
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   2490
+            Width           =   1050
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   4
+            Left            =   2040
+            MaxLength       =   10
+            TabIndex        =   4
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   2490
+            Width           =   1050
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Fecha Regularización"
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   10
+            Left            =   210
+            TabIndex        =   57
+            Top             =   3000
+            Width           =   1545
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   4
+            Left            =   1770
+            Picture         =   "frmAPOListados.frx":0B3A
+            ToolTipText     =   "Buscar fecha"
+            Top             =   3000
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   3
+            Left            =   1710
+            MouseIcon       =   "frmAPOListados.frx":0BC5
+            MousePointer    =   4  'Icon
+            ToolTipText     =   "Buscar socio"
+            Top             =   885
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   2
+            Left            =   1725
+            MouseIcon       =   "frmAPOListados.frx":0D17
+            MousePointer    =   4  'Icon
+            ToolTipText     =   "Buscar socio"
+            Top             =   510
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            AutoSize        =   -1  'True
+            Caption         =   "Socio"
+            BeginProperty Font 
+               Name            =   "Tahoma"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   9
+            Left            =   255
+            TabIndex        =   47
+            Top             =   300
+            Width           =   375
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Hasta"
+            Height          =   195
+            Index           =   8
+            Left            =   1125
+            TabIndex        =   46
+            Top             =   885
+            Width           =   420
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Desde"
+            Height          =   195
+            Index           =   7
+            Left            =   1140
+            TabIndex        =   45
+            Top             =   510
+            Width           =   465
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   1
+            Left            =   1740
+            Picture         =   "frmAPOListados.frx":0E69
+            ToolTipText     =   "Buscar fecha"
+            Top             =   1890
+            Width           =   240
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   0
+            Left            =   1740
+            Picture         =   "frmAPOListados.frx":0EF4
+            ToolTipText     =   "Buscar fecha"
+            Top             =   1530
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Hasta"
+            Height          =   195
+            Index           =   6
+            Left            =   1080
+            TabIndex        =   44
+            Top             =   1890
+            Width           =   420
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Desde"
+            Height          =   195
+            Index           =   5
+            Left            =   1080
+            TabIndex        =   43
+            Top             =   1530
+            Width           =   465
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Fecha Factura"
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   4
+            Left            =   210
+            TabIndex        =   42
+            Top             =   1200
+            Width           =   1815
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Precio Aumento Kilos"
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   3
+            Left            =   225
+            TabIndex        =   41
+            Top             =   2235
+            Width           =   1815
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Precio Disminución Kilos"
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   2
+            Left            =   3195
+            TabIndex        =   40
+            Top             =   2235
+            Width           =   1815
+         End
+      End
+      Begin VB.CommandButton CmdAcepRegul 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4200
+         TabIndex        =   11
+         Top             =   6915
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   0
+         Left            =   5370
+         TabIndex        =   12
+         Top             =   6915
+         Width           =   975
+      End
+      Begin MSComctlLib.ProgressBar pb2 
+         Height          =   255
+         Left            =   120
+         TabIndex        =   35
+         Top             =   6630
+         Visible         =   0   'False
+         Width           =   6255
+         _ExtentX        =   11033
+         _ExtentY        =   450
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label1 
+         Caption         =   "lb1"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   1
+         Left            =   180
+         TabIndex        =   56
+         Top             =   6300
+         Visible         =   0   'False
+         Width           =   6105
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Regularización de Aportaciones"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   180
+         TabIndex        =   36
+         Top             =   300
+         Width           =   5160
       End
    End
    Begin VB.Frame FrameListAporQua 
@@ -5851,7 +5860,7 @@ Attribute frmMens2.VB_VarHelpID = -1
  
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -5880,16 +5889,23 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
+Private Sub Check3_Click()
+    chkNegativas.Enabled = (Check3.Value = 1)
+    If Not chkNegativas.Enabled Then chkNegativas.Value = 0
+End Sub
+
+
+
 Private Sub CmdAcepApoObli_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim Tipos As String
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     
@@ -5899,7 +5915,7 @@ Dim Sql2 As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -5915,8 +5931,8 @@ Dim Sql2 As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio= """) Then Exit Sub
     End If
     
-    sql = "rsocios.fechabaja is null"
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    Sql = "rsocios.fechabaja is null"
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
     
     If HayRegistros(Tabla, cadSelect) Then
@@ -5934,11 +5950,11 @@ Dim Sql2 As String
             
             cadTitulo = "Aportación Obligatoria"
         
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
-            cadParam = cadParam & "pTitulo=""Aportación Obligatoria""|"
+            CadParam = CadParam & "pTitulo=""Aportación Obligatoria""|"
             numParam = numParam + 1
             
             cadNombreRPT = nomDocu
@@ -5960,7 +5976,7 @@ End Sub
 Private Sub CmdAcepCertBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -5973,7 +5989,7 @@ Dim vSQL As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6006,19 +6022,19 @@ Dim vSQL As String
     Tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio"
     
     If HayRegistros(Tabla, cadSelect) Then
-        cadParam = cadParam & "pPresi=""" & txtcodigo(92).Text & """|"
-        cadParam = cadParam & "pSecre=""" & txtcodigo(93).Text & """|"
-        cadParam = cadParam & "pTesor=""" & txtcodigo(94).Text & """|"
-        cadParam = cadParam & "pObser=""" & txtcodigo(95).Text & """|"
-        cadParam = cadParam & "pFecha=""" & txtcodigo(76).Text & """|"
-        cadParam = cadParam & "pHastaFecha=""" & txtcodigo(91).Text & """|"
+        CadParam = CadParam & "pPresi=""" & txtcodigo(92).Text & """|"
+        CadParam = CadParam & "pSecre=""" & txtcodigo(93).Text & """|"
+        CadParam = CadParam & "pTesor=""" & txtcodigo(94).Text & """|"
+        CadParam = CadParam & "pObser=""" & txtcodigo(95).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(76).Text & """|"
+        CadParam = CadParam & "pHastaFecha=""" & txtcodigo(91).Text & """|"
         numParam = numParam + 6
         
         indRPT = 74 ' "rManAportacion.rpt"
         
         cadTitulo = "Certificado de Aportaciones"
     
-        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
         
         cadNombreRPT = nomDocu
         LlamarImprimir
@@ -6031,22 +6047,22 @@ Dim vSQL As String
 End Sub
 
 Private Function ActualizarTipo(Tabla As String, cadSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Nregs As Long
 
     On Error GoTo eActualizarTipo
 
     ActualizarTipo = False
 
-    sql = "select distinct rsocios.codsocio from " & Tabla
-    sql = sql & " where " & cadSelect
+    Sql = "select distinct rsocios.codsocio from " & Tabla
+    Sql = Sql & " where " & cadSelect
     
-    Nregs = TotalRegistrosConsulta(sql)
+    Nregs = TotalRegistrosConsulta(Sql)
     
-    sql = "update rtipoapor set numero = numero + " & DBSet(Nregs, "N")
-    sql = sql & " where codaport = " & DBSet(txtcodigo(87).Text, "N")
+    Sql = "update rtipoapor set numero = numero + " & DBSet(Nregs, "N")
+    Sql = Sql & " where codaport = " & DBSet(txtcodigo(87).Text, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ActualizarTipo = True
     Exit Function
@@ -6058,7 +6074,7 @@ End Function
 Private Sub CmdAcepDevApoQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6071,7 +6087,7 @@ Dim vSQL As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6106,7 +6122,7 @@ Dim vSQL As String
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadwhere = vSQL
+    frmMens2.cadWhere = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -6135,11 +6151,11 @@ Dim vSQL As String
             
             cadTitulo = "Resumen Devolución de Aportaciones"
             
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             cadNombreRPT = Replace(nomDocu, "APOInf.rpt", "APOInfAnyo.rpt")
             
-            cadParam = cadParam & "pResumen=1|"
+            CadParam = CadParam & "pResumen=1|"
             numParam = numParam + 1
 
 '            cadNombreRPT = nomDocu
@@ -6157,7 +6173,7 @@ End Sub
 Private Sub CmdAcepDevApor_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6170,7 +6186,7 @@ Dim vSQL As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6212,10 +6228,10 @@ Dim vSQL As String
             
             cadTitulo = "Devolución de Aportaciones"
             
-            cadParam = cadParam & "pTitulo=""Devolución de Aportaciones""|"
+            CadParam = CadParam & "pTitulo=""Devolución de Aportaciones""|"
             numParam = numParam + 1
         
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
@@ -6232,7 +6248,7 @@ Dim vSQL As String
 End Sub
 
 Private Function ActualizarDevoluciones(vTabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
 Dim b As Boolean
@@ -6244,10 +6260,10 @@ Dim Importe As Currency
     
     ActualizarDevoluciones = False
     
-    sql = "DEVAPO" 'devolucion aportaciones
+    Sql = "DEVAPO" 'devolucion aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Devolución de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -6255,11 +6271,11 @@ Dim Importe As Currency
         
     conn.BeginTrans
 
-    sql = "select codigo1, sum(importe2) importe from tmpinformes where codusu = " & vUsu.Codigo
-    sql = sql & " group by codigo1 "
-    sql = sql & " order by codigo1 "
+    Sql = "select codigo1, sum(importe2) importe from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " group by codigo1 "
+    Sql = Sql & " order by codigo1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     Sql2 = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
 
@@ -6267,7 +6283,7 @@ Dim Importe As Currency
     b = True
 
     Pb11.visible = True
-    Pb11.Max = TotalRegistrosConsulta(sql)
+    Pb11.Max = TotalRegistrosConsulta(Sql)
     Pb11.Value = 0
     
     SqlValues = ""
@@ -6309,21 +6325,21 @@ eActualizarDevoluciones:
 End Function
 
 Private Function InsertarTemporal(vTabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eInsertarTemporal
     
     InsertarTemporal = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
-    sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
-    sql = sql & " select " & vUsu.Codigo & ", raportacion.codsocio, fecaport, codaport, numfactu, codtipom, importe "
-    sql = sql & " from " & vTabla
-    sql = sql & " where " & vSelect
+    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
+    Sql = Sql & " select " & vUsu.Codigo & ", raportacion.codsocio, fecaport, codaport, numfactu, codtipom, importe "
+    Sql = Sql & " from " & vTabla
+    Sql = Sql & " where " & vSelect
     
-    conn.Execute sql
+    conn.Execute Sql
 
     InsertarTemporal = True
     Exit Function
@@ -6335,21 +6351,21 @@ End Function
 
 
 Private Function InsertarTemporal2(vTabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eInsertarTemporal
     
     InsertarTemporal2 = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
-    sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
-    sql = sql & " select " & vUsu.Codigo & ", codsocio, " & DBSet(txtcodigo(74).Text, "F") & "," & DBSet(txtcodigo(71).Text, "N") & ", 0, null," & DBSet(txtcodigo(73).Text, "N")
-    sql = sql & " from " & vTabla
-    sql = sql & " where " & vSelect
+    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
+    Sql = Sql & " select " & vUsu.Codigo & ", codsocio, " & DBSet(txtcodigo(74).Text, "F") & "," & DBSet(txtcodigo(71).Text, "N") & ", 0, null," & DBSet(txtcodigo(73).Text, "N")
+    Sql = Sql & " from " & vTabla
+    Sql = Sql & " where " & vSelect
     
-    conn.Execute sql
+    conn.Execute Sql
 
     InsertarTemporal2 = True
     Exit Function
@@ -6364,13 +6380,13 @@ End Function
 Private Sub CmdAcepInsApoBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim Tipos As String
-Dim sql As String
+Dim Sql As String
 
     
     InicializarVbles
@@ -6379,7 +6395,7 @@ Dim sql As String
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6439,8 +6455,8 @@ Dim sql As String
         End If
         
         
-        sql = " not (rfactsoc.codtipom, rfactsoc.fecfactu, rfactsoc.numfactu) in (select codtipom, fecaport, numfactu from raportacion) "
-        If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+        Sql = " not (rfactsoc.codtipom, rfactsoc.fecfactu, rfactsoc.numfactu) in (select codtipom, fecaport, numfactu from raportacion) "
+        If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
         
         If HayRegistros(Tabla, cadSelect) Then
             If InsertarAportacionesBolbaite(Tabla, cadSelect) Then
@@ -6460,7 +6476,7 @@ Dim sql As String
             If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
         End If
         
-        cadParam = cadParam & "pFecha=""" & txtcodigo(70).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(70).Text & """|"
         numParam = numParam + 1
         
         If HayRegistros(Tabla, cadSelect) Then
@@ -6468,7 +6484,7 @@ Dim sql As String
             ConSubInforme = True
             
             cadTitulo = "Impresión de Recibos Aportaciones"
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             cadNombreRPT = nomDocu
               
@@ -6482,7 +6498,7 @@ End Sub
 Private Sub CmdAcepCalApoQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6495,7 +6511,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
      '======== FORMULA  ====================================
@@ -6541,7 +6557,7 @@ InicializarVbles
     Set frmMens1 = New frmMensajes
     
     frmMens1.OpcionMensaje = 16
-    frmMens1.cadwhere = vSQL
+    frmMens1.cadWhere = vSQL
     frmMens1.Show vbModal
     
     Set frmMens1 = Nothing
@@ -6561,7 +6577,7 @@ InicializarVbles
 End Sub
 
 Private Function CalculoAportacionQuatretonda(vTabla As String, vWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Importe As Currency
 Dim RS As ADODB.Recordset
 Dim cadErr As String
@@ -6587,10 +6603,10 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    sql = "select rcampos.* from " & vTabla
-    sql = sql & " where " & vWhere
+    Sql = "select rcampos.* from " & vTabla
+    Sql = Sql & " where " & vWhere
     
-    CargarProgres Pb5, TotalRegistrosConsulta(sql)
+    CargarProgres Pb5, TotalRegistrosConsulta(Sql)
     Pb5.visible = True
     
     
@@ -6600,11 +6616,11 @@ Dim Existe As Boolean
     Set vTipoMov = New CTiposMov
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF And b
         Sql2 = "select count(*) from ariagro.raporhco where codsocio = " & DBSet(RS!Codsocio, "N")
-        Sql2 = Sql2 & " and codcampo = " & DBSet(RS!codcampo, "N") & " and codvarie = " & DBSet(RS!codvarie, "N")
+        Sql2 = Sql2 & " and codcampo = " & DBSet(RS!CodCampo, "N") & " and codvarie = " & DBSet(RS!codvarie, "N")
         Sql2 = Sql2 & " and fecaport = " & DBSet(txtcodigo(20).Text, "F")
         
         IncrementarProgres Pb5, 1
@@ -6614,7 +6630,7 @@ Dim Existe As Boolean
         If TotalRegistros(Sql2) > 0 Then
             b = False
             cadErr = "Ya existe la aportación para el socio " & DBLet(RS!Codsocio, "N") & ", campo " & _
-                    DBLet(RS!codcampo, "N") & ", variedad " & DBLet(RS!codvarie, "N") & _
+                    DBLet(RS!CodCampo, "N") & ", variedad " & DBLet(RS!codvarie, "N") & _
                     " y fecha de aportación " & txtcodigo(20).Text & ". Revise."
         Else
             Importe = Round2(Round2(DBLet(RS!supcoope, "N") / vParamAplic.Faneca, 2) * CCur(ImporteSinFormato(txtcodigo(26).Text)), 2)
@@ -6634,8 +6650,8 @@ Dim Existe As Boolean
                     End If
                 Loop Until Not Existe
                 
-                CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-                CadValues = CadValues & DBSet(RS!Poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
+                CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!CodCampo, "N") & ","
+                CadValues = CadValues & DBSet(RS!poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
                 CadValues = CadValues & DBSet(RS!codvarie, "N") & "," & DBSet(Importe, "N") & "," & DBSet(txtcodigo(20).Text, "F") & ","
                 CadValues = CadValues & DBSet(RS!anoplant, "N") & "," & ValorNulo & "," & DBSet(RS!supcoope, "N") & ","
                 CadValues = CadValues & DBSet(txtcodigo(31).Text, "N") & ",0)"
@@ -6675,7 +6691,7 @@ End Function
 Private Sub CmdAcepIntTesBol_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6689,7 +6705,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'D/H socio
@@ -6760,7 +6776,7 @@ End Sub
 Private Sub CmdAcepIntTesQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6774,7 +6790,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'D/H socio
@@ -6823,7 +6839,7 @@ InicializarVbles
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadwhere = vSQL
+    frmMens2.cadWhere = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -6865,7 +6881,7 @@ End Sub
 Private Sub CmdAcepListado_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6878,7 +6894,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -6924,7 +6940,7 @@ InicializarVbles
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 32
-    frmMens.cadwhere = vSQL
+    frmMens.cadWhere = vSQL
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -6936,12 +6952,12 @@ InicializarVbles
         Case Else
             If Not AnyadirAFormula(cadFormula, "{rsocios.tiporelacion} = " & Combo1(1).ListIndex - 1) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rsocios.tiporelacion=" & Combo1(1).ListIndex - 1) Then Exit Sub
-            cadParam = cadParam & "pRelacion=" & Combo1(1).ListIndex & "|"
+            CadParam = CadParam & "pRelacion=" & Combo1(1).ListIndex & "|"
             numParam = numParam + 1
     End Select
-    cadParam = cadParam & "pResumen=" & chkResumen(0).Value & "|"
-    numParam = numParam + 1
     
+    CadParam = CadParam & "pResumen=" & chkResumen(0).Value & "|"
+    numParam = numParam + 1
     
     Tabla = "raportacion INNER JOIN rsocios ON raportacion.codsocio = rsocios.codsocio and rsocios.fechabaja is null "
     
@@ -6950,7 +6966,7 @@ InicializarVbles
         
         cadTitulo = "Informe Aportaciones"
     
-        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
         
         cadNombreRPT = nomDocu
         LlamarImprimir
@@ -6962,7 +6978,7 @@ End Sub
 Private Sub CmdAcepListAporQua_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -6975,7 +6991,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -7023,7 +7039,7 @@ InicializarVbles
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadwhere = vSQL
+    frmMens2.cadWhere = vSQL
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -7051,7 +7067,7 @@ InicializarVbles
             Case 6
                 indRPT = 83 'informe de APORTACIONES para Quatretonda
             
-                If Not PonerParamRPT(indRPT, cadParam, 1, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, 1, nomDocu) Then Exit Sub
                                    
                 cadNombreRPT = nomDocu '"rAPOInf.rpt"
                 
@@ -7063,14 +7079,14 @@ InicializarVbles
                     cadNombreRPT = Replace(cadNombreRPT, "APOInf.rpt", "APOInfSocio.rpt")
                     cadTitulo = cadTitulo & " por Socio "
                     '[Monica]18/09/2014: añado lo del resumen cuando es por socio por las devoluciones
-                    cadParam = cadParam & "pResumen=" & Me.Check1.Value & "|"
+                    CadParam = CadParam & "pResumen=" & Me.Check1.Value & "|"
                     numParam = numParam + 1
                 Else
                     If Me.Opcion1(0).Value Then
                         cadNombreRPT = Replace(cadNombreRPT, "APOInf.rpt", "APOInfAnyo.rpt")
                         cadTitulo = cadTitulo & " por Año "
                         
-                        cadParam = cadParam & "pResumen=" & Me.Check1.Value & "|"
+                        CadParam = CadParam & "pResumen=" & Me.Check1.Value & "|"
                         numParam = numParam + 1
                     End If
                 End If
@@ -7092,13 +7108,13 @@ End Sub
 Private Sub CmdAcepRegBajaSocios_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 
 Dim vCampAnt As CCampAnt
 
@@ -7108,12 +7124,12 @@ Dim vCampAnt As CCampAnt
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     ' socios dados de alta durante la campaña anterior
-    sql = "rsocios.codsocio = " & DBSet(txtcodigo(59).Text, "N")
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    Sql = "rsocios.codsocio = " & DBSet(txtcodigo(59).Text, "N")
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
     Tabla = "rsocios"
     
@@ -7147,7 +7163,7 @@ End Sub
 Private Sub CmdAcepRegul_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -7160,7 +7176,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'D/H socio
@@ -7192,7 +7208,7 @@ InicializarVbles
         Me.Label1(1).visible = True
         Me.Refresh
         DoEvents
-        If CargarTablaTemporal(Tabla, cadSelect, txtcodigo(4).Text, txtcodigo(5).Text, Me.Pb2) Then
+        If CargarTablaTemporal(Tabla, cadSelect, txtcodigo(4).Text, txtcodigo(5).Text, Me.pb2) Then
             Label1(1).Caption = "Comprobando Socios en Sección"
             Label1(1).visible = True
             Me.Refresh
@@ -7216,7 +7232,7 @@ InicializarVbles
 End Sub
 
 Private Function SociosEnSeccion(vTabla As String, vWhere As String, Seccion As Integer) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim b As Boolean
 
@@ -7225,32 +7241,32 @@ Dim b As Boolean
     SociosEnSeccion = False
 
     'Seleccionamos los distintos socios, cuentas que vamos a facturar
-    sql = "SELECT DISTINCT " & vTabla & ".codigo1 codsocio"
-    sql = sql & " from " & vTabla
-    If vWhere <> "" Then sql = sql & " where " & vWhere
-    sql = sql & " order by 1 "
+    Sql = "SELECT DISTINCT " & vTabla & ".codigo1 codsocio"
+    Sql = Sql & " from " & vTabla
+    If vWhere <> "" Then Sql = Sql & " where " & vWhere
+    Sql = Sql & " order by 1 "
 
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
     b = True
 
     While Not RS.EOF And b
-        sql = "select * from rsocios_seccion where codsocio = " & DBSet(RS!Codsocio, "N") & " and codsecci = " & DBSet(Seccion, "N")
+        Sql = "select * from rsocios_seccion where codsocio = " & DBSet(RS!Codsocio, "N") & " and codsecci = " & DBSet(Seccion, "N")
 
-        If Not (RegistrosAListar(sql, cAgro) > 0) Then
+        If Not (RegistrosAListar(Sql, cAgro) > 0) Then
         'si no lo encuentra
             b = False 'no encontrado
-            sql = "El Socio " & Format(RS!Codsocio, "000000") & " no tiene registro en la seccion " & Seccion
+            Sql = "El Socio " & Format(RS!Codsocio, "000000") & " no tiene registro en la seccion " & Seccion
         End If
 
         RS.MoveNext
     Wend
 
     If Not b Then
-        sql = "Comprobando Socios en Seccion.. " & vbCrLf & vbCrLf & sql
+        Sql = "Comprobando Socios en Seccion.. " & vbCrLf & vbCrLf & Sql
 
-        MsgBox sql, vbExclamation
+        MsgBox Sql, vbExclamation
         SociosEnSeccion = False
     Else
         SociosEnSeccion = True
@@ -7265,7 +7281,7 @@ ESocSec:
 End Function
 
 Private Function ActualizarRegularizacion()
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -7280,10 +7296,10 @@ Dim SqlExiste As String
     On Error GoTo eActualizarRegularizacion
         
         
-    sql = "REGAPO" 'regularizacion de aportaciones
+    Sql = "REGAPO" 'regularizacion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Regularización de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -7292,10 +7308,10 @@ Dim SqlExiste As String
     conn.BeginTrans
     ConnConta.BeginTrans
 
-    sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
-    sql = sql & " order by codigo1 "
+    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by codigo1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     Sql2 = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values "
 
@@ -7304,18 +7320,18 @@ Dim SqlExiste As String
 
     b = True
 
-    Pb2.visible = True
-    Pb2.Max = TotalRegistrosConsulta(sql)
-    Pb2.Value = 0
+    pb2.visible = True
+    pb2.Max = TotalRegistrosConsulta(Sql)
+    pb2.Value = 0
     
     While Not RS.EOF And b
-        IncrementarProgresNew Pb2, 1
+        IncrementarProgresNew pb2, 1
     
         SqlValues = ""
         
-        sql = "select importe from raportacion where codsocio=" & DBSet(RS!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtcodigo(8).Text, "F")
+        Sql = "select importe from raportacion where codsocio=" & DBSet(RS!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtcodigo(8).Text, "F")
     
-        ImporIni = DevuelveValor(sql)
+        ImporIni = DevuelveValor(Sql)
         Importe = ImporIni + DBLet(RS!importe4, "N")
     
         SqlExiste = "select count(*) from raportacion where codsocio = " & DBSet(RS!Codigo1, "N") & " and codaport=0 and fecaport=" & DBSet(txtcodigo(14).Text, "F")
@@ -7368,17 +7384,17 @@ eActualizarRegularizacion:
 End Function
 
 Private Function NoDevolverAporSocio(Socio As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
-    sql = "select nodevolverapor from rsocios where codsocio = " & DBSet(Socio, "N")
-    NoDevolverAporSocio = (DevuelveValor(sql) = 1)
+    Sql = "select nodevolverapor from rsocios where codsocio = " & DBSet(Socio, "N")
+    NoDevolverAporSocio = (DevuelveValor(Sql) = 1)
 
 End Function
 
 Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -7390,7 +7406,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -7421,9 +7437,14 @@ InicializarVbles
     
     
     If HayRegistros(Tabla, cadSelect) Then
-        If CargarTablaTemporal(Tabla, cadSelect, txtcodigo(6).Text, txtcodigo(7).Text, Me.Pb1) Then
+        If CargarTablaTemporal(Tabla, cadSelect, txtcodigo(6).Text, txtcodigo(7).Text, Me.pb1) Then
+            '[Monica]20/01/2016: si es mogente solo las de regularizacion negaiva
+            If chkNegativas.Value = 1 Then BorrarPositivas
+        
             cadFormula = ""
             If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
+            
+            If Not HayRegistros("tmpinformes", "tmpinformes.codusu = " & vUsu.Codigo) Then Exit Sub
             
             Select Case OpcionListado
                 Case 1 'Informe de aportaciones
@@ -7439,13 +7460,13 @@ InicializarVbles
                     cadTitulo = "Informe Aportaciones"
                     LlamarImprimir
                 Case 3 ' Certificado de aportaciones
-                    cadParam = cadParam & "pDesdeFecha=""" & txtcodigo(2).Text & """|"
-                    cadParam = cadParam & "pHastaFecha=""" & txtcodigo(3).Text & """|"
-                    cadParam = cadParam & "pFecha=""" & txtcodigo(12).Text & """|"
+                    CadParam = CadParam & "pDesdeFecha=""" & txtcodigo(2).Text & """|"
+                    CadParam = CadParam & "pHastaFecha=""" & txtcodigo(3).Text & """|"
+                    CadParam = CadParam & "pFecha=""" & txtcodigo(12).Text & """|"
                     numParam = numParam + 3
                     '[Monica]11/03/2015:imprimimos el resumen
                     If vParamAplic.Cooperativa = 3 Then
-                        cadParam = cadParam & "pResumen=" & Check3.Value & "|"
+                        CadParam = CadParam & "pResumen=" & Check3.Value & "|"
                         numParam = numParam + 1
                     End If
                     indRPT = 74 'certificado de APORTACIONES
@@ -7463,9 +7484,19 @@ InicializarVbles
     End If
 End Sub
 
-Private Function CargarTablaTemporal(nTabla1 As String, nSelect1 As String, Precio1 As String, Precio2 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Sub BorrarPositivas()
+Dim Sql As String
+
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo & " and importe4 > 0 "
+    conn.Execute Sql
+    
+
+End Sub
+
+
+Private Function CargarTablaTemporal(nTabla1 As String, nSelect1 As String, Precio1 As String, Precio2 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cValues As String
 Dim AcumAnt As Long
@@ -7486,12 +7517,12 @@ Dim Importe As Currency
         Exit Function
     End If
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
 
 
-    sql = "insert into tmpinformes (codusu, codigo1, nombre1, importe1, importe2, importe3, precio1, importe4) values "
+    Sql = "insert into tmpinformes (codusu, codigo1, nombre1, importe1, importe2, importe3, precio1, importe4) values "
     
     Sql2 = " select raportacion.codsocio, nomsocio, fecaport, codaport, kilos "
     Sql2 = Sql2 & " from " & nTabla1
@@ -7500,9 +7531,9 @@ Dim Importe As Currency
     Sql2 = Sql2 & " order by 1, 3, 4"
     
     
-    Pb1.visible = True
-    Pb1.Max = TotalRegistrosConsulta(Sql2)
-    Pb1.Value = 0
+    pb1.visible = True
+    pb1.Max = TotalRegistrosConsulta(Sql2)
+    pb1.Value = 0
     
     
     cValues = ""
@@ -7524,7 +7555,7 @@ Dim Importe As Currency
     While Not RS.EOF
         Entro = True
         
-        Pb1.Value = Pb1.Value + 1
+        pb1.Value = pb1.Value + 1
         DoEvents
         
         If SocioAnt <> RS.Fields(0).Value Then
@@ -7601,13 +7632,13 @@ Dim Importe As Currency
 
     If cValues <> "" Then
         cValues = Mid(cValues, 1, Len(cValues) - 1)
-        conn.Execute sql & cValues
+        conn.Execute Sql & cValues
     End If
 
     Set RS = Nothing
 
     CargarTablaTemporal = True
-    Pb1.visible = False
+    pb1.visible = False
     
     Exit Function
     
@@ -7617,9 +7648,9 @@ End Function
 
 Private Function ExistenRegistrosAcumulados(nTabla As String, nWhere As String) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim I As Long
-Dim CadMen As String
+Dim cadMen As String
 Dim cad As String
 
 
@@ -7627,19 +7658,19 @@ Dim cad As String
     
     ExistenRegistrosAcumulados = False
     
-    sql = "select raportacion.codsocio, count(*) from " & nTabla
-    sql = sql & " where codaport = 0 "
+    Sql = "select raportacion.codsocio, count(*) from " & nTabla
+    Sql = Sql & " where codaport = 0 "
     If nWhere <> "" Then
-        sql = sql & " and " & nWhere
+        Sql = Sql & " and " & nWhere
     End If
-    sql = sql & " group by 1 "
-    sql = sql & " having count(*) > 1"
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " having count(*) > 1"
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not RS.EOF Then
-        CadMen = "Los siguientes socios tienen más de un registro de acumulado anterior entre las fechas: "
+        cadMen = "Los siguientes socios tienen más de un registro de acumulado anterior entre las fechas: "
         I = 0
         While Not RS.EOF
             I = I + 1
@@ -7674,13 +7705,13 @@ End Sub
 Private Sub CmdAcepRegAltaSocios_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 
 
 InicializarVbles
@@ -7689,25 +7720,25 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     ' socios dados de alta durante la campaña
-    sql = "((rsocios.fechaalta between " & DBSet(vParam.FecIniCam, "F") & " and " & DBSet(vParam.FecFinCam, "F") & ") or "
-    sql = sql & " rsocios.codsocio in (select codsocio from rsocios_seccion where codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
-    sql = sql & " and fecalta between " & DBSet(vParam.FecIniCam, "F") & " and " & DBSet(vParam.FecFinCam, "F")
-    sql = sql & " and fecbaja is null)) "
+    Sql = "((rsocios.fechaalta between " & DBSet(vParam.FecIniCam, "F") & " and " & DBSet(vParam.FecFinCam, "F") & ") or "
+    Sql = Sql & " rsocios.codsocio in (select codsocio from rsocios_seccion where codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
+    Sql = Sql & " and fecalta between " & DBSet(vParam.FecIniCam, "F") & " and " & DBSet(vParam.FecFinCam, "F")
+    Sql = Sql & " and fecbaja is null)) "
     
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
     
-    sql = "rsocios.fechabaja is null"
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    Sql = "rsocios.fechabaja is null"
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
-    sql = "rsocios.codsocio in (select codsocio from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie) "
-    sql = sql & " inner join productos on variedades.codprodu = productos.codprodu "
-    sql = sql & " where productos.codgrupo = 5) "
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    Sql = "rsocios.codsocio in (select codsocio from (rcampos inner join variedades on rcampos.codvarie = variedades.codvarie) "
+    Sql = Sql & " inner join productos on variedades.codprodu = productos.codprodu "
+    Sql = Sql & " where productos.codgrupo = 5) "
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     
     
     Tabla = "rsocios"
@@ -7718,7 +7749,7 @@ InicializarVbles
         Me.Label1(1).visible = True
         Me.Refresh
         DoEvents
-        If CargarTablaTemporal2(Tabla, cadSelect, txtcodigo(60).Text, Me.pb6) Then
+        If CargarTablaTemporal2(Tabla, cadSelect, txtcodigo(60).Text, Me.Pb6) Then
             Label1(1).Caption = "Comprobando Socios en Sección"
             Label1(1).visible = True
             Me.Refresh
@@ -7846,7 +7877,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, W As Integer
+Dim h As Integer, w As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -7887,9 +7918,9 @@ Dim List As Collection
     
     Select Case OpcionListado
         Case 1 ' rendimiento por articulo
-            FrameCobrosVisible True, h, W
+            FrameCobrosVisible True, h, w
             Tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Frame1.visible = False
             Frame1.Enabled = False
             Label1(0).Caption = "Informe de Aportaciones"
@@ -7897,14 +7928,14 @@ Dim List As Collection
         Case 2 ' regularizacion
             ConexionConta vParamAplic.SeccionAlmaz
         
-            FrameRegularizacionVisible True, h, W
+            FrameRegularizacionVisible True, h, w
             Tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             
         Case 3 ' Certificado de aportaciones
-            FrameCobrosVisible True, h, W
+            FrameCobrosVisible True, h, w
             Tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Frame1.visible = True
             Frame1.Enabled = True
             Label1(0).Caption = "Certificado de Aportaciones"
@@ -7912,29 +7943,33 @@ Dim List As Collection
             '[Monica]11/03/2015: para el caso de Mogente imprimen o no resumen
             Me.Check3.Enabled = (vParamAplic.Cooperativa = 3)
             Me.Check3.visible = (vParamAplic.Cooperativa = 3)
+            '[Monica]20/01/2016: para el caso de Mogente cuando es resumen pueden o no imprimir solo las que
+            '                    tienen una regularizacion negativa
+            Me.chkNegativas.Enabled = False
+            Me.chkNegativas.visible = (vParamAplic.Cooperativa = 3)
             
         Case 4 ' Informe de aportaciones
-            FrameInformesVisible True, h, W
+            FrameInformesVisible True, h, w
             Tabla = "raportacion"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Label1(0).Caption = "Certificado de Aportaciones"
             
             CargaCombo
                 
         Case 5 ' Cálculo de Aportaciones de Quatretonda
-            FrameCalculoAporQuaVisible True, h, W
+            FrameCalculoAporQuaVisible True, h, w
             Tabla = "rcampos"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Label1(0).Caption = "Cálculo de Aportaciones"
     
         Case 6 ' Listado de aportaciones para quatretonda
-            FrameListAporQuaVisible True, h, W
+            FrameListAporQuaVisible True, h, w
             Tabla = "raporhco"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             CargaCombo
                     
         Case 7 ' borrado masivo
-            FrameListAporQuaVisible True, h, W
+            FrameListAporQuaVisible True, h, w
             Tabla = "raporhco"
             Label1(6).Caption = "Borrado Masivo de Aportaciones"
             
@@ -7952,35 +7987,35 @@ Dim List As Collection
             
             
         Case 17 ' Devolucion de aportaciones para quatretonda
-            FrameDevolAporQuaVisible True, h, W
+            FrameDevolAporQuaVisible True, h, w
             Tabla = "raporhco"
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             CargaCombo
             txtcodigo(112).Text = Format(Now, "dd/mm/yyyy")
             
             
         Case 8 ' integracion en tesoreria
             ConexionConta vParamAplic.Seccionhorto
-            FrameIntTesorQuaVisible True, h, W
+            FrameIntTesorQuaVisible True, h, w
             Tabla = "raporhco"
-            Me.pb4.visible = False
+            Me.Pb4.visible = False
             
         Case 9 ' integracion en tesoresia del alta de socios de mogente
             ConexionConta vParamAplic.SeccionAlmaz
         
-            FrameRegAltaSociosVisible True, h, W
+            FrameRegAltaSociosVisible True, h, w
             Tabla = "rsocios"
-            Me.pb6.visible = False
+            Me.Pb6.visible = False
             
         Case 10 ' integracion en tesoresia del alta de socios de mogente
             ConexionConta vParamAplic.SeccionAlmaz
         
-            FrameRegBajaSociosVisible True, h, W
+            FrameRegBajaSociosVisible True, h, w
             Tabla = "rsocios"
             Me.Pb7.visible = False
             
         Case 11 ' insercion de aportaciones para bolbaite
-            FrameInsertarApoBolVisible True, h, W
+            FrameInsertarApoBolVisible True, h, w
             Tabla = "rfactsoc"
             Me.Pb8.visible = False
             Frame12.visible = False
@@ -7989,7 +8024,7 @@ Dim List As Collection
             CargarListView 0
             
         Case 12 ' Impresion de recibos de bolbaite
-            FrameInsertarApoBolVisible True, h, W
+            FrameInsertarApoBolVisible True, h, w
             
             Label1(19).Caption = "Impresión de Recibos"
             Tabla = "raportacion"
@@ -7997,35 +8032,35 @@ Dim List As Collection
             Frame5.visible = False
             Frame5.Enabled = False
             Me.CmdAcepInsApoBol.Top = 5100
-            Me.cmdCancel(8).Top = 5100
+            Me.CmdCancel(8).Top = 5100
             
             CargarListView 0
             
         Case 13 ' aportacion obligatoria de bolbaite
-            FrameAportacionObligatoriaVisible True, h, W
+            FrameAportacionObligatoriaVisible True, h, w
             
             Tabla = "rsocios"
-            Me.pb9.visible = False
+            Me.Pb9.visible = False
             
         Case 14
-            FrameIntTesorBolVisible True, h, W
+            FrameIntTesorBolVisible True, h, w
             
             ConexionConta vParamAplic.Seccionhorto
             Tabla = "raportacion"
-            Me.pb10.visible = False
+            Me.Pb10.visible = False
             
         Case 15 ' certificado de aportacion bolbaite
-            FrameCertificadoBolVisible True, h, W
+            FrameCertificadoBolVisible True, h, w
             
             Tabla = "raportacion"
         
         Case 16 ' devolucion de aportaciones de bolbaite
-            FrameDevolAporBolVisible True, h, W
+            FrameDevolAporBolVisible True, h, w
             Tabla = "raportacion"
         
     End Select
     
-    Me.Width = W + 70
+    Me.Width = w + 70
     Me.Height = h + 350
 End Sub
 
@@ -8068,46 +8103,46 @@ Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {raportacion.codaport} in (" & CadenaSeleccion & ")"
+        Sql = " {raportacion.codaport} in (" & CadenaSeleccion & ")"
         Sql2 = " {raportacion.codaport} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {raportacion.codaport} = -1 "
+        Sql = " {raportacion.codaport} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmMens1_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {rcampos.codvarie} = -1 "
+        Sql = " {rcampos.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {raporhco.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {raporhco.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {raporhco.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {raporhco.codvarie} = -1 "
+        Sql = " {raporhco.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -8634,94 +8669,94 @@ Dim cad As String, cadTipo As String 'tipo cliente
 End Sub
 
 
-Private Sub FrameCalculoAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameCalculoAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameCalculoAporQua.visible = visible
     If visible = True Then
         Me.FrameCalculoAporQua.Top = -90
         Me.FrameCalculoAporQua.Left = 0
         Me.FrameCalculoAporQua.Height = 7140
         Me.FrameCalculoAporQua.Width = 6555
-        W = Me.FrameCalculoAporQua.Width
+        w = Me.FrameCalculoAporQua.Width
         h = Me.FrameCalculoAporQua.Height
     End If
 End Sub
 
 
-Private Sub FrameCobrosVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameCobrosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameCobros.visible = visible
     If visible = True Then
         Me.FrameCobros.Top = -90
         Me.FrameCobros.Left = 0
         Me.FrameCobros.Height = 5790
         Me.FrameCobros.Width = 6555
-        W = Me.FrameCobros.Width
+        w = Me.FrameCobros.Width
         h = Me.FrameCobros.Height
     End If
 End Sub
 
 
-Private Sub FrameInformesVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameInformesVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameInforme.visible = visible
     If visible = True Then
         Me.FrameInforme.Top = -90
         Me.FrameInforme.Left = 0
         Me.FrameInforme.Height = 6300
         Me.FrameInforme.Width = 6555
-        W = Me.FrameInforme.Width
+        w = Me.FrameInforme.Width
         h = Me.FrameInforme.Height
     End If
 End Sub
 
-Private Sub FrameListAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameListAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameListAporQua.visible = visible
     If visible = True Then
         Me.FrameListAporQua.Top = -90
         Me.FrameListAporQua.Left = 0
         Me.FrameListAporQua.Height = 6660
         Me.FrameListAporQua.Width = 6555
-        W = Me.FrameListAporQua.Width
+        w = Me.FrameListAporQua.Width
         h = Me.FrameListAporQua.Height
     End If
 End Sub
 
-Private Sub FrameDevolAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameDevolAporQuaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameDevolAporQua.visible = visible
     If visible = True Then
         Me.FrameDevolAporQua.Top = -90
         Me.FrameDevolAporQua.Left = 0
         Me.FrameDevolAporQua.Height = 7140
         Me.FrameDevolAporQua.Width = 6555
-        W = Me.FrameDevolAporQua.Width
+        w = Me.FrameDevolAporQua.Width
         h = Me.FrameDevolAporQua.Height
     End If
 End Sub
 
 
-Private Sub FrameIntTesorQuaVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameIntTesorQuaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameIntTesorQua.visible = visible
     If visible = True Then
         Me.FrameIntTesorQua.Top = -90
         Me.FrameIntTesorQua.Left = 0
         Me.FrameIntTesorQua.Height = 7530
         Me.FrameIntTesorQua.Width = 6555
-        W = Me.FrameIntTesorQua.Width
+        w = Me.FrameIntTesorQua.Width
         h = Me.FrameIntTesorQua.Height
     End If
 End Sub
 
-Private Sub FrameRegularizacionVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameRegularizacionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameRegularizacion.visible = visible
     If visible = True Then
         Me.FrameRegularizacion.Top = -90
         Me.FrameRegularizacion.Left = 0
         Me.FrameRegularizacion.Height = 7530
         Me.FrameRegularizacion.Width = 6555
-        W = Me.FrameRegularizacion.Width
+        w = Me.FrameRegularizacion.Width
         h = Me.FrameRegularizacion.Height
     End If
 End Sub
 
-Private Sub FrameInsertarApoBolVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameInsertarApoBolVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameInsertarApoBol.visible = visible
     If visible = True Then
         Me.FrameInsertarApoBol.Top = -90
@@ -8731,56 +8766,56 @@ Private Sub FrameInsertarApoBolVisible(visible As Boolean, ByRef h As Integer, B
         If OpcionListado = 12 Then Me.FrameInsertarApoBol.Height = 6460
         
         Me.FrameInsertarApoBol.Width = 6555
-        W = Me.FrameInsertarApoBol.Width
+        w = Me.FrameInsertarApoBol.Width
         h = Me.FrameInsertarApoBol.Height
     End If
 End Sub
 
 
-Private Sub FrameAportacionObligatoriaVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameAportacionObligatoriaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameAporObligatoria.visible = visible
     If visible = True Then
         Me.FrameAporObligatoria.Top = -90
         Me.FrameAporObligatoria.Left = 0
         Me.FrameAporObligatoria.Height = 6330
         Me.FrameAporObligatoria.Width = 6555
-        W = Me.FrameAporObligatoria.Width
+        w = Me.FrameAporObligatoria.Width
         h = Me.FrameAporObligatoria.Height
     End If
 End Sub
 
-Private Sub FrameIntTesorBolVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameIntTesorBolVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameIntTesorBol.visible = visible
     If visible = True Then
         Me.FrameIntTesorBol.Top = -90
         Me.FrameIntTesorBol.Left = 0
         Me.FrameIntTesorBol.Height = 7530
         Me.FrameIntTesorBol.Width = 6555
-        W = Me.FrameIntTesorBol.Width
+        w = Me.FrameIntTesorBol.Width
         h = Me.FrameIntTesorBol.Height
     End If
 End Sub
 
-Private Sub FrameCertificadoBolVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameCertificadoBolVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameCertificadoBol.visible = visible
     If visible = True Then
         Me.FrameCertificadoBol.Top = -90
         Me.FrameCertificadoBol.Left = 0
         Me.FrameCertificadoBol.Height = 7530
         Me.FrameCertificadoBol.Width = 6555
-        W = Me.FrameCertificadoBol.Width
+        w = Me.FrameCertificadoBol.Width
         h = Me.FrameCertificadoBol.Height
     End If
 End Sub
 
-Private Sub FrameDevolAporBolVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameDevolAporBolVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameDevolAporBol.visible = visible
     If visible = True Then
         Me.FrameDevolAporBol.Top = -90
         Me.FrameDevolAporBol.Left = 0
         Me.FrameDevolAporBol.Height = 6900
         Me.FrameDevolAporBol.Width = 6555
-        W = Me.FrameDevolAporBol.Width
+        w = Me.FrameDevolAporBol.Width
         h = Me.FrameDevolAporBol.Height
     End If
 End Sub
@@ -8789,27 +8824,27 @@ End Sub
 
 
 
-Private Sub FrameRegAltaSociosVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameRegAltaSociosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameRegAltaSocios.visible = visible
     If visible = True Then
         Me.FrameRegAltaSocios.Top = -90
         Me.FrameRegAltaSocios.Left = 0
         Me.FrameRegAltaSocios.Height = 5400
         Me.FrameRegAltaSocios.Width = 6555
-        W = Me.FrameRegAltaSocios.Width
+        w = Me.FrameRegAltaSocios.Width
         h = Me.FrameRegAltaSocios.Height
     End If
 End Sub
 
 
-Private Sub FrameRegBajaSociosVisible(visible As Boolean, ByRef h As Integer, ByRef W As Integer)
+Private Sub FrameRegBajaSociosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameRegBajaSocios.visible = visible
     If visible = True Then
         Me.FrameRegBajaSocios.Top = -90
         Me.FrameRegBajaSocios.Left = 0
         Me.FrameRegBajaSocios.Height = 5400
         Me.FrameRegBajaSocios.Width = 6555
-        W = Me.FrameRegBajaSocios.Width
+        w = Me.FrameRegBajaSocios.Width
         h = Me.FrameRegBajaSocios.Height
     End If
 End Sub
@@ -8821,7 +8856,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -8849,7 +8884,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -8859,7 +8894,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -8913,19 +8948,19 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 
-    sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If RS.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -8936,8 +8971,8 @@ Dim RS As ADODB.Recordset
 
 End Function
 
-Private Function ProcesarCambios(cadwhere As String) As Boolean
-Dim sql As String
+Private Function ProcesarCambios(cadWhere As String) As Boolean
+Dim Sql As String
 Dim Sql1 As String
 Dim I As Integer
 Dim HayReg As Integer
@@ -8949,20 +8984,20 @@ On Error GoTo eProcesarCambios
     
     conn.Execute "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
         
-    If cadwhere <> "" Then
-        cadwhere = QuitarCaracterACadena(cadwhere, "{")
-        cadwhere = QuitarCaracterACadena(cadwhere, "}")
-        cadwhere = QuitarCaracterACadena(cadwhere, "_1")
+    If cadWhere <> "" Then
+        cadWhere = QuitarCaracterACadena(cadWhere, "{")
+        cadWhere = QuitarCaracterACadena(cadWhere, "}")
+        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
     End If
         
-    sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
-    sql = sql & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
-    sql = sql & " and albaran.numalbar = albaran_variedad.numalbar "
+    Sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
+    Sql = Sql & " and albaran.numalbar = albaran_variedad.numalbar "
     
-    If cadwhere <> "" Then sql = sql & " and " & cadwhere
+    If cadWhere <> "" Then Sql = Sql & " and " & cadWhere
     
     
-    conn.Execute sql
+    conn.Execute Sql
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -8975,7 +9010,7 @@ End Function
 Private Function DatosOk() As Boolean
 Dim b As Boolean
 Dim vDevuelve As String
-Dim sql As String
+Dim Sql As String
 
 
     b = True
@@ -9239,17 +9274,17 @@ Dim sql As String
         
             ' vemos si el socio al que vamos a dar de baja tiene concepto de aportacion 0
             If b Then
-                sql = "select * from raportacion where raportacion.codsocio = " & DBSet(txtcodigo(59).Text, "N")
-                If TotalRegistrosConsulta(sql) = 0 Then
+                Sql = "select * from raportacion where raportacion.codsocio = " & DBSet(txtcodigo(59).Text, "N")
+                If TotalRegistrosConsulta(Sql) = 0 Then
                     MsgBox "El socio a dar de baja no tiene registro de regularizacion. Revise.", vbExclamation
                     PonerFoco txtcodigo(59)
                     b = False
                 End If
                 ' vemos si el socio tiene fecha de baja
                 If b Then
-                    sql = "select * from rsocios  "
-                    sql = sql & " where codsocio = " & DBSet(txtcodigo(59).Text, "N") & " and not fechabaja is null "
-                    If TotalRegistrosConsulta(sql) = 0 Then
+                    Sql = "select * from rsocios  "
+                    Sql = Sql & " where codsocio = " & DBSet(txtcodigo(59).Text, "N") & " and not fechabaja is null "
+                    If TotalRegistrosConsulta(Sql) = 0 Then
                         MsgBox "El socio a dar de baja no tiene fecha de baja. Revise.", vbExclamation
                         PonerFoco txtcodigo(59)
                         b = False
@@ -9257,9 +9292,9 @@ Dim sql As String
                 End If
                 ' vemos si el socio esta en la seccion de almazara
                 If b Then
-                    sql = "select * from rsocios_seccion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
-                    sql = sql & " and codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
-                    If TotalRegistrosConsulta(sql) = 0 Then
+                    Sql = "select * from rsocios_seccion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
+                    Sql = Sql & " and codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
+                    If TotalRegistrosConsulta(Sql) = 0 Then
                         MsgBox "El socio a dar de baja no es de la sección de almazara. Revise.", vbExclamation
                         PonerFoco txtcodigo(59)
                         b = False
@@ -9267,10 +9302,10 @@ Dim sql As String
                 End If
                 ' comprobamos que a este socio no se le haya hecho ya la devolucion
                 If b Then
-                    sql = "select sum(importe) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
-                    sql = sql & " and fecaport >= (select max(fecaport) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
-                    sql = sql & " and codaport = 0) "
-                    If DevuelveValor(sql) = 0 Then
+                    Sql = "select sum(importe) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
+                    Sql = Sql & " and fecaport >= (select max(fecaport) from raportacion where codsocio = " & DBSet(txtcodigo(59).Text, "N")
+                    Sql = Sql & " and codaport = 0) "
+                    If DevuelveValor(Sql) = 0 Then
                         MsgBox "Al socio ya se le ha hecho la devolución de la aportación. Revise.", vbExclamation
                         PonerFoco txtcodigo(59)
                         b = False
@@ -9503,14 +9538,14 @@ End Function
 'GRABAR EN TESORERIA
 '======================================================================
 ' ### [Monica] 16/01/2008
-Private Function InsertarEnTesoreriaNewAPO(MenError As String, Socio As Long, Importe As Currency, FVenci As String, FPNeg As String, FPPos As String, CtaBanco As String, FecFac As String, tipo As Byte) As Boolean
+Private Function InsertarEnTesoreriaNewAPO(MenError As String, Socio As Long, Importe As Currency, FVenci As String, FPNeg As String, FPPos As String, CtaBanco As String, FecFac As String, Tipo As Byte) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 ' Tipo: 0 = Regularizacion
 '       1 = Alta Socio
 '       2 = Baja Socio
 
 Dim b As Boolean
-Dim sql As String, Text33csb As String, Text41csb As String
+Dim Sql As String, Text33csb As String, Text41csb As String
 Dim Sql4 As String
 Dim Rs4 As ADODB.Recordset
 
@@ -9559,7 +9594,7 @@ Dim numfactu As String
                 letraser = ""
                 letraser = DevuelveDesdeBDNew(cAgro, "usuarios.stipom", "letraser", "codtipom", "RAP", "T")
     
-                Select Case tipo
+                Select Case Tipo
                     Case 0 ' Regularizacion
                         Text33csb = "'Regularización Aportación de " & Format(DBLet(fecfactu, "F"), "dd/mm/yy") & "'"
                         Text41csb = "de " & DBSet(Importe, "N")
@@ -9590,18 +9625,18 @@ Dim numfactu As String
                 
     
                 'Insertamos en la tabla scobro de la CONTA
-                sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-                sql = sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-                sql = sql & " text33csb, text41csb, agente" ') "
+                Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
+                Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
+                Sql = Sql & " text33csb, text41csb, agente" ') "
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    sql = sql & ", iban) "
+                    Sql = Sql & ", iban) "
                 Else
-                    sql = sql & ") "
+                    Sql = Sql & ") "
                 End If
                 
-                sql = sql & " VALUES " & CadValues2
-                ConnConta.Execute sql
+                Sql = Sql & " VALUES " & CadValues2
+                ConnConta.Execute Sql
             
             Else
                 '********** si la factura es negativa se inserta en la spago con valor positivo
@@ -9623,19 +9658,19 @@ Dim numfactu As String
                 CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(vSocio.CuentaBan, "T", "S") & ","
             
                 'David. JUNIO 07.   Los dos textos de grabacion de datos de csb
-                Select Case tipo
+                Select Case Tipo
                     Case 0
-                        sql = "Regularización de Aportación"
+                        Sql = "Regularización de Aportación"
                     Case 1
-                        sql = "Aportación de Alta Socio"
+                        Sql = "Aportación de Alta Socio"
                     Case 2
-                        sql = "Devolución Aportación Baja Socio"
+                        Sql = "Devolución Aportación Baja Socio"
                 End Select
                     
-                CadValues2 = CadValues2 & "'" & DevNombreSQL(sql) & "',"
+                CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "',"
                 
-                sql = " de " & Format(DBLet(fecfactu, "F"), "dd/mm/yyyy")
-                CadValues2 = CadValues2 & "'" & DevNombreSQL(sql) & "'" ')"
+                Sql = " de " & Format(DBLet(fecfactu, "F"), "dd/mm/yyyy")
+                CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "'" ')"
 
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
@@ -9649,16 +9684,16 @@ Dim numfactu As String
                 If CadValues2 <> "" Then
                     'Insertamos en la tabla spagop de la CONTA
                     'David. Cuenta bancaria y descripcion textos
-                    sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ' ) "
+                    Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ' ) "
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        sql = sql & ", iban) "
+                        Sql = Sql & ", iban) "
                     Else
-                        sql = sql & ") "
+                        Sql = Sql & ") "
                     End If
                     
-                    sql = sql & " VALUES " & CadValues2
-                    ConnConta.Execute sql
+                    Sql = Sql & " VALUES " & CadValues2
+                    ConnConta.Execute Sql
                 End If
                 '*******
             End If
@@ -9696,10 +9731,10 @@ Private Sub ConexionConta(Seccion As Integer)
 End Sub
 
 
-Private Function ComprobarCtaContable_new(cadTABLA As String, Opcion As Byte, Optional Seccion As Integer, Optional cuenta As String) As Boolean
+Private Function ComprobarCtaContable_new(cadTabla As String, Opcion As Byte, Optional Seccion As Integer, Optional cuenta As String) As Boolean
 'Comprobar que todas las ctas contables de los distintos clientes de las facturas
 'que vamos a contabilizar existan en la contabilidad
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 'Dim RSconta As ADODB.Recordset
 Dim b As Boolean
@@ -9725,37 +9760,37 @@ Dim NumDigit3 As String
     Select Case Opcion
         Case 1
             'Seleccionamos los distintos socios, cuentas que vamos a facturar
-            sql = "SELECT DISTINCT tmpinformes.codigo1 codsocio, rsocios_seccion.codmaccli as codmacta "
-            sql = sql & " FROM (tmpinformes INNER JOIN rsocios_seccion ON tmpinformes.codigo1=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
-            sql = sql & " and tmpinformes.codusu = " & vUsu.Codigo & ") "
-            sql = sql & " ORDER BY 1 "
+            Sql = "SELECT DISTINCT tmpinformes.codigo1 codsocio, rsocios_seccion.codmaccli as codmacta "
+            Sql = Sql & " FROM (tmpinformes INNER JOIN rsocios_seccion ON tmpinformes.codigo1=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
+            Sql = Sql & " and tmpinformes.codusu = " & vUsu.Codigo & ") "
+            Sql = Sql & " ORDER BY 1 "
         
         Case 2
             'Seleccionamos los distintos socios proveedor, cuentas que vamos a facturar
-            sql = "SELECT DISTINCT tmpinformes.codigo1 codsocio, rsocios_seccion.codmacpro as codmacta "
-            sql = sql & " FROM (tmpinformes INNER JOIN rsocios_seccion ON tmpinformes.codigo1=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
-            sql = sql & " and tmpinformes.codusu = " & vUsu.Codigo & ") "
-            sql = sql & " ORDER BY 1 "
+            Sql = "SELECT DISTINCT tmpinformes.codigo1 codsocio, rsocios_seccion.codmacpro as codmacta "
+            Sql = Sql & " FROM (tmpinformes INNER JOIN rsocios_seccion ON tmpinformes.codigo1=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
+            Sql = Sql & " and tmpinformes.codusu = " & vUsu.Codigo & ") "
+            Sql = Sql & " ORDER BY 1 "
         
         
         
     End Select
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
     b = True
 
     While Not RS.EOF And b
         If Opcion < 4 Then
-            sql = SQLcuentas & " AND codmacta= " & DBSet(RS!Codmacta, "T")
+            Sql = SQLcuentas & " AND codmacta= " & DBSet(RS!Codmacta, "T")
         End If
 
-        If Not (RegistrosAListar(sql, cConta) > 0) Then
+        If Not (RegistrosAListar(Sql, cConta) > 0) Then
         'si no lo encuentra
             b = False 'no encontrado
             If Opcion = 1 Or Opcion = 2 Then
-                sql = DBLet(RS!Codmacta, "T") & " del Socio " & Format(RS!Codsocio, "000000")
+                Sql = DBLet(RS!Codmacta, "T") & " del Socio " & Format(RS!Codsocio, "000000")
             End If
         End If
 
@@ -9763,9 +9798,9 @@ Dim NumDigit3 As String
     Wend
 
     If Not b Then
-        sql = "Comprobando Ctas Contables en contabilidad... " & vbCrLf & vbCrLf & sql
+        Sql = "Comprobando Ctas Contables en contabilidad... " & vbCrLf & vbCrLf & Sql
 
-        MsgBox sql, vbExclamation
+        MsgBox Sql, vbExclamation
         ComprobarCtaContable_new = False
     Else
         ComprobarCtaContable_new = True
@@ -9781,7 +9816,7 @@ End Function
 
 
 Private Function IntegracionAportacionesTesoreria(Tabla As String, vWhere As String)
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -9796,10 +9831,10 @@ Dim SqlExiste As String
     On Error GoTo eIntegracionAportacionesTesoreria
         
         
-    sql = "INTAPO" 'Integracion de aportaciones
+    Sql = "INTAPO" 'Integracion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Integración de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -9815,21 +9850,21 @@ Dim SqlExiste As String
     conn.BeginTrans
     ConnConta.BeginTrans
 
-    sql = "select raporhco.codsocio, sum(impaport) as importe from " & Tabla
-    If vWhere <> "" Then sql = sql & " WHERE " & vWhere
-    sql = sql & " group by 1 "
-    sql = sql & " order by 1 "
+    Sql = "select raporhco.codsocio, sum(impaport) as importe from " & Tabla
+    If vWhere <> "" Then Sql = Sql & " WHERE " & vWhere
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " order by 1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
 
-    pb4.visible = True
-    pb4.Max = TotalRegistrosConsulta(sql)
-    pb4.Value = 0
+    Pb4.visible = True
+    Pb4.Max = TotalRegistrosConsulta(Sql)
+    Pb4.Value = 0
     
     While Not RS.EOF And b
-        IncrementarProgresNew pb4, 1
+        IncrementarProgresNew Pb4, 1
     
         MensError = "Insertando cobro en tesoreria" & vbCrLf & vbCrLf
         b = InsertarEnTesoreriaAPOQua(MensError, RS!Codsocio, DBLet(RS!Importe, "N"))
@@ -9872,7 +9907,7 @@ Private Function InsertarEnTesoreriaAPOQua(MenError As String, Socio As Long, Im
 '       1 = bodega
 
 Dim b As Boolean
-Dim sql As String, Text33csb As String, Text41csb As String
+Dim Sql As String, Text33csb As String, Text41csb As String
 Dim Sql4 As String
 Dim Rs4 As ADODB.Recordset
 
@@ -9942,17 +9977,17 @@ Dim Text2csb As String
                 End If
     
                 'Insertamos en la tabla scobro de la CONTA
-                sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-                sql = sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-                sql = sql & " text33csb, text41csb, agente" ') "
+                Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
+                Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
+                Sql = Sql & " text33csb, text41csb, agente" ') "
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    sql = sql & ", iban) "
+                    Sql = Sql & ", iban) "
                 Else
-                    sql = sql & ") "
+                    Sql = Sql & ") "
                 End If
-                sql = sql & " VALUES " & CadValues2
-                ConnConta.Execute sql
+                Sql = Sql & " VALUES " & CadValues2
+                ConnConta.Execute Sql
             
             Else
                 '[Monica]01/09/2014: añadido esto, si el importe es negativo lo tengo que cambiar a positivo
@@ -9978,17 +10013,17 @@ Dim Text2csb As String
                 End If
     
                 'Insertamos en la tabla scobro de la CONTA
-                sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
+                Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    sql = sql & ", iban) "
+                    Sql = Sql & ", iban) "
                 Else
-                    sql = sql & ") "
+                    Sql = Sql & ") "
                 End If
                 
-                sql = sql & " VALUES " & CadValues2
+                Sql = Sql & " VALUES " & CadValues2
                 
-                ConnConta.Execute sql
+                ConnConta.Execute Sql
             
             End If
             
@@ -10007,7 +10042,7 @@ End Function
 
 Private Function CargarTemporalQua(nTabla1 As String, nSelect1 As String) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cValues As String
 Dim AcumAnt As Long
@@ -10023,17 +10058,17 @@ Dim Importe As Currency
 
     On Error GoTo eCargarTablaTemporal
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
-    sql = "insert into tmpinformes (codusu, importe1, codigo1) "
+    Sql = "insert into tmpinformes (codusu, importe1, codigo1) "
     
     Sql2 = " select " & vUsu.Codigo & ", raporhco.numaport, raporhco.codsocio "
     Sql2 = Sql2 & " from " & nTabla1
     
     If nSelect1 <> "" Then Sql2 = Sql2 & " where " & nSelect1
     
-    conn.Execute sql & Sql2
+    conn.Execute Sql & Sql2
 
     CargarTemporalQua = True
     
@@ -10045,16 +10080,16 @@ End Function
 
 
 Private Function ActualizarAportaciones(MensError As String, cTabla As String, cWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eActualizarAportaciones
 
     ActualizarAportaciones = False
 
-    sql = "update raporhco, tmpinformes set intconta = 1 where tmpinformes.codusu = " & vUsu.Codigo
-    sql = sql & " and tmpinformes.importe1 = raporhco.numaport "
+    Sql = "update raporhco, tmpinformes set intconta = 1 where tmpinformes.codusu = " & vUsu.Codigo
+    Sql = Sql & " and tmpinformes.importe1 = raporhco.numaport "
     
-    conn.Execute sql
+    conn.Execute Sql
 
     ActualizarAportaciones = True
     Exit Function
@@ -10064,19 +10099,19 @@ eActualizarAportaciones:
 End Function
 
 Private Function ActualizarAportacionesBol(MensError As String, cTabla As String, cWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eActualizarAportacionesBol
 
     ActualizarAportacionesBol = False
 
-    sql = "update raportacion, tmpinformes set intconta = 1 where tmpinformes.codusu = " & vUsu.Codigo
-    sql = sql & " and tmpinformes.importe1 = raportacion.numfactu "
-    sql = sql & " and tmpinformes.fecha1 = raportacion.fecaport "
-    sql = sql & " and (tmpinformes.nombre1 = raportacion.codtipom or tmpinformes.nombre1 is null) "
-    sql = sql & " and tmpinformes.codigo1 = raportacion.codsocio "
+    Sql = "update raportacion, tmpinformes set intconta = 1 where tmpinformes.codusu = " & vUsu.Codigo
+    Sql = Sql & " and tmpinformes.importe1 = raportacion.numfactu "
+    Sql = Sql & " and tmpinformes.fecha1 = raportacion.fecaport "
+    Sql = Sql & " and (tmpinformes.nombre1 = raportacion.codtipom or tmpinformes.nombre1 is null) "
+    Sql = Sql & " and tmpinformes.codigo1 = raportacion.codsocio "
     
-    conn.Execute sql
+    conn.Execute Sql
 
     ActualizarAportacionesBol = True
     Exit Function
@@ -10115,9 +10150,9 @@ Private Sub CargaCombo()
 End Sub
 
 Private Function BorradoMasivoAporQua(Tabla As String, vWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
-Dim cadwhere As String
+Dim cadWhere As String
 Dim Mens As String
 Dim Nregs As Long
 
@@ -10125,10 +10160,10 @@ Dim Nregs As Long
 
     BorradoMasivoAporQua = False
 
-    sql = "select raporhco.* from " & Tabla
-    If vWhere <> "" Then sql = sql & " where " & vWhere
+    Sql = "select raporhco.* from " & Tabla
+    If vWhere <> "" Then Sql = Sql & " where " & vWhere
    
-    Sql2 = sql
+    Sql2 = Sql
     If vWhere <> "" Then
         Sql2 = Sql2 & " and intconta = 1"
     Else
@@ -10143,15 +10178,15 @@ Dim Nregs As Long
    
     Sql2 = "delete from raporhco "
     If vWhere <> "" Then
-        cadwhere = cadwhere & " where " & vWhere & " and intconta = 0  "
+        cadWhere = cadWhere & " where " & vWhere & " and intconta = 0  "
     Else
-        cadwhere = cadwhere & " and intconta = 0 "
+        cadWhere = cadWhere & " and intconta = 0 "
     End If
-    Nregs = TotalRegistrosConsulta("select raporhco.* from " & Tabla & cadwhere)
+    Nregs = TotalRegistrosConsulta("select raporhco.* from " & Tabla & cadWhere)
     
     If MsgBox("Va a eliminar " & Nregs & " registros no contabilizados. ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Function
     
-    conn.Execute Sql2 & cadwhere
+    conn.Execute Sql2 & cadWhere
    
     BorradoMasivoAporQua = True
     Exit Function
@@ -10161,9 +10196,9 @@ eBorradoMasivoAporQua:
 End Function
 
 
-Private Function CargarTablaTemporal2(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Function CargarTablaTemporal2(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cValues As String
 Dim AcumAnt As Long
@@ -10179,10 +10214,10 @@ Dim Importe As Currency
 
     On Error GoTo eCargarTablaTemporal
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
-    sql = "insert into tmpinformes (codusu, codigo1, nombre1, importe1)  "
+    Sql = "insert into tmpinformes (codusu, codigo1, nombre1, importe1)  "
     
     Sql2 = " select " & vUsu.Codigo & ", rsocios.codsocio, rsocios.nomsocio, sum(if(kilosnet is null, 0,kilosnet)) "
     Sql2 = Sql2 & " from " & nTabla1 & " left join rhisfruta on rsocios.codsocio = rhisfruta.codsocio "
@@ -10192,7 +10227,7 @@ Dim Importe As Currency
     Sql2 = Sql2 & " having  sum(if(kilosnet is null, 0,kilosnet)) <> 0 "
     Sql2 = Sql2 & " order by 1,2,3"
     
-    conn.Execute sql & Sql2
+    conn.Execute Sql & Sql2
     
     CargarTablaTemporal2 = True
     
@@ -10206,7 +10241,7 @@ End Function
 
 
 Private Function ActualizarRegularizacionAltaSocio(Precio As Currency)
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -10222,11 +10257,11 @@ Dim Fecha As Date
     On Error GoTo eActualizarRegularizacion
         
         
-    sql = "ALTAPO" 'regularizacion de aportaciones alta socios
+    Sql = "ALTAPO" 'regularizacion de aportaciones alta socios
     
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Regularización de Aportaciones de Alta Socios. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -10235,10 +10270,10 @@ Dim Fecha As Date
     conn.BeginTrans
     ConnConta.BeginTrans
 
-    sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
-    sql = sql & " order by codigo1 "
+    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by codigo1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     Sql2 = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values "
 
@@ -10247,14 +10282,14 @@ Dim Fecha As Date
 
     b = True
 
-    pb6.visible = True
-    pb6.Max = TotalRegistrosConsulta(sql)
-    pb6.Value = 0
+    Pb6.visible = True
+    Pb6.Max = TotalRegistrosConsulta(Sql)
+    Pb6.Value = 0
     
     Fecha = vParam.FecIniCam 'DateAdd("d", (-1), vParam.FecIniCam)
     
     While Not RS.EOF And b
-        IncrementarProgresNew pb6, 1
+        IncrementarProgresNew Pb6, 1
     
         SqlValues = ""
         
@@ -10303,9 +10338,9 @@ End Function
 
 
 
-Private Function CargarTablaTemporal3(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef Pb1 As ProgressBar) As Boolean
+Private Function CargarTablaTemporal3(nTabla1 As String, nSelect1 As String, Precio1 As String, ByRef pb1 As ProgressBar) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cValues As String
 Dim AcumAnt As Long
@@ -10326,8 +10361,8 @@ Dim CadValues As String
 
     On Error GoTo eCargarTablaTemporal
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
     SqlInsert = "insert into tmpinformes (codusu, codigo1, nombre1, importe1) values "
     
@@ -10372,7 +10407,7 @@ End Function
 
 
 Private Function ActualizarRegularizacionBajaSocio()
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -10388,10 +10423,10 @@ Dim Fecha As Date
     On Error GoTo eActualizarRegularizacion
         
         
-    sql = "BAJAPO" 'regularizacion de aportaciones
+    Sql = "BAJAPO" 'regularizacion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Regularización de Aportaciones de Baja Socios. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -10400,10 +10435,10 @@ Dim Fecha As Date
     conn.BeginTrans
     ConnConta.BeginTrans
 
-    sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
-    sql = sql & " order by codigo1 "
+    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by codigo1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     Sql2 = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values "
 
@@ -10413,7 +10448,7 @@ Dim Fecha As Date
     b = True
 
     Pb7.visible = True
-    Pb7.Max = TotalRegistrosConsulta(sql)
+    Pb7.Max = TotalRegistrosConsulta(Sql)
     Pb7.Value = 0
     
     Fecha = txtcodigo(54).Text
@@ -10472,7 +10507,7 @@ Private Sub CargarListView(Index As Integer)
 'en un ListView
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo ECargarList
 
@@ -10482,18 +10517,18 @@ Dim sql As String
  '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Tipo Movimiento", 2750
     
-    sql = "SELECT codtipom, nomtipom "
-    sql = sql & " FROM usuarios.stipom "
+    Sql = "SELECT codtipom, nomtipom "
+    Sql = Sql & " FROM usuarios.stipom "
     '[Monica]28/03/2014: en el caso de Bolbaite dejo seleccionar las facturas de almazara y de bodega si tuvieran
     If vParamAplic.Cooperativa = 14 Then
-        sql = sql & " WHERE stipom.tipodocu in (1,2,3,4,7,8,9,10)"
+        Sql = Sql & " WHERE stipom.tipodocu in (1,2,3,4,7,8,9,10)"
     Else
-        sql = sql & " WHERE stipom.tipodocu in (1,2,3,4)"
+        Sql = Sql & " WHERE stipom.tipodocu in (1,2,3,4)"
     End If
-    sql = sql & " ORDER BY codtipom "
+    Sql = Sql & " ORDER BY codtipom "
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF
         Set ItmX = ListView1(Index).ListItems.Add
@@ -10513,7 +10548,7 @@ End Sub
 
 
 Private Function InsertarAportacionesBolbaite(Tabla As String, vWhere As String)
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -10526,10 +10561,10 @@ Dim SqlExiste As String
     On Error GoTo eInsertarAportacionesBolbaite
         
         
-    sql = "INSAPO" 'Integracion de aportaciones
+    Sql = "INSAPO" 'Integracion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Inserción de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -10544,11 +10579,11 @@ Dim SqlExiste As String
         
     conn.BeginTrans
 
-    sql = "select * from " & Tabla
-    If vWhere <> "" Then sql = sql & " WHERE " & vWhere
-    sql = sql & " order by codtipom, numfactu, fecfactu "
+    Sql = "select * from " & Tabla
+    If vWhere <> "" Then Sql = Sql & " WHERE " & vWhere
+    Sql = Sql & " order by codtipom, numfactu, fecfactu "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
 
@@ -10556,11 +10591,11 @@ Dim SqlExiste As String
     SqlValues = ""
 
     Pb8.visible = True
-    Pb8.Max = TotalRegistrosConsulta(sql)
+    Pb8.Max = TotalRegistrosConsulta(Sql)
     Pb8.Value = 0
     
    
-    sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
+    Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
     
     While Not RS.EOF And b
         IncrementarProgresNew Pb8, 1
@@ -10583,7 +10618,7 @@ Dim SqlExiste As String
     
     If SqlValues <> "" Then
         SqlValues = Mid(SqlValues, 1, Len(SqlValues) - 1)
-        conn.Execute sql & SqlValues
+        conn.Execute Sql & SqlValues
     End If
     
     
@@ -10606,7 +10641,7 @@ End Function
 
 
 Private Function InsertarAportacionesObligatoriasBolbaite(Tabla As String, vWhere As String)
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -10619,10 +10654,10 @@ Dim SqlExiste As String
     On Error GoTo eInsertarAportacionesObligatoriasBolbaite
         
         
-    sql = "INSAPO" 'Integracion de aportaciones
+    Sql = "INSAPO" 'Integracion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Inserción de Aportaciones Obligatorias. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -10637,25 +10672,25 @@ Dim SqlExiste As String
         
     conn.BeginTrans
 
-    sql = "select * from " & Tabla
-    If vWhere <> "" Then sql = sql & " WHERE " & vWhere
-    sql = sql & " order by codsocio"
+    Sql = "select * from " & Tabla
+    If vWhere <> "" Then Sql = Sql & " WHERE " & vWhere
+    Sql = Sql & " order by codsocio"
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
 
 
     SqlValues = ""
 
-    pb9.visible = True
-    pb9.Max = TotalRegistrosConsulta(sql)
-    pb9.Value = 0
+    Pb9.visible = True
+    Pb9.Max = TotalRegistrosConsulta(Sql)
+    Pb9.Value = 0
     
-    sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
+    Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,codtipom,numfactu,intconta,porcaport) values "
     
     While Not RS.EOF And b
-        IncrementarProgresNew pb9, 1
+        IncrementarProgresNew Pb9, 1
     
         Sql2 = "select * from raportacion where fecaport = " & DBSet(txtcodigo(74).Text, "F")
         Sql2 = Sql2 & " and codsocio = " & DBSet(RS!Codsocio, "N")
@@ -10675,7 +10710,7 @@ Dim SqlExiste As String
     
     If SqlValues <> "" Then
         SqlValues = Mid(SqlValues, 1, Len(SqlValues) - 1)
-        conn.Execute sql & SqlValues
+        conn.Execute Sql & SqlValues
     End If
     
     
@@ -10697,7 +10732,7 @@ End Function
 
 
 Private Function IntegracionAportacionesTesoreriaBolbaite(Tabla As String, vWhere As String)
-Dim sql As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim Sql2 As String
 Dim SqlValues As String
@@ -10712,10 +10747,10 @@ Dim SqlExiste As String
     On Error GoTo eIntegracionAportacionesTesoreria
         
         
-    sql = "INTAPO" 'Integracion de aportaciones
+    Sql = "INTAPO" 'Integracion de aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Integración de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -10731,20 +10766,20 @@ Dim SqlExiste As String
     conn.BeginTrans
     ConnConta.BeginTrans
 
-    sql = "select * from " & Tabla
-    If vWhere <> "" Then sql = sql & " WHERE " & vWhere
-    sql = sql & " order by 1 "
+    Sql = "select * from " & Tabla
+    If vWhere <> "" Then Sql = Sql & " WHERE " & vWhere
+    Sql = Sql & " order by 1 "
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
 
-    pb10.visible = True
-    pb10.Max = TotalRegistrosConsulta(sql)
-    pb10.Value = 0
+    Pb10.visible = True
+    Pb10.Max = TotalRegistrosConsulta(Sql)
+    Pb10.Value = 0
     
     While Not RS.EOF And b
-        IncrementarProgresNew pb10, 1
+        IncrementarProgresNew Pb10, 1
     
         MensError = "Insertando cobro en tesoreria" & vbCrLf & vbCrLf
         b = InsertarEnTesoreriaAPOBol(MensError, RS)  'Rs!Codsocio, DBLet(Rs!Importe, "N"))
@@ -10779,7 +10814,7 @@ End Function
 
 Private Function CargarTemporalBol(nTabla1 As String, nSelect1 As String) As Boolean
 Dim RS As ADODB.Recordset
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cValues As String
 Dim AcumAnt As Long
@@ -10795,17 +10830,17 @@ Dim Importe As Currency
 
     On Error GoTo eCargarTablaTemporal
 
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
-    sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, nombre1) "
+    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, nombre1) "
     
     Sql2 = " select " & vUsu.Codigo & ", raportacion.codsocio, raportacion.fecaport, raportacion.numfactu, raportacion.codtipom "
     Sql2 = Sql2 & " from " & nTabla1
     
     If nSelect1 <> "" Then Sql2 = Sql2 & " where " & nSelect1
     
-    conn.Execute sql & Sql2
+    conn.Execute Sql & Sql2
 
     CargarTemporalBol = True
     
@@ -10822,7 +10857,7 @@ Private Function InsertarEnTesoreriaAPOBol(MenError As String, ByRef RS As ADODB
 '       1 = bodega
 
 Dim b As Boolean
-Dim sql As String, Text33csb As String, Text41csb As String
+Dim Sql As String, Text33csb As String, Text41csb As String
 Dim Sql4 As String
 Dim Rs4 As ADODB.Recordset
 
@@ -10898,19 +10933,19 @@ Dim Text2csb As String
                 
     
                 'Insertamos en la tabla scobro de la CONTA
-                sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-                sql = sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-                sql = sql & " text33csb, text41csb, agente" ') "
+                Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
+                Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
+                Sql = Sql & " text33csb, text41csb, agente" ') "
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    sql = sql & ", iban) "
+                    Sql = Sql & ", iban) "
                 Else
-                    sql = sql & ") "
+                    Sql = Sql & ") "
                 End If
                 
-                sql = sql & " VALUES " & CadValues2
+                Sql = Sql & " VALUES " & CadValues2
                 
-                ConnConta.Execute sql
+                ConnConta.Execute Sql
             
             Else
                 '[Monica]01/09/2014: añadido esto, si el importe es negativo lo tengo que cambiar a positivo
@@ -10936,17 +10971,17 @@ Dim Text2csb As String
                 End If
     
                 'Insertamos en la tabla scobro de la CONTA
-                sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
+                Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    sql = sql & ", iban) "
+                    Sql = Sql & ", iban) "
                 Else
-                    sql = sql & ") "
+                    Sql = Sql & ") "
                 End If
                 
-                sql = sql & " VALUES " & CadValues2
+                Sql = Sql & " VALUES " & CadValues2
                 
-                ConnConta.Execute sql
+                ConnConta.Execute Sql
             
             End If
         End If
@@ -10965,7 +11000,7 @@ End Function
 
 
 Private Function InsertarDevolucionesQua(vTabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
 Dim b As Boolean
@@ -10983,10 +11018,10 @@ Dim Existe As Boolean
     
     InsertarDevolucionesQua = False
     
-    sql = "DEVAPO" 'devolucion aportaciones
+    Sql = "DEVAPO" 'devolucion aportaciones
     'Bloquear para que nadie mas pueda realizarlo
-    DesBloqueoManual (sql)
-    If Not BloqueoManual(sql, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Devolución de Aportaciones. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -11020,10 +11055,10 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    sql = "select raporhco.* from " & vTabla
-    sql = sql & " where " & vSelect
+    Sql = "select raporhco.* from " & vTabla
+    Sql = Sql & " where " & vSelect
     
-    CargarProgres pb12, TotalRegistrosConsulta(sql)
+    CargarProgres pb12, TotalRegistrosConsulta(Sql)
     pb12.visible = True
     
     
@@ -11033,7 +11068,7 @@ Dim Existe As Boolean
     Set vTipoMov = New CTiposMov
     
     Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not RS.EOF And b
         IncrementarProgres pb12, 1
@@ -11054,8 +11089,8 @@ Dim Existe As Boolean
             End If
         Loop Until Not Existe
                 
-        CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-        CadValues = CadValues & DBSet(RS!Poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
+        CadValues = "(" & DBSet(NumApor, "N") & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!CodCampo, "N") & ","
+        CadValues = CadValues & DBSet(RS!poligono, "N") & "," & DBSet(RS!Parcela, "N") & "," & DBSet(RS!codparti, "N") & ","
         CadValues = CadValues & DBSet(RS!codvarie, "N") & "," & DBSet(RS!ImpAport * (-1), "N") & "," & DBSet(txtcodigo(112).Text, "F") & ","
         CadValues = CadValues & DBSet(RS!anoplant, "N") & "," & ValorNulo & "," & DBSet(RS!supcoope, "N") & ","
         CadValues = CadValues & DBSet(txtcodigo(98).Text, "N") & ",0)"
@@ -11096,23 +11131,23 @@ End Function
 
 
 Private Function InsertarTemporalDevolQua(vTabla As String, vSelect As String) As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eInsertarTemporal
     
     InsertarTemporalDevolQua = False
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
                                             'socio,  campo,    variedad,  importe
-    sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, importe3)"
-    sql = sql & " select " & vUsu.Codigo & ", rapohco.codsocio, raporhco.codcampo, raporhco.codvarie, sum(coalesce(raporhco.impaport,0)) importe "
-    sql = sql & " from " & vTabla
-    sql = sql & " where " & vSelect
-    sql = sql & " group by 1,2,3,4 "
-    sql = sql & " order by 1,2,3,4 "
+    Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, importe3)"
+    Sql = Sql & " select " & vUsu.Codigo & ", rapohco.codsocio, raporhco.codcampo, raporhco.codvarie, sum(coalesce(raporhco.impaport,0)) importe "
+    Sql = Sql & " from " & vTabla
+    Sql = Sql & " where " & vSelect
+    Sql = Sql & " group by 1,2,3,4 "
+    Sql = Sql & " order by 1,2,3,4 "
     
-    conn.Execute sql
+    conn.Execute Sql
 
     InsertarTemporalDevolQua = True
     Exit Function

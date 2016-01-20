@@ -1,11 +1,88 @@
-0356B97090781            0010605150605153058226227200008720   88        
-0356B97090781            002NATURAL DE MONTAÑA S.L.                     
-0356B97090781            003Partida Alegea, s/n                         
-0356B97090781            00446820 VALENCIA                              
-0656B970907810000000T    01000000000404800001234123456789011  01        
-0656B970907810000000T    011                                   A        
-0656B970907810000000T    012                                 aaa        
-0656B970907810000000T    013                                            
-0656B970907810000000T    014   aa                             aa        
-0656B970907810000000T    016                             Nómina         
-0856B97090781               000000004048000000010000000011              
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
+<CstmrCdtTrfInitn>
+   <GrpHdr>
+      <MsgId>TRANPAG000000F20160120T105324</MsgId>
+      <CreDtTm>2016-01-20T10:53:24</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>100</CtrlSum>
+      <InitgPty>
+         <Nm>Picassent</Nm>
+         <Id>
+           <OrgId>
+               <Othr>
+                  <Id>F46026621</Id>
+               </Othr>
+           </OrgId>
+         </Id>
+      </InitgPty>
+   </GrpHdr>
+   <PmtInf>
+      <PmtInfId>20160120105324F46026621</PmtInfId>
+      <PmtMtd>TRF</PmtMtd>
+      <ReqdExctnDt>2016-01-20</ReqdExctnDt>
+      <Dbtr>
+         <Nm>Picassent</Nm>
+         <PstlAdr>
+            <Ctry>ES</Ctry>
+            <AdrLine>Polig.Industrial Picassent C/6 N  3 Picassent Valencia</AdrLine>
+         </PstlAdr>
+         <Id>
+            <OrgId>
+               <Othr>
+                  <Id>F46026621</Id>
+               </Othr>
+            </OrgId>
+         </Id>
+    </Dbtr>
+    <DbtrAcct>
+       <Id>
+          <IBAN>ES6121007414902200088187</IBAN>
+       </Id>
+       <Ccy>EUR</Ccy>
+    </DbtrAcct>
+    <DbtrAgt>
+       <FinInstnId>
+          <BIC>CAIXESBBXXX</BIC>
+       </FinInstnId>
+    </DbtrAgt>
+   <CdtTrfTxInf>
+      <PmtId>
+         <EndToEndId>53097208Y</EndToEndId>
+      </PmtId>
+      <PmtTpInf>
+          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
+          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
+       </PmtTpInf>
+       <Amt>
+          <InstdAmt Ccy="EUR">100</InstdAmt>
+       </Amt>
+       <CdtrAgt>
+          <FinInstnId>
+             <BIC>CCRIES2AXXX</BIC>
+          </FinInstnId>
+       </CdtrAgt>
+       <Cdtr>
+          <Nm>LOPEZ TORREGROSA ROBERTO</Nm>
+           <Id>
+               <OrgId>
+                  <Othr>
+                     <Id>53097208Y</Id>
+                  </Othr>
+               </OrgId>
+           </Id>
+        </Cdtr>
+        <CdtrAcct>
+           <Id>
+              <IBAN>ES5130587032882810010844</IBAN>
+           </Id>
+        </CdtrAcct>
+      <Purp>
+         <Cd>SALA</Cd>
+      </Purp>
+      <RmtInf>
+         <Ustrd>Pago N mina 20/01/2016 Importe100,00</Ustrd>
+      </RmtInf>
+   </CdtTrfTxInf>
+   </PmtInf>
+</CstmrCdtTrfInitn></Document>

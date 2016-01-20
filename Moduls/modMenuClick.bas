@@ -925,36 +925,35 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
                 
         Case 18: frmPOZRecibos.Show vbModal ' mantenimiento de historico de Recibos
         
-        Case 19: AbrirListadoPOZ (6) ' Reimpresion de recibos de pozos
+        Case 20: AbrirListadoPOZ (6) ' Reimpresion de recibos de pozos
         
-        Case 20: ' Impresion de carta de reclamacion para escalona
+        Case 21: ' Impresion de carta de reclamacion para escalona
                 Screen.MousePointer = vbHourglass
                 frmPOZListadoOfer.OpcionListado = 1
                 frmPOZListadoOfer.Show vbModal
                 Screen.MousePointer = vbDefault
         
-        Case 22: frmPOZIntTesor.Show vbModal ' Integracion contable
-        Case 23: ' Integracion aridoc
+        '[Monica]11/01/2016: facturas de recargo solo para escalona
+        Case 22: frmPOZFraRecargo.Show vbModal
+        
+        Case 24: frmPOZIntTesor.Show vbModal ' Integracion contable
+        Case 25: ' Integracion aridoc
                 frmImpAridoc.Tipo = 6 ' Integracion de aridoc: Facturas de socio de pozos
                 frmImpAridoc.Caption = "Exportar Facturas Socio a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
                 
-        Case 25: AbrirListadoPOZ (7) ' Informe de Facturas generadas por Hidrante
+        Case 27: AbrirListadoPOZ (7) ' Informe de Facturas generadas por Hidrante
                 
-        Case 26: AbrirListadoPOZ (18) ' listado de recibos pendientes de cobro
+        Case 28: AbrirListadoPOZ (18) ' listado de recibos pendientes de cobro
                 
-        Case 27: AbrirListadoPOZ (20) ' listado de recibos de consumo pendientes de cobro
+        Case 29: AbrirListadoPOZ (20) ' listado de recibos de consumo pendientes de cobro
                 
-        Case 28: AbrirListadoPOZ (8) ' Impresion de Etiquetas de contadores
+        Case 30: AbrirListadoPOZ (8) ' Impresion de Etiquetas de contadores
                  
-        Case 30: AbrirListadoPOZ (9) ' Rectificación de Lecturas
+        Case 32: AbrirListadoPOZ (9) ' Rectificación de Lecturas
         
-        Case 31: frmPOZIndefa.Show vbModal  ' prueba de indefa
-                 
-        '[Monica]11/01/2016: facturas de recargo solo para escalona
-        Case 32: frmPOZFraRecargo.Show vbModal
-    
+        Case 33: frmPOZIndefa.Show vbModal  ' prueba de indefa
     End Select
 End Sub
 
@@ -1097,24 +1096,24 @@ Dim I As Integer
     MDIppal.mnRec_Pozos(17).Enabled = (vParamAplic.Cooperativa = 10)
     MDIppal.mnRec_Pozos(17).visible = (vParamAplic.Cooperativa = 10)
     '[Monica]26/11/2012: Cartas de reclamacion solo para escalona
-    MDIppal.mnRec_Pozos(20).Enabled = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(20).visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(21).Enabled = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(21).visible = (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10)
 
     '[Monica]16/05/2014: los listados de recibos pendientes de cobro y recibos por riego a manta solo lo ve Escalona
     MDIppal.mnRec_Pozos(13).Enabled = (vParamAplic.Cooperativa = 10)
     MDIppal.mnRec_Pozos(13).visible = (vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(26).Enabled = (vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(26).visible = (vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(27).Enabled = (vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(27).visible = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(28).Enabled = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(28).visible = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(29).Enabled = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(29).visible = (vParamAplic.Cooperativa = 10)
 
     '[Monica]11/01/2016: las facturas de recargo solo las ve Escalona
-    MDIppal.mnRec_Pozos(32).Enabled = (vParamAplic.Cooperativa = 10)
-    MDIppal.mnRec_Pozos(32).visible = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(22).Enabled = (vParamAplic.Cooperativa = 10)
+    MDIppal.mnRec_Pozos(22).visible = (vParamAplic.Cooperativa = 10)
 
     '[Monica]12/01/2016: la rectificacion de lectura no la ve ni Escalona ni Utxera
-    MDIppal.mnRec_Pozos(30).Enabled = (vParamAplic.Cooperativa = 7)
-    MDIppal.mnRec_Pozos(30).visible = (vParamAplic.Cooperativa = 7)
+    MDIppal.mnRec_Pozos(32).Enabled = (vParamAplic.Cooperativa = 7)
+    MDIppal.mnRec_Pozos(32).visible = (vParamAplic.Cooperativa = 7)
 
 
 

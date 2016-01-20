@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManAsesoria 
@@ -35,7 +35,7 @@ Begin VB.Form frmManAsesoria
       Index           =   0
       Left            =   8970
       TabIndex        =   4
-      Tag             =   "Int.Contable|N|N|||rrecasesoriaett|idconta|||"
+      Tag             =   "Int.Contable|N|N|||rrecasesoria|idconta|||"
       Top             =   5010
       Visible         =   0   'False
       Width           =   255
@@ -49,7 +49,7 @@ Begin VB.Form frmManAsesoria
       Left            =   8040
       MaxLength       =   11
       TabIndex        =   3
-      Tag             =   "Complementos|N|N|||rrecasesoriaett|importe|###,##0.00||"
+      Tag             =   "Complementos|N|N|||rrecasesoria|importe|###,##0.00||"
       Top             =   4980
       Width           =   750
    End
@@ -526,7 +526,7 @@ Dim b As Boolean
     
     chkAux(0).visible = Not b
 
-    cmdAceptar.visible = Not b
+    CmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
