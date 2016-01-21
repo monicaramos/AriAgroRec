@@ -279,8 +279,12 @@ Private mvarCtaVentasConsPOZ As String ' cta ventas consumo de pozos
 Private mvarCtaVentasCuoPOZ As String ' cta ventas cuotas de pozos
 Private mvarCtaVentasTalPOZ As String ' cta ventas talla de pozos
 Private mvarCtaVentasMtoPOZ As String ' cta ventas mantenimiento de pozos
-
+'[Monica]21/01/2016: cuenta de recargos (escalona)
 Private mvarCtaVentasMantaPOZ As String ' cta ventas consumo a manta pozos
+
+Private mvarCtaRecargosPOZ As String ' cta recargos pozos
+
+
 
 Private mvarCodCCostPoz As String ' centro de coste de pozos
  
@@ -1904,7 +1908,16 @@ Public Property Get CtaVentasMantaPOZ() As String
 End Property
 
 
+'[Monica]21/01/2016: cuenta de recargos (escalona)
+' cuenta recargos pozos
 
+Public Property Let CtaRecargosPOZ(ByVal vData As String)
+     mvarCtaRecargosPOZ = vData
+End Property
+
+Public Property Get CtaRecargosPOZ() As String
+     CtaRecargosPOZ = mvarCtaRecargosPOZ
+End Property
 
 
 ' centro de coste  pozos
@@ -2339,7 +2352,8 @@ On Error GoTo Err3
         mvarCtaVentasTalPOZ = DBLet(RS!CtaVentasTalPOZ, "T") ' cta contable de ventas talla de pozos
         mvarCtaVentasMtoPOZ = DBLet(RS!CtaVentasMtoPOZ, "T") ' cta contable de ventas mantenimiento de pozos
         mvarCtaVentasMantaPOZ = DBLet(RS!CtaVentasMantaPOZ, "T") ' cta contable de ventas consumo a manta de pozos
-        
+        '[Monica]21/01/2016: cuenta de recargos (escalona)
+        mvarCtaRecargosPOZ = DBLet(RS!CtaRecargosPOZ, "T") ' cta contable de recargos de pozos
         
         mvarCodCCostPoz = DBLet(RS!CodCCostPOZ, "T") ' centro de coste de pozos
         mvarForpaConPOZ = DBLet(RS!ForpaConPOZ, "N") ' forma de pago contado pozos
@@ -2651,6 +2665,8 @@ On Error GoTo eModificar
     SQL = SQL & ", ctaventastalpoz= " & DBSet(mvarCtaVentasTalPOZ, "T") ' cuenta contable de ventas talla pozos
     SQL = SQL & ", ctaventasmtopoz= " & DBSet(mvarCtaVentasMtoPOZ, "T") ' cuenta contable de ventas mantenimiento pozos
     SQL = SQL & ", ctaventasmantapoz= " & DBSet(mvarCtaVentasMantaPOZ, "T") ' cuenta contable de ventas consumo a manta pozos
+    '[Monica]21/01/2016: cuenta de recargos (escalona)
+    SQL = SQL & ", ctarecargospoz= " & DBSet(mvarCtaRecargosPOZ, "T") ' cuenta contable de recargos de pozos
     
     SQL = SQL & ", codccostpoz= " & DBSet(mvarCodCCostPoz, "T") ' centro de coste pozos
     SQL = SQL & ", forpaconpoz= " & DBSet(mvarForpaConPOZ, "N") ' forma de pago de contado de pozos

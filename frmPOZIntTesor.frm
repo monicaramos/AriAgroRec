@@ -360,8 +360,8 @@ Private HaDevueltoDatos As Boolean
 
 Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmFPa As frmForpaConta 'formas de pago de la contabilidad
-Attribute frmFPa.VB_VarHelpID = -1
+Private WithEvents frmFpa As frmForpaConta 'formas de pago de la contabilidad
+Attribute frmFpa.VB_VarHelpID = -1
 Private WithEvents frmCtas As frmCtasConta 'cuentas contables de contabilidad
 Attribute frmCtas.VB_VarHelpID = -1
 
@@ -388,6 +388,8 @@ Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 
 
+Dim Salir As Boolean
+
 Private Sub KEYpress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
         KeyAscii = 0
@@ -397,13 +399,13 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
 Dim cadWhere As String
 
     If Not DatosOk Then Exit Sub
              
-    Sql = "SELECT count(*)" & _
+    SQL = "SELECT count(*)" & _
           " FROM rrecibpozos " & _
           "WHERE "
           
@@ -412,36 +414,36 @@ Dim cadWhere As String
     If txtCodigo(0).Text <> "" Then cadWhere = cadWhere & " and rrecibpozos.fecfactu >= " & DBSet(txtCodigo(0).Text, "F")
     If txtCodigo(1).Text <> "" Then cadWhere = cadWhere & " and rrecibpozos.fecfactu <= " & DBSet(txtCodigo(1).Text, "F")
              
-    Sql = Sql & cadWhere
+    SQL = SQL & cadWhere
     
     ' dependiendo del tipo de recibo ponemos el tipo de movimiento
-    Select Case Combo1(0).ListIndex
-        Case 0 ' contadores
+    Select Case Mid(Combo1(0).Text, 1, 3) ' antes Combo1(0).ListIndex
+        Case "RCP" '0 contadores
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RCP'"
-        Case 1 ' mantenimiento
+        Case "RMP" '1 mantenimiento
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RMP'"
-        Case 2
+        Case "RVP" '2
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RVP'"
-        Case 3
+        Case "TAL" '3
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'TAL'"
-        Case 4
+        Case "RMT" '4
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RMT'"
         '[Monica]14/01/2016: la rectificativas
-        Case 5
+        Case "RRC" '5
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RRC'"
-        Case 6
+        Case "RRM" '6
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RRM'"
-        Case 7
+        Case "RRV" '7
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RRV'"
-        Case 8
+        Case "RTA" '8
             cadWhere = cadWhere & " and rrecibpozos.codtipom = 'RTA'"
-'        Case 9
+'        Case "RRT" '9
 '            cadwhere = cadwhere & " and rrecibpozos.codtipom = 'RRT' "
             
     End Select
              
              
-    If RegistrosAListar(Sql) = 0 Then
+    If RegistrosAListar(SQL) = 0 Then
         MsgBox "No existen datos a contabilizar entre esas fechas.", vbExclamation
         Exit Sub
     End If
@@ -469,6 +471,10 @@ Dim cadWhere As String
     '[Monica]19/01/2016: solo en el caso de escalona no salimos de la integracion contable
     If vParamAplic.Cooperativa <> 10 Then cmdCancel_Click
     
+    '[Monica]21/01/2016: cuando vuelvo refrescar el combo
+    CargaCombo
+    If Combo1(0).ListCount > 0 Then Combo1(0).ListIndex = 0
+    
 eError:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "No se ha realizado el proceso de contabilización a tesoreria. Llame a soporte."
@@ -485,6 +491,7 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Activate()
+    
     If PrimeraVez Then
         PrimeraVez = False
         
@@ -492,13 +499,17 @@ Private Sub Form_Activate()
         txtCodigo_LostFocus (3)
         
         PonerFoco txtCodigo(0)
-        Combo1(0).ListIndex = 0
+        '[Monica]21/01/2016: si hay recibos para contabilizar situamos el combo en el primero
+        If Combo1(0).ListCount > 0 Then
+            Combo1(0).ListIndex = 0
+        End If
+        
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer, I As Integer
+Dim H As Integer, W As Integer, I As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -515,7 +526,7 @@ Dim List As Collection
 
     ConexionConta
          
-    FrameCobrosVisible True, h, w
+    FrameCobrosVisible True, H, W
     Pb1.visible = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
@@ -523,12 +534,20 @@ Dim List As Collection
     
     CargaCombo
     If vParamAplic.Cooperativa = 7 Then
-        Combo1(0).ListIndex = 0
+        '[Monica]21/01/2016: si hay recibos para contabilizar situamos el combo en el primero
+        If Combo1(0).ListCount > 0 Then Combo1(0).ListIndex = 0
         Combo1(0).Enabled = False
     
         '[Monica]08/05/2012: campo de observaciones del registro de iva de contabilidad
         txtCodigo(5).Text = "Consumo Agua Riegos"
     End If
+    Salir = False
+    If Combo1(0).ListCount = 0 Then
+        MsgBox "No hay recibos pendientes de integrar.", vbExclamation
+        Salir = True
+    End If
+
+    
     
 '   Me.Width = w + 70
 '   Me.Height = h + 350
@@ -652,7 +671,7 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
@@ -681,7 +700,7 @@ Dim cad As String, cadTipo As String 'tipo cliente
     End Select
 End Sub
 
-Private Sub FrameCobrosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameCobrosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
     Me.FrameCobros.visible = visible
 End Sub
 
@@ -726,12 +745,12 @@ End Function
  
 Private Sub AbrirFrmForpaConta(indice As Integer)
     indCodigo = indice
-    Set frmFPa = New frmForpaConta
-    frmFPa.DatosADevolverBusqueda = "0|1|"
-    frmFPa.CodigoActual = txtCodigo(indice)
+    Set frmFpa = New frmForpaConta
+    frmFpa.DatosADevolverBusqueda = "0|1|"
+    frmFpa.CodigoActual = txtCodigo(indice)
 '    frmFpa.Conexion = cContaFacSoc
-    frmFPa.Show vbModal
-    Set frmFPa = Nothing
+    frmFpa.Show vbModal
+    Set frmFpa = Nothing
 End Sub
 
 
@@ -747,17 +766,17 @@ End Sub
 
 Private Sub ContabilizarCobros(cadWhere As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
+Dim SQL As String
 Dim b As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
 Dim cadTabla As String
 
-    Sql = "CONTES" 'contabilizar tesoreria
+    SQL = "CONTES" 'contabilizar tesoreria
 
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Contabilizar Cobros. Hay otro usuario contabilizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -812,7 +831,7 @@ Dim b As Boolean
 Dim Orden1 As String
 Dim Orden2 As String
 Dim FFin As Date
-Dim Sql As String
+Dim SQL As String
 
    b = True
 
@@ -829,8 +848,8 @@ Dim Sql As String
         PonerFoco txtCodigo(3)
    Else
         ' comprobamos que existe la forma de pago en contabilidad
-        Sql = DevuelveDesdeBDNew(cConta, "sforpa", "codforpa", "codforpa", txtCodigo(3).Text, "N")
-        If Sql = "" Then
+        SQL = DevuelveDesdeBDNew(cConta, "sforpa", "codforpa", "codforpa", txtCodigo(3).Text, "N")
+        If SQL = "" Then
             MsgBox "No existe la forma de pago en Contabilidad. Revise.", vbExclamation
             b = False
             PonerFoco txtCodigo(3)
@@ -843,13 +862,29 @@ Dim Sql As String
         PonerFoco txtCodigo(4)
    End If
    
+   
+   '[Monica]21/01/2016: comprobamos si es escalona que tenga la cuenta de recargo en parametros
+   If vParamAplic.Cooperativa = 10 Then
+        If vParamAplic.CtaRecargosPOZ = "" Then
+            MsgBox "Debe de introducir la Cta.Contable de Recargos en parámetros. Revise.", vbExclamation
+            b = False
+        End If
+   End If
+   If Combo1(0).Text = "" And Combo1(0).ListCount > 0 Then
+        MsgBox "Debe introducir un Tipo de Factura para integrar. Revise.", vbExclamation
+        b = False
+        PonerFocoCmb Combo1(0)
+   End If
+        
+        
+   
    DatosOk = b
    
 End Function
 
 Private Function PasarCalculoAContab(cadWhere As String) As Boolean
-Dim Sql As String
-Dim Rs As ADODB.Recordset
+Dim SQL As String
+Dim RS As ADODB.Recordset
 Dim b As Boolean
 Dim I As Integer
 Dim numlinea As Integer
@@ -862,7 +897,7 @@ Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
 Dim cadMen As String
-Dim cad As String
+Dim Cad As String
 Dim CtaDifer As String
 Dim Codmacta As String
 
@@ -872,11 +907,11 @@ Dim Codmacta As String
     
     'Total de lineas de asiento a Insertar en la contabilidad
     
-    Sql = "SELECT count(distinct codtipom, numfactu,fecfactu)" & _
+    SQL = "SELECT count(distinct codtipom, numfactu,fecfactu)" & _
           " FROM rrecibpozos " & _
           "WHERE " & cadWhere
              
-    numlinea = TotalRegistros(Sql)
+    numlinea = TotalRegistros(SQL)
     
     If numlinea = 0 Then Exit Function
     
@@ -891,24 +926,24 @@ Dim Codmacta As String
         
         Obs = "Contabilización de Cobro de Recibos de fecha " & Format(txtCodigo(0).Text, "dd/mm/yyyy")
 
-        Sql = "select distinct codtipom, numfactu, fecfactu, codsocio from rrecibpozos where " & cadWhere
-        Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        SQL = "select distinct codtipom, numfactu, fecfactu, codsocio from rrecibpozos where " & cadWhere
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
         b = True
         I = 1
-        While Not Rs.EOF And b
+        While Not RS.EOF And b
                 IncrementarProgres Me.Pb1, 1
                 Me.lblProgres(1).Caption = "Insertando registro en Tesorería...   (" & I & " de " & numlinea & ")"
                 Me.Refresh
                 I = I + 1
                 cadMen = "Insertando en Tesoreria: "
-                b = InsertarEnTesoreriaPOZOS(cadMen, Rs, CDate(txtCodigo(2).Text), CInt(txtCodigo(3).Text), txtCodigo(4).Text)
+                b = InsertarEnTesoreriaPOZOS(cadMen, RS, CDate(txtCodigo(2).Text), CInt(txtCodigo(3).Text), txtCodigo(4).Text)
                
-                Rs.MoveNext
+                RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
             
 ' de momento comentado para hacer pruebas
         If b Then
@@ -938,14 +973,14 @@ End Function
 
 Private Function ActualizarCobros(cadWhere As String, cadErr As String) As Boolean
 'Poner el movimiento como contabilizada
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EActualizar
     
-    Sql = "UPDATE rrecibpozos SET contabilizado=1 "
-    Sql = Sql & " WHERE " & cadWhere
+    SQL = "UPDATE rrecibpozos SET contabilizado=1 "
+    SQL = SQL & " WHERE " & cadWhere
 
-    conn.Execute Sql
+    conn.Execute SQL
     
 EActualizar:
     If Err.Number <> 0 Then
@@ -983,16 +1018,16 @@ End Sub
 
 Private Sub ContabilizarFacturas(cadTabla As String, cadWhere As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
+Dim SQL As String
 Dim b As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
 
-    Sql = "CONTES" 'contabilizar recibos de pozos
+    SQL = "CONTES" 'contabilizar recibos de pozos
 
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Contabilizar Recibos de Pozos. Hay otro usuario contabilizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -1018,38 +1053,39 @@ Dim CCoste As String
     'comprobar si existen en Ariagrorec facturas anteriores al periodo solicitado
     'sin contabilizar
     If Me.txtCodigo(0).Text <> "" Then 'anteriores a fechadesde
-        Sql = "SELECT COUNT(*) FROM " & cadTabla
-        Sql = Sql & " WHERE fecfactu <"
-        Sql = Sql & DBSet(txtCodigo(0), "F") & " AND contabilizado=0 "
-        Select Case Combo1(0).ListIndex
-            Case 0
-                Sql = Sql & " and codtipom = 'RCP'"
-            Case 1
-                Sql = Sql & " and codtipom = 'RMP'"
-            Case 2
-                Sql = Sql & " and codtipom = 'RVP'"
-            Case 3
-                Sql = Sql & " and codtipom = 'TAL'"
-            Case 4
-                Sql = Sql & " and codtipom = 'RMT'"
+        SQL = "SELECT COUNT(*) FROM " & cadTabla
+        SQL = SQL & " WHERE fecfactu <"
+        SQL = SQL & DBSet(txtCodigo(0), "F") & " AND contabilizado=0 "
+        '[Monica]21/01/2016: el combo es de las pendientes de contabilizar
+        Select Case Mid(Combo1(0).Text, 1, 3) 'Combo1(0).ListIndex
+            Case "RCP" '0
+                SQL = SQL & " and codtipom = 'RCP'"
+            Case "RMP" '1
+                SQL = SQL & " and codtipom = 'RMP'"
+            Case "RVP" '2
+                SQL = SQL & " and codtipom = 'RVP'"
+            Case "TAL" '3
+                SQL = SQL & " and codtipom = 'TAL'"
+            Case "RMT" '4
+                SQL = SQL & " and codtipom = 'RMT'"
         
             '[Monica]14/01/2016: la rectificativas
-            Case 5
-                Sql = Sql & " and codtipom = 'RRC'"
-            Case 6
-                Sql = Sql & " and codtipom = 'RRM'"
-            Case 7
-                Sql = Sql & " and codtipom = 'RRV'"
-            Case 8
-                Sql = Sql & " and codtipom = 'RTA'"
-'            Case 9
+            Case "RRC" '5
+                SQL = SQL & " and codtipom = 'RRC'"
+            Case "RRM" '6
+                SQL = SQL & " and codtipom = 'RRM'"
+            Case "RRV" '7
+                SQL = SQL & " and codtipom = 'RRV'"
+            Case "RTA" '8
+                SQL = SQL & " and codtipom = 'RTA'"
+'            Case "RRT" '9
 '                SQL = SQL & " and codtipom = 'RRT' "
         
         
         
         End Select
             
-        If RegistrosAListar(Sql) > 0 Then
+        If RegistrosAListar(SQL) > 0 Then
             MsgBox "Hay Facturas anteriores sin contabilizar.", vbExclamation
             Exit Sub
         End If
@@ -1079,11 +1115,11 @@ Dim CCoste As String
 
     'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
 '    TerminaBloquear
-    Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
-    Sql = Sql & ".codtipom=tmpFactu.codtipom AND "
-    Sql = Sql & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+    SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
+    SQL = SQL & ".codtipom=tmpFactu.codtipom AND "
+    SQL = SQL & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
 
-    If Not BloqueaRegistro(Sql, cadWhere) Then
+    If Not BloqueaRegistro(SQL, cadWhere) Then
         MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -1120,8 +1156,8 @@ Dim CCoste As String
     '-----------------------------------------------------------------------
     If cadTabla = "rrecibpozos" Then
         Me.lblProgres(1).Caption = "Comprobando Nº Facturas en contabilidad ..."
-        Sql = "anofaccl>=" & Year(txtCodigo(0).Text) & " AND anofaccl<= " & Year(txtCodigo(1).Text)
-        b = ComprobarNumFacturas_new(cadTabla, Sql)
+        SQL = "anofaccl>=" & Year(txtCodigo(0).Text) & " AND anofaccl<= " & Year(txtCodigo(1).Text)
+        b = ComprobarNumFacturas_new(cadTabla, SQL)
     End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
@@ -1154,9 +1190,21 @@ Dim CCoste As String
     Me.Refresh
     If Not b Then Exit Sub
 
+    '[Monica]21/01/2016: comprobamos la cuenta de recargo (escalona)
+    If vParamAplic.Cooperativa = 10 Then
+        Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble Recargos en contabilidad ..."
+        b = ComprobarCtaContable_new(cadTabla, 2, 6)
+        IncrementarProgres Me.Pb1, 10
+        Me.Refresh
+        If Not b Then Exit Sub
+    End If
+
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
         '[Monica]27/06/2013: añadimos la contabilizacion de las facturas de contador para Utxera y Escalona
-        If Combo1(0).ListIndex = 1 Or Combo1(0).ListIndex = 2 Or Combo1(0).ListIndex = 6 Or Combo1(0).ListIndex = 7 Then ' mantenimiento
+        
+        '[Monica]21/01/2016: cambiamos el combo por los que quedan por facturar
+        'If Combo1(0).ListIndex = 1 Or Combo1(0).ListIndex = 2 Or Combo1(0).ListIndex = 6 Or Combo1(0).ListIndex = 7 Then ' mantenimiento
+        If Mid(Combo1(0).Text, 1, 3) = "RMP" Or Mid(Combo1(0).Text, 1, 3) = "RVP" Or Mid(Combo1(0).Text, 1, 3) = "RRM" Or Mid(Combo1(0).Text, 1, 3) = "RMV" Then
             Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble Venta Mantenimiento en contabilidad ..."
             b = ComprobarCtaContable_new(cadTabla, 2, 4)
             IncrementarProgres Me.Pb1, 10
@@ -1164,7 +1212,9 @@ Dim CCoste As String
             If Not b Then Exit Sub
         End If
         
-        If Combo1(0).ListIndex = 3 Or Combo1(0).ListIndex = 8 Then ' talla
+        '[Monica]21/01/2016: cambiamos el combo por los que quedan por facturar
+        'If Combo1(0).ListIndex = 3 Or Combo1(0).ListIndex = 8 Then ' talla
+        If Mid(Combo1(0).Text, 1, 3) = "TAL" Or Mid(Combo1(0).Text, 1, 3) = "RTA" Then
             Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble Venta Talla en contabilidad ..."
             b = ComprobarCtaContable_new(cadTabla, 2, 3)
             IncrementarProgres Me.Pb1, 10
@@ -1172,7 +1222,9 @@ Dim CCoste As String
             If Not b Then Exit Sub
         End If
         
-        If Combo1(0).ListIndex = 4 Or Combo1(0).ListIndex = 9 Then  ' recibo consumo a manta
+        '[Monica]21/01/2016: cambiamos el combo por los que quedan por facturar
+        'If Combo1(0).ListIndex = 4 Or Combo1(0).ListIndex = 9 Then  ' recibo consumo a manta
+        If Mid(Combo1(0).Text, 1, 3) = "RMT" Or Mid(Combo1(0).Text, 1, 3) = "RRT" Then
             Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble Venta Manta en contabilidad ..."
             b = ComprobarCtaContable_new(cadTabla, 2, 5)
             IncrementarProgres Me.Pb1, 10
@@ -1282,8 +1334,8 @@ Dim CCoste As String
 End Sub
 
 Private Function PasarFacturasAContab(cadTabla As String) As Boolean
-Dim Sql As String
-Dim Rs As ADODB.Recordset
+Dim SQL As String
+Dim RS As ADODB.Recordset
 Dim b As Boolean
 Dim I As Integer
 Dim numfactu As Integer
@@ -1301,41 +1353,41 @@ Dim CCoste As String
     PasarFacturasAContab = False
 
     '---- Obtener el total de Facturas a Insertar en la contabilidad
-    Sql = "SELECT count(distinct tmpfactu.codtipom, tmpfactu.numfactu, tmpfactu.fecfactu) "
-    Sql = Sql & " FROM " & cadTabla & " INNER JOIN tmpFactu "
+    SQL = "SELECT count(distinct tmpfactu.codtipom, tmpfactu.numfactu, tmpfactu.fecfactu) "
+    SQL = SQL & " FROM " & cadTabla & " INNER JOIN tmpFactu "
     
     Codigo1 = "codtipom"
-    Sql = Sql & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
-    Sql = Sql & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+    SQL = SQL & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
+    SQL = SQL & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
 
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        numfactu = Rs.Fields(0)
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not RS.EOF Then
+        numfactu = RS.Fields(0)
     Else
         numfactu = 0
     End If
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
 
 
     'Modificacion como David
     '-----------------------------------------------------------
     ' Mosrtaremos para cada factura de PROVEEDOR
     ' que numregis le ha asignado
-    Sql = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
     If numfactu > 0 Then
         CargarProgres Me.Pb1, numfactu
 
         'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
-        Sql = "SELECT distinct codtipom, numfactu, fecfactu  "
-        Sql = Sql & " FROM tmpFactu "
+        SQL = "SELECT distinct codtipom, numfactu, fecfactu  "
+        SQL = SQL & " FROM tmpFactu "
 
-        Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenStatic, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
         I = 1
 
         b = True
@@ -1344,17 +1396,17 @@ Dim CCoste As String
         CCoste = ""
         
         'pasar a contabilidad cada una de las facturas seleccionadas
-        While Not Rs.EOF
-            Sql = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "T") & " and numfactu=" & Rs!numfactu
-            Sql = Sql & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
-            If PasarFacturaPOZOS(Sql, CCoste, txtCodigo(4).Text, txtCodigo(2).Text, Rs.Fields(0), Rs!fecfactu, txtCodigo(5).Text, txtCodigo(3).Text) = False And b Then b = False
+        While Not RS.EOF
+            SQL = cadTabla & "." & Codigo1 & "=" & DBSet(RS.Fields(0), "T") & " and numfactu=" & RS!numfactu
+            SQL = SQL & " and fecfactu=" & DBSet(RS!fecfactu, "F")
+            If PasarFacturaPOZOS(SQL, CCoste, txtCodigo(4).Text, txtCodigo(2).Text, RS.Fields(0), RS!fecfactu, txtCodigo(5).Text, txtCodigo(3).Text) = False And b Then b = False
 
             '---- Laura 26/10/2006
             'Al pasar cada factura al hacer el commit desbloqueamos los registros
             'que teniamos bloqueados y los volvemos a bloquear
             'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
-            Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
-            If Not BloqueaRegistro(Sql, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
+            SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+            If Not BloqueaRegistro(SQL, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
 '                MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
 '                Screen.MousePointer = vbDefault
 '                Exit Sub
@@ -1365,11 +1417,11 @@ Dim CCoste As String
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
             I = I + 1
-            Rs.MoveNext
+            RS.MoveNext
         Wend
 
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
     End If
 
 EPasarFac:
@@ -1386,8 +1438,8 @@ Private Function ComprobarFechasConta(ind As Integer) As Boolean
 'comprobar que el periodo de fechas a contabilizar esta dentro del
 'periodo de fechas del ejercicio de la contabilidad
 Dim FechaIni As String, FechaFin As String
-Dim cad As String
-Dim Rs As ADODB.Recordset
+Dim Cad As String
+Dim RS As ADODB.Recordset
     
 Dim vSeccion As CSeccion
     
@@ -1398,28 +1450,28 @@ On Error GoTo EComprobar
     
     If txtCodigo(ind).Text <> "" Then
         FechaIni = "Select fechaini,fechafin From parametros"
-        Set Rs = New ADODB.Recordset
-        Rs.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        If Not Rs.EOF Then
-            FechaIni = DBLet(Rs!FechaIni, "F")
-            FechaFin = DateAdd("yyyy", 1, DBLet(Rs!FechaFin, "F"))
+        If Not RS.EOF Then
+            FechaIni = DBLet(RS!FechaIni, "F")
+            FechaFin = DateAdd("yyyy", 1, DBLet(RS!FechaFin, "F"))
             'nos guardamos los valores
             Orden1 = FechaIni
             Orden2 = FechaFin
         
             If Not EntreFechas(FechaIni, txtCodigo(ind).Text, FechaFin) Then
-                 cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
-                 cad = cad & "    Desde: " & FechaIni & vbCrLf
-                 cad = cad & "    Hasta: " & FechaFin
-                 MsgBox cad, vbExclamation
+                 Cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
+                 Cad = Cad & "    Desde: " & FechaIni & vbCrLf
+                 Cad = Cad & "    Hasta: " & FechaFin
+                 MsgBox Cad, vbExclamation
                  txtCodigo(ind).Text = ""
             Else
                 ComprobarFechasConta = True
             End If
         End If
-        Rs.Close
-        Set Rs = Nothing
+        RS.Close
+        Set RS = Nothing
     Else
         ComprobarFechasConta = True
     End If
@@ -1448,42 +1500,79 @@ End Sub
 
 
 Private Sub CargaCombo()
-Dim Rs As ADODB.Recordset
-Dim Sql As String
-Dim I As Byte
+Dim RS As ADODB.Recordset
+Dim SQL As String
+Dim I As Integer
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
     For I = 0 To Combo1.Count - 1
         Combo1(I).Clear
     Next I
     
-    'tipo de fichero
-    Combo1(0).AddItem "RCP-Consumo"
-    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
-    Combo1(0).AddItem "RMP-Mantenimiento"
-    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
-    Combo1(0).AddItem "RVP-Contadores"
-    Combo1(0).ItemData(Combo1(0).NewIndex) = 2
-    If vParamAplic.Cooperativa = 10 Then
-        Combo1(0).AddItem "TAL-Talla"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 3
-        Combo1(0).AddItem "RMT-Consumo Manta"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 4
-        
-        '[Monica]14/01/2016: las rectificativas
-        Combo1(0).AddItem "RRC-Rect.Consumo"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 5
-        Combo1(0).AddItem "RRM-Rect.Mantenimiento"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 6
-        Combo1(0).AddItem "RRV-Rect.Contadores"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 7
-        Combo1(0).AddItem "RTA-Rect.Talla"
-        Combo1(0).ItemData(Combo1(0).NewIndex) = 8
-'        Combo1(0).AddItem "RRT-Rect.Consumo Manta"
-'        Combo1(0).ItemData(Combo1(0).NewIndex) = 9
+'    'tipo de fichero
+'    Combo1(0).AddItem "RCP-Consumo"
+'    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
+'    Combo1(0).AddItem "RMP-Mantenimiento"
+'    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
+'    Combo1(0).AddItem "RVP-Contadores"
+'    Combo1(0).ItemData(Combo1(0).NewIndex) = 2
+'    If vParamAplic.Cooperativa = 10 Then
+'        Combo1(0).AddItem "TAL-Talla"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 3
+'        Combo1(0).AddItem "RMT-Consumo Manta"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 4
+'
+'        '[Monica]14/01/2016: las rectificativas
+'        Combo1(0).AddItem "RRC-Rect.Consumo"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 5
+'        Combo1(0).AddItem "RRM-Rect.Mantenimiento"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 6
+'        Combo1(0).AddItem "RRV-Rect.Contadores"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 7
+'        Combo1(0).AddItem "RTA-Rect.Talla"
+'        Combo1(0).ItemData(Combo1(0).NewIndex) = 8
+''        Combo1(0).AddItem "RRT-Rect.Consumo Manta"
+''        Combo1(0).ItemData(Combo1(0).NewIndex) = 9
+'
+'    End If
     
-    End If
+    '[Monica]21/01/2016: cargamos los tipos de movimiento de aquellos que hayan facturas pendientes de integrar
     
+    SQL = "select codtipom from rrecibpozos where contabilizado = 0 group by 1 order by 1 "
+    
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    I = -1
+    While Not RS.EOF
+        I = I + 1
+        Select Case DBLet(RS.Fields(0).Value, "N")
+            Case "RCP"
+                Combo1(0).AddItem "RCP-Consumo"
+            Case "RMP"
+                Combo1(0).AddItem "RMP-Mantenimiento"
+            Case "RVP"
+                Combo1(0).AddItem "RVP-Contadores"
+            Case "TAL"
+                Combo1(0).AddItem "TAL-Talla"
+            Case "RMT"
+                Combo1(0).AddItem "RMT-Consumo Manta"
+            Case "RRC"
+                Combo1(0).AddItem "RRC-Rect.Consumo"
+            Case "RRM"
+                Combo1(0).AddItem "RRM-Rect.Mantenimiento"
+            Case "RRV"
+                Combo1(0).AddItem "RRV-Rect.Contadores"
+            Case "RTA"
+                Combo1(0).AddItem "RTA-Rect.Talla"
+            Case "RRT"
+                Combo1(0).AddItem "RRT-Rect.Consumo Manta"
+        End Select
+        Combo1(0).ItemData(Combo1(0).NewIndex) = I
+    
+        RS.MoveNext
+    Wend
+    Set RS = Nothing
     
 End Sub
 

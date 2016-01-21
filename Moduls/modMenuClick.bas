@@ -936,7 +936,15 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
         '[Monica]11/01/2016: facturas de recargo solo para escalona
         Case 22: frmPOZFraRecargo.Show vbModal
         
-        Case 24: frmPOZIntTesor.Show vbModal ' Integracion contable
+        Case 24:
+        
+                Load frmPOZIntTesor
+                If frmPOZIntTesor.Combo1(0).ListCount = 0 Then
+                    Unload frmPOZIntTesor
+                Else
+                    frmPOZIntTesor.Show vbModal ' Integracion contable
+                End If
+                
         Case 25: ' Integracion aridoc
                 frmImpAridoc.Tipo = 6 ' Integracion de aridoc: Facturas de socio de pozos
                 frmImpAridoc.Caption = "Exportar Facturas Socio a Aridoc"

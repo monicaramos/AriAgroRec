@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCalidades 
@@ -8,15 +8,26 @@ Begin VB.Form frmManCalidades
    ClientHeight    =   5925
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   14880
+   ClientWidth     =   15180
    Icon            =   "frmManCalidades.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5925
-   ScaleWidth      =   14880
+   ScaleWidth      =   15180
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkAux 
+      BackColor       =   &H80000005&
+      Height          =   255
+      Index           =   1
+      Left            =   12150
+      TabIndex        =   11
+      Tag             =   "Se aplica bonificaciones|N|N|0|1|rcalidad|seaplicabonif|||"
+      Top             =   4980
+      Visible         =   0   'False
+      Width           =   255
+   End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
@@ -127,7 +138,7 @@ Begin VB.Form frmManCalidades
       Height          =   285
       Index           =   2
       Left            =   1170
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   4950
       Visible         =   0   'False
       Width           =   1815
@@ -139,7 +150,7 @@ Begin VB.Form frmManCalidades
       Index           =   0
       Left            =   900
       MaskColor       =   &H00000000&
-      TabIndex        =   19
+      TabIndex        =   20
       ToolTipText     =   "Buscar Variedad"
       Top             =   4950
       Visible         =   0   'False
@@ -161,8 +172,8 @@ Begin VB.Form frmManCalidades
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   12435
-      TabIndex        =   11
+      Left            =   12825
+      TabIndex        =   12
       Top             =   5265
       Visible         =   0   'False
       Width           =   1035
@@ -171,8 +182,8 @@ Begin VB.Form frmManCalidades
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   13590
-      TabIndex        =   12
+      Left            =   13980
+      TabIndex        =   13
       Top             =   5265
       Visible         =   0   'False
       Width           =   1095
@@ -208,10 +219,10 @@ Begin VB.Form frmManCalidades
       Bindings        =   "frmManCalidades.frx":0014
       Height          =   4410
       Left            =   135
-      TabIndex        =   15
+      TabIndex        =   16
       Top             =   540
-      Width           =   14565
-      _ExtentX        =   25691
+      Width           =   14925
+      _ExtentX        =   26326
       _ExtentY        =   7779
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -277,8 +288,8 @@ Begin VB.Form frmManCalidades
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   13575
-      TabIndex        =   18
+      Left            =   13965
+      TabIndex        =   19
       Top             =   5265
       Visible         =   0   'False
       Width           =   1095
@@ -287,7 +298,7 @@ Begin VB.Form frmManCalidades
       Height          =   555
       Index           =   1
       Left            =   120
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   5190
       Width           =   2385
       Begin VB.Label lblIndicador 
@@ -304,7 +315,7 @@ Begin VB.Form frmManCalidades
          EndProperty
          Height          =   255
          Left            =   40
-         TabIndex        =   14
+         TabIndex        =   15
          Top             =   240
          Width           =   2295
       End
@@ -360,10 +371,10 @@ Begin VB.Form frmManCalidades
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   0
-      Width           =   14880
-      _ExtentX        =   26247
+      Width           =   15180
+      _ExtentX        =   26776
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -422,7 +433,7 @@ Begin VB.Form frmManCalidades
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   5040
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   90
          Visible         =   0   'False
          Width           =   1215
@@ -542,7 +553,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
@@ -557,9 +568,9 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not b
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not b
+    Next I
     
     txtAux2(2).visible = Not b
     btnBuscar(0).visible = Not b
@@ -638,9 +649,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -663,9 +674,9 @@ Private Sub BotonBuscar()
     CargaGrid "rcalidad.codvarie = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -676,13 +687,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -701,13 +712,13 @@ Private Sub BotonModificar()
     txtAux(4).Text = DataGrid1.Columns(9).Text
     txtAux(5).Text = DataGrid1.Columns(10).Text
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = adodc1.Recordset!tipcalid
+    I = adodc1.Recordset!tipcalid
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), i
+    PosicionarCombo Me.Combo1(0), I
     
-    i = adodc1.Recordset!tipcalid1
+    I = adodc1.Recordset!tipcalid1
     ' *****************************************************
-    PosicionarCombo Me.Combo1(1), i
+    PosicionarCombo Me.Combo1(1), I
     
     Me.chkAux(0).Value = Me.adodc1.Recordset!gastosrec
     
@@ -728,9 +739,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -830,7 +841,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim I As Integer
     Dim Cad As String
 
     Select Case Modo
@@ -893,7 +904,7 @@ Dim Cad As String, Indicador As String
 End Sub
 
 Private Sub LimpiarCampos()
-Dim i As Integer
+Dim I As Integer
 
     On Error Resume Next
     
@@ -901,9 +912,9 @@ Dim i As Integer
     lblIndicador.Caption = ""
     Me.chkAux(0).Value = 0
     
-    For i = 0 To Combo1.Count - 1
-        Combo1(i).ListIndex = -1
-    Next i
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).ListIndex = -1
+    Next I
     
     ' *** si n'hi han combos a la capçalera ***
     ' *****************************************
@@ -942,7 +953,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim Cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -951,16 +962,16 @@ Dim Aux As String
         Exit Sub
     End If
     Cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -1028,7 +1039,9 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & "rcalidad.tipcalid1, "
     CadenaConsulta = CadenaConsulta & " CASE rcalidad.tipcalid1 WHEN 0 THEN ""Comercial"" WHEN 1 THEN ""No Comercial"" WHEN 2 THEN ""Retirada"" END, "
     CadenaConsulta = CadenaConsulta & " nomcalibrador1, nomcalibrador2, gastosrec, IF(gastosrec=1,'*','') as dgastorec, "
-    CadenaConsulta = CadenaConsulta & " rcalidad.eurrecsoc, rcalidad.eurreccoop "
+    CadenaConsulta = CadenaConsulta & " rcalidad.eurrecsoc, rcalidad.eurreccoop, "
+    '[Monica]21/01/2016: se aplica bonificaciones para anticipos y liquidaciones (PICASSENT)
+    CadenaConsulta = CadenaConsulta & " seaplicabonif, IF(seaplicabonif=1,'*','') as dseaplicabonif"
     CadenaConsulta = CadenaConsulta & " FROM variedades, rcalidad"
     CadenaConsulta = CadenaConsulta & " WHERE variedades.codvarie = rcalidad.codvarie "
     '************************************************************************
@@ -1146,6 +1159,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     tots = tots & "S|txtAux(3)|T|Abrev|700|;N||||0|;S|Combo1(0)|C|Tipo|1220|;N||||0|;S|Combo1(1)|C|Tipo|1220|;"
     tots = tots & "S|txtAux(4)|T|Calibrador 1|1500|;S|txtAux(5)|T|Calibrador 2|1500|;N||||0|;S|chkAux(0)|CB|GR|360|;"
     tots = tots & "S|txtAux(6)|T|Eu.R.Soc|900|;S|txtAux(7)|T|Eu.R.Coop|900|;"
+    '[Monica]21/01/2016:
+    tots = tots & "N||||0|;S|chkAux(0)|CB|Bon|360|;"
     
     arregla tots, DataGrid1, Me
     
