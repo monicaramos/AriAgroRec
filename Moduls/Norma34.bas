@@ -17,7 +17,7 @@ Public Sub CopiarFicheroNorma43(Destino As String)
 End Sub
 
 Private Function CopiarEnDisquette(A_disquetera As Boolean, Intentos As Byte) As Boolean
-Dim i As Integer
+Dim I As Integer
 Dim Cad As String
 
 On Error Resume Next
@@ -25,8 +25,8 @@ On Error Resume Next
     CopiarEnDisquette = False
     
     If A_disquetera Then
-        For i = 1 To Intentos
-            Cad = "Introduzca un disco vacio. (" & i & ")"
+        For I = 1 To Intentos
+            Cad = "Introduzca un disco vacio. (" & I & ")"
             MsgBox Cad, vbInformation
             FileCopy App.Path & "\norma34.txt", "a:\norma34.txt"
             If Err.Number <> 0 Then
@@ -35,7 +35,7 @@ On Error Resume Next
                 CopiarEnDisquette = True
                 Exit For
             End If
-        Next i
+        Next I
     Else
         If AuxD = "" Then
             Cad = Format(Now, "ddmmyyhhnn")
@@ -763,8 +763,8 @@ EGen2:
 End Function
 
 
-Public Function FrmtStr(campo As String, longitud As Integer) As String
-    FrmtStr = Mid(Trim(campo) & Space(longitud), 1, longitud)
+Public Function FrmtStr(Campo As String, longitud As Integer) As String
+    FrmtStr = Mid(Trim(Campo) & Space(longitud), 1, longitud)
 End Function
 
 
@@ -941,7 +941,7 @@ Dim EsPersonaJuridica2 As Boolean
     Aux = "0|0|"
     miRsAux.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
-        If Not IsNull(miRsAux.Fields(1)) Then Aux = miRsAux.Fields(0) & "|" & miRsAux.Fields(1) & "|"
+        If Not IsNull(miRsAux.Fields(1)) Then Aux = miRsAux.Fields(0) & "|" & Format(miRsAux.Fields(1), "#.00") & "|"
     End If
     miRsAux.Close
 
@@ -1229,7 +1229,7 @@ End Function
 
 
 Private Function XML(Cadena As String) As String
-Dim i As Integer
+Dim I As Integer
 Dim Aux As String
 Dim Le As String
 Dim C As Integer
@@ -1247,8 +1247,8 @@ Dim C As Integer
     '/ - ? : ( ) . , ' +
     'Espacio
     Aux = ""
-    For i = 1 To Len(Cadena)
-        Le = Mid(Cadena, i, 1)
+    For I = 1 To Len(Cadena)
+        Le = Mid(Cadena, I, 1)
         C = Asc(Le)
 
 

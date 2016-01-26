@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -386,6 +386,7 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
+      Tab             =   5
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -400,53 +401,30 @@ Begin VB.Form frmManCampos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(26)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label28"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label29"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label6(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label5"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(2)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "imgBuscar(3)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label2"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "imgBuscar(13)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label36"
-      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Text5(0)"
+      Tab(0).Control(1)=   "Combo1(0)"
+      Tab(0).Control(2)=   "Text2(3)"
+      Tab(0).Control(3)=   "Text2(2)"
+      Tab(0).Control(4)=   "Text1(2)"
+      Tab(0).Control(5)=   "Text1(3)"
+      Tab(0).Control(6)=   "Text1(21)"
+      Tab(0).Control(7)=   "Text1(37)"
+      Tab(0).Control(8)=   "Text4(3)"
+      Tab(0).Control(9)=   "Text5(3)"
+      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text5(3)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text4(3)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text1(37)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(21)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Text1(3)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Text1(2)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(2)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text2(3)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Combo1(0)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text5(0)"
-      Tab(0).Control(22).Enabled=   0   'False
+      Tab(0).Control(12)=   "Label36"
+      Tab(0).Control(13)=   "imgBuscar(13)"
+      Tab(0).Control(14)=   "Label2"
+      Tab(0).Control(15)=   "imgBuscar(3)"
+      Tab(0).Control(16)=   "imgBuscar(2)"
+      Tab(0).Control(17)=   "Label5"
+      Tab(0).Control(18)=   "Label6(0)"
+      Tab(0).Control(19)=   "Label29"
+      Tab(0).Control(20)=   "imgZoom(0)"
+      Tab(0).Control(21)=   "Label28"
+      Tab(0).Control(22)=   "Label1(26)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
@@ -475,8 +453,9 @@ Begin VB.Form frmManCampos
       Tab(4).ControlCount=   1
       TabCaption(5)   =   "Agroseguro"
       TabPicture(5)   =   "frmManCampos.frx":0098
-      Tab(5).ControlEnabled=   0   'False
+      Tab(5).ControlEnabled=   -1  'True
       Tab(5).Control(0)=   "FrameAux3"
+      Tab(5).Control(0).Enabled=   0   'False
       Tab(5).ControlCount=   1
       TabCaption(6)   =   "Histórico"
       TabPicture(6)   =   "frmManCampos.frx":00B4
@@ -503,7 +482,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3910
          Left            =   -74820
-         TabIndex        =   243
+         TabIndex        =   244
          Top             =   450
          Width           =   12450
          Begin VB.TextBox txtAux9 
@@ -511,7 +490,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   4
             Left            =   5700
-            TabIndex        =   249
+            TabIndex        =   250
             Tag             =   "Observaciones|T|S|||rcampos_revision|observac|||"
             Text            =   "Observac"
             Top             =   2910
@@ -525,7 +504,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1710
             MaxLength       =   10
-            TabIndex        =   247
+            TabIndex        =   248
             Tag             =   "Fecha|F|N|||rcampos_revision|fecha|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2910
@@ -538,7 +517,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   2850
             MaxLength       =   50
-            TabIndex        =   248
+            TabIndex        =   249
             Tag             =   "Tecnico|T|S|||rcampos_revision|tecnico|||"
             Text            =   "tecnico"
             Top             =   2910
@@ -552,7 +531,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   246
+            TabIndex        =   247
             Tag             =   "Linea|N|N|||rcampos_revision|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -566,7 +545,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   245
+            TabIndex        =   246
             Tag             =   "Campo|N|N|0|99999999|rcampos_revision|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -579,7 +558,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   12
             Left            =   2520
-            TabIndex        =   244
+            TabIndex        =   245
             ToolTipText     =   "Buscar fecha"
             Top             =   2880
             Visible         =   0   'False
@@ -589,7 +568,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   7
             Left            =   45
-            TabIndex        =   250
+            TabIndex        =   251
             Top             =   0
             Width           =   1590
             _ExtentX        =   2805
@@ -670,7 +649,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   7
             Left            =   45
-            TabIndex        =   251
+            TabIndex        =   252
             Top             =   450
             Width           =   12300
             _ExtentX        =   21696
@@ -759,7 +738,7 @@ Begin VB.Form frmManCampos
          ForeColor       =   &H00972E0B&
          Height          =   675
          Left            =   -74850
-         TabIndex        =   218
+         TabIndex        =   219
          Top             =   3930
          Width           =   6915
          Begin VB.TextBox Text1 
@@ -795,7 +774,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Alta Programa Operativo"
             Height          =   255
             Left            =   2640
-            TabIndex        =   242
+            TabIndex        =   243
             Top             =   270
             Width           =   2235
          End
@@ -803,7 +782,7 @@ Begin VB.Form frmManCampos
             Caption         =   "% Comisión"
             Height          =   255
             Left            =   210
-            TabIndex        =   219
+            TabIndex        =   220
             Top             =   270
             Width           =   1155
          End
@@ -812,7 +791,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3910
          Left            =   -74820
-         TabIndex        =   206
+         TabIndex        =   207
          Top             =   450
          Width           =   12210
          Begin VB.CheckBox chkAux 
@@ -820,7 +799,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   1
             Left            =   7830
-            TabIndex        =   217
+            TabIndex        =   218
             Tag             =   "Contabilizado|N|N|0|1|rcampos_gastos|contabilizado|||"
             Top             =   2970
             Visible         =   0   'False
@@ -832,7 +811,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   10
             Left            =   6750
-            TabIndex        =   214
+            TabIndex        =   215
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -845,7 +824,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   212
+            TabIndex        =   213
             Tag             =   "Campo|N|N|0|99999999|rcampos_gastos|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -859,7 +838,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   210
+            TabIndex        =   211
             Tag             =   "Linea|N|N|||rcampos_gastos|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -872,7 +851,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   2
-            TabIndex        =   209
+            TabIndex        =   210
             Tag             =   "Concepto|N|S|||rcampos_gastos|codgasto|00||"
             Text            =   "Co"
             Top             =   2940
@@ -886,7 +865,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   6000
             MaxLength       =   10
-            TabIndex        =   211
+            TabIndex        =   212
             Tag             =   "Fecha|F|N|||rcampos_gastos|fecha|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2970
@@ -900,7 +879,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   6960
             MaxLength       =   10
-            TabIndex        =   213
+            TabIndex        =   214
             Tag             =   "Importe|N|N|||rcampos_gastos|importe|###,###,##0.00||"
             Text            =   "Importe"
             Top             =   2970
@@ -913,7 +892,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   9
             Left            =   2460
-            TabIndex        =   208
+            TabIndex        =   209
             ToolTipText     =   "Buscar concepto gasto"
             Top             =   2910
             Visible         =   0   'False
@@ -928,7 +907,7 @@ Begin VB.Form frmManCampos
             Left            =   2700
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   207
+            TabIndex        =   208
             Text            =   "Nombre concepto"
             Top             =   2940
             Visible         =   0   'False
@@ -938,7 +917,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   5
             Left            =   45
-            TabIndex        =   215
+            TabIndex        =   216
             Top             =   0
             Width           =   1710
             _ExtentX        =   3016
@@ -1020,7 +999,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   5
             Left            =   45
-            TabIndex        =   216
+            TabIndex        =   217
             Top             =   450
             Width           =   9120
             _ExtentX        =   16087
@@ -1101,7 +1080,7 @@ Begin VB.Form frmManCampos
          ForeColor       =   &H00972E0B&
          Height          =   675
          Left            =   -67740
-         TabIndex        =   202
+         TabIndex        =   203
          Top             =   3960
          Width           =   5265
          Begin VB.TextBox Text1 
@@ -1109,7 +1088,7 @@ Begin VB.Form frmManCampos
             Index           =   39
             Left            =   1170
             MaxLength       =   4
-            TabIndex        =   204
+            TabIndex        =   205
             Tag             =   "Codigo Cliente|N|S|||rcampos|codclien|||"
             Top             =   240
             Width           =   675
@@ -1120,7 +1099,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   39
             Left            =   1890
-            TabIndex        =   203
+            TabIndex        =   204
             Top             =   240
             Width           =   3180
          End
@@ -1128,7 +1107,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Código"
             Height          =   255
             Left            =   330
-            TabIndex        =   205
+            TabIndex        =   206
             Top             =   270
             Width           =   525
          End
@@ -1155,7 +1134,7 @@ Begin VB.Form frmManCampos
          ForeColor       =   &H00972E0B&
          Height          =   675
          Left            =   -67740
-         TabIndex        =   199
+         TabIndex        =   200
          Top             =   3240
          Width           =   5265
          Begin VB.TextBox Text2 
@@ -1164,7 +1143,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   38
             Left            =   1890
-            TabIndex        =   201
+            TabIndex        =   202
             Top             =   240
             Width           =   3180
          End
@@ -1190,7 +1169,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Código"
             Height          =   255
             Left            =   330
-            TabIndex        =   200
+            TabIndex        =   201
             Top             =   270
             Width           =   555
          End
@@ -1199,7 +1178,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3930
          Left            =   -74820
-         TabIndex        =   183
+         TabIndex        =   184
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtAux2 
@@ -1211,7 +1190,7 @@ Begin VB.Form frmManCampos
             Left            =   2700
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   197
+            TabIndex        =   198
             Text            =   "Nombre socio"
             Top             =   2940
             Visible         =   0   'False
@@ -1223,7 +1202,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   8
             Left            =   2460
-            TabIndex        =   196
+            TabIndex        =   197
             ToolTipText     =   "Buscar socio"
             Top             =   2910
             Visible         =   0   'False
@@ -1236,7 +1215,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   6960
             MaxLength       =   10
-            TabIndex        =   192
+            TabIndex        =   193
             Tag             =   "Fecha Baja|F|S|||rcampos_hco|fechabaja|dd/mm/yyyy||"
             Text            =   "Fec.Baja"
             Top             =   2940
@@ -1250,7 +1229,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   6000
             MaxLength       =   10
-            TabIndex        =   191
+            TabIndex        =   192
             Tag             =   "Fecha Alta|F|N|||rcampos_hco|fechaalta|dd/mm/yyyy||"
             Text            =   "Fec.Alta"
             Top             =   2940
@@ -1264,7 +1243,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   7
-            TabIndex        =   190
+            TabIndex        =   191
             Tag             =   "Socio|N|S|||rcampos_hco|codsocio|000000||"
             Text            =   "Socio"
             Top             =   2940
@@ -1278,7 +1257,7 @@ Begin VB.Form frmManCampos
             Index           =   5
             Left            =   7980
             MaxLength       =   4
-            TabIndex        =   193
+            TabIndex        =   194
             Tag             =   "Incidencia|N|S|||rcampos_hco|codincid|0000||"
             Text            =   "In"
             Top             =   2940
@@ -1292,7 +1271,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   189
+            TabIndex        =   190
             Tag             =   "Linea|N|N|||rcampos_hco|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -1306,7 +1285,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   188
+            TabIndex        =   189
             Tag             =   "Campo|N|N|0|99999999|rcampos_hco|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -1322,7 +1301,7 @@ Begin VB.Form frmManCampos
             Left            =   8820
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   187
+            TabIndex        =   188
             Text            =   "Nombre incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1334,7 +1313,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   7
             Left            =   8580
-            TabIndex        =   186
+            TabIndex        =   187
             ToolTipText     =   "Buscar incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1346,7 +1325,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   6
             Left            =   6750
-            TabIndex        =   185
+            TabIndex        =   186
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1358,7 +1337,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   5
             Left            =   7740
-            TabIndex        =   184
+            TabIndex        =   185
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1368,7 +1347,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   4
             Left            =   45
-            TabIndex        =   194
+            TabIndex        =   195
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -1446,7 +1425,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   4
             Left            =   45
-            TabIndex        =   195
+            TabIndex        =   196
             Top             =   450
             Width           =   10710
             _ExtentX        =   18891
@@ -1518,26 +1497,40 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   0
-         Left            =   4050
+         Left            =   -70950
          MaxLength       =   30
-         TabIndex        =   181
+         TabIndex        =   182
          Top             =   1920
          Width           =   1530
       End
       Begin VB.Frame FrameAux3 
          BorderStyle     =   0  'None
          Height          =   3930
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   166
          Top             =   450
          Width           =   12210
+         Begin VB.TextBox txtaux5 
+            Alignment       =   1  'Right Justify
+            BorderStyle     =   0  'None
+            Height          =   285
+            Index           =   7
+            Left            =   7800
+            MaxLength       =   7
+            TabIndex        =   172
+            Tag             =   "Kilos Aportacion|N|S|||rcampos_seguros|kilosaportacion|###,##0||"
+            Text            =   "Kilos A"
+            Top             =   2970
+            Visible         =   0   'False
+            Width           =   735
+         End
          Begin VB.CommandButton cmdAux 
             Appearance      =   0  'Flat
             Caption         =   "+"
             Height          =   315
             Index           =   4
-            Left            =   9480
-            TabIndex        =   179
+            Left            =   10170
+            TabIndex        =   180
             ToolTipText     =   "Buscar fecha"
             Top             =   2970
             Visible         =   0   'False
@@ -1547,8 +1540,8 @@ Begin VB.Form frmManCampos
             BackColor       =   &H80000005&
             Height          =   255
             Index           =   0
-            Left            =   9780
-            TabIndex        =   176
+            Left            =   10470
+            TabIndex        =   175
             Tag             =   "Siniestro|N|N|0|1|rcampos_seguros|essiniestro|||"
             Top             =   3000
             Visible         =   0   'False
@@ -1560,7 +1553,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   3
             Left            =   2430
-            TabIndex        =   178
+            TabIndex        =   179
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1572,7 +1565,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   2
             Left            =   3390
-            TabIndex        =   177
+            TabIndex        =   178
             ToolTipText     =   "Buscar incidencia"
             Top             =   2910
             Visible         =   0   'False
@@ -1587,7 +1580,7 @@ Begin VB.Form frmManCampos
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   180
+            TabIndex        =   181
             Text            =   "Nombre incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1643,7 +1636,7 @@ Begin VB.Form frmManCampos
             Left            =   6990
             MaxLength       =   7
             TabIndex        =   171
-            Tag             =   "Kilos|N|S|||rcampos_seguros|kilos|###,##0||"
+            Tag             =   "Kilos Indemniz.|N|S|||rcampos_seguros|kilos|###,##0||"
             Text            =   "Kilos"
             Top             =   2970
             Visible         =   0   'False
@@ -1668,10 +1661,10 @@ Begin VB.Form frmManCampos
             BorderStyle     =   0  'None
             Height          =   285
             Index           =   5
-            Left            =   7890
-            MaxLength       =   10
+            Left            =   8580
+            MaxLength       =   13
             TabIndex        =   173
-            Tag             =   "Importe|N|S|||rcampos_seguros|importe|###,##0.00||"
+            Tag             =   "Importe|N|S|||rcampos_seguros|importe|##,###,##0.00||"
             Text            =   "Importe"
             Top             =   2970
             Visible         =   0   'False
@@ -1682,9 +1675,9 @@ Begin VB.Form frmManCampos
             BorderStyle     =   0  'None
             Height          =   285
             Index           =   6
-            Left            =   8700
+            Left            =   9390
             MaxLength       =   10
-            TabIndex        =   175
+            TabIndex        =   174
             Tag             =   "Fecha Pago|F|S|||rcampos_seguros|fechapago|dd/mm/yyyy||"
             Text            =   "Fec.Pago"
             Top             =   2970
@@ -1695,7 +1688,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   3
             Left            =   45
-            TabIndex        =   172
+            TabIndex        =   176
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -1773,10 +1766,10 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   3
             Left            =   45
-            TabIndex        =   174
+            TabIndex        =   177
             Top             =   450
-            Width           =   10710
-            _ExtentX        =   18891
+            Width           =   12120
+            _ExtentX        =   21378
             _ExtentY        =   5689
             _Version        =   393216
             AllowUpdate     =   0   'False
@@ -1958,7 +1951,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   13
             Left            =   10080
-            TabIndex        =   231
+            TabIndex        =   232
             Top             =   30
             Width           =   1600
          End
@@ -1969,7 +1962,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   9
             Left            =   10080
-            TabIndex        =   225
+            TabIndex        =   226
             Top             =   3720
             Width           =   1600
          End
@@ -1980,7 +1973,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   8
             Left            =   8460
-            TabIndex        =   223
+            TabIndex        =   224
             Top             =   3720
             Width           =   1600
          End
@@ -1991,7 +1984,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   6
             Left            =   5220
-            TabIndex        =   222
+            TabIndex        =   223
             Top             =   3720
             Width           =   1600
          End
@@ -2002,7 +1995,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   7
             Left            =   6840
-            TabIndex        =   221
+            TabIndex        =   222
             Top             =   3720
             Width           =   1600
          End
@@ -2314,7 +2307,7 @@ Begin VB.Form frmManCampos
             Height          =   225
             Index           =   6
             Left            =   8520
-            TabIndex        =   232
+            TabIndex        =   233
             Top             =   60
             Width           =   1455
          End
@@ -2333,7 +2326,7 @@ Begin VB.Form frmManCampos
             Height          =   225
             Index           =   5
             Left            =   3930
-            TabIndex        =   224
+            TabIndex        =   225
             Top             =   3780
             Width           =   945
          End
@@ -3220,7 +3213,7 @@ Begin VB.Form frmManCampos
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   0
-         Left            =   1380
+         Left            =   -73620
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
@@ -3232,7 +3225,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   83
          Top             =   855
@@ -3243,7 +3236,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   2
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   82
          Top             =   520
@@ -3253,7 +3246,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   2
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
@@ -3264,7 +3257,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   4
          TabIndex        =   5
          Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
@@ -3274,7 +3267,7 @@ Begin VB.Form frmManCampos
       Begin VB.TextBox Text1 
          Height          =   435
          Index           =   21
-         Left            =   5940
+         Left            =   -69060
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -3287,7 +3280,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   37
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   6
          Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
@@ -3299,7 +3292,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   75
          Top             =   1185
@@ -3310,7 +3303,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   30
          TabIndex        =   74
          Top             =   1530
@@ -3329,7 +3322,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3615
-         Left            =   5820
+         Left            =   -69180
          TabIndex        =   71
          Top             =   450
          Width           =   6720
@@ -3566,7 +3559,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Revisión"
             Height          =   255
             Left            =   3720
-            TabIndex        =   241
+            TabIndex        =   242
             Top             =   2640
             Width           =   1155
          End
@@ -3574,7 +3567,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Refer.Catastral"
             Height          =   255
             Left            =   150
-            TabIndex        =   220
+            TabIndex        =   221
             Top             =   2640
             Width           =   1245
          End
@@ -3582,7 +3575,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Ficha Cultivo"
             Height          =   255
             Left            =   3720
-            TabIndex        =   198
+            TabIndex        =   199
             Top             =   1920
             Width           =   1785
          End
@@ -3746,7 +3739,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2445
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   66
          Top             =   2310
          Width           =   5415
@@ -3756,7 +3749,7 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   1230
             MaxLength       =   10
-            TabIndex        =   230
+            TabIndex        =   231
             Tag             =   "Sup.Sigpac|N|N|0|9999.9999|rcampos|supsigpa|###0.0000||"
             Text            =   "1234567890"
             Top             =   915
@@ -3769,7 +3762,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   10
             Left            =   2670
-            TabIndex        =   229
+            TabIndex        =   230
             Top             =   915
             Width           =   1185
          End
@@ -3780,7 +3773,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   11
             Left            =   2670
-            TabIndex        =   227
+            TabIndex        =   228
             Top             =   1275
             Width           =   1185
          End
@@ -3791,7 +3784,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   12
             Left            =   2670
-            TabIndex        =   226
+            TabIndex        =   227
             Top             =   1620
             Width           =   1185
          End
@@ -3919,7 +3912,7 @@ Begin VB.Form frmManCampos
             ForeColor       =   &H000040C0&
             Height          =   465
             Left            =   2670
-            TabIndex        =   228
+            TabIndex        =   229
             Top             =   210
             Visible         =   0   'False
             Width           =   1005
@@ -4012,7 +4005,7 @@ Begin VB.Form frmManCampos
       Begin MSComctlLib.ListView ListView4 
          Height          =   4155
          Left            =   -74910
-         TabIndex        =   240
+         TabIndex        =   241
          Top             =   600
          Width           =   12120
          _ExtentX        =   21378
@@ -4077,7 +4070,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   3910
          Left            =   -74760
-         TabIndex        =   233
+         TabIndex        =   234
          Top             =   660
          Width           =   12210
          Begin VB.TextBox txtAux8 
@@ -4087,7 +4080,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1710
             MaxLength       =   10
-            TabIndex        =   237
+            TabIndex        =   238
             Tag             =   "Fecha|F|N|||rcampos_ordrec|fecimpre|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2940
@@ -4101,7 +4094,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   236
+            TabIndex        =   237
             Tag             =   "Orden|N|N|||rcampos_ordrec|nroorden|0000000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -4115,7 +4108,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   210
             MaxLength       =   8
-            TabIndex        =   235
+            TabIndex        =   236
             Tag             =   "Campo|N|N|0|99999999|rcampos_ordrec|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2910
@@ -4128,7 +4121,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   11
             Left            =   2550
-            TabIndex        =   234
+            TabIndex        =   235
             ToolTipText     =   "Buscar fecha"
             Top             =   2910
             Visible         =   0   'False
@@ -4138,7 +4131,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   6
             Left            =   45
-            TabIndex        =   238
+            TabIndex        =   239
             Top             =   0
             Width           =   1710
             _ExtentX        =   3016
@@ -4216,7 +4209,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   6
             Left            =   45
-            TabIndex        =   239
+            TabIndex        =   240
             Top             =   450
             Width           =   3900
             _ExtentX        =   6879
@@ -4286,15 +4279,15 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label36 
          Caption         =   "Nº Hidrante"
          Height          =   255
-         Left            =   3090
-         TabIndex        =   182
+         Left            =   -71910
+         TabIndex        =   183
          Top             =   1950
          Width           =   885
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Zona"
          Top             =   1200
          Width           =   240
@@ -4302,7 +4295,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label2 
          Caption         =   "Tipo Parcela"
          Height          =   255
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   84
          Top             =   1935
          Width           =   1035
@@ -4310,7 +4303,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Partida"
          Top             =   870
          Width           =   240
@@ -4318,7 +4311,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Variedad"
          Top             =   570
          Width           =   240
@@ -4326,7 +4319,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label5 
          Caption         =   "Variedad"
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   80
          Top             =   525
          Width           =   735
@@ -4335,7 +4328,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Partida"
          Height          =   255
          Index           =   0
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   79
          Top             =   855
          Width           =   735
@@ -4343,7 +4336,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label29 
          Caption         =   "Observaciones"
          Height          =   255
-         Left            =   5940
+         Left            =   -69060
          TabIndex        =   78
          Top             =   4080
          Width           =   1140
@@ -4351,7 +4344,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   7170
+         Left            =   -67830
          ToolTipText     =   "Zoom descripción"
          Top             =   4080
          Width           =   240
@@ -4359,7 +4352,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label28 
          Caption         =   "Poblacion"
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   77
          Top             =   1530
          Width           =   735
@@ -4368,7 +4361,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Zona"
          Height          =   255
          Index           =   26
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   76
          Top             =   1200
          Width           =   735
@@ -5383,21 +5376,21 @@ Dim I As Byte
     For I = 0 To ToolAux.Count - 1 '[Monica]30/09/2013: antes - 1
         If I <> 6 Then
             ToolAux(I).Buttons(1).Enabled = b
-            If b Then bAux = (b And Me.Adoaux(I).Recordset.RecordCount > 0)
+            If b Then bAux = (b And Me.AdoAux(I).Recordset.RecordCount > 0)
             ToolAux(I).Buttons(2).Enabled = bAux
             ToolAux(I).Buttons(3).Enabled = bAux
         End If
     Next I
     
     ToolAux(4).Buttons(1).Enabled = b And vUsu.Login = "root"
-    If b Then bAux = (b And Me.Adoaux(4).Recordset.RecordCount > 0)
+    If b Then bAux = (b And Me.AdoAux(4).Recordset.RecordCount > 0)
     ToolAux(4).Buttons(2).Enabled = bAux And vUsu.Login = "root"
     ToolAux(4).Buttons(3).Enabled = bAux And vUsu.Login = "root"
     
     ' boton de integracion contable
-    bAux = b And Me.Adoaux(5).Recordset.RecordCount > 0
-    If Me.Adoaux(5).Recordset.RecordCount > 0 Then
-        bAux = bAux And CInt(Adoaux(5).Recordset.Fields(6).Value) = 0
+    bAux = b And Me.AdoAux(5).Recordset.RecordCount > 0
+    If Me.AdoAux(5).Recordset.RecordCount > 0 Then
+        bAux = bAux And CInt(AdoAux(5).Recordset.Fields(6).Value) = 0
     End If
         
     ToolAux(5).Buttons(4).Enabled = bAux
@@ -5473,7 +5466,7 @@ Dim Tabla As String
        Case 3 ' agroseguro
             Tabla = "rcampos_seguros"
             Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
-            Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.importe,rcampos_seguros.fechapago,"
+            Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
             Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
             Sql = Sql & " FROM " & Tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
@@ -5853,7 +5846,7 @@ Private Sub imgZoom_Click(Index As Integer)
                 frmZ.pValor = txtAux9(indice).Text
             Else
                 frmZ.pModo = Modo
-                frmZ.pValor = DBLet(Me.Adoaux(7).Recordset!Observac, "T")
+                frmZ.pValor = DBLet(Me.AdoAux(7).Recordset!Observac, "T")
             End If
             frmZ.Show vbModal
             Set frmZ = Nothing
@@ -5963,7 +5956,7 @@ Dim Municipio As String
     Screen.MousePointer = vbHourglass
 
 '    If LanzaHomeGnral(Direccion) Then espera 2
-    LanzaVisorMimeDocumento Me.hWnd, Direccion
+    LanzaVisorMimeDocumento Me.hwnd, Direccion
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -6361,8 +6354,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     For I = 0 To DataGridAux.Count - 1 '[Monica]30/09/2013: antes - 1
         If I <> 6 Then
             CargaGrid I, True
-            If Not Adoaux(I).Recordset.EOF Then _
-                PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
+            If Not AdoAux(I).Recordset.EOF Then _
+                PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
         End If
     Next I
     '[Monica]30/09/2013
@@ -6476,8 +6469,8 @@ Dim V
                     'SSTab2.Tab = NumTabMto
                     ' ************************
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llínies
@@ -6490,10 +6483,10 @@ Dim V
                     ' ***********************
 
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                        V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                         ' ***************************************************************
                     End If
                     ' ***  bloquejar els camps fora dels grids ***
@@ -6505,7 +6498,7 @@ Dim V
             PosicionarData
 
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not Adoaux(NumTabMto).Recordset.EOF Then
+            If Not AdoAux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -6734,7 +6727,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE codcampo=" & Data1.Recordset!CodCampo
+    vWhere = " WHERE codcampo=" & Data1.Recordset!codcampo
         ' ***********************************************************************
         
     ' ***** elimina les llínies ****
@@ -6759,7 +6752,7 @@ Dim vWhere As String
 '    ' *******************************
 '
 
-    CargarUnCampo CLng(Data1.Recordset!CodCampo), "D"
+    CargarUnCampo CLng(Data1.Recordset!codcampo), "D"
 
 
 '    'Eliminar la CAPÇALERA
@@ -7349,7 +7342,7 @@ Private Sub BotonImpresionRevisiones()
     Screen.MousePointer = vbHourglass
     
     frmListado.OpcionListado = 45
-    frmListado.NumCod = "rcampos_revision.codcampo = " & Me.Data1.Recordset!CodCampo
+    frmListado.NumCod = "rcampos_revision.codcampo = " & Me.Data1.Recordset!codcampo
     frmListado.Show vbModal
     
     Screen.MousePointer = vbDefault
@@ -7364,7 +7357,7 @@ Private Sub BotonContabilizarGasto()
     Screen.MousePointer = vbHourglass
     
     frmListado.OpcionListado = 37
-    frmListado.NumCod = "rcampos_gastos.codcampo = " & Adoaux(5).Recordset!CodCampo & " and rcampos_gastos.numlinea = " & Adoaux(5).Recordset!numlinea
+    frmListado.NumCod = "rcampos_gastos.codcampo = " & AdoAux(5).Recordset!codcampo & " and rcampos_gastos.numlinea = " & AdoAux(5).Recordset!numlinea
     frmListado.Show vbModal
     CargaGrid NumTabMto, True
     
@@ -7389,7 +7382,7 @@ Dim eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     eliminar = False
@@ -7401,64 +7394,64 @@ Dim eliminar As Boolean
     Select Case Index
         Case 0 'coopropietarios
             Sql = "¿Seguro que desea eliminar el coopropietario?"
-            Sql = Sql & vbCrLf & "Coopropietario: " & Adoaux(Index).Recordset!Codsocio & " - " & Adoaux(Index).Recordset!nomsocio
+            Sql = Sql & vbCrLf & "Coopropietario: " & AdoAux(Index).Recordset!Codsocio & " - " & AdoAux(Index).Recordset!nomsocio
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_cooprop"
-                Sql = Sql & " WHERE rcampos_cooprop.codcampo = " & DBLet(Adoaux(Index).Recordset!CodCampo, "N")
-                Sql = Sql & " and codsocio = " & DBLet(Adoaux(Index).Recordset!Codsocio, "N")
+                Sql = Sql & " WHERE rcampos_cooprop.codcampo = " & DBLet(AdoAux(Index).Recordset!codcampo, "N")
+                Sql = Sql & " and codsocio = " & DBLet(AdoAux(Index).Recordset!Codsocio, "N")
             End If
         
         Case 1 'clasificacion
             Sql = "¿Seguro que desea eliminar la clasificación?"
-            Sql = Sql & vbCrLf & "Clasificación: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
+            Sql = Sql & vbCrLf & "Clasificación: " & AdoAux(Index).Recordset!codcalid & " - " & AdoAux(Index).Recordset!nomcalid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_clasif"
-                Sql = Sql & vWhere & " AND codvarie= " & DBLet(Adoaux(Index).Recordset!codvarie, "N")
-                Sql = Sql & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
+                Sql = Sql & vWhere & " AND codvarie= " & DBLet(AdoAux(Index).Recordset!codvarie, "N")
+                Sql = Sql & " and codcalid = " & DBLet(AdoAux(Index).Recordset!codcalid, "N")
             End If
     
         Case 2 'parcelas
             vWhere = ObtenerWhereCab2(True)
             
             Sql = "¿Seguro que desea eliminar la parcela?"
-            Sql = Sql & vbCrLf & "Póligono: " & Adoaux(Index).Recordset!poligono & " - Parcela : " & Adoaux(Index).Recordset!Parcela
+            Sql = Sql & vbCrLf & "Póligono: " & AdoAux(Index).Recordset!poligono & " - Parcela : " & AdoAux(Index).Recordset!Parcela
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_parcelas"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
             End If
     
         Case 3 'agroseguro
             vWhere = ObtenerWhereCab3(True)
             
             Sql = "¿Seguro que desea eliminar la Línea?"
-            Sql = Sql & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!Fecha & " - Incidencia : " & Adoaux(Index).Recordset!nomincid
+            Sql = Sql & vbCrLf & "Fecha: " & AdoAux(Index).Recordset!Fecha & " - Incidencia : " & AdoAux(Index).Recordset!nomincid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_seguros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
             End If
     
         Case 4 'hco de campos
             vWhere = ObtenerWhereCab4(True)
             
             Sql = "¿Seguro que desea eliminar la Línea?" & vbCrLf
-            Sql = Sql & "Socio: " & Format(Adoaux(Index).Recordset!Codsocio, "000000") & " - " & Adoaux(Index).Recordset!nomsocio
-            Sql = Sql & vbCrLf & "Fecha Alta: " & Adoaux(Index).Recordset!FechaAlta
-            Sql = Sql & vbCrLf & "Fecha Baja: " & Adoaux(Index).Recordset!FechaBaja
-            Sql = Sql & vbCrLf & "Incidencia : " & Adoaux(Index).Recordset!nomincid
+            Sql = Sql & "Socio: " & Format(AdoAux(Index).Recordset!Codsocio, "000000") & " - " & AdoAux(Index).Recordset!nomsocio
+            Sql = Sql & vbCrLf & "Fecha Alta: " & AdoAux(Index).Recordset!FechaAlta
+            Sql = Sql & vbCrLf & "Fecha Baja: " & AdoAux(Index).Recordset!FechaBaja
+            Sql = Sql & vbCrLf & "Incidencia : " & AdoAux(Index).Recordset!nomincid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_hco"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
             End If
     
         Case 5 'gastos de campos
             vWhere = ObtenerWhereCab5(True)
             
-            If Adoaux(Index).Recordset!contabilizado Then
+            If AdoAux(Index).Recordset!contabilizado Then
                 Sql = "Este Gasto está contabilizado. Si continua deberá modificar la contabilidad." & vbCrLf
                 Sql = Sql & " ¿ Desea continuar ? "
                 If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Sub
@@ -7466,13 +7459,13 @@ Dim eliminar As Boolean
             
             
             Sql = "¿Seguro que desea eliminar la Línea?" & vbCrLf
-            Sql = Sql & "Concepto: " & Format(Adoaux(Index).Recordset!Codgasto, "00") & " - " & Adoaux(Index).Recordset!NomGasto
-            Sql = Sql & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!Fecha
-            Sql = Sql & vbCrLf & "Importe: " & Adoaux(Index).Recordset!Importe
+            Sql = Sql & "Concepto: " & Format(AdoAux(Index).Recordset!Codgasto, "00") & " - " & AdoAux(Index).Recordset!NomGasto
+            Sql = Sql & vbCrLf & "Fecha: " & AdoAux(Index).Recordset!Fecha
+            Sql = Sql & vbCrLf & "Importe: " & AdoAux(Index).Recordset!Importe
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_gastos"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
             End If
         
         Case 6 'ordenes de recoleccion
@@ -7480,12 +7473,12 @@ Dim eliminar As Boolean
             
             
             Sql = "¿Seguro que desea eliminar la Línea?" & vbCrLf
-            Sql = Sql & "Orden: " & Format(Adoaux(Index).Recordset!nroorden, "0000000")
-            Sql = Sql & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!fecimpre
+            Sql = Sql & "Orden: " & Format(AdoAux(Index).Recordset!nroorden, "0000000")
+            Sql = Sql & vbCrLf & "Fecha: " & AdoAux(Index).Recordset!fecimpre
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_ordrec"
-                Sql = Sql & vWhere & " AND nroorden= " & DBLet(Adoaux(Index).Recordset!nroorden, "N")
+                Sql = Sql & vWhere & " AND nroorden= " & DBLet(AdoAux(Index).Recordset!nroorden, "N")
             End If
     
         Case 7 'revisiones de campos
@@ -7493,26 +7486,26 @@ Dim eliminar As Boolean
             
             
             Sql = "¿Seguro que desea eliminar la Línea?" & vbCrLf
-            Sql = Sql & "Fecha: " & Adoaux(Index).Recordset!Fecha
-            Sql = Sql & vbCrLf & "Técnico: " & Adoaux(Index).Recordset!tecnico
+            Sql = Sql & "Fecha: " & AdoAux(Index).Recordset!Fecha
+            Sql = Sql & vbCrLf & "Técnico: " & AdoAux(Index).Recordset!tecnico
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
                 Sql = "DELETE FROM rcampos_revision"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
             End If
     
     
     End Select
 
     If eliminar Then
-        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
 '        If Index <> 3 Then
             CargaGrid Index, True
         ' ***************************************************
-        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
             
         End If
         SumaTotalPorcentajes NumTabMto
@@ -7592,7 +7585,7 @@ Dim I As Integer
             End Select
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), Adoaux(Index)
+            AnyadirLinea DataGridAux(Index), AdoAux(Index)
 
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7637,6 +7630,8 @@ Dim I As Integer
                     For I = 0 To txtAux5.Count - 1
                         txtAux5(I).Text = ""
                     Next I
+                    txtAux2(2).Text = ""
+                    
                     txtAux5(0).Text = Text1(0).Text 'codcampo
                     txtAux5(1).Text = NumF 'numlinea
                     PonerFoco txtAux5(2)
@@ -7701,11 +7696,11 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim Sql As String
     
 
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
 
     If Index = 5 Then
-        If CInt(Adoaux(Index).Recordset!contabilizado) = 1 Then
+        If CInt(AdoAux(Index).Recordset!contabilizado) = 1 Then
             Sql = "Este Gasto está contabilizado, deberá modificar la contabilidad." & vbCrLf
             Sql = Sql & " ¿ Desea continuar ? "
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbNo Then Exit Sub
@@ -7773,9 +7768,17 @@ Private Sub BotonModificarLinea(Index As Integer)
                 txtAux5(I).Text = DataGridAux(Index).Columns(I).Text
             Next I
             txtAux2(2).Text = DataGridAux(Index).Columns(4).Text
-            For I = 4 To 6
-                txtAux5(I).Text = DataGridAux(Index).Columns(I + 1).Text
-            Next I
+            '[Monica]26/01/2016: añadida nueva columna de kilos de aportacion
+'            For I = 4 To 6
+'                txtAux5(I).Text = DataGridAux(Index).Columns(I + 1).Text
+'            Next I
+            txtAux5(4).Text = DataGridAux(Index).Columns(5).Text
+            txtAux5(7).Text = DataGridAux(Index).Columns(6).Text
+            txtAux5(5).Text = DataGridAux(Index).Columns(7).Text
+            txtAux5(6).Text = DataGridAux(Index).Columns(8).Text
+        
+            Me.chkAux(0).Value = Me.AdoAux(3).Recordset!essiniestro
+        
         
         Case 4 'hco de campos
             For I = 0 To 2
@@ -8461,13 +8464,13 @@ Dim Sql2 As String
     b = DataGridAux(Index).Enabled
     DataGridAux(Index).Enabled = False
     
-    Adoaux(Index).ConnectionString = conn
-    Adoaux(Index).RecordSource = Sql2
-    Adoaux(Index).CursorType = adOpenDynamic
-    Adoaux(Index).LockType = adLockPessimistic
+    AdoAux(Index).ConnectionString = conn
+    AdoAux(Index).RecordSource = Sql2
+    AdoAux(Index).CursorType = adOpenDynamic
+    AdoAux(Index).LockType = adLockPessimistic
     DataGridAux(Index).ScrollBars = dbgNone
-    Adoaux(Index).Refresh
-    Set DataGridAux(Index).DataSource = Adoaux(Index)
+    AdoAux(Index).Refresh
+    Set DataGridAux(Index).DataSource = AdoAux(Index)
     
     DataGridAux(Index).AllowRowSizing = False
     DataGridAux(Index).RowHeight = 290
@@ -8481,7 +8484,7 @@ Dim Sql2 As String
         DataGridAux(Index).Columns(I).AllowSizing = False
     Next I
     
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     
     'DataGridAux(Index).Enabled = b
@@ -8499,7 +8502,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
                 If VisualizaClasificacion Then
                     PonerClasificacionGrafica
                 End If
@@ -8521,7 +8524,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
 '                SumaTotalPorcentajes
             Else
                 For I = 0 To 3
@@ -8560,7 +8563,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To 3
@@ -8575,7 +8578,10 @@ Dim Sql2 As String
             tots = "N||||0|;N||||0|;S|txtaux5(2)|T|Fecha|1100|;S|cmdAux(3)|B|||;" 'codcampo,numlinea
             tots = tots & "S|txtaux5(3)|T|Incidencia|1100|;S|cmdAux(2)|B|||;"
             tots = tots & "S|txtAux2(2)|T|Descripcion|3500|;"
-            tots = tots & "S|txtaux5(4)|T|Kilos|1500|;"
+            '[Monica]26/01/2016: nueva columna de kilos aportacion, cambio etiqueta de los kilos a indemnizables
+            tots = tots & "S|txtaux5(4)|T|Kilos Indemniza.|1500|;"
+            tots = tots & "S|txtaux5(7)|T|Kilos Aportacion|1500|;"
+            
             tots = tots & "S|txtaux5(5)|T|Importe|1500|;"
             tots = tots & "S|txtaux5(6)|T|Fecha Pago|1100|;S|cmdAux(4)|B|||;"
             tots = tots & "N||||0|;S|chkAux(0)|CB|Sin|360|;"
@@ -8588,7 +8594,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To 3
@@ -8614,7 +8620,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To 5
@@ -8638,7 +8644,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To 4
@@ -8657,7 +8663,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To 0
@@ -8679,7 +8685,7 @@ Dim Sql2 As String
             
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             
             Else
                 For I = 0 To txtAux9.Count - 1
@@ -8692,7 +8698,7 @@ Dim Sql2 As String
     DataGridAux(Index).ScrollBars = dbgAutomatic
       
     ' **** si n'hi han llínies en grids i camps fora d'estos ****
-    If Not Adoaux(Index).Recordset.EOF Then
+    If Not AdoAux(Index).Recordset.EOF Then
         DataGridAux_RowColChange Index, 1, 1
     Else
         LimpiarCamposFrame Index
@@ -8795,7 +8801,7 @@ Dim Cad As String
             ModoLineas = 0
 
 '            If NumTabMto <> 3 Then
-                V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
 '            End If
 
@@ -8805,7 +8811,7 @@ Dim Cad As String
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
 '            If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
 '            End If
             ' ***********************************************************
 
@@ -9260,7 +9266,7 @@ Dim I As Integer
 Dim arrData()
 Dim TotalPorc As Currency
    
-    Sql = "select count(*) from rcampos_clasif, rcalidad where rcampos_clasif.codcampo = " & Data1.Recordset!CodCampo
+    Sql = "select count(*) from rcampos_clasif, rcalidad where rcampos_clasif.codcampo = " & Data1.Recordset!codcampo
     Sql = Sql & " and rcampos_clasif.codvarie = rcalidad.codvarie "
     Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
     
@@ -9274,7 +9280,7 @@ Dim TotalPorc As Currency
     
     ReDim arrData(I - 1, 2)
    
-    Sql = "select rcampos_clasif.muestra, rcalidad.nomcalid from rcampos_clasif, rcalidad where rcampos_clasif.codcampo = " & Data1.Recordset!CodCampo
+    Sql = "select rcampos_clasif.muestra, rcalidad.nomcalid from rcampos_clasif, rcalidad where rcampos_clasif.codcampo = " & Data1.Recordset!codcampo
     Sql = Sql & " and rcampos_clasif.codvarie = rcalidad.codvarie "
     Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
     Sql = Sql & " order by rcampos_clasif.codcalid "
@@ -9317,7 +9323,7 @@ Dim Rs As ADODB.Recordset
    
    Select Case numTab
         Case 0 ' coopropietarios
-            Sql = "select sum(porcentaje) from rcampos_cooprop where rcampos_cooprop.codcampo = " & Data1.Recordset!CodCampo
+            Sql = "select sum(porcentaje) from rcampos_cooprop where rcampos_cooprop.codcampo = " & Data1.Recordset!codcampo
             
             Set Rs = New ADODB.Recordset
             Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -9336,7 +9342,7 @@ Dim Rs As ADODB.Recordset
             End If
    
         Case 1 ' clasificaciones
-            Sql = "select sum(muestra) from rcampos_clasif where rcampos_clasif.codcampo = " & Data1.Recordset!CodCampo
+            Sql = "select sum(muestra) from rcampos_clasif where rcampos_clasif.codcampo = " & Data1.Recordset!codcampo
             
             Set Rs = New ADODB.Recordset
             Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -9503,8 +9509,11 @@ Dim Nuevo As Boolean
                 txtAux2(2).Text = ""
             End If
         
-        
         Case 4 'kilos
+            PonerFormatoEntero txtAux5(Index)
+        
+        '[Monica]26/01/2016: nueva columna de kilos aportacion
+        Case 7 ' kilos aportacion
             PonerFormatoEntero txtAux5(Index)
         
         Case 5 ' importe
@@ -9688,7 +9697,7 @@ Dim NroContadores As Long
             
             frmMens2.cadWHERE2 = "1"
             frmMens2.OpcionMensaje = 39
-            frmMens2.cadWhere = " and codcampo = " & DBSet(Text1(0).Text, "N")
+            frmMens2.cadwhere = " and codcampo = " & DBSet(Text1(0).Text, "N")
             frmMens2.Show vbModal
             
             Set frmMens2 = Nothing
@@ -9745,7 +9754,7 @@ Dim Sql As String
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 25
-    frmMens.cadWhere = Sql
+    frmMens.cadwhere = Sql
     frmMens.Show vbModal
     
     Set frmMens = Nothing

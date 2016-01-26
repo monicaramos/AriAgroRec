@@ -26,7 +26,7 @@ Dim Anticipos As Currency
 
 Dim TotalFac As Currency
 
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim vTipoMov As CTiposMov
 
 Dim numfactu As Long
@@ -214,14 +214,14 @@ Dim Tipo As String
     If CInt(Tipo) = 7 Then ' si se trata de un anticipo de almazara no descontamos gastos
         GastosAlb = 0
     Else
-        GastosAlb = DevuelveValor("select sum(importe) from rhisfruta_gastos where numalbar = " & DBSet(RS!numalbar, "N"))
+        GastosAlb = DevuelveValor("select sum(importe) from rhisfruta_gastos where numalbar = " & DBSet(RS!Numalbar, "N"))
     End If
     
     'insertamos el albaran
     Sql = "insert into tmpfact_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
     Sql = Sql & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto) values ("
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    Sql = Sql & DBSet(RS!numalbar, "N") & "," & DBSet(RS!Fecalbar, "F") & "," & DBSet(RS!codvarie, "N") & ","
+    Sql = Sql & DBSet(RS!Numalbar, "N") & "," & DBSet(RS!Fecalbar, "F") & "," & DBSet(RS!codvarie, "N") & ","
     
     If Not IsNull(codcampo) And codcampo <> "" Then
         Sql = Sql & DBSet(codcampo, "N") & ","
@@ -467,7 +467,7 @@ Dim vPrecio As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -577,7 +577,7 @@ Dim vPrecio As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -825,7 +825,7 @@ Dim vPrecio As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -954,7 +954,7 @@ Dim vPrecio As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -1239,7 +1239,7 @@ Dim PorcComi As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -1358,7 +1358,7 @@ Dim PorcComi As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -1983,7 +1983,7 @@ Dim Existe As Boolean
         AntSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -2099,7 +2099,7 @@ Dim Existe As Boolean
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -2910,7 +2910,7 @@ Dim vPorcGasto As String
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -3109,7 +3109,7 @@ Dim vPorcGasto As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -3454,7 +3454,7 @@ Dim vPorcGasto As String
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -3672,7 +3672,7 @@ Dim vPorcGasto As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -4380,7 +4380,7 @@ Dim ConGastos As Byte
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -4486,7 +4486,7 @@ Dim ConGastos As Byte
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -4904,7 +4904,7 @@ Dim PgbVisible As Boolean
             vFactuADV.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuADV.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuADV.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuADV.NIF = DBLet(RsAlb!nifsocio, "T")
+            vFactuADV.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuADV.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuADV.ForPago = Forpa
 '[Monica] 09/02/2010 la forma de pago está en la contabilidad de adv
@@ -5299,7 +5299,7 @@ Dim vPorcGasto As String
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -5535,7 +5535,7 @@ Dim vPorcGasto As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         '[Monica]05/03/2014: alzira entra a tramos
@@ -5916,7 +5916,7 @@ Dim vPrecio As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -6051,7 +6051,7 @@ Dim vPrecio As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         '[Monica]05/03/2014: entra alzira a tramos
@@ -6333,7 +6333,7 @@ Dim Gastos As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -6471,7 +6471,7 @@ Dim Gastos As Currency
                 AntCampo = actCampo
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -6763,13 +6763,13 @@ Dim PgbVisible As Boolean
             vFactuBOD.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuBOD.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuBOD.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuBOD.NIF = DBLet(RsAlb!nifsocio, "T")
+            vFactuBOD.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuBOD.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuBOD.ForPago = Forpa
             vFactuBOD.TipForPago = DBSet(DevuelveDesdeBDNew(cAgro, "forpago", "tipoforp", "codforpa", Forpa, "N"), "N")
-            cadW = "  rbodalbaran.numalbar IN (" & RsAlb!numalbar
+            cadW = "  rbodalbaran.numalbar IN (" & RsAlb!Numalbar
         Else
-            cadW = cadW & ", " & RsAlb!numalbar
+            cadW = cadW & ", " & RsAlb!Numalbar
         End If
     
         'Guardamos datos del registro anterior
@@ -6949,7 +6949,7 @@ Dim vPrecio As Currency
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
         actCampo = CStr(DBLet(RS!codcampo, "N"))
    
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionBodega) Then
                 baseimpo = 0
@@ -7072,7 +7072,7 @@ Dim vPrecio As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionBodega) Then
                         vPorcIva = ""
@@ -7321,13 +7321,13 @@ Dim vPorcGasto As String
         AntSocio = CStr(DBLet(RS!Codsocio, "N"))
         AntVarie = CStr(DBLet(RS!codvarie, "N"))
         AntCampo = CStr(DBLet(RS!codcampo, "N"))
-        AntAlbar = CStr(DBLet(RS!numalbar, "N"))
+        AntAlbar = CStr(DBLet(RS!Numalbar, "N"))
         
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
         actCampo = CStr(DBLet(RS!codcampo, "N"))
-        ActAlbar = CStr(DBLet(RS!numalbar, "N"))
-        Set vSocio = New CSocio
+        ActAlbar = CStr(DBLet(RS!Numalbar, "N"))
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionBodega) Then
                 baseimpo = 0
@@ -7514,7 +7514,7 @@ Dim vPorcGasto As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionBodega) Then
                         vPorcIva = ""
@@ -7794,7 +7794,7 @@ Dim campo As String
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
    
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionAlmaz) Then
                 baseimpo = 0
@@ -7893,7 +7893,7 @@ Dim campo As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionAlmaz) Then
                         vPorcIva = ""
@@ -8114,12 +8114,12 @@ Dim campo As String
     If Not RS.EOF Then
         AntSocio = CStr(DBLet(RS!Codsocio, "N"))
         AntVarie = CStr(DBLet(RS!codvarie, "N"))
-        AntAlbar = CStr(DBLet(RS!numalbar, "N"))
+        AntAlbar = CStr(DBLet(RS!Numalbar, "N"))
         
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
-        ActAlbar = CStr(DBLet(RS!numalbar, "N"))
-        Set vSocio = New CSocio
+        ActAlbar = CStr(DBLet(RS!Numalbar, "N"))
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionAlmaz) Then
                 baseimpo = 0
@@ -8285,7 +8285,7 @@ Dim campo As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionAlmaz) Then
                         vPorcIva = ""
@@ -8674,12 +8674,12 @@ On Error GoTo EFacturacionTransporte
     
     If Not RS.EOF Then
         AntTrans = CStr(DBLet(RS!codTrans, "T"))
-        AntAlbar = CStr(DBLet(RS!numalbar, "N"))
+        AntAlbar = CStr(DBLet(RS!Numalbar, "N"))
         AntVarie = CStr(DBLet(RS!codvarie, "N"))
         AntCampo = CStr(DBLet(RS!codcampo, "N"))
         
         ActTrans = CStr(DBLet(RS!codTrans, "T"))
-        ActAlbar = CStr(DBLet(RS!numalbar, "N"))
+        ActAlbar = CStr(DBLet(RS!Numalbar, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
         actCampo = CStr(DBLet(RS!codcampo, "N"))
     
@@ -8752,7 +8752,7 @@ On Error GoTo EFacturacionTransporte
     
     While Not RS.EOF And b
         ActTrans = DBLet(RS!codTrans, "T")
-        ActAlbar = DBSet(RS!numalbar, "N")
+        ActAlbar = DBSet(RS!Numalbar, "N")
         ActVarie = DBSet(RS!codvarie, "N")
         actCampo = DBSet(RS!codcampo, "N")
         
@@ -9073,7 +9073,7 @@ Dim Precio As Currency
     Sql = "insert into tmpFact_albarantra (codtipom, numfactu, fecfactu, numalbar, fecalbar, codvarie, codcampo, "
     Sql = Sql & "kilosbru, kilosnet, precio, importe, codtrans, fechaent) values ("
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    Sql = Sql & DBSet(RS!numalbar, "N") & "," & DBSet(RS!FechaEnt, "F") & "," & DBSet(RS!codvarie, "N") & "," & DBSet(RS!codcampo, "N") & ","
+    Sql = Sql & DBSet(RS!Numalbar, "N") & "," & DBSet(RS!FechaEnt, "F") & "," & DBSet(RS!codvarie, "N") & "," & DBSet(RS!codcampo, "N") & ","
     If vParamAplic.Cooperativa = 2 Then
         Sql = Sql & DBSet(DBLet(RS!Numnotac, "N"), "N") & "," & DBSet(DBLet(RS!KilosTra, "N"), "N") & ","
     Else
@@ -9223,14 +9223,14 @@ Dim SqlGastos As String
     If Not RS.EOF Then
         AntSocio = CStr(DBLet(RS!Codsocio, "N"))
         AntVarie = CStr(DBLet(RS!codvarie, "N"))
-        AntAlbar = CStr(DBLet(RS!numalbar, "N"))
+        AntAlbar = CStr(DBLet(RS!Numalbar, "N"))
         
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
-        ActAlbar = CStr(DBLet(RS!numalbar, "N"))
+        ActAlbar = CStr(DBLet(RS!Numalbar, "N"))
 '        Rdto = CStr(DBLet(Rs!PrEstimado, "N"))
         
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionAlmaz) Then
                 baseimpo = 0
@@ -9571,7 +9571,7 @@ Dim SqlGastos As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionAlmaz) Then
                         vPorcIva = ""
@@ -10029,7 +10029,7 @@ Dim Existe As Boolean
         End If
     End If
     
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     If vSocio.LeerDatos(Socio) Then
         If vSocio.LeerDatosSeccion(Socio, vParamAplic.Seccionhorto) Then
             baseimpo = CCur(Importe)
@@ -10245,7 +10245,7 @@ On Error GoTo EFacturacionTransporteSocio
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
         actCampo = CStr(DBLet(RS!codcampo, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -10354,7 +10354,7 @@ On Error GoTo EFacturacionTransporteSocio
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -10753,7 +10753,7 @@ Dim SqlValues As String
         Importe = Round2(DBLet(Rs2!KilosNet, "N") * DBLet(Rs2!PrEstimado, "N") * DBLet(Rs2!precioindustria, "N"), 2)
     
         SqlValues = SqlValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-        SqlValues = SqlValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Variedad, "N") & ","
+        SqlValues = SqlValues & DBSet(Rs2!Numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Variedad, "N") & ","
         SqlValues = SqlValues & DBSet(Rs2!codcampo, "N") & ",0," & DBSet(Rs2!KilosNet, "N") & "," & DBSet(Rs2!PrEstimado, "N") & ","
         SqlValues = SqlValues & DBSet(Rs2!precioindustria, "N") & "," & DBSet(Importe, "N") & ",0),"
     
@@ -10846,7 +10846,7 @@ Dim Grado As Currency
         End If
         
         Sql1 = "update rhisfruta set kgradobonif = " & DBSet(Grado + Round2(Grado * Porcen / 100, 2), "N")
-        Sql1 = Sql1 & " where numalbar = " & DBSet(RS!numalbar, "N")
+        Sql1 = Sql1 & " where numalbar = " & DBSet(RS!Numalbar, "N")
         
         conn.Execute Sql1
     
@@ -10995,12 +10995,12 @@ Dim campo As String
     If Not RS.EOF Then
         AntSocio = CStr(DBLet(RS!Codsocio, "N"))
         AntVarie = CStr(DBLet(RS!codvarie, "N"))
-        AntAlbar = CStr(DBLet(RS!numalbar, "N"))
+        AntAlbar = CStr(DBLet(RS!Numalbar, "N"))
         
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
-        ActAlbar = CStr(DBLet(RS!numalbar, "N"))
-        Set vSocio = New CSocio
+        ActAlbar = CStr(DBLet(RS!Numalbar, "N"))
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionAlmaz) Then
                 baseimpo = 0
@@ -11166,7 +11166,7 @@ Dim campo As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionAlmaz) Then
                         vPorcIva = ""
@@ -11461,7 +11461,7 @@ Dim PorcComi As Currency
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -11688,7 +11688,7 @@ Dim PorcComi As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -12069,7 +12069,7 @@ Dim RS As ADODB.Recordset
         Cadena = ""
     
         While Not RS.EOF
-            Cadena = Cadena & Format(DBLet(RS!numalbar, "N"), "0000000") & ", "
+            Cadena = Cadena & Format(DBLet(RS!Numalbar, "N"), "0000000") & ", "
         
             RS.MoveNext
         Wend
@@ -12203,7 +12203,7 @@ Dim Precio As Currency
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
 '        actCampo = CStr(DBLet(Rs!codcampo, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -12289,7 +12289,7 @@ Dim Precio As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -12561,7 +12561,7 @@ Dim ImporRet As Currency
 '        actCampo = CStr(DBLet(Rs!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
 '[Monica]25/06/2012: seccion
 '            If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
@@ -12821,7 +12821,7 @@ Dim ImporRet As Currency
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
 '[Monica]25/06/2012: Seccion
 '                    If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
@@ -13529,7 +13529,7 @@ Dim vPorcGasto As String
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -13730,7 +13730,7 @@ Dim vPorcGasto As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -14122,7 +14122,7 @@ Dim campo As String
         ActSocio = CStr(DBLet(RS!Codsocio, "N"))
         ActVarie = CStr(DBLet(RS!codvarie, "N"))
    
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.SeccionAlmaz) Then
                 baseimpo = 0
@@ -14221,7 +14221,7 @@ Dim campo As String
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.SeccionAlmaz) Then
                         vPorcIva = ""
@@ -14356,7 +14356,7 @@ Dim Tipo As String
     If CInt(Tipo) = 7 Then ' si se trata de un anticipo de almazara no descontamos gastos
         GastosAlb = 0
     Else
-        GastosAlb = DevuelveValor("select sum(importe) from rhisfruta_gastos where numalbar = " & DBSet(RS!numalbar, "N"))
+        GastosAlb = DevuelveValor("select sum(importe) from rhisfruta_gastos where numalbar = " & DBSet(RS!Numalbar, "N"))
     End If
     
     'insertamos el albaran
@@ -14466,7 +14466,7 @@ Dim Existe As Boolean
         End If
     End If
     
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     If vSocio.LeerDatos(Socio) Then
         If vSocio.LeerDatosSeccion(Socio, vParamAplic.Seccionhorto) Then
             baseimpo = CCur(Importe)
@@ -14692,7 +14692,7 @@ Dim HayPrecio As Boolean
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -14837,7 +14837,7 @@ Dim HayPrecio As Boolean
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -14880,7 +14880,7 @@ Dim HayPrecio As Boolean
         Dim Rs9 As ADODB.Recordset
         Dim Precio As Currency
         
-        Sql9 = "select precio1 from tmpinformes2 where importe1 = " & DBSet(RS!numalbar, "N") & " and importe2 = " & DBSet(RS!codvarie, "N")
+        Sql9 = "select precio1 from tmpinformes2 where importe1 = " & DBSet(RS!Numalbar, "N") & " and importe2 = " & DBSet(RS!codvarie, "N")
         Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
         
         Set Rs9 = New ADODB.Recordset
@@ -14903,6 +14903,10 @@ Dim HayPrecio As Boolean
                     Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                 End If
             End If
+            
+            '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
+            If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+            
         
             vPrecio = DBLet(Precio, "N")
             vImporte = vImporte + Round2(DBLet(RS!KilosNet, "N") * Precio * (1 + (PorcBoni / 100)), 2)
@@ -15165,7 +15169,7 @@ Dim HayPrecio As Boolean
         actCampo = CStr(DBLet(RS!codcampo, "N"))
         ActCalid = CStr(DBLet(RS!codcalid, "N"))
     
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
             If vSocio.LeerDatosSeccion(ActSocio, vParamAplic.Seccionhorto) Then
                 baseimpo = 0
@@ -15457,7 +15461,7 @@ Dim HayPrecio As Boolean
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
-                Set vSocio = New CSocio
+                Set vSocio = New cSocio
                 If vSocio.LeerDatos(ActSocio) Then
                     If vSocio.LeerDatosSeccion(AntSocio, vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
@@ -15512,7 +15516,7 @@ Dim HayPrecio As Boolean
         
         Sql9 = "select precio1 from tmpinformes2 where fecha1 = " & DBSet(RS!Fecalbar, "F") & " and importe2 = " & DBSet(RS!codvarie, "N")
         Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
-        Sql9 = Sql9 & " and importe1 = " & DBSet(RS!numalbar, "N") & " and importeb1 = " & DBSet(RS!Codsocio, "N")
+        Sql9 = Sql9 & " and importe1 = " & DBSet(RS!Numalbar, "N") & " and importeb1 = " & DBSet(RS!Codsocio, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -15535,6 +15539,12 @@ Dim HayPrecio As Boolean
                     Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                 End If
             End If
+            
+            
+            '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
+            If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+            
+            
             vPrecio = DBLet(Precio, "N")
             vImporte = vImporte + Round2(DBLet(RS!KilosNet, "N") * Precio, 2)
             
