@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:49"
+            TextSave        =   "13:49"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -686,19 +686,19 @@ Begin VB.MDIForm MDIppal
       End
       Begin VB.Menu mnRec_PagoSocios 
          Caption         =   "-"
-         Index           =   15
-      End
-      Begin VB.Menu mnRec_PagoSocios 
-         Caption         =   "&Factura Rectificativa"
-         Index           =   16
-      End
-      Begin VB.Menu mnRec_PagoSocios 
-         Caption         =   "-"
          Index           =   17
       End
       Begin VB.Menu mnRec_PagoSocios 
-         Caption         =   "Facturación &Contratos"
+         Caption         =   "&Factura Rectificativa"
          Index           =   18
+      End
+      Begin VB.Menu mnRec_PagoSocios 
+         Caption         =   "-"
+         Index           =   19
+      End
+      Begin VB.Menu mnRec_PagoSocios 
+         Caption         =   "Facturación &Contratos"
+         Index           =   20
       End
    End
    Begin VB.Menu mnFacturasSocios 
@@ -1714,7 +1714,7 @@ Private PrimeraVez As Boolean
 Dim TieneEditorDeMenus As Boolean
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim i As Integer
+    Dim I As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -2245,7 +2245,7 @@ End Sub
 Private Sub PoneMenusDelEditor()
 Dim T As Control
 Dim Sql As String
-Dim C As String
+Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
@@ -2268,9 +2268,9 @@ Dim miRsAux As ADODB.Recordset
         Sql = "·" & Sql
         For Each T In Me.Controls
             If TypeOf T Is menu Then
-                C = DevuelveCadenaMenu(T)
-                C = "·" & C & "·"
-                If InStr(1, Sql, C) > 0 Then T.visible = False
+                c = DevuelveCadenaMenu(T)
+                c = "·" & c & "·"
+                If InStr(1, Sql, c) > 0 Then T.visible = False
            
             End If
         Next
@@ -2292,7 +2292,7 @@ EDevuelveCadenaMenu:
 End Function
 
 Private Sub LanzaHome(Opcion As String)
-    Dim i As Integer
+    Dim I As Integer
     Dim Cad As String
     On Error GoTo ELanzaHome
     
@@ -2303,11 +2303,11 @@ Private Sub LanzaHome(Opcion As String)
         Exit Sub
     End If
         
-    i = FreeFile
+    I = FreeFile
     Cad = ""
-    Open App.Path & "\lanzaexp.dat" For Input As #i
-    Line Input #i, Cad
-    Close #i
+    Open App.Path & "\lanzaexp.dat" For Input As #I
+    Line Input #I, Cad
+    Close #I
     
     'Lanzamos
     If Cad <> "" Then Shell Cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus

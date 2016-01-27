@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManPrecios 
@@ -957,8 +957,9 @@ Private Sub Combo1_LostFocus(Index As Integer)
     End If
     
     '[Monica]10/04/2013: Añadido pq se quedaba bloqueado el precio de industria
+    '[Monica]27/01/2016: Añadido el precio de complementaria unica
     If tipo = 0 Then
-        Text1(5).Enabled = (Combo1(0).ListIndex = 2) Or (Combo1(0).ListIndex = 4) Or (Combo1(0).ListIndex = 5) Or Modo = 1
+        Text1(5).Enabled = (Combo1(0).ListIndex = 2) Or (Combo1(0).ListIndex = 4) Or (Combo1(0).ListIndex = 5) Or (Combo1(0).ListIndex = 6) Or Modo = 1
     Else
         Text1(5).Enabled = True
     End If
@@ -1335,28 +1336,28 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' calidades
             Tabla = "rprecios_calidad"
-            SQL = "SELECT rprecios_calidad.codvarie, rprecios_calidad.tipofact, rprecios_calidad.contador, rprecios_calidad.codcalid, rcalidad.nomcalid, rprecios_calidad.precoop, rprecios_calidad.presocio "
-            SQL = SQL & " FROM " & Tabla & " INNER JOIN rcalidad ON rprecios_calidad.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and rprecios_calidad.codcalid = rcalidad.codcalid "
+            Sql = "SELECT rprecios_calidad.codvarie, rprecios_calidad.tipofact, rprecios_calidad.contador, rprecios_calidad.codcalid, rcalidad.nomcalid, rprecios_calidad.precoop, rprecios_calidad.presocio "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN rcalidad ON rprecios_calidad.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and rprecios_calidad.codcalid = rcalidad.codcalid "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rprecios_calidad.codvarie = -1"
+                Sql = Sql & " WHERE rprecios_calidad.codvarie = -1"
             End If
-            SQL = SQL & " ORDER BY " & Tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & Tabla & ".codcalid "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -1419,13 +1420,25 @@ Private Sub imgAyuda_Click(Index As Integer)
 Dim vCadena As String
     Select Case Index
         Case 0
-           ' "____________________________________________________________"
-            vCadena = "Cuando el Tipo de Factura es de Industria, Anticipo Genérico o " & vbCrLf & _
-                      "Anticipo de Retirada el precio se introduce en el Precio Industria." & vbCrLf & vbCrLf & _
-                      "En Anticipo Genérico y Anticipo de Retirada es un precio único para" & vbCrLf & _
-                      "todas las calidades, ya que se realiza sobre entradas clasificadas " & vbCrLf & _
-                      "como pendientes de clasificar (Histórico y Clasificadas)" & vbCrLf & _
-                      "" & vbCrLf & vbCrLf
+'            '[Monica]27/01/2016: distinguimos entre catadau y el resto pq tiene un tipo nuevo de liquidacion complementaria unica
+'            If vParamAplic.Cooperativa <> 0 Then
+'                vCadena = "Cuando el Tipo de Factura es de Industria, Anticipo Genérico o " & vbCrLf & _
+'                          "Anticipo de Retirada el precio se introduce en el Precio Industria." & vbCrLf & vbCrLf & _
+'                          "En Anticipo Genérico y Anticipo de Retirada es un precio único para" & vbCrLf & _
+'                          "todas las calidades, ya que se realiza sobre entradas clasificadas " & vbCrLf & _
+'                          "como pendientes de clasificar (Histórico y Clasificadas)" & vbCrLf & _
+'                          "" & vbCrLf & vbCrLf
+'            Else
+                vCadena = "Cuando el Tipo de Factura es de Industria, Anticipo Genérico,  " & vbCrLf & _
+                          "Anticipo de Retirada o Complem.Única el precio se introduce en el " & vbCrLf & _
+                          "Precio Industria." & vbCrLf & vbCrLf & _
+                          "En Anticipo Genérico y Anticipo de Retirada es un precio único para" & vbCrLf & _
+                          "todas las calidades, ya que se realiza sobre entradas clasificadas " & vbCrLf & _
+                          "como pendientes de clasificar (Histórico y Clasificadas)" & vbCrLf & vbCrLf & _
+                          "En la complementaria única tambien es un precio único para todas " & vbCrLf & _
+                          "las calidades." & vbCrLf & _
+                          "" & vbCrLf & vbCrLf
+'            End If
                       
         Case 1
            ' "____________________________________________________________"
@@ -1585,7 +1598,7 @@ End Sub
 
 
 Private Sub mnGeneracionMasiva_Click()
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
     
     Set frmGen = New frmGeneraPrecios
@@ -1847,11 +1860,22 @@ Dim Cad As String
     Cad = "¿Seguro que desea eliminar el Precio de la Variedad?"
     Cad = Cad & vbCrLf & "Variedad: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
     Cad = Cad & vbCrLf & "Tipo    : "
-    If Data1.Recordset.Fields(1) = 0 Then
-        Cad = Cad & "Anticipo"
-    Else
-        Cad = Cad & "Liquidacion"
-    End If
+    Select Case Data1.Recordset.Fields(1)
+        Case 0
+            Cad = Cad & "Anticipo"
+        Case 1
+            Cad = Cad & "Liquidacion"
+        Case 2
+            Cad = Cad & "Industria directa"
+        Case 3
+            Cad = Cad & "Complementaria"
+        Case 4
+            Cad = Cad & "Anticipo Genérico"
+        Case 5
+            Cad = Cad & "Anticipo Retirada"
+        Case 6
+            Cad = Cad & "Complementaria única"
+    End Select
     Cad = Cad & vbCrLf & "Contador: " & Data1.Recordset.Fields(2)
     ' **************************************************************************
     
@@ -2050,7 +2074,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Cad As String
 'Dim Datos As String
 
@@ -2063,8 +2087,8 @@ Dim Cad As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = DevuelveDesdeBDNew(cAgro, "rprecios", "codvarie", "codvarie", Text1(0).Text, "N", , "tipofact", Combo1(0).ListIndex, "N", "contador", Text1(1).Text, "N")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "rprecios", "codvarie", "codvarie", Text1(0).Text, "N", , "tipofact", Combo1(0).ListIndex, "N", "contador", Text1(1).Text, "N")
+        If Sql <> "" Then
             MsgBox "Ya existe el contador para este variedad. Revise.", vbExclamation
             b = False
         End If
@@ -2165,7 +2189,8 @@ Private Sub Text1_GotFocus(Index As Integer)
     
     If Index = 5 Then
         If tipo = 0 Then
-            Text1(Index).Enabled = (Combo1(0).ListIndex = 2) Or (Combo1(0).ListIndex = 4) Or (Combo1(0).ListIndex = 5)
+            '[Monica]27/01/2016: incluido tambien el tipo complementaria unica
+            Text1(Index).Enabled = (Combo1(0).ListIndex = 2) Or (Combo1(0).ListIndex = 4) Or (Combo1(0).ListIndex = 5) Or (Combo1(0).ListIndex = 6)
         Else
             Text1(Index).Enabled = True
         End If
@@ -2342,7 +2367,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim eliminar As Boolean
 
@@ -2369,12 +2394,12 @@ Dim eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'calidad
-            SQL = "¿Seguro que desea eliminar la calidad?"
-            SQL = SQL & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid & " - " & AdoAux(Index).Recordset!nomcalid
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la calidad?"
+            Sql = Sql & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid & " - " & AdoAux(Index).Recordset!nomcalid
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 eliminar = True
-                SQL = "DELETE FROM rprecios_calidad "
-                SQL = SQL & vWhere & " and codcalid = " & DBLet(AdoAux(Index).Recordset!codcalid, "N")
+                Sql = "DELETE FROM rprecios_calidad "
+                Sql = Sql & vWhere & " and codcalid = " & DBLet(AdoAux(Index).Recordset!codcalid, "N")
             End If
         
     End Select
@@ -2382,7 +2407,7 @@ Dim eliminar As Boolean
     If eliminar Then
         NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -2586,7 +2611,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim b As Boolean
 Dim cant As Integer
 Dim Mens As String
@@ -2604,9 +2629,9 @@ Dim vFact As Byte, vDocum As Byte
     
     If b And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        SQL = ""
+        Sql = ""
 '        SQL = DevuelveDesdeBDNew(cAgro, "rprecios_calidad", "codcalid", "codvarie", txtaux1(0).Text, "N", , "tipofact", txtaux1(2).Text, "N", "codcalid", txtaux1(1).Text, "N")
-        If SQL <> "" Then
+        If Sql <> "" Then
             MsgBox "Ya existe la calidad. Revise.", vbExclamation
             PonerFoco txtaux1(1)
             b = False
@@ -3015,7 +3040,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim Cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificar
 
@@ -3112,6 +3137,11 @@ Dim I As Integer
         Combo1(0).ItemData(Combo1(0).NewIndex) = 4
         Combo1(0).AddItem "Anticipo Retirada"
         Combo1(0).ItemData(Combo1(0).NewIndex) = 5
+        '[Monica]27/01/2016: liquidacion complementaria sobre kilos normales / venta campo y kilos aportados
+'        If vParamAplic.Cooperativa = 0 Then
+'            Combo1(0).AddItem "Complem.Única"
+'            Combo1(0).ItemData(Combo1(0).NewIndex) = 6
+'        End If
     End If
 End Sub
 
@@ -3241,7 +3271,7 @@ Private Sub InicializarVbles()
 End Sub
 
 Private Sub PonerClasificacionGrafica()
-Dim SQL As String
+Dim Sql As String
 Dim RS As ADODB.Recordset
 Dim I As Integer
 Dim arrData()
@@ -3298,7 +3328,7 @@ End Sub
 
 
 Private Sub SumaTotalPorcentajes()
-Dim SQL As String
+Dim Sql As String
 Dim I As Currency
 Dim RS As ADODB.Recordset
    
@@ -3320,7 +3350,7 @@ End Sub
 
 
 Private Function VisualizaClasificacion() As Boolean
-Dim SQL As String
+Dim Sql As String
 
 
 '    SQL = ""
