@@ -23,6 +23,54 @@ Begin VB.Form frmListAnticipos
       TabIndex        =   0
       Top             =   0
       Width           =   6615
+      Begin VB.Frame FrameTipo 
+         Height          =   705
+         Left            =   3300
+         TabIndex        =   334
+         Top             =   270
+         Visible         =   0   'False
+         Width           =   2715
+         Begin VB.CheckBox Check1 
+            Caption         =   "Agroseguro"
+            Height          =   195
+            Index           =   26
+            Left            =   1410
+            TabIndex        =   338
+            Top             =   420
+            Value           =   1  'Checked
+            Width           =   1245
+         End
+         Begin VB.CheckBox Check1 
+            Caption         =   "VCampo"
+            Height          =   195
+            Index           =   25
+            Left            =   120
+            TabIndex        =   337
+            Top             =   420
+            Value           =   1  'Checked
+            Width           =   1035
+         End
+         Begin VB.CheckBox Check1 
+            Caption         =   "PIntegrado"
+            Height          =   195
+            Index           =   24
+            Left            =   1410
+            TabIndex        =   336
+            Top             =   180
+            Value           =   1  'Checked
+            Width           =   1155
+         End
+         Begin VB.CheckBox Check1 
+            Caption         =   "Normales"
+            Height          =   195
+            Index           =   23
+            Left            =   120
+            TabIndex        =   335
+            Top             =   180
+            Value           =   1  'Checked
+            Width           =   1035
+         End
+      End
       Begin VB.TextBox txtcodigo 
          Enabled         =   0   'False
          Height          =   435
@@ -2607,6 +2655,7 @@ Begin VB.Form frmListAnticipos
          BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
             NumPanels       =   1
             BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -4279,7 +4328,7 @@ Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
 Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en los listados
                         'Se necesita si el tipo de codigo es texto
 
-Public Event RectificarFactura(Cliente As String, Observaciones As String)
+Public Event RectificarFactura(cliente As String, observaciones As String)
 
 Private Conexion As Byte
 '1.- Conexión a BD Ariges  2.- Conexión a BD Conta
@@ -4341,7 +4390,7 @@ Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
-Dim tipo As String
+Dim Tipo As String
 
 Dim indice As Integer
 
@@ -4359,17 +4408,44 @@ Dim vReturn As Integer
 Dim vFechas As String
 
 
-Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
-End Sub
 
+Private Sub KEYpress(KeyAscii As Integer)
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+End Sub
 
 Private Sub Check1_Click(Index As Integer)
     Select Case Index
+        Case 5
+'[Monica]27/01/2016: complementaria catadau
+            '++Monica:03/06/2013: distinguimos para Catadau entre entradas
+            Check1(16).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            Check1(16).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            imgAyuda(2).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            imgAyuda(2).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            If Check1(16).Enabled Then
+                Check1(16).Top = 3690
+                imgAyuda(2).Top = 3690
+            End If
+            
+            FrameTipo.Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            FrameTipo.visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            FrameTipo.Top = 4530
+        
+            Check1(25).visible = (Check1(5).Value = 1)
+            Check1(25).Enabled = (Check1(5).Value = 1)
+            Check1(26).visible = (Check1(5).Value = 1)
+            Check1(26).Enabled = (Check1(5).Value = 1)
+            If Check1(25).Enabled Then
+                Check1(25).Value = 1
+                Check1(26).Value = 1
+            Else
+                Check1(25).Value = 0
+                Check1(26).Value = 0
+            End If
+        
         Case 7
             CertificadoRetencionesVisible
         Case 9
@@ -4421,8 +4497,8 @@ Dim Anticipos As String
     
     '======== FORMULA  ====================================
     'D/H SOCIO
-    cDesde = Trim(txtcodigo(64).Text)
-    cHasta = Trim(txtcodigo(65).Text)
+    cDesde = Trim(txtCodigo(64).Text)
+    cHasta = Trim(txtCodigo(65).Text)
     nDesde = txtNombre(64).Text
     nHasta = txtNombre(65).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -4433,8 +4509,8 @@ Dim Anticipos As String
     End If
     
     'D/H CLASE
-    cDesde = Trim(txtcodigo(66).Text)
-    cHasta = Trim(txtcodigo(67).Text)
+    cDesde = Trim(txtCodigo(66).Text)
+    cHasta = Trim(txtCodigo(67).Text)
     nDesde = txtNombre(66).Text
     nHasta = txtNombre(67).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -4445,8 +4521,8 @@ Dim Anticipos As String
     End If
     
     Sql2 = ""
-    If txtcodigo(66).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(66).Text, "N")
-    If txtcodigo(67).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(67).Text, "N")
+    If txtCodigo(66).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(66).Text, "N")
+    If txtCodigo(67).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(67).Text, "N")
     
     Set frmMens = New frmMensajes
     
@@ -4458,8 +4534,8 @@ Dim Anticipos As String
     
     
     'D/H Fecha
-    cDesde = Trim(txtcodigo(62).Text)
-    cHasta = Trim(txtcodigo(63).Text)
+    cDesde = Trim(txtCodigo(62).Text)
+    cHasta = Trim(txtCodigo(63).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -4545,7 +4621,7 @@ Dim vSQL As String
         
                 If Not ComprobarTiposMovimiento(2, nTabla, cadSelect) Then Exit Sub
                         
-                If FacturaAnticipoVentaCampo(txtcodigo(49).Text, txtcodigo(50).Text, txtcodigo(45).Text, txtcodigo(51).Text) Then
+                If FacturaAnticipoVentaCampo(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     
@@ -4565,7 +4641,7 @@ Dim vSQL As String
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Fecha de Factura
-                        FecFac = CDate(txtcodigo(51).Text)
+                        FecFac = CDate(txtCodigo(51).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
@@ -4592,7 +4668,7 @@ Dim vSQL As String
         
                 If Not ComprobarTiposMovimiento(0, nTabla, cadSelect) Then Exit Sub
                         
-                If FacturaAnticipoSinEntrada(txtcodigo(49).Text, txtcodigo(50).Text, txtcodigo(45).Text, txtcodigo(51).Text, Check1(17).Value = 1) Then
+                If FacturaAnticipoSinEntrada(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     
@@ -4618,7 +4694,7 @@ Dim vSQL As String
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Fecha de Factura
-                        FecFac = CDate(txtcodigo(51).Text)
+                        FecFac = CDate(txtCodigo(51).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
@@ -4680,8 +4756,8 @@ Dim MaxContador As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(55).Text)
-        cHasta = Trim(txtcodigo(56).Text)
+        cDesde = Trim(txtCodigo(55).Text)
+        cHasta = Trim(txtCodigo(56).Text)
         nDesde = txtNombre(55).Text
         nHasta = txtNombre(56).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -4692,8 +4768,8 @@ Dim MaxContador As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(53).Text)
-        cHasta = Trim(txtcodigo(54).Text)
+        cDesde = Trim(txtCodigo(53).Text)
+        cHasta = Trim(txtCodigo(54).Text)
         nDesde = txtNombre(53).Text
         nHasta = txtNombre(54).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -4704,13 +4780,13 @@ Dim MaxContador As String
         End If
         
         Sql2 = ""
-        If txtcodigo(53).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(53).Text, "N")
-        If txtcodigo(54).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(54).Text, "N")
+        If txtCodigo(53).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(53).Text, "N")
+        If txtCodigo(54).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(54).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(57).Text)
-        cHasta = Trim(txtcodigo(58).Text)
+        cDesde = Trim(txtCodigo(57).Text)
+        cHasta = Trim(txtCodigo(58).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -4794,7 +4870,7 @@ Dim Sql2 As String
 Dim TotalKilos As Long
 Dim ImporteSoc As Currency
 Dim Importe As Currency
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Precio As Double
 Dim TotImpor As Currency
 Dim TotalSocios As Long
@@ -4843,7 +4919,7 @@ Dim Reg As Long
     
     Sql = "select sum(kilosnet) from raporreparto"
     TotalKilos = DevuelveValor(Sql)
-    Importe = CCur(txtcodigo(47).Text)
+    Importe = CCur(txtCodigo(47).Text)
     
     Precio = Round2(Importe / TotalKilos, 6)
     TotImpor = 0
@@ -4855,12 +4931,12 @@ Dim Reg As Long
     
     Sql = "select codsocio, tipoentr, kilosnet from raporreparto order by codsocio"
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Reg = Reg + 1
-        ImporteSoc = Round2(Precio * DBLet(RS!KilosNet, "N"), 2)
+        ImporteSoc = Round2(Precio * DBLet(Rs!KilosNet, "N"), 2)
         
         If Reg <> TotalSocios Then
             TotImpor = TotImpor + ImporteSoc
@@ -4870,13 +4946,13 @@ Dim Reg As Long
         
         Sql = "update raporreparto set importe = " & DBSet(ImporteSoc, "N")
         Sql = Sql & ", precio = " & TransformaComasPuntos(ImporteSinFormato(CStr(Precio)))
-        Sql = Sql & " where codsocio= " & DBSet(RS!Codsocio, "N")
-        Sql = Sql & " and tipoentr= " & DBSet(RS!TipoEntr, "N")
+        Sql = Sql & " where codsocio= " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and tipoentr= " & DBSet(Rs!TipoEntr, "N")
         conn.Execute Sql
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     Me.Label2(32).visible = False
@@ -4895,24 +4971,24 @@ End Function
 
 
 Private Sub CmdAcepDesF_Click()
-Dim tipo As Byte
+Dim Tipo As Byte
     If DatosOk Then
         Pb2.visible = True
         Select Case OpcionListado
             Case 5 ' anticipo
-                tipo = 0
+                Tipo = 0
             Case 7
                 ' venta campo
                 Select Case Combo1(1).ListIndex
                     Case 0 ' anticipo
-                        tipo = 1
+                        Tipo = 1
                     Case 1 ' liquidacion
-                        tipo = 2
+                        Tipo = 2
                 End Select
             Case 15 ' liquidacion
-                tipo = 3
+                Tipo = 3
         End Select
-        If DeshacerFacturacion(tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, Pb2) Then
+        If DeshacerFacturacion(Tipo, txtCodigo(9).Text, txtCodigo(10).Text, txtCodigo(11).Text, Pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -4952,8 +5028,8 @@ Dim vSQL As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(16).Text)
-        cHasta = Trim(txtcodigo(17).Text)
+        cDesde = Trim(txtCodigo(16).Text)
+        cHasta = Trim(txtCodigo(17).Text)
         nDesde = txtNombre(16).Text
         nHasta = txtNombre(17).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -4964,8 +5040,8 @@ Dim vSQL As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(18).Text)
-        cHasta = Trim(txtcodigo(19).Text)
+        cDesde = Trim(txtCodigo(18).Text)
+        cHasta = Trim(txtCodigo(19).Text)
         nDesde = txtNombre(18).Text
         nHasta = txtNombre(19).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -4975,14 +5051,14 @@ Dim vSQL As String
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHClase=""") Then Exit Sub
         End If
         
-        If txtcodigo(18).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(18).Text, "N")
-        If txtcodigo(19).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(19).Text, "N")
+        If txtCodigo(18).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(18).Text, "N")
+        If txtCodigo(19).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(19).Text, "N")
         
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(22).Text)
-        cHasta = Trim(txtcodigo(23).Text)
+        cDesde = Trim(txtCodigo(22).Text)
+        cHasta = Trim(txtCodigo(23).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -5035,16 +5111,16 @@ Dim vSQL As String
                 Me.Pb3.Value = 0
                 Me.Refresh
                         
-                If FacturacionVentaCampo(Combo1(0).ListIndex, nTabla, cadSelect, txtcodigo(14).Text, Me.Pb3, Check1(10).Value, Check1(15).Value = 1) Then
+                If FacturacionVentaCampo(Combo1(0).ListIndex, nTabla, cadSelect, txtCodigo(14).Text, Me.Pb3, Check1(10).Value, Check1(15).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     ' si imprimimos resumen
                     If Me.Check1(0).Value Then
                         cadFormula = ""
-                        cadParam = cadParam & "pFecFac= """ & txtcodigo(14).Text & """|"
+                        cadParam = cadParam & "pFecFac= """ & txtCodigo(14).Text & """|"
                         numParam = numParam + 1
                         
-                        FecFac = CDate(txtcodigo(14).Text)
+                        FecFac = CDate(txtCodigo(14).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -5090,7 +5166,7 @@ Dim vSQL As String
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Fecha de Factura
-                        FecFac = CDate(txtcodigo(14).Text)
+                        FecFac = CDate(txtCodigo(14).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
@@ -5140,7 +5216,7 @@ Dim devuelve As String
 Dim nTabla As String
 
     '[Monica]11/03/2015: observaciones de factura
-    ObsFactura = txtcodigo(68)
+    ObsFactura = txtCodigo(68)
 
 
 
@@ -5152,18 +5228,18 @@ Dim nTabla As String
     If Not ComprobarTiposIVA("rhisfruta", "rhisfruta.numalbar = " & NumCod) Then Exit Sub
     
     
-    If FacturacionLiquidacionDirecta(NumCod, txtcodigo(61).Text, txtcodigo(60).Text) Then
+    If FacturacionLiquidacionDirecta(NumCod, txtCodigo(61).Text, txtCodigo(60).Text) Then
         MsgBox "Proceso realizado correctamente", vbExclamation
         
         'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
         If Me.Check1(18).Value Then
             cadFormula = ""
-            cadParam = cadParam & "pFecFac= """ & txtcodigo(61).Text & """|"
+            cadParam = cadParam & "pFecFac= """ & txtCodigo(61).Text & """|"
             numParam = numParam + 1
             cadParam = cadParam & "pTitulo= ""Resumen Facturación de Liquidaciones""|"
             numParam = numParam + 1
             
-            FecFac = CDate(txtcodigo(61).Text)
+            FecFac = CDate(txtCodigo(61).Text)
             cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
             If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -5185,7 +5261,7 @@ Dim nTabla As String
             If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
             'Fecha de Factura
-            FecFac = CDate(txtcodigo(61).Text)
+            FecFac = CDate(txtCodigo(61).Text)
             cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
             If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
             cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -5224,14 +5300,14 @@ End Sub
 Private Sub CmdAcepModelo_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim I As Byte
+Dim i As Byte
 Dim nTabla As String
 Dim nTabla2 As String
 Dim nTabla3 As String
 
 Dim vWhere As String
 Dim b As Boolean
-Dim tipo As Byte
+Dim Tipo As Byte
 Dim FecFin As String
 Dim FecIni As String
 Dim Codigo1 As String
@@ -5255,8 +5331,8 @@ Dim vCampAnt As CCampAnt
     '++
 
     'D/H Socios
-    cDesde = Trim(txtcodigo(34).Text)
-    cHasta = Trim(txtcodigo(35).Text)
+    cDesde = Trim(txtCodigo(34).Text)
+    cHasta = Trim(txtCodigo(35).Text)
     nDesde = txtNombre(34).Text
     nHasta = txtNombre(35).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -5277,8 +5353,8 @@ Dim vCampAnt As CCampAnt
     
     
     'D/H Transportistas
-    cDesde = Trim(txtcodigo(43).Text)
-    cHasta = Trim(txtcodigo(44).Text)
+    cDesde = Trim(txtCodigo(43).Text)
+    cHasta = Trim(txtCodigo(44).Text)
     nDesde = txtNombre(43).Text
     nHasta = txtNombre(44).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -5320,7 +5396,7 @@ Dim vCampAnt As CCampAnt
     nTabla = vEmpresa.BDAriagro & ".rfactsoc INNER JOIN usuarios.stipom stipom ON rfactsoc.codtipom = stipom.codtipom "
     
     
-    txtcodigo(30).Text = Format(Year(FecIni), "0000") ' inicio del año natural
+    txtCodigo(30).Text = Format(Year(FecIni), "0000") ' inicio del año natural
     
     
     Select Case OpcionListado
@@ -5387,7 +5463,7 @@ Private Sub CmdAcepRecalImp_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -5404,11 +5480,11 @@ Dim Sql As String
     If Not DatosOk Then Exit Sub
 
     ' Socio el socio es obligatorio introducirlo
-    If Not AnyadirAFormula(cadSelect, "rhisfruta.codsocio = " & Trim(txtcodigo(52).Text)) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, "rhisfruta.codsocio = " & Trim(txtCodigo(52).Text)) Then Exit Sub
     
     ' Variedad
-    If Trim(txtcodigo(48).Text) <> "" Then
-        If Not AnyadirAFormula(cadSelect, "rhisfruta.codvarie = " & Trim(txtcodigo(48).Text)) Then Exit Sub
+    If Trim(txtCodigo(48).Text) <> "" Then
+        If Not AnyadirAFormula(cadSelect, "rhisfruta.codvarie = " & Trim(txtCodigo(48).Text)) Then Exit Sub
     End If
     
     If Not AnyadirAFormula(cadSelect, "rhisfruta.tipoentr = 1") Then Exit Sub
@@ -5440,7 +5516,7 @@ Private Sub CmdAcepResul_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -5467,11 +5543,11 @@ Dim Codigo1 As String
     
     'Tipo de movimiento:
     Tipos = ""
-    For I = 1 To ListView1(1).ListItems.Count
-        If ListView1(1).ListItems(I).Checked Then
-            Tipos = Tipos & DBSet(ListView1(1).ListItems(I).Key, "T") & ","
+    For i = 1 To ListView1(1).ListItems.Count
+        If ListView1(1).ListItems(i).Checked Then
+            Tipos = Tipos & DBSet(ListView1(1).ListItems(i).Key, "T") & ","
         End If
-    Next I
+    Next i
     
     If Tipos = "" Then
         MsgBox "Debe seleccionar al menos un tipo de factura.", vbExclamation
@@ -5485,8 +5561,8 @@ Dim Codigo1 As String
     End If
     
     'D/H Socios
-    cDesde = Trim(txtcodigo(24).Text)
-    cHasta = Trim(txtcodigo(25).Text)
+    cDesde = Trim(txtCodigo(24).Text)
+    cHasta = Trim(txtCodigo(25).Text)
     nDesde = txtNombre(24).Text
     nHasta = txtNombre(25).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -5501,8 +5577,8 @@ Dim Codigo1 As String
     
     
     'D/H Transportistas
-    cDesde = Trim(txtcodigo(41).Text)
-    cHasta = Trim(txtcodigo(42).Text)
+    cDesde = Trim(txtCodigo(41).Text)
+    cHasta = Trim(txtCodigo(42).Text)
     nDesde = txtNombre(41).Text
     nHasta = txtNombre(42).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -5519,8 +5595,8 @@ Dim Codigo1 As String
     
     
     'D/H Clase
-    cDesde = Trim(txtcodigo(28).Text)
-    cHasta = Trim(txtcodigo(29).Text)
+    cDesde = Trim(txtCodigo(28).Text)
+    cHasta = Trim(txtCodigo(29).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{variedades.codclase}"
@@ -5536,13 +5612,13 @@ Dim Codigo1 As String
     End If
     
     vSQL = ""
-    If txtcodigo(28).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(28).Text, "N")
-    If txtcodigo(29).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtcodigo(29).Text, "N")
+    If txtCodigo(28).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(28).Text, "N")
+    If txtCodigo(29).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(29).Text, "N")
     
     
     'D/H Fecha factura
-    cDesde = Trim(txtcodigo(26).Text)
-    cHasta = Trim(txtcodigo(27).Text)
+    cDesde = Trim(txtCodigo(26).Text)
+    cHasta = Trim(txtCodigo(27).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{" & Tabla & ".fecfactu}"
@@ -5617,13 +5693,13 @@ Dim Codigo1 As String
 
                         cadNombreRPT = nomDocu
 
-                        cadParam = cadParam & "pDesdeFecha=""" & txtcodigo(26).Text & """|"
+                        cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pHastaFecha=""" & txtcodigo(27).Text & """|"
+                        cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pFecha=""" & txtcodigo(32).Text & """|"
+                        cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                         numParam = numParam + 1
-                        cadParam = cadParam & "pJustificante=" & txtcodigo(33).Text & "|"
+                        cadParam = cadParam & "pJustificante=" & txtCodigo(33).Text & "|"
                         numParam = numParam + 1
                     Else
                         If Check1(9).Value = 1 Then ' informe de aportaciones
@@ -5635,11 +5711,11 @@ Dim Codigo1 As String
     
                             cadNombreRPT = nomDocu
     
-                            cadParam = cadParam & "pDesdeFecha=""" & txtcodigo(26).Text & """|"
+                            cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                             numParam = numParam + 1
-                            cadParam = cadParam & "pHastaFecha=""" & txtcodigo(27).Text & """|"
+                            cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                             numParam = numParam + 1
-                            cadParam = cadParam & "pFecha=""" & txtcodigo(32).Text & """|"
+                            cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                             numParam = numParam + 1
                             
                             '[Monica]12/01/2012 : el precio lo paso a capon
@@ -5663,11 +5739,11 @@ Dim Codigo1 As String
                                 cadNombreRPT = Replace(cadNombreRPT, "Retenciones", "RetencionesEpi")
                                 cadTitulo = "Informe de Retenciones por Socio/Epígrafe"
             
-                                cadParam = cadParam & "pDesdeFecha=""" & txtcodigo(26).Text & """|"
+                                cadParam = cadParam & "pDesdeFecha=""" & txtCodigo(26).Text & """|"
                                 numParam = numParam + 1
-                                cadParam = cadParam & "pHastaFecha=""" & txtcodigo(27).Text & """|"
+                                cadParam = cadParam & "pHastaFecha=""" & txtCodigo(27).Text & """|"
                                 numParam = numParam + 1
-                                cadParam = cadParam & "pFecha=""" & txtcodigo(32).Text & """|"
+                                cadParam = cadParam & "pFecha=""" & txtCodigo(32).Text & """|"
                                 numParam = numParam + 1
                                 
                                 ConSubInforme = True
@@ -5693,7 +5769,7 @@ End Sub
 
 Private Sub cmdAceptarAnt_Click()
     '[Monica]11/03/2015: observaciones de factura
-    ObsFactura = txtcodigo(68)
+    ObsFactura = txtCodigo(68)
     
     Select Case vParamAplic.Cooperativa
         Case 0 'COOPERATIVA CATADAU
@@ -5781,8 +5857,8 @@ Dim Tabla1 As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -5793,8 +5869,8 @@ Dim Tabla1 As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -5805,13 +5881,13 @@ Dim Tabla1 As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -5848,29 +5924,42 @@ Dim Tabla1 As String
             If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
         End If
                 
-        '[Monica]27/01/2016: si no es liquidacion complementaria unica, lo que se hacia antes
-        If vParamAplic.Cooperativa = 0 And (OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) And Check1(5).Value = 1 Then
-            If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4") Then Exit Sub
+        
+        '[Monica]03/06/2013: distinguimos entre entradas normales y entradas de p.integrado (solo para catadau)
+        If vParamAplic.Cooperativa = 0 And (OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) Then
+        '[Monica]27/01/2016: cambiamos lo de la seleccion de las entradas
+'                If Check1(16).Value = 1 Then ' solo entradas normales
+'                    If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 0") Then Exit Sub
+'                    If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 0") Then Exit Sub
+'                Else ' solo producto integrado
+'                    If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 2") Then Exit Sub
+'                    If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 2") Then Exit Sub
+'                End If
+            If Check1(23).Value = 0 Then ' normales
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 0") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 0") Then Exit Sub
+            End If
+            If Check1(24).Value = 0 Then ' producto integrado
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 2") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 2") Then Exit Sub
+            End If
+            If Check1(25).Value = 0 Then ' venta campo
+                If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1") Then Exit Sub
+            End If
+        
+            If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
+        
+        
         Else
             '[Monica]27/03/2013: nuevo tipo de entradas que tampoco hemos de liquidar (complementarias=siniestro) solo catadau
             '[Monica]30/11/2011: antes no estaba ni industria ni retirada
             'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
             If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} <> 1 and {rhisfruta.tipoentr} <> 3 and {rhisfruta.tipoentr} <> 4 and {rhisfruta.tipoentr} <> 6") Then Exit Sub
-            
-            '[Monica]03/06/2013: distinguimos entre entradas normales y entradas de p.integrado (solo para catadau)
-            If vParamAplic.Cooperativa = 0 And (OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) Then
-                If Check1(16).Value = 1 Then ' solo entradas normales
-                    If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 0") Then Exit Sub
-                    If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 0") Then Exit Sub
-                Else ' solo producto integrado
-                    If Not AnyadirAFormula(cadSelect, "{rhisfruta.tipoentr} = 2") Then Exit Sub
-                    If Not AnyadirAFormula(cadFormula, "{rhisfruta.tipoentr} = 2") Then Exit Sub
-                End If
-            End If
-        
         End If
+        
         
         '++monica: 28/07/2009 dependiendo del tipo de recoleccion (0=coop 1=socio 2=todos)
         Select Case Combo1(2).ListIndex
@@ -6020,18 +6109,18 @@ Dim Tabla1 As String
             
             If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
-                cDesde = Trim(txtcodigo(6).Text)
-                cHasta = Trim(txtcodigo(7).Text)
+                cDesde = Trim(txtCodigo(6).Text)
+                cHasta = Trim(txtCodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
@@ -6051,7 +6140,7 @@ Dim Tabla1 As String
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             ConSubInforme = True
@@ -6113,10 +6202,10 @@ Dim Tabla1 As String
                                 Me.Refresh
                                 b = False
                                 If TipoPrec = 0 Then
-                                    b = FacturacionAnticiposCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1)
+                                    b = FacturacionAnticiposCatadau(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1)
                                 Else
                                     '[Monica]07/02/2012: pasamos a la funcion si es o no liquidacion complementaria
-                                    b = FacturacionLiquidacionesCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, (Check1(5).Value = 1), txtcodigo(6).Text, txtcodigo(7).Text, vFechas, (Check1(21).Value = 1))
+                                    b = FacturacionLiquidacionesCatadau(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, (Check1(5).Value = 1), txtCodigo(6).Text, txtCodigo(7).Text, vFechas, (Check1(21).Value = 1))
                                 End If
                                 If b Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -6124,7 +6213,7 @@ Dim Tabla1 As String
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
                                             cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
@@ -6133,7 +6222,7 @@ Dim Tabla1 As String
                                         End If
                                         numParam = numParam + 1
                                         
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -6163,7 +6252,7 @@ Dim Tabla1 As String
                                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -6207,7 +6296,7 @@ End Sub
 
 Private Function CargarFechasAnticiposPendientes(vTabla As String, vSelect As String) As String
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Cadena As String
 
 
@@ -6224,15 +6313,15 @@ Dim Cadena As String
     Sql = "select distinct fff.fecfactu from (rfactsoc_variedad fff inner join usuarios.stipom aaa on fff.codtipom = aaa.codtipom and aaa.tipodocu = 1) inner join rfactsoc ccc on ccc.codtipom = fff.codtipom and ccc.numfactu = fff.numfactu and ccc.fecfactu = fff.fecfactu   "
     Sql = Sql & " where fff.descontado = 0 and ccc.esanticipogasto = 0 and (fff.codvarie, ccc.codsocio, fff.codcampo)  in (select distinct rhisfruta.codvarie, rhisfruta.codsocio, rhisfruta.codcampo from " & vTabla & " where " & vSelect & ") "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Cadena = ""
     
-    While Not RS.EOF
-        Cadena = Cadena & DBSet(RS.Fields(0).Value, "F") & ","
+    While Not Rs.EOF
+        Cadena = Cadena & DBSet(Rs.Fields(0).Value, "F") & ","
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     'quitamos la ultima coma
@@ -6240,7 +6329,7 @@ Dim Cadena As String
         Cadena = Mid(Cadena, 1, Len(Cadena) - 1)
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     CargarFechasAnticiposPendientes = Cadena
     Exit Function
@@ -6284,8 +6373,8 @@ Dim MaxContador As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -6296,8 +6385,8 @@ Dim MaxContador As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -6308,13 +6397,13 @@ Dim MaxContador As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -6467,18 +6556,18 @@ Dim MaxContador As String
             
             If HayPreciosVariedadesValsur(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
-                cDesde = Trim(txtcodigo(6).Text)
-                cHasta = Trim(txtcodigo(7).Text)
+                cDesde = Trim(txtCodigo(6).Text)
+                cHasta = Trim(txtCodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 If Check1(5).Value = 0 Then
@@ -6493,14 +6582,14 @@ Dim MaxContador As String
                 
                 '02/09/2010
                 cadAux = "{rprecios.contador} = (select max(p.contador) from rprecios p where p.codvarie = rhisfruta.codvarie and "
-                cadAux = cadAux & " p.tipofact = " & TipoPrec & " and p.fechaini = " & DBSet(txtcodigo(6).Text, "F")
-                cadAux = cadAux & " and p.fechafin = " & DBSet(txtcodigo(7).Text, "F") & ")"
+                cadAux = cadAux & " p.tipofact = " & TipoPrec & " and p.fechaini = " & DBSet(txtCodigo(6).Text, "F")
+                cadAux = cadAux & " and p.fechafin = " & DBSet(txtCodigo(7).Text, "F") & ")"
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 Select Case OpcionListado
                     Case 1  '1 - informe de anticipos
                         'pasamos como parametro la fecha de anticipo
-                        cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                        cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                         numParam = numParam + 1
                         ConSubInforme = False
                         
@@ -6525,7 +6614,7 @@ Dim MaxContador As String
                                                                         
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
@@ -6539,7 +6628,7 @@ Dim MaxContador As String
                                                                         
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
@@ -6552,7 +6641,7 @@ Dim MaxContador As String
         '                            If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
                                     ConSubInforme = True
                                     'pasamos como parametro la fecha de anticipo
-                                    cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                                    cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
                                     numParam = numParam + 1
@@ -6683,23 +6772,23 @@ Dim MaxContador As String
                             Select Case vParamAplic.Cooperativa
                                 Case 1, 3, 5  ' valsur / mogente
                                     If TipoPrec = 0 Then
-                                        b = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                        b = FacturacionAnticiposValsur(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                     Else
-                                        b = FacturacionLiquidacionesValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, Check1(5).Value)
+                                        b = FacturacionLiquidacionesValsur(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, Check1(5).Value)
                                     End If
                                 Case 4 ' alzira
                                     If TipoPrec = 0 Then
                                         '[Monica]20/01/2012: alzira no ha hecho hasta el momento anticipos
                                         'b = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
-                                        b = FacturacionAnticiposAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                        b = FacturacionAnticiposAlzira(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                     Else
-                                        b = FacturacionLiquidacionesAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, TipoPrec)
+                                        b = FacturacionLiquidacionesAlzira(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, TipoPrec)
                                     End If
                                 Case 2 ' Picassent
                                     If TipoPrec = 0 Then
-                                        b = FacturacionAnticiposPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, Check1(14).Value = 1)
+                                        b = FacturacionAnticiposPicassent(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, Check1(14).Value = 1)
                                     Else
-                                        b = FacturacionLiquidacionesPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1)
+                                        b = FacturacionLiquidacionesPicassent(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1)
                                     End If
                                 
                                 
@@ -6710,7 +6799,7 @@ Dim MaxContador As String
                                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                 If Me.Check1(2).Value Then
                                     cadFormula = ""
-                                    cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                    cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     If TipoPrec = 0 Then
                                         cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
@@ -6719,7 +6808,7 @@ Dim MaxContador As String
                                     End If
                                     numParam = numParam + 1
                                     
-                                    FecFac = CDate(txtcodigo(15).Text)
+                                    FecFac = CDate(txtCodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -6749,7 +6838,7 @@ Dim MaxContador As String
                                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     'Fecha de Factura
-                                    FecFac = CDate(txtcodigo(15).Text)
+                                    FecFac = CDate(txtCodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -6836,8 +6925,8 @@ Dim vSeccion As CSeccion
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -6848,8 +6937,8 @@ Dim vSeccion As CSeccion
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -6860,13 +6949,13 @@ Dim vSeccion As CSeccion
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -7030,18 +7119,18 @@ Dim vSeccion As CSeccion
             If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
             
                 'D/H fecha
-                cDesde = Trim(txtcodigo(6).Text)
-                cHasta = Trim(txtcodigo(7).Text)
+                cDesde = Trim(txtCodigo(6).Text)
+                cHasta = Trim(txtCodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
@@ -7061,7 +7150,7 @@ Dim vSeccion As CSeccion
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             '[Monica]14/02/2012: pasamos el iva de la seccion de horto para el calculo del importe con iva
@@ -7134,10 +7223,10 @@ Dim vSeccion As CSeccion
                                 Me.Refresh
                                 b = False
                                 If TipoPrec = 0 Then
-                                    b = FacturacionAnticiposCatadau(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                    b = FacturacionAnticiposCatadau(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
                                 Else
                                    '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
-                                    b = FacturacionLiquidacionesQuatretonda(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, (TipoPrec = 3), Seccion)
+                                    b = FacturacionLiquidacionesQuatretonda(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, (TipoPrec = 3), Seccion)
                                 End If
                                 If b Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7145,7 +7234,7 @@ Dim vSeccion As CSeccion
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
                                             cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
@@ -7154,7 +7243,7 @@ Dim vSeccion As CSeccion
                                         End If
                                         numParam = numParam + 1
                                         
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -7184,7 +7273,7 @@ Dim vSeccion As CSeccion
                                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -7252,7 +7341,7 @@ Dim Sql2 As String
 Dim cadSelect1 As String
 
     '[Monica]11/03/2015: observaciones de factura
-    ObsFactura = txtcodigo(68)
+    ObsFactura = txtCodigo(68)
 
 
     InicializarVbles
@@ -7264,8 +7353,8 @@ Dim cadSelect1 As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7276,8 +7365,8 @@ Dim cadSelect1 As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7288,13 +7377,13 @@ Dim cadSelect1 As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -7357,8 +7446,8 @@ Dim cadSelect1 As String
             Select Case OpcionListado
                 Case 2  '2 - listado de prevision de pagos de anticipos
                     cadSelect1 = " rhisfruta.tipoentr <> 1 and rhisfruta.recolect = 1 "
-                    If txtcodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtcodigo(6).Text, "F")
-                    If txtcodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtcodigo(7).Text, "F")
+                    If txtCodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtCodigo(6).Text, "F")
+                    If txtCodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtCodigo(7).Text, "F")
                     
                     If CargarTemporalAnticiposGastos(nTabla, cadSelect, cadSelect1) Then
                         cadFormula = ""
@@ -7383,11 +7472,11 @@ Dim cadSelect1 As String
                         Me.Refresh
                         
                         cadSelect1 = " rhisfruta.tipoentr <> 1 and rhisfruta.recolect = 1 "
-                        If txtcodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtcodigo(6).Text, "F")
-                        If txtcodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtcodigo(7).Text, "F")
+                        If txtCodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtCodigo(6).Text, "F")
+                        If txtCodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtCodigo(7).Text, "F")
                         
                         
-                        b = FacturacionAnticiposGastos(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, cadSelect1)
+                        b = FacturacionAnticiposGastos(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, cadSelect1)
                         
                         If b Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7395,14 +7484,14 @@ Dim cadSelect1 As String
                             'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS GASTOS
                             If Me.Check1(2).Value Then
                                 cadFormula = ""
-                                cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
                                 If TipoPrec = 0 Then
                                     cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos Gastos""|"
                                 End If
                                 numParam = numParam + 1
                                 
-                                FecFac = CDate(txtcodigo(15).Text)
+                                FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -7430,7 +7519,7 @@ Dim cadSelect1 As String
                                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                  
                                 'Fecha de Factura
-                                FecFac = CDate(txtcodigo(15).Text)
+                                FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -7490,7 +7579,7 @@ Dim Sql3 As String
 Dim cadSelect1 As String
 
     '[Monica]11/03/2015: observaciones de factura
-    ObsFactura = txtcodigo(68)
+    ObsFactura = txtCodigo(68)
 
 
     InicializarVbles
@@ -7500,17 +7589,17 @@ Dim cadSelect1 As String
     numParam = numParam + 1
     
     If DatosOk Then
-        If Check1(12).Value = 1 And ComprobarCero(txtcodigo(59).Text) = 0 Then
+        If Check1(12).Value = 1 And ComprobarCero(txtCodigo(59).Text) = 0 Then
             MsgBox "Debe introducir obligatoriamente la cantidad de kilos retirados.", vbExclamation
-            PonerFoco txtcodigo(59)
+            PonerFoco txtCodigo(59)
             Exit Sub
         End If
         
         
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7521,12 +7610,12 @@ Dim cadSelect1 As String
         End If
         
         Sql3 = ""
-        If txtcodigo(12).Text <> "" Then Sql3 = Sql3 & " and rsocios.codsocio >=" & DBSet(txtcodigo(12).Text, "N")
-        If txtcodigo(13).Text <> "" Then Sql3 = Sql3 & " and rsocios.codsocio <=" & DBSet(txtcodigo(13).Text, "N")
+        If txtCodigo(12).Text <> "" Then Sql3 = Sql3 & " and rsocios.codsocio >=" & DBSet(txtCodigo(12).Text, "N")
+        If txtCodigo(13).Text <> "" Then Sql3 = Sql3 & " and rsocios.codsocio <=" & DBSet(txtCodigo(13).Text, "N")
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7537,13 +7626,13 @@ Dim cadSelect1 As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -7655,7 +7744,7 @@ Dim cadSelect1 As String
                         Me.Pb1.Value = 0
                         Me.Refresh
                         
-                        b = FacturacionAnticiposGenerico("tmpliquidacion", "codigo = " & vUsu.Codigo, txtcodigo(15).Text, Me.Pb1, txtcodigo(6).Text, txtcodigo(7).Text, Check1(12).Value = 1, Check1(22).Value = 1)
+                        b = FacturacionAnticiposGenerico("tmpliquidacion", "codigo = " & vUsu.Codigo, txtCodigo(15).Text, Me.Pb1, txtCodigo(6).Text, txtCodigo(7).Text, Check1(12).Value = 1, Check1(22).Value = 1)
                         
                         If b Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7663,14 +7752,14 @@ Dim cadSelect1 As String
                             'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS GASTOS
                             If Me.Check1(2).Value Then
                                 cadFormula = ""
-                                cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                 numParam = numParam + 1
                                 If TipoPrec = 0 Then
                                     cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos Genérico""|"
                                 End If
                                 numParam = numParam + 1
                                 
-                                FecFac = CDate(txtcodigo(15).Text)
+                                FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -7698,7 +7787,7 @@ Dim cadSelect1 As String
                                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                  
                                 'Fecha de Factura
-                                FecFac = CDate(txtcodigo(15).Text)
+                                FecFac = CDate(txtCodigo(15).Text)
                                 cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                 cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -7761,7 +7850,7 @@ Dim cadSelect1 As String
 Dim CadenaAlbaranes As String
     
     '[Monica]11/03/2015: observaciones de factura
-    ObsFactura = txtcodigo(68)
+    ObsFactura = txtCodigo(68)
 
     InicializarVbles
     
@@ -7772,8 +7861,8 @@ Dim CadenaAlbaranes As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7784,8 +7873,8 @@ Dim CadenaAlbaranes As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -7796,13 +7885,13 @@ Dim CadenaAlbaranes As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -7891,18 +7980,18 @@ Dim CadenaAlbaranes As String
             
             If HayPreciosVariedadesIndustria(nTabla, cadSelect) Then
                 'D/H fecha
-                cDesde = Trim(txtcodigo(6).Text)
-                cHasta = Trim(txtcodigo(7).Text)
+                cDesde = Trim(txtCodigo(6).Text)
+                cHasta = Trim(txtCodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 
@@ -7915,7 +8004,7 @@ Dim CadenaAlbaranes As String
                             cadFormula = ""
                             If Not AnyadirAFormula(cadFormula, "{tmpliquidacion.codusu} = " & vUsu.Codigo) Then Exit Sub
                             
-                            cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             
                             ConSubInforme = True
@@ -7950,19 +8039,19 @@ Dim CadenaAlbaranes As String
                                 Me.Pb1.Max = Nregs
                                 Me.Pb1.Value = 0
                                 Me.Refresh
-                                b = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, CadenaAlbaranes)
+                                b = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, CadenaAlbaranes)
                                 If b Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                                    
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         cadParam = cadParam & "pTitulo= ""Resumen Facturación Liquidación Industria""|"
                                         numParam = numParam + 1
                                         
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -7984,7 +8073,7 @@ Dim CadenaAlbaranes As String
                                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                          
                                         'Fecha de Factura
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -8025,7 +8114,7 @@ Private Sub cmdAceptarReimp_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -8044,11 +8133,11 @@ Dim Tipos As String
     '======== FORMULA  ====================================
     'Tipo de movimiento:
     Tipos = ""
-    For I = 1 To ListView1(0).ListItems.Count
-        If ListView1(0).ListItems(I).Checked Then
-            Tipos = Tipos & DBSet(ListView1(0).ListItems(I).Key, "T") & ","
+    For i = 1 To ListView1(0).ListItems.Count
+        If ListView1(0).ListItems(i).Checked Then
+            Tipos = Tipos & DBSet(ListView1(0).ListItems(i).Key, "T") & ","
         End If
-    Next I
+    Next i
     
     If Tipos = "" Then
         MsgBox "Debe seleccionar al menos un tipo de factura.", vbExclamation
@@ -8066,8 +8155,8 @@ Dim Tipos As String
     End If
     
     'D/H Cliente
-    cDesde = Trim(txtcodigo(0).Text)
-    cHasta = Trim(txtcodigo(1).Text)
+    cDesde = Trim(txtCodigo(0).Text)
+    cHasta = Trim(txtCodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -8078,8 +8167,8 @@ Dim Tipos As String
     End If
     
     'D/H Nro de Factura
-    cDesde = Trim(txtcodigo(4).Text)
-    cHasta = Trim(txtcodigo(5).Text)
+    cDesde = Trim(txtCodigo(4).Text)
+    cHasta = Trim(txtCodigo(5).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{rfactsoc.numfactu}"
@@ -8088,8 +8177,8 @@ Dim Tipos As String
     End If
     
     'D/H Fecha factura
-    cDesde = Trim(txtcodigo(2).Text)
-    cHasta = Trim(txtcodigo(3).Text)
+    cDesde = Trim(txtCodigo(2).Text)
+    cHasta = Trim(txtCodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{" & Tabla & ".fecfactu}"
@@ -8198,15 +8287,15 @@ Private Sub Combo1_LostFocus(Index As Integer)
                 ' si solo hay un tipo de movimiento de anticipo venta campo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(3) = 1 Then
-                    txtcodigo(9).Text = vParamAplic.PrimFactAntVC
-                    txtcodigo(10).Text = vParamAplic.UltFactAntVC
+                    txtCodigo(9).Text = vParamAplic.PrimFactAntVC
+                    txtCodigo(10).Text = vParamAplic.UltFactAntVC
                 End If
             Case 1 ' liquidacion venta campo
                 ' si solo hay un tipo de movimiento de liquidacion venta campo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(4) = 1 Then
-                    txtcodigo(9).Text = vParamAplic.PrimFactLiqVC
-                    txtcodigo(10).Text = vParamAplic.UltFactLiqVC
+                    txtCodigo(9).Text = vParamAplic.PrimFactLiqVC
+                    txtCodigo(10).Text = vParamAplic.UltFactLiqVC
                 End If
         End Select
     End If
@@ -8234,31 +8323,31 @@ Private Sub Form_Activate()
             Case 1, 2, 3 ' 1-Inf.Anticipos
                          ' 2-Listado de Previsión de pago
                          ' 3-Facturas de Anticipos
-                PonerFoco txtcodigo(12)
+                PonerFoco txtCodigo(12)
                 
             Case 4    ' reimpresion de facturas de SOCIOS
-                PonerFoco txtcodigo(4)
+                PonerFoco txtCodigo(4)
                 
             Case 5    ' deshacer proceso de facturacion de anticipos
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
                 Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(1) = 1 Then
-                    txtcodigo(9).Text = vParamAplic.PrimFactAnt
-                    txtcodigo(10).Text = vParamAplic.UltFactAnt
+                    txtCodigo(9).Text = vParamAplic.PrimFactAnt
+                    txtCodigo(10).Text = vParamAplic.UltFactAnt
                 End If
                 
             Case 6    ' generacion de factura de venta campo (anticipo o liquidacion)
                 Combo1(0).ListIndex = 0 ' por defecto anticipo
                 Pb3.visible = False
-                txtcodigo(14).Text = Format(Now, "dd/mm/yyyy")
+                txtCodigo(14).Text = Format(Now, "dd/mm/yyyy")
                 Check1(0).Value = 1
                 Check1(1).Value = 1
                 PonerFocoCmb Combo1(0)
                 
             Case 16 ' generacion de factura de anticipo venta campo sin entradas asociadas
-                txtcodigo(51).Text = Format(Now, "dd/mm/yyyy")
+                txtCodigo(51).Text = Format(Now, "dd/mm/yyyy")
                 Check1(8).Value = 1
                 
             Case 7    ' deshacer proceso de facturacion de venta campo
@@ -8266,15 +8355,15 @@ Private Sub Form_Activate()
                 Combo1(1).ListIndex = 0 ' por defecto anticipo
 '                txtCodigo(9).Text = vParamAplic.PrimFactAntVC
 '                txtCodigo(10).Text = vParamAplic.UltFactAntVC
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
             
             Case 8, 9   ' 8 - informe de resultados
                         ' 9 - informe de retenciones
-                PonerFoco txtcodigo(24)
+                PonerFoco txtCodigo(24)
                 
             Case 10, 11  ' 10 - grabacion modelo 190
                          ' 11 - grabacion modelo 346
-                PonerFoco txtcodigo(34)
+                PonerFoco txtCodigo(34)
                 
                 ' [Monica] 14/01/2010 No hay cabecera 190a
                 Me.FrameDomicilio.visible = False '(OpcionListado = 10)
@@ -8283,30 +8372,30 @@ Private Sub Form_Activate()
                 Me.BarraEst.visible = False '(OpcionListado = 10)
                 
 '                txtcodigo(30).Text = Format(Year(Now), "0000")
-                txtcodigo(36).Text = vParam.PerContacto
-                txtcodigo(37).Text = vParam.Telefono
+                txtCodigo(36).Text = vParam.PerContacto
+                txtCodigo(37).Text = vParam.Telefono
             
             Case 12, 13, 14 ' 12-Inf.Liquidacion
                             ' 13-Listado de Previsión de pago
                             ' 14-Facturas de Liquidacion
-                PonerFoco txtcodigo(12)
+                PonerFoco txtCodigo(12)
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
                 Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(2) = 1 Then
-                    txtcodigo(9).Text = vParamAplic.PrimFactLiq
-                    txtcodigo(10).Text = vParamAplic.UltFactLiq
+                    txtCodigo(9).Text = vParamAplic.PrimFactLiq
+                    txtCodigo(10).Text = vParamAplic.UltFactLiq
                 End If
                 
             Case 17 ' recalculo de importes de venta campo
-                PonerFoco txtcodigo(52)
+                PonerFoco txtCodigo(52)
                 
             Case 19 ' liquidacion de entrada directa
-                PonerFoco txtcodigo(61)
-                txtcodigo(61).Text = Format(Now, "dd/mm/yyyy")
+                PonerFoco txtCodigo(61)
+                txtCodigo(61).Text = Format(Now, "dd/mm/yyyy")
                 
         End Select
     End If
@@ -8314,7 +8403,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim H As Integer, W As Integer
+Dim h As Integer, w As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -8322,12 +8411,12 @@ Dim List As Collection
 
     'IMAGES para busqueda
     Set List = New Collection
-    For H = 24 To 27
-        List.Add H
-    Next H
-    For H = 1 To 10
-        List.Add H
-    Next H
+    For h = 24 To 27
+        List.Add h
+    Next h
+    For h = 1 To 10
+        List.Add h
+    Next h
     List.Add 12
     List.Add 13
     List.Add 14
@@ -8335,38 +8424,38 @@ Dim List As Collection
     List.Add 18
     List.Add 19
     
-    For H = 0 To 5
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 12 To 13
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 16 To 21
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 24 To 25
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 28 To 29
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 34 To 35
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 48 To 49
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 52 To 56
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 64 To 67
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
+    For h = 0 To 5
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 12 To 13
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 16 To 21
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 24 To 25
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 28 To 29
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 34 To 35
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 48 To 49
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 52 To 56
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
+    For h = 64 To 67
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
     
     
-    For H = 0 To imgAyuda.Count - 1
-        imgAyuda(H).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next H
+    For h = 0 To imgAyuda.Count - 1
+        imgAyuda(h).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next h
     
     
     Set List = Nothing
@@ -8410,7 +8499,7 @@ Dim List As Collection
     '---------------------
     Case 1, 12   '1- Informe de Anticipos
                  '12- Informe de Liquidacion
-        FrameAnticiposVisible True, H, W
+        FrameAnticiposVisible True, h, w
         Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
@@ -8432,26 +8521,35 @@ Dim List As Collection
             Check1(5).visible = True
             Check1(5).Value = 0
             
-'            '[Monica]27/01/2016: si es liquidacion complementaria unica
-'            If LiqComplementariaUnica Then
-'                Check1(5).Enabled = False
-'                Check1(5).visible = False
-'                Check1(16).Enabled = False
-'                Check1(16).visible = False
-'                imgAyuda(2).Enabled = False
-'                imgAyuda(2).visible = False
-'            End If
             
-            
+'[Monica]27/01/2016: cambiamos esto liquidaciones y complementaria
             '++Monica:03/06/2013: distinguimos para Catadau entre entradas
-            Check1(16).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-            Check1(16).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-            imgAyuda(2).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-            imgAyuda(2).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            Check1(16).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            Check1(16).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            imgAyuda(2).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            imgAyuda(2).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
             If Check1(16).Enabled Then
                 Check1(16).Top = 3690
                 imgAyuda(2).Top = 3690
             End If
+            
+            FrameTipo.Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            FrameTipo.visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+            FrameTipo.Top = 4530
+            
+            Check1(25).visible = (Check1(5).Value = 1)
+            Check1(25).Enabled = (Check1(5).Value = 1)
+            Check1(26).visible = (Check1(5).Value = 1)
+            Check1(26).Enabled = (Check1(5).Value = 1)
+            If Check1(25).Enabled Then
+                Check1(25).Value = 1
+                Check1(26).Value = 1
+            Else
+                Check1(25).Value = 0
+                Check1(26).Value = 0
+            End If
+            
+
             '[Monica]10/03/2014: no permitimos facturas negativas colo para alzira
             If vParamAplic.Cooperativa = 4 Then
                 Check1(21).visible = True
@@ -8469,7 +8567,7 @@ Dim List As Collection
         Combo1(2).ListIndex = 2
     Case 2, 13   '2 - Listado de prevision de pagos de anticipos
                  '13- Listado de prevision de pagos de liquidacion
-        FrameAnticiposVisible True, H, W
+        FrameAnticiposVisible True, h, w
         Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = False
         Me.FrameFechaAnt.Enabled = False
@@ -8497,7 +8595,7 @@ Dim List As Collection
                 imgAyuda(1).Enabled = True
                 imgAyuda(1).visible = True
                 Label2(43).visible = True
-                txtcodigo(59).visible = True
+                txtCodigo(59).visible = True
             End If
             '++Monica:03/12/2009
             Check1(5).Enabled = False
@@ -8515,27 +8613,35 @@ Dim List As Collection
                 Check1(5).visible = True
                 Check1(5).Value = 0
             
-'                '[Monica]27/01/2016: si es liquidacion complementaria unica
-'                If LiqComplementariaUnica Then
-'                    Check1(5).Enabled = False
-'                    Check1(5).visible = False
-'                    Check1(16).Enabled = False
-'                    Check1(16).visible = False
-'                    imgAyuda(2).Enabled = False
-'                    imgAyuda(2).visible = False
-'                End If
                 
                 
-                
+'[Monica]27/01/2016: cambiamos esto liquidaciones y complementaria
                 '++Monica:03/06/2013: distinguimos para Catadau entre entradas
-                Check1(16).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                Check1(16).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                imgAyuda(2).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                imgAyuda(2).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                Check1(16).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria) And Check1(5).Value = 0
+                Check1(16).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria) And Check1(5).Value = 0
+                imgAyuda(2).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria) And Check1(5).Value = 0
+                imgAyuda(2).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria) And Check1(5).Value = 0
                 If Check1(16).Enabled Then
                     Check1(16).Top = 3690
                     imgAyuda(2).Top = 3690
                 End If
+                
+                FrameTipo.Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                FrameTipo.visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                FrameTipo.Top = 4530
+                
+                Check1(25).visible = (Check1(5).Value = 1)
+                Check1(25).Enabled = (Check1(5).Value = 1)
+                Check1(26).visible = (Check1(5).Value = 1)
+                Check1(26).Enabled = (Check1(5).Value = 1)
+                If Check1(25).Enabled Then
+                    Check1(25).Value = 1
+                    Check1(26).Value = 1
+                Else
+                    Check1(25).Value = 0
+                    Check1(26).Value = 0
+                End If
+            
             
                 '[Monica]10/03/2014: no permitimos facturas negativas colo para alzira
                 If vParamAplic.Cooperativa = 4 Then
@@ -8571,7 +8677,7 @@ Dim List As Collection
         
     Case 3, 14   '3 - Factura de Anticipos
                  '14- Factura de Liquidacion
-        FrameAnticiposVisible True, H, W
+        FrameAnticiposVisible True, h, w
         Tabla = "rhisfruta"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
@@ -8582,8 +8688,8 @@ Dim List As Collection
         '[Monica]11/03/2015: observaciones de la factura visibles
         If OpcionListado = 14 Then
             Me.Label2(49).visible = (vParamAplic.Cooperativa = 4)
-            Me.txtcodigo(68).visible = (vParamAplic.Cooperativa = 4)
-            Me.txtcodigo(68).Enabled = (vParamAplic.Cooperativa = 4)
+            Me.txtCodigo(68).visible = (vParamAplic.Cooperativa = 4)
+            Me.txtCodigo(68).Enabled = (vParamAplic.Cooperativa = 4)
         End If
         
         '[Monica]11/04/2013: activamos el check de descontar facturas varias
@@ -8607,7 +8713,7 @@ Dim List As Collection
                 imgAyuda(1).Enabled = True
                 imgAyuda(1).visible = True
                 Label2(43).visible = True
-                txtcodigo(59).visible = True
+                txtCodigo(59).visible = True
             End If
             
             '++Monica:03/12/2009
@@ -8628,25 +8734,31 @@ Dim List As Collection
                 Check1(5).visible = True
                 Check1(5).Value = 0
                 
-'                '[Monica]27/01/2016: si es liquidacion complementaria unica
-'                If LiqComplementariaUnica Then
-'                    Check1(5).Enabled = False
-'                    Check1(5).visible = False
-'                    Check1(16).Enabled = False
-'                    Check1(16).visible = False
-'                    imgAyuda(2).Enabled = False
-'                    imgAyuda(2).visible = False
-'                End If
-                
-                
+'[Monica]27/01/2016: cambiamos esto liquidaciones y complementaria
                 '++Monica:03/06/2013: distinguimos para Catadau entre entradas
-                Check1(16).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                Check1(16).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                imgAyuda(2).visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
-                imgAyuda(2).Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                Check1(16).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                Check1(16).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                imgAyuda(2).visible = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                imgAyuda(2).Enabled = False '(vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
                 If Check1(16).Enabled Then
                     Check1(16).Top = 3690
                     imgAyuda(2).Top = 3690
+                End If
+                
+                FrameTipo.Enabled = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                FrameTipo.visible = (vParamAplic.Cooperativa = 0 And Not LiquidacionIndustria)
+                FrameTipo.Top = 4530
+                
+                Check1(25).visible = (Check1(5).Value = 1)
+                Check1(25).Enabled = (Check1(5).Value = 1)
+                Check1(26).visible = (Check1(5).Value = 1)
+                Check1(26).Enabled = (Check1(5).Value = 1)
+                If Check1(25).Enabled Then
+                    Check1(25).Value = 1
+                    Check1(26).Value = 1
+                Else
+                    Check1(25).Value = 0
+                    Check1(26).Value = 0
                 End If
             
                 '[Monica]10/03/2014: no permitimos facturas negativas colo para alzira
@@ -8681,7 +8793,7 @@ Dim List As Collection
         Combo1(2).ListIndex = 2
         
     Case 4   ' Reimpresion de facturas de SOCIOS
-        FrameReimpresionVisible True, H, W
+        FrameReimpresionVisible True, h, w
         Tabla = "rfactsoc"
         Me.FrameFechaAnt.visible = True
         Me.FrameFechaAnt.Enabled = True
@@ -8696,7 +8808,7 @@ Dim List As Collection
     Case 5   ' Deshacer Proceso de facturación de Anticipos
         ActivarCLAVE
         FrameTipoFactura.visible = False
-        FrameDesFacturacionVisible True, H, W
+        FrameDesFacturacionVisible True, h, w
         Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación de Anticipos"
         
@@ -8706,7 +8818,7 @@ Dim List As Collection
         Check1(15).visible = (vParamAplic.HayFacVarias)
         Check1(15).Enabled = (vParamAplic.HayFacVarias)
     
-        FrameGeneraFacturaVisible True, H, W
+        FrameGeneraFacturaVisible True, h, w
         CargaCombo
         Tabla = "rhisfruta"
         Me.Caption = "Facturación"
@@ -8718,20 +8830,20 @@ Dim List As Collection
         End If
     
     Case 16   ' Generacion de factura de anticipo venta campo sin entradas asociadas
-        FrameGenFactAnticipoVCVisible True, H, W
+        FrameGenFactAnticipoVCVisible True, h, w
     
     Case 161 '  Generacion de factura de anticipo sin entradas
-        FrameGenFactAnticipoSinEntVisible True, H, W
+        FrameGenFactAnticipoSinEntVisible True, h, w
         
     
     Case 17   ' Recalculo de importes de venta campo
-        FrameRecalculoImporteVisible True, H, W
+        FrameRecalculoImporteVisible True, h, w
     
     Case 7   ' Deshacer Proceso de facturación de venta campo
         ActivarCLAVE
         FrameTipoFactura.visible = True
         CargaCombo
-        FrameDesFacturacionVisible True, H, W
+        FrameDesFacturacionVisible True, h, w
         Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación Venta Campo"
                 
@@ -8739,23 +8851,23 @@ Dim List As Collection
                 '9= Informe de Retenciones de facturas de SOCIOS
         If OpcionListado = 8 Then
             Label8.Caption = "Listado de Resultados"
-            txtcodigo(26).Text = Format(vParam.FecIniCam, "dd/mm/yyyy")
-            txtcodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+            txtCodigo(26).Text = Format(vParam.FecIniCam, "dd/mm/yyyy")
+            txtCodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
         Else
             Label8.Caption = "Listado de Retenciones/Aportaciones"
-            txtcodigo(26).Text = Format(DateAdd("yyyy", -1, vParam.FecIniCam), "dd/mm/yyyy")
-            txtcodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+            txtCodigo(26).Text = Format(DateAdd("yyyy", -1, vParam.FecIniCam), "dd/mm/yyyy")
+            txtCodigo(27).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
         End If
         
         FrameOpc.Enabled = (OpcionListado = 9)
         FrameOpc.visible = (OpcionListado = 9)
         
-        txtcodigo(32).Text = Format(Now, "dd/mm/yyyy")
+        txtCodigo(32).Text = Format(Now, "dd/mm/yyyy")
         
         FrameFechaCertif.visible = False
         FrameFechaCertif.Enabled = False
         
-        FrameResultadosVisible True, H, W
+        FrameResultadosVisible True, h, w
         Tabla = "rfactsoc"
         CargarListView (1)
         
@@ -8766,28 +8878,28 @@ Dim List As Collection
         Else
             Label9.Caption = "Grabación Modelo 346"
         End If
-        FrameGrabacionModelosVisible True, H, W
+        FrameGrabacionModelosVisible True, h, w
         Tabla = "rfactsoc"
     
     Case 15   ' Deshacer Proceso de facturación de Liquidacion
         ActivarCLAVE
         FrameTipoFactura.visible = False
-        FrameDesFacturacionVisible True, H, W
+        FrameDesFacturacionVisible True, h, w
         Tabla = "rfactsoc"
         Me.Caption = "Deshacer Proceso Facturación de Liquidación"
         
     Case 18   ' Calculo de Aportaciones (SOLO PICASSENT)
         CargaCombo
-        FrameAportacionVisible True, H, W
+        FrameAportacionVisible True, h, w
         Tabla = "rhisfruta"
         
     Case 19   ' Liquidacion Directa para Alzira
-        FrameLiqDirectaVisible True, H, W
+        FrameLiqDirectaVisible True, h, w
         Tabla = "rhisfruta"
     
     
     Case 20   ' Anticipos pendientes de descontar
-        FrameAnticiposPdteDescontarVisible True, H, W
+        FrameAnticiposPdteDescontarVisible True, h, w
         Tabla = "rhisfruta"
     
     
@@ -8796,8 +8908,8 @@ Dim List As Collection
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
-    Me.Width = W + 70
-    Me.Height = H + 350
+    Me.Width = w + 70
+    Me.Height = h + 350
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -8808,7 +8920,7 @@ Private Sub Form_Unload(Cancel As Integer)
             DesBloqueoManual ("FACLIQ")
     End Select
     
-    LiqComplementariaUnica = False
+'    LiqComplementariaUnica = False
 End Sub
 
 
@@ -8816,19 +8928,19 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
@@ -8865,8 +8977,8 @@ Dim Sql2 As String
         Sql = "insert into tmpinformes (codusu, importe1, fecha1, fecha2, importe2)     "
         Sql = Sql & " select " & vUsu.Codigo & ", rprecios.codvarie, rprecios.fechaini, rprecios.fechafin, max(contador) from rprecios inner join variedades on rprecios.codvarie = variedades.codvarie "
         Sql = Sql & " where " & Replace(Replace(Variedades, "{", ""), "}", "")
-        Sql = Sql & " and rprecios.fechaini = " & DBSet(txtcodigo(6).Text, "F")
-        Sql = Sql & " and rprecios.fechafin = " & DBSet(txtcodigo(7).Text, "F")
+        Sql = Sql & " and rprecios.fechaini = " & DBSet(txtCodigo(6).Text, "F")
+        Sql = Sql & " and rprecios.fechafin = " & DBSet(txtCodigo(7).Text, "F")
         Sql = Sql & " group by 1,2,3,4 "
         
         conn.Execute Sql
@@ -8880,8 +8992,8 @@ End Sub
 
 
 Private Sub frmMens1_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(50).Text = RecuperaValor(CadenaSeleccion, 1)
-    PonerDatosCampo txtcodigo(50)
+    txtCodigo(50).Text = RecuperaValor(CadenaSeleccion, 1)
+    PonerDatosCampo txtCodigo(50)
 End Sub
 
 
@@ -8920,33 +9032,33 @@ Private Sub frmMens5_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub Image1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
 Dim TotalCant As Currency
 Dim TotalImporte As Currency
 
@@ -8955,22 +9067,22 @@ Dim TotalImporte As Currency
     Select Case Index
         ' reimpresion de facturas socios
         Case 0
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = True
+            Next i
         Case 1
-            For I = 1 To ListView1(0).ListItems.Count
-                ListView1(0).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(0).ListItems.Count
+                ListView1(0).ListItems(i).Checked = False
+            Next i
         ' informe de resultados y listado de retenciones
         Case 2
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = True
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = True
+            Next i
         Case 3
-            For I = 1 To ListView1(1).ListItems.Count
-                ListView1(1).ListItems(I).Checked = False
-            Next I
+            For i = 1 To ListView1(1).ListItems.Count
+                ListView1(1).ListItems(i).Checked = False
+            Next i
     End Select
     
     Screen.MousePointer = vbDefault
@@ -9033,7 +9145,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 48 ' VARIEDAD
             AbrirFrmVariedad (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
@@ -9099,13 +9211,13 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(indice).Text <> "" Then frmC.NovaData = txtCodigo(indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag)) '<===
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag)) '<===
     ' ********************************************
 
 End Sub
@@ -9117,7 +9229,7 @@ End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
     If OpcionListado = 10 Then
         If Index = 40 Then
             BarraEst.SimpleText = " CL = Calle    AV = Avenida."
@@ -9206,7 +9318,7 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 Dim b As Boolean
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -9216,30 +9328,30 @@ Dim b As Boolean
     Select Case Index
     
         Case 0, 1, 12, 13, 16, 17, 24, 25, 34, 35, 49, 52, 55, 56, 64, 65 'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
             
             If Index = 49 Then PonerCamposSocio
             
         Case 41, 42, 43, 44 ' TRANSPORTISTAS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rtransporte", "nomtrans", "codtrans", "T")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rtransporte", "nomtrans", "codtrans", "T")
 '            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             
         Case 4, 5 ' NROS DE FACTURA
-            PonerFormatoEntero txtcodigo(Index)
+            PonerFormatoEntero txtCodigo(Index)
             
         Case 2, 3, 6, 7, 11, 15, 26, 27, 32, 51, 57, 5, 62, 63 'FECHAS
             b = True
-            If txtcodigo(Index).Text <> "" Then b = PonerFormatoFecha(txtcodigo(Index))
+            If txtCodigo(Index).Text <> "" Then b = PonerFormatoFecha(txtCodigo(Index))
             
             '[Monica]11/03/2015: si es factura vamos a las observaciones
             If b And Index = 15 And (OpcionListado = 3 Or OpcionListado = 14) Then ' And vParamAplic.Cooperativa = 4 Then
-                PonerFoco txtcodigo(68)
+                PonerFoco txtCodigo(68)
                 Exit Sub
             End If
             
             
-            If b And Index = 7 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then PonerFoco txtcodigo(15)
+            If b And Index = 7 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then PonerFoco txtCodigo(15)
             If b And Index = 15 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then
                 If AnticipoGastos Then
                     cmdAceptarAntGastos.SetFocus
@@ -9276,65 +9388,65 @@ Dim b As Boolean
             
         Case 14, 22, 23, 61 ' FECHA DE GENERACION DE FACTURA
             '[Monica]28/08/2013: no miramos si la fecha esta dentro de campaña
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), True
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), True
             
         Case 8 ' password de deshacer facturacion
-            If txtcodigo(Index).Text = "" Then Exit Sub
-            If Trim(txtcodigo(Index).Text) <> Trim(txtcodigo(Index).Tag) Then
+            If txtCodigo(Index).Text = "" Then Exit Sub
+            If Trim(txtCodigo(Index).Text) <> Trim(txtCodigo(Index).Tag) Then
                 MsgBox "    ACCESO DENEGADO    ", vbExclamation
-                txtcodigo(Index).Text = ""
-                PonerFoco txtcodigo(Index)
+                txtCodigo(Index).Text = ""
+                PonerFoco txtCodigo(Index)
             Else
                 DesactivarCLAVE
                 Select Case OpcionListado
                     Case 5, 15 '5 = anticipos
                                '15= liquidaciones
-                        PonerFoco txtcodigo(9)
+                        PonerFoco txtCodigo(9)
                     Case 7 ' venta campo
                         PonerFocoCmb Combo1(1)
                 End Select
             End If
         
         Case 9, 10 ' numero de facturas
-            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
         
         Case 30, 31, 37, 39 ' datos de modelo190 y modelo346
-            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
             
         Case 33 ' nro de justificante en el certificado de retenciones
-            If PonerFormatoEntero(txtcodigo(Index)) Then
+            If PonerFormatoEntero(txtCodigo(Index)) Then
                 CmdAcepResul.SetFocus
             End If
             
         Case 18, 19, 20, 21, 28, 29, 53, 54, 66, 67 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
             
         Case 45, 46 ' importe
-            PonerFormatoDecimal txtcodigo(Index), 3
+            PonerFormatoDecimal txtCodigo(Index), 3
         
         Case 50 ' campo
-            PonerDatosCampo txtcodigo(Index).Text
+            PonerDatosCampo txtCodigo(Index).Text
         
         Case 48 ' variedad
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
     
         Case 47 ' Importe de aportacion a repartir
-            PonerFormatoDecimal txtcodigo(Index), 3
+            PonerFormatoDecimal txtCodigo(Index), 3
                 
         Case 59 ' Kilos de Retirada
-            PonerFormatoEntero txtcodigo(59)
+            PonerFormatoEntero txtCodigo(59)
     
         Case 60 ' precio calidad en liquidacion directa
-            PonerFormatoDecimal txtcodigo(60), 7
+            PonerFormatoDecimal txtCodigo(60), 7
     
     
     End Select
 End Sub
 
 
-Private Sub FrameAnticiposVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameAnticiposVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
 Dim b As Boolean
 
 'Frame para el listado de socios por seccion
@@ -9345,8 +9457,8 @@ Dim b As Boolean
         Me.FrameAnticipos.Left = 0
         Me.FrameAnticipos.Height = 6630 '5970 '5640
         Me.FrameAnticipos.Width = 6615
-        W = Me.FrameAnticipos.Width
-        H = Me.FrameAnticipos.Height
+        w = Me.FrameAnticipos.Width
+        h = Me.FrameAnticipos.Height
         
         b = (OpcionListado = 1 Or OpcionListado = 2 Or OpcionListado = 3 Or _
              OpcionListado = 12 Or OpcionListado = 13 Or OpcionListado = 14) And _
@@ -9428,32 +9540,32 @@ Dim b As Boolean
 End Sub
 
 
-Private Sub FrameReimpresionVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameReimpresionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameReimpresion.visible = visible
     If visible = True Then
         Me.FrameReimpresion.Top = -90
         Me.FrameReimpresion.Left = 0
         Me.FrameReimpresion.Height = 5640
         Me.FrameReimpresion.Width = 6675
-        W = Me.FrameReimpresion.Width
-        H = Me.FrameReimpresion.Height
+        w = Me.FrameReimpresion.Width
+        h = Me.FrameReimpresion.Height
     End If
 End Sub
 
 
-Private Sub FrameResultadosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameResultadosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameResultados.visible = visible
     If visible = True Then
         Me.FrameResultados.Top = -90
         Me.FrameResultados.Left = 0
         Me.FrameResultados.Height = 7320
         Me.FrameResultados.Width = 6675
-        W = Me.FrameResultados.Width
-        H = Me.FrameResultados.Height
+        w = Me.FrameResultados.Width
+        h = Me.FrameResultados.Height
     End If
 End Sub
 
-Private Sub FrameGrabacionModelosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameGrabacionModelosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameGrabacionModelos.visible = visible
     If visible = True Then
         Me.FrameGrabacionModelos.Top = -90
@@ -9465,53 +9577,53 @@ Private Sub FrameGrabacionModelosVisible(visible As Boolean, ByRef H As Integer,
                 Me.CmdCancelModelo.Top = 4740
         End Select
         Me.FrameGrabacionModelos.Width = 6675
-        W = Me.FrameGrabacionModelos.Width
-        H = Me.FrameGrabacionModelos.Height
+        w = Me.FrameGrabacionModelos.Width
+        h = Me.FrameGrabacionModelos.Height
     End If
 End Sub
 
 
-Private Sub FrameAportacionVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameAportacionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameAportaciones.visible = visible
     If visible = True Then
         Me.FrameAportaciones.Top = -90
         Me.FrameAportaciones.Left = 0
         Me.FrameAportaciones.Height = 6930
         Me.FrameAportaciones.Width = 6615
-        W = Me.FrameAportaciones.Width
-        H = Me.FrameAportaciones.Height
+        w = Me.FrameAportaciones.Width
+        h = Me.FrameAportaciones.Height
     End If
 End Sub
 
 
 
 
-Private Sub FrameDesFacturacionVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameDesFacturacionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameDesFacturacion.visible = visible
     If visible = True Then
         Me.FrameDesFacturacion.Top = -90
         Me.FrameDesFacturacion.Left = 0
         Me.FrameDesFacturacion.Height = 4740
         Me.FrameDesFacturacion.Width = 6615
-        W = Me.FrameDesFacturacion.Width
-        H = Me.FrameDesFacturacion.Height
+        w = Me.FrameDesFacturacion.Width
+        h = Me.FrameDesFacturacion.Height
     End If
 End Sub
 
-Private Sub FrameGeneraFacturaVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameGeneraFacturaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameGeneraFactura.visible = visible
     If visible = True Then
         Me.FrameGeneraFactura.Top = -90
         Me.FrameGeneraFactura.Left = 0
         Me.FrameGeneraFactura.Height = 5790
         Me.FrameGeneraFactura.Width = 6615
-        W = Me.FrameGeneraFactura.Width
-        H = Me.FrameGeneraFactura.Height
+        w = Me.FrameGeneraFactura.Width
+        h = Me.FrameGeneraFactura.Height
     End If
 End Sub
 
 '[Monica]06/09/2013: generacion de facturas de anticipo sin entradas
-Private Sub FrameGenFactAnticipoSinEntVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameGenFactAnticipoSinEntVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameGenFactAnticipoVC.visible = visible
     If visible = True Then
     
@@ -9522,8 +9634,8 @@ Private Sub FrameGenFactAnticipoSinEntVisible(visible As Boolean, ByRef H As Int
         Me.FrameGenFactAnticipoVC.Left = 0
         Me.FrameGenFactAnticipoVC.Height = 6270
         Me.FrameGenFactAnticipoVC.Width = 6675
-        W = Me.FrameGenFactAnticipoVC.Width
-        H = Me.FrameGenFactAnticipoVC.Height
+        w = Me.FrameGenFactAnticipoVC.Width
+        h = Me.FrameGenFactAnticipoVC.Height
         
         '[Monica]06/11/2013: Modificacion para Picassent, debemos poder crear un anticipo a cuenta de terceros
         Check1(17).visible = (vParamAplic.Cooperativa = 2)
@@ -9535,52 +9647,52 @@ End Sub
 
 
 
-Private Sub FrameGenFactAnticipoVCVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameGenFactAnticipoVCVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameGenFactAnticipoVC.visible = visible
     If visible = True Then
         Me.FrameGenFactAnticipoVC.Top = -90
         Me.FrameGenFactAnticipoVC.Left = 0
         Me.FrameGenFactAnticipoVC.Height = 6270
         Me.FrameGenFactAnticipoVC.Width = 6675
-        W = Me.FrameGenFactAnticipoVC.Width
-        H = Me.FrameGenFactAnticipoVC.Height
+        w = Me.FrameGenFactAnticipoVC.Width
+        h = Me.FrameGenFactAnticipoVC.Height
     End If
 End Sub
 
 
-Private Sub FrameRecalculoImporteVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameRecalculoImporteVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameRecalculoImporte.visible = visible
     If visible = True Then
         Me.FrameRecalculoImporte.Top = -90
         Me.FrameRecalculoImporte.Left = 0
         Me.FrameRecalculoImporte.Height = 3750
         Me.FrameRecalculoImporte.Width = 6675
-        W = Me.FrameRecalculoImporte.Width
-        H = Me.FrameRecalculoImporte.Height
+        w = Me.FrameRecalculoImporte.Width
+        h = Me.FrameRecalculoImporte.Height
     End If
 End Sub
 
-Private Sub FrameLiqDirectaVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameLiqDirectaVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameLiqDirecta.visible = visible
     If visible = True Then
         Me.FrameLiqDirecta.Top = -90
         Me.FrameLiqDirecta.Left = 0
         Me.FrameLiqDirecta.Height = 4200
         Me.FrameLiqDirecta.Width = 6615
-        W = Me.FrameLiqDirecta.Width
-        H = Me.FrameLiqDirecta.Height
+        w = Me.FrameLiqDirecta.Width
+        h = Me.FrameLiqDirecta.Height
     End If
 End Sub
 
-Private Sub FrameAnticiposPdteDescontarVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub FrameAnticiposPdteDescontarVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
     Me.FrameAnticiposPdtes.visible = visible
     If visible = True Then
         Me.FrameAnticiposPdtes.Top = -90
         Me.FrameAnticiposPdtes.Left = 0
         Me.FrameAnticiposPdtes.Height = 5430
         Me.FrameAnticiposPdtes.Width = 6615
-        W = Me.FrameAnticiposPdtes.Width
-        H = Me.FrameAnticiposPdtes.Height
+        w = Me.FrameAnticiposPdtes.Width
+        h = Me.FrameAnticiposPdtes.Height
     End If
 End Sub
 
@@ -9696,7 +9808,7 @@ Private Sub AbrirFrmClase(indice As Integer)
     indCodigo = indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtCodigo(indice).Text
     
     Set frmCla = Nothing
 End Sub
@@ -9771,34 +9883,34 @@ Dim tipoMov As String
             '1 - Informe de Anticipos
             '3 - Factura de Anticipos
             If b Then
-                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
+                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
                     MsgBox "Debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(6)
+                    PonerFoco txtCodigo(6)
                 End If
             End If
             If b Then
-                If txtcodigo(15).Text = "" Then
+                If txtCodigo(15).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Anticipo.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(15)
+                    PonerFoco txtCodigo(15)
                 End If
             End If
             
        Case 2 'Prevision de pagos
             If b Then
-                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
+                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
                     MsgBox "Para realizar la Previsión de Pago de Anticipos debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(6)
+                    PonerFoco txtCodigo(6)
                 End If
             End If
        
        Case 5 'Deshacer proceso de facturacion de anticipos
-            If txtcodigo(9).Text = "" Or txtcodigo(10).Text = "" Then
+            If txtCodigo(9).Text = "" Or txtCodigo(10).Text = "" Then
                 MsgBox "Debe introducir la primera y última factura de la Facturación de Anticipos", vbExclamation
                 b = False
-                PonerFoco txtcodigo(9)
+                PonerFoco txtCodigo(9)
 '            Else
 '                ' si la factura hasta no coincide con el contador de stipom no seguir
 '                Set vCont = New CTiposMov
@@ -9812,40 +9924,40 @@ Dim tipoMov As String
             End If
             
             If b Then
-                If txtcodigo(11).Text = "" Then
+                If txtCodigo(11).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Anticipo.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(11)
+                    PonerFoco txtCodigo(11)
                 End If
             End If
     
         Case 6 ' factura de ventas campo (anticipo o liquidacion)
             If b Then
-                If txtcodigo(14).Text = "" Then
+                If txtCodigo(14).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(14)
+                    PonerFoco txtCodigo(14)
                 End If
             End If
         
         Case 16, 161 ' 16 factura de anticipo de venta campo sin entradas asociadas
                      ' 161 factura de anticipo normal
             If b Then
-                If txtcodigo(51).Text = "" Then
+                If txtCodigo(51).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(51)
+                    PonerFoco txtCodigo(51)
                 End If
             End If
             
             If b Then
-                If txtcodigo(49).Text = "" Then
+                If txtCodigo(49).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente un socio para la Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(49)
+                    PonerFoco txtCodigo(49)
                 Else
                     ' el socio ha de ser obligatoriamente de la seccion de horto
-                    Sql = "select count(*) from rsocios_seccion where codsocio = " & DBSet(txtcodigo(49).Text, "N")
+                    Sql = "select count(*) from rsocios_seccion where codsocio = " & DBSet(txtCodigo(49).Text, "N")
                     Sql = Sql & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
                     
                     If TotalRegistros(Sql) = 0 Then
@@ -9857,49 +9969,49 @@ Dim tipoMov As String
             End If
             
             If b Then
-                If txtcodigo(45).Text = "" Then
+                If txtCodigo(45).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el importe de la Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(45)
+                    PonerFoco txtCodigo(45)
                 End If
             End If
             
             If b Then
-                If txtcodigo(50).Text = "" Then
+                If txtCodigo(50).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el campo del socio.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(50)
+                    PonerFoco txtCodigo(50)
                 Else
-                    Sql = "select count(*) from rcampos where codcampo = " & DBSet(txtcodigo(50).Text, "N")
-                    Sql = Sql & " and codsocio = " & DBSet(txtcodigo(49).Text, "N")
+                    Sql = "select count(*) from rcampos where codcampo = " & DBSet(txtCodigo(50).Text, "N")
+                    Sql = Sql & " and codsocio = " & DBSet(txtCodigo(49).Text, "N")
                     If TotalRegistros(Sql) = 0 Then
                         MsgBox "El código del campo no existe o no es del socio.", vbExclamation
                         b = False
-                        PonerFoco txtcodigo(50)
+                        PonerFoco txtCodigo(50)
                     End If
                 End If
             End If
             
         Case 17 ' recalculo de importe de venta campo
-            If txtcodigo(52).Text = "" Then
+            If txtCodigo(52).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente el campo del socio.", vbExclamation
                 b = False
-                PonerFoco txtcodigo(52)
+                PonerFoco txtCodigo(52)
             End If
             
             If b Then
-                If txtcodigo(46).Text = "" Then
+                If txtCodigo(46).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente un importe.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(46)
+                    PonerFoco txtCodigo(46)
                 End If
             End If
         
         Case 7 'deshacer facturacion de venta campo ( anticipo o liquidacion )
-            If txtcodigo(9).Text = "" Or txtcodigo(10).Text = "" Then
+            If txtCodigo(9).Text = "" Or txtCodigo(10).Text = "" Then
                 MsgBox "Debe introducir la primera y última factura de la Facturación", vbExclamation
                 b = False
-                PonerFoco txtcodigo(9)
+                PonerFoco txtCodigo(9)
 '            Else
 '                ' si la factura hasta no coincide con el contador de stipom no seguir
 '                Select Case Combo1(1).ListIndex
@@ -9920,15 +10032,15 @@ Dim tipoMov As String
             End If
             
             If b Then
-                If txtcodigo(11).Text = "" Then
+                If txtCodigo(11).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(11)
+                    PonerFoco txtCodigo(11)
                 End If
             End If
             ' comprobamos que si son anticipos no esten liquidados
             If b And tipoMov = "FAC" Then
-                If AnticiposLiquidados(tipoMov, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text) Then
+                If AnticiposLiquidados(tipoMov, txtCodigo(9).Text, txtCodigo(10).Text, txtCodigo(11).Text) Then
                     MsgBox "Hay Facturas de Anticipos que han sido liquidadas. Revise.", vbExclamation
                     b = False
                     PonerFocoBtn cmdCancelDesF
@@ -9937,10 +10049,10 @@ Dim tipoMov As String
             
        Case 13 'Prevision de pagos de liquidacion de industria
             If b And LiquidacionIndustria Then
-                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
+                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
                     MsgBox "Para realizar la Previsión de Pago de Industria debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(6)
+                    PonerFoco txtCodigo(6)
                 End If
             End If
             
@@ -9948,46 +10060,46 @@ Dim tipoMov As String
             ' en el caso de certificado de retenciones obligamos a que nos introduzcan el rango
             ' de fechas que sale en el certificado
             If Check1(7).Value = 1 Then
-                If txtcodigo(26).Text = "" Or txtcodigo(27).Text = "" Then
+                If txtCodigo(26).Text = "" Or txtCodigo(27).Text = "" Then
                     MsgBox "Debe introducir un valor en los campos de Fechas.", vbExclamation
                     b = False
-                    If txtcodigo(26).Text = "" Then
-                        PonerFoco txtcodigo(26)
+                    If txtCodigo(26).Text = "" Then
+                        PonerFoco txtCodigo(26)
                     Else
-                        PonerFoco txtcodigo(27)
+                        PonerFoco txtCodigo(27)
                     End If
                 Else
-                    If txtcodigo(32).Text = "" Then
+                    If txtCodigo(32).Text = "" Then
                         MsgBox "Debe meter obligatoriamente la Fecha del Certificado.", vbExclamation
                         b = False
-                        PonerFoco txtcodigo(32)
+                        PonerFoco txtCodigo(32)
                     End If
                 End If
             End If
             
          Case 14 ' factura de liquidaciones
             If b Then
-                If txtcodigo(15).Text = "" Then
+                If txtCodigo(15).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Liquidación.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(15)
+                    PonerFoco txtCodigo(15)
                 End If
             End If
          
         Case 19 ' factura de liquidacion directa
             If b Then
-                If txtcodigo(61).Text = "" Then
+                If txtCodigo(61).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Factura.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(61)
+                    PonerFoco txtCodigo(61)
                 End If
             End If
             
             If b Then
-                If txtcodigo(60).Text = "" Then
+                If txtCodigo(60).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente el precio calidad.", vbExclamation
                     b = False
-                    PonerFoco txtcodigo(60)
+                    PonerFoco txtCodigo(60)
                 End If
             End If
          
@@ -9999,7 +10111,7 @@ End Function
 
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 
@@ -10017,23 +10129,23 @@ Dim Sql1 As String
     
     
     Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
-    While Not RS.EOF
-        Sql1 = Sql1 & DBLet(RS.Fields(0).Value, "N") & ","
-        RS.MoveNext
+    While Not Rs.EOF
+        Sql1 = Sql1 & DBLet(Rs.Fields(0).Value, "N") & ","
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     'quitamos el ultimo or
     ConcatenarCampos = Mid(Sql1, 1, Len(Sql1) - 1)
     
 End Function
 
 Private Function CargarTemporalAnticiposValsur(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -10090,8 +10202,8 @@ Dim HayReg As Boolean
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -10107,15 +10219,15 @@ Dim HayReg As Boolean
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
             End If
@@ -10124,9 +10236,9 @@ Dim HayReg As Boolean
         End If
     End If
     
-    While Not RS.EOF
+    While Not Rs.EOF
         '++monica:28/07/2009 añadida la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             
             ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
         
@@ -10152,7 +10264,7 @@ Dim HayReg As Boolean
             Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Neto = 0
@@ -10162,11 +10274,11 @@ Dim HayReg As Boolean
             KilosNet = 0
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -10176,9 +10288,9 @@ Dim HayReg As Boolean
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -10186,10 +10298,10 @@ Dim HayReg As Boolean
         Dim PreCoop As Currency
         Dim PreSocio As Currency
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -10201,9 +10313,9 @@ Dim HayReg As Boolean
         
             Select Case Recolect
                 Case 0
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2)
                 Case 1
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
             End Select
             
         End If
@@ -10212,7 +10324,7 @@ Dim HayReg As Boolean
         
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -10260,7 +10372,7 @@ End Function
 
 '[Monica]20/01/2012: nueva funcion de carga de anticipos de alzira que antes no tenia
 Private Function CargarTemporalAnticiposAlzira(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -10317,8 +10429,8 @@ Dim HayReg As Boolean
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -10334,15 +10446,15 @@ Dim HayReg As Boolean
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 '[Monica]29/04/2011: INTERNAS
                 If vSocio.EsFactADVInt Then
@@ -10356,9 +10468,9 @@ Dim HayReg As Boolean
         End If
     End If
     
-    While Not RS.EOF
+    While Not Rs.EOF
         '++monica:28/07/2009 añadida la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             
             ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
         
@@ -10384,7 +10496,7 @@ Dim HayReg As Boolean
             Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Neto = 0
@@ -10394,11 +10506,11 @@ Dim HayReg As Boolean
             KilosNet = 0
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     '[Monica]29/04/2011: INTERNAS
                     If vSocio.EsFactADVInt Then
@@ -10413,9 +10525,9 @@ Dim HayReg As Boolean
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -10423,10 +10535,10 @@ Dim HayReg As Boolean
         Dim PreCoop As Currency
         Dim PreSocio As Currency
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -10442,9 +10554,9 @@ Dim HayReg As Boolean
 '                Case 1
 '                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
                 Case 0
-                    baseimpo = baseimpo + (DBLet(RS!Kilos, "N") * PreCoop)
+                    baseimpo = baseimpo + (DBLet(Rs!Kilos, "N") * PreCoop)
                 Case 1
-                    baseimpo = baseimpo + (DBLet(RS!Kilos, "N") * PreSocio)
+                    baseimpo = baseimpo + (DBLet(Rs!Kilos, "N") * PreSocio)
             End Select
             
         End If
@@ -10453,7 +10565,7 @@ Dim HayReg As Boolean
         
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -10501,7 +10613,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposPicassent(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -10570,8 +10682,8 @@ Dim ImporteFVar As Currency
     Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
     Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, Kneto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -10587,15 +10699,15 @@ Dim ImporteFVar As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
             End If
@@ -10604,9 +10716,9 @@ Dim ImporteFVar As Currency
         End If
     End If
     
-    While Not RS.EOF
+    While Not Rs.EOF
         '++monica:28/07/2009 añadida la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             
             ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
         
@@ -10632,7 +10744,7 @@ Dim ImporteFVar As Currency
             Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(TotalFac, "N") & "," & DBSet(Bonifica, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Bonifica = 0
@@ -10643,7 +10755,7 @@ Dim ImporteFVar As Currency
             KilosNet = 0
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             '[Monica]15/04/2013: descontamos las facturas varias
             If Check1(14).Value Then                                                                                                 'anticipos            no descontados   q no sean de ventacampo
                 ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0 ")
@@ -10656,8 +10768,8 @@ Dim ImporteFVar As Currency
         
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -10667,9 +10779,9 @@ Dim ImporteFVar As Currency
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -10677,10 +10789,10 @@ Dim ImporteFVar As Currency
         Dim PreCoop As Currency
         Dim PreSocio As Currency
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -10694,32 +10806,32 @@ Dim ImporteFVar As Currency
                 Case 0
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreCoop > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                     
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                         End If
                     
                     End If
                 
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreCoop * (1 + (PorcBoni / 100)), 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreCoop * (1 + (PorcBoni / 100)), 2)
                 Case 1
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreSocio > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                         End If
                     End If
                 
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2)
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreSocio * (1 + (PorcBoni / 100)), 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreSocio * (1 + (PorcBoni / 100)), 2)
             End Select
             
         End If
@@ -10728,7 +10840,7 @@ Dim ImporteFVar As Currency
         
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -10787,7 +10899,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposCalidadPicassent(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -10855,8 +10967,8 @@ Dim PorcComi As Currency
     Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
     Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -10872,15 +10984,15 @@ Dim PorcComi As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
-        CalidAnt = RS!codcalid
+    If Not Rs.EOF Then
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
+        CalidAnt = Rs!codcalid
     End If
     
-    While Not RS.EOF
+    While Not Rs.EOF
         '++monica:28/07/2009 añadida la segunda condicion
-        If VarieAnt <> RS!codvarie Or CalidAnt <> RS!codcalid Then
+        If VarieAnt <> Rs!codvarie Or CalidAnt <> Rs!codcalid Then
             
             Sql1 = Sql1 & "(" & vUsu.Codigo & ","
             Sql1 = Sql1 & DBSet(VarieAnt, "N") & "," & DBSet(NVarieAnt, "T") & ","
@@ -10889,8 +11001,8 @@ Dim PorcComi As Currency
             Sql1 = Sql1 & DBSet(Importe, "N") & "," & DBSet(Bonifica - Importe, "N") & ","
             Sql1 = Sql1 & DBSet(Bonifica, "N") & "),"
             
-            VarieAnt = RS!codvarie
-            CalidAnt = RS!codcalid
+            VarieAnt = Rs!codvarie
+            CalidAnt = Rs!codcalid
             
             baseimpo = 0
             Bonifica = 0
@@ -10902,9 +11014,9 @@ Dim PorcComi As Currency
             KilosNet = 0
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -10912,10 +11024,10 @@ Dim PorcComi As Currency
         Dim PreCoop As Currency
         Dim PreSocio As Currency
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -10929,31 +11041,31 @@ Dim PorcComi As Currency
                 Case 0
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreCoop > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                         End If
                     End If
                     PrecioAnt = PreCoop
-                    Importe = Importe + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreCoop * (1 + (PorcBoni / 100)), 2)
+                    Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreCoop * (1 + (PorcBoni / 100)), 2)
                 Case 1
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreSocio > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                         End If
                     End If
                     PrecioAnt = PreSocio
-                    Importe = Importe + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2)
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreSocio * (1 + (PorcBoni / 100)), 2)
+                    Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreSocio * (1 + (PorcBoni / 100)), 2)
             End Select
             
         End If
@@ -10962,7 +11074,7 @@ Dim PorcComi As Currency
         
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -10996,7 +11108,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposCatadau(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -11044,8 +11156,8 @@ Dim HayReg As Boolean
         Sql = Sql & " group by 1,2,3 "
         Sql = Sql & " order by 1,2,3 "
         
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -11061,15 +11173,15 @@ Dim HayReg As Boolean
         End If
     
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -11078,9 +11190,9 @@ Dim HayReg As Boolean
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
             '++monica:28/07/2009 añadida la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 
                 ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
             
@@ -11106,7 +11218,7 @@ Dim HayReg As Boolean
                 Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
                 Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                 
                 baseimpo = 0
                 Neto = 0
@@ -11116,11 +11228,11 @@ Dim HayReg As Boolean
                 KilosNet = 0
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     End If
@@ -11130,7 +11242,7 @@ Dim HayReg As Boolean
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = DBLet(RS!Kilos, "N")
+            KilosNet = DBLet(Rs!Kilos, "N")
             
 '            Sql3 = "select sum(gastos) from tmpliquidacion1 where codusu = " & vUsu.Codigo
 '            Sql3 = Sql3 & " and codsocio = " & DBSet(Rs!CodSocio, "N")
@@ -11140,13 +11252,13 @@ Dim HayReg As Boolean
 '
 '            baseimpo = DBLet(Rs!Importe, "N") - Gastos
 '
-            baseimpo = DBLet(RS!Importe, "N")
+            baseimpo = DBLet(Rs!Importe, "N")
                 
             HayReg = True
     
     
     
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         ' ultimo registro si ha entrado
         If HayReg Then
@@ -11194,7 +11306,7 @@ eCargarTemporal:
 End Function
 
 
-Private Function HayPreciosVariedadesValsur(tipo As Byte, cTabla As String, cWhere As String, TipoPrecio As Byte) As Boolean
+Private Function HayPreciosVariedadesValsur(Tipo As Byte, cTabla As String, cWhere As String, TipoPrecio As Byte) As Boolean
 'Comprobar si hay precios para cada una de las variedades seleccionadas
 ' tipo: 0=anticipos
 '       1=liquidaciones
@@ -11203,7 +11315,7 @@ Private Function HayPreciosVariedadesValsur(tipo As Byte, cTabla As String, cWhe
 '             2 = precio recolectado socio y cooperativa
 Dim Sql As String
 Dim vPrecios As CPrecios
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim b As Boolean
 Dim Sql2 As String
 
@@ -11224,29 +11336,29 @@ Dim Sql2 As String
         Sql2 = Sql2 & " where " & cWhere
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica]25/02/2011: Añadido esto en alzira quieren poder hacer una liquidacion complementaria
     ' si estamos hacendo una liquidacion complementaria, cogemos los precios correspondientes
-    If tipo = 1 And Check1(5).Value = 1 Then
-        tipo = 3
+    If Tipo = 1 And Check1(5).Value = 1 Then
+        Tipo = 3
     End If
 
     b = True
     ' comprobamos que existen registros para todos las variedades / calidades seleccionadas
-    While Not RS.EOF And b
+    While Not Rs.EOF And b
         Set vPrecios = New CPrecios
-        b = vPrecios.Leer(CStr(tipo), CStr(RS.Fields(0).Value), txtcodigo(6).Text, txtcodigo(7).Text)
+        b = vPrecios.Leer(CStr(Tipo), CStr(Rs.Fields(0).Value), txtCodigo(6).Text, txtCodigo(7).Text)
 '        If b Then b = vPrecios.ExistenPreciosCalidades
         If b Then b = vPrecios.ExisteAlgunPrecioCalidad(Sql2, TipoPrecio)
         Set vPrecios = Nothing
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     HayPreciosVariedadesValsur = b
     Exit Function
@@ -11255,7 +11367,7 @@ eHayPreciosVariedadesValsur:
     MuestraError Err.nume, "Comprobando si hay precios en variedades", Err.Description
 End Function
 
-Private Function HayPreciosVariedadesCatadau(tipo As Byte, cTabla As String, cWhere As String, TipoPrecio As Byte) As Boolean
+Private Function HayPreciosVariedadesCatadau(Tipo As Byte, cTabla As String, cWhere As String, TipoPrecio As Byte) As Boolean
 'Comprobar si hay precios para cada una de las variedades seleccionadas
 ' tipo: 0=anticipos
 '       1=liquidaciones
@@ -11264,7 +11376,7 @@ Private Function HayPreciosVariedadesCatadau(tipo As Byte, cTabla As String, cWh
 '             2 = precio recolectado socio y cooperativa
 Dim Sql As String
 Dim vPrecios As CPrecios
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim b As Boolean
 Dim Sql2 As String
@@ -11302,25 +11414,25 @@ Dim Numreg As Long
     Sql = Sql & " group by 1,2,3 "
     Sql = Sql & " order by 1,2,3 "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
     
     ' si estamos hacendo una liquidacion complementaria, cogemos los precios correspondientes
-    If tipo = 1 And Check1(5).Value = 1 Then
-        tipo = 3
+    If Tipo = 1 And Check1(5).Value = 1 Then
+        Tipo = 3
     End If
     
     
-    If Not RS.EOF Then VarieAnt = DBLet(RS!codvarie, "N")
+    If Not Rs.EOF Then VarieAnt = DBLet(Rs!codvarie, "N")
     Numreg = 0
     ' comprobamos que existen registros para todos las variedades / calidades seleccionadas
-    While Not RS.EOF And b
+    While Not Rs.EOF And b
         Sql2 = "select * from rprecios where (codvarie, tipofact, contador) = ("
-        Sql2 = Sql2 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(RS!codvarie, "N") & " and "
-        Sql2 = Sql2 & " tipofact = " & tipo & " and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql2 = Sql2 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
+        Sql2 = Sql2 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(Rs!codvarie, "N") & " and "
+        Sql2 = Sql2 & " tipofact = " & Tipo & " and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql2 = Sql2 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql2 = Sql2 & " group by 1, 2) "
         
         Set Rs2 = New ADODB.Recordset
@@ -11328,9 +11440,9 @@ Dim Numreg As Long
         
         If Rs2.EOF Then
             b = False
-            MsgBox "No existen precios para la variedad " & DBLet(RS!codvarie, "N") & " de fecha " & DBLet(RS!Fecalbar, "F") & ". Revise.", vbExclamation
+            MsgBox "No existen precios para la variedad " & DBLet(Rs!codvarie, "N") & " de fecha " & DBLet(Rs!Fecalbar, "F") & ". Revise.", vbExclamation
         Else
-            If DBLet(RS!codvarie, "N") <> VarieAnt Then
+            If DBLet(Rs!codvarie, "N") <> VarieAnt Then
                 b = (Numreg <> 0)
                 
                 If Numreg <> 0 Then
@@ -11338,13 +11450,13 @@ Dim Numreg As Long
                     conn.Execute Sql5
                 End If
                 Numreg = 0
-                VarieAnt = DBLet(RS!codvarie, "N")
+                VarieAnt = DBLet(Rs!codvarie, "N")
             End If
             ' miramos si hay alguna calidad para facturar
-            Sql2 = "select count(*) from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
+            Sql2 = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
             Sql2 = Sql2 & " and contador = " & DBSet(Rs2!Contador, "N")
-            Sql2 = Sql2 & " and tipofact = " & tipo
-            Sql2 = Sql2 & " and codcalid = " & DBSet(RS!codcalid, "N")
+            Sql2 = Sql2 & " and tipofact = " & Tipo
+            Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
 '07/07/2014
             Select Case TipoPrecio
                 Case 0
@@ -11359,7 +11471,7 @@ Dim Numreg As Long
             
         Set Rs2 = Nothing
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     'ultimo registro
     If b Then
@@ -11369,8 +11481,8 @@ Dim Numreg As Long
             conn.Execute Sql5
         End If
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     HayPreciosVariedadesCatadau = b
     Exit Function
@@ -11421,12 +11533,12 @@ End Function
 
 
 Private Sub ActivarCLAVE()
-Dim I As Integer
+Dim i As Integer
     
-    For I = 9 To 11
-        txtcodigo(I).Enabled = False
-    Next I
-    txtcodigo(8).Enabled = True
+    For i = 9 To 11
+        txtCodigo(i).Enabled = False
+    Next i
+    txtCodigo(8).Enabled = True
     imgFec(6).Enabled = False
     CmdAcepDesF.Enabled = False
     cmdCancelDesF.Enabled = True
@@ -11434,12 +11546,12 @@ Dim I As Integer
 End Sub
 
 Private Sub DesactivarCLAVE()
-Dim I As Integer
+Dim i As Integer
 
-    For I = 9 To 11
-        txtcodigo(I).Enabled = True
-    Next I
-    txtcodigo(8).Enabled = False
+    For i = 9 To 11
+        txtCodigo(i).Enabled = True
+    Next i
+    txtCodigo(8).Enabled = False
     imgFec(6).Enabled = True
     CmdAcepDesF.Enabled = True
     Combo1(1).Enabled = True
@@ -11502,7 +11614,7 @@ End Sub
 Private Sub CargarListView(Index As Integer)
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Sql As String
 
@@ -11519,18 +11631,18 @@ Dim Sql As String
     Sql = Sql & " WHERE stipom.tipodocu in (1,2,3,4,5,6,7,8,9,10,11) or stipom.codtipom = 'FTR'"
     Sql = Sql & " ORDER BY codtipom "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Set ItmX = ListView1(Index).ListItems.Add
-        ItmX.Text = RS.Fields(1).Value ' Format(Rs.Fields(0).Value)
-        ItmX.Key = RS.Fields(0).Value
+        ItmX.Text = Rs.Fields(1).Value ' Format(Rs.Fields(0).Value)
+        ItmX.Key = Rs.Fields(0).Value
 '        ItmX.SubItems(1) = Rs.Fields(1).Value
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -11539,7 +11651,7 @@ ECargarList:
 End Sub
 
 
-Private Function NroTotalMovimientos(tipo As Byte) As Long
+Private Function NroTotalMovimientos(Tipo As Byte) As Long
 ' Tipo: 1 - anticipos
 '       2 - liquidacion
 '       3 - anticipos venta campo
@@ -11547,7 +11659,7 @@ Private Function NroTotalMovimientos(tipo As Byte) As Long
 Dim Sql As String
     
     Sql = "select distinct "
-    Select Case tipo
+    Select Case Tipo
         Case 1
             Sql = Sql & " CodTipomAnt "
         Case 2
@@ -11559,9 +11671,9 @@ Dim Sql As String
     End Select
     
     Sql = Sql & " from rcoope, usuarios.stipom stipom "
-    Sql = Sql & " WHERE stipom.tipodocu=" & tipo
+    Sql = Sql & " WHERE stipom.tipodocu=" & Tipo
     Sql = Sql & " and stipom.codtipom = rcoope."
-    Select Case tipo
+    Select Case Tipo
         Case 1
             Sql = Sql & "CodTipomAnt "
         Case 2
@@ -11578,11 +11690,11 @@ End Function
 
 
 
-Private Function GeneraFicheroModelo(tipo As Byte, pTabla As String, pWhere As String) As Boolean
+Private Function GeneraFicheroModelo(Tipo As Byte, pTabla As String, pWhere As String) As Boolean
 Dim NFic As Integer
 Dim Regs As Integer
 Dim CodigoOrdenante As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Aux As String
 Dim Aux2 As String
 Dim Cad As String
@@ -11618,7 +11730,7 @@ Dim CPostal As String
     
     Open App.Path & "\modelo.txt" For Output As #NFic
     
-    Select Case tipo
+    Select Case Tipo
         Case 0 ' MODELO 190
             ' previamente hemos de cargar una tabla intermedia donde sumemos base retencion por nif,
             ' cargaremos el nif del socio / transportista y nombre para cargar la linea 190
@@ -11674,14 +11786,14 @@ Dim CPostal As String
             Sql = "select count(distinct nif, tipo), sum(basereten), sum(impreten) "
             Sql = Sql & " from tmpReten "
             
-            Set RS = New ADODB.Recordset
-            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             
             ' CABECERA
-            Cabecera190b NFic, CLng(DBLet(RS.Fields(0).Value, "N")), CCur(DBLet(RS.Fields(2).Value, "N")), CCur(DBLet(RS.Fields(1).Value, "N"))
+            Cabecera190b NFic, CLng(DBLet(Rs.Fields(0).Value, "N")), CCur(DBLet(Rs.Fields(2).Value, "N")), CCur(DBLet(Rs.Fields(1).Value, "N"))
             
-            Set RS = Nothing
+            Set Rs = Nothing
             
             ' LINEAS
             
@@ -11692,27 +11804,27 @@ Dim CPostal As String
             Aux = Aux & " having sum(tmpreten.basereten) <> 0 "
             Aux = Aux & " order by 1,2 "
             
-            Set RS = New ADODB.Recordset
-            RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            If RS.EOF Then
+            If Rs.EOF Then
                 'No hayningun registro
             Else
                 b = True
                 Regs = 0
-                While Not RS.EOF And b
+                While Not Rs.EOF And b
                     Regs = Regs + 1
                     
-                    Nombre = DevuelveValor("select nombre from tmpreten where nif = " & DBSet(RS!nif, "T"))
-                    CPostal = DevuelveValor("select codpostal from tmpreten where nif = " & DBSet(RS!nif, "T"))
+                    Nombre = DevuelveValor("select nombre from tmpreten where nif = " & DBSet(Rs!nif, "T"))
+                    CPostal = DevuelveValor("select codpostal from tmpreten where nif = " & DBSet(Rs!nif, "T"))
                     
-                    Linea190new NFic, Nombre, CPostal, RS
+                    Linea190new NFic, Nombre, CPostal, Rs
                     
-                    RS.MoveNext
+                    Rs.MoveNext
                 Wend
             End If
-            RS.Close
-            Set RS = Nothing
+            Rs.Close
+            Set Rs = Nothing
             
    
             
@@ -11739,30 +11851,30 @@ Dim CPostal As String
             
                 Cabecera346 NFic, Nregs, CCur(Total)
             
-                Set RS = New ADODB.Recordset
-                RS.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Set Rs = New ADODB.Recordset
+                Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                If RS.EOF Then
+                If Rs.EOF Then
                     'No hayningun registro
                 Else
                     b = True
                     Regs = 0
-                    While Not RS.EOF And b
+                    While Not Rs.EOF And b
                         Regs = Regs + 1
                         Set vSocio = New cSocio
                         
-                        If vSocio.LeerDatos(DBLet(RS!Codsocio, "N")) Then
-                            Linea346 NFic, vSocio, RS
+                        If vSocio.LeerDatos(DBLet(Rs!Codsocio, "N")) Then
+                            Linea346 NFic, vSocio, Rs
                         Else
                             b = False
                         End If
                         
                         Set vSocio = Nothing
-                        RS.MoveNext
+                        Rs.MoveNext
                     Wend
                 End If
-                RS.Close
-                Set RS = Nothing
+                Rs.Close
+                Set Rs = Nothing
                 
             End If
     End Select
@@ -11772,7 +11884,7 @@ Dim CPostal As String
     Exit Function
     
 EGen:
-    Set RS = Nothing
+    Set Rs = Nothing
     Close (NFic)
     MuestraError Err.Number, Err.Description
 End Function
@@ -11824,14 +11936,14 @@ Dim Cad As String
 'TIPO DE REGISTRO 1:REGISTRO DEL RETENEDOR}
     
     Cad = "1190"                                                  'p.1
-    Cad = Cad & Format(txtcodigo(30).Text, "0000")                'p.5 año de ejercicio
+    Cad = Cad & Format(txtCodigo(30).Text, "0000")                'p.5 año de ejercicio
     Cad = Cad & RellenaABlancos(vParam.CifEmpresa, True, 9)       'p.9 cif empresa
     Cad = Cad & RellenaABlancos(SinCaracteresRaros(vParam.NombreEmpresa), True, 40)   'p.18 nombre de empresa
     '[Monica]20/01/2016: antes era una D
     Cad = Cad & "T"                                               'p.58 antes era D
-    Cad = Cad & RellenaAceros(txtcodigo(37).Text, True, 9)        'p.59 telefono
-    Cad = Cad & RellenaABlancos(SinCaracteresRaros(txtcodigo(36).Text), True, 40)     'p.68 persona de contacto
-    Cad = Cad & RellenaAceros(txtcodigo(31).Text, True, 13)       'p.108 nro de justificante
+    Cad = Cad & RellenaAceros(txtCodigo(37).Text, True, 9)        'p.59 telefono
+    Cad = Cad & RellenaABlancos(SinCaracteresRaros(txtCodigo(36).Text), True, 40)     'p.68 persona de contacto
+    Cad = Cad & RellenaAceros(txtCodigo(31).Text, True, 13)       'p.108 nro de justificante
     Cad = Cad & Space(2)                                          'p.121 ni es complementaria ni sustitutiva
     Cad = Cad & RellenaAceros("0", True, 13)                      'p.123 13 ceros (justificante de la complementaria o sustitutiva)
     Cad = Cad & Format(Nregs, "000000000")                        'p.136 nro de registros
@@ -11857,11 +11969,11 @@ Dim Cad As String
 End Sub
 
 
-Private Sub Linea190(NFich As Integer, vSocio As cSocio, ByRef RS As ADODB.Recordset)
+Private Sub Linea190(NFich As Integer, vSocio As cSocio, ByRef Rs As ADODB.Recordset)
 Dim Cad As String
 
     Cad = "2190"                                                'p.1
-    Cad = Cad & Format(txtcodigo(30).Text, "0000")              'p.5 año ejercicio
+    Cad = Cad & Format(txtCodigo(30).Text, "0000")              'p.5 año ejercicio
     Cad = Cad & RellenaABlancos(vParam.CifEmpresa, True, 9)     'p.9 cif empresa
     Cad = Cad & RellenaABlancos(vSocio.nif, True, 9)            'p.18 nifsocio
     Cad = Cad & Space(9)                                        'p.27 nif del representante legal
@@ -11878,18 +11990,18 @@ Dim Cad As String
 ' antes no estaba en el if de abajo siempre era un blanco lo he cambiado según el signo.
 '    cad = cad & " "                                             'p.81
     
-    If DBLet(RS.Fields(1).Value, "N") < 0 Then                  'p.82 base de retencion
+    If DBLet(Rs.Fields(1).Value, "N") < 0 Then                  'p.82 base de retencion
         Cad = Cad & "N"                                             'p.81
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(1).Value, "N") * (-1) * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(1).Value, "N") * (-1) * 100)), False, 13)
     Else
         Cad = Cad & " "                                             'p.81
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(1).Value, "N") * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(1).Value, "N") * 100)), False, 13)
     End If
     
-    If DBLet(RS.Fields(2).Value, "N") < 0 Then                  'p.95 importe de retencion
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(2).Value, "N") * (-1) * 100)), False, 13)
+    If DBLet(Rs.Fields(2).Value, "N") < 0 Then                  'p.95 importe de retencion
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(2).Value, "N") * (-1) * 100)), False, 13)
     Else
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(2).Value, "N") * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(2).Value, "N") * 100)), False, 13)
     End If
     
     Cad = Cad & " "                                             'p.108
@@ -11908,18 +12020,18 @@ End Sub
 
 
 
-Private Sub Linea190new(NFich As Integer, Nombre As String, CPostal As String, ByRef RS As ADODB.Recordset)
+Private Sub Linea190new(NFich As Integer, Nombre As String, CPostal As String, ByRef Rs As ADODB.Recordset)
 Dim Cad As String
 
     Cad = "2190"                                                'p.1
-    Cad = Cad & Format(txtcodigo(30).Text, "0000")              'p.5 año ejercicio
+    Cad = Cad & Format(txtCodigo(30).Text, "0000")              'p.5 año ejercicio
     Cad = Cad & RellenaABlancos(vParam.CifEmpresa, True, 9)     'p.9 cif empresa
-    Cad = Cad & RellenaABlancos(RS!nif, True, 9)            'p.18 nifsocio
+    Cad = Cad & RellenaABlancos(Rs!nif, True, 9)            'p.18 nifsocio
     Cad = Cad & Space(9)                                        'p.27 nif del representante legal
     Cad = Cad & RellenaABlancos(SinCaracteresRaros(Nombre), True, 40)        'p.36 nombre socio
     Cad = Cad & RellenaABlancos(Mid(CPostal, 1, 2), True, 2) 'p.76 codpobla[1,2] codigo de provincia
     Cad = Cad & "H"                                             'p.78 clave de percepcion H=actividades agrícolas, ganaderas y forestales
-    If RS!tipo = 0 Then
+    If Rs!Tipo = 0 Then
         Cad = Cad & "01"                                            'p.79 subclave:
     Else
         Cad = Cad & "04"
@@ -11934,18 +12046,18 @@ Dim Cad As String
 ' antes no estaba en el if de abajo siempre era un blanco lo he cambiado según el signo.
 '    cad = cad & " "                                             'p.81
     
-    If DBLet(RS.Fields(2).Value, "N") < 0 Then                  'p.82 base de retencion
+    If DBLet(Rs.Fields(2).Value, "N") < 0 Then                  'p.82 base de retencion
         Cad = Cad & "N"                                             'p.81
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(2).Value, "N") * (-1) * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(2).Value, "N") * (-1) * 100)), False, 13)
     Else
         Cad = Cad & " "                                             'p.81
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(2).Value, "N") * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(2).Value, "N") * 100)), False, 13)
     End If
     
-    If DBLet(RS.Fields(3).Value, "N") < 0 Then                  'p.95 importe de retencion
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(3).Value, "N") * (-1) * 100)), False, 13)
+    If DBLet(Rs.Fields(3).Value, "N") < 0 Then                  'p.95 importe de retencion
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(3).Value, "N") * (-1) * 100)), False, 13)
     Else
-        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(3).Value, "N") * 100)), False, 13)
+        Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(3).Value, "N") * 100)), False, 13)
     End If
     
     Cad = Cad & " "                                             'p.108
@@ -11973,13 +12085,13 @@ Dim Cad As String
 
    'TIPO DE REGISTRO 0:PRESENTACION COLECTIVA
     Cad = "1346"                                                'p.1
-    Cad = Cad & Format(txtcodigo(30).Text, "0000")              'p.5 año ejercicio
+    Cad = Cad & Format(txtCodigo(30).Text, "0000")              'p.5 año ejercicio
     Cad = Cad & RellenaABlancos(vParam.CifEmpresa, True, 9)     'p.9 cif empresa
     Cad = Cad & RellenaABlancos(vParam.NombreEmpresa, True, 40) 'p.18 nombre empresa
     Cad = Cad & "D"    'p.58 siglas
-    Cad = Cad & RellenaAceros(txtcodigo(37).Text, False, 9)     'p.59 telefono
-    Cad = Cad & RellenaABlancos(txtcodigo(36).Text, True, 40)   'p.68 persona de contacto
-    Cad = Cad & RellenaAceros(txtcodigo(31).Text, False, 13)    'p.108 nro justificante
+    Cad = Cad & RellenaAceros(txtCodigo(37).Text, False, 9)     'p.59 telefono
+    Cad = Cad & RellenaABlancos(txtCodigo(36).Text, True, 40)   'p.68 persona de contacto
+    Cad = Cad & RellenaAceros(txtCodigo(31).Text, False, 13)    'p.108 nro justificante
     Cad = Cad & Space(2)                                        ' contar posiciones en multibase
     Cad = Cad & String(13, "0")                                 'p.122
     Cad = Cad & RellenaAceros(CStr(Nregs), False, 9)            'p.136 numero de registros
@@ -11992,11 +12104,11 @@ Dim Cad As String
 End Sub
 
 
-Private Sub Linea346(NFich As Integer, vSocio As cSocio, ByRef RS As ADODB.Recordset)
+Private Sub Linea346(NFich As Integer, vSocio As cSocio, ByRef Rs As ADODB.Recordset)
 Dim Cad As String
           
     Cad = "2346"                                                'p.1
-    Cad = Cad & Format(txtcodigo(30).Text, "0000")              'p.5 año ejercicio
+    Cad = Cad & Format(txtCodigo(30).Text, "0000")              'p.5 año ejercicio
     Cad = Cad & RellenaABlancos(vParam.CifEmpresa, True, 9)     'p.9 cif empresa
     Cad = Cad & RellenaABlancos(vSocio.nif, True, 18)            'p.18 nifsocio
     Cad = Cad & RellenaABlancos(SinCaracteresRaros(vSocio.Nombre), True, 40)        'p.36 nombre socio
@@ -12004,7 +12116,7 @@ Dim Cad As String
     '[Monica]21/02/2012: la clave de percepcion es una B antes A
     Cad = Cad & "B"                                             'p.78
     
-    Select Case DBLet(RS.Fields(1).Value, "N")
+    Select Case DBLet(Rs.Fields(1).Value, "N")
         Case 0
             '[Monica]21/02/2012: el tipo de percepcion un 2 antes era un 6
             Cad = Cad & "2"                                             'p.79
@@ -12015,10 +12127,10 @@ Dim Cad As String
     End Select
     
     Cad = Cad & " "                                             ' contar posiciones en multibase
-    Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(RS.Fields(2).Value, "N") * 100)), False, 14) 'p.81 base imponible
+    Cad = Cad & RellenaAceros(ImporteSinFormato(CStr(DBLet(Rs.Fields(2).Value, "N") * 100)), False, 14) 'p.81 base imponible
     Cad = Cad & RellenaAceros("0", True, 4)                     'p.95
     
-    Select Case DBLet(RS.Fields(1).Value, "N")
+    Select Case DBLet(Rs.Fields(1).Value, "N")
         Case 0
             '[Monica]17/02/2012: en Alzira es subvencion fondo operativo
             If vParamAplic.Cooperativa = 4 Then
@@ -12048,7 +12160,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionValsur(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -12112,8 +12224,8 @@ Dim vGastos As Currency
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -12129,16 +12241,16 @@ Dim vGastos As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
-        CampoAnt = RS!codcampo
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
+        CampoAnt = Rs!codcampo
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 vPorcGasto = ""
@@ -12149,8 +12261,8 @@ Dim vGastos As Currency
         End If
     End If
     
-    While Not RS.EOF
-        If CampoAnt <> RS!codcampo Then
+    While Not Rs.EOF
+        If CampoAnt <> Rs!codcampo Then
             ' gastos por campo
             
             ' [MONICA] : 08/09/2009 los gastos de transporte son una bonificacion para Valsur
@@ -12160,8 +12272,8 @@ Dim vGastos As Currency
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
             Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
             
             ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
             
@@ -12170,8 +12282,8 @@ Dim vGastos As Currency
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
             Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
             
             ImpoBonif = ImpoBonif + DevuelveValor(Sql4)
              
@@ -12182,11 +12294,11 @@ Dim vGastos As Currency
             'fin 15/03/2010
             
             
-            CampoAnt = RS!codcampo
+            CampoAnt = Rs!codcampo
         End If
     
         ' 23/07/2009: añadido el or con la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             ' anticipos
             Sql4 = "select sum(rfactsoc_variedad.imporvar) "
             Sql4 = Sql4 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -12267,10 +12379,10 @@ Dim vGastos As Currency
 '02/09/2010
 '            Sql1 = Sql1 & "),"
             Sql1 = Sql1 & ","
-            Sql1 = Sql1 & DBSet(RS!Contador, "N") & "," & DBSet(RS!TipoFact, "N") & "," & DBSet(RS!FechaIni, "F") & "," & DBSet(RS!FechaFin, "F") & "),"
+            Sql1 = Sql1 & DBSet(Rs!Contador, "N") & "," & DBSet(Rs!TipoFact, "N") & "," & DBSet(Rs!FechaIni, "F") & "," & DBSet(Rs!FechaFin, "F") & "),"
             
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Neto = 0
@@ -12285,11 +12397,11 @@ Dim vGastos As Currency
             
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     vPorcGasto = ""
@@ -12301,7 +12413,7 @@ Dim vGastos As Currency
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -12313,10 +12425,10 @@ Dim vGastos As Currency
         Dim vFecFin As String
         Dim vTipo As String
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -12325,25 +12437,25 @@ Dim vGastos As Currency
             PreCoop = DBLet(Rs9.Fields(0).Value, "N")
             PreSocio = DBLet(Rs9.Fields(1).Value, "N")
         
-            Recolect = DBLet(RS!Recolect, "N")
+            Recolect = DBLet(Rs!Recolect, "N")
             Select Case Recolect
                 Case 0
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2)
                 Case 1
-                    baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2)
+                    baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
             End Select
         End If
         Set Rs9 = Nothing
         
-        vConta = RS!Contador
-        vFecIni = DBLet(RS!FechaIni, "F")
-        vFecFin = DBLet(RS!FechaFin, "F")
-        vTipo = RS!TipoFact
+        vConta = Rs!Contador
+        vFecIni = DBLet(Rs!FechaIni, "F")
+        vFecFin = DBLet(Rs!FechaFin, "F")
+        vTipo = Rs!TipoFact
         'hasta aqui
             
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -12368,8 +12480,8 @@ Dim vGastos As Currency
         Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
         Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
+        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
         
         ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
                 
@@ -12377,8 +12489,8 @@ Dim vGastos As Currency
         Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
         Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
+        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
         
                 
         ImpoBonif = ImpoBonif + DevuelveValor(Sql4)
@@ -12461,7 +12573,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionPicassent(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -12551,8 +12663,8 @@ Dim PorcComi As Currency
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -12573,17 +12685,17 @@ Dim PorcComi As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
-        CampoAnt = RS!codcampo
-        AlbarAnt = RS!numalbar
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
+        CampoAnt = Rs!codcampo
+        AlbarAnt = Rs!numalbar
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 vPorcGasto = ""
@@ -12608,8 +12720,8 @@ Dim PorcComi As Currency
     
     sqlLiquid = ""
     
-    While Not RS.EOF
-        If AlbarAnt <> RS!numalbar Or VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+    While Not Rs.EOF
+        If AlbarAnt <> Rs!numalbar Or VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             ' gastos de los albaranes
             Sql4 = "select sum(rhisfruta_gastos.importe) "
             Sql4 = Sql4 & " from rhisfruta_gastos "
@@ -12624,11 +12736,11 @@ Dim PorcComi As Currency
             
             ImpoGastosFactura = ImpoGastosFactura + DevuelveValor(Sql4)
             
-            AlbarAnt = RS!numalbar
+            AlbarAnt = Rs!numalbar
         End If
     
         ' 23/07/2009: añadido el or con la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             ' anticipos
             Sql4 = "select sum(rfactsoc_variedad.imporvar) "
             Sql4 = Sql4 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -12687,10 +12799,10 @@ Dim PorcComi As Currency
 '02/09/2010
 '            Sql1 = Sql1 & "),"
             Sql1 = Sql1 & ","
-            Sql1 = Sql1 & DBSet(RS!Contador, "N") & "," & DBSet(RS!TipoFact, "N") & "," & DBSet(RS!FechaIni, "F") & "," & DBSet(RS!FechaFin, "F") & "),"
+            Sql1 = Sql1 & DBSet(Rs!Contador, "N") & "," & DBSet(Rs!TipoFact, "N") & "," & DBSet(Rs!FechaIni, "F") & "," & DBSet(Rs!FechaFin, "F") & "),"
             
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Neto = 0
@@ -12706,7 +12818,7 @@ Dim PorcComi As Currency
             
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             ImpoIvaFactura = Round2((BaseImpoFactura) * ComprobarCero(vPorcIva) / 100, 2)
         
             Select Case TipoIRPF
@@ -12753,8 +12865,8 @@ Dim PorcComi As Currency
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     vPorcGasto = ""
@@ -12766,7 +12878,7 @@ Dim PorcComi As Currency
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -12778,10 +12890,10 @@ Dim PorcComi As Currency
         Dim vFecFin As String
         Dim vTipo As String
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -12790,18 +12902,18 @@ Dim PorcComi As Currency
             PreCoop = DBLet(Rs9.Fields(0).Value, "N")
             PreSocio = DBLet(Rs9.Fields(1).Value, "N")
             PorcBoni = 0
-            Recolect = DBLet(RS!Recolect, "N")
+            Recolect = DBLet(Rs!Recolect, "N")
             PorcComi = 0
             Select Case Recolect
                 Case 0
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreCoop > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                         If Check1(13).Value Then
                             '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                             If CCur(PorcComi) <> 0 Then
                                 PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                             End If
@@ -12811,8 +12923,8 @@ Dim PorcComi As Currency
 '                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
 '                    BaseImpo = BaseImpo + Round2(DBLet(RS!Kilos, "N") * PreCoop * (1 + (PorcBoni / 100)), 2)
                     
-                    ImpBonif = Round2(DBLet(RS!Kilos, "N") * PreCoop * (PorcBoni / 100), 2)
-                    ImpTot = Round2(DBLet(RS!Kilos, "N") * PreCoop, 2) + ImpBonif
+                    ImpBonif = Round2(DBLet(Rs!Kilos, "N") * PreCoop * (PorcBoni / 100), 2)
+                    ImpTot = Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2) + ImpBonif
                 
                     Bonifica = Bonifica + ImpBonif
                     baseimpo = baseimpo + ImpTot
@@ -12821,20 +12933,20 @@ Dim PorcComi As Currency
                 Case 1
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreSocio > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                         If Check1(13).Value Then
                             '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                             If CCur(PorcComi) <> 0 Then
                                 PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                             End If
                         End If
                     End If
                     
-                    ImpBonif = Round2(DBLet(RS!Kilos, "N") * PreSocio * (PorcBoni / 100), 2)
-                    ImpTot = Round2(DBLet(RS!Kilos, "N") * PreSocio, 2) + ImpBonif
+                    ImpBonif = Round2(DBLet(Rs!Kilos, "N") * PreSocio * (PorcBoni / 100), 2)
+                    ImpTot = Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2) + ImpBonif
                 
                     Bonifica = Bonifica + ImpBonif
                     baseimpo = baseimpo + ImpTot
@@ -12845,21 +12957,21 @@ Dim PorcComi As Currency
         End If
         Set Rs9 = Nothing
         
-        vConta = RS!Contador
-        vFecIni = DBLet(RS!FechaIni, "F")
-        vFecFin = DBLet(RS!FechaFin, "F")
-        vTipo = RS!TipoFact
+        vConta = Rs!Contador
+        vFecIni = DBLet(Rs!FechaIni, "F")
+        vFecFin = DBLet(Rs!FechaFin, "F")
+        vTipo = Rs!TipoFact
         'hasta aqui
             
         ' insertamos en tmpliquidacion la linea de calidad
-        sqlLiquid = sqlLiquid & "(" & vUsu.Codigo & ", " & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codvarie, "N") & ","
-        sqlLiquid = sqlLiquid & DBSet(RS!codcampo, "N") & "," & DBSet(RS!numalbar, "N") & "," & DBSet(RS!codcalid, "N") & "," & DBSet(PorcBoni, "N") & ","
+        sqlLiquid = sqlLiquid & "(" & vUsu.Codigo & ", " & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+        sqlLiquid = sqlLiquid & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(PorcBoni, "N") & ","
         sqlLiquid = sqlLiquid & DBSet(ImpBonif, "N") & "," & DBSet(ImpTot, "N") & "),"
             
             
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' Metemos las bonificaciones
@@ -13001,7 +13113,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionAlzira(cTabla As String, cWhere As String, TipoPrec As Byte) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -13064,8 +13176,8 @@ Dim vGastos As Currency
     Sql = Sql & " having sum(if(rhisfruta_clasif.kilosnet is null, 0, rhisfruta_clasif.kilosnet)) <> 0 " '[Monica]28/03/2013: no tienen que salir los que son 0
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -13081,16 +13193,16 @@ Dim vGastos As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
-        CampoAnt = RS!codcampo
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
+        CampoAnt = Rs!codcampo
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 '[Monica]29/04/2011: INTERNAS
                 If vSocio.EsFactADVInt Then
@@ -13107,8 +13219,8 @@ Dim vGastos As Currency
         End If
     End If
     
-    While Not RS.EOF
-        If CampoAnt <> RS!codcampo Or VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+    While Not Rs.EOF
+        If CampoAnt <> Rs!codcampo Or VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             ' gastos por campo
 '[MONICA] : 19/01/2010 los gastos que se aplican a Alzira no son los 4 imptrans, impacarr, imprecol, imppenal
 '           si no los gastos que tenemos en rhisfruta_gastos
@@ -13149,8 +13261,8 @@ Dim vGastos As Currency
                     Case 1      ' recolectado socio
                         Sql4 = Sql4 & " and rhisfruta.recolect = 1"
                 End Select
-                Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-                Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F") & ")"
+                Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+                Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F") & ")"
                 '[Monica]02/04/2013: cambio el devuelvevalor por el ObternerGastosAlbaranes
                 ImpoGastos = ImpoGastos + ObtenerGastosAlbaranes(CStr(SocioAnt), CStr(VarieAnt), CStr(CampoAnt), cTabla, cWhere, 1)
                 'ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
@@ -13158,11 +13270,11 @@ Dim vGastos As Currency
             End If
             ImpoBonif = 0
             
-            CampoAnt = RS!codcampo
+            CampoAnt = Rs!codcampo
         End If
     
         ' 23/07/2009: añadido el or con la segunda condicion
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             ' anticipos
             Sql4 = "select sum(rfactsoc_variedad.imporvar) "
             Sql4 = Sql4 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -13239,7 +13351,7 @@ Dim vGastos As Currency
             Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             Neto = 0
@@ -13254,11 +13366,11 @@ Dim vGastos As Currency
             
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     '[Monica]29/04/2011: INTERNAS
                     If vSocio.EsFactADVInt Then
@@ -13275,23 +13387,23 @@ Dim vGastos As Currency
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         Select Case Recolect
 '            Case 0
 '                baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * RS!precoop, 2)
 '            Case 1
 '                baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * RS!presocio, 2)
             Case 0
-                baseimpo = baseimpo + (DBLet(RS!Kilos, "N") * RS!PreCoop)
+                baseimpo = baseimpo + (DBLet(Rs!Kilos, "N") * Rs!PreCoop)
             Case 1
-                baseimpo = baseimpo + (DBLet(RS!Kilos, "N") * RS!PreSocio)
+                baseimpo = baseimpo + (DBLet(Rs!Kilos, "N") * Rs!PreSocio)
         End Select
             
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -13339,8 +13451,8 @@ Dim vGastos As Currency
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
             Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F") & ")"
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F") & ")"
                 
             '[Monica]02/04/2013: cambio el devuelvevalor por el ObternerGastosAlbaranes
             ImpoGastos = ImpoGastos + ObtenerGastosAlbaranes(CStr(SocioAnt), CStr(VarieAnt), CStr(CampoAnt), cTabla, cWhere, 1)
@@ -13417,12 +13529,36 @@ eCargarTemporal:
 End Function
 
 
+Private Function CargarTemporalTotalesCatadau()
+Dim Sql As String
+
+    Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    'comerciales
+    Sql = "insert into tmpinformes2 (codusu,codigo1,importe1) "
+    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(kilosnet) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & " and tipoentr in (0,2)"
+    Sql = Sql & " group by 1, 2 "
+    conn.Execute Sql
+    'venta campo
+    Sql = "insert into tmpinformes2 (codusu,codigo1,importe2) "
+    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(kilosnet) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & " and tipoentr = 1 "
+    Sql = Sql & " group by 1, 2 "
+    conn.Execute Sql
+    'kilos aportacion
+    Sql = "insert into tmpinformes2 (codusu,codigo1,importe1) "
+    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(kilosnet) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & " and codcalid = 0"
+    Sql = Sql & " group by 1, 2 "
+    conn.Execute Sql
 
 
+End Function
 
 
 Private Function CargarTemporalLiquidacionCatadau(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -13465,6 +13601,13 @@ Dim HayReg As Boolean
         conn.Execute Sql2
 
     
+        '[Monica]27/01/2016: si es catadau y es complementaria sacamos otro report
+        If vParamAplic.Cooperativa = 0 And Check1(5).Value = 1 Then
+            CargarTemporalTotalesCatadau
+        End If
+    
+    
+    
         Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie,"
         Sql = Sql & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
         Sql = Sql & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
@@ -13472,8 +13615,8 @@ Dim HayReg As Boolean
         Sql = Sql & " group by 1, 2, 3 "
         Sql = Sql & " order by 1, 2, 3 "
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -13489,15 +13632,15 @@ Dim HayReg As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     '[Monica]05/03/2014:
                     If vParamAplic.Cooperativa = 4 Then
@@ -13519,10 +13662,10 @@ Dim HayReg As Boolean
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
         
             ' 23/07/2009: añadido el or con la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 ' anticipos
                 Sql4 = "select sum(rfactsoc_variedad.imporvar) "
                 Sql4 = Sql4 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -13590,7 +13733,7 @@ Dim HayReg As Boolean
                 Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
                 Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                 
                 baseimpo = 0
                 Neto = 0
@@ -13604,11 +13747,11 @@ Dim HayReg As Boolean
                 
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                         vPorcGasto = ""
@@ -13620,9 +13763,9 @@ Dim HayReg As Boolean
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = DBLet(RS!Kilos, "N")
+            KilosNet = DBLet(Rs!Kilos, "N")
             
-            baseimpo = DBLet(RS!Importe, "N")
+            baseimpo = DBLet(Rs!Importe, "N")
                 
             ' gastos
             Sql4 = "select sum(gastos) from tmpliquidacion1 "
@@ -13634,7 +13777,7 @@ Dim HayReg As Boolean
                 
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
             
         ' ultimo registro si ha entrado
@@ -13756,7 +13899,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposGastos(cTabla As String, cWhere As String, Cad As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -13810,8 +13953,8 @@ Dim Importe As Currency
     Sql = Sql & " group by 1, 2, 3, 4, 5 "
     Sql = Sql & " order by 1, 2, 3, 4, 5 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie,kggastos, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -13827,15 +13970,15 @@ Dim Importe As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
             End If
@@ -13844,8 +13987,8 @@ Dim Importe As Currency
         End If
     End If
     
-    While Not RS.EOF
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+    While Not Rs.EOF
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             
             ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
         
@@ -13871,7 +14014,7 @@ Dim Importe As Currency
             Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(TotalFac, "N") & "," & DBSet(KilosNet, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             baseimpo = 0
             ImpoIva = 0
@@ -13881,11 +14024,11 @@ Dim Importe As Currency
             KilosGastos = 0
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -13895,17 +14038,17 @@ Dim Importe As Currency
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        If DBLet(RS!gastosrec, "N") = 1 Then
-            KilosGastos = KilosGastos + DBLet(RS!Kilos, "N")
+        If DBLet(Rs!gastosrec, "N") = 1 Then
+            KilosGastos = KilosGastos + DBLet(Rs!Kilos, "N")
         
         
             ' insertar linea de variedad, campo
             Sql3 = "select sum(imprecol) from rhisfruta where "
             If Cad <> "" Then Sql3 = Sql3 & Cad & " and "
-            Sql3 = Sql3 & " rhisfruta.codvarie = " & DBSet(RS!codvarie, "N")
-            Sql3 = Sql3 & " and codcampo = " & DBSet(RS!codcampo, "N") & " and codsocio = " & DBSet(RS!Codsocio, "N")
+            Sql3 = Sql3 & " rhisfruta.codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
             
             Importe = DevuelveValor(Sql3)
         
@@ -13918,7 +14061,7 @@ Dim Importe As Currency
             
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -13966,7 +14109,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposGenericos(cTabla As String, cWhere As String, ConCampo As Boolean, DeRetirada As Boolean) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -14032,8 +14175,8 @@ Dim Sql8 As String
     End If
 
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, kilos, porceiva, porcerete,precio
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, porcen1, porcen2, precio1) values "
@@ -14048,15 +14191,15 @@ Dim Sql8 As String
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        SocioAnt = RS!Codsocio
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
+    If Not Rs.EOF Then
+        SocioAnt = Rs!Codsocio
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
         
         Set vSocio = Nothing
         Set vSocio = New cSocio
-        If vSocio.LeerDatos(RS!Codsocio) Then
-            If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
+            If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
             End If
@@ -14073,16 +14216,16 @@ Dim Sql8 As String
     
     Sql1 = ""
     KilosNet = 0
-    While Not RS.EOF
-        If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+    While Not Rs.EOF
+        If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             Sql8 = "select precioindustria from rprecios where (codvarie, tipofact, contador) = ("
             Sql8 = Sql8 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(VarieAnt, "N") & " and "
             If DeRetirada Then
-                Sql8 = Sql8 & " tipofact = 5 and fechaini = " & DBSet(txtcodigo(6).Text, "F")
+                Sql8 = Sql8 & " tipofact = 5 and fechaini = " & DBSet(txtCodigo(6).Text, "F")
             Else
-                Sql8 = Sql8 & " tipofact = 4 and fechaini = " & DBSet(txtcodigo(6).Text, "F")
+                Sql8 = Sql8 & " tipofact = 4 and fechaini = " & DBSet(txtCodigo(6).Text, "F")
             End If
-            Sql8 = Sql8 & " and fechafin = " & DBSet(txtcodigo(7).Text, "F") & " and precioindustria <> 0 and precioindustria is not null "
+            Sql8 = Sql8 & " and fechafin = " & DBSet(txtCodigo(7).Text, "F") & " and precioindustria <> 0 and precioindustria is not null "
             Sql8 = Sql8 & " group by 1, 2) "
             
             Precio = DevuelveValor(Sql8)
@@ -14094,12 +14237,12 @@ Dim Sql8 As String
             Sql1 = Sql1 & DBSet(PorcReten, "N", "S") & ","
             Sql1 = Sql1 & DBSet(Precio, "N") & "),"
             
-            VarieAnt = RS!codvarie
+            VarieAnt = Rs!codvarie
             
             KilosNet = 0
         End If
         
-        If RS!Codsocio <> SocioAnt Then
+        If Rs!Codsocio <> SocioAnt Then
             
             ImpoIvaFactura = Round2((BaseImpoFactura) * ComprobarCero(vPorcIva) / 100, 2)
         
@@ -14133,8 +14276,8 @@ Dim Sql8 As String
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -14145,28 +14288,28 @@ Dim Sql8 As String
             TipoIRPF = vSocio.TipoIRPF
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
         Sql8 = "select precioindustria from rprecios where (codvarie, tipofact, contador) = ("
         Sql8 = Sql8 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(VarieAnt, "N") & " and "
         If DeRetirada Then
-            Sql8 = Sql8 & " tipofact = 5 and fechaini = " & DBSet(txtcodigo(6).Text, "F")
+            Sql8 = Sql8 & " tipofact = 5 and fechaini = " & DBSet(txtCodigo(6).Text, "F")
         Else
-            Sql8 = Sql8 & " tipofact = 4 and fechaini = " & DBSet(txtcodigo(6).Text, "F")
+            Sql8 = Sql8 & " tipofact = 4 and fechaini = " & DBSet(txtCodigo(6).Text, "F")
         End If
-        Sql8 = Sql8 & " and fechafin = " & DBSet(txtcodigo(7).Text, "F") & " and precioindustria <> 0 and precioindustria is not null "
+        Sql8 = Sql8 & " and fechafin = " & DBSet(txtCodigo(7).Text, "F") & " and precioindustria <> 0 and precioindustria is not null "
         Sql8 = Sql8 & " group by 1, 2) "
         
         Precio = DevuelveValor(Sql8)
         
-        Importe = Round2(RS!Kilos * Precio, 2)
+        Importe = Round2(Rs!Kilos * Precio, 2)
     
         BaseImpoFactura = BaseImpoFactura + Importe
         
             
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -14221,10 +14364,10 @@ End Function
 
 
 
-Private Function CargarTemporalCatadau(cTabla As String, cWhere As String, tipo As Byte) As Boolean
+Private Function CargarTemporalCatadau(cTabla As String, cWhere As String, Tipo As Byte) As Boolean
 'tipo  0=anticipos
 '      1=liquidacion
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
@@ -14306,8 +14449,6 @@ Dim HayPrecio As Boolean
     conn.Execute Sql2
     
     
-    
-    
     Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
     Sql = Sql & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
     Sql = Sql & " sum(rhisfruta_clasif.kilosnet) as kilos "
@@ -14331,23 +14472,23 @@ Dim HayPrecio As Boolean
     Me.Pb1.Value = 0
     Me.Refresh
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
-    If tipo = 1 And Check1(5).Value = 1 Then tipo = 3 'seleccionamos los precios de liquidacion complementaria
+    If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
                                     
                                     
-    While Not RS.EOF
-        Label2(12).Caption = "Socio " & RS!Codsocio & " Variedad " & RS!codvarie & "-" & RS!codcalid & " Campo " & RS!codcampo
+    While Not Rs.EOF
+        Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
         IncrementarProgresNew Pb1, 1
         Me.Refresh
         DoEvents
     
-        Sql3 = "select fechaini, fechafin, precioindustria, max(contador) as contador from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
-        Sql3 = Sql3 & " and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql3 = Sql3 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
+        Sql3 = "select fechaini, fechafin, precioindustria, max(contador) as contador from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
+        Sql3 = Sql3 & " and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2,3"
                 
         Set RS1 = New ADODB.Recordset
@@ -14356,19 +14497,18 @@ Dim HayPrecio As Boolean
             Contador = DBLet(RS1!Contador, "N")
             FechaIni = DBLet(RS1!FechaIni, "F")
             FechaFin = DBLet(RS1!FechaFin, "F")
-            Precio = DBLet(RS1!precioindustria, "N")
         End If
         Set RS1 = Nothing
         
-        If DBLet(RS!Recolect, "N") = 0 Then 'cooperativa
+        If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
         Else
             Sql3 = "select presocio "
         End If
         
-        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
+        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
         Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
         
         Precio = DevuelveValor(Sql3)
@@ -14378,16 +14518,19 @@ Dim HayPrecio As Boolean
         HayPrecio = (TotalRegistrosConsulta(Sql3) <> 0)
         If Not HayPrecio Then
         
-            Sql4 = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql4 = Sql4 & " and importe3 = " & DBSet(RS!codcalid, "N")
+            Sql4 = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and importe3 = " & DBSet(Rs!codcalid, "N")
             Sql4 = Sql4 & " and fecha1 between " & DBSet(FechaIni, "F") & " and " & DBSet(FechaFin, "F")
 
             conn.Execute Sql4
         Else
+            Dim vPrecio As Currency
+            vPrecio = Precio
+        
             Sql4 = "update tmpinformes2 set precio1 = " & DBSet(Precio, "N")
             Sql4 = Sql4 & " where codusu = " & DBSet(vUsu.Codigo, "N")
-            Sql4 = Sql4 & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql4 = Sql4 & " and importe3 = " & DBSet(RS!codcalid, "N")
+            Sql4 = Sql4 & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and importe3 = " & DBSet(Rs!codcalid, "N")
             Sql4 = Sql4 & " and fecha1 between " & DBSet(FechaIni, "F") & " and " & DBSet(FechaFin, "F")
 
             conn.Execute Sql4
@@ -14395,9 +14538,9 @@ Dim HayPrecio As Boolean
         
         Sql4 = "select sum(if(isnull(imptrans),0,imptrans)) + sum(if(isnull(impacarr),0,impacarr)) + sum(if(isnull(imprecol),0,imprecol)) + sum(if(isnull(imppenal),0,imppenal)) as gastos"
         Sql4 = Sql4 & "  from rhisfruta "
-        Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
-        Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(RS!codcampo, "N") & " and "
+        Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
+        Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
         Sql4 = Sql4 & " rhisfruta.fecalbar >= " & DBSet(FechaIni, "F") & " and "
         Sql4 = Sql4 & " rhisfruta.fecalbar <= " & DBSet(FechaFin, "F") & " and "
         '[Monica]24/04/2013: tipo de entrada la seleccionada
@@ -14417,26 +14560,26 @@ Dim HayPrecio As Boolean
         
         '[Monica]05/03/2014: tramos para alzira
         If vParamAplic.Cooperativa = 4 Then
-            Gastos = ObtenerGastosAlbaranes(CStr(RS!Codsocio), CStr(RS!codvarie), CStr(RS!codcampo), cTabla, cWhere, 1)
+            Gastos = ObtenerGastosAlbaranes(CStr(Rs!Codsocio), CStr(Rs!codvarie), CStr(Rs!codcampo), cTabla, cWhere, 1)
         End If
         
         '[Monica] 03/12/2009 si es liquidacion: no se descuentan gastos(complementaria) ponemos gastos = 0
-        If tipo = 3 Or tipo = 6 Then
+        If Tipo = 3 Or Tipo = 6 Then
             Gastos = 0
         End If
         ' end 03/12/2009
         
-        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
-        Sql5 = Sql5 & " tmpliquidacion1.codcampo = " & DBSet(RS!codcampo, "N") & " and "
+        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
+        Sql5 = Sql5 & " tmpliquidacion1.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.fechaini = " & DBSet(FechaIni, "F") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.fechafin = " & DBSet(FechaFin, "F") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.codusu = " & vUsu.Codigo
         
         If TotalRegistros(Sql5) = 0 Then
-            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & ","
-            Sql5 = Sql5 & DBSet(RS!codvarie, "N") & ","
-            Sql5 = Sql5 & DBSet(RS!codcampo, "N") & ","
+            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & ","
+            Sql5 = Sql5 & DBSet(Rs!codvarie, "N") & ","
+            Sql5 = Sql5 & DBSet(Rs!codcampo, "N") & ","
             Sql5 = Sql5 & DBSet(FechaIni, "F") & ","
             Sql5 = Sql5 & DBSet(FechaFin, "F") & ","
             Sql5 = Sql5 & DBSet(Gastos, "N") & ")"
@@ -14448,12 +14591,12 @@ Dim HayPrecio As Boolean
         '[Monica]24/04/2013: añadida la condicion
         If HayPrecio Then
             Sql2 = "select count(*) from tmpliquidacion where codusu = " & vUsu.Codigo
-            Sql2 = Sql2 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-            Sql2 = Sql2 & " and codcampo = " & DBSet(RS!codcampo, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(RS!codvarie, "N")
-            Sql2 = Sql2 & " and recolect = " & DBSet(RS!Recolect, "N")
-            Sql2 = Sql2 & " and tipoentr = " & DBSet(RS!TipoEntr, "N")
-            Sql2 = Sql2 & " and codcalid = " & DBSet(RS!codcalid, "N")
+            Sql2 = Sql2 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+            Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and recolect = " & DBSet(Rs!Recolect, "N")
+            Sql2 = Sql2 & " and tipoentr = " & DBSet(Rs!TipoEntr, "N")
+            Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
             Sql2 = Sql2 & " and contador = " & DBSet(Contador, "N")
             Sql2 = Sql2 & " and fechaini = " & DBSet(FechaIni, "F")
             Sql2 = Sql2 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -14463,25 +14606,25 @@ Dim HayPrecio As Boolean
                 
                 Sql3 = "insert into tmpliquidacion (codusu,codsocio,codcampo,recolect,tipoentr,codvarie,codcalid,contador,kilosnet,precio,importe, "
                 Sql3 = Sql3 & " nomvarie, fechaini, fechafin, gastos)"
-                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!Recolect, "N") & "," & DBSet(RS!TipoEntr, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!codvarie, "N") & "," & DBSet(RS!codcalid, "N") & "," & DBSet(Contador, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
+                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!Recolect, "N") & "," & DBSet(Rs!TipoEntr, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Contador, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
                 Sql3 = Sql3 & DBSet(FechaFin, "F") & "," & DBSet(Gastos, "N") & ")"
                 
                 conn.Execute Sql3
-                Kilos = RS!Kilos
+                Kilos = Rs!Kilos
             Else
-                Kilos = Kilos + RS!Kilos
-                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(RS!Kilos, "N")
+                Kilos = Kilos + Rs!Kilos
+                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(Rs!Kilos, "N")
                 Sql3 = Sql3 & " where codusu = " & vUsu.Codigo
-                Sql3 = Sql3 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-                Sql3 = Sql3 & " and codcampo = " & DBSet(RS!codcampo, "N")
-                Sql3 = Sql3 & " and recolect = " & DBSet(RS!Recolect, "N")
-                Sql3 = Sql3 & " and tipoentr = " & DBSet(RS!TipoEntr, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(RS!codvarie, "N")
-                Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
+                Sql3 = Sql3 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+                Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+                Sql3 = Sql3 & " and recolect = " & DBSet(Rs!Recolect, "N")
+                Sql3 = Sql3 & " and tipoentr = " & DBSet(Rs!TipoEntr, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
                 Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
                 Sql3 = Sql3 & " and fechaini = " & DBSet(FechaIni, "F")
                 Sql3 = Sql3 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -14491,8 +14634,25 @@ Dim HayPrecio As Boolean
         '[Monica]24/04/2013: añadida la condicion he puesto end if
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
+                                    
+'[Monica]27/01/2016: si es complementaria y se añaden lo de agroseguro
+    If Check1(26).Value = 1 Then
+        Sql = "insert into tmpliquidacion (codusu,codcampo,codsocio,kilosnet,precio) "
+        Sql = Sql & " select " & vUsu.Codigo & ",codcampo,0,sum(coalesce(kilosaportacion,0))," & DBSet(vPrecio, "N")
+        Sql = Sql & " from rcampos_seguros "
+        Sql = Sql & " where rcampos_seguros.codcampo in (select distinct codcampo from tmpliquidacion where codusu = " & vUsu.Codigo & ") "
+        Sql = Sql & " group by 1 "
+        conn.Execute Sql
+        
+        Sql = "update tmpliquidacion  dd, tmpliquidacion ff "
+        Sql = Sql & " set dd.codsocio = ff.codsocio, dd.codvarie = ff.codvarie "
+        Sql = Sql & " where dd.codusu = " & DBSet(vUsu.Codigo, "N") & " and dd.codsocio = 0 "
+        Sql = Sql & " and dd.codusu = ff.codusu and dd.codcampo = ff.codcampo  "
+        conn.Execute Sql
+    End If
+                                    
                                     
     Sql3 = "update tmpliquidacion set importe = round(kilosnet * precio,2) where codusu = " & vUsu.Codigo
     conn.Execute Sql3
@@ -14535,7 +14695,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionQuatretonda(cTabla As String, cWhere As String, Seccion As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -14587,8 +14747,8 @@ Dim HayReg As Boolean
         Sql = Sql & " group by 1, 2, 3 "
         Sql = Sql & " order by 1, 2, 3 "
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  retirada,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -14605,17 +14765,17 @@ Dim HayReg As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
                 '[25/06/2012]: seccion
 '                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), Seccion) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), Seccion) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     vPorcGasto = ""
@@ -14626,10 +14786,10 @@ Dim HayReg As Boolean
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
         
             ' 23/07/2009: añadido el or con la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 ' anticipos
                 Sql4 = "select sum(rfactsoc_variedad.imporvar) "
                 Sql4 = Sql4 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -14679,7 +14839,7 @@ Dim HayReg As Boolean
                 Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
                 Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                 
                 baseimpo = 0
                 Neto = 0
@@ -14695,13 +14855,13 @@ Dim HayReg As Boolean
                 
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
                 '[25/06/2012]: seccion
 '                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), Seccion) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), Seccion) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                         vPorcGasto = ""
@@ -14716,31 +14876,31 @@ Dim HayReg As Boolean
                 
             ' kilos retirada
             Sql4 = "select sum(codcampo) from tmpliquidacion1 "
-            Sql4 = Sql4 & " where codsocio = " & DBSet(RS!Codsocio, "N")
+            Sql4 = Sql4 & " where codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql4 = Sql4 & " and codusu = " & vUsu.Codigo
-            Sql4 = Sql4 & " and codvarie = " & DBSet(RS!codvarie, "N")
+            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             
             ImpoGastos = DevuelveValor(Sql4)
                 
-            KilosNet = DBLet(RS!Kilos, "N") - ImpoGastos
+            KilosNet = DBLet(Rs!Kilos, "N") - ImpoGastos
             KilosRet = KilosRet + ImpoGastos
             
             ' importe retirada
             Sql4 = "select sum(gastos) from tmpliquidacion1 "
-            Sql4 = Sql4 & " where codsocio = " & DBSet(RS!Codsocio, "N")
+            Sql4 = Sql4 & " where codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql4 = Sql4 & " and codusu = " & vUsu.Codigo
-            Sql4 = Sql4 & " and codvarie = " & DBSet(RS!codvarie, "N")
+            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             
             ImpoGastos = DevuelveValor(Sql4)
             
-            baseimpo = DBLet(RS!Importe, "N") - ImpoGastos
+            baseimpo = DBLet(Rs!Importe, "N") - ImpoGastos
             ImporRet = ImporRet + ImpoGastos
             
             ImpoGastos = 0
             
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
             
         ' ultimo registro si ha entrado
@@ -14818,10 +14978,10 @@ eCargarTemporal:
 End Function
 
 
-Private Function CargarTemporalQuatretonda(cTabla As String, cWhere As String, tipo As Byte) As Boolean
+Private Function CargarTemporalQuatretonda(cTabla As String, cWhere As String, Tipo As Byte) As Boolean
 'tipo  0=anticipos
 '      1=liquidacion
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
@@ -14906,24 +15066,24 @@ Dim ImporRet As Currency
     Me.Pb1.Value = 0
     Me.Refresh
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
-    If tipo = 1 And Check1(5).Value = 1 Then tipo = 3 'seleccionamos los precios de liquidacion complementaria
+    If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
                                     
                                     
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        Label2(12).Caption = "Socio " & RS!Codsocio & " Variedad " & RS!codvarie & "-" & RS!codcalid & " Campo " & RS!codcampo
+        Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
         IncrementarProgresNew Pb1, 1
         Me.Refresh
         DoEvents
     
-        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
-        Sql3 = Sql3 & " and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql3 = Sql3 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
+        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
+        Sql3 = Sql3 & " and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
         Set RS1 = New ADODB.Recordset
@@ -14934,15 +15094,15 @@ Dim ImporRet As Currency
             FechaFin = DBLet(RS1!FechaFin, "F")
         End If
         Set RS1 = Nothing
-        If DBLet(RS!Recolect, "N") = 0 Then 'cooperativa
+        If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
         Else
             Sql3 = "select presocio "
         End If
         
-        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
+        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
         Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
         
         Precio = DevuelveValor(Sql3)
@@ -14957,8 +15117,8 @@ Dim ImporRet As Currency
 '        Sql4 = Sql4 & " rhisfruta.fecalbar <= " & DBSet(FechaFin, "F")
         
         Sql4 = "select sum(kilosnet) from rfactsoc_variedad inner join rfactsoc on rfactsoc_variedad.codtipom=rfactsoc.codtipom and rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
-        Sql4 = Sql4 & " where rfactsoc.codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql4 = Sql4 & " rfactsoc_variedad.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
+        Sql4 = Sql4 & " where rfactsoc.codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql4 = Sql4 & " rfactsoc_variedad.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
         '[Monica]23/12/2014: el tipo de movimiento de veto ruso tb es de retirada
         Sql4 = Sql4 & " rfactsoc.codtipom in ('FAA','VAA') and rfactsoc.esretirada = 1"
         '[Monica]05/12/2011: los kilos de retirada solo se restan en la primera liquidacion
@@ -14968,8 +15128,8 @@ Dim ImporRet As Currency
         KilosRet = DevuelveValor(Sql4)
         
         Sql4 = "select sum(imporvar) from rfactsoc_variedad inner join rfactsoc on rfactsoc_variedad.codtipom=rfactsoc.codtipom and rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
-        Sql4 = Sql4 & " where rfactsoc.codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql4 = Sql4 & " rfactsoc_variedad.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
+        Sql4 = Sql4 & " where rfactsoc.codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql4 = Sql4 & " rfactsoc_variedad.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
         Sql4 = Sql4 & " rfactsoc.codtipom in ('FAA','VAA') and rfactsoc.esretirada = 1"
         '[Monica]05/12/2011: los kilos de retirada solo se restan en la primera liquidacion
         Sql4 = Sql4 & " and rfactsoc_variedad.descontado = 0 "
@@ -14977,13 +15137,13 @@ Dim ImporRet As Currency
         ImporRet = DevuelveValor(Sql4)
         
         
-        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
+        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
         Sql5 = Sql5 & " tmpliquidacion1.codusu = " & vUsu.Codigo
         
         If TotalRegistros(Sql5) = 0 Then
-            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & ","
-            Sql5 = Sql5 & DBSet(RS!codvarie, "N") & ","
+            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & ","
+            Sql5 = Sql5 & DBSet(Rs!codvarie, "N") & ","
             Sql5 = Sql5 & DBSet(KilosRet, "N") & ","
             Sql5 = Sql5 & "'0000-00-00',"
             Sql5 = Sql5 & "'0000-00-00',"
@@ -14998,12 +15158,12 @@ Dim ImporRet As Currency
 '        If Precio <> 0 Then
 '            Importe = Round2(Precio * DBLet(RS!kilos, "N"), 2)
             Sql2 = "select count(*) from tmpliquidacion where codusu = " & vUsu.Codigo
-            Sql2 = Sql2 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-            Sql2 = Sql2 & " and codcampo = " & DBSet(RS!codcampo, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(RS!codvarie, "N")
-            Sql2 = Sql2 & " and recolect = " & DBSet(RS!Recolect, "N")
-            Sql2 = Sql2 & " and tipoentr = " & DBSet(RS!TipoEntr, "N")
-            Sql2 = Sql2 & " and codcalid = " & DBSet(RS!codcalid, "N")
+            Sql2 = Sql2 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+            Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and recolect = " & DBSet(Rs!Recolect, "N")
+            Sql2 = Sql2 & " and tipoentr = " & DBSet(Rs!TipoEntr, "N")
+            Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
             Sql2 = Sql2 & " and contador = " & DBSet(Contador, "N")
             Sql2 = Sql2 & " and fechaini = " & DBSet(FechaIni, "F")
             Sql2 = Sql2 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -15013,25 +15173,25 @@ Dim ImporRet As Currency
                 
                 Sql3 = "insert into tmpliquidacion (codusu,codsocio,codcampo,recolect,tipoentr,codvarie,codcalid,contador,kilosnet,precio,importe, "
                 Sql3 = Sql3 & " nomvarie, fechaini, fechafin, gastos)"
-                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!Recolect, "N") & "," & DBSet(RS!TipoEntr, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!codvarie, "N") & "," & DBSet(RS!codcalid, "N") & "," & DBSet(Contador, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
+                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!Recolect, "N") & "," & DBSet(Rs!TipoEntr, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Contador, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
                 Sql3 = Sql3 & DBSet(FechaFin, "F") & "," & DBSet(Gastos, "N") & ")"
                 
                 conn.Execute Sql3
-                Kilos = RS!Kilos
+                Kilos = Rs!Kilos
             Else
-                Kilos = Kilos + RS!Kilos
-                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(RS!Kilos, "N")
+                Kilos = Kilos + Rs!Kilos
+                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(Rs!Kilos, "N")
                 Sql3 = Sql3 & " where codusu = " & vUsu.Codigo
-                Sql3 = Sql3 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-                Sql3 = Sql3 & " and codcampo = " & DBSet(RS!codcampo, "N")
-                Sql3 = Sql3 & " and recolect = " & DBSet(RS!Recolect, "N")
-                Sql3 = Sql3 & " and tipoentr = " & DBSet(RS!TipoEntr, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(RS!codvarie, "N")
-                Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
+                Sql3 = Sql3 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+                Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+                Sql3 = Sql3 & " and recolect = " & DBSet(Rs!Recolect, "N")
+                Sql3 = Sql3 & " and tipoentr = " & DBSet(Rs!TipoEntr, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
                 Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
                 Sql3 = Sql3 & " and fechaini = " & DBSet(FechaIni, "F")
                 Sql3 = Sql3 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -15041,7 +15201,7 @@ Dim ImporRet As Currency
 '30/07/2009
 '        End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
                                     
     Sql3 = "update tmpliquidacion set importe = round(kilosnet * precio,2) where codusu = " & vUsu.Codigo
@@ -15083,7 +15243,7 @@ End Function
 
 Private Function ComprobarTiposIVA(Tabla As String, cSelect As String) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim vSeccion As CSeccion
 Dim b As Boolean
 
@@ -15101,28 +15261,28 @@ Dim b As Boolean
             Sql = Sql & " group by 1 "
             Sql = Sql & " order by 1 "
             
-            Set RS = New ADODB.Recordset
-            RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             b = True
             
-            While Not RS.EOF And b
-                If DBLet(RS.Fields(0).Value, "N") = 0 Then
+            While Not Rs.EOF And b
+                If DBLet(Rs.Fields(0).Value, "N") = 0 Then
                     b = False
                     MsgBox "Hay socios sin iva en la sección hortofrutícola. Revise.", vbExclamation
                 Else
                     Sql = ""
-                    Sql = DevuelveDesdeBDNew(cConta, "tiposiva", "codigiva", "codigiva", DBLet(RS.Fields(0).Value, "N"), "N")
+                    Sql = DevuelveDesdeBDNew(cConta, "tiposiva", "codigiva", "codigiva", DBLet(Rs.Fields(0).Value, "N"), "N")
                     If Sql = "" Then
                         b = False
-                        MsgBox "No existe el codigo de iva " & DBLet(RS.Fields(0).Value, "N") & ". Revise.", vbExclamation
+                        MsgBox "No existe el codigo de iva " & DBLet(Rs.Fields(0).Value, "N") & ". Revise.", vbExclamation
                     End If
                 End If
             
-                RS.MoveNext
+                Rs.MoveNext
             Wend
         
-            Set RS = Nothing
+            Set Rs = Nothing
         
             ComprobarTiposIVA = b
         
@@ -15172,7 +15332,7 @@ Dim vCampAnt As CCampAnt
 Dim ctabla1 As String
 Dim Sql2 As String
 Dim Sql4 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim CadValues As String
 Dim BaseIva As Currency
@@ -15399,33 +15559,33 @@ Dim cTablaAnticip As String
             Dim ImporteTot As Currency
             Dim vImporte As Currency
             Dim Importe As Currency
-            Dim Rs5 As ADODB.Recordset
+            Dim RS5 As ADODB.Recordset
             Dim Rs6 As ADODB.Recordset
             
             
             Sql = "select * from rfactsoc_gastos where (codtipom, numfactu, fecfactu) in (select rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu from " & cTabla & " where " & cSelect & ")"
             Sql = Sql & " order by codtipom, numfactu, fecfactu "
             
-            Set Rs5 = New ADODB.Recordset
-            Rs5.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Set RS5 = New ADODB.Recordset
+            RS5.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            While Not Rs5.EOF
-                Sql = "select sum(kilosnet) from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(Rs5!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs5!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs5!fecfactu, "F")
+            While Not RS5.EOF
+                Sql = "select sum(kilosnet) from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                 
                 TotalKilos = DevuelveValor(Sql)
-                ImporteTot = DBLet(Rs5!Importe)
+                ImporteTot = DBLet(RS5!Importe)
                 vImporte = 0
                 
-                Sql = "select * from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(Rs5!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs5!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs5!fecfactu, "F")
+                Sql = "select * from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                 
                 Set Rs6 = New ADODB.Recordset
                 Rs6.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 While Not Rs6.EOF
-                    Importe = Round2(DBLet(Rs6!KilosNet) * DBLet(Rs5!Importe) / TotalKilos, 2)
+                    Importe = Round2(DBLet(Rs6!KilosNet) * DBLet(RS5!Importe) / TotalKilos, 2)
                     vImporte = vImporte + Importe
                     
                     Varie = DBLet(Rs6!codvarie)
@@ -15433,9 +15593,9 @@ Dim cTablaAnticip As String
                     
                     Sql = "update tmprfactsoc_variedad set imporvar = imporvar - " & DBSet(Importe, "N")
                     Sql = Sql & " where codusu = " & vUsu.Codigo
-                    Sql = Sql & " and codtipom = " & DBSet(Rs5!CodTipom, "T")
-                    Sql = Sql & " and numfactu = " & DBSet(Rs5!numfactu, "N")
-                    Sql = Sql & " and fecfactu = " & DBSet(Rs5!fecfactu, "F")
+                    Sql = Sql & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                    Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                    Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
                     Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                     
@@ -15449,19 +15609,19 @@ Dim cTablaAnticip As String
                 If vImporte <> ImporteTot Then
                     Sql = "update tmprfactsoc_variedad set imporvar = impovar + " & DBSet(vImporte - ImporteTot, "N")
                     Sql = Sql & " where codusu = " & vUsu.Codigo
-                    Sql = Sql & " and codtipom = " & DBSet(Rs5!CodTipom, "T")
-                    Sql = Sql & " and numfactu = " & DBSet(Rs5!numfactu, "N")
-                    Sql = Sql & " and fecfactu = " & DBSet(Rs5!fecfactu, "F")
+                    Sql = Sql & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                    Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                    Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
                     Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                 
                     conn.Execute Sql
                 End If
             
-                Rs5.MoveNext
+                RS5.MoveNext
             Wend
             
-            Set Rs5 = Nothing
+            Set RS5 = Nothing
         End If
     
     
@@ -15726,8 +15886,8 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
         Sql = Sql & " group by 1,2,3,4,5 "
         Sql = Sql & " order by 1,2,3,4,5"
 
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                                 'nif,    0/1   soc/trans, codprodu, basereten,impreten
         Sql2 = "insert into tmpinformes (codusu, nombre1,codigo1, nombre2, importe1, importe2, importe3) values "
@@ -15735,93 +15895,93 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
         
         CadValues = ""
         
-        While Not RS.EOF
-            Select Case RS.Fields(1).Value
+        While Not Rs.EOF
+            Select Case Rs.Fields(1).Value
                 Case 0
-                    TipoIRPF = DevuelveValor("select tipoirpf from rsocios where codsocio = " & DBSet(RS!Codigo, "N"))
+                    TipoIRPF = DevuelveValor("select tipoirpf from rsocios where codsocio = " & DBSet(Rs!Codigo, "N"))
                 Case 1
-                    TipoIRPF = DevuelveValor("select tipoirpf from rtranspor where codtrans = " & DBSet(RS!Codigo, "T"))
+                    TipoIRPF = DevuelveValor("select tipoirpf from rtranspor where codtrans = " & DBSet(Rs!Codigo, "T"))
             End Select
             
-            BaseIva = DBLet(RS!Importe, "N")
-            ImpoIva = Round(BaseIva * DBLet(RS!porc_iva, "N") / 100, 2)
+            BaseIva = DBLet(Rs!Importe, "N")
+            ImpoIva = Round(BaseIva * DBLet(Rs!porc_iva, "N") / 100, 2)
             Select Case TipoIRPF
                 Case 0
-                    ImpoReten = Round2((BaseIva + ImpoIva) * DBLet(RS!porc_ret, "N") / 100, 2)
+                    ImpoReten = Round2((BaseIva + ImpoIva) * DBLet(Rs!porc_ret, "N") / 100, 2)
                     BaseReten = (BaseIva + ImpoIva)
                 Case 1
-                    ImpoReten = Round2(BaseIva * DBLet(RS!porc_ret, "N") / 100, 2)
+                    ImpoReten = Round2(BaseIva * DBLet(Rs!porc_ret, "N") / 100, 2)
                     BaseReten = BaseIva
                 Case 2
                     ImpoReten = 0
                     BaseReten = 0
             End Select
             
-            Sql4 = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and nombre1 = " & DBSet(RS.Fields(0).Value, "T")
-            Sql4 = Sql4 & " and codigo1 = " & DBSet(RS.Fields(1).Value, "N")
-            Sql4 = Sql4 & " and nombre2 = " & DBSet(RS!Codigo, "T")
-            Sql4 = Sql4 & " and importe1 = " & DBSet(RS!codprodu, "N")
+            Sql4 = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and nombre1 = " & DBSet(Rs.Fields(0).Value, "T")
+            Sql4 = Sql4 & " and codigo1 = " & DBSet(Rs.Fields(1).Value, "N")
+            Sql4 = Sql4 & " and nombre2 = " & DBSet(Rs!Codigo, "T")
+            Sql4 = Sql4 & " and importe1 = " & DBSet(Rs!codprodu, "N")
             If TotalRegistros(Sql4) <> 0 Then
                 Sql4 = "update tmpinformes set importe2 = importe2 + " & DBSet(BaseReten, "N") & ","
                 Sql4 = Sql4 & " importe3 = importe3 + " & DBSet(ImpoReten, "N")
-                Sql4 = Sql4 & " where codusu = " & vUsu.Codigo & " and nombre1 = " & DBSet(RS.Fields(0).Value, "T")
-                Sql4 = Sql4 & " and codigo1 = " & DBSet(RS.Fields(1).Value, "N")
-                Sql4 = Sql4 & " and nombre2 = " & DBSet(RS!Codigo, "T")
-                Sql4 = Sql4 & " and importe1 = " & DBSet(RS!codprodu, "N")
+                Sql4 = Sql4 & " where codusu = " & vUsu.Codigo & " and nombre1 = " & DBSet(Rs.Fields(0).Value, "T")
+                Sql4 = Sql4 & " and codigo1 = " & DBSet(Rs.Fields(1).Value, "N")
+                Sql4 = Sql4 & " and nombre2 = " & DBSet(Rs!Codigo, "T")
+                Sql4 = Sql4 & " and importe1 = " & DBSet(Rs!codprodu, "N")
                 
                 conn.Execute Sql4
                 
             Else
             
-                CadValues = "(" & vUsu.Codigo & "," & DBSet(RS.Fields(0).Value, "T") & "," & DBSet(RS.Fields(1).Value, "N") & "," & DBSet(RS!Codigo, "T") & "," & DBSet(RS!codprodu, "N") & ","
+                CadValues = "(" & vUsu.Codigo & "," & DBSet(Rs.Fields(0).Value, "T") & "," & DBSet(Rs.Fields(1).Value, "N") & "," & DBSet(Rs!Codigo, "T") & "," & DBSet(Rs!codprodu, "N") & ","
                 CadValues = CadValues & DBSet(BaseReten, "N") & ","
                 CadValues = CadValues & DBSet(ImpoReten, "N") & ")"
                 
                 conn.Execute Sql2 & CadValues
                     
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        Set RS = Nothing
+        Set Rs = Nothing
         If CadValues <> "" Then
             
             ' comprobamos por socio si cuadra con la base de retencion e importe de retencion del socio
             Sql2 = "select codigo1, nombre2 codigo, sum(importe2) basereten, sum(importe3) impreten from tmpinformes where codusu = " & vUsu.Codigo
             Sql2 = Sql2 & " group by 1, 2 order by 1, 2 "
             
-            Set RS = New ADODB.Recordset
-            RS.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not RS.EOF
-                Select Case RS.Fields(0).Value
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            While Not Rs.EOF
+                Select Case Rs.Fields(0).Value
                     Case 0
                         Sql = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
-                        Sql = Sql & " and codsocio = " & DBSet(RS!Codigo, "N")
+                        Sql = Sql & " and codsocio = " & DBSet(Rs!Codigo, "N")
                         Sql = Sql & " and tipo = 0"
                     Case 1 '"B"
                         Sql = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
-                        Sql = Sql & " and codsocio = " & DBSet(RS!Codigo, "T")
+                        Sql = Sql & " and codsocio = " & DBSet(Rs!Codigo, "T")
                         Sql = Sql & " and tipo = 1"
                 End Select
                 
                 Set Rs2 = New ADODB.Recordset
                 Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not Rs2.EOF Then
-                    DifBase = DBLet(Rs2!Base, "N") - DBLet(RS!BaseReten, "N")
-                    DifRete = DBLet(Rs2!Reten, "N") - DBLet(RS!ImpReten, "N")
+                    DifBase = DBLet(Rs2!Base, "N") - DBLet(Rs!BaseReten, "N")
+                    DifRete = DBLet(Rs2!Reten, "N") - DBLet(Rs!ImpReten, "N")
                 
                     If DifBase <> 0 Or DifRete <> 0 Then
                         'cogemos el maximo producto para actualizarle el redondeo
                         Sql2 = "select max(importe1) from tmpinformes where codusu = " & vUsu.Codigo
-                        Sql2 = Sql2 & " and codigo1 = " & DBSet(RS.Fields(0).Value, "N")
-                        Sql2 = Sql2 & " and nombre2 = " & DBSet(RS!Codigo, "T")
+                        Sql2 = Sql2 & " and codigo1 = " & DBSet(Rs.Fields(0).Value, "N")
+                        Sql2 = Sql2 & " and nombre2 = " & DBSet(Rs!Codigo, "T")
                         
                         Producto = DevuelveValor(Sql2)
                         
                         Sql2 = "update tmpinformes set importe2 = importe2 + (" & DBSet(DifBase, "N") & "),"
                         Sql2 = Sql2 & " importe3 = importe3 + (" & DBSet(DifRete, "N") & ")"
                         Sql2 = Sql2 & " where codusu = " & DBSet(vUsu.Codigo, "N")
-                        Sql2 = Sql2 & " and codigo1 = " & DBSet(RS.Fields(0).Value, "N")
-                        Sql2 = Sql2 & " and nombre2 = " & DBSet(RS!Codigo, "T")
+                        Sql2 = Sql2 & " and codigo1 = " & DBSet(Rs.Fields(0).Value, "N")
+                        Sql2 = Sql2 & " and nombre2 = " & DBSet(Rs!Codigo, "T")
                         Sql2 = Sql2 & " and importe1 = " & DBSet(Producto, "N")
                         
                         conn.Execute Sql2
@@ -15829,9 +15989,9 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
                 End If
                 Set Rs2 = Nothing
             
-                RS.MoveNext
+                Rs.MoveNext
             Wend
-            Set RS = Nothing
+            Set Rs = Nothing
             
         End If
     
@@ -15850,7 +16010,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionIndustria(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -15898,8 +16058,8 @@ Dim HayReg As Boolean
         Sql = Sql & " group by 1, 2, 3, 4 "
         Sql = Sql & " order by 1, 2, 3, 4 "
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    codcampo, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -15915,16 +16075,16 @@ Dim HayReg As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
-            CampoAnt = RS!codcampo
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
+            CampoAnt = Rs!codcampo
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -15933,9 +16093,9 @@ Dim HayReg As Boolean
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
         
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Or CampoAnt <> RS!codcampo Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Or CampoAnt <> Rs!codcampo Then
                 
                 Bruto = baseimpo
                 
@@ -15972,8 +16132,8 @@ Dim HayReg As Boolean
                 Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
                 Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
                 
-                VarieAnt = RS!codvarie
-                CampoAnt = RS!codcampo
+                VarieAnt = Rs!codvarie
+                CampoAnt = Rs!codcampo
                 
                 baseimpo = 0
                 Neto = 0
@@ -15986,11 +16146,11 @@ Dim HayReg As Boolean
                 
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     End If
@@ -16000,9 +16160,9 @@ Dim HayReg As Boolean
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = DBLet(RS!Kilos, "N")
+            KilosNet = DBLet(Rs!Kilos, "N")
             
-            baseimpo = DBLet(RS!Importe, "N")
+            baseimpo = DBLet(Rs!Importe, "N")
                 
             ' gastos
             Sql4 = "select sum(gastos) from tmpliquidacion1 "
@@ -16016,7 +16176,7 @@ Dim HayReg As Boolean
                 
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
             
         ' ultimo registro si ha entrado
@@ -16083,7 +16243,7 @@ Private Function HayPreciosVariedadesIndustria(cTabla As String, cWhere As Strin
 'Comprobar si hay precios para cada una de las variedades seleccionadas
 Dim Sql As String
 Dim vPrecios As CPrecios
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim b As Boolean
 Dim Sql2 As String
@@ -16117,19 +16277,19 @@ Dim Numreg As Long
     Sql = Sql & " group by 1,2 "
     Sql = Sql & " order by 1,2 "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
     
-    If Not RS.EOF Then VarieAnt = DBLet(RS!codvarie, "N")
+    If Not Rs.EOF Then VarieAnt = DBLet(Rs!codvarie, "N")
     Numreg = 0
     ' comprobamos que existen registros para todos las variedades seleccionadas
-    While Not RS.EOF And b
+    While Not Rs.EOF And b
         Sql2 = "select * from rprecios where (codvarie, tipofact, contador) = ("
-        Sql2 = Sql2 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(RS!codvarie, "N") & " and "
-        Sql2 = Sql2 & " tipofact = 2 and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql2 = Sql2 & " and fechafin >= " & DBSet(RS!Fecalbar, "F") & " and precioindustria <> 0 and precioindustria is not null "
+        Sql2 = Sql2 & "SELECT codvarie, tipofact, max(contador) FROM rprecios WHERE codvarie=" & DBSet(Rs!codvarie, "N") & " and "
+        Sql2 = Sql2 & " tipofact = 2 and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql2 = Sql2 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F") & " and precioindustria <> 0 and precioindustria is not null "
         Sql2 = Sql2 & " group by 1, 2) "
         
         Set Rs2 = New ADODB.Recordset
@@ -16137,21 +16297,21 @@ Dim Numreg As Long
         
         If Rs2.EOF Then
             b = False
-            MsgBox "No existe precio de Industria para la variedad " & DBLet(RS!codvarie, "N") & " de fecha " & DBLet(RS!Fecalbar, "F") & ". Revise.", vbExclamation
+            MsgBox "No existe precio de Industria para la variedad " & DBLet(Rs!codvarie, "N") & " de fecha " & DBLet(Rs!Fecalbar, "F") & ". Revise.", vbExclamation
         Else
-            Sql5 = "select count(*) from tmpvarie where codvarie = " & DBSet(RS!codvarie, "N")
+            Sql5 = "select count(*) from tmpvarie where codvarie = " & DBSet(Rs!codvarie, "N")
             If TotalRegistros(Sql5) = 0 Then
-                Sql5 = "insert into tmpVarie (codvarie) values (" & DBSet(RS!codvarie, "N") & ")"
+                Sql5 = "insert into tmpVarie (codvarie) values (" & DBSet(Rs!codvarie, "N") & ")"
                 conn.Execute Sql5
             End If
         End If
             
         Set Rs2 = Nothing
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
     HayPreciosVariedadesIndustria = b
     Exit Function
@@ -16163,7 +16323,7 @@ End Function
 
 
 Private Function CargarTemporalIndustria(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
@@ -16247,21 +16407,21 @@ Dim Sql5 As String
     Me.Pb1.Value = 0
     Me.Refresh
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        Label2(12).Caption = "Socio " & RS!Codsocio & " Variedad " & RS!codvarie & "-" & RS!codcalid & " Campo " & RS!codcampo
+        Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
         IncrementarProgresNew Pb1, 1
         Me.Refresh
         DoEvents
     
-        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
+        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
         Sql3 = Sql3 & " and tipofact = 2 "
-        Sql3 = Sql3 & " and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql3 = Sql3 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
+        Sql3 = Sql3 & " and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
         Set RS1 = New ADODB.Recordset
@@ -16273,7 +16433,7 @@ Dim Sql5 As String
         End If
         Set RS1 = Nothing
         
-        Sql3 = "select precioindustria from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
+        Sql3 = "select precioindustria from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
         Sql3 = Sql3 & " and tipofact = 2 "
         Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
         
@@ -16282,9 +16442,9 @@ Dim Sql5 As String
         
         Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos"
         Sql4 = Sql4 & "  from rhisfruta, rhisfruta_gastos "
-        Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
-        Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(RS!codcampo, "N") & " and "
+        Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
+        Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
         Sql4 = Sql4 & " rhisfruta.fecalbar >= " & DBSet(FechaIni, "F") & " and "
         Sql4 = Sql4 & " rhisfruta.fecalbar <= " & DBSet(FechaFin, "F") & " and "
         Sql4 = Sql4 & " rhisfruta.tipoentr = 3 and "
@@ -16296,9 +16456,9 @@ Dim Sql5 As String
         If vParamAplic.Cooperativa = 0 Then
             Sql4 = "select sum(if(isnull(imptrans),0,imptrans)) + sum(if(isnull(impacarr),0,impacarr)) + sum(if(isnull(imprecol),0,imprecol)) + sum(if(isnull(imppenal),0,imppenal)) as gastos"
             Sql4 = Sql4 & "  from rhisfruta "
-            Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-            Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
-            Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(RS!codcampo, "N") & " and "
+            Sql4 = Sql4 & " where rhisfruta.codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+            Sql4 = Sql4 & " rhisfruta.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
+            Sql4 = Sql4 & " rhisfruta.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
             Sql4 = Sql4 & " rhisfruta.fecalbar >= " & DBSet(FechaIni, "F") & " and "
             Sql4 = Sql4 & " rhisfruta.fecalbar <= " & DBSet(FechaFin, "F") & " and "
             Sql4 = Sql4 & " rhisfruta.tipoentr = 3"
@@ -16306,17 +16466,17 @@ Dim Sql5 As String
             Gastos = DevuelveValor(Sql4)
         End If
         
-        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(RS!Codsocio, "N") & "  and "
-        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(RS!codvarie, "N") & "  and "
-        Sql5 = Sql5 & " tmpliquidacion1.codcampo = " & DBSet(RS!codcampo, "N") & " and "
+        Sql5 = "select count(*) from tmpliquidacion1 where codsocio = " & DBSet(Rs!Codsocio, "N") & "  and "
+        Sql5 = Sql5 & " tmpliquidacion1.codvarie = " & DBSet(Rs!codvarie, "N") & "  and "
+        Sql5 = Sql5 & " tmpliquidacion1.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.fechaini = " & DBSet(FechaIni, "F") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.fechafin = " & DBSet(FechaFin, "F") & " and "
         Sql5 = Sql5 & " tmpliquidacion1.codusu = " & vUsu.Codigo
         
         If TotalRegistros(Sql5) = 0 Then
-            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & ","
-            Sql5 = Sql5 & DBSet(RS!codvarie, "N") & ","
-            Sql5 = Sql5 & DBSet(RS!codcampo, "N") & ","
+            Sql5 = "insert into tmpliquidacion1 values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & ","
+            Sql5 = Sql5 & DBSet(Rs!codvarie, "N") & ","
+            Sql5 = Sql5 & DBSet(Rs!codcampo, "N") & ","
             Sql5 = Sql5 & DBSet(FechaIni, "F") & ","
             Sql5 = Sql5 & DBSet(FechaFin, "F") & ","
             Sql5 = Sql5 & DBSet(Gastos, "N") & ")"
@@ -16330,10 +16490,10 @@ Dim Sql5 As String
 '        If Precio <> 0 Then
 '            Importe = Round2(Precio * DBLet(RS!kilos, "N"), 2)
             Sql2 = "select count(*) from tmpliquidacion where codusu = " & vUsu.Codigo
-            Sql2 = Sql2 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-            Sql2 = Sql2 & " and codcampo = " & DBSet(RS!codcampo, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(RS!codvarie, "N")
-            Sql2 = Sql2 & " and codcalid = " & DBSet(RS!codcalid, "N")
+            Sql2 = Sql2 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+            Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
             Sql2 = Sql2 & " and contador = " & DBSet(Contador, "N")
             Sql2 = Sql2 & " and fechaini = " & DBSet(FechaIni, "F")
             Sql2 = Sql2 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -16343,22 +16503,22 @@ Dim Sql5 As String
                 
                 Sql3 = "insert into tmpliquidacion (codusu,codsocio,codcampo,codvarie,codcalid,contador,kilosnet,precio,importe, "
                 Sql3 = Sql3 & " nomvarie, fechaini, fechafin, gastos)"
-                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codcampo, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!codvarie, "N") & "," & DBSet(RS!codcalid, "N") & "," & DBSet(Contador, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
-                Sql3 = Sql3 & DBSet(RS!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
+                Sql3 = Sql3 & " values (" & vUsu.Codigo & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Contador, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!Kilos, "N") & "," & DBSet(Precio, "N") & "," & DBSet(0, "N") & ","
+                Sql3 = Sql3 & DBSet(Rs!nomvarie, "T") & "," & DBSet(FechaIni, "F") & ","
                 Sql3 = Sql3 & DBSet(FechaFin, "F") & "," & DBSet(Gastos, "N") & ")"
                 
                 conn.Execute Sql3
-                Kilos = RS!Kilos
+                Kilos = Rs!Kilos
             Else
-                Kilos = Kilos + RS!Kilos
-                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(RS!Kilos, "N")
+                Kilos = Kilos + Rs!Kilos
+                Sql3 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(Rs!Kilos, "N")
                 Sql3 = Sql3 & " where codusu = " & vUsu.Codigo
-                Sql3 = Sql3 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-                Sql3 = Sql3 & " and codcampo = " & DBSet(RS!codcampo, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(RS!codvarie, "N")
-                Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
+                Sql3 = Sql3 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+                Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
                 Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
                 Sql3 = Sql3 & " and fechaini = " & DBSet(FechaIni, "F")
                 Sql3 = Sql3 & " and fechafin = " & DBSet(FechaFin, "F")
@@ -16368,7 +16528,7 @@ Dim Sql5 As String
 '30/07/2009
 '        End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
                                     
     Sql3 = "update tmpliquidacion set importe = round(kilosnet * precio,2) where codusu = " & vUsu.Codigo
@@ -16477,18 +16637,18 @@ Dim vCont As CTiposMov
 Dim tipoMov As String
 Dim OtrosTipos As Boolean
 Dim Tipos As String
-Dim I As Integer
+Dim i As Integer
     
     
     b = True
     'Tipo de movimiento: INDUSTRIA
     Tipos = ""
     Industria = False
-    For I = 1 To ListView1(0).ListItems.Count
-        If ListView1(0).ListItems(I).Checked Then
-            Tipos = Tipos & DBSet(ListView1(0).ListItems(I).Key, "T") & ","
+    For i = 1 To ListView1(0).ListItems.Count
+        If ListView1(0).ListItems(i).Checked Then
+            Tipos = Tipos & DBSet(ListView1(0).ListItems(i).Key, "T") & ","
         End If
-    Next I
+    Next i
     If Len(Tipos) > 0 Then Tipos = Mid(Tipos, 1, Len(Tipos) - 1)
     If InStr(1, Tipos, "FLI") Then
         If Len(Tipos) > 5 Then
@@ -16504,16 +16664,16 @@ Dim I As Integer
     Bodega = False
     OtrosTipos = False
     If b Then
-        For I = 1 To ListView1(0).ListItems.Count
-            If ListView1(0).ListItems(I).Checked Then 'And Mid(ListView1(0).ListItems(i).Key, 3, 1) = "B" Then
-                tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(ListView1(0).ListItems(I).Key, "T"))
-                If tipo >= 7 And tipo <= 10 Then
+        For i = 1 To ListView1(0).ListItems.Count
+            If ListView1(0).ListItems(i).Checked Then 'And Mid(ListView1(0).ListItems(i).Key, 3, 1) = "B" Then
+                Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(ListView1(0).ListItems(i).Key, "T"))
+                If Tipo >= 7 And Tipo <= 10 Then
                     Bodega = True
                 Else
                     OtrosTipos = True
                 End If
             End If
-        Next I
+        Next i
         
         If Bodega And OtrosTipos Then
             MsgBox "Si selecciona las facturas de bodega/almazara no puede meter más tipos de factura.", vbExclamation
@@ -16530,12 +16690,12 @@ Private Sub PonerCamposSocio()
 Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
 
-    If txtcodigo(49).Text = "" Then Exit Sub
+    If txtCodigo(49).Text = "" Then Exit Sub
     
-    Cad = "rcampos.codsocio = " & DBSet(txtcodigo(49).Text, "N") & " and rcampos.fecbajas is null"
+    Cad = "rcampos.codsocio = " & DBSet(txtCodigo(49).Text, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select count(*) from rcampos where " & Cad
      
@@ -16544,16 +16704,16 @@ Dim RS As ADODB.Recordset
     If NumRegis = 0 Then Exit Sub
     If NumRegis = 1 Then
         Cad1 = "select codcampo from rcampos where " & Cad
-        Set RS = New ADODB.Recordset
-        RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
-            txtcodigo(50).Text = DBLet(RS.Fields(0).Value)
-            PonerDatosCampo txtcodigo(50).Text
+        Set Rs = New ADODB.Recordset
+        Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            txtCodigo(50).Text = DBLet(Rs.Fields(0).Value)
+            PonerDatosCampo txtCodigo(50).Text
         End If
     Else
         Set frmMens1 = New frmMensajes
         frmMens1.cadwhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
-        frmMens1.Campo = txtcodigo(50).Text
+        frmMens1.Campo = txtCodigo(50).Text
         frmMens1.OpcionMensaje = 7
         frmMens1.Show vbModal
         Set frmMens1 = Nothing
@@ -16566,7 +16726,7 @@ Private Sub PonerDatosCampo(Campo As String)
 Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
 
     If Campo = "" Then Exit Sub
@@ -16582,8 +16742,8 @@ Dim RS As ADODB.Recordset
     Cad1 = Cad1 & " and rpartida.codzonas = rzonas.codzonas "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla "
      
-    Set RS = New ADODB.Recordset
-    RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
 '    Text1(5).Text = ""
     Text2(0).Text = ""
@@ -16592,20 +16752,20 @@ Dim RS As ADODB.Recordset
     Text2(1).Text = ""
     Text2(2).Text = ""
     Text2(5).Text = ""
-    If Not RS.EOF Then
-        txtcodigo(50).Text = Campo
-        PonerFormatoEntero txtcodigo(50)
-        Text2(4).Text = DBLet(RS.Fields(0).Value, "N") ' codigo de partida
+    If Not Rs.EOF Then
+        txtCodigo(50).Text = Campo
+        PonerFormatoEntero txtCodigo(50)
+        Text2(4).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If Text2(4).Text <> "" Then Text2(4).Text = Format(Text2(4).Text, "0000")
-        Text2(3).Text = DBLet(RS.Fields(1).Value, "T") ' nombre de partida
-        Text2(1).Text = DBLet(RS.Fields(2).Value, "N") ' codigo de zona
+        Text2(3).Text = DBLet(Rs.Fields(1).Value, "T") ' nombre de partida
+        Text2(1).Text = DBLet(Rs.Fields(2).Value, "N") ' codigo de zona
         If Text2(1).Text <> "" Then Text2(1).Text = Format(Text2(1).Text, "0000")
-        Text2(2).Text = DBLet(RS.Fields(3).Value, "T") ' nombre de zona
-        Text2(5).Text = DBLet(RS.Fields(4).Value, "T") ' descripcion de poblacion
-        Text2(0).Text = DBLet(RS.Fields(5).Value, "N") ' Nro de campo
+        Text2(2).Text = DBLet(Rs.Fields(3).Value, "T") ' nombre de zona
+        Text2(5).Text = DBLet(Rs.Fields(4).Value, "T") ' descripcion de poblacion
+        Text2(0).Text = DBLet(Rs.Fields(5).Value, "N") ' Nro de campo
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
 End Sub
 
@@ -16613,7 +16773,7 @@ End Sub
 
 Private Function RecalculoImportes(Albar As String) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ImpTotal As Currency
 Dim Albaran As Long
 Dim KilosNet As Long
@@ -16636,17 +16796,17 @@ Dim Importe As Currency
         Sql = "select sum(kilosnet) from rhisfruta where numalbar in (" & Trim(Albar) & ")"
         KilosTot = DevuelveValor(Sql)
     
-        ImporteTotal = txtcodigo(46).Text
+        ImporteTotal = txtCodigo(46).Text
     
         Sql = "select numalbar, kilosnet from rhisfruta where numalbar in (" & Trim(Albar) & ")"
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         ImpTotal = 0
         
-        While Not RS.EOF
-            Albaran = DBLet(RS!numalbar, "N")
-            Importe = Round2(RS!KilosNet * ImporteTotal / KilosTot, 2)
+        While Not Rs.EOF
+            Albaran = DBLet(Rs!numalbar, "N")
+            Importe = Round2(Rs!KilosNet * ImporteTotal / KilosTot, 2)
             
             ImpTotal = ImpTotal + Importe
             
@@ -16656,9 +16816,9 @@ Dim Importe As Currency
             
             conn.Execute Sql
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        Set RS = Nothing
+        Set Rs = Nothing
         
         If ImpTotal <> ImporteTotal And ImpTotal <> 0 Then
             Sql = "update rhisfruta set impentrada = impentrada + " & DBSet(ImporteTotal - ImpTotal, "N")
@@ -16682,7 +16842,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionesCalidadPicassent(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -16745,8 +16905,8 @@ Dim PorcComi As Currency
     Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
     Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -16762,15 +16922,15 @@ Dim PorcComi As Currency
     End If
     
     HayReg = False
-    If Not RS.EOF Then
-        VarieAnt = RS!codvarie
-        NVarieAnt = RS!nomvarie
-        CalidAnt = RS!codcalid
+    If Not Rs.EOF Then
+        VarieAnt = Rs!codvarie
+        NVarieAnt = Rs!nomvarie
+        CalidAnt = Rs!codcalid
     End If
     
-    While Not RS.EOF
+    While Not Rs.EOF
         '++monica:28/07/2009 añadida la segunda condicion
-        If VarieAnt <> RS!codvarie Or CalidAnt <> RS!codcalid Then
+        If VarieAnt <> Rs!codvarie Or CalidAnt <> Rs!codcalid Then
             Sql1 = Sql1 & "(" & vUsu.Codigo & ","
             Sql1 = Sql1 & DBSet(VarieAnt, "N") & "," & DBSet(NVarieAnt, "T") & ","
             Sql1 = Sql1 & DBSet(CalidAnt, "N") & ","
@@ -16778,8 +16938,8 @@ Dim PorcComi As Currency
             Sql1 = Sql1 & DBSet(Importe, "N") & "," & DBSet(Bonifica - Importe, "N") & ","
             Sql1 = Sql1 & DBSet(Bonifica, "N") & "),"
             
-            VarieAnt = RS!codvarie
-            CalidAnt = RS!codcalid
+            VarieAnt = Rs!codvarie
+            CalidAnt = Rs!codcalid
             
             baseimpo = 0
             Bonifica = 0
@@ -16791,9 +16951,9 @@ Dim PorcComi As Currency
             KilosNet = 0
         End If
         
-        KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+        KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
         
-        Recolect = DBLet(RS!Recolect, "N")
+        Recolect = DBLet(Rs!Recolect, "N")
         
         '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
         Dim Sql9 As String
@@ -16801,10 +16961,10 @@ Dim PorcComi As Currency
         Dim PreCoop As Currency
         Dim PreSocio As Currency
         
-        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and tipofact = " & DBSet(RS!TipoFact, "N")
-        Sql9 = Sql9 & " and contador = " & DBSet(RS!Contador, "N")
-        Sql9 = Sql9 & " and codcalid = " & DBSet(RS!codcalid, "N")
+        Sql9 = "select precoop, presocio from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and tipofact = " & DBSet(Rs!TipoFact, "N")
+        Sql9 = Sql9 & " and contador = " & DBSet(Rs!Contador, "N")
+        Sql9 = Sql9 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -16818,37 +16978,37 @@ Dim PorcComi As Currency
                 Case 0
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreCoop > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                         If Check1(13).Value Then
                             '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                             If CCur(PorcComi) <> 0 Then
                                 PreCoop = PreCoop - Round2(PreCoop * PorcComi / 100, 4)
                             End If
                         End If
                     End If
                     PrecioAnt = PreCoop
-                    Importe = Importe + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2)
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreCoop, 2) + Round2(DBLet(RS!Kilos, "N") * PreCoop * PorcBoni / 100, 2)
+                    Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreCoop, 2) + Round2(DBLet(Rs!Kilos, "N") * PreCoop * PorcBoni / 100, 2)
                 Case 1
                     ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                     If PreSocio > 0 Then
-                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                        PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                         
                         '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                         If Check1(13).Value Then
                             '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                            PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                             If CCur(PorcComi) <> 0 Then
                                 PreSocio = PreSocio - Round2(PreSocio * PorcComi / 100, 4)
                             End If
                         End If
                     End If
                     PrecioAnt = PreSocio
-                    Importe = Importe + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2)
-                    Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * PreSocio, 2) + Round2(DBLet(RS!Kilos, "N") * PreSocio * PorcBoni / 100, 2)
+                    Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2)
+                    Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * PreSocio, 2) + Round2(DBLet(Rs!Kilos, "N") * PreSocio * PorcBoni / 100, 2)
             End Select
             
         End If
@@ -16859,7 +17019,7 @@ Dim PorcComi As Currency
         
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -16897,7 +17057,7 @@ Dim KilosRetirados As Long
 Dim TKilosEntrados As Long
 Dim TKilosRetirados As Long
 Dim Kilos As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim SocioAnt As String
 Dim VarieAnt As String
 Dim CampoAnt As String
@@ -16956,7 +17116,7 @@ Dim CampoAnt As String
     '[Monica]19/10/2011: si la factura es de retirada los kilos deben coincidir con los kilos de Retirada
     If Check1(12).Value = 1 Then
         'comprobamos que los kilos retirados es una cantidad inferior a la que hay de kilos entrados
-        TKilosRetirados = CLng(ImporteSinFormato(txtcodigo(59).Text))
+        TKilosRetirados = CLng(ImporteSinFormato(txtCodigo(59).Text))
         TKilosEntrados = DevuelveValor("select sum(kilosnet) from tmpliquidacion where codusu = " & vUsu.Codigo)
         If TKilosEntrados < TKilosRetirados Then
             MsgBox "Los kilos de Retirada son superiores a los entrados. Revise.", vbExclamation
@@ -16968,29 +17128,29 @@ Dim CampoAnt As String
     
         ' prorrateamos los kilos
         Sql = "select * from tmpliquidacion where codusu = " & vUsu.Codigo & " order by codsocio"
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RS.EOF
-            Kilos = Round2(DBLet(RS!KilosNet, "N") * TKilosRetirados / TKilosEntrados, 0)
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            Kilos = Round2(DBLet(Rs!KilosNet, "N") * TKilosRetirados / TKilosEntrados, 0)
             KilosRetirados = KilosRetirados + Kilos
             
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            CampoAnt = RS!codcampo
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            CampoAnt = Rs!codcampo
             
             Sql2 = "update tmpliquidacion set kilosnet = " & DBSet(Kilos, "N")
             Sql2 = Sql2 & " where codusu = " & vUsu.Codigo
-            Sql2 = Sql2 & " and codsocio = " & DBSet(RS!Codsocio, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(RS!codvarie, "N")
+            Sql2 = Sql2 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             If ConCampo Then
-                Sql2 = Sql2 & " and codcampo = " & DBSet(RS!codcampo, "N")
+                Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
             End If
             
             conn.Execute Sql2
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        Set RS = Nothing
+        Set Rs = Nothing
     
         If KilosRetirados <> TKilosRetirados Then
             Sql2 = "update tmpliquidacion set kilosnet = kilosnet + " & DBSet(TKilosRetirados - KilosRetirados, "N")
@@ -17015,13 +17175,13 @@ End Function
 Private Sub KilosRetiradaVisible()
 ' si se trata de un anticipo de retirada
     If Check1(12).Value Then
-        txtcodigo(59).Enabled = True
+        txtCodigo(59).Enabled = True
         '[Monica]23/12/2014: veto ruso
         Check1(22).Enabled = True
         
 
     Else
-        txtcodigo(59).Enabled = False
+        txtCodigo(59).Enabled = False
         '[Monica]23/12/2014: veto ruso
         Check1(22).Enabled = False
         Check1(22).Value = 0
@@ -17032,7 +17192,7 @@ End Sub
 Private Function HayVariedadesAlmazaraconHorto(mTabla As String, mSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Totales As Integer
 
     Sql = "select distinct rhisfruta.codvarie from " & mTabla
@@ -17050,7 +17210,7 @@ End Function
 Private Function HayVariedadesAlmazara(mTabla As String, mSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Totales As Integer
 
     Sql = "select distinct rhisfruta.codvarie from " & mTabla
@@ -17067,7 +17227,7 @@ Private Function AlbaranesFacturados(cTabla As String, cWhere As String, Optiona
 Dim Sql As String
 Dim Cadena As String
 Dim Cadena2 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
     
     On Error GoTo eAlbaranesFacturados
     
@@ -17079,17 +17239,17 @@ Dim RS As ADODB.Recordset
     Sql = Sql & " order by 1"
             
     If TotalRegistros(Sql) > 0 Then
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         Cadena = ""
     
-        While Not RS.EOF
-            Cadena = Cadena & Format(DBLet(RS!numalbar, "N"), "0000000") & ", "
+        While Not Rs.EOF
+            Cadena = Cadena & Format(DBLet(Rs!numalbar, "N"), "0000000") & ", "
         
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        Set RS = Nothing
+        Set Rs = Nothing
         
         Set frmMens4 = New frmMensajes
         
@@ -17369,8 +17529,8 @@ Dim Tabla1 As String
     If DatosOk Then
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -17381,8 +17541,8 @@ Dim Tabla1 As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -17393,13 +17553,13 @@ Dim Tabla1 As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -17543,18 +17703,18 @@ Dim Tabla1 As String
             
             If HayPreciosVariedadesCatadau(TipoPrec, nTabla, cadSelect, Combo1(2).ListIndex) Then
                 'D/H fecha
-                cDesde = Trim(txtcodigo(6).Text)
-                cHasta = Trim(txtcodigo(7).Text)
+                cDesde = Trim(txtCodigo(6).Text)
+                cHasta = Trim(txtCodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 If Check1(5).Value = 0 Then
@@ -17577,7 +17737,7 @@ Dim Tabla1 As String
                     Case 1  '1 - informe de anticipos
                         If CargarTemporalCatadau(Tabla1, cadSelect1, TipoPrec) Then
                             'pasamos como parametro la fecha de anticipo
-                            cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             ConSubInforme = True
 
@@ -17628,7 +17788,7 @@ Dim Tabla1 As String
                                                                 
                             ConSubInforme = True
                             'pasamos como parametro la fecha de anticipo
-                            cadParam = cadParam & "pFecAnt=""" & txtcodigo(15).Text & """|"
+                            cadParam = cadParam & "pFecAnt=""" & txtCodigo(15).Text & """|"
                             numParam = numParam + 1
                             cadParam = cadParam & "pUsu=" & vUsu.Codigo & "|"
                             numParam = numParam + 1
@@ -17716,9 +17876,9 @@ Dim Tabla1 As String
                                 Me.Refresh
                                 b = False
                                 If TipoPrec = 0 Then
-                                    b = FacturacionAnticiposPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, Check1(14).Value = 1, Check1(11).Value = 1)
+                                    b = FacturacionAnticiposPicassentNew(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, Check1(14).Value = 1, Check1(11).Value = 1)
                                 Else
-                                    b = FacturacionLiquidacionesPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1, Check1(11).Value = 1)
+                                    b = FacturacionLiquidacionesPicassentNew(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1, Check1(11).Value = 1)
                                 End If
                                 If b Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -17726,7 +17886,7 @@ Dim Tabla1 As String
                                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                     If Me.Check1(2).Value Then
                                         cadFormula = ""
-                                        cadParam = cadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                                        cadParam = cadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
                                         numParam = numParam + 1
                                         If TipoPrec = 0 Then
                                             cadParam = cadParam & "pTitulo= ""Resumen Facturación de Anticipos""|"
@@ -17735,7 +17895,7 @@ Dim Tabla1 As String
                                         End If
                                         numParam = numParam + 1
                                         
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -17765,7 +17925,7 @@ Dim Tabla1 As String
                                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
     
                                         'Fecha de Factura
-                                        FecFac = CDate(txtcodigo(15).Text)
+                                        FecFac = CDate(txtCodigo(15).Text)
                                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -17814,10 +17974,10 @@ Dim Tabla1 As String
     End If
 End Sub
 
-Private Function CargarTemporalPicassent(cTabla As String, cWhere As String, tipo As Byte) As Boolean
+Private Function CargarTemporalPicassent(cTabla As String, cWhere As String, Tipo As Byte) As Boolean
 'tipo  0=anticipos
 '      1=liquidacion
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
 Dim Sql As String
@@ -17923,24 +18083,24 @@ Dim HayPrecio As Boolean
     Me.Pb1.Value = 0
     Me.Refresh
 
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
-    If tipo = 1 And Check1(5).Value = 1 Then tipo = 3 'seleccionamos los precios de liquidacion complementaria
+    If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
                                     
                                     
-    While Not RS.EOF
+    While Not Rs.EOF
     
-        Label2(12).Caption = "Socio " & RS!Codsocio & " Variedad " & RS!codvarie & "-" & RS!codcalid & " Campo " & RS!codcampo
+        Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
         IncrementarProgresNew Pb1, 1
         Me.Refresh
         DoEvents
     
-        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
-        Sql3 = Sql3 & " and fechaini <= " & DBSet(RS!Fecalbar, "F")
-        Sql3 = Sql3 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
+        Sql3 = "select fechaini, fechafin, max(contador) as contador from rprecios where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
+        Sql3 = Sql3 & " and fechaini <= " & DBSet(Rs!Fecalbar, "F")
+        Sql3 = Sql3 & " and fechafin >= " & DBSet(Rs!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
         Set RS1 = New ADODB.Recordset
@@ -17951,15 +18111,15 @@ Dim HayPrecio As Boolean
             FechaFin = DBLet(RS1!FechaFin, "F")
         End If
         Set RS1 = Nothing
-        If DBLet(RS!Recolect, "N") = 0 Then 'cooperativa
+        If DBLet(Rs!Recolect, "N") = 0 Then 'cooperativa
             Sql3 = "select precoop "
         Else
             Sql3 = "select presocio "
         End If
         
-        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(RS!codvarie, "N")
-        Sql3 = Sql3 & " and codcalid = " & DBSet(RS!codcalid, "N")
-        Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
+        Sql3 = Sql3 & " from rprecios_calidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql3 = Sql3 & " and codcalid = " & DBSet(Rs!codcalid, "N")
+        Sql3 = Sql3 & " and tipofact = " & DBSet(Tipo, "N")
         Sql3 = Sql3 & " and contador = " & DBSet(Contador, "N")
         
         Precio = DevuelveValor(Sql3)
@@ -17968,8 +18128,8 @@ Dim HayPrecio As Boolean
         HayPrecio = (TotalRegistrosConsulta(Sql3) <> 0)
         If Not HayPrecio Then
         
-            Sql4 = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql4 = Sql4 & " and importe3 = " & DBSet(RS!codcalid, "N")
+            Sql4 = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and importe3 = " & DBSet(Rs!codcalid, "N")
             Sql4 = Sql4 & " and fecha1 between " & DBSet(FechaIni, "F") & " and " & DBSet(FechaFin, "F")
 
             conn.Execute Sql4
@@ -17980,17 +18140,17 @@ Dim HayPrecio As Boolean
             Sql4 = Sql4 & ", fecha2 = " & DBSet(FechaIni, "F")
             Sql4 = Sql4 & ", fecha3 = " & DBSet(FechaFin, "F")
             Sql4 = Sql4 & ", campo1 = " & DBSet(Contador, "N")
-            Sql4 = Sql4 & ", campo2 = " & DBSet(tipo, "N")
+            Sql4 = Sql4 & ", campo2 = " & DBSet(Tipo, "N")
             Sql4 = Sql4 & " where codusu = " & DBSet(vUsu.Codigo, "N")
-            Sql4 = Sql4 & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql4 = Sql4 & " and importe3 = " & DBSet(RS!codcalid, "N")
+            Sql4 = Sql4 & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and importe3 = " & DBSet(Rs!codcalid, "N")
             Sql4 = Sql4 & " and fecha1 between " & DBSet(FechaIni, "F") & " and " & DBSet(FechaFin, "F")
 
             conn.Execute Sql4
         
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
                                     
                                         
@@ -18014,7 +18174,7 @@ eCargarTemporal:
 End Function
 
 Private Function CargarTemporalAnticiposPicassentNew(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -18073,8 +18233,8 @@ Dim HayPrecio As Boolean
         
         
         
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, Kneto, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -18090,15 +18250,15 @@ Dim HayPrecio As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 End If
@@ -18107,9 +18267,9 @@ Dim HayPrecio As Boolean
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
             '++monica:28/07/2009 añadida la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 '[Monica]24/02/2014: añadida condicion
                 If KilosNet <> 0 Then
                     ImpoIva = Round2(baseimpo * ImporteSinFormato(vPorcIva) / 100, 2)
@@ -18137,7 +18297,7 @@ Dim HayPrecio As Boolean
                     Sql1 = Sql1 & DBSet(TotalFac, "N") & "," & DBSet(Bonifica, "N") & "),"
                 End If
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                                     
                 baseimpo = 0
                 Bonifica = 0
@@ -18148,7 +18308,7 @@ Dim HayPrecio As Boolean
                 KilosNet = 0
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 '[Monica]15/04/2013: descontamos las facturas varias
                 If Check1(14).Value Then                                                                                                 'anticipos            no descontados   q no sean de ventacampo
                     ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0 ")
@@ -18161,8 +18321,8 @@ Dim HayPrecio As Boolean
             
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     End If
@@ -18172,16 +18332,16 @@ Dim HayPrecio As Boolean
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+            KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
             
-            Recolect = DBLet(RS!Recolect, "N")
+            Recolect = DBLet(Rs!Recolect, "N")
             
             Dim Sql9 As String
             Dim Rs9 As ADODB.Recordset
             Dim Precio As Currency
             
-            Sql9 = "select precio1 from tmpinformes2 where fecha1 = " & DBSet(RS!Fecalbar, "F") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
+            Sql9 = "select precio1 from tmpinformes2 where fecha1 = " & DBSet(Rs!Fecalbar, "F") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
             
             Set Rs9 = New ADODB.Recordset
             Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -18192,10 +18352,10 @@ Dim HayPrecio As Boolean
                 
                 ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                 If Precio > 0 Then
-                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                 
                     '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                    PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                    PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                     If CCur(PorcComi) <> 0 Then
                         Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                     End If
@@ -18203,16 +18363,16 @@ Dim HayPrecio As Boolean
                 End If
             
                 '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
-                If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+                If Not EsCalidadConBonificacion(CStr(Rs!codvarie), CStr(Rs!codcalid)) Then PorcBoni = 0
             
             
-                Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * Precio, 2)
-                baseimpo = baseimpo + Round2(DBLet(RS!Kilos, "N") * Precio * (1 + (PorcBoni / 100)), 2)
+                Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * Precio, 2)
+                baseimpo = baseimpo + Round2(DBLet(Rs!Kilos, "N") * Precio * (1 + (PorcBoni / 100)), 2)
                 
             Else
                 '[Monica]24/02/2014: añadida condicion
                 ' los kilos que le he sumado se los quito
-                KilosNet = KilosNet - DBLet(RS!Kilos, "N")
+                KilosNet = KilosNet - DBLet(Rs!Kilos, "N")
                 
             End If
             
@@ -18220,7 +18380,7 @@ Dim HayPrecio As Boolean
             
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
         ' ultimo registro si ha entrado
@@ -18284,7 +18444,7 @@ End Function
 
 
 Private Function CargarTemporalAnticiposCalidadPicassentNew(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -18349,8 +18509,8 @@ Dim HayPrecio As Boolean
         Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
     
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
         Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -18366,15 +18526,15 @@ Dim HayPrecio As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
-            CalidAnt = RS!codcalid
+        If Not Rs.EOF Then
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
+            CalidAnt = Rs!codcalid
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
             '++monica:28/07/2009 añadida la segunda condicion
-            If VarieAnt <> RS!codvarie Or CalidAnt <> RS!codcalid Then
+            If VarieAnt <> Rs!codvarie Or CalidAnt <> Rs!codcalid Then
                 '[Monica]24/02/2014: añadida condicion
                 If HayPrecio Then
                     Sql1 = Sql1 & "(" & vUsu.Codigo & ","
@@ -18385,8 +18545,8 @@ Dim HayPrecio As Boolean
                     Sql1 = Sql1 & DBSet(Bonifica, "N") & "),"
                 End If
                 
-                VarieAnt = RS!codvarie
-                CalidAnt = RS!codcalid
+                VarieAnt = Rs!codvarie
+                CalidAnt = Rs!codcalid
                 
                 baseimpo = 0
                 Bonifica = 0
@@ -18398,17 +18558,17 @@ Dim HayPrecio As Boolean
                 KilosNet = 0
             End If
             
-            KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+            KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
             
-            Recolect = DBLet(RS!Recolect, "N")
+            Recolect = DBLet(Rs!Recolect, "N")
             
             '[Monica]01/09/2010: añadido ésto, antes los precios los sacabamos en el propio select
             Dim Sql9 As String
             Dim Rs9 As ADODB.Recordset
             Dim Precio As Currency
             
-            Sql9 = "select precio1 from tmpinformes2 where fecha1 = " & DBSet(RS!Fecalbar, "F") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
+            Sql9 = "select precio1 from tmpinformes2 where fecha1 = " & DBSet(Rs!Fecalbar, "F") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
             
             Set Rs9 = New ADODB.Recordset
             Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -18423,22 +18583,22 @@ Dim HayPrecio As Boolean
                 
                 ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                 If Precio > 0 Then
-                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                     
                     '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                    PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                    PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                     If CCur(PorcComi) <> 0 Then
                         Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                     End If
                 End If
                 PrecioAnt = Precio
-                Importe = Importe + Round2(DBLet(RS!Kilos, "N") * Precio, 2)
+                Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * Precio, 2)
                 
                 '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
-                If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+                If Not EsCalidadConBonificacion(CStr(Rs!codvarie), CStr(Rs!codcalid)) Then PorcBoni = 0
                 
                 
-                Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * Precio * (1 + (PorcBoni / 100)), 2)
+                Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * Precio * (1 + (PorcBoni / 100)), 2)
             Else
                 '[Monica]24/02/2014: añadida variable
                 HayPrecio = False
@@ -18447,7 +18607,7 @@ Dim HayPrecio As Boolean
             'hasta aqui
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
         ' ultimo registro si ha entrado
@@ -18485,7 +18645,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionPicassentNew(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -18588,8 +18748,8 @@ Dim HayPrecio As Boolean
         Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0"
         Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos, incremento, anticipos, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importeb6, importe4, porcen1, importe5, "
@@ -18610,17 +18770,17 @@ Dim HayPrecio As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
-            CampoAnt = RS!codcampo
-            AlbarAnt = RS!numalbar
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
+            CampoAnt = Rs!codcampo
+            AlbarAnt = Rs!numalbar
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                     vPorcGasto = ""
@@ -18645,8 +18805,8 @@ Dim HayPrecio As Boolean
         
         sqlLiquid = ""
         
-        While Not RS.EOF
-            If AlbarAnt <> RS!numalbar Or VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+        While Not Rs.EOF
+            If AlbarAnt <> Rs!numalbar Or VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
             
                 '[Monica]24/02/2014: añadida condicion
                 If KilosNet <> 0 Then
@@ -18667,11 +18827,11 @@ Dim HayPrecio As Boolean
                 
                 End If
                 
-                AlbarAnt = RS!numalbar
+                AlbarAnt = Rs!numalbar
             End If
         
             ' 23/07/2009: añadido el or con la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 '[Monica]24/02/2014: añadida condicion
                 If KilosNet <> 0 Then
                     '[Monica]10/01/2014: cargamos los aumentos por variedad que tenga
@@ -18742,7 +18902,7 @@ Dim HayPrecio As Boolean
                     
                 End If
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                 
                 baseimpo = 0
                 Neto = 0
@@ -18760,7 +18920,7 @@ Dim HayPrecio As Boolean
                 
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
             
                 '[Monica]24/02/2014: añadida condicion
                 If BaseImpoFactura <> 0 Then
@@ -18813,8 +18973,8 @@ Dim HayPrecio As Boolean
                 
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                         vPorcGasto = ""
@@ -18826,13 +18986,13 @@ Dim HayPrecio As Boolean
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+            KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
             
             '[Monica]01/09/2010: añadido precios
             
-            Sql9 = "select precio1, fecha2, fecha3, campo1, campo2 from tmpinformes2 where fecha1 = " & DBSet(RS!Fecalbar, "F") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql9 = Sql9 & " and importe3 = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
-            Sql9 = Sql9 & " and importe1 = " & DBSet(RS!numalbar, "N")
+            Sql9 = "select precio1, fecha2, fecha3, campo1, campo2 from tmpinformes2 where fecha1 = " & DBSet(Rs!Fecalbar, "F") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql9 = Sql9 & " and importe3 = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
+            Sql9 = Sql9 & " and importe1 = " & DBSet(Rs!numalbar, "N")
             
             Set Rs9 = New ADODB.Recordset
             Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -18847,12 +19007,12 @@ Dim HayPrecio As Boolean
                 vConta = DBLet(Rs9!campo1, "N")
                 ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                 If Precio > 0 Then
-                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                     
                     '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                     If Check1(13).Value Then
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                         End If
@@ -18860,11 +19020,11 @@ Dim HayPrecio As Boolean
                 End If
             
                 '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
-                If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+                If Not EsCalidadConBonificacion(CStr(Rs!codvarie), CStr(Rs!codcalid)) Then PorcBoni = 0
             
             
-                ImpBonif = Round2(DBLet(RS!Kilos, "N") * Precio * (PorcBoni / 100), 2)
-                ImpTot = Round2(DBLet(RS!Kilos, "N") * Precio, 2) + ImpBonif
+                ImpBonif = Round2(DBLet(Rs!Kilos, "N") * Precio * (PorcBoni / 100), 2)
+                ImpTot = Round2(DBLet(Rs!Kilos, "N") * Precio, 2) + ImpBonif
             
                 Bonifica = Bonifica + ImpBonif
                 baseimpo = baseimpo + ImpTot
@@ -18876,7 +19036,7 @@ Dim HayPrecio As Boolean
             Else
                 '[Monica]24/02/2014: añadida else
                 HayPrecio = False
-                KilosNet = KilosNet - DBLet(RS!Kilos, "N")
+                KilosNet = KilosNet - DBLet(Rs!Kilos, "N")
             End If
             
             Set Rs9 = Nothing
@@ -18884,8 +19044,8 @@ Dim HayPrecio As Boolean
             '[Monica]24/02/2014: añadida condicion
             If HayPrecio Then
                 ' insertamos en tmpliquidacion la linea de calidad
-                sqlLiquid = sqlLiquid & "(" & vUsu.Codigo & ", " & DBSet(RS!Codsocio, "N") & "," & DBSet(RS!codvarie, "N") & ","
-                sqlLiquid = sqlLiquid & DBSet(RS!codcampo, "N") & "," & DBSet(RS!numalbar, "N") & "," & DBSet(RS!codcalid, "N") & "," & DBSet(PorcBoni, "N") & ","
+                sqlLiquid = sqlLiquid & "(" & vUsu.Codigo & ", " & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                sqlLiquid = sqlLiquid & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(PorcBoni, "N") & ","
                 sqlLiquid = sqlLiquid & DBSet(ImpBonif, "N") & "," & DBSet(ImpTot, "N") & "),"
             End If
             
@@ -18894,7 +19054,7 @@ Dim HayPrecio As Boolean
                 
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
         ' Metemos las bonificaciones
@@ -19051,7 +19211,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionesCalidadPicassentNew(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -19123,8 +19283,8 @@ Dim HayPrecio As Boolean
         Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect, rhisfruta.numalbar "
     
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
         Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -19140,15 +19300,15 @@ Dim HayPrecio As Boolean
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
-            CalidAnt = RS!codcalid
+        If Not Rs.EOF Then
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
+            CalidAnt = Rs!codcalid
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
             '++monica:28/07/2009 añadida la segunda condicion
-            If VarieAnt <> RS!codvarie Or CalidAnt <> RS!codcalid Then
+            If VarieAnt <> Rs!codvarie Or CalidAnt <> Rs!codcalid Then
                 '[Monica]24/02/2014: añadida condicion
                 If HayPrecio Then
                     Sql1 = Sql1 & "(" & vUsu.Codigo & ","
@@ -19159,8 +19319,8 @@ Dim HayPrecio As Boolean
                     Sql1 = Sql1 & DBSet(Bonifica, "N") & "),"
                 End If
                 
-                VarieAnt = RS!codvarie
-                CalidAnt = RS!codcalid
+                VarieAnt = Rs!codvarie
+                CalidAnt = Rs!codcalid
                 
                 baseimpo = 0
                 Bonifica = 0
@@ -19172,9 +19332,9 @@ Dim HayPrecio As Boolean
                 KilosNet = 0
             End If
             
-            KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+            KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
             
-            Recolect = DBLet(RS!Recolect, "N")
+            Recolect = DBLet(Rs!Recolect, "N")
             
             
             Dim Sql9 As String
@@ -19185,9 +19345,9 @@ Dim HayPrecio As Boolean
             Dim vFecFin As String
             Dim vTipo As String
                 
-            Sql9 = "select precio1, fecha2, fecha3, campo1, campo2 from tmpinformes2 where fecha1 = " & DBSet(RS!Fecalbar, "F") & " and importe2 = " & DBSet(RS!codvarie, "N")
-            Sql9 = Sql9 & " and importe3 = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
-            Sql9 = Sql9 & " and importe1 = " & DBSet(RS!numalbar, "N")
+            Sql9 = "select precio1, fecha2, fecha3, campo1, campo2 from tmpinformes2 where fecha1 = " & DBSet(Rs!Fecalbar, "F") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+            Sql9 = Sql9 & " and importe3 = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
+            Sql9 = Sql9 & " and importe1 = " & DBSet(Rs!numalbar, "N")
             
             Set Rs9 = New ADODB.Recordset
             Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -19202,12 +19362,12 @@ Dim HayPrecio As Boolean
                 vConta = DBLet(Rs9!campo1, "N")
                 ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
                 If Precio > 0 Then
-                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                    PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                     
                     '[Monica]22/03/2012: Solo si le indicamos que no calcule comision no lo hace (solo prevision de liquidacion)
                     If Check1(13).Value Then
                         '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                        PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                         If CCur(PorcComi) <> 0 Then
                             Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                         End If
@@ -19215,11 +19375,11 @@ Dim HayPrecio As Boolean
                 End If
             
                 '[Monica]25/01/2016: para el caso de Picassent si la calidad no tiene bonificacion PorcBoni = 0
-                If Not EsCalidadConBonificacion(CStr(RS!codvarie), CStr(RS!codcalid)) Then PorcBoni = 0
+                If Not EsCalidadConBonificacion(CStr(Rs!codvarie), CStr(Rs!codcalid)) Then PorcBoni = 0
             
                 PrecioAnt = Precio
-                Importe = Importe + Round2(DBLet(RS!Kilos, "N") * Precio, 2)
-                Bonifica = Bonifica + Round2(DBLet(RS!Kilos, "N") * Precio, 2) + Round2(DBLet(RS!Kilos, "N") * Precio * PorcBoni / 100, 2)
+                Importe = Importe + Round2(DBLet(Rs!Kilos, "N") * Precio, 2)
+                Bonifica = Bonifica + Round2(DBLet(Rs!Kilos, "N") * Precio, 2) + Round2(DBLet(Rs!Kilos, "N") * Precio * PorcBoni / 100, 2)
             
                 vFecIni = DBLet(Rs9!fecha2, "F") ' fechaini
                 vFecFin = DBLet(Rs9!fecha3, "F") ' fechafin
@@ -19233,7 +19393,7 @@ Dim HayPrecio As Boolean
             
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
         
         ' ultimo registro si ha entrado
@@ -19270,7 +19430,7 @@ End Function
 
 
 Private Function CargarTemporalLiquidacionAlziraNew(cTabla As String, cWhere As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -19321,8 +19481,8 @@ Dim vAnticipos As Currency
         Sql = Sql & " group by 1, 2, 3, 4 "
         Sql = Sql & " order by 1, 2, 3, 4 "
     
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -19338,16 +19498,16 @@ Dim vAnticipos As Currency
         End If
         
         HayReg = False
-        If Not RS.EOF Then
-            SocioAnt = RS!Codsocio
-            VarieAnt = RS!codvarie
-            NVarieAnt = RS!nomvarie
-            CampoAnt = RS!codcampo
+        If Not Rs.EOF Then
+            SocioAnt = Rs!Codsocio
+            VarieAnt = Rs!codvarie
+            NVarieAnt = Rs!nomvarie
+            CampoAnt = Rs!codcampo
             
             Set vSocio = Nothing
             Set vSocio = New cSocio
-            If vSocio.LeerDatos(RS!Codsocio) Then
-                If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+            If vSocio.LeerDatos(Rs!Codsocio) Then
+                If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                     vPorcIva = ""
                     '[Monica]05/03/2014:
                     If vParamAplic.Cooperativa = 4 Then
@@ -19369,10 +19529,10 @@ Dim vAnticipos As Currency
             End If
         End If
         
-        While Not RS.EOF
+        While Not Rs.EOF
            
             ' 23/07/2009: añadido el or con la segunda condicion
-            If VarieAnt <> RS!codvarie Or SocioAnt <> RS!Codsocio Then
+            If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
                 
                 Bruto = baseimpo
                 
@@ -19411,7 +19571,7 @@ Dim vAnticipos As Currency
                 Sql1 = Sql1 & DBSet(ImpoReten, "N", "S") & ","
                 Sql1 = Sql1 & DBSet(TotalFac, "N") & "),"
                 
-                VarieAnt = RS!codvarie
+                VarieAnt = Rs!codvarie
                 baseimpo = 0
                 Neto = 0
                 ImpoIva = 0
@@ -19424,11 +19584,11 @@ Dim vAnticipos As Currency
                 
             End If
             
-            If RS!Codsocio <> SocioAnt Then
+            If Rs!Codsocio <> SocioAnt Then
                 Set vSocio = Nothing
                 Set vSocio = New cSocio
-                If vSocio.LeerDatos(RS!Codsocio) Then
-                    If vSocio.LeerDatosSeccion(CStr(RS!Codsocio), vParamAplic.Seccionhorto) Then
+                If vSocio.LeerDatos(Rs!Codsocio) Then
+                    If vSocio.LeerDatosSeccion(CStr(Rs!Codsocio), vParamAplic.Seccionhorto) Then
                         vPorcIva = ""
                         If vParamAplic.Cooperativa = 4 Then
                             '[Monica]29/04/2011: INTERNAS
@@ -19450,7 +19610,7 @@ Dim vAnticipos As Currency
                 TipoIRPF = vSocio.TipoIRPF
             End If
             
-            KilosNet = KilosNet + DBLet(RS!Kilos, "N")
+            KilosNet = KilosNet + DBLet(Rs!Kilos, "N")
             
             
             ' anticipos
@@ -19461,13 +19621,13 @@ Dim vAnticipos As Currency
             Sql4 = Sql4 & " and rfactsoc.codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and rfactsoc.esanticipogasto = 0 "
             Sql4 = Sql4 & " and rfactsoc_variedad.codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and rfactsoc_variedad.codcampo = " & DBSet(RS!codcampo, "N")
+            Sql4 = Sql4 & " and rfactsoc_variedad.codcampo = " & DBSet(Rs!codcampo, "N")
             Sql4 = Sql4 & " and rfactsoc_variedad.descontado = 0"
 
 
             vAnticipos = DevuelveValor(Sql4)
 
-            baseimpo = baseimpo + DBLet(RS!Importe, "N")
+            baseimpo = baseimpo + DBLet(Rs!Importe, "N")
                 
                 
             '[Monica]10/03/2014: esto solo seria para el caso de alzira
@@ -19492,7 +19652,7 @@ Dim vAnticipos As Currency
                 
             HayReg = True
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
             
         ' ultimo registro si ha entrado
@@ -19560,7 +19720,7 @@ End Function
 
 Public Function InformeAnticiposPicassentNew(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, DescontarFVarias As Boolean, EsTerceros As Boolean) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
 Dim AntSocio As String
 Dim AntVarie As String
@@ -19673,19 +19833,19 @@ Dim numfactu As Long
     
     HayReg = False
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    If Not RS.EOF Then
-        AntSocio = CStr(DBLet(RS!Codsocio, "N"))
-        AntVarie = CStr(DBLet(RS!codvarie, "N"))
-        AntCampo = CStr(DBLet(RS!codcampo, "N"))
-        AntCalid = CStr(DBLet(RS!codcalid, "N"))
+    If Not Rs.EOF Then
+        AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
+        AntVarie = CStr(DBLet(Rs!codvarie, "N"))
+        AntCampo = CStr(DBLet(Rs!codcampo, "N"))
+        AntCalid = CStr(DBLet(Rs!codcalid, "N"))
         
-        ActSocio = CStr(DBLet(RS!Codsocio, "N"))
-        ActVarie = CStr(DBLet(RS!codvarie, "N"))
-        actCampo = CStr(DBLet(RS!codcampo, "N"))
-        ActCalid = CStr(DBLet(RS!codcalid, "N"))
+        ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
+        ActVarie = CStr(DBLet(Rs!codvarie, "N"))
+        actCampo = CStr(DBLet(Rs!codcampo, "N"))
+        ActCalid = CStr(DBLet(Rs!codcalid, "N"))
     
         Set vSocio = New cSocio
         If vSocio.LeerDatos(ActSocio) Then
@@ -19740,11 +19900,11 @@ Dim numfactu As Long
         End If
     End If
     
-    While Not RS.EOF And b
-        ActCalid = DBLet(RS!codcalid, "N")
-        ActVarie = DBLet(RS!codvarie, "N")
-        actCampo = DBSet(RS!codcampo, "N")
-        ActSocio = DBSet(RS!Codsocio, "N")
+    While Not Rs.EOF And b
+        ActCalid = DBLet(Rs!codcalid, "N")
+        ActVarie = DBLet(Rs!codvarie, "N")
+        actCampo = DBSet(Rs!codcampo, "N")
+        ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActCalid <> AntCalid Or AntCampo <> actCampo Or AntVarie <> ActVarie Or AntSocio <> ActSocio) Then
             ' kilos e importe por variedad campo
@@ -19886,8 +20046,8 @@ Dim numfactu As Long
         Dim Rs9 As ADODB.Recordset
         Dim Precio As Currency
         
-        Sql9 = "select precio1 from tmpinformes2 where importe1 = " & DBSet(RS!numalbar, "N") & " and importe2 = " & DBSet(RS!codvarie, "N")
-        Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
+        Sql9 = "select precio1 from tmpinformes2 where importe1 = " & DBSet(Rs!numalbar, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N")
+        Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
         
         Set Rs9 = New ADODB.Recordset
         Rs9.Open Sql9, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
@@ -19901,20 +20061,20 @@ Dim numfactu As Long
             PorcComi = 0
             ' si el precio es positivo miramos si hay porcentaje de bonificacion para esa fecha
             If Precio > 0 Then
-                PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(RS!codvarie, "N") & " and fechaent = " & DBSet(RS!Fecalbar, "F"))
+                PorcBoni = DevuelveValor("select porcbonif from rbonifentradas where codvarie = " & DBSet(Rs!codvarie, "N") & " and fechaent = " & DBSet(Rs!Fecalbar, "F"))
                 
                 '[Monica]03/02/2012: Si el precio es positivo vemos si tiene comision el campo y se lo descontamos si es positivo
-                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(RS!codcampo, "N"))
+                PorcComi = DevuelveValor("select dtoprecio from rcampos where codcampo = " & DBSet(Rs!codcampo, "N"))
                 If CCur(PorcComi) <> 0 Then
                     Precio = Precio - Round2(Precio * PorcComi / 100, 4)
                 End If
             End If
         
             vPrecio = DBLet(Precio, "N")
-            vImporte = vImporte + Round2(DBLet(RS!KilosNet, "N") * Precio * (1 + (PorcBoni / 100)), 2)
-            vBonifica = vBonifica + Round2(DBLet(RS!KilosNet, "N") * Precio * (1 + (PorcBoni / 100)), 2) - Round2(DBLet(RS!KilosNet, "N") * Precio, 2)
+            vImporte = vImporte + Round2(DBLet(Rs!KilosNet, "N") * Precio * (1 + (PorcBoni / 100)), 2)
+            vBonifica = vBonifica + Round2(DBLet(Rs!KilosNet, "N") * Precio * (1 + (PorcBoni / 100)), 2) - Round2(DBLet(Rs!KilosNet, "N") * Precio, 2)
             
-            KilosCal = KilosCal + DBLet(RS!KilosNet, "N")
+            KilosCal = KilosCal + DBLet(Rs!KilosNet, "N")
             
         Else
             HayPrecio = False
@@ -19923,15 +20083,15 @@ Dim numfactu As Long
         Set Rs9 = Nothing
         
         '[Monica]20/03/2014: miramos si hay precio para la calidad
-        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(RS!codcampo, "N") & " and importe2 = " & DBSet(RS!codvarie, "N") & " and importeb1 = " & DBSet(RS!Codsocio, "N")
-        Sql9 = Sql9 & " and importe3  = " & DBSet(RS!codcalid, "N") & " and codusu = " & vUsu.Codigo
+        Sql9 = "select count(*) from tmpinformes2 where importe5 = " & DBSet(Rs!codcampo, "N") & " and importe2 = " & DBSet(Rs!codvarie, "N") & " and importeb1 = " & DBSet(Rs!Codsocio, "N")
+        Sql9 = Sql9 & " and importe3  = " & DBSet(Rs!codcalid, "N") & " and codusu = " & vUsu.Codigo
         HayPrecio = (TotalRegistros(Sql9) <> 0)
         
         
         'hasta aqui
         HayReg = True
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
     ' ultimo registro si ha entrado
@@ -20046,4 +20206,5 @@ eFacturacion:
         InformeAnticiposPicassentNew = True
     End If
 End Function
+
 

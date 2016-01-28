@@ -7,14 +7,14 @@ Begin VB.Form frmPOZFraRecargo
    ClientHeight    =   7110
    ClientLeft      =   45
    ClientTop       =   4335
-   ClientWidth     =   7740
+   ClientWidth     =   7920
    Icon            =   "frmPOZFraRecargo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    Picture         =   "frmPOZFraRecargo.frx":000C
    ScaleHeight     =   7110
-   ScaleWidth      =   7740
+   ScaleWidth      =   7920
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Text1 
@@ -34,7 +34,7 @@ Begin VB.Form frmPOZFraRecargo
       Left            =   120
       TabIndex        =   6
       Top             =   600
-      Width           =   7425
+      Width           =   7695
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Height          =   315
@@ -100,7 +100,7 @@ Begin VB.Form frmPOZFraRecargo
          Height          =   255
          Index           =   2
          Left            =   5190
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   960
          Width           =   1245
       End
@@ -150,27 +150,33 @@ Begin VB.Form frmPOZFraRecargo
       End
    End
    Begin VB.Frame FrameAux0 
-      Height          =   4950
+      Height          =   5040
       Left            =   120
       TabIndex        =   12
       Top             =   2010
-      Width           =   7440
-      Begin VB.CommandButton cmdCancelar 
-         Cancel          =   -1  'True
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   6120
-         TabIndex        =   19
-         Top             =   4410
-         Width           =   1035
+      Width           =   7710
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Height          =   315
+         Index           =   1
+         Left            =   5580
+         MaxLength       =   10
+         TabIndex        =   22
+         Tag             =   "Fecha Factura|F|N|||tcafpc|fecfactu|dd/mm/yyyy|S|"
+         Top             =   4590
+         Width           =   1605
       End
-      Begin VB.CommandButton cmdAceptar 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4920
-         TabIndex        =   18
-         Top             =   4410
-         Width           =   1035
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Height          =   315
+         Index           =   0
+         Left            =   5580
+         MaxLength       =   10
+         TabIndex        =   19
+         Top             =   4170
+         Width           =   1605
       End
       Begin VB.Frame Frame1 
          Height          =   555
@@ -199,13 +205,13 @@ Begin VB.Form frmPOZFraRecargo
          End
       End
       Begin MSComctlLib.ListView ListView1 
-         Height          =   3555
+         Height          =   3435
          Left            =   150
          TabIndex        =   17
          Top             =   540
-         Width           =   7065
-         _ExtentX        =   12462
-         _ExtentY        =   6271
+         Width           =   7305
+         _ExtentX        =   12885
+         _ExtentY        =   6059
          View            =   3
          LabelEdit       =   1
          MultiSelect     =   -1  'True
@@ -243,6 +249,24 @@ Begin VB.Form frmPOZFraRecargo
             Text            =   "Importe"
             Object.Width           =   3706
          EndProperty
+      End
+      Begin VB.Label Label1 
+         Caption         =   "TOTAL CON RECARGO"
+         Height          =   255
+         Index           =   4
+         Left            =   3600
+         TabIndex        =   21
+         Top             =   4590
+         Width           =   1875
+      End
+      Begin VB.Label Label1 
+         Caption         =   "TOTAL SELECCIONADO"
+         Height          =   255
+         Index           =   3
+         Left            =   3600
+         TabIndex        =   20
+         Top             =   4230
+         Width           =   1875
       End
       Begin VB.Image imgCheck 
          Height          =   240
@@ -331,8 +355,8 @@ Begin VB.Form frmPOZFraRecargo
       Left            =   0
       TabIndex        =   4
       Top             =   0
-      Width           =   7740
-      _ExtentX        =   13653
+      Width           =   7920
+      _ExtentX        =   13970
       _ExtentY        =   741
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -427,8 +451,8 @@ Private WithEvents frmVar As frmComVar  'Form Mto clientes
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmBanPr As frmComBanco 'Mto de Bancos propios
 Attribute frmBanPr.VB_VarHelpID = -1
-Private WithEvents frmFPa As frmComFpa 'Mto de formas de pago
-Attribute frmFPa.VB_VarHelpID = -1
+Private WithEvents frmFpa As frmComFpa 'Mto de formas de pago
+Attribute frmFpa.VB_VarHelpID = -1
 'Private WithEvents frmCtas As frmCtasConta 'Cuentas contables
 
 Private Modo As Byte
@@ -446,7 +470,7 @@ Private Modo As Byte
 
 'cadena donde se almacena la WHERE para la seleccion de los albaranes
 'marcados para facturar
-Dim cadWhere As String
+Dim cadwhere As String
 
 'Cuando vuelve del formulario de ver los albaranes seleccionados hay que volver
 'a cargar los datos de los albaranes
@@ -502,7 +526,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 '    'Icono del formulario
 '    Me.Icon = frmPpal.Icon
 
@@ -625,10 +649,10 @@ Dim indice As Byte
             indice = 26
        
        Case 4 'Forma de pago
-            Set frmFPa = New frmComFpa
-            frmFPa.DatosADevolverBusqueda = "0|1|"
-            frmFPa.Show vbModal
-            Set frmFPa = Nothing
+            Set frmFpa = New frmComFpa
+            frmFpa.DatosADevolverBusqueda = "0|1|"
+            frmFpa.Show vbModal
+            Set frmFpa = Nothing
             indice = 4
        
     End Select
@@ -679,8 +703,10 @@ Dim obj As Object
 End Sub
 
 
-Private Sub ListView1_ItemCheck(ByVal Item As MSComctlLib.ListItem)
-    If Item.SubItems(4) < 0 Then Item.Checked = False
+Private Sub ListView1_ItemCheck(ByVal item As MSComctlLib.ListItem)
+    If item.SubItems(4) < 0 Then item.Checked = False
+    
+    CalcularTotales
 End Sub
 
 
@@ -748,7 +774,10 @@ Private Sub Text1_LostFocus(Index As Integer)
             If PonerFormatoEntero(Text1(Index)) Then
                 Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio")
                 
-                If Text2(Index).Text <> "" Then CargarFacturas Text1(Index)
+                If Text2(Index).Text <> "" Then
+                    CargarFacturas Text1(Index)
+                    CalcularTotales
+                End If
             Else
                 Text2(Index).Text = ""
             End If
@@ -761,6 +790,7 @@ Private Sub Text1_LostFocus(Index As Integer)
             PonerFormatoDecimal Text1(Index), 3
             PonerFocoListView Me.ListView1
     End Select
+    CalcularTotales
 End Sub
 
 
@@ -769,7 +799,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim I As Byte, Numreg As Byte
+Dim i As Byte, Numreg As Byte
 Dim b As Boolean
 On Error GoTo EPonerModo
 
@@ -779,27 +809,27 @@ On Error GoTo EPonerModo
     '=========================================
     b = (Modo = 2)
         
-    cmdAceptar.visible = (ModoLineas = 2)
-    cmdAceptar.Enabled = (ModoLineas = 2)
-    cmdCancelar.visible = (ModoLineas = 2)
-    cmdCancelar.Enabled = (ModoLineas = 2)
+'    cmdAceptar.visible = (ModoLineas = 2)
+'    cmdAceptar.Enabled = (ModoLineas = 2)
+'    cmdCancelar.visible = (ModoLineas = 2)
+'    cmdCancelar.Enabled = (ModoLineas = 2)
     
 '    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
 '    'Si estamos en Insertar además limpia los campos Text1
 '    'si estamos en modificar bloquea las compos que son clave primaria
 '    BloquearText1 Me, Modo
     
-    For I = 0 To Text1.Count - 1
-        BloquearTxt Text1(I), (Modo <> 3)
-    Next I
+    For i = 0 To Text1.Count - 1
+        BloquearTxt Text1(i), (Modo <> 3)
+    Next i
     
     
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Enabled = b
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Enabled = b
+    Next i
                     
     Me.chkVistaPrevia.Enabled = (Modo <= 2)
     
@@ -836,33 +866,33 @@ End Sub
 Private Function DatosOk() As Boolean
 'Comprobar que los datos del frame de introduccion son correctos antes de cargar datos
 Dim vtag As CTag
-Dim cad As String
-Dim I As Byte
+Dim Cad As String
+Dim i As Byte
 Dim vSeccion As CSeccion
 
     On Error GoTo EDatosOK
     DatosOk = False
     
     ' deben de introducirse todos los datos del frame
-    For I = 0 To 3
-        If Text1(I).Text = "" Then
-            If Text1(I).Tag <> "" Then
+    For i = 0 To 3
+        If Text1(i).Text = "" Then
+            If Text1(i).Tag <> "" Then
                 Set vtag = New CTag
-                If vtag.Cargar(Text1(I)) Then
-                    cad = vtag.Nombre
+                If vtag.Cargar(Text1(i)) Then
+                    Cad = vtag.Nombre
                 Else
-                    cad = "Campo"
+                    Cad = "Campo"
                 End If
                 Set vtag = Nothing
             End If
-            If (I = 0 And ComprobarCero(Text1(2).Text) = "0") Or (I = 2 And ComprobarCero(Text1(0).Text) = "0") Then
-                MsgBox cad & " no puede estar vacio. Reintroduzca", vbExclamation
+            If (i = 0 And ComprobarCero(Text1(2).Text) = "0") Or (i = 2 And ComprobarCero(Text1(0).Text) = "0") Then
+                MsgBox Cad & " no puede estar vacio. Reintroduzca", vbExclamation
                 PonerModo 3
-                PonerFoco Text1(I)
+                PonerFoco Text1(i)
                 Exit Function
             End If
         End If
-    Next I
+    Next i
         
     'comprobamos que no me hayan puesto ambos valores
     If ComprobarCero(Text1(0).Text) <> "0" And ComprobarCero(Text1(2).Text) <> "0" Then
@@ -890,8 +920,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = New CSeccion
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
-            I = EsFechaOKConta(CDate(Text1(1).Text))
-            If I > 0 Then
+            i = EsFechaOKConta(CDate(Text1(1).Text))
+            If i > 0 Then
                 MsgBox "Fecha fuera ejercicios contables", vbExclamation
                 vSeccion.CerrarConta
                 Set vSeccion = Nothing
@@ -958,33 +988,33 @@ End Function
 
 Private Function HayFacturas() As Boolean
 Dim Sql As String
-Dim I As Integer
+Dim i As Integer
 
     HayFacturas = False
-    For I = 1 To Me.ListView1.ListItems.Count
-        If Me.ListView1.ListItems(I).Checked Then
+    For i = 1 To Me.ListView1.ListItems.Count
+        If Me.ListView1.ListItems(i).Checked Then
             HayFacturas = True
             Exit For
         End If
-    Next I
+    Next i
 
 
 End Function
 
 Private Function DeFechaIgualoPosterior() As Boolean
 Dim Sql As String
-Dim I As Integer
+Dim i As Integer
 
     DeFechaIgualoPosterior = True
 
-    For I = 1 To Me.ListView1.ListItems.Count
-        If Me.ListView1.ListItems(I).Checked Then
-            If CDate(ListView1.ListItems(I).SubItems(3)) > CDate(Text1(1).Text) Then
+    For i = 1 To Me.ListView1.ListItems.Count
+        If Me.ListView1.ListItems(i).Checked Then
+            If CDate(ListView1.ListItems(i).SubItems(3)) > CDate(Text1(1).Text) Then
                 DeFechaIgualoPosterior = False
                 Exit For
             End If
         End If
-    Next I
+    Next i
     
 End Function
 
@@ -1035,7 +1065,7 @@ Dim Nombre As String
     InicializarListView
 
     'Como no habrá albaranes seleccionados vaciamos la cadwhere
-    cadWhere = ""
+    cadwhere = ""
     
     PonerModo 3
     
@@ -1176,10 +1206,10 @@ Dim Sql As String
     On Error GoTo ESel
     SeleccionaRegistros = False
     
-    If cadWhere = "" Then Exit Function
+    If cadwhere = "" Then Exit Function
     
     Sql = "Select count(*) FROM rhisfruta"
-    Sql = Sql & " WHERE " & cadWhere
+    Sql = Sql & " WHERE " & cadwhere
     If RegistrosAListar(Sql) <> 0 Then SeleccionaRegistros = True
     Exit Function
     
@@ -1191,8 +1221,8 @@ End Function
 
 Private Sub BotonFacturar()
 Dim vFactu As CFacturaTer
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim b As Boolean
 Dim Sql As String
 
@@ -1220,16 +1250,16 @@ Dim Sql As String
     
     
     b = True
-    I = 1
-    While I <= Me.ListView1.ListItems.Count And b
-        If Me.ListView1.ListItems(I).Checked Then
+    i = 1
+    While i <= Me.ListView1.ListItems.Count And b
+        If Me.ListView1.ListItems(i).Checked Then
             'creamos la factura rectificativa
-            b = CrearFactura(Me.ListView1.ListItems(I).Text, Me.ListView1.ListItems(I).SubItems(2), Me.ListView1.ListItems(I).SubItems(3), True)
+            b = CrearFactura(Me.ListView1.ListItems(i).Text, Me.ListView1.ListItems(i).SubItems(2), Me.ListView1.ListItems(i).SubItems(3), True)
 
             'creamos la nueva factura con recargo
-            If b Then b = CrearFactura(Me.ListView1.ListItems(I), Me.ListView1.ListItems(I).SubItems(2), Me.ListView1.ListItems(I).SubItems(3), False)
+            If b Then b = CrearFactura(Me.ListView1.ListItems(i), Me.ListView1.ListItems(i).SubItems(2), Me.ListView1.ListItems(i).SubItems(3), False)
         End If
-        I = I + 1
+        i = i + 1
     Wend
 
     If b Then
@@ -1254,7 +1284,7 @@ Error1:
 End Sub
 
 
-Private Function CrearFactura(vTipom As String, NumFact As String, FecFact As String, EsRectificativa As Boolean) As Boolean
+Private Function CrearFactura(vTipoM As String, NumFact As String, FecFact As String, EsRectificativa As Boolean) As Boolean
 Dim Sql As String
 Dim vTipoMov As CTiposMov
 Dim vSeccion As CSeccion
@@ -1278,7 +1308,7 @@ Dim b As Boolean
     CrearFactura = False
     
     If EsRectificativa Then
-        Select Case vTipom
+        Select Case vTipoM
             Case "RCP"
                 CodTipom = "RRC"
             Case "RMP"
@@ -1291,7 +1321,7 @@ Dim b As Boolean
                 CodTipom = "RTA"
         End Select
     Else
-        CodTipom = vTipom
+        CodTipom = vTipoM
     End If
     
     Set vTipoMov = New CTiposMov
@@ -1329,7 +1359,7 @@ Dim b As Boolean
         vImpRecargo = 0
         SqlInsert = SqlInsert & ",codtipomrec, numfacturec, fecfacturec, imprecargo, gastodedevol, porcrecargo) "
     Else
-        vImpRecargo = CalculoImpRecargo(vTipom, NumFact, FecFact)
+        vImpRecargo = CalculoImpRecargo(vTipoM, NumFact, FecFact)
         SqlInsert = SqlInsert & ",imprecargo, porcrecargo) "
     End If
 
@@ -1360,7 +1390,7 @@ Dim b As Boolean
                 
                 SqlGastos = "SELECT sum(coalesce(gastos,0)) gastos "
                 SqlGastos = SqlGastos & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
-                SqlGastos = SqlGastos & " WHERE stipom.codtipom = " & DBSet(vTipom, "T")
+                SqlGastos = SqlGastos & " WHERE stipom.codtipom = " & DBSet(vTipoM, "T")
                 SqlGastos = SqlGastos & " and scobro.codfaccl = " & DBSet(NumFact, "N")
                 SqlGastos = SqlGastos & " and scobro.fecfaccl = " & DBSet(FecFact, "F")
                 
@@ -1374,11 +1404,11 @@ Dim b As Boolean
         End If
         Set vSeccion = Nothing
 '????
-        SqlValues = SqlValues & "," & DBSet(vTipom, "T") & "," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & ",0, " & DBSet(vGastoDevol, "N") & ",0 "
+        SqlValues = SqlValues & "," & DBSet(vTipoM, "T") & "," & DBSet(NumFact, "N") & "," & DBSet(FecFact, "F") & ",0, " & DBSet(vGastoDevol, "N") & ",0 "
     Else
         SqlValues = SqlValues & "," & DBSet(vImpRecargo, "N") & "," & DBSet(Text1(0).Text, "N")
     End If
-    SqlValues = SqlValues & " from rrecibpozos where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    SqlValues = SqlValues & " from rrecibpozos where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
     
@@ -1389,7 +1419,7 @@ Dim b As Boolean
     SqlInsert = "insert into rrecibpozos_acc (CodTipom , numfactu, fecfactu, numlinea, numfases, Acciones, observac) "
     
     SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ",numlinea, numfases, Acciones, observac "
-    SqlValues = SqlValues & " from rrecibpozos_acc where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    SqlValues = SqlValues & " from rrecibpozos_acc where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
     
@@ -1399,7 +1429,7 @@ Dim b As Boolean
     SqlInsert = "insert into rrecibpozos_cam (codTipom , numfactu, fecfactu, numlinea, codcampo, hanegada, precio1, precio2, codzonas, poligono, parcela, subparce) "
     
     SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
-    SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
     
@@ -1409,7 +1439,7 @@ Dim b As Boolean
     SqlInsert = "insert into rrecibpozos_hid (codTipom , numfactu, fecfactu, numlinea, Hidrante, hanegada, nroorden) "
     
     SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, Hidrante, hanegada, nroorden "
-    SqlValues = SqlValues & " from rrecibpozos_hid where  codtipom = " & DBSet(vTipom, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    SqlValues = SqlValues & " from rrecibpozos_hid where  codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
     
     conn.Execute SqlInsert & SqlValues
     
@@ -1470,16 +1500,16 @@ End Function
 
 Private Function ExisteFacturaEnHco() As Boolean
 'Comprobamos si la factura ya existe en la tabla de Facturas a Proveedor: scafpc
-Dim cad As String
+Dim Cad As String
 
     ExisteFacturaEnHco = False
     'Tiene que tener valor los 3 campos de clave primaria antes de comprobar
     If Not (Text1(0).Text <> "" And Text1(1).Text <> "" And Text1(3).Text <> "") Then Exit Function
     
     ' No debe existir el número de factura para el proveedor en hco. [06/05/2013]la fecha a mirar es la de recepcion
-    cad = "SELECT count(*) FROM rcafter "
-    cad = cad & " WHERE codsocio=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(2).Text)
-    If RegistrosAListar(cad) > 0 Then
+    Cad = "SELECT count(*) FROM rcafter "
+    Cad = Cad & " WHERE codsocio=" & Text1(3).Text & " AND numfactu=" & DBSet(Text1(0).Text, "T") & " AND year(fecfactu)=" & Year(Text1(2).Text)
+    If RegistrosAListar(Cad) > 0 Then
         MsgBox "Factura de Tercero ya existente. Reintroduzca.", vbExclamation
         ExisteFacturaEnHco = True
         Exit Function
@@ -1513,7 +1543,7 @@ Error1:
 End Sub
 
 Private Sub cmdCancelar_Click()
-Dim I As Integer
+Dim i As Integer
 Dim V
     
 End Sub
@@ -1549,6 +1579,8 @@ Dim TotalArray As Long
         If Index = 1 And ListView1.ListItems(TotalArray).SubItems(4) < 0 Then ListView1.ListItems(TotalArray).Checked = False
         If (TotalArray Mod 50) = 0 Then DoEvents
     Next TotalArray
+    CalcularTotales
+    
 End Sub
 
 
@@ -1686,7 +1718,45 @@ Dim Rs As ADODB.Recordset
    Wend
    Set Rs = Nothing
     
-    
-    
 End Sub
+
+
+
+Private Function CalcularTotales()
+Dim Rs As ADODB.Recordset
+Dim Sql As String
+Dim Importe1 As Currency
+Dim Importe2 As Currency
+Dim vImporte As Currency
+Dim i As Integer
+
+    On Error Resume Next
+    
+    Importe1 = 0
+    Importe2 = 0
+    
+    For i = 1 To ListView1.ListItems.Count
+        If ListView1.ListItems(i).Checked Then
+            If ComprobarCero(Text1(0).Text) <> "0" Then
+                vImporte = Round2(ListView1.ListItems(i).SubItems(4) * ImporteFormateado(Text1(0).Text) / 100, 2)
+            Else
+                vImporte = ImporteFormateado(Text1(2).Text)
+            End If
+            Importe1 = Importe1 + ListView1.ListItems(i).SubItems(4)
+            
+            Importe2 = Importe2 + ListView1.ListItems(i).SubItems(4) + vImporte
+        End If
+    Next i
+    
+    Text2(0).Text = Format(Importe1, "###,###,##0.00")
+    Text2(1).Text = Format(Importe2, "###,###,##0.00")
+    
+    
+    DoEvents
+    
+
+End Function
+
+
+
 
