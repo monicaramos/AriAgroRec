@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -93,52 +93,212 @@ Begin VB.Form frmADVHcoFacturas
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmADVHcoFacturas.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame2(1)"
-      Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Text1(16)"
+      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(1)=   "Label1(12)"
+      Tab(0).Control(2)=   "Label1(30)"
       Tab(0).Control(3)=   "Label1(31)"
-      Tab(0).Control(4)=   "Label1(30)"
-      Tab(0).Control(5)=   "Label1(12)"
-      Tab(0).Control(6)=   "Label1(11)"
+      Tab(0).Control(4)=   "Text1(16)"
+      Tab(0).Control(5)=   "Text1(15)"
+      Tab(0).Control(6)=   "Frame2(1)"
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Partes"
       TabPicture(1)   =   "frmADVHcoFacturas.frx":0A2A
       Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "FrameCuadrilla"
+      Tab(1).Control(0)=   "FrameObserva"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "FrameObserva"
+      Tab(1).Control(1)=   "DataGrid2"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "DataGrid2"
+      Tab(1).Control(2)=   "DataGrid1"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "DataGrid1"
+      Tab(1).Control(3)=   "txtAux(6)"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtAux(6)"
+      Tab(1).Control(4)=   "txtAux(5)"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "txtAux(5)"
+      Tab(1).Control(5)=   "txtAux(4)"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "txtAux(4)"
+      Tab(1).Control(6)=   "cmdObserva"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "cmdObserva"
+      Tab(1).Control(7)=   "txtAux(0)"
       Tab(1).Control(7).Enabled=   0   'False
-      Tab(1).Control(8)=   "txtAux(0)"
+      Tab(1).Control(8)=   "txtAux(1)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "txtAux(1)"
+      Tab(1).Control(9)=   "txtAux(2)"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "txtAux(2)"
+      Tab(1).Control(10)=   "txtAux(3)"
       Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "txtAux(3)"
+      Tab(1).Control(11)=   "txtAux3(0)"
       Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "txtAux3(0)"
+      Tab(1).Control(12)=   "txtAux3(1)"
       Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "txtAux3(1)"
+      Tab(1).Control(13)=   "txtAux3(2)"
       Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "txtAux3(2)"
+      Tab(1).Control(14)=   "txtAux3(3)"
       Tab(1).Control(14).Enabled=   0   'False
-      Tab(1).Control(15)=   "txtAux3(3)"
+      Tab(1).Control(15)=   "txtAux3(4)"
       Tab(1).Control(15).Enabled=   0   'False
-      Tab(1).Control(16)=   "txtAux3(4)"
+      Tab(1).Control(16)=   "FrameCuadrilla"
       Tab(1).Control(16).Enabled=   0   'False
       Tab(1).ControlCount=   17
+      Begin VB.Frame FrameCuadrilla 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame3"
+         Height          =   2145
+         Left            =   240
+         TabIndex        =   100
+         Top             =   2610
+         Width           =   11085
+         Begin VB.TextBox txtAux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000013&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   11
+            Left            =   7500
+            MaxLength       =   12
+            TabIndex        =   105
+            Tag             =   "Importe|N|N|0||advfacturas_trabajador|importel|#,###,###,##0.00|N|"
+            Text            =   "Importe"
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin VB.TextBox txtAux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   10
+            Left            =   4500
+            MaxLength       =   12
+            TabIndex        =   104
+            Tag             =   "Precio|N|N|0|999999.0000|advfacturas_trabajador|precio|###,##0.0000|N|"
+            Text            =   "Precio"
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   855
+         End
+         Begin VB.TextBox txtAux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   7
+            Left            =   1770
+            MaxLength       =   12
+            TabIndex        =   103
+            Tag             =   "Trabajador|N|N|||advfacturas_trabajador|codtraba|000000|N|"
+            Text            =   "codtraba"
+            Top             =   1290
+            Visible         =   0   'False
+            Width           =   735
+         End
+         Begin VB.TextBox txtAux1 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   8
+            Left            =   2670
+            MaxLength       =   12
+            TabIndex        =   102
+            Tag             =   "Nombre Trab|T|N|||slifac|nomartic||N|"
+            Text            =   "nomartic"
+            Top             =   1290
+            Visible         =   0   'False
+            Width           =   975
+         End
+         Begin VB.TextBox txtAux1 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   9
+            Left            =   3660
+            MaxLength       =   12
+            TabIndex        =   101
+            Tag             =   "Horas|N|N|0||advfacturas_trabajador|horas|###,##0.00|N|"
+            Text            =   "horas"
+            Top             =   1320
+            Visible         =   0   'False
+            Width           =   735
+         End
+         Begin MSDataGridLib.DataGrid DataGrid3 
+            Bindings        =   "frmADVHcoFacturas.frx":0A46
+            Height          =   2025
+            Left            =   0
+            TabIndex        =   106
+            Top             =   60
+            Width           =   10935
+            _ExtentX        =   19288
+            _ExtentY        =   3572
+            _Version        =   393216
+            AllowUpdate     =   -1  'True
+            AllowArrows     =   -1  'True
+            ColumnHeaders   =   -1  'True
+            HeadLines       =   1
+            RowHeight       =   15
+            FormatLocked    =   -1  'True
+            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ColumnCount     =   2
+            BeginProperty Column00 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            BeginProperty Column01 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            SplitCount      =   1
+            BeginProperty Split0 
+               AllowFocus      =   0   'False
+               AllowRowSizing  =   0   'False
+               AllowSizing     =   0   'False
+               BeginProperty Column00 
+               EndProperty
+               BeginProperty Column01 
+               EndProperty
+            EndProperty
+         End
+      End
       Begin VB.TextBox txtAux3 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
@@ -854,7 +1014,7 @@ Begin VB.Form frmADVHcoFacturas
          Width           =   1095
       End
       Begin MSDataGridLib.DataGrid DataGrid1 
-         Bindings        =   "frmADVHcoFacturas.frx":0A46
+         Bindings        =   "frmADVHcoFacturas.frx":0A5B
          Height          =   2025
          Left            =   240
          TabIndex        =   17
@@ -926,7 +1086,7 @@ Begin VB.Form frmADVHcoFacturas
          EndProperty
       End
       Begin MSDataGridLib.DataGrid DataGrid2 
-         Bindings        =   "frmADVHcoFacturas.frx":0A5B
+         Bindings        =   "frmADVHcoFacturas.frx":0A70
          Height          =   1940
          Left            =   240
          TabIndex        =   18
@@ -1040,166 +1200,6 @@ Begin VB.Form frmADVHcoFacturas
          Text            =   "Text1 7"
          Top             =   3495
          Width           =   1365
-      End
-      Begin VB.Frame FrameCuadrilla 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame3"
-         Height          =   2145
-         Left            =   240
-         TabIndex        =   100
-         Top             =   2610
-         Width           =   11085
-         Begin VB.TextBox txtAux1 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000013&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   11
-            Left            =   7500
-            MaxLength       =   12
-            TabIndex        =   105
-            Tag             =   "Importe|N|N|0||advfacturas_trabajador|importel|#,###,###,##0.00|N|"
-            Text            =   "Importe"
-            Top             =   1320
-            Visible         =   0   'False
-            Width           =   1095
-         End
-         Begin VB.TextBox txtAux1 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   10
-            Left            =   4500
-            MaxLength       =   12
-            TabIndex        =   104
-            Tag             =   "Precio|N|N|0|999999.0000|advfacturas_trabajador|precio|###,##0.0000|N|"
-            Text            =   "Precio"
-            Top             =   1320
-            Visible         =   0   'False
-            Width           =   855
-         End
-         Begin VB.TextBox txtAux1 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   7
-            Left            =   1770
-            MaxLength       =   12
-            TabIndex        =   103
-            Tag             =   "Trabajador|N|N|||advfacturas_trabajador|codtraba|000000|N|"
-            Text            =   "codtraba"
-            Top             =   1290
-            Visible         =   0   'False
-            Width           =   735
-         End
-         Begin VB.TextBox txtAux1 
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   8
-            Left            =   2670
-            MaxLength       =   12
-            TabIndex        =   102
-            Tag             =   "Nombre Trab|T|N|||slifac|nomartic||N|"
-            Text            =   "nomartic"
-            Top             =   1290
-            Visible         =   0   'False
-            Width           =   975
-         End
-         Begin VB.TextBox txtAux1 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   9
-            Left            =   3660
-            MaxLength       =   12
-            TabIndex        =   101
-            Tag             =   "Horas|N|N|0||advfacturas_trabajador|horas|###,##0.00|N|"
-            Text            =   "horas"
-            Top             =   1320
-            Visible         =   0   'False
-            Width           =   735
-         End
-         Begin MSDataGridLib.DataGrid DataGrid3 
-            Bindings        =   "frmADVHcoFacturas.frx":0A70
-            Height          =   2025
-            Left            =   0
-            TabIndex        =   106
-            Top             =   60
-            Width           =   10935
-            _ExtentX        =   19288
-            _ExtentY        =   3572
-            _Version        =   393216
-            AllowUpdate     =   -1  'True
-            AllowArrows     =   -1  'True
-            ColumnHeaders   =   -1  'True
-            HeadLines       =   1
-            RowHeight       =   15
-            FormatLocked    =   -1  'True
-            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ColumnCount     =   2
-            BeginProperty Column00 
-               DataField       =   ""
-               Caption         =   ""
-               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                  Type            =   0
-                  Format          =   ""
-                  HaveTrueFalseNull=   0
-                  FirstDayOfWeek  =   0
-                  FirstWeekOfYear =   0
-                  LCID            =   3082
-                  SubFormatType   =   0
-               EndProperty
-            EndProperty
-            BeginProperty Column01 
-               DataField       =   ""
-               Caption         =   ""
-               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                  Type            =   0
-                  Format          =   ""
-                  HaveTrueFalseNull=   0
-                  FirstDayOfWeek  =   0
-                  FirstWeekOfYear =   0
-                  LCID            =   3082
-                  SubFormatType   =   0
-               EndProperty
-            EndProperty
-            SplitCount      =   1
-            BeginProperty Split0 
-               AllowFocus      =   0   'False
-               AllowRowSizing  =   0   'False
-               AllowSizing     =   0   'False
-               BeginProperty Column00 
-               EndProperty
-               BeginProperty Column01 
-               EndProperty
-            EndProperty
-         End
       End
       Begin VB.Label Label1 
          Caption         =   "-"
@@ -3372,7 +3372,7 @@ Dim b As Boolean
     If Data2.Recordset.EOF Then Exit Function
     
     vWhere = ObtenerWhereCP(True)
-    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!Numalbar & "'"
+    vWhere = vWhere & " AND numalbar='" & Data3.Recordset.Fields!numalbar & "'"
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
@@ -3759,7 +3759,7 @@ End Sub
 
 
 Private Sub PonerDatosSocio(Codsocio As String, Optional nifsocio As String)
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim Observaciones As String
     
     On Error GoTo EPonerDatos
@@ -3769,7 +3769,7 @@ Dim Observaciones As String
         Exit Sub
     End If
 
-    Set vSocio = New CSocio
+    Set vSocio = New cSocio
     'si se ha modificado el proveedor volver a cargar los datos
     If vSocio.Existe(Codsocio) Then
         If vSocio.LeerDatos(Codsocio) Then
@@ -4098,7 +4098,7 @@ End Function
 Private Function ActualizarDatosFactura() As Boolean
 Dim vFactuADV As CFacturaADV
 Dim cadSel As String
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 
 '    Set vFactuADV = New CFacturaADV
 '    cadSel = ObtenerWhereCP(False)
