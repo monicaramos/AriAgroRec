@@ -15,6 +15,102 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameVariedades 
+      Height          =   5790
+      Left            =   0
+      TabIndex        =   32
+      Top             =   60
+      Width           =   7050
+      Begin MSComctlLib.ListView ListView6 
+         Height          =   4155
+         Left            =   225
+         TabIndex        =   35
+         Top             =   675
+         Width           =   6525
+         _ExtentX        =   11509
+         _ExtentY        =   7329
+         View            =   3
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   4
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Código"
+            Object.Width           =   1764
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Variedad"
+            Object.Width           =   3881
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "Clase "
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Descripcion"
+            Object.Width           =   3706
+         EndProperty
+      End
+      Begin VB.CommandButton cmdCanVariedades 
+         Caption         =   "Cancelar"
+         Height          =   375
+         Left            =   5520
+         TabIndex        =   34
+         Top             =   5160
+         Width           =   1215
+      End
+      Begin VB.CommandButton cmdAcepVariedades 
+         Caption         =   "Aceptar"
+         Height          =   375
+         Left            =   4080
+         TabIndex        =   33
+         Top             =   5160
+         Width           =   1215
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   3
+         Left            =   240
+         Picture         =   "frmMensajes.frx":000C
+         Top             =   5160
+         Width           =   240
+      End
+      Begin VB.Image imgCheck 
+         Height          =   240
+         Index           =   2
+         Left            =   600
+         Picture         =   "frmMensajes.frx":0156
+         Top             =   5160
+         Width           =   240
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Variedades"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Left            =   270
+         TabIndex        =   36
+         Top             =   270
+         Width           =   5145
+      End
+   End
    Begin VB.Frame FrameImpFrasPozos 
       Height          =   5790
       Left            =   0
@@ -99,7 +195,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":02A0
          Top             =   5160
          Width           =   240
       End
@@ -107,7 +203,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0156
+         Picture         =   "frmMensajes.frx":03EA
          Top             =   5160
          Width           =   240
       End
@@ -641,102 +737,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   130
          Top             =   600
          Width           =   945
-      End
-   End
-   Begin VB.Frame FrameVariedades 
-      Height          =   5790
-      Left            =   0
-      TabIndex        =   32
-      Top             =   60
-      Width           =   7050
-      Begin MSComctlLib.ListView ListView6 
-         Height          =   4155
-         Left            =   225
-         TabIndex        =   35
-         Top             =   675
-         Width           =   6525
-         _ExtentX        =   11509
-         _ExtentY        =   7329
-         View            =   3
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         Checkboxes      =   -1  'True
-         FullRowSelect   =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         BorderStyle     =   1
-         Appearance      =   1
-         NumItems        =   4
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Código"
-            Object.Width           =   1764
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Text            =   "Variedad"
-            Object.Width           =   3881
-         EndProperty
-         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   2
-            Text            =   "Clase "
-            Object.Width           =   1411
-         EndProperty
-         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   3
-            Text            =   "Descripcion"
-            Object.Width           =   3706
-         EndProperty
-      End
-      Begin VB.CommandButton cmdCanVariedades 
-         Caption         =   "Cancelar"
-         Height          =   375
-         Left            =   5520
-         TabIndex        =   34
-         Top             =   5160
-         Width           =   1215
-      End
-      Begin VB.CommandButton cmdAcepVariedades 
-         Caption         =   "Aceptar"
-         Height          =   375
-         Left            =   4080
-         TabIndex        =   33
-         Top             =   5160
-         Width           =   1215
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   3
-         Left            =   240
-         Picture         =   "frmMensajes.frx":02A0
-         Top             =   5160
-         Width           =   240
-      End
-      Begin VB.Image imgCheck 
-         Height          =   240
-         Index           =   2
-         Left            =   600
-         Picture         =   "frmMensajes.frx":03EA
-         Top             =   5160
-         Width           =   240
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Variedades"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   375
-         Left            =   270
-         TabIndex        =   36
-         Top             =   270
-         Width           =   5145
       End
    End
    Begin VB.Frame FrameHidrantesSocio 
@@ -2586,7 +2586,7 @@ Public cadWhere As String 'Cadena para pasarle la WHERE de la SELECT de los cobr
                           'para cargar el ListView
                           
 Public cadWHERE2 As String
-Public Campo As String
+Public campo As String
 Public Cadena As String ' sql para cargar el listview
 Public vCampos As String 'Articulo y cantidad Empipados para Nº de Series
                          'Tambien para pasar el nombre de la tabla de lineas (sliped, slirep,...)
@@ -2666,7 +2666,7 @@ End Function
 Private Sub CmdAcepCrearCampo_Click()
 Dim NroCampo As Long
 Dim SQL As String
-Dim Codzona As String
+Dim CodZona As String
 Dim vSuperficie As Currency
 
     On Error GoTo ECrear
@@ -2674,7 +2674,7 @@ Dim vSuperficie As Currency
     If Not DatosOk Then Exit Sub
 
 
-    Codzona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
+    CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
     vSuperficie = 0
 
     SQL = "select max(codcampo) from rcampos "
@@ -2689,7 +2689,7 @@ Dim vSuperficie As Currency
     SQL = SQL & DBSet(Text8(1).Text, "N") & ","
     SQL = SQL & DBSet(Text8(2).Text, "N") & ","
     SQL = SQL & DBSet(Text8(3).Text, "N") & ","
-    SQL = SQL & DBSet(Codzona, "N") & ","
+    SQL = SQL & DBSet(CodZona, "N") & ","
     SQL = SQL & DBSet(Now, "F") & ","
     SQL = SQL & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
     SQL = SQL & DBSet(vSuperficie, "N") & ","
@@ -2726,18 +2726,18 @@ End Sub
 
 Private Sub CmdAcepImpFras_Click()
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 
-    For I = 1 To Me.ListView19.ListItems.Count
-        If ListView19.ListItems(I).Checked Then
+    For i = 1 To Me.ListView19.ListItems.Count
+        If ListView19.ListItems(i).Checked Then
             SQL = "update rrecibpozos set imprimir = " & DBSet(vUsu.PC, "T")
-            SQL = SQL & " where codtipom = " & DBSet(ListView19.ListItems(I).Text, "T")
-            SQL = SQL & " and numfactu = " & DBSet(Me.ListView19.ListItems(I).SubItems(1), "N")
-            SQL = SQL & " and fecfactu = " & DBSet(Me.ListView19.ListItems(I).SubItems(2), "F")
+            SQL = SQL & " where codtipom = " & DBSet(ListView19.ListItems(i).Text, "T")
+            SQL = SQL & " and numfactu = " & DBSet(Me.ListView19.ListItems(i).SubItems(1), "N")
+            SQL = SQL & " and fecfactu = " & DBSet(Me.ListView19.ListItems(i).SubItems(2), "F")
             
             conn.Execute SQL
         End If
-    Next I
+    Next i
     Unload Me
 End Sub
 
@@ -2812,7 +2812,7 @@ Dim Cad As String
 End Sub
 
 Private Sub cmdAceptarNSeries_Click()
-Dim I As Integer, J As Integer
+Dim i As Integer, J As Integer
 Dim Seleccionados As Integer
 Dim Cad As String, SQL As String
 Dim articulo As String
@@ -2831,17 +2831,17 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
         For J = 0 To TotalArray
             articulo = codArtic(J)
             Cad = Cad & articulo & "|"
-            For I = 1 To ListView2.ListItems.Count
-                If ListView2.ListItems(I).Checked Then
-                    If articulo = ListView2.ListItems(I).ListSubItems(1).Text Then
+            For i = 1 To ListView2.ListItems.Count
+                If ListView2.ListItems(i).Checked Then
+                    If articulo = ListView2.ListItems(i).ListSubItems(1).Text Then
                         If Seleccionados < Abs(cantidad(J)) Then
                             Seleccionados = Seleccionados + 1
-                            Cad = Cad & ListView2.ListItems(I).Text & "|"
+                            Cad = Cad & ListView2.ListItems(i).Text & "|"
                         End If
                    'cad = cad & Data1.Recordset.Fields(1) & "|"
                     End If
                 End If
-            Next I
+            Next i
             If Seleccionados < Abs(cantidad(J)) Then
                 'Comprobar que si tiene Nºs de serie de ese articulos cargados seleccione los
                 'que corresponden
@@ -2876,24 +2876,24 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
             Cad = Cad & vUsu.Codigo & ",1,'2005-04-12',1,"
             
             
-            For I = 1 To ListView2.ListItems.Count
-                If ListView2.ListItems(I).Checked Then
-                    conn.Execute Cad & (ListView2.ListItems(I).Text) & ")"
+            For i = 1 To ListView2.ListItems.Count
+                If ListView2.ListItems(i).Checked Then
+                    conn.Execute Cad & (ListView2.ListItems(i).Text) & ")"
                     NumRegElim = NumRegElim + 1
                 End If
-            Next I
+            Next i
             
             
             '----------------------------------------------------------------
             
         Else
             Cad = ""
-            For I = 1 To ListView2.ListItems.Count
-                If ListView2.ListItems(I).Checked Then
-                    Cad = Cad & Val(ListView2.ListItems(I).Text) & ","
+            For i = 1 To ListView2.ListItems.Count
+                If ListView2.ListItems(i).Checked Then
+                    Cad = Cad & Val(ListView2.ListItems(i).Text) & ","
                      'cad = cad & Data1.Recordset.Fields(1) & "|"
                 End If
-            Next I
+            Next i
             If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
         End If
     ElseIf OpcionMensaje = 11 Then
@@ -2904,25 +2904,25 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
         c2 = ""
         c3 = ""
         SQL = ""
-        For I = 1 To ListView2.ListItems.Count
-            If ListView2.ListItems(I).Checked Then
+        For i = 1 To ListView2.ListItems.Count
+            If ListView2.ListItems(i).Checked Then
                 If SQL = "" Then
-                    c1 = DBSet(ListView2.ListItems(I), "T", "N")
-                    c2 = ListView2.ListItems(I).ListSubItems(1)
+                    c1 = DBSet(ListView2.ListItems(i), "T", "N")
+                    c2 = ListView2.ListItems(i).ListSubItems(1)
 '                    c3 = ListView2.ListItems(i).ListSubItems(2)
-                    Cad = "(codtipoa=" & Trim(c1) & " and numalbar=" & Val(c2) & " and numlinea IN (" & ListView2.ListItems(I).ListSubItems(2)
+                    Cad = "(codtipoa=" & Trim(c1) & " and numalbar=" & Val(c2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
 
                 Else
-                    If Trim(DBSet(ListView2.ListItems(I), "T", "N")) = Trim(c1) And Trim(ListView2.ListItems(I).ListSubItems(1)) = Trim(c2) Then
+                    If Trim(DBSet(ListView2.ListItems(i), "T", "N")) = Trim(c1) And Trim(ListView2.ListItems(i).ListSubItems(1)) = Trim(c2) Then
                     'es el mismo albaran y concatenamos lineas
-                        Cad = "," & ListView2.ListItems(I).ListSubItems(2)
+                        Cad = "," & ListView2.ListItems(i).ListSubItems(2)
 
                     Else
                         If Cad <> "" Then SQL = SQL & ")) "
-                        c1 = DBSet(ListView2.ListItems(I), "T", "N")
-                        c2 = ListView2.ListItems(I).ListSubItems(1)
+                        c1 = DBSet(ListView2.ListItems(i), "T", "N")
+                        c2 = ListView2.ListItems(i).ListSubItems(1)
 '                    c3 = ListView2.ListItems(i).ListSubItems(2)
-                        Cad = " or (codtipoa=" & Trim(c1) & " and numalbar=" & Val(c2) & " and numlinea IN (" & ListView2.ListItems(I).ListSubItems(2)
+                        Cad = " or (codtipoa=" & Trim(c1) & " and numalbar=" & Val(c2) & " and numlinea IN (" & ListView2.ListItems(i).ListSubItems(2)
                         
 '                       cad=cad &
                     End If
@@ -2933,7 +2933,7 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
             Else
 '                cad = ""
             End If
-        Next I
+        Next i
         If Cad <> "" Then
             SQL = SQL & "))"
             Cad = "(" & cadWhere & ") AND (" & SQL & ")"
@@ -3114,11 +3114,11 @@ Private Sub CmdContinuar_Click()
 End Sub
 
 Private Sub cmdDeselTodos_Click()
-Dim I As Long
+Dim i As Long
 
-    For I = 1 To ListView2.ListItems.Count
-        ListView2.ListItems(I).Checked = False
-    Next I
+    For i = 1 To ListView2.ListItems.Count
+        ListView2.ListItems(i).Checked = False
+    Next i
 End Sub
 
 
@@ -3236,11 +3236,11 @@ Private Sub CmdSalir4_Click()
 End Sub
 
 Private Sub cmdSelTodos_Click()
-    Dim I As Long
+    Dim i As Long
 
-    For I = 1 To ListView2.ListItems.Count
-        ListView2.ListItems(I).Checked = True
-    Next I
+    For i = 1 To ListView2.ListItems.Count
+        ListView2.ListItems(i).Checked = True
+    Next i
 End Sub
 
 
@@ -3263,11 +3263,11 @@ Dim OK As Boolean
         
         Case 6 ' mostrar los campos del socio
             CargarCamposSocio 1
-            If Campo <> "" Then SituarCampoSocio CLng(Campo)
+            If campo <> "" Then SituarCampoSocio CLng(campo)
             
         Case 7 ' mostrar los campos del socio con la variedad
             CargarCamposSocio 2
-            If Campo <> "" Then SituarCampoSocio CLng(Campo)
+            If campo <> "" Then SituarCampoSocio CLng(campo)
             
         Case 8, 9, 17, 42, 55 'Etiquetas de clientes/Proveedores/Socios
             CargarListaClientes
@@ -3288,7 +3288,7 @@ Dim OK As Boolean
             CargarListaVariedades False
         
         Case 22 ' Trabajadores a seleccionar de la cuadrilla
-            CargarListaTrabajadores Campo
+            CargarListaTrabajadores campo
         
         Case 23 ' Hidrantes de un socio
             CargarHidrantesSocio
@@ -3310,7 +3310,7 @@ Dim OK As Boolean
         
         Case 29 ' mostrar los campos del socio
             CargarCamposSocio 1
-            If Campo <> "" Then SituarCampoSocio CLng(Campo)
+            If campo <> "" Then SituarCampoSocio CLng(campo)
             
             Label6.visible = True
             Text4.visible = True
@@ -3398,7 +3398,7 @@ Dim OK As Boolean
         Case 53 'asignamos los valores
             txtAux(3).Text = Cadena
             txtAux(4).Text = cadWhere
-            txtAux(0).Text = Campo
+            txtAux(0).Text = campo
             
             
         Case 54 ' transportistas
@@ -3440,7 +3440,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim H As Integer, W As Integer
+Dim h As Integer, w As Integer
 Dim Cad As String
 On Error Resume Next
 
@@ -3474,20 +3474,20 @@ On Error Resume Next
     PulsadoSalir = True
     PrimeraVez = True
     
-    For H = 1 To 3
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
+    For h = 1 To 3
+        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next h
     
     
     Select Case OpcionMensaje
         Case 1 'Mensaje de Cobros Pendientes
-            PonerFrameCobrosPtesVisible True, H, W
+            PonerFrameCobrosPtesVisible True, h, w
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
             PonerFocoBtn Me.cmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
-            PonerFrameCobrosPtesVisible True, H, W
+            PonerFrameCobrosPtesVisible True, h, w
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
             PonerFocoBtn Me.cmdAceptarCobros
@@ -3501,9 +3501,9 @@ On Error Resume Next
 '            PulsadoSalir = False
             
         Case 5 'Consumo de variedades por socio (bodega)
-            H = FrameConsumoSocio.Height
-            W = FrameConsumoSocio.Width
-            PonerFrameVisible FrameConsumoSocio, True, H, W
+            h = FrameConsumoSocio.Height
+            w = FrameConsumoSocio.Width
+            PonerFrameVisible FrameConsumoSocio, True, h, w
             Label1(4).Caption = "por Variedad"
             Label1(6).Caption = "por Producto"
             frmMensajes.Caption = "Consumo del Socio"
@@ -3511,20 +3511,20 @@ On Error Resume Next
             
         Case 6, 7  ' 6 = campos del socio para entrada
                    ' 7 = campos del socio para entrada de adv
-            H = FrameCampos.Height
-            W = FrameCampos.Width
-            PonerFrameVisible FrameCampos, True, H, W
+            h = FrameCampos.Height
+            w = FrameCampos.Width
+            PonerFrameVisible FrameCampos, True, h, w
         
             
         Case 8, 17 'Etiquetas de Clientes
-            PonerFrameNSeriesVisible True, H, W
+            PonerFrameNSeriesVisible True, h, w
             Me.Caption = "Clientes"
             PulsadoSalir = False
             Me.cmdSelTodos.visible = True
             Me.cmdDeselTodos.visible = True
             
         Case 9, 42, 55  'Etiquetas de Socios
-            PonerFrameNSeriesVisible True, H, W
+            PonerFrameNSeriesVisible True, h, w
             Me.Caption = "Socios"
             PulsadoSalir = False
             Me.cmdSelTodos.visible = False
@@ -3536,12 +3536,12 @@ On Error Resume Next
             Me.cmdCancelar.Left = 7040
         
         Case 10 'Errores al contabilizar facturas
-            PonerFrameCobrosPtesVisible True, H, W
+            PonerFrameCobrosPtesVisible True, h, w
             Me.Caption = "Facturas NO contabilizadas: "
             PonerFocoBtn Me.cmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
-            PonerFrameNSeriesVisible True, H, W
+            PonerFrameNSeriesVisible True, h, w
             Me.Caption = "Lineas Factura a Rectificar"
             PulsadoSalir = False
             Me.cmdSelTodos.visible = True
@@ -3550,7 +3550,7 @@ On Error Resume Next
             Me.cmdCancelar.Left = Me.cmdCancelar.Left + 1000
         
         Case 12 'Mensaje Partes de ADV que no se van a Facturar
-            PonerFrameCobrosPtesVisible True, H, W
+            PonerFrameCobrosPtesVisible True, h, w
             CargarListaAlbaranes
             Me.Caption = "Facturación Partes ADV"
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
@@ -3559,36 +3559,36 @@ On Error Resume Next
             PonerFocoBtn Me.cmdAceptarCobros
             
         Case 13 'Muestra Errores
-            H = 6000
-            W = 8800
-            PonerFrameVisible Me.FrameErrores, True, H, W
+            h = 6000
+            w = 8800
+            PonerFrameVisible Me.FrameErrores, True, h, w
             Me.Text1.Text = vCampos
             Me.Caption = "Errores"
         
         Case 14 'Muestra Empresas del sistema
-            PonerFrameNSeriesVisible True, H, W
+            PonerFrameNSeriesVisible True, h, w
             Me.Caption = "Selección"
             CargarListaEmpresas
             
         Case 15
-            H = FrameCamposSocio.Height
-            W = FrameCamposSocio.Width
-            PonerFrameVisible FrameCamposSocio, True, H, W
+            h = FrameCamposSocio.Height
+            w = FrameCamposSocio.Width
+            PonerFrameVisible FrameCamposSocio, True, h, w
             
         Case 4, 16 'variedades
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             
 
         Case 19 'Entradas sin clasificar
-            PonerFrameEntradasSinClasificarVisible True, H, W
+            PonerFrameEntradasSinClasificarVisible True, h, w
             CargarListaEntradas
             Me.Caption = "Entradas Erróneas"
             PonerFocoBtn Me.CmdAceptarPal
         
         Case 20 'Entradas sin clasificar
-            PonerFrameEntradasSinClasificarVisible True, H, W
+            PonerFrameEntradasSinClasificarVisible True, h, w
             Label1(2).visible = False
             CmdCanPal.visible = False
             CmdCanPal.Enabled = False
@@ -3597,125 +3597,125 @@ On Error Resume Next
             PonerFocoBtn Me.CmdCanPal
             
         Case 21 ' Entradas de Bascula sin CRFID
-            PonerFrameEntradasSinCRFIDVisible True, H, W
+            PonerFrameEntradasSinCRFIDVisible True, h, w
             CargarListaEntradasSinCRFID Cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
             PonerFocoBtn Me.CmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Label3.Caption = "Trabajadores"
     
         Case 23 ' Hidrantes de un socio (POZOS)
-            H = FrameCampos.Height
-            W = FrameCampos.Width
-            PonerFrameVisible FrameCampos, True, H, W
+            h = FrameCampos.Height
+            w = FrameCampos.Width
+            PonerFrameVisible FrameCampos, True, h, w
                    
         Case 24 ' albaranes de transportista
-            H = FrameCampos.Height
-            W = FrameCampos.Width
-            PonerFrameVisible FrameCampos, True, H, W
+            h = FrameCampos.Height
+            w = FrameCampos.Width
+            PonerFrameVisible FrameCampos, True, h, w
             
             Label2.Caption = "Albaranes Pendientes del Transportista"
             
         Case 25
-            H = FrameCamposSocio.Height
-            W = FrameCamposSocio.Width
+            h = FrameCamposSocio.Height
+            w = FrameCamposSocio.Width
             Label5.Caption = "Campos con el Nro.Orden incorrecto"
             cmdCamposSocio(1).Caption = "Corregir"
-            PonerFrameVisible FrameCamposSocio, True, H, W
+            PonerFrameVisible FrameCamposSocio, True, h, w
         
         Case 26 ' albaranes de un socio
-            H = FrameCampos.Height
-            W = FrameCampos.Width
-            PonerFrameVisible FrameCampos, True, H, W
+            h = FrameCampos.Height
+            w = FrameCampos.Width
+            PonerFrameVisible FrameCampos, True, h, w
             
             Label2.Caption = "Albaranes Venta Campo"
         
         Case 27 ' incidencias
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             
             Label3.Caption = "Plagas"
         
         Case 28 ' Entradas de Bascula sin tara de salida
-            H = FrameEntradasSinSalida.Height
-            W = FrameEntradasSinSalida.Width
-            PonerFrameVisible FrameEntradasSinSalida, True, H, W
+            h = FrameEntradasSinSalida.Height
+            w = FrameEntradasSinSalida.Width
+            PonerFrameVisible FrameEntradasSinSalida, True, h, w
             
         Case 29, 52
-            H = FrameCampos.Height
-            W = FrameCampos.Width
-            PonerFrameVisible FrameCampos, True, H, W
+            h = FrameCampos.Height
+            w = FrameCampos.Width
+            PonerFrameVisible FrameCampos, True, h, w
         
             If OpcionMensaje = 52 Then Label2.Caption = "Nro.Ordenes Recolección"
         
-            Text4.Text = Campo
+            Text4.Text = campo
     
         Case 30 ' Entradas de Bodega sin tarar
-            H = FrameEntradasSinSalida.Height
-            W = FrameEntradasSinSalida.Width
-            PonerFrameVisible FrameEntradasSinSalida, True, H, W
+            h = FrameEntradasSinSalida.Height
+            w = FrameEntradasSinSalida.Width
+            PonerFrameVisible FrameEntradasSinSalida, True, h, w
     
         Case 31 ' Facturas de anticipo venta campo sin entradas
-            H = FrameFacturas.Height
-            W = FrameFacturas.Width
-            PonerFrameVisible FrameFacturas, True, H, W
+            h = FrameFacturas.Height
+            w = FrameFacturas.Width
+            PonerFrameVisible FrameFacturas, True, h, w
     
         Case 32 ' Tipo de aportaciones
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             
             Label3.Caption = "Tipo de Aportaciones"
         
         Case 33 ' Facturas de un socio
             Label9.Caption = "Facturas del Socio "
             
-            H = FrameFacturas.Height
-            W = FrameFacturas.Width
-            PonerFrameVisible FrameFacturas, True, H, W
+            h = FrameFacturas.Height
+            w = FrameFacturas.Width
+            PonerFrameVisible FrameFacturas, True, h, w
     
         Case 34, 51, 57 ' relacion de campos
-            H = FrameCamposSocio.Height
-            W = FrameCamposSocio.Width
+            h = FrameCamposSocio.Height
+            w = FrameCamposSocio.Width
             Label5.Caption = "Campos "
             cmdCamposSocio(1).Enabled = False
             cmdCamposSocio(1).visible = False
-            PonerFrameVisible FrameCamposSocio, True, H, W
+            PonerFrameVisible FrameCamposSocio, True, h, w
             cmdCamposSocio(0).Caption = "Regresar"
     
     
         Case 35 ' relacion de campos
-            H = FrameAlbaranesLiquidados.Height
-            W = FrameAlbaranesLiquidados.Width
+            h = FrameAlbaranesLiquidados.Height
+            w = FrameAlbaranesLiquidados.Width
             
-            PonerFrameVisible FrameAlbaranesLiquidados, True, H, W
+            PonerFrameVisible FrameAlbaranesLiquidados, True, h, w
     
         Case 36 ' situaciones
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Label3.Caption = "Situaciones"
             
         Case 37 ' hidrantes de un socio para facturar
-            H = FrameHidrantesSocio.Height
-            W = FrameHidrantesSocio.Width
-            PonerFrameVisible FrameHidrantesSocio, True, H, W
+            h = FrameHidrantesSocio.Height
+            w = FrameHidrantesSocio.Width
+            PonerFrameVisible FrameHidrantesSocio, True, h, w
             Label10.Caption = "Hidrantes Socio para Facturar"
             
         Case 38 ' orden del printnou
-            H = FrameOrdenListado.Height
-            W = FrameOrdenListado.Width
-            PonerFrameVisible FrameOrdenListado, True, H + 90, W
+            h = FrameOrdenListado.Height
+            w = FrameOrdenListado.Width
+            PonerFrameVisible FrameOrdenListado, True, h + 90, w
         
         Case 39 ' hidrantes de un campo para cambiar el socio
-            H = FrameHidrantesSocio.Height
-            W = FrameHidrantesSocio.Width
-            PonerFrameVisible FrameHidrantesSocio, True, H, W
+            h = FrameHidrantesSocio.Height
+            w = FrameHidrantesSocio.Width
+            PonerFrameVisible FrameHidrantesSocio, True, h, w
             Label10.Caption = "Contadores del Campo" ' a modificar"
             '[Monica]30/10/2013: quitamos lo de seleccionar
             ListView13.Checkboxes = False
@@ -3727,153 +3727,153 @@ On Error Resume Next
             
             
         Case 40 ' Archivos a incluir en el email
-            H = FrameArchivos.Height
-            W = FrameArchivos.Width
-            PonerFrameVisible FrameArchivos, True, H, W
+            h = FrameArchivos.Height
+            w = FrameArchivos.Width
+            PonerFrameVisible FrameArchivos, True, h, w
             Label10.Caption = "Archivos a adjuntar"
             
         Case 41 ' Entradas clasificadas con error.
-            H = Me.FrameEntradasConError.Height
-            W = FrameEntradasConError.Width
-            PonerFrameVisible FrameEntradasConError, True, H, W
+            h = Me.FrameEntradasConError.Height
+            w = FrameEntradasConError.Width
+            PonerFrameVisible FrameEntradasConError, True, h, w
             Label4(1).Caption = "Entradas con Error"
     
         Case 43 ' Empresas para carga de kilos
-            H = Me.FrameEmpresas.Height
-            W = FrameEmpresas.Width
-            PonerFrameVisible FrameEmpresas, True, H, W
+            h = Me.FrameEmpresas.Height
+            w = FrameEmpresas.Width
+            PonerFrameVisible FrameEmpresas, True, h, w
     
         Case 44 ' Diferencias con Indefa
-            H = Me.FrameDiferencias.Height
-            W = FrameDiferencias.Width
-            PonerFrameVisible FrameDiferencias, True, H, W
+            h = Me.FrameDiferencias.Height
+            w = FrameDiferencias.Width
+            PonerFrameVisible FrameDiferencias, True, h, w
         
         Case 45, 46 ' Imagen de Indefa del contador
-            H = Me.FrameImgContador.Height + 500
-            W = Me.FrameImgContador.Width + 500
+            h = Me.FrameImgContador.Height + 500
+            w = Me.FrameImgContador.Width + 500
             
             FrameImgContador.visible = True
             FrameImgContador.Top = -90
-            FrameImgContador.Width = W
-            FrameImgContador.Height = H + 90
-            Me.Image2.Height = H + 90
-            Me.Image2.Width = W
+            FrameImgContador.Width = w
+            FrameImgContador.Height = h + 90
+            Me.Image2.Height = h + 90
+            Me.Image2.Width = w
         
         Case 47 ' albaranes del socio
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Label3.Caption = "Albaranes Pdtes del Socio"
         
         
         Case 48 ' anticipos sin descontar
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Label3.Caption = "Anticipos sin descontar"
         
         
         Case 49 ' campos con precios de zona a 0
-            PonerFrameCobrosPtesVisible True, H, W
+            PonerFrameCobrosPtesVisible True, h, w
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
             PonerFocoBtn Me.cmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
-            H = Me.FrameHidrantesANoFacturar.Height
-            W = Me.FrameHidrantesANoFacturar.Width
-            PonerFrameVisible FrameHidrantesANoFacturar, True, H, W
+            h = Me.FrameHidrantesANoFacturar.Height
+            w = Me.FrameHidrantesANoFacturar.Width
+            PonerFrameVisible FrameHidrantesANoFacturar, True, h, w
             frmMensajes.Caption = "Contadores a no facturar"
         
             Label1(17).Caption = Label1(17).Caption & " " & vParamAplic.ConsumoMinPOZ
             Label1(16).Caption = Label1(16).Caption & " " & vParamAplic.ConsumoMaxPOZ
         
         Case 53 'Frame de cambios
-            H = Me.FrameCambios.Height + 150
-            W = Me.FrameCambios.Width
-            PonerFrameVisible FrameCambios, True, H, W
+            h = Me.FrameCambios.Height + 150
+            w = Me.FrameCambios.Width
+            PonerFrameVisible FrameCambios, True, h, w
         
         Case 54 'transportistas
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Me.Label3.Caption = "Transportistas"
         
         Case 56 ' fechas sin descontar
-            H = FrameVariedades.Height
-            W = FrameVariedades.Width
-            PonerFrameVisible FrameVariedades, True, H, W
+            h = FrameVariedades.Height
+            w = FrameVariedades.Width
+            PonerFrameVisible FrameVariedades, True, h, w
             Label3.Caption = "Fechas de Anticipos a descontar"
         
         Case 58 ' tipo de recibo
-            H = FramePago.Height
-            W = FramePago.Width
-            PonerFrameVisible FramePago, True, H, W
+            h = FramePago.Height
+            w = FramePago.Width
+            PonerFrameVisible FramePago, True, h, w
         
         Case 59 ' clave de acceso
-            H = frameClaveAcceso.Height
-            W = frameClaveAcceso.Width
-            PonerFrameVisible frameClaveAcceso, True, H, W
+            h = frameClaveAcceso.Height
+            w = frameClaveAcceso.Width
+            PonerFrameVisible frameClaveAcceso, True, h, w
         
         Case 60 ' transportistas
-            H = FrameMatriculas.Height
-            W = FrameMatriculas.Width
-            PonerFrameVisible FrameMatriculas, True, H, W
+            h = FrameMatriculas.Height
+            w = FrameMatriculas.Width
+            PonerFrameVisible FrameMatriculas, True, h, w
         
         Case 61 ' facturas de pozos
-            H = FrameImpFrasPozos.Height
-            W = FrameImpFrasPozos.Width
-            PonerFrameVisible FrameImpFrasPozos, True, H, W
+            h = FrameImpFrasPozos.Height
+            w = FrameImpFrasPozos.Width
+            PonerFrameVisible FrameImpFrasPozos, True, h, w
         
         Case 62 ' creacion de un campo de una entrada de abn
-            H = Me.FrameCreacionCampo.Height
-            W = Me.FrameCreacionCampo.Width
-            PonerFrameVisible FrameCreacionCampo, True, H, W
+            h = Me.FrameCreacionCampo.Height
+            w = Me.FrameCreacionCampo.Width
+            PonerFrameVisible FrameCreacionCampo, True, h, w
         
         Case 63 ' visualizacion de entradas de almazara previa a insertar (ABN)
-            H = Me.FrameVisualizaEntradas.Height
-            W = Me.FrameVisualizaEntradas.Width
-            PonerFrameVisible FrameVisualizaEntradas, True, H, W
+            h = Me.FrameVisualizaEntradas.Height
+            w = Me.FrameVisualizaEntradas.Width
+            PonerFrameVisible FrameVisualizaEntradas, True, h, w
         
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
-    Me.Height = H + 350
-    Me.Width = W + 70
+    Me.Height = h + 350
+    Me.Width = w + 70
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
 'Pone el Frame de Cobros Pendientes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
-    H = 4600
+    h = 4600
         
     Select Case OpcionMensaje
         Case 1
-            H = 5000
-            W = 8600
+            h = 5000
+            w = 8600
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
-            W = 8800
+            w = 8800
             Me.cmdAceptarCobros.Top = 4000
             Me.cmdAceptarCobros.Left = 4200
         Case 5 'Componentes
-            W = 6000
-            H = 5000
+            w = 6000
+            h = 5000
             Me.cmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
-            W = 7000
-            H = 6000
+            w = 7000
+            h = 6000
             Me.cmdAceptarCobros.Top = 5400
             Me.cmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
-            H = 6000
-            W = 8400
+            h = 6000
+            w = 8400
             Me.cmdAceptarCobros.Top = 5300
             Me.cmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
@@ -3887,8 +3887,8 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             End If
             
         Case 49
-            H = 6000
-            W = 8400
+            h = 6000
+            w = 8400
             Me.cmdAceptarCobros.Top = 5300
             Me.cmdAceptarCobros.Left = 4900
             
@@ -3902,7 +3902,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = ""
     End Select
             
-    PonerFrameVisible Me.FrameCobrosPtes, visible, H, W
+    PonerFrameVisible Me.FrameCobrosPtes, visible, h, w
 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
@@ -3912,13 +3912,13 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     End If
 End Sub
 
-Private Sub PonerFrameEntradasSinClasificarVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameEntradasSinClasificarVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
 'Pone el Frame de Cobros Pendientes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
         
-    H = 6000
-    W = 8400
+    h = 6000
+    w = 8400
     Me.CmdAceptarPal.Top = 5300
     Me.CmdAceptarPal.Left = 4900
     Me.CmdCanPal.Top = 5300
@@ -3929,41 +3929,41 @@ Private Sub PonerFrameEntradasSinClasificarVisible(visible As Boolean, ByRef H A
     Me.CmdAceptarPal.Caption = "&Continuar"
     Me.CmdCanPal.Caption = "&Salir"
         
-    PonerFrameVisible Me.FrameEntradasSinClasificar, visible, H, W
+    PonerFrameVisible Me.FrameEntradasSinClasificar, visible, h, w
 
 End Sub
 
-Private Sub PonerFrameEntradasSinCRFIDVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
+Private Sub PonerFrameEntradasSinCRFIDVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
 'Pone el Frame de Cobros Pendientes Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
         
-    H = 4600
-    W = 8655
+    h = 4600
+    w = 8655
         
-    PonerFrameVisible Me.FrameEntradasSinCRFID, visible, H, W
+    PonerFrameVisible Me.FrameEntradasSinCRFID, visible, h, w
 
 End Sub
 
 
 
 
-Private Sub PonerFrameNSeriesVisible(visible As Boolean, H As Integer, W As Integer)
+Private Sub PonerFrameNSeriesVisible(visible As Boolean, h As Integer, w As Integer)
 'Pone el Frame de Nº Serie Visible y Ajustado al Formulario, y visualiza los controles
 'necesario para el Informe
 
-    H = 5000
+    h = 5000
    
     If OpcionMensaje = 11 Then 'Lineas Factura a Rectificar
-        W = 10900
+        w = 10900
     ElseIf OpcionMensaje = 14 Then
-        W = 6500
+        w = 6500
         Me.Label7(1).visible = True
     Else
-        W = 8500
+        w = 8500
         Me.Label7(1).visible = False
     End If
-    PonerFrameVisible Me.FrameNSeries, visible, H, W
+    PonerFrameVisible Me.FrameNSeries, visible, h, w
 End Sub
 
 
@@ -4446,7 +4446,7 @@ Dim SQL As String
              Set ItmX = ListView2.ListItems.Add
              ItmX.Text = RS!codtipoa 'cod tipo alb
              ItmX.Checked = False
-             ItmX.SubItems(1) = Format(RS!Numalbar, "0000000") 'Nº Albaran
+             ItmX.SubItems(1) = Format(RS!numalbar, "0000000") 'Nº Albaran
              ItmX.SubItems(2) = RS!numlinea 'linea Albaran
              ItmX.SubItems(3) = Format(RS!codAlmac, "000") 'cod almacen
              ItmX.SubItems(4) = RS!codArtic 'Cod Articulo
@@ -4618,7 +4618,7 @@ Dim SQL As String
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
             
             'en campo traemos "/retirada"
-            If Campo <> "" Then ItmX.SubItems(3) = ItmX.SubItems(3) & Campo
+            If campo <> "" Then ItmX.SubItems(3) = ItmX.SubItems(3) & campo
 
             RS.MoveNext
         Wend
@@ -4676,7 +4676,7 @@ Private Sub CargarListaEmpresas()
 Dim RS As ADODB.Recordset
 Dim ItmX As ListItem
 Dim SQL As String
-Dim I As Integer
+Dim i As Integer
 
 Dim Prohibidas As String
 
@@ -4694,7 +4694,7 @@ Dim Prohibidas As String
     ListView2.ListItems.Clear
     
     Set RS = New ADODB.Recordset
-    I = -1
+    i = -1
     RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RS.EOF
         SQL = "|" & RS!codempre & "|"
@@ -4703,14 +4703,14 @@ Dim Prohibidas As String
             ItmX.Tag = RS!codempre
             If ItmX.Tag = vEmpresa.codempre Then
                 ItmX.Checked = True
-                I = ItmX.Index
+                i = ItmX.Index
             End If
             ItmX.ToolTipText = RS!Ariagro
         End If
         RS.MoveNext
     Wend
     RS.Close
-    If I > 0 Then Set ListView2.SelectedItem = ListView2.ListItems(I)
+    If i > 0 Then Set ListView2.SelectedItem = ListView2.ListItems(i)
 
     
 ECargarLista:
@@ -4755,15 +4755,15 @@ Private Function ObtenerTamanyosArray() As Boolean
 'Para el frame de los Nº de Serie de los Articulos
 'En cada indice pone en CodArtic(i) el codigo del articulo
 'y en Cantidad(i) la cantidad solicitada de cada codartic
-Dim I As Integer, J As Integer
+Dim i As Integer, J As Integer
 
     ObtenerTamanyosArray = False
     'Primero a los campos de la tabla
     TotalArray = -1
     J = 0
     Do
-        I = J + 1
-        J = InStr(I, vCampos, "·")
+        i = J + 1
+        J = InStr(i, vCampos, "·")
         If J > 0 Then TotalArray = TotalArray + 1
     Loop Until J = 0
     
@@ -4780,23 +4780,23 @@ End Function
 Private Function SeparaCampos() As Boolean
 'Para el frame de los Nº de Serie de los Articulos
 Dim Grupo As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim C As Integer 'Contador dentro del array
 
     SeparaCampos = False
-    I = 0
+    i = 0
     C = 0
     Do
-        J = I + 1
-        I = InStr(J, vCampos, "·")
-        If I > 0 Then
-            Grupo = Mid(vCampos, J, I - J)
+        J = i + 1
+        i = InStr(J, vCampos, "·")
+        If i > 0 Then
+            Grupo = Mid(vCampos, J, i - J)
             'Y en la martriz
             InsertaGrupo Grupo, C
             C = C + 1
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     SeparaCampos = True
 End Function
 
@@ -4932,26 +4932,26 @@ End Sub
 Private Function RegresarCargaEmpresas() As String
 Dim SQL As String
 Dim Parametros As String
-Dim I As Integer
+Dim i As Integer
 
     CadenaDesdeOtroForm = ""
     
         SQL = ""
         Parametros = ""
-        For I = 1 To ListView2.ListItems.Count
-            If Me.ListView2.ListItems(I).Checked Then
-                SQL = SQL & Me.ListView2.ListItems(I).Text & "|"
+        For i = 1 To ListView2.ListItems.Count
+            If Me.ListView2.ListItems(i).Checked Then
+                SQL = SQL & Me.ListView2.ListItems(i).Text & "|"
                 Parametros = Parametros & "1" 'Contador
             End If
-        Next I
+        Next i
         CadenaDesdeOtroForm = Len(Parametros) & "|" & SQL
         'Vemos las conta
         SQL = ""
-        For I = 1 To ListView2.ListItems.Count
-            If Me.ListView2.ListItems(I).Checked Then
-                SQL = SQL & Me.ListView2.ListItems(I).Tag & "|"
+        For i = 1 To ListView2.ListItems.Count
+            If Me.ListView2.ListItems(i).Checked Then
+                SQL = SQL & Me.ListView2.ListItems(i).Tag & "|"
             End If
-        Next I
+        Next i
         CadenaDesdeOtroForm = CadenaDesdeOtroForm & SQL
     
     
@@ -5137,7 +5137,7 @@ Dim It As ListItem
             It.SubItems(1) = Format(RS!codvarie, "000000")
             It.SubItems(2) = RS!nomvarie
             It.SubItems(3) = RS!nomparti
-            It.SubItems(4) = RS!Poligono
+            It.SubItems(4) = RS!poligono
             It.SubItems(5) = RS!Parcela
             It.SubItems(6) = RS!NroCampo
         Else
@@ -5161,7 +5161,7 @@ Dim It As ListItem
                     Else
                         If Opcion = 7 Then
                             It.SubItems(1) = RS!nomparti
-                            It.SubItems(2) = DBLet(RS!Poligono, "N")
+                            It.SubItems(2) = DBLet(RS!poligono, "N")
                             It.SubItems(3) = DBLet(RS!Parcela, "N")
                             It.SubItems(4) = DBLet(RS!SubParce, "T")
                             It.SubItems(5) = RS!nomvarie
@@ -5170,7 +5170,7 @@ Dim It As ListItem
                             It.SubItems(1) = RS!nomparti
                             It.SubItems(2) = DBLet(RS!CodPobla, "T")
                             It.SubItems(3) = DBLet(RS!desPobla, "T")
-                            It.SubItems(4) = RS!Poligono
+                            It.SubItems(4) = RS!poligono
                             It.SubItems(5) = RS!Parcela
                             It.SubItems(6) = DBLet(RS!SubParce, "T")
                             It.SubItems(7) = RS!NroCampo
@@ -5200,10 +5200,10 @@ Dim It As ListItem
     Wend
     RS.Close
     
-    If (Opcion = 1 Or Opcion = 2) And Campo <> "" Then SituarCampoSocio CLng(Campo)
+    If (Opcion = 1 Or Opcion = 2) And campo <> "" Then SituarCampoSocio CLng(campo)
 End Sub
 
-Private Sub CargarListaVariedades(DadoProducto As Boolean)
+Private Sub CargarListaVariedades(DadoProducto As Boolean, Optional Ordenar As Boolean)
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim It As ListItem
@@ -5217,10 +5217,13 @@ Dim It As ListItem
     End If
     If cadWhere <> "" Then SQL = SQL & cadWhere
     
+'    If Ordenar Then SQL = SQL & " order by 1"
+    
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ListView6.ColumnHeaders.Clear
+    ListView6.ListItems.Clear
     
     If DadoProducto Then
         ListView6.ColumnHeaders.Add , , "Código", 1000.0631
@@ -5259,6 +5262,12 @@ Dim It As ListItem
     Wend
     RS.Close
     
+    If Ordenar Then
+        ListView6.Sorted = True
+        ListView6.SortKey = 0
+    Else
+        ListView6.Sorted = False
+    End If
 End Sub
 
 
@@ -5417,7 +5426,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Hidrante, "T")
         It.SubItems(1) = Format(RS!codparti, "000000")
         It.SubItems(2) = RS!nomparti
-        It.SubItems(3) = DBLet(RS!Poligono, "T")
+        It.SubItems(3) = DBLet(RS!poligono, "T")
         It.SubItems(4) = DBLet(RS!parcelas, "T")
         It.Checked = False
         
@@ -5430,7 +5439,7 @@ Dim It As ListItem
     Wend
     RS.Close
     
-    If Campo <> "" Then SituarHidranteSocio Campo
+    If campo <> "" Then SituarHidranteSocio campo
 End Sub
 
 
@@ -5465,7 +5474,7 @@ Dim It As ListItem
         It.Text = DBLet(RS!Hidrante, "T")
         It.SubItems(1) = Format(RS!codparti, "000000")
         It.SubItems(2) = RS!nomparti
-        It.SubItems(3) = DBLet(RS!Poligono, "T")
+        It.SubItems(3) = DBLet(RS!poligono, "T")
         It.SubItems(4) = DBLet(RS!parcelas, "T")
         It.Checked = True
         
@@ -5518,7 +5527,7 @@ Dim It As ListItem
         It.SubItems(1) = Format(RS!Codsocio, "000000")
         It.SubItems(2) = RS!nomsocio
         It.SubItems(3) = RS!nomparti
-        It.SubItems(4) = DBLet(RS!Poligono, "T")
+        It.SubItems(4) = DBLet(RS!poligono, "T")
         It.SubItems(5) = DBLet(RS!parcelas, "T")
         It.Checked = True
         
@@ -5599,7 +5608,7 @@ Dim NomFic As String
         Set It = ListView15.ListItems.Add
             
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(RS!Numalbar, "T")
+        It.Text = DBLet(RS!numalbar, "T")
         It.SubItems(1) = Format(RS!codvarie, "000000")
         It.SubItems(2) = Format(RS!Codsocio, "000000")
         It.SubItems(3) = Format(RS!codcampo, "00000000")
@@ -5653,10 +5662,10 @@ Dim SQL As String
 End Function
 
 
-Private Sub SituarCampoSocio(Campo As Long)
+Private Sub SituarCampoSocio(campo As Long)
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 Dim ItmX As ListItem
     
 ' es lo mismo que lo de abajo para otro caso
@@ -5668,32 +5677,32 @@ Dim ItmX As ListItem
 '        ListView4.SetFocus
 '    End If
 '
-    For I = 1 To ListView4.ListItems.Count
-        If Val(ListView4.ListItems(I).Text) = Val(Campo) Then
-            ListView4.ListItems(I).Selected = True
-            ListView4.ListItems(I).EnsureVisible
+    For i = 1 To ListView4.ListItems.Count
+        If Val(ListView4.ListItems(i).Text) = Val(campo) Then
+            ListView4.ListItems(i).Selected = True
+            ListView4.ListItems(i).EnsureVisible
             ListView4.SetFocus
             Exit Sub
         End If
-    Next I
+    Next i
     
 End Sub
 
 
-Private Sub SituarHidranteSocio(Campo As String)
+Private Sub SituarHidranteSocio(campo As String)
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim I As Integer
+Dim i As Integer
 Dim ItmX As ListItem
     
-    For I = 1 To ListView4.ListItems.Count
-        If Val(ListView4.ListItems(I).Text) = Val(Campo) Then
-            ListView4.ListItems(I).Selected = True
-            ListView4.ListItems(I).EnsureVisible
+    For i = 1 To ListView4.ListItems.Count
+        If Val(ListView4.ListItems(i).Text) = Val(campo) Then
+            ListView4.ListItems(i).Selected = True
+            ListView4.ListItems(i).EnsureVisible
             ListView4.SetFocus
             Exit Sub
         End If
-    Next I
+    Next i
     
 End Sub
 
@@ -5720,16 +5729,16 @@ Dim b As Boolean
 End Sub
 
 Private Sub imgCheck4_Click(Index As Integer)
-Dim I As Long
+Dim i As Long
 
     If Index = 0 Then
-        For I = 1 To ListView19.ListItems.Count
-            ListView19.ListItems(I).Checked = False
-        Next I
+        For i = 1 To ListView19.ListItems.Count
+            ListView19.ListItems(i).Checked = False
+        Next i
     Else
-        For I = 1 To ListView19.ListItems.Count
-            ListView19.ListItems(I).Checked = True
-        Next I
+        For i = 1 To ListView19.ListItems.Count
+            ListView19.ListItems(i).Checked = True
+        Next i
     End If
 
 End Sub
@@ -5823,7 +5832,7 @@ Dim It As ListItem
         Set It = ListView4.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(RS!Numalbar, "N")
+        It.Text = DBLet(RS!numalbar, "N")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = RS!nomvarie
         It.SubItems(3) = Format(DBLet(RS!codcampo, "N"), "00000000")
@@ -5886,12 +5895,12 @@ Dim It As ListItem
         Set It = ListView4.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(RS!Numalbar, "N")
+        It.Text = DBLet(RS!numalbar, "N")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = RS!nomvarie
         It.SubItems(3) = Format(DBLet(RS!NroCampo, "N"), "000000")
         It.SubItems(4) = RS!nomparti
-        It.SubItems(5) = RS!Poligono
+        It.SubItems(5) = RS!poligono
         It.SubItems(6) = RS!Parcela
         It.SubItems(7) = DBLet(RS!KilosNet, "N")
         
@@ -5940,7 +5949,7 @@ Dim It As ListItem
         Set It = ListView12.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(RS!Numalbar, "N")
+        It.Text = DBLet(RS!numalbar, "N")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = RS!nomvarie
         It.SubItems(3) = Format(DBLet(RS!codcampo, "N"), "00000000")
@@ -6124,10 +6133,18 @@ Dim It As ListItem
 End Sub
 
 
+
+
+
+Private Sub ListView6_ColumnClick(ByVal ColumnHeader As MSComctlLib.ColumnHeader)
+    If OpcionMensaje = 16 Then
+        CargarListaVariedades False, True
+    End If
+End Sub
+
 Private Sub lw1_DblClick()
     CmdAcepEmpresas_Click
 End Sub
-
 
 
 Private Sub Text4_LostFocus()
@@ -6197,7 +6214,7 @@ Dim It As ListItem
         Set It = ListView10.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(RS!Numalbar, "N")
+        It.Text = DBLet(RS!numalbar, "N")
         It.SubItems(1) = Format(RS!Fecalbar, "dd/mm/yyyy")
         It.SubItems(2) = Format(RS!horaentr, "hh:mm:ss")
         It.SubItems(3) = Format(RS!codvarie, "000000")
@@ -6435,7 +6452,7 @@ Dim Nregs As Integer
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql2, ConnIndefa, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not Rs2.EOF Then
-            If Trim(DBLet(RS!Poligono, "T")) <> Trim(DBLet(Rs2!Poligono, "T")) Or _
+            If Trim(DBLet(RS!poligono, "T")) <> Trim(DBLet(Rs2!poligono, "T")) Or _
                Mid(Trim(DBLet(RS!parcelas, "T")), 1, 25) <> Mid(Trim(DBLet(Rs2!parcelas, "T")), 1, 25) Or _
                Int(ComprobarCero(DBLet(RS!hanegada, "N"))) <> Int(Round2(ComprobarCero(DBLet(Rs2!Hanegadas, "N")), 4)) Or _
                (DBLet(RS!Codsocio, "N") <> ComprobarCero(DBLet(Rs2!socio_revisado, "N")) And DBLet(Rs2!socio_revisado, "N") <> 0) Or _
@@ -6468,7 +6485,7 @@ Private Sub CargarAlbaranesPdtesFacturar()
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim It As ListItem
-Dim I As Integer
+Dim i As Integer
 
 
     SQL = "select rhisfruta.numalbar, rhisfruta.fecalbar, variedades.nomvarie, rhisfruta.kilosnet from rhisfruta, variedades  where rhisfruta.codvarie = variedades.codvarie "
@@ -6489,17 +6506,17 @@ Dim I As Integer
     While Not RS.EOF
         Set It = ListView6.ListItems.Add
             
-        It.Text = Format(DBLet(RS!Numalbar, "N"), "000000")
+        It.Text = Format(DBLet(RS!numalbar, "N"), "000000")
         It.SubItems(1) = DBLet(RS!Fecalbar, "F")
         It.SubItems(2) = DBLet(RS!nomvarie, "F")
         It.SubItems(3) = DBLet(RS!KilosNet, "N")
         It.Checked = False
         
-        If EstaFacturado(RS!Numalbar) Then
+        If EstaFacturado(RS!numalbar) Then
             It.ForeColor = vbRed
-            For I = 1 To 3
-                It.ListSubItems(I).ForeColor = vbRed
-            Next I
+            For i = 1 To 3
+                It.ListSubItems(i).ForeColor = vbRed
+            Next i
         End If
         
         
@@ -6521,7 +6538,7 @@ Private Sub CargarAnticiposSinDescontar()
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim It As ListItem
-Dim I As Integer
+Dim i As Integer
 
 
     SQL = cadWhere
@@ -6562,7 +6579,7 @@ Private Sub CargarFechasSinDescontar()
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim It As ListItem
-Dim I As Integer
+Dim i As Integer
 
 
     SQL = "select distinct fecfactu from rfactsoc_variedad where fecfactu in (" & cadWhere & ") order by fecfactu "

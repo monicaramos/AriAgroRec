@@ -244,7 +244,7 @@ Private DbClick As Boolean
 
 Private Sub Adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
 Dim columna As String
-Dim j As Byte
+Dim j As Integer
 
     If Busca Then
         Busca = False
@@ -270,9 +270,9 @@ Dim j As Byte
         'Antes:
         'Text1.Text = Adodc1.Recordset.Fields(columna)
         If FormatoCampo(vSelElem) <> "" Then
-            text1.Text = Format(Adodc1.Recordset.Fields(columna), FormatoCampo(vSelElem))
+            Text1.Text = Format(Adodc1.Recordset.Fields(columna), FormatoCampo(vSelElem))
         Else
-            text1.Text = DBLet(Adodc1.Recordset.Fields(columna), TipoCampo(vSelElem))
+            Text1.Text = DBLet(Adodc1.Recordset.Fields(columna), TipoCampo(vSelElem))
         End If
         '--------------------------------------------------------
     End If
@@ -493,7 +493,7 @@ Dim anc As Single
     '--------------------------------------------------------
     
     DataGrid1.AllowRowSizing = False
-    Adodc1.ConnectionString = Conn
+    Adodc1.ConnectionString = conn
     Adodc1.RecordSource = cad
     Adodc1.Refresh
     
@@ -517,7 +517,7 @@ Dim anc As Single
 
 
     'Habilitamos el text1 para que escriban
-    text1.Enabled = True
+    Text1.Enabled = True
     If Not Adodc1.Recordset.EOF Then
         'Le ponemos el 1er registro
         cad = CabTablas(vSelElem)
@@ -538,13 +538,13 @@ Dim anc As Single
         'antes:
         'Text1.Text = Adodc1.Recordset(cad)
         If FormatoCampo(vSelElem) <> "" Then
-            text1.Text = Format(Adodc1.Recordset(cad), FormatoCampo(vSelElem))
+            Text1.Text = Format(Adodc1.Recordset(cad), FormatoCampo(vSelElem))
         Else
             'Text1.Text = DBSet(Adodc1.Recordset(cad), TipoCampo(vSelElem))
-            text1.Text = DBLet(Adodc1.Recordset(cad), TipoCampo(vSelElem))
+            Text1.Text = DBLet(Adodc1.Recordset(cad), TipoCampo(vSelElem))
         End If
         '-----------------------------------------------
-        PonerFoco text1
+        PonerFoco Text1
     Else
         PonerFocoBtn cmdSalir
     End If
@@ -584,7 +584,7 @@ Dim i As Byte
     
     Select Case TipoCampo(vSelElem)
         Case "N"
-            If Not IsNumeric(text1.Text) Then
+            If Not IsNumeric(Text1.Text) Then
                 If Adodc1.Recordset.RecordCount > 0 Then Adodc1.Recordset.MoveFirst
                 Exit Sub
             End If
@@ -592,14 +592,14 @@ Dim i As Byte
             '---- se añade el formato
             'antes:
             'SQLDBGRID = SQLDBGRID & " >= " & Trim(Text1)
-             If Len(Trim(text1)) > Len(FormatoCampo(vSelElem)) Then
-                SQLDBGRID = SQLDBGRID & " >= " & Val(Mid(Trim(text1), 1, Len(FormatoCampo(vSelElem))))
+             If Len(Trim(Text1)) > Len(FormatoCampo(vSelElem)) Then
+                SQLDBGRID = SQLDBGRID & " >= " & Val(Mid(Trim(Text1), 1, Len(FormatoCampo(vSelElem))))
             Else
-                SQLDBGRID = SQLDBGRID & " >= " & Val(Trim(text1))
+                SQLDBGRID = SQLDBGRID & " >= " & Val(Trim(Text1))
             End If
             '-----------------------------------------------------
         Case "T"
-            SQLDBGRID = SQLDBGRID & " >= '" & Trim(text1) & "'"
+            SQLDBGRID = SQLDBGRID & " >= '" & Trim(Text1) & "'"
     End Select
     Screen.MousePointer = vbHourglass
     
@@ -610,8 +610,8 @@ Dim i As Byte
 End Sub
 
 Private Sub Text1_GotFocus()
-text1.SelStart = 0
-text1.SelLength = Len(text1.Text)
+Text1.SelStart = 0
+Text1.SelLength = Len(Text1.Text)
 End Sub
 
 Private Sub Text1_KeyDown(KeyCode As Integer, Shift As Integer)
