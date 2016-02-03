@@ -64,7 +64,7 @@ Private DigcoTRA As String
 Private CtaBaTRA As String
 
 
-Public Function CrearTMPFacturas(cadTabla As String, cadWhere As String) As Boolean
+Public Function CrearTMPFacturas(cadTabla As String, cadwhere As String) As Boolean
 'Crea una temporal donde inserta la clave primaria de las
 'facturas seleccionadas para facturar y trabaja siempre con ellas
 Dim SQL As String
@@ -145,7 +145,7 @@ Dim SQL As String
         End If
     End If
     SQL = SQL & " FROM " & cadTabla
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     SQL = " INSERT INTO tmpFactu " & SQL
     conn.Execute SQL
 
@@ -170,39 +170,39 @@ End Sub
 
 
 
-Private Sub InsertarTMPErrFac(MenError As String, cadWhere As String)
+Private Sub InsertarTMPErrFac(MenError As String, cadwhere As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codprove,numfactu,fecfactu,error) "
     SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "tmpFactu")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "tmpFactu")
     conn.Execute SQL
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Private Sub InsertarTMPErrFacSoc(MenError As String, cadWhere As String)
+Private Sub InsertarTMPErrFacSoc(MenError As String, cadwhere As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
     SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "tmpFactu")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "tmpFactu")
     conn.Execute SQL
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
 
-Private Sub InsertarTMPErrFacFVAR(MenError As String, cadWhere As String)
+Private Sub InsertarTMPErrFacFVAR(MenError As String, cadwhere As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
     SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "fvarcabfact", "tmpFactu")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "fvarcabfact", "tmpFactu")
     conn.Execute SQL
     
     If Err.Number <> 0 Then Err.Clear
@@ -298,7 +298,7 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim RSconta As ADODB.Recordset
 Dim b As Boolean
-Dim cad As String, devuelve As String
+Dim Cad As String, devuelve As String
 Dim Sql2 As String
 Dim Total As Long
 
@@ -328,7 +328,7 @@ On Error GoTo EComprobarLetra
     '        SQL = SQL & cadWHERE
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en usuarios
@@ -338,7 +338,7 @@ On Error GoTo EComprobarLetra
                 Total = TotalRegistrosConsulta(Sql2)
                 If Total = 0 Then 'devuelve = "" Then
                     b = False
-                    cad = RS!CodTipom & " en BD de Ariagrorec."
+                    Cad = RS!CodTipom & " en BD de Ariagrorec."
                 ElseIf DevuelveValor(Sql2) <> "" Then 'SQL <> "" Then
                     'comprobar que todas las letras serie existen en la contabilidad
                     devuelve = "tiporegi= " & DBSet(DevuelveValor(Sql2), "T") 'SQL, "T")
@@ -348,10 +348,10 @@ On Error GoTo EComprobarLetra
                         'no encontrado
                         b = False
                         'Cad = SQL & " en BD de Contabilidad."
-                        cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
+                        Cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
                     End If
                 End If
-                If b Then cad = cad & DBSet(RS!CodTipom, "T") & ","
+                If b Then Cad = Cad & DBSet(RS!CodTipom, "T") & ","
                 RS.MoveNext
             Wend
             RS.Close
@@ -360,22 +360,22 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe el tipo de movimiento: " & cad & vbCrLf
+                devuelve = "No existe el tipo de movimiento: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
             End If
             
             'Todos los Tipo de movimiento existen
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1) 'quitamos ult. coma
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitamos ult. coma
             
                 'miramos si hay algun movimiento de factura que la letra serie sea nulo
                 SQL = "select count(*) from usuarios.stipom "
-                SQL = SQL & "where codtipom IN (" & cad & ") and (isnull(letraser) or letraser='')"
+                SQL = SQL & "where codtipom IN (" & Cad & ") and (isnull(letraser) or letraser='')"
                 If RegistrosAListar(SQL) > 0 Then
                     SQL = "Hay algun tipo de movimiento de Facturación que no tiene letra serie." & vbCrLf
-                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & cad
+                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & Cad
                     MsgBox SQL, vbExclamation
                     Exit Function
                 End If
@@ -401,7 +401,7 @@ On Error GoTo EComprobarLetra
     '        SQL = SQL & cadWHERE
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en usuarios
@@ -411,7 +411,7 @@ On Error GoTo EComprobarLetra
                 Total = TotalRegistrosConsulta(Sql2)
                 If Total = 0 Then 'devuelve = "" Then
                     b = False
-                    cad = RS!CodTipom & " en BD de Ariagrorec."
+                    Cad = RS!CodTipom & " en BD de Ariagrorec."
                 ElseIf DevuelveValor(Sql2) <> "" Then 'SQL <> "" Then
                     'comprobar que todas las letras serie existen en la contabilidad
                     devuelve = "tiporegi= " & DBSet(DevuelveValor(Sql2), "T") 'SQL, "T")
@@ -421,10 +421,10 @@ On Error GoTo EComprobarLetra
                         'no encontrado
                         b = False
                         'Cad = SQL & " en BD de Contabilidad."
-                        cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
+                        Cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
                     End If
                 End If
-                If b Then cad = cad & DBSet(RS!CodTipom, "T") & ","
+                If b Then Cad = Cad & DBSet(RS!CodTipom, "T") & ","
                 RS.MoveNext
             Wend
             RS.Close
@@ -433,22 +433,22 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe el tipo de movimiento: " & cad & vbCrLf
+                devuelve = "No existe el tipo de movimiento: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
             End If
             
             'Todos los Tipo de movimiento existen
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1) 'quitamos ult. coma
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitamos ult. coma
             
                 'miramos si hay algun movimiento de factura que la letra serie sea nulo
                 SQL = "select count(*) from usuarios.stipom "
-                SQL = SQL & "where codtipom IN (" & cad & ") and (isnull(letraser) or letraser='')"
+                SQL = SQL & "where codtipom IN (" & Cad & ") and (isnull(letraser) or letraser='')"
                 If RegistrosAListar(SQL) > 0 Then
                     SQL = "Hay algun tipo de movimiento de Facturación que no tiene letra serie." & vbCrLf
-                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & cad
+                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & Cad
                     MsgBox SQL, vbExclamation
                     Exit Function
                 End If
@@ -475,7 +475,7 @@ On Error GoTo EComprobarLetra
     '        SQL = SQL & cadWHERE
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en usuarios
@@ -485,7 +485,7 @@ On Error GoTo EComprobarLetra
                 Total = TotalRegistrosConsulta(Sql2)
                 If Total = 0 Then 'devuelve = "" Then
                     b = False
-                    cad = RS!CodTipom & " en BD de Ariagrorec."
+                    Cad = RS!CodTipom & " en BD de Ariagrorec."
                 ElseIf DevuelveValor(Sql2) <> "" Then 'SQL <> "" Then
                     'comprobar que todas las letras serie existen en la contabilidad
                     devuelve = "tiporegi= " & DBSet(DevuelveValor(Sql2), "T") 'SQL, "T")
@@ -495,10 +495,10 @@ On Error GoTo EComprobarLetra
                         'no encontrado
                         b = False
                         'Cad = SQL & " en BD de Contabilidad."
-                        cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
+                        Cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
                     End If
                 End If
-                If b Then cad = cad & DBSet(RS!CodTipom, "T") & ","
+                If b Then Cad = Cad & DBSet(RS!CodTipom, "T") & ","
                 RS.MoveNext
             Wend
             RS.Close
@@ -507,22 +507,22 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe el tipo de movimiento: " & cad & vbCrLf
+                devuelve = "No existe el tipo de movimiento: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
             End If
             
             'Todos los Tipo de movimiento existen
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1) 'quitamos ult. coma
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitamos ult. coma
             
                 'miramos si hay algun movimiento de factura que la letra serie sea nulo
                 SQL = "select count(*) from usuarios.stipom "
-                SQL = SQL & "where codtipom IN (" & cad & ") and (isnull(letraser) or letraser='')"
+                SQL = SQL & "where codtipom IN (" & Cad & ") and (isnull(letraser) or letraser='')"
                 If RegistrosAListar(SQL) > 0 Then
                     SQL = "Hay algun tipo de movimiento de Facturación que no tiene letra serie." & vbCrLf
-                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & cad
+                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & Cad
                     MsgBox SQL, vbExclamation
                     Exit Function
                 End If
@@ -552,7 +552,7 @@ On Error GoTo EComprobarLetra
     '        SQL = SQL & cadWHERE
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en usuarios
@@ -562,7 +562,7 @@ On Error GoTo EComprobarLetra
                 Total = TotalRegistrosConsulta(Sql2)
                 If Total = 0 Then 'devuelve = "" Then
                     b = False
-                    cad = RS!CodTipom & " en BD de Ariagrorec."
+                    Cad = RS!CodTipom & " en BD de Ariagrorec."
                 ElseIf DevuelveValor(Sql2) <> "" Then 'SQL <> "" Then
                     'comprobar que todas las letras serie existen en la contabilidad
                     devuelve = "tiporegi= " & DBSet(DevuelveValor(Sql2), "T") 'SQL, "T")
@@ -572,10 +572,10 @@ On Error GoTo EComprobarLetra
                         'no encontrado
                         b = False
                         'Cad = SQL & " en BD de Contabilidad."
-                        cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
+                        Cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
                     End If
                 End If
-                If b Then cad = cad & DBSet(RS!CodTipom, "T") & ","
+                If b Then Cad = Cad & DBSet(RS!CodTipom, "T") & ","
                 RS.MoveNext
             Wend
             RS.Close
@@ -584,22 +584,22 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe el tipo de movimiento: " & cad & vbCrLf
+                devuelve = "No existe el tipo de movimiento: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
             End If
             
             'Todos los Tipo de movimiento existen
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1) 'quitamos ult. coma
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitamos ult. coma
             
                 'miramos si hay algun movimiento de factura que la letra serie sea nulo
                 SQL = "select count(*) from usuarios.stipom "
-                SQL = SQL & "where codtipom IN (" & cad & ") and (isnull(letraser) or letraser='')"
+                SQL = SQL & "where codtipom IN (" & Cad & ") and (isnull(letraser) or letraser='')"
                 If RegistrosAListar(SQL) > 0 Then
                     SQL = "Hay algun tipo de movimiento de Facturación que no tiene letra serie." & vbCrLf
-                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & cad
+                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & Cad
                     MsgBox SQL, vbExclamation
                     Exit Function
                 End If
@@ -625,7 +625,7 @@ On Error GoTo EComprobarLetra
             SQL = SQL & " INNER JOIN tmpFactu ON rtelmovil.numserie=tmpFactu.numserie AND rtelmovil.numfactu=tmpFactu.numfactu AND rtelmovil.fecfactu=tmpFactu.fecfactu "
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en la contabilidad
@@ -636,7 +636,7 @@ On Error GoTo EComprobarLetra
                     'no encontrado
                     b = False
                     'Cad = SQL & " en BD de Contabilidad."
-                    cad = RS!numserie & " en BD de Contabilidad."
+                    Cad = RS!numserie & " en BD de Contabilidad."
                 End If
                 
                 RS.MoveNext
@@ -647,7 +647,7 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe la letra de serie: " & cad & vbCrLf
+                devuelve = "No existe la letra de serie: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
@@ -677,7 +677,7 @@ On Error GoTo EComprobarLetra
     '        SQL = SQL & cadWHERE
             Set RS = New ADODB.Recordset
             RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            cad = ""
+            Cad = ""
             b = True
             While Not RS.EOF And b
                 'comprobar que todas las letras serie existen en usuarios
@@ -687,7 +687,7 @@ On Error GoTo EComprobarLetra
                 Total = TotalRegistrosConsulta(Sql2)
                 If Total = 0 Then 'devuelve = "" Then
                     b = False
-                    cad = RS!CodTipom & " en BD de Ariagrorec."
+                    Cad = RS!CodTipom & " en BD de Ariagrorec."
                 ElseIf DevuelveValor(Sql2) <> "" Then 'SQL <> "" Then
                     'comprobar que todas las letras serie existen en la contabilidad
                     devuelve = "tiporegi= " & DBSet(DevuelveValor(Sql2), "T") 'SQL, "T")
@@ -697,10 +697,10 @@ On Error GoTo EComprobarLetra
                         'no encontrado
                         b = False
                         'Cad = SQL & " en BD de Contabilidad."
-                        cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
+                        Cad = DevuelveValor(Sql2) & " en BD de Contabilidad."
                     End If
                 End If
-                If b Then cad = cad & DBSet(RS!CodTipom, "T") & ","
+                If b Then Cad = Cad & DBSet(RS!CodTipom, "T") & ","
                 RS.MoveNext
             Wend
             RS.Close
@@ -709,22 +709,22 @@ On Error GoTo EComprobarLetra
             Set RSconta = Nothing
             
             If Not b Then 'Hay algun movimiento que no existe
-                devuelve = "No existe el tipo de movimiento: " & cad & vbCrLf
+                devuelve = "No existe el tipo de movimiento: " & Cad & vbCrLf
                 devuelve = devuelve & "Consulte con el administrador."
                 MsgBox devuelve, vbExclamation
                 Exit Function
             End If
             
             'Todos los Tipo de movimiento existen
-            If cad <> "" Then
-                cad = Mid(cad, 1, Len(cad) - 1) 'quitamos ult. coma
+            If Cad <> "" Then
+                Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitamos ult. coma
             
                 'miramos si hay algun movimiento de factura que la letra serie sea nulo
                 SQL = "select count(*) from usuarios.stipom "
-                SQL = SQL & "where codtipom IN (" & cad & ") and (isnull(letraser) or letraser='')"
+                SQL = SQL & "where codtipom IN (" & Cad & ") and (isnull(letraser) or letraser='')"
                 If RegistrosAListar(SQL) > 0 Then
                     SQL = "Hay algun tipo de movimiento de Facturación que no tiene letra serie." & vbCrLf
-                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & cad
+                    SQL = SQL & "Comprobar en la tabla de tipos de movimiento: " & Cad
                     MsgBox SQL, vbExclamation
                     Exit Function
                 End If
@@ -1064,7 +1064,7 @@ End Function
 
 
 
-Public Function ComprobarCtaContable_new(cadTabla As String, Opcion As Byte, Optional Tipo As Byte, Optional Seccion As Integer, Optional cuenta As String) As Boolean
+Public Function ComprobarCtaContable_new(cadTabla As String, Opcion As Byte, Optional tipo As Byte, Optional Seccion As Integer, Optional cuenta As String) As Boolean
 'Comprobar que todas las ctas contables de los distintos clientes de las facturas
 'que vamos a contabilizar existan en la contabilidad
 Dim SQL As String
@@ -1168,7 +1168,7 @@ Dim NumDigit3 As String
                                         SQL = SQL & " INNER JOIN tmpFactu ON rfacttra.codtipom=tmpFactu.codtipom AND rfacttra.numfactu=tmpFactu.numfactu AND rfacttra.fecfactu=tmpFactu.fecfactu "
                                     Else
                                         If cadTabla = "fvarcabfact" Then
-                                            If Tipo = 0 Then ' seleccionamos primero los socios
+                                            If tipo = 0 Then ' seleccionamos primero los socios
                                                 'Seleccionamos los distintos socios de facturas varias, cuentas que vamos a facturar
                                                 SQL = "SELECT DISTINCT fvarcabfact.codsocio, rsocios_seccion.codmaccli as codmacta "
                                                 SQL = SQL & " FROM (fvarcabfact INNER JOIN rsocios_seccion ON fvarcabfact.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N") & " and not fvarcabfact.codsocio is null and fvarcabfact.codsocio <> 0 ) "
@@ -1203,7 +1203,7 @@ Dim NumDigit3 As String
     ElseIf Opcion = 8 Then
         SQL = "SELECT distinct "
         If cadTabla = "rfactsoc" Then
-            Select Case Tipo
+            Select Case tipo
                 Case 1, 3, 7, 9  ' 1=anticipos , 3=anticipos venta campo, 7=anticipos almazara, 9=anticipo bodega
                     SQL = SQL & " rfactsoc_variedad.codvarie, variedades.ctaanticipo as codmacta from ((rfactsoc_variedad "
                 Case 2, 4, 8, 10, 11 ' 2=liquidaciones, 4=liquidaciones venta campo, 8=liquidacion almazara, 10=liquidacion bodega
@@ -1254,7 +1254,7 @@ Dim NumDigit3 As String
                                 SQL = SQL & " FROM rtelmovil "
                             Else
                                 If cadTabla = "rrecibpozos" Then
-                                    Select Case Tipo
+                                    Select Case tipo
                                         Case 1   ' cuenta de ventas de consumo
                                             SQL = "select distinct " & vParamAplic.CtaVentasConsPOZ & " as codmacta "
                                             SQL = SQL & " FROM rrecibpozos "
@@ -1305,7 +1305,7 @@ Dim NumDigit3 As String
         SQL = "select distinct " & DBSet(vParamAplic.CtaTerReten, "T") & " as codmacta from tcafpc "
     ElseIf Opcion = 7 Then
             If cadTabla = "rfactsoc" Then
-                Select Case Tipo
+                Select Case tipo
                     Case 1, 3, 7, 9  ' 1=anticipos , 3=anticipos venta campo, 7=anticipos almazara, 9=anticipos bodega
                         SQL = " SELECT variedades.ctaanticipo as cuenta "
                         SQL = SQL & " FROM rfactsoc_variedad, variedades, tmpFactu  WHERE "
@@ -1455,7 +1455,7 @@ Dim NumDigit3 As String
                                 SQL = DBLet(RS!Codmacta, "T") & " de ventas de Bodega"
                             Else
                                 If cadTabla = "rrecibpozos" Then
-                                    Select Case Tipo
+                                    Select Case tipo
                                         Case 1
                                             SQL = DBLet(RS!Codmacta, "T") & " de ventas consumo de Pozos"
                                         Case 2
@@ -1557,7 +1557,7 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim RSconta As ADODB.Recordset
 Dim b As Boolean
-Dim i As Byte
+Dim I As Byte
 'Dim CodigIVA As String
 
     On Error GoTo ECompIVA
@@ -1571,25 +1571,25 @@ Dim i As Byte
 
     If Not RSconta.EOF Then
         'Seleccionamos los distintos tipos de IVA de las facturas a Contabilizar
-        For i = 1 To 3
+        For I = 1 To 3
             If cadTabla = "advfacturas" Then
-                SQL = "SELECT DISTINCT advfacturas.codiiva" & i
+                SQL = "SELECT DISTINCT advfacturas.codiiva" & I
                 SQL = SQL & " FROM advfacturas "
                 SQL = SQL & " INNER JOIN tmpFactu ON advfacturas.codtipom=tmpFactu.codtipom AND advfacturas.numfactu=tmpFactu.numfactu AND advfacturas.fecfactu=tmpFactu.fecfactu "
-                SQL = SQL & " WHERE not isnull(codiiva" & i & ")"
+                SQL = SQL & " WHERE not isnull(codiiva" & I & ")"
 '                SQL = SQL & " WHERE " & " codigiv" & i & " <> 0 "
             Else
                 If cadTabla = "rbodfacturas" Then
-                    SQL = "SELECT DISTINCT rbodfacturas.codiiva" & i
+                    SQL = "SELECT DISTINCT rbodfacturas.codiiva" & I
                     SQL = SQL & " FROM rbodfacturas "
                     SQL = SQL & " INNER JOIN tmpFactu ON rbodfacturas.codtipom=tmpFactu.codtipom AND rbodfacturas.numfactu=tmpFactu.numfactu AND rbodfacturas.fecfactu=tmpFactu.fecfactu "
-                    SQL = SQL & " WHERE not isnull(codiiva" & i & ")"
+                    SQL = SQL & " WHERE not isnull(codiiva" & I & ")"
                 Else
                     If cadTabla = "scafpc" Then
-                        SQL = "SELECT DISTINCT scafpc.tipoiva" & i
+                        SQL = "SELECT DISTINCT scafpc.tipoiva" & I
                         SQL = SQL & " FROM " & cadTabla
                         SQL = SQL & " INNER JOIN tmpFactu ON scafpc.codprove=tmpFactu.codprove AND scafpc.numfactu=tmpFactu.numfactu AND scafpc.fecfactu=tmpFactu.fecfactu "
-                        SQL = SQL & " WHERE not isnull(tipoiva" & i & ")"
+                        SQL = SQL & " WHERE not isnull(tipoiva" & I & ")"
         '                SQL = SQL & " WHERE " & " tipoiva" & i & " <> 0 "
                     Else
                         If cadTabla = "rrecibpozos" Then
@@ -1599,10 +1599,10 @@ Dim i As Byte
                             SQL = SQL & " WHERE not isnull(tipoiva)"
             '                SQL = SQL & " WHERE " & " tipoiva" & i & " <> 0 "
                         Else
-                            SQL = "SELECT DISTINCT rcafter.tipoiva" & i
+                            SQL = "SELECT DISTINCT rcafter.tipoiva" & I
                             SQL = SQL & " FROM " & cadTabla
                             SQL = SQL & " INNER JOIN tmpFactu ON rcafter.codsocio=tmpFactu.codsocio AND rcafter.numfactu=tmpFactu.numfactu AND rcafter.fecfactu=tmpFactu.fecfactu "
-                            SQL = SQL & " WHERE not isnull(tipoiva" & i & ")"
+                            SQL = SQL & " WHERE not isnull(tipoiva" & I & ")"
             '                SQL = SQL & " WHERE " & " tipoiva" & i & " <> 0 "
                     
                         End If
@@ -1637,7 +1637,7 @@ Dim i As Byte
             Else
                 ComprobarTiposIVA = True
             End If
-        Next i
+        Next I
     End If
     RSconta.Close
     Set RSconta = Nothing
@@ -1656,7 +1656,7 @@ Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim RSconta As ADODB.Recordset
 Dim b As Boolean
-Dim i As Byte
+Dim I As Byte
 'Dim CodigIVA As String
 
     On Error GoTo ECompIVA
@@ -1921,7 +1921,7 @@ End Function
 
 
 
-Public Function PasarFactura(cadWhere As String, CodCCost As String, CtaBan As String) As Boolean
+Public Function PasarFactura(cadwhere As String, CodCCost As String, CtaBan As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariges.scafac --> conta.cabfact
 ' ariges.slifac --> conta.linfact
@@ -1937,18 +1937,18 @@ Dim SQL As String
     
     
     'Insertar en la conta Cabecera Factura
-    b = InsertarCabFact(cadWhere, cadMen)
+    b = InsertarCabFact(cadwhere, cadMen)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
         CCoste = CodCCost
         'Insertar lineas de Factura en la Conta
-        b = InsertarLinFact_new("facturas", cadWhere, cadMen)
+        b = InsertarLinFact_new("facturas", cadwhere, cadMen)
         cadMen = "Insertando Lin. Factura: " & cadMen
 
         '++monica:añadida la parte de insertar en tesoreria
         If b Then
-            b = InsertarEnTesoreriaNewFac(cadWhere, CtaBan, cadMen)
+            b = InsertarEnTesoreriaNewFac(cadwhere, CtaBan, cadMen)
             cadMen = "Insertando en Tesoreria: " & cadMen
         End If
         
@@ -1957,7 +1957,7 @@ Dim SQL As String
 
         If b Then
             'Poner intconta=1 en ariagro.facturas
-            b = ActualizarCabFact("facturas", cadWhere, cadMen)
+            b = ActualizarCabFact("facturas", cadwhere, cadMen)
             cadMen = "Actualizando Factura: " & cadMen
         End If
     End If
@@ -1986,12 +1986,12 @@ EContab:
         
         SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
         SQL = SQL & " Select *," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "facturas", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "facturas", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
 
-Public Function PasarFacturaADV(cadWhere As String, CodCCost As String, CtaBan As String, FecVen As String, TipoM As String, FecFac As Date, Observac As String) As Boolean
+Public Function PasarFacturaADV(cadwhere As String, CodCCost As String, CtaBan As String, FecVen As String, TipoM As String, FecFac As Date, Observac As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariges.scafac --> conta.cabfact
 ' ariges.slifac --> conta.linfact
@@ -2013,18 +2013,18 @@ Dim Obs As String
     
     If TipoM <> "FIN" Then
         
-        b = InsertarCabFactADV(cadWhere, Observac, cadMen)
+        b = InsertarCabFactADV(cadwhere, Observac, cadMen)
         cadMen = "Insertando Cab. Factura: " & cadMen
         
         If b Then
             CCoste = CodCCost
             'Insertar lineas de Factura en la Conta
-            b = InsertarLinFactADV("advfacturas", cadWhere, cadMen)
+            b = InsertarLinFactADV("advfacturas", cadwhere, cadMen)
             cadMen = "Insertando Lin. Factura: " & cadMen
     
             '++monica:añadida la parte de insertar en tesoreria
             If b Then
-                b = InsertarEnTesoreriaNewADV(cadWhere, CtaBan, FecVen, cadMen)
+                b = InsertarEnTesoreriaNewADV(cadwhere, CtaBan, FecVen, cadMen)
                 cadMen = "Insertando en Tesoreria: " & cadMen
             End If
         End If
@@ -2045,11 +2045,11 @@ Dim Obs As String
         End If
     
         If b Then
-            Socio = DevuelveValor("select codsocio from advfacturas where " & cadWhere)
+            Socio = DevuelveValor("select codsocio from advfacturas where " & cadwhere)
             CtaSocio = DevuelveValor("select codmaccli from rsocios_seccion where codsocio = " & Socio & " and codsecci = " & vParamAplic.SeccionADV)
         
         
-            b = InsertarLinAsientoFactInt("advfacturas", cadWhere, cadMen, CtaSocio, Mc.Contador)
+            b = InsertarLinAsientoFactInt("advfacturas", cadwhere, cadMen, CtaSocio, Mc.Contador)
             cadMen = "Insertando Lin. Factura Interna: " & cadMen
         
             Set Mc = Nothing
@@ -2058,7 +2058,7 @@ Dim Obs As String
         '++monica:añadida la parte de insertar en tesoreria
         If b Then
             CCoste = CodCCost
-            b = InsertarEnTesoreriaNewADV(cadWhere, CtaBan, FecVen, cadMen)
+            b = InsertarEnTesoreriaNewADV(cadwhere, CtaBan, FecVen, cadMen)
             cadMen = "Insertando en Tesoreria: " & cadMen
         End If
     
@@ -2066,7 +2066,7 @@ Dim Obs As String
 
     If b Then
         'Poner intconta=1 en ariagro.facturas
-        b = ActualizarCabFact("advfacturas", cadWhere, cadMen)
+        b = ActualizarCabFact("advfacturas", cadwhere, cadMen)
         cadMen = "Actualizando Factura: " & cadMen
     End If
     
@@ -2097,7 +2097,7 @@ EContab:
         
         SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
         SQL = SQL & " Select *," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "advfacturas", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "advfacturas", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
@@ -2106,20 +2106,20 @@ Public Function InsertarCabAsientoDia(Diario As String, Asiento As String, Fecha
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 
     On Error GoTo EInsertar
        
     
-    cad = Format(Diario, "00") & ", " & DBSet(Fecha, "F") & "," & Format(Asiento, "000000") & ","
-    cad = cad & "''," & ValorNulo & "," & DBSet(Obs, "T")
-    cad = "(" & cad & ")"
+    Cad = Format(Diario, "00") & ", " & DBSet(Fecha, "F") & "," & Format(Asiento, "000000") & ","
+    Cad = Cad & "''," & ValorNulo & "," & DBSet(Obs, "T")
+    Cad = "(" & Cad & ")"
 
     'Insertar en la contabilidad
     SQL = "INSERT INTO cabapu (numdiari, fechaent, numasien, bloqactu, numaspre, obsdiari) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -2132,7 +2132,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarLinAsientoFactInt(cadTabla As String, cadWhere As String, cadErr As String, CtaSocio As String, Optional Contador As Long) As Boolean
+Private Function InsertarLinAsientoFactInt(cadTabla As String, cadwhere As String, cadErr As String, CtaSocio As String, Optional Contador As Long) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim numdocum As String
@@ -2143,9 +2143,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim cadMen As String
 Dim FeFact As Date
 
@@ -2155,7 +2155,7 @@ Dim cadCampo As String
 
     InsertarLinAsientoFactInt = False
 
-    TotalFac = DevuelveValor("select totalfac from advfacturas where " & cadWhere)
+    TotalFac = DevuelveValor("select totalfac from advfacturas where " & cadwhere)
     'utilizamos sfamia.ctaventa o sfamia.aboventa
     If TotalFac >= 0 Then
         cadCampo = "advfamia.ctaventa"
@@ -2172,7 +2172,7 @@ Dim cadCampo As String
     SQL = SQL & " FROM ((advfacturas_lineas inner join usuarios.stipom on advfacturas_lineas.codtipom=usuarios.stipom.codtipom) "
     SQL = SQL & " inner join advartic on advfacturas_lineas.codartic=advartic.codartic) "
     SQL = SQL & " inner join advfamia on advartic.codfamia=advfamia.codfamia "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "advfacturas", "advfacturas_lineas")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "advfacturas", "advfacturas_lineas")
     If vEmpresa.TieneAnalitica Then
         SQL = SQL & " GROUP BY 5,7 " '& cadCampo, codccost
     Else
@@ -2184,7 +2184,7 @@ Dim cadCampo As String
     
     RS.Open SQL, conn, adOpenDynamic, adLockOptimistic, adCmdText
             
-    i = 0
+    I = 0
     ImporteD = 0
     ImporteH = 0
     
@@ -2200,59 +2200,59 @@ Dim cadCampo As String
     
     
     While Not RS.EOF And b
-        i = i + 1
+        I = I + 1
         
         FeFact = RS!fecfactu
         
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
         
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If RS.Fields(5).Value < 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(5).Value * (-1), "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(5).Value * (-1), "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
         
             ImporteD = ImporteD + (CCur(RS.Fields(5).Value) * (-1))
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet((RS.Fields(5).Value), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet((RS.Fields(5).Value), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
         
             ImporteH = ImporteH + CCur(RS.Fields(5).Value)
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
 
         RS.MoveNext
     Wend
     
-    If b And i > 0 Then
-        i = i + 1
+    If b And I > 0 Then
+        I = I + 1
                 
         ' el Total es sobre la cuenta del cliente
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FeFact, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & ","
-        cad = cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FeFact, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & ","
+        Cad = Cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
             
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If ImporteD - ImporteH > 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet(ImporteD - ImporteH, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet(ImporteD - ImporteH, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet(((ImporteD - ImporteH) * -1), "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet(((ImporteD - ImporteH) * -1), "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
         
     End If
         
@@ -2267,7 +2267,7 @@ eInsertarLinAsientoFactInt:
 End Function
 
 
-Private Function InsertarLinAsientoFactIntPOZ(cadTabla As String, cadWhere As String, cadErr As String, CtaSocio As String, Optional Contador As Long) As Boolean
+Private Function InsertarLinAsientoFactIntPOZ(cadTabla As String, cadwhere As String, cadErr As String, CtaSocio As String, Optional Contador As Long) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim numdocum As String
@@ -2278,9 +2278,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim cadMen As String
 Dim FeFact As Date
 Dim ImpConsumo As Currency
@@ -2303,7 +2303,7 @@ Dim cadCampo As String
         End If
         
         SQL = SQL & " FROM rrecibpozos inner join usuarios.stipom on rrecibpozos.codtipom=usuarios.stipom.codtipom "
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
         
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 1,2,3,4,7 " '& cadCampo, codccost
@@ -2322,8 +2322,8 @@ Dim cadCampo As String
         
         
         
-        cad = ""
-        i = 0
+        Cad = ""
+        I = 1
         totimp = 0
         If Not RS.EOF Then
             
@@ -2333,91 +2333,91 @@ Dim cadCampo As String
     
             b = True
             If ImpConsumo <> 0 Then
-                i = i + 1
+                I = I + 1
             
                 FeFact = RS!fecfactu
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(vParamAplic.CtaVentasConsPOZ, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(vParamAplic.CtaVentasConsPOZ, "T") & "," & DBSet(numdocum, "T") & ","
                 
                 ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
                 If ImpConsumo < 0 Then
                     ' importe al debe en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpConsumo * (-1), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpConsumo * (-1), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 
                     ImporteD = ImporteD + (CCur(ImpConsumo) * (-1))
                 Else
                     ' importe al haber en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpConsumo, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpConsumo, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 
                     ImporteH = ImporteH + CCur(ImpConsumo)
                 End If
                 
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
 
             End If
             
             
             If b And ImpCuota <> 0 Then
-                i = i + 1
+                I = I + 1
             
                 FeFact = RS!fecfactu
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(vParamAplic.CtaVentasCuoPOZ, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(vParamAplic.CtaVentasCuoPOZ, "T") & "," & DBSet(numdocum, "T") & ","
                 
                 ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
                 If ImpCuota < 0 Then
                     ' importe al debe en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpCuota * (-1), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpCuota * (-1), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 
                     ImporteD = ImporteD + (CCur(ImpCuota) * (-1))
                 Else
                     ' importe al haber en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpCuota, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpCuota, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 
                     ImporteH = ImporteH + CCur(ImpCuota)
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
                 
             End If
             
         
-            If b And i > 0 Then
-                i = i + 1
+            If b And I > 1 Then
+                I = 1
                         
                 ' el Total es sobre la cuenta del cliente
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FeFact, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & ","
-                cad = cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FeFact, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & ","
+                Cad = Cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
                     
                 ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
                 If ImporteD - ImporteH > 0 Then
                     ' importe al debe en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImporteD - ImporteH, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImporteD - ImporteH, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
                 Else
                     ' importe al haber en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet(((ImporteD - ImporteH) * -1), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoInt, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet(((ImporteD - ImporteH) * -1), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
         End If
         
@@ -2438,7 +2438,7 @@ End Function
 
 
 
-Public Function InsertarLinAsientoDia(cad As String, cadErr As String) As Boolean
+Public Function InsertarLinAsientoDia(Cad As String, cadErr As String) As Boolean
 ' el Tipo me indica desde donde viene la llamada
 ' tipo = 0 srecau.codmacta
 ' tipo = 1 scaalb.codmacta
@@ -2446,7 +2446,7 @@ Public Function InsertarLinAsientoDia(cad As String, cadErr As String) As Boolea
 Dim RS As ADODB.Recordset
 Dim Aux As String
 Dim SQL As String
-Dim i As Byte
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 
     On Error GoTo EInLinea
@@ -2454,7 +2454,7 @@ Dim totimp As Currency, ImpLinea As Currency
  
     SQL = "INSERT INTO linapu (numdiari, fechaent, numasien, linliapu, codmacta, numdocum, codconce, "
     SQL = SQL & " ampconce, timporteD, timporteH, codccost, ctacontr, idcontab, punteada) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     
     ConnConta.Execute SQL
 
@@ -2469,7 +2469,7 @@ End Function
 
 
 
-Public Function PasarFacturaBOD(cadWhere As String, CodCCost As String, CtaBan As String, FecVen As String, Tipo As Byte) As Boolean
+Public Function PasarFacturaBOD(cadwhere As String, CodCCost As String, CtaBan As String, FecVen As String, tipo As Byte) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariagro.rbodfacturas --> conta.cabfact
 ' ariagro.rbodfacturas_variedad --> conta.linfact
@@ -2486,19 +2486,19 @@ Dim SQL As String
     ConnConta.BeginTrans
     conn.BeginTrans
     
-    
     'Insertar en la conta Cabecera Factura
-    b = InsertarCabFactBOD(cadWhere, cadMen, Tipo)
+    b = InsertarCabFactBOD(cadwhere, cadMen, tipo)
     cadMen = "Insertando Cab. Factura: " & cadMen
+    
     
     If b Then
         CCoste = CodCCost
         'Insertar lineas de Factura en la Conta
-        Select Case Tipo
+        Select Case tipo
             Case 0
-                b = InsertarLinFactBOD("rbodfact1", cadWhere, cadMen)
+                b = InsertarLinFactBOD("rbodfact1", cadwhere, cadMen)
             Case 1
-                b = InsertarLinFactBOD("rbodfact2", cadWhere, cadMen)
+                b = InsertarLinFactBOD("rbodfact2", cadwhere, cadMen)
         End Select
         
         'b = InsertarLinFactBOD("rbodfacturas", cadWHERE, cadMen)
@@ -2506,16 +2506,15 @@ Dim SQL As String
 
         '++monica:añadida la parte de insertar en tesoreria
         If b Then
-            b = InsertarEnTesoreriaNewBOD(cadWhere, CtaBan, FecVen, cadMen, Tipo)
+            b = InsertarEnTesoreriaNewBOD(cadwhere, CtaBan, FecVen, cadMen, tipo)
             cadMen = "Insertando en Tesoreria: " & cadMen
         End If
-        
         '++
 
 
         If b Then
             'Poner intconta=1 en ariagro.facturas
-            b = ActualizarCabFact("rbodfacturas", cadWhere, cadMen)
+            b = ActualizarCabFact("rbodfacturas", cadwhere, cadMen)
             cadMen = "Actualizando Factura: " & cadMen
         End If
     End If
@@ -2544,13 +2543,13 @@ EContab:
         
         SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
         SQL = SQL & " Select tmpfactu.*," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rbodfacturas", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rbodfacturas", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
 
 
-Public Function PasarFacturaTel(cadWhere As String, CodCCost As String, CtaVtas As String, CodIva As String) As Boolean
+Public Function PasarFacturaTel(cadwhere As String, CodCCost As String, CtaVtas As String, CodIva As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariagro.rbodfacturas --> conta.cabfact
 ' ariagro.rbodfacturas_variedad --> conta.linfact
@@ -2570,13 +2569,13 @@ Dim SQL As String
     CodiIVA = CodIva
     
     'Insertar en la conta Cabecera Factura
-    b = InsertarCabFactTEL(cadWhere, cadMen)
+    b = InsertarCabFactTEL(cadwhere, cadMen)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
         CCoste = CodCCost
         'Insertar lineas de Factura en la Conta
-        b = InsertarLinFactTEL(CtaVtas, cadWhere, cadMen)
+        b = InsertarLinFactTEL(CtaVtas, cadwhere, cadMen)
         
         cadMen = "Insertando Lin. Factura: " & cadMen
 
@@ -2592,7 +2591,7 @@ Dim SQL As String
 
         If b Then
             'Poner intconta=1 en ariagro.facturas
-            b = ActualizarCabFact("rtelmovil", cadWhere, cadMen)
+            b = ActualizarCabFact("rtelmovil", cadwhere, cadMen)
             cadMen = "Actualizando Factura: " & cadMen
         End If
     End If
@@ -2615,7 +2614,7 @@ EContab:
         
         SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
         SQL = SQL & " Select tmpfactu.*," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rtelmovil", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rtelmovil", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
@@ -2624,11 +2623,11 @@ End Function
 
 
 
-Private Function InsertarCabFact(cadWhere As String, cadErr As String) As Boolean
+Private Function InsertarCabFact(cadwhere As String, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 
 
     On Error GoTo EInsertar
@@ -2638,12 +2637,12 @@ Dim cad As String
     SQL = SQL & "totalfac,codiiva1,codiiva2,codiiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3 "
     SQL = SQL & " FROM (" & "facturas inner join " & "stipom on facturas.codtipom=stipom.codtipom) "
     SQL = SQL & "INNER JOIN " & "clientes ON facturas.codclien=clientes.codclien "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -2662,7 +2661,7 @@ Dim cad As String
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!codiiva1, "N") & "," & DBSet(RS!codiiva2, "N", "S") & "," & DBSet(RS!codiiva3, "N", "S") & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -2672,7 +2671,7 @@ Dim cad As String
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -2685,11 +2684,11 @@ EInsertar:
 End Function
 
 
-Private Function InsertarCabFactADV(cadWhere As String, Observac As String, cadErr As String) As Boolean
+Private Function InsertarCabFactADV(cadwhere As String, Observac As String, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 
 
     On Error GoTo EInsertar
@@ -2700,12 +2699,12 @@ Dim cad As String
     SQL = SQL & " FROM ((" & "advfacturas inner join " & "usuarios.stipom on advfacturas.codtipom=usuarios.stipom.codtipom) "
     SQL = SQL & "INNER JOIN rsocios ON advfacturas.codsocio=rsocios.codsocio) "
     SQL = SQL & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.SeccionADV, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -2726,7 +2725,7 @@ Dim cad As String
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!codiiva1, "N") & "," & DBSet(RS!codiiva2, "N", "S") & "," & DBSet(RS!codiiva3, "N", "S") & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -2737,7 +2736,7 @@ Dim cad As String
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -2749,16 +2748,16 @@ EInsertar:
     End If
 End Function
 
-Private Function InsertarCabFactBOD(cadWhere As String, cadErr As String, Tipo As Byte) As Boolean
+Private Function InsertarCabFactBOD(cadwhere As String, cadErr As String, tipo As Byte) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Seccion As Integer
 
     On Error GoTo EInsertar
     
-    Select Case Tipo
+    Select Case tipo
         Case 0
             Seccion = vParamAplic.SeccionAlmaz
         Case 1
@@ -2772,12 +2771,12 @@ Dim Seccion As Integer
     SQL = SQL & " FROM ((" & "rbodfacturas inner join " & "usuarios.stipom on rbodfacturas.codtipom=usuarios.stipom.codtipom) "
     SQL = SQL & "INNER JOIN rsocios ON rbodfacturas.codsocio=rsocios.codsocio) "
     SQL = SQL & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -2795,7 +2794,7 @@ Dim Seccion As Integer
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!codiiva1, "N") & "," & DBSet(RS!codiiva2, "N", "S") & "," & DBSet(RS!codiiva3, "N", "S") & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -2806,7 +2805,7 @@ Dim Seccion As Integer
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -2820,11 +2819,11 @@ End Function
 
 
 
-Private Function InsertarCabFactTEL(cadWhere As String, cadErr As String) As Boolean
+Private Function InsertarCabFactTEL(cadwhere As String, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Seccion As Integer
 Dim PorcIva As String
 
@@ -2837,12 +2836,12 @@ Dim PorcIva As String
     SQL = SQL & " FROM (rtelmovil "
     SQL = SQL & "INNER JOIN rsocios ON rtelmovil.codsocio=rsocios.codsocio) "
     SQL = SQL & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -2862,7 +2861,7 @@ Dim PorcIva As String
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(CodiIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -2873,7 +2872,7 @@ Dim PorcIva As String
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -2887,15 +2886,15 @@ End Function
 
 
 
-Private Function InsertarLinFact(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFact(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 
     On Error GoTo EInLinea
@@ -2905,26 +2904,26 @@ Dim totimp As Currency, ImpLinea As Currency
         SQL = SQL & " FROM ((slifac inner join stipom on slifac.codtipom=stipom.codtipom) "
         SQL = SQL & " inner join sartic on slifac.codartic=sartic.codartic) "
         SQL = SQL & " inner join sfamia on sartic.codfamia=sfamia.codfamia "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "scafac", "slifac")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "scafac", "slifac")
         SQL = SQL & " GROUP BY sfamia.codfamia "
     Else
         SQL = " SELECT slifpc.codprove,numfactu,fecfactu,sartic.codfamia,sfamia.ctacompr,sfamia.abocompr,sum(importel) as importe "
         SQL = SQL & " FROM (slifpc  "
         SQL = SQL & " inner join sartic on slifpc.codartic=sartic.codartic) "
         SQL = SQL & " inner join sfamia on sartic.codfamia=sfamia.codfamia "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "scafpc", "slifpc")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "scafpc", "slifpc")
         SQL = SQL & " GROUP BY sfamia.codfamia "
     End If
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         'ImpLinea = RS!Importe - CCur(CalcularDto(CStr(RS!Importe), CStr(DtoPPago)))
@@ -2939,7 +2938,7 @@ Dim totimp As Currency, ImpLinea As Currency
         SQL = ""
         Sql2 = ""
         If cadTabla = "scafac" Then
-            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
             If Not conCtaAlt Then 'cliente no tiene cuenta alternativa
                 If ImpLinea >= 0 Then
                     SQL = SQL & DBSet(RS!ctaventa, "T")
@@ -2954,7 +2953,7 @@ Dim totimp As Currency, ImpLinea As Currency
                 End If
             End If
         Else
-            SQL = NumRegis & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = NumRegis & "," & Year(RS!fecfactu) & "," & I & ","
             If ImpLinea >= 0 Then
                 SQL = SQL & DBSet(RS!ctacompr, "T")
             Else
@@ -2970,9 +2969,9 @@ Dim totimp As Currency, ImpLinea As Currency
             SQL = SQL & DBSet(CCoste, "T")
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -2992,9 +2991,9 @@ Dim totimp As Currency, ImpLinea As Currency
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -3003,14 +3002,14 @@ Dim totimp As Currency, ImpLinea As Currency
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         If cadTabla = "scafac" Then
             SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
         Else
             SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
         End If
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -3027,15 +3026,15 @@ End Function
 
 
 
-Private Function InsertarLinFact_new(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFact_new(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -3085,7 +3084,7 @@ Dim NumDigit3 As String
         SQL = SQL & " FROM ((facturas_envases inner join stipom on facturas_envases.codtipom=stipom.codtipom) "
         SQL = SQL & " inner join sartic on facturas_envases.codartic=sartic.codartic) "
         SQL = SQL & " inner join sfamia on sartic.codfamia=sfamia.codfamia "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "facturas", "facturas_envases")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "facturas", "facturas_envases")
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 5,7 " '& cadCampo, codccost
         Else
@@ -3103,7 +3102,7 @@ Dim NumDigit3 As String
         SQL = SQL & " inner join tipomer on albaran.codtimer = tipomer.codtimer) "
         SQL = SQL & " inner join albaran_variedad on facturas_variedad.numalbar = albaran_variedad.numalbar and facturas_variedad.numlinealbar = albaran_variedad.numlinea) "
         SQL = SQL & " inner join variedades on albaran_variedad.codvarie=variedades.codvarie) "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "facturas", "facturas_variedad")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "facturas", "facturas_variedad")
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 5,7 " '& cadCampo1, codccost
         Else
@@ -3126,7 +3125,7 @@ Dim NumDigit3 As String
             SQL = SQL & " FROM (slifpc  "
             SQL = SQL & " inner join sartic on slifpc.codartic=sartic.codartic) "
             SQL = SQL & " inner join sfamia on sartic.codfamia=sfamia.codfamia "
-            SQL = SQL & " WHERE " & Replace(cadWhere, "scafpc", "slifpc")
+            SQL = SQL & " WHERE " & Replace(cadwhere, "scafpc", "slifpc")
             SQL = SQL & " GROUP BY " & cadCampo
             If vEmpresa.TieneAnalitica Then
                 SQL = SQL & ", sfamia.codccost "
@@ -3152,7 +3151,7 @@ Dim NumDigit3 As String
                  SQL = " SELECT 2, variedades.ctacomtercero as cuenta, sum(rlifter.importel) as importe "
             End If
              SQL = SQL & " FROM rlifter, variedades "
-             SQL = SQL & " WHERE " & Replace(cadWhere, "rcafter", "rlifter") & " and"
+             SQL = SQL & " WHERE " & Replace(cadwhere, "rcafter", "rlifter") & " and"
              SQL = SQL & " rlifter.codvarie = variedades.codvarie "
              SQL = SQL & " group by 1,2 "
              
@@ -3164,7 +3163,7 @@ Dim NumDigit3 As String
                 SQL = SQL & " select 1, fvarconce.codmacpr as cuenta, rcafter.impcargo as importe "
              End If
              SQL = SQL & " FROM rcafter, fvarconce "
-             SQL = SQL & " WHERE " & cadWhere & " and"
+             SQL = SQL & " WHERE " & cadwhere & " and"
              SQL = SQL & " rcafter.concepcargo = fvarconce.codconce "
              SQL = SQL & " group by 1,2 "
              
@@ -3178,12 +3177,12 @@ Dim NumDigit3 As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         'ImpLinea = RS!Importe - CCur(CalcularDto(CStr(RS!Importe), CStr(DtoPPago)))
@@ -3199,7 +3198,7 @@ Dim NumDigit3 As String
         Sql2 = ""
         
         If cadTabla = "facturas" Then 'VENTAS a clientes
-            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
             SQL = SQL & DBSet(RS!cuenta, "T")
 '            If Not conCtaAlt Then 'cliente no tiene cuenta alternativa
 '                If ImpLinea >= 0 Then
@@ -3218,7 +3217,7 @@ Dim NumDigit3 As String
             If cadTabla = "scafpc" Then 'COMPRAS
                 'Laura 24/10/2006
                 'SQL = numRegis & "," & Year(RS!FecFactu) & "," & i & ","
-                SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+                SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
                 
     '            If ImpLinea >= 0 Then
                     SQL = SQL & DBSet(RS!cuenta, "T")
@@ -3226,7 +3225,7 @@ Dim NumDigit3 As String
     '                SQL = SQL & DBSet(RS!abocompr, "T")
     '            End If
             Else 'TRANSPORTE
-                SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+                SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
                 SQL = SQL & DBSet(RS!cuenta, "T")
             End If
         End If
@@ -3251,9 +3250,9 @@ Dim NumDigit3 As String
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -3275,9 +3274,9 @@ Dim NumDigit3 As String
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -3286,14 +3285,14 @@ Dim NumDigit3 As String
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         If cadTabla = "facturas" Then
             SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
         Else
             SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
         End If
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -3307,15 +3306,15 @@ EInLinea:
 End Function
 
 
-Private Function InsertarLinFactADV(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactADV(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -3344,7 +3343,7 @@ Dim NumDigit3 As String
         SQL = SQL & " FROM ((advfacturas_lineas inner join usuarios.stipom on advfacturas_lineas.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & " inner join advartic on advfacturas_lineas.codartic=advartic.codartic) "
         SQL = SQL & " inner join advfamia on advartic.codfamia=advfamia.codfamia "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "advfacturas", "advfacturas_lineas")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "advfacturas", "advfacturas_lineas")
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 5,7 " '& cadCampo, codccost
         Else
@@ -3357,12 +3356,12 @@ Dim NumDigit3 As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
 ' --monica:no hay descuentos
 '        '---- Laura: 10/10/2006
@@ -3382,7 +3381,7 @@ Dim NumDigit3 As String
         Sql2 = ""
         
         If cadTabla = "advfacturas" Then 'VENTAS a socios
-            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
             SQL = SQL & DBSet(RS!cuenta, "T")
         End If
         
@@ -3397,9 +3396,9 @@ Dim NumDigit3 As String
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -3420,9 +3419,9 @@ Dim NumDigit3 As String
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -3431,10 +3430,10 @@ Dim NumDigit3 As String
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -3448,15 +3447,15 @@ EInLinea:
 End Function
 
 
-Private Function InsertarLinFactBOD(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactBOD(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -3492,7 +3491,7 @@ Dim NumDigit3 As String
     
     SQL = SQL & " FROM (rbodfacturas_lineas inner join usuarios.stipom on rbodfacturas_lineas.codtipom=usuarios.stipom.codtipom) "
     SQL = SQL & " inner join variedades on rbodfacturas_lineas.codvarie=variedades.codvarie "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rbodfacturas", "rbodfacturas_lineas")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rbodfacturas", "rbodfacturas_lineas")
     If vEmpresa.TieneAnalitica Then
         SQL = SQL & " GROUP BY 5,7 " '& cadCampo, codccost
     Else
@@ -3502,12 +3501,12 @@ Dim NumDigit3 As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
 ' --monica:no hay descuentos
 '        '---- Laura: 10/10/2006
@@ -3526,7 +3525,7 @@ Dim NumDigit3 As String
         SQL = ""
         Sql2 = ""
         
-        SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+        SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
         SQL = SQL & DBSet(RS!cuenta, "T")
         
         Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -3540,9 +3539,9 @@ Dim NumDigit3 As String
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -3563,9 +3562,9 @@ Dim NumDigit3 As String
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -3574,10 +3573,10 @@ Dim NumDigit3 As String
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -3591,15 +3590,15 @@ EInLinea:
 End Function
 
 
-Private Function InsertarLinFactTEL(CtaVtas As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactTEL(CtaVtas As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -3620,23 +3619,23 @@ Dim NumDigit3 As String
     End If
     
     SQL = SQL & " FROM rtelmovil "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     If Not RS.EOF Then
-        SQLaux = cad
+        SQLaux = Cad
         
         ImpLinea = DBLet(RS!Importe, "N")
         totimp = totimp + DBLet(RS!Importe, "N")
 
         'concatenamos linea para insertar en la tabla de conta.linfact
-        SQL = "'" & RS!numserie & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+        SQL = "'" & RS!numserie & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
         SQL = SQL & DBSet(RS!cuenta, "T")
         SQL = SQL & "," & DBSet(ImpLinea, "N") & ","
         
@@ -3648,9 +3647,9 @@ Dim NumDigit3 As String
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     End If
     RS.Close
@@ -3658,9 +3657,9 @@ Dim NumDigit3 As String
     
 
     'Insertar en la contabilidad
-    If cad <> "" Then
+    If Cad <> "" Then
         SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -3675,7 +3674,7 @@ End Function
 
 
 
-Private Function InsertarLinFactSoc(cadTabla As String, cadWhere As String, cadErr As String, Tipo As Byte, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactSoc(cadTabla As String, cadwhere As String, cadErr As String, tipo As Byte, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
@@ -3683,8 +3682,8 @@ Dim SQLaux As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -3703,11 +3702,11 @@ Dim ImpAnticipo As Currency
     
     On Error GoTo EInLinea
     
-    TipoAnt = Tipo
+    TipoAnt = tipo
 '    TipoFactAnt = TipoFact
     
-    If Tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
-        Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
+    If tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
+        tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
         
         TipoFact = CodTipomRECT
 
@@ -3724,13 +3723,13 @@ Dim ImpAnticipo As Currency
 
         ' [Monica] 29/12/2009 si es liquidacion de industria miramos que cuenta coger dependiendo de que el socio sea
         ' tercero o no lo sea
-        SQL = "select mid(rfactsoc.codtipom,1,3) from " & cadTabla & " where " & cadWhere
+        SQL = "select mid(rfactsoc.codtipom,1,3) from " & cadTabla & " where " & cadwhere
         TipoFact = DevuelveValor(SQL)
     
     End If
     
-    If Tipo = 2 And TipoFact = "FLI" Then
-        SQL = "select rfactsoc.codsocio from " & cadTabla & " where " & cadWhere
+    If tipo = 2 And TipoFact = "FLI" Then
+        SQL = "select rfactsoc.codsocio from " & cadTabla & " where " & cadwhere
         Socio = DevuelveValor(SQL)
         
         Set vSocio = New cSocio
@@ -3759,7 +3758,7 @@ Dim ImpAnticipo As Currency
             End If
             
             SQL = SQL & " FROM rfactsoc_variedad, variedades "
-            SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "rfactsoc_variedad") & " and"
+            SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "rfactsoc_variedad") & " and"
             SQL = SQL & " rfactsoc_variedad.codvarie = variedades.codvarie "
             SQL = SQL & " group by 1,2 "
             SQL = SQL & " order by 1,2 "
@@ -3772,7 +3771,7 @@ Dim ImpAnticipo As Currency
     ' fin de lo añadido
     
         If vEmpresa.TieneAnalitica Then
-            Select Case Tipo
+            Select Case tipo
                 Case 1, 3, 7, 9
                      SQL = " SELECT 1, variedades.ctaanticipo as cuenta, sum(rfactsoc_variedad.imporvar) as importe, variedades.codccost "
                 Case 2, 4, 8, 10
@@ -3784,7 +3783,7 @@ Dim ImpAnticipo As Currency
                 SQL = " SELECT 1, variedades.ctaacarecol as cuenta, sum(rfactsoc_variedad.imporvar) as importe, variedades.codccost "
             End If
         Else
-            Select Case Tipo
+            Select Case tipo
                 Case 1, 3, 7, 9
                      SQL = " SELECT 1, variedades.ctaanticipo as cuenta, sum(rfactsoc_variedad.imporvar) as importe "
                 Case 2, 4, 8, 10
@@ -3798,7 +3797,7 @@ Dim ImpAnticipo As Currency
             End If
         End If
         SQL = SQL & " FROM rfactsoc_variedad, variedades "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "rfactsoc_variedad") & " and"
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "rfactsoc_variedad") & " and"
         SQL = SQL & " rfactsoc_variedad.codvarie = variedades.codvarie "
         SQL = SQL & " group by 1,2 "
         SQL = SQL & " order by 1,2 "
@@ -3810,21 +3809,21 @@ Dim ImpAnticipo As Currency
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         ImpLinea = RS!Importe
         
         ' si se trata de una liquidacion hemos de descontar los anticipos por variedad
         ' que no sean anticipo de gastos
-        If (Tipo = 2 Or Tipo = 4 Or Tipo = 8 Or Tipo = 10) And TipoFact <> "FTS" Then
+        If (tipo = 2 Or tipo = 4 Or tipo = 8 Or tipo = 10) And TipoFact <> "FTS" Then
             Sql3 = "select sum(baseimpo) from rfactsoc_anticipos, variedades "
-            Sql3 = Sql3 & " where " & Replace(cadWhere, "rfactsoc", "rfactsoc_anticipos")
+            Sql3 = Sql3 & " where " & Replace(cadwhere, "rfactsoc", "rfactsoc_anticipos")
             Sql3 = Sql3 & " and rfactsoc_anticipos.codvarieanti = variedades.codvarie "
             Sql3 = Sql3 & " and variedades.ctaliquidacion = " & DBSet(RS!cuenta, "N")
             
@@ -3839,7 +3838,7 @@ Dim ImpAnticipo As Currency
         SQL = ""
         Sql2 = ""
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(RS!cuenta, "T")
         
         Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -3857,8 +3856,8 @@ Dim ImpAnticipo As Currency
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -3879,9 +3878,9 @@ Dim ImpAnticipo As Currency
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -3890,40 +3889,40 @@ Dim ImpAnticipo As Currency
 
     ' las retenciones si las hay
     If ImpReten <> 0 Then
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaSocio, "T")
         SQL = SQL & "," & DBSet(ImpReten, "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaReten, "T")
         SQL = SQL & "," & DBSet(ImpReten * (-1), "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     ' las aportaciones de fondo operativo si las hay
     If ImpAport <> 0 Then
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaSocio, "T")
         SQL = SQL & "," & DBSet(ImpAport, "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaAport, "T")
         SQL = SQL & "," & DBSet(ImpAport * (-1), "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     '[Monica]20/12/2013: si es montifrut no descontamos el descuento que tengo grabado a pie
@@ -3932,7 +3931,7 @@ Dim ImpAnticipo As Currency
         ' insertamos todos los gastos a pie de factura rfactsoc_gastos
         SQL = " SELECT rconcepgasto.codmacta as cuenta, sum(rfactsoc_gastos.importe) as importe "
         SQL = SQL & " from rconcepgasto INNER JOIN rfactsoc_gastos ON rconcepgasto.codgasto = rfactsoc_gastos.codgasto "
-        SQL = SQL & " where " & Replace(cadWhere, "rfactsoc", "rfactsoc_gastos")
+        SQL = SQL & " where " & Replace(cadwhere, "rfactsoc", "rfactsoc_gastos")
         SQL = SQL & " group by 1 "
         SQL = SQL & " order by 1 "
         
@@ -3940,21 +3939,21 @@ Dim ImpAnticipo As Currency
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         While Not RS.EOF
-            SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+            SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
             SQL = SQL & DBSet(CtaSocio, "T")
             SQL = SQL & "," & DBSet(RS!Importe, "N") & ","
             SQL = SQL & ValorNulo ' no llevan centro de coste
             
-            cad = cad & "(" & SQL & ")" & ","
-            i = i + 1
+            Cad = Cad & "(" & SQL & ")" & ","
+            I = I + 1
         
-            SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+            SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
             SQL = SQL & DBSet(RS!cuenta, "T")
             SQL = SQL & "," & DBSet(RS!Importe * (-1), "N") & ","
             SQL = SQL & ValorNulo ' no llevan centro de coste
             
-            cad = cad & "(" & SQL & ")" & ","
-            i = i + 1
+            Cad = Cad & "(" & SQL & ")" & ","
+            I = I + 1
         
             RS.MoveNext
         Wend
@@ -3962,14 +3961,14 @@ Dim ImpAnticipo As Currency
     End If
     
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
     
-    Tipo = TipoAnt
+    tipo = TipoAnt
 
 EInLinea:
     If Err.Number <> 0 Then
@@ -3986,7 +3985,7 @@ End Function
 
 
 
-Private Function ActualizarCabFact(cadTabla As String, cadWhere As String, cadErr As String) As Boolean
+Private Function ActualizarCabFact(cadTabla As String, cadwhere As String, cadErr As String) As Boolean
 'Poner la factura como contabilizada
 Dim SQL As String
 
@@ -4001,7 +4000,7 @@ Dim SQL As String
             SQL = "UPDATE " & cadTabla & " SET intconta=1"
             
     End Select
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
 
     conn.Execute SQL
     
@@ -4016,7 +4015,7 @@ End Function
 
 
 
-Private Function ActualizarCabFactSoc(cadTabla As String, cadWhere As String, cadErr As String) As Boolean
+Private Function ActualizarCabFactSoc(cadTabla As String, cadwhere As String, cadErr As String) As Boolean
 'Poner la factura como contabilizada
 Dim SQL As String
 
@@ -4024,7 +4023,7 @@ Dim SQL As String
     
         
     SQL = "UPDATE " & cadTabla & " SET contabilizado=1 "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
 
     conn.Execute SQL
     
@@ -4043,7 +4042,7 @@ End Function
 ' FACTURAS SOCIOS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaSoc(cadWhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String) As Boolean
+Public Function PasarFacturaSoc(cadwhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -4062,15 +4061,15 @@ Dim Obs As String
     Set Mc = New Contadores
         
     '[Monica]29/04/2011: INTERNAS
-    If EsFacturaInterna(cadWhere) Then
+    If EsFacturaInterna(cadwhere) Then
         CtaReten = CtaRete
         CtaAport = CtaApor
         ' Insertamos en el diario
-        b = InsertarAsientoDiario(cadWhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
+        b = InsertarAsientoDiario(cadwhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
         cadMen = "Insertando Factura en Diario: " & cadMen
     Else
        '---- Insertar en la conta Cabecera Factura
-        b = InsertarCabFactSoc(cadWhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
+        b = InsertarCabFactSoc(cadwhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
         cadMen = "Insertando Cab. Factura: " & cadMen
     End If
     
@@ -4085,26 +4084,26 @@ Dim Obs As String
         
         '[Monica]09/05/2013: si la cooperativa es Montifrut, las formas de pago estan en la propia factura
         If vParamAplic.Cooperativa = 12 Then
-            ForpaPosi = DevuelveValor("select codforpa from rfactsoc where " & cadWhere)
+            ForpaPosi = DevuelveValor("select codforpa from rfactsoc where " & cadwhere)
             ForpaNega = ForpaPosi
         End If
         
 '01-06-2009
-        b = InsertarEnTesoreriaSoc(cadWhere, cadMen, FacturaSoc, FecFactuSoc)
+        b = InsertarEnTesoreriaSoc(cadwhere, cadMen, FacturaSoc, FecFactuSoc)
         cadMen = "Insertando en Tesoreria: " & cadMen
 
         If b Then
             CCoste = CodCCost
             '[Monica]29/04/2011: INTERNAS
-            If Not EsFacturaInterna(cadWhere) Then
+            If Not EsFacturaInterna(cadwhere) Then
                 '---- Insertar lineas de Factura en la Conta
-                b = InsertarLinFactSoc("rfactsoc", cadWhere, cadMen, TipoFact, Mc.Contador)
+                b = InsertarLinFactSoc("rfactsoc", cadwhere, cadMen, TipoFact, Mc.Contador)
                 cadMen = "Insertando Lin. Factura: " & cadMen
             End If
             
             If b Then
                 '---- Poner intconta=1 en ariges.scafac
-                b = ActualizarCabFactSoc("rfactsoc", cadWhere, cadMen)
+                b = ActualizarCabFactSoc("rfactsoc", cadwhere, cadMen)
                 cadMen = "Actualizando Factura Socio: " & cadMen
             End If
         End If
@@ -4125,18 +4124,18 @@ EContab:
         conn.RollbackTrans
         PasarFacturaSoc = False
         If Not b Then
-            InsertarTMPErrFacSoc cadMen, cadWhere
+            InsertarTMPErrFacSoc cadMen, cadwhere
         End If
     End If
 End Function
 
 
-Private Function InsertarCabFactProv(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String) As Boolean
+Private Function InsertarCabFactProv(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 
@@ -4148,12 +4147,12 @@ Dim Nulo3 As String
     SQL = SQL & "totalfac,tipoiva1,tipoiva2,tipoiva3,proveedor.codprove, proveedor.nomprove "
     SQL = SQL & " FROM " & "scafpc "
     SQL = SQL & "INNER JOIN " & "proveedor ON scafpc.codprove=proveedor.codprove "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
     
         If Mc.ConseguirContador("1", (RS!FecRecep <= CDate(FechaFin) - 365), True) = 0 Then
@@ -4177,13 +4176,13 @@ Dim Nulo3 As String
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
             SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!TipoIVA1, "N") & "," & DBSet(RS!TipoIVA2, "N", Nulo2) & "," & DBSet(RS!TipoIVA3, "N", Nulo3) & ",0,"
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(RS!FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
             
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
             
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -4208,12 +4207,12 @@ EInsertar:
 End Function
 
 
-Private Function InsertarCabFactSoc(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String) As Boolean
+Private Function InsertarCabFactSoc(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, tipo As Byte, FecRec As Date, TipoM As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -4238,12 +4237,12 @@ Dim Socio As String
     SQL = SQL & " FROM (" & "rfactsoc "
     SQL = SQL & "INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio) "
     SQL = SQL & " INNER JOIN rsocios_seccion ON rfactsoc.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Secci, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         '[Monica]09/05/2013: si la cooperativa es Montifrut la fecha de recepcion es la de factura
         If vParamAplic.Cooperativa = 12 Then
@@ -4281,7 +4280,7 @@ Dim Socio As String
             
             CtaSocio = RS!codmacpro
             Seccion = Secci
-            TipoFact = Tipo
+            TipoFact = tipo
             FecRecep = FecRec
             BancoSoc = DBLet(RS!CodBanco, "N")
             SucurSoc = DBLet(RS!CodSucur, "N")
@@ -4291,7 +4290,7 @@ Dim Socio As String
             TotalTesor = DBLet(RS!TotalFac, "N")
             
             
-            Variedades = VariedadesFactura(cadWhere)
+            Variedades = VariedadesFactura(cadwhere)
             
             Select Case TipoFact
                 Case 1, 7, 9 ' anticipo
@@ -4315,13 +4314,13 @@ Dim Socio As String
             SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
             
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
             
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -4361,7 +4360,7 @@ Dim Socio As String
                 
                 CtaSocio = RS!codmacpro
                 Seccion = Secci
-                TipoFact = Tipo
+                TipoFact = tipo
                 FecRecep = FecRec
                 IbanSoc = DBLet(RS!Iban, "T")
                 BancoSoc = DBLet(RS!CodBanco, "N")
@@ -4372,10 +4371,10 @@ Dim Socio As String
                 
                 '[Monica]08/04/2015: en el caso de catadau vemos si el socio es un asociado para reemplazar la cuenta
                 If vParamAplic.Cooperativa = 0 Then
-                   SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rfactsoc where " & cadWhere & ")"
+                   SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rfactsoc where " & cadwhere & ")"
                    If DevuelveValor(SQL) = 1 Then
                        
-                       SQL = "select codsocio from rfactsoc where " & cadWhere
+                       SQL = "select codsocio from rfactsoc where " & cadwhere
                        Socio = DevuelveValor(SQL)
                        
                        SQL = "select replace(codmacpro,mid(codmacpro,1,length(rseccion.raiz_cliente_socio)), rseccion.raiz_cliente_asociado) "
@@ -4388,7 +4387,7 @@ Dim Socio As String
                 End If
                 
                 
-                Variedades = VariedadesFactura(cadWhere)
+                Variedades = VariedadesFactura(cadwhere)
                 
                 Select Case TipoFact
                     Case 1, 7, 9 ' anticipo
@@ -4412,13 +4411,13 @@ Dim Socio As String
                 SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
                 SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
                 SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-                cad = cad & "(" & SQL & ")"
+                Cad = Cad & "(" & SQL & ")"
                 
                 'Insertar en la contabilidad
                 SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
                 SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
                 SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-                SQL = SQL & " VALUES " & cad
+                SQL = SQL & " VALUES " & Cad
                 ConnConta.Execute SQL
                 
                 'añadido como david para saber que numero de registro corresponde a cada factura
@@ -4445,11 +4444,11 @@ End Function
 
 
 
-Private Function InsertarAsientoDiario(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String) As Boolean
+Private Function InsertarAsientoDiario(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, tipo As Byte, FecRec As Date, TipoM As String) As Boolean
 ' la contabilizacion de las facturas internas de horto, se han de insertar en el diario no en el registro de iva de proveedor
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -4469,12 +4468,12 @@ Dim b As Boolean
     SQL = SQL & " FROM (" & "rfactsoc "
     SQL = SQL & "INNER JOIN rsocios ON rfactsoc.codsocio=rsocios.codsocio) "
     SQL = SQL & " INNER JOIN rsocios_seccion ON rfactsoc.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Secci, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
         
@@ -4497,7 +4496,7 @@ Dim b As Boolean
             
             CtaSocio = RS!codmacpro
             Seccion = Secci
-            TipoFact = Tipo
+            TipoFact = tipo
             FecRecep = FecRec
             BancoSoc = DBLet(RS!CodBanco, "N")
             SucurSoc = DBLet(RS!CodSucur, "N")
@@ -4507,10 +4506,10 @@ Dim b As Boolean
             
             '[Monica]08/04/2015: en el caso de catadau vemos si el socio es un asociado para reemplazar la cuenta
             If vParamAplic.Cooperativa = 0 Then
-               SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rfactsoc where " & cadWhere & ")"
+               SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rfactsoc where " & cadwhere & ")"
                If DevuelveValor(SQL) = 1 Then
                    
-                   SQL = "select codsocio from rfactsoc where " & cadWhere
+                   SQL = "select codsocio from rfactsoc where " & cadwhere
                    Socio = DevuelveValor(SQL)
                    
                    SQL = "select replace(codmacpro,mid(codmacpro,1,length(rseccion.raiz_cliente_socio)), rseccion.raiz_cliente_asociado) "
@@ -4522,7 +4521,7 @@ Dim b As Boolean
                End If
             End If
             
-            Variedades = VariedadesFactura(cadWhere)
+            Variedades = VariedadesFactura(cadwhere)
             
             Obs = "Contabilización Factura Interna de Fecha " & Format(FecRecep, "dd/mm/yyyy")
         
@@ -4531,10 +4530,10 @@ Dim b As Boolean
             cadMen = "Insertando Cab. Asiento: " & cadMen
     
             If b Then
-                Socio = DevuelveValor("select codsocio from rfactsoc where " & cadWhere)
+                Socio = DevuelveValor("select codsocio from rfactsoc where " & cadwhere)
 '                CtaSocio = DevuelveValor("select codmacpro from rsocios_seccion where codsocio = " & Socio & " and codsecci = " & vParamAplic.SeccionHorto)
             
-                b = InsertarLinAsientoFactIntProv("rfactsoc", cadWhere, cadMen, Tipo, CtaSocio, Mc.Contador)
+                b = InsertarLinAsientoFactIntProv("rfactsoc", cadwhere, cadMen, tipo, CtaSocio, Mc.Contador)
                 cadMen = "Insertando Lin. Factura Interna: " & cadMen
             
                 Set Mc = Nothing
@@ -4558,7 +4557,7 @@ End Function
 
 
 
-Private Function InsertarLinAsientoFactIntProv(cadTabla As String, cadWhere As String, cadErr As String, Tipo As Byte, CtaSocio As String, Optional Contador As Long) As Boolean
+Private Function InsertarLinAsientoFactIntProv(cadTabla As String, cadwhere As String, cadErr As String, tipo As Byte, CtaSocio As String, Optional Contador As Long) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim numdocum As String
@@ -4569,9 +4568,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim cadMen As String
 Dim FeFact As Date
 
@@ -4593,27 +4592,27 @@ Dim NumFact As Long
     
     InsertarLinAsientoFactIntProv = False
     
-    TipoAnt = Tipo
+    TipoAnt = tipo
 '    TipoFactAnt = TipoFact
     
-    If Tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
-        Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
+    If tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
+        tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
         
         TipoFact = CodTipomRECT
 
     Else
         ' [Monica] 29/12/2009 si es liquidacion de industria miramos que cuenta coger dependiendo de que el socio sea
         ' tercero o no lo sea
-        SQL = "select mid(rfactsoc.codtipom,1,3) from " & cadTabla & " where " & cadWhere
+        SQL = "select mid(rfactsoc.codtipom,1,3) from " & cadTabla & " where " & cadwhere
         TipoFact = DevuelveValor(SQL)
     
     End If
     
     FeFact = FecFactuSoc
-    NumFact = DevuelveValor("select numfactu from rfactsoc where " & cadWhere)
+    NumFact = DevuelveValor("select numfactu from rfactsoc where " & cadwhere)
     
-    If Tipo = 2 And TipoFact = "FLI" Then
-        SQL = "select rfactsoc.codsocio from " & cadTabla & " where " & cadWhere
+    If tipo = 2 And TipoFact = "FLI" Then
+        SQL = "select rfactsoc.codsocio from " & cadTabla & " where " & cadwhere
         Socio = DevuelveValor(SQL)
         
         Set vSocio = New cSocio
@@ -4632,7 +4631,7 @@ Dim NumFact As Long
                 End If
             End If
             SQL = SQL & " FROM rfactsoc_variedad, variedades "
-            SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "rfactsoc_variedad") & " and"
+            SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "rfactsoc_variedad") & " and"
             SQL = SQL & " rfactsoc_variedad.codvarie = variedades.codvarie "
             SQL = SQL & " group by 1,2 "
             SQL = SQL & " order by 1,2 "
@@ -4645,7 +4644,7 @@ Dim NumFact As Long
     ' fin de lo añadido
     
         If vEmpresa.TieneAnalitica Then
-            Select Case Tipo
+            Select Case tipo
                 Case 1, 3, 7, 9
                      SQL = " SELECT 1, variedades.ctaanticipo as cuenta, sum(rfactsoc_variedad.imporvar) as importe, variedades.codccost "
                 Case 2, 4, 8, 10
@@ -4657,7 +4656,7 @@ Dim NumFact As Long
                 SQL = " SELECT 1, variedades.ctaacarecol as cuenta, sum(rfactsoc_variedad.imporvar) as importe, variedades.codccost "
             End If
         Else
-            Select Case Tipo
+            Select Case tipo
                 Case 1, 3, 7, 9
                      SQL = " SELECT 1, variedades.ctaanticipo as cuenta, sum(rfactsoc_variedad.imporvar) as importe "
                 Case 2, 4, 8, 10
@@ -4670,7 +4669,7 @@ Dim NumFact As Long
             End If
         End If
         SQL = SQL & " FROM rfactsoc_variedad, variedades "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rfactsoc", "rfactsoc_variedad") & " and"
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rfactsoc", "rfactsoc_variedad") & " and"
         SQL = SQL & " rfactsoc_variedad.codvarie = variedades.codvarie "
         SQL = SQL & " group by 1,2 "
         SQL = SQL & " order by 1,2 "
@@ -4680,7 +4679,7 @@ Dim NumFact As Long
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    i = 0
+    I = 0
     ImporteD = 0
     ImporteH = 0
     
@@ -4693,20 +4692,20 @@ Dim NumFact As Long
     
     b = True
 
-    cad = ""
+    Cad = ""
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         ImpLinea = RS!Importe
         
         ' si se trata de una liquidacion hemos de descontar los anticipos por variedad
         ' que no sean anticipo de gastos
-        If (Tipo = 2 Or Tipo = 4 Or Tipo = 8 Or Tipo = 10) And TipoFact <> "FTS" Then
+        If (tipo = 2 Or tipo = 4 Or tipo = 8 Or tipo = 10) And TipoFact <> "FTS" Then
             Sql3 = "select sum(baseimpo) from rfactsoc_anticipos, variedades "
-            Sql3 = Sql3 & " where " & Replace(cadWhere, "rfactsoc", "rfactsoc_anticipos")
+            Sql3 = Sql3 & " where " & Replace(cadwhere, "rfactsoc", "rfactsoc_anticipos")
             Sql3 = Sql3 & " and rfactsoc_anticipos.codvarieanti = variedades.codvarie "
             Sql3 = Sql3 & " and variedades.ctaliquidacion = " & DBSet(RS!cuenta, "N")
             
@@ -4717,30 +4716,30 @@ Dim NumFact As Long
         '----
         totimp = totimp + ImpLinea
         
-        i = i + 1
+        I = I + 1
         
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
         
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If RS.Fields(2).Value > 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(2).Value, "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(2).Value, "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
         
             ImporteD = ImporteD + (CCur(RS.Fields(2).Value))
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet((RS.Fields(2).Value) * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet((RS.Fields(2).Value) * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
         
             ImporteH = ImporteH + (CCur(RS.Fields(2).Value) * (-1))
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
 
         RS.MoveNext
     Wend
@@ -4760,7 +4759,7 @@ Dim NumFact As Long
             SQL = SQL & " where numdiari = " & DBSet(vEmpresa.NumDiarioInt, "N")
             SQL = SQL & " and fechaent = " & DBSet(FecRecep, "F")
             SQL = SQL & " and numasien = " & DBSet(Contador, "N")
-            SQL = SQL & " and linliapu = " & DBSet(i, "N")
+            SQL = SQL & " and linliapu = " & DBSet(I, "N")
             
             ConnConta.Execute SQL
         Else
@@ -4768,81 +4767,81 @@ Dim NumFact As Long
             SQL = SQL & " where numdiari = " & DBSet(vEmpresa.NumDiarioInt, "N")
             SQL = SQL & " and fechaent = " & DBSet(FecRecep, "F")
             SQL = SQL & " and numasien = " & DBSet(Contador, "N")
-            SQL = SQL & " and linliapu = " & DBSet(i, "N")
+            SQL = SQL & " and linliapu = " & DBSet(I, "N")
             
             ConnConta.Execute SQL
         End If
     End If
 
-    If b And i > 0 Then
-        i = i + 1
+    If b And I > 0 Then
+        I = I + 1
         
         ' el Total es sobre la cuenta del socio
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & ","
-        cad = cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & ","
+        Cad = Cad & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
             
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If ImporteD - ImporteH < 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet((ImporteD - ImporteH) * (-1), "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet((ImporteD - ImporteH) * (-1), "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet((ImporteD - ImporteH), "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet((ImporteD - ImporteH), "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
         
     End If
 
     If b Then
         ' las retenciones si las hay
         If ImpReten <> 0 Then
-            i = i + 1
+            I = I + 1
             
-            cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-            cad = cad & DBSet(i, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+            Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+            Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
         
             If ImpReten > 0 Then
                 ' importe al debe en positivo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpReten, "N") & ","
-                cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpReten, "N") & ","
+                Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
             Else
                 ' importe al haber en positivo, cambiamos el signo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                cad = cad & DBSet((ImpReten * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                Cad = Cad & DBSet((ImpReten * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
             
             End If
             
-            cad = "(" & cad & ")"
+            Cad = "(" & Cad & ")"
             
-            b = InsertarLinAsientoDia(cad, cadMen)
-            cadMen = "Insertando Lin. Asiento: " & i
+            b = InsertarLinAsientoDia(Cad, cadMen)
+            cadMen = "Insertando Lin. Asiento: " & I
             
             If b Then
-                i = i + 1
+                I = I + 1
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(CtaReten, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaReten, "T") & "," & DBSet(numdocum, "T") & ","
                 If ImpReten > 0 Then
                     ' importe al haber en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpReten, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpReten, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 Else
                     ' importe al debe en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpReten * (-1)), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpReten * (-1)), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
             
         End If
@@ -4852,46 +4851,46 @@ Dim NumFact As Long
     If b Then
         ' las aportaciones de fondo operativo si las hay
         If ImpAport <> 0 Then
-            i = i + 1
+            I = I + 1
             
-            cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-            cad = cad & DBSet(i, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+            Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+            Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
         
             If ImpAport > 0 Then
                 ' importe al debe en positivo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpAport, "N") & ","
-                cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpAport, "N") & ","
+                Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
             Else
                 ' importe al haber en positivo, cambiamos el signo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                cad = cad & DBSet((ImpAport * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                Cad = Cad & DBSet((ImpAport * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
             
             End If
             
-            cad = "(" & cad & ")"
+            Cad = "(" & Cad & ")"
             
-            b = InsertarLinAsientoDia(cad, cadMen)
-            cadMen = "Insertando Lin. Asiento: " & i
+            b = InsertarLinAsientoDia(Cad, cadMen)
+            cadMen = "Insertando Lin. Asiento: " & I
             
             If b Then
-                i = i + 1
+                I = I + 1
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(CtaAport, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaAport, "T") & "," & DBSet(numdocum, "T") & ","
                 If ImpAport > 0 Then
                     ' importe al haber en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpAport, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpAport, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 Else
                     ' importe al debe en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpAport * (-1)), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpAport * (-1)), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
         End If
     End If
@@ -4901,7 +4900,7 @@ Dim NumFact As Long
         ' insertamos todos los gastos a pie de factura rfactsoc_gastos
         SQL = " SELECT rconcepgasto.codmacta as cuenta, sum(rfactsoc_gastos.importe) as importe "
         SQL = SQL & " from rconcepgasto INNER JOIN rfactsoc_gastos ON rconcepgasto.codgasto = rfactsoc_gastos.codgasto "
-        SQL = SQL & " where " & Replace(cadWhere, "rfactsoc", "rfactsoc_gastos")
+        SQL = SQL & " where " & Replace(cadwhere, "rfactsoc", "rfactsoc_gastos")
         SQL = SQL & " group by 1 "
         SQL = SQL & " order by 1 "
         
@@ -4909,45 +4908,45 @@ Dim NumFact As Long
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         While Not RS.EOF And b
-            i = i + 1
+            I = I + 1
             
-            cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-            cad = cad & DBSet(i, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+            Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+            Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
         
             If RS!Importe > 0 Then
                 ' importe al debe en positivo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS!Importe, "N") & ","
-                cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(RS!cuenta, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS!Importe, "N") & ","
+                Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(RS!cuenta, "T") & "," & ValorNulo & ",0"
             Else
                 ' importe al haber en positivo, cambiamos el signo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                cad = cad & DBSet((RS!Importe * (-1)), "N") & "," & ValorNulo & "," & DBSet(RS!cuenta, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                Cad = Cad & DBSet((RS!Importe * (-1)), "N") & "," & ValorNulo & "," & DBSet(RS!cuenta, "T") & "," & ValorNulo & ",0"
             End If
             
-            cad = "(" & cad & ")"
+            Cad = "(" & Cad & ")"
             
-            b = InsertarLinAsientoDia(cad, cadMen)
-            cadMen = "Insertando Lin. Asiento: " & i
+            b = InsertarLinAsientoDia(Cad, cadMen)
+            cadMen = "Insertando Lin. Asiento: " & I
             
             If b Then
-                i = i + 1
+                I = I + 1
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
                 If ImpAport > 0 Then
                     ' importe al haber en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 Else
                     ' importe al debe en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((RS!Importe * (-1)), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((RS!Importe * (-1)), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "T") & "," & ValorNulo & ",0"
                 End If
             
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
 
         
@@ -4964,7 +4963,7 @@ Dim NumFact As Long
 '        ConnConta.Execute Sql
 '    End If
     
-    Tipo = TipoAnt
+    tipo = TipoAnt
 
 EInLinea:
     If Err.Number <> 0 Then
@@ -5005,7 +5004,7 @@ End Sub
 ' FACTURAS TRANSPORTE
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaTerc(cadWhere As String, CodCCost As String, FechaFin As String) As Boolean
+Public Function PasarFacturaTerc(cadwhere As String, CodCCost As String, FechaFin As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.tcafpc --> conta.cabfactprov
 ' ariagro.tlifpc --> conta.linfactprov
@@ -5025,18 +5024,18 @@ Dim Mc As Contadores
     Set Mc = New Contadores
     
     '---- Insertar en la conta Cabecera Factura
-    b = InsertarCabFactTerc(cadWhere, cadMen, Mc, FechaFin)
+    b = InsertarCabFactTerc(cadwhere, cadMen, Mc, FechaFin)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
         CCoste = CodCCost
         '---- Insertar lineas de Factura en la Conta
-        b = InsertarLinFact_new("rcafter", cadWhere, cadMen, Mc.Contador)
+        b = InsertarLinFact_new("rcafter", cadwhere, cadMen, Mc.Contador)
         cadMen = "Insertando Lin. Factura: " & cadMen
 
         If b Then
             '---- Poner intconta=1 en ariges.scafac
-            b = ActualizarCabFact("rcafter", cadWhere, cadMen)
+            b = ActualizarCabFact("rcafter", cadwhere, cadMen)
             cadMen = "Actualizando Factura: " & cadMen
         End If
     End If
@@ -5062,7 +5061,7 @@ EContab:
         conn.RollbackTrans
         PasarFacturaTerc = False
         If Not b Then
-            InsertarTMPErrFac cadMen, cadWhere
+            InsertarTMPErrFac cadMen, cadwhere
 '            SQL = "Insert into tmpErrFac(codprove,numfactu,fecfactu,error) "
 '            SQL = SQL & " Select *," & DBSet(Mid(cadMen, 1, 200), "T") & " as error From tmpFactu "
 '            SQL = SQL & " WHERE " & Replace(cadWhere, "scafpc", "tmpFactu")
@@ -5071,12 +5070,12 @@ EContab:
     End If
 End Function
 
-Private Function InsertarCabFactTerc(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String) As Boolean
+Private Function InsertarCabFactTerc(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Nulo4 As String
@@ -5090,12 +5089,12 @@ Dim Nulo4 As String
     SQL = SQL & " FROM (" & "rcafter "
     SQL = SQL & "INNER JOIN " & "rsocios ON rcafter.codsocio=rsocios.codsocio )"
     SQL = SQL & " INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
 
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
 
         If Mc.ConseguirContador("1", (RS!FecRecep <= CDate(FechaFin) - 365), True) = 0 Then
@@ -5128,13 +5127,13 @@ Dim Nulo4 As String
                 SQL = SQL & DBSet(vParamAplic.CtaTerReten, "T") & ","
             End If
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(RS!FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
 
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
 
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -5158,7 +5157,7 @@ EInsertar:
 End Function
 
 ' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewFac(cadWhere As String, CtaBan As String, MenError As String) As Boolean
+Public Function InsertarEnTesoreriaNewFac(cadwhere As String, CtaBan As String, MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 Dim b As Boolean
 Dim SQL As String, Text33csb As String, Text41csb As String
@@ -5167,7 +5166,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -5183,7 +5182,7 @@ Dim Rsx As ADODB.Recordset
     CadValues2 = ""
     
     Set Rsx = New ADODB.Recordset
-    SQL = "select * from facturas where " & cadWhere
+    SQL = "select * from facturas where " & cadwhere
     Rsx.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rsx.EOF Then
@@ -5245,13 +5244,13 @@ EInsertarTesoreriaNewFac:
     InsertarEnTesoreriaNewFac = b
 End Function
 
-Public Function InsertarEnTesoreriaSoc(cadWhere As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
+Public Function InsertarEnTesoreriaSoc(cadwhere As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim b As Boolean
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim CC As String
 Dim letraser As String
 Dim Text33csb As String
@@ -5278,19 +5277,19 @@ Dim UltimoVto As Integer
     InsertarEnTesoreriaSoc = False
     
     '[Monica] 21/01/2010 tenemos que descontar del totaltesor los gastos a pie de factura
-    SQL = "select sum(importe) from rfactsoc_gastos where " & Replace(cadWhere, "rfactsoc", "rfactsoc_gastos")
+    SQL = "select sum(importe) from rfactsoc_gastos where " & Replace(cadwhere, "rfactsoc", "rfactsoc_gastos")
     GastosPie = DevuelveValor(SQL)
     '[Monica]29/11/2013: si es Montifrut los gastos a pie no se descuentan del importe
     If vParamAplic.Cooperativa = 12 Then GastosPie = 0
     
     
     '[Monica] 13/06/2013 tenemos que descontar las facturas varias que se insertaron
-    SQL = "select sum(totalfac) from fvarcabfact where (codsecci, codtipom, numfactu, fecfactu) in (select codsecci, codtipomfvar, numfactufvar, fecfactufvar from rfactsoc_fvarias where " & Replace(cadWhere, "rfactsoc", "rfactsoc_fvarias") & ")"
+    SQL = "select sum(totalfac) from fvarcabfact where (codsecci, codtipom, numfactu, fecfactu) in (select codsecci, codtipomfvar, numfactufvar, fecfactufvar from rfactsoc_fvarias where " & Replace(cadwhere, "rfactsoc", "rfactsoc_fvarias") & ")"
     GastosVarias = DevuelveValor(SQL)
     
     
     '[Monica]27/01/2012: Cogemos el nro de factura recibido si lo hay
-    FactuRec = DevuelveValor("select numfacrec from rfactsoc where " & cadWhere)
+    FactuRec = DevuelveValor("select numfacrec from rfactsoc where " & cadwhere)
     If FactuRec = "0" Then
         letraser = ""
         letraser = DevuelveValor("select letraser from usuarios.stipom where codtipom = " & DBSet(tipoMov, "T"))
@@ -5309,7 +5308,7 @@ Dim UltimoVto As Integer
     
     
     'si hay porcentaje de corredor hemos de descontarlo tb. Este porcentaje lo cargaba Montifrut
-    SQL = "select porccorredor from rfactsoc where " & cadWhere
+    SQL = "select porccorredor from rfactsoc where " & cadwhere
     PorcCorredor = DevuelveValor(SQL)
     
     TotalTesor1 = Round2(TotalTesor * PorcCorredor / 100, 2)
@@ -5339,7 +5338,7 @@ Dim UltimoVto As Integer
                     
                       'Primer Vencimiento
                       '------------------------------------------------------------
-                      i = 1
+                      I = 1
                       'FECHA VTO
                       FecVenci = CDate(fecfactu)
                       '=== Modificado: Laura 23/01/2007
@@ -5351,7 +5350,7 @@ Dim UltimoVto As Integer
                       FecVenci1 = FecVenci
         
         
-                      CadValues2 = CadValuesAux2 & i
+                      CadValues2 = CadValuesAux2 & I
                       CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
                       
                       'IMPORTE del Vencimiento
@@ -5401,15 +5400,15 @@ Dim UltimoVto As Integer
                       'Resto Vencimientos
                       '--------------------------------------------------------------------
                       UltimoVto = 1
-                      For i = 2 To rsVenci!numerove
-                          UltimoVto = i
+                      For I = 2 To rsVenci!numerove
+                          UltimoVto = I
                          'FECHA Resto Vencimientos
                           '==== Modificado: Laura 23/01/2007
                           'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
                           FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
                           '==================================================
         
-                          CadValues2 = CadValues2 & CadValuesAux2 & i
+                          CadValues2 = CadValues2 & CadValuesAux2 & I
                           CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
         
                           'IMPORTE Resto de Vendimientos
@@ -5447,12 +5446,12 @@ Dim UltimoVto As Integer
                           Else
                               CadValues2 = CadValues2 & "),"
                           End If
-                      Next i
+                      Next I
                       
                       
                       'Ultimo Vencimiento es si lo hay la parte de descuento
                       If TotalTesor1 <> 0 Then ' For i = 2 To rsVenci!numerove
-                          i = UltimoVto + 1
+                          I = UltimoVto + 1
                           
 '                         'FECHA Resto Vencimientos
 '                          FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
@@ -5467,7 +5466,7 @@ Dim UltimoVto As Integer
 '                                FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
 '                          End If
         
-                          CadValues2 = CadValues2 & CadValuesAux2 & i & ", " & ForpaPosi & ", '" & Format(FecVenci1, FormatoFecha) & "', "
+                          CadValues2 = CadValues2 & CadValuesAux2 & I & ", " & ForpaPosi & ", '" & Format(FecVenci1, FormatoFecha) & "', "
         
                           'IMPORTE Resto de Vendimientos
                           ImpVenci = TotalTesor1  'Round2(TotalTesor / rsVenci!numerove, 2)
@@ -5606,7 +5605,7 @@ Dim UltimoVto As Integer
                 CadValuesAux2 = "(" & DBSet(letraser, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(fecfactu, "F") & ","
 
                 '-------- Primer Vencimiento
-                i = 1
+                I = 1
                 'FECHA VTO
                 FecVenci = DBLet(fecfactu, "F")
                 '=== Laura 23/01/2007
@@ -5614,7 +5613,7 @@ Dim UltimoVto As Integer
                 FecVenci = DateAdd("d", DBLet(rsVenci!primerve, "N"), FecVenci)
                 '===
                 
-                CadValues2 = CadValuesAux2 & i & ", "
+                CadValues2 = CadValuesAux2 & I & ", "
                 '[Monica]03/07/2013: añado trim(codmacta)
                 CadValues2 = CadValues2 & DBSet(Trim(CtaSocio), "T") & ", " & DBSet(ForpaNega, "N") & ", " & DBSet(FecVenci, "F") & ", "
                 
@@ -5642,9 +5641,9 @@ Dim UltimoVto As Integer
                     '=== Laura 23/01/2007
                     'FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
                     '===
-                    i = 2
+                    I = 2
                     
-                    CadValues2 = CadValues2 & CadValuesAux2 & i & ", " & DBSet(Trim(CtaSocio), "T") & ", " & DBSet(ForpaNega, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
+                    CadValues2 = CadValues2 & CadValuesAux2 & I & ", " & DBSet(Trim(CtaSocio), "T") & ", " & DBSet(ForpaNega, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
                     
                     'IMPORTE Resto de Vendimientos
                     'ImpVenci = Round2(TotalTesor * (-1) / rsVenci!numerove, 2)
@@ -5722,7 +5721,7 @@ EInsertarTesoreriaSoc:
 End Function
 
 ' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewADV(cadWhere As String, CtaBan As String, FecVen As String, MenError As String) As Boolean
+Public Function InsertarEnTesoreriaNewADV(cadwhere As String, CtaBan As String, FecVen As String, MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 Dim b As Boolean
 Dim SQL As String, Text33csb As String, Text41csb As String
@@ -5731,7 +5730,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -5747,7 +5746,7 @@ Dim vSocio As cSocio
     CadValues2 = ""
     
     Set Rsx = New ADODB.Recordset
-    SQL = "select * from advfacturas where " & cadWhere
+    SQL = "select * from advfacturas where " & cadwhere
     Rsx.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rsx.EOF Then
@@ -5853,7 +5852,7 @@ End Function
 
 
 ' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewBOD(cadWhere As String, CtaBan As String, FecVen As String, MenError As String, Tipo As Byte) As Boolean
+Public Function InsertarEnTesoreriaNewBOD(cadwhere As String, CtaBan As String, FecVen As String, MenError As String, tipo As Byte) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 ' Tipo: 0 = almazara
 '       1 = bodega
@@ -5865,7 +5864,7 @@ Dim Rs4 As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim DigConta As String
 Dim CC As String
 Dim vrefer As String
@@ -5881,12 +5880,12 @@ Dim Seccion As Integer
     CadValues2 = ""
     
     Set Rsx = New ADODB.Recordset
-    SQL = "select * from rbodfacturas where " & cadWhere
+    SQL = "select * from rbodfacturas where " & cadwhere
     Rsx.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rsx.EOF Then
     
-        Select Case Tipo
+        Select Case tipo
             Case 0 ' almazara
                 Seccion = vParamAplic.SeccionAlmaz
             Case 1 ' bodega
@@ -5997,7 +5996,7 @@ End Function
 Private Function VariedadesFactura(cadenawhere As String) As String
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
     
@@ -6009,20 +6008,20 @@ Dim cad As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-    cad = ""
+    Cad = ""
     While Not RS.EOF
-        cad = cad & DBLet(RS.Fields(0).Value, "T") & ","
+        Cad = Cad & DBLet(RS.Fields(0).Value, "T") & ","
     
         RS.MoveNext
     Wend
     
-    If cad <> "" Then ' quitamos la ultima coma
-        cad = Mid(cad, 1, Len(cad) - 1)
+    If Cad <> "" Then ' quitamos la ultima coma
+        Cad = Mid(Cad, 1, Len(Cad) - 1)
     End If
     
     Set RS = Nothing
     
-    VariedadesFactura = cad
+    VariedadesFactura = Cad
     
 End Function
 
@@ -6031,7 +6030,7 @@ End Function
 ' FACTURAS ALMAZARA SOCIOS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaAlmzSoc(cadWhere As String, FechaFin As String, FecRecep As Date, CtaRete As String, TotalFactura As Currency) As Boolean
+Public Function PasarFacturaAlmzSoc(cadwhere As String, FechaFin As String, FecRecep As Date, CtaRete As String, TotalFactura As Currency) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura Socio
 ' ariagro.rcabfactalmz --> conta.cabfactprov
 ' ariagro.rlinfactalmz --> conta.linfactprov
@@ -6048,7 +6047,7 @@ Dim Mc As Contadores
     Set Mc = New Contadores
     
     '---- Insertar en la conta Cabecera Factura
-    b = InsertarCabFactAlmzSoc(cadWhere, cadMen, Mc, CDate(FechaFin), FecRecep, TotalFactura)
+    b = InsertarCabFactAlmzSoc(cadwhere, cadMen, Mc, CDate(FechaFin), FecRecep, TotalFactura)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
@@ -6056,12 +6055,12 @@ Dim Mc As Contadores
         
         If b Then
             '---- Insertar lineas de Factura en la Conta
-            b = InsertarLinFactAlmzSoc("rcabfactalmz", cadWhere, cadMen, Mc.Contador)
+            b = InsertarLinFactAlmzSoc("rcabfactalmz", cadwhere, cadMen, Mc.Contador)
             cadMen = "Insertando Lin. Factura Almazara Socio: " & cadMen
     
             If b Then
                 '---- Poner intconta=1 en ariges.scafac
-                b = ActualizarCabFactAlmz("rcabfactalmz", cadWhere, cadMen)
+                b = ActualizarCabFactAlmz("rcabfactalmz", cadwhere, cadMen)
                 cadMen = "Actualizando Factura Almazara Socio: " & cadMen
             End If
         End If
@@ -6080,19 +6079,19 @@ EContab:
         If Not b Then
             SQL = "Insert into tmpErrFac(tipofichero,numfactu,fecfactu,codsocio,error) "
             SQL = SQL & " Select *," & DBSet(cadMen, "T") & " as error From tmpFactu "
-            SQL = SQL & " WHERE " & Replace(cadWhere, "rcabfactalmz", "tmpFactu")
+            SQL = SQL & " WHERE " & Replace(cadwhere, "rcabfactalmz", "tmpFactu")
             conn.Execute SQL
         End If
     End If
 End Function
 
 
-Private Function InsertarCabFactAlmzSoc(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, TotalFactura As Currency) As Boolean
+Private Function InsertarCabFactAlmzSoc(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, TotalFactura As Currency) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -6104,12 +6103,12 @@ Dim Concepto As String
     SQL = SQL & " FROM (" & "rcabfactalmz "
     SQL = SQL & "INNER JOIN rsocios ON rcabfactalmz.codsocio=rsocios.codsocio) "
     SQL = SQL & " INNER JOIN rsocios_seccion ON rcabfactalmz.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
     
         If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
@@ -6129,10 +6128,10 @@ Dim Concepto As String
             
             '[Monica]29/07/2015: si es un asociado hay que seleccionar raiz de asociado + codigo de asociado
             If vParamAplic.Cooperativa = 0 Then
-               SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadWhere & ")"
+               SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadwhere & ")"
                If DevuelveValor(SQL) = 1 Then
                    
-                   SQL = "select nroasociado from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadWhere & ")"
+                   SQL = "select nroasociado from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadwhere & ")"
                    Socio = DevuelveValor(SQL)
                    
                    SQL = "select raiz_cliente_asociado from rseccion where codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
@@ -6153,13 +6152,13 @@ Dim Concepto As String
             SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
             
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
             
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -6189,7 +6188,7 @@ Dim b As Boolean
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim CC As String
 Dim letraser As String
 Dim Text33csb As String
@@ -6254,8 +6253,8 @@ Dim Socio2 As Long
             CadValuesAux2 = "('" & CtaSocio & "', " & DBSet(UltimaFactura, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
         
             '------------------------------------------------------------
-            i = 1
-            CadValues2 = CadValuesAux2 & i
+            I = 1
+            CadValues2 = CadValuesAux2 & I
             CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
             CadValues2 = CadValues2 & DBSet(TotalTesor, "N") & ", " & DBSet(CtaBanco, "T") & ","
         
@@ -6350,15 +6349,15 @@ End Function
 
 
 
-Private Function InsertarLinFactAlmzSoc(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactAlmzSoc(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -6373,17 +6372,17 @@ Dim LineaVariedad As Integer
 
     SQL = " SELECT sum(rlinfactalmz.importel) as importe "
     SQL = SQL & " FROM rlinfactalmz "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rcabfactalmz", "rlinfactalmz")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rcabfactalmz", "rlinfactalmz")
 
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     If Not RS.EOF Then
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         ImpLinea = RS!Importe
@@ -6394,15 +6393,15 @@ Dim LineaVariedad As Integer
         SQL = ""
         Sql2 = ""
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(vParamAplic.CtaGastosAlmz, "T")
         
         Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
         SQL = SQL & "," & DBSet(ImpLinea, "N") & ","
         SQL = SQL & ValorNulo ' centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     RS.Close
@@ -6410,29 +6409,29 @@ Dim LineaVariedad As Integer
     
     ' las retenciones si las hay
     If ImpReten <> 0 Then
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaSocio, "T")
         SQL = SQL & "," & DBSet(ImpReten, "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaReten, "T")
         SQL = SQL & "," & DBSet(ImpReten * (-1), "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -6445,14 +6444,14 @@ EInLinea:
     End If
 End Function
 
-Private Function ActualizarCabFactAlmz(cadTabla As String, cadWhere As String, cadErr As String) As Boolean
+Private Function ActualizarCabFactAlmz(cadTabla As String, cadwhere As String, cadErr As String) As Boolean
 'Poner la factura como contabilizada
 Dim SQL As String
 
     On Error GoTo EActualizar
     
     SQL = "UPDATE " & cadTabla & " SET contabilizado=1 "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
 
     conn.Execute SQL
     
@@ -6466,7 +6465,7 @@ EActualizar:
 End Function
 
 
-Public Function PasarFacturaAlmzCli(cadWhere As String, CodCCost As String, LetraSerie As String, TotalFactura As Currency) As Boolean
+Public Function PasarFacturaAlmzCli(cadwhere As String, CodCCost As String, LetraSerie As String, TotalFactura As Currency) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariagro.rcabfactalmz --> conta.cabfact
 ' ariagro.rlinfactalmz --> conta.linfact
@@ -6479,18 +6478,18 @@ Dim SQL As String
 
     
     'Insertar en la conta Cabecera Factura
-    b = InsertarCabFactAlmzCli(cadWhere, cadMen, LetraSerie, TotalFactura)
+    b = InsertarCabFactAlmzCli(cadwhere, cadMen, LetraSerie, TotalFactura)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
         CCoste = CodCCost
         'Insertar lineas de Factura en la Conta
-        b = InsertarLinFactAlmzCli("rcabfactalmz", cadWhere, cadMen, LetraSerie)
+        b = InsertarLinFactAlmzCli("rcabfactalmz", cadwhere, cadMen, LetraSerie)
         cadMen = "Insertando Lin. Factura Almazara Cliente: " & cadMen
 
         If b Then
             'Poner intconta=1 en ariagro.facturas
-            b = ActualizarCabFactAlmz("rcabfactalmz", cadWhere, cadMen)
+            b = ActualizarCabFactAlmz("rcabfactalmz", cadwhere, cadMen)
             cadMen = "Actualizando Factura Almazara: " & cadMen
         End If
     End If
@@ -6514,18 +6513,18 @@ EContab:
         
         SQL = "Insert into tmpErrFac(tipofichero,numfactu,fecfactu,codsocio,error) "
         SQL = SQL & " Select *," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rcabfactalmz", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rcabfactalmz", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
 
 
-Private Function InsertarCabFactAlmzCli(cadWhere As String, cadErr As String, LetraSerie As String, TotalFactura As Currency) As Boolean
+Private Function InsertarCabFactAlmzCli(cadwhere As String, cadErr As String, LetraSerie As String, TotalFactura As Currency) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim Concepto As String
-Dim cad As String
+Dim Cad As String
 
 
     On Error GoTo EInsertar
@@ -6534,12 +6533,12 @@ Dim cad As String
     SQL = SQL & "baseimpo,tipoiva,porc_iva,imporiva,basereten, porc_ret, impreten, totalfac, tipoiva "
     SQL = SQL & " FROM (" & "rcabfactalmz inner join " & "rsocios_seccion on rcabfactalmz.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.SeccionAlmaz & ") "
     SQL = SQL & "INNER JOIN " & "rsocios ON rsocios_seccion.codsocio=rsocios.codsocio "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         BaseImp = RS!baseimpo
         '---- Laura 10/10/2006:  añadir el totalfac para utilizarlo en insertar lineas
@@ -6559,10 +6558,10 @@ Dim cad As String
         
         '[Monica]29/07/2015: si es un asociado hay que seleccionar raiz de asociado + codigo de asociado
         If vParamAplic.Cooperativa = 0 Then
-           SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadWhere & ")"
+           SQL = "select rsocios.tiporelacion from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadwhere & ")"
            If DevuelveValor(SQL) = 1 Then
                
-               SQL = "select nroasociado from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadWhere & ")"
+               SQL = "select nroasociado from rsocios where codsocio in (select codsocio from rcabfactalmz where " & cadwhere & ")"
                Socio = DevuelveValor(SQL)
                
                SQL = "select raiz_cliente_asociado from rseccion where codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
@@ -6578,7 +6577,7 @@ Dim cad As String
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -6589,7 +6588,7 @@ Dim cad As String
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -6602,15 +6601,15 @@ EInsertar:
 End Function
 
 
-Private Function InsertarLinFactAlmzCli(cadTabla As String, cadWhere As String, cadErr As String, LetraSerie As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactAlmzCli(cadTabla As String, cadwhere As String, cadErr As String, LetraSerie As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -6624,19 +6623,19 @@ Dim NumDigit3 As String
 
     SQL = " SELECT " & DBSet(LetraSerie, "T") & ",rlinfactalmz.numfactu,rlinfactalmz.fecfactu,rlinfactalmz.codsocio," & vParamAplic.CtaVentasAlmz & ",sum(importel) as importe "
     SQL = SQL & " FROM rlinfactalmz "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rcabfactalmz", "rlinfactalmz")
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rcabfactalmz", "rlinfactalmz")
     SQL = SQL & " GROUP BY 1,2,3,4,5 "
     SQL = SQL & " order by 1,2,3,4,5 "
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         totimp = totimp + DBLet(RS!Importe, "N")
         
@@ -6644,7 +6643,7 @@ Dim NumDigit3 As String
         SQL = ""
         Sql2 = ""
         
-        SQL = "'" & LetraSerie & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+        SQL = "'" & LetraSerie & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
         SQL = SQL & DBSet(vParamAplic.CtaVentasAlmz, "T")
         
         Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -6653,9 +6652,9 @@ Dim NumDigit3 As String
         SQL = SQL & ValorNulo ' centro de coste
         
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -6677,9 +6676,9 @@ Dim NumDigit3 As String
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -6688,10 +6687,10 @@ Dim NumDigit3 As String
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -6715,7 +6714,7 @@ Dim b As Boolean
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim CC As String
 Dim letraser As String
 
@@ -6788,7 +6787,7 @@ Dim CadValues As String
 Dim Base As Currency
 
 Dim Cad1 As String
-Dim cad As String
+Dim Cad As String
             
     On Error GoTo EInsertarTesoreriaPOZ
 
@@ -6940,14 +6939,14 @@ Dim cad As String
                        '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                         Text33csb = ""
                         Text41csb = ""
-                        cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RCP" & Format(DBLet(RS1!numfactu, "N"), "0000000") & " Cont:" & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
-                        cad = cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 15) & " Pol/Par:" & Mid(Trim(DBLet(Rs6!poligono, "T")), 1, 2) & "/" & DBLet(Rs6!parcelas)
+                        Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RCP" & Format(DBLet(RS1!numfactu, "N"), "0000000") & " Cont:" & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
+                        Cad = Cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 15) & " Pol/Par:" & Mid(Trim(DBLet(Rs6!poligono, "T")), 1, 2) & "/" & DBLet(Rs6!parcelas)
 
-                        If Len(cad) > 80 Then cad = Mid(cad, 1, 78) & ".."
-                        Text33csb = cad
+                        If Len(Cad) > 80 Then Cad = Mid(Cad, 1, 78) & ".."
+                        Text33csb = Cad
 
-                        cad = "Lec:" & Format(DBLet(Rs6!fech_act, "F"), "dd-mm-yy") & " " & Format(DBLet(Rs6!Consumo1, "N"), "000000") & " m³ Pr:" & Format(DBLet(Rs6!Precio1, "N"), "0.00") & " €/m³ Total: " & Format(DBLet(Rs6!TotalFact, "N"), "###,##0.00")
-                        Text41csb = cad
+                        Cad = "Lec:" & Format(DBLet(Rs6!fech_act, "F"), "dd-mm-yy") & " " & Format(DBLet(Rs6!Consumo1, "N"), "000000") & " m³ Pr:" & Format(DBLet(Rs6!Precio1, "N"), "0.00") & " €/m³ Total: " & Format(DBLet(Rs6!TotalFact, "N"), "###,##0.00")
+                        Text41csb = Cad
 
                         '[Monica]20/02/2014: en utxera tb grabamos el codigo de socio
                         'Referencia = DBLet(Rs6!Hidrante, "T")
@@ -6961,26 +6960,26 @@ Dim cad As String
                        
                         Text33csb = ""
                         Text41csb = ""
-                        cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RCP" & Format(DBLet(RS1!numfactu, "N"), "0000000") & " Cont:" & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
-                        cad = cad & " Pol/Par:" & Mid(Trim(DBLet(Rs6!poligono, "T")), 1, 2) & "/" & Mid(Trim(DBLet(Rs6!parcelas)), 1, 20) & " Lec.ant:" & Format(DBLet(Rs6!lect_ant, "N"), "000000000")
+                        Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RCP" & Format(DBLet(RS1!numfactu, "N"), "0000000") & " Cont:" & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
+                        Cad = Cad & " Pol/Par:" & Mid(Trim(DBLet(Rs6!poligono, "T")), 1, 2) & "/" & Mid(Trim(DBLet(Rs6!parcelas)), 1, 20) & " Lec.ant:" & Format(DBLet(Rs6!lect_ant, "N"), "000000000")
                         
 '                        If Len(Cad) > 80 Then Cad = Mid(Cad, 1, 78) & ".."
 
-                        Text33csb = cad
+                        Text33csb = Cad
                         
                         Dim longitud As Integer
-                        longitud = Len(cad)
+                        longitud = Len(Cad)
                         
                         Text33csb = Text33csb & Space(80 - longitud)
                         
-                        cad = "Le.ac:" & Format(DBLet(Rs6!lect_act, "N"), "000000000") & " Con:" & Format(DBLet(Rs6!Consumo1, "N"), "000000") & " Pr:" & Format(DBLet(Rs6!Precio1, "N"), "#0.00") & "€/m³ Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "#####0.00")
+                        Cad = "Le.ac:" & Format(DBLet(Rs6!lect_act, "N"), "000000000") & " Con:" & Format(DBLet(Rs6!Consumo1, "N"), "000000") & " Pr:" & Format(DBLet(Rs6!Precio1, "N"), "#0.00") & "€/m³ Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "#####0.00")
                         '[Monica]15/01/2016: si hay recargo lo especifico
                         If DBLet(Rs6!imprecargo, "N") <> 0 Then
-                            cad = cad & "+" & Format(DBLet(Rs6!imprecargo, "N"), "##0.00")
+                            Cad = Cad & "+" & Format(DBLet(Rs6!imprecargo, "N"), "##0.00")
                         End If
-                        Text41csb = cad
+                        Text41csb = Cad
                         
-                        longitud = Len(cad)
+                        longitud = Len(Cad)
                         Text41csb = Text41csb & Space(60 - longitud)
                         
                         Referencia = Format(DBLet(RS1!Codsocio, "N"), "000000")
@@ -7031,17 +7030,17 @@ Dim cad As String
                         '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                         Text33csb = ""
                         Text41csb = ""
-                        cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                        Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
                         
                         '[Monica]29/04/2014: grabamos las hanegadas y las brazas en lugar de "Precios según información enviada"
-                        cad = cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 20) & " " & Format(v_hanegada, "#####0") & "hg " & Format(v_brazas, "#####0") & "br a " & DBSet(Rs6!Precio, "N") & "Eur" ' " Precios según información enviada"
+                        Cad = Cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 20) & " " & Format(v_hanegada, "#####0") & "hg " & Format(v_brazas, "#####0") & "br a " & DBSet(Rs6!Precio, "N") & "Eur" ' " Precios según información enviada"
                          
-                        Text33csb = cad
+                        Text33csb = Cad
                          
-                        cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N"), "####0.00") & " "
-                        cad = cad & DBLet(Rs6!Hidrante, "T")
+                        Cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N"), "####0.00") & " "
+                        Cad = Cad & DBLet(Rs6!Hidrante, "T")
                         
-                        Text41csb = cad
+                        Text41csb = Cad
                         
                         '[Monica]20/02/2014: grabamos el codigo de socio en lugar del hidrante
                         'Referencia = DBLet(Rs6!Hidrante, "T")
@@ -7069,17 +7068,17 @@ Dim cad As String
                             '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                             Text33csb = ""
                             Text41csb = ""
-                            cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
-                            cad = cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 20) & " Precios según información enviada"
+                            Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                            Cad = Cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 20) & " Precios según información enviada"
                              
-                            Text33csb = cad
+                            Text33csb = Cad
                              
-                            cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00")
+                            Cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00")
                             '[Monica]15/01/2016: metemos el recargo
                             If DBLet(Rs6!imprecargo, "N") <> 0 Then
-                                cad = cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
+                                Cad = Cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
                             End If
-                            cad = cad & " "
+                            Cad = Cad & " "
                             
                             
                             Sql4 = "select rpartida.nomparti, rpozos.poligono, rpozos.parcelas, rrecibpozos_hid.hanegada, rrecibpozos.precio, "
@@ -7097,9 +7096,9 @@ Dim cad As String
                             Set Rs4 = New ADODB.Recordset
                             Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                             
-                            i = 0
-                            While Not Rs4.EOF And i <= 6 '15
-                                i = i + 1
+                            I = 0
+                            While Not Rs4.EOF And I <= 6 '15
+                                I = I + 1
 '[Monica]29/01/2014: sustituido por
 '                                hanegada = DBLet(DBLet(Rs4!hanegada, "N"))
 '                                'Brazas = (Int(Hanegada) * 200) + (Hanegada - Int(Hanegada)) * 1000
@@ -7139,13 +7138,13 @@ Dim cad As String
 '                                        Text81csb = CadValues
 '                                End Select
 
-                                If i > 1 Then cad = cad & "/"
+                                If I > 1 Then Cad = Cad & "/"
 
-                                cad = cad & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
+                                Cad = Cad & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
                                 
                                 Rs4.MoveNext
                             Wend
-                            Text41csb = cad
+                            Text41csb = Cad
 '[Monica]29/01/2014: quitado
 '                            If i > 14 Then Text81csb = "y otros"
 '
@@ -7202,7 +7201,7 @@ Dim cad As String
                             Text53csb = ""
                             Text61csb = "SOCIO : " & DBLet(RS!nomsocio, "T")
                             Text62csb = ""
-                            Text63csb = "N.I.F.: " & DBLet(RS!nifSocio, "N")
+                            Text63csb = "N.I.F.: " & DBLet(RS!nifsocio, "N")
                             Text71csb = ""
                             Text72csb = ""
                             Text73csb = ""
@@ -7246,15 +7245,15 @@ Dim cad As String
                     '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                      Text33csb = ""
                      Text41csb = ""
-                     cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "TAL" & Format(DBLet(RS1!numfactu, "N"), "0000000")
-                     cad = cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 15) & " Precios según información enviada"
+                     Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "TAL" & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                     Cad = Cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!Concepto), 1, 15) & " Precios según información enviada"
                      
-                     Text33csb = cad
+                     Text33csb = Cad
                      
-                     cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00") & " "
+                     Cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00") & " "
                     '[Monica]15/01/2016: metemos el recargo
                     If DBLet(Rs6!imprecargo, "N") <> 0 Then
-                        cad = cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
+                        Cad = Cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
                     End If
                      
                     
@@ -7273,9 +7272,9 @@ Dim cad As String
                     Set Rs4 = New ADODB.Recordset
                     Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     
-                    i = 0
-                    While Not Rs4.EOF And i < 6 '15
-                        i = i + 1
+                    I = 0
+                    While Not Rs4.EOF And I < 6 '15
+                        I = I + 1
 
 '                        hanegada = DBLet(DBLet(Rs4!hanegada, "N"))
 '                        'Brazas = (Int(Hanegada) * 200) + (Hanegada - Int(Hanegada)) * 1000
@@ -7283,11 +7282,11 @@ Dim cad As String
 '                        v_brazas = (hanegada - Int(hanegada)) * 200
                     
                         'CadValues = Mid(Rs4!nomparti, 1, 15) & " " & Format(DBLet(Rs4!Poligono, "N"), "##0") & " " & Format(DBLet(Rs4!Parcela, "N"), "####0") & " " & DBLet(Rs4!SubParce, "T") & " " & Format(v_hanegada, "##0") & " " & Format(v_brazas, "###0") & " " & Format(DBLet(Rs4!Precio, "N"), "##0.0000")
-                        cad = cad & Format(DBLet(Rs4!poligono, "N"), "00") & "/" & Format(DBLet(Rs4!Parcela, "N"), "000")
+                        Cad = Cad & Format(DBLet(Rs4!poligono, "N"), "00") & "/" & Format(DBLet(Rs4!Parcela, "N"), "000")
                         If DBLet(Rs4!SubParce, "T") = "" Then
-                            cad = cad & "  "
+                            Cad = Cad & "  "
                         Else
-                            cad = cad & Mid(DBLet(Rs4!SubParce, "T"), 1, 1) & " "
+                            Cad = Cad & Mid(DBLet(Rs4!SubParce, "T"), 1, 1) & " "
                         End If
                         
 '                        Select Case i
@@ -7323,7 +7322,7 @@ Dim cad As String
 '
                         Rs4.MoveNext
                     Wend
-                    Text41csb = cad
+                    Text41csb = Cad
 '                    If i > 14 Then Text81csb = "y otros"
 '
 '                    Text83csb = ""
@@ -7407,20 +7406,20 @@ Dim cad As String
                         '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                         Text33csb = ""
                         Text41csb = ""
-                        cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RVP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
-                        cad = cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!importemo), 1, 30) & " Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00")
+                        Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RVP" & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                        Cad = Cad & " Soc:" & Format(DBLet(RS1!Codsocio, "N"), "000000") & " " & Mid(DBLet(Rs6!importemo), 1, 30) & " Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00")
                         
                         '[Monica]15/01/2016: metemos el recargo
                         If DBLet(Rs6!imprecargo, "N") <> 0 Then
-                            cad = cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
+                            Cad = Cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
                         End If
                         
                          
-                        Text33csb = cad
+                        Text33csb = Cad
                          
-                        cad = DBLet(Rs6!Conceptoar1, "T") & "/" & DBLet(Rs6!Conceptoar2, "T")
+                        Cad = DBLet(Rs6!Conceptoar1, "T") & "/" & DBLet(Rs6!Conceptoar2, "T")
                         
-                        Text41csb = cad
+                        Text41csb = Cad
                         
 '                        Referencia = DBLet(Rs6!Codsocio, "N")
                     '[Monica]08/01/2014: para el caso de escalona lo cambiamos para que imprima en referencia
@@ -7461,15 +7460,15 @@ Dim cad As String
                         '[Monica]29/01/2014: cambios text33csb(80) text41csb(60)
                         Text33csb = ""
                         Text41csb = ""
-                        cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMT" & Format(DBLet(RS1!numfactu, "N"), "0000000")
-                        cad = cad & " " & DBLet(Rs6!Concepto)
+                        Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & "RMT" & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                        Cad = Cad & " " & DBLet(Rs6!Concepto)
                          
-                        Text33csb = cad
+                        Text33csb = Cad
                          
-                        cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00") & " "
+                        Cad = "Tot:" & Format(DBLet(Rs6!TotalFact, "N") - DBLet(Rs6!imprecargo, "N"), "####0.00") & " "
                         '[Monica]15/01/2016: metemos el recargo
                         If DBLet(Rs6!imprecargo, "N") <> 0 Then
-                            cad = cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
+                            Cad = Cad & " Rec:" & Format(DBLet(Rs6!imprecargo, "N"), "###0.00")
                         End If
                         
                         Sql4 = "select rpartida.nomparti, rrecibpozos_cam.poligono, rrecibpozos_cam.parcela, rrecibpozos_cam.hanegada, rrecibpozos_cam.precio1, "
@@ -7493,9 +7492,9 @@ Dim cad As String
                             v_hanegada = Int(hanegada)
                             v_brazas = (hanegada - Int(hanegada)) * 200
                         
-                            cad = cad & " " & Mid(DBLet(Rs4!nomparti, "T"), 1, 15) & " " & DBLet(Rs4!poligono, "N") & " " & DBLet(Rs4!Parcela, "N") & " " & Format(v_hanegada, "###0") & "H " & Format(v_brazas, "###0") & "B " & Format(DBLet(Rs4!Precio1, "N"), "#,##0.0000")
+                            Cad = Cad & " " & Mid(DBLet(Rs4!nomparti, "T"), 1, 15) & " " & DBLet(Rs4!poligono, "N") & " " & DBLet(Rs4!Parcela, "N") & " " & Format(v_hanegada, "###0") & "H " & Format(v_brazas, "###0") & "B " & Format(DBLet(Rs4!Precio1, "N"), "#,##0.0000")
                         End If
-                        Text41csb = cad
+                        Text41csb = Cad
                         
                         Set Rs4 = Nothing
                         
@@ -7511,19 +7510,19 @@ Dim cad As String
                  Text33csb = ""
                  Text41csb = ""
                  
-                 cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & DBLet(RS1!CodTipom, "T") & Format(DBLet(RS1!numfactu, "N"), "0000000")
-                 cad = cad & " Rectifica la factura: " & DBLet(RS1!CodTipomrec, "T") & "-" & Format(DBLet(RS1!numfacturec, "N"), "0000000") & " de fecha " & Format(DBLet(RS1!fecfacturec, "F"), "dd/mm/yyyy")
+                 Cad = Mid(Year(DBLet(RS1!fecfactu, "F")), 3, 2) & DBLet(RS1!CodTipom, "T") & Format(DBLet(RS1!numfactu, "N"), "0000000")
+                 Cad = Cad & " Rectifica la factura: " & DBLet(RS1!CodTipomrec, "T") & "-" & Format(DBLet(RS1!numfacturec, "N"), "0000000") & " de fecha " & Format(DBLet(RS1!fecfacturec, "F"), "dd/mm/yyyy")
                  
-                 Text33csb = cad
+                 Text33csb = Cad
                  
-                 cad = "Tot:" & Format(DBLet(RS1!TotalFact, "N") - DBLet(RS1!imprecargo, "N"), "####0.00") & " "
+                 Cad = "Tot:" & Format(DBLet(RS1!TotalFact, "N") - DBLet(RS1!imprecargo, "N"), "####0.00") & " "
                 '[Monica]15/01/2016: metemos el recargo
                 If DBLet(RS1!imprecargo, "N") <> 0 Then
-                    cad = cad & " Rec:" & Format(DBLet(RS1!imprecargo, "N"), "###0.00")
+                    Cad = Cad & " Rec:" & Format(DBLet(RS1!imprecargo, "N"), "###0.00")
                 End If
                  
                 
-                Text41csb = cad
+                Text41csb = Cad
                 Referencia = Format(DBLet(RS1!Codsocio, "T"), "000000")
                  
                 
@@ -7593,7 +7592,7 @@ Dim cad As String
         
         '[Monica]03/08/2012: Metemos en todas las cooperativas los datos fiscales del socio
         CadValues2 = CadValues2 & DBSet(RS!nomsocio, "T") & "," & DBSet(RS!dirsocio, "T") & "," & DBSet(RS!pobsocio, "T")
-        CadValues2 = CadValues2 & "," & DBSet(RS!codPostal, "T") & "," & DBSet(RS!prosocio, "T") ' & ")"
+        CadValues2 = CadValues2 & "," & DBSet(RS!codpostal, "T") & "," & DBSet(RS!prosocio, "T") ' & ")"
         
         '[Monica]22/11/2013: Tema iban
         If vEmpresa.HayNorma19_34Nueva = 1 Then
@@ -7642,32 +7641,32 @@ End Function
 
 Private Function ParteCadena(Origen As String, NroSubcadenas As Integer, longitud) As String
 Dim j As Integer
-Dim i As Integer
+Dim I As Integer
 Dim k As Integer
-Dim cad As String
+Dim Cad As String
 
     On Error Resume Next
 
     ParteCadena = ""
 
     j = 1
-    cad = ""
+    Cad = ""
     For k = 1 To NroSubcadenas
-        i = j + longitud - 1
+        I = j + longitud - 1
         If Len(Origen) - j > 0 Then
             If Len(Mid(Origen, j + 1, Len(Origen) - j)) > longitud Then
-                While Mid(Origen, i + 1, 1) <> " "
-                    i = i - 1
+                While Mid(Origen, I + 1, 1) <> " "
+                    I = I - 1
                 Wend
             End If
-            If j > 0 And i - j + 1 > 0 Then
-                cad = cad & Mid(Origen, j, i - j + 1) & "|"
+            If j > 0 And I - j + 1 > 0 Then
+                Cad = Cad & Mid(Origen, j, I - j + 1) & "|"
             End If
-            j = i + 1
+            j = I + 1
         End If
     Next k
     
-    ParteCadena = cad
+    ParteCadena = Cad
     
 
 End Function
@@ -7677,7 +7676,7 @@ End Function
 ' FACTURAS TRANSPORTISTAS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaTra(cadWhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String) As Boolean
+Public Function PasarFacturaTra(cadwhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -7697,15 +7696,15 @@ Dim Mc As Contadores
     Set Mc = New Contadores
     
     '[Monica]17/10/2011: FACTURAS INTERNAS
-    If EsFacturaInternaTrans(cadWhere) Then
+    If EsFacturaInternaTrans(cadwhere) Then
         CtaReten = CtaRete
         ' Insertamos en el diario
-        b = InsertarAsientoDiarioTRANS(cadWhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
+        b = InsertarAsientoDiarioTRANS(cadwhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
         cadMen = "Insertando Factura en Diario: " & cadMen
     Else
     
         '---- Insertar en la conta Cabecera Factura
-        b = InsertarCabFactTra(cadWhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
+        b = InsertarCabFactTra(cadwhere, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
         cadMen = "Insertando Cab. Factura: " & cadMen
         
     End If
@@ -7720,21 +7719,21 @@ Dim Mc As Contadores
         tipoMov = TipoM    ' codtipom de la factura de socio
         
 '01-06-2009
-        b = InsertarEnTesoreriaTra(cadWhere, cadMen, FacturaTRA, FecFactuTRA)
+        b = InsertarEnTesoreriaTra(cadwhere, cadMen, FacturaTRA, FecFactuTRA)
         cadMen = "Insertando en Tesoreria: " & cadMen
 
         If b Then
             CCoste = CodCCost
             '[Monica]17/10/2011: INTERNAS
-            If Not EsFacturaInternaTrans(cadWhere) Then
+            If Not EsFacturaInternaTrans(cadwhere) Then
                 '---- Insertar lineas de Factura en la Conta
-                b = InsertarLinFactTra("rfacttra", cadWhere, cadMen, TipoFact, Mc.Contador)
+                b = InsertarLinFactTra("rfacttra", cadwhere, cadMen, TipoFact, Mc.Contador)
                 cadMen = "Insertando Lin. Factura: " & cadMen
             End If
     
             If b Then
                 '---- Poner intconta=1 en ariagro.rfacttra
-                b = ActualizarCabFactSoc("rfacttra", cadWhere, cadMen)
+                b = ActualizarCabFactSoc("rfacttra", cadwhere, cadMen)
                 cadMen = "Actualizando Factura Transporte: " & cadMen
             End If
         End If
@@ -7755,18 +7754,18 @@ EContab:
         conn.RollbackTrans
         PasarFacturaTra = False
         If Not b Then
-            InsertarTMPErrFacSoc cadMen, cadWhere
+            InsertarTMPErrFacSoc cadMen, cadwhere
         End If
     End If
 End Function
 
 
-Private Function InsertarCabFactTra(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String) As Boolean
+Private Function InsertarCabFactTra(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, tipo As Byte, FecRec As Date, TipoM As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -7782,12 +7781,12 @@ Dim letraser As String
     SQL = SQL & ",rtransporte.iban "
     SQL = SQL & " FROM (" & "rfacttra "
     SQL = SQL & "INNER JOIN rtransporte ON rfacttra.codtrans=rtransporte.codtrans) "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
     
         If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
@@ -7841,13 +7840,13 @@ Dim letraser As String
             SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
             
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
             
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -7872,13 +7871,13 @@ EInsertar:
 End Function
 
 
-Public Function InsertarEnTesoreriaTra(cadWhere As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
+Public Function InsertarEnTesoreriaTra(cadwhere As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim b As Boolean
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim CC As String
 Dim letraser As String
 Dim Text33csb As String
@@ -7902,8 +7901,8 @@ Dim GastosPie As Currency
         CadValuesAux2 = "('" & Trim(CtaTransporte) & "', " & DBSet(letraser & "-" & numfactu, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
     
         '------------------------------------------------------------
-        i = 1
-        CadValues2 = CadValuesAux2 & i
+        I = 1
+        CadValues2 = CadValuesAux2 & I
         CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
         CadValues2 = CadValues2 & DBSet(TotalTesor, "N") & ", " & DBSet(CtaBanco, "T") & ","
     
@@ -7998,7 +7997,7 @@ EInsertarTesoreriaTra:
 End Function
 
 
-Private Function InsertarLinFactTra(cadTabla As String, cadWhere As String, cadErr As String, Tipo As Byte, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactTra(cadTabla As String, cadwhere As String, cadErr As String, tipo As Byte, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
@@ -8006,8 +8005,8 @@ Dim SQLaux As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -8027,11 +8026,11 @@ Dim TipoFact As String
 Dim ImpAnticipo As Currency
     On Error GoTo EInLinea
     
-    TipoAnt = Tipo
+    TipoAnt = tipo
 '    TipoFactAnt = TipoFact
     
-    If Tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
-        Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
+    If tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
+        tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
         
         TipoFact = CodTipomRECT
 
@@ -8057,7 +8056,7 @@ Dim ImpAnticipo As Currency
         SQL = " SELECT 1, variedades.ctatransporte as cuenta, sum(rfacttra_albaran.importe) as importe "
     End If
     SQL = SQL & " FROM rfacttra_albaran, variedades "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rfacttra", "rfacttra_albaran") & " and"
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rfacttra", "rfacttra_albaran") & " and"
     SQL = SQL & " rfacttra_albaran.codvarie = variedades.codvarie "
     SQL = SQL & " group by 1,2 "
     SQL = SQL & " order by 1,2 "
@@ -8065,12 +8064,12 @@ Dim ImpAnticipo As Currency
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         ImpLinea = RS!Importe
@@ -8081,7 +8080,7 @@ Dim ImpAnticipo As Currency
         SQL = ""
         Sql2 = ""
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(RS!cuenta, "T")
         
         Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -8099,8 +8098,8 @@ Dim ImpAnticipo As Currency
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -8121,9 +8120,9 @@ Dim ImpAnticipo As Currency
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -8132,52 +8131,52 @@ Dim ImpAnticipo As Currency
 
     ' las retenciones si las hay
     If ImpReten <> 0 Then
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaTransporte, "T")
         SQL = SQL & "," & DBSet(ImpReten, "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
         
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaReten, "T")
         SQL = SQL & "," & DBSet(ImpReten * (-1), "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     ' las aportaciones de fondo operativo si las hay
     If ImpAport <> 0 Then
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaTransporte, "T")
         SQL = SQL & "," & DBSet(ImpAport, "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     
-        SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+        SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
         SQL = SQL & DBSet(CtaAport, "T")
         SQL = SQL & "," & DBSet(ImpAport * (-1), "N") & ","
         SQL = SQL & ValorNulo ' no llevan centro de coste
         
-        cad = cad & "(" & SQL & ")" & ","
-        i = i + 1
+        Cad = Cad & "(" & SQL & ")" & ","
+        I = I + 1
     End If
     
     
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
     
-    Tipo = TipoAnt
+    tipo = TipoAnt
 
 EInLinea:
     If Err.Number <> 0 Then
@@ -8189,14 +8188,14 @@ EInLinea:
 End Function
 
 
-Public Function EsFacturaInterna(cwhere As String) As Boolean
+Public Function EsFacturaInterna(cWhere As String) As Boolean
 Dim SQL As String
 
 
     On Error GoTo eEsFacturaInterna
     
     SQL = "select rsocios.esfactadvinterna from rfactsoc inner join rsocios on rfactsoc.codsocio = rsocios.codsocio "
-    SQL = SQL & " where " & cwhere
+    SQL = SQL & " where " & cWhere
     
     EsFacturaInterna = (DevuelveValor(SQL) = 1)
     Exit Function
@@ -8205,14 +8204,14 @@ eEsFacturaInterna:
     MuestraError Err.Number, "Es Factura Interna", Err.Description
 End Function
 
-Public Function EsFacturaInternaTrans(cwhere As String) As Boolean
+Public Function EsFacturaInternaTrans(cWhere As String) As Boolean
 Dim SQL As String
 
 
     On Error GoTo eEsFacturaInternaTrans
     
     SQL = "select rtransporte.esfacttrainterna from rfacttra inner join rtransporte on rfacttra.codtrans = rtransporte.codtrans "
-    SQL = SQL & " where " & cwhere
+    SQL = SQL & " where " & cWhere
     
     EsFacturaInternaTrans = (DevuelveValor(SQL) = 1)
     Exit Function
@@ -8230,7 +8229,7 @@ Dim SQL As String
 
 End Function
 
-Public Function PasarFacturaPOZOS(cadWhere As String, CodCCost As String, CtaBan As String, FecVen As String, TipoM As String, FecFac As Date, Observac As String, Forpa As String) As Boolean
+Public Function PasarFacturaPOZOS(cadwhere As String, CodCCost As String, CtaBan As String, FecVen As String, TipoM As String, FecFac As Date, Observac As String, Forpa As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 Dim b As Boolean
 Dim cadMen As String
@@ -8250,24 +8249,24 @@ Dim RS1 As ADODB.Recordset
     
         
         'Insertar en la conta Cabecera Factura
-        b = InsertarCabFactPOZ(cadWhere, Observac, cadMen)
+        b = InsertarCabFactPOZ(cadwhere, Observac, cadMen)
         cadMen = "Insertando Cab. Factura: " & cadMen
         
         If b Then
             CCoste = CodCCost
             'Insertar lineas de Factura en la Conta
-            b = InsertarLinFactPOZ("rrecibpozos", cadWhere, cadMen, TipoM)
+            b = InsertarLinFactPOZ("rrecibpozos", cadwhere, cadMen, TipoM)
             cadMen = "Insertando Lin. Factura: " & cadMen
             
             '++monica:añadida la parte de insertar en tesoreria
             If b Then
                 '[Monica]30/09/2011: como tenia hecha la funcion de insertar en tesoreria para todos,
                 '                    la aprovecho y le paso como parametro el recordset Rs1
-                SQL = "select * from rrecibpozos where " & cadWhere
+                SQL = "select * from rrecibpozos where " & cadwhere
                 Set RS1 = New ADODB.Recordset
                 RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 '[Monica]18/07/2014: añadida la funcion de si es contado
-                If TipoM = "RMT" And EsContado(cadWhere) Then
+                If TipoM = "RMT" And EsContado(cadwhere) Then
                     b = InsertarAsientoCobroPOZOS(cadMen, RS1, CDate(FecVen), CtaBan)
                 Else
                     b = InsertarEnTesoreriaPOZOS(cadMen, RS1, CDate(FecVen), Forpa, CtaBan)
@@ -8295,11 +8294,11 @@ Dim RS1 As ADODB.Recordset
         End If
     
         If b Then
-            Socio = DevuelveValor("select codsocio from rrecibpozos where " & cadWhere)
+            Socio = DevuelveValor("select codsocio from rrecibpozos where " & cadwhere)
             CtaSocio = DevuelveValor("select codmaccli from rsocios_seccion where codsocio = " & Socio & " and codsecci = " & vParamAplic.SeccionPOZOS)
         
         
-            b = InsertarLinAsientoFactIntPOZ("rrecibpozos", cadWhere, cadMen, CtaSocio, Mc.Contador)
+            b = InsertarLinAsientoFactIntPOZ("rrecibpozos", cadwhere, cadMen, CtaSocio, Mc.Contador)
             cadMen = "Insertando Lin. Factura Interna: " & cadMen
         
             Set Mc = Nothing
@@ -8308,14 +8307,20 @@ Dim RS1 As ADODB.Recordset
         '++monica:añadida la parte de insertar en tesoreria
         If b Then
             CCoste = CodCCost
+            SQL = "select * from rrecibpozos where " & cadwhere
+            Set RS1 = New ADODB.Recordset
+            RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
             b = InsertarEnTesoreriaPOZOS(cadMen, RS1, CDate(FecVen), Forpa, CtaBan)
+            
             cadMen = "Insertando en Tesoreria: " & cadMen
+            Set RS1 = Nothing
         End If
     End If
     
     If b Then
         'Poner intconta=1 en ariagro.facturas
-        b = ActualizarCabFact("rrecibpozos", cadWhere, cadMen)
+        b = ActualizarCabFact("rrecibpozos", cadwhere, cadMen)
         cadMen = "Actualizando Factura: " & cadMen
     End If
     
@@ -8337,16 +8342,16 @@ EContab:
         
         SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
         SQL = SQL & " Select *," & DBSet(cadMen, "T") & " as error From tmpFactu "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "rrecibpozos", "tmpFactu")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "rrecibpozos", "tmpFactu")
         conn.Execute SQL
     End If
 End Function
 
-Private Function InsertarCabFactPOZ(cadWhere As String, Observac As String, cadErr As String) As Boolean
+Private Function InsertarCabFactPOZ(cadwhere As String, Observac As String, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim ImporIva As Currency
 
     On Error GoTo EInsertar
@@ -8356,14 +8361,14 @@ Dim ImporIva As Currency
     SQL = SQL & " FROM ((" & "rrecibpozos inner join " & "usuarios.stipom on rrecibpozos.codtipom=usuarios.stipom.codtipom) "
     SQL = SQL & "INNER JOIN rsocios ON rrecibpozos.codsocio=rsocios.codsocio) "
     SQL = SQL & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.SeccionPOZOS, "N")
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     SQL = SQL & " group by 1,2,3,4,5,6,7 "
     SQL = SQL & " order by 1,2,3,4,5,6,7 "
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -8382,7 +8387,7 @@ Dim ImporIva As Currency
         SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
         SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -8393,7 +8398,7 @@ Dim ImporIva As Currency
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -8407,15 +8412,15 @@ End Function
 
 
 
-Private Function InsertarLinFactPOZ(cadTabla As String, cadWhere As String, cadErr As String, tipoMov As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactPOZ(cadTabla As String, cadwhere As String, cadErr As String, tipoMov As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpConsumo As Currency, ImpCuota As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -8435,7 +8440,7 @@ Dim NumDigit3 As String
         End If
         
         SQL = SQL & " FROM rrecibpozos inner join usuarios.stipom on rrecibpozos.codtipom=usuarios.stipom.codtipom "
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
         
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 1,2,3,4,7 " '& cadCampo, codccost
@@ -8446,12 +8451,12 @@ Dim NumDigit3 As String
         Set RS = New ADODB.Recordset
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        cad = ""
-        i = 1
+        Cad = ""
+        I = 1
         totimp = 0
         SQLaux = ""
         If Not RS.EOF Then
-            SQLaux = cad
+            SQLaux = Cad
             
             ImpConsumo = DBLet(RS!Importeconsumo, "N")
             ImpCuota = DBLet(RS!importecuota, "N")
@@ -8463,9 +8468,9 @@ Dim NumDigit3 As String
             
             
             If ImpConsumo <> 0 Then
-                SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & DBSet(i, "N") & "," & DBSet(vParamAplic.CtaVentasConsPOZ, "T") & ","
+                SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & DBSet(I, "N") & "," & DBSet(vParamAplic.CtaVentasConsPOZ, "T") & ","
                 
-                Sql2 = cad & SQL  'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
+                Sql2 = Cad & SQL  'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
                 SQL = SQL & DBSet(ImpConsumo, "N") & ","
                 
                 If vEmpresa.TieneAnalitica Then
@@ -8476,18 +8481,18 @@ Dim NumDigit3 As String
                     CCoste = ValorNulo
                 End If
                 
-                cad = "(" & SQL & ")" & ","
+                Cad = "(" & SQL & ")" & ","
                 
-                SQLaux = SQLaux & cad
+                SQLaux = SQLaux & Cad
                 
-                i = i + 1
+                I = I + 1
             End If
             
             
             If ImpCuota <> 0 Then
-                SQL = "('" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & DBSet(i, "N") & "," & DBSet(vParamAplic.CtaVentasCuoPOZ, "T") & ","
+                SQL = "('" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & DBSet(I, "N") & "," & DBSet(vParamAplic.CtaVentasCuoPOZ, "T") & ","
                 
-                Sql2 = cad & SQL   'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
+                Sql2 = Cad & SQL   'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
                 SQL = SQL & DBSet(ImpCuota, "N") & ","
                 
                 If vEmpresa.TieneAnalitica Then
@@ -8498,9 +8503,9 @@ Dim NumDigit3 As String
                     CCoste = ValorNulo
                 End If
                 
-                cad = cad & SQL & ")" & ","
+                Cad = Cad & SQL & ")" & ","
                 
-                SQLaux = SQLaux & cad
+                SQLaux = SQLaux & Cad
             End If
             
             RS.MoveNext
@@ -8509,7 +8514,7 @@ Dim NumDigit3 As String
         RS.Close
         Set RS = Nothing
         
-        BaseImp = DevuelveValor("select sum(baseimpo) from rrecibpozos where " & cadWhere)
+        BaseImp = DevuelveValor("select sum(baseimpo) from rrecibpozos where " & cadwhere)
         'comprtobar que la suma de los importes de las lineas insertadas suman la BImponible
         'de la factura
         If totimp <> BaseImp Then
@@ -8528,15 +8533,15 @@ Dim NumDigit3 As String
 '            Else 'solo una linea
 '                cad = SQLaux & ")" & ","
 '            End If
-            cad = Sql2 & "),"
+            Cad = Sql2 & "),"
         End If
     
     
         'Insertar en la contabilidad
-        If cad <> "" Then
-            cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+        If Cad <> "" Then
+            Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
             SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
         End If
     Else
@@ -8565,7 +8570,7 @@ Dim NumDigit3 As String
         End If
         
         SQL = SQL & " FROM rrecibpozos inner join usuarios.stipom on rrecibpozos.codtipom=usuarios.stipom.codtipom "
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 1,2,3,4,6 " '& cadCampo, codccost
         Else
@@ -8576,12 +8581,12 @@ Dim NumDigit3 As String
         Set RS = New ADODB.Recordset
         RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        cad = ""
-        i = 1
+        Cad = ""
+        I = 1
         totimp = 0
         SQLaux = ""
         While Not RS.EOF
-            SQLaux = cad
+            SQLaux = Cad
             'calculamos la Base Imp del total del importe para cada cta cble ventas
             ImpLinea = DBLet(RS!Importe, "N")
             totimp = totimp + DBLet(RS!Importe, "N")
@@ -8590,7 +8595,7 @@ Dim NumDigit3 As String
             SQL = ""
             Sql2 = ""
             
-            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
             SQL = SQL & DBSet(RS!cuenta, "T")
             
             Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -8604,9 +8609,9 @@ Dim NumDigit3 As String
                 CCoste = ValorNulo
             End If
             
-            cad = cad & "(" & SQL & ")" & ","
+            Cad = Cad & "(" & SQL & ")" & ","
             
-            i = i + 1
+            I = I + 1
             RS.MoveNext
         Wend
         RS.Close
@@ -8622,7 +8627,7 @@ Dim NumDigit3 As String
         End If
         
         SQL = SQL & " FROM rrecibpozos inner join usuarios.stipom on rrecibpozos.codtipom=usuarios.stipom.codtipom "
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
         If vEmpresa.TieneAnalitica Then
             SQL = SQL & " GROUP BY 1,2,3,4,6 " '& cadCampo, codccost
         Else
@@ -8635,7 +8640,7 @@ Dim NumDigit3 As String
     
         While Not RS.EOF
             If DBLet(RS!Importe, "N") <> 0 Then
-                SQLaux = cad
+                SQLaux = Cad
                 'calculamos la Base Imp del total del importe para cada cta cble ventas
                 ImpLinea = DBLet(RS!Importe, "N")
                 totimp = totimp + DBLet(RS!Importe, "N")
@@ -8644,7 +8649,7 @@ Dim NumDigit3 As String
                 SQL = ""
                 Sql2 = ""
                 
-                SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+                SQL = "'" & RS!letraser & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
                 SQL = SQL & DBSet(RS!cuenta, "T")
                 
                 Sql2 = SQL & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -8658,9 +8663,9 @@ Dim NumDigit3 As String
                     CCoste = ValorNulo
                 End If
                 
-                cad = cad & "(" & SQL & ")" & ","
+                Cad = Cad & "(" & SQL & ")" & ","
                 
-                i = i + 1
+                I = I + 1
             End If
             RS.MoveNext
         Wend
@@ -8684,9 +8689,9 @@ Dim NumDigit3 As String
                 Sql2 = Sql2 & DBSet(CCoste, "T")
             End If
             If SQLaux <> "" Then 'hay mas de una linea
-                cad = SQLaux & "(" & Sql2 & ")" & ","
+                Cad = SQLaux & "(" & Sql2 & ")" & ","
             Else 'solo una linea
-                cad = "(" & Sql2 & ")" & ","
+                Cad = "(" & Sql2 & ")" & ","
             End If
             
     '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -8695,10 +8700,10 @@ Dim NumDigit3 As String
     
     
         'Insertar en la contabilidad
-        If cad <> "" Then
-            cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+        If Cad <> "" Then
+            Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
             SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
         End If
     
@@ -8715,11 +8720,11 @@ End Function
 '###########################CONTABILIZACION DE FACTURAS DE TRANSPORTE INTERNAS
 
 
-Private Function InsertarAsientoDiarioTRANS(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String) As Boolean
+Private Function InsertarAsientoDiarioTRANS(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, tipo As Byte, FecRec As Date, TipoM As String) As Boolean
 ' la contabilizacion de las facturas internas de horto, se han de insertar en el diario no en el registro de iva de proveedor
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -8739,12 +8744,12 @@ Dim b As Boolean
     SQL = SQL & ",rtransporte.iban "
     SQL = SQL & " FROM (" & "rfacttra "
     SQL = SQL & "INNER JOIN rtransporte ON rfacttra.codtrans=rtransporte.codtrans) "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
         
@@ -8765,7 +8770,7 @@ Dim b As Boolean
             FecfactuRECT = DBLet(RS!rectif_fecfactu, "T")
             
             CtaTransporte = RS!codmacpro
-            TipoFact = Tipo
+            TipoFact = tipo
             FecRecep = FecRec
             BancoTRA = DBLet(RS!CodBanco, "N")
             SucurTRA = DBLet(RS!CodSucur, "N")
@@ -8783,7 +8788,7 @@ Dim b As Boolean
             cadMen = "Insertando Cab. Asiento: " & cadMen
     
             If b Then
-                b = InsertarLinAsientoFactIntTRA("rfacttra", cadWhere, cadMen, Tipo, CtaTransporte, Mc.Contador)
+                b = InsertarLinAsientoFactIntTRA("rfacttra", cadwhere, cadMen, tipo, CtaTransporte, Mc.Contador)
                 cadMen = "Insertando Lin. Factura Interna: " & cadMen
             
                 Set Mc = Nothing
@@ -8809,7 +8814,7 @@ End Function
 
 
 
-Private Function InsertarLinAsientoFactIntTRA(cadTabla As String, cadWhere As String, cadErr As String, Tipo As Byte, CtaSocio As String, Optional Contador As Long) As Boolean
+Private Function InsertarLinAsientoFactIntTRA(cadTabla As String, cadwhere As String, cadErr As String, tipo As Byte, CtaSocio As String, Optional Contador As Long) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim numdocum As String
@@ -8820,9 +8825,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim cadMen As String
 Dim FeFact As Date
 
@@ -8842,11 +8847,11 @@ Dim NumFact As Long
     
     InsertarLinAsientoFactIntTRA = False
     
-    TipoAnt = Tipo
+    TipoAnt = tipo
 '    TipoFactAnt = TipoFact
     
-    If Tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
-        Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
+    If tipo = 11 Then ' si es una factura rectificativa cojo el tipo de movimiento de la factura que rectifico
+        tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(CodTipomRECT, "T"))
         
         TipoFact = CodTipomRECT
     Else
@@ -8854,7 +8859,7 @@ Dim NumFact As Long
     End If
     
     FeFact = FecFactuTRA
-    NumFact = DevuelveValor("select numfactu from rfacttra where " & cadWhere)
+    NumFact = DevuelveValor("select numfactu from rfacttra where " & cadwhere)
     
     If vEmpresa.TieneAnalitica Then
         SQL = " SELECT 1, variedades.ctatransporte as cuenta, sum(rfacttra_albaran.importe) as importe, variedades.codccost "
@@ -8862,7 +8867,7 @@ Dim NumFact As Long
         SQL = " SELECT 1, variedades.ctatransporte as cuenta, sum(rfacttra_albaran.importe) as importe "
     End If
     SQL = SQL & " FROM rfacttra_albaran, variedades "
-    SQL = SQL & " WHERE " & Replace(cadWhere, "rfacttra", "rfacttra_albaran") & " and"
+    SQL = SQL & " WHERE " & Replace(cadwhere, "rfacttra", "rfacttra_albaran") & " and"
     SQL = SQL & " rfacttra_albaran.codvarie = variedades.codvarie "
     SQL = SQL & " group by 1,2 "
     SQL = SQL & " order by 1,2 "
@@ -8870,7 +8875,7 @@ Dim NumFact As Long
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    i = 0
+    I = 0
     ImporteD = 0
     ImporteH = 0
     
@@ -8883,41 +8888,41 @@ Dim NumFact As Long
     
     b = True
 
-    cad = ""
+    Cad = ""
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
         '---- Laura: 10/10/2006
         ImpLinea = RS!Importe
         
         totimp = totimp + ImpLinea
         
-        i = i + 1
+        I = I + 1
         
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
         
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If RS.Fields(2).Value > 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(2).Value, "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS.Fields(2).Value, "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
         
             ImporteD = ImporteD + (CCur(RS.Fields(2).Value))
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet((RS.Fields(2).Value) * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet((RS.Fields(2).Value) * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
         
             ImporteH = ImporteH + (CCur(RS.Fields(2).Value) * (-1))
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
 
         RS.MoveNext
     Wend
@@ -8937,7 +8942,7 @@ Dim NumFact As Long
             SQL = SQL & " where numdiari = " & DBSet(vEmpresa.NumDiarioInt, "N")
             SQL = SQL & " and fechaent = " & DBSet(FecRecep, "F")
             SQL = SQL & " and numasien = " & DBSet(Contador, "N")
-            SQL = SQL & " and linliapu = " & DBSet(i, "N")
+            SQL = SQL & " and linliapu = " & DBSet(I, "N")
             
             ConnConta.Execute SQL
         Else
@@ -8945,81 +8950,81 @@ Dim NumFact As Long
             SQL = SQL & " where numdiari = " & DBSet(vEmpresa.NumDiarioInt, "N")
             SQL = SQL & " and fechaent = " & DBSet(FecRecep, "F")
             SQL = SQL & " and numasien = " & DBSet(Contador, "N")
-            SQL = SQL & " and linliapu = " & DBSet(i, "N")
+            SQL = SQL & " and linliapu = " & DBSet(I, "N")
             
             ConnConta.Execute SQL
         End If
     End If
 
-    If b And i > 0 Then
-        i = i + 1
+    If b And I > 0 Then
+        I = I + 1
         
         ' el Total es sobre la cuenta del transportista
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & ","
-        cad = cad & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & ","
+        Cad = Cad & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
             
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If ImporteD - ImporteH < 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet((ImporteD - ImporteH) * (-1), "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet((ImporteD - ImporteH) * (-1), "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         Else
             'importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet((ImporteD - ImporteH), "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet((ImporteD - ImporteH), "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
         
     End If
 
     If b Then
         ' las retenciones si las hay
         If ImpReten <> 0 Then
-            i = i + 1
+            I = I + 1
             
-            cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-            cad = cad & DBSet(i, "N") & "," & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
+            Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+            Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
         
             If ImpReten > 0 Then
                 ' importe al debe en positivo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpReten, "N") & ","
-                cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpReten, "N") & ","
+                Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
             Else
                 ' importe al haber en positivo, cambiamos el signo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                cad = cad & DBSet((ImpReten * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                Cad = Cad & DBSet((ImpReten * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaReten, "T") & "," & ValorNulo & ",0"
             
             End If
             
-            cad = "(" & cad & ")"
+            Cad = "(" & Cad & ")"
             
-            b = InsertarLinAsientoDia(cad, cadMen)
-            cadMen = "Insertando Lin. Asiento: " & i
+            b = InsertarLinAsientoDia(Cad, cadMen)
+            cadMen = "Insertando Lin. Asiento: " & I
             
             If b Then
-                i = i + 1
+                I = I + 1
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(CtaReten, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaReten, "T") & "," & DBSet(numdocum, "T") & ","
                 If ImpReten > 0 Then
                     ' importe al haber en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpReten, "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpReten, "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
                 Else
                     ' importe al debe en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpReten * (-1)), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpReten * (-1)), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
             
         End If
@@ -9029,51 +9034,51 @@ Dim NumFact As Long
     If b Then
         ' las aportaciones de fondo operativo si las hay
         If ImpAport <> 0 Then
-            i = i + 1
+            I = I + 1
             
-            cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-            cad = cad & DBSet(i, "N") & "," & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
+            Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+            Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaTransporte, "T") & "," & DBSet(numdocum, "T") & ","
         
             If ImpAport > 0 Then
                 ' importe al debe en positivo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpAport, "N") & ","
-                cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(ImpAport, "N") & ","
+                Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
             Else
                 ' importe al haber en positivo, cambiamos el signo
-                cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-                cad = cad & DBSet((ImpAport * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
+                Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+                Cad = Cad & DBSet((ImpAport * (-1)), "N") & "," & ValorNulo & "," & DBSet(CtaAport, "T") & "," & ValorNulo & ",0"
             
             End If
             
-            cad = "(" & cad & ")"
+            Cad = "(" & Cad & ")"
             
-            b = InsertarLinAsientoDia(cad, cadMen)
-            cadMen = "Insertando Lin. Asiento: " & i
+            b = InsertarLinAsientoDia(Cad, cadMen)
+            cadMen = "Insertando Lin. Asiento: " & I
             
             If b Then
-                i = i + 1
+                I = I + 1
                 
-                cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
-                cad = cad & DBSet(i, "N") & "," & DBSet(CtaAport, "T") & "," & DBSet(numdocum, "T") & ","
+                Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(FecRecep, "F") & "," & DBSet(Contador, "N") & ","
+                Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaAport, "T") & "," & DBSet(numdocum, "T") & ","
                 If ImpAport > 0 Then
                     ' importe al haber en positivo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
-                    cad = cad & DBSet(ImpAport, "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliaciond, "T") & "," & ValorNulo & ","
+                    Cad = Cad & DBSet(ImpAport, "N") & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
                 Else
                     ' importe al debe en positivo, cambiamos el signo
-                    cad = cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpAport * (-1)), "N") & ","
-                    cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
+                    Cad = Cad & DBSet(vEmpresa.ConceptoIntProv, "N") & "," & DBSet(ampliacionh, "T") & "," & DBSet((ImpAport * (-1)), "N") & ","
+                    Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaTransporte, "T") & "," & ValorNulo & ",0"
                 End If
                 
-                cad = "(" & cad & ")"
+                Cad = "(" & Cad & ")"
                 
-                b = InsertarLinAsientoDia(cad, cadMen)
-                cadMen = "Insertando Lin. Asiento: " & i
+                b = InsertarLinAsientoDia(Cad, cadMen)
+                cadMen = "Insertando Lin. Asiento: " & I
             End If
         End If
     End If
     
-    Tipo = TipoAnt
+    tipo = TipoAnt
 
 EInLinea:
     If Err.Number <> 0 Then
@@ -9090,7 +9095,7 @@ End Function
 
 
 
-Public Function PasarAsientoGastoCampo(cadWhere As String, FechaFin As String, FecRecep As String, CtaContra As String, Concep As String, Amplia As String) As Boolean
+Public Function PasarAsientoGastoCampo(cadwhere As String, FechaFin As String, FecRecep As String, CtaContra As String, Concep As String, Amplia As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -9109,12 +9114,12 @@ Dim Mc As Contadores
     Set Mc = New Contadores
     
     ' Insertamos en el diario
-    b = InsertarAsientoGastoCampo(cadWhere, cadMen, Mc, CDate(FechaFin), CDate(FecRecep), CtaContra, Concep, Amplia)
+    b = InsertarAsientoGastoCampo(cadwhere, cadMen, Mc, CDate(FechaFin), CDate(FecRecep), CtaContra, Concep, Amplia)
     cadMen = "Insertando Asiento de Gasto en Diario: " & cadMen
     
     If b Then
         '---- Poner contabilizado=1 en rcampos_gastos
-        b = ActualizarCabFactSoc("rcampos_gastos", cadWhere, cadMen)
+        b = ActualizarCabFactSoc("rcampos_gastos", cadwhere, cadMen)
         cadMen = "Actualizando Concepto Gasto Campo: " & cadMen
     End If
     
@@ -9132,18 +9137,18 @@ EContab:
         conn.RollbackTrans
         PasarAsientoGastoCampo = False
         If Not b Then
-            InsertarTMPErrFacSoc cadMen, cadWhere
+            InsertarTMPErrFacSoc cadMen, cadwhere
         End If
     End If
 End Function
 
 
 
-Private Function InsertarAsientoGastoCampo(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, CtaContra As String, Concep As String, Amplia As String) As Boolean
+Private Function InsertarAsientoGastoCampo(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, CtaContra As String, Concep As String, Amplia As String) As Boolean
 ' la contabilizacion de las facturas internas de horto, se han de insertar en el diario no en el registro de iva de proveedor
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -9159,12 +9164,12 @@ Dim b As Boolean
     SQL = " SELECT rcampos_gastos.codgasto, rcampos_gastos.fecha, rcampos_gastos.importe, rconcepgasto.codmacgto "
     SQL = SQL & " FROM (rcampos_gastos "
     SQL = SQL & "INNER JOIN rconcepgasto ON rcampos_gastos.codgasto=rconcepgasto.codgasto) "
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
         
@@ -9175,7 +9180,7 @@ Dim b As Boolean
             cadMen = "Insertando Cab. Asiento: " & cadMen
     
             If b Then
-                b = InsertarLinAsientoDiaGastos("rcampos_gastos", cadWhere, cadMen, CtaContra, Mc.Contador, Concep, Amplia)
+                b = InsertarLinAsientoDiaGastos("rcampos_gastos", cadwhere, cadMen, CtaContra, Mc.Contador, Concep, Amplia)
                 cadMen = "Insertando Lin. Asiento Diario: " & cadMen
             
                 Set Mc = Nothing
@@ -9196,7 +9201,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarLinAsientoDiaGastos(cadTabla As String, cadWhere As String, cadErr As String, CtaContra As String, Contador As Long, Concep As String, Amplia As String) As Boolean
+Private Function InsertarLinAsientoDiaGastos(cadTabla As String, cadwhere As String, cadErr As String, CtaContra As String, Contador As Long, Concep As String, Amplia As String) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim numdocum As String
@@ -9207,9 +9212,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim cadMen As String
 Dim FeFact As Date
 
@@ -9221,7 +9226,7 @@ Dim cadCampo As String
 
     SQL = " SELECT rcampos_gastos.fecha, rcampos_gastos.codcampo, rconcepgasto.codmacgto cuenta, rcampos_gastos.importe as importe "
     SQL = SQL & " FROM rcampos_gastos Inner JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
-    SQL = SQL & " where " & cadWhere
+    SQL = SQL & " where " & cadwhere
     SQL = SQL & " order by 1, 2 " '& cadCampo
 
     
@@ -9229,7 +9234,7 @@ Dim cadCampo As String
     
     RS.Open SQL, conn, adOpenDynamic, adLockOptimistic, adCmdText
             
-    i = 0
+    I = 0
     ImporteD = 0
     ImporteH = 0
     
@@ -9243,56 +9248,56 @@ Dim cadCampo As String
     b = True
     
     If Not RS.EOF Then
-        i = i + 1
+        I = I + 1
         
         FeFact = RS!Fecha
         
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!Fecha, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!Fecha, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & "," & DBSet(RS!cuenta, "T") & "," & DBSet(numdocum, "T") & ","
         
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If DBLet(RS!Importe, "N") > 0 Then
             ' importe al debe en positivo
-            cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS!Importe, "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(RS!Importe, "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
         
             ImporteD = ImporteD + CCur(DBLet(RS!Importe, "N"))
         Else
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
         
             ImporteH = ImporteH + CCur(DBLet(RS!Importe, "N"))
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
 
-        i = i + 1
+        I = I + 1
                 
         ' el Total es sobre la cuenta del cliente
-        cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!Fecha, "F") & "," & DBSet(Contador, "N") & ","
-        cad = cad & DBSet(i, "N") & ","
-        cad = cad & DBSet(CtaContra, "T") & "," & DBSet(numdocum, "T") & ","
+        Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!Fecha, "F") & "," & DBSet(Contador, "N") & ","
+        Cad = Cad & DBSet(I, "N") & ","
+        Cad = Cad & DBSet(CtaContra, "T") & "," & DBSet(numdocum, "T") & ","
             
         ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
         If DBLet(RS!Importe, "N") > 0 Then
             ' importe al haber en positivo, cambiamos el signo
-            cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-            cad = cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(RS!cuenta, "N") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+            Cad = Cad & DBSet(RS!Importe, "N") & "," & ValorNulo & "," & DBSet(RS!cuenta, "N") & "," & ValorNulo & ",0"
         Else
             ' importe al debe en positivo
-            cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!Importe, "N") * (-1), "N") & ","
-            cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(RS!cuenta, "N") & "," & ValorNulo & ",0"
+            Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!Importe, "N") * (-1), "N") & ","
+            Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(RS!cuenta, "N") & "," & ValorNulo & ",0"
         
         End If
         
-        cad = "(" & cad & ")"
+        Cad = "(" & Cad & ")"
         
-        b = InsertarLinAsientoDia(cad, cadMen)
-        cadMen = "Insertando Lin. Asiento: " & i
+        b = InsertarLinAsientoDia(Cad, cadMen)
+        cadMen = "Insertando Lin. Asiento: " & I
 
     End If
     
@@ -9310,7 +9315,7 @@ End Function
 '----------------------------------------------------------------------
 ' FACTURAS VARIAS REGISTRO CLIENTE
 '----------------------------------------------------------------------
-Public Function PasarFacturaFVAR(cadWhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, TipoM As String, Optional FecRecep As Date) As Boolean
+Public Function PasarFacturaFVAR(cadwhere As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, TipoM As String, Optional FecRecep As Date) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -9344,11 +9349,11 @@ Dim Obs As String
         ' tendriamos que insertar en el diario FALTA
     Else
         If TipoM = "FVP" Then 'registro de iva de proveedor
-            b = InsertarCabFactFVARPro(cadWhere, cadMen, Mc, CDate(FechaFin), Seccion, CStr(FecRecep))
+            b = InsertarCabFactFVARPro(cadwhere, cadMen, Mc, CDate(FechaFin), Seccion, CStr(FecRecep))
             cadMen = "Insertando Cab. Factura Proveedor: " & cadMen
         Else ' registro de iva de cliente
             '---- Insertar en la conta Cabecera Factura
-            b = InsertarCabFactFVAR(cadWhere, cadMen, TipoFact, Seccion)
+            b = InsertarCabFactFVAR(cadwhere, cadMen, TipoFact, Seccion)
             cadMen = "Insertando Cab. Factura: " & cadMen
         End If
     End If
@@ -9361,12 +9366,12 @@ Dim Obs As String
         tipoMov = TipoM    ' codtipom de la factura de socio
         
         If TipoM = "FVP" Then ' registro de iva de proveedor
-            b = InsertarEnTesoreriaNewFVARPro(cadWhere, cadMen, CtaBanco, CStr(FecVenci))
+            b = InsertarEnTesoreriaNewFVARPro(cadwhere, cadMen, CtaBanco, CStr(FecVenci))
             cadMen = "Insertando en Tesoreria: " & cadMen
         Else
             'si la factura es a un cliente o de socio a no descontar en liquidacion , se inserta en tesoreria
-            If TipoFact = 1 Or (TipoFact = 0 And Not FraADescontarEnLiquidacion(cadWhere)) Then
-                b = InsertarEnTesoreriaNewFVAR(cadWhere, CtaBanco, CStr(FecVenci), cadMen, TipoFact, Seccion)
+            If TipoFact = 1 Or (TipoFact = 0 And Not FraADescontarEnLiquidacion(cadwhere)) Then
+                b = InsertarEnTesoreriaNewFVAR(cadwhere, CtaBanco, CStr(FecVenci), cadMen, TipoFact, Seccion)
                 cadMen = "Insertando en Tesoreria: " & cadMen
             End If
         End If
@@ -9374,13 +9379,13 @@ Dim Obs As String
             If TipoM = "FVP" Then ' registro de iva de proveedores
                 CCoste = CodCCost
                 '---- Insertar lineas de Factura en la Conta
-                b = InsertarLinFactFVAR("fvarcabfactpro", cadWhere, cadMen, Mc.Contador)
+                b = InsertarLinFactFVAR("fvarcabfactpro", cadwhere, cadMen, Mc.Contador)
                 cadMen = "Insertando Lin. Factura: " & cadMen
             Else
                 If TipoM <> "FVG" Then
                     CCoste = CodCCost
                     '---- Insertar lineas de Factura en la Conta
-                    b = InsertarLinFactFVAR("fvarcabfact", cadWhere, cadMen)
+                    b = InsertarLinFactFVAR("fvarcabfact", cadwhere, cadMen)
                     cadMen = "Insertando Lin. Factura: " & cadMen
                 End If
             End If
@@ -9388,9 +9393,9 @@ Dim Obs As String
             If b Then
                 '---- Poner intconta=1 en ariges.scafac
                 If TipoM = "FVP" Then ' registro de iva de proveedores
-                    b = ActualizarCabFact("fvarcabfactpro", cadWhere, cadMen)
+                    b = ActualizarCabFact("fvarcabfactpro", cadwhere, cadMen)
                 Else
-                    b = ActualizarCabFact("fvarcabfact", cadWhere, cadMen)
+                    b = ActualizarCabFact("fvarcabfact", cadwhere, cadMen)
                 End If
                 cadMen = "Actualizando Factura Varia: " & cadMen
             End If
@@ -9412,23 +9417,23 @@ EContab:
         conn.RollbackTrans
         PasarFacturaFVAR = False
         If Not b Then
-            InsertarTMPErrFacFVAR cadMen, cadWhere
+            InsertarTMPErrFacFVAR cadMen, cadwhere
         End If
     End If
 End Function
 
 
-Private Function InsertarCabFactFVAR(cadWhere As String, cadErr As String, Tipo As Byte, vSeccion As String) As Boolean
+Private Function InsertarCabFactFVAR(cadwhere As String, cadErr As String, tipo As Byte, vSeccion As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Seccion As Integer
 
     On Error GoTo EInsertar
     
     ' factura de cliente (socio)
-    If Tipo = 0 Then
+    If tipo = 0 Then
         SQL = "SELECT stipom.letraser,numfactu,fecfactu, rsocios_seccion.codmaccli as codmacta,year(fecfactu) as anofaccl,"
         SQL = SQL & "baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
         SQL = SQL & "totalfac,tipoiva1,tipoiva2,tipoiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3, "
@@ -9436,7 +9441,7 @@ Dim Seccion As Integer
         SQL = SQL & " FROM ((" & "fvarcabfact inner join " & "usuarios.stipom on fvarcabfact.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & "INNER JOIN rsocios ON fvarcabfact.codsocio=rsocios.codsocio) "
         SQL = SQL & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vSeccion, "N")
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
     Else
     ' factura de cliente (cliente)
         SQL = "SELECT stipom.letraser,numfactu,fecfactu, clientes.codmacta as codmacta,year(fecfactu) as anofaccl,"
@@ -9445,14 +9450,14 @@ Dim Seccion As Integer
         SQL = SQL & "retfaccl, trefaccl, cuereten "
         SQL = SQL & " FROM ((" & "fvarcabfact inner join " & "usuarios.stipom on fvarcabfact.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & "INNER JOIN clientes ON fvarcabfact.codclien=clientes.codclien) "
-        SQL = SQL & " WHERE " & cadWhere
+        SQL = SQL & " WHERE " & cadwhere
     End If
         
         
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
         DtoPPago = 0
@@ -9470,7 +9475,7 @@ Dim Seccion As Integer
         SQL = SQL & DBSet(RS!TotalFac, "N") & "," & DBSet(RS!TipoIVA1, "N") & "," & DBSet(RS!TipoIVA2, "N", "S") & "," & DBSet(RS!TipoIVA3, "N", "S") & ",0,"
         SQL = SQL & DBSet(RS!retfaccl, "N", "S") & "," & DBSet(RS!trefaccl, "N", "S") & "," & DBSet(RS!cuereten, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
         SQL = SQL & DBSet(RS!fecfactu, "F")
-        cad = cad & "(" & SQL & ")"
+        Cad = Cad & "(" & SQL & ")"
 '        RS.MoveNext
     End If
     RS.Close
@@ -9480,7 +9485,7 @@ Dim Seccion As Integer
     SQL = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
     SQL = SQL & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
     SQL = SQL & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    SQL = SQL & " VALUES " & cad
+    SQL = SQL & " VALUES " & Cad
     ConnConta.Execute SQL
     
 EInsertar:
@@ -9494,7 +9499,7 @@ End Function
 
 
 
-Public Function InsertarEnTesoreriaNewFVAR(cadWhere As String, CtaBan As String, FecVen As String, MenError As String, Tipo As Byte, vSeccion As String) As Boolean
+Public Function InsertarEnTesoreriaNewFVAR(cadwhere As String, CtaBan As String, FecVen As String, MenError As String, tipo As Byte, vSeccion As String) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 Dim b As Boolean
 Dim SQL As String, Text33csb As String, Text41csb As String
@@ -9504,7 +9509,7 @@ Dim rsVenci As ADODB.Recordset
 
 Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Long
+Dim I As Long
 Dim DigConta As String
 Dim CC As String
 
@@ -9527,7 +9532,7 @@ Dim PorcIva As String
 
 Dim Rsx7 As ADODB.Recordset
 Dim Sql7 As String
-Dim CADENA As String
+Dim Cadena As String
 
 Dim CadRegistro As String
 Dim CadRegistro1 As String
@@ -9543,14 +9548,14 @@ Dim vSocio As cSocio
     CadValues2 = ""
     
     Set Rsx = New ADODB.Recordset
-    SQL = "select * from fvarcabfact where " & cadWhere
+    SQL = "select * from fvarcabfact where " & cadwhere
     Rsx.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rsx.EOF Then
         letraser = ""
         letraser = ObtenerLetraSerie2(Rsx!CodTipom)
     
-        If Tipo = 0 Then
+        If tipo = 0 Then
             ' socio
             
             Dim vSoc As cSocio
@@ -9607,7 +9612,7 @@ Dim vSocio As cSocio
             
                     CadValuesAux2 = "('" & Trim(letraser) & "', " & DBSet(Rsx!numfactu, "N") & ", " & DBSet(Rsx!fecfactu, "F") & ", "
                     '-------- Primer Vencimiento
-                    i = 1
+                    I = 1
                     'FECHA VTO
                     FecVenci = DBLet(Rsx!fecfactu, "F")
                     '=== Laura 23/01/2007
@@ -9615,7 +9620,7 @@ Dim vSocio As cSocio
                     FecVenci = DateAdd("d", DBLet(rsVenci!primerve, "N"), FecVenci)
                     '===
                     
-                    CadValues2 = CadValuesAux2 & i & ", "
+                    CadValues2 = CadValuesAux2 & I & ", "
                     
                     '[Monica]03/07/2013: añado trim(codmacta)
                     CadValues2 = CadValues2 & DBSet(Trim(Codmacta), "T") & ", " & DBSet(Rsx!codforpa, "N") & ", " & DBSet(FecVenci, "F") & ", "
@@ -9643,14 +9648,14 @@ Dim vSocio As cSocio
                 
                     'Resto Vencimientos
                     '--------------------------------------------------------------------
-                    For i = 2 To rsVenci!numerove
+                    For I = 2 To rsVenci!numerove
                        'FECHA Resto Vencimientos
                         '=== Laura 23/01/2007
                         'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
                         FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
                         '===
                             
-                        CadValues2 = CadValues2 & CadValuesAux2 & i & ", " & DBSet(Trim(Rs4!Codmacta), "T") & ", " & DBSet(Rsx!codforpa, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
+                        CadValues2 = CadValues2 & CadValuesAux2 & I & ", " & DBSet(Trim(Rs4!Codmacta), "T") & ", " & DBSet(Rsx!codforpa, "N") & ", '" & Format(FecVenci, FormatoFecha) & "', "
                         
                         'IMPORTE Resto de Vendimientos
                         ImpVenci = Round2(TotalFac / rsVenci!numerove, 2)
@@ -9663,7 +9668,7 @@ Dim vSocio As cSocio
                             CadValues2 = CadValues2 & "),"
                         End If
                         
-                    Next i
+                    Next I
                     ' quitamos la ultima coma
                     CadValues2 = Mid(CadValues2, 1, Len(CadValues2) - 1)
                         
@@ -9701,15 +9706,15 @@ End Function
 
 
 
-Private Function InsertarLinFactFVAR(cadTabla As String, cadWhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
+Private Function InsertarLinFactFVAR(cadTabla As String, cadwhere As String, cadErr As String, Optional NumRegis As Long) As Boolean
 'cadWHere: selecciona un registro de scafac
 'codtipom=x and numfactu=y and fecfactu=z
 Dim SQL As String
 Dim SQLaux As String
 Dim Sql2 As String
 Dim RS As ADODB.Recordset
-Dim cad As String, Aux As String
-Dim i As Byte
+Dim Cad As String, Aux As String
+Dim I As Byte
 Dim totimp As Currency, ImpLinea As Currency
 Dim cadCampo As String
 Dim CadCampo1 As String
@@ -9735,7 +9740,7 @@ Dim NumDigit3 As String
         
         SQL = SQL & " FROM (fvarlinfact inner join usuarios.stipom on fvarlinfact.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & " inner join fvarconce on fvarlinfact.codconce=fvarconce.codconce "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "fvarcabfact", "fvarlinfact")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "fvarcabfact", "fvarlinfact")
     Else
         If vEmpresa.TieneAnalitica Then
             SQL = " SELECT usuarios.stipom.letraser,fvarlinfactpro.codtipom,numfactu,fecfactu," & cadCampo & " as cuenta,sum(importe) as importe, fvarconce.codccost "
@@ -9745,7 +9750,7 @@ Dim NumDigit3 As String
         
         SQL = SQL & " FROM (fvarlinfactpro inner join usuarios.stipom on fvarlinfactpro.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & " inner join fvarconce on fvarlinfactpro.codconce=fvarconce.codconce "
-        SQL = SQL & " WHERE " & Replace(cadWhere, "fvarcabfactpro", "fvarlinfactpro")
+        SQL = SQL & " WHERE " & Replace(cadwhere, "fvarcabfactpro", "fvarlinfactpro")
     End If
     
     If vEmpresa.TieneAnalitica Then
@@ -9757,12 +9762,12 @@ Dim NumDigit3 As String
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    cad = ""
-    i = 1
+    Cad = ""
+    I = 1
     totimp = 0
     SQLaux = ""
     While Not RS.EOF
-        SQLaux = cad
+        SQLaux = Cad
         'calculamos la Base Imp del total del importe para cada cta cble ventas
 ' --monica:no hay descuentos
 '        '---- Laura: 10/10/2006
@@ -9782,11 +9787,11 @@ Dim NumDigit3 As String
         Sql2 = ""
         
         If cadTabla = "fvarcabfact" Then
-            SQL = "'" & Trim(RS!letraser) & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = "'" & Trim(RS!letraser) & "'," & RS!numfactu & "," & Year(RS!fecfactu) & "," & I & ","
             SQL = SQL & DBSet(Trim(RS!cuenta), "T")
             
         Else
-            SQL = NumRegis & "," & Year(RS!fecfactu) & "," & i & ","
+            SQL = NumRegis & "," & Year(RS!fecfactu) & "," & I & ","
             SQL = SQL & DBSet(Trim(RS!cuenta), "T")
         
         End If
@@ -9803,9 +9808,9 @@ Dim NumDigit3 As String
             CCoste = ValorNulo
         End If
         
-        cad = cad & "(" & SQL & ")" & ","
+        Cad = Cad & "(" & SQL & ")" & ","
         
-        i = i + 1
+        I = I + 1
         RS.MoveNext
     Wend
     RS.Close
@@ -9826,9 +9831,9 @@ Dim NumDigit3 As String
             Sql2 = Sql2 & DBSet(CCoste, "T")
         End If
         If SQLaux <> "" Then 'hay mas de una linea
-            cad = SQLaux & "(" & Sql2 & ")" & ","
+            Cad = SQLaux & "(" & Sql2 & ")" & ","
         Else 'solo una linea
-            cad = "(" & Sql2 & ")" & ","
+            Cad = "(" & Sql2 & ")" & ","
         End If
         
 '        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
@@ -9838,34 +9843,34 @@ Dim NumDigit3 As String
     If cadTabla = "fvarcabfactpro" Then
         ' las retenciones si las hay
         If ImpReten <> 0 Then
-            SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+            SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
             SQL = SQL & DBSet(Trim(CtaSocio), "T")
             SQL = SQL & "," & DBSet(ImpReten, "N") & ","
             SQL = SQL & ValorNulo ' no llevan centro de coste
             
-            cad = cad & "(" & SQL & ")" & ","
-            i = i + 1
+            Cad = Cad & "(" & SQL & ")" & ","
+            I = I + 1
             
-            SQL = NumRegis & "," & AnyoFacPr & "," & i & ","
+            SQL = NumRegis & "," & AnyoFacPr & "," & I & ","
             SQL = SQL & DBSet(Trim(CtaReten), "T")
             SQL = SQL & "," & DBSet(ImpReten * (-1), "N") & ","
             SQL = SQL & ValorNulo ' no llevan centro de coste
             
-            cad = cad & "(" & SQL & ")" & ","
-            i = i + 1
+            Cad = Cad & "(" & SQL & ")" & ","
+            I = I + 1
         End If
     End If
 
 
     'Insertar en la contabilidad
-    If cad <> "" Then
-        cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
+    If Cad <> "" Then
+        Cad = Mid(Cad, 1, Len(Cad) - 1) 'quitar la ult. coma
         If cadTabla = "fvarcabfact" Then
             SQL = "INSERT INTO linfact (numserie,codfaccl,anofaccl,numlinea,codtbase,impbascl,codccost) "
         Else
             SQL = "INSERT INTO linfactprov (numregis,anofacpr,numlinea,codtbase,impbaspr,codccost) "
         End If
-        SQL = SQL & " VALUES " & cad
+        SQL = SQL & " VALUES " & Cad
         ConnConta.Execute SQL
     End If
 
@@ -9879,11 +9884,11 @@ EInLinea:
 End Function
 
 
-Private Function FraADescontarEnLiquidacion(cwhere As String) As Boolean
+Private Function FraADescontarEnLiquidacion(cWhere As String) As Boolean
 Dim SQL As String
 Dim RS As ADODB.Recordset
 
-    SQL = "select enliquidacion from fvarcabfact where " & cwhere
+    SQL = "select enliquidacion from fvarcabfact where " & cWhere
     
     FraADescontarEnLiquidacion = (DevuelveValor(SQL) > 0)
 
@@ -9892,12 +9897,12 @@ End Function
 
 
 
-Private Function InsertarCabFactFVARPro(cadWhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String, Seccion As String, FecRecep As String) As Boolean
+Private Function InsertarCabFactFVARPro(cadwhere As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String, Seccion As String, FecRecep As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim SQL As String
 Dim RS As ADODB.Recordset
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 
@@ -9911,12 +9916,12 @@ Dim Nulo3 As String
     SQL = SQL & " FROM (fvarcabfactpro "
     SQL = SQL & " INNER JOIN rsocios_seccion ON fvarcabfactpro.codsocio=rsocios_seccion.codsocio) "
     SQL = SQL & " INNER JOIN rsocios ON fvarcabfactpro.codsocio = rsocios.codsocio"
-    SQL = SQL & " WHERE " & cadWhere
+    SQL = SQL & " WHERE " & cadwhere
     
     Set RS = New ADODB.Recordset
     RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    cad = ""
+    Cad = ""
     If Not RS.EOF Then
     
         If Mc.ConseguirContador("1", (CDate(FecRecep) <= CDate(FechaFin) - 365), True) = 0 Then
@@ -9940,13 +9945,13 @@ Dim Nulo3 As String
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
             SQL = SQL & DBSet(TotalFac, "N") & "," & DBSet(RS!TipoIVA1, "N") & "," & DBSet(RS!TipoIVA2, "N", Nulo2) & "," & DBSet(RS!TipoIVA3, "N", Nulo3) & ",0,"
             SQL = SQL & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            cad = cad & "(" & SQL & ")"
+            Cad = Cad & "(" & SQL & ")"
             
             'Insertar en la contabilidad
             SQL = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
             SQL = SQL & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
             SQL = SQL & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            SQL = SQL & " VALUES " & cad
+            SQL = SQL & " VALUES " & Cad
             ConnConta.Execute SQL
             
             'añadido como david para saber que numero de registro corresponde a cada factura
@@ -9984,13 +9989,13 @@ End Function
 
 
 
-Private Function InsertarEnTesoreriaNewFVARPro(cadWhere As String, MenError As String, CtaBanco As String, FecVenci As Date) As Boolean
+Private Function InsertarEnTesoreriaNewFVARPro(cadwhere As String, MenError As String, CtaBanco As String, FecVenci As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim b As Boolean
 Dim SQL As String
 Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
+Dim I As Byte
 Dim CC As String
 Dim letraser As String
 Dim Text33csb As String
@@ -10016,8 +10021,8 @@ Dim FactuRec As String
         CadValuesAux2 = "('" & Trim(CtaSocio) & "', " & DBSet(FacturaSoc, "T") & ", '" & Format(FecFactuSoc, FormatoFecha) & "', "
     
         '------------------------------------------------------------
-        i = 1
-        CadValues2 = CadValuesAux2 & i
+        I = 1
+        CadValues2 = CadValuesAux2 & I
         
         CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
         CadValues2 = CadValues2 & DBSet(TotalFac, "N") & ", " & DBSet(CtaBanco, "T") & ","
@@ -10124,7 +10129,7 @@ Private Function InsertarAsientoCobroPOZOS(cadMen As String, ByRef RS As ADODB.R
 
 ' la contabilizacion de las facturas internas de horto, se han de insertar en el diario no en el registro de iva de proveedor
 Dim SQL As String
-Dim cad As String
+Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
@@ -10136,7 +10141,7 @@ Dim b As Boolean
 Dim Mc As Contadores
     On Error GoTo EInsertar
        
-    cad = ""
+    Cad = ""
     Set Mc = New Contadores
 
     If Mc.ConseguirContador("0", (DBLet(RS!fecfactu) <= CDate(vEmpresa.FechaFin)), True) = 0 Then
@@ -10197,9 +10202,9 @@ Dim ImporteD As Currency
 Dim ImporteH As Currency
 Dim Diferencia As Currency
 Dim Obs As String
-Dim i As Long
+Dim I As Long
 Dim b As Boolean
-Dim cad As String
+Dim Cad As String
 Dim FeFact As Date
 Dim cadMen As String
 
@@ -10212,7 +10217,7 @@ Dim Amplia As String
     InsertarLinAsientoCobroPOZOS = False
         
         
-    i = 0
+    I = 0
     ImporteD = 0
     ImporteH = 0
     
@@ -10229,57 +10234,57 @@ Dim Amplia As String
     
     b = True
     
-    i = i + 1
+    I = I + 1
     
     FeFact = RS!fecfactu
     
-    cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
-    cad = cad & DBSet(i, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
+    Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
+    Cad = Cad & DBSet(I, "N") & "," & DBSet(CtaSocio, "T") & "," & DBSet(numdocum, "T") & ","
     
     ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
     If DBLet(RS!TotalFact, "N") > 0 Then
         ' importe al haber en positivo
-        cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-        cad = cad & DBSet(RS!TotalFact, "N") & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
+        Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+        Cad = Cad & DBSet(RS!TotalFact, "N") & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
     
         ImporteH = ImporteH + CCur(DBLet(RS!TotalFact, "N"))
         
     Else
         ' importe al debe en positivo cambiamos signo
-        cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!TotalFact, "N") * (-1), "N") & ","
-        cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
+        Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!TotalFact, "N") * (-1), "N") & ","
+        Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaContra, "T") & "," & ValorNulo & ",0"
     
         ImporteD = ImporteD + CCur(DBLet(RS!TotalFact, "N") * (-1))
     
     End If
     
-    cad = "(" & cad & ")"
+    Cad = "(" & Cad & ")"
     
-    b = InsertarLinAsientoDia(cad, cadMen)
-    cadMen = "Insertando Lin. Asiento: " & i
+    b = InsertarLinAsientoDia(Cad, cadMen)
+    cadMen = "Insertando Lin. Asiento: " & I
 
-    i = i + 1
+    I = I + 1
             
     ' el Total es sobre la cuenta del cliente
-    cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
-    cad = cad & DBSet(i, "N") & ","
-    cad = cad & DBSet(CtaContra, "T") & "," & DBSet(numdocum, "T") & ","
+    Cad = DBSet(vEmpresa.NumDiarioInt, "N") & "," & DBSet(RS!fecfactu, "F") & "," & DBSet(Contador, "N") & ","
+    Cad = Cad & DBSet(I, "N") & ","
+    Cad = Cad & DBSet(CtaContra, "T") & "," & DBSet(numdocum, "T") & ","
         
     ' COMPROBAMOS EL SIGNO DEL IMPORTE PQ NO PERMITIMOS INTRODUCIR APUNTES CON IMPORTES NEGATIVOS
     If DBLet(RS!TotalFact, "N") > 0 Then
         ' importe al debe en positivo
-        cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!TotalFact, "N"), "N") & ","
-        cad = cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "N") & "," & ValorNulo & ",0"
+        Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliaciond, "T") & "," & DBSet(DBLet(RS!TotalFact, "N"), "N") & ","
+        Cad = Cad & ValorNulo & "," & ValorNulo & "," & DBSet(CtaSocio, "N") & "," & ValorNulo & ",0"
     Else
         ' importe al haber en positivo, cambiamos el signo
-        cad = cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
-        cad = cad & DBSet(DBLet(RS!TotalFact, "N") * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "N") & "," & ValorNulo & ",0"
+        Cad = Cad & DBSet(Concep, "N") & "," & DBSet(ampliacionh, "T") & "," & ValorNulo & ","
+        Cad = Cad & DBSet(DBLet(RS!TotalFact, "N") * (-1), "N") & "," & ValorNulo & "," & DBSet(CtaSocio, "N") & "," & ValorNulo & ",0"
     End If
     
-    cad = "(" & cad & ")"
+    Cad = "(" & Cad & ")"
     
-    b = InsertarLinAsientoDia(cad, cadMen)
-    cadMen = "Insertando Lin. Asiento: " & i
+    b = InsertarLinAsientoDia(Cad, cadMen)
+    cadMen = "Insertando Lin. Asiento: " & I
 
     InsertarLinAsientoCobroPOZOS = b
     Exit Function
