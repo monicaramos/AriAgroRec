@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -35,9 +35,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame3"
+      Tab(0).Control(0)=   "FrameAnticipos"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "FrameAnticipos"
+      Tab(0).Control(2)=   "Frame3"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -4228,7 +4228,7 @@ Dim devuelve As String
 Dim cadMen As String
 Dim SQL As String
 Dim vSeccion As CSeccion
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
         
@@ -4262,7 +4262,7 @@ Dim vSocio As CSocio
                     PonerFoco Text1(Index)
                 Else
                     ' sacamos el iva del socio
-                    Set vSocio = New CSocio
+                    Set vSocio = New cSocio
                     If vSocio.LeerDatosSeccion(Text1(2).Text, vParamAplic.Seccionhorto) Then
                         Text1(3).Text = vSocio.CodIva
                         Combo1(1).ListIndex = vSocio.TipoIRPF
@@ -4651,7 +4651,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -4766,7 +4766,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -4774,7 +4774,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -4816,7 +4816,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
                         frmLFac.Factura = Data3.Recordset.Fields(1).Value
                         frmLFac.fecfactu = Data3.Recordset.Fields(2).Value
                         frmLFac.Variedad = Data3.Recordset.Fields(3).Value
-                        frmLFac.campo = Data3.Recordset.Fields(5).Value
+                        frmLFac.Campo = Data3.Recordset.Fields(5).Value
                         frmLFac.Show vbModal
                         
                         Set frmLFac = Nothing
@@ -5093,7 +5093,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -5293,7 +5293,7 @@ Dim SQL As String
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 PonerFormatoEntero txtAux(Index)
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
@@ -5820,6 +5820,18 @@ Dim EsComplemen As Byte
         numParam = numParam + 1
     End If
     
+    '[Monica]10/02/2016: preguntamos si quiere imprimir el detalle de los campos
+    If vParamAplic.Cooperativa = 4 Then
+        If Text1(12).Text = "FAA" Then
+            If MsgBox("¿ Desea impresión detallada por campos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+                CadParam = CadParam & "pDetalle=1|"
+            Else
+                CadParam = CadParam & "pDetalle=0|"
+            End If
+            numParam = numParam + 1
+        End If
+    End If
+    
     
     If Not HayRegParaInforme(NombreTabla, cadSelect) Then Exit Sub
      
@@ -5896,7 +5908,7 @@ Dim cadMen As String
     
         Case 16 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
             End If
         
     End Select
