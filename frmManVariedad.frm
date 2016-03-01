@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -165,39 +165,45 @@ Begin VB.Form frmManVariedad
       Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "Label1(2)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "text2(2)"
+      Tab(0).Control(16)=   "Label1(3)"
       Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "text1(2)"
+      Tab(0).Control(17)=   "imgAyuda(1)"
       Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "text1(4)"
+      Tab(0).Control(18)=   "text2(2)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "text1(3)"
+      Tab(0).Control(19)=   "text1(2)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "text2(3)"
+      Tab(0).Control(20)=   "text1(4)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "text1(9)"
+      Tab(0).Control(21)=   "text1(3)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "text2(9)"
+      Tab(0).Control(22)=   "text2(3)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "Frame3"
+      Tab(0).Control(23)=   "text1(9)"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "text2(26)"
+      Tab(0).Control(24)=   "text2(9)"
       Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "text1(26)"
+      Tab(0).Control(25)=   "Frame3"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "text1(27)"
+      Tab(0).Control(26)=   "text2(26)"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "text2(27)"
+      Tab(0).Control(27)=   "text1(26)"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Frame4"
+      Tab(0).Control(28)=   "text1(27)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).Control(29)=   "Frame6"
+      Tab(0).Control(29)=   "text2(27)"
       Tab(0).Control(29).Enabled=   0   'False
-      Tab(0).Control(30)=   "Combo1(1)"
+      Tab(0).Control(30)=   "Frame4"
       Tab(0).Control(30).Enabled=   0   'False
-      Tab(0).Control(31)=   "Combo1(2)"
+      Tab(0).Control(31)=   "Frame6"
       Tab(0).Control(31).Enabled=   0   'False
-      Tab(0).ControlCount=   32
+      Tab(0).Control(32)=   "Combo1(1)"
+      Tab(0).Control(32).Enabled=   0   'False
+      Tab(0).Control(33)=   "Combo1(2)"
+      Tab(0).Control(33).Enabled=   0   'False
+      Tab(0).Control(34)=   "text1(38)"
+      Tab(0).Control(34).Enabled=   0   'False
+      Tab(0).ControlCount=   35
       TabCaption(1)   =   "Calibres"
       TabPicture(1)   =   "frmManVariedad.frx":0028
       Tab(1).ControlEnabled=   0   'False
@@ -247,6 +253,17 @@ Begin VB.Form frmManVariedad
       Tab(3).Control(33)=   "Label6"
       Tab(3).Control(34)=   "Label7"
       Tab(3).ControlCount=   35
+      Begin VB.TextBox text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   38
+         Left            =   7545
+         MaxLength       =   6
+         TabIndex        =   136
+         Tag             =   "Variedad Retirada|T|S|||variedades|codvarret|||"
+         Top             =   1380
+         Width           =   915
+      End
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   2
@@ -448,7 +465,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label38 
             Caption         =   "Acarreo Recolección"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   132
             Top             =   1890
             Width           =   1500
@@ -472,7 +489,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label37 
             Caption         =   "Facturas Transporte"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   130
             Top             =   1560
             Width           =   1470
@@ -480,7 +497,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label36 
             Caption         =   "Siniestros"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   128
             Top             =   1245
             Width           =   1470
@@ -520,7 +537,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label34 
             Caption         =   "Compras Terceros"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   120
             Top             =   930
             Width           =   1470
@@ -528,7 +545,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label33 
             Caption         =   "Liquidación"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   119
             Top             =   600
             Width           =   1440
@@ -536,7 +553,7 @@ Begin VB.Form frmManVariedad
          Begin VB.Label Label32 
             Caption         =   "Anticipos"
             Height          =   255
-            Left            =   330
+            Left            =   210
             TabIndex        =   118
             Top             =   270
             Width           =   1440
@@ -1645,6 +1662,25 @@ Begin VB.Form frmManVariedad
          Top             =   495
          Width           =   3435
       End
+      Begin VB.Image imgAyuda 
+         Height          =   240
+         Index           =   1
+         Left            =   8580
+         MousePointer    =   4  'Icon
+         Tag             =   "-1"
+         ToolTipText     =   "Ayuda"
+         Top             =   1380
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Variedad Retirada"
+         Height          =   255
+         Index           =   3
+         Left            =   6120
+         TabIndex        =   137
+         Top             =   1410
+         Width           =   1320
+      End
       Begin VB.Label Label1 
          Caption         =   "Tipo Variedad"
          Height          =   255
@@ -1709,34 +1745,34 @@ Begin VB.Form frmManVariedad
       Begin VB.Label Label15 
          Caption         =   "Euros/kg Seg.Social"
          Height          =   255
-         Left            =   -70545
+         Left            =   -70665
          TabIndex        =   87
          Top             =   1500
-         Width           =   1770
+         Width           =   2010
       End
       Begin VB.Label Label14 
          Caption         =   "Euros/kg Mano Obra"
          Height          =   255
-         Left            =   -70545
+         Left            =   -70665
          TabIndex        =   86
          Top             =   1170
-         Width           =   1770
+         Width           =   1950
       End
       Begin VB.Label Label13 
          Caption         =   "Euros/kg Recolec."
          Height          =   255
-         Left            =   -70545
+         Left            =   -70665
          TabIndex        =   85
          Top             =   825
-         Width           =   2040
+         Width           =   2160
       End
       Begin VB.Label Label12 
          Caption         =   "Euros/kg Destajo"
          Height          =   255
-         Left            =   -70545
+         Left            =   -70665
          TabIndex        =   84
          Top             =   510
-         Width           =   1410
+         Width           =   1530
       End
       Begin VB.Label Label11 
          Caption         =   "Porcentaje Destrio"
@@ -2247,7 +2283,7 @@ Dim vCadena As String
             If DatosOk Then
                 If InsertarDesdeForm2(Me, 1) Then
                     
-                    CargarUnaVariedad CLng(text1(0).Text), "I"
+                    CargarUnaVariedad CLng(Text1(0).Text), "I"
                     
                     Data1.RecordSource = "Select * from " & NombreTabla & Ordenacion
                     TerminaBloquear
@@ -2261,10 +2297,10 @@ Dim vCadena As String
             If DatosOk Then
                 If ModificaDesdeFormulario2(Me, 1) Then
                     '[Monica]18/09/2013: si estamos actualizando variedad en Picassent el claveant en 'PP&VVVV'
-                    Produ = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(text1(0).Text, "N"))
-                    vCadena = CLng(Produ) & "&" & CLng(text1(0).Text)
+                    Produ = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Text1(0).Text, "N"))
+                    vCadena = CLng(Produ) & "&" & CLng(Text1(0).Text)
                     
-                    CargarUnaVariedad CLng(text1(0).Text), "U", vCadena
+                    CargarUnaVariedad CLng(Text1(0).Text), "U", vCadena
                     
                     TerminaBloquear
                     PosicionarData
@@ -2319,7 +2355,7 @@ Private Sub Form_Activate()
             Else
                 PonerModo 1 'búsqueda
                 ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-                text1(0).BackColor = vbYellow 'codvarie
+                Text1(0).BackColor = vbYellow 'codvarie
                 ' ****************************************************************************
             End If
         End If
@@ -2398,7 +2434,9 @@ Dim i As Integer
     Next i
     Me.imgBuscar(4).Picture = frmPpal.imgListComun.ListImages(21).Picture
     
-    imgAyuda(0).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
 
     CargaCombo
     
@@ -2448,6 +2486,16 @@ Dim i As Integer
 '        text1(0).BackColor = vbYellow 'codclien
 '        ' ****************************************************************************
 '    End If
+
+    '[Monica]01/03/2016: Si es Abn ponemos los gastos molturacion y envasado en la variedad
+    If vParamAplic.Cooperativa = 1 Then
+        Label14.Caption = "Euros/kg Gtos.Molturación"
+        Text1(17).Tag = "Euros/kg Gtos.Molturación|N|S|||variedades|eurmanob|0.0000||"
+        Label15.Caption = "Euros/litro Gtos.Envasado"
+        Text1(18).Tag = "Euros/kg Gtos.Envasado|N|S|||variedades|eursegsoc|0.0000||"
+    End If
+
+
 End Sub
 
 Private Sub LimpiarCampos()
@@ -2514,7 +2562,7 @@ Dim b As Boolean
     BloquearText1 Me, Modo
     
     '++monica: si el modo es insertar damos el siguiente pero dejamos modificar
-    If Modo = 3 Then text1(0).Locked = False
+    If Modo = 3 Then Text1(0).Locked = False
     
     ' ***** bloquejar tots els controls visibles de la clau primaria de la capçalera ***
 '    If Modo = 4 Then _
@@ -2673,7 +2721,7 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
         'Sabem quins camps son els que mos torna
         'Creem una cadena consulta i posem els datos
         CadB = ""
-        Aux = ValorDevueltoFormGrid(text1(0), CadenaDevuelta, 1)
+        Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
         CadB = Aux
         '   Com la clau principal es única, en posar el sql apuntant
         '   al valor retornat sobre la clau ppal es suficient
@@ -2687,30 +2735,30 @@ End Sub
 
 Private Sub frmCCos_DatoSeleccionado(CadenaSeleccion As String)
 'Centro de Coste de la contabilidad
-    text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
-    text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
-    text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
-    text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
 End Sub
 
 Private Sub frmIva_DatoSeleccionado(CadenaSeleccion As String)
 'Tipo de iva de la contabilidad
-    text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigiva
-    FormateaCampo text1(indice)
-    text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Porceiva
+    Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigiva
+    FormateaCampo Text1(indice)
+    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Porceiva
 End Sub
 
 Private Sub frmTra_Actualizar(vValor As String)
     On Error GoTo EEPonerBusq
     
     LimpiarCampos
-    text1(0).Text = vValor 'codvarie
+    Text1(0).Text = vValor 'codvarie
     
-    FormateaCampo text1(0)
+    FormateaCampo Text1(0)
     
     Screen.MousePointer = vbHourglass
     
@@ -2742,15 +2790,15 @@ EEPonerBusq:
 End Sub
 
 Private Sub frmProd_DatoSeleccionado(CadenaSeleccion As String)
-    text1(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
-    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    Text1(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTUn_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento de tipos de unidad
-    text1(9).Text = RecuperaValor(CadenaSeleccion, 1) 'tipos de unidad
-    FormateaCampo text1(9)
-    text2(9).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de unidad
+    Text1(9).Text = RecuperaValor(CadenaSeleccion, 1) 'tipos de unidad
+    FormateaCampo Text1(9)
+    Text2(9).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de unidad
 End Sub
 
 
@@ -2763,6 +2811,11 @@ Dim vCadena As String
                       "Se utiliza para restringir las variedades a mostrar en los informes. " & vbCrLf & _
                       vbCrLf
                       
+        Case 1
+           ' "____________________________________________________________"
+            vCadena = "Indica la variedad que viene en el fichero de traspaso de albaranes de retirada de almazara." & vbCrLf & vbCrLf & _
+                      "En los albaranes de retirada se grabará el código de variedad asociada a la variedad de retirada." & vbCrLf & _
+                      vbCrLf
                       
     End Select
     MsgBox vCadena, vbInformation, "Descripción de Ayuda"
@@ -2861,14 +2914,14 @@ Dim i As Integer
     If Modo <> 1 Then
         LimpiarCampos
         PonerModo 1
-        PonerFoco text1(0) ' <===
-        text1(0).BackColor = vbYellow ' <===
+        PonerFoco Text1(0) ' <===
+        Text1(0).BackColor = vbYellow ' <===
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
-            text1(kCampo).Text = ""
-            text1(kCampo).BackColor = vbYellow
-            PonerFoco text1(kCampo)
+            Text1(kCampo).Text = ""
+            Text1(kCampo).BackColor = vbYellow
+            PonerFoco Text1(kCampo)
         End If
     End If
 ' ******************************************************************************
@@ -2885,7 +2938,7 @@ Private Sub HacerBusqueda()
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
-        PonerFoco text1(0)
+        PonerFoco Text1(0)
         ' **********************************************************************
     End If
 End Sub
@@ -2897,9 +2950,9 @@ Private Sub MandaBusquedaPrevia(CadB As String)
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
     Cad = ""
-    Cad = Cad & ParaGrid(text1(0), 15, "Cód.")
-    Cad = Cad & ParaGrid(text1(1), 60, "Nombre")
-    Cad = Cad & ParaGrid(text1(2), 25, "Producto")
+    Cad = Cad & ParaGrid(Text1(0), 15, "Cód.")
+    Cad = Cad & ParaGrid(Text1(1), 60, "Nombre")
+    Cad = Cad & ParaGrid(Text1(2), 25, "Producto")
     If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
@@ -2919,7 +2972,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
             If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
                 cmdRegresar_Click
         Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco text1(kCampo)
+            PonerFoco Text1(kCampo)
         End If
     End If
 End Sub
@@ -2943,7 +2996,7 @@ Dim J As Integer
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            Cad = Cad & text1(J).Text & "|"
+            Cad = Cad & Text1(J).Text & "|"
         End If
     Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
@@ -3006,10 +3059,10 @@ Private Sub BotonAnyadir()
     
     
     ' codEmpre i quins camps tenen la PK de la capçalera *******
-    text1(0).Text = NumF
-    FormateaCampo text1(0)
+    Text1(0).Text = NumF
+    FormateaCampo Text1(0)
        
-    PonerFoco text1(0) '*** 1r camp visible que siga PK ***
+    PonerFoco Text1(0) '*** 1r camp visible que siga PK ***
     
     ' *** si n'hi han camps de descripció a la capçalera ***
     'PosarDescripcions
@@ -3023,10 +3076,10 @@ Private Sub BotonModificar()
     PonerModo 4
 
     ' *** bloquejar els camps visibles de la clau primaria de la capçalera ***
-    BloquearTxt text1(0), True
+    BloquearTxt Text1(0), True
     
     ' *** foco al 1r camp visible que NO siga clau primaria ***
-    PonerFoco text1(1)
+    PonerFoco Text1(1)
 End Sub
 
 Private Sub BotonEliminar()
@@ -3045,7 +3098,7 @@ Dim Cad As String
 
     ' *************** canviar la pregunta ****************
     Cad = "¿Seguro que desea eliminar la Variedad?"
-    Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(text1(0)))
+    Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
     Cad = Cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(2)
     
     If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
@@ -3089,7 +3142,7 @@ Dim CPostal As String, desProvi As String, desPais As String
     Next i
 
     If vParamAplic.NumeroConta <> 0 Then
-        text2(26).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", text1(26), "N")
+        Text2(26).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(26), "N")
     
     ' ************* configurar els camps de les descripcions de la capçalera *************
 '    Text2(21).Text = NombreCuentaCorrecta(Text1(21).Text)
@@ -3097,17 +3150,17 @@ Dim CPostal As String, desProvi As String, desPais As String
 '    Text2(23).Text = NombreCuentaCorrecta(Text1(23).Text)
 '    Text2(24).Text = NombreCuentaCorrecta(Text1(24).Text)
 '    Text2(25).Text = NombreCuentaCorrecta(Text1(25).Text)
-        text2(21).Text = PonerNombreCuenta(text1(21), Modo)
-        text2(22).Text = PonerNombreCuenta(text1(22), Modo)
-        text2(23).Text = PonerNombreCuenta(text1(23), Modo)
-        text2(24).Text = PonerNombreCuenta(text1(24), Modo)
-        text2(25).Text = PonerNombreCuenta(text1(25), Modo)
-        text2(27).Text = PonerNombreDeCod(text1(27), "cabccost", "nomccost", "codccost", "T", cConta)
+        Text2(21).Text = PonerNombreCuenta(Text1(21), Modo)
+        Text2(22).Text = PonerNombreCuenta(Text1(22), Modo)
+        Text2(23).Text = PonerNombreCuenta(Text1(23), Modo)
+        Text2(24).Text = PonerNombreCuenta(Text1(24), Modo)
+        Text2(25).Text = PonerNombreCuenta(Text1(25), Modo)
+        Text2(27).Text = PonerNombreDeCod(Text1(27), "cabccost", "nomccost", "codccost", "T", cConta)
     
-        text2(28).Text = PonerNombreCuenta(text1(28), Modo)
-        text2(29).Text = PonerNombreCuenta(text1(29), Modo)
+        Text2(28).Text = PonerNombreCuenta(Text1(28), Modo)
+        Text2(29).Text = PonerNombreCuenta(Text1(29), Modo)
     
-        text2(34).Text = PonerNombreCuenta(text1(34), Modo)
+        Text2(34).Text = PonerNombreCuenta(Text1(34), Modo)
         
         '[Monica]18/07/2012: las ejecuto solo en el caso de que coindicida la contabilidad de horto con la de comercial
         '                    las vuelvo a poner
@@ -3115,19 +3168,19 @@ Dim CPostal As String, desProvi As String, desPais As String
             '                    seran de la seccion que corresponda de recoleccion
             '                    quito las 6 instrucciones siguientes
         If vParamAplic.NumeroConta = DevuelveValor("select empresa_conta from rseccion, rparam where rseccion.codsecci = rparam.seccionhorto") Then
-            text2(31).Text = PonerNombreCuenta(text1(31), Modo)
-            text2(32).Text = PonerNombreCuenta(text1(32), Modo)
-            text2(33).Text = PonerNombreCuenta(text1(33), Modo)
-            text2(35).Text = PonerNombreCuenta(text1(35), Modo)
-            text2(36).Text = PonerNombreCuenta(text1(36), Modo)
-            text2(37).Text = PonerNombreCuenta(text1(37), Modo)
+            Text2(31).Text = PonerNombreCuenta(Text1(31), Modo)
+            Text2(32).Text = PonerNombreCuenta(Text1(32), Modo)
+            Text2(33).Text = PonerNombreCuenta(Text1(33), Modo)
+            Text2(35).Text = PonerNombreCuenta(Text1(35), Modo)
+            Text2(36).Text = PonerNombreCuenta(Text1(36), Modo)
+            Text2(37).Text = PonerNombreCuenta(Text1(37), Modo)
         End If
     Else
-        text2(26).Text = DevuelveDesdeBDNew(cAgro, "tiposiva", "nombriva", "nombriva", text1(26), "N")
+        Text2(26).Text = DevuelveDesdeBDNew(cAgro, "tiposiva", "nombriva", "nombriva", Text1(26), "N")
     End If
-    text2(2).Text = PonerNombreDeCod(text1(2), "productos", "nomprodu", "codprodu", "N")
-    text2(3).Text = PonerNombreDeCod(text1(3), "clases", "nomclase", "codclase", "N")
-    text2(9).Text = PonerNombreDeCod(text1(9), "sunida", "nomunida", "codunida", "N")
+    Text2(2).Text = PonerNombreDeCod(Text1(2), "productos", "nomprodu", "codprodu", "N")
+    Text2(3).Text = PonerNombreDeCod(Text1(3), "clases", "nomclase", "codclase", "N")
+    Text2(9).Text = PonerNombreDeCod(Text1(9), "sunida", "nomunida", "codunida", "N")
     ' ********************************************************************************
     
     '-- Esto permanece para saber donde estamos
@@ -3151,14 +3204,14 @@ Dim V
                     PonerCampos
                 End If
                 ' *** foco al primer camp visible de la capçalera ***
-                PonerFoco text1(0)
+                PonerFoco Text1(0)
 
         Case 4  'Modificar
                 TerminaBloquear
                 PonerModo 2
                 PonerCampos
                 ' *** primer camp visible de la capçalera ***
-                PonerFoco text1(0)
+                PonerFoco Text1(0)
         
         Case 5 'LLÍNIES
             Select Case ModoLineas
@@ -3226,15 +3279,15 @@ Dim Sql As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        If ExisteCP(text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then b = False
     End If
     
     If b Then
         If vEmpresa.TieneAnalitica Then 'hay contab. analitica
-             Sql = DevuelveDesdeBDNew(cConta, "cabccost", "codccost", "codccost", text1(27), "T")
+             Sql = DevuelveDesdeBDNew(cConta, "cabccost", "codccost", "codccost", Text1(27), "T")
              If Sql = "" Then
                 MsgBox "No existe el Centro de Coste. Reintroduzca.", vbExclamation
-                PonerFoco text1(27)
+                PonerFoco Text1(27)
                 b = False
              End If
         End If
@@ -3251,7 +3304,7 @@ Private Sub PosicionarData()
 Dim Cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(codvarie=" & text1(0).Text & ")"
+    Cad = "(codvarie=" & Text1(0).Text & ")"
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
@@ -3271,7 +3324,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE codvarie=" & Data1.Recordset!CodVarie
+    vWhere = " WHERE codvarie=" & Data1.Recordset!codvarie
         
     ' ***** elimina les llínies ****
     conn.Execute "DELETE FROM variane " & vWhere
@@ -3283,10 +3336,10 @@ Dim vWhere As String
         conn.Execute "DELETE FROM rcalidad " & vWhere
 '    End If
         
-    CargarUnaVariedad CLng(Data1.Recordset!CodVarie), "D"
+    CargarUnaVariedad CLng(Data1.Recordset!codvarie), "D"
         
     'Eliminar la CAPÇALERA
-    vWhere = " WHERE codvarie=" & Data1.Recordset!CodVarie
+    vWhere = " WHERE codvarie=" & Data1.Recordset!codvarie
     conn.Execute "Delete from " & NombreTabla & vWhere
        
 FinEliminar:
@@ -3302,7 +3355,7 @@ End Function
 
 Private Sub Text1_GotFocus(Index As Integer)
     kCampo = Index
-    ConseguirFoco text1(Index), Modo
+    ConseguirFoco Text1(Index), Modo
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
@@ -3310,7 +3363,7 @@ Dim cadMen As String
 Dim Nuevo As Boolean
 Dim NumDigit As String
 
-    If Not PerderFocoGnral(text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -3319,57 +3372,57 @@ Dim NumDigit As String
     ' ***************** configurar els LostFocus dels camps de la capçalera *****************
     Select Case Index
         Case 0 'cod variedad
-            PonerFormatoEntero text1(0)
+            PonerFormatoEntero Text1(0)
 
         Case 1 'NOMBRE
-            text1(Index).Text = UCase(text1(Index).Text)
+            Text1(Index).Text = UCase(Text1(Index).Text)
         
         Case 2 'Producto
-            If PonerFormatoEntero(text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(text1(Index), "productos", "nomprodu")
-                If text2(Index).Text = "" Then
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "productos", "nomprodu")
+                If Text2(Index).Text = "" Then
                     MsgBox "No existe el Producto. Reintroduzca.", vbExclamation
-                    PonerFoco text1(Index)
+                    PonerFoco Text1(Index)
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 3 'clase
-            If PonerFormatoEntero(text1(Index)) Then
-                text2(Index) = PonerNombreDeCod(text1(Index), "clases", "nomclase", "codclase", "N")
-                If text2(Index).Text = "" Then
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index) = PonerNombreDeCod(Text1(Index), "clases", "nomclase", "codclase", "N")
+                If Text2(Index).Text = "" Then
                     MsgBox "No existe la Clase. Reintroduzca.", vbExclamation
-                    PonerFoco text1(Index)
+                    PonerFoco Text1(Index)
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
                 
         Case 9 'Tipo de Unidad
-            If PonerFormatoEntero(text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(text1(Index), "sunida", "nomunida")
-                If text2(Index).Text = "" Then
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "sunida", "nomunida")
+                If Text2(Index).Text = "" Then
                     MsgBox "No existe el Tipo de Unidad. Reintroduzca.", vbExclamation
-                    PonerFoco text1(Index)
+                    PonerFoco Text1(Index)
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 5, 6, 7, 8, 10, 11, 12, 13, 14
             If Modo = 1 Then Exit Sub
-            cadMen = TransformaPuntosComas(text1(Index).Text)
-            text1(Index).Text = Format(cadMen, "##0.00")
+            cadMen = TransformaPuntosComas(Text1(Index).Text)
+            Text1(Index).Text = Format(cadMen, "##0.00")
             
         Case 15, 16, 17, 18, 19, 20
             If Modo = 1 Then Exit Sub
-            cadMen = TransformaPuntosComas(text1(Index).Text)
-            text1(Index).Text = Format(cadMen, "0.0000")
+            cadMen = TransformaPuntosComas(Text1(Index).Text)
+            Text1(Index).Text = Format(cadMen, "0.0000")
         
         Case 21, 22, 23, 24, 25, 28, 29, 31, 32, 33, 34, 35, 36, 37 'cta contable de ventas
-            If text1(Index).Text = "" Then
-                text2(Index) = ""
+            If Text1(Index).Text = "" Then
+                Text2(Index) = ""
                 Exit Sub
             End If
             
@@ -3381,28 +3434,28 @@ Dim NumDigit As String
 '            End If
             
 '            Text2(Index).Text = NombreCuentaCorrecta(Text1(Index).Text)
-            text2(Index).Text = PonerNombreCuenta(text1(Index), Modo)
+            Text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo)
             
             If Index = 37 Then cmdAceptar.SetFocus
     
     
         Case 26 ' tipo de iva de contabilidad
             'conConta: BD Contabilidad
-            If PonerFormatoEntero(text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(text1(Index), "tiposiva", "nombriva", , , cConta)
+            If PonerFormatoEntero(Text1(Index)) Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "tiposiva", "nombriva", , , cConta)
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 27 ' centro de coste
-            If text1(Index).Text <> "" Then
+            If Text1(Index).Text <> "" Then
                 If vParamAplic.NumeroConta <> 0 Then
-                    text2(Index).Text = PonerNombreDeCod(text1(Index), "cabccost", "nomccost", "codccost", "T", cConta)
+                    Text2(Index).Text = PonerNombreDeCod(Text1(Index), "cabccost", "nomccost", "codccost", "T", cConta)
                 End If
             End If
         
         Case 30
-            If text1(Index).Text <> "" Then PonerFormatoEntero text1(Index)
+            If Text1(Index).Text <> "" Then PonerFormatoEntero Text1(Index)
     
             
     End Select
@@ -3547,7 +3600,7 @@ Dim i As Integer
     PonerModo 5, Index
     
     ' *** bloquejar la clau primaria de la capçalera ***
-    BloquearTxt text1(0), True
+    BloquearTxt Text1(0), True
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
@@ -3581,7 +3634,7 @@ Dim i As Integer
             Select Case Index
                 ' *** valor per defecte a l'insertar i formateig de tots els camps ***
                 Case 0 'calibres
-                    txtAux(0).Text = text1(0).Text 'codvarie
+                    txtAux(0).Text = Text1(0).Text 'codvarie
 '                    txtAux(3).Text = text1(1).Text 'nomcalibre
                     txtAux(1).Text = NumF 'codcalib
                     txtAux(2).Text = ""
@@ -3589,7 +3642,7 @@ Dim i As Integer
                     txtAux(4).Text = ""
                     PonerFoco txtAux(1)
                 Case 1 'variedades anecoop
-                    txtAux(8).Text = text1(0).Text 'codvarie
+                    txtAux(8).Text = Text1(0).Text 'codvarie
                     txtAux(9).Text = NumF 'numlinea
                     txtAux(10).Text = ""
                     
@@ -3617,7 +3670,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     NumTabMto = Index
     PonerModo 5, Index
     ' *** bloqueje la clau primaria de la capçalera ***
-    BloquearTxt text1(0), True
+    BloquearTxt Text1(0), True
   
     Select Case Index
         Case 0, 1 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
@@ -3824,10 +3877,10 @@ Dim numnivel As Byte
             
             Set frmCtas = New frmCtasConta
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = text1(indice).Text
+            frmCtas.CodigoActual = Text1(indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
             
        Case 13, 14, 15 ' cuentas contables de recoleccion
             If vParamAplic.NumeroConta = 0 Then Exit Sub
@@ -3836,10 +3889,10 @@ Dim numnivel As Byte
             
             Set frmCtas = New frmCtasConta
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = text1(indice).Text
+            frmCtas.CodigoActual = Text1(indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
        
                    
        Case 4 'codigos ean de esa variedad
@@ -3856,20 +3909,20 @@ Dim numnivel As Byte
             Set frmIva = New frmTipIVAConta
             frmIva.DeConsulta = True
             frmIva.DatosADevolverBusqueda = "0|1|2|"
-            frmIva.CodigoActual = text1(indice).Text
+            frmIva.CodigoActual = Text1(indice).Text
             frmIva.Show vbModal
             Set frmIva = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
        
        Case 10 'Centro de Coste
             If vParamAplic.NumeroConta = 0 Then Exit Sub
             indice = 27
             Set frmCCos = New frmCCosConta
             frmCCos.DatosADevolverBusqueda = "0|1|"
-            frmCCos.CodigoActual = text1(indice).Text
+            frmCCos.CodigoActual = Text1(indice).Text
             frmCCos.Show vbModal
             Set frmCCos = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
     
         Case 11, 12 'cuentas contables de transporte
             If vParamAplic.NumeroConta = 0 Then Exit Sub
@@ -3878,10 +3931,10 @@ Dim numnivel As Byte
             
             Set frmCtas = New frmCtasConta
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = text1(indice).Text
+            frmCtas.CodigoActual = Text1(indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
     
         Case 16, 17, 18, 19
             If vParamAplic.NumeroConta = 0 Then Exit Sub
@@ -3890,10 +3943,10 @@ Dim numnivel As Byte
             
             Set frmCtas = New frmCtasConta
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = text1(indice).Text
+            frmCtas.CodigoActual = Text1(indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco text1(indice)
+            PonerFoco Text1(indice)
     
     End Select
     
@@ -3902,16 +3955,16 @@ End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento de Clases
-    text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codclase
-    FormateaCampo text1(3)
-    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomclase
+    Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codclase
+    FormateaCampo Text1(3)
+    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomclase
 End Sub
 
 Private Sub frmPro_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Porductos
-    text1(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codprodu
-    FormateaCampo text1(2)
-    text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomprodu
+    Text1(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codprodu
+    FormateaCampo Text1(2)
+    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomprodu
 End Sub
 
 Private Sub DataGridAux_RowColChange(Index As Integer, LastRow As Variant, ByVal LastCol As Integer)
@@ -4119,7 +4172,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " codvarie=" & Val(text1(0).Text)
+    vWhere = vWhere & " codvarie=" & Val(Text1(0).Text)
     
     ObtenerWhereCab = vWhere
 End Function
@@ -4190,7 +4243,7 @@ Private Sub AbrirFrmClase(indice As Integer)
     
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, text1(indCodigo).Text
+    AyudaClasesCom frmCla, Text1(indCodigo).Text
         
     Set frmCla = Nothing
 
@@ -4202,7 +4255,7 @@ Private Sub AbrirFrmProducto(indice As Integer)
     
     Set frmProd = New frmComercial
     
-    AyudaProductosCom frmProd, text1(indCodigo).Text
+    AyudaProductosCom frmProd, Text1(indCodigo).Text
     
     Set frmProd = Nothing
     
@@ -4215,7 +4268,7 @@ Private Sub AbrirFrmTUnidad(indice As Integer)
     
     Set frmTUn = New frmComercial
     
-    AyudaTUnidadesCom frmTUn, text1(indCodigo).Text
+    AyudaTUnidadesCom frmTUn, Text1(indCodigo).Text
         
     Set frmCla = Nothing
 
