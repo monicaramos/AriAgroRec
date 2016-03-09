@@ -835,11 +835,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub Check1_Click(Index As Integer)
@@ -857,7 +857,7 @@ End Sub
 Private Sub CmdAcepDesF_Click()
 Dim tipo As Byte
     If DatosOk Then
-        Pb2.visible = True
+        pb2.visible = True
         Select Case OpcionListado
             Case 5 ' anticipo de bodega
                 tipo = 6
@@ -868,7 +868,7 @@ Dim tipo As Byte
             Case 150 ' liquidacion de almazara
                 tipo = 5
         End Select
-        If DeshacerFacturacion(tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, Pb2) Then
+        If DeshacerFacturacion(tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -1024,7 +1024,7 @@ Dim vTipo As Byte
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -1336,7 +1336,7 @@ Dim vTipo As Byte
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -1710,7 +1710,7 @@ Private Sub Form_Activate()
                 
             Case 5    ' deshacer proceso de facturacion de anticipos bodega
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(9) = 1 Then
@@ -1720,7 +1720,7 @@ Private Sub Form_Activate()
                 
             Case 50    ' deshacer proceso de facturacion de anticipos almazara
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(7) = 1 Then
@@ -1735,7 +1735,7 @@ Private Sub Form_Activate()
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(10) = 1 Then
@@ -1745,7 +1745,7 @@ Private Sub Form_Activate()
                 
             Case 150   ' deshacer proceso de facturacion de liquidacion de almazara
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(8) = 1 Then
@@ -3101,11 +3101,11 @@ End Function
 
 
 Private Sub ActivarCLAVE()
-Dim I As Integer
+Dim i As Integer
     
-    For I = 9 To 11
-        txtcodigo(I).Enabled = False
-    Next I
+    For i = 9 To 11
+        txtcodigo(i).Enabled = False
+    Next i
     txtcodigo(8).Enabled = True
     imgFec(6).Enabled = False
     CmdAcepDesF.Enabled = False
@@ -3114,11 +3114,11 @@ Dim I As Integer
 End Sub
 
 Private Sub DesactivarCLAVE()
-Dim I As Integer
+Dim i As Integer
 
-    For I = 9 To 11
-        txtcodigo(I).Enabled = True
-    Next I
+    For i = 9 To 11
+        txtcodigo(i).Enabled = True
+    Next i
     txtcodigo(8).Enabled = False
     imgFec(6).Enabled = True
     CmdAcepDesF.Enabled = True
@@ -4382,7 +4382,7 @@ Dim b As Boolean
 Dim Sql2 As String
 Dim Sql5 As String
 Dim VarieAnt As Long
-Dim Numreg As Long
+Dim NumReg As Long
 
     On Error GoTo eHayPreciosVariedadesBodegaAlmazara
     
@@ -4416,7 +4416,7 @@ Dim Numreg As Long
     b = True
     
     If Not RS.EOF Then VarieAnt = DBLet(RS!codvarie, "N")
-    Numreg = 0
+    NumReg = 0
     ' comprobamos que existen registros para todos las variedades seleccionadas
     While Not RS.EOF And b
         If vParamAplic.Cooperativa = 1 And tipo = 1 Then
@@ -4471,7 +4471,7 @@ End Function
 
 Private Function CargarTemporalBodega(tipo As Byte, cTabla As String, cWhere As String) As Boolean
 Dim RS As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
+Dim Rs1 As ADODB.Recordset
 
 Dim SQL As String
 Dim Sql1 As String
@@ -4571,14 +4571,14 @@ Dim Sql5 As String
         Sql3 = Sql3 & " and fechafin >= " & DBSet(RS!Fecalbar, "F")
         Sql3 = Sql3 & " group by 1,2"
                 
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS1.EOF Then
-            Contador = DBLet(RS1!Contador, "N")
-            FechaIni = DBLet(RS1!FechaIni, "F")
-            FechaFin = DBLet(RS1!FechaFin, "F")
+        Set Rs1 = New ADODB.Recordset
+        Rs1.Open Sql3, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs1.EOF Then
+            Contador = DBLet(Rs1!Contador, "N")
+            FechaIni = DBLet(Rs1!FechaIni, "F")
+            FechaFin = DBLet(Rs1!FechaFin, "F")
         End If
-        Set RS1 = Nothing
+        Set Rs1 = Nothing
         
         Sql3 = "select precioindustria from rprecios where codvarie = " & DBSet(RS!codvarie, "N")
         Sql3 = Sql3 & " and tipofact = " & DBSet(tipo, "N")
