@@ -9199,8 +9199,8 @@ Dim vPorcGasto As String
 
 Dim campo As String
 
-Dim LitrosConsumidos As Long
-Dim LitrosProducidos As Long
+Dim LitrosConsumidos As Currency
+Dim LitrosProducidos As Currency
 Dim PrecioConsumido As Currency
 Dim PrecioProducido As Currency
 
@@ -9222,6 +9222,11 @@ Dim PrecioMoltura As Currency
 Dim PrecioEnvasado As Currency
 
 Dim Rs4 As ADODB.Recordset
+
+Dim Litros As Currency
+Dim Cantidad As Currency
+
+
 
     On Error GoTo eFacturacion
 
@@ -9341,6 +9346,15 @@ Dim Rs4 As ADODB.Recordset
         
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
             ' litros consumidos a otro precio
+
+            Sql3 = "select rbodalbaran_variedad.*, variedades.* "
+            Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
+            Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
+            Sql3 = Sql3 & " and variedades.codclase = " & DBSet(AntVarie, "N")
+            Sql3 = Sql3 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
+            Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
+            Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
+
             Sql4 = "select rbodalbaran_variedad.codvarie, variedades.eurdesta, variedades.eursegsoc, sum(cantidad) cantidad, round(variedades.eurdesta * sum(cantidad), 2) importevta, round(variedades.eursegsoc * sum(cantidad), 2) importeenv "
             Sql4 = Sql4 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
             Sql4 = Sql4 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
@@ -9348,10 +9362,11 @@ Dim Rs4 As ADODB.Recordset
             Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
             Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
             Sql4 = Sql4 & " group by 1,2,3  order by 1,2, 3 "
-            
+
             Sql5 = "select sum(cantidad) from (" & Sql4 & ") aaaaa"
-            
+
             LitrosConsumidos = DevuelveValor(Sql5)
+
             
             If LitrosProducidos > LitrosConsumidos Then
                 ' añadido
@@ -9368,15 +9383,17 @@ Dim Rs4 As ADODB.Recordset
                 KilosConsu = Kilos - KilosComer
                 
 '                ImporteRetirado = Round2(LitrosConsumidos * PrecioRetirado, 2)
-                Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
-                ImporteRetirado = DevuelveValor(Sql5)
+'                Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
+'                ImporteRetirado = DevuelveValor(Sql5)
+                ImporteRetirado = CalculoImporteRetirado(Sql3, CStr(LitrosConsumidos), False)
                 
                 PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(AntVarie, "N"))
                 
                 ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
                 ImporteMoltura1 = Round2(KilosComer * PrecioMoltura, 2)
-                Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
-                ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+'                Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
+'                ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+                ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosConsumidos, True)
                 
                 ' fañadido
             
@@ -9419,12 +9436,23 @@ Dim Rs4 As ADODB.Recordset
                 
                 conn.Execute Sql
                 
+                Litros = LitrosConsumidos
                 
                 Set Rs4 = New ADODB.Recordset
                 Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                While Not Rs4.EOF
+                
+                While Not Rs4.EOF And Litros <> 0
                     jj = jj + 1
+                    
+                    If DBLet(Rs4!Cantidad, "N") < Litros Then
+                        Litros = Litros - DBLet(Rs4!Cantidad, "N")
+                        Cantidad = DBLet(Rs4!Cantidad, "N")
+                    Else
+                        Cantidad = Litros
+                        Litros = 0
+                    End If
+                
                     
                     Sql = "insert into tmpfact_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
                     Sql = Sql & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto, "
@@ -9437,7 +9465,7 @@ Dim Rs4 As ADODB.Recordset
                     Sql = Sql & DBSet(LitrosConsumidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                     Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2,"
                     Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                    Sql = Sql & DBSet(Rs4!cantidad, "N") & ")"
+                    Sql = Sql & DBSet(Cantidad, "N") & ")"
                     conn.Execute Sql
                     
                     Rs4.MoveNext
@@ -9452,34 +9480,27 @@ Dim Rs4 As ADODB.Recordset
 '                Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
 '
 '                PrecioRetirado = DevuelveValor(Sql4)
-                
-                Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
-                PrecioRetirado = DevuelveValor(Sql5)
+'
+'                Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
+'                PrecioRetirado = DevuelveValor(Sql5)
                 
                 
                 Rdto = Round2(LitrosProducidos * 100 / Kilos, 4)
                 
                 KilosConsu = Round2(LitrosProducidos * 100 / Rdto, 0)
                 
-                Sql3 = "select rbodalbaran_variedad.* "
-                Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
-                Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
-                Sql3 = Sql3 & " and variedades.codclase = " & DBSet(AntVarie, "N")
-                Sql3 = Sql3 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
-                Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
-                Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
                 
-                ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosProducidos)
-                
-'                ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+'               ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+                ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosProducidos, False)
+                PrecioRetirado = Round2(ImporteRetirado / LitrosProducidos, 4)
                 
                 PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(AntVarie, "N"))
                 
                 ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
-                PrecioEnvasado = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(AntVarie, "N"))
-                
-                ImporteEnvasado = Round2(LitrosProducidos * PrecioEnvasado, 2)
-                
+'                PrecioEnvasado = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(AntVarie, "N"))
+'                ImporteEnvasado = Round2(LitrosProducidos * PrecioEnvasado, 2)
+                ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosProducidos, True)
+                PrecioEnvasado = Round2(ImporteEnvasado / LitrosProducidos, 4)
                 ' fañadido
 
                 baseimpo = baseimpo + Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado), 2)
@@ -9497,13 +9518,24 @@ Dim Rs4 As ADODB.Recordset
                     Importe = Importe - GastosCoop2
                 End If
             
+                Litros = LitrosProducidos
+            
             
             
                 Set Rs4 = New ADODB.Recordset
                 Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                While Not Rs4.EOF
+                While Not Rs4.EOF And Litros <> 0
                     jj = jj + 1
+            
+                    If DBLet(Rs4!Cantidad, "N") < Litros Then
+                        Litros = Litros - DBLet(Rs4!Cantidad, "N")
+                        Cantidad = DBLet(Rs4!Cantidad, "N")
+                    Else
+                        Cantidad = Litros
+                        Litros = 0
+                    End If
+            
             
                     ' insertamos en las lineas de albaranes las lineas de litros consumidos a precioconsumido
                     ' y la lina de litros producidos a precio producido
@@ -9517,7 +9549,7 @@ Dim Rs4 As ADODB.Recordset
                     Sql = Sql & DBSet(LitrosProducidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                     Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2," '[Monica]28/03/2014: antes ",1,"
                     Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                    Sql = Sql & DBSet(Rs4!cantidad, "N") & ")"
+                    Sql = Sql & DBSet(Cantidad, "N") & ")"
                     
                     conn.Execute Sql
                     
@@ -9708,6 +9740,14 @@ Dim Rs4 As ADODB.Recordset
     
     ' ultimo registro si ha entrado
     If b And HayReg Then
+        Sql3 = "select rbodalbaran_variedad.*, variedades.* "
+        Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
+        Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
+        Sql3 = Sql3 & " and variedades.codclase = " & DBSet(AntVarie, "N")
+        Sql3 = Sql3 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
+        Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
+        Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
+        
         ' litros consumidos a otro precio
         Sql4 = "select rbodalbaran_variedad.codvarie, variedades.eurdesta, variedades.eursegsoc, sum(cantidad) cantidad, round(variedades.eurdesta * sum(cantidad), 2) importevta, round(variedades.eursegsoc * sum(cantidad), 2) importeenv "
         Sql4 = Sql4 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
@@ -9715,7 +9755,7 @@ Dim Rs4 As ADODB.Recordset
         Sql4 = Sql4 & " and variedades.codclase = " & DBSet(AntVarie, "N")
         Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
         Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
-        Sql4 = Sql4 & " group by 1,2  order by 1,2 "
+        Sql4 = Sql4 & " group by 1,2,3  order by 1,2, 3 "
         
         
         Sql5 = "select sum(cantidad) from (" & Sql4 & ") aaaaa"
@@ -9738,17 +9778,20 @@ Dim Rs4 As ADODB.Recordset
             
             KilosComer = Round2((LitrosProducidos - LitrosConsumidos) * 100 / Rdto, 0)
             KilosConsu = Kilos - KilosComer
-            
+
+
 '                ImporteRetirado = Round2(LitrosConsumidos * PrecioRetirado, 2)
-            Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
-            ImporteRetirado = DevuelveValor(Sql5)
+'            Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
+'            ImporteRetirado = DevuelveValor(Sql5)
+            ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosConsumidos, False)
             
             PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(AntVarie, "N"))
             
             ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
             ImporteMoltura1 = Round2(KilosComer * PrecioMoltura, 2)
-            Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
-            ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+'            Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
+'            ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+            ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosConsumidos, True)
             
             ' fañadido
         
@@ -9795,10 +9838,21 @@ Dim Rs4 As ADODB.Recordset
             Set Rs4 = New ADODB.Recordset
             Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-            While Not Rs4.EOF
-            '???????
+            
+            Litros = LitrosConsumidos
+            
+            While Not Rs4.EOF And Litros <> 0
                 jj = jj + 1
                 
+                If DBLet(Rs4!Cantidad, "N") < Litros Then
+                    Litros = Litros - DBLet(Rs4!Cantidad, "N")
+                    Cantidad = DBLet(Rs4!Cantidad, "N")
+                Else
+                    Cantidad = Litros
+                    Litros = 0
+                End If
+            
+            
                 Sql = "insert into tmpfact_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
                 Sql = Sql & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto, "
                 Sql = Sql & "prretirada, prmoltura, prenvasado, litrosconsu) values ("
@@ -9810,7 +9864,7 @@ Dim Rs4 As ADODB.Recordset
                 Sql = Sql & DBSet(LitrosConsumidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                 Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2,"
                 Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                Sql = Sql & DBSet(Rs4!cantidad, "N") & ")"
+                Sql = Sql & DBSet(Cantidad, "N") & ")"
                 conn.Execute Sql
                 
                 Rs4.MoveNext
@@ -9825,27 +9879,26 @@ Dim Rs4 As ADODB.Recordset
 '                Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
 '
 '                PrecioRetirado = DevuelveValor(Sql4)
+'            Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
+'            PrecioRetirado = DevuelveValor(Sql5)
             
-                Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
-                PrecioRetirado = DevuelveValor(Sql5)
-                
             
             Rdto = Round2(LitrosProducidos * 100 / Kilos, 4)
             
             KilosConsu = Round2(LitrosProducidos * 100 / Rdto, 0)
-            
-            ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+'            ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+            ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosProducidos, False)
+            PrecioRetirado = Round2(ImporteRetirado / LitrosProducidos, 4)
+
             
             PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(AntVarie, "N"))
-            
             ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
             
-            
-            
 '            ImporteEnvasado = Round2(LitrosProducidos * vParamAplic.GtoEnvasado, 2)
-            PrecioEnvasado = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(AntVarie, "N"))
-            ImporteEnvasado = Round2(LitrosProducidos * PrecioEnvasado, 2)
-           
+'            PrecioEnvasado = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(AntVarie, "N"))
+'            ImporteEnvasado = Round2(LitrosProducidos * PrecioEnvasado, 2)
+            ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosProducidos, True)
+            PrecioEnvasado = Round2(ImporteEnvasado / LitrosProducidos, 4)
            
             ' fañadido
 
@@ -9868,8 +9921,20 @@ Dim Rs4 As ADODB.Recordset
         
             Set Rs4 = New ADODB.Recordset
             Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs4.EOF
+            
+            
+            Litros = LitrosProducidos
+            
+            While Not Rs4.EOF And Litros <> 0
                 jj = jj + 1
+                
+                If DBLet(Rs4!Cantidad, "N") < Litros Then
+                    Litros = Litros - DBLet(Rs4!Cantidad, "N")
+                    Cantidad = DBLet(Rs4!Cantidad, "N")
+                Else
+                    Cantidad = Litros
+                    Litros = 0
+                End If
         
                 ' insertamos en las lineas de albaranes las lineas de litros consumidos a precioconsumido
                 ' y la lina de litros producidos a precio producido
@@ -9883,7 +9948,7 @@ Dim Rs4 As ADODB.Recordset
                 Sql = Sql & DBSet(LitrosProducidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                 Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2," '[Monica]28/03/2014: antes ",1,"
                 Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                Sql = Sql & DBSet(Rs4!cantidad, "N") & ")"
+                Sql = Sql & DBSet(Cantidad, "N") & ")"
                 
                 conn.Execute Sql
                 
@@ -10012,12 +10077,13 @@ eFacturacion:
 End Function
 
 
-Private Function CalculoImporteRetirado(Sql As String, LitrosProducidos As Currency) As Currency
+Public Function CalculoImporteRetirado(Sql As String, LitrosProducidos As Currency, EsImpEnvasado As Boolean) As Currency
 
 Dim Rs As ADODB.Recordset
 Dim Litros As Currency
-
-'                Sql3 = "select rbodalbaran_variedad.* "
+Dim Importe As Currency
+Dim Precio As Currency
+'                Sql3 = "select rbodalbaran_variedad.*, variedades.* "
 '                Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
 '                Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
 '                Sql3 = Sql3 & " and variedades.codclase = " & DBSet(AntVarie, "N")
@@ -10025,15 +10091,29 @@ Dim Litros As Currency
 '                Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
 '                Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
 
-                
+    Litros = LitrosProducidos
+    Importe = 0
+    
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    While Not Rs.EOF
-    
+    While Not Rs.EOF And Litros <> 0
+        If DBLet(Rs!Cantidad, "N") < Litros Then
+            Litros = Litros - DBLet(Rs!Cantidad, "N")
+            Importe = Importe + DBLet(Rs!ImporteL, "N")
+        Else
+            If EsImpEnvasado Then
+                Precio = DBLet(Rs!eursegsoc, "N")
+            Else
+                Precio = DBLet(Rs!EurDesta, "N")
+            End If
+            Importe = CalcularImporte(CStr(DBLet(Litros, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+            Litros = 0
+        End If
     
         Rs.MoveNext
     Wend
-
+    Set Rs = Nothing
+    CalculoImporteRetirado = Importe
 
 End Function
 

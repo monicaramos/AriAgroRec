@@ -868,7 +868,7 @@ Dim Tipo As Byte
             Case 150 ' liquidacion de almazara
                 Tipo = 5
         End Select
-        If DeshacerFacturacion(Tipo, txtCodigo(9).Text, txtCodigo(10).Text, txtCodigo(11).Text, pb2) Then
+        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -922,8 +922,8 @@ Dim vTipo As Byte
             
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtCodigo(12).Text)
-        cHasta = Trim(txtCodigo(13).Text)
+        cDesde = Trim(txtcodigo(12).Text)
+        cHasta = Trim(txtcodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -934,8 +934,8 @@ Dim vTipo As Byte
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtCodigo(20).Text)
-        cHasta = Trim(txtCodigo(21).Text)
+        cDesde = Trim(txtcodigo(20).Text)
+        cHasta = Trim(txtcodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -946,13 +946,13 @@ Dim vTipo As Byte
         End If
         
         Sql2 = ""
-        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
-        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
+        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
+        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtCodigo(6).Text)
-        cHasta = Trim(txtCodigo(7).Text)
+        cDesde = Trim(txtcodigo(6).Text)
+        cHasta = Trim(txtcodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -1063,11 +1063,11 @@ Dim vTipo As Byte
                                 Exit Sub
                             End If
                             
-                            Me.pb1.visible = True
-                            Me.pb1.Max = Nregs
-                            Me.pb1.Value = 0
+                            Me.Pb1.visible = True
+                            Me.Pb1.Max = Nregs
+                            Me.Pb1.Value = 0
                             Me.Refresh
-                            b = FacturacionLiquidacionesAlmazaraCastelduc(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1)
+                            b = FacturacionLiquidacionesAlmazaraCastelduc(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
                                 
                             If b Then
                                 MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -1075,12 +1075,12 @@ Dim vTipo As Byte
                                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                 If Me.Check1(2).Value Then
                                     cadFormula = ""
-                                    CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     CadParam = CadParam & "pTitulo= ""Resumen Facturación Liquidaciones Almazara""|"
                                     numParam = numParam + 1
                                     
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -1110,7 +1110,7 @@ Dim vTipo As Byte
                                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     'Fecha de Factura
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -1198,8 +1198,8 @@ Dim vTipo As Byte
             
         '======== FORMULA  ====================================
         'D/H SOCIO
-        cDesde = Trim(txtCodigo(12).Text)
-        cHasta = Trim(txtCodigo(13).Text)
+        cDesde = Trim(txtcodigo(12).Text)
+        cHasta = Trim(txtcodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -1210,8 +1210,8 @@ Dim vTipo As Byte
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtCodigo(20).Text)
-        cHasta = Trim(txtCodigo(21).Text)
+        cDesde = Trim(txtcodigo(20).Text)
+        cHasta = Trim(txtcodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -1222,13 +1222,13 @@ Dim vTipo As Byte
         End If
         
         Sql2 = ""
-        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
-        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
+        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
+        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtCodigo(6).Text)
-        cHasta = Trim(txtCodigo(7).Text)
+        cDesde = Trim(txtcodigo(6).Text)
+        cHasta = Trim(txtcodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -1364,18 +1364,18 @@ Dim vTipo As Byte
             
             If HayPreciosVariedadesBodegaAlmazara(vTipo, nTabla, cadSelect, vParamAplic.Cooperativa) Then
                 'D/H fecha
-                cDesde = Trim(txtCodigo(6).Text)
-                cHasta = Trim(txtCodigo(7).Text)
+                cDesde = Trim(txtcodigo(6).Text)
+                cHasta = Trim(txtcodigo(7).Text)
                 cadDesde = CDate(cDesde)
                 cadhasta = CDate(cHasta)
                 cadAux = "{rprecios.fechaini}= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechaini}=" & DBSet(txtCodigo(6).Text, "F")
+                cadAux = "{rprecios.fechaini}=" & DBSet(txtcodigo(6).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 cadAux = "{rprecios.fechafin}= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")"
                 If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                cadAux = "{rprecios.fechafin}=" & DBSet(txtCodigo(7).Text, "F")
+                cadAux = "{rprecios.fechafin}=" & DBSet(txtcodigo(7).Text, "F")
                 If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                 
                 ' si se trata de anticipos--> seleccionamos los precios de anticipos
@@ -1435,7 +1435,7 @@ Dim vTipo As Byte
                             nTabla = "(" & nTabla & ") INNER JOIN rprecios_calidad ON rprecios.codvarie = rprecios_calidad.codvarie "
                             nTabla = nTabla & " and rprecios.tipofact = rprecios_calidad.tipofact and rprecios.contador = rprecios_calidad.contador "
                             
-                            b = CargarTemporalLiquidacionAlmazaraValsur(nTabla, cadSelect, txtCodigo(6).Text, txtCodigo(7).Text)
+                            b = CargarTemporalLiquidacionAlmazaraValsur(nTabla, cadSelect, txtcodigo(6).Text, txtcodigo(7).Text)
                         Else
                             b = CargarTemporalLiquidacionAlmazara(nTabla, cadSelect)
                         End If
@@ -1459,15 +1459,15 @@ Dim vTipo As Byte
                                 Exit Sub
                             End If
                             
-                            Me.pb1.visible = True
-                            Me.pb1.Max = Nregs
-                            Me.pb1.Value = 0
+                            Me.Pb1.visible = True
+                            Me.Pb1.Max = Nregs
+                            Me.Pb1.Value = 0
                             Me.Refresh
                             b = False
                             If TipoPrec = 9 Then
-                                b = FacturacionAnticiposBodega(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1)
+                                b = FacturacionAnticiposBodega(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
                             Else
-                                b = FacturacionLiquidacionesBodega(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1, Check1(0).Value = 1)
+                                b = FacturacionLiquidacionesBodega(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, Check1(0).Value = 1)
                             End If
                                 
                             If b Then
@@ -1476,7 +1476,7 @@ Dim vTipo As Byte
                                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                 If Me.Check1(2).Value Then
                                     cadFormula = ""
-                                    CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     If TipoPrec = 9 Then
                                         CadParam = CadParam & "pTitulo= ""Resumen Facturación Anticipos Bodega""|"
@@ -1485,7 +1485,7 @@ Dim vTipo As Byte
                                     End If
                                     numParam = numParam + 1
                                     
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -1515,7 +1515,7 @@ Dim vTipo As Byte
                                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     'Fecha de Factura
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -1556,26 +1556,26 @@ Dim vTipo As Byte
                                 Exit Sub
                             End If
                             
-                            Me.pb1.visible = True
-                            Me.pb1.Max = Nregs
-                            Me.pb1.Value = 0
+                            Me.Pb1.visible = True
+                            Me.Pb1.Max = Nregs
+                            Me.Pb1.Value = 0
                             Me.Refresh
                             b = False
                             If TipoPrec = 7 Then
                                 '[Monica]15/04/2013: Castelduc hace factura de anticipo de almazara por kilos no por litros
                                 If vParamAplic.Cooperativa = 5 Then
-                                    b = FacturacionAnticiposAlmazaraCastelduc(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1)
+                                    b = FacturacionAnticiposAlmazaraCastelduc(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
                                 Else
-                                    b = FacturacionAnticiposAlmazara(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1)
+                                    b = FacturacionAnticiposAlmazara(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
                                 End If
                             Else
                                 If vParamAplic.Cooperativa = 1 Then
                                     nTabla = "(" & nTabla & ") INNER JOIN rprecios_calidad ON rprecios.codvarie = rprecios_calidad.codvarie "
                                     nTabla = nTabla & " and rprecios.tipofact = rprecios_calidad.tipofact and rprecios.contador = rprecios_calidad.contador "
                                 
-                                    b = FacturacionLiquidacionesAlmazaraValsur(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1, txtCodigo(6).Text, txtCodigo(7).Text)
+                                    b = FacturacionLiquidacionesAlmazaraValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, txtcodigo(6).Text, txtcodigo(7).Text)
                                 Else
-                                    b = FacturacionLiquidacionesAlmazara(nTabla, cadSelect, txtCodigo(15).Text, Me.pb1)
+                                    b = FacturacionLiquidacionesAlmazara(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
                                 End If
                             End If
                                 
@@ -1585,7 +1585,7 @@ Dim vTipo As Byte
                                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                                 If Me.Check1(2).Value Then
                                     cadFormula = ""
-                                    CadParam = CadParam & "pFecFac= """ & txtCodigo(15).Text & """|"
+                                    CadParam = CadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
                                     numParam = numParam + 1
                                     If TipoPrec = 7 Then
                                         CadParam = CadParam & "pTitulo= ""Resumen Facturación Anticipos Almazara""|"
@@ -1594,7 +1594,7 @@ Dim vTipo As Byte
                                     End If
                                     numParam = numParam + 1
                                     
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -1624,7 +1624,7 @@ Dim vTipo As Byte
                                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                                     'Fecha de Factura
-                                    FecFac = CDate(txtCodigo(15).Text)
+                                    FecFac = CDate(txtcodigo(15).Text)
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -1681,15 +1681,15 @@ Private Sub Combo1_LostFocus(Index As Integer)
                 ' si solo hay un tipo de movimiento de anticipo venta campo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(3) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactAntVC
-                    txtCodigo(10).Text = vParamAplic.UltFactAntVC
+                    txtcodigo(9).Text = vParamAplic.PrimFactAntVC
+                    txtcodigo(10).Text = vParamAplic.UltFactAntVC
                 End If
             Case 1 ' liquidacion venta campo
                 ' si solo hay un tipo de movimiento de liquidacion venta campo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(4) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactLiqVC
-                    txtCodigo(10).Text = vParamAplic.UltFactLiqVC
+                    txtcodigo(9).Text = vParamAplic.PrimFactLiqVC
+                    txtcodigo(10).Text = vParamAplic.UltFactLiqVC
                 End If
         End Select
     End If
@@ -1706,51 +1706,51 @@ Private Sub Form_Activate()
             Case 2, 3, 20, 30
                          ' 2 / 20-Listado de Previsión de pago
                          ' 3 / 30-Facturas de Anticipos
-                PonerFoco txtCodigo(12)
+                PonerFoco txtcodigo(12)
                 
             Case 5    ' deshacer proceso de facturacion de anticipos bodega
-                PonerFoco txtCodigo(8)
+                PonerFoco txtcodigo(8)
                 Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(9) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactAntBOD
-                    txtCodigo(10).Text = vParamAplic.UltFactAntBOD
+                    txtcodigo(9).Text = vParamAplic.PrimFactAntBOD
+                    txtcodigo(10).Text = vParamAplic.UltFactAntBOD
                 End If
                 
             Case 50    ' deshacer proceso de facturacion de anticipos almazara
-                PonerFoco txtCodigo(8)
+                PonerFoco txtcodigo(8)
                 Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(7) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactAntAlmz
-                    txtCodigo(10).Text = vParamAplic.UltFactAntAlmz
+                    txtcodigo(9).Text = vParamAplic.PrimFactAntAlmz
+                    txtcodigo(10).Text = vParamAplic.UltFactAntAlmz
                 End If
                 
             Case 13, 14, 130, 140
                             ' 13 / 130 -Listado de Previsión de pago
                             ' 14 / 140 -Facturas de Liquidacion
-                PonerFoco txtCodigo(12)
+                PonerFoco txtcodigo(12)
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
-                PonerFoco txtCodigo(8)
+                PonerFoco txtcodigo(8)
                 Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(10) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactLiqBOD
-                    txtCodigo(10).Text = vParamAplic.UltFactLiqBOD
+                    txtcodigo(9).Text = vParamAplic.PrimFactLiqBOD
+                    txtcodigo(10).Text = vParamAplic.UltFactLiqBOD
                 End If
                 
             Case 150   ' deshacer proceso de facturacion de liquidacion de almazara
-                PonerFoco txtCodigo(8)
+                PonerFoco txtcodigo(8)
                 Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(8) = 1 Then
-                    txtCodigo(9).Text = vParamAplic.PrimFactLiqAlmz
-                    txtCodigo(10).Text = vParamAplic.UltFactLiqAlmz
+                    txtcodigo(9).Text = vParamAplic.PrimFactLiqAlmz
+                    txtcodigo(10).Text = vParamAplic.UltFactLiqAlmz
                 End If
                 
         End Select
@@ -1816,7 +1816,7 @@ Dim List As Collection
             Me.Label3.Caption = "Previsión de Pagos Liquidación Bodega"
         End If
         
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = False
@@ -1852,7 +1852,7 @@ Dim List As Collection
             Me.Label3.Caption = "Previsión de Pagos Liquidación Almazara"
         End If
         
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = False
@@ -1897,7 +1897,7 @@ Dim List As Collection
             Me.Label3.Caption = "Factura de Liquidación Bodega"
             Me.Label2(25).Caption = "Fecha Liquidación"
         End If
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = True
@@ -1915,7 +1915,7 @@ Dim List As Collection
             Check1(3).Value = 1
         End If
         
-        txtCodigo(15).Text = Format(Now, "dd/mm/yyyy")
+        txtcodigo(15).Text = Format(Now, "dd/mm/yyyy")
         
         CargaCombo
         Combo1(2).ListIndex = 2
@@ -1942,7 +1942,7 @@ Dim List As Collection
             Me.Label3.Caption = "Factura de Liquidación Almazara"
             Me.Label2(25).Caption = "Fecha Liquidación"
         End If
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = True
@@ -1961,7 +1961,7 @@ Dim List As Collection
             Check1(3).Value = 1
         End If
         
-        txtCodigo(15).Text = Format(Now, "dd/mm/yyyy")
+        txtcodigo(15).Text = Format(Now, "dd/mm/yyyy")
         
         CargaCombo
         Combo1(2).ListIndex = 2
@@ -2027,19 +2027,19 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
@@ -2059,22 +2059,22 @@ Dim Sql2 As String
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -2088,7 +2088,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmSocios (Index)
         
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -2142,13 +2142,13 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(indice).Text <> "" Then frmC.NovaData = txtCodigo(indice).Text
+    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag)) '<===
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag)) '<===
     ' ********************************************
 
 End Sub
@@ -2156,7 +2156,7 @@ End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
     If OpcionListado = 10 Then
 '        If Index = 40 Then
 '            BarraEst.SimpleText = " CL = Calle    AV = Avenida."
@@ -2229,7 +2229,7 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 Dim b As Boolean
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -2239,61 +2239,61 @@ Dim b As Boolean
     Select Case Index
     
         Case 0, 1, 12, 13, 16, 17, 24, 25, 34, 35 'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             
         Case 4, 5 ' NROS DE FACTURA
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
             
         Case 2, 3, 6, 7, 11, 15, 26, 27, 32 'FECHAS
             b = True
            '[Monica]28/08/2013: comprobamos que la fecha esté en la campaña
-            If txtCodigo(Index).Text <> "" Then
+            If txtcodigo(Index).Text <> "" Then
                 If Index = 6 Or Index = 7 Then
-                    b = PonerFormatoFecha(txtCodigo(Index), True)
+                    b = PonerFormatoFecha(txtcodigo(Index), True)
                 Else
-                    b = PonerFormatoFecha(txtCodigo(Index))
+                    b = PonerFormatoFecha(txtcodigo(Index))
                 End If
             End If
-            If b And Index = 7 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then PonerFoco txtCodigo(15)
+            If b And Index = 7 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then PonerFoco txtcodigo(15)
             If b And Index = 15 And (Me.OpcionListado = 1 Or Me.OpcionListado = 3 Or Me.OpcionListado = 12 Or Me.OpcionListado = 14) Then
                  cmdAceptarAnt.SetFocus
             End If
             
         Case 14, 22, 23  ' FECHA DE GENERACION DE FACTURA
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 8 ' password de deshacer facturacion
-            If txtCodigo(Index).Text = "" Then Exit Sub
-            If Trim(txtCodigo(Index).Text) <> Trim(txtCodigo(Index).Tag) Then
+            If txtcodigo(Index).Text = "" Then Exit Sub
+            If Trim(txtcodigo(Index).Text) <> Trim(txtcodigo(Index).Tag) Then
                 MsgBox "    ACCESO DENEGADO    ", vbExclamation
-                txtCodigo(Index).Text = ""
-                PonerFoco txtCodigo(Index)
+                txtcodigo(Index).Text = ""
+                PonerFoco txtcodigo(Index)
             Else
                 DesactivarCLAVE
                 Select Case OpcionListado
                     Case 5, 15 '5 = anticipos
                                '15= liquidaciones
-                        PonerFoco txtCodigo(9)
+                        PonerFoco txtcodigo(9)
                     Case 7 ' venta campo
                         PonerFocoCmb Combo1(1)
                 End Select
             End If
         
         Case 9, 10 ' numero de facturas
-            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
         
         Case 30, 31, 37, 39 ' datos de modelo190 y modelo346
-            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
             
         Case 33 ' nro de justificante en el certificado de retenciones
-            If txtCodigo(Index).Text <> "" Then
-                PonerFormatoEntero txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then
+                PonerFormatoEntero txtcodigo(Index)
             End If
             
         Case 18, 19, 20, 21, 28, 29 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
             
     End Select
 End Sub
@@ -2438,7 +2438,7 @@ Private Sub AbrirFrmClase(indice As Integer)
     indCodigo = indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtCodigo(indice).Text
+    AyudaClasesCom frmCla, txtcodigo(indice).Text
     
     Set frmCla = Nothing
 End Sub
@@ -2472,50 +2472,50 @@ Dim tipoMov As String
             '3 - Factura de Anticipos bodega
             '30 - Factura de anticipos almazara
             If b Then
-                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
+                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
                     MsgBox "Debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(6)
+                    PonerFoco txtcodigo(6)
                 End If
             End If
             If b Then
-                If txtCodigo(15).Text = "" Then
+                If txtcodigo(15).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Anticipo.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(15)
+                    PonerFoco txtcodigo(15)
                 End If
             End If
             
        Case 2, 20  'Prevision de pagos bodega y almazara
             If b Then
-                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
+                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
                     MsgBox "Para realizar la Previsión de Pago de Anticipos debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(6)
+                    PonerFoco txtcodigo(6)
                 End If
             End If
        
        Case 5, 50 'Deshacer proceso de facturacion de anticipos (bodega, almazara)
-            If txtCodigo(9).Text = "" Or txtCodigo(10).Text = "" Then
+            If txtcodigo(9).Text = "" Or txtcodigo(10).Text = "" Then
                 MsgBox "Debe introducir la primera y última factura de la Facturación de Anticipos", vbExclamation
                 b = False
-                PonerFoco txtCodigo(9)
+                PonerFoco txtcodigo(9)
             End If
             
             If b Then
-                If txtCodigo(11).Text = "" Then
+                If txtcodigo(11).Text = "" Then
                     MsgBox "Debe introducir la Fecha de Anticipo.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(11)
+                    PonerFoco txtcodigo(11)
                 End If
             End If
     
        Case 13, 130 'Prevision de pagos de liquidacion
             If b Then
-                If txtCodigo(6).Text = "" Or txtCodigo(7) = "" Then
+                If txtcodigo(6).Text = "" Or txtcodigo(7) = "" Then
                     MsgBox "Para realizar la Previsión de Pago debe introducir obligatoriamente el rango de fechas.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(6)
+                    PonerFoco txtcodigo(6)
                 End If
             End If
             
@@ -2523,10 +2523,10 @@ Dim tipoMov As String
          Case 14, 140 '14 =  factura de liquidaciones bodega
                       '140=  factura de liquidaciones almazara
             If b Then
-                If txtCodigo(15).Text = "" Then
+                If txtcodigo(15).Text = "" Then
                     MsgBox "Debe introducir obligatoriamente la Fecha de Liquidación.", vbExclamation
                     b = False
-                    PonerFoco txtCodigo(15)
+                    PonerFoco txtcodigo(15)
                 End If
             End If
          
@@ -3104,9 +3104,9 @@ Private Sub ActivarCLAVE()
 Dim I As Integer
     
     For I = 9 To 11
-        txtCodigo(I).Enabled = False
+        txtcodigo(I).Enabled = False
     Next I
-    txtCodigo(8).Enabled = True
+    txtcodigo(8).Enabled = True
     imgFec(6).Enabled = False
     CmdAcepDesF.Enabled = False
     cmdCancelDesF.Enabled = True
@@ -3117,9 +3117,9 @@ Private Sub DesactivarCLAVE()
 Dim I As Integer
 
     For I = 9 To 11
-        txtCodigo(I).Enabled = True
+        txtcodigo(I).Enabled = True
     Next I
-    txtCodigo(8).Enabled = False
+    txtcodigo(8).Enabled = False
     imgFec(6).Enabled = True
     CmdAcepDesF.Enabled = True
     Combo1(1).Enabled = True
@@ -3431,8 +3431,8 @@ Dim EsComplementaria As Boolean
                 Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
                 Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
                 Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
-                Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-                Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+                Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+                Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
                 Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
                 
                 ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
@@ -3584,8 +3584,8 @@ Dim EsComplementaria As Boolean
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
             Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
                 
             ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
@@ -3754,8 +3754,8 @@ Dim campo As String
             Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta  "
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
             Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
             ImpoGastos = DevuelveValor(Sql4)
@@ -3865,8 +3865,8 @@ Dim campo As String
         Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta "
         Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
         Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
         ImpoGastos = DevuelveValor(Sql4)
@@ -3959,8 +3959,8 @@ Dim HayReg As Boolean
 Dim vGastos As Currency
 Dim campo As String
 
-Dim LitrosConsumidos As Long
-Dim LitrosProducidos As Long
+Dim LitrosConsumidos As Currency
+Dim LitrosProducidos As Currency
 
 Dim PrecioConsumido As Currency
 Dim PrecioProducido As Currency
@@ -3976,10 +3976,11 @@ Dim ImporteMoltura1 As Currency
 Dim ImporteEnvasado As Currency
 
 Dim Importe As Currency
-Dim PrecioMontura As Currency
+Dim PrecioMoltura As Currency
+Dim PrecioEnvasado As Currency
 
 Dim Sql5 As String
-
+Dim Sql3 As String
 
     On Error GoTo eCargarTemporal
     
@@ -4053,6 +4054,14 @@ Dim Sql5 As String
     
         ' 23/07/2009: añadido el or con la segunda condicion
         If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
+            Sql3 = "select rbodalbaran_variedad.*, variedades.* "
+            Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
+            Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
+            Sql3 = Sql3 & " and variedades.codclase = " & DBSet(VarieAnt, "N")
+            Sql3 = Sql3 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
+            Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
+            Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
+        
             ' litros consumidos a otro precio
             Sql4 = "select rbodalbaran_variedad.codvarie, variedades.eurdesta, variedades.eursegsoc, sum(cantidad) cantidad, round(variedades.eurdesta * sum(cantidad), 2) importevta, round(variedades.eursegsoc * sum(cantidad), 2) importeenv  "
             Sql4 = Sql4 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
@@ -4085,17 +4094,19 @@ Dim Sql5 As String
                 KilosConsu = KilosNet - KilosComer
                 
 '                ImporteRetirado = Round2(LitrosConsumidos * PrecioRetirado, 2)
-                Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
-                ImporteRetirado = DevuelveValor(Sql5)
+'                Sql5 = "select sum(importevta) from (" & Sql4 & ") aaaaa"
+'                ImporteRetirado = DevuelveValor(Sql5)
+                ImporteRetirado = CalculoImporteRetirado(Sql3, CStr(LitrosConsumidos), False)
                 
-                PrecioMontura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
+                PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
                 
-                ImporteMoltura = Round2(KilosConsu * PrecioMontura, 2)
-                ImporteMoltura1 = Round2(KilosComer * PrecioMontura, 2)
+                ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
+                ImporteMoltura1 = Round2(KilosComer * PrecioMoltura, 2)
                 
 '                ImporteEnvasado = Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
-                Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
-                ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+'                Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
+'                ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+                ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosConsumidos, True)
 
                 
                 baseimpo = baseimpo + Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado) + ((LitrosProducidos - LitrosConsumidos) * PrecioProducido), 2) - ImporteMoltura1
@@ -4111,18 +4122,24 @@ Dim Sql5 As String
 '
 '                PrecioRetirado = DevuelveValor(Sql4)
                 
-                Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
-                PrecioRetirado = DevuelveValor(Sql5)
-                
-                
+'                Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
+'                PrecioRetirado = DevuelveValor(Sql5)
                 
                 Rdto = Round2(LitrosProducidos * 100 / KilosNet, 4)
                 
                 KilosConsu = Round2(LitrosProducidos * 100 / Rdto, 0)
                 
-                ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
-                ImporteMoltura = Round2(KilosConsu * vParamAplic.GtoMoltura, 2)
-                ImporteEnvasado = Round2(LitrosProducidos * vParamAplic.GtoEnvasado, 2)
+'                ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+                ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosProducidos, False)
+                PrecioRetirado = Round2(ImporteRetirado / LitrosProducidos, 4)
+
+                PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
+                
+                ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
+'                ImporteEnvasado = Round2(LitrosProducidos * vParamAplic.GtoEnvasado, 2)
+                ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosProducidos, True)
+                PrecioEnvasado = Round2(ImporteEnvasado / LitrosProducidos, 4)
+
                 
                 baseimpo = baseimpo + Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado), 2)
                 Importe = Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado), 2)
@@ -4135,8 +4152,8 @@ Dim Sql5 As String
             Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta  "
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
             Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
             ImpoGastos = DevuelveValor(Sql4)
@@ -4242,6 +4259,14 @@ Dim Sql5 As String
     
     ' ultimo registro si ha entrado
     If HayReg Then
+        Sql3 = "select rbodalbaran_variedad.*, variedades.* "
+        Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
+        Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
+        Sql3 = Sql3 & " and variedades.codclase = " & DBSet(VarieAnt, "N")
+        Sql3 = Sql3 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
+        Sql3 = Sql3 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
+        Sql3 = Sql3 & " order by rbodalbaran_variedad.numalbar desc, rbodalbaran_variedad.numlinea desc"
+        
         ' litros consumidos a otro precio
         Sql4 = "select rbodalbaran_variedad.codvarie, variedades.eurdesta, variedades.eursegsoc, sum(cantidad) cantidad, round(variedades.eurdesta * sum(cantidad), 2) importevta, round(variedades.eursegsoc * sum(cantidad), 2) importeenv "
         Sql4 = Sql4 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
@@ -4264,12 +4289,12 @@ Dim Sql5 As String
         
 'Ahora 01/04/2011
         If LitrosProducidos > LitrosConsumidos Then
-            Sql4 = "select min(precioar) from rbodalbaran_variedad, rbodalbaran where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
-            Sql4 = Sql4 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
-            Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
-        
-            PrecioRetirado = DevuelveValor(Sql4)
+'            Sql4 = "select min(precioar) from rbodalbaran_variedad, rbodalbaran where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
+'            Sql4 = Sql4 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
+'            Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = " & DBSet(VarieAnt, "N")
+'            Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
+'
+'            PrecioRetirado = DevuelveValor(Sql4)
         
             Rdto = Round2(LitrosProducidos * 100 / KilosNet, 4)
             
@@ -4277,17 +4302,19 @@ Dim Sql5 As String
             KilosConsu = KilosNet - KilosComer
             
 '            ImporteRetirado = Round2(LitrosConsumidos * PrecioRetirado, 2)
-            Sql5 = "select sum(importevta) from (" & Sql5 & ") aaaaa"
-            ImporteRetirado = DevuelveValor(Sql5)
+'            Sql5 = "select sum(importevta) from (" & Sql5 & ") aaaaa"
+'            ImporteRetirado = DevuelveValor(Sql5)
+            ImporteRetirado = CalculoImporteRetirado(Sql3, CStr(LitrosConsumidos), False)
             
-            PrecioMontura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
+            PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
             
             ImporteMoltura = Round2(KilosConsu * vParamAplic.GtoMoltura, 2)
             ImporteMoltura1 = Round2(KilosComer * vParamAplic.GtoMoltura, 2)
             
 '            ImporteEnvasado = Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
-            Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
-            ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+'            Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
+'            ImporteEnvasado = DevuelveValor(Sql5) 'Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
+            ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosConsumidos, True)
 
             
             baseimpo = baseimpo + Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado) + ((LitrosProducidos - LitrosConsumidos) * PrecioProducido), 2) - ImporteMoltura1
@@ -4301,18 +4328,24 @@ Dim Sql5 As String
 '            Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
 '
 '            PrecioRetirado = DevuelveValor(Sql4)
-            
-            Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
-            PrecioRetirado = DevuelveValor(Sql5)
-            
+'            Sql5 = "select eurdesta from (" & Sql4 & ") aaaaa"
+'            PrecioRetirado = DevuelveValor(Sql5)
+
             
             Rdto = Round2(LitrosProducidos * 100 / KilosNet, 4)
             
             KilosConsu = Round2(LitrosProducidos * 100 / Rdto, 0)
             
-            ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
-            ImporteMoltura = Round2(KilosConsu * vParamAplic.GtoMoltura, 2)
-            ImporteEnvasado = Round2(LitrosProducidos * vParamAplic.GtoEnvasado, 2)
+'            ImporteRetirado = Round2(LitrosProducidos * PrecioRetirado, 2)
+            ImporteRetirado = CalculoImporteRetirado(Sql3, LitrosProducidos, False)
+            PrecioRetirado = Round2(ImporteRetirado / LitrosProducidos, 4)
+            
+            PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
+            
+            ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
+'            ImporteEnvasado = Round2(LitrosProducidos * vParamAplic.GtoEnvasado, 2)
+            ImporteEnvasado = CalculoImporteRetirado(Sql3, LitrosProducidos, True)
+            PrecioEnvasado = Round2(ImporteEnvasado / LitrosProducidos, 4)
             
             baseimpo = baseimpo + Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado), 2)
             Importe = Round2((ImporteRetirado - ImporteMoltura - ImporteEnvasado), 2)
@@ -4341,8 +4374,8 @@ Dim Sql5 As String
         Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta "
         Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
         Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
         ImpoGastos = DevuelveValor(Sql4)
@@ -4584,9 +4617,9 @@ Dim Sql5 As String
     Nregs = TotalRegistrosConsulta(Sql)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
-    Me.pb1.visible = True
-    Me.pb1.Max = Nregs
-    Me.pb1.Value = 0
+    Me.Pb1.visible = True
+    Me.Pb1.Max = Nregs
+    Me.Pb1.Value = 0
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
@@ -4596,7 +4629,7 @@ Dim Sql5 As String
     While Not Rs.EOF
     
         Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "- Campo " & Rs!codcampo
-        IncrementarProgresNew pb1, 1
+        IncrementarProgresNew Pb1, 1
         Me.Refresh
         DoEvents
     
@@ -4701,7 +4734,7 @@ Dim Sql5 As String
     conn.Execute Sql3
                                     
                                     
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -4710,7 +4743,7 @@ Dim Sql5 As String
     Exit Function
     
 eCargarTemporal:
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -4907,8 +4940,8 @@ Dim PrecioProducido As Currency
             Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta  "
             Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
             Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
             Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
             ImpoGastos = DevuelveValor(Sql4)
@@ -5024,8 +5057,8 @@ Dim PrecioProducido As Currency
         Sql4 = "select sum(if(isnull(importe),0,importe)) as gastos from rhisfruta_gastos, rhisfruta "
         Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
-        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+        Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtcodigo(6).Text, "F")
+        Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtcodigo(7).Text, "F")
         Sql4 = Sql4 & " and rhisfruta.numalbar = rhisfruta_gastos.numalbar "
             
         ImpoGastos = DevuelveValor(Sql4)
