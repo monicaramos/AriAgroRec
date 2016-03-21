@@ -232,7 +232,7 @@ End Sub
 
 Public Sub SubmnC_RecoleccionG_PagoSocios_Click(Index As Integer)
     Select Case Index
-        Case 1: frmManPrecios.tipo = 0
+        Case 1: frmManPrecios.Tipo = 0
                 frmManPrecios.Show vbModal    ' Mantenimiento de precios
         Case 2: frmCalculoPrecios.Show vbModal ' calculo de precios
         
@@ -414,7 +414,7 @@ Public Sub SubmnC_RecoleccionG_FacturasSocios_Click(Index As Integer)
         Case 6:
                 frmContaFacSoc.Show vbModal       ' Integracion contable
         Case 7:
-                frmImpAridoc.tipo = 0 ' Integracion de aridoc: Facturas de socio
+                frmImpAridoc.Tipo = 0 ' Integracion de aridoc: Facturas de socio
                 frmImpAridoc.Caption = "Exportar Facturas Socio a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal
@@ -523,7 +523,7 @@ Public Sub SubmnC_RecoleccionG_Transporte_Click(Index As Integer)
 
         Case 6: frmTRAContaFac.Show vbModal 'Construc ("Integracion contable")
         Case 7: 'Construc ("Integracion al aridoc") ' Integracion del aridoc
-                frmImpAridoc.tipo = 5 ' Integracion de aridoc: Facturas de transporte
+                frmImpAridoc.Tipo = 5 ' Integracion de aridoc: Facturas de transporte
                 frmImpAridoc.Caption = "Exportar Facturas Transporte a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -588,7 +588,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                         frmPagoRecibos.Show vbModal 'Pago de Recibos
                  End If
                  
-        Case 17: frmImpAridoc.tipo = 4 ' Integracion de aridoc: Recibos de Nóminas
+        Case 17: frmImpAridoc.Tipo = 4 ' Integracion de aridoc: Recibos de Nóminas
                  frmImpAridoc.Caption = "Importar Recibos a Aridoc"
                  frmImpAridoc.Label4(16).Caption = "Fecha"
                  frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -651,7 +651,7 @@ Public Sub SubmnC_RecoleccionG_Almz_Click(Index As Integer)
         Case 4: frmAlmzEntradas.Show vbModal   'Construc ("Entradas bascula")  ' Hco de facturas
         Case 5: AbrirListadoBodEntradas (5) ' reparto de gastos de liquidacion almazara
         Case 6: ' mantenimiento de precios de anticipos liquidacion
-                frmManPrecios.tipo = 1 ' almazara
+                frmManPrecios.Tipo = 1 ' almazara
                 frmManPrecios.Show vbModal
         Case 7: frmAlmzListEntradas.OpcionListado = 0
                 frmAlmzListEntradas.Show vbModal ' informe de entradas de almazara por socios/variedad
@@ -715,30 +715,30 @@ Public Sub SubmnC_RecoleccionG_Almz1_Click(Index As Integer)
         Case 1: frmBodAlbRetirada.Show vbModal ' albaranes de retirada de bodega
 
         Case 3: ' previsio de facturacion de albaranes de retirada
-                frmBodFactAlbaranes.tipo = 0     ' Prevision Facturacion de albaranes de almazara
+                frmBodFactAlbaranes.Tipo = 0     ' Prevision Facturacion de albaranes de almazara
                 frmBodFactAlbaranes.OpcionListado = 50
                 frmBodFactAlbaranes.Show vbModal
                         
         Case 4:
-                frmBodFactAlbaranes.tipo = 0     ' Facturacion de albaranes de almazara
+                frmBodFactAlbaranes.Tipo = 0     ' Facturacion de albaranes de almazara
                 frmBodFactAlbaranes.OpcionListado = 52
                 frmBodFactAlbaranes.Label10(0).Caption = "Facturación de Albaranes Retirada Almazara"
                 frmBodFactAlbaranes.Show vbModal
                 
-        Case 5: frmBodReimpre.tipo = 0            ' Reimpresion de facturas de retirada (almazara)
+        Case 5: frmBodReimpre.Tipo = 0            ' Reimpresion de facturas de retirada (almazara)
                 frmBodReimpre.Label1 = "Reimpresión de Facturas de Almazara"
                 frmBodReimpre.Show vbModal
                   
-        Case 6: frmBodHcoFacturas.tipo = 0       ' Hco de Albaranes Facturas almazara
+        Case 6: frmBodHcoFacturas.Tipo = 0       ' Hco de Albaranes Facturas almazara
                 frmBodHcoFacturas.Caption = "Histórico de Facturas Retirada Almazara"
                 frmBodHcoFacturas.Show vbModal
         
-        Case 8: frmBodContaFac.tipo = 0          ' Integracion contable de facturas
+        Case 8: frmBodContaFac.Tipo = 0          ' Integracion contable de facturas
                 frmBodContaFac.Caption = "Integración Contable de Facturas de Retirada de Almazara"
                 frmBodContaFac.Show vbModal
             
         Case 9: ' Integracion del aridoc
-                frmImpAridoc.tipo = 2 ' Integracion de aridoc: Facturas de Retirada de almazara
+                frmImpAridoc.Tipo = 2 ' Integracion de aridoc: Facturas de Retirada de almazara
                 frmImpAridoc.Caption = "Exportar Facturas Almazara a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -756,31 +756,31 @@ Public Sub SubmnC_RecoleccionG_Bod1_Click(Index As Integer)
         Case 1: frmBodAlbRetirada.Show vbModal ' albaranes de retirada de bodega
 
 
-        Case 3: frmBodFactAlbaranes.tipo = 1    ' Prevision Facturacion de albaranes de retirada bodega
+        Case 3: frmBodFactAlbaranes.Tipo = 1    ' Prevision Facturacion de albaranes de retirada bodega
                 frmBodFactAlbaranes.OpcionListado = 50
                 frmBodFactAlbaranes.Label10(0).Caption = "Previsión Facturación Retirada Bodega"
                 frmBodFactAlbaranes.Show vbModal
 
 
-        Case 4: frmBodFactAlbaranes.tipo = 1    ' Facturacion de albaranes de bodega
+        Case 4: frmBodFactAlbaranes.Tipo = 1    ' Facturacion de albaranes de bodega
                 frmBodFactAlbaranes.OpcionListado = 52
                 frmBodFactAlbaranes.Label10(0).Caption = "Facturación de Albaranes Retirada Bodega"
                 frmBodFactAlbaranes.Show vbModal
         
-        Case 5: frmBodReimpre.tipo = 1              ' Reimpresion de facturas de retirada(bodega)
+        Case 5: frmBodReimpre.Tipo = 1              ' Reimpresion de facturas de retirada(bodega)
                 frmBodReimpre.Label1 = "Reimpresión de Facturas de Bodega"
                 frmBodReimpre.Show vbModal
         
-        Case 6: frmBodHcoFacturas.tipo = 1
+        Case 6: frmBodHcoFacturas.Tipo = 1
                 frmBodHcoFacturas.Caption = "Histórico de Facturas Retirada Bodega"
                 frmBodHcoFacturas.Show vbModal      ' Hco de Albaranes Facturas bodega
         
-        Case 8: frmBodContaFac.tipo = 1
+        Case 8: frmBodContaFac.Tipo = 1
                 frmBodContaFac.Caption = "Integración Contable de Facturas de Retirada de Bodega"
                 frmBodContaFac.Show vbModal         ' Integracion contable de facturas bodega
         
         Case 9: ' Integracion del aridoc
-                frmImpAridoc.tipo = 3 ' Integracion de aridoc: Facturas de Retirada de bodega
+                frmImpAridoc.Tipo = 3 ' Integracion de aridoc: Facturas de Retirada de bodega
                 frmImpAridoc.Caption = "Exportar Facturas Bodega a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -817,7 +817,7 @@ Public Sub SubmnC_RecoleccionG_ADV_Click(Index As Integer)
         Case 11: frmADVHcoFacturas.Show vbModal  ' Hco de Partes Facturas
         Case 13: frmADVContaFac.Show vbModal    ' Integracion contable de facturas
         Case 14: ' Integracion del aridoc
-                frmImpAridoc.tipo = 1 ' Integracion de aridoc: Facturas de adv
+                frmImpAridoc.Tipo = 1 ' Integracion de aridoc: Facturas de adv
                 frmImpAridoc.Caption = "Exportar Facturas ADV a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -841,7 +841,7 @@ Public Sub SubmnC_RecoleccionG_Bodega_Click(Index As Integer)
         Case 2: frmBodBonifica.Show vbModal     ' tabla de bonificaciones de bodega
         Case 3: AbrirListadoBodEntradas (4)    ' reparto de gastos de liquidacion bodega
         Case 4: ' mantenimiento de precios de anticipos liquidacion
-                frmManPrecios.tipo = 2 ' bodega
+                frmManPrecios.Tipo = 2 ' bodega
                 frmManPrecios.Show vbModal
         Case 5: AbrirListadoBodEntradas (0) ' informe de entradas
         Case 6: AbrirListadoBodEntradas (1)  ' extracto de entradas de bodega por socios/variedad
@@ -946,7 +946,7 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
                 End If
                 
         Case 25: ' Integracion aridoc
-                frmImpAridoc.tipo = 6 ' Integracion de aridoc: Facturas de socio de pozos
+                frmImpAridoc.Tipo = 6 ' Integracion de aridoc: Facturas de socio de pozos
                 frmImpAridoc.Caption = "Exportar Facturas Socio a Aridoc"
                 frmImpAridoc.Label4(16).Caption = "Fecha Factura"
                 frmImpAridoc.Show vbModal 'vbModalConstruc("Integracion aridoc")
@@ -1044,11 +1044,11 @@ End Sub
 
 Public Sub BloqueoMenusSegunCooperativa()
 Dim b As Boolean
-Dim I As Integer
+Dim i As Integer
 
     ' traspaso de facturas a cooperativas solo para Valsur
-    MDIppal.mnE_Util(3).Enabled = MDIppal.mnE_Util(3).visible And (vParamAplic.Cooperativa = 1)
-    MDIppal.mnE_Util(3).visible = MDIppal.mnE_Util(3).visible And (vParamAplic.Cooperativa = 1)
+    MDIppal.mnE_Util(3).Enabled = (vParamAplic.Cooperativa = 1)
+    MDIppal.mnE_Util(3).visible = (vParamAplic.Cooperativa = 1)
     
     ' traspaso de ROPAS solo para Catadau
     MDIppal.mnE_Util(4).Enabled = MDIppal.mnE_Util(4).visible 'And (vParamAplic.Cooperativa = 0)
@@ -1056,27 +1056,27 @@ Dim I As Integer
     
 ' luego lo descomento
     ' telefonia solo para Valsur
-    For I = 8 To 10
-        MDIppal.mnE_Util(I).Enabled = MDIppal.mnE_Util(I).visible And (vParamAplic.Cooperativa = 1)
-        MDIppal.mnE_Util(I).visible = MDIppal.mnE_Util(I).visible And (vParamAplic.Cooperativa = 1)
-    Next I
+    For i = 8 To 10
+        MDIppal.mnE_Util(i).Enabled = (vParamAplic.Cooperativa = 1)
+        MDIppal.mnE_Util(i).visible = (vParamAplic.Cooperativa = 1)
+    Next i
     
 '    ' traspaso de datos a Almazara solo para Moixent
 '    MDIppal.mnE_Util(6).Enabled = (vParamAplic.Cooperativa = 3)
 '    MDIppal.mnE_Util(6).visible = (vParamAplic.Cooperativa = 3)
 '
     'traspaso a almazara solo para catadau
-    MDIppal.mnRec_Almazara(1).Enabled = MDIppal.mnRec_Almazara(1).visible And (vParamAplic.Cooperativa = 0)
-    MDIppal.mnRec_Almazara(1).visible = MDIppal.mnRec_Almazara(1).visible And (vParamAplic.Cooperativa = 0)
+    MDIppal.mnRec_Almazara(1).Enabled = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnRec_Almazara(1).visible = (vParamAplic.Cooperativa = 0)
     
     '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
     ' mantenimiento de calibradores solo para catadau , alzira, castelduc y picassent
-    MDIppal.mnRecG_Admon(25).Enabled = MDIppal.mnRecG_Admon(25).visible And ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
-    MDIppal.mnRecG_Admon(25).visible = MDIppal.mnRecG_Admon(25).visible And ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
+    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
+    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
     
     
-    MDIppal.mnRec_AlmzLiquidacion(4).Enabled = MDIppal.mnRec_AlmzLiquidacion(4).visible And vParamAplic.Cooperativa = 1
-    MDIppal.mnRec_AlmzLiquidacion(4).visible = MDIppal.mnRec_AlmzLiquidacion(4).visible And vParamAplic.Cooperativa = 1
+    MDIppal.mnRec_AlmzLiquidacion(4).Enabled = vParamAplic.Cooperativa = 1
+    MDIppal.mnRec_AlmzLiquidacion(4).visible = vParamAplic.Cooperativa = 1
     
     MDIppal.mnRec_LiquFO(1).Enabled = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
     MDIppal.mnRec_LiquFO(1).visible = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
@@ -1175,13 +1175,13 @@ Dim I As Integer
     
     
     '[Monica]04/05/2015: traspaso de ropas solo para Castelduc
-    MDIppal.mnE_Util(16).Enabled = MDIppal.mnE_Util(16).visible And (vParamAplic.Cooperativa = 5)
-    MDIppal.mnE_Util(16).visible = MDIppal.mnE_Util(16).visible And (vParamAplic.Cooperativa = 5)
+    MDIppal.mnE_Util(16).Enabled = (vParamAplic.Cooperativa = 5)
+    MDIppal.mnE_Util(16).visible = (vParamAplic.Cooperativa = 5)
 
     
     '[Monica]29/06/2015: traspaso de albaranes de retirada solo para ABN
-    MDIppal.mnE_Util(17).Enabled = MDIppal.mnE_Util(17).visible And (vParamAplic.Cooperativa = 1)
-    MDIppal.mnE_Util(17).visible = MDIppal.mnE_Util(17).visible And (vParamAplic.Cooperativa = 1)
+    MDIppal.mnE_Util(17).Enabled = (vParamAplic.Cooperativa = 1)
+    MDIppal.mnE_Util(17).visible = (vParamAplic.Cooperativa = 1)
     
     '[Monica]20/10/2015: solo para ABN traspaso de campos de almazara
     MDIppal.mnRec_AlmTrasCampos(1).Enabled = (vParamAplic.Cooperativa = 1)
