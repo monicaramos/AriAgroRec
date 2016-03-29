@@ -4745,7 +4745,7 @@ End Function
 
 
 
-Public Function TraspasoPartesFacturas(cadSQL As String, cadwhere As String, FechaFact As String, Banpr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, Forpa As String) As Boolean
+Public Function TraspasoPartesFacturas(cadSQL As String, cadWHERE As String, FechaFact As String, Banpr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, Forpa As String) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Partes que vamos a Facturar
 '      FechaFact: Fecha de la Factura
 '      BanPr: Cod. de Banco Propio
@@ -4799,7 +4799,7 @@ Dim PgbVisible As Boolean
     'Bloqueamos todos los albaranes que vamos a facturar (cabeceras y lineas)
     'Nota: esta bloqueando tambien los registros de la tabla clientes: sclien correspondientes
     Sql = " (advpartes INNER JOIN rsocios ON advpartes.codsocio=rsocios.codsocio ) INNER JOIN advpartes_lineas ON advpartes.numparte=advpartes_lineas.numparte "
-    If Not BloqueaRegistro(Sql, cadwhere) Then
+    If Not BloqueaRegistro(Sql, cadWHERE) Then
         Screen.MousePointer = vbDefault
         'comprobamos que no haya nadie facturando
         DesBloqueoManual ("ADVFAC")
@@ -4906,7 +4906,7 @@ Dim PgbVisible As Boolean
             vFactuADV.CPostal = DBLet(RsAlb!codPostal, "T")
             vFactuADV.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuADV.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuADV.nif = DBLet(RsAlb!nifsocio, "T")
+            vFactuADV.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuADV.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuADV.ForPago = Forpa
 '[Monica] 09/02/2010 la forma de pago está en la contabilidad de adv
@@ -6619,7 +6619,7 @@ End Function
 
 
 
-Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadwhere As String, FechaFact As String, Banpr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, Forpa As String, TAlmzBod As Byte) As Boolean
+Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWHERE As String, FechaFact As String, Banpr As String, ByRef PBar1 As ProgressBar, ByRef LblBar As Label, ImprimeLasFacturasGeneradas As Boolean, ByRef vTipoM As String, TextosCSB As String, Forpa As String, TAlmzBod As Byte) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Partes que vamos a Facturar
 '      FechaFact: Fecha de la Factura
 '      BanPr: Cod. de Banco Propio
@@ -6674,7 +6674,7 @@ Dim PgbVisible As Boolean
     Sql = " (rbodalbaran INNER JOIN rsocios ON rbodalbaran.codsocio=rsocios.codsocio ) INNER JOIN rbodalbaran_variedad ON rbodalbaran.numalbar=rbodalbaran_variedad.numalbar "
     Sql = "(" & Sql & ") INNER JOIN variedades ON rbodalbaran_variedad.codvarie = variedades.codvarie "
     Sql = "(" & Sql & ") INNER JOIN productos ON variedades.codprodu = productos.codprodu "
-    If Not BloqueaRegistro(Sql, cadwhere) Then
+    If Not BloqueaRegistro(Sql, cadWHERE) Then
         Screen.MousePointer = vbDefault
         'comprobamos que no haya nadie facturando
         DesBloqueoManual ("BODFAC")
@@ -6765,7 +6765,7 @@ Dim PgbVisible As Boolean
             vFactuBOD.CPostal = DBLet(RsAlb!codPostal, "T")
             vFactuBOD.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuBOD.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuBOD.nif = DBLet(RsAlb!nifsocio, "T")
+            vFactuBOD.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuBOD.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuBOD.ForPago = Forpa
             vFactuBOD.TipForPago = DBSet(DevuelveDesdeBDNew(cAgro, "forpago", "tipoforp", "codforpa", Forpa, "N"), "N")
@@ -9224,7 +9224,7 @@ Dim PrecioEnvasado As Currency
 Dim Rs4 As ADODB.Recordset
 
 Dim Litros As Currency
-Dim Cantidad As Currency
+Dim cantidad As Currency
 
 
 
@@ -9299,6 +9299,8 @@ Dim Cantidad As Currency
                 Importe = 0
                 
                 KilosComer = 0
+                
+                LitrosProducidos = 0
                 
                 vPorcIva = ""
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
@@ -9445,11 +9447,11 @@ Dim Cantidad As Currency
                 While Not Rs4.EOF And Litros <> 0
                     jj = jj + 1
                     
-                    If DBLet(Rs4!Cantidad, "N") < Litros Then
-                        Litros = Litros - DBLet(Rs4!Cantidad, "N")
-                        Cantidad = DBLet(Rs4!Cantidad, "N")
+                    If DBLet(Rs4!cantidad, "N") < Litros Then
+                        Litros = Litros - DBLet(Rs4!cantidad, "N")
+                        cantidad = DBLet(Rs4!cantidad, "N")
                     Else
-                        Cantidad = Litros
+                        cantidad = Litros
                         Litros = 0
                     End If
                 
@@ -9465,7 +9467,7 @@ Dim Cantidad As Currency
                     Sql = Sql & DBSet(LitrosConsumidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                     Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2,"
                     Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                    Sql = Sql & DBSet(Cantidad, "N") & ")"
+                    Sql = Sql & DBSet(cantidad, "N") & ")"
                     conn.Execute Sql
                     
                     Rs4.MoveNext
@@ -9528,11 +9530,11 @@ Dim Cantidad As Currency
                 While Not Rs4.EOF And Litros <> 0
                     jj = jj + 1
             
-                    If DBLet(Rs4!Cantidad, "N") < Litros Then
-                        Litros = Litros - DBLet(Rs4!Cantidad, "N")
-                        Cantidad = DBLet(Rs4!Cantidad, "N")
+                    If DBLet(Rs4!cantidad, "N") < Litros Then
+                        Litros = Litros - DBLet(Rs4!cantidad, "N")
+                        cantidad = DBLet(Rs4!cantidad, "N")
                     Else
-                        Cantidad = Litros
+                        cantidad = Litros
                         Litros = 0
                     End If
             
@@ -9549,7 +9551,7 @@ Dim Cantidad As Currency
                     Sql = Sql & DBSet(LitrosProducidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                     Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2," '[Monica]28/03/2014: antes ",1,"
                     Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                    Sql = Sql & DBSet(Cantidad, "N") & ")"
+                    Sql = Sql & DBSet(cantidad, "N") & ")"
                     
                     conn.Execute Sql
                     
@@ -9844,11 +9846,11 @@ Dim Cantidad As Currency
             While Not Rs4.EOF And Litros <> 0
                 jj = jj + 1
                 
-                If DBLet(Rs4!Cantidad, "N") < Litros Then
-                    Litros = Litros - DBLet(Rs4!Cantidad, "N")
-                    Cantidad = DBLet(Rs4!Cantidad, "N")
+                If DBLet(Rs4!cantidad, "N") < Litros Then
+                    Litros = Litros - DBLet(Rs4!cantidad, "N")
+                    cantidad = DBLet(Rs4!cantidad, "N")
                 Else
-                    Cantidad = Litros
+                    cantidad = Litros
                     Litros = 0
                 End If
             
@@ -9864,7 +9866,7 @@ Dim Cantidad As Currency
                 Sql = Sql & DBSet(LitrosConsumidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                 Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2,"
                 Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                Sql = Sql & DBSet(Cantidad, "N") & ")"
+                Sql = Sql & DBSet(cantidad, "N") & ")"
                 conn.Execute Sql
                 
                 Rs4.MoveNext
@@ -9928,11 +9930,11 @@ Dim Cantidad As Currency
             While Not Rs4.EOF And Litros <> 0
                 jj = jj + 1
                 
-                If DBLet(Rs4!Cantidad, "N") < Litros Then
-                    Litros = Litros - DBLet(Rs4!Cantidad, "N")
-                    Cantidad = DBLet(Rs4!Cantidad, "N")
+                If DBLet(Rs4!cantidad, "N") < Litros Then
+                    Litros = Litros - DBLet(Rs4!cantidad, "N")
+                    cantidad = DBLet(Rs4!cantidad, "N")
                 Else
-                    Cantidad = Litros
+                    cantidad = Litros
                     Litros = 0
                 End If
         
@@ -9948,7 +9950,7 @@ Dim Cantidad As Currency
                 Sql = Sql & DBSet(LitrosProducidos, "N") & "," & DBSet(GastosCoop, "N") & "," & DBSet(PrecioConsumido, "N") & ","
                 Sql = Sql & DBSet((ImporteRetirado - ImporteMoltura - ImporteEnvasado), "N") & ",2," '[Monica]28/03/2014: antes ",1,"
                 Sql = Sql & DBSet(Rs4!EurDesta, "N") & "," & DBSet(PrecioMoltura, "N") & "," & DBSet(Rs4!eursegsoc, "N") & ","
-                Sql = Sql & DBSet(Cantidad, "N") & ")"
+                Sql = Sql & DBSet(cantidad, "N") & ")"
                 
                 conn.Execute Sql
                 
@@ -10097,16 +10099,21 @@ Dim Precio As Currency
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF And Litros <> 0
-        If DBLet(Rs!Cantidad, "N") < Litros Then
-            Litros = Litros - DBLet(Rs!Cantidad, "N")
-            Importe = Importe + DBLet(Rs!ImporteL, "N")
+        If DBLet(Rs!cantidad, "N") <= Litros Then
+            Litros = Litros - DBLet(Rs!cantidad, "N")
+            If EsImpEnvasado Then
+                Precio = DBLet(Rs!eursegsoc, "N")
+                Importe = Importe + CalcularImporte(CStr(DBLet(Rs!cantidad, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+            Else
+                Importe = Importe + DBLet(Rs!ImporteL, "N")
+            End If
         Else
             If EsImpEnvasado Then
                 Precio = DBLet(Rs!eursegsoc, "N")
             Else
                 Precio = DBLet(Rs!EurDesta, "N")
             End If
-            Importe = CalcularImporte(CStr(DBLet(Litros, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+            Importe = Importe + CalcularImporte(CStr(DBLet(Litros, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
             Litros = 0
         End If
     
@@ -14084,9 +14091,9 @@ End Function
 
 
 
-Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef ImpIVA As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
+Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
 
-    Dim I As Integer
+    Dim i As Integer
     Dim Sql As String
     Dim baseimpo As Dictionary
     Dim CodIva As Integer
@@ -14100,15 +14107,15 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
     totimp = 0
     Base = 0
     ImpRet = 0
-    For I = 0 To 2
-         Tipiva(I) = 0
-         ImpTot(I) = 0
-         Impbas(I) = 0
-         ImpIVA(I) = 0
-         PorIva(I) = 0
-         PorRec(I) = 0
-         ImpREC(I) = 0
-    Next I
+    For i = 0 To 2
+         Tipiva(i) = 0
+         ImpTot(i) = 0
+         Impbas(i) = 0
+         impiva(i) = 0
+         PorIva(i) = 0
+         PorRec(i) = 0
+         ImpREC(i) = 0
+    Next i
 
     ' recorremos todas las lineas de la factura
     If Not Rs.EOF Then Rs.MoveFirst
@@ -14119,17 +14126,17 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         Rs.MoveNext
     Wend
 
-    For I = 0 To baseimpo.Count - 1
-        If I <= 2 Then
-            Tipiva(I) = baseimpo.Keys(I)
-            Impbas(I) = baseimpo.Items(I)
+    For i = 0 To baseimpo.Count - 1
+        If i <= 2 Then
+            Tipiva(i) = baseimpo.Keys(i)
+            Impbas(i) = baseimpo.Items(i)
  
-            PorIva(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(I)), "N")
-            PorRec(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(I)), "N")
-            ImpIVA(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
-            ImpREC(I) = DBLet(Round2(Impbas(I) * PorRec(I) / 100, 2), "N")
-            ImpTot(I) = Impbas(I) + ImpIVA(I) + ImpREC(I)
-            TotFac = TotFac + ImpTot(I)
+            PorIva(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
+            PorRec(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(i)), "N")
+            impiva(i) = DBLet(Round2(Impbas(i) * PorIva(i) / 100, 2), "N")
+            ImpREC(i) = DBLet(Round2(Impbas(i) * PorRec(i) / 100, 2), "N")
+            ImpTot(i) = Impbas(i) + impiva(i) + ImpREC(i)
+            TotFac = TotFac + ImpTot(i)
  
 'antes el iva estaba incluido
 '            PorIva(i) = DevuelveDesdeBDNewFac(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
@@ -14139,7 +14146,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         
         
         End If
-    Next I
+    Next i
     'si hay retencion la calculamos
     If PorRet <> 0 Then
         Base = 0
@@ -14149,21 +14156,21 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
             If Socio <> "" Then Sql = DevuelveValor("select tipoirpf from rsocios where codsocio = " & DBSet(Socio, "N"))
             Select Case Sql
                 Case 0
-                    For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I) + ImpIVA(I)
-                    Next I
+                    For i = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(i) + impiva(i)
+                    Next i
                 Case 1
-                    For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I)
-                    Next I
+                    For i = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(i)
+                    Next i
                 Case 2
                 
             End Select
         
         Else
-            For I = 0 To baseimpo.Count - 1
-                Base = Base + Impbas(I)
-            Next I
+            For i = 0 To baseimpo.Count - 1
+                Base = Base + Impbas(i)
+            Next i
         End If
         ImpRet = Round2(Base * PorRet / 100, 2)
         TotFac = TotFac - ImpRet

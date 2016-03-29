@@ -1024,7 +1024,7 @@ Dim vTipo As Byte
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -1336,7 +1336,7 @@ Dim vTipo As Byte
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -3101,11 +3101,11 @@ End Function
 
 
 Private Sub ActivarCLAVE()
-Dim I As Integer
+Dim i As Integer
     
-    For I = 9 To 11
-        txtcodigo(I).Enabled = False
-    Next I
+    For i = 9 To 11
+        txtcodigo(i).Enabled = False
+    Next i
     txtcodigo(8).Enabled = True
     imgFec(6).Enabled = False
     CmdAcepDesF.Enabled = False
@@ -3114,11 +3114,11 @@ Dim I As Integer
 End Sub
 
 Private Sub DesactivarCLAVE()
-Dim I As Integer
+Dim i As Integer
 
-    For I = 9 To 11
-        txtcodigo(I).Enabled = True
-    Next I
+    For i = 9 To 11
+        txtcodigo(i).Enabled = True
+    Next i
     txtcodigo(8).Enabled = False
     imgFec(6).Enabled = True
     CmdAcepDesF.Enabled = True
@@ -4308,8 +4308,8 @@ Dim Sql3 As String
             
             PrecioMoltura = DevuelveValor("select eurmanob from variedades where codvarie = " & DBSet(VarieAnt, "N"))
             
-            ImporteMoltura = Round2(KilosConsu * vParamAplic.GtoMoltura, 2)
-            ImporteMoltura1 = Round2(KilosComer * vParamAplic.GtoMoltura, 2)
+            ImporteMoltura = Round2(KilosConsu * PrecioMoltura, 2)
+            ImporteMoltura1 = Round2(KilosComer * PrecioMoltura, 2)
             
 '            ImporteEnvasado = Round2(LitrosConsumidos * vParamAplic.GtoEnvasado, 2)
 '            Sql5 = "select sum(importeenv) from (" & Sql4 & ") aaaaa"
@@ -4450,7 +4450,7 @@ Dim b As Boolean
 Dim Sql2 As String
 Dim Sql5 As String
 Dim VarieAnt As Long
-Dim Numreg As Long
+Dim NumReg As Long
 
     On Error GoTo eHayPreciosVariedadesBodegaAlmazara
     
@@ -4484,7 +4484,7 @@ Dim Numreg As Long
     b = True
     
     If Not Rs.EOF Then VarieAnt = DBLet(Rs!codvarie, "N")
-    Numreg = 0
+    NumReg = 0
     ' comprobamos que existen registros para todos las variedades seleccionadas
     While Not Rs.EOF And b
         If vParamAplic.Cooperativa = 1 And Tipo = 1 Then
