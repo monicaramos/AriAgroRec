@@ -857,7 +857,7 @@ End Sub
 Private Sub CmdAcepDesF_Click()
 Dim Tipo As Byte
     If DatosOk Then
-        pb2.visible = True
+        Pb2.visible = True
         Select Case OpcionListado
             Case 5 ' anticipo de bodega
                 Tipo = 6
@@ -868,7 +868,7 @@ Dim Tipo As Byte
             Case 150 ' liquidacion de almazara
                 Tipo = 5
         End Select
-        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, pb2) Then
+        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, Pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -1598,7 +1598,7 @@ Dim vTipo As Byte
                                     cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                                     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                                     If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
-                                    ConSubInforme = False
+                                    ConSubInforme = True
                                     
                                     LlamarImprimir
                                 End If
@@ -1710,7 +1710,7 @@ Private Sub Form_Activate()
                 
             Case 5    ' deshacer proceso de facturacion de anticipos bodega
                 PonerFoco txtcodigo(8)
-                Me.pb2.visible = False
+                Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(9) = 1 Then
@@ -1720,7 +1720,7 @@ Private Sub Form_Activate()
                 
             Case 50    ' deshacer proceso de facturacion de anticipos almazara
                 PonerFoco txtcodigo(8)
-                Me.pb2.visible = False
+                Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(7) = 1 Then
@@ -1735,7 +1735,7 @@ Private Sub Form_Activate()
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
                 PonerFoco txtcodigo(8)
-                Me.pb2.visible = False
+                Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(10) = 1 Then
@@ -1745,7 +1745,7 @@ Private Sub Form_Activate()
                 
             Case 150   ' deshacer proceso de facturacion de liquidacion de almazara
                 PonerFoco txtcodigo(8)
-                Me.pb2.visible = False
+                Me.Pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(8) = 1 Then
@@ -3992,7 +3992,7 @@ Dim Sql3 As String
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    
+                                        '%%%%%
     Sql = "SELECT rhisfruta.codsocio, variedades.codclase codvarie, variedades.nomvarie, rhisfruta.numalbar, "
     Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios.tipofact, rhisfruta.prestimado, sum(rhisfruta.kilosnet) as kilos "
     Sql = Sql & " FROM  " & cTabla
@@ -4271,7 +4271,7 @@ Dim Sql3 As String
         Sql4 = "select rbodalbaran_variedad.codvarie, variedades.eurdesta, variedades.eursegsoc, sum(cantidad) cantidad, round(variedades.eurdesta * sum(cantidad), 2) importevta, round(variedades.eursegsoc * sum(cantidad), 2) importeenv "
         Sql4 = Sql4 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(SocioAnt, "N")
         Sql4 = Sql4 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
-        Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = " & DBSet(VarieAnt, "N")
+        Sql4 = Sql4 & " and variedades.codclase = " & DBSet(VarieAnt, "N")
         Sql4 = Sql4 & " and rbodalbaran.numalbar = rbodalbaran_variedad.numalbar "
         Sql4 = Sql4 & " and rbodalbaran_variedad.codvarie = variedades.codvarie "
         Sql4 = Sql4 & " group by 1,2  order by 1,2 "

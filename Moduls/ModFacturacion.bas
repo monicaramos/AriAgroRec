@@ -9246,8 +9246,8 @@ Dim cantidad As Currency
     
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
-
-    Sql = "SELECT  rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numalbar, "
+                                        '%%%%rhisfruta.codvarie
+    Sql = "SELECT  rhisfruta.codsocio, variedades.codclase codvarie, rhisfruta.numalbar, "
     Sql = Sql & " rhisfruta.fecalbar,  rhisfruta.kilosbru, rhisfruta.prestimado,  "
     Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rhisfruta.kilosnet"
     Sql = Sql & " FROM  " & cTabla
@@ -9259,7 +9259,9 @@ Dim cantidad As Currency
         Sql = Sql & " where " & cWhere
     End If
     ' ordenado por socio, variedad, campo, numlabar, fecalbar
-    Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numalbar, rhisfruta.fecalbar "
+    'Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numalbar, rhisfruta.fecalbar "
+    '%%%%%%%%%
+    Sql = Sql & " order by 1,2,3,4 "
     
     Set vSeccion = New CSeccion
     
@@ -10099,24 +10101,25 @@ Dim Precio As Currency
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF And Litros <> 0
-        If DBLet(Rs!cantidad, "N") <= Litros Then
-            Litros = Litros - DBLet(Rs!cantidad, "N")
-            If EsImpEnvasado Then
-                Precio = DBLet(Rs!eursegsoc, "N")
-                Importe = Importe + CalcularImporte(CStr(DBLet(Rs!cantidad, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+        If DBLet(Rs!ampliaci) <> "Regularización de Precios" Then
+            If DBLet(Rs!cantidad, "N") <= Litros Then
+                Litros = Litros - DBLet(Rs!cantidad, "N")
+                If EsImpEnvasado Then
+                    Precio = DBLet(Rs!eursegsoc, "N")
+                    Importe = Importe + CalcularImporte(CStr(DBLet(Rs!cantidad, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+                Else
+                    Importe = Importe + DBLet(Rs!ImporteL, "N")
+                End If
             Else
-                Importe = Importe + DBLet(Rs!ImporteL, "N")
+                If EsImpEnvasado Then
+                    Precio = DBLet(Rs!eursegsoc, "N")
+                Else
+                    Precio = DBLet(Rs!EurDesta, "N")
+                End If
+                Importe = Importe + CalcularImporte(CStr(DBLet(Litros, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
+                Litros = 0
             End If
-        Else
-            If EsImpEnvasado Then
-                Precio = DBLet(Rs!eursegsoc, "N")
-            Else
-                Precio = DBLet(Rs!EurDesta, "N")
-            End If
-            Importe = Importe + CalcularImporte(CStr(DBLet(Litros, "N")), CStr(Precio), CStr(Rs!dtolinea), 0, 0, 0)
-            Litros = 0
         End If
-    
         Rs.MoveNext
     Wend
     Set Rs = Nothing
