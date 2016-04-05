@@ -1225,7 +1225,7 @@ Attribute frmMen3.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private CadParam As String 'cadena con los parametros q se pasan a Crystal R.
+Private cadParam As String 'cadena con los parametros q se pasan a Crystal R.
 Private numParam As Byte
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
@@ -1266,7 +1266,7 @@ End Sub
 
 
 Private Sub cmdEnvioMail_Click()
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
 Dim T1 As Single
 
@@ -1334,21 +1334,21 @@ Dim T1 As Single
         
     'Cadena para seleccion D/H Factura
     '--------------------------------------------
-    If txtCodigo(106).Text <> "" Or txtCodigo(107).Text <> "" Then
+    If txtcodigo(106).Text <> "" Or txtcodigo(107).Text <> "" Then
         Codigo = "rfactsoc.numfactu"
         If Not PonerDesdeHasta(Codigo, "N", 106, 107, "") Then Exit Sub
     End If
     
     'Cadena para seleccion D/H Fecha
     '--------------------------------------------
-    If txtCodigo(108).Text <> "" Or txtCodigo(109).Text <> "" Then
+    If txtcodigo(108).Text <> "" Or txtcodigo(109).Text <> "" Then
         Codigo = "rfactsoc.fecfactu"
         If Not PonerDesdeHasta(Codigo, "F", 108, 109, "") Then Exit Sub
     End If
     
     'Cadena para seleccion D/H Socio
     '--------------------------------------------
-    If txtCodigo(110).Text <> "" Or txtCodigo(111).Text <> "" Then
+    If txtcodigo(110).Text <> "" Or txtcodigo(111).Text <> "" Then
         Codigo = "rfactsoc.codsocio"
         If Not PonerDesdeHasta(Codigo, "N", 110, 111, "") Then Exit Sub
     End If
@@ -1363,7 +1363,7 @@ Dim T1 As Single
     cadSelect = " WHERE " & cadSelect
 
     
-    Set Rs = New ADODB.Recordset
+    Set RS = New ADODB.Recordset
     DoEvents
         
     If OpcionListado = 316 Then
@@ -1388,16 +1388,16 @@ Dim T1 As Single
     NomTabla = "Select codtipom,numfactu,codsocio,fecfactu,totalfac,esliqcomplem from rfactsoc  " & cadSelect
     'El orden vamos a hacerlo por: Tipo documento
     NomTabla = NomTabla & " ORDER BY codtipom, numfactu, fecfactu "
-    Rs.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open NomTabla, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     NumRegElim = 0
-    While Not Rs.EOF
-        NomTabla = Rs!Codsocio & "," & Rs!numfactu & ",'" & Trim(Rs!CodTipom) & "','" & Format(Rs!fecfactu, FormatoFecha)
-        NomTabla = NomTabla & "'," & TransformaComasPuntos(CStr(DBLet(Rs!TotalFac, "N"))) & "," & DBLet(Rs!Esliqcomplem, "N") & ")"
+    While Not RS.EOF
+        NomTabla = RS!Codsocio & "," & RS!numfactu & ",'" & Trim(RS!CodTipom) & "','" & Format(RS!fecfactu, FormatoFecha)
+        NomTabla = NomTabla & "'," & TransformaComasPuntos(CStr(DBLet(RS!TotalFac, "N"))) & "," & DBLet(RS!Esliqcomplem, "N") & ")"
         conn.Execute Codigo & NomTabla
         NumRegElim = NumRegElim + 1
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
     
     If NumRegElim = 0 Then
@@ -1421,13 +1421,13 @@ Dim T1 As Single
         cadSelect = "Select codsocio,maisocio "
         cadSelect = cadSelect & " as email from tmpinformes,rsocios where codusu = " & vUsu.Codigo & " and codsocio=codigo1"
         cadSelect = cadSelect & " group by codsocio having email is null"
-        Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         NumRegElim = 0
-        While Not Rs.EOF
+        While Not RS.EOF
             NumRegElim = NumRegElim + 1
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Rs.Close
+        RS.Close
         
         If NumRegElim > 0 Then
             If MsgBox("Tiene socio sin mail. Continuar sin sus datos?", vbQuestion + vbYesNo) = vbNo Then
@@ -1436,23 +1436,23 @@ Dim T1 As Single
             End If
                 
             'Si no salimos borramos
-            Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             cadSelect = "DELETE from tmpinformes where codusu =" & vSesion.Codigo & " and codigo1 ="
-            While Not Rs.EOF
-                conn.Execute cadSelect & Rs!Codsocio
-                Rs.MoveNext
+            While Not RS.EOF
+                conn.Execute cadSelect & RS!Codsocio
+                RS.MoveNext
             Wend
-            Rs.Close
+            RS.Close
             
             
             cadSelect = "Select count(*) from tmpinformes where codusu =" & vSesion.Codigo
-            Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             NumRegElim = 0
-            If Not Rs.EOF Then
-                If Not IsNull(Rs.Fields(0)) Then NumRegElim = DBLet(Rs.Fields(0), "N")
+            If Not RS.EOF Then
+                If Not IsNull(RS.Fields(0)) Then NumRegElim = DBLet(RS.Fields(0), "N")
                 
             End If
-            Rs.Close
+            RS.Close
             
             If NumRegElim = 0 Then
                 'NO hay datos para enviar
@@ -1465,7 +1465,7 @@ Dim T1 As Single
                 If MsgBox(cadSelect, vbQuestion + vbYesNo) = vbNo Then NumRegElim = 0
             End If
             If NumRegElim = 0 Then
-                Set Rs = Nothing
+                Set RS = Nothing
                 Screen.MousePointer = vbDefault
                 Exit Sub
             End If
@@ -1525,7 +1525,7 @@ Dim T1 As Single
     
     If vParamAplic.Cooperativa = 0 Then T1 = Timer
     
-    If GeneracionEnvioMail(Rs) Then NumRegElim = 1
+    If GeneracionEnvioMail(RS) Then NumRegElim = 1
     
     Label14(22).Caption = "Preparando envia email"
     Label14(22).Refresh
@@ -1664,18 +1664,18 @@ Dim Situacion As String
         If chkMail(1).Value = 1 Then
             ' si estamos mandando un SMS no es obligado meter un codigo de carta
         Else
-            If txtCodigo(63).Text = "" Then
+            If txtcodigo(63).Text = "" Then
                 MsgBox "Debe seleccionar una carta para imprimir.", vbInformation
                 Exit Sub
             End If
         End If
         
         'Parametro cod. carta
-        CadParam = "|pCodCarta= " & txtCodigo(63).Text & "|"
+        cadParam = "|pCodCarta= " & txtcodigo(63).Text & "|"
         numParam = numParam + 1
         
         'Parametro fecha
-        CadParam = CadParam & "|pFecha= """ & txtCodigo(0).Text & """|"
+        cadParam = cadParam & "|pFecha= """ & txtcodigo(0).Text & """|"
         numParam = numParam + 1
         
         'Nombre fichero .rpt a Imprimir
@@ -1683,11 +1683,11 @@ Dim Situacion As String
         Titulo = "Cartas a Socios" '"Cartas a Proveedores"
         
         indRPT = 61 'Personalizacion de la carta a socios
-        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
           
         '[Monica]19/10/2012: nueva variable para indicar que se pasa por visreport o no ImpresionNormal
         ImpresionNormal = True
-        Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtCodigo(63).Text, "N")
+        Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtcodigo(63).Text, "N")
         If Documento <> "" Then
             '[Monica]19/10/2012: Si hay mas de un documento a imprimir o .rpt
             If InStr(1, Documento, ",") <> 0 Then
@@ -1708,7 +1708,7 @@ Dim Situacion As String
         conSubRPT = True
         
     Else 'ETIQUETAS
-        CadParam = "|"
+        cadParam = "|"
     
         'Nombre fichero .rpt a Imprimir
         nomRPT = "rSocioEtiq.rpt" '"rComProveEtiq.rpt"
@@ -1717,7 +1717,7 @@ Dim Situacion As String
         '===================================================
         '============ PARAMETROS ===========================
         indRPT = 27 'Impresion de Etiquetas de socios
-        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
           
         'Nombre fichero .rpt a Imprimir
         nomRPT = nomDocu
@@ -1738,16 +1738,16 @@ Dim Situacion As String
     '[Monica]11/11/2013: cambio para castelduc seccion o fase
     If vParamAplic.Cooperativa <> 5 Then
         
-        If txtCodigo(58).Text <> "" Then
+        If txtcodigo(58).Text <> "" Then
             ' solo se sacan los socios que no esten dados de baja
-            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtcodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtcodigo(58).Text) Then Exit Sub
         End If
         
         
         'Cadena para seleccion D/H Socio
         '--------------------------------------------
-        If txtCodigo(60).Text <> "" Or txtCodigo(61).Text <> "" Then
+        If txtcodigo(60).Text <> "" Or txtcodigo(61).Text <> "" Then
             campo = "{rsocios_seccion.codsocio}"
             'Parametro Desde/Hasta socio
             If Not PonerDesdeHasta(campo, "N", 60, 61, "") Then Exit Sub
@@ -1762,14 +1762,14 @@ Dim Situacion As String
     Else
         '[Monica]11/11/2013: Caso de CASTELDUC si no me dan seccion cojo los datos de la fases
         '                    si me dan la seccion funciona como el resto de cooperativas
-        If ComprobarCero(txtCodigo(58).Text) <> 0 Then
+        If ComprobarCero(txtcodigo(58).Text) <> 0 Then
             ' solo se sacan los socios que no esten dados de baja
-            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtCodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & txtcodigo(58).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & txtcodigo(58).Text) Then Exit Sub
             
             'Cadena para seleccion D/H Socio
             '--------------------------------------------
-            If txtCodigo(60).Text <> "" Or txtCodigo(61).Text <> "" Then
+            If txtcodigo(60).Text <> "" Or txtcodigo(61).Text <> "" Then
                 campo = "{rsocios_seccion.codsocio}"
                 'Parametro Desde/Hasta socio
                 If Not PonerDesdeHasta(campo, "N", 60, 61, "") Then Exit Sub
@@ -1796,7 +1796,7 @@ Dim Situacion As String
             
             'Cadena para seleccion D/H Socio
             '--------------------------------------------
-            If txtCodigo(60).Text <> "" Or txtCodigo(61).Text <> "" Then
+            If txtcodigo(60).Text <> "" Or txtcodigo(61).Text <> "" Then
                 campo = "{rsocios_pozos.codsocio}"
                 'Parametro Desde/Hasta socio
                 If Not PonerDesdeHasta(campo, "N", 60, 61, "") Then Exit Sub
@@ -1888,17 +1888,17 @@ Dim Situacion As String
     
         
     'Parametro a la Atencion de
-    If txtCodigo(62).Text <> "" Then
-        CadParam = CadParam & "pAtencion=""Att. " & txtCodigo(62).Text & """|"
+    If txtcodigo(62).Text <> "" Then
+        cadParam = cadParam & "pAtencion=""Att. " & txtcodigo(62).Text & """|"
     Else
-        CadParam = CadParam & "pAtencion=""""|"
+        cadParam = cadParam & "pAtencion=""""|"
     End If
     numParam = numParam + 1
     
     Tabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
     
     '[Monica]11/11/2013: Castelduc
-    If vParamAplic.Cooperativa = 5 And ComprobarCero(txtCodigo(58).Text) = 0 Then
+    If vParamAplic.Cooperativa = 5 And ComprobarCero(txtcodigo(58).Text) = 0 Then
         Tabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio"
     End If
     
@@ -1924,12 +1924,12 @@ Dim Situacion As String
     
     Set frmMen = New frmMensajes
     
-    If txtCodigo(58).Text = "" Then
-        frmMen.cadwhere = "SELECT distinct rsocios.codsocio,nomsocio,nifsocio FROM rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio where " & cadSelect & " order by rsocios.codsocio "
+    If txtcodigo(58).Text = "" Then
+        frmMen.cadWHERE = "SELECT distinct rsocios.codsocio,nomsocio,nifsocio FROM rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio where " & cadSelect & " order by rsocios.codsocio "
         frmMen.OpcionMensaje = 55 'Etiquetas socios
     Else
         '[Monica]24/10/2014: antes solo tenia cadselect
-        frmMen.cadwhere = "rsocios.codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
+        frmMen.cadWHERE = "rsocios.codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
         frmMen.OpcionMensaje = 9 'Etiquetas socios
     End If
     
@@ -1941,7 +1941,7 @@ Dim Situacion As String
     '[Monica]16/11/2012: añadida la condicion de cooperativa <> 8
     If Documento <> "" And ImpresionNormal And vParamAplic.Cooperativa <> 8 Then
         Set frmMen2 = New frmMensajes
-        frmMen2.cadwhere = " and codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
+        frmMen2.cadWHERE = " and codsocio in (select rsocios.codsocio from " & Tabla & " where " & cadSelect & ")"
         frmMen2.OpcionMensaje = 15 'Etiquetas socios
         frmMen2.Show vbModal
         Set frmMen2 = Nothing
@@ -1982,7 +1982,7 @@ Private Sub Form_Activate()
         Select Case OpcionListado
             Case 305, 306 '305: Listado Etiquetas proveedor
                           '306: Listado Cartas a proveedores
-                PonerFoco txtCodigo(58)
+                PonerFoco txtcodigo(58)
                 
                 '[Monica]11/11/2013: castelduc
                 If vParamAplic.Cooperativa = 5 Then
@@ -1991,7 +1991,7 @@ Private Sub Form_Activate()
                 End If
                 
             Case 315, 316 ' envio de facturas por email y facturacion electronica
-                PonerFoco txtCodigo(110)
+                PonerFoco txtcodigo(110)
                 
                 
         End Select
@@ -2048,8 +2048,8 @@ Dim devuelve As String
             Me.Frame3.Enabled = (chkMail(0).Value = True)
             Me.Frame4.visible = (chkMail(1).Value = True)
             Me.Frame4.Enabled = (chkMail(1).Value = True)
-            txtCodigo(0).Text = Format(Now, "dd/mm/yyyy")
-            txtCodigo(1).Text = Format(Now, "hh:mm:ss")
+            txtcodigo(0).Text = Format(Now, "dd/mm/yyyy")
+            txtcodigo(1).Text = Format(Now, "hh:mm:ss")
             
             '[Monica]11/11/2013: solo para Castelduc si me da fases no hacemos caso de la seccion
             Frame5.Enabled = (vParamAplic.Cooperativa = 5)
@@ -2105,13 +2105,13 @@ End Sub
 
 Private Sub frmCar_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Cartas de Socio
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+    txtcodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -2126,7 +2126,7 @@ Private Sub frmMen_DatoSeleccionado(CadenaSeleccion As String)
                 cadFormula = "{rsocios_seccion.codsocio} IN [" & CadenaSeleccion & "]"
                 cadSelect = "rsocios_seccion.codsocio IN (" & CadenaSeleccion & ")"
             End If
-            If vParamAplic.Cooperativa = 5 And txtCodigo(58).Text = "" Then
+            If vParamAplic.Cooperativa = 5 And txtcodigo(58).Text = "" Then
                 cadFormula = "{rsocios.codsocio} IN [" & CadenaSeleccion & "]"
                 cadSelect = "rsocios.codsocio IN (" & CadenaSeleccion & ")"
             End If
@@ -2163,13 +2163,13 @@ End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Secciones
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Socios
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -2209,7 +2209,7 @@ Private Sub imgBuscarOfer_Click(Index As Integer)
             Set frmSec = Nothing
             
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -2250,13 +2250,13 @@ Private Sub imgFecha_Click(Index As Integer)
             indCodigo = Index + 75
    End Select
 
-   PonerFormatoFecha txtCodigo(indCodigo)
-   If txtCodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtCodigo(indCodigo).Text)
+   PonerFormatoFecha txtcodigo(indCodigo)
+   If txtcodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtcodigo(indCodigo).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco txtCodigo(indCodigo)
+   PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -2334,9 +2334,9 @@ Private Sub chkMail_Click(Index As Integer)
     Frame4.Enabled = (chkMail(1).Value = 1)
     
     '[Monica]22/12/2011: si tenemos metido el numero de carta que me traiga el texto del sms
-    If chkMail(1).Value = 1 And txtCodigo(63).Text <> "" Then
-        txtCodigo(2).Text = DevuelveValor("select textosms from scartas where codcarta = " & DBSet(txtCodigo(63).Text, "N"))
-        If txtCodigo(2).Text = "0" Then txtCodigo(2).Text = ""
+    If chkMail(1).Value = 1 And txtcodigo(63).Text <> "" Then
+        txtcodigo(2).Text = DevuelveValor("select textosms from scartas where codcarta = " & DBSet(txtcodigo(63).Text, "N"))
+        If txtcodigo(2).Text = "0" Then txtcodigo(2).Text = ""
     End If
     
     
@@ -2344,7 +2344,7 @@ End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -2395,7 +2395,7 @@ Dim EsNomCod As Boolean
 
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -2406,13 +2406,13 @@ Dim EsNomCod As Boolean
     
     Select Case Index
         Case 0 ' Fecha de la carta
-            PonerFormatoFecha txtCodigo(Index), False
+            PonerFormatoFecha txtcodigo(Index), False
             
         Case 108, 109 ' Fecha factura
-            PonerFormatoFecha txtCodigo(Index), True
+            PonerFormatoFecha txtcodigo(Index), True
         
         Case 1
-            PonerFormatoHora txtCodigo(Index)
+            PonerFormatoHora txtcodigo(Index)
         
         Case 63, 64 'CARTA de la Oferta
             EsNomCod = True
@@ -2423,8 +2423,8 @@ Dim EsNomCod As Boolean
             Titulo = "cod. de Carta"
                     
         Case 60, 61, 110, 111 'Socio
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = txtCodigo(Index).Text
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = txtcodigo(Index).Text
             
          Case 58, 59 'Cod. Seccion
             EsNomCod = True
@@ -2436,37 +2436,37 @@ Dim EsNomCod As Boolean
             Titulo = "Sección"
             
         Case 106, 107 ' nro de factura
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
             
     End Select
     
     If EsNomCod Then
         If TipCampo = "N" Then
-            If PonerFormatoEntero(txtCodigo(Index)) Then
-                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codcampo, TipCampo)
-                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, Formato)
+            If PonerFormatoEntero(txtcodigo(Index)) Then
+                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), Tabla, nomCampo, codcampo, TipCampo)
+                If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, Formato)
                 
                 If Index = 63 And chkMail(1).Value = 1 Then
-                    txtCodigo(2).Text = DevuelveValor("select textosms from scartas where codcarta = " & DBSet(txtCodigo(63).Text, "N"))
-                    If txtCodigo(2).Text = "0" Then txtCodigo(2).Text = ""
+                    txtcodigo(2).Text = DevuelveValor("select textosms from scartas where codcarta = " & DBSet(txtcodigo(63).Text, "N"))
+                    If txtcodigo(2).Text = "0" Then txtcodigo(2).Text = ""
                 End If
             Else
                 txtNombre(Index).Text = ""
             End If
         Else
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), Tabla, nomCampo, codcampo, TipCampo)
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), Tabla, nomCampo, codcampo, TipCampo)
         End If
     End If
 End Sub
 
 Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
-    If txtCodigo(indD).Text <> "" Then
-        Cad = Cad & "desde " & txtCodigo(indD).Text
+    If txtcodigo(indD).Text <> "" Then
+        Cad = Cad & "desde " & txtcodigo(indD).Text
         If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
     End If
-    If txtCodigo(indH).Text <> "" Then
-        Cad = Cad & "  hasta " & txtCodigo(indH).Text
+    If txtcodigo(indH).Text <> "" Then
+        Cad = Cad & "  hasta " & txtcodigo(indH).Text
         If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
     End If
     AnyadirParametroDH = Cad
@@ -2476,7 +2476,7 @@ End Function
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    CadParam = ""
+    cadParam = ""
     numParam = 0
     
     Documento = ""
@@ -2487,7 +2487,7 @@ Dim devuelve As String
 Dim Cad As String
 
     PonerDesdeHasta = False
-    devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+    devuelve = CadenaDesdeHasta(txtcodigo(indD).Text, txtcodigo(indH).Text, campo, Tipo)
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     
@@ -2496,14 +2496,14 @@ Dim Cad As String
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+        Cad = CadenaDesdeHastaBD(txtcodigo(indD).Text, txtcodigo(indH).Text, campo, Tipo)
         If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            CadParam = CadParam & AnyadirParametroDH(param, indD, indH) & """|"
+            cadParam = cadParam & AnyadirParametroDH(param, indD, indH) & """|"
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -2514,7 +2514,7 @@ End Function
 Private Sub LlamarImprimir()
      With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -2528,9 +2528,9 @@ End Sub
 
 
 
-Private Sub EnviarSMS(cadwhere As String, cadTit As String, cadRpt As String, cadTabla As String, ByRef EstaOk As Boolean)
+Private Sub EnviarSMS(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String, ByRef EstaOk As Boolean)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
 Dim Direccion As String
@@ -2556,10 +2556,10 @@ On Error GoTo EEnviar
         SQL = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
     End If
     SQL = SQL & "FROM " & cadTabla
-    SQL = SQL & " WHERE " & cadwhere
+    SQL = SQL & " WHERE " & cadWHERE
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cont = 0
     lista = ""
@@ -2567,25 +2567,25 @@ On Error GoTo EEnviar
     b = True
     
     
-    While Not Rs.EOF And b
+    While Not RS.EOF And b
     'para cada socio enviamos un SMS
-        Cad1 = DBLet(Rs.Fields(2), "T") 'movil socio
+        Cad1 = DBLet(RS.Fields(2), "T") 'movil socio
         
         If Cad1 = "" Then 'no tiene movil
-            lista = lista & Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & vbCrLf
+            lista = lista & Format(RS.Fields(0), "000000") & " - " & RS.Fields(1) & vbCrLf
             EstaOk = False
         End If
         
         If Cad1 <> "" Then 'HAY movil  --> ENVIAMOS el mensaje
             Direccion = "http://www.afilnet.com/http/sms/?email=" & Trim(vParamAplic.SMSemail) & "&pass=" & Trim(vParamAplic.SMSclave)
             Direccion = Direccion & "&mobile=" & Trim(Cad1) & "&id=" & Trim(vParamAplic.SMSremitente)
-            Direccion = Direccion & "&country=0034" & "&sms=" & txtCodigo(2).Text & "&now=" & Format(Check1.Value, "0")
-            Direccion = Direccion & "&date=" & Format(txtCodigo(0).Text, "yyyy/mm/dd") & " " & Format(txtCodigo(1).Text, "hh:mm")
+            Direccion = Direccion & "&country=0034" & "&sms=" & txtcodigo(2).Text & "&now=" & Format(Check1.Value, "0")
+            Direccion = Direccion & "&date=" & Format(txtcodigo(0).Text, "yyyy/mm/dd") & " " & Format(txtcodigo(1).Text, "hh:mm")
             Direccion = Direccion & "&type=" & Format(Check2.Value, "0")
             
             Screen.MousePointer = vbHourglass
             
-            Label9(10).Caption = Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & " - " & Rs.Fields(2)
+            Label9(10).Caption = Format(RS.Fields(0), "000000") & " - " & RS.Fields(1) & " - " & RS.Fields(2)
             DoEvents
            
             'Cargamos en el fichero el resultado de enviar un mensaje
@@ -2606,8 +2606,8 @@ On Error GoTo EEnviar
                     cont = cont + 1
                     
                     SQL = "INSERT INTO rsmsenviados (codsocio, movsocio, fechaenvio, horaenvio, texto)"
-                    SQL = SQL & " VALUES (" & DBSet(Rs.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
-                    SQL = SQL & DBSet(txtCodigo(0).Text, "F") & "," & DBSet(txtCodigo(1).Text, "H") & "," & DBSet(txtCodigo(2).Text, "T") & ")"
+                    SQL = SQL & " VALUES (" & DBSet(RS.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
+                    SQL = SQL & DBSet(txtcodigo(0).Text, "F") & "," & DBSet(txtcodigo(1).Text, "H") & "," & DBSet(txtcodigo(2).Text, "T") & ")"
                     conn.Execute SQL
             
             
@@ -2619,7 +2619,7 @@ On Error GoTo EEnviar
                         MsgBox "No tiene créditos. Revise", vbExclamation
                         b = False
                     Else
-                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(Rs.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
+                        If MsgBox("Error en el envio de mensaje al socio " & DBLet(RS.Fields(0), "N") & ". ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then b = False
                     End If
                     EstaOk = False
             End Select
@@ -2627,13 +2627,13 @@ On Error GoTo EEnviar
             Screen.MousePointer = vbDefault
             
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     Label9(10).Caption = ""
     DoEvents
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
     Screen.MousePointer = vbDefault
    
@@ -2672,9 +2672,9 @@ DownloadError:
     MsgBox Err.Description
 End Sub
 
-Private Sub InsertarTemporal(cadwhere As String)
+Private Sub InsertarTemporal(cadWHERE As String)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
 Dim Sql2 As String
@@ -2684,16 +2684,16 @@ Dim Sql2 As String
     conn.Execute Sql2
     
     'seleccionamos todos los socios a los que queremos enviar e-mail
-    SQL = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadwhere & ")"
+    SQL = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadWHERE & ")"
     
     Sql2 = "insert into tmpinformes (codusu, codigo1) " & SQL
     conn.Execute Sql2
 
 End Sub
 
-Private Sub EnviarEMailMulti(cadwhere As String, cadTit As String, cadRpt As String, cadTabla As String)
+Private Sub EnviarEMailMulti(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
 
@@ -2717,10 +2717,10 @@ On Error GoTo EEnviar
         SQL = "SELECT codclien,nomclien,maiclie1,maiclie2 "
         SQL = SQL & "FROM " & cadTabla
     End If
-    SQL = SQL & " WHERE " & cadwhere
+    SQL = SQL & " WHERE " & cadWHERE
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ' Primero la borro por si acaso
     SQL = " DROP TABLE IF EXISTS tmpMail;"
@@ -2738,14 +2738,14 @@ On Error GoTo EEnviar
     cont = 0
     lista = ""
     
-    While Not Rs.EOF
+    While Not RS.EOF
     'para cada cliente/proveedor enviamos un e-mail
-        Cad1 = DBLet(Rs.Fields(2), "T") 'e-mail administracion
-        Cad2 = DBLet(Rs.Fields(3), "T") 'e-mail compras
+        Cad1 = DBLet(RS.Fields(2), "T") 'e-mail administracion
+        Cad2 = DBLet(RS.Fields(3), "T") 'e-mail compras
         
         If Cad1 = "" And Cad2 = "" Then 'no tiene e-mail
 '              MsgBox "Sin mail para el proveedor: " & Format(RS!codProve, "000000") & " - " & RS!nomprove, vbExclamation
-              lista = lista & Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & vbCrLf
+              lista = lista & Format(RS.Fields(0), "000000") & " - " & RS.Fields(1) & vbCrLf
         ElseIf Cad1 <> "" And Cad2 <> "" Then 'tiene 2 e-mail
             'ver a q e-mail se va a enviar (administracion, compras)
             If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
@@ -2760,21 +2760,21 @@ On Error GoTo EEnviar
         End If
         
         If Cad1 <> "" Then 'HAY email --> ENVIAMOS e-mail
-            Label9(10).Caption = Format(Rs.Fields(0), "000000") & " - " & Rs.Fields(1) & " - " & Rs.Fields(2)
+            Label9(10).Caption = Format(RS.Fields(0), "000000") & " - " & RS.Fields(1) & " - " & RS.Fields(2)
             DoEvents
 
 
             If ImpresionNormal Then
                 With frmImprimir
-                    .OtrosParametros = CadParam
+                    .OtrosParametros = cadParam
                     .NumeroParametros = numParam
                     If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
                        cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
                        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
-                        SQL = "{rsocios.codsocio}=" & Rs.Fields(0)
+                        SQL = "{rsocios.codsocio}=" & RS.Fields(0)
                         .Opcion = 306
                     Else
-                        SQL = "{sclien.codclien}=" & Rs.Fields(0)
+                        SQL = "{sclien.codclien}=" & RS.Fields(0)
                         .Opcion = 91
                     End If
                     .FormulaSeleccion = SQL
@@ -2788,7 +2788,7 @@ On Error GoTo EEnviar
                     If CadenaDesdeOtroForm = "" Then
                     'si se ha generado el .pdf para enviar
                         SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                        SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                        SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(RS.Fields(0), "N") & "," & DBSet(RS.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
                         conn.Execute SQL
                 
                         Me.Refresh
@@ -2796,7 +2796,7 @@ On Error GoTo EEnviar
                         cont = cont + 1
                         'Se ha generado bien el documento
                         'Lo copiamos sobre app.path & \temp
-                        SQL = Rs.Fields(0) & ".pdf"
+                        SQL = RS.Fields(0) & ".pdf"
                         FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & SQL
                     End If
                 End With
@@ -2806,7 +2806,7 @@ On Error GoTo EEnviar
                 If CadenaDesdeOtroForm = "" Then
                 'si se ha generado el .pdf para enviar
                     SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                    SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                    SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(RS.Fields(0), "N") & "," & DBSet(RS.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
                     conn.Execute SQL
             
                     Me.Refresh
@@ -2824,11 +2824,11 @@ On Error GoTo EEnviar
                 DoEvents
             End If
         End If
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
       
     If cont > 0 Then
         espera 0.4
@@ -2839,17 +2839,17 @@ On Error GoTo EEnviar
             
             '[Monica]08/07/2011: si no hay a la atencion no se pone nada en el cuerpo del mensaje
             '                    añadida la condicion
-            If txtCodigo(62).Text <> "" Then
-                SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
+            If txtcodigo(62).Text <> "" Then
+                SQL = SQL & "Att : " & txtcodigo(62).Text & "|"
             End If
         Else
             SQL = "Carta: " & txtNombre(63).Text & "|"
-            SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
+            SQL = SQL & "Att : " & txtcodigo(62).Text & "|"
         End If
        
         If Not ImpresionNormal Then
             Set frmMen3 = New frmMensajes
-            frmMen3.cadwhere = ""
+            frmMen3.cadWHERE = ""
             frmMen3.OpcionMensaje = 40 'archivos a seleccionar
             frmMen3.Show vbModal
             Set frmMen3 = Nothing
@@ -2900,19 +2900,19 @@ End Sub
 
 
 Private Sub CargarIconos()
-Dim I As Integer
+Dim i As Integer
 
     Me.imgBuscarOfer(35).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    For I = 37 To 39
-        Me.imgBuscarOfer(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 56 To 57
-        Me.imgBuscarOfer(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 37 To 39
+        Me.imgBuscarOfer(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 56 To 57
+        Me.imgBuscarOfer(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 
-    For I = 0 To imgAyuda.Count - 1
-        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next I
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
 
 
 
@@ -2927,7 +2927,7 @@ Dim b As Boolean
     
     '[Monica]11/11/2013: dejamos poner unicamente las fases de Castelduc
     If vParamAplic.Cooperativa = 5 Then
-        If Combo1(0).ListIndex = -1 And ComprobarCero(txtCodigo(58).Text) = 0 Then
+        If Combo1(0).ListIndex = -1 And ComprobarCero(txtcodigo(58).Text) = 0 Then
             b = False
             MsgBox "Debe introducir sección o fase. Revise.", vbExclamation
             PonerFocoCmb Combo1(0)
@@ -2935,34 +2935,34 @@ Dim b As Boolean
     End If
     
     '[Monica]11/11/2013: en Castelduc dejamos poner unicamente las fases
-    If txtCodigo(58).Text = "" And vParamAplic.Cooperativa <> 5 Then
+    If txtcodigo(58).Text = "" And vParamAplic.Cooperativa <> 5 Then
         MsgBox "Debe introducir un valor en la Sección. Revise.", vbExclamation
         b = False
-        PonerFoco txtCodigo(58)
+        PonerFoco txtcodigo(58)
     End If
     
     
     If b And OpcionListado = 306 And chkMail(1).Value = 1 Then
-        If txtCodigo(0).Text = "" Then
+        If txtcodigo(0).Text = "" Then
             MsgBox "Debe introducir un valor en la Fecha del SMS. Revise.", vbExclamation
             b = False
-            PonerFoco txtCodigo(0)
+            PonerFoco txtcodigo(0)
         End If
-        If b And txtCodigo(1).Text = "" Then
+        If b And txtcodigo(1).Text = "" Then
             MsgBox "Debe introducir un valor en la Hora del SMS. Revise.", vbExclamation
             b = False
-            PonerFoco txtCodigo(1)
+            PonerFoco txtcodigo(1)
         End If
-        If b And txtCodigo(2).Text = "" Then
+        If b And txtcodigo(2).Text = "" Then
             MsgBox "Debe introducir un valor en el Texto del SMS. Revise.", vbExclamation
             b = False
-            PonerFoco txtCodigo(2)
+            PonerFoco txtcodigo(2)
         End If
     End If
     
     '[Monica]19/10/2012: comprobamos que si vamos a enviar mas de un documento es por email.
     If b And OpcionListado = 306 Then
-        Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtCodigo(63).Text, "N")
+        Documento = DevuelveDesdeBDNew(cAgro, "scartas", "documrpt", "codcarta", txtcodigo(63).Text, "N")
         If Documento <> "" Then
             If InStr(1, Documento, ",") <> 0 And chkMail(0).Value = 0 Then
                 MsgBox "Para enviar más de un archivo adjunto debe seleccionar sólo por email.", vbExclamation
@@ -2996,7 +2996,7 @@ Dim b As Boolean
 End Function
 
 
-Private Function GeneracionEnvioMail(ByRef Rs As ADODB.Recordset) As Boolean
+Private Function GeneracionEnvioMail(ByRef RS As ADODB.Recordset) As Boolean
 Dim Tipo As Integer
 Dim TipoRec As String ' tipo de factura a la que rectifica
 Dim Sql5 As String
@@ -3007,22 +3007,22 @@ Dim letraser As String
     GeneracionEnvioMail = False
     
     cadSelect = "Select * from tmpinformes where codusu =" & vUsu.Codigo & " ORDER BY importe1,codigo1"
-    Rs.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS.Open cadSelect, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     CodClien = ""
-    While Not Rs.EOF
+    While Not RS.EOF
     
         InicializarVbles
         '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
         
         '[Monica]28/01/2013: impresion con arrobas o sin arrobas para Montifrut
         If vParamAplic.Cooperativa = 12 Then
             If Check5.Value = 1 Then
-                CadParam = CadParam & "pConArrobas=1|"
+                cadParam = cadParam & "pConArrobas=1|"
             Else
-                CadParam = CadParam & "pConArrobas=0|"
+                cadParam = cadParam & "pConArrobas=0|"
             End If
             numParam = numParam + 1
         End If
@@ -3030,23 +3030,23 @@ Dim letraser As String
         
         If Dir(App.Path & "\docum.pdf", vbArchive) <> "" Then Kill App.Path & "\docum.pdf"
     
-        Label14(22).Caption = "Factura: " & Rs!Importe1 & " " & Rs!Nombre1
+        Label14(22).Caption = "Factura: " & RS!Importe1 & " " & RS!Nombre1
         Label14(22).Refresh
         
         Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
         Dim nomDocu As String 'Nombre de Informe rpt de crystal
         
         'Facturas socios
-        Select Case Mid(Rs!Nombre1, 1, 3)
+        Select Case Mid(RS!Nombre1, 1, 3)
             Case "FRS" ' Impresion de facturas rectificativas
                        ' hacemos caso del codtipom que rectifica
-                  TipoRec = DevuelveValor("select rectif_codtipom from rfactsoc where numfactu = " & DBSet(Rs!Importe1, "N") & " and codtipom = " & DBSet(Rs!Nombre1, "T") & " and fecfactu = " & DBSet(Rs!fecha1, "T"))
+                  TipoRec = DevuelveValor("select rectif_codtipom from rfactsoc where numfactu = " & DBSet(RS!Importe1, "N") & " and codtipom = " & DBSet(RS!Nombre1, "T") & " and fecfactu = " & DBSet(RS!fecha1, "T"))
                        
                   Select Case Mid(TipoRec, 1, 3)
                         Case "FLI"
                             indRPT = 38 'Impresion de Factura Socio de Industria
                         Case Else
-                            Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(Rs!Nombre1, 1, 3), "T"))
+                            Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(RS!Nombre1, 1, 3), "T"))
                             If Tipo >= 7 And Tipo <= 10 Then
                                 indRPT = 42 'Imporesion de Facturas de Bodega o Almazara
                             Else
@@ -3066,7 +3066,7 @@ Dim letraser As String
             Case "FLI"
                 indRPT = 38 'Impresion de Factura Socio de Industria
             Case Else
-                Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(Rs!Nombre1, 1, 3), "T"))
+                Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(RS!Nombre1, 1, 3), "T"))
                 If Tipo >= 7 And Tipo <= 10 Then
                     indRPT = 42 'Imporesion de Facturas de Bodega o Almazara
                 Else
@@ -3080,14 +3080,14 @@ Dim letraser As String
 
                     '[Monica]17/02/2016: si la factura es de anticipo
                     If vParamAplic.Cooperativa = 4 Then
-                        If Mid(Rs!Nombre1, 1, 3) = "FAA" Then
+                        If Mid(RS!Nombre1, 1, 3) = "FAA" Then
                             If ConDetalle Then
-                                CadParam = CadParam & "pDetalle=1|"
+                                cadParam = cadParam & "pDetalle=1|"
                             Else
-                                CadParam = CadParam & "pDetalle=0|"
+                                cadParam = cadParam & "pDetalle=0|"
                             End If
                         Else
-                            CadParam = CadParam & "pDetalle=0|"
+                            cadParam = cadParam & "pDetalle=1|"
                         End If
                         numParam = numParam + 1
                     End If
@@ -3096,18 +3096,18 @@ Dim letraser As String
                 End If
        End Select
         
-       If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Function
+       If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Function
        'Nombre fichero .rpt a Imprimir
         
         
-       cadFormula = "({rfactsoc.codtipom}='" & Trim(Rs!Nombre1) & "') "
-       cadFormula = cadFormula & " AND ({rfactsoc.numfactu}=" & Rs!Importe1 & ") "
-       cadFormula = cadFormula & " AND ({rfactsoc.fecfactu}= Date(" & Year(Rs!fecha1) & "," & Month(Rs!fecha1) & "," & Day(Rs!fecha1) & "))"
+       cadFormula = "({rfactsoc.codtipom}='" & Trim(RS!Nombre1) & "') "
+       cadFormula = cadFormula & " AND ({rfactsoc.numfactu}=" & RS!Importe1 & ") "
+       cadFormula = cadFormula & " AND ({rfactsoc.fecfactu}= Date(" & Year(RS!fecha1) & "," & Month(RS!fecha1) & "," & Day(RS!fecha1) & "))"
 
    
         With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = True
@@ -3136,7 +3136,7 @@ Dim letraser As String
    
             EsperaFichero
             
-            FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & Rs!Nombre1 & Format(Rs!Importe1, "0000000") & ".pdf" 'RS!importe1 & Format(RS!Codigo1, "0000000") & ".pdf"
+            FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & RS!Nombre1 & Format(RS!Importe1, "0000000") & ".pdf" 'RS!importe1 & Format(RS!Codigo1, "0000000") & ".pdf"
         Else
             ' Se tiene que llamar base_letradeserie_numFactura_yyyymmdd_tipo.pdf
             ' tipo: F = Factura de cliente
@@ -3144,10 +3144,10 @@ Dim letraser As String
             
             ' Sacamos la letra de serie
             letraser = ""
-            letraser = DevuelveValor("select letraser from usuarios.stipom where codtipom = " & DBSet(Rs!Nombre1, "T"))
+            letraser = DevuelveValor("select letraser from usuarios.stipom where codtipom = " & DBSet(RS!Nombre1, "T"))
             
             '[Monica]07/03/2013: tengo que incluir el nro de la base de datos, antes era "ariagro_" y la letra de serie
-            cadFormula = vEmpresa.BDAriagro & "_" & Trim(letraser) & "_" & Rs!Importe1 & "_" & Format(Rs!fecha1, "yyyymmdd") & "_S" & Rs!Nombre1 & ".pdf"
+            cadFormula = vEmpresa.BDAriagro & "_" & Trim(letraser) & "_" & RS!Importe1 & "_" & Format(RS!fecha1, "yyyymmdd") & "_S" & RS!Nombre1 & ".pdf"
             cadFormula = vParamAplic.PathFacturaE & "\" & cadFormula
             
             Label14(22).Caption = cadFormula
@@ -3156,19 +3156,19 @@ Dim letraser As String
             FileCopy App.Path & "\docum.pdf", cadFormula
             
             'Ha copiado, luego yo la pongo como en facturaE
-            cadFormula = "UPDATE rfactsoc set enfacturae=1 WHERE codtipom = '" & Rs!Nombre1 & "' AND numfactu=" & Rs!Importe1
-            cadFormula = cadFormula & " AND fecfactu='" & Format(Rs!fecha1, FormatoFecha) & "'"
+            cadFormula = "UPDATE rfactsoc set enfacturae=1 WHERE codtipom = '" & RS!Nombre1 & "' AND numfactu=" & RS!Importe1
+            cadFormula = cadFormula & " AND fecfactu='" & Format(RS!fecha1, FormatoFecha) & "'"
             
             conn.Execute cadFormula
         
         End If
        
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Rs.Close
+    RS.Close
     
-    Set Rs = Nothing
+    Set RS = Nothing
     GeneracionEnvioMail = True
     Exit Function
 EGeneracionEnvioMail:
@@ -3220,30 +3220,30 @@ Private Sub CargarComboTipoMov(indice As Integer)
 
 'Lo cargamos con los valores de la tabla stipom que tengan tipo de documento=Albaranes (tipodocu=1)
 Dim SQL As String
-Dim Rs As ADODB.Recordset
-Dim I As Byte
+Dim RS As ADODB.Recordset
+Dim i As Byte
 
     On Error GoTo ECargaCombo
     
     '[Monica]18/02/2013: excluimos los movimientos de facturas varias
     SQL = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    I = 0
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    i = 0
     
     ListTipoMov(indice).Clear
     
     'LOS TIKCETS NO LOS ENVIO POR MAIL
-    While Not Rs.EOF
-        ListTipoMov(indice).AddItem Rs.Fields(0).Value & "-" & Rs.Fields(1).Value
+    While Not RS.EOF
+        ListTipoMov(indice).AddItem RS.Fields(0).Value & "-" & RS.Fields(1).Value
         'ListTipoMov(indice).List (ListTipoMov(indice).NewIndex)
         ListTipoMov(indice).Selected((ListTipoMov(indice).NewIndex)) = True
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
     
-    Rs.Close
-    Set Rs = Nothing
+    RS.Close
+    Set RS = Nothing
     
 ECargaCombo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -3252,26 +3252,26 @@ End Sub
 
 Private Function SituacionesBloqueo() As String
 Dim SQL As String
-Dim Cadena As String
-Dim Rs As ADODB.Recordset
+Dim cadena As String
+Dim RS As ADODB.Recordset
 
-    Cadena = ""
+    cadena = ""
 
-    SituacionesBloqueo = Cadena
+    SituacionesBloqueo = cadena
 
     SQL = "select codsitua from rsituacion where bloqueo = 1"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
-        Cadena = Cadena & DBLet(Rs!codsitua) & ","
-        Rs.MoveNext
+    While Not RS.EOF
+        cadena = cadena & DBLet(RS!codsitua) & ","
+        RS.MoveNext
     Wend
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
-    SituacionesBloqueo = Cadena
+    SituacionesBloqueo = cadena
 
 End Function
 
@@ -3279,9 +3279,9 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 Dim SQL As String
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     Combo1(0).Clear
     
@@ -3290,18 +3290,18 @@ Dim Rs As ADODB.Recordset
     Combo1(0).AddItem "Todas" 'campo del codigo
     Combo1(0).ItemData(Combo1(0).NewIndex) = 0
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
-        SQL = "Fase " & Rs.Fields(0).Value
+    While Not RS.EOF
+        SQL = "Fase " & RS.Fields(0).Value
         
         Combo1(0).AddItem SQL 'campo del codigo
-        Combo1(0).ItemData(Combo1(0).NewIndex) = Rs.Fields(0).Value
+        Combo1(0).ItemData(Combo1(0).NewIndex) = RS.Fields(0).Value
         
-        Rs.MoveNext
+        RS.MoveNext
     Wend
-    Set Rs = Nothing
+    Set RS = Nothing
     
     
 End Sub
