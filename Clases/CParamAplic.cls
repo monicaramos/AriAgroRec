@@ -333,6 +333,10 @@ Private mvarConsumoMaxPoz As Long ' Consumo maximo de pozos
 
 Private mvarClaveAcceso As String ' Clave de acceso
 
+'[Monica]21/04/2016: servidor sqlserver de Castellduc
+Private mvarSqlServer As String ' Servidor de SqlServer de Castellduc CASTELLDUCS1-O5
+Private mvarSqlServer1 As String ' Servidor de SqlServer de Castellduc CASTELLDUCS2-O5
+
 
 
 '------------------------------------------------
@@ -2111,6 +2115,24 @@ Public Property Get ClaveAcceso() As String
      ClaveAcceso = mvarClaveAcceso
 End Property
 
+Public Property Let SqlServer(ByVal vData As String)
+     mvarSqlServer = vData
+End Property
+
+Public Property Get SqlServer() As String
+     SqlServer = mvarSqlServer
+End Property
+
+
+Public Property Let SqlServer1(ByVal vData As String)
+     mvarSqlServer1 = vData
+End Property
+
+Public Property Get SqlServer1() As String
+     SqlServer1 = mvarSqlServer1
+End Property
+
+
 
 '------------------------------------------------
 'FUNCIONES del modulo Cparametros
@@ -2390,6 +2412,9 @@ On Error GoTo Err3
         '[Monica]02/12/2014:
         mvarClaveAcceso = DBLet(RS!ClaveAcceso, "T") ' Clave de Acceso
         
+        '[Monica]21/04/2016:
+        mvarSqlServer = DBLet(RS!SqlServer, "T") ' SqlServer CASTELLDUCS1-O5
+        mvarSqlServer1 = DBLet(RS!SqlServer1, "T") ' SqlServer1 CASTELLDUCS1-O5
         
         
         Leer = 0
@@ -2413,7 +2438,7 @@ End Function
 Public Function Modificar() As Byte
 'Modifica los parametros de la Aplicación
 'Modifica la Tabla: sparam, BD: Arigasol
-On Error GoTo eModificar
+On Error GoTo EModificar
 
     SQL = "UPDATE rparam SET "
     SQL = SQL & " serconta= '" & mvarSerConta & "'"
@@ -2693,6 +2718,9 @@ On Error GoTo eModificar
     '[Monica]02/12/2014:
     SQL = SQL & ", claveacceso= " & DBSet(mvarClaveAcceso, "T") ' Clave de Acceso
     
+    '[Monica]21/04/2016:
+    SQL = SQL & ", sqlserver= " & DBSet(mvarSqlServer, "T") ' SqlServer de Castellduc CASTELLDUCS1-O5
+    SQL = SQL & ", sqlserver1= " & DBSet(mvarSqlServer1, "T") ' SqlServer 1 de Castellduc CASTELLDUCS2-O5
     
 '    SQL = SQL & " WHERE codparam =" & Codigo & ";"
 
@@ -2701,7 +2729,7 @@ On Error GoTo eModificar
     Modificar = 1
     Exit Function
 
-eModificar:
+EModificar:
     Mens = "Se ha producido un error." & vbCrLf
     Mens = Mens & "Número: " & Err.Number & vbCrLf
     Mens = Mens & "Descripción: " & Err.Description
