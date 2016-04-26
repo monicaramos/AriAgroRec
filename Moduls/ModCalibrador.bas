@@ -19,7 +19,7 @@ Dim v_prec As Currency
 Dim b As Boolean
 Dim NomFic As String
 Dim Nota As String
-Dim linea As Integer
+Dim Linea As Integer
 
     ProcesarDirectorioCatadau = False
     b = True
@@ -43,14 +43,14 @@ Dim linea As Integer
                 Label1.Caption = "Procesando Fichero: " & NomFic
                 'longitud = FileLen(nomDir & NomFic)
                 
-                linea = 1
+                Linea = 1
                 If Cad <> "" Then
-                    Nota = DevuelveNota(NF, linea)
+                    Nota = DevuelveNota(NF, Linea)
                 
                     If Nota <> "" Then
                     ' si no hay linea donde me indica el nro de nota no hago nada con el fichero
                         pb1.visible = True
-                        pb1.Max = linea  'longitud
+                        pb1.Max = Linea  'longitud
                         DoEvents
         '                Refresh
                         pb1.Value = 0
@@ -878,7 +878,7 @@ Dim v_impo As Currency
 Dim v_prec As Currency
 Dim b As Boolean
 Dim NomFic As String
-Dim linea As Integer
+Dim Linea As Integer
 Dim Nota As String
 
 
@@ -950,8 +950,8 @@ Dim Nota As String
                 If Cad <> "" Then
                     Select Case tipo
                         Case 1  'escandalladora
-                            linea = 1
-                            Nota = DevuelveNota(NF, linea)
+                            Linea = 1
+                            Nota = DevuelveNota(NF, Linea)
                 
                             If Nota <> "" Then
                                 Close #NF
@@ -1033,7 +1033,7 @@ Dim HoraFin As String
 Dim FechaEnt As String
 Dim UltimaLinea As Boolean
 Dim NroCalidad As Integer
-Dim linea As String
+Dim Linea As String
 
     On Error GoTo eProcesarFicheroAlziraEscandalladora
 
@@ -1092,9 +1092,9 @@ Dim linea As String
             J = J + 1
             NroCalidad = NroCalidad + 1
             
-            linea = RecuperaValorNew(Cad, ";", 2)
+            Linea = RecuperaValorNew(Cad, ";", 2)
             
-            If CCur(linea) = 1 Then
+            If CCur(Linea) = 1 Then
                 Nombre1 = RecuperaValorNew(Cad, ";", 4)
                 
                 ' quitamos "x.- " del nombre
@@ -1353,7 +1353,7 @@ Dim HoraFin As String
 Dim FechaEnt As String
 Dim UltimaLinea As Boolean
 Dim NroCalidad As Integer
-Dim linea As String
+Dim Linea As String
 Dim CalDestri As String
 Dim CalPeque As String
 
@@ -1655,7 +1655,7 @@ Dim HoraFin As String
 Dim FechaEnt As String
 Dim UltimaLinea As Boolean
 Dim NroCalidad As Integer
-Dim linea As String
+Dim Linea As String
 Dim PorcenDestrio As String
 
     On Error GoTo eProcesarFicheroAlziraKaki
@@ -2617,7 +2617,7 @@ Dim NomFic As String
 End Function
 
 
-Private Function DevuelveNota(NF As Long, ByRef linea As Integer) As String
+Private Function DevuelveNota(NF As Long, ByRef Linea As Integer) As String
 Dim Cad As String
 Dim NSep As Integer
 
@@ -2626,7 +2626,7 @@ Dim NSep As Integer
     While Not EOF(NF)
         Line Input #NF, Cad
         
-        linea = linea + 1
+        Linea = Linea + 1
         
         NSep = NumeroSubcadenasInStr(Cad, ";")
         
@@ -2642,7 +2642,7 @@ End Function
 '*****************PROCESO DE TRASPASO DE CALIBRADOR DE CASTELDUC ********************
 '************************************************************************************
 
-Public Function ProcesarDirectorioCastelduc(nomDir As String, tipo As Byte, ByRef pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
+Public Function ProcesarDirectorioCastelduc(nomDir As String, tipo As Byte, ByRef pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label, Optional NotaD As String, Optional NotaH As String) As Boolean
 Dim NF As Long
 Dim Cad As String
 Dim i As Integer
@@ -2658,7 +2658,7 @@ Dim v_impo As Currency
 Dim v_prec As Currency
 Dim b As Boolean
 Dim NomFic As String
-Dim linea As Integer
+Dim Linea As Integer
 Dim Nota As String
 
 
@@ -2705,8 +2705,51 @@ Dim Nota As String
 '           NomFic = Dir   ' Obtiene siguiente entrada.
 '        Loop
 '++
+        SQL = "select distinct numnotac from tmpcalibradorcast where codusu = " & vUsu.Codigo
+        SQL = SQL & " and numnotac >= " & DBSet(NotaD, "N") & " and numnotac <= " & DBSet(NotaH, "N")
+        
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+        While Not RS.EOF
+        
+            SQL = "delete from tmpcalibrador"
+            conn.Execute SQL
+        
+            SQL = "insert into tmpcalibrador (numnota, nomcalid, kilos1) "
+            SQL = SQL & " select numnotac, nomcalid, sum(kilos) from tmpcalibradorcast where codusu = " & vUsu.Codigo
+            SQL = SQL & " and numnotac = " & DBSet(RS!NumNotac, "N") & " and numcalid > -1 "
+            SQL = SQL & " group by 1,2"
+            
+            conn.Execute SQL
+            
+            SQL = "update tmpcalibrador set kilos3 = "
+            SQL = SQL & " (select sum(kilos) from tmpcalibradorcast where numnotac = " & DBSet(RS!NumNotac, "N") & " and codusu = " & vUsu.Codigo & " and numcalid = -1)"
+            SQL = SQL & " where numnota = " & DBSet(RS!NumNotac, "N")
+            
+            conn.Execute SQL
+            
+            SQL = "update tmpcalibrador set kilos1 = replace(kilos1,'.',','), kilos3 = replace(kilos3,'.',',') "
+            
+            conn.Execute SQL
+            
+        
+            Label1.Caption = "Procesando Nota: " & RS!NumNotac
+            longitud = TotalRegistros("select count(*) from tmpcalibrador")
 
+            pb1.visible = True
+            pb1.Max = longitud
+            'Me.Refresh
+            DoEvents
+            pb1.Value = 0
 
+            If longitud <> 0 Then
+                b = ProcesarFicheroAlziraPrecalib(pb1, Label1, Label2)
+            End If
+        
+            RS.MoveNext
+        Wend
+        Set RS = Nothing
     Else
         ' castello de rugat para castelduc
         ' solo hay un fichero que le pasan, luego hay que procesarlo
@@ -3095,7 +3138,7 @@ Dim v_impo As Currency
 Dim v_prec As Currency
 Dim b As Boolean
 Dim NomFic As String
-Dim linea As Integer
+Dim Linea As Integer
 Dim Nota As String
 
 
@@ -3201,7 +3244,7 @@ Dim HoraFin As String
 Dim FechaEnt As String
 Dim UltimaLinea As Boolean
 Dim NroCalidad As Integer
-Dim linea As String
+Dim Linea As String
 Dim PorcenDestrio As String
 
 Dim Inicio As String
