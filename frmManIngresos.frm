@@ -1,10 +1,10 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManIngresos 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Ingresos a incluir en Liquidacion de Terceros"
+   Caption         =   "Ingresos a incluir en Liquidacion"
    ClientHeight    =   5925
    ClientLeft      =   45
    ClientTop       =   330
@@ -412,6 +412,10 @@ Attribute VB_Exposed = False
 ' +-+- Autor: MONICA  +-+-
 ' +-+-+-+-+-+-+-+-+-+-+-+-
 
+' Ingresos a incluir en liquidacion de terceros y no terceros
+
+
+
 ' **************** PER A QUE FUNCIONE EN UN ATRE MANTENIMENT ********************
 ' 0. Posar-li l'atribut Datasource a "adodc1" del Datagrid1. Canviar el Caption
 '    del formulari
@@ -473,7 +477,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim i As Integer
 Dim indCodigo As Integer
 
@@ -672,7 +676,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -687,18 +691,18 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Registro?"
-    Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(2) & adodc1.Recordset.Fields(3)
-    Sql = Sql & vbCrLf & "Concepto: " & adodc1.Recordset.Fields(4)
+    SQL = "¿Seguro que desea eliminar el Registro?"
+    SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(2) & adodc1.Recordset.Fields(3)
+    SQL = SQL & vbCrLf & "Concepto: " & adodc1.Recordset.Fields(4)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from ringresos where codsocio=" & adodc1.Recordset!Codsocio
-        Sql = Sql & " and codvarie = " & adodc1.Recordset!codvarie
-        Sql = Sql & " and concepto = " & DBSet(adodc1.Recordset!Concepto, "T")
-        conn.Execute Sql
+        SQL = "Delete from ringresos where codsocio=" & adodc1.Recordset!Codsocio
+        SQL = SQL & " and codvarie = " & adodc1.Recordset!codvarie
+        SQL = SQL & " and concepto = " & DBSet(adodc1.Recordset!Concepto, "T")
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -733,12 +737,12 @@ Private Sub btnBuscar_Click(Index As Integer)
     Select Case Index
         Case 0 'grupo de productos
             
-            Indice = Index
+            indice = Index
             Set frmSoc = New frmManSocios
             frmSoc.DatosADevolverBusqueda = "0|1|"
             frmSoc.Show vbModal
             Set frmSoc = Nothing
-            PonerFoco txtAux(Indice)
+            PonerFoco txtAux(indice)
     
         Case 1 ' variedad
             AbrirFrmVariedades 1
@@ -748,8 +752,8 @@ Private Sub btnBuscar_Click(Index As Integer)
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.adodc1, 1
 End Sub
 
-Private Sub AbrirFrmVariedades(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmVariedades(indice As Integer)
+    indCodigo = indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.CodigoActual = txtAux(indCodigo)
@@ -933,13 +937,13 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo socio
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre socio
+    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo socio
+    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre socio
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo variedad
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
+    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo variedad
+    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1007,24 +1011,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     If Ascendente Then
-        Sql = Sql & " ORDER BY  ringresos.codsocio, ringresos.codvarie, ringresos.concepto "
+        SQL = SQL & " ORDER BY  ringresos.codsocio, ringresos.codvarie, ringresos.concepto "
     Else
         '********************* canviar el ORDER BY *********************++
-        Sql = Sql & " ORDER BY  ringresos.codsocio, ringresos.codvarie "
+        SQL = SQL & " ORDER BY  ringresos.codsocio, ringresos.codvarie "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Socio|800|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Nombre Socio|3000|;"
@@ -1054,8 +1058,8 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim Sql As String
-Dim vSocio As CSocio
+Dim SQL As String
+Dim vSocio As cSocio
 
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
@@ -1068,9 +1072,10 @@ Dim vSocio As CSocio
                     MsgBox (cadMen)
                     PonerFoco txtAux(Index)
                 Else
-                    Set vSocio = New CSocio
+                    Set vSocio = New cSocio
                     If vSocio.LeerDatos(txtAux(Index)) Then
-                          If Not vSocio.EsTercero(txtAux(Index).Text) Then PonerFoco txtAux(Index)
+'[Monica]26/05/2016: levantado el control de que el socio sea tercero para Picassent
+'                          If Not vSocio.Estercero(txtAux(Index).Text) Then PonerFoco txtAux(Index)
                     End If
                     Set vSocio = Nothing
                 End If
@@ -1097,7 +1102,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1105,9 +1110,9 @@ Dim Mens As String
     If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "ringresos", "codsocio", "codsocio", txtAux(0).Text, "N", , "codvarie", txtAux(1).Text, "F", "concepto", txtAux(2).Text, "T")
-        If Sql <> "" Then
+        SQL = ""
+        SQL = DevuelveDesdeBDNew(cAgro, "ringresos", "codsocio", "codsocio", txtAux(0).Text, "N", , "codvarie", txtAux(1).Text, "F", "concepto", txtAux(2).Text, "T")
+        If SQL <> "" Then
             MsgBox "El socio existe para esta variedad y concepto. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             b = False
@@ -1116,8 +1121,8 @@ Dim Mens As String
         If b Then
             'comprobamos que el socio tenga algun campo de la variedad indicada para que luego se puedan incluir en la liquidacion
             If txtAux(0).Text <> "" And txtAux(1).Text <> "" And Modo <> 1 Then
-                Sql = "select count(*) from rcampos where codsocio = " & DBSet(txtAux(0).Text, "N") & " and codvarie = " & DBSet(txtAux(1).Text, "N")
-                If TotalRegistros(Sql) = 0 Then
+                SQL = "select count(*) from rcampos where codsocio = " & DBSet(txtAux(0).Text, "N") & " and codvarie = " & DBSet(txtAux(1).Text, "N")
+                If TotalRegistros(SQL) = 0 Then
                     MsgBox "El socio introducido no tiene ningún campo de esa variedad. Revise.", vbExclamation
                     PonerFoco txtAux(0)
                     b = False
@@ -1175,9 +1180,9 @@ Private Sub KEYpress(KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (Indice)
+    btnBuscar_Click (indice)
 End Sub
 
 

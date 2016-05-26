@@ -451,8 +451,8 @@ Private WithEvents frmVar As frmComVar  'Form Mto clientes
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmBanPr As frmComBanco 'Mto de Bancos propios
 Attribute frmBanPr.VB_VarHelpID = -1
-Private WithEvents frmFpa As frmComFpa 'Mto de formas de pago
-Attribute frmFpa.VB_VarHelpID = -1
+Private WithEvents frmFPa As frmComFpa 'Mto de formas de pago
+Attribute frmFPa.VB_VarHelpID = -1
 'Private WithEvents frmCtas As frmCtasConta 'Cuentas contables
 
 Private Modo As Byte
@@ -470,7 +470,7 @@ Private Modo As Byte
 
 'cadena donde se almacena la WHERE para la seleccion de los albaranes
 'marcados para facturar
-Dim cadwhere As String
+Dim cadWHERE As String
 
 'Cuando vuelve del formulario de ver los albaranes seleccionados hay que volver
 'a cargar los datos de los albaranes
@@ -649,10 +649,10 @@ Dim indice As Byte
             indice = 26
        
        Case 4 'Forma de pago
-            Set frmFpa = New frmComFpa
-            frmFpa.DatosADevolverBusqueda = "0|1|"
-            frmFpa.Show vbModal
-            Set frmFpa = Nothing
+            Set frmFPa = New frmComFpa
+            frmFPa.DatosADevolverBusqueda = "0|1|"
+            frmFPa.Show vbModal
+            Set frmFPa = Nothing
             indice = 4
        
     End Select
@@ -799,7 +799,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte, Numreg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 On Error GoTo EPonerModo
 
@@ -987,7 +987,7 @@ EDatosOK:
 End Function
 
 Private Function HayFacturas() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim i As Integer
 
     HayFacturas = False
@@ -1002,7 +1002,7 @@ Dim i As Integer
 End Function
 
 Private Function DeFechaIgualoPosterior() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim i As Integer
 
     DeFechaIgualoPosterior = True
@@ -1065,7 +1065,7 @@ Dim Nombre As String
     InicializarListView
 
     'Como no habrá albaranes seleccionados vaciamos la cadwhere
-    cadwhere = ""
+    cadWHERE = ""
     
     PonerModo 3
     
@@ -1088,8 +1088,8 @@ End Sub
 Private Sub CargarFacturas(Socio As String)
 'Recupera de la BD y muestra en el Listview todos los albaranes de compra
 'que tiene el proveedor introducido.
-Dim Sql As String
-Dim Rs As ADODB.Recordset
+Dim SQL As String
+Dim RS As ADODB.Recordset
 Dim RSFact As ADODB.Recordset
 Dim It As ListItem
 Dim TotalArray As Integer
@@ -1104,18 +1104,18 @@ On Error GoTo ECargar
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
     
-            Sql = "select uuu.codtipom, uuu.nomtipom, numfactu, fecfactu from rrecibpozos inner join usuarios.stipom uuu on rrecibpozos.codtipom = uuu.codtipom where codsocio = " & DBSet(Socio, "N")
-            Sql = Sql & " and fecfactu "
-            Sql = Sql & " and contabilizado = 1  "
+            SQL = "select uuu.codtipom, uuu.nomtipom, numfactu, fecfactu from rrecibpozos inner join usuarios.stipom uuu on rrecibpozos.codtipom = uuu.codtipom where codsocio = " & DBSet(Socio, "N")
+            SQL = SQL & " and fecfactu "
+            SQL = SQL & " and contabilizado = 1  "
             '[Monica]15/01/2016: no se muestran para poder rectificar ni las facturas rectifcativas ni
             '                   LAS DE RIEGO A MANTA --> SOBRARIA EL TIPO RRT(RECT.CONSUMO MANTA)
-            Sql = Sql & " and not rrecibpozos.codtipom in ('RRC','RRM','RRT','RRV','RTA','RMT') "
+            SQL = SQL & " and not rrecibpozos.codtipom in ('RRC','RRM','RRT','RRV','RTA','RMT') "
             
             
-            Sql = Sql & " order by 4 "
+            SQL = SQL & " order by 4 "
             
             Set RSFact = New ADODB.Recordset
-            RSFact.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RSFact.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
             HayReg = False
     
@@ -1127,17 +1127,17 @@ On Error GoTo ECargar
             ListView1.ListItems.Clear
                 
             While Not RSFact.EOF
-                Sql = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
-                Sql = Sql & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
-                Sql = Sql & " WHERE stipom.codtipom = " & DBSet(RSFact!CodTipom, "T")
-                Sql = Sql & " and scobro.codfaccl = " & DBSet(RSFact!numfactu, "N")
-                Sql = Sql & " and scobro.fecfaccl = " & DBSet(RSFact!fecfactu, "F")
-                Sql = Sql & " and scobro.codmacta = " & DBSet(Codmacta, "T")
-                Set Rs = New ADODB.Recordset
-                Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+                SQL = "SELECT sum(coalesce(impvenci,0) + coalesce(gastos,0) - coalesce(impcobro,0)) importe "
+                SQL = SQL & " FROM scobro INNER JOIN usuarios.stipom ON scobro.numserie = stipom.letraser "
+                SQL = SQL & " WHERE stipom.codtipom = " & DBSet(RSFact!CodTipom, "T")
+                SQL = SQL & " and scobro.codfaccl = " & DBSet(RSFact!numfactu, "N")
+                SQL = SQL & " and scobro.fecfaccl = " & DBSet(RSFact!fecfactu, "F")
+                SQL = SQL & " and scobro.codmacta = " & DBSet(Codmacta, "T")
+                Set RS = New ADODB.Recordset
+                RS.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                If Not Rs.EOF Then
-                    If DBLet(Rs.Fields(0).Value, "N") <> 0 Then
+                If Not RS.EOF Then
+                    If DBLet(RS.Fields(0).Value, "N") <> 0 Then
                     
                         HayReg = True
                     
@@ -1151,20 +1151,20 @@ On Error GoTo ECargar
                         'It.SubItems(4) = Format(DBLet(Rs!Importe, "N"), "###,###,##0.00")
                         
                         ' de momento saco el importe del totalfact
-                        Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
-                        Sql = Sql & " where codtipom = " & DBSet(RSFact!CodTipom, "T")
-                        Sql = Sql & " and numfactu = " & DBSet(RSFact!numfactu, "N")
-                        Sql = Sql & " and fecfactu = " & DBSet(RSFact!fecfactu, "F")
+                        SQL = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+                        SQL = SQL & " where codtipom = " & DBSet(RSFact!CodTipom, "T")
+                        SQL = SQL & " and numfactu = " & DBSet(RSFact!numfactu, "N")
+                        SQL = SQL & " and fecfactu = " & DBSet(RSFact!fecfactu, "F")
                         
                         Dim Importe As Currency
-                        Importe = DevuelveValor(Sql)
+                        Importe = DevuelveValor(SQL)
                         It.SubItems(4) = Format(Importe, "###,###,##0.00")
                         
                         If Importe > 0 Then
                             It.Checked = True
                         End If
                         
-                        Rs.MoveNext
+                        RS.MoveNext
                         TotalArray = TotalArray + 1
                         If TotalArray > 300 Then
                             TotalArray = 0
@@ -1173,7 +1173,7 @@ On Error GoTo ECargar
                     
                     End If
                 End If
-                Set Rs = Nothing
+                Set RS = Nothing
                 
                 RSFact.MoveNext
             Wend
@@ -1201,16 +1201,16 @@ Private Function SeleccionaRegistros() As Boolean
 'Comprueba que se seleccionan albaranes en la base de datos
 'es decir que hay albaranes marcados
 'cuando se van marcando albaranes se van añadiendo el la cadena cadWhere
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ESel
     SeleccionaRegistros = False
     
-    If cadwhere = "" Then Exit Function
+    If cadWHERE = "" Then Exit Function
     
-    Sql = "Select count(*) FROM rhisfruta"
-    Sql = Sql & " WHERE " & cadwhere
-    If RegistrosAListar(Sql) <> 0 Then SeleccionaRegistros = True
+    SQL = "Select count(*) FROM rhisfruta"
+    SQL = SQL & " WHERE " & cadWHERE
+    If RegistrosAListar(SQL) <> 0 Then SeleccionaRegistros = True
     Exit Function
     
 ESel:
@@ -1224,7 +1224,7 @@ Dim vFactu As CFacturaTer
 Dim Cad As String
 Dim i As Integer
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
@@ -1245,8 +1245,8 @@ Dim Sql As String
     conn.BeginTrans
     
     ' desmarcamos todas las facturas de ese socio
-    Sql = "update rrecibpozos set imprimir = '' where codsocio = " & DBSet(Text1(3).Text, "N")
-    conn.Execute Sql
+    SQL = "update rrecibpozos set imprimir = '' where codsocio = " & DBSet(Text1(3).Text, "N")
+    conn.Execute SQL
     
     
     b = True
@@ -1285,7 +1285,7 @@ End Sub
 
 
 Private Function CrearFactura(vTipoM As String, NumFact As String, FecFact As String, EsRectificativa As Boolean) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim vTipoMov As CTiposMov
 Dim vSeccion As CSeccion
 Dim CodTipom As String
@@ -1329,7 +1329,8 @@ Dim b As Boolean
         'Comprobar si mientras tanto se incremento el contador de albaranes
         Do
             numfactu = vTipoMov.ConseguirContador(CodTipom)
-            devuelve = DevuelveDesdeBDNew(cAgro, "rrecibpozos", "numfactu", "numfactu", CStr(numfactu), "N", , "codtipom", CodTipom, "T")
+            '[Monica]26/05/2016: añadida la condicion del año que no se miraba para la comprobacion de la existencia del contador
+            devuelve = DevuelveDesdeBDNew(cAgro, "rrecibpozos", "numfactu", "numfactu", CStr(numfactu), "N", , "codtipom", CodTipom, "T", "year(fecfactu)", Mid(Text1(1).Text, 7, 4), "N")
             If devuelve <> "" Then
                 'Ya existe el contador incrementarlo
                 Existe = True
@@ -1453,10 +1454,10 @@ eCrearFactura:
 End Function
 
 Private Function CalculoImpRecargo(TipoM As String, NumFact As String, FecFact As String) As Currency
-Dim Sql As String
+Dim SQL As String
 Dim vImporte As Currency
 Dim vSeccion As CSeccion
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 
     vImporte = 0
 
@@ -1479,12 +1480,12 @@ Dim Rs As ADODB.Recordset
 '    End If
 '    Set vSeccion = Nothing
 
-    Sql = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
-    Sql = Sql & " where codtipom = " & DBSet(TipoM, "T")
-    Sql = Sql & " and numfactu = " & DBSet(NumFact, "N")
-    Sql = Sql & " and fecfactu = " & DBSet(FecFact, "F")
+    SQL = "SELECT sum(coalesce(totalfact,0))  from rrecibpozos "
+    SQL = SQL & " where codtipom = " & DBSet(TipoM, "T")
+    SQL = SQL & " and numfactu = " & DBSet(NumFact, "N")
+    SQL = SQL & " and fecfactu = " & DBSet(FecFact, "F")
     
-    vImporte = DevuelveValor(Sql)
+    vImporte = DevuelveValor(SQL)
     
 
     If ComprobarCero(Text1(0).Text) <> "0" Then
@@ -1589,17 +1590,17 @@ Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
     
-Dim Sql As String
-Dim Rs As ADODB.Recordset
+Dim SQL As String
+Dim RS As ADODB.Recordset
     
     
-    Sql = "select codtipom from rrecibpozos where imprimir = " & DBSet(vUsu.PC, "T")
-    Sql = Sql & " and fecfactu = " & DBSet(Text1(1).Text, "F") & " group by 1 order by 1"
+    SQL = "select codtipom from rrecibpozos where imprimir = " & DBSet(vUsu.PC, "T")
+    SQL = SQL & " and fecfactu = " & DBSet(Text1(1).Text, "F") & " group by 1 order by 1"
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF
+    While Not RS.EOF
         
         
         cadFormula = ""
@@ -1609,7 +1610,7 @@ Dim Rs As ADODB.Recordset
         
         '===================================================
         '============ PARAMETROS ===========================
-        Select Case DBLet(Rs!CodTipom)
+        Select Case DBLet(RS!CodTipom)
             Case "RCP"
                 indRPT = 46 'Impresion de recibos de consumo de pozos
                 cadTitulo = "Reimpresión de Recibos Consumo"
@@ -1646,14 +1647,14 @@ Dim Rs As ADODB.Recordset
         
         If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
         
-        If DBLet(Rs!CodTipom) = "TAL" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
-        If DBLet(Rs!CodTipom) = "RVP" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
-        If DBLet(Rs!CodTipom) = "RMT" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
+        If DBLet(RS!CodTipom) = "TAL" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
+        If DBLet(RS!CodTipom) = "RVP" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
+        If DBLet(RS!CodTipom) = "RMT" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
           
         '[Monica]14/01/2016: las rectificativas
-        If DBLet(Rs!CodTipom) = "RTA" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
-        If DBLet(Rs!CodTipom) = "RRV" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
-        If DBLet(Rs!CodTipom) = "RRM" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
+        If DBLet(RS!CodTipom) = "RTA" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
+        If DBLet(RS!CodTipom) = "RRV" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
+        If DBLet(RS!CodTipom) = "RRM" Then nomDocu = Replace(nomDocu, "Mto.", "Manta.")
           
           
         'Nombre fichero .rpt a Imprimir
@@ -1680,8 +1681,8 @@ Dim Rs As ADODB.Recordset
         If Not AnyadirAFormula(cadSelect, "rrecibpozos.imprimir=" & DBSet(vUsu.PC, "T")) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rrecibpozos.imprimir} = """ & vUsu.PC & """") Then Exit Sub
         
-        If Not AnyadirAFormula(cadSelect, "rrecibpozos.codtipom=" & DBSet(Rs!CodTipom, "T")) Then Exit Sub
-        If Not AnyadirAFormula(cadFormula, "{rrecibpozos.codtipom} = """ & Rs!CodTipom & """") Then Exit Sub
+        If Not AnyadirAFormula(cadSelect, "rrecibpozos.codtipom=" & DBSet(RS!CodTipom, "T")) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rrecibpozos.codtipom} = """ & RS!CodTipom & """") Then Exit Sub
         
         
         
@@ -1714,26 +1715,26 @@ Dim Rs As ADODB.Recordset
             ActualizarRegistros "rrecibpozos", cadSelect
         End If
     
-        Rs.MoveNext
+        RS.MoveNext
    Wend
-   Set Rs = Nothing
+   Set RS = Nothing
     
 End Sub
 
 
 
 Private Function CalcularTotales()
-Dim Rs As ADODB.Recordset
-Dim Sql As String
-Dim Importe1 As Currency
-Dim Importe2 As Currency
+Dim RS As ADODB.Recordset
+Dim SQL As String
+Dim importe1 As Currency
+Dim importe2 As Currency
 Dim vImporte As Currency
 Dim i As Integer
 
     On Error Resume Next
     
-    Importe1 = 0
-    Importe2 = 0
+    importe1 = 0
+    importe2 = 0
     
     For i = 1 To ListView1.ListItems.Count
         If ListView1.ListItems(i).Checked Then
@@ -1742,14 +1743,14 @@ Dim i As Integer
             Else
                 vImporte = ImporteFormateado(Text1(2).Text)
             End If
-            Importe1 = Importe1 + ListView1.ListItems(i).SubItems(4)
+            importe1 = importe1 + ListView1.ListItems(i).SubItems(4)
             
-            Importe2 = Importe2 + ListView1.ListItems(i).SubItems(4) + vImporte
+            importe2 = importe2 + ListView1.ListItems(i).SubItems(4) + vImporte
         End If
     Next i
     
-    Text2(0).Text = Format(Importe1, "###,###,##0.00")
-    Text2(1).Text = Format(Importe2, "###,###,##0.00")
+    Text2(0).Text = Format(importe1, "###,###,##0.00")
+    Text2(1).Text = Format(importe2, "###,###,##0.00")
     
     
     DoEvents
