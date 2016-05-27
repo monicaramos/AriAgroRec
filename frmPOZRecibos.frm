@@ -943,6 +943,20 @@ Begin VB.Form frmPOZRecibos
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
             Height          =   290
+            Index           =   11
+            Left            =   6720
+            MaxLength       =   15
+            TabIndex        =   151
+            Text            =   "SP"
+            Top             =   1530
+            Visible         =   0   'False
+            Width           =   555
+         End
+         Begin VB.TextBox txtAux5 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BorderStyle     =   0  'None
+            Height          =   290
             Index           =   10
             Left            =   6060
             MaxLength       =   9
@@ -2611,7 +2625,7 @@ Private HaCambiadoCP As Boolean
 Dim indice As Byte
 Dim Facturas As String
 
-Dim cliente As String
+Dim Cliente As String
 Private BuscaChekc As String
 
 Private Sub Check1_Click(Index As Integer)
@@ -2879,7 +2893,7 @@ Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Facturas (scafac)
 ' y los registros correspondientes de las tablas cab. albaranes (scafac1)
 ' y las lineas de la factura (slifac)
-Dim cad As String
+Dim Cad As String
 'Dim vTipoMov As CTiposMov
 
     On Error GoTo EEliminar
@@ -2890,34 +2904,34 @@ Dim cad As String
     
     Select Case Data1.Recordset.Fields(0).Value
         Case "RCP"
-            cad = "Recibo de Consumo." & vbCrLf
+            Cad = "Recibo de Consumo." & vbCrLf
     
         Case "RMP"
-            cad = "Recibo de Mantenimiento." & vbCrLf
+            Cad = "Recibo de Mantenimiento." & vbCrLf
             
         Case "TAL"
-            cad = "Recibo de Talla." & vbCrLf
+            Cad = "Recibo de Talla." & vbCrLf
         
         Case "RVP"
-            cad = "Recibo de Contadores." & vbCrLf
+            Cad = "Recibo de Contadores." & vbCrLf
         
     End Select
     
-    cad = cad & "-------------------------------------      " & vbCrLf & vbCrLf
-    cad = cad & "Va a eliminar el Recibo del Socio:            "
-    cad = cad & vbCrLf & "Nº Recibo:  " & Format(Text1(0).Text, "0000000")
-    cad = cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    Cad = Cad & "-------------------------------------      " & vbCrLf & vbCrLf
+    Cad = Cad & "Va a eliminar el Recibo del Socio:            "
+    Cad = Cad & vbCrLf & "Nº Recibo:  " & Format(Text1(0).Text, "0000000")
+    Cad = Cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
 
-    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
+    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
 '        On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
 '        NumPedElim = Data1.Recordset.Fields(1).Value
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -3123,7 +3137,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim cad As String
+Dim Cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -3136,9 +3150,9 @@ Dim cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        cad = Data1.Recordset.Fields(0) & "|"
-        cad = cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(0) & "|"
+        Cad = Cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -3751,31 +3765,31 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
     '##A mano
-    cad = ""
+    Cad = ""
 '    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
-    cad = cad & "Tipo Fichero|case rrecibpozos.codtipom when ""RCP"" then ""RCP-Consumo"" when ""RMP"" then ""RMP-Mantenim"" when ""RVP"" then ""RVP-Contadores"" when ""RMT"" then ""RMT-Manta"" when ""TAL"" then ""TAL-Talla"" when ""RRC"" then ""RRC-Rect Consumo""  when ""RRM"" then ""RRM-Rect Mto"" when ""RRT"" then ""RRT-Rect Manta""  when ""RRV"" then ""RRV-Rect Cont"" when ""RTA"" then ""RTA-Rect Talla""  when ""FIN"" then ""FIN-Internas"" end as tipo|N||22·"
-    cad = cad & "Tipo|rrecibpozos.codtipom|N||6·" ' ParaGrid(Combo1(0), 0, "Tipo")
-    cad = cad & "Nº.Factura|rrecibpozos.numfactu|N||12·"
-    cad = cad & "Fecha|rrecibpozos.fecfactu|F||15·"
-    cad = cad & "Lin|rrecibpozos.numlinea|N||6·"
-    cad = cad & "Código|rrecibpozos.codsocio|N|000000|12·"
-    cad = cad & "Socio|rsocios.nomsocio|N||38·"
+    Cad = Cad & "Tipo Fichero|case rrecibpozos.codtipom when ""RCP"" then ""RCP-Consumo"" when ""RMP"" then ""RMP-Mantenim"" when ""RVP"" then ""RVP-Contadores"" when ""RMT"" then ""RMT-Manta"" when ""TAL"" then ""TAL-Talla"" when ""RRC"" then ""RRC-Rect Consumo""  when ""RRM"" then ""RRM-Rect Mto"" when ""RRT"" then ""RRT-Rect Manta""  when ""RRV"" then ""RRV-Rect Cont"" when ""RTA"" then ""RTA-Rect Talla""  when ""FIN"" then ""FIN-Internas"" end as tipo|N||22·"
+    Cad = Cad & "Tipo|rrecibpozos.codtipom|N||6·" ' ParaGrid(Combo1(0), 0, "Tipo")
+    Cad = Cad & "Nº.Factura|rrecibpozos.numfactu|N||12·"
+    Cad = Cad & "Fecha|rrecibpozos.fecfactu|F||15·"
+    Cad = Cad & "Lin|rrecibpozos.numlinea|N||6·"
+    Cad = Cad & "Código|rrecibpozos.codsocio|N|000000|12·"
+    Cad = Cad & "Socio|rsocios.nomsocio|N||38·"
     
     Tabla = NombreTabla & " inner join rsocios on rrecibpozos.codsocio = rsocios.codsocio "
     Titulo = "Recibos de Contadores"
     devuelve = "1|2|3|4|"
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = Cad
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -3926,7 +3940,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Byte, Numreg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 Dim b1 As Boolean
 
@@ -3949,11 +3963,11 @@ Dim b1 As Boolean
     
     
     'Poner Flechas de desplazamiento visibles
-    Numreg = 1
+    NumReg = 1
     If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then Numreg = 2 'Solo es para saber q hay + de 1 registro
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, Numreg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
           
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -4199,7 +4213,7 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim SQL As String, LEtra As String, Sql2 As String
 Dim b As Boolean
 Dim vTipoMov As CTiposMov
@@ -4252,10 +4266,10 @@ FinEliminar:
     End If
     If Not b Then
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -4715,7 +4729,7 @@ End Sub
 
 
 Private Sub PonerHidrantesSocio()
-Dim cad As String
+Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim RS As ADODB.Recordset
@@ -4725,15 +4739,15 @@ Dim RS As ADODB.Recordset
     
     If Not (Modo = 3) Then Exit Sub
 
-    cad = "rpozos.codsocio = " & DBSet(Text1(2).Text, "N")
+    Cad = "rpozos.codsocio = " & DBSet(Text1(2).Text, "N")
      
-    Cad1 = "select count(*) from rpozos where " & cad
+    Cad1 = "select count(*) from rpozos where " & Cad
      
     NumRegis = TotalRegistros(Cad1)
     
     If NumRegis = 0 Then Exit Sub
     If NumRegis = 1 Then
-        Cad1 = "select hidrante, rpozos.codparti, rpartida.nomparti, rpozos.poligono from rpozos inner join rpartida on rpozos.codparti = rpartida.codparti where " & cad
+        Cad1 = "select hidrante, rpozos.codparti, rpartida.nomparti, rpozos.poligono from rpozos inner join rpartida on rpozos.codparti = rpartida.codparti where " & Cad
         Set RS = New ADODB.Recordset
         RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not RS.EOF Then
@@ -4741,7 +4755,7 @@ Dim RS As ADODB.Recordset
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWhere = " and " & cad
+        frmMens.cadWHERE = " and " & Cad
         frmMens.campo = Text1(14).Text
         frmMens.OpcionMensaje = 23
         frmMens.Show vbModal
@@ -4788,12 +4802,12 @@ Dim tots As String
 
         Case 1 'campos
             'si es visible|control|tipo campo|nombre campo|ancho control|
-            tots = "N||||0|;N||||0|;N||||0|;N||||0|;S|txtAux5(4)|T|Campo|1300|;" 'codsocio,numfase
-            tots = tots & "S|txtAux5(5)|T|Hanegadas|1200|;S|txtAux5(6)|T|Pr/Ha.Cuota|1200|;S|txtAux5(7)|T|Pr/Ha.Ordin.|1200|;"
-            tots = tots & "S|txtAux5(8)|T|Poligono|1100|;S|txtAux5(9)|T|Parcela|1100|;S|txtAux5(10)|T|SParcela|850|;"
+            tots = "N||||0|;N||||0|;N||||0|;N||||0|;S|txtAux5(4)|T|Campo|850|;" 'codsocio,numfase
+            tots = tots & "S|txtAux5(5)|T|Hdas|900|;S|txtAux5(6)|T|Pr/Ha.Cuota|1200|;S|txtAux5(7)|T|Pr/Ha.Ordin.|1200|;"
+            tots = tots & "S|txtAux5(8)|T|Poligono|900|;S|txtAux5(9)|T|Parcela|1100|;S|txtAux5(10)|T|SParcela|850|;S|txtAux5(11)|T|Importe|900|;"
             arregla tots, DataGridAux(Index), Me
         
-'            DataGridAux(Index).Columns(3).Alignment = dbgLeft
+            DataGridAux(Index).Columns(11).Alignment = dbgRight
         
             b = (Modo = 4) And ((ModificaLineas = 1) Or (ModificaLineas = 2))
 
@@ -4852,7 +4866,7 @@ Dim Tabla As String
             
        Case 1 ' campos
             Tabla = "rrecibpozos_cam"
-            SQL = "SELECT codtipom,numfactu,fecfactu,numlinea,codcampo, hanegada, precio1, precio2, poligono, parcela, subparce "
+            SQL = "SELECT codtipom,numfactu,fecfactu,numlinea,codcampo, hanegada, precio1, precio2, poligono, parcela, subparce, if(coalesce(hanegada,0) <> 0,round((coalesce(precio1,0) + coalesce(precio2,0)) * hanegada,2),0) importe "
             SQL = SQL & " FROM " & Tabla
             If enlaza Then
                 SQL = SQL & ObtenerWhereCab(True)
@@ -4882,7 +4896,7 @@ End Function
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -4902,9 +4916,9 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
-        Case 0: vTabla = "rrecibpozos_hid"
-        Case 1: vTabla = "rrecibpozos_campos"
-        Case 2: vTabla = "rrecibpozos_acc"
+        Case 0: vtabla = "rrecibpozos_hid"
+        Case 1: vtabla = "rrecibpozos_campos"
+        Case 2: vtabla = "rrecibpozos_acc"
     End Select
     ' ********************************************************
     
@@ -5003,7 +5017,7 @@ End Sub
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim SQL As String
 Dim vWhere As String
-Dim eliminar As Boolean
+Dim Eliminar As Boolean
 
     On Error GoTo Error2
 
@@ -5020,7 +5034,7 @@ Dim eliminar As Boolean
     If AdoAux(Index).Recordset.EOF Then Exit Sub
 '    If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
-    eliminar = False
+    Eliminar = False
    
     vWhere = ObtenerWhereCab(True)
     
@@ -5031,7 +5045,7 @@ Dim eliminar As Boolean
             SQL = "¿Seguro que desea eliminar el registro?"
             SQL = SQL & vbCrLf & "Hidrante: " & AdoAux(Index).Recordset!Hidrante
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
+                Eliminar = True
                 SQL = "DELETE FROM rrecibpozos_hid"
                 SQL = SQL & vWhere & " AND hidrante= " & DBLet(AdoAux(Index).Recordset!Hidrante, "T")
                 
@@ -5050,7 +5064,7 @@ Dim eliminar As Boolean
             SQL = "¿Seguro que desea eliminar el registro?"
             SQL = SQL & vbCrLf & "Campos: " & AdoAux(Index).Recordset!codcampo
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
+                Eliminar = True
                 SQL = "DELETE FROM rrecibpozos_cam"
                 SQL = SQL & vWhere & " AND codcampo= " & DBLet(AdoAux(Index).Recordset!codcampo, "N")
                 
@@ -5069,7 +5083,7 @@ Dim eliminar As Boolean
             SQL = "¿Seguro que desea eliminar el registro?"
             SQL = SQL & vbCrLf & "Numero Fase: " & AdoAux(Index).Recordset!numfases
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
+                Eliminar = True
                 SQL = "DELETE FROM rrecibpozos_acc"
                 SQL = SQL & vWhere & " AND numfases= " & DBLet(AdoAux(Index).Recordset!numfases, "N")
             
@@ -5085,7 +5099,7 @@ Dim eliminar As Boolean
         
     End Select
 
-    If eliminar Then
+    If Eliminar Then
         NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute SQL
@@ -5113,7 +5127,7 @@ End Sub
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
     Dim i As Integer
-    Dim j As Integer
+    Dim J As Integer
     
     If AdoAux(Index).Recordset.EOF Then Exit Sub
     If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
@@ -5265,7 +5279,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim cad As String
+Dim Cad As String
 Dim TablaAux As String
 
     On Error Resume Next
@@ -5325,7 +5339,7 @@ Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim RS As ADODB.Recordset
 Dim SQL As Integer
 Dim b As Boolean
-Dim cant As Integer
+Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
 
@@ -5396,7 +5410,7 @@ End Function
 Private Sub TxtAux3_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim CADENA As String
+Dim cadena As String
     
     If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
 
@@ -5448,7 +5462,7 @@ End Sub
 Private Sub TxtAux4_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim CADENA As String
+Dim cadena As String
     
     If Not PerderFocoGnral(txtAux4(Index), Modo) Then Exit Sub
 
@@ -5482,7 +5496,7 @@ End Sub
 Private Sub TxtAux5_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim CADENA As String
+Dim cadena As String
     
     If Not PerderFocoGnral(txtAux5(Index), Modo) Then Exit Sub
 

@@ -1367,14 +1367,14 @@ Dim b As Boolean
     SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codsocio,hidrante, "
     If EsRectificativa Then
         SqlValues = SqlValues & "baseimpo * (-1),tipoiva,porc_iva,imporiva*(-1), totalfact * (-1),"
-        SqlValues = SqlValues & "consumo,impcuota * (-1),lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1 * (-1),consumo2,precio2 * (-1),concepto,"
+        SqlValues = SqlValues & "consumo,impcuota * (-1),lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1 * (-1),consumo2,precio2 * (-1),concat(concepto,' Nro." & NumFact & " de " & FecFact & "'),"
         SqlValues = SqlValues & "0,0,conceptomo,importemo *(-1),conceptoar1,importear1 * (-1),conceptoar2,importear2 * (-1),"
         SqlValues = SqlValues & "conceptoar3,importear3 * (-1),conceptoar4,importear4 * (-1),difdias,codparti,calibre,codpozo,porcdto,impdto * (-1),"
         SqlValues = SqlValues & "precio * (-1),pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
         SqlValues = SqlValues & "lect_ant2 , fech_ant2, lect_act2, fech_act2, " & DBSet(vUsu.PC, "T")
     Else
         SqlValues = SqlValues & "baseimpo + " & DBSet(vImpRecargo, "N") & ",tipoiva,porc_iva,round((baseimpo + " & DBSet(vImpRecargo, "N") & ") * porc_iva / 100,2), totalfact + " & DBSet(vImpRecargo, "N") & ","
-        SqlValues = SqlValues & "consumo,impcuota,lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1,consumo2,precio2,concepto,"
+        SqlValues = SqlValues & "consumo,impcuota,lect_ant,fech_ant,lect_act,fech_act,consumo1,precio1,consumo2,precio2,concat(concepto,' Nro." & NumFact & " de " & FecFact & "'),"
         SqlValues = SqlValues & "0,0,conceptomo,importemo,conceptoar1,importear1,conceptoar2,importear2,"
         SqlValues = SqlValues & "conceptoar3,importear3,conceptoar4,importear4,difdias,codparti,calibre,codpozo,porcdto,impdto,"
         SqlValues = SqlValues & "precio,pasaridoc,parcelas,poligono,nroorden,numalbar,fecalbar,escontado,"
