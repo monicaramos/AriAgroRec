@@ -17,6 +17,342 @@ Begin VB.Form frmListAnticipos
    ScaleWidth      =   6750
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameReimpresion 
+      Height          =   5220
+      Left            =   0
+      TabIndex        =   33
+      Top             =   -30
+      Width           =   6675
+      Begin VB.CheckBox Check4 
+         Caption         =   "Duplicado"
+         Height          =   225
+         Left            =   540
+         TabIndex        =   342
+         Top             =   4650
+         Width           =   1965
+      End
+      Begin VB.CheckBox Check3 
+         Caption         =   "Impresión con Arrobas"
+         Height          =   225
+         Left            =   540
+         TabIndex        =   304
+         Top             =   4350
+         Width           =   1965
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   1
+         Left            =   2655
+         Locked          =   -1  'True
+         TabIndex        =   43
+         Text            =   "Text5"
+         Top             =   3780
+         Width           =   3675
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   0
+         Left            =   2655
+         Locked          =   -1  'True
+         TabIndex        =   41
+         Text            =   "Text5"
+         Top             =   3405
+         Width           =   3675
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   1
+         Left            =   1755
+         MaxLength       =   6
+         TabIndex        =   39
+         Top             =   3780
+         Width           =   830
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   0
+         Left            =   1755
+         MaxLength       =   6
+         TabIndex        =   38
+         Top             =   3405
+         Width           =   830
+      End
+      Begin VB.CommandButton cmdAceptarReimp 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4170
+         TabIndex        =   40
+         Top             =   4485
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdCancelReimp 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5340
+         TabIndex        =   42
+         Top             =   4485
+         Width           =   975
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   2
+         Left            =   1755
+         MaxLength       =   10
+         TabIndex        =   36
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2415
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   3
+         Left            =   1755
+         MaxLength       =   10
+         TabIndex        =   37
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   2775
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   4
+         Left            =   1740
+         MaxLength       =   7
+         TabIndex        =   34
+         Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
+         Top             =   1365
+         Width           =   830
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   5
+         Left            =   1755
+         MaxLength       =   7
+         TabIndex        =   35
+         Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
+         Top             =   1755
+         Width           =   830
+      End
+      Begin MSComctlLib.ListView ListView1 
+         Height          =   1110
+         Index           =   0
+         Left            =   3180
+         TabIndex        =   101
+         Top             =   1350
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   1958
+         View            =   3
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         HideColumnHeaders=   -1  'True
+         Checkboxes      =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         Appearance      =   1
+         NumItems        =   0
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Tipo de Factura"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   5
+         Left            =   3180
+         TabIndex        =   102
+         Top             =   1110
+         Width           =   1815
+      End
+      Begin VB.Image Image1 
+         Height          =   240
+         Index           =   1
+         Left            =   6060
+         Picture         =   "frmListAnticipos.frx":000C
+         ToolTipText     =   "Desmarcar todos"
+         Top             =   1020
+         Width           =   240
+      End
+      Begin VB.Image Image1 
+         Height          =   240
+         Index           =   0
+         Left            =   5820
+         Picture         =   "frmListAnticipos.frx":0A0E
+         ToolTipText     =   "Marcar todos"
+         Top             =   1020
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   1
+         Left            =   1470
+         MouseIcon       =   "frmListAnticipos.frx":7260
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   3780
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   0
+         Left            =   1470
+         MouseIcon       =   "frmListAnticipos.frx":73B2
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   3405
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   11
+         Left            =   510
+         TabIndex        =   53
+         Top             =   3165
+         Width           =   375
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   12
+         Left            =   870
+         TabIndex        =   52
+         Top             =   3780
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   13
+         Left            =   855
+         TabIndex        =   51
+         Top             =   3405
+         Width           =   465
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   4
+         Left            =   1485
+         Picture         =   "frmListAnticipos.frx":7504
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2775
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   3
+         Left            =   1485
+         Picture         =   "frmListAnticipos.frx":758F
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2415
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   14
+         Left            =   825
+         TabIndex        =   50
+         Top             =   2775
+         Width           =   420
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   15
+         Left            =   825
+         TabIndex        =   49
+         Top             =   2415
+         Width           =   465
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha Factura"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   16
+         Left            =   465
+         TabIndex        =   48
+         Top             =   2115
+         Width           =   1815
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Nro.Factura"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   2
+         Left            =   495
+         TabIndex        =   47
+         Top             =   1125
+         Width           =   870
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   0
+         Left            =   900
+         TabIndex        =   46
+         Top             =   1395
+         Width           =   465
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   1
+         Left            =   900
+         TabIndex        =   45
+         Top             =   1755
+         Width           =   420
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Reimpresión de Facturas Socios"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Index           =   0
+         Left            =   495
+         TabIndex        =   44
+         Top             =   315
+         Width           =   5160
+      End
+   End
    Begin VB.Frame FrameGrabacionModelos 
       Height          =   7245
       Left            =   -240
@@ -371,7 +707,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   5
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":000C
+         MouseIcon       =   "frmListAnticipos.frx":761A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2580
@@ -381,7 +717,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   4
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":015E
+         MouseIcon       =   "frmListAnticipos.frx":776C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2205
@@ -410,7 +746,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   35
          Left            =   1410
-         MouseIcon       =   "frmListAnticipos.frx":02B0
+         MouseIcon       =   "frmListAnticipos.frx":78BE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1620
@@ -420,7 +756,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   34
          Left            =   1410
-         MouseIcon       =   "frmListAnticipos.frx":0402
+         MouseIcon       =   "frmListAnticipos.frx":7A10
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1245
@@ -578,7 +914,7 @@ Begin VB.Form frmListAnticipos
             Height          =   240
             Index           =   13
             Left            =   1440
-            Picture         =   "frmListAnticipos.frx":0554
+            Picture         =   "frmListAnticipos.frx":7B62
             ToolTipText     =   "Buscar fecha"
             Top             =   135
             Width           =   240
@@ -819,7 +1155,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   2
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":05DF
+         MouseIcon       =   "frmListAnticipos.frx":7BED
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2055
@@ -829,7 +1165,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   3
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":0731
+         MouseIcon       =   "frmListAnticipos.frx":7D3F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2430
@@ -877,7 +1213,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   29
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":0883
+         MouseIcon       =   "frmListAnticipos.frx":7E91
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3420
@@ -887,7 +1223,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   28
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":09D5
+         MouseIcon       =   "frmListAnticipos.frx":7FE3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3030
@@ -981,7 +1317,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   10
          Left            =   1440
-         Picture         =   "frmListAnticipos.frx":0B27
+         Picture         =   "frmListAnticipos.frx":8135
          ToolTipText     =   "Buscar fecha"
          Top             =   4680
          Width           =   240
@@ -990,7 +1326,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   9
          Left            =   1440
-         Picture         =   "frmListAnticipos.frx":0BB2
+         Picture         =   "frmListAnticipos.frx":81C0
          ToolTipText     =   "Buscar fecha"
          Top             =   4320
          Width           =   240
@@ -1037,7 +1373,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   25
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":0C3D
+         MouseIcon       =   "frmListAnticipos.frx":824B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1485
@@ -1047,7 +1383,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   24
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":0D8F
+         MouseIcon       =   "frmListAnticipos.frx":839D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1110
@@ -1057,7 +1393,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   2
          Left            =   5790
-         Picture         =   "frmListAnticipos.frx":0EE1
+         Picture         =   "frmListAnticipos.frx":84EF
          ToolTipText     =   "Marcar todos"
          Top             =   3990
          Width           =   240
@@ -1066,7 +1402,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   3
          Left            =   6030
-         Picture         =   "frmListAnticipos.frx":7733
+         Picture         =   "frmListAnticipos.frx":ED41
          ToolTipText     =   "Desmarcar todos"
          Top             =   3990
          Width           =   240
@@ -1080,334 +1416,6 @@ Begin VB.Form frmListAnticipos
          TabIndex        =   128
          Top             =   4020
          Width           =   1815
-      End
-   End
-   Begin VB.Frame FrameReimpresion 
-      Height          =   5220
-      Left            =   0
-      TabIndex        =   33
-      Top             =   -30
-      Width           =   6675
-      Begin VB.CheckBox Check3 
-         Caption         =   "Impresión con Arrobas"
-         Height          =   225
-         Left            =   540
-         TabIndex        =   304
-         Top             =   4350
-         Width           =   1965
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   1
-         Left            =   2655
-         Locked          =   -1  'True
-         TabIndex        =   43
-         Text            =   "Text5"
-         Top             =   3780
-         Width           =   3675
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   0
-         Left            =   2655
-         Locked          =   -1  'True
-         TabIndex        =   41
-         Text            =   "Text5"
-         Top             =   3405
-         Width           =   3675
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   1
-         Left            =   1755
-         MaxLength       =   6
-         TabIndex        =   39
-         Top             =   3780
-         Width           =   830
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   0
-         Left            =   1755
-         MaxLength       =   6
-         TabIndex        =   38
-         Top             =   3405
-         Width           =   830
-      End
-      Begin VB.CommandButton cmdAceptarReimp 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4170
-         TabIndex        =   40
-         Top             =   4275
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdCancelReimp 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5340
-         TabIndex        =   42
-         Top             =   4275
-         Width           =   975
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   2
-         Left            =   1755
-         MaxLength       =   10
-         TabIndex        =   36
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2415
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   3
-         Left            =   1755
-         MaxLength       =   10
-         TabIndex        =   37
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   2775
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   4
-         Left            =   1740
-         MaxLength       =   7
-         TabIndex        =   34
-         Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
-         Top             =   1365
-         Width           =   830
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   5
-         Left            =   1755
-         MaxLength       =   7
-         TabIndex        =   35
-         Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
-         Top             =   1755
-         Width           =   830
-      End
-      Begin MSComctlLib.ListView ListView1 
-         Height          =   1110
-         Index           =   0
-         Left            =   3180
-         TabIndex        =   101
-         Top             =   1350
-         Width           =   3135
-         _ExtentX        =   5530
-         _ExtentY        =   1958
-         View            =   3
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         HideColumnHeaders=   -1  'True
-         Checkboxes      =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         Appearance      =   1
-         NumItems        =   0
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Tipo de Factura"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   5
-         Left            =   3180
-         TabIndex        =   102
-         Top             =   1110
-         Width           =   1815
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   1
-         Left            =   6060
-         Picture         =   "frmListAnticipos.frx":8135
-         ToolTipText     =   "Desmarcar todos"
-         Top             =   1020
-         Width           =   240
-      End
-      Begin VB.Image Image1 
-         Height          =   240
-         Index           =   0
-         Left            =   5820
-         Picture         =   "frmListAnticipos.frx":8B37
-         ToolTipText     =   "Marcar todos"
-         Top             =   1020
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   1
-         Left            =   1470
-         MouseIcon       =   "frmListAnticipos.frx":F389
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   3780
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   0
-         Left            =   1470
-         MouseIcon       =   "frmListAnticipos.frx":F4DB
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   3405
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   11
-         Left            =   510
-         TabIndex        =   53
-         Top             =   3165
-         Width           =   375
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   12
-         Left            =   870
-         TabIndex        =   52
-         Top             =   3780
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   13
-         Left            =   855
-         TabIndex        =   51
-         Top             =   3405
-         Width           =   465
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   4
-         Left            =   1485
-         Picture         =   "frmListAnticipos.frx":F62D
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2775
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   3
-         Left            =   1485
-         Picture         =   "frmListAnticipos.frx":F6B8
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2415
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   14
-         Left            =   825
-         TabIndex        =   50
-         Top             =   2775
-         Width           =   420
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   15
-         Left            =   825
-         TabIndex        =   49
-         Top             =   2415
-         Width           =   465
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Fecha Factura"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   16
-         Left            =   465
-         TabIndex        =   48
-         Top             =   2115
-         Width           =   1815
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Nro.Factura"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   2
-         Left            =   495
-         TabIndex        =   47
-         Top             =   1125
-         Width           =   870
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   0
-         Left            =   900
-         TabIndex        =   46
-         Top             =   1395
-         Width           =   465
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   1
-         Left            =   900
-         TabIndex        =   45
-         Top             =   1755
-         Width           =   420
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Reimpresión de Facturas Socios"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Index           =   0
-         Left            =   495
-         TabIndex        =   44
-         Top             =   315
-         Width           =   5160
       End
    End
    Begin VB.Frame FrameAnticipos 
@@ -6370,7 +6378,7 @@ End Sub
 Private Function CargarFechasAnticiposPendientes(vtabla As String, vSelect As String) As String
 Dim Sql As String
 Dim Rs As ADODB.Recordset
-Dim Cadena As String
+Dim cadena As String
 
 
     On Error GoTo eCargarFechasAnticiposPendientes
@@ -6389,22 +6397,22 @@ Dim Cadena As String
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Cadena = ""
+    cadena = ""
     
     While Not Rs.EOF
-        Cadena = Cadena & DBSet(Rs.Fields(0).Value, "F") & ","
+        cadena = cadena & DBSet(Rs.Fields(0).Value, "F") & ","
     
         Rs.MoveNext
     Wend
     
     'quitamos la ultima coma
-    If Len(Cadena) > 0 Then
-        Cadena = Mid(Cadena, 1, Len(Cadena) - 1)
+    If Len(cadena) > 0 Then
+        cadena = Mid(cadena, 1, Len(cadena) - 1)
     End If
     
     Set Rs = Nothing
     
-    CargarFechasAnticiposPendientes = Cadena
+    CargarFechasAnticiposPendientes = cadena
     Exit Function
     
 eCargarFechasAnticiposPendientes:
@@ -8309,6 +8317,11 @@ Dim Tipos As String
             End If
         End If
         
+        '[Monica]06/06/2016: en el caso de reimpresion de facturas de socio ver si se imprime la palabra duplicado
+        If indRPT = 23 Then
+            CadParam = CadParam & "pDuplicado=" & Check4.Value & "|"
+            numParam = numParam + 1
+        End If
         
         LlamarImprimir
         
@@ -17402,7 +17415,7 @@ End Function
 
 Private Function AlbaranesFacturados(cTabla As String, cWhere As String, Optional CadenaAlbaranes As String) As Boolean
 Dim Sql As String
-Dim Cadena As String
+Dim cadena As String
 Dim Cadena2 As String
 Dim Rs As ADODB.Recordset
     
@@ -17419,10 +17432,10 @@ Dim Rs As ADODB.Recordset
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-        Cadena = ""
+        cadena = ""
     
         While Not Rs.EOF
-            Cadena = Cadena & Format(DBLet(Rs!numalbar, "N"), "0000000") & ", "
+            cadena = cadena & Format(DBLet(Rs!numalbar, "N"), "0000000") & ", "
         
             Rs.MoveNext
         Wend
@@ -17431,7 +17444,7 @@ Dim Rs As ADODB.Recordset
         Set frmMens4 = New frmMensajes
         
         frmMens4.OpcionMensaje = 35
-        frmMens4.cadWHERE = "rhisfruta.numalbar in (" & Mid(Cadena, 1, Len(Cadena) - 2) & ")"
+        frmMens4.cadWHERE = "rhisfruta.numalbar in (" & Mid(cadena, 1, Len(cadena) - 2) & ")"
         frmMens4.Show vbModal
         
         Set frmMens4 = Nothing
@@ -17446,9 +17459,9 @@ Dim Rs As ADODB.Recordset
                 ' se liquidan todos los albaranes no facturados
                 AlbaranesFacturados = True
 
-                cWhere = cWhere & " and rhisfruta.numalbar not in (" & Mid(Cadena, 1, Len(Cadena) - 2) & ")"
+                cWhere = cWhere & " and rhisfruta.numalbar not in (" & Mid(cadena, 1, Len(cadena) - 2) & ")"
             
-                CadenaAlbaranes = "not rhisfruta.numalbar  in (" & Mid(Cadena, 1, Len(Cadena) - 2) & ")"
+                CadenaAlbaranes = "not rhisfruta.numalbar  in (" & Mid(cadena, 1, Len(cadena) - 2) & ")"
             
             Case 2
                 ' abortamos el proceso
