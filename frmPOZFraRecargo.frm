@@ -37,6 +37,7 @@ Begin VB.Form frmPOZFraRecargo
       Width           =   7695
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         Enabled         =   0   'False
          Height          =   315
          Index           =   2
          Left            =   5940
@@ -45,6 +46,7 @@ Begin VB.Form frmPOZFraRecargo
          Tag             =   "Importe Factura|T|N|||tcafpc|numfactu||S|"
          Text            =   "Text1 7"
          Top             =   930
+         Visible         =   0   'False
          Width           =   1245
       End
       Begin VB.TextBox Text2 
@@ -97,11 +99,13 @@ Begin VB.Form frmPOZFraRecargo
       End
       Begin VB.Label Label1 
          Caption         =   "Importe"
+         Enabled         =   0   'False
          Height          =   255
          Index           =   2
          Left            =   5190
          TabIndex        =   18
          Top             =   960
+         Visible         =   0   'False
          Width           =   1245
       End
       Begin VB.Image imgFecha 
@@ -1429,8 +1433,15 @@ Dim b As Boolean
     
     SqlInsert = "insert into rrecibpozos_cam (codTipom , numfactu, fecfactu, numlinea, codcampo, hanegada, precio1, precio2, codzonas, poligono, parcela, subparce) "
     
-    SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
-    SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    If EsRectificativa Then
+        SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, precio1 * (-1), precio2 * (-1), codzonas, poligono, parcela, subparce "
+        SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    Else
+        SqlValues = " select " & DBSet(CodTipom, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(Text1(1).Text, "F") & ", numlinea, codcampo, hanegada, "
+        SqlValues = SqlValues & "round(precio1 * (1 + (" & DBSet(Text1(0).Text, "N") & "/100)),4), round(precio2 * (1 + (" & DBSet(Text1(0).Text, "N") & "/100)),4), codzonas, poligono, parcela, subparce "
+        SqlValues = SqlValues & " from rrecibpozos_cam where codtipom = " & DBSet(vTipoM, "T") & " and numfactu = " & DBSet(NumFact, "N") & " and fecfactu = " & DBSet(FecFact, "F")
+    End If
+    
     
     conn.Execute SqlInsert & SqlValues
     

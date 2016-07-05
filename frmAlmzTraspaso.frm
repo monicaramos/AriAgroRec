@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmAlmzTraspaso 
    BorderStyle     =   3  'Fixed Dialog
@@ -320,7 +320,7 @@ Attribute frmTIva.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadparam As String 'Cadena con los parametros para Crystal Report
+Private cadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -382,12 +382,12 @@ End Sub
 
 
 Private Sub CmdAcep_Click()
-Dim Sql As String
-Dim I As Byte
+Dim SQL As String
+Dim i As Byte
 Dim cadWHERE As String
 Dim b As Boolean
 Dim NomFic As String
-Dim Cadena As String
+Dim cadena As String
 Dim cadena1 As String
 Dim nompath As String
 Dim cadTabla As String
@@ -427,16 +427,16 @@ On Error GoTo eError
                 
                 '========= PARAMETROS  =============================
             'Añadir el parametro de Empresa
-            cadparam = cadparam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
     
             If ComprobarErrores() Then
                     cadTabla = "tmpinformes"
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                     
-                    Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                    SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                     
-                    If TotalRegistros(Sql) <> 0 Then
+                    If TotalRegistros(SQL) <> 0 Then
                         MsgBox "Hay errores en los ficheros de Traspaso. Debe corregirlos previamente.", vbExclamation
                         cadTitulo = "Errores de Traspaso"
                         cadNombreRPT = "rErroresTraspaso.rpt"
@@ -524,16 +524,16 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -558,18 +558,18 @@ Dim vSeccion As CSeccion
             AbrirFrmVariedad (Index)
             
         Case 1, 3 ' tipo de iva de contabilidad
-            indCodigo = 1
-            PonerFoco txtcodigo(indice)
+            indCodigo = Index
+            PonerFoco txtcodigo(indCodigo)
             Set vSeccion = New CSeccion
             If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
                 If vSeccion.AbrirConta Then
                     Set frmTIva = New frmTipIVAConta
                     frmTIva.DeConsulta = True
                     frmTIva.DatosADevolverBusqueda = "0|1|"
-                    frmTIva.CodigoActual = txtcodigo(1).Text
+                    frmTIva.CodigoActual = txtcodigo(indCodigo).Text
                     frmTIva.Show vbModal
                     Set frmTIva = Nothing
-                    PonerFoco txtcodigo(1)
+                    PonerFoco txtcodigo(indCodigo)
                 End If
             End If
             Set vSeccion = Nothing
@@ -661,7 +661,7 @@ End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim vSeccion As CSeccion
 
     'Quitar espacios en blanco por los lados
@@ -713,7 +713,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadparam = ""
+    cadParam = ""
     numParam = 0
 End Sub
 
@@ -741,7 +741,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadparam = cadparam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -751,7 +751,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadparam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -778,7 +778,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadparam
+        .OtrosParametros = cadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -814,22 +814,22 @@ End Sub
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistros = True
     Exit Function
@@ -842,15 +842,15 @@ End Function
 
 Private Function ComprobarErrores() As Boolean
 Dim NF As Long
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim longitud As Long
 Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
-Dim Sql As String
-Dim SQL1 As String
-Dim total As Long
+Dim NumReg As Long
+Dim SQL As String
+Dim Sql1 As String
+Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
@@ -869,8 +869,8 @@ Dim Tipo As Integer
         Exit Function
     End If
     
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     
 'ACEITEC.TXT
     lblProgres(2).Caption = "Comprobando errores fichero ACEITEC.TXT "
@@ -878,8 +878,8 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero1 For Input As #NF
     
-    Line Input #NF, cad
-    I = 0
+    Line Input #NF, Cad
+    i = 0
     
     longitud = FileLen(Fichero1)
     
@@ -891,26 +891,26 @@ Dim Tipo As Integer
     ' PROCESO DEL FICHERO ACEITEC.TXT
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "ACEITEC.TXT")
+        b = ComprobarRegistro(Cad, "ACEITEC.TXT")
         
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
-    If cad <> "" And b Then
-        I = I + 1
+    If Cad <> "" And b Then
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "ACEITEC.TXT")
+        b = ComprobarRegistro(Cad, "ACEITEC.TXT")
     End If
     
     pb2.visible = False
@@ -924,8 +924,8 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero2 For Input As #NF
     
-    Line Input #NF, cad
-    I = 0
+    Line Input #NF, Cad
+    i = 0
     
     longitud = FileLen(Fichero2)
     
@@ -937,26 +937,26 @@ Dim Tipo As Integer
     ' PROCESO DEL FICHERO ACEITUNC.TXT
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "ACEITUNC.TXT")
+        b = ComprobarRegistro(Cad, "ACEITUNC.TXT")
         
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
-    If cad <> "" And b Then
-        I = I + 1
+    If Cad <> "" And b Then
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "ACEITUNC.TXT")
+        b = ComprobarRegistro(Cad, "ACEITUNC.TXT")
     End If
     
     pb2.visible = False
@@ -971,8 +971,8 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero3 For Input As #NF
     
-    Line Input #NF, cad
-    I = 0
+    Line Input #NF, Cad
+    i = 0
     
     longitud = FileLen(Fichero3)
     
@@ -984,26 +984,26 @@ Dim Tipo As Integer
     ' PROCESO DEL FICHERO STOCKC.TXT
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "STOCKC.TXT")
+        b = ComprobarRegistro(Cad, "STOCKC.TXT")
         
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
-    If cad <> "" And b Then
-        I = I + 1
+    If Cad <> "" And b Then
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = ComprobarRegistro(cad, "STOCKC.TXT")
+        b = ComprobarRegistro(Cad, "STOCKC.TXT")
     End If
     
     pb2.visible = False
@@ -1019,15 +1019,15 @@ End Function
 
 
 Private Function CargarFicheros() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim RS As ADODB.Recordset
 Dim longitud As Long
 
-Dim CadMen As String
-Dim cad As String
+Dim cadMen As String
+Dim Cad As String
 
 Dim NF As Integer
-Dim I As Integer
+Dim i As Integer
 Dim b As Boolean
 
 
@@ -1041,8 +1041,8 @@ Dim b As Boolean
     NF = FreeFile
     Open Fichero1 For Input As #NF
     
-    Line Input #NF, cad
-    I = 0
+    Line Input #NF, Cad
+    i = 0
     
     longitud = FileLen(Fichero1)
     
@@ -1053,26 +1053,26 @@ Dim b As Boolean
     
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = InsertarRegistros(cad, 0)
+        b = InsertarRegistros(Cad, 0)
             
-        Line Input #NF, cad
+        Line Input #NF, Cad
     Wend
     Close #NF
     
-    If cad <> "" And b Then
-        I = I + 1
+    If Cad <> "" And b Then
+        i = i + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(cad)
-        lblProgres(3).Caption = "Linea " & I
+        Me.pb2.Value = Me.pb2.Value + Len(Cad)
+        lblProgres(3).Caption = "Linea " & i
         Me.Refresh
         
-        b = InsertarRegistros(cad, 0)
+        b = InsertarRegistros(Cad, 0)
     End If
     
     pb2.visible = False
@@ -1087,8 +1087,8 @@ Dim b As Boolean
         NF = FreeFile
         Open Fichero2 For Input As #NF
         
-        Line Input #NF, cad
-        I = 0
+        Line Input #NF, Cad
+        i = 0
         
         longitud = FileLen(Fichero2)
         
@@ -1098,26 +1098,26 @@ Dim b As Boolean
         Me.pb2.Value = 0
         
         While Not EOF(NF) And b
-            I = I + 1
+            i = i + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(cad)
-            lblProgres(3).Caption = "Linea " & I
+            Me.pb2.Value = Me.pb2.Value + Len(Cad)
+            lblProgres(3).Caption = "Linea " & i
             Me.Refresh
             
-            b = InsertarRegistros(cad, 1)
+            b = InsertarRegistros(Cad, 1)
                 
-            Line Input #NF, cad
+            Line Input #NF, Cad
         Wend
         Close #NF
         
-        If cad <> "" And b Then
-            I = I + 1
+        If Cad <> "" And b Then
+            i = i + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(cad)
-            lblProgres(3).Caption = "Linea " & I
+            Me.pb2.Value = Me.pb2.Value + Len(Cad)
+            lblProgres(3).Caption = "Linea " & i
             Me.Refresh
             
-            b = InsertarRegistros(cad, 1)
+            b = InsertarRegistros(Cad, 1)
         End If
     End If
         
@@ -1134,8 +1134,8 @@ Dim b As Boolean
         NF = FreeFile
         Open Fichero3 For Input As #NF
         
-        Line Input #NF, cad
-        I = 0
+        Line Input #NF, Cad
+        i = 0
         
         longitud = FileLen(Fichero3)
         
@@ -1145,26 +1145,26 @@ Dim b As Boolean
         Me.pb2.Value = 0
         
         While Not EOF(NF) And b
-            I = I + 1
+            i = i + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(cad)
-            lblProgres(3).Caption = "Linea " & I
+            Me.pb2.Value = Me.pb2.Value + Len(Cad)
+            lblProgres(3).Caption = "Linea " & i
             Me.Refresh
             
-            b = InsertarRegistros(cad, 2)
+            b = InsertarRegistros(Cad, 2)
                 
-            Line Input #NF, cad
+            Line Input #NF, Cad
         Wend
         Close #NF
         
-        If cad <> "" And b Then
-            I = I + 1
+        If Cad <> "" And b Then
+            i = i + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(cad)
-            lblProgres(3).Caption = "Linea " & I
+            Me.pb2.Value = Me.pb2.Value + Len(Cad)
+            lblProgres(3).Caption = "Linea " & i
             Me.Refresh
             
-            b = InsertarRegistros(cad, 2)
+            b = InsertarRegistros(Cad, 2)
         End If
         
         pb2.visible = False
@@ -1193,7 +1193,7 @@ Private Function ExistenFicheros(nompath As String) As Boolean
 Dim b1 As Boolean
 Dim b2 As Boolean
 Dim b3 As Boolean
-Dim CadMen As String
+Dim cadMen As String
 
     On Error GoTo eExistenFicheros
 
@@ -1203,25 +1203,25 @@ Dim CadMen As String
     b2 = False
     b3 = False
     
-    CadMen = "Los Ficheros : " & vbCrLf
+    cadMen = "Los Ficheros : " & vbCrLf
     
     If Dir(nompath & "\aceitec.txt") <> "" Then
-        CadMen = CadMen & vbCrLf & "        aceitec.txt"
+        cadMen = cadMen & vbCrLf & "        aceitec.txt"
         b1 = True
     End If
     If Dir(nompath & "\aceitunc.txt") <> "" Then
-        CadMen = CadMen & vbCrLf & "        aceitunc.txt"
+        cadMen = cadMen & vbCrLf & "        aceitunc.txt"
         b2 = True
     End If
     If Dir(nompath & "\stockc.txt") <> "" Then
-        CadMen = CadMen & vbCrLf & "        stockc.txt"
+        cadMen = cadMen & vbCrLf & "        stockc.txt"
         b3 = True
     End If
     
     
     If Not (b1 And b2 And b3) Then
-        CadMen = CadMen & vbCrLf & vbCrLf & "no existen en el directorio seleccionado. Revise." & vbCrLf
-        MsgBox CadMen, vbExclamation
+        cadMen = cadMen & vbCrLf & vbCrLf & "no existen en el directorio seleccionado. Revise." & vbCrLf
+        MsgBox cadMen, vbExclamation
     End If
     ExistenFicheros = (b1 And b2 And b3)
     Exit Function
@@ -1231,20 +1231,20 @@ eExistenFicheros:
 End Function
 
 
-Private Function ComprobarRegistro(cad As String, fichero As String) As Boolean
+Private Function ComprobarRegistro(Cad As String, fichero As String) As Boolean
 Dim Socio As String
-Dim Sql As String
-Dim SQL1 As String
+Dim SQL As String
+Dim Sql1 As String
 Dim Mens As String
 
     On Error GoTo eComprobarRegistro
 
     ComprobarRegistro = True
 
-    If Mid(cad, 1, 3) = "CAB" Then
-        Socio = Mid(cad, 6, 5)
-        Fecha = Mid(cad, 50, 10)
-        Factura = Mid(cad, 60, 6)
+    If Mid(Cad, 1, 3) = "CAB" Then
+        Socio = Mid(Cad, 6, 5)
+        Fecha = Mid(Cad, 50, 10)
+        Factura = Mid(Cad, 60, 6)
         Select Case fichero
             Case "ACEITEC.TXT"
                 Tipo = 0
@@ -1256,40 +1256,40 @@ Dim Mens As String
 
         'Comprobamos que el socio existe
         If Socio <> "" Then
-            Sql = ""
-            Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
-            If Sql = "" Then
+            SQL = ""
+            SQL = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
+            If SQL = "" Then
                 
                 Mens = "No existe el socio " & Format(Socio, "000000") & "-" & fichero
-                Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                       vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
         
             If fichero = "ACEITUNC.TXT" Then
                 ' comprobamos que el socio tiene un campo para la variedad introducida sin fecha de baja
-                SQL1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N")
-                SQL1 = SQL1 & " and codvarie = " & DBSet(txtcodigo(0).Text, "N")
-                SQL1 = SQL1 & " and fecbajas is null"
+                Sql1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N")
+                Sql1 = Sql1 & " and codvarie = " & DBSet(txtcodigo(0).Text, "N")
+                Sql1 = Sql1 & " and fecbajas is null"
                 
-                If DevuelveValor(SQL1) = 0 Then
+                If DevuelveValor(Sql1) = 0 Then
                     Mens = "No existe campo del socio " & Format(Socio, "000000") & "-" & fichero
-                    Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                    SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 End If
                 
                 ' comprobamos que el socio es de la seccion de almazara
-                SQL1 = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
-                SQL1 = SQL1 & " and codsecci = " & vParamAplic.SeccionAlmaz
-                If TotalRegistros(SQL1) = 0 Then
+                Sql1 = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
+                Sql1 = Sql1 & " and codsecci = " & vParamAplic.SeccionAlmaz
+                If TotalRegistros(Sql1) = 0 Then
                     Mens = "El socio " & Format(Socio, "000000") & " no es de almazara"
-                    Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                    SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 
                 
                 End If
@@ -1299,17 +1299,17 @@ Dim Mens As String
         
         
         ' COMPROBAMOS QUE LA FACTURA NO EXISTA
-        SQL1 = "select count(*) from rcabfactalmz where codsocio = " & DBSet(Socio, "N")
-        SQL1 = SQL1 & " and numfactu = " & DBSet(Factura, "N")
-        SQL1 = SQL1 & " and fecfactu = " & DBSet(Fecha, "F")
-        SQL1 = SQL1 & " and tipofichero = " & DBSet(Tipo, "N")
+        Sql1 = "select count(*) from rcabfactalmz where codsocio = " & DBSet(Socio, "N")
+        Sql1 = Sql1 & " and numfactu = " & DBSet(Factura, "N")
+        Sql1 = Sql1 & " and fecfactu = " & DBSet(Fecha, "F")
+        Sql1 = Sql1 & " and tipofichero = " & DBSet(Tipo, "N")
         
-        If TotalRegistros(SQL1) <> 0 Then
+        If TotalRegistros(Sql1) <> 0 Then
             Mens = "Existe la factura " & Format(Factura, "0000000") & "-" & Format(Fecha, "dd/mm/yyyy")
-            Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+            SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                   vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
             
-            conn.Execute Sql
+            conn.Execute SQL
         End If
         
         
@@ -1322,12 +1322,12 @@ eComprobarRegistro:
 End Function
 
 
-Private Function InsertarRegistros(cad As String, Tipo As Byte) As Boolean
+Private Function InsertarRegistros(Cad As String, Tipo As Byte) As Boolean
 ' Tipo = 0 --> aceitec
 '        1 --> aceitunc
 '        2 --> stockc
-Dim Sql As String
-Dim SQL1 As String
+Dim SQL As String
+Dim Sql1 As String
 
 
 Dim vSocio As cSocio
@@ -1344,10 +1344,10 @@ Dim BaseReten As Currency
     
     InsertarRegistros = False
         
-    If Mid(cad, 1, 3) = "CAB" Then
-        Socio = Mid(cad, 6, 5)
-        Fecha = Mid(cad, 50, 10)
-        Factura = Mid(cad, 60, 6)
+    If Mid(Cad, 1, 3) = "CAB" Then
+        Socio = Mid(Cad, 6, 5)
+        Fecha = Mid(Cad, 50, 10)
+        Factura = Mid(Cad, 60, 6)
         
         numlinea = 0
         
@@ -1356,51 +1356,51 @@ Dim BaseReten As Currency
     End If
     
  
-    If Mid(cad, 1, 3) = "DET" Then
+    If Mid(Cad, 1, 3) = "DET" Then
         Concepto = ValorNulo
         cantidad = ValorNulo
         Precio = ValorNulo
         Importe = ValorNulo
             
         numlinea = numlinea + 1
-        Concepto = Mid(cad, 12, 30)
-        cantidad = Mid(cad, 43, 9)
-        Precio = Mid(cad, 50, 8)
-        Importe = Mid(cad, 58, 11)
+        Concepto = Mid(Cad, 12, 30)
+        cantidad = Mid(Cad, 43, 9)
+        Precio = Mid(Cad, 50, 8)
+        Importe = Mid(Cad, 58, 11)
     
         CantidadVar = CantidadVar + cantidad
         ImporteVar = ImporteVar + Importe
     
         
-        Sql = "insert into tmprlinfactalmz (tipofichero, numfactu, fecfactu, codsocio, numlinea, "
-        Sql = Sql & " concepto, cantidad, precioar, importel) values ( "
-        Sql = Sql & DBSet(Tipo, "N") & ","
-        Sql = Sql & DBSet(Factura, "N") & ","
-        Sql = Sql & DBSet(Fecha, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & ","
-        Sql = Sql & DBSet(numlinea, "N") & ","
-        Sql = Sql & DBSet(Concepto, "T") & ","
-        Sql = Sql & DBSet(cantidad, "N") & ","
-        Sql = Sql & DBSet(Precio, "N") & ","
-        Sql = Sql & DBSet(Importe, "N") & ")"
+        SQL = "insert into tmprlinfactalmz (tipofichero, numfactu, fecfactu, codsocio, numlinea, "
+        SQL = SQL & " concepto, cantidad, precioar, importel) values ( "
+        SQL = SQL & DBSet(Tipo, "N") & ","
+        SQL = SQL & DBSet(Factura, "N") & ","
+        SQL = SQL & DBSet(Fecha, "F") & ","
+        SQL = SQL & DBSet(Socio, "N") & ","
+        SQL = SQL & DBSet(numlinea, "N") & ","
+        SQL = SQL & DBSet(Concepto, "T") & ","
+        SQL = SQL & DBSet(cantidad, "N") & ","
+        SQL = SQL & DBSet(Precio, "N") & ","
+        SQL = SQL & DBSet(Importe, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
     End If
     
     
-    If Mid(cad, 1, 3) = "TOT" Then
-        Base = Mid(cad, 4, 11)
-        iva = Mid(cad, 20, 11)
-        TotFactu = Mid(cad, 31, 11)
+    If Mid(Cad, 1, 3) = "TOT" Then
+        Base = Mid(Cad, 4, 11)
+        iva = Mid(Cad, 20, 11)
+        TotFactu = Mid(Cad, 31, 11)
         
         ImpReten = ""
         PorcReten = 0
         BaseReten = 0
         If Tipo = 1 Then ' fichero ACEITUNC.TXT
-            ImpReten = Mid(cad, 36, 11)
-            TotFactu = Mid(cad, 47, 11)
-            PorcReten = Mid(cad, 31, 5)
+            ImpReten = Mid(Cad, 36, 11)
+            TotFactu = Mid(Cad, 47, 11)
+            PorcReten = Mid(Cad, 31, 5)
         End If
         
         TipoIVA = ""
@@ -1436,67 +1436,67 @@ Dim BaseReten As Currency
         If Tipo = 1 Then ' fichero ACEITUNC.TXT
              
              'CABECERA DE FACTURA
-             Sql = "insert into rfactsoc (`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-             Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,"
-             Sql = Sql & "`basereten`,`porc_ret`,`impreten`,`baseaport`,`porc_apo`,"
-             Sql = Sql & "`impapor`,`totalfac`,`impreso`,`contabilizado`,`pasaridoc`,"
-             Sql = Sql & "`esanticipogasto`) values ("
-             Sql = Sql & DBSet(CodTipom, "T") & ","
-             Sql = Sql & DBSet(Factura, "N") & ","
-             Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
-             Sql = Sql & DBSet(Socio, "N") & ","
-             Sql = Sql & DBSet(Base, "N") & ","
-             Sql = Sql & DBSet(TipoIVA, "N") & "," ' tipo de iva
-             Sql = Sql & DBSet(PorcIva, "N") & "," ' porcentaje iva
-             Sql = Sql & DBSet(iva, "N") & "," ' importe iva
-             Sql = Sql & DBSet(TipoIRPF, "N") & "," ' tipo irfpf
-             Sql = Sql & DBSet(BaseReten, "N", "S") & "," ' base de retencion
-             Sql = Sql & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
-             Sql = Sql & DBSet(ImpReten, "N", "S") & ","
-             Sql = Sql & ValorNulo & "," ' base de aportacion
-             Sql = Sql & ValorNulo & "," ' porcentaje de aportacion
-             Sql = Sql & ValorNulo & "," ' importe de aportacion
-             Sql = Sql & DBSet(TotFactu, "N") & "," ' total factura
-             Sql = Sql & "0,1,0,0) " ' se introduce como contabilizada
+             SQL = "insert into rfactsoc (`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+             SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,"
+             SQL = SQL & "`basereten`,`porc_ret`,`impreten`,`baseaport`,`porc_apo`,"
+             SQL = SQL & "`impapor`,`totalfac`,`impreso`,`contabilizado`,`pasaridoc`,"
+             SQL = SQL & "`esanticipogasto`) values ("
+             SQL = SQL & DBSet(CodTipom, "T") & ","
+             SQL = SQL & DBSet(Factura, "N") & ","
+             SQL = SQL & DBSet(txtcodigo(2).Text, "F") & ","
+             SQL = SQL & DBSet(Socio, "N") & ","
+             SQL = SQL & DBSet(Base, "N") & ","
+             SQL = SQL & DBSet(TipoIVA, "N") & "," ' tipo de iva
+             SQL = SQL & DBSet(PorcIva, "N") & "," ' porcentaje iva
+             SQL = SQL & DBSet(iva, "N") & "," ' importe iva
+             SQL = SQL & DBSet(TipoIRPF, "N") & "," ' tipo irfpf
+             SQL = SQL & DBSet(BaseReten, "N", "S") & "," ' base de retencion
+             SQL = SQL & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
+             SQL = SQL & DBSet(ImpReten, "N", "S") & ","
+             SQL = SQL & ValorNulo & "," ' base de aportacion
+             SQL = SQL & ValorNulo & "," ' porcentaje de aportacion
+             SQL = SQL & ValorNulo & "," ' importe de aportacion
+             SQL = SQL & DBSet(TotFactu, "N") & "," ' total factura
+             SQL = SQL & "0,1,0,0) " ' se introduce como contabilizada
              
-             conn.Execute Sql
+             conn.Execute SQL
         
         
             'VARIEDAD DE FACTURA
-            SQL1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N") & " and "
-            SQL1 = SQL1 & " codvarie = " & DBSet(txtcodigo(0).Text, "N") & " and fecbajas is null "
+            Sql1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N") & " and "
+            Sql1 = Sql1 & " codvarie = " & DBSet(txtcodigo(0).Text, "N") & " and fecbajas is null "
             
-            campo = DevuelveValor(SQL1)
+            campo = DevuelveValor(Sql1)
             
-            Sql = "insert into temprfactsoc_variedad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
-            Sql = Sql & "kilosnet, preciomed, imporvar, descontado) values ("
-            Sql = Sql & DBSet(CodTipom, "T") & ","
-            Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtcodigo(0).Text, "N") & ","
-            Sql = Sql & DBSet(campo, "N") & "," 'campo
-            Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
-            Sql = Sql & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
-            Sql = Sql & DBSet(ImporteVar, "N") & ",0)" ' importe y no descontado
+            SQL = "insert into temprfactsoc_variedad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
+            SQL = SQL & "kilosnet, preciomed, imporvar, descontado) values ("
+            SQL = SQL & DBSet(CodTipom, "T") & ","
+            SQL = SQL & DBSet(Factura, "N") & ","
+            SQL = SQL & DBSet(txtcodigo(2).Text, "F") & ","
+            SQL = SQL & DBSet(txtcodigo(0).Text, "N") & ","
+            SQL = SQL & DBSet(campo, "N") & "," 'campo
+            SQL = SQL & DBSet(CantidadVar, "N") & "," 'kilos
+            SQL = SQL & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
+            SQL = SQL & DBSet(ImporteVar, "N") & ",0)" ' importe y no descontado
             
-            conn.Execute Sql
+            conn.Execute SQL
         
             Calidad = CalidadPrimera(txtcodigo(0).Text)
             
             'CALIDAD DE FACTURA
-            Sql = "insert into temprfactsoc_calidad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
-            Sql = Sql & "codcalid, kilosnet, precio, imporcal) values ("
-            Sql = Sql & DBSet(CodTipom, "T") & ","
-            Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtcodigo(0).Text, "N") & ","
-            Sql = Sql & DBSet(campo, "N") & "," 'campo
-            Sql = Sql & DBSet(Calidad, "N") & "," ' calidad: ponemos la calidad primera
-            Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
-            Sql = Sql & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
-            Sql = Sql & DBSet(ImporteVar, "N") & ")" ' importe y no descontado
+            SQL = "insert into temprfactsoc_calidad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
+            SQL = SQL & "codcalid, kilosnet, precio, imporcal) values ("
+            SQL = SQL & DBSet(CodTipom, "T") & ","
+            SQL = SQL & DBSet(Factura, "N") & ","
+            SQL = SQL & DBSet(txtcodigo(2).Text, "F") & ","
+            SQL = SQL & DBSet(txtcodigo(0).Text, "N") & ","
+            SQL = SQL & DBSet(campo, "N") & "," 'campo
+            SQL = SQL & DBSet(Calidad, "N") & "," ' calidad: ponemos la calidad primera
+            SQL = SQL & DBSet(CantidadVar, "N") & "," 'kilos
+            SQL = SQL & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
+            SQL = SQL & DBSet(ImporteVar, "N") & ")" ' importe y no descontado
             
-            conn.Execute Sql
+            conn.Execute SQL
         
             CantidadVar = 0
             ImporteVar = 0
@@ -1515,25 +1515,25 @@ Dim BaseReten As Currency
         End If
         
         ' insertamos cabecera de factura de almazara
-        Sql = "insert into rcabfactalmz (tipofichero, numfactu, fecfactu, codsocio, baseimpo, tipoiva, "
-        Sql = Sql & "porc_iva, imporiva, tipoirpf, basereten, porc_ret, impreten, totalfac, impreso, "
-        Sql = Sql & "contabilizado) values ("
-        Sql = Sql & DBSet(Tipo, "N") & ","
-        Sql = Sql & DBSet(Factura, "N") & ","
-        Sql = Sql & DBSet(Fecha, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & ","
-        Sql = Sql & DBSet(Base, "N") & ","
-        Sql = Sql & DBSet(TipoIVA, "N") & "," ' tipo iva
-        Sql = Sql & DBSet(PorcIva, "N") & "," 'porcentaje iva
-        Sql = Sql & DBSet(iva, "N") & "," ' importe iva
-        Sql = Sql & DBSet(TipoIRPF, "N") & "," ' tipo irpf
-        Sql = Sql & DBSet(BaseReten, "N", "S") & "," ' base de retencion
-        Sql = Sql & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
-        Sql = Sql & DBSet(ImpReten, "N", "S") & "," 'importe de retencion
-        Sql = Sql & DBSet(TotFactu, "N") & "," 'total factura
-        Sql = Sql & "0,0)" ' impreso y contabilizado
+        SQL = "insert into rcabfactalmz (tipofichero, numfactu, fecfactu, codsocio, baseimpo, tipoiva, "
+        SQL = SQL & "porc_iva, imporiva, tipoirpf, basereten, porc_ret, impreten, totalfac, impreso, "
+        SQL = SQL & "contabilizado) values ("
+        SQL = SQL & DBSet(Tipo, "N") & ","
+        SQL = SQL & DBSet(Factura, "N") & ","
+        SQL = SQL & DBSet(Fecha, "F") & ","
+        SQL = SQL & DBSet(Socio, "N") & ","
+        SQL = SQL & DBSet(Base, "N") & ","
+        SQL = SQL & DBSet(TipoIVA, "N") & "," ' tipo iva
+        SQL = SQL & DBSet(PorcIva, "N") & "," 'porcentaje iva
+        SQL = SQL & DBSet(iva, "N") & "," ' importe iva
+        SQL = SQL & DBSet(TipoIRPF, "N") & "," ' tipo irpf
+        SQL = SQL & DBSet(BaseReten, "N", "S") & "," ' base de retencion
+        SQL = SQL & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
+        SQL = SQL & DBSet(ImpReten, "N", "S") & "," 'importe de retencion
+        SQL = SQL & DBSet(TotFactu, "N") & "," 'total factura
+        SQL = SQL & "0,0)" ' impreso y contabilizado
         
-        conn.Execute Sql
+        conn.Execute SQL
         
     End If
     
@@ -1548,53 +1548,53 @@ End Function
 
 Private Function CrearTMPlineas() As Boolean
 ' temporales de lineas para insertar posteriormente en rfactsoc_variedad y rfactsoc_calidad
-Dim Sql As String
+Dim SQL As String
     
     On Error GoTo ECrear
     
     CrearTMPlineas = False
     
     'rfactsoc_variedad
-    Sql = "CREATE TEMPORARY TABLE temprfactsoc_variedad ( "
-    Sql = Sql & "`codtipom` char(3) NOT NULL ,"
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
-    Sql = Sql & "`fecfactu` date NOT NULL,"
-    Sql = Sql & "`codvarie` int(6) NOT NULL,"
-    Sql = Sql & "`codcampo` int(8) unsigned NOT NULL,"
-    Sql = Sql & "`kilosnet` int(6) NOT NULL,"
-    Sql = Sql & "`preciomed` decimal(6,4) NOT NULL,"
-    Sql = Sql & "`imporvar` decimal(8,2) NOT NULL,"
-    Sql = Sql & "`descontado` tinyint(1) NOT NULL default '0')"
+    SQL = "CREATE TEMPORARY TABLE temprfactsoc_variedad ( "
+    SQL = SQL & "`codtipom` char(3) NOT NULL ,"
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL,"
+    SQL = SQL & "`fecfactu` date NOT NULL,"
+    SQL = SQL & "`codvarie` int(6) NOT NULL,"
+    SQL = SQL & "`codcampo` int(8) unsigned NOT NULL,"
+    SQL = SQL & "`kilosnet` int(6) NOT NULL,"
+    SQL = SQL & "`preciomed` decimal(6,4) NOT NULL,"
+    SQL = SQL & "`imporvar` decimal(8,2) NOT NULL,"
+    SQL = SQL & "`descontado` tinyint(1) NOT NULL default '0')"
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     'rfactsoc_calidad
-    Sql = "CREATE TEMPORARY  TABLE temprfactsoc_calidad ( "
-    Sql = Sql & "`codtipom` char(3),"
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
-    Sql = Sql & "`fecfactu` date NOT NULL,"
-    Sql = Sql & "`codvarie` int(6) NOT NULL,"
-    Sql = Sql & "`codcampo` int(8) unsigned NOT NULL,"
-    Sql = Sql & "`codcalid` smallint(2) NOT NULL,"
-    Sql = Sql & "`kilosnet` int(6) NOT NULL,"
-    Sql = Sql & "`precio` decimal(6,4) NOT NULL,"
-    Sql = Sql & "`imporcal` decimal(8,2) NOT NULL)"
+    SQL = "CREATE TEMPORARY  TABLE temprfactsoc_calidad ( "
+    SQL = SQL & "`codtipom` char(3),"
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL,"
+    SQL = SQL & "`fecfactu` date NOT NULL,"
+    SQL = SQL & "`codvarie` int(6) NOT NULL,"
+    SQL = SQL & "`codcampo` int(8) unsigned NOT NULL,"
+    SQL = SQL & "`codcalid` smallint(2) NOT NULL,"
+    SQL = SQL & "`kilosnet` int(6) NOT NULL,"
+    SQL = SQL & "`precio` decimal(6,4) NOT NULL,"
+    SQL = SQL & "`imporcal` decimal(8,2) NOT NULL)"
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     ' si es liquidacion venta campo o no se insertaran en los anticipos
-    Sql = "CREATE TEMPORARY  TABLE tmprlinfactalmz ( "
-    Sql = Sql & "`tipofichero` tinyint(1) unsigned NOT NULL, "
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL, "
-    Sql = Sql & "`fecfactu` date NOT NULL, "
-    Sql = Sql & "`codsocio` int(6) unsigned NOT NULL,"
-    Sql = Sql & "`numlinea` smallint(4) unsigned NOT NULL,"
-    Sql = Sql & "`concepto` varchar(40) NOT NULL,"
-    Sql = Sql & "`cantidad` int(7) NOT NULL,"
-    Sql = Sql & "`precioar` decimal(8,4) NOT NULL,"
-    Sql = Sql & "`importel` decimal(8,2) NOT NULL) "
+    SQL = "CREATE TEMPORARY  TABLE tmprlinfactalmz ( "
+    SQL = SQL & "`tipofichero` tinyint(1) unsigned NOT NULL, "
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL, "
+    SQL = SQL & "`fecfactu` date NOT NULL, "
+    SQL = SQL & "`codsocio` int(6) unsigned NOT NULL,"
+    SQL = SQL & "`numlinea` smallint(4) unsigned NOT NULL,"
+    SQL = SQL & "`concepto` varchar(40) NOT NULL,"
+    SQL = SQL & "`cantidad` int(7) NOT NULL,"
+    SQL = SQL & "`precioar` decimal(8,4) NOT NULL,"
+    SQL = SQL & "`importel` decimal(8,2) NOT NULL) "
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     CrearTMPlineas = True
     
@@ -1602,12 +1602,12 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMPlineas = False
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmprlinfactalmz;"
-        conn.Execute Sql
-        Sql = " DROP TABLE IF EXISTS temprfactsoc_variedad;"
-        conn.Execute Sql
-        Sql = " DROP TABLE IF EXISTS temprfactsoc_calidad;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmprlinfactalmz;"
+        conn.Execute SQL
+        SQL = " DROP TABLE IF EXISTS temprfactsoc_variedad;"
+        conn.Execute SQL
+        SQL = " DROP TABLE IF EXISTS temprfactsoc_calidad;"
+        conn.Execute SQL
     End If
 End Function
 
@@ -1625,8 +1625,8 @@ End Sub
 
 
 Private Function InsertarTemporales() As Boolean
-Dim Sql As String
-Dim SQL1 As String
+Dim SQL As String
+Dim Sql1 As String
 
 
 Dim vSocio As cSocio
@@ -1641,19 +1641,19 @@ Dim PorcIva As String
     
     InsertarTemporales = False
         
-    Sql = "insert into rfactsoc_variedad (codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado) "
-    Sql = Sql & " select codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado from temprfactsoc_variedad "
+    SQL = "insert into rfactsoc_variedad (codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado) "
+    SQL = SQL & " select codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado from temprfactsoc_variedad "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
-    Sql = Sql & " select codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal from temprfactsoc_calidad "
+    SQL = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
+    SQL = SQL & " select codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal from temprfactsoc_calidad "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into rlinfactalmz (tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel) "
-    Sql = Sql & " select tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel from tmprlinfactalmz "
-    conn.Execute Sql
+    SQL = "insert into rlinfactalmz (tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel) "
+    SQL = SQL & " select tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel from tmprlinfactalmz "
+    conn.Execute SQL
     
     InsertarTemporales = True
     Exit Function
