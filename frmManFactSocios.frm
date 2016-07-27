@@ -28,21 +28,22 @@ Begin VB.Form frmManFactSocios
       _ExtentY        =   7805
       _Version        =   393216
       Tabs            =   5
-      Tab             =   3
+      Tab             =   1
       TabsPerRow      =   5
       TabHeight       =   520
       ForeColor       =   12582912
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0)=   "Frame3"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2)=   "FrameAnticipos"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameGastos"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Albaranes"
       TabPicture(2)   =   "frmManFactSocios.frx":0044
@@ -51,7 +52,7 @@ Begin VB.Form frmManFactSocios
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Rectificativa"
       TabPicture(3)   =   "frmManFactSocios.frx":0060
-      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Frame6"
       Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
@@ -63,7 +64,7 @@ Begin VB.Form frmManFactSocios
       Begin VB.Frame Frame6 
          BorderStyle     =   0  'None
          Height          =   2085
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   123
          Top             =   780
          Width           =   8835
@@ -740,7 +741,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   3690
-         Left            =   -74865
+         Left            =   135
          TabIndex        =   71
          Top             =   360
          Width           =   9255
@@ -3364,7 +3365,7 @@ Dim vWhere As String
 Dim anc As Single
 Dim J As Byte
 
-    On Error GoTo EModificarLinea
+    On Error GoTo eModificarLinea
 
 
 '     'solo se puede modificar la factura si no esta contabilizada
@@ -3434,7 +3435,7 @@ Dim J As Byte
 
 
     
-EModificarLinea:
+eModificarLinea:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
 
@@ -4186,6 +4187,8 @@ Private Sub mnVerTodos_Click()
 End Sub
 
 
+
+
 Private Sub Text1_Change(Index As Integer)
 '    If Index = 9 Then HaCambiadoCP = True 'Cod. Postal
 End Sub
@@ -4359,7 +4362,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -4520,7 +4523,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Byte, Numreg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 Dim b1 As Boolean
 
@@ -4556,11 +4559,11 @@ Dim b1 As Boolean
     
     
     'Poner Flechas de desplazamiento visibles
-    Numreg = 1
+    NumReg = 1
     If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then Numreg = 2 'Solo es para saber q hay + de 1 registro
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, Numreg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
           
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -4816,7 +4819,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
                         frmLFac.Factura = Data3.Recordset.Fields(1).Value
                         frmLFac.fecfactu = Data3.Recordset.Fields(2).Value
                         frmLFac.Variedad = Data3.Recordset.Fields(3).Value
-                        frmLFac.Campo = Data3.Recordset.Fields(5).Value
+                        frmLFac.campo = Data3.Recordset.Fields(5).Value
                         frmLFac.Show vbModal
                         
                         Set frmLFac = Nothing
@@ -5705,7 +5708,7 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim CadParam As String
+Dim cadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
@@ -5722,7 +5725,7 @@ Dim EsComplemen As Byte
     End If
     
     cadFormula = ""
-    CadParam = ""
+    cadParam = ""
     cadSelect = ""
     numParam = 0
     
@@ -5781,7 +5784,7 @@ Dim EsComplemen As Byte
     End Select
     
     
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -5799,23 +5802,23 @@ Dim EsComplemen As Byte
     devuelve = "fecfactu = " & DBSet(Text1(1).Text, "F")
     If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
     
-    CadParam = CadParam & "pDuplicado=1|"
+    cadParam = cadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     If indRPT = 23 And vParamAplic.Cooperativa = 2 Then
         Dim PrecioApor As Double
         PrecioApor = DevuelveValor("select min(precio) from raporreparto")
         
-        CadParam = CadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
+        cadParam = cadParam & "pPrecioApor=""" & Replace(Format(PrecioApor, "#0.000000"), ",", ".") & """|"
         numParam = numParam + 1
     End If
     
     '[Monica]28/01/2014: preguntamos si quiere imprimir arrobas
     If vParamAplic.Cooperativa = 12 Then
         If MsgBox("¿ Desea impresión con Arrobas ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-            CadParam = CadParam & "pConArrobas=1|"
+            cadParam = cadParam & "pConArrobas=1|"
         Else
-            CadParam = CadParam & "pConArrobas=0|"
+            cadParam = cadParam & "pConArrobas=0|"
         End If
         numParam = numParam + 1
     End If
@@ -5824,9 +5827,9 @@ Dim EsComplemen As Byte
     If vParamAplic.Cooperativa = 4 Then
         If Text1(12).Text = "FAA" Then
             If MsgBox("¿ Desea impresión detallada por campos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                CadParam = CadParam & "pDetalle=1|"
+                cadParam = cadParam & "pDetalle=1|"
             Else
-                CadParam = CadParam & "pDetalle=0|"
+                cadParam = cadParam & "pDetalle=0|"
             End If
             numParam = numParam + 1
         End If
@@ -5842,7 +5845,7 @@ Dim EsComplemen As Byte
             .outTipoDocumento = 100
     
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = CadParam
+            .OtrosParametros = cadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False
@@ -5897,9 +5900,12 @@ Dim cadMen As String
                     End If
                     PonerFoco txtAux3(Index)
                 Else
-                    If Not EsGastodeFactura(txtAux3(Index).Text) = True Then
-                        MsgBox "Este concepto de gasto no es de factura. Reintroduzca.", vbExclamation
-                        PonerFoco txtAux3(Index)
+                    '[Monica]20/07/2016: el gasto puede no ser de factura
+                    If vParamAplic.Cooperativa <> 0 Then
+                        If Not EsGastodeFactura(txtAux3(Index).Text) = True Then
+                            MsgBox "Este concepto de gasto no es de factura. Reintroduzca.", vbExclamation
+                            PonerFoco txtAux3(Index)
+                        End If
                     End If
                 End If
             Else
@@ -6176,7 +6182,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -6198,7 +6204,7 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case NumTabMto
-        Case 1: vTabla = "rfactsoc_gastos"
+        Case 1: vtabla = "rfactsoc_gastos"
     End Select
     ' ********************************************************
     
@@ -6208,7 +6214,7 @@ Dim i As Integer
         Case 1 ' *** pose els index dels tabs de llínies que tenen datagrid ***
 '             *** canviar la clau primaria de les llínies,
 '            pasar a "" si no volem que mos sugerixca res a l'afegir ***
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 '             ***************************************************************
 
             AnyadirLinea DataGrid4, Data5
@@ -6289,7 +6295,7 @@ Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim RS As ADODB.Recordset
 Dim SQL As String
 Dim b As Boolean
-Dim cant As Integer
+Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
 
@@ -6396,7 +6402,7 @@ Private Sub CalculoTotales()
 Dim Base As Currency
 Dim Tiva As Currency
 Dim PorIva As Currency
-Dim ImpIVA As Currency
+Dim impiva As Currency
 Dim BaseReten As Currency
 Dim BaseAFO As Currency
 Dim PorRet As Currency
@@ -6408,11 +6414,11 @@ Dim TotFac As Currency
     
     Base = CCur(ComprobarCero(Text1(5).Text))
     PorIva = CCur(ComprobarCero(Text1(4).Text))
-    ImpIVA = Round2(Base * PorIva / 100, 2)
+    impiva = Round2(Base * PorIva / 100, 2)
     
     Select Case Combo1(1).ListIndex
         Case 0
-            BaseReten = Base + ImpIVA
+            BaseReten = Base + impiva
         Case 1
             BaseReten = Base
         Case 2
@@ -6436,15 +6442,15 @@ Dim TotFac As Currency
         PorAFO = CCur(ComprobarCero(Text1(13).Text))
         ImpAFO = Round2(BaseAFO * PorAFO / 100, 2)
     
-        TotFac = Base + ImpIVA - ImpRet - ImpAFO
+        TotFac = Base + impiva - ImpRet - ImpAFO
     Else
-        TotFac = Base + ImpIVA - ImpRet
+        TotFac = Base + impiva - ImpRet
     End If
 
-    If ImpIVA = 0 Then
+    If impiva = 0 Then
         Text1(6).Text = "0"
     Else
-        Text1(6).Text = Format(ImpIVA, "###,##0.00")
+        Text1(6).Text = Format(impiva, "###,##0.00")
     End If
     
     If BaseReten = 0 Then
@@ -6586,7 +6592,7 @@ End Sub
 
 Private Function AsignarAlbaranes() As Boolean
 Dim SQL As String
-Dim cadwhere As String
+Dim cadWHERE As String
 
 
     On Error GoTo eAsignaAlbaranes
@@ -6597,15 +6603,15 @@ Dim cadwhere As String
     SQL = SQL & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
     SQL = SQL & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
-    cadwhere = "codsocio = " & DBSet(Text1(2).Text, "N")
-    cadwhere = cadwhere & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
-    cadwhere = cadwhere & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
+    cadWHERE = "codsocio = " & DBSet(Text1(2).Text, "N")
+    cadWHERE = cadWHERE & " and rhisfruta.codvarie in (select distinct codvarie from rfactsoc_variedad where codtipom = " & DBSet(Data1.Recordset!CodTipom, "T")
+    cadWHERE = cadWHERE & " and numfactu = " & Data1.Recordset!numfactu & " and fecfactu = " & DBSet(Data1.Recordset!fecfactu, "F") & ")"
     
     If TotalRegistrosConsulta(SQL) <> 0 Then
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 47
-        frmMens.cadwhere = cadwhere
+        frmMens.cadWHERE = cadWHERE
         
         frmMens.Show vbModal
         
