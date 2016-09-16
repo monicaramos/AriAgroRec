@@ -24,7 +24,7 @@ Begin VB.Form frmManCampos
       Height          =   1125
       Index           =   0
       Left            =   240
-      TabIndex        =   59
+      TabIndex        =   63
       Top             =   510
       Width           =   12735
       Begin VB.TextBox Text1 
@@ -45,7 +45,7 @@ Begin VB.Form frmManCampos
          Index           =   22
          Left            =   5400
          MaxLength       =   40
-         TabIndex        =   102
+         TabIndex        =   106
          Top             =   675
          Width           =   4995
       End
@@ -78,7 +78,7 @@ Begin VB.Form frmManCampos
          Index           =   1
          Left            =   5400
          MaxLength       =   40
-         TabIndex        =   81
+         TabIndex        =   85
          Top             =   315
          Width           =   4995
       End
@@ -97,7 +97,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Nº Orden"
          Height          =   255
          Left            =   270
-         TabIndex        =   104
+         TabIndex        =   108
          Top             =   660
          Width           =   1185
       End
@@ -105,7 +105,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Propietario"
          Height          =   255
          Left            =   3015
-         TabIndex        =   103
+         TabIndex        =   107
          Top             =   720
          Width           =   915
       End
@@ -129,7 +129,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Socio"
          Height          =   255
          Left            =   3015
-         TabIndex        =   61
+         TabIndex        =   65
          Top             =   360
          Width           =   870
       End
@@ -148,7 +148,7 @@ Begin VB.Form frmManCampos
          Height          =   255
          Index           =   0
          Left            =   270
-         TabIndex        =   60
+         TabIndex        =   64
          Top             =   315
          Width           =   1005
       End
@@ -157,7 +157,7 @@ Begin VB.Form frmManCampos
       Height          =   555
       Index           =   0
       Left            =   195
-      TabIndex        =   57
+      TabIndex        =   61
       Top             =   6660
       Width           =   2865
       Begin VB.Label lblIndicador 
@@ -174,7 +174,7 @@ Begin VB.Form frmManCampos
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   58
+         TabIndex        =   62
          Top             =   180
          Width           =   2655
       End
@@ -184,7 +184,7 @@ Begin VB.Form frmManCampos
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11910
-      TabIndex        =   56
+      TabIndex        =   60
       Top             =   6810
       Width           =   1035
    End
@@ -192,7 +192,7 @@ Begin VB.Form frmManCampos
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10800
-      TabIndex        =   55
+      TabIndex        =   59
       Top             =   6810
       Width           =   1035
    End
@@ -247,7 +247,7 @@ Begin VB.Form frmManCampos
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   63
+      TabIndex        =   67
       Top             =   0
       Width           =   13095
       _ExtentX        =   23098
@@ -361,7 +361,7 @@ Begin VB.Form frmManCampos
          Height          =   195
          Index           =   0
          Left            =   10440
-         TabIndex        =   64
+         TabIndex        =   68
          Top             =   120
          Width           =   1215
       End
@@ -370,7 +370,7 @@ Begin VB.Form frmManCampos
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11910
-      TabIndex        =   62
+      TabIndex        =   66
       Top             =   6810
       Visible         =   0   'False
       Width           =   1035
@@ -378,7 +378,7 @@ Begin VB.Form frmManCampos
    Begin TabDlg.SSTab SSTab1 
       Height          =   4890
       Left            =   240
-      TabIndex        =   65
+      TabIndex        =   69
       Top             =   1740
       Width           =   12765
       _ExtentX        =   22516
@@ -386,6 +386,7 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
+      Tab             =   1
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -400,64 +401,49 @@ Begin VB.Form frmManCampos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(26)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label28"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label29"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label6(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label5"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(2)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "imgBuscar(3)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label2"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "imgBuscar(13)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label36"
-      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Text5(0)"
+      Tab(0).Control(1)=   "Combo1(0)"
+      Tab(0).Control(2)=   "Text2(3)"
+      Tab(0).Control(3)=   "Text2(2)"
+      Tab(0).Control(4)=   "Text1(2)"
+      Tab(0).Control(5)=   "Text1(3)"
+      Tab(0).Control(6)=   "Text1(21)"
+      Tab(0).Control(7)=   "Text1(37)"
+      Tab(0).Control(8)=   "Text4(3)"
+      Tab(0).Control(9)=   "Text5(3)"
+      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text5(3)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text4(3)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text1(37)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(21)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Text1(3)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Text1(2)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(2)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text2(3)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Combo1(0)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text5(0)"
-      Tab(0).Control(22).Enabled=   0   'False
+      Tab(0).Control(12)=   "Label36"
+      Tab(0).Control(13)=   "imgBuscar(13)"
+      Tab(0).Control(14)=   "Label2"
+      Tab(0).Control(15)=   "imgBuscar(3)"
+      Tab(0).Control(16)=   "imgBuscar(2)"
+      Tab(0).Control(17)=   "Label5"
+      Tab(0).Control(18)=   "Label6(0)"
+      Tab(0).Control(19)=   "Label29"
+      Tab(0).Control(20)=   "imgZoom(0)"
+      Tab(0).Control(21)=   "Label28"
+      Tab(0).Control(22)=   "Label1(26)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame9"
-      Tab(1).Control(1)=   "Frame8"
-      Tab(1).Control(2)=   "Frame7"
-      Tab(1).Control(3)=   "Frame6"
-      Tab(1).Control(4)=   "Frame5"
-      Tab(1).Control(5)=   "Frame3"
-      Tab(1).ControlCount=   6
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Frame6"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "Frame7"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Frame10"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
       Tab(2).ControlEnabled=   0   'False
@@ -499,11 +485,105 @@ Begin VB.Form frmManCampos
       Tab(9).ControlEnabled=   0   'False
       Tab(9).Control(0)=   "FrameAux7"
       Tab(9).ControlCount=   1
+      Begin VB.Frame Frame10 
+         Caption         =   "Puntos"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   675
+         Left            =   150
+         TabIndex        =   257
+         Top             =   3270
+         Width           =   6915
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   47
+            Left            =   6270
+            MaxLength       =   2
+            TabIndex        =   47
+            Tag             =   "Puntos Estado Vegetativo|N|S|1|4|rcampos|ptosestadovege||#0|"
+            Top             =   240
+            Width           =   270
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   46
+            Left            =   4320
+            MaxLength       =   2
+            TabIndex        =   46
+            Tag             =   "Puntos Calibre|N|S|1|4|rcampos|ptoscalibre||#0|"
+            Top             =   240
+            Width           =   270
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   45
+            Left            =   3090
+            MaxLength       =   2
+            TabIndex        =   45
+            Tag             =   "Puntos Estado Fito|N|S|1|4|rcampos|ptosestadofito||#0|"
+            Top             =   240
+            Width           =   270
+         End
+         Begin VB.TextBox Text1 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   44
+            Left            =   960
+            MaxLength       =   2
+            TabIndex        =   44
+            Tag             =   "Puntos Calidad|N|S|1|4|rcampos|ptoscalidad||#0|"
+            Top             =   240
+            Width           =   270
+         End
+         Begin VB.Label Label49 
+            Caption         =   "Calibre"
+            Height          =   255
+            Left            =   3660
+            TabIndex        =   261
+            Top             =   270
+            Width           =   885
+         End
+         Begin VB.Label Label48 
+            Caption         =   "Estado Vegetativo"
+            Height          =   255
+            Left            =   4830
+            TabIndex        =   260
+            Top             =   270
+            Width           =   1515
+         End
+         Begin VB.Label Label47 
+            Caption         =   "Calidad"
+            Height          =   255
+            Left            =   210
+            TabIndex        =   259
+            Top             =   270
+            Width           =   1155
+         End
+         Begin VB.Label Label46 
+            Caption         =   "Estado Fitosanitario"
+            Height          =   255
+            Left            =   1530
+            TabIndex        =   258
+            Top             =   270
+            Width           =   1515
+         End
+      End
       Begin VB.Frame FrameAux7 
          BorderStyle     =   0  'None
          Height          =   3910
          Left            =   -74820
-         TabIndex        =   244
+         TabIndex        =   248
          Top             =   450
          Width           =   12450
          Begin VB.TextBox txtAux9 
@@ -511,7 +591,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   4
             Left            =   5700
-            TabIndex        =   250
+            TabIndex        =   254
             Tag             =   "Observaciones|T|S|||rcampos_revision|observac|||"
             Text            =   "Observac"
             Top             =   2910
@@ -525,7 +605,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1710
             MaxLength       =   10
-            TabIndex        =   248
+            TabIndex        =   252
             Tag             =   "Fecha|F|N|||rcampos_revision|fecha|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2910
@@ -538,7 +618,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   2850
             MaxLength       =   50
-            TabIndex        =   249
+            TabIndex        =   253
             Tag             =   "Tecnico|T|S|||rcampos_revision|tecnico|||"
             Text            =   "tecnico"
             Top             =   2910
@@ -552,7 +632,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   247
+            TabIndex        =   251
             Tag             =   "Linea|N|N|||rcampos_revision|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -566,7 +646,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   246
+            TabIndex        =   250
             Tag             =   "Campo|N|N|0|99999999|rcampos_revision|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -579,7 +659,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   12
             Left            =   2520
-            TabIndex        =   245
+            TabIndex        =   249
             ToolTipText     =   "Buscar fecha"
             Top             =   2880
             Visible         =   0   'False
@@ -589,7 +669,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   7
             Left            =   45
-            TabIndex        =   251
+            TabIndex        =   255
             Top             =   0
             Width           =   1590
             _ExtentX        =   2805
@@ -670,7 +750,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   7
             Left            =   45
-            TabIndex        =   252
+            TabIndex        =   256
             Top             =   450
             Width           =   12300
             _ExtentX        =   21696
@@ -758,16 +838,16 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -74850
-         TabIndex        =   219
-         Top             =   3930
+         Left            =   150
+         TabIndex        =   223
+         Top             =   3960
          Width           =   6915
          Begin VB.TextBox Text1 
             Height          =   285
             Index           =   43
             Left            =   5310
             MaxLength       =   10
-            TabIndex        =   45
+            TabIndex        =   49
             Tag             =   "Fecha Alta Programa Operativo|F|S|||rcampos|fecaltapropera|dd/mm/yyyy||"
             Top             =   240
             Width           =   1200
@@ -777,7 +857,7 @@ Begin VB.Form frmManCampos
             Index           =   40
             Left            =   1530
             MaxLength       =   4
-            TabIndex        =   44
+            TabIndex        =   48
             Tag             =   "%Comision sobre precio|N|S|||rcampos|dtoprecio|##0.00||"
             Top             =   240
             Width           =   675
@@ -795,7 +875,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Alta Programa Operativo"
             Height          =   255
             Left            =   2640
-            TabIndex        =   243
+            TabIndex        =   247
             Top             =   270
             Width           =   2235
          End
@@ -803,7 +883,7 @@ Begin VB.Form frmManCampos
             Caption         =   "% Comisión"
             Height          =   255
             Left            =   210
-            TabIndex        =   220
+            TabIndex        =   224
             Top             =   270
             Width           =   1155
          End
@@ -812,7 +892,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3910
          Left            =   -74820
-         TabIndex        =   207
+         TabIndex        =   211
          Top             =   450
          Width           =   12210
          Begin VB.CheckBox chkAux 
@@ -820,7 +900,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   1
             Left            =   7830
-            TabIndex        =   218
+            TabIndex        =   222
             Tag             =   "Contabilizado|N|N|0|1|rcampos_gastos|contabilizado|||"
             Top             =   2970
             Visible         =   0   'False
@@ -832,7 +912,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   10
             Left            =   6750
-            TabIndex        =   215
+            TabIndex        =   219
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -845,7 +925,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   213
+            TabIndex        =   217
             Tag             =   "Campo|N|N|0|99999999|rcampos_gastos|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -859,7 +939,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   211
+            TabIndex        =   215
             Tag             =   "Linea|N|N|||rcampos_gastos|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -872,7 +952,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   2
-            TabIndex        =   210
+            TabIndex        =   214
             Tag             =   "Concepto|N|S|||rcampos_gastos|codgasto|00||"
             Text            =   "Co"
             Top             =   2940
@@ -886,7 +966,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   6000
             MaxLength       =   10
-            TabIndex        =   212
+            TabIndex        =   216
             Tag             =   "Fecha|F|N|||rcampos_gastos|fecha|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2970
@@ -900,7 +980,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   6960
             MaxLength       =   10
-            TabIndex        =   214
+            TabIndex        =   218
             Tag             =   "Importe|N|N|||rcampos_gastos|importe|###,###,##0.00||"
             Text            =   "Importe"
             Top             =   2970
@@ -913,7 +993,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   9
             Left            =   2460
-            TabIndex        =   209
+            TabIndex        =   213
             ToolTipText     =   "Buscar concepto gasto"
             Top             =   2910
             Visible         =   0   'False
@@ -928,7 +1008,7 @@ Begin VB.Form frmManCampos
             Left            =   2700
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   208
+            TabIndex        =   212
             Text            =   "Nombre concepto"
             Top             =   2940
             Visible         =   0   'False
@@ -938,7 +1018,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   5
             Left            =   45
-            TabIndex        =   216
+            TabIndex        =   220
             Top             =   0
             Width           =   1710
             _ExtentX        =   3016
@@ -1020,7 +1100,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   5
             Left            =   45
-            TabIndex        =   217
+            TabIndex        =   221
             Top             =   450
             Width           =   9120
             _ExtentX        =   16087
@@ -1100,8 +1180,8 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -67740
-         TabIndex        =   203
+         Left            =   7260
+         TabIndex        =   207
          Top             =   3960
          Width           =   5265
          Begin VB.TextBox Text1 
@@ -1109,7 +1189,7 @@ Begin VB.Form frmManCampos
             Index           =   39
             Left            =   1170
             MaxLength       =   4
-            TabIndex        =   205
+            TabIndex        =   209
             Tag             =   "Codigo Cliente|N|S|||rcampos|codclien|||"
             Top             =   240
             Width           =   675
@@ -1120,7 +1200,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   39
             Left            =   1890
-            TabIndex        =   204
+            TabIndex        =   208
             Top             =   240
             Width           =   3180
          End
@@ -1128,7 +1208,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Código"
             Height          =   255
             Left            =   330
-            TabIndex        =   206
+            TabIndex        =   210
             Top             =   270
             Width           =   525
          End
@@ -1154,9 +1234,9 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -67740
-         TabIndex        =   200
-         Top             =   3240
+         Left            =   7260
+         TabIndex        =   204
+         Top             =   3270
          Width           =   5265
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -1164,7 +1244,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   38
             Left            =   1890
-            TabIndex        =   202
+            TabIndex        =   206
             Top             =   240
             Width           =   3180
          End
@@ -1173,7 +1253,7 @@ Begin VB.Form frmManCampos
             Index           =   38
             Left            =   1170
             MaxLength       =   4
-            TabIndex        =   54
+            TabIndex        =   58
             Tag             =   "Codigo GlobalGap|T|S|||rcampos|codigoggap|||"
             Top             =   240
             Width           =   675
@@ -1190,7 +1270,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Código"
             Height          =   255
             Left            =   330
-            TabIndex        =   201
+            TabIndex        =   205
             Top             =   270
             Width           =   555
          End
@@ -1199,7 +1279,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3930
          Left            =   -74820
-         TabIndex        =   184
+         TabIndex        =   188
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtAux2 
@@ -1211,7 +1291,7 @@ Begin VB.Form frmManCampos
             Left            =   2700
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   198
+            TabIndex        =   202
             Text            =   "Nombre socio"
             Top             =   2940
             Visible         =   0   'False
@@ -1223,7 +1303,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   8
             Left            =   2460
-            TabIndex        =   197
+            TabIndex        =   201
             ToolTipText     =   "Buscar socio"
             Top             =   2910
             Visible         =   0   'False
@@ -1236,7 +1316,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   6960
             MaxLength       =   10
-            TabIndex        =   193
+            TabIndex        =   197
             Tag             =   "Fecha Baja|F|S|||rcampos_hco|fechabaja|dd/mm/yyyy||"
             Text            =   "Fec.Baja"
             Top             =   2940
@@ -1250,7 +1330,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   6000
             MaxLength       =   10
-            TabIndex        =   192
+            TabIndex        =   196
             Tag             =   "Fecha Alta|F|N|||rcampos_hco|fechaalta|dd/mm/yyyy||"
             Text            =   "Fec.Alta"
             Top             =   2940
@@ -1264,7 +1344,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   7
-            TabIndex        =   191
+            TabIndex        =   195
             Tag             =   "Socio|N|S|||rcampos_hco|codsocio|000000||"
             Text            =   "Socio"
             Top             =   2940
@@ -1278,7 +1358,7 @@ Begin VB.Form frmManCampos
             Index           =   5
             Left            =   7980
             MaxLength       =   4
-            TabIndex        =   194
+            TabIndex        =   198
             Tag             =   "Incidencia|N|S|||rcampos_hco|codincid|0000||"
             Text            =   "In"
             Top             =   2940
@@ -1292,7 +1372,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   190
+            TabIndex        =   194
             Tag             =   "Linea|N|N|||rcampos_hco|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -1306,7 +1386,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   189
+            TabIndex        =   193
             Tag             =   "Campo|N|N|0|99999999|rcampos_hco|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -1322,7 +1402,7 @@ Begin VB.Form frmManCampos
             Left            =   8820
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   188
+            TabIndex        =   192
             Text            =   "Nombre incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1334,7 +1414,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   7
             Left            =   8580
-            TabIndex        =   187
+            TabIndex        =   191
             ToolTipText     =   "Buscar incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1346,7 +1426,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   6
             Left            =   6750
-            TabIndex        =   186
+            TabIndex        =   190
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1358,7 +1438,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   5
             Left            =   7740
-            TabIndex        =   185
+            TabIndex        =   189
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1368,7 +1448,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   4
             Left            =   45
-            TabIndex        =   195
+            TabIndex        =   199
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -1446,7 +1526,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   4
             Left            =   45
-            TabIndex        =   196
+            TabIndex        =   200
             Top             =   450
             Width           =   10710
             _ExtentX        =   18891
@@ -1518,9 +1598,9 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   0
-         Left            =   4050
+         Left            =   -70950
          MaxLength       =   30
-         TabIndex        =   182
+         TabIndex        =   186
          Top             =   1920
          Width           =   1530
       End
@@ -1528,7 +1608,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3930
          Left            =   -74820
-         TabIndex        =   166
+         TabIndex        =   170
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtaux5 
@@ -1538,7 +1618,7 @@ Begin VB.Form frmManCampos
             Index           =   7
             Left            =   7800
             MaxLength       =   7
-            TabIndex        =   172
+            TabIndex        =   176
             Tag             =   "Kilos Aportacion|N|S|||rcampos_seguros|kilosaportacion|###,##0||"
             Text            =   "Kilos A"
             Top             =   2970
@@ -1551,7 +1631,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   4
             Left            =   10170
-            TabIndex        =   180
+            TabIndex        =   184
             ToolTipText     =   "Buscar fecha"
             Top             =   2970
             Visible         =   0   'False
@@ -1562,7 +1642,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   0
             Left            =   10470
-            TabIndex        =   175
+            TabIndex        =   179
             Tag             =   "Siniestro|N|N|0|1|rcampos_seguros|essiniestro|||"
             Top             =   3000
             Visible         =   0   'False
@@ -1574,7 +1654,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   3
             Left            =   2430
-            TabIndex        =   179
+            TabIndex        =   183
             ToolTipText     =   "Buscar fecha"
             Top             =   2940
             Visible         =   0   'False
@@ -1586,7 +1666,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   2
             Left            =   3390
-            TabIndex        =   178
+            TabIndex        =   182
             ToolTipText     =   "Buscar incidencia"
             Top             =   2910
             Visible         =   0   'False
@@ -1601,7 +1681,7 @@ Begin VB.Form frmManCampos
             Left            =   3600
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   181
+            TabIndex        =   185
             Text            =   "Nombre incidencia"
             Top             =   2940
             Visible         =   0   'False
@@ -1614,7 +1694,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   167
+            TabIndex        =   171
             Tag             =   "Campo|N|N|0|99999999|rcampos_seguros|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -1628,7 +1708,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   168
+            TabIndex        =   172
             Tag             =   "Linea|N|N|||rcampos_seguros|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -1642,7 +1722,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   2640
             MaxLength       =   4
-            TabIndex        =   170
+            TabIndex        =   174
             Tag             =   "Incidencia|N|S|||rcampos_seguros|codincid|0000||"
             Text            =   "In"
             Top             =   2940
@@ -1656,7 +1736,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   6990
             MaxLength       =   7
-            TabIndex        =   171
+            TabIndex        =   175
             Tag             =   "Kilos Indemniz.|N|S|||rcampos_seguros|kilos|###,##0||"
             Text            =   "Kilos"
             Top             =   2970
@@ -1670,7 +1750,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   10
-            TabIndex        =   169
+            TabIndex        =   173
             Tag             =   "Fecha|F|N|||rcampos_seguros|fecha|dd/mm/yyyy||"
             Text            =   "Fec"
             Top             =   2940
@@ -1684,7 +1764,7 @@ Begin VB.Form frmManCampos
             Index           =   5
             Left            =   8580
             MaxLength       =   13
-            TabIndex        =   173
+            TabIndex        =   177
             Tag             =   "Importe|N|S|||rcampos_seguros|importe|##,###,##0.00||"
             Text            =   "Importe"
             Top             =   2970
@@ -1698,7 +1778,7 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   9390
             MaxLength       =   10
-            TabIndex        =   174
+            TabIndex        =   178
             Tag             =   "Fecha Pago|F|S|||rcampos_seguros|fechapago|dd/mm/yyyy||"
             Text            =   "Fec.Pago"
             Top             =   2970
@@ -1709,7 +1789,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   3
             Left            =   45
-            TabIndex        =   176
+            TabIndex        =   180
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -1787,7 +1867,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   3
             Left            =   45
-            TabIndex        =   177
+            TabIndex        =   181
             Top             =   450
             Width           =   12120
             _ExtentX        =   21378
@@ -1867,9 +1947,9 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1305
-         Left            =   -67740
-         TabIndex        =   161
-         Top             =   1920
+         Left            =   7260
+         TabIndex        =   165
+         Top             =   1950
          Width           =   5235
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -1877,7 +1957,7 @@ Begin VB.Form frmManCampos
             Index           =   36
             Left            =   1650
             MaxLength       =   6
-            TabIndex        =   51
+            TabIndex        =   55
             Tag             =   "Kg.Seguro|N|S|0|999999|rcampos|kilosaseant|###,###||"
             Top             =   450
             Width           =   1305
@@ -1887,7 +1967,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   5
             Left            =   330
-            TabIndex        =   50
+            TabIndex        =   54
             Tag             =   "Seguro|N|N|||rcampos|aseguradoant||N|"
             Top             =   240
             Width           =   915
@@ -1898,7 +1978,7 @@ Begin VB.Form frmManCampos
             Index           =   35
             Left            =   3420
             MaxLength       =   13
-            TabIndex        =   52
+            TabIndex        =   56
             Tag             =   "Importe.Seguro|N|S|||rcampos|costeseguroant|##,###,##0.00||"
             Top             =   450
             Width           =   1275
@@ -1908,7 +1988,7 @@ Begin VB.Form frmManCampos
             Index           =   34
             Left            =   360
             MaxLength       =   2
-            TabIndex        =   53
+            TabIndex        =   57
             Tag             =   "Seguro Opcion|T|S|||rcampos|codseguroant|||"
             Top             =   870
             Width           =   735
@@ -1919,7 +1999,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   34
             Left            =   1140
-            TabIndex        =   162
+            TabIndex        =   166
             Top             =   870
             Width           =   3540
          End
@@ -1928,7 +2008,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   4
             Left            =   1650
-            TabIndex        =   165
+            TabIndex        =   169
             Top             =   180
             Width           =   735
          End
@@ -1937,7 +2017,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   3
             Left            =   3420
-            TabIndex        =   164
+            TabIndex        =   168
             Top             =   180
             Width           =   735
          End
@@ -1953,7 +2033,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Opción"
             Height          =   255
             Left            =   360
-            TabIndex        =   163
+            TabIndex        =   167
             Top             =   600
             Width           =   555
          End
@@ -1962,7 +2042,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   4200
          Left            =   -74820
-         TabIndex        =   145
+         TabIndex        =   149
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtAux2 
@@ -1972,7 +2052,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   13
             Left            =   10080
-            TabIndex        =   232
+            TabIndex        =   236
             Top             =   30
             Width           =   1600
          End
@@ -1983,7 +2063,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   9
             Left            =   10080
-            TabIndex        =   226
+            TabIndex        =   230
             Top             =   3720
             Width           =   1600
          End
@@ -1994,7 +2074,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   8
             Left            =   8460
-            TabIndex        =   224
+            TabIndex        =   228
             Top             =   3720
             Width           =   1600
          End
@@ -2005,7 +2085,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   6
             Left            =   5220
-            TabIndex        =   223
+            TabIndex        =   227
             Top             =   3720
             Width           =   1600
          End
@@ -2016,7 +2096,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   7
             Left            =   6840
-            TabIndex        =   222
+            TabIndex        =   226
             Top             =   3720
             Width           =   1600
          End
@@ -2027,7 +2107,7 @@ Begin VB.Form frmManCampos
             Index           =   10
             Left            =   9990
             MaxLength       =   10
-            TabIndex        =   158
+            TabIndex        =   162
             Tag             =   "Sup.Cult Catas|N|N|0|9999.9999|rcampos_parcelas|supcultcatas|###0.0000||"
             Text            =   "Sup.Cult C"
             Top             =   2970
@@ -2041,7 +2121,7 @@ Begin VB.Form frmManCampos
             Index           =   9
             Left            =   8400
             MaxLength       =   10
-            TabIndex        =   157
+            TabIndex        =   161
             Tag             =   "Sup.Catas|N|N|0|9999.9999|rcampos_parcelas|supcatas|###0.0000||"
             Text            =   "Sup.Catas"
             Top             =   2970
@@ -2055,7 +2135,7 @@ Begin VB.Form frmManCampos
             Index           =   8
             Left            =   7260
             MaxLength       =   10
-            TabIndex        =   156
+            TabIndex        =   160
             Tag             =   "Sup.Cult Sigpac|N|N|0|9999.9999|rcampos_parcelas|supcultsigpa|###0.0000||"
             Text            =   "Sup.Sigpa"
             Top             =   2970
@@ -2069,7 +2149,7 @@ Begin VB.Form frmManCampos
             Index           =   7
             Left            =   6060
             MaxLength       =   10
-            TabIndex        =   155
+            TabIndex        =   159
             Tag             =   "Sup.Sigpac|N|N|0|9999.9999|rcampos_parcelas|supsigpa|###0.0000||"
             Text            =   "Sup.Sigpa"
             Top             =   2970
@@ -2083,7 +2163,7 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   5220
             MaxLength       =   6
-            TabIndex        =   154
+            TabIndex        =   158
             Tag             =   "Cod.SigpaC|N|S|0|999999|rcampos_parcelas|codsigpa|000000||"
             Text            =   "sig"
             Top             =   2970
@@ -2097,7 +2177,7 @@ Begin VB.Form frmManCampos
             Index           =   5
             Left            =   4350
             MaxLength       =   3
-            TabIndex        =   153
+            TabIndex        =   157
             Tag             =   "Recinto|N|N|0|999|rcampos_parcelas|recintos|000||"
             Text            =   "rec"
             Top             =   2970
@@ -2111,7 +2191,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1680
             MaxLength       =   3
-            TabIndex        =   150
+            TabIndex        =   154
             Tag             =   "Poligono|N|N|0|999|rcampos_parcelas|poligono|000||"
             Text            =   "pol"
             Top             =   2940
@@ -2125,7 +2205,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   2580
             MaxLength       =   6
-            TabIndex        =   151
+            TabIndex        =   155
             Tag             =   "Parcela|N|N|0|999999|rcampos_parcelas|parcela|000000||"
             Text            =   "par"
             Top             =   2940
@@ -2139,7 +2219,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   3420
             MaxLength       =   2
-            TabIndex        =   152
+            TabIndex        =   156
             Tag             =   "Subparcela|T|S|||rcampos_parcelas|subparce|||"
             Text            =   "su"
             Top             =   2940
@@ -2153,7 +2233,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   147
+            TabIndex        =   151
             Tag             =   "Linea|N|N|||rcampos_parcelas|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -2167,7 +2247,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   146
+            TabIndex        =   150
             Tag             =   "Campo|N|N|0|99999999|rcampos_parcelas|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -2178,7 +2258,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   2
             Left            =   45
-            TabIndex        =   148
+            TabIndex        =   152
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -2256,7 +2336,7 @@ Begin VB.Form frmManCampos
             Height          =   3195
             Index           =   2
             Left            =   45
-            TabIndex        =   149
+            TabIndex        =   153
             Top             =   450
             Width           =   11910
             _ExtentX        =   21008
@@ -2328,7 +2408,7 @@ Begin VB.Form frmManCampos
             Height          =   225
             Index           =   6
             Left            =   8520
-            TabIndex        =   233
+            TabIndex        =   237
             Top             =   60
             Width           =   1455
          End
@@ -2347,7 +2427,7 @@ Begin VB.Form frmManCampos
             Height          =   225
             Index           =   5
             Left            =   3930
-            TabIndex        =   225
+            TabIndex        =   229
             Top             =   3780
             Width           =   945
          End
@@ -2356,7 +2436,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   3930
          Left            =   -74820
-         TabIndex        =   135
+         TabIndex        =   139
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtaux1 
@@ -2367,7 +2447,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   5940
             MaxLength       =   6
-            TabIndex        =   141
+            TabIndex        =   145
             Tag             =   "Muestra|N|N|0|100|rcampos_clasif|muestra|##0.00||"
             Text            =   "muestr"
             Top             =   2970
@@ -2381,7 +2461,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   140
+            TabIndex        =   144
             Tag             =   "Variedad|N|N|||rcampos_clasif|codvarie|000000|N|"
             Text            =   "var"
             Top             =   2925
@@ -2395,7 +2475,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   139
+            TabIndex        =   143
             Tag             =   "Campo|N|N|1|99999999|rcampos_clasif|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -2409,7 +2489,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   1710
             MaxLength       =   3
-            TabIndex        =   138
+            TabIndex        =   142
             Tag             =   "Calidad|N|N|||rcampos_clasif|codcalid|00|S|"
             Text            =   "cal"
             Top             =   2925
@@ -2422,7 +2502,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   1
             Left            =   2385
-            TabIndex        =   137
+            TabIndex        =   141
             ToolTipText     =   "Buscar calidad"
             Top             =   2925
             Visible         =   0   'False
@@ -2437,7 +2517,7 @@ Begin VB.Form frmManCampos
             Left            =   2565
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   136
+            TabIndex        =   140
             Text            =   "Nombre calidad"
             Top             =   2925
             Visible         =   0   'False
@@ -2447,7 +2527,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   1
             Left            =   45
-            TabIndex        =   142
+            TabIndex        =   146
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -2525,7 +2605,7 @@ Begin VB.Form frmManCampos
             Height          =   3195
             Index           =   1
             Left            =   45
-            TabIndex        =   143
+            TabIndex        =   147
             Top             =   450
             Width           =   6450
             _ExtentX        =   11377
@@ -2595,7 +2675,7 @@ Begin VB.Form frmManCampos
             Height          =   3300
             Left            =   6750
             OleObjectBlob   =   "frmManCampos.frx":023F
-            TabIndex        =   144
+            TabIndex        =   148
             Top             =   450
             Width           =   5370
          End
@@ -2604,7 +2684,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Height          =   4230
          Left            =   -74820
-         TabIndex        =   126
+         TabIndex        =   130
          Top             =   450
          Width           =   12210
          Begin VB.TextBox txtAux2 
@@ -2616,7 +2696,7 @@ Begin VB.Form frmManCampos
             Left            =   2565
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   132
+            TabIndex        =   136
             Text            =   "Nombre socio"
             Top             =   2925
             Visible         =   0   'False
@@ -2628,7 +2708,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   0
             Left            =   2385
-            TabIndex        =   131
+            TabIndex        =   135
             ToolTipText     =   "Buscar socio"
             Top             =   2925
             Visible         =   0   'False
@@ -2641,7 +2721,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1710
             MaxLength       =   6
-            TabIndex        =   129
+            TabIndex        =   133
             Tag             =   "Socio|N|N|||rcampos_cooprop|codsocio|000000|S|"
             Text            =   "socio"
             Top             =   2925
@@ -2655,7 +2735,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   225
             MaxLength       =   8
-            TabIndex        =   128
+            TabIndex        =   132
             Tag             =   "Campo|N|N|1|99999999|rcampos_clasif|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2925
@@ -2669,7 +2749,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   127
+            TabIndex        =   131
             Tag             =   "Linea|N|N|||rcampos_cooprop|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -2684,7 +2764,7 @@ Begin VB.Form frmManCampos
             Index           =   3
             Left            =   5940
             MaxLength       =   6
-            TabIndex        =   130
+            TabIndex        =   134
             Tag             =   "Porcentaje|N|N|0|100|rcampos_cooprop|porcentaje|##0.00||"
             Text            =   "porc"
             Top             =   2940
@@ -2695,7 +2775,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   0
             Left            =   45
-            TabIndex        =   133
+            TabIndex        =   137
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -2773,7 +2853,7 @@ Begin VB.Form frmManCampos
             Height          =   3195
             Index           =   0
             Left            =   45
-            TabIndex        =   134
+            TabIndex        =   138
             Top             =   450
             Width           =   7080
             _ExtentX        =   12488
@@ -2852,9 +2932,9 @@ Begin VB.Form frmManCampos
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   3405
-         Left            =   -74850
-         TabIndex        =   113
+         Height          =   2775
+         Left            =   150
+         TabIndex        =   117
          Top             =   510
          Width           =   6915
          Begin VB.CheckBox chkAbonos 
@@ -2864,7 +2944,7 @@ Begin VB.Form frmManCampos
             Left            =   5100
             TabIndex        =   38
             Tag             =   "Acabado Recol.|N|N|||rcampos|acabadorecol||N|"
-            Top             =   1680
+            Top             =   1350
             Width           =   1515
          End
          Begin VB.CheckBox chkAbonos 
@@ -2874,7 +2954,7 @@ Begin VB.Form frmManCampos
             Left            =   3390
             TabIndex        =   37
             Tag             =   "Naturane|N|N|||rcampos|esnaturane||N|"
-            Top             =   1680
+            Top             =   1350
             Width           =   1215
          End
          Begin VB.TextBox Text1 
@@ -2885,7 +2965,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   10
             TabIndex        =   41
             Tag             =   "Nro LLave|N|S|||rcampos|nrollave|#########0||"
-            Top             =   3030
+            Top             =   2400
             Width           =   1395
          End
          Begin VB.CheckBox chkAbonos 
@@ -2895,7 +2975,7 @@ Begin VB.Form frmManCampos
             Left            =   5100
             TabIndex        =   43
             Tag             =   "Residuos|N|N|||rcampos|conresiduos||N|"
-            Top             =   3030
+            Top             =   2400
             Width           =   1545
          End
          Begin VB.CheckBox chkAbonos 
@@ -2905,7 +2985,7 @@ Begin VB.Form frmManCampos
             Left            =   3390
             TabIndex        =   42
             Tag             =   "Con Poda|N|N|||rcampos|conpoda||N|"
-            Top             =   3030
+            Top             =   2400
             Width           =   1665
          End
          Begin VB.TextBox Text2 
@@ -2915,8 +2995,8 @@ Begin VB.Form frmManCampos
             Index           =   31
             Left            =   2340
             MaxLength       =   30
-            TabIndex        =   123
-            Top             =   2580
+            TabIndex        =   127
+            Top             =   2070
             Width           =   4185
          End
          Begin VB.TextBox Text1 
@@ -2927,7 +3007,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   2
             TabIndex        =   40
             Tag             =   "Patrón a Pie|N|S|0|99|rcampos|codpatron|00||"
-            Top             =   2580
+            Top             =   2070
             Width           =   765
          End
          Begin VB.TextBox Text2 
@@ -2937,8 +3017,8 @@ Begin VB.Form frmManCampos
             Index           =   30
             Left            =   2340
             MaxLength       =   30
-            TabIndex        =   121
-            Top             =   2160
+            TabIndex        =   125
+            Top             =   1740
             Width           =   4185
          End
          Begin VB.TextBox Text1 
@@ -2949,7 +3029,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   2
             TabIndex        =   39
             Tag             =   "Procedencia Riego|N|S|0|99|rcampos|codproce|00||"
-            Top             =   2160
+            Top             =   1740
             Width           =   735
          End
          Begin VB.TextBox Text2 
@@ -2958,8 +3038,8 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   25
             Left            =   2340
-            TabIndex        =   116
-            Top             =   390
+            TabIndex        =   120
+            Top             =   270
             Width           =   4200
          End
          Begin VB.TextBox Text1 
@@ -2970,7 +3050,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   2
             TabIndex        =   33
             Tag             =   "Marco Plantación|N|S|0|99|rcampos|codplanta|00||"
-            Top             =   390
+            Top             =   270
             Width           =   735
          End
          Begin VB.TextBox Text2 
@@ -2979,8 +3059,8 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   26
             Left            =   2340
-            TabIndex        =   115
-            Top             =   810
+            TabIndex        =   119
+            Top             =   630
             Width           =   4200
          End
          Begin VB.TextBox Text1 
@@ -2991,7 +3071,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   2
             TabIndex        =   34
             Tag             =   "Código Desarrollo|N|S|0|99|rcampos|coddesa|00||"
-            Top             =   810
+            Top             =   630
             Width           =   735
          End
          Begin VB.ComboBox Combo1 
@@ -3001,7 +3081,7 @@ Begin VB.Form frmManCampos
             Style           =   2  'Dropdown List
             TabIndex        =   36
             Tag             =   "Sistema Riego|N|N|||rcampos|codriego||N|"
-            Top             =   1680
+            Top             =   1350
             Width           =   1440
          End
          Begin VB.TextBox Text2 
@@ -3011,8 +3091,8 @@ Begin VB.Form frmManCampos
             Index           =   27
             Left            =   2340
             MaxLength       =   30
-            TabIndex        =   114
-            Top             =   1230
+            TabIndex        =   118
+            Top             =   1050
             Width           =   4185
          End
          Begin VB.TextBox Text1 
@@ -3023,7 +3103,7 @@ Begin VB.Form frmManCampos
             MaxLength       =   2
             TabIndex        =   35
             Tag             =   "Tipo Tierra|N|S|0|99|rcampos|codtierra|00||"
-            Top             =   1230
+            Top             =   990
             Width           =   735
          End
          Begin VB.Label Label6 
@@ -3031,8 +3111,8 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   4
             Left            =   210
-            TabIndex        =   125
-            Top             =   3060
+            TabIndex        =   129
+            Top             =   2430
             Width           =   945
          End
          Begin VB.Image imgBuscar 
@@ -3040,7 +3120,7 @@ Begin VB.Form frmManCampos
             Index           =   11
             Left            =   1230
             ToolTipText     =   "Buscar Patrón Pie"
-            Top             =   2580
+            Top             =   2070
             Width           =   240
          End
          Begin VB.Label Label6 
@@ -3048,8 +3128,8 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   3
             Left            =   210
-            TabIndex        =   124
-            Top             =   2610
+            TabIndex        =   128
+            Top             =   2100
             Width           =   945
          End
          Begin VB.Image imgBuscar 
@@ -3057,7 +3137,7 @@ Begin VB.Form frmManCampos
             Index           =   10
             Left            =   1230
             ToolTipText     =   "Buscar Procedencia"
-            Top             =   2160
+            Top             =   1740
             Width           =   240
          End
          Begin VB.Label Label6 
@@ -3065,16 +3145,16 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   2
             Left            =   210
-            TabIndex        =   122
-            Top             =   2190
+            TabIndex        =   126
+            Top             =   1770
             Width           =   945
          End
          Begin VB.Label Label27 
             Caption         =   "Marco Plant."
             Height          =   255
             Left            =   210
-            TabIndex        =   120
-            Top             =   420
+            TabIndex        =   124
+            Top             =   300
             Width           =   975
          End
          Begin VB.Image imgBuscar 
@@ -3082,15 +3162,15 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   1230
             ToolTipText     =   "Buscar Marco Plantación"
-            Top             =   390
+            Top             =   270
             Width           =   240
          End
          Begin VB.Label Label30 
             Caption         =   "Desarrollo"
             Height          =   255
             Left            =   210
-            TabIndex        =   119
-            Top             =   810
+            TabIndex        =   123
+            Top             =   630
             Width           =   885
          End
          Begin VB.Image imgBuscar 
@@ -3098,15 +3178,15 @@ Begin VB.Form frmManCampos
             Index           =   7
             Left            =   1230
             ToolTipText     =   "Buscar Tipo Tierra"
-            Top             =   1230
+            Top             =   990
             Width           =   240
          End
          Begin VB.Label Label12 
             Caption         =   "Sistema Riego"
             Height          =   255
             Left            =   210
-            TabIndex        =   118
-            Top             =   1710
+            TabIndex        =   122
+            Top             =   1380
             Width           =   1035
          End
          Begin VB.Image imgBuscar 
@@ -3114,7 +3194,7 @@ Begin VB.Form frmManCampos
             Index           =   8
             Left            =   1230
             ToolTipText     =   "Buscar Desarrollo Vegetativo"
-            Top             =   810
+            Top             =   630
             Width           =   240
          End
          Begin VB.Label Label6 
@@ -3122,8 +3202,8 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   1
             Left            =   210
-            TabIndex        =   117
-            Top             =   1230
+            TabIndex        =   121
+            Top             =   990
             Width           =   945
          End
       End
@@ -3140,8 +3220,8 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1335
-         Left            =   -67740
-         TabIndex        =   108
+         Left            =   7260
+         TabIndex        =   112
          Top             =   510
          Width           =   5235
          Begin VB.TextBox Text2 
@@ -3150,7 +3230,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   29
             Left            =   1140
-            TabIndex        =   111
+            TabIndex        =   115
             Top             =   900
             Width           =   3540
          End
@@ -3159,7 +3239,7 @@ Begin VB.Form frmManCampos
             Index           =   29
             Left            =   360
             MaxLength       =   2
-            TabIndex        =   49
+            TabIndex        =   53
             Tag             =   "Seguro Opcion|T|S|||rcampos|codseguro|||"
             Top             =   900
             Width           =   735
@@ -3170,7 +3250,7 @@ Begin VB.Form frmManCampos
             Index           =   28
             Left            =   3420
             MaxLength       =   13
-            TabIndex        =   48
+            TabIndex        =   52
             Tag             =   "Importe.Seguro|N|S|||rcampos|costeseguro|##,###,##0.00||"
             Top             =   480
             Width           =   1275
@@ -3180,7 +3260,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   0
             Left            =   330
-            TabIndex        =   46
+            TabIndex        =   50
             Tag             =   "Seguro|N|N|||rcampos|asegurado||N|"
             Top             =   270
             Width           =   915
@@ -3191,7 +3271,7 @@ Begin VB.Form frmManCampos
             Index           =   4
             Left            =   1650
             MaxLength       =   6
-            TabIndex        =   47
+            TabIndex        =   51
             Tag             =   "Kg.Seguro|N|S|0|999999|rcampos|kilosase|###,###||"
             Top             =   480
             Width           =   1305
@@ -3200,7 +3280,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Opción"
             Height          =   255
             Left            =   360
-            TabIndex        =   112
+            TabIndex        =   116
             Top             =   630
             Width           =   555
          End
@@ -3217,7 +3297,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   2
             Left            =   3420
-            TabIndex        =   110
+            TabIndex        =   114
             Top             =   210
             Width           =   735
          End
@@ -3226,7 +3306,7 @@ Begin VB.Form frmManCampos
             Height          =   255
             Index           =   1
             Left            =   1650
-            TabIndex        =   109
+            TabIndex        =   113
             Top             =   210
             Width           =   735
          End
@@ -3234,7 +3314,7 @@ Begin VB.Form frmManCampos
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   0
-         Left            =   1380
+         Left            =   -73620
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
@@ -3246,9 +3326,9 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
-         TabIndex        =   83
+         TabIndex        =   87
          Top             =   855
          Width           =   3315
       End
@@ -3257,9 +3337,9 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   2
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
-         TabIndex        =   82
+         TabIndex        =   86
          Top             =   520
          Width           =   3315
       End
@@ -3267,7 +3347,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   2
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
@@ -3278,7 +3358,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   4
          TabIndex        =   5
          Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
@@ -3288,7 +3368,7 @@ Begin VB.Form frmManCampos
       Begin VB.TextBox Text1 
          Height          =   435
          Index           =   21
-         Left            =   5940
+         Left            =   -69060
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -3301,7 +3381,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   37
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   6
          Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
@@ -3313,9 +3393,9 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
-         TabIndex        =   75
+         TabIndex        =   79
          Top             =   1185
          Width           =   3315
       End
@@ -3324,9 +3404,9 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   30
-         TabIndex        =   74
+         TabIndex        =   78
          Top             =   1530
          Width           =   4200
       End
@@ -3343,8 +3423,8 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3615
-         Left            =   5820
-         TabIndex        =   71
+         Left            =   -69180
+         TabIndex        =   75
          Top             =   450
          Width           =   6720
          Begin VB.TextBox Text1 
@@ -3425,7 +3505,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   24
             Left            =   2250
-            TabIndex        =   105
+            TabIndex        =   109
             Top             =   1080
             Width           =   4200
          End
@@ -3543,7 +3623,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   12
             Left            =   2250
-            TabIndex        =   72
+            TabIndex        =   76
             Top             =   720
             Width           =   4200
          End
@@ -3580,7 +3660,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Revisión"
             Height          =   255
             Left            =   3720
-            TabIndex        =   242
+            TabIndex        =   246
             Top             =   2640
             Width           =   1155
          End
@@ -3588,7 +3668,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Refer.Catastral"
             Height          =   255
             Left            =   150
-            TabIndex        =   221
+            TabIndex        =   225
             Top             =   2640
             Width           =   1245
          End
@@ -3596,7 +3676,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Ficha Cultivo"
             Height          =   255
             Left            =   3720
-            TabIndex        =   199
+            TabIndex        =   203
             Top             =   1920
             Width           =   1785
          End
@@ -3604,7 +3684,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Tipo Campo"
             Height          =   255
             Left            =   3720
-            TabIndex        =   160
+            TabIndex        =   164
             Top             =   1530
             Width           =   1245
          End
@@ -3612,7 +3692,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Recolectado"
             Height          =   255
             Left            =   150
-            TabIndex        =   107
+            TabIndex        =   111
             Top             =   1530
             Width           =   1035
          End
@@ -3628,7 +3708,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Responsable"
             Height          =   255
             Left            =   150
-            TabIndex        =   106
+            TabIndex        =   110
             Top             =   1080
             Width           =   945
          End
@@ -3636,7 +3716,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Longitud"
             Height          =   255
             Left            =   5400
-            TabIndex        =   101
+            TabIndex        =   105
             Top             =   2970
             Width           =   1185
          End
@@ -3644,7 +3724,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Latitud"
             Height          =   255
             Left            =   4140
-            TabIndex        =   100
+            TabIndex        =   104
             Top             =   2970
             Width           =   945
          End
@@ -3652,7 +3732,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Nº OID"
             Height          =   255
             Left            =   2910
-            TabIndex        =   99
+            TabIndex        =   103
             Top             =   2970
             Width           =   705
          End
@@ -3660,7 +3740,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Año plantación"
             Height          =   255
             Left            =   150
-            TabIndex        =   98
+            TabIndex        =   102
             Top             =   1920
             Width           =   1185
          End
@@ -3668,7 +3748,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Nº Recinto"
             Height          =   255
             Left            =   150
-            TabIndex        =   95
+            TabIndex        =   99
             Top             =   2280
             Width           =   915
          End
@@ -3676,7 +3756,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Subparcela"
             Height          =   255
             Left            =   1830
-            TabIndex        =   94
+            TabIndex        =   98
             Top             =   2970
             Width           =   945
          End
@@ -3684,7 +3764,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Parcela"
             Height          =   255
             Left            =   990
-            TabIndex        =   93
+            TabIndex        =   97
             Top             =   2940
             Width           =   705
          End
@@ -3692,7 +3772,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Poligono"
             Height          =   255
             Left            =   150
-            TabIndex        =   92
+            TabIndex        =   96
             Top             =   2940
             Width           =   705
          End
@@ -3700,7 +3780,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Alta"
             Height          =   255
             Left            =   150
-            TabIndex        =   86
+            TabIndex        =   90
             Top             =   360
             Width           =   795
          End
@@ -3708,7 +3788,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Fecha Baja"
             Height          =   255
             Left            =   3720
-            TabIndex        =   85
+            TabIndex        =   89
             Top             =   360
             Width           =   975
          End
@@ -3734,7 +3814,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Situación"
             Height          =   255
             Left            =   150
-            TabIndex        =   73
+            TabIndex        =   77
             Top             =   720
             Width           =   945
          End
@@ -3760,8 +3840,8 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2445
-         Left            =   150
-         TabIndex        =   66
+         Left            =   -74850
+         TabIndex        =   70
          Top             =   2310
          Width           =   5415
          Begin VB.TextBox Text1 
@@ -3770,7 +3850,7 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   1230
             MaxLength       =   10
-            TabIndex        =   231
+            TabIndex        =   235
             Tag             =   "Sup.Sigpac|N|N|0|9999.9999|rcampos|supsigpa|###0.0000||"
             Text            =   "1234567890"
             Top             =   915
@@ -3783,7 +3863,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   10
             Left            =   2670
-            TabIndex        =   230
+            TabIndex        =   234
             Top             =   915
             Width           =   1185
          End
@@ -3794,7 +3874,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   11
             Left            =   2670
-            TabIndex        =   228
+            TabIndex        =   232
             Top             =   1275
             Width           =   1185
          End
@@ -3805,7 +3885,7 @@ Begin VB.Form frmManCampos
             Height          =   285
             Index           =   12
             Left            =   2670
-            TabIndex        =   227
+            TabIndex        =   231
             Top             =   1620
             Width           =   1185
          End
@@ -3827,7 +3907,7 @@ Begin VB.Form frmManCampos
             Index           =   33
             Left            =   3900
             MaxLength       =   10
-            TabIndex        =   90
+            TabIndex        =   94
             Top             =   1620
             Width           =   1335
          End
@@ -3849,7 +3929,7 @@ Begin VB.Form frmManCampos
             Index           =   5
             Left            =   3900
             MaxLength       =   10
-            TabIndex        =   87
+            TabIndex        =   91
             Text            =   "1234567890"
             Top             =   555
             Width           =   1335
@@ -3873,7 +3953,7 @@ Begin VB.Form frmManCampos
             Index           =   7
             Left            =   3900
             MaxLength       =   10
-            TabIndex        =   89
+            TabIndex        =   93
             Top             =   1275
             Width           =   1335
          End
@@ -3884,7 +3964,7 @@ Begin VB.Form frmManCampos
             Index           =   6
             Left            =   3900
             MaxLength       =   10
-            TabIndex        =   88
+            TabIndex        =   92
             Text            =   "1234567890"
             Top             =   915
             Width           =   1335
@@ -3933,7 +4013,7 @@ Begin VB.Form frmManCampos
             ForeColor       =   &H000040C0&
             Height          =   465
             Left            =   2670
-            TabIndex        =   229
+            TabIndex        =   233
             Top             =   210
             Visible         =   0   'False
             Width           =   1005
@@ -3942,7 +4022,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Cultivable"
             Height          =   255
             Left            =   135
-            TabIndex        =   159
+            TabIndex        =   163
             Top             =   1665
             Width           =   990
          End
@@ -3960,7 +4040,7 @@ Begin VB.Form frmManCampos
             ForeColor       =   &H000040C0&
             Height          =   255
             Left            =   3900
-            TabIndex        =   97
+            TabIndex        =   101
             Top             =   270
             Width           =   1155
          End
@@ -3978,7 +4058,7 @@ Begin VB.Form frmManCampos
             ForeColor       =   &H000040C0&
             Height          =   255
             Left            =   1230
-            TabIndex        =   96
+            TabIndex        =   100
             Top             =   270
             Width           =   1395
          End
@@ -3986,7 +4066,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Arboles"
             Height          =   255
             Left            =   2970
-            TabIndex        =   91
+            TabIndex        =   95
             Top             =   2010
             Width           =   720
          End
@@ -3994,7 +4074,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Cooperativa"
             Height          =   255
             Left            =   135
-            TabIndex        =   70
+            TabIndex        =   74
             Top             =   600
             Width           =   915
          End
@@ -4002,7 +4082,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Aforo"
             Height          =   255
             Left            =   135
-            TabIndex        =   69
+            TabIndex        =   73
             Top             =   2040
             Width           =   960
          End
@@ -4010,7 +4090,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Sigpac"
             Height          =   255
             Left            =   135
-            TabIndex        =   68
+            TabIndex        =   72
             Top             =   960
             Width           =   870
          End
@@ -4018,7 +4098,7 @@ Begin VB.Form frmManCampos
             Caption         =   "Catastro"
             Height          =   255
             Left            =   135
-            TabIndex        =   67
+            TabIndex        =   71
             Top             =   1320
             Width           =   990
          End
@@ -4026,7 +4106,7 @@ Begin VB.Form frmManCampos
       Begin MSComctlLib.ListView ListView4 
          Height          =   4155
          Left            =   -74910
-         TabIndex        =   241
+         TabIndex        =   245
          Top             =   600
          Width           =   12120
          _ExtentX        =   21378
@@ -4091,7 +4171,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   3910
          Left            =   -74760
-         TabIndex        =   234
+         TabIndex        =   238
          Top             =   660
          Width           =   12210
          Begin VB.TextBox txtAux8 
@@ -4101,7 +4181,7 @@ Begin VB.Form frmManCampos
             Index           =   2
             Left            =   1710
             MaxLength       =   10
-            TabIndex        =   238
+            TabIndex        =   242
             Tag             =   "Fecha|F|N|||rcampos_ordrec|fecimpre|dd/mm/yyyy||"
             Text            =   "Fecha"
             Top             =   2940
@@ -4115,7 +4195,7 @@ Begin VB.Form frmManCampos
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   237
+            TabIndex        =   241
             Tag             =   "Orden|N|N|||rcampos_ordrec|nroorden|0000000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -4129,7 +4209,7 @@ Begin VB.Form frmManCampos
             Index           =   0
             Left            =   210
             MaxLength       =   8
-            TabIndex        =   236
+            TabIndex        =   240
             Tag             =   "Campo|N|N|0|99999999|rcampos_ordrec|codcampo|00000000|S|"
             Text            =   "campo"
             Top             =   2910
@@ -4142,7 +4222,7 @@ Begin VB.Form frmManCampos
             Height          =   315
             Index           =   11
             Left            =   2550
-            TabIndex        =   235
+            TabIndex        =   239
             ToolTipText     =   "Buscar fecha"
             Top             =   2910
             Visible         =   0   'False
@@ -4152,7 +4232,7 @@ Begin VB.Form frmManCampos
             Height          =   390
             Index           =   6
             Left            =   45
-            TabIndex        =   239
+            TabIndex        =   243
             Top             =   0
             Width           =   1710
             _ExtentX        =   3016
@@ -4230,7 +4310,7 @@ Begin VB.Form frmManCampos
             Height          =   3225
             Index           =   6
             Left            =   45
-            TabIndex        =   240
+            TabIndex        =   244
             Top             =   450
             Width           =   3900
             _ExtentX        =   6879
@@ -4300,15 +4380,15 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label36 
          Caption         =   "Nº Hidrante"
          Height          =   255
-         Left            =   3090
-         TabIndex        =   183
+         Left            =   -71910
+         TabIndex        =   187
          Top             =   1950
          Width           =   885
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Zona"
          Top             =   1200
          Width           =   240
@@ -4316,15 +4396,15 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label2 
          Caption         =   "Tipo Parcela"
          Height          =   255
-         Left            =   150
-         TabIndex        =   84
+         Left            =   -74850
+         TabIndex        =   88
          Top             =   1935
          Width           =   1035
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Partida"
          Top             =   870
          Width           =   240
@@ -4332,7 +4412,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Variedad"
          Top             =   570
          Width           =   240
@@ -4340,8 +4420,8 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label5 
          Caption         =   "Variedad"
          Height          =   255
-         Left            =   180
-         TabIndex        =   80
+         Left            =   -74820
+         TabIndex        =   84
          Top             =   525
          Width           =   735
       End
@@ -4349,23 +4429,23 @@ Begin VB.Form frmManCampos
          Caption         =   "Partida"
          Height          =   255
          Index           =   0
-         Left            =   180
-         TabIndex        =   79
+         Left            =   -74820
+         TabIndex        =   83
          Top             =   855
          Width           =   735
       End
       Begin VB.Label Label29 
          Caption         =   "Observaciones"
          Height          =   255
-         Left            =   5940
-         TabIndex        =   78
+         Left            =   -69060
+         TabIndex        =   82
          Top             =   4080
          Width           =   1140
       End
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   7170
+         Left            =   -67830
          ToolTipText     =   "Zoom descripción"
          Top             =   4080
          Width           =   240
@@ -4373,8 +4453,8 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label28 
          Caption         =   "Poblacion"
          Height          =   255
-         Left            =   180
-         TabIndex        =   77
+         Left            =   -74820
+         TabIndex        =   81
          Top             =   1530
          Width           =   735
       End
@@ -4382,8 +4462,8 @@ Begin VB.Form frmManCampos
          Caption         =   "Zona"
          Height          =   255
          Index           =   26
-         Left            =   180
-         TabIndex        =   76
+         Left            =   -74820
+         TabIndex        =   80
          Top             =   1200
          Width           =   735
       End
@@ -7230,6 +7310,10 @@ Dim Nuevo As Boolean
         Case 40 ' % Comision sobre precio de anticipo/liquidacion
             PonerFormatoDecimal Text1(Index), 4
             
+        '[Monica]26/09/2016: para coopic
+        Case 44, 45, 46, 47 ' puntos
+            PonerFormatoEntero Text1(Index)
+            
     End Select
 End Sub
 
@@ -7261,12 +7345,11 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
