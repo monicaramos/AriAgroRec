@@ -3714,7 +3714,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     cHasta = Trim(txtcodigo(65).Text)
     nDesde = txtNombre(64).Text
     nHasta = txtNombre(65).Text
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         nDesde = ""
         nHasta = ""
     End If
@@ -3767,7 +3767,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
 
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(Tabla, cadSelect) Then
-        If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2) And Me.Check2.Value = 1 Then
+        If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Me.Check2.Value = 1 Then
             If vParamAplic.Cooperativa = 4 Then ' Alzira
                 Shell App.Path & "\nomina.exe /E|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
             Else ' Picassent
@@ -4157,7 +4157,7 @@ Dim Prevision As Boolean
                         End If
                     End If
                 Else
-                    If vParamAplic.Cooperativa = 2 Then  ' Picassent
+                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then  ' Picassent
                         If ProcesoCargaHorasPicassent(cTabla, cadSelect) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
                             cmdCancel_Click (0)
@@ -4727,7 +4727,7 @@ Dim List As Collection
 
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(0).Cancel = True
+    Me.CmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -6331,7 +6331,7 @@ Dim Precio As Currency
 Dim Importe As Currency
 
 Dim i As Integer
-Dim J As Integer
+Dim j As Integer
 
 Dim Fdesde As Date
 Dim Fhasta As Date
@@ -6358,9 +6358,9 @@ Dim Dias As Long
         Importe = ImporteSinFormato(txtcodigo(39).Text)
     End If
 
-    For J = TrabaDesde To Trabahasta
+    For j = TrabaDesde To Trabahasta
         '[Monica]29/10/2014: añadimos la condicion de que el trabajador que vamos a introducir no tenga fecha de baja
-        If TotalRegistros("select count(*) from straba where codtraba = " & J & " and (fechabaja is null or fechabaja = '')") <> 0 Then
+        If TotalRegistros("select count(*) from straba where codtraba = " & j & " and (fechabaja is null or fechabaja = '')") <> 0 Then
     
             For i = 0 To Dias
                 Fecha = DateAdd("y", i, Fdesde)
@@ -6368,13 +6368,13 @@ Dim Dias As Long
                 Sql = "select count(*) from horas where fechahora = " & DBSet(Fecha, "F")
                 Sql = Sql & " and codvarie = " & DBSet(txtcodigo(28).Text, "N")
                 Sql = Sql & " and codcapat = " & DBSet(0, "N")
-                Sql = Sql & " and codtraba = " & DBSet(J, "N")
+                Sql = Sql & " and codtraba = " & DBSet(j, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
                     Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
                     Sql1 = Sql1 & DBSet(Fecha, "F") & ","
                     Sql1 = Sql1 & DBSet(txtcodigo(28).Text, "N") & ","
-                    Sql1 = Sql1 & DBSet(J, "N") & ","
+                    Sql1 = Sql1 & DBSet(j, "N") & ","
                     Sql1 = Sql1 & "0,"
                     Sql1 = Sql1 & DBSet(Importe, "N") & ","
                     Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
@@ -6384,7 +6384,7 @@ Dim Dias As Long
                 
             Next i
         End If
-    Next J
+    Next j
     
     CalculoEventuales = True
     Exit Function
@@ -7034,7 +7034,7 @@ Dim Nregs As Integer
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     '[Monica]05/02/2014: solo lo cambio para Picassent, para el resto lo dejo como estaba
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         Sql = "select rentradas.codcapat, rentradas.fechaent, rentradas.codvarie, sum("
         If vParamAplic.EsCaja1 Then Sql = Sql & "+coalesce(rentradas.numcajo1,0)"
         If vParamAplic.EsCaja2 Then Sql = Sql & "+coalesce(rentradas.numcajo2,0)"
@@ -7218,8 +7218,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -7229,7 +7229,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
@@ -7579,7 +7579,7 @@ On Error GoTo eCargarTemporalListAsesoria
         ActTraba = DBLet(Rs!CodTraba, "N")
         AntTraba = DBLet(Rs!CodTraba, "N")
     End If
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         v_cadena = String(Day(Fhasta), "N")
     Else
         v_cadena = String(31, "N") ' para Alzira
@@ -7618,7 +7618,7 @@ On Error GoTo eCargarTemporalListAsesoria
             
             conn.Execute Sql3
 
-            If vParamAplic.Cooperativa = 2 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                 v_cadena = String(Day(Fhasta), "N")
             Else
                 v_cadena = String(31, "N") ' para Alzira
@@ -7728,8 +7728,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -7739,7 +7739,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmActClasifica 
    BorderStyle     =   3  'Fixed Dialog
@@ -480,7 +480,7 @@ Attribute frmMens1.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -523,15 +523,15 @@ Dim cTabla As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Select Case Index
         Case 0 ' informe de entradas de bascula
             '======== FORMULA  ====================================
             'D/H SOCIO
-            cDesde = Trim(txtCodigo(4).Text)
-            cHasta = Trim(txtCodigo(5).Text)
+            cDesde = Trim(txtcodigo(4).Text)
+            cHasta = Trim(txtcodigo(5).Text)
             nDesde = txtNombre(4).Text
             nHasta = txtNombre(5).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -542,8 +542,8 @@ Dim cTabla As String
             End If
             
             'D/H CLASE
-            cDesde = Trim(txtCodigo(0).Text)
-            cHasta = Trim(txtCodigo(1).Text)
+            cDesde = Trim(txtcodigo(0).Text)
+            cHasta = Trim(txtcodigo(1).Text)
             nDesde = txtNombre(0).Text
             nHasta = txtNombre(1).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -554,8 +554,8 @@ Dim cTabla As String
             End If
             
             'D/H VARIEDAD
-            cDesde = Trim(txtCodigo(2).Text)
-            cHasta = Trim(txtCodigo(3).Text)
+            cDesde = Trim(txtcodigo(2).Text)
+            cHasta = Trim(txtcodigo(3).Text)
             nDesde = txtNombre(2).Text
             nHasta = txtNombre(3).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -566,8 +566,8 @@ Dim cTabla As String
             End If
 
             'D/H fecha
-            cDesde = Trim(txtCodigo(6).Text)
-            cHasta = Trim(txtCodigo(7).Text)
+            cDesde = Trim(txtcodigo(6).Text)
+            cHasta = Trim(txtcodigo(7).Text)
             nDesde = ""
             nHasta = ""
             If Not (cDesde = "" And cHasta = "") Then
@@ -657,7 +657,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtCodigo(4)
+        PonerFoco txtcodigo(4)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -683,12 +683,12 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(CByte(imgFec(0).Tag) + 6).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(CByte(imgFec(0).Tag) + 6).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
@@ -705,12 +705,12 @@ Dim Sql As String
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -726,7 +726,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmSocio (Index)
     
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -755,19 +755,19 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = Index '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Index + 6).Text <> "" Then frmC.NovaData = txtCodigo(Index + 6).Text
+    If txtcodigo(Index + 6).Text <> "" Then frmC.NovaData = txtcodigo(Index + 6).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag) + 6) '<===
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag) + 6) '<===
     ' ********************************************
 
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -808,7 +808,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -817,26 +817,26 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0, 1 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
     
         Case 4, 5 'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
     
         Case 6, 7 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 2, 3 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
     End Select
 End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -864,7 +864,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -874,7 +874,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -889,7 +889,7 @@ Private Sub AbrirFrmClase(indice As Integer)
     indCodigo = indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtCodigo(indice).Text
+    AyudaClasesCom frmCla, txtcodigo(indice).Text
     
     Set frmCla = Nothing
 End Sub
@@ -916,7 +916,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -953,10 +953,10 @@ Private Function DatosOk() As Boolean
 Dim b As Boolean
 Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
     
     b = True
-    If txtCodigo(9).Text = "" Or txtCodigo(10).Text = "" Or txtCodigo(11).Text = "" Then
+    If txtcodigo(9).Text = "" Or txtcodigo(10).Text = "" Or txtcodigo(11).Text = "" Then
         MsgBox " ", vbExclamation
         b = False
     End If
@@ -1077,8 +1077,8 @@ Dim RS1 As ADODB.Recordset
         cTabla = QuitarCaracterACadena(cTabla, "}")
         
         '[Monica]24/09/2013: en el caso de ser Picassent no tengo en cuenta si es tercero o no para agrupar
-        If ((DBLet(RS1.Fields(1).Value, "N") <> 1) And vParamAplic.SeAgrupanNotas And vParamAplic.Cooperativa <> 2) Or _
-           (vParamAplic.SeAgrupanNotas And vParamAplic.Cooperativa = 2) Then   ' caso de no ser tercero
+        If ((DBLet(RS1.Fields(1).Value, "N") <> 1) And vParamAplic.SeAgrupanNotas And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16) Or _
+           (vParamAplic.SeAgrupanNotas And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)) Then   ' caso de no ser tercero
             ' si no es tercero y se agrupan notas
             '[Monica]30/01/2014: en el caso de Alzira se rompe tambien por capataz
             If vParamAplic.Cooperativa = 4 Then
@@ -1150,7 +1150,7 @@ Dim RS1 As ADODB.Recordset
                     
                     '[Monica]14/10/2010 añado la condicion de que no sea Picassent
                     '[Monica]27/04/2010 Calculo de costes de transporte, si es por tarifas y la entrada no es de venta campo
-                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 Then
+                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
                         If b Then
                             b = CalculoGastosTransporte(numalbar, cadMen, False)
                             cadMen = "Calculando Gastos de Transporte: " & cadMen
@@ -1240,7 +1240,7 @@ Dim RS1 As ADODB.Recordset
                     Else
                     
                     ' se respeta iguala el nro de albaran con el nro de nota
-                        numalbar = DBLet(Rs.Fields!numnotac, "N")
+                        numalbar = DBLet(Rs.Fields!Numnotac, "N")
                     End If
         
                     b = InsertarCabecera(Rs, numalbar, cadMen, True)
@@ -1269,7 +1269,7 @@ Dim RS1 As ADODB.Recordset
                     
                     '[Monica]14/10/2010 añado la condicion de que no sea Picassent
                     '[Monica]27/04/2010 Calculo de costes de transporte, si es por tarifas y la entrada no es de venta campo
-                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 Then
+                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
                         If b Then
                             b = CalculoGastosTransporte(numalbar, cadMen, False)
                             cadMen = "Calculando Gastos de Transporte: " & cadMen
@@ -1435,7 +1435,7 @@ eActualizarTabla:
 End Function
 
 
-Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, EsTercero As Boolean) As Boolean
+Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1477,8 +1477,8 @@ Dim Precio As Currency
     Sql1 = Sql1 & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql1 = Sql1 & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql1 = Sql1 & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql1 = Sql1 & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
     End If
     
     Set Rs2 = New ADODB.Recordset
@@ -1519,7 +1519,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, EsTercero As Boolean) As Boolean
+Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1563,8 +1563,8 @@ Dim Precio As Currency
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
 
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
     End If
     
     conn.Execute Sql
@@ -1634,7 +1634,7 @@ End Function
 
 
 
-Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, EsTercero As Boolean) As Boolean
+Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1678,8 +1678,8 @@ Dim CalidadClasif As String
     
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
     End If
     
     Sql = Sql & " group by 1,2,3"
@@ -1696,7 +1696,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, EsTercero As Boolean) As Boolean
+Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
@@ -1739,8 +1739,8 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.numnotac = rclasifica_incidencia.numnotac and  "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
     End If
     
     Sql = Sql & " group by 1,2,3"
@@ -1806,7 +1806,7 @@ On Error GoTo EInsertar
         '[Monica]25/02/2011: Si no es Picassent
         If Not EsPicassent Then
             Sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             
             conn.Execute Sql
         End If
@@ -1858,7 +1858,7 @@ End Function
 
 
 
-Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, EsTercero As Boolean) As Boolean
+Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
@@ -1887,8 +1887,8 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
@@ -1910,8 +1910,8 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
@@ -1932,8 +1932,8 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If EsTercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
+    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
@@ -2032,8 +2032,8 @@ Dim Cad As String
     Cad = ""
     
     While Not Rs.EOF
-        If Not CalculoGastosCorrectos(DBLet(Rs!numnotac, "N")) Then
-            Cad = Cad & "(" & vUsu.Codigo & "," & DBLet(Rs!numnotac, "N") & "," & DBLet(Rs!Codsocio, "N") & ",1),"
+        If Not CalculoGastosCorrectos(DBLet(Rs!Numnotac, "N")) Then
+            Cad = Cad & "(" & vUsu.Codigo & "," & DBLet(Rs!Numnotac, "N") & "," & DBLet(Rs!Codsocio, "N") & ",1),"
         End If
     
         Rs.MoveNext

@@ -3,27 +3,27 @@ Option Explicit
 
 Sub CargarTodosLosCampos()
     '-- Utilidad que carga todos los campos de la base de datos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim cmp As GRPTC_Campo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
+    Sql = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
             '-- creamos el objeto auxiliar que montará el XML de trazatec
             Set cmp = New GRPTC_Campo
             '-- vamos cargando los diferentes valores
-            cmp.Codsocio = RS!Codsocio
-            cmp.codcampo = RS!codcampo
-            cmp.codprodu = RS!codprodu
-            cmp.codvarie = RS!codvarie
-            cmp.codparti = RS!codparti
+            cmp.Codsocio = Rs!Codsocio
+            cmp.codcampo = Rs!codcampo
+            cmp.codprodu = Rs!codprodu
+            cmp.codvarie = Rs!codvarie
+            cmp.codparti = Rs!codparti
             cmp.hanegada = 0 ' no interesa en trazatec
             cmp.numarbol = 0 ' tampoco interesa
-            cmp.Poligono = RS!Poligono
+            cmp.Poligono = Rs!Poligono
             '-- Y ahora el objeto chivato para grabar
             Set chv = New GRPTC_Chivato
             chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -41,32 +41,32 @@ Sub CargarTodosLosCampos()
             chv.Clv_New = CStr(cmp.codcampo)
             chv.XML = cmp.GenXML
             chv.Grabar
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
 End Sub
 
 Sub CargarUnCampo(codcampo As Long, Tipo As String, Optional OldCadena As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim cmp As GRPTC_Campo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
-    SQL = SQL & " and a.codcampo = " & CStr(codcampo)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
+    Sql = Sql & " and a.codcampo = " & CStr(codcampo)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set cmp = New GRPTC_Campo
         '-- vamos cargando los diferentes valores
-        cmp.Codsocio = RS!Codsocio
-        cmp.codcampo = RS!codcampo
-        cmp.codprodu = RS!codprodu
-        cmp.codvarie = RS!codvarie
-        cmp.codparti = RS!codparti
+        cmp.Codsocio = Rs!Codsocio
+        cmp.codcampo = Rs!codcampo
+        cmp.codprodu = Rs!codprodu
+        cmp.codvarie = Rs!codvarie
+        cmp.codparti = Rs!codparti
         cmp.hanegada = 0 ' no interesa en trazatec
         cmp.numarbol = 0 ' tampoco interesa
-        cmp.Poligono = RS!Poligono
+        cmp.Poligono = Rs!Poligono
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -97,7 +97,7 @@ Sub CargarUnCampo(codcampo As Long, Tipo As String, Optional OldCadena As String
         End If
         If Tipo = "U" Then
             '[Monica]17/09/2013: solo para picassent cuando se está modificando el campo
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 7 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 7 Or vParamAplic.Cooperativa = 16 Then
                 chv.Clv_Old = OldCadena
             Else
                 chv.Clv_Old = chv.Clv_New
@@ -109,23 +109,23 @@ End Sub
 
 
 Sub CargarUnSocio(Codsocio As Long, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim soc As GRPTC_Socio
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from rsocios "
-    SQL = SQL & " where codsocio = " & CStr(Codsocio)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from rsocios "
+    Sql = Sql & " where codsocio = " & CStr(Codsocio)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set soc = New GRPTC_Socio
         '-- vamos cargando los diferentes valores
-        soc.Codsocio = RS!Codsocio
-        soc.nifSocio = RS!nifSocio
-        soc.nomsocio = RS!nomsocio
-        soc.domsocio = RS!dirsocio
-        soc.telsocio = DBLet(RS!telsoci1)
+        soc.Codsocio = Rs!Codsocio
+        soc.nifsocio = Rs!nifsocio
+        soc.nomsocio = Rs!nomsocio
+        soc.domsocio = Rs!dirsocio
+        soc.telsocio = DBLet(Rs!telsoci1)
         soc.CodPobla = 0 ' algo hay que hacer
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
@@ -152,20 +152,20 @@ End Sub
 
 
 Sub CargarUnaPoblacion(CodPobla As String, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim pob As GRPTC_Poblacion
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from rpueblos "
-    SQL = SQL & " where codpobla = '" & CodPobla & "'"
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from rpueblos "
+    Sql = Sql & " where codpobla = '" & CodPobla & "'"
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set pob = New GRPTC_Poblacion
         '-- vamos cargando los diferentes valores
-        pob.CodPobla = RS!CodPobla
-        pob.desPobla = RS!desPobla
+        pob.CodPobla = Rs!CodPobla
+        pob.desPobla = Rs!desPobla
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -190,20 +190,20 @@ Sub CargarUnaPoblacion(CodPobla As String, Tipo As String)
 End Sub
 
 Sub CargarUnaCuadrilla(codcapat As Long, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim cua As GRPTC_Cuadrilla
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from rcapataz "
-    SQL = SQL & " where codcapat = " & CStr(codcapat)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from rcapataz "
+    Sql = Sql & " where codcapat = " & CStr(codcapat)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set cua = New GRPTC_Cuadrilla
         '-- vamos cargando los diferentes valores
-        cua.codcapat = RS!codcapat
-        cua.nomcapat = RS!nomcapat
+        cua.codcapat = Rs!codcapat
+        cua.nomcapat = Rs!nomcapat
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -230,20 +230,20 @@ End Sub
 
 
 Sub CargarUnaPartida(codparti As Long, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim par As GRPTC_Partida
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from rpartida "
-    SQL = SQL & " where codparti = " & CStr(codparti)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from rpartida "
+    Sql = Sql & " where codparti = " & CStr(codparti)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set par = New GRPTC_Partida
         '-- vamos cargando los diferentes valores
-        par.codparti = RS!codparti
-        par.nomparti = RS!nomparti
+        par.codparti = Rs!codparti
+        par.nomparti = Rs!nomparti
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -269,20 +269,20 @@ End Sub
 
 
 Sub CargarUnVehiculo(codTrans As String, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim tra As GRPTC_Vehiculo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from rtransporte "
-    SQL = SQL & " where codtrans = '" & codTrans & "'"
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from rtransporte "
+    Sql = Sql & " where codtrans = '" & codTrans & "'"
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set tra = New GRPTC_Vehiculo
         '-- vamos cargando los diferentes valores
-        tra.nomcamio = RS!nomtrans
-        tra.matricul = RS!codTrans
+        tra.nomcamio = Rs!nomtrans
+        tra.matricul = Rs!codTrans
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -309,20 +309,20 @@ End Sub
 
 
 Sub CargarUnProducto(codprodu As Long, Tipo As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim pro As GRPTC_Producto
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from productos "
-    SQL = SQL & " where codprodu = " & CStr(codprodu)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from productos "
+    Sql = Sql & " where codprodu = " & CStr(codprodu)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set pro = New GRPTC_Producto
         '-- vamos cargando los diferentes valores
-        pro.codprodu = RS!codprodu
-        pro.nomprodu = RS!nomprodu
+        pro.codprodu = Rs!codprodu
+        pro.nomprodu = Rs!nomprodu
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -347,21 +347,21 @@ Sub CargarUnProducto(codprodu As Long, Tipo As String)
 End Sub
 
 Sub CargarUnaVariedad(codvarie As Long, Tipo As String, Optional OldCadena As String)
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim vari As GRPTC_Variedad
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    SQL = "select * from variedades "
-    SQL = SQL & " where codvarie = " & CStr(codvarie)
-    Set RS = dbAriagro.cursor(SQL)
-    If Not RS.EOF Then
+    Sql = "select * from variedades "
+    Sql = Sql & " where codvarie = " & CStr(codvarie)
+    Set Rs = dbAriagro.cursor(Sql)
+    If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set vari = New GRPTC_Variedad
         '-- vamos cargando los diferentes valores
-        vari.codvarie = RS!codvarie
-        vari.nomvarie = RS!nomvarie
-        vari.codprodu = RS!codprodu
+        vari.codvarie = Rs!codvarie
+        vari.nomvarie = Rs!nomvarie
+        vari.codprodu = Rs!codprodu
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -380,7 +380,7 @@ Sub CargarUnaVariedad(codvarie As Long, Tipo As String, Optional OldCadena As St
         End If
         If Tipo = "U" Then
             '[Monica]18/09/2013: Si es Picassent o Quatretonda tengo que meter producto variedad
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 7 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 7 Or vParamAplic.Cooperativa = 16 Then
                 chv.Clv_Old = OldCadena
             Else
                 chv.Clv_Old = chv.Clv_New

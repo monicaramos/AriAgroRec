@@ -1775,9 +1775,9 @@ Dim i As Integer
     ' ************************************************
     
     '[Monica]24/11/2014: Insertamos el campo de observaciones solo para el caso de Picassent
-    Text1(25).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14)
-    Text1(25).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14)
-    Label24.visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14)
+    Text1(25).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14 Or vParamAplic.Cooperativa = 16)
+    Text1(25).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14 Or vParamAplic.Cooperativa = 16)
+    Label24.visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 14 Or vParamAplic.Cooperativa = 16)
     
     If DatosADevolverBusqueda = "" Then
         PonerModo 0
@@ -2073,7 +2073,7 @@ Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
 'partidas
 Dim Zona As String
 Dim Poblacion As String
-Dim otroCampo As String
+Dim OtroCampo As String
 Dim CodPobla As String
 
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
@@ -2259,7 +2259,7 @@ Dim i As Integer
         ActivaTicket
                 
         With frmVisReport
-            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
+            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
             .SoloImprimir = True
             .OtrosParametros = ""
             .NumeroParametros = 1
@@ -2298,7 +2298,7 @@ Dim i As Integer
                 CadParam = "|pPagina=" & i & "|"
                 
                 With frmVisReport
-                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
+                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
                     .SoloImprimir = True
                     .OtrosParametros = CadParam ' ""
                     .NumeroParametros = 1
@@ -2346,7 +2346,7 @@ Dim Cad As String
     
     frmEntBascula2.crear = 1
     
-    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
+    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
     If TotalRegistros(Sql) <> 0 Then
         Cad = "La paletización para esta entrada ya está realizada." & vbCrLf
         Cad = Cad & vbCrLf & "            ¿ Desea crearla de nuevo ? "
@@ -2370,7 +2370,7 @@ Dim Cad As String
     If vParamAplic.EsCaja4 Then cajas = cajas + DBLet(Data1.Recordset!numcajo4, "N")
     If vParamAplic.EsCaja5 Then cajas = cajas + DBLet(Data1.Recordset!numcajo5, "N")
     
-    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!numnotac)
+    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!Numnotac)
     frmEntBascula2.NumCajones = CStr(cajas)
     frmEntBascula2.Numkilos = ImporteSinFormato(Text1(11).Text)
     frmEntBascula2.Codsocio = Text1(1).Text
@@ -2489,7 +2489,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vtabla = NombreTabla1
+        frmB.vTabla = NombreTabla1
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
@@ -2514,7 +2514,7 @@ Private Sub cmdRegresar_Click()
 Dim Cad As String
 Dim Aux As String
 Dim i As Integer
-Dim J As Integer
+Dim j As Integer
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
@@ -2524,12 +2524,12 @@ Dim J As Integer
     Cad = ""
     i = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
+        j = i + 1
+        i = InStr(j, DatosADevolverBusqueda, "|")
         If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
-            J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            Aux = Mid(DatosADevolverBusqueda, j, i - j)
+            j = Val(Aux)
+            Cad = Cad & Text1(j).Text & "|"
         End If
     Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
@@ -2679,7 +2679,7 @@ Dim Cad As String
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        If Not Eliminar Then
+        If Not eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ' **** repasar si es diu Data1 l'adodc de la capçalera ***
@@ -2965,7 +2965,7 @@ Dim Cad As String, Indicador As String
 End Sub
 
 
-Private Function Eliminar() As Boolean
+Private Function eliminar() As Boolean
 Dim vWhere As String
 Dim Mens As String
 
@@ -2973,7 +2973,7 @@ Dim Mens As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & Data1.Recordset!numnotac
+    vWhere = " WHERE numnotac=" & Data1.Recordset!Numnotac
         ' ***********************************************************************
         
     Mens = "Actualizar chivato"
@@ -2981,7 +2981,7 @@ Dim Mens As String
         
         
     ' ***** elimina les llínies ****
-    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!numnotac))
+    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!Numnotac))
 
     conn.Execute "Delete from " & NombreTabla & vWhere
        
@@ -2989,10 +2989,10 @@ FinEliminar:
     If Err.Number <> 0 Or Not b Then
         MuestraError Err.Number, "Eliminar"
         conn.RollbackTrans
-        Eliminar = False
+        eliminar = False
     Else
         conn.CommitTrans
-        Eliminar = True
+        eliminar = True
     End If
 End Function
 
@@ -4680,7 +4680,7 @@ End Function
 Private Sub CrearPaletizacion()
 Dim Sql As String
 
-    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
+    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
     conn.Execute Sql
     
     mnPaletizacion_Click
@@ -4700,7 +4700,7 @@ Dim IdPalet As Currency
 
     If vParamAplic.HayTraza = False Then Exit Sub
     
-    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
+    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
@@ -4723,7 +4723,7 @@ Dim IdPalet As Currency
         If vParamAplic.EsCaja5 Then NumCajas = NumCajas + DBLet(Data1.Recordset!numcajo5, "N")
         
         If NumCajas = 0 Then 'vamos por palots y debemos ver cuantos registros=palots tenemos
-            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
+            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
             
             Numlineas = TotalRegistros(Sql1)
         End If
@@ -5347,7 +5347,7 @@ Dim NumF As String
     If Not Rs.EOF Then
         Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
         
-        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!numnotac, "N"), "######0") & """"
+        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!Numnotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
         cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
@@ -5388,8 +5388,8 @@ Dim NumF As String
         
         Sql = Sql & DBSet(Now, "F") & ","
         Sql = Sql & DBSet("&", "T") & ","
-        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
-        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
         Sql = Sql & DBSet(cadena, "T") & ","
         Sql = Sql & ValorNulo & ","
         Sql = Sql & ValorNulo & ","

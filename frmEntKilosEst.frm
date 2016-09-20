@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmEntKilosEst 
@@ -467,7 +467,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo Error1
     
@@ -481,14 +481,14 @@ Dim cad As String
                     PonerModo 4
                     CargaTxtAux True, True
                 Else 'No existen registros en la tabla sinven para ese criterio de búsqueda
-                    cad = "No hay campos de alta para este socio."
-                    MsgBox cad, vbInformation
+                    Cad = "No hay campos de alta para este socio."
+                    MsgBox Cad, vbInformation
                     PonerFoco Text1(0)
                 End If
             Else
-                cad = "Criterio de Búsqueda incompleto." & vbCrLf
-                cad = cad & "Debe introducir el socio "
-                MsgBox cad, vbExclamation
+                Cad = "Criterio de Búsqueda incompleto." & vbCrLf
+                Cad = Cad & "Debe introducir el socio "
+                MsgBox Cad, vbExclamation
                 PonerFoco Text1(0)
             End If
             
@@ -597,7 +597,7 @@ On Error GoTo ECarga
         
     '[Monica]26/08/2011: Modificacion si es Picassent quiere que saque el nro de orden
     'Cod. Campo
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         DataGrid1.Columns(0).Caption = "Huerto"
         DataGrid1.Columns(0).Width = 1000
         DataGrid1.Columns(0).NumberFormat = "0000"
@@ -665,7 +665,7 @@ On Error GoTo ECarga
     
     '[Monica]26/08/2011: Modificacion si es Picassent el campo lo pongo al final
     'Cod. Campo
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         DataGrid1.Columns(10).Caption = ""
         DataGrid1.Columns(10).Width = 0
         DataGrid1.Columns(10).Alignment = dbgCenter
@@ -706,7 +706,7 @@ Dim alto As Single
 '                Combo1(1).ListIndex = ValorCombo(Combo1(1))
                 PosicionarCombo Combo1(1), Data1.Recordset!Recolect
                 Combo1(1).Locked = False
-                txtAux.Text = DBLet(Data1.Recordset!canaforo, "N")
+                txtAux.Text = DBLet(Data1.Recordset!Canaforo, "N")
                 txtAux.Text = Format(txtAux.Text, "###,###,##0")
                 txtAux.Locked = False
         End If
@@ -977,7 +977,7 @@ Private Function MontaSQLCarga(enlaza As Boolean) As String
 Dim Sql As String
 
 
-    If vParamAplic.Cooperativa = 2 Then ' si es Picassent quiere el nro de orden
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then  ' si es Picassent quiere el nro de orden
         Sql = "SELECT rcampos.nrocampo, rpartida.nomparti, "
     Else
         Sql = "SELECT rcampos.codcampo, rpartida.nomparti, "
@@ -992,7 +992,7 @@ Dim Sql As String
     Sql = Sql & " rcampos.nroarbol,recolect, CASE rcampos.recolect when 0 then ""Cooper"" when 1 then ""Socio"" end as desrecolect, "
     Sql = Sql & " round(rcampos.canaforo * (1 + " & DBSet(vParamAplic.PorcIncreAforo, "N") & "/ 100 ), 0) canaforo, rcampos.canaforo canafororeal "
     
-    If vParamAplic.Cooperativa = 2 Then
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
         Sql = Sql & ", codcampo "
     End If
     Sql = Sql & " FROM (rcampos INNER JOIN rpartida on rcampos.codparti=rpartida.codparti) INNER JOIN variedades ON rcampos.codvarie=variedades.codvarie "
@@ -1069,7 +1069,7 @@ End Function
 
 
 Private Sub PonerBotonCabecera(b As Boolean)
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     If b Then Me.lblIndicador.Caption = ""
 End Sub
@@ -1120,21 +1120,21 @@ Private Sub PasarSigReg()
 '        DataGrid1.Row = DataGrid1.Row + 1
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
     ElseIf DataGrid1.Bookmark = Data1.Recordset.RecordCount Then
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
 
 Private Function ModificarExistencia() As Boolean
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Indicador As String
 
     If DatosOk Then
         If ActualizarExistencia(Combo1(1).ListIndex, txtAux.Text) Then
             TerminaBloquear
-            Numreg = Data1.Recordset.AbsolutePosition
+            NumReg = Data1.Recordset.AbsolutePosition
             CargaGrid True
-            If SituarDataPosicion(Data1, Numreg, Indicador) Then
+            If SituarDataPosicion(Data1, NumReg, Indicador) Then
 
             End If
             ModificarExistencia = True
@@ -1189,7 +1189,7 @@ Dim Rs As ADODB.Recordset
 End Function
 
 
-Private Sub CalcularTotales(Cadena As String)
+Private Sub CalcularTotales(cadena As String)
 Dim Hdas  As Currency
 Dim Has As Currency
 
@@ -1198,7 +1198,7 @@ Dim Sql As String
 
     On Error Resume Next
     
-    Sql = Sql & "select sum(hdas), sum(has) from (" & Cadena & ") aaaaa"
+    Sql = Sql & "select sum(hdas), sum(has) from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1208,7 +1208,7 @@ Dim Sql As String
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     
-    If TotalRegistrosConsulta(Cadena) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
         If Rs.Fields(0).Value <> 0 Then Hdas = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar

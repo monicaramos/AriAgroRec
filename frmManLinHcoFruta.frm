@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManLinHcoFruta 
@@ -1292,13 +1292,13 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-Dim cad As String
+Dim Cad As String
 
-    cad = ""
+    Cad = ""
     If Text1(0).Text <> "" And Text1(1).Text <> "" Then
-        cad = Text1(0).Text & "|" & Text1(1).Text & "|"
+        Cad = Text1(0).Text & "|" & Text1(1).Text & "|"
     End If
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
 
     CheckValueGuardar Me.Name, Me.chkVistaPrevia(0).Value
     Screen.MousePointer = vbDefault
@@ -1414,7 +1414,7 @@ End Sub
 '   En PONERMODO s'habiliten, o no, els diversos camps del
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Integer, Numreg As Byte
+Dim i As Integer, NumReg As Byte
 Dim b As Boolean
 
     On Error GoTo EPonerModo
@@ -1439,11 +1439,11 @@ Dim b As Boolean
     '=======================================
     b = (Modo = 2)
     'Posar Fleches de desplasament visibles
-    Numreg = 1
+    NumReg = 1
     If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then Numreg = 2 'Només es per a saber que n'hi ha + d'1 registre
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, Numreg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
     '---------------------------------------------
     
     b = Modo <> 0 And Modo <> 2
@@ -1632,7 +1632,7 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
     End If
 End Sub
 
-Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmcap_DatoSeleccionado(CadenaSeleccion As String)
     Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codcapataz
     PonerFormatoEntero Text1(indice)
     Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
@@ -1806,20 +1806,20 @@ Private Sub HacerBusqueda()
 End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
+    Dim Cad As String
         
     'Cridem al form
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & ParaGrid(Text1(0), 20, "Código")
-    cad = cad & ParaGrid(Text1(1), 20, "Confección")
-    cad = cad & ParaGrid(Text1(2), 60, "Descripción")
-    If cad <> "" Then
+    Cad = ""
+    Cad = Cad & ParaGrid(Text1(0), 20, "Código")
+    Cad = Cad & ParaGrid(Text1(1), 20, "Confección")
+    Cad = Cad & ParaGrid(Text1(2), 60, "Descripción")
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = NombreTabla
+        frmB.vCampos = Cad
+        frmB.vTabla = NombreTabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         frmB.vDevuelve = "0|1|2|" '*** els camps que volen que torne ***
@@ -1840,10 +1840,10 @@ Private Sub MandaBusquedaPrevia(CadB As String)
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim Aux As String
 Dim i As Integer
-Dim J As Integer
+Dim j As Integer
 
     Unload Me
 End Sub
@@ -1954,7 +1954,7 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub BotonEliminar()
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo EEliminar
 
@@ -1968,15 +1968,15 @@ Dim cad As String
     ' ***************************************************************************
 
     ' *************** canviar la pregunta ****************
-    cad = "¿Seguro que desea eliminar la Nota de Entrada?"
-    cad = cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
-    cad = cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(1)
+    Cad = "¿Seguro que desea eliminar la Nota de Entrada?"
+    Cad = Cad & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
+    Cad = Cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(1)
     
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        If Not Eliminar Then
+        If Not eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -2141,14 +2141,14 @@ EDatosOK:
 End Function
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    cad = "(numalbar=" & DBSet(Text1(0).Text, "N") & ")"
-    cad = cad & " and (numnotac = " & DBSet(Text1(1).Text, "N") & ")"
+    Cad = "(numalbar=" & DBSet(Text1(0).Text, "N") & ")"
+    Cad = Cad & " and (numnotac = " & DBSet(Text1(1).Text, "N") & ")"
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    If SituarDataMULTI(Data1, cad, Indicador) Then
+    If SituarDataMULTI(Data1, Cad, Indicador) Then
     'If SituarData(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
@@ -2158,7 +2158,7 @@ Dim cad As String, Indicador As String
     End If
 End Sub
 
-Private Function Eliminar() As Boolean
+Private Function eliminar() As Boolean
 Dim vWhere As String
 
     On Error GoTo FinEliminar
@@ -2179,10 +2179,10 @@ FinEliminar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar"
         conn.RollbackTrans
-        Eliminar = False
+        eliminar = False
     Else
         conn.CommitTrans
-        Eliminar = True
+        eliminar = True
     End If
 End Function
 
@@ -2272,7 +2272,7 @@ Dim Variedad As String
                         Dim Transporte As Currency
                         Dim TipoEntr As String
                         
-                        If vParamAplic.Cooperativa = 2 Then
+                        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                             Precio = DevuelveValor("select preciokg from rtarifatra where codtarif = " & DBSet(Text1(Index).Text, "N"))
                             Transporte = Round2(Text1(16).Text * Precio, 2)
                             ' dentro del importe de acarreo
@@ -2356,7 +2356,7 @@ End Sub
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim Sql As String
 Dim vWhere As String
-Dim Eliminar As Boolean
+Dim eliminar As Boolean
 Dim bol As Boolean
 Dim MenError As String
 
@@ -2375,7 +2375,7 @@ Dim MenError As String
     If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
-    Eliminar = False
+    eliminar = False
    
     vWhere = ObtenerWhereCab(True)
     
@@ -2386,14 +2386,14 @@ Dim MenError As String
             Sql = "¿Seguro que desea eliminar la Incidencia?"
             Sql = Sql & vbCrLf & "Incidencia: " & AdoAux(Index).Recordset!codincid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-                Eliminar = True
+                eliminar = True
                 Sql = "DELETE FROM rhisfruta_incidencia "
                 Sql = Sql & vWhere & " AND codincid= " & AdoAux(Index).Recordset!codincid
             End If
             
     End Select
 
-    If Eliminar Then
+    If eliminar Then
         NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         BloqueaRegistro "rhisfruta", "numalbar = " & Text1(0).Text
@@ -2435,7 +2435,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vtabla As String
+Dim vWhere As String, vTabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -2456,7 +2456,7 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
-        Case 0: vtabla = "rhisfruta_incidencia"
+        Case 0: vTabla = "rhisfruta_incidencia"
     End Select
     
     vWhere = ObtenerWhereCab(False)
@@ -2496,7 +2496,7 @@ End Sub
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
     Dim i As Integer
-    Dim J As Integer
+    Dim j As Integer
     
     If AdoAux(Index).Recordset.EOF Then Exit Sub
     If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
@@ -2648,7 +2648,7 @@ Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim b As Boolean
 Dim Cant As Integer
@@ -2958,7 +2958,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numalbar=" & Me.Data1.Recordset!numalbar & " and numnotac = " & Me.Data1.Recordset!numnotac
+    vWhere = vWhere & " numalbar=" & Me.Data1.Recordset!numalbar & " and numnotac = " & Me.Data1.Recordset!Numnotac
     
     ObtenerWhereCab = vWhere
 End Function
@@ -3006,7 +3006,7 @@ End Sub
 'End Sub
 
 Private Sub CalcularTotales()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim TotalEnvases As String
 Dim TotalCostes As String
@@ -3019,15 +3019,15 @@ Dim Valor As Currency
     Sql = Sql & " from albaran_calibre where numalbar = " & DBSet(Text1(0).Text, "N")
     Sql = Sql & " and numlinea = " & DBSet(Text1(1).Text, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     TotalEnvases = 0
-    If Not RS.EOF Then
-        If RS.Fields(0).Value > 0 Then TotalEnvases = RS.Fields(0).Value
+    If Not Rs.EOF Then
+        If Rs.Fields(0).Value > 0 Then TotalEnvases = Rs.Fields(0).Value
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     
 '    Text3(0).Text = Format(TotalEnvases, "###,##0")
     If Err.Number <> 0 Then
@@ -3049,9 +3049,9 @@ End Function
 
 
 
-Private Function ActualizarVariedades(Albaran As String, linea As String) As Boolean
+Private Function ActualizarVariedades(Albaran As String, Linea As String) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql1 As String
 
     On Error GoTo eActualizarVariedades
@@ -3059,74 +3059,74 @@ Dim Sql1 As String
     ActualizarVariedades = False
 
     Sql1 = "select sum(pesobrut), sum(pesoneto), sum(numcajas), sum(unidades) from albaran_calibre where numalbar = " & DBSet(Albaran, "N")
-    Sql1 = Sql1 & " and numlinea = " & DBSet(linea, "N")
+    Sql1 = Sql1 & " and numlinea = " & DBSet(Linea, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
-        If DBLet(RS.Fields(0).Value, "N") = 0 Then
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0).Value, "N") = 0 Then
             Sql = "update albaran_variedad set pesobrut = null "
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
-        If DBLet(RS.Fields(1).Value, "N") = 0 Then
+        If DBLet(Rs.Fields(1).Value, "N") = 0 Then
             Sql = "update albaran_variedad set pesoneto = null "
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
-        If DBLet(RS.Fields(2).Value, "N") = 0 Then
+        If DBLet(Rs.Fields(2).Value, "N") = 0 Then
             Sql = "update albaran_variedad set numcajas = null "
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
-        If DBLet(RS.Fields(3).Value, "N") = 0 Then
+        If DBLet(Rs.Fields(3).Value, "N") = 0 Then
             Sql = "update albaran_variedad set unidades = null "
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
         
-        If DBLet(RS.Fields(0).Value, "N") <> 0 Then
-            Sql = "update albaran_variedad set pesobrut = " & DBSet(RS.Fields(0).Value, "N")
+        If DBLet(Rs.Fields(0).Value, "N") <> 0 Then
+            Sql = "update albaran_variedad set pesobrut = " & DBSet(Rs.Fields(0).Value, "N")
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
         
-        If DBLet(RS.Fields(1).Value, "N") <> 0 Then
-            Sql = "update albaran_variedad set pesoneto = " & DBSet(RS.Fields(1).Value, "N")
+        If DBLet(Rs.Fields(1).Value, "N") <> 0 Then
+            Sql = "update albaran_variedad set pesoneto = " & DBSet(Rs.Fields(1).Value, "N")
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
-        If DBLet(RS.Fields(2).Value, "N") <> 0 Then
-            Sql = "update albaran_variedad set numcajas = " & DBSet(RS.Fields(2).Value, "N")
+        If DBLet(Rs.Fields(2).Value, "N") <> 0 Then
+            Sql = "update albaran_variedad set numcajas = " & DBSet(Rs.Fields(2).Value, "N")
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
-        If DBLet(RS.Fields(3).Value, "N") <> 0 Then
-            Sql = "update albaran_variedad set unidades = " & DBSet(RS.Fields(3).Value, "N")
+        If DBLet(Rs.Fields(3).Value, "N") <> 0 Then
+            Sql = "update albaran_variedad set unidades = " & DBSet(Rs.Fields(3).Value, "N")
             Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
-            Sql = Sql & " and numlinea = " & DBSet(linea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
             conn.Execute Sql
         End If
     
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 eActualizarVariedades:
     If Err.Number = 0 Then ActualizarVariedades = True

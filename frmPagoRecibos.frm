@@ -639,7 +639,7 @@ Dim Sql As String
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If HayRegParaInforme(Tabla, cadSelect) Then
-            If vParamAplic.Cooperativa = 2 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                 ProcesarCambiosPicassent (cadSelect)
             Else
                 ProcesarCambios (cadSelect)
@@ -647,7 +647,7 @@ Dim Sql As String
         Else
             Repetir = True
             If MsgBox("¿Desea repetir el proceso?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                If vParamAplic.Cooperativa = 2 Then ' si la cooperativa es picassent repite norma como natural
+                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then ' si la cooperativa es picassent repite norma como natural
                     RepetirNormaPicassent cadSelect
                 Else
                     '[Monica]03/11/2010: anteriormente en Alzira no grababamos en rrecibosnomina, ahora sí
@@ -706,8 +706,8 @@ On Error GoTo eProcesarCambios
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -728,7 +728,7 @@ On Error GoTo eProcesarCambios
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         Sql2 = "select salarios.impsalar, salarios.imphorae, straba.dtosirpf, straba.dtosegso, straba.porc_antig from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
@@ -1685,13 +1685,13 @@ Dim List As Collection
             W = 6660
             FrameHorasTrabajadasVisible True, H, W
             indFrame = 0
-            Me.cmdCancel(0).Cancel = True
+            Me.CmdCancel(0).Cancel = True
         Case 2
             H = 7530
             W = 6660
             FramePagoRecibosNaturalVisible True, H, W
             indFrame = 0
-            Me.cmdCancel(1).Cancel = True
+            Me.CmdCancel(1).Cancel = True
     End Select
         
     Tabla = "horas"
@@ -1702,7 +1702,7 @@ Dim List As Collection
     
     Me.Combo1(1).ListIndex = 1
     
-    Pb1.visible = False
+    pb1.visible = False
     pb2.visible = False
 End Sub
 
@@ -1876,7 +1876,7 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vtabla = Tabla
+        frmB.vTabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano

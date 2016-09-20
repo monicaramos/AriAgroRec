@@ -338,7 +338,7 @@ Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -373,10 +373,10 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim KilosDestrio As Currency
 Dim KilosPixat As Currency
@@ -396,26 +396,26 @@ Dim RstaGlobal As Boolean
 
     conn.BeginTrans
 
-    sql = "select * from rhisfruta_aux  order by numalbar "
-    Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select * from rhisfruta_aux  order by numalbar "
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
-        Label4.Caption = "Albaran " & Format(DBLet(RS!numalbar, "N"), "0000000")
+    While Not Rs.EOF
+        Label4.Caption = "Albaran " & Format(DBLet(Rs!numalbar, "N"), "0000000")
         
-        KilosDestrio = Round(RS!KilosNet * RS!pordestrio / 100, 0)
-        KilosPixat = Round(RS!KilosNet * RS!PORPIXAT / 100, 0)
+        KilosDestrio = Round(Rs!KilosNet * Rs!pordestrio / 100, 0)
+        KilosPixat = Round(Rs!KilosNet * Rs!PORPIXAT / 100, 0)
         
-        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(RS!numalbar, "N") & " and codvarie = " & DBSet(RS!codvarie, "N") & " and codcalid = 5")
+        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcalid = 5")
         
         
-        Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(RS!numalbar, "N") & " order by codvarie, codcalid "
+        Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " order by codvarie, codcalid "
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
-        v1 = RS!KilosNet - KilosDes
-        v2 = RS!KilosNet - KilosDestrio - KilosPixat
+        v1 = Rs!KilosNet - KilosDes
+        v2 = Rs!KilosNet - KilosDestrio - KilosPixat
         TotalKilos = v2
         
         
@@ -433,8 +433,8 @@ Dim RstaGlobal As Boolean
             End Select
             
            
-            Sql3 = " where numalbar = " & DBSet(RS!numalbar, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(RS!codvarie, "N")
+            Sql3 = " where numalbar = " & DBSet(Rs!numalbar, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             Rs2.MoveNext
             
@@ -463,9 +463,9 @@ Dim RstaGlobal As Boolean
         Wend
         Set Rs2 = Nothing
             
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
 
     conn.CommitTrans
     MsgBox "Proceso realizado correctamente", vbExclamation
@@ -478,13 +478,13 @@ EAceptar:
 End Sub
 
 Private Sub CmdAcepRec_Click(Index As Integer)
-Dim sql As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
                 
 Dim Ent As String ' Entidad
 Dim Suc As String ' Oficina
 Dim DC As String ' Digitos de control
-Dim I, i2, i3, i4 As Integer
+Dim i, i2, i3, i4 As Integer
 Dim NumCC As String ' Número de cuenta propiamente dicho
 Dim CC As String
 Dim cadResult As String
@@ -503,44 +503,44 @@ Dim NFich As Integer
     DoEvents
        
     
-    sql = "select codsocio,codbanco,codsucur,digcontr,cuentaba from rsocios where cuentaba <> '8888888888' order by codsocio "
+    Sql = "select codsocio,codbanco,codsucur,digcontr,cuentaba from rsocios where cuentaba <> '8888888888' order by codsocio "
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
 
     cadResult = ""
 
-    While Not RS.EOF
-        Label2(4).Caption = "Socio : " & Format(DBLet(RS!Codsocio), "000000")
+    While Not Rs.EOF
+        Label2(4).Caption = "Socio : " & Format(DBLet(Rs!Codsocio), "000000")
         DoEvents
     
-        If IsNumeric(DBLet(RS!CuentaBa)) And IsNumeric(DBLet(RS!CodBanco)) And IsNumeric(DBLet(RS!CodSucur)) Then
+        If IsNumeric(DBLet(Rs!CuentaBa)) And IsNumeric(DBLet(Rs!CodBanco)) And IsNumeric(DBLet(Rs!CodSucur)) Then
             
-                If Not IsNumeric(DBLet(RS!digcontr)) Then
+                If Not IsNumeric(DBLet(Rs!digcontr)) Then
                     DDCC = 0
                 Else
-                    DDCC = DBLet(RS!digcontr)
+                    DDCC = DBLet(Rs!digcontr)
                 End If
                 
             
-                CC = Format(DBLet(RS!CodBanco), "0000") & Format(DBLet(RS!CodSucur), "0000") & Format(DDCC, "00") & Format(DBLet(RS!CuentaBa), "0000000000")
+                CC = Format(DBLet(Rs!CodBanco), "0000") & Format(DBLet(Rs!CodSucur), "0000") & Format(DDCC, "00") & Format(DBLet(Rs!CuentaBa), "0000000000")
                 
                 If Len(CC) = 20 Then  '-- Las cuentas deben contener 20 dígitos en total
                     If Not Comprueba_CC(CC) Then
                         
                         '-- Calculamos el primer dígito de control
-                        I = Val(Mid(CC, 1, 1)) * 4
-                        I = I + Val(Mid(CC, 2, 1)) * 8
-                        I = I + Val(Mid(CC, 3, 1)) * 5
-                        I = I + Val(Mid(CC, 4, 1)) * 10
-                        I = I + Val(Mid(CC, 5, 1)) * 9
-                        I = I + Val(Mid(CC, 6, 1)) * 7
-                        I = I + Val(Mid(CC, 7, 1)) * 3
-                        I = I + Val(Mid(CC, 8, 1)) * 6
-                        i2 = Int(I / 11)
-                        i3 = I - (i2 * 11)
+                        i = Val(Mid(CC, 1, 1)) * 4
+                        i = i + Val(Mid(CC, 2, 1)) * 8
+                        i = i + Val(Mid(CC, 3, 1)) * 5
+                        i = i + Val(Mid(CC, 4, 1)) * 10
+                        i = i + Val(Mid(CC, 5, 1)) * 9
+                        i = i + Val(Mid(CC, 6, 1)) * 7
+                        i = i + Val(Mid(CC, 7, 1)) * 3
+                        i = i + Val(Mid(CC, 8, 1)) * 6
+                        i2 = Int(i / 11)
+                        i3 = i - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -552,18 +552,18 @@ Dim NFich As Integer
                         DC = i4
                         
                         '-- Calculamos el segundo dígito de control
-                        I = Val(Mid(CC, 11, 1)) * 1
-                        I = I + Val(Mid(CC, 12, 1)) * 2
-                        I = I + Val(Mid(CC, 13, 1)) * 4
-                        I = I + Val(Mid(CC, 14, 1)) * 8
-                        I = I + Val(Mid(CC, 15, 1)) * 5
-                        I = I + Val(Mid(CC, 16, 1)) * 10
-                        I = I + Val(Mid(CC, 17, 1)) * 9
-                        I = I + Val(Mid(CC, 18, 1)) * 7
-                        I = I + Val(Mid(CC, 19, 1)) * 3
-                        I = I + Val(Mid(CC, 20, 1)) * 6
-                        i2 = Int(I / 11)
-                        i3 = I - (i2 * 11)
+                        i = Val(Mid(CC, 11, 1)) * 1
+                        i = i + Val(Mid(CC, 12, 1)) * 2
+                        i = i + Val(Mid(CC, 13, 1)) * 4
+                        i = i + Val(Mid(CC, 14, 1)) * 8
+                        i = i + Val(Mid(CC, 15, 1)) * 5
+                        i = i + Val(Mid(CC, 16, 1)) * 10
+                        i = i + Val(Mid(CC, 17, 1)) * 9
+                        i = i + Val(Mid(CC, 18, 1)) * 7
+                        i = i + Val(Mid(CC, 19, 1)) * 3
+                        i = i + Val(Mid(CC, 20, 1)) * 6
+                        i2 = Int(i / 11)
+                        i3 = i - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -574,19 +574,19 @@ Dim NFich As Integer
                         
                         DC = DC & i4
                         
-                        sql = "update rsocios set digcontr = " & DBSet(DC, "N") & " where codsocio = " & DBSet(RS!Codsocio, "N")
-                        conn.Execute sql
+                        Sql = "update rsocios set digcontr = " & DBSet(DC, "N") & " where codsocio = " & DBSet(Rs!Codsocio, "N")
+                        conn.Execute Sql
                     
-                        cadResult = cadResult & DBLet(RS!Codsocio, "N") & "-"
+                        cadResult = cadResult & DBLet(Rs!Codsocio, "N") & "-"
                     
-                        Print #NFich, "Socio : " & Format(DBLet(RS!Codsocio), "000000") & " DC Anterior " & DBLet(RS!digcontr) & " - Nuevo " & DC
+                        Print #NFich, "Socio : " & Format(DBLet(Rs!Codsocio), "000000") & " DC Anterior " & DBLet(Rs!digcontr) & " - Nuevo " & DC
                     
                     End If
                 End If
             
         End If
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
 
     If cadResult <> "" Then
@@ -594,7 +594,7 @@ Dim NFich As Integer
         cadResult = Mid(cadResult, 1, Len(cadResult) - 1)
     
     
-        Set RS = Nothing
+        Set Rs = Nothing
         
         conn.CommitTrans
         
@@ -641,7 +641,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, W As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -662,16 +662,16 @@ End Sub
 
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        sql = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -744,7 +744,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -772,7 +772,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -782,7 +782,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -807,7 +807,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -842,9 +842,9 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
@@ -870,22 +870,22 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        sql = sql & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ActualizarRegistros = True
     Exit Function
@@ -903,17 +903,17 @@ Public Function GeneraRegistros(vDesde As String, vHasta As String) As Boolean
 'Actualizar la tabla ariges.scafac.inconta=1 para indicar que ya esta contabilizada
 Dim b As Boolean
 Dim cadMen As String
-Dim sql As String
+Dim Sql As String
 Dim NumF As Currency
 Dim vFactADV As CFacturaADV
-Dim vSocio As CSocio
-Dim RS As ADODB.Recordset
+Dim vSocio As cSocio
+Dim Rs As ADODB.Recordset
 Dim cadErr As String
 
 
 Dim Desde As Long
 Dim Hasta As Long
-Dim I As Long
+Dim i As Long
 
     On Error GoTo EContab
 
@@ -924,23 +924,23 @@ Dim I As Long
     Desde = CLng(vDesde)
     Hasta = CLng(vHasta)
     
-    sql = "select numalbar from rhisfruta where tipoentr <> 1 and numalbar >=  " & DBSet(Desde, "N")
-    sql = sql & " and numalbar <= " & DBSet(Hasta, "N")
-    sql = sql & " order by numalbar "
+    Sql = "select numalbar from rhisfruta where tipoentr <> 1 and numalbar >=  " & DBSet(Desde, "N")
+    Sql = Sql & " and numalbar <= " & DBSet(Hasta, "N")
+    Sql = Sql & " order by numalbar "
     
-    Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF And b
-        Label2(2).Caption = RS!numalbar
+    While Not Rs.EOF And b
+        Label2(2).Caption = Rs!numalbar
         DoEvents
     
-        b = CalculoGastosTransporte(RS!numalbar, cadErr)
+        b = CalculoGastosTransporte(Rs!numalbar, cadErr)
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
 'antes
 '    I = vDesde
@@ -969,8 +969,8 @@ EContab:
 End Function
 
 Private Function CalculoGastosTransporte(Albaran As Long, cadErr As String) As Boolean
-Dim sql As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 Dim PrecTarifaAlm As Currency
 Dim PrecTarifaAlm2 As Currency
 Dim PrecTarifa As Currency
@@ -986,19 +986,19 @@ On Error GoTo EInsertar
 
     cadErr = ""
 
-    If vParamAplic.Cooperativa <> 2 Then
-        sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilosnet) as kilos "
+    If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
+        Sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilosnet) as kilos "
     Else
-        sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilostra) as kilos "
+        Sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilostra) as kilos "
     End If
-    sql = sql & " from rhisfruta_entradas, rtarifatra where numalbar = " & DBSet(Albaran, "N")
-    sql = sql & " and rtarifatra.tipotarifa <> 2 " 'las tarifas que buscamos son del tipo 1 o 2 (no sin asignar)
-    sql = sql & " and rtarifatra.codtarif = rhisfruta_entradas.codtarif "
-    sql = sql & " group by 1, 2, 3 "
-    sql = sql & " order by 1, 2, 3 "
+    Sql = Sql & " from rhisfruta_entradas, rtarifatra where numalbar = " & DBSet(Albaran, "N")
+    Sql = Sql & " and rtarifatra.tipotarifa <> 2 " 'las tarifas que buscamos son del tipo 1 o 2 (no sin asignar)
+    Sql = Sql & " and rtarifatra.codtarif = rhisfruta_entradas.codtarif "
+    Sql = Sql & " group by 1, 2, 3 "
+    Sql = Sql & " order by 1, 2, 3 "
 
-    Set RS = New ADODB.Recordset
-    RS.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     PrecTarifaAlm = DevuelveValor("select preciokg from rtarifatra where codtarif = " & vParamAplic.TarifaTRA)
     PrecTarifaAlm2 = DevuelveValor("select preciokg from rtarifatra where codtarif = " & vParamAplic.TarifaTRA2)
@@ -1007,60 +1007,60 @@ On Error GoTo EInsertar
     TotImpTrans = 0
     ImpGastoSocio = 0
     
-    While Not RS.EOF
-        PrecTarifa = DevuelveValor("select preciokg from rtarifatra where codtarif = " & DBSet(RS!Codtarif, "N"))
+    While Not Rs.EOF
+        PrecTarifa = DevuelveValor("select preciokg from rtarifatra where codtarif = " & DBSet(Rs!Codtarif, "N"))
         
-        ImpTrans = Round2(PrecTarifa * DBLet(RS!Kilos, "N"), 2)
+        ImpTrans = Round2(PrecTarifa * DBLet(Rs!Kilos, "N"), 2)
         
         TotImpTrans = TotImpTrans + ImpTrans
-        If vParamAplic.Cooperativa <> 2 Then
-            sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
-            sql = sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(RS!Numnotac, "N")
+        If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
+            Sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             
-            conn.Execute sql
+            conn.Execute Sql
         End If
-        If DBLet(RS!tipotarifa, "N") = 0 Then
-            ImpGastoSocio = ImpGastoSocio + Round2((DBLet(RS!Kilos, "N") * (PrecTarifa - PrecTarifaAlm)), 2)
+        If DBLet(Rs!tipotarifa, "N") = 0 Then
+            ImpGastoSocio = ImpGastoSocio + Round2((DBLet(Rs!Kilos, "N") * (PrecTarifa - PrecTarifaAlm)), 2)
         Else
-            ImpGastoSocio = ImpGastoSocio + Round2((DBLet(RS!Kilos, "N") * (PrecTarifa - PrecTarifaAlm2)), 2)
+            ImpGastoSocio = ImpGastoSocio + Round2((DBLet(Rs!Kilos, "N") * (PrecTarifa - PrecTarifaAlm2)), 2)
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
-    If vParamAplic.Cooperativa <> 2 Then
+    If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
         ' actualizamos cabecera
-        sql = "update rhisfruta set imptrans = " & DBSet(TotImpTrans, "N")
-        sql = sql & " where numalbar = " & DBSet(Albaran, "N")
+        Sql = "update rhisfruta set imptrans = " & DBSet(TotImpTrans, "N")
+        Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
         
-        conn.Execute sql
+        conn.Execute Sql
     End If
     
     If ImpGastoSocio <> 0 Then
         ' si existe registro en la tabla rhisfruta_gastos de concepto codgastotra actualizamos el importe
-        sql = "select count(*) from rhisfruta_gastos where numalbar = " & DBSet(Albaran, "N")
-        sql = sql & " and codgasto = " & DBSet(vParamAplic.CodGastoTRA, "N")
+        Sql = "select count(*) from rhisfruta_gastos where numalbar = " & DBSet(Albaran, "N")
+        Sql = Sql & " and codgasto = " & DBSet(vParamAplic.CodGastoTRA, "N")
         
-        If TotalRegistros(sql) = 0 Then
+        If TotalRegistros(Sql) = 0 Then
         
             NumF = ""
             NumF = SugerirCodigoSiguienteStr("rhisfruta_gastos", "numlinea", "numalbar = " & DBSet(Albaran, "N"))
             ' grabamos un registro en con los gastos del cliente
-            sql = "insert into rhisfruta_gastos (numalbar, numlinea, codgasto, importe) values (" & DBSet(Albaran, "N") & ","
-            sql = sql & DBSet(NumF, "N") & "," & DBSet(vParamAplic.CodGastoTRA, "N") & "," & DBSet(ImpGastoSocio, "N") & ")"
+            Sql = "insert into rhisfruta_gastos (numalbar, numlinea, codgasto, importe) values (" & DBSet(Albaran, "N") & ","
+            Sql = Sql & DBSet(NumF, "N") & "," & DBSet(vParamAplic.CodGastoTRA, "N") & "," & DBSet(ImpGastoSocio, "N") & ")"
             
-            conn.Execute sql
+            conn.Execute Sql
             
         Else
         
             ' acualizamos el registro que hay
-            sql = "update rhisfruta_gastos set importe = " & DBSet(ImpGastoSocio, "N")
-            sql = sql & " where numalbar = " & DBSet(Albaran, "N")
-            sql = sql & " and codgasto = " & DBSet(vParamAplic.CodGastoTRA, "N")
+            Sql = "update rhisfruta_gastos set importe = " & DBSet(ImpGastoSocio, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
+            Sql = Sql & " and codgasto = " & DBSet(vParamAplic.CodGastoTRA, "N")
             
-            conn.Execute sql
+            conn.Execute Sql
         
         End If
     End If

@@ -557,7 +557,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Then
                     frmManHorasDestajo.Show vbModal 'mantenimiento de horas de destajo
                 Else
-                    If vParamAplic.Cooperativa = 2 Then
+                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                         frmManHorasDestajoPica.Show vbModal  'Entrada de Horas destajo picassent
                     End If
                 End If
@@ -570,7 +570,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 If vParamAplic.Cooperativa = 9 Then
                     frmManHorasNat.Show vbModal  'Entrada de Horas de trabajadores para natural de montaña
                 Else
-                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
+                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Then
                         If vParamAplic.Cooperativa = 0 Then frmManHorasPica.Caption = "Entrada de Horas"
                         frmManHorasPica.Show vbModal  'Entrada de Horas de trabajadores para picassent
                     Else
@@ -1071,18 +1071,18 @@ Dim i As Integer
     
     '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
     ' mantenimiento de calibradores solo para catadau , alzira, castelduc y picassent
-    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
-    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9))
+    MDIppal.mnRecG_Admon(25).Enabled = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16))
+    MDIppal.mnRecG_Admon(25).visible = ((vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 2) Or (vParamAplic.Cooperativa = 4) Or (vParamAplic.Cooperativa = 5) Or (vParamAplic.Cooperativa = 9) Or (vParamAplic.Cooperativa = 16))
     
     
     MDIppal.mnRec_AlmzLiquidacion(4).Enabled = vParamAplic.Cooperativa = 1
     MDIppal.mnRec_AlmzLiquidacion(4).visible = vParamAplic.Cooperativa = 1
     
-    MDIppal.mnRec_LiquFO(1).Enabled = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
-    MDIppal.mnRec_LiquFO(1).visible = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
+    MDIppal.mnRec_LiquFO(1).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
+    MDIppal.mnRec_LiquFO(1).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
     '[Monica]10/01/2014: incremento de liquidacion para picassent
-    MDIppal.mnRec_LiquFO(2).Enabled = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
-    MDIppal.mnRec_LiquFO(2).visible = (vParamAplic.Cooperativa = 2) 'Solo para Picassent
+    MDIppal.mnRec_LiquFO(2).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
+    MDIppal.mnRec_LiquFO(2).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
     
     '[Monica]23/09/2011: la rectificacion de facturas de consumo de momento solo para Quatretonda
     MDIppal.mnRec_Pozos(28).Enabled = (vParamAplic.Cooperativa = 7)
@@ -1166,8 +1166,8 @@ Dim i As Integer
     MDIppal.mnP_PreNominas(12).visible = vParamAplic.Cooperativa = 9
 
     '[Monica]12/12/2013: el informe de atria solo lo ve Picassent
-    MDIppal.mnRec_InforOfi(2).Enabled = (vParamAplic.Cooperativa = 2)
-    MDIppal.mnRec_InforOfi(2).visible = (vParamAplic.Cooperativa = 2)
+    MDIppal.mnRec_InforOfi(2).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
+    MDIppal.mnRec_InforOfi(2).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
     
     '[Monica]12/12/2013: el informe de fitosanitarios solo para catadau
     MDIppal.mnRec_InforOfi(3).Enabled = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)

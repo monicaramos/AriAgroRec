@@ -472,7 +472,7 @@ Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
 Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en los listados
                         'Se necesita si el tipo de codigo es texto
 
-Public Event RectificarFactura(cliente As String, observaciones As String)
+Public Event RectificarFactura(Cliente As String, Observaciones As String)
 
 Private Conexion As Byte
 '1.- Conexión a BD Ariges  2.- Conexión a BD Conta
@@ -494,7 +494,7 @@ Attribute frmC.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -525,18 +525,18 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Sub Check1_Click(Index As Integer)
-Dim I As Integer
+Dim i As Integer
     Select Case Index
         Case 2
-            For I = 0 To 1
-                Check1(I).Enabled = (Check1(2).Value = 0)
-            Next I
+            For i = 0 To 1
+                Check1(i).Enabled = (Check1(2).Value = 0)
+            Next i
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje daba error y lo he comentado
 '            Check1(3).Enabled = (Check1(2).Value = 0)
         Case 3
-            For I = 0 To 2
-                Check1(I).Enabled = (Check1(3).Value = 0)
-            Next I
+            For i = 0 To 2
+                Check1(i).Enabled = (Check1(3).Value = 0)
+            Next i
     End Select
 End Sub
 
@@ -553,15 +553,15 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Select Case Index
         Case 0 ' impresion de recibos
             '======== FORMULA  ====================================
             'D/H TRABAJADOR
-            cDesde = Trim(txtCodigo(18).Text)
-            cHasta = Trim(txtCodigo(19).Text)
+            cDesde = Trim(txtcodigo(18).Text)
+            cHasta = Trim(txtcodigo(19).Text)
             nDesde = txtNombre(18).Text
             nHasta = txtNombre(19).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -572,8 +572,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             End If
              
              'D/H ALMACEN
-            cDesde = Trim(txtCodigo(2).Text)
-            cHasta = Trim(txtCodigo(3).Text)
+            cDesde = Trim(txtcodigo(2).Text)
+            cHasta = Trim(txtcodigo(3).Text)
             nDesde = txtNombre(2).Text
             nHasta = txtNombre(3).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -584,8 +584,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             End If
            
             'D/H fecha
-            cDesde = Trim(txtCodigo(16).Text)
-            cHasta = Trim(txtCodigo(17).Text)
+            cDesde = Trim(txtcodigo(16).Text)
+            cHasta = Trim(txtcodigo(17).Text)
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
                 Codigo = "{horas.fecharec}"
@@ -594,8 +594,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             End If
             
             'D/H FORMA DE PAGO DEL TRABAJADOR
-            cDesde = Trim(txtCodigo(0).Text)
-            cHasta = Trim(txtCodigo(1).Text)
+            cDesde = Trim(txtcodigo(0).Text)
+            cHasta = Trim(txtcodigo(1).Text)
             nDesde = txtNombre(0).Text
             nHasta = txtNombre(1).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -613,12 +613,12 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
             AnyadirAFormula cadFormula, "not isnull({horas.fecharec})"
             AnyadirAFormula cadSelect, "not isnull({horas.fecharec})"
             
-            cadParam = cadParam & "pSeccion=""" & Me.Combo1(1).Text & """|"
+            CadParam = CadParam & "pSeccion=""" & Me.Combo1(1).Text & """|"
             numParam = numParam + 1
             '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Then
+            If vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 9 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                 indRPT = 55 'Informe de horas mensual
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                   
                 'Nombre fichero .rpt a Imprimir
                 cadNombreRPT = nomDocu
@@ -637,9 +637,9 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                 
                     ' sobre horas productivas
                     If Check1(1).Value Then ' se imprime el resumen
-                        cadParam = cadParam & "pHProductivas=1|"
+                        CadParam = CadParam & "pHProductivas=1|"
                     Else
-                        cadParam = cadParam & "pHProductivas=0|"
+                        CadParam = CadParam & "pHProductivas=0|"
                     End If
                     numParam = numParam + 1
                     
@@ -692,28 +692,28 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 15 ' Informe de Horas Trabajadas
-                PonerFoco txtCodigo(18)
+                PonerFoco txtcodigo(18)
         End Select
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
-Dim I As Integer
+Dim i As Integer
 
     PrimeraVez = True
     limpiar Me
 
     'IMAGES para busqueda
     Set List = New Collection
-    For h = 24 To 27
-        List.Add h
-    Next h
-    For h = 1 To 10
-        List.Add h
-    Next h
+    For H = 24 To 27
+        List.Add H
+    Next H
+    For H = 1 To 10
+        List.Add H
+    Next H
     List.Add 12
     List.Add 13
     List.Add 14
@@ -726,12 +726,12 @@ Dim I As Integer
 '        Me.imgBuscar(List.item(h)).Picture = frmPpal.imgListImages16.ListImages(1).Picture
 '    Next h
 ' ### [Monica] 09/11/2006    he sustituido el anterior
-    For h = 14 To 15 'imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
-    For h = 0 To 3 'imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
+    For H = 14 To 15 'imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
+    For H = 0 To 3 'imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
      
     
     Set List = Nothing
@@ -741,25 +741,25 @@ Dim I As Integer
     
     '###Descomentar
 '    CommitConexion
-    h = 6870
-    w = 6660
-    FrameHorasTrabajadasVisible True, h, w
+    H = 6870
+    W = 6660
+    FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
     Tabla = "horas"
         
     CargaCombo
         
-    For I = 0 To Check1.Count - 1
+    For i = 0 To Check1.Count - 1
         '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-        Check1(I).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-        Check1(I).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-    Next I
+        Check1(i).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+        Check1(i).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+    Next i
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.CmdCancel.Cancel = True
+    Me.Width = W + 70
+    Me.Height = H + 350
     
     Me.Combo1(1).ListIndex = 1
 End Sub
@@ -767,29 +767,29 @@ End Sub
 
 Private Sub frmAlm_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Almacenes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(CByte(imgFecha(2).Tag) + 14).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(CByte(imgFecha(2).Tag) + 14).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
-Private Sub frmFpa_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -808,7 +808,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmManTraba (Index)
     
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -838,18 +838,18 @@ Private Sub imgFecha_Click(Index As Integer)
 
     imgFecha(2).Tag = Index '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Index + 14).Text <> "" Then frmC.NovaData = txtCodigo(Index + 14).Text
+    If txtcodigo(Index + 14).Text <> "" Then frmC.NovaData = txtcodigo(Index + 14).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(CByte(imgFecha(2).Tag) + 14) '<===
+    PonerFoco txtcodigo(CByte(imgFecha(2).Tag) + 14) '<===
     ' ********************************************
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -887,10 +887,10 @@ End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -899,20 +899,20 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0, 1 'FORMAS DE PAGO
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "forpago", "nomforpa", "codforpa", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "forpago", "nomforpa", "codforpa", "N")
             
         Case 2, 3 'almacen
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "salmpr", "nomalmac", "codalmac", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "salmpr", "nomalmac", "codalmac", "N")
         
         Case 16, 17 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 18, 19 'TRABAJADORES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "straba", "nomtraba", "codtraba", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "straba", "nomtraba", "codtraba", "N")
     End Select
 End Sub
 
-Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el listado de horas trabajadas
     Me.FrameHorasTrabajadas.visible = visible
     If visible = True Then
@@ -920,15 +920,15 @@ Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef h As Integer, 
         Me.FrameHorasTrabajadas.Left = 0
         Me.FrameHorasTrabajadas.Height = 6555 '6870
         Me.FrameHorasTrabajadas.Width = 6660
-        w = Me.FrameHorasTrabajadas.Width
-        h = Me.FrameHorasTrabajadas.Height
+        W = Me.FrameHorasTrabajadas.Width
+        H = Me.FrameHorasTrabajadas.Height
     End If
 End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -956,7 +956,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -966,7 +966,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -990,11 +990,11 @@ Private Sub AbrirFrmManFPago(indice As Integer)
 
     Set frmFPa = New frmComercial
     
-    AyudaFPagoCom frmFPa, txtCodigo(indice)
+    AyudaFPagoCom frmFPa, txtcodigo(indice)
     
     Set frmFPa = Nothing
     
-    PonerFoco txtCodigo(indice)
+    PonerFoco txtcodigo(indice)
 End Sub
 
 Private Sub AbrirFrmManAlm(indice As Integer)
@@ -1002,11 +1002,11 @@ Private Sub AbrirFrmManAlm(indice As Integer)
     
     Set frmAlm = New frmComercial
     
-    AyudaAlmacenCom frmAlm, txtCodigo(indice)
+    AyudaAlmacenCom frmAlm, txtcodigo(indice)
     
     Set frmAlm = Nothing
     
-    PonerFoco txtCodigo(indice)
+    PonerFoco txtcodigo(indice)
 End Sub
 
 
@@ -1014,7 +1014,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1

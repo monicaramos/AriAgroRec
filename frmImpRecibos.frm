@@ -331,7 +331,7 @@ Attribute frmC.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -377,15 +377,15 @@ Dim numParam2 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     Select Case Index
         Case 0 ' impresion de recibos
             '======== FORMULA  ====================================
             'D/H TRABAJADOR
-            cDesde = Trim(txtCodigo(18).Text)
-            cHasta = Trim(txtCodigo(19).Text)
+            cDesde = Trim(txtcodigo(18).Text)
+            cHasta = Trim(txtcodigo(19).Text)
             nDesde = txtNombre(18).Text
             nHasta = txtNombre(19).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -396,8 +396,8 @@ Dim numParam2 As String
             End If
             
             'D/H fecha
-            cDesde = Trim(txtCodigo(16).Text)
-            cHasta = Trim(txtCodigo(17).Text)
+            cDesde = Trim(txtcodigo(16).Text)
+            cHasta = Trim(txtcodigo(17).Text)
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
                 Codigo = "{horas.fechahora}"
@@ -405,7 +405,7 @@ Dim numParam2 As String
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
                        
-            cadParam2 = cadParam
+            cadParam2 = CadParam
             numParam2 = numParam
                        
             'Tipo de seccion
@@ -415,31 +415,31 @@ Dim numParam2 As String
             
             Tabla = "horas INNER JOIN straba ON horas.codtraba = straba.codtraba "
                        
-            cadParam = cadParam & "pFecha=""" & txtCodigo(20).Text & """|"
+            CadParam = CadParam & "pFecha=""" & txtcodigo(20).Text & """|"
             numParam = numParam + 1
-            cadParam = cadParam & "pTitulo=""" & "Recibo Horas " & Combo1(1).Text & """|"
+            CadParam = CadParam & "pTitulo=""" & "Recibo Horas " & Combo1(1).Text & """|"
             numParam = numParam + 1
                        
             ' imprimir el resumen
             If Check1(0).Value Then ' se imprime el resumen
-                cadParam = cadParam & "pImpIRPF=1|"
+                CadParam = CadParam & "pImpIRPF=1|"
             Else
-                cadParam = cadParam & "pImpIRPF=0|"
+                CadParam = CadParam & "pImpIRPF=0|"
             End If
             numParam = numParam + 1
                        
             ' sobre horas productivas
             If Check1(1).Value Then ' se imprime el resumen
-                cadParam = cadParam & "pHProductivas=1|"
+                CadParam = CadParam & "pHProductivas=1|"
             Else
-                cadParam = cadParam & "pHProductivas=0|"
+                CadParam = CadParam & "pHProductivas=0|"
             End If
             numParam = numParam + 1
                        
                        
                        
             indRPT = 13 'Impresion de Recibos
-            If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
             'Nombre fichero .rpt a Imprimir
             frmImprimir.NombreRPT = nomDocu
@@ -455,11 +455,11 @@ Dim numParam2 As String
     If HayRegParaInforme(Tabla, cadSelect) Then
         
         '[Monica] 03/09/2010: la impresion de recibos para Picassent es el informe de Recibo a cuenta nomina trabajadores
-        If vParamAplic.Cooperativa = 2 Then
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
             If CargarTablaTemporal(Tabla, cadSelect) Then
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                 
-                cadParam = cadParam2
+                CadParam = cadParam2
                 numParam = numParam2
                 ConSubInforme = True
             Else
@@ -493,29 +493,29 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 10 ' Listado de Clientes
-                PonerFoco txtCodigo(4)
+                PonerFoco txtcodigo(4)
                 
             Case 11 ' Listado de Proveedores
-                PonerFoco txtCodigo(2)
+                PonerFoco txtcodigo(2)
             
             Case 12 ' Listado de Variedades
-                PonerFoco txtCodigo(6)
+                PonerFoco txtcodigo(6)
         
             Case 13 ' Listado de Calibres
-                PonerFoco txtCodigo(8)
+                PonerFoco txtcodigo(8)
                 
             Case 14 ' Imforme de Movimientos de calibres
-                PonerFoco txtCodigo(12)
+                PonerFoco txtcodigo(12)
             
             Case 15 ' Informe de Horas Trabajadas
-                PonerFoco txtCodigo(18)
+                PonerFoco txtcodigo(18)
         End Select
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -523,12 +523,12 @@ Dim List As Collection
 
     'IMAGES para busqueda
     Set List = New Collection
-    For h = 24 To 27
-        List.Add h
-    Next h
-    For h = 1 To 10
-        List.Add h
-    Next h
+    For H = 24 To 27
+        List.Add H
+    Next H
+    For H = 1 To 10
+        List.Add H
+    Next H
     List.Add 12
     List.Add 13
     List.Add 14
@@ -541,9 +541,9 @@ Dim List As Collection
 '        Me.imgBuscar(List.item(h)).Picture = frmPpal.imgListImages16.ListImages(1).Picture
 '    Next h
 ' ### [Monica] 09/11/2006    he sustituido el anterior
-    For h = 14 To 15 'imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
+    For H = 14 To 15 'imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
      
     
     Set List = Nothing
@@ -553,40 +553,40 @@ Dim List As Collection
     
     '###Descomentar
 '    CommitConexion
-    h = 6360
-    w = 6660
-    FrameHorasTrabajadasVisible True, h, w
+    H = 6360
+    W = 6660
+    FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
     Tabla = "horas"
         
     CargaCombo
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.CmdCancel.Cancel = True
+    Me.Width = W + 70
+    Me.Height = H + 350
     
     Me.Combo1(1).ListIndex = 1
-    If vParamAplic.Cooperativa = 2 Then Me.Combo1(1).ListIndex = 0
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then Me.Combo1(1).ListIndex = 0
 End Sub
 
 
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(CByte(imgFecha(2).Tag) + 14).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(CByte(imgFecha(2).Tag) + 14).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Clientes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -597,7 +597,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmManTraba (Index)
     
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -627,13 +627,13 @@ Private Sub imgFecha_Click(Index As Integer)
 
     imgFecha(2).Tag = Index '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Index + 14).Text <> "" Then frmC.NovaData = txtCodigo(Index + 14).Text
+    If txtcodigo(Index + 14).Text <> "" Then frmC.NovaData = txtcodigo(Index + 14).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(CByte(imgFecha(2).Tag) + 14) '<===
+    PonerFoco txtcodigo(CByte(imgFecha(2).Tag) + 14) '<===
     ' ********************************************
 End Sub
 
@@ -644,7 +644,7 @@ Private Sub ListView1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -684,7 +684,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -694,10 +694,10 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     Select Case Index
             
         Case 14, 15, 16, 17, 20 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 18, 19 'TRABAJADORES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "straba", "nomtraba", "codtraba", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "straba", "nomtraba", "codtraba", "N")
             
     End Select
 End Sub
@@ -759,7 +759,7 @@ Dim Titulo As String
 End Sub
 
 
-Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el listado de horas trabajadas
     Me.FrameHorasTrabajadas.visible = visible
     If visible = True Then
@@ -767,15 +767,15 @@ Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef h As Integer, 
         Me.FrameHorasTrabajadas.Left = 0
         Me.FrameHorasTrabajadas.Height = 5985
         Me.FrameHorasTrabajadas.Width = 6660
-        w = Me.FrameHorasTrabajadas.Width
-        h = Me.FrameHorasTrabajadas.Height
+        W = Me.FrameHorasTrabajadas.Width
+        H = Me.FrameHorasTrabajadas.Height
     End If
 End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
     ConSubInforme = False
 End Sub
@@ -804,7 +804,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -814,7 +814,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -827,10 +827,10 @@ Private Sub LlamarImprimir()
 End Sub
 
 Private Function PonerGrupo(numGrupo As Byte, cadgrupo As String) As Byte
-Dim Campo As String
+Dim campo As String
 Dim nomCampo As String
 
-    Campo = "pGroup" & numGrupo & "="
+    campo = "pGroup" & numGrupo & "="
     nomCampo = "pGroup" & numGrupo & "Name="
     PonerGrupo = 0
 
@@ -850,28 +850,28 @@ Dim nomCampo As String
         
         'Informe de variedades
         Case "Clase"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codclase}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Producto""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codclase}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Producto""" & "|"
             numParam = numParam + 3
             
         Case "Producto"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codprodu}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Clase""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codprodu}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Clase""" & "|"
             numParam = numParam + 3
 
         'Informe de calibres
         Case "Variedad"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codvarie}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "variedades" & ".nomvarie}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Variedad""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codvarie}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "variedades" & ".nomvarie}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Variedad""" & "|"
             numParam = numParam + 3
             
         Case "Calibre"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codcalib}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "calibres" & ".nomcalib}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Calibre""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codcalib}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "calibres" & ".nomcalib}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Calibre""" & "|"
             numParam = numParam + 3
             
 '        'Informe de Horas Trabajadas
@@ -893,28 +893,28 @@ End Select
 End Function
 
 Private Function PonerOrden(cadgrupo As String) As Byte
-Dim Campo As String
+Dim campo As String
 Dim nomCampo As String
 
     PonerOrden = 0
 
     Select Case cadgrupo
         Case "Codigo"
-            cadParam = cadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
-                    cadParam = cadParam & ".codclien}|"
+                    CadParam = CadParam & ".codclien}|"
                 Case 11
-                    cadParam = cadParam & ".codprove}|"
+                    CadParam = CadParam & ".codprove}|"
             End Select
             Tipo = "Código"
         Case "Alfabético"
-            cadParam = cadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
-                    cadParam = cadParam & ".nomclien}|"
+                    CadParam = CadParam & ".nomclien}|"
                 Case 11
-                    cadParam = cadParam & ".nomprove}|"
+                    CadParam = CadParam & ".nomprove}|"
             End Select
             Tipo = "Alfabético"
     End Select
@@ -937,7 +937,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -979,34 +979,34 @@ Dim Cad As String
 '    txtNombre(9).Text = RecuperaValor(CadTag, 5)
 '    Contabilizada = RecuperaValor(CadTag, 6)
      intconta = "intconta"
-     txtCodigo(12).Text = ""
-     txtCodigo(12).Text = DevuelveDesdeBDNew(cAgro, "schfac", "codsocio", "letraser", txtCodigo(9).Text, "T", intconta, "numfactu", txtCodigo(10).Text, "N", "fecfactu", txtCodigo(11).Text, "F")
-     If txtCodigo(12).Text <> "" Then
-        txtNombre(9).Text = PonerNombreDeCod(txtCodigo(12), "ssocio", "nomsocio", "codsocio", "N")
+     txtcodigo(12).Text = ""
+     txtcodigo(12).Text = DevuelveDesdeBDNew(cAgro, "schfac", "codsocio", "letraser", txtcodigo(9).Text, "T", intconta, "numfactu", txtcodigo(10).Text, "N", "fecfactu", txtcodigo(11).Text, "F")
+     If txtcodigo(12).Text <> "" Then
+        txtNombre(9).Text = PonerNombreDeCod(txtcodigo(12), "ssocio", "nomsocio", "codsocio", "N")
         Contabilizada = CInt(intconta)
      Else
         Cad = "No existe la factura. Reintroduzca. " & vbCrLf & vbCrLf
-        Cad = Cad & "   Serie: " & txtCodigo(9).Text & vbCrLf
-        Cad = Cad & "   Factura: " & txtCodigo(10).Text & vbCrLf
-        Cad = Cad & "   Fecha: " & txtCodigo(11).Text & vbCrLf
+        Cad = Cad & "   Serie: " & txtcodigo(9).Text & vbCrLf
+        Cad = Cad & "   Factura: " & txtcodigo(10).Text & vbCrLf
+        Cad = Cad & "   Fecha: " & txtcodigo(11).Text & vbCrLf
         Cad = Cad & vbCrLf
         MsgBox Cad, vbExclamation
-        txtCodigo(9).Text = ""
-        txtCodigo(10).Text = ""
-        txtCodigo(11).Text = ""
-        PonerFoco txtCodigo(9)
+        txtcodigo(9).Text = ""
+        txtcodigo(10).Text = ""
+        txtcodigo(11).Text = ""
+        PonerFoco txtcodigo(9)
      End If
 End Sub
 
 
 Private Function ConTarjetaProfesional(letraser As String, numfactu As String, fecfactu As String) As Boolean
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
-    SQL = "select count(*) from slhfac, starje where letraser = " & DBSet(letraser, "T") & " and numfactu = " & DBSet(numfactu, "N")
-    SQL = SQL & " and fecfactu = " & DBSet(fecfactu, "F") & " and starje.tiptarje = 2 and slhfac.numtarje = starje.numtarje "
+    Sql = "select count(*) from slhfac, starje where letraser = " & DBSet(letraser, "T") & " and numfactu = " & DBSet(numfactu, "N")
+    Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F") & " and starje.tiptarje = 2 and slhfac.numtarje = starje.numtarje "
     
-    ConTarjetaProfesional = (TotalRegistros(SQL) <> 0)
+    ConTarjetaProfesional = (TotalRegistros(Sql) <> 0)
 
 End Function
 
@@ -1034,17 +1034,17 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
 
     b = True
 
-    If txtCodigo(20).Text = "" Then
+    If txtcodigo(20).Text = "" Then
         MsgBox "Debe introducir una Fecha de Recibo.", vbExclamation
-        txtCodigo(20).Text = ""
-        PonerFoco txtCodigo(20)
+        txtcodigo(20).Text = ""
+        PonerFoco txtcodigo(20)
         b = False
     End If
     
@@ -1056,7 +1056,7 @@ End Function
 
 
 Private Function ActualizarRegistros(Tabla As String, cWhere As String) As Boolean
-Dim SQL As String
+Dim Sql As String
     On Error GoTo eActualizarRegistros
     
     ActualizarRegistros = False
@@ -1065,12 +1065,12 @@ Dim SQL As String
     cWhere = QuitarCaracterACadena(cWhere, "}")
     cWhere = QuitarCaracterACadena(cWhere, "_1")
 
-    SQL = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
-    SQL = SQL & " where " & cWhere
-    SQL = SQL & " and horas.codtraba = straba.codtraba"
+    Sql = "update horas, straba set fecharec = " & DBSet(txtcodigo(20).Text, "F")
+    Sql = Sql & " where " & cWhere
+    Sql = Sql & " and horas.codtraba = straba.codtraba"
 '    (codtraba, fechahora) in (select horas.codtraba, horas.fechahora from " & tabla & " where " & cWhere & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ActualizarRegistros = True
     
@@ -1084,10 +1084,10 @@ End Function
 
 
 Private Function CargarTablaTemporal(cTabla As String, cWhere As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim SqlReg As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Compleme As Currency
 Dim Reten As Currency
 Dim IRPF As Currency
@@ -1107,19 +1107,19 @@ Dim SegSoc As Currency
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select horas.codtraba,horas.fechahora,straba.codcateg,straba.pluscapataz,straba.dtosirpf,straba.dtosegso,straba.dtoreten, "
-    SQL = SQL & " sum(if(importe is null,0,importe)) as importe, sum(if(compleme is null,0,compleme)) as compleme, sum(if(penaliza is null,0,penaliza)) as penaliza FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select horas.codtraba,horas.fechahora,straba.codcateg,straba.pluscapataz,straba.dtosirpf,straba.dtosegso,straba.dtoreten, "
+    Sql = Sql & " sum(if(importe is null,0,importe)) as importe, sum(if(compleme is null,0,compleme)) as compleme, sum(if(penaliza is null,0,penaliza)) as penaliza FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " group by 1,2,3,4,5,6,7 "
-    SQL = SQL & " order by 1,2,3,4,5,6,7 "
+    Sql = Sql & " group by 1,2,3,4,5,6,7 "
+    Sql = Sql & " order by 1,2,3,4,5,6,7 "
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 '                                            codtraba,fecha, codcateg, importe, complemento,penalizacion,
     Sql2 = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, importe2, importe3,"
 '                  irpf,     segsoc,   retencion, complcapat, total,
@@ -1127,27 +1127,27 @@ Dim SegSoc As Currency
 
     SqlReg = ""
 
-    While Not RS.EOF
+    While Not Rs.EOF
         SqlReg = SqlReg & "(" & vUsu.Codigo & ","
-        SqlReg = SqlReg & DBSet(RS!CodTraba, "N") & ","
-        SqlReg = SqlReg & DBSet(RS!FechaHora, "F") & ","
-        SqlReg = SqlReg & DBSet(RS!codcateg, "N") & ","
-        SqlReg = SqlReg & DBSet(RS!Importe, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!CodTraba, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!FechaHora, "F") & ","
+        SqlReg = SqlReg & DBSet(Rs!Codcateg, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!Importe, "N") & ","
         
-        Compleme = DBLet(RS!Compleme, "N") + DBLet(RS!PlusCapataz, "N")
+        Compleme = DBLet(Rs!Compleme, "N") + DBLet(Rs!PlusCapataz, "N")
         
         SqlReg = SqlReg & DBSet(Compleme, "N") & ","
-        SqlReg = SqlReg & DBSet(RS!Penaliza, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!Penaliza, "N") & ","
         
         IRPF = 0
         
-        Bruto = DBLet(RS!Importe, "N") + Compleme - DBLet(RS!Penaliza, "N")
-        IRPF = Round2(Bruto * DBLet(RS!dtosirpf, "N") * 0.01, 2)
+        Bruto = DBLet(Rs!Importe, "N") + Compleme - DBLet(Rs!Penaliza, "N")
+        IRPF = Round2(Bruto * DBLet(Rs!dtosirpf, "N") * 0.01, 2)
         
         SqlReg = SqlReg & DBSet(IRPF, "N") & ","
         
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
-        SegSoc = Round2(Bruto * DBLet(RS!dtosegso, "N") * 0.01, 2)
+        SegSoc = Round2(Bruto * DBLet(Rs!dtosegso, "N") * 0.01, 2)
 
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
 '        SqlReg = SqlReg & DBSet(Rs!dtosegso, "N") & ","
@@ -1157,19 +1157,19 @@ Dim SegSoc As Currency
 '        Bruto = Bruto - DBLet(Rs!dtosegso, "N")
         Bruto = Bruto - DBLet(SegSoc, "N")
         
-        Reten = Round2(Bruto * DBLet(RS!dtoreten, "N") * 0.01, 2)
+        Reten = Round2(Bruto * DBLet(Rs!dtoreten, "N") * 0.01, 2)
         
         SqlReg = SqlReg & DBSet(Reten, "N") & ","
-        SqlReg = SqlReg & DBSet(RS!PlusCapataz, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!PlusCapataz, "N") & ","
         
         
         Total = Bruto - IRPF - Reten
         SqlReg = SqlReg & DBSet(Total, "N") & "),"
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
 
-    Set RS = Nothing
+    Set Rs = Nothing
     
     'quitamos la ultima coma e insertamos
     If Len(SqlReg) <> 0 Then
@@ -1192,23 +1192,23 @@ Dim SegSoc As Currency
     Sql2 = Sql2 & " order by 1 "
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Sql2 = "insert into tmpliquidacion (codusu, codvarie, importe) values "
 
     SqlReg = ""
 
-    While Not RS.EOF
-        Total = DBLet(RS!Importe, "N") + DBLet(RS!Compleme, "N") - DBLet(RS!Penaliza, "N")
+    While Not Rs.EOF
+        Total = DBLet(Rs!Importe, "N") + DBLet(Rs!Compleme, "N") - DBLet(Rs!Penaliza, "N")
         
         SqlReg = SqlReg & "(" & vUsu.Codigo & ","
-        SqlReg = SqlReg & DBSet(RS!CodVarie, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!codvarie, "N") & ","
         SqlReg = SqlReg & DBSet(Total, "N") & "),"
 
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     'quitamos la ultima coma e insertamos
     If Len(SqlReg) <> 0 Then

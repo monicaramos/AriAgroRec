@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmTRAFactAlb 
    BorderStyle     =   3  'Fixed Dialog
@@ -1213,7 +1213,7 @@ Attribute frmF.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadparam As String
+Private CadParam As String
 Private numParam As Byte
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadSelect1 As String 'Cadena para comprobar si hay datos antes de abrir Informe
@@ -1299,7 +1299,7 @@ End Function
 
 Private Sub CmdAcepFTraSoc_Click()
 'Facturacion de Albaranes
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim cadFrom As String
 Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
                       'que no se van a facturar
@@ -1319,7 +1319,7 @@ Dim nTabla As String
 Dim Tabla1 As String
 
 
-Dim NRegs As Long
+Dim Nregs As Long
 Dim FecFac As Date
 Dim TipoPrec As Byte ' 0 anticipos
                      ' 1 liquidaciones
@@ -1330,7 +1330,7 @@ Dim Sql2 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadparam = cadparam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -1401,7 +1401,7 @@ Dim Sql2 As String
         
         
         '[Monica]10/10/2013: añadimos la condicion de que el socio sea tercero si lo han marcado (solo PICASSENT)
-        If vParamAplic.Cooperativa = 2 Then
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
             If Check1(11).Value = 1 Then ' socios terceros
                 If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadSelect1, "{rsocios.tipoprod} = 1") Then Exit Sub
@@ -1443,30 +1443,30 @@ Dim Sql2 As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadWhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If HayRegParaInformeNew(nTabla, cadSelect, Tabla1, cadSelect1) Then
-            b = FacturacionTransporteSocio(nTabla, cadSelect, Tabla1, cadSelect1, txtcodigo(17).Text, Me.Pb1, txtcodigo(8).Text, txtcodigo(9).Text, Check1(11).Value = 1)
+            b = FacturacionTransporteSocio(nTabla, cadSelect, Tabla1, cadSelect1, txtcodigo(17).Text, Me.pb1, txtcodigo(8).Text, txtcodigo(9).Text, Check1(11).Value = 1)
             If b Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                                
                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                 If Me.Check1(1).Value Then
                     cadFormula = ""
-                    cadparam = cadparam & "pFecFac= """ & txtcodigo(17).Text & """|"
+                    CadParam = CadParam & "pFecFac= """ & txtcodigo(17).Text & """|"
                     numParam = numParam + 1
                     
                     '[Monica]10/10/2013: si son socios terceros (Picassent)
                     If Check1(11).Value = 1 Then
-                        cadparam = cadparam & "pTitulo= ""Resumen Informe Transporte Tercero""|"
-                        cadparam = cadparam & "pEsInforme=1|"
+                        CadParam = CadParam & "pTitulo= ""Resumen Informe Transporte Tercero""|"
+                        CadParam = CadParam & "pEsInforme=1|"
                     Else
-                        cadparam = cadparam & "pTitulo= ""Resumen Facturación Transporte Socio""|"
-                        cadparam = cadparam & "pEsInforme=0|"
+                        CadParam = CadParam & "pTitulo= ""Resumen Facturación Transporte Socio""|"
+                        CadParam = CadParam & "pEsInforme=0|"
                     End If
                     numParam = numParam + 2
                     
@@ -1512,7 +1512,7 @@ Dim Sql2 As String
                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                    
                     indRPT = 23 'Impresion de facturas de transporte/recoleccion a socios
-                    If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                     'Nombre fichero .rpt a Imprimir
                     cadNombreRPT = nomDocu
                     
@@ -1548,7 +1548,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 'Facturacion de Albaranes
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim cadFrom As String
 Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
                       'que no se van a facturar
@@ -1568,7 +1568,7 @@ Dim nTabla As String
 Dim Tabla1 As String
 
 
-Dim NRegs As Long
+Dim Nregs As Long
 Dim FecFac As Date
 Dim TipoPrec As Byte ' 0 anticipos
                      ' 1 liquidaciones
@@ -1580,7 +1580,7 @@ Dim Sql4 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadparam = cadparam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -1671,7 +1671,7 @@ Dim Sql4 As String
         '[Monica]07/11/2013: añadimos el poder seleccionar los transportistas a facturar
         Set frmMens4 = New frmMensajes
         frmMens4.OpcionMensaje = 54
-        frmMens4.cadWhere = Sql4
+        frmMens4.cadWHERE = Sql4
         frmMens4.Show vbModal
         Set frmMens4 = Nothing
                 
@@ -1679,23 +1679,23 @@ Dim Sql4 As String
                 
         Set frmMens = New frmMensajes
         frmMens.OpcionMensaje = 16
-        frmMens.cadWhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         Set frmMens = Nothing
         
         
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If HayRegParaInformeNew(nTabla, cadSelect, Tabla1, cadSelect1) Then
-            b = FacturacionTransporte(nTabla, cadSelect, Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, txtcodigo(6).Text, txtcodigo(7).Text)
+            b = FacturacionTransporte(nTabla, cadSelect, Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1, txtcodigo(6).Text, txtcodigo(7).Text)
             If b Then
                 MsgBox "Proceso realizado correctamente.", vbExclamation
                                
                 'IMPRESION DEL RESUMEN DE LA FACTURACION DE ANTICIPOS/LIQUIDACIONES
                 If Me.Check1(2).Value Then
                     cadFormula = ""
-                    cadparam = cadparam & "pFecFac= """ & txtcodigo(15).Text & """|"
+                    CadParam = CadParam & "pFecFac= """ & txtcodigo(15).Text & """|"
                     numParam = numParam + 1
-                    cadparam = cadparam & "pTitulo= ""Resumen Facturación Transporte""|"
+                    CadParam = CadParam & "pTitulo= ""Resumen Facturación Transporte""|"
                     numParam = numParam + 1
                     
                     FecFac = CDate(txtcodigo(15).Text)
@@ -1727,7 +1727,7 @@ Dim Sql4 As String
                     If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                                    
                     indRPT = 49 'Impresion de facturas de transportistas
-                    If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                     'Nombre fichero .rpt a Imprimir
                     cadNombreRPT = nomDocu
                     'Nombre fichero .rpt a Imprimir
@@ -1760,7 +1760,7 @@ End Sub
 '#### Laura 14/11/2006 Recuperar facturas ALZIRA
 Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, FecFac As String, numFac As String) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim codMacta1 As String 'cliente factura ariges
 Dim codMacta2 As String 'cliente factura conta
 Dim LEtra As String
@@ -1773,25 +1773,25 @@ Dim LEtra As String
     Sql = Sql & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
     Sql = Sql & " Where " & cadSelAlb
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        codMacta1 = DBLet(RS!Codmacta, "T")
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        codMacta1 = DBLet(Rs!Codmacta, "T")
     
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     
     
     'codmacta en la contabilidad
     LEtra = ObtenerLetraSerie("FAV")
     Sql = "SELECT codmacta FROM cabfact "
     Sql = Sql & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(FecFac)
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
-        codMacta2 = DBLet(RS!Codmacta, "T")
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        codMacta2 = DBLet(Rs!Codmacta, "T")
     End If
-    Set RS = Nothing
+    Set Rs = Nothing
     
     If codMacta1 <> "" And codMacta2 <> "" Then
         If codMacta1 = codMacta2 Then
@@ -1818,8 +1818,8 @@ End Function
 Private Sub cmdAceptarReimp_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
-Dim I As Byte
+Dim cadTabla As String, cOrden As String
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -1832,7 +1832,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadparam = cadparam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
      '======== FORMULA  ====================================
@@ -1884,7 +1884,7 @@ InicializarVbles
         ConSubInforme = False
         cadTitulo = "Reimpresión de Facturas transporte"
         
-        If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
           
         'Nombre fichero .rpt a Imprimir
         cadNombreRPT = nomDocu
@@ -1921,8 +1921,8 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
-Dim I As Integer
+Dim H As Integer, W As Integer
+Dim i As Integer
 Dim indFrame As Single
 
 
@@ -1935,19 +1935,19 @@ Dim indFrame As Single
     
     ConexionConta
     
-    For I = 0 To 5
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 12 To 13
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 20 To 21
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 0 To 5
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 12 To 13
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 20 To 21
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 
-    For I = 0 To imgAyuda.Count - 1
-        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next I
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
     
 
     ' Necesitamos la conexion a la contabilidad de la seccion de adv
@@ -1967,31 +1967,31 @@ Dim indFrame As Single
         'LISTADOS DE FACTURACION
         '-----------------------
         Case 1 ' Facturacion de Albaranes de transporte
-            PonerFrameFacVisible True, h, w
+            PonerFrameFacVisible True, H, W
             txtcodigo(15).Text = Format(Now, "dd/mm/yyyy")
             txtcodigo(7).Text = Format(CDate(txtcodigo(15).Text) - 1, "dd/mm/yyyy")
             indFrame = 6
             
-            Me.Pb1.visible = False
+            Me.pb1.visible = False
             Me.Check1(2).Value = 1
             Me.Check1(3).Value = 1
             
         Case 2 ' Reimpresion de facturas de transporte
-            FrameReimpresionVisible True, h, w
+            FrameReimpresionVisible True, H, W
             Tabla = "rfacttra"
             
         Case 3 ' Facturacion de Albaranes de transporte a socios
-            PonerFrameFacTraSocVisible True, h, w
+            PonerFrameFacTraSocVisible True, H, W
             txtcodigo(17).Text = Format(Now, "dd/mm/yyyy")
             txtcodigo(9).Text = Format(CDate(txtcodigo(17).Text) - 1, "dd/mm/yyyy")
             indFrame = 6
             
-            Me.Pb2.visible = False
+            Me.pb2.visible = False
             Me.Check1(0).Value = 1
             Me.Check1(1).Value = 1
             
-            Me.Frame1.Enabled = (vParamAplic.Cooperativa = 2)
-            Me.Frame1.visible = (vParamAplic.Cooperativa = 2)
+            Me.Frame1.Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
+            Me.Frame1.visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
            
     End Select
     
@@ -2002,8 +2002,8 @@ Dim indFrame As Single
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.CmdCancel(0).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
         
 End Sub
 
@@ -2408,49 +2408,49 @@ End Sub
 
 
 
-Private Sub PonerFrameFacVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim cad As String
+Dim Cad As String
 
-    h = 6015
-    w = 6735
+    H = 6015
+    W = 6735
     
     If visible = True Then
          Select Case CodClien 'aqui guardamos el tipo de movimiento
-            Case "FTR": cad = "(TRA)"
+            Case "FTR": Cad = "(TRA)"
                 
         End Select
         
-        Me.Label2(10).Caption = "Factura de Transporte " & cad
+        Me.Label2(10).Caption = "Factura de Transporte " & Cad
         Me.Label2(12).Caption = ""
         
         Me.Caption = "Facturación"
     End If
     
-    PonerFrameVisible Me.FrameFacturar, visible, h, w
+    PonerFrameVisible Me.FrameFacturar, visible, H, W
 End Sub
 
 
-Private Sub PonerFrameFacTraSocVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub PonerFrameFacTraSocVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim cad As String
+Dim Cad As String
 
-    h = 6015
-    w = 6735
+    H = 6015
+    W = 6735
     
     If visible = True Then
          Select Case CodClien 'aqui guardamos el tipo de movimiento
-            Case "FTS": cad = "(TRA)"
+            Case "FTS": Cad = "(TRA)"
                 
         End Select
         
-        Me.Label2(13).Caption = "Factura de Transporte a Socio" & cad
+        Me.Label2(13).Caption = "Factura de Transporte a Socio" & Cad
         Me.Label2(14).Caption = ""
         
         Me.Caption = "Facturación"
     End If
     
-    PonerFrameVisible Me.FrameFacturarSocio, visible, h, w
+    PonerFrameVisible Me.FrameFacturarSocio, visible, H, W
 End Sub
 
 
@@ -2480,7 +2480,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadparam = cadparam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -2492,7 +2492,7 @@ Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
     cadSelect1 = ""
-    cadparam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -2500,7 +2500,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadparam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -2522,7 +2522,7 @@ End Sub
 
 Private Function ObtenerClientes(cadW As String, Importe As String) As String
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
     
@@ -2535,17 +2535,17 @@ Dim RS As ADODB.Recordset
     Sql = Sql & " group by codclien "
     If Importe <> "" Then Sql = Sql & "having baseimp>" & Importe
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Sql = ""
-    While Not RS.EOF
+    While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            Sql = Sql & RS!CodClien & ","
+            Sql = Sql & Rs!CodClien & ","
 '        End If
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If Sql <> "" Then
         Sql = Mid(Sql, 1, Len(Sql) - 1)
         Sql = "( {scafac.codclien} IN [" & Sql & "] )"
@@ -2659,7 +2659,7 @@ End Sub
 
 
 
-Private Sub FrameReimpresionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameReimpresionVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el listado de socios por seccion
     Me.FrameReimpresion.visible = visible
     If visible = True Then
@@ -2667,8 +2667,8 @@ Private Sub FrameReimpresionVisible(visible As Boolean, ByRef h As Integer, ByRe
         Me.FrameReimpresion.Left = 0
         Me.FrameReimpresion.Height = 5640
         Me.FrameReimpresion.Width = 6675
-        w = Me.FrameReimpresion.Width
-        h = Me.FrameReimpresion.Height
+        W = Me.FrameReimpresion.Width
+        H = Me.FrameReimpresion.Height
     End If
 End Sub
 
