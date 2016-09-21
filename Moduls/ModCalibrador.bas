@@ -7,10 +7,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -76,14 +76,14 @@ Dim Linea As Integer
               ' Realiza una comparación a nivel de bit para asegurarse de que MiNombre es un directorio.
               If (GetAttr(nomDir & NomFic) And vbArchive) = vbArchive Then
               
-                Sql = "delete from tmpcalibrador"
-                conn.Execute Sql
+                SQL = "delete from tmpcalibrador"
+                conn.Execute SQL
               
-                Sql = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpcalibrador` fields escaped by '\\' enclosed by '""' lines terminated by '\r\n' ( `numnota`, `fecnota`, `albaran`,`porcen1`,`porcen2`,`kilos1`, `kilos2`, `kilos3`,`numnota2`,`export`,`nomcalid`,`kilos4`,`kilos5`)  "
-                conn.Execute Sql
+                SQL = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpcalibrador` fields escaped by '\\' enclosed by '""' lines terminated by '\r\n' ( `numnota`, `fecnota`, `albaran`,`porcen1`,`porcen2`,`kilos1`, `kilos2`, `kilos3`,`numnota2`,`export`,`nomcalid`,`kilos4`,`kilos5`)  "
+                conn.Execute SQL
                 
-                Sql = "delete from tmpcalibrador where numnota = ''"
-                conn.Execute Sql
+                SQL = "delete from tmpcalibrador where numnota = ''"
+                conn.Execute SQL
                 
                 Label1.Caption = "Procesando Fichero: " & NomFic
                 longitud = TotalRegistros("select count(*) from tmpcalibrador")
@@ -122,15 +122,15 @@ End Function
 '
 Private Function ProcesarFicheroCatadauCGrande(NF As Long, Cad As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label, ByRef Nota As String) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -155,7 +155,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -179,7 +179,7 @@ Dim HayReg As Boolean
 
     ProcesarFicheroCatadauCGrande = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -200,12 +200,12 @@ Dim HayReg As Boolean
             
     Notaca = Nota 'RecuperaValorNew(cad, ";", 1)
     
-    Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     Situacion = 0
-    If Rs.EOF Then
+    If RS.EOF Then
         Observ = "NOTA NO EXISTE"
         Situacion = 2
     End If
@@ -236,11 +236,11 @@ Dim HayReg As Boolean
             
             If Situacion <> 2 Then
                 ' si hay nota asociada busco los datos
-                Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(Rs!codvarie, "N")
-                Sql = Sql & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
+                SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS!CodVarie, "N")
+                SQL = SQL & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
                 
                 Set RS1 = New ADODB.Recordset
-                RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
                 If RS1.EOF Then
                     Observ = "NO EXIS.CAL"
@@ -285,57 +285,57 @@ Dim HayReg As Boolean
 '    End If
 
 
-    Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+    SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
 
-    SeInserta = (TotalRegistros(Sql) = 0)
+    SeInserta = (TotalRegistros(SQL) = 0)
 
     If SeInserta Then
         If Situacion = 2 Then
             ' si no hay nota asociada no puedo meter la clasificacion
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(KilosTot, "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(KilosTot, "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
 
         Else
             ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
             ' tabla: rclasifauto
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-            Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-            Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-            Sql = Sql & DBSet(Round2(KilosTot, 0), "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+            SQL = SQL & DBSet(RS!codcampo, "N") & ","
+            SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+            SQL = SQL & DBSet(Round2(KilosTot, 0), "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
         End If
-        conn.Execute Sql
+        conn.Execute SQL
 
         ' tabla: rclasifauto_clasif
-        Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-        Sql = Sql & " values "
+        SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+        SQL = SQL & " values "
 
     Else
-        Sql = "update rclasifauto set kilospod = kilospod + " & DBSet(Podrid, "N") & ","
-        Sql = Sql & " kilosdes = kilosdes + " & DBSet(Destri, "N") & ","
-        Sql = Sql & " kilosnet = kilosnet + " & DBSet(KilosTot, "N")
-        Sql = Sql & " where numnotac = " & DBSet(Notaca, "N")
+        SQL = "update rclasifauto set kilospod = kilospod + " & DBSet(Podrid, "N") & ","
+        SQL = SQL & " kilosdes = kilosdes + " & DBSet(Destri, "N") & ","
+        SQL = SQL & " kilosnet = kilosnet + " & DBSet(KilosTot, "N")
+        SQL = SQL & " where numnotac = " & DBSet(Notaca, "N")
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
 
 
@@ -349,8 +349,8 @@ Dim HayReg As Boolean
         ' cargamos la tabla temporal
         For i = 1 To NroCalidad
             If NomCal(i) <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                     SQLaux = SQLaux & "," & DBSet(KilCal(i), "N") & ")"
@@ -378,12 +378,12 @@ Dim HayReg As Boolean
         While Not RSaux.EOF
             HayReg = True
             If SeInserta Then
-                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                 Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
             Else
                 Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                 Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
 
                 conn.Execute Sql2
@@ -399,13 +399,13 @@ Dim HayReg As Boolean
             If Sql2 <> "" Then
                 Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
             End If
-            Sql = Sql & Sql2
-            conn.Execute Sql
+            SQL = SQL & Sql2
+            conn.Execute SQL
         End If
     End If ' si la situacion es distinta de 2
 
 
-    Set Rs = Nothing
+    Set RS = Nothing
     Set NomCal = Nothing
     Set KilCal = Nothing
 
@@ -423,16 +423,16 @@ End Function
 ' ESTE NO SE CORRESPONDE CON AGRE1104 DE EUROAGRO
 Private Function ProcesarFicheroCatadauCPequeño(ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -456,7 +456,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -480,7 +480,7 @@ Dim HayReg As Boolean
 
     ProcesarFicheroCatadauCPequeño = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -500,13 +500,13 @@ Dim HayReg As Boolean
     Set KilCal = New Dictionary
             
             
-    Sql = "select * from tmpcalibrador "
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select * from tmpcalibrador "
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Notaca = 0
-    If Not Rs.EOF Then
-        Notaca = DBLet(Rs.Fields(0).Value, "N")
+    If Not RS.EOF Then
+        Notaca = DBLet(RS.Fields(0).Value, "N")
         
         If Notaca <> 0 Then
             Sql2 = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
@@ -520,7 +520,7 @@ Dim HayReg As Boolean
             
             b = True
             
-            While Not Rs.EOF
+            While Not RS.EOF
                 i = i + 1
                 
                 Pb1.Value = Pb1.Value + 1
@@ -528,9 +528,9 @@ Dim HayReg As Boolean
                 'Me.Refresh
                 DoEvents
                 
-                Nombre1 = DBLet(Rs!nomcalid, "T")
-                Destri = DBLet(Rs!Kilos3, "T")
-                Podrid = DBLet(Rs!Kilos2, "T")
+                Nombre1 = DBLet(RS!nomcalid, "T")
+                Destri = DBLet(RS!Kilos3, "T")
+                Podrid = DBLet(RS!Kilos2, "T")
                 'Pequen = DBLet(RS!Kilos4, "T")
 'antes calculo de kilos segun porcentaje
 '                Kilone = DBLet(RS!Kilos1, "T")
@@ -538,16 +538,16 @@ Dim HayReg As Boolean
 '                Kilos = Round2(CCur(Kilone) * CCur(Porcen) / 100, 2)
 '                KilosTot = KilosTot + Kilos
 'ahora me guardo el porcentaje
-                KilosTot = DBLet(Rs!Kilos1, "T")
-                Kilos = DBLet(Rs!porcen1, "T")
+                KilosTot = DBLet(RS!Kilos1, "T")
+                Kilos = DBLet(RS!porcen1, "T")
                 
                 If Situacion <> 2 Then
                     ' si hay nota asociada busco los datos
-                    Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS1!codvarie, "N")
-                    Sql = Sql & " and nomcalibrador2 = " & DBSet(Nombre1, "T")
+                    SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS1!CodVarie, "N")
+                    SQL = SQL & " and nomcalibrador2 = " & DBSet(Nombre1, "T")
                     
                     Set Rs2 = New ADODB.Recordset
-                    Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     
                     If Rs2.EOF Then
                         Observ = "NO EXIS.CAL"
@@ -560,52 +560,52 @@ Dim HayReg As Boolean
                 
                 End If
                 
-                Rs.MoveNext
+                RS.MoveNext
             Wend
         
-            Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+            SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
         
-            SeInserta = (TotalRegistros(Sql) = 0)
+            SeInserta = (TotalRegistros(SQL) = 0)
         
             If SeInserta Then
                 If Situacion = 2 Then
                     ' si no hay nota asociada no puedo meter la clasificacion
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(KilosTot, "N") & ","
-                    Sql = Sql & DBSet(Destri, "N") & ","
-                    Sql = Sql & DBSet(Podrid, "N") & ","
-                    Sql = Sql & DBSet(Pequen, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(KilosTot, "N") & ","
+                    SQL = SQL & DBSet(Destri, "N") & ","
+                    SQL = SQL & DBSet(Podrid, "N") & ","
+                    SQL = SQL & DBSet(Pequen, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
         
                 Else
                     ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                     ' tabla: rclasifauto
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(RS1!Codsocio, "N") & ","
-                    Sql = Sql & DBSet(RS1!codcampo, "N") & ","
-                    Sql = Sql & DBSet(RS1!codvarie, "N") & ","
-                    Sql = Sql & DBSet(KilosTot, "N") & ","
-                    Sql = Sql & DBSet(Destri, "N") & ","
-                    Sql = Sql & DBSet(Podrid, "N") & ","
-                    Sql = Sql & DBSet(Pequen, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(RS1!CodSocio, "N") & ","
+                    SQL = SQL & DBSet(RS1!codcampo, "N") & ","
+                    SQL = SQL & DBSet(RS1!CodVarie, "N") & ","
+                    SQL = SQL & DBSet(KilosTot, "N") & ","
+                    SQL = SQL & DBSet(Destri, "N") & ","
+                    SQL = SQL & DBSet(Podrid, "N") & ","
+                    SQL = SQL & DBSet(Pequen, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
                 End If
-                conn.Execute Sql
+                conn.Execute SQL
         
                 ' tabla: rclasifauto_clasif
-                Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-                Sql = Sql & " values "
+                SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+                SQL = SQL & " values "
         
             End If
         End If
@@ -618,8 +618,8 @@ Dim HayReg As Boolean
             ' cargamos la tabla temporal
             For j = 1 To i
                 If NomCal(j) <> "" Then
-                    Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(j), "N"))
-                    If Nregs = 0 Then
+                    nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(j), "N"))
+                    If nRegs = 0 Then
                         'insertamos en la temporal
                         SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(j), "N")
                         SQLaux = SQLaux & "," & DBSet(KilCal(j), "N") & ")"
@@ -645,12 +645,12 @@ Dim HayReg As Boolean
             While Not RSaux.EOF
                 HayReg = True
                 If SeInserta Then
-                    Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS1!codvarie, "N") & ","
+                    Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS1!CodVarie, "N") & ","
                     Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
                 Else
                     Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                     Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                    Sql2 = Sql2 & " and codvarie = " & DBSet(RS1!codvarie, "N")
+                    Sql2 = Sql2 & " and codvarie = " & DBSet(RS1!CodVarie, "N")
                     Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
     
                     conn.Execute Sql2
@@ -665,12 +665,12 @@ Dim HayReg As Boolean
                 If Sql2 <> "" Then
                     Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
                 End If
-                Sql = Sql & Sql2
-                conn.Execute Sql
+                SQL = SQL & Sql2
+                conn.Execute SQL
             End If
         End If ' si la situacion es distinta de 2
     
-        Set Rs = Nothing
+        Set RS = Nothing
         Set RS1 = Nothing
         Set NomCal = Nothing
         Set KilCal = Nothing
@@ -843,7 +843,7 @@ Dim HayReg As Boolean
 '        End If
 '    End If ' si la situacion es distinta de 2
 
-    Set Rs = Nothing
+    Set RS = Nothing
     Set NomCal = Nothing
     Set KilCal = Nothing
 
@@ -867,10 +867,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -901,11 +901,11 @@ Dim Nota As String
               ' Realiza una comparación a nivel de bit para asegurarse de que MiNombre es un directorio.
               If (GetAttr(nomDir & NomFic) And vbArchive) = vbArchive Then
               
-                Sql = "delete from tmpcalibrador"
-                conn.Execute Sql
+                SQL = "delete from tmpcalibrador"
+                conn.Execute SQL
               
-                Sql = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpcalibrador` fields escaped by '\\' enclosed by '""' lines terminated by '\r\n' ( `numnota`, `fecnota`, `nomcalid`, `kilos1`, `kilos2`, `kilos3`, `kilos4`)  "
-                conn.Execute Sql
+                SQL = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpcalibrador` fields escaped by '\\' enclosed by '""' lines terminated by '\r\n' ( `numnota`, `fecnota`, `nomcalid`, `kilos1`, `kilos2`, `kilos3`, `kilos4`)  "
+                conn.Execute SQL
                 
                 Label1.Caption = "Procesando Fichero: " & NomFic
                 longitud = TotalRegistros("select count(*) from tmpcalibrador")
@@ -985,15 +985,15 @@ End Function
 
 Private Function ProcesarFicheroAlziraEscandalladora(NF As Long, Cad As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label, ByRef Nota As String) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -1019,7 +1019,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -1039,7 +1039,7 @@ Dim Linea As String
 
     ProcesarFicheroAlziraEscandalladora = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -1064,15 +1064,15 @@ Dim Linea As String
     'Notaca = RecuperaValorNew(cad, ";", 1)
     Notaca = Nota
     
-    Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    If Rs.EOF Then
+    If RS.EOF Then
         Observ = "NOTA NO EXISTE"
         Situacion = 2
     Else
-        codVar = DBLet(Rs!codvarie, "N")
+        codVar = DBLet(RS!CodVarie, "N")
     End If
     
     b = True
@@ -1111,11 +1111,11 @@ Dim Linea As String
                 
                 If Situacion <> 2 Then
                     ' si hay nota asociada busco los datos
-                    Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(Rs!codvarie, "N")
-                    Sql = Sql & " and nomcalibrador2 = " & DBSet(Trim(Nombre1), "T")
+                    SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS!CodVarie, "N")
+                    SQL = SQL & " and nomcalibrador2 = " & DBSet(Trim(Nombre1), "T")
                     
                     Set RS1 = New ADODB.Recordset
-                    RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     
                     If RS1.EOF Then
                         Observ = "NO EXIS.CAL"
@@ -1153,11 +1153,11 @@ Dim Linea As String
     If Situacion <> 2 Then
         If Destri <> 0 Then
             ' si hay kilos de destrio buscamos cual es la calidad de destrio
-            Sql = "select codcalid from rcalidad where codvarie = " & DBSet(codVar, "N")
-            Sql = Sql & " and tipcalid = 1 " ' calidad de destrio
+            SQL = "select codcalid from rcalidad where codvarie = " & DBSet(codVar, "N")
+            SQL = SQL & " and tipcalid = 1 " ' calidad de destrio
 
             Set RS1 = New ADODB.Recordset
-            RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
             If RS1.EOF Then
                 Observ = "NO HAY DESTRIO"
@@ -1178,49 +1178,49 @@ Dim Linea As String
 '        Situacion = 4
 '    End If
 
-    Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+    SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
 
-    SeInserta = (TotalRegistros(Sql) = 0)
+    SeInserta = (TotalRegistros(SQL) = 0)
 
     If SeInserta Then
         If Situacion = 2 Then
             ' si no hay nota asociada no puedo meter la clasificacion
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(KilosTot, "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(KilosTot, "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
 
         Else
             ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
             ' tabla: rclasifauto
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-            Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-            Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-            Sql = Sql & DBSet(KilosTot, "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+            SQL = SQL & DBSet(RS!codcampo, "N") & ","
+            SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+            SQL = SQL & DBSet(KilosTot, "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
         End If
-        conn.Execute Sql
+        conn.Execute SQL
 
         ' tabla: rclasifauto_clasif
-        Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-        Sql = Sql & " values "
+        SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+        SQL = SQL & " values "
 
     End If
 
@@ -1234,8 +1234,8 @@ Dim Linea As String
         ' cargamos la tabla temporal
         For i = 1 To NroCalidad
             If NomCal(i) <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                     SQLaux = SQLaux & "," & DBSet(KilCal(i), "N") & ")"
@@ -1262,12 +1262,12 @@ Dim Linea As String
         
         While Not RSaux.EOF
             If SeInserta Then
-                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                 Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
             Else
                 Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                 Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
 
                 conn.Execute Sql2
@@ -1282,12 +1282,12 @@ Dim Linea As String
             If Sql2 <> "" Then
                 Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
             End If
-            Sql = Sql & Sql2
-            conn.Execute Sql
+            SQL = SQL & Sql2
+            conn.Execute SQL
         End If
     End If ' si la situacion es distinta de 2
 
-    Set Rs = Nothing
+    Set RS = Nothing
     Set NomCal = Nothing
     Set KilCal = Nothing
 
@@ -1304,16 +1304,16 @@ End Function
 
 Private Function ProcesarFicheroAlziraPrecalib(ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -1339,7 +1339,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -1362,7 +1362,7 @@ Dim CalPeque As String
 
     ProcesarFicheroAlziraPrecalib = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -1381,13 +1381,13 @@ Dim CalPeque As String
     Set NomCal = New Dictionary
     Set KilCal = New Dictionary
             
-    Sql = "select * from tmpcalibrador "
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select * from tmpcalibrador "
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Notaca = 0
-    If Not Rs.EOF Then
-        Notaca = DBLet(Rs.Fields(0).Value, "N")
+    If Not RS.EOF Then
+        Notaca = DBLet(RS.Fields(0).Value, "N")
         
         Sql2 = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
         Set RS1 = New ADODB.Recordset
@@ -1400,7 +1400,7 @@ Dim CalPeque As String
         
         b = True
         
-        While Not Rs.EOF
+        While Not RS.EOF
             i = i + 1
             
             Pb1.Value = Pb1.Value + 1
@@ -1408,22 +1408,22 @@ Dim CalPeque As String
             'Me.Refresh
             DoEvents
             
-            Nombre1 = DBLet(Rs!nomcalid, "T")
-            Destri = DBLet(Rs!Kilos3, "T")
-            Pequen = DBLet(Rs!Kilos4, "T")
+            Nombre1 = DBLet(RS!nomcalid, "T")
+            Destri = DBLet(RS!Kilos3, "T")
+            Pequen = DBLet(RS!Kilos4, "T")
                     
-            Kilone = DBLet(Rs!Kilos1, "T")
+            Kilone = DBLet(RS!Kilos1, "T")
             
             Kilos = Round2(CCur(Kilone), 2)
             KilosTot = KilosTot + Kilos
                     
             If Situacion <> 2 Then
                 ' si hay nota asociada busco los datos
-                Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS1!codvarie, "N")
-                Sql = Sql & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
+                SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS1!CodVarie, "N")
+                SQL = SQL & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
                 
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
                 If Rs2.EOF Then
                     Observ = "NO EXIS.CAL"
@@ -1436,52 +1436,52 @@ Dim CalPeque As String
             
             End If
             
-            Rs.MoveNext
+            RS.MoveNext
         Wend
     
-        Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+        SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
     
-        SeInserta = (TotalRegistros(Sql) = 0)
+        SeInserta = (TotalRegistros(SQL) = 0)
     
         If SeInserta Then
             If Situacion = 2 Then
                 ' si no hay nota asociada no puedo meter la clasificacion
-                Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
-                Sql = Sql & DBSet(Notaca, "N") & ","
-                Sql = Sql & DBSet(0, "N") & ","
-                Sql = Sql & DBSet(0, "N") & ","
-                Sql = Sql & DBSet(0, "N") & ","
-                Sql = Sql & DBSet(KilosTot, "N") & ","
-                Sql = Sql & DBSet(Destri, "N") & ","
-                Sql = Sql & DBSet(Podrid, "N") & ","
-                Sql = Sql & DBSet(Pequen, "N") & ","
-                Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                SQL = SQL & "`observac`,`situacion`) values ("
+                SQL = SQL & DBSet(Notaca, "N") & ","
+                SQL = SQL & DBSet(0, "N") & ","
+                SQL = SQL & DBSet(0, "N") & ","
+                SQL = SQL & DBSet(0, "N") & ","
+                SQL = SQL & DBSet(KilosTot, "N") & ","
+                SQL = SQL & DBSet(Destri, "N") & ","
+                SQL = SQL & DBSet(Podrid, "N") & ","
+                SQL = SQL & DBSet(Pequen, "N") & ","
+                SQL = SQL & DBSet(Observ, "T") & ","
+                SQL = SQL & DBSet(Situacion, "N") & ")"
     
             Else
                 ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                 ' tabla: rclasifauto
-                Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
-                Sql = Sql & DBSet(Notaca, "N") & ","
-                Sql = Sql & DBSet(RS1!Codsocio, "N") & ","
-                Sql = Sql & DBSet(RS1!codcampo, "N") & ","
-                Sql = Sql & DBSet(RS1!codvarie, "N") & ","
-                Sql = Sql & DBSet(KilosTot, "N") & ","
-                Sql = Sql & DBSet(Destri, "N") & ","
-                Sql = Sql & DBSet(Podrid, "N") & ","
-                Sql = Sql & DBSet(Pequen, "N") & ","
-                Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                SQL = SQL & "`observac`,`situacion`) values ("
+                SQL = SQL & DBSet(Notaca, "N") & ","
+                SQL = SQL & DBSet(RS1!CodSocio, "N") & ","
+                SQL = SQL & DBSet(RS1!codcampo, "N") & ","
+                SQL = SQL & DBSet(RS1!CodVarie, "N") & ","
+                SQL = SQL & DBSet(KilosTot, "N") & ","
+                SQL = SQL & DBSet(Destri, "N") & ","
+                SQL = SQL & DBSet(Podrid, "N") & ","
+                SQL = SQL & DBSet(Pequen, "N") & ","
+                SQL = SQL & DBSet(Observ, "T") & ","
+                SQL = SQL & DBSet(Situacion, "N") & ")"
             End If
-            conn.Execute Sql
+            conn.Execute SQL
     
             ' tabla: rclasifauto_clasif
-            Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-            Sql = Sql & " values "
+            SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+            SQL = SQL & " values "
     
         End If
     
@@ -1495,8 +1495,8 @@ Dim CalPeque As String
             ' cargamos la tabla temporal
             For j = 1 To i
                 If NomCal(j) <> "" Then
-                    Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(j), "N"))
-                    If Nregs = 0 Then
+                    nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(j), "N"))
+                    If nRegs = 0 Then
                         'insertamos en la temporal
                         SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(j), "N")
                         SQLaux = SQLaux & "," & DBSet(KilCal(j), "N") & ")"
@@ -1513,10 +1513,10 @@ Dim CalPeque As String
             Next j
     
             'le sumamos los kilos de destrio
-            CalDestri = CalidadDestrio(RS1!codvarie)
+            CalDestri = CalidadDestrio(RS1!CodVarie)
             If CalDestri <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(CalDestri, "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(CalDestri, "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(CalDestri, "N")
                     SQLaux = SQLaux & "," & DBSet(Destri, "N") & ")"
@@ -1532,10 +1532,10 @@ Dim CalPeque As String
             End If
             
             'le sumamos los kilos de menut
-            CalPeque = CalidadMenut(RS1!codvarie)
+            CalPeque = CalidadMenut(RS1!CodVarie)
             If CalPeque <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(CalPeque, "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(CalPeque, "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(CalPeque, "N")
                     SQLaux = SQLaux & "," & DBSet(Pequen, "N") & ")"
@@ -1562,12 +1562,12 @@ Dim CalPeque As String
     
             While Not RSaux.EOF
                 If SeInserta Then
-                    Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS1!codvarie, "N") & ","
+                    Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS1!CodVarie, "N") & ","
                     Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
                 Else
                     Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                     Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                    Sql2 = Sql2 & " and codvarie = " & DBSet(RS1!codvarie, "N")
+                    Sql2 = Sql2 & " and codvarie = " & DBSet(RS1!CodVarie, "N")
                     Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
     
                     conn.Execute Sql2
@@ -1582,12 +1582,12 @@ Dim CalPeque As String
                 If Sql2 <> "" Then
                     Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
                 End If
-                Sql = Sql & Sql2
-                conn.Execute Sql
+                SQL = SQL & Sql2
+                conn.Execute SQL
             End If
         End If ' si la situacion es distinta de 2
     
-        Set Rs = Nothing
+        Set RS = Nothing
         Set RS1 = Nothing
         Set NomCal = Nothing
         Set KilCal = Nothing
@@ -1607,15 +1607,15 @@ End Function
 
 Private Function ProcesarFicheroAlziraKaki(NF As Long, Cad As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -1641,7 +1641,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -1662,7 +1662,7 @@ Dim PorcenDestrio As String
 
     ProcesarFicheroAlziraKaki = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -1698,15 +1698,15 @@ Dim PorcenDestrio As String
     
     Notaca = Mid(Cad, 10, 10) ' posicion de la [10,19]
     
-    Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
-    If Rs.EOF Then
+    If RS.EOF Then
         Observ = "NOTA NO EXISTE"
         Situacion = 2
     Else
-        codVar = DBLet(Rs!codvarie, "N")
+        codVar = DBLet(RS!CodVarie, "N")
     End If
     
     ' saltamos 9 lineas
@@ -1745,11 +1745,11 @@ Dim PorcenDestrio As String
         
         If Situacion <> 2 Then
             ' si hay nota asociada busco los datos
-            Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql = Sql & " and nomcalibrador3 = " & DBSet(Trim(Nombre1), "T")
+            SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS!CodVarie, "N")
+            SQL = SQL & " and nomcalibrador3 = " & DBSet(Trim(Nombre1), "T")
             
             Set RS1 = New ADODB.Recordset
-            RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If RS1.EOF Then
                 Observ = "NO EXIS.CAL"
@@ -1774,11 +1774,11 @@ Dim PorcenDestrio As String
     If Situacion <> 2 Then
         If Destri <> 0 Then
             ' si hay kilos de destrio buscamos cual es la calidad de destrio
-            Sql = "select codcalid from rcalidad where codvarie = " & DBSet(codVar, "N")
-            Sql = Sql & " and tipcalid = 1 " ' calidad de destrio
+            SQL = "select codcalid from rcalidad where codvarie = " & DBSet(codVar, "N")
+            SQL = SQL & " and tipcalid = 1 " ' calidad de destrio
 
             Set RS1 = New ADODB.Recordset
-            RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
             If RS1.EOF Then
                 Observ = "NO HAY DESTRIO"
@@ -1803,49 +1803,49 @@ Dim PorcenDestrio As String
 '        Situacion = 4
 '    End If
 
-    Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+    SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
 
-    SeInserta = (TotalRegistros(Sql) = 0)
+    SeInserta = (TotalRegistros(SQL) = 0)
 
     If SeInserta Then
         If Situacion = 2 Then
             ' si no hay nota asociada no puedo meter la clasificacion
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(KilosTot, "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(KilosTot, "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
 
         Else
             ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
             ' tabla: rclasifauto
-            Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-            Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-            Sql = Sql & "`observac`,`situacion`) values ("
-            Sql = Sql & DBSet(Notaca, "N") & ","
-            Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-            Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-            Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-            Sql = Sql & DBSet(KilosTot, "N") & ","
-            Sql = Sql & DBSet(Destri, "N") & ","
-            Sql = Sql & DBSet(Podrid, "N") & ","
-            Sql = Sql & DBSet(Pequen, "N") & ","
-            Sql = Sql & DBSet(Observ, "T") & ","
-            Sql = Sql & DBSet(Situacion, "N") & ")"
+            SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+            SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+            SQL = SQL & "`observac`,`situacion`) values ("
+            SQL = SQL & DBSet(Notaca, "N") & ","
+            SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+            SQL = SQL & DBSet(RS!codcampo, "N") & ","
+            SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+            SQL = SQL & DBSet(KilosTot, "N") & ","
+            SQL = SQL & DBSet(Destri, "N") & ","
+            SQL = SQL & DBSet(Podrid, "N") & ","
+            SQL = SQL & DBSet(Pequen, "N") & ","
+            SQL = SQL & DBSet(Observ, "T") & ","
+            SQL = SQL & DBSet(Situacion, "N") & ")"
         End If
-        conn.Execute Sql
+        conn.Execute SQL
 
         ' tabla: rclasifauto_clasif
-        Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-        Sql = Sql & " values "
+        SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+        SQL = SQL & " values "
 
     End If
 
@@ -1859,8 +1859,8 @@ Dim PorcenDestrio As String
         ' cargamos la tabla temporal
         For i = 1 To NroCalidad
             If NomCal(i) <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                     SQLaux = SQLaux & "," & DBSet(KilCal(i), "N") & ")"
@@ -1887,12 +1887,12 @@ Dim PorcenDestrio As String
         
         While Not RSaux.EOF
             If SeInserta Then
-                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                 Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
             Else
                 Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                 Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
 
                 conn.Execute Sql2
@@ -1907,8 +1907,8 @@ Dim PorcenDestrio As String
             If Sql2 <> "" Then
                 Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
             End If
-            Sql = Sql & Sql2
-            conn.Execute Sql
+            SQL = SQL & Sql2
+            conn.Execute SQL
         End If
 'ya veremos
 '        If Destri <> 0 Then
@@ -1920,7 +1920,7 @@ Dim PorcenDestrio As String
 '        End If
     End If ' si la situacion es distinta de 2
 
-    Set Rs = Nothing
+    Set RS = Nothing
     Set NomCal = Nothing
     Set KilCal = Nothing
 
@@ -1941,10 +1941,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -2029,15 +2029,15 @@ End Function
 
 Private Function ProcesarLineaCatadau(NF As Long, Cad As String, Calibr As Byte, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -2062,7 +2062,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim SeInserta As Boolean
 
@@ -2071,7 +2071,7 @@ Dim SeInserta As Boolean
 
     ProcesarLineaCatadau = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -2098,15 +2098,15 @@ Dim SeInserta As Boolean
                 Podrid = RecuperaValorNew(Cad, ",", 9)
                 Pequen = RecuperaValorNew(Cad, ",", 10)
         
-                Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-                Set Rs = New ADODB.Recordset
-                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+                Set RS = New ADODB.Recordset
+                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
-                If Rs.EOF Then
+                If RS.EOF Then
                     Observ = "NOTA NO EXISTE"
                     Situacion = 2
                 Else
-                    If DBLet(Rs.Fields(0).Value, "N") <> Kilone Then
+                    If DBLet(RS.Fields(0).Value, "N") <> Kilone Then
                         Observ = "K.NETOS DIF."
                         Situacion = 4
                     End If
@@ -2145,11 +2145,11 @@ Dim SeInserta As Boolean
                     If Situacion <> 2 Then
                         ' si hay nota asociada busco los datos
                         
-                        Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(Rs!codvarie, "N")
-                        Sql = Sql & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
+                        SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(RS!CodVarie, "N")
+                        SQL = SQL & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
                         
                         Set RS1 = New ADODB.Recordset
-                        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                        RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         
                         If RS1.EOF Then
                             Observ = "NO EXIS.CAL"
@@ -2182,49 +2182,49 @@ Dim SeInserta As Boolean
                     KilCal(i) = RecuperaValorNew(Cad, ",", i + 4)
                 Next i
                
-                Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+                SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
                 
-                SeInserta = (TotalRegistros(Sql) = 0)
+                SeInserta = (TotalRegistros(SQL) = 0)
                 
                 If SeInserta Then
                     If Situacion = 2 Then
                         ' si no hay nota asociada no puedo meter la clasificacion
-                        Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                        Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                        Sql = Sql & "`observac`,`situacion`) values ("
-                        Sql = Sql & DBSet(Notaca, "N") & ","
-                        Sql = Sql & DBSet(0, "N") & ","
-                        Sql = Sql & DBSet(0, "N") & ","
-                        Sql = Sql & DBSet(0, "N") & ","
-                        Sql = Sql & DBSet(Kilone, "N") & ","
-                        Sql = Sql & DBSet(Destri, "N") & ","
-                        Sql = Sql & DBSet(Podrid, "N") & ","
-                        Sql = Sql & DBSet(Pequen, "N") & ","
-                        Sql = Sql & DBSet(Observ, "T") & ","
-                        Sql = Sql & DBSet(Situacion, "N") & ")"
+                        SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                        SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                        SQL = SQL & "`observac`,`situacion`) values ("
+                        SQL = SQL & DBSet(Notaca, "N") & ","
+                        SQL = SQL & DBSet(0, "N") & ","
+                        SQL = SQL & DBSet(0, "N") & ","
+                        SQL = SQL & DBSet(0, "N") & ","
+                        SQL = SQL & DBSet(Kilone, "N") & ","
+                        SQL = SQL & DBSet(Destri, "N") & ","
+                        SQL = SQL & DBSet(Podrid, "N") & ","
+                        SQL = SQL & DBSet(Pequen, "N") & ","
+                        SQL = SQL & DBSet(Observ, "T") & ","
+                        SQL = SQL & DBSet(Situacion, "N") & ")"
                     
                     Else
                         ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                         ' tabla: rclasifauto
-                        Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                        Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                        Sql = Sql & "`observac`,`situacion`) values ("
-                        Sql = Sql & DBSet(Notaca, "N") & ","
-                        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-                        Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-                        Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-                        Sql = Sql & DBSet(Kilone, "N") & ","
-                        Sql = Sql & DBSet(Destri, "N") & ","
-                        Sql = Sql & DBSet(Podrid, "N") & ","
-                        Sql = Sql & DBSet(Pequen, "N") & ","
-                        Sql = Sql & DBSet(Observ, "T") & ","
-                        Sql = Sql & DBSet(Situacion, "N") & ")"
+                        SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                        SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                        SQL = SQL & "`observac`,`situacion`) values ("
+                        SQL = SQL & DBSet(Notaca, "N") & ","
+                        SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+                        SQL = SQL & DBSet(RS!codcampo, "N") & ","
+                        SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+                        SQL = SQL & DBSet(Kilone, "N") & ","
+                        SQL = SQL & DBSet(Destri, "N") & ","
+                        SQL = SQL & DBSet(Podrid, "N") & ","
+                        SQL = SQL & DBSet(Pequen, "N") & ","
+                        SQL = SQL & DBSet(Observ, "T") & ","
+                        SQL = SQL & DBSet(Situacion, "N") & ")"
                     End If
-                    conn.Execute Sql
+                    conn.Execute SQL
                 
                     ' tabla: rclasifauto_clasif
-                    Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-                    Sql = Sql & " values "
+                    SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+                    SQL = SQL & " values "
                     
                 End If
                 
@@ -2239,8 +2239,8 @@ Dim SeInserta As Boolean
                     ' cargamos la tabla temporal
                     For i = 0 To NGrupos - 1
                         If NomCal(i) <> "" Then
-                            Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                            If Nregs = 0 Then
+                            nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                            If nRegs = 0 Then
                                 'insertamos en la temporal
                                 SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                                 SQLaux = SQLaux & "," & KilCal(i) & ")"
@@ -2265,12 +2265,12 @@ Dim SeInserta As Boolean
                     
                     While Not RSaux.EOF
                         If SeInserta Then
-                            Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                            Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                             Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
                         Else
                             Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                             Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                            Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                             Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
                             
                             conn.Execute Sql2
@@ -2286,8 +2286,8 @@ Dim SeInserta As Boolean
                         If Sql2 <> "" Then
                             Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
                         End If
-                        Sql = Sql & Sql2
-                        conn.Execute Sql
+                        SQL = SQL & Sql2
+                        conn.Execute SQL
                     End If
                 End If ' si la situacion es distinta de 2
                 
@@ -2307,7 +2307,7 @@ Dim SeInserta As Boolean
                 ' salto tipo g
                 Line Input #NF, Cad
                 
-                Set Rs = Nothing
+                Set RS = Nothing
                 Set NomCal = Nothing
                 Set KilCal = Nothing
             
@@ -2340,11 +2340,11 @@ Dim SeInserta As Boolean
 '****************falsta esto
 '            Notaca = Mid(NomFic, 1, 7)
             
-            Sql = "select codsocio, codcampo, codvarie, kilosnet from rclasifica"
-            Sql = Sql & " where numnotac = " & DBSet(Notaca, "N")
+            SQL = "select codsocio, codcampo, codvarie, kilosnet from rclasifica"
+            SQL = SQL & " where numnotac = " & DBSet(Notaca, "N")
             
             Set RS1 = New ADODB.Recordset
-            RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             If RS1.EOF Then
                 Observ = "NOTA NO EXI."
@@ -2374,9 +2374,9 @@ End Function
 ' Proceso de traspaso para VALSUR
 '
 Private Function ProcesarLineaValsur(Cad As String, Calibrador As Byte) As Boolean
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 
@@ -2430,37 +2430,37 @@ Dim numlinea As Long
         KilCal(i) = RecuperaValor(Cad, i + 19)
     Next i
     
-    Sql = "select codsocio, codcampo, codvarie from rclasifica where numnotac = " & DBSet(NumNota, "N")
+    SQL = "select codsocio, codcampo, codvarie from rclasifica where numnotac = " & DBSet(NumNota, "N")
     
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set RS = New ADODB.Recordset
+    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Rs.EOF Then
+    If RS.EOF Then
         Observac = "NOTA NO EXISTE"
         Situacion = 2
     
         'insertamos la cabecera de la clasificacion
-        Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`,"
-        Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,`observac`,`situacion` ) values ("
-        Sql = Sql & DBSet(NumNota, "N") & ","
-        Sql = Sql & ValorNulo & ","
-        Sql = Sql & 0 & ","
-        Sql = Sql & ValorNulo & ","
-        Sql = Sql & DBSet(KilosTot, "N") & ","
-        Sql = Sql & DBSet(KilosDes, "N") & ","
-        Sql = Sql & DBSet(KilosPod, "N") & ","
-        Sql = Sql & DBSet(KilosNet, "N") & ","
-        Sql = Sql & DBSet(Observac, "T") & ","
-        Sql = Sql & DBSet(Situacion, "N") & ")"
+        SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`,"
+        SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,`observac`,`situacion` ) values ("
+        SQL = SQL & DBSet(NumNota, "N") & ","
+        SQL = SQL & ValorNulo & ","
+        SQL = SQL & 0 & ","
+        SQL = SQL & ValorNulo & ","
+        SQL = SQL & DBSet(KilosTot, "N") & ","
+        SQL = SQL & DBSet(KilosDes, "N") & ","
+        SQL = SQL & DBSet(KilosPod, "N") & ","
+        SQL = SQL & DBSet(KilosNet, "N") & ","
+        SQL = SQL & DBSet(Observac, "T") & ","
+        SQL = SQL & DBSet(Situacion, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
         ' no metemos la clasificacion pq no se corresponde con ninguna nota
     Else
         ' insertamos las calidades si existen
         For i = 1 To 12
             If NomCal(i) <> "" And KilCal(i) <> 0 Then
-                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(RS!CodVarie, "N")
                 Select Case Calibrador
                     Case 0 ' calibrador 1
                         Sql2 = Sql2 & " and nomcalibrador1 = " & DBSet(NomCal(i), "T")
@@ -2480,7 +2480,7 @@ Dim numlinea As Long
 
                     ProcesarLineaValsur = False
                     
-                    Set Rs = Nothing
+                    Set RS = Nothing
                     Set Rs2 = Nothing
                     
                     Set NomCal = Nothing
@@ -2493,7 +2493,7 @@ Dim numlinea As Long
                 
                 Sql3 = "insert into rclasifauto_clasif(numnotac,codvarie,codcalid,kiloscal) values ("
                 Sql3 = Sql3 & DBSet(NumNota, "N") & ","
-                Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & ","
+                Sql3 = Sql3 & DBSet(RS!CodVarie, "N") & ","
                 Sql3 = Sql3 & DBSet(CodCal, "N") & ","
                 Sql3 = Sql3 & DBSet(KilCal(i), "N") & ")"
                 
@@ -2502,24 +2502,24 @@ Dim numlinea As Long
         Next i
     
         'insertamos la cabecera de la clasificacion
-        Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`,"
-        Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,`observac`,`situacion`) values ("
-        Sql = Sql & DBSet(NumNota, "N") & ","
-        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-        Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-        Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-        Sql = Sql & DBSet(KilosTot, "N") & ","
-        Sql = Sql & DBSet(KilosDes, "N") & ","
-        Sql = Sql & DBSet(KilosPod, "N") & ","
-        Sql = Sql & DBSet(KilosNet, "N") & ","
-        Sql = Sql & DBSet(Observac, "T") & ","
-        Sql = Sql & DBSet(Situacion, "N") & ")"
+        SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`,"
+        SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,`observac`,`situacion`) values ("
+        SQL = SQL & DBSet(NumNota, "N") & ","
+        SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+        SQL = SQL & DBSet(RS!codcampo, "N") & ","
+        SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+        SQL = SQL & DBSet(KilosTot, "N") & ","
+        SQL = SQL & DBSet(KilosDes, "N") & ","
+        SQL = SQL & DBSet(KilosPod, "N") & ","
+        SQL = SQL & DBSet(KilosNet, "N") & ","
+        SQL = SQL & DBSet(Observac, "T") & ","
+        SQL = SQL & DBSet(Situacion, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
     End If
     
-    Set Rs = Nothing
+    Set RS = Nothing
     
     Set NomCal = Nothing
     Set KilCal = Nothing
@@ -2536,10 +2536,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -2647,10 +2647,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -2705,36 +2705,36 @@ Dim Nota As String
 '           NomFic = Dir   ' Obtiene siguiente entrada.
 '        Loop
 '++
-        Sql = "select distinct numnotac from tmpcalibradorcast where codusu = " & vUsu.Codigo
-        Sql = Sql & " and numnotac >= " & DBSet(NotaD, "N") & " and numnotac <= " & DBSet(NotaH, "N")
+        SQL = "select distinct numnotac from tmpcalibradorcast where codusu = " & vUsu.Codigo
+        SQL = SQL & " and numnotac >= " & DBSet(NotaD, "N") & " and numnotac <= " & DBSet(NotaH, "N")
         
-        Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set RS = New ADODB.Recordset
+        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        While Not Rs.EOF
+        While Not RS.EOF
         
-            Sql = "delete from tmpcalibrador"
-            conn.Execute Sql
+            SQL = "delete from tmpcalibrador"
+            conn.Execute SQL
         
-            Sql = "insert into tmpcalibrador (numnota, nomcalid, kilos1) "
-            Sql = Sql & " select numnotac, nomcalid, sum(kilos) from tmpcalibradorcast where codusu = " & vUsu.Codigo
-            Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N") & " and numcalid > -1 "
-            Sql = Sql & " group by 1,2"
+            SQL = "insert into tmpcalibrador (numnota, nomcalid, kilos1) "
+            SQL = SQL & " select numnotac, nomcalid, sum(kilos) from tmpcalibradorcast where codusu = " & vUsu.Codigo
+            SQL = SQL & " and numnotac = " & DBSet(RS!numnotac, "N") & " and numcalid > -1 "
+            SQL = SQL & " group by 1,2"
             
-            conn.Execute Sql
+            conn.Execute SQL
             
-            Sql = "update tmpcalibrador set kilos3 = "
-            Sql = Sql & " (select sum(kilos) from tmpcalibradorcast where numnotac = " & DBSet(Rs!Numnotac, "N") & " and codusu = " & vUsu.Codigo & " and numcalid = -1)"
-            Sql = Sql & " where numnota = " & DBSet(Rs!Numnotac, "N")
+            SQL = "update tmpcalibrador set kilos3 = "
+            SQL = SQL & " (select sum(kilos) from tmpcalibradorcast where numnotac = " & DBSet(RS!numnotac, "N") & " and codusu = " & vUsu.Codigo & " and numcalid = -1)"
+            SQL = SQL & " where numnota = " & DBSet(RS!numnotac, "N")
             
-            conn.Execute Sql
+            conn.Execute SQL
             
-            Sql = "update tmpcalibrador set kilos1 = replace(kilos1,'.',','), kilos3 = replace(kilos3,'.',',') "
+            SQL = "update tmpcalibrador set kilos1 = replace(kilos1,'.',','), kilos3 = replace(kilos3,'.',',') "
             
-            conn.Execute Sql
+            conn.Execute SQL
             
         
-            Label1.Caption = "Procesando Nota: " & Rs!Numnotac
+            Label1.Caption = "Procesando Nota: " & RS!numnotac
             longitud = TotalRegistros("select count(*) from tmpcalibrador")
 
             Pb1.visible = True
@@ -2747,9 +2747,9 @@ Dim Nota As String
                 b = ProcesarFicheroAlziraPrecalib(Pb1, Label1, Label2)
             End If
         
-            Rs.MoveNext
+            RS.MoveNext
         Wend
-        Set Rs = Nothing
+        Set RS = Nothing
     Else
         ' castello de rugat para castelduc
         ' solo hay un fichero que le pasan, luego hay que procesarlo
@@ -2771,15 +2771,15 @@ End Function
 
 Private Function ProcesarFicheroCastelducRugat(nomFich As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label, ByRef Nota As String) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -2804,7 +2804,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -2834,7 +2834,7 @@ Dim longitud As Long
 
     ProcesarFicheroCastelducRugat = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -2889,12 +2889,12 @@ Dim longitud As Long
             Notaca = Mid(Cad, 1, PrimerBlanco(Cad)) ' numero de nota
             Cad = Trim(Mid(Cad, PrimerBlanco(Cad) + 1, Len(Cad)))
         
-            Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-            Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
             Situacion = 0
-            If Rs.EOF Then
+            If RS.EOF Then
                 Observ = "NOTA NO EXISTE"
                 Situacion = 2
             End If
@@ -2965,55 +2965,55 @@ Dim longitud As Long
             Cad = Mid(Cad, PrimerBlanco(Cad) + 1, Len(Cad))
                 
             If Situacion <> 2 Then
-                If DBLet(Rs.Fields(0).Value, "N") <> Int(KilosTot) Then
+                If DBLet(RS.Fields(0).Value, "N") <> Int(KilosTot) Then
                     Observ = "K.NETOS DIF."
                     Situacion = 4
                 End If
             End If
         
-            Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+            SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
         
-            SeInserta = (TotalRegistros(Sql) = 0)
+            SeInserta = (TotalRegistros(SQL) = 0)
         
             If SeInserta Then
                 If Situacion = 2 Then
                     ' si no hay nota asociada no puedo meter la clasificacion
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(KilosTot, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(KilosTot, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
         
                 Else
                     ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                     ' tabla: rclasifauto
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-                    Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-                    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-                    Sql = Sql & DBSet(Round2(KilosTot, 0), "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+                    SQL = SQL & DBSet(RS!codcampo, "N") & ","
+                    SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+                    SQL = SQL & DBSet(Round2(KilosTot, 0), "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
                 End If
-                conn.Execute Sql
+                conn.Execute SQL
         
                 ' tabla: rclasifauto_clasif
-                Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-                Sql = Sql & " values "
+                SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+                SQL = SQL & " values "
         
             End If
         
@@ -3028,8 +3028,8 @@ Dim longitud As Long
                 ' cargamos la tabla temporal
                 For i = 1 To 10
                     If NomCal(i) <> "" Then
-                        Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                        If Nregs = 0 Then
+                        nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                        If nRegs = 0 Then
                             'insertamos en la temporal
                             SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                             SQLaux = SQLaux & "," & DBSet(ImporteSinFormato(KilCal(i)), "N") & ")"
@@ -3057,12 +3057,12 @@ Dim longitud As Long
                 While Not RSaux.EOF
                     HayReg = True
                     If SeInserta Then
-                        Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                        Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                         Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
                     Else
                         Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                         Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                         Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
         
                         conn.Execute Sql2
@@ -3077,12 +3077,12 @@ Dim longitud As Long
                     If Sql2 <> "" Then
                         Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
                     End If
-                    Sql = Sql & Sql2
-                    conn.Execute Sql
+                    SQL = SQL & Sql2
+                    conn.Execute SQL
                 End If
             End If ' si la situacion es distinta de 2
         
-            Set Rs = Nothing
+            Set RS = Nothing
             Set NomCal = Nothing
             Set KilCal = Nothing
         
@@ -3105,12 +3105,12 @@ eProcesarFicheroCastelducRugat:
 End Function
 
 
-Private Function PrimerBlanco(cadena As String) As Long
+Private Function PrimerBlanco(Cadena As String) As Long
 Dim j As Long
 
     PrimerBlanco = 0
     j = 1
-    While Asc(Mid(cadena, j, 1)) <> 9 And j <= Len(cadena)
+    While Asc(Mid(Cadena, j, 1)) <> 9 And j <= Len(Cadena)
         j = j + 1
     Wend
     PrimerBlanco = j
@@ -3127,10 +3127,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -3196,15 +3196,15 @@ End Function
 
 Private Function ProcesarFicheroPicassent(NF As Long, Cad As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -3230,7 +3230,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -3258,7 +3258,7 @@ Dim Ordinal As Long
 
     ProcesarFicheroPicassent = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -3295,8 +3295,8 @@ Dim Ordinal As Long
                     vCadena = RecuperaValorNew(Cad, ",", 3)
                     
                     If InStr(1, vCadena, "/") <> 0 Then
-                        codsoc = RecuperaValorNew(vCadena, "/", 1)
-                        codsoc = Mid(codsoc, 2, Len(codsoc))
+                        CodSoc = RecuperaValorNew(vCadena, "/", 1)
+                        CodSoc = Mid(CodSoc, 2, Len(CodSoc))
                         Codcam = Mid(vCadena, InStr(1, vCadena, "/") + 1, Len(vCadena)) ', RecuperaValorNew(vCadena, "/", 2), 1, 4)
                         If InStr(1, Codcam, "-") <> 0 Then
                             Codcam = RecuperaValorNew(Codcam, "-", 1)
@@ -3306,9 +3306,9 @@ Dim Ordinal As Long
                         If InStr(1, vCadena, "-") <> 0 Then
                             vClasi = Mid(vCadena, InStr(1, vCadena, "-") + 1, 1)  ' RecuperaValorNew(vCadena, "-", 2)
                         End If
-                        If CInt(codsoc) <> 999 Then
-                            Sql = "select count(*) from rsocios where codsocio = " & DBSet(codsoc, "N")
-                            If TotalRegistros(Sql) = 0 Then
+                        If CInt(CodSoc) <> 999 Then
+                            SQL = "select count(*) from rsocios where codsocio = " & DBSet(CodSoc, "N")
+                            If TotalRegistros(SQL) = 0 Then
                                 Observ = "NO EXIS.SOC"
                                 Situacion = 2
                             End If
@@ -3320,16 +3320,16 @@ Dim Ordinal As Long
             Case "103"
                 codVar = RecuperaValorNew(Cad, ",", 2)
                 If Situacion = 0 Then
-                    Sql = "select count(*) from variedades where codvarie = " & DBSet(codVar, "N")
-                    If TotalRegistros(Sql) = 0 Then
+                    SQL = "select count(*) from variedades where codvarie = " & DBSet(codVar, "N")
+                    If TotalRegistros(SQL) = 0 Then
                         Observ = "NO EXIS.VAR"
                         Situacion = 3
                     Else
                         If CLng(ComprobarCero(Codcam)) <> 9999 Then
-                            Sql = "select count(*) from rcampos where codsocio= " & DBSet(codsoc, "N")
-                            Sql = Sql & " and codvarie = " & DBSet(codVar, "N")
-                            Sql = Sql & " and codcampo = " & DBSet(Codcam, "N")
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from rcampos where codsocio= " & DBSet(CodSoc, "N")
+                            SQL = SQL & " and codvarie = " & DBSet(codVar, "N")
+                            SQL = SQL & " and codcampo = " & DBSet(Codcam, "N")
+                            If TotalRegistros(SQL) = 0 Then
                                 Observ = "NO EXIS.CPO"
                                 Situacion = 4
                             End If
@@ -3353,10 +3353,10 @@ Dim Ordinal As Long
                     For i = 1 To NGrupos
                         Nombre1 = RecuperaValorNew(Cad, ",", i + 2)
                     
-                        Sql = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(codVar, "N")
-                        Sql = Sql & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
+                        SQL = "select codcalid from rcalidad_calibrador where codvarie = " & DBSet(codVar, "N")
+                        SQL = SQL & " and nomcalibrador1 = " & DBSet(Nombre1, "T")
                         
-                        NomCal(i) = DevuelveValor(Sql)
+                        NomCal(i) = DevuelveValor(SQL)
                         If NomCal(i) = 0 Then
                             Observ = "NO EXIS.CAL"
                             Situacion = 1
@@ -3387,50 +3387,50 @@ Dim Ordinal As Long
     Wend
     
     '[Monica] en el fichero me viene el codcampo y he de mostrar el nro de campo
-    Sql = "select nrocampo from rcampos where codsocio= " & DBSet(codsoc, "N")
-    Sql = Sql & " and codvarie = " & DBSet(codVar, "N")
-    Sql = Sql & " and codcampo = " & DBSet(Codcam, "N")
+    SQL = "select nrocampo from rcampos where codsocio= " & DBSet(CodSoc, "N")
+    SQL = SQL & " and codvarie = " & DBSet(codVar, "N")
+    SQL = SQL & " and codcampo = " & DBSet(Codcam, "N")
     
-    NroCam = DevuelveValor(Sql)
+    NroCam = DevuelveValor(SQL)
     
     If vClasi = 0 Then vClasi = 1
     
-    Sql = "select max(ordinal) + 1 from rclasifauto where codsocio = " & DBSet(codsoc, "N")
-    Sql = Sql & " and codcampo = " & DBSet(NroCam, "N")
-    Sql = Sql & " and codvarie = " & DBSet(codVar, "N")
-    Sql = Sql & " and numnotac = " & DBSet(vClasi, "N")
-    Sql = Sql & " and fechacla = " & DBSet(vFecha, "F")
+    SQL = "select max(ordinal) + 1 from rclasifauto where codsocio = " & DBSet(CodSoc, "N")
+    SQL = SQL & " and codcampo = " & DBSet(NroCam, "N")
+    SQL = SQL & " and codvarie = " & DBSet(codVar, "N")
+    SQL = SQL & " and numnotac = " & DBSet(vClasi, "N")
+    SQL = SQL & " and fechacla = " & DBSet(vFecha, "F")
     
 
-    Ordinal = DevuelveValor(Sql)
+    Ordinal = DevuelveValor(SQL)
     If Ordinal = 0 Then Ordinal = 1
 '    SeInserta = (TotalRegistros(Sql) = 0)
 
 '    If SeInserta Then
-        Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-        Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-        Sql = Sql & "`observac`,`situacion`,`fechacla`,`ordinal`  ) values ("
-        Sql = Sql & DBSet(vClasi, "N") & ","
-        Sql = Sql & DBSet(codsoc, "N") & ","
-        Sql = Sql & DBSet(NroCam, "N") & ","
-        Sql = Sql & DBSet(codVar, "N") & ","
-        Sql = Sql & DBSet(KilosTot, "N") & ","
-        Sql = Sql & DBSet(0, "N") & ","
-        Sql = Sql & DBSet(0, "N") & ","
-        Sql = Sql & DBSet(0, "N") & ","
-        Sql = Sql & DBSet(Observ, "T") & ","
-        Sql = Sql & DBSet(Situacion, "N") & ","
-        Sql = Sql & DBSet(vFecha, "F") & ","
-        Sql = Sql & DBSet(Ordinal, "N") & ")"
+        SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+        SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+        SQL = SQL & "`observac`,`situacion`,`fechacla`,`ordinal`  ) values ("
+        SQL = SQL & DBSet(vClasi, "N") & ","
+        SQL = SQL & DBSet(CodSoc, "N") & ","
+        SQL = SQL & DBSet(NroCam, "N") & ","
+        SQL = SQL & DBSet(codVar, "N") & ","
+        SQL = SQL & DBSet(KilosTot, "N") & ","
+        SQL = SQL & DBSet(0, "N") & ","
+        SQL = SQL & DBSet(0, "N") & ","
+        SQL = SQL & DBSet(0, "N") & ","
+        SQL = SQL & DBSet(Observ, "T") & ","
+        SQL = SQL & DBSet(Situacion, "N") & ","
+        SQL = SQL & DBSet(vFecha, "F") & ","
+        SQL = SQL & DBSet(Ordinal, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
         
  '   End If
         
     If Situacion = 0 Then
         ' tabla: rclasifauto_clasif
-        Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`,`codcampo`,`codsocio`,`fechacla`,`ordinal`) "
-        Sql = Sql & " values "
+        SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`,`codcampo`,`codsocio`,`fechacla`,`ordinal`) "
+        SQL = SQL & " values "
     
         'borramos la tabla temporal
         SQLaux = "delete from tmpcata"
@@ -3439,8 +3439,8 @@ Dim Ordinal As Long
         ' cargamos la tabla temporal
         For i = 1 To NGrupos
             If NomCal(i) <> "" Then
-                Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                If Nregs = 0 Then
+                nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                If nRegs = 0 Then
                     'insertamos en la temporal
                     SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                     SQLaux = SQLaux & "," & DBSet(KilCal(i), "N") & ")"
@@ -3469,7 +3469,7 @@ Dim Ordinal As Long
 '            If SeInserta Then
                 Sql2 = Sql2 & "(" & DBSet(vClasi, "N") & "," & DBSet(codVar, "N") & ","
                 Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & ","
-                Sql2 = Sql2 & DBSet(NroCam, "N") & "," & DBSet(codsoc, "N") & ","
+                Sql2 = Sql2 & DBSet(NroCam, "N") & "," & DBSet(CodSoc, "N") & ","
                 Sql2 = Sql2 & DBSet(vFecha, "F") & "," & DBSet(Ordinal, "N") & "),"
 '            Else
 '                Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
@@ -3491,13 +3491,13 @@ Dim Ordinal As Long
 '        If SeInserta Then
             If Sql2 <> "" Then
                 Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
-                Sql = Sql & Sql2
-                conn.Execute Sql
+                SQL = SQL & Sql2
+                conn.Execute SQL
             End If
 '        End If
     End If
     
-    Set Rs = Nothing
+    Set RS = Nothing
     Set NomCal = Nothing
     Set KilCal = Nothing
 
@@ -3517,10 +3517,10 @@ Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -3573,7 +3573,7 @@ Dim Nota As String
         Loop
     
     
-    ProcesarDirectorioPicassent = b
+    ProcesarDirectorioCOOPIC = b
     
     Pb1.visible = False
     Label1.Caption = ""
@@ -3584,15 +3584,15 @@ End Function
 
 Private Function ProcesarFicheroCOOPIC(NF As Long, Cad As String, ByRef Pb1 As ProgressBar, ByRef Label1 As Label, ByRef Label2 As Label) As Boolean
 Dim b As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Mens As String
 Dim numlinea As Long
-Dim Rs As ADODB.Recordset
+Dim RS As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim RSaux As ADODB.Recordset
 
-Dim codsoc As String
+Dim CodSoc As String
 Dim Codcam As String
 Dim codpro As String
 Dim codVar As String
@@ -3617,7 +3617,7 @@ Dim NomCal As Dictionary
 Dim KilCal As Dictionary
 
 Dim SQLaux As String
-Dim Nregs As Integer
+Dim nRegs As Integer
 
 Dim NSep As Integer
 
@@ -3636,18 +3636,18 @@ Dim NroCalidad As Integer
 Dim Porcen As String
 Dim KilosMuestreo As String
 Dim HayReg As Boolean
-Dim NF As Integer
-Dim Cad As String
 Dim Cad1 As String
 Dim longitud As Long
-
+Dim Destrio As String
+Dim Varie As String
+Dim Fecha As String
 
 
     On Error GoTo eProcesarFicheroCOOPIC
 
     ProcesarFicheroCOOPIC = False
     
-    codsoc = 0
+    CodSoc = 0
     Codcam = 0
     codpro = 0
     codVar = 0
@@ -3663,15 +3663,10 @@ Dim longitud As Long
     i = 0
     
     
-    NF = FreeFile
-    
-    Open nomFich For Input As #NF
     
     Line Input #NF, Cad1
     i = 0
 
-    Label1.Caption = "Procesando Fichero: " & nomFich
-    longitud = FileLen(nomFich)
     
     Pb1.visible = True
     Pb1.Max = longitud
@@ -3701,12 +3696,12 @@ Dim longitud As Long
             Notaca = ""
             Notaca = Mid(Cad, 1, 9) ' numero de nota
         
-            Sql = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
-            Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            SQL = "select kilosnet, codvarie, codcampo, codsocio from rclasifica where numnotac = " & DBSet(Notaca, "N")
+            Set RS = New ADODB.Recordset
+            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
             Situacion = 0
-            If Rs.EOF Then
+            If RS.EOF Then
                 Observ = "NOTA NO EXISTE"
                 Situacion = 2
             End If
@@ -3752,55 +3747,55 @@ Dim longitud As Long
                 
                 
             If Situacion <> 2 Then
-                If DBLet(Rs.Fields(1).Value, "N") <> Int(Varie) Then
+                If DBLet(RS.Fields(1).Value, "N") <> Int(Varie) Then
                     Observ = "VARIEDAD DIF."
                     Situacion = 4
                 End If
             End If
         
-            Sql = "select count(*) from rclasifauto where numnotac = " & Notaca
+            SQL = "select count(*) from rclasifauto where numnotac = " & Notaca
         
-            SeInserta = (TotalRegistros(Sql) = 0)
+            SeInserta = (TotalRegistros(SQL) = 0)
         
             If SeInserta Then
                 If Situacion = 2 Then
                     ' si no hay nota asociada no puedo meter la clasificacion
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(KilosTot, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(KilosTot, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
         
                 Else
                     ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                     ' tabla: rclasifauto
-                    Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
-                    Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                    Sql = Sql & "`observac`,`situacion`) values ("
-                    Sql = Sql & DBSet(Notaca, "N") & ","
-                    Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-                    Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-                    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-                    Sql = Sql & DBSet(Round2(KilosTot, 0), "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(0, "N") & ","
-                    Sql = Sql & DBSet(Observ, "T") & ","
-                    Sql = Sql & DBSet(Situacion, "N") & ")"
+                    SQL = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                    SQL = SQL & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
+                    SQL = SQL & "`observac`,`situacion`) values ("
+                    SQL = SQL & DBSet(Notaca, "N") & ","
+                    SQL = SQL & DBSet(RS!CodSocio, "N") & ","
+                    SQL = SQL & DBSet(RS!codcampo, "N") & ","
+                    SQL = SQL & DBSet(RS!CodVarie, "N") & ","
+                    SQL = SQL & DBSet(Round2(KilosTot, 0), "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(0, "N") & ","
+                    SQL = SQL & DBSet(Observ, "T") & ","
+                    SQL = SQL & DBSet(Situacion, "N") & ")"
                 End If
-                conn.Execute Sql
+                conn.Execute SQL
         
                 ' tabla: rclasifauto_clasif
-                Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
-                Sql = Sql & " values "
+                SQL = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+                SQL = SQL & " values "
         
             End If
         
@@ -3815,8 +3810,8 @@ Dim longitud As Long
                 ' cargamos la tabla temporal
                 For i = 1 To 10
                     If NomCal(i) <> "" Then
-                        Nregs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
-                        If Nregs = 0 Then
+                        nRegs = TotalRegistros("select count(*) from tmpcata where codcalid = " & DBSet(NomCal(i), "N"))
+                        If nRegs = 0 Then
                             'insertamos en la temporal
                             SQLaux = "insert into tmpcata (codcalid, kilosnet) values (" & DBSet(NomCal(i), "N")
                             SQLaux = SQLaux & "," & DBSet(ImporteSinFormato(KilCal(i)), "N") & ")"
@@ -3844,12 +3839,12 @@ Dim longitud As Long
                 While Not RSaux.EOF
                     HayReg = True
                     If SeInserta Then
-                        Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                        Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(RS!CodVarie, "N") & ","
                         Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
                     Else
                         Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                         Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
-                        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql2 = Sql2 & " and codvarie = " & DBSet(RS!CodVarie, "N")
                         Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
         
                         conn.Execute Sql2
@@ -3864,12 +3859,12 @@ Dim longitud As Long
                     If Sql2 <> "" Then
                         Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
                     End If
-                    Sql = Sql & Sql2
-                    conn.Execute Sql
+                    SQL = SQL & Sql2
+                    conn.Execute SQL
                 End If
             End If ' si la situacion es distinta de 2
         
-            Set Rs = Nothing
+            Set RS = Nothing
             Set NomCal = Nothing
             Set KilCal = Nothing
         
