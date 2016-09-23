@@ -212,12 +212,7 @@ End Sub
 
 Public Sub SubmnC_RecoleccionG_Clasifica_Click(Index As Integer)
     Select Case Index
-        Case 1:
-            If vParamAplic.Cooperativa = 16 Then
-                Construc "Traspaso desde el calibrador "
-            Else
-                AbrirListado (21)             ' Traspaso desde el calibrador
-            End If
+        Case 1: AbrirListado (21)             ' Traspaso desde el calibrador
         Case 2: AbrirListado (22)             ' Traspaso entradas trazabilidad
         Case 3: ' Picassent tiene distinto formulario
                 If vParamAplic.Cooperativa = 2 Then
