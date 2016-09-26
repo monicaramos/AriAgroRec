@@ -5379,7 +5379,7 @@ Dim b As Boolean
     '[Monica]06/05/2015: solo para el caso de alzira no dejamos modificar la superficie cooperativa si no tiene nivel 0
     If vParamAplic.Cooperativa = 4 And Modo = 4 Then
         Text1(5).Enabled = (vUsu.Nivel = 0)
-        Text2(5).Enabled = (vUsu.Nivel = 0)
+        text2(5).Enabled = (vUsu.Nivel = 0)
     End If
 
 
@@ -5697,19 +5697,19 @@ End Sub
 Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
 'cliente de suministros
     Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de cliente de suministros
-    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre
+    text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre
 End Sub
 
 Private Sub frmDesa_DatoSeleccionado(CadenaSeleccion As String)
     Text1(26).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo desarrollo vegetativo
     FormateaCampo Text1(26)
-    Text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre desarrollo vegetativo
+    text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre desarrollo vegetativo
 End Sub
 
 Private Sub frmGlo_DatoSeleccionado(CadenaSeleccion As String)
 'globalgap
     Text1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de globalgap
-    Text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    text2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmGto_DatoSeleccionado(CadenaSeleccion As String)
@@ -5760,7 +5760,7 @@ Dim CodPobla As String
 
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
     FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
     
     
     '[Monica]23/05/2013: sustituyo esto por el ponerdatospartida
@@ -5774,43 +5774,43 @@ End Sub
 Private Sub frmPat_DatoSeleccionado(CadenaSeleccion As String)
     Text1(31).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo patron a pie
     FormateaCampo Text1(31)
-    Text2(31).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre patron a pie
+    text2(31).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre patron a pie
 End Sub
 
 Private Sub frmPlan_DatoSeleccionado(CadenaSeleccion As String)
     Text1(25).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo marco plantacion
     FormateaCampo Text1(25)
-    Text2(25).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre marco plantacion
+    text2(25).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre marco plantacion
 End Sub
 
 Private Sub frmProc_DatoSeleccionado(CadenaSeleccion As String)
     Text1(30).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo procedencia de riego
     FormateaCampo Text1(30)
-    Text2(30).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre procedencia de riego
+    text2(30).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre procedencia de riego
 End Sub
 
 Private Sub frmRes_DatoSeleccionado(CadenaSeleccion As String)
     Text1(24).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo capataz responsable
     FormateaCampo Text1(24)
-    Text2(24).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
+    text2(24).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
 End Sub
 
 Private Sub frmSegOp_DatoSeleccionado(CadenaSeleccion As String)
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo seguro opcion
     FormateaCampo Text1(indCodigo)
-    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre seguro opcion
+    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre seguro opcion
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
     Text1(12).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
     FormateaCampo Text1(12)
-    Text2(12).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
+    text2(12).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
     Text1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
     FormateaCampo Text1(indice)
-    Text2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
+    text2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
 End Sub
 
 Private Sub frmSoc1_DatoSeleccionado(CadenaSeleccion As String)
@@ -5823,13 +5823,13 @@ End Sub
 Private Sub frmTie_DatoSeleccionado(CadenaSeleccion As String)
     Text1(27).Text = RecuperaValor(CadenaSeleccion, 1) 'tipo de tierra
     FormateaCampo Text1(27)
-    Text2(27).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de tierra
+    text2(27).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de tierra
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
     Text1(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codvariedad
     FormateaCampo Text1(2)
-    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
+    text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -6051,7 +6051,7 @@ Dim Municipio As String
     Screen.MousePointer = vbHourglass
 
 '    If LanzaHomeGnral(Direccion) Then espera 2
-    LanzaVisorMimeDocumento Me.hwnd, Direccion
+    LanzaVisorMimeDocumento Me.hWnd, Direccion
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -6094,7 +6094,7 @@ End Sub
 
 Private Sub Text2_GotFocus(Index As Integer)
     kCampo = Index
-    ConseguirFoco Text2(Index), Modo
+    ConseguirFoco text2(Index), Modo
 End Sub
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -6110,7 +6110,7 @@ Private Sub Text2_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 
-    If Not PerderFocoGnral(Text2(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(text2(Index), Modo) Then Exit Sub
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -6119,9 +6119,9 @@ Dim Nuevo As Boolean
     Select Case Index
         Case 5, 6, 7, 33 'superficies en hectareas
             If Modo = 1 Then Exit Sub
-            If Text2(Index).Text <> "" Then
-                PonerFormatoDecimal Text2(Index), 3
-                Text1(Index).Text = Round2(ImporteSinFormato(Text2(Index).Text) * vParamAplic.Faneca, 4)
+            If text2(Index).Text <> "" Then
+                PonerFormatoDecimal text2(Index), 3
+                Text1(Index).Text = Round2(ImporteSinFormato(text2(Index).Text) * vParamAplic.Faneca, 4)
                 PonerFormatoDecimal Text1(Index), 7
             Else
                 If Index = 5 Then
@@ -6223,12 +6223,13 @@ Private Sub MandaBusquedaPrevia(CadB As String)
     Cad = ""
     Cad = Cad & "Código|rcampos.codcampo|N|000000|9·"
     Cad = Cad & "Socio|rcampos.codsocio|N|000000|9·"
-    Cad = Cad & "Nombre|rsocios.nomsocio|T||34·"
-    Cad = Cad & "Variedad|variedades.nomvarie|T||17·"
+    Cad = Cad & "Nombre|rsocios.nomsocio|T||30·"
+    Cad = Cad & "Variedad|variedades.nomvarie|T||16·"
     Cad = Cad & "Partida|rpartida.nomparti|T||15·"
     Cad = Cad & "Pol.|rcampos.poligono|T||5·"
     Cad = Cad & "Parc.|rcampos.parcela|T||7·"
     Cad = Cad & "Sp.|rcampos.subparce|T||4·"
+    Cad = Cad & "Nro|rcampos.nrocampo|T||5·"
     
     NombreTabla1 = "((rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio) inner join variedades on rcampos.codvarie = variedades.codvarie) " & _
                    " inner join rpartida on rcampos.codparti = rpartida.codparti "
@@ -6409,7 +6410,7 @@ Dim Cad As String
     Cad = "¿Seguro que desea eliminar el Campo?"
     Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
     Cad = Cad & vbCrLf & "Socio : " & Data1.Recordset.Fields(1)
-    Cad = Cad & vbCrLf & "Nombre: " & Text2(1).Text
+    Cad = Cad & vbCrLf & "Nombre: " & text2(1).Text
     ' **************************************************************************
     
     'borrem
@@ -6886,8 +6887,8 @@ Dim Nuevo As Boolean
 
         Case 1 'SOCIO
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6905,19 +6906,19 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
             ' si estamos insertando ponemos el propietario iguasl que el socio
             If Modo = 3 Then
                 Text1(22).Text = Text1(Index).Text
-                Text2(22).Text = Text2(Index).Text
+                text2(22).Text = text2(Index).Text
             End If
         
         Case 22 'PROPIETARIO
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio", "N")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio", "N")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6935,25 +6936,25 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
         
         Case 2 'VARIEDAD
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "variedades", "nomvarie")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "variedades", "nomvarie")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Variedad: " & Text1(Index).Text & vbCrLf
                     MsgBox cadMen, vbExclamation
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
                 
         Case 3 'PARTIDA
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rpartida", "nomparti", "codparti", "N")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rpartida", "nomparti", "codparti", "N")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Partida: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6973,21 +6974,21 @@ Dim Nuevo As Boolean
                     PonerDatosPartida
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
                 
         Case 5, 6, 7, 33 'superficies en hectareas
             If Modo = 1 Then Exit Sub
             If Text1(Index).Text <> "" Then
                 PonerFormatoDecimal Text1(Index), 7
-                Text2(Index).Text = Round2(ImporteSinFormato(Text1(Index).Text) / vParamAplic.Faneca, 2)
-                PonerFormatoDecimal Text2(Index), 3
+                text2(Index).Text = Round2(ImporteSinFormato(Text1(Index).Text) / vParamAplic.Faneca, 2)
+                PonerFormatoDecimal text2(Index), 3
                 
                 If Index = 5 Then
                     If ComprobarCero(Text1(5).Text) = 0 Then
                         EstablecerOrden False 'por hanegadas
                         
-                        PonerFoco Text2(Index)
+                        PonerFoco text2(Index)
                     Else
                         EstablecerOrden True 'por hectareas
                         PonerFoco Text1(6)
@@ -6997,7 +6998,7 @@ Dim Nuevo As Boolean
                 If Index = 5 Then
                     EstablecerOrden False 'por hanegadas
                     
-                    PonerFoco Text2(Index)
+                    PonerFoco text2(Index)
                 End If
             End If
             
@@ -7007,8 +7008,8 @@ Dim Nuevo As Boolean
                 
         Case 12 'SITUACION Campo
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsituacioncampo", "nomsitua")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsituacioncampo", "nomsitua")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Situación Campo: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7026,7 +7027,7 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 13, 14 'poligono y parcela
@@ -7059,8 +7060,8 @@ Dim Nuevo As Boolean
         Case 24 'Responsable
             If Modo = 1 Then Exit Sub
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcapataz", "nomcapat")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcapataz", "nomcapat")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Responsable: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7078,13 +7079,13 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 25 'Marco de Plantacion
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rplantacion", "nomplanta")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rplantacion", "nomplanta")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el marco de Plantación: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7102,14 +7103,14 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
             
         Case 26 'Desarrollo vegetativo
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rdesarrollo", "nomdesa")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rdesarrollo", "nomdesa")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Desarrollo Vegetativo: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7127,13 +7128,13 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 27 ' Tipo de tierra
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rtierra", "nomtierra")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rtierra", "nomtierra")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Tipo de Tierra: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7151,7 +7152,7 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 28, 35 ' importe coste seguro
@@ -7161,8 +7162,8 @@ Dim Nuevo As Boolean
             If Modo = 1 Then Exit Sub
 '            If PonerFormatoEntero(Text1(Index)) Then
             If Text1(Index).Text <> "" Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseguroopcion", "nomseguro", "codseguro", "T")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseguroopcion", "nomseguro", "codseguro", "T")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Opción Seguro: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7180,14 +7181,14 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 34 'opcion seguro
             If Modo = 1 Then Exit Sub
 '            If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseguroopcion", "nomseguro", "codseguro", "T")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseguroopcion", "nomseguro", "codseguro", "T")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Opción Seguro: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7212,8 +7213,8 @@ Dim Nuevo As Boolean
             
         Case 30 'procedencia de riego
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rproceriego", "nomproce")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rproceriego", "nomproce")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Procedencia de Riego: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7231,13 +7232,13 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 31 'patron a pie
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rpatronpie", "nompatron")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rpatronpie", "nompatron")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Patrón Pie: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7255,7 +7256,7 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 32 ' nro de llave
@@ -7269,8 +7270,8 @@ Dim Nuevo As Boolean
             
         Case 38 ' globalgap
             If Text1(Index).Text <> "" Then
-                Text2(Index).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(Index).Text, "T")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(Index).Text, "T")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el código de GlobalGap: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -7290,13 +7291,13 @@ Dim Nuevo As Boolean
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 39 ' codigo de cliente
             If vParamAplic.BDAriges <> "" Then
                 If Text1(39).Text <> "" Then
-                    Text2(39).Text = DevuelveDesdeBDNew(cAriges, "sclien", "nomclien", "codclien", Text1(39).Text, "N")
+                    text2(39).Text = DevuelveDesdeBDNew(cAriges, "sclien", "nomclien", "codclien", Text1(39).Text, "N")
                 End If
             End If
             
@@ -7358,50 +7359,50 @@ Dim NomEmple As String
 
     On Error GoTo EPosarDescripcions
 
-    Text2(1).Text = PonerNombreDeCod(Text1(1), "rsocios", "nomsocio", "codsocio", "N")
-    Text2(22).Text = PonerNombreDeCod(Text1(22), "rsocios", "nomsocio", "codsocio", "N")
-    Text2(12).Text = PonerNombreDeCod(Text1(12), "rsituacioncampo", "nomsitua", "codsitua", "N")
-    Text2(2).Text = PonerNombreDeCod(Text1(2), "variedades", "nomvarie", "codvarie", "N")
-    Text2(3).Text = PonerNombreDeCod(Text1(3), "rpartida", "nomparti", "codparti", "N")
-    Text2(38).Text = PonerNombreDeCod(Text1(38), "rglobalgap", "descripcion", "codigo", "T")
+    text2(1).Text = PonerNombreDeCod(Text1(1), "rsocios", "nomsocio", "codsocio", "N")
+    text2(22).Text = PonerNombreDeCod(Text1(22), "rsocios", "nomsocio", "codsocio", "N")
+    text2(12).Text = PonerNombreDeCod(Text1(12), "rsituacioncampo", "nomsitua", "codsitua", "N")
+    text2(2).Text = PonerNombreDeCod(Text1(2), "variedades", "nomvarie", "codvarie", "N")
+    text2(3).Text = PonerNombreDeCod(Text1(3), "rpartida", "nomparti", "codparti", "N")
+    text2(38).Text = PonerNombreDeCod(Text1(38), "rglobalgap", "descripcion", "codigo", "T")
     
     '[Monica]14/02/2013: sacamos el codigo de conselleria de las lineas
     txtAux2(13).Text = DevuelveValor("select codconse from variedades where codvarie = " & DBSet(Text1(2).Text, "N"))
     
     
     If vParamAplic.BDAriges <> "" Then
-        Text2(39).Text = DevuelveDesdeBDNew(cAriges, "sclien", "nomclien", "codclien", Text1(39).Text, "N")
+        text2(39).Text = DevuelveDesdeBDNew(cAriges, "sclien", "nomclien", "codclien", Text1(39).Text, "N")
     End If
     
     PonerDatosPartida
     
     If Text1(5).Text <> "" Then
-        Text2(5).Text = Round2(ImporteSinFormato(Text1(5).Text) / vParamAplic.Faneca, 2)
-        PonerFormatoDecimal Text2(5), 3
+        text2(5).Text = Round2(ImporteSinFormato(Text1(5).Text) / vParamAplic.Faneca, 2)
+        PonerFormatoDecimal text2(5), 3
     End If
     
     If Text1(6).Text <> "" Then
-        Text2(6).Text = Round2(ImporteSinFormato(Text1(6).Text) / vParamAplic.Faneca, 2)
-        PonerFormatoDecimal Text2(6), 3
+        text2(6).Text = Round2(ImporteSinFormato(Text1(6).Text) / vParamAplic.Faneca, 2)
+        PonerFormatoDecimal text2(6), 3
     End If
     
     If Text1(7).Text <> "" Then
-        Text2(7).Text = Round2(ImporteSinFormato(Text1(7).Text) / vParamAplic.Faneca, 2)
-        PonerFormatoDecimal Text2(7), 3
+        text2(7).Text = Round2(ImporteSinFormato(Text1(7).Text) / vParamAplic.Faneca, 2)
+        PonerFormatoDecimal text2(7), 3
     End If
     
     If Text1(33).Text <> "" Then
-        Text2(33).Text = Round2(ImporteSinFormato(Text1(33).Text) / vParamAplic.Faneca, 2)
-        PonerFormatoDecimal Text2(33), 3
+        text2(33).Text = Round2(ImporteSinFormato(Text1(33).Text) / vParamAplic.Faneca, 2)
+        PonerFormatoDecimal text2(33), 3
     End If
     
-    Text2(24).Text = PonerNombreDeCod(Text1(24), "rcapataz", "nomcapat", "codcapat", "N")
-    Text2(25).Text = PonerNombreDeCod(Text1(25), "rplantacion", "nomplanta", "codplanta", "N")
-    Text2(26).Text = PonerNombreDeCod(Text1(26), "rdesarrollo", "nomdesa", "coddesa", "N")
-    Text2(27).Text = PonerNombreDeCod(Text1(27), "rtierra", "nomtierra", "codtierra", "N")
-    Text2(29).Text = PonerNombreDeCod(Text1(29), "rseguroopcion", "nomseguro", "codseguro", "T")
-    Text2(30).Text = PonerNombreDeCod(Text1(30), "rproceriego", "nomproce", "codproce", "N")
-    Text2(31).Text = PonerNombreDeCod(Text1(31), "rpatronpie", "nompatron", "codpatron", "N")
+    text2(24).Text = PonerNombreDeCod(Text1(24), "rcapataz", "nomcapat", "codcapat", "N")
+    text2(25).Text = PonerNombreDeCod(Text1(25), "rplantacion", "nomplanta", "codplanta", "N")
+    text2(26).Text = PonerNombreDeCod(Text1(26), "rdesarrollo", "nomdesa", "coddesa", "N")
+    text2(27).Text = PonerNombreDeCod(Text1(27), "rtierra", "nomtierra", "codtierra", "N")
+    text2(29).Text = PonerNombreDeCod(Text1(29), "rseguroopcion", "nomseguro", "codseguro", "T")
+    text2(30).Text = PonerNombreDeCod(Text1(30), "rproceriego", "nomproce", "codproce", "N")
+    text2(31).Text = PonerNombreDeCod(Text1(31), "rpatronpie", "nompatron", "codpatron", "N")
     
     '[Monica]19/09/2011: si el campo está regado por un hidrante que aparezca el hidrante
     Text5(0).Text = DevuelveDesdeBDNew(cAgro, "rpozos_campos", "hidrante", "codcampo", Text1(0).Text, "N")
@@ -9886,20 +9887,20 @@ End Sub
 
 Private Sub EstablecerOrden(PorHectareas As Boolean)
     If PorHectareas Then
-        Text2(5).TabIndex = 83
-        Text2(6).TabIndex = 84
-        Text2(7).TabIndex = 85
-        Text2(33).TabIndex = 86
+        text2(5).TabIndex = 83
+        text2(6).TabIndex = 84
+        text2(7).TabIndex = 85
+        text2(33).TabIndex = 86
         
         Text1(5).TabIndex = 8
         Text1(6).TabIndex = 9
         Text1(7).TabIndex = 10
         Text1(33).TabIndex = 11
     Else
-        Text2(5).TabIndex = 8
-        Text2(6).TabIndex = 9
-        Text2(7).TabIndex = 10
-        Text2(33).TabIndex = 11
+        text2(5).TabIndex = 8
+        text2(6).TabIndex = 9
+        text2(7).TabIndex = 10
+        text2(33).TabIndex = 11
         
         Text1(5).TabIndex = 83
         Text1(6).TabIndex = 84

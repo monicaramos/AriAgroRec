@@ -3536,7 +3536,9 @@ Dim Nota As String
     b = True
     ' Muestra los nombres en C:\ que representan directorios.
     
-    NomFic = Dir(nomDir & "*.txt")  ' Recupera la primera entrada.
+'    NomFic = Dir(nomDir & "*.txt")  ' Recupera la primera entrada.
+    
+    NomFic = nomDir
     
     If NomFic <> "" Then
         b = ProcesarFicheroCOOPIC(NomFic, Pb1, Label1, Label2)
@@ -3737,14 +3739,7 @@ Dim CodCal As Integer
         If Situacion <> 2 Then
             If DBLet(Rs.Fields(1).Value, "N") <> Int(Varie) Then
                 Observ = "VARIEDAD DIF."
-                Situacion = 3
-            End If
-            
-            If Situacion <> 3 Then
-                If DBLet(Rs!FechaEnt) <> Fecha Then
-                    Observ = "FECHA INC."
-                    Situacion = 5
-                End If
+                Situacion = 8
             End If
         End If
         
@@ -3758,39 +3753,40 @@ Dim CodCal As Integer
                 ' si no hay nota asociada no puedo meter la clasificacion
                 Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
                 Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
+                Sql = Sql & "`observac`,`situacion`,ordinal) values ("
                 Sql = Sql & DBSet(Notaca, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
-                Sql = Sql & DBSet(KilosTot, "N") & ","
+                Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                Sql = Sql & DBSet(Situacion, "N") & ",1)"
     
             Else
                 ' insertamos en las tablas intermedias: rclasifauto y rclasifauto_clasif
                 ' tabla: rclasifauto
                 Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
                 Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
-                Sql = Sql & "`observac`,`situacion`) values ("
+                Sql = Sql & "`observac`,`situacion`,fechacla, ordinal) values ("
                 Sql = Sql & DBSet(Notaca, "N") & ","
                 Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
                 Sql = Sql & DBSet(Rs!codcampo, "N") & ","
                 Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-                Sql = Sql & DBSet(Round2(KilosTot, 0), "N") & ","
+                Sql = Sql & DBSet(Round2(Rs!KilosNet, 0), "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(Observ, "T") & ","
-                Sql = Sql & DBSet(Situacion, "N") & ")"
+                Sql = Sql & DBSet(Situacion, "N") & ","
+                Sql = Sql & DBSet(Rs!FechaEnt, "F") & ",1)"
             End If
             conn.Execute Sql
     
             ' tabla: rclasifauto_clasif
-            Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`) "
+            Sql = "insert into rclasifauto_clasif (`numnotac`,`codvarie`,`codcalid`,`kiloscal`,codcampo, codsocio, fechacla,ordinal) "
             Sql = Sql & " values "
     
         End If
@@ -3847,7 +3843,9 @@ Dim CodCal As Integer
                 HayReg = True
                 If SeInserta Then
                     Sql2 = Sql2 & "(" & DBSet(Notaca, "N") & "," & DBSet(Rs!codvarie, "N") & ","
-                    Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & "),"
+                    Sql2 = Sql2 & DBSet(RSaux!codcalid, "N") & "," & DBSet(RSaux!KilosNet, "N") & ","
+                    Sql2 = Sql2 & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                    Sql2 = Sql2 & DBSet(Rs!FechaEnt, "F") & ",1),"
                 Else
                     Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                     Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")

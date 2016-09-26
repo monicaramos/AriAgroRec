@@ -1738,7 +1738,7 @@ Dim b As Boolean
             Case 9 ' Natural
                 b = ActualizarEntradasCatadau
             Case 16 'COOPIC
-                b = ActualizarEntradasCastelduc
+                b = ActualizarEntradasAlzira
             
         End Select
         If b Then

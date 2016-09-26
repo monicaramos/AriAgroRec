@@ -2440,7 +2440,7 @@ Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
 'partidas
 Dim Zona As String
 Dim Poblacion As String
-Dim otroCampo As String
+Dim OtroCampo As String
 Dim CodPobla As String
 
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
