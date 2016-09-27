@@ -36,6 +36,7 @@ Begin VB.Form frmManTraba
       Width           =   6600
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         Enabled         =   0   'False
          Height          =   285
          Index           =   35
          Left            =   3090
@@ -44,6 +45,7 @@ Begin VB.Form frmManTraba
          Tag             =   "Importe Embargo|N|N|||straba|impembargo|###,##0.00||"
          Text            =   "0000000000"
          Top             =   4260
+         Visible         =   0   'False
          Width           =   990
       End
       Begin VB.CheckBox chkEmbarga 
@@ -368,10 +370,12 @@ Begin VB.Form frmManTraba
       End
       Begin VB.Label Label31 
          Caption         =   "Importe Embargo"
+         Enabled         =   0   'False
          Height          =   255
          Left            =   1830
          TabIndex        =   87
          Top             =   4320
+         Visible         =   0   'False
          Width           =   1335
       End
       Begin VB.Label Label30 

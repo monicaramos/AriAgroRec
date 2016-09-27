@@ -4727,7 +4727,7 @@ Dim List As Collection
 
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(0).Cancel = True
+    Me.cmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -6331,7 +6331,7 @@ Dim Precio As Currency
 Dim Importe As Currency
 
 Dim i As Integer
-Dim j As Integer
+Dim J As Integer
 
 Dim Fdesde As Date
 Dim Fhasta As Date
@@ -6358,9 +6358,9 @@ Dim Dias As Long
         Importe = ImporteSinFormato(txtcodigo(39).Text)
     End If
 
-    For j = TrabaDesde To Trabahasta
+    For J = TrabaDesde To Trabahasta
         '[Monica]29/10/2014: añadimos la condicion de que el trabajador que vamos a introducir no tenga fecha de baja
-        If TotalRegistros("select count(*) from straba where codtraba = " & j & " and (fechabaja is null or fechabaja = '')") <> 0 Then
+        If TotalRegistros("select count(*) from straba where codtraba = " & J & " and (fechabaja is null or fechabaja = '')") <> 0 Then
     
             For i = 0 To Dias
                 Fecha = DateAdd("y", i, Fdesde)
@@ -6368,13 +6368,13 @@ Dim Dias As Long
                 Sql = "select count(*) from horas where fechahora = " & DBSet(Fecha, "F")
                 Sql = Sql & " and codvarie = " & DBSet(txtcodigo(28).Text, "N")
                 Sql = Sql & " and codcapat = " & DBSet(0, "N")
-                Sql = Sql & " and codtraba = " & DBSet(j, "N")
+                Sql = Sql & " and codtraba = " & DBSet(J, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
                     Sql1 = "insert into horas (fechahora,codvarie,codtraba,codcapat,importe,fecharec,intconta,pasaridoc,codalmac) values ("
                     Sql1 = Sql1 & DBSet(Fecha, "F") & ","
                     Sql1 = Sql1 & DBSet(txtcodigo(28).Text, "N") & ","
-                    Sql1 = Sql1 & DBSet(j, "N") & ","
+                    Sql1 = Sql1 & DBSet(J, "N") & ","
                     Sql1 = Sql1 & "0,"
                     Sql1 = Sql1 & DBSet(Importe, "N") & ","
                     Sql1 = Sql1 & "null,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ") "
@@ -6384,7 +6384,7 @@ Dim Dias As Long
                 
             Next i
         End If
-    Next j
+    Next J
     
     CalculoEventuales = True
     Exit Function
@@ -7218,8 +7218,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb1.visible = True
-    CargarProgres pb1, Rs.Fields(0).Value
+    Pb1.visible = True
+    CargarProgres Pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -7229,7 +7229,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
@@ -7552,6 +7552,8 @@ Dim RS5 As ADODB.Recordset
 Dim Anticipado As Currency
 Dim v_cadena As String
 Dim Dias As String
+Dim HayEmbargo As Boolean
+Dim ImpEmbargo As Currency
 
 On Error GoTo eCargarTemporalListAsesoria
     
@@ -7607,14 +7609,23 @@ On Error GoTo eCargarTemporalListAsesoria
                                                 
             Bruto = DevuelveValor(Sql)
                                                 
-            Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, nombre1, importe1, importe2, importe3) values ("
+            ImpEmbargo = 0
+'            Sql = "select hayembargo from straba where codtraba = " & DBSet(AntTraba, "N")
+'            HayEmbargo = (DevuelveValor(Sql) = "1")
+'            If HayEmbargo Then
+'                Sql = "select impembargo from straba where codtraba = " & DBSet(AntTraba, "N")
+'                ImpEmbargo = DevuelveValor(Sql)
+'            End If
+            
+            Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, nombre1, importe1, importe2, importe3, importe4) values ("
             Sql3 = Sql3 & vUsu.Codigo & ","
             Sql3 = Sql3 & DBSet(AntTraba, "N") & ","
             Sql3 = Sql3 & DBSet(Fhasta, "F") & ","
             Sql3 = Sql3 & DBSet(v_cadena, "T") & ","
             Sql3 = Sql3 & DBSet(Anticipado, "N") & ","
             Sql3 = Sql3 & DBSet(Dias, "N") & ","
-            Sql3 = Sql3 & DBSet(Bruto, "N") & ")"
+            Sql3 = Sql3 & DBSet(Bruto, "N") & ","
+            Sql3 = Sql3 & DBSet(ImpEmbargo, "N") & ")"
             
             conn.Execute Sql3
 
@@ -7655,14 +7666,24 @@ On Error GoTo eCargarTemporalListAsesoria
                                             
         Bruto = DevuelveValor(Sql)
         
-        Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, nombre1, importe1, importe2, importe3) values ("
+        ImpEmbargo = 0
+'        Sql = "select hayembargo from straba where codtraba = " & DBSet(ActTraba, "N")
+'        HayEmbargo = (DevuelveValor(Sql) = "1")
+'        If HayEmbargo Then
+'            Sql = "select impembargo from straba where codtraba = " & DBSet(ActTraba, "N")
+'            ImpEmbargo = DevuelveValor(Sql)
+'        End If
+        
+        
+        Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, nombre1, importe1, importe2, importe3, importe4) values ("
         Sql3 = Sql3 & vUsu.Codigo & ","
         Sql3 = Sql3 & DBSet(ActTraba, "N") & ","
         Sql3 = Sql3 & DBSet(Fhasta, "F") & ","
         Sql3 = Sql3 & DBSet(v_cadena, "T") & ","
         Sql3 = Sql3 & DBSet(Anticipado, "N") & ","
         Sql3 = Sql3 & DBSet(Dias, "N") & ","
-        Sql3 = Sql3 & DBSet(Bruto, "N") & ")"
+        Sql3 = Sql3 & DBSet(Bruto, "N") & ","
+        Sql3 = Sql3 & DBSet(ImpEmbargo, "N") & ")"
         
         conn.Execute Sql3
     End If
@@ -7728,8 +7749,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb1.visible = True
-    CargarProgres pb1, Rs.Fields(0).Value
+    Pb1.visible = True
+    CargarProgres Pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -7739,7 +7760,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
