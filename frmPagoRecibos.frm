@@ -2477,7 +2477,7 @@ On Error GoTo eProcesarCambiosPicassent
         
             Set Rs2 = Nothing
             
-            Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo, straba.impembargo   from salarios, straba where straba.codtraba = " & DBSet(ActCodTraba, "N")
+            Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo, straba.impembargo from salarios, straba where straba.codtraba = " & DBSet(ActCodTraba, "N")
             Sql2 = Sql2 & " and salarios.codcateg = straba.codcateg "
             
             Set Rs2 = New ADODB.Recordset
@@ -2492,11 +2492,11 @@ On Error GoTo eProcesarCambiosPicassent
         
         TImpbruto = TImpbruto + ImpBruto
         
-        IRPF = Round2(ImpBruto * Rs2!dtosirpf / 100, 2)
+        IRPF = Round2(ImpBruto * DBLet(Rs2!dtosirpf, "N") / 100, 2)
         TIRPF = TIRPF + IRPF
 
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
-        SegSoc = Round2(ImpBruto * Rs2!dtosegso / 100, 2)
+        SegSoc = Round2(ImpBruto * DBLet(Rs2!dtosegso, "N") / 100, 2)
         
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
 '        ImpBruto2 = ImpBruto - DBLet(Rs2!dtosegso, "N")

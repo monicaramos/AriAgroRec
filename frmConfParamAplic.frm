@@ -27,7 +27,7 @@ Begin VB.Form frmConfParamAplic
       _ExtentY        =   10372
       _Version        =   393216
       Tabs            =   13
-      Tab             =   7
+      Tab             =   2
       TabsPerRow      =   7
       TabHeight       =   520
       ForeColor       =   8388608
@@ -47,28 +47,49 @@ Begin VB.Form frmConfParamAplic
       Tab(1).ControlCount=   4
       TabCaption(2)   =   "Entradas"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
-      Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "chkCoopro"
-      Tab(2).Control(1)=   "Text1(109)"
-      Tab(2).Control(2)=   "chkNotaManual"
-      Tab(2).Control(3)=   "chkRespetarNroNota"
-      Tab(2).Control(4)=   "Text1(66)"
-      Tab(2).Control(5)=   "Text1(65)"
-      Tab(2).Control(6)=   "Text1(64)"
-      Tab(2).Control(7)=   "chkAgruparNotas"
-      Tab(2).Control(8)=   "Text1(31)"
-      Tab(2).Control(9)=   "Text1(24)"
+      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).Control(0)=   "Label11"
+      Tab(2).Control(0).Enabled=   0   'False
+      Tab(2).Control(1)=   "Label14"
+      Tab(2).Control(1).Enabled=   0   'False
+      Tab(2).Control(2)=   "Label19"
+      Tab(2).Control(2).Enabled=   0   'False
+      Tab(2).Control(3)=   "Label20"
+      Tab(2).Control(3).Enabled=   0   'False
+      Tab(2).Control(4)=   "Label21"
+      Tab(2).Control(4).Enabled=   0   'False
+      Tab(2).Control(5)=   "Label22"
+      Tab(2).Control(5).Enabled=   0   'False
+      Tab(2).Control(6)=   "Label1(101)"
+      Tab(2).Control(6).Enabled=   0   'False
+      Tab(2).Control(7)=   "imgAyuda(2)"
+      Tab(2).Control(7).Enabled=   0   'False
+      Tab(2).Control(8)=   "Frame3"
+      Tab(2).Control(8).Enabled=   0   'False
+      Tab(2).Control(9)=   "chkTaraTractor"
+      Tab(2).Control(9).Enabled=   0   'False
       Tab(2).Control(10)=   "chkTraza"
-      Tab(2).Control(11)=   "chkTaraTractor"
-      Tab(2).Control(12)=   "Frame3"
-      Tab(2).Control(13)=   "imgAyuda(2)"
-      Tab(2).Control(14)=   "Label1(101)"
-      Tab(2).Control(15)=   "Label22"
-      Tab(2).Control(16)=   "Label21"
-      Tab(2).Control(17)=   "Label20"
-      Tab(2).Control(18)=   "Label19"
-      Tab(2).Control(19)=   "Label14"
-      Tab(2).Control(20)=   "Label11"
+      Tab(2).Control(10).Enabled=   0   'False
+      Tab(2).Control(11)=   "Text1(24)"
+      Tab(2).Control(11).Enabled=   0   'False
+      Tab(2).Control(12)=   "Text1(31)"
+      Tab(2).Control(12).Enabled=   0   'False
+      Tab(2).Control(13)=   "chkAgruparNotas"
+      Tab(2).Control(13).Enabled=   0   'False
+      Tab(2).Control(14)=   "Text1(64)"
+      Tab(2).Control(14).Enabled=   0   'False
+      Tab(2).Control(15)=   "Text1(65)"
+      Tab(2).Control(15).Enabled=   0   'False
+      Tab(2).Control(16)=   "Text1(66)"
+      Tab(2).Control(16).Enabled=   0   'False
+      Tab(2).Control(17)=   "chkRespetarNroNota"
+      Tab(2).Control(17).Enabled=   0   'False
+      Tab(2).Control(18)=   "chkNotaManual"
+      Tab(2).Control(18).Enabled=   0   'False
+      Tab(2).Control(19)=   "Text1(109)"
+      Tab(2).Control(19).Enabled=   0   'False
+      Tab(2).Control(20)=   "chkCoopro"
+      Tab(2).Control(20).Enabled=   0   'False
       Tab(2).ControlCount=   21
       TabCaption(3)   =   "Aridoc"
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
@@ -129,39 +150,23 @@ Begin VB.Form frmConfParamAplic
       Tab(6).ControlCount=   11
       TabCaption(7)   =   "ADV"
       TabPicture(7)   =   "frmConfParamAplic.frx":00D0
-      Tab(7).ControlEnabled=   -1  'True
-      Tab(7).Control(0)=   "Label1(36)"
-      Tab(7).Control(0).Enabled=   0   'False
-      Tab(7).Control(1)=   "imgBuscar(4)"
-      Tab(7).Control(1).Enabled=   0   'False
-      Tab(7).Control(2)=   "imgBuscar(5)"
-      Tab(7).Control(2).Enabled=   0   'False
-      Tab(7).Control(3)=   "Label1(42)"
-      Tab(7).Control(3).Enabled=   0   'False
-      Tab(7).Control(4)=   "Label1(44)"
-      Tab(7).Control(4).Enabled=   0   'False
-      Tab(7).Control(5)=   "imgBuscar(58)"
-      Tab(7).Control(5).Enabled=   0   'False
-      Tab(7).Control(6)=   "Label1(106)"
-      Tab(7).Control(6).Enabled=   0   'False
-      Tab(7).Control(7)=   "imgBuscar(23)"
-      Tab(7).Control(7).Enabled=   0   'False
-      Tab(7).Control(8)=   "Text2(56)"
-      Tab(7).Control(8).Enabled=   0   'False
-      Tab(7).Control(9)=   "Text1(56)"
-      Tab(7).Control(9).Enabled=   0   'False
-      Tab(7).Control(10)=   "Text1(57)"
-      Tab(7).Control(10).Enabled=   0   'False
-      Tab(7).Control(11)=   "Text2(57)"
-      Tab(7).Control(11).Enabled=   0   'False
-      Tab(7).Control(12)=   "Text2(58)"
-      Tab(7).Control(12).Enabled=   0   'False
-      Tab(7).Control(13)=   "Text1(58)"
-      Tab(7).Control(13).Enabled=   0   'False
-      Tab(7).Control(14)=   "Text2(114)"
-      Tab(7).Control(14).Enabled=   0   'False
-      Tab(7).Control(15)=   "Text1(114)"
-      Tab(7).Control(15).Enabled=   0   'False
+      Tab(7).ControlEnabled=   0   'False
+      Tab(7).Control(0)=   "Text1(114)"
+      Tab(7).Control(1)=   "Text2(114)"
+      Tab(7).Control(2)=   "Text1(58)"
+      Tab(7).Control(3)=   "Text2(58)"
+      Tab(7).Control(4)=   "Text2(57)"
+      Tab(7).Control(5)=   "Text1(57)"
+      Tab(7).Control(6)=   "Text1(56)"
+      Tab(7).Control(7)=   "Text2(56)"
+      Tab(7).Control(8)=   "imgBuscar(23)"
+      Tab(7).Control(9)=   "Label1(106)"
+      Tab(7).Control(10)=   "imgBuscar(58)"
+      Tab(7).Control(11)=   "Label1(44)"
+      Tab(7).Control(12)=   "Label1(42)"
+      Tab(7).Control(13)=   "imgBuscar(5)"
+      Tab(7).Control(14)=   "imgBuscar(4)"
+      Tab(7).Control(15)=   "Label1(36)"
       Tab(7).ControlCount=   16
       TabCaption(8)   =   "Suministros"
       TabPicture(8)   =   "frmConfParamAplic.frx":00EC
@@ -234,133 +239,69 @@ Begin VB.Form frmConfParamAplic
       TabPicture(12)  =   "frmConfParamAplic.frx":015C
       Tab(12).ControlEnabled=   0   'False
       Tab(12).Control(0)=   "Label24"
-      Tab(12).Control(0).Enabled=   0   'False
       Tab(12).Control(1)=   "Label25"
-      Tab(12).Control(1).Enabled=   0   'False
       Tab(12).Control(2)=   "Label27"
-      Tab(12).Control(2).Enabled=   0   'False
       Tab(12).Control(3)=   "imgBuscar(17)"
-      Tab(12).Control(3).Enabled=   0   'False
       Tab(12).Control(4)=   "Label1(85)"
-      Tab(12).Control(4).Enabled=   0   'False
       Tab(12).Control(5)=   "Label28"
-      Tab(12).Control(5).Enabled=   0   'False
       Tab(12).Control(6)=   "Label26"
-      Tab(12).Control(6).Enabled=   0   'False
       Tab(12).Control(7)=   "Label29"
-      Tab(12).Control(7).Enabled=   0   'False
       Tab(12).Control(8)=   "Label1(113)"
-      Tab(12).Control(8).Enabled=   0   'False
       Tab(12).Control(9)=   "imgBuscar(25)"
-      Tab(12).Control(9).Enabled=   0   'False
       Tab(12).Control(10)=   "Label1(114)"
-      Tab(12).Control(10).Enabled=   0   'False
       Tab(12).Control(11)=   "imgBuscar(122)"
-      Tab(12).Control(11).Enabled=   0   'False
       Tab(12).Control(12)=   "imgBuscar(123)"
-      Tab(12).Control(12).Enabled=   0   'False
       Tab(12).Control(13)=   "Label1(115)"
-      Tab(12).Control(13).Enabled=   0   'False
       Tab(12).Control(14)=   "imgBuscar(124)"
-      Tab(12).Control(14).Enabled=   0   'False
       Tab(12).Control(15)=   "Label1(116)"
-      Tab(12).Control(15).Enabled=   0   'False
       Tab(12).Control(16)=   "Label1(118)"
-      Tab(12).Control(16).Enabled=   0   'False
       Tab(12).Control(17)=   "imgBuscar(126)"
-      Tab(12).Control(17).Enabled=   0   'False
       Tab(12).Control(18)=   "Label1(119)"
-      Tab(12).Control(18).Enabled=   0   'False
       Tab(12).Control(19)=   "imgBuscar(127)"
-      Tab(12).Control(19).Enabled=   0   'False
       Tab(12).Control(20)=   "imgBuscar(129)"
-      Tab(12).Control(20).Enabled=   0   'False
       Tab(12).Control(21)=   "Label1(121)"
-      Tab(12).Control(21).Enabled=   0   'False
       Tab(12).Control(22)=   "imgBuscar(130)"
-      Tab(12).Control(22).Enabled=   0   'False
       Tab(12).Control(23)=   "Label1(122)"
-      Tab(12).Control(23).Enabled=   0   'False
       Tab(12).Control(24)=   "Label1(131)"
-      Tab(12).Control(24).Enabled=   0   'False
       Tab(12).Control(25)=   "imgBuscar(131)"
-      Tab(12).Control(25).Enabled=   0   'False
       Tab(12).Control(26)=   "Label1(123)"
-      Tab(12).Control(26).Enabled=   0   'False
       Tab(12).Control(27)=   "Label1(124)"
-      Tab(12).Control(27).Enabled=   0   'False
       Tab(12).Control(28)=   "Label1(125)"
-      Tab(12).Control(28).Enabled=   0   'False
       Tab(12).Control(29)=   "imgBuscar(134)"
-      Tab(12).Control(29).Enabled=   0   'False
       Tab(12).Control(30)=   "imgBuscar(135)"
-      Tab(12).Control(30).Enabled=   0   'False
       Tab(12).Control(31)=   "Label1(126)"
-      Tab(12).Control(31).Enabled=   0   'False
       Tab(12).Control(32)=   "Text1(88)"
-      Tab(12).Control(32).Enabled=   0   'False
       Tab(12).Control(33)=   "Text1(86)"
-      Tab(12).Control(33).Enabled=   0   'False
       Tab(12).Control(34)=   "Text1(89)"
-      Tab(12).Control(34).Enabled=   0   'False
       Tab(12).Control(35)=   "Text1(87)"
-      Tab(12).Control(35).Enabled=   0   'False
       Tab(12).Control(36)=   "Text1(90)"
-      Tab(12).Control(36).Enabled=   0   'False
       Tab(12).Control(37)=   "Text2(90)"
-      Tab(12).Control(37).Enabled=   0   'False
       Tab(12).Control(38)=   "Text1(92)"
-      Tab(12).Control(38).Enabled=   0   'False
       Tab(12).Control(39)=   "Text1(91)"
-      Tab(12).Control(39).Enabled=   0   'False
       Tab(12).Control(40)=   "Text2(121)"
-      Tab(12).Control(40).Enabled=   0   'False
       Tab(12).Control(41)=   "Text1(121)"
-      Tab(12).Control(41).Enabled=   0   'False
       Tab(12).Control(42)=   "Text2(122)"
-      Tab(12).Control(42).Enabled=   0   'False
       Tab(12).Control(43)=   "Text1(122)"
-      Tab(12).Control(43).Enabled=   0   'False
       Tab(12).Control(44)=   "Text1(123)"
-      Tab(12).Control(44).Enabled=   0   'False
       Tab(12).Control(45)=   "Text2(123)"
-      Tab(12).Control(45).Enabled=   0   'False
       Tab(12).Control(46)=   "Text1(124)"
-      Tab(12).Control(46).Enabled=   0   'False
       Tab(12).Control(47)=   "Text2(124)"
-      Tab(12).Control(47).Enabled=   0   'False
       Tab(12).Control(48)=   "Text2(126)"
-      Tab(12).Control(48).Enabled=   0   'False
       Tab(12).Control(49)=   "Text1(126)"
-      Tab(12).Control(49).Enabled=   0   'False
       Tab(12).Control(50)=   "Text2(127)"
-      Tab(12).Control(50).Enabled=   0   'False
       Tab(12).Control(51)=   "Text1(127)"
-      Tab(12).Control(51).Enabled=   0   'False
       Tab(12).Control(52)=   "Text1(129)"
-      Tab(12).Control(52).Enabled=   0   'False
       Tab(12).Control(53)=   "Text2(129)"
-      Tab(12).Control(53).Enabled=   0   'False
       Tab(12).Control(54)=   "Text1(130)"
-      Tab(12).Control(54).Enabled=   0   'False
       Tab(12).Control(55)=   "Text2(130)"
-      Tab(12).Control(55).Enabled=   0   'False
       Tab(12).Control(56)=   "Text2(131)"
-      Tab(12).Control(56).Enabled=   0   'False
       Tab(12).Control(57)=   "Text1(131)"
-      Tab(12).Control(57).Enabled=   0   'False
       Tab(12).Control(58)=   "Text1(132)"
-      Tab(12).Control(58).Enabled=   0   'False
       Tab(12).Control(59)=   "Text1(133)"
-      Tab(12).Control(59).Enabled=   0   'False
       Tab(12).Control(60)=   "Text2(134)"
-      Tab(12).Control(60).Enabled=   0   'False
       Tab(12).Control(61)=   "Text1(134)"
-      Tab(12).Control(61).Enabled=   0   'False
       Tab(12).Control(62)=   "Text1(135)"
-      Tab(12).Control(62).Enabled=   0   'False
       Tab(12).Control(63)=   "Text2(135)"
-      Tab(12).Control(63).Enabled=   0   'False
       Tab(12).ControlCount=   64
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
@@ -847,7 +788,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkCoopro 
          Caption         =   "Desdoble Coopropietarios "
          Height          =   375
-         Left            =   -71610
+         Left            =   3390
          TabIndex        =   51
          Tag             =   "Desdoble Coopropietarios Entradas|N|S|||rparam|cooproentradas|0||"
          Top             =   4800
@@ -879,7 +820,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   114
-         Left            =   2490
+         Left            =   -72510
          MaxLength       =   10
          TabIndex        =   84
          Tag             =   "Cod.Iva Pozos|N|S|||rparam|codivaexeadv|000||"
@@ -891,7 +832,7 @@ Begin VB.Form frmConfParamAplic
          Enabled         =   0   'False
          Height          =   285
          Index           =   114
-         Left            =   3090
+         Left            =   -71910
          TabIndex        =   382
          Top             =   2820
          Width           =   4860
@@ -911,7 +852,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   109
-         Left            =   -66990
+         Left            =   8010
          MaxLength       =   10
          TabIndex        =   52
          Tag             =   "Porc.Incr/Decr.Aforo|N|N|||rparam|porcincreaforo||##0.00|"
@@ -932,7 +873,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkNotaManual 
          Caption         =   "Nro.Nota manual"
          Height          =   375
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   46
          Tag             =   "Nro Nota Manual|N|S|||rparam|nronotamanual|0||"
          Top             =   5100
@@ -1818,7 +1759,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkRespetarNroNota 
          Caption         =   "Se respeta Nro.de Nota"
          Height          =   375
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   44
          Tag             =   "Se Respeta Nro.Notas|N|N|0|1|rparam|serespetanota|0||"
          Top             =   4485
@@ -1828,7 +1769,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   66
-         Left            =   -67560
+         Left            =   7440
          MaxLength       =   6
          TabIndex        =   48
          Tag             =   "Peso Caja Llena|N|S|||rparam|pesocajallena|##0.00||"
@@ -1840,7 +1781,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   65
-         Left            =   -68850
+         Left            =   6150
          MaxLength       =   6
          TabIndex        =   50
          Tag             =   "Kilos Caja Máximo|N|N|||rparam|kiloscajamax|##0.00||"
@@ -1852,7 +1793,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   64
-         Left            =   -70110
+         Left            =   4890
          MaxLength       =   6
          TabIndex        =   49
          Tag             =   "Kilos Caja Mínimo|N|N|||rparam|kiloscajamin|##0.00||"
@@ -1863,7 +1804,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkAgruparNotas 
          Caption         =   "Se agrupan notas"
          Height          =   375
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   43
          Tag             =   "Se Agrupan Notas|N|S|||rparam|agruparnotas|0||"
          Top             =   4170
@@ -1925,7 +1866,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   58
-         Left            =   2475
+         Left            =   -72525
          MaxLength       =   10
          TabIndex        =   83
          Tag             =   "Cta Contable Banco|T|S|||rparam|ctabancoadv|||"
@@ -1937,7 +1878,7 @@ Begin VB.Form frmConfParamAplic
          Enabled         =   0   'False
          Height          =   285
          Index           =   58
-         Left            =   3780
+         Left            =   -71220
          TabIndex        =   174
          Top             =   2340
          Width           =   4185
@@ -1947,7 +1888,7 @@ Begin VB.Form frmConfParamAplic
          Enabled         =   0   'False
          Height          =   285
          Index           =   57
-         Left            =   3105
+         Left            =   -71895
          TabIndex        =   172
          Top             =   1410
          Width           =   4890
@@ -1956,7 +1897,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   57
-         Left            =   2475
+         Left            =   -72525
          MaxLength       =   10
          TabIndex        =   82
          Tag             =   "Almacen ADV|N|N|||rparam|codalmacadv|000||"
@@ -1967,7 +1908,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   56
-         Left            =   2475
+         Left            =   -72525
          MaxLength       =   10
          TabIndex        =   81
          Tag             =   "Sección ADV|N|S|||rparam|seccionadv|000||"
@@ -1979,7 +1920,7 @@ Begin VB.Form frmConfParamAplic
          Enabled         =   0   'False
          Height          =   285
          Index           =   56
-         Left            =   3105
+         Left            =   -71895
          TabIndex        =   170
          Top             =   1020
          Width           =   4890
@@ -2701,7 +2642,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   31
-         Left            =   -72720
+         Left            =   2280
          MaxLength       =   50
          TabIndex        =   41
          Tag             =   "Impresora Entradas|T|N|||rparam|impresoraentradas|||"
@@ -2768,7 +2709,7 @@ Begin VB.Form frmConfParamAplic
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   24
-         Left            =   -70110
+         Left            =   4890
          MaxLength       =   6
          TabIndex        =   47
          Tag             =   "Cajas por Palet|N|N|||rparam|cajasporpalet|###,##0||"
@@ -2779,7 +2720,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkTraza 
          Caption         =   "Hay Trazabilidad"
          Height          =   375
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   45
          Tag             =   "Hay Trazabilidad|N|S|||rparam|haytraza|0||"
          Top             =   4800
@@ -2788,7 +2729,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.CheckBox chkTaraTractor 
          Caption         =   "Se tara tractor de entrada"
          Height          =   375
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   42
          Tag             =   "Se Tara Tractor|N|S|||rparam|setaratractor|0||"
          Top             =   3840
@@ -2796,7 +2737,7 @@ Begin VB.Form frmConfParamAplic
       End
       Begin VB.Frame Frame3 
          Height          =   2775
-         Left            =   -74865
+         Left            =   135
          TabIndex        =   108
          Top             =   690
          Width           =   8700
@@ -4574,7 +4515,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgAyuda 
          Height          =   240
          Index           =   2
-         Left            =   -69360
+         Left            =   5640
          MousePointer    =   4  'Icon
          Tag             =   "-1"
          ToolTipText     =   "Ayuda"
@@ -4614,7 +4555,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   23
-         Left            =   2220
+         Left            =   -72780
          ToolTipText     =   "Buscar Iva"
          Top             =   2850
          Width           =   240
@@ -4623,7 +4564,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Código IVA Fact.Internas"
          Height          =   195
          Index           =   106
-         Left            =   390
+         Left            =   -74610
          TabIndex        =   383
          Top             =   2880
          Width           =   1875
@@ -4643,7 +4584,7 @@ Begin VB.Form frmConfParamAplic
          ForeColor       =   &H00000000&
          Height          =   195
          Index           =   101
-         Left            =   -68850
+         Left            =   6150
          TabIndex        =   372
          Top             =   4860
          Width           =   1890
@@ -4878,7 +4819,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label22 
          Caption         =   "Peso Caja Llena"
          Height          =   285
-         Left            =   -68850
+         Left            =   6150
          TabIndex        =   193
          Top             =   3930
          Width           =   1320
@@ -4886,7 +4827,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label21 
          Caption         =   "Mínimo"
          Height          =   285
-         Left            =   -70110
+         Left            =   4890
          TabIndex        =   192
          Top             =   4260
          Width           =   570
@@ -4894,7 +4835,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label20 
          Caption         =   "Máximo"
          Height          =   285
-         Left            =   -68850
+         Left            =   6150
          TabIndex        =   191
          Top             =   4260
          Width           =   570
@@ -4902,7 +4843,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label19 
          Caption         =   "Límites Kilos Caja"
          Height          =   285
-         Left            =   -71610
+         Left            =   3390
          TabIndex        =   190
          Top             =   4500
          Width           =   1950
@@ -4953,7 +4894,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   58
-         Left            =   2220
+         Left            =   -72780
          ToolTipText     =   "Buscar cuenta"
          Top             =   2370
          Width           =   240
@@ -4962,7 +4903,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Cuenta Banco Prevista"
          Height          =   195
          Index           =   44
-         Left            =   390
+         Left            =   -74610
          TabIndex        =   175
          Top             =   2370
          Width           =   1650
@@ -4971,7 +4912,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Almacén"
          Height          =   195
          Index           =   42
-         Left            =   420
+         Left            =   -74580
          TabIndex        =   173
          Top             =   1440
          Width           =   1140
@@ -4979,7 +4920,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   5
-         Left            =   2205
+         Left            =   -72795
          ToolTipText     =   "Buscar Almacén"
          Top             =   1440
          Width           =   240
@@ -4987,7 +4928,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   4
-         Left            =   2205
+         Left            =   -72795
          ToolTipText     =   "Buscar Sección"
          Top             =   1050
          Width           =   240
@@ -4996,7 +4937,7 @@ Begin VB.Form frmConfParamAplic
          Caption         =   "Sección ADV"
          Height          =   195
          Index           =   36
-         Left            =   420
+         Left            =   -74580
          TabIndex        =   171
          Top             =   1050
          Width           =   1140
@@ -5071,7 +5012,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label14 
          Caption         =   "Impresora de Entradas"
          Height          =   285
-         Left            =   -74520
+         Left            =   480
          TabIndex        =   130
          Top             =   3540
          Width           =   1890
@@ -5122,7 +5063,7 @@ Begin VB.Form frmConfParamAplic
       Begin VB.Label Label11 
          Caption         =   "Cajas por Palet"
          Height          =   285
-         Left            =   -71610
+         Left            =   3390
          TabIndex        =   116
          Top             =   3930
          Width           =   1590
@@ -5689,7 +5630,7 @@ Dim kms As Currency
                     End If
                     BloqueoMenusSegunCooperativa
                     PonerModo 2
-                    PonerFocoBtn Me.cmdSalir
+                    PonerFocoBtn Me.CmdSalir
                 End If
            End If
         End If
@@ -5923,9 +5864,9 @@ Private Sub frmExt_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmAri_DatoSeleccionado(CadenaSeleccion As String)
-Dim cad As String
-    cad = RecuperaValor(CadenaSeleccion, 1)
-    Text1(indice).Text = Mid(cad, 2, Len(cad))
+Dim Cad As String
+    Cad = RecuperaValor(CadenaSeleccion, 1)
+    Text1(indice).Text = Mid(Cad, 2, Len(Cad))
     Text1(indice).Text = Format(Text1(indice).Text, "000")
     Text2(indice).Text = RecuperaValor(CadenaSeleccion, 3)
 End Sub
@@ -6539,7 +6480,7 @@ End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim cad As String
+Dim Cad As String
 
     If Text1(Index).Text = "" Then Exit Sub
     
@@ -6562,8 +6503,8 @@ Dim cad As String
             If Text1(Index).Text = "" Then Exit Sub
             Text1(Index).Text = Format(Text1(Index).Text, "000")
             If ComprobarCero(Text1(Index)) <> 0 Then
-                cad = CargaPath(Text1(Index))
-                Text2(Index).Text = Mid(cad, 2, Len(cad))
+                Cad = CargaPath(Text1(Index))
+                Text2(Index).Text = Mid(Cad, 2, Len(Cad))
             End If
         
         Case 13
@@ -6995,14 +6936,14 @@ End Sub
 Private Sub PonerBotonCabecera(b As Boolean)
     Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
-    Me.cmdSalir.visible = b
+    Me.CmdSalir.visible = b
 '    If b Then Me.lblIndicador.Caption = ""
 End Sub
 
 
 Private Sub PonerCampos()
 Dim i As Byte
-Dim cad As String
+Dim Cad As String
 
 
 On Error GoTo EPonerCampos
@@ -7013,36 +6954,36 @@ On Error GoTo EPonerCampos
     ' ************* si hay aridoc **************
     If vParamAplic.HayAridoc = 1 Then
          If ComprobarCero(Text1(10).Text) <> 0 Then
-            cad = CargaPath(Text1(10))
-            Text2(10).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(10))
+            Text2(10).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(11).Text) <> 0 Then
-            cad = CargaPath(Text1(11))
-            Text2(11).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(11))
+            Text2(11).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(61).Text) <> 0 Then
-            cad = CargaPath(Text1(61))
-            Text2(61).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(61))
+            Text2(61).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(67)) <> 0 Then
-            cad = CargaPath(Text1(67))
-            Text2(67).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(67))
+            Text2(67).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(68)) <> 0 Then
-            cad = CargaPath(Text1(68))
-            Text2(68).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(68))
+            Text2(68).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(73)) <> 0 Then
-            cad = CargaPath(Text1(73))
-            Text2(73).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(73))
+            Text2(73).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(74)) <> 0 Then
-            cad = CargaPath(Text1(74))
-            Text2(74).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(74))
+            Text2(74).Text = Mid(Cad, 2, Len(Cad))
          End If
          If ComprobarCero(Text1(96)) <> 0 Then
-            cad = CargaPath(Text1(96))
-            Text2(96).Text = Mid(cad, 2, Len(cad))
+            Cad = CargaPath(Text1(96))
+            Text2(96).Text = Mid(Cad, 2, Len(Cad))
          End If
 
          Text2(13).Text = DevuelveDesdeBDNew(cAridoc, "extension", "descripcion", "codext", Text1(13).Text, "N")
@@ -7550,7 +7491,7 @@ End Sub
 
 Private Function CargaPath(Codigo As Integer) As String
 Dim Nod As Node
-Dim j As Integer
+Dim J As Integer
 Dim i As Integer
 Dim c As String
 Dim campo1 As String

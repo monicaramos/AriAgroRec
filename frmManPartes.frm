@@ -1626,7 +1626,7 @@ Private Sub cmdCancelar_Click()
                     If ModificaLineas = 1 Then 'INSERTAR
                         ModificaLineas = 0
                         DataGrid3.AllowAddNew = False
-                        If Not AdoAux(0).Recordset.EOF Then AdoAux(0).Recordset.MoveFirst
+                        If Not Adoaux(0).Recordset.EOF Then Adoaux(0).Recordset.MoveFirst
                     End If
                     ModificaLineas = 0
                     LLamaLineas Modo, 0, "DataGrid3"
@@ -1770,7 +1770,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 'Modificar una linea
 Dim vWhere As String
 Dim anc As Single
-Dim j As Byte
+Dim J As Byte
 
     On Error GoTo eModificarLinea
 
@@ -1783,7 +1783,7 @@ Dim j As Byte
             SePuedeModificar = SePuedeModificarLinea(CStr(Data3.Recordset.Fields(0).Value), CStr(Data3.Recordset.Fields(1).Value))
         
         Case 1
-            If AdoAux(0).Recordset.EOF Then
+            If Adoaux(0).Recordset.EOF Then
                 TerminaBloquear
                 Exit Sub
             End If
@@ -1807,8 +1807,8 @@ Dim j As Byte
                 Exit Sub
             End If
             If DataGrid2.Bookmark < DataGrid2.FirstRow Or DataGrid2.Bookmark > (DataGrid2.FirstRow + DataGrid2.VisibleRows - 1) Then
-                j = DataGrid2.Bookmark - DataGrid2.FirstRow
-                DataGrid2.Scroll 0, j
+                J = DataGrid2.Bookmark - DataGrid2.FirstRow
+                DataGrid2.Scroll 0, J
                 DataGrid2.Refresh
             End If
             
@@ -1862,8 +1862,8 @@ Dim j As Byte
                 Exit Sub
             End If
             If DataGrid3.Bookmark < DataGrid3.FirstRow Or DataGrid3.Bookmark > (DataGrid3.FirstRow + DataGrid3.VisibleRows - 1) Then
-                j = DataGrid3.Bookmark - DataGrid3.FirstRow
-                DataGrid3.Scroll 0, j
+                J = DataGrid3.Bookmark - DataGrid3.FirstRow
+                DataGrid3.Scroll 0, J
                 DataGrid3.Refresh
             End If
             
@@ -1875,9 +1875,9 @@ Dim j As Byte
                 anc = anc + DataGrid3.RowTop(DataGrid3.Row) + 10
             End If
         
-            For j = 0 To 2
-                txtAux2(j).Text = DataGrid3.Columns(j).Text
-            Next j
+            For J = 0 To 2
+                txtAux2(J).Text = DataGrid3.Columns(J).Text
+            Next J
             Text2(6).Text = DataGrid3.Columns(3).Text
             
             txtAux2(3).Text = DataGrid3.Columns(4).Text
@@ -1902,8 +1902,8 @@ Dim j As Byte
                 Exit Sub
             End If
             If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-                j = DataGrid1.Bookmark - DataGrid1.FirstRow
-                DataGrid1.Scroll 0, j
+                J = DataGrid1.Bookmark - DataGrid1.FirstRow
+                DataGrid1.Scroll 0, J
                 DataGrid1.Refresh
             End If
             
@@ -1915,9 +1915,9 @@ Dim j As Byte
                 anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 10
             End If
         
-            For j = 0 To 5
-                txtAux(j).Text = DataGrid1.Columns(j).Text
-            Next j
+            For J = 0 To 5
+                txtAux(J).Text = DataGrid1.Columns(J).Text
+            Next J
             
             ModificaLineas = 2 'Modificar
             LLamaLineas ModificaLineas, anc, "DataGrid1"
@@ -2034,7 +2034,7 @@ Dim Cad As String
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
 '        NumPedElim = Data1.Recordset.Fields(1).Value
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -2560,12 +2560,12 @@ Dim NumF As String
         While Not Rs.EOF
             ' solo si no está insertada la nota de campo en otro parte la insertamos de nuevas
             Sql = "select count(*) from rpartes_variedad where nroparte <> " & Data1.Recordset.Fields(0).Value
-            Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
             
             If TotalRegistros(Sql) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
                 Cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
-                Cad = Cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!Numnotac, "N") & ","
+                Cad = Cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!numnotac, "N") & ","
                 Cad = Cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
                 
                 conn.Execute Cad
@@ -2653,6 +2653,7 @@ Dim UltLinea As Integer
 '
 '        Capataz = DevuelveValor(SQL)
         
+        
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 22
@@ -2660,16 +2661,26 @@ Dim UltLinea As Integer
         frmMens.Show vbModal
         
         Set frmMens = Nothing
-            
-        ' vemos cuantos trabajadores hay en la cuadrilla para realizar los calculos
-        Sql4 = "select count(*) from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
-        Sql4 = Sql4 & " and " & cadSelect
-        Sql4 = Sql4 & " order by 1 "
         
+        ' vemos cuantos trabajadores hay en la cuadrilla para realizar los calculos
+        '[Monica]30/09/2016: para el caso de coopic no tiene que ser de la cuadrilla sino los seleccionados
+        If vParamAplic.Cooperativa = 16 Then
+            Sql4 = "select count(*) from straba where (1=1) "
+            Sql4 = Sql4 & " and " & cadSelect
+            Sql4 = Sql4 & " order by 1 "
+        Else
+            Sql4 = "select count(*) from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
+            Sql4 = Sql4 & " and " & cadSelect
+            Sql4 = Sql4 & " order by 1 "
+        End If
         NroTrabajadores = TotalRegistros(Sql4)
         
         If NroTrabajadores = 0 Then
-            MsgBox "No se han seleccionado trabajadores de la cuadrilla. No se ha ejecutado el proceso.", vbExclamation
+            If vParamAplic.Cooperativa = 16 Then
+                MsgBox "No se han seleccionado trabajadores. No se ha ejecutado el proceso.", vbExclamation
+            Else
+                MsgBox "No se han seleccionado trabajadores de la cuadrilla. No se ha ejecutado el proceso.", vbExclamation
+            End If
             RecalcularImportes = True
             Exit Function
         End If
@@ -2724,10 +2735,16 @@ Dim UltLinea As Integer
                 
             End If
             
-            Sql4 = "select codtraba from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
-            Sql4 = Sql4 & " and " & cadSelect
-            Sql4 = Sql4 & " order by 1 "
-            
+            '[Monica]30/09/2016: para el caso de coopic solo trabajadores de la cuadrilla
+            If vParamAplic.Cooperativa = 16 Then
+                Sql4 = "select codtraba from straba where (1=1) "
+                Sql4 = Sql4 & " and " & cadSelect
+                Sql4 = Sql4 & " order by 1 "
+            Else
+                Sql4 = "select codtraba from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
+                Sql4 = Sql4 & " and " & cadSelect
+                Sql4 = Sql4 & " order by 1 "
+            End If
             Set Rs2 = New ADODB.Recordset
             Rs2.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
@@ -3139,7 +3156,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -3217,11 +3234,11 @@ Dim i As Integer
     If Data1.Recordset.RecordCount > 0 Then
         CargaGrid DataGrid2, Data3, True ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, True ' rpartes_variedad
-        CargaGrid DataGrid3, AdoAux(0), True ' rpartes_gastos
+        CargaGrid DataGrid3, Adoaux(0), True ' rpartes_gastos
     Else
         CargaGrid DataGrid2, Data3, False ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, False ' rpartes_variedad
-        CargaGrid DataGrid3, AdoAux(0), False ' rpartes_gastos
+        CargaGrid DataGrid3, Adoaux(0), False ' rpartes_gastos
     End If
     
     Screen.MousePointer = vbDefault
@@ -3592,21 +3609,21 @@ Dim Sql As String
        Case 1 'gastos del parte
             ' *************** canviar la pregunta ****************
             Cad = "¿Seguro que desea eliminar el Gasto del Parte?"
-            Cad = Cad & vbCrLf & "Parte: " & AdoAux(0).Recordset.Fields(0)
-            Cad = Cad & vbCrLf & "Código: " & AdoAux(0).Recordset.Fields(2) & "-" & AdoAux(0).Recordset.Fields(3)
+            Cad = Cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
+            Cad = Cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
             
             If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
-                NumRegElim = AdoAux(0).Recordset.AbsolutePosition
+                NumRegElim = Adoaux(0).Recordset.AbsolutePosition
                 TerminaBloquear
-                Sql = "delete from rpartes_gastos where nroparte = " & AdoAux(0).Recordset.Fields(0)
-                Sql = Sql & " and numlinea = " & AdoAux(0).Recordset.Fields(1)
+                Sql = "delete from rpartes_gastos where nroparte = " & Adoaux(0).Recordset.Fields(0)
+                Sql = Sql & " and numlinea = " & Adoaux(0).Recordset.Fields(1)
                 conn.Execute Sql
                 
-                SituarDataTrasEliminar AdoAux(0), NumRegElim
+                SituarDataTrasEliminar Adoaux(0), NumRegElim
                 
-                CargaGrid DataGrid3, AdoAux(0), True
+                CargaGrid DataGrid3, Adoaux(0), True
 '                SSTab1.Tab = 1
 
             End If
@@ -3938,7 +3955,7 @@ End Sub
 
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim Sql As String, LEtra As String, Sql2 As String
 Dim b As Boolean
 Dim vTipoMov As CTiposMov
@@ -3979,10 +3996,10 @@ FinEliminar:
     End If
     If Not b Then
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -4033,7 +4050,7 @@ On Error Resume Next
 
     CargaGrid DataGrid2, Data3, False 'entradas e incidencias
     CargaGrid DataGrid1, Data2, False
-    CargaGrid DataGrid3, Me.AdoAux(0), False 'clasificacion
+    CargaGrid DataGrid3, Me.Adoaux(0), False 'clasificacion
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -4169,7 +4186,7 @@ Dim i As Integer
               Case 0
                 bAux = (b And Me.Data3.Recordset.RecordCount > 0)
               Case 1
-                bAux = (b And Me.AdoAux(0).Recordset.RecordCount > 0)
+                bAux = (b And Me.Adoaux(0).Recordset.RecordCount > 0)
               Case 2
                 bAux = (b And Me.Data2.Recordset.RecordCount > 0)
             End Select
@@ -4493,7 +4510,7 @@ Dim b As Boolean
                     If b Then BotonAnyadirLinea NumTabMto
 '                LLamaLineas NumTabMto, 0
                 Case 1
-                    CargaGrid DataGrid3, AdoAux(0), True
+                    CargaGrid DataGrid3, Adoaux(0), True
                     If b Then BotonAnyadirLinea NumTabMto
                 Case 2
                     CargaGrid DataGrid1, Data2, True
@@ -4507,7 +4524,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -4529,9 +4546,9 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case NumTabMto
-        Case 0: vTabla = "rpartes_trabajador" ' gastos individuales
-        Case 1: vTabla = "rpartes_gastos" ' gastos  generales
-        Case 2: vTabla = "rpartes_variedad" ' notas/variedad kilos
+        Case 0: vtabla = "rpartes_trabajador" ' gastos individuales
+        Case 1: vtabla = "rpartes_gastos" ' gastos  generales
+        Case 2: vtabla = "rpartes_variedad" ' notas/variedad kilos
     End Select
     ' ********************************************************
     
@@ -4541,7 +4558,7 @@ Dim i As Integer
         Case 0 ' *** pose els index dels tabs de llínies que tenen datagrid ***
             ' *** canviar la clau primaria de les llínies,
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
 
             AnyadirLinea DataGrid2, Data3
@@ -4568,6 +4585,7 @@ Dim i As Integer
             Text2(4).Text = "" ' nomconce
             Text2(0).Text = "" ' nomvarie
             txtAux3(7).Text = "0" ' modificado
+            txtAux3(8).Text = "0" ' modificado
             
             BloquearTxt txtAux3(1), False
 '                    BloquearTxt txtaux(12), False
@@ -4577,10 +4595,10 @@ Dim i As Integer
         Case 1 ' *** pose els index dels tabs de llínies que tenen datagrid ***
             ' *** canviar la clau primaria de les llínies,
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
 
-            AnyadirLinea DataGrid3, AdoAux(0)
+            AnyadirLinea DataGrid3, Adoaux(0)
     
             anc = DataGrid3.Top
             If DataGrid3.Row < 0 Then
@@ -4605,7 +4623,7 @@ Dim i As Integer
         Case 2 ' *** pose els index dels tabs de llínies que tenen datagrid ***
             ' *** canviar la clau primaria de les llínies,
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
 
             AnyadirLinea DataGrid1, Data2
@@ -4690,14 +4708,14 @@ Dim Cad As String
             Select Case NumTabMto
                 Case 1
 
-                    V = AdoAux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
-                    CargaGrid DataGrid3, AdoAux(0), True
+                    V = Adoaux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
+                    CargaGrid DataGrid3, Adoaux(0), True
 
                     ' *** si n'hi han tabs ***
 '                    SSTab1.Tab = 1
 
                     DataGrid3.SetFocus
-                    AdoAux(0).Recordset.Find (AdoAux(0).Recordset.Fields(1).Name & " =" & V)
+                    Adoaux(0).Recordset.Find (Adoaux(0).Recordset.Fields(1).Name & " =" & V)
 
                     LLamaLineas ModificaLineas, 0, "DataGrid3"
                 Case 0

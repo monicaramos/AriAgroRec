@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "12:27"
+            TextSave        =   "10:22"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1832,7 +1832,7 @@ Dim Cad As String
     '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
     If vParamAplic.Cooperativa = 10 Then
         If Dir("c:\indefa", vbDirectory) <> "" Then
-            LanzaVisorMimeDocumento Me.hwnd, "c:\indefa\ftpINDEFA.bat"
+            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
         Else
             If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
         End If

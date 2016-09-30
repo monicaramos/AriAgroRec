@@ -3724,7 +3724,6 @@ Dim PrimCalidad As Currency
 Dim b As Boolean
 Dim cadErr As String
 
-
     On Error GoTo eActualizarEntradasAlzira
 
     conn.BeginTrans
@@ -4172,3 +4171,161 @@ Dim Sql As String
 
 End Sub
 
+
+Private Function ActualizarEntradasCoopic() As Boolean
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim RsGastos As ADODB.Recordset
+Dim i As Integer
+Dim Sql As String
+Dim Sql2 As String
+
+Dim KilosNet As Currency
+Dim FactCorrDest As Currency
+Dim CalDestrio As Currency
+Dim CalPodrido As Currency
+Dim KilDestrio As Currency
+Dim KilMuestra As Currency
+Dim KilPodrido As Currency
+Dim KilosTot As Currency
+Dim Kilos As Currency
+
+Dim UltCalidad As Currency
+Dim PrimCalidad As Currency
+
+Dim b As Boolean
+Dim cadErr As String
+
+
+    On Error GoTo eActualizarEntradasCoopic
+
+    conn.BeginTrans
+    
+    ActualizarEntradasCoopic = False
+    
+    Sql = "select * from rclasifauto order by numnotac"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    b = True
+    
+    While Not Rs.EOF And b
+    
+        ' kilos de la entrada
+        Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        KilosNet = DevuelveValor(Sql2)
+    
+        Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        
+        KilMuestra = DevuelveValor(Sql2)
+        If KilMuestra <> 0 Then
+            Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " order by codcalid "
+        
+            Set Rs2 = New ADODB.Recordset
+            Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
+            KilosTot = 0
+            While Not Rs2.EOF
+                UltCalidad = Rs2!codcalid
+            
+                Kilos = Round2(KilosNet * DBLet(Rs2!KilosCal, "N") / KilMuestra, 0)
+                KilosTot = KilosTot + Kilos
+            
+                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                
+                If TotalRegistros(Sql) = 0 Then
+                    Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+                    Sql = Sql & " values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!KilosCal, "N")
+                    Sql = Sql & "," & DBSet(Kilos, "N") & ")"
+                    
+                    conn.Execute Sql
+                Else
+                    Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!KilosCal, "N") & ","
+                    Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                
+                    conn.Execute Sql
+                End If
+                
+                Rs2.MoveNext
+            Wend
+            
+            Set Rs2 = Nothing
+            
+            ' si la diferencia es positiva se suma a la ultima calidad
+            If KilosNet - KilosTot > 0 Then
+                Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
+                
+                conn.Execute Sql
+            Else
+            ' si es negativa a la primera
+                Sql = "select min(codcalid) from rclasifica_clasif "
+                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " and kilosnet >= " & DBSet((KilosNet - KilosTot) * (-1), "N")
+                
+                PrimCalidad = DevuelveValor(Sql)
+                
+                Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
+                
+                conn.Execute Sql
+            End If
+        End If
+    
+        Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and kilosnet is null "
+        conn.Execute Sql
+        
+        Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        conn.Execute Sql
+        
+        Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        conn.Execute Sql
+        
+        '++ 20-05-2009: calculamos los gastos de recoleccion para la entrada clasificada
+        Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        
+        Set RsGastos = New ADODB.Recordset
+        RsGastos.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        
+        If Not RsGastos.EOF Then
+            cadErr = "Actualizando Gastos"
+            b = ActualizarGastos(RsGastos, cadErr)
+        End If
+        
+        Set RsGastos = Nothing
+        '++
+    
+        Rs.MoveNext
+    Wend
+
+    Set Rs = Nothing
+
+    If b Then
+        ActualizarEntradasCoopic = True
+        conn.CommitTrans
+        Exit Function
+    End If
+
+eActualizarEntradasCoopic:
+    If Err.Number <> 0 Or Not b Then
+        conn.RollbackTrans
+        MuestraError Err.Number, "Actualizar entradas", Err.Description & cadErr
+    End If
+End Function

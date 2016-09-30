@@ -3273,7 +3273,7 @@ End Sub
 
 
 Private Sub Form_Activate()
-Dim OK As Boolean
+Dim Ok As Boolean
 
     
     Select Case OpcionMensaje
@@ -3408,7 +3408,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3509,13 +3509,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3564,12 +3564,12 @@ On Error Resume Next
             Me.imgCheck1(1).visible = True
             
             Me.cmdAceptarNSeries.Left = 5960
-            Me.CmdCancelar.Left = 7040
+            Me.cmdCancelar.Left = 7040
         
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3578,7 +3578,7 @@ On Error Resume Next
             Me.cmdSelTodos.visible = True
             Me.cmdDeselTodos.visible = True
             Me.cmdAceptarNSeries.Left = Me.cmdAceptarNSeries.Left + 1000
-            Me.CmdCancelar.Left = Me.CmdCancelar.Left + 1000
+            Me.cmdCancelar.Left = Me.cmdCancelar.Left + 1000
         
         Case 12 'Mensaje Partes de ADV que no se van a Facturar
             PonerFrameCobrosPtesVisible True, H, W
@@ -3587,7 +3587,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3631,7 +3631,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.CmdSalir
+            PonerFocoBtn Me.cmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -3808,7 +3808,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -3889,47 +3889,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.cmdAceptarCobros.Top = 4000
-            Me.cmdAceptarCobros.Left = 4200
+            Me.CmdAceptarCobros.Top = 4000
+            Me.CmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.cmdAceptarCobros.Left = 4000
+            Me.CmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.cmdAceptarCobros.Top = 5400
-            Me.cmdAceptarCobros.Left = 4600
+            Me.CmdAceptarCobros.Top = 5400
+            Me.CmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.cmdCancelarCobros.Top = 5300
-                Me.cmdCancelarCobros.Left = 4600
-                Me.cmdAceptarCobros.Left = 3300
+                Me.CmdCancelarCobros.Top = 5300
+                Me.CmdCancelarCobros.Left = 4600
+                Me.CmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.cmdAceptarCobros.Caption = "&SI"
-                Me.cmdCancelarCobros.Caption = "&NO"
+                Me.CmdAceptarCobros.Caption = "&SI"
+                Me.CmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             
-            Me.cmdCancelarCobros.Top = 5300
-            Me.cmdCancelarCobros.Left = 4600
-            Me.cmdAceptarCobros.Left = 3300
+            Me.CmdCancelarCobros.Top = 5300
+            Me.CmdCancelarCobros.Left = 4600
+            Me.CmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.cmdAceptarCobros.Caption = "&SI"
-            Me.cmdCancelarCobros.Caption = "&NO"
+            Me.CmdAceptarCobros.Caption = "&SI"
+            Me.CmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -3938,7 +3938,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -5810,13 +5810,25 @@ Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
-    Sql = "select rcuadrilla_trabajador.codtraba, straba.nomtraba from rcuadrilla_trabajador, straba "
-    Sql = Sql & " where rcuadrilla_trabajador.codcuadrilla = " & DBSet(Cuadrilla, "N")
-    Sql = Sql & " and rcuadrilla_trabajador.codtraba = straba.codtraba "
-    '[Monica]28/10/2015: cuando seleccionamos los trabajadores de la cuadrilla solo los que no tienen fecha de baja
-    Sql = Sql & " and straba.fechabaja is null "
+    '[Monica]30/09/2016: para el caso de coopic sacamos todos los trabajadores que estén activos sean o no de la cuadrilla
+    If vParamAplic.Cooperativa = 16 Then
+        Sql = "select straba.codtraba, straba.nomtraba from straba "
+        Sql = Sql & " where (1=1) "
+        '[Monica]28/10/2015: cuando seleccionamos los trabajadores de la cuadrilla solo los que no tienen fecha de baja
+        Sql = Sql & " and straba.fechabaja is null "
+        
+        Sql = Sql & " order by straba.codtraba"
+    Else
+        Sql = "select rcuadrilla_trabajador.codtraba, straba.nomtraba from rcuadrilla_trabajador, straba "
+        Sql = Sql & " where rcuadrilla_trabajador.codcuadrilla = " & DBSet(Cuadrilla, "N")
+        Sql = Sql & " and rcuadrilla_trabajador.codtraba = straba.codtraba "
     
-    Sql = Sql & " order by rcuadrilla_trabajador.numlinea"
+        '[Monica]28/10/2015: cuando seleccionamos los trabajadores de la cuadrilla solo los que no tienen fecha de baja
+        Sql = Sql & " and straba.fechabaja is null "
+        
+        Sql = Sql & " order by rcuadrilla_trabajador.numlinea"
+    
+    End If
    
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
