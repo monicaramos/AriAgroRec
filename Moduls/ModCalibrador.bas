@@ -3751,7 +3751,7 @@ Dim CodCal As Integer
         If SeInserta Then
             If Situacion = 2 Then
                 ' si no hay nota asociada no puedo meter la clasificacion
-                Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`, "
+                Sql = "insert into rclasifauto (`numnotac`,`codsocio`,`codcampo`,`codvarie`,  "
                 Sql = Sql & "`kilosnet`,`kilosdes`,`kilospod`,`kilospeq`,"
                 Sql = Sql & "`observac`,`situacion`,ordinal) values ("
                 Sql = Sql & DBSet(Notaca, "N") & ","
@@ -3775,7 +3775,7 @@ Dim CodCal As Integer
                 Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
                 Sql = Sql & DBSet(Rs!codcampo, "N") & ","
                 Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-                Sql = Sql & DBSet(Round2(Rs!KilosNet, 0), "N") & ","
+                Sql = Sql & DBSet(Rs!KilosNet, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
                 Sql = Sql & DBSet(0, "N") & ","
@@ -3847,7 +3847,7 @@ Dim CodCal As Integer
                     Sql2 = Sql2 & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                     Sql2 = Sql2 & DBSet(Rs!FechaEnt, "F") & ",1),"
                 Else
-                    Sql2 = "update rclasifauto_Clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
+                    Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal + " & DBSet(RSaux!KilosNet, "N")
                     Sql2 = Sql2 & " where numnotac = " & DBSet(Notaca, "N")
                     Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
                     Sql2 = Sql2 & " and codcalid = " & DBSet(RSaux!codcalid, "N")
@@ -3876,12 +3876,10 @@ Dim CodCal As Integer
         Cad1 = ""
     
         If Not EOF(NF) Then Line Input #NF, Cad1
-        
     Wend
     
     Close #NF
     
-
     ProcesarFicheroCOOPIC = True
     Exit Function
 
@@ -3891,10 +3889,3 @@ eProcesarFicheroCOOPIC:
         MsgBox "Error en Procesar Linea " & Err.Description, vbExclamation
     End If
 End Function
-
-
-
-
-
-
-
