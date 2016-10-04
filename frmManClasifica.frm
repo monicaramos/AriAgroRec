@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManClasifica 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Clasificación de Campos"
-   ClientHeight    =   7875
+   ClientHeight    =   8190
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   13935
@@ -13,7 +13,7 @@ Begin VB.Form frmManClasifica
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7875
+   ScaleHeight     =   8190
    ScaleWidth      =   13935
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -23,25 +23,36 @@ Begin VB.Form frmManClasifica
       Height          =   285
       Index           =   1
       Left            =   4860
-      TabIndex        =   94
+      TabIndex        =   95
       Text            =   "Text3"
-      Top             =   7365
+      Top             =   7635
       Width           =   1300
    End
    Begin VB.Frame Frame2 
-      Height          =   3345
+      Height          =   3525
       Index           =   0
       Left            =   135
-      TabIndex        =   31
+      TabIndex        =   32
       Top             =   495
       Width           =   13635
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   24
+         Left            =   1170
+         MaxLength       =   6
+         TabIndex        =   9
+         Tag             =   "Contrato|T|S|||rclasifica|codtrato|||"
+         Top             =   3120
+         Width           =   795
+      End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
          Height          =   285
          Index           =   2
          Left            =   4650
-         TabIndex        =   93
+         TabIndex        =   94
          Text            =   "12345678901234567890"
          Top             =   1410
          Width           =   630
@@ -52,7 +63,7 @@ Begin VB.Form frmManClasifica
          Index           =   23
          Left            =   6390
          MaxLength       =   7
-         TabIndex        =   16
+         TabIndex        =   17
          Tag             =   "Kilos Trans|N|N|||rclasifica|kilostra|###,##0||"
          Top             =   2400
          Width           =   1380
@@ -62,7 +73,7 @@ Begin VB.Form frmManClasifica
          Index           =   3
          Left            =   6390
          Style           =   2  'Dropdown List
-         TabIndex        =   11
+         TabIndex        =   12
          Tag             =   "Transportado por|N|N|0|1|rclasifica|transportadopor||N|"
          Top             =   840
          Width           =   1380
@@ -73,7 +84,7 @@ Begin VB.Form frmManClasifica
          Index           =   22
          Left            =   6390
          MaxLength       =   12
-         TabIndex        =   15
+         TabIndex        =   16
          Tag             =   "Precio Estimado|N|S|||rclasifica|prestimado|###,##0.0000||"
          Top             =   2100
          Width           =   1380
@@ -84,7 +95,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   1
          Left            =   1170
-         TabIndex        =   88
+         TabIndex        =   89
          Text            =   "12345678901234567890"
          Top             =   1755
          Width           =   4140
@@ -95,7 +106,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   0
          Left            =   2040
-         TabIndex        =   87
+         TabIndex        =   88
          Text            =   "12345678901234567890"
          Top             =   1410
          Width           =   2520
@@ -114,7 +125,7 @@ Begin VB.Form frmManClasifica
          ForeColor       =   &H00C00000&
          Height          =   1500
          Left            =   8010
-         TabIndex        =   77
+         TabIndex        =   78
          Top             =   135
          Width           =   5550
          Begin VB.TextBox Text1 
@@ -123,7 +134,7 @@ Begin VB.Form frmManClasifica
             Index           =   17
             Left            =   4140
             MaxLength       =   8
-            TabIndex        =   25
+            TabIndex        =   26
             Tag             =   "Importe Penalización|N|S|||rclasifica|imppenal|#,##0.00||"
             Text            =   "123"
             Top             =   1080
@@ -135,7 +146,7 @@ Begin VB.Form frmManClasifica
             Index           =   16
             Left            =   2790
             MaxLength       =   8
-            TabIndex        =   24
+            TabIndex        =   25
             Tag             =   "Importe Recolección|N|S|||rclasifica|imprecol|#,##0.00||"
             Text            =   "123"
             Top             =   1080
@@ -147,7 +158,7 @@ Begin VB.Form frmManClasifica
             Index           =   15
             Left            =   1440
             MaxLength       =   8
-            TabIndex        =   23
+            TabIndex        =   24
             Tag             =   "Importe Acarreo|N|S|||rclasifica|impacarr|#,##0.00||"
             Text            =   "123"
             Top             =   1080
@@ -159,7 +170,7 @@ Begin VB.Form frmManClasifica
             Index           =   14
             Left            =   90
             MaxLength       =   8
-            TabIndex        =   22
+            TabIndex        =   23
             Tag             =   "Importe Transporte|N|S|||rclasifica|imptrans|#,##0.00||"
             Text            =   "123"
             Top             =   1080
@@ -170,7 +181,7 @@ Begin VB.Form frmManClasifica
             Index           =   2
             Left            =   90
             Style           =   2  'Dropdown List
-            TabIndex        =   19
+            TabIndex        =   20
             Tag             =   "Tipo Recolección|N|N|0|1|rclasifica|tiporecol||N|"
             Top             =   540
             Width           =   1350
@@ -181,7 +192,7 @@ Begin VB.Form frmManClasifica
             Index           =   19
             Left            =   4140
             MaxLength       =   3
-            TabIndex        =   21
+            TabIndex        =   22
             Tag             =   "Nro.Trabajadores|N|S|||rclasifica|numtraba|##0||"
             Text            =   "123"
             Top             =   540
@@ -193,7 +204,7 @@ Begin VB.Form frmManClasifica
             Index           =   18
             Left            =   2790
             MaxLength       =   8
-            TabIndex        =   20
+            TabIndex        =   21
             Tag             =   "Horas Trabajadas|N|S|||rclasifica|horastra|#,##0.00||"
             Text            =   "123"
             Top             =   540
@@ -203,7 +214,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Imp.Penalización"
             Height          =   255
             Left            =   4140
-            TabIndex        =   84
+            TabIndex        =   85
             Top             =   855
             Width           =   1275
          End
@@ -211,7 +222,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Imp.Recolección"
             Height          =   255
             Left            =   2790
-            TabIndex        =   83
+            TabIndex        =   84
             Top             =   855
             Width           =   1275
          End
@@ -219,7 +230,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Imp.Acarreo"
             Height          =   255
             Left            =   1485
-            TabIndex        =   82
+            TabIndex        =   83
             Top             =   855
             Width           =   1140
          End
@@ -227,7 +238,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Imp.Transporte"
             Height          =   255
             Left            =   90
-            TabIndex        =   81
+            TabIndex        =   82
             Top             =   855
             Width           =   1275
          End
@@ -236,7 +247,7 @@ Begin VB.Form frmManClasifica
             Height          =   255
             Index           =   0
             Left            =   90
-            TabIndex        =   80
+            TabIndex        =   81
             Top             =   315
             Width           =   1260
          End
@@ -244,7 +255,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Nro.Trabajadores"
             Height          =   255
             Left            =   4185
-            TabIndex        =   79
+            TabIndex        =   80
             Top             =   315
             Width           =   1230
          End
@@ -252,7 +263,7 @@ Begin VB.Form frmManClasifica
             Caption         =   "Horas Trabajadas"
             Height          =   255
             Left            =   2790
-            TabIndex        =   78
+            TabIndex        =   79
             Top             =   315
             Width           =   1365
          End
@@ -263,7 +274,7 @@ Begin VB.Form frmManClasifica
          Index           =   13
          Left            =   6390
          MaxLength       =   10
-         TabIndex        =   18
+         TabIndex        =   19
          Tag             =   "Fecha Albarán|F|S|||rclasifica|fecalbar|dd/mm/yyyy||"
          Top             =   3000
          Width           =   1380
@@ -293,7 +304,7 @@ Begin VB.Form frmManClasifica
          Index           =   0
          Left            =   6390
          Style           =   2  'Dropdown List
-         TabIndex        =   9
+         TabIndex        =   10
          Tag             =   "Tipo Entrada|N|N|0|3|rclasifica|tipoentr||N|"
          Top             =   195
          Width           =   1380
@@ -303,7 +314,7 @@ Begin VB.Form frmManClasifica
          Index           =   1
          Left            =   6390
          Style           =   2  'Dropdown List
-         TabIndex        =   10
+         TabIndex        =   11
          Tag             =   "Recolectado|N|N|0|1|rclasifica|recolect||N|"
          Top             =   525
          Width           =   1380
@@ -314,7 +325,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   6
          Left            =   1770
-         TabIndex        =   68
+         TabIndex        =   69
          Top             =   2100
          Width           =   3540
       End
@@ -335,7 +346,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   7
          Left            =   2205
-         TabIndex        =   67
+         TabIndex        =   68
          Top             =   2445
          Width           =   3090
       End
@@ -356,7 +367,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   8
          Left            =   1755
-         TabIndex        =   66
+         TabIndex        =   67
          Top             =   2790
          Width           =   3540
       End
@@ -389,7 +400,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   4
          Left            =   1920
-         TabIndex        =   64
+         TabIndex        =   65
          Text            =   "12345678901234567890"
          Top             =   1020
          Width           =   3390
@@ -400,7 +411,7 @@ Begin VB.Form frmManClasifica
          Index           =   12
          Left            =   6390
          MaxLength       =   7
-         TabIndex        =   17
+         TabIndex        =   18
          Tag             =   "Albarán|N|S|||rclasifica|numalbar|0000000||"
          Top             =   2700
          Width           =   1380
@@ -412,7 +423,7 @@ Begin VB.Form frmManClasifica
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   26
+         TabIndex        =   27
          Tag             =   "Observaciones|T|S|||rclasifica|observac|||"
          Top             =   2040
          Width           =   5445
@@ -423,7 +434,7 @@ Begin VB.Form frmManClasifica
          Index           =   11
          Left            =   6390
          MaxLength       =   7
-         TabIndex        =   14
+         TabIndex        =   15
          Tag             =   "Nro.Cajas|N|N|||rclasifica|numcajon|###,##0||"
          Top             =   1800
          Width           =   1380
@@ -434,7 +445,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   3
          Left            =   1920
-         TabIndex        =   50
+         TabIndex        =   51
          Text            =   "12345678901234567890"
          Top             =   660
          Width           =   3390
@@ -457,7 +468,7 @@ Begin VB.Form frmManClasifica
          Index           =   10
          Left            =   6390
          MaxLength       =   7
-         TabIndex        =   13
+         TabIndex        =   14
          Tag             =   "Peso Neto|N|N|||rclasifica|kilosnet|###,##0||"
          Top             =   1500
          Width           =   1380
@@ -468,7 +479,7 @@ Begin VB.Form frmManClasifica
          Index           =   9
          Left            =   6390
          MaxLength       =   7
-         TabIndex        =   12
+         TabIndex        =   13
          Tag             =   "Peso Bruto|N|N|||rclasifica|kilosbru|###,##0||"
          Top             =   1200
          Width           =   1380
@@ -501,10 +512,18 @@ Begin VB.Form frmManClasifica
          Index           =   21
          Left            =   4500
          MaxLength       =   20
-         TabIndex        =   86
+         TabIndex        =   87
          Tag             =   "Hora|FH|N|||rclasifica|horaentr|yyyy-mm-dd hh:mm:ss||"
          Top             =   240
          Width           =   840
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Contrato"
+         Height          =   255
+         Left            =   150
+         TabIndex        =   96
+         Top             =   3150
+         Width           =   705
       End
       Begin VB.Image imgAyuda 
          Height          =   240
@@ -521,7 +540,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   6
          Left            =   5400
-         TabIndex        =   92
+         TabIndex        =   93
          Top             =   2430
          Width           =   1095
       End
@@ -530,7 +549,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   1
          Left            =   5400
-         TabIndex        =   91
+         TabIndex        =   92
          Top             =   900
          Width           =   1035
       End
@@ -539,7 +558,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   5
          Left            =   5400
-         TabIndex        =   90
+         TabIndex        =   91
          Top             =   2130
          Width           =   1185
       End
@@ -548,7 +567,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   2
          Left            =   150
-         TabIndex        =   89
+         TabIndex        =   90
          Top             =   1800
          Width           =   900
       End
@@ -556,7 +575,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "F.Albarán"
          Height          =   255
          Left            =   5400
-         TabIndex        =   76
+         TabIndex        =   77
          Top             =   3000
          Width           =   705
       End
@@ -573,7 +592,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Fecha"
          Height          =   255
          Left            =   1980
-         TabIndex        =   75
+         TabIndex        =   76
          Top             =   270
          Width           =   480
       End
@@ -590,7 +609,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Hora"
          Height          =   255
          Left            =   4050
-         TabIndex        =   74
+         TabIndex        =   75
          Top             =   270
          Width           =   570
       End
@@ -599,7 +618,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   2
          Left            =   5400
-         TabIndex        =   73
+         TabIndex        =   74
          Top             =   270
          Width           =   1035
       End
@@ -608,7 +627,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   3
          Left            =   5400
-         TabIndex        =   72
+         TabIndex        =   73
          Top             =   600
          Width           =   1035
       End
@@ -616,7 +635,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Capataz"
          Height          =   255
          Left            =   150
-         TabIndex        =   71
+         TabIndex        =   72
          Top             =   2175
          Width           =   705
       End
@@ -632,7 +651,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Transp."
          Height          =   255
          Left            =   150
-         TabIndex        =   70
+         TabIndex        =   71
          Top             =   2505
          Width           =   705
       End
@@ -648,7 +667,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Tarifa"
          Height          =   255
          Left            =   150
-         TabIndex        =   69
+         TabIndex        =   70
          Top             =   2850
          Width           =   705
       End
@@ -673,7 +692,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   0
          Left            =   150
-         TabIndex        =   65
+         TabIndex        =   66
          Top             =   1425
          Width           =   690
       End
@@ -690,7 +709,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   3
          Left            =   5400
-         TabIndex        =   61
+         TabIndex        =   62
          Top             =   2730
          Width           =   1185
       End
@@ -699,7 +718,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   4
          Left            =   5400
-         TabIndex        =   59
+         TabIndex        =   60
          Top             =   1815
          Width           =   1185
       End
@@ -707,7 +726,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Variedad"
          Height          =   255
          Left            =   150
-         TabIndex        =   51
+         TabIndex        =   52
          Top             =   705
          Width           =   690
       End
@@ -724,7 +743,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   2
          Left            =   5400
-         TabIndex        =   49
+         TabIndex        =   50
          Top             =   1530
          Width           =   1095
       End
@@ -733,7 +752,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   1
          Left            =   5400
-         TabIndex        =   48
+         TabIndex        =   49
          Top             =   1230
          Width           =   870
       End
@@ -742,7 +761,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   1
          Left            =   150
-         TabIndex        =   47
+         TabIndex        =   48
          Top             =   1050
          Width           =   690
       End
@@ -750,7 +769,7 @@ Begin VB.Form frmManClasifica
          Caption         =   "Observaciones"
          Height          =   255
          Left            =   8070
-         TabIndex        =   36
+         TabIndex        =   37
          Top             =   1800
          Width           =   1125
       End
@@ -767,7 +786,7 @@ Begin VB.Form frmManClasifica
          Height          =   255
          Index           =   0
          Left            =   150
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   270
          Width           =   1095
       End
@@ -778,9 +797,9 @@ Begin VB.Form frmManClasifica
       Height          =   285
       Index           =   0
       Left            =   6210
-      TabIndex        =   57
+      TabIndex        =   58
       Text            =   "Text3"
-      Top             =   7365
+      Top             =   7635
       Width           =   1300
    End
    Begin VB.Frame FrameAux1 
@@ -797,8 +816,8 @@ Begin VB.Form frmManClasifica
       ForeColor       =   &H00C00000&
       Height          =   3360
       Left            =   8055
-      TabIndex        =   42
-      Top             =   3900
+      TabIndex        =   43
+      Top             =   4140
       Width           =   5700
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
@@ -807,7 +826,7 @@ Begin VB.Form frmManClasifica
          Index           =   1
          Left            =   1755
          MaskColor       =   &H00000000&
-         TabIndex        =   56
+         TabIndex        =   57
          ToolTipText     =   "Buscar Incidencia"
          Top             =   2610
          Visible         =   0   'False
@@ -821,7 +840,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   9
          Left            =   1980
-         TabIndex        =   55
+         TabIndex        =   56
          Text            =   "nombre"
          Top             =   2610
          Visible         =   0   'False
@@ -835,7 +854,7 @@ Begin VB.Form frmManClasifica
          Index           =   9
          Left            =   1080
          MaxLength       =   4
-         TabIndex        =   44
+         TabIndex        =   45
          Tag             =   "Incidencia|N|N|||rclasifica_incidencia|codincid|0000|S|"
          Text            =   "inci"
          Top             =   2610
@@ -850,7 +869,7 @@ Begin VB.Form frmManClasifica
          Index           =   8
          Left            =   360
          MaxLength       =   16
-         TabIndex        =   43
+         TabIndex        =   44
          Tag             =   "Nro.Nota|N|N|||rclasifica_incidencia|numnotac|0000000|S|"
          Text            =   "codfor"
          Top             =   2610
@@ -861,7 +880,7 @@ Begin VB.Form frmManClasifica
          Height          =   390
          Index           =   1
          Left            =   90
-         TabIndex        =   45
+         TabIndex        =   46
          Top             =   270
          Width           =   1200
          _ExtentX        =   2117
@@ -893,7 +912,7 @@ Begin VB.Form frmManClasifica
          Height          =   2610
          Index           =   1
          Left            =   90
-         TabIndex        =   46
+         TabIndex        =   47
          Top             =   630
          Width           =   5490
          _ExtentX        =   9684
@@ -1022,8 +1041,8 @@ Begin VB.Form frmManClasifica
       ForeColor       =   &H00C00000&
       Height          =   3360
       Left            =   150
-      TabIndex        =   37
-      Top             =   3900
+      TabIndex        =   38
+      Top             =   4140
       Width           =   7815
       Begin VB.TextBox txtAux 
          Alignment       =   1  'Right Justify
@@ -1033,7 +1052,7 @@ Begin VB.Form frmManClasifica
          Index           =   4
          Left            =   5805
          MaxLength       =   7
-         TabIndex        =   63
+         TabIndex        =   64
          Tag             =   "Kilos Neto|N|S|||rclasifica_clasif|kilosnet|###,##0||"
          Text            =   "neto"
          Top             =   2565
@@ -1047,7 +1066,7 @@ Begin VB.Form frmManClasifica
          Index           =   2
          Left            =   3420
          MaskColor       =   &H00000000&
-         TabIndex        =   85
+         TabIndex        =   86
          ToolTipText     =   "Buscar Calidad"
          Top             =   2565
          Visible         =   0   'False
@@ -1060,7 +1079,7 @@ Begin VB.Form frmManClasifica
          Index           =   2
          Left            =   3060
          MaxLength       =   2
-         TabIndex        =   60
+         TabIndex        =   61
          Tag             =   "Calidad|N|N|||rclasifica_clasif|codcalid|00|S|"
          Text            =   "Ca"
          Top             =   2565
@@ -1075,7 +1094,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   2
          Left            =   3645
-         TabIndex        =   54
+         TabIndex        =   55
          Text            =   "Calidad"
          Top             =   2565
          Visible         =   0   'False
@@ -1088,7 +1107,7 @@ Begin VB.Form frmManClasifica
          Index           =   0
          Left            =   945
          MaskColor       =   &H00000000&
-         TabIndex        =   53
+         TabIndex        =   54
          ToolTipText     =   "Buscar Envase"
          Top             =   2565
          Visible         =   0   'False
@@ -1102,7 +1121,7 @@ Begin VB.Form frmManClasifica
          Height          =   285
          Index           =   0
          Left            =   1155
-         TabIndex        =   52
+         TabIndex        =   53
          Top             =   2565
          Visible         =   0   'False
          Width           =   1815
@@ -1115,7 +1134,7 @@ Begin VB.Form frmManClasifica
          Index           =   3
          Left            =   4680
          MaxLength       =   10
-         TabIndex        =   62
+         TabIndex        =   63
          Tag             =   "Muestra|N|S|||rclasifica_clasif|muestra|###,##0.00||"
          Text            =   "muestra"
          Top             =   2565
@@ -1129,7 +1148,7 @@ Begin VB.Form frmManClasifica
          Index           =   1
          Left            =   495
          MaxLength       =   6
-         TabIndex        =   39
+         TabIndex        =   40
          Tag             =   "Variedad|N|N|||rclasifica_clasif|codvarie|000000|S|"
          Text            =   "Var"
          Top             =   2565
@@ -1144,7 +1163,7 @@ Begin VB.Form frmManClasifica
          Index           =   0
          Left            =   45
          MaxLength       =   16
-         TabIndex        =   38
+         TabIndex        =   39
          Tag             =   "Nro.Nota|N|N|||rclasifica_clasif|numnotac|0000000|S|"
          Text            =   "nota"
          Top             =   2565
@@ -1155,7 +1174,7 @@ Begin VB.Form frmManClasifica
          Height          =   390
          Index           =   0
          Left            =   135
-         TabIndex        =   40
+         TabIndex        =   41
          Top             =   225
          Width           =   1200
          _ExtentX        =   2117
@@ -1233,7 +1252,7 @@ Begin VB.Form frmManClasifica
          Height          =   2615
          Index           =   0
          Left            =   135
-         TabIndex        =   41
+         TabIndex        =   42
          Top             =   630
          Width           =   7590
          _ExtentX        =   13388
@@ -1304,8 +1323,8 @@ Begin VB.Form frmManClasifica
       Height          =   555
       Index           =   0
       Left            =   135
-      TabIndex        =   29
-      Top             =   7275
+      TabIndex        =   30
+      Top             =   7545
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1321,7 +1340,7 @@ Begin VB.Form frmManClasifica
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   180
          Width           =   2655
       End
@@ -1331,16 +1350,16 @@ Begin VB.Form frmManClasifica
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   12705
-      TabIndex        =   28
-      Top             =   7350
+      TabIndex        =   29
+      Top             =   7590
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   11610
-      TabIndex        =   27
-      Top             =   7365
+      TabIndex        =   28
+      Top             =   7605
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -1394,7 +1413,7 @@ Begin VB.Form frmManClasifica
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   34
+      TabIndex        =   35
       Top             =   0
       Width           =   13935
       _ExtentX        =   24580
@@ -1485,7 +1504,7 @@ Begin VB.Form frmManClasifica
          Height          =   195
          Index           =   0
          Left            =   8520
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   120
          Width           =   1215
       End
@@ -1494,8 +1513,8 @@ Begin VB.Form frmManClasifica
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   12720
-      TabIndex        =   33
-      Top             =   7350
+      TabIndex        =   34
+      Top             =   7620
       Visible         =   0   'False
       Width           =   1035
    End
@@ -1514,8 +1533,8 @@ Begin VB.Form frmManClasifica
       Height          =   240
       Index           =   0
       Left            =   3120
-      TabIndex        =   58
-      Top             =   7365
+      TabIndex        =   59
+      Top             =   7665
       Width           =   1365
    End
    Begin VB.Menu mnOpciones 
@@ -1910,7 +1929,11 @@ Dim i As Integer
     CargaGrid 1, False
        
     ModoLineas = 0
-       
+    '[Monica]04/10/2016: nuevo contrato de Coopic
+    Text1(24).Enabled = (vParamAplic.Cooperativa = 16)
+    Text1(24).visible = (vParamAplic.Cooperativa = 16)
+    Label9.visible = (vParamAplic.Cooperativa = 16)
+    
     
 '    If DatosADevolverBusqueda = "" Then
 '        PonerModo 0
@@ -2132,7 +2155,7 @@ Dim i As Byte
     b = (Modo = 2) And Not DeConsulta
     For i = 0 To ToolAux.Count - 1
         ToolAux(i).Buttons(1).Enabled = b
-        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
+        If b Then bAux = (b And Me.AdoAux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -2229,7 +2252,7 @@ Private Sub frmCam_DatoSeleccionado(CadenaSeleccion As String)
     Text1(5).Text = RecuperaValor(CadenaSeleccion, 1) 'codcampo
 End Sub
 
-Private Sub frmcap_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
 'Capataces
     Text1(6).Text = RecuperaValor(CadenaSeleccion, 1) 'codcapat
     Text2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
@@ -2778,8 +2801,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     'For i = 0 To DataGridAux.Count - 1
     For i = 0 To 1
         CargaGrid i, True
-        If Not Adoaux(i).Recordset.EOF Then _
-            PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
+        If Not AdoAux(i).Recordset.EOF Then _
+            PonerCamposForma2 Me, AdoAux(i), 2, "FrameAux" & i
     Next i
 
     Text1(2).Text = Mid(Text1(21).Text, 12, 8)
@@ -2846,8 +2869,8 @@ Dim V
 '                    ' *** si n'hi han tabs ***
 '                    SituarTab (NumTabMto + 1)
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
                     
                     CalcularKilosNetos
@@ -2860,10 +2883,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
                         ' ***************************************************************
                     End If
                     CalcularKilosNetos
@@ -2873,7 +2896,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not Adoaux(NumTabMto).Recordset.EOF Then
+            If Not AdoAux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2962,7 +2985,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & Data1.Recordset!numnotac
+    vWhere = " WHERE numnotac=" & Data1.Recordset!Numnotac
     
     ' ***** elimina les llínies ****
     conn.Execute "DELETE FROM rclasifica_clasif " & vWhere
@@ -3318,7 +3341,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -3330,32 +3353,32 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'calidades
             Sql = "¿Seguro que desea eliminar la Calidad?"
-            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid
+            Sql = Sql & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_clasif "
-                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!codvarie
-                Sql = Sql & " and codcalid= " & Adoaux(Index).Recordset!codcalid
+                Sql = Sql & vWhere & " AND codvarie= " & AdoAux(Index).Recordset!codvarie
+                Sql = Sql & " and codcalid= " & AdoAux(Index).Recordset!codcalid
             End If
             
         Case 1 'incidencias
             Sql = "¿Seguro que desea eliminar la Incidencia?"
-            Sql = Sql & vbCrLf & "Nombre: " & Adoaux(Index).Recordset!nomincid
+            Sql = Sql & vbCrLf & "Nombre: " & AdoAux(Index).Recordset!nomincid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_incidencia "
-                Sql = Sql & vWhere & " AND codincid= " & Adoaux(Index).Recordset!codincid
+                Sql = Sql & vWhere & " AND codincid= " & AdoAux(Index).Recordset!codincid
             End If
             
     End Select
 
     If Eliminar Then
-        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
-        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
@@ -3411,7 +3434,7 @@ Dim i As Integer
             
 '            If Index = 0 Then NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 
-            AnyadirLinea DataGridAux(Index), Adoaux(Index)
+            AnyadirLinea DataGridAux(Index), AdoAux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -3456,8 +3479,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim i As Integer
     Dim J As Integer
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -3904,14 +3927,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim i As Byte
 
-    Adoaux(Index).ConnectionString = conn
-    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    Adoaux(Index).CursorType = adOpenDynamic
-    Adoaux(Index).LockType = adLockPessimistic
-    Adoaux(Index).Refresh
+    AdoAux(Index).ConnectionString = conn
+    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    AdoAux(Index).CursorType = adOpenDynamic
+    AdoAux(Index).LockType = adLockPessimistic
+    AdoAux(Index).Refresh
     
-    If Not Adoaux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
+    If Not AdoAux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -3945,7 +3968,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'clasificacion
@@ -4055,9 +4078,9 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
-                    V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                    V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
                 Case 1
-                    V = Adoaux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
+                    V = AdoAux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -4066,7 +4089,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -4080,7 +4103,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numnotac=" & Me.Data1.Recordset!numnotac
+    vWhere = vWhere & " numnotac=" & Me.Data1.Recordset!Numnotac
     
     ObtenerWhereCab = vWhere
 End Function
@@ -4137,7 +4160,7 @@ Dim Valor As Currency
 
     'total kilosnetos
     Sql = "select sum(kilosnet) from rclasifica_clasif "
-    Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
+    Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
     
     
     Text3(0).Text = TotalRegistros(Sql)
@@ -4150,7 +4173,7 @@ Dim Valor As Currency
     
     'total muestra
     Sql = "select sum(muestra) from rclasifica_clasif "
-    Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
+    Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
     
     
     Text3(1).Text = TotalRegistros(Sql)
@@ -4316,11 +4339,11 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGridAux(0).Bookmark < Me.Adoaux(0).Recordset.RecordCount Then
+    If Me.DataGridAux(0).Bookmark < Me.AdoAux(0).Recordset.RecordCount Then
 '        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGridAux(0).Bookmark = DataGridAux(0).Bookmark + 1
         BotonModificarLinea 0
-    ElseIf DataGridAux(0).Bookmark = Adoaux(0).Recordset.RecordCount Then
+    ElseIf DataGridAux(0).Bookmark = AdoAux(0).Recordset.RecordCount Then
 '        PonerFocoBtn Me.cmdAceptar
         BotonModificarLinea 0
     End If
@@ -4364,7 +4387,7 @@ Dim KilosNetos As Long
 
     On Error GoTo eCalcularKilosNetos
     
-    Sql = "select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!numnotac
+    Sql = "select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!Numnotac
 '[Monica]14/10/2011: lo dejo en la clasificacion automatica
 '    If vParamAplic.Cooperativa = 0 Then
 '        SQL = SQL & " and codcalid not in (select codcalid from rcalidad where codvarie = " & Me.Data1.Recordset!CodVarie
@@ -4381,7 +4404,7 @@ Dim KilosNetos As Long
     Set Rs = Nothing
     
     If TotalMuestra = 0 Then
-        Sql = "update rclasifica_clasif set kilosnet = " & ValorNulo & " where numnotac = " & Me.Data1.Recordset!numnotac
+        Sql = "update rclasifica_clasif set kilosnet = " & ValorNulo & " where numnotac = " & Me.Data1.Recordset!Numnotac
         conn.Execute Sql
         
         CargaGrid 0, True
@@ -4392,7 +4415,7 @@ Dim KilosNetos As Long
         Exit Sub
     End If
 
-    Sql = "select rclasifica_clasif.* from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!numnotac
+    Sql = "select rclasifica_clasif.* from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!Numnotac
     '050509
 '    sql = sql & " and muestra <> 0"
     
@@ -4429,7 +4452,7 @@ Dim KilosNetos As Long
         
         vSQL = "update rclasifica_clasif set kilosnet = " & DBSet(KilosNet, "N", "S")
         vSQL = vSQL & ", muestra = " & DBSet(Rs!Muestra, "N", "S")
-        vSQL = vSQL & " where numnotac = " & DBSet(Rs!numnotac, "N")
+        vSQL = vSQL & " where numnotac = " & DBSet(Rs!Numnotac, "N")
         vSQL = vSQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
         vSQL = vSQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
@@ -4445,15 +4468,15 @@ Dim KilosNetos As Long
     If TotalKilos <> Me.Data1.Recordset!KilosNet Then
         '[Monica]28/06/2011: si es Quatretonda la calidad de redondeo es la de maxima muestra no la de destrio
         If vParamAplic.Cooperativa = 7 Then
-            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!numnotac, True)
+            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!Numnotac, True)
         Else
-            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!numnotac, True)
+            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!Numnotac, True)
         End If
         
         If vSQL <> "" Then Calidad = CInt(vSQL)
     
         Sql = "update rclasifica_clasif set kilosnet = kilosnet + (" & (Me.Data1.Recordset!KilosNet - TotalKilos) & ") "
-        Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
+        Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
         Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
         Sql = Sql & " and codcalid = " & DBSet(Calidad, "N")
     
