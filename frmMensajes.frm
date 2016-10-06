@@ -15,124 +15,61 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameCampos 
-      Height          =   5610
+   Begin VB.Frame FrameContratos 
+      Height          =   5790
       Left            =   0
-      TabIndex        =   28
-      Top             =   60
-      Width           =   11580
-      Begin VB.CheckBox ChkVariedades 
-         Caption         =   "Todas las variedades"
-         Enabled         =   0   'False
-         Height          =   255
-         Left            =   9420
-         TabIndex        =   165
-         Top             =   330
-         Visible         =   0   'False
-         Width           =   1905
+      TabIndex        =   166
+      Top             =   0
+      Width           =   7050
+      Begin VB.CommandButton CmdAcepContratos 
+         Caption         =   "Regresar"
+         Height          =   375
+         Left            =   5520
+         TabIndex        =   168
+         Top             =   5160
+         Width           =   1215
       End
-      Begin VB.TextBox Text4 
-         Height          =   315
-         Left            =   1140
-         TabIndex        =   56
-         Text            =   "Text4"
-         Top             =   5010
-         Visible         =   0   'False
-         Width           =   1275
-      End
-      Begin MSComctlLib.ListView ListView4 
+      Begin MSComctlLib.ListView ListView21 
          Height          =   4155
-         Left            =   225
-         TabIndex        =   29
-         Top             =   720
-         Width           =   11100
-         _ExtentX        =   19579
+         Left            =   210
+         TabIndex        =   167
+         Top             =   750
+         Width           =   6525
+         _ExtentX        =   11509
          _ExtentY        =   7329
          View            =   3
          LabelWrap       =   -1  'True
          HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
          FullRowSelect   =   -1  'True
          _Version        =   393217
          ForeColor       =   -2147483640
          BackColor       =   -2147483643
          BorderStyle     =   1
          Appearance      =   1
-         NumItems        =   11
+         NumItems        =   4
          BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Text            =   "Campo"
-            Object.Width           =   1941
+            Text            =   "Código"
+            Object.Width           =   1764
          EndProperty
          BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   1
-            Text            =   "Partida"
-            Object.Width           =   3000
+            Text            =   "Variedad"
+            Object.Width           =   3881
          EndProperty
          BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   2
-            Text            =   "C.Pobla"
+            Text            =   "Clase "
             Object.Width           =   1411
          EndProperty
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
-            Text            =   "Poblacion"
-            Object.Width           =   2735
-         EndProperty
-         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   4
-            Text            =   "Polígono"
-            Object.Width           =   1464
-         EndProperty
-         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   5
-            Text            =   "Parcela"
-            Object.Width           =   1482
-         EndProperty
-         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   6
-            Text            =   "Sp."
-            Object.Width           =   794
-         EndProperty
-         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   7
-            Text            =   "Nro."
-            Object.Width           =   1059
-         EndProperty
-         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   8
-            Text            =   "Hdas"
-            Object.Width           =   1305
-         EndProperty
-         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   9
-            Text            =   "Código"
-            Object.Width           =   1306
-         EndProperty
-         BeginProperty ColumnHeader(11) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   10
-            Text            =   "Variedad"
-            Object.Width           =   2540
+            Text            =   "Descripcion"
+            Object.Width           =   3706
          EndProperty
       End
-      Begin VB.CommandButton cmdCamposSocio 
-         Caption         =   "Regresar"
-         Height          =   375
-         Index           =   2
-         Left            =   10050
-         TabIndex        =   30
-         Top             =   4980
-         Width           =   1215
-      End
-      Begin VB.Label Label6 
-         Caption         =   "Socio"
-         Height          =   285
-         Left            =   360
-         TabIndex        =   55
-         Top             =   5040
-         Visible         =   0   'False
-         Width           =   645
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Campos del Socio"
+      Begin VB.Label Label23 
+         Caption         =   "Contratos"
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   12
@@ -145,14 +82,30 @@ Begin VB.Form frmMensajes
          ForeColor       =   &H00800000&
          Height          =   375
          Left            =   270
-         TabIndex        =   31
+         TabIndex        =   169
          Top             =   270
          Width           =   5145
+      End
+      Begin VB.Image imgCheck5 
+         Height          =   240
+         Index           =   1
+         Left            =   600
+         Picture         =   "frmMensajes.frx":000C
+         Top             =   5160
+         Width           =   240
+      End
+      Begin VB.Image imgCheck5 
+         Height          =   240
+         Index           =   0
+         Left            =   240
+         Picture         =   "frmMensajes.frx":0156
+         Top             =   5160
+         Width           =   240
       End
    End
    Begin VB.Frame FrameVariedades 
       Height          =   5790
-      Left            =   0
+      Left            =   30
       TabIndex        =   32
       Top             =   60
       Width           =   7050
@@ -215,7 +168,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   240
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":02A0
          Top             =   5160
          Width           =   240
       End
@@ -223,7 +176,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   600
-         Picture         =   "frmMensajes.frx":0156
+         Picture         =   "frmMensajes.frx":03EA
          Top             =   5160
          Width           =   240
       End
@@ -330,7 +283,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":02A0
+         Picture         =   "frmMensajes.frx":0534
          Top             =   5160
          Width           =   240
       End
@@ -338,7 +291,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":03EA
+         Picture         =   "frmMensajes.frx":067E
          Top             =   5160
          Width           =   240
       End
@@ -957,7 +910,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0534
+         Picture         =   "frmMensajes.frx":07C8
          Top             =   5160
          Width           =   240
       End
@@ -965,7 +918,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":067E
+         Picture         =   "frmMensajes.frx":0912
          Top             =   5160
          Width           =   240
       End
@@ -1178,7 +1131,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":07C8
+         Picture         =   "frmMensajes.frx":0A5C
          Top             =   6960
          Width           =   240
       End
@@ -1186,7 +1139,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0912
+         Picture         =   "frmMensajes.frx":0BA6
          Top             =   6960
          Width           =   240
       End
@@ -1707,7 +1660,7 @@ Begin VB.Form frmMensajes
          Left            =   150
          MultiLine       =   -1  'True
          TabIndex        =   9
-         Text            =   "frmMensajes.frx":0A5C
+         Text            =   "frmMensajes.frx":0CF0
          Top             =   210
          Width           =   6615
       End
@@ -1968,7 +1921,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image1 
          Height          =   480
          Left            =   210
-         Picture         =   "frmMensajes.frx":0A62
+         Picture         =   "frmMensajes.frx":0CF6
          Top             =   180
          Width           =   480
       End
@@ -2203,7 +2156,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0EA4
+         Picture         =   "frmMensajes.frx":1138
          Top             =   5160
          Width           =   240
       End
@@ -2211,7 +2164,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0FEE
+         Picture         =   "frmMensajes.frx":1282
          Top             =   5160
          Width           =   240
       End
@@ -2305,7 +2258,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   720
-         Picture         =   "frmMensajes.frx":1138
+         Picture         =   "frmMensajes.frx":13CC
          Top             =   4185
          Visible         =   0   'False
          Width           =   240
@@ -2314,7 +2267,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   1080
-         Picture         =   "frmMensajes.frx":1282
+         Picture         =   "frmMensajes.frx":1516
          Top             =   4185
          Visible         =   0   'False
          Width           =   240
@@ -2360,7 +2313,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   3  'Both
          TabIndex        =   14
-         Text            =   "frmMensajes.frx":13CC
+         Text            =   "frmMensajes.frx":1660
          Top             =   360
          Width           =   7695
       End
@@ -2483,6 +2436,141 @@ Begin VB.Form frmMensajes
          Width           =   5145
       End
    End
+   Begin VB.Frame FrameCampos 
+      Height          =   5610
+      Left            =   0
+      TabIndex        =   28
+      Top             =   60
+      Width           =   11580
+      Begin VB.CheckBox ChkVariedades 
+         Caption         =   "Todas las variedades"
+         Enabled         =   0   'False
+         Height          =   255
+         Left            =   9420
+         TabIndex        =   165
+         Top             =   330
+         Visible         =   0   'False
+         Width           =   1905
+      End
+      Begin VB.TextBox Text4 
+         Height          =   315
+         Left            =   1140
+         TabIndex        =   56
+         Text            =   "Text4"
+         Top             =   5010
+         Visible         =   0   'False
+         Width           =   1275
+      End
+      Begin MSComctlLib.ListView ListView4 
+         Height          =   4155
+         Left            =   225
+         TabIndex        =   29
+         Top             =   720
+         Width           =   11100
+         _ExtentX        =   19579
+         _ExtentY        =   7329
+         View            =   3
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         FullRowSelect   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   11
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Text            =   "Campo"
+            Object.Width           =   1941
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Text            =   "Partida"
+            Object.Width           =   3000
+         EndProperty
+         BeginProperty ColumnHeader(3) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   2
+            Text            =   "C.Pobla"
+            Object.Width           =   1411
+         EndProperty
+         BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   3
+            Text            =   "Poblacion"
+            Object.Width           =   2735
+         EndProperty
+         BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   4
+            Text            =   "Polígono"
+            Object.Width           =   1464
+         EndProperty
+         BeginProperty ColumnHeader(6) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   5
+            Text            =   "Parcela"
+            Object.Width           =   1482
+         EndProperty
+         BeginProperty ColumnHeader(7) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   6
+            Text            =   "Sp."
+            Object.Width           =   794
+         EndProperty
+         BeginProperty ColumnHeader(8) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   7
+            Text            =   "Nro."
+            Object.Width           =   1059
+         EndProperty
+         BeginProperty ColumnHeader(9) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   8
+            Text            =   "Hdas"
+            Object.Width           =   1305
+         EndProperty
+         BeginProperty ColumnHeader(10) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   9
+            Text            =   "Código"
+            Object.Width           =   1306
+         EndProperty
+         BeginProperty ColumnHeader(11) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   10
+            Text            =   "Variedad"
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.CommandButton cmdCamposSocio 
+         Caption         =   "Regresar"
+         Height          =   375
+         Index           =   2
+         Left            =   10050
+         TabIndex        =   30
+         Top             =   4980
+         Width           =   1215
+      End
+      Begin VB.Label Label6 
+         Caption         =   "Socio"
+         Height          =   285
+         Left            =   360
+         TabIndex        =   55
+         Top             =   5040
+         Visible         =   0   'False
+         Width           =   645
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Campos del Socio"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   375
+         Left            =   270
+         TabIndex        =   31
+         Top             =   270
+         Width           =   5145
+      End
+   End
 End
 Attribute VB_Name = "frmMensajes"
 Attribute VB_GlobalNameSpace = False
@@ -2593,6 +2681,8 @@ Public OpcionMensaje As Byte
 '62 .- Creacion de un campo en el traspaso de entradas de almazara para ABN
 '63 .- Visualizacion previa del fichero de entradas
 
+'64 .- Tipos de contrato en Coopic
+
 Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
@@ -2687,6 +2777,18 @@ Private Function DatosOk() As Boolean
 End Function
 
 
+
+Private Sub CmdAcepContratos_Click()
+    cadena = ""
+    For NumRegElim = 1 To ListView21.ListItems.Count
+        If ListView21.ListItems(NumRegElim).Checked Then
+            cadena = cadena & DBSet(ListView21.ListItems(NumRegElim).Text, "T") & ","
+        End If
+    Next NumRegElim
+    If cadena <> "" Then cadena = Mid(cadena, 1, Len(cadena) - 1)
+    RaiseEvent DatoSeleccionado(cadena)
+    Unload Me
+End Sub
 
 Private Sub CmdAcepCrearCampo_Click()
 Dim NroCampo As Long
@@ -3272,6 +3374,8 @@ End Sub
 
 
 
+
+
 Private Sub Form_Activate()
 Dim Ok As Boolean
 
@@ -3408,7 +3512,7 @@ Dim Ok As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3458,6 +3562,10 @@ Dim Ok As Boolean
             
         Case 63 ' cargar la previsualizacion de entradas
             CargarPrevisualizacion
+            
+        Case 64 ' Contratos
+            CargarContratos
+        
     End Select
     
     Screen.MousePointer = vbDefault
@@ -3496,6 +3604,7 @@ On Error Resume Next
     Me.FrameImpFrasPozos.visible = False
     Me.FrameCreacionCampo.visible = False
     Me.FrameVisualizaEntradas.visible = False
+    Me.FrameContratos.visible = False
     PulsadoSalir = True
     PrimeraVez = True
     
@@ -3509,13 +3618,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3569,7 +3678,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3587,7 +3696,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3631,7 +3740,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.cmdSalir
+            PonerFocoBtn Me.CmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -3808,7 +3917,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -3866,6 +3975,11 @@ On Error Resume Next
             H = Me.FrameVisualizaEntradas.Height
             W = Me.FrameVisualizaEntradas.Width
             PonerFrameVisible FrameVisualizaEntradas, True, H, W
+            
+        Case 64 ' Tipos de contrato
+            H = Me.FrameContratos.Height
+            W = Me.FrameContratos.Width
+            PonerFrameVisible FrameContratos, True, H, W
         
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
@@ -3889,47 +4003,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.CmdAceptarCobros.Top = 4000
-            Me.CmdAceptarCobros.Left = 4200
+            Me.cmdAceptarCobros.Top = 4000
+            Me.cmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.CmdAceptarCobros.Left = 4000
+            Me.cmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.CmdAceptarCobros.Top = 5400
-            Me.CmdAceptarCobros.Left = 4600
+            Me.cmdAceptarCobros.Top = 5400
+            Me.cmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.CmdCancelarCobros.Top = 5300
-                Me.CmdCancelarCobros.Left = 4600
-                Me.CmdAceptarCobros.Left = 3300
+                Me.cmdCancelarCobros.Top = 5300
+                Me.cmdCancelarCobros.Left = 4600
+                Me.cmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.CmdAceptarCobros.Caption = "&SI"
-                Me.CmdCancelarCobros.Caption = "&NO"
+                Me.cmdAceptarCobros.Caption = "&SI"
+                Me.cmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             
-            Me.CmdCancelarCobros.Top = 5300
-            Me.CmdCancelarCobros.Left = 4600
-            Me.CmdAceptarCobros.Left = 3300
+            Me.cmdCancelarCobros.Top = 5300
+            Me.cmdCancelarCobros.Left = 4600
+            Me.cmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.CmdAceptarCobros.Caption = "&SI"
-            Me.CmdCancelarCobros.Caption = "&NO"
+            Me.cmdAceptarCobros.Caption = "&SI"
+            Me.cmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -3938,7 +4052,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -4596,7 +4710,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!Codsocio, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = Rs.Fields(3).Value
@@ -4643,7 +4757,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
@@ -4686,7 +4800,7 @@ Dim ItmX As ListItem
     
         While Not Rs.EOF
             Set ItmX = ListView7.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Entradas sin CRFID."
@@ -5787,6 +5901,16 @@ Dim i As Long
 End Sub
 
 
+Private Sub imgCheck5_Click(Index As Integer)
+Dim b As Boolean
+
+    b = Index = 1
+    For TotalArray = 1 To ListView21.ListItems.Count
+        ListView21.ListItems(TotalArray).Checked = b
+        If (TotalArray Mod 50) = 0 Then DoEvents
+    Next TotalArray
+End Sub
+
 Private Sub ListView4_DblClick()
     If Me.OpcionMensaje = 6 Then
         cmdCamposSocio_Click (2)
@@ -5899,7 +6023,7 @@ Dim It As ListItem
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
         It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
-        It.SubItems(4) = Format(DBLet(Rs!numnotac, "N"), "0000000")
+        It.SubItems(4) = Format(DBLet(Rs!Numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(Rs!KilosNet, "N")
         It.SubItems(6) = DBLet(Rs!ImpTrans, "N")
         
@@ -6174,7 +6298,7 @@ Dim It As ListItem
         Set It = ListView10.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(Rs!numnotac, "N")
+        It.Text = DBLet(Rs!Numnotac, "N")
         It.SubItems(1) = Format(Rs!FechaEnt, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
         It.SubItems(3) = Format(Rs!codvarie, "000000")
@@ -7311,6 +7435,41 @@ Dim It As ListItem
 '        It.SubItems(4) = DBLet(Rs!importe4)
 '        It.SubItems(5) = DBLet(Rs!importe5)
 '        It.SubItems(6) = DBLet(Rs!Nombre1)
+        
+        Rs.MoveNext
+        TotalArray = TotalArray + 1
+        If TotalArray > 300 Then
+            TotalArray = 0
+            DoEvents
+        End If
+    Wend
+    Rs.Close
+    
+End Sub
+
+
+Private Sub CargarContratos()
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+Dim It As ListItem
+
+    Sql = "select distinct contrato from rclasifica"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    ListView21.ColumnHeaders.Clear
+
+    ListView21.ColumnHeaders.Add , , "Contrato", 1000
+    
+    ListView21.ListItems.Clear
+    
+    TotalArray = 0
+    While Not Rs.EOF
+        Set It = ListView21.ListItems.Add
+            
+        'It.Tag = DevNombreSQL(RS!codCampo)
+        It.Text = DBLet(Rs!contrato, "T")
         
         Rs.MoveNext
         TotalArray = TotalArray + 1
