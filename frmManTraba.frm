@@ -31,31 +31,17 @@ Begin VB.Form frmManTraba
       ForeColor       =   &H00972E0B&
       Height          =   4665
       Left            =   5910
-      TabIndex        =   50
+      TabIndex        =   49
       Top             =   1320
       Width           =   6600
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   35
-         Left            =   3090
-         MaxLength       =   10
-         TabIndex        =   38
-         Tag             =   "Importe Embargo|N|N|||straba|impembargo|###,##0.00||"
-         Text            =   "0000000000"
-         Top             =   4260
-         Visible         =   0   'False
-         Width           =   990
-      End
       Begin VB.CheckBox chkEmbarga 
          Caption         =   "Hay Embargo"
          Height          =   315
          Index           =   1
-         Left            =   270
+         Left            =   180
          TabIndex        =   37
          Tag             =   "Hay embargo|N|N|||straba|hayembargo||N|"
-         Top             =   4290
+         Top             =   4260
          Width           =   1335
       End
       Begin VB.TextBox Text1 
@@ -86,7 +72,7 @@ Begin VB.Form frmManTraba
          Height          =   285
          Index           =   32
          Left            =   1800
-         TabIndex        =   84
+         TabIndex        =   83
          Top             =   3930
          Width           =   2310
       End
@@ -183,7 +169,7 @@ Begin VB.Form frmManTraba
          Height          =   285
          Index           =   24
          Left            =   1800
-         TabIndex        =   75
+         TabIndex        =   74
          Top             =   2430
          Width           =   4530
       End
@@ -224,7 +210,7 @@ Begin VB.Form frmManTraba
          Height          =   285
          Index           =   20
          Left            =   1800
-         TabIndex        =   52
+         TabIndex        =   51
          Top             =   2835
          Width           =   4530
       End
@@ -310,7 +296,7 @@ Begin VB.Form frmManTraba
          Height          =   285
          Index           =   9
          Left            =   1800
-         TabIndex        =   51
+         TabIndex        =   50
          Top             =   900
          Width           =   4530
       End
@@ -368,21 +354,11 @@ Begin VB.Form frmManTraba
          Top             =   2055
          Width           =   1065
       End
-      Begin VB.Label Label31 
-         Caption         =   "Importe Embargo"
-         Enabled         =   0   'False
-         Height          =   255
-         Left            =   1830
-         TabIndex        =   87
-         Top             =   4320
-         Visible         =   0   'False
-         Width           =   1335
-      End
       Begin VB.Label Label30 
          Caption         =   "Pr.Coste Hora"
          Height          =   255
          Left            =   4350
-         TabIndex        =   86
+         TabIndex        =   85
          Top             =   3960
          Width           =   1095
       End
@@ -390,7 +366,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Horario"
          Height          =   255
          Left            =   180
-         TabIndex        =   85
+         TabIndex        =   84
          Top             =   3930
          Width           =   750
       End
@@ -416,7 +392,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Nro.Tarjeta"
          Height          =   255
          Left            =   4350
-         TabIndex        =   83
+         TabIndex        =   82
          Top             =   3630
          Width           =   915
       End
@@ -424,7 +400,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Código.Asesoria"
          Height          =   255
          Left            =   2130
-         TabIndex        =   82
+         TabIndex        =   81
          Top             =   3630
          Width           =   1245
       End
@@ -432,7 +408,7 @@ Begin VB.Form frmManTraba
          Caption         =   "% Retención"
          Height          =   255
          Left            =   150
-         TabIndex        =   81
+         TabIndex        =   80
          Top             =   3630
          Width           =   1020
       End
@@ -440,7 +416,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Plus Capataz"
          Height          =   255
          Left            =   4080
-         TabIndex        =   80
+         TabIndex        =   79
          Top             =   2040
          Width           =   1020
       End
@@ -448,7 +424,7 @@ Begin VB.Form frmManTraba
          Caption         =   "% Antiguedad"
          Height          =   255
          Left            =   4080
-         TabIndex        =   79
+         TabIndex        =   78
          Top             =   1260
          Width           =   1020
       End
@@ -456,7 +432,7 @@ Begin VB.Form frmManTraba
          Caption         =   "% Seg.Social"
          Height          =   255
          Left            =   2100
-         TabIndex        =   78
+         TabIndex        =   77
          Top             =   1260
          Width           =   1020
       End
@@ -464,7 +440,7 @@ Begin VB.Form frmManTraba
          Caption         =   "% IRPF"
          Height          =   255
          Left            =   180
-         TabIndex        =   77
+         TabIndex        =   76
          Top             =   1260
          Width           =   1020
       End
@@ -472,7 +448,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Almacén"
          Height          =   255
          Left            =   180
-         TabIndex        =   76
+         TabIndex        =   75
          Top             =   2430
          Width           =   750
       End
@@ -488,7 +464,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Sección "
          Height          =   255
          Left            =   4080
-         TabIndex        =   71
+         TabIndex        =   70
          Top             =   1620
          Width           =   615
       End
@@ -496,7 +472,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Seg.Social"
          Height          =   255
          Left            =   180
-         TabIndex        =   70
+         TabIndex        =   69
          Top             =   2055
          Width           =   1050
       End
@@ -504,7 +480,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Tipo "
          Height          =   255
          Left            =   2085
-         TabIndex        =   60
+         TabIndex        =   59
          Top             =   1620
          Width           =   615
       End
@@ -512,7 +488,7 @@ Begin VB.Form frmManTraba
          Caption         =   "F.Pago"
          Height          =   255
          Left            =   180
-         TabIndex        =   59
+         TabIndex        =   58
          Top             =   2895
          Width           =   615
       End
@@ -529,7 +505,7 @@ Begin VB.Form frmManTraba
          Height          =   195
          Index           =   21
          Left            =   180
-         TabIndex        =   58
+         TabIndex        =   57
          Top             =   3285
          Width           =   1005
       End
@@ -545,7 +521,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Categoria"
          Height          =   255
          Left            =   180
-         TabIndex        =   57
+         TabIndex        =   56
          Top             =   900
          Width           =   750
       End
@@ -553,7 +529,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Fec.Alta"
          Height          =   255
          Left            =   180
-         TabIndex        =   56
+         TabIndex        =   55
          Top             =   450
          Width           =   705
       End
@@ -570,7 +546,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Fec.Baja"
          Height          =   255
          Left            =   2295
-         TabIndex        =   55
+         TabIndex        =   54
          Top             =   450
          Width           =   750
       End
@@ -587,7 +563,7 @@ Begin VB.Form frmManTraba
          Caption         =   "F.Antig"
          Height          =   255
          Left            =   4410
-         TabIndex        =   54
+         TabIndex        =   53
          Top             =   450
          Width           =   660
       End
@@ -604,7 +580,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Grupo Cot."
          Height          =   255
          Left            =   180
-         TabIndex        =   53
+         TabIndex        =   52
          Top             =   1620
          Width           =   1020
       End
@@ -615,7 +591,7 @@ Begin VB.Form frmManTraba
       Height          =   285
       Index           =   23
       Left            =   8370
-      TabIndex        =   73
+      TabIndex        =   72
       Top             =   3735
       Width           =   3840
    End
@@ -624,7 +600,7 @@ Begin VB.Form frmManTraba
       Index           =   23
       Left            =   7095
       MaxLength       =   10
-      TabIndex        =   72
+      TabIndex        =   71
       Tag             =   "Cta.Contable|T|S|||straba|codmacta|||"
       Top             =   3735
       Width           =   1215
@@ -735,7 +711,7 @@ Begin VB.Form frmManTraba
       Height          =   765
       Index           =   0
       Left            =   225
-      TabIndex        =   43
+      TabIndex        =   42
       Top             =   480
       Width           =   12195
       Begin VB.TextBox Text1 
@@ -763,7 +739,7 @@ Begin VB.Form frmManTraba
          Caption         =   "Nombre "
          Height          =   255
          Left            =   2745
-         TabIndex        =   45
+         TabIndex        =   44
          Top             =   315
          Width           =   810
       End
@@ -772,7 +748,7 @@ Begin VB.Form frmManTraba
          Height          =   255
          Index           =   0
          Left            =   270
-         TabIndex        =   44
+         TabIndex        =   43
          Top             =   315
          Width           =   495
       End
@@ -783,7 +759,7 @@ Begin VB.Form frmManTraba
       Height          =   285
       Index           =   25
       Left            =   9600
-      TabIndex        =   49
+      TabIndex        =   48
       Top             =   765
       Width           =   1425
    End
@@ -791,7 +767,7 @@ Begin VB.Form frmManTraba
       Height          =   555
       Index           =   0
       Left            =   180
-      TabIndex        =   41
+      TabIndex        =   40
       Top             =   5955
       Width           =   2865
       Begin VB.Label lblIndicador 
@@ -808,7 +784,7 @@ Begin VB.Form frmManTraba
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   42
+         TabIndex        =   41
          Top             =   180
          Width           =   2655
       End
@@ -818,7 +794,7 @@ Begin VB.Form frmManTraba
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11445
-      TabIndex        =   40
+      TabIndex        =   39
       Top             =   6150
       Width           =   1035
    End
@@ -826,7 +802,7 @@ Begin VB.Form frmManTraba
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10155
-      TabIndex        =   39
+      TabIndex        =   38
       Top             =   6150
       Width           =   1035
    End
@@ -881,7 +857,7 @@ Begin VB.Form frmManTraba
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   47
+      TabIndex        =   46
       Top             =   0
       Width           =   12615
       _ExtentX        =   22251
@@ -971,7 +947,7 @@ Begin VB.Form frmManTraba
          Height          =   195
          Index           =   0
          Left            =   8520
-         TabIndex        =   48
+         TabIndex        =   47
          Top             =   120
          Width           =   1215
       End
@@ -980,7 +956,7 @@ Begin VB.Form frmManTraba
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11460
-      TabIndex        =   46
+      TabIndex        =   45
       Top             =   6150
       Visible         =   0   'False
       Width           =   1035
@@ -989,7 +965,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Cta.Conta."
       Height          =   255
       Left            =   6075
-      TabIndex        =   74
+      TabIndex        =   73
       Top             =   3735
       Width           =   735
    End
@@ -1012,7 +988,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Teléfono"
       Height          =   255
       Left            =   225
-      TabIndex        =   69
+      TabIndex        =   68
       Top             =   3060
       Width           =   735
    End
@@ -1020,7 +996,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Móvil"
       Height          =   255
       Left            =   3315
-      TabIndex        =   68
+      TabIndex        =   67
       Top             =   3060
       Width           =   495
    End
@@ -1028,7 +1004,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Fax"
       Height          =   255
       Left            =   225
-      TabIndex        =   67
+      TabIndex        =   66
       Top             =   3420
       Width           =   735
    End
@@ -1036,7 +1012,7 @@ Begin VB.Form frmManTraba
       Caption         =   "E-mail"
       Height          =   255
       Left            =   225
-      TabIndex        =   66
+      TabIndex        =   65
       Top             =   3750
       Width           =   495
    End
@@ -1044,7 +1020,7 @@ Begin VB.Form frmManTraba
       Caption         =   "NIF"
       Height          =   255
       Left            =   240
-      TabIndex        =   65
+      TabIndex        =   64
       Top             =   1650
       Width           =   735
    End
@@ -1053,7 +1029,7 @@ Begin VB.Form frmManTraba
       Height          =   255
       Index           =   0
       Left            =   240
-      TabIndex        =   64
+      TabIndex        =   63
       Top             =   2010
       Width           =   735
    End
@@ -1061,7 +1037,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Observaciones"
       Height          =   255
       Left            =   210
-      TabIndex        =   63
+      TabIndex        =   62
       Top             =   4185
       Width           =   1170
    End
@@ -1078,7 +1054,7 @@ Begin VB.Form frmManTraba
       Caption         =   "Provincia"
       Height          =   255
       Left            =   225
-      TabIndex        =   62
+      TabIndex        =   61
       Top             =   2745
       Width           =   735
    End
@@ -1087,7 +1063,7 @@ Begin VB.Form frmManTraba
       Height          =   255
       Index           =   26
       Left            =   225
-      TabIndex        =   61
+      TabIndex        =   60
       Top             =   2400
       Width           =   735
    End
@@ -1241,6 +1217,23 @@ Private Sub chkAbonos_LostFocus(Index As Integer)
     End If
 End Sub
 
+
+
+
+Private Sub chkEmbarga_GotFocus(Index As Integer)
+    PonerFocoChk Me.chkEmbarga(Index)
+End Sub
+
+Private Sub chkEmbarga_Click(Index As Integer)
+    If Modo = 1 Then
+        'Buscqueda
+        If InStr(1, BuscaChekc, "chkEmbarga(" & Index & ")") = 0 Then BuscaChekc = BuscaChekc & "chkEmbarga(" & Index & ")|"
+    End If
+End Sub
+
+Private Sub chkEmbarga_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
 
 
 Private Sub cmdAceptar_Click()
@@ -1416,12 +1409,12 @@ Dim i As Integer
     
     limpiar Me   'Mètode general: Neteja els controls TextBox
     lblIndicador.Caption = ""
-    Me.chkAbonos(0).Value = 0
     
     For i = 0 To Combo1.Count - 1
         Combo1(i).ListIndex = -1
     Next i
     Me.chkAbonos(0).Value = 0
+    Me.chkEmbarga(1).Value = 0
     
     ' *** si n'hi han combos a la capçalera ***
     ' *****************************************
@@ -1474,6 +1467,7 @@ Dim b As Boolean
     BloquearText1 Me, Modo
     BloquearCombo Me, Modo
     BloquearChk Me.chkAbonos(0), (Modo = 0 Or Modo = 2 Or Modo = 5)
+    BloquearChk Me.chkEmbarga(1), (Modo = 0 Or Modo = 2 Or Modo = 5)
     
     ' ***** bloquejar tots els controls visibles de la clau primaria de la capçalera ***
 '    If Modo = 4 Then _

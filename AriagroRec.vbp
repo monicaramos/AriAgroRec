@@ -301,6 +301,7 @@ Form=frmManVariedad.frm
 Form=frmAlmzEntradas.frm
 Form=frmBodAlbRetirada.frm
 Form=frmBodListEntradas.frm
+Form=frmManPartesCajas.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

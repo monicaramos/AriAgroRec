@@ -9,21 +9,21 @@ Begin VB.Form frmManPartes
    ClientHeight    =   8445
    ClientLeft      =   45
    ClientTop       =   4335
-   ClientWidth     =   13005
+   ClientWidth     =   13665
    Icon            =   "frmManPartes.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   8445
-   ScaleWidth      =   13005
+   ScaleWidth      =   13665
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
       Height          =   1065
       Left            =   90
       TabIndex        =   13
-      Top             =   540
-      Width           =   12765
+      Top             =   570
+      Width           =   13425
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   0
@@ -74,7 +74,7 @@ Begin VB.Form frmManPartes
          Caption         =   "Impreso"
          Height          =   195
          Index           =   0
-         Left            =   11730
+         Left            =   12210
          TabIndex        =   5
          Top             =   480
          Width           =   855
@@ -176,11 +176,11 @@ Begin VB.Form frmManPartes
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   6210
-      Left            =   90
+      Left            =   60
       TabIndex        =   18
-      Top             =   1665
-      Width           =   12750
-      _ExtentX        =   22490
+      Top             =   1710
+      Width           =   13530
+      _ExtentX        =   23865
       _ExtentY        =   10954
       _Version        =   393216
       Tabs            =   1
@@ -205,7 +205,174 @@ Begin VB.Form frmManPartes
       Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "FrameAux0"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).ControlCount=   3
+      Tab(0).Control(3)=   "Frame5"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).ControlCount=   4
+      Begin VB.Frame Frame5 
+         Caption         =   "Resumen"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00C00000&
+         Height          =   2565
+         Left            =   6780
+         TabIndex        =   61
+         Top             =   3540
+         Width           =   6600
+         Begin VB.TextBox txtAux4 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   1
+            Left            =   1350
+            MaxLength       =   15
+            TabIndex        =   67
+            Text            =   "nomvarie"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   975
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   0
+            Left            =   420
+            MaxLength       =   7
+            TabIndex        =   66
+            Tag             =   "Variedad|N|N|||rpartes_variedad|codvarie|000000|N|"
+            Text            =   "codvari"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   735
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   3
+            Left            =   3375
+            MaxLength       =   7
+            TabIndex        =   65
+            Tag             =   "Kilos Recol|N|S|||rpartes_trabajador|kilosrec|###,##0|N|"
+            Text            =   "Kilos"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   540
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   4
+            Left            =   4785
+            MaxLength       =   10
+            TabIndex        =   64
+            Tag             =   "Importe|N|N|||rpartes_trabajador|importe|###,##0.00||"
+            Text            =   "Importe"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   945
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   2
+            Left            =   2460
+            MaxLength       =   7
+            TabIndex        =   63
+            Tag             =   "Cajas Recol|N|S|||rpartes_trabajador|numcajas|###,##0|N|"
+            Text            =   "Cajas"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   540
+         End
+         Begin MSDataGridLib.DataGrid DataGrid4 
+            Bindings        =   "frmManPartes.frx":013E
+            Height          =   1725
+            Left            =   120
+            TabIndex        =   62
+            Top             =   720
+            Width           =   6300
+            _ExtentX        =   11113
+            _ExtentY        =   3043
+            _Version        =   393216
+            AllowUpdate     =   0   'False
+            AllowArrows     =   -1  'True
+            ColumnHeaders   =   -1  'True
+            HeadLines       =   1
+            RowHeight       =   15
+            FormatLocked    =   -1  'True
+            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ColumnCount     =   2
+            BeginProperty Column00 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            BeginProperty Column01 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            SplitCount      =   1
+            BeginProperty Split0 
+               BeginProperty Column00 
+               EndProperty
+               BeginProperty Column01 
+               EndProperty
+            EndProperty
+         End
+      End
       Begin VB.Frame FrameAux0 
          Caption         =   "Gastos Generales Parte"
          BeginProperty Font 
@@ -222,7 +389,7 @@ Begin VB.Form frmManPartes
          Left            =   6795
          TabIndex        =   35
          Top             =   3555
-         Width           =   5700
+         Width           =   6390
          Begin VB.TextBox txtAux2 
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
@@ -342,7 +509,7 @@ Begin VB.Form frmManPartes
             EndProperty
          End
          Begin MSDataGridLib.DataGrid DataGrid3 
-            Bindings        =   "frmManPartes.frx":013E
+            Bindings        =   "frmManPartes.frx":0153
             Height          =   1730
             Left            =   90
             TabIndex        =   43
@@ -475,7 +642,23 @@ Begin VB.Form frmManPartes
          Left            =   90
          TabIndex        =   24
          Top             =   330
-         Width           =   12450
+         Width           =   13170
+         Begin VB.TextBox txtAux3 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            Height          =   315
+            Index           =   9
+            Left            =   5820
+            MaxLength       =   7
+            TabIndex        =   60
+            Tag             =   "Cajas Recol|N|S|||rpartes_trabajador|numcajas|###,##0|N|"
+            Text            =   "Cajas"
+            Top             =   1170
+            Visible         =   0   'False
+            Width           =   540
+         End
          Begin VB.TextBox txtAux3 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
@@ -483,7 +666,7 @@ Begin VB.Form frmManPartes
             BorderStyle     =   0  'None
             Height          =   315
             Index           =   8
-            Left            =   6660
+            Left            =   7200
             MaxLength       =   7
             TabIndex        =   29
             Tag             =   "Horasl|N|S|||rpartes_trabajador|horastra|#,##0.00|N|"
@@ -499,7 +682,7 @@ Begin VB.Form frmManPartes
             BorderStyle     =   0  'None
             Height          =   315
             Index           =   7
-            Left            =   8460
+            Left            =   9000
             MaxLength       =   10
             TabIndex        =   57
             Tag             =   "Modificado|N|N|0|1|rpartes_trabajador|modificado|0||"
@@ -514,7 +697,7 @@ Begin VB.Form frmManPartes
             Enabled         =   0   'False
             Height          =   315
             Index           =   1
-            Left            =   10350
+            Left            =   11160
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   55
@@ -614,7 +797,7 @@ Begin VB.Form frmManPartes
             BorderStyle     =   0  'None
             Height          =   315
             Index           =   4
-            Left            =   7395
+            Left            =   7935
             MaxLength       =   10
             TabIndex        =   30
             Tag             =   "Importe|N|N|||rpartes_trabajador|importe|###,##0.00||"
@@ -630,7 +813,7 @@ Begin VB.Form frmManPartes
             BorderStyle     =   0  'None
             Height          =   315
             Index           =   3
-            Left            =   5985
+            Left            =   6525
             MaxLength       =   7
             TabIndex        =   28
             Tag             =   "Kilos Recol|N|S|||rpartes_trabajador|kilosrec|###,##0|N|"
@@ -721,15 +904,15 @@ Begin VB.Form frmManPartes
             Left            =   60
             TabIndex        =   33
             Top             =   210
-            Width           =   1110
-            _ExtentX        =   1958
+            Width           =   1470
+            _ExtentX        =   2593
             _ExtentY        =   688
             ButtonWidth     =   609
             ButtonHeight    =   582
             AllowCustomize  =   0   'False
             _Version        =   393216
             BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-               NumButtons      =   3
+               NumButtons      =   4
                BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                   Object.ToolTipText     =   "Nuevo"
                   Object.Tag             =   "2"
@@ -742,16 +925,20 @@ Begin VB.Form frmManPartes
                   Object.ToolTipText     =   "Eliminar"
                   Object.Tag             =   "2"
                EndProperty
+               BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Insertar cajones"
+                  Object.Tag             =   "2"
+               EndProperty
             EndProperty
          End
          Begin MSDataGridLib.DataGrid DataGrid2 
-            Bindings        =   "frmManPartes.frx":0153
+            Bindings        =   "frmManPartes.frx":0168
             Height          =   2325
             Left            =   60
             TabIndex        =   34
             Top             =   675
-            Width           =   12225
-            _ExtentX        =   21564
+            Width           =   13065
+            _ExtentX        =   23045
             _ExtentY        =   4101
             _Version        =   393216
             AllowUpdate     =   0   'False
@@ -819,7 +1006,7 @@ Begin VB.Form frmManPartes
             ForeColor       =   &H00C00000&
             Height          =   255
             Index           =   2
-            Left            =   8190
+            Left            =   9300
             TabIndex        =   56
             Top             =   225
             Width           =   1665
@@ -953,7 +1140,7 @@ Begin VB.Form frmManPartes
             Width           =   735
          End
          Begin MSDataGridLib.DataGrid DataGrid1 
-            Bindings        =   "frmManPartes.frx":0168
+            Bindings        =   "frmManPartes.frx":017D
             Height          =   1730
             Left            =   90
             TabIndex        =   23
@@ -1082,7 +1269,7 @@ Begin VB.Form frmManPartes
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   11700
+      Left            =   12480
       TabIndex        =   7
       Top             =   7950
       Width           =   1035
@@ -1090,7 +1277,7 @@ Begin VB.Form frmManPartes
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   10530
+      Left            =   11310
       TabIndex        =   6
       Top             =   7965
       Width           =   1035
@@ -1101,8 +1288,8 @@ Begin VB.Form frmManPartes
       Left            =   0
       TabIndex        =   11
       Top             =   0
-      Width           =   13005
-      _ExtentX        =   22939
+      Width           =   13665
+      _ExtentX        =   24104
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -1193,7 +1380,7 @@ Begin VB.Form frmManPartes
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   11670
+      Left            =   12480
       TabIndex        =   8
       Top             =   7935
       Visible         =   0   'False
@@ -1300,6 +1487,53 @@ Begin VB.Form frmManPartes
       Visible         =   0   'False
       Width           =   1425
       _ExtentX        =   2514
+      _ExtentY        =   582
+      ConnectMode     =   0
+      CursorLocation  =   3
+      IsolationLevel  =   -1
+      ConnectionTimeout=   15
+      CommandTimeout  =   30
+      CursorType      =   3
+      LockType        =   3
+      CommandType     =   8
+      CursorOptions   =   0
+      CacheSize       =   50
+      MaxRecords      =   0
+      BOFAction       =   0
+      EOFAction       =   0
+      ConnectStringType=   1
+      Appearance      =   1
+      BackColor       =   -2147483643
+      ForeColor       =   -2147483640
+      Orientation     =   0
+      Enabled         =   -1
+      Connect         =   ""
+      OLEDBString     =   ""
+      OLEDBFile       =   ""
+      DataSourceName  =   ""
+      OtherAttributes =   ""
+      UserName        =   ""
+      Password        =   ""
+      RecordSource    =   ""
+      Caption         =   "Adodc1"
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      _Version        =   393216
+   End
+   Begin MSAdodcLib.Adodc Data4 
+      Height          =   330
+      Left            =   0
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   1335
+      _ExtentX        =   2355
       _ExtentY        =   582
       ConnectMode     =   0
       CursorLocation  =   3
@@ -2011,7 +2245,7 @@ Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Facturas (scafac)
 ' y los registros correspondientes de las tablas cab. albaranes (scafac1)
 ' y las lineas de la factura (slifac)
-Dim Cad As String
+Dim cad As String
 'Dim vTipoMov As CTiposMov
 
     On Error GoTo EEliminar
@@ -2019,16 +2253,16 @@ Dim Cad As String
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
-    Cad = "Cabecera de Partes." & vbCrLf
-    Cad = Cad & "-------------------------------------      " & vbCrLf & vbCrLf
-    Cad = Cad & "Va a eliminar el Parte:            "
-    Cad = Cad & vbCrLf & "Nº Parte:  " & Format(Text1(0).Text, "0000000")
-    Cad = Cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    cad = "Cabecera de Partes." & vbCrLf
+    cad = cad & "-------------------------------------      " & vbCrLf & vbCrLf
+    cad = cad & "Va a eliminar el Parte:            "
+    cad = cad & vbCrLf & "Nº Parte:  " & Format(Text1(0).Text, "0000000")
+    cad = cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
 
-    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
+    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
 
     'Borramos
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
 '        On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
@@ -2062,7 +2296,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim Cad As String
+Dim cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -2076,9 +2310,9 @@ Dim Cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        Cad = Data1.Recordset.Fields(0) & "|"
-        Cad = Cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(Cad)
+        cad = Data1.Recordset.Fields(0) & "|"
+        cad = cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(cad)
         Unload Me
     End If
 End Sub
@@ -2151,6 +2385,8 @@ Dim i As Integer
             .Buttons(1).Image = 3   'Insertar
             .Buttons(2).Image = 4   'Modificar
             .Buttons(3).Image = 5   'Borrar
+            
+            If kCampo = 0 Then .Buttons(4).Image = 16
         End With
     Next kCampo
    ' ***********************************
@@ -2189,6 +2425,13 @@ Dim i As Integer
     
 '        CargaGrid DataGrid1, Data2, False
     'Poner los grid sin apuntar a nada
+    
+    '[Monica]10/10/2016: si hay resumen por variedad de cajas, no mostramos los gastos generales
+    FrameAux0.visible = (vParamAplic.HayResumenCajas = 0)
+    FrameAux0.Enabled = (vParamAplic.HayResumenCajas = 0)
+    Frame5.visible = (vParamAplic.HayResumenCajas = 1)
+    Frame5.Enabled = (vParamAplic.HayResumenCajas = 1)
+    
     LimpiarDataGrids
     
     SSTab1.Tab = 0
@@ -2200,6 +2443,9 @@ Dim i As Integer
     Else
         PonerModo 0
     End If
+    
+    ToolAux(0).Buttons(4).visible = (vParamAplic.HayResumenCajas = 1)
+    ToolAux(0).Buttons(4).Enabled = (vParamAplic.HayResumenCajas = 1)
     
 '    If DatosADevolverBusqueda = "" Then
 '        If numalbar = "" Then
@@ -2404,7 +2650,7 @@ Private Sub mnRecalcularImportes_Click()
 End Sub
 
 Private Sub BotonRecalcularImportes()
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2413,6 +2659,7 @@ Dim Capataz As Long
     If RecalcularImportes Then
         CargaGrid DataGrid1, Data2, True
         CargaGrid DataGrid2, Data3, True
+        If vParamAplic.HayResumenCajas = 1 Then CargaGrid DataGrid4, Data3, True
         PonerModo 2
     End If
     
@@ -2428,7 +2675,7 @@ End Sub
 
 
 Private Sub BotonTraerEntradas()
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2437,6 +2684,7 @@ Dim Capataz As Long
     If TraerEntradas Then
         CargaGrid DataGrid1, Data2, True
         CargaGrid DataGrid2, Data3, True
+        
         PonerModo 2
     End If
     
@@ -2444,7 +2692,7 @@ End Sub
 
 
 Private Function TraerEntradas() As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2474,14 +2722,14 @@ Dim NumF As String
         End If
     End If
 
-    Cad = "Se va a proceder a traer los kilos recolectados en la fecha de entrada."
+    cad = "Se va a proceder a traer los kilos recolectados en la fecha de entrada."
     
     If Data2.Recordset.RecordCount <> 0 Then
-        Cad = Cad & vbCrLf & "Perderá los registros que actualmente tiene en Reparto de Kilos."
+        cad = cad & vbCrLf & "Perderá los registros que actualmente tiene en Reparto de Kilos."
     End If
-    Cad = Cad & vbCrLf & "  ¿ Desea Continuar ? "
+    cad = cad & vbCrLf & "  ¿ Desea Continuar ? "
     
-    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         
         conn.BeginTrans
         
@@ -2497,8 +2745,8 @@ Dim NumF As String
         
         conn.Execute Sql
     
-        Cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
-        Capataz = DevuelveValor(Cad)
+        cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
+        Capataz = DevuelveValor(cad)
         
         ' borramos anteriormente los registros de rpartes_variedad que hubieran
         Sql = "delete from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
@@ -2555,20 +2803,20 @@ Dim NumF As String
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        Cad = ""
+        cad = ""
         NumF = ""
         While Not Rs.EOF
             ' solo si no está insertada la nota de campo en otro parte la insertamos de nuevas
             Sql = "select count(*) from rpartes_variedad where nroparte <> " & Data1.Recordset.Fields(0).Value
-            Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             
             If TotalRegistros(Sql) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
-                Cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
-                Cad = Cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!numnotac, "N") & ","
-                Cad = Cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
+                cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
+                cad = cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!Numnotac, "N") & ","
+                cad = cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
                 
-                conn.Execute Cad
+                conn.Execute cad
             End If
                 
             Rs.MoveNext
@@ -2604,7 +2852,7 @@ Dim NroTrabajadores As Long
 Dim KilosTrab As Long
 Dim Precio As Currency
 Dim ImporteTrab As Currency
-Dim Cad As String
+Dim cad As String
 Dim NumF As Long
 Dim PlusCapataz As Currency
         
@@ -2642,10 +2890,10 @@ Dim UltLinea As Integer
     End If
     
     
-    Cad = "Se va a proceder a recalcular los importes por trabajador según los kilos recolectados y "
-    Cad = Cad & "los gastos generales introducidos. "
-    Cad = Cad & vbCrLf & "         ¿ Desea Continuar ? "
-    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    cad = "Se va a proceder a recalcular los importes por trabajador según los kilos recolectados y "
+    cad = cad & "los gastos generales introducidos. "
+    cad = cad & vbCrLf & "         ¿ Desea Continuar ? "
+    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         'mostramos cuales son los trabajadores de la cuadrilla que han de seleccionar para hacer el reparto
         
 '        SQL = "select codcapat from rpartes, rcuadrilla where rpartes.codcuadrilla = " & Data1.Recordset.Fields(2).Value
@@ -3127,18 +3375,18 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim Tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
     '##A mano
-    Cad = ""
-    Cad = Cad & "Parte|rpartes.nroparte|N|0000000|11·"
-    Cad = Cad & "Fecha|rpartes.fechapar|F||14·"
-    Cad = Cad & "Cuadrilla|rpartes.codcuadrilla|N|000000|10·"
-    Cad = Cad & "Capataz|rcuadrilla.codcapat|N|0000|10·"
-    Cad = Cad & "Nombre|rcapataz.nomcapat|N||55·"
+    cad = ""
+    cad = cad & "Parte|rpartes.nroparte|N|0000000|11·"
+    cad = cad & "Fecha|rpartes.fechapar|F||14·"
+    cad = cad & "Cuadrilla|rpartes.codcuadrilla|N|000000|10·"
+    cad = cad & "Capataz|rcuadrilla.codcapat|N|0000|10·"
+    cad = cad & "Nombre|rcapataz.nomcapat|N||55·"
     
 '    Cad = Cad & "Cod|rhisfruta.codvarie|N||7·" 'ParaGrid(Text1(3), 10, "Cliente")
 '    Cad = Cad & "Nombre|variedades.nomvarie|N||20·"
@@ -3152,10 +3400,10 @@ Dim Desc As String, devuelve As String
     Titulo = "Partes de Campos"
     devuelve = "0|"
            
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -3235,11 +3483,15 @@ Dim i As Integer
         CargaGrid DataGrid2, Data3, True ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, True ' rpartes_variedad
         CargaGrid DataGrid3, Adoaux(0), True ' rpartes_gastos
+        CargaGrid DataGrid4, Data2, True ' rpartes_variedad
+        
     Else
         CargaGrid DataGrid2, Data3, False ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, False ' rpartes_variedad
         CargaGrid DataGrid3, Adoaux(0), False ' rpartes_gastos
+        CargaGrid DataGrid4, Data2, False ' rpartes_gastos
     End If
+    
     
     Screen.MousePointer = vbDefault
     Exit Sub
@@ -3525,6 +3777,8 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
                         BotonModificarLinea Index
                     Case 3
                         BotonEliminarLinea Index
+                    Case 4
+                        IntroducirCajones
                     Case Else
                 End Select
             
@@ -3559,9 +3813,103 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 
 End Sub
 
+Private Sub IntroducirCajones()
+Dim frmPartesCajas As frmManPartesCajas
+
+    If Text1(0).Text = "" Then Exit Sub
+    
+    If Me.Data2.Recordset.Fields.Count = 0 Then Exit Sub
+
+    Set frmPartesCajas = New frmManPartesCajas
+
+    frmPartesCajas.NroParte = Text1(0).Text
+    frmPartesCajas.Show vbModal
+
+    Set frmPartesCajas = Nothing
+    
+    RepartoxCajas
+    
+
+End Sub
+
+Private Sub RepartoxCajas()
+Dim Sql As String
+Dim Sql2 As String
+Dim TotalCajas As Currency
+Dim TotalImporte As Currency
+Dim TotalKilos As Long
+
+Dim TImporte As Currency
+Dim TKilos As Long
+
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+
+Dim NumLin As Integer
+Dim Importe As Currency
+Dim Kilos As Long
+
+    
+    Sql = "select codvarie, sum(coalesce(numcajas,0)) numcajas, sum(kilosrec) kilosrec, sum(importe) importe from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
+    Set Rs = New ADODB.Recordset
+    
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+        TotalCajas = DBLet(Rs!NumCajas)
+        TotalImporte = DBLet(Rs!Importe)
+        TotalKilos = DBLet(Rs!KilosRec)
+    
+        TImporte = 0
+        TKilos = 0
+        
+        Sql2 = "select * from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
+        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N") & " order by numlinea "
+        
+        Set Rs2 = New ADODB.Recordset
+        
+        Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs2.EOF
+            Importe = Round2(DBLet(Rs2!NumCajas, "N") * TotalImporte / TotalCajas, 2)
+            Kilos = Round2(DBLet(Rs2!KilosRec, "N") & TotalImporte / TotalKilos, 0)
+            
+            Sql = "update rpartes_trabajador set importe = " & DBSet(Importe, "N")
+            Sql = Sql & " , kilos = " & DBSet(Kilos, "N")
+            Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Rs!numlinea, "N")
+            
+            conn.Execute Sql
+            
+            TImporte = TImporte + Importe
+            TKilos = TKilos + Kilos
+        
+            NumLin = DBLet(Rs!numlinea, "N")
+            
+            Rs2.MoveNext
+        Wend
+        Set Rs2 = Nothing
+        
+        If TImporte <> TotalImporte Or TKilos <> TotalKilos Then
+            Sql = "update rpartes_trabajador set importe = importe + " & DBSet(TotalImporte - TImporte, "N")
+            Sql = Sql & ", kilos = kilos + " & DBSet(TotalKilos - TKilos, "N")
+            Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
+            Sql = Sql & " and numlinea = " & DBSet(NumLin, "N")
+            
+            conn.Execute Sql
+        End If
+    
+        Rs.MoveNext
+    
+    Wend
+    
+    Set Rs = Nothing
+    
+
+
+
+End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 
     On Error GoTo EEliminarLinea
@@ -3579,16 +3927,16 @@ Dim Sql As String
         Case 0 'gastos individuales
             'comprobamos que la linea de gastos trabajador no es de kilos
             If Not SePuedeModificarLinea(CStr(Data3.Recordset.Fields(0).Value), CStr(Data3.Recordset.Fields(1).Value)) Then
-                Cad = "¿Seguro que desea eliminar la Linea?"
-                Cad = Cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
+                cad = "¿Seguro que desea eliminar la Linea?"
+                cad = cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
             Else
                 ' *************** canviar la pregunta ****************
-                Cad = "¿Seguro que desea eliminar el Gasto Individual?"
-                Cad = Cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
+                cad = "¿Seguro que desea eliminar el Gasto Individual?"
+                cad = cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
             End If
         
             
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Data3.Recordset.AbsolutePosition
@@ -3608,11 +3956,11 @@ Dim Sql As String
             Screen.MousePointer = vbDefault
        Case 1 'gastos del parte
             ' *************** canviar la pregunta ****************
-            Cad = "¿Seguro que desea eliminar el Gasto del Parte?"
-            Cad = Cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
-            Cad = Cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
+            cad = "¿Seguro que desea eliminar el Gasto del Parte?"
+            cad = cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
+            cad = cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
             
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Adoaux(0).Recordset.AbsolutePosition
@@ -3631,11 +3979,11 @@ Dim Sql As String
        
         Case 2 ' variedades
             ' *************** canviar la pregunta ****************
-            Cad = "¿Seguro que desea eliminar los kilos de la Nota?"
-            Cad = Cad & vbCrLf & "Parte: " & Data2.Recordset.Fields(0)
-            Cad = Cad & vbCrLf & "Nota: " & Data2.Recordset.Fields(2) & "-" & Data2.Recordset.Fields(4)
+            cad = "¿Seguro que desea eliminar los kilos de la Nota?"
+            cad = cad & vbCrLf & "Parte: " & Data2.Recordset.Fields(0)
+            cad = cad & vbCrLf & "Nota: " & Data2.Recordset.Fields(2) & "-" & Data2.Recordset.Fields(4)
             
-            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Data2.Recordset.AbsolutePosition
@@ -3740,6 +4088,8 @@ Dim Sql As String
             Opcion = 2
         Case "DataGrid3" 'clasificacion
             Opcion = 3
+        Case "DataGrid4" 'clasificacion
+            Opcion = 4
     End Select
     
     Sql = MontaSQLCarga(enlaza, Opcion)
@@ -3786,7 +4136,7 @@ Dim tots As String
             tots = tots & "S|txtAux3(1)|T|Codigo|750|;S|btnBuscar(1)|B|||;"
             tots = tots & "S|Text2(3)|T|Nombre Trabajador|3000|;S|txtAux3(2)|T|Gasto|600|;S|btnBuscar(2)|B|||;S|Text2(4)|T|Descripcion Gasto|2435|;"
             tots = tots & "S|txtAux3(5)|T|Cód|600|;S|Text2(0)|T|Variedad|1500|;"
-            tots = tots & "S|txtAux3(3)|T|KilosRec|1000|;S|txtAux3(8)|T|Horas|720|;S|txtAux3(4)|T|Importe|1050|;N||||0|;"
+            tots = tots & "S|txtAux3(9)|T|Cajas|830|;S|txtAux3(3)|T|KilosRec|1000|;S|txtAux3(8)|T|Horas|720|;S|txtAux3(4)|T|Importe|1050|;N||||0|;"
             arregla tots, DataGrid2, Me
             
          Case "DataGrid3" 'rpartes_gastos (gastos generales del parte)
@@ -3796,6 +4146,16 @@ Dim tots As String
             tots = tots & "S|Text2(6)|T|Descripción Gasto|3000|;"
             tots = tots & "S|txtAux2(3)|T|Importe|1100|;"
             arregla tots, DataGrid3, Me
+         
+         Case "DataGrid4" 'rpartes_gastos (gastos generales del parte)
+'       SQL = SELECT nroparte, numlinea, codgasto, nomgasto, importe
+            tots = ""
+            tots = tots & "S|txtAux4(0)|T|Codigo|700|;"
+            tots = tots & "S|txtAux4(1)|T|Nombre Variedad|1800|;"
+            tots = tots & "S|txtAux4(2)|T|Cajas|1000|;"
+            tots = tots & "S|txtAux4(3)|T|Kilos|1000|;"
+            tots = tots & "S|txtAux4(4)|T|Importe|1200|;"
+            arregla tots, DataGrid4, Me
     
     End Select
     
@@ -3811,7 +4171,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
-Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
@@ -3829,7 +4189,7 @@ Dim Variedad As String
 Dim Capataz As String
 Dim CapatazParte  As String
 Dim numalbar As String
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 
@@ -3862,8 +4222,8 @@ Dim Rs As ADODB.Recordset
                         If Not Rs.EOF Then
                             Capataz = DBLet(Rs!codcapat, "N")
                         
-                            Cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
-                            CapatazParte = DevuelveValor(Cad)
+                            cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
+                            CapatazParte = DevuelveValor(cad)
                             If CStr(Capataz) <> CStr(CapatazParte) Or DBLet(Rs!FechaEnt, "F") <> Data1.Recordset.Fields(3) Then
                                 If MsgBox("Esta nota de campo no es del capataz del parte o no es de la fecha de entrada. ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
                                     txtAux(3).Text = DevuelveDesdeBDNew(cAgro, "rhisfruta", "codvarie", "numalbar", numalbar, "N")
@@ -4051,6 +4411,7 @@ On Error Resume Next
     CargaGrid DataGrid2, Data3, False 'entradas e incidencias
     CargaGrid DataGrid1, Data2, False
     CargaGrid DataGrid3, Me.Adoaux(0), False 'clasificacion
+    CargaGrid DataGrid4, Data2, False 'clasificacion
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -4112,7 +4473,7 @@ Dim Sql As String
         
     Case 2  ' rpartes_trabajador
         Sql = "SELECT rpartes_trabajador.nroparte, rpartes_trabajador.numlinea, rpartes_trabajador.codtraba, straba.nomtraba, rpartes_trabajador.codgasto, "
-        Sql = Sql & " rconcepgastonom.nomgasto, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.kilosrec, rpartes_trabajador.horastra, rpartes_trabajador.importe, rpartes_trabajador.modificado "
+        Sql = Sql & " rconcepgastonom.nomgasto, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.numcajas, rpartes_trabajador.kilosrec, rpartes_trabajador.horastra, rpartes_trabajador.importe, rpartes_trabajador.modificado "
         Sql = Sql & " FROM ((rpartes_trabajador INNER JOIN straba ON rpartes_trabajador.codtraba = straba.codtraba) "
         Sql = Sql & " LEFT JOIN rconcepgastonom ON rpartes_trabajador.codgasto = rconcepgastonom.codgasto) "
         Sql = Sql & " LEFT JOIN variedades ON rpartes_trabajador.codvarie = variedades.codvarie"
@@ -4122,6 +4483,13 @@ Dim Sql As String
         Sql = "SELECT rpartes_gastos.nroparte, rpartes_gastos.numlinea, rpartes_gastos.codgasto, rconcepgastonom.nomgasto, rpartes_gastos.importe "
         Sql = Sql & " FROM rpartes_gastos, rconcepgastonom "
         Sql = Sql & " WHERE rpartes_gastos.codgasto = rconcepgastonom.codgasto "
+        
+    Case 4  ' resumen
+        Sql = "select rpartes_trabajador.codvarie, variedades.nomvarie, sum(numcajas) cajas, sum(kilosrec) kilos , sum(importe) importe"
+        Sql = Sql & "  from rpartes_trabajador, variedades "
+        Sql = Sql & " where rpartes_trabajador.codvarie = variedades.codvarie "
+        
+        
     End Select
     
     If enlaza Then
@@ -4136,6 +4504,10 @@ Dim Sql As String
             Sql = Sql & " ORDER BY nroparte, codtraba, codvarie "
         Case 3
             Sql = Sql & " ORDER BY nroparte, numlinea "
+        Case 4
+            Sql = Sql & " group by 1, 2 "
+            Sql = Sql & " ORDER BY 1 "
+            
     End Select
     MontaSQLCarga = Sql
 End Function
@@ -4193,6 +4565,8 @@ Dim i As Integer
         End If
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
+        '[Monica]10/10/2016: nuevo boton para insertar los cajones
+        If i = 0 Then ToolAux(i).Buttons(4).Enabled = bAux
     Next i
 
 
@@ -4669,7 +5043,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim Cad As String
+Dim cad As String
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -4919,7 +5293,7 @@ End Sub
 '                    y el nro de horas que ha trabajado en el parte
 
 Private Function RecalcularImportesHoras() As Boolean
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -4954,10 +5328,10 @@ Dim KilosTrab As Long
     RecalcularImportesHoras = True
 
     
-    Cad = "Se va a proceder a recalcular los importes por trabajador según las horas. "
+    cad = "Se va a proceder a recalcular los importes por trabajador según las horas. "
 '    cad = cad & "los gastos generales introducidos. "
-    Cad = Cad & vbCrLf & "         ¿ Desea Continuar ? "
-    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    cad = cad & vbCrLf & "         ¿ Desea Continuar ? "
+    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         'mostramos cuales son los trabajadores de la cuadrilla que han de seleccionar para hacer el reparto
         
         Sql = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
@@ -5062,3 +5436,5 @@ eRecalcularImportes:
     RecalcularImportesHoras = False
     MuestraError Err.Number, "Recalcular Importes", Err.Description
 End Function
+
+

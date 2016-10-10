@@ -2412,7 +2412,7 @@ On Error GoTo eProcesarCambiosPicassent
     If Not Rs.EOF Then
         AntCodTraba = DBLet(Rs!CodTraba, "N")
         ActCodTraba = AntCodTraba
-        Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo, straba.impembargo from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
+        Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
         Sql2 = Sql2 & " and salarios.codcateg = straba.codcateg "
         
         Set Rs2 = New ADODB.Recordset
@@ -2477,7 +2477,7 @@ On Error GoTo eProcesarCambiosPicassent
         
             Set Rs2 = Nothing
             
-            Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo, straba.impembargo from salarios, straba where straba.codtraba = " & DBSet(ActCodTraba, "N")
+            Sql2 = "select salarios.*, straba.dtoreten, straba.dtosegso, straba.dtosirpf, straba.pluscapataz, straba.hayembargo from salarios, straba where straba.codtraba = " & DBSet(ActCodTraba, "N")
             Sql2 = Sql2 & " and salarios.codcateg = straba.codcateg "
             
             Set Rs2 = New ADODB.Recordset
