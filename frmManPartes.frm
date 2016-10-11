@@ -2245,7 +2245,7 @@ Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Facturas (scafac)
 ' y los registros correspondientes de las tablas cab. albaranes (scafac1)
 ' y las lineas de la factura (slifac)
-Dim cad As String
+Dim Cad As String
 'Dim vTipoMov As CTiposMov
 
     On Error GoTo EEliminar
@@ -2253,16 +2253,16 @@ Dim cad As String
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
     
-    cad = "Cabecera de Partes." & vbCrLf
-    cad = cad & "-------------------------------------      " & vbCrLf & vbCrLf
-    cad = cad & "Va a eliminar el Parte:            "
-    cad = cad & vbCrLf & "Nº Parte:  " & Format(Text1(0).Text, "0000000")
-    cad = cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    Cad = "Cabecera de Partes." & vbCrLf
+    Cad = Cad & "-------------------------------------      " & vbCrLf & vbCrLf
+    Cad = Cad & "Va a eliminar el Parte:            "
+    Cad = Cad & vbCrLf & "Nº Parte:  " & Format(Text1(0).Text, "0000000")
+    Cad = Cad & vbCrLf & "Fecha:  " & Format(Text1(1).Text, "dd/mm/yyyy")
 
-    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
+    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarlo? "
 
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
 '        On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
@@ -2296,7 +2296,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim cad As String
+Dim Cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -2310,9 +2310,9 @@ Dim cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        cad = Data1.Recordset.Fields(0) & "|"
-        cad = cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(0) & "|"
+        Cad = Cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -2650,7 +2650,7 @@ Private Sub mnRecalcularImportes_Click()
 End Sub
 
 Private Sub BotonRecalcularImportes()
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2659,7 +2659,7 @@ Dim Capataz As Long
     If RecalcularImportes Then
         CargaGrid DataGrid1, Data2, True
         CargaGrid DataGrid2, Data3, True
-        If vParamAplic.HayResumenCajas = 1 Then CargaGrid DataGrid4, Data3, True
+        If vParamAplic.HayResumenCajas = 1 Then CargaGrid DataGrid4, Data4, True
         PonerModo 2
     End If
     
@@ -2675,7 +2675,7 @@ End Sub
 
 
 Private Sub BotonTraerEntradas()
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2692,7 +2692,7 @@ End Sub
 
 
 Private Function TraerEntradas() As Boolean
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -2722,14 +2722,14 @@ Dim NumF As String
         End If
     End If
 
-    cad = "Se va a proceder a traer los kilos recolectados en la fecha de entrada."
+    Cad = "Se va a proceder a traer los kilos recolectados en la fecha de entrada."
     
     If Data2.Recordset.RecordCount <> 0 Then
-        cad = cad & vbCrLf & "Perderá los registros que actualmente tiene en Reparto de Kilos."
+        Cad = Cad & vbCrLf & "Perderá los registros que actualmente tiene en Reparto de Kilos."
     End If
-    cad = cad & vbCrLf & "  ¿ Desea Continuar ? "
+    Cad = Cad & vbCrLf & "  ¿ Desea Continuar ? "
     
-    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         
         conn.BeginTrans
         
@@ -2745,8 +2745,8 @@ Dim NumF As String
         
         conn.Execute Sql
     
-        cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
-        Capataz = DevuelveValor(cad)
+        Cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
+        Capataz = DevuelveValor(Cad)
         
         ' borramos anteriormente los registros de rpartes_variedad que hubieran
         Sql = "delete from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
@@ -2803,7 +2803,7 @@ Dim NumF As String
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        cad = ""
+        Cad = ""
         NumF = ""
         While Not Rs.EOF
             ' solo si no está insertada la nota de campo en otro parte la insertamos de nuevas
@@ -2812,11 +2812,11 @@ Dim NumF As String
             
             If TotalRegistros(Sql) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
-                cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
-                cad = cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!Numnotac, "N") & ","
-                cad = cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
+                Cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
+                Cad = Cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!Numnotac, "N") & ","
+                Cad = Cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
                 
-                conn.Execute cad
+                conn.Execute Cad
             End If
                 
             Rs.MoveNext
@@ -2852,7 +2852,7 @@ Dim NroTrabajadores As Long
 Dim KilosTrab As Long
 Dim Precio As Currency
 Dim ImporteTrab As Currency
-Dim cad As String
+Dim Cad As String
 Dim NumF As Long
 Dim PlusCapataz As Currency
         
@@ -2890,10 +2890,10 @@ Dim UltLinea As Integer
     End If
     
     
-    cad = "Se va a proceder a recalcular los importes por trabajador según los kilos recolectados y "
-    cad = cad & "los gastos generales introducidos. "
-    cad = cad & vbCrLf & "         ¿ Desea Continuar ? "
-    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    Cad = "Se va a proceder a recalcular los importes por trabajador según los kilos recolectados y "
+    Cad = Cad & "los gastos generales introducidos. "
+    Cad = Cad & vbCrLf & "         ¿ Desea Continuar ? "
+    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         'mostramos cuales son los trabajadores de la cuadrilla que han de seleccionar para hacer el reparto
         
 '        SQL = "select codcapat from rpartes, rcuadrilla where rpartes.codcuadrilla = " & Data1.Recordset.Fields(2).Value
@@ -3375,18 +3375,18 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
     '##A mano
-    cad = ""
-    cad = cad & "Parte|rpartes.nroparte|N|0000000|11·"
-    cad = cad & "Fecha|rpartes.fechapar|F||14·"
-    cad = cad & "Cuadrilla|rpartes.codcuadrilla|N|000000|10·"
-    cad = cad & "Capataz|rcuadrilla.codcapat|N|0000|10·"
-    cad = cad & "Nombre|rcapataz.nomcapat|N||55·"
+    Cad = ""
+    Cad = Cad & "Parte|rpartes.nroparte|N|0000000|11·"
+    Cad = Cad & "Fecha|rpartes.fechapar|F||14·"
+    Cad = Cad & "Cuadrilla|rpartes.codcuadrilla|N|000000|10·"
+    Cad = Cad & "Capataz|rcuadrilla.codcapat|N|0000|10·"
+    Cad = Cad & "Nombre|rcapataz.nomcapat|N||55·"
     
 '    Cad = Cad & "Cod|rhisfruta.codvarie|N||7·" 'ParaGrid(Text1(3), 10, "Cliente")
 '    Cad = Cad & "Nombre|variedades.nomvarie|N||20·"
@@ -3400,10 +3400,10 @@ Dim Desc As String, devuelve As String
     Titulo = "Partes de Campos"
     devuelve = "0|"
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -3483,13 +3483,13 @@ Dim i As Integer
         CargaGrid DataGrid2, Data3, True ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, True ' rpartes_variedad
         CargaGrid DataGrid3, Adoaux(0), True ' rpartes_gastos
-        CargaGrid DataGrid4, Data2, True ' rpartes_variedad
+        CargaGrid DataGrid4, Data4, True ' rpartes_variedad
         
     Else
         CargaGrid DataGrid2, Data3, False ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, False ' rpartes_variedad
         CargaGrid DataGrid3, Adoaux(0), False ' rpartes_gastos
-        CargaGrid DataGrid4, Data2, False ' rpartes_gastos
+        CargaGrid DataGrid4, Data4, False ' rpartes_gastos
     End If
     
     
@@ -3829,6 +3829,14 @@ Dim frmPartesCajas As frmManPartesCajas
     
     RepartoxCajas
     
+    TerminaBloquear
+    PosicionarData
+    
+    CargaGrid DataGrid1, Data2, True
+    CargaGrid DataGrid2, Data3, True
+    If vParamAplic.HayResumenCajas = 1 Then CargaGrid DataGrid4, Data4, True
+    PonerModo 2
+    
 
 End Sub
 
@@ -3850,14 +3858,21 @@ Dim Importe As Currency
 Dim Kilos As Long
 
     
-    Sql = "select codvarie, sum(coalesce(numcajas,0)) numcajas, sum(kilosrec) kilosrec, sum(importe) importe from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
+    Sql = "select codvarie, sum(coalesce(numcajas,0)) numcajas, sum(coalesce(kilosrec,0)) kilos, sum(coalesce(importe,0)) importe from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " group by 1 order by 1"
+    
+    Sql2 = "select sum(numcajas) from (" & Sql & ") aaaaa"
+    If DevuelveValor(Sql2) = 0 Then Exit Sub
+    
+    
+    
     Set Rs = New ADODB.Recordset
     
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        TotalCajas = DBLet(Rs!NumCajas)
-        TotalImporte = DBLet(Rs!Importe)
-        TotalKilos = DBLet(Rs!KilosRec)
+        TotalCajas = DBLet(Rs.Fields(1))
+        TotalKilos = DBLet(Rs.Fields(2))
+        TotalImporte = DBLet(Rs.Fields(3))
     
         TImporte = 0
         TKilos = 0
@@ -3870,19 +3885,19 @@ Dim Kilos As Long
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs2.EOF
             Importe = Round2(DBLet(Rs2!NumCajas, "N") * TotalImporte / TotalCajas, 2)
-            Kilos = Round2(DBLet(Rs2!KilosRec, "N") & TotalImporte / TotalKilos, 0)
+            Kilos = Round2(DBLet(Rs2!NumCajas, "N") * TotalKilos / TotalCajas, 0)
             
             Sql = "update rpartes_trabajador set importe = " & DBSet(Importe, "N")
-            Sql = Sql & " , kilos = " & DBSet(Kilos, "N")
+            Sql = Sql & " , kilosrec = " & DBSet(Kilos, "N")
             Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
-            Sql = Sql & " and numlinea = " & DBSet(Rs!numlinea, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Rs2!numlinea, "N")
             
             conn.Execute Sql
             
             TImporte = TImporte + Importe
             TKilos = TKilos + Kilos
         
-            NumLin = DBLet(Rs!numlinea, "N")
+            NumLin = DBLet(Rs2!numlinea, "N")
             
             Rs2.MoveNext
         Wend
@@ -3890,7 +3905,7 @@ Dim Kilos As Long
         
         If TImporte <> TotalImporte Or TKilos <> TotalKilos Then
             Sql = "update rpartes_trabajador set importe = importe + " & DBSet(TotalImporte - TImporte, "N")
-            Sql = Sql & ", kilos = kilos + " & DBSet(TotalKilos - TKilos, "N")
+            Sql = Sql & ", kilosrec = kilosrec + " & DBSet(TotalKilos - TKilos, "N")
             Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
             Sql = Sql & " and numlinea = " & DBSet(NumLin, "N")
             
@@ -3909,7 +3924,7 @@ Dim Kilos As Long
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 
     On Error GoTo EEliminarLinea
@@ -3927,16 +3942,16 @@ Dim Sql As String
         Case 0 'gastos individuales
             'comprobamos que la linea de gastos trabajador no es de kilos
             If Not SePuedeModificarLinea(CStr(Data3.Recordset.Fields(0).Value), CStr(Data3.Recordset.Fields(1).Value)) Then
-                cad = "¿Seguro que desea eliminar la Linea?"
-                cad = cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
+                Cad = "¿Seguro que desea eliminar la Linea?"
+                Cad = Cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
             Else
                 ' *************** canviar la pregunta ****************
-                cad = "¿Seguro que desea eliminar el Gasto Individual?"
-                cad = cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
+                Cad = "¿Seguro que desea eliminar el Gasto Individual?"
+                Cad = Cad & vbCrLf & "Parte: " & Data3.Recordset.Fields(0)
             End If
         
             
-            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Data3.Recordset.AbsolutePosition
@@ -3956,11 +3971,11 @@ Dim Sql As String
             Screen.MousePointer = vbDefault
        Case 1 'gastos del parte
             ' *************** canviar la pregunta ****************
-            cad = "¿Seguro que desea eliminar el Gasto del Parte?"
-            cad = cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
-            cad = cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
+            Cad = "¿Seguro que desea eliminar el Gasto del Parte?"
+            Cad = Cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
+            Cad = Cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
             
-            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Adoaux(0).Recordset.AbsolutePosition
@@ -3979,11 +3994,11 @@ Dim Sql As String
        
         Case 2 ' variedades
             ' *************** canviar la pregunta ****************
-            cad = "¿Seguro que desea eliminar los kilos de la Nota?"
-            cad = cad & vbCrLf & "Parte: " & Data2.Recordset.Fields(0)
-            cad = cad & vbCrLf & "Nota: " & Data2.Recordset.Fields(2) & "-" & Data2.Recordset.Fields(4)
+            Cad = "¿Seguro que desea eliminar los kilos de la Nota?"
+            Cad = Cad & vbCrLf & "Parte: " & Data2.Recordset.Fields(0)
+            Cad = Cad & vbCrLf & "Nota: " & Data2.Recordset.Fields(2) & "-" & Data2.Recordset.Fields(4)
             
-            If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Data2.Recordset.AbsolutePosition
@@ -4171,7 +4186,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
@@ -4189,7 +4204,7 @@ Dim Variedad As String
 Dim Capataz As String
 Dim CapatazParte  As String
 Dim numalbar As String
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 
@@ -4222,8 +4237,8 @@ Dim Rs As ADODB.Recordset
                         If Not Rs.EOF Then
                             Capataz = DBLet(Rs!codcapat, "N")
                         
-                            cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
-                            CapatazParte = DevuelveValor(cad)
+                            Cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
+                            CapatazParte = DevuelveValor(Cad)
                             If CStr(Capataz) <> CStr(CapatazParte) Or DBLet(Rs!FechaEnt, "F") <> Data1.Recordset.Fields(3) Then
                                 If MsgBox("Esta nota de campo no es del capataz del parte o no es de la fecha de entrada. ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
                                     txtAux(3).Text = DevuelveDesdeBDNew(cAgro, "rhisfruta", "codvarie", "numalbar", numalbar, "N")
@@ -4411,7 +4426,7 @@ On Error Resume Next
     CargaGrid DataGrid2, Data3, False 'entradas e incidencias
     CargaGrid DataGrid1, Data2, False
     CargaGrid DataGrid3, Me.Adoaux(0), False 'clasificacion
-    CargaGrid DataGrid4, Data2, False 'clasificacion
+    CargaGrid DataGrid4, Data4, False 'clasificacion
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -5043,7 +5058,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim cad As String
+Dim Cad As String
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -5293,7 +5308,7 @@ End Sub
 '                    y el nro de horas que ha trabajado en el parte
 
 Private Function RecalcularImportesHoras() As Boolean
-Dim cad As String
+Dim Cad As String
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -5328,10 +5343,10 @@ Dim KilosTrab As Long
     RecalcularImportesHoras = True
 
     
-    cad = "Se va a proceder a recalcular los importes por trabajador según las horas. "
+    Cad = "Se va a proceder a recalcular los importes por trabajador según las horas. "
 '    cad = cad & "los gastos generales introducidos. "
-    cad = cad & vbCrLf & "         ¿ Desea Continuar ? "
-    If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+    Cad = Cad & vbCrLf & "         ¿ Desea Continuar ? "
+    If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         'mostramos cuales son los trabajadores de la cuadrilla que han de seleccionar para hacer el reparto
         
         Sql = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value

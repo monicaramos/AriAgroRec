@@ -324,10 +324,10 @@ Dim gridCargado As Boolean 'Si el DataGrid ya tiene todos los Datos cargados.
 Dim PrimeraVez As Boolean
 
 Private HaDevueltoDatos As Boolean
-
+Dim DVariedad  As Dictionary
 
 Private Sub cmdAceptar_Click()
-Dim cad As String
+Dim Cad As String
 
     On Error GoTo Error1
     
@@ -392,7 +392,7 @@ Dim i As Integer
     
     Text1(0).Text = Format(NroParte, "0000000")
 
-'    CargarTemporal
+    CargarTemporal
 
     PrimeraVez = True
 
@@ -404,19 +404,52 @@ End Sub
 
 Private Sub CargarTemporal()
 Dim Sql As String
-
+Dim Rs As ADODB.Recordset
+Dim Sql2 As String
+Dim NumCajas As Long
 
     Sql = "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
     conn.Execute Sql
     
-    Sql = "insert into tmpinformes (codusu, campo1, nombre1, campo2, nombre2, importe1) select " & vUsu.Codigo & ","
-    Sql = Sql & " rpartes_trabajador.codtraba, straba.nomtraba, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.numcajas "
-    Sql = Sql & " FROM (rpartes_trabajador INNER JOIN straba on rpartes_trabajador.codtraba=straba.codtraba) INNER JOIN variedades ON rpartes_trabajador.codvarie = variedades.codvarie"
-    Sql = Sql & " WHERE rpartes_trabajador.nroparte = " & Text1(0).Text
-    Sql = Sql & " ORDER BY rpartes_trabajador.codtraba, rpartes_trabajador.codvarie"
+    Sql = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute Sql
+    
+    Set DVariedad = New Dictionary
+    
+'    Sql = "insert into tmpinformes (codusu, campo1, nombre1, campo2, nombre2, importe1) select " & vUsu.Codigo & ","
+'    Sql = Sql & " rpartes_trabajador.codtraba, straba.nomtraba, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.numcajas "
+'    Sql = Sql & " FROM (rpartes_trabajador INNER JOIN straba on rpartes_trabajador.codtraba=straba.codtraba) INNER JOIN variedades ON rpartes_trabajador.codvarie = variedades.codvarie"
+'    Sql = Sql & " WHERE rpartes_trabajador.nroparte = " & Text1(0).Text
+'    Sql = Sql & " ORDER BY rpartes_trabajador.codtraba, rpartes_trabajador.codvarie"
+
+    Sql = "insert into tmpinformes (codusu, codigo1, importe1) select " & vUsu.Codigo & ", rpartes_variedad.codvarie, 0 from rpartes_variedad "
+    Sql = Sql & " where rpartes_variedad.nroparte = " & DBSet(Text1(0).Text, "N") & " group by 1,2 "
 
     conn.Execute Sql
-
+    
+    Sql = "select codigo1 from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N") & " order by 1 "
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        Sql2 = "select sum(numcajas) from rclasifica where numnotac in (select numnotac from rpartes_variedad where nroparte = " & DBSet(Text1(0).Text, "N") & ")"
+        Sql2 = Sql2 & " and codvarie =  " & DBSet(Rs!Codigo1, "N")
+        NumCajas = DevuelveValor(Sql2)
+        
+        Sql2 = "select sum(rhisfruta_entradas.numcajon) from rhisfruta_entradas inner join rhisfruta on rhisfruta_entradas.numalbar = rhisfruta.numalbar where rhisfruta_entradas.numnotac in (select numnotac from rpartes_variedad where nroparte = " & DBSet(Text1(0).Text, "N") & ")"
+        Sql2 = Sql2 & " and rhisfruta.codvarie = " & DBSet(Rs!Codigo1, "N")
+        NumCajas = NumCajas + DevuelveValor(Sql2)
+        
+        Sql2 = "update tmpinformes set importe1 = " & DBSet(NumCajas, "N") & " where codusu = " & DBSet(vUsu.Codigo, "N") & " and codigo1 = " & DBSet(Rs!Codigo1, "N")
+        conn.Execute Sql2
+        
+        DVariedad(DBLet(Rs!Codigo1, "N")) = NumCajas
+        
+        Rs.MoveNext
+    Wend
+    Set Rs = Nothing
+    
+    
 End Sub
 
 
@@ -513,6 +546,44 @@ Dim alto As Single
 End Sub
 
 
+Private Sub Form_Unload(Cancel As Integer)
+Dim Mens As String
+
+    Cancel = 0
+    Mens = ""
+    If Not CajasCorrectas(Mens) Then
+        MsgBox "Las cajas asignadas a los trabajadores no coinciden con la suma de las notas. Revise" & vbCrLf & vbCrLf & Mens, vbExclamation
+        
+        If MsgBox("¿ Desea salir igualmente ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Cancel = 1
+    End If
+End Sub
+
+Private Function CajasCorrectas(ByRef Mens As String) As Boolean
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eCajasCorrectas
+
+    CajasCorrectas = False
+
+    Sql = "select rpartes_trabajador.codvarie,variedades.nomvarie, sum(numcajas) from rpartes_trabajador inner join variedades on rpartes_trabajador.codvarie = variedades.codvarie where nroparte = " & DBSet(NroParte, "N")
+    Sql = Sql & " group by 1,2 order by 1,2 "
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not Rs.EOF
+        If DVariedad(DBLet(Rs!codvarie)) <> DBLet(Rs.Fields(2)) Then
+            Mens = Mens & "Variedad " & Rs.Fields(1) & " cajas asignadas " & Rs.Fields(2) & ", reales " & DVariedad(DBLet(Rs!codvarie)) & vbCrLf
+        End If
+        Rs.MoveNext
+    Wend
+    Set Rs = Nothing
+    If Mens = "" Then CajasCorrectas = True
+    Exit Function
+eCajasCorrectas:
+    MuestraError Err.Number, "Comprobacion cajas correctas", Err.Description
+End Function
+
 
 Private Sub Text1_GotFocus(Index As Integer)
     ConseguirFoco Text1(Index), Modo
@@ -535,7 +606,7 @@ Private Sub txtAux_GotFocus()
     ConseguirFocoLin txtAux
 End Sub
 
-Private Sub TxtAux_KeyDown(KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(KeyCode As Integer, Shift As Integer)
 On Error GoTo EKeyD
     If KeyCode = 38 Or KeyCode = 40 Then
         ModificarExistencia
@@ -732,8 +803,13 @@ Private Function DatosOk() As Boolean
     txtAux.Text = Trim(txtAux.Text)
 
     If txtAux.Text <> "" And EsNumerico(txtAux.Text) Then
-        If PonerFormatoDecimal(txtAux, 1) Then
-            DatosOk = True
+        If PonerFormatoEntero(txtAux) Then
+'            If CLng(txtAux) > DVariedad(Data1.Recordset!codvarie) Then
+'                MsgBox "Ha sobrepasado el numero de cajas por variedad. Revise.", vbExclamation
+'                DatosOk = False
+'            Else
+                DatosOk = True
+'            End If
         Else
             DatosOk = False
         End If
@@ -772,6 +848,9 @@ Dim ADonde As String
     Sql = Sql & " codvarie = " & Data1.Recordset!codvarie & " and "
     Sql = Sql & " nroparte =" & Val(Text1(0).Text)
     conn.Execute Sql
+    
+'    DVariedad(Data1.Recordset!codvarie) = DVariedad(Data1.Recordset!codvarie) - Canti
+    
     
 '    Sql = "update tmpinformes set importe1 = " & DBSet(Canti, "N")
 '    Sql = Sql & " where codusu = " & DBSet(vUsu.Codigo, "N")
@@ -813,6 +892,7 @@ Dim Indicador As String
 
     If DatosOk Then
         If ActualizarExistencia(txtAux.Text) Then
+        
             TerminaBloquear
             NumReg = Data1.Recordset.AbsolutePosition
             CargaGrid True
