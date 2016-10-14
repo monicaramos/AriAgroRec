@@ -566,7 +566,7 @@ Begin VB.Form frmEntBascula
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   5
-         Left            =   1380
+         Left            =   1350
          MaxLength       =   8
          TabIndex        =   6
          Tag             =   "Código Campo|N|N|1|99999999|rentradas|codcampo|00000000|N|"
@@ -620,12 +620,12 @@ Begin VB.Form frmEntBascula
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   2
-         Left            =   1410
+         Left            =   1380
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rentradas|codvarie|0000||"
          Top             =   520
-         Width           =   840
+         Width           =   870
       End
       Begin VB.TextBox Text3 
          Alignment       =   1  'Right Justify
@@ -1451,6 +1451,7 @@ Public ImpresoraDefecto As String
 
 Dim Lineas As Collection
 Dim NF As Integer
+Dim CampoAnt As String
 
 
 Private Sub cmdAceptar_Click()
@@ -2642,6 +2643,9 @@ Private Sub BotonAnyadir()
     ' *** si n'hi han tabs, em posicione al 1r ***
     Me.SSTab1.Tab = 0
     ' ********************************************
+    
+    CampoAnt = ""
+    
 End Sub
 
 
@@ -2664,6 +2668,9 @@ Private Sub BotonModificar()
 
     NumKilosAnt = CCur(ComprobarCero(Text1(11).Text))
     PonerModo 4
+
+    CampoAnt = Text1(5).Text
+
 
     ' *** bloquejar els camps visibles de la clau primaria de la capçalera ***
     BloquearTxt Text1(0), True
@@ -3901,6 +3908,7 @@ Private Sub imgBuscar_Click(Index As Integer)
 ''            frmCamp.CodigoActual = Text1(5).Text
 '            frmCamp.Show vbModal
 '            Set frmCamp = Nothing
+            CampoAnt = Text1(5).Text
             PonerCamposSocioVariedad
             PonerFoco Text1(5)
     
@@ -4561,6 +4569,10 @@ Dim Rs As ADODB.Recordset
     
     If Text1(1).Text = "" Or Text1(2).Text = "" Then Exit Sub
 
+    '[Monica]13/10/2016:
+    If CampoAnt <> Text1(5).Text And CampoAnt <> "" Then Exit Sub
+
+
     Cad = "rcampos.codsocio = " & DBSet(Text1(1).Text, "N") & " and rcampos.fecbajas is null"
     Cad = Cad & " and rcampos.codvarie = " & DBSet(Text1(2).Text, "N")
      
@@ -4570,13 +4582,14 @@ Dim Rs As ADODB.Recordset
     
 '    If NumRegis = 0 Then Exit Sub
 '    If NumRegis = 1 Then
-        Cad1 = "select codcampo from rcampos where " & Cad
-        Set Rs = New ADODB.Recordset
-        Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not Rs.EOF Then
-            Text1(5).Text = DBLet(Rs.Fields(0).Value)
-            PonerDatosCampo Text1(5).Text
-        End If
+
+'        Cad1 = "select codcampo from rcampos where " & Cad
+'        Set Rs = New ADODB.Recordset
+'        Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'        If Not Rs.EOF Then
+'            Text1(5).Text = DBLet(Rs.Fields(0).Value)
+'            PonerDatosCampo Text1(5).Text
+'        End If
 '    Else
         Set frmMens = New frmMensajes
         frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
