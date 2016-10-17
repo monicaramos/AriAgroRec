@@ -3772,16 +3772,20 @@ Dim Ordinal As Integer
         
             SeInserta = (TotalRegistros(Sql) = 0)
         
-            Sql = "select max(ordinal) + 1 from rclasifauto where codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql = Sql & " and numnotac = " & DBSet(Notaca, "N")
-            Sql = Sql & " and fechacla = " & DBSet(Rs!FechaEnt, "F")
+            If Situacion <> 2 Then
+                Sql = "select max(ordinal) + 1 from rclasifauto where codsocio = " & DBSet(Rs!Codsocio, "N")
+                Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " and numnotac = " & DBSet(Notaca, "N")
+                Sql = Sql & " and fechacla = " & DBSet(Rs!FechaEnt, "F")
+                
             
-        
-            Ordinal = DevuelveValor(Sql)
-            If Ordinal = 0 Then Ordinal = 1
-        
+                Ordinal = DevuelveValor(Sql)
+                If Ordinal = 0 Then Ordinal = 1
+            Else
+                Ordinal = 1
+            End If
+            
         
         
 '            If SeInserta Then

@@ -338,6 +338,10 @@ Private mvarSqlServer1 As String ' Servidor de SqlServer de Castellduc CASTELLDU
 '[Monica]10/10/2016: hay resumen por variedad de cajas, kilos e importes en el mto de partes de trabajo
 Private mvarHayResumenCajas As Byte
 
+Private mvarPathEntradas As String     ' path de impresion de entradas
+
+
+
 '------------------------------------------------
 'Propiedades del modulo CParamAplic
 '------------------------------------------------
@@ -2142,6 +2146,19 @@ End Property
 
 
 
+'path de impresion de entradas
+
+Public Property Let PathEntradas(ByVal vData As String)
+     mvarPathEntradas = vData
+End Property
+
+Public Property Get PathEntradas() As String
+     PathEntradas = mvarPathEntradas
+End Property
+
+
+
+
 
 '------------------------------------------------
 'FUNCIONES del modulo Cparametros
@@ -2427,6 +2444,11 @@ On Error GoTo Err3
         
         '[Monica]10/10/2016: resumen de cajas en el mto de partes de trabajo
         mvarHayResumenCajas = DBLet(Rs!HayResumenCajas, "N") ' Hay Resumen Cajas
+                
+        '[Monica]17/10/2016: directorio de grabacion de entradas
+        mvarPathEntradas = DBLet(Rs!directorioentradas, "T") ' directorio de impresion de entradas
+        
+        
         
         Leer = 0
     End If
@@ -2732,6 +2754,12 @@ On Error GoTo eModificar
     '[Monica]21/04/2016:
     Sql = Sql & ", sqlserver= " & DBSet(mvarSqlServer, "T") ' SqlServer de Castellduc CASTELLDUCS1-O5
     Sql = Sql & ", sqlserver1= " & DBSet(mvarSqlServer1, "T") ' SqlServer 1 de Castellduc CASTELLDUCS2-O5
+    
+    '[Monica]17/10/2016: directorio de impresion de entradas
+    Sql = Sql & ", directorioentradas= " & DBSet(Replace(mvarPathEntradas, "\", "\\"), "T") ' path ficheros de impresino de entradas
+    
+    
+    
     
 '    SQL = SQL & " WHERE codparam =" & Codigo & ";"
 

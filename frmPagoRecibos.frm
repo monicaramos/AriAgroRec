@@ -582,11 +582,10 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 Private Sub cmdAceptar_Click(Index As Integer)
@@ -1981,6 +1980,7 @@ Private Sub LlamarImprimir()
         .EnvioEMail = False
         .NombreRPT = cadNombreRPT
         .Opcion = 0
+        .ConSubInforme = True
         .Show vbModal
     End With
 End Sub
@@ -2451,12 +2451,15 @@ On Error GoTo eProcesarCambiosPicassent
                 
                 conn.Execute Sql3
         
+                Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
+                Sql3 = Sql3 & DBSet(txtcodigo(16).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
+                
+                conn.Execute Sql3
+        
+        
+        
                 '[Monica]26/09/2016: si no hay embargo le pagamos
                 If DBLet(Rs2!HayEmbargo) = 0 Then
-                    Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
-                    Sql3 = Sql3 & DBSet(txtcodigo(16).Text, "F") & "," & DBSet(TNeto34, "N") & ")"
-                    
-                    conn.Execute Sql3
                     
                     Sql3 = "insert into tmpImpor (codtraba, importe) values ("
                     Sql3 = Sql3 & DBSet(AntCodTraba, "N") & "," & DBSet(ImporteSinFormato(CStr(TNeto34)), "N") & ")"
@@ -2541,12 +2544,14 @@ On Error GoTo eProcesarCambiosPicassent
             
             conn.Execute Sql3
     
+            Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
+            Sql3 = Sql3 & DBSet(txtcodigo(16).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
+            
+            conn.Execute Sql3
+            
+            
             '[Monica]26/09/2016: si no hay embargo le pagamos
             If DBLet(Rs2!HayEmbargo) = 0 Then
-                Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
-                Sql3 = Sql3 & DBSet(txtcodigo(16).Text, "F") & "," & DBSet(TNeto34, "N") & ")"
-                
-                conn.Execute Sql3
                 
                 Sql3 = "insert into tmpImpor (codtraba, importe) values ("
                 Sql3 = Sql3 & DBSet(AntCodTraba, "N") & "," & DBSet(ImporteSinFormato(CStr(TNeto34)), "N") & ")"
@@ -2609,14 +2614,28 @@ On Error GoTo eProcesarCambiosPicassent
         Mens = "Copiar fichero"
         If CopiarFichero Then
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
-            CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|"
-            numParam = 3
-            cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo
+            CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|" & "pImpagados=0|"
+            numParam = 4
+            cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 0"
             cadNombreRPT = "rListadoPagos.rpt"
             cadTitulo = "Impresion de Pagos"
-            ConSubInforme = False
+            ConSubInforme = True
 
             LlamarImprimir
+            
+            '[Monica]17/10/2016: impresion de los impagados de Picassent
+            Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
+            If CInt(DevuelveValor(Sql)) <> 0 Then
+                CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
+                CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|" & "pImpagados=1|"
+                numParam = 4
+                cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 1"
+                cadNombreRPT = "rListadoPagos.rpt"
+                cadTitulo = "Impresion de Impagos"
+                ConSubInforme = True
+    
+                LlamarImprimir
+            End If
             
             If Not Repetir Then
                 If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then

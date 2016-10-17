@@ -410,13 +410,49 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 Dim Ok As Boolean
 
+Dim CadFormulaImp As String
+
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 2, cerrar
+    If cerrar Then Unload Me
 End Sub
+
+Private Function DatosOk() As Boolean
+Dim b As Boolean
+
+    DatosOk = False
+    
+    If vParamAplic.Cooperativa = 2 Then
+        If txtCodigo(4).Text = "" Or txtCodigo(5).Text = "" Then
+            MsgBox "Debe introducir las fechas. Revise.", vbExclamation
+            PonerFoco txtCodigo(4)
+            Exit Function
+        Else
+            If txtCodigo(4).Text <> txtCodigo(5).Text Then
+                MsgBox "Debe introducir la misma fecha desde y hasta. Revise.", vbExclamation
+                PonerFoco txtCodigo(4)
+                Exit Function
+            End If
+        End If
+        
+        If vParamAplic.PathEntradas = "" Then
+            MsgBox "No está configurado el path de impresión de entradas. Revise.", vbExclamation
+            Exit Function
+        Else
+            If Dir(vParamAplic.PathEntradas & "\", vbDirectory) = "" Then
+                MsgBox "No existe el directorio seleccionado para impresión de entradas. Revise.", vbExclamation
+                Exit Function
+            End If
+        End If
+        
+    End If
+    
+    DatosOk = True
+    
+End Function
+
 
 Private Sub cmdAceptar_Click(Index As Integer)
 Dim cOrden As String
@@ -425,6 +461,10 @@ Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim numOp As Byte
 Dim HayReg As Boolean
 Dim cadena As String
+    
+    '[Monica]17/10/2016: si es Picassent obligamos a que me pongan una fecha de maximo 1 dia
+    If Not DatosOk Then Exit Sub
+    
     
     InicializarVbles
     
@@ -458,6 +498,8 @@ Dim cadena As String
                 TipCod = "N"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
             End If
+
+            CadFormulaImp = cadFormula
 
             'D/H fecha
             cDesde = Trim(txtCodigo(4).Text)
@@ -670,6 +712,11 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
         Case 4, 5 'FECHAS
             If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            
+            '[Monica]17/10/2016: obligamos a meter la misma fecha si es Picassent
+            If vParamAplic.Cooperativa = 2 Then
+                If Index = 4 Then txtCodigo(5).Text = txtCodigo(4).Text
+            End If
             
         Case 2, 3 'VARIEDADES
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
@@ -914,6 +961,8 @@ Dim Retirada As Boolean
 Dim Destrio As Boolean
 Dim PorcenDestrio As Currency
 
+Dim fr As frmVisReport
+
     On Error GoTo eActualizarTabla
     
     ActualizarTabla = False
@@ -946,6 +995,49 @@ Dim PorcenDestrio As Currency
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
+    '[Monica]17/10/2016: para el caso de Picassent vamos a imprimir las todas las entradas en un fichero pdf  yyyymmddhhmmss.pdf
+'*****
+    If vParamAplic.Cooperativa = 2 Then
+    
+        lblProgres.Caption = "Impresión de entradas"
+        DoEvents
+    
+    
+        Set fr = New frmVisReport
+        
+        Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
+        Dim nomDocu As String 'Nombre de Informe rpt de crystal
+        Dim ImprimeDirecto As Integer
+        
+        
+        '++monica: seleccionamos que rpt se ha de ejecutar
+    
+    '            cadParam = "pEmpresa=""AriagroRec""|"
+        CadParam = ""
+        numParam = 1
+        
+        indRPT = 25
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then
+            conn.RollbackTrans
+            Exit Function
+        End If
+        '++
+        fr.NumeroParametros = numParam
+        fr.OtrosParametros = CadParam
+        fr.ConSubInforme = True
+        fr.Informe = App.Path & "\Informes\" & nomDocu
+        fr.FormulaSeleccion = "{rentradas.fechaent} = Date(" & Mid(txtCodigo(4).Text, 7, 4) & _
+                                                    "," & Mid(txtCodigo(4).Text, 4, 2) & _
+                                                    "," & Mid(txtCodigo(4).Text, 1, 2) & ")"
+                                                    
+        If CadFormulaImp <> "" Then fr.FormulaSeleccion = fr.FormulaSeleccion & " and " & CadFormulaImp
+        
+        fr.FicheroPDF = vParamAplic.PathEntradas & "\" & Mid(txtCodigo(4), 7, 4) & Mid(txtCodigo(4), 4, 2) & Mid(txtCodigo(4), 1, 2) & "_" & Format(Now, "hhmmss") & ".pdf"
+        Load fr 'trabaja sin mostrar el formulario
+        
+    End If
+'*****
+    
     Pesadas = "("
     
     i = 0
