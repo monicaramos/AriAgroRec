@@ -1298,7 +1298,7 @@ Begin VB.Form frmManPartes
       Style           =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   17
+         NumButtons      =   18
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Buscar"
             Object.Width           =   1e-4
@@ -1335,12 +1335,10 @@ Begin VB.Form frmManPartes
             Object.ToolTipText     =   "Recalcular Importes"
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
             Style           =   3
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Object.ToolTipText     =   "Inf.Días Trabajados"
          EndProperty
          BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Enabled         =   0   'False
@@ -1348,21 +1346,24 @@ Begin VB.Form frmManPartes
             Style           =   3
          EndProperty
          BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Salir"
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Style           =   3
+         EndProperty
+         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Primero"
             ImageIndex      =   6
          EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Anterior"
             ImageIndex      =   7
          EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Siguiente"
             ImageIndex      =   8
          EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Object.ToolTipText     =   "Último"
             ImageIndex      =   9
          EndProperty
@@ -1614,6 +1615,13 @@ Begin VB.Form frmManPartes
          Shortcut        =   ^R
       End
       Begin VB.Menu mnBarra3 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnInforme 
+         Caption         =   "&Informe Días Trabajados"
+         Shortcut        =   ^I
+      End
+      Begin VB.Menu mnBarra4 
          Caption         =   "-"
       End
       Begin VB.Menu mnSalir 
@@ -2356,7 +2364,7 @@ Dim i As Integer
     Next kCampo
 
     ' ICONITOS DE LA BARRA
-    btnPrimero = 14
+    btnPrimero = 15
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
@@ -2368,7 +2376,8 @@ Dim i As Integer
         .Buttons(6).Image = 5   'Borrar
         .Buttons(8).Image = 33  'Traer entradas
         .Buttons(9).Image = 31  'Recalcular importes
-        .Buttons(11).Image = 11  'Salir
+        .Buttons(11).Image = 10 'Informe de dias trabajados
+        .Buttons(13).Image = 11  'Salir
         .Buttons(btnPrimero).Image = 6  'Primero
         .Buttons(btnPrimero + 1).Image = 7 'Anterior
         .Buttons(btnPrimero + 2).Image = 8 'Siguiente
@@ -2633,12 +2642,10 @@ Private Sub mnEliminar_Click()
     End If
 End Sub
 
-Private Sub mnImprimir_Click()
-'Imprimir Factura
-    
-    If Data1.Recordset.EOF Then Exit Sub
-        
-    BotonImprimir
+
+
+Private Sub mnInforme_Click()
+    AbrirListadoNominas (39) 'Informe dias trabajados
 End Sub
 
 Private Sub mnRecalcularImportes_Click()
@@ -4045,7 +4052,11 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         
         Case 9  ' Recalcular importes
             mnRecalcularImportes_Click
-        Case 11   'Salir
+            
+        Case 11 ' Informe de dias trabajados
+            mnInforme_Click
+            
+        Case 13   'Salir
             mnSalir_Click
         Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
             Desplazamiento (Button.Index - btnPrimero)
