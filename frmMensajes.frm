@@ -2801,37 +2801,47 @@ Dim vSuperficie As Currency
     If Not DatosOk Then Exit Sub
 
 
-    CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
-    vSuperficie = 0
+    Sql = "select codcampo from rcampos where "
+    Sql = Sql & " poligono = " & DBSet(Text8(4).Text, "N")
+    Sql = Sql & " and parcela = " & DBSet(Text8(5).Text, "N")
+    Sql = Sql & " and subparce = " & DBSet(Text8(6).Text, "T")
 
-    Sql = "select max(codcampo) from rcampos "
-    NroCampo = DevuelveValor(Sql) + 1
+    NroCampo = DevuelveValor(Sql)
 
-    ' insertamos en la tabla de rhisfruta
-    Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
-    Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
-    Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
-    Sql = Sql & DBSet(NroCampo, "N") & ","
-    Sql = Sql & DBSet(Text8(1).Text, "N") & ","
-    Sql = Sql & DBSet(Text8(1).Text, "N") & ","
-    Sql = Sql & DBSet(Text8(2).Text, "N") & ","
-    Sql = Sql & DBSet(Text8(3).Text, "N") & ","
-    Sql = Sql & DBSet(CodZona, "N") & ","
-    Sql = Sql & DBSet(Now, "F") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & "0," ' situacion
-    Sql = Sql & DBSet(Text8(4).Text, "N") & ","
-    Sql = Sql & DBSet(Text8(5).Text, "N") & ","
-    Sql = Sql & DBSet(Text8(6).Text, "T") & ","
-    Sql = Sql & "0,0,0,"
-    Sql = Sql & DBSet(NroCampo, "N") & ","
-    Sql = Sql & "0)"
+    If NroCampo = 0 Then
     
-    conn.Execute Sql
+        CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
+        vSuperficie = 0
     
+        Sql = "select max(codcampo) from rcampos "
+        NroCampo = DevuelveValor(Sql) + 1
+    
+        ' insertamos en la tabla de rhisfruta
+        Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
+        Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
+        Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
+        Sql = Sql & DBSet(NroCampo, "N") & ","
+        Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+        Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+        Sql = Sql & DBSet(Text8(2).Text, "N") & ","
+        Sql = Sql & DBSet(Text8(3).Text, "N") & ","
+        Sql = Sql & DBSet(CodZona, "N") & ","
+        Sql = Sql & DBSet(Now, "F") & ","
+        Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
+        Sql = Sql & DBSet(vSuperficie, "N") & ","
+        Sql = Sql & DBSet(vSuperficie, "N") & ","
+        Sql = Sql & DBSet(vSuperficie, "N") & ","
+        Sql = Sql & "0," ' situacion
+        Sql = Sql & DBSet(Text8(4).Text, "N") & ","
+        Sql = Sql & DBSet(Text8(5).Text, "N") & ","
+        Sql = Sql & DBSet(Text8(6).Text, "T") & ","
+        Sql = Sql & "0,0,0,"
+        Sql = Sql & DBSet(NroCampo, "N") & ","
+        Sql = Sql & "0)"
+        
+        conn.Execute Sql
+    
+    End If
     RaiseEvent DatoSeleccionado(CStr(NroCampo))
     Unload Me
     
@@ -3377,7 +3387,7 @@ End Sub
 
 
 Private Sub Form_Activate()
-Dim Ok As Boolean
+Dim OK As Boolean
 
     
     Select Case OpcionMensaje

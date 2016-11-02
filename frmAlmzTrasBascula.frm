@@ -166,7 +166,7 @@ Attribute frmMens2.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -224,11 +224,11 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 Dim Sql As String
-Dim I As Byte
-Dim cadWhere As String
+Dim i As Byte
+Dim cadWHERE As String
 Dim b As Boolean
 Dim NomFic As String
-Dim CADENA As String
+Dim cadena As String
 Dim cadena1 As String
 
 On Error GoTo eError
@@ -277,7 +277,7 @@ On Error GoTo eError
         InicializarTabla
             '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
           
@@ -295,10 +295,10 @@ On Error GoTo eError
                     
                     Select Case vParamAplic.Cooperativa
                         Case 1 ' valsur
-                            cadParam = cadParam & "pDescrip=""Coop/Pobl""|"
+                            CadParam = CadParam & "pDescrip=""Coop/Pobl""|"
                             numParam = numParam + 1
                         Case 3 ' Moixent
-                            cadParam = cadParam & "pDescrip=""Pol/Parc""|"
+                            CadParam = CadParam & "pDescrip=""Pol/Parc""|"
                             numParam = numParam + 1
                     End Select
                     
@@ -343,11 +343,11 @@ End Sub
 Private Sub cmdAceptarABN()
 
 Dim Sql As String
-Dim I As Byte
-Dim cadWhere As String
+Dim i As Byte
+Dim cadWHERE As String
 Dim b As Boolean
 Dim NomFic As String
-Dim CADENA As String
+Dim cadena As String
 Dim cadena1 As String
 
 On Error GoTo eError
@@ -369,7 +369,7 @@ On Error GoTo eError
         InicializarVbles
             '========= PARAMETROS  =============================
         'Añadir el parametro de Empresa
-        cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
         numParam = numParam + 1
 
         
@@ -486,7 +486,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -514,7 +514,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -549,11 +549,11 @@ End Function
 Private Function ProcesarFichero(nomFich As String) As Boolean
 Dim NF As Long
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
@@ -569,7 +569,7 @@ Dim NomFic As String
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
     Line Input #NF, Cad
-    I = 0
+    i = 0
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -581,10 +581,10 @@ Dim NomFic As String
         
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         b = InsertarLinea(Cad)
@@ -608,11 +608,11 @@ End Function
 Private Function CargaInicialABN(nomFich As String) As Boolean
 Dim NF As Long
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
@@ -632,7 +632,7 @@ Dim NomFic As String
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
     Line Input #NF, Cad
-    I = 0
+    i = 0
     
     
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
@@ -645,23 +645,23 @@ Dim NomFic As String
         
     ' salto la primera linea que es la cabecera
     Line Input #NF, Cad
-    lblProgres(1).Caption = "Linea " & I
+    lblProgres(1).Caption = "Linea " & i
     Me.Refresh
-    I = 1
+    i = 1
     
         
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         Cad = Cad & ";"
         If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaPreviaABN(Cad)
         
         If b Then
-            If I > 20 Then
+            If i > 20 Then
                 CargaInicialABN = True
                 Close #NF
                 lblProgres(0).Caption = ""
@@ -696,7 +696,7 @@ End Function
 
 Private Function InsertarLineaPreviaABN(Cad As String) As Boolean
 Dim Sql As String
-Dim CADENA As String
+Dim cadena As String
 
     On Error GoTo eInsertarLineaPreviaABN
 
@@ -705,11 +705,11 @@ Dim CADENA As String
     CargarVariables Cad
     
     ' insertamos la entrada
-    CADENA = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
-    CADENA = CADENA & "," & DBSet(ComprobarCero(Bruto) - ComprobarCero(Tara), "N")
+    cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
+    cadena = cadena & "," & DBSet(ComprobarCero(Bruto) - ComprobarCero(Tara), "N")
     
     Sql = "insert into tmpinformes (codusu, importe1, fecha1, importe2, importe3, importe4, importe5, nombre1, importeb1) values "
-    Sql = Sql & "(" & CADENA & ")"
+    Sql = Sql & "(" & cadena & ")"
     conn.Execute Sql
     
     Exit Function
@@ -723,11 +723,11 @@ End Function
 Private Function ProcesarFicheroABN(nomFich As String) As Boolean
 Dim NF As Long
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
@@ -751,7 +751,7 @@ Dim NomFic As String
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
     Line Input #NF, Cad
-    I = 0
+    i = 0
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -764,9 +764,9 @@ Dim NomFic As String
     ' salto la primera linea que es la cabecera
     Line Input #NF, Cad
     Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-    lblProgres(1).Caption = "Linea " & I
+    lblProgres(1).Caption = "Linea " & i
     Me.Refresh
-    I = 1
+    i = 1
     
     
     ' procendencia de la entrada
@@ -783,10 +783,10 @@ Dim NomFic As String
         
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         Cad = Cad & ";"
@@ -819,11 +819,11 @@ End Function
 Private Function ComprobarSociosVariedades(nomFich As String) As Boolean
 Dim NF As Long
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
@@ -845,7 +845,7 @@ Dim NomFic As String
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
     Line Input #NF, Cad
-    I = 0
+    i = 0
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -858,19 +858,19 @@ Dim NomFic As String
     ' salto la primera linea que es la cabecera
     Line Input #NF, Cad
     Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-    lblProgres(1).Caption = "Linea " & I
+    lblProgres(1).Caption = "Linea " & i
     Me.Refresh
-    I = 1
+    i = 1
     
     SociosNoExisten = ""
     VariedadesNoExisten = ""
         
     b = True
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         Cad = Cad & ";"
@@ -904,11 +904,11 @@ End Function
 Private Function ProcesarFichero2(nomFich As String) As Boolean
 Dim NF As Long
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
+Dim NumReg As Long
 Dim Sql As String
 Dim Sql1 As String
 Dim Total As Long
@@ -925,7 +925,7 @@ Dim b As Boolean
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
     Line Input #NF, Cad
-    I = 0
+    i = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -938,10 +938,10 @@ Dim b As Boolean
     b = True
 
     While Not EOF(NF) And b
-        I = I + 1
+        i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         b = ComprobarRegistro(Cad)
@@ -951,10 +951,10 @@ Dim b As Boolean
     Close #NF
     
     If Cad <> "" Then
-        I = I + 1
+        i = i + 1
         
         Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & I
+        lblProgres(1).Caption = "Linea " & i
         Me.Refresh
         
         b = ComprobarRegistro(Cad)
@@ -976,7 +976,7 @@ End Function
 Private Function ComprobarRegistro(Cad As String) As Boolean
 Dim Sql As String
 Dim Mens As String
-Dim CADENA As String
+Dim cadena As String
 
     On Error GoTo eComprobarRegistro
 
@@ -1231,7 +1231,7 @@ Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
-Dim CADENA As String
+Dim cadena As String
 
     On Error GoTo EInsertarLinea
 
@@ -1241,21 +1241,22 @@ Dim CADENA As String
     
     HayError = False
     
-     ' comprobaciones para poder insertar la entrada
-    CADENA = ""
-    ' comprobamos que me han puesto los datos de busqueda de parcela
-    If poligono = "" Or Parcela = "" Or Subparcela = "" Then
-        Mens = "No hay datos de campo"
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
-              "importe2, nombre2, nombre1) values (" & _
-              vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
-        Sql = Sql & "0," & DBSet(CADENA, "T") & "," & DBSet(Mens, "T") & ")"
-        
-        conn.Execute Sql
-        
-    Else
-        CADENA = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
-    End If
+'[Monica]02/11/2016: quito esta comprobacion
+'     ' comprobaciones para poder insertar la entrada
+'    cadena = ""
+'    ' comprobamos que me han puesto los datos de busqueda de parcela
+'    If poligono = "" Or Parcela = "" Or Subparcela = "" Then
+'        Mens = "No hay datos de campo"
+'        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+'              "importe2, nombre2, nombre1) values (" & _
+'              vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
+'        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+'
+'        conn.Execute Sql
+'
+'    Else
+'        cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+'    End If
     
 ' de momento lo quito pq hay una comprobacion previa que impide hacer nada si no existen los socios y variedades
 '    'Comprobamos que el socio existe
@@ -1290,25 +1291,31 @@ Dim CADENA As String
 '
 '    If HayError Then Exit Function
     
+    '[Monica]02/11/2016: quito la condicion de que tengan valores
     ' comprobamos que el campo existe
-    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0 And ComprobarCero(Subparcela) <> 0 Then
-        Sql = "select codcampo from rcampos where poligono = " & DBSet(poligono, "N")
-        Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
-        Sql = Sql & " and subparce = " & DBSet(Subparcela, "N")
+'    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0  And ComprobarCero(Subparcela) <> 0 Then
+        Sql = "select codcampo from rcampos where (1=1) "
+        If ComprobarCero(poligono) <> 0 Then Sql = Sql & " and poligono = " & DBSet(poligono, "N")
+        If ComprobarCero(Parcela) <> 0 Then Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
+        If ComprobarCero(Subparcela) <> 0 Then Sql = Sql & " and subparce = " & DBSet(Subparcela, "N")
+
+        If ComprobarCero(poligono) = 0 And ComprobarCero(Parcela) = 0 And ComprobarCero(Subparcela) = 0 Then
+            Sql = Sql & " and false "
+        End If
 
         'si no existe el campo lo creamos
         If DevuelveValor(Sql) = 0 Then
             Set frmMens = New frmMensajes
-            frmMens.CADENA = Socio & "|" & Variedad & "|" & poligono & "|" & Parcela & "|" & Subparcela & "|"
+            frmMens.cadena = Socio & "|" & Variedad & "|" & poligono & "|" & Parcela & "|" & Subparcela & "|"
             frmMens.OpcionMensaje = 62
             frmMens.Show vbModal
             Set frmMens = Nothing
         Else
             campo = DevuelveValor(Sql)
         End If
-    Else
-        campo = 0
-    End If
+'    Else
+'        campo = 0
+'    End If
     
     If HayError Then Exit Function
     
@@ -1325,23 +1332,8 @@ Dim CADENA As String
     ' Comprobamos que la entrada no exista ya
     Sql = "select count(*) from rhisfruta where numalbar = " & DBSet(vNota, "N")
     If TotalRegistros(Sql) <> 0 Then
-'        Mens = "Ya existe la entrada " & vNota
-'        Sql = "insert into tmpinformes (codusu, importe1,  " & _
-'              "importe2, nombre2, nombre1) values (" & _
-'              vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
-'        Sql = Sql & "0," & DBSet(Cadena, "T") & "," & DBSet(Mens, "T") & ")"
-'
-'        conn.Execute Sql
-        
         HayError = True
     End If
-    
-'
-'    CPobla = ""
-'    CPobla = DevuelveDesdeBDNew(cAgro, "rsocios", "codcoope", "codsocio", Socio, "N")
-'    CPostal = ""
-'    CPostal = DevuelveDesdeBDNew(cAgro, "rcoope", "codposta", "codcoope", CPobla, "N")
-    
     
     
     If HayError Then
@@ -1398,7 +1390,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -1420,12 +1412,12 @@ End Sub
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim I As Byte
+Dim i As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     If vParamAplic.Cooperativa = 1 Then ' caso de valsur tendran tres opciones
         'tipo de fichero
@@ -1504,18 +1496,18 @@ Private Sub CargarVariables(Cad As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim CADENA As String
+Dim cadena As String
 Dim Mens As String
 Dim Sql As String
 
     If CadenaSeleccion = "" Then
-        CADENA = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+        cadena = Format(ComprobarCero(poligono), "0000") & "-" & Format(ComprobarCero(Parcela), "0000") & "-" & Subparcela
     
         Mens = "No se creó el Campo "
         Sql = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(CADENA, "T") & "," & DBSet(Mens, "T") & ")"
+        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
         conn.Execute Sql
         
@@ -1548,7 +1540,7 @@ Dim numlinea As Long
 
 Dim vError As Boolean
 Dim vNota As Long
-Dim CADENA As String
+Dim cadena As String
 
 
     CompruebaSociosVariedades = True
