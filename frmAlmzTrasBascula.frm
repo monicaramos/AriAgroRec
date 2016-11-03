@@ -1241,22 +1241,21 @@ Dim cadena As String
     
     HayError = False
     
-'[Monica]02/11/2016: quito esta comprobacion
-'     ' comprobaciones para poder insertar la entrada
-'    cadena = ""
-'    ' comprobamos que me han puesto los datos de busqueda de parcela
-'    If poligono = "" Or Parcela = "" Or Subparcela = "" Then
-'        Mens = "No hay datos de campo"
-'        Sql = "insert into tmpinformes (codusu, importe1,  " & _
-'              "importe2, nombre2, nombre1) values (" & _
-'              vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
-'        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
-'
-'        conn.Execute Sql
-'
-'    Else
-'        cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
-'    End If
+     ' comprobaciones para poder insertar la entrada
+    cadena = ""
+    ' comprobamos que me han puesto los datos de busqueda de parcela
+    If poligono = "" And Parcela = "" And Subparcela = "" Then
+        Mens = "No hay datos de campo"
+        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+              "importe2, nombre2, nombre1) values (" & _
+              vUsu.Codigo & "," & DBSet(NumNota, "N") & ","
+        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+
+        conn.Execute Sql
+
+    Else
+        cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+    End If
     
 ' de momento lo quito pq hay una comprobacion previa que impide hacer nada si no existen los socios y variedades
 '    'Comprobamos que el socio existe
@@ -1294,14 +1293,11 @@ Dim cadena As String
     '[Monica]02/11/2016: quito la condicion de que tengan valores
     ' comprobamos que el campo existe
 '    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0  And ComprobarCero(Subparcela) <> 0 Then
-        Sql = "select codcampo from rcampos where (1=1) "
-        If ComprobarCero(poligono) <> 0 Then Sql = Sql & " and poligono = " & DBSet(poligono, "N")
-        If ComprobarCero(Parcela) <> 0 Then Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
+    Sql = "select codcampo from rcampos where (1=1) "
+    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0 Then
+        Sql = Sql & " and poligono = " & DBSet(poligono, "N")
+        Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
         If ComprobarCero(Subparcela) <> 0 Then Sql = Sql & " and subparce = " & DBSet(Subparcela, "N")
-
-        If ComprobarCero(poligono) = 0 And ComprobarCero(Parcela) = 0 And ComprobarCero(Subparcela) = 0 Then
-            Sql = Sql & " and false "
-        End If
 
         'si no existe el campo lo creamos
         If DevuelveValor(Sql) = 0 Then
@@ -1313,9 +1309,9 @@ Dim cadena As String
         Else
             campo = DevuelveValor(Sql)
         End If
-'    Else
-'        campo = 0
-'    End If
+    Else
+        campo = 0
+    End If
     
     If HayError Then Exit Function
     
@@ -1334,7 +1330,6 @@ Dim cadena As String
     If TotalRegistros(Sql) <> 0 Then
         HayError = True
     End If
-    
     
     If HayError Then
         Sql = "update rhisfruta set fecalbar = " & DBSet(FechaEnt, "F")
