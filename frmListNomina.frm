@@ -7968,6 +7968,9 @@ On Error GoTo eCargarTemporalListAsesoria
             Sql = "select sum(neto34) from rrecibosnomina where codtraba = " & DBSet(AntTraba, "N")
             Sql = Sql & " and fechahora >= " & DBSet(Fdesde, "F")
             Sql = Sql & " and fechahora <= " & DBSet(Fhasta, "F")
+            
+            '[Monica]04/11/2016: y que no haya sido embargado
+            Sql = Sql & " and hayembargo = 0 "
                                                 
             Anticipado = DevuelveValor(Sql)
                                                 
@@ -8025,6 +8028,8 @@ On Error GoTo eCargarTemporalListAsesoria
         Sql = "select sum(neto34) from rrecibosnomina where codtraba = " & DBSet(ActTraba, "N")
         Sql = Sql & " and fechahora >= " & DBSet(Fdesde, "F")
         Sql = Sql & " and fechahora <= " & DBSet(Fhasta, "F")
+        '[Monica]04/11/2016: y que no haya sido embargado
+        Sql = Sql & " and hayembargo = 0 "
                                             
         Anticipado = DevuelveValor(Sql)
                                             
