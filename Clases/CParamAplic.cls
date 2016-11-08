@@ -340,6 +340,7 @@ Private mvarHayResumenCajas As Byte
 
 Private mvarPathEntradas As String     ' path de impresion de entradas
 
+Private mvarContabilidadNueva As Boolean
 
 
 '------------------------------------------------
@@ -2157,6 +2158,10 @@ Public Property Get PathEntradas() As String
 End Property
 
 
+'[Monica]03/11/2016: si hay contabilidad nueva
+Public Property Get ContabilidadNueva() As Boolean
+     ContabilidadNueva = mvarContabilidadNueva
+End Property
 
 
 
@@ -2448,7 +2453,8 @@ On Error GoTo Err3
         '[Monica]17/10/2016: directorio de grabacion de entradas
         mvarPathEntradas = DBLet(Rs!directorioentradas, "T") ' directorio de impresion de entradas
         
-        
+        '[Monica]03/11/2016: nueva contabilidad
+        mvarContabilidadNueva = (DBLet(Rs!nuevacontabilidad, "N") = 1)
         
         Leer = 0
     End If
