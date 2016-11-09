@@ -1156,7 +1156,7 @@ Dim RS1 As ADODB.Recordset
                     
                     '[Monica]14/10/2010 añado la condicion de que no sea Picassent
                     '[Monica]27/04/2010 Calculo de costes de transporte, si es por tarifas y la entrada no es de venta campo
-                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
+                    If vParamAplic.TipoPortesTRA And DBLet(Rs!TipoEntr, "N") <> 1 And vParamAplic.Cooperativa <> 2 Then 'And vParamAplic.Cooperativa <> 16 Then
                         If b Then
                             b = CalculoGastosTransporte(numalbar, cadMen, False)
                             cadMen = "Calculando Gastos de Transporte: " & cadMen

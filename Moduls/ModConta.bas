@@ -655,3 +655,123 @@ Public Function NombreCuentaCorrecta(ByRef cuenta As String) As String
 
 End Function
 
+Public Function HayCobrosPagosPendientes(vCodmacta As String) As Boolean
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim Nregs As Long
+
+    On Error GoTo eHayCobrosPagosPendientes
+
+    If vParamAplic.ContabilidadNueva Then
+        Sql = "select count(*) from cobros where codmacta = " & DBSet(vCodmacta, "T")
+        Sql = Sql & " and (codrem is null or codrem = 0) and (transfer is null or transfer = 0) "
+    Else
+        Sql = "select count(*) from scobro where codmacta = " & DBSet(vCodmacta, "T")
+        Sql = Sql & " and (codrem is null or codrem = 0) and (transfer is null or transfer = 0) "
+    End If
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0).Value) <> 0 Then Nregs = DBLet(Rs.Fields(0).Value)
+    End If
+            
+    If vParamAplic.ContabilidadNueva Then
+        Sql = "select count(*) from pagos where codmacta = " & DBSet(vCodmacta, "T")
+        Sql = Sql & " and (nrodocum is null or nrodocum = 0)"
+    Else
+        Sql = "select count(*) from spagop where ctaprove = " & DBSet(vCodmacta, "T")
+        Sql = Sql & " and (transfer is null or transfer = 0)"
+    End If
+    Set Rs = Nothing
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        If DBLet(Rs.Fields(0).Value) <> 0 Then Nregs = Nregs + DBLet(Rs.Fields(0).Value)
+    End If
+    Set Rs = Nothing
+    
+    HayCobrosPagosPendientes = (Nregs <> 0)
+    Exit Function
+    
+eHayCobrosPagosPendientes:
+    MuestraError Err.Number, "Hay Cobros Pagos Pendientes", Err.Description
+End Function
+
+
+
+Public Function ActualizarCobrosPagosPdtes(vCodmacta As String, vBanco As String, vSucur As String, vDigcon As String, vCta As String, vIban As String, vFPago As String) As Boolean
+Dim Sql2 As String
+Dim vvIban As String
+    
+    On Error GoTo eActualizarCobrosPagosPdtes
+    
+    ConnConta.BeginTrans
+    
+    ActualizarCobrosPagosPdtes = False
+    
+    If vParamAplic.ContabilidadNueva Then
+        vvIban = MiFormat(vIban, "") & MiFormat(vBanco, "0000") & MiFormat(vSucur, "0000") & MiFormat(vDigcon, "00") & MiFormat(vCta, "0000000000")
+        
+        Sql2 = "update cobros set iban = " & DBSet(vvIban, "T", "S")
+    Else
+        Sql2 = "update scobro set codbanco = " & DBSet(vBanco, "N", "S") & ", codsucur = " & DBSet(vSucur, "N", "S")
+        Sql2 = Sql2 & ", digcontr = " & DBSet(vDigcon, "T", "S") & ", cuentaba = " & DBSet(vCta, "T", "S")
+    
+        '[Monica]22/11/2013: tema iban
+        If vEmpresa.HayNorma19_34Nueva = 1 Then
+            Sql2 = Sql2 & ", iban = " & DBSet(vIban, "T", "S")
+        End If
+    End If
+    
+    '[Monica]26/03/2015: se modifica tambien la forma de pago
+    Sql2 = Sql2 & ", codforpa = " & DBSet(vFPago, "N")
+    
+    Sql2 = Sql2 & " where codmacta = " & DBSet(vCodmacta, "T")
+    Sql2 = Sql2 & " and (codrem is null or codrem = 0) and (transfer is null or transfer = 0)"
+    
+    ConnConta.Execute Sql2
+    
+    
+    If vParamAplic.ContabilidadNueva Then
+        vvIban = MiFormat(vIban, "") & MiFormat(vBanco, "0000") & MiFormat(vSucur, "0000") & MiFormat(vDigcon, "00") & MiFormat(vCta, "0000000000")
+        
+        Sql2 = "update pagos set iban = " & DBSet(vvIban, "T", "S")
+        
+        '[Monica]26/03/2015: se modifica tambien la forma de pago
+        Sql2 = Sql2 & ", codforpa = " & DBSet(vFPago, "N")
+        
+        
+        Sql2 = Sql2 & " where codmacta = " & DBSet(vCodmacta, "T")
+        Sql2 = Sql2 & " and (nrodocum is null or nrodocum = 0)"
+    
+    Else
+        Sql2 = "update spagop set entidad = " & DBSet(vBanco, "T", "S") & ", oficina = " & DBSet(vSucur, "T", "S")
+        Sql2 = Sql2 & ", cc = " & DBSet(vDigcon, "T", "S") & ", cuentaba = " & DBSet(vCta, "T", "S")
+        
+        '[Monica]22/11/2013: tema iban
+        If vEmpresa.HayNorma19_34Nueva = 1 Then
+            Sql2 = Sql2 & ", iban = " & DBSet(vIban, "T", "S")
+        End If
+        '[Monica]26/03/2015: se modifica tambien la forma de pago
+        Sql2 = Sql2 & ", codforpa = " & DBSet(vFPago, "N")
+        
+        
+        Sql2 = Sql2 & " where ctaprove = " & DBSet(vCodmacta, "T")
+        Sql2 = Sql2 & " and (transfer is null or transfer = 0)"
+    End If
+   
+    ConnConta.Execute Sql2
+    
+    ActualizarCobrosPagosPdtes = True
+    ConnConta.CommitTrans
+    Exit Function
+    
+eActualizarCobrosPagosPdtes:
+    ConnConta.RollbackTrans
+    MuestraError Err.Number, "Actualizar Cobros Pagos Pendientes", Err.Description
+End Function
+
+
+
