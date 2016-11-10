@@ -2445,7 +2445,7 @@ On Error GoTo Err3
         
         '[Monica]21/04/2016:
         mvarSqlServer = DBLet(Rs!SqlServer, "T") ' SqlServer CASTELLDUCS1-O5
-        mvarSqlServer1 = DBLet(Rs!SqlServer1, "T") ' SqlServer1 CASTELLDUCS1-O5
+        mvarSqlServer1 = DBLet(Rs!SqlServer1, "T") ' SqlServer1 CASTELLDUCS2-O5
         
         '[Monica]10/10/2016: resumen de cajas en el mto de partes de trabajo
         mvarHayResumenCajas = DBLet(Rs!HayResumenCajas, "N") ' Hay Resumen Cajas
