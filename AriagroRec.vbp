@@ -302,6 +302,7 @@ Form=frmAlmzEntradas.frm
 Form=frmBodAlbRetirada.frm
 Form=frmBodListEntradas.frm
 Form=frmManPartesCajas.frm
+Class=cContabilizarFacturas; Clases\cContabilizarFacturas.cls
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

@@ -533,6 +533,9 @@ Dim PrimeraVez As Boolean
 Dim vSeccion As CSeccion
 Dim Tipo As Byte
 
+Dim cContaFra As cContabilizarFacturas
+
+
 Private Sub KEYpress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
         KeyAscii = 0
@@ -793,7 +796,7 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -810,8 +813,8 @@ Dim Cad As String, cadTipo As String 'tipo cliente
                 txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rseccion", "nomsecci", "codsecci", "N")
                 ConexionConta
             Else
-                Cad = "Debe introducir obligatoriamente una sección. " & vbCrLf & vbCrLf & "     ¿ Desea continuar ?"
-                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then cmdCancel_Click
+                cad = "Debe introducir obligatoriamente una sección. " & vbCrLf & vbCrLf & "     ¿ Desea continuar ?"
+                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then cmdCancel_Click
             End If
 
         Case 3, 9 ' FORMAS DE PAGO DE LA CONTABILIDAD(POSITIVAS Y NEGATIVAS)
@@ -1323,6 +1326,17 @@ Dim Codigo1 As String
     Sql = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
     conn.Execute Sql
 
+    Set cContaFra = New cContabilizarFacturas
+    
+    If Not cContaFra.EstablecerValoresInciales(ConnConta) Then
+        'NO ha establcedio los valores de la conta.  Le dejaremos seguir, avisando que
+        ' obviamente, no va a contabilizar las FRAS
+        Sql = "Si continua, las facturas se insertaran en el registro, pero no serán contabilizadas" & vbCrLf
+        Sql = Sql & "en este momento. Deberán ser contabilizadas desde el ARICONTA" & vbCrLf & vbCrLf
+        Sql = Sql & Space(50) & "¿Continuar?"
+        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+    End If
+
     '---- Pasar cada una de las facturas seleccionadas a la Conta
     If numfactu > 0 Then
         CargarProgres Me.Pb1, numfactu
@@ -1342,7 +1356,7 @@ Dim Codigo1 As String
             Sql = Sql & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
             Sql = Sql & " and " & cadTabla & ".codtrans=" & DBSet(Rs!codTrans, "T")
             
-            If PasarFacturaTra(Sql, CCoste, Orden2, vParamAplic.Seccionhorto, Tipo, CDate(txtcodigo(0).Text), CDate(txtcodigo(1).Text), txtcodigo(3).Text, txtcodigo(9).Text, txtcodigo(4).Text, txtcodigo(10).Text, "", Mid(Combo1(0).Text, 1, 3)) = False And b Then b = False
+            If PasarFacturaTra(Sql, CCoste, Orden2, vParamAplic.Seccionhorto, Tipo, CDate(txtcodigo(0).Text), CDate(txtcodigo(1).Text), txtcodigo(3).Text, txtcodigo(9).Text, txtcodigo(4).Text, txtcodigo(10).Text, "", Mid(Combo1(0).Text, 1, 3), cContaFra) = False And b Then b = False
 
             '---- Laura 26/10/2006
             'Al pasar cada factura al hacer el commit desbloqueamos los registros
@@ -1366,6 +1380,8 @@ Dim Codigo1 As String
         Rs.Close
         Set Rs = Nothing
     End If
+    
+    Set cContaFra = Nothing
 
 EPasarFac:
     If Err.Number <> 0 Then b = False
@@ -1394,7 +1410,7 @@ Private Function ComprobarFechasConta(ind As Integer) As Boolean
 'comprobar que el periodo de fechas a contabilizar esta dentro del
 'periodo de fechas del ejercicio de la contabilidad
 Dim FechaIni As String, FechaFin As String
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
     
 Dim vSeccion As CSeccion
@@ -1417,10 +1433,10 @@ On Error GoTo EComprobar
             Orden2 = FechaFin
         
             If Not EntreFechas(FechaIni, txtcodigo(ind).Text, FechaFin) Then
-                 Cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
-                 Cad = Cad & "    Desde: " & FechaIni & vbCrLf
-                 Cad = Cad & "    Hasta: " & FechaFin
-                 MsgBox Cad, vbExclamation
+                 cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
+                 cad = cad & "    Desde: " & FechaIni & vbCrLf
+                 cad = cad & "    Hasta: " & FechaFin
+                 MsgBox cad, vbExclamation
                  txtcodigo(ind).Text = ""
             Else
                 ComprobarFechasConta = True

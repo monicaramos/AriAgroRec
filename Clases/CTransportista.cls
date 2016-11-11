@@ -18,6 +18,13 @@ Option Explicit
 'Variables locales que contienen valores de propiedad
 Private mCodTrans As String 'Cod. transportista
 Private mNomTrans As String 'Nombre transportista
+
+Private mDirTrans As String 'Dierccion trans
+Private mCodposta As String 'cod. postal trans
+Private mPobTrans As String 'poblacion trans
+Private mProTrans As String 'Provincia trans
+Private mNIFTrans As String 'NIF trans
+
 Private mMatricul As String 'matricula
 Private mTaraVehi As String 'tara de vehiculo
 Private mTipoIRPF As Byte 'tipo irpf: 0=modulos 1=E.D 2=entidad
@@ -145,6 +152,59 @@ Public Property Get EsFactTraInterna() As Byte
 End Property
 
 
+'**** Direccion del trans
+
+Public Property Let Direccion(ByVal vData As String)
+     mDirTrans = vData
+End Property
+
+Public Property Get Direccion() As String
+     Direccion = mDirTrans
+End Property
+
+'**** CPostal del trans
+
+Public Property Let CPostal(ByVal vData As String)
+     mCodposta = vData
+End Property
+
+Public Property Get CPostal() As String
+     CPostal = mCodposta
+End Property
+
+'**** Poblacion del trans
+
+Public Property Let Poblacion(ByVal vData As String)
+     mPobTrans = vData
+End Property
+
+Public Property Get Poblacion() As String
+     Poblacion = mPobTrans
+End Property
+
+'**** Provincia del trans
+
+Public Property Let Provincia(ByVal vData As String)
+     mProTrans = vData
+End Property
+
+Public Property Get Provincia() As String
+     Provincia = mProTrans
+End Property
+
+'**** NIF del trans
+
+Public Property Let nif(ByVal vData As String)
+     mNIFTrans = vData
+End Property
+
+Public Property Get nif() As String
+     nif = mNIFTrans
+End Property
+
+
+
+
 '------------------------------------------------
 '------------------------------------------------
 'Procedimientos del modulo CTransportista
@@ -182,7 +242,8 @@ Dim Sql As String
     On Error GoTo ELeer
     LeerDatos = False
     
-    Sql = "SELECT codtrans,nomtrans,matricula,taravehi,tipoirpf,codmacpro,codiva,codforpa,esfacttrainterna "
+    Sql = "SELECT codtrans,nomtrans,matricula,taravehi,tipoirpf,codmacpro,codiva,codforpa,esfacttrainterna, "
+    Sql = Sql & "dirtrans,pobtrans,codpostal,protrans,niftrans "
     Sql = Sql & " FROM rtransporte "
     Sql = Sql & " WHERE codtrans=" & DBSet(vCodTrans, "T")
     
@@ -202,6 +263,14 @@ Dim Sql As String
         mCtaTra = DBLet(Rs!codmacpro, "T")
         mCodIva = CStr(Rs!CodIva)
         mEsFactTraInterna = DBLet(Rs!EsFactTraInterna, "N")
+        
+        
+        mDirTrans = DBLet(Rs!dirtrans, "T")
+        mCodposta = DBLet(Rs!codpostal, "T")
+        mPobTrans = DBLet(Rs!pobtrans, "T")
+        mProTrans = DBLet(Rs!protrans, "T")
+        mNIFTrans = Rs!NIFTrans
+        
         
         LeerDatos = True
     End If

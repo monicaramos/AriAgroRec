@@ -386,7 +386,6 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
-      Tab             =   1
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -401,48 +400,64 @@ Begin VB.Form frmManCampos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
-      Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Text5(0)"
-      Tab(0).Control(1)=   "Combo1(0)"
-      Tab(0).Control(2)=   "Text2(3)"
-      Tab(0).Control(3)=   "Text2(2)"
-      Tab(0).Control(4)=   "Text1(2)"
-      Tab(0).Control(5)=   "Text1(3)"
-      Tab(0).Control(6)=   "Text1(21)"
-      Tab(0).Control(7)=   "Text1(37)"
-      Tab(0).Control(8)=   "Text4(3)"
-      Tab(0).Control(9)=   "Text5(3)"
-      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
+      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).Control(0)=   "Label1(26)"
+      Tab(0).Control(0).Enabled=   0   'False
+      Tab(0).Control(1)=   "Label28"
+      Tab(0).Control(1).Enabled=   0   'False
+      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(2).Enabled=   0   'False
+      Tab(0).Control(3)=   "Label29"
+      Tab(0).Control(3).Enabled=   0   'False
+      Tab(0).Control(4)=   "Label6(0)"
+      Tab(0).Control(4).Enabled=   0   'False
+      Tab(0).Control(5)=   "Label5"
+      Tab(0).Control(5).Enabled=   0   'False
+      Tab(0).Control(6)=   "imgBuscar(2)"
+      Tab(0).Control(6).Enabled=   0   'False
+      Tab(0).Control(7)=   "imgBuscar(3)"
+      Tab(0).Control(7).Enabled=   0   'False
+      Tab(0).Control(8)=   "Label2"
+      Tab(0).Control(8).Enabled=   0   'False
+      Tab(0).Control(9)=   "imgBuscar(13)"
+      Tab(0).Control(9).Enabled=   0   'False
+      Tab(0).Control(10)=   "Label36"
+      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(12)=   "Label36"
-      Tab(0).Control(13)=   "imgBuscar(13)"
-      Tab(0).Control(14)=   "Label2"
-      Tab(0).Control(15)=   "imgBuscar(3)"
-      Tab(0).Control(16)=   "imgBuscar(2)"
-      Tab(0).Control(17)=   "Label5"
-      Tab(0).Control(18)=   "Label6(0)"
-      Tab(0).Control(19)=   "Label29"
-      Tab(0).Control(20)=   "imgZoom(0)"
-      Tab(0).Control(21)=   "Label28"
-      Tab(0).Control(22)=   "Label1(26)"
+      Tab(0).Control(11).Enabled=   0   'False
+      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(12).Enabled=   0   'False
+      Tab(0).Control(13)=   "Text5(3)"
+      Tab(0).Control(13).Enabled=   0   'False
+      Tab(0).Control(14)=   "Text4(3)"
+      Tab(0).Control(14).Enabled=   0   'False
+      Tab(0).Control(15)=   "Text1(37)"
+      Tab(0).Control(15).Enabled=   0   'False
+      Tab(0).Control(16)=   "Text1(21)"
+      Tab(0).Control(16).Enabled=   0   'False
+      Tab(0).Control(17)=   "Text1(3)"
+      Tab(0).Control(17).Enabled=   0   'False
+      Tab(0).Control(18)=   "Text1(2)"
+      Tab(0).Control(18).Enabled=   0   'False
+      Tab(0).Control(19)=   "Text2(2)"
+      Tab(0).Control(19).Enabled=   0   'False
+      Tab(0).Control(20)=   "Text2(3)"
+      Tab(0).Control(20).Enabled=   0   'False
+      Tab(0).Control(21)=   "Combo1(0)"
+      Tab(0).Control(21).Enabled=   0   'False
+      Tab(0).Control(22)=   "Text5(0)"
+      Tab(0).Control(22).Enabled=   0   'False
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
-      Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "Frame5"
-      Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "Frame6"
-      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).ControlEnabled=   0   'False
+      Tab(1).Control(0)=   "Frame10"
+      Tab(1).Control(1)=   "Frame9"
+      Tab(1).Control(2)=   "Frame8"
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "Frame8"
-      Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "Frame9"
-      Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "Frame10"
-      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(4)=   "Frame6"
+      Tab(1).Control(5)=   "Frame5"
+      Tab(1).Control(6)=   "Frame3"
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -498,7 +513,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   257
          Top             =   3270
          Width           =   6915
@@ -838,7 +853,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   223
          Top             =   3960
          Width           =   6915
@@ -1180,7 +1195,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   7260
+         Left            =   -67740
          TabIndex        =   207
          Top             =   3960
          Width           =   5265
@@ -1234,7 +1249,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   7260
+         Left            =   -67740
          TabIndex        =   204
          Top             =   3270
          Width           =   5265
@@ -1598,7 +1613,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   0
-         Left            =   -70950
+         Left            =   4050
          MaxLength       =   30
          TabIndex        =   186
          Top             =   1920
@@ -1947,7 +1962,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1305
-         Left            =   7260
+         Left            =   -67740
          TabIndex        =   165
          Top             =   1950
          Width           =   5235
@@ -2933,7 +2948,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2775
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   117
          Top             =   510
          Width           =   6915
@@ -3220,7 +3235,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1335
-         Left            =   7260
+         Left            =   -67740
          TabIndex        =   112
          Top             =   510
          Width           =   5235
@@ -3314,7 +3329,7 @@ Begin VB.Form frmManCampos
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   0
-         Left            =   -73620
+         Left            =   1380
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
@@ -3326,7 +3341,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   -72735
+         Left            =   2265
          MaxLength       =   30
          TabIndex        =   87
          Top             =   855
@@ -3337,7 +3352,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   2
-         Left            =   -72735
+         Left            =   2265
          MaxLength       =   30
          TabIndex        =   86
          Top             =   520
@@ -3347,7 +3362,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   2
-         Left            =   -73620
+         Left            =   1380
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
@@ -3358,7 +3373,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   3
-         Left            =   -73620
+         Left            =   1380
          MaxLength       =   4
          TabIndex        =   5
          Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
@@ -3368,7 +3383,7 @@ Begin VB.Form frmManCampos
       Begin VB.TextBox Text1 
          Height          =   435
          Index           =   21
-         Left            =   -69060
+         Left            =   5940
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -3381,7 +3396,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   37
-         Left            =   -73620
+         Left            =   1380
          MaxLength       =   6
          TabIndex        =   6
          Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
@@ -3393,7 +3408,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   -72735
+         Left            =   2265
          MaxLength       =   30
          TabIndex        =   79
          Top             =   1185
@@ -3404,7 +3419,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   -73620
+         Left            =   1380
          MaxLength       =   30
          TabIndex        =   78
          Top             =   1530
@@ -3423,7 +3438,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3615
-         Left            =   -69180
+         Left            =   5820
          TabIndex        =   75
          Top             =   450
          Width           =   6720
@@ -3840,7 +3855,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2445
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   70
          Top             =   2310
          Width           =   5415
@@ -4380,7 +4395,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label36 
          Caption         =   "Nº Hidrante"
          Height          =   255
-         Left            =   -71910
+         Left            =   3090
          TabIndex        =   187
          Top             =   1950
          Width           =   885
@@ -4388,7 +4403,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   -73920
+         Left            =   1080
          ToolTipText     =   "Buscar Zona"
          Top             =   1200
          Width           =   240
@@ -4396,7 +4411,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label2 
          Caption         =   "Tipo Parcela"
          Height          =   255
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   88
          Top             =   1935
          Width           =   1035
@@ -4404,7 +4419,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   -73920
+         Left            =   1080
          ToolTipText     =   "Buscar Partida"
          Top             =   870
          Width           =   240
@@ -4412,7 +4427,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   -73920
+         Left            =   1080
          ToolTipText     =   "Buscar Variedad"
          Top             =   570
          Width           =   240
@@ -4420,7 +4435,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label5 
          Caption         =   "Variedad"
          Height          =   255
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   84
          Top             =   525
          Width           =   735
@@ -4429,7 +4444,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Partida"
          Height          =   255
          Index           =   0
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   83
          Top             =   855
          Width           =   735
@@ -4437,7 +4452,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label29 
          Caption         =   "Observaciones"
          Height          =   255
-         Left            =   -69060
+         Left            =   5940
          TabIndex        =   82
          Top             =   4080
          Width           =   1140
@@ -4445,7 +4460,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   -67830
+         Left            =   7170
          ToolTipText     =   "Zoom descripción"
          Top             =   4080
          Width           =   240
@@ -4453,7 +4468,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label28 
          Caption         =   "Poblacion"
          Height          =   255
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   81
          Top             =   1530
          Width           =   735
@@ -4462,7 +4477,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Zona"
          Height          =   255
          Index           =   26
-         Left            =   -74820
+         Left            =   180
          TabIndex        =   80
          Top             =   1200
          Width           =   735
@@ -6057,7 +6072,7 @@ Dim Municipio As String
     Screen.MousePointer = vbHourglass
 
 '    If LanzaHomeGnral(Direccion) Then espera 2
-    LanzaVisorMimeDocumento Me.hWnd, Direccion
+    LanzaVisorMimeDocumento Me.hwnd, Direccion
     Screen.MousePointer = vbDefault
 
 End Sub
@@ -6220,31 +6235,31 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim Cad As String
+    Dim cad As String
     Dim NombreTabla1 As String
         
     'Cridem al form
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    Cad = ""
-    Cad = Cad & "Código|rcampos.codcampo|N|000000|9·"
-    Cad = Cad & "Socio|rcampos.codsocio|N|000000|9·"
-    Cad = Cad & "Nombre|rsocios.nomsocio|T||30·"
-    Cad = Cad & "Variedad|variedades.nomvarie|T||16·"
-    Cad = Cad & "Partida|rpartida.nomparti|T||15·"
-    Cad = Cad & "Pol.|rcampos.poligono|T||5·"
-    Cad = Cad & "Parc.|rcampos.parcela|T||7·"
-    Cad = Cad & "Sp.|rcampos.subparce|T||4·"
-    Cad = Cad & "Nro|rcampos.nrocampo|T||5·"
+    cad = ""
+    cad = cad & "Código|rcampos.codcampo|N|000000|9·"
+    cad = cad & "Socio|rcampos.codsocio|N|000000|9·"
+    cad = cad & "Nombre|rsocios.nomsocio|T||30·"
+    cad = cad & "Variedad|variedades.nomvarie|T||16·"
+    cad = cad & "Partida|rpartida.nomparti|T||15·"
+    cad = cad & "Pol.|rcampos.poligono|T||5·"
+    cad = cad & "Parc.|rcampos.parcela|T||7·"
+    cad = cad & "Sp.|rcampos.subparce|T||4·"
+    cad = cad & "Nro|rcampos.nrocampo|T||5·"
     
     NombreTabla1 = "((rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio) inner join variedades on rcampos.codvarie = variedades.codvarie) " & _
                    " inner join rpartida on rcampos.codparti = rpartida.codparti "
     
     
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vtabla = NombreTabla1
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -6267,7 +6282,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
 Dim i As Integer
 Dim J As Integer
@@ -6277,7 +6292,7 @@ Dim J As Integer
         Exit Sub
     End If
     
-    Cad = ""
+    cad = ""
     i = 0
     Do
         J = i + 1
@@ -6285,10 +6300,10 @@ Dim J As Integer
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            cad = cad & Text1(J).Text & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -6400,7 +6415,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EEliminar
 
@@ -6413,14 +6428,14 @@ Dim Cad As String
     ' ***************************************************************************
 
     ' *************** canviar la pregunta ****************
-    Cad = "¿Seguro que desea eliminar el Campo?"
-    Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
-    Cad = Cad & vbCrLf & "Socio : " & Data1.Recordset.Fields(1)
-    Cad = Cad & vbCrLf & "Nombre: " & Text2(1).Text
+    cad = "¿Seguro que desea eliminar el Campo?"
+    cad = cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
+    cad = cad & vbCrLf & "Socio : " & Data1.Recordset.Fields(1)
+    cad = cad & vbCrLf & "Nombre: " & Text2(1).Text
     ' **************************************************************************
     
     'borrem
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -6613,7 +6628,7 @@ End Sub
 Private Function DatosOk() As Boolean
 Dim b As Boolean
 Dim Sql As String
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
 'Dim Datos As String
 
@@ -6673,8 +6688,8 @@ Dim Rs As ADODB.Recordset
             Set Rs = New ADODB.Recordset
             Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If DBLet(Rs.Fields(0).Value, "F") <> "" Then
-                Cad = "Este socio tiene fecha de baja. ¿ Desea continuar ?"
-                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+                cad = "Este socio tiene fecha de baja. ¿ Desea continuar ?"
+                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
                     b = False
                 End If
             End If
@@ -6732,10 +6747,10 @@ Dim Rs As ADODB.Recordset
         If CInt(Text1(2).Text) <> CInt(VarieAnt) Then
             Sql = "select count(*) from rcampos_clasif where codcampo = " & DBSet(Text1(0).Text, "N")
             If TotalRegistros(Sql) <> 0 Then
-                Cad = "Si se modifica la variedad, perderá la clasificación." & vbCrLf
-                Cad = Cad & "               ¿ Desea continuar ?"
+                cad = "Si se modifica la variedad, perderá la clasificación." & vbCrLf
+                cad = cad & "               ¿ Desea continuar ?"
                 
-                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
                     b = False
                 End If
             End If
@@ -6764,19 +6779,19 @@ Dim Rs As ADODB.Recordset
         
         If b And (CInt(Text1(2).Text) <> CInt(VarieAnt) Or CLng(Text1(1).Text) <> CLng(SocioAnt)) Then
             If HayEntradasCampoSocioVariedad(Text1(0).Text, SocioAnt, VarieAnt) Then
-                Cad = "Exiten entradas del campo, para el socio, variedad anterior que se modificarán." & vbCrLf & vbCrLf
-                Cad = Cad & "                ¿ Desea continuar ?  "
-                If MsgBox(Cad, vbQuestion + vbYesNo) = vbNo Then
+                cad = "Exiten entradas del campo, para el socio, variedad anterior que se modificarán." & vbCrLf & vbCrLf
+                cad = cad & "                ¿ Desea continuar ?  "
+                If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then
                     b = False
                 End If
             End If
             
             If b And HayAnticiposPdtesCampoSocioVariedad(Text1(0).Text, SocioAnt, VarieAnt) Then
-                Cad = "Exiten anticipos pendientes de descontar del campo, para el socio, variedad anterior. "
-                Cad = Cad & " Si posteriormente liquida no se descontarán. " & vbCrLf & vbCrLf
-                Cad = Cad & "       ¿ Seguro que desea continuar ?  "
+                cad = "Exiten anticipos pendientes de descontar del campo, para el socio, variedad anterior. "
+                cad = cad & " Si posteriormente liquida no se descontarán. " & vbCrLf & vbCrLf
+                cad = cad & "       ¿ Seguro que desea continuar ?  "
             
-                If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
                     b = False
                 End If
             End If
@@ -6803,15 +6818,15 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(codcampo=" & Text1(0).Text & ")"
+    cad = "(codcampo=" & Text1(0).Text & ")"
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarData(Data1, Cad, Indicador) Then
+    If SituarData(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -7462,7 +7477,7 @@ Private Sub BotonContabilizarGasto()
     Screen.MousePointer = vbHourglass
     
     frmListado.OpcionListado = 37
-    frmListado.NumCod = "rcampos_gastos.codcampo = " & Adoaux(5).Recordset!codcampo & " and rcampos_gastos.numlinea = " & Adoaux(5).Recordset!numlinea
+    frmListado.NumCod = "rcampos_gastos.codcampo = " & Adoaux(5).Recordset!codcampo & " and rcampos_gastos.numlinea = " & Adoaux(5).Recordset!NumLinea
     frmListado.Show vbModal
     CargaGrid NumTabMto, True
     
@@ -7525,7 +7540,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_parcelas"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 3 'agroseguro
@@ -7536,7 +7551,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_seguros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 4 'hco de campos
@@ -7550,7 +7565,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_hco"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
         Case 5 'gastos de campos
@@ -7570,7 +7585,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_gastos"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
         
         Case 6 'ordenes de recoleccion
@@ -7596,7 +7611,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rcampos_revision"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!NumLinea, "N")
             End If
     
     
@@ -8244,7 +8259,7 @@ EDatosOKLlin:
 End Function
 
 
-Private Function ActualisaCtaprpal(ByRef numlinea As Integer)
+Private Function ActualisaCtaprpal(ByRef NumLinea As Integer)
 Dim Sql As String
 'yo
 '    On Error Resume Next
@@ -8879,7 +8894,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim Cad As String
+Dim cad As String
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -8932,7 +8947,7 @@ Private Sub Modificar()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim Cad As String
+Dim cad As String
 Dim Sql As String
 Dim vCadena As String
 Dim Produ As Integer
