@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmSumActSoc 
    BorderStyle     =   3  'Fixed Dialog
@@ -25,7 +25,7 @@ Begin VB.Form frmSumActSoc
    End
    Begin VB.Frame FrameCobros 
       Height          =   5670
-      Left            =   30
+      Left            =   0
       TabIndex        =   5
       Top             =   30
       Width           =   6330
@@ -295,7 +295,7 @@ Attribute frmSoc.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -316,7 +316,7 @@ Dim PrimeraVez As Boolean
 Dim vSeccion As CSeccion
 Dim Tipo As Byte
 
-Dim NRegs As Long
+Dim Nregs As Long
 
 Private Sub KEYpress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
@@ -327,9 +327,9 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim SQL As String
+Dim Sql As String
 Dim i As Byte
-Dim cadWhere As String
+Dim cadWHERE As String
 Dim cDesde As String
 Dim cHasta As String
 Dim cTabla As String
@@ -359,8 +359,8 @@ Dim vSQL As String
     
     vSQL = "select count(*) from " & cTabla & " where " & cadSelect
     
-    NRegs = TotalRegistros(vSQL)
-    If NRegs = 0 Then
+    Nregs = TotalRegistros(vSQL)
+    If Nregs = 0 Then
         MsgBox "No hay datos entre esos límites.", vbExclamation
         Exit Sub
     Else
@@ -551,7 +551,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -599,9 +599,9 @@ Dim cta As String
 
 End Function
 
-Private Sub ActualizarSocios(cadTABLA As String, cadWhere As String)
+Private Sub ActualizarSocios(cadTabla As String, cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vSQL As String
 Dim Rs As ADODB.Recordset
@@ -617,11 +617,11 @@ Dim Sql4 As String
     On Error GoTo eActualizarSocios
 
 
-    SQL = "ACTSOC" 'ACTualizar datos de SOCios de suminitros
+    Sql = "ACTSOC" 'ACTualizar datos de SOCios de suminitros
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se pueden Actualizar Datos de Socios de Suministros. Hay otro usuario actualizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -631,20 +631,20 @@ Dim Sql4 As String
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 3, vUsu, "Actualizar Datos Socios Ariges: " & vbCrLf & cadTABLA & vbCrLf & cadWhere
+    LOG.Insertar 3, vUsu, "Actualizar Datos Socios Ariges: " & vbCrLf & cadTabla & vbCrLf & cadWHERE
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
 
-    SQL = "select * from " & cadTABLA & " where " & cadWhere
+    Sql = "select * from " & cadTabla & " where " & cadWHERE
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Visualizar la barra de Progreso
     Me.Pb1.visible = True
     Me.lblProgres(0).Caption = "Procesando Socios: "
     ' si insertamos o modificamos el numero de registros nos coincide
-    Pb1.Max = NRegs
+    Pb1.Max = Nregs
     Pb1.Value = 0
 
     While Not Rs.EOF
@@ -678,15 +678,15 @@ Dim Sql4 As String
                 Sql2 = "update " & vParamAplic.BDAriges & ".sclien "
                 Sql2 = Sql2 & " set nomclien = " & DBSet(Rs!nomsocio, "T")
                 Sql2 = Sql2 & ", domclien = " & DBSet(Rs!dirsocio, "T")
-                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!codpostal, "T")
+                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!CodPostal, "T")
                 Sql2 = Sql2 & ", pobclien = " & DBSet(Rs!pobsocio, "T")
                 Sql2 = Sql2 & ", proclien = " & DBSet(Rs!prosocio, "T")
-                Sql2 = Sql2 & ", nifclien = " & DBSet(Rs!nifsocio, "T")
+                Sql2 = Sql2 & ", nifclien = " & DBSet(Rs!nifSocio, "T")
                 Sql2 = Sql2 & ", codforpa = " & DBSet(txtcodigo(3).Text, "N")
-                Sql2 = Sql2 & ", codbanco = " & DBSet(Rs!codbanco, "N")
-                Sql2 = Sql2 & ", codsucur = " & DBSet(Rs!codsucur, "N")
+                Sql2 = Sql2 & ", codbanco = " & DBSet(Rs!CodBanco, "N")
+                Sql2 = Sql2 & ", codsucur = " & DBSet(Rs!CodSucur, "N")
                 Sql2 = Sql2 & ", digcontr = " & DBSet(Rs!digcontr, "T")
-                Sql2 = Sql2 & ", cuentaba = " & DBSet(Rs!cuentaba, "T")
+                Sql2 = Sql2 & ", cuentaba = " & DBSet(Rs!CuentaBa, "T")
                 Sql2 = Sql2 & ", codmacta = " & DBSet(CtaClien, "T")
                 Sql2 = Sql2 & ", telclie1 = " & DBSet(Rs!telsoci1, "T")
                 Sql2 = Sql2 & ", maiclie1 = " & DBSet(Rs!maisocio, "T")
@@ -730,10 +730,10 @@ Dim Sql4 As String
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nomclien
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nombre comercial
                 Sql2 = Sql2 & DBSet(Rs!dirsocio, "T") & "," 'direccion
-                Sql2 = Sql2 & DBSet(Rs!codpostal, "T") & "," 'codigo postal
+                Sql2 = Sql2 & DBSet(Rs!CodPostal, "T") & "," 'codigo postal
                 Sql2 = Sql2 & DBSet(Rs!pobsocio, "T") & "," 'poblacion
                 Sql2 = Sql2 & DBSet(DBLet(Rs!prosocio, "T"), "T", "N") & "," 'provincia
-                Sql2 = Sql2 & DBSet(Rs!nifsocio, "T") & "," 'nifsocio
+                Sql2 = Sql2 & DBSet(Rs!nifSocio, "T") & "," 'nifsocio
                 Sql2 = Sql2 & DBSet(Now, "F") & ","         'fecha de alta
                 Sql2 = Sql2 & DBSet(rsAriges!defactividad, "N") & "," 'codigo de actividad
                 Sql2 = Sql2 & DBSet(rsAriges!defenvio, "N") & "," 'codenvio
@@ -741,10 +741,10 @@ Dim Sql4 As String
                 Sql2 = Sql2 & DBSet(rsAriges!defruta, "N") & "," 'codrutas
                 Sql2 = Sql2 & DBSet(rsAriges!defagente, "N") & "," 'codigo de agente
                 Sql2 = Sql2 & DBSet(txtcodigo(3).Text, "N") & "," 'codigo de forma de pago
-                Sql2 = Sql2 & DBSet(Rs!codbanco, "N") & "," 'codigo de banco
-                Sql2 = Sql2 & DBSet(Rs!codsucur, "N") & "," 'codigo de sucursal
+                Sql2 = Sql2 & DBSet(Rs!CodBanco, "N") & "," 'codigo de banco
+                Sql2 = Sql2 & DBSet(Rs!CodSucur, "N") & "," 'codigo de sucursal
                 Sql2 = Sql2 & DBSet(Rs!digcontr, "T") & "," 'digcontr
-                Sql2 = Sql2 & DBSet(Rs!cuentaba, "T") & "," 'cuenta banco
+                Sql2 = Sql2 & DBSet(Rs!CuentaBa, "T") & "," 'cuenta banco
                 Sql2 = Sql2 & DBSet(CtaClien, "T") & "," 'codmacta de la seccion de suministros
                 Sql2 = Sql2 & DBSet(Rs!telsoci1, "T") & "," ' telefono
                 Sql2 = Sql2 & DBSet(Rs!maisocio, "T") & "," 'mail
@@ -774,130 +774,6 @@ eActualizarSocios:
     MuestraError Err.Number, "Actualizar socios", Err.Description
 End Sub
 
-Private Function PasarFacturasAContab(cadTABLA As String) As Boolean
-Dim SQL As String
-Dim Rs As ADODB.Recordset
-Dim b As Boolean
-Dim i As Integer
-Dim numfactu As Integer
-Dim Codigo1 As String
-Dim AntSocio As Long
-Dim TotalTesoreria As Currency
-Dim TotalFactura As Currency
-Dim Facturas As String
-Dim Mens As String
-Dim AntFecha As String
-
-    On Error GoTo EPasarFac
-
-    PasarFacturasAContab = False
-
-    '---- Obtener el total de Facturas a Insertar en la contabilidad
-    SQL = "SELECT count(*) "
-    SQL = SQL & " FROM " & cadTABLA & " INNER JOIN tmpFactu "
-    Codigo1 = "tipofichero"
-    SQL = SQL & " ON " & cadTABLA & "." & Codigo1 & "=tmpFactu." & Codigo1
-    SQL = SQL & " AND " & cadTABLA & ".numfactu=tmpFactu.numfactu AND " & cadTABLA & ".fecfactu=tmpFactu.fecfactu "
-
-    Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not Rs.EOF Then
-        numfactu = Rs.Fields(0)
-    Else
-        numfactu = 0
-    End If
-    Rs.Close
-    Set Rs = Nothing
-
-
-    'Modificacion como David
-    '-----------------------------------------------------------
-    ' Mosrtaremos para cada factura de PROVEEDOR
-    ' que numregis le ha asignado
-    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
-    conn.Execute SQL
-
-    '---- Pasar cada una de las facturas seleccionadas a la Conta
-    If numfactu > 0 Then
-        CargarProgres Me.Pb1, numfactu
-
-        ConnConta.BeginTrans
-        conn.BeginTrans
-
-        'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
-        SQL = "SELECT rcabfactalmz.codsocio, rcabfactalmz.tipofichero, rcabfactalmz.numfactu, rcabfactalmz.fecfactu  "
-        SQL = SQL & " FROM tmpFactu, rcabfactalmz "
-        SQL = SQL & " where tmpFactu.tipofichero = rcabfactalmz.tipofichero and tmpFactu.numfactu = rcabfactalmz.numfactu "
-        SQL = SQL & " and tmpFactu.fecfactu = rcabfactalmz.fecfactu and tmpFactu.codsocio = rcabfactalmz.codsocio "
-        SQL = SQL & " group by 1, 2, 3, 4 "
-        SQL = SQL & " order by 1, 2, 3, 4 "
-        
-        Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
-        
-        i = 1
-
-        b = True
-        TotalTesoreria = 0
-        Facturas = ""
-        
-        AntSocio = DBLet(Rs!Codsocio, "N")
-        AntFecha = DBLet(Rs!fecfactu, "F")
-        
-        
-        While Not Rs.EOF And b
-            If DBLet(Rs!Codsocio, "N") <> AntSocio Then
-                Mens = "Insertando en Tesoreria "
-                If InsertarEnTesoreriaAlmz(Mens, AntSocio, Facturas, CDate(AntFecha), TotalTesoreria, CDate(txtcodigo(1).Text), CDate(txtcodigo(0).Text), txtcodigo(3).Text, txtcodigo(9).Text, txtcodigo(4).Text, txtcodigo(2).Text) = False And b Then b = False
-               
-                AntSocio = DBLet(Rs!Codsocio, "N")
-                AntFecha = DBLet(Rs!fecfactu, "F")
-                TotalTesoreria = 0
-                Facturas = ""
-            End If
-            
-            SQL = cadTABLA & "." & Codigo1 & "=" & DBSet(Rs.Fields(1), "N") & " and rcabfactalmz.numfactu=" & DBSet(Rs!numfactu, "N")
-            SQL = SQL & " and rcabfactalmz.fecfactu=" & DBSet(Rs!fecfactu, "F") & " and rcabfactalmz.codsocio =" & DBSet(Rs!Codsocio, "N")
-            
-            If DBLet(Rs!tipofichero, "N") = 1 Then
-               TotalFactura = 0
-               Facturas = Facturas & " " & Format(DBLet(Rs!numfactu, "N"), "0000000")
-               If PasarFacturaAlmzSoc(SQL, Orden2, txtcodigo(0).Text, txtcodigo(10).Text, TotalFactura) = False And b Then b = False
-               TotalTesoreria = TotalTesoreria + TotalFactura
-            Else
-               TotalFactura = 0
-               Facturas = Facturas & " " & Format(DBLet(Rs!numfactu, "N"), "0000000")
-               If PasarFacturaAlmzCli(SQL, Orden2, txtcodigo(2).Text, TotalFactura) = False And b Then b = False
-               TotalTesoreria = TotalTesoreria - TotalFactura
-            End If
-
-            IncrementarProgres Me.Pb1, 1
-            Me.lblProgres(1).Caption = "Insertando Facturas Almazara en Contabilidad...   (" & i & " de " & numfactu & ")"
-            Me.Refresh
-            i = i + 1
-            Rs.MoveNext
-        Wend
-        
-        ' ultimo registro de tesoreria
-        InsertarEnTesoreriaAlmz Mens, DBLet(AntSocio, "N"), Facturas, CDate(AntFecha), TotalTesoreria, txtcodigo(1).Text, txtcodigo(0).Text, txtcodigo(3).Text, txtcodigo(9).Text, txtcodigo(4).Text, txtcodigo(2).Text
-
-        Rs.Close
-        Set Rs = Nothing
-    End If
-
-EPasarFac:
-    If Err.Number <> 0 Then b = False
-
-    If b Then
-        ConnConta.CommitTrans
-        conn.CommitTrans
-        PasarFacturasAContab = True
-    Else
-        ConnConta.RollbackTrans
-        conn.RollbackTrans
-        PasarFacturasAContab = False
-    End If
-End Function
 
 Private Function ComprobarFechasConta(ind As Integer) As Boolean
 'comprobar que el periodo de fechas a contabilizar esta dentro del
@@ -950,7 +826,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
 
         .SoloImprimir = False
@@ -989,17 +865,17 @@ End Function
 
 
 Private Function ExisteCliente(Socio As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eExisteCliente
     
     ExisteCliente = False
     
-    SQL = "select * from sclien where codclien = " & DBSet(Socio, "N")
+    Sql = "select * from sclien where codclien = " & DBSet(Socio, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, ConnAriges, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, ConnAriges, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         ExisteCliente = True

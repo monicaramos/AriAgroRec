@@ -67,6 +67,13 @@ Dim vvIban As String
 Dim vSoc As cSocio
 Dim vTra As CTransportista
 
+Private vTipoIva(2) As Currency
+Private vPorcIva(2) As Currency
+Private vPorcRec(2) As Currency
+Private vBaseIva(2) As Currency
+Private vImpIva(2) As Currency
+Private vImpRec(2) As Currency
+
 
 Public Function CrearTMPFacturas(cadTabla As String, cadWHERE As String) As Boolean
 'Crea una temporal donde inserta la clave primaria de las
@@ -744,67 +751,6 @@ EComprobarLetra:
     End If
 End Function
 
-'###### ESTE YA NO SE UTILIZA
-'Public Function ComprobarNumFacturas(cadTabla As String, cadWConta) As Boolean
-''Comprobar que no exista ya en la contabilidad un nº de factura para la fecha que
-''vamos a contabilizar
-'Dim SQL As String
-'Dim RS As ADODB.Recordset
-'Dim RSconta As ADODB.Recordset
-'Dim b As Boolean
-'
-'    On Error GoTo ECompFactu
-'
-'    ComprobarNumFacturas = False
-'
-'    SQL = "SELECT numserie,codfaccl,anofaccl FROM cabfact "
-'    SQL = SQL & " WHERE " & cadWConta
-'
-'    Set RSconta = New ADODB.Recordset
-'    RSconta.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
-'
-'    If Not RSconta.EOF Then
-'        'Seleccionamos las distintas facturas que vamos a facturar
-'        SQL = "SELECT DISTINCT " & cadTabla & ".codtipom,letraser,scafac.numfactu,scafac.fecfactu "
-'        SQL = SQL & " FROM (" & cadTabla & " INNER JOIN stipom ON " & cadTabla & ".codtipom=stipom.codtipom) "
-'        SQL = SQL & " INNER JOIN tmpFactu ON scafac.codtipom=tmpFactu.codtipom AND scafac.numfactu=tmpFactu.numfactu AND scafac.fecfactu=tmpFactu.fecfactu "
-''        SQL = SQL & " WHERE " & cadWHERE
-'
-'        Set RS = New ADODB.Recordset
-'        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        b = True
-'        While Not RS.EOF And b
-'            SQL = "(numserie= " & DBSet(RS!LetraSer, "T") & " AND codfaccl=" & DBSet(RS!NumFactu, "N") & " AND anofaccl=" & Year(RS!FecFactu) & ")"
-'            If SituarRSetMULTI(RSconta, SQL) Then
-'                b = False
-'                SQL = "          Nº Fac.: " & Format(RS!NumFactu, "0000000") & vbCrLf
-'                SQL = SQL & "          Fecha: " & RS!FecFactu
-'            End If
-'            RS.MoveNext
-'        Wend
-'        RS.Close
-'        Set RS = Nothing
-'
-'        If Not b Then
-'            SQL = "Ya existe la factura: " & vbCrLf & SQL
-'            SQL = "Comprobando Nº Facturas en Contabilidad...       " & vbCrLf & vbCrLf & SQL
-'
-'            MsgBox SQL, vbExclamation
-'            ComprobarNumFacturas = False
-'        Else
-'            ComprobarNumFacturas = True
-'        End If
-'    Else
-'        ComprobarNumFacturas = True
-'    End If
-'    RSconta.Close
-'    Set RSconta = Nothing
-'
-'ECompFactu:
-'     If Err.Number <> 0 Then
-'        MuestraError Err.Number, "Comprobar Nº Facturas", Err.Description
-'    End If
-'End Function
 
 
 Public Function ComprobarNumFacturas_new(cadTabla As String, cadWConta) As Boolean
@@ -833,7 +779,11 @@ Dim b As Boolean
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         b = True
         While Not Rs.EOF And b
-            Sql = "(numserie= " & DBSet(Rs!numserie, "T") & " AND codfaccl=" & DBSet(Rs!numfactu, "N") & " AND anofaccl=" & Year(Rs!fecfactu) & ")"
+            If vParamAplic.ContabilidadNueva Then
+                Sql = "(numserie= " & DBSet(Rs!numserie, "T") & " AND numfactu=" & DBSet(Rs!numfactu, "N") & " AND anofactu=" & Year(Rs!fecfactu) & ")"
+            Else
+                Sql = "(numserie= " & DBSet(Rs!numserie, "T") & " AND codfaccl=" & DBSet(Rs!numfactu, "N") & " AND anofaccl=" & Year(Rs!fecfactu) & ")"
+            End If
 '            If SituarRSetMULTI(RSconta, SQL) Then
             Sql = SQLconta & Sql
             If RegistrosAListar(Sql, cConta) Then
@@ -868,7 +818,11 @@ Dim b As Boolean
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         b = True
         While Not Rs.EOF And b
-            Sql = "(numserie= " & DBSet(Rs!letraser, "T") & " AND codfaccl=" & DBSet(Rs!numfactu, "N") & " AND anofaccl=" & Year(Rs!fecfactu) & ")"
+            If vParamAplic.ContabilidadNueva Then
+                Sql = "(numserie= " & DBSet(Rs!letraser, "T") & " AND numfactu=" & DBSet(Rs!numfactu, "N") & " AND anofactu=" & Year(Rs!fecfactu) & ")"
+            Else
+                Sql = "(numserie= " & DBSet(Rs!letraser, "T") & " AND codfaccl=" & DBSet(Rs!numfactu, "N") & " AND anofaccl=" & Year(Rs!fecfactu) & ")"
+            End If
 '            If SituarRSetMULTI(RSconta, SQL) Then
             Sql = SQLconta & Sql
             If RegistrosAListar(Sql, cConta) Then
@@ -900,170 +854,6 @@ ECompFactu:
         MuestraError Err.Number, "Comprobar Nº Facturas", Err.Description
     End If
 End Function
-
-
-
-
-'###### ESTE YA NO SE UTILIZA
-'Public Function ComprobarCtaContable(cadTabla As String, Opcion As Byte) As Boolean
-''Comprobar que todas las ctas contables de los distintos clientes de las facturas
-''que vamos a contabilizar existan en la contabilidad
-'Dim SQL As String
-'Dim RS As ADODB.Recordset
-'Dim RSconta As ADODB.Recordset
-'Dim b As Boolean
-'Dim cadG As String
-'
-'    On Error GoTo ECompCta
-'
-'    ComprobarCtaContable = False
-'
-'    If Opcion = 3 Then 'si hay analitica comprobar que todas las cuentas
-'                        'empiezan por el digito que hay en conta.parametros.grupogto o .grupovta
-'        cadG = "grupovta"
-'        SQL = DevuelveDesdeBDNew(conConta, "parametros", "grupogto", "", "", "", cadG)
-'        If SQL <> "" And cadG <> "" Then
-'            SQL = " AND (codmacta like '" & SQL & "%' OR codmacta like '" & cadG & "%')"
-'        ElseIf SQL <> "" Then
-'            SQL = " AND (codmacta like '" & SQL & "%')"
-'        ElseIf cadG <> "" Then
-'            SQL = " AND (codmacta like '" & cadG & "%')"
-'        End If
-'        cadG = SQL
-'    End If
-'
-'    SQL = "SELECT codmacta FROM cuentas "
-'    SQL = SQL & " WHERE apudirec='S'"
-'    If cadG <> "" Then SQL = SQL & cadG
-'
-'    Set RSconta = New ADODB.Recordset
-'    RSconta.Open SQL, ConnConta, adOpenStatic, adLockPessimistic, adCmdText
-'
-'    If Not RSconta.EOF Then
-'        If Opcion = 1 Then
-'            If cadTabla = "scafac" Then
-'                'Seleccionamos los distintos clientes,cuentas que vamos a facturar
-'                SQL = "SELECT DISTINCT scafac.codclien, sclien.codmacta "
-'                SQL = SQL & " FROM (scafac INNER JOIN sclien ON scafac.codclien=sclien.codclien) "
-'                SQL = SQL & " INNER JOIN tmpFactu ON scafac.codtipom=tmpFactu.codtipom AND scafac.numfactu=tmpFactu.numfactu AND scafac.fecfactu=tmpFactu.fecfactu "
-'            Else
-'                'Seleccionamos los distintos proveedores,cuentas que vamos a facturar
-'                SQL = "SELECT DISTINCT scafpc.codprove, sprove.codmacta "
-'                SQL = SQL & " FROM (scafpc INNER JOIN sprove ON scafpc.codprove=sprove.codprove) "
-'                SQL = SQL & " INNER JOIN tmpFactu ON scafpc.codprove=tmpFactu.codprove AND scafpc.numfactu=tmpFactu.numfactu AND scafpc.fecfactu=tmpFactu.fecfactu "
-'            End If
-'
-'        ElseIf Opcion = 2 Or Opcion = 3 Then
-'            SQL = "SELECT distinct "
-'            If Opcion = 2 Then SQL = SQL & " sartic.codfamia,"
-'            If cadTabla = "scafac" Then
-'                SQL = SQL & " sfamia.ctaventa as codmacta,sfamia.aboventa as ctaabono, sfamia.ctavent1,sfamia.abovent1 from ((slifac "
-'                SQL = SQL & " INNER JOIN tmpFactu ON slifac.codtipom=tmpFactu.codtipom AND slifac.numfactu=tmpFactu.numfactu AND slifac.fecfactu=tmpFactu.fecfactu) "
-'                SQL = SQL & "INNER JOIN sartic ON slifac.codartic=sartic.codartic) "
-'            Else
-'                SQL = SQL & " sfamia.ctacompr as codmacta,sfamia.abocompr as ctaabono from ((slifpc "
-'                SQL = SQL & " INNER JOIN tmpFactu ON slifpc.codprove=tmpFactu.codprove AND slifpc.numfactu=tmpFactu.numfactu AND slifpc.fecfactu=tmpFactu.fecfactu) "
-'                SQL = SQL & "INNER JOIN sartic ON slifpc.codartic=sartic.codartic) "
-'            End If
-'            SQL = SQL & " LEFT OUTER JOIN sfamia ON sartic.codfamia=sfamia.codfamia "
-'        End If
-'
-'        Set RS = New ADODB.Recordset
-'        RS.Open SQL, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        b = True
-'        While Not RS.EOF And b
-'            SQL = "codmacta= " & DBSet(RS!Codmacta, "T")
-'            RSconta.MoveFirst
-'            RSconta.Find (SQL), , adSearchForward
-'            If RSconta.EOF Then
-'                b = False 'no encontrado
-'                If Opcion = 1 Then
-'                    If cadTabla = "scafac" Then
-'                        SQL = RS!Codmacta & " del Cliente " & Format(RS!CodClien, "000000")
-'                    Else
-'                        SQL = RS!Codmacta & " del Proveedor " & Format(RS!codProve, "000000")
-'                    End If
-'                ElseIf Opcion = 2 Then
-'                    SQL = RS!Codmacta & " de la familia " & Format(RS!codfamia, "0000")
-'                ElseIf Opcion = 3 Then
-'                    SQL = RS!Codmacta
-'                End If
-'            End If
-'
-'            If Opcion = 2 Then
-'                'Comprobar que ademas de existir la cuenta de ventas exista tambien
-'                'la cuenta ABONO ventas
-'                SQL = "codmacta= " & DBSet(RS!ctaabono, "T")
-'                RSconta.MoveFirst
-'                RSconta.Find (SQL), , adSearchForward
-'                If RSconta.EOF Then
-'                    b = False 'no encontrado
-'                    SQL = RS!ctaabono & " de la familia " & Format(RS!codfamia, "0000")
-'                End If
-'            End If
-'
-'            'comprobar cuentas alternativas solo para facturacion a clientes
-'            If cadTabla = "scafac" Then
-'                If Opcion = 2 Then
-'                    ' Comprobar cuenta venta alternativa
-'                    If DBLet(RS!ctavent1, "T") <> "" Then
-'                        SQL = "codmacta= " & DBSet(RS!ctavent1, "T")
-'                        RSconta.MoveFirst
-'                        RSconta.Find (SQL), , adSearchForward
-'                        If RSconta.EOF Then
-'                            b = False 'no encontrado
-'                            SQL = RS!ctavent1 & " de la familia " & Format(RS!codfamia, "0000")
-'                        End If
-'                    Else
-'                        b = False
-'                        SQL = " o la familia no tiene asignada cuenta venta alternativa."
-'                    End If
-'                End If
-'                If Opcion = 2 Then
-'                    ' Comprobar cuenta de abono alternativa
-'                    If DBLet(RS!abovent1, "T") <> "" Then
-'                        SQL = "codmacta= " & DBSet(RS!abovent1, "T")
-'                        RSconta.MoveFirst
-'                        RSconta.Find (SQL), , adSearchForward
-'                        If RSconta.EOF Then
-'                            b = False 'no encontrado
-'                            SQL = RS!ctaabon1 & " de la familia " & Format(RS!codfamia, "0000")
-'                        End If
-'                    Else
-'                        b = False
-'                        SQL = " o la familia no tiene asignada cuenta abono alternativa."
-'                    End If
-'                End If
-'            End If
-'            RS.MoveNext
-'        Wend
-'        RS.Close
-'        Set RS = Nothing
-'
-'        If Not b Then
-'            If Opcion <> 3 Then
-'                SQL = "No existe la cta contable " & SQL
-'            Else
-'                SQL = "La cuenta " & SQL & " no es del nivel correcto."
-'            End If
-'            SQL = "Comprobando Ctas Contables en contabilidad... " & vbCrLf & vbCrLf & SQL
-'
-'            MsgBox SQL, vbExclamation
-'            ComprobarCtaContable = False
-'        Else
-'            ComprobarCtaContable = True
-'        End If
-'    Else
-'        ComprobarCtaContable = True
-'    End If
-'    RSconta.Close
-'    Set RSconta = Nothing
-'
-'ECompCta:
-'     If Err.Number <> 0 Then
-'        MuestraError Err.Number, "Comprobar Ctas Contables", Err.Description
-'    End If
-'End Function
 
 
 
@@ -2591,13 +2381,15 @@ Private Function InsertarCabFactADV(cadWHERE As String, Observac As String, cadE
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Cad As String
-
+Dim IvaImp As Currency
 
     On Error GoTo EInsertar
     
     Sql = "SELECT stipom.letraser,numfactu,fecfactu, rsocios_seccion.codmaccli as codmacta,year(fecfactu) as anofaccl,"
     Sql = Sql & "baseimp1,baseimp2,baseimp3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
-    Sql = Sql & "totalfac,codiiva1,codiiva2,codiiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3 "
+    Sql = Sql & "totalfac,codiiva1,codiiva2,codiiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3, "
+    Sql = Sql & "advfacturas.codforpa, "
+    Sql = Sql & "advfacturas.nomsocio, advfacturas.dirsocio,advfacturas.pobsocio,advfacturas.codpostal,advfacturas.prosocio,advfacturas.nifsocio"
     Sql = Sql & " FROM ((" & "advfacturas inner join " & "usuarios.stipom on advfacturas.codtipom=usuarios.stipom.codtipom) "
     Sql = Sql & "INNER JOIN rsocios ON advfacturas.codsocio=rsocios.codsocio) "
     Sql = Sql & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.SeccionADV, "N")
@@ -2612,6 +2404,8 @@ Dim Cad As String
         DtoPPago = 0
         DtoGnral = 0
         BaseImp = Rs!baseimp1 + CCur(DBLet(Rs!baseimp2, "N")) + CCur(DBLet(Rs!baseimp3, "N"))
+        IvaImp = DBLet(Rs!impoiva1, "N") + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
+        
         '---- Laura 10/10/2006:  añadir el totalfac para utilizarlo en insertar lineas
         TotalFac = Rs!TotalFac
         '----
@@ -2621,12 +2415,29 @@ Dim Cad As String
         '[Monica]02/05/2012: añadido campo observaciones del frame, antes valor nulo
         Sql = Sql & DBSet(Observac, "T") & "," '& ValorNulo & ","
         
-        Sql = Sql & DBSet(Rs!baseimp1, "N") & "," & DBSet(Rs!baseimp2, "N", "S") & "," & DBSet(Rs!baseimp3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!codiiva1, "N") & "," & DBSet(Rs!codiiva2, "N", "S") & "," & DBSet(Rs!codiiva3, "N", "S") & ",0,"
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F")
+        
+        If vParamAplic.ContabilidadNueva Then
+            ' para el caso de las rectificativas
+            Dim vTipM As String
+            vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+            If vTipM = "FAR" Then
+                Sql = Sql & "'D',"
+            Else
+                Sql = Sql & "'0',"
+            End If
+            
+            Sql = Sql & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(Rs!TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0," & DBSet(Rs!fecfactu, "F") & ","
+            Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+            Sql = Sql & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+        Else
+            Sql = Sql & DBSet(Rs!baseimp1, "N") & "," & DBSet(Rs!baseimp2, "N", "S") & "," & DBSet(Rs!baseimp3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!codiiva1, "N") & "," & DBSet(Rs!codiiva2, "N", "S") & "," & DBSet(Rs!codiiva3, "N", "S") & ",0,"
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & DBSet(Rs!fecfactu, "F")
+        End If
         Cad = Cad & "(" & Sql & ")"
 '        RS.MoveNext
     End If
@@ -2634,13 +2445,69 @@ Dim Cad As String
     Set Rs = Nothing
     
     
-    'Insertar en la contabilidad
-    Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
-    Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
-    Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    Sql = Sql & " VALUES " & Cad
-    ConnConta.Execute Sql
-    
+    If vParamAplic.ContabilidadNueva Then
+        Sql = "INSERT INTO factcli (numserie,numfactu,fecfactu,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+        Sql = Sql & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,fecliqcl,nommacta,dirdatos,codpobla,despobla, desprovi,nifdatos,"
+        Sql = Sql & "codpais,codagente)"
+        Sql = Sql & " VALUES " & Cad
+        ConnConta.Execute Sql
+'***
+        CadenaInsertFaclin2 = ""
+            
+        
+        'numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+        'IVA 1, siempre existe
+        Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+        Sql2 = Sql2 & "1," & DBSet(Rs!baseimp1, "N") & "," & Rs!codiiva1 & "," & DBSet(Rs!porciva1, "N") & ","
+        Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+        CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+        
+        'para las lineas
+        vTipoIva(0) = Rs!TipoIVA1
+        vPorcIva(0) = Rs!porciva1
+        vPorcRec(0) = 0
+        vImpIva(0) = Rs!impoiva1
+        vImpRec(0) = 0
+        vBaseIva(0) = Rs!baseimp1
+        
+        vTipoIva(1) = 0: vTipoIva(2) = 0
+        
+        If Not IsNull(Rs!porciva2) Then
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "2," & DBSet(Rs!baseimp2, "N") & "," & Rs!codiiva2 & "," & DBSet(Rs!porciva2, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+            vTipoIva(1) = Rs!TipoIVA2
+            vPorcIva(1) = Rs!porciva2
+            vPorcRec(1) = 0
+            vImpIva(1) = Rs!impoiva2
+            vImpRec(1) = 0
+            vBaseIva(1) = Rs!baseimp2
+        End If
+        If Not IsNull(Rs!porciva3) Then
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "3," & DBSet(Rs!baseimp3, "N") & "," & Rs!codiiva3 & "," & DBSet(Rs!porciva3, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+            vTipoIva(2) = Rs!TipoIVA3
+            vPorcIva(2) = Rs!porciva3
+            vPorcRec(2) = 0
+            vImpIva(2) = Rs!impoiva3
+            vImpRec(2) = 0
+            vBaseIva(2) = Rs!baseimp3
+        End If
+
+        Sql = "INSERT INTO factcli_totales(numserie,numfactu,fecfactu,anofactu,numlinea,baseimpo,codigiva,"
+        Sql = Sql & "porciva,porcrec,impoiva,imporec) VALUES " & CadenaInsertFaclin2
+        ConnConta.Execute Sql
+    Else
+        'Insertar en la contabilidad
+        Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
+        Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
+        Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
+        Sql = Sql & " VALUES " & Cad
+        ConnConta.Execute Sql
+    End If
 EInsertar:
     If Err.Number <> 0 Then
         InsertarCabFactADV = False
@@ -2669,7 +2536,8 @@ Dim Seccion As Integer
     
     Sql = "SELECT stipom.letraser,numfactu,fecfactu, rsocios_seccion.codmaccli as codmacta,year(fecfactu) as anofaccl,"
     Sql = Sql & "baseimp1,baseimp2,baseimp3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
-    Sql = Sql & "totalfac,codiiva1,codiiva2,codiiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3 "
+    Sql = Sql & "totalfac,codiiva1,codiiva2,codiiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3, rbodfacturas.codforpa,  "
+    Sql = Sql & "rbodfacturas.nomsocio, rbodfacturas.dirsocio,rbodfacturas.pobsocio,rbodfacturas.codpostal,rbodfacturas.prosocio,rbodfacturas.nifsocio"
     Sql = Sql & " FROM ((" & "rbodfacturas inner join " & "usuarios.stipom on rbodfacturas.codtipom=usuarios.stipom.codtipom) "
     Sql = Sql & "INNER JOIN rsocios ON rbodfacturas.codsocio=rsocios.codsocio) "
     Sql = Sql & "INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N")
@@ -2684,31 +2552,107 @@ Dim Seccion As Integer
         DtoPPago = 0
         DtoGnral = 0
         BaseImp = Rs!baseimp1 + CCur(DBLet(Rs!baseimp2, "N")) + CCur(DBLet(Rs!baseimp3, "N"))
+        IvaImp = DBLet(Rs!impoiva1, "N") + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
+        
         '---- Laura 10/10/2006:  añadir el totalfac para utilizarlo en insertar lineas
         TotalFac = Rs!TotalFac
         '----
         
         Sql = ""
-        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!baseimp1, "N") & "," & DBSet(Rs!baseimp2, "N", "S") & "," & DBSet(Rs!baseimp3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!codiiva1, "N") & "," & DBSet(Rs!codiiva2, "N", "S") & "," & DBSet(Rs!codiiva3, "N", "S") & ",0,"
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F")
-        Cad = Cad & "(" & Sql & ")"
+        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & ValorNulo & ","
+        
+        If vParamAplic.ContabilidadNueva Then
+            
+            ' para el caso de las rectificativas
+            Dim vTipM As String
+            vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+            If vTipM = "FAR" Then
+                Sql = Sql & "'D',"
+            Else
+                Sql = Sql & "'0',"
+            End If
+            
+            Sql = Sql & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(Rs!TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0," & DBSet(Rs!fecfactu, "F") & ","
+            Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+            Sql = Sql & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+            Sql = "INSERT INTO factcli (numserie,numfactu,fecfactu,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+            Sql = Sql & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,fecliqcl,nommacta,dirdatos,codpobla,despobla, desprovi,nifdatos,"
+            Sql = Sql & "codpais,codagente)"
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+    '***
+            CadenaInsertFaclin2 = ""
+                
+            
+            'numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+            'IVA 1, siempre existe
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "1," & DBSet(Rs!baseimp1, "N") & "," & Rs!codiiva1 & "," & DBSet(Rs!porciva1, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+            
+            'para las lineas
+            vTipoIva(0) = Rs!TipoIVA1
+            vPorcIva(0) = Rs!porciva1
+            vPorcRec(0) = 0
+            vImpIva(0) = Rs!impoiva1
+            vImpRec(0) = 0
+            vBaseIva(0) = Rs!baseimp1
+            
+            vTipoIva(1) = 0: vTipoIva(2) = 0
+            
+            If Not IsNull(Rs!porciva2) Then
+                Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+                Sql2 = Sql2 & "2," & DBSet(Rs!baseimp2, "N") & "," & Rs!codiiva2 & "," & DBSet(Rs!porciva2, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                vTipoIva(1) = Rs!TipoIVA2
+                vPorcIva(1) = Rs!porciva2
+                vPorcRec(1) = 0
+                vImpIva(1) = Rs!impoiva2
+                vImpRec(1) = 0
+                vBaseIva(1) = Rs!baseimp2
+            End If
+            If Not IsNull(Rs!porciva3) Then
+                Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+                Sql2 = Sql2 & "3," & DBSet(Rs!baseimp3, "N") & "," & Rs!codiiva3 & "," & DBSet(Rs!porciva3, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                vTipoIva(2) = Rs!TipoIVA3
+                vPorcIva(2) = Rs!porciva3
+                vPorcRec(2) = 0
+                vImpIva(2) = Rs!impoiva3
+                vImpRec(2) = 0
+                vBaseIva(2) = Rs!baseimp3
+            End If
+    
+            Sql = "INSERT INTO factcli_totales(numserie,numfactu,fecfactu,anofactu,numlinea,baseimpo,codigiva,"
+            Sql = Sql & "porciva,porcrec,impoiva,imporec) VALUES " & CadenaInsertFaclin2
+            ConnConta.Execute Sql
+                
+        Else
+            Sql = Sql & DBSet(Rs!baseimp1, "N") & "," & DBSet(Rs!baseimp2, "N", "S") & "," & DBSet(Rs!baseimp3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!codiiva1, "N") & "," & DBSet(Rs!codiiva2, "N", "S") & "," & DBSet(Rs!codiiva3, "N", "S") & ",0,"
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            Cad = Cad & "(" & Sql & ")"
+        
+            'Insertar en la contabilidad
+            Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,fecliqcl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
+            Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
+            Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien) "
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+        
+        End If
 '        RS.MoveNext
     End If
     Rs.Close
     Set Rs = Nothing
     
     
-    'Insertar en la contabilidad
-    Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
-    Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
-    Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    Sql = Sql & " VALUES " & Cad
-    ConnConta.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -4308,82 +4252,6 @@ EContab:
 End Function
 
 
-Private Function InsertarCabFactProv(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As String) As Boolean
-'Insertando en tabla conta.cabfact
-'(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
-Dim Sql As String
-Dim Rs As ADODB.Recordset
-Dim Cad As String
-Dim Nulo2 As String
-Dim Nulo3 As String
-
-    On Error GoTo EInsertar
-       
-    
-    Sql = " SELECT fecfactu,year(fecrecep) as anofacpr,fecrecep,numfactu,proveedor.codmacta,"
-    Sql = Sql & "scafpc.dtoppago,scafpc.dtognral,baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
-    Sql = Sql & "totalfac,tipoiva1,tipoiva2,tipoiva3,proveedor.codprove, proveedor.nomprove "
-    Sql = Sql & " FROM " & "scafpc "
-    Sql = Sql & "INNER JOIN " & "proveedor ON scafpc.codprove=proveedor.codprove "
-    Sql = Sql & " WHERE " & cadWHERE
-    
-    Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
-    Cad = ""
-    If Not Rs.EOF Then
-    
-        If Mc.ConseguirContador("1", (Rs!FecRecep <= CDate(FechaFin) - 365), True) = 0 Then
-        
-            'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
-            DtoPPago = Rs!DtoPPago
-            DtoGnral = Rs!DtoGnral
-            BaseImp = Rs!BaseIVA1 + CCur(DBLet(Rs!BaseIVA2, "N")) + CCur(DBLet(Rs!BaseIVA3, "N"))
-            TotalFac = Rs!TotalFac
-            AnyoFacPr = Rs!anofacpr
-            
-            Nulo2 = "N"
-            Nulo3 = "N"
-            If DBLet(Rs!BaseIVA2, "N") = "0" Then Nulo2 = "S"
-            If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
-            Sql = ""
-            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Rs!Codmacta, "T") & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & ","
-            Sql = Sql & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", Nulo2) & "," & DBSet(Rs!porciva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ",0,"
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!FecRecep, "F") & ",0"
-            Cad = Cad & "(" & Sql & ")"
-            
-            'Insertar en la contabilidad
-            Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
-            Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
-            Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            Sql = Sql & " VALUES " & Cad
-            ConnConta.Execute Sql
-            
-            'añadido como david para saber que numero de registro corresponde a cada factura
-            'Para saber el numreo de registro que le asigna a la factrua
-            Sql = "INSERT INTO tmpinformes (codusu,codigo1,nombre1,nombre2,importe1) VALUES (" & vUsu.Codigo & "," & Mc.Contador
-            Sql = Sql & ",'" & DevNombreSQL(Rs!numfactu) & " @ " & Format(Rs!fecfactu, "dd/mm/yyyy") & "','" & DevNombreSQL(Rs!nomprove) & "'," & Rs!codProve & ")"
-            conn.Execute Sql
-            
-            
-        End If
-    End If
-    Rs.Close
-    Set Rs = Nothing
-    
-EInsertar:
-    If Err.Number <> 0 Then
-        InsertarCabFactProv = False
-        cadErr = Err.Description
-    Else
-        InsertarCabFactProv = True
-    End If
-End Function
-
 
 Private Function InsertarCabFactSoc(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String) As Boolean
 'Insertando en tabla conta.cabfact
@@ -4516,7 +4384,7 @@ Dim CadenaInsertFaclin2 As String
             
             Else
                 Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
-                Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
                 Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
                 Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
             
@@ -4670,7 +4538,7 @@ Dim CadenaInsertFaclin2 As String
                     ConnConta.Execute Sql
                 Else
                     Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
-                    Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
+                    Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
                     Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
                     Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
                 
@@ -5398,6 +5266,7 @@ Dim Nulo4 As String
     Sql = " SELECT fecfactu,year(fecrecep) as anofacpr,fecrecep,numfactu,rsocios_seccion.codmacpro as codmacta,"
     Sql = Sql & "rcafter.dtoppago,rcafter.dtognral,baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
     Sql = Sql & "totalfac,tipoiva1,tipoiva2,tipoiva3, retfacpr, trefacpr, rsocios_seccion.codsocio, rsocios.nomsocio, rcafter.intracom "
+    Sql = Sql & "rsocios.dirsocio,rsocios.pobsocio,rsocios.codpostal,rsocios.prosocio,rsocios.nifsocio"
     Sql = Sql & " FROM (" & "rcafter "
     Sql = Sql & "INNER JOIN " & "rsocios ON rcafter.codsocio=rsocios.codsocio )"
     Sql = Sql & " INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
@@ -5425,29 +5294,121 @@ Dim Nulo4 As String
             If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
             If DBLet(Rs!trefacpr, "N") = "0" Then Nulo4 = "S"
             Sql = ""
-            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Rs!Codmacta, "T") & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & ","
-            Sql = Sql & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", Nulo2) & "," & DBSet(Rs!porciva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ","
-            Sql = Sql & DBSet(Rs!intracom, "N") & ","
-            Sql = Sql & DBSet(Rs!retfacpr, "N", Nulo4) & "," & DBSet(Rs!trefacpr, "N", Nulo4) & ","
-            If Nulo4 = "S" Then
-                Sql = Sql & ValorNulo & ","
+            If vParamAplic.ContabilidadNueva Then Sql = "'" & SerieFraPro & "',"
+            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Rs!Codmacta, "T") & "," & ValorNulo & ","
+            
+            If vParamAplic.ContabilidadNueva Then
+                Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
+                Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
+                
+                TipoOpera = 0
+                
+                Aux = "0"
+                Select Case TipoOpera
+                Case 0
+                    If Rs!TotalFac < 0 Then
+                        Aux = "D"
+                    Else
+                        If Not IsNull(Rs!TipoIVA2) Then Aux = "C"
+                    End If
+                End Select
+                
+                'codopera,codconce340,codintra
+                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & DBSet(Rs!intracom, "N") & ","
+                
+                
+                'para las lineas
+                'factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+                'IVA 1, siempre existe
+                Aux = "'" & SerieFraPro & "'," & Mc.Contador & "," & DBSet(Rs!FecRecep, "F") & "," & Rs!anofacpr & ","
+                
+                Sql2 = Aux & "1," & DBSet(Rs!BaseIVA1, "N") & "," & Rs!TipoIVA1 & "," & DBSet(Rs!porciva1, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+                vTipoIva(0) = Rs!TipoIVA1
+                vPorcIva(0) = Rs!porciva1
+                vPorcRec(0) = 0
+                vImpIva(0) = Rs!impoiva1
+                vImpRec(0) = 0
+                vBaseIva(0) = Rs!BaseIVA1
+                
+                vTipoIva(1) = 0: vTipoIva(2) = 0
+                
+                If Not IsNull(Rs!porciva2) Then
+                    Sql2 = Aux & "2," & DBSet(Rs!BaseIVA2, "N") & "," & Rs!TipoIVA2 & "," & DBSet(Rs!porciva2, "N") & ","
+                    Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                    vTipoIva(1) = Rs!TipoIVA2
+                    vPorcIva(1) = Rs!porciva2
+                    vPorcRec(1) = 0
+                    vImpIva(1) = Rs!impoiva2
+                    vImpRec(1) = 0
+                    vBaseIva(1) = Rs!BaseIVA2
+                End If
+                
+                If Not IsNull(Rs!porciva3) Then
+                    Sql2 = Aux & "3," & DBSet(Rs!BaseIVA3, "N") & "," & Rs!TipoIVA3 & "," & DBSet(Rs!porciva3, "N") & ","
+                    Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                    vTipoIva(2) = Rs!TipoIVA3
+                    vPorcIva(2) = Rs!porciva3
+                    vPorcRec(2) = 0
+                    vImpIva(2) = Rs!impoiva3
+                    vImpRec(2) = 0
+                    vBaseIva(2) = Rs!BaseIVA3
+                End If
+                    
+                    
+                'Los totales
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                ImporAux = Rs!BaseIVA1 + DBLet(Rs!BaseIVA2, "N") + DBLet(Rs!BaseIVA3, "N")
+                Sql = Sql & DBSet(ImporAux, "N") & "," & ValorNulo & ","
+                        
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                Sql = Sql & DBSet(ImporAux, "N") & "," & DBSet(Rs!BaseReten, "N", "S") & ","
+                'totivas
+                ImporAux = Rs!impoiva1 + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
+                Sql = Sql & DBSet(ImporAux, "N") & "," & DBSet(TotalFac, "N") & ","
+                
+                If DBLet(Rs!retfacpr, "N") <> 0 Then
+                    Sql = Sql & DBSet(Rs!retfacpr, "N") & "," & DBSet(Rs!trefacpr, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2"
+                Else
+                    Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
+                End If
+                
+                Cad = Cad & "(" & Sql & ")"
+            
+                Sql = "INSERT INTO factpro(numserie,numregis,fecfactu,anofactu,fecharec,fecliqpr,numfactu,codmacta,observa,nommacta,"
+                Sql = Sql & "dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,codforpa,codopera,codconce340,codintra,"
+                Sql = Sql & "totbases,totbasesret,totivas,totfacpr,retfacpr,trefacpr,cuereten,tiporeten)"
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
+                
             Else
-                Sql = Sql & DBSet(vParamAplic.CtaTerReten, "T") & ","
+                Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & ","
+                Sql = Sql & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", Nulo2) & "," & DBSet(Rs!porciva3, "N", Nulo3) & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ","
+                Sql = Sql & DBSet(Rs!intracom, "N") & ","
+                Sql = Sql & DBSet(Rs!retfacpr, "N", Nulo4) & "," & DBSet(Rs!trefacpr, "N", Nulo4) & ","
+                If Nulo4 = "S" Then
+                    Sql = Sql & ValorNulo & ","
+                Else
+                    Sql = Sql & DBSet(vParamAplic.CtaTerReten, "T") & ","
+                End If
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ",0"
+                Cad = Cad & "(" & Sql & ")"
+    
+                'Insertar en la contabilidad
+                Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,fecliqpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
+                Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
+                Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,nodeducible) "
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
             End If
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!FecRecep, "F") & ",0"
-            Cad = Cad & "(" & Sql & ")"
-
-            'Insertar en la contabilidad
-            Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
-            Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
-            Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            Sql = Sql & " VALUES " & Cad
-            ConnConta.Execute Sql
-
             'añadido como david para saber que numero de registro corresponde a cada factura
             'Para saber el numreo de registro que le asigna a la factrua
             Sql = "INSERT INTO tmpinformes (codusu,codigo1,nombre1,nombre2,importe1) VALUES (" & vUsu.Codigo & "," & Mc.Contador
@@ -5468,93 +5429,6 @@ EInsertar:
     End If
 End Function
 
-' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewFac(cadWHERE As String, CtaBan As String, MenError As String) As Boolean
-'Guarda datos de Tesoreria en tablas: conta.scobros
-Dim b As Boolean
-Dim Sql As String, Text33csb As String, Text41csb As String
-Dim Sql4 As String
-Dim Rs4 As ADODB.Recordset
-
-Dim CadValues As String, cadValuesAux As String 'para insertar en svenci
-Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
-Dim i As Byte
-Dim DigConta As String
-Dim CC As String
-Dim vrefer As String
-Dim letraser As String
-Dim Rsx As ADODB.Recordset
-
-
-    On Error GoTo EInsertarTesoreriaNewFac
-
-    b = False
-    InsertarEnTesoreriaNewFac = False
-    CadValues = ""
-    CadValues2 = ""
-    
-    Set Rsx = New ADODB.Recordset
-    Sql = "select * from facturas where " & cadWHERE
-    Rsx.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        
-    If Not Rsx.EOF Then
-    
-        Sql4 = "select codbanco, codsucur, digcontr, cuentaba, codmacta, iban from clientes where codclien = " & DBLet(Rsx!CodClien, "N")
-        Set Rs4 = New ADODB.Recordset
-        
-        Rs4.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        
-        If Not Rs4.EOF Then
-            letraser = ""
-            letraser = DevuelveDesdeBDNew(cAgro, "stipom", "letraser", "codtipom", Rsx!CodTipom, "T")
-            
-            Text33csb = "'Factura:" & DBLet(letraser, "T") & "-" & DBLet(Rsx!numfactu, "T") & " " & Format(DBLet(Rsx!fecfactu, "F"), "dd/mm/yy") & "'"
-            Text41csb = "de " & DBSet(Rsx!TotalFac, "N")
-                  
-            CC = DBLet(Rs4!digcontr, "T")
-            If DBLet(Rs4!digcontr, "T") = "**" Then CC = "00"
-        
-            '[Monica]03/07/2013: añado trim(codmacta)
-            CadValuesAux2 = "(" & DBSet(letraser, "T") & "," & DBSet(Rsx!numfactu, "N") & "," & DBSet(Rsx!fecfactu, "F") & ", 1," & DBSet(Trim(Rs4!Codmacta), "T") & ","
-            CadValues2 = CadValuesAux2 & DBSet(Rsx!Codforpa, "N") & "," & DBSet(Rsx!fecfactu, "F") & "," & DBSet(Rsx!TotalFac, "N") & ","
-            CadValues2 = CadValues2 & DBSet(CtaBan, "T") & "," & DBSet(Rs4!CodBanco, "N", "S") & "," & DBSet(Rs4!CodSucur, "N", "S") & ","
-            CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(Rs4!CuentaBa, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & ",1" ')"
-            '[Monica]22/11/2013: Tema iban
-            If vEmpresa.HayNorma19_34Nueva = 1 Then
-                CadValues2 = CadValues2 & "," & DBSet(Rs4!Iban, "T", "S") & ") "
-            Else
-                CadValues2 = CadValues2 & ") "
-            End If
-            
-            
-            'Insertamos en la tabla scobro de la CONTA
-            Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-            Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-            Sql = Sql & " text33csb, text41csb, agente" ') "
-            '[Monica]22/11/2013: Tema iban
-            If vEmpresa.HayNorma19_34Nueva = 1 Then
-                Sql = Sql & ", iban) "
-            Else
-                Sql = Sql & ") "
-            End If
-            
-            
-            Sql = Sql & " VALUES " & CadValues2
-            ConnConta.Execute Sql
-    
-        End If
-    
-        b = True
-    End If
-    
-EInsertarTesoreriaNewFac:
-    If Err.Number <> 0 Then
-        b = False
-        MenError = Err.Description
-    End If
-    InsertarEnTesoreriaNewFac = b
-End Function
 
 Public Function InsertarEnTesoreriaSoc(cadWHERE As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
@@ -5710,7 +5584,7 @@ Dim UltimoVto As Integer
 
                             vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                             
-                            CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
+                            CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
                             CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
@@ -5772,7 +5646,7 @@ Dim UltimoVto As Integer
                                 
                                 vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                                 
-                                CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
+                                CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
                                 CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
@@ -5841,7 +5715,7 @@ Dim UltimoVto As Integer
                           If vParamAplic.ContabilidadNueva Then
                                 vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                                 
-                                CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
+                                CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
                                 CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
@@ -6172,7 +6046,7 @@ Dim vSocio As cSocio
                         
                         CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                         'nomsocio,dirsocio,pobsocio,codpostal,prosocio,nifsocio
-                        CadValues2 = CadValues2 & DBSet(Rsx!nomsocio, "T") & "," & DBSet(Rsx!dirsocio, "T") & "," & DBSet(Rsx!pobsocio, "T") & "," & DBSet(Rsx!codpostal, "T") & ","
+                        CadValues2 = CadValues2 & DBSet(Rsx!nomsocio, "T") & "," & DBSet(Rsx!dirsocio, "T") & "," & DBSet(Rsx!pobsocio, "T") & "," & DBSet(Rsx!CodPostal, "T") & ","
                         CadValues2 = CadValues2 & DBSet(Rsx!prosocio, "T") & "," & DBSet(Rsx!nifSocio, "T") & ",'ES') "
                         
                         Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
@@ -6336,7 +6210,7 @@ Dim Seccion As Integer
                         
                         CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                         'nomsocio,dirsocio,pobsocio,codpostal,prosocio,nifsocio
-                        CadValues2 = CadValues2 & DBSet(Rsx!nomsocio, "T") & "," & DBSet(Rsx!dirsocio, "T") & "," & DBSet(Rsx!pobsocio, "T") & "," & DBSet(Rsx!codpostal, "T") & ","
+                        CadValues2 = CadValues2 & DBSet(Rsx!nomsocio, "T") & "," & DBSet(Rsx!dirsocio, "T") & "," & DBSet(Rsx!pobsocio, "T") & "," & DBSet(Rsx!CodPostal, "T") & ","
                         CadValues2 = CadValues2 & DBSet(Rsx!prosocio, "T") & "," & DBSet(Rsx!nifSocio, "T") & ",'ES') "
                         
                         Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
@@ -6467,7 +6341,7 @@ End Function
 ' FACTURAS ALMAZARA SOCIOS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaAlmzSoc(cadWHERE As String, FechaFin As String, FecRecep As Date, CtaRete As String, TotalFactura As Currency) As Boolean
+Public Function PasarFacturaAlmzSoc(cadWHERE As String, FechaFin As String, FecRecep As Date, CtaRete As String, TotalFactura As Currency, FP As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura Socio
 ' ariagro.rcabfactalmz --> conta.cabfactprov
 ' ariagro.rlinfactalmz --> conta.linfactprov
@@ -6484,7 +6358,7 @@ Dim Mc As Contadores
     Set Mc = New Contadores
     
     '---- Insertar en la conta Cabecera Factura
-    b = InsertarCabFactAlmzSoc(cadWHERE, cadMen, Mc, CDate(FechaFin), FecRecep, TotalFactura)
+    b = InsertarCabFactAlmzSoc(cadWHERE, cadMen, Mc, CDate(FechaFin), FecRecep, TotalFactura, FP)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
@@ -6523,7 +6397,7 @@ EContab:
 End Function
 
 
-Private Function InsertarCabFactAlmzSoc(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, TotalFactura As Currency) As Boolean
+Private Function InsertarCabFactAlmzSoc(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, FecRec As Date, TotalFactura As Currency, FP As String) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim Sql As String
@@ -6533,10 +6407,18 @@ Dim Nulo2 As String
 Dim Nulo3 As String
 Dim Concepto As String
 
+Dim TipoOpera As Integer
+
+Dim Aux As String
+
+Dim Sql2 As String
+Dim CadenaInsertFaclin2 As String
+
     On Error GoTo EInsertar
        
     Sql = " SELECT fecfactu,year(" & DBSet(FecRec, "F") & ") as anofacpr," & DBSet(FecRec, "F") & ",numfactu,rsocios_seccion.codmacpro,"
-    Sql = Sql & "baseimpo, tipoiva, porc_iva,imporiva,basereten,porc_ret,impreten,totalfac, rcabfactalmz.codsocio, rsocios.nomsocio "
+    Sql = Sql & "baseimpo, tipoiva, porc_iva,imporiva,basereten,porc_ret,impreten,totalfac, rcabfactalmz.codsocio, rsocios.nomsocio, "
+    Sql = Sql & " rsocios.dirsocio, rsocios.pobsocio, rsocios.codpostal, rsocios.prosocio, rsocios.nifsocio "
     Sql = Sql & " FROM (" & "rcabfactalmz "
     Sql = Sql & "INNER JOIN rsocios ON rcabfactalmz.codsocio=rsocios.codsocio) "
     Sql = Sql & " INNER JOIN rsocios_seccion ON rcabfactalmz.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(vParamAplic.SeccionAlmaz, "N")
@@ -6581,22 +6463,78 @@ Dim Concepto As String
             Concepto = "ALMAZARA ACEITE"
             
             Sql = ""
-            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & AnyoFacPr & "," & DBSet(FecRecep, "F") & "," & DBSet(FacturaSoc, "T") & "," & DBSet(CtaSocio, "T") & "," & DBSet(Concepto, "T") & ","
-            Sql = Sql & DBSet(BaseImp, "N") & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!ImporIva, "N") & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            Cad = Cad & "(" & Sql & ")"
+            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & AnyoFacPr & "," & DBSet(FecRecep, "F") & "," & DBSet(FecRecep, "F") & ","
+            Sql = Sql & DBSet(FacturaSoc, "T") & "," & DBSet(CtaSocio, "T") & "," & DBSet(Concepto, "T") & ","
             
-            'Insertar en la contabilidad
-            Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
-            Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
-            Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            Sql = Sql & " VALUES " & Cad
-            ConnConta.Execute Sql
+            If vParamAplic.ContabilidadNueva Then
+                Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
+                Sql = Sql & DBSet(FP, "N") & ","
+            
+                '$$$
+                TipoOpera = 5 ' REA
+                
+                Aux = "0"
+                If Rs!TotalFac < 0 Then Aux = "D"
+                'codopera,codconce340,codintra
+                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
+                
+                '[Monica]10/11/2016: en totalfac llevabamos base + impiva pq antes retencion estaba en lineas
+                '                    en la nueva conta está en la cabecera
+                TotalFac = TotalFac - ImpReten
+                
+                'para las lineas
+                'factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+                'IVA 1, siempre existe
+                Aux = "'" & SerieFraPro & "'," & Mc.Contador & "," & DBSet(Rs!FecRecep, "F") & "," & Rs!anofacpr & ","
+                
+                Sql2 = Aux & "1," & DBSet(BaseImp, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & DBSet(Rs!porc_iva, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!ImporIva, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+                    
+                'Los totales
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                Sql = Sql & DBSet(BaseImp, "N") & "," & DBSet(Rs!BaseReten, "N", "S") & ","
+                'totivas
+                Sql = Sql & DBSet(Rs!ImporIva, "N") & "," & DBSet(TotalFac, "N") & ","
+                If DBLet(Rs!porc_ret, "N") <> 0 Then
+                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2" ' 2=retenciones agrícolas
+                Else
+                    Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
+                End If
+            
+                'Insertar en la contabilidad
+                Sql = "INSERT INTO factpro(numserie,numregis,fecfactu,anofactu,fecharec,fecliqpr,numfactu,codmacta,observa,nommacta,"
+                Sql = Sql & "dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,codforpa,codopera,codconce340,codintra,"
+                Sql = Sql & "totbases,totbasesret,totivas,totfacpr,retfacpr,trefacpr,cuereten,tiporeten)"
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
+            
+                'Las  lineas de IVA
+                Sql = "INSERT INTO factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)"
+                Sql = Sql & " VALUES " & CadenaInsertFaclin2
+                ConnConta.Execute Sql
+            
+            
+            Else
+                Sql = Sql & DBSet(BaseImp, "N") & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!ImporIva, "N") & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+                Cad = Cad & "(" & Sql & ")"
+                
+                'Insertar en la contabilidad
+                Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,fecliqpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
+                Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
+                Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,nodeducible) "
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
+            End If
+            
             
             'añadido como david para saber que numero de registro corresponde a cada factura
             'Para saber el numreo de registro que le asigna a la factrua
@@ -6646,7 +6584,8 @@ Dim Socio2 As Long
     InsertarEnTesoreriaAlmz = False
     b = False
     
-    Sql = "select rsocios.nomsocio, rsocios.codbanco, rsocios.codsucur, rsocios.digcontr, rsocios.cuentaba, rsocios_seccion.codmacpro, rsocios.iban "
+    Sql = "select rsocios.nomsocio, rsocios.codbanco, rsocios.codsucur, rsocios.digcontr, rsocios.cuentaba, rsocios_seccion.codmacpro, rsocios.iban, "
+    Sql = Sql & " rsocios.dirsocio,rsocios.pobsocio,rsocios.codpostal,rsocios.prosocio,rsocios.nifsocio "
     Sql = Sql & " from rsocios inner join rsocios_seccion on rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.SeccionAlmaz
     Sql = Sql & " where rsocios.codsocio = " & DBSet(Socio, "N")
 
@@ -6710,9 +6649,7 @@ Dim Socio2 As Long
             Sql = " de " & Format(fecfactu, "dd/mm/yyyy")
             CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "'" ')"
             
-            If vParamAplic.ContabilidadNueva Then
-            
-            Else
+            If Not vParamAplic.ContabilidadNueva Then
                 '[Monica]22/11/2013: Tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
                     CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & ") "
@@ -6732,12 +6669,11 @@ Dim Socio2 As Long
                     
                     CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
-                    CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                    CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
+                    CadValues2 = CadValues2 & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!codposta, "T") & ","
+                    CadValues2 = CadValues2 & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES'),"
                     
                     Sql = "INSERT INTO pagos (codmacta, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,text1csb,text2csb, iban,"
                     Sql = Sql & "nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais)"
-            
                     
                 Else
                     Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
@@ -6777,8 +6713,8 @@ Dim Socio2 As Long
                 
                 CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
-                CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
+                CadValues2 = CadValues2 & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+                CadValues2 = CadValues2 & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES'),"
             
             
                 Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
@@ -6945,7 +6881,7 @@ EActualizar:
 End Function
 
 
-Public Function PasarFacturaAlmzCli(cadWHERE As String, CodCCost As String, LetraSerie As String, TotalFactura As Currency) As Boolean
+Public Function PasarFacturaAlmzCli(cadWHERE As String, CodCCost As String, LetraSerie As String, TotalFactura As Currency, FP As String) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura
 ' ariagro.rcabfactalmz --> conta.cabfact
 ' ariagro.rlinfactalmz --> conta.linfact
@@ -6958,7 +6894,7 @@ Dim Sql As String
 
     
     'Insertar en la conta Cabecera Factura
-    b = InsertarCabFactAlmzCli(cadWHERE, cadMen, LetraSerie, TotalFactura)
+    b = InsertarCabFactAlmzCli(cadWHERE, cadMen, LetraSerie, TotalFactura, FP)
     cadMen = "Insertando Cab. Factura: " & cadMen
     
     If b Then
@@ -7010,7 +6946,8 @@ Dim Cad As String
     On Error GoTo EInsertar
     
     Sql = Sql & " SELECT " & DBSet(LetraSerie, "T") & ",tipofichero,numfactu,fecfactu,rsocios_seccion.codmacpro,year(fecfactu) as anofaccl,"
-    Sql = Sql & "baseimpo,tipoiva,porc_iva,imporiva,basereten, porc_ret, impreten, totalfac, tipoiva "
+    Sql = Sql & "baseimpo,tipoiva,porc_iva,imporiva,basereten, porc_ret, impreten, totalfac,  "
+    Sql = Sql & "rsocios.nomsocio, rsocios.dirsocio,rsocios.pobsocio,rsocios.codpostal,rsocios.prosocio,rsocios.nifsocio"
     Sql = Sql & " FROM (" & "rcabfactalmz inner join " & "rsocios_seccion on rcabfactalmz.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.SeccionAlmaz & ") "
     Sql = Sql & "INNER JOIN " & "rsocios ON rsocios_seccion.codsocio=rsocios.codsocio "
     Sql = Sql & " WHERE " & cadWHERE
@@ -7050,26 +6987,70 @@ Dim Cad As String
         End If
         
         Sql = ""
-        Sql = "'" & LetraSerie & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(CtaSocio, "T") & "," & Year(Rs!fecfactu) & "," & DBSet(Concepto, "T") & ","
-        Sql = Sql & DBSet(Rs!baseimpo, "N") & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!ImporIva, "N", "N") & ","
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F")
-        Cad = Cad & "(" & Sql & ")"
+        Sql = "'" & LetraSerie & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(CtaSocio, "T") & "," & Year(Rs!fecfactu) & "," & DBSet(Concepto, "T") & ","
+        
+        
+        If vParamAplic.ContabilidadNueva Then
+            ' para el caso de las rectificativas
+            Dim vTipM As String
+            vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+            If vTipM = "FAR" Then
+                Sql = Sql & "'D',"
+            Else
+                Sql = Sql & "'0',"
+            End If
+            
+            Sql = Sql & "0," & DBSet(FP, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(Rs!TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0,"
+            Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+            Sql = Sql & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+        
+            Cad = Cad & "(" & Sql & ")"
+        
+        
+            Sql = "INSERT INTO factcli (numserie,numfactu,fecfactu,fecliqcl,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+            Sql = Sql & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,nommacta,dirdatos,codpobla,despobla, desprovi,nifdatos,"
+            Sql = Sql & "codpais,codagente)"
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+    '***
+            CadenaInsertFaclin2 = ""
+                
+            
+            'numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+            'IVA 1, siempre existe
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "1," & DBSet(Rs!baseimpo, "N") & "," & Rs!TipoIVA & "," & DBSet(Rs!porc_iva, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!ImporIva, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+        
+            Sql = "INSERT INTO factcli_totales(numserie,numfactu,fecfactu,anofactu,numlinea,baseimpo,codigiva,"
+            Sql = Sql & "porciva,porcrec,impoiva,imporec) VALUES " & CadenaInsertFaclin2
+            ConnConta.Execute Sql
+            
+        Else
+            Sql = Sql & DBSet(Rs!baseimpo, "N") & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!ImporIva, "N", "N") & ","
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
+        
+            Cad = Cad & "(" & Sql & ")"
+        
+            'Insertar en la contabilidad
+            Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,fecliqcl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
+            Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
+            Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien) "
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+        
+        End If
 '        RS.MoveNext
     End If
     Rs.Close
     Set Rs = Nothing
     
     
-    'Insertar en la contabilidad
-    Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
-    Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
-    Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    Sql = Sql & " VALUES " & Cad
-    ConnConta.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -8060,42 +8041,56 @@ Dim Cad As String
         End If
     
         CadValuesAux2 = "(" & DBSet(LetraSerie, "T") & "," & DBSet(UltimaFactura, "N") & "," & DBSet(RS1!fecfactu, "F") & ", 1," & DBSet(CtaSocio, "T") & ","
-        CadValues2 = CadValuesAux2 & DBSet(Forpa, "N") & "," & DBSet(FecVenci, "F") & "," & DBSet((TotalFact), "N") & ","
-        CadValues2 = CadValues2 & DBSet(CtaBanco, "T") & "," & DBSet(BancoSoc, "N", "S") & "," & DBSet(SucurSoc, "N", "S") & ","
-        CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        CadValues2 = CadValues2 & DBSet(Text33csb, "T") & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1,"
-        CadValues2 = CadValues2 & DBSet(Text43csb, "T") & "," & DBSet(Text51csb, "T") & "," & DBSet(Text52csb, "T") & ","
-        CadValues2 = CadValues2 & DBSet(Text53csb, "T") & "," & DBSet(Text61csb, "T") & "," & DBSet(Text62csb, "T") & ","
-        CadValues2 = CadValues2 & DBSet(Text63csb, "T") & "," & DBSet(Text71csb, "T") & "," & DBSet(Text72csb, "T") & "," & DBSet(Text73csb, "T") & "," & DBSet(Text81csb, "T") & "," & DBSet(Text82csb, "T") & ","
-        CadValues2 = CadValues2 & DBSet(Text83csb, "T") & ","
-        CadValues2 = CadValues2 & DBSet(Referencia, "T", "S") & "," '& ")"
+        CadValues2 = CadValuesAux2 & DBSet(Forpa, "N") & "," & DBSet(FecVenci, "F") & "," & DBSet((TotalFact), "N") & "," & DBSet(CtaBanco, "T") & ","
+        If vParamAplic.ContabilidadNueva Then
+            vvIban = MiFormat(IbanSoc, "") & MiFormat(CStr(BancoSoc), "0000") & MiFormat(CStr(SucurSoc), "0000") & MiFormat(CC, "00") & MiFormat(CtaBaSoc, "0000000000")
         
-        '[Monica]03/08/2012: Metemos en todas las cooperativas los datos fiscales del socio
-        CadValues2 = CadValues2 & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T")
-        CadValues2 = CadValues2 & "," & DBSet(Rs!codpostal, "T") & "," & DBSet(Rs!prosocio, "T") ' & ")"
-        
-        '[Monica]22/11/2013: Tema iban
-        If vEmpresa.HayNorma19_34Nueva = 1 Then
-            CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & ")"
-        Else
-            CadValues2 = CadValues2 & ")"
-        End If
-        
-        
-        
-        
-        'Insertamos en la tabla scobro de la CONTA
-        Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-        Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-        '[Monica] 16/07/2010: hemos añadido todo lo que debe llevar impreso el recibo de banco ( desde agente )
-        Sql = Sql & " text33csb, text41csb, text42csb, agente, text43csb, text51csb, text52csb, text53csb,"
-        Sql = Sql & " text61csb, text62csb, text63csb, text71csb,text72csb,text73csb, text81csb, text82csb, text83csb, referencia, "
-        Sql = Sql & " nomclien, domclien, pobclien, cpclien, proclien" ') "
-        '[Monica]22/11/2013: Tema iban
-        If vEmpresa.HayNorma19_34Nueva = 1 Then
-            Sql = Sql & ", iban) "
-        Else
+            CadValues2 = CadValues2 & DBSet(vvIban, "T") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            CadValues2 = CadValues2 & DBSet(Text33csb, "T") & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1,"
+            CadValues2 = CadValues2 & DBSet(Referencia, "T", "S") & ","
+            CadValues2 = CadValues2 & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T")
+            CadValues2 = CadValues2 & "," & DBSet(Rs!CodPostal, "T") & "," & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES')"
+            
+            Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
+            Sql = Sql & "ctabanc1, iban, ctabanc2, fecultco, impcobro, "
+            Sql = Sql & " text33csb, text41csb, text42csb, agente, referencia, "
+            Sql = Sql & "nomclien, domclien, pobclien, cpclien, proclien, nifclien, codpais"
             Sql = Sql & ") "
+        Else
+            CadValues2 = CadValues2 & DBSet(BancoSoc, "N", "S") & "," & DBSet(SucurSoc, "N", "S") & ","
+            CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            CadValues2 = CadValues2 & DBSet(Text33csb, "T") & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1,"
+            CadValues2 = CadValues2 & DBSet(Text43csb, "T") & "," & DBSet(Text51csb, "T") & "," & DBSet(Text52csb, "T") & ","
+            CadValues2 = CadValues2 & DBSet(Text53csb, "T") & "," & DBSet(Text61csb, "T") & "," & DBSet(Text62csb, "T") & ","
+            CadValues2 = CadValues2 & DBSet(Text63csb, "T") & "," & DBSet(Text71csb, "T") & "," & DBSet(Text72csb, "T") & "," & DBSet(Text73csb, "T") & "," & DBSet(Text81csb, "T") & "," & DBSet(Text82csb, "T") & ","
+            CadValues2 = CadValues2 & DBSet(Text83csb, "T") & ","
+            CadValues2 = CadValues2 & DBSet(Referencia, "T", "S") & "," '& ")"
+            
+            '[Monica]03/08/2012: Metemos en todas las cooperativas los datos fiscales del socio
+            CadValues2 = CadValues2 & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T")
+            CadValues2 = CadValues2 & "," & DBSet(Rs!CodPostal, "T") & "," & DBSet(Rs!prosocio, "T") ' & ")"
+            
+            '[Monica]22/11/2013: Tema iban
+            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & ")"
+            Else
+                CadValues2 = CadValues2 & ")"
+            End If
+            
+        
+            'Insertamos en la tabla scobro de la CONTA
+            Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
+            Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
+            '[Monica] 16/07/2010: hemos añadido todo lo que debe llevar impreso el recibo de banco ( desde agente )
+            Sql = Sql & " text33csb, text41csb, text42csb, agente, text43csb, text51csb, text52csb, text53csb,"
+            Sql = Sql & " text61csb, text62csb, text63csb, text71csb,text72csb,text73csb, text81csb, text82csb, text83csb, referencia, "
+            Sql = Sql & " nomclien, domclien, pobclien, cpclien, proclien" ') "
+            '[Monica]22/11/2013: Tema iban
+            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                Sql = Sql & ", iban) "
+            Else
+                Sql = Sql & ") "
+            End If
         End If
         Sql = Sql & " VALUES " & CadValues2
         ConnConta.Execute Sql
@@ -8354,7 +8349,7 @@ Dim CadenaInsertFaclin2 As String
             Else
                 
                 Sql = Sql & DBSet(Rs!nomtrans, "T") & "," & DBSet(Rs!dirtrans, "T", "S") & ","
-                Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobtrans, "T", "S") & "," & DBSet(Rs!protrans, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobtrans, "T", "S") & "," & DBSet(Rs!protrans, "T", "S") & ","
                 Sql = Sql & DBSet(Rs!NIFTrans, "F", "S") & ",'ES',"
                 Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
             
@@ -8479,10 +8474,10 @@ Dim vvIban As String
         If vParamAplic.ContabilidadNueva Then
             vvIban = MiFormat(IbanTRA, "") & MiFormat(CStr(BancoTRA), "0000") & MiFormat(CStr(SucurTRA), "0000") & MiFormat(DigcoTRA, "00") & MiFormat(CtaBaTRA, "0000000000")
             
-            CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
+            CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
             CadValues2 = CadValues2 & DBSet(vTra.Nombre, "T") & "," & DBSet(vTra.Direccion, "T") & "," & DBSet(vTra.Poblacion, "T") & "," & DBSet(vTra.CPostal, "T") & ","
-            CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.nif, "T") & ",'ES'),"
+            CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.nif, "T") & ",'ES') "
         
         Else
             '[Monica]22/11/2013: Tema iban
@@ -9173,26 +9168,68 @@ Dim ImporIva As Currency
         End If
         
         Sql = ""
-        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & DBSet(Observac, "T") & ","
-        Sql = Sql & DBSet(Rs!baseimpo, "N") & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(ImporIva, "N", "N") & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
-        Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F")
-        Cad = Cad & "(" & Sql & ")"
+        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & DBSet(Observac, "T") & ","
+        
+        If vParamAplic.ContabilidadNueva Then
+            ' para el caso de las rectificativas
+            Dim vTipM As String
+            vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+            If vTipM = "FAR" Then
+                Sql = Sql & "'D',"
+            Else
+                Sql = Sql & "'0',"
+            End If
+            
+            Sql = Sql & "0," & DBSet(FP, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(ImporIva, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0,"
+            Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+            Sql = Sql & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+        
+            Cad = Cad & "(" & Sql & ")"
+        
+        
+            Sql = "INSERT INTO factcli (numserie,numfactu,fecfactu,fecliqcl,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+            Sql = Sql & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,nommacta,dirdatos,codpobla,despobla, desprovi,nifdatos,"
+            Sql = Sql & "codpais,codagente)"
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+    '***
+            CadenaInsertFaclin2 = ""
+                
+            
+            'numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+            'IVA 1, siempre existe
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "1," & DBSet(Rs!baseimpo, "N") & "," & Rs!TipoIVA & "," & DBSet(Rs!porc_iva, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!ImporIva, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+        
+            Sql = "INSERT INTO factcli_totales(numserie,numfactu,fecfactu,anofactu,numlinea,baseimpo,codigiva,"
+            Sql = Sql & "porciva,porcrec,impoiva,imporec) VALUES " & CadenaInsertFaclin2
+            ConnConta.Execute Sql
+        
+        Else
+        
+            Sql = Sql & DBSet(Rs!baseimpo, "N") & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!porc_iva, "N") & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(ImporIva, "N", "N") & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+            Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA, "N") & "," & ValorNulo & "," & ValorNulo & ",0,"
+            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
+            Cad = Cad & "(" & Sql & ")"
+        
+            'Insertar en la contabilidad
+            Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,fecliqcl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
+            Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
+            Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien) "
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+        
+        End If
 '        RS.MoveNext
     End If
     Rs.Close
     Set Rs = Nothing
     
-    
-    'Insertar en la contabilidad
-    Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
-    Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
-    Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    Sql = Sql & " VALUES " & Cad
-    ConnConta.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -10248,7 +10285,8 @@ Dim Seccion As Integer
         Sql = "SELECT stipom.letraser,numfactu,fecfactu, clientes.codmacta as codmacta,year(fecfactu) as anofaccl,"
         Sql = Sql & "baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
         Sql = Sql & "totalfac,tipoiva1,tipoiva2,tipoiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3, "
-        Sql = Sql & "retfaccl, trefaccl, cuereten "
+        Sql = Sql & "retfaccl, trefaccl, cuereten, codforpa, "
+        Sql = Sql & "clientes.nomclien,clientes.domclien,clientes.pobclien,clientes.codpobla,clientes.proclien,clietnes.cifclien "
         Sql = Sql & " FROM ((" & "fvarcabfact inner join " & "usuarios.stipom on fvarcabfact.codtipom=usuarios.stipom.codtipom) "
         Sql = Sql & "INNER JOIN clientes ON fvarcabfact.codclien=clientes.codclien) "
         Sql = Sql & " WHERE " & cadWHERE
@@ -10264,31 +10302,109 @@ Dim Seccion As Integer
         DtoPPago = 0
         DtoGnral = 0
         BaseImp = Rs!BaseIVA1 + CCur(DBLet(Rs!BaseIVA2, "N")) + CCur(DBLet(Rs!BaseIVA3, "N"))
+        IvaImp = DBLet(Rs!impoiva1, "N") + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
         '---- Laura 10/10/2006:  añadir el totalfac para utilizarlo en insertar lineas
         TotalFac = Rs!TotalFac
         '----
         
         Sql = ""
-        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
-        Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", "S") & "," & DBSet(Rs!TipoIVA3, "N", "S") & ",0,"
-        Sql = Sql & DBSet(Rs!retfaccl, "N", "S") & "," & DBSet(Rs!trefaccl, "N", "S") & "," & DBSet(Rs!cuereten, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F")
-        Cad = Cad & "(" & Sql & ")"
+        Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & ValorNulo & ","
+        '$$$
+        If vParamAplic.ContabilidadNueva Then
+            ' para el caso de las rectificativas
+            Dim vTipM As String
+            vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+            If vTipM = "FAR" Then
+                Sql = Sql & "'D',"
+            Else
+                Sql = Sql & "'0',"
+            End If
+            
+            Sql = Sql & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(Rs!TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0," & DBSet(Rs!fecfactu, "F") & ","
+            Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!CodPostal, "T") & ","
+            Sql = Sql & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+            Sql = "INSERT INTO factcli (numserie,numfactu,fecfactu,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+            Sql = Sql & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,fecliqcl,nommacta,dirdatos,codpobla,despobla, desprovi,nifdatos,"
+            Sql = Sql & "codpais,codagente)"
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+    '***
+            CadenaInsertFaclin2 = ""
+                
+            
+            'numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+            'IVA 1, siempre existe
+            Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+            Sql2 = Sql2 & "1," & DBSet(Rs!baseimp1, "N") & "," & Rs!codiiva1 & "," & DBSet(Rs!porciva1, "N") & ","
+            Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+            CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+            
+            'para las lineas
+            vTipoIva(0) = Rs!TipoIVA1
+            vPorcIva(0) = Rs!porciva1
+            vPorcRec(0) = 0
+            vImpIva(0) = Rs!impoiva1
+            vImpRec(0) = 0
+            vBaseIva(0) = Rs!baseimp1
+            
+            vTipoIva(1) = 0: vTipoIva(2) = 0
+            
+            If Not IsNull(Rs!porciva2) Then
+                Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+                Sql2 = Sql2 & "2," & DBSet(Rs!baseimp2, "N") & "," & Rs!codiiva2 & "," & DBSet(Rs!porciva2, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                vTipoIva(1) = Rs!TipoIVA2
+                vPorcIva(1) = Rs!porciva2
+                vPorcRec(1) = 0
+                vImpIva(1) = Rs!impoiva2
+                vImpRec(1) = 0
+                vBaseIva(1) = Rs!baseimp2
+            End If
+            If Not IsNull(Rs!porciva3) Then
+                Sql2 = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & Year(Rs!fecfactu) & ","
+                Sql2 = Sql2 & "3," & DBSet(Rs!baseimp3, "N") & "," & Rs!codiiva3 & "," & DBSet(Rs!porciva3, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                vTipoIva(2) = Rs!TipoIVA3
+                vPorcIva(2) = Rs!porciva3
+                vPorcRec(2) = 0
+                vImpIva(2) = Rs!impoiva3
+                vImpRec(2) = 0
+                vBaseIva(2) = Rs!baseimp3
+            End If
+    
+            Sql = "INSERT INTO factcli_totales(numserie,numfactu,fecfactu,anofactu,numlinea,baseimpo,codigiva,"
+            Sql = Sql & "porciva,porcrec,impoiva,imporec) VALUES " & CadenaInsertFaclin2
+            ConnConta.Execute Sql
+                
+        
+        
+        
+        
+        Else
+            Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & "," & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", "S") & "," & DBSet(Rs!porciva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!porcrec1, "N", "S") & "," & DBSet(Rs!porcrec2, "N", "S") & "," & DBSet(Rs!porcrec3, "N", "S") & "," & DBSet(Rs!impoiva1, "N", "N") & "," & DBSet(Rs!impoiva2, "N", "S") & "," & DBSet(Rs!impoiva3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!imporec1, "N", "S") & "," & DBSet(Rs!imporec2, "N", "S") & "," & DBSet(Rs!imporec3, "N", "S") & ","
+            Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", "S") & "," & DBSet(Rs!TipoIVA3, "N", "S") & ",0,"
+            Sql = Sql & DBSet(Rs!retfaccl, "N", "S") & "," & DBSet(Rs!trefaccl, "N", "S") & "," & DBSet(Rs!cuereten, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+        
+            Cad = Cad & "(" & Sql & ")"
+        
+            'Insertar en la contabilidad
+            Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,fecliqcl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
+            Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
+            Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien) "
+            Sql = Sql & " VALUES " & Cad
+            ConnConta.Execute Sql
+        
+        End If
 '        RS.MoveNext
     End If
     Rs.Close
     Set Rs = Nothing
         
-    'Insertar en la contabilidad
-    Sql = "INSERT INTO cabfact (numserie,codfaccl,fecfaccl,codmacta,anofaccl,confaccl,ba1faccl,ba2faccl,ba3faccl,"
-    Sql = Sql & "pi1faccl,pi2faccl,pi3faccl,pr1faccl,pr2faccl,pr3faccl,ti1faccl,ti2faccl,ti3faccl,tr1faccl,tr2faccl,tr3faccl,"
-    Sql = Sql & "totfaccl,tp1faccl,tp2faccl,tp3faccl,intracom,retfaccl,trefaccl,cuereten,numdiari,fechaent,numasien,fecliqcl) "
-    Sql = Sql & " VALUES " & Cad
-    ConnConta.Execute Sql
-    
 EInsertar:
     If Err.Number <> 0 Then
         InsertarCabFactFVAR = False
@@ -10457,11 +10573,11 @@ Dim vSocio As cSocio
                         
                         If Tipo = 0 Then ' socio
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & "),"
+                            CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
                         Else ' cliente
                             'nomclien,domclien,pobclien,codpobla,proclien,cifclien
-                            CadValues2 = CadValues2 & DBSet(Rsx!nomclien, "T") & "," & DBSet(Rsx!domclien, "T") & "," & DBSet(Rsx!pobclien, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(Rsx!CodPobla, "T") & "," & DBSet(Rsx!proclien, "T") & "," & DBSet(Rsx!cifclien, "T") & "),"
+                            CadValues2 = CadValues2 & DBSet(Rsx!Nomclien, "T") & "," & DBSet(Rsx!domclien, "T") & "," & DBSet(Rsx!pobclien, "T") & ","
+                            CadValues2 = CadValues2 & DBSet(Rsx!CodPobla, "T") & "," & DBSet(Rsx!proclien, "T") & "," & DBSet(Rsx!cifclien, "T") & ",'ES'),"
                         End If
                     End If
                     
@@ -10493,17 +10609,17 @@ Dim vSocio As cSocio
                         Else
                             CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & Text33csb & "," & DBSet(Text41csb, "T") & ",1"
                             
-                            vvIban = MiFormat(IbanSoc, "") & MiFormat(CodBanco, "0000") & MiFormat(CodSucur, "0000") & MiFormat(CC, "00") & MiFormat(CuentaBa, "0000000000")
+                            vvIban = MiFormat(IbanSoc, "") & MiFormat(Rs4!CodBanco, "0000") & MiFormat(Rs4!CodSucur, "0000") & MiFormat(CC, "00") & MiFormat(Rs4!CuentaBa, "0000000000")
                             
-                            CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
+                            CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             
                             If Tipo = 0 Then ' socio
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & "),"
+                                CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
                             Else ' cliente
                                 'nomclien,domclien,pobclien,codpobla,proclien,cifclien
-                                CadValues2 = CadValues2 & DBSet(Rsx!nomclien, "T") & "," & DBSet(Rsx!domclien, "T") & "," & DBSet(Rsx!pobclien, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(Rsx!CodPobla, "T") & "," & DBSet(Rsx!proclien, "T") & "," & DBSet(Rsx!cifclien, "T") & "),"
+                                CadValues2 = CadValues2 & DBSet(Rsx!Nomclien, "T") & "," & DBSet(Rsx!domclien, "T") & "," & DBSet(Rsx!pobclien, "T") & ","
+                                CadValues2 = CadValues2 & DBSet(Rsx!CodPobla, "T") & "," & DBSet(Rsx!proclien, "T") & "," & DBSet(Rsx!cifclien, "T") & ",'ES'),"
                             End If
                         End If
                     Next i
@@ -10752,14 +10868,21 @@ Dim Rs As ADODB.Recordset
 Dim Cad As String
 Dim Nulo2 As String
 Dim Nulo3 As String
+Dim TipoOpera As Integer
+Dim Aux As String
+
+Dim Sql2 As String
+Dim CadenaInsertFaclin2 As String
+Dim ImporAux As Currency
 
     On Error GoTo EInsertar
        
     
     Sql = " SELECT fecfactu," & Year(CDate(FecRecep)) & " as anofacpr,numfactu,rsocios_seccion.codmacpro codmacta,"
     Sql = Sql & "baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
-    Sql = Sql & "totalfac,tipoiva1,tipoiva2,tipoiva3,rsocios_seccion.codsocio, rsocios.nomsocio, "
-    Sql = Sql & "retfaccl, trefaccl, cuereten, rsocios.codbanco, rsocios.codsucur, rsocios.digcontr, rsocios.cuentaba  "
+    Sql = Sql & "totalfac,tipoiva1,tipoiva2,tipoiva3,rsocios_seccion.codsocio, rsocios.nomsocio, fvarcabfactpro.codforpa, "
+    Sql = Sql & "retfaccl, trefaccl, cuereten, rsocios.codbanco, rsocios.codsucur, rsocios.digcontr, rsocios.cuentaba,  "
+    Sql = Sql & " rsocios.dirsocio, rsocios.pobsocio, rsocios.codpostal, rsocios.prosocio, rsocios.nifsocio "
     Sql = Sql & " FROM (fvarcabfactpro "
     Sql = Sql & " INNER JOIN rsocios_seccion ON fvarcabfactpro.codsocio=rsocios_seccion.codsocio) "
     Sql = Sql & " INNER JOIN rsocios ON fvarcabfactpro.codsocio = rsocios.codsocio"
@@ -10785,21 +10908,115 @@ Dim Nulo3 As String
             If DBLet(Rs!BaseIVA2, "N") = "0" Then Nulo2 = "S"
             If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
             Sql = ""
-            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Trim(Rs!Codmacta), "T") & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & ","
-            Sql = Sql & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", Nulo2) & "," & DBSet(Rs!porciva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-            Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ",0,"
-            Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(FecRecep, "F") & ",0"
-            Cad = Cad & "(" & Sql & ")"
+            If vParamAplic.ContabilidadNueva Then Sql = "'" & SerieFraPro & "',"
+            Sql = Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(FecRecep, "F") & "," & DBSet(FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Trim(Rs!Codmacta), "T") & "," & ValorNulo & ","
             
-            'Insertar en la contabilidad
-            Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
-            Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
-            Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,fecliqpr,nodeducible) "
-            Sql = Sql & " VALUES " & Cad
-            ConnConta.Execute Sql
+            If vParamAplic.ContabilidadNueva Then
+                Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!CodPostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
+                Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
+                Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
+                
+                TipoOpera = 0
+                
+                Aux = "0"
+                Select Case TipoOpera
+                Case 0
+                    If Rs!TotalFac < 0 Then
+                        Aux = "D"
+                    Else
+                        If Not IsNull(Rs!TipoIVA2) Then Aux = "C"
+                    End If
+                End Select
+                
+                'codopera,codconce340,codintra
+                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
+                
+                
+                'para las lineas
+                'factpro_totales(numserie,numregis,fecharec,anofactu,numlinea,baseimpo,codigiva,porciva,porcrec,impoiva,imporec)
+                'IVA 1, siempre existe
+                Aux = "'" & SerieFraPro & "'," & Mc.Contador & "," & DBSet(Rs!FecRecep, "F") & "," & Rs!anofacpr & ","
+                
+                Sql2 = Aux & "1," & DBSet(Rs!BaseIVA1, "N") & "," & Rs!TipoIVA1 & "," & DBSet(Rs!porciva1, "N") & ","
+                Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & ValorNulo
+                CadenaInsertFaclin2 = CadenaInsertFaclin2 & "(" & Sql2 & ")"
+                vTipoIva(0) = Rs!TipoIVA1
+                vPorcIva(0) = Rs!porciva1
+                vPorcRec(0) = 0
+                vImpIva(0) = Rs!impoiva1
+                vImpRec(0) = 0
+                vBaseIva(0) = Rs!BaseIVA1
+                
+                vTipoIva(1) = 0: vTipoIva(2) = 0
+                
+                If Not IsNull(Rs!porciva2) Then
+                    Sql2 = Aux & "2," & DBSet(Rs!BaseIVA2, "N") & "," & Rs!TipoIVA2 & "," & DBSet(Rs!porciva2, "N") & ","
+                    Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva2, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                    vTipoIva(1) = Rs!TipoIVA2
+                    vPorcIva(1) = Rs!porciva2
+                    vPorcRec(1) = 0
+                    vImpIva(1) = Rs!impoiva2
+                    vImpRec(1) = 0
+                    vBaseIva(1) = Rs!BaseIVA2
+                End If
+                
+                If Not IsNull(Rs!porciva3) Then
+                    Sql2 = Aux & "3," & DBSet(Rs!BaseIVA3, "N") & "," & Rs!TipoIVA3 & "," & DBSet(Rs!porciva3, "N") & ","
+                    Sql2 = Sql2 & ValorNulo & "," & DBSet(Rs!impoiva3, "N") & "," & ValorNulo
+                    CadenaInsertFaclin2 = CadenaInsertFaclin2 & " , (" & Sql2 & ")"
+                    vTipoIva(2) = Rs!TipoIVA3
+                    vPorcIva(2) = Rs!porciva3
+                    vPorcRec(2) = 0
+                    vImpIva(2) = Rs!impoiva3
+                    vImpRec(2) = 0
+                    vBaseIva(2) = Rs!BaseIVA3
+                End If
+                    
+                    
+                'Los totales
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                ImporAux = Rs!BaseIVA1 + DBLet(Rs!BaseIVA2, "N") + DBLet(Rs!BaseIVA3, "N")
+                Sql = Sql & DBSet(ImporAux, "N") & "," & ValorNulo & ","
+                        
+                'totbases,totbasesret,totivas,totrecargo,totfacpr,
+                Sql = Sql & DBSet(ImporAux, "N") & "," & DBSet(Rs!BaseReten, "N", "S") & ","
+                'totivas
+                ImporAux = Rs!impoiva1 + DBLet(Rs!impoiva2, "N") + DBLet(Rs!impoiva3, "N")
+                Sql = Sql & DBSet(ImporAux, "N") & "," & DBSet(TotalFac, "N") & ","
+                
+                If DBLet(Rs!porc_ret, "N") <> 0 Then
+                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2"
+                Else
+                    Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo
+                End If
+                
+                Cad = Cad & "(" & Sql & ")"
+            
+                Sql = "INSERT INTO factpro(numserie,numregis,fecfactu,anofactu,fecharec,fecliqpr,numfactu,codmacta,observa,nommacta,"
+                Sql = Sql & "dirdatos,codpobla,despobla,desprovi,nifdatos,codpais,codforpa,codopera,codconce340,codintra,"
+                Sql = Sql & "totbases,totbasesret,totivas,totfacpr,retfacpr,trefacpr,cuereten,tiporeten)"
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
+                
+            Else
+                Sql = Sql & DBSet(Rs!BaseIVA1, "N") & "," & DBSet(Rs!BaseIVA2, "N", "S") & "," & DBSet(Rs!BaseIVA3, "N", "S") & ","
+                Sql = Sql & DBSet(Rs!porciva1, "N") & "," & DBSet(Rs!porciva2, "N", Nulo2) & "," & DBSet(Rs!porciva3, "N", Nulo3) & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ",0,"
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
+                Cad = Cad & "(" & Sql & ")"
+                
+                'Insertar en la contabilidad
+                Sql = "INSERT INTO cabfactprov (numregis,fecfacpr,anofacpr,fecrecpr,fecliqpr,numfacpr,codmacta,confacpr,ba1facpr,ba2facpr,ba3facpr,"
+                Sql = Sql & "pi1facpr,pi2facpr,pi3facpr,pr1facpr,pr2facpr,pr3facpr,ti1facpr,ti2facpr,ti3facpr,tr1facpr,tr2facpr,tr3facpr,"
+                Sql = Sql & "totfacpr,tp1facpr,tp2facpr,tp3facpr,extranje,retfacpr,trefacpr,cuereten,numdiari,fechaent,numasien,nodeducible) "
+                Sql = Sql & " VALUES " & Cad
+                ConnConta.Execute Sql
+            End If
             
             'añadido como david para saber que numero de registro corresponde a cada factura
             'Para saber el numreo de registro que le asigna a la factrua
@@ -10874,10 +11091,12 @@ Dim FactuRec As String
         CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
         CadValues2 = CadValues2 & DBSet(TotalFac, "N") & ", " & DBSet(CtaBanco, "T") & ","
     
-        'David. Para que ponga la cuenta bancaria (SI LA tiene)
-        CadValues2 = CadValues2 & DBSet(BancoSoc, "T", "S") & "," & DBSet(SucurSoc, "T", "S") & ","
-        CadValues2 = CadValues2 & DBSet(DigcoSoc, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
-    
+        If Not vParamAplic.ContabilidadNueva Then
+            'David. Para que ponga la cuenta bancaria (SI LA tiene)
+            CadValues2 = CadValues2 & DBSet(BancoSoc, "T", "S") & "," & DBSet(SucurSoc, "T", "S") & ","
+            CadValues2 = CadValues2 & DBSet(DigcoSoc, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+        End If
+        
         'David. JUNIO 07.   Los dos textos de grabacion de datos de csb
         Sql = "Fact.: " & letraser & "-" & FacturaSoc & "-" & Format(FecFactuSoc, "dd/mm/yyyy")
             
@@ -10885,27 +11104,41 @@ Dim FactuRec As String
         
         Sql = ""
         CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "'" ')"
-        '[Monica]22/11/2013: Tema iban
-        If vEmpresa.HayNorma19_34Nueva = 1 Then
-            CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & ") "
-        Else
-            CadValues2 = CadValues2 & ") "
-        End If
+        If vParamAplic.ContabilidadNueva Then
+            vvIban = MiFormat(IbanSoc, "") & MiFormat(CStr(BancoSoc), "0000") & MiFormat(CStr(SucurSoc), "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
+            
+            CadValues2 = CadValues2 & ", " & DBSet(vvIban, "T") & ","
+            'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
+            CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
+            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES') "
         
+        
+        Else
+            '[Monica]22/11/2013: Tema iban
+            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & ") "
+            Else
+                CadValues2 = CadValues2 & ") "
+            End If
+        End If
     
         'Grabar tabla spagop de la CONTABILIDAD
         '-------------------------------------------------
         If CadValues2 <> "" Then
             'Insertamos en la tabla spagop de la CONTA
             'David. Cuenta bancaria y descripcion textos
-            Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
-            '[Monica]22/11/2013: Tema iban
-            If vEmpresa.HayNorma19_34Nueva = 1 Then
-                Sql = Sql & ", iban) "
+            If vParamAplic.ContabilidadNueva Then
+                Sql = "INSERT INTO pagos (codmacta, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,text1csb,text2csb, iban,"
+                Sql = Sql & "nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais)"
             Else
-                Sql = Sql & ") "
+                Sql = "INSERT INTO spagop (ctaprove, numfactu, fecfactu, numorden, codforpa, fecefect, impefect, ctabanc1,entidad,oficina,cc,cuentaba,text1csb,text2csb" ') "
+                '[Monica]22/11/2013: Tema iban
+                If vEmpresa.HayNorma19_34Nueva = 1 Then
+                    Sql = Sql & ", iban) "
+                Else
+                    Sql = Sql & ") "
+                End If
             End If
-
             Sql = Sql & " VALUES " & CadValues2
             ConnConta.Execute Sql
         End If
@@ -10928,26 +11161,47 @@ Dim FactuRec As String
         '[Monica]03/07/2013: añado trim(codmacta)
         CadValuesAux2 = "(" & DBSet(letraser, "T") & "," & DBSet(FacturaSoc, "N") & "," & DBSet(FecFactuSoc, "F") & ", 1," & DBSet(Trim(CtaSocio), "T") & ","
         CadValues2 = CadValuesAux2 & DBSet(ForpaNega, "N") & "," & DBSet(FecFactuSoc, "F") & "," & DBSet(TotalFac * (-1), "N") & ","
-        CadValues2 = CadValues2 & DBSet(CtaBanco, "T") & "," & DBSet(BancoSoc, "N", "S") & "," & DBSet(SucurSoc, "N", "S") & ","
-        CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
-        CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1" ')"
-        '[Monica]22/11/2013: Tema iban
-        If vEmpresa.HayNorma19_34Nueva = 1 Then
-            CadValues2 = CadValues2 & "," & DBSet(IbanSoc, "T", "S") & ") "
-        Else
-            CadValues2 = CadValues2 & ") "
+        If Not vParamAplic.ContabilidadNueva Then
+            CadValues2 = CadValues2 & DBSet(CtaBanco, "T") & "," & DBSet(BancoSoc, "N", "S") & "," & DBSet(SucurSoc, "N", "S") & ","
+            CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
         End If
+        CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+        CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1" ')"
         
+        If vParamAplic.ContabilidadNueva Then
+            vvIban = MiFormat(IbanSoc, "") & MiFormat(CStr(BancoSoc), "0000") & MiFormat(CStr(SucurSoc), "0000") & MiFormat(CC, "00") & MiFormat(CtaBaSoc, "0000000000")
+            
+            CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
+            'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
+            CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
+            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES') "
 
-        'Insertamos en la tabla scobro de la CONTA
-        Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
-        Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
-        Sql = Sql & " text33csb, text41csb, text42csb, agente" ') "
-        '[Monica]22/11/2013: Tema iban
-        If vEmpresa.HayNorma19_34Nueva = 1 Then
-            Sql = Sql & ", iban) "
-        Else
+            'Insertamos en la tabla scobro de la CONTA
+            Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
+            Sql = Sql & "ctabanc1, ctabanc2, fecultco, impcobro, "
+            Sql = Sql & " text33csb, text41csb, text42csb, agente, iban, " ') "
+            Sql = Sql & "nomclien, domclien, pobclien, cpclien, proclien, nifclien, codpais"
             Sql = Sql & ") "
+        
+        Else
+            '[Monica]22/11/2013: Tema iban
+            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                CadValues2 = CadValues2 & "," & DBSet(IbanSoc, "T", "S") & ") "
+            Else
+                CadValues2 = CadValues2 & ") "
+            End If
+            
+    
+            'Insertamos en la tabla scobro de la CONTA
+            Sql = "INSERT INTO scobro (numserie, codfaccl, fecfaccl, numorden, codmacta, codforpa, fecvenci, impvenci, "
+            Sql = Sql & "ctabanc1, codbanco, codsucur, digcontr, cuentaba, ctabanc2, fecultco, impcobro, "
+            Sql = Sql & " text33csb, text41csb, text42csb, agente" ') "
+            '[Monica]22/11/2013: Tema iban
+            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                Sql = Sql & ", iban) "
+            Else
+                Sql = Sql & ") "
+            End If
         End If
         
         Sql = Sql & " VALUES " & CadValues2
