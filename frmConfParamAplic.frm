@@ -34,103 +34,103 @@ Begin VB.Form frmConfParamAplic
       TabCaption(0)   =   "Contabilidad"
       TabPicture(0)   =   "frmConfParamAplic.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame6"
-      Tab(0).Control(1)=   "Frame2"
+      Tab(0).Control(0)=   "Frame2"
+      Tab(0).Control(1)=   "Frame6"
       Tab(0).ControlCount=   2
       TabCaption(1)   =   "Internet"
       TabPicture(1)   =   "frmConfParamAplic.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame7"
-      Tab(1).Control(1)=   "Frame21"
-      Tab(1).Control(2)=   "Frame17"
-      Tab(1).Control(3)=   "Frame4"
+      Tab(1).Control(0)=   "Frame4"
+      Tab(1).Control(1)=   "Frame17"
+      Tab(1).Control(2)=   "Frame21"
+      Tab(1).Control(3)=   "Frame7"
       Tab(1).ControlCount=   4
       TabCaption(2)   =   "Entradas"
       TabPicture(2)   =   "frmConfParamAplic.frx":0044
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "chkCoopro"
-      Tab(2).Control(1)=   "Text1(109)"
-      Tab(2).Control(2)=   "chkNotaManual"
-      Tab(2).Control(3)=   "chkRespetarNroNota"
-      Tab(2).Control(4)=   "Text1(66)"
-      Tab(2).Control(5)=   "Text1(65)"
-      Tab(2).Control(6)=   "Text1(64)"
-      Tab(2).Control(7)=   "chkAgruparNotas"
-      Tab(2).Control(8)=   "Text1(31)"
-      Tab(2).Control(9)=   "Text1(24)"
+      Tab(2).Control(0)=   "Label11"
+      Tab(2).Control(1)=   "Label14"
+      Tab(2).Control(2)=   "Label19"
+      Tab(2).Control(3)=   "Label20"
+      Tab(2).Control(4)=   "Label21"
+      Tab(2).Control(5)=   "Label22"
+      Tab(2).Control(6)=   "Label1(101)"
+      Tab(2).Control(7)=   "imgAyuda(2)"
+      Tab(2).Control(8)=   "Frame3"
+      Tab(2).Control(9)=   "chkTaraTractor"
       Tab(2).Control(10)=   "chkTraza"
-      Tab(2).Control(11)=   "chkTaraTractor"
-      Tab(2).Control(12)=   "Frame3"
-      Tab(2).Control(13)=   "imgAyuda(2)"
-      Tab(2).Control(14)=   "Label1(101)"
-      Tab(2).Control(15)=   "Label22"
-      Tab(2).Control(16)=   "Label21"
-      Tab(2).Control(17)=   "Label20"
-      Tab(2).Control(18)=   "Label19"
-      Tab(2).Control(19)=   "Label14"
-      Tab(2).Control(20)=   "Label11"
+      Tab(2).Control(11)=   "Text1(24)"
+      Tab(2).Control(12)=   "Text1(31)"
+      Tab(2).Control(13)=   "chkAgruparNotas"
+      Tab(2).Control(14)=   "Text1(64)"
+      Tab(2).Control(15)=   "Text1(65)"
+      Tab(2).Control(16)=   "Text1(66)"
+      Tab(2).Control(17)=   "chkRespetarNroNota"
+      Tab(2).Control(18)=   "chkNotaManual"
+      Tab(2).Control(19)=   "Text1(109)"
+      Tab(2).Control(20)=   "chkCoopro"
       Tab(2).ControlCount=   21
       TabCaption(3)   =   "Aridoc"
       TabPicture(3)   =   "frmConfParamAplic.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Text2(13)"
-      Tab(3).Control(1)=   "Text1(13)"
+      Tab(3).Control(0)=   "Label1(28)"
+      Tab(3).Control(1)=   "imgBuscar(9)"
       Tab(3).Control(2)=   "SSTab2"
-      Tab(3).Control(3)=   "imgBuscar(9)"
-      Tab(3).Control(4)=   "Label1(28)"
+      Tab(3).Control(3)=   "Text1(13)"
+      Tab(3).Control(4)=   "Text2(13)"
       Tab(3).ControlCount=   5
       TabCaption(4)   =   "Otros"
       TabPicture(4)   =   "frmConfParamAplic.frx":007C
       Tab(4).ControlEnabled=   0   'False
-      Tab(4).Control(0)=   "Label12"
+      Tab(4).Control(0)=   "Text1(136)"
       Tab(4).Control(0).Enabled=   0   'False
-      Tab(4).Control(1)=   "Label13"
+      Tab(4).Control(1)=   "Text1(110)"
       Tab(4).Control(1).Enabled=   0   'False
-      Tab(4).Control(2)=   "imgBuscar(0)"
+      Tab(4).Control(2)=   "Text1(41)"
       Tab(4).Control(2).Enabled=   0   'False
-      Tab(4).Control(3)=   "Label1(0)"
+      Tab(4).Control(3)=   "Text1(39)"
       Tab(4).Control(3).Enabled=   0   'False
-      Tab(4).Control(4)=   "Label1(58)"
+      Tab(4).Control(4)=   "Text1(38)"
       Tab(4).Control(4).Enabled=   0   'False
-      Tab(4).Control(5)=   "Label1(4)"
+      Tab(4).Control(5)=   "Text1(37)"
       Tab(4).Control(5).Enabled=   0   'False
-      Tab(4).Control(6)=   "Label15"
+      Tab(4).Control(6)=   "Frame5"
       Tab(4).Control(6).Enabled=   0   'False
-      Tab(4).Control(7)=   "imgZoom(0)"
+      Tab(4).Control(7)=   "Text1(28)"
       Tab(4).Control(7).Enabled=   0   'False
-      Tab(4).Control(8)=   "imgZoom(1)"
+      Tab(4).Control(8)=   "Text2(27)"
       Tab(4).Control(8).Enabled=   0   'False
-      Tab(4).Control(9)=   "Label16"
+      Tab(4).Control(9)=   "Text1(27)"
       Tab(4).Control(9).Enabled=   0   'False
-      Tab(4).Control(10)=   "Label17"
+      Tab(4).Control(10)=   "Text1(26)"
       Tab(4).Control(10).Enabled=   0   'False
-      Tab(4).Control(11)=   "Label1(102)"
+      Tab(4).Control(11)=   "Text1(25)"
       Tab(4).Control(11).Enabled=   0   'False
       Tab(4).Control(12)=   "Label34"
       Tab(4).Control(12).Enabled=   0   'False
-      Tab(4).Control(13)=   "Text1(25)"
+      Tab(4).Control(13)=   "Label1(102)"
       Tab(4).Control(13).Enabled=   0   'False
-      Tab(4).Control(14)=   "Text1(26)"
+      Tab(4).Control(14)=   "Label17"
       Tab(4).Control(14).Enabled=   0   'False
-      Tab(4).Control(15)=   "Text1(27)"
+      Tab(4).Control(15)=   "Label16"
       Tab(4).Control(15).Enabled=   0   'False
-      Tab(4).Control(16)=   "Text2(27)"
+      Tab(4).Control(16)=   "imgZoom(1)"
       Tab(4).Control(16).Enabled=   0   'False
-      Tab(4).Control(17)=   "Text1(28)"
+      Tab(4).Control(17)=   "imgZoom(0)"
       Tab(4).Control(17).Enabled=   0   'False
-      Tab(4).Control(18)=   "Frame5"
+      Tab(4).Control(18)=   "Label15"
       Tab(4).Control(18).Enabled=   0   'False
-      Tab(4).Control(19)=   "Text1(37)"
+      Tab(4).Control(19)=   "Label1(4)"
       Tab(4).Control(19).Enabled=   0   'False
-      Tab(4).Control(20)=   "Text1(38)"
+      Tab(4).Control(20)=   "Label1(58)"
       Tab(4).Control(20).Enabled=   0   'False
-      Tab(4).Control(21)=   "Text1(39)"
+      Tab(4).Control(21)=   "Label1(0)"
       Tab(4).Control(21).Enabled=   0   'False
-      Tab(4).Control(22)=   "Text1(41)"
+      Tab(4).Control(22)=   "imgBuscar(0)"
       Tab(4).Control(22).Enabled=   0   'False
-      Tab(4).Control(23)=   "Text1(110)"
+      Tab(4).Control(23)=   "Label13"
       Tab(4).Control(23).Enabled=   0   'False
-      Tab(4).Control(24)=   "Text1(136)"
+      Tab(4).Control(24)=   "Label12"
       Tab(4).Control(24).Enabled=   0   'False
       Tab(4).ControlCount=   25
       TabCaption(5)   =   "Terc/Trans"
@@ -144,172 +144,172 @@ Begin VB.Form frmConfParamAplic
       TabCaption(6)   =   "Almazara"
       TabPicture(6)   =   "frmConfParamAplic.frx":00B4
       Tab(6).ControlEnabled=   0   'False
-      Tab(6).Control(0)=   "Text1(116)"
-      Tab(6).Control(1)=   "Text1(115)"
-      Tab(6).Control(2)=   "Frame16"
-      Tab(6).Control(3)=   "Text1(48)"
-      Tab(6).Control(4)=   "Text2(48)"
+      Tab(6).Control(0)=   "Label1(34)"
+      Tab(6).Control(1)=   "imgBuscar(3)"
+      Tab(6).Control(2)=   "Label1(107)"
+      Tab(6).Control(3)=   "Label1(108)"
+      Tab(6).Control(4)=   "imgAyuda(1)"
       Tab(6).Control(5)=   "Frame10"
-      Tab(6).Control(6)=   "imgAyuda(1)"
-      Tab(6).Control(7)=   "Label1(108)"
-      Tab(6).Control(8)=   "Label1(107)"
-      Tab(6).Control(9)=   "imgBuscar(3)"
-      Tab(6).Control(10)=   "Label1(34)"
+      Tab(6).Control(6)=   "Text2(48)"
+      Tab(6).Control(7)=   "Text1(48)"
+      Tab(6).Control(8)=   "Frame16"
+      Tab(6).Control(9)=   "Text1(115)"
+      Tab(6).Control(10)=   "Text1(116)"
       Tab(6).ControlCount=   11
       TabCaption(7)   =   "ADV"
       TabPicture(7)   =   "frmConfParamAplic.frx":00D0
       Tab(7).ControlEnabled=   0   'False
-      Tab(7).Control(0)=   "Text1(114)"
-      Tab(7).Control(1)=   "Text2(114)"
-      Tab(7).Control(2)=   "Text1(58)"
-      Tab(7).Control(3)=   "Text2(58)"
-      Tab(7).Control(4)=   "Text2(57)"
-      Tab(7).Control(5)=   "Text1(57)"
-      Tab(7).Control(6)=   "Text1(56)"
-      Tab(7).Control(7)=   "Text2(56)"
-      Tab(7).Control(8)=   "imgBuscar(23)"
-      Tab(7).Control(9)=   "Label1(106)"
-      Tab(7).Control(10)=   "imgBuscar(58)"
-      Tab(7).Control(11)=   "Label1(44)"
-      Tab(7).Control(12)=   "Label1(42)"
-      Tab(7).Control(13)=   "imgBuscar(5)"
-      Tab(7).Control(14)=   "imgBuscar(4)"
-      Tab(7).Control(15)=   "Label1(36)"
+      Tab(7).Control(0)=   "Label1(36)"
+      Tab(7).Control(1)=   "imgBuscar(4)"
+      Tab(7).Control(2)=   "imgBuscar(5)"
+      Tab(7).Control(3)=   "Label1(42)"
+      Tab(7).Control(4)=   "Label1(44)"
+      Tab(7).Control(5)=   "imgBuscar(58)"
+      Tab(7).Control(6)=   "Label1(106)"
+      Tab(7).Control(7)=   "imgBuscar(23)"
+      Tab(7).Control(8)=   "Text2(56)"
+      Tab(7).Control(9)=   "Text1(56)"
+      Tab(7).Control(10)=   "Text1(57)"
+      Tab(7).Control(11)=   "Text2(57)"
+      Tab(7).Control(12)=   "Text2(58)"
+      Tab(7).Control(13)=   "Text1(58)"
+      Tab(7).Control(14)=   "Text2(114)"
+      Tab(7).Control(15)=   "Text1(114)"
       Tab(7).ControlCount=   16
       TabCaption(8)   =   "Suministros"
       TabPicture(8)   =   "frmConfParamAplic.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "Text1(62)"
-      Tab(8).Control(1)=   "Text1(60)"
-      Tab(8).Control(2)=   "Text2(60)"
-      Tab(8).Control(3)=   "Label1(52)"
-      Tab(8).Control(4)=   "imgBuscar(60)"
-      Tab(8).Control(5)=   "Label1(46)"
+      Tab(8).Control(0)=   "Label1(46)"
+      Tab(8).Control(1)=   "imgBuscar(60)"
+      Tab(8).Control(2)=   "Label1(52)"
+      Tab(8).Control(3)=   "Text2(60)"
+      Tab(8).Control(4)=   "Text1(60)"
+      Tab(8).Control(5)=   "Text1(62)"
       Tab(8).ControlCount=   6
       TabCaption(9)   =   "Bodega"
       TabPicture(9)   =   "frmConfParamAplic.frx":0108
       Tab(9).ControlEnabled=   0   'False
-      Tab(9).Control(0)=   "Text1(128)"
-      Tab(9).Control(1)=   "Frame15"
-      Tab(9).Control(2)=   "Text1(76)"
-      Tab(9).Control(3)=   "Text2(76)"
-      Tab(9).Control(4)=   "Text1(75)"
-      Tab(9).Control(5)=   "Text1(69)"
-      Tab(9).Control(6)=   "Text2(69)"
-      Tab(9).Control(7)=   "Text1(59)"
-      Tab(9).Control(8)=   "Text2(59)"
-      Tab(9).Control(9)=   "ChkContadorManual"
-      Tab(9).Control(10)=   "Text2(63)"
+      Tab(9).Control(0)=   "imgBuscar(10)"
+      Tab(9).Control(1)=   "Label1(53)"
+      Tab(9).Control(2)=   "Label1(45)"
+      Tab(9).Control(3)=   "imgBuscar(59)"
+      Tab(9).Control(4)=   "Label1(65)"
+      Tab(9).Control(5)=   "imgBuscar(69)"
+      Tab(9).Control(6)=   "Label1(75)"
+      Tab(9).Control(7)=   "Label1(76)"
+      Tab(9).Control(8)=   "imgBuscar(16)"
+      Tab(9).Control(9)=   "Label1(120)"
+      Tab(9).Control(10)=   "imgAyuda(3)"
       Tab(9).Control(11)=   "Text1(63)"
-      Tab(9).Control(12)=   "imgAyuda(3)"
-      Tab(9).Control(13)=   "Label1(120)"
-      Tab(9).Control(14)=   "imgBuscar(16)"
-      Tab(9).Control(15)=   "Label1(76)"
-      Tab(9).Control(16)=   "Label1(75)"
-      Tab(9).Control(17)=   "imgBuscar(69)"
-      Tab(9).Control(18)=   "Label1(65)"
-      Tab(9).Control(19)=   "imgBuscar(59)"
-      Tab(9).Control(20)=   "Label1(45)"
-      Tab(9).Control(21)=   "Label1(53)"
-      Tab(9).Control(22)=   "imgBuscar(10)"
+      Tab(9).Control(12)=   "Text2(63)"
+      Tab(9).Control(13)=   "ChkContadorManual"
+      Tab(9).Control(14)=   "Text2(59)"
+      Tab(9).Control(15)=   "Text1(59)"
+      Tab(9).Control(16)=   "Text2(69)"
+      Tab(9).Control(17)=   "Text1(69)"
+      Tab(9).Control(18)=   "Text1(75)"
+      Tab(9).Control(19)=   "Text2(76)"
+      Tab(9).Control(20)=   "Text1(76)"
+      Tab(9).Control(21)=   "Frame15"
+      Tab(9).Control(22)=   "Text1(128)"
       Tab(9).ControlCount=   23
       TabCaption(10)  =   "Telefonia"
       TabPicture(10)  =   "frmConfParamAplic.frx":0124
       Tab(10).ControlEnabled=   0   'False
-      Tab(10).Control(0)=   "Text1(71)"
-      Tab(10).Control(1)=   "Text2(70)"
-      Tab(10).Control(2)=   "Text1(70)"
-      Tab(10).Control(3)=   "Label1(67)"
-      Tab(10).Control(4)=   "Label1(66)"
-      Tab(10).Control(5)=   "imgBuscar(70)"
+      Tab(10).Control(0)=   "imgBuscar(70)"
+      Tab(10).Control(1)=   "Label1(66)"
+      Tab(10).Control(2)=   "Label1(67)"
+      Tab(10).Control(3)=   "Text1(70)"
+      Tab(10).Control(4)=   "Text2(70)"
+      Tab(10).Control(5)=   "Text1(71)"
       Tab(10).ControlCount=   6
       TabCaption(11)  =   "Nóminas"
       TabPicture(11)  =   "frmConfParamAplic.frx":0140
       Tab(11).ControlEnabled=   0   'False
-      Tab(11).Control(0)=   "Text1(108)"
-      Tab(11).Control(1)=   "Text1(101)"
-      Tab(11).Control(2)=   "Text1(100)"
-      Tab(11).Control(3)=   "Text1(99)"
-      Tab(11).Control(4)=   "Text1(98)"
-      Tab(11).Control(5)=   "Text1(97)"
-      Tab(11).Control(6)=   "Text1(72)"
-      Tab(11).Control(7)=   "Text2(72)"
-      Tab(11).Control(8)=   "Label1(100)"
-      Tab(11).Control(9)=   "Label1(97)"
-      Tab(11).Control(10)=   "Label1(96)"
-      Tab(11).Control(11)=   "Label1(95)"
-      Tab(11).Control(12)=   "Label1(94)"
-      Tab(11).Control(13)=   "Label31"
-      Tab(11).Control(14)=   "imgBuscar(13)"
-      Tab(11).Control(15)=   "Label1(68)"
+      Tab(11).Control(0)=   "Label1(68)"
+      Tab(11).Control(1)=   "imgBuscar(13)"
+      Tab(11).Control(2)=   "Label31"
+      Tab(11).Control(3)=   "Label1(94)"
+      Tab(11).Control(4)=   "Label1(95)"
+      Tab(11).Control(5)=   "Label1(96)"
+      Tab(11).Control(6)=   "Label1(97)"
+      Tab(11).Control(7)=   "Label1(100)"
+      Tab(11).Control(8)=   "Text2(72)"
+      Tab(11).Control(9)=   "Text1(72)"
+      Tab(11).Control(10)=   "Text1(97)"
+      Tab(11).Control(11)=   "Text1(98)"
+      Tab(11).Control(12)=   "Text1(99)"
+      Tab(11).Control(13)=   "Text1(100)"
+      Tab(11).Control(14)=   "Text1(101)"
+      Tab(11).Control(15)=   "Text1(108)"
       Tab(11).ControlCount=   16
       TabCaption(12)  =   "Pozos"
       TabPicture(12)  =   "frmConfParamAplic.frx":015C
       Tab(12).ControlEnabled=   0   'False
-      Tab(12).Control(0)=   "Label24"
-      Tab(12).Control(1)=   "Label25"
-      Tab(12).Control(2)=   "Label27"
-      Tab(12).Control(3)=   "imgBuscar(17)"
-      Tab(12).Control(4)=   "Label1(85)"
-      Tab(12).Control(5)=   "Label28"
-      Tab(12).Control(6)=   "Label26"
-      Tab(12).Control(7)=   "Label29"
-      Tab(12).Control(8)=   "Label1(113)"
-      Tab(12).Control(9)=   "imgBuscar(25)"
-      Tab(12).Control(10)=   "Label1(114)"
-      Tab(12).Control(11)=   "imgBuscar(122)"
-      Tab(12).Control(12)=   "imgBuscar(123)"
-      Tab(12).Control(13)=   "Label1(115)"
-      Tab(12).Control(14)=   "imgBuscar(124)"
-      Tab(12).Control(15)=   "Label1(116)"
-      Tab(12).Control(16)=   "Label1(118)"
-      Tab(12).Control(17)=   "imgBuscar(126)"
-      Tab(12).Control(18)=   "Label1(119)"
-      Tab(12).Control(19)=   "imgBuscar(127)"
-      Tab(12).Control(20)=   "imgBuscar(129)"
-      Tab(12).Control(21)=   "Label1(121)"
-      Tab(12).Control(22)=   "imgBuscar(130)"
-      Tab(12).Control(23)=   "Label1(122)"
-      Tab(12).Control(24)=   "Label1(131)"
-      Tab(12).Control(25)=   "imgBuscar(131)"
-      Tab(12).Control(26)=   "Label1(123)"
-      Tab(12).Control(27)=   "Label1(124)"
-      Tab(12).Control(28)=   "Label1(125)"
-      Tab(12).Control(29)=   "imgBuscar(134)"
-      Tab(12).Control(30)=   "imgBuscar(135)"
-      Tab(12).Control(31)=   "Label1(126)"
-      Tab(12).Control(32)=   "Text1(88)"
-      Tab(12).Control(33)=   "Text1(86)"
-      Tab(12).Control(34)=   "Text1(89)"
-      Tab(12).Control(35)=   "Text1(87)"
-      Tab(12).Control(36)=   "Text1(90)"
-      Tab(12).Control(37)=   "Text2(90)"
-      Tab(12).Control(38)=   "Text1(92)"
-      Tab(12).Control(39)=   "Text1(91)"
-      Tab(12).Control(40)=   "Text2(121)"
-      Tab(12).Control(41)=   "Text1(121)"
-      Tab(12).Control(42)=   "Text2(122)"
-      Tab(12).Control(43)=   "Text1(122)"
-      Tab(12).Control(44)=   "Text1(123)"
-      Tab(12).Control(45)=   "Text2(123)"
-      Tab(12).Control(46)=   "Text1(124)"
-      Tab(12).Control(47)=   "Text2(124)"
-      Tab(12).Control(48)=   "Text2(126)"
-      Tab(12).Control(49)=   "Text1(126)"
-      Tab(12).Control(50)=   "Text2(127)"
-      Tab(12).Control(51)=   "Text1(127)"
-      Tab(12).Control(52)=   "Text1(129)"
-      Tab(12).Control(53)=   "Text2(129)"
-      Tab(12).Control(54)=   "Text1(130)"
-      Tab(12).Control(55)=   "Text2(130)"
-      Tab(12).Control(56)=   "Text2(131)"
-      Tab(12).Control(57)=   "Text1(131)"
-      Tab(12).Control(58)=   "Text1(132)"
-      Tab(12).Control(59)=   "Text1(133)"
-      Tab(12).Control(60)=   "Text2(134)"
-      Tab(12).Control(61)=   "Text1(134)"
-      Tab(12).Control(62)=   "Text1(135)"
-      Tab(12).Control(63)=   "Text2(135)"
+      Tab(12).Control(0)=   "Text2(135)"
+      Tab(12).Control(1)=   "Text1(135)"
+      Tab(12).Control(2)=   "Text1(134)"
+      Tab(12).Control(3)=   "Text2(134)"
+      Tab(12).Control(4)=   "Text1(133)"
+      Tab(12).Control(5)=   "Text1(132)"
+      Tab(12).Control(6)=   "Text1(131)"
+      Tab(12).Control(7)=   "Text2(131)"
+      Tab(12).Control(8)=   "Text2(130)"
+      Tab(12).Control(9)=   "Text1(130)"
+      Tab(12).Control(10)=   "Text2(129)"
+      Tab(12).Control(11)=   "Text1(129)"
+      Tab(12).Control(12)=   "Text1(127)"
+      Tab(12).Control(13)=   "Text2(127)"
+      Tab(12).Control(14)=   "Text1(126)"
+      Tab(12).Control(15)=   "Text2(126)"
+      Tab(12).Control(16)=   "Text2(124)"
+      Tab(12).Control(17)=   "Text1(124)"
+      Tab(12).Control(18)=   "Text2(123)"
+      Tab(12).Control(19)=   "Text1(123)"
+      Tab(12).Control(20)=   "Text1(122)"
+      Tab(12).Control(21)=   "Text2(122)"
+      Tab(12).Control(22)=   "Text1(121)"
+      Tab(12).Control(23)=   "Text2(121)"
+      Tab(12).Control(24)=   "Text1(91)"
+      Tab(12).Control(25)=   "Text1(92)"
+      Tab(12).Control(26)=   "Text2(90)"
+      Tab(12).Control(27)=   "Text1(90)"
+      Tab(12).Control(28)=   "Text1(87)"
+      Tab(12).Control(29)=   "Text1(89)"
+      Tab(12).Control(30)=   "Text1(86)"
+      Tab(12).Control(31)=   "Text1(88)"
+      Tab(12).Control(32)=   "Label1(126)"
+      Tab(12).Control(33)=   "imgBuscar(135)"
+      Tab(12).Control(34)=   "imgBuscar(134)"
+      Tab(12).Control(35)=   "Label1(125)"
+      Tab(12).Control(36)=   "Label1(124)"
+      Tab(12).Control(37)=   "Label1(123)"
+      Tab(12).Control(38)=   "imgBuscar(131)"
+      Tab(12).Control(39)=   "Label1(131)"
+      Tab(12).Control(40)=   "Label1(122)"
+      Tab(12).Control(41)=   "imgBuscar(130)"
+      Tab(12).Control(42)=   "Label1(121)"
+      Tab(12).Control(43)=   "imgBuscar(129)"
+      Tab(12).Control(44)=   "imgBuscar(127)"
+      Tab(12).Control(45)=   "Label1(119)"
+      Tab(12).Control(46)=   "imgBuscar(126)"
+      Tab(12).Control(47)=   "Label1(118)"
+      Tab(12).Control(48)=   "Label1(116)"
+      Tab(12).Control(49)=   "imgBuscar(124)"
+      Tab(12).Control(50)=   "Label1(115)"
+      Tab(12).Control(51)=   "imgBuscar(123)"
+      Tab(12).Control(52)=   "imgBuscar(122)"
+      Tab(12).Control(53)=   "Label1(114)"
+      Tab(12).Control(54)=   "imgBuscar(25)"
+      Tab(12).Control(55)=   "Label1(113)"
+      Tab(12).Control(56)=   "Label29"
+      Tab(12).Control(57)=   "Label26"
+      Tab(12).Control(58)=   "Label28"
+      Tab(12).Control(59)=   "Label1(85)"
+      Tab(12).Control(60)=   "imgBuscar(17)"
+      Tab(12).Control(61)=   "Label27"
+      Tab(12).Control(62)=   "Label25"
+      Tab(12).Control(63)=   "Label24"
       Tab(12).ControlCount=   64
       Begin VB.TextBox Text1 
          Height          =   285
@@ -3280,34 +3280,34 @@ Begin VB.Form frmConfParamAplic
          TabCaption(0)   =   "Anticipos / Liquid."
          TabPicture(0)   =   "frmConfParamAplic.frx":0178
          Tab(0).ControlEnabled=   0   'False
-         Tab(0).Control(0)=   "Frame9"
-         Tab(0).Control(1)=   "Frame8"
-         Tab(0).Control(2)=   "Text1(11)"
-         Tab(0).Control(3)=   "Text2(11)"
-         Tab(0).Control(4)=   "Text1(10)"
-         Tab(0).Control(5)=   "Text2(10)"
-         Tab(0).Control(6)=   "imgBuscar(7)"
-         Tab(0).Control(7)=   "Label1(7)"
-         Tab(0).Control(8)=   "imgBuscar(6)"
-         Tab(0).Control(9)=   "Label1(6)"
+         Tab(0).Control(0)=   "Label1(6)"
+         Tab(0).Control(1)=   "imgBuscar(6)"
+         Tab(0).Control(2)=   "Label1(7)"
+         Tab(0).Control(3)=   "imgBuscar(7)"
+         Tab(0).Control(4)=   "Text2(10)"
+         Tab(0).Control(5)=   "Text1(10)"
+         Tab(0).Control(6)=   "Text2(11)"
+         Tab(0).Control(7)=   "Text1(11)"
+         Tab(0).Control(8)=   "Frame8"
+         Tab(0).Control(9)=   "Frame9"
          Tab(0).ControlCount=   10
          TabCaption(1)   =   "ADV / Recibos Campo"
          TabPicture(1)   =   "frmConfParamAplic.frx":0194
          Tab(1).ControlEnabled=   0   'False
-         Tab(1).Control(0)=   "Frame14"
-         Tab(1).Control(1)=   "Text1(74)"
-         Tab(1).Control(2)=   "Text2(73)"
-         Tab(1).Control(3)=   "Text2(74)"
-         Tab(1).Control(4)=   "Text1(73)"
-         Tab(1).Control(5)=   "Frame11"
-         Tab(1).Control(6)=   "Text2(61)"
-         Tab(1).Control(7)=   "Text1(61)"
-         Tab(1).Control(8)=   "imgBuscar(15)"
-         Tab(1).Control(9)=   "Label1(70)"
-         Tab(1).Control(10)=   "Label1(69)"
-         Tab(1).Control(11)=   "imgBuscar(14)"
-         Tab(1).Control(12)=   "Label1(47)"
-         Tab(1).Control(13)=   "imgBuscar(8)"
+         Tab(1).Control(0)=   "imgBuscar(8)"
+         Tab(1).Control(1)=   "Label1(47)"
+         Tab(1).Control(2)=   "imgBuscar(14)"
+         Tab(1).Control(3)=   "Label1(69)"
+         Tab(1).Control(4)=   "Label1(70)"
+         Tab(1).Control(5)=   "imgBuscar(15)"
+         Tab(1).Control(6)=   "Text1(61)"
+         Tab(1).Control(7)=   "Text2(61)"
+         Tab(1).Control(8)=   "Frame11"
+         Tab(1).Control(9)=   "Text1(73)"
+         Tab(1).Control(10)=   "Text2(74)"
+         Tab(1).Control(11)=   "Text2(73)"
+         Tab(1).Control(12)=   "Text1(74)"
+         Tab(1).Control(13)=   "Frame14"
          Tab(1).ControlCount=   14
          TabCaption(2)   =   "Almazara / Bodega"
          TabPicture(2)   =   "frmConfParamAplic.frx":01B0
@@ -3336,11 +3336,11 @@ Begin VB.Form frmConfParamAplic
          TabCaption(3)   =   "Transporte"
          TabPicture(3)   =   "frmConfParamAplic.frx":01CC
          Tab(3).ControlEnabled=   0   'False
-         Tab(3).Control(0)=   "Text2(96)"
-         Tab(3).Control(1)=   "Text1(96)"
+         Tab(3).Control(0)=   "imgBuscar(20)"
+         Tab(3).Control(1)=   "Label1(93)"
          Tab(3).Control(2)=   "Frame20"
-         Tab(3).Control(3)=   "Label1(93)"
-         Tab(3).Control(4)=   "imgBuscar(20)"
+         Tab(3).Control(3)=   "Text1(96)"
+         Tab(3).Control(4)=   "Text2(96)"
          Tab(3).ControlCount=   5
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -5658,7 +5658,7 @@ Dim kms As Currency
                     End If
                     BloqueoMenusSegunCooperativa
                     PonerModo 2
-                    PonerFocoBtn Me.CmdSalir
+                    PonerFocoBtn Me.cmdSalir
                 End If
            End If
         End If
@@ -6611,7 +6611,11 @@ Dim Cad As String
             If vSeccion.LeerDatos(Text1(27).Text) Then
                 If vSeccion.AbrirConta Then
                     If PonerFormatoEntero(Text1(Index)) Then
-                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        If vParamAplic.ContabilidadNueva Then
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(Index), "N")
+                        Else
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        End If
                     Else
                         Text2(Index).Text = ""
                     End If
@@ -6655,7 +6659,11 @@ Dim Cad As String
             If vSeccion.LeerDatos(Text1(48).Text) Then
                 If vSeccion.AbrirConta Then
                     If PonerFormatoEntero(Text1(Index)) Then
-                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        If vParamAplic.ContabilidadNueva Then
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(Index), "N")
+                        Else
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        End If
                     Else
                         Text2(Index).Text = ""
                     End If
@@ -6852,7 +6860,11 @@ Dim Cad As String
             If vSeccion.LeerDatos(Text1(121).Text) Then
                 If vSeccion.AbrirConta Then
                     If PonerFormatoEntero(Text1(Index)) Then
-                        Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        If vParamAplic.ContabilidadNueva Then
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(Index), "N")
+                        Else
+                            Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(Index), "N")
+                        End If
                     Else
                         Text2(Index).Text = ""
                     End If
@@ -6962,9 +6974,9 @@ End Sub
 
 
 Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
+    Me.CmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
-    Me.CmdSalir.visible = b
+    Me.cmdSalir.visible = b
 '    If b Then Me.lblIndicador.Caption = ""
 End Sub
 
@@ -7054,11 +7066,19 @@ On Error GoTo EPonerCampos
                 
                 ' forma de pago de facturas anticipos / liquidaciones de socios positivas
                 If Text1(43).Text <> "" Then
-                    Text2(43).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(43), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(43).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(43), "N")
+                    Else
+                        Text2(43).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(43), "N")
+                    End If
                 End If
                 ' forma de pago de facturas anticipos / liquidaciones de socios negativas
                 If Text1(44).Text <> "" Then
-                    Text2(44).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(44), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(44).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(44), "N")
+                    Else
+                        Text2(44).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(44), "N")
+                    End If
                 End If
                 
                 ' telefonia de valsur
@@ -7119,11 +7139,19 @@ On Error GoTo EPonerCampos
                 End If
                 ' forma de pago de contado de pozos
                 If Text1(126).Text <> "" Then
-                    Text2(126).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(126), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(126).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(126), "N")
+                    Else
+                        Text2(126).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(126), "N")
+                    End If
                 End If
                 ' forma de pago de recibos de pozos
                 If Text1(127).Text <> "" Then
-                    Text2(127).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(127), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(127).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(127), "N")
+                    Else
+                        Text2(127).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(127), "N")
+                    End If
                 End If
             End If
             vSeccion.CerrarConta
@@ -7152,11 +7180,19 @@ On Error GoTo EPonerCampos
                 
                 ' forma de pago de facturas almazara positivas y negativas
                 If Text1(51).Text <> "" Then
-                    Text2(51).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(51), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(51).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(51), "N")
+                    Else
+                        Text2(51).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(51), "N")
+                    End If
                 End If
                 ' forma de pago de facturas anticipos / liquidaciones de socios negativas
                 If Text1(52).Text <> "" Then
-                    Text2(52).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(52), "N")
+                    If vParamAplic.ContabilidadNueva Then
+                        Text2(52).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", Text1(52), "N")
+                    Else
+                        Text2(52).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", Text1(52), "N")
+                    End If
                 End If
                 
                 ' cuenta de ventas de facturas de almazara

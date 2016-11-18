@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmForpaConta 
@@ -391,6 +391,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '-----------------------------------------------
 Dim PrimeraVez As Boolean
+Dim vTabla As String
 
 
 Private Sub PonerModo(vModo)
@@ -411,7 +412,7 @@ Dim b As Boolean
     Combo1.visible = Not b
         
     cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
+    CmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
@@ -478,7 +479,7 @@ End Sub
 Private Sub BotonBuscar()
 '    lblIndicador.Caption = "BUSQUEDA"
     ' ***************** canviar per la clau primaria ********
-    CargaGrid "sforpa.codforpa = -1"
+    CargaGrid vTabla & ".codforpa = -1"
     '*******************************************************************************
     'Buscar
     txtAux(0).Text = ""
@@ -532,7 +533,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -541,7 +542,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -549,10 +550,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -610,15 +611,29 @@ Private Sub Form_Load()
     '## A mano
     chkVistaPrevia.Value = CheckValueLeer(Name)
       
+    If vParamAplic.ContabilidadNueva Then
+        vTabla = "formapago"
+    Else
+        vTabla = "sforpa"
+    End If
+
+    txtAux(0).Tag = "Código de Forma de Pago|N|N|||" & vTabla & "|codforpa|000|S|"
+    txtAux(1).Tag = "Descripción de la Forpa|T|N|||" & vTabla & "|nomforpa|||"
+    Combo1.Tag = "Tipo Forpa|N|N|0|9|" & vTabla & "|tipforpa||N|"
+
+
 '    PonerOpcionesMenu  'En funcion del usuario
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM sforpa, stipoformapago where sforpa.tipforpa = stipoformapago.tipoformapago "
+    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM " & vTabla & ", stipoformapago where " & vTabla & ".tipforpa = stipoformapago.tipoformapago "
     '************************************************************************
     
     CadB = ""
     CargaGrid ""
 
     CargaCombo
+
+
+
 
 '    lblIndicador.Caption = ""
 '    PonerModo 2
@@ -663,20 +678,20 @@ End Sub
 
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String, tots As String
+    Dim Sql As String, tots As String
     
     adodc1.ConnectionString = ConnConta
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY codforpa"
+    Sql = Sql & " ORDER BY codforpa"
     '**************************************************************++
     
-    adodc1.RecordSource = SQL
+    adodc1.RecordSource = Sql
     adodc1.CursorType = adOpenDynamic
     adodc1.LockType = adLockOptimistic
     adodc1.Refresh

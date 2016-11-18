@@ -3522,7 +3522,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3628,13 +3628,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3688,7 +3688,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3706,7 +3706,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3927,7 +3927,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.CmdCancelarCobros
+            PonerFocoBtn Me.cmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -4013,47 +4013,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.CmdAceptarCobros.Top = 4000
-            Me.CmdAceptarCobros.Left = 4200
+            Me.cmdAceptarCobros.Top = 4000
+            Me.cmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.CmdAceptarCobros.Left = 4000
+            Me.cmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.CmdAceptarCobros.Top = 5400
-            Me.CmdAceptarCobros.Left = 4600
+            Me.cmdAceptarCobros.Top = 5400
+            Me.cmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.CmdCancelarCobros.Top = 5300
-                Me.CmdCancelarCobros.Left = 4600
-                Me.CmdAceptarCobros.Left = 3300
+                Me.cmdCancelarCobros.Top = 5300
+                Me.cmdCancelarCobros.Left = 4600
+                Me.cmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.CmdAceptarCobros.Caption = "&SI"
-                Me.CmdCancelarCobros.Caption = "&NO"
+                Me.cmdAceptarCobros.Caption = "&SI"
+                Me.cmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
             
-            Me.CmdCancelarCobros.Top = 5300
-            Me.CmdCancelarCobros.Left = 4600
-            Me.CmdAceptarCobros.Left = 3300
+            Me.cmdCancelarCobros.Top = 5300
+            Me.cmdCancelarCobros.Left = 4600
+            Me.cmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.CmdAceptarCobros.Caption = "&SI"
-            Me.CmdCancelarCobros.Caption = "&NO"
+            Me.cmdAceptarCobros.Caption = "&SI"
+            Me.cmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -4062,7 +4062,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -4151,10 +4151,17 @@ Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Sql As String
 
-    Sql = "SELECT numserie, codfaccl, fecfaccl, fecvenci, impvenci, impcobro "
-    Sql = Sql & " FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
-    Sql = Sql & cadWHERE
-    Sql = Sql & " and (ImpVenci + if(Gastos is null,0,gastos) - if(impcobro is null, 0, impcobro)) <> 0 "
+    If vParamAplic.ContabilidadNueva Then
+        Sql = "SELECT numserie, numfactu, fecfactu, fecvenci, impvenci, impcobro "
+        Sql = Sql & " FROM cobros INNER JOIN formapago ON cobros.codforpa=formapago.codforpa "
+        Sql = Sql & cadWHERE
+        Sql = Sql & " and (ImpVenci + if(Gastos is null,0,gastos) - if(impcobro is null, 0, impcobro)) <> 0 "
+    Else
+        Sql = "SELECT numserie, codfaccl, fecfaccl, fecvenci, impvenci, impcobro "
+        Sql = Sql & " FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+        Sql = Sql & cadWHERE
+        Sql = Sql & " and (ImpVenci + if(Gastos is null,0,gastos) - if(impcobro is null, 0, impcobro)) <> 0 "
+    End If
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
      
@@ -4720,7 +4727,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!Codsocio, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = Rs.Fields(3).Value
@@ -4767,7 +4774,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
@@ -4810,7 +4817,7 @@ Dim ItmX As ListItem
     
         While Not Rs.EOF
             Set ItmX = ListView7.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Entradas sin CRFID."
@@ -6033,7 +6040,7 @@ Dim It As ListItem
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
         It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
-        It.SubItems(4) = Format(DBLet(Rs!Numnotac, "N"), "0000000")
+        It.SubItems(4) = Format(DBLet(Rs!numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(Rs!KilosNet, "N")
         It.SubItems(6) = DBLet(Rs!ImpTrans, "N")
         
@@ -6308,7 +6315,7 @@ Dim It As ListItem
         Set It = ListView10.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(Rs!Numnotac, "N")
+        It.Text = DBLet(Rs!numnotac, "N")
         It.SubItems(1) = Format(Rs!FechaEnt, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
         It.SubItems(3) = Format(Rs!codvarie, "000000")
@@ -6961,7 +6968,7 @@ Dim It As ListItem
             
         It.Text = DBLet(Rs!codTrans, "T")
         It.SubItems(1) = DBLet(Rs!nomtrans, "T")
-        It.SubItems(2) = DBLet(Rs!Matricula, "T")
+        It.SubItems(2) = DBLet(Rs!matricula, "T")
         
         It.Checked = False
         
@@ -7026,7 +7033,7 @@ Dim It As ListItem
         Set It = ListView18.ListItems.Add
             
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(Rs!Matricula, "T")
+        It.Text = DBLet(Rs!matricula, "T")
         It.SubItems(1) = Format(Rs!Contador, "0000000")
         
         Rs.MoveNext

@@ -93,13 +93,13 @@ Begin VB.Form frmADVHcoFacturas
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmADVHcoFacturas.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(11)"
-      Tab(0).Control(1)=   "Label1(12)"
-      Tab(0).Control(2)=   "Label1(30)"
+      Tab(0).Control(0)=   "Frame2(1)"
+      Tab(0).Control(1)=   "Text1(15)"
+      Tab(0).Control(2)=   "Text1(16)"
       Tab(0).Control(3)=   "Label1(31)"
-      Tab(0).Control(4)=   "Text1(16)"
-      Tab(0).Control(5)=   "Text1(15)"
-      Tab(0).Control(6)=   "Frame2(1)"
+      Tab(0).Control(4)=   "Label1(30)"
+      Tab(0).Control(5)=   "Label1(12)"
+      Tab(0).Control(6)=   "Label1(11)"
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Partes"
       TabPicture(1)   =   "frmADVHcoFacturas.frx":0A2A
@@ -2310,7 +2310,7 @@ Private Sub BotonEliminar()
 'Eliminar Registro de la Cabecera: Tabla de Facturas (scafac)
 ' y los registros correspondientes de las tablas cab. albaranes (scafac1)
 ' y las lineas de la factura (slifac)
-Dim cad As String
+Dim Cad As String
 Dim NumPedElim As Long
 On Error GoTo EEliminar
 
@@ -2323,24 +2323,24 @@ On Error GoTo EEliminar
 '    'solo se puede modificar la factura si no esta contabilizada
 '    If FactContabilizada Then Exit Sub
     
-    cad = "Cabecera de Facturas." & vbCrLf
-    cad = cad & "-----------------------------------" & vbCrLf & vbCrLf
-    cad = cad & "Va a eliminar la Factura:            "
-    cad = cad & vbCrLf & "Socio  :  " & Text1(2).Text & " - " & Text1(3).Text
-    cad = cad & vbCrLf & "NºFact.:  " & Text1(0).Text
-    cad = cad & vbCrLf & "Fecha  :  " & Format(Text1(1).Text, "dd/mm/yyyy")
+    Cad = "Cabecera de Facturas." & vbCrLf
+    Cad = Cad & "-----------------------------------" & vbCrLf & vbCrLf
+    Cad = Cad & "Va a eliminar la Factura:            "
+    Cad = Cad & vbCrLf & "Socio  :  " & Text1(2).Text & " - " & Text1(3).Text
+    Cad = Cad & vbCrLf & "NºFact.:  " & Text1(0).Text
+    Cad = Cad & vbCrLf & "Fecha  :  " & Format(Text1(1).Text, "dd/mm/yyyy")
 
-    cad = cad & vbCrLf & vbCrLf & " ¿Desea Eliminarla? "
+    Cad = Cad & vbCrLf & vbCrLf & " ¿Desea Eliminarla? "
     
     'Borramos
-    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
         NumPedElim = Data1.Recordset.Fields(1).Value
         
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -2399,7 +2399,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 'Este es el boton Cabecera
-Dim cad As String
+Dim Cad As String
 
     'Quitar lineas y volver a la cabecera
     If Modo = 5 Then  'modo 5: Mantenimientos Lineas
@@ -2412,9 +2412,9 @@ Dim cad As String
             MsgBox "Ningún registro devuelto.", vbExclamation
             Exit Sub
         End If
-        cad = Data1.Recordset.Fields(0) & "|"
-        cad = cad & Data1.Recordset.Fields(1) & "|"
-        RaiseEvent DatoSeleccionado(cad)
+        Cad = Data1.Recordset.Fields(0) & "|"
+        Cad = Cad & Data1.Recordset.Fields(1) & "|"
+        RaiseEvent DatoSeleccionado(Cad)
         Unload Me
     End If
 End Sub
@@ -2770,14 +2770,14 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim sql As String
+Dim Sql As String
 On Error GoTo EBloqueaAlb
 
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    sql = "select * FROM advfacturas_partes "
-    sql = sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute sql, , adCmdText
+    Sql = "select * FROM advfacturas_partes "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -2787,16 +2787,16 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea TODAS las lineas de la factura
-Dim sql As String
+Dim Sql As String
     
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     
     'bloquear cabecera albaranes x factura
-    sql = "select * FROM advfacturas_lineas "
-    sql = sql & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute sql, , adCmdText
+    Sql = "select * FROM advfacturas_lineas "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -2908,7 +2908,11 @@ Dim devuelve As String
             If PonerFormatoEntero(Text1(Index)) Then
 '[Monica] 09/02/2010 La forma de pago la sacamos de la contabilidad de adv.
 '                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa")
-                Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", "N")
+                If vParamAplic.ContabilidadNueva Then
+                    Text2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", "N")
+                Else
+                    Text2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", "N")
+                End If
             Else
                 Text2(Index).Text = ""
             End If
@@ -2955,27 +2959,27 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 Dim devuelve As String
     
     'Llamamos a al form
     '##A mano
-    cad = ""
-        cad = cad & ParaGrid(Text1(17), 10, "Tipo Fac.")
-        cad = cad & ParaGrid(Text1(0), 18, "Nº Factura")
-        cad = cad & ParaGrid(Text1(1), 15, "Fecha Fac.")
-        cad = cad & ParaGrid(Text1(2), 12, "Socio")
-        cad = cad & ParaGrid(Text1(3), 45, "Nombre Socio")
+    Cad = ""
+        Cad = Cad & ParaGrid(Text1(17), 10, "Tipo Fac.")
+        Cad = Cad & ParaGrid(Text1(0), 18, "Nº Factura")
+        Cad = Cad & ParaGrid(Text1(1), 15, "Fecha Fac.")
+        Cad = Cad & ParaGrid(Text1(2), 12, "Socio")
+        Cad = Cad & ParaGrid(Text1(3), 45, "Nombre Socio")
         Tabla = NombreTabla
         Titulo = "Facturas ADV"
         devuelve = "0|1|2|"
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
+        frmB.vCampos = Cad
         frmB.vTabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -3067,7 +3071,11 @@ Dim BrutoFac As Single
     
     'poner descripcion campos
 '    Text2(10).Text = PonerNombreDeCod(Text1(10), "forpago", "nomforpa")
-    Text2(10).Text = PonerNombreDeCod(Text1(10), "sforpa", "nomforpa", "codforpa", "N", cConta)
+    If vParamAplic.ContabilidadNueva Then
+        Text2(10).Text = PonerNombreDeCod(Text1(10), "formapago", "nomforpa", "codforpa", "N", cConta)
+    Else
+        Text2(10).Text = PonerNombreDeCod(Text1(10), "sforpa", "nomforpa", "codforpa", "N", cConta)
+    End If
 '--monica
 '    Text2(13).Text = PonerNombreDeCod(Text1(13), conAri, "straba", "nomtraba", "codtraba")
     
@@ -3090,7 +3098,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte, Numreg As Byte
+Dim i As Byte, NumReg As Byte
 Dim b As Boolean
 
     On Error GoTo EPonerModo
@@ -3114,11 +3122,11 @@ Dim b As Boolean
     End If
         
     'Poner Flechas de desplazamiento visibles
-    Numreg = 1
+    NumReg = 1
     If Not Data1.Recordset.EOF Then
-        If Data1.Recordset.RecordCount > 1 Then Numreg = 2 'Solo es para saber q hay + de 1 registro
+        If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, Numreg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
           
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -3179,7 +3187,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
     
     
     For i = 0 To Me.imgBuscar.Count - 1
@@ -3257,7 +3265,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3265,7 +3273,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 17 And KeyAscii = 13 Then 'campo nº de lote y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYpress KeyAscii
     End If
@@ -3286,7 +3294,7 @@ Private Sub Text3_LostFocus(Index As Integer)
 '        Case 0, 1 'trabajador
 '            Text2(Index).Text = PonerNombreDeCod(Text3(Index), conAri, "straba", "nomtraba", "codtraba", "Cod. Trabajador", "N")
         Case 8 'observa 5
-            PonerFocoBtn Me.cmdAceptar
+            PonerFocoBtn Me.CmdAceptar
     End Select
 End Sub
 
@@ -3362,7 +3370,7 @@ End Sub
     
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
-Dim sql As String
+Dim Sql As String
 Dim vWhere As String
 Dim b As Boolean
 
@@ -3376,18 +3384,18 @@ Dim b As Boolean
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
-        sql = "UPDATE " & NomTablaLineas & " SET "
-        sql = sql & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
-        sql = sql & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
-        sql = sql & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
-        sql = sql & "importel= " & DBSet(txtAux(7).Text, "N")
-        sql = sql & ", numlotes=" & DBSet(Text2(17).Text, "T")
-        sql = sql & vWhere
+        Sql = "UPDATE " & NomTablaLineas & " SET "
+        Sql = Sql & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
+        Sql = Sql & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
+        Sql = Sql & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
+        Sql = Sql & "importel= " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & ", numlotes=" & DBSet(Text2(17).Text, "T")
+        Sql = Sql & vWhere
     End If
     
-    If sql <> "" Then
+    If Sql <> "" Then
         'actualizar la factura y vencimientos
-        b = ModificarFactura(sql)
+        b = ModificarFactura(Sql)
         ModificarLinea = b
     End If
     
@@ -3405,7 +3413,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.cmdAceptar.visible = Not b
+    Me.CmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3424,7 +3432,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim b As Boolean
 Dim Opcion As Byte
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo ECargaGRid
 
@@ -3439,8 +3447,8 @@ Dim sql As String
             Opcion = 3
     End Select
     
-    sql = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, sql, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
@@ -3563,7 +3571,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 
-Private Sub BotonMtoLineas(numTab As Integer, cad As String)
+Private Sub BotonMtoLineas(numTab As Integer, Cad As String)
     Me.SSTab1.Tab = numTab
     
     If Me.DataGrid1.visible Then 'Lineas de Albaranes
@@ -3571,7 +3579,7 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
             MsgBox "La factura no tiene lineas.", vbInformation
             Exit Sub
         End If
-        TituloLinea = cad
+        TituloLinea = Cad
         
         ModificaLineas = 0
         PonerModo 5
@@ -3580,8 +3588,8 @@ Private Sub BotonMtoLineas(numTab As Integer, cad As String)
 End Sub
 
 
-Private Function eliminar() As Boolean
-Dim sql As String
+Private Function Eliminar() As Boolean
+Dim Sql As String
 Dim cta As String
 Dim b As Boolean
 Dim vTipoMov As CTiposMov
@@ -3589,7 +3597,7 @@ Dim vTipoMov As CTiposMov
     On Error GoTo FinEliminar
 
         b = False
-        eliminar = False
+        Eliminar = False
         If Data1.Recordset.EOF Then Exit Function
         
         conn.BeginTrans
@@ -3599,21 +3607,21 @@ Dim vTipoMov As CTiposMov
         'Eliminar en tablas de factura de ADV: advfacturas, advfacturas_partes, advfacturas_lineas
         '---------------------------------------------------------------
         If b Then
-            sql = " " & ObtenerWhereCP(True)
+            Sql = " " & ObtenerWhereCP(True)
         
             'Lineas de facturas (slifpc)
-            conn.Execute "Delete from " & NomTablaLineas & sql
+            conn.Execute "Delete from " & NomTablaLineas & Sql
         
             ' advfacturas_trabajador
-            conn.Execute "delete from advfacturas_trabajador " & sql
+            conn.Execute "delete from advfacturas_trabajador " & Sql
             
             
             'Lineas de cabeceras de albaranes de la factura
-            conn.Execute "Delete from advfacturas_partes " & sql
+            conn.Execute "Delete from advfacturas_partes " & Sql
             
             
             'Cabecera de facturas (scafpc)
-            conn.Execute "Delete from " & NombreTabla & sql
+            conn.Execute "Delete from " & NombreTabla & Sql
         End If
         
         'Eliminar los movimientos generados por el albaran que genero la factura
@@ -3638,7 +3646,7 @@ FinEliminar:
         conn.CommitTrans
 '        ConnConta.CommitTrans
     End If
-    eliminar = b
+    Eliminar = b
 End Function
 
 
@@ -3682,11 +3690,11 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim sql As String
+Dim Sql As String
 On Error Resume Next
-    sql = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
-    If conWhere Then sql = " WHERE " & sql
-    ObtenerWhereCP = sql
+    Sql = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
 End Function
 
 
@@ -3699,32 +3707,32 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim sql As String
+Dim Sql As String
     
     Select Case Opcion
         Case 1
-            sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, codalmac, advfacturas_lineas.codartic, nomartic, ampliaci, dosishab, cantidad, advfacturas_lineas.preciove, importel "
-            sql = sql & " FROM advfacturas_lineas inner join advartic on advfacturas_lineas.codartic = advartic.codartic " 'lineas de factura
+            Sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, codalmac, advfacturas_lineas.codartic, nomartic, ampliaci, dosishab, cantidad, advfacturas_lineas.preciove, importel "
+            Sql = Sql & " FROM advfacturas_lineas inner join advartic on advfacturas_lineas.codartic = advartic.codartic " 'lineas de factura
     
         Case 2
-            sql = "SELECT codtipom,numfactu,fecfactu,numparte, fechapar,codcampo, codtrata, observac, litrosrea  "
-            sql = sql & " FROM advfacturas_partes " 'cabeceras partes de la factura
+            Sql = "SELECT codtipom,numfactu,fecfactu,numparte, fechapar,codcampo, codtrata, observac, litrosrea  "
+            Sql = Sql & " FROM advfacturas_partes " 'cabeceras partes de la factura
             
         Case 3
-            sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, advfacturas_trabajador.codtraba, nomtraba, horas, precio, importel "
-            sql = sql & " FROM advfacturas_trabajador inner join straba on advfacturas_trabajador.codtraba = straba.codtraba " 'lineas de factura
+            Sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, advfacturas_trabajador.codtraba, nomtraba, horas, precio, importel "
+            Sql = Sql & " FROM advfacturas_trabajador inner join straba on advfacturas_trabajador.codtraba = straba.codtraba " 'lineas de factura
     End Select
     
     If enlaza Then
-        sql = sql & " " & ObtenerWhereCP(True)
+        Sql = Sql & " " & ObtenerWhereCP(True)
         'lineas factura proveedor
-        If Opcion = 1 Or Opcion = 3 Then sql = sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
+        If Opcion = 1 Or Opcion = 3 Then Sql = Sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
     Else
-        sql = sql & " WHERE numfactu = -1"
+        Sql = Sql & " WHERE numfactu = -1"
     End If
-    sql = sql & " ORDER BY codtipom, numfactu, fecfactu, numparte "
-    If Opcion = 1 Or Opcion = 3 Then sql = sql & ", numlinea "
-    MontaSQLCarga = sql
+    Sql = Sql & " ORDER BY codtipom, numfactu, fecfactu, numparte "
+    If Opcion = 1 Or Opcion = 3 Then Sql = Sql & ", numlinea "
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -3758,7 +3766,7 @@ Dim b As Boolean
 End Sub
 
 
-Private Sub PonerDatosSocio(Codsocio As String, Optional nifsocio As String)
+Private Sub PonerDatosSocio(Codsocio As String, Optional nifSocio As String)
 Dim vSocio As cSocio
 Dim Observaciones As String
     
@@ -3844,7 +3852,7 @@ End Sub
    
 
 Private Function ModificaAlbxFac() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim b As Boolean
 On Error GoTo EModificaAlb
     
@@ -3858,15 +3866,15 @@ On Error GoTo EModificaAlb
 '    SQL = "UPDATE scafpa SET codtrab2=" & DBSet(Text3(0).Text, "N", "S") & ", "
 '    SQL = SQL & "codtrab1=" & DBSet(Text3(1).Text, "N", "S")
     If Me.FrameObserva.visible Then
-        sql = "UPDATE advfacturas_partes SET "
-        sql = sql & " observac=" & DBSet(Text3(4).Text, "T")
+        Sql = "UPDATE advfacturas_partes SET "
+        Sql = Sql & " observac=" & DBSet(Text3(4).Text, "T")
 '        SQL = SQL & ", observa2=" & DBSet(Text3(5).Text, "T")
 '        SQL = SQL & ", observa3=" & DBSet(Text3(6).Text, "T")
 '        SQL = SQL & ", observa4=" & DBSet(Text3(7).Text, "T")
 '        SQL = SQL & ", observa5=" & DBSet(Text3(8).Text, "T")
-        sql = sql & ObtenerWhereCP(True)
-        sql = sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
-        conn.Execute sql
+        Sql = Sql & ObtenerWhereCP(True)
+        Sql = Sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
+        conn.Execute Sql
     End If
 '--monica
 '    SQL = SQL & ObtenerWhereCP(True)
@@ -3884,7 +3892,7 @@ Private Function ModificarFactura(Optional sqlLineas As String) As Boolean
 'si se ha modificado la linea de slifac, añadir a la transaccion la modificación de la linea y recalcular
 Dim bol As Boolean
 Dim MenError As String
-Dim sql As String
+Dim Sql As String
 Dim vFactuADV As CFacturaADV
 On Error GoTo EModFact
 
@@ -4072,25 +4080,25 @@ Private Function ObtenerSelFactura() As String
 'Cuando venimos desde dobleClick en Movimientos de Articulos para Albaranes ya
 'Facturados, abrimos este form pero cargando los datos de la factura
 'correspendiente al albaran que se selecciono
-Dim cad As String
+Dim Cad As String
 Dim Rs As ADODB.Recordset
 On Error Resume Next
 
-    cad = "SELECT codsocio,numfactu,fecfactu FROM advfacturas_partes "
-    cad = cad & " WHERE codsocio=" & DBSet(hcoCodSocio, "N") & " AND numparte=" & DBSet(hcoCodMovim, "T")
-    cad = cad & " AND fechapar=" & DBSet(hcoFechaMovim, "F")
+    Cad = "SELECT codsocio,numfactu,fecfactu FROM advfacturas_partes "
+    Cad = Cad & " WHERE codsocio=" & DBSet(hcoCodSocio, "N") & " AND numparte=" & DBSet(hcoCodMovim, "T")
+    Cad = Cad & " AND fechapar=" & DBSet(hcoFechaMovim, "F")
 
     Set Rs = New ADODB.Recordset
-    Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then 'where para la factura
-        cad = " WHERE codsocio=" & Rs!Codsocio & " AND numfactu= " & Rs!numfactu & " AND fecfactu=" & DBSet(Rs!fecfactu, "F")
+        Cad = " WHERE codsocio=" & Rs!Codsocio & " AND numfactu= " & Rs!numfactu & " AND fecfactu=" & DBSet(Rs!fecfactu, "F")
     Else
-        cad = " where numfactu=-1"
+        Cad = " where numfactu=-1"
     End If
     Rs.Close
     Set Rs = Nothing
 
-    ObtenerSelFactura = cad
+    ObtenerSelFactura = Cad
 End Function
 
 
@@ -4211,14 +4219,14 @@ End Sub
 
 Private Sub BotonImprimir()
 Dim cadFormula As String
-Dim cadParam As String
+Dim CadParam As String
 Dim numParam As Byte
 Dim cadSelect As String 'select para insertar en tabla temporal
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim NroCopias As Integer
-Dim tipo As Byte
+Dim Tipo As Byte
 
     If Text1(0).Text = "" Then
         MsgBox "Debe seleccionar una Factura para Imprimir.", vbInformation
@@ -4226,7 +4234,7 @@ Dim tipo As Byte
     End If
     
     cadFormula = ""
-    cadParam = ""
+    CadParam = ""
     cadSelect = ""
     numParam = 0
     
@@ -4243,7 +4251,7 @@ Dim tipo As Byte
     
     indRPT = 32
     
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
       
     'Nombre fichero .rpt a Imprimir
     frmImprimir.NombreRPT = nomDocu
@@ -4262,7 +4270,7 @@ Dim tipo As Byte
     If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Sub
     
     
-    cadParam = cadParam & "pDuplicado=1|"
+    CadParam = CadParam & "pDuplicado=1|"
     numParam = numParam + 1
     
     
@@ -4270,7 +4278,7 @@ Dim tipo As Byte
      
     With frmImprimir
             .FormulaSeleccion = cadFormula
-            .OtrosParametros = cadParam
+            .OtrosParametros = CadParam
             .NumeroParametros = numParam
             .SoloImprimir = False
             .EnvioEMail = False

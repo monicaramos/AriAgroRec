@@ -957,7 +957,7 @@ Dim b As Boolean
 '    Combo1(0).Enabled = Not b
 '
     
-    cmdAceptar.visible = Not b
+    CmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -1677,7 +1677,11 @@ Private Sub CargaGrid(Optional vSQL As String)
         
             CargaForaGrid
         
-            txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+            If vParamAplic.ContabilidadNueva Then
+                txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+            Else
+                txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+            End If
             If DBLet(adodc1.Recordset!codmacpro, "T") <> "" Then
                 txtAux2(5).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", adodc1.Recordset!codmacpro, "T")
             End If
@@ -1718,8 +1722,11 @@ Private Sub txtAux_LostFocus(Index As Integer)
             If vSeccion Is Nothing Then Exit Sub
             
             If txtAux(Index).Text = "" Then Exit Sub
-            
-            If txtAux(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtAux(Index).Text, "N")
+            If vParamAplic.ContabilidadNueva Then
+                If txtAux(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtAux(Index).Text, "N")
+            Else
+                If txtAux(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtAux(Index).Text, "N")
+            End If
             If txtAux2(Index).Text = "" Then
                 MsgBox "Forma de Pago  no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
@@ -1978,7 +1985,11 @@ Dim i As Integer
     End If
     
     If Not vSeccion Is Nothing Then
-        txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+        If vParamAplic.ContabilidadNueva Then
+            txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+        Else
+            txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", adodc1.Recordset!Codforpa, "N")
+        End If
         txtAux2(5).Text = ""
         If DBLet(adodc1.Recordset!codmacpro, "T") <> "" Then
             txtAux2(5).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", adodc1.Recordset!codmacpro, "T")
@@ -2043,8 +2054,11 @@ Dim Sql As String
             If vSeccion Is Nothing Then Exit Sub
             
             If txtAux1(Index).Text = "" Then Exit Sub
-            
-            If txtAux1(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtAux1(Index).Text, "N")
+            If vParamAplic.ContabilidadNueva Then
+                If txtAux1(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtAux1(Index).Text, "N")
+            Else
+                If txtAux1(Index).Text <> "" Then txtAux2(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtAux1(Index).Text, "N")
+            End If
             If txtAux2(Index).Text = "" Then
                 MsgBox "Forma de Pago  no existe en la contabilidad. Reintroduzca.", vbExclamation
             Else

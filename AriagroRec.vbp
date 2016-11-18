@@ -61,7 +61,6 @@ Form=frmBodReimpre.frm
 Form=frmBodContaFac.frm
 Class=CTiposMov; Clases\CTiposMov.cls
 Form=frmBackUP.frm
-Form=frmVerErrores.frm
 Form=frmLLave.frm
 Form=frmTrzManPalet.frm
 Form=frmlRepartoAlb.frm

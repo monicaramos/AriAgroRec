@@ -392,7 +392,7 @@ Attribute frmF.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String
+Private CadParam As String
 Private numParam As Byte
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
@@ -439,9 +439,9 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
@@ -474,7 +474,7 @@ Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim numOp As Byte
 
 Dim cadDesde As Date
-Dim cadHasta As Date
+Dim cadhasta As Date
 
 Dim cadAux As String
 
@@ -497,7 +497,7 @@ Dim Sql2 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -566,20 +566,20 @@ Dim Sql2 As String
         
         
         cadDesde = "01/01/1900"
-        cadHasta = "31/12/2500"
+        cadhasta = "31/12/2500"
         
         If txtcodigo(6).Text <> "" Then cadDesde = CDate(txtcodigo(6).Text)
-        If txtcodigo(7).Text <> "" Then cadHasta = CDate(txtcodigo(7).Text)
+        If txtcodigo(7).Text <> "" Then cadhasta = CDate(txtcodigo(7).Text)
         
-        cadParam = cadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
-        cadParam = cadParam & "pFecHasta= Date(" & Year(cadHasta) & "," & Month(cadHasta) & "," & Day(cadHasta) & ")" & "|" 'txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
+        CadParam = CadParam & "pFecHasta= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")" & "|" 'txtcodigo(7).Text & """|"
         numParam = numParam + 2
         
         
 '        If Not AnyadirAFormula(cadSelect, "{rhisfruta.numalbar} not in (select numalbar from rfacttra_albaran) ") Then Exit Sub
 '
         '[Monica]04/11/2013: no sacamos el nombre del socio si es Catadau y lo marcan
-        cadParam = cadParam & "pQuitarSocio=" & Check1.Value & "|"
+        CadParam = CadParam & "pQuitarSocio=" & Check1.Value & "|"
         numParam = numParam + 1
         
         cadTitulo = "Informe Entradas de Transporte"
@@ -587,7 +587,7 @@ Dim Sql2 As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -604,7 +604,7 @@ Dim Sql2 As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 58 ' informe de entradas por transportista
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 frmImprimir.NombreRPT = nomDocu
                 
@@ -636,7 +636,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim i As Integer
 Dim indFrame As Single
 
@@ -665,7 +665,7 @@ Dim indFrame As Single
         
 '    OpcionListado = 52
     
-    PonerFrameFacVisible True, h, w
+    PonerFrameFacVisible True, H, W
     txtcodigo(7).Text = Format(Now - 1, "dd/mm/yyyy")
     indFrame = 6
     
@@ -677,8 +677,8 @@ Dim indFrame As Single
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.cmdCancel.Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
         
 End Sub
 
@@ -702,17 +702,17 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1011,7 +1011,11 @@ Dim Tabla As String
             If PonerFormatoEntero(txtcodigo(Index)) Then
 '                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "forpago", "nomforpa", "codforpa", "N")
 '[Monica] 09/02/2010 no es de comercial sino de la contabilidad de adv
-                txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(Index), "N")
+                If vParamAplic.ContabilidadNueva Then
+                    txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(Index), "N")
+                Else
+                    txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(Index), "N")
+                End If
                 If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
             Else
                 txtNombre(Index).Text = ""
@@ -1022,15 +1026,15 @@ End Sub
 
 
 
-Private Sub PonerFrameFacVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
 Dim Cad As String
 
-    h = 5070
-    w = 6735
+    H = 5070
+    W = 6735
     
     
-    PonerFrameVisible Me.FrameFacturar, visible, h, w
+    PonerFrameVisible Me.FrameFacturar, visible, H, W
 End Sub
 
 
@@ -1058,7 +1062,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1069,7 +1073,7 @@ End Function
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1077,7 +1081,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1098,7 +1102,7 @@ Private Sub txtCodigo_Validate(Index As Integer, Cancel As Boolean)
 End Sub
 
 Private Function ObtenerClientes(cadW As String, Importe As String) As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
@@ -1106,28 +1110,28 @@ Dim Rs As ADODB.Recordset
     cadW = Replace(cadW, "{", "")
     cadW = Replace(cadW, "}", "")
     
-    SQL = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
-    SQL = SQL & " From scafac "
-    If cadW <> "" Then SQL = SQL & " where " & cadW
-    SQL = SQL & " group by codclien "
-    If Importe <> "" Then SQL = SQL & "having baseimp>" & Importe
+    Sql = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
+    Sql = Sql & " From scafac "
+    If cadW <> "" Then Sql = Sql & " where " & cadW
+    Sql = Sql & " group by codclien "
+    If Importe <> "" Then Sql = Sql & "having baseimp>" & Importe
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
     While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & Rs!CodClien & ","
+            Sql = Sql & Rs!CodClien & ","
 '        End If
         Rs.MoveNext
     Wend
     Rs.Close
     Set Rs = Nothing
-    If SQL <> "" Then
-        SQL = Mid(SQL, 1, Len(SQL) - 1)
-        SQL = "( {scafac.codclien} IN [" & SQL & "] )"
+    If Sql <> "" Then
+        Sql = Mid(Sql, 1, Len(Sql) - 1)
+        Sql = "( {scafac.codclien} IN [" & Sql & "] )"
     End If
-    ObtenerClientes = SQL
+    ObtenerClientes = Sql
     
 EClientes:
    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
@@ -1136,23 +1140,23 @@ End Function
 
 
 
-Private Function ActualizarRegistrosFac(ctabla As String, cwhere As String) As Boolean
+Private Function ActualizarRegistrosFac(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistrosFac = False
-    SQL = "update " & ctabla & ", usuarios.stipom set impreso = 1 "
-    SQL = SQL & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
-    If cwhere <> "" Then
-        cwhere = QuitarCaracterACadena(cwhere, "{")
-        cwhere = QuitarCaracterACadena(cwhere, "}")
-        cwhere = QuitarCaracterACadena(cwhere, "_1")
-        SQL = SQL & " and " & cwhere
+    Sql = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
+    Sql = Sql & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
+    If cWhere <> "" Then
+        cWhere = QuitarCaracterACadena(cWhere, "{")
+        cWhere = QuitarCaracterACadena(cWhere, "}")
+        cWhere = QuitarCaracterACadena(cWhere, "_1")
+        Sql = Sql & " and " & cWhere
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ActualizarRegistrosFac = True
     Exit Function
@@ -1181,8 +1185,8 @@ Private Sub AbrirFrmTransportistas(indice As Integer)
 End Sub
 
 
-Private Function ProcesoEntradasTransportista(ctabla As String, cwhere As String, ctabla1 As String, cwhere1 As String) As Boolean
-Dim SQL As String
+Private Function ProcesoEntradasTransportista(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String) As Boolean
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -1193,34 +1197,34 @@ Dim Rs As ADODB.Recordset
     
     ProcesoEntradasTransportista = False
 
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
-    ctabla = QuitarCaracterACadena(ctabla, "{")
-    ctabla = QuitarCaracterACadena(ctabla, "}")
+    cTabla = QuitarCaracterACadena(cTabla, "{")
+    cTabla = QuitarCaracterACadena(cTabla, "}")
     
     ctabla1 = QuitarCaracterACadena(ctabla1, "{")
     ctabla1 = QuitarCaracterACadena(ctabla1, "}")
     
-    cwhere = QuitarCaracterACadena(cwhere, "{")
-    cwhere = QuitarCaracterACadena(cwhere, "}")
+    cWhere = QuitarCaracterACadena(cWhere, "{")
+    cWhere = QuitarCaracterACadena(cWhere, "}")
     
     cwhere1 = QuitarCaracterACadena(cwhere1, "{")
     cwhere1 = QuitarCaracterACadena(cwhere1, "}")
     
-    SQL = "select " & vUsu.Codigo & ", rclasifica.codtrans,rclasifica.codvarie,rclasifica.codsocio,rclasifica.codcampo,rclasifica.fechaent,rclasifica.kilosnet,rclasifica.kilostra,rclasifica.impacarr, rclasifica.codtarif, rclasifica.numnotac from " & QuitarCaracterACadena(ctabla, "_1")
-    If cwhere <> "" Then
-        SQL = SQL & " WHERE " & cwhere
+    Sql = "select " & vUsu.Codigo & ", rclasifica.codtrans,rclasifica.codvarie,rclasifica.codsocio,rclasifica.codcampo,rclasifica.fechaent,rclasifica.kilosnet,rclasifica.kilostra,rclasifica.impacarr, rclasifica.codtarif, rclasifica.numnotac from " & QuitarCaracterACadena(cTabla, "_1")
+    If cWhere <> "" Then
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " union "
-    SQL = SQL & "select " & vUsu.Codigo & ", rhisfruta_entradas.codtrans,rhisfruta.codvarie,rhisfruta.codsocio,rhisfruta.codcampo,rhisfruta_entradas.fechaent,rhisfruta_entradas.kilosnet,rhisfruta_entradas.kilostra,rhisfruta_entradas.impacarr, rhisfruta_entradas.codtarif, rhisfruta_entradas.numnotac from " & QuitarCaracterACadena(ctabla1, "_1")
+    Sql = Sql & " union "
+    Sql = Sql & "select " & vUsu.Codigo & ", rhisfruta_entradas.codtrans,rhisfruta.codvarie,rhisfruta.codsocio,rhisfruta.codcampo,rhisfruta_entradas.fechaent,rhisfruta_entradas.kilosnet,rhisfruta_entradas.kilostra,rhisfruta_entradas.impacarr, rhisfruta_entradas.codtarif, rhisfruta_entradas.numnotac from " & QuitarCaracterACadena(ctabla1, "_1")
     If cwhere1 <> "" Then
-        SQL = SQL & " WHERE " & cwhere1
+        Sql = Sql & " WHERE " & cwhere1
     End If
-    SQL = SQL & " order by 1, 2, 3 "
+    Sql = Sql & " order by 1, 2, 3 "
                                            'transpor,codvarie, codsocio, codcampo, fechaent, kilosnet, kilostra, impacarr, codtarif,  numnotac
     Sql2 = "insert into tmpinformes (codusu, nombre1, codigo1, importe1, importe2, fecha1,  importe3,  importe4, importe5, importeb1, importeb2) "
-    Sql2 = Sql2 & SQL
+    Sql2 = Sql2 & Sql
     
     conn.Execute Sql2
     

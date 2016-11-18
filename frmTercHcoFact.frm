@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -46,9 +46,9 @@ Begin VB.Form frmTercHcoFact
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmTercHcoFact.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(0)=   "Frame2(1)"
       Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Frame2(1)"
+      Tab(0).Control(2)=   "Label1(11)"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmTercHcoFact.frx":0A2A
@@ -2401,7 +2401,7 @@ On Error GoTo EEliminar
         NumRegElim = Data1.Recordset.AbsolutePosition
 '        NumPedElim = Data1.Recordset.Fields(1).Value
         
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -2500,7 +2500,7 @@ End Sub
 
 Private Sub CmdTraerAlbaranes_Click()
 Dim Sql As String
-Dim cadwhere As String
+Dim cadWHERE As String
 
     If AsignarAlbaranes Then
 '        MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -2510,7 +2510,7 @@ End Sub
 
 Private Function AsignarAlbaranes() As Boolean
 Dim Sql As String
-Dim cadwhere As String
+Dim cadWHERE As String
 
 Dim Coope As Long
 Dim cSocios As String
@@ -2550,7 +2550,7 @@ Dim cSocios As String
     
 '[Monica]19/09/2013: cambio esta linea por la de abajo
 '    cadwhere = "codsocio = " & DBSet(Text1(2).Text, "N")
-    cadwhere = cSocios
+    cadWHERE = cSocios
     
 '[Monica]19/09/2013:--- quiere que quite la condicion de que sean albaranes de la variedad que me dieron inicial
 '    cadwhere = cadwhere & " and rhisfruta.codvarie in (select distinct codvarie from rlifter where codsocio = " & Data1.Recordset!CodSocio
@@ -2560,7 +2560,7 @@ Dim cSocios As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 47
-        frmMens.cadwhere = cadwhere
+        frmMens.cadWHERE = cadWHERE
         
         frmMens.Show vbModal
         
@@ -3404,7 +3404,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
     
     
     For i = 0 To Me.imgBuscar.Count - 1
@@ -3482,7 +3482,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3490,7 +3490,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 17 And KeyAscii = 13 Then 'campo nº de lote y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYpress KeyAscii
     End If
@@ -3511,7 +3511,7 @@ Private Sub Text3_LostFocus(Index As Integer)
 '        Case 0, 1 'trabajador
 '            Text2(Index).Text = PonerNombreDeCod(Text3(Index), conAri, "straba", "nomtraba", "codtraba", "Cod. Trabajador", "N")
         Case 8 'observa 5
-            PonerFocoBtn Me.cmdAceptar
+            PonerFocoBtn Me.CmdAceptar
     End Select
 End Sub
 
@@ -3630,7 +3630,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.cmdAceptar.visible = Not b
+    Me.CmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3774,7 +3774,7 @@ Private Sub BotonMtoLineas(numTab As Integer, Cad As String)
 End Sub
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim cta As String
@@ -3784,7 +3784,7 @@ Dim vSeccion As CSeccion
     On Error GoTo FinEliminar
 
         b = False
-        eliminar = False
+        Eliminar = False
         If Data1.Recordset.EOF Then Exit Function
         
         Set vSeccion = New CSeccion
@@ -3851,7 +3851,7 @@ FinEliminar:
     vSeccion.CerrarConta
     Set vSeccion = Nothing
     
-    eliminar = b
+    Eliminar = b
 End Function
 
 
@@ -3977,7 +3977,7 @@ End Sub
 
 
 Private Sub PonerDatosTransportista(codTrans As String, Optional NIFTrans As String)
-Dim vSoc As CSocio
+Dim vSoc As cSocio
 Dim Observaciones As String
     
     On Error GoTo EPonerDatos
@@ -3987,7 +3987,7 @@ Dim Observaciones As String
         Exit Sub
     End If
 
-    Set vSoc = New CSocio
+    Set vSoc = New cSocio
     'si se ha modificado el proveedor volver a cargar los datos
     If vSoc.Existe(codTrans) Then
         If vSoc.LeerDatos(codTrans) Then
@@ -4016,7 +4016,7 @@ Dim Observaciones As String
                 Text1(7).Text = vSoc.CPostal
                 Text1(8).Text = vSoc.Poblacion
                 Text1(9).Text = vSoc.Provincia
-                Text1(4).Text = vSoc.NIF
+                Text1(4).Text = vSoc.nif
                 Text1(5).Text = DBLet(vSoc.Tfno1, "T")
             End If
             
@@ -4037,7 +4037,7 @@ End Sub
 
 Private Sub PonerDatosProveVario(nifProve As String)
 'Poner el los campos Text el valor del proveedor
-Dim vSoc As CSocio
+Dim vSoc As cSocio
 Dim b As Boolean
    
 '    If nifProve = "" Then Exit Sub
@@ -4167,14 +4167,16 @@ On Error GoTo EModFact
                     bol = vFactu.LeerDatos(Text1(2).Text, Text1(0).Text, Text1(1).Text)
                     
                     If bol Then
-                        'Eliminar de la spagop
-                        Sql = " ctaprove='" & vFactu.CtaTerce & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
-                        Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
-                        ConnConta.Execute "Delete from spagop WHERE " & Sql
-                        
-                        'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
-                        If bol Then
-                            bol = vFactu.InsertarEnTesoreria(MenError)
+                        If Not vParamAplic.ContabilidadNueva Then
+                            'Eliminar de la spagop
+                            Sql = " ctaprove='" & vFactu.CtaTerce & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
+                            Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
+                            ConnConta.Execute "Delete from spagop WHERE " & Sql
+                            
+                            'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
+                            If bol Then
+                                bol = vFactu.InsertarEnTesoreria(MenError)
+                            End If
                         End If
                     End If
                     Set vFactu = Nothing

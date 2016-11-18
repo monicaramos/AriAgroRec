@@ -4451,15 +4451,25 @@ Dim vSeccion As CSeccion
             If vSeccion.AbrirConta Then
         
                 'AHORA FEBRERO 2010
-                Sql = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
-                vWhere = " WHERE scobro.codmacta = '" & Codmacta & "'"
-' lo llamamos desde el mto de socios, campos y contadores
-'                vWhere = vWhere & " AND fecvenci <= ' " & Format(FechaDoc, FormatoFecha) & "' "
-                'Antes mayo 2010
-                'vWhere = vWhere & " AND (sforpa.tipforpa between 0 and 3)"
-                vWhere = vWhere & " AND recedocu=0 "
-                Sql = Sql & vWhere & " ORDER BY fecfaccl, codfaccl "
-                
+                If vParamAplic.ContabilidadNueva Then
+                    Sql = "SELECT cobros.* FROM cobros INNER JOIN formapago ON cobros.codforpa=formapago.codforpa "
+                    vWhere = " WHERE cobros.codmacta = '" & Codmacta & "'"
+    ' lo llamamos desde el mto de socios, campos y contadores
+    '                vWhere = vWhere & " AND fecvenci <= ' " & Format(FechaDoc, FormatoFecha) & "' "
+                    'Antes mayo 2010
+                    'vWhere = vWhere & " AND (sforpa.tipforpa between 0 and 3)"
+                    vWhere = vWhere & " AND recedocu=0 "
+                    Sql = Sql & vWhere & " ORDER BY fecfactu, numfactu "
+                Else
+                    Sql = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+                    vWhere = " WHERE scobro.codmacta = '" & Codmacta & "'"
+    ' lo llamamos desde el mto de socios, campos y contadores
+    '                vWhere = vWhere & " AND fecvenci <= ' " & Format(FechaDoc, FormatoFecha) & "' "
+                    'Antes mayo 2010
+                    'vWhere = vWhere & " AND (sforpa.tipforpa between 0 and 3)"
+                    vWhere = vWhere & " AND recedocu=0 "
+                    Sql = Sql & vWhere & " ORDER BY fecfaccl, codfaccl "
+                End If
                 'Lee de la Base de Datos de CONTABILIDAD
                 Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
                 Importe = 0
