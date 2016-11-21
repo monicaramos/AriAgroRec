@@ -37,7 +37,7 @@ Public Declare Function LoadLibraryEx Lib "kernel32" Alias "LoadLibraryExA" (ByV
 Public Const DONT_RESOLVE_DLL_REFERENCES = &H1
 Public Const LOAD_LIBRARY_AS_DATAFILE = &H2
 Public Declare Function FreeLibrary Lib "kernel32" (ByVal hLibModule As Long) As Long
-Public Declare Function EnumResourceNames Lib "kernel32" Alias "EnumResourceNamesA" (ByVal ghmodule As Long, ByVal lpType As ResType, ByVal lpEnumFunc As Long, ByVal Lparam As Long) As Long
+Public Declare Function EnumResourceNames Lib "kernel32" Alias "EnumResourceNamesA" (ByVal ghmodule As Long, ByVal lpType As ResType, ByVal lpEnumFunc As Long, ByVal lparam As Long) As Long
 'String management
 Public Declare Function StrLen Lib "kernel32" Alias "lstrlenA" (ByVal lpString As Long) As Long
 Public Declare Function StrCpy Lib "kernel32" Alias "lstrcpyA" (ByVal lpString1 As String, ByVal lpString2 As Long) As Long
@@ -92,12 +92,12 @@ Private Declare Function LoadImage Lib "user32" Alias "LoadImageA" (ByVal hInst 
 'Private Declare Function DestroyIcon Lib "user32" (ByVal hIcon As Long) As Long
 'Private Declare Function GetLastError Lib "kernel32.dll" () As Long
 'Private Declare Function DeleteObject Lib "gdi32.dll" (ByVal hObject As Long) As Long
-Public Declare Function LoadLibrary Lib "kernel32.dll" Alias "LoadLibraryA" (ByVal lpLibFileName As String) As Long
+Public Declare Function LoadLibrary Lib "Kernel32.dll" Alias "LoadLibraryA" (ByVal lpLibFileName As String) As Long
 
-Private Declare Function FindResource Lib "kernel32.dll" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As String) As Long
+Private Declare Function FindResource Lib "Kernel32.dll" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As String) As Long
 Private Declare Function FindResourceByNum Lib "kernel32" Alias "FindResourceA" (ByVal hInstance As Long, ByVal lpName As String, ByVal lpType As Long) As Long
 
-Private Declare Function LoadResource Lib "kernel32.dll" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
+Private Declare Function LoadResource Lib "Kernel32.dll" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
 Private Declare Function CreateIconFromResourceEx Lib "user32" (presbits As Byte, ByVal dwResSize As Long, ByVal fIcon As Long, ByVal dwVer As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal uFlags As Long) As Long
 Private Declare Function LockResource Lib "kernel32" (ByVal hResData As Long) As Long
 Private Declare Function SizeofResource Lib "kernel32" (ByVal hInstance As Long, ByVal hResInfo As Long) As Long
@@ -258,7 +258,7 @@ Public Function GetDataArray(ByVal ResType As String, ByVal ResName As String, B
 
 End Function
 
-Public Function EnumResNameProc(ByVal ghmodule As Long, ByVal lpszType As ResType, ByVal lpszName As Long, ByVal Lparam As Long) As Long
+Public Function EnumResNameProc(ByVal ghmodule As Long, ByVal lpszType As ResType, ByVal lpszName As Long, ByVal lparam As Long) As Long
     Dim sNumber As String, IsNum As Boolean
     
     If (lpszName > &HFFFF&) Or (lpszName < 0) Then
@@ -339,37 +339,37 @@ Public Sub LoadIconRes(ByVal sResType As ResType, ByVal sResNumber As String, By
     ' Brrrrrrrrr.... Isn't good programming, but work!
     ' Image control is good to retrieve the size of icon, because is autosize ;-))
     ' Feel free to choose another method! ;-))))))))))
-    Dim h As Long, w As Long
+    Dim H As Long, W As Long
 '    Set frmEnumRes.Image1.Picture = hPicture
 '    w = frmEnumRes.Image1.Width / Screen.TwipsPerPixelX
 '    h = frmEnumRes.Image1.Height / Screen.TwipsPerPixelY
-    w = iSize
-    h = iSize
+    W = iSize
+    H = iSize
        
     If Not hPicture Is Nothing Then
         If tamany = 32 Then
             If opcio = 1 Then
-                frmPpal.imgListComun32.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun32.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
 '            ElseIf opcio = 2 Then
 '                frmPpal.imgListPpal.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
             End If
         ElseIf tamany = 24 Then
             If opcio = 1 Then
-                frmPpal.imgListComun.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 2 Then
-                frmPpal.imgListComun_BN.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun_BN.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 3 Then
-                frmPpal.imgListComun_OM.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun_OM.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 4 Then
-                frmPpal.imgListPpal.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListPpal.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             End If
         ElseIf tamany = 16 Then
             If opcio = 1 Then
-                frmPpal.imgListComun16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 2 Then
-                frmPpal.imgListComun_BN16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun_BN16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
             ElseIf opcio = 3 Then
-                frmPpal.imgListComun_OM16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+                frmPpal.imgListComun_OM16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
 '            ElseIf opcio = 4 Then
 '                frmPpal.imgListImages16.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
             End If

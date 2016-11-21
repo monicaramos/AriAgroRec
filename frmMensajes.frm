@@ -2795,7 +2795,7 @@ Dim NroCampo As Long
 Dim Sql As String
 Dim CodZona As String
 Dim vSuperficie As Currency
-
+Dim Situacion As Integer
     On Error GoTo ECrear
 
     If Not DatosOk Then Exit Sub
@@ -2815,6 +2815,9 @@ Dim vSuperficie As Currency
     
         Sql = "select max(codcampo) from rcampos "
         NroCampo = DevuelveValor(Sql) + 1
+        
+        Sql = "select min(codsitua) from rsituacioncampo"
+        Situacion = DevuelveValor(Sql)
     
         ' insertamos en la tabla de rhisfruta
         Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
@@ -2831,7 +2834,7 @@ Dim vSuperficie As Currency
         Sql = Sql & DBSet(vSuperficie, "N") & ","
         Sql = Sql & DBSet(vSuperficie, "N") & ","
         Sql = Sql & DBSet(vSuperficie, "N") & ","
-        Sql = Sql & "0," ' situacion
+        Sql = Sql & DBSet(Situacion, "N") & "," ' situacion
         Sql = Sql & DBSet(Text8(4).Text, "N") & ","
         Sql = Sql & DBSet(Text8(5).Text, "N") & ","
         Sql = Sql & DBSet(Text8(6).Text, "T") & ","
@@ -3522,7 +3525,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3628,13 +3631,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3688,7 +3691,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3706,7 +3709,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3927,7 +3930,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -4013,47 +4016,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.cmdAceptarCobros.Top = 4000
-            Me.cmdAceptarCobros.Left = 4200
+            Me.CmdAceptarCobros.Top = 4000
+            Me.CmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.cmdAceptarCobros.Left = 4000
+            Me.CmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.cmdAceptarCobros.Top = 5400
-            Me.cmdAceptarCobros.Left = 4600
+            Me.CmdAceptarCobros.Top = 5400
+            Me.CmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.cmdCancelarCobros.Top = 5300
-                Me.cmdCancelarCobros.Left = 4600
-                Me.cmdAceptarCobros.Left = 3300
+                Me.CmdCancelarCobros.Top = 5300
+                Me.CmdCancelarCobros.Left = 4600
+                Me.CmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.cmdAceptarCobros.Caption = "&SI"
-                Me.cmdCancelarCobros.Caption = "&NO"
+                Me.CmdAceptarCobros.Caption = "&SI"
+                Me.CmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             
-            Me.cmdCancelarCobros.Top = 5300
-            Me.cmdCancelarCobros.Left = 4600
-            Me.cmdAceptarCobros.Left = 3300
+            Me.CmdCancelarCobros.Top = 5300
+            Me.CmdCancelarCobros.Left = 4600
+            Me.CmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.cmdAceptarCobros.Caption = "&SI"
-            Me.cmdCancelarCobros.Caption = "&NO"
+            Me.CmdAceptarCobros.Caption = "&SI"
+            Me.CmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -4062,7 +4065,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -4679,8 +4682,8 @@ Dim Sql As String
             ItmX.SubItems(1) = Rs!Fechapar
             ItmX.SubItems(2) = Rs!codtrata
             ItmX.SubItems(3) = Format(Rs!Codsocio, "000000")
-            ItmX.SubItems(4) = Rs!nomsocio
-            ItmX.SubItems(5) = Rs!codcampo
+            ItmX.SubItems(4) = Rs!NomSocio
+            ItmX.SubItems(5) = Rs!Codcampo
             
             Rs.MoveNext
         Wend
@@ -4727,7 +4730,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!Codsocio, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = Rs.Fields(3).Value
@@ -4774,8 +4777,8 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
-            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.SubItems(1) = Format(Rs!CodVarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
             
@@ -4817,8 +4820,8 @@ Dim ItmX As ListItem
     
         While Not Rs.EOF
             Set ItmX = ListView7.ListItems.Add
-            ItmX.Text = Format(Rs!numnotac, "000000")
-            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
+            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.SubItems(1) = Format(Rs!CodVarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Entradas sin CRFID."
             Rs.MoveNext
@@ -4867,7 +4870,7 @@ Dim Prohibidas As String
                 ItmX.Checked = True
                 i = ItmX.Index
             End If
-            ItmX.ToolTipText = Rs!Ariagro
+            ItmX.ToolTipText = Rs!ariagro
         End If
         Rs.MoveNext
     Wend
@@ -5295,10 +5298,10 @@ Dim It As ListItem
             It.Text = DBLet(Rs!nroorden, "N")
         Else
             If Opcion = 7 Then
-                It.Text = DBLet(Rs!codcampo, "N")
+                It.Text = DBLet(Rs!Codcampo, "N")
             Else
                 If Opcion <> 5 Then
-                    It.Text = DBLet(Rs!codcampo, "N")
+                    It.Text = DBLet(Rs!Codcampo, "N")
                 Else
                     It.Text = DBLet(Rs!NroCampo, "N")
                 End If
@@ -5306,7 +5309,7 @@ Dim It As ListItem
         End If
         
         If Opcion = 0 Or Opcion = 2 Then
-            It.SubItems(1) = Format(Rs!codvarie, "000000")
+            It.SubItems(1) = Format(Rs!CodVarie, "000000")
             It.SubItems(2) = Rs!nomvarie
             It.SubItems(3) = Rs!nomparti
             It.SubItems(4) = Rs!poligono
@@ -5317,19 +5320,19 @@ Dim It As ListItem
                 It.SubItems(1) = Rs!NroCampo
                 It.SubItems(2) = Rs!nomparti
                 It.SubItems(3) = Rs!nomvarie
-                It.SubItems(4) = Rs!nomsocio
+                It.SubItems(4) = Rs!NomSocio
             Else
                 If Opcion = 5 Then
                     It.SubItems(1) = Rs!nomparti
                     It.SubItems(2) = Rs!nomvarie
-                    It.SubItems(3) = Rs!nomsocio
+                    It.SubItems(3) = Rs!NomSocio
                 Else
                     If Opcion = 6 Then
                         It.SubItems(1) = Rs!fecimpre
                         It.SubItems(2) = DBLet(Rs!NroCampo, "N")
                         It.SubItems(3) = Rs!nomparti
                         It.SubItems(4) = Rs!nomvarie
-                        It.SubItems(5) = Rs!nomsocio
+                        It.SubItems(5) = Rs!NomSocio
                     Else
                         If Opcion = 7 Then
                             It.SubItems(1) = Rs!nomparti
@@ -5337,7 +5340,7 @@ Dim It As ListItem
                             It.SubItems(3) = DBLet(Rs!Parcela, "N")
                             It.SubItems(4) = DBLet(Rs!SubParce, "T")
                             It.SubItems(5) = Rs!nomvarie
-                            It.SubItems(6) = Rs!nomsocio
+                            It.SubItems(6) = Rs!NomSocio
                         Else
                             It.SubItems(1) = Rs!nomparti
                             It.SubItems(2) = DBLet(Rs!CodPobla, "T")
@@ -5347,7 +5350,7 @@ Dim It As ListItem
                             It.SubItems(6) = DBLet(Rs!SubParce, "T")
                             It.SubItems(7) = Rs!NroCampo
                             It.SubItems(8) = Rs!Hdas
-                            It.SubItems(9) = Rs!codvarie
+                            It.SubItems(9) = Rs!CodVarie
                             It.SubItems(10) = Rs!nomvarie
                         End If
                     End If
@@ -5416,7 +5419,7 @@ Dim It As ListItem
     While Not Rs.EOF
         Set It = ListView6.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!CodVarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         If DadoProducto Then
             It.SubItems(2) = Format(DBLet(Rs!codprodu, "N"), "000")
@@ -5475,7 +5478,7 @@ Dim Consumido As Currency
     While Not Rs.EOF
         Set It = ListView8.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!CodVarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         It.SubItems(2) = Format(DBLet(Rs!Unidades, "N"), "###,##0.00")
         It.SubItems(3) = Format(DBLet(Rs!cantidad, "N"), "###,##0.00")
@@ -5699,7 +5702,7 @@ Dim It As ListItem
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!Hidrante, "T")
         It.SubItems(1) = Format(Rs!Codsocio, "000000")
-        It.SubItems(2) = Rs!nomsocio
+        It.SubItems(2) = Rs!NomSocio
         It.SubItems(3) = Rs!nomparti
         It.SubItems(4) = DBLet(Rs!poligono, "T")
         It.SubItems(5) = DBLet(Rs!parcelas, "T")
@@ -5783,9 +5786,9 @@ Dim NomFic As String
             
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!numalbar, "T")
-        It.SubItems(1) = Format(Rs!codvarie, "000000")
+        It.SubItems(1) = Format(Rs!CodVarie, "000000")
         It.SubItems(2) = Format(Rs!Codsocio, "000000")
-        It.SubItems(3) = Format(Rs!codcampo, "00000000")
+        It.SubItems(3) = Format(Rs!Codcampo, "00000000")
         Select Case DBLet(Rs!TipoEntr, "N")
             Case 0
                 It.SubItems(4) = "Ya existe la nota de campo en el histórico"
@@ -6039,8 +6042,8 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
-        It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
-        It.SubItems(4) = Format(DBLet(Rs!numnotac, "N"), "0000000")
+        It.SubItems(3) = Format(DBLet(Rs!Codcampo, "N"), "00000000")
+        It.SubItems(4) = Format(DBLet(Rs!Numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(Rs!KilosNet, "N")
         It.SubItems(6) = DBLet(Rs!ImpTrans, "N")
         
@@ -6156,7 +6159,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
-        It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
+        It.SubItems(3) = Format(DBLet(Rs!Codcampo, "N"), "00000000")
         It.SubItems(4) = DBLet(Rs!KilosNet, "N")
         
         It.Checked = False
@@ -6315,13 +6318,13 @@ Dim It As ListItem
         Set It = ListView10.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(Rs!numnotac, "N")
+        It.Text = DBLet(Rs!Numnotac, "N")
         It.SubItems(1) = Format(Rs!FechaEnt, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!codvarie, "000000")
+        It.SubItems(3) = Format(Rs!CodVarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
-        It.SubItems(6) = Rs!nomsocio
+        It.SubItems(6) = Rs!NomSocio
         
         It.Checked = True
         
@@ -6421,10 +6424,10 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = Format(Rs!Fecalbar, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!codvarie, "000000")
+        It.SubItems(3) = Format(Rs!CodVarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
-        It.SubItems(6) = Rs!nomsocio
+        It.SubItems(6) = Rs!NomSocio
         
         It.Checked = True
         
@@ -6565,9 +6568,9 @@ Dim Sql1 As String
         
         It.Text = Cad
         It.SubItems(1) = Rs!nomresum
-        Cad = Rs!Ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        Cad = Rs!ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
         It.Tag = Cad
-        It.ToolTipText = Rs!Ariagro
+        It.ToolTipText = Rs!ariagro
     End If
     Set Rs = Nothing
     
@@ -6581,7 +6584,7 @@ Dim Sql1 As String
     Encontrado = False
     
     While Not Rs.EOF And Not Encontrado
-        If AbrirConexionCampAnterior(DBLet(Rs!Ariagro, "T")) Then
+        If AbrirConexionCampAnterior(DBLet(Rs!ariagro, "T")) Then
             Sql1 = "select * from empresas "
             Set RS1 = New ADODB.Recordset
             RS1.Open Sql1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -6594,9 +6597,9 @@ Dim Sql1 As String
                     
                     It.Text = Cad
                     It.SubItems(1) = Rs!nomresum
-                    Cad = Rs!Ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+                    Cad = Rs!ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
                     It.Tag = Cad
-                    It.ToolTipText = Rs!Ariagro
+                    It.ToolTipText = Rs!ariagro
             End If
 '        It.SmallIcon = 1
         End If
@@ -6902,7 +6905,7 @@ Dim Consumido As Currency
         Set It = ListView16.ListItems.Add
             
         It.Text = DBLet(Rs!Hidrante, "T")
-        It.SubItems(1) = DBLet(Rs!nomsocio, "T")
+        It.SubItems(1) = DBLet(Rs!NomSocio, "T")
         It.SubItems(2) = Format(DBLet(Rs!Consumo, "N"), "########0")
         It.Checked = False
         
@@ -6933,7 +6936,7 @@ Dim Consumido As Currency
         Set It = ListView17.ListItems.Add
             
         It.Text = DBLet(Rs!Hidrante, "T")
-        It.SubItems(1) = DBLet(Rs!nomsocio, "T")
+        It.SubItems(1) = DBLet(Rs!NomSocio, "T")
         It.SubItems(2) = Format(DBLet(Rs!Consumo, "N"), "########0")
         It.Checked = False
         

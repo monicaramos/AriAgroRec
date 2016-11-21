@@ -607,6 +607,7 @@ Dim Cliente As String
         End If 'De IVA 3
     End If  'DE LOS IVAS
     
+    
     RF.Close
     
     '-------------------------------------
@@ -617,16 +618,15 @@ Dim Cliente As String
     
     If DatosRetencion <> "" Then
         
-        Sql = numlinea & ",'" & RF!cuereten & "'," & DocConcAmp
+        Sql = numlinea & ",'" & RecuperaValor(DatosRetencion, 1) & "'," & DocConcAmp
         'Importes, atencion importes negativos
-        Cad2 = CadenaImporte(True, RF!trefaccl, Importe0)
+        Cad2 = CadenaImporte(True, RecuperaValor(DatosRetencion, 2), Importe0)
         Sql = Sql & "," & Cad2 & ","
         Sql = Sql & "NULL,NULL,'FRACLI',0)"
        
         miConexion.Execute Cad & Sql
         numlinea = numlinea + 1 'Es el contador de lineaapunteshco
     End If
-    
     
     
     '------------------------------------------------------------
@@ -2085,7 +2085,7 @@ Private Function DigitosNivel(Nivel) As Integer
 End Function
 
 
-Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef OtroCampo As String) As String
+Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef otroCampo As String) As String
     Dim Rs As Recordset
     Dim Cad As String
     Dim Aux As String
@@ -2093,7 +2093,7 @@ Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodi
     On Error GoTo EDevuelveDesdeBD
     DevuelveDesdeBDModulo = ""
     Cad = "Select " & kCampo
-    If OtroCampo <> "" Then Cad = Cad & ", " & OtroCampo
+    If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
     Cad = Cad & " FROM " & Ktabla
     Cad = Cad & " WHERE " & Kcodigo & " = "
     If Tipo = "" Then Tipo = "N"
@@ -2118,7 +2118,7 @@ Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodi
     
     If Not Rs.EOF Then
         DevuelveDesdeBDModulo = DBLet(Rs.Fields(0))
-        If OtroCampo <> "" Then OtroCampo = DBLet(Rs.Fields(1))
+        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
     End If
     Rs.Close
     Set Rs = Nothing

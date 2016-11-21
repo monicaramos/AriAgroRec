@@ -3,6 +3,7 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmManHcoFruta 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Histórico de Fruta Clasificada"
@@ -1928,6 +1929,35 @@ Begin VB.Form frmManHcoFruta
       EndProperty
       _Version        =   393216
    End
+   Begin MSComDlg.CommonDialog CommonDialog1 
+      Left            =   2340
+      Top             =   8610
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+      DefaultExt      =   "doc"
+   End
+   Begin MSComctlLib.ProgressBar Pb1 
+      Height          =   225
+      Left            =   2820
+      TabIndex        =   101
+      Top             =   8610
+      Visible         =   0   'False
+      Width           =   6210
+      _ExtentX        =   10954
+      _ExtentY        =   397
+      _Version        =   393216
+      Appearance      =   1
+      Enabled         =   0   'False
+   End
+   Begin VB.Label lblProgres 
+      Height          =   195
+      Index           =   0
+      Left            =   2850
+      TabIndex        =   100
+      Top             =   8850
+      Width           =   6195
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
       Begin VB.Menu mnBuscar 
@@ -2027,6 +2057,8 @@ Private WithEvents frmCamp As frmManCampos 'Form Mto de campos
 Attribute frmCamp.VB_VarHelpID = -1
 Private WithEvents frmMens2 As frmMensajes ' mensajes para password
 Attribute frmMens2.VB_VarHelpID = -1
+Private WithEvents frmMens3 As frmMensajes ' mensajes para password
+Attribute frmMens3.VB_VarHelpID = -1
 
 Private Modo As Byte
 '-----------------------------
@@ -2094,6 +2126,34 @@ Dim CampoAnt As String
 
 Dim Cliente As String
 Private BuscaChekc As String
+
+
+Dim NumNota As String
+Dim Variedad As String
+Dim Socio As String
+Dim Bruto As String
+Dim Neto As String
+Dim NIF As String
+Dim NomSocio As String
+Dim FechaEnt As String
+Dim HoraEnt As String
+
+
+'GENERALES PARA PASARLE A CRYSTAL REPORT
+Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
+Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadTitulo As String 'Titulo para la ventana frmImprimir
+Private cadNombreRPT As String 'Nombre del informe
+
+Dim SociosNoExisten As String
+Dim VariedadesNoExisten As String
+Dim CalidadesNoExisten As String
+
+Dim Continuar As Boolean
+
+
 
 Private Sub btnBuscar_Click(Index As Integer)
     TerminaBloquear
@@ -2941,6 +3001,10 @@ Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
     Clave = CadenaSeleccion
 End Sub
 
+Private Sub frmMens3_DatoSeleccionado(CadenaSeleccion As String)
+    Continuar = (CadenaSeleccion <> "")
+End Sub
+
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Variedades
     Text1(indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
@@ -3135,7 +3199,18 @@ End Function
 
 
 Private Sub mnImportar_Click()
-    Shell App.Path & "\clasificacion.exe /I|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
+    '[Monica]21/11/2016: para el caso de bolbaite se introducen las entradas como las de almazara en ABN
+    If vParamAplic.Cooperativa = 14 Then
+        lblProgres(0).visible = False
+        Pb1.visible = False
+        
+        ImportacionEntradas
+        
+        lblProgres(0).visible = False
+        Pb1.visible = False
+    Else
+        Shell App.Path & "\clasificacion.exe /I|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
+    End If
 End Sub
 
 Private Sub mnImprimir_Click()
@@ -3622,7 +3697,7 @@ Dim b As Boolean
     Text2(2).Text = PonerNombreDeCod(Text1(2), "variedades", "nomvarie", "codvarie", "N") 'variedades
     Text2(3).Text = PonerNombreDeCod(Text1(3), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
-    VisualizarDatosCampo Data1.Recordset!codcampo
+    VisualizarDatosCampo Data1.Recordset!Codcampo
     
 '    MostrarCadena Text1(3), Text1(4)
     
@@ -5593,3 +5668,506 @@ Dim Sql As String
 eModificandoClasificacion:
     Mens = Mens & vbCrLf & Err.Description
 End Function
+
+
+Private Sub ImportacionEntradas()
+Dim Sql As String
+Dim i As Byte
+Dim cadWHERE As String
+Dim b As Boolean
+Dim NomFic As String
+Dim cadena As String
+Dim cadena1 As String
+
+On Error GoTo eError
+
+'    If Not DatosOk Then Exit Sub
+    
+    Me.CommonDialog1.Flags = cdlOFNExplorer + cdlOFNHideReadOnly + cdlOFNPathMustExist + cdlOFNFileMustExist
+
+    Me.CommonDialog1.DefaultExt = "csv"
+    CommonDialog1.FilterIndex = 1
+    Me.CommonDialog1.FileName = "albaranes.csv"
+    
+    
+    Me.CommonDialog1.CancelError = True
+    
+    Me.CommonDialog1.ShowOpen
+    
+    If Me.CommonDialog1.FileName <> "" Then
+        InicializarVbles
+            '========= PARAMETROS  =============================
+        'Añadir el parametro de Empresa
+        CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+        numParam = numParam + 1
+
+        If CargaInicialTabla(Me.CommonDialog1.FileName) Then
+            SociosNoExisten = ""
+            VariedadesNoExisten = ""
+            CalidadesNoExisten = ""
+            If CompruebaSociosVariedades(SociosNoExisten, VariedadesNoExisten, CalidadesNoExisten) Then
+                If SociosNoExisten <> "" Then
+                    MsgBox "Los siguientes socios no existen, creelos y vuelva a importar: " & vbCrLf & vbCrLf & Mid(SociosNoExisten, 1, Len(SociosNoExisten) - 2), vbExclamation
+                    Exit Sub
+                End If
+                If VariedadesNoExisten <> "" Then
+                    MsgBox "Las siguientes variedades no existen, creelas y vuelva a importar: : " & vbCrLf & vbCrLf & Mid(VariedadesNoExisten, 1, Len(VariedadesNoExisten) - 2), vbExclamation
+                    Exit Sub
+                End If
+                If CalidadesNoExisten <> "" Then
+                    MsgBox "Las siguientes variedades-calidades no existen, creelas y vuelva a importar: : " & vbCrLf & vbCrLf & Mid(VariedadesNoExisten, 1, Len(CalidadesNoExisten) - 2), vbExclamation
+                    Exit Sub
+                End If
+            End If
+        End If
+
+        If ProcesarFicheroEntradas(Me.CommonDialog1.FileName) Then
+            MsgBox "Proceso realizado correctamente.", vbExclamation
+            
+            cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
+            
+            Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+            
+            If TotalRegistros(Sql) <> 0 Then
+                MsgBox "Han habido errores en el Traspaso de Entradas. ", vbExclamation
+                cadTitulo = "Errores en el Traspaso de Entradas"
+                cadNombreRPT = "rErroresTrasEntBascula.rpt"
+                
+                cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
+                
+                LlamarImprimir
+            End If
+        Else
+            MsgBox "No se ha podido realizar el proceso.", vbExclamation
+        End If
+    Else
+        MsgBox "No ha seleccionado ningún fichero", vbExclamation
+        Exit Sub
+    End If
+             
+eError:
+    If Err.Number = 32755 Then Exit Sub ' le han dado a cancelar
+
+End Sub
+
+
+Private Sub LlamarImprimir()
+    With frmImprimir
+        .FormulaSeleccion = cadFormula
+        .OtrosParametros = CadParam
+        .NumeroParametros = numParam
+        .SoloImprimir = False
+        .Titulo = cadTitulo
+        .NombreRPT = cadNombreRPT
+        .Opcion = 0
+        .Show vbModal
+    End With
+End Sub
+
+
+Private Sub InicializarVbles()
+    cadFormula = ""
+    cadSelect = ""
+    CadParam = ""
+    numParam = 0
+End Sub
+
+
+Private Function CargaInicialTabla(nomFich As String) As Boolean
+Dim NF As Long
+Dim Cad As String
+Dim i As Integer
+Dim longitud As Long
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
+Dim NumReg As Long
+Dim Sql As String
+Dim Sql1 As String
+Dim Total As Long
+Dim v_cant As Currency
+Dim v_impo As Currency
+Dim v_prec As Currency
+Dim b As Boolean
+Dim NomFic As String
+
+    On Error GoTo eProcesarFicheroABN
+
+
+    CargaInicialTabla = False
+    NF = FreeFile
+    
+    Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+    
+    Line Input #NF, Cad
+    i = 0
+    
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    lblProgres(0).Caption = "Carga inicial fichero: " & nomFich
+    longitud = FileLen(nomFich)
+    
+        
+    ' salto la primera linea que es la cabecera
+    Line Input #NF, Cad
+    Me.Refresh
+    i = 1
+    
+        
+    b = True
+    While Not EOF(NF) And b
+        i = i + 1
+        
+        lblProgres(0).Caption = "Carga inicial fichero. Linea " & i
+        Me.Refresh
+        
+        Cad = Cad & ";"
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaPrevia(Cad)
+        
+        If b Then
+            If i > 20 Then
+                CargaInicialTabla = True
+                Close #NF
+                lblProgres(0).Caption = ""
+                Exit Function
+            End If
+        End If
+        
+        Line Input #NF, Cad
+    Wend
+    Close #NF
+    
+    If Cad <> "" And b Then
+        Cad = Cad & ";"
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaPrevia(Cad)
+    End If
+    
+    CargaInicialTabla = b
+    
+    lblProgres(0).Caption = ""
+    
+eProcesarFicheroABN:
+    If Err.Number <> 0 Or Not b Then
+    Else
+    End If
+ 
+
+End Function
+
+Private Function InsertarLineaPrevia(Cad As String) As Boolean
+Dim Sql As String
+Dim cadena As String
+
+    On Error GoTo eInsertarLineaPrevia
+
+    InsertarLineaPrevia = True
+    
+    CargarVariables Cad
+    
+    ' insertamos la entrada
+    cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(HoraEnt, "T") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & ","
+    cadena = cadena & DBSet(Bruto, "N") & "," & DBSet(Neto, "N") & "," & DBSet(NomSocio, "T") & "," & DBSet(NIF, "T")
+    
+    Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1, importe2, importe3, importe4, importe5, nombre2, nombre3) values "
+    Sql = Sql & "(" & cadena & ")"
+    conn.Execute Sql
+    
+    Exit Function
+    
+eInsertarLineaPrevia:
+    InsertarLineaPrevia = False
+    MuestraError Err.Number, "Insertar Linea Previa", Err.Description
+End Function
+
+
+Private Sub CargarVariables(Cad As String)
+            
+    NumNota = ""
+    FechaEnt = ""
+    HoraEnt = ""
+    Bruto = ""
+    Variedad = ""
+    Socio = ""
+    Neto = ""
+    NIF = ""
+    NomSocio = ""
+    
+    NumNota = RecuperaValorNew(Cad, ";", 1)
+    FechaEnt = RecuperaValorNew(Cad, ";", 2)
+    HoraEnt = RecuperaValorNew(Cad, ";", 3)
+    Bruto = RecuperaValorNew(Cad, ";", 8)
+    Variedad = RecuperaValorNew(Cad, ";", 7)
+    Socio = RecuperaValorNew(Cad, ";", 4)
+    Neto = RecuperaValorNew(Cad, ";", 9)
+    NIF = RecuperaValorNew(Cad, ";", 6)
+    NomSocio = RecuperaValorNew(Cad, ";", 5)
+    
+End Sub
+
+Private Function CompruebaSociosVariedades(ByRef SociosNoExisten As String, ByRef VariedadesNoExisten As String, ByRef CalidadesNoExisten As String) As Boolean
+Dim NumLin As String
+Dim b As Boolean
+Dim Sql As String
+
+Dim Sql1 As String
+
+Dim Mens As String
+Dim numlinea As Long
+
+Dim vError As Boolean
+Dim vNota As Long
+Dim cadena As String
+Dim vNif As String
+
+Dim Rs As ADODB.Recordset
+
+    CompruebaSociosVariedades = True
+    
+    SociosNoExisten = ""
+    VariedadesNoExisten = ""
+    CalidadesNoExisten = ""
+    
+    Sql = " select importe2, importe3, nombre3 from tmpinformes where codusu = " & vUsu.Codigo
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        Socio = DBSet(Rs!importe2, "N")
+        Variedad = DBSet(Rs!importe3, "N")
+        vNif = DBLet(Rs!nombre3)
+        
+        'Comprobamos que el socio existe
+        Sql = ""
+        Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N", , "nifsocio", vNif, "T")
+        
+        If Sql = "" Then SociosNoExisten = SociosNoExisten & Socio & ", "
+        
+        'Comprobamos que la variedad existe
+        Sql = ""
+        Sql = DevuelveDesdeBDNew(cAgro, "variedades", "codvarie", "codvarie", Variedad, "N")
+        If Sql = "" Then
+            VariedadesNoExisten = VariedadesNoExisten & Variedad & ", "
+        Else
+            Sql = "select min(codcalid) from rcalidad where codvarie = " & DBSet(Variedad, "N")
+            Sql = DevuelveValor(Sql)
+            If Sql = "0" Then CalidadesNoExisten = CalidadesNoExisten & Variedad & ","
+        End If
+        
+        Rs.MoveNext
+    Wend
+    
+    Set Rs = Nothing
+    
+End Function
+
+Private Function ProcesarFicheroEntradas(nomFich As String) As Boolean
+Dim NF As Long
+Dim Cad As String
+Dim i As Integer
+Dim longitud As Long
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
+Dim NumReg As Long
+Dim Sql As String
+Dim Sql1 As String
+Dim Total As Long
+Dim v_cant As Currency
+Dim v_impo As Currency
+Dim v_prec As Currency
+Dim b As Boolean
+Dim NomFic As String
+
+    On Error GoTo eProcesarFicheroEntradas
+
+
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    conn.BeginTrans
+
+    ProcesarFicheroEntradas = False
+    NF = FreeFile
+    
+    Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+    
+    Line Input #NF, Cad
+    i = 0
+    
+    lblProgres(0).Caption = "Procesando Fichero: " & nomFich
+    longitud = FileLen(nomFich)
+    
+    Pb1.visible = True
+    Me.Pb1.Max = longitud
+    Me.Refresh
+    Me.Pb1.Value = 0
+        
+    ' salto la primera linea que es la cabecera
+    Line Input #NF, Cad
+    Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
+    Me.Refresh
+    i = 1
+    
+        
+    b = True
+    While Not EOF(NF) And b
+        i = i + 1
+        
+        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
+        lblProgres(0).Caption = "Procesando Fichero. Linea " & i
+            Me.Refresh
+        
+        Cad = Cad & ";"
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaTraspasoEntradas(Cad)
+        
+        Line Input #NF, Cad
+    Wend
+    Close #NF
+    
+    If Cad <> "" And b Then
+        Cad = Cad & ";"
+        If Mid(Cad, 1, 6) <> ";;;;;;" Then b = InsertarLineaTraspasoEntradas(Cad)
+    End If
+    
+    ProcesarFicheroEntradas = b
+    
+    Pb1.visible = False
+    lblProgres(0).Caption = ""
+    
+eProcesarFicheroEntradas:
+    If Err.Number <> 0 Or Not b Then
+        conn.RollbackTrans
+    Else
+        conn.CommitTrans
+    End If
+End Function
+
+
+Private Function InsertarLineaTraspasoEntradas(Cad As String) As Boolean
+Dim NumLin As String
+Dim b As Boolean
+Dim Sql As String
+
+Dim Sql1 As String
+
+Dim Mens As String
+Dim numlinea As Long
+
+Dim vError As Boolean
+Dim vNota As Long
+Dim cadena As String
+Dim Codcampo As Long
+Dim HayError As Boolean
+Dim Calidad As String
+
+    On Error GoTo EInsertarLinea
+
+    InsertarLineaTraspasoEntradas = False
+    
+    CargarVariables Cad
+    
+    
+     ' comprobaciones para poder insertar la entrada
+    Sql = "select codcampo from rcampos where codvarie = " & DBSet(Variedad, "N")
+    Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
+    
+    Codcampo = DevuelveValor(Sql)
+    
+    If CLng(Codcampo) = 0 Then
+        Set frmMens3 = New frmMensajes
+        frmMens3.cadena = Socio & "|" & Variedad & "||||"
+        frmMens3.OpcionMensaje = 62
+        frmMens3.Show vbModal
+        Set frmMens3 = Nothing
+        
+        If Not Continuar Then Exit Function
+    
+        Sql = "select codcampo from rcampos where codvarie = " & DBSet(Variedad, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
+        
+        Codcampo = DevuelveValor(Sql)
+    End If
+    
+    
+    ' al nro de nota le sumo por delante la cooperativa
+    vNota = 2000000 + NumNota
+    
+    ' Comprobamos que la entrada no exista ya
+    Sql = "select count(*) from rhisfruta where numalbar = " & DBSet(vNota, "N")
+    If TotalRegistros(Sql) <> 0 Then
+        HayError = True
+    End If
+    
+    If HayError Then
+'        Sql = "update rhisfruta set fecalbar = " & DBSet(FechaEnt, "F")
+'        Sql = Sql & ", codvarie = " & DBSet(Variedad, "N")
+'        Sql = Sql & ", codsocio = " & DBSet(Socio, "N")
+'        Sql = Sql & ", codcampo = " & DBSet(campo, "N")
+'        Sql = Sql & ", kilosbru = " & DBSet(Bruto, "N")
+'        Sql = Sql & ", kilosnet = " & DBSet(Neto, "N")
+'        Sql = Sql & " where numalbar = " & DBSet(vNota, "N")
+'        conn.Execute Sql
+'
+        Exit Function
+    End If
+    
+    ' insertamos en la tabla de rhisfruta
+    Sql = "insert into rhisfruta ("
+    Sql = Sql & "`numalbar`,`fecalbar`,`codvarie`,`codsocio`,`codcampo`,`tipoentr`,"
+    Sql = Sql & "`recolect`,`kilosbru`,`numcajon`,`kilosnet`,`imptrans`,`impacarr`,"
+    Sql = Sql & "`imprecol`,`imppenal`,`impreso`,`impentrada`,`cobradosn`,`prestimado`,"
+    Sql = Sql & "`nromuestraalmz` ) VALUES ("
+    Sql = Sql & DBSet(vNota, "N") & ","
+    Sql = Sql & DBSet(FechaEnt, "F") & ","
+    Sql = Sql & DBSet(Variedad, "N") & ","
+    Sql = Sql & DBSet(Socio, "N") & ","
+    
+    'campo
+    Sql = Sql & DBSet(Codcampo, "N") & ","
+    
+    Sql = Sql & "0,0,"
+    Sql = Sql & DBSet(Bruto, "N") & ","
+    Sql = Sql & "0," ' numero de cajones
+    Sql = Sql & DBSet(Neto, "N") & ","
+    Sql = Sql & "0,0,0,0,0,0,0,0,"
+    Sql = Sql & ValorNulo & ")"
+    
+    conn.Execute Sql
+    
+    
+    ' insertamos en la tabla rhisfruta_entradas
+    Sql = "insert into rhisfruta_entradas ("
+    Sql = Sql & "numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,kilostra,tiporecol) "
+    Sql = Sql & " VALUES ("
+    Sql = Sql & DBSet(vNota, "N") & ","
+    Sql = Sql & DBSet(vNota, "N") & ","
+    Sql = Sql & DBSet(FechaEnt, "F") & ","
+    Sql = Sql & DBSet(FechaEnt & " " & HoraEnt, "FH") & ","
+    Sql = Sql & DBSet(Bruto, "N") & ","
+    Sql = Sql & "0,"
+    Sql = Sql & DBSet(Neto, "N") & ","
+    Sql = Sql & DBSet(Neto, "N") & ",0)"
+    
+    conn.Execute Sql
+    
+    Calidad = DevuelveValor("select min(codcalid) from rcalidad where codvarie = " & DBSet(Variedad, "N"))
+    
+    ' insertamos en la tabla rhisfruta_clasif
+    Sql = "insert into rhisfruta_clasif (numalbar,codvarie,codcalid,kilosnet) values ("
+    Sql = Sql & DBSet(vNota, "N") & ","
+    Sql = Sql & DBSet(Variedad, "N") & ","
+    Sql = Sql & DBSet(Calidad, "N") & ","
+    Sql = Sql & DBSet(Neto, "N") & ")"
+    
+    conn.Execute Sql
+    
+    InsertarLineaTraspasoEntradas = True
+    Exit Function
+    
+EInsertarLinea:
+    If Err.Number <> 0 Then
+        InsertarLineaTraspasoEntradas = False
+        MsgBox "Error en Insertar Línea Traspaso Entradas" & Err.Description, vbExclamation
+    End If
+End Function
+
