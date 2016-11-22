@@ -2133,8 +2133,8 @@ Dim Variedad As String
 Dim Socio As String
 Dim Bruto As String
 Dim Neto As String
-Dim NIF As String
-Dim NomSocio As String
+Dim nif As String
+Dim nomsocio As String
 Dim FechaEnt As String
 Dim HoraEnt As String
 
@@ -2152,7 +2152,7 @@ Dim VariedadesNoExisten As String
 Dim CalidadesNoExisten As String
 
 Dim Continuar As Boolean
-
+Dim vvCampo As String
 
 
 Private Sub btnBuscar_Click(Index As Integer)
@@ -3001,8 +3001,9 @@ Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
     Clave = CadenaSeleccion
 End Sub
 
-Private Sub frmMens3_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmMens3_datoseleccionado(CadenaSeleccion As String)
     Continuar = (CadenaSeleccion <> "")
+    vvCampo = CadenaSeleccion
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
@@ -3697,7 +3698,7 @@ Dim b As Boolean
     Text2(2).Text = PonerNombreDeCod(Text1(2), "variedades", "nomvarie", "codvarie", "N") 'variedades
     Text2(3).Text = PonerNombreDeCod(Text1(3), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
-    VisualizarDatosCampo Data1.Recordset!Codcampo
+    VisualizarDatosCampo Data1.Recordset!codcampo
     
 '    MostrarCadena Text1(3), Text1(4)
     
@@ -5866,7 +5867,7 @@ Dim cadena As String
     
     ' insertamos la entrada
     cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(HoraEnt, "T") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & ","
-    cadena = cadena & DBSet(Bruto, "N") & "," & DBSet(Neto, "N") & "," & DBSet(NomSocio, "T") & "," & DBSet(NIF, "T")
+    cadena = cadena & DBSet(Bruto, "N") & "," & DBSet(Neto, "N") & "," & DBSet(nomsocio, "T") & "," & DBSet(nif, "T")
     
     Sql = "insert into tmpinformes (codusu, importe1, fecha1, nombre1, importe2, importe3, importe4, importe5, nombre2, nombre3) values "
     Sql = Sql & "(" & cadena & ")"
@@ -5889,18 +5890,18 @@ Private Sub CargarVariables(Cad As String)
     Variedad = ""
     Socio = ""
     Neto = ""
-    NIF = ""
-    NomSocio = ""
+    nif = ""
+    nomsocio = ""
     
-    NumNota = RecuperaValorNew(Cad, ";", 1)
-    FechaEnt = RecuperaValorNew(Cad, ";", 2)
-    HoraEnt = RecuperaValorNew(Cad, ";", 3)
-    Bruto = RecuperaValorNew(Cad, ";", 8)
-    Variedad = RecuperaValorNew(Cad, ";", 7)
-    Socio = RecuperaValorNew(Cad, ";", 4)
-    Neto = RecuperaValorNew(Cad, ";", 9)
-    NIF = RecuperaValorNew(Cad, ";", 6)
-    NomSocio = RecuperaValorNew(Cad, ";", 5)
+    NumNota = RecuperaValorNew(Cad, ";", 1) + (9000000)
+    FechaEnt = RecuperaValorNew(Cad, ";", 12)
+    HoraEnt = RecuperaValorNew(Cad, ";", 13)
+    Bruto = RecuperaValorNew(Cad, ";", 9)
+    Variedad = 7001 ' RecuperaValorNew(Cad, ";", 7)
+    Socio = RecuperaValorNew(Cad, ";", 2)
+    Neto = RecuperaValorNew(Cad, ";", 11)
+    nif = RecuperaValorNew(Cad, ";", 8)
+    nomsocio = RecuperaValorNew(Cad, ";", 3)
     
 End Sub
 
@@ -5917,7 +5918,7 @@ Dim numlinea As Long
 Dim vError As Boolean
 Dim vNota As Long
 Dim cadena As String
-Dim vNif As String
+Dim vNIF As String
 
 Dim Rs As ADODB.Recordset
 
@@ -5935,11 +5936,11 @@ Dim Rs As ADODB.Recordset
     While Not Rs.EOF
         Socio = DBSet(Rs!importe2, "N")
         Variedad = DBSet(Rs!importe3, "N")
-        vNif = DBLet(Rs!nombre3)
+        vNIF = DBLet(Rs!nombre3)
         
         'Comprobamos que el socio existe
         Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N", , "nifsocio", vNif, "T")
+        Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N", , "nifsocio", vNIF, "T")
         
         If Sql = "" Then SociosNoExisten = SociosNoExisten & Socio & ", "
         
@@ -6056,7 +6057,7 @@ Dim numlinea As Long
 Dim vError As Boolean
 Dim vNota As Long
 Dim cadena As String
-Dim Codcampo As Long
+Dim codcampo As Long
 Dim HayError As Boolean
 Dim Calidad As String
 
@@ -6071,31 +6072,50 @@ Dim Calidad As String
     Sql = "select codcampo from rcampos where codvarie = " & DBSet(Variedad, "N")
     Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
     
-    Codcampo = DevuelveValor(Sql)
+    codcampo = DevuelveValor(Sql)
     
-    If CLng(Codcampo) = 0 Then
+    If CLng(codcampo) = 0 Then
+    
+        vvCampo = 0
+    
         Set frmMens3 = New frmMensajes
         frmMens3.cadena = Socio & "|" & Variedad & "||||"
-        frmMens3.OpcionMensaje = 62
+        frmMens3.OpcionMensaje = 65
         frmMens3.Show vbModal
         Set frmMens3 = Nothing
-        
+
         If Not Continuar Then Exit Function
-    
-        Sql = "select codcampo from rcampos where codvarie = " & DBSet(Variedad, "N")
-        Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
-        
-        Codcampo = DevuelveValor(Sql)
+
+'        Sql = "select codcampo from rcampos where codvarie = " & DBSet(Variedad, "N")
+'        Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
+'
+'        codcampo = DevuelveValor(Sql)
+        codcampo = vvCampo
     End If
-    
+
     
     ' al nro de nota le sumo por delante la cooperativa
-    vNota = 2000000 + NumNota
+    vNota = NumNota
     
     ' Comprobamos que la entrada no exista ya
     Sql = "select count(*) from rhisfruta where numalbar = " & DBSet(vNota, "N")
     If TotalRegistros(Sql) <> 0 Then
         HayError = True
+    Else
+        Sql = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(vNota, "N")
+        If TotalRegistros(Sql) <> 0 Then
+            HayError = True
+        Else
+            Sql = "select count(*) from rclasifica where numnotac = " & DBSet(vNota, "N")
+            If TotalRegistros(Sql) <> 0 Then
+                HayError = True
+            Else
+                Sql = "select count(*) from rentradas where numnotac = " & DBSet(vNota, "N")
+                If TotalRegistros(Sql) <> 0 Then
+                    HayError = True
+                End If
+            End If
+        End If
     End If
     
     If HayError Then
@@ -6107,7 +6127,7 @@ Dim Calidad As String
 '        Sql = Sql & ", kilosnet = " & DBSet(Neto, "N")
 '        Sql = Sql & " where numalbar = " & DBSet(vNota, "N")
 '        conn.Execute Sql
-'
+        MsgBox "Exite el nro de nota " & vNota & ".", vbExclamation
         Exit Function
     End If
     
@@ -6123,7 +6143,7 @@ Dim Calidad As String
     Sql = Sql & DBSet(Socio, "N") & ","
     
     'campo
-    Sql = Sql & DBSet(Codcampo, "N") & ","
+    Sql = Sql & DBSet(codcampo, "N") & ","
     
     Sql = Sql & "0,0,"
     Sql = Sql & DBSet(Bruto, "N") & ","

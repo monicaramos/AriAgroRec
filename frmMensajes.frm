@@ -15,6 +15,228 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameCreacionCampo 
+      Height          =   4725
+      Left            =   0
+      TabIndex        =   140
+      Top             =   0
+      Width           =   6555
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   4
+         Left            =   1320
+         MaxLength       =   3
+         TabIndex        =   145
+         Tag             =   "Poligono|N|N|0|999|rcampos|poligono|000||"
+         Top             =   1710
+         Width           =   825
+      End
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   5
+         Left            =   1320
+         MaxLength       =   6
+         TabIndex        =   146
+         Tag             =   "Parcela|N|N|0|999999|rcampos|parcela|000000||"
+         Top             =   2130
+         Width           =   795
+      End
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   6
+         Left            =   1320
+         MaxLength       =   2
+         TabIndex        =   147
+         Tag             =   "Subparcela|T|S|||rcampos|subparce|||"
+         Top             =   2550
+         Width           =   825
+      End
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   3
+         Left            =   1320
+         MaxLength       =   4
+         TabIndex        =   148
+         Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
+         Top             =   3210
+         Width           =   855
+      End
+      Begin VB.TextBox Text9 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   3
+         Left            =   2295
+         MaxLength       =   30
+         TabIndex        =   155
+         Top             =   3210
+         Width           =   3795
+      End
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   2
+         Left            =   1320
+         MaxLength       =   6
+         TabIndex        =   144
+         Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
+         Top             =   1290
+         Width           =   840
+      End
+      Begin VB.TextBox Text9 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   2
+         Left            =   2220
+         MaxLength       =   30
+         TabIndex        =   153
+         Top             =   1320
+         Width           =   3915
+      End
+      Begin VB.TextBox Text9 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   1
+         Left            =   2220
+         MaxLength       =   40
+         TabIndex        =   149
+         Top             =   870
+         Width           =   3915
+      End
+      Begin VB.TextBox Text8 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   1
+         Left            =   1320
+         MaxLength       =   6
+         TabIndex        =   143
+         Tag             =   "Código Socio|N|N|1|999999|rcampos|codsocio|000000|N|"
+         Top             =   870
+         Width           =   825
+      End
+      Begin VB.CommandButton CmdCanCrearCampo 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   4905
+         TabIndex        =   152
+         Top             =   3780
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAcepCrearCampo 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3720
+         TabIndex        =   150
+         Top             =   3780
+         Width           =   975
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   1
+         Left            =   1050
+         ToolTipText     =   "Buscar Socio"
+         Top             =   900
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   2
+         Left            =   1050
+         ToolTipText     =   "Buscar Variedad"
+         Top             =   1320
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   3
+         Left            =   1050
+         ToolTipText     =   "Buscar Partida"
+         Top             =   3210
+         Width           =   240
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Poligono"
+         Height          =   255
+         Index           =   0
+         Left            =   390
+         TabIndex        =   159
+         Top             =   1740
+         Width           =   705
+      End
+      Begin VB.Label Label20 
+         Caption         =   "Parcela"
+         Height          =   255
+         Left            =   390
+         TabIndex        =   158
+         Top             =   2160
+         Width           =   705
+      End
+      Begin VB.Label Label19 
+         Caption         =   "Subparcela"
+         Height          =   255
+         Left            =   390
+         TabIndex        =   157
+         Top             =   2580
+         Width           =   945
+      End
+      Begin VB.Label Label21 
+         Caption         =   "Partida"
+         Height          =   255
+         Left            =   390
+         TabIndex        =   156
+         Top             =   3210
+         Width           =   585
+      End
+      Begin VB.Label Label18 
+         Caption         =   "Variedad"
+         Height          =   255
+         Left            =   390
+         TabIndex        =   154
+         Top             =   1320
+         Width           =   735
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Socio"
+         Height          =   255
+         Index           =   5
+         Left            =   390
+         TabIndex        =   151
+         Top             =   900
+         Width           =   600
+      End
+      Begin VB.Label lblProgres 
+         Height          =   285
+         Index           =   3
+         Left            =   180
+         TabIndex        =   142
+         Top             =   3480
+         Width           =   6195
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Datos para la creación del campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   525
+         Index           =   13
+         Left            =   390
+         TabIndex        =   141
+         Top             =   330
+         Width           =   5565
+      End
+   End
    Begin VB.Frame FrameContratos 
       Height          =   5790
       Left            =   0
@@ -373,228 +595,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   164
          Top             =   270
          Width           =   5145
-      End
-   End
-   Begin VB.Frame FrameCreacionCampo 
-      Height          =   4725
-      Left            =   0
-      TabIndex        =   140
-      Top             =   0
-      Width           =   6555
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   4
-         Left            =   1320
-         MaxLength       =   3
-         TabIndex        =   145
-         Tag             =   "Poligono|N|N|0|999|rcampos|poligono|000||"
-         Top             =   1710
-         Width           =   825
-      End
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   5
-         Left            =   1320
-         MaxLength       =   6
-         TabIndex        =   146
-         Tag             =   "Parcela|N|N|0|999999|rcampos|parcela|000000||"
-         Top             =   2130
-         Width           =   795
-      End
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   6
-         Left            =   1320
-         MaxLength       =   2
-         TabIndex        =   147
-         Tag             =   "Subparcela|T|S|||rcampos|subparce|||"
-         Top             =   2550
-         Width           =   825
-      End
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   3
-         Left            =   1320
-         MaxLength       =   4
-         TabIndex        =   148
-         Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
-         Top             =   3210
-         Width           =   855
-      End
-      Begin VB.TextBox Text9 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   3
-         Left            =   2295
-         MaxLength       =   30
-         TabIndex        =   155
-         Top             =   3210
-         Width           =   3795
-      End
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   2
-         Left            =   1320
-         MaxLength       =   6
-         TabIndex        =   144
-         Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
-         Top             =   1290
-         Width           =   840
-      End
-      Begin VB.TextBox Text9 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   2
-         Left            =   2220
-         MaxLength       =   30
-         TabIndex        =   153
-         Top             =   1320
-         Width           =   3915
-      End
-      Begin VB.TextBox Text9 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   1
-         Left            =   2220
-         MaxLength       =   40
-         TabIndex        =   149
-         Top             =   870
-         Width           =   3915
-      End
-      Begin VB.TextBox Text8 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   1
-         Left            =   1320
-         MaxLength       =   6
-         TabIndex        =   143
-         Tag             =   "Código Socio|N|N|1|999999|rcampos|codsocio|000000|N|"
-         Top             =   870
-         Width           =   825
-      End
-      Begin VB.CommandButton CmdCanCrearCampo 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   4905
-         TabIndex        =   152
-         Top             =   3780
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAcepCrearCampo 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3720
-         TabIndex        =   150
-         Top             =   3780
-         Width           =   975
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   1
-         Left            =   1050
-         ToolTipText     =   "Buscar Socio"
-         Top             =   900
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   2
-         Left            =   1050
-         ToolTipText     =   "Buscar Variedad"
-         Top             =   1320
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   3
-         Left            =   1050
-         ToolTipText     =   "Buscar Partida"
-         Top             =   3210
-         Width           =   240
-      End
-      Begin VB.Label Label7 
-         Caption         =   "Poligono"
-         Height          =   255
-         Index           =   0
-         Left            =   390
-         TabIndex        =   159
-         Top             =   1740
-         Width           =   705
-      End
-      Begin VB.Label Label20 
-         Caption         =   "Parcela"
-         Height          =   255
-         Left            =   390
-         TabIndex        =   158
-         Top             =   2160
-         Width           =   705
-      End
-      Begin VB.Label Label19 
-         Caption         =   "Subparcela"
-         Height          =   255
-         Left            =   390
-         TabIndex        =   157
-         Top             =   2580
-         Width           =   945
-      End
-      Begin VB.Label Label21 
-         Caption         =   "Partida"
-         Height          =   255
-         Left            =   390
-         TabIndex        =   156
-         Top             =   3210
-         Width           =   585
-      End
-      Begin VB.Label Label18 
-         Caption         =   "Variedad"
-         Height          =   255
-         Left            =   390
-         TabIndex        =   154
-         Top             =   1320
-         Width           =   735
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Socio"
-         Height          =   255
-         Index           =   5
-         Left            =   390
-         TabIndex        =   151
-         Top             =   900
-         Width           =   600
-      End
-      Begin VB.Label lblProgres 
-         Height          =   285
-         Index           =   3
-         Left            =   180
-         TabIndex        =   142
-         Top             =   3480
-         Width           =   6195
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Datos para la creación del campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   12
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   525
-         Index           =   13
-         Left            =   390
-         TabIndex        =   141
-         Top             =   330
-         Width           =   5565
       End
    End
    Begin VB.Frame FramePago 
@@ -2683,6 +2683,10 @@ Public OpcionMensaje As Byte
 
 '64 .- Tipos de contrato en Coopic
 
+'65 .- Creacion de un campo en el traspaso de entradas de garrofa bolbaite
+
+
+
 Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
@@ -2751,6 +2755,7 @@ Private Function DatosOk() As Boolean
 
     DatosOk = False
 
+
     If Text8(1).Text = "" Or Text9(1).Text = "" Then
         MsgBox "Socio no existe. Reintroduzca.", vbExclamation
         Exit Function
@@ -2759,19 +2764,21 @@ Private Function DatosOk() As Boolean
         MsgBox "Variedad no existe. Reintroduzca.", vbExclamation
         Exit Function
     End If
-    If Text8(4).Text = "" Then
-        MsgBox "Tiene que introducir un Polígono", vbExclamation
-        Exit Function
+    
+    If OpcionMensaje = 62 Then
+        If Text8(4).Text = "" Then
+            MsgBox "Tiene que introducir un Polígono", vbExclamation
+            Exit Function
+        End If
+        If Text8(5).Text = "" Then
+            MsgBox "Tiene que introducir una Parcela", vbExclamation
+            Exit Function
+        End If
+        If Text8(6).Text = "" Then
+            MsgBox "Tiene que introducir una Subparcela", vbExclamation
+            Exit Function
+        End If
     End If
-    If Text8(5).Text = "" Then
-        MsgBox "Tiene que introducir una Parcela", vbExclamation
-        Exit Function
-    End If
-    If Text8(6).Text = "" Then
-        MsgBox "Tiene que introducir una Subparcela", vbExclamation
-        Exit Function
-    End If
-
     DatosOk = True
 
 End Function
@@ -2801,48 +2808,88 @@ Dim Situacion As Integer
     If Not DatosOk Then Exit Sub
 
 
-    Sql = "select codcampo from rcampos where "
-    Sql = Sql & " poligono = " & DBSet(Text8(4).Text, "N")
-    Sql = Sql & " and parcela = " & DBSet(Text8(5).Text, "N")
-    Sql = Sql & " and subparce = " & DBSet(Text8(6).Text, "T")
+    If OpcionMensaje = 62 Then
 
-    NroCampo = DevuelveValor(Sql)
-
-    If NroCampo = 0 Then
+        Sql = "select codcampo from rcampos where "
+        Sql = Sql & " poligono = " & DBSet(Text8(4).Text, "N")
+        Sql = Sql & " and parcela = " & DBSet(Text8(5).Text, "N")
+        Sql = Sql & " and subparce = " & DBSet(Text8(6).Text, "T")
     
-        CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
-        vSuperficie = 0
+        NroCampo = DevuelveValor(Sql)
     
-        Sql = "select max(codcampo) from rcampos "
-        NroCampo = DevuelveValor(Sql) + 1
+        If NroCampo = 0 Then
         
-        Sql = "select min(codsitua) from rsituacioncampo"
-        Situacion = DevuelveValor(Sql)
-    
-        ' insertamos en la tabla de rhisfruta
-        Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
-        Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
-        Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
-        Sql = Sql & DBSet(NroCampo, "N") & ","
-        Sql = Sql & DBSet(Text8(1).Text, "N") & ","
-        Sql = Sql & DBSet(Text8(1).Text, "N") & ","
-        Sql = Sql & DBSet(Text8(2).Text, "N") & ","
-        Sql = Sql & DBSet(Text8(3).Text, "N") & ","
-        Sql = Sql & DBSet(CodZona, "N") & ","
-        Sql = Sql & DBSet(Now, "F") & ","
-        Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
-        Sql = Sql & DBSet(vSuperficie, "N") & ","
-        Sql = Sql & DBSet(vSuperficie, "N") & ","
-        Sql = Sql & DBSet(vSuperficie, "N") & ","
-        Sql = Sql & DBSet(Situacion, "N") & "," ' situacion
-        Sql = Sql & DBSet(Text8(4).Text, "N") & ","
-        Sql = Sql & DBSet(Text8(5).Text, "N") & ","
-        Sql = Sql & DBSet(Text8(6).Text, "T") & ","
-        Sql = Sql & "0,0,0,"
-        Sql = Sql & DBSet(NroCampo, "N") & ","
-        Sql = Sql & "0)"
+            CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
+            vSuperficie = 0
         
-        conn.Execute Sql
+            Sql = "select max(codcampo) from rcampos "
+            NroCampo = DevuelveValor(Sql) + 1
+            
+            Sql = "select min(codsitua) from rsituacioncampo"
+            Situacion = DevuelveValor(Sql)
+        
+            ' insertamos en la tabla de rhisfruta
+            Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
+            Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
+            Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
+            Sql = Sql & DBSet(NroCampo, "N") & ","
+            Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(2).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(3).Text, "N") & ","
+            Sql = Sql & DBSet(CodZona, "N") & ","
+            Sql = Sql & DBSet(Now, "F") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(Situacion, "N") & "," ' situacion
+            Sql = Sql & DBSet(Text8(4).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(5).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(6).Text, "T") & ","
+            Sql = Sql & "0,0,0,"
+            Sql = Sql & DBSet(NroCampo, "N") & ","
+            Sql = Sql & "0)"
+            
+            conn.Execute Sql
+        
+        End If
+    Else ' opcion = 65 creacion de campos en trapaso garrofas de bolbaite
+    
+            CodZona = DevuelveValor("select codzonas from rpartida where codparti = " & DBSet(Text8(3).Text, "N"))
+            vSuperficie = 0
+        
+            Sql = "select max(codcampo) from rcampos "
+            NroCampo = DevuelveValor(Sql) + 1
+            
+            Sql = "select min(codsitua) from rsituacioncampo"
+            Situacion = DevuelveValor(Sql)
+        
+            ' insertamos en la tabla de rhisfruta
+            Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
+            Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
+            Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
+            Sql = Sql & DBSet(NroCampo, "N") & ","
+            Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(1).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(2).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(3).Text, "N") & ","
+            Sql = Sql & DBSet(CodZona, "N") & ","
+            Sql = Sql & DBSet(Now, "F") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(vSuperficie, "N") & ","
+            Sql = Sql & DBSet(Situacion, "N") & "," ' situacion
+            Sql = Sql & DBSet(Text8(4).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(5).Text, "N") & ","
+            Sql = Sql & DBSet(Text8(6).Text, "T") & ","
+            Sql = Sql & "0,0,0,"
+            Sql = Sql & DBSet(NroCampo, "N") & ","
+            Sql = Sql & "0)"
+            
+            conn.Execute Sql
+    
     
     End If
     RaiseEvent DatoSeleccionado(CStr(NroCampo))
@@ -3562,7 +3609,7 @@ Dim OK As Boolean
             Orden = 0
             CargarFacturasPozos "importe1", nomColumna2
             
-        Case 62 ' creacion de campo de entrada de almazara de abn
+        Case 62, 65 ' creacion de campo de entrada de almazara de abn
             Text8(1).Text = RecuperaValor(cadena, 1)
             Text9(1).Text = DevuelveValor("select nomsocio from rsocios where codsocio = " & DBSet(Text8(1).Text, "N"))
             Text8(2).Text = RecuperaValor(cadena, 2)
@@ -3578,6 +3625,7 @@ Dim OK As Boolean
             
         Case 64 ' Contratos
             CargarContratos
+        
         
     End Select
     
@@ -3979,11 +4027,19 @@ On Error Resume Next
             W = FrameImpFrasPozos.Width
             PonerFrameVisible FrameImpFrasPozos, True, H, W
         
-        Case 62 ' creacion de un campo de una entrada de abn
+        Case 62, 65  ' creacion de un campo de una entrada de abn
             H = Me.FrameCreacionCampo.Height
             W = Me.FrameCreacionCampo.Width
             PonerFrameVisible FrameCreacionCampo, True, H, W
-        
+            
+            Text8(1).Enabled = (OpcionMensaje = 62)
+            Text8(2).Enabled = (OpcionMensaje = 62)
+            imgBuscar(1).Enabled = (OpcionMensaje = 62)
+            imgBuscar(2).Enabled = (OpcionMensaje = 62)
+            Text8(4).Enabled = (OpcionMensaje = 62)
+            Text8(5).Enabled = (OpcionMensaje = 62)
+            Text8(6).Enabled = (OpcionMensaje = 62)
+ 
         Case 63 ' visualizacion de entradas de almazara previa a insertar (ABN)
             H = Me.FrameVisualizaEntradas.Height
             W = Me.FrameVisualizaEntradas.Width
@@ -4682,8 +4738,8 @@ Dim Sql As String
             ItmX.SubItems(1) = Rs!Fechapar
             ItmX.SubItems(2) = Rs!codtrata
             ItmX.SubItems(3) = Format(Rs!Codsocio, "000000")
-            ItmX.SubItems(4) = Rs!NomSocio
-            ItmX.SubItems(5) = Rs!Codcampo
+            ItmX.SubItems(4) = Rs!nomsocio
+            ItmX.SubItems(5) = Rs!codcampo
             
             Rs.MoveNext
         Wend
@@ -5298,10 +5354,10 @@ Dim It As ListItem
             It.Text = DBLet(Rs!nroorden, "N")
         Else
             If Opcion = 7 Then
-                It.Text = DBLet(Rs!Codcampo, "N")
+                It.Text = DBLet(Rs!codcampo, "N")
             Else
                 If Opcion <> 5 Then
-                    It.Text = DBLet(Rs!Codcampo, "N")
+                    It.Text = DBLet(Rs!codcampo, "N")
                 Else
                     It.Text = DBLet(Rs!NroCampo, "N")
                 End If
@@ -5312,7 +5368,7 @@ Dim It As ListItem
             It.SubItems(1) = Format(Rs!CodVarie, "000000")
             It.SubItems(2) = Rs!nomvarie
             It.SubItems(3) = Rs!nomparti
-            It.SubItems(4) = Rs!poligono
+            It.SubItems(4) = Rs!Poligono
             It.SubItems(5) = Rs!Parcela
             It.SubItems(6) = Rs!NroCampo
         Else
@@ -5320,32 +5376,32 @@ Dim It As ListItem
                 It.SubItems(1) = Rs!NroCampo
                 It.SubItems(2) = Rs!nomparti
                 It.SubItems(3) = Rs!nomvarie
-                It.SubItems(4) = Rs!NomSocio
+                It.SubItems(4) = Rs!nomsocio
             Else
                 If Opcion = 5 Then
                     It.SubItems(1) = Rs!nomparti
                     It.SubItems(2) = Rs!nomvarie
-                    It.SubItems(3) = Rs!NomSocio
+                    It.SubItems(3) = Rs!nomsocio
                 Else
                     If Opcion = 6 Then
                         It.SubItems(1) = Rs!fecimpre
                         It.SubItems(2) = DBLet(Rs!NroCampo, "N")
                         It.SubItems(3) = Rs!nomparti
                         It.SubItems(4) = Rs!nomvarie
-                        It.SubItems(5) = Rs!NomSocio
+                        It.SubItems(5) = Rs!nomsocio
                     Else
                         If Opcion = 7 Then
                             It.SubItems(1) = Rs!nomparti
-                            It.SubItems(2) = DBLet(Rs!poligono, "N")
+                            It.SubItems(2) = DBLet(Rs!Poligono, "N")
                             It.SubItems(3) = DBLet(Rs!Parcela, "N")
                             It.SubItems(4) = DBLet(Rs!SubParce, "T")
                             It.SubItems(5) = Rs!nomvarie
-                            It.SubItems(6) = Rs!NomSocio
+                            It.SubItems(6) = Rs!nomsocio
                         Else
                             It.SubItems(1) = Rs!nomparti
                             It.SubItems(2) = DBLet(Rs!CodPobla, "T")
                             It.SubItems(3) = DBLet(Rs!desPobla, "T")
-                            It.SubItems(4) = Rs!poligono
+                            It.SubItems(4) = Rs!Poligono
                             It.SubItems(5) = Rs!Parcela
                             It.SubItems(6) = DBLet(Rs!SubParce, "T")
                             It.SubItems(7) = Rs!NroCampo
@@ -5603,7 +5659,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!Hidrante, "T")
         It.SubItems(1) = Format(Rs!codparti, "000000")
         It.SubItems(2) = Rs!nomparti
-        It.SubItems(3) = DBLet(Rs!poligono, "T")
+        It.SubItems(3) = DBLet(Rs!Poligono, "T")
         It.SubItems(4) = DBLet(Rs!parcelas, "T")
         It.Checked = False
         
@@ -5651,7 +5707,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!Hidrante, "T")
         It.SubItems(1) = Format(Rs!codparti, "000000")
         It.SubItems(2) = Rs!nomparti
-        It.SubItems(3) = DBLet(Rs!poligono, "T")
+        It.SubItems(3) = DBLet(Rs!Poligono, "T")
         It.SubItems(4) = DBLet(Rs!parcelas, "T")
         It.Checked = True
         
@@ -5702,9 +5758,9 @@ Dim It As ListItem
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!Hidrante, "T")
         It.SubItems(1) = Format(Rs!Codsocio, "000000")
-        It.SubItems(2) = Rs!NomSocio
+        It.SubItems(2) = Rs!nomsocio
         It.SubItems(3) = Rs!nomparti
-        It.SubItems(4) = DBLet(Rs!poligono, "T")
+        It.SubItems(4) = DBLet(Rs!Poligono, "T")
         It.SubItems(5) = DBLet(Rs!parcelas, "T")
         It.Checked = True
         
@@ -5788,7 +5844,7 @@ Dim NomFic As String
         It.Text = DBLet(Rs!numalbar, "T")
         It.SubItems(1) = Format(Rs!CodVarie, "000000")
         It.SubItems(2) = Format(Rs!Codsocio, "000000")
-        It.SubItems(3) = Format(Rs!Codcampo, "00000000")
+        It.SubItems(3) = Format(Rs!codcampo, "00000000")
         Select Case DBLet(Rs!TipoEntr, "N")
             Case 0
                 It.SubItems(4) = "Ya existe la nota de campo en el histórico"
@@ -6042,7 +6098,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
-        It.SubItems(3) = Format(DBLet(Rs!Codcampo, "N"), "00000000")
+        It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
         It.SubItems(4) = Format(DBLet(Rs!Numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(Rs!KilosNet, "N")
         It.SubItems(6) = DBLet(Rs!ImpTrans, "N")
@@ -6107,7 +6163,7 @@ Dim It As ListItem
         It.SubItems(2) = Rs!nomvarie
         It.SubItems(3) = Format(DBLet(Rs!NroCampo, "N"), "000000")
         It.SubItems(4) = Rs!nomparti
-        It.SubItems(5) = Rs!poligono
+        It.SubItems(5) = Rs!Poligono
         It.SubItems(6) = Rs!Parcela
         It.SubItems(7) = DBLet(Rs!KilosNet, "N")
         
@@ -6159,7 +6215,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
-        It.SubItems(3) = Format(DBLet(Rs!Codcampo, "N"), "00000000")
+        It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
         It.SubItems(4) = DBLet(Rs!KilosNet, "N")
         
         It.Checked = False
@@ -6324,7 +6380,7 @@ Dim It As ListItem
         It.SubItems(3) = Format(Rs!CodVarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
-        It.SubItems(6) = Rs!NomSocio
+        It.SubItems(6) = Rs!nomsocio
         
         It.Checked = True
         
@@ -6427,7 +6483,7 @@ Dim It As ListItem
         It.SubItems(3) = Format(Rs!CodVarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
-        It.SubItems(6) = Rs!NomSocio
+        It.SubItems(6) = Rs!nomsocio
         
         It.Checked = True
         
@@ -6659,7 +6715,7 @@ Dim Nregs As Integer
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql2, ConnIndefa, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not Rs2.EOF Then
-            If Trim(DBLet(Rs!poligono, "T")) <> Trim(DBLet(Rs2!poligono, "T")) Or _
+            If Trim(DBLet(Rs!Poligono, "T")) <> Trim(DBLet(Rs2!Poligono, "T")) Or _
                Mid(Trim(DBLet(Rs!parcelas, "T")), 1, 25) <> Mid(Trim(DBLet(Rs2!parcelas, "T")), 1, 25) Or _
                Int(ComprobarCero(DBLet(Rs!hanegada, "N"))) <> Int(Round2(ComprobarCero(DBLet(Rs2!Hanegadas, "N")), 4)) Or _
                (DBLet(Rs!Codsocio, "N") <> ComprobarCero(DBLet(Rs2!socio_revisado, "N")) And DBLet(Rs2!socio_revisado, "N") <> 0) Or _
@@ -6905,7 +6961,7 @@ Dim Consumido As Currency
         Set It = ListView16.ListItems.Add
             
         It.Text = DBLet(Rs!Hidrante, "T")
-        It.SubItems(1) = DBLet(Rs!NomSocio, "T")
+        It.SubItems(1) = DBLet(Rs!nomsocio, "T")
         It.SubItems(2) = Format(DBLet(Rs!Consumo, "N"), "########0")
         It.Checked = False
         
@@ -6936,7 +6992,7 @@ Dim Consumido As Currency
         Set It = ListView17.ListItems.Add
             
         It.Text = DBLet(Rs!Hidrante, "T")
-        It.SubItems(1) = DBLet(Rs!NomSocio, "T")
+        It.SubItems(1) = DBLet(Rs!nomsocio, "T")
         It.SubItems(2) = Format(DBLet(Rs!Consumo, "N"), "########0")
         It.Checked = False
         

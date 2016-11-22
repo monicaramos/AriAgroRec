@@ -46,9 +46,9 @@ Begin VB.Form frmTercHcoFact
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmTercHcoFact.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame2(1)"
+      Tab(0).Control(0)=   "Label1(11)"
       Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Label1(11)"
+      Tab(0).Control(2)=   "Frame2(1)"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmTercHcoFact.frx":0A2A
@@ -3171,7 +3171,7 @@ Dim devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -3404,7 +3404,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     
     For i = 0 To Me.imgBuscar.Count - 1
@@ -3482,7 +3482,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3490,7 +3490,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 17 And KeyAscii = 13 Then 'campo nº de lote y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYpress KeyAscii
     End If
@@ -3511,7 +3511,7 @@ Private Sub Text3_LostFocus(Index As Integer)
 '        Case 0, 1 'trabajador
 '            Text2(Index).Text = PonerNombreDeCod(Text3(Index), conAri, "straba", "nomtraba", "codtraba", "Cod. Trabajador", "N")
         Case 8 'observa 5
-            PonerFocoBtn Me.CmdAceptar
+            PonerFocoBtn Me.cmdAceptar
     End Select
 End Sub
 
@@ -3630,7 +3630,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3801,10 +3801,13 @@ Dim vSeccion As CSeccion
         
         'Eliminar en la tabla pagos de la Contabilidad: spagop
         '------------------------------------------------
-        cta = DevuelveDesdeBDNew(cAgro, "rsocios_seccion", "codmacpro", "codsocio", Text1(2).Text, "N", , "codsecci", vParamAplic.Seccionhorto, "N")
-        Sql = " ctaprove='" & cta & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
-        Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
-        ConnConta.Execute "Delete from spagop WHERE " & Sql
+        If Not vParamAplic.ContabilidadNueva Then
+            cta = DevuelveDesdeBDNew(cAgro, "rsocios_seccion", "codmacpro", "codsocio", Text1(2).Text, "N", , "codsecci", vParamAplic.Seccionhorto, "N")
+            Sql = " ctaprove='" & cta & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
+            Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
+            ConnConta.Execute "Delete from spagop WHERE " & Sql
+        End If
+        
         b = True
         
         'Eliminar en tablas de factura de Ariagro: tcafter, tlifter
@@ -4167,16 +4170,20 @@ On Error GoTo EModFact
                     bol = vFactu.LeerDatos(Text1(2).Text, Text1(0).Text, Text1(1).Text)
                     
                     If bol Then
-                        If Not vParamAplic.ContabilidadNueva Then
-                            'Eliminar de la spagop
+                        'Eliminar de la spagop
+                        If vParamAplic.ContabilidadNueva Then
+                            Sql = " codmacta='" & vFactu.CtaTerce & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
+                            Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
+                            ConnConta.Execute "Delete from pagos WHERE " & Sql
+                        
+                        Else
                             Sql = " ctaprove='" & vFactu.CtaTerce & "' AND numfactu='" & Data1.Recordset.Fields!numfactu & "'"
                             Sql = Sql & " AND fecfactu='" & Format(Data1.Recordset.Fields!fecfactu, FormatoFecha) & "'"
                             ConnConta.Execute "Delete from spagop WHERE " & Sql
-                            
-                            'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
-                            If bol Then
-                                bol = vFactu.InsertarEnTesoreria(MenError)
-                            End If
+                        End If
+                        'Volvemos a grabar en TESORERIA. Tabla de Contabilidad: sconta.spagop
+                        If bol Then
+                            bol = vFactu.InsertarEnTesoreria(MenError)
                         End If
                     End If
                     Set vFactu = Nothing
@@ -4186,9 +4193,6 @@ On Error GoTo EModFact
         Sql = "update rhisfruta, rlifter set rhisfruta.impentrada = 0 where rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar "
         Sql = Sql & " and rlifter.codsocio = " & DBSet(Text1(2).Text, "N") & " and rlifter.numfactu = " & DBSet(Text1(0).Text, "T") & " and rlifter.fecfactu = " & DBSet(Text1(1).Text, "F")
         conn.Execute Sql
-    
-        
-        
         
         End If
     End If
@@ -4516,11 +4520,11 @@ Dim Precio As Currency
     CadValues = ""
     While Not Rs.EOF
         TotalKilos = DBLet(Rs!KilosNet, "N")
-        ImporteVar = DevuelveValor("select sum(importel) from rlifter where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N"))
+        ImporteVar = DevuelveValor("select sum(importel) from rlifter where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!CodVarie, "N"))
     
         ImporteTot = ImporteTot + ImporteVar
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!CodVarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4533,7 +4537,7 @@ Dim Precio As Currency
             PrecioAlb = Round2(ImporteAlb / Rs2!KilosNet, 4)
             
             CadValues = CadValues & "(" & DBSet(Text1(2).Text, "N") & "," & DBSet(Text1(0).Text, "T") & "," & DBSet(Text1(1).Text, "F") & ","
-            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Rs2!KilosNet, "N") & ","
+            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!CodVarie, "N") & "," & DBSet(Rs2!KilosNet, "N") & ","
             CadValues = CadValues & DBSet(ImporteAlb, "N") & "," & DBSet(PrecioAlb, "N") & ",0),"
             
             Rs2.MoveNext
