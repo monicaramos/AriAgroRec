@@ -140,7 +140,7 @@ Public ObsFactura As String ' Observaciones de la factura de anticipo/liquidacio
 
 
 Public Const SerieFraPro = "1"
-
+Public vvTrabajadores As String
 
 'Inicio Aplicación
 Public Sub Main()

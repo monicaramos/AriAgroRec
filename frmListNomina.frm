@@ -3520,11 +3520,10 @@ Dim ConSubInforme As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 
@@ -7245,7 +7244,7 @@ Dim Nregs As Integer
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
-        VarieAnt = DBLet(Rs!codvarie, "N")
+        VarieAnt = DBLet(Rs!CodVarie, "N")
         CapatAnt = DBLet(Rs!codcapat, "N")
         FechaAnt = DBLet(Rs!FechaEnt, "F")
         
@@ -7257,11 +7256,11 @@ Dim Nregs As Integer
                                         '   capataz,fecha,  variedad, numcajon, kilos
     Sql = "insert into tmpinformes (codusu, campo1, fecha1, importe1, importe2, importe3) values  "
     While Not Rs.EOF
-        If DBLet(Rs!codcapat, "N") <> CapatAnt Or DBLet(Rs!FechaEnt, "F") <> FechaAnt Or DBLet(Rs!codvarie, "N") <> VarieAnt Then
+        If DBLet(Rs!codcapat, "N") <> CapatAnt Or DBLet(Rs!FechaEnt, "F") <> FechaAnt Or DBLet(Rs!CodVarie, "N") <> VarieAnt Then
             Sql2 = Sql2 & "( " & vUsu.Codigo & "," & DBSet(CapatAnt, "N") & "," & DBSet(FechaAnt, "F") & "," & DBSet(VarieAnt, "N") & ","
             Sql2 = Sql2 & DBSet(TotCajon, "N") & "," & DBSet(TotKilos, "N") & "),"
         
-            VarieAnt = DBLet(Rs!codvarie, "N")
+            VarieAnt = DBLet(Rs!CodVarie, "N")
             CapatAnt = DBLet(Rs!codcapat, "N")
             FechaAnt = DBLet(Rs!FechaEnt, "F")
         
@@ -7413,7 +7412,7 @@ Dim Nregs As Integer
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
-        VarieAnt = DBLet(Rs!codvarie, "N")
+        VarieAnt = DBLet(Rs!CodVarie, "N")
         CapatAnt = DBLet(Rs!codcapat, "N")
         FechaAnt = DBLet(Rs!FechaEnt, "F")
         
@@ -7425,11 +7424,11 @@ Dim Nregs As Integer
                                         '   capataz,fecha,  variedad, numcajon, kilos
     Sql = "insert into tmpinformes (codusu, campo1, fecha1, importe1, importe2, importe3) values  "
     While Not Rs.EOF
-        If DBLet(Rs!codcapat, "N") <> CapatAnt Or DBLet(Rs!FechaEnt, "F") <> FechaAnt Or DBLet(Rs!codvarie, "N") <> VarieAnt Then
+        If DBLet(Rs!codcapat, "N") <> CapatAnt Or DBLet(Rs!FechaEnt, "F") <> FechaAnt Or DBLet(Rs!CodVarie, "N") <> VarieAnt Then
             Sql2 = Sql2 & "( " & vUsu.Codigo & "," & DBSet(CapatAnt, "N") & "," & DBSet(FechaAnt, "F") & "," & DBSet(VarieAnt, "N") & ","
             Sql2 = Sql2 & DBSet(TotCajon, "N") & "," & DBSet(TotKilos, "N") & "),"
         
-            VarieAnt = DBLet(Rs!codvarie, "N")
+            VarieAnt = DBLet(Rs!CodVarie, "N")
             CapatAnt = DBLet(Rs!codcapat, "N")
             FechaAnt = DBLet(Rs!FechaEnt, "F")
         
@@ -7606,7 +7605,7 @@ On Error GoTo eProcesoPaseABanco
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
         Extra = DBLet(Rs!sufijoem, "T") & "|" & vParam.NombreEmpresa & "|"
@@ -8171,7 +8170,7 @@ On Error GoTo eProcesoPaseABanco
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
         Extra = DBLet(Rs!sufijoem, "T") & "|" & vParam.NombreEmpresa & "|"

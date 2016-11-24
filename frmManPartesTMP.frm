@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManPartesTMP 
@@ -433,6 +433,9 @@ Public ParamVariedad As String
 
 'codi per al registe que s'afegix al cridar des d'atre formulari.
 'Obrir en modo Insertar i tornar datos del registre insertat
+
+Public SoloTrabajador As Byte
+
 Public NuevoCodigo As String
 Public CodigoActual As String
 Public DeConsulta As Boolean
@@ -456,7 +459,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
@@ -471,9 +474,12 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not b
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not b
+    Next i
+    
+    txtAux(1).visible = (SoloTrabajador = 0)
+    txtAux(2).visible = (SoloTrabajador = 0)
     
     'el codigo de usuario no quiero mostrarlo
 '    txtAux(3).visible = False
@@ -481,7 +487,7 @@ Dim b As Boolean
     txtAux2(2).visible = Not b Or Modo = 4
     btnBuscar(0).visible = Not b
 
-    cmdAceptar.visible = Not b
+    CmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -550,9 +556,9 @@ Private Sub BotonAnyadir()
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     
     txtAux(3).Text = vUsu.Codigo
@@ -574,9 +580,9 @@ Private Sub BotonBuscar()
     CargaGrid "tmpliquidacion.codvarie = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
@@ -585,13 +591,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -620,9 +626,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To 2
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To 2
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -705,7 +711,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -739,7 +745,7 @@ Private Sub cmdAceptar_Click()
             If DatosOk Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(1)
+                    i = adodc1.Recordset.Fields(1)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -750,7 +756,7 @@ Private Sub cmdAceptar_Click()
 '                        lblIndicador.Caption = ""
 '                    End If
 
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & DBSet(I, "N"))
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & DBSet(i, "N"))
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -784,8 +790,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -793,18 +799,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
-    I = 0
+    Cad = ""
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
-    RaiseEvent DatoSeleccionado(cad)
+    Loop Until i = 0
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -838,6 +844,8 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+Dim Sql As String
+
     PrimeraVez = True
 
     With Me.Toolbar1
@@ -859,13 +867,24 @@ Private Sub Form_Load()
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
     
-    
+    Sql = "delete from tmpliquidacion where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "SELECT tmpliquidacion.codusu, tmpliquidacion.codvarie, straba.nomtraba, tmpliquidacion.gastos, tmpliquidacion.importe "
+    If SoloTrabajador = 1 Then
+        CadenaConsulta = "SELECT tmpliquidacion.codusu, tmpliquidacion.codvarie, straba.nomtraba "
+    Else
+        CadenaConsulta = "SELECT tmpliquidacion.codusu, tmpliquidacion.codvarie, straba.nomtraba, tmpliquidacion.gastos, tmpliquidacion.importe "
+    End If
     CadenaConsulta = CadenaConsulta & " FROM tmpliquidacion inner join straba on tmpliquidacion.codvarie = straba.codtraba "
     CadenaConsulta = CadenaConsulta & " WHERE tmpliquidacion.codusu = " & vUsu.Codigo
     '************************************************************************
+    
+    txtAux(1).Enabled = (SoloTrabajador = 0)
+    txtAux(1).visible = (SoloTrabajador = 0)
+    txtAux(2).Enabled = (SoloTrabajador = 0)
+    txtAux(2).visible = (SoloTrabajador = 0)
+        
     
     CadB = ""
     CargaGrid
@@ -883,8 +902,40 @@ Private Sub Form_Unload(Cancel As Integer)
 '    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     Screen.MousePointer = vbDefault
     If Modo = 4 Then TerminaBloquear
+    
+    CargarTrabajadores
+    
 End Sub
 
+
+Private Sub CargarTrabajadores()
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eCargarTrabajadores
+
+    vvTrabajadores = ""
+    
+    Sql = "select codvarie from tmpliquidacion where codusu = " & vUsu.Codigo
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        vvTrabajadores = vvTrabajadores & DBLet(Rs!CodVarie, "N") & ","
+        Rs.MoveNext
+    Wend
+    
+    Set Rs = Nothing
+    
+    If vvTrabajadores <> "" Then vvTrabajadores = Mid(vvTrabajadores, 1, Len(vvTrabajadores) - 1)
+    
+    Exit Sub
+    
+eCargarTrabajadores:
+    vvTrabajadores = ""
+    MuestraError Err.Number, "Cargar trabajadores", Err.Description
+End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
 'Trabajadores
@@ -973,9 +1024,15 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "N|txtAux(3)|T|Usuario|800|;S|txtAux(0)|T|Código|900|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Trabajador|3500|;"
-    tots = tots & "S|txtAux(1)|T|Horas|900|;"
-    tots = tots & "S|txtAux(2)|T|Importe|1100|;"
+    tots = "N|txtAux(3)|T|Usuario|800|;S|txtAux(0)|T|Código|900|;S|btnBuscar(0)|B|||;"
+    
+    If SoloTrabajador = 1 Then
+        tots = tots & "S|txtAux2(2)|T|Trabajador|5500|;"
+    Else
+        tots = tots & "S|txtAux2(2)|T|Trabajador|3500|;"
+        tots = tots & "S|txtAux(1)|T|Horas|900|;"
+        tots = tots & "S|txtAux(2)|T|Importe|1100|;"
+    End If
     
     arregla tots, DataGrid1, Me
     
@@ -998,6 +1055,10 @@ Dim PrecHora As Currency
         Case 0 'codigo de trabajador
             If txtAux(Index).Text = "" Then Exit Sub
             txtAux2(2).Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba", "codtraba", "N")
+            If txtAux2(2).Text = "" Then
+                MsgBox "Trabajador no existe. Reintroduzca.", vbExclamation
+                PonerFoco txtAux(Index)
+            End If
         
         Case 1 'horas
             PonerFormatoDecimal txtAux(Index), 4
@@ -1035,8 +1096,16 @@ Dim Mens As String
             PonerFoco txtAux(0)
             b = False
         End If
+        
+        If b Then
+            Sql = DevuelveDesdeBDNew(cAgro, "straba", "fechabaja", "codtraba", txtAux(0).Text, "N")
+            If Sql <> "" Then
+                MsgBox "El trabajador está dado de baja. Revise.", vbExclamation
+                PonerFoco txtAux(0)
+                b = False
+            End If
+        End If
     End If
-    
     
     DatosOk = b
 End Function
@@ -1078,12 +1147,10 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1096,7 +1163,7 @@ End Sub
 
 Private Function SepuedeBorrar() As Boolean
 Dim Sql As String
-Dim cad As String
+Dim Cad As String
 
     SepuedeBorrar = False
     SepuedeBorrar = True

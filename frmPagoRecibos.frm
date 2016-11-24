@@ -794,7 +794,7 @@ On Error GoTo eProcesarCambios
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1093,7 +1093,7 @@ On Error GoTo eProcesarCambios
             Cad = ""
         Else
             '[Monica]22/11/2013:iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1267,7 +1267,7 @@ On Error GoTo eRepetirNormaNatural
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1428,7 +1428,7 @@ On Error GoTo eRepetirNormaPicassent
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -2491,7 +2491,13 @@ On Error GoTo eProcesarCambiosPicassent
         
         ImpHoras = Round2(DBLet(Rs.Fields(2).Value, "N") * DBLet(Rs2!impsalar, "N"), 2)
                                     ' importe + pluscapataz + complemento - penalizacion
-        ImpBruto = Round2(ImpHoras + DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs2!PlusCapataz, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
+                                    
+        If vParamAplic.Cooperativa = 2 Then
+            ImpBruto = Round2(ImpHoras + DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs2!PlusCapataz, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
+        Else
+            ' en coopic llevamos en el bruto el plus del capataz
+            ImpBruto = Round2(ImpHoras + DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
+        End If
         
         TImpbruto = TImpbruto + ImpBruto
         
@@ -2578,7 +2584,7 @@ On Error GoTo eProcesarCambiosPicassent
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -2595,14 +2601,19 @@ On Error GoTo eProcesarCambiosPicassent
         End If
     End If
     
-    If vEmpresa.AplicarNorma19_34Nueva = 1 Then
-        If HayXML Then
-            b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+    
+    If vParamAplic.Cooperativa = 2 Then
+        If vEmpresa.AplicarNorma19_34Nueva = 1 Then
+            If HayXML Then
+                b = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+            Else
+                b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+            End If
         Else
-            b = GeneraFicheroNorma34SEPA(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
+            b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
         End If
     Else
-        b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
+        b = True
     End If
     
     vSeccion.CerrarConta
@@ -2612,7 +2623,10 @@ On Error GoTo eProcesarCambiosPicassent
 '    b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     If b Then
         Mens = "Copiar fichero"
-        If CopiarFichero Then
+        
+        If vParamAplic.Cooperativa = 2 Then b = CopiarFichero
+        
+        If b Then
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
             CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|" & "pImpagados=0|"
             numParam = 4

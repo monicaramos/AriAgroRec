@@ -354,12 +354,12 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
 End Sub
+
 Private Sub cmdAceptar_Click(Index As Integer)
 Dim cOrden As String
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
@@ -562,7 +562,7 @@ Dim List As Collection
     CargaCombo
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -733,7 +733,7 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -1134,8 +1134,12 @@ Dim SegSoc As Currency
         SqlReg = SqlReg & DBSet(Rs!Codcateg, "N") & ","
         SqlReg = SqlReg & DBSet(Rs!Importe, "N") & ","
         
-        Compleme = DBLet(Rs!Compleme, "N") + DBLet(Rs!PlusCapataz, "N")
-        
+        If vParamAplic.Cooperativa = 2 Then
+            Compleme = DBLet(Rs!Compleme, "N") + DBLet(Rs!PlusCapataz, "N")
+        Else
+            Compleme = DBLet(Rs!Compleme, "N")
+        End If
+            
         SqlReg = SqlReg & DBSet(Compleme, "N") & ","
         SqlReg = SqlReg & DBSet(Rs!Penaliza, "N") & ","
         
@@ -1160,7 +1164,11 @@ Dim SegSoc As Currency
         Reten = Round2(Bruto * DBLet(Rs!dtoreten, "N") * 0.01, 2)
         
         SqlReg = SqlReg & DBSet(Reten, "N") & ","
-        SqlReg = SqlReg & DBSet(Rs!PlusCapataz, "N") & ","
+        If vParamAplic.Cooperativa = 2 Then
+            SqlReg = SqlReg & DBSet(Rs!PlusCapataz, "N") & ","
+        Else
+            SqlReg = SqlReg & "0,"
+        End If
         
         
         Total = Bruto - IRPF - Reten
@@ -1202,7 +1210,7 @@ Dim SegSoc As Currency
         Total = DBLet(Rs!Importe, "N") + DBLet(Rs!Compleme, "N") - DBLet(Rs!Penaliza, "N")
         
         SqlReg = SqlReg & "(" & vUsu.Codigo & ","
-        SqlReg = SqlReg & DBSet(Rs!codvarie, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!CodVarie, "N") & ","
         SqlReg = SqlReg & DBSet(Total, "N") & "),"
 
         Rs.MoveNext
