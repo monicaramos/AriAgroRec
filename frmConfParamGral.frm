@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmConfParamGral 
@@ -85,12 +85,12 @@ Begin VB.Form frmConfParamGral
       TabCaption(1)   =   "Datos Campaña"
       TabPicture(1)   =   "frmConfParamGral.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label21"
-      Tab(1).Control(3)=   "imgFec(0)"
-      Tab(1).Control(4)=   "text1(12)"
-      Tab(1).Control(5)=   "text1(11)"
+      Tab(1).Control(0)=   "text1(11)"
+      Tab(1).Control(1)=   "text1(12)"
+      Tab(1).Control(2)=   "imgFec(0)"
+      Tab(1).Control(3)=   "Label21"
+      Tab(1).Control(4)=   "imgFec(1)"
+      Tab(1).Control(5)=   "Label2"
       Tab(1).ControlCount=   6
       Begin VB.TextBox text1 
          Height          =   315
@@ -595,19 +595,19 @@ Private Sub cmdAceptar_Click()
 '            vEmpresa.nomempre = text1(1).Text
 '            vEmpresa.ModificarDatos
     
-            vParam.NombreEmpresa = text1(1).Text
-            vParam.DomicilioEmpresa = text1(2).Text
-            vParam.CPostal = text1(3).Text
-            vParam.Poblacion = text1(4).Text
-            vParam.Provincia = text1(5).Text
-            vParam.CifEmpresa = text1(6).Text
-            vParam.Telefono = text1(7).Text
-            vParam.Fax = text1(8).Text
-            vParam.WebEmpresa = text1(9).Text
-            vParam.MailEmpresa = text1(10).Text
-            vParam.FecIniCam = text1(11).Text
-            vParam.FecFinCam = text1(12).Text
-            vParam.PerContacto = text1(13).Text
+            vParam.NombreEmpresa = Text1(1).Text
+            vParam.DomicilioEmpresa = Text1(2).Text
+            vParam.CPostal = Text1(3).Text
+            vParam.Poblacion = Text1(4).Text
+            vParam.Provincia = Text1(5).Text
+            vParam.CifEmpresa = Text1(6).Text
+            vParam.Telefono = Text1(7).Text
+            vParam.Fax = Text1(8).Text
+            vParam.WebEmpresa = Text1(9).Text
+            vParam.MailEmpresa = Text1(10).Text
+            vParam.FecIniCam = Text1(11).Text
+            vParam.FecFinCam = Text1(12).Text
+            vParam.PerContacto = Text1(13).Text
             vParam.Modificar
             TerminaBloquear
             
@@ -655,8 +655,8 @@ Dim i As Integer
     End With
     
     'carga IMAGES de mail
-    For i = 0 To Me.ImgMail.Count - 1
-        Me.ImgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
+    For i = 0 To Me.imgMail.Count - 1
+        Me.imgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
     Next i
     
     VieneDeBuscar = False
@@ -708,13 +708,13 @@ End Sub
 Private Sub PonerCampos()
     If Data1.Recordset.EOF Then Exit Sub
     PonerCamposForma Me, Data1
-    If Trim(text1(3).Text) = "0" Then text1(3).Text = ""
-    If Trim(text1(6).Text) = "0" Then text1(6).Text = ""
+    If Trim(Text1(3).Text) = "0" Then Text1(3).Text = ""
+    If Trim(Text1(6).Text) = "0" Then Text1(6).Text = ""
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    text1(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    Text1(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -741,11 +741,11 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(0).Tag = Index + 11 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If text1(Index + 11).Text <> "" Then frmC.NovaData = text1(Index + 11).Text
+    If Text1(Index + 11).Text <> "" Then frmC.NovaData = Text1(Index + 11).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco text1(CByte(imgFec(0).Tag) + 11)
+    PonerFoco Text1(CByte(imgFec(0).Tag) + 11)
     ' ***************************
 End Sub
 
@@ -757,7 +757,7 @@ Dim dirMail As String
     Screen.MousePointer = vbHourglass
     
     Select Case Index
-        Case 0: dirMail = text1(10).Text
+        Case 0: dirMail = Text1(10).Text
     End Select
 
     If LanzaMailGnral(dirMail) Then espera 2
@@ -770,7 +770,7 @@ Private Sub imgWeb_Click()
 '    If Modo = 0 Then Exit Sub
     Screen.MousePointer = vbHourglass
 
-    If LanzaHomeGnral(text1(9).Text) Then espera 2
+    If LanzaHomeGnral(Text1(9).Text) Then espera 2
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -783,7 +783,7 @@ Private Sub mnSalir_Click()
 End Sub
 
 Private Sub Text1_GotFocus(Index As Integer)
-    ConseguirFoco text1(Index), 3
+    ConseguirFoco Text1(Index), 3
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -808,7 +808,7 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(text1(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -820,7 +820,7 @@ Private Sub Text1_LostFocus(Index As Integer)
     'Si queremos hacer algo ..
     Select Case Index
         Case 11, 12 'Fecha inicio de campaña y fecha fin de campaña
-            PonerFormatoFecha text1(Index)
+            PonerFormatoFecha Text1(Index)
     End Select
     
 End Sub
@@ -841,7 +841,7 @@ Private Sub BotonModificar()
 '    Me.lblIndicador.Caption = "MODIFICAR"
     PonerModo 4
     'Me.imgBuscar.Enabled = True
-    PonerFoco text1(1)
+    PonerFoco Text1(1)
 End Sub
 
 Private Function DatosOk() As Boolean
@@ -913,12 +913,11 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 ' ### [Monica] 13/11/2006
@@ -927,8 +926,8 @@ End Sub
 Private Sub BotonAnyadir()
     'LimpiarCampos
     PonerModo 3
-    text1(0).Text = 1
-    PonerFoco text1(1)
+    Text1(0).Text = 1
+    PonerFoco Text1(1)
 End Sub
 
 Private Sub PonerModoOpcionesMenu()

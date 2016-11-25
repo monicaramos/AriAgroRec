@@ -886,7 +886,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!codvarie
+        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!CodVarie
         Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
         conn.Execute Sql
         CargaGrid CadB
@@ -1042,7 +1042,7 @@ End Sub
 Private Sub cmdRegresar_Click()
 Dim Cad As String
 Dim i As Integer
-Dim j As Integer
+Dim J As Integer
 Dim Aux As String
 
     If adodc1.Recordset.EOF Then
@@ -1052,12 +1052,12 @@ Dim Aux As String
     Cad = ""
     i = 0
     Do
-        j = i + 1
-        i = InStr(j, DatosADevolverBusqueda, "|")
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
         If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, j, i - j)
-            j = Val(Aux)
-            Cad = Cad & adodc1.Recordset.Fields(j) & "|"
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+            J = Val(Aux)
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
@@ -1388,12 +1388,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)

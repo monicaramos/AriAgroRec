@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasDestajoPica 
@@ -1359,7 +1359,7 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 
-Private Sub frmcap_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo capataz
     txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
 End Sub
@@ -1695,12 +1695,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1778,20 +1777,20 @@ Private Sub CargaForaGrid()
  End Sub
 
 
-Private Sub CalcularTotales(Cadena As String)
+Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
 Dim Compleme As Currency
 Dim Penaliza As Currency
 
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 
     On Error Resume Next
     
-    Sql = "select sum(importe) importe , sum(compleme) compleme, sum(penaliza) penaliza from (" & Cadena & ") aaaaa"
+    Sql = "select sum(importe) importe , sum(compleme) compleme, sum(penaliza) penaliza from (" & cadena & ") aaaaa"
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Compleme = 0
@@ -1800,19 +1799,19 @@ Dim Sql As String
     Text2.Text = ""
     Text3.Text = ""
     
-    If TotalRegistrosConsulta(Cadena) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
     
-    If Not RS.EOF Then
-        If RS.Fields(0).Value <> 0 Then Importe = DBLet(RS.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
-        If RS.Fields(1).Value <> 0 Then Compleme = DBLet(RS.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
-        If RS.Fields(2).Value <> 0 Then Penaliza = DBLet(RS.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
+    If Not Rs.EOF Then
+        If Rs.Fields(0).Value <> 0 Then Importe = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
+        If Rs.Fields(1).Value <> 0 Then Compleme = DBLet(Rs.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
+        If Rs.Fields(2).Value <> 0 Then Penaliza = DBLet(Rs.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
     
         Text1.Text = Format(Importe, "###,###,##0.00")
         Text2.Text = Format(Compleme, "###,###,##0.00")
         Text3.Text = Format(Penaliza, "###,###,##0.00")
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     
     DoEvents

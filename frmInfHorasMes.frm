@@ -517,11 +517,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub Check1_Click(Index As Integer)
@@ -757,7 +757,7 @@ Dim i As Integer
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     

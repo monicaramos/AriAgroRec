@@ -3293,12 +3293,11 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -3357,7 +3356,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_clasif "
-                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!codvarie
+                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!CodVarie
                 Sql = Sql & " and codcalid= " & Adoaux(Index).Recordset!codcalid
             End If
             
@@ -4453,7 +4452,7 @@ Dim KilosNetos As Long
         vSQL = "update rclasifica_clasif set kilosnet = " & DBSet(KilosNet, "N", "S")
         vSQL = vSQL & ", muestra = " & DBSet(Rs!Muestra, "N", "S")
         vSQL = vSQL & " where numnotac = " & DBSet(Rs!Numnotac, "N")
-        vSQL = vSQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        vSQL = vSQL & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         vSQL = vSQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         conn.Execute vSQL
@@ -4468,16 +4467,16 @@ Dim KilosNetos As Long
     If TotalKilos <> Me.Data1.Recordset!KilosNet Then
         '[Monica]28/06/2011: si es Quatretonda la calidad de redondeo es la de maxima muestra no la de destrio
         If vParamAplic.Cooperativa = 7 Then
-            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!Numnotac, True)
+            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!CodVarie, Me.Data1.Recordset!Numnotac, True)
         Else
-            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!Numnotac, True)
+            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!CodVarie, Me.Data1.Recordset!Numnotac, True)
         End If
         
         If vSQL <> "" Then Calidad = CInt(vSQL)
     
         Sql = "update rclasifica_clasif set kilosnet = kilosnet + (" & (Me.Data1.Recordset!KilosNet - TotalKilos) & ") "
         Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
-        Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
+        Sql = Sql & " and codvarie = " & Data1.Recordset!CodVarie
         Sql = Sql & " and codcalid = " & DBSet(Calidad, "N")
     
         conn.Execute Sql
@@ -4786,7 +4785,7 @@ Dim Sql As String
     End If
     
     '[Monica]08/02/2012: si modifican variedad o socio o campo o fecha u hora y tienen traza
-    If b And (CLng(Data1.Recordset!codvarie) <> CLng(Text1(3).Text) Or CLng(Data1.Recordset!Codsocio) <> CLng(Text1(4).Text) Or CLng(Data1.Recordset!codcampo) <> CLng(Text1(5).Text) Or _
+    If b And (CLng(Data1.Recordset!CodVarie) <> CLng(Text1(3).Text) Or CLng(Data1.Recordset!Codsocio) <> CLng(Text1(4).Text) Or CLng(Data1.Recordset!codcampo) <> CLng(Text1(5).Text) Or _
              CStr(Data1.Recordset!FechaEnt) <> Text1(1).Text Or CStr(Data1.Recordset!horaentr) <> Text1(21).Text) Then
           MenError = "Actualizar Traza: "
           b = ActualizarTraza(Text1(0).Text, Text1(3).Text, Text1(4).Text, Text1(5).Text, Text1(1).Text, Text1(21).Text, MenError)

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmContrRecFactPre 
@@ -963,7 +963,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -978,22 +978,22 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Concepto de Coste?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Concepto de Coste?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        SQL = "Delete from rhisfruta_clasif where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta_clasif where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         
-        SQL = "Delete from rhisfruta_cta where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta_cta where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         
-        SQL = "Delete from rhisfruta where codcoste=" & adodc1.Recordset!codCoste
-        conn.Execute SQL
+        Sql = "Delete from rhisfruta where codcoste=" & adodc1.Recordset!codCoste
+        conn.Execute Sql
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1178,7 +1178,7 @@ Dim V
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -1187,7 +1187,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -1195,10 +1195,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1314,19 +1314,19 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub LimpiarPrecios()
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "update rhisfruta set prestimado = " & DBSet(Precio, "N")
-    SQL = SQL & " where numalbar in (" & Albaranes & ")"
+    Sql = "update rhisfruta set prestimado = " & DBSet(Precio, "N")
+    Sql = Sql & " where numalbar in (" & Albaranes & ")"
 
-    conn.Execute SQL
+    conn.Execute Sql
     
-    SQL = "update rhisfruta_clasif set precio = " & DBSet(Precio, "N")
+    Sql = "update rhisfruta_clasif set precio = " & DBSet(Precio, "N")
     '[Monica]19/09/2013: añadimos el importe
-    SQL = SQL & ", importe = round(kilosnet * " & DBSet(Precio, "N") & ",2) "
-    SQL = SQL & " where numalbar in (" & Albaranes & ")"
+    Sql = Sql & ", importe = round(kilosnet * " & DBSet(Precio, "N") & ",2) "
+    Sql = Sql & " where numalbar in (" & Albaranes & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 End Sub
 
@@ -1418,20 +1418,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
+    Sql = Sql & " ORDER BY rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|800|;S|txtAux2(0)|T|Variedad|3675|;" '2575
@@ -1473,7 +1473,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim TipoCoste As Byte
 
@@ -1571,12 +1571,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1631,25 +1630,25 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 1 ' LINEAS
-            SQL = "SELECT rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta_clasif.codvarie, variedades.nomvarie, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta_clasif.kilosnet, rhisfruta_clasif.precio, rhisfruta_clasif.importe "
-            SQL = SQL & " FROM rhisfruta_clasif, rhisfruta, variedades, rcalidad "
-            SQL = SQL & " where rhisfruta.numalbar = rhisfruta_clasif.numalbar "
-            SQL = SQL & " and rhisfruta_clasif.codvarie = variedades.codvarie "
-            SQL = SQL & " and rhisfruta_clasif.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and rhisfruta_clasif.codcalid = rcalidad.codcalid "
-            SQL = SQL & " and rhisfruta_clasif.numalbar in (" & Albaranes & ")"
+            Sql = "SELECT rhisfruta_clasif.numalbar, rhisfruta.fecalbar, rhisfruta_clasif.codvarie, variedades.nomvarie, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta_clasif.kilosnet, rhisfruta_clasif.precio, rhisfruta_clasif.importe "
+            Sql = Sql & " FROM rhisfruta_clasif, rhisfruta, variedades, rcalidad "
+            Sql = Sql & " where rhisfruta.numalbar = rhisfruta_clasif.numalbar "
+            Sql = Sql & " and rhisfruta_clasif.codvarie = variedades.codvarie "
+            Sql = Sql & " and rhisfruta_clasif.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and rhisfruta_clasif.codcalid = rcalidad.codcalid "
+            Sql = Sql & " and rhisfruta_clasif.numalbar in (" & Albaranes & ")"
             
-            SQL = SQL & " ORDER BY rhisfruta_clasif.numalbar, rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
+            Sql = Sql & " ORDER BY rhisfruta_clasif.numalbar, rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid "
     
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Function ObtenerWhereCab(conW As Boolean) As String
@@ -1683,9 +1682,9 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
-Dim eliminar As Boolean
+Dim Eliminar As Boolean
 
     On Error GoTo Error2
 
@@ -1699,7 +1698,7 @@ Dim eliminar As Boolean
 '    PonerModo 5
 
     If Adoaux(Index).Recordset.EOF Then Exit Sub
-    eliminar = False
+    Eliminar = False
    
     vWhere = ObtenerWhereCab(True)
     
@@ -1707,28 +1706,28 @@ Dim eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'lineas de confeccion
-            SQL = "¿ Seguro que desea eliminar la linea ?"
-            SQL = SQL & vbCrLf & "Linea: " & Adoaux(Index).Recordset!codlinea '& " " & Adoaux(Index).Recordset!NomTraba
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
-                SQL = "DELETE FROM rhisfruta_clasif "
-                SQL = SQL & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+            Sql = "¿ Seguro que desea eliminar la linea ?"
+            Sql = Sql & vbCrLf & "Linea: " & Adoaux(Index).Recordset!codlinea '& " " & Adoaux(Index).Recordset!NomTraba
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+                Eliminar = True
+                Sql = "DELETE FROM rhisfruta_clasif "
+                Sql = Sql & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
             End If
             
         Case 2 'lineas de cuentas contables
-            SQL = "¿ Seguro que desea eliminar la cuenta asociada ?"
-            SQL = SQL & vbCrLf & "Cuenta Contable: " & Adoaux(Index).Recordset!ctacontable '& " " & Adoaux(Index).Recordset!NomTraba
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
-                SQL = "DELETE FROM rhisfruta_cta "
-                SQL = SQL & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+            Sql = "¿ Seguro que desea eliminar la cuenta asociada ?"
+            Sql = Sql & vbCrLf & "Cuenta Contable: " & Adoaux(Index).Recordset!ctacontable '& " " & Adoaux(Index).Recordset!NomTraba
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+                Eliminar = True
+                Sql = "DELETE FROM rhisfruta_cta "
+                Sql = Sql & vWhere & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
             End If
     End Select
 
-    If eliminar Then
+    If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGridAux Index, True
@@ -1747,7 +1746,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -1768,8 +1767,8 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
-        Case 1: vTabla = "rhisfruta_clasif"
-        Case 2: vTabla = "rhisfruta_cta"
+        Case 1: vtabla = "rhisfruta_clasif"
+        Case 2: vtabla = "rhisfruta_cta"
     End Select
     
     vWhere = ObtenerWhereCab(False)
@@ -1779,7 +1778,7 @@ Dim i As Integer
             ' *** canviar la clau primaria de les llínies,
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
             
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 
             AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
@@ -1959,7 +1958,7 @@ Private Function ModificaRegistro() As Boolean
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim SQL As String
+Dim Sql As String
 
     
     On Error GoTo eModificaRegistro
@@ -1972,20 +1971,20 @@ Dim SQL As String
     nomframe = "FrameAux1" 'lineas de confeccion
     
     
-    SQL = "update rhisfruta set prestimado = " & DBSet(txtAux(2).Text, "N")
-    SQL = SQL & " where codvarie = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and numalbar in (" & Albaranes & ")"
+    Sql = "update rhisfruta set prestimado = " & DBSet(txtAux(2).Text, "N")
+    Sql = Sql & " where codvarie = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and numalbar in (" & Albaranes & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     If MsgBox("¿ Desea actualizar los precios de todas las calidades de los albaranes ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-        SQL = "update rhisfruta_clasif set precio = " & DBSet(txtAux(2).Text, "N")
-        SQL = SQL & " , importe = round(kilosnet * " & DBSet(txtAux(2).Text, "N") & ",2) "
-        SQL = SQL & " where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid = " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and numalbar in (" & Albaranes & ")"
+        Sql = "update rhisfruta_clasif set precio = " & DBSet(txtAux(2).Text, "N")
+        Sql = Sql & " , importe = round(kilosnet * " & DBSet(txtAux(2).Text, "N") & ",2) "
+        Sql = Sql & " where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid = " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and numalbar in (" & Albaranes & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     CargaGridAux 1, True
@@ -2008,15 +2007,15 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    cad = "rhisfruta_clasif.codvarie=" & DBSet(txtAux(42).Text, "N") & " and rhisfruta_clasif.codcalid = " & DBSet(txtAux(43).Text, "N") & " and rhisfruta_clasif.numalbar = " & DBSet(txtAux(41).Text, "N")
+    Cad = "rhisfruta_clasif.codvarie=" & DBSet(txtAux(42).Text, "N") & " and rhisfruta_clasif.codcalid = " & DBSet(txtAux(43).Text, "N") & " and rhisfruta_clasif.numalbar = " & DBSet(txtAux(41).Text, "N")
     
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarDataMULTI(Me.Adoaux(1), cad, Indicador) Then
+    If SituarDataMULTI(Me.Adoaux(1), Cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2028,9 +2027,9 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim b As Boolean
-Dim cant As Integer
+Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
 
@@ -2045,9 +2044,9 @@ Dim vFact As Byte, vDocum As Byte
     If b And nomframe = "FrameAux1" Then
         'comprobamos que no exista ese codigo de linea
         If ModoLineas = 1 Then
-            SQL = "select count(*) from rhisfruta_clasif where codcoste = " & Me.adodc1.Recordset!codCoste
-            SQL = SQL & " and codlinea = " & DBSet(txtAux(42).Text, "N")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rhisfruta_clasif where codcoste = " & Me.adodc1.Recordset!codCoste
+            Sql = Sql & " and codlinea = " & DBSet(txtAux(42).Text, "N")
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Código de linea ya existe. Revise.", vbExclamation
                 b = False
             End If
@@ -2057,9 +2056,9 @@ Dim vFact As Byte, vDocum As Byte
     If b And nomframe = "FramAux2" Then
         'comprobamos que no exista ese codigo de linea
         If ModoLineas = 1 Then
-            SQL = "select count(*) from rhisfruta_cta where codcoste = " & Me.adodc1.Recordset!codCoste
-            SQL = SQL & " and ctacontable = " & DBSet(txtAux(52).Text, "T")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rhisfruta_cta where codcoste = " & Me.adodc1.Recordset!codCoste
+            Sql = Sql & " and ctacontable = " & DBSet(txtAux(52).Text, "T")
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Cuenta contable ya existe. Revise.", vbExclamation
                 b = False
             End If

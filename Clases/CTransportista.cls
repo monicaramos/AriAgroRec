@@ -24,6 +24,7 @@ Private mCodposta As String 'cod. postal trans
 Private mPobTrans As String 'poblacion trans
 Private mProTrans As String 'Provincia trans
 Private mNIFTrans As String 'NIF trans
+Private mMaiTrans As String 'Mail trans
 
 Private mMatricul As String 'matricula
 Private mTaraVehi As String 'tara de vehiculo
@@ -35,6 +36,16 @@ Private mCodIva As String
 
 Private mContador As String
 Private mEsFactTraInterna As Byte '0=no interna 1=interna
+
+
+Private mIban As String ' iban
+
+Private mCodbanco As String 'cod. banco
+Private mCodsucur As String 'cod. sucur
+Private mDigContr As String 'digito control
+Private mCuentaba As String 'cuenta bancaria
+
+
 
 '------------------------------------------------
 '------------------------------------------------
@@ -67,12 +78,12 @@ End Property
 
 '**** Matricula del transportista
 
-Public Property Let Matricula(ByVal vData As String)
+Public Property Let matricula(ByVal vData As String)
      mMatricul = vData
 End Property
 
-Public Property Get Matricula() As String
-     Matricula = mMatricul
+Public Property Get matricula() As String
+     matricula = mMatricul
 End Property
 
 '**** Tara del vehiculo
@@ -202,6 +213,68 @@ Public Property Get nif() As String
      nif = mNIFTrans
 End Property
 
+'**** MAIL del trans
+
+Public Property Let EMail(ByVal vData As String)
+     mMaiTrans = vData
+End Property
+
+Public Property Get EMail() As String
+     EMail = mMaiTrans
+End Property
+
+'[Monica]22/11/2013: tema Iban
+'**** IBAN
+Public Property Let IBAN(ByVal vData As String)
+     mIban = vData
+End Property
+
+Public Property Get IBAN() As String
+     IBAN = mIban
+End Property
+
+'**** Banco del socio
+
+Public Property Let Banco(ByVal vData As String)
+     mCodbanco = vData
+End Property
+
+Public Property Get Banco() As String
+     Banco = mCodbanco
+End Property
+
+
+'**** Sucursal del socio
+
+Public Property Let Sucursal(ByVal vData As String)
+     mCodsucur = vData
+End Property
+
+Public Property Get Sucursal() As String
+     Sucursal = mCodsucur
+End Property
+
+
+'**** Digito Control de la cuenta del socio
+
+Public Property Let Digcontrol(ByVal vData As String)
+     mDigContr = vData
+End Property
+
+Public Property Get Digcontrol() As String
+     Digcontrol = mDigContr
+End Property
+
+
+'**** Cuenta Bancaria de la Factura
+
+Public Property Let CuentaBan(ByVal vData As String)
+     mCuentaba = vData
+End Property
+
+Public Property Get CuentaBan() As String
+     CuentaBan = mCuentaba
+End Property
 
 
 
@@ -243,7 +316,7 @@ Dim Sql As String
     LeerDatos = False
     
     Sql = "SELECT codtrans,nomtrans,matricula,taravehi,tipoirpf,codmacpro,codiva,codforpa,esfacttrainterna, "
-    Sql = Sql & "dirtrans,pobtrans,codpostal,protrans,niftrans "
+    Sql = Sql & "dirtrans,pobtrans,codpostal,protrans,niftrans,maitrans,iban,codbanco,codsucur,digcontr,cuentaba "
     Sql = Sql & " FROM rtransporte "
     Sql = Sql & " WHERE codtrans=" & DBSet(vCodTrans, "T")
     
@@ -270,6 +343,14 @@ Dim Sql As String
         mPobTrans = DBLet(Rs!pobtrans, "T")
         mProTrans = DBLet(Rs!protrans, "T")
         mNIFTrans = Rs!NIFTrans
+        mMaiTrans = DBLet(Rs!maitrans, "T")
+        
+        mIban = CStr(DBLet(Rs!IBAN, "T"))
+        
+        mCodbanco = CStr(Format(ComprobarCero(DBLet(Rs!CodBanco, "N")), "0000"))
+        mCodsucur = CStr(Format(ComprobarCero(DBLet(Rs!CodSucur, "N")), "0000"))
+        mDigContr = DBLet(Rs!digcontr, "T")
+        mCuentaba = DBLet(Rs!CuentaBa, "T")
         
         
         LeerDatos = True

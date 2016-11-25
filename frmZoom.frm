@@ -87,5 +87,7 @@ Private Sub Form_Load()
     BloquearTxt Text1(0), (pModo <> 3 And pModo <> 4)
     Me.cmdActualizar.visible = (pModo = 3 Or pModo = 4)
     
-    SendKeys "^{END}"
+ '   SendKeys "^{END}"
+    CreateObject("WScript.Shell").SendKeys "^{END}"
+    
 End Sub

@@ -679,7 +679,7 @@ Attribute frmCla.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -707,11 +707,11 @@ Dim ConSubInforme As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub Check1_Click()
@@ -750,7 +750,7 @@ Dim nTabla As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -866,7 +866,7 @@ Dim nTabla As String
                 
                 indRPT = 72 ' informe de entradas
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 cadNombreRPT = nomDocu ' rAlmzExtSocEntradas.rpt
                 
@@ -881,10 +881,10 @@ Dim nTabla As String
             Case 1
                 If Check1.Value = 0 Then
                     ' no saltamos pagina por socio
-                    cadParam = cadParam & "pSoloTotales=" & Check3.Value & "|"
+                    CadParam = CadParam & "pSoloTotales=" & Check3.Value & "|"
                     numParam = numParam + 1
                     
-                    cadParam = cadParam & "pDetalleVariedad=" & Check4.Value & "|"
+                    CadParam = CadParam & "pDetalleVariedad=" & Check4.Value & "|"
                     numParam = numParam + 1
                     
                     cadNombreRPT = "rAlmzExtEntradas.rpt"
@@ -894,7 +894,7 @@ Dim nTabla As String
                     If vParamAplic.Cooperativa = 3 Then
                         indRPT = 35 ' extracto de entradas por socio Almazara
                         
-                        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                         
                         cadNombreRPT = nomDocu ' rAlmzExtSocEntradas.rpt
                     Else
@@ -1230,7 +1230,7 @@ Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
     cadSelect1 = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1258,7 +1258,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1268,7 +1268,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False

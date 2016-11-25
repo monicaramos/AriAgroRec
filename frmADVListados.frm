@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmADVListados 
    BorderStyle     =   3  'Fixed Dialog
@@ -1189,7 +1189,7 @@ Attribute frmTto.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -1208,11 +1208,11 @@ Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim PrimeraVez As Boolean
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub CmdAcepInsGastos_Click()
@@ -1234,7 +1234,7 @@ Dim vHayReg As Byte
     End If
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'D/H Parte
@@ -1289,12 +1289,12 @@ Dim vHayReg As Byte
 End Sub
 
 
-Private Function HayArticuloGastos(vTabla As String, vWhere As String) As Boolean
-Dim SQL As String
+Private Function HayArticuloGastos(vtabla As String, vWhere As String) As Boolean
+Dim Sql As String
 Dim cTabla As String
 Dim cWhere As String
 Dim CadPartes As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Cad As String
 
     On Error GoTo eHayArticuloGastos
@@ -1303,29 +1303,29 @@ Dim Cad As String
     HayArticuloGastos = False
 
 
-    cTabla = QuitarCaracterACadena(vTabla, "{")
-    cTabla = QuitarCaracterACadena(vTabla, "}")
-    SQL = "Select distinct advpartes.numparte FROM " & QuitarCaracterACadena(cTabla, "_1")
+    cTabla = QuitarCaracterACadena(vtabla, "{")
+    cTabla = QuitarCaracterACadena(vtabla, "}")
+    Sql = "Select distinct advpartes.numparte FROM " & QuitarCaracterACadena(cTabla, "_1")
     If vWhere <> "" Then
         cWhere = QuitarCaracterACadena(vWhere, "{")
         cWhere = QuitarCaracterACadena(vWhere, "}")
         cWhere = QuitarCaracterACadena(vWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
-        SQL = SQL & " and advpartes_lineas.codartic = " & DBSet(txtcodigo(13).Text, "T")
+        Sql = Sql & " WHERE " & cWhere
+        Sql = Sql & " and advpartes_lineas.codartic = " & DBSet(txtcodigo(13).Text, "T")
     End If
-    SQL = SQL & " order by 1 "
+    Sql = Sql & " order by 1 "
     
-    If TotalRegistrosConsulta(SQL) <> 0 Then
+    If TotalRegistrosConsulta(Sql) <> 0 Then
         CadPartes = ""
-        Set RS = New ADODB.Recordset
-        RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        While Not RS.EOF
-            CadPartes = CadPartes & DBLet(RS!Numparte, "N") & ", "
+        While Not Rs.EOF
+            CadPartes = CadPartes & DBLet(Rs!Numparte, "N") & ", "
         
-            RS.MoveNext
+            Rs.MoveNext
         Wend
-        Set RS = Nothing
+        Set Rs = Nothing
         
         Cad = "Los siguientes albaranes ya tienen un Artículo de Gastos. Revise. "
         Cad = Cad & vbCrLf & vbCrLf
@@ -1354,7 +1354,7 @@ Dim vHayReg As Byte
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     'D/H Parte
@@ -1424,7 +1424,7 @@ Dim vHayReg As Byte
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     ' Proceso de pago de partes de campo
@@ -1481,7 +1481,7 @@ End Sub
 Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -1495,7 +1495,7 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -1541,7 +1541,7 @@ InicializarVbles
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHTrata= """) Then Exit Sub
     End If
     
-    cadParam = cadParam & "pResumen=" & Check1.Value & "|"
+    CadParam = CadParam & "pResumen=" & Check1.Value & "|"
     numParam = numParam + 1
     
     Tabla = "(" & Tabla & ") inner join advfacturas on advfacturas_lineas.codtipom = advfacturas.codtipom and  advfacturas_lineas.numfactu = advfacturas.numfactu and advfacturas_lineas.fecfactu = advfacturas.fecfactu "
@@ -1589,20 +1589,20 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
     limpiar Me
 
     'IMAGES para busqueda
-     For h = 0 To 6
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-     Next h
+     For H = 0 To 6
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+     Next H
      
-     For h = 104 To 105
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-     Next h
+     For H = 104 To 105
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+     Next H
 
          
     indFrame = 5
@@ -1614,23 +1614,23 @@ Dim List As Collection
     
     Select Case OpcionListado
         Case 0 ' rendimiento por articulo
-            FrameCobrosVisible True, h, w
+            FrameCobrosVisible True, H, W
             Tabla = "advfacturas_lineas"
             Option1.Value = True
         
         Case 1 ' Proceso de Pago de Partes de adv
-            FramePagoPartesADVVisible True, h, w
+            FramePagoPartesADVVisible True, H, W
             indFrame = 0
             Tabla = "advfacturas_partes"
             
         Case 2 ' Asignacion de precios a albaranes de mogente (partes de adv)
-            FrameAsignacionPreciosVisible True, h, w
+            FrameAsignacionPreciosVisible True, H, W
             indFrame = 0
             Tabla = "advpartes"
         
         '[Monica]19/07/2013: insercion de gastos en los partes
         Case 3 ' Insercion de gastos a los albaranes de mogente ( partes de adv )
-            FrameInsercionGastosVisible True, h, w
+            FrameInsercionGastosVisible True, H, W
             indFrame = 0
             Tabla = "advpartes"
         
@@ -1638,9 +1638,9 @@ Dim List As Collection
     End Select
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(0).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.cmdCancel(0).Cancel = True
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
@@ -1815,19 +1815,19 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     End Select
 End Sub
 
-Private Sub FrameCobrosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameCobrosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
     Me.FrameCobros.visible = visible
     If visible = True Then
         Me.FrameCobros.Top = -90
         Me.FrameCobros.Left = 0
         Me.FrameCobros.Height = 7440 '4200
         Me.FrameCobros.Width = 6555
-        w = Me.FrameCobros.Width
-        h = Me.FrameCobros.Height
+        W = Me.FrameCobros.Width
+        H = Me.FrameCobros.Height
     End If
 End Sub
 
-Private Sub FramePagoPartesADVVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FramePagoPartesADVVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el calculo de horas productivas
     Me.FramePagoPartesADV.visible = visible
     If visible = True Then
@@ -1835,12 +1835,12 @@ Private Sub FramePagoPartesADVVisible(visible As Boolean, ByRef h As Integer, By
         Me.FramePagoPartesADV.Left = 0
         Me.FramePagoPartesADV.Height = 4455
         Me.FramePagoPartesADV.Width = 6345
-        w = Me.FramePagoPartesADV.Width
-        h = Me.FramePagoPartesADV.Height
+        W = Me.FramePagoPartesADV.Width
+        H = Me.FramePagoPartesADV.Height
     End If
 End Sub
 
-Private Sub FrameAsignacionPreciosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameAsignacionPreciosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el calculo de horas productivas
     Me.FrameAsignacionPrecios.visible = visible
     If visible = True Then
@@ -1848,13 +1848,13 @@ Private Sub FrameAsignacionPreciosVisible(visible As Boolean, ByRef h As Integer
         Me.FrameAsignacionPrecios.Left = 0
         Me.FrameAsignacionPrecios.Height = 5415
         Me.FrameAsignacionPrecios.Width = 6345
-        w = Me.FrameAsignacionPrecios.Width
-        h = Me.FrameAsignacionPrecios.Height
+        W = Me.FrameAsignacionPrecios.Width
+        H = Me.FrameAsignacionPrecios.Height
     End If
 End Sub
 
 
-Private Sub FrameInsercionGastosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameInsercionGastosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el calculo de horas productivas
     Me.FrameInsercionGastos.visible = visible
     If visible = True Then
@@ -1862,8 +1862,8 @@ Private Sub FrameInsercionGastosVisible(visible As Boolean, ByRef h As Integer, 
         Me.FrameInsercionGastos.Left = 0
         Me.FrameInsercionGastos.Height = 5415
         Me.FrameInsercionGastos.Width = 6345
-        w = Me.FrameInsercionGastos.Width
-        h = Me.FrameInsercionGastos.Height
+        W = Me.FrameInsercionGastos.Width
+        H = Me.FrameInsercionGastos.Height
     End If
 End Sub
 
@@ -1873,7 +1873,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1901,7 +1901,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1911,7 +1911,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -1948,21 +1948,21 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
-    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         HayRegistros = False
     Else
@@ -1971,8 +1971,8 @@ Dim RS As ADODB.Recordset
 
 End Function
 
-Private Function ProcesarCambios(cadwhere As String) As Boolean
-Dim SQL As String
+Private Function ProcesarCambios(cadWHERE As String) As Boolean
+Dim Sql As String
 Dim Sql1 As String
 Dim i As Integer
 Dim HayReg As Integer
@@ -1984,20 +1984,20 @@ On Error GoTo eProcesarCambios
     
     conn.Execute "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
         
-    If cadwhere <> "" Then
-        cadwhere = QuitarCaracterACadena(cadwhere, "{")
-        cadwhere = QuitarCaracterACadena(cadwhere, "}")
-        cadwhere = QuitarCaracterACadena(cadwhere, "_1")
+    If cadWHERE <> "" Then
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    SQL = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
-    SQL = SQL & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
-    SQL = SQL & " and albaran.numalbar = albaran_variedad.numalbar "
+    Sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
+    Sql = Sql & " and albaran.numalbar = albaran_variedad.numalbar "
     
-    If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
     
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -2009,9 +2009,9 @@ End Function
 
 
 Private Sub InsertaLineaEnTemporal(ByRef ItmX As ListItem)
-Dim SQL As String
+Dim Sql As String
 Dim Codmacta As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql1 As String
 
         Sql1 = "insert into tmpinformes(codusu, codigo1) values ("
@@ -2028,19 +2028,19 @@ Private Function DatosOk() As Boolean
 End Function
 
 Private Function ProcesoCargaHoras(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo eProcesoCargaHoras
     
     Screen.MousePointer = vbHourglass
     
-    SQL = "NOMADV" 'nominas de adv
+    Sql = "NOMADV" 'nominas de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Carga de Nóminas de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2050,54 +2050,54 @@ Dim RS As ADODB.Recordset
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, sum(advfacturas_trabajador.importel), sum(advfacturas_trabajador.horas) FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, sum(advfacturas_trabajador.importel), sum(advfacturas_trabajador.horas) FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " group by 1, 2"
-    SQL = SQL & " order by 1, 2"
+    Sql = Sql & " group by 1, 2"
+    Sql = Sql & " order by 1, 2"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
-    SQL = "insert into horas (codtraba, fechahora, horasdia, horasproduc, compleme,"
-    SQL = SQL & "intconta, pasaridoc, codalmac, nroparte) values "
+    Sql = "insert into horas (codtraba, fechahora, horasdia, horasproduc, compleme,"
+    Sql = Sql & "intconta, pasaridoc, codalmac, nroparte) values "
         
     Sql3 = ""
     vHayReg = 0
-    While Not RS.EOF
-        Sql2 = "select count(*) from horas where fechahora = " & DBSet(RS.Fields(1).Value, "F")
-        Sql2 = Sql2 & " and codtraba = " & DBSet(RS.Fields(0).Value, "N")
+    While Not Rs.EOF
+        Sql2 = "select count(*) from horas where fechahora = " & DBSet(Rs.Fields(1).Value, "F")
+        Sql2 = Sql2 & " and codtraba = " & DBSet(Rs.Fields(0).Value, "N")
         Sql2 = Sql2 & " and codalmac = " & DBSet(vParamAplic.AlmacenNOMI, "N")
         
         If TotalRegistros(Sql2) = 0 Then
             vHayReg = 1
             If vParamAplic.Cooperativa = 7 Then
-                Sql3 = Sql3 & "(" & DBSet(RS.Fields(0).Value, "N") & "," & DBSet(RS.Fields(1).Value, "F") & "," & DBSet(RS.Fields(3).Value, "N") & ",0,"
+                Sql3 = Sql3 & "(" & DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "F") & "," & DBSet(Rs.Fields(3).Value, "N") & ",0,"
                 Sql3 = Sql3 & "0,0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ","
                 Sql3 = Sql3 & ValorNulo & "),"
             Else
-                Sql3 = Sql3 & "(" & DBSet(RS.Fields(0).Value, "N") & "," & DBSet(RS.Fields(1).Value, "F") & ",0,0,"
-                Sql3 = Sql3 & DBSet(RS.Fields(2).Value, "N") & ",0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ","
+                Sql3 = Sql3 & "(" & DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "F") & ",0,0,"
+                Sql3 = Sql3 & DBSet(Rs.Fields(2).Value, "N") & ",0,0," & DBSet(vParamAplic.AlmacenNOMI, "N") & ","
                 Sql3 = Sql3 & ValorNulo & "),"
             End If
         End If
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     If Sql3 <> "" Then
         ' quitamos la ultima coma
         Sql3 = Mid(Sql3, 1, Len(Sql3) - 1)
-        SQL = SQL & Sql3
+        Sql = Sql & Sql3
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     DesBloqueoManual ("CARNOM") 'carga de nominas
@@ -2114,10 +2114,10 @@ End Function
 
 
 Private Function ProcesoAsignacionPrecios(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Nregs As Integer
 Dim Importe As Currency
 
@@ -2126,10 +2126,10 @@ Dim Importe As Currency
     
     Screen.MousePointer = vbHourglass
     
-    SQL = "PREADV" 'precios de adv
+    Sql = "PREADV" 'precios de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Asignacion de Precios de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2151,50 +2151,50 @@ Dim Importe As Currency
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select advpartes_lineas.numparte, advpartes_lineas.numlinea, advpartes_lineas.codartic, advartic.preciove, advtrata.tipoprecio, advpartes_lineas.dosishab bultos, advpartes_lineas.cantidad FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select advpartes_lineas.numparte, advpartes_lineas.numlinea, advpartes_lineas.codartic, advartic.preciove, advtrata.tipoprecio, advpartes_lineas.dosishab bultos, advpartes_lineas.cantidad FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " order by 1, 2"
+    Sql = Sql & " order by 1, 2"
     
-    Nregs = TotalRegistrosConsulta(SQL)
+    Nregs = TotalRegistrosConsulta(Sql)
     
     Me.Pb1.visible = True
     CargarProgres Pb1, Nregs
     Me.Refresh
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     vHayReg = 0
-    While Not RS.EOF
+    While Not Rs.EOF
         vHayReg = 1
     
         IncrementarProgres Pb1, 1
         Me.Refresh
     
-        If DBLet(RS!TipoPrecio) = 0 Then ' cantidad
-            Importe = Round2(DBLet(RS!preciove) * DBLet(RS!cantidad), 2)
+        If DBLet(Rs!TipoPrecio) = 0 Then ' cantidad
+            Importe = Round2(DBLet(Rs!preciove) * DBLet(Rs!cantidad), 2)
         Else ' bultos
-            Importe = Round2(DBLet(RS!preciove) * DBLet(RS!bultos), 2)
+            Importe = Round2(DBLet(Rs!preciove) * DBLet(Rs!bultos), 2)
         End If
     
         Sql3 = "update advpartes_lineas set importel = " & DBSet(Importe, "N")
-        Sql3 = Sql3 & " ,preciove = " & DBSet(RS!preciove, "N")
-        Sql3 = Sql3 & " where numparte = " & DBSet(RS!Numparte, "N")
-        Sql3 = Sql3 & " and numlinea = " & DBSet(RS!numlinea, "N")
+        Sql3 = Sql3 & " ,preciove = " & DBSet(Rs!preciove, "N")
+        Sql3 = Sql3 & " where numparte = " & DBSet(Rs!Numparte, "N")
+        Sql3 = Sql3 & " and numlinea = " & DBSet(Rs!numlinea, "N")
         
         conn.Execute Sql3
     
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     conn.CommitTrans
     
@@ -2217,24 +2217,24 @@ End Function
 
 
 Private Function ProcesoInsercionGastos(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Nregs As Integer
 Dim Importe As Currency
 Dim Precio As Currency
-Dim CodIVA As Integer
+Dim CodIva As Integer
 Dim CadValues As String
 
     On Error GoTo eProcesoInsercionGastos
     
     Screen.MousePointer = vbHourglass
     
-    SQL = "INSADV" 'insercion de gastos de adv
+    Sql = "INSADV" 'insercion de gastos de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar el proceso de Inserción de Gastos de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2252,51 +2252,51 @@ Dim CadValues As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select advpartes.numparte, max(advpartes_lineas.numlinea) + 1  numlinea, sum(advpartes_lineas.dosishab) bultos FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select advpartes.numparte, max(advpartes_lineas.numlinea) + 1  numlinea, sum(advpartes_lineas.dosishab) bultos FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " group by 1 "
-    SQL = SQL & " order by 1 "
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " order by 1 "
     
-    Nregs = TotalRegistrosConsulta(SQL)
+    Nregs = TotalRegistrosConsulta(Sql)
     
-    Me.Pb2.visible = True
-    CargarProgres Pb2, Nregs
+    Me.pb2.visible = True
+    CargarProgres pb2, Nregs
     Me.Refresh
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     Precio = DevuelveDesdeBDNew(cAgro, "advartic", "preciove", "codartic", txtcodigo(13).Text, "T")
-    CodIVA = DevuelveDesdeBDNew(cAgro, "advartic", "codigiva", "codartic", txtcodigo(13).Text, "T")
+    CodIva = DevuelveDesdeBDNew(cAgro, "advartic", "codigiva", "codartic", txtcodigo(13).Text, "T")
         
     Sql3 = "insert into advpartes_lineas (numparte,numlinea,codalmac,codartic,dosishab,cantidad,preciove,importel,ampliaci,codigiva) values "
         
     vHayReg = 0
     CadValues = ""
-    While Not RS.EOF
+    While Not Rs.EOF
         vHayReg = 1
     
-        IncrementarProgres Pb2, 1
+        IncrementarProgres pb2, 1
         DoEvents
     
-        Importe = Round2(Precio * DBLet(RS!bultos), 2)
+        Importe = Round2(Precio * DBLet(Rs!bultos), 2)
     
-        CadValues = CadValues & "(" & DBSet(RS!Numparte, "N") & "," & DBSet(RS!numlinea, "N") & "," & vParamAplic.AlmacenADV & ","
-        CadValues = CadValues & DBSet(txtcodigo(13).Text, "T") & "," & DBSet(RS!bultos, "N") & "," & DBSet(RS!bultos, "N") & ","
+        CadValues = CadValues & "(" & DBSet(Rs!Numparte, "N") & "," & DBSet(Rs!numlinea, "N") & "," & vParamAplic.AlmacenADV & ","
+        CadValues = CadValues & DBSet(txtcodigo(13).Text, "T") & "," & DBSet(Rs!bultos, "N") & "," & DBSet(Rs!bultos, "N") & ","
         CadValues = CadValues & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & "," & ValorNulo & ","
-        CadValues = CadValues & DBSet(CodIVA, "N") & "),"
+        CadValues = CadValues & DBSet(CodIva, "N") & "),"
     
     
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
     If CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
@@ -2309,12 +2309,12 @@ Dim CadValues As String
     Screen.MousePointer = vbDefault
     
     ProcesoInsercionGastos = True
-    Me.Pb2.visible = False
+    Me.pb2.visible = False
     Exit Function
     
 eProcesoInsercionGastos:
     Screen.MousePointer = vbDefault
-    Me.Pb2.visible = False
+    Me.pb2.visible = False
     MuestraError Err.Number, "Proceso de Inserción de Gastos", Err.Description
 End Function
 

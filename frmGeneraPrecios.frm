@@ -562,7 +562,7 @@ Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
 Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en los listados
                         'Se necesita si el tipo de codigo es texto
 
-Public Event RectificarFactura(cliente As String, Observaciones As String)
+Public Event RectificarFactura(Cliente As String, Observaciones As String)
 
 Private Conexion As Byte
 '1.- Conexión a BD Ariges  2.- Conexión a BD Conta
@@ -586,7 +586,7 @@ Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -609,11 +609,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -674,15 +674,15 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
     limpiar Me
 
-    For h = 0 To imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
+    For H = 0 To imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
     
     Tabla = "rcalidad"
     
@@ -693,20 +693,20 @@ Dim List As Collection
     
     Select Case OpcionGenerar
         Case 0
-            h = FrameGeneraPreciosMasiva.Height
-            w = FrameGeneraPreciosMasiva.Width
-            PonerFrameVisible FrameGeneraPreciosMasiva, True, h, w
+            H = FrameGeneraPreciosMasiva.Height
+            W = FrameGeneraPreciosMasiva.Width
+            PonerFrameVisible FrameGeneraPreciosMasiva, True, H, W
         Case 1
-            h = FrameCopiaVariedad.Height
-            w = FrameCopiaVariedad.Width
-            PonerFrameVisible FrameCopiaVariedad, True, h, w
+            H = FrameCopiaVariedad.Height
+            W = FrameCopiaVariedad.Width
+            PonerFrameVisible FrameCopiaVariedad, True, H, W
     End Select
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
@@ -858,7 +858,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -886,7 +886,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -896,7 +896,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -923,7 +923,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -960,7 +960,7 @@ Private Function DatosOk() As Boolean
 Dim b As Boolean
 Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
@@ -1302,7 +1302,7 @@ End Function
 Private Function InsertarCabecera(cadErr As String, Contador As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Cad As String
 Dim NumF As Currency
 
@@ -1333,29 +1333,29 @@ Private Function InsertarLineas(cadErr As String, Contador As String) As Boolean
 Dim Sql As String
 Dim Cad As String
 Dim Cad1 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EInLinea
 
     Sql = "select codcalid from rcalidad where codvarie = " & DBSet(txtcodigo(0).Text, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     Cad = "insert into rprecios_calidad (codvarie, tipofact, contador, codcalid, precoop, presocio) values "
     
     Cad1 = ""
     
-    While Not RS.EOF
+    While Not Rs.EOF
         Cad1 = Cad1 & "(" & DBSet(txtcodigo(0).Text, "N") & "," & DBSet(Combo1(0).ListIndex, "N") & ","
         Cad1 = Cad1 & DBSet(Contador, "N") & ","
-        Cad1 = Cad1 & DBSet(RS.Fields(0).Value, "N") & ","
+        Cad1 = Cad1 & DBSet(Rs.Fields(0).Value, "N") & ","
         Cad1 = Cad1 & DBSet(txtcodigo(3).Text, "N") & ","
         Cad1 = Cad1 & DBSet(txtcodigo(4).Text, "N") & "),"
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     
     If Cad1 <> "" Then
         ' quitamos la ultima coma

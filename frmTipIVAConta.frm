@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmTipIVAConta 
@@ -638,7 +638,7 @@ Private WithEvents frmCtas As frmCtasConta 'Cuentas contables de la Contabilidad
 Attribute frmCtas.VB_VarHelpID = -1
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 Dim PrimeraVez As Boolean
 Dim Modo As Byte
@@ -662,7 +662,7 @@ Dim i As Byte
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, Me.adodc1, cadB
+        PonerContRegIndicador lblIndicador, Me.adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -744,7 +744,7 @@ Dim NumF As String
 Dim anc As Single
 Dim i As Byte
     CargaGrid 'primer de tot carregue tot el grid
-    cadB = ""
+    CadB = ""
     '********* canviar taula i camp; repasar codEmpre ************
     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
         NumF = NuevoCodigo
@@ -791,7 +791,7 @@ End Sub
 
 Private Sub BotonVerTodos()
     CargaGrid ""
-    cadB = ""
+    CadB = ""
     PonerModo 2
 End Sub
 
@@ -812,7 +812,7 @@ Dim i As Byte
 End Sub
 
 Private Sub BotonModificar()
-    Dim cad As String
+    Dim Cad As String
     Dim anc As Single
     Dim i As Integer, J As Integer
     Screen.MousePointer = vbHourglass
@@ -863,7 +863,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -878,18 +878,18 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*** canviar la pregunta, els noms dels camps i el DELETE; repasar codEmpre ***
-    SQL = "¿Seguro que desea eliminar el Tipo de Iva?"
+    Sql = "¿Seguro que desea eliminar el Tipo de Iva?"
     'SQL = SQL & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), "000")
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'N'hi ha que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from tiposiva where codigiva = " & adodc1.Recordset!Codigiva
+        Sql = "Delete from tiposiva where codigiva = " & adodc1.Recordset!Codigiva
         
-        conn.Execute SQL
-        CargaGrid cadB
+        conn.Execute Sql
+        CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "RESULTADO BUSQUEDA"
@@ -932,7 +932,7 @@ Dim i As Integer
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -943,7 +943,7 @@ Dim i As Integer
                     i = adodc1.Recordset.AbsolutePosition
                     TerminaBloquear
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
 '                    If CadB <> "" Then
 '                        CargaGrid CadB
 '                        lblIndicador.Caption = "RESULTADO BUSQUEDA"
@@ -958,9 +958,9 @@ Dim i As Integer
             
     
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda(Me)
-            If cadB <> "" Then
-                CargaGrid cadB
+            CadB = ObtenerBusqueda(Me)
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -975,7 +975,7 @@ Private Sub cmdCancelar_Click()
 
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'INSERTAR
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -1004,7 +1004,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -1013,7 +1013,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -1021,10 +1021,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1077,7 +1077,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
 '        End If
 '    End If
-    If Modo = 2 Then PonerContRegIndicador lblIndicador, Me.adodc1, cadB
+    If Modo = 2 Then PonerContRegIndicador lblIndicador, Me.adodc1, CadB
 End Sub
 
 Private Sub LimpiarCampos()
@@ -1150,7 +1150,7 @@ Dim i As Integer
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT codigiva,nombriva,porceiva,tipodiva,CASE tipodiva WHEN 0 THEN ""IVA"" WHEN 1 THEN ""IGIC"" WHEN 2 THEN ""BIEN DE INVERSIÓN"" WHEN 3 THEN ""R.E.A."" END,porcerec,cuentare,cuentarr,cuentaso,cuentasr,cuentasn FROM tiposiva "
     '************************************************************************
-    cadB = ""
+    CadB = ""
     CargaGrid
     
 '    If (DatosADevolverBusqueda <> "") Then 'And NuevoCodigo <> "" Then
@@ -1237,7 +1237,7 @@ End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
     Dim i As Integer
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
     On Error GoTo ECargaGRid
@@ -1247,14 +1247,14 @@ Private Sub CargaGrid(Optional vSQL As String)
         adodc1.ConnectionString = conn
     End If
     
-    SQL = CadenaConsulta '& " WHERE " & WhereSel
-    If vSQL <> "" Then SQL = SQL & " WHERE " & vSQL
+    Sql = CadenaConsulta '& " WHERE " & WhereSel
+    If vSQL <> "" Then Sql = Sql & " WHERE " & vSQL
 
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY codigiva"
+    Sql = Sql & " ORDER BY codigiva"
     '**************************************************************++
     
-    adodc1.RecordSource = SQL
+    adodc1.RecordSource = Sql
     adodc1.CursorType = adOpenDynamic
     adodc1.LockType = adLockOptimistic
     DataGrid1.ScrollBars = dbgNone
@@ -1357,11 +1357,11 @@ End Function
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 And Modo = 2 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -1374,8 +1374,8 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "tiposiva"
         .Informe2 = "rTiposIVA.rpt"
-        If cadB <> "" Then
-            .cadRegSelec = SQL2SF(cadB)
+        If CadB <> "" Then
+            .cadRegSelec = SQL2SF(CadB)
         Else
             .cadRegSelec = ""
         End If
@@ -1407,8 +1407,8 @@ Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim b As Boolean
 ' *** només per ad este manteniment ***
-Dim RS As Recordset
-Dim cad As String
+Dim Rs As Recordset
+Dim Cad As String
 'Dim exped As String
 ' *************************************
 

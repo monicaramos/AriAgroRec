@@ -1619,11 +1619,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -2270,7 +2270,7 @@ Dim List As Collection
         FrameTomaDatosVisible True, H, W
         Tabla = "rcampos"
         Me.Label3.Caption = "Informe de Toma de Datos"
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         CargaCombo
         txtcodigo(3).Text = "Listado de Kilos Estimados"
         
@@ -2278,7 +2278,7 @@ Dim List As Collection
         FrameDesviacionAforosVisible True, H, W
         Tabla = "rcampos"
         Me.Label3.Caption = "Informe de Desviación de Aforos"
-        Me.pb1.visible = False
+        Me.Pb1.visible = False
         
     Case 3   '3 - Informe de Clasificación de Socios
         FrameClasificacionVisible True, H, W

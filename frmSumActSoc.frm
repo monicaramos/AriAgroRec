@@ -319,11 +319,11 @@ Dim Tipo As Byte
 Dim Nregs As Long
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -678,7 +678,7 @@ Dim Sql4 As String
                 Sql2 = "update " & vParamAplic.BDAriges & ".sclien "
                 Sql2 = Sql2 & " set nomclien = " & DBSet(Rs!nomsocio, "T")
                 Sql2 = Sql2 & ", domclien = " & DBSet(Rs!dirsocio, "T")
-                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!CodPostal, "T")
+                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!codpostal, "T")
                 Sql2 = Sql2 & ", pobclien = " & DBSet(Rs!pobsocio, "T")
                 Sql2 = Sql2 & ", proclien = " & DBSet(Rs!prosocio, "T")
                 Sql2 = Sql2 & ", nifclien = " & DBSet(Rs!nifSocio, "T")
@@ -730,7 +730,7 @@ Dim Sql4 As String
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nomclien
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nombre comercial
                 Sql2 = Sql2 & DBSet(Rs!dirsocio, "T") & "," 'direccion
-                Sql2 = Sql2 & DBSet(Rs!CodPostal, "T") & "," 'codigo postal
+                Sql2 = Sql2 & DBSet(Rs!codpostal, "T") & "," 'codigo postal
                 Sql2 = Sql2 & DBSet(Rs!pobsocio, "T") & "," 'poblacion
                 Sql2 = Sql2 & DBSet(DBLet(Rs!prosocio, "T"), "T", "N") & "," 'provincia
                 Sql2 = Sql2 & DBSet(Rs!nifSocio, "T") & "," 'nifsocio

@@ -194,7 +194,7 @@ Dim Neto As String
 Dim CPobla As String
 Dim CPostal As String
 Dim FechaEnt As String
-Dim poligono As String
+Dim Poligono As String
 Dim Parcela As String
 Dim Subparcela As String
 Dim Tara As String
@@ -215,11 +215,11 @@ Dim VariedadesNoExisten As String
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -705,7 +705,7 @@ Dim cadena As String
     CargarVariables Cad
     
     ' insertamos la entrada
-    cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
+    cadena = vUsu.Codigo & "," & NumNota & "," & DBSet(FechaEnt, "F") & "," & DBSet(Socio, "N") & "," & DBSet(Variedad, "N") & "," & DBSet(Poligono, "N", "S") & "," & DBSet(Parcela, "N", "S") & "," & DBSet(Subparcela, "N", "S")
     cadena = cadena & "," & DBSet(ComprobarCero(Bruto) - ComprobarCero(Tara), "N")
     
     Sql = "insert into tmpinformes (codusu, importe1, fecha1, importe2, importe3, importe4, importe5, nombre1, importeb1) values "
@@ -1244,7 +1244,7 @@ Dim cadena As String
      ' comprobaciones para poder insertar la entrada
     cadena = ""
     ' comprobamos que me han puesto los datos de busqueda de parcela
-    If poligono = "" And Parcela = "" And Subparcela = "" Then
+    If Poligono = "" And Parcela = "" And Subparcela = "" Then
         Mens = "No hay datos de campo"
         Sql = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
@@ -1254,7 +1254,7 @@ Dim cadena As String
         conn.Execute Sql
 
     Else
-        cadena = Format(CCur(poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+        cadena = Format(CCur(Poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
     End If
     
 ' de momento lo quito pq hay una comprobacion previa que impide hacer nada si no existen los socios y variedades
@@ -1294,15 +1294,15 @@ Dim cadena As String
     ' comprobamos que el campo existe
 '    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0  And ComprobarCero(Subparcela) <> 0 Then
     Sql = "select codcampo from rcampos where (1=1) "
-    If ComprobarCero(poligono) <> 0 And ComprobarCero(Parcela) <> 0 Then
-        Sql = Sql & " and poligono = " & DBSet(poligono, "N")
+    If ComprobarCero(Poligono) <> 0 And ComprobarCero(Parcela) <> 0 Then
+        Sql = Sql & " and poligono = " & DBSet(Poligono, "N")
         Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
         If ComprobarCero(Subparcela) <> 0 Then Sql = Sql & " and subparce = " & DBSet(Subparcela, "N")
 
         'si no existe el campo lo creamos
         If DevuelveValor(Sql) = 0 Then
             Set frmMens = New frmMensajes
-            frmMens.cadena = Socio & "|" & Variedad & "|" & poligono & "|" & Parcela & "|" & Subparcela & "|"
+            frmMens.cadena = Socio & "|" & Variedad & "|" & Poligono & "|" & Parcela & "|" & Subparcela & "|"
             frmMens.OpcionMensaje = 62
             frmMens.Show vbModal
             Set frmMens = Nothing
@@ -1442,7 +1442,7 @@ Private Sub CargarVariables(Cad As String)
         Bruto = ""
         Variedad = ""
         Socio = ""
-        poligono = ""
+        Poligono = ""
         Parcela = ""
         Subparcela = ""
         Tara = ""
@@ -1453,7 +1453,7 @@ Private Sub CargarVariables(Cad As String)
         Bruto = RecuperaValorNew(Cad, ";", 5)
         Variedad = RecuperaValorNew(Cad, ";", 6)
         Socio = RecuperaValorNew(Cad, ";", 7)
-        poligono = RecuperaValorNew(Cad, ";", 16)
+        Poligono = RecuperaValorNew(Cad, ";", 16)
         Parcela = RecuperaValorNew(Cad, ";", 18)
         Subparcela = RecuperaValorNew(Cad, ";", 19)
         Tara = RecuperaValorNew(Cad, ";", 21)
@@ -1468,7 +1468,7 @@ Private Sub CargarVariables(Cad As String)
         Socio = ""
         Bruto = ""
         CPobla = "46640"
-        poligono = ""
+        Poligono = ""
         Parcela = ""
         
         FechaEnt = ""
@@ -1480,7 +1480,7 @@ Private Sub CargarVariables(Cad As String)
         VV = Mid(Cad, 53, 9)
         Variedad = Format(CCur(VV), "000000")
         Bruto = Mid(Cad, 23, 7)
-        poligono = Mid(Cad, 146, 8) '[Monica]07/12/2011: antes 136
+        Poligono = Mid(Cad, 146, 8) '[Monica]07/12/2011: antes 136
         Parcela = Mid(Cad, 154, 8)  '[Monica]07/12/2011: antes 144
         
         FechaEnt = Mid(Cad, 15, 8)
@@ -1496,7 +1496,7 @@ Dim Mens As String
 Dim Sql As String
 
     If CadenaSeleccion = "" Then
-        cadena = Format(ComprobarCero(poligono), "0000") & "-" & Format(ComprobarCero(Parcela), "0000") & "-" & Subparcela
+        cadena = Format(ComprobarCero(Poligono), "0000") & "-" & Format(ComprobarCero(Parcela), "0000") & "-" & Subparcela
     
         Mens = "No se creó el Campo "
         Sql = "insert into tmpinformes (codusu, importe1,  " & _

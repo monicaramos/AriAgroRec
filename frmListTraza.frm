@@ -264,7 +264,7 @@ Attribute frmProd.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -282,17 +282,17 @@ Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim Indice As Integer
+Dim indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -307,15 +307,15 @@ End Sub
 
 
 Private Sub CmdAcepInsAboca_Click()
-Dim SQL As String
+Dim Sql As String
 
     If Not DatosOk Then Exit Sub
     
-    SQL = "INSABO" 'insertar abocamiento
+    Sql = "INSABO" 'insertar abocamiento
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar este proceso. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -331,7 +331,7 @@ Dim SQL As String
 End Sub
 
 Private Function InsertarAbocamiento() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim IdPalet As Long
 Dim FechaHora As String
 Dim LOG As cLOG
@@ -340,36 +340,36 @@ Dim LOG As cLOG
         
     InsertarAbocamiento = False
     
-    SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
-    IdPalet = DevuelveValor(SQL)
+    Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
+    IdPalet = DevuelveValor(Sql)
     
     conn.BeginTrans
         
-    FechaHora = Format(txtCodigo(16).Text, "yyyy-mm-dd") & " " & Format(txtCodigo(15).Text, FormatoHora)
+    FechaHora = Format(txtcodigo(16).Text, "yyyy-mm-dd") & " " & Format(txtcodigo(15).Text, FormatoHora)
     
     ' Insertamos el abocamiento
-    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
-    SQL = SQL & DBSet(txtCodigo(14).Text, "N") & ","
-    SQL = SQL & DBSet(IdPalet, "N") & ","
-    SQL = SQL & "'" & Trim(FechaHora) & "',"
-    SQL = SQL & DBSet(txtCodigo(16).Text, "F") & ",0) "
+    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
+    Sql = Sql & DBSet(txtcodigo(14).Text, "N") & ","
+    Sql = Sql & DBSet(IdPalet, "N") & ","
+    Sql = Sql & "'" & Trim(FechaHora) & "',"
+    Sql = Sql & DBSet(txtcodigo(16).Text, "F") & ",0) "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtCodigo(13).Text) & " " & vbCrLf & SQL
+    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtcodigo(13).Text) & " " & vbCrLf & Sql
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
     
     
     ' liberamos la tarjeta CRFID
-    SQL = "update trzpalets set crfid = " & ValorNulo
-    SQL = SQL & " where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
-    SQL = SQL & " and idpalet = " & DBSet(IdPalet, "N")
+    Sql = "update trzpalets set crfid = " & ValorNulo
+    Sql = Sql & " where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
+    Sql = Sql & " and idpalet = " & DBSet(IdPalet, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     
@@ -395,14 +395,14 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 1 ' abocamiento manual de una linea
-                PonerFoco txtCodigo(16)
+                PonerFoco txtcodigo(16)
         End Select
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -410,12 +410,12 @@ Dim List As Collection
 
     'IMAGES para busqueda
     Set List = New Collection
-    For h = 24 To 27
-        List.Add h
-    Next h
-    For h = 1 To 10
-        List.Add h
-    Next h
+    For H = 24 To 27
+        List.Add H
+    Next H
+    For H = 1 To 10
+        List.Add H
+    Next H
     List.Add 12
     List.Add 13
     List.Add 14
@@ -438,72 +438,72 @@ Dim List As Collection
     'LISTADOS DE MANTENIMIENTOS BASICOS
     '---------------------
     Case 1  ' Insercion en la tabla de abocamientos
-        FrameAbocamientoVisible True, h, w
+        FrameAbocamientoVisible True, H, W
         Tabla = "trzlineas_cargas"
         
     
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmProd_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -524,7 +524,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmProducto (Index)
         
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 
@@ -554,17 +554,17 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 9
-            Indice = 16
+            indice = 16
     End Select
 
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
+    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(Indice) '<===
+    PonerFoco txtcodigo(indice) '<===
     ' ********************************************
 
 End Sub
@@ -580,7 +580,7 @@ Private Sub Option4_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -603,22 +603,22 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (Indice)
+    imgBuscar_Click (indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgFec_Click (Indice)
+    imgFec_Click (indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 Dim b As Boolean
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -627,41 +627,41 @@ Dim b As Boolean
 
     Select Case Index
         Case 6, 7, 8
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
         
         Case 60, 61 'productos
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "productos", "nomprodu", "codprodu", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "productos", "nomprodu", "codprodu", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
         Case 9, 10, 17, 24, 25   'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             
         Case 2, 3, 4, 5, 30, 31, 11, 12, 16 'FECHAS
             b = True
-            If txtCodigo(Index).Text <> "" Then
-                b = PonerFormatoFecha(txtCodigo(Index))
+            If txtcodigo(Index).Text <> "" Then
+                b = PonerFormatoFecha(txtcodigo(Index))
             End If
             
         Case 0, 1, 28, 29 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
             
         Case 18, 19 ' variedades
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
         Case 15 ' hora
-            PonerFormatoHora txtCodigo(Index)
+            PonerFormatoHora txtcodigo(Index)
             
         Case 14 'linea de abocamiento
-            PonerFormatoEntero txtCodigo(Index)
+            PonerFormatoEntero txtcodigo(Index)
         
         
     End Select
 End Sub
 
-Private Sub FrameAbocamientoVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameAbocamientoVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el listado de diferencias de produccion
     Me.FrameAbocamiento.visible = visible
     If visible = True Then
@@ -669,15 +669,15 @@ Private Sub FrameAbocamientoVisible(visible As Boolean, ByRef h As Integer, ByRe
         Me.FrameAbocamiento.Left = 0
         Me.FrameAbocamiento.Height = 4170
         Me.FrameAbocamiento.Width = 6015
-        w = Me.FrameAbocamiento.Width
-        h = Me.FrameAbocamiento.Height
+        W = Me.FrameAbocamiento.Width
+        H = Me.FrameAbocamiento.Height
     End If
 End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -705,7 +705,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -715,7 +715,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -727,8 +727,8 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmCalidad(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmCalidad(indice As Integer)
+    indCodigo = indice
     Set frmCal = New frmManCalidades
     frmCal.DatosADevolverBusqueda = "2|3|"
 '    frmCli.DeConsulta = True
@@ -737,16 +737,16 @@ Private Sub AbrirFrmCalidad(Indice As Integer)
     Set frmCal = Nothing
 End Sub
 
-Private Sub AbrirFrmArea(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmArea(indice As Integer)
+    indCodigo = indice
     Set frmArea = New frmTrzAreas
     frmArea.DatosADevolverBusqueda = "0|1|"
     frmArea.Show vbModal
     Set frmArea = Nothing
 End Sub
 
-Private Sub AbrirFrmSocios(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmSocios(indice As Integer)
+    indCodigo = indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
@@ -755,45 +755,45 @@ Private Sub AbrirFrmSocios(Indice As Integer)
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmSituacion(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmSituacion(indice As Integer)
+    indCodigo = indice
     Set frmSit = New frmManSituCamp
     frmSit.DatosADevolverBusqueda = "0|1|"
     frmSit.Show vbModal
     Set frmSit = Nothing
 End Sub
 
-Private Sub AbrirFrmSocio(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmSocio(indice As Integer)
+    indCodigo = indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmClase(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmClase(indice As Integer)
+    indCodigo = indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtCodigo(Indice).Text
+    AyudaClasesCom frmCla, txtcodigo(indice).Text
         
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(Indice As Integer)
-    indCodigo = Indice
+Private Sub AbrirFrmVariedad(indice As Integer)
+    indCodigo = indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
     Set frmVar = Nothing
 End Sub
 
-Private Sub AbrirFrmProducto(Indice As Integer)
+Private Sub AbrirFrmProducto(indice As Integer)
     
-    indCodigo = Indice + 58
+    indCodigo = indice + 58
     Set frmProd = New frmComercial
     
-    AyudaProductosCom frmProd, txtCodigo(indCodigo).Text
+    AyudaProductosCom frmProd, txtcodigo(indCodigo).Text
     
     Set frmProd = Nothing
     
@@ -809,7 +809,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -844,9 +844,9 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
@@ -855,43 +855,43 @@ Dim Fecha As Date
 Dim vCont As CTiposMov
 Dim tipoMov As String
 
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     b = True
     
     Select Case OpcionListado
         Case 1
             ' abocamiento manual de una entrada ( inserción en trzlineas_cargas )
-            If txtCodigo(16).Text = "" Then
+            If txtcodigo(16).Text = "" Then
                 MsgBox "Debe introducir la fecha de abocamiento.", vbExclamation
-                PonerFoco txtCodigo(16)
+                PonerFoco txtcodigo(16)
                 b = False
             End If
-            If txtCodigo(15).Text = "" Then
+            If txtcodigo(15).Text = "" Then
                 MsgBox "Debe introducir la hora de abocamiento.", vbExclamation
-                PonerFoco txtCodigo(15)
+                PonerFoco txtcodigo(15)
                 b = False
             End If
-            If txtCodigo(13).Text = "" Then
+            If txtcodigo(13).Text = "" Then
                 MsgBox "Debe introducir el Nro de CRFID.", vbExclamation
-                PonerFoco txtCodigo(13)
+                PonerFoco txtcodigo(13)
                 b = False
             End If
-            If txtCodigo(14).Text = "" Then
+            If txtcodigo(14).Text = "" Then
                 MsgBox "Debe introducir la linea de abocamiento.", vbExclamation
-                PonerFoco txtCodigo(14)
+                PonerFoco txtcodigo(14)
                 b = False
             End If
             
             ' Comprobamos que el nro de tarjeta no esté liberada
             If b Then
-                SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+                Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
                 
-                Set RS = New ADODB.Recordset
-                RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                If RS.EOF Then
+                Set Rs = New ADODB.Recordset
+                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                If Rs.EOF Then
                     MsgBox "El CRFID introducido no se encuentra asignado a ninguna entrada. Reintroduzca.", vbExclamation
-                    PonerFoco txtCodigo(13)
+                    PonerFoco txtcodigo(13)
                     b = False
                 End If
             End If
@@ -902,34 +902,34 @@ End Function
 
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
-    Set RS = New ADODB.Recordset
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Set Rs = New ADODB.Recordset
     
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
-    While Not RS.EOF
-        Sql1 = Sql1 & DBLet(RS.Fields(0).Value, "N") & ","
-        RS.MoveNext
+    While Not Rs.EOF
+        Sql1 = Sql1 & DBLet(Rs.Fields(0).Value, "N") & ","
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     'quitamos el ultimo or
     ConcatenarCampos = Mid(Sql1, 1, Len(Sql1) - 1)
     
@@ -938,18 +938,18 @@ End Function
 
 
 Private Function YaEstaPalet(codpalet As Long, Palet As Long) As Boolean
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
     
-    SQL = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
+    Sql = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
             " and palet = " & CStr(Palet)
             
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    YaEstaPalet = Not RS.EOF
+    YaEstaPalet = Not Rs.EOF
 
-    Set RS = Nothing
+    Set Rs = Nothing
 
 End Function
 

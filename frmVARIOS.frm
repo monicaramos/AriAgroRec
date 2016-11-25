@@ -364,11 +364,11 @@ Dim Contabilizada As Byte
 Dim vSeccion As CSeccion
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -406,7 +406,7 @@ Dim RstaGlobal As Boolean
         KilosDestrio = Round(Rs!KilosNet * Rs!pordestrio / 100, 0)
         KilosPixat = Round(Rs!KilosNet * Rs!PORPIXAT / 100, 0)
         
-        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcalid = 5")
+        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!CodVarie, "N") & " and codcalid = 5")
         
         
         Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " order by codvarie, codcalid "
@@ -434,7 +434,7 @@ Dim RstaGlobal As Boolean
             
            
             Sql3 = " where numalbar = " & DBSet(Rs!numalbar, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             Rs2.MoveNext
             

@@ -957,7 +957,7 @@ Dim b As Boolean
 '    Combo1(0).Enabled = Not b
 '
     
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -1277,7 +1277,7 @@ Private Sub cmdAceptar_Click()
                 
 ' De momento lo dejo comentado, pq no se permite crear la cuenta desde el transportista
 '                    '[Monica]08/11/2016: Si han cambiado nombre o CCC pregunto si quieren cambiar los datos de la cuenta en la seccion de horto
-'                    ModificarDatosCuentaContable
+                    ModificarDatosCuentaContable
                 
                 
                     i = adodc1.Recordset.Fields(0)
@@ -1888,12 +1888,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub CargaCombo()
@@ -2072,7 +2071,9 @@ Dim Sql As String
         
             If txtAux1(Index).Text <> "" Then txtAux2(Index).Text = PonerNombreCuenta(txtAux1(Index), 2)
             If txtAux2(Index).Text = "" Then
-                MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
+                ' ahora se crea
+                txtAux2(Index).Text = PonerNombreCuenta(txtAux1(Index), 3, txtAux(0).Text)
+                'MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
             
         Case 6 'iva

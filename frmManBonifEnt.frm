@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManBonifEnt 
@@ -451,7 +451,7 @@ Attribute frmC1.VB_VarHelpID = -1
 
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 
 
@@ -475,7 +475,7 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -488,7 +488,7 @@ Dim b As Boolean
     btnBuscar(0).visible = Not b
     btnBuscar(1).visible = Not b
     
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -572,7 +572,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    cadB = ""
+    CadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -665,9 +665,9 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!codvarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
+        Sql = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!CodVarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
         conn.Execute Sql
-        CargaGrid cadB
+        CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
@@ -756,9 +756,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda(Me)
-            If cadB <> "" Then
-                CargaGrid cadB
+            CadB = ObtenerBusqueda(Me)
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -767,7 +767,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid cadB
+                    CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -778,7 +778,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -788,7 +788,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
                     adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
@@ -801,7 +801,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -850,7 +850,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, cadB
+    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, CadB
 End Sub
 
 Private Sub Form_Activate()
@@ -904,7 +904,7 @@ Private Sub Form_Load()
     
     '************************************************************************
     
-    cadB = ""
+    CadB = ""
     CargaGrid
     
 End Sub
@@ -1120,9 +1120,9 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "rbonifentradas"
         .Informe2 = "rManBonifEnt.rpt"
-        If cadB <> "" Then
+        If CadB <> "" Then
             '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(cadB)
+            .cadRegSelec = SQL2SF(CadB)
         Else
             .cadRegSelec = ""
         End If
@@ -1179,12 +1179,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCoope 
@@ -817,7 +817,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
-Dim I As Integer
+Dim i As Integer
     
     Modo = vModo
 '    PonerIndicador lblIndicador, Modo
@@ -836,9 +836,9 @@ Dim I As Integer
     ' **************************************************
     
     ' **** si n'hi han camps fora del grid, bloquejar-los ****
-    For I = 3 To txtAux.Count - 1
-        BloquearTxt txtAux(I), b
-    Next I
+    For i = 3 To txtAux.Count - 1
+        BloquearTxt txtAux(i), b
+    Next i
     
     ' ********************************************************
 
@@ -896,7 +896,7 @@ End Sub
 Private Sub BotonAnyadir()
 Dim NumF As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     CargaGrid 'primer de tot carregue tot el grid
     CadB = ""
@@ -919,9 +919,9 @@ Dim I As Integer
     
     ' *** valors per defecte a l'afegir (dins i fora del grid); repasar codEmpre ***
     txtAux(0).Text = NumF
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     ' **************************************************
 
     LLamaLineas anc, 3
@@ -942,16 +942,16 @@ Private Sub BotonVerTodos()
 End Sub
 
 Private Sub BotonBuscar()
-    Dim I As Integer
+    Dim i As Integer
     
     ' *** canviar per la PK (no posar codempre si està a Form_Load) ***
     CargaGrid "codcoope = -1"
     '*******************************************************************************
 
     ' *** canviar-ho pels valors per defecte al buscar (dins i fora del grid);
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas DataGrid1.Top + 206, 1 '206, 1
     
@@ -962,13 +962,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
 
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -996,21 +996,21 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-Dim I As Integer
+Dim i As Integer
 
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
 
     ' *** posar el Top a tots els controls del grid (botons també) ***
     'Me.imgFec(2).Top = alto
-    For I = 0 To 2
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To 2
+        txtAux(i).Top = alto
+    Next i
     ' ***************************************************
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1025,17 +1025,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*** canviar la pregunta, els noms dels camps i el DELETE; repasar codEmpre ***
-    SQL = "¿Seguro que desea eliminar la Cooperativa?"
+    Sql = "¿Seguro que desea eliminar la Cooperativa?"
     'SQL = SQL & vbCrLf & "Código: " & Format(adodc1.Recordset.Fields(0), "000")
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'N'hi ha que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rcoope where codcoope = " & adodc1.Recordset!codcoope
+        Sql = "Delete from rcoope where codcoope = " & adodc1.Recordset!codcoope
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1065,7 +1065,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim I As Long
+Dim i As Long
 
     Select Case Modo
         Case 3 'INSERTAR
@@ -1093,7 +1093,7 @@ Dim I As Long
             If DatosOk Then
                 'If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeFormulario2(Me, 0) Then
-                    I = adodc1.Recordset.AbsolutePosition
+                    i = adodc1.Recordset.AbsolutePosition
                     TerminaBloquear
                     PonerModo 2
                     CargaGrid CadB
@@ -1104,7 +1104,7 @@ Dim I As Long
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Move I - 1
+                    adodc1.Recordset.Move i - 1
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1151,8 +1151,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1160,21 +1160,21 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
-    I = 0
+    Cad = ""
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     ' *** adrede: per a tornar el TipoSuplem ***
     ' cad = cad & TipoSuplem & "|"
     ' ******************************************
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1195,7 +1195,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
     '******* repasar si n'hi ha botó d'imprimir o no******
     With Me.Toolbar1
@@ -1222,9 +1222,9 @@ Dim I As Integer
 '   Next i
 
     'carga IMAGES de mail
-    For I = 0 To Me.ImgMail.Count - 1
-        Me.ImgMail(I).Picture = frmPpal.imgListImages16.ListImages(2).Picture
-    Next I
+    For i = 0 To Me.imgMail.Count - 1
+        Me.imgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
+    Next i
 
     chkVistaPrevia.Value = CheckValueLeer(Name)
     ' *** SI N'HI HAN COMBOS ***
@@ -1336,21 +1336,21 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim I As Integer
-    Dim SQL As String
+    Dim i As Integer
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     ' *** si en Form_load ya li he posat clausula WHERE, canviar el `WHERE` de
     ' `SQL = CadenaConsulta & " WHERE " & vSQL` per un `AND`
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & vSQL  ' ### [Monica] 08/09/2006: antes habia AND
+        Sql = CadenaConsulta & " WHERE " & vSQL  ' ### [Monica] 08/09/2006: antes habia AND
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
     'SQL = SQL & " ORDER BY codempre, codsupdt"
-    SQL = SQL & " ORDER BY codcoope"
+    Sql = Sql & " ORDER BY codcoope"
     '**************************************************************++
     
 '    adodc1.RecordSource = SQL
@@ -1360,14 +1360,14 @@ Private Sub CargaGrid(Optional vSQL As String)
 '    adodc1.Refresh
 '    Set DataGrid1.DataSource = adodc1 ' per a que no ixca l'error de "la fila actual no está disponible"
        
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, False
        
        
     ' *** posar només els controls del grid ***
     tots = "S|txtAux(0)|T|Cód.|650|;S|txtAux(1)|T|Denominación|3650|;S|txtAux(2)|T|% Gastos|1200|;"
-    For I = 3 To txtAux.Count - 1
+    For i = 3 To txtAux.Count - 1
         tots = tots & "N||||0|;"
-    Next I
+    Next i
     arregla tots, DataGrid1, Me
     DataGrid1.ScrollBars = dbgAutomatic
     ' **********************************************************
@@ -1464,10 +1464,10 @@ Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim b As Boolean
 ' *** només per ad este manteniment ***
-Dim RS As Recordset
-Dim cad As String
-Dim I As Integer
-Dim SQL As String
+Dim Rs As Recordset
+Dim Cad As String
+Dim i As Integer
+Dim Sql As String
 Dim Nregs As Long
 Dim Tipo As Byte
 'Dim exped As String
@@ -1497,8 +1497,8 @@ Dim Tipo As Byte
     ' *** Si cal fer altres comprovacions ***
     ' los tipos de movimientos deben de existir en la stipom
     If b And (Modo = 3 Or Modo = 4) Then
-        For I = 12 To 19
-            Select Case I
+        For i = 12 To 19
+            Select Case i
                 Case 12 ', 16, 18
                     Tipo = 1
                 Case 13 ', 17, 19
@@ -1517,38 +1517,38 @@ Dim Tipo As Byte
                     Tipo = 10
             End Select
         
-            SQL = "select count(*) from usuarios.stipom where codtipom = " & DBSet(txtAux(I).Text, "T") & " and tipodocu = " & Tipo
-            Nregs = TotalRegistros(SQL)
+            Sql = "select count(*) from usuarios.stipom where codtipom = " & DBSet(txtAux(i).Text, "T") & " and tipodocu = " & Tipo
+            Nregs = TotalRegistros(Sql)
             If Nregs = 0 Then
-                cad = "No existe el Tipo de Movimiento de "
-                Select Case I
+                Cad = "No existe el Tipo de Movimiento de "
+                Select Case i
                     Case 12
-                        cad = cad & " Anticipos,"
+                        Cad = Cad & " Anticipos,"
                     Case 14
-                        cad = cad & " Anticipos de Venta Campo,"
+                        Cad = Cad & " Anticipos de Venta Campo,"
                     Case 13
-                        cad = cad & " Liquidación,"
+                        Cad = Cad & " Liquidación,"
                     Case 15
-                        cad = cad & " Liquidación de Venta Campo,"
+                        Cad = Cad & " Liquidación de Venta Campo,"
                     Case 16
-                        cad = cad & " Anticipos de Almazara,"
+                        Cad = Cad & " Anticipos de Almazara,"
                     Case 17
-                        cad = cad & " Liquidación de Almazara,"
+                        Cad = Cad & " Liquidación de Almazara,"
                     Case 18
-                        cad = cad & " Anticipos de Bodega,"
+                        Cad = Cad & " Anticipos de Bodega,"
                     Case 19
-                        cad = cad & " Liquidación de Bodega,"
+                        Cad = Cad & " Liquidación de Bodega,"
                 End Select
-                cad = cad & " o no es del tipo correcto."
-                cad = cad & vbCrLf & vbCrLf
-                cad = cad & "LLame a Ariadna.            "
+                Cad = Cad & " o no es del tipo correcto."
+                Cad = Cad & vbCrLf & vbCrLf
+                Cad = Cad & "LLame a Ariadna.            "
                 
-                MsgBox cad, vbExclamation
+                MsgBox Cad, vbExclamation
                 DatosOk = False
-                PonerFoco txtAux(I)
+                PonerFoco txtAux(i)
                 Exit Function
             End If
-        Next I
+        Next i
     
     End If
     ' *********************************************
@@ -1564,22 +1564,22 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 And Modo = 2 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-Dim I As Byte
+Dim i As Byte
 
     If Modo <> 4 Then 'Modificar
         CargaForaGrid
     Else
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Text = ""
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Text = ""
+        Next i
     End If
     
     If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, CadB
@@ -1587,25 +1587,25 @@ Dim I As Byte
 End Sub
 
 Private Sub CargaForaGrid()
-Dim I As Integer
+Dim i As Integer
 
     If DataGrid1.Columns.Count <= 2 Then Exit Sub
     
     ' *** posar als camps de fora del grid el valor de la columna corresponent ***
     
-    For I = 3 To 21
-        txtAux(I) = DataGrid1.Columns(I).Text
-    Next I
+    For i = 3 To 21
+        txtAux(i) = DataGrid1.Columns(i).Text
+    Next i
  End Sub
 
 Private Sub LimpiarCampos()
-Dim I As Integer
+Dim i As Integer
 On Error Resume Next
 
     ' *** posar a huit tots els camps de fora del grid ***
-    For I = 3 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 3 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     ' ****************************************************
 
     If Err.Number <> 0 Then Err.Clear

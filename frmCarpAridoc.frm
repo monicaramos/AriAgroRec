@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmCarpAridoc 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Esta es la pregunta"
@@ -305,32 +305,32 @@ End Sub
 
 
 
-Private Function CopiaArchivosCarpetaRecursiva(No As Node) As String
+Private Function CopiaArchivosCarpetaRecursiva(NO As Node) As String
 Dim Nod As Node
 Dim J As Integer
 Dim i As Integer
-Dim C As String
+Dim c As String
 
     'Primero copiamos la carpeta
-    C = Mid(No.Key, 2) & "|"
-        If No.Children > 0 Then
-            J = No.Children
-            Set Nod = No.Child
+    c = Mid(NO.Key, 2) & "|"
+        If NO.Children > 0 Then
+            J = NO.Children
+            Set Nod = NO.Child
             For i = 1 To J
-               C = C & CopiaArchivosCarpetaRecursiva(Nod)
+               c = c & CopiaArchivosCarpetaRecursiva(Nod)
                If i <> J Then Set Nod = Nod.Next
             Next i
         End If
-    CopiaArchivosCarpetaRecursiva = C
+    CopiaArchivosCarpetaRecursiva = c
 End Function
     
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -339,10 +339,10 @@ Private Sub TreeView1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub CargaArbol()
-Dim cad As String
-Dim RS As ADODB.Recordset
+Dim Cad As String
+Dim Rs As ADODB.Recordset
 Dim Nod As Node
-Dim C As Integer
+Dim c As Integer
 Dim i As Integer
 Dim Contador2 As Integer
 
@@ -350,7 +350,7 @@ Dim Contador2 As Integer
     TreeView1.Nodes.Clear
     TreeView1.ImageList = Me.ImageList3
     
-    cad = " from carpetas"
+    Cad = " from carpetas"
 '    If ModoTrabajo = vbHistNue Or ModoTrabajo = vbHistAnt Then cad = cad & "hco"
 '    'Es el usuario propietario
 '    If vUsu.Codusu > 0 Then
@@ -373,80 +373,80 @@ Dim Contador2 As Integer
     
     
     'Ordenado por padre
-    cad = cad & " ORDER BY Padre,nombre"
+    Cad = Cad & " ORDER BY Padre,nombre"
     
     
-    Set RS = New ADODB.Recordset
-    RS.Open "select * " & cad, ConnAridoc, adOpenKeyset, adLockPessimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open "select * " & Cad, ConnAridoc, adOpenKeyset, adLockPessimistic, adCmdText
+    If Rs.EOF Then
         MsgBox "ERROR GRAVE cargando árbol de directorios(Situacion: 1)", vbCritical
         End
     End If
     CadenaCarpetas = "|"
     
-    If RS!padre <> 0 Then
+    If Rs!padre <> 0 Then
         MsgBox "Error en primer NODO. Padre != 0", vbExclamation
         End
     End If
-    C = 0
+    c = 0
     i = 0
     While i = 0
-        INSERTAR_NODO RS, 1
-        RS.MoveNext
-        If RS.EOF Then
+        INSERTAR_NODO Rs, 1
+        Rs.MoveNext
+        If Rs.EOF Then
             i = 1
         Else
-            If RS!padre <> 0 Then i = 1
+            If Rs!padre <> 0 Then i = 1
         End If
-        C = C + 1
+        c = c + 1
     Wend
     
     'Cargo el segundo nivel
     Contador2 = TreeView1.Nodes.Count
-    C = 0
+    c = 0
     For i = 1 To Contador2
-        cad = Mid(TreeView1.Nodes(i).Key, 2)
-        RS.MoveFirst
-        RS.Find " padre = " & cad, , adSearchForward, 1
-        While Not RS.EOF
-            C = C + 1
-            If RS!padre = cad Then
-                INSERTAR_NODO RS, 2
+        Cad = Mid(TreeView1.Nodes(i).Key, 2)
+        Rs.MoveFirst
+        Rs.Find " padre = " & Cad, , adSearchForward, 1
+        While Not Rs.EOF
+            c = c + 1
+            If Rs!padre = Cad Then
+                INSERTAR_NODO Rs, 2
             Else
-                RS.MoveLast
+                Rs.MoveLast
                 
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     Next i
        
-    If C > 0 Then
+    If c > 0 Then
 '                If Not PrimeraVez Then Label3.Caption = "     c   a   r   g   a   n   d   o  "
                 'Cargo el tercer nivel
-                C = Contador2 + 1
+                c = Contador2 + 1
                 Contador2 = TreeView1.Nodes.Count
-                For i = C To Contador2
-                    cad = Mid(TreeView1.Nodes(i).Key, 2)
-                    RS.MoveFirst
-                    RS.Find " padre = " & cad, , adSearchForward, 1
-                    While Not RS.EOF
-                        C = C + 1
-                        If RS!padre = cad Then
-                            INSERTAR_NODO RS, 2
+                For i = c To Contador2
+                    Cad = Mid(TreeView1.Nodes(i).Key, 2)
+                    Rs.MoveFirst
+                    Rs.Find " padre = " & Cad, , adSearchForward, 1
+                    While Not Rs.EOF
+                        c = c + 1
+                        If Rs!padre = Cad Then
+                            INSERTAR_NODO Rs, 2
                         Else
-                            RS.MoveLast
+                            Rs.MoveLast
                         End If
-                        RS.MoveNext
+                        Rs.MoveNext
                     Wend
                 Next i
                 
    
-                C = Contador2 + 1
+                c = Contador2 + 1
                 Contador2 = TreeView1.Nodes.Count
-                If Contador2 >= C Then
-                    For i = C To Contador2
+                If Contador2 >= c Then
+                    For i = c To Contador2
                         
-                        CargaArbolRecursivo Mid(TreeView1.Nodes(i).Key, 2), RS, 5
+                        CargaArbolRecursivo Mid(TreeView1.Nodes(i).Key, 2), Rs, 5
                       
                     Next i
                 End If
@@ -456,7 +456,7 @@ Dim Contador2 As Integer
     
     
         
-    RS.Close
+    Rs.Close
 '    If Not PrimeraVez Then Label3.Caption = " AriDoc: Gestión documental"
     If TreeView1.Nodes.Count > 2 Then TreeView1.Nodes(3).EnsureVisible
    
@@ -508,14 +508,14 @@ EIns_Nodo:
     Cortar11 = Cortar11 & "Verifique ARIDOC. Si persiste avise a soporte técnico"
     Cortar11 = Cortar11 & vbCrLf & vbCrLf & vbCrLf & "¿FINALIZAR?"
     If MsgBox(Cortar11, vbCritical + vbYesNo) = vbYes Then
-        Conn.Close
+        conn.Close
         End
     End If
 End Function
 
 
-Private Sub CargaArbolRecursivo(CarpePadre As String, ByRef rs1 As ADODB.Recordset, ByVal Nivel As Integer)
-Dim C As Integer
+Private Sub CargaArbolRecursivo(CarpePadre As String, ByRef RS1 As ADODB.Recordset, ByVal Nivel As Integer)
+Dim c As Integer
 Dim i As Integer
 Dim cadena As String
 Dim Fin As Boolean
@@ -526,20 +526,20 @@ Dim Fin As Boolean
 
 
     cadena = ""
-    C = 0
-    rs1.MoveFirst
-    rs1.Find " padre = " & CarpePadre, , adSearchForward, 1
-    Fin = rs1.EOF
+    c = 0
+    RS1.MoveFirst
+    RS1.Find " padre = " & CarpePadre, , adSearchForward, 1
+    Fin = RS1.EOF
     While Not Fin
-        If rs1!padre = CarpePadre Then
+        If RS1!padre = CarpePadre Then
         
-            i = INSERTAR_NODO(rs1, Nivel)
+            i = INSERTAR_NODO(RS1, Nivel)
             If i > 0 Then
-                cadena = cadena & rs1!codcarpeta & "|"
-                C = C + 1
+                cadena = cadena & RS1!codcarpeta & "|"
+                c = c + 1
             End If
-            rs1.MoveNext
-            If rs1.EOF Then Fin = True
+            RS1.MoveNext
+            If RS1.EOF Then Fin = True
         Else
             Fin = True
         End If
@@ -561,9 +561,9 @@ Dim Fin As Boolean
 '        End If
     Wend
 
-    If C > 0 Then
-        For i = 1 To C
-            CargaArbolRecursivo (RecuperaValor(cadena, i)), rs1, Nivel + 1
+    If c > 0 Then
+        For i = 1 To c
+            CargaArbolRecursivo (RecuperaValor(cadena, i)), RS1, Nivel + 1
         Next i
     End If
 

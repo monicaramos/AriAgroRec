@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmADVTrataMoi 
    BorderStyle     =   3  'Fixed Dialog
@@ -508,7 +508,7 @@ Private BuscaChekc As String
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadparam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -894,28 +894,28 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim Tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' lineas de tratamiento
             Tabla = "advtrata_lineas"
-            SQL = "SELECT advtrata_lineas.codtrata, advtrata_lineas.numlinea, advtrata_lineas.codartic, advartic.nomartic, "
-            SQL = SQL & " advtrata_lineas.dosishab, advtrata_lineas.cantidad "
-            SQL = SQL & " FROM " & Tabla & " INNER JOIN advartic ON advtrata_lineas.codartic = advartic.codartic "
+            Sql = "SELECT advtrata_lineas.codtrata, advtrata_lineas.numlinea, advtrata_lineas.codartic, advartic.nomartic, "
+            Sql = Sql & " advtrata_lineas.dosishab, advtrata_lineas.cantidad "
+            Sql = Sql & " FROM " & Tabla & " INNER JOIN advartic ON advtrata_lineas.codartic = advartic.codartic "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE advtrata_lineas.codtrata = '-1'"
+                Sql = Sql & " WHERE advtrata_lineas.codtrata = '-1'"
             End If
-            SQL = SQL & " ORDER BY " & Tabla & ".codtrata "
+            Sql = Sql & " ORDER BY " & Tabla & ".codtrata "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -1125,7 +1125,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = NombreTabla1
+        frmB.vtabla = NombreTabla1
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
@@ -1284,7 +1284,7 @@ Dim Cad As String
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ' **** repasar si es diu Data1 l'adodc de la capçalera ***
@@ -1363,7 +1363,7 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Cad As String
 'Dim Datos As String
 
@@ -1376,8 +1376,8 @@ Dim Cad As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = DevuelveDesdeBDNew(cAgro, "advtrata", "codtrata", "codtrata", Text1(0).Text, "T")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "advtrata", "codtrata", "codtrata", Text1(0).Text, "T")
+        If Sql <> "" Then
             MsgBox "Ya existe el codigo de tratamiento. Revise.", vbExclamation
             b = False
         End If
@@ -1422,7 +1422,7 @@ Dim Cad As String, Indicador As String
 End Sub
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim vWhere As String
 
     On Error GoTo FinEliminar
@@ -1443,10 +1443,10 @@ FinEliminar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar"
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -1502,12 +1502,11 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -1698,7 +1697,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadparam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1712,7 +1711,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadparam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 

@@ -553,7 +553,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
@@ -568,9 +568,9 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not b
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not b
+    Next i
     
     txtAux2(2).visible = Not b
     btnBuscar(0).visible = Not b
@@ -579,8 +579,8 @@ Dim b As Boolean
     chkAux(0).visible = Not b
     chkAux(1).visible = Not b
 
-    CmdAceptar.visible = Not b
-    CmdCancelar.visible = Not b
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
@@ -650,9 +650,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -676,9 +676,9 @@ Private Sub BotonBuscar()
     CargaGrid "rcalidad.codvarie = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
     Combo1(1).ListIndex = -1
@@ -691,13 +691,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -716,13 +716,13 @@ Private Sub BotonModificar()
     txtAux(4).Text = DataGrid1.Columns(9).Text
     txtAux(5).Text = DataGrid1.Columns(10).Text
     ' ***** canviar-ho pel nom del camp del combo *********
-    I = adodc1.Recordset!tipcalid
+    i = adodc1.Recordset!tipcalid
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), I
+    PosicionarCombo Me.Combo1(0), i
     
-    I = adodc1.Recordset!tipcalid1
+    i = adodc1.Recordset!tipcalid1
     ' *****************************************************
-    PosicionarCombo Me.Combo1(1), I
+    PosicionarCombo Me.Combo1(1), i
     
     Me.chkAux(0).Value = Me.adodc1.Recordset!gastosrec
     
@@ -744,9 +744,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -783,7 +783,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!codvarie
+        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!CodVarie
         Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
         conn.Execute Sql
         CargaGrid CadB
@@ -847,7 +847,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
     Dim Cad As String
 
     Select Case Modo
@@ -910,7 +910,7 @@ Dim Cad As String, Indicador As String
 End Sub
 
 Private Sub LimpiarCampos()
-Dim I As Integer
+Dim i As Integer
 
     On Error Resume Next
     
@@ -919,9 +919,9 @@ Dim I As Integer
     Me.chkAux(0).Value = 0
     Me.chkAux(1).Value = 0
     
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).ListIndex = -1
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).ListIndex = -1
+    Next i
     
     ' *** si n'hi han combos a la capçalera ***
     ' *****************************************
@@ -960,7 +960,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -969,16 +969,16 @@ Dim Aux As String
         Exit Sub
     End If
     Cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -1342,12 +1342,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1394,7 +1393,7 @@ Dim Sql As String
 Dim Cad As String
 
     SepuedeBorrar = False
-    Sql = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", adodc1.Recordset!codvarie, "N", , "codcalid", adodc1.Recordset!codcalid, "N")
+    Sql = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", adodc1.Recordset!CodVarie, "N", , "codcalid", adodc1.Recordset!codcalid, "N")
     If Sql <> "" Then
         Cad = "No se puede eliminar la fila, "
         MsgBox Cad & "tiene Calibradores asociados.", vbExclamation

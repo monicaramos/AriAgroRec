@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmPOZPozos 
@@ -455,7 +455,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 Private WithEvents frmSoc As frmManSocios 'mantenimiento de socios
 Attribute frmSoc.VB_VarHelpID = -1
@@ -491,7 +491,7 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -554,7 +554,7 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-    CargaGrid cadB, True 'primer de tot carregue tot el grid
+    CargaGrid CadB, True 'primer de tot carregue tot el grid
 '    CadB = ""
    
 '    '******************** canviar taula i camp **************************
@@ -585,7 +585,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    cadB = ""
+    CadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -655,7 +655,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim sql As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -670,16 +670,16 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    sql = "¿Seguro que desea eliminar el tipo de Pozo?"
-    sql = sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el tipo de Pozo?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        sql = "Delete from rtipopozos where codpozo=" & adodc1.Recordset!Codpozo
+        Sql = "Delete from rtipopozos where codpozo=" & adodc1.Recordset!Codpozo
         
-        conn.Execute sql
-        CargaGrid cadB
+        conn.Execute Sql
+        CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -713,9 +713,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda3(Me, False, BuscaChekc)
-            If cadB <> "" Then
-                CargaGrid cadB
+            CadB = ObtenerBusqueda3(Me, False, BuscaChekc)
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -724,7 +724,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    CargaGrid cadB
+                    CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
@@ -735,7 +735,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -746,7 +746,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
 '                    If CadB <> "" Then
 '                        CargaGrid CadB
 '                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -766,7 +766,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             CargaGrid
@@ -788,7 +788,7 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 Dim i As Integer
 Dim J As Integer
 Dim Aux As String
@@ -797,7 +797,7 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
+    Cad = ""
     i = 0
     Do
         J = i + 1
@@ -805,10 +805,10 @@ Dim Aux As String
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -821,7 +821,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, cadB
+    If Modo = 2 Then PonerContRegIndicador Me.lblIndicador, adodc1, CadB
 End Sub
 
 Private Sub Form_Activate()
@@ -868,7 +868,7 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " FROM  rtipopozos where 1=1 "
     '************************************************************************
     
-    cadB = ""
+    CadB = ""
     CargaGrid "rtipopozos.codpozo = -1"
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -946,18 +946,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim sql As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        sql = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    sql = sql & " ORDER BY  rtipopozos.codpozo "
+    Sql = Sql & " ORDER BY  rtipopozos.codpozo "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|730|;S|txtAux(1)|T|Descripcion|3700|;"
@@ -1024,7 +1024,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1032,8 +1032,8 @@ Dim Mens As String
     If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        sql = "select count(*) from rtipopozos where codpozo= " & DBSet(txtAux(0).Text, "N")
-        If TotalRegistros(sql) <> 0 Then
+        Sql = "select count(*) from rtipopozos where codpozo= " & DBSet(txtAux(0).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El codigo de pozo existe. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             b = False
@@ -1053,9 +1053,9 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "rtipopozos"
         .Informe2 = "rManTipoPozos.rpt"
-        If cadB <> "" Then
+        If CadB <> "" Then
             '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(cadB)
+            .cadRegSelec = SQL2SF(CadB)
         Else
             .cadRegSelec = ""
         End If
@@ -1112,12 +1112,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1126,24 +1125,24 @@ Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim sql As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    sql = "update rtipopozos set "
-    sql = sql & " nompozo = " & DBSet(ImporteSinFormato(txtAux(1).Text), "T")
-    sql = sql & ", hastametcub1 = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    sql = sql & ", precio1 = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    sql = sql & ", hastametcub2 = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    sql = sql & ", precio2 = " & DBSet(ImporteSinFormato(txtAux(5).Text), "N")
-    sql = sql & ", imporcuota = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
-    sql = sql & ", imporcuotahda = " & DBSet(ImporteSinFormato(txtAux(7).Text), "N")
+    Sql = "update rtipopozos set "
+    Sql = Sql & " nompozo = " & DBSet(ImporteSinFormato(txtAux(1).Text), "T")
+    Sql = Sql & ", hastametcub1 = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", precio1 = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    Sql = Sql & ", hastametcub2 = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    Sql = Sql & ", precio2 = " & DBSet(ImporteSinFormato(txtAux(5).Text), "N")
+    Sql = Sql & ", imporcuota = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
+    Sql = Sql & ", imporcuotahda = " & DBSet(ImporteSinFormato(txtAux(7).Text), "N")
     
-    sql = sql & " where codpozo = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " where codpozo = " & DBSet(txtAux(0).Text, "N")
     
-    conn.Execute sql
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function

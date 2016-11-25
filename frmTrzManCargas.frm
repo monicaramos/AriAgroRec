@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmTrzManCargas 
@@ -526,7 +526,7 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 Private PrimeraVez As Boolean
 Private HaDevueltoDatos As Boolean
 
@@ -563,7 +563,7 @@ Dim i As Byte
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -582,7 +582,7 @@ Dim i As Byte
     txtAux2(5).visible = False
     txtAux2(7).visible = False
     
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -645,7 +645,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    cadB = ""
+    CadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -757,7 +757,7 @@ Dim temp As Boolean
         'fin de control de modificaciones
         
         conn.Execute Sql
-        CargaGrid cadB
+        CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
@@ -853,14 +853,14 @@ Dim b As Boolean
                 txtAux(i).Tag = ""
             Next i
         
-            cadB = ObtenerBusqueda(Me)
+            CadB = ObtenerBusqueda(Me)
             
             txtAux(5).Tag = "Socio|N|N|0|999999|trzlineas_cargas|codsocio|000000|N|"
             txtAux(6).Tag = "Campo|N|N|0|99999999|trzlineas_cargas|codcampo|00000000||"
             txtAux(7).Tag = "Variedad|N|N|0|999999|trzlineas_cargas|codvarie|000000|N|"
             txtAux(8).Tag = "Kilos|N|N|0|999999.99|trzlineas_cargas|numkilos|###,##0.00||"
-            If cadB <> "" Then
-                CargaGrid cadB
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -923,7 +923,7 @@ Dim b As Boolean
                     txtAux(3).MaxLength = 8
                     
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
     '                    If CadB <> "" Then
     '                        CargaGrid CadB
     '                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
@@ -959,7 +959,7 @@ On Error Resume Next
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'INSERTAR
             DataGrid1.AllowAddNew = False
             If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
@@ -1033,7 +1033,7 @@ Dim i As Byte
 '            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
 '        End If
 '    End If
-    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, cadB
+    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, CadB
 End Sub
 
 
@@ -1091,7 +1091,7 @@ Dim i As Integer
     CadenaConsulta = CadenaConsulta & " trzpalets.codvarie = variedades.codvarie "
     '************************************************************************
     
-    cadB = ""
+    CadB = ""
     CargaGrid ""
    
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -1243,7 +1243,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 
@@ -1395,12 +1395,11 @@ Dim i As Integer
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -1414,22 +1413,22 @@ End Sub
 'End Sub
 
 Private Sub CalcularSumaPantalla()
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 
-  If Not adodc1.Recordset.EOF And cadB = "" Then cadB = "codclave > 0"
-  If cadB <> "" Then
+  If Not adodc1.Recordset.EOF And CadB = "" Then CadB = "codclave > 0"
+  If CadB <> "" Then
      Sql = "select sum(cantidad), sum(importel) FROM scaalb "
-     Sql = Sql & " WHERE " & cadB
-     Set RS = New ADODB.Recordset ' Crear objeto
-     RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText ' abrir cursor
-      If Not RS.EOF Then
-        Sql = "Cantidad: " & Format(RS.Fields(0), "###,##0.000") & vbCrLf
-        Sql = Sql & " Importe : " & Format(RS.Fields(1), "####,##0.00")
+     Sql = Sql & " WHERE " & CadB
+     Set Rs = New ADODB.Recordset ' Crear objeto
+     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText ' abrir cursor
+      If Not Rs.EOF Then
+        Sql = "Cantidad: " & Format(Rs.Fields(0), "###,##0.000") & vbCrLf
+        Sql = Sql & " Importe : " & Format(Rs.Fields(1), "####,##0.00")
         MsgBox "Totales Selección: " & vbCrLf & vbCrLf & Sql, vbInformation
       End If
-     RS.Close
-     Set RS = Nothing
+     Rs.Close
+     Set Rs = Nothing
     Else
         MsgBox "Haga primero una selección para ver Totales.", vbInformation
   End If

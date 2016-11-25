@@ -300,8 +300,8 @@ Private Sub cmdSalir_Click()
 End Sub
 
 Private Function DatosOk() As Boolean
-    DesdeFecha = CDate(txtCodigo(0).Text)
-    Hastafecha = CDate(txtCodigo(1).Text)
+    DesdeFecha = CDate(txtcodigo(0).Text)
+    Hastafecha = CDate(txtcodigo(1).Text)
     If DesdeFecha > Hastafecha Then
         MsgBox "La fecha desde debe ser menor que la fecha hasta", vbInformation
         Exit Function
@@ -357,8 +357,8 @@ Private Sub Combo1_LostFocus(Index As Integer)
 End Sub
 
 Private Sub Form_Load()
-    txtCodigo(0).Text = Date
-    txtCodigo(1).Text = Date
+    txtcodigo(0).Text = Date
+    txtcodigo(1).Text = Date
     Set impor = New ArdImportador
     
     Set ardDB = New BaseDatos
@@ -447,17 +447,17 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(0).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
+    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag))
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag))
     ' ***************************
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub txtCarp_GotFocus(Index As Integer)
@@ -484,7 +484,7 @@ Dim Cad As String
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -512,18 +512,18 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -532,7 +532,7 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
     Select Case Index
         Case 0, 1, 2 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
     End Select
 End Sub
@@ -543,10 +543,10 @@ Private Sub CargaFacturas(TipoFact As Byte, DFecha As Date, HFecha As Date)
 '           1 = Liquidacion
 
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -567,7 +567,7 @@ On Error GoTo err_CargaFacturas
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 
     Set db = New BaseDatos
     db.Tipo = "MYSQL"
@@ -576,30 +576,30 @@ Dim cadparam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select rfactsoc.*, stipom.letraser " & _
-            " from rfactsoc, usuarios.stipom where rfactsoc.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
-            " and rfactsoc.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
+    Sql = "select rfactsoc.*, stipom.letraser " & _
+            " from rfactsoc, usuarios.stipom where rfactsoc.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
+            " and rfactsoc.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
             " and rfactsoc.codtipom = stipom.codtipom " & _
             " and rfactsoc.pasaridoc = 0"
             
     Select Case TipoFact
         Case 0 ' anticipos
             '[Monica]01/04/2011 añadidas 7,9 anticipos de almazara y de bodega
-            SQL = SQL & " and stipom.tipodocu in (1,3,7,9)"
+            Sql = Sql & " and stipom.tipodocu in (1,3,7,9)"
         Case 1 ' liquidaciones
             '[Monica]01/04/2011 añadidas 8,10 liquidaciones de almazara y de bodega
-            SQL = SQL & " and stipom.tipodocu in (2,4,5,6,8,10)" ' [Monica]26/04/2010: añadidas 5 y 6
+            Sql = Sql & " and stipom.tipodocu in (2,4,5,6,8,10)" ' [Monica]26/04/2010: añadidas 5 y 6
         Case 2 ' rectificativas
-            SQL = SQL & " and stipom.tipodocu = 11 "
+            Sql = Sql & " and stipom.tipodocu = 11 "
     End Select
             
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -613,115 +613,115 @@ Dim cadparam As String
             '++monica: seleccionamos que rpt se ha de ejecutar
 
 '            cadParam = "pEmpresa=""AriagroRec""|"
-            cadparam = ""
+            CadParam = ""
             numParam = 1
             
-            If DBLet(RS!CodTipom, "T") = "FLI" Then
+            If DBLet(Rs!CodTipom, "T") = "FLI" Then
                 indRPT = 38
             Else
                 
                 '[Monica]01/04/2011: anticipos y liquidaciones de almazara y bodega
                 '                   antes no estaba puesta esta condicion
-                If DBLet(Mid(RS!CodTipom, 2, 2), "T") = "LZ" Or _
-                   DBLet(Mid(RS!CodTipom, 2, 2), "T") = "NZ" Or _
-                   DBLet(Mid(RS!CodTipom, 2, 2), "T") = "LB" Or _
-                   DBLet(Mid(RS!CodTipom, 2, 2), "T") = "NB" Then
+                If DBLet(Mid(Rs!CodTipom, 2, 2), "T") = "LZ" Or _
+                   DBLet(Mid(Rs!CodTipom, 2, 2), "T") = "NZ" Or _
+                   DBLet(Mid(Rs!CodTipom, 2, 2), "T") = "LB" Or _
+                   DBLet(Mid(Rs!CodTipom, 2, 2), "T") = "NB" Then
                     indRPT = 42
                 Else
                     indRPT = 23 'Impresion de Factura
                 End If
             End If
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             '++
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = True
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{rfactsoc.codtipom} = '" & RS!CodTipom & "' and " & _
-                                  "{rfactsoc.numfactu} =" & CStr(RS!numfactu) & " and " & _
-                                  "{rfactsoc.fecfactu} = Date(" & Format(RS!fecfactu, "yyyy") & _
-                                                        "," & Format(RS!fecfactu, "mm") & _
-                                                        "," & Format(RS!fecfactu, "dd") & ")"
+            fr.FormulaSeleccion = "{rfactsoc.codtipom} = '" & Rs!CodTipom & "' and " & _
+                                  "{rfactsoc.numfactu} =" & CStr(Rs!numfactu) & " and " & _
+                                  "{rfactsoc.fecfactu} = Date(" & Format(Rs!fecfactu, "yyyy") & _
+                                                        "," & Format(Rs!fecfactu, "mm") & _
+                                                        "," & Format(Rs!fecfactu, "dd") & ")"
             fr.FicheroPDF = FicheroPDF
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            SQL = "select * from rsocios where codsocio = " & db.numero(RS!Codsocio)
-            Set Rs2 = db.cursor(SQL)
+            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(Sql)
             
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            SQL = "select count(distinct codvarie) from rfactsoc_variedad where "
-            SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-            SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-            SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F")
+            Sql = "select count(distinct codvarie) from rfactsoc_variedad where "
+            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(SQL) > 1 Then
+            If TotalRegistros(Sql) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                SQL = "select nomvarie from variedades where codvarie in ( "
-                SQL = SQL & "select codvarie from rfactsoc_variedad where "
-                SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-                SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-                SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F") & " ) "
+                Sql = "select nomvarie from variedades where codvarie in ( "
+                Sql = Sql & "select codvarie from rfactsoc_variedad where "
+                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(SQL)
+                Variedad = DevuelveValor(Sql)
             End If
 
             Select Case TipoFact
                 Case 0 ' anticipos
-                    c1 = CargaParametroFac(vParamAplic.C1Anticipo, RS, Rs2, Variedad)
-                    c2 = CargaParametroFac(vParamAplic.C2Anticipo, RS, Rs2, Variedad)
-                    c3 = CargaParametroFac(vParamAplic.C3Anticipo, RS, Rs2, Variedad)
-                    c4 = CargaParametroFac(vParamAplic.C4Anticipo, RS, Rs2, Variedad)
+                    c1 = CargaParametroFac(vParamAplic.C1Anticipo, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFac(vParamAplic.C2Anticipo, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFac(vParamAplic.C3Anticipo, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFac(vParamAplic.C4Anticipo, Rs, Rs2, Variedad)
                 Case 1
-                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, RS, Rs2, Variedad)
-                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, RS, Rs2, Variedad)
-                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, RS, Rs2, Variedad)
-                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, RS, Rs2, Variedad)
+                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, Rs, Rs2, Variedad)
                 Case 2 ' rectificativas
-                    TipoFact1 = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(RS!rectif_codtipom, "T"))
+                    TipoFact1 = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Rs!rectif_codtipom, "T"))
                     
                     Select Case TipoFact1 ' tipo de la factura que rectifica
                         Case 1
-                            c1 = CargaParametroFac(vParamAplic.C1Anticipo, RS, Rs2, Variedad)
-                            c2 = CargaParametroFac(vParamAplic.C2Anticipo, RS, Rs2, Variedad)
-                            c3 = CargaParametroFac(vParamAplic.C3Anticipo, RS, Rs2, Variedad)
-                            c4 = CargaParametroFac(vParamAplic.C4Anticipo, RS, Rs2, Variedad)
+                            c1 = CargaParametroFac(vParamAplic.C1Anticipo, Rs, Rs2, Variedad)
+                            c2 = CargaParametroFac(vParamAplic.C2Anticipo, Rs, Rs2, Variedad)
+                            c3 = CargaParametroFac(vParamAplic.C3Anticipo, Rs, Rs2, Variedad)
+                            c4 = CargaParametroFac(vParamAplic.C4Anticipo, Rs, Rs2, Variedad)
                         Case 2
-                            c1 = CargaParametroFac(vParamAplic.C1Liquidacion, RS, Rs2, Variedad)
-                            c2 = CargaParametroFac(vParamAplic.C2Liquidacion, RS, Rs2, Variedad)
-                            c3 = CargaParametroFac(vParamAplic.C3Liquidacion, RS, Rs2, Variedad)
-                            c4 = CargaParametroFac(vParamAplic.C4Liquidacion, RS, Rs2, Variedad)
+                            c1 = CargaParametroFac(vParamAplic.C1Liquidacion, Rs, Rs2, Variedad)
+                            c2 = CargaParametroFac(vParamAplic.C2Liquidacion, Rs, Rs2, Variedad)
+                            c3 = CargaParametroFac(vParamAplic.C3Liquidacion, Rs, Rs2, Variedad)
+                            c4 = CargaParametroFac(vParamAplic.C4Liquidacion, Rs, Rs2, Variedad)
                     End Select
                     
             End Select
             
             '[Monica]20/04/2011: en el importe total factura no estan incluidos los gastos
-            SQL = "select sum(importe) from rfactsoc_gastos where "
-            SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-            SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-            SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F") & " ) "
+            Sql = "select sum(importe) from rfactsoc_gastos where "
+            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-            Gastos = DevuelveValor(SQL)
+            Gastos = DevuelveValor(Sql)
             '[Monica]20/04/2011
             
             
-            f1 = RS!fecfactu
-            i1 = RS!TotalFac + Gastos
+            f1 = Rs!fecfactu
+            i1 = Rs!TotalFac + Gastos
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                SQL = "update rfactsoc set pasaridoc = 1 where codtipom = " & DBSet(RS!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(RS!numfactu, "N") & " and fecfactu = " & DBSet(RS!fecfactu, "F")
-                db.ejecutar SQL
+                Sql = "update rfactsoc set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -734,10 +734,10 @@ End Sub
 Private Sub CargaFacturasADV(DFecha As Date, HFecha As Date)
     
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -755,7 +755,7 @@ On Error GoTo err_CargaFacturas
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 
     Set db = New BaseDatos
     db.Tipo = "MYSQL"
@@ -764,19 +764,19 @@ Dim cadparam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select advfacturas.*, stipom.letraser " & _
-            " from advfacturas, usuarios.stipom where advfacturas.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
-            " and advfacturas.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
+    Sql = "select advfacturas.*, stipom.letraser " & _
+            " from advfacturas, usuarios.stipom where advfacturas.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
+            " and advfacturas.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
             " and advfacturas.codtipom = stipom.codtipom " & _
             " and advfacturas.pasaridoc = 0"
     
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -789,46 +789,46 @@ Dim cadparam As String
             '++monica: seleccionamos que rpt se ha de ejecutar
 
 '            cadParam = "pEmpresa=""AriagroRec""|"
-            cadparam = ""
+            CadParam = ""
             numParam = 1
             indRPT = 32 'Impresion de Factura de adv
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             '++
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = False
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{advfacturas.codtipom} = '" & RS!CodTipom & "' and " & _
-                                  "{advfacturas.numfactu} =" & CStr(RS!numfactu) & " and " & _
-                                  "{advfacturas.fecfactu} = Date(" & Format(RS!fecfactu, "yyyy") & _
-                                                        "," & Format(RS!fecfactu, "mm") & _
-                                                        "," & Format(RS!fecfactu, "dd") & ")"
+            fr.FormulaSeleccion = "{advfacturas.codtipom} = '" & Rs!CodTipom & "' and " & _
+                                  "{advfacturas.numfactu} =" & CStr(Rs!numfactu) & " and " & _
+                                  "{advfacturas.fecfactu} = Date(" & Format(Rs!fecfactu, "yyyy") & _
+                                                        "," & Format(Rs!fecfactu, "mm") & _
+                                                        "," & Format(Rs!fecfactu, "dd") & ")"
             fr.FicheroPDF = FicheroPDF
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            SQL = "select * from rsocios where codsocio = " & db.numero(RS!Codsocio)
-            Set Rs2 = db.cursor(SQL)
+            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(Sql)
 
-            c1 = CargaParametroFacADV(vParamAplic.C1ADV, RS, Rs2)
-            c2 = CargaParametroFacADV(vParamAplic.C2ADV, RS, Rs2)
-            c3 = CargaParametroFacADV(vParamAplic.C3ADV, RS, Rs2)
-            c4 = CargaParametroFacADV(vParamAplic.C4ADV, RS, Rs2)
+            c1 = CargaParametroFacADV(vParamAplic.C1ADV, Rs, Rs2)
+            c2 = CargaParametroFacADV(vParamAplic.C2ADV, Rs, Rs2)
+            c3 = CargaParametroFacADV(vParamAplic.C3ADV, Rs, Rs2)
+            c4 = CargaParametroFacADV(vParamAplic.C4ADV, Rs, Rs2)
             
-            f1 = RS!fecfactu
-            i1 = RS!TotalFac
+            f1 = Rs!fecfactu
+            i1 = Rs!TotalFac
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                SQL = "update advfacturas set pasaridoc = 1 where codtipom = " & DBSet(RS!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(RS!numfactu, "N") & " and fecfactu = " & DBSet(RS!fecfactu, "F")
-                db.ejecutar SQL
+                Sql = "update advfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -840,10 +840,10 @@ End Sub
 
 Private Sub CargaRecibos(DFecha As Date, HFecha As Date)
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -858,7 +858,7 @@ On Error GoTo err_CargaRecibos
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 
     Set db = New BaseDatos
     db.Tipo = "MYSQL"
@@ -867,20 +867,20 @@ Dim cadparam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select horas.codtraba " & _
-            " from horas where fecharec = " & db.Fecha(CDate(txtCodigo(2).Text)) & _
+    Sql = "select horas.codtraba " & _
+            " from horas where fecharec = " & db.Fecha(CDate(txtcodigo(2).Text)) & _
             " and horas.pasaridoc = 0 " & _
             " and codtraba in (select codtraba from straba where codsecci = " & Combo1(0).ListIndex & ")" & _
             " group by codtraba "
             
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -891,28 +891,28 @@ Dim cadparam As String
             Set fr = New frmVisReport
             
             '++monica: seleccionamos que rpt se ha de ejecutar
-            cadparam = "pEmpresa=""Ariagro""|"
+            CadParam = "pEmpresa=""Ariagro""|"
             numParam = 1
             indRPT = 13 'Impresion de Factura
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu, True) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu, True) Then Exit Sub
             '++
-            cadparam = cadparam & "|pFecha=""" & txtCodigo(2).Text & """|"
+            CadParam = CadParam & "|pFecha=""" & txtcodigo(2).Text & """|"
             numParam = numParam + 1
-            cadparam = cadparam & "|pTitulo=""" & "Recibo Horas " & Combo1(0).Text & """|"
+            CadParam = CadParam & "|pTitulo=""" & "Recibo Horas " & Combo1(0).Text & """|"
             numParam = numParam + 1
-            cadparam = cadparam & "|pHProductivas=" & Check1(1).Value & "|"
+            CadParam = CadParam & "|pHProductivas=" & Check1(1).Value & "|"
             numParam = numParam + 1
             
             
             
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = False
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{horas.codtraba} = " & RS!CodTraba & " and " & _
-                                           "{horas.fecharec} = Date(" & Format(CDate(txtCodigo(2).Text), "yyyy") & _
-                                                                    "," & Format(CDate(txtCodigo(2).Text), "mm") & _
-                                                                    "," & Format(CDate(txtCodigo(2).Text), "dd") & ") and " & _
+            fr.FormulaSeleccion = "{horas.codtraba} = " & Rs!CodTraba & " and " & _
+                                           "{horas.fecharec} = Date(" & Format(CDate(txtcodigo(2).Text), "yyyy") & _
+                                                                    "," & Format(CDate(txtcodigo(2).Text), "mm") & _
+                                                                    "," & Format(CDate(txtcodigo(2).Text), "dd") & ") and " & _
                                            "{horas.pasaridoc} = 0 "
                                                                     
             fr.FicheroPDF = FicheroPDF
@@ -926,30 +926,30 @@ Dim cadparam As String
 '            c3 = "ARIAGRO"
 '            c4 = RS!CodClien
 '++monica: c1 a c4 esta parametrizado
-            SQL = "select * from straba where codtraba = " & db.numero(RS!CodTraba)
-            Set Rs2 = db.cursor(SQL)
-            c1 = CargaParametroRec(vParamAplic.C1Recibo, RS, Rs2)
-            c2 = CargaParametroRec(vParamAplic.C2Recibo, RS, Rs2)
-            c3 = CargaParametroRec(vParamAplic.C3Recibo, RS, Rs2)
-            c4 = CargaParametroRec(vParamAplic.C4Recibo, RS, Rs2)
+            Sql = "select * from straba where codtraba = " & db.numero(Rs!CodTraba)
+            Set Rs2 = db.cursor(Sql)
+            c1 = CargaParametroRec(vParamAplic.C1Recibo, Rs, Rs2)
+            c2 = CargaParametroRec(vParamAplic.C2Recibo, Rs, Rs2)
+            c3 = CargaParametroRec(vParamAplic.C3Recibo, Rs, Rs2)
+            c4 = CargaParametroRec(vParamAplic.C4Recibo, Rs, Rs2)
             
 '            f1 = RS!fechahora
 '            i1 = RS!TotalFac
-            f1 = CDate(txtCodigo(2).Text)
+            f1 = CDate(txtcodigo(2).Text)
             i1 = 0
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas
-                SQL = "update horas set pasaridoc = 1 where codtraba = " & DBSet(RS!CodTraba, "N")
-                SQL = SQL & " and fecharec = " & db.Fecha(CDate(txtCodigo(2).Text))
+                Sql = "update horas set pasaridoc = 1 where codtraba = " & DBSet(Rs!CodTraba, "N")
+                Sql = Sql & " and fecharec = " & db.Fecha(CDate(txtcodigo(2).Text))
     '            SQL = SQL & " and fechahora = " & DBSet(RS!fechahora, "F")
-                db.ejecutar SQL
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -968,10 +968,10 @@ Private Sub CargaFacturasBod(DFecha As Date, HFecha As Date, Tipo As Byte)
 
     
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -989,7 +989,7 @@ On Error GoTo err_CargaFacturas
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 Dim codigoTipom As String
 
     Set db = New BaseDatos
@@ -1006,20 +1006,20 @@ Dim codigoTipom As String
             
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select rbodfacturas.*, stipom.letraser " & _
-            " from rbodfacturas, usuarios.stipom where rbodfacturas.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
-            " and rbodfacturas.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
+    Sql = "select rbodfacturas.*, stipom.letraser " & _
+            " from rbodfacturas, usuarios.stipom where rbodfacturas.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
+            " and rbodfacturas.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
             " and rbodfacturas.codtipom = stipom.codtipom " & _
             " and rbodfacturas.pasaridoc = 0 " & _
             " and mid(rbodfacturas.codtipom,2,2) = " & DBSet(codigoTipom, "T")
     
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1032,20 +1032,20 @@ Dim codigoTipom As String
             '++monica: seleccionamos que rpt se ha de ejecutar
 
 '            cadParam = "pEmpresa=""AriagroRec""|"
-            cadparam = ""
+            CadParam = ""
             numParam = 1
             indRPT = 41 'Impresion de Factura de retirada de almazara / bodega
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             '++
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = False
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{rbodfacturas.codtipom} = '" & RS!CodTipom & "' and " & _
-                                  "{rbodfacturas.numfactu} =" & CStr(RS!numfactu) & " and " & _
-                                  "{rbodfacturas.fecfactu} = Date(" & Format(RS!fecfactu, "yyyy") & _
-                                                        "," & Format(RS!fecfactu, "mm") & _
-                                                        "," & Format(RS!fecfactu, "dd") & ")"
+            fr.FormulaSeleccion = "{rbodfacturas.codtipom} = '" & Rs!CodTipom & "' and " & _
+                                  "{rbodfacturas.numfactu} =" & CStr(Rs!numfactu) & " and " & _
+                                  "{rbodfacturas.fecfactu} = Date(" & Format(Rs!fecfactu, "yyyy") & _
+                                                        "," & Format(Rs!fecfactu, "mm") & _
+                                                        "," & Format(Rs!fecfactu, "dd") & ")"
             fr.FicheroPDF = FicheroPDF
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
@@ -1055,55 +1055,55 @@ Dim codigoTipom As String
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            SQL = "select count(distinct codvarie) from rbodfacturas_lineas where "
-            SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-            SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-            SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F")
+            Sql = "select count(distinct codvarie) from rbodfacturas_lineas where "
+            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(SQL) > 1 Then
+            If TotalRegistros(Sql) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                SQL = "select nomvarie from variedades where codvarie in ( "
-                SQL = SQL & "select codvarie from rbodfacturas_lineas where "
-                SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-                SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-                SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F") & " ) "
+                Sql = "select nomvarie from variedades where codvarie in ( "
+                Sql = Sql & "select codvarie from rbodfacturas_lineas where "
+                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(SQL)
+                Variedad = DevuelveValor(Sql)
             End If
             
             
-            SQL = "select * from rsocios where codsocio = " & db.numero(RS!Codsocio)
-            Set Rs2 = db.cursor(SQL)
+            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(Sql)
 
             Select Case Tipo
                 Case 0 ' almazara
-                    c1 = CargaParametroFacBOD(vParamAplic.C1Almz, RS, Rs2, Variedad)
-                    c2 = CargaParametroFacBOD(vParamAplic.C2Almz, RS, Rs2, Variedad)
-                    c3 = CargaParametroFacBOD(vParamAplic.C3Almz, RS, Rs2, Variedad)
-                    c4 = CargaParametroFacBOD(vParamAplic.C4Almz, RS, Rs2, Variedad)
+                    c1 = CargaParametroFacBOD(vParamAplic.C1Almz, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFacBOD(vParamAplic.C2Almz, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFacBOD(vParamAplic.C3Almz, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFacBOD(vParamAplic.C4Almz, Rs, Rs2, Variedad)
                 Case 1 ' bodega
-                    c1 = CargaParametroFacBOD(vParamAplic.C1BOD, RS, Rs2, Variedad)
-                    c2 = CargaParametroFacBOD(vParamAplic.C2BOD, RS, Rs2, Variedad)
-                    c3 = CargaParametroFacBOD(vParamAplic.C3BOD, RS, Rs2, Variedad)
-                    c4 = CargaParametroFacBOD(vParamAplic.C4BOD, RS, Rs2, Variedad)
+                    c1 = CargaParametroFacBOD(vParamAplic.C1BOD, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFacBOD(vParamAplic.C2BOD, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFacBOD(vParamAplic.C3BOD, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFacBOD(vParamAplic.C4BOD, Rs, Rs2, Variedad)
             End Select
                         
             
-            f1 = RS!fecfactu
-            i1 = RS!TotalFac
+            f1 = Rs!fecfactu
+            i1 = Rs!TotalFac
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                SQL = "update rbodfacturas set pasaridoc = 1 where codtipom = " & DBSet(RS!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(RS!numfactu, "N") & " and fecfactu = " & DBSet(RS!fecfactu, "F")
-                db.ejecutar SQL
+                Sql = "update rbodfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -1119,10 +1119,10 @@ Private Sub CargaFacturasTransporte(TipoFact As Byte, DFecha As Date, HFecha As 
 '           1 = Liquidacion
 
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -1142,7 +1142,7 @@ On Error GoTo err_CargaFacturas
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 
     Set db = New BaseDatos
     db.Tipo = "MYSQL"
@@ -1151,19 +1151,19 @@ Dim cadparam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select rfacttra.*, stipom.letraser " & _
-            " from rfacttra, usuarios.stipom where rfacttra.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
-            " and rfacttra.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
+    Sql = "select rfacttra.*, stipom.letraser " & _
+            " from rfacttra, usuarios.stipom where rfacttra.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
+            " and rfacttra.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
             " and rfacttra.codtipom = stipom.codtipom " & _
             " and rfacttra.pasaridoc = 0"
             
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1177,52 +1177,52 @@ Dim cadparam As String
             '++monica: seleccionamos que rpt se ha de ejecutar
 
 '            cadParam = "pEmpresa=""AriagroRec""|"
-            cadparam = ""
+            CadParam = ""
             numParam = 1
             
             indRPT = 49
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             '++
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = False
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{rfacttra.codtipom} = '" & RS!CodTipom & "' and " & _
-                                  "{rfacttra.numfactu} =" & CStr(RS!numfactu) & " and " & _
-                                  "{rfacttra.fecfactu} = Date(" & Format(RS!fecfactu, "yyyy") & _
-                                                        "," & Format(RS!fecfactu, "mm") & _
-                                                        "," & Format(RS!fecfactu, "dd") & ")"
+            fr.FormulaSeleccion = "{rfacttra.codtipom} = '" & Rs!CodTipom & "' and " & _
+                                  "{rfacttra.numfactu} =" & CStr(Rs!numfactu) & " and " & _
+                                  "{rfacttra.fecfactu} = Date(" & Format(Rs!fecfactu, "yyyy") & _
+                                                        "," & Format(Rs!fecfactu, "mm") & _
+                                                        "," & Format(Rs!fecfactu, "dd") & ")"
             fr.FicheroPDF = FicheroPDF
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            SQL = "select * from rtransporte where codtrans = " & db.Texto(RS!codTrans)
-            Set Rs2 = db.cursor(SQL)
+            Sql = "select * from rtransporte where codtrans = " & db.Texto(Rs!codTrans)
+            Set Rs2 = db.cursor(Sql)
             
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            SQL = "select count(distinct codvarie) from rfacttra_albaran where "
-            SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-            SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-            SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F")
+            Sql = "select count(distinct codvarie) from rfacttra_albaran where "
+            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(SQL) > 1 Then
+            If TotalRegistros(Sql) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                SQL = "select nomvarie from variedades where codvarie in ( "
-                SQL = SQL & "select codvarie from rfacttra_variedad where "
-                SQL = SQL & " codtipom = " & DBSet(RS!CodTipom, "T") & " and "
-                SQL = SQL & " numfactu = " & CStr(RS!numfactu) & " and "
-                SQL = SQL & " fecfactu = " & DBSet(RS!fecfactu, "F") & " ) "
+                Sql = "select nomvarie from variedades where codvarie in ( "
+                Sql = Sql & "select codvarie from rfacttra_variedad where "
+                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
+                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(SQL)
+                Variedad = DevuelveValor(Sql)
             End If
 
-            c1 = CargaParametroFacTra(vParamAplic.C1Transporte, RS, Rs2, Variedad)
-            c2 = CargaParametroFacTra(vParamAplic.C2Transporte, RS, Rs2, Variedad)
-            c3 = CargaParametroFacTra(vParamAplic.C3Transporte, RS, Rs2, Variedad)
-            c4 = CargaParametroFacTra(vParamAplic.C4Transporte, RS, Rs2, Variedad)
+            c1 = CargaParametroFacTra(vParamAplic.C1Transporte, Rs, Rs2, Variedad)
+            c2 = CargaParametroFacTra(vParamAplic.C2Transporte, Rs, Rs2, Variedad)
+            c3 = CargaParametroFacTra(vParamAplic.C3Transporte, Rs, Rs2, Variedad)
+            c4 = CargaParametroFacTra(vParamAplic.C4Transporte, Rs, Rs2, Variedad)
                 
 '                Case 2 ' rectificativas
 '                    TipoFact1 = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(RS!rectif_codtipom, "T"))
@@ -1242,20 +1242,20 @@ Dim cadparam As String
 '
 '            End Select
             
-            f1 = RS!fecfactu
-            i1 = RS!TotalFac
+            f1 = Rs!fecfactu
+            i1 = Rs!TotalFac
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                SQL = "update rfacttra set pasaridoc = 1 where codtipom = " & DBSet(RS!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(RS!numfactu, "N") & " and fecfactu = " & DBSet(RS!fecfactu, "F")
-                db.ejecutar SQL
+                Sql = "update rfacttra set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -1272,10 +1272,10 @@ Private Sub CargaFacturasPozos(TipoFact As Byte, DFecha As Date, HFecha As Date)
 '           1 = mantenimiento
 
     Dim db As BaseDatos
-    Dim SQL As String
-    Dim RS As ADODB.Recordset
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim I As Long
+    Dim i As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -1296,7 +1296,7 @@ On Error GoTo err_CargaFacturas
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim numParam As Byte
-Dim cadparam As String
+Dim CadParam As String
 
     Set db = New BaseDatos
     db.Tipo = "MYSQL"
@@ -1305,33 +1305,33 @@ Dim cadparam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    SQL = "select rrecibpozos.*, stipom.letraser " & _
-            " from rrecibpozos, usuarios.stipom where rrecibpozos.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
-            " and rrecibpozos.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
+    Sql = "select rrecibpozos.*, stipom.letraser " & _
+            " from rrecibpozos, usuarios.stipom where rrecibpozos.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
+            " and rrecibpozos.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
             " and rrecibpozos.codtipom = stipom.codtipom " & _
             " and rrecibpozos.pasaridoc = 0"
             
     Select Case TipoFact
         Case 0 ' consumo
             '[Monica]01/04/2011 añadidas 7,9 anticipos de almazara y de bodega
-            SQL = SQL & " and rrecibpozos.codtipom in ('RCP')"
+            Sql = Sql & " and rrecibpozos.codtipom in ('RCP')"
         Case 1 ' mantenimiento
             '[Monica]01/04/2011 añadidas 8,10 liquidaciones de almazara y de bodega
-            SQL = SQL & " and rrecibpozos.codtipom in ('RMP')" ' [Monica]26/04/2010: añadidas 5 y 6
+            Sql = Sql & " and rrecibpozos.codtipom in ('RMP')" ' [Monica]26/04/2010: añadidas 5 y 6
         Case 2 ' facturas de talla
-            SQL = SQL & " and rrecibpozos.codtipom in ('TAL')" ' [Monica]29/06/2012: añadidas facturas de talla
+            Sql = Sql & " and rrecibpozos.codtipom in ('TAL')" ' [Monica]29/06/2012: añadidas facturas de talla
         Case 3 ' contadores
-            SQL = SQL & " and rrecibpozos.codtipom in ('RVP')" ' [Monica]27/06/2013: añadidas facturas de contadores
+            Sql = Sql & " and rrecibpozos.codtipom in ('RVP')" ' [Monica]27/06/2013: añadidas facturas de contadores
         
     End Select
             
-    Set RS = db.cursor(SQL)
+    Set Rs = db.cursor(Sql)
     
-    If Not RS.EOF Then
-        RS.MoveFirst
-        While Not RS.EOF
-            I = I + 1
-            lblInf.Caption = "Procesando registro " & CStr(I)
+    If Not Rs.EOF Then
+        Rs.MoveFirst
+        While Not Rs.EOF
+            i = i + 1
+            lblInf.Caption = "Procesando registro " & CStr(i)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1345,72 +1345,72 @@ Dim cadparam As String
             '++monica: seleccionamos que rpt se ha de ejecutar
 
 '            cadParam = "pEmpresa=""AriagroRec""|"
-            cadparam = ""
+            CadParam = ""
             numParam = 1
             
                         
-            If DBLet(RS!CodTipom, "T") = "RCP" Then
+            If DBLet(Rs!CodTipom, "T") = "RCP" Then
                 indRPT = 46
             Else ' RMP y TAL
                 indRPT = 47 'Impresion de Factura
             End If
             
-            If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
             
-            If DBLet(RS!CodTipom, "T") = "TAL" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
-            If DBLet(RS!CodTipom, "T") = "RVP" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
+            If DBLet(Rs!CodTipom, "T") = "TAL" Then nomDocu = Replace(nomDocu, "Mto.", "Tal.")
+            If DBLet(Rs!CodTipom, "T") = "RVP" Then nomDocu = Replace(nomDocu, "Mto.", "Cont.")
             
             '++
             fr.NumeroParametros = numParam
-            fr.OtrosParametros = cadparam
+            fr.OtrosParametros = CadParam
             fr.ConSubInforme = True
             fr.Informe = App.Path & "\Informes\" & nomDocu
-            fr.FormulaSeleccion = "{rrecibpozos.codtipom} = '" & RS!CodTipom & "' and " & _
-                                  "{rrecibpozos.numfactu} =" & CStr(RS!numfactu) & " and " & _
-                                  "{rrecibpozos.fecfactu} = Date(" & Format(RS!fecfactu, "yyyy") & _
-                                                        "," & Format(RS!fecfactu, "mm") & _
-                                                        "," & Format(RS!fecfactu, "dd") & ")"
+            fr.FormulaSeleccion = "{rrecibpozos.codtipom} = '" & Rs!CodTipom & "' and " & _
+                                  "{rrecibpozos.numfactu} =" & CStr(Rs!numfactu) & " and " & _
+                                  "{rrecibpozos.fecfactu} = Date(" & Format(Rs!fecfactu, "yyyy") & _
+                                                        "," & Format(Rs!fecfactu, "mm") & _
+                                                        "," & Format(Rs!fecfactu, "dd") & ")"
             fr.FicheroPDF = FicheroPDF
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            SQL = "select * from rsocios where codsocio = " & db.numero(RS!Codsocio)
-            Set Rs2 = db.cursor(SQL)
+            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(Sql)
             
             Variedad = ""
 
             Select Case TipoFact
                 Case 0 ' consumo
-                    c1 = CargaParametroFac(vParamAplic.C1Anticipo, RS, Rs2, Variedad)
-                    c2 = CargaParametroFac(vParamAplic.C2Anticipo, RS, Rs2, Variedad)
-                    c3 = CargaParametroFac(vParamAplic.C3Anticipo, RS, Rs2, Variedad)
-                    c4 = CargaParametroFac(vParamAplic.C4Anticipo, RS, Rs2, Variedad)
+                    c1 = CargaParametroFac(vParamAplic.C1Anticipo, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFac(vParamAplic.C2Anticipo, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFac(vParamAplic.C3Anticipo, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFac(vParamAplic.C4Anticipo, Rs, Rs2, Variedad)
                 Case 1 ' mantenimiento
-                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, RS, Rs2, Variedad)
-                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, RS, Rs2, Variedad)
-                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, RS, Rs2, Variedad)
-                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, RS, Rs2, Variedad)
+                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, Rs, Rs2, Variedad)
                 Case 2 ' facturas de talla
-                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, RS, Rs2, Variedad)
-                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, RS, Rs2, Variedad)
-                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, RS, Rs2, Variedad)
-                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, RS, Rs2, Variedad)
+                    c1 = CargaParametroFac(vParamAplic.C1Liquidacion, Rs, Rs2, Variedad)
+                    c2 = CargaParametroFac(vParamAplic.C2Liquidacion, Rs, Rs2, Variedad)
+                    c3 = CargaParametroFac(vParamAplic.C3Liquidacion, Rs, Rs2, Variedad)
+                    c4 = CargaParametroFac(vParamAplic.C4Liquidacion, Rs, Rs2, Variedad)
             End Select
             
-            f1 = RS!fecfactu
-            i1 = RS!TotalFact
+            f1 = Rs!fecfactu
+            i1 = Rs!TotalFact
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                SQL = "update rrecibpozos set pasaridoc = 1 where codtipom = " & DBSet(RS!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(RS!numfactu, "N") & " and fecfactu = " & DBSet(RS!fecfactu, "F")
-                db.ejecutar SQL
+                Sql = "update rrecibpozos set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar Sql
             End If
             
             Unload fr
             Set fr = Nothing
             
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
     Exit Sub
@@ -1425,12 +1425,12 @@ End Sub
 
 
 
-Private Function CargaParametroFac(param As Byte, ByRef RS As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
+Private Function CargaParametroFac(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
     Select Case param
         Case 0 'facturas
-            CargaParametroFac = Format(RS!numfactu, "0000000") & "-" & RS!letraser
+            CargaParametroFac = Format(Rs!numfactu, "0000000") & "-" & Rs!letraser
         Case 1 'codigo socio
-            CargaParametroFac = RS!Codsocio
+            CargaParametroFac = Rs!Codsocio
         Case 2 'nombre socio
             CargaParametroFac = Rs2!nomsocio
         Case 3 'variedad???
@@ -1441,8 +1441,8 @@ Private Function CargaParametroFac(param As Byte, ByRef RS As ADODB.Recordset, B
 
 End Function
 
-Private Function CargaParametroFacADV(param As Byte, ByRef RS As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset) As String
-Dim SQL As String
+Private Function CargaParametroFacADV(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset) As String
+Dim Sql As String
 Dim rs3 As ADODB.Recordset
 Dim db As BaseDatos
 
@@ -1453,9 +1453,9 @@ Dim db As BaseDatos
 
     Select Case param
         Case 0 'factura
-            CargaParametroFacADV = Format(RS!numfactu, "0000000") & "-" & RS!letraser
+            CargaParametroFacADV = Format(Rs!numfactu, "0000000") & "-" & Rs!letraser
         Case 1 'codigo socio
-            CargaParametroFacADV = RS!Codsocio
+            CargaParametroFacADV = Rs!Codsocio
         Case 2 'nombre socio
             CargaParametroFacADV = Rs2!nomsocio
         Case 3 'destino
@@ -1467,13 +1467,13 @@ Dim db As BaseDatos
     End Select
 End Function
 
-Private Function CargaParametroRec(param As Byte, ByRef RS As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset) As String
+Private Function CargaParametroRec(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset) As String
     Select Case param
         Case 0 'facturas
 '            CargaParametroRec = Format(RS!numfactu, "0000000") & "-" & RS!letraser
-            CargaParametroRec = RS!CodTraba
+            CargaParametroRec = Rs!CodTraba
         Case 1 'codigo trabajador
-            CargaParametroRec = Rs2!NomTraba
+            CargaParametroRec = Rs2!nomtraba
         Case 2 'nombre trabajador
             CargaParametroRec = "ARIAGROREC"
         Case 3 'procedencia
@@ -1484,8 +1484,8 @@ Private Function CargaParametroRec(param As Byte, ByRef RS As ADODB.Recordset, B
 
 End Function
 
-Private Function CargaParametroFacBOD(param As Byte, ByRef RS As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
-Dim SQL As String
+Private Function CargaParametroFacBOD(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
+Dim Sql As String
 Dim rs3 As ADODB.Recordset
 Dim db As BaseDatos
 
@@ -1496,9 +1496,9 @@ Dim db As BaseDatos
 
     Select Case param
         Case 0 'factura
-            CargaParametroFacBOD = Format(RS!numfactu, "0000000") & "-" & RS!letraser
+            CargaParametroFacBOD = Format(Rs!numfactu, "0000000") & "-" & Rs!letraser
         Case 1 'codigo socio
-            CargaParametroFacBOD = RS!Codsocio
+            CargaParametroFacBOD = Rs!Codsocio
         Case 2 'nombre socio
             CargaParametroFacBOD = Rs2!nomsocio
         Case 3 'variedades
@@ -1509,12 +1509,12 @@ Dim db As BaseDatos
 End Function
 
 
-Private Function CargaParametroFacTra(param As Byte, ByRef RS As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
+Private Function CargaParametroFacTra(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
     Select Case param
         Case 0 'facturas
-            CargaParametroFacTra = Format(RS!numfactu, "0000000") & "-" & RS!letraser
+            CargaParametroFacTra = Format(Rs!numfactu, "0000000") & "-" & Rs!letraser
         Case 1 'codigo transportista
-            CargaParametroFacTra = RS!codTrans
+            CargaParametroFacTra = Rs!codTrans
         Case 2 'nombre socio
             CargaParametroFacTra = Rs2!nomtrans
         Case 3 'variedad???
@@ -1530,7 +1530,7 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
@@ -1579,53 +1579,53 @@ End Sub
 Private Function CargaPath(Codigo As Integer) As String
 Dim Nod As Node
 Dim J As Integer
-Dim I As Integer
-Dim C As String
+Dim i As Integer
+Dim c As String
 Dim campo1 As String
 Dim padre As String
 Dim A As String
 
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
     'distinto del cargapath de parametros de aplicacion
 
-    SQL = "select nombre, padre from carpetas where codcarpeta = " & DBSet(Codigo, "N")
-    Set RS = ardDB.cursor(SQL)
+    Sql = "select nombre, padre from carpetas where codcarpeta = " & DBSet(Codigo, "N")
+    Set Rs = ardDB.cursor(Sql)
 
-    If Not RS.EOF Then
-        C = "\" & RS!Nombre
-        If RS!padre > 0 Then
-            C = CargaPath(CInt(RS!padre)) & C
+    If Not Rs.EOF Then
+        c = "\" & Rs!Nombre
+        If Rs!padre > 0 Then
+            c = CargaPath(CInt(Rs!padre)) & c
         End If
     End If
     
-    CargaPath = C
+    CargaPath = c
 End Function
 
 
 
 Private Function IntentaMatar(FicheroPDF As String) As Boolean
-Dim I As Integer
+Dim i As Integer
 
     On Error Resume Next
-    I = 1
+    i = 1
     IntentaMatar = False
     Do
         If Dir(FicheroPDF, vbArchive) <> "" Then
             Kill FicheroPDF
             If Err.Number <> 0 Then
                 Err.Clear
-                I = I + 1
+                i = i + 1
             Else
                 IntentaMatar = True
-                I = 6
+                i = 6
             End If
         Else
             IntentaMatar = True
-            I = 6
+            i = 6
         End If
-    Loop Until I < 5 Or IntentaMatar = True
+    Loop Until i < 5 Or IntentaMatar = True
     
     
 End Function

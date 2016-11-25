@@ -348,11 +348,11 @@ Dim ConSubInforme As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -411,7 +411,7 @@ Dim devuelve As String
     ProcesoFacturacionRectificativa Tabla, cadSelect
     
     DesBloqueoManual ("RECFAC") 'RECtificativas FACturas
-    pb1.visible = False
+    Pb1.visible = False
     
 End Sub
 
@@ -443,7 +443,7 @@ Dim List As Collection
     
     indFrame = 0
     txtcodigo(10).Text = Format(Now, "dd/mm/yyyy")
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
     Combo1(0).ListIndex = 0
     
     Me.FrameGenFacturaRect.Top = -90
@@ -457,7 +457,7 @@ Dim List As Collection
     Me.Check1(1).Value = 1
     
     'Esto se consigue poniendo el cancel en el opcion k corresponda
-    Me.CmdCancel(0).Cancel = True
+    Me.cmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -727,11 +727,11 @@ Dim Sql2 As String
                 
         Nregs = TotalRegistrosConsulta("select * from " & nTabla & " where " & cadSelect)
         If Nregs <> 0 Then
-                Me.pb1.visible = True
-                Me.pb1.Max = Nregs
-                Me.pb1.Value = 0
+                Me.Pb1.visible = True
+                Me.Pb1.Max = Nregs
+                Me.Pb1.Value = 0
                 Me.Refresh
-                b = FacturacionRectificativa(nTabla, cadSelect, txtcodigo(10).Text, Me.pb1)
+                b = FacturacionRectificativa(nTabla, cadSelect, txtcodigo(10).Text, Me.Pb1)
                 If b Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
@@ -812,7 +812,7 @@ Dim Sql2 As String
 End Sub
 
 
-Private Function FacturacionRectificativa(cTabla As String, cWhere As String, FecFac As String, pb1 As ProgressBar) As Boolean
+Private Function FacturacionRectificativa(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -938,7 +938,7 @@ Dim Tipo As Integer
             End If
         Loop Until Not Existe
             
-        IncrementarProgresNew pb1, 1
+        IncrementarProgresNew Pb1, 1
         
         'insertar en la tabla de cabecera de facturas
         Sql = "insert into rfactsoc (codtipom,numfactu,fecfactu,codsocio,baseimpo,tipoiva,porc_iva,imporiva,tipoirpf,basereten,porc_ret,"
@@ -954,7 +954,7 @@ Dim Tipo As Integer
         Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
         Sql = Sql & DBSet(Rs!TipoIVA, "N") & ","
-        Sql = Sql & DBSet(Rs!porc_iva, "N") & ","
+        Sql = Sql & DBSet(Rs!Porc_Iva, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
         Sql = Sql & DBSet(Rs!TipoIRPF, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo

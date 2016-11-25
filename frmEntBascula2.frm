@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmEntBascula2 
@@ -774,15 +774,15 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 Public crear As Byte ' 0=false 1=true
 Public NumNota As String
 Public NumCajones As String
-Public NumKilos As String
-Public CodSocio As String
-Public CodCampo As String
+Public Numkilos As String
+Public Codsocio As String
+Public codcampo As String
 Public CodVarie As String
 Public Fecha As String
-Public hora As String
+Public Hora As String
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 
 Dim Modo As Byte
@@ -921,7 +921,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim sql As String
+Dim Sql As String
 Dim temp As Boolean
 
 '    On Error GoTo Error2
@@ -984,7 +984,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     i = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
                     adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                     
@@ -1002,7 +1002,7 @@ Private Sub cmdAceptar_Click()
             End If
             TerminaBloquear
             PonerModo 2
-            CargaGrid cadB
+            CargaGrid CadB
             BotonModificar
     End Select
 End Sub
@@ -1073,7 +1073,7 @@ Private Sub Form_Activate()
 '            End If
 '        End If
         PrimeraVez = False
-        cadB = ""
+        CadB = ""
         CargaGrid
         mnPaletsPalots_Click
 
@@ -1083,7 +1083,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim sql As String
+Dim Sql As String
     PrimeraVez = True
 
     With Me.Toolbar1
@@ -1121,13 +1121,13 @@ Dim sql As String
             InsertarPalets 0
         End If
     Else
-        sql = "select count(*) from trzpalets where numnotac = " & Trim(NumNota)
+        Sql = "select count(*) from trzpalets where numnotac = " & Trim(NumNota)
         If Val(NumCajones) <> 0 Then
-            Text1(10).Text = Format(TotalRegistros(sql), "###,##0")
+            Text1(10).Text = Format(TotalRegistros(Sql), "###,##0")
             Text1(11).Text = ""
         Else
             Text1(10).Text = ""
-            Text1(11).Text = Format(TotalRegistros(sql), "###,##0")
+            Text1(11).Text = Format(TotalRegistros(Sql), "###,##0")
         End If
     End If
     
@@ -1238,20 +1238,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim sql As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        sql = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        sql = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    sql = sql & " ORDER BY trzpalets.idpalet"
+    Sql = Sql & " ORDER BY trzpalets.idpalet"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Id.Palet|1200|;N|||||;"
@@ -1339,7 +1339,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Mens As String
 Dim Rs As ADODB.Recordset
 
@@ -1350,11 +1350,11 @@ Dim Rs As ADODB.Recordset
 '         If ExisteCP(txtAux(0)) Then b = False
 '    End If
 
-    sql = "select numnotac, sum(numcajones), sum(numkilos) from trzpalets where numnotac = " & DBSet(NumNota, "N")
-    sql = sql & " group by 1 order by 1"
+    Sql = "select numnotac, sum(numcajones), sum(numkilos) from trzpalets where numnotac = " & DBSet(NumNota, "N")
+    Sql = Sql & " group by 1 order by 1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     b = False
     
@@ -1365,7 +1365,7 @@ Dim Rs As ADODB.Recordset
         If DBLet(Rs.Fields(1).Value, "N") <> Val(NumCajones) Then
             MsgBox "La suma de número de cajas no cuadra con el total. Revise.", vbExclamation
         Else
-            If DBLet(Rs.Fields(2).Value, "N") <> Val(NumKilos) Then
+            If DBLet(Rs.Fields(2).Value, "N") <> Val(Numkilos) Then
                 MsgBox "La suma de número de kilos no cuadra con el total. Revise.", vbExclamation
             Else
                 b = True
@@ -1397,17 +1397,17 @@ End Function
 Private Function DatosOkLin() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Mens As String
 Dim Rs As ADODB.Recordset
 
     b = CompForm(Me)
     If Not b Then Exit Function
 
-    sql = "select count(*) from trzpalets where idpalet <> " & DBSet(txtAux(0).Text, "N")
-    sql = sql & " and crfid = " & DBSet(txtAux(10).Text, "T")
+    Sql = "select count(*) from trzpalets where idpalet <> " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and crfid = " & DBSet(txtAux(10).Text, "T")
     
-    If TotalRegistros(sql) <> 0 Then
+    If TotalRegistros(Sql) <> 0 Then
         MsgBox "Este Numero CRFID está asignado a otro palet. Revise.", vbExclamation
         txtAux(10).Text = ""
         b = False
@@ -1430,7 +1430,7 @@ Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
         cadReg = PonerContRegistros(Me.adodc1)
-        If cadB = "" Then
+        If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
             lblIndicador.Caption = "BUSQUEDA: " & cadReg
@@ -1449,20 +1449,19 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
 Private Sub InsertarPalets(Palets As Long)
-Dim sql As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Kilos As Currency
-Dim Cajas As Currency
+Dim cajas As Currency
 Dim nroPalets As Integer
 Dim RestoCajas As Currency
 Dim KilosporPalet As Currency
@@ -1471,8 +1470,8 @@ Dim RestoKilos As Currency
 Dim NumF As String
 Dim Tipo As Byte
 
-    sql = "delete from trzpalets where numnotac = " & Trim(NumNota)
-    conn.Execute sql
+    Sql = "delete from trzpalets where numnotac = " & Trim(NumNota)
+    conn.Execute Sql
     
     If Val(Text1(8).Text) <> 0 Then ' si palets
         ' se reparte en palets las cajas
@@ -1482,7 +1481,7 @@ Dim Tipo As Byte
             nroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
             RestoCajas = Val(NumCajones) Mod vParamAplic.CajasporPalet
             
-            KilosporPalet = (vParamAplic.CajasporPalet * NumKilos) \ Val(NumCajones)
+            KilosporPalet = (vParamAplic.CajasporPalet * Numkilos) \ Val(NumCajones)
             TotKilos = 0
         
             For i = 1 To nroPalets
@@ -1490,67 +1489,67 @@ Dim Tipo As Byte
                 
                 TotKilos = TotKilos + KilosporPalet
                 
-                sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-                sql = sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-                sql = sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
-                sql = sql & DBSet(KilosporPalet, "N") & "," & DBSet(CodSocio, "N") & "," & DBSet(CodCampo, "N") & ","
-                sql = sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & hora, "FH", "S") & ","
-                sql = sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
+                Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+                Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+                Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
+                Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
+                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
-                conn.Execute sql
+                conn.Execute Sql
             Next i
             
             If RestoCajas <> 0 Then ' insertamos el ultimo palet con el resto
                 NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
                 
-                RestoKilos = NumKilos - (KilosporPalet * nroPalets)
+                RestoKilos = Numkilos - (KilosporPalet * nroPalets)
                 
                 TotKilos = TotKilos + RestoKilos
                 
-                sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-                sql = sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-                sql = sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(RestoCajas, "N") & ","
-                sql = sql & DBSet(RestoKilos, "N") & "," & DBSet(CodSocio, "N") & "," & DBSet(CodCampo, "N") & ","
-                sql = sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & hora, "FH", "S") & ","
-                sql = sql & DBSet(NumNota, "T") & "," & ValorNulo & ")"
+                Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+                Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+                Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(RestoCajas, "N") & ","
+                Sql = Sql & DBSet(RestoKilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
+                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(NumNota, "T") & "," & ValorNulo & ")"
                 
-                conn.Execute sql
+                conn.Execute Sql
                 
                 nroPalets = nroPalets + 1
             End If
             
-            RestoKilos = NumKilos - TotKilos
+            RestoKilos = Numkilos - TotKilos
             
             If RestoKilos <> 0 Then ' actualizamos el ultimo registro si hay resto de kilos
-                sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
-                sql = sql & " where idpalet = " & DBSet(NumF, "N")
+                Sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
+                Sql = Sql & " where idpalet = " & DBSet(NumF, "N")
                 
-                conn.Execute sql
+                conn.Execute Sql
             End If
         Else ' partimos del nro de palets
             nroPalets = Palets
-            Kilos = NumKilos \ nroPalets
-            Cajas = Val(NumCajones) \ nroPalets
+            Kilos = Numkilos \ nroPalets
+            cajas = Val(NumCajones) \ nroPalets
             
             For i = 1 To nroPalets
                 NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
                 
-                sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-                sql = sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-                sql = sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(Cajas, "N") & ","
-                sql = sql & DBSet(Kilos, "N") & "," & DBSet(CodSocio, "N") & "," & DBSet(CodCampo, "N") & ","
-                sql = sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & hora, "FH", "S") & ","
-                sql = sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
+                Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+                Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+                Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(cajas, "N") & ","
+                Sql = Sql & DBSet(Kilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
+                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
-                conn.Execute sql
+                conn.Execute Sql
             Next i
             
-            sql = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (Cajas * nroPalets))
-            sql = sql & ", numkilos = numkilos + " & CCur(NumKilos) - (Kilos * nroPalets)
-            sql = sql & " where numnotac = " & DBSet(NumNota, "N")
-            sql = sql & " and idpalet = " & DBSet(NumF, "N")
+            Sql = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
+            Sql = Sql & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
+            Sql = Sql & " where numnotac = " & DBSet(NumNota, "N")
+            Sql = Sql & " and idpalet = " & DBSet(NumF, "N")
             
-            conn.Execute sql
+            conn.Execute Sql
         End If
     
         Text1(10).Text = Format(nroPalets, "##,##0")
@@ -1563,27 +1562,27 @@ Dim Tipo As Byte
         Tipo = 1
         
         nroPalets = Val(Text1(11).Text) ' en realidad son palots
-        KilosporPalet = NumKilos \ nroPalets
-        RestoKilos = NumKilos - (KilosporPalet * nroPalets)
+        KilosporPalet = Numkilos \ nroPalets
+        RestoKilos = Numkilos - (KilosporPalet * nroPalets)
     
         For i = 1 To nroPalets
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
-            sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-            sql = sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            sql = sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & ",0,"
-            sql = sql & DBSet(KilosporPalet, "N") & "," & DBSet(CodSocio, "N") & "," & DBSet(CodCampo, "N") & ","
-            sql = sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & hora, "FH", "S") & ","
-            sql = sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
+            Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & ",0,"
+            Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
+            Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
             
-            conn.Execute sql
+            conn.Execute Sql
         Next i
         
         If RestoKilos <> 0 Then ' actualizamos los kilos del ultimo palot
-            sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
-            sql = sql & " where idpalet = " & DBSet(NumF, "N")
+            Sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
+            Sql = Sql & " where idpalet = " & DBSet(NumF, "N")
             
-            conn.Execute sql
+            conn.Execute Sql
         End If
     
     End If
@@ -1598,23 +1597,23 @@ Private Sub CargarDatosCabecera()
 
     Text1(0).Text = NumNota
     Text1(8).Text = Val(NumCajones)
-    Text1(9).Text = NumKilos
-    Text1(4).Text = CodSocio
-    Text1(7).Text = CodCampo
+    Text1(9).Text = Numkilos
+    Text1(4).Text = Codsocio
+    Text1(7).Text = codcampo
     Text1(3).Text = CodVarie
     Text1(1).Text = Fecha
-    Text1(2).Text = hora
-    Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", CodSocio, "N")
+    Text1(2).Text = Hora
+    Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Codsocio, "N")
     Text2(1).Text = DevuelveDesdeBDNew(cAgro, "variedades", "nomvarie", "codvarie", CodVarie, "N")
 
-    PonerDatosCampo CodCampo
+    PonerDatosCampo codcampo
 
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
 Dim Cad As String
 Dim Cad1 As String
-Dim numRegis As Long
+Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
 
 
@@ -1684,7 +1683,7 @@ End Function
 
 
 Private Function SalirFormulario() As Boolean
-Dim sql As String
+Dim Sql As String
 Dim b As Boolean
 Dim Rs As ADODB.Recordset
 Dim Cad As String
@@ -1698,9 +1697,9 @@ Dim Cad As String
     Cad = "Todos los registros deben de tener el CRFID. "
     
     Set Rs = New ADODB.Recordset
-    sql = "select crfid from trzpalets where numnotac = " & DBSet(NumNota, "N")
+    Sql = "select crfid from trzpalets where numnotac = " & DBSet(NumNota, "N")
     
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then b = False
     
@@ -1717,8 +1716,8 @@ Dim Cad As String
             SalirFormulario = False
         Else
             ' borramos los registros antes de salir
-            sql = "delete from trzpalets where numnotac = " & DBSet(NumNota, "N")
-            conn.Execute sql
+            Sql = "delete from trzpalets where numnotac = " & DBSet(NumNota, "N")
+            conn.Execute Sql
         End If
     End If
     Exit Function

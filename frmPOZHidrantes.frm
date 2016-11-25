@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
@@ -1578,7 +1578,7 @@ Private HaDevueltoDatos As Boolean
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim cadB As String
+Dim CadB As String
 
 Dim vSeccion As CSeccion
 Dim b As Boolean
@@ -1590,7 +1590,7 @@ Private NumKilosAnt As Currency
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -1861,7 +1861,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
        
     
 ' cambio la siguiente expresion por la de abajo
@@ -1961,7 +1961,7 @@ Dim i As Byte
     b = (Modo = 3 Or Modo = 4 Or Modo = 2)
     For i = 0 To ToolAux.Count - 1
         ToolAux(i).Buttons(1).Enabled = b
-        If b Then bAux = (b And Me.AdoAux(i).Recordset.RecordCount > 0)
+        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
@@ -1985,13 +1985,13 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
         Screen.MousePointer = vbHourglass
         'Sabem quins camps son els que mos torna
         'Creem una cadena consulta i posem els datos
-        cadB = ""
+        CadB = ""
         Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        cadB = Aux
+        CadB = Aux
         '   Com la clau principal es única, en posar el sql apuntant
         '   al valor retornat sobre la clau ppal es suficient
         ' *** canviar o llevar el WHERE; repasar codEmpre ***
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         'CadenaConsulta = "select * from " & NombreTabla & " WHERE codempre = " & codEmpre & " AND " & CadB & " " & Ordenacion
         ' **********************************
         PonerCadenaBusqueda
@@ -2232,12 +2232,12 @@ End Sub
 
 Private Sub HacerBusqueda()
     
-    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia cadB
-    ElseIf cadB <> "" Then
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        MandaBusquedaPrevia CadB
+    ElseIf CadB <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
@@ -2247,7 +2247,7 @@ Private Sub HacerBusqueda()
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
     Dim Cad As String
     Dim NombreTabla1 As String
         
@@ -2266,8 +2266,8 @@ Private Sub MandaBusquedaPrevia(cadB As String)
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = NombreTabla1
-        frmB.vSQL = cadB
+        frmB.vtabla = NombreTabla1
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
         frmB.vTitulo = "Hidrantes" ' ***** repasa açò: títol de BuscaGrid *****
@@ -2345,7 +2345,7 @@ End Sub
 Private Sub BotonVerTodos()
 'Vore tots
     LimpiarCampos 'Neteja els Text1
-    cadB = ""
+    CadB = ""
     
     PonerModo 0
     
@@ -2424,7 +2424,7 @@ Dim Cad As String
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ' **** repasar si es diu Data1 l'adodc de la capçalera ***
@@ -2455,8 +2455,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     ' *** si n'hi han llínies en datagrids ***
     For i = 0 To DataGridAux.Count - 1
         CargaGrid i, True
-        If Not AdoAux(i).Recordset.EOF Then _
-            PonerCamposForma2 Me, AdoAux(i), 2, "FrameAux" & i
+        If Not Adoaux(i).Recordset.EOF Then _
+            PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
     Next i
     ' *******************************************
     SumaTotalPorcentajes 0
@@ -2572,8 +2572,8 @@ Dim V
                     'SSTab2.Tab = NumTabMto
                     ' ************************
 
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
-                        AdoAux(NumTabMto).Recordset.MoveFirst
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                        Adoaux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llínies
@@ -2586,10 +2586,10 @@ Dim V
                     ' ***********************
 
                     PonerModo 4
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                         ' ***************************************************************
                     End If
 
@@ -2604,7 +2604,7 @@ Dim V
             PosicionarData
 
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not AdoAux(NumTabMto).Recordset.EOF Then
+            If Not Adoaux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2691,7 +2691,7 @@ Dim Cad As String, Indicador As String
 End Sub
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim vWhere As String
 
     On Error GoTo FinEliminar
@@ -2710,10 +2710,10 @@ FinEliminar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Eliminar"
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -2761,7 +2761,7 @@ Dim Sql As String
                 Else
                     If TotalRegistros("select count(*) from rcampos where codsocio = " & DBSet(Text1(Index).Text, "N")) > 0 Then
                         Set frmMens = New frmMensajes
-                        frmMens.cadwhere = "and rcampos.codsocio = " & DBSet(Text1(Index).Text, "N")
+                        frmMens.cadWHERE = "and rcampos.codsocio = " & DBSet(Text1(Index).Text, "N")
                         frmMens.campo = Text1(Index).Text
                         frmMens.OpcionMensaje = 29
                         frmMens.Show vbModal
@@ -2853,8 +2853,8 @@ End Sub
 Private Sub PonerDatosCampo(campo As String)
 Dim Cad As String
 Dim Cad1 As String
-Dim numRegis As Long
-Dim RS As ADODB.Recordset
+Dim NumRegis As Long
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 
 
@@ -2866,17 +2866,17 @@ Dim Sql As String
     If (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Modo = 4 Then
         Sql = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(18).Text, "N")
         
-        Set RS = New ADODB.Recordset
-        RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
        
-        If DBLet(RS.Fields(0)) <> CLng(ComprobarCero(Text1(2).Text)) Then
-            Text1(2).Text = Format(DBLet(RS!Codsocio, "N"), "000000") ' codigo de socio del campo
-            Text2(2).Text = DBLet(RS!nomsocio, "T") ' nombre de socio
+        If DBLet(Rs.Fields(0)) <> CLng(ComprobarCero(Text1(2).Text)) Then
+            Text1(2).Text = Format(DBLet(Rs!Codsocio, "N"), "000000") ' codigo de socio del campo
+            Text2(2).Text = DBLet(Rs!nomsocio, "T") ' nombre de socio
            
            'If MsgBox("¿ Desea traer los datos de RAE al contador ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then Exit Sub
         End If
         
-        Set RS = Nothing
+        Set Rs = Nothing
         
         Exit Sub
         
@@ -2890,10 +2890,10 @@ Dim Sql As String
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla"
      
-    Set RS = New ADODB.Recordset
-    RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
         Text1(3).Text = ""
         Text1(4).Text = ""
         Text1(5).Text = ""
@@ -2902,32 +2902,32 @@ Dim Sql As String
         
         Text1(18).Text = campo
         PonerFormatoEntero Text1(18)
-        Text1(3).Text = DBLet(RS.Fields(0).Value, "N") ' codigo de partida
+        Text1(3).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If Text1(3).Text <> "" Then Text1(3).Text = Format(Text1(3).Text, "0000")
-        Text2(3).Text = DBLet(RS.Fields(1).Value, "T") ' nombre de partida
-        Text2(1).Text = DBLet(RS.Fields(5).Value, "T") ' nombre de poblacion
-        Text1(4).Text = DBLet(RS.Fields(2).Value, "N") ' poligono
+        Text2(3).Text = DBLet(Rs.Fields(1).Value, "T") ' nombre de partida
+        Text2(1).Text = DBLet(Rs.Fields(5).Value, "T") ' nombre de poblacion
+        Text1(4).Text = DBLet(Rs.Fields(2).Value, "N") ' poligono
 '[Monica]03/08/2012: quito el formato de poligono y parcela
 '        If Text1(4).Text <> "" Then Text1(4).Text = Format(Text1(4).Text, "0000")
-        Text1(5).Text = DBLet(RS.Fields(3).Value, "N") ' parcela
+        Text1(5).Text = DBLet(Rs.Fields(3).Value, "N") ' parcela
         
-        If vParamAplic.Cooperativa = 10 Then Text1(5).Text = Text1(5).Text & " " & DBLet(RS.Fields(6).Value)
+        If vParamAplic.Cooperativa = 10 Then Text1(5).Text = Text1(5).Text & " " & DBLet(Rs.Fields(6).Value)
         
 '        If Text1(5).Text <> "" Then Text1(5).Text = Format(Text1(5).Text, "000000")
         
         'hanegadas
-        Text1(6).Text = Format(Round2(DBLet(RS.Fields(4).Value, "N") / vParamAplic.Faneca, 2), "##,##0.00")
+        Text1(6).Text = Format(Round2(DBLet(Rs.Fields(4).Value, "N") / vParamAplic.Faneca, 2), "##,##0.00")
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
 End Sub
 
 Private Sub PonerDatosCampoLineas(campo As String)
 Dim Cad As String
 Dim Cad1 As String
-Dim numRegis As Long
-Dim RS As ADODB.Recordset
+Dim NumRegis As Long
+Dim Rs As ADODB.Recordset
 Dim i As Integer
 
 
@@ -2941,28 +2941,28 @@ Dim i As Integer
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla"
      
-    Set RS = New ADODB.Recordset
-    RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not RS.EOF Then
+    If Not Rs.EOF Then
         For i = 1 To 5
             txtAux2(i).Text = ""
         Next i
         
         txtAux4(2).Text = campo
         PonerFormatoEntero txtAux4(2)
-        txtAux2(1).Text = DBLet(RS.Fields(1).Value, "T") ' nombre de partida
-        txtAux2(2).Text = DBLet(RS.Fields(5).Value, "T") ' nombre de poblacion
-        txtAux2(4).Text = DBLet(RS.Fields(2).Value, "N") ' poligono
+        txtAux2(1).Text = DBLet(Rs.Fields(1).Value, "T") ' nombre de partida
+        txtAux2(2).Text = DBLet(Rs.Fields(5).Value, "T") ' nombre de poblacion
+        txtAux2(4).Text = DBLet(Rs.Fields(2).Value, "N") ' poligono
         If txtAux2(4).Text <> "" Then txtAux2(4).Text = Format(txtAux2(4).Text, "0000")
-        txtAux2(5).Text = DBLet(RS.Fields(3).Value, "N") ' parcela
+        txtAux2(5).Text = DBLet(Rs.Fields(3).Value, "N") ' parcela
         If txtAux2(5).Text <> "" Then txtAux2(5).Text = Format(txtAux2(5).Text, "000000")
         
         'hanegadas
-        txtAux2(3).Text = Format(Round2(DBLet(RS.Fields(4).Value, "N") / vParamAplic.Faneca, 2), "##,##0.00")
+        txtAux2(3).Text = Format(Round2(DBLet(Rs.Fields(4).Value, "N") / vParamAplic.Faneca, 2), "##,##0.00")
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
 End Sub
 
@@ -2993,12 +2993,11 @@ Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -3122,7 +3121,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     
     indRPT = 78 ' personalizacion del informe de hidrantes
     
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     
     '[Monica]12/03/2013: solo si es quatretonda tiene una impresion expandida de rpozos_campos
     If vParamAplic.Cooperativa = 7 Then
@@ -3135,8 +3134,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     With frmImprimir2
         .cadTabla2 = "rpozos"
         .Informe2 = nomDocu
-        If cadB <> "" Then
-            .cadRegSelec = SQL2SF(cadB)
+        If CadB <> "" Then
+            .cadRegSelec = SQL2SF(CadB)
         Else
             .cadRegSelec = ""
         End If
@@ -3166,7 +3165,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -3180,7 +3179,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -3336,7 +3335,7 @@ End Sub
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim Sql As String
 Dim vWhere As String
-Dim eliminar As Boolean
+Dim Eliminar As Boolean
 
     On Error GoTo Error2
 
@@ -3350,10 +3349,10 @@ Dim eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
-    eliminar = False
+    Eliminar = False
    
     vWhere = ObtenerWhereCab(True)
     
@@ -3362,34 +3361,34 @@ Dim eliminar As Boolean
     Select Case Index
         Case 0 'coopropietarios
             Sql = "¿Seguro que desea eliminar el coopropietario?"
-            Sql = Sql & vbCrLf & "Coopropietario: " & AdoAux(Index).Recordset!Codsocio & " - " & AdoAux(Index).Recordset!nomsocio
+            Sql = Sql & vbCrLf & "Coopropietario: " & Adoaux(Index).Recordset!Codsocio & " - " & Adoaux(Index).Recordset!nomsocio
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
+                Eliminar = True
                 Sql = "DELETE FROM rpozos_cooprop"
-                Sql = Sql & " WHERE rpozos_cooprop.hidrante = " & DBSet(AdoAux(Index).Recordset!Hidrante, "T")
-                Sql = Sql & " and codsocio = " & AdoAux(Index).Recordset!Codsocio
+                Sql = Sql & " WHERE rpozos_cooprop.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
+                Sql = Sql & " and codsocio = " & Adoaux(Index).Recordset!Codsocio
             End If
         Case 1 ' campos
             Sql = "¿Seguro que desea eliminar el campo del hidrante?"
-            Sql = Sql & vbCrLf & "Campo: " & AdoAux(Index).Recordset!codcampo
+            Sql = Sql & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codcampo
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-                eliminar = True
+                Eliminar = True
                 Sql = "DELETE FROM rpozos_campos"
-                Sql = Sql & " WHERE rpozos_campos.hidrante = " & DBSet(AdoAux(Index).Recordset!Hidrante, "T")
-                Sql = Sql & " and numlinea = " & AdoAux(Index).Recordset!numlinea
+                Sql = Sql & " WHERE rpozos_campos.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
+                Sql = Sql & " and numlinea = " & Adoaux(Index).Recordset!numlinea
             End If
         
     End Select
 
-    If eliminar Then
-        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
+    If Eliminar Then
+        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
         ' ***************************************************
-        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
             
         End If
         SumaTotalPorcentajes NumTabMto
@@ -3413,7 +3412,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
 
@@ -3433,8 +3432,8 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case Index
-        Case 0: vTabla = "rpozos_cooprop"
-        Case 1: vTabla = "rpozos_campos"
+        Case 0: vtabla = "rpozos_cooprop"
+        Case 1: vtabla = "rpozos_campos"
     End Select
     ' ********************************************************
 
@@ -3446,13 +3445,13 @@ Dim i As Integer
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
             Select Case Index
                 Case 0
-                    NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", "rpozos_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'")
+                    NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", "rpozos_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'")
                 Case 1
-                    NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", "rpozos_campos.hidrante = '" & Trim(Text1(0).Text) & "'")
+                    NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", "rpozos_campos.hidrante = '" & Trim(Text1(0).Text) & "'")
             End Select
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
 
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -3506,8 +3505,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim i As Integer
     Dim J As Integer
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
 
     ModoLineas = 2 'Modificar llínia
 
@@ -3661,7 +3660,7 @@ Dim Nuevo As Boolean
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux3(Index), 4
-            If txtAux3(2).Text <> "" Then CmdAceptar.SetFocus
+            If txtAux3(2).Text <> "" Then cmdAceptar.SetFocus
     
     End Select
 
@@ -3734,7 +3733,7 @@ Dim Sql As String
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux4(Index), 4
-            If txtAux4(2).Text <> "" Then CmdAceptar.SetFocus
+            If txtAux4(2).Text <> "" Then cmdAceptar.SetFocus
     
     End Select
 
@@ -3755,10 +3754,10 @@ End Sub
 
 'AAAAAAAAAAAAAAAAAAAAAAA
 Private Function DatosOkLlin(nomframe As String) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim b As Boolean
-Dim cant As Integer
+Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
 
@@ -3861,13 +3860,13 @@ Dim tots As String
     b = DataGridAux(Index).Enabled
     DataGridAux(Index).Enabled = False
     
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
     DataGridAux(Index).ScrollBars = dbgNone
-    AdoAux(Index).Refresh
-    Set DataGridAux(Index).DataSource = AdoAux(Index)
+    Adoaux(Index).Refresh
+    Set DataGridAux(Index).DataSource = Adoaux(Index)
     
     DataGridAux(Index).AllowRowSizing = False
     DataGridAux(Index).RowHeight = 290
@@ -3881,7 +3880,7 @@ Dim tots As String
         DataGridAux(Index).Columns(i).AllowSizing = False
     Next i
     
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     'DataGridAux(Index).Enabled = b
 '    PrimeraVez = False
@@ -3900,7 +3899,7 @@ Dim tots As String
 '            BloquearTxt txtAux(14), Not b
 '            BloquearTxt txtAux(15), Not b
 
-            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
 '                SumaTotalPorcentajes
             Else
                 For i = 0 To 3
@@ -3923,7 +3922,7 @@ Dim tots As String
             b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
 
-            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
 '                SumaTotalPorcentajes
             Else
                 For i = 2 To 2
@@ -3938,7 +3937,7 @@ Dim tots As String
     DataGridAux(Index).ScrollBars = dbgAutomatic
       
     ' **** si n'hi han llínies en grids i camps fora d'estos ****
-    If Not AdoAux(Index).Recordset.EOF Then
+    If Not Adoaux(Index).Recordset.EOF Then
         DataGridAux_RowColChange Index, 1, 1
     Else
         LimpiarCamposFrame Index
@@ -4079,7 +4078,7 @@ Dim Cad As String
             ModoLineas = 0
 
             If NumTabMto <> 3 Then
-                V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
             End If
 
@@ -4089,7 +4088,7 @@ Dim Cad As String
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
             End If
             ' ***********************************************************
 
@@ -4104,18 +4103,18 @@ End Sub
 Private Sub SumaTotalPorcentajes(numTab As Integer)
 Dim Sql As String
 Dim i As Currency
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
    
    Select Case numTab
         Case 0 ' coopropietarios
             Sql = "select sum(porcentaje) from rpozos_cooprop where rpozos_cooprop.hidrante = " & DBSet(Data1.Recordset!Hidrante, "T")
             
-            Set RS = New ADODB.Recordset
-            RS.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
             i = 0
-            If Not RS.EOF Then
-                i = DBLet(RS.Fields(0).Value, "N")
+            If Not Rs.EOF Then
+                i = DBLet(Rs.Fields(0).Value, "N")
             End If
             
             If i = 0 Then Exit Sub

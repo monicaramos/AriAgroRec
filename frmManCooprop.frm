@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManCooprop 
@@ -579,8 +579,8 @@ Private WithEvents frmCtas As frmCtasConta 'cuentas contables
 Attribute frmCtas.VB_VarHelpID = -1
 Private WithEvents frmTIva As frmTipIVAConta 'Tipos de iva de conta
 Attribute frmTIva.VB_VarHelpID = -1
-Private WithEvents frmFpa As frmForpaConta 'formas de pago de la contabilidad
-Attribute frmFpa.VB_VarHelpID = -1
+Private WithEvents frmFPa As frmForpaConta 'formas de pago de la contabilidad
+Attribute frmFPa.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'mensajes
 Attribute frmMens.VB_VarHelpID = -1
 
@@ -598,7 +598,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
@@ -612,14 +612,14 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).visible = Not b
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not b
+    Next i
     
-    For I = 0 To Me.cmdAux.Count - 1
-        cmdAux(I).visible = Not b
-        cmdAux(I).Enabled = Not b
-    Next I
+    For i = 0 To Me.cmdAux.Count - 1
+        cmdAux(i).visible = Not b
+        cmdAux(i).Enabled = Not b
+    Next i
     
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
@@ -633,9 +633,9 @@ Dim b As Boolean
     PonerOpcionesMenu  'En funcion del usuario
     
     'Si estamos modo Modificar bloquear clave primaria
-    For I = 0 To 1
-        BloquearTxt txtaux(I), (Modo = 4)
-    Next I
+    For i = 0 To 1
+        BloquearTxt txtAux(i), (Modo = 4)
+    Next i
     
 End Sub
 
@@ -691,20 +691,20 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    txtaux(0).Text = "" ' NumF
-    FormateaCampo txtaux(0)
-    For I = 1 To txtaux.Count - 1
-        txtaux(I).Text = ""
-    Next I
+    txtAux(0).Text = "" ' NumF
+    FormateaCampo txtAux(0)
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
-    For I = 0 To txtAux2.Count - 1
-        txtAux2(I).Text = ""
-    Next I
+    For i = 0 To txtAux2.Count - 1
+        txtAux2(i).Text = ""
+    Next i
     
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -718,23 +718,23 @@ Private Sub BotonBuscar()
     CargaGrid "rcopropiedad.codpropiedad = '-1'"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 '    PosicionarCombo Combo1, "724"
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -745,10 +745,10 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(2).Text
-    txtaux(3).Text = DataGrid1.Columns(3).Text
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
+    txtAux(3).Text = DataGrid1.Columns(3).Text
 '    txtaux(4).Text = DataGrid1.Columns(4).Text
     
     
@@ -761,7 +761,7 @@ Private Sub BotonModificar()
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonerFoco txtaux(2)
+    PonerFoco txtAux(2)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -772,14 +772,14 @@ Dim jj As Integer
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     For jj = 0 To cmdAux.Count - 1
         cmdAux(jj).visible = (Modo = 1 Or Modo = 3 Or Modo = 4)
-        cmdAux(jj).Top = txtaux(3).Top
-        cmdAux(jj).Height = txtaux(3).Height
+        cmdAux(jj).Top = txtAux(3).Top
+        cmdAux(jj).Height = txtAux(3).Height
     Next jj
 
 End Sub
@@ -840,7 +840,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Double
+    Dim i As Double
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -855,7 +855,7 @@ Private Sub cmdAceptar_Click()
         Case 3 'INSERTAR
             If DatosOk Then
                 If InsertarDesdeForm(Me) Then
-                    SumaPorcentajes CLng(txtaux(0).Text)
+                    SumaPorcentajes CLng(txtAux(0).Text)
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
@@ -874,9 +874,9 @@ Private Sub cmdAceptar_Click()
         Case 4 'MODIFICAR
             If DatosOk Then
                 If ModificaDesdeFormulario(Me) Then
-                    SumaPorcentajes CLng(txtaux(0).Text)
+                    SumaPorcentajes CLng(txtAux(0).Text)
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -886,7 +886,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -898,7 +898,7 @@ Private Sub cmdAux_Click(Index As Integer)
         Case 0
             indice = 4
             PonerCampos
-            PonerFoco txtaux(indice)
+            PonerFoco txtAux(indice)
         
      End Select
 End Sub
@@ -931,7 +931,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -940,16 +940,16 @@ Dim Aux As String
         Exit Sub
     End If
     Cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -1034,14 +1034,14 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-    txtaux(2).Text = RecuperaValor(CadenaSeleccion, 1)
-    PonerDatosCampo txtaux(2).Text
+    txtAux(2).Text = RecuperaValor(CadenaSeleccion, 1)
+    PonerDatosCampo txtAux(2).Text
 End Sub
 
 Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
-    txtaux(6).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
-    FormateaCampo txtaux(6)
+    txtAux(6).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
+    FormateaCampo txtAux(6)
     txtAux2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
 End Sub
 
@@ -1137,44 +1137,44 @@ Private Sub CargaGrid(Optional vSQL As String)
         'cargamos los datos del campo
         PonerDatosCampo adodc1.Recordset.Fields(2).Value
     Else
-        For I = 0 To txtAux2.Count - 1
-            txtAux2(I).Text = ""
-        Next I
+        For i = 0 To txtAux2.Count - 1
+            txtAux2(i).Text = ""
+        Next i
     End If
 
 '   DataGrid1.Columns(2).Alignment = dbgRight
 End Sub
 
 Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtaux(Index)
+    ConseguirFocoLin txtAux(Index)
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim NumF As String
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
             If Modo = 3 Then
                 '******************** canviar taula i camp **************************
-                txtaux(1).Text = SugerirCodigoSiguienteStr("rcopropiedad", "numlinea", "codpropiedad=" & txtaux(0).Text)
-                PonerFormatoEntero txtaux(1)
+                txtAux(1).Text = SugerirCodigoSiguienteStr("rcopropiedad", "numlinea", "codpropiedad=" & txtAux(0).Text)
+                PonerFormatoEntero txtAux(1)
                 '********************************************************************
             End If
         
         Case 1
-            PonerFormatoEntero txtaux(Index)
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            PonerFormatoEntero txtAux(Index)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
 
         Case 2
-            PonerFormatoEntero txtaux(Index)
-            If txtaux(Index).Text <> "" Then PonerDatosCampo txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
+            If txtAux(Index).Text <> "" Then PonerDatosCampo txtAux(Index)
             
         Case 3
             If Modo = 1 Then Exit Sub
-            PonerFormatoDecimal txtaux(Index), 4
+            PonerFormatoDecimal txtAux(Index), 4
            
     End Select
     
@@ -1256,19 +1256,18 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub PonerCampos()
 Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     Cad = "rcampos.fecbajas is null"
      
@@ -1279,16 +1278,16 @@ Dim RS As ADODB.Recordset
     If NumRegis = 0 Then Exit Sub
     If NumRegis = 1 Then
         Cad1 = "select codcampo from rcampos where " & Cad
-        Set RS = New ADODB.Recordset
-        RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        If Not RS.EOF Then
-            txtaux(2).Text = DBLet(RS.Fields(0).Value)
-            PonerDatosCampo txtaux(2).Text
+        Set Rs = New ADODB.Recordset
+        Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        If Not Rs.EOF Then
+            txtAux(2).Text = DBLet(Rs.Fields(0).Value)
+            PonerDatosCampo txtAux(2).Text
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWhere = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
-        frmMens.campo = txtaux(2).Text
+        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.campo = txtAux(2).Text
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal
         Set frmMens = Nothing
@@ -1300,7 +1299,7 @@ Private Sub PonerDatosCampo(campo As String)
 Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
 
     If campo = "" Then Exit Sub
@@ -1320,33 +1319,33 @@ Dim RS As ADODB.Recordset
     Cad1 = Cad1 & " and rcampos.codvarie = variedades.codvarie "
     Cad1 = Cad1 & " and rcampos.codsocio = rsocios.codsocio "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
-    For I = 0 To txtAux2.Count - 1
-        txtAux2(I).Text = ""
-    Next I
+    For i = 0 To txtAux2.Count - 1
+        txtAux2(i).Text = ""
+    Next i
     
-    If Not RS.EOF Then
-        txtaux(2).Text = campo
-        PonerFormatoEntero txtaux(2)
-        txtAux2(2).Text = DBLet(RS.Fields(0).Value, "N") ' codigo de partida
+    If Not Rs.EOF Then
+        txtAux(2).Text = campo
+        PonerFormatoEntero txtAux(2)
+        txtAux2(2).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If txtAux2(2).Text <> "" Then txtAux2(2).Text = Format(txtAux2(2).Text, "0000")
-        txtAux2(3).Text = DBLet(RS.Fields(1).Value, "T") ' nombre de partida
-        txtAux2(4).Text = DBLet(RS.Fields(2).Value, "N") ' codigo de zona
+        txtAux2(3).Text = DBLet(Rs.Fields(1).Value, "T") ' nombre de partida
+        txtAux2(4).Text = DBLet(Rs.Fields(2).Value, "N") ' codigo de zona
         If txtAux2(4).Text <> "" Then txtAux2(4).Text = Format(txtAux2(4).Text, "0000")
-        txtAux2(5).Text = DBLet(RS.Fields(3).Value, "T") ' nombre de zona
-        txtAux2(6).Text = DBLet(RS.Fields(4).Value, "T") ' descripcion de poblacion
+        txtAux2(5).Text = DBLet(Rs.Fields(3).Value, "T") ' nombre de zona
+        txtAux2(6).Text = DBLet(Rs.Fields(4).Value, "T") ' descripcion de poblacion
         
-        txtAux2(7).Text = Format(DBLet(RS.Fields(5).Value, "N"), "000000") ' variedad
-        txtAux2(8).Text = DBLet(RS.Fields(6).Value, "T") ' nombre de variedad
+        txtAux2(7).Text = Format(DBLet(Rs.Fields(5).Value, "N"), "000000") ' variedad
+        txtAux2(8).Text = DBLet(Rs.Fields(6).Value, "T") ' nombre de variedad
         
-        txtAux2(0).Text = Format(DBLet(RS.Fields(7).Value, "N"), "000000") ' socio
-        txtAux2(1).Text = DBLet(RS.Fields(8).Value, "T")     ' nombre socio
+        txtAux2(0).Text = Format(DBLet(Rs.Fields(7).Value, "N"), "000000") ' socio
+        txtAux2(1).Text = DBLet(Rs.Fields(8).Value, "T")     ' nombre socio
     End If
     
-    Set RS = Nothing
+    Set Rs = Nothing
     
 End Sub
 

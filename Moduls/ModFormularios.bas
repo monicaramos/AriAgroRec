@@ -1,5 +1,5 @@
 Attribute VB_Name = "ModFormularios"
-Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
 '----------------------------------------------------------------------------
 '----------------------------------------------------------------------------
@@ -12,34 +12,34 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (B
 'Se puede comentar todo y asi no hace nada ni da error
 'El SQL es propio de cada tabla
 Public Function SugerirCodigoSiguienteStr(NomTabla As String, NomCodigo As String, Optional CondLineas As String) As String
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
     On Error GoTo ESugerirCodigo
 
     'SQL = "Select Max(codtipar) from stipar"
-    SQL = "Select Max(" & NomCodigo & ") from " & NomTabla
+    Sql = "Select Max(" & NomCodigo & ") from " & NomTabla
     If CondLineas <> "" Then
-        SQL = SQL & " WHERE " & CondLineas
+        Sql = Sql & " WHERE " & CondLineas
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, , , adCmdText
-    SQL = "1"
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then
-            If IsNumeric(RS.Fields(0)) Then
-                SQL = CStr(RS.Fields(0) + 1)
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, , , adCmdText
+    Sql = "1"
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then
+            If IsNumeric(Rs.Fields(0)) Then
+                Sql = CStr(Rs.Fields(0) + 1)
             Else
-                If Asc(Left(RS.Fields(0), 1)) <> 122 Then 'Z
-                SQL = Left(RS.Fields(0), 1) & CStr(Asc(Right(RS.Fields(0), 1)) + 1)
+                If Asc(Left(Rs.Fields(0), 1)) <> 122 Then 'Z
+                Sql = Left(Rs.Fields(0), 1) & CStr(Asc(Right(Rs.Fields(0), 1)) + 1)
                 End If
             End If
         End If
     End If
-    RS.Close
-    Set RS = Nothing
-    SugerirCodigoSiguienteStr = SQL
+    Rs.Close
+    Set Rs = Nothing
+    SugerirCodigoSiguienteStr = Sql
 ESugerirCodigo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
@@ -47,7 +47,7 @@ End Function
 
 
 Public Sub BloquearFrameAux(ByRef formulario As Form, nom_frame As String, Modo As Byte, Optional NumTabMto As Integer)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim Control As Object
 
@@ -139,7 +139,7 @@ Public Sub BloquearText1(ByRef formulario As Form, Modo As Byte)
 'Bloquea controles q se llamen TEXT1 si no estamos en Modo: 3.-Insertar, 4.-Modificar
 'IN ->  formulario: formulario en el que se van a poner los controles textbox en modo visualización
 '       Modo: modo del mantenimiento (Insertar, Modificar,Buscar...)
-Dim I As Byte
+Dim i As Byte
 Dim b As Boolean
 Dim vtag As CTag
 On Error Resume Next
@@ -148,21 +148,21 @@ On Error Resume Next
         'b = (Modo = 3 Or Modo = 4 Or Modo = 1 Or Modo = 5) 'And ModoLineas = 1))
         b = (Modo = 3 Or Modo = 4 Or Modo = 1) '06/09/2005, lleve el modo 5 per a que no es puga modificar la capçalera mentre treballe en les llínies
         
-        For I = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
+        For i = 0 To .Text1.Count - 1 'En principio todos los TExt1 tiene TAG
             Set vtag = New CTag
-            vtag.Cargar .Text1(I)
+            vtag.Cargar .Text1(i)
             If vtag.Cargado Then
                 If vtag.EsClave And (Modo = 4 Or Modo = 5) Then
-                    .Text1(I).Locked = True
-                    .Text1(I).BackColor = &H80000018 'groc
+                    .Text1(i).Locked = True
+                    .Text1(i).BackColor = &H80000018 'groc
                 Else
-                     .Text1(I).Locked = Not b  '((Not b) And (Modo <> 1))
+                     .Text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
                     If b Then
-                        .Text1(I).BackColor = vbWhite
+                        .Text1(i).BackColor = vbWhite
                     Else
-                        .Text1(I).BackColor = &H80000018 'groc
+                        .Text1(i).BackColor = &H80000018 'groc
                     End If
-                    If Modo = 3 Then .Text1(I).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+                    If Modo = 3 Then .Text1(i).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
                 End If
 '            Else
 '                .text1(i).Locked = Not b  '((Not b) And (Modo <> 1))
@@ -174,7 +174,7 @@ On Error Resume Next
 '                If Modo = 3 Then .text1(i).Text = "" 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
             End If
             Set vtag = Nothing
-        Next I
+        Next i
     End With
     
     If Err.Number <> 0 Then Err.Clear
@@ -238,10 +238,10 @@ Public Sub BloquearCheck1(ByRef formulario As Form, Modo As Byte)
 
     b = (Modo = 3 Or Modo = 4 Or Modo = 1)
     With formulario
-        For I = 0 To .Check1.Count - 1
-            .Check1(I).Enabled = b
-            If Modo = 3 Then .Check1(I).Value = 0 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
-        Next I
+        For i = 0 To .Check1.Count - 1
+            .Check1(i).Enabled = b
+            If Modo = 3 Then .Check1(i).Value = 0 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+        Next i
     End With
     
     If Err.Number <> 0 Then Err.Clear
@@ -300,24 +300,24 @@ Dim b As Boolean
     b = (Modo = 3 Or Modo = 4 Or Modo = 1) '06/09/2005, lleve el modo 5 per a que no es puga modificar la capçalera mentre treballe en les llínies
     
     With formulario
-        For I = 0 To .Combo1.Count - 1
+        For i = 0 To .Combo1.Count - 1
             Set vtag = New CTag
-            vtag.Cargar .Combo1(I)
+            vtag.Cargar .Combo1(i)
             If vtag.Cargado Then
                 If vtag.EsClave And (Modo = 4 Or Modo = 5) Then
-                    .Combo1(I).Enabled = False
-                    .Combo1(I).BackColor = &H80000018 'groc
+                    .Combo1(i).Enabled = False
+                    .Combo1(i).BackColor = &H80000018 'groc
                 Else
-                    .Combo1(I).Enabled = b
+                    .Combo1(i).Enabled = b
                     If b Then
-                        .Combo1(I).BackColor = vbWhite
+                        .Combo1(i).BackColor = vbWhite
                     Else
-                        .Combo1(I).BackColor = &H80000018 'Amarillo Claro
+                        .Combo1(i).BackColor = &H80000018 'Amarillo Claro
                     End If
-                    If Modo = 3 Then .Combo1(I).ListIndex = 0 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
+                    If Modo = 3 Then .Combo1(i).ListIndex = 0 'Modo 3: Insertar (si vamos a Insertar ade+ Limpiamos el campo)
                 End If
             End If
-        Next I
+        Next i
     End With
     
     If Err.Number <> 0 Then Err.Clear
@@ -356,10 +356,10 @@ On Error Resume Next
     b = (Modo = 3 Or Modo = 4 Or Modo = 1)
     
     With formulario
-        For I = 0 To .imgBuscar.Count - 1
-            .imgBuscar(I).Enabled = b
-            .imgBuscar(I).visible = b
-        Next I
+        For i = 0 To .imgBuscar.Count - 1
+            .imgBuscar(i).Enabled = b
+            .imgBuscar(i).visible = b
+        Next i
     End With
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -380,15 +380,15 @@ Dim b As Boolean
 '    bAux = (Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2))
     
     With formulario
-        For I = 0 To .imgBuscar.Count - 1
-            If .imgBuscar(I).Tag = 1 Then 'esta en la cabecera
-                .imgBuscar(I).Enabled = b
-                .imgBuscar(I).visible = b
+        For i = 0 To .imgBuscar.Count - 1
+            If .imgBuscar(i).Tag = 1 Then 'esta en la cabecera
+                .imgBuscar(i).Enabled = b
+                .imgBuscar(i).visible = b
             Else 'esta en las lineas
-                .imgBuscar(I).Enabled = False
-                .imgBuscar(I).visible = False
+                .imgBuscar(i).Enabled = False
+                .imgBuscar(i).visible = False
             End If
-        Next I
+        Next i
     End With
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -409,10 +409,10 @@ Public Sub BloquearImgZoom(ByRef formulario As Form, Modo As Byte, Optional Modo
 
     b = (Modo = 3 Or Modo = 4 Or Modo = 2 Or (Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2)))
     With formulario
-        For I = 0 To .imgZoom.Count - 1
-            .imgZoom(I).Enabled = b
-            .imgZoom(I).visible = b
-        Next I
+        For i = 0 To .imgZoom.Count - 1
+            .imgZoom(i).Enabled = b
+            .imgZoom(i).visible = b
+        Next i
     End With
     
     If Err.Number <> 0 Then Err.Clear
@@ -491,7 +491,7 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
 '(IN) formulario y Modo en que se encuentra el formulario
 '(IN) Opcion : 1 para los TEXT1, 3 para los txtAux
 
-    Dim I As Integer
+    Dim i As Integer
     
     On Error Resume Next
 
@@ -499,46 +499,46 @@ Public Sub PonerLongCamposGnral(ByRef formulario As Form, Modo As Byte, Opcion A
         If Modo = 1 Then 'BUSQUEDA
             Select Case Opcion
                 Case 1 'Para los TEXT1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
                             End If
                         End With
-                    Next I
+                    Next i
                 
                 Case 3 'para los TXTAUX
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .MaxLength <> 0 Then
                                .HelpContextID = .MaxLength 'guardamos es maxlenth para reestablecerlo despues
                                 .MaxLength = 0 'tamaño infinito
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
             
         Else 'resto de modos
             Select Case Opcion
                 Case 1 'par los Text1
-                    For I = 0 To .Text1.Count - 1
-                        With .Text1(I)
+                    For i = 0 To .Text1.Count - 1
+                        With .Text1(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
                 Case 3 'para los txtAux
-                    For I = 0 To .txtAux.Count - 1
-                        With .txtAux(I)
+                    For i = 0 To .txtAux.Count - 1
+                        With .txtAux(i)
                             If .HelpContextID <> 0 Then
                                 .MaxLength = .HelpContextID 'volvemos a poner el valor real del maxlenth
                                 .HelpContextID = 0
                             End If
                         End With
-                    Next I
+                    Next i
             End Select
         End If
     End With
@@ -767,17 +767,17 @@ End Function
 
 
 
-Public Function SituarDataTrasEliminar(ByRef vData As Adodc, Numreg, Optional no_refre As Boolean) As Boolean
+Public Function SituarDataTrasEliminar(ByRef vData As Adodc, NumReg, Optional no_refre As Boolean) As Boolean
     On Error GoTo ESituarDataElim
 
     If Not no_refre Then vData.Refresh 'quan siga False o no es passe a la funció, es refrescarà. Hi ha que passar-lo com a True quan el manteniment siga Grid per a que no refresque
     
     If Not vData.Recordset.EOF Then    'Solo habia un registro
-        If Numreg > vData.Recordset.RecordCount Then
+        If NumReg > vData.Recordset.RecordCount Then
             vData.Recordset.MoveLast
         Else
             vData.Recordset.MoveFirst
-            vData.Recordset.Move Numreg - 1
+            vData.Recordset.Move NumReg - 1
         End If
         SituarDataTrasEliminar = True
     Else
@@ -1051,25 +1051,25 @@ End Function
 
 Public Sub DesplazamientoVisible(ByRef toolb As Toolbar, iniBoton As Byte, bol As Boolean, NReg As Byte)
 'Oculta o Muestra las botones de desplazamiento de la toolbar
-Dim I As Byte
+Dim i As Byte
 
     Select Case NReg
         Case 0, 1 '0 o 1 registro no mostrar los botones despl.
-            For I = iniBoton To iniBoton + 3
-                toolb.Buttons(I).visible = False
-            Next I
+            For i = iniBoton To iniBoton + 3
+                toolb.Buttons(i).visible = False
+            Next i
         Case Else '>1 reg, mostrar si bol
-            For I = iniBoton To iniBoton + 3
-                toolb.Buttons(I).visible = bol
-            Next I
+            For i = iniBoton To iniBoton + 3
+                toolb.Buttons(i).visible = bol
+            Next i
     End Select
 End Sub
 
 
 
 Public Function EsNumerico(Texto As String) As Boolean
-Dim I As Integer
-Dim C As Integer
+Dim i As Integer
+Dim c As Integer
 Dim L As Integer
 Dim Cad As String
 Dim b As Boolean
@@ -1082,43 +1082,43 @@ Dim b As Boolean
         b = False
         '======= Añade Laura
         'formato: (.25)
-        I = InStr(1, Texto, ".")
-        If I = 1 Then
+        i = InStr(1, Texto, ".")
+        If i = 1 Then
             If IsNumeric(Mid(Texto, 2, Len(Texto))) Then b = True
         'añado el caso -.25 [Monica]04/06/2013
         Else
-            If I = 2 And Mid(Texto, 1, 1) = "-" Then
+            If i = 2 And Mid(Texto, 1, 1) = "-" Then
                 If IsNumeric(Mid(Texto, 3, Len(Texto))) Then b = True
             End If
         End If
         '======================
     Else
         'Vemos si ha puesto mas de un punto
-        C = 0
+        c = 0
         L = 1
         Do
-            I = InStr(L, Texto, ",")
-            If I > 0 Then
-                L = I + 1
-                C = C + 1
+            i = InStr(L, Texto, ",")
+            If i > 0 Then
+                L = i + 1
+                c = c + 1
             End If
-        Loop Until I = 0
-        If C > 1 Then
+        Loop Until i = 0
+        If c > 1 Then
             Cad = "Numero de comas incorrecto"
             b = False
         End If
         
         'Si no ha puesto ninguna coma y tiene más de un punto
-        If C = 0 Then
+        If c = 0 Then
             L = 1
             Do
-                I = InStr(L, Texto, ".")
-                If I > 0 Then
-                    L = I + 1
-                    C = C + 1
+                i = InStr(L, Texto, ".")
+                If i > 0 Then
+                    L = i + 1
+                    c = c + 1
                 End If
-            Loop Until I = 0
-            If C > 1 Then
+            Loop Until i = 0
+            If c > 1 Then
                 Cad = "Numero incorrecto"
                 b = False
             End If
@@ -1221,7 +1221,7 @@ Public Function PonerFormatoDecimal(ByRef T As TextBox, tipoF As Single) As Bool
 Dim Valor As Double
 Dim PEntera As Currency
 Dim NoOK As Boolean
-Dim I As Byte
+Dim i As Byte
 Dim cadEnt As String
 'Dim mTas As CTag
 
@@ -1242,8 +1242,8 @@ Dim cadEnt As String
             Valor = ImporteFormateado(.Text)
         Else
             cadEnt = .Text
-            I = InStr(1, cadEnt, ".")
-            If I > 0 Then cadEnt = Mid(cadEnt, 1, I - 1)
+            i = InStr(1, cadEnt, ".")
+            If i > 0 Then cadEnt = Mid(cadEnt, 1, i - 1)
             If tipoF = 1 And Len(cadEnt) > 10 Then
                 MsgBox "El valor no puede ser mayor de 9999999999,99", vbExclamation
                 NoOK = True
@@ -1383,10 +1383,10 @@ Dim cadEnt As String
 End Function
 
 
-Public Function PonerNombreDeCod(ByRef Txt As TextBox, Tabla As String, campo As String, Optional Codigo As String, Optional tipo As String, Optional cBD As Byte, Optional codigo2 As String, Optional Valor2 As String, Optional tipo2 As String) As String
+Public Function PonerNombreDeCod(ByRef Txt As TextBox, Tabla As String, campo As String, Optional Codigo As String, Optional Tipo As String, Optional cBD As Byte, Optional codigo2 As String, Optional Valor2 As String, Optional tipo2 As String) As String
 'Devuelve el nombre/Descripción asociado al Código correspondiente
 'Además pone formato al campo txt del código a partir del Tag
-Dim SQL As String
+Dim Sql As String
 Dim devuelve As String
 Dim vtag As CTag
 Dim ValorCodigo As String
@@ -1398,13 +1398,13 @@ Dim ValorCodigo As String
         Set vtag = New CTag
         If vtag.Cargar(Txt) Then
             If Codigo = "" Then Codigo = vtag.columna
-            If tipo = "" Then tipo = vtag.TipoDato
+            If Tipo = "" Then Tipo = vtag.TipoDato
             
             If cBD = 0 Then cBD = cAgro
-            SQL = DevuelveDesdeBDNew(cBD, Tabla, campo, Codigo, ValorCodigo, tipo, , codigo2, Valor2, tipo2)
+            Sql = DevuelveDesdeBDNew(cBD, Tabla, campo, Codigo, ValorCodigo, Tipo, , codigo2, Valor2, tipo2)
             If vtag.TipoDato = "N" Then ValorCodigo = Format(ValorCodigo, vtag.Formato)
             Txt.Text = ValorCodigo 'Valor codigo formateado
-            If SQL = "" Then
+            If Sql = "" Then
 '                If vtag.Nombre <> "" Then
 '                    devuelve = "No existe el " & vtag.Nombre & ": " & ValorCodigo
 '                Else
@@ -1414,7 +1414,7 @@ Dim ValorCodigo As String
 '                Txt.Text = ""
 '                PonerFoco Txt
             Else
-                PonerNombreDeCod = SQL 'Descripcion del codigo
+                PonerNombreDeCod = Sql 'Descripcion del codigo
             End If
         End If
         Set vtag = Nothing
@@ -1479,9 +1479,13 @@ Public Sub KEYdown(KeyCode As Integer)
 On Error Resume Next
     Select Case KeyCode
         Case 38 'Desplazamieto Fecha Hacia Arriba
-            SendKeys "+{tab}"
+            'SendKeys "+{tab}"
+            CreateObject("WScript.Shell").SendKeys "+{tab}"
+            
         Case 40 'Desplazamiento Flecha Hacia Abajo
-            SendKeys "{tab}"
+            'SendKeys "{tab}"
+            CreateObject("WScript.Shell").SendKeys "{tab}"
+            
     End Select
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -1565,7 +1569,7 @@ On Error GoTo ELanzaHome
         Exit Function
     End If
 
-    Call ShellExecute(hwnd, "Open", "mailto: " & dirMail, "", "", vbNormalFocus)
+    Call ShellExecute(hWnd, "Open", "mailto: " & dirMail, "", "", vbNormalFocus)
     LanzaMailGnral = True
     
 ELanzaHome:
@@ -1576,18 +1580,18 @@ End Function
 
 Public Sub SubirItemList(ByRef LView As ListView)
 'Subir el item seleccionado del listview una posicion
-Dim I As Byte, item As Byte
+Dim i As Byte, item As Byte
 Dim Aux As String
 On Error Resume Next
    
-    For I = 2 To LView.ListItems.Count
-        If LView.ListItems(I).Selected Then
-            item = I
-            Aux = LView.ListItems(I).Text
-            LView.ListItems(I).Text = LView.ListItems(I - 1).Text
-            LView.ListItems(I - 1).Text = Aux
+    For i = 2 To LView.ListItems.Count
+        If LView.ListItems(i).Selected Then
+            item = i
+            Aux = LView.ListItems(i).Text
+            LView.ListItems(i).Text = LView.ListItems(i - 1).Text
+            LView.ListItems(i - 1).Text = Aux
         End If
-    Next I
+    Next i
     If item <> 0 Then
         LView.ListItems(item).Selected = False
         LView.ListItems(item - 1).Selected = True
@@ -1599,18 +1603,18 @@ End Sub
 
 Public Sub BajarItemList(ByRef LView As ListView)
 'Bajar el item seleccionado del listview una posicion
-Dim I As Byte, item As Byte
+Dim i As Byte, item As Byte
 Dim Aux As String
 On Error Resume Next
 
-    For I = 1 To LView.ListItems.Count - 1
-        If LView.ListItems(I).Selected Then
-            item = I
-            Aux = LView.ListItems(I).Text
-            LView.ListItems(I).Text = LView.ListItems(I + 1).Text
-            LView.ListItems(I + 1).Text = Aux
+    For i = 1 To LView.ListItems.Count - 1
+        If LView.ListItems(i).Selected Then
+            item = i
+            Aux = LView.ListItems(i).Text
+            LView.ListItems(i).Text = LView.ListItems(i + 1).Text
+            LView.ListItems(i + 1).Text = Aux
         End If
-    Next I
+    Next i
     If item <> 0 Then
         LView.ListItems(item).Selected = False
         LView.ListItems(item + 1).Selected = True
@@ -1636,13 +1640,13 @@ End Function
 
 
 
-Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
+Public Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
     On Error GoTo ECargaGRid
 
     vDataGrid.Enabled = True
     '    vdata.Recordset.Cancel
     vData.ConnectionString = conn
-    vData.RecordSource = SQL
+    vData.RecordSource = Sql
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -1727,40 +1731,40 @@ End Sub
 '----------------------------------------------------------------------------
 '----------------------------------------------------------------------------
 
-Public Sub DatosPoblacion(CodPobla As String, desPobla As String, CPostal As String, Provi As String, Pais As String, Optional Prefix As String)
+Public Sub DatosPoblacion(CodPobla As String, desPobla As String, CPostal As String, Provi As String, PAIS As String, Optional Prefix As String)
 'IN --> codPobla
 'OUT -> desPobla (Descripcion de la poblacion)
 '        CPostal, Provi, Pais
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
     If CodPobla <> "" Then
         If EsEntero(CodPobla) Then
-            SQL = "SELECT poblacio.despobla,poblacio.codposta, provinci.desprovi, naciones.desnacio, provinci.preprovi"
-            SQL = SQL & " FROM poblacio, provinci, naciones WHERE codpobla= " & CodPobla
-            SQL = SQL & " AND provinci.codprovi = poblacio.codprovi AND naciones.codnacio = provinci.codnacio"
+            Sql = "SELECT poblacio.despobla,poblacio.codposta, provinci.desprovi, naciones.desnacio, provinci.preprovi"
+            Sql = Sql & " FROM poblacio, provinci, naciones WHERE codpobla= " & CodPobla
+            Sql = Sql & " AND provinci.codprovi = poblacio.codprovi AND naciones.codnacio = provinci.codnacio"
 
-            Set RS = New ADODB.Recordset
-            RS.Open SQL, conn, , , adCmdText
-            If Not RS.EOF Then
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, conn, , , adCmdText
+            If Not Rs.EOF Then
                 CodPobla = Format(CodPobla, "000000")
-                desPobla = RS.Fields!desPobla
-                CPostal = DBLet(RS.Fields!codposta, "T")
-                Provi = RS.Fields!desProvi
-                Pais = RS.Fields!desnacio
-                If Not IsNull(RS.Fields!preprovi) Then _
-                    Prefix = CStr(RS.Fields!preprovi)
+                desPobla = Rs.Fields!desPobla
+                CPostal = DBLet(Rs.Fields!codposta, "T")
+                Provi = Rs.Fields!desProvi
+                PAIS = Rs.Fields!desnacio
+                If Not IsNull(Rs.Fields!preprovi) Then _
+                    Prefix = CStr(Rs.Fields!preprovi)
             Else
 '                MsgBox "No existe el código de Población: " & codPobla, vbInformation
                 CodPobla = "NoExiste"
                 desPobla = ""
                 CPostal = ""
                 Provi = ""
-                Pais = ""
+                PAIS = ""
                 Prefix = ""
             End If
-            RS.Close
-            Set RS = Nothing
+            Rs.Close
+            Set Rs = Nothing
         Else
              MsgBox "El Código de Población debe ser numérico.", vbInformation
              CodPobla = ""
@@ -1770,7 +1774,7 @@ Dim RS As ADODB.Recordset
         desPobla = ""
         CPostal = ""
         Provi = ""
-        Pais = ""
+        PAIS = ""
     End If
 End Sub
 
@@ -1780,7 +1784,7 @@ Dim CodPobla As String, desPobla As String
 Dim CPostal As String
 Dim desProvi As String, desPais As String
 Dim Prefix As String
-Dim CadMen As String
+Dim cadMen As String
 
     CodPobla = Tcpob.Text
     DatosPoblacion CodPobla, desPobla, CPostal, desProvi, desPais, Prefix
@@ -1797,9 +1801,9 @@ Dim CadMen As String
 '    Tdpai.Text = desPais
     If CodPobla = "NoExiste" Then
         'cadMen = "No existe el código de Población: " & Format(Tcpob.Text, "000000")
-        CadMen = "No existe la Población: " & Format(Tcpob.Text, "000000")
-        CadMen = CadMen & vbCrLf & "¿Desea Crearla?"
-        If MsgBox(CadMen, vbQuestion + vbYesNo) = vbYes Then
+        cadMen = "No existe la Población: " & Format(Tcpob.Text, "000000")
+        cadMen = cadMen & vbCrLf & "¿Desea Crearla?"
+        If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
             Nuevo = True
 '                    Indice = Index
 '            Set frmPob = New frmPoblacio
@@ -1878,7 +1882,7 @@ End Function
 Public Function PonerNomProveedor(ByRef T As TextBox) As String
 'Obtiene la cadena "nombre" del proveedor del codigo en T
 Dim cadNom As String
-Dim CadMen As String
+Dim cadMen As String
 
     On Error Resume Next
 
@@ -1901,8 +1905,8 @@ Dim CadMen As String
         cadNom = PonerNombreDeCod(T, "proveedo", "nomcomer", "codprove", "N")
 '        cadNom = DevuelveDesdeBDnew(cAgro, "proveedor", "nomcomer", "codprove", T.Text, "N")
         If cadNom = "" Then
-            CadMen = "No existe el proveedor: " & T.Text & vbCrLf
-            MsgBox CadMen, vbExclamation
+            cadMen = "No existe el proveedor: " & T.Text & vbCrLf
+            MsgBox cadMen, vbExclamation
 '            cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
 '            If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
 '                Nuevo = True
@@ -1925,32 +1929,32 @@ End Function
 Public Function PonerBancoPropio(codempre As String, codBanpr As String, nomBanpr As String) As String
 'devuelve la cuenta: ES-2077-0014-11-01010225252
 'en nomBanco devuelve el nombre del banco
-Dim SQL As String
+Dim Sql As String
 Dim nomempre As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
      'Poner banco Propio
     If codBanpr <> "" Then
         'comprobamos que existe el banco propio en la BD
-        SQL = DevuelveDesdeBDNew(cAgro, "bancctas", "codbanpr", "codempre", codempre, "N", , "codbanpr", codBanpr, "N")
-        If SQL = "" Then 'No existe el cod. banpr
+        Sql = DevuelveDesdeBDNew(cAgro, "bancctas", "codbanpr", "codempre", codempre, "N", , "codbanpr", codBanpr, "N")
+        If Sql = "" Then 'No existe el cod. banpr
             nomempre = DevuelveDesdeBDNew(cAgro, "empresas", "nomempre", "codempre", codempre, "N")
-            SQL = "No existe el código de Banco Propio: " & codBanpr
-            SQL = SQL & vbCrLf & "para la empresa: " & Format(codempre, "000") & " - " & nomempre
-            MsgBox SQL, vbExclamation
+            Sql = "No existe el código de Banco Propio: " & codBanpr
+            Sql = Sql & vbCrLf & "para la empresa: " & Format(codempre, "000") & " - " & nomempre
+            MsgBox Sql, vbExclamation
             PonerBancoPropio = ""
             nomBanpr = "Error"
         Else
-            SQL = "SELECT DISTINCT naciones.ibanpais, bancctas.codbanco, bancctas.codsucur, bancctas.digcontr, bancctas.ctabanco, bancsofi.nombanco "
-            SQL = SQL & " FROM bancctas, naciones, bancsofi WHERE codempre = " & codempre & " AND codbanpr= " & codBanpr
-            SQL = SQL & " AND bancctas.codnacio = naciones.codnacio "
-            SQL = SQL & " AND (bancctas.codnacio = bancsofi.codnacio AND bancctas.codbanco = bancsofi.codbanco) "
-            Set RS = New ADODB.Recordset
-            RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            PonerBancoPropio = RS.Fields(0).Value & "-" & Format(RS.Fields(1).Value, "0000") & "-" & Format(RS.Fields(2).Value, "0000") & "-" & Format(RS.Fields(3).Value, "00") & "-" & Format(RS.Fields(4).Value, "0000000000")
-            nomBanpr = RS.Fields!NomBanco
-            RS.Close
-            Set RS = Nothing
+            Sql = "SELECT DISTINCT naciones.ibanpais, bancctas.codbanco, bancctas.codsucur, bancctas.digcontr, bancctas.ctabanco, bancsofi.nombanco "
+            Sql = Sql & " FROM bancctas, naciones, bancsofi WHERE codempre = " & codempre & " AND codbanpr= " & codBanpr
+            Sql = Sql & " AND bancctas.codnacio = naciones.codnacio "
+            Sql = Sql & " AND (bancctas.codnacio = bancsofi.codnacio AND bancctas.codbanco = bancsofi.codbanco) "
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            PonerBancoPropio = Rs.Fields(0).Value & "-" & Format(Rs.Fields(1).Value, "0000") & "-" & Format(Rs.Fields(2).Value, "0000") & "-" & Format(Rs.Fields(3).Value, "00") & "-" & Format(Rs.Fields(4).Value, "0000000000")
+            nomBanpr = Rs.Fields!NomBanco
+            Rs.Close
+            Set Rs = Nothing
         End If
     Else
         PonerBancoPropio = ""
@@ -2146,15 +2150,15 @@ On Error Resume Next
     b = (Modo = 3 Or Modo = 4 Or Modo = 1) Or (Modo = 5 And ModoLineas = 2)
     
     With formulario
-        For I = 0 To .btnBuscar.Count - 1
-            If formulario.btnBuscar(I).Container.Name = nomframe Then
-                .btnBuscar(I).Enabled = Not b
-                .btnBuscar(I).visible = Not b
+        For i = 0 To .btnBuscar.Count - 1
+            If formulario.btnBuscar(i).Container.Name = nomframe Then
+                .btnBuscar(i).Enabled = Not b
+                .btnBuscar(i).visible = Not b
             Else
-                .btnBuscar(I).Enabled = False
-                .btnBuscar(I).visible = False
+                .btnBuscar(i).Enabled = False
+                .btnBuscar(i).visible = False
             End If
-        Next I
+        Next i
     End With
     If Err.Number <> 0 Then Err.Clear
 End Sub

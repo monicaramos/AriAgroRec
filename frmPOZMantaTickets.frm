@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmPOZMantaTickets 
@@ -659,7 +659,7 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 Private CadenaConsulta As String
-Private cadB As String
+Private CadB As String
 
 Dim Ordenacion As String
 
@@ -674,7 +674,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Dim FechaAnt As String
 Dim OK As Boolean
@@ -693,7 +693,7 @@ Dim CadenaB As String
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -713,16 +713,16 @@ Dim b As Boolean
     
     b = (Modo = 2)
     If b Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
         If Not adodc1.Recordset.EOF Then Text2(1).Text = DBLet(adodc1.Recordset!Concepto, "T")
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = (Modo = 1)
-        txtAux(I).Enabled = (Modo = 1)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = (Modo = 1)
+        txtAux(i).Enabled = (Modo = 1)
+    Next i
     
     'hdas
     txtAux(7).visible = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
@@ -746,10 +746,10 @@ Dim b As Boolean
     Text2(1).Enabled = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
     
     
-    For I = 0 To Me.btnBuscar.Count - 1
-        btnBuscar(I).visible = (Modo = 1)
-        btnBuscar(I).Enabled = (Modo = 1)
-    Next I
+    For i = 0 To Me.btnBuscar.Count - 1
+        btnBuscar(i).visible = (Modo = 1)
+        btnBuscar(i).Enabled = (Modo = 1)
+    Next i
     btnBuscar(3).visible = (Modo = 1 Or Modo = 4)
     btnBuscar(3).Enabled = (Modo = 1 Or Modo = 4)
     btnBuscar(4).visible = (Modo = 1 Or (Modo = 4 And PagoTicket))
@@ -816,7 +816,7 @@ Private Sub BotonAnyadir()
     CadenaB = " WHERE rpozticketsmanta.fecpago is null "
     
     CargaGrid 'primer de tot carregue tot el grid
-    cadB = ""
+    CadB = ""
     '******************** canviar taula i camp **************************
     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
         NumF = NuevoCodigo
@@ -833,9 +833,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -860,9 +860,9 @@ Private Sub BotonBuscar()
     CargaGrid "rpozticketsmanta.codsocio is null"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     
     Text2(0).Text = ""
     Text2(2).Text = ""
@@ -882,9 +882,9 @@ Private Sub BotonBuscarFacturados()
     '*******************************************************************************
     
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     
     Text2(0).Text = ""
     Text2(2).Text = ""
@@ -899,15 +899,15 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     PagoTicket = False
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -950,7 +950,7 @@ End Sub
 
 Private Sub BotonPagoTicket()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     If Me.adodc1.Recordset.EOF Then Exit Sub
     
@@ -984,8 +984,8 @@ Private Sub BotonPagoTicket()
     PagoTicket = True
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1029,14 +1029,14 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     Text2(0).Top = alto
     Text2(2).Top = alto
-    For I = 0 To Me.btnBuscar.Count - 1
-        btnBuscar(I).Top = alto
-    Next I
+    For i = 0 To Me.btnBuscar.Count - 1
+        btnBuscar(i).Top = alto
+    Next i
     ' ### [Monica] 12/09/2006
     
 End Sub
@@ -1070,12 +1070,12 @@ Dim vTipoMov As CTiposMov
         
         'Devolvemos contador, si no estamos actualizando
         Set vTipoMov = New CTiposMov
-        vTipoMov.DevolverContador "ALV", adodc1.Recordset!Numalbar
+        vTipoMov.DevolverContador "ALV", adodc1.Recordset!numalbar
         Set vTipoMov = Nothing
         
-        Sql = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!Numalbar
+        Sql = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
         conn.Execute Sql
-        CargaGrid cadB
+        CargaGrid CadB
         
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1113,12 +1113,12 @@ Dim Fecha As String
         
     'Nº Ticket
 '    Fecha = Year(Fecha) & "," & Month(Fecha) & "," & Day(Fecha)
-    cadAux = "{rpozticketsmanta.numalbar} = " & Me.adodc1.Recordset!Numalbar & " and {rpozticketsmanta.fecalbar} = date(""" & Me.adodc1.Recordset!Fecalbar & """)"
+    cadAux = "{rpozticketsmanta.numalbar} = " & Me.adodc1.Recordset!numalbar & " and {rpozticketsmanta.fecalbar} = date(""" & Me.adodc1.Recordset!Fecalbar & """)"
     
     If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
     
     indRPT = 47 'Impresion de recibos de mantenimiento de pozos
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     'Nombre fichero .rpt a Imprimir
     
     '[Monica]30/07/2014: dependiendo de si el socio es de contado mandamos una impresion u otra
@@ -1138,14 +1138,14 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -1237,7 +1237,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As Long
+    Dim i As Long
     Dim NReg As Long
     Dim Sql As String
     Dim Sql2 As String
@@ -1246,10 +1246,10 @@ Private Sub cmdAceptar_Click()
     
     Select Case Modo
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda(Me)
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me)
+            If CadB <> "" Then
                 
-                CargaGrid cadB   '& AnyadeCadenaFiltro(True)
+                CargaGrid CadB   '& AnyadeCadenaFiltro(True)
                 PonerModo 2
 '                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
@@ -1269,7 +1269,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -1281,10 +1281,10 @@ Private Sub cmdAceptar_Click()
                         OK = True
                         
                         TerminaBloquear
-                        I = adodc1.Recordset.Fields(0)
+                        i = adodc1.Recordset.Fields(0)
                         PonerModo 2
                         CargaGrid "" 'CadB
-                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I & "")
+                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i & "")
                         PonerFocoGrid Me.DataGrid1
                     End If
                 Else
@@ -1303,7 +1303,7 @@ Dim bol As Boolean
 Dim MenError As String
 Dim devuelve As String
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error GoTo EModifica
 
@@ -1451,7 +1451,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -1468,7 +1468,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim Cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1477,16 +1477,16 @@ Dim Aux As String
         Exit Sub
     End If
     Cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
@@ -1506,8 +1506,8 @@ Dim Cad As String
     
     Ordenacion = "ORDER BY " & DataGrid1.Columns(0).DataField
     
-    cadB = ""
-    CargaGrid cadB
+    CadB = ""
+    CargaGrid CadB
     
     Screen.MousePointer = vbDefault
 End Sub
@@ -1518,7 +1518,7 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If Modo = 2 Then
-        PonerContRegIndicador lblIndicador, adodc1, cadB
+        PonerContRegIndicador lblIndicador, adodc1, CadB
         Text2(1).Text = adodc1.Recordset!Concepto
     End If
 End Sub
@@ -1585,7 +1585,7 @@ Dim Sql2 As String
     
     Ordenacion = " ORDER BY 1 "
     
-    cadB = ""
+    CadB = ""
     CargaGrid
     
     FechaAnt = ""
@@ -1834,11 +1834,10 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 

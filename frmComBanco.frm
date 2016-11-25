@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmComBanco 
@@ -717,7 +717,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo)
 Dim b As Boolean
-Dim I As Integer
+Dim i As Integer
     
     Modo = vModo
 '    PonerIndicador lblIndicador, Modo
@@ -739,9 +739,9 @@ Dim I As Integer
     ' **************************************************
     
     ' **** si n'hi han camps fora del grid, bloquejar-los ****
-    For I = 6 To 17
-        BloquearTxt txtAux(I), b
-    Next I
+    For i = 6 To 17
+        BloquearTxt txtAux(i), b
+    Next i
     
     ' ********************************************************
 
@@ -799,7 +799,7 @@ End Sub
 Private Sub BotonAnyadir()
 Dim NumF As String
 Dim anc As Single
-Dim I As Integer
+Dim i As Integer
     
     CargaGrid 'primer de tot carregue tot el grid
     CadB = ""
@@ -824,9 +824,9 @@ Dim I As Integer
     
     ' *** valors per defecte a l'afegir (dins i fora del grid); repasar codEmpre ***
     txtAux(0).Text = NumF
-    For I = 1 To 17
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To 17
+        txtAux(i).Text = ""
+    Next i
     ' cuenta CCC
     txtAux(2).Text = "0"
     txtAux(3).Text = "0"
@@ -852,16 +852,16 @@ Private Sub BotonVerTodos()
 End Sub
 
 Private Sub BotonBuscar()
-    Dim I As Integer
+    Dim i As Integer
     
     ' *** canviar per la PK (no posar codempre si està a Form_Load) ***
     CargaGrid "codbanpr = -1"
     '*******************************************************************************
 
     ' *** canviar-ho pels valors per defecte al buscar (dins i fora del grid);
-    For I = 0 To 17
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To 17
+        txtAux(i).Text = ""
+    Next i
 
     LLamaLineas DataGrid1.Top + 206, 1
     
@@ -872,13 +872,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
 
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -906,16 +906,16 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub LLamaLineas(alto As Single, xModo As Byte)
-Dim I As Integer
+Dim i As Integer
 
     DeseleccionaGrid Me.DataGrid1
     PonerModo xModo
 
     ' *** posar el Top a tots els controls del grid (botons també) ***
     'Me.imgFec(2).Top = alto
-    For I = 0 To 5
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To 5
+        txtAux(i).Top = alto
+    Next i
     ' ***************************************************
 End Sub
 
@@ -975,7 +975,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim I As Long
+Dim i As Long
 
     Select Case Modo
         Case 3 'INSERTAR
@@ -1003,7 +1003,7 @@ Dim I As Long
             If DatosOk Then
                 'If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeFormulario2(Me, 0) Then
-                    I = adodc1.Recordset.AbsolutePosition
+                    i = adodc1.Recordset.AbsolutePosition
                     TerminaBloquear
                     PonerModo 2
                     CargaGrid CadB
@@ -1014,7 +1014,7 @@ Dim I As Long
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Move I - 1
+                    adodc1.Recordset.Move i - 1
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1061,8 +1061,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1070,21 +1070,21 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
-    I = 0
+    Cad = ""
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     ' *** adrede: per a tornar el TipoSuplem ***
     ' cad = cad & TipoSuplem & "|"
     ' ******************************************
-    RaiseEvent DatoSeleccionado(cad)
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1105,7 +1105,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
     '******* repasar si n'hi ha botó d'imprimir o no******
     With Me.Toolbar1
@@ -1127,14 +1127,14 @@ Dim I As Integer
 
 ' ### [Monica] 08/09/2006
     'IMAGES para busqueda
-   For I = 0 To Me.imgBuscar.Count - 1
-       Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-   Next I
+   For i = 0 To Me.imgBuscar.Count - 1
+       Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+   Next i
 
     'carga IMAGES de mail
-    For I = 0 To Me.imgMail.Count - 1
-        Me.imgMail(I).Picture = frmPpal.imgListImages16.ListImages(2).Picture
-    Next I
+    For i = 0 To Me.imgMail.Count - 1
+        Me.imgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
+    Next i
 
     chkVistaPrevia.Value = CheckValueLeer(Name)
     ' *** SI N'HI HAN COMBOS ***
@@ -1271,7 +1271,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim I As Integer
+    Dim i As Integer
     Dim Sql As String
     Dim tots As String
     
@@ -1302,9 +1302,9 @@ Private Sub CargaGrid(Optional vSQL As String)
     tots = "S|txtAux(0)|T|Cód.|650|;S|txtAux(1)|T|Denominación|1957|;S|txtAux(2)|T|Entidad|800|;"
     tots = tots & "S|txtAux(3)|T|Sucursal|800|;S|txtAux(4)|T|D.C.|650|;"
     tots = tots & "S|txtAux(5)|T|Cuenta|1000|;"
-    For I = 1 To 12
+    For i = 1 To 12
         tots = tots & "N||||0|;"
-    Next I
+    Next i
     arregla tots, DataGrid1, Me
     DataGrid1.ScrollBars = dbgAutomatic
     ' **********************************************************
@@ -1397,8 +1397,8 @@ Private Function DatosOk() As Boolean
 Dim Datos As String
 Dim b As Boolean
 ' *** només per ad este manteniment ***
-Dim RS As Recordset
-Dim cad As String
+Dim Rs As Recordset
+Dim Cad As String
 'Dim exped As String
 ' *************************************
 
@@ -1440,22 +1440,22 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 And Modo = 2 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-Dim I As Byte
+Dim i As Byte
 
     If Modo <> 4 Then 'Modificar
         CargaForaGrid
     Else
-        For I = 0 To txtAux.Count - 1
-            txtAux(I).Text = ""
-        Next I
+        For i = 0 To txtAux.Count - 1
+            txtAux(i).Text = ""
+        Next i
     End If
     
     If Modo = 2 Then PonerContRegIndicador lblIndicador, Me.adodc1, CadB
@@ -1491,13 +1491,13 @@ Private Sub CargaForaGrid()
  End Sub
 
 Private Sub LimpiarCampos()
-Dim I As Integer
+Dim i As Integer
 On Error Resume Next
 
     ' *** posar a huit tots els camps de fora del grid ***
-    For I = 6 To 17
-        txtAux(I).Text = ""
-    Next I
+    For i = 6 To 17
+        txtAux(i).Text = ""
+    Next i
     ' ****************************************************
     Text2(12).Text = "" ' el nombre de la cuenta contable la ponemos a cero
 

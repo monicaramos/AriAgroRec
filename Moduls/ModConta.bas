@@ -38,7 +38,7 @@ Dim Cad As String
                 If MsgBox(Cad, vbYesNo) = vbYes Then
                     If InStr(1, Txt.Tag, "rsocio") > 0 Then
                         InsertarCuentaCble DevfrmCCtas, clien
-                    ElseIf InStr(1, Txt.Tag, "sprove") > 0 Then
+                    ElseIf InStr(1, Txt.Tag, "rtransporte") > 0 Then
                         InsertarCuentaCble DevfrmCCtas, "", clien
                     End If
                     PonerNombreCuenta = clien
@@ -67,8 +67,8 @@ End Function
 Public Function CuentaCorrectaUltimoNivel(ByRef cuenta As String, ByRef devuelve As String) As Boolean
     'Comprueba si es numerica
     Dim Sql As String
-    Dim OtroCampo As String
-    
+    Dim otroCampo As String
+'
     CuentaCorrectaUltimoNivel = False
     If cuenta = "" Then
         devuelve = "Cuenta vacia"
@@ -90,9 +90,9 @@ Public Function CuentaCorrectaUltimoNivel(ByRef cuenta As String, ByRef devuelve
     End If
     '==================
 
-    OtroCampo = "apudirec"
+    otroCampo = "apudirec"
     'BD 2: conexion a BD Conta
-    Sql = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", cuenta, "T", OtroCampo)
+    Sql = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", cuenta, "T", otroCampo)
     If Sql = "" Then
         devuelve = "No existe la cuenta : " & cuenta
         CuentaCorrectaUltimoNivel = True
@@ -100,7 +100,7 @@ Public Function CuentaCorrectaUltimoNivel(ByRef cuenta As String, ByRef devuelve
     End If
 
     'Llegados aqui, si que existe la cuenta
-    If OtroCampo = "S" Then 'Si es apunte directo
+    If otroCampo = "S" Then 'Si es apunte directo
         CuentaCorrectaUltimoNivel = True
         devuelve = Sql
     Else
@@ -157,6 +157,7 @@ End Function
 Private Function InsertarCuentaCble(cuenta As String, cadSocio As String, Optional cadProve As String) As Boolean
 Dim Sql As String
 Dim vSocio As cSocio
+Dim vTrans As CTransportista
 Dim b As Boolean
 Dim vIban As String
 
@@ -166,13 +167,13 @@ Dim vIban As String
         Sql = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,obsdatos,pais, entidad, oficina, cc, cuentaba"
         '[Monica]22/11/2013: tema iban
         If vEmpresa.HayNorma19_34Nueva = 1 Then
-            Sql = Sql & ", iban) "
+            Sql = Sql & ", iban,forpa) "
         Else
-            Sql = Sql & ") "
+            Sql = Sql & ",forpa) "
         End If
     Else
         Sql = "INSERT INTO cuentas (codmacta,nommacta,apudirec,model347,razosoci,dirdatos,codposta,despobla,desprovi,nifdatos,maidatos,obsdatos,codpais"
-        Sql = Sql & ", iban) "
+        Sql = Sql & ", iban, forpa) "
     End If
     
     Sql = Sql & " VALUES (" & DBSet(cuenta, "T") & ","
@@ -186,15 +187,15 @@ Dim vIban As String
                 Sql = Sql & DBSet(vSocio.Banco, "T", "S") & "," & DBSet(vSocio.Sucursal, "T", "S") & "," & DBSet(vSocio.Digcontrol, "T", "S") & "," & DBSet(vSocio.CuentaBan, "T", "S")
                 '[Monica]22/11/2013: tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    Sql = Sql & "," & DBSet(vSocio.Iban, "T", "S") & ")"
+                    Sql = Sql & "," & DBSet(vSocio.IBAN, "T", "S") & "," & ValorNulo & ")"
                 Else
-                    Sql = Sql & ")"
+                    Sql = Sql & "," & ValorNulo & ")"
                 End If
             Else
-                vIban = MiFormat(vSocio.Iban, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(vSocio.Digcontrol, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
+                vIban = MiFormat(vSocio.IBAN, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(vSocio.Digcontrol, "00") & MiFormat(vSocio.CuentaBan, "0000000000")
                 
                 Sql = Sql & ",'ES',"
-                Sql = Sql & DBSet(vIban, "T") & ")"
+                Sql = Sql & DBSet(vIban, "T") & "," & ValorNulo & ")"
             End If
             ConnConta.Execute Sql
             cadSocio = vSocio.Nombre
@@ -203,6 +204,36 @@ Dim vIban As String
             b = False
         End If
         Set vSocio = Nothing
+    End If
+    
+    If cadProve <> "" Then
+        Set vTrans = New CTransportista
+        If vTrans.LeerDatos(cadProve) Then                          ' antes cuenta
+            Sql = Sql & DBSet(vTrans.Nombre, "T") & ",'S',1," & DBSet(vTrans.Nombre, "T") & "," & DBSet(vTrans.Direccion, "T") & ","
+            Sql = Sql & DBSet(vTrans.CPostal, "T") & "," & DBSet(vTrans.Poblacion, "T") & "," & DBSet(vTrans.Provincia, "T") & "," & DBSet(vTrans.nif, "T") & "," & DBSet(vTrans.EMail, "T") & "," & ValorNulo
+            If Not vParamAplic.ContabilidadNueva Then
+                Sql = Sql & ",'ESPAÑA',"
+                Sql = Sql & DBSet(vTrans.Banco, "T", "S") & "," & DBSet(vTrans.Sucursal, "T", "S") & "," & DBSet(vTrans.Digcontrol, "T", "S") & "," & DBSet(vTrans.CuentaBan, "T", "S")
+                '[Monica]22/11/2013: tema iban
+                If vEmpresa.HayNorma19_34Nueva = 1 Then
+                    Sql = Sql & "," & DBSet(vTrans.IBAN, "T", "S") & "," & DBSet(vTrans.ForPago, "N") & ")"
+                Else
+                    Sql = Sql & "," & DBSet(vTrans.ForPago, "N") & ")"
+                End If
+            Else
+                vIban = MiFormat(vTrans.IBAN, "") & MiFormat(vTrans.Banco, "0000") & MiFormat(vTrans.Sucursal, "0000") & MiFormat(vTrans.Digcontrol, "00") & MiFormat(vTrans.CuentaBan, "0000000000")
+                
+                Sql = Sql & ",'ES',"
+                Sql = Sql & DBSet(vIban, "T") & "," & DBSet(vTrans.ForPago, "N") & ")"
+            End If
+            ConnConta.Execute Sql
+            cadProve = vTrans.Nombre
+            b = True
+        Else
+            b = False
+        End If
+        Set vTrans = Nothing
+    
     End If
     
     
@@ -625,7 +656,7 @@ End Function
 Public Function NombreCuentaCorrecta(ByRef cuenta As String) As String
     'Comprueba si es numerica
     Dim Sql As String
-    Dim OtroCampo As String
+    Dim otroCampo As String
     
 ' ### [Monica] 27/10/2006 añadida la linea siguiente condicion vParamAplic.NumeroConta = 0
 ' para que no saque nada si no hay contabilidad

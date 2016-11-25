@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmListSuperficies 
    BorderStyle     =   3  'Fixed Dialog
@@ -593,7 +593,7 @@ Attribute frmMens1.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -617,11 +617,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -641,7 +641,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim nTabla As String
 
-Dim NRegs As Long
+Dim Nregs As Long
 Dim FecFac As Date
 
 Dim b As Boolean
@@ -652,7 +652,7 @@ Dim vSQL As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -687,7 +687,7 @@ Dim vSQL As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadWhere = vSQL
+        frmMens.cadWHERE = vSQL
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -703,61 +703,61 @@ Dim vSQL As String
 '                numParam = numParam + 1
                 
                 'tipo de superficie (hectareas o hanegadas)
-                If Option2(0).Value Then cadParam = cadParam & "pTipo=0|"
-                If Option2(1).Value Then cadParam = cadParam & "pTipo=1|"
+                If Option2(0).Value Then CadParam = CadParam & "pTipo=0|"
+                If Option2(1).Value Then CadParam = CadParam & "pTipo=1|"
                 numParam = numParam + 1
                 
-                cadParam = cadParam & "pRango1="""
+                CadParam = CadParam & "pRango1="""
                 If txtcodigo(2).Text <> "" Then
                     If txtcodigo(3).Text = "" Then
-                        cadParam = cadParam & ">=" & txtcodigo(2).Text
+                        CadParam = CadParam & ">=" & txtcodigo(2).Text
                     Else
-                        cadParam = cadParam & txtcodigo(2).Text
+                        CadParam = CadParam & txtcodigo(2).Text
                         If txtcodigo(3).Text <> "" Then
-                            cadParam = cadParam & " y " & txtcodigo(3).Text
+                            CadParam = CadParam & " y " & txtcodigo(3).Text
                         End If
                     End If
                 End If
-                cadParam = cadParam & """|"
+                CadParam = CadParam & """|"
                 
-                cadParam = cadParam & "pRango2="""
+                CadParam = CadParam & "pRango2="""
                 If txtcodigo(4).Text <> "" Then
                     If txtcodigo(5).Text = "" Then
-                        cadParam = cadParam & ">=" & txtcodigo(4).Text
+                        CadParam = CadParam & ">=" & txtcodigo(4).Text
                     Else
-                        cadParam = cadParam & txtcodigo(4).Text
+                        CadParam = CadParam & txtcodigo(4).Text
                         If txtcodigo(5).Text <> "" Then
-                            cadParam = cadParam & " y " & txtcodigo(5).Text
+                            CadParam = CadParam & " y " & txtcodigo(5).Text
                         End If
                     End If
                 End If
-                cadParam = cadParam & """|"
+                CadParam = CadParam & """|"
                 
-                cadParam = cadParam & "pRango3="""
+                CadParam = CadParam & "pRango3="""
                 If txtcodigo(6).Text <> "" Then
                     If txtcodigo(7).Text = "" Then
-                        cadParam = cadParam & ">=" & txtcodigo(6).Text
+                        CadParam = CadParam & ">=" & txtcodigo(6).Text
                     Else
-                        cadParam = cadParam & txtcodigo(6).Text
+                        CadParam = CadParam & txtcodigo(6).Text
                         If txtcodigo(7).Text <> "" Then
-                            cadParam = cadParam & " y " & txtcodigo(7).Text
+                            CadParam = CadParam & " y " & txtcodigo(7).Text
                         End If
                     End If
                 End If
-                cadParam = cadParam & """|"
+                CadParam = CadParam & """|"
                 
-                cadParam = cadParam & "pRango4="""
+                CadParam = CadParam & "pRango4="""
                 If txtcodigo(8).Text <> "" Then
                     If txtcodigo(9).Text = "" Then
-                        cadParam = cadParam & ">=" & txtcodigo(8).Text
+                        CadParam = CadParam & ">=" & txtcodigo(8).Text
                     Else
-                        cadParam = cadParam & txtcodigo(8).Text
+                        CadParam = CadParam & txtcodigo(8).Text
                         If txtcodigo(9).Text <> "" Then
-                            cadParam = cadParam & " y " & txtcodigo(9).Text
+                            CadParam = CadParam & " y " & txtcodigo(9).Text
                         End If
                     End If
                 End If
-                cadParam = cadParam & """|"
+                CadParam = CadParam & """|"
                 
                 numParam = numParam + 4
                                     
@@ -815,7 +815,7 @@ Dim H As Integer, W As Integer
 
     FrameSuperficiesVisible True, H, W
     Tabla = "rcampos"
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
@@ -836,16 +836,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {rcampos.codvarie} = -1 "
+        Sql = " {rcampos.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -948,7 +948,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -976,7 +976,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -986,7 +986,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1067,16 +1067,16 @@ End Sub
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
 Dim numser As String
 Dim Fecha As Date
 Dim vCont As CTiposMov
-Dim TipoMov As String
+Dim tipoMov As String
 Dim i As Integer
 
     b = False
@@ -1108,19 +1108,19 @@ End Function
 
 Private Function CargarTemporalSuperficie(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 
 Dim Cad As String
 Dim HayReg As Boolean
-Dim NRegs As Long
+Dim Nregs As Long
 
     On Error GoTo eCargarTemporal
     
     CargarTemporalSuperficie = False
 
-    pb1.visible = True
+    Pb1.visible = True
     Label2(0).visible = True
 
     Sql2 = "delete from tmpsuperficies where codusu = " & vUsu.Codigo
@@ -1137,23 +1137,23 @@ Dim NRegs As Long
         
     ' insertamos en la temporal con la suma de superficie a cero
     '                                       variedad
-    SQL = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
-    SQL = SQL & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
-    SQL = SQL & " where " & cWhere
-    SQL = SQL & " group by 1,2 "
-    SQL = SQL & " order by 1,2 "
+    Sql = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
+    Sql = Sql & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
+    Sql = Sql & " where " & cWhere
+    Sql = Sql & " group by 1,2 "
+    Sql = Sql & " order by 1,2 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
-    If Option3(0).Value Then SQL = "select rcampos.codvarie, sum(supcoope) from " & cTabla
-    If Option3(1).Value Then SQL = "select rcampos.codvarie, sum(supcatas) from " & cTabla
-    If Option3(2).Value Then SQL = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
-    If Option3(3).Value Then SQL = "select rcampos.codvarie, sum(supculti) from " & cTabla
-    SQL = SQL & " where " & cWhere
+    If Option3(0).Value Then Sql = "select rcampos.codvarie, sum(supcoope) from " & cTabla
+    If Option3(1).Value Then Sql = "select rcampos.codvarie, sum(supcatas) from " & cTabla
+    If Option3(2).Value Then Sql = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
+    If Option3(3).Value Then Sql = "select rcampos.codvarie, sum(supculti) from " & cTabla
+    Sql = Sql & " where " & cWhere
     
     If txtcodigo(2).Text <> "" Or txtcodigo(3).Text <> "" Then
         ' rango 1
-        Sql2 = SQL
+        Sql2 = Sql
         If txtcodigo(2).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtcodigo(2).Text, "N")
         End If
@@ -1163,19 +1163,19 @@ Dim NRegs As Long
         Sql2 = Sql2 & " group by 1 "
         Sql2 = Sql2 & " order by 1 "
         
-        pb1.visible = True
+        Pb1.visible = True
         Label2(0).Caption = "Actualizando Rango 1"
-        NRegs = TotalRegistrosConsulta(Sql2)
-        If NRegs <> 0 Then
-            pb1.Max = NRegs
-            pb1.Value = 0
+        Nregs = TotalRegistrosConsulta(Sql2)
+        If Nregs <> 0 Then
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
         
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1193,7 +1193,7 @@ Dim NRegs As Long
     
     If txtcodigo(4).Text <> "" Or txtcodigo(5).Text <> "" Then
         ' rango 2
-        Sql2 = SQL
+        Sql2 = Sql
         If txtcodigo(4).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtcodigo(4).Text, "N")
         End If
@@ -1204,10 +1204,10 @@ Dim NRegs As Long
         Sql2 = Sql2 & " order by 1 "
         
         Label2(0).Caption = "Actualizando Rango 2"
-        NRegs = TotalRegistrosConsulta(Sql2)
-        If NRegs <> 0 Then
-            pb1.Max = NRegs
-            pb1.Value = 0
+        Nregs = TotalRegistrosConsulta(Sql2)
+        If Nregs <> 0 Then
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
         
         
@@ -1215,7 +1215,7 @@ Dim NRegs As Long
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1233,7 +1233,7 @@ Dim NRegs As Long
     
     If txtcodigo(6).Text <> "" Or txtcodigo(7).Text <> "" Then
         ' rango 3
-        Sql2 = SQL
+        Sql2 = Sql
         If txtcodigo(6).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtcodigo(6).Text, "N")
         End If
@@ -1244,17 +1244,17 @@ Dim NRegs As Long
         Sql2 = Sql2 & " order by 1 "
         
         Label2(0).Caption = "Actualizando Rango 3"
-        NRegs = TotalRegistrosConsulta(Sql2)
-        If NRegs <> 0 Then
-            pb1.Max = NRegs
-            pb1.Value = 0
+        Nregs = TotalRegistrosConsulta(Sql2)
+        If Nregs <> 0 Then
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
     
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1272,7 +1272,7 @@ Dim NRegs As Long
     
     If txtcodigo(8).Text <> "" Or txtcodigo(9).Text <> "" Then
         ' rango 4
-        Sql2 = SQL
+        Sql2 = Sql
         If txtcodigo(8).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtcodigo(8).Text, "N")
         End If
@@ -1283,17 +1283,17 @@ Dim NRegs As Long
         Sql2 = Sql2 & " order by 1 "
         
         Label2(0).Caption = "Actualizando Rango 4"
-        NRegs = TotalRegistrosConsulta(Sql2)
-        If NRegs <> 0 Then
-            pb1.Max = NRegs
-            pb1.Value = 0
+        Nregs = TotalRegistrosConsulta(Sql2)
+        If Nregs <> 0 Then
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
     
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1309,7 +1309,7 @@ Dim NRegs As Long
         Set Rs = Nothing
     End If
     Me.Label2(0).visible = False
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
     Me.Refresh
     
     

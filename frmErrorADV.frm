@@ -246,7 +246,7 @@ Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -272,11 +272,11 @@ Dim Contabilizada As Byte
 Dim vSeccion As CSeccion
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -287,8 +287,8 @@ Dim nDesde As String
 Dim nHasta As String
 
 
-    cDesde = Trim(txtCodigo(1).Text)
-    cHasta = Trim(txtCodigo(2).Text)
+    cDesde = Trim(txtcodigo(1).Text)
+    cHasta = Trim(txtcodigo(2).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -318,25 +318,25 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtCodigo(0)
+        PonerFoco txtcodigo(0)
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
     limpiar Me
 
-    For h = 0 To imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
+    For H = 0 To imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
     
     Tabla = "advfacturas"
-    txtCodigo(1).Text = Format(vParam.FecIniCam, "dd/mm/yyyy")
-    txtCodigo(2).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
+    txtcodigo(1).Text = Format(vParam.FecIniCam, "dd/mm/yyyy")
+    txtcodigo(2).Text = Format(vParam.FecFinCam, "dd/mm/yyyy")
     
     CommitConexion
     
@@ -354,13 +354,13 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtCodigo(CByte(imgFec(0).Tag) + 1).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(CByte(imgFec(0).Tag) + 1).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -380,7 +380,7 @@ Dim Sql2 As String
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -390,7 +390,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmArticuloADV (Index)
     
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -419,19 +419,19 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = Index '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtCodigo(Index + 1).Text <> "" Then frmC.NovaData = txtCodigo(Index + 1).Text
+    If txtcodigo(Index + 1).Text <> "" Then frmC.NovaData = txtcodigo(Index + 1).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag) + 1) '<===
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag) + 1) '<===
     ' ********************************************
 
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -462,7 +462,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -471,14 +471,14 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             
         Case 1, 2 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
         
         Case 3, 4 'PRECIOS
-            PonerFormatoDecimal txtCodigo(Index), 8
+            PonerFormatoDecimal txtcodigo(Index), 8
         
     End Select
 End Sub
@@ -487,7 +487,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -515,7 +515,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -525,7 +525,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -550,7 +550,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -587,7 +587,7 @@ Private Function DatosOk() As Boolean
 Dim b As Boolean
 Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String
@@ -596,27 +596,27 @@ Dim Fecha As Date
 Dim Cad As String
 
     b = True
-    If txtCodigo(0).Text = "" Then
+    If txtcodigo(0).Text = "" Then
         MsgBox "Debe introducir el articulo", vbExclamation
         b = False
     Else
-        Sql = DevuelveDesdeBDNew(cAgro, "advartic", "nomartic", "codartic", txtCodigo(0).Text, "N")
+        Sql = DevuelveDesdeBDNew(cAgro, "advartic", "nomartic", "codartic", txtcodigo(0).Text, "N")
         If Sql = "" Then
             MsgBox "No existe el articulo. Reintroduzca.", vbExclamation
             b = False
-            PonerFoco txtCodigo(0)
+            PonerFoco txtcodigo(0)
         End If
     End If
     
     If b Then
-        If (txtCodigo(1).Text = "" Or txtCodigo(2).Text = "") Then
+        If (txtcodigo(1).Text = "" Or txtcodigo(2).Text = "") Then
             MsgBox "El rango de fechas debe de tener un valor. Reintroduzca.", vbExclamation
             b = False
         End If
     End If
     
     If b Then
-        If txtCodigo(3).Text = "" Then
+        If txtcodigo(3).Text = "" Then
             Cad = "El valor del precio esta vacio. Revise."
             MsgBox Cad, vbExclamation
             b = False
@@ -629,21 +629,21 @@ End Function
 
 
 
-Private Function ActualizarRegistros(ctabla As String, cwhere As String) As Boolean
+Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
 Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
-    ctabla = QuitarCaracterACadena(ctabla, "{")
-    ctabla = QuitarCaracterACadena(ctabla, "}")
-    Sql = "update " & QuitarCaracterACadena(ctabla, "_1") & " set impreso = 1 "
-    If cwhere <> "" Then
-        cwhere = QuitarCaracterACadena(cwhere, "{")
-        cwhere = QuitarCaracterACadena(cwhere, "}")
-        cwhere = QuitarCaracterACadena(cwhere, "_1")
-        Sql = Sql & " WHERE " & cwhere
+    cTabla = QuitarCaracterACadena(cTabla, "{")
+    cTabla = QuitarCaracterACadena(cTabla, "}")
+    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    If cWhere <> "" Then
+        cWhere = QuitarCaracterACadena(cWhere, "{")
+        cWhere = QuitarCaracterACadena(cWhere, "}")
+        cWhere = QuitarCaracterACadena(cWhere, "_1")
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     conn.Execute Sql
@@ -667,7 +667,7 @@ Dim cadMen As String
 Dim Sql As String
 Dim NumF As Currency
 Dim vFactADV As CFacturaADV
-Dim vSocio As CSocio
+Dim vSocio As cSocio
 Dim Rs As ADODB.Recordset
 
 
@@ -677,10 +677,10 @@ Dim Rs As ADODB.Recordset
     
     
     ' actualizar lines de facturas
-    Sql = "update advfacturas_lineas, advfacturas set advfacturas_lineas.preciove = " & DBSet(txtCodigo(3).Text, "N")
-    Sql = Sql & " where advfacturas_lineas.codartic = " & DBSet(txtCodigo(0).Text, "T")
-    Sql = Sql & " and advfacturas.fecfactu >= " & DBSet(txtCodigo(1).Text, "F")
-    Sql = Sql & " and advfacturas.fecfactu <= " & DBSet(txtCodigo(2).Text, "F")
+    Sql = "update advfacturas_lineas, advfacturas set advfacturas_lineas.preciove = " & DBSet(txtcodigo(3).Text, "N")
+    Sql = Sql & " where advfacturas_lineas.codartic = " & DBSet(txtcodigo(0).Text, "T")
+    Sql = Sql & " and advfacturas.fecfactu >= " & DBSet(txtcodigo(1).Text, "F")
+    Sql = Sql & " and advfacturas.fecfactu <= " & DBSet(txtcodigo(2).Text, "F")
     Sql = Sql & " and advfacturas.codtipom = advfacturas_lineas.codtipom "
     Sql = Sql & " and advfacturas.numfactu = advfacturas_lineas.numfactu "
     Sql = Sql & " and advfacturas.fecfactu = advfacturas_lineas.fecfactu "
@@ -688,9 +688,9 @@ Dim Rs As ADODB.Recordset
     conn.Execute Sql
     
     Sql = "update advfacturas_lineas, advfacturas set advfacturas_lineas.importel = round(advfacturas_lineas.preciove * advfacturas_lineas.cantidad,2) "
-    Sql = Sql & " where advfacturas_lineas.codartic = " & DBSet(txtCodigo(0).Text, "T")
-    Sql = Sql & " and advfacturas.fecfactu >= " & DBSet(txtCodigo(1).Text, "F")
-    Sql = Sql & " and advfacturas.fecfactu <= " & DBSet(txtCodigo(2).Text, "F")
+    Sql = Sql & " where advfacturas_lineas.codartic = " & DBSet(txtcodigo(0).Text, "T")
+    Sql = Sql & " and advfacturas.fecfactu >= " & DBSet(txtcodigo(1).Text, "F")
+    Sql = Sql & " and advfacturas.fecfactu <= " & DBSet(txtcodigo(2).Text, "F")
     Sql = Sql & " and advfacturas.codtipom = advfacturas_lineas.codtipom "
     Sql = Sql & " and advfacturas.numfactu = advfacturas_lineas.numfactu "
     Sql = Sql & " and advfacturas.fecfactu = advfacturas_lineas.fecfactu "
@@ -702,9 +702,9 @@ Dim Rs As ADODB.Recordset
     Sql = Sql & " where advfacturas.codtipom = advfacturas_lineas.codtipom and "
     Sql = Sql & " advfacturas.numfactu = advfacturas_lineas.numfactu and "
     Sql = Sql & " advfacturas.fecfactu = advfacturas_lineas.fecfactu and "
-    Sql = Sql & " advfacturas.fecfactu >= " & DBSet(txtCodigo(1).Text, "F") & " and "
-    Sql = Sql & " advfacturas.fecfactu <= " & DBSet(txtCodigo(2).Text, "F") & " and "
-    Sql = Sql & " advfacturas_lineas.codartic = " & DBSet(txtCodigo(0).Text, "T")
+    Sql = Sql & " advfacturas.fecfactu >= " & DBSet(txtcodigo(1).Text, "F") & " and "
+    Sql = Sql & " advfacturas.fecfactu <= " & DBSet(txtcodigo(2).Text, "F") & " and "
+    Sql = Sql & " advfacturas_lineas.codartic = " & DBSet(txtcodigo(0).Text, "T")
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -713,9 +713,9 @@ Dim Rs As ADODB.Recordset
         
        
        '******************ESTOY AQUI
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
        
-        If vSocio.LeerDatos(Rs!codsocio) Then
+        If vSocio.LeerDatos(Rs!Codsocio) Then
             
             Set vFactADV = New CFacturaADV
             

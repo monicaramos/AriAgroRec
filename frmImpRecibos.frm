@@ -1189,7 +1189,11 @@ Dim SegSoc As Currency
 
 
     Sql2 = "Select horas.codvarie,  "
-    Sql2 = Sql2 & " sum(importe) as importe, sum(if(horas.compleme is null,0,horas.compleme)) + sum(if(straba.pluscapataz is null,0,straba.pluscapataz)) as compleme, sum(penaliza) as penaliza FROM " & QuitarCaracterACadena(cTabla, "_1")
+    If vParamAplic.Cooperativa = 16 Then
+        Sql2 = Sql2 & " sum(importe) as importe, sum(if(horas.compleme is null,0,horas.compleme)) as compleme, sum(penaliza) as penaliza FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Else
+        Sql2 = Sql2 & " sum(importe) as importe, sum(if(horas.compleme is null,0,horas.compleme)) + sum(if(straba.pluscapataz is null,0,straba.pluscapataz)) as compleme, sum(penaliza) as penaliza FROM " & QuitarCaracterACadena(cTabla, "_1")
+    End If
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")

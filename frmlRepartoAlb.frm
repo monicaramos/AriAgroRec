@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmRepartoAlb 
    BorderStyle     =   3  'Fixed Dialog
@@ -537,7 +537,7 @@ Attribute frmCla.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -575,11 +575,11 @@ Dim vImpEntrada As Single
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -603,7 +603,7 @@ Dim Sql As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -723,7 +723,7 @@ Dim Sql As String
             Else
                 MsgBox "El proceso no se ha realizado.", vbExclamation
             End If
-            Me.Pb2.visible = False
+            Me.pb2.visible = False
         End If
     End If
     
@@ -769,7 +769,7 @@ Dim List As Collection
     
     Tabla = "rhisfruta"
     
-    Me.Pb2.visible = False
+    Me.pb2.visible = False
     
     ActivarCLAVE
     
@@ -924,7 +924,7 @@ End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -987,7 +987,7 @@ Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
     cadSelect1 = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1015,7 +1015,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1042,9 +1042,9 @@ End Sub
 
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim SQL1 As String
+Dim Sql1 As String
 
     ConcatenarCampos = ""
 
@@ -1060,18 +1060,18 @@ Dim SQL1 As String
     
     
     Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
-    Set Rs = New adodb.Recordset
+    Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    SQL1 = ""
+    Sql1 = ""
     While Not Rs.EOF
-        SQL1 = SQL1 & DBLet(Rs.Fields(0).Value, "N") & ","
+        Sql1 = Sql1 & DBLet(Rs.Fields(0).Value, "N") & ","
         Rs.MoveNext
     Wend
     Set Rs = Nothing
     'quitamos el ultimo or
-    ConcatenarCampos = Mid(SQL1, 1, Len(SQL1) - 1)
+    ConcatenarCampos = Mid(Sql1, 1, Len(Sql1) - 1)
     
 End Function
 
@@ -1093,7 +1093,7 @@ Dim Sql As String
         Sql = Sql & " WHERE " & cWhere
     End If
     
-    Conn.Execute Sql
+    conn.Execute Sql
     
     ActualizarRegistros = True
     Exit Function
@@ -1116,46 +1116,46 @@ Dim Sql As String
 End Function
 
 Private Sub ActivarCLAVE()
-Dim I As Integer
+Dim i As Integer
     
-    For I = 12 To 15
-        txtcodigo(I).Enabled = False
-        imgBuscar(I).Enabled = False
-        imgBuscar(I).visible = False
-    Next I
-    For I = 2 To 3
-        txtcodigo(I).Enabled = False
-    Next I
-    For I = 6 To 7
-        txtcodigo(I).Enabled = False
-    Next I
-    For I = 0 To 1
-        imgFec(I).Enabled = False
-        imgFec(I).visible = False
-    Next I
+    For i = 12 To 15
+        txtcodigo(i).Enabled = False
+        imgBuscar(i).Enabled = False
+        imgBuscar(i).visible = False
+    Next i
+    For i = 2 To 3
+        txtcodigo(i).Enabled = False
+    Next i
+    For i = 6 To 7
+        txtcodigo(i).Enabled = False
+    Next i
+    For i = 0 To 1
+        imgFec(i).Enabled = False
+        imgFec(i).visible = False
+    Next i
     txtcodigo(8).Enabled = True
     cmdAceptar.Enabled = False
     cmdCancel.Enabled = True
 End Sub
 
 Private Sub DesactivarCLAVE()
-Dim I As Integer
+Dim i As Integer
     
-    For I = 12 To 15
-        txtcodigo(I).Enabled = True
-        imgBuscar(I).Enabled = True
-        imgBuscar(I).visible = True
-    Next I
-    For I = 2 To 3
-        txtcodigo(I).Enabled = True
-    Next I
-    For I = 6 To 7
-        txtcodigo(I).Enabled = True
-    Next I
-    For I = 0 To 1
-        imgFec(I).Enabled = True
-        imgFec(I).visible = True
-    Next I
+    For i = 12 To 15
+        txtcodigo(i).Enabled = True
+        imgBuscar(i).Enabled = True
+        imgBuscar(i).visible = True
+    Next i
+    For i = 2 To 3
+        txtcodigo(i).Enabled = True
+    Next i
+    For i = 6 To 7
+        txtcodigo(i).Enabled = True
+    Next i
+    For i = 0 To 1
+        imgFec(i).Enabled = True
+        imgFec(i).visible = True
+    Next i
     txtcodigo(8).Enabled = True
     cmdAceptar.Enabled = True
     cmdCancel.Enabled = True
@@ -1167,11 +1167,11 @@ Private Function RepartoAlbaranes(cTabla As String, cWhere As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql4 As String
-Dim Rs As adodb.Recordset
-Dim Rs2 As adodb.Recordset
-Dim Rs3 As adodb.Recordset
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim rs3 As ADODB.Recordset
 
-Dim NumAlbar As Long
+Dim numalbar As Long
 Dim vTipoMov As CTiposMov
 
 Dim Albaranes As String
@@ -1208,77 +1208,77 @@ Dim NumReg As Long
     End If
     
     NumReg = TotalRegistrosConsulta(Sql)
-    Pb2.visible = True
-    Pb2.Max = NumReg
+    pb2.visible = True
+    pb2.Max = NumReg
     
-    CargarProgres Pb2, CInt(NumReg)
-    Conn.BeginTrans
+    CargarProgres pb2, CInt(NumReg)
+    conn.BeginTrans
     
     CodTipoMov = "ALF" 'albaranes de fruta
     
     b = True
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF And b
-        IncrementarProgres Pb2, 1
+        IncrementarProgres pb2, 1
         
-        If TieneCopropietarios(Rs!CodCampo) Then
+        If TieneCopropietarios(Rs!codcampo) Then
             Set vTipoMov = New CTiposMov
             If vTipoMov.Leer(CodTipoMov) Then
 
                 tKilosBru = DBLet(Rs!KilosBru, "N")
-                tNumcajon = DBLet(Rs!numcajon, "N")
+                tNumcajon = DBLet(Rs!Numcajon, "N")
                 tKilosNet = DBLet(Rs!KilosNet, "N")
-                tImpTrans = DBLet(Rs!imptrans, "N")
+                tImpTrans = DBLet(Rs!ImpTrans, "N")
                 tImpAcarr = DBLet(Rs!impacarr, "N")
                 tImpRecol = DBLet(Rs!imprecol, "N")
-                tImppenal = DBLet(Rs!Imppenal, "N")
+                tImppenal = DBLet(Rs!ImpPenal, "N")
                 tImpEntrada = DBLet(Rs!ImpEntrada, "N")
 
                 Albaranes = ""
 
-                NroPropiedad = DevuelveValor("select codpropiedad from rcopropiedad where codcampo = " & DBSet(Rs!CodCampo, "N"))
+                NroPropiedad = DevuelveValor("select codpropiedad from rcopropiedad where codcampo = " & DBSet(Rs!codcampo, "N"))
                 
                 Sql2 = "select * from rcopropiedad where codpropiedad = " & DBSet(NroPropiedad, "N")
                 Sql2 = Sql2 & " order by numlinea "
                 
-                Set Rs2 = New adodb.Recordset
-                Rs2.Open Sql2, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Set Rs2 = New ADODB.Recordset
+                Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
                 While Not Rs2.EOF And b
-                    If DBLet(Rs2!CodCampo, "N") <> DBLet(Rs!CodCampo, "N") Then
-                        NumAlbar = vTipoMov.ConseguirContador(CodTipoMov)
+                    If DBLet(Rs2!codcampo, "N") <> DBLet(Rs!codcampo, "N") Then
+                        numalbar = vTipoMov.ConseguirContador(CodTipoMov)
                         Do
-                            devuelve = DevuelveDesdeBDNew(cAgro, "rhisfruta", "numalbar", "numalbar", CStr(NumAlbar), "N")
+                            devuelve = DevuelveDesdeBDNew(cAgro, "rhisfruta", "numalbar", "numalbar", CStr(numalbar), "N")
                             If devuelve <> "" Then
                                 'Ya existe el contador incrementarlo
                                 Existe = True
                                 vTipoMov.IncrementarContador (CodTipoMov)
-                                NumAlbar = vTipoMov.ConseguirContador(CodTipoMov)
+                                numalbar = vTipoMov.ConseguirContador(CodTipoMov)
                             Else
                                 Existe = False
                             End If
                         Loop Until Not Existe
                         
-                        Sql = "select codvarie, codsocio, codcampo from rcampos where codcampo = " & DBSet(Rs2!CodCampo, "N")
+                        Sql = "select codvarie, codsocio, codcampo from rcampos where codcampo = " & DBSet(Rs2!codcampo, "N")
                         
-                        Set Rs3 = New adodb.Recordset
-                        Rs3.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                        Set rs3 = New ADODB.Recordset
+                        rs3.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         
-                        If Not Rs3.EOF Then
-                            If DBLet(Rs3!codvarie, "N") <> DBLet(Rs!codvarie, "N") Then
+                        If Not rs3.EOF Then
+                            If DBLet(rs3!CodVarie, "N") <> DBLet(Rs!CodVarie, "N") Then
                                 b = False
-                                Mens = "El campo " & Rs2!CodCampo & " no es de la misma variedad que el campo " & Rs!CodCampo
+                                Mens = "El campo " & Rs2!codcampo & " no es de la misma variedad que el campo " & Rs!codcampo
                             Else
                                 vKilosBru = Round2(DBLet(Rs!KilosBru, "N") * DBLet(Rs2!Porcentaje, "N") / 100)
-                                vNumcajon = Round2(DBLet(Rs!numcajon, "N") * DBLet(Rs2!Porcentaje, "N") / 100)
+                                vNumcajon = Round2(DBLet(Rs!Numcajon, "N") * DBLet(Rs2!Porcentaje, "N") / 100)
                                 vKilosNet = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs2!Porcentaje, "N") / 100)
-                                vImpTrans = Round2(DBLet(Rs!imptrans, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
+                                vImpTrans = Round2(DBLet(Rs!ImpTrans, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
                                 vImpAcarr = Round2(DBLet(Rs!impacarr, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
                                 vImpRecol = Round2(DBLet(Rs!imprecol, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
-                                vImppenal = Round2(DBLet(Rs!Imppenal, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
+                                vImppenal = Round2(DBLet(Rs!ImpPenal, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
                                 vImpEntrada = Round2(DBLet(Rs!ImpEntrada, "N") * DBLet(Rs2!Porcentaje, "N") / 100, 2)
                                 
                                 tKilosBru = tKilosBru - vKilosBru
@@ -1293,12 +1293,12 @@ Dim NumReg As Long
                                 Sql4 = "insert into rhisfruta (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,"
                                 Sql4 = Sql4 & "kilosbru,numcajon,kilosnet,imptrans,impacarr,imprecol,imppenal,impreso,impentrada,"
                                 Sql4 = Sql4 & "cobradosn,prestimado,coddeposito,codpobla,transportadopor) values ("
-                                Sql4 = Sql4 & DBSet(NumAlbar, "N") & ","
-                                Sql4 = Sql4 & DBSet(Rs!fecalbar, "F") & ","
-                                Sql4 = Sql4 & DBSet(Rs!codvarie, "N") & ","
-                                Sql4 = Sql4 & DBSet(Rs3!Codsocio, "N") & ","
-                                Sql4 = Sql4 & DBSet(Rs2!CodCampo, "N") & ","
-                                Sql4 = Sql4 & DBSet(Rs!tipoentr, "N") & ","
+                                Sql4 = Sql4 & DBSet(numalbar, "N") & ","
+                                Sql4 = Sql4 & DBSet(Rs!Fecalbar, "F") & ","
+                                Sql4 = Sql4 & DBSet(Rs!CodVarie, "N") & ","
+                                Sql4 = Sql4 & DBSet(rs3!Codsocio, "N") & ","
+                                Sql4 = Sql4 & DBSet(Rs2!codcampo, "N") & ","
+                                Sql4 = Sql4 & DBSet(Rs!TipoEntr, "N") & ","
                                 Sql4 = Sql4 & DBSet(Rs!Recolect, "N") & ","
                                 Sql4 = Sql4 & DBSet(vKilosBru, "N") & ","
                                 Sql4 = Sql4 & DBSet(vNumcajon, "N") & ","
@@ -1312,28 +1312,28 @@ Dim NumReg As Long
                                 Sql4 = Sql4 & DBSet(Rs!cobradosn, "N") & ","
                                 Sql4 = Sql4 & DBSet(Rs!PrEstimado, "N", "S") & ","
                                 Sql4 = Sql4 & DBSet(Rs!coddeposito, "N", "S") & ","
-                                Sql4 = Sql4 & DBSet(Rs!codpobla, "N", "S") & ","
+                                Sql4 = Sql4 & DBSet(Rs!CodPobla, "N", "S") & ","
                                 Sql4 = Sql4 & DBSet(Rs!transportadopor, "N") & ")"
                                 
-                                Conn.Execute Sql4
+                                conn.Execute Sql4
                                 
                                 Mens = "Reparto de Entradas."
-                                If b Then b = RepartoEntradas(DBLet(Rs!NumAlbar, "N"), NumAlbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If b Then b = RepartoEntradas(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                             
                                 Mens = "Reparto de Clasificación."
-                                If b Then b = RepartoClasificacion(DBLet(Rs!NumAlbar, "N"), NumAlbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If b Then b = RepartoClasificacion(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                                 
                                 Mens = "Reparto de Gastos."
-                                If b Then b = RepartoGastos(DBLet(Rs!NumAlbar, "N"), NumAlbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If b Then b = RepartoGastos(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                                 
                                 Mens = "Grabar Incidencias."
-                                If b Then b = GrabarIncidencias(DBLet(Rs!NumAlbar, "N"), NumAlbar, Mens)
+                                If b Then b = GrabarIncidencias(DBLet(Rs!numalbar, "N"), numalbar, Mens)
                             
-                                Albaranes = Albaranes & NumAlbar & ","
+                                Albaranes = Albaranes & numalbar & ","
                             End If
                         End If
                         
-                        Set Rs3 = Nothing
+                        Set rs3 = Nothing
                         
                     End If
                 
@@ -1352,20 +1352,20 @@ Dim NumReg As Long
                     Sql4 = Sql4 & "imprecol = " & DBSet(tImpRecol, "N") & ","
                     Sql4 = Sql4 & "Imppenal = " & DBSet(tImppenal, "N") & ","
                     Sql4 = Sql4 & "Impentrada = " & DBSet(tImpEntrada, "N")
-                    Sql4 = Sql4 & " where numalbar = " & DBSet(Rs!NumAlbar, "N")
+                    Sql4 = Sql4 & " where numalbar = " & DBSet(Rs!numalbar, "N")
                     
-                    Conn.Execute Sql4
+                    conn.Execute Sql4
                 
                     Albaranes = "(" & Mid(Albaranes, 1, Len(Albaranes) - 1) & ")"
                 
                     Mens = "Actualizar Entradas."
-                    If b Then b = ActualizarEntradas(Rs!NumAlbar, Albaranes, Mens)
+                    If b Then b = ActualizarEntradas(Rs!numalbar, Albaranes, Mens)
                 
                     Mens = "Actualizar Clasificación."
-                    If b Then b = ActualizarClasificacion(Rs!NumAlbar, Albaranes, Mens)
+                    If b Then b = ActualizarClasificacion(Rs!numalbar, Albaranes, Mens)
                     
                     Mens = "Actualizara Gastos."
-                    If b Then b = ActualizarGastosAlbaranes(Rs!NumAlbar, Albaranes, Mens)
+                    If b Then b = ActualizarGastosAlbaranes(Rs!numalbar, Albaranes, Mens)
                 
                 
                     vTipoMov.IncrementarContador (CodTipoMov)
@@ -1384,27 +1384,27 @@ Dim NumReg As Long
 
 eRepartoAlbaranes:
     If Err.Number <> 0 Or Not b Then
-        Conn.RollbackTrans
+        conn.RollbackTrans
     
     Else
-        Conn.CommitTrans
+        conn.CommitTrans
         RepartoAlbaranes = True
     End If
 
 
 End Function
 
-Private Function TieneCopropietarios(Campo As String) As Boolean
+Private Function TieneCopropietarios(campo As String) As Boolean
 Dim NroCampo As String
 
-    TieneCopropietarios = TotalRegistros("select count(*) from rcopropiedad where codcampo = " & DBSet(Campo, "N")) > 0
+    TieneCopropietarios = TotalRegistros("select count(*) from rcopropiedad where codcampo = " & DBSet(campo, "N")) > 0
 
 End Function
 
 
-Private Function RepartoEntradas(AlbAnt As Long, NumAlbar As Long, Porcentaje As Currency, Mens As String) As Boolean
+Private Function RepartoEntradas(AlbAnt As Long, numalbar As Long, Porcentaje As Currency, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lKilosBru As Long
@@ -1442,17 +1442,17 @@ Dim NumNota As Long
 
     Sql = "select * from rhisfruta_entradas where numalbar = " & DBSet(AlbAnt, "N")
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         lKilosBru = Round2(DBLet(Rs!KilosBru, "N") * Porcentaje / 100)
-        lNumcajon = Round2(DBLet(Rs!numcajon, "N") * Porcentaje / 100)
+        lNumcajon = Round2(DBLet(Rs!Numcajon, "N") * Porcentaje / 100)
         lKilosNet = Round2(DBLet(Rs!KilosNet, "N") * Porcentaje / 100)
-        lImpTrans = Round2(DBLet(Rs!imptrans, "N") * Porcentaje / 100, 2)
+        lImpTrans = Round2(DBLet(Rs!ImpTrans, "N") * Porcentaje / 100, 2)
         lImpAcarr = Round2(DBLet(Rs!impacarr, "N") * Porcentaje / 100, 2)
         lImpRecol = Round2(DBLet(Rs!imprecol, "N") * Porcentaje / 100, 2)
-        lImppenal = Round2(DBLet(Rs!Imppenal, "N") * Porcentaje / 100, 2)
+        lImppenal = Round2(DBLet(Rs!ImpPenal, "N") * Porcentaje / 100, 2)
         
         tKilosBru = tKilosBru - lKilosBru
         tNumcajon = tNumcajon - lNumcajon
@@ -1462,12 +1462,12 @@ Dim NumNota As Long
         tImpRecol = tImpRecol - lImpRecol
         tImppenal = tImppenal - lImppenal
        
-        NumNota = Rs!NumNotac
+        NumNota = Rs!Numnotac
         
         Sql2 = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,observac,imptrans,"
         Sql2 = Sql2 & "impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat) values ("
-        Sql2 = Sql2 & DBSet(NumAlbar, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!NumNotac, "N") & ","
+        Sql2 = Sql2 & DBSet(numalbar, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!Numnotac, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!FechaEnt, "F") & ","
         Sql2 = Sql2 & DBSet(Rs!horaentr, "FH") & ","
         Sql2 = Sql2 & DBSet(lKilosBru, "N") & ","
@@ -1480,10 +1480,10 @@ Dim NumNota As Long
         Sql2 = Sql2 & DBSet(lImppenal, "N", "S") & ","
         Sql2 = Sql2 & DBSet(Rs!PrEstimado, "N", "S") & ","
         Sql2 = Sql2 & DBSet(Rs!codTrans, "T", "S") & ","
-        Sql2 = Sql2 & DBSet(Rs!codtarif, "N", "S") & ","
+        Sql2 = Sql2 & DBSet(Rs!Codtarif, "N", "S") & ","
         Sql2 = Sql2 & DBSet(Rs!codcapat, "N", "S") & ")"
         
-        Conn.Execute Sql2
+        conn.Execute Sql2
     
         Rs.MoveNext
     Wend
@@ -1495,9 +1495,9 @@ Dim NumNota As Long
     Sql2 = Sql2 & ", impacarr = impacarr + " & DBSet(tImpAcarr, "N")
     Sql2 = Sql2 & ", imprecol = imprecol + " & DBSet(tImpAcarr, "N")
     Sql2 = Sql2 & ", imppenal = imppenal + " & DBSet(tImppenal, "N")
-    Sql2 = Sql2 & " where numalbar = " & DBSet(NumAlbar, "N") & " and numnotac = " & DBSet(NumNota, "N")
+    Sql2 = Sql2 & " where numalbar = " & DBSet(numalbar, "N") & " and numnotac = " & DBSet(NumNota, "N")
     
-    Conn.Execute Sql2
+    conn.Execute Sql2
     
     Set Rs = Nothing
     
@@ -1512,9 +1512,9 @@ End Function
 
 
 
-Private Function RepartoClasificacion(AlbAnt As Long, NumAlbar As Long, Porcentaje As Currency, Mens As String) As Boolean
+Private Function RepartoClasificacion(AlbAnt As Long, numalbar As Long, Porcentaje As Currency, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lKilosNet As Single
@@ -1531,8 +1531,8 @@ Dim Calid As Long
     
     Sql = "select * from rhisfruta_clasif where numalbar = " & DBSet(AlbAnt, "N")
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         lKilosNet = Round2(DBLet(Rs!KilosNet, "N") * Porcentaje / 100)
@@ -1544,21 +1544,21 @@ Dim Calid As Long
         tKilosNet = tKilosNet - lKilosNet
         
         Sql2 = "insert into rhisfruta_clasif (numalbar,codvarie,codcalid,kilosnet) values ("
-        Sql2 = Sql2 & DBSet(NumAlbar, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!codvarie, "N") & ","
+        Sql2 = Sql2 & DBSet(numalbar, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!CodVarie, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!codcalid, "N") & ","
         Sql2 = Sql2 & DBSet(lKilosNet, "N", "S") & ")"
         
-        Conn.Execute Sql2
+        conn.Execute Sql2
     
         Rs.MoveNext
     Wend
     
     ' si no está correcto el totalkilonet el redondeo  va sobre la primera calidad con kilos
     Sql2 = "update rhisfruta_clasif set kilosnet = kilosnet + " & DBSet(tKilosNet, "N")
-    Sql2 = Sql2 & " where numalbar = " & DBSet(NumAlbar, "N") & " and codcalid = " & DBSet(Calid, "N")
+    Sql2 = Sql2 & " where numalbar = " & DBSet(numalbar, "N") & " and codcalid = " & DBSet(Calid, "N")
     
-    Conn.Execute Sql2
+    conn.Execute Sql2
     
     Set Rs = Nothing
     
@@ -1570,9 +1570,9 @@ eRepartoClasificacion:
 End Function
 
 
-Private Function RepartoGastos(AlbAnt As Long, NumAlbar As Long, Porcentaje As Currency, Mens As String) As Boolean
+Private Function RepartoGastos(AlbAnt As Long, numalbar As Long, Porcentaje As Currency, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lGastos As Single
@@ -1583,19 +1583,19 @@ Dim lGastos As Single
 
     Sql = "select * from rhisfruta_gastos where numalbar = " & DBSet(AlbAnt, "N")
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         lGastos = Round2(Rs!Importe * Porcentaje / 100, 2)
         
         Sql2 = "insert into rhisfruta_gastos (numalbar,numlinea,codgasto,importe) values ("
-        Sql2 = Sql2 & DBSet(NumAlbar, "N") & ","
+        Sql2 = Sql2 & DBSet(numalbar, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!numlinea, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!codgasto, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!Codgasto, "N") & ","
         Sql2 = Sql2 & DBSet(lGastos, "N", "S") & ")"
         
-        Conn.Execute Sql2
+        conn.Execute Sql2
         
         Rs.MoveNext
     Wend
@@ -1611,9 +1611,9 @@ End Function
 
 
 
-Private Function GrabarIncidencias(AlbAnt As Long, NumAlbar As Long, Mens As String) As Boolean
+Private Function GrabarIncidencias(AlbAnt As Long, numalbar As Long, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lGastos As Single
@@ -1623,8 +1623,8 @@ Dim lGastos As Single
     GrabarIncidencias = False
 
     Sql = "insert into rhisfruta_incidencia (numalbar,numnotac,codincid) "
-    Sql = "select " & DBSet(NumAlbar, "N") & ",numnotac, codincid from rhisfruta_incidencia where numalbar = " & DBSet(AlbAnt, "N")
-    Conn.Execute Sql
+    Sql = "select " & DBSet(numalbar, "N") & ",numnotac, codincid from rhisfruta_incidencia where numalbar = " & DBSet(AlbAnt, "N")
+    conn.Execute Sql
         
     GrabarIncidencias = True
     Exit Function
@@ -1637,7 +1637,7 @@ End Function
 
 Private Function ActualizarEntradas(AlbAnt As Long, cadAlbaran As String, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
     On Error GoTo eActualizarEntradas
@@ -1649,8 +1649,8 @@ Dim Sql2 As String
     Sql = Sql & " from rhisfruta_entradas where numalbar in " & cadAlbaran
     Sql = Sql & " group by 1 order by 1"
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Sql2 = "update rhisfruta_entradas set kilosbru = kilosbru - " & DBSet(Rs!kilbru, "N")
@@ -1661,9 +1661,9 @@ Dim Sql2 As String
         Sql2 = Sql2 & ", imprecol = imprecol - " & DBSet(Rs!ImpREC, "N")
         Sql2 = Sql2 & ", imppenal = imppenal - " & DBSet(Rs!imppen, "N")
         Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N")
-        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!NumNotac, "N")
+        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
     
-        Conn.Execute Sql2
+        conn.Execute Sql2
         Rs.MoveNext
     Wend
     
@@ -1680,7 +1680,7 @@ End Function
 
 Private Function ActualizarClasificacion(AlbAnt As Long, cadAlbaran As String, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lKilosNet As Single
@@ -1694,15 +1694,15 @@ Dim Calid As Long
     Sql = "select codvarie, codcalid, sum(kilosnet) as kilosnet from rhisfruta_clasif where numalbar in " & cadAlbaran
     Sql = Sql & " group by 1,2 order by 1,2 "
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Sql2 = "update rhisfruta_clasif set kilosnet = kilosnet - " & DBSet(Rs!KilosNet, "N")
-        Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N") & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
-        Conn.Execute Sql2
+        conn.Execute Sql2
         
         Rs.MoveNext
     Wend
@@ -1720,7 +1720,7 @@ End Function
 
 Private Function ActualizarGastosAlbaranes(AlbAnt As Long, cadAlbaran As String, Mens As String) As Boolean
 Dim Sql As String
-Dim Rs As adodb.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql2 As String
 
 Dim lKilosNet As Single
@@ -1734,14 +1734,14 @@ Dim Calid As Long
     Sql = "select numlinea, sum(importe) as importe from rhisfruta_gastos where numalbar in " & cadAlbaran
     Sql = Sql & " group by 1 order by 1 "
     
-    Set Rs = New adodb.Recordset
-    Rs.Open Sql, Conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Sql2 = "update rhisfruta_gastos set importe = importe - " & DBSet(Rs!Importe, "N")
         Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N") & " and numlinea = " & DBSet(Rs!numlinea, "N")
         
-        Conn.Execute Sql2
+        conn.Execute Sql2
         
         Rs.MoveNext
     Wend

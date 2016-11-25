@@ -445,7 +445,7 @@ Attribute frmTto.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -464,17 +464,17 @@ Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim PrimeraVez As Boolean
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -486,13 +486,13 @@ InicializarVbles
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
     'D/H Socio
-    cDesde = Trim(txtCodigo(0).Text)
-    cHasta = Trim(txtCodigo(1).Text)
+    cDesde = Trim(txtcodigo(0).Text)
+    cHasta = Trim(txtcodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -503,8 +503,8 @@ InicializarVbles
     End If
     
     'D/H Nro de Parte o factura
-    cDesde = Trim(txtCodigo(4).Text)
-    cHasta = Trim(txtCodigo(5).Text)
+    cDesde = Trim(txtcodigo(4).Text)
+    cHasta = Trim(txtcodigo(5).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Select Case OpcionListado
@@ -518,8 +518,8 @@ InicializarVbles
     End If
     
     'D/H Fecha Parte o fecha factura
-    cDesde = Trim(txtCodigo(2).Text)
-    cHasta = Trim(txtCodigo(3).Text)
+    cDesde = Trim(txtcodigo(2).Text)
+    cHasta = Trim(txtcodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Select Case OpcionListado
@@ -534,8 +534,8 @@ InicializarVbles
     
     If OpcionListado = 0 And vParamAplic.Cooperativa = 3 Then
         'D/H tipo de venta
-        cDesde = Trim(txtCodigo(6).Text)
-        cHasta = Trim(txtCodigo(7).Text)
+        cDesde = Trim(txtcodigo(6).Text)
+        cHasta = Trim(txtcodigo(7).Text)
         nDesde = txtNombre(6).Text
         nHasta = txtNombre(7).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -551,7 +551,7 @@ InicializarVbles
         ' 32 = impresion de facturas de adv
         indRPT = OpcionListado + 31
         
-        If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+        If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
           
         'Nombre fichero .rpt a Imprimir
         frmImprimir.NombreRPT = nomDocu
@@ -584,21 +584,21 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
     limpiar Me
 
     'IMAGES para busqueda
-     For h = 0 To 3
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-     Next h
+     For H = 0 To 3
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+     Next H
 
     '###Descomentar
 '    CommitConexion
          
-    FrameCobrosVisible True, h, w
+    FrameCobrosVisible True, H, W
     indFrame = 5
     
     Frame1.visible = False
@@ -630,24 +630,24 @@ Dim List As Collection
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.cmdCancel.Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtCodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtcodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Clientes
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTto_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de tipos de venta
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -675,11 +675,11 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(2).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
+    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtCodigo(CByte(imgFec(2).Tag))
+    PonerFoco txtcodigo(CByte(imgFec(2).Tag))
     ' ***************************
 End Sub
 
@@ -691,11 +691,11 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 2, 3 ' Tipo de venta
             AbrirFrmTipoVta (Index)
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -731,10 +731,10 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -742,37 +742,37 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0, 1 'SOCIO
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clientes", "nomclien", "codclien", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clientes", "nomclien", "codclien", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
         Case 2, 3 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 4, 5 'FACTURAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
         
         Case 6, 7 'TIPO DE VENTA
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "advtrata", "nomtrata", "codtrata", "T")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "advtrata", "nomtrata", "codtrata", "T")
         
     End Select
 End Sub
 
-Private Sub FrameCobrosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameCobrosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
     Me.FrameCobros.visible = visible
     If visible = True Then
         Me.FrameCobros.Top = -90
         Me.FrameCobros.Left = 0
         Me.FrameCobros.Height = 5760
         Me.FrameCobros.Width = 6690
-        w = Me.FrameCobros.Width
-        h = Me.FrameCobros.Height
+        W = Me.FrameCobros.Width
+        H = Me.FrameCobros.Height
     End If
 End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -800,7 +800,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -810,7 +810,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -841,21 +841,21 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
-Dim RS As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
 
-    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If RS.EOF Then
+    If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
         HayRegistros = False
     Else
@@ -864,8 +864,8 @@ Dim RS As ADODB.Recordset
 
 End Function
 
-Private Function ProcesarCambios(cadWhere As String) As Boolean
-Dim SQL As String
+Private Function ProcesarCambios(cadWHERE As String) As Boolean
+Dim Sql As String
 Dim Sql1 As String
 Dim i As Integer
 Dim HayReg As Integer
@@ -877,20 +877,20 @@ On Error GoTo eProcesarCambios
     
     conn.Execute "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
         
-    If cadWhere <> "" Then
-        cadWhere = QuitarCaracterACadena(cadWhere, "{")
-        cadWhere = QuitarCaracterACadena(cadWhere, "}")
-        cadWhere = QuitarCaracterACadena(cadWhere, "_1")
+    If cadWHERE <> "" Then
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    SQL = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
-    SQL = SQL & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
-    SQL = SQL & " and albaran.numalbar = albaran_variedad.numalbar "
+    Sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
+    Sql = Sql & " and albaran.numalbar = albaran_variedad.numalbar "
     
-    If cadWhere <> "" Then SQL = SQL & " and " & cadWhere
+    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
     
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 

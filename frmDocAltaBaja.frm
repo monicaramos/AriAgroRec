@@ -489,7 +489,7 @@ Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -515,11 +515,11 @@ Dim indice As Integer
 Dim NumCampo As String
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub cmdAceptar_Click(Index As Integer)
@@ -535,7 +535,7 @@ Dim devuelve As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
 '    cadParam = cadParam & "pCodigo=" & NumCod & "|"
@@ -546,17 +546,17 @@ Dim devuelve As String
         cadTitulo = "Documento Alta de Socios"
         
         If txtcodigo(4).Text <> "" Then
-            cadParam = cadParam & "pFecha=""" & txtcodigo(4).Text & """|"
+            CadParam = CadParam & "pFecha=""" & txtcodigo(4).Text & """|"
             numParam = numParam + 1
         End If
         
-        cadParam = cadParam & "pImporte=""" & txtcodigo(5).Text & """|"
+        CadParam = CadParam & "pImporte=""" & txtcodigo(5).Text & """|"
         numParam = numParam + 1
         
-        cadParam = cadParam & "pBanco=" & Check1(0).Value & "|"
+        CadParam = CadParam & "pBanco=" & Check1(0).Value & "|"
         numParam = numParam + 1
         
-        cadParam = cadParam & "pObserva=""" & txtcodigo(3).Text & """|"
+        CadParam = CadParam & "pObserva=""" & txtcodigo(3).Text & """|"
         numParam = numParam + 1
         
         '[Monica]13/03/2014: distinguimos entre escalona y utxera y el resto
@@ -578,10 +578,10 @@ Dim devuelve As String
     If Opcion(1).Value And Opcion1(0).Value Then
         cadTitulo = "Documento Alta de Campos"
     
-        cadParam = cadParam & "pFecha=""" & txtcodigo(2).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(2).Text & """|"
         numParam = numParam + 1
     
-        cadParam = cadParam & "pFechaCons=""" & txtcodigo(9).Text & """|"
+        CadParam = CadParam & "pFechaCons=""" & txtcodigo(9).Text & """|"
         numParam = numParam + 1
     
         If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
@@ -599,10 +599,10 @@ Dim devuelve As String
     
         cadTitulo = "Documento Baja de Socios"
         
-        cadParam = cadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
         numParam = numParam + 1
     
-        cadParam = cadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
         numParam = numParam + 1
         
         '[Monica]13/03/2014: para el caso de escalona y utxera enlazamos con el codpropiet del campo
@@ -622,15 +622,15 @@ Dim devuelve As String
     If Opcion(1).Value And Opcion1(1).Value Then
         cadTitulo = "Documento Baja de Campos"
          
-        cadParam = cadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
         numParam = numParam + 1
     
-        cadParam = cadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
         numParam = numParam + 1
         
         
         Set frmMens = New frmMensajes
-        frmMens.cadwhere = " and rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWHERE = " and rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.OpcionMensaje = 15
         frmMens.Show vbModal
         Set frmMens = Nothing
@@ -659,7 +659,7 @@ Dim devuelve As String
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod) Then Exit Sub
         End If
         
-        cadParam = cadParam & "pFecha=""" & txtcodigo(1).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtcodigo(1).Text & """|"
         numParam = numParam + 1
         
         If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtcodigo(0).Text) Then Exit Sub
@@ -668,9 +668,9 @@ Dim devuelve As String
         
         '[Monica]13/03/2014: para el caso de escalona y utxera enlazamos con el codpropiet del campo
         If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
-            frmMens.cadwhere = " and rcampos.codpropiet = " & NumCod & " and rcampos.fecbajas is null"
+            frmMens.cadWHERE = " and rcampos.codpropiet = " & NumCod & " and rcampos.fecbajas is null"
         Else
-            frmMens.cadwhere = " and rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+            frmMens.cadWHERE = " and rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         End If
         frmMens.OpcionMensaje = 15
         frmMens.Show vbModal
@@ -688,7 +688,7 @@ Dim devuelve As String
     If Opcion(1) And Opcion1(1) Then indRPT = 19 ' baja campos
     If Opcion1(2) Then indRPT = 28 ' transmision de campos
     
-    If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
     
     frmImprimir.NombreRPT = nomDocu
     
@@ -733,7 +733,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim List As Collection
 
     PrimeraVez = True
@@ -741,12 +741,12 @@ Dim List As Collection
 
     'IMAGES para busqueda
     Set List = New Collection
-    For h = 24 To 27
-        List.Add h
-    Next h
-    For h = 1 To 10
-        List.Add h
-    Next h
+    For H = 24 To 27
+        List.Add H
+    Next H
+    For H = 1 To 10
+        List.Add H
+    Next H
     List.Add 12
     List.Add 13
     List.Add 14
@@ -755,9 +755,9 @@ Dim List As Collection
     List.Add 19
     
     
-    For h = 0 To imgBuscar.Count - 1
-        Me.imgBuscar(h).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next h
+    For H = 0 To imgBuscar.Count - 1
+        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next H
     
 ' ### [Monica] 09/11/2006    he sustituido el anterior
 '    For h = 0 To imgBuscar.Count - 1
@@ -777,7 +777,7 @@ Dim List As Collection
 
     '###Descomentar
 '    CommitConexion
-    FrameCalidadesVisible True, h, w
+    FrameCalidadesVisible True, H, W
     
     Me.Opcion(0).Value = True
     Me.Opcion1(0).Value = True
@@ -792,8 +792,8 @@ Dim List As Collection
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 
@@ -977,7 +977,7 @@ End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -1008,12 +1008,12 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
     Conexion = cAgro    'Conexión a BD: Ariges
 '    Select Case OpcionListado
 '        Case 7 'Traspaso de Almacenes
@@ -1033,11 +1033,11 @@ Dim Titulo As String
 '            titulo = "Articulos"
 '    End Select
           
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = Cad
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -1062,7 +1062,7 @@ Dim Titulo As String
     Screen.MousePointer = vbDefault
 End Sub
 
-Private Sub FrameCalidadesVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameCalidadesVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el listado de clientes
     Me.FrameCalidades.visible = visible
     If visible = True Then
@@ -1070,12 +1070,12 @@ Private Sub FrameCalidadesVisible(visible As Boolean, ByRef h As Integer, ByRef 
         Me.FrameCalidades.Left = 0
         Me.FrameCalidades.Height = 6255
         Me.FrameCalidades.Width = 6390
-        w = Me.FrameCalidades.Width
-        h = Me.FrameCalidades.Height
+        W = Me.FrameCalidades.Width
+        H = Me.FrameCalidades.Height
     End If
 End Sub
 
-Private Sub FrameSociosSeccionVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub FrameSociosSeccionVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 ''Frame para el listado de socios por seccion
 '    Me.FrameSociosSeccion.visible = visible
 '    If visible = True Then
@@ -1128,7 +1128,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1156,7 +1156,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1166,7 +1166,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1179,10 +1179,10 @@ Private Sub LlamarImprimir()
 End Sub
 
 Private Function PonerGrupo(numGrupo As Byte, cadgrupo As String) As Byte
-Dim Campo As String
+Dim campo As String
 Dim nomCampo As String
 
-    Campo = "pGroup" & numGrupo & "="
+    campo = "pGroup" & numGrupo & "="
     nomCampo = "pGroup" & numGrupo & "Name="
     PonerGrupo = 0
 
@@ -1202,41 +1202,41 @@ Dim nomCampo As String
         
         'Informe de variedades
         Case "Clase"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codclase}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Producto""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codclase}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Producto""" & "|"
             numParam = numParam + 3
             
         Case "Producto"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codprodu}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Clase""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codprodu}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Clase""" & "|"
             numParam = numParam + 3
 
         'Informe de calibres
         Case "Seccion"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codsecci}" & "|"
-            cadParam = cadParam & nomCampo & "{rseccion.nomsecci}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Seccion""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codsecci}" & "|"
+            CadParam = CadParam & nomCampo & "{rseccion.nomsecci}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Seccion""" & "|"
             numParam = numParam + 3
             
         Case "Socio"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codsocio}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "rsocios" & ".nomsocio}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Socio""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codsocio}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "rsocios" & ".nomsocio}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Socio""" & "|"
             numParam = numParam + 3
             
         'Informe de calidades
         Case "Variedad"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codvarie}" & "|"
-            cadParam = cadParam & nomCampo & "{variedades.nomvarie}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Variedad""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codvarie}" & "|"
+            CadParam = CadParam & nomCampo & "{variedades.nomvarie}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Variedad""" & "|"
             numParam = numParam + 3
             
         Case "Calidad"
-            cadParam = cadParam & Campo & "{" & Tabla & ".codcalid}" & "|"
-            cadParam = cadParam & nomCampo & " {" & "rcalidad" & ".nomcalid}" & "|"
-            cadParam = cadParam & "pTitulo1" & "=""Calidad""" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codcalid}" & "|"
+            CadParam = CadParam & nomCampo & " {" & "rcalidad" & ".nomcalid}" & "|"
+            CadParam = CadParam & "pTitulo1" & "=""Calidad""" & "|"
             numParam = numParam + 3
             
             
@@ -1260,28 +1260,28 @@ End Select
 End Function
 
 Private Function PonerOrden(cadgrupo As String) As Byte
-Dim Campo As String
+Dim campo As String
 Dim nomCampo As String
 
     PonerOrden = 0
 
     Select Case cadgrupo
         Case "Codigo"
-            cadParam = cadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
-                    cadParam = cadParam & ".codclien}|"
+                    CadParam = CadParam & ".codclien}|"
                 Case 11
-                    cadParam = cadParam & ".codprove}|"
+                    CadParam = CadParam & ".codprove}|"
             End Select
             Tipo = "Código"
         Case "Alfabético"
-            cadParam = cadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
-                    cadParam = cadParam & ".nomclien}|"
+                    CadParam = CadParam & ".nomclien}|"
                 Case 11
-                    cadParam = cadParam & ".nomprove}|"
+                    CadParam = CadParam & ".nomprove}|"
             End Select
             Tipo = "Alfabético"
     End Select
@@ -1336,7 +1336,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -1484,7 +1484,7 @@ End Sub
 
 Private Function ConTarjetaProfesional(letraser As String, numfactu As String, fecfactu As String) As Boolean
 Dim Sql As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     Sql = "select count(*) from slhfac, starje where letraser = " & DBSet(letraser, "T") & " and numfactu = " & DBSet(numfactu, "N")
     Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F") & " and starje.tiptarje = 2 and slhfac.numtarje = starje.numtarje "

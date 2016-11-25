@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmTrasTraza 
    BorderStyle     =   3  'Fixed Dialog
@@ -222,7 +222,7 @@ Attribute frmCoop.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -250,27 +250,27 @@ Dim ConSubInforme As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
 Private Sub cmdAcepTras_Click()
-Dim SQL As String
+Dim Sql As String
 Dim i As Byte
 Dim cadWHERE As String
 Dim b As Boolean
 Dim NomFic As String
-Dim Cadena As String
+Dim cadena As String
 Dim cadena1 As String
 Dim Directorio As String
-Dim Fec As String
+Dim fec As String
 Dim nomDir As String
 
-Dim nRegs As Long
+Dim Nregs As Long
 Dim cadTabla As String
 Dim NomFic1 As String
 
@@ -298,27 +298,27 @@ On Error GoTo eError
 
     If Directorio <> "" Then
 
-        SQL = "DROP TABLE IF EXISTS tmpentradas; "
-        conn.Execute SQL
+        Sql = "DROP TABLE IF EXISTS tmpentradas; "
+        conn.Execute Sql
         
-        SQL = "CREATE TEMPORARY TABLE `tmpentradas` ("
-        SQL = SQL & "`numnotac` int(7), "
-        SQL = SQL & "`fechaent` varchar(8), "
-        SQL = SQL & "`codsocio` int(6), "
-        SQL = SQL & "`codcampo` int(8), "
-        SQL = SQL & "`codpobla` varchar(6), "
-        SQL = SQL & "`codprodu` int(7), "
-        SQL = SQL & "`codvarie` int(7), "
-        SQL = SQL & "`kilosbru` int(8), "
-        SQL = SQL & "`numcajo1` int(7), "
-        SQL = SQL & "`numcajo2` int(7), "
-        SQL = SQL & "`numcajo3` int(7), "
-        SQL = SQL & "`tipoentr` varchar(1),"
-        SQL = SQL & "`recolect` varchar(1)"
-        SQL = SQL & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
+        Sql = "CREATE TEMPORARY TABLE `tmpentradas` ("
+        Sql = Sql & "`numnotac` int(7), "
+        Sql = Sql & "`fechaent` varchar(8), "
+        Sql = Sql & "`codsocio` int(6), "
+        Sql = Sql & "`codcampo` int(8), "
+        Sql = Sql & "`codpobla` varchar(6), "
+        Sql = Sql & "`codprodu` int(7), "
+        Sql = Sql & "`codvarie` int(7), "
+        Sql = Sql & "`kilosbru` int(8), "
+        Sql = Sql & "`numcajo1` int(7), "
+        Sql = Sql & "`numcajo2` int(7), "
+        Sql = Sql & "`numcajo3` int(7), "
+        Sql = Sql & "`tipoentr` varchar(1),"
+        Sql = Sql & "`recolect` varchar(1)"
+        Sql = Sql & " ) ENGINE=InnoDB DEFAULT CHARSET=latin1"
     
     
-        conn.Execute SQL
+        conn.Execute Sql
         
         conn.BeginTrans
 
@@ -337,21 +337,21 @@ On Error GoTo eError
               
                 lblProgres(0).Caption = "Procesando Fichero: " & NomFic
               
-                SQL = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpentradas` fields terminated by '|' lines terminated by '\n' "
-                SQL = SQL & "(`numnotac`,`fechaent`,`codsocio`,`codcampo`,`codpobla`,`codprodu`,`codvarie`,`kilosbru`,`numcajo1`,`numcajo2`,`numcajo3`,`tipoentr`,`recolect`)  "
-                conn.Execute SQL
+                Sql = "load data local infile '" & Replace(nomDir & NomFic, "\", "/") & "' into table `tmpentradas` fields terminated by '|' lines terminated by '\n' "
+                Sql = Sql & "(`numnotac`,`fechaent`,`codsocio`,`codcampo`,`codpobla`,`codprodu`,`codvarie`,`kilosbru`,`numcajo1`,`numcajo2`,`numcajo3`,`tipoentr`,`recolect`)  "
+                conn.Execute Sql
                 
 '              End If
            End If
            NomFic = Dir   ' Obtiene siguiente entrada.
         Loop
 
-        SQL = "select count(*) from tmpentradas"
-        nRegs = TotalRegistros(SQL)
-        If nRegs <> 0 Then
-            pb1.visible = True
-            pb1.Max = nRegs
-            pb1.Value = 0
+        Sql = "select count(*) from tmpentradas"
+        Nregs = TotalRegistros(Sql)
+        If Nregs <> 0 Then
+            Pb1.visible = True
+            Pb1.Max = Nregs
+            Pb1.Value = 0
             Me.Refresh
             DoEvents
                 
@@ -359,16 +359,16 @@ On Error GoTo eError
                 
                 '========= PARAMETROS  =============================
             'Añadir el parametro de Empresa
-            cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+            CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
             numParam = numParam + 1
     
-            If ComprobarErrores(pb1) Then
+            If ComprobarErrores(Pb1) Then
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                 
-                SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                 
-                If TotalRegistros(SQL) <> 0 Then
+                If TotalRegistros(Sql) <> 0 Then
                     MsgBox "Hay errores en el Traspaso de Trazabilidad." & vbCrLf & "   Debe corregirlos previamente.", vbExclamation
                     cadTitulo = "Errores de Traspaso de TRAZABILIDAD"
                     cadNombreRPT = "rErroresTrasTraza.rpt"
@@ -398,7 +398,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb1.visible = False
+        Pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
         lblProgres(2).Caption = ""
@@ -437,7 +437,7 @@ Dim List As Collection
 '    CommitConexion
         
     FrameTrasTrazaVisible True, H, W
-    pb1.visible = False
+    Pb1.visible = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
@@ -463,7 +463,7 @@ Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
     cadSelect1 = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -491,7 +491,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -501,7 +501,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -519,7 +519,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -548,17 +548,17 @@ Private Sub AbrirVisReport()
 End Sub
 
 
-Private Function ComprobarErrores(ByRef pb1 As ProgressBar) As Boolean
+Private Function ComprobarErrores(ByRef Pb1 As ProgressBar) As Boolean
 Dim NF As Long
 Dim Cad As String
 Dim i As Integer
 Dim longitud As Long
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
-Dim Numreg As Long
-Dim SQL As String
-Dim SQL1 As String
-Dim total As Long
+Dim NumReg As Long
+Dim Sql As String
+Dim Sql1 As String
+Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
@@ -573,136 +573,136 @@ Dim Variedad As String
 
     ComprobarErrores = False
     
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
     i = 0
     lblProgres(1).Caption = "Comprobando errores Tabla temporal entradas "
     
-    SQL = "select * from tmpentradaS"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select * from tmpentradaS"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     b = True
     i = 0
-    While Not RS.EOF And b
+    While Not Rs.EOF And b
         i = i + 1
 
-        Me.pb1.Value = Me.pb1.Value + 1
+        Me.Pb1.Value = Me.Pb1.Value + 1
         lblProgres(2).Caption = "Linea " & i
         Me.Refresh
 
-        Variedad = Format(RS!codprodu, "00") & Format(RS!codvarie, "00")
+        Variedad = Format(Rs!codprodu, "00") & Format(Rs!CodVarie, "00")
 
         ' comprobamos la fecha
-        FechaEnt = DBLet(RS!FechaEnt, "T")
+        FechaEnt = DBLet(Rs!FechaEnt, "T")
         If Not EsFechaOK(FechaEnt) Then
             Mens = "Fecha incorrecta"
-            SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                  DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                  DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                   DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute SQL
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista la variedad
-        SQL = "select count(*) from variedades where codvarie = " & DBSet(Variedad, "N")
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from variedades where codvarie = " & DBSet(Variedad, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Variedad no existe"
-            SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                  DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                  DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                   DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute SQL
+            conn.Execute Sql
         Else
             If EsVariedadGrupo5(Variedad) Or EsVariedadGrupo6(Variedad) Then
                 Mens = "Variedad no es del grupo correcto."
-                SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                      DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+                Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                      DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                       DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-                conn.Execute SQL
+                conn.Execute Sql
             End If
         End If
 
         ' comprobamos que exista el socio
-        SQL = "select count(*) from rsocios where codsocio = " & DBSet(RS!Codsocio, "N")
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Socio no existe"
-            SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                  DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                  DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                   DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute SQL
+            conn.Execute Sql
         End If
 
         ' comprobamos que exista el campo
-        SQL = "select count(*) from rcampos where codsocio = " & DBSet(RS!Codsocio, "N")
-        SQL = SQL & " and nrocampo = " & DBSet(RS!codCampo, "N")
-        SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
-        SQL = SQL & " and fecbajas is null "
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+        Sql = Sql & " and fecbajas is null "
+        If TotalRegistros(Sql) = 0 Then
             Mens = "Campo no existe o con fecha de baja"
-            SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                  DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                  DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                   DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute SQL
+            conn.Execute Sql
         End If
 
         ' comprobamos que no exista mas de un campo con ese numero de orden campo (scampo.codcampo MB)
-        SQL = "select count(*) from rcampos where codsocio = " & DBSet(RS!Codsocio, "N")
-        SQL = SQL & " and nrocampo = " & DBSet(RS!codCampo, "N")
-        SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
-        If TotalRegistros(SQL) > 1 Then
+        Sql = "select count(*) from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+        If TotalRegistros(Sql) > 1 Then
             Mens = "Campo con más de un registro"
-            SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                  DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                  vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                  DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                   DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-            conn.Execute SQL
+            conn.Execute Sql
         End If
 
         If Not EsVariedadGrupo5(Variedad) And Not EsVariedadGrupo6(Variedad) Then
             ' comprobamos que no exista el albaran en rentradas
-            SQL = "select count(*) from rentradas where numnotac = " & DBSet(RS!Numnotac, "N")
-            If TotalRegistros(SQL) > 0 Then
+            Sql = "select count(*) from rentradas where numnotac = " & DBSet(Rs!Numnotac, "N")
+            If TotalRegistros(Sql) > 0 Then
                 Mens = "Nro.Nota ya existe en entradas báscula"
-                SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                      DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+                Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                      DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                       DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-                conn.Execute SQL
+                conn.Execute Sql
             End If
     
             ' comprobamos que no exista el albaran en rclasifica
-            SQL = "select count(*) from rclasifica where numnotac = " & DBSet(RS!Numnotac, "N")
-            If TotalRegistros(SQL) > 0 Then
+            Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
+            If TotalRegistros(Sql) > 0 Then
                 Mens = "Nro.Nota ya existe en entradas clasificadas"
-                SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                      DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+                Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                      DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                       DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-                conn.Execute SQL
+                conn.Execute Sql
             End If
     
             ' comprobamos que no exista el albaran en el historico
-            SQL = "select numalbar from rhisfruta_entradas where numnotac = " & DBSet(RS!Numnotac, "N")
-            If DevuelveValor(SQL) <> 0 Then
-                Mens = "Nro.Nota existe en hco.albarán:" & DevuelveValor(SQL)
-                SQL = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
-                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(RS!Codsocio, "N") & "," & _
-                      DBSet(RS!codCampo, "N") & "," & DBSet(RS!Numnotac, "N") & "," & _
+            Sql = "select numalbar from rhisfruta_entradas where numnotac = " & DBSet(Rs!Numnotac, "N")
+            If DevuelveValor(Sql) <> 0 Then
+                Mens = "Nro.Nota existe en hco.albarán:" & DevuelveValor(Sql)
+                Sql = "insert into tmpinformes (codusu, campo1, codigo1, importe1, importe2, fecha1, nombre1) values (" & _
+                      vUsu.Codigo & "," & DBSet(Variedad, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & _
+                      DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Numnotac, "N") & "," & _
                       DBSet(FechaEnt, "F") & "," & DBSet(Mens, "T") & ")"
-                conn.Execute SQL
+                conn.Execute Sql
             End If
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    Set RS = Nothing
+    Set Rs = Nothing
     
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
     lblProgres(2).Caption = ""
@@ -716,10 +716,10 @@ End Function
 
 
 Private Function CargarEntradas() As Boolean
-Dim SQL As String
-Dim SQL1 As String
+Dim Sql As String
+Dim Sql1 As String
 Dim Sql3 As String
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Precio As Currency
 Dim Transporte As Currency
@@ -751,45 +751,45 @@ Dim Hora As String
     
     lblProgres(1).Caption = "Cargando Entradas"
     
-    SQL = "select count(*) from tmpentradas order by numnotac"
-    longitud = TotalRegistros(SQL)
+    Sql = "select count(*) from tmpentradas order by numnotac"
+    longitud = TotalRegistros(Sql)
     
-    pb1.visible = True
-    Me.pb1.Max = longitud
+    Pb1.visible = True
+    Me.Pb1.Max = longitud
     Me.Refresh
-    Me.pb1.Value = 0
+    Me.Pb1.Value = 0
     
-    SQL = "select * from tmpentradas order by numnotac"
+    Sql = "select * from tmpentradas order by numnotac"
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not RS.EOF
-        Me.pb1.Value = Me.pb1.Value + 1
-        lblProgres(2).Caption = "Nro.Nota " & DBLet(RS!Numnotac, "N")
+    While Not Rs.EOF
+        Me.Pb1.Value = Me.Pb1.Value + 1
+        lblProgres(2).Caption = "Nro.Nota " & DBLet(Rs!Numnotac, "N")
         Me.Refresh
         
-        Variedad = Format(RS!codprodu, "00") & Format(RS!codvarie, "00")
+        Variedad = Format(Rs!codprodu, "00") & Format(Rs!CodVarie, "00")
             
-        SQL = "insert into rentradas (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,"
-        SQL = SQL & "codcapat,codtarif,kilosbru,numcajo1,numcajo2,numcajo3,numcajo4,numcajo5,taracaja1,taracaja2,"
-        SQL = SQL & "taracaja3,taracaja4,taracaja5,taravehi,kilosnet,nropesada,numlinea,transportadopor) values "
+        Sql = "insert into rentradas (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,"
+        Sql = Sql & "codcapat,codtarif,kilosbru,numcajo1,numcajo2,numcajo3,numcajo4,numcajo5,taracaja1,taracaja2,"
+        Sql = Sql & "taracaja3,taracaja4,taracaja5,taravehi,kilosnet,nropesada,numlinea,transportadopor) values "
     
         campo = 0
-        campo = DevuelveValor("select codcampo from rcampos where nrocampo = " & DBSet(RS!codCampo, "N") & " and codsocio=" & DBSet(RS!Codsocio, "N") & " and codvarie=" & DBSet(Variedad, "N"))
+        campo = DevuelveValor("select codcampo from rcampos where nrocampo = " & DBSet(Rs!codcampo, "N") & " and codsocio=" & DBSet(Rs!Codsocio, "N") & " and codvarie=" & DBSet(Variedad, "N"))
     
         ' fecha y hora en formato de mysql
-        Fecha = "20" & Mid(RS!FechaEnt, 7, 2) & "-" & Mid(RS!FechaEnt, 4, 2) & "-" & Mid(RS!FechaEnt, 1, 2)
+        Fecha = "20" & Mid(Rs!FechaEnt, 7, 2) & "-" & Mid(Rs!FechaEnt, 4, 2) & "-" & Mid(Rs!FechaEnt, 1, 2)
         Hora = Fecha & " " & Format(Now, "hh:mm:ss")
     
-        SQL = SQL & "(" & DBSet(RS!Numnotac, "N") & ","
-        SQL = SQL & DBSet(Fecha, "F") & ","
-        SQL = SQL & DBSet(Hora, "FH") & ","
-        SQL = SQL & DBSet(Variedad, "N") & ","
-        SQL = SQL & DBSet(RS!Codsocio, "N") & ","
-        SQL = SQL & DBSet(campo, "N") & ","
+        Sql = Sql & "(" & DBSet(Rs!Numnotac, "N") & ","
+        Sql = Sql & DBSet(Fecha, "F") & ","
+        Sql = Sql & DBSet(Hora, "FH") & ","
+        Sql = Sql & DBSet(Variedad, "N") & ","
+        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
+        Sql = Sql & DBSet(campo, "N") & ","
         
-        Select Case DBLet(RS!TipoEntr, "T")
+        Select Case DBLet(Rs!TipoEntr, "T")
             Case "N"
                 TipoEntr = 0
             Case "V"
@@ -800,50 +800,50 @@ Dim Hora As String
                 TipoEntr = 2
         End Select
         
-        Select Case DBLet(RS!Recolect, "T")
+        Select Case DBLet(Rs!Recolect, "T")
             Case "C"
                 Recolect = 0
             Case "S"
                 Recolect = 1
         End Select
         
-        KilosNet = DBLet(RS!KilosBru, "N") - _
-                  (Round2(DBLet(RS!numcajo1, "N") * vParamAplic.PesoCaja1, 0) + _
-                   Round2(DBLet(RS!numcajo2, "N") * vParamAplic.PesoCaja2, 0) + _
-                   Round2(DBLet(RS!numcajo3, "N") * vParamAplic.PesoCaja3, 0))
+        KilosNet = DBLet(Rs!KilosBru, "N") - _
+                  (Round2(DBLet(Rs!numcajo1, "N") * vParamAplic.PesoCaja1, 0) + _
+                   Round2(DBLet(Rs!numcajo2, "N") * vParamAplic.PesoCaja2, 0) + _
+                   Round2(DBLet(Rs!numcajo3, "N") * vParamAplic.PesoCaja3, 0))
         
         
-        SQL = SQL & DBSet(TipoEntr, "N") & "," ' tipoentr 0=normal
-        SQL = SQL & DBSet(Recolect, "N") & "," ' recolect 1=socio
-        SQL = SQL & ValorNulo & "," 'transportista
-        SQL = SQL & ValorNulo & "," 'capataz
-        SQL = SQL & ValorNulo & "," 'tarifa
-        SQL = SQL & DBSet(RS!KilosBru, "N") & ","
-        SQL = SQL & DBSet(RS!numcajo1, "N") & ","
-        SQL = SQL & DBSet(RS!numcajo2, "N") & ","
-        SQL = SQL & DBSet(RS!numcajo3, "N") & ","
-        SQL = SQL & ValorNulo & "," ' numcajo4
-        SQL = SQL & ValorNulo & "," ' numcajo5
-        SQL = SQL & DBSet(Round2(DBLet(RS!numcajo1, "N") * vParamAplic.PesoCaja1, 0), "N") & ","
+        Sql = Sql & DBSet(TipoEntr, "N") & "," ' tipoentr 0=normal
+        Sql = Sql & DBSet(Recolect, "N") & "," ' recolect 1=socio
+        Sql = Sql & ValorNulo & "," 'transportista
+        Sql = Sql & ValorNulo & "," 'capataz
+        Sql = Sql & ValorNulo & "," 'tarifa
+        Sql = Sql & DBSet(Rs!KilosBru, "N") & ","
+        Sql = Sql & DBSet(Rs!numcajo1, "N") & ","
+        Sql = Sql & DBSet(Rs!numcajo2, "N") & ","
+        Sql = Sql & DBSet(Rs!numcajo3, "N") & ","
+        Sql = Sql & ValorNulo & "," ' numcajo4
+        Sql = Sql & ValorNulo & "," ' numcajo5
+        Sql = Sql & DBSet(Round2(DBLet(Rs!numcajo1, "N") * vParamAplic.PesoCaja1, 0), "N") & ","
         
-        If DBLet(RS!numcajo2, "N") <> 0 Then
-            SQL = SQL & DBSet(Round2(DBLet(RS!numcajo2, "N") * vParamAplic.PesoCaja2, 0), "N") & ","
+        If DBLet(Rs!numcajo2, "N") <> 0 Then
+            Sql = Sql & DBSet(Round2(DBLet(Rs!numcajo2, "N") * vParamAplic.PesoCaja2, 0), "N") & ","
         Else
-            SQL = SQL & ValorNulo & ","
+            Sql = Sql & ValorNulo & ","
         End If
-        If DBLet(RS!numcajo3, "N") <> 0 Then
-            SQL = SQL & DBSet(Round2(DBLet(RS!numcajo3, "N") * vParamAplic.PesoCaja3, 0), "N") & ","
+        If DBLet(Rs!numcajo3, "N") <> 0 Then
+            Sql = Sql & DBSet(Round2(DBLet(Rs!numcajo3, "N") * vParamAplic.PesoCaja3, 0), "N") & ","
         Else
-            SQL = SQL & ValorNulo & ","
+            Sql = Sql & ValorNulo & ","
         End If
         
-        SQL = SQL & ValorNulo & ","
-        SQL = SQL & ValorNulo & ","
-        SQL = SQL & ValorNulo & "," ' taravehi
-        SQL = SQL & DBSet(KilosNet, "N") & "," ' kilos netos
-        SQL = SQL & ValorNulo & "," ' nro de pesada
-        SQL = SQL & ValorNulo & "," ' nro de linea
-        SQL = SQL & "0)" ' transportado por cooperativa
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & ValorNulo & ","
+        Sql = Sql & ValorNulo & "," ' taravehi
+        Sql = Sql & DBSet(KilosNet, "N") & "," ' kilos netos
+        Sql = Sql & ValorNulo & "," ' nro de pesada
+        Sql = Sql & ValorNulo & "," ' nro de linea
+        Sql = Sql & "0)" ' transportado por cooperativa
         
 '        SQL = SQL & DBSet(RS!KilosNet, "N") & ","
 '        SQL = SQL & ValorNulo & ","
@@ -858,15 +858,15 @@ Dim Hora As String
 '        SQL = SQL & DBSet(RS!fecalbar, "F") & ",0)"
 '
         If Not EsVariedadGrupo5(Variedad) And Not EsVariedadGrupo6(Variedad) Then
-            conn.Execute SQL
+            conn.Execute Sql
         End If
         
-        RS.MoveNext
+        Rs.MoveNext
     Wend
     
-    Set RS = Nothing
+    Set Rs = Nothing
 
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(1).Caption = ""
     lblProgres(2).Caption = ""
 
@@ -879,9 +879,9 @@ End Function
 
 Private Function DatosOk() As Boolean
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
-Dim vClien As CSocio
+Dim vClien As cSocio
 ' añadido
 Dim Mens As String
 Dim numfactu As String

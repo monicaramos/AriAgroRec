@@ -1409,7 +1409,7 @@ Private Sub btnBuscar_Click(Index As Integer)
         
     End Select
     
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
 End Sub
 
 
@@ -1436,7 +1436,7 @@ Dim i As Long
                 If InsertarDesdeForm2(Me, 1) Then
 '                    text2(9).Text = PonerNombreCuenta(text1(9), Modo, text1(0).Text)
         
-                    AdoAux(1).RecordSource = "Select * from " & NombreTabla & Ordenacion
+                    Adoaux(1).RecordSource = "Select * from " & NombreTabla & Ordenacion
                     PosicionarData
                 End If
             Else
@@ -1447,10 +1447,10 @@ Dim i As Long
             If DatosOk Then
                 If ModificaDesdeFormulario2(Me, 2, "FrameAux1") Then
                     TerminaBloquear
-                    i = AdoAux(1).Recordset.Fields(0)
+                    i = Adoaux(1).Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid 1, True, CadB
-                    AdoAux(1).Recordset.Find (AdoAux(1).Recordset.Fields(0).Name & " =" & i)
+                    Adoaux(1).Recordset.Find (Adoaux(1).Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGridAux(1)
                     
                 End If
@@ -1495,7 +1495,7 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
             If Me.CodigoActual <> "" Then
-                SituarData Me.AdoAux(1), "numnotac=" & CodigoActual, "", True
+                SituarData Me.Adoaux(1), "numnotac=" & CodigoActual, "", True
             End If
         End If
     End If
@@ -1761,7 +1761,7 @@ Dim i As Byte
     Toolbar1.Buttons(7).Enabled = b And Not DeConsulta
     Me.mnNuevo.Enabled = b And Not DeConsulta
     
-    b = (Modo = 2 And Me.AdoAux(1).Recordset.RecordCount > 0) And Not DeConsulta
+    b = (Modo = 2 And Me.Adoaux(1).Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
     Toolbar1.Buttons(8).Enabled = b
     Me.mnModificar.Enabled = b
@@ -1786,7 +1786,7 @@ Dim i As Byte
     For i = 0 To ToolAux.Count - 1
         If i <> 1 Then
             ToolAux(i).Buttons(1).Enabled = b
-            If b Then bAux = (b And Me.AdoAux(i).Recordset.RecordCount > 0)
+            If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
             ToolAux(i).Buttons(2).Enabled = bAux
             ToolAux(i).Buttons(3).Enabled = bAux
         End If
@@ -2037,7 +2037,7 @@ Private Sub mnModificar_Click()
     'If EsCodigoCero(CStr(adoaux(1).Recordset.Fields(0).Value), FormatoCampo(Text1(0))) Then Exit Sub
     ' ***************************************************************************
     
-    If BLOQUEADesdeFormulario2(Me, AdoAux(1), 2, "FrameAux1") Then
+    If BLOQUEADesdeFormulario2(Me, Adoaux(1), 2, "FrameAux1") Then
         BotonModificar
     End If
 End Sub
@@ -2092,7 +2092,7 @@ Dim i As Integer
         ' *** si n'hi han combos a la capçalera ***
     Else
         HacerBusqueda
-        If AdoAux(1).Recordset.EOF Then
+        If Adoaux(1).Recordset.EOF Then
             Text1(kCampo).Text = ""
             Text1(kCampo).BackColor = vbYellow
             PonerFoco Text1(kCampo)
@@ -2141,14 +2141,14 @@ Dim Sql As String
 Dim b As Boolean
 Dim Cad As String
 
-    If AdoAux(1).Recordset!Codsocio <> 999 And AdoAux(1).Recordset!codcampo <> 9999 Then
+    If Adoaux(1).Recordset!Codsocio <> 999 And Adoaux(1).Recordset!codcampo <> 9999 Then
         MsgBox "La clasificacióon no es conjunta.", vbExclamation
         Exit Sub
     End If
 
 '    CadTag = "codvarie|fechacla|codsocio|codcampo|kilosnet|observac|situacio|"
-    Cad = Me.AdoAux(1).Recordset!codvarie & "|" & Me.AdoAux(1).Recordset!fechacla & "|999|9999|" & Me.AdoAux(1).Recordset!KilosNet & "|"
-    Cad = Cad & Me.AdoAux(1).Recordset!Observac & "|" & Me.AdoAux(1).Recordset!Situacion & "|"
+    Cad = Me.Adoaux(1).Recordset!CodVarie & "|" & Me.Adoaux(1).Recordset!fechacla & "|999|9999|" & Me.Adoaux(1).Recordset!KilosNet & "|"
+    Cad = Cad & Me.Adoaux(1).Recordset!Observac & "|" & Me.Adoaux(1).Recordset!Situacion & "|"
 
     frmListado.OpcionListado = 30
     frmListado.CadTag = Cad
@@ -2202,7 +2202,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
         'Si ha posat valors i tenim que es formulari de búsqueda llavors
         'tindrem que tancar el form llançant l'event
         If HaDevueltoDatos Then
-            If (Not AdoAux(1).Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+            If (Not Adoaux(1).Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
                 cmdRegresar_Click
         Else   'de ha retornat datos, es a decir NO ha retornat datos
             PonerFoco Text1(kCampo)
@@ -2216,7 +2216,7 @@ Dim Aux As String
 Dim i As Integer
 Dim J As Integer
 
-    If AdoAux(1).Recordset.EOF Then
+    If Adoaux(1).Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
@@ -2240,17 +2240,17 @@ Private Sub PonerCadenaBusqueda()
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
     
-    AdoAux(1).RecordSource = CadenaConsulta
-    AdoAux(1).Refresh
+    Adoaux(1).RecordSource = CadenaConsulta
+    Adoaux(1).Refresh
     
-    If AdoAux(1).Recordset.RecordCount <= 0 Then
+    If Adoaux(1).Recordset.RecordCount <= 0 Then
         MsgBox "No hay ningún registro en la tabla " & NombreTabla, vbInformation
         Screen.MousePointer = vbDefault
         Exit Sub
     Else
         PonerModo 2
         'adoaux(1).Recordset.MoveLast
-        AdoAux(1).Recordset.MoveFirst
+        Adoaux(1).Recordset.MoveFirst
         PonerCampos
     End If
     
@@ -2278,7 +2278,7 @@ Private Sub BotonVerTodos()
     CadB = ""
     CargaGrid 1, True, CadB
     PonerModo 2
-    If AdoAux(1).Recordset.EOF Then
+    If Adoaux(1).Recordset.EOF Then
         CargaGrid 0, False
         CargaGrid 2, False
     Else
@@ -2349,7 +2349,7 @@ Private Sub BotonModificar()
     Text2(4).Text = DataGridAux(1).Columns(4).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = AdoAux(1).Recordset!Situacion
+    i = Adoaux(1).Recordset!Situacion
     ' *****************************************************
     PosicionarCombo Me.Combo1(0), i
 '    For j = 0 To Combo1.ListCount - 1
@@ -2372,7 +2372,7 @@ Dim Cad As String
     On Error GoTo EEliminar
 
     'Ciertas comprobaciones
-    If AdoAux(1).Recordset.EOF Then Exit Sub
+    If Adoaux(1).Recordset.EOF Then Exit Sub
 
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
@@ -2382,20 +2382,20 @@ Dim Cad As String
 
     ' *************** canviar la pregunta ****************
     Cad = "¿Seguro que desea eliminar la Clasificación?"
-    Cad = Cad & vbCrLf & "Variedad: " & AdoAux(1).Recordset!codvarie
-    Cad = Cad & vbCrLf & "Socio   : " & AdoAux(1).Recordset!Codsocio
-    Cad = Cad & vbCrLf & "Campo   : " & AdoAux(1).Recordset!codcampo
-    Cad = Cad & vbCrLf & "Fecha   : " & AdoAux(1).Recordset!fechacla
+    Cad = Cad & vbCrLf & "Variedad: " & Adoaux(1).Recordset!CodVarie
+    Cad = Cad & vbCrLf & "Socio   : " & Adoaux(1).Recordset!Codsocio
+    Cad = Cad & vbCrLf & "Campo   : " & Adoaux(1).Recordset!codcampo
+    Cad = Cad & vbCrLf & "Fecha   : " & Adoaux(1).Recordset!fechacla
     
     
     If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
-        NumRegElim = AdoAux(1).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(1).Recordset.AbsolutePosition
         If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
-        ElseIf SituarDataTrasEliminar(AdoAux(1), NumRegElim, True) Then
+        ElseIf SituarDataTrasEliminar(Adoaux(1), NumRegElim, True) Then
 '            PonerCampos
             CargaGrid 1, True, CadB
         Else
@@ -2415,15 +2415,15 @@ Dim i As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
-    If AdoAux(1).Recordset.EOF Then Exit Sub
+    If Adoaux(1).Recordset.EOF Then Exit Sub
     
-    PonerCamposForma2 Me, AdoAux(1), 2, "FrameAux1" 'opcio=1: posa el format o els camps de la capçalera
+    PonerCamposForma2 Me, Adoaux(1), 2, "FrameAux1" 'opcio=1: posa el format o els camps de la capçalera
     
     ' *** si n'hi han llínies en datagrids ***
     'For i = 0 To DataGridAux.Count - 1
     CargaGrid i, True
-    If Not AdoAux(i).Recordset.EOF Then _
-        PonerCamposForma2 Me, AdoAux(i), 2, "FrameAux" & i
+    If Not Adoaux(i).Recordset.EOF Then _
+        PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
 
     
     ' ************* configurar els camps de les descripcions de la capçalera *************
@@ -2433,7 +2433,7 @@ Dim CPostal As String, desProvi As String, desPais As String
     ' ********************************************************************************
     
     '-- Esto permanece para saber donde estamos
-    lblIndicador.Caption = AdoAux(1).Recordset.AbsolutePosition & " de " & AdoAux(1).Recordset.RecordCount
+    lblIndicador.Caption = Adoaux(1).Recordset.AbsolutePosition & " de " & Adoaux(1).Recordset.RecordCount
     
     PonerModoOpcionesMenu (Modo)
     PonerOpcionesMenu
@@ -2446,7 +2446,7 @@ Dim V
     Select Case Modo
         Case 1, 3 'Búsqueda, Insertar
                 LimpiarCampos
-                If AdoAux(1).Recordset.EOF Then
+                If Adoaux(1).Recordset.EOF Then
                     PonerModo 0
                 Else
                     PonerModo 2
@@ -2483,8 +2483,8 @@ Dim V
 '                    ' *** si n'hi han tabs ***
 '                    SituarTab (NumTabMto + 1)
                     
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
-                        AdoAux(NumTabMto).Recordset.MoveFirst
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                        Adoaux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llínies
@@ -2494,10 +2494,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
 '                    PonerModo 4
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(2).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(2).Name & " =" & V)
                         ' ***************************************************************
                     End If
             End Select
@@ -2505,7 +2505,7 @@ Dim V
 '            PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not AdoAux(NumTabMto).Recordset.EOF Then
+            If Not Adoaux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2542,7 +2542,7 @@ Dim Cad As String, Indicador As String
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(adoaux(1), cad, Indicador) Then
-    If SituarData(AdoAux(1), Cad, Indicador) Then
+    If SituarData(Adoaux(1), Cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2558,21 +2558,21 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & AdoAux(1).Recordset!numnotac & _
-             " and codvarie=" & AdoAux(1).Recordset!codvarie & _
-             " and codsocio=" & AdoAux(1).Recordset!Codsocio & _
-             " and codcampo=" & AdoAux(1).Recordset!codcampo
+    vWhere = " WHERE numnotac=" & Adoaux(1).Recordset!Numnotac & _
+             " and codvarie=" & Adoaux(1).Recordset!CodVarie & _
+             " and codsocio=" & Adoaux(1).Recordset!Codsocio & _
+             " and codcampo=" & Adoaux(1).Recordset!codcampo
      
      
     '[Monica]06/03/2014: la fecha que me llega a'0000-00-00 00:00:00' el ado la lee como un nulo
-     If IsNull(AdoAux(1).Recordset!fechacla) Then
+     If IsNull(Adoaux(1).Recordset!fechacla) Then
         vWhere = vWhere & " and (fechacla is null or fechacla = '0000-00-00')"
      Else
-        vWhere = vWhere & " and fechacla=" & DBSet(AdoAux(1).Recordset!fechacla, "F")
+        vWhere = vWhere & " and fechacla=" & DBSet(Adoaux(1).Recordset!fechacla, "F")
      End If
      
      vWhere = vWhere & _
-             " and ordinal=" & AdoAux(1).Recordset!Ordinal
+             " and ordinal=" & Adoaux(1).Recordset!Ordinal
 
     ' ***** elimina les llínies ****
     conn.Execute "DELETE FROM rclasifauto_clasif " & vWhere
@@ -2628,7 +2628,7 @@ Dim Nuevo As Boolean
                         TerminaBloquear
                         frmVar.Show vbModal
                         Set frmVar = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
                     Else
                         Text1(Index).Text = ""
                     End If
@@ -2652,7 +2652,7 @@ Dim Nuevo As Boolean
                         TerminaBloquear
                         frmSoc.Show vbModal
                         Set frmSoc = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
                     Else
                         Text1(Index).Text = ""
                     End If
@@ -2704,12 +2704,11 @@ Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -2752,7 +2751,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
 '    PonerModo 5, Index
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -2764,19 +2763,19 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'calidades
             Sql = "¿Seguro que desea eliminar la Calidad?"
-            Sql = Sql & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid
+            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifauto_clasif "
-                Sql = Sql & vWhere & " AND codvarie= " & AdoAux(Index).Recordset!codvarie
-                Sql = Sql & " and codcalid= " & AdoAux(Index).Recordset!codcalid
-                Sql = Sql & " and codsocio=" & AdoAux(Index).Recordset!Codsocio
-                Sql = Sql & " and codcampo=" & AdoAux(Index).Recordset!codcampo
+                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!CodVarie
+                Sql = Sql & " and codcalid= " & Adoaux(Index).Recordset!codcalid
+                Sql = Sql & " and codsocio=" & Adoaux(Index).Recordset!Codsocio
+                Sql = Sql & " and codcampo=" & Adoaux(Index).Recordset!codcampo
                 
             End If
         Case 2 'plagas
             Sql = "¿Seguro que desea eliminar la Plaga?"
-            Sql = Sql & vbCrLf & "Plaga: " & AdoAux(Index).Recordset!Codplaga
+            Sql = Sql & vbCrLf & "Plaga: " & Adoaux(Index).Recordset!Codplaga
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifauto_plagas "
@@ -2785,7 +2784,7 @@ Dim Eliminar As Boolean
 '                Sql = Sql & " and codsocio=" & DBSet(AdoAux(Index).Recordset!CodSocio, "N")
 '                Sql = Sql & " and codcampo=" & DBSet(AdoAux(Index).Recordset!CodCampo, "N")
 '                Sql = Sql & " and fechacla=" & DBSet(AdoAux(Index).Recordset!fechacla, "F")
-                Sql = Sql & " and codplaga=" & DBSet(AdoAux(Index).Recordset!Codplaga, "N")
+                Sql = Sql & " and codplaga=" & DBSet(Adoaux(Index).Recordset!Codplaga, "N")
                 
                 
             End If
@@ -2793,16 +2792,16 @@ Dim Eliminar As Boolean
     End Select
 
     If Eliminar Then
-        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
-        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
-        If BLOQUEADesdeFormulario2(Me, AdoAux(1), 2, "FrameAux1") Then
+        If BLOQUEADesdeFormulario2(Me, Adoaux(1), 2, "FrameAux1") Then
             CargaGrid Index, True
 '            BotonModificar
         End If
@@ -2852,7 +2851,7 @@ Dim i As Integer
             
 '            If Index = 0 Then NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -2895,7 +2894,7 @@ Dim i As Integer
             
 '            If Index = 0 Then NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -2906,12 +2905,12 @@ Dim i As Integer
             
             LLamaLineas Index, 5, anc
         
-            txtAux1(0).Text = AdoAux(1).Recordset!numnotac 'numnotac
-            txtAux1(1).Text = AdoAux(1).Recordset!codvarie 'Text1(3).Text 'codvarie
-            txtAux1(2).Text = AdoAux(1).Recordset!Codsocio 'Text1(4).Text 'socio
-            txtAux1(3).Text = AdoAux(1).Recordset!codcampo 'Text1(5).Text 'campo
-            txtAux1(4).Text = AdoAux(1).Recordset!fechacla 'Text1(1).Text 'fecha
-            txtAux1(6).Text = AdoAux(1).Recordset!Ordinal 'Text1(1).Text 'ordinal
+            txtAux1(0).Text = Adoaux(1).Recordset!Numnotac 'numnotac
+            txtAux1(1).Text = Adoaux(1).Recordset!CodVarie 'Text1(3).Text 'codvarie
+            txtAux1(2).Text = Adoaux(1).Recordset!Codsocio 'Text1(4).Text 'socio
+            txtAux1(3).Text = Adoaux(1).Recordset!codcampo 'Text1(5).Text 'campo
+            txtAux1(4).Text = Adoaux(1).Recordset!fechacla 'Text1(1).Text 'fecha
+            txtAux1(6).Text = Adoaux(1).Recordset!Ordinal 'Text1(1).Text 'ordinal
             txtAux1(5).Text = ""
             txtAux2(5).Text = ""
             txtAux2(1).Text = ""
@@ -2931,8 +2930,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim i As Integer
     Dim J As Integer
     
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -3096,7 +3095,7 @@ Dim Nuevo As Boolean
                         TerminaBloquear
                         frmCal.Show vbModal
                         Set frmCal = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
                     Else
                         txtAux(Index).Text = ""
                     End If
@@ -3120,7 +3119,7 @@ Dim Nuevo As Boolean
                         TerminaBloquear
                         frmInc.Show vbModal
                         Set frmInc = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
                     Else
                         txtAux(Index).Text = ""
                     End If
@@ -3185,7 +3184,7 @@ Dim Nuevo As Boolean
                         TerminaBloquear
                         frmInc.Show vbModal
                         Set frmInc = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
                     Else
                         txtAux1(Index).Text = ""
                     End If
@@ -3267,7 +3266,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             PonerFoco Text1(5)
     End Select
     
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, AdoAux(1), 1
+    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Adoaux(1), 1
 End Sub
 
 Private Sub DataGridAux_RowColChange(Index As Integer, LastRow As Variant, ByVal LastCol As Integer)
@@ -3332,14 +3331,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim i As Byte
 
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
-    AdoAux(Index).Refresh
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
+    Adoaux(Index).Refresh
     
-    If Not AdoAux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
+    If Not Adoaux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -3373,7 +3372,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza, CadB)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'clasificacion
@@ -3458,7 +3457,7 @@ Dim b As Boolean
     If DatosOkLlin(nomframe) Then
         TerminaBloquear
         If InsertarDesdeForm2(Me, 2, nomframe) Then
-            b = BLOQUEADesdeFormulario2(Me, AdoAux(1), 2, "FrameAux1")
+            b = BLOQUEADesdeFormulario2(Me, Adoaux(1), 2, "FrameAux1")
 '            b = BloqueaRegistro("rclasifauto", "codvarie = " & AdoAux(1).Recordset!CodVarie)
             Select Case NumTabMto
                 Case 0, 2  ' *** els index de les llinies en grid (en o sense tab) ***
@@ -3490,9 +3489,9 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
-                    V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                    V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
                 Case 1
-                    V = AdoAux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
+                    V = Adoaux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -3501,7 +3500,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -3515,12 +3514,12 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " rclasifauto_clasif.numnotac=" & Me.AdoAux(1).Recordset!numnotac & _
-                      " and rclasifauto_clasif.codvarie=" & Me.AdoAux(1).Recordset!codvarie & _
-                      " and rclasifauto_clasif.codsocio=" & Me.AdoAux(1).Recordset!Codsocio & _
-                      " and rclasifauto_clasif.codcampo=" & Me.AdoAux(1).Recordset!codcampo & _
-                      " and rclasifauto_clasif.fechacla=" & DBSet(Me.AdoAux(1).Recordset!fechacla, "F") & _
-                      " and rclasifauto_clasif.ordinal=" & Me.AdoAux(1).Recordset!Ordinal
+    vWhere = vWhere & " rclasifauto_clasif.numnotac=" & Me.Adoaux(1).Recordset!Numnotac & _
+                      " and rclasifauto_clasif.codvarie=" & Me.Adoaux(1).Recordset!CodVarie & _
+                      " and rclasifauto_clasif.codsocio=" & Me.Adoaux(1).Recordset!Codsocio & _
+                      " and rclasifauto_clasif.codcampo=" & Me.Adoaux(1).Recordset!codcampo & _
+                      " and rclasifauto_clasif.fechacla=" & DBSet(Me.Adoaux(1).Recordset!fechacla, "F") & _
+                      " and rclasifauto_clasif.ordinal=" & Me.Adoaux(1).Recordset!Ordinal
                       
     ObtenerWhereCab = vWhere
 End Function
@@ -3593,7 +3592,7 @@ Private Sub PonerContRegIndicador()
 Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
-        cadReg = PonerContRegistros(Me.AdoAux(1))
+        cadReg = PonerContRegistros(Me.Adoaux(1))
         If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
@@ -3654,8 +3653,8 @@ Dim TotalKilos As String
     
         Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal * (" & DBSet((KilosPeq - KilosDes - KilosPod), "N")
         Sql2 = Sql2 & ") / " & DBSet(Rs!KilosNet, "N")
-        Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         
         conn.Execute Sql2
         
@@ -3664,7 +3663,7 @@ Dim TotalKilos As String
 '        KilosDes2 = Round2(KilosDes * 20 / 100, 0)
         
         ' calidad de destrio
-        Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql2 = Sql2 & " and tipcalid = 1 "
         CalDestrio = DevuelveValor(Sql2)
 
@@ -3676,7 +3675,7 @@ Dim TotalKilos As String
         
         If CalDestrio <> 0 Then
             Sql2 = "update rclasifauto_clasif set kilocal = kiloscal + " & DBSet(KilosPod + KilosDes2, "N")
-            Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N") & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " and codcalid = " & DBSet(CalDestrio, "N")
             
             conn.Execute Sql2
@@ -3691,14 +3690,14 @@ Dim TotalKilos As String
 '        End If
     
         ' kilos de la entrada
-        Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
         KilosEntrada = DevuelveValor(Sql2)
     
         KilMuestra = KilosPeq
         
         If KilMuestra <> 0 Then
-            Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " order by codcalid "
         
             Set Rs2 = New ADODB.Recordset
@@ -3711,13 +3710,13 @@ Dim TotalKilos As String
                 Kilos = Round2(KilosEntrada * DBLet(Rs2!KilosCal, "N") / KilMuestra, 0)
                 KilosTot = KilosTot + Kilos
             
-                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
                     Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                    Sql = Sql & " values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " values (" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs!KilosCal, "N")
                     Sql = Sql & "," & DBSet(Kilos, "N") & ")"
                     
@@ -3725,8 +3724,8 @@ Dim TotalKilos As String
                 Else
                     Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!KilosCal, "N") & ","
                     Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                 
                     conn.Execute Sql
@@ -3738,7 +3737,7 @@ Dim TotalKilos As String
             Set Rs2 = Nothing
             
             ' borramos las lineas de clasificacion que no tienen calidad
-            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
             Sql = Sql & " and muestra is null "
             
             conn.Execute Sql
@@ -3747,23 +3746,23 @@ Dim TotalKilos As String
             ' si la diferencia es positiva se suma a la ultima calidad
             If KilosEntrada - KilosTot > 0 Then
                 Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - KilosTot, "N")
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
                 
                 conn.Execute Sql
             Else
             ' si es negativa a la primera que no deje el importe negqativo
                 Sql = "select min(codcalid) from rclasifica_clasif "
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and kiloscal >= " & DBSet(KilosEntrada - KilosTot, "N")
                 
                 PrimCalidad = DevuelveValor(Sql)
                 
                 Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - KilosTot, "N")
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
                 
                 conn.Execute Sql
@@ -3772,13 +3771,13 @@ Dim TotalKilos As String
         
         If CalDestrio <> 0 Then
             ' factor de correccion de destrio
-            Sql2 = "select facorrde from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select facorrde from variedades where codvarie = " & DBSet(Rs!CodVarie, "N")
             FactCorrDest = DevuelveValor(Sql2)
             
             KilDestrio = Round2(FactCorrDest * KilosEntrada / 100, 0)
             
-            Sql3 = "select kiloscal from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcalid = "
+            Sql3 = "select kiloscal from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N") & " and codcalid = "
             Sql3 = Sql3 & DBSet(CalDestrio, "N")
             
             KilosDes3 = DevuelveValor(Sql3)
@@ -3788,60 +3787,60 @@ Dim TotalKilos As String
             KilosDes3 = KilosDes3 + KilDestrio
             
             Sql3 = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosDes3, "N")
-            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(CalDestrio, "N")
             conn.Execute Sql3
             
             ' el resto de calidades
             Sql3 = "update rclasifica_clasif set kilosnet = kilosnet - round(kilosnet *"
             Sql3 = Sql3 & DBSet(KilDestrio, "N") & " / " & DBSet(KilosNet, "N") & "0) "
-            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql3 = Sql3 & " and codcalid <> " & CalDestrio
             conn.Execute Sql3
             
-            Sql3 = "select sum(kilosnet) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie " & DBSet(Rs!codvarie, "N")
+            Sql3 = "select sum(kilosnet) from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie " & DBSet(Rs!CodVarie, "N")
             
             TotalKilos = DevuelveValor(Sql3)
             
             If KilosEntrada - TotalKilos > 0 Then
                 ' si la diferencia es positiva va a la ultima calidad
                 Sql3 = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - TotalKilos, "N")
-                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql3 = Sql3 & " and codcalid = " & DBSet(UltCalidad, "N")
                 conn.Execute Sql3
             End If
             If KilosEntrada - TotalKilos < 0 Then
                 ' si la diferencia es negativa va a la primera calidad que se pueda
                 Sql3 = "select min(codcalid) from rclasifica_clasif "
-                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql3 = Sql3 & " and kiloscal >= " & DBSet(KilosEntrada - TotalKilos, "N")
                 
                 PrimCalidad = DevuelveValor(Sql)
                 
                 Sql3 = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - TotalKilos, "N")
-                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql3 = Sql3 & " and codcalid = " & DBSet(PrimCalidad, "N")
                 
                 conn.Execute Sql
             End If
             
             ' para todas las calidades que no sean de destrio con kilos negativos --> se ponen a 0
-            Sql3 = "update rclasifica_clasif set kilosnet = 0 where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = "update rclasifica_clasif set kilosnet = 0 where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql3 = Sql3 & " and codcalid <> " & DBSet(CalDestrio, "N")
             Sql3 = Sql3 & " and kilosnet < 0 "
             conn.Execute Sql3
             
             ' para la calidad de destrio, si kilos > kilos muestreados --> se pone kilos muestreados
             Sql3 = "update rclasifica_clasif set kilosnet = " & DBSet(KilosEntrada, "N")
-            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(CalDestrio, "N")
             Sql3 = Sql3 & " and kilosnet > " & DBSet(KilosEntrada, "N")
             conn.Execute Sql3
@@ -3849,21 +3848,21 @@ Dim TotalKilos As String
             ' para todas las calidades
             Sql3 = "update rclasifica_clasif set muestra = round(kilosnet * " & DBSet(KilMuestra, "N")
             Sql3 = Sql3 & " / " & DBSet(KilosEntrada, "N") & ",2)"
-            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             conn.Execute Sql3
         Else
             ' no existe la calidad de destrio damos un error
-            MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!codvarie, "N") & ". Revise.", vbExclamation
+            MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!CodVarie, "N") & ". Revise.", vbExclamation
             Exit Function
         End If
         
-        Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         conn.Execute Sql
 
-        Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         conn.Execute Sql
     
         Rs.MoveNext
@@ -3923,12 +3922,12 @@ Dim EntClasif As String
     EntClasif = ""
     While Not Rs.EOF And b
     
-        If EntradaClasificada(DBLet(Rs!numnotac)) Then
-            EntClasif = EntClasif & DBLet(Rs!numnotac) & ", "
+        If EntradaClasificada(DBLet(Rs!Numnotac)) Then
+            EntClasif = EntClasif & DBLet(Rs!Numnotac) & ", "
         Else
         
             ' kilos de la entrada
-            Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
             KilosNet = DevuelveValor(Sql2)
             
             ' si hay kilos de destrio recalculamos
@@ -3936,37 +3935,37 @@ Dim EntClasif As String
             KilPodrido = CCur(DBLet(Rs!KilosPod, "N"))
             If KilDestrio <> 0 Then
                 ' factor de correccion de destrio
-                Sql2 = "select facorrde from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select facorrde from variedades where codvarie = " & DBSet(Rs!CodVarie, "N")
                 FactCorrDest = DevuelveValor(Sql2)
     
                 ' calidad de destrio
-                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and tipcalid = 1 "
                 CalDestrio = DevuelveValor(Sql2)
                 
                 If CalDestrio = 0 Then
                     ' no existe la calidad de destrio damos un error
-                    MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!codvarie, "N") & ". Revise.", vbExclamation
+                    MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!CodVarie, "N") & ". Revise.", vbExclamation
                     Exit Function
                 End If
                 
                 ' actualizamos el muestreo de la calidad de destrio
-                Sql2 = "select count(*) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select count(*) from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(CalDestrio, "N")
                 
                 If TotalRegistros(Sql2) = 0 Then
                     ' si en la clasificacion no hay calidad de destrio, la creamos
                     Sql2 = "insert into rclasifauto_clasif (numnotac, codvarie, codcalid, kiloscal) values ("
-                    Sql2 = Sql2 & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                    Sql2 = Sql2 & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N") & ","
                     Sql2 = Sql2 & DBSet(CalDestrio, "N") & "," & DBSet(KilDestrio, "N") & ")"
                     
                     conn.Execute Sql2
                 Else
                     ' si en la clasificacion hay calidad de destrio, la actualizamos
                     Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal + " & DBSet(KilDestrio, "N")
-                    Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql2 = Sql2 & " and codcalid = " & DBSet(CalDestrio, "N")
                 
                     conn.Execute Sql2
@@ -3974,8 +3973,8 @@ Dim EntClasif As String
                 
                 ' multiplicamos los kilos de destrio por el factor de correccion
                 Sql2 = "update rclasifauto_clasif set kiloscal = round(kiloscal * " & DBSet(FactCorrDest, "N") & ",2)"
-                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(CalDestrio, "N")
                 
                 conn.Execute Sql2
@@ -3983,37 +3982,37 @@ Dim EntClasif As String
         
             If KilPodrido <> 0 Then
                 ' factor de correccion de podrido o mermas distinto del de destrio
-                Sql2 = "select facorrme from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select facorrme from variedades where codvarie = " & DBSet(Rs!CodVarie, "N")
                 FactCorrDest = DevuelveValor(Sql2)
     
                 ' calidad de podrido o merma
-                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and tipcalid = 3 "
                 CalPodrido = DevuelveValor(Sql2)
                 
                 If CalPodrido = 0 Then
                     ' no existe la calidad de podrido o merma damos un error
-                    MsgBox "No existe calidad de podrido o merma para la variedad " & DBLet(Rs!codvarie, "N") & ". Revise.", vbExclamation
+                    MsgBox "No existe calidad de podrido o merma para la variedad " & DBLet(Rs!CodVarie, "N") & ". Revise.", vbExclamation
                     Exit Function
                 End If
                 
                 ' actualizamos el muestreo de la calidad de podrido o merma
-                Sql2 = "select count(*) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select count(*) from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
                 
                 If TotalRegistros(Sql2) = 0 Then
                     ' si en la clasificacion no hay calidad de podrido o merma, la creamos
                     Sql2 = "insert into rclasifauto_clasif (numnotac, codvarie, codcalid, kiloscal) values ("
-                    Sql2 = Sql2 & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & ","
+                    Sql2 = Sql2 & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N") & ","
                     Sql2 = Sql2 & DBSet(CalPodrido, "N") & "," & DBSet(KilPodrido, "N") & ")"
                     
                     conn.Execute Sql2
                 Else
                     ' si en la clasificacion hay calidad de podrido o merma, la actualizamos
                     Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal + " & DBSet(KilPodrido, "N")
-                    Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
                 
                     conn.Execute Sql2
@@ -4021,21 +4020,21 @@ Dim EntClasif As String
                 
                 ' multiplicamos los kilos de podrido/merma por el factor de correccion
                 Sql2 = "update rclasifauto_clasif set kiloscal = round(kiloscal * " & DBSet(FactCorrDest, "N") & ",2)"
-                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
                 
                 conn.Execute Sql2
         
             End If
         
-            Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             
             KilMuestra = DevuelveValor(Sql2)
             If KilMuestra <> 0 Then
-                Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " order by codcalid "
             
                 Set Rs2 = New ADODB.Recordset
@@ -4049,13 +4048,13 @@ Dim EntClasif As String
                     Kilos = Round2(KilosNet * DBLet(Rs2!KilosCal, "N") / KilMuestra, 0)
                     KilosTot = KilosTot + Kilos
                 
-                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                     
                     If TotalRegistros(Sql) = 0 Then
                         Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                        Sql = Sql & " values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " values (" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!KilosCal, "N")
                         Sql = Sql & "," & DBSet(Kilos, "N") & ")"
                         
@@ -4063,8 +4062,8 @@ Dim EntClasif As String
                     Else
                         Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!KilosCal, "N") & ","
                         Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                        Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                     
                         conn.Execute Sql
@@ -4078,43 +4077,43 @@ Dim EntClasif As String
                 ' si la diferencia es positiva se suma a la ultima calidad
                 If KilosNet - KilosTot > 0 Then
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
                     
                     conn.Execute Sql
                 Else
                 ' si es negativa a la primera
                     Sql = "select min(codcalid) from rclasifica_clasif "
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and kilosnet >= " & DBSet((KilosNet - KilosTot) * (-1), "N")
                     
                     PrimCalidad = DevuelveValor(Sql)
                     
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
                     
                     conn.Execute Sql
                 End If
             End If
         
-            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and kilosnet is null "
+            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N") & " and kilosnet is null "
             conn.Execute Sql
             
-            Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             conn.Execute Sql
             
-            Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             conn.Execute Sql
             
             '++ 20-05-2009: calculamos los gastos de recoleccion para la entrada clasificadaç
-            Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
             
             Set RsGastos = New ADODB.Recordset
             RsGastos.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4196,7 +4195,7 @@ Dim cadErr As String
     While Not Rs.EOF And b
     
         ' kilos de la entrada
-        Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
         KilosNet = DevuelveValor(Sql2)
         
 '**** DE MOMENTO NO CALCULAMOS EL FACTOR DE CORRECCION SOBRE LOS KILOS DE DESTRIO
@@ -4278,13 +4277,13 @@ Dim cadErr As String
 '
 '        End If
     
-        Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         
         KilMuestra = DevuelveValor(Sql2)
         If KilMuestra <> 0 Then
-            Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " order by codcalid "
         
             Set Rs2 = New ADODB.Recordset
@@ -4298,13 +4297,13 @@ Dim cadErr As String
                 Kilos = Round2(KilosNet * DBLet(Rs2!KilosCal, "N") / KilMuestra, 0)
                 KilosTot = KilosTot + Kilos
             
-                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                 
                 If TotalRegistros(Sql) = 0 Then
                     Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                    Sql = Sql & " values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " values (" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!KilosCal, "N")
                     Sql = Sql & "," & DBSet(Kilos, "N") & ")"
                     
@@ -4312,8 +4311,8 @@ Dim cadErr As String
                 Else
                     Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!KilosCal, "N") & ","
                     Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                 
                     conn.Execute Sql
@@ -4327,43 +4326,43 @@ Dim cadErr As String
             ' si la diferencia es positiva se suma a la ultima calidad
             If KilosNet - KilosTot > 0 Then
                 Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
                 
                 conn.Execute Sql
             Else
             ' si es negativa a la primera
                 Sql = "select min(codcalid) from rclasifica_clasif "
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and kilosnet >= " & DBSet((KilosNet - KilosTot) * (-1), "N")
                 
                 PrimCalidad = DevuelveValor(Sql)
                 
                 Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
                 
                 conn.Execute Sql
             End If
         End If
     
-        Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and kilosnet is null "
+        Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N") & " and kilosnet is null "
         conn.Execute Sql
         
-        Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         conn.Execute Sql
         
-        Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!numnotac, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         conn.Execute Sql
         
         '++ 20-05-2009: calculamos los gastos de recoleccion para la entrada clasificadaç
-        Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
         
         Set RsGastos = New ADODB.Recordset
         RsGastos.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4434,22 +4433,22 @@ Dim EntClasif As String
     b = True
     EntClasif = ""
     While Not Rs.EOF And b
-        If EntradaClasificada(DBLet(Rs!numnotac)) Then
-            EntClasif = EntClasif & DBLet(Rs!numnotac) & ", "
+        If EntradaClasificada(DBLet(Rs!Numnotac)) Then
+            EntClasif = EntClasif & DBLet(Rs!Numnotac) & ", "
         Else
         
             ' kilos de la entrada
-            Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
             KilosNet = DevuelveValor(Sql2)
             
         
-            Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             
             KilMuestra = DevuelveValor(Sql2)
             If KilMuestra <> 0 Then
-                Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = "select * from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " order by codcalid "
             
                 Set Rs2 = New ADODB.Recordset
@@ -4461,7 +4460,7 @@ Dim EntClasif As String
                 
                     '[Monica] 04/06/2010
                     ' comprobamos si es la calidad de destrio a la que le ponemos el total de kilos
-                    Sql = "select count(*) from rcalidad where codvarie = " & DBSet(Rs2!codvarie, "N")
+                    Sql = "select count(*) from rcalidad where codvarie = " & DBSet(Rs2!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                     Sql = Sql & " and tipcalid = 1 "
                     
@@ -4478,13 +4477,13 @@ Dim EntClasif As String
                     '[Monica] 04/06/2010
                     
                 
-                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                     
                     If TotalRegistros(Sql) = 0 Then
                         Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                        Sql = Sql & " values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " values (" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!KilosCal, "N")
                         Sql = Sql & "," & DBSet(Kilos, "N") & ")"
                         
@@ -4492,8 +4491,8 @@ Dim EntClasif As String
                     Else
                         Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!KilosCal, "N") & ","
                         Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                        Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
                     
                         conn.Execute Sql
@@ -4507,43 +4506,43 @@ Dim EntClasif As String
                 ' si la diferencia es positiva se suma a la ultima calidad
                 If KilosNet - KilosTot > 0 Then
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
                     
                     conn.Execute Sql
                 Else
                 ' si es negativa a la primera
                     Sql = "select min(codcalid) from rclasifica_clasif "
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and kilosnet >= " & DBSet((KilosNet - KilosTot) * (-1), "N")
                     
                     PrimCalidad = DevuelveValor(Sql)
                     
                     Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
-                    Sql = Sql & " where numnotac = " & DBSet(Rs!numnotac, "N")
-                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!Numnotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
                     
                     conn.Execute Sql
                 End If
             End If
         
-            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and kilosnet is null "
+            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N") & " and kilosnet is null "
             conn.Execute Sql
             
-            Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = "delete from rclasifauto_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             conn.Execute Sql
             
-            Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!numnotac, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = "delete from rclasifauto where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             conn.Execute Sql
             
             '++ 20-05-2009: calculamos los gastos de recoleccion para la entrada clasificadaç
-            Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
             
             Set RsGastos = New ADODB.Recordset
             RsGastos.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4600,13 +4599,13 @@ Dim Importe  As Long
 Dim Rs As ADODB.Recordset
 Dim Sql As String
     
-    If Me.AdoAux(1).Recordset.EOF Then Exit Sub
+    If Me.Adoaux(1).Recordset.EOF Then Exit Sub
 
-    Sql = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & Me.AdoAux(1).Recordset!numnotac
-    Sql = Sql & " and codvarie = " & Me.AdoAux(1).Recordset!codvarie
-    Sql = Sql & " and codsocio = " & Me.AdoAux(1).Recordset!Codsocio
-    Sql = Sql & " and codcampo = " & Me.AdoAux(1).Recordset!codcampo
-    Sql = Sql & " and fechacla = " & DBSet(Me.AdoAux(1).Recordset!fechacla, "F")
+    Sql = "select sum(kiloscal) from rclasifauto_clasif where numnotac = " & Me.Adoaux(1).Recordset!Numnotac
+    Sql = Sql & " and codvarie = " & Me.Adoaux(1).Recordset!CodVarie
+    Sql = Sql & " and codsocio = " & Me.Adoaux(1).Recordset!Codsocio
+    Sql = Sql & " and codcampo = " & Me.Adoaux(1).Recordset!codcampo
+    Sql = Sql & " and fechacla = " & DBSet(Me.Adoaux(1).Recordset!fechacla, "F")
 
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4678,39 +4677,39 @@ Dim PorcDest As Currency
         
         If KilosPeq <> 0 Then
             ' calidad de kilos manuales (pequeño)
-            Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " and tipcalid = 4 "
             CalManual = DevuelveValor(Sql2)
         
             If CalManual = 0 Then
                 ' no existe la calidad de pequeño damos un error
-                MsgBox "No existe calidad de kilos manuales(pequeño) para la variedad " & DBLet(Rs!codvarie, "N") & ". Revise.", vbExclamation
+                MsgBox "No existe calidad de kilos manuales(pequeño) para la variedad " & DBLet(Rs!CodVarie, "N") & ". Revise.", vbExclamation
                 conn.RollbackTrans
                 Exit Function
             End If
         
             Sql2 = "select count(*) from rclasifauto_clasif "
             Sql2 = Sql2 & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " and fechacla = " & DBSet(Rs!fechacla, "F")
             Sql2 = Sql2 & " and ordinal = " & DBSet(Rs!Ordinal, "N")
             Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             Sql2 = Sql2 & " and codcalid = " & DBSet(CalManual, "N")
             
             If TotalRegistros(Sql2) = 0 Then
                 Sql2 = "insert into rclasifauto_clasif (numnotac,codvarie,codcalid,kiloscal,codcampo,codsocio,fechacla,ordinal) values "
-                Sql2 = Sql2 & "(" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(CalManual, "N") & ","
+                Sql2 = Sql2 & "(" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(CalManual, "N") & ","
                 Sql2 = Sql2 & DBSet(KilosPeq, "N") & "," & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!fechacla, "F") & ","
                 Sql2 = Sql2 & DBSet(Rs!Ordinal, "N") & ")"
             Else
                 Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal + " & DBSet(KilosPeq, "N")
                 Sql2 = Sql2 & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql2 = Sql2 & " and fechacla = " & DBSet(Rs!fechacla, "F")
                 Sql2 = Sql2 & " and ordinal = " & DBSet(Rs!Ordinal, "N")
                 Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
-                Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
+                Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
                 Sql2 = Sql2 & " and codcalid = " & DBSet(CalManual, "N")
             End If
             
@@ -4718,13 +4717,13 @@ Dim PorcDest As Currency
         End If
         
         ' calidad de destrio
-        Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql2 = Sql2 & " and tipcalid = 1 "
         CalDestrio = DevuelveValor(Sql2)
         
         If CalDestrio = 0 Then
             ' no existe la calidad de destrio damos un error
-            MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!codvarie, "N") & ". Revise.", vbExclamation
+            MsgBox "No existe calidad de destrio para la variedad " & DBLet(Rs!CodVarie, "N") & ". Revise.", vbExclamation
             conn.RollbackTrans
             Exit Function
         End If
@@ -4733,11 +4732,11 @@ Dim PorcDest As Currency
     
         Sql = "select * from rclasifauto_clasif "
         Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
         Sql = Sql & " and ordinal = " & DBSet(Rs!Ordinal, "N")
         Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-        Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
         
         Set Rs2 = New ADODB.Recordset
         Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4750,11 +4749,11 @@ Dim PorcDest As Currency
             
             Sql = "update rclasifauto_clasif set kiloscal = kiloscal - " & DBSet(KilosDes, "N")
             Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
             Sql = Sql & " and ordinal = " & DBSet(Rs!Ordinal, "N")
             Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
         
             conn.Execute Sql
@@ -4766,26 +4765,26 @@ Dim PorcDest As Currency
         
         Sql = "select count(*) from rclasifauto_clasif  "
         Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
         Sql = Sql & " and ordinal = " & DBSet(Rs!Ordinal, "N")
         Sql = Sql & " and codcampo = " & DBSet(Rs!codcampo, "N")
-        Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
         Sql = Sql & " and codcalid = " & DBSet(CalDestrio, "N")
         
         If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into rclasifauto_clasif (numnotac,codvarie,codcalid,kiloscal,codcampo,codsocio,fechacla,ordinal) values "
-            Sql2 = Sql2 & "(" & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(CalDestrio, "N") & ","
+            Sql2 = Sql2 & "(" & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(CalDestrio, "N") & ","
             Sql2 = Sql2 & DBSet(TKilosDes, "N") & "," & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!fechacla, "F") & ","
             Sql2 = Sql2 & DBSet(Rs!Ordinal, "N") & ")"
         Else
             Sql2 = "update rclasifauto_clasif set kiloscal = kiloscal + " & DBSet(TKilosDes, "N")
             Sql2 = Sql2 & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " and fechacla = " & DBSet(Rs!fechacla, "F")
             Sql2 = Sql2 & " and ordinal = " & DBSet(Rs!Ordinal, "N")
             Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
             Sql2 = Sql2 & " and codcalid = " & DBSet(CalDestrio, "N")
         End If
         
@@ -4810,7 +4809,7 @@ Dim PorcDest As Currency
     While Not Rs.EOF
         ' obtenemos el codcampo de rclasifica pq en rclasifauto en picassent llevamos el antiguo nro de campo ej:1001
         Sql = "select codcampo from rcampos where codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql = Sql & " and nrocampo = " & DBSet(Rs!codcampo, "N")
         
         campo = DevuelveValor(Sql)
@@ -4818,7 +4817,7 @@ Dim PorcDest As Currency
         Sql2 = "select rclasifica.numnotac, rclasifica.codvarie, sum(rclasifica_clasif.kilosnet) "
         Sql2 = Sql2 & " from rclasifica left join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac "
         Sql2 = Sql2 & " where rclasifica.codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql2 = Sql2 & " and rclasifica.codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = Sql2 & " and rclasifica.codvarie = " & DBSet(Rs!CodVarie, "N")
         Sql2 = Sql2 & " and rclasifica.fechaent = " & DBSet(Rs!fechacla, "F")
         Sql2 = Sql2 & " and rclasifica.codcampo = " & DBSet(campo, "N")
         Sql2 = Sql2 & " group by 1,2 "
@@ -4831,7 +4830,7 @@ Dim PorcDest As Currency
         If Rs2.EOF Then ' entrada no existe
             Sql2 = "update rclasifauto set situacion = 5 "
             Sql2 = Sql2 & " where rclasifauto.codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql2 = Sql2 & " and rclasifauto.codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = Sql2 & " and rclasifauto.codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql2 = Sql2 & " and rclasifauto.fechacla = " & DBSet(Rs!fechacla, "F")
             Sql2 = Sql2 & " and rclasifauto.codcampo = " & DBSet(Rs!codcampo, "N")
             
@@ -4840,7 +4839,7 @@ Dim PorcDest As Currency
             While Not Rs2.EOF
                 Sql3 = "select sum(kiloscal) from rclasifauto_clasif "
                 Sql3 = Sql3 & " where rclasifauto_clasif.codsocio = " & DBSet(Rs!Codsocio, "N")
-                Sql3 = Sql3 & " and rclasifauto_clasif.codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = Sql3 & " and rclasifauto_clasif.codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql3 = Sql3 & " and rclasifauto_clasif.fechacla = " & DBSet(Rs!fechacla, "F")
                 Sql3 = Sql3 & " and rclasifauto_clasif.codcampo = " & DBSet(Rs!codcampo, "N")
                 
@@ -4849,12 +4848,12 @@ Dim PorcDest As Currency
                 If KilMuestra <> 0 Then
             
                     ' kilos de la entrada
-                    Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs2!numnotac, "N")
+                    Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs2!Numnotac, "N")
                     KilosEntrada = DevuelveValor(Sql2)
                 
                     Sql3 = "select codcalid, sum(kiloscal) kiloscal from rclasifauto_clasif "
                     Sql3 = Sql3 & " where rclasifauto_clasif.codsocio = " & DBSet(Rs!Codsocio, "N")
-                    Sql3 = Sql3 & " and rclasifauto_clasif.codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql3 = Sql3 & " and rclasifauto_clasif.codvarie = " & DBSet(Rs!CodVarie, "N")
                     Sql3 = Sql3 & " and rclasifauto_clasif.fechacla = " & DBSet(Rs!fechacla, "F")
                     Sql3 = Sql3 & " and rclasifauto_clasif.codcampo = " & DBSet(Rs!codcampo, "N")
                     Sql3 = Sql3 & " group by 1 "
@@ -4870,13 +4869,13 @@ Dim PorcDest As Currency
                         Kilos = Round2(KilosEntrada * DBLet(rs3!KilosCal, "N") / KilMuestra, 0)
                         KilosTot = KilosTot + Kilos
                     
-                        Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs2!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs2!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and codcalid = " & DBSet(rs3!codcalid, "N")
                         
                         If TotalRegistros(Sql) = 0 Then
                             Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-                            Sql = Sql & " values (" & DBSet(Rs2!numnotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                            Sql = Sql & " values (" & DBSet(Rs2!Numnotac, "N") & "," & DBSet(Rs!CodVarie, "N")
                             Sql = Sql & "," & DBSet(rs3!codcalid, "N") & "," & DBSet(rs3!KilosCal, "N")
                             Sql = Sql & "," & DBSet(Kilos, "N") & ")"
                             
@@ -4884,8 +4883,8 @@ Dim PorcDest As Currency
                         Else
                             Sql = "update rclasifica_clasif set muestra = " & DBSet(rs3!KilosCal, "N") & ","
                             Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
-                            Sql = Sql & " where numnotac = " & DBSet(Rs2!numnotac, "N")
-                            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                            Sql = Sql & " where numnotac = " & DBSet(Rs2!Numnotac, "N")
+                            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                             Sql = Sql & " and codcalid = " & DBSet(rs3!codcalid, "N")
                         
                             conn.Execute Sql
@@ -4897,7 +4896,7 @@ Dim PorcDest As Currency
                     Set rs3 = Nothing
                     
                     ' borramos las lineas de clasificacion que no tienen calidad
-                    Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs2!numnotac, "N")
+                    Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs2!Numnotac, "N")
                     Sql = Sql & " and muestra is null "
                     
                     conn.Execute Sql
@@ -4905,23 +4904,23 @@ Dim PorcDest As Currency
                     ' si la diferencia es positiva se suma a la ultima calidad
                     If KilosEntrada - KilosTot > 0 Then
                         Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - KilosTot, "N")
-                        Sql = Sql & " where numnotac = " & DBSet(Rs2!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs2!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
                         
                         conn.Execute Sql
                     Else
                     ' si es negativa a la primera que no deje el importe negqativo
                         Sql = "select min(codcalid) from rclasifica_clasif "
-                        Sql = Sql & " where numnotac = " & DBSet(Rs2!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs2!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and kilosnet >= " & DBSet(KilosEntrada - KilosTot, "N")
                         
                         PrimCalidad = DevuelveValor(Sql)
                         
                         Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosEntrada - KilosTot, "N")
-                        Sql = Sql & " where numnotac = " & DBSet(Rs2!numnotac, "N")
-                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs2!Numnotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
                         Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
                         
                         conn.Execute Sql
@@ -4933,8 +4932,8 @@ Dim PorcDest As Currency
                 ' insertamos las incidencias en la clasificacion
                 Sql2 = "insert into rclasifica_incidencia (numnotac, codincid) values "
                                 
-                Sql3 = " select distinct " & DBSet(Rs2!numnotac, "N") & ", codplaga from rclasifauto_plagas "
-                Sql3 = Sql3 & " where codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql3 = " select distinct " & DBSet(Rs2!Numnotac, "N") & ", codplaga from rclasifauto_plagas "
+                Sql3 = Sql3 & " where codvarie = " & DBSet(Rs!CodVarie, "N")
                 Sql3 = Sql3 & " and codsocio = " & DBSet(Rs!Codsocio, "N")
                 Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
                 Sql3 = Sql3 & " and fechacla = " & DBSet(Rs!fechacla, "F")
@@ -4944,10 +4943,10 @@ Dim PorcDest As Currency
                 Sql = ""
                 While Not rs3.EOF
                     Sql3 = "select count(*) from rclasifica_incidencia "
-                    Sql3 = Sql3 & " where numnotac = " & DBSet(Rs2!numnotac, "N")
+                    Sql3 = Sql3 & " where numnotac = " & DBSet(Rs2!Numnotac, "N")
                     Sql3 = Sql3 & " and codincid = " & DBSet(rs3!Codplaga, "N")
                     If TotalRegistros(Sql3) = 0 Then
-                        Sql = Sql & "(" & DBSet(Rs2!numnotac, "N") & "," & DBSet(rs3!Codplaga, "N") & "),"
+                        Sql = Sql & "(" & DBSet(Rs2!Numnotac, "N") & "," & DBSet(rs3!Codplaga, "N") & "),"
                     End If
                 
                     rs3.MoveNext
@@ -4961,19 +4960,19 @@ Dim PorcDest As Currency
             Set Rs2 = Nothing
         
             Sql = "delete from rclasifauto_clasif where codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
             conn.Execute Sql
     
             Sql = "delete from rclasifauto_plagas where codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
             conn.Execute Sql
     
             Sql = "delete from rclasifauto where codcampo = " & DBSet(Rs!codcampo, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
             Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql = Sql & " and fechacla = " & DBSet(Rs!fechacla, "F")
             conn.Execute Sql

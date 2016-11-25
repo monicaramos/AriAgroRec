@@ -426,11 +426,11 @@ Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim PrimeraVez As Boolean
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -438,7 +438,7 @@ Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim I As Byte
+Dim i As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -465,8 +465,8 @@ InicializarVbles
     
     
     'D/H Socio Tercero
-    cDesde = Trim(txtCodigo(0).Text)
-    cHasta = Trim(txtCodigo(1).Text)
+    cDesde = Trim(txtcodigo(0).Text)
+    cHasta = Trim(txtcodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -477,8 +477,8 @@ InicializarVbles
     End If
     
     'D/H Variedad
-    cDesde = Trim(txtCodigo(4).Text)
-    cHasta = Trim(txtCodigo(5).Text)
+    cDesde = Trim(txtcodigo(4).Text)
+    cHasta = Trim(txtcodigo(5).Text)
     nDesde = txtNombre(4).Text
     nHasta = txtNombre(5).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -489,8 +489,8 @@ InicializarVbles
     End If
     
     'D/H Fecha albaran
-    cDesde = Trim(txtCodigo(2).Text)
-    cHasta = Trim(txtCodigo(3).Text)
+    cDesde = Trim(txtcodigo(2).Text)
+    cHasta = Trim(txtcodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{rhisfruta.fecalbar}"
@@ -587,7 +587,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtCodigo(2)
+        PonerFoco txtcodigo(2)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -630,18 +630,18 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtCodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtcodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de socios
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Variedades
-    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -669,11 +669,11 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(2).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
+    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtCodigo(CByte(imgFec(2).Tag))
+    PonerFoco txtcodigo(CByte(imgFec(2).Tag))
     ' ***************************
 End Sub
 
@@ -690,7 +690,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmVariedades (Index)
         
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub Optcodigo_KeyPress(KeyAscii As Integer)
@@ -708,7 +708,7 @@ Private Sub OptNombre_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -747,7 +747,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -756,15 +756,15 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
     Select Case Index
         Case 0, 1 'socio tercero
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
         Case 2, 3 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 4, 5 'VARIEDAD
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "00")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
     End Select
 End Sub
 
@@ -845,7 +845,7 @@ Private Sub AbrirFrmVariedades(indice As Integer)
     indCodigo = indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
-    frmVar.CodigoActual = txtCodigo(indCodigo)
+    frmVar.CodigoActual = txtcodigo(indCodigo)
     frmVar.Show vbModal
     Set frmVar = Nothing
 End Sub
@@ -891,19 +891,19 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
-    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -914,10 +914,10 @@ Dim Rs As ADODB.Recordset
 
 End Function
 
-Private Function ProcesarCambios(cadwhere As String) As Boolean
-Dim SQL As String
+Private Function ProcesarCambios(cadWHERE As String) As Boolean
+Dim Sql As String
 Dim Sql1 As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim b As Boolean
 
@@ -927,21 +927,21 @@ On Error GoTo eProcesarCambios
     
     conn.Execute "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
         
-    If cadwhere <> "" Then
-        cadwhere = QuitarCaracterACadena(cadwhere, "{")
-        cadwhere = QuitarCaracterACadena(cadwhere, "}")
-        cadwhere = QuitarCaracterACadena(cadwhere, "_1")
+    If cadWHERE <> "" Then
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    SQL = "insert into tmpinformes (codusu, codigo1) "
+    Sql = "insert into tmpinformes (codusu, codigo1) "
     
-    SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar "
-    SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-    SQL = SQL & " where not numalbar in (select numalbar from rlifter) "
-    SQL = SQL & "  and rsocios.tipoprod = 1 "
-    If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+    Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar "
+    Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+    Sql = Sql & " where not numalbar in (select numalbar from rlifter) "
+    Sql = Sql & "  and rsocios.tipoprod = 1 "
+    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -953,10 +953,10 @@ End Function
 
 
 
-Private Function ProcesarCambiosNew(cadwhere As String) As Boolean
-Dim SQL As String
+Private Function ProcesarCambiosNew(cadWHERE As String) As Boolean
+Dim Sql As String
 Dim Sql1 As String
-Dim I As Integer
+Dim i As Integer
 Dim HayReg As Integer
 Dim b As Boolean
 
@@ -966,122 +966,122 @@ On Error GoTo eProcesarCambios
     
     conn.Execute "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
         
-    If cadwhere <> "" Then
-        cadwhere = QuitarCaracterACadena(cadwhere, "{")
-        cadwhere = QuitarCaracterACadena(cadwhere, "}")
-        cadwhere = QuitarCaracterACadena(cadwhere, "_1")
+    If cadWHERE <> "" Then
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "{")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "}")
+        cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    SQL = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4, precio1, importe5, nombre1) "
+    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4, precio1, importe5, nombre1) "
     
     Select Case Combo1(0).ListIndex
         Case 0 ' no facturados
-            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
-            SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-            SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
-            SQL = SQL & "  and rsocios.tipoprod = 1 "
-            If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
+            Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+            Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
+            Sql = Sql & "  and rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             
         
             If Check1.Value = 1 Then
-                SQL = SQL & " union "
-                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
-                SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-                SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
-                SQL = SQL & " and rsocios.tipoprod <> 1 "
-                If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+                Sql = Sql & " union "
+                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
+                Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+                Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
+                Sql = Sql & " and rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             End If
         
         
         Case 1 ' facturados
-            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            SQL = SQL & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
-            SQL = SQL & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-            SQL = SQL & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
-            SQL = SQL & " where rsocios.tipoprod = 1 "
-            If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            Sql = Sql & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
+            Sql = Sql & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+            Sql = Sql & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
+            Sql = Sql & " where rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             
             If Check1.Value = 1 Then
-                SQL = SQL & " union "
-                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                SQL = SQL & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
-                SQL = SQL & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-                SQL = SQL & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
-                SQL = SQL & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
+                Sql = Sql & " union "
+                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                Sql = Sql & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
+                Sql = Sql & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+                Sql = Sql & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
+                Sql = Sql & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
                 '[Monica]06/11/2013. Cambiado por lo de abajo
                 'sql = sql & " where rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) and "
-                SQL = SQL & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
-                SQL = SQL & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
-                SQL = SQL & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
-                SQL = SQL & " rsocios.tipoprod <> 1 "
-                If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+                Sql = Sql & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
+                Sql = Sql & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
+                Sql = Sql & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
+                Sql = Sql & " rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
                 
-                SQL = SQL & " group by 1,2,3,4,5,6,7,10 "
+                Sql = Sql & " group by 1,2,3,4,5,6,7,10 "
                 
             End If
             
         Case 2 ' todos
             ' no facturados
-            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
-            SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-            SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
-            SQL = SQL & "  and rsocios.tipoprod = 1 "
-            If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
+            Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+            Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
+            Sql = Sql & "  and rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             
         
             If Check1.Value = 1 Then
-                SQL = SQL & " union "
-                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
-                SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-                SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
-                SQL = SQL & " and rsocios.tipoprod <> 1 "
-                If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+                Sql = Sql & " union "
+                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
+                Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+                Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
+                Sql = Sql & " and rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             End If
         
             'facturados
-            SQL = SQL & " union "
-            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            SQL = SQL & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
-            SQL = SQL & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-            SQL = SQL & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
-            SQL = SQL & " where rsocios.tipoprod = 1 "
-            If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+            Sql = Sql & " union "
+            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            Sql = Sql & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
+            Sql = Sql & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+            Sql = Sql & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
+            Sql = Sql & " where rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
             
             If Check1.Value = 1 Then
-                SQL = SQL & " union "
-                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                SQL = SQL & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
-                SQL = SQL & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-                SQL = SQL & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar  and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
-                SQL = SQL & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
+                Sql = Sql & " union "
+                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                Sql = Sql & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
+                Sql = Sql & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+                Sql = Sql & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar  and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
+                Sql = Sql & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
                 '[Monica]06/11/2013. Cambiado por lo de abajo
                 'sql = sql & " where rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) and "
-                SQL = SQL & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
-                SQL = SQL & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
+                Sql = Sql & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
+                Sql = Sql & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
                 'hasta aqui
-                SQL = SQL & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
-                SQL = SQL & " rsocios.tipoprod <> 1 "
-                If cadwhere <> "" Then SQL = SQL & " and " & cadwhere
+                Sql = Sql & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
+                Sql = Sql & " rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
                 
-                SQL = SQL & " group by 1,2,3,4,5,6,7,10 "
+                Sql = Sql & " group by 1,2,3,4,5,6,7,10 "
                 
             End If
             
     End Select
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ProcesarCambiosNew = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -1092,7 +1092,7 @@ eProcesarCambios:
 End Function
 
 Private Sub InsertaLineaEnTemporal(ByRef ItmX As ListItem)
-Dim SQL As String
+Dim Sql As String
 Dim Codmacta As String
 Dim Rs As ADODB.Recordset
 Dim Sql1 As String
@@ -1109,15 +1109,15 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     'tipo de hectareas
     Combo1(0).AddItem "Pendientes Facturar"

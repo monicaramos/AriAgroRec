@@ -346,7 +346,7 @@ Attribute frmCla.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
@@ -374,11 +374,11 @@ Dim ConSubInforme As Boolean
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 
@@ -407,7 +407,7 @@ Dim nTabla As String
     
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     '======== FORMULA  ====================================
@@ -523,16 +523,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -651,7 +651,7 @@ End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim cad As String, cadTipo As String 'tipo cliente
+Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -696,7 +696,7 @@ Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
     cadSelect1 = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -724,7 +724,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -734,7 +734,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -790,7 +790,7 @@ Private Sub AbrirVisReport()
     With frmVisReport
         .FormulaSeleccion = cadFormula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         '##descomen
 '        .MostrarTree = MostrarTree
@@ -939,26 +939,26 @@ End Sub
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -974,22 +974,22 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ActualizarRegistros = True
     Exit Function
@@ -1000,14 +1000,14 @@ End Function
 
 
 Private Function NombreCalidad(Var As String, Calid As String) As String
-Dim SQL As String
+Dim Sql As String
 
     NombreCalidad = ""
 
-    SQL = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
-    SQL = SQL & " and codcalid = " & DBSet(Calid, "N")
+    Sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
+    Sql = Sql & " and codcalid = " & DBSet(Calid, "N")
     
-    NombreCalidad = DevuelveValor(SQL)
+    NombreCalidad = DevuelveValor(Sql)
     
 End Function
 
@@ -1048,15 +1048,15 @@ ecopiarfichero:
 End Function
 
 
-Private Function ProductoCampo(Campo As String) As String
-Dim SQL As String
+Private Function ProductoCampo(campo As String) As String
+Dim Sql As String
 
     ProductoCampo = ""
     
-    SQL = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
-    SQL = SQL & " where rcampos.codcampo = " & DBSet(Campo, "N")
+    Sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
+    Sql = Sql & " where rcampos.codcampo = " & DBSet(campo, "N")
     
-    ProductoCampo = DevuelveValor(SQL)
+    ProductoCampo = DevuelveValor(Sql)
 
 End Function
 
@@ -1064,7 +1064,7 @@ End Function
 
 Private Function ModificarRdto(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cWhere2 As String
 Dim Precio As Currency
@@ -1076,15 +1076,15 @@ Dim Rs As ADODB.Recordset
  
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    cWhere2 = " numalbar in (" & SQL & ")"
+    cWhere2 = " numalbar in (" & Sql & ")"
     
     If Not BloqueaRegistro("rhisfruta", cWhere2) Then
         MsgBox "No se pueden actualizar Entradas. Hay registros bloqueados.", vbExclamation
@@ -1092,7 +1092,7 @@ Dim Rs As ADODB.Recordset
         Exit Function
     Else
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             
@@ -1100,12 +1100,12 @@ Dim Rs As ADODB.Recordset
                 Precio = CCur(ImporteSinFormato(txtcodigo(2).Text))
                 
                 Sql2 = "update rhisfruta set prestimado = round(prestimado + " & DBSet(Precio, "N") & ",2) "
-                Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!NumAlbar, "N")
+                Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
             Else
                 Precio = 1 + (CCur(ImporteSinFormato(txtcodigo(2).Text)) / 100)
                 
                 Sql2 = "update rhisfruta set prestimado = round(prestimado * " & DBSet(Precio, "N") & ",2) "
-                Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!NumAlbar, "N")
+                Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
             End If
             conn.Execute Sql2
         

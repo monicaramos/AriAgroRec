@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmForpaSumi 
@@ -663,20 +663,20 @@ End Sub
 
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String, tots As String
+    Dim Sql As String, tots As String
     
     adodc1.ConnectionString = ConnAriges
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " WHERE " & vSQL
+        Sql = CadenaConsulta & " WHERE " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY codforpa"
+    Sql = Sql & " ORDER BY codforpa"
     '**************************************************************++
     
-    adodc1.RecordSource = SQL
+    adodc1.RecordSource = Sql
     adodc1.CursorType = adOpenDynamic
     adodc1.LockType = adLockOptimistic
     adodc1.Refresh
@@ -717,11 +717,11 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 And (Modo = 0 Or Modo = 2) Then Unload Me 'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 

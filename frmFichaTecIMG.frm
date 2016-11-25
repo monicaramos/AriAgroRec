@@ -176,16 +176,16 @@ Dim PrimeraVez As Boolean
 
 Dim It As ListItem
 Dim Contador As Integer
-Dim fichero As String
+Dim Fichero As String
 Dim TipoDocu As Byte
 
 Private Sub InsertarDesdeFichero()
-Dim Cadena As String
+Dim cadena As String
 Dim Carpeta As String
 Dim Aux As String
 Dim J As Integer
 
-    fichero = ""
+    Fichero = ""
     cd1.FileName = ""
     cd1.InitDir = "c:\"
     cd1.Flags = cdlOFNAllowMultiselect Or cdlOFNExplorer
@@ -212,18 +212,18 @@ Dim J As Integer
     InsertandoImg = True
 
     J = InStr(1, cd1.FileName, Chr(0))
-    Cadena = cd1.FileName
+    cadena = cd1.FileName
     TipoDocu = 0
     If InStr(1, cd1.FileName, "pdf") <> 0 Then TipoDocu = 1
-    fichero = Cadena
+    Fichero = cadena
         
             
-    CargarIMG (Cadena)
+    CargarIMG (cadena)
     InsertandoImg = False
     Screen.MousePointer = vbDefault
     
     Text1(0).Text = CCur(DevuelveValor("select max(orden) from rfichdocs where codsocio = " & DBSet(RecuperaValor(vDatos, 1), "N"))) + 1
-    Text1(1).Text = Dir(Cadena)
+    Text1(1).Text = Dir(cadena)
     PonerFoco Text1(1)
 End Sub
 
@@ -258,13 +258,13 @@ Private Function CargarIMG(Archivo As String) As Boolean
 End Function
 
 Private Function InsertarImagen() As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim c As String
 Dim L As Long
 Dim L1 As Long
 
 Dim k As Integer
-Dim eliminar As Boolean
+Dim Eliminar As Boolean
 
     
     On Error GoTo eInsertarImagen
@@ -274,14 +274,14 @@ Dim eliminar As Boolean
     AbrirConexion
     
     c = "Select max(codigo) from rfichdocs" '  where codsocio = " & RecuperaValor(vDatos, 1)
-    Set RS = New ADODB.Recordset
-    RS.Open c, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open c, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     L = 0
-    If Not RS.EOF Then
-        If Not IsNull(RS.Fields(0)) Then L = RS.Fields(0)
+    If Not Rs.EOF Then
+        If Not IsNull(Rs.Fields(0)) Then L = Rs.Fields(0)
     End If
     L = L + 1
-    RS.Close
+    Rs.Close
     
     
 '    c = "Select max(orden) from rfichdocs where codsocio = " & RecuperaValor(vDatos, 1)
@@ -297,26 +297,26 @@ Dim eliminar As Boolean
     
     ' es nuevo
     c = "insert into rfichdocs (codigo, codsocio, descripfich, orden, docum) values"
-    c = c & " (" & DBSet(L, "N") & "," & RecuperaValor(vDatos, 1) & "," & DBSet(Me.Text1(1).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Dir(fichero), "T") & ")"
+    c = c & " (" & DBSet(L, "N") & "," & RecuperaValor(vDatos, 1) & "," & DBSet(Me.Text1(1).Text, "T") & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Dir(Fichero), "T") & ")"
     conn.Execute c
     
     espera 0.2
     
     'Abro parar guardar el binary
     c = "Select * from rfichdocs where codigo =" & L '& " and codsocio = " & DBSet(RecuperaValor(vDatos, 1), "N")
-    Adodc1.ConnectionString = conn
-    Adodc1.RecordSource = c
-    Adodc1.Refresh
+    adodc1.ConnectionString = conn
+    adodc1.RecordSource = c
+    adodc1.Refresh
 '
-    If Adodc1.Recordset.EOF Then
+    If adodc1.Recordset.EOF Then
         'MAAAAAAAAAAAAL
 
     Else
         'Guardar
         InsertandoImg = True
-        CargarIMG fichero 'lw1.ListItems(k).SubItems(2)
-        GuardarBinary Adodc1.Recordset!campo, fichero
-        Adodc1.Recordset.Update
+        CargarIMG Fichero 'lw1.ListItems(k).SubItems(2)
+        GuardarBinary adodc1.Recordset!campo, Fichero
+        adodc1.Recordset.Update
     End If
 
     InsertarImagen = True
@@ -412,11 +412,10 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 

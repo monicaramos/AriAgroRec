@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasDestajo 
@@ -1458,12 +1458,11 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then 'ESC
-        If (Modo = 0 Or Modo = 2) Then Unload Me
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
@@ -1476,30 +1475,30 @@ Private Sub BotonActualizarEntradas()
     CargaGrid
 End Sub
 
-Private Function Kilos(cajas As String, forfait As String) As String
+Private Function Kilos(cajas As String, Forfait As String) As String
 Dim KilosCajon As String
 
     Kilos = ""
 
     ' si no hay cajas ni variedad, no podemos calcular los kilos
-    If cajas = "" Or forfait = "" Then Exit Function
+    If cajas = "" Or Forfait = "" Then Exit Function
     
     KilosCajon = 0
-    KilosCajon = DevuelveValor("select kiloscaj from forfaits where codforfait = " & DBSet(forfait, "T"))
+    KilosCajon = DevuelveValor("select kiloscaj from forfaits where codforfait = " & DBSet(Forfait, "T"))
     
     Kilos = CStr(Round2(KilosCajon * CCur(ImporteSinFormato(cajas)), 0))
     
     
 End Function
 
-Private Function Importe(Kilos As String, forfait As String) As String
+Private Function Importe(Kilos As String, Forfait As String) As String
 Dim PrecKilo As String
     
     Importe = ""
     
-    If Kilos = "" Or forfait = "" Then Exit Function
+    If Kilos = "" Or Forfait = "" Then Exit Function
     
-    PrecKilo = DevuelveValor("select preciokilonom from forfaits where codforfait = " & DBSet(forfait, "T"))
+    PrecKilo = DevuelveValor("select preciokilonom from forfaits where codforfait = " & DBSet(Forfait, "T"))
     
     Importe = Round2(CCur(Kilos) * CCur(ImporteSinFormato(PrecKilo)), 2)
     

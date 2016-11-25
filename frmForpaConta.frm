@@ -391,7 +391,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '-----------------------------------------------
 Dim PrimeraVez As Boolean
-Dim vTabla As String
+Dim vtabla As String
 
 
 Private Sub PonerModo(vModo)
@@ -412,7 +412,7 @@ Dim b As Boolean
     Combo1.visible = Not b
         
     cmdAceptar.visible = Not b
-    CmdCancelar.visible = Not b
+    cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
     'Si es regresar
@@ -479,7 +479,7 @@ End Sub
 Private Sub BotonBuscar()
 '    lblIndicador.Caption = "BUSQUEDA"
     ' ***************** canviar per la clau primaria ********
-    CargaGrid vTabla & ".codforpa = -1"
+    CargaGrid vtabla & ".codforpa = -1"
     '*******************************************************************************
     'Buscar
     txtAux(0).Text = ""
@@ -612,19 +612,19 @@ Private Sub Form_Load()
     chkVistaPrevia.Value = CheckValueLeer(Name)
       
     If vParamAplic.ContabilidadNueva Then
-        vTabla = "formapago"
+        vtabla = "formapago"
     Else
-        vTabla = "sforpa"
+        vtabla = "sforpa"
     End If
 
-    txtAux(0).Tag = "Código de Forma de Pago|N|N|||" & vTabla & "|codforpa|000|S|"
-    txtAux(1).Tag = "Descripción de la Forpa|T|N|||" & vTabla & "|nomforpa|||"
-    Combo1.Tag = "Tipo Forpa|N|N|0|9|" & vTabla & "|tipforpa||N|"
+    txtAux(0).Tag = "Código de Forma de Pago|N|N|||" & vtabla & "|codforpa|000|S|"
+    txtAux(1).Tag = "Descripción de la Forpa|T|N|||" & vtabla & "|nomforpa|||"
+    Combo1.Tag = "Tipo Forpa|N|N|0|9|" & vtabla & "|tipforpa||N|"
 
 
 '    PonerOpcionesMenu  'En funcion del usuario
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM " & vTabla & ", stipoformapago where " & vTabla & ".tipforpa = stipoformapago.tipoformapago "
+    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM " & vtabla & ", stipoformapago where " & vtabla & ".tipforpa = stipoformapago.tipoformapago "
     '************************************************************************
     
     CadB = ""
@@ -732,11 +732,11 @@ End Sub
 
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 And (Modo = 0 Or Modo = 2) Then Unload Me 'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, Modo, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 

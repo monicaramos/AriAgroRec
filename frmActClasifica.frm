@@ -504,11 +504,11 @@ Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
 
 Private Sub KEYpress(KeyAscii As Integer)
-    If KeyAscii = 13 Then 'ENTER
-        KeyAscii = 0
-        SendKeys "{tab}"
-    ElseIf KeyAscii = 27 Then Unload Me  'ESC
-    End If
+Dim cerrar As Boolean
+
+    KEYpressGnral KeyAscii, 0, cerrar
+    If cerrar Then Unload Me
+
 End Sub
 
 Private Sub cmdAceptar_Click(Index As Integer)
@@ -1475,7 +1475,7 @@ Dim Precio As Currency
     Sql1 = Sql1 & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql1 = Sql1 & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql1 = Sql1 & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql1 = Sql1 & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql1 = Sql1 & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql1 = Sql1 & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
@@ -1502,7 +1502,7 @@ Dim Precio As Currency
     
     Sql = Sql & "(" & DBSet(Albaran, "N") & ","
     Sql = Sql & DBSet(Rs!FechaEnt, "F") & ","
-    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
+    Sql = Sql & DBSet(Rs!CodVarie, "N") & ","
     Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
     Sql = Sql & DBSet(Rs!codcampo, "N") & ","
     Sql = Sql & DBSet(Rs!TipoEntr, "N") & ","
@@ -1570,7 +1570,7 @@ Dim Precio As Currency
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: para el caso de Alzira se rompe tambien por capataz
@@ -1684,7 +1684,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = rclasifica_clasif.numnotac and "
@@ -1745,7 +1745,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
@@ -1896,7 +1896,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and "
     
@@ -1919,7 +1919,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and  "
     
@@ -1942,7 +1942,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
