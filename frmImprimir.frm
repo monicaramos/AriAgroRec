@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmImprimir 
    BorderStyle     =   3  'Fixed Dialog
@@ -527,7 +527,8 @@ Dim Lanza As String
         
     Case 100 ' Fra de socio
          Aux = Me.outClaveNombreArchiv & ".pdf"
-        
+    Case 101 ' listados de socio
+         Aux = Me.outClaveNombreArchiv & ".pdf"
     End Select
     NombrePDF = App.Path & "\temp\" & Aux
     If Dir(NombrePDF, vbArchive) <> "" Then Kill NombrePDF
@@ -555,7 +556,8 @@ Dim Lanza As String
         
     Case 100
         Aux = "Factura nº" & outClaveNombreArchiv
-        
+    Case 101
+        Aux = "Informe"
     End Select
     
     Lanza = Lanza & Aux & "|"
