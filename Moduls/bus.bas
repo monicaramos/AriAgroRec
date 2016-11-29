@@ -6,7 +6,7 @@ Option Explicit
 
 
 Public Declare Function ShellExecute Lib "shell32.dll" Alias _
-    "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, _
+    "ShellExecuteA" (ByVal hWnd As Long, ByVal lpOperation As String, _
     ByVal lpFile As String, ByVal lpParameters As String, _
     ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
@@ -98,6 +98,10 @@ Public FFin As String
 
 
 Public teclaBuscar As Integer 'llamada desde prismaticos
+
+Public Const vbLightBlue = &HFEEFDA
+Public Const vbErrorColor = &HDFE1FF      '&HFFFFC0
+Public Const vbMoreLightBlue = &HFEFBD8   ' azul clarito
 
 Public CadenaDesdeOtroForm As String
 
@@ -875,7 +879,7 @@ Dim Aux As String
 End Function
 
 
-Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef otroCampo As String) As String
+Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef OtroCampo As String) As String
     Dim Rs As Recordset
     Dim Cad As String
     Dim Aux As String
@@ -883,7 +887,7 @@ Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As S
     On Error GoTo EDevuelveDesdeBD
     DevuelveDesdeBD = ""
     Cad = "Select " & kCampo
-    If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
+    If OtroCampo <> "" Then Cad = Cad & ", " & OtroCampo
     Cad = Cad & " FROM " & Ktabla
     Cad = Cad & " WHERE " & Kcodigo & " = "
     If Tipo = "" Then Tipo = "N"
@@ -905,7 +909,7 @@ Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As S
     Rs.Open Cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not Rs.EOF Then
         DevuelveDesdeBD = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+        If OtroCampo <> "" Then OtroCampo = DBLet(Rs.Fields(1))
     End If
     Rs.Close
     Set Rs = Nothing
@@ -1004,7 +1008,7 @@ End Function
 'LAURA
 'Este metodo sustituye a DevuelveDesdeBD
 'Funciona para claves primarias formadas por 3 campos
-Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As String, Kcodigo1 As String, valorCodigo1 As String, Optional tipo1 As String, Optional ByRef otroCampo As String, Optional KCodigo2 As String, Optional ValorCodigo2 As String, Optional tipo2 As String, Optional KCodigo3 As String, Optional ValorCodigo3 As String, Optional tipo3 As String) As String
+Public Function DevuelveDesdeBDNew(vBD As Byte, Ktabla As String, kCampo As String, Kcodigo1 As String, valorCodigo1 As String, Optional tipo1 As String, Optional ByRef OtroCampo As String, Optional KCodigo2 As String, Optional ValorCodigo2 As String, Optional tipo2 As String, Optional KCodigo3 As String, Optional ValorCodigo3 As String, Optional tipo3 As String) As String
 'IN: vBD --> Base de Datos a la que se accede
 Dim Rs As Recordset
 Dim Cad As String
@@ -1014,7 +1018,7 @@ On Error GoTo EDevuelveDesdeBDnew
     DevuelveDesdeBDNew = ""
 '    If valorCodigo1 = "" And ValorCodigo2 = "" Then Exit Function
     Cad = "Select " & kCampo
-    If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
+    If OtroCampo <> "" Then Cad = Cad & ", " & OtroCampo
     Cad = Cad & " FROM " & Ktabla
     If Kcodigo1 <> "" Then
         Cad = Cad & " WHERE " & Kcodigo1 & " = "
@@ -1094,7 +1098,7 @@ On Error GoTo EDevuelveDesdeBDnew
     
     If Not Rs.EOF Then
         DevuelveDesdeBDNew = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+        If OtroCampo <> "" Then OtroCampo = DBLet(Rs.Fields(1))
     End If
     Rs.Close
     Set Rs = Nothing
@@ -1108,7 +1112,7 @@ End Function
 
 
 'CESAR
-Public Function DevuelveDesdeBDnew2(kBD As Integer, kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional num As Byte, Optional ByRef otroCampo As String) As String
+Public Function DevuelveDesdeBDnew2(kBD As Integer, kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional num As Byte, Optional ByRef OtroCampo As String) As String
 Dim Rs As Recordset
 Dim Cad As String
 Dim Aux As String
@@ -1121,7 +1125,7 @@ On Error GoTo EDevuelveDesdeBDnew2
 DevuelveDesdeBDnew2 = ""
 
 Cad = "Select " & kCampo
-If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
+If OtroCampo <> "" Then Cad = Cad & ", " & OtroCampo
 Cad = Cad & " FROM " & Ktabla
 
 If Kcodigo <> "" Then Cad = Cad & " where "
@@ -1157,9 +1161,9 @@ End Select
 
 If Not Rs.EOF Then
     DevuelveDesdeBDnew2 = DBLet(Rs.Fields(0))
-    If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+    If OtroCampo <> "" Then OtroCampo = DBLet(Rs.Fields(1))
 Else
-     If otroCampo <> "" Then otroCampo = ""
+     If OtroCampo <> "" Then OtroCampo = ""
 End If
 Rs.Close
 Set Rs = Nothing

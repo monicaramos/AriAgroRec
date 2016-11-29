@@ -17,8 +17,8 @@ Begin VB.MDIForm MDIppal
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   12120
-      _ExtentX        =   21378
+      Width           =   18960
+      _ExtentX        =   33443
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -92,9 +92,9 @@ Begin VB.MDIForm MDIppal
       Height          =   585
       Left            =   0
       TabIndex        =   1
-      Top             =   7275
-      Width           =   12120
-      _ExtentX        =   21378
+      Top             =   13890
+      Width           =   18960
+      _ExtentX        =   33443
       _ExtentY        =   1032
       _Version        =   393216
       BeginProperty Panels {8E3867A5-8586-11D1-B16A-00C0F0283628} 
@@ -112,7 +112,7 @@ Begin VB.MDIForm MDIppal
          EndProperty
          BeginProperty Panel3 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             AutoSize        =   1
-            Object.Width           =   4789
+            Object.Width           =   16854
          EndProperty
          BeginProperty Panel4 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Alignment       =   1
@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:00"
+            TextSave        =   "19:09"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 

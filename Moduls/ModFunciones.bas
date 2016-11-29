@@ -34,6 +34,13 @@ Dim mTag As CTag
 Dim Carga As Boolean
 Dim Correcto As Boolean
 
+    Dim HayCamposIncorrectos As Boolean
+    Dim CampoIncorrecto As String
+
+    HayCamposIncorrectos = False
+    CampoIncorrecto = ""
+
+
     CompForm = False
     Set mTag = New CTag
     For Each Control In formulario.Controls
@@ -41,8 +48,15 @@ Dim Correcto As Boolean
         If TypeOf Control Is TextBox And Control.visible = True Then
             Carga = mTag.Cargar(Control)
             If Carga = True Then
-                Correcto = mTag.Comprobar(Control)
-                If Not Correcto Then Exit Function
+                Correcto = mTag.Comprobar(Control, True)
+                If Not Correcto Then
+                    Control.BackColor = vbErrorColor
+                    HayCamposIncorrectos = True
+                    CampoIncorrecto = Control.Name
+                    If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
+                Else
+                    Control.BackColor = vbWhite
+                End If
             Else
                 MsgBox "Carga de tag erronea en el control " & Control.Text & " -> " & Control.Tag
                 Exit Function
@@ -58,14 +72,26 @@ Dim Correcto As Boolean
 
                 Else
                     If mTag.Vacio = "N" And Control.ListIndex < 0 Then
-                            MsgBox "Seleccione una dato para: " & mTag.Nombre, vbExclamation
-                            Exit Function
+'                            MsgBox "Seleccione una dato para: " & mTag.Nombre, vbExclamation
+'                            Exit Function
+                        Control.BackColor = vbErrorColor
+                        HayCamposIncorrectos = True
+                        CampoIncorrecto = Control.Name
+                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
+                    Else
+                        Control.BackColor = vbWhite
+
                     End If
                 End If
             End If
         End If
     Next Control
-    CompForm = True
+    If HayCamposIncorrectos Then
+        MsgBox "Revise datos obligatorios o incorrectos", vbExclamation
+    End If
+    CompForm = Not HayCamposIncorrectos
+    
+'    CompForm = True
 End Function
 
 'Añade: CESAR
@@ -76,6 +102,12 @@ Dim mTag As CTag
 Dim Carga As Boolean
 Dim Correcto As Boolean
 
+    Dim HayCamposIncorrectos As Boolean
+    Dim CampoIncorrecto As String
+    
+    HayCamposIncorrectos = False
+    CampoIncorrecto = ""
+
     CompForm2 = False
     Set mTag = New CTag
     For Each Control In formulario.Controls
@@ -84,8 +116,16 @@ Dim Correcto As Boolean
             If (opcio = 0) Or ((opcio = 1) And (InStr(1, Control.Container.Name, "FrameAux")) = 0) Or ((opcio = 2) And (Control.Container.Name = nom_frame)) Then
                 Carga = mTag.Cargar(Control)
                 If Carga = True Then
-                    Correcto = mTag.Comprobar(Control)
-                    If Not Correcto Then Exit Function
+                    Correcto = mTag.Comprobar(Control, True)
+                    If Not Correcto Then
+                        Control.BackColor = vbErrorColor
+                        HayCamposIncorrectos = True
+                        CampoIncorrecto = Control.Name
+                        If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
+                    Else
+                        Control.BackColor = vbWhite
+                    End If
+                    
                 Else
                     MsgBox "Carga de tag erronea en el control " & Control.Text & " -> " & Control.Tag
                     Exit Function
@@ -104,8 +144,13 @@ Dim Correcto As Boolean
         
                         Else
                             If mTag.Vacio = "N" And Control.ListIndex < 0 Then
-                                    MsgBox "Seleccione una dato para: " & mTag.Nombre, vbExclamation
-                                    Exit Function
+'                                    MsgBox "Seleccione una dato para: " & mTag.Nombre, vbExclamation
+'                                    Exit Function
+                                Control.BackColor = vbErrorColor
+                                HayCamposIncorrectos = True
+                                CampoIncorrecto = Control.Name
+                                If IsArray(Control) Then CampoIncorrecto = CampoIncorrecto & "(" & Control.Index & ")"
+
                             End If
                         End If
                     End If
@@ -113,7 +158,13 @@ Dim Correcto As Boolean
             End If
         End If
     Next Control
-    CompForm2 = True
+    
+    If HayCamposIncorrectos Then
+        MsgBox "Revise datos obligatorios o incorrectos", vbExclamation
+    End If
+    CompForm2 = Not HayCamposIncorrectos
+    
+'    CompForm2 = True
 End Function
 
 

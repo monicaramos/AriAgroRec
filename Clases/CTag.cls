@@ -151,14 +151,14 @@ Public Property Let Maximo(ByVal vData As Long)
     mvarMaximo = vData
 End Property
 
-Public Property Get tabla() As String
+Public Property Get Tabla() As String
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado derecho de la asignacion
 'Syntax: Debug.Print X.Tabla
-    tabla = mvarTabla
+    Tabla = mvarTabla
 End Property
 
-Public Property Let tabla(ByVal vData As String)
+Public Property Let Tabla(ByVal vData As String)
 'se usa cuando se asigna un valor a la propiedad, en el
 'lado izquierdo de la asignacion
 'Syntax: X.Tabla = 5
@@ -318,7 +318,7 @@ End Function
 '****************************   COMPROBAR ********************************
 
 'Comprueba que la cadena que se le pasa cumple lo especificado en cada una de las propiedades.
-Public Function Comprobar(vObjetoComp As Object) As Boolean
+Public Function Comprobar(vObjetoComp As Object, Optional SinMensaje As Boolean) As Boolean
    
     
     If mvarCargado = False Then
@@ -334,7 +334,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             '-- No se permiten nulos.
             If vValor = "" Then
                 Mens = "El valor de " & mvarNombre & " no puede ser nulo."
-                MsgBox Mens, vbInformation, "Comprobador de campos"
+                If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                 Comprobar = False
                 Exit Function
             End If
@@ -352,7 +352,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
                 If vValor <> "" Then
                     If Not IsNumeric(vValor) Then
                         Mens = "El valor de " & mvarNombre & " debe ser numérico."
-                        MsgBox Mens, vbInformation, "Comprobador de campos"
+                        If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                         Comprobar = False
                         Exit Function
                     End If
@@ -364,7 +364,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
                     If vValor <> "" Then
                         If Not EsFechaOKString(CStr(vValor)) Then
                             Mens = "El valor de " & mvarNombre & " debe ser una fecha (dd/mm/aaaa)."
-                            MsgBox Mens, vbInformation, "Comprobador de campos"
+                            If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                             Comprobar = False
                             Exit Function
                         End If
@@ -373,7 +373,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             Case "H"
                 If Not IsDate(vValor) Then
                     Mens = "El valor de " & mvarNombre & " debe ser una hora (hh:mm)."
-                    MsgBox Mens, vbInformation, "Comprobador de campos"
+                    If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                     Comprobar = False
                     Exit Function
                 End If
@@ -381,7 +381,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             Case "FH"
                 If Not IsDate(vValor) Then
                     Mens = "El valor de " & mvarNombre & " debe ser fecha/hora (dd/MM/yyy HH:mm)."
-                    MsgBox Mens, vbInformation, "Comprobador de campos"
+                    If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                     Comprobar = False
                     Exit Function
                 End If
@@ -393,7 +393,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             If VacioMin = False Then
                   If Val(vValor) < mvarMinimo Then
                       Mens = "El valor de " & mvarNombre & " debe ser mayor o igual que " & mvarMinimo
-                      MsgBox Mens, vbInformation, "Comprobador de campos"
+                      If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                       Comprobar = False
                       Exit Function
                   End If
@@ -403,7 +403,7 @@ Public Function Comprobar(vObjetoComp As Object) As Boolean
             If VacioMax = False Then
                   If Val(vValor) > mvarMaximo Then
                       Mens = "El valor de " & mvarNombre & " debe ser menor o igual que " & Format(mvarMaximo, mvarFormato)
-                      MsgBox Mens, vbInformation, "Comprobador de campos"
+                      If Not SinMensaje Then MsgBox Mens, vbInformation, "Comprobador de campos"
                       Comprobar = False
                       Exit Function
                   End If
