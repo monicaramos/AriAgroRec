@@ -4681,7 +4681,7 @@ Dim Sql As String
     
     If enlaza Then
         Sql = Sql & " and " & ObtenerWhereCP(False)
-        If Opcion = 1 Then Sql = Sql & " AND numnotac=" & Data3.Recordset.Fields!Numnotac
+        If Opcion = 1 Then Sql = Sql & " AND numnotac=" & Data3.Recordset.Fields!numnotac
     Else
         Sql = Sql & " and numalbar = -1"
     End If

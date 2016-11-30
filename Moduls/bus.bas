@@ -145,6 +145,10 @@ Public ObsFactura As String ' Observaciones de la factura de anticipo/liquidacio
 
 Public Const SerieFraPro = "1"
 Public vvTrabajadores As String
+Public DireccionAyuda As String
+
+
+
 
 'Inicio Aplicación
 Public Sub Main()
@@ -1512,6 +1516,9 @@ On Error Resume Next
     FormatoDescuento = "#0.00" 'Decima(4,2)
 
     teclaBuscar = 43
+
+    DireccionAyuda = "http://help-ariagro.ariadnasw.com/"
+
 
     InicializarFormatos
 

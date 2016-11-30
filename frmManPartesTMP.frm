@@ -17,6 +17,20 @@ Begin VB.Form frmManPartesTMP
    ScaleWidth      =   7290
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   290
+      Index           =   4
+      Left            =   5610
+      MaxLength       =   12
+      TabIndex        =   14
+      Tag             =   "Linea|N|N|||tmpliquidacion|contador|0||"
+      Text            =   "contador"
+      Top             =   4980
+      Width           =   900
+   End
    Begin VB.TextBox txtAux2 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
@@ -480,14 +494,14 @@ Dim b As Boolean
     
     txtAux(1).visible = (SoloTrabajador = 0)
     txtAux(2).visible = (SoloTrabajador = 0)
-    
+    txtAux(4).visible = False
     'el codigo de usuario no quiero mostrarlo
 '    txtAux(3).visible = False
     
     txtAux2(2).visible = Not b Or Modo = 4
     btnBuscar(0).visible = Not b
 
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -562,6 +576,12 @@ Private Sub BotonAnyadir()
     txtAux2(2).Text = ""
     
     txtAux(3).Text = vUsu.Codigo
+    
+    
+    If SoloTrabajador = 1 Then
+        NumF = SugerirCodigoSiguienteStr("tmpliquidacion", "contador", "codusu = " & vUsu.Codigo)
+        txtAux(4).Text = NumF
+    End If
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -659,7 +679,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from tmpliquidacion where codvarie=" & adodc1.Recordset!CodVarie
+        Sql = "Delete from tmpliquidacion where codvarie=" & adodc1.Recordset!codvarie
         Sql = Sql & " and codusu = " & vUsu.Codigo
         conn.Execute Sql
         CargaGrid CadB
@@ -885,6 +905,9 @@ Dim Sql As String
     txtAux(2).Enabled = (SoloTrabajador = 0)
     txtAux(2).visible = (SoloTrabajador = 0)
         
+    ' el numero de linea para saber el orden de introduccion
+    txtAux(4).Enabled = (SoloTrabajador = 1)
+    txtAux(4).visible = (SoloTrabajador = 1)
     
     CadB = ""
     CargaGrid
@@ -922,7 +945,7 @@ Dim Rs As ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        vvTrabajadores = vvTrabajadores & DBLet(Rs!CodVarie, "N") & ","
+        vvTrabajadores = vvTrabajadores & DBLet(Rs!codvarie, "N") & ","
         Rs.MoveNext
     Wend
     
@@ -1018,7 +1041,11 @@ Private Sub CargaGrid(Optional vSQL As String)
     
     
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY tmpliquidacion.codvarie"
+    If SoloTrabajador = 1 Then
+        Sql = Sql & " ORDER BY tmpliquidacion.contador"
+    Else
+        Sql = Sql & " ORDER BY tmpliquidacion.codvarie"
+    End If
     '**************************************************************++
     
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez

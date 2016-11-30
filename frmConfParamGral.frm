@@ -5,23 +5,73 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmConfParamGral 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Datos de Empresa"
-   ClientHeight    =   6375
+   ClientHeight    =   6615
    ClientLeft      =   45
-   ClientTop       =   735
+   ClientTop       =   435
    ClientWidth     =   8070
    Icon            =   "frmConfParamGral.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6375
+   ScaleHeight     =   6615
    ScaleWidth      =   8070
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   210
+      TabIndex        =   34
+      Top             =   30
+      Width           =   1365
+      Begin VB.CheckBox chkVistaPrevia 
+         Caption         =   "Vista previa"
+         Height          =   195
+         Left            =   3750
+         TabIndex        =   35
+         Top             =   270
+         Visible         =   0   'False
+         Width           =   1215
+      End
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   150
+         TabIndex        =   36
+         Top             =   150
+         Width           =   1020
+         _ExtentX        =   1799
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Añadir"
+               Object.Tag             =   "1"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+         EndProperty
+      End
+   End
    Begin TabDlg.SSTab SSTab1 
       Height          =   4950
       Left            =   180
-      TabIndex        =   21
-      Top             =   765
+      TabIndex        =   20
+      Top             =   825
       Width           =   7545
       _ExtentX        =   13309
       _ExtentY        =   8731
@@ -30,6 +80,15 @@ Begin VB.Form frmConfParamGral
       TabsPerRow      =   2
       TabHeight       =   520
       WordWrap        =   0   'False
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
       TabCaption(0)   =   "Datos empresa"
       TabPicture(0)   =   "frmConfParamGral.frx":000C
       Tab(0).ControlEnabled=   -1  'True
@@ -85,12 +144,12 @@ Begin VB.Form frmConfParamGral
       TabCaption(1)   =   "Datos Campaña"
       TabPicture(1)   =   "frmConfParamGral.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label21"
-      Tab(1).Control(3)=   "imgFec(0)"
-      Tab(1).Control(4)=   "text1(12)"
-      Tab(1).Control(5)=   "text1(11)"
+      Tab(1).Control(0)=   "text1(11)"
+      Tab(1).Control(1)=   "text1(12)"
+      Tab(1).Control(2)=   "imgFec(0)"
+      Tab(1).Control(3)=   "Label21"
+      Tab(1).Control(4)=   "imgFec(1)"
+      Tab(1).Control(5)=   "Label2"
       Tab(1).ControlCount=   6
       Begin VB.TextBox text1 
          BeginProperty Font 
@@ -113,25 +172,44 @@ Begin VB.Form frmConfParamGral
       End
       Begin VB.TextBox text1 
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   11
-         Left            =   -73290
+         Left            =   -73020
          MaxLength       =   10
          TabIndex        =   11
          Tag             =   "F.Inicio Campaña|F|N|||empresas|fechaini|dd/mm/yyyy||"
+         Text            =   "0000000000"
          Top             =   765
-         Width           =   1200
+         Width           =   1320
       End
       Begin VB.TextBox text1 
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
-         Left            =   -73290
+         Left            =   -73020
          MaxLength       =   10
          TabIndex        =   12
          Tag             =   "F.Fin Campaña|F|N|||empresas|fechafin|dd/mm/yyyy||"
          Top             =   1260
-         Width           =   1200
+         Width           =   1290
       End
       Begin VB.TextBox text1 
          BeginProperty Font 
@@ -337,7 +415,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   11
          Left            =   510
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   4440
          Width           =   1080
       End
@@ -345,7 +423,7 @@ Begin VB.Form frmConfParamGral
          Enabled         =   0   'False
          Height          =   240
          Index           =   0
-         Left            =   -73560
+         Left            =   -73320
          Picture         =   "frmConfParamGral.frx":0044
          ToolTipText     =   "Buscar fecha"
          Top             =   765
@@ -354,17 +432,26 @@ Begin VB.Form frmConfParamGral
       End
       Begin VB.Label Label21 
          Caption         =   "Fecha Inicio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   -74640
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   765
-         Width           =   975
+         Width           =   1695
       End
       Begin VB.Image imgFec 
          Enabled         =   0   'False
          Height          =   240
          Index           =   1
-         Left            =   -73560
+         Left            =   -73320
          Picture         =   "frmConfParamGral.frx":00CF
          ToolTipText     =   "Buscar fecha"
          Top             =   1260
@@ -373,9 +460,18 @@ Begin VB.Form frmConfParamGral
       End
       Begin VB.Label Label2 
          Caption         =   "Fecha Fin"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   -74640
-         TabIndex        =   32
+         TabIndex        =   31
          Top             =   1260
          Width           =   1110
       End
@@ -393,7 +489,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   1
          Left            =   525
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   735
          Width           =   1035
       End
@@ -411,7 +507,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   2
          Left            =   525
-         TabIndex        =   30
+         TabIndex        =   29
          Top             =   1205
          Width           =   1005
       End
@@ -429,7 +525,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   3
          Left            =   525
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   1675
          Width           =   885
       End
@@ -447,7 +543,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   4
          Left            =   2550
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   1665
          Width           =   975
       End
@@ -465,7 +561,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   5
          Left            =   525
-         TabIndex        =   27
+         TabIndex        =   26
          Top             =   2145
          Width           =   1005
       End
@@ -483,7 +579,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   6
          Left            =   525
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   2615
          Width           =   495
       End
@@ -501,7 +597,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   7
          Left            =   525
-         TabIndex        =   25
+         TabIndex        =   24
          Top             =   3085
          Width           =   975
       End
@@ -519,7 +615,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   8
          Left            =   4320
-         TabIndex        =   24
+         TabIndex        =   23
          Top             =   3045
          Width           =   465
       End
@@ -537,7 +633,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   9
          Left            =   525
-         TabIndex        =   23
+         TabIndex        =   22
          Top             =   3555
          Width           =   600
       End
@@ -555,7 +651,7 @@ Begin VB.Form frmConfParamGral
          Height          =   255
          Index           =   10
          Left            =   525
-         TabIndex        =   22
+         TabIndex        =   21
          Top             =   4025
          Width           =   690
       End
@@ -582,24 +678,33 @@ Begin VB.Form frmConfParamGral
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   6585
       TabIndex        =   14
-      Top             =   5850
+      Top             =   6000
       Width           =   1035
    End
    Begin VB.Frame Frame1 
-      Height          =   540
+      Height          =   630
       Left            =   180
-      TabIndex        =   19
+      TabIndex        =   18
       Top             =   5820
-      Width           =   2355
+      Width           =   2595
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -608,26 +713,44 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   20
+         TabIndex        =   19
          Top             =   240
          Width           =   1920
       End
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   5430
       TabIndex        =   13
-      Top             =   5850
+      Top             =   6000
       Visible         =   0   'False
       Width           =   1035
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "&Salir"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   6570
       TabIndex        =   16
-      Top             =   5880
+      Top             =   6000
       Width           =   1035
    End
    Begin VB.TextBox text1 
@@ -640,37 +763,6 @@ Begin VB.Form frmConfParamGral
       Text            =   "1"
       Top             =   1200
       Width           =   645
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   420
-      Left            =   0
-      TabIndex        =   18
-      Top             =   0
-      Width           =   8070
-      _ExtentX        =   14235
-      _ExtentY        =   741
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   4
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Añadir"
-            Object.Tag             =   "1"
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-      EndProperty
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
@@ -719,6 +811,25 @@ Begin VB.Form frmConfParamGral
       EndProperty
       _Version        =   393216
    End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   7320
+      TabIndex        =   37
+      Top             =   150
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
+   End
    Begin VB.Label Label1 
       Caption         =   "Código"
       Height          =   255
@@ -730,6 +841,8 @@ Begin VB.Form frmConfParamGral
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnAñadir 
          Caption         =   "&Añadir"
       End
@@ -753,6 +866,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
+Private Const IdPrograma = 101
 
 Private NombreTabla As String  'Nombre de la tabla o de la
 Private Ordenacion As String
@@ -842,7 +957,7 @@ Private Sub Form_Load()
 Dim i As Integer
 
     'Icono del formulario
-'    Me.Icon = frmPpal.Icon
+    Me.Icon = frmPpal.Icon
 
     ' ICONITOS DE LA BARRA
     With Me.Toolbar1
@@ -850,6 +965,12 @@ Dim i As Integer
         .Buttons(1).Image = 3   'Anyadir
         .Buttons(2).Image = 4   'Modificar
         .Buttons(4).Image = 11  'Salir
+    End With
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
     End With
     
     'carga IMAGES de mail
@@ -1000,9 +1121,9 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgFec_Click (Indice)
+    imgFec_Click (indice)
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
@@ -1142,3 +1263,9 @@ Private Sub mnAñadir_Click()
     BotonAnyadir
 End Sub
 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub

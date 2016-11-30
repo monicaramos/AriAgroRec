@@ -2325,19 +2325,22 @@ On Error GoTo EBLOQUEADesdeFormulario
     Screen.MousePointer = vbHourglass
     For Each Control In formulario.Controls
         'Si es texto monta esta parte de sql
-        If TypeOf Control Is TextBox And Control.visible = True Then
-            If Control.Tag <> "" Then
-
-                mTag.Cargar Control
-                If mTag.Cargado Then
-                    'Sea para el where o para el update esto lo necesito
-                    Aux = ValorParaSQL(Control.Text, mTag)
-                    'Si es campo clave NO se puede modificar y se utiliza como busqueda
-                    'dentro del WHERE
-                    If mTag.EsClave Then
-                        'Lo pondremos para el WHERE
-                         If cadWHERE <> "" Then cadWHERE = cadWHERE & " AND "
-                         cadWHERE = cadWHERE & "(" & mTag.columna & " = " & Aux & ")"
+        If TypeOf Control Is TextBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+    
+                    mTag.Cargar Control
+                    If mTag.Cargado Then
+                        'Sea para el where o para el update esto lo necesito
+                        
+                        Aux = ValorParaSQL(Control.Text, mTag)
+                        'Si es campo clave NO se puede modificar y se utiliza como busqueda
+                        'dentro del WHERE
+                        If mTag.EsClave Then
+                            'Lo pondremos para el WHERE
+                             If cadWHERE <> "" Then cadWHERE = cadWHERE & " AND "
+                             cadWHERE = cadWHERE & "(" & mTag.columna & " = " & Aux & ")"
+                        End If
                     End If
                 End If
             End If
