@@ -1354,10 +1354,10 @@ End Sub
 
 Private Sub Form_Load()
 Dim Sql2 As String
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
-
-
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM

@@ -1308,6 +1308,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     

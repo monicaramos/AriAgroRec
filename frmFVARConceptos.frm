@@ -1174,6 +1174,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     '******* repasar si n'hi ha botó d'imprimir o no******
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM

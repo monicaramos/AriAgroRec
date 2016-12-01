@@ -726,6 +726,10 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
     
     ' ICONETS DE LA BARRA
@@ -1576,7 +1580,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE codvarie=" & Data1.Recordset!CodVarie
+    vWhere = " WHERE codvarie=" & Data1.Recordset!codvarie
         ' ***********************************************************************
         
     ' ***** elimina les llínies ****

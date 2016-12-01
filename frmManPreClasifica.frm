@@ -802,7 +802,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!Numnotac
+        Sql = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!numnotac
         
         conn.Execute Sql
         CargaGrid CadB
@@ -1059,6 +1059,10 @@ End Sub
 
 Private Sub Form_Load()
     PrimeraVez = True
+    
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+    
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
@@ -1468,11 +1472,11 @@ Dim Sql2 As String
     While Not Rs.EOF
         'Comprobamos que el numero de nota no exista ya en rclasifica  or rhisfruta_entradas
         YaExiste = False
-        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
         If TotalRegistros(Sql) <> 0 Then
             YaExiste = True
         Else
-            Sql = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!numnotac, "N")
             If TotalRegistros(Sql) <> 0 Then
                 YaExiste = True
             End If
@@ -1480,17 +1484,17 @@ Dim Sql2 As String
         
         If YaExiste Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!CodVarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",0)"
             
             conn.Execute Sql2
         End If
         
         'Comprobamos que exista la variedad
-        Sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!CodVarie, "N")
+        Sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
         If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!CodVarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",1)"
             
             conn.Execute Sql2
@@ -1500,7 +1504,7 @@ Dim Sql2 As String
         Sql = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
         If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!CodVarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",2)"
             
             conn.Execute Sql2
@@ -1508,10 +1512,10 @@ Dim Sql2 As String
         
         'Comprobamos que exista el campo para el socio / variedad
         Sql = "select count(*) from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
-        Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!CodVarie, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N")
         If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!Numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!CodVarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",3)"
             
             conn.Execute Sql2

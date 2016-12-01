@@ -1590,6 +1590,8 @@ Dim H As Integer, W As Integer
 Dim i As Integer
 Dim indFrame As Single
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me

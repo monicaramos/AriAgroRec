@@ -345,7 +345,7 @@ Dim Cliente As String
     Sql = Sql & ") VALUES ("
     Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
     Sql = Sql & "," & DBSet(Observaciones, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGROREC'"
+    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
     miConexion.Execute Sql & ")"
     
     'Lineas fijas, es decir la linea de cliente, importes y tal y tal
@@ -780,7 +780,7 @@ Dim Importe As Currency
     Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
     Cad = Observaciones & vbCrLf & "Factura interna: " & Format(RCab!numfactu, "00000") & " - " & RCab!fecfactu
     Sql = Sql & "," & DBSet(Cad, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGROREC'"
+    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
     Sql = Sql & ")"
     Cad = ""
     miConexion.Execute Sql
@@ -1058,7 +1058,7 @@ Dim NoSumaIVA As Boolean
     Sql = Sql & ") VALUES ("
     Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
     Sql = Sql & "," & DBSet(Observaciones, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGROREC'"
+    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
     Sql = Sql & ")"
     miConexion.Execute Sql
     
@@ -2085,7 +2085,7 @@ Private Function DigitosNivel(Nivel) As Integer
 End Function
 
 
-Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef otroCampo As String) As String
+Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodigo As String, ValorCodigo As String, Optional Tipo As String, Optional ByRef OtroCampo As String) As String
     Dim Rs As Recordset
     Dim Cad As String
     Dim Aux As String
@@ -2093,7 +2093,7 @@ Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodi
     On Error GoTo EDevuelveDesdeBD
     DevuelveDesdeBDModulo = ""
     Cad = "Select " & kCampo
-    If otroCampo <> "" Then Cad = Cad & ", " & otroCampo
+    If OtroCampo <> "" Then Cad = Cad & ", " & OtroCampo
     Cad = Cad & " FROM " & Ktabla
     Cad = Cad & " WHERE " & Kcodigo & " = "
     If Tipo = "" Then Tipo = "N"
@@ -2118,7 +2118,7 @@ Private Function DevuelveDesdeBDModulo(kCampo As String, Ktabla As String, Kcodi
     
     If Not Rs.EOF Then
         DevuelveDesdeBDModulo = DBLet(Rs.Fields(0))
-        If otroCampo <> "" Then otroCampo = DBLet(Rs.Fields(1))
+        If OtroCampo <> "" Then OtroCampo = DBLet(Rs.Fields(1))
     End If
     Rs.Close
     Set Rs = Nothing

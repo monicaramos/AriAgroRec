@@ -1703,6 +1703,11 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
     
     '[Monica]08/05/2012: añadida Escalona que funciona como Utxera

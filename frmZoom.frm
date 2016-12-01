@@ -81,6 +81,9 @@ End Sub
 
 Private Sub Form_Load()
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     'obtener el campo correspondiente y mostrarlo en el text
     Text1(0).Text = pValor
     Label1.Caption = pTitulo

@@ -746,6 +746,10 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
     limpiar Me
     
@@ -1268,7 +1272,7 @@ Dim NumReg As Long
                         rs3.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         
                         If Not rs3.EOF Then
-                            If DBLet(rs3!CodVarie, "N") <> DBLet(Rs!CodVarie, "N") Then
+                            If DBLet(rs3!codvarie, "N") <> DBLet(Rs!codvarie, "N") Then
                                 b = False
                                 Mens = "El campo " & Rs2!codcampo & " no es de la misma variedad que el campo " & Rs!codcampo
                             Else
@@ -1295,7 +1299,7 @@ Dim NumReg As Long
                                 Sql4 = Sql4 & "cobradosn,prestimado,coddeposito,codpobla,transportadopor) values ("
                                 Sql4 = Sql4 & DBSet(numalbar, "N") & ","
                                 Sql4 = Sql4 & DBSet(Rs!Fecalbar, "F") & ","
-                                Sql4 = Sql4 & DBSet(Rs!CodVarie, "N") & ","
+                                Sql4 = Sql4 & DBSet(Rs!codvarie, "N") & ","
                                 Sql4 = Sql4 & DBSet(rs3!Codsocio, "N") & ","
                                 Sql4 = Sql4 & DBSet(Rs2!codcampo, "N") & ","
                                 Sql4 = Sql4 & DBSet(Rs!TipoEntr, "N") & ","
@@ -1462,12 +1466,12 @@ Dim NumNota As Long
         tImpRecol = tImpRecol - lImpRecol
         tImppenal = tImppenal - lImppenal
        
-        NumNota = Rs!Numnotac
+        NumNota = Rs!numnotac
         
         Sql2 = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,observac,imptrans,"
         Sql2 = Sql2 & "impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat) values ("
         Sql2 = Sql2 & DBSet(numalbar, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!Numnotac, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!numnotac, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!FechaEnt, "F") & ","
         Sql2 = Sql2 & DBSet(Rs!horaentr, "FH") & ","
         Sql2 = Sql2 & DBSet(lKilosBru, "N") & ","
@@ -1545,7 +1549,7 @@ Dim Calid As Long
         
         Sql2 = "insert into rhisfruta_clasif (numalbar,codvarie,codcalid,kilosnet) values ("
         Sql2 = Sql2 & DBSet(numalbar, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!CodVarie, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!codvarie, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!codcalid, "N") & ","
         Sql2 = Sql2 & DBSet(lKilosNet, "N", "S") & ")"
         
@@ -1661,7 +1665,7 @@ Dim Sql2 As String
         Sql2 = Sql2 & ", imprecol = imprecol - " & DBSet(Rs!ImpREC, "N")
         Sql2 = Sql2 & ", imppenal = imppenal - " & DBSet(Rs!imppen, "N")
         Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N")
-        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
     
         conn.Execute Sql2
         Rs.MoveNext
@@ -1699,7 +1703,7 @@ Dim Calid As Long
     
     While Not Rs.EOF
         Sql2 = "update rhisfruta_clasif set kilosnet = kilosnet - " & DBSet(Rs!KilosNet, "N")
-        Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N") & " and codvarie = " & DBSet(Rs!CodVarie, "N")
+        Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N")
         Sql2 = Sql2 & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         conn.Execute Sql2

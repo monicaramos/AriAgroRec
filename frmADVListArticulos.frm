@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmADVListArticulos 
    BorderStyle     =   3  'Fixed Dialog
@@ -436,7 +436,7 @@ Attribute frmF.VB_VarHelpID = -1
 
 '---- Variables para el INFORME ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String 'Cadena con los parametros para Crystal Report
+Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private cadTitulo As String 'Titulo para el frmImprimir
@@ -466,19 +466,19 @@ Private Sub cmdAceptarArtic_Click()
 'Listado de Articulos
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
-Dim cadTABLA As String, cOrden As String
+Dim cadTabla As String, cOrden As String
 Dim campo As String
 Dim Opcion As Byte, numOp As Byte
 
     InicializarVbles
     
     cadNombreRPT = "rADVListArticulos.rpt"  'Nombre fichero .rpt a Imprimir
-    cadTABLA = "advartic"
+    cadTabla = "advartic"
     
     '===================================================
     '============ PARAMETROS ===========================
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     
@@ -486,13 +486,13 @@ Dim Opcion As Byte, numOp As Byte
     '================= FORMULA ==========================
     'Cadena para seleccion D/H FAMILIA
     '--------------------------------------------
-    cDesde = Trim(txtCodigo(62).Text)
-    cHasta = Trim(txtCodigo(63).Text)
+    cDesde = Trim(txtcodigo(62).Text)
+    cHasta = Trim(txtcodigo(63).Text)
     nDesde = txtNombre(62).Text
     nHasta = txtNombre(63).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & cadTABLA & ".codfamia}"
+        Codigo = "{" & cadTabla & ".codfamia}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFamilia= """) Then Exit Sub
     End If
@@ -500,33 +500,33 @@ Dim Opcion As Byte, numOp As Byte
     
     'Cadena para seleccion D/H PROVEEDOR
     '--------------------------------------------
-    cDesde = Trim(txtCodigo(66).Text)
-    cHasta = Trim(txtCodigo(67).Text)
+    cDesde = Trim(txtcodigo(66).Text)
+    cHasta = Trim(txtcodigo(67).Text)
     nDesde = txtNombre(66).Text
     nHasta = txtNombre(67).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & cadTABLA & ".codprove}"
+        Codigo = "{" & cadTabla & ".codprove}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHProveedor= """) Then Exit Sub
     End If
     
     'Cadena para seleccion TIPO ARTICULO
     '--------------------------------------------
-    If combo1(0).ListIndex <> 3 Then
-        If AnyadirAFormula(cadFormula, "{advartic.tipoprod}=" & combo1(0).ListIndex) = False Then Exit Sub
-        If AnyadirAFormula(cadSelect, "{advartic.tipoprod}=" & combo1(0).ListIndex) = False Then Exit Sub
+    If Combo1(0).ListIndex <> 3 Then
+        If AnyadirAFormula(cadFormula, "{advartic.tipoprod}=" & Combo1(0).ListIndex) = False Then Exit Sub
+        If AnyadirAFormula(cadSelect, "{advartic.tipoprod}=" & Combo1(0).ListIndex) = False Then Exit Sub
     End If
     
     'Cadena para seleccion D/H ARTICULO
     '--------------------------------------------
-    cDesde = Trim(txtCodigo(70).Text)
-    cHasta = Trim(txtCodigo(71).Text)
+    cDesde = Trim(txtcodigo(70).Text)
+    cHasta = Trim(txtcodigo(71).Text)
     nDesde = txtNombre(70).Text
     nHasta = txtNombre(71).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & cadTABLA & ".codartic}"
+        Codigo = "{" & cadTabla & ".codartic}"
         TipCod = "T"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHArticulo= """) Then Exit Sub
     End If
@@ -545,43 +545,43 @@ Dim Opcion As Byte, numOp As Byte
         Select Case Opcion
             Case 1 'El group2 es el Proveedor
                 campo = "pTitulo1=""" & ListView2.ListItems(3).Text & """" '3
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
                 
                 campo = "pTitulo2=""" & ListView2.ListItems(3).Text & """" '4
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
             Case 2 'El Group3 es el Proveedor
                 campo = "pTitulo1=""" & ListView2.ListItems(2).Text & """" '2
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
                 
                 campo = "pTitulo2=""" & ListView2.ListItems(3).Text & """" '4
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
             Case 3, 0 'El Group4 es el Proveedor
                       '0 'El Group1 es el Proveedor
                 campo = "pTitulo1=""" & ListView2.ListItems(2).Text & """" '2
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
                 
                 campo = "pTitulo2=""" & ListView2.ListItems(3).Text & """" '3
-                cadParam = cadParam & campo & "|"
+                CadParam = CadParam & campo & "|"
                 numParam = numParam + 1
                 
                 If Opcion = 0 Then
                     campo = "pTitulo3=""" & ListView2.ListItems(3).Text & """" '4
-                    cadParam = cadParam & campo & "|"
+                    CadParam = CadParam & campo & "|"
                     numParam = numParam + 1
                 End If
         End Select
    
     'Parametro Orden del Informe
     campo = "pOrden=" & Opcion
-    cadParam = cadParam & campo & "|"
+    CadParam = CadParam & campo & "|"
     numParam = numParam + 1
     
-    If HayRegParaInforme(cadTABLA, cadSelect) Then
+    If HayRegParaInforme(cadTabla, cadSelect) Then
        LlamarImprimir
     End If
     
@@ -605,15 +605,19 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtCodigo(62)
+        PonerFoco txtcodigo(62)
     End If
     Screen.MousePointer = vbDefault
 End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer, w As Integer
+Dim H As Integer, W As Integer
 Dim i As Integer
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
 
     PrimeraVez = True
     limpiar Me
@@ -636,52 +640,52 @@ Dim i As Integer
     cadTitulo = ""
     cadNombreRPT = ""
     
-    ListadosAlmacen h, w
+    ListadosAlmacen H, W
     
     CargaCombo
     
-    combo1(0).ListIndex = 3
+    Combo1(0).ListIndex = 3
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.cmdCancel(indFrame).Cancel = True
-    Me.Width = w + 70
-    Me.Height = h + 350
+    Me.Width = W + 70
+    Me.Height = H + 350
 End Sub
 
 
 
 Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Articulos
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+    txtcodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmFam_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Familias
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmMarcas_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Marcas
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmPro_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Proveedores
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTArt_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Tipo de articulos
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -694,7 +698,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             indCodigo = Index + 43
             Set frmFam = New frmComercial
             
-            AyudaFamiliasADV frmFam, txtCodigo(indCodigo).Text
+            AyudaFamiliasADV frmFam, txtcodigo(indCodigo).Text
             
             Set frmFam = Nothing
             
@@ -712,19 +716,19 @@ Private Sub imgBuscar_Click(Index As Integer)
             
             Set frmPro = New frmComercial
             
-            AyudaProveedoresCom frmPro, txtCodigo(indCodigo).Text
+            AyudaProveedoresCom frmPro, txtcodigo(indCodigo).Text
             
             Set frmPro = Nothing
             
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
     Screen.MousePointer = vbDefault
 End Sub
 
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -737,14 +741,14 @@ End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Tabla As String
-Dim CodCampo As String, nomCampo As String
+Dim codcampo As String, nomCampo As String
 Dim TipCampo As String, Formato As String
 Dim Titulo As String
 Dim EsNomCod As Boolean 'Si es campo Cod-Descripcion llama a PonerNombreDeCod
 
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -754,29 +758,29 @@ Dim EsNomCod As Boolean 'Si es campo Cod-Descripcion llama a PonerNombreDeCod
         
     Select Case Index
         Case 70, 71  'Cod. ARTICULO
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "advartic", "nomartic", "codartic", "T")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "advartic", "nomartic", "codartic", "T")
         
         Case 62, 63 'Cod. FAMILIA
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "advfamia", "nomfamia", "codfamia", "N")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "advfamia", "nomfamia", "codfamia", "N")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000")
         
         Case 66, 67 'PROVEEDOR
-            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "proveedor", "nomprove")
-            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "proveedor", "nomprove")
+            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
         
     End Select
     
 End Sub
 
-Private Sub ponerFrameArticulosVisible(visible As Boolean, ByRef h As Integer, ByRef w As Integer)
+Private Sub ponerFrameArticulosVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Frame para el informe de Articulos, de tabla: sartic
 Dim b As Boolean
 
     b = True
-    h = 6620
-    w = 9435
+    H = 6620
+    W = 9435
     
-    PonerFrameVisible Me.FrameInfArticulos, visible, h, w
+    PonerFrameVisible Me.FrameInfArticulos, visible, H, W
 
     If visible = True Then
         'visible orden campos si opcionlistado=6
@@ -806,7 +810,7 @@ End Sub
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadParam = ""
+    CadParam = ""
     numParam = 0
     conSubRPT = False
 End Sub
@@ -835,7 +839,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -846,7 +850,7 @@ End Function
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .Titulo = cadTitulo
@@ -869,25 +873,25 @@ Dim NomTipo As String
     
     Select Case cadgrupo
         Case "Familia"
-            cadParam = cadParam & campo & "{advartic.codfamia}" & "|"
+            CadParam = CadParam & campo & "{advartic.codfamia}" & "|"
             If numGrupo = 1 Then
-                cadParam = cadParam & nomCampo & " ""FAMILIA: "" & " & " totext({advartic.codfamia},""0000"") & " & """  """ & " & {advfamia.nomfamia}" & "|"
+                CadParam = CadParam & nomCampo & " ""FAMILIA: "" & " & " totext({advartic.codfamia},""0000"") & " & """  """ & " & {advfamia.nomfamia}" & "|"
             Else
-                cadParam = cadParam & nomCampo & " totext({advartic.codfamia},""0000"") & " & """ """ & " & {advfamia.nomfamia}" & "|"
+                CadParam = CadParam & nomCampo & " totext({advartic.codfamia},""0000"") & " & """ """ & " & {advfamia.nomfamia}" & "|"
             End If
             numParam = numParam + 1
         Case "Proveedor"
-            cadParam = cadParam & campo & "{advartic.codprove}" & "|"
+            CadParam = CadParam & campo & "{advartic.codprove}" & "|"
             If numGrupo = 1 Then
-                cadParam = cadParam & nomCampo & " ""PROVEEDOR: "" & " & " totext({advartic.codprove},""000000"") & " & """  """ & " & {proveedor.nomprove}" & "|"
+                CadParam = CadParam & nomCampo & " ""PROVEEDOR: "" & " & " totext({advartic.codprove},""000000"") & " & """  """ & " & {proveedor.nomprove}" & "|"
             Else
-                cadParam = cadParam & nomCampo & " totext({advartic.codprove},""000000"") & " & """ """ & " & {proveedor.nomprove}" & "|"
+                CadParam = CadParam & nomCampo & " totext({advartic.codprove},""000000"") & " & """ """ & " & {proveedor.nomprove}" & "|"
             End If
             numParam = numParam + 1
             PonerGrupo = numGrupo
         Case "Tipo Articulo"
-            cadParam = cadParam & campo & "{advartic.tipoprod}" & "|"
-            Select Case combo1(0).ListIndex
+            CadParam = CadParam & campo & "{advartic.tipoprod}" & "|"
+            Select Case Combo1(0).ListIndex
                 Case 0
                     NomTipo = "Producto"
                 Case 1
@@ -899,9 +903,9 @@ Dim NomTipo As String
             End Select
             
             If numGrupo = 1 Then
-                cadParam = cadParam & nomCampo & " ""TIPO ARTICULO: "" & {@nomTipo}" & "|"
+                CadParam = CadParam & nomCampo & " ""TIPO ARTICULO: "" & {@nomTipo}" & "|"
             Else
-                cadParam = cadParam & nomCampo & "{@nomTipo}" & "|"
+                CadParam = CadParam & nomCampo & "{@nomTipo}" & "|"
             End If
             numParam = numParam + 1
     End Select
@@ -909,9 +913,9 @@ Dim NomTipo As String
 End Function
 
 
-Private Sub ListadosAlmacen(h As Integer, w As Integer)
+Private Sub ListadosAlmacen(H As Integer, W As Integer)
    'Listado de Artículo
-    ponerFrameArticulosVisible True, h, w
+    ponerFrameArticulosVisible True, H, W
     CargarListViewOrden
     Codigo = "{advartic"
     indFrame = 11
@@ -925,16 +929,16 @@ Dim Fin As Integer
 Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    combo1(0).Clear
+    Combo1(0).Clear
 
-    combo1(0).AddItem "Producto"
-    combo1(0).ItemData(combo1(0).NewIndex) = 0
-    combo1(0).AddItem "Trabajo"
-    combo1(0).ItemData(combo1(0).NewIndex) = 1
-    combo1(0).AddItem "Varios"
-    combo1(0).ItemData(combo1(0).NewIndex) = 2
-    combo1(0).AddItem "Todos"
-    combo1(0).ItemData(combo1(0).NewIndex) = 3
+    Combo1(0).AddItem "Producto"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
+    Combo1(0).AddItem "Trabajo"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
+    Combo1(0).AddItem "Varios"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 2
+    Combo1(0).AddItem "Todos"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 3
 
 End Sub
 

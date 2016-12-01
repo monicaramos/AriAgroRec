@@ -236,15 +236,17 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim cad As String
+Dim Cad As String
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     Lanzado = False
     CargaICO
-    cad = Dir(App.Path & "\impre.dat", vbArchive)
+    Cad = Dir(App.Path & "\impre.dat", vbArchive)
 
     'ReestableceSoloImprimir = False
-    If cad = "" Then
+    If Cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1

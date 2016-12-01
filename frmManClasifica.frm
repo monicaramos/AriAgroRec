@@ -1842,6 +1842,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
  
     ' ICONETS DE LA BARRA
@@ -2985,7 +2988,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & Data1.Recordset!Numnotac
+    vWhere = " WHERE numnotac=" & Data1.Recordset!numnotac
     
     ' ***** elimina les llínies ****
     conn.Execute "DELETE FROM rclasifica_clasif " & vWhere
@@ -3356,7 +3359,7 @@ Dim Eliminar As Boolean
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_clasif "
-                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!CodVarie
+                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!codvarie
                 Sql = Sql & " and codcalid= " & Adoaux(Index).Recordset!codcalid
             End If
             
@@ -4102,7 +4105,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numnotac=" & Me.Data1.Recordset!Numnotac
+    vWhere = vWhere & " numnotac=" & Me.Data1.Recordset!numnotac
     
     ObtenerWhereCab = vWhere
 End Function
@@ -4159,7 +4162,7 @@ Dim Valor As Currency
 
     'total kilosnetos
     Sql = "select sum(kilosnet) from rclasifica_clasif "
-    Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
+    Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
     
     
     Text3(0).Text = TotalRegistros(Sql)
@@ -4172,7 +4175,7 @@ Dim Valor As Currency
     
     'total muestra
     Sql = "select sum(muestra) from rclasifica_clasif "
-    Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
+    Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
     
     
     Text3(1).Text = TotalRegistros(Sql)
@@ -4386,7 +4389,7 @@ Dim KilosNetos As Long
 
     On Error GoTo eCalcularKilosNetos
     
-    Sql = "select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!Numnotac
+    Sql = "select sum(muestra) from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!numnotac
 '[Monica]14/10/2011: lo dejo en la clasificacion automatica
 '    If vParamAplic.Cooperativa = 0 Then
 '        SQL = SQL & " and codcalid not in (select codcalid from rcalidad where codvarie = " & Me.Data1.Recordset!CodVarie
@@ -4403,7 +4406,7 @@ Dim KilosNetos As Long
     Set Rs = Nothing
     
     If TotalMuestra = 0 Then
-        Sql = "update rclasifica_clasif set kilosnet = " & ValorNulo & " where numnotac = " & Me.Data1.Recordset!Numnotac
+        Sql = "update rclasifica_clasif set kilosnet = " & ValorNulo & " where numnotac = " & Me.Data1.Recordset!numnotac
         conn.Execute Sql
         
         CargaGrid 0, True
@@ -4414,7 +4417,7 @@ Dim KilosNetos As Long
         Exit Sub
     End If
 
-    Sql = "select rclasifica_clasif.* from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!Numnotac
+    Sql = "select rclasifica_clasif.* from rclasifica_clasif where numnotac = " & Me.Data1.Recordset!numnotac
     '050509
 '    sql = sql & " and muestra <> 0"
     
@@ -4451,8 +4454,8 @@ Dim KilosNetos As Long
         
         vSQL = "update rclasifica_clasif set kilosnet = " & DBSet(KilosNet, "N", "S")
         vSQL = vSQL & ", muestra = " & DBSet(Rs!Muestra, "N", "S")
-        vSQL = vSQL & " where numnotac = " & DBSet(Rs!Numnotac, "N")
-        vSQL = vSQL & " and codvarie = " & DBSet(Rs!CodVarie, "N")
+        vSQL = vSQL & " where numnotac = " & DBSet(Rs!numnotac, "N")
+        vSQL = vSQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
         vSQL = vSQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
         
         conn.Execute vSQL
@@ -4467,16 +4470,16 @@ Dim KilosNetos As Long
     If TotalKilos <> Me.Data1.Recordset!KilosNet Then
         '[Monica]28/06/2011: si es Quatretonda la calidad de redondeo es la de maxima muestra no la de destrio
         If vParamAplic.Cooperativa = 7 Then
-            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!CodVarie, Me.Data1.Recordset!Numnotac, True)
+            vSQL = CalidadMaximaMuestraenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!numnotac, True)
         Else
-            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!CodVarie, Me.Data1.Recordset!Numnotac, True)
+            vSQL = CalidadDestrioenClasificacion(Me.Data1.Recordset!codvarie, Me.Data1.Recordset!numnotac, True)
         End If
         
         If vSQL <> "" Then Calidad = CInt(vSQL)
     
         Sql = "update rclasifica_clasif set kilosnet = kilosnet + (" & (Me.Data1.Recordset!KilosNet - TotalKilos) & ") "
-        Sql = Sql & " where numnotac = " & Data1.Recordset!Numnotac
-        Sql = Sql & " and codvarie = " & Data1.Recordset!CodVarie
+        Sql = Sql & " where numnotac = " & Data1.Recordset!numnotac
+        Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
         Sql = Sql & " and codcalid = " & DBSet(Calidad, "N")
     
         conn.Execute Sql
@@ -4785,7 +4788,7 @@ Dim Sql As String
     End If
     
     '[Monica]08/02/2012: si modifican variedad o socio o campo o fecha u hora y tienen traza
-    If b And (CLng(Data1.Recordset!CodVarie) <> CLng(Text1(3).Text) Or CLng(Data1.Recordset!Codsocio) <> CLng(Text1(4).Text) Or CLng(Data1.Recordset!codcampo) <> CLng(Text1(5).Text) Or _
+    If b And (CLng(Data1.Recordset!codvarie) <> CLng(Text1(3).Text) Or CLng(Data1.Recordset!Codsocio) <> CLng(Text1(4).Text) Or CLng(Data1.Recordset!codcampo) <> CLng(Text1(5).Text) Or _
              CStr(Data1.Recordset!FechaEnt) <> Text1(1).Text Or CStr(Data1.Recordset!horaentr) <> Text1(21).Text) Then
           MenError = "Actualizar Traza: "
           b = ActualizarTraza(Text1(0).Text, Text1(3).Text, Text1(4).Text, Text1(5).Text, Text1(1).Text, Text1(21).Text, MenError)

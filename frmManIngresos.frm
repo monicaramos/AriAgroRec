@@ -700,7 +700,7 @@ Dim temp As Boolean
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         Sql = "Delete from ringresos where codsocio=" & adodc1.Recordset!Codsocio
-        Sql = Sql & " and codvarie = " & adodc1.Recordset!CodVarie
+        Sql = Sql & " and codvarie = " & adodc1.Recordset!codvarie
         Sql = Sql & " and concepto = " & DBSet(adodc1.Recordset!Concepto, "T")
         conn.Execute Sql
         CargaGrid CadB
@@ -891,6 +891,8 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
     PrimeraVez = True
 
     With Me.Toolbar1

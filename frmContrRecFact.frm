@@ -1686,8 +1686,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
     
     ' ICONITOS DE LA BARRA
     With Me.Toolbar1

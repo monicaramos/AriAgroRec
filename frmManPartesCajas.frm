@@ -378,6 +378,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
     
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+    
     'ICONOS de La toolbar
     With Toolbar1
         .ImageList = frmPpal.imgListComun

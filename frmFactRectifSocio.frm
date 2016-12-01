@@ -432,6 +432,8 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -954,7 +956,7 @@ Dim Tipo As Integer
         Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
         Sql = Sql & DBSet(Rs!TipoIVA, "N") & ","
-        Sql = Sql & DBSet(Rs!Porc_Iva, "N") & ","
+        Sql = Sql & DBSet(Rs!porc_iva, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
         Sql = Sql & DBSet(Rs!TipoIRPF, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo

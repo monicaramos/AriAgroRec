@@ -1109,6 +1109,8 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
     PrimeraVez = True
 
     With Me.Toolbar1
@@ -1627,7 +1629,7 @@ Dim MenError As String
     
     
     '[Monica]08/02/2012: Si han modificado variedad socio o fecha en traza
-    If CLng(adodc1.Recordset!CodVarie) <> CLng(txtAux(3).Text) Or CLng(adodc1.Recordset!Codsocio) <> CLng(txtAux(2).Text) Or _
+    If CLng(adodc1.Recordset!codvarie) <> CLng(txtAux(3).Text) Or CLng(adodc1.Recordset!Codsocio) <> CLng(txtAux(2).Text) Or _
        DBLet(adodc1.Recordset!Fecalbar, "F") <> CDate(txtAux(1).Text) Then
          MenError = "No se han realizado los cambios en Trazabilidad. " & vbCrLf
          If Not ActualizarTraza2(txtAux(0).Text, txtAux(3).Text, txtAux(2).Text, txtAux(1).Text, MenError) Then
@@ -1794,7 +1796,7 @@ Dim b As Boolean
     b = True
     If crear = 1 Then
         nroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
-        b = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!CodVarie))
+        b = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!codvarie))
     End If
     
     If Imprimir = 1 Then

@@ -1310,6 +1310,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
     
     ' ICONETS DE LA BARRA
@@ -2957,7 +2960,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numalbar=" & Me.Data1.Recordset!numalbar & " and numnotac = " & Me.Data1.Recordset!Numnotac
+    vWhere = vWhere & " numalbar=" & Me.Data1.Recordset!numalbar & " and numnotac = " & Me.Data1.Recordset!numnotac
     
     ObtenerWhereCab = vWhere
 End Function

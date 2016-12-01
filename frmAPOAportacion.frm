@@ -606,7 +606,7 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim indCodigo As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim SobreCampanya As String
 
 
@@ -626,18 +626,18 @@ Dim b As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not b
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not b
+    Next i
     
     txtAux2(0).visible = Not b
     txtAux2(6).visible = Not b
     
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).visible = Not b
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).visible = Not b
+    Next i
     
-    CmdAceptar.visible = Not b
+    cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
     DataGrid1.Enabled = b
     
@@ -739,9 +739,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     txtAux2(0).Text = ""
     txtAux2(6).Text = ""
@@ -772,9 +772,9 @@ Private Sub BotonBuscar()
     CargaGrid "raportacion.codsocio = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     Me.txtAux2(0).Text = ""
     Me.txtAux2(6).Text = ""
     
@@ -785,13 +785,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -829,21 +829,21 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
     txtAux2(6).Top = alto
-    For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).Top = alto - 15
-    Next I
+    For i = 0 To btnBuscar.Count - 1
+        btnBuscar(i).Top = alto - 15
+    Next i
     
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -858,20 +858,20 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
-        SQL = SQL & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
-        SQL = SQL & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
+        Sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
+        Sql = Sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
+        Sql = Sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -958,7 +958,7 @@ Private Sub btnBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -993,7 +993,7 @@ Private Sub cmdAceptar_Click()
                 If ModificaDesdeFormulario(Me) Then
 '                If ModificaDesdeForm Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1003,7 +1003,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1037,8 +1037,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
-Dim I As Integer
+Dim Cad As String
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1046,18 +1046,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    cad = ""
-    I = 0
+    Cad = ""
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            cad = cad & adodc1.Recordset.Fields(J) & "|"
+            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
-    RaiseEvent DatoSeleccionado(cad)
+    Loop Until i = 0
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -1090,6 +1090,8 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
     PrimeraVez = True
 
     With Me.Toolbar1
@@ -1173,7 +1175,7 @@ Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Function ProcesoCargaKilos(Campaña As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vCampAnt As CCampAnt
 Dim Sql2 As String
 Dim Campanya As String
@@ -1190,9 +1192,9 @@ Dim vFecha As Date
     conn.BeginTrans
 
 
-    SQL = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
-    SQL = SQL & " inner join productos on variedades.codprodu = productos.codprodu "
-    SQL = SQL & " where productos.codgrupo = 5 group by 1 order by 1 "
+    Sql = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
+    Sql = Sql & " inner join productos on variedades.codprodu = productos.codprodu "
+    Sql = Sql & " where productos.codgrupo = 5 group by 1 order by 1 "
     
 '    Campanya = Mid(CStr(Year(vParam.FecIniCam) - 1), 3, 2) & "/" & Mid(CStr(Year(vParam.FecFinCam) - 1), 3, 2)
     
@@ -1210,7 +1212,7 @@ Dim vFecha As Date
     
     
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF And b
             Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1239,7 +1241,7 @@ Dim vFecha As Date
         If vCampAnt.Leer = 0 Then
             If AbrirConexionCampAnterior(vCampAnt.BaseDatos) Then
                 Set Rs = New ADODB.Recordset
-                Rs.Open SQL, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open Sql, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
             
                 While Not Rs.EOF And b
                     Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1263,9 +1265,9 @@ Dim vFecha As Date
 
     If b And CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
-        SQL = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
+        Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
 
 eCargaKilos:
@@ -1405,18 +1407,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
+    Sql = Sql & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|730|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2700|;"
@@ -1433,7 +1435,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales SQL
+    CalcularTotales Sql
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
 '    DataGrid1.Columns(12).Alignment = dbgCenter
@@ -1502,7 +1504,7 @@ End Sub
 Private Function DatosOk() As Boolean
 'Dim Datos As String
 Dim b As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1510,10 +1512,10 @@ Dim Mens As String
     If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fecha = " & DBSet(txtAux(1).Text, "F")
-        SQL = SQL & " and codaport = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fecha = " & DBSet(txtAux(1).Text, "F")
+        Sql = Sql & " and codaport = " & DBSet(txtAux(6).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El socio existe para esta fecha, tipo de aportación. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             b = False
@@ -1634,22 +1636,22 @@ Private Sub AbrirFrmSocio(indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    SQL = "update raportacion set "
-    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    SQL = SQL & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    SQL = SQL & " where codcapat = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-    SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+    Sql = "update raportacion set "
+    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    Sql = Sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    Sql = Sql & " where codcapat = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function
@@ -1658,25 +1660,25 @@ eModificaDesdeForm:
     MuestraError Err.Number, "Modificando registro", Err.Description
 End Function
 
-Private Sub CalcularTotales(Cadena As String)
+Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
 Dim Kilos As Long
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(kilos) kilos , sum(importe) importe from (" & Cadena & ") aaaaa"
+    Sql = "select sum(kilos) kilos , sum(importe) importe from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Kilos = 0
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     
-    If TotalRegistrosConsulta(Cadena) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
         If Rs.Fields(0).Value <> 0 Then Kilos = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar

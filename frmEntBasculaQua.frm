@@ -1953,6 +1953,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
     
     ' ICONETS DE LA BARRA
@@ -2481,7 +2484,7 @@ Private Sub frmCamp_DatoSeleccionado(CadenaSeleccion As String)
     End If
 End Sub
 
-Private Sub frmcap_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
     Text1(12).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de capataz
     FormateaCampo Text1(12)
     Text2(12).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de capataz

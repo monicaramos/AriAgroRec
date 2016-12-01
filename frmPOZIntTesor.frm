@@ -412,8 +412,8 @@ Dim cadWHERE As String
           
     cadWHERE = "contabilizado = 0"
           
-    If txtCodigo(0).Text <> "" Then cadWHERE = cadWHERE & " and rrecibpozos.fecfactu >= " & DBSet(txtCodigo(0).Text, "F")
-    If txtCodigo(1).Text <> "" Then cadWHERE = cadWHERE & " and rrecibpozos.fecfactu <= " & DBSet(txtCodigo(1).Text, "F")
+    If txtcodigo(0).Text <> "" Then cadWHERE = cadWHERE & " and rrecibpozos.fecfactu >= " & DBSet(txtcodigo(0).Text, "F")
+    If txtcodigo(1).Text <> "" Then cadWHERE = cadWHERE & " and rrecibpozos.fecfactu <= " & DBSet(txtcodigo(1).Text, "F")
              
     Sql = Sql & cadWHERE
     
@@ -498,10 +498,10 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         
-        txtCodigo(3).Text = vParamAplic.ForpaRecPOZ
+        txtcodigo(3).Text = vParamAplic.ForpaRecPOZ
         txtCodigo_LostFocus (3)
         
-        PonerFoco txtCodigo(0)
+        PonerFoco txtcodigo(0)
         '[Monica]21/01/2016: si hay recibos para contabilizar situamos el combo en el primero
         If Combo1(0).ListCount > 0 Then
             Combo1(0).ListIndex = 0
@@ -514,6 +514,8 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer, i As Integer
 Dim List As Collection
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -521,7 +523,7 @@ Dim List As Collection
     'IMAGES para busqueda
     Me.imgBuscar(3).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Me.imgBuscar(4).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    txtCodigo(2).Text = Format(Now, "dd/mm/yyyy") ' fecha de vencimiento
+    txtcodigo(2).Text = Format(Now, "dd/mm/yyyy") ' fecha de vencimiento
     
     For i = 0 To imgAyuda.Count - 1
         imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
@@ -542,7 +544,7 @@ Dim List As Collection
         Combo1(0).Enabled = False
     
         '[Monica]08/05/2012: campo de observaciones del registro de iva de contabilidad
-        txtCodigo(5).Text = "Consumo Agua Riegos"
+        txtcodigo(5).Text = "Consumo Agua Riegos"
     End If
     Salir = False
     If Combo1(0).ListCount = 0 Then
@@ -565,18 +567,18 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Cuentas contables
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de formas de pago de contabilidad
-    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -618,11 +620,11 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(0).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
+    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtCodigo(CByte(imgFec(0).Tag) + 1)
+    PonerFoco txtcodigo(CByte(imgFec(0).Tag) + 1)
     ' ***************************
 End Sub
 
@@ -634,11 +636,11 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmCuentas (Index)
         
     End Select
-    PonerFoco txtCodigo(indCodigo)
+    PonerFoco txtcodigo(indCodigo)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtCodigo(Index), 3
+    ConseguirFoco txtcodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -677,7 +679,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim Cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
+    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -687,19 +689,19 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     Select Case Index
         Case 3 ' FORMA DE PAGO DE LA CONTABILIDAD
             If vParamAplic.ContabilidadNueva Then
-                If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtCodigo(3).Text, "N")
+                If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtcodigo(3).Text, "N")
             Else
-                If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtCodigo(3).Text, "N")
+                If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtcodigo(3).Text, "N")
             End If
             If txtNombre(Index).Text = "" Then
                 MsgBox "Forma de Pago  no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
             
         Case 0, 1, 2 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
+            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
             
         Case 4 ' CUENTA CONTABLE
-            If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreCuenta(txtCodigo(Index), 2)
+            If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreCuenta(txtcodigo(Index), 2)
             If txtNombre(Index).Text = "" Then
                 MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
@@ -754,7 +756,7 @@ Private Sub AbrirFrmForpaConta(indice As Integer)
     indCodigo = indice
     Set frmFPa = New frmForpaConta
     frmFPa.DatosADevolverBusqueda = "0|1|"
-    frmFPa.CodigoActual = txtCodigo(indice)
+    frmFPa.CodigoActual = txtcodigo(indice)
 '    frmFpa.Conexion = cContaFacSoc
     frmFPa.Show vbModal
     Set frmFPa = Nothing
@@ -766,7 +768,7 @@ Private Sub AbrirFrmCuentas(indice As Integer)
     indCodigo = indice
     Set frmCtas = New frmCtasConta
     frmCtas.DatosADevolverBusqueda = "0|1|"
-    frmCtas.CodigoActual = txtCodigo(indCodigo)
+    frmCtas.CodigoActual = txtcodigo(indCodigo)
     frmCtas.Show vbModal
     Set frmCtas = Nothing
 End Sub
@@ -843,34 +845,34 @@ Dim Sql As String
    b = True
 
 
-   If txtCodigo(2).Text = "" And b Then
+   If txtcodigo(2).Text = "" And b Then
         MsgBox "Introduzca la Fecha de Vencimiento a contabilizar.", vbExclamation
         b = False
-        PonerFoco txtCodigo(2)
+        PonerFoco txtcodigo(2)
    End If
     
-   If txtCodigo(3).Text = "" And b Then
+   If txtcodigo(3).Text = "" And b Then
         MsgBox "Introduzca la Forma de Pago para contabilizar.", vbExclamation
         b = False
-        PonerFoco txtCodigo(3)
+        PonerFoco txtcodigo(3)
    Else
         ' comprobamos que existe la forma de pago en contabilidad
         If vParamAplic.ContabilidadNueva Then
-            Sql = DevuelveDesdeBDNew(cConta, "formapago", "codforpa", "codforpa", txtCodigo(3).Text, "N")
+            Sql = DevuelveDesdeBDNew(cConta, "formapago", "codforpa", "codforpa", txtcodigo(3).Text, "N")
         Else
-            Sql = DevuelveDesdeBDNew(cConta, "sforpa", "codforpa", "codforpa", txtCodigo(3).Text, "N")
+            Sql = DevuelveDesdeBDNew(cConta, "sforpa", "codforpa", "codforpa", txtcodigo(3).Text, "N")
         End If
         If Sql = "" Then
             MsgBox "No existe la forma de pago en Contabilidad. Revise.", vbExclamation
             b = False
-            PonerFoco txtCodigo(3)
+            PonerFoco txtcodigo(3)
         End If
    End If
    
-   If txtCodigo(4).Text = "" And b Then
+   If txtcodigo(4).Text = "" And b Then
         MsgBox "Introduzca la Cta.Contable de Banco para contabilizar.", vbExclamation
         b = False
-        PonerFoco txtCodigo(4)
+        PonerFoco txtcodigo(4)
    End If
    
    
@@ -935,7 +937,7 @@ Dim Codmacta As String
         ConnConta.BeginTrans
         conn.BeginTrans
         
-        Obs = "Contabilización de Cobro de Recibos de fecha " & Format(txtCodigo(0).Text, "dd/mm/yyyy")
+        Obs = "Contabilización de Cobro de Recibos de fecha " & Format(txtcodigo(0).Text, "dd/mm/yyyy")
 
         Sql = "select distinct codtipom, numfactu, fecfactu, codsocio from rrecibpozos where " & cadWHERE
         Set Rs = New ADODB.Recordset
@@ -950,7 +952,7 @@ Dim Codmacta As String
                 Me.Refresh
                 i = i + 1
                 cadMen = "Insertando en Tesoreria: "
-                b = InsertarEnTesoreriaPOZOS(cadMen, Rs, CDate(txtCodigo(2).Text), CInt(txtCodigo(3).Text), txtCodigo(4).Text)
+                b = InsertarEnTesoreriaPOZOS(cadMen, Rs, CDate(txtcodigo(2).Text), CInt(txtcodigo(3).Text), txtcodigo(4).Text)
                
                 Rs.MoveNext
         Wend
@@ -1048,12 +1050,12 @@ Dim CCoste As String
     'comprobar que se han rellenado los dos campos de fecha
     'sino rellenar con fechaini o fechafin del ejercicio
     'que guardamos en vbles Orden1,Orden2
-    If txtCodigo(0).Text = "" Then
-       txtCodigo(0).Text = vEmpresa.FechaIni  'fechaini del ejercicio de la conta
+    If txtcodigo(0).Text = "" Then
+       txtcodigo(0).Text = vEmpresa.FechaIni  'fechaini del ejercicio de la conta
     End If
 
-    If txtCodigo(1).Text = "" Then
-       txtCodigo(1).Text = vEmpresa.FechaFin  'fecha fin del ejercicio de la conta
+    If txtcodigo(1).Text = "" Then
+       txtcodigo(1).Text = vEmpresa.FechaFin  'fecha fin del ejercicio de la conta
     End If
 
 
@@ -1063,10 +1065,10 @@ Dim CCoste As String
 
     'comprobar si existen en Ariagrorec facturas anteriores al periodo solicitado
     'sin contabilizar
-    If Me.txtCodigo(0).Text <> "" Then 'anteriores a fechadesde
+    If Me.txtcodigo(0).Text <> "" Then 'anteriores a fechadesde
         Sql = "SELECT COUNT(*) FROM " & cadTabla
         Sql = Sql & " WHERE fecfactu <"
-        Sql = Sql & DBSet(txtCodigo(0), "F") & " AND contabilizado=0 "
+        Sql = Sql & DBSet(txtcodigo(0), "F") & " AND contabilizado=0 "
         '[Monica]21/01/2016: el combo es de las pendientes de contabilizar
         Select Case Mid(Combo1(0).Text, 1, 3) 'Combo1(0).ListIndex
             Case "RCP" '0
@@ -1168,7 +1170,7 @@ Dim CCoste As String
     '-----------------------------------------------------------------------
     If cadTabla = "rrecibpozos" Then
         Me.lblProgres(1).Caption = "Comprobando Nº Facturas en contabilidad ..."
-        Sql = "anofaccl>=" & Year(txtCodigo(0).Text) & " AND anofaccl<= " & Year(txtCodigo(1).Text)
+        Sql = "anofaccl>=" & Year(txtcodigo(0).Text) & " AND anofaccl<= " & Year(txtcodigo(1).Text)
         b = ComprobarNumFacturas_new(cadTabla, Sql)
     End If
     IncrementarProgres Me.Pb1, 10
@@ -1423,7 +1425,7 @@ Dim CCoste As String
         While Not Rs.EOF
             Sql = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "T") & " and numfactu=" & Rs!numfactu
             Sql = Sql & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
-            If PasarFacturaPOZOS(Sql, CCoste, txtCodigo(4).Text, txtCodigo(2).Text, Rs.Fields(0), Rs!fecfactu, txtCodigo(5).Text, txtCodigo(3).Text, cContaFra) = False And b Then b = False
+            If PasarFacturaPOZOS(Sql, CCoste, txtcodigo(4).Text, txtcodigo(2).Text, Rs.Fields(0), Rs!fecfactu, txtcodigo(5).Text, txtcodigo(3).Text, cContaFra) = False And b Then b = False
 
             '---- Laura 26/10/2006
             'Al pasar cada factura al hacer el commit desbloqueamos los registros
@@ -1474,7 +1476,7 @@ On Error GoTo EComprobar
     ComprobarFechasConta = False
     
     
-    If txtCodigo(ind).Text <> "" Then
+    If txtcodigo(ind).Text <> "" Then
         FechaIni = "Select fechaini,fechafin From parametros"
         Set Rs = New ADODB.Recordset
         Rs.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -1486,12 +1488,12 @@ On Error GoTo EComprobar
             Orden1 = FechaIni
             Orden2 = FechaFin
         
-            If Not EntreFechas(FechaIni, txtCodigo(ind).Text, FechaFin) Then
+            If Not EntreFechas(FechaIni, txtcodigo(ind).Text, FechaFin) Then
                  Cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
                  Cad = Cad & "    Desde: " & FechaIni & vbCrLf
                  Cad = Cad & "    Hasta: " & FechaFin
                  MsgBox Cad, vbExclamation
-                 txtCodigo(ind).Text = ""
+                 txtcodigo(ind).Text = ""
             Else
                 ComprobarFechasConta = True
             End If

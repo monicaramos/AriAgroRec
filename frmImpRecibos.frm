@@ -518,6 +518,9 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
     limpiar Me
 
@@ -1214,7 +1217,7 @@ Dim SegSoc As Currency
         Total = DBLet(Rs!Importe, "N") + DBLet(Rs!Compleme, "N") - DBLet(Rs!Penaliza, "N")
         
         SqlReg = SqlReg & "(" & vUsu.Codigo & ","
-        SqlReg = SqlReg & DBSet(Rs!CodVarie, "N") & ","
+        SqlReg = SqlReg & DBSet(Rs!codvarie, "N") & ","
         SqlReg = SqlReg & DBSet(Total, "N") & "),"
 
         Rs.MoveNext

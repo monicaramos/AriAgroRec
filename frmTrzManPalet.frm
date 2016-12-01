@@ -117,9 +117,9 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Dim IdPalet As Long
-Dim SQL As String
-Dim rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
 Private Sub cmdAbocar_Click()
     Dim resultado As Boolean
@@ -153,30 +153,30 @@ Private Sub cmdConsultar_Click()
         Exit Sub
     End If
     
-    SQL = "select * from trzpalets where CRFID ='" & txtRFID & "'"
-    Set rs = New ADODB.Recordset
-    rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = "select * from trzpalets where CRFID ='" & txtRFID & "'"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Not rs.EOF Then
-        IdPalet = rs!IdPalet '????? rafa
+    If Not Rs.EOF Then
+        IdPalet = Rs!IdPalet '????? rafa
         'SQL = "select * from Palets where codPalet = " & CStr(IdPalet)
-        SQL = "select nomvarie from variedades where codvarie = " & DBSet(rs!CodVarie, "N")
-        Set Rs1 = New ADODB.Recordset
-        Rs1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Sql = "select nomvarie from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        Set RS1 = New ADODB.Recordset
+        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        SQL = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(rs!numnotac) & vbCrLf
-        SQL = SQL & "Socio:" & CStr(rs!CodSocio) & " Campo:" & CStr(rs!CodCampo) & " Cajones:" & CStr(rs!NumCajones) & " Kilos:" & CStr(rs!NumKilos) & vbCrLf
-        SQL = SQL & "Variedad:" & Rs1!nomvarie
+        Sql = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!numnotac) & vbCrLf
+        Sql = Sql & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!Numkilos) & vbCrLf
+        Sql = Sql & "Variedad:" & RS1!nomvarie
         'SQL = SQL & "Producto:" & rs!NomProdu & " Variedad:" & rs!nomvarie
         
-        Set Rs1 = Nothing
-        txtResul.Text = SQL
+        Set RS1 = Nothing
+        txtResul.Text = Sql
     Else
         IdPalet = 0
         txtResul.Text = "NO HAY NINGUN PALET CON ESTA TARJETA ASOCIADA"
     End If
     
-    Set rs = Nothing
+    Set Rs = Nothing
     
 End Sub
 
@@ -186,8 +186,8 @@ Private Sub cmdDesAsign_Click()
         Exit Sub
     End If
     
-    SQL = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
-    conn.Execute SQL
+    Sql = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
+    conn.Execute Sql
     
     MsgBox "Tarjeta desasignada"
     
@@ -202,6 +202,9 @@ Private Sub cmdSalir_Click()
 End Sub
 
 Private Sub Form_Load()
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     IdPalet = 0
 End Sub
 
@@ -209,29 +212,29 @@ Private Sub txtRFID_Change()
     txtResul = ""
 End Sub
 
-Private Function CargaLineaConfeccion(linea As Long, RFID As String, fechahora As Date) As Boolean
-    Dim SQL As String
-    Dim rs As ADODB.Recordset
+Private Function CargaLineaConfeccion(Linea As Long, RFID As String, FechaHora As Date) As Boolean
+    Dim Sql As String
+    Dim Rs As ADODB.Recordset
     Dim resultaddo As Boolean
     
     '-- Buscamos que el palet exista
-    SQL = "select * from trzpalets where CRFID = '" & RFID & "'"
-    Set rs = New ADODB.Recordset
-    rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If rs.EOF Then
-        MsgBox "El palet RFID: " & RFID & " leido en la línea " & CStr(linea) & " no existe en el sistema"
+    Sql = "select * from trzpalets where CRFID = '" & RFID & "'"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Rs.EOF Then
+        MsgBox "El palet RFID: " & RFID & " leido en la línea " & CStr(Linea) & " no existe en el sistema"
         Exit Function
     End If
-    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
-    SQL = SQL & DBSet(linea, "N") & ","
-    SQL = SQL & DBSet(rs!IdPalet, "N") & ","
-    SQL = SQL & DBSet(fechahora, "FH") & ","
-    SQL = SQL & DBSet(fechahora, "F") & ","
-    SQL = SQL & DBSet(rs!Tipo, "N") & ")"
-    conn.Execute SQL
+    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
+    Sql = Sql & DBSet(Linea, "N") & ","
+    Sql = Sql & DBSet(Rs!IdPalet, "N") & ","
+    Sql = Sql & DBSet(FechaHora, "FH") & ","
+    Sql = Sql & DBSet(FechaHora, "F") & ","
+    Sql = Sql & DBSet(Rs!Tipo, "N") & ")"
+    conn.Execute Sql
     
-    SQL = "update trzpalets set CRFID = null where IdPalet=" & DBSet(rs!IdPalet, "N")
-    conn.Execute SQL
+    Sql = "update trzpalets set CRFID = null where IdPalet=" & DBSet(Rs!IdPalet, "N")
+    conn.Execute Sql
     
     CargaLineaConfeccion = True
 End Function

@@ -665,7 +665,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!CodVarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
+        Sql = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!codvarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
         conn.Execute Sql
         CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -870,6 +870,11 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
 
     With Me.Toolbar1

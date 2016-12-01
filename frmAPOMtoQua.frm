@@ -1105,6 +1105,10 @@ Dim i As Integer
 
     PrimeraVez = True
     
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+    
+    
     ' ICONETS DE LA BARRA
     btnPrimero = 19 'index del botó "primero"
     With Me.Toolbar1

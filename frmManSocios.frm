@@ -329,35 +329,35 @@ Begin VB.Form frmManSocios
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label5"
+      Tab(0).Control(0)=   "Frame7"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label29"
+      Tab(0).Control(1)=   "Frame6"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(2)=   "Text1(7)"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "imgMail(0)"
+      Tab(0).Control(3)=   "Frame4"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label19"
+      Tab(0).Control(4)=   "Text1(12)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "imgFec(2)"
+      Tab(0).Control(5)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Label10"
+      Tab(0).Control(6)=   "Text1(20)"
       Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Text1(2)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Text1(20)"
+      Tab(0).Control(8)=   "Label10"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(9)=   "imgFec(2)"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Text1(12)"
+      Tab(0).Control(10)=   "Label19"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Frame4"
+      Tab(0).Control(11)=   "imgMail(0)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Text1(7)"
+      Tab(0).Control(12)=   "imgZoom(0)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Frame6"
+      Tab(0).Control(13)=   "Label29"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Frame7"
+      Tab(0).Control(14)=   "Label5"
       Tab(0).Control(14).Enabled=   0   'False
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
@@ -374,16 +374,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
-      Tab(3).Control(1)=   "Text3(0)"
-      Tab(3).Control(2)=   "Toolbar2"
-      Tab(3).Control(3)=   "lw1"
-      Tab(3).Control(4)=   "Toolbar3"
-      Tab(3).Control(5)=   "Frame5"
-      Tab(3).Control(6)=   "Toolbar4"
-      Tab(3).Control(7)=   "imgFec(3)"
-      Tab(3).Control(8)=   "Label17"
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(9)=   "Frame8"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -2994,7 +2994,7 @@ Private HaDevueltoDatos As Boolean
 
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
-Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim CadB As String
 
 Dim vSeccion As CSeccion
@@ -3224,28 +3224,28 @@ Private Sub cmdAux_Click(Index As Integer)
         
            
            frmC.NovaData = Now
-           Indice = Index + 2
+           indice = Index + 2
            Me.cmdAux(0).Tag = Index
            
-           PonerFormatoFecha txtAux1(Indice)
-           If txtAux1(Indice).Text <> "" Then frmC.NovaData = CDate(txtAux1(Indice).Text)
+           PonerFormatoFecha txtAux1(indice)
+           If txtAux1(indice).Text <> "" Then frmC.NovaData = CDate(txtAux1(indice).Text)
         
            Screen.MousePointer = vbDefault
            frmC.Show vbModal
            Set frmC = Nothing
-           PonerFoco txtAux1(Indice)
+           PonerFoco txtAux1(indice)
         
         Case 2, 3 'cuentas contables de cliente y proveedor
             If vSeccion Is Nothing Then Exit Sub
             
-            Indice = Index + 2
+            indice = Index + 2
             Set frmCtas = New frmCtasConta
             frmCtas.NumDigit = 0
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = txtAux1(Indice).Text
+            frmCtas.CodigoActual = txtAux1(indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco txtAux1(Indice)
+            PonerFoco txtAux1(indice)
         
         
         Case 5 'codigo de iva
@@ -3321,6 +3321,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     
@@ -3864,18 +3866,18 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-Dim Indice As Byte
-    Indice = CByte(Me.cmdAux(0).Tag + 2)
-    txtAux1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim indice As Byte
+    indice = CByte(Me.cmdAux(0).Tag + 2)
+    txtAux1(indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-Dim Indice As Byte
-    Indice = CByte(Me.imgFec(0).Tag)
-    If Indice = 0 Then
-        Text3(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim indice As Byte
+    indice = CByte(Me.imgFec(0).Tag)
+    If indice = 0 Then
+        Text3(indice).Text = Format(vFecha, "dd/mm/yyyy")
     Else
-        Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+        Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
     End If
 End Sub
 
@@ -3917,7 +3919,7 @@ Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(Indice).Text = vCampo
+     Text1(indice).Text = vCampo
 End Sub
 
 Private Sub Image1_DblClick()
@@ -4022,31 +4024,31 @@ Private Sub imgFec_Click(Index As Integer)
        frmC1.NovaData = Now
        Select Case Index
             Case 0, 1
-                Indice = Index + 13
+                indice = Index + 13
             Case 2
-                Indice = Index + 5
+                indice = Index + 5
             Case 3
-                Indice = 0
+                indice = 0
        End Select
        
-       Me.imgFec(0).Tag = Indice
+       Me.imgFec(0).Tag = indice
        
        If Index <> 3 Then
-           PonerFormatoFecha Text1(Indice)
-           If Text1(Indice).Text <> "" Then frmC1.NovaData = CDate(Text1(Indice).Text)
+           PonerFormatoFecha Text1(indice)
+           If Text1(indice).Text <> "" Then frmC1.NovaData = CDate(Text1(indice).Text)
         
            Screen.MousePointer = vbDefault
            frmC1.Show vbModal
            Set frmC1 = Nothing
-           PonerFoco Text1(Indice)
+           PonerFoco Text1(indice)
        Else
-           PonerFormatoFecha Text3(Indice)
-           If Text3(Indice).Text <> "" Then frmC1.NovaData = CDate(Text3(Indice).Text)
+           PonerFormatoFecha Text3(indice)
+           If Text3(indice).Text <> "" Then frmC1.NovaData = CDate(Text3(indice).Text)
         
            Screen.MousePointer = vbDefault
            frmC1.Show vbModal
            Set frmC1 = Nothing
-           PonerFoco Text3(Indice)
+           PonerFoco Text3(indice)
            
        End If
       'Para la fecha de la navegacion
@@ -4080,21 +4082,21 @@ Private Sub imgZoom_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            Indice = 20
+            indice = 20
             frmZ.pTitulo = "Observaciones del Socio"
-            frmZ.pValor = Text1(Indice).Text
+            frmZ.pValor = Text1(indice).Text
             frmZ.pModo = Modo
             frmZ.Show vbModal
             Set frmZ = Nothing
-            PonerFoco Text1(Indice)
+            PonerFoco Text1(indice)
         Case 1
-            Indice = 16
+            indice = 16
             frmZ.pTitulo = "Observaciones del Teléfono"
-            frmZ.pValor = txtAux(Indice).Text
+            frmZ.pValor = txtAux(indice).Text
             frmZ.pModo = Modo
             frmZ.Show vbModal
             Set frmZ = Nothing
-            PonerFoco txtAux(Indice)
+            PonerFoco txtAux(indice)
     End Select
             
 End Sub
@@ -5216,14 +5218,14 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgFec_Click (Indice)
+    imgFec_Click (indice)
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (Indice)
+    imgBuscar_Click (indice)
 End Sub
 
 
@@ -5785,7 +5787,7 @@ Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Intege
     If Not txtAux(Index).MultiLine Then KEYdown KeyCode
 End Sub
 
-Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 '    If Not txtAux(Index).MultiLine Then
         If KeyAscii = teclaBuscar Then
             If Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) Then
@@ -5886,7 +5888,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             PonerFoco Text1(21)
     
         Case 2 ' codigo globalgap
-            Indice = 26
+            indice = 26
             '[Monica]25/04/2012
 '            Set frmGlo = New frmBasico
 '            AyudaGlobalGap frmGlo, Text1(indice)
@@ -5894,13 +5896,13 @@ Private Sub imgBuscar_Click(Index As Integer)
             
             frmGlo.DeConsulta = True
             frmGlo.DatosADevolverBusqueda = "0|1|"
-            frmGlo.CodigoActual = Text1(Indice).Text
+            frmGlo.CodigoActual = Text1(indice).Text
             frmGlo.Show vbModal
             
             Set frmGlo = Nothing
 
             Set frmGlo = Nothing
-            PonerFoco Text1(Indice)
+            PonerFoco Text1(indice)
            
     
     End Select
@@ -5911,9 +5913,9 @@ End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
-    txtAux1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
-    FormateaCampo txtAux1(Indice)
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
+    txtAux1(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
+    FormateaCampo txtAux1(indice)
+    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
 End Sub
 
 ' *********************************************************************************
@@ -6568,9 +6570,9 @@ Private Sub txtAux1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYImage(KeyAscii As Integer, Indice As Integer)
+Private Sub KEYImage(KeyAscii As Integer, indice As Integer)
     KeyAscii = 0
-    cmdAux_Click (Indice)
+    cmdAux_Click (indice)
 End Sub
 
 

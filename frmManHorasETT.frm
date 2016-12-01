@@ -1065,7 +1065,7 @@ Dim temp As Boolean
         Sql = "Delete from horasett where codcapat=" & adodc1.Recordset!codcapat
         Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
         Sql = Sql & " and codigoett = " & DBLet(adodc1.Recordset!CodigoETT)
-        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!CodVarie, "N")
+        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
         
         
         conn.Execute Sql
@@ -1309,6 +1309,11 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
 
     With Me.Toolbar1

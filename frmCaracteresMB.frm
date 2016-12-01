@@ -197,7 +197,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Dim SQL As String
+Dim Sql As String
 
 Private Sub cmdMultiBase_Click(Index As Integer)
 Dim i As Integer
@@ -220,8 +220,8 @@ Dim i As Integer
     'Comprobacion si hay alguien trabajando
     If UsuariosConectados Then Exit Sub
     
-    SQL = "Seguro que desea continuar con el proceso"
-    If MsgBox(SQL, vbCritical + vbYesNoCancel) <> vbYes Then Exit Sub
+    Sql = "Seguro que desea continuar con el proceso"
+    If MsgBox(Sql, vbCritical + vbYesNoCancel) <> vbYes Then Exit Sub
     
 '   'BLOQUEAMOS LA BD
 '   If Not Bloquear_DesbloquearBD(True) Then
@@ -241,8 +241,8 @@ Dim i As Integer
 '    Bloquear_DesbloquearBD False
     Screen.MousePointer = vbDefault
     Label34.Caption = ""
-    SQL = "Proceso finalizado" & vbCrLf & "Se han realizado: " & NumRegElim & " cambio(s)."
-    MsgBox SQL, vbInformation
+    Sql = "Proceso finalizado" & vbCrLf & "Se han realizado: " & NumRegElim & " cambio(s)."
+    MsgBox Sql, vbInformation
 End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
@@ -255,6 +255,11 @@ End Sub
 
 Private Sub Form_Load()
 Dim W, H
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
     Me.frameMultibase.visible = False
     'MULTIBASE
@@ -278,55 +283,55 @@ Dim Cad As String
     Select Case Tabla
     Case 0
         'Socios
-        SQL = "Select codsocio,nomsocio,dirsocio,pobsocio,prosocio,observaciones"
-        SQL = SQL & " FROM rsocios"
+        Sql = "Select codsocio,nomsocio,dirsocio,pobsocio,prosocio,observaciones"
+        Sql = Sql & " FROM rsocios"
         Inicio = 1 'k es dos
         Fin = 5
     Case 1
         'Cooperativas
-        SQL = "Select codcoope,nomcoope,domcoope,pobcoope,procoope  from rcoope"
+        Sql = "Select codcoope,nomcoope,domcoope,pobcoope,procoope  from rcoope"
         Inicio = 1
         Fin = 4
     Case 2
         'Partidas
-        SQL = "Select codparti,nomparti FROM rpartida "
+        Sql = "Select codparti,nomparti FROM rpartida "
         Cad = ""
         Inicio = 1
         Fin = 1
     Case 3
         'Pueblos
-        SQL = "Select codpobla,despobla FROM rpueblos "
+        Sql = "Select codpobla,despobla FROM rpueblos "
         Cad = ""
         Inicio = 1
         Fin = 1
     Case 4
         'Telefonos de socios
-        SQL = "Select idtelefono,codsocio,nombre,direccion,poblacion,provincia,observaciones FROM rsocios_telefonos "
+        Sql = "Select idtelefono,codsocio,nombre,direccion,poblacion,provincia,observaciones FROM rsocios_telefonos "
         Cad = ""
         Inicio = 2
         Fin = 6
     End Select
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         
-        While Not RS.EOF
-            Label34.Caption = RS.Fields(0) & " - " & RS.Fields(1)
+        While Not Rs.EOF
+            Label34.Caption = Rs.Fields(0) & " - " & Rs.Fields(1)
             Label34.Refresh
             Cambio = ""
             For i = Inicio To Fin
                 'Campo no nulo
-                If Not IsNull(RS.Fields(i)) Then
-                    SQL = RS.Fields(i)
-                    Cad = RevisaCaracterMultibase(SQL)
-                    If SQL <> Cad Then
+                If Not IsNull(Rs.Fields(i)) Then
+                    Sql = Rs.Fields(i)
+                    Cad = RevisaCaracterMultibase(Sql)
+                    If Sql <> Cad Then
                         'Han habido cambios
                         If Cambio <> "" Then Cambio = Cambio & ","
 '                        Sql = NombreSQL(Cad)
-                        SQL = DevNombreSQL(Cad)
+                        Sql = DevNombreSQL(Cad)
                         NumRegElim = NumRegElim + 1
-                        Cambio = Cambio & RS.Fields(i).Name & " = '" & SQL & "'"
+                        Cambio = Cambio & Rs.Fields(i).Name & " = '" & Sql & "'"
                     End If
                 End If
             Next i
@@ -334,31 +339,31 @@ Dim Cad As String
                 'OK HAY K CAMBIAR, k updatear
                 Select Case Tabla
                 Case 0 'rsocios
-                    SQL = "UPDATE rsocios SET " & Cambio & " WHERE codsocio =" & RS.Fields(0)
+                    Sql = "UPDATE rsocios SET " & Cambio & " WHERE codsocio =" & Rs.Fields(0)
             
                 Case 1 'rcoope
-                    SQL = "UPDATE rcoope"
-                    SQL = SQL & " SET " & Cambio & " WHERE codcoope = " & DBSet(RS.Fields(0).Value, "N")
+                    Sql = "UPDATE rcoope"
+                    Sql = Sql & " SET " & Cambio & " WHERE codcoope = " & DBSet(Rs.Fields(0).Value, "N")
                 
                 Case 2 'rpartida
-                    SQL = "UPDATE rpartida SET " & Cambio & " WHERE codparti =" & DBSet(RS.Fields(0).Value, "N")
+                    Sql = "UPDATE rpartida SET " & Cambio & " WHERE codparti =" & DBSet(Rs.Fields(0).Value, "N")
                 
                 Case 3 'rpueblos
-                    SQL = "UPDATE rpueblos SET " & Cambio & " WHERE codpobla =" & DBSet(RS.Fields(0).Value, "N")
+                    Sql = "UPDATE rpueblos SET " & Cambio & " WHERE codpobla =" & DBSet(Rs.Fields(0).Value, "N")
                 
                 Case 4 'rsocios_telefono
-                    SQL = "UPDATE rsocios_telefonos SET " & Cambio & " WHERE idtelefono =" & DBSet(RS.Fields(0).Value, "N")
-                    SQL = SQL & " and codsocio = " & DBSet(RS.Fields(1).Value, "N")
+                    Sql = "UPDATE rsocios_telefonos SET " & Cambio & " WHERE idtelefono =" & DBSet(Rs.Fields(0).Value, "N")
+                    Sql = Sql & " and codsocio = " & DBSet(Rs.Fields(1).Value, "N")
                 End Select
                 
                 'Ejecutamos
-                conn.Execute SQL
+                conn.Execute Sql
             End If
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
             
 End Sub
 

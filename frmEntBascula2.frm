@@ -777,7 +777,7 @@ Public NumCajones As String
 Public Numkilos As String
 Public Codsocio As String
 Public codcampo As String
-Public CodVarie As String
+Public codvarie As String
 Public Fecha As String
 Public Hora As String
 
@@ -1084,6 +1084,10 @@ End Sub
 
 Private Sub Form_Load()
 Dim Sql As String
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
 
     With Me.Toolbar1
@@ -1493,7 +1497,7 @@ Dim Tipo As Byte
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
                 Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
                 Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
@@ -1510,7 +1514,7 @@ Dim Tipo As Byte
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
                 Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(RestoCajas, "N") & ","
                 Sql = Sql & DBSet(RestoKilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "T") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
@@ -1538,7 +1542,7 @@ Dim Tipo As Byte
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
                 Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(cajas, "N") & ","
                 Sql = Sql & DBSet(Kilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
@@ -1572,7 +1576,7 @@ Dim Tipo As Byte
             Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
             Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & ",0,"
             Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-            Sql = Sql & DBSet(CodVarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
             Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
             
             conn.Execute Sql
@@ -1600,11 +1604,11 @@ Private Sub CargarDatosCabecera()
     Text1(9).Text = Numkilos
     Text1(4).Text = Codsocio
     Text1(7).Text = codcampo
-    Text1(3).Text = CodVarie
+    Text1(3).Text = codvarie
     Text1(1).Text = Fecha
     Text1(2).Text = Hora
     Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Codsocio, "N")
-    Text2(1).Text = DevuelveDesdeBDNew(cAgro, "variedades", "nomvarie", "codvarie", CodVarie, "N")
+    Text2(1).Text = DevuelveDesdeBDNew(cAgro, "variedades", "nomvarie", "codvarie", codvarie, "N")
 
     PonerDatosCampo codcampo
 

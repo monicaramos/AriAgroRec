@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmInfAlbDestrios 
    BorderStyle     =   3  'Fixed Dialog
@@ -491,7 +491,7 @@ Attribute frmF.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadparam As String
+Private CadParam As String
 Private numParam As Byte
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
@@ -542,7 +542,7 @@ End Function
 
 Private Sub cmdAceptar_Click()
 'Facturacion de Albaranes
-Dim campo As String, cad As String
+Dim campo As String, Cad As String
 Dim cadFrom As String
 Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
                       'que no se van a facturar
@@ -552,7 +552,7 @@ Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim numOp As Byte
 
 Dim cadDesde As Date
-Dim cadHasta As Date
+Dim cadhasta As Date
 
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
@@ -561,7 +561,7 @@ Dim nTabla As String
 Dim Tabla1 As String
 Dim nTabla2 As String
 
-Dim NRegs As Long
+Dim Nregs As Long
 Dim FecFac As Date
 
 Dim b As Boolean
@@ -573,7 +573,7 @@ Dim CadFechas As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadparam = cadparam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -649,17 +649,17 @@ Dim CadFechas As String
         
         
         cadDesde = "01/01/1900"
-        cadHasta = "31/12/2500"
+        cadhasta = "31/12/2500"
         
         If txtcodigo(6).Text <> "" Then cadDesde = CDate(txtcodigo(6).Text)
-        If txtcodigo(7).Text <> "" Then cadHasta = CDate(txtcodigo(7).Text)
+        If txtcodigo(7).Text <> "" Then cadhasta = CDate(txtcodigo(7).Text)
         
-        cadparam = cadparam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
-        cadparam = cadparam & "pFecHasta= Date(" & Year(cadHasta) & "," & Month(cadHasta) & "," & Day(cadHasta) & ")" & "|" 'txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
+        CadParam = CadParam & "pFecHasta= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")" & "|" 'txtcodigo(7).Text & """|"
         numParam = numParam + 2
         
         
-        cadparam = cadparam & "pResumen=" & Check1.Value & "|"
+        CadParam = CadParam & "pResumen=" & Check1.Value & "|"
         numParam = numParam + 1
         
         
@@ -668,7 +668,7 @@ Dim CadFechas As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadWhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -677,7 +677,7 @@ Dim CadFechas As String
         Set frmMens1 = New frmMensajes
         
         frmMens1.OpcionMensaje = 27
-        frmMens1.cadWhere = Sql3
+        frmMens1.cadWHERE = Sql3
         frmMens1.Show vbModal
         
         Set frmMens1 = Nothing
@@ -694,7 +694,7 @@ Dim CadFechas As String
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 73 ' informe de entradas por transportista
 
-                If Not PonerParamRPT(indRPT, cadparam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
 
                 frmImprimir.NombreRPT = nomDocu
                 cadNombreRPT = nomDocu '"rInfAlbDestrios.rpt"
@@ -733,9 +733,11 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim I As Integer
+Dim i As Integer
 Dim indFrame As Single
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -743,15 +745,15 @@ Dim indFrame As Single
     'Ocultar todos los Frames de Formulario
     Me.FrameFacturar.visible = False
     
-    For I = 0 To 1
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 12 To 13
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 20 To 21
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 0 To 1
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 12 To 13
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 20 To 21
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
     
     NomTabla = "rhisfruta"
     NomTablaLin = "rhisfruta_entradas"
@@ -1031,7 +1033,7 @@ End Sub
 
 Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim cad As String
+Dim Cad As String
 
     H = 5940
     W = 6735
@@ -1065,7 +1067,7 @@ Dim devuelve2 As String
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadparam = cadparam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1076,7 +1078,7 @@ End Function
 Private Sub InicializarVbles()
     cadFormula = ""
     cadSelect = ""
-    cadparam = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1084,7 +1086,7 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadparam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
@@ -1180,13 +1182,13 @@ eProcesoEntradas:
 End Function
 
 
-Private Function InsertaPlagasClasAuto(vWhere As String, vTabla As String) As Boolean
+Private Function InsertaPlagasClasAuto(vWhere As String, vtabla As String) As Boolean
 Dim Sql As String
 Dim KilosTot As Long
-Dim I As Integer
+Dim i As Integer
 Dim Porcen As Currency
 Dim Rs As ADODB.Recordset
-Dim NRegs As Long
+Dim Nregs As Long
     
     
     On Error GoTo eInsertaPlagasClasAuto
@@ -1198,13 +1200,13 @@ Dim NRegs As Long
     conn.Execute Sql
 
     Sql = "select rhisfruta.codsocio, rhisfruta.codvarie, rcampos.nrocampo from "
-    Sql = Sql & "(" & vTabla & ") inner join rcampos on rhisfruta.codcampo = rcampos.codcampo "
+    Sql = Sql & "(" & vtabla & ") inner join rcampos on rhisfruta.codcampo = rcampos.codcampo "
     Sql = Sql & " where " & vWhere
     Sql = Sql & " group by 1,2,3 "
     Sql = Sql & " order by 1,2,3 "
     
-    NRegs = TotalRegistrosConsulta(Sql)
-    CargarProgres Pb1, CInt(NRegs)
+    Nregs = TotalRegistrosConsulta(Sql)
+    CargarProgres Pb1, CInt(Nregs)
     Pb1.visible = True
     
     Set Rs = New ADODB.Recordset
@@ -1215,8 +1217,8 @@ Dim NRegs As Long
         
         Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
         Sql = Sql & " from rcontrol_plagas "
-        Sql = Sql & " where codsocio = " & DBSet(Rs!CodSocio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
+        Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
         Sql = Sql & " and codcampo = " & DBSet(Rs!NroCampo, "N")
         Sql = Sql & " and idplaga <> 2 "
         If txtcodigo(6).Text <> "" Then Sql = Sql & " and fechacla >= " & DBSet(txtcodigo(6).Text, "F")
@@ -1225,7 +1227,7 @@ Dim NRegs As Long
         KilosTot = DevuelveValor(Sql)
 
 
-        For I = 3 To 13
+        For i = 3 To 13
             Sql = "SELECT "
             If KilosTot <> 0 Then
                 Sql = Sql & " round((sum(kilosplaga1)+sum(kilosplaga2)+sum(kilosplaga3)+sum(kilosplaga4)+sum(kilosplaga5)+sum(kilosplaga6)+sum(kilosplaga7)+sum(kilosplaga8)+sum(kilosplaga9)+sum(kilosplaga10)+sum(kilosplaga11)) * 100 / " & DBSet(KilosTot, "N") & ",2) "
@@ -1233,28 +1235,28 @@ Dim NRegs As Long
                 Sql = Sql & "0 "
             End If
             Sql = Sql & " from rcontrol_plagas "
-            Sql = Sql & " where codsocio = " & DBSet(Rs!CodSocio, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!CodVarie, "N")
+            Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
             Sql = Sql & " and codcampo = " & DBSet(Rs!NroCampo, "N")
-            Sql = Sql & " and rcontrol_plagas.idplaga = " & DBSet(I, "N")
+            Sql = Sql & " and rcontrol_plagas.idplaga = " & DBSet(i, "N")
             If txtcodigo(6).Text <> "" Then Sql = Sql & " and fechacla >= " & DBSet(txtcodigo(6).Text, "F")
             If txtcodigo(7).Text <> "" Then Sql = Sql & " and fechacla <= " & DBSet(txtcodigo(7).Text, "F")
         
             Porcen = DevuelveValor(Sql)
             
-            Select Case I
+            Select Case i
                 Case 3 ' piojo gris
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 1"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",1) "
                                 
                                 conn.Execute Sql
@@ -1262,14 +1264,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 2"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",2)"
                                 
                                 conn.Execute Sql
@@ -1277,14 +1279,14 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 3"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",3)"
                                 
                                 conn.Execute Sql
@@ -1296,14 +1298,14 @@ Dim NRegs As Long
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 4"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",4)"
                                 
                                 conn.Execute Sql
@@ -1311,14 +1313,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 5"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",5)"
                                 
                                 conn.Execute Sql
@@ -1326,14 +1328,14 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 6"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",6)"
                                 
                                 conn.Execute Sql
@@ -1345,14 +1347,14 @@ Dim NRegs As Long
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 7"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",7)"
                                 
                                 conn.Execute Sql
@@ -1360,14 +1362,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 8"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",8)"
                                 
                                 conn.Execute Sql
@@ -1375,14 +1377,14 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 9"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",9)"
                                 
                                 conn.Execute Sql
@@ -1394,14 +1396,14 @@ Dim NRegs As Long
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 16"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",16)"
                                 
                                 conn.Execute Sql
@@ -1409,14 +1411,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 17"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",17)"
                                 
                                 conn.Execute Sql
@@ -1424,14 +1426,14 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 18"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",18)"
                                 
                                 conn.Execute Sql
@@ -1442,14 +1444,14 @@ Dim NRegs As Long
                 Case 7 ' %piedra
                     If Porcen > 1 Then
                         Sql = "select count(*) from tmpinformes "
-                        Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                        Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                        Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                        Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                         Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                         Sql = Sql & " and campo1 = 22"
                         If TotalRegistros(Sql) = 0 Then
                                                                    'codvarie,codsocio, codcampo, codplaga
                             Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                            Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                            Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                             Sql = Sql & DBSet(Rs!NroCampo, "N") & ",22)"
                             
                             conn.Execute Sql
@@ -1460,14 +1462,14 @@ Dim NRegs As Long
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 19"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",19)"
                                 
                                 conn.Execute Sql
@@ -1475,14 +1477,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 20"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",20)"
                                 
                                 conn.Execute Sql
@@ -1490,14 +1492,14 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 21"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",21)"
                                 
                                 conn.Execute Sql
@@ -1509,14 +1511,14 @@ Dim NRegs As Long
                     Select Case Porcen
                         Case 1 To 5
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 10"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",10)"
                                 
                                 conn.Execute Sql
@@ -1524,14 +1526,14 @@ Dim NRegs As Long
                             
                         Case 5.01 To 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 11"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",11)"
                                 
                                 conn.Execute Sql
@@ -1539,21 +1541,21 @@ Dim NRegs As Long
             
                         Case Is > 15
                             Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!CodSocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!CodVarie, "N")
+                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
                             Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
                             Sql = Sql & " and campo1 = 12"
                             If TotalRegistros(Sql) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
                                 Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!CodSocio, "N") & ","
+                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
                                 Sql = Sql & DBSet(Rs!NroCampo, "N") & ",12)"
                                 
                                 conn.Execute Sql
                             End If
                     End Select
             End Select
-        Next I
+        Next i
 
         Rs.MoveNext
     Wend

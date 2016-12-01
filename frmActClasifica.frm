@@ -666,6 +666,10 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PrimeraVez = True
     limpiar Me
 
@@ -1250,7 +1254,7 @@ Dim RS1 As ADODB.Recordset
                     Else
                     
                     ' se respeta iguala el nro de albaran con el nro de nota
-                        numalbar = DBLet(Rs.Fields!Numnotac, "N")
+                        numalbar = DBLet(Rs.Fields!numnotac, "N")
                     End If
         
                     b = InsertarCabecera(Rs, numalbar, cadMen, True)
@@ -1475,7 +1479,7 @@ Dim Precio As Currency
     Sql1 = Sql1 & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql1 = Sql1 & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql1 = Sql1 & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql1 = Sql1 & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql1 = Sql1 & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql1 = Sql1 & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
@@ -1491,7 +1495,7 @@ Dim Precio As Currency
     Sql1 = Sql1 & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql1 = Sql1 & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql1 = Sql1 & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
     End If
     
     Set Rs2 = New ADODB.Recordset
@@ -1502,7 +1506,7 @@ Dim Precio As Currency
     
     Sql = Sql & "(" & DBSet(Albaran, "N") & ","
     Sql = Sql & DBSet(Rs!FechaEnt, "F") & ","
-    Sql = Sql & DBSet(Rs!CodVarie, "N") & ","
+    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
     Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
     Sql = Sql & DBSet(Rs!codcampo, "N") & ","
     Sql = Sql & DBSet(Rs!TipoEntr, "N") & ","
@@ -1570,7 +1574,7 @@ Dim Precio As Currency
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: para el caso de Alzira se rompe tambien por capataz
@@ -1582,7 +1586,7 @@ Dim Precio As Currency
 
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
     End If
     
     conn.Execute Sql
@@ -1684,7 +1688,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = rclasifica_clasif.numnotac and "
@@ -1697,7 +1701,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
     End If
     
     Sql = Sql & " group by 1,2,3"
@@ -1745,7 +1749,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
@@ -1758,7 +1762,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!numnotac, "N")
     End If
     
     Sql = Sql & " group by 1,2,3"
@@ -1824,7 +1828,7 @@ On Error GoTo EInsertar
         '[Monica]25/02/2011: Si no es Picassent
         If Not EsPicassent Then
             Sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!numnotac, "N")
             
             conn.Execute Sql
         End If
@@ -1896,7 +1900,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and "
     
@@ -1906,7 +1910,7 @@ Dim vPrecio As String
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
@@ -1919,7 +1923,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and  "
     
@@ -1929,7 +1933,7 @@ Dim vPrecio As String
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
@@ -1942,7 +1946,7 @@ Dim vPrecio As String
     Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
     Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
     Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!CodVarie, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
     Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
@@ -1951,7 +1955,7 @@ Dim vPrecio As String
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!Numnotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!numnotac, "N") & " and "
     End If
     
     Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
@@ -2050,8 +2054,8 @@ Dim Cad As String
     Cad = ""
     
     While Not Rs.EOF
-        If Not CalculoGastosCorrectos(DBLet(Rs!Numnotac, "N")) Then
-            Cad = Cad & "(" & vUsu.Codigo & "," & DBLet(Rs!Numnotac, "N") & "," & DBLet(Rs!Codsocio, "N") & ",1),"
+        If Not CalculoGastosCorrectos(DBLet(Rs!numnotac, "N")) Then
+            Cad = Cad & "(" & vUsu.Codigo & "," & DBLet(Rs!numnotac, "N") & "," & DBLet(Rs!Codsocio, "N") & ",1),"
         End If
     
         Rs.MoveNext

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmCartasSocio 
    BorderStyle     =   3  'Fixed Dialog
@@ -562,16 +562,16 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim cad As String
+Dim Cad As String
 
     If Data1.Recordset.EOF Then
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
 
-    cad = Data1.Recordset.Fields(0) & "|"
-    cad = cad & Data1.Recordset.Fields(1) & "|"
-    RaiseEvent DatoSeleccionado(cad)
+    Cad = Data1.Recordset.Fields(0) & "|"
+    Cad = Cad & Data1.Recordset.Fields(1) & "|"
+    RaiseEvent DatoSeleccionado(Cad)
     Unload Me
 End Sub
 
@@ -589,10 +589,10 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim I As Integer
+Dim i As Integer
 
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     'ICONOS de La toolbar
     btnPrimero = 13 'Posicion del Boton Primero en la toolbar (+ 3 siguientes)
@@ -620,12 +620,12 @@ Dim I As Integer
     
     
     'IMAGES para zoom
-    For I = 0 To Me.imgZoom.Count - 1
-        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
-    Next I
-    For I = 0 To imgAyuda.Count - 1
-        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next I
+    For i = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next i
+    For i = 0 To imgAyuda.Count - 1
+        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next i
         
     'Vemos como esta guardado el valor del check
     chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -908,16 +908,16 @@ End Sub
 
 
 Private Sub BotonVerTodos()
-Dim cad As String
+Dim Cad As String
 
 'Ver todos
     LimpiarCampos
     
     If chkVistaPrevia.Value = 1 Then
-        cad = ""
+        Cad = ""
 '[Monica]19/06/2014: dejamos buscar
 '        If CodigoActual <> "" Then cad = " codcarta = " & DBSet(CodigoActual, "N")
-        MandaBusquedaPrevia cad
+        MandaBusquedaPrevia Cad
     Else
 '[Monica]19/06/2014: dejamos buscar
 '        If CodigoActual <> "" Then
@@ -1013,25 +1013,25 @@ End Function
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    cad = ""
+    Cad = ""
     'Estamos en Modo de Cabeceras
     'Registro de la tabla de cabeceras: scapla
-    cad = cad & ParaGrid(Text1(0), 20, "Cod. Carta")
-    cad = cad & ParaGrid(Text1(1), 80, "Descripción")
+    Cad = Cad & ParaGrid(Text1(0), 20, "Cod. Carta")
+    Cad = Cad & ParaGrid(Text1(1), 80, "Descripción")
     
     Tabla = NombreTabla
     Titulo = "Cartas de Oferta"
            
-    If cad <> "" Then
+    If Cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = Tabla
+        frmB.vCampos = Cad
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -1082,18 +1082,18 @@ End Sub
 
 
 Private Sub PonerCadenaBusqueda()
-Dim CadMen As String
+Dim cadMen As String
     Screen.MousePointer = vbHourglass
     On Error GoTo EEPonerBusq
 
     Data1.RecordSource = CadenaConsulta
     Data1.Refresh
     If Data1.Recordset.RecordCount <= 0 Then
-        CadMen = "No hay ningún registro en la tabla " & NombreTabla
+        cadMen = "No hay ningún registro en la tabla " & NombreTabla
         If Modo = 1 Then
-            MsgBox CadMen & " para ese criterio de Búsqueda.", vbInformation
+            MsgBox cadMen & " para ese criterio de Búsqueda.", vbInformation
         Else
-            MsgBox CadMen, vbInformation
+            MsgBox cadMen, vbInformation
         End If
         Screen.MousePointer = vbDefault
         PonerModo Modo

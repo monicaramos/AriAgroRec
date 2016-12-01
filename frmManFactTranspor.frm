@@ -40,16 +40,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(14)"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label1(13)"
-      Tab(1).Control(3)=   "Label1(12)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Text1(15)"
-      Tab(1).Control(6)=   "Text1(14)"
-      Tab(1).Control(7)=   "Text1(13)"
-      Tab(1).Control(8)=   "Text1(12)"
-      Tab(1).Control(9)=   "Combo1(2)"
+      Tab(1).Control(0)=   "Combo1(2)"
+      Tab(1).Control(1)=   "Text1(12)"
+      Tab(1).Control(2)=   "Text1(13)"
+      Tab(1).Control(3)=   "Text1(14)"
+      Tab(1).Control(4)=   "Text1(15)"
+      Tab(1).Control(5)=   "Label1(11)"
+      Tab(1).Control(6)=   "Label1(12)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgFec(1)"
+      Tab(1).Control(9)=   "Label1(14)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          Height          =   315
@@ -1641,7 +1641,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 'Modificar una linea
 Dim vWhere As String
 Dim anc As Single
-Dim j As Byte
+Dim J As Byte
 
     On Error GoTo eModificarLinea
 
@@ -1677,8 +1677,8 @@ Dim j As Byte
             Exit Sub
         End If
         If DataGrid5.Bookmark < DataGrid5.FirstRow Or DataGrid5.Bookmark > (DataGrid5.FirstRow + DataGrid5.VisibleRows - 1) Then
-            j = DataGrid5.Bookmark - DataGrid5.FirstRow
-            DataGrid5.Scroll 0, j
+            J = DataGrid5.Bookmark - DataGrid5.FirstRow
+            DataGrid5.Scroll 0, J
             DataGrid5.Refresh
         End If
 
@@ -1690,13 +1690,13 @@ Dim j As Byte
             anc = anc + DataGrid5.RowTop(DataGrid5.Row) + 10
         End If
 
-        For j = 3 To 4
-            txtAux1(j).Text = DataGrid5.Columns(j).Text
-        Next j
+        For J = 3 To 4
+            txtAux1(J).Text = DataGrid5.Columns(J).Text
+        Next J
 
-        For j = 5 To 9
-            txtAux1(j).Text = DataGrid5.Columns(j + 1).Text
-        Next j
+        For J = 5 To 9
+            txtAux1(J).Text = DataGrid5.Columns(J + 1).Text
+        Next J
 
         ModificaLineas = 2 'Modificar
         LLamaLineas ModificaLineas, anc, "DataGrid5"
@@ -1767,7 +1767,7 @@ Dim Cad As String
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
 '        NumPedElim = Data1.Recordset.Fields(1).Value
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -1882,6 +1882,9 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
      'Icono de busqueda
     For kCampo = 0 To Me.imgBuscar.Count - 1
@@ -2459,7 +2462,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -2921,7 +2924,7 @@ Dim Sql As String
             Cad = Cad & vbCrLf & "Factura: " & Data6.Recordset.Fields(1)
             Cad = Cad & vbCrLf & "Fecha: " & Data6.Recordset.Fields(2)
             Cad = Cad & vbCrLf & "Albarán: " & Data6.Recordset.Fields(3)
-            Cad = Cad & vbCrLf & "Nota: " & Data6.Recordset!Numnotac
+            Cad = Cad & vbCrLf & "Nota: " & Data6.Recordset!numnotac
             
             
             If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
@@ -3212,7 +3215,7 @@ End Sub
 
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim Sql As String, LEtra As String, Sql2 As String
 Dim b As Boolean
 Dim vTipoMov As CTiposMov
@@ -3254,10 +3257,10 @@ FinEliminar:
     End If
     If Not b Then
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -3836,7 +3839,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -3854,7 +3857,7 @@ Dim i As Integer
     ' **************************************************
 
     ' *** posar el nom del les distintes taules de llínies ***
-    vTabla = "rfacttra_albaran"
+    vtabla = "rfacttra_albaran"
     ' ********************************************************
     
     vWhere = ObtenerWhereCab(False)

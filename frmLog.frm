@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmLog 
@@ -592,7 +592,7 @@ End Sub
 
 Private Sub cmdAceptar_Click()
 'Dim I As Integer
-Dim cadB As String
+Dim CadB As String
 Dim Aux As String
 On Error Resume Next
 
@@ -614,12 +614,12 @@ On Error Resume Next
             End If
         
         
-            cadB = ObtenerBusqueda(Me, False)
-            If cadB <> "" And Aux <> "" Then Aux = " AND " & Aux
-            cadB = cadB & Aux
-            If cadB <> "" Then
+            CadB = ObtenerBusqueda(Me, False)
+            If CadB <> "" And Aux <> "" Then Aux = " AND " & Aux
+            CadB = CadB & Aux
+            If CadB <> "" Then
                 PonerModo 2
-                CargaGrid cadB
+                CargaGrid CadB
                 DataGrid1.SetFocus
             End If
 '        Case 3 'Insertar
@@ -721,7 +721,12 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim h As Integer
+Dim H As Integer
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     ' ICONITOS DE LA BARRA
     With Me.Toolbar1
         .ImageList = frmPpal.imgListComun
@@ -764,8 +769,8 @@ Private Sub imgAyuda_Click(Index As Integer)
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 53
-    frmMens.Cadena = DBLet(Me.adodc1.Recordset!Cadena, "T")
-    frmMens.cadwhere = DBLet(Me.adodc1.Recordset!ValorAnt, "T")
+    frmMens.cadena = DBLet(Me.adodc1.Recordset!cadena, "T")
+    frmMens.cadWHERE = DBLet(Me.adodc1.Recordset!ValorAnt, "T")
     frmMens.campo = DBLet(Me.adodc1.Recordset!CP, "T")
     frmMens.Show vbModal
     
@@ -818,20 +823,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 
-Private Sub CargaGrid(Optional SQL As String)
+Private Sub CargaGrid(Optional Sql As String)
 Dim b As Boolean
 Dim tots As String
     
     b = DataGrid1.Enabled
     
-    If SQL <> "" Then
-        SQL = CadenaConsulta & " AND " & SQL
+    If Sql <> "" Then
+        Sql = CadenaConsulta & " AND " & Sql
         Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY fecha desc"
+    Sql = Sql & " ORDER BY fecha desc"
     
-    CargaGridGnral DataGrid1, Me.adodc1, SQL, False
+    CargaGridGnral DataGrid1, Me.adodc1, Sql, False
     
     '### a mano
     tots = "S|txtAux(0)|T|Fecha|2000|;S|CboTipoSitu|C|Accion|1700|;S|txtAux(1)|T|Usuario|1200|;"
@@ -893,7 +898,7 @@ Private Sub txtAux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo
 End Sub
 
-Private Sub TxtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
+Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     KEYdown KeyCode
 End Sub
 

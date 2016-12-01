@@ -430,27 +430,27 @@ Attribute frmF.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
-Private cadParam As String
+Private CadParam As String
 Private numParam As Byte
-Private cadselect As String 'Cadena para comprobar si hay datos antes de abrir Informe
+Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
 Private Titulo As String 'Titulo informe que se pasa a frmImprimir
 Private nomRPT As String 'nombre del fichero .rpt a imprimir
 Private conSubRPT As Boolean 'si tiene subinformes para enlazarlos a las tablas correctas
 Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
-Private ConSubinforme As Boolean
+Private ConSubInforme As Boolean
 '-------------------------------------
 
 Dim cadSelect1 As String
 Dim cadSelect2 As String
 
 
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
-Dim tipo As String
+Dim Tipo As String
 
 Dim indice As Integer
 
@@ -507,7 +507,7 @@ Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim numOp As Byte
 
 Dim cadDesde As Date
-Dim cadHasta As Date
+Dim cadhasta As Date
 
 Dim cadAux As String
 
@@ -530,7 +530,7 @@ Dim Sql2 As String
     InicializarVbles
     
     'Añadir el parametro de Empresa
-    cadParam = cadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
     If DatosOk Then
@@ -603,7 +603,7 @@ Dim Sql2 As String
             nTabla2 = nTabla2 & " and grupopro.codgrupo <> 6 " ' grupo no puede ser 6=bodega
         End If
         
-        cadSelect2 = Replace(cadselect, "rclasifica", "rentradas")
+        cadSelect2 = Replace(cadSelect, "rclasifica", "rentradas")
         
 '        If Not AnyadirAFormula(cadSelect, "{rclasifica.transportadopor} = 0 ") Then Exit Sub
 '        If Not AnyadirAFormula(cadFormula, "{rclasifica.transportadopor} = 0 ") Then Exit Sub
@@ -611,7 +611,7 @@ Dim Sql2 As String
 '        If Not AnyadirAFormula(cadSelect, "{rclasifica.tipoentr} <> 1 ") Then Exit Sub
 '        If Not AnyadirAFormula(cadFormula, "{rclasifica.tipoentr} <> 1 ") Then Exit Sub
         
-        cadSelect1 = Replace(Replace(cadselect, "rclasifica", "rhisfruta_entradas"), "rhisfruta_entradas.codsocio", "rhisfruta.codsocio")
+        cadSelect1 = Replace(Replace(cadSelect, "rclasifica", "rhisfruta_entradas"), "rhisfruta_entradas.codsocio", "rhisfruta.codsocio")
         
         Tabla1 = "((((rhisfruta INNER JOIN rhisfruta_entradas on rhisfruta.numalbar = rhisfruta_entradas.numalbar) "
         Tabla1 = Tabla1 & " INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio) "
@@ -627,17 +627,17 @@ Dim Sql2 As String
         
         
         cadDesde = "01/01/1900"
-        cadHasta = "31/12/2500"
+        cadhasta = "31/12/2500"
         
         If txtcodigo(6).Text <> "" Then cadDesde = CDate(txtcodigo(6).Text)
-        If txtcodigo(7).Text <> "" Then cadHasta = CDate(txtcodigo(7).Text)
+        If txtcodigo(7).Text <> "" Then cadhasta = CDate(txtcodigo(7).Text)
         
-        cadParam = cadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
-        cadParam = cadParam & "pFecHasta= Date(" & Year(cadHasta) & "," & Month(cadHasta) & "," & Day(cadHasta) & ")" & "|" 'txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
+        CadParam = CadParam & "pFecHasta= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")" & "|" 'txtcodigo(7).Text & """|"
         numParam = numParam + 2
         
         
-        cadParam = cadParam & "pSaltoSocio=" & Check1.Value & "|"
+        CadParam = CadParam & "pSaltoSocio=" & Check1.Value & "|"
         numParam = numParam + 1
         
         If Me.Option1(0).Value Then
@@ -649,40 +649,40 @@ Dim Sql2 As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadwhere = Sql2
+        frmMens.cadWHERE = Sql2
         frmMens.Show vbModal
         
         Set frmMens = Nothing
         conSubRPT = True
         
-        If ProcesoEntradasSocio(nTabla, cadselect, Tabla1, cadSelect1, nTabla2, cadSelect2) Then
+        If ProcesoEntradasSocio(nTabla, cadSelect, Tabla1, cadSelect1, nTabla2, cadSelect2) Then
             If HayRegParaInforme("tmpinformes", "{tmpinformes.codusu} = " & vUsu.Codigo) Then
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
 
                 'Nombre fichero .rpt a Imprimir
                 indRPT = 59 ' informe de entradas por transportista
                 
-                If Not PonerParamRPT(indRPT, cadParam, numParam, nomDocu) Then Exit Sub
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
                 
                 If Me.Option1(1).Value Then
                     If Check3.Value Then
                         nomDocu = Replace(nomDocu, "EntradasSocios.rpt", "EntradasSocios2.rpt")
                         '[Monica]26/08/2011: Resumen por variedad
                         If Check2.Value Then
-                            cadParam = cadParam & "pResumen=1|"
+                            CadParam = CadParam & "pResumen=1|"
                             numParam = numParam + 1
                         End If
                     Else
                         nomDocu = Replace(nomDocu, "EntradasSocios.rpt", "EntradasSocios1.rpt")
                         '[Monica]26/08/2011: Resumen por variedad
                         If Check2.Value Then
-                            cadParam = cadParam & "pResumen=1|"
+                            CadParam = CadParam & "pResumen=1|"
                             numParam = numParam + 1
                         End If
                     End If
                     '[Monica]26/08/2014: calculo con mermas para Quatretonda
                     If vParamAplic.Cooperativa = 7 Then
-                        cadParam = cadParam & "pMerma=" & Check5.Value & "|"
+                        CadParam = CadParam & "pMerma=" & Check5.Value & "|"
                         numParam = numParam + 1
                     End If
                 End If
@@ -692,7 +692,7 @@ Dim Sql2 As String
                 If Me.Option1(0).Value Then
                     If Check2.Value Then
                         nomDocu = Replace(nomDocu, "EntradasSocios.rpt", "EntradasSocios3.rpt")
-                        cadParam = cadParam & "pResumen=1|"
+                        CadParam = CadParam & "pResumen=1|"
                         numParam = numParam + 1
                     End If
                 End If
@@ -701,7 +701,7 @@ Dim Sql2 As String
                 
                 cadNombreRPT = nomDocu '"rInfEntradasTrans.rpt"
                 
-                ConSubinforme = True
+                ConSubInforme = True
                 LlamarImprimir
 '            Else
 '                MsgBox "No hay registros entre esos límites.", vbExclamation
@@ -728,9 +728,11 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim I As Integer
+Dim i As Integer
 Dim indFrame As Single
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -739,12 +741,12 @@ Dim indFrame As Single
     Me.FrameFacturar.visible = False
     
     
-    For I = 12 To 13
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
-    For I = 20 To 21
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 12 To 13
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
+    For i = 20 To 21
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
 
     
     NomTabla = "rhisfruta"
@@ -798,7 +800,7 @@ Dim Sql2 As String
     Else
         Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadselect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadSelect2, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
@@ -989,8 +991,8 @@ End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim devuelve As String
-Dim codcampo As String, nomcampo As String
-Dim tabla As String
+Dim codcampo As String, nomCampo As String
+Dim Tabla As String
       
     Select Case Index
         'FECHA Desde Hasta
@@ -1007,10 +1009,10 @@ Dim tabla As String
         
         Case 12, 13  'Cod. Socio
             If PonerFormatoEntero(txtcodigo(Index)) Then
-                nomcampo = "nomsocio"
-                tabla = "rsocios"
+                nomCampo = "nomsocio"
+                Tabla = "rsocios"
                 codcampo = "codsocio"
-                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), tabla, nomcampo, codcampo, "N")
+                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), Tabla, nomCampo, codcampo, "N")
                 If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             Else
                 txtNombre(Index).Text = ""
@@ -1047,16 +1049,16 @@ Dim devuelve2 As String
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
-        If Not AnyadirAFormula(cadselect, devuelve) Then Exit Function
+        If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         devuelve2 = CadenaDesdeHastaBD(codD, codH, Codigo, TipCod)
         If devuelve2 = "Error" Then Exit Function
-        If Not AnyadirAFormula(cadselect, devuelve2) Then Exit Function
+        If Not AnyadirAFormula(cadSelect, devuelve2) Then Exit Function
     End If
     If devuelve <> "" Then
         If param <> "" Then
             'Parametro Desde/Hasta
-            cadParam = cadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
+            CadParam = CadParam & AnyadirParametroDH(param, codD, codH, nomD, nomH)
             numParam = numParam + 1
         End If
         PonerDesdeHasta = True
@@ -1066,8 +1068,8 @@ End Function
 
 Private Sub InicializarVbles()
     cadFormula = ""
-    cadselect = ""
-    cadParam = ""
+    cadSelect = ""
+    CadParam = ""
     numParam = 0
 End Sub
 
@@ -1075,13 +1077,13 @@ End Sub
 Private Sub LlamarImprimir()
     With frmImprimir
         .FormulaSeleccion = cadFormula
-        .OtrosParametros = cadParam
+        .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
         .EnvioEMail = False
         .Opcion = 0
         .Titulo = cadTitulo
-        .ConSubinforme = conSubRPT
+        .ConSubInforme = conSubRPT
         .NombreRPT = cadNombreRPT  'nombre del informe
         .Show vbModal
     End With
@@ -1106,7 +1108,7 @@ Private Sub AbrirFrmSocios(indice As Integer)
 End Sub
 
 
-Private Function ProcesoEntradasSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, cTabla2 As String, cwhere2 As String) As Boolean
+Private Function ProcesoEntradasSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, cTabla2 As String, cWhere2 As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -1137,8 +1139,8 @@ Dim Rs As ADODB.Recordset
     cwhere1 = QuitarCaracterACadena(cwhere1, "{")
     cwhere1 = QuitarCaracterACadena(cwhere1, "}")
     
-    cwhere2 = QuitarCaracterACadena(cwhere2, "{")
-    cwhere2 = QuitarCaracterACadena(cwhere2, "}")
+    cWhere2 = QuitarCaracterACadena(cWhere2, "{")
+    cWhere2 = QuitarCaracterACadena(cWhere2, "}")
     
     
     Sql = "select " & vUsu.Codigo & ", rentradas.codsocio,rentradas.codvarie,rentradas.codcampo,rentradas.numnotac,rentradas.fechaent,rentradas.kilosnet,rentradas.kilostra,rentradas.kilosbru,rentradas.recolect, rentradas.tipoentr, "
@@ -1146,8 +1148,8 @@ Dim Rs As ADODB.Recordset
     Sql = Sql & " (if(numcajo1 is null, 0,numcajo1) + if(numcajo2 is null, 0,numcajo2) + if(numcajo3 is null, 0,numcajo3) + if(numcajo4 is null, 0,numcajo4) + if(numcajo5 is null, 0,numcajo5)) numcajon "
     
     Sql = Sql & " from " & QuitarCaracterACadena(cTabla2, "_1")
-    If cwhere2 <> "" Then
-        Sql = Sql & " WHERE " & cwhere2
+    If cWhere2 <> "" Then
+        Sql = Sql & " WHERE " & cWhere2
     End If
     Sql = Sql & " union "
     Sql = Sql & "select " & vUsu.Codigo & ", rclasifica.codsocio,rclasifica.codvarie,rclasifica.codcampo,rclasifica.numnotac,rclasifica.fechaent,rclasifica.kilosnet,rclasifica.kilostra, rclasifica.kilosbru, rclasifica.recolect, rclasifica.tipoentr, rclasifica.numcajon from " & QuitarCaracterACadena(cTabla, "_1")

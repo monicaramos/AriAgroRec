@@ -2128,6 +2128,8 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -2910,7 +2912,7 @@ Dim HayReg As Boolean
                 Sql = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
-                        " and trzpalets.codvarie = " & DBSet(Rs!CodVarie, "N") & _
+                        " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
@@ -2938,7 +2940,7 @@ Dim HayReg As Boolean
 '                    Sql = Sql & CStr(Rs!codvarie) & ","
 '24/05/2010:  ahora puede ser por variedad o por linea
                     If Option1(0).Value Then ' si es por variedad
-                        Sql = Sql & CStr(Rs!CodVarie) & ","
+                        Sql = Sql & CStr(Rs!codvarie) & ","
                     Else
                         Sql = Sql & CStr(Rs2!Linea) & ","
                     End If
@@ -3141,7 +3143,7 @@ Dim HayReg As Boolean
                 Sql = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
-                        " and trzpalets.codvarie = " & DBSet(Rs!CodVarie, "N") & _
+                        " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
@@ -3165,7 +3167,7 @@ Dim HayReg As Boolean
                     Sql = Sql & CStr(Rs!NumPalet) & ","
                     
                     If Option1(0).Value Then ' si es por variedad
-                        Sql = Sql & CStr(Rs!CodVarie) & ","
+                        Sql = Sql & CStr(Rs!codvarie) & ","
                     Else
                         Sql = Sql & CStr(Rs2!Linea) & ","
                     End If

@@ -93,13 +93,13 @@ Begin VB.Form frmADVHcoFacturas
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmADVHcoFacturas.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame2(1)"
-      Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Text1(16)"
+      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(1)=   "Label1(12)"
+      Tab(0).Control(2)=   "Label1(30)"
       Tab(0).Control(3)=   "Label1(31)"
-      Tab(0).Control(4)=   "Label1(30)"
-      Tab(0).Control(5)=   "Label1(12)"
-      Tab(0).Control(6)=   "Label1(11)"
+      Tab(0).Control(4)=   "Text1(16)"
+      Tab(0).Control(5)=   "Text1(15)"
+      Tab(0).Control(6)=   "Frame2(1)"
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Partes"
       TabPicture(1)   =   "frmADVHcoFacturas.frx":0A2A
@@ -2484,8 +2484,8 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     ' ICONITOS DE LA BARRA
     btnPrimero = 15
@@ -2980,7 +2980,7 @@ Dim devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -3187,7 +3187,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2 And Modo <> 5)
     cmdCancelar.visible = b
-    CmdAceptar.visible = b
+    cmdAceptar.visible = b
     
     
     For i = 0 To Me.imgBuscar.Count - 1
@@ -3265,7 +3265,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3273,7 +3273,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 17 And KeyAscii = 13 Then 'campo nº de lote y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYpress KeyAscii
     End If
@@ -3294,7 +3294,7 @@ Private Sub Text3_LostFocus(Index As Integer)
 '        Case 0, 1 'trabajador
 '            Text2(Index).Text = PonerNombreDeCod(Text3(Index), conAri, "straba", "nomtraba", "codtraba", "Cod. Trabajador", "N")
         Case 8 'observa 5
-            PonerFocoBtn Me.CmdAceptar
+            PonerFocoBtn Me.cmdAceptar
     End Select
 End Sub
 
@@ -3413,7 +3413,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
 On Error Resume Next
 
-    Me.CmdAceptar.visible = Not b
+    Me.cmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"

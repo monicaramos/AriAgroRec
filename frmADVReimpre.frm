@@ -587,6 +587,9 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
     limpiar Me
 

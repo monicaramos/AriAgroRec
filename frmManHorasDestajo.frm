@@ -828,7 +828,7 @@ Dim temp As Boolean
         NumRegElim = adodc1.Recordset.AbsolutePosition
         Sql = "Delete from horasdestajo where codtraba=" & adodc1.Recordset!CodTraba
         Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        Sql = Sql & " and codvarie = " & adodc1.Recordset!CodVarie
+        Sql = Sql & " and codvarie = " & adodc1.Recordset!codvarie
         Sql = Sql & " and codforfait = " & DBSet(adodc1.Recordset!codforfait, "T")
         
         conn.Execute Sql
@@ -1092,6 +1092,11 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
 
     With Me.Toolbar1

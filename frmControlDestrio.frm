@@ -1407,6 +1407,9 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
  
     ' ICONETS DE LA BARRA
@@ -2387,7 +2390,7 @@ Dim vWhere As String
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
     vWhere = " WHERE nroclasif=" & Data1.Recordset!nroclasif
-    vWhere = vWhere & " and codvarie = " & Data1.Recordset!CodVarie
+    vWhere = vWhere & " and codvarie = " & Data1.Recordset!codvarie
     vWhere = vWhere & " and codsocio = " & Data1.Recordset!Codsocio
     vWhere = vWhere & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
     vWhere = vWhere & " and codcampo = " & Data1.Recordset!codcampo
@@ -2949,7 +2952,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " codvarie=" & Me.Data1.Recordset!CodVarie
+    vWhere = vWhere & " codvarie=" & Me.Data1.Recordset!codvarie
     vWhere = vWhere & " and fechacla=" & DBSet(Me.Data1.Recordset!fechacla, "F")
     vWhere = vWhere & " and codsocio=" & Me.Data1.Recordset!Codsocio
     vWhere = vWhere & " and codcampo=" & Me.Data1.Recordset!codcampo
@@ -2965,7 +2968,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " codvarie=" & Me.Data1.Recordset!CodVarie
+    vWhere = vWhere & " codvarie=" & Me.Data1.Recordset!codvarie
     vWhere = vWhere & " and fechacla=" & DBSet(Me.Data1.Recordset!fechacla, "F")
     vWhere = vWhere & " and codsocio=" & Me.Data1.Recordset!Codsocio
     vWhere = vWhere & " and codcampo=" & Me.Data1.Recordset!codcampo
@@ -3032,7 +3035,7 @@ Dim i As Integer
     Sql = Sql & " sum(kilosplaga5) plaga5, sum(kilosplaga6) plaga6, sum(kilosplaga7) plaga7, sum(kilosplaga8) plaga8, "
     Sql = Sql & " sum(kilosplaga9) plaga9, sum(kilosplaga10) plaga10, sum(kilosplaga11) plaga11 "
     Sql = Sql & " from rcontrol_plagas "
-    Sql = Sql & " where codvarie = " & Data1.Recordset!CodVarie
+    Sql = Sql & " where codvarie = " & Data1.Recordset!codvarie
     Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
     Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
     Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
@@ -3356,7 +3359,7 @@ Dim i As Integer
     
                     '[Monica]30/01/2014: antes no estaba clareta (16)
     For i = 1 To 16 '15 '14 [Monica]25/11/2011: antes no estaba la palga pixat (15)
-        Sql1 = Sql1 & "(" & DBSet(Rs!CodVarie, "N") & "," & DBSet(Rs!fechacla, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
+        Sql1 = Sql1 & "(" & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!fechacla, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
         Sql1 = Sql1 & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!nroclasif, "N") & "," & DBSet(i, "N") & ","
         Sql1 = Sql1 & "0,0,0,0,0,0,0,0,0,0,0, " & DBSet(Text1(7).Text, "N") & "),"
     Next i
@@ -3460,7 +3463,7 @@ Dim Porcen As Currency
     Sql = "update rclasifauto set kilospeq = " & DBSet(Text1(5).Text, "N")
     Sql = Sql & ", porcdest = " & DBSet(Text1(6).Text, "N")
     Sql = Sql & " where numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
-    Sql = Sql & " and codvarie = " & Data1.Recordset!CodVarie
+    Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
     Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
     Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
     Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
@@ -3490,7 +3493,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
     Sql = "delete from rclasifauto_plagas where " 'numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
     'SQL = SQL & " and codvarie = " & Data1.Recordset!CodVarie
-    Sql = Sql & " codVarie = " & Data1.Recordset!CodVarie
+    Sql = Sql & " codVarie = " & Data1.Recordset!codvarie
     Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
     Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
     Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
@@ -3536,7 +3539,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3556,7 +3559,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3576,7 +3579,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3600,7 +3603,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3620,7 +3623,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3640,7 +3643,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3664,7 +3667,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3684,7 +3687,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3704,7 +3707,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3728,7 +3731,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3748,7 +3751,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3768,7 +3771,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3791,7 +3794,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = SQL & Data1.Recordset!nroclasif & ","
                         Sql = Sql & "1,"
-                        Sql = Sql & Data1.Recordset!CodVarie & ","
+                        Sql = Sql & Data1.Recordset!codvarie & ","
                         Sql = Sql & Data1.Recordset!Codsocio & ","
                         Sql = Sql & Data1.Recordset!codcampo & ","
                         Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3814,7 +3817,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3834,7 +3837,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3854,7 +3857,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3878,7 +3881,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3898,7 +3901,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
@@ -3918,7 +3921,7 @@ Dim Porcen As Currency
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
                             Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!CodVarie & ","
+                            Sql = Sql & Data1.Recordset!codvarie & ","
                             Sql = Sql & Data1.Recordset!Codsocio & ","
                             Sql = Sql & Data1.Recordset!codcampo & ","
                             Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","

@@ -775,6 +775,9 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
 
     With Me.Toolbar1

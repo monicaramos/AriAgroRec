@@ -866,6 +866,9 @@ End Sub
 Private Sub Form_Load()
 Dim Sql As String
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
 
     With Me.Toolbar1

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmConfParamRpt 
    BorderStyle     =   3  'Fixed Dialog
@@ -435,7 +435,7 @@ Dim Modo As Byte
 
 Private Sub cmdAceptar_Click()
 Dim vParamRpt As CParamRpt 'Clase Parametros para Reports
-Dim cad As String, Indicador As String
+Dim Cad As String, Indicador As String
 Dim actualiza As Boolean
 
     If DatosOk Then
@@ -469,8 +469,8 @@ Dim actualiza As Boolean
         End If
         Set vParamRpt = Nothing
         If actualiza = 0 Then 'Inserta o Modifica
-            cad = "codcryst=" & Text1(0).Text
-            If SituarData(Data1, cad, Indicador) Then
+            Cad = "codcryst=" & Text1(0).Text
+            If SituarData(Data1, Cad, Indicador) Then
                 PonerModo 2
                 Me.lblIndicador.Caption = Indicador
             End If
@@ -516,9 +516,9 @@ End Sub
 
 
 Private Sub Form_Load()
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
-'
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     ' ICONITOS DE LA BARRA
     With Me.Toolbar1
         btnPrimero = 11
@@ -783,20 +783,20 @@ Dim b As Boolean
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
+Dim Cad As String
 
     'Llamamos a al form
     Screen.MousePointer = vbHourglass
-    cad = ParaGrid(Text1(0), 10, "Código")
-    cad = cad & ParaGrid(Text1(1), 30, "Descripción")
-    cad = cad & ParaGrid(Text1(2), 60, "Fichero")
+    Cad = ParaGrid(Text1(0), 10, "Código")
+    Cad = Cad & ParaGrid(Text1(1), 30, "Descripción")
+    Cad = Cad & ParaGrid(Text1(2), 60, "Fichero")
         
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vTabla = "scryst"
-        frmB.vSQL = cadB
+        frmB.vCampos = Cad
+        frmB.vtabla = "scryst"
+        frmB.vSQL = CadB
 '        HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|"

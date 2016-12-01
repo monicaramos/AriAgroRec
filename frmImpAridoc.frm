@@ -357,6 +357,10 @@ Private Sub Combo1_LostFocus(Index As Integer)
 End Sub
 
 Private Sub Form_Load()
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     txtcodigo(0).Text = Date
     txtcodigo(1).Text = Date
     Set impor = New ArdImportador

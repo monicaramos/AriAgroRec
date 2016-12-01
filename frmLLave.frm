@@ -237,6 +237,10 @@ End Sub
 
 Private Sub Form_Load()
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     PulsadoSalir = False
     txt3(0) = ActiveLock1.SoftwareName
     txt3(1) = ActiveLock1.SoftwareCode

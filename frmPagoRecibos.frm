@@ -794,7 +794,7 @@ On Error GoTo eProcesarCambios
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1093,7 +1093,7 @@ On Error GoTo eProcesarCambios
             Cad = ""
         Else
             '[Monica]22/11/2013:iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1267,7 +1267,7 @@ On Error GoTo eRepetirNormaNatural
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1428,7 +1428,7 @@ On Error GoTo eRepetirNormaPicassent
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If
@@ -1637,6 +1637,8 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
@@ -2584,7 +2586,7 @@ On Error GoTo eProcesarCambiosPicassent
             Cad = ""
         Else
             '[Monica]22/11/2013: iban
-            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
+            Cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
         End If
         CodigoOrden34 = DBLet(Rs!codorden34, "T")
     End If

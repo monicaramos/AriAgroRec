@@ -7324,11 +7324,11 @@ Dim Fecha As Date
             If Not Rs2.EOF Then
                 Cad3 = "(" & vUsu.Codigo & "," & DBSet(Rs!Hidrante, "T") & ","
                 Cad2 = ""
-                If Trim(DBLet(Rs!poligono, "T")) <> Trim(DBLet(Rs2!poligono, "T")) Then
-                    If DBLet(Rs2!poligono, "T") = "" Then
+                If Trim(DBLet(Rs!Poligono, "T")) <> Trim(DBLet(Rs2!Poligono, "T")) Then
+                    If DBLet(Rs2!Poligono, "T") = "" Then
                         Cad2 = Cad2 & "'',"
                     Else
-                        Cad2 = Cad2 & DBSet(Rs2!poligono, "T") & ","
+                        Cad2 = Cad2 & DBSet(Rs2!Poligono, "T") & ","
                     End If
                 Else
                     Cad2 = Cad2 & ValorNulo & ","
@@ -7424,14 +7424,14 @@ Dim Fecha As Date
             Sql = "select count(*) from rpozos where hidrante = " & DBSet(Contador, "T")
             If TotalRegistros(Sql) = 0 Then
                 CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(Contador, "T") & ","
-                CadValues = CadValues & DBSet(Rs2!poligono, "N") & "," & DBSet(Rs2!parcelas, "T") & ","
+                CadValues = CadValues & DBSet(Rs2!Poligono, "N") & "," & DBSet(Rs2!parcelas, "T") & ","
                 CadValues = CadValues & DBSet(Rs2!Hanegadas, "N") & ",0),"
             Else
                 ' estan en escalona pero tienen fecha de baja pongo una marca para identificarlos
                 Sql = "select count(*) from rpozos where hidrante = " & DBSet(Contador, "T") & " and not fechabaja is null"
                 If TotalRegistros(Sql) = 1 Then
                     CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(Contador, "T") & ","
-                    CadValues = CadValues & DBSet(Rs2!poligono, "N") & "," & DBSet(Rs2!parcelas, "T") & ","
+                    CadValues = CadValues & DBSet(Rs2!Poligono, "N") & "," & DBSet(Rs2!parcelas, "T") & ","
                     CadValues = CadValues & DBSet(Rs2!Hanegadas, "N") & ",1),"
                 End If
                 
@@ -9468,6 +9468,8 @@ Dim i As Integer
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
 
     PrimeraVez = True
@@ -10865,7 +10867,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -11306,7 +11308,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 Dim Precio1 As Currency
@@ -11392,7 +11394,7 @@ Dim vSocio As cSocio
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
 
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -11528,9 +11530,9 @@ Dim vSocio As cSocio
             Acciones = 0
         End If
             
-        BaseImpo = ImpConsumo + ImpCuota + ImpConsumoHda
-        ImpoIva = Round2(BaseImpo * vPorcIva / 100, 2)
-        TotalFac = BaseImpo + ImpoIva
+        baseimpo = ImpConsumo + ImpCuota + ImpConsumoHda
+        ImpoIva = Round2(baseimpo * vPorcIva / 100, 2)
+        TotalFac = baseimpo + ImpoIva
     
         IncrementarProgresNew Pb1, 1
         
@@ -11542,7 +11544,7 @@ Dim vSocio As cSocio
         '[Monica]28/02/2012: introducimos los nuevos campos
         Sql = Sql & "codparti, calibre, codpozo) "
         Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(NumLin, "N") & "," & DBSet(ActSocio, "N") & ","
-        Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(BaseImpo, "N") & ","
+        Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(baseimpo, "N") & ","
         '[Monica]01/02/2016: Introducimos las facturas internas
         If Not vSocio.EsFactADVInt Then
             Sql = Sql & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(vPorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
@@ -12877,7 +12879,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -12956,7 +12958,7 @@ Dim ConsumoHidrante As Long
             End If
         Loop Until Not Existe
         
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -13037,7 +13039,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -13123,7 +13125,7 @@ Dim Descuento As Currency
             End If
         Loop Until Not Existe
         
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -13146,8 +13148,8 @@ Dim Descuento As Currency
     
     
         '[Monica]14/03/2012, descomponemos el total que lleva el iva incluido
-        BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
     
         IncrementarProgresNew pb2, 1
         
@@ -13156,7 +13158,7 @@ Dim Descuento As Currency
         Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
         Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, escontado) "
         Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
-        Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+        Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
         Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -13238,7 +13240,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -13326,7 +13328,7 @@ Dim CadValues As String
             End If
         Loop Until Not Existe
         
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -13356,8 +13358,8 @@ Dim CadValues As String
         End If
     
         '[Monica]14/03/2012, descomponemos el total que lleva el iva incluido
-        BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
     
         IncrementarProgresNew pb2, 1
         
@@ -13366,7 +13368,7 @@ Dim CadValues As String
         Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
         Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, escontado) "
         Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
-        Sql = Sql & ValorNulo & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+        Sql = Sql & ValorNulo & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
         Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -13476,7 +13478,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 Dim TotalZona As Currency
 
@@ -13560,7 +13562,7 @@ Dim SqlPrec As String
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -13588,8 +13590,8 @@ Dim SqlPrec As String
             Loop Until Not Existe
         
         
-            BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-            ImpoIva = TotalFac - BaseImpo
+            baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+            ImpoIva = TotalFac - baseimpo
         
         
             'insertar en la tabla de recibos de pozos
@@ -13597,7 +13599,7 @@ Dim SqlPrec As String
             Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
             Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio,escontado) "
             Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(SocioAnt, "N") & ","
-            Sql = Sql & ValorNulo & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
             Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
             Sql = Sql & ValorNulo & "," & ValorNulo & ","
             Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -13639,7 +13641,7 @@ Dim SqlPrec As String
                 CadValues = CadValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                 CadValues = CadValues & DBSet(Rs8!codcampo, "N") & "," & DBSet(Rs8!hanegada, "N") & ","
                 CadValues = CadValues & DBSet(PrecioTalla1, "N") & "," & DBSet(PrecioTalla2, "N") & "," & DBSet(ZonaTalla, "N") & ","
-                CadValues = CadValues & DBSet(Rs8!poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T") & "),"
+                CadValues = CadValues & DBSet(Rs8!Poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T") & "),"
                 
                 Rs8.MoveNext
             Wend
@@ -13655,7 +13657,7 @@ Dim SqlPrec As String
             If b Then b = vTipoMov.IncrementarContador(tipoMov)
             
             
-            BaseImpo = 0
+            baseimpo = 0
             ImpoIva = 0
             TotalFac = 0
         
@@ -13692,15 +13694,15 @@ Dim SqlPrec As String
             End If
         Loop Until Not Existe
             
-        BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
     
         'insertar en la tabla de recibos de pozos
         Sql = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
         Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
         Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, escontado) "
         Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(SocioAnt, "N") & ","
-        Sql = Sql & ValorNulo & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+        Sql = Sql & ValorNulo & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
         Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -13742,7 +13744,7 @@ Dim SqlPrec As String
             CadValues = CadValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
             CadValues = CadValues & DBSet(Rs8!codcampo, "N") & "," & DBSet(Rs8!hanegada, "N") & ","
             CadValues = CadValues & DBSet(PrecioTalla1, "N") & "," & DBSet(PrecioTalla2, "N") & "," & DBSet(ZonaTalla, "N") & ","
-            CadValues = CadValues & DBSet(Rs8!poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T") & "),"
+            CadValues = CadValues & DBSet(Rs8!Poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T") & "),"
             
             Rs8.MoveNext
         Wend
@@ -13808,7 +13810,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -13883,7 +13885,7 @@ Dim vCta As String
     While Not Rs.EOF And b
         HayReg = True
         
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -13905,13 +13907,13 @@ Dim vCta As String
         End If
     
         '[Monica]14/03/2012, descomponemos el total que lleva el iva incluido
-        BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
     
         IncrementarProgresNew Pb1, 1
         
         'modificamos la tabla de recibos de pozos
-        Sql = "update rrecibpozos set baseimpo = " & DBSet(BaseImpo, "N")
+        Sql = "update rrecibpozos set baseimpo = " & DBSet(baseimpo, "N")
         Sql = Sql & ", tipoiva = " & DBSet(vParamAplic.CodIvaPOZ, "N")
         Sql = Sql & ", porc_iva = " & DBSet(PorcIva, "N")
         Sql = Sql & ", imporiva = " & DBSet(ImpoIva, "N")
@@ -14163,7 +14165,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -14242,14 +14244,14 @@ Dim ConsumoHidrante As Long
             End If
         Loop Until Not Existe
         
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
         TotalFac = CCur(ImporteSinFormato(ComprobarCero(txtcodigo(33).Text)))
         '[Monica]08/06/2016: antes en estas facturas no grababamos el importe de iva y en baseimpo poniamos el totalfac
-        BaseImpo = Round2(TotalFac / (1 + (vPorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (vPorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
         
     
         IncrementarProgresNew Pb3, 1
@@ -14266,7 +14268,7 @@ Dim ConsumoHidrante As Long
             Sql = Sql & ") "
         End If
         Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
-        Sql = Sql & ValorNulo & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+        Sql = Sql & ValorNulo & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
         Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
         Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -14596,7 +14598,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -14660,7 +14662,7 @@ Dim cadMen As String
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    BaseImpo = 0
+    baseimpo = 0
     ImpoIva = 0
     TotalFac = 0
 
@@ -14703,19 +14705,19 @@ Dim cadMen As String
             
             ' consumo de agua y consumo de electricidad
             
-            BaseImpo = Round2(ConsTra1 * CCur(ImporteSinFormato(txtcodigo(4).Text)), 2) + _
+            baseimpo = Round2(ConsTra1 * CCur(ImporteSinFormato(txtcodigo(4).Text)), 2) + _
                        Round2(ConsTra1 * CCur(ImporteSinFormato(txtcodigo(5).Text)), 2)
     
     
-            ImpoIva = Round2(BaseImpo * PorcIva / 100, 2)
-            TotalFac = BaseImpo + Round2(BaseImpo * PorcIva / 100, 2)
+            ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
+            TotalFac = baseimpo + Round2(baseimpo * PorcIva / 100, 2)
     
     
             'insertar en la tabla de recibos de pozos
             Sql = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, numlinea, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
             Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, concepto, contabilizado, codparti, parcelas, poligono, nroorden, escontado) "
             Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ",1,"
-            Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(BaseImpo, "N") & "," & vParamAplic.CodIvaPOZ & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+            Sql = Sql & DBSet(Rs!Hidrante, "T") & "," & DBSet(baseimpo, "N") & "," & vParamAplic.CodIvaPOZ & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
             Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(ConsumoHidrante, "N") & "," & DBSet(0, "N") & ","
             Sql = Sql & DBSet(Rs!lect_ant, "N") & "," & DBSet(Rs!fech_ant, "F") & ","
             Sql = Sql & DBSet(Rs!lect_act, "N") & "," & DBSet(Rs!fech_act, "F") & ","
@@ -14731,7 +14733,7 @@ Dim cadMen As String
             End If
             
             '[Monica]22/10/2012: guardamos tambien la partida [Monica]03/05/2013: ahora tb el poligono [Monica]22/07/2013: metemos el nro de orden
-            Sql = Sql & DBSet(Rs!codparti, "N") & "," & DBSet(Rs!parcelas, "T") & "," & DBSet(Rs!poligono, "T") & "," & DBSet(Rs!nroorden, "N") '& ")"
+            Sql = Sql & DBSet(Rs!codparti, "N") & "," & DBSet(Rs!parcelas, "T") & "," & DBSet(Rs!Poligono, "T") & "," & DBSet(Rs!nroorden, "N") '& ")"
     
             '[Monica]02/09/2014: CONTADOSSSS
             If EsSocioContadoPOZOS(CStr(Rs!Codsocio)) Then
@@ -14866,10 +14868,10 @@ Dim vPorcIva As Currency
 
     
                 '[Monica]08/06/2016: sacamos el porcentaje de iva grabado
-                vPorcIva = DBLet(Rs!Porc_Iva, "N")
+                vPorcIva = DBLet(Rs!porc_iva, "N")
 
 
-                tBaseImpo = DBLet(Rs!BaseImpo, "N")
+                tBaseImpo = DBLet(Rs!baseimpo, "N")
                 tImporIva = DBLet(Rs!ImporIva, "N")
                 tTotalFact = DBLet(Rs!TotalFact, "N")
 
@@ -14926,7 +14928,7 @@ Dim vPorcIva As Currency
                     If SinIva Then
                         Sql4 = Sql4 & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
                     Else
-                        Sql4 = Sql4 & vParamAplic.CodIvaPOZ & "," & DBSet(Rs!Porc_Iva, "N") & "," & DBSet(vImporIva, "N") & ","
+                        Sql4 = Sql4 & vParamAplic.CodIvaPOZ & "," & DBSet(Rs!porc_iva, "N") & "," & DBSet(vImporIva, "N") & ","
                     End If
                     
                     Sql4 = Sql4 & DBSet(vTotalFact, "N") & "," & DBSet(Rs!Consumo, "N", "S") & "," & DBSet(0, "N") & ","
@@ -14947,7 +14949,7 @@ Dim vPorcIva As Currency
                     Sql4 = Sql4 & DBSet(Rs!Codpozo, "N") & "," & DBSet(Rs!PorcDto, "N") & "," & DBSet(Rs!ImpDto, "N") & "," & DBSet(Rs!Precio, "N") & "," & DBSet(Rs!pasaridoc, "N") & ","
                     
                     '[Monica]22/10/2012: guardamos tambien la partida [Monica]03/05/2013: ahora tb el poligono [Monica]22/07/2013: ahora tb metemos el nro de orden
-                    Sql4 = Sql4 & DBSet(Rs!codparti, "N") & "," & DBSet(Rs!parcelas, "T") & "," & DBSet(Rs!poligono, "T") & "," & DBSet(Rs!nroorden, "N") '& ")"
+                    Sql4 = Sql4 & DBSet(Rs!codparti, "N") & "," & DBSet(Rs!parcelas, "T") & "," & DBSet(Rs!Poligono, "T") & "," & DBSet(Rs!nroorden, "N") '& ")"
 
                     '[Monica]02/09/2014: CONTADOSSSS
                     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
@@ -15745,7 +15747,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 Dim TotalZona As Currency
 
@@ -15829,7 +15831,7 @@ Dim Nregs As Integer
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
-        BaseImpo = 0
+        baseimpo = 0
         ImpoIva = 0
         TotalFac = 0
         
@@ -15844,14 +15846,14 @@ Dim Nregs As Integer
         
             numfactu = numfactu + 1
         
-            BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-            ImpoIva = TotalFac - BaseImpo
+            baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+            ImpoIva = TotalFac - baseimpo
         
             'insertar en la tabla de recibos de pozos tmpinformes
             '                               codusu, numfactu,fecfactu,codsocio,baseimpo,codivapoz,porciva,imporiva, totalfac, concepto
             Sql = "insert into tmpinformes (codusu, importe1, fecha1, codigo1, importe2, campo1, porcen1, importe3, importe4, nombre1) "
             Sql = Sql & " values (" & vUsu.Codigo & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(SocioAnt, "N") & ","
-            Sql = Sql & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+            Sql = Sql & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
             Sql = Sql & DBSet(TotalFac, "N") & ","
             Sql = Sql & DBSet(txtcodigo(97).Text, "T") & ")"
             
@@ -15891,7 +15893,7 @@ Dim Nregs As Integer
             Set Rs8 = Nothing
                 
             
-            BaseImpo = 0
+            baseimpo = 0
             ImpoIva = 0
             TotalFac = 0
         
@@ -15916,13 +15918,13 @@ Dim Nregs As Integer
     If HayReg And b Then
         numfactu = numfactu + 1
             
-        BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-        ImpoIva = TotalFac - BaseImpo
+        baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+        ImpoIva = TotalFac - baseimpo
     
         'insertar en la tabla de recibos de pozos (intermedia)
         Sql = "insert into tmpinformes (codusu, importe1, fecha1, codigo1, importe2, campo1, porcen1, importe3, importe4, nombre1) "
         Sql = Sql & " values (" & vUsu.Codigo & "," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(SocioAnt, "N") & ","
-        Sql = Sql & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+        Sql = Sql & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
         Sql = Sql & DBSet(TotalFac, "N") & ","
         Sql = Sql & DBSet(txtcodigo(97).Text, "T") & ")"
         
@@ -16279,7 +16281,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -16367,7 +16369,7 @@ Dim i As Integer
                 End If
             Loop Until Not Existe
             
-            BaseImpo = 0
+            baseimpo = 0
             ImpoIva = 0
             TotalFac = 0
             
@@ -16380,8 +16382,8 @@ Dim i As Integer
             
         
             '[Monica]14/03/2012, descomponemos el total que lleva el iva incluido
-            BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-            ImpoIva = TotalFac - BaseImpo
+            baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+            ImpoIva = TotalFac - baseimpo
         
             IncrementarProgresNew pb7, 1
             
@@ -16390,7 +16392,7 @@ Dim i As Integer
             Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
             Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio) "
             Sql = Sql & " values ('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
-            Sql = Sql & ValorNulo & "," & DBSet(BaseImpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+            Sql = Sql & ValorNulo & "," & DBSet(baseimpo, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
             Sql = Sql & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & ","
             Sql = Sql & ValorNulo & "," & ValorNulo & ","
             Sql = Sql & ValorNulo & "," & ValorNulo & ","
@@ -16424,7 +16426,7 @@ Dim i As Integer
             While Not Rs8.EOF
                 CadValues = CadValues & "('" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                 CadValues = CadValues & DBSet(Rs8!codcampo, "N") & "," & DBSet(Rs8!hanegada, "N") & "," & DBSet(txtcodigo(112).Text, "N") & ","
-                CadValues = CadValues & DBSet(Rs8!codzonas, "N") & "," & DBSet(Rs8!poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T")
+                CadValues = CadValues & DBSet(Rs8!codzonas, "N") & "," & DBSet(Rs8!Poligono, "N") & "," & DBSet(Rs8!Parcela, "N") & "," & DBSet(Rs8!SubParce, "T")
                 CadValues = CadValues & "),"
                 Rs8.MoveNext
             Wend
@@ -16491,7 +16493,7 @@ Dim PorcIva As Currency
 Dim vTipoMov As CTiposMov
 Dim numfactu As Long
 Dim ImpoIva As Currency
-Dim BaseImpo As Currency
+Dim baseimpo As Currency
 Dim TotalFac As Currency
 
 
@@ -16585,7 +16587,7 @@ Dim Precio As Currency
                 End If
             Loop Until Not Existe
             
-            BaseImpo = 0
+            baseimpo = 0
             ImpoIva = 0
             TotalFac = 0
             
@@ -16596,8 +16598,8 @@ Dim Precio As Currency
             TotalFac = Round2(Acciones * Precio, 2)
         
             '[Monica]14/03/2012, descomponemos el total que lleva el iva incluido
-            BaseImpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
-            ImpoIva = TotalFac - BaseImpo
+            baseimpo = Round2(TotalFac / (1 + (PorcIva / 100)), 2)
+            ImpoIva = TotalFac - baseimpo
         
             IncrementarProgresNew pb7, 1
             
@@ -16605,7 +16607,7 @@ Dim Precio As Currency
             Sql = "insert into rpozticketsmanta (numalbar,fecalbar,codsocio,codcampo,hanegada,precio1,importe,codzonas,poligono,parcela,subparce,fecriego,fecpago,concepto) "
             Sql = Sql & " values (" & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
             Sql = Sql & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!Hanegadas, "N") & "," & DBSet(Precio, "N") & "," ' DBSet(CCur(ImporteSinFormato(txtCodigo(112).Text)), "N") & ","
-            Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!codzonas, "N") & "," & DBSet(Rs!poligono, "N") & "," & DBSet(Rs!Parcela, "N") & "," & DBSet(Rs!SubParce, "T")
+            Sql = Sql & DBSet(TotalFac, "N") & "," & DBSet(Rs!codzonas, "N") & "," & DBSet(Rs!Poligono, "N") & "," & DBSet(Rs!Parcela, "N") & "," & DBSet(Rs!SubParce, "T")
             Sql = Sql & "," & ValorNulo & "," & ValorNulo & "," & DBSet(txtcodigo(113).Text, "T") & ")"
             
             conn.Execute Sql

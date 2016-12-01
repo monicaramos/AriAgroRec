@@ -35,9 +35,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0)=   "Frame3"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2)=   "FrameAnticipos"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -3363,7 +3363,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 'Modificar una linea
 Dim vWhere As String
 Dim anc As Single
-Dim j As Byte
+Dim J As Byte
 
     On Error GoTo eModificarLinea
 
@@ -3399,8 +3399,8 @@ Dim j As Byte
             Exit Sub
         End If
         If DataGrid4.Bookmark < DataGrid4.FirstRow Or DataGrid4.Bookmark > (DataGrid4.FirstRow + DataGrid4.VisibleRows - 1) Then
-            j = DataGrid4.Bookmark - DataGrid4.FirstRow
-            DataGrid4.Scroll 0, j
+            J = DataGrid4.Bookmark - DataGrid4.FirstRow
+            DataGrid4.Scroll 0, J
             DataGrid4.Refresh
         End If
 
@@ -3412,9 +3412,9 @@ Dim j As Byte
             anc = anc + DataGrid4.RowTop(DataGrid4.Row) + 10
         End If
 
-        For j = 10 To 13
-            txtAux3(j).Text = DataGrid4.Columns(j - 10).Text
-        Next j
+        For J = 10 To 13
+            txtAux3(J).Text = DataGrid4.Columns(J - 10).Text
+        Next J
         txtAux3(14).Text = DataGrid4.Columns(4).Text
 
         txtAux3(15).Text = DataGrid4.Columns(5).Text
@@ -3512,7 +3512,7 @@ Dim Cad As String
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
 '        NumPedElim = Data1.Recordset.Fields(1).Value
-        If Not eliminar Then
+        If Not Eliminar Then
             Screen.MousePointer = vbDefault
             Exit Sub
         ElseIf SituarDataTrasEliminar(Data1, NumRegElim) Then
@@ -3669,6 +3669,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
      'Icono de busqueda
     For kCampo = 0 To Me.imgBuscar.Count - 1
@@ -4362,7 +4364,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vTabla = Tabla
+        frmB.vtabla = Tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -5306,7 +5308,7 @@ End Sub
 
 
 
-Private Function eliminar() As Boolean
+Private Function Eliminar() As Boolean
 Dim Sql As String, LEtra As String, Sql2 As String
 Dim b As Boolean
 Dim vTipoMov As CTiposMov
@@ -5385,10 +5387,10 @@ FinEliminar:
     End If
     If Not b Then
         conn.RollbackTrans
-        eliminar = False
+        Eliminar = False
     Else
         conn.CommitTrans
-        eliminar = True
+        Eliminar = True
     End If
 End Function
 
@@ -6182,7 +6184,7 @@ End Sub
 
 Private Sub BotonAnyadirLinea(Index As Integer)
 Dim NumF As String
-Dim vWhere As String, vTabla As String
+Dim vWhere As String, vtabla As String
 Dim anc As Single
 Dim i As Integer
     
@@ -6204,7 +6206,7 @@ Dim i As Integer
 
     ' *** posar el nom del les distintes taules de llínies ***
     Select Case NumTabMto
-        Case 1: vTabla = "rfactsoc_gastos"
+        Case 1: vtabla = "rfactsoc_gastos"
     End Select
     ' ********************************************************
     
@@ -6214,7 +6216,7 @@ Dim i As Integer
         Case 1 ' *** pose els index dels tabs de llínies que tenen datagrid ***
 '             *** canviar la clau primaria de les llínies,
 '            pasar a "" si no volem que mos sugerixca res a l'afegir ***
-            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
+            NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 '             ***************************************************************
 
             AnyadirLinea DataGrid4, Data5

@@ -1108,6 +1108,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     
@@ -3000,8 +3002,8 @@ Dim Sql As String
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Dim cadena As String
-    If CLng(Me.Data1.Recordset!CodVarie) <> CLng(Text1(2).Text) Then
-        cadena = Trim(Text1(6).Text) & " " & Text1(0).Text & " " & Text1(1).Text & " de " & Me.Data1.Recordset!CodVarie & " a " & CInt(Text1(2).Text)
+    If CLng(Me.Data1.Recordset!codvarie) <> CLng(Text1(2).Text) Then
+        cadena = Trim(Text1(6).Text) & " " & Text1(0).Text & " " & Text1(1).Text & " de " & Me.Data1.Recordset!codvarie & " a " & CInt(Text1(2).Text)
         
         Set LOG = New cLOG
         LOG.Insertar 12, vUsu, "Modificar Variedad : " & cadena & vbCrLf

@@ -1655,6 +1655,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     
@@ -2290,7 +2292,7 @@ Dim i As Integer
         ActivaTicket
                 
         With frmVisReport
-            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
+            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
             .SoloImprimir = True
             .OtrosParametros = ""
             .NumeroParametros = 1
@@ -2329,7 +2331,7 @@ Dim i As Integer
                 CadParam = "|pPagina=" & i & "|"
                 
                 With frmVisReport
-                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
+                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
                     .SoloImprimir = True
                     .OtrosParametros = CadParam ' ""
                     .NumeroParametros = 1
@@ -2377,7 +2379,7 @@ Dim Cad As String
     
     frmEntBascula2.crear = 1
     
-    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     If TotalRegistros(Sql) <> 0 Then
         Cad = "La paletización para esta entrada ya está realizada." & vbCrLf
         Cad = Cad & vbCrLf & "            ¿ Desea crearla de nuevo ? "
@@ -2401,7 +2403,7 @@ Dim Cad As String
     If vParamAplic.EsCaja4 Then cajas = cajas + DBLet(Data1.Recordset!numcajo4, "N")
     If vParamAplic.EsCaja5 Then cajas = cajas + DBLet(Data1.Recordset!numcajo5, "N")
     
-    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!Numnotac)
+    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!numnotac)
     frmEntBascula2.NumCajones = CStr(cajas)
     frmEntBascula2.Numkilos = ImporteSinFormato(Text1(11).Text)
     frmEntBascula2.Codsocio = Text1(1).Text
@@ -3010,7 +3012,7 @@ Dim Mens As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & Data1.Recordset!Numnotac
+    vWhere = " WHERE numnotac=" & Data1.Recordset!numnotac
         ' ***********************************************************************
         
     Mens = "Actualizar chivato"
@@ -3018,7 +3020,7 @@ Dim Mens As String
         
         
     ' ***** elimina les llínies ****
-    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!Numnotac))
+    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!numnotac))
 
     conn.Execute "Delete from " & NombreTabla & vWhere
        
@@ -4723,7 +4725,7 @@ End Function
 Private Sub CrearPaletizacion()
 Dim Sql As String
 
-    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     conn.Execute Sql
     
     mnPaletizacion_Click
@@ -4743,7 +4745,7 @@ Dim IdPalet As Currency
 
     If vParamAplic.HayTraza = False Then Exit Sub
     
-    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
@@ -4766,7 +4768,7 @@ Dim IdPalet As Currency
         If vParamAplic.EsCaja5 Then NumCajas = NumCajas + DBLet(Data1.Recordset!numcajo5, "N")
         
         If NumCajas = 0 Then 'vamos por palots y debemos ver cuantos registros=palots tenemos
-            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
             
             Numlineas = TotalRegistros(Sql1)
         End If
@@ -5390,7 +5392,7 @@ Dim NumF As String
     If Not Rs.EOF Then
         Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
         
-        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!Numnotac, "N"), "######0") & """"
+        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!numnotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
         cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
@@ -5431,8 +5433,8 @@ Dim NumF As String
         
         Sql = Sql & DBSet(Now, "F") & ","
         Sql = Sql & DBSet("&", "T") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
         Sql = Sql & DBSet(cadena, "T") & ","
         Sql = Sql & ValorNulo & ","
         Sql = Sql & ValorNulo & ","

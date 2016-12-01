@@ -1500,7 +1500,7 @@ Dim Mens As String
                     End If
                     
                     '[Monica]08/02/2012: Si han modificado variedad socio o campo actualizamos en traza
-                    If Data1.Recordset!CodVarie <> CLng(Text1(2).Text) Or Data1.Recordset!Codsocio <> CLng(Text1(1).Text) Or Data1.Recordset!codcampo <> CLng(Text1(5).Text) Or _
+                    If Data1.Recordset!codvarie <> CLng(Text1(2).Text) Or Data1.Recordset!Codsocio <> CLng(Text1(1).Text) Or Data1.Recordset!codcampo <> CLng(Text1(5).Text) Or _
                        Data1.Recordset!FechaEnt <> Text1(10).Text Or Data1.Recordset!horaentr <> Text1(4).Text Then
                          Mens = "No se han realizado los cambios en Trazabilidad. " & vbCrLf
                          If Not ActualizarTraza(Text1(0).Text, Text1(2).Text, Text1(1).Text, Text1(5).Text, Text1(10).Text, Text1(4).Text, Mens) Then
@@ -1685,6 +1685,9 @@ Private Sub Form_Load()
 Dim i As Integer
 Dim Sql As String
 Dim Rs As ADODB.Recordset
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
 
     PrimeraVez = True
@@ -2144,7 +2147,7 @@ Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
 'partidas
 Dim Zona As String
 Dim Poblacion As String
-Dim otroCampo As String
+Dim OtroCampo As String
 Dim CodPobla As String
 
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
@@ -2330,7 +2333,7 @@ Dim i As Integer
         ActivaTicket
                 
         With frmVisReport
-            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
+            .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
             .SoloImprimir = True
             .OtrosParametros = ""
             .NumeroParametros = 1
@@ -2369,7 +2372,7 @@ Dim i As Integer
                 CadParam = "|pPagina=" & i & "|"
                 
                 With frmVisReport
-                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!Numnotac
+                    .FormulaSeleccion = "{rentradas.numnotac}=" & Data1.Recordset!numnotac
                     .SoloImprimir = True
                     .OtrosParametros = CadParam ' ""
                     .NumeroParametros = 1
@@ -2417,7 +2420,7 @@ Dim Cad As String
     
     frmEntBascula2.crear = 1
     
-    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     If TotalRegistros(Sql) <> 0 Then
         Cad = "La paletización para esta entrada ya está realizada." & vbCrLf
         Cad = Cad & vbCrLf & "            ¿ Desea crearla de nuevo ? "
@@ -2441,12 +2444,12 @@ Dim Cad As String
     If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo4, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo4, "N")
     If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo5, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo5, "N")
     
-    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!Numnotac)
+    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!numnotac)
     frmEntBascula2.NumCajones = CStr(cajas)
     frmEntBascula2.Numkilos = ImporteSinFormato(Text1(11).Text)
     frmEntBascula2.Codsocio = Text1(1).Text
     frmEntBascula2.codcampo = Text1(5).Text
-    frmEntBascula2.CodVarie = Text1(2).Text
+    frmEntBascula2.codvarie = Text1(2).Text
     frmEntBascula2.Fecha = Text1(10).Text
     frmEntBascula2.Hora = Text1(22).Text
 
@@ -3058,7 +3061,7 @@ Dim Mens As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE numnotac=" & Data1.Recordset!Numnotac
+    vWhere = " WHERE numnotac=" & Data1.Recordset!numnotac
         ' ***********************************************************************
         
     Mens = "Actualizar chivato"
@@ -3066,7 +3069,7 @@ Dim Mens As String
         
         
     ' ***** elimina les llínies ****
-    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!Numnotac))
+    conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(Data1.Recordset!numnotac))
 
     conn.Execute "Delete from " & NombreTabla & vWhere
        
@@ -4788,7 +4791,7 @@ End Function
 Private Sub CrearPaletizacion()
 Dim Sql As String
 
-    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "delete from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     conn.Execute Sql
     
     mnPaletizacion_Click
@@ -4808,7 +4811,7 @@ Dim IdPalet As Currency
 
     If vParamAplic.HayTraza = False Then Exit Sub
     
-    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
@@ -4831,7 +4834,7 @@ Dim IdPalet As Currency
         If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo5, "N"))) Then NumCajas = NumCajas + DBLet(Data1.Recordset!numcajo5, "N")
         
         If NumCajas = 0 Then 'vamos por palots y debemos ver cuantos registros=palots tenemos
-            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!Numnotac)
+            Sql1 = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
             
             Numlineas = TotalRegistros(Sql1)
         End If
@@ -5162,14 +5165,14 @@ On Error GoTo EImpTickD
             Situacion = ""
             Situacion = DevuelveValor("select nomsitua from rsituacioncampo, rcampos where rcampos.codsitua = rsituacioncampo.codsitua and rcampos.codsitua <> 0 and rcampos.codcampo = " & DBSet(Rs!codcampo, "N"))
             
-            Lin = RellenaABlancos("Variedad: " & Format(Rs!CodVarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
+            Lin = RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Variedad: " & Format(Rs!CodVarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
+                  RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
             Printer.Print Lin
 
             ' LINEA 8
             Clase = ""
-            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!CodVarie, "N") & " and variedades.codclase = clases.codclase ")
+            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and variedades.codclase = clases.codclase ")
             
             Lin = RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2) & RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2)
             Printer.Print Lin
@@ -5374,14 +5377,14 @@ Dim GGN As String
             Situacion = ""
             Situacion = DevuelveValor("select nomsitua from rsituacioncampo, rcampos where rcampos.codsitua = rsituacioncampo.codsitua and rcampos.codsitua <> 0 and rcampos.codcampo = " & DBSet(Rs!codcampo, "N"))
             
-            Lin = RellenaABlancos("Variedad: " & Format(Rs!CodVarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
+            Lin = RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43) & _
                   Space(2) & _
-                  RellenaABlancos("Variedad: " & Format(Rs!CodVarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
+                  RellenaABlancos("Variedad: " & Format(Rs!codvarie, "0000") & " " & DBLet(Rs!nomvarie, "T") & " " & Situacion, True, 43)
             Lineas.Add Lin
 
             ' LINEA 8
             Clase = ""
-            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!CodVarie, "N") & " and variedades.codclase = clases.codclase ")
+            Clase = DevuelveValor("select nomclase from clases, variedades where variedades.codvarie = " & DBSet(Rs!codvarie, "N") & " and variedades.codclase = clases.codclase ")
             
             Lin = RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2) & RellenaABlancos("Grupo   : " & Clase, True, 43) & Space(2)
             Lineas.Add Lin
@@ -5453,12 +5456,12 @@ Dim NumF As String
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     If Not Rs.EOF Then
-        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!CodVarie, "N"))
+        Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
         
-        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!Numnotac, "N"), "######0") & """"
+        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!numnotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
-        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!CodVarie, "N"), "#####0") & """"
+        cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
         cadena = cadena & " codsocio=" & """" & Format(DBLet(Rs!Codsocio, "N"), "#####0") & """"
         cadena = cadena & " codcampo=" & """" & Format(DBLet(Rs!codcampo, "N"), "#######0") & """"
         cadena = cadena & " kilosbru=" & """" & Format(DBLet(Rs!KilosBru, "N"), "###0") & """"
@@ -5496,8 +5499,8 @@ Dim NumF As String
         
         Sql = Sql & DBSet(Now, "F") & ","
         Sql = Sql & DBSet("&", "T") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
         Sql = Sql & DBSet(cadena, "T") & ","
         Sql = Sql & ValorNulo & ","
         Sql = Sql & ValorNulo & ","

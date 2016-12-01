@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmLogin 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Inicio de sesión empresa"
@@ -172,9 +172,9 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
           Option Explicit
 
-Dim cad As String
+Dim Cad As String
 Dim ItmX As ListItem
-Dim RS As Recordset
+Dim Rs As Recordset
 
     
 Private Sub cmdCancel_Click()
@@ -204,14 +204,14 @@ Dim OK As Boolean
         'Comprobamos ,k la empresa no este bloqueada
         conn.Execute "SET AUTOCOMMIT=0"
         If ComprobarEmpresaBloqueada(vUsu.Codigo, vUsu.CadenaConexion) Then
-            cad = "BLOQ"
+            Cad = "BLOQ"
             CadenaDesdeOtroForm = ""
         Else
-            cad = ""
+            Cad = ""
         End If
         conn.Execute "SET AUTOCOMMIT=1"
         
-        If cad <> "" Then GoTo Salida   'Empresa bloqueada
+        If Cad <> "" Then GoTo Salida   'Empresa bloqueada
             
         
 
@@ -230,6 +230,11 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
+
     CargaImagen
     lw1.SmallIcons = Me.ImageList1
     Me.txtUser.Text = vUsu.Login
@@ -263,20 +268,20 @@ Private Function DevuelveProhibidas() As String
 Dim i As Long
     On Error GoTo EDevuelveProhibidas
     DevuelveProhibidas = ""
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     i = vUsu.Codigo Mod 1000
-    RS.Open "Select * from usuarios.usuarioempresasariagro WHERE codusu =" & i, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    cad = ""
-    While Not RS.EOF
-        cad = cad & RS.Fields(1) & "|"
-        RS.MoveNext
+    Rs.Open "Select * from usuarios.usuarioempresasariagro WHERE codusu =" & i, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Cad = ""
+    While Not Rs.EOF
+        Cad = Cad & Rs.Fields(1) & "|"
+        Rs.MoveNext
     Wend
-    If cad <> "" Then cad = "|" & cad
-    RS.Close
-    DevuelveProhibidas = cad
+    If Cad <> "" Then Cad = "|" & Cad
+    Rs.Close
+    DevuelveProhibidas = Cad
 EDevuelveProhibidas:
     Err.Clear
-    Set RS = Nothing
+    Set Rs = Nothing
 End Function
 
 
@@ -288,7 +293,7 @@ Dim SqlEmp As String
 Prohibidas = DevuelveProhibidas
 
 'Cargamos las empresas
-Set RS = New ADODB.Recordset
+Set Rs = New ADODB.Recordset
 'RS.Open "Select * from usuarios.empresasariagro ORDER BY Codempre desc", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 '[Monica]26/12/2012: cambio de campaña actual 11/06/2013: metemos un orden
 'SqlEmp = "select 0, aaa.* from usuarios.empresasariagro aaa where codempre = 0 "
@@ -300,24 +305,24 @@ SqlEmp = SqlEmp & " union "
 SqlEmp = SqlEmp & " select 1, aaa.orden, aaa.codempre, aaa.nomempre,aaa.nomresum,aaa.Usuario,aaa.Pass,aaa.ariagro from usuarios.empresasariagro aaa where codempre <> 0 "
 SqlEmp = SqlEmp & " order by 1, 2, 3 desc"
 
-RS.Open SqlEmp, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+Rs.Open SqlEmp, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-While Not RS.EOF
-    cad = "|" & RS!codempre & "|"
-    If InStr(1, Prohibidas, cad) = 0 Then
-        cad = RS!nomempre
+While Not Rs.EOF
+    Cad = "|" & Rs!codempre & "|"
+    If InStr(1, Prohibidas, Cad) = 0 Then
+        Cad = Rs!nomempre
         Set ItmX = lw1.ListItems.Add()
         
-        ItmX.Text = cad
-        ItmX.SubItems(1) = RS!nomresum
-        cad = RS!Ariagro & "|" & RS!nomresum & "|" & RS!Usuario & "|" & RS!Pass & "|"
-        ItmX.Tag = cad
-        ItmX.ToolTipText = RS!Ariagro
+        ItmX.Text = Cad
+        ItmX.SubItems(1) = Rs!nomresum
+        Cad = Rs!Ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        ItmX.Tag = Cad
+        ItmX.ToolTipText = Rs!Ariagro
         ItmX.SmallIcon = 1
     End If
-    RS.MoveNext
+    Rs.MoveNext
 Wend
-RS.Close
+Rs.Close
 End Sub
 
 
@@ -327,7 +332,7 @@ End Sub
 'a la que ha entrado, y el usuario
 Private Sub NumeroEmpresaMemorizar(Leer As Boolean)
 Dim NF As Integer
-Dim C1 As String
+Dim c1 As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
@@ -345,18 +350,18 @@ On Error GoTo ENumeroEmpresaMemorizar
             End If
             
                 'El tercer pipe, si tiene es el ancho col1
-                cad = AnchoLogin
-                C1 = RecuperaValor(cad, 3)
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                Cad = AnchoLogin
+                c1 = RecuperaValor(Cad, 3)
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 4360
                 End If
                 lw1.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 4)
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = RecuperaValor(Cad, 4)
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
@@ -367,22 +372,22 @@ On Error GoTo ENumeroEmpresaMemorizar
             Exit Sub
         End If
     End If
-    cad = App.Path & "\ultempre.dat"
+    Cad = App.Path & "\ultempre.dat"
     If Leer Then
-        If Dir(cad) <> "" Then
+        If Dir(Cad) <> "" Then
             NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
+            Open Cad For Input As #NF
+            Line Input #NF, Cad
             Close #NF
-            cad = Trim(cad)
-            If cad <> "" Then
+            Cad = Trim(Cad)
+            If Cad <> "" Then
                 'El primer pipe es el usuario. Como ya no lo necesito, no toco nada
                 
-                C1 = RecuperaValor(cad, 2)
+                c1 = RecuperaValor(Cad, 2)
                 'el segundo es el
-                If C1 <> "" Then
+                If c1 <> "" Then
                     For NF = 1 To Me.lw1.ListItems.Count
-                        If lw1.ListItems(NF).Text = C1 Then
+                        If lw1.ListItems(NF).Text = c1 Then
                             Set lw1.SelectedItem = lw1.ListItems(NF)
                             lw1.SelectedItem.EnsureVisible
                             Exit For
@@ -391,17 +396,17 @@ On Error GoTo ENumeroEmpresaMemorizar
                 End If
                 
                 'El tercer pipe, si tiene es el ancho col1
-                C1 = RecuperaValor(cad, 3)
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = RecuperaValor(Cad, 3)
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 4360
                 End If
                 lw1.ColumnHeaders(1).Width = NF
                 'El cuarto pipe si tiene es el ancho de col2
-                C1 = RecuperaValor(cad, 4)
-                If Val(C1) > 0 Then
-                    NF = Val(C1)
+                c1 = RecuperaValor(Cad, 4)
+                If Val(c1) > 0 Then
+                    NF = Val(c1)
                 Else
                     NF = 1400
                 End If
@@ -410,10 +415,10 @@ On Error GoTo ENumeroEmpresaMemorizar
         End If
     Else 'Escribir
         NF = FreeFile
-        Open cad For Output As #NF
-        cad = "NO ncesito|" & lw1.SelectedItem.Text & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
-        AnchoLogin = cad
-        Print #NF, cad
+        Open Cad For Output As #NF
+        Cad = "NO ncesito|" & lw1.SelectedItem.Text & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
+        AnchoLogin = Cad
+        Print #NF, Cad
         Close #NF
     End If
 ENumeroEmpresaMemorizar:
@@ -425,13 +430,13 @@ End Sub
 'Lo que haremos aqui es ver cual es la empresa de campaña actual
 Private Sub NumeroEmpresaMemorizarNew(Leer As Boolean)
 Dim NF As Integer
-Dim C1 As String
+Dim c1 As String
 
 Dim Atributos As Integer
 
 On Error GoTo ENumeroEmpresaMemorizarNew
     
-    cad = App.Path & "\ultempre.dat"
+    Cad = App.Path & "\ultempre.dat"
     NF = FreeFile
     If Leer Then
         For NF = 1 To Me.lw1.ListItems.Count
@@ -441,24 +446,24 @@ On Error GoTo ENumeroEmpresaMemorizarNew
             End If
         Next NF
         
-        If Dir(cad) <> "" Then
-            Open cad For Input As #NF
-            Line Input #NF, cad
+        If Dir(Cad) <> "" Then
+            Open Cad For Input As #NF
+            Line Input #NF, Cad
             Close #NF
-            cad = Trim(cad)
-            If cad <> "" Then
+            Cad = Trim(Cad)
+            If Cad <> "" Then
                     'El tercer pipe, si tiene es el ancho col1
-                    C1 = RecuperaValor(cad, 3)
-                    If Val(C1) > 0 Then
-                        NF = Val(C1)
+                    c1 = RecuperaValor(Cad, 3)
+                    If Val(c1) > 0 Then
+                        NF = Val(c1)
                     Else
                         NF = 4360
                     End If
                     lw1.ColumnHeaders(1).Width = NF
                     'El cuarto pipe si tiene es el ancho de col2
-                    C1 = RecuperaValor(cad, 4)
-                    If Val(C1) > 0 Then
-                        NF = Val(C1)
+                    c1 = RecuperaValor(Cad, 4)
+                    If Val(c1) > 0 Then
+                        NF = Val(c1)
                     Else
                         NF = 1400
                     End If
@@ -466,18 +471,18 @@ On Error GoTo ENumeroEmpresaMemorizarNew
             End If
         End If
     Else 'Escribir
-        If Dir(cad) <> "" Then
+        If Dir(Cad) <> "" Then
             NF = FreeFile
             ' le quito el atributo de solo lectura
-            Atributos = GetAttr(cad)
-            If (GetAttr(cad) And vbReadOnly) <> 0 Then
-                SetAttr cad, Atributos - vbReadOnly
+            Atributos = GetAttr(Cad)
+            If (GetAttr(Cad) And vbReadOnly) <> 0 Then
+                SetAttr Cad, Atributos - vbReadOnly
             End If
             
-            Open cad For Output As #NF
-            cad = "NO ncesito|" & lw1.SelectedItem.Text & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
-            AnchoLogin = cad
-            Print #NF, cad
+            Open Cad For Output As #NF
+            Cad = "NO ncesito|" & lw1.SelectedItem.Text & "|" & Int(Round(lw1.ColumnHeaders(1).Width, 2)) & "|" & Int(Round(lw1.ColumnHeaders(2).Width, 2)) & "|"
+            AnchoLogin = Cad
+            Print #NF, Cad
             Close #NF
        End If
     End If

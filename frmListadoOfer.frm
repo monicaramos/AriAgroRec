@@ -2001,9 +2001,9 @@ Dim H As Integer, W As Integer
 Dim indFrame As Single
 Dim devuelve As String
     
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
-'
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
     limpiar Me
     indCodigo = 0

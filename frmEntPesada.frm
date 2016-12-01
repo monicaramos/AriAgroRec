@@ -2294,6 +2294,8 @@ Private Sub Form_Load()
 Dim i As Integer
 Dim Sql As String
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
      'Icono de busqueda
     For kCampo = 0 To Me.imgBuscar.Count - 1
@@ -4758,7 +4760,7 @@ Dim Producto As String
     While Not Rs.EOF
         Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
     
-        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!Numnotac, "N"), "######0") & """"
+        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!numnotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Text1(1).Text, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
         cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
@@ -4789,8 +4791,8 @@ Dim Producto As String
         Sql = Sql & "'U',"
         Sql = Sql & DBSet(Now, "F") & ","
         Sql = Sql & DBSet("&", "T") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
-        Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
+        Sql = Sql & DBSet(Rs!numnotac, "N") & ","
         Sql = Sql & DBSet(cadena, "T") & ","
         Sql = Sql & ValorNulo & ","
         Sql = Sql & ValorNulo & ","
@@ -4854,7 +4856,7 @@ Dim NumF As String
     While Not Rs.EOF
         Producto = DevuelveValor("select codprodu from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
         
-        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!Numnotac, "N"), "######0") & """"
+        cadena = v_cadena & "<ROW notacamp=" & """" & Format(DBLet(Rs!numnotac, "N"), "######0") & """"
         cadena = cadena & " fechaent=" & """" & Format(Rs!FechaEnt, "yyyymmdd") & """"
         cadena = cadena & " codprodu=" & """" & Format(DBLet(Producto, "N"), "#####0") & """"
         cadena = cadena & " codvarie=" & """" & Format(DBLet(Rs!codvarie, "N"), "#####0") & """"
@@ -4876,7 +4878,7 @@ Dim NumF As String
     
         Sql2 = "select * from tmppesada where codusu= " & vUsu.Codigo
         Sql2 = Sql2 & " and nropesada = " & Data1.Recordset.Fields!nropesada
-        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
         Sql2 = Sql2 & " order by contador "
         
         Set RS1 = New ADODB.Recordset
@@ -4905,8 +4907,8 @@ Dim NumF As String
             
             Sql = Sql & DBSet(Now, "F") & ","
             Sql = Sql & DBSet("&", "T") & ","
-            Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
-            Sql = Sql & DBSet(Rs!Numnotac, "N") & ","
+            Sql = Sql & DBSet(Rs!numnotac, "N") & ","
+            Sql = Sql & DBSet(Rs!numnotac, "N") & ","
             Sql = Sql & DBSet(cadena, "T") & ","
             Sql = Sql & ValorNulo & ","
             Sql = Sql & ValorNulo & ","
@@ -4919,7 +4921,7 @@ Dim NumF As String
             ' borramos de la temporal tras introducir en el chivato
             Sql = "delete from tmppesada where codusu = " & vUsu.Codigo
             Sql = Sql & " and nropesada = " & Rs!nropesada
-            Sql = Sql & " and numnotac = " & Rs!Numnotac
+            Sql = Sql & " and numnotac = " & Rs!numnotac
             Sql = Sql & " and contador = " & RS1!Contador
             
             conn.Execute Sql
@@ -4981,7 +4983,7 @@ Dim MaxNota As String
             Sql2 = Sql2 & ", kilosbru= " & DBSet(txtAux(2).Text, "N")
             Sql2 = Sql2 & ", kilostra= " & DBSet(txtAux(11).Text, "N")
             Sql2 = Sql2 & " where nropesada = " & Data1.Recordset!nropesada
-            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
             
             conn.Execute Sql2
             
@@ -5016,7 +5018,7 @@ Dim MaxNota As String
                 Sql = Sql & ", kilostra = " & DBSet(Kilos, "N")
             End If
             Sql = Sql & " where nropesada = " & Data1.Recordset!nropesada
-            Sql = Sql & " and numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql = Sql & " and numnotac = " & DBSet(Rs!numnotac, "N")
             
             conn.Execute Sql
             

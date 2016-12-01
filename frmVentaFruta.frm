@@ -1882,6 +1882,9 @@ Private Sub Form_Load()
 Dim i As Integer
 Dim Sql As String
 
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
      'Icono de busqueda
     For kCampo = 0 To Me.imgBuscar.Count - 1
         Me.imgBuscar(kCampo).Picture = frmPpal.imgListImages16.ListImages(1).Picture

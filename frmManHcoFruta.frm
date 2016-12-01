@@ -2770,6 +2770,8 @@ End Sub
 
 Private Sub Form_Load()
 Dim i As Integer
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     'Icono de busqueda
     For kCampo = 0 To Me.imgBuscar.Count - 1

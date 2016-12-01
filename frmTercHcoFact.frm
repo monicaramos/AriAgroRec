@@ -46,9 +46,9 @@ Begin VB.Form frmTercHcoFact
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmTercHcoFact.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(0)=   "Frame2(1)"
       Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Frame2(1)"
+      Tab(0).Control(2)=   "Label1(11)"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmTercHcoFact.frx":0A2A
@@ -2634,8 +2634,8 @@ End Sub
 Private Sub Form_Load()
 Dim i As Integer
 
-'    'Icono del formulario
-'    Me.Icon = frmPpal.Icon
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     ' ICONITOS DE LA BARRA
     btnPrimero = 15
@@ -4520,11 +4520,11 @@ Dim Precio As Currency
     CadValues = ""
     While Not Rs.EOF
         TotalKilos = DBLet(Rs!KilosNet, "N")
-        ImporteVar = DevuelveValor("select sum(importel) from rlifter where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!CodVarie, "N"))
+        ImporteVar = DevuelveValor("select sum(importel) from rlifter where " & ObtenerWhereCP(False) & " and codvarie = " & DBSet(Rs!codvarie, "N"))
     
         ImporteTot = ImporteTot + ImporteVar
     
-        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!CodVarie, "N")
+        Sql2 = "select * from rhisfruta where numalbar in (" & Albaranes & ") and codvarie = " & DBSet(Rs!codvarie, "N")
         Set Rs2 = New ADODB.Recordset
         
         Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -4537,7 +4537,7 @@ Dim Precio As Currency
             PrecioAlb = Round2(ImporteAlb / Rs2!KilosNet, 4)
             
             CadValues = CadValues & "(" & DBSet(Text1(2).Text, "N") & "," & DBSet(Text1(0).Text, "T") & "," & DBSet(Text1(1).Text, "F") & ","
-            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!CodVarie, "N") & "," & DBSet(Rs2!KilosNet, "N") & ","
+            CadValues = CadValues & DBSet(Rs2!numalbar, "N") & "," & DBSet(Rs2!Fecalbar, "F") & "," & DBSet(Rs2!codvarie, "N") & "," & DBSet(Rs2!KilosNet, "N") & ","
             CadValues = CadValues & DBSet(ImporteAlb, "N") & "," & DBSet(PrecioAlb, "N") & ",0),"
             
             Rs2.MoveNext

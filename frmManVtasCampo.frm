@@ -886,7 +886,7 @@ Dim temp As Boolean
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!CodVarie
+        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!codvarie
         Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
         conn.Execute Sql
         CargaGrid CadB
@@ -1097,6 +1097,10 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
+
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
+
     PrimeraVez = True
 
     With Me.Toolbar1

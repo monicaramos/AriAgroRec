@@ -998,8 +998,12 @@ End Sub
 
 
 Private Sub Form_Load()
+
+
+
     PrimeraVez = True
     Me.Icon = frmPpal.Icon
+    
     Me.FrameUsuario.visible = False
     Me.FrameNormal.Enabled = True
     Me.cmdEmp(1).Picture = frmPpal.ImageListB.ListImages(7).Picture

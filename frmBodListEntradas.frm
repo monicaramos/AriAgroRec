@@ -3650,10 +3650,11 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     limpiar Me
-    
     
     ConSubInforme = False
 
@@ -5241,21 +5242,21 @@ Dim PrecioVta As Currency
                     Set RS1 = New ADODB.Recordset
                     RS1.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                     While Not RS1.EOF
-                        Codigiva = DevuelveDesdeBDNew(cAgro, "variedades", "codigiva", "codvarie", RS1!Importe1, "N")
+                        Codigiva = DevuelveDesdeBDNew(cAgro, "variedades", "codigiva", "codvarie", RS1!importe1, "N")
                     
                     
                         ' en negativo
                         Linea = Linea + 1
                         
-                        Importe = CalcularImporte(CStr(RS1!Importe2 * (-1)), CStr(DBLet(RS1!Precio1, "N")), CStr(0), 0, 0, 0)
+                        Importe = CalcularImporte(CStr(RS1!importe2 * (-1)), CStr(DBLet(RS1!Precio1, "N")), CStr(0), 0, 0, 0)
                         
                         Sql1 = "insert into rbodalbaran_variedad (numalbar, numlinea, codvarie, unidades, cantidad, "
                         Sql1 = Sql1 & "precioar, dtolinea, importel, ampliaci, codigiva) values ("
                         Sql1 = Sql1 & DBSet(Albaran, "N") & ","
                         Sql1 = Sql1 & DBSet(Linea, "N") & ","
-                        Sql1 = Sql1 & DBSet(RS1!Importe1, "N") & "," 'variedad
-                        Sql1 = Sql1 & DBSet(RS1!Importe2 * (-1), "N") & "," 'cantidad
-                        Sql1 = Sql1 & DBSet(RS1!Importe2 * (-1), "N") & ","
+                        Sql1 = Sql1 & DBSet(RS1!importe1, "N") & "," 'variedad
+                        Sql1 = Sql1 & DBSet(RS1!importe2 * (-1), "N") & "," 'cantidad
+                        Sql1 = Sql1 & DBSet(RS1!importe2 * (-1), "N") & ","
                         Sql1 = Sql1 & DBSet(RS1!Precio1, "N") & ","
                         Sql1 = Sql1 & "0," ' la filas añadidas no tienen dtolinea
                         Sql1 = Sql1 & DBSet(Importe, "N") & ","
@@ -5267,15 +5268,15 @@ Dim PrecioVta As Currency
                         ' en positivo
                         Linea = Linea + 1
                         
-                        Importe = CalcularImporte(CStr(RS1!Importe2), CStr(DBLet(RS1!Precio2, "N")), CStr(0), 0, 0, 0)
+                        Importe = CalcularImporte(CStr(RS1!importe2), CStr(DBLet(RS1!Precio2, "N")), CStr(0), 0, 0, 0)
                         
                         Sql1 = "insert into rbodalbaran_variedad (numalbar, numlinea, codvarie, unidades, cantidad, "
                         Sql1 = Sql1 & "precioar, dtolinea, importel, ampliaci, codigiva) values ("
                         Sql1 = Sql1 & DBSet(Albaran, "N") & ","
                         Sql1 = Sql1 & DBSet(Linea + 1, "N") & ","
-                        Sql1 = Sql1 & DBSet(RS1!Importe1, "N") & "," 'variedad
-                        Sql1 = Sql1 & DBSet(RS1!Importe2, "N") & "," 'cantidad
-                        Sql1 = Sql1 & DBSet(RS1!Importe2, "N") & ","
+                        Sql1 = Sql1 & DBSet(RS1!importe1, "N") & "," 'variedad
+                        Sql1 = Sql1 & DBSet(RS1!importe2, "N") & "," 'cantidad
+                        Sql1 = Sql1 & DBSet(RS1!importe2, "N") & ","
                         Sql1 = Sql1 & DBSet(RS1!Precio2, "N") & ","
                         Sql1 = Sql1 & "0," ' la filas añadidas no tienen dtolinea
                         Sql1 = Sql1 & DBSet(Importe, "N") & ","
@@ -5507,14 +5508,14 @@ Dim Diferencia As Currency
         IncrementarProgresNew pb2, 1
         DoEvents
     
-        Entradas = DevuelveValor("select cantidad from tmpalmazara where codusu = " & vUsu.Codigo & " and entradas = 'Entradas' and codsocio = " & DBSet(Rs!Importe1, "N"))
-        Salidas = DevuelveValor("select cantidad from tmpalmazara where codusu = " & vUsu.Codigo & " and entradas = 'Salidas' and codsocio = " & DBSet(Rs!Importe1, "N"))
+        Entradas = DevuelveValor("select cantidad from tmpalmazara where codusu = " & vUsu.Codigo & " and entradas = 'Entradas' and codsocio = " & DBSet(Rs!importe1, "N"))
+        Salidas = DevuelveValor("select cantidad from tmpalmazara where codusu = " & vUsu.Codigo & " and entradas = 'Salidas' and codsocio = " & DBSet(Rs!importe1, "N"))
         Diferencia = Entradas - Salidas
         
         Sql = "update tmpinformes set importe2 = " & DBSet(Entradas, "N")
         Sql = Sql & ", importe3 = " & DBSet(Salidas, "N")
         Sql = Sql & ", importe4 = " & DBSet(Diferencia, "N")
-        Sql = Sql & " where codusu = " & vUsu.Codigo & " and importe1 = " & DBSet(Rs!Importe1, "N")
+        Sql = Sql & " where codusu = " & vUsu.Codigo & " and importe1 = " & DBSet(Rs!importe1, "N")
         
         conn.Execute Sql
         

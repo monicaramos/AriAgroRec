@@ -1289,8 +1289,10 @@ End Sub
 Private Sub Form_Load()
 Dim Sql2 As String
 
-    PrimeraVez = True
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
+    PrimeraVez = True
 
     LeerFiltro True
     PonerFiltro Filtro

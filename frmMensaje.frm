@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMensaje 
    BackColor       =   &H80000005&
    BorderStyle     =   0  'None
@@ -330,7 +330,7 @@ Private Sub CmdAceptarCobros_Click()
      Unload Me
 End Sub
 
-Private Sub CmdCancel_Click()
+Private Sub cmdCancel_Click()
     Unload Me
 End Sub
 
@@ -344,6 +344,8 @@ End Sub
 
 
 Private Sub Form_Load()
+
+
     Me.Shape1.Width = Me.Width - 30
     Me.Shape1.Height = Me.Height - 30
 
@@ -360,7 +362,7 @@ Private Sub Form_Load()
             PonerFrameCobrosPtesVisible True, 1000, 2000
             CargarListaErrComprobacion
             Me.Caption = "Errores de Comprobacion: "
-            PonerFocoBtn Me.CmdSalir
+            PonerFocoBtn Me.cmdSalir
             
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, 1000, 2000
@@ -385,7 +387,7 @@ End Sub
 Private Sub CargarListaErrContab()
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Sql As String
 
@@ -394,9 +396,9 @@ Dim Sql As String
     Sql = " SELECT  * "
     Sql = Sql & " FROM tmperrfac "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
         ListView1.Height = 4500
         ListView1.Width = 7400
         ListView1.Left = 500
@@ -405,7 +407,7 @@ Dim Sql As String
         'Los encabezados
         ListView1.ColumnHeaders.Clear
 
-        If RS.Fields(0).Name = "codprove" Then
+        If Rs.Fields(0).Name = "codprove" Then
             'Facturas de Compra
              ListView1.ColumnHeaders.Add , , "Prove.", 700
         Else 'Facturas de Venta
@@ -415,19 +417,19 @@ Dim Sql As String
         ListView1.ColumnHeaders.Add , , "Fecha", 1100, 1
         ListView1.ColumnHeaders.Add , , "Error", 4620
     
-        While Not RS.EOF
+        While Not Rs.EOF
             Set ItmX = ListView1.ListItems.Add
             'El primer campo será codtipom si llamamos desde Ventas
             ' y será codprove si llamamos desde Compras
-            ItmX.Text = RS.Fields(0).Value
-            ItmX.SubItems(1) = Format(RS!NumFactu, "0000000")
-            ItmX.SubItems(2) = RS!FecFactu
-            ItmX.SubItems(3) = RS!Error
-            RS.MoveNext
+            ItmX.Text = Rs.Fields(0).Value
+            ItmX.SubItems(1) = Format(Rs!numfactu, "0000000")
+            ItmX.SubItems(2) = Rs!fecfactu
+            ItmX.SubItems(3) = Rs!Error
+            Rs.MoveNext
         Wend
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarList:
     If Err.Number <> 0 Then
@@ -447,7 +449,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             W = 9200
 '            Me.Label1(0).Top = 4800
 '            Me.Label1(0).Left = 3400
-            Me.CmdSalir.Caption = "&Salir"
+            Me.cmdSalir.Caption = "&Salir"
             PonerFrameVisible Me.FrameErrores, visible, H, W
             Me.frameAcercaDE.visible = False
             Me.FrameCobrosPtes.visible = False
@@ -488,7 +490,7 @@ End Sub
 Private Sub CargarListaErrComprobacion()
 'Muestra la lista Detallada de Facturas que dieron error al contabilizar
 'en un ListView
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
 Dim Sql As String
 
@@ -497,9 +499,9 @@ Dim Sql As String
     Sql = " SELECT  * "
     Sql = Sql & " FROM tmperrcomprob "
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
 '        ListView1.Height = 4500
 '        ListView1.Width = 7400
 '        ListView1.Left = 500
@@ -531,19 +533,19 @@ Dim Sql As String
 '        ListView1.ColumnHeaders.Add , , "Fecha", 1100, 1
 '        ListView1.ColumnHeaders.Add , , "Error", 4620
     
-        While Not RS.EOF
+        While Not Rs.EOF
             Set ItmX = ListView2.ListItems.Add
             'El primer campo será codtipom si llamamos desde Ventas
             ' y será codprove si llamamos desde Compras
-            ItmX.Text = RS.Fields(0).Value
+            ItmX.Text = Rs.Fields(0).Value
 '            ItmX.SubItems(1) = Format(RS!NumFactu, "0000000")
 '            ItmX.SubItems(2) = RS!FecFactu
 '            ItmX.SubItems(3) = RS!Error
-            RS.MoveNext
+            Rs.MoveNext
         Wend
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
 ECargarListErrComprobacion:
     If Err.Number <> 0 Then

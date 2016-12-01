@@ -3637,6 +3637,8 @@ Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim Cad As String
 On Error Resume Next
+    'Icono del formulario
+    Me.Icon = frmPpal.Icon
 
     Me.FrameCobrosPtes.visible = False
     Me.FrameNSeries.visible = False
@@ -4786,7 +4788,7 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
             ItmX.SubItems(1) = Format(Rs!Codsocio, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = Rs.Fields(3).Value
@@ -4833,8 +4835,8 @@ Dim Sql As String
     
         While Not Rs.EOF
             Set ItmX = ListView5.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
-            ItmX.SubItems(1) = Format(Rs!CodVarie, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Variedad sin calidad venta campo"
             
@@ -4876,8 +4878,8 @@ Dim ItmX As ListItem
     
         While Not Rs.EOF
             Set ItmX = ListView7.ListItems.Add
-            ItmX.Text = Format(Rs!Numnotac, "000000")
-            ItmX.SubItems(1) = Format(Rs!CodVarie, "000000")
+            ItmX.Text = Format(Rs!numnotac, "000000")
+            ItmX.SubItems(1) = Format(Rs!codvarie, "000000")
             ItmX.SubItems(2) = Rs.Fields(2).Value
             ItmX.SubItems(3) = "Entradas sin CRFID."
             Rs.MoveNext
@@ -4926,7 +4928,7 @@ Dim Prohibidas As String
                 ItmX.Checked = True
                 i = ItmX.Index
             End If
-            ItmX.ToolTipText = Rs!ariagro
+            ItmX.ToolTipText = Rs!Ariagro
         End If
         Rs.MoveNext
     Wend
@@ -5365,7 +5367,7 @@ Dim It As ListItem
         End If
         
         If Opcion = 0 Or Opcion = 2 Then
-            It.SubItems(1) = Format(Rs!CodVarie, "000000")
+            It.SubItems(1) = Format(Rs!codvarie, "000000")
             It.SubItems(2) = Rs!nomvarie
             It.SubItems(3) = Rs!nomparti
             It.SubItems(4) = Rs!Poligono
@@ -5406,7 +5408,7 @@ Dim It As ListItem
                             It.SubItems(6) = DBLet(Rs!SubParce, "T")
                             It.SubItems(7) = Rs!NroCampo
                             It.SubItems(8) = Rs!Hdas
-                            It.SubItems(9) = Rs!CodVarie
+                            It.SubItems(9) = Rs!codvarie
                             It.SubItems(10) = Rs!nomvarie
                         End If
                     End If
@@ -5475,7 +5477,7 @@ Dim It As ListItem
     While Not Rs.EOF
         Set It = ListView6.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!CodVarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         If DadoProducto Then
             It.SubItems(2) = Format(DBLet(Rs!codprodu, "N"), "000")
@@ -5534,7 +5536,7 @@ Dim Consumido As Currency
     While Not Rs.EOF
         Set It = ListView8.ListItems.Add
             
-        It.Text = Format(DBLet(Rs!CodVarie, "N"), "000000")
+        It.Text = Format(DBLet(Rs!codvarie, "N"), "000000")
         It.SubItems(1) = DBLet(Rs!nomvarie, "T")
         It.SubItems(2) = Format(DBLet(Rs!Unidades, "N"), "###,##0.00")
         It.SubItems(3) = Format(DBLet(Rs!cantidad, "N"), "###,##0.00")
@@ -5842,7 +5844,7 @@ Dim NomFic As String
             
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!numalbar, "T")
-        It.SubItems(1) = Format(Rs!CodVarie, "000000")
+        It.SubItems(1) = Format(Rs!codvarie, "000000")
         It.SubItems(2) = Format(Rs!Codsocio, "000000")
         It.SubItems(3) = Format(Rs!codcampo, "00000000")
         Select Case DBLet(Rs!TipoEntr, "N")
@@ -6099,7 +6101,7 @@ Dim It As ListItem
         It.SubItems(1) = DBLet(Rs!Fecalbar, "F")
         It.SubItems(2) = Rs!nomvarie
         It.SubItems(3) = Format(DBLet(Rs!codcampo, "N"), "00000000")
-        It.SubItems(4) = Format(DBLet(Rs!Numnotac, "N"), "0000000")
+        It.SubItems(4) = Format(DBLet(Rs!numnotac, "N"), "0000000")
         It.SubItems(5) = DBLet(Rs!KilosNet, "N")
         It.SubItems(6) = DBLet(Rs!ImpTrans, "N")
         
@@ -6374,10 +6376,10 @@ Dim It As ListItem
         Set It = ListView10.ListItems.Add
         
         'It.Tag = DevNombreSQL(RS!codCampo)
-        It.Text = DBLet(Rs!Numnotac, "N")
+        It.Text = DBLet(Rs!numnotac, "N")
         It.SubItems(1) = Format(Rs!FechaEnt, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!CodVarie, "000000")
+        It.SubItems(3) = Format(Rs!codvarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
         It.SubItems(6) = Rs!nomsocio
@@ -6480,7 +6482,7 @@ Dim It As ListItem
         It.Text = DBLet(Rs!numalbar, "N")
         It.SubItems(1) = Format(Rs!Fecalbar, "dd/mm/yyyy")
         It.SubItems(2) = Format(Rs!horaentr, "hh:mm:ss")
-        It.SubItems(3) = Format(Rs!CodVarie, "000000")
+        It.SubItems(3) = Format(Rs!codvarie, "000000")
         It.SubItems(4) = Rs!nomvarie
         It.SubItems(5) = Format(Rs!Codsocio, "000000")
         It.SubItems(6) = Rs!nomsocio
@@ -6624,9 +6626,9 @@ Dim Sql1 As String
         
         It.Text = Cad
         It.SubItems(1) = Rs!nomresum
-        Cad = Rs!ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+        Cad = Rs!Ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
         It.Tag = Cad
-        It.ToolTipText = Rs!ariagro
+        It.ToolTipText = Rs!Ariagro
     End If
     Set Rs = Nothing
     
@@ -6640,7 +6642,7 @@ Dim Sql1 As String
     Encontrado = False
     
     While Not Rs.EOF And Not Encontrado
-        If AbrirConexionCampAnterior(DBLet(Rs!ariagro, "T")) Then
+        If AbrirConexionCampAnterior(DBLet(Rs!Ariagro, "T")) Then
             Sql1 = "select * from empresas "
             Set RS1 = New ADODB.Recordset
             RS1.Open Sql1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -6653,9 +6655,9 @@ Dim Sql1 As String
                     
                     It.Text = Cad
                     It.SubItems(1) = Rs!nomresum
-                    Cad = Rs!ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
+                    Cad = Rs!Ariagro & "|" & Rs!nomresum & "|" & Rs!Usuario & "|" & Rs!Pass & "|"
                     It.Tag = Cad
-                    It.ToolTipText = Rs!ariagro
+                    It.ToolTipText = Rs!Ariagro
             End If
 '        It.SmallIcon = 1
         End If
