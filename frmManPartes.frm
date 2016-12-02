@@ -2646,10 +2646,14 @@ Private Sub mnEliminar_Click()
     End If
 End Sub
 
-
-
 Private Sub mnInforme_Click()
-    AbrirListadoNominas (39) 'Informe dias trabajados
+    
+    If vParamAplic.Cooperativa = 16 Then
+        AbrirListadoNominas (40) ' impresion de parte de trabajo
+    Else
+        AbrirListadoNominas (39) 'Informe dias trabajados
+    End If
+    
 End Sub
 
 Private Sub mnRecalcularImportes_Click()
@@ -3442,7 +3446,7 @@ Dim Desc As String, devuelve As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
         frmB.vtabla = Tabla
-        frmB.vSQL = CadB
+        frmB.vSql = CadB
         HaDevueltoDatos = False
         '###A mano
         frmB.vDevuelve = "0|1|"
@@ -3677,7 +3681,7 @@ Dim b As Boolean
     '---------------------------------------------
     b = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    CmdAceptar.visible = b
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -3777,7 +3781,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3785,7 +3789,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -4112,7 +4116,7 @@ Private Sub PonerBotonCabecera(b As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.cmdAceptar.visible = Not b
+    Me.CmdAceptar.visible = Not b
     Me.cmdCancelar.visible = Not b
     Me.cmdRegresar.visible = b
     Me.cmdRegresar.Caption = "Cabecera"
@@ -4307,7 +4311,7 @@ Dim Rs As ADODB.Recordset
 
 
         Case 5 ' kilos
-            If PonerFormatoEntero(txtAux(Index)) Then cmdAceptar.SetFocus
+            If PonerFormatoEntero(txtAux(Index)) Then CmdAceptar.SetFocus
     
     End Select
 
@@ -4361,7 +4365,7 @@ Dim Sql As String
 
         Case 3 ' importe
             If txtAux2(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux2(Index), 3) Then cmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux2(Index), 3) Then CmdAceptar.SetFocus
             End If
     
     End Select
@@ -4790,7 +4794,7 @@ Dim ImporteTrab As Currency
         
         Case 4 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
             End If
     End Select
     
@@ -4855,7 +4859,7 @@ EInsertarCab:
 End Sub
 
 
-Private Function InsertarOferta(vSQL As String, vTipoMov As CTiposMov) As Boolean
+Private Function InsertarOferta(vSql As String, vTipoMov As CTiposMov) As Boolean
 Dim MenError As String
 Dim bol As Boolean, Existe As Boolean
 Dim cambiaSQL As Boolean
@@ -4880,13 +4884,13 @@ Dim devuelve As String
             Existe = False
         End If
     Loop Until Not Existe
-    If cambiaSQL Then vSQL = CadenaInsertarDesdeForm(Me)
+    If cambiaSQL Then vSql = CadenaInsertarDesdeForm(Me)
     
     
     'Aqui empieza transaccion
     conn.BeginTrans
     MenError = "Error al insertar en la tabla Cabecera de Partes (" & NombreTabla & ")."
-    conn.Execute vSQL, , adCmdText
+    conn.Execute vSql, , adCmdText
     
     MenError = "Error al actualizar el contador del Parte."
     vTipoMov.IncrementarContador (CodTipoMov)

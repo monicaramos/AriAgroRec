@@ -1,8 +1,8 @@
 Attribute VB_Name = "arreglaGrid"
-Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As Form)
+Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As Form, Optional RowHeight As Integer)
     'Dim tots As String
     Dim camp As String
-    Dim mens As String
+    Dim Mens As String
     Dim difer As Integer
     Dim i As Integer
     Dim k As Integer
@@ -19,7 +19,9 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
     Dim TotalAncho As Integer
     
     grid.AllowRowSizing = False
-    grid.RowHeight = 290
+    If RowHeight = 0 Then RowHeight = 290
+    grid.RowHeight = RowHeight
+    'grid.RowHeight = 290
     
     '***********
     difer = 563 'dirència recomanda entre l'ample del Datagrid i la suma dels amples de les columnes
@@ -194,8 +196,8 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                 Case "B"
                     If Not primer Then 'es el primer objecte visible
                         ' *** FALTA PER A QUAN UN BOTO ES EL PRIMER OBJECTE VISIBLE
-                        mens = "Falta programar en arreglaGrid per al cas que un Button es el primer objete visible d'un Datagrid"
-                        MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & mens
+                        Mens = "Falta programar en arreglaGrid per al cas que un Button es el primer objete visible d'un Datagrid"
+                        MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & Mens
                     Else
                         o = 0
                         While obj_ant Is Nothing
@@ -212,12 +214,12 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                                 'obj.Left = obj_ant.Left + obj_ant.Width - obj.Width
                             Case "C" 'objecte anterior a boto es combo
                                 ' *** FALTA PER A QUAN L'OBJECTE ANTERIOR A UN BOTO ES UN COMBO
-                                mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un Button es un ComboBox"
-                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & mens
+                                Mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un Button es un ComboBox"
+                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & Mens
                             Case "B" 'objecte anterior a combo es un boto
                                 ' *** FALTA PER A QUAN L'OBJECTE ANTERIOR A UN BOTO ES UN BOTO
-                                mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un Button es un Button"
-                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & mens
+                                Mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un Button es un Button"
+                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & Mens
                         End Select
                     End If
                     
@@ -282,8 +284,8 @@ Public Sub arregla(ByRef tots As String, ByRef grid As DataGrid, ByRef formu As 
                                 obj.Left = obj_ant.Left + obj_ant.Width
                             Case "B" 'objecte anterior a combo es un boto
                                 ' *** FALTA PER A QUAN L'OBJECTE ANTERIOR A UN COMBO ES UN BOTO
-                                mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un ComboBox es un Button"
-                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & mens
+                                Mens = "Falta programar en arreglaGrid per al cas que un l'objecte anterior a un ComboBox es un Button"
+                                MsgBox "MÒDUL arreglaGrid:" & vbCrLf & "-----------------------" & vbCrLf & vbCrLf & Mens
                                 
                              '=== LAURA (07/04/06): añadir tipo CB=CheckBox
                             Case "CB" 'anterior es un ChekBox
@@ -319,34 +321,34 @@ Public Function eval(ByRef formu As Form, nom_camp As String) As Control
 Dim Ctrl As Control
 Dim nom_camp2 As String
 Dim nou_i As Integer
-Dim j As Integer
+Dim J As Integer
 
     Set eval = Nothing
-    j = InStr(1, nom_camp, "(")
-    If j = 0 Then
+    J = InStr(1, nom_camp, "(")
+    If J = 0 Then
         nou_i = -1
     Else
         nom_camp = Left(nom_camp, Len(nom_camp) - 1)
-        nou_i = Val(Mid(nom_camp, j + 1))
-        nom_camp = Left(nom_camp, j - 1)
+        nou_i = Val(Mid(nom_camp, J + 1))
+        nom_camp = Left(nom_camp, J - 1)
     End If
     
     For Each Ctrl In formu.Controls
         If Ctrl.Name = nom_camp Then
             If nou_i >= 0 Then
                 If nou_i = Ctrl.Index Then
-                    j = 1 'coincidix el nom i l'index
+                    J = 1 'coincidix el nom i l'index
                 Else
-                    j = 0 'coincidix el nom però no l'index
+                    J = 0 'coincidix el nom però no l'index
                 End If
             Else
-                j = 1 'coincidix el nom i no te index
+                J = 1 'coincidix el nom i no te index
             End If
         Else
-            j = -1 'no coincidix el nom
+            J = -1 'no coincidix el nom
         End If
         
-        If j > 0 Then
+        If J > 0 Then
             Set eval = Ctrl
             Exit For
         End If
