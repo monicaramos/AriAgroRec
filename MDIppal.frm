@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:34"
+            TextSave        =   "12:35"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -417,6 +417,10 @@ Begin VB.MDIForm MDIppal
       Begin VB.Menu mnRec_InforOfi 
          Caption         =   "Registro de Fitosanitarios"
          Index           =   3
+      End
+      Begin VB.Menu mnRec_InforOfi 
+         Caption         =   "Informe Diferencia Kilos"
+         Index           =   4
       End
    End
    Begin VB.Menu mnEntradas 

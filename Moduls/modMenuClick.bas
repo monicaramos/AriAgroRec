@@ -137,6 +137,10 @@ Public Sub SubmnC_RecoleccionG_InforOfi_Click(Index As Integer)
         Case 2: AbrirListado (43)       ' INFORME de miembros atria
     
         Case 3: AbrirListado (46) ' registro de fitosanitarios
+    
+        Case 4: AbrirListado (50) ' informe de diferencias de kilos
+    
+    
     End Select
 End Sub
 
@@ -1172,6 +1176,11 @@ Dim i As Integer
     '[Monica]12/12/2013: el informe de fitosanitarios solo para catadau
     MDIppal.mnRec_InforOfi(3).Enabled = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)
     MDIppal.mnRec_InforOfi(3).visible = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)
+    
+    
+'    '[Monica]07/12/2016: informe de diferencias de kilos
+'    MDIppal.mnRec_InforOfi(4).Enabled = (vParamAplic.Cooperativa = 0)
+'    MDIppal.mnRec_InforOfi(4).visible = (vParamAplic.Cooperativa = 0)
     
     
     '[Monica]04/05/2015: traspaso de ropas solo para Castelduc

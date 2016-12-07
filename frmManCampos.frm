@@ -386,6 +386,7 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
+      Tab             =   1
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -400,64 +401,48 @@ Begin VB.Form frmManCampos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(26)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label28"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label29"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label6(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label5"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(2)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "imgBuscar(3)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label2"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "imgBuscar(13)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label36"
-      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).ControlEnabled=   0   'False
+      Tab(0).Control(0)=   "Text5(0)"
+      Tab(0).Control(1)=   "Combo1(0)"
+      Tab(0).Control(2)=   "Text2(3)"
+      Tab(0).Control(3)=   "Text2(2)"
+      Tab(0).Control(4)=   "Text1(2)"
+      Tab(0).Control(5)=   "Text1(3)"
+      Tab(0).Control(6)=   "Text1(21)"
+      Tab(0).Control(7)=   "Text1(37)"
+      Tab(0).Control(8)=   "Text4(3)"
+      Tab(0).Control(9)=   "Text5(3)"
+      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text5(3)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text4(3)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text1(37)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(21)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Text1(3)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Text1(2)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(2)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text2(3)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Combo1(0)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text5(0)"
-      Tab(0).Control(22).Enabled=   0   'False
+      Tab(0).Control(12)=   "Label36"
+      Tab(0).Control(13)=   "imgBuscar(13)"
+      Tab(0).Control(14)=   "Label2"
+      Tab(0).Control(15)=   "imgBuscar(3)"
+      Tab(0).Control(16)=   "imgBuscar(2)"
+      Tab(0).Control(17)=   "Label5"
+      Tab(0).Control(18)=   "Label6(0)"
+      Tab(0).Control(19)=   "Label29"
+      Tab(0).Control(20)=   "imgZoom(0)"
+      Tab(0).Control(21)=   "Label28"
+      Tab(0).Control(22)=   "Label1(26)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Frame10"
-      Tab(1).Control(1)=   "Frame9"
-      Tab(1).Control(2)=   "Frame8"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Frame3"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "Frame5"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Frame6"
+      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(4)=   "Frame6"
-      Tab(1).Control(5)=   "Frame5"
-      Tab(1).Control(6)=   "Frame3"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "Frame8"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "Frame9"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Frame10"
+      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -513,7 +498,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   257
          Top             =   3270
          Width           =   6915
@@ -853,7 +838,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   223
          Top             =   3960
          Width           =   6915
@@ -1195,7 +1180,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -67740
+         Left            =   7260
          TabIndex        =   207
          Top             =   3960
          Width           =   5265
@@ -1249,7 +1234,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   675
-         Left            =   -67740
+         Left            =   7260
          TabIndex        =   204
          Top             =   3270
          Width           =   5265
@@ -1613,7 +1598,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   0
-         Left            =   4050
+         Left            =   -70950
          MaxLength       =   30
          TabIndex        =   186
          Top             =   1920
@@ -1962,7 +1947,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1305
-         Left            =   -67740
+         Left            =   7260
          TabIndex        =   165
          Top             =   1950
          Width           =   5235
@@ -2948,7 +2933,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2775
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   117
          Top             =   510
          Width           =   6915
@@ -3235,7 +3220,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1335
-         Left            =   -67740
+         Left            =   7260
          TabIndex        =   112
          Top             =   510
          Width           =   5235
@@ -3329,7 +3314,7 @@ Begin VB.Form frmManCampos
       Begin VB.ComboBox Combo1 
          Height          =   315
          Index           =   0
-         Left            =   1380
+         Left            =   -73620
          Style           =   2  'Dropdown List
          TabIndex        =   7
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
@@ -3341,7 +3326,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   87
          Top             =   855
@@ -3352,7 +3337,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   2
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   86
          Top             =   520
@@ -3362,7 +3347,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   2
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rcampos|codvarie|0000||"
@@ -3373,7 +3358,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   4
          TabIndex        =   5
          Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
@@ -3383,7 +3368,7 @@ Begin VB.Form frmManCampos
       Begin VB.TextBox Text1 
          Height          =   435
          Index           =   21
-         Left            =   5940
+         Left            =   -69060
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -3396,7 +3381,7 @@ Begin VB.Form frmManCampos
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   37
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   6
          TabIndex        =   6
          Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
@@ -3408,7 +3393,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   2265
+         Left            =   -72735
          MaxLength       =   30
          TabIndex        =   79
          Top             =   1185
@@ -3419,7 +3404,7 @@ Begin VB.Form frmManCampos
          Enabled         =   0   'False
          Height          =   285
          Index           =   3
-         Left            =   1380
+         Left            =   -73620
          MaxLength       =   30
          TabIndex        =   78
          Top             =   1530
@@ -3438,7 +3423,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3615
-         Left            =   5820
+         Left            =   -69180
          TabIndex        =   75
          Top             =   450
          Width           =   6720
@@ -3855,7 +3840,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2445
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   70
          Top             =   2310
          Width           =   5415
@@ -4395,7 +4380,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label36 
          Caption         =   "Nº Hidrante"
          Height          =   255
-         Left            =   3090
+         Left            =   -71910
          TabIndex        =   187
          Top             =   1950
          Width           =   885
@@ -4403,7 +4388,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   13
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Zona"
          Top             =   1200
          Width           =   240
@@ -4411,7 +4396,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label2 
          Caption         =   "Tipo Parcela"
          Height          =   255
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   88
          Top             =   1935
          Width           =   1035
@@ -4419,7 +4404,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Partida"
          Top             =   870
          Width           =   240
@@ -4427,7 +4412,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1080
+         Left            =   -73920
          ToolTipText     =   "Buscar Variedad"
          Top             =   570
          Width           =   240
@@ -4435,7 +4420,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label5 
          Caption         =   "Variedad"
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   84
          Top             =   525
          Width           =   735
@@ -4444,7 +4429,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Partida"
          Height          =   255
          Index           =   0
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   83
          Top             =   855
          Width           =   735
@@ -4452,7 +4437,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label29 
          Caption         =   "Observaciones"
          Height          =   255
-         Left            =   5940
+         Left            =   -69060
          TabIndex        =   82
          Top             =   4080
          Width           =   1140
@@ -4460,7 +4445,7 @@ Begin VB.Form frmManCampos
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   7170
+         Left            =   -67830
          ToolTipText     =   "Zoom descripción"
          Top             =   4080
          Width           =   240
@@ -4468,7 +4453,7 @@ Begin VB.Form frmManCampos
       Begin VB.Label Label28 
          Caption         =   "Poblacion"
          Height          =   255
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   81
          Top             =   1530
          Width           =   735
@@ -4477,7 +4462,7 @@ Begin VB.Form frmManCampos
          Caption         =   "Zona"
          Height          =   255
          Index           =   26
-         Left            =   180
+         Left            =   -74820
          TabIndex        =   80
          Top             =   1200
          Width           =   735
