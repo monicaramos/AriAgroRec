@@ -1178,9 +1178,9 @@ Dim i As Integer
     MDIppal.mnRec_InforOfi(3).visible = (vParamAplic.Cooperativa = 0) Or (vParamAplic.Cooperativa = 4)
     
     
-'    '[Monica]07/12/2016: informe de diferencias de kilos
-'    MDIppal.mnRec_InforOfi(4).Enabled = (vParamAplic.Cooperativa = 0)
-'    MDIppal.mnRec_InforOfi(4).visible = (vParamAplic.Cooperativa = 0)
+    '[Monica]07/12/2016: informe de diferencias de kilos
+    MDIppal.mnRec_InforOfi(4).Enabled = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnRec_InforOfi(4).visible = (vParamAplic.Cooperativa = 0)
     
     
     '[Monica]04/05/2015: traspaso de ropas solo para Castelduc

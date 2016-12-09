@@ -17,11 +17,59 @@ Begin VB.Form frmListado
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameDiferenciaKilos 
-      Height          =   4740
+      Height          =   5670
       Left            =   0
       TabIndex        =   887
       Top             =   0
       Width           =   6615
+      Begin MSComctlLib.ProgressBar pb11 
+         Height          =   225
+         Left            =   630
+         TabIndex        =   915
+         Top             =   4830
+         Visible         =   0   'False
+         Width           =   5610
+         _ExtentX        =   9895
+         _ExtentY        =   397
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Frame Frame11 
+         Caption         =   "Clasificado por"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   750
+         Left            =   630
+         TabIndex        =   912
+         Top             =   3990
+         Width           =   2820
+         Begin VB.OptionButton Opcion1 
+            Caption         =   "Variedad"
+            Height          =   255
+            Index           =   15
+            Left            =   1500
+            TabIndex        =   914
+            Top             =   330
+            Width           =   1200
+         End
+         Begin VB.OptionButton Opcion1 
+            Caption         =   "Socio"
+            Height          =   345
+            Index           =   14
+            Left            =   300
+            TabIndex        =   913
+            Top             =   270
+            Width           =   1290
+         End
+      End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
@@ -133,18 +181,18 @@ Begin VB.Form frmListado
       Begin VB.CommandButton CmdAcepDifKilos 
          Caption         =   "&Aceptar"
          Height          =   375
-         Left            =   4110
+         Left            =   4050
          TabIndex        =   889
-         Top             =   4065
+         Top             =   5130
          Width           =   975
       End
       Begin VB.CommandButton CmdCancel 
          Caption         =   "&Cancelar"
          Height          =   375
          Index           =   27
-         Left            =   5190
+         Left            =   5250
          TabIndex        =   888
-         Top             =   4065
+         Top             =   5130
          Width           =   975
       End
       Begin VB.TextBox txtcodigo 
@@ -166,6 +214,16 @@ Begin VB.Form frmListado
          TabIndex        =   895
          Top             =   3240
          Width           =   1095
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cargando Temporal"
+         Height          =   195
+         Index           =   267
+         Left            =   630
+         TabIndex        =   916
+         Top             =   5100
+         Visible         =   0   'False
+         Width           =   3525
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -13120,7 +13178,7 @@ Dim b As Boolean
     'CONTABILIZAR ASIENTO DE GASTOS
     '===========================================================================
     Me.lblProgres(0).Caption = "Contabilizar Asiento de Gastos: "
-    CargarProgres Me.pb1, 10
+    CargarProgres Me.Pb1, 10
     Me.lblProgres(1).Caption = "Insertando Asiento en Diario..."
 
 
@@ -13427,7 +13485,11 @@ Dim Tabla2 As String
      cHasta = Trim(txtcodigo(185).Text)
      nDesde = ""
      nHasta = ""
+     
      devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
+     
+     CadParam = CadParam & AnyadirParametroDH("pDHFecha=""", cDesde, cHasta, "", "")
+     numParam = numParam + 1
 
      Tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
      Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
@@ -13458,12 +13520,12 @@ Dim Tabla2 As String
            
                 indRPT = 112 'informe de diferencias de kilos
             
-                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub   '   cadNombreRPT = "rInfKilosSocio.rpt"
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub '   cadNombreRPT = "rInfKilosSocio.rpt"
                 cadTitulo = "Informe de Diferencias de Kilos"
                 cadNombreRPT = nomDocu '"rInfDiferencias.rpt"
+                
+                If Opcion1(15).Value Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "Var.rpt")
                 cadFormula = "{tmpinfkilos.codusu} = " & vUsu.Codigo & " and {tmpinfkilos.kilosnet} <> 0 "
-               
-               
                 LlamarImprimir
            End If
         End If
@@ -16269,7 +16331,7 @@ On Error GoTo eError
                 
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, Pb1, lblProgres(0), lblProgres(1))
             End If
         
         Case 1 '********* VALSUR *************
@@ -16295,7 +16357,7 @@ On Error GoTo eError
     
                 conn.BeginTrans
                 ' resto de casos (incluido catadau, calibrador grande)
-                b = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.pb1, Me.lblProgres(0), Me.lblProgres(1))
+                b = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.Pb1, Me.lblProgres(0), Me.lblProgres(1))
             Else
                 MsgBox "No ha seleccionado ningún fichero", vbExclamation
                 Exit Sub
@@ -16332,7 +16394,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
      
         Case 16 ' ******** COOPIC **********
@@ -16366,7 +16428,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
      
      
@@ -16401,7 +16463,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
     
         Case 5 ' ******** CASTELDUC **********
@@ -16435,7 +16497,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1), txtcodigo(170).Text, txtcodigo(179).Text)
+                b = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1), txtcodigo(170).Text, txtcodigo(179).Text)
             End If
     
     
@@ -16450,7 +16512,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb1.visible = False
+        Pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
 '        BorrarArchivo Me.CommonDialog1.FileName
@@ -16472,7 +16534,7 @@ Dim fecha1 As Date
 
 
 
-    pb1.visible = False
+    Pb1.visible = False
     
     Me.Refresh
     DoEvents
@@ -16524,7 +16586,7 @@ Dim fecha1 As Date
         conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
     End If
     
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(0).visible = False
     
     CargarTablaCalibrador = True
@@ -17208,7 +17270,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb1.visible = False
+        Pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
         BorrarArchivo Fichero1
@@ -17503,6 +17565,10 @@ Private Sub Form_Activate()
         
             Case 48 ' traspaso de albaranes de retirada para abn
                 PonerFoco txtcodigo(169)
+        
+            Case 50 ' informe de diferencias
+                PonerFoco txtcodigo(186)
+                Me.Opcion1(14).Value = True
         
         End Select
     End If
@@ -17803,7 +17869,7 @@ Dim List As Collection
         CargaCombo
         Combo1(6).ListIndex = 0
         FrameTraspasoCalibradorVisible True, H, W
-        pb1.visible = False
+        Pb1.visible = False
         '[Monica]21/04/2016: añadida la fecha para Castellduc (cooperativa=5)
         FrameNota.visible = vParamAplic.Cooperativa = 5
         FrameNota.Enabled = vParamAplic.Cooperativa = 5
@@ -19087,7 +19153,7 @@ Private Sub FrameDiferenciaKilosVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.FrameDiferenciaKilos.Top = -90
         Me.FrameDiferenciaKilos.Left = 0
-        Me.FrameDiferenciaKilos.Height = 4740
+        Me.FrameDiferenciaKilos.Height = 5670
         Me.FrameDiferenciaKilos.Width = 6615
         W = Me.FrameDiferenciaKilos.Width
         H = Me.FrameDiferenciaKilos.Height
@@ -24695,6 +24761,7 @@ Dim Arboles As Long
 Dim DCanaforo As Long
 Dim DkilosAse As Long
 Dim KilosTot As Currency
+Dim Sql4 As String
 
                     
     
@@ -24742,6 +24809,13 @@ Dim KilosTot As Currency
     
     Sql = Sql & " order by 1, 2"
     
+    
+    pb11.visible = True
+    Label2(267).visible = True
+    
+    Sql4 = "select count(*) from (" & Sql & ") aaaa"
+    CargarProgres pb11, DevuelveValor(Sql4)
+    
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -24749,6 +24823,8 @@ Dim KilosTot As Currency
     Sql2 = Sql2 & "canaforo, nroarbol) values "
     
     While Not Rs.EOF
+        IncrementarProgres pb11, 1
+    
         SocioAct = DBLet(Rs.Fields(0).Value, "N")
         CampoAct = DBLet(Rs.Fields(1).Value, "N")
             
@@ -24776,7 +24852,7 @@ Dim KilosTot As Currency
         KilosTot = KilosTot + DevuelveValor(SQLaux)
         
        
-        Sql3 = Sql3 & DBSet(DevuelveValor(SQLaux), "N") & "," 'kilosnet
+        Sql3 = Sql3 & DBSet(KilosTot, "N") & "," 'kilosnet
         
         SqlAux2 = "select canaforo, kilosase "
         SqlAux2 = SqlAux2 & " from rcampos where codcampo = " & DBSet(Rs.Fields(1).Value, "N")
@@ -24821,7 +24897,7 @@ Dim KilosTot As Currency
     Sql2 = Mid(Sql2, 1, Len(Sql2) - 1)
     conn.Execute Sql2
     
-    '[Monica]13/11/2013: puede que hayan errores en el prorrateo de hectareas, hanegadas, arboles y canaforo, se lo daremos al
+    '[Monica]13/11/2013: puede que hayan errores en el prorrateo de arboles y canaforo, se lo daremos al
     Sql = "select codcampo, sum(canaforo) canaforo, sum(nroarbol) kilosase from tmpinfkilos where codusu = " & vUsu.Codigo & " group by codcampo order by codcampo "
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -24849,9 +24925,15 @@ Dim KilosTot As Currency
     Wend
     
     CargarTemporal7 = True
+    
+    pb11.visible = False
+    Label2(267).visible = False
+    
     Exit Function
     
 eCargarTemporal:
+    pb11.visible = False
+    Label2(267).visible = False
     MuestraError "Cargando temporal", Err.Description
 End Function
 
