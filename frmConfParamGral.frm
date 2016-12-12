@@ -144,12 +144,12 @@ Begin VB.Form frmConfParamGral
       TabCaption(1)   =   "Datos Campaña"
       TabPicture(1)   =   "frmConfParamGral.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "text1(11)"
-      Tab(1).Control(1)=   "text1(12)"
-      Tab(1).Control(2)=   "imgFec(0)"
-      Tab(1).Control(3)=   "Label21"
-      Tab(1).Control(4)=   "imgFec(1)"
-      Tab(1).Control(5)=   "Label2"
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(1)=   "imgFec(1)"
+      Tab(1).Control(2)=   "Label21"
+      Tab(1).Control(3)=   "imgFec(0)"
+      Tab(1).Control(4)=   "text1(12)"
+      Tab(1).Control(5)=   "text1(11)"
       Tab(1).ControlCount=   6
       Begin VB.TextBox text1 
          BeginProperty Font 
@@ -867,7 +867,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Const IdPrograma = 101
+Private Const IdPrograma = 1001
 
 Private NombreTabla As String  'Nombre de la tabla o de la
 Private Ordenacion As String

@@ -19,13 +19,13 @@ Begin VB.Form frmConfParamRpt
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   3270
-      TabIndex        =   28
+      TabIndex        =   27
       Top             =   30
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   210
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   210
          Width           =   1965
          _ExtentX        =   3466
@@ -506,15 +506,16 @@ Begin VB.Form frmConfParamRpt
       _Version        =   393216
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
-      Height          =   390
-      Left            =   10650
-      TabIndex        =   27
-      Top             =   120
+      Height          =   330
+      Left            =   10680
+      TabIndex        =   29
+      Top             =   150
       Width           =   405
       _ExtentX        =   714
-      _ExtentY        =   688
+      _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
+      Style           =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
          NumButtons      =   1
@@ -681,12 +682,18 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Private Const IdPrograma = 1004
+
+
 Private NombreTabla As String  'Nombre de la tabla o de la
 Private Ordenacion As String
 Private CadenaConsulta As String
 
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmTDoc As frmBasico2
+Attribute frmTDoc.VB_VarHelpID = -1
+
 Dim HaDevueltoDatos  As Boolean
 
 Dim btnPrimero As Byte
@@ -701,10 +708,10 @@ Dim Modo As Byte
 
 Private Sub cmdAceptar_Click()
 Dim vParamRpt As CParamRpt 'Clase Parametros para Reports
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 Dim actualiza As Boolean
 
-    If DatosOk Then
+    If DatosOK Then
         'Modifica datos en la Tabla: scryst
 '        I = ModificaDesdeFormulario(Me)
         'Actualizar campos de la clase
@@ -735,8 +742,8 @@ Dim actualiza As Boolean
         End If
         Set vParamRpt = Nothing
         If actualiza = 0 Then 'Inserta o Modifica
-            Cad = "codcryst=" & Text1(0).Text
-            If SituarData(Data1, Cad, Indicador) Then
+            cad = "codcryst=" & Text1(0).Text
+            If SituarData(Data1, cad, Indicador) Then
                 PonerModo 2
                 Me.lblIndicador.Caption = Indicador
             End If
@@ -748,7 +755,7 @@ End Sub
 
 Private Sub cmdCancelar_Click()
     Select Case Modo
-        Case 3 'Insertar
+        Case 1, 3 'Insertar
             LimpiarCampos
             PonerModo 0
             'PonerFoco Text1(0)
@@ -855,6 +862,17 @@ EEPonerBusq:
 End Sub
 
 
+Private Sub frmTDoc_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    CadB = "codcryst = " & RecuperaValor(CadenaSeleccion, 1)
+    
+    'Se muestran en el mismo form
+    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+    PonerCadenaBusqueda
+    Screen.MousePointer = vbDefault
+
+End Sub
+
 Private Sub mnModificar_Click()
      If BLOQUEADesdeFormulario(Me) Then BotonModificar
 End Sub
@@ -884,6 +902,10 @@ End Sub
 
 
 Private Sub Text1_LostFocus(Index As Integer)
+
+    If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
+
+
     If Index = 4 Then 'cod. ISO
         If Text1(Index).Text = "" Then Exit Sub
         If Not PonerFormatoEntero(Text1(Index)) Then
@@ -897,7 +919,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 5
             'BUSCAR
-            
+            BotonBuscar
         
         Case 6
             'Ver todos
@@ -910,6 +932,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
+Private Sub BotonBuscar()
+    'Buscar
+    If Modo <> 1 Then
+        LimpiarCampos
+        PonerModo 1
+        '### A mano
+        '-------------------------------------------------
+        'Si pasamos el control aqui lo ponemos en amarillo
+        PonerFoco Text1(0)
+        Else
+            HacerBusqueda
+            If Data1.Recordset.EOF Then
+                 '### A mano
+                Text1(0).Text = ""
+                PonerFoco Text1(0)
+            End If
+    End If
+End Sub
 
 Private Sub BotonAnyadir()
     LimpiarCampos
@@ -943,11 +983,27 @@ Private Sub BotonVerTodos()
     End If
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-    DatosOk = False
-    b = CompForm(Me)
-    DatosOk = b
+Private Sub HacerBusqueda()
+Dim cad As String
+Dim CadB As String
+CadB = ObtenerBusqueda(Me)
+
+If chkVistaPrevia = 1 Then
+    MandaBusquedaPrevia CadB
+    Else
+        'Se muestran en el mismo form
+        If CadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+            PonerCadenaBusqueda
+        End If
+End If
+End Sub
+
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+    DatosOK = False
+    B = CompForm(Me)
+    DatosOK = B
 End Function
 
 
@@ -959,11 +1015,11 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdSalir.visible = b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdSalir.visible = B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 
@@ -1021,7 +1077,7 @@ End Sub
 '   En PONERMODO se habilitan, o no, los diverso campos del
 '   formulario en funcion del modo en k vayamos a trabajar
 Private Sub PonerModo(Kmodo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 Dim NumReg As Byte
    
     Modo = Kmodo
@@ -1036,14 +1092,14 @@ Dim NumReg As Byte
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    b = (Kmodo = 2) Or (Kmodo = 0)
-    DesplazamientoVisible b And Me.Data1.Recordset.RecordCount > 1 ' Me.Toolbar1, btnPrimero, b, NumReg
+    B = (Kmodo = 2) Or (Kmodo = 0)
+    DesplazamientoVisible B And Me.Data1.Recordset.RecordCount > 1 ' Me.Toolbar1, btnPrimero, b, NumReg
     
     
     '------------------------------------------------------
     'Modo insertar o modificar
-    b = (Kmodo >= 3) '-->Luego not b sera kmodo<3
-    PonerBotonCabecera Not b
+    B = (Kmodo >= 3) Or Kmodo = 1 '-->Luego not b sera kmodo<3
+    PonerBotonCabecera Not B
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
@@ -1055,9 +1111,9 @@ Dim NumReg As Byte
     'Si estamos en Insertar además limpia los campos Text1
     BloquearText1 Me, Modo
     
-    b = Not (Modo = 3 Or Modo = 4 Or Modo = 1)
+    B = Not (Modo = 3 Or Modo = 4 Or Modo = 1)
     
-    BloquearChk Me.chkImpDirecto, b
+    BloquearChk Me.chkImpDirecto, B
     
     PonerModoOpcionesMenu 'Activar opciones de menu según el Modo
     PonerOpcionesMenu   'Activar opciones de menu según nivel
@@ -1066,50 +1122,32 @@ End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
-    b = (Modo = 3) Or (Modo = 4)
-    Me.Toolbar1.Buttons(1).Enabled = Not b 'Insertar
-    Me.mnNuevo.Enabled = Not b
-    Me.Toolbar1.Buttons(2).Enabled = (Not b) 'Modificar
-    Me.mnModificar.Enabled = Not b
+Dim B As Boolean
+    B = (Modo = 3) Or (Modo = 4)
+    Me.Toolbar1.Buttons(1).Enabled = Not B 'Insertar
+    Me.mnNuevo.Enabled = Not B
+    Me.Toolbar1.Buttons(2).Enabled = (Not B) 'Modificar
+    Me.mnModificar.Enabled = Not B
 End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
 
-    'Llamamos a al form
-    Screen.MousePointer = vbHourglass
-    Cad = ParaGrid(Text1(0), 10, "Código")
-    Cad = Cad & ParaGrid(Text1(1), 30, "Descripción")
-    Cad = Cad & ParaGrid(Text1(2), 60, "Fichero")
-        
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        frmB.vtabla = "scryst"
-        frmB.vSQL = CadB
-'        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = "0|"
-        frmB.vTitulo = "Tipos documento"
-        frmB.vSelElem = 1
-'        frmB.vConexionGrid = conAri
-'        frmB.vCargaFrame = False
-
-        frmB.Show vbModal
-        Set frmB = Nothing
-        
-        If HaDevueltoDatos Then
-'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-'                cmdRegresar_Click
-        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-            PonerFoco Text1(0)
-        End If
+    Set frmTDoc = New frmBasico2
     
-    Screen.MousePointer = vbDefault
+    AyudaTiposDocumentos frmTDoc, , CadB
+    
+    Set frmTDoc = Nothing
+
 End Sub
 
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
 
 Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
     Desplazamiento (Button.Index)

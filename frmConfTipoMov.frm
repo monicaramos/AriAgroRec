@@ -444,7 +444,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Const IdPrograma = 103
+Private Const IdPrograma = 1003
 
 
 Private NombreTabla As String  'Nombre de la tabla o de la
@@ -527,7 +527,7 @@ End Sub
 
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
-Dim Cad As String
+Dim cad As String
 
 If Data1.Recordset Is Nothing Then Exit Sub
 If Data1.Recordset.EOF Then Exit Sub
@@ -536,19 +536,19 @@ Me.Refresh
 Screen.MousePointer = vbHourglass
 
 If ColIndex = 5 Then
-    Cad = "tipodocu"
+    cad = "tipodocu"
     If ColIndex = ColIndexAnt Then
         If AscAnt Then
-            Cad = Cad & " DESC "
+            cad = cad & " DESC "
         End If
     End If
 Else
     If ColIndex <> ColIndexAnt Then
-        Cad = DataGrid1.Columns(ColIndex).DataField
+        cad = DataGrid1.Columns(ColIndex).DataField
     Else
-        Cad = DataGrid1.Columns(ColIndex).DataField
+        cad = DataGrid1.Columns(ColIndex).DataField
         If AscAnt Then
-            Cad = Cad & " DESC "
+            cad = cad & " DESC "
         End If
     End If
 End If
@@ -556,7 +556,7 @@ End If
 AscAnt = Not AscAnt
 
 ColIndexAnt = ColIndex
-CargaGrid "", Cad
+CargaGrid "", cad
 
 Screen.MousePointer = vbDefault
 End Sub
@@ -814,14 +814,14 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 
-Private Sub CargaGrid(Optional vSql As String, Optional Orden As String)
+Private Sub CargaGrid(Optional vSQL As String, Optional Orden As String)
 Dim i As Byte
 Dim tots As String
 Dim Sql As String
 
     
-    If vSql <> "" Then
-        Sql = CadenaConsulta & " and " & vSql
+    If vSQL <> "" Then
+        Sql = CadenaConsulta & " and " & vSQL
     Else
         Sql = CadenaConsulta
     End If
@@ -924,6 +924,16 @@ Dim b As Boolean
 Dim i As Byte
 
     Modo = vModo
+    
+    b = (Modo = 2)
+    If b Then
+        PonerContRegIndicador Me.lblIndicador, Me.Data1, CadB
+    Else
+        PonerIndicador lblIndicador, Modo
+    End If
+    
+    
+    
     b = (Modo = 0) Or (Modo = 2)
 
     For i = 0 To txtAux.Count - 1
@@ -934,13 +944,6 @@ Dim i As Byte
     Me.CboMueveStock.visible = Not b
     Me.Combo1.visible = Not b
     
-'    If b Then Me.lblIndicador.Caption = ""
-    
-    If b And Not Data1.Recordset.EOF Then
-        Me.lblIndicador.Caption = Data1.Recordset.AbsolutePosition & " de " & Data1.Recordset.RecordCount
-    Else
-        Me.lblIndicador.Caption = ""
-    End If
     cmdAceptar.visible = Not b
     cmdCancelar.visible = Not b
 
@@ -1089,7 +1092,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtAux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), 3
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1101,6 +1104,9 @@ Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
+    
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
+    
     'Quitar espacios en blanco por los lados
     txtAux(Index).Text = Trim(txtAux(Index).Text)
     If txtAux(Index).Text = "" Then Exit Sub
@@ -1119,7 +1125,7 @@ End Sub
 Private Function SepuedeBorrar() As Boolean
 Dim Sql As String
 Dim Sql1 As String
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
 Dim b As Boolean
 
@@ -1140,8 +1146,8 @@ Dim b As Boolean
     Wend
     
     If Not b Then
-        Cad = "No se puede eliminar la fila. " & vbCrLf
-        MsgBox Cad & "Esta vinculada con Facturas de Socios", vbExclamation
+        cad = "No se puede eliminar la fila. " & vbCrLf
+        MsgBox cad & "Esta vinculada con Facturas de Socios", vbExclamation
         Exit Function
     End If
     SepuedeBorrar = True
