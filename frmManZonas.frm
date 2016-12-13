@@ -1146,14 +1146,14 @@ Private Sub txtAux_LostFocus(Index As Integer)
         Case 1
             txtAux(Index).Text = UCase(txtAux(Index).Text)
         Case 2, 3  'Precios de pozos
+            '[Monica]29/05/2013: fallaba cuando el numero se metia con error
+            If Modo = 1 Then Exit Sub
         
             If Not PonerFormatoDecimal(txtAux(Index), 7) Then
 '[Monica]09/12/2013: se metia en un bucle si no poniamos nada
 '                PonerFoco txtAux(Index)
                 Exit Sub
             End If
-            '[Monica]29/05/2013: fallaba cuando el numero se metia con error
-            If Modo = 1 Then Exit Sub
             If IsNumeric(txtAux(2)) And IsNumeric(txtAux(3)) Then  '(Index = 2 Or Index = 3) Then
                 txtAux(4).Text = CCur(ComprobarCero(txtAux(2).Text)) + CCur(ComprobarCero(txtAux(3).Text))
                 If CCur(txtAux(4).Text) = 0 Then txtAux(4).Text = ""
@@ -1161,6 +1161,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
             End If
             
         Case 5 'precio de manta
+            If Modo = 1 Then Exit Sub
             PonerFormatoDecimal txtAux(Index), 7
     End Select
 

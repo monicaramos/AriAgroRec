@@ -517,7 +517,7 @@ Private Sub BotonAnyadir()
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonFoco txtAux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -535,7 +535,7 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
-    PonFoco txtAux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -564,7 +564,7 @@ Private Sub BotonModificar()
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonFoco txtAux(1)
+    PonerFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
