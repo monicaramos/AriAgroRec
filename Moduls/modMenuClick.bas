@@ -574,11 +574,15 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 If vParamAplic.Cooperativa = 9 Then
                     frmManHorasNat.Show vbModal  'Entrada de Horas de trabajadores para natural de montaña
                 Else
-                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Then
+                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
                         If vParamAplic.Cooperativa = 0 Then frmManHorasPica.Caption = "Entrada de Horas"
                         frmManHorasPica.Show vbModal  'Entrada de Horas de trabajadores para picassent
                     Else
-                        frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                        If vParamAplic.Cooperativa = 16 Then
+                            frmManHorasCoopic.Show vbModal ' entradas horas coopic
+                        Else
+                            frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                        End If
                     End If
                 End If
         Case 14: frmImpRecibos.Show vbModal 'Impresión de Recibos
