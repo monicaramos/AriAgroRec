@@ -613,7 +613,10 @@ Dim Sql As String
     AnyadirAFormula cadSelect, "straba.codsecci = " & Me.Combo1(1).ListIndex
     
     'La forma de pago tiene que ser de tipo Transferencia
-    AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+    '[Monica]15/12/2016: en el caso de coopic no miro la fp
+    If vParamAplic.Cooperativa <> 16 Then
+        AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+    End If
     
     Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
@@ -1521,7 +1524,10 @@ Dim Sql As String
     AnyadirAFormula cadSelect, "straba.codsecci = " & Me.Combo1(3).ListIndex
     
     'La forma de pago tiene que ser de tipo Transferencia
-    AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+    '[Monica]15/12/2016: solo en el caso de coopic me da igual la fp pq ellos no pagan
+    If vParamAplic.Cooperativa <> 16 Then
+        AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
+    End If
     
     Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
@@ -2498,7 +2504,8 @@ On Error GoTo eProcesarCambiosPicassent
             ImpBruto = Round2(ImpHoras + DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs2!PlusCapataz, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
         Else
             ' en coopic llevamos en el bruto el plus del capataz
-            ImpBruto = Round2(ImpHoras + DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
+            ' y no hay imphoras
+            ImpBruto = Round2(DBLet(Rs.Fields(5).Value, "N") + DBLet(Rs.Fields(3).Value, "N") - DBLet(Rs.Fields(4).Value, "N"), 2)
         End If
         
         TImpbruto = TImpbruto + ImpBruto
