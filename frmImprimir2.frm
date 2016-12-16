@@ -15,6 +15,15 @@ Begin VB.Form frmImprimir2
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   1980
       TabIndex        =   5
@@ -23,6 +32,15 @@ Begin VB.Form frmImprimir2
    End
    Begin VB.CommandButton cmdImprimir 
       Caption         =   "&Imprimir"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   720
       TabIndex        =   4
@@ -32,7 +50,7 @@ Begin VB.Form frmImprimir2
    Begin VB.Frame Frame1 
       Caption         =   " Intervalo de registros "
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
          Weight          =   400
@@ -49,7 +67,7 @@ Begin VB.Form frmImprimir2
       Begin VB.OptionButton Option1 
          Caption         =   "Registros buscados"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -67,7 +85,7 @@ Begin VB.Form frmImprimir2
       Begin VB.OptionButton Option1 
          Caption         =   "Todos"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
@@ -85,7 +103,7 @@ Begin VB.Form frmImprimir2
       Begin VB.OptionButton Option1 
          Caption         =   "Registro actual"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
             Weight          =   400
