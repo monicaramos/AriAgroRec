@@ -2447,7 +2447,7 @@ Dim CadenaInsertFaclin2 As String
     Cad = ""
     If Not Rs.EOF Then
         vContaFra.NumeroFactura = DBLet(Rs!numfactu)
-        vContaFra.Serie = DBLet(Rs!Serie)
+        vContaFra.Serie = DBLet(Rs!letraser)
         vContaFra.Anofac = DBLet(Rs!anofaccl)
         
         'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura

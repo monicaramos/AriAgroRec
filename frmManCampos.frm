@@ -402,29 +402,29 @@ Begin VB.Form frmManCampos
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Text5(0)"
-      Tab(0).Control(1)=   "Combo1(0)"
-      Tab(0).Control(2)=   "Text2(3)"
-      Tab(0).Control(3)=   "Text2(2)"
-      Tab(0).Control(4)=   "Text1(2)"
-      Tab(0).Control(5)=   "Text1(3)"
-      Tab(0).Control(6)=   "Text1(21)"
-      Tab(0).Control(7)=   "Text1(37)"
-      Tab(0).Control(8)=   "Text4(3)"
-      Tab(0).Control(9)=   "Text5(3)"
-      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(0)=   "Label1(26)"
+      Tab(0).Control(1)=   "Label28"
+      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(3)=   "Label29"
+      Tab(0).Control(4)=   "Label6(0)"
+      Tab(0).Control(5)=   "Label5"
+      Tab(0).Control(6)=   "imgBuscar(2)"
+      Tab(0).Control(7)=   "imgBuscar(3)"
+      Tab(0).Control(8)=   "Label2"
+      Tab(0).Control(9)=   "imgBuscar(13)"
+      Tab(0).Control(10)=   "Label36"
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(12)=   "Label36"
-      Tab(0).Control(13)=   "imgBuscar(13)"
-      Tab(0).Control(14)=   "Label2"
-      Tab(0).Control(15)=   "imgBuscar(3)"
-      Tab(0).Control(16)=   "imgBuscar(2)"
-      Tab(0).Control(17)=   "Label5"
-      Tab(0).Control(18)=   "Label6(0)"
-      Tab(0).Control(19)=   "Label29"
-      Tab(0).Control(20)=   "imgZoom(0)"
-      Tab(0).Control(21)=   "Label28"
-      Tab(0).Control(22)=   "Label1(26)"
+      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(13)=   "Text5(3)"
+      Tab(0).Control(14)=   "Text4(3)"
+      Tab(0).Control(15)=   "Text1(37)"
+      Tab(0).Control(16)=   "Text1(21)"
+      Tab(0).Control(17)=   "Text1(3)"
+      Tab(0).Control(18)=   "Text1(2)"
+      Tab(0).Control(19)=   "Text2(2)"
+      Tab(0).Control(20)=   "Text2(3)"
+      Tab(0).Control(21)=   "Combo1(0)"
+      Tab(0).Control(22)=   "Text5(0)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
@@ -477,8 +477,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "ListView4"
-      Tab(8).Control(1)=   "FrameAux6"
+      Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(1)=   "ListView4"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -5522,7 +5522,7 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
@@ -5541,9 +5541,9 @@ Dim Tabla As String
             Sql = Sql & " ORDER BY rcampos_cooprop.codsocio "
        
        Case 1 ' clasificacion
-            Tabla = "rcampos_clasif"
+            tabla = "rcampos_clasif"
             Sql = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
             Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
@@ -5551,83 +5551,83 @@ Dim Tabla As String
                 Sql = Sql & " WHERE rcampos_clasif.codcampo = -1"
             End If
             Sql = Sql
-            Sql = Sql & " ORDER BY " & Tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
             
        Case 2 ' parcelas
-            Tabla = "rcampos_parcelas"
+            tabla = "rcampos_parcelas"
             Sql = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
             Sql = Sql & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
             Sql = Sql & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab2(True)
             Else
                 Sql = Sql & " WHERE rcampos_parcelas.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
             
        Case 3 ' agroseguro
-            Tabla = "rcampos_seguros"
+            tabla = "rcampos_seguros"
             Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
             Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
             Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab3(True)
             Else
                 Sql = Sql & " WHERE rcampos_seguros.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
             
         Case 4 ' hco del campo
-            Tabla = "rcampos_hco"
+            tabla = "rcampos_hco"
             Sql = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
             Sql = Sql & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
-            Sql = Sql & " FROM (" & Tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
+            Sql = Sql & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
             Sql = Sql & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab4(True)
             Else
                 Sql = Sql & " WHERE rcampos_hco.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
         
         Case 5 ' gastos del campo
-            Tabla = "rcampos_gastos"
+            tabla = "rcampos_gastos"
             Sql = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
             Sql = Sql & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab5(True)
             Else
                 Sql = Sql & " WHERE rcampos_gastos.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     
         Case 6 ' impresion de ordenes de recoleccion del campo
-            Tabla = "rcampos_ordrec"
+            tabla = "rcampos_ordrec"
             Sql = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab6(True)
             Else
                 Sql = Sql & " WHERE rcampos_ordrec.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".nroorden "
+            Sql = Sql & " ORDER BY " & tabla & ".nroorden "
     
         Case 7 ' revisiones
-            Tabla = "rcampos_revision"
+            tabla = "rcampos_revision"
             Sql = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab7(True)
             Else
                 Sql = Sql & " WHERE rcampos_revision.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     
     
     

@@ -548,9 +548,10 @@ End Sub
 
 
 
-Public Sub DesplazamientoData(ByRef vData As Adodc, Index As Integer)
+Public Sub DesplazamientoData(ByRef vData As Adodc, Index As Integer, Optional EsNuevo As Boolean)
 'Para desplazarse por los registros de control Data
     If vData.Recordset.EOF Then Exit Sub
+    If EsNuevo Then Index = Index - 1
     Select Case Index
         Case 0 'Primer Registro
             If Not vData.Recordset.BOF Then vData.Recordset.MoveFirst
@@ -1383,7 +1384,7 @@ Dim cadEnt As String
 End Function
 
 
-Public Function PonerNombreDeCod(ByRef Txt As TextBox, Tabla As String, campo As String, Optional Codigo As String, Optional Tipo As String, Optional cBD As Byte, Optional codigo2 As String, Optional Valor2 As String, Optional tipo2 As String) As String
+Public Function PonerNombreDeCod(ByRef Txt As TextBox, tabla As String, campo As String, Optional Codigo As String, Optional Tipo As String, Optional cBD As Byte, Optional codigo2 As String, Optional Valor2 As String, Optional tipo2 As String) As String
 'Devuelve el nombre/Descripción asociado al Código correspondiente
 'Además pone formato al campo txt del código a partir del Tag
 Dim Sql As String
@@ -1401,7 +1402,7 @@ Dim ValorCodigo As String
             If Tipo = "" Then Tipo = vtag.TipoDato
             
             If cBD = 0 Then cBD = cAgro
-            Sql = DevuelveDesdeBDNew(cBD, Tabla, campo, Codigo, ValorCodigo, Tipo, , codigo2, Valor2, tipo2)
+            Sql = DevuelveDesdeBDNew(cBD, tabla, campo, Codigo, ValorCodigo, Tipo, , codigo2, Valor2, tipo2)
             If vtag.TipoDato = "N" Then ValorCodigo = Format(ValorCodigo, vtag.Formato)
             Txt.Text = ValorCodigo 'Valor codigo formateado
             If Sql = "" Then
