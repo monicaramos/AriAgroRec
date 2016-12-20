@@ -1132,7 +1132,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
     Dim cad As String
     Dim SQL As String
     Dim tabla As String
-    Dim Rc As Byte
+    Dim RC As Byte
 
     On Error GoTo EObtenerBusqueda
 
@@ -1221,8 +1221,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
                             Else
                             tabla = ""
                         End If
-                        Rc = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
-                        If Rc = 0 Then
+                        RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
+                        If RC = 0 Then
                             If SQL <> "" Then SQL = SQL & " AND "
                             SQL = SQL & "(" & cad & ")"
                         End If
@@ -1295,7 +1295,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     Dim cad As String
     Dim SQL As String
     Dim tabla As String
-    Dim Rc As Byte
+    Dim RC As Byte
 
     On Error GoTo EObtenerBusqueda
 
@@ -1367,8 +1367,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                             Else
                             tabla = ""
                         End If
-                        Rc = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
-                        If Rc = 0 Then
+                        RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
+                        If RC = 0 Then
                             If SQL <> "" Then SQL = SQL & " AND "
                             SQL = SQL & "(" & cad & ")"
                         End If
@@ -1441,7 +1441,7 @@ Dim Aux As String
 Dim cad As String
 Dim SQL As String
 Dim tabla As String, columna As String
-Dim Rc As Byte
+Dim RC As Byte
 
     On Error GoTo EObtenerBusqueda3
 
@@ -1548,8 +1548,8 @@ Dim Rc As Byte
                         Else
                             columna = mTag.columna & "}"
                         End If
-                    Rc = SeparaCampoBusqueda3(mTag.TipoDato, tabla & columna, Aux, cad, paraRPT)
-                    If Rc = 0 Then
+                    RC = SeparaCampoBusqueda3(mTag.TipoDato, tabla & columna, Aux, cad, paraRPT)
+                    If RC = 0 Then
                         If SQL <> "" Then SQL = SQL & " AND "
                         If Not paraRPT Then
                             SQL = SQL & "(" & cad & ")"
@@ -4403,6 +4403,34 @@ Public Sub AyudaClienteCom(frmBas As frmBasico, Optional CodActual As String)
     frmBas.Show vbModal
     
 End Sub
+
+
+Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Descripción|3000|;S|txtAux(2)|T|Fichero|2595|;"
+    frmBas.CadenaConsulta = "SELECT variedades.codvarie, variedades.nomvarie, productos.nomprodu "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM variedades inner join productos on variedades.codprodu = productos.codprodu "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    frmBas.Tag1 = "Código |N|N|||variedades|codvarie|0000|S|"
+    frmBas.Tag2 = "Descripción|T|N|||variedades|nomvarie|||"
+    frmBas.Tag3 = "Producto|T|N|||variedades|nomprodu|||"
+    
+    frmBas.Maxlen1 = 4
+    frmBas.Maxlen2 = 30
+    frmBas.Maxlen3 = 100
+    
+    frmBas.tabla = "variedades"
+    frmBas.CampoCP = "codvarie"
+    frmBas.Caption = "Variedades"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    frmBas.Show vbModal
+
+    
+End Sub
+
 
 
 Public Function ActualizarTraza(Nota As String, Variedad As String, Socio As String, campo As String, Fecha As String, Hora As String, MenError As String)
