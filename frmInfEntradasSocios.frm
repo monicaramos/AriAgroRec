@@ -25,14 +25,24 @@ Begin VB.Form frmInfEntradasSocios
    Begin VB.Frame FrameFacturar 
       Height          =   6150
       Left            =   0
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   -60
       Width           =   6435
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         Index           =   0
+         Left            =   1380
+         Style           =   2  'Dropdown List
+         TabIndex        =   6
+         Tag             =   "Tipo Campo|N|N|0|1|rcampos|tipocampo||N|"
+         Top             =   3780
+         Width           =   1380
+      End
       Begin VB.CheckBox Check5 
          Caption         =   "Incluir Mermas"
          Height          =   225
          Left            =   3270
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   5250
          Width           =   2745
       End
@@ -40,7 +50,7 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "Incluir Entradas Facturas"
          Height          =   225
          Left            =   3270
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   4890
          Width           =   2745
       End
@@ -48,7 +58,7 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "Por Tipo de Entrada"
          Height          =   225
          Left            =   3270
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   4560
          Width           =   2745
       End
@@ -56,7 +66,7 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "Sólo resumen"
          Height          =   225
          Left            =   3270
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   4200
          Width           =   2745
       End
@@ -64,16 +74,16 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "Agrupado por"
          ForeColor       =   &H00972E0B&
          Height          =   915
-         Left            =   390
-         TabIndex        =   26
-         Top             =   3720
+         Left            =   330
+         TabIndex        =   27
+         Top             =   4350
          Width           =   2385
          Begin VB.OptionButton Option1 
             Caption         =   "Variedad"
             Height          =   255
             Index           =   1
             Left            =   1290
-            TabIndex        =   28
+            TabIndex        =   29
             Top             =   330
             Width           =   945
          End
@@ -82,7 +92,7 @@ Begin VB.Form frmInfEntradasSocios
             Height          =   255
             Index           =   0
             Left            =   210
-            TabIndex        =   27
+            TabIndex        =   28
             Top             =   330
             Width           =   825
          End
@@ -91,7 +101,7 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "Salta página por Socio"
          Height          =   225
          Left            =   3270
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   3840
          Width           =   2745
       End
@@ -119,7 +129,7 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "&Cancelar"
          Height          =   375
          Left            =   4890
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   5565
          Width           =   975
       End
@@ -150,7 +160,7 @@ Begin VB.Form frmInfEntradasSocios
          Index           =   12
          Left            =   2700
          Locked          =   -1  'True
-         TabIndex        =   14
+         TabIndex        =   15
          Text            =   "Text5"
          Top             =   1095
          Width           =   3195
@@ -162,7 +172,7 @@ Begin VB.Form frmInfEntradasSocios
          Index           =   13
          Left            =   2700
          Locked          =   -1  'True
-         TabIndex        =   13
+         TabIndex        =   14
          Text            =   "Text5"
          Top             =   1455
          Width           =   3195
@@ -172,7 +182,7 @@ Begin VB.Form frmInfEntradasSocios
          Left            =   7860
          Picture         =   "frmInfEntradasSocios.frx":000C
          Style           =   1  'Graphical
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   2215
          Visible         =   0   'False
          Width           =   380
@@ -181,7 +191,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   440
          Left            =   7860
          Style           =   1  'Graphical
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   1440
          Visible         =   0   'False
          Width           =   380
@@ -213,7 +223,7 @@ Begin VB.Form frmInfEntradasSocios
          Index           =   20
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   10
+         TabIndex        =   11
          Text            =   "Text5"
          Top             =   2040
          Width           =   3375
@@ -225,7 +235,7 @@ Begin VB.Form frmInfEntradasSocios
          Index           =   21
          Left            =   2520
          Locked          =   -1  'True
-         TabIndex        =   9
+         TabIndex        =   10
          Text            =   "Text5"
          Top             =   2400
          Width           =   3375
@@ -234,9 +244,18 @@ Begin VB.Form frmInfEntradasSocios
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   3810
-         TabIndex        =   6
+         TabIndex        =   7
          Top             =   5580
          Width           =   975
+      End
+      Begin VB.Label Label34 
+         Caption         =   "Tipo Campo"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Left            =   360
+         TabIndex        =   34
+         Top             =   3750
+         Width           =   1245
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -254,7 +273,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   19
          Left            =   405
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   2700
          Width           =   450
       End
@@ -263,7 +282,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   20
          Left            =   735
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   2940
          Width           =   465
       End
@@ -272,7 +291,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   21
          Left            =   735
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   3285
          Width           =   420
       End
@@ -281,7 +300,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   22
          Left            =   720
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   1140
          Width           =   465
       End
@@ -290,7 +309,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   23
          Left            =   720
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   1500
          Width           =   420
       End
@@ -308,7 +327,7 @@ Begin VB.Form frmInfEntradasSocios
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   420
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   345
          Width           =   5925
       End
@@ -319,7 +338,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   27
          Left            =   390
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   900
          Width           =   405
       End
@@ -358,7 +377,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   11
          Left            =   390
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   1830
          Width           =   390
       End
@@ -367,7 +386,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   18
          Left            =   765
-         TabIndex        =   16
+         TabIndex        =   17
          Top             =   2085
          Width           =   465
       End
@@ -376,7 +395,7 @@ Begin VB.Form frmInfEntradasSocios
          Height          =   195
          Index           =   28
          Left            =   765
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   2475
          Width           =   420
       End
@@ -445,7 +464,7 @@ Dim cadSelect1 As String
 Dim cadSelect2 As String
 
 
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -576,10 +595,22 @@ Dim Sql2 As String
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
         End If
         
-        nTabla = "(((rclasifica "
+        Select Case Combo1(0).ListIndex
+            Case 0
+                            
+            Case 1
+                If Not AnyadirAFormula(cadSelect, "rcampos.codigoggap >= 1 and not rcampos.codigoggap is null") Then Exit Sub
+            Case 2
+                If Not AnyadirAFormula(cadSelect, "rcampos.esnaturane = 1") Then Exit Sub
+        End Select
+        
+        
+        nTabla = "((((rclasifica "
         nTabla = nTabla & " INNER JOIN rsocios ON rclasifica.codsocio = rsocios.codsocio) "
         nTabla = nTabla & " INNER JOIN variedades ON rclasifica.codvarie = variedades.codvarie) "
         nTabla = nTabla & " INNER JOIN productos ON variedades.codprodu = productos.codprodu) "
+        '[Monica]22/12/2016: añadido el combo de tipo de campo (todos, globalgap o naturane)
+        nTabla = nTabla & " INNER JOIN rcampos ON rclasifica.codcampo = rcampos.codcampo) "
         nTabla = nTabla & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         
         '[Monica]03/11/2011: en Quatretonda podemos mostrar las variedades de almazara
@@ -590,10 +621,12 @@ Dim Sql2 As String
         End If
         
         
-        nTabla2 = "(((rentradas "
+        nTabla2 = "((((rentradas "
         nTabla2 = nTabla2 & " INNER JOIN rsocios ON rentradas.codsocio = rsocios.codsocio) "
         nTabla2 = nTabla2 & " INNER JOIN variedades ON rentradas.codvarie = variedades.codvarie) "
         nTabla2 = nTabla2 & " INNER JOIN productos ON variedades.codprodu = productos.codprodu) "
+        '[Monica]22/12/2016: añadido el combo de tipo de campo (todos, globalgap o naturane)
+        nTabla2 = nTabla2 & " INNER JOIN rcampos ON rentradas.codcampo = rcampos.codcampo) "
         nTabla2 = nTabla2 & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         
         '[Monica]03/11/2011: en Quatretonda podemos mostrar las variedades de almazara
@@ -613,10 +646,12 @@ Dim Sql2 As String
         
         cadSelect1 = Replace(Replace(cadSelect, "rclasifica", "rhisfruta_entradas"), "rhisfruta_entradas.codsocio", "rhisfruta.codsocio")
         
-        Tabla1 = "((((rhisfruta INNER JOIN rhisfruta_entradas on rhisfruta.numalbar = rhisfruta_entradas.numalbar) "
+        Tabla1 = "(((((rhisfruta INNER JOIN rhisfruta_entradas on rhisfruta.numalbar = rhisfruta_entradas.numalbar) "
         Tabla1 = Tabla1 & " INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio) "
         Tabla1 = Tabla1 & " INNER JOIN variedades ON rhisfruta.codvarie = variedades.codvarie) "
         Tabla1 = Tabla1 & " INNER JOIN productos ON variedades.codprodu = productos.codprodu) "
+        '[Monica]22/12/2016: añadido el combo de tipo de campo (todos, globalgap o naturane)
+        Tabla1 = Tabla1 & " INNER JOIN rcampos ON rhisfruta.codcampo = rcampos.codcampo) "
         Tabla1 = Tabla1 & " INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         '[Monica]03/11/2011: en Quatretonda podemos mostrar las variedades de almazara
         If vParamAplic.Cooperativa <> 7 Then
@@ -721,6 +756,7 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         PonerFoco txtcodigo(12)
+        Combo1(0).ListIndex = 0
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -763,6 +799,7 @@ Dim indFrame As Single
     Me.Option1(0).Value = True
     Option1_Click (0)
     
+    CargaCombo
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.cmdCancel.Cancel = True
@@ -770,6 +807,24 @@ Dim indFrame As Single
     Me.Height = H + 350
         
 End Sub
+
+Private Sub CargaCombo()
+Dim i As Integer
+
+   ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
+    
+    'tipo de campo
+    Combo1(0).AddItem "Todos"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
+    Combo1(0).AddItem "Globalgap"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
+    Combo1(0).AddItem "Naturane"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 2
+End Sub
+
 
 Private Sub Form_Unload(Cancel As Integer)
     If Not vSeccion Is Nothing Then
@@ -992,7 +1047,7 @@ End Sub
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim codcampo As String, nomCampo As String
-Dim Tabla As String
+Dim tabla As String
       
     Select Case Index
         'FECHA Desde Hasta
@@ -1010,9 +1065,9 @@ Dim Tabla As String
         Case 12, 13  'Cod. Socio
             If PonerFormatoEntero(txtcodigo(Index)) Then
                 nomCampo = "nomsocio"
-                Tabla = "rsocios"
+                tabla = "rsocios"
                 codcampo = "codsocio"
-                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), Tabla, nomCampo, codcampo, "N")
+                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), tabla, nomCampo, codcampo, "N")
                 If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
             Else
                 txtNombre(Index).Text = ""

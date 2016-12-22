@@ -305,6 +305,7 @@ Class=cContabilizarFacturas; Clases\cContabilizarFacturas.cls
 Form=frmBasico2.frm
 Form=frmManHorasCoopic.frm
 Form=frmManSociosPrev.frm
+Form=frmManCamposPrev.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""
