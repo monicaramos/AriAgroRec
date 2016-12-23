@@ -2208,7 +2208,7 @@ Dim b As Boolean
                 txtAux3(jj).Top = alto + 10 '- 210 '200
                 txtAux3(jj).visible = b
             Next jj
-            For jj = 8 To 8
+            For jj = 8 To 9
                 txtAux3(jj).Height = DataGrid2.RowHeight
                 txtAux3(jj).Top = alto + 10 '- 210 '200
                 txtAux3(jj).visible = b
@@ -3162,9 +3162,18 @@ Dim Importe As Currency
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
-            Sql4 = "select codtraba from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
-            Sql4 = Sql4 & " and " & cadSelect
-            Sql4 = Sql4 & " order by 1 "
+        
+            If vParamAplic.Cooperativa = 16 Then
+                Sql4 = "select codtraba from straba where (1=1) "
+                Sql4 = Sql4 & " and " & cadSelect
+                Sql4 = Sql4 & " order by 1 "
+            
+            Else
+        
+                Sql4 = "select codtraba from rcuadrilla_trabajador where codcuadrilla = " & Data1.Recordset.Fields(2)
+                Sql4 = Sql4 & " and " & cadSelect
+                Sql4 = Sql4 & " order by 1 "
+            End If
             
             Set Rs2 = New ADODB.Recordset
             Rs2.Open Sql4, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -3435,7 +3444,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim Cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
@@ -3453,8 +3462,8 @@ Dim Desc As String, devuelve As String
 '    Cad = Cad & "Nombre|rsocios.nomsocio|N||28·"
 '    Cad = Cad & "Campo|rhisfruta.codcampo|N||10·"
     
-    Tabla = NombreTabla & " INNER JOIN rcuadrilla ON rpartes.codcuadrilla=rcuadrilla.codcuadrilla "
-    Tabla = "(" & Tabla & ") INNER JOIN rcapataz ON rcuadrilla.codcapat=rcapataz.codcapat "
+    tabla = NombreTabla & " INNER JOIN rcuadrilla ON rpartes.codcuadrilla=rcuadrilla.codcuadrilla "
+    tabla = "(" & tabla & ") INNER JOIN rcapataz ON rcuadrilla.codcapat=rcapataz.codcapat "
     
     Titulo = "Partes de Campos"
     devuelve = "0|"
@@ -3463,7 +3472,7 @@ Dim Desc As String, devuelve As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vtabla = Tabla
+        frmB.vtabla = tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -3684,6 +3693,9 @@ Dim b As Boolean
     BloquearTxt txtAux3(8), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
     txtAux3(8).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
     
+    '[Monica]23/12/2016
+    BloquearTxt txtAux3(9), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+    txtAux3(9).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
     
     
     For i = 1 To 2
@@ -5038,7 +5050,7 @@ Dim i As Integer
             Text2(0).Text = "" ' nomvarie
             txtAux3(7).Text = "0" ' modificado
             txtAux3(8).Text = "0" ' modificado
-            
+            txtAux3(9).Text = "0" ' modificado
             BloquearTxt txtAux3(1), False
 '                    BloquearTxt txtaux(12), False
             PonerFoco txtAux3(1)

@@ -16,6 +16,957 @@ Begin VB.Form frmListado
    ScaleWidth      =   7890
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameGastosCampos 
+      Height          =   6720
+      Left            =   0
+      TabIndex        =   573
+      Top             =   -60
+      Width           =   6765
+      Begin VB.Frame Frame7 
+         Caption         =   "Clasificado por"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   720
+         Left            =   570
+         TabIndex        =   605
+         Top             =   5010
+         Width           =   3690
+         Begin VB.OptionButton Opcion1 
+            Caption         =   "Socio"
+            Height          =   345
+            Index           =   5
+            Left            =   480
+            TabIndex        =   591
+            Top             =   225
+            Width           =   1290
+         End
+         Begin VB.OptionButton Opcion1 
+            Caption         =   "Concepto"
+            Height          =   255
+            Index           =   6
+            Left            =   2160
+            TabIndex        =   606
+            Top             =   270
+            Width           =   1320
+         End
+      End
+      Begin VB.CheckBox Check17 
+         Caption         =   "Resumen"
+         ForeColor       =   &H00000000&
+         Height          =   390
+         Left            =   4920
+         TabIndex        =   604
+         Top             =   5130
+         Width           =   1695
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   126
+         Left            =   2115
+         MaxLength       =   10
+         TabIndex        =   588
+         Top             =   4320
+         Width           =   1095
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   127
+         Left            =   2115
+         MaxLength       =   10
+         TabIndex        =   590
+         Top             =   4650
+         Width           =   1095
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   13
+         Left            =   5220
+         TabIndex        =   594
+         Top             =   6180
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAcepGtosCampos 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4140
+         TabIndex        =   592
+         Top             =   6180
+         Width           =   975
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   120
+         Left            =   2115
+         MaxLength       =   6
+         TabIndex        =   580
+         Text            =   "000000"
+         Top             =   1275
+         Width           =   900
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   121
+         Left            =   2115
+         MaxLength       =   6
+         TabIndex        =   581
+         Top             =   1605
+         Width           =   900
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   120
+         Left            =   3030
+         Locked          =   -1  'True
+         TabIndex        =   579
+         Text            =   "Text5"
+         Top             =   1275
+         Width           =   3375
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   121
+         Left            =   3030
+         Locked          =   -1  'True
+         TabIndex        =   578
+         Text            =   "Text5"
+         Top             =   1605
+         Width           =   3375
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   124
+         Left            =   2115
+         MaxLength       =   6
+         TabIndex        =   584
+         Top             =   3360
+         Width           =   825
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   125
+         Left            =   2115
+         MaxLength       =   6
+         TabIndex        =   586
+         Top             =   3690
+         Width           =   825
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   124
+         Left            =   2970
+         Locked          =   -1  'True
+         TabIndex        =   577
+         Text            =   "Text5"
+         Top             =   3360
+         Width           =   3375
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   125
+         Left            =   2970
+         Locked          =   -1  'True
+         TabIndex        =   576
+         Text            =   "Text5"
+         Top             =   3690
+         Width           =   3375
+      End
+      Begin VB.CommandButton Command38 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":000C
+         Style           =   1  'Graphical
+         TabIndex        =   575
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command35 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":0316
+         Style           =   1  'Graphical
+         TabIndex        =   574
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   122
+         Left            =   2115
+         MaxLength       =   8
+         TabIndex        =   582
+         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00000000|S|"
+         Text            =   "00000000"
+         Top             =   2280
+         Width           =   1065
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   123
+         Left            =   2115
+         MaxLength       =   8
+         TabIndex        =   583
+         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00000000|S|"
+         Top             =   2610
+         Width           =   1065
+      End
+      Begin MSComctlLib.ProgressBar Pb6 
+         Height          =   255
+         Left            =   570
+         TabIndex        =   607
+         Top             =   5850
+         Visible         =   0   'False
+         Width           =   5685
+         _ExtentX        =   10028
+         _ExtentY        =   450
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cargando Temporal"
+         Height          =   255
+         Index           =   182
+         Left            =   570
+         TabIndex        =   608
+         Top             =   6180
+         Visible         =   0   'False
+         Width           =   3495
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   181
+         Left            =   675
+         TabIndex        =   603
+         Top             =   4080
+         Width           =   435
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         Height          =   255
+         Index           =   180
+         Left            =   1005
+         TabIndex        =   602
+         Top             =   4350
+         Width           =   675
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         Height          =   225
+         Index           =   179
+         Left            =   1005
+         TabIndex        =   601
+         Top             =   4665
+         Width           =   750
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   178
+         Left            =   960
+         TabIndex        =   600
+         Top             =   1320
+         Width           =   645
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   177
+         Left            =   960
+         TabIndex        =   599
+         Top             =   1650
+         Width           =   780
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Concepto Gasto"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   176
+         Left            =   675
+         TabIndex        =   598
+         Top             =   3075
+         Width           =   1155
+      End
+      Begin VB.Label Label23 
+         Caption         =   "Informe de Gastos por Campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   630
+         TabIndex        =   597
+         Top             =   420
+         Width           =   5025
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   175
+         Left            =   1005
+         TabIndex        =   596
+         Top             =   3375
+         Width           =   675
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   174
+         Left            =   1005
+         TabIndex        =   595
+         Top             =   3735
+         Width           =   630
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   173
+         Left            =   675
+         TabIndex        =   593
+         Top             =   1050
+         Width           =   375
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   90
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0620
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1275
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   91
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0772
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   1635
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   94
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":08C4
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar concepto"
+         Top             =   3360
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   95
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0A16
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar concepto"
+         Top             =   3720
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   22
+         Left            =   1800
+         Picture         =   "frmListado.frx":0B68
+         ToolTipText     =   "Buscar fecha"
+         Top             =   4650
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   21
+         Left            =   1800
+         Picture         =   "frmListado.frx":0BF3
+         ToolTipText     =   "Buscar fecha"
+         Top             =   4320
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   157
+         Left            =   675
+         TabIndex        =   589
+         Top             =   2025
+         Width           =   495
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   156
+         Left            =   975
+         TabIndex        =   587
+         Top             =   2325
+         Width           =   645
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   155
+         Left            =   975
+         TabIndex        =   585
+         Top             =   2655
+         Width           =   780
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   92
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0C7E
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar campo"
+         Top             =   2280
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   93
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0DD0
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar campo"
+         Top             =   2640
+         Width           =   240
+      End
+   End
+   Begin VB.Frame FrameContabGastos 
+      Height          =   5220
+      Left            =   0
+      TabIndex        =   609
+      Top             =   -30
+      Width           =   6615
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   108
+         Left            =   4560
+         MaxLength       =   10
+         TabIndex        =   626
+         Text            =   "fecha gto"
+         Top             =   1020
+         Visible         =   0   'False
+         Width           =   1230
+      End
+      Begin VB.TextBox txtcodigo 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   119
+         Left            =   1365
+         MaxLength       =   30
+         TabIndex        =   611
+         Top             =   2400
+         Width           =   4875
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   112
+         Left            =   1365
+         MaxLength       =   2
+         TabIndex        =   610
+         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00|S|"
+         Top             =   1650
+         Width           =   945
+      End
+      Begin VB.CommandButton Command41 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":0F22
+         Style           =   1  'Graphical
+         TabIndex        =   618
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command40 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":122C
+         Style           =   1  'Graphical
+         TabIndex        =   617
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   128
+         Left            =   2880
+         Locked          =   -1  'True
+         TabIndex        =   616
+         Text            =   "Text5"
+         Top             =   3120
+         Width           =   3375
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   128
+         Left            =   1365
+         MaxLength       =   10
+         TabIndex        =   612
+         Top             =   3120
+         Width           =   1455
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   112
+         Left            =   2340
+         Locked          =   -1  'True
+         TabIndex        =   615
+         Text            =   "Text5"
+         Top             =   1650
+         Width           =   3885
+      End
+      Begin VB.CommandButton CmdAcepContaGastos 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4170
+         TabIndex        =   613
+         Top             =   4500
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   14
+         Left            =   5250
+         TabIndex        =   614
+         Top             =   4500
+         Width           =   975
+      End
+      Begin MSComctlLib.ProgressBar ProgressBar3 
+         Height          =   255
+         Left            =   600
+         TabIndex        =   619
+         Top             =   3810
+         Visible         =   0   'False
+         Width           =   5655
+         _ExtentX        =   9975
+         _ExtentY        =   450
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Concepto Contable"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   193
+         Left            =   420
+         TabIndex        =   624
+         Top             =   1380
+         Width           =   1890
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   81
+         Left            =   1020
+         MouseIcon       =   "frmListado.frx":1536
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar cuenta"
+         Top             =   3150
+         Width           =   240
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   80
+         Left            =   1020
+         MouseIcon       =   "frmListado.frx":1688
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar concepto"
+         Top             =   1710
+         Width           =   240
+      End
+      Begin VB.Label Label24 
+         Caption         =   "Contabilización de Gastos al Diario"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   390
+         TabIndex        =   623
+         Top             =   420
+         Width           =   5025
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Ampliación de Concepto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   189
+         Left            =   420
+         TabIndex        =   622
+         Top             =   2130
+         Width           =   2370
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Cta Contrapartida"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   184
+         Left            =   420
+         TabIndex        =   621
+         Top             =   2880
+         Width           =   1770
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cargando Temporal"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   183
+         Left            =   600
+         TabIndex        =   620
+         Top             =   4170
+         Visible         =   0   'False
+         Width           =   5535
+      End
+   End
+   Begin VB.Frame FrameAsignacionGlobalgap 
+      Height          =   3135
+      Left            =   0
+      TabIndex        =   867
+      Top             =   0
+      Width           =   6090
+      Begin MSComctlLib.ProgressBar pb10 
+         Height          =   225
+         Left            =   540
+         TabIndex        =   874
+         Top             =   1740
+         Visible         =   0   'False
+         Width           =   5100
+         _ExtentX        =   8996
+         _ExtentY        =   397
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   26
+         Left            =   4650
+         TabIndex        =   872
+         Top             =   2340
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAcepAsigGlobalgap 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   3600
+         TabIndex        =   871
+         Top             =   2340
+         Width           =   975
+      End
+      Begin VB.CommandButton Command58 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":17DA
+         Style           =   1  'Graphical
+         TabIndex        =   870
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command57 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmListado.frx":1AE4
+         Style           =   1  'Graphical
+         TabIndex        =   869
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CheckBox Check25 
+         Caption         =   "Limpiar los códigos que no existan"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   330
+         Left            =   570
+         TabIndex        =   868
+         Top             =   1170
+         Width           =   4815
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cargando Temporal"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   262
+         Left            =   570
+         TabIndex        =   876
+         Top             =   2490
+         Visible         =   0   'False
+         Width           =   2895
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Cargando Temporal"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   238
+         Left            =   570
+         TabIndex        =   875
+         Top             =   2250
+         Visible         =   0   'False
+         Width           =   2895
+      End
+      Begin VB.Label Label35 
+         Caption         =   "Asignación de códigos Globalgap"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   540
+         TabIndex        =   873
+         Top             =   405
+         Width           =   5025
+      End
+   End
    Begin VB.Frame FrameInformeFases 
       Height          =   3390
       Left            =   0
@@ -44,7 +995,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command29 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":000C
+         Picture         =   "frmListado.frx":1DEE
          Style           =   1  'Graphical
          TabIndex        =   417
          Top             =   1440
@@ -54,7 +1005,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command28 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":0316
+         Picture         =   "frmListado.frx":20F8
          Style           =   1  'Graphical
          TabIndex        =   416
          Top             =   2215
@@ -193,7 +1144,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   181
             Left            =   1800
-            MouseIcon       =   "frmListado.frx":0620
+            MouseIcon       =   "frmListado.frx":2402
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar situación"
             Top             =   240
@@ -334,7 +1285,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command12 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":0772
+         Picture         =   "frmListado.frx":2554
          Style           =   1  'Graphical
          TabIndex        =   222
          Top             =   2215
@@ -344,7 +1295,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command11 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":0A7C
+         Picture         =   "frmListado.frx":285E
          Style           =   1  'Graphical
          TabIndex        =   221
          Top             =   1440
@@ -413,7 +1364,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   46
          Left            =   2340
-         MouseIcon       =   "frmListado.frx":0D86
+         MouseIcon       =   "frmListado.frx":2B68
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   1275
@@ -423,7 +1374,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   2310
-         Picture         =   "frmListado.frx":0ED8
+         Picture         =   "frmListado.frx":2CBA
          ToolTipText     =   "Buscar fecha"
          Top             =   1830
          Width           =   240
@@ -530,7 +1481,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command64 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":0F63
+         Picture         =   "frmListado.frx":2D45
          Style           =   1  'Graphical
          TabIndex        =   899
          Top             =   1440
@@ -540,7 +1491,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command63 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":126D
+         Picture         =   "frmListado.frx":304F
          Style           =   1  'Graphical
          TabIndex        =   898
          Top             =   2215
@@ -642,7 +1593,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   128
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1577
+         MouseIcon       =   "frmListado.frx":3359
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -652,7 +1603,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   127
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":16C9
+         MouseIcon       =   "frmListado.frx":34AB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -700,7 +1651,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1650
-         Picture         =   "frmListado.frx":181B
+         Picture         =   "frmListado.frx":35FD
          ToolTipText     =   "Buscar fecha"
          Top             =   3630
          Width           =   240
@@ -709,7 +1660,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1650
-         Picture         =   "frmListado.frx":18A6
+         Picture         =   "frmListado.frx":3688
          ToolTipText     =   "Buscar fecha"
          Top             =   3240
          Width           =   240
@@ -718,7 +1669,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   126
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1931
+         MouseIcon       =   "frmListado.frx":3713
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -728,7 +1679,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   125
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1A83
+         MouseIcon       =   "frmListado.frx":3865
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -980,7 +1931,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command10 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":1BD5
+         Picture         =   "frmListado.frx":39B7
          Style           =   1  'Graphical
          TabIndex        =   171
          Top             =   2215
@@ -990,7 +1941,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command9 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":1EDF
+         Picture         =   "frmListado.frx":3CC1
          Style           =   1  'Graphical
          TabIndex        =   170
          Top             =   1440
@@ -1112,7 +2063,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   37
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":21E9
+         MouseIcon       =   "frmListado.frx":3FCB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3210
@@ -1122,7 +2073,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   38
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":233B
+         MouseIcon       =   "frmListado.frx":411D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3600
@@ -1226,7 +2177,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   33
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":248D
+         MouseIcon       =   "frmListado.frx":426F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -1236,7 +2187,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   34
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":25DF
+         MouseIcon       =   "frmListado.frx":43C1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -1246,7 +2197,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1620
-         Picture         =   "frmListado.frx":2731
+         Picture         =   "frmListado.frx":4513
          ToolTipText     =   "Buscar fecha"
          Top             =   4455
          Width           =   240
@@ -1255,7 +2206,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1620
-         Picture         =   "frmListado.frx":27BC
+         Picture         =   "frmListado.frx":459E
          ToolTipText     =   "Buscar fecha"
          Top             =   4050
          Width           =   240
@@ -1302,7 +2253,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":2847
+         MouseIcon       =   "frmListado.frx":4629
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -1312,7 +2263,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":2999
+         MouseIcon       =   "frmListado.frx":477B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -1378,7 +2329,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command34 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":2AEB
+         Picture         =   "frmListado.frx":48CD
          Style           =   1  'Graphical
          TabIndex        =   522
          Top             =   2215
@@ -1388,7 +2339,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command31 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":2DF5
+         Picture         =   "frmListado.frx":4BD7
          Style           =   1  'Graphical
          TabIndex        =   521
          Top             =   1440
@@ -1418,7 +2369,7 @@ Begin VB.Form frmListado
          Width           =   3375
       End
       Begin VB.Label Label21 
-         Caption         =   $"frmListado.frx":30FF
+         Caption         =   $"frmListado.frx":4EE1
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -1459,7 +2410,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   20
          Left            =   1590
-         Picture         =   "frmListado.frx":3198
+         Picture         =   "frmListado.frx":4F7A
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -1506,7 +2457,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   71
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":3223
+         MouseIcon       =   "frmListado.frx":5005
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2145
@@ -1536,114 +2487,11 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   72
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":3375
+         MouseIcon       =   "frmListado.frx":5157
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar incidencia"
          Top             =   3090
          Width           =   240
-      End
-   End
-   Begin VB.Frame FrameAsignacionGlobalgap 
-      Height          =   3135
-      Left            =   0
-      TabIndex        =   867
-      Top             =   0
-      Width           =   6090
-      Begin MSComctlLib.ProgressBar pb10 
-         Height          =   225
-         Left            =   540
-         TabIndex        =   874
-         Top             =   1950
-         Visible         =   0   'False
-         Width           =   5100
-         _ExtentX        =   8996
-         _ExtentY        =   397
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   26
-         Left            =   4650
-         TabIndex        =   872
-         Top             =   2340
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdAcepAsigGlobalgap 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3600
-         TabIndex        =   871
-         Top             =   2340
-         Width           =   975
-      End
-      Begin VB.CommandButton Command58 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":34C7
-         Style           =   1  'Graphical
-         TabIndex        =   870
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command57 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":37D1
-         Style           =   1  'Graphical
-         TabIndex        =   869
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CheckBox Check25 
-         Caption         =   "Limpiar los códigos que no existan"
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Left            =   570
-         TabIndex        =   868
-         Top             =   1380
-         Width           =   3435
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cargando Temporal"
-         Height          =   195
-         Index           =   262
-         Left            =   570
-         TabIndex        =   876
-         Top             =   2490
-         Visible         =   0   'False
-         Width           =   2895
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cargando Temporal"
-         Height          =   195
-         Index           =   238
-         Left            =   570
-         TabIndex        =   875
-         Top             =   2250
-         Visible         =   0   'False
-         Width           =   2895
-      End
-      Begin VB.Label Label35 
-         Caption         =   "Asignación de códigos Globalgap"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   540
-         TabIndex        =   873
-         Top             =   405
-         Width           =   5025
       End
    End
    Begin VB.Frame FrameEntradasCampo 
@@ -1931,7 +2779,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command4 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":3ADB
+         Picture         =   "frmListado.frx":52A9
          Style           =   1  'Graphical
          TabIndex        =   125
          Top             =   1440
@@ -1941,7 +2789,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command3 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":3DE5
+         Picture         =   "frmListado.frx":55B3
          Style           =   1  'Graphical
          TabIndex        =   124
          Top             =   2215
@@ -2087,7 +2935,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   7
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":40EF
+         MouseIcon       =   "frmListado.frx":58BD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -2097,7 +2945,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   6
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":4241
+         MouseIcon       =   "frmListado.frx":5A0F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -2145,7 +2993,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1620
-         Picture         =   "frmListado.frx":4393
+         Picture         =   "frmListado.frx":5B61
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -2154,7 +3002,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1620
-         Picture         =   "frmListado.frx":441E
+         Picture         =   "frmListado.frx":5BEC
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -2163,7 +3011,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   15
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":44A9
+         MouseIcon       =   "frmListado.frx":5C77
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3600
@@ -2173,7 +3021,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   14
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":45FB
+         MouseIcon       =   "frmListado.frx":5DC9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -2183,7 +3031,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   13
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":474D
+         MouseIcon       =   "frmListado.frx":5F1B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -2193,7 +3041,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   12
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":489F
+         MouseIcon       =   "frmListado.frx":606D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -2730,7 +3578,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command2 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":49F1
+         Picture         =   "frmListado.frx":61BF
          Style           =   1  'Graphical
          TabIndex        =   53
          Top             =   2215
@@ -2740,7 +3588,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command1 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":4CFB
+         Picture         =   "frmListado.frx":64C9
          Style           =   1  'Graphical
          TabIndex        =   52
          Top             =   1440
@@ -2833,7 +3681,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   83
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5005
+         MouseIcon       =   "frmListado.frx":67D3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5880
@@ -2852,7 +3700,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   82
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5157
+         MouseIcon       =   "frmListado.frx":6925
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5520
@@ -2949,7 +3797,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   58
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":52A9
+         MouseIcon       =   "frmListado.frx":6A77
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   5025
@@ -2959,7 +3807,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   57
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":53FB
+         MouseIcon       =   "frmListado.frx":6BC9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   4650
@@ -2969,7 +3817,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   59
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":554D
+         MouseIcon       =   "frmListado.frx":6D1B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3780
@@ -2979,7 +3827,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   60
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":569F
+         MouseIcon       =   "frmListado.frx":6E6D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   4155
@@ -3125,7 +3973,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":57F1
+         MouseIcon       =   "frmListado.frx":6FBF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   3285
@@ -3135,7 +3983,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   4
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":5943
+         MouseIcon       =   "frmListado.frx":7111
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   2910
@@ -3239,7 +4087,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5A95
+         MouseIcon       =   "frmListado.frx":7263
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1560
@@ -3249,7 +4097,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5BE7
+         MouseIcon       =   "frmListado.frx":73B5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1200
@@ -3259,7 +4107,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":5D39
+         MouseIcon       =   "frmListado.frx":7507
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2400
@@ -3269,7 +4117,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":5E8B
+         MouseIcon       =   "frmListado.frx":7659
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2025
@@ -3397,7 +4245,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   9
             Left            =   900
-            Picture         =   "frmListado.frx":5FDD
+            Picture         =   "frmListado.frx":77AB
             ToolTipText     =   "Buscar fecha"
             Top             =   240
             Width           =   240
@@ -3585,726 +4433,6 @@ Begin VB.Form frmListado
          Top             =   870
          Width           =   5820
          WordWrap        =   -1  'True
-      End
-   End
-   Begin VB.Frame FrameContabGastos 
-      Height          =   5220
-      Left            =   0
-      TabIndex        =   609
-      Top             =   -30
-      Width           =   6615
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   108
-         Left            =   4560
-         MaxLength       =   10
-         TabIndex        =   626
-         Text            =   "fecha gto"
-         Top             =   1020
-         Visible         =   0   'False
-         Width           =   1230
-      End
-      Begin VB.TextBox txtcodigo 
-         Height          =   285
-         Index           =   119
-         Left            =   1935
-         MaxLength       =   30
-         TabIndex        =   611
-         Top             =   2400
-         Width           =   4185
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   112
-         Left            =   1935
-         MaxLength       =   2
-         TabIndex        =   610
-         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00|S|"
-         Top             =   1650
-         Width           =   735
-      End
-      Begin VB.CommandButton Command41 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":6068
-         Style           =   1  'Graphical
-         TabIndex        =   618
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command40 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":6372
-         Style           =   1  'Graphical
-         TabIndex        =   617
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   128
-         Left            =   3030
-         Locked          =   -1  'True
-         TabIndex        =   616
-         Text            =   "Text5"
-         Top             =   3120
-         Width           =   3105
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   128
-         Left            =   1935
-         MaxLength       =   10
-         TabIndex        =   612
-         Top             =   3120
-         Width           =   1035
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   112
-         Left            =   2730
-         Locked          =   -1  'True
-         TabIndex        =   615
-         Text            =   "Text5"
-         Top             =   1650
-         Width           =   3375
-      End
-      Begin VB.CommandButton CmdAcepContaGastos 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4170
-         TabIndex        =   613
-         Top             =   4500
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   14
-         Left            =   5250
-         TabIndex        =   614
-         Top             =   4500
-         Width           =   975
-      End
-      Begin MSComctlLib.ProgressBar ProgressBar3 
-         Height          =   255
-         Left            =   600
-         TabIndex        =   619
-         Top             =   3810
-         Visible         =   0   'False
-         Width           =   5655
-         _ExtentX        =   9975
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Concepto Contable"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   193
-         Left            =   630
-         TabIndex        =   624
-         Top             =   1380
-         Width           =   1380
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   81
-         Left            =   1590
-         MouseIcon       =   "frmListado.frx":667C
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar cuenta"
-         Top             =   3150
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   80
-         Left            =   1590
-         MouseIcon       =   "frmListado.frx":67CE
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar concepto"
-         Top             =   1680
-         Width           =   240
-      End
-      Begin VB.Label Label24 
-         Caption         =   "Contabilización de Gastos al Diario"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   623
-         Top             =   420
-         Width           =   5025
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Ampliación de Concepto"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   189
-         Left            =   630
-         TabIndex        =   622
-         Top             =   2130
-         Width           =   1710
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Cta Contrapartida"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   184
-         Left            =   630
-         TabIndex        =   621
-         Top             =   2910
-         Width           =   1305
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cargando Temporal"
-         Height          =   195
-         Index           =   183
-         Left            =   600
-         TabIndex        =   620
-         Top             =   4170
-         Visible         =   0   'False
-         Width           =   1935
-      End
-   End
-   Begin VB.Frame FrameGastosCampos 
-      Height          =   6630
-      Left            =   0
-      TabIndex        =   573
-      Top             =   -60
-      Width           =   6615
-      Begin VB.Frame Frame7 
-         Caption         =   "Clasificado por"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   720
-         Left            =   570
-         TabIndex        =   605
-         Top             =   4890
-         Width           =   3690
-         Begin VB.OptionButton Opcion1 
-            Caption         =   "Socio"
-            Height          =   345
-            Index           =   5
-            Left            =   480
-            TabIndex        =   591
-            Top             =   225
-            Width           =   1290
-         End
-         Begin VB.OptionButton Opcion1 
-            Caption         =   "Concepto"
-            Height          =   255
-            Index           =   6
-            Left            =   2160
-            TabIndex        =   606
-            Top             =   270
-            Width           =   1320
-         End
-      End
-      Begin VB.CheckBox Check17 
-         Caption         =   "Resumen"
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Left            =   4920
-         TabIndex        =   604
-         Top             =   5070
-         Width           =   1095
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   126
-         Left            =   1935
-         MaxLength       =   10
-         TabIndex        =   588
-         Top             =   4170
-         Width           =   1095
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   127
-         Left            =   1935
-         MaxLength       =   10
-         TabIndex        =   590
-         Top             =   4530
-         Width           =   1095
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   13
-         Left            =   5220
-         TabIndex        =   594
-         Top             =   6060
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAcepGtosCampos 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4140
-         TabIndex        =   592
-         Top             =   6060
-         Width           =   975
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   120
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   580
-         Top             =   1275
-         Width           =   750
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   121
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   581
-         Top             =   1635
-         Width           =   750
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   120
-         Left            =   2760
-         Locked          =   -1  'True
-         TabIndex        =   579
-         Text            =   "Text5"
-         Top             =   1275
-         Width           =   3375
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   121
-         Left            =   2760
-         Locked          =   -1  'True
-         TabIndex        =   578
-         Text            =   "Text5"
-         Top             =   1635
-         Width           =   3375
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   124
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   584
-         Top             =   3210
-         Width           =   735
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   125
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   586
-         Top             =   3570
-         Width           =   735
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   124
-         Left            =   2760
-         Locked          =   -1  'True
-         TabIndex        =   577
-         Text            =   "Text5"
-         Top             =   3210
-         Width           =   3375
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   125
-         Left            =   2760
-         Locked          =   -1  'True
-         TabIndex        =   576
-         Text            =   "Text5"
-         Top             =   3570
-         Width           =   3375
-      End
-      Begin VB.CommandButton Command38 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":6920
-         Style           =   1  'Graphical
-         TabIndex        =   575
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command35 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmListado.frx":6C2A
-         Style           =   1  'Graphical
-         TabIndex        =   574
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   122
-         Left            =   1935
-         MaxLength       =   8
-         TabIndex        =   582
-         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00000000|S|"
-         Top             =   2220
-         Width           =   915
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   123
-         Left            =   1935
-         MaxLength       =   8
-         TabIndex        =   583
-         Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00000000|S|"
-         Top             =   2580
-         Width           =   915
-      End
-      Begin MSComctlLib.ProgressBar Pb6 
-         Height          =   255
-         Left            =   360
-         TabIndex        =   607
-         Top             =   5730
-         Visible         =   0   'False
-         Width           =   5895
-         _ExtentX        =   10398
-         _ExtentY        =   450
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Cargando Temporal"
-         Height          =   195
-         Index           =   182
-         Left            =   390
-         TabIndex        =   608
-         Top             =   6030
-         Visible         =   0   'False
-         Width           =   1935
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   181
-         Left            =   675
-         TabIndex        =   603
-         Top             =   3960
-         Width           =   435
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   180
-         Left            =   1005
-         TabIndex        =   602
-         Top             =   4200
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   179
-         Left            =   1005
-         TabIndex        =   601
-         Top             =   4545
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   178
-         Left            =   960
-         TabIndex        =   600
-         Top             =   1320
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   177
-         Left            =   960
-         TabIndex        =   599
-         Top             =   1680
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Concepto Gasto"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   176
-         Left            =   675
-         TabIndex        =   598
-         Top             =   2985
-         Width           =   1155
-      End
-      Begin VB.Label Label23 
-         Caption         =   "Informe de Gastos por Campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   597
-         Top             =   420
-         Width           =   5025
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   175
-         Left            =   1005
-         TabIndex        =   596
-         Top             =   3255
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   174
-         Left            =   1005
-         TabIndex        =   595
-         Top             =   3645
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   173
-         Left            =   675
-         TabIndex        =   593
-         Top             =   1080
-         Width           =   375
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   90
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":6F34
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1275
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   91
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":7086
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   1665
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   94
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":71D8
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar concepto"
-         Top             =   3210
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   95
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":732A
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar concepto"
-         Top             =   3600
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   22
-         Left            =   1620
-         Picture         =   "frmListado.frx":747C
-         ToolTipText     =   "Buscar fecha"
-         Top             =   4530
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   21
-         Left            =   1620
-         Picture         =   "frmListado.frx":7507
-         ToolTipText     =   "Buscar fecha"
-         Top             =   4170
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   157
-         Left            =   675
-         TabIndex        =   589
-         Top             =   2025
-         Width           =   495
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   156
-         Left            =   1005
-         TabIndex        =   587
-         Top             =   2265
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   155
-         Left            =   1005
-         TabIndex        =   585
-         Top             =   2655
-         Width           =   420
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   92
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":7592
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar campo"
-         Top             =   2220
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   93
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":76E4
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar campo"
-         Top             =   2610
-         Width           =   240
       End
    End
    Begin VB.Frame FrameSociosSeccion 
@@ -13277,7 +13405,7 @@ Dim b As Boolean
     'CONTABILIZAR ASIENTO DE GASTOS
     '===========================================================================
     Me.lblProgres(0).Caption = "Contabilizar Asiento de Gastos: "
-    CargarProgres Me.pb1, 10
+    CargarProgres Me.Pb1, 10
     Me.lblProgres(1).Caption = "Insertando Asiento en Diario..."
 
 
@@ -16430,7 +16558,7 @@ On Error GoTo eError
                 
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioCatadau(Directorio & "\", Combo1(6).ListIndex, fec, Pb1, lblProgres(0), lblProgres(1))
             End If
         
         Case 1 '********* VALSUR *************
@@ -16456,7 +16584,7 @@ On Error GoTo eError
     
                 conn.BeginTrans
                 ' resto de casos (incluido catadau, calibrador grande)
-                b = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.pb1, Me.lblProgres(0), Me.lblProgres(1))
+                b = ProcesarFichero(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Me.Pb1, Me.lblProgres(0), Me.lblProgres(1))
             Else
                 MsgBox "No ha seleccionado ningún fichero", vbExclamation
                 Exit Sub
@@ -16493,7 +16621,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioPicassent(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
      
         Case 16 ' ******** COOPIC **********
@@ -16527,7 +16655,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioCOOPIC(Me.CommonDialog1.FileName, Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
      
      
@@ -16562,7 +16690,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1))
+                b = ProcesarDirectorioAlzira(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1))
             End If
     
         Case 5 ' ******** CASTELDUC **********
@@ -16596,7 +16724,7 @@ On Error GoTo eError
             
                 conn.BeginTrans
 
-                b = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, pb1, lblProgres(0), lblProgres(1), txtcodigo(170).Text, txtcodigo(179).Text)
+                b = ProcesarDirectorioCastelduc(Directorio & "\", Combo1(6).ListIndex, Pb1, lblProgres(0), lblProgres(1), txtcodigo(170).Text, txtcodigo(179).Text)
             End If
     
     
@@ -16611,7 +16739,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb1.visible = False
+        Pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
 '        BorrarArchivo Me.CommonDialog1.FileName
@@ -16633,7 +16761,7 @@ Dim fecha1 As Date
 
 
 
-    pb1.visible = False
+    Pb1.visible = False
     
     Me.Refresh
     DoEvents
@@ -16685,7 +16813,7 @@ Dim fecha1 As Date
         conn.Execute CadInsert & Mid(CadValues, 1, Len(CadValues) - 1)
     End If
     
-    pb1.visible = False
+    Pb1.visible = False
     lblProgres(0).visible = False
     
     CargarTablaCalibrador = True
@@ -17369,7 +17497,7 @@ eError:
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb1.visible = False
+        Pb1.visible = False
         lblProgres(0).Caption = ""
         lblProgres(1).Caption = ""
         BorrarArchivo Fichero1
@@ -17968,7 +18096,7 @@ Dim List As Collection
         CargaCombo
         Combo1(6).ListIndex = 0
         FrameTraspasoCalibradorVisible True, H, W
-        pb1.visible = False
+        Pb1.visible = False
         '[Monica]21/04/2016: añadida la fecha para Castellduc (cooperativa=5)
         FrameNota.visible = vParamAplic.Cooperativa = 5
         FrameNota.Enabled = vParamAplic.Cooperativa = 5
@@ -19472,8 +19600,8 @@ Private Sub FrameGastosCamposVisible(visible As Boolean, ByRef H As Integer, ByR
     If visible = True Then
         Me.FrameGastosCampos.Top = -90
         Me.FrameGastosCampos.Left = 0
-        Me.FrameGastosCampos.Height = 6630
-        Me.FrameGastosCampos.Width = 6615
+        Me.FrameGastosCampos.Height = 6720
+        Me.FrameGastosCampos.Width = 6765
         W = Me.FrameGastosCampos.Width
         H = Me.FrameGastosCampos.Height
     End If

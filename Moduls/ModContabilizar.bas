@@ -6331,7 +6331,7 @@ Dim ImporAux2 As Currency
                 Else
                     Sql = Sql & DBSet(vParamAplic.CtaTerReten, "T") & ","
                 End If
-                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & ",0"
+                Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & "0"
                 Cad = Cad & "(" & Sql & ")"
     
                 'Insertar en la contabilidad
