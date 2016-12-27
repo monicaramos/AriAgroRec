@@ -2663,7 +2663,9 @@ Dim Sql As String
         Capataz = Sql
         
         frmListNomina.txtcodigo(72) = Capataz
+        frmListNomina.txtNombre(72) = DevuelveValor("select nomcapat from rcapataz where codcapat = " & Capataz)
         frmListNomina.txtcodigo(73) = Capataz
+        frmListNomina.txtNombre(73) = frmListNomina.txtNombre(72)
         
         frmListNomina.Show vbModal
     
@@ -2795,6 +2797,8 @@ Dim NumF As String
         Else
             Sql = Sql & " rhisfruta_entradas.kilosnet kilosnet "
         End If
+        '[Monica]27/12/2016: añado las cajas de todas las tablas
+        Sql = Sql & ", rhisfruta_entradas.numcajon "
         
         Sql = Sql & " from rhisfruta_entradas, rhisfruta "
         Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
@@ -2806,6 +2810,9 @@ Dim NumF As String
             Sql = Sql & " union "
             Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra,"
             Sql = Sql & " rclasifica.kilostra kilosnet " ' los kilostra
+            '[Monica]27/12/2016: añado las cajas de todas las tablas
+            Sql = Sql & ", rclasifica.numcajon "
+            
             Sql = Sql & " from rclasifica "
             Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
             Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
@@ -2816,6 +2823,8 @@ Dim NumF As String
             Sql = Sql & " union "
             Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
             Sql = Sql & " rclasifica.kilosnet kilosnet " ' los kilostra
+            '[Monica]27/12/2016: añado las cajas de todas las tablas
+            Sql = Sql & ", rclasifica.numcajon "
             Sql = Sql & " from rclasifica "
             Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
             Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
@@ -2826,6 +2835,8 @@ Dim NumF As String
             Sql = Sql & " union "
             Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
             Sql = Sql & " rclasifica.kilosnet kilosnet " ' los kilostra
+            '[Monica]27/12/2016: añado las cajas de todas las tablas
+            Sql = Sql & ", rclasifica.numcajon "
             Sql = Sql & " from rclasifica "
             Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
             Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
@@ -2845,9 +2856,9 @@ Dim NumF As String
             
             If TotalRegistros(Sql) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
-                Cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec) values "
+                Cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec, numcajon) values "
                 Cad = Cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!numnotac, "N") & ","
-                Cad = Cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & ")"
+                Cad = Cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Numcajon, "N") & ")"
                 
                 conn.Execute Cad
             End If
@@ -4217,7 +4228,11 @@ Dim tots As String
 '           SQL = "SELECT nroparte, codvarie, nomvarie, kilosrec
             tots = "N||||0|;N||||0|;S|txtAux(2)|T|Nota|1000|;"
             tots = tots & "S|txtAux(3)|T|Codigo|800|;"
-            tots = tots & "S|txtAux(4)|T|Nombre Variedad|1800|;S|txtAux(6)|T|Horas|1000|;S|txtAux(5)|T|Kilos|1250|;"
+            If vParamAplic.Cooperativa = 16 Then
+                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1800|;S|txtAux(6)|T|Cajas|1000|;S|txtAux(5)|T|Kilos|1250|;"
+            Else
+                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1800|;S|txtAux(6)|T|Horas|1000|;S|txtAux(5)|T|Kilos|1250|;"
+            End If
             arregla tots, DataGrid1, Me
          
          Case "DataGrid2" 'rpartes_trabajador
@@ -4558,7 +4573,11 @@ Dim Sql As String
     Select Case Opcion
     Case 1  ' rpartes_variedad
         Sql = "SELECT rpartes_variedad.nroparte,rpartes_variedad.numlinea,rpartes_variedad.numnotac, "
-        Sql = Sql & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.horastra, rpartes_variedad.kilosrec "
+        If vParamAplic.Cooperativa = 16 Then
+            Sql = Sql & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.numcajon, rpartes_variedad.kilosrec "
+        Else
+            Sql = Sql & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.horastra, rpartes_variedad.kilosrec "
+        End If
         Sql = Sql & " FROM rpartes_variedad, variedades WHERE rpartes_variedad.codvarie = variedades.codvarie "
         
     Case 2  ' rpartes_trabajador
