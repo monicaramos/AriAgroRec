@@ -24946,7 +24946,7 @@ Dim Sql3 As String
     Sql2 = "insert into tmpinformes (codusu, campo1, campo2, codigo1, nombre1, nombre2, importe1, importe2) "
     conn.Execute Sql2 & Sql3
     ' socios
-    Sql3 = "select distinct " & vUsu.Codigo & ",1,if(tipoprod = 3,0,1), rsocios.codsocio, rsocios.nifsocio, rsocios.nomsocio, rsocios.votos, rsocios.capital from " & cTabla
+    Sql3 = "select distinct " & vUsu.Codigo & ",1,if(tipoprod = 4,0,1), rsocios.codsocio, rsocios.nifsocio, rsocios.nomsocio, rsocios.votos, rsocios.capital from " & cTabla
     If cWhere <> "" Then Sql3 = Sql3 & " where " & cWhere
     conn.Execute Sql2 & Sql3
             
