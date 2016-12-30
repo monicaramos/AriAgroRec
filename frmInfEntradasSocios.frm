@@ -446,6 +446,8 @@ Private WithEvents frmSoc As frmManSocios
 Attribute frmSoc.VB_VarHelpID = -1
 Private WithEvents frmF As frmCal 'Calendario de Fechas
 Attribute frmF.VB_VarHelpID = -1
+Private WithEvents frmMens8 As frmMensajes
+Attribute frmMens8.VB_VarHelpID = -1
 
 '----- Variables para el INforme ----
 Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
@@ -478,6 +480,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim PrimeraVez As Boolean
 
 Dim vSeccion As CSeccion
+Dim Contratos As String
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -544,6 +547,7 @@ Dim TipoPrec As Byte ' 0 anticipos
                      ' 1 liquidaciones
 Dim b As Boolean
 Dim Sql2 As String
+Dim vCad As String
 
 
     InicializarVbles
@@ -688,6 +692,57 @@ Dim Sql2 As String
         frmMens.Show vbModal
         
         Set frmMens = Nothing
+        
+        
+        '[Monica]30/12/2016: incluimos los contratos para poder seleccionar
+        Contratos = ""
+        If vParamAplic.Cooperativa = 16 Then
+        
+           Set frmMens8 = New frmMensajes
+           
+           frmMens8.desdeHco = True
+           frmMens8.OpcionMensaje = 64
+           frmMens8.Show vbModal
+           
+           Set frmMens8 = Nothing
+
+            If Contratos <> "" Then
+                ' rentradas
+                If InStr(UCase(Contratos), "NULL") <> 0 Then
+                    vCad = "(rentradas.contrato is null or rentradas.contrato in (" & Contratos & "))"
+                Else
+                    vCad = "(rentradas.contrato in (" & Contratos & "))"
+                End If
+                If Not AnyadirAFormula(cadSelect2, vCad) Then Exit Sub
+            
+                ' rclasifica
+                If InStr(UCase(Contratos), "NULL") <> 0 Then
+                    vCad = "(rclasifica.contrato is null or rclasifica.contrato in (" & Contratos & "))"
+                Else
+                    vCad = "(rclasifica.contrato in (" & Contratos & "))"
+                End If
+                If Not AnyadirAFormula(cadSelect, vCad) Then Exit Sub
+                
+                ' rhsifruta
+                If InStr(UCase(Contratos), "NULL") <> 0 Then
+                    vCad = "(rhisfruta.contrato is null or rhisfruta.contrato in (" & Contratos & "))"
+                Else
+                    vCad = "(rhisfruta.contrato in (" & Contratos & "))"
+                End If
+                If Not AnyadirAFormula(cadSelect1, vCad) Then Exit Sub
+            Else
+                ' rentradas
+                vCad = "rentradas.contrato = '-1'"
+                If Not AnyadirAFormula(cadSelect2, vCad) Then Exit Sub
+                ' rclasifica
+                vCad = "rclasifica.contrato = '-1'"
+                If Not AnyadirAFormula(cadSelect, vCad) Then Exit Sub
+                ' rhsifruta
+                vCad = "rhisfruta.contrato = '-1'"
+                If Not AnyadirAFormula(cadSelect1, vCad) Then Exit Sub
+            End If
+        End If
+        
         conSubRPT = True
         
         If ProcesoEntradasSocio(nTabla, cadSelect, Tabla1, cadSelect1, nTabla2, cadSelect2) Then
@@ -916,6 +971,14 @@ Private Sub imgFecha_Click(Index As Integer)
 
 End Sub
 
+
+Private Sub frmMens8_datoseleccionado(CadenaSeleccion As String)
+    If CadenaSeleccion <> "" Then
+        Contratos = CadenaSeleccion
+    Else
+        Contratos = ""
+    End If
+End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
     txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")

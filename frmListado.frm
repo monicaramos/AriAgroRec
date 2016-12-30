@@ -12815,6 +12815,8 @@ Private WithEvents frmMens6 As frmMensajes 'Mensajes
 Attribute frmMens6.VB_VarHelpID = -1
 Private WithEvents frmMens7 As frmMensajes 'Mensajes
 Attribute frmMens7.VB_VarHelpID = -1
+Private WithEvents frmMens8 As frmMensajes 'Mensajes
+Attribute frmMens8.VB_VarHelpID = -1
 Private WithEvents frmSitu As frmManSituacion 'Situacion de socio
 Attribute frmSitu.VB_VarHelpID = -1
 Private WithEvents frmCoop As frmManCoope 'Cooperativa
@@ -12891,7 +12893,7 @@ Dim CifEmpre As String
 
 Dim AlbaranAnterior As Long
 Dim Albaran2 As Long
-
+Dim Contratos As String
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -16306,6 +16308,29 @@ Dim vcad As String
                        Set frmMens2 = Nothing
                 End If
                 
+                '[Monica]30/12/2016: incluimos los contratos para poder seleccionar
+                If vParamAplic.Cooperativa = 16 Then
+                   Contratos = ""
+                
+                   Set frmMens8 = New frmMensajes
+                   
+                   frmMens8.desdeHco = True
+                   frmMens8.OpcionMensaje = 64
+                   frmMens8.Show vbModal
+                   
+                   Set frmMens8 = Nothing
+                   
+                   If Contratos <> "" Then
+                        If InStr(UCase(Contratos), "NULL") <> 0 Then
+                            vcad = "(rhisfruta.contrato is null or rhisfruta.contrato in (" & Contratos & "))"
+                        Else
+                            vcad = "(rhisfruta.contrato in (" & Contratos & "))"
+                        End If
+                        If Not AnyadirAFormula(cadSelect, vcad) Then Exit Sub
+                   End If
+                   
+                End If
+                
                 If CargarTemporal4New(nTabla, cadSelect) Then
                     CadParam = CadParam & "pRecolectado=" & Combo1(8).ListIndex & "|"
                     numParam = numParam + 1
@@ -18276,6 +18301,7 @@ End Sub
 
 
 
+
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
     txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
@@ -18456,6 +18482,16 @@ Dim Sql2 As String
     End If
 End Sub
 
+Private Sub frmMens8_datoseleccionado(CadenaSeleccion As String)
+Dim Sql As String
+Dim Sql2 As String
+
+    If CadenaSeleccion <> "" Then
+        Contratos = CadenaSeleccion
+    Else
+        Contratos = ""
+    End If
+End Sub
 
 
 Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)

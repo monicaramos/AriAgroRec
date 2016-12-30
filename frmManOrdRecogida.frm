@@ -8,13 +8,13 @@ Begin VB.Form frmManOrdRecogida
    ClientHeight    =   6225
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   8850
+   ClientWidth     =   10170
    Icon            =   "frmManOrdRecogida.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6225
-   ScaleWidth      =   8850
+   ScaleWidth      =   10170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
@@ -23,84 +23,156 @@ Begin VB.Form frmManOrdRecogida
       Left            =   135
       TabIndex        =   8
       Top             =   495
-      Width           =   8445
+      Width           =   9525
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   1290
+         Left            =   1320
          MaxLength       =   6
          TabIndex        =   3
          Tag             =   "Variedad|N|N|1|9999|rordrecogida|codvarie|000000||"
-         Top             =   600
-         Width           =   1050
+         Top             =   660
+         Width           =   1230
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   2370
+         Left            =   2580
          MaxLength       =   30
          TabIndex        =   27
-         Top             =   600
-         Width           =   3315
+         Top             =   660
+         Width           =   6405
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Capazo Desinfectado"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   3
-         Left            =   5850
+         Left            =   6600
          TabIndex        =   26
          Tag             =   "Capazo Desinfectado|N|N|0|1|rordrecogida|capazodesinf|0||"
-         Top             =   1020
-         Width           =   1935
+         Top             =   1110
+         Width           =   2625
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Capazo Limpio"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   2
-         Left            =   4080
+         Left            =   4680
          TabIndex        =   25
          Tag             =   "Capazo Limpio|N|N|0|1|rordrecogida|capazolimp|0||"
-         Top             =   1020
-         Width           =   1575
+         Top             =   1110
+         Width           =   2055
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Tijeras Desinfectadas"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   1
-         Left            =   1950
+         Left            =   2070
          TabIndex        =   24
          Tag             =   "Tijeras Desinfectadas|N|N|0|1|rordrecogida|tijeradesinf|0||"
-         Top             =   1020
-         Width           =   1935
+         Top             =   1110
+         Width           =   2505
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Tijeras Limpias"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   0
-         Left            =   180
+         Left            =   150
          TabIndex        =   23
          Tag             =   "Tijeras Limpias|N|N|0|1|rordrecogida|tijeralimp|0||"
-         Top             =   1020
-         Width           =   1575
+         Top             =   1110
+         Width           =   1815
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   4470
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha Impresión|F|N|||rordrecogida|fecimpre|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   240
-         Width           =   1020
+         Top             =   270
+         Width           =   1320
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   6960
+         Left            =   8070
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Nro.Campo|N|N|||rordrecogida|nrocampo|00000000||"
@@ -108,39 +180,66 @@ Begin VB.Form frmManOrdRecogida
          Width           =   930
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1320
          MaxLength       =   9
          TabIndex        =   0
          Tag             =   "Nro.Nota|N|S|||rordrecogida|nroorden|000000000|S|"
          Text            =   "123456789"
-         Top             =   240
-         Width           =   1020
+         Top             =   270
+         Width           =   1230
       End
       Begin VB.Label Label5 
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   150
          TabIndex        =   28
-         Top             =   600
-         Width           =   735
+         Top             =   660
+         Width           =   855
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   990
+         Left            =   1050
          ToolTipText     =   "Buscar Variedad"
-         Top             =   600
+         Top             =   660
          Width           =   240
       End
       Begin VB.Label Label14 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   3660
+         Left            =   3480
          TabIndex        =   22
          Top             =   270
-         Width           =   480
+         Width           =   690
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -148,25 +247,43 @@ Begin VB.Form frmManOrdRecogida
          Left            =   4185
          Picture         =   "frmManOrdRecogida.frx":000C
          ToolTipText     =   "Buscar fecha"
-         Top             =   240
+         Top             =   270
          Width           =   240
       End
       Begin VB.Label Label26 
          Caption         =   "NroCampo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   6150
+         Left            =   7020
          TabIndex        =   21
-         Top             =   300
-         Width           =   780
+         Top             =   270
+         Width           =   990
       End
       Begin VB.Label Label1 
          Caption         =   "Nro.Orden"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
          Left            =   150
          TabIndex        =   9
          Top             =   270
-         Width           =   1095
+         Width           =   990
       End
    End
    Begin VB.Frame FrameAux1 
@@ -187,7 +304,16 @@ Begin VB.Form frmManOrdRecogida
       Top             =   2100
       Width           =   8460
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   6540
          Style           =   2  'Dropdown List
@@ -199,7 +325,16 @@ Begin VB.Form frmManOrdRecogida
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   1755
          MaskColor       =   &H00000000&
@@ -214,7 +349,16 @@ Begin VB.Form frmManOrdRecogida
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   9
          Left            =   1980
          TabIndex        =   19
@@ -227,7 +371,16 @@ Begin VB.Form frmManOrdRecogida
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   9
          Left            =   1080
          MaxLength       =   4
@@ -242,7 +395,16 @@ Begin VB.Form frmManOrdRecogida
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   8
          Left            =   360
          MaxLength       =   16
@@ -413,8 +575,8 @@ Begin VB.Form frmManOrdRecogida
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -431,16 +593,34 @@ Begin VB.Form frmManOrdRecogida
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7545
+      Left            =   8535
       TabIndex        =   5
       Top             =   5610
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6450
+      Left            =   7440
       TabIndex        =   4
       Top             =   5595
       Width           =   1035
@@ -451,8 +631,8 @@ Begin VB.Form frmManOrdRecogida
       Left            =   0
       TabIndex        =   11
       Top             =   0
-      Width           =   8850
-      _ExtentX        =   15610
+      Width           =   10170
+      _ExtentX        =   17939
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -548,8 +728,17 @@ Begin VB.Form frmManOrdRecogida
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7560
+      Left            =   8550
       TabIndex        =   10
       Top             =   5610
       Visible         =   0   'False
@@ -1178,7 +1367,7 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
