@@ -16,6 +16,216 @@ Begin VB.Form frmPagoRecibos
    ScaleWidth      =   6510
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameHorasTrabajadas 
+      Height          =   5130
+      Left            =   45
+      TabIndex        =   6
+      Top             =   0
+      Width           =   6435
+      Begin VB.CheckBox Check1 
+         Caption         =   "Sobre Horas Productivas"
+         Height          =   195
+         Index           =   1
+         Left            =   540
+         TabIndex        =   16
+         Top             =   3870
+         Width           =   2130
+      End
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         Index           =   0
+         Left            =   1800
+         Style           =   2  'Dropdown List
+         TabIndex        =   14
+         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
+         Top             =   3420
+         Width           =   1665
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Height          =   285
+         Index           =   18
+         Left            =   2655
+         Locked          =   -1  'True
+         TabIndex        =   12
+         Text            =   "Text5"
+         Top             =   2790
+         Width           =   3015
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   18
+         Left            =   1830
+         MaxLength       =   6
+         TabIndex        =   3
+         Top             =   2790
+         Width           =   750
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   16
+         Left            =   1845
+         MaxLength       =   10
+         TabIndex        =   1
+         Top             =   1800
+         Width           =   1005
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   20
+         Left            =   1845
+         MaxLength       =   10
+         TabIndex        =   2
+         Top             =   2340
+         Width           =   1005
+      End
+      Begin VB.ComboBox Combo1 
+         Height          =   315
+         Index           =   1
+         Left            =   1830
+         Style           =   2  'Dropdown List
+         TabIndex        =   0
+         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
+         Top             =   1035
+         Width           =   1350
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   0
+         Left            =   4650
+         TabIndex        =   5
+         Top             =   4500
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAceptar 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Index           =   0
+         Left            =   3570
+         TabIndex        =   4
+         Top             =   4485
+         Width           =   975
+      End
+      Begin MSComctlLib.ProgressBar Pb1 
+         Height          =   240
+         Left            =   480
+         TabIndex        =   11
+         Top             =   4170
+         Width           =   5550
+         _ExtentX        =   9790
+         _ExtentY        =   423
+         _Version        =   393216
+         Appearance      =   1
+      End
+      Begin MSComDlg.CommonDialog CommonDialog1 
+         Left            =   90
+         Top             =   3915
+         _ExtentX        =   847
+         _ExtentY        =   847
+         _Version        =   393216
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Concepto Transferencia "
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Left            =   540
+         TabIndex        =   15
+         Top             =   3150
+         Width           =   1875
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   14
+         Left            =   1515
+         MouseIcon       =   "frmPagoRecibos.frx":000C
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar banco"
+         Top             =   2790
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Banco "
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   27
+         Left            =   540
+         TabIndex        =   13
+         Top             =   2700
+         Width           =   510
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   2
+         Left            =   1530
+         Picture         =   "frmPagoRecibos.frx":015E
+         ToolTipText     =   "Buscar fecha"
+         Top             =   1800
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Recibo"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   24
+         Left            =   540
+         TabIndex        =   10
+         Top             =   1530
+         Width           =   1005
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha Pago"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   30
+         Left            =   540
+         TabIndex        =   9
+         Top             =   2160
+         Width           =   870
+      End
+      Begin VB.Image imgFecha 
+         Height          =   240
+         Index           =   6
+         Left            =   1515
+         Picture         =   "frmPagoRecibos.frx":01E9
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2340
+         Width           =   240
+      End
+      Begin VB.Label Label8 
+         Caption         =   "Sección "
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Left            =   540
+         TabIndex        =   8
+         Top             =   1035
+         Width           =   615
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Pago de Recibos"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   405
+         TabIndex        =   7
+         Top             =   405
+         Width           =   5925
+      End
+   End
    Begin VB.Frame FramePagoRecibosNatural 
       Height          =   6930
       Left            =   60
@@ -233,7 +443,7 @@ Begin VB.Form frmPagoRecibos
          Height          =   240
          Index           =   1
          Left            =   1500
-         Picture         =   "frmPagoRecibos.frx":000C
+         Picture         =   "frmPagoRecibos.frx":0274
          ToolTipText     =   "Buscar fecha"
          Top             =   2340
          Width           =   240
@@ -264,7 +474,7 @@ Begin VB.Form frmPagoRecibos
          Height          =   240
          Index           =   0
          Left            =   1470
-         Picture         =   "frmPagoRecibos.frx":0097
+         Picture         =   "frmPagoRecibos.frx":02FF
          ToolTipText     =   "Buscar fecha"
          Top             =   1800
          Width           =   240
@@ -284,7 +494,7 @@ Begin VB.Form frmPagoRecibos
          Height          =   240
          Index           =   0
          Left            =   1470
-         MouseIcon       =   "frmPagoRecibos.frx":0122
+         MouseIcon       =   "frmPagoRecibos.frx":038A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar banco"
          Top             =   2790
@@ -298,216 +508,6 @@ Begin VB.Form frmPagoRecibos
          TabIndex        =   22
          Top             =   3150
          Width           =   1875
-      End
-   End
-   Begin VB.Frame FrameHorasTrabajadas 
-      Height          =   5130
-      Left            =   45
-      TabIndex        =   6
-      Top             =   0
-      Width           =   6435
-      Begin VB.CheckBox Check1 
-         Caption         =   "Sobre Horas Productivas"
-         Height          =   195
-         Index           =   1
-         Left            =   540
-         TabIndex        =   16
-         Top             =   3870
-         Width           =   2130
-      End
-      Begin VB.ComboBox Combo1 
-         Height          =   315
-         Index           =   0
-         Left            =   1800
-         Style           =   2  'Dropdown List
-         TabIndex        =   14
-         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
-         Top             =   3420
-         Width           =   1665
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Height          =   285
-         Index           =   18
-         Left            =   2655
-         Locked          =   -1  'True
-         TabIndex        =   12
-         Text            =   "Text5"
-         Top             =   2790
-         Width           =   3015
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   18
-         Left            =   1830
-         MaxLength       =   6
-         TabIndex        =   3
-         Top             =   2790
-         Width           =   750
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   16
-         Left            =   1845
-         MaxLength       =   10
-         TabIndex        =   1
-         Top             =   1800
-         Width           =   1005
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   20
-         Left            =   1845
-         MaxLength       =   10
-         TabIndex        =   2
-         Top             =   2340
-         Width           =   1005
-      End
-      Begin VB.ComboBox Combo1 
-         Height          =   315
-         Index           =   1
-         Left            =   1830
-         Style           =   2  'Dropdown List
-         TabIndex        =   0
-         Tag             =   "Tipo|N|N|||straba|codsecci||N|"
-         Top             =   1035
-         Width           =   1350
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   0
-         Left            =   4650
-         TabIndex        =   5
-         Top             =   4500
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAceptar 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Index           =   0
-         Left            =   3570
-         TabIndex        =   4
-         Top             =   4485
-         Width           =   975
-      End
-      Begin MSComctlLib.ProgressBar Pb1 
-         Height          =   240
-         Left            =   480
-         TabIndex        =   11
-         Top             =   4170
-         Width           =   5550
-         _ExtentX        =   9790
-         _ExtentY        =   423
-         _Version        =   393216
-         Appearance      =   1
-      End
-      Begin MSComDlg.CommonDialog CommonDialog1 
-         Left            =   90
-         Top             =   3915
-         _ExtentX        =   847
-         _ExtentY        =   847
-         _Version        =   393216
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Concepto Transferencia "
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Left            =   540
-         TabIndex        =   15
-         Top             =   3150
-         Width           =   1875
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   14
-         Left            =   1515
-         MouseIcon       =   "frmPagoRecibos.frx":0274
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar banco"
-         Top             =   2790
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Banco "
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   27
-         Left            =   540
-         TabIndex        =   13
-         Top             =   2700
-         Width           =   510
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   2
-         Left            =   1530
-         Picture         =   "frmPagoRecibos.frx":03C6
-         ToolTipText     =   "Buscar fecha"
-         Top             =   1800
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Recibo"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   24
-         Left            =   540
-         TabIndex        =   10
-         Top             =   1530
-         Width           =   1005
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha Pago"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   30
-         Left            =   540
-         TabIndex        =   9
-         Top             =   2160
-         Width           =   870
-      End
-      Begin VB.Image imgFecha 
-         Height          =   240
-         Index           =   6
-         Left            =   1515
-         Picture         =   "frmPagoRecibos.frx":0451
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2340
-         Width           =   240
-      End
-      Begin VB.Label Label8 
-         Caption         =   "Sección "
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Left            =   540
-         TabIndex        =   8
-         Top             =   1035
-         Width           =   615
-      End
-      Begin VB.Label Label7 
-         Caption         =   "Pago de Recibos"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   405
-         TabIndex        =   7
-         Top             =   405
-         Width           =   5925
       End
    End
    Begin MSComDlg.CommonDialog cd1 
@@ -570,7 +570,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -618,9 +618,9 @@ Dim Sql As String
         AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
     End If
     
-    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
-    cTabla = Tabla
+    cTabla = tabla
     cadSelect1 = cadSelect
     cadSelect2 = cadSelect
     
@@ -640,7 +640,7 @@ Dim Sql As String
         AnyadirAFormula cadSelect, "horas.intconta = 0"
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(Tabla, cadSelect) Then
+        If HayRegParaInforme(tabla, cadSelect) Then
             If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
                 ProcesarCambiosPicassent (cadSelect)
             Else
@@ -1529,9 +1529,9 @@ Dim Sql As String
         AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
     End If
     
-    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
+    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) INNER JOIN forpago ON straba.codforpa = forpago.codforpa "
                
-    cTabla = Tabla
+    cTabla = tabla
     cadSelect1 = cadSelect
     cadSelect2 = cadSelect
     
@@ -1551,10 +1551,10 @@ Dim Sql As String
         AnyadirAFormula cadSelect, "horas.intconta = 0"
 
         '[Monica]06/05/2015: comprobamos que todos los trabajadores tengan direccion
-        If Not DireccionesOk(Tabla, cadSelect) Then Exit Sub
+        If Not DireccionesOk(tabla, cadSelect) Then Exit Sub
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(Tabla, cadSelect) Then
+        If HayRegParaInforme(tabla, cadSelect) Then
             ProcesarCambiosNatural (cadSelect)
         Else
             Repetir = True
@@ -1704,13 +1704,18 @@ Dim List As Collection
             Me.cmdCancel(1).Cancel = True
     End Select
         
-    Tabla = "horas"
+    tabla = "horas"
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
     Me.Width = W + 70
     Me.Height = H + 350
     
     Me.Combo1(1).ListIndex = 1
+    
+    If vParamAplic.Cooperativa = 16 Then
+        Check1(1).Caption = "Es anticipo"
+    End If
+    
     
     Pb1.visible = False
     pb2.visible = False
@@ -1858,7 +1863,7 @@ End Sub
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
 Dim Cad As String
-Dim Tabla As String
+Dim tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
@@ -1886,7 +1891,7 @@ Dim Titulo As String
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
         frmB.vCampos = Cad
-        frmB.vtabla = Tabla
+        frmB.vtabla = tabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
@@ -2017,26 +2022,26 @@ Dim nomCampo As String
         
         'Informe de variedades
         Case "Clase"
-            CadParam = CadParam & campo & "{" & Tabla & ".codclase}" & "|"
+            CadParam = CadParam & campo & "{" & tabla & ".codclase}" & "|"
             CadParam = CadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Producto""" & "|"
             numParam = numParam + 3
             
         Case "Producto"
-            CadParam = CadParam & campo & "{" & Tabla & ".codprodu}" & "|"
+            CadParam = CadParam & campo & "{" & tabla & ".codprodu}" & "|"
             CadParam = CadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Clase""" & "|"
             numParam = numParam + 3
 
         'Informe de calibres
         Case "Variedad"
-            CadParam = CadParam & campo & "{" & Tabla & ".codvarie}" & "|"
+            CadParam = CadParam & campo & "{" & tabla & ".codvarie}" & "|"
             CadParam = CadParam & nomCampo & " {" & "variedades" & ".nomvarie}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Variedad""" & "|"
             numParam = numParam + 3
             
         Case "Calibre"
-            CadParam = CadParam & campo & "{" & Tabla & ".codcalib}" & "|"
+            CadParam = CadParam & campo & "{" & tabla & ".codcalib}" & "|"
             CadParam = CadParam & nomCampo & " {" & "calibres" & ".nomcalib}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Calibre""" & "|"
             numParam = numParam + 3
@@ -2067,7 +2072,7 @@ Dim nomCampo As String
 
     Select Case cadgrupo
         Case "Codigo"
-            CadParam = CadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".codclien}|"
@@ -2076,7 +2081,7 @@ Dim nomCampo As String
             End Select
             Tipo = "Código"
         Case "Alfabético"
-            CadParam = CadParam & "Orden" & "= {" & Tabla
+            CadParam = CadParam & "Orden" & "= {" & tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".nomclien}|"
@@ -2232,7 +2237,7 @@ EDatosOK:
 End Function
 
 
-Private Function ActualizarRegistros(Tabla As String, cWhere As String) As Boolean
+Private Function ActualizarRegistros(tabla As String, cWhere As String) As Boolean
 Dim Sql As String
     On Error GoTo eActualizarRegistros
     
@@ -2323,6 +2328,41 @@ ecopiarfichero:
     End If
     Err.Clear
 End Function
+
+Public Function CopiarFicheroA3() As Boolean
+Dim nomFich As String
+
+On Error GoTo ecopiarfichero
+
+    CopiarFicheroA3 = False
+    ' abrimos el commondialog para indicar donde guardarlo
+'    Me.CommonDialog1.InitDir = App.path
+
+    Me.CommonDialog1.DefaultExt = "txt"
+    
+    CommonDialog1.Filter = "Archivos txt|txt|"
+    CommonDialog1.FilterIndex = 1
+    
+    ' copiamos el primer fichero
+    CommonDialog1.FileName = "anticipoA3.txt"
+    Me.CommonDialog1.ShowSave
+    
+    If CommonDialog1.FileName <> "" Then
+        FileCopy App.Path & "\anticipoA3.txt", CommonDialog1.FileName
+    End If
+    
+    CopiarFicheroA3 = True
+    Exit Function
+
+ecopiarfichero:
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, Err.Description
+    End If
+    Err.Clear
+End Function
+
+
+
 
 
 Private Sub ProcesarCambiosPicassent(cadWHERE As String)
@@ -2622,7 +2662,8 @@ On Error GoTo eProcesarCambiosPicassent
             b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
         End If
     Else
-        b = True
+        ' generamos el fichero plano del anticipo
+        b = GeneraFicheroA3(Check1(1).Value = 1, Max, txtcodigo(16).Text)
     End If
     
     vSeccion.CerrarConta
@@ -2633,7 +2674,12 @@ On Error GoTo eProcesarCambiosPicassent
     If b Then
         Mens = "Copiar fichero"
         
-        If vParamAplic.Cooperativa = 2 Then b = CopiarFichero
+        If vParamAplic.Cooperativa = 2 Then
+            CopiarFichero
+        Else
+            CopiarFicheroA3
+        End If
+        
         
         If b Then
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"

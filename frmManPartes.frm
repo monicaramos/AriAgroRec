@@ -2885,6 +2885,36 @@ eBotonTraerEntradas:
     MuestraError Err.Number, "Traer Entradas", Err.Description
 End Function
 
+Function SecuenciaTrabajadores() As String
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eSecuenciaTrabajadores
+
+
+    Sql = "select distinct codtraba from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    Sql = ""
+    While Not Rs.EOF
+        Sql = Sql & DBSet(Rs!CodTraba, "N") & ","
+        
+        Rs.MoveNext
+    Wend
+    Set Rs = Nothing
+    
+    If Sql <> "" Then Sql = Mid(Sql, 1, Len(Sql) - 1)
+    
+    SecuenciaTrabajadores = Sql
+    Exit Function
+    
+eSecuenciaTrabajadores:
+    MuestraError Err.Number, "Secuencia Trabajadores", Err.Description
+End Function
+
+
 Function RecalcularImportes() As Boolean
 Dim Sql As String
 Dim Sql2 As String
@@ -2950,20 +2980,27 @@ Dim Importe As Currency
         
         If vParamAplic.Cooperativa = 16 Then
         
-            vvTrabajadores = ""
         
-            Set frmTMP = New frmManPartesTMP
-            frmTMP.ParamVariedad = Text1(0).Text
-            frmTMP.SoloTrabajador = 1
-            frmTMP.Show vbModal
-            Set frmTMP = Nothing
-            
-            If vvTrabajadores <> "" Then
+            'miramos para que lo recalcule entre lo que haya en rpartes_trabajador
+            Cad = "select count(*) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+            If TotalRegistros(Cad) <> 0 Then
+                vvTrabajadores = SecuenciaTrabajadores '"select distinct codtraba from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value & ""
                 cadSelect = "codtraba in (" & vvTrabajadores & ")"
             Else
-                cadSelect = "codtraba = -1"
-            End If
+                vvTrabajadores = ""
             
+                Set frmTMP = New frmManPartesTMP
+                frmTMP.ParamVariedad = Text1(0).Text
+                frmTMP.SoloTrabajador = 1
+                frmTMP.Show vbModal
+                Set frmTMP = Nothing
+                
+                If vvTrabajadores <> "" Then
+                    cadSelect = "codtraba in (" & vvTrabajadores & ")"
+                Else
+                    cadSelect = "codtraba = -1"
+                End If
+            End If
         Else
             Set frmMens = New frmMensajes
             
@@ -3224,13 +3261,23 @@ Dim Importe As Currency
                 Sql2 = Sql2 & ValorNulo & ","
                 
                 If vParamAplic.Cooperativa = 16 Then
-                    Importe = Round2(DBLet(Rs!PlusCapataz, "N") * (NroTrabajadores - 1), 2)
-                    Sql2 = Sql2 & DBSet(Importe, "N") & ",1)"
+                    Dim NroCapataces As Integer
+                    Sql = "select count(*) from straba where " & cadSelect & " and pluscapataz <> 0"
+                    
+                    NroCapataces = DevuelveValor(Sql)
+                    If NroCapataces > 0 Then
+                        Importe = Round2((DBLet(Rs!PlusCapataz, "N") * (NroTrabajadores - NroCapataces)) / NroCapataces, 2)
+                    
+                        Sql2 = Sql2 & DBSet(Importe, "N") & ",1)"
+                    Else
+                        Sql2 = Sql2 & "0,1)"
+                    End If
                 Else
                     Sql2 = Sql2 & DBSet(Rs!PlusCapataz, "N") & ",1)"
                 End If
-            
+                
                 conn.Execute Sql2
+            
             End If
             Rs.MoveNext
         Wend

@@ -16,6 +16,199 @@ Begin VB.Form frmListNomina
    ScaleWidth      =   8145
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameInfDiasTrabajados 
+      Height          =   4275
+      Left            =   30
+      TabIndex        =   261
+      Top             =   30
+      Width           =   6375
+      Begin VB.CheckBox Check6 
+         Caption         =   "Exportar Cadena para Excel"
+         Height          =   375
+         Left            =   570
+         TabIndex        =   277
+         Top             =   3420
+         Width           =   2775
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Index           =   13
+         Left            =   4770
+         TabIndex        =   263
+         Top             =   3375
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdDiasTrabajados 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3750
+         TabIndex        =   262
+         Top             =   3390
+         Width           =   975
+      End
+      Begin VB.Frame Frame7 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame1"
+         Height          =   2985
+         Left            =   420
+         TabIndex        =   264
+         Top             =   900
+         Width           =   5595
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   69
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   270
+            Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
+            Top             =   765
+            Width           =   750
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   68
+            Left            =   1380
+            MaxLength       =   6
+            TabIndex        =   269
+            Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
+            Top             =   405
+            Width           =   750
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   68
+            Left            =   2220
+            Locked          =   -1  'True
+            TabIndex        =   268
+            Text            =   "Text5"
+            Top             =   405
+            Width           =   3015
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Height          =   285
+            Index           =   69
+            Left            =   2220
+            Locked          =   -1  'True
+            TabIndex        =   267
+            Text            =   "Text5"
+            Top             =   780
+            Width           =   3015
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            Height          =   285
+            Index           =   67
+            Left            =   1380
+            MaxLength       =   4
+            TabIndex        =   266
+            Top             =   1380
+            Width           =   840
+         End
+         Begin VB.ComboBox Combo1 
+            Height          =   315
+            Index           =   2
+            Left            =   1380
+            TabIndex        =   265
+            Text            =   "Combo2"
+            Top             =   1950
+            Width           =   1575
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Desde"
+            Height          =   195
+            Index           =   92
+            Left            =   390
+            TabIndex        =   275
+            Top             =   420
+            Width           =   465
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Hasta"
+            Height          =   195
+            Index           =   91
+            Left            =   390
+            TabIndex        =   274
+            Top             =   780
+            Width           =   420
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Trabajador"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   90
+            Left            =   180
+            TabIndex        =   273
+            Top             =   60
+            Width           =   765
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   30
+            Left            =   1080
+            MouseIcon       =   "frmListNomina.frx":000C
+            MousePointer    =   4  'Icon
+            ToolTipText     =   "Buscar trabajador"
+            Top             =   810
+            Width           =   240
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   29
+            Left            =   1080
+            MouseIcon       =   "frmListNomina.frx":015E
+            MousePointer    =   4  'Icon
+            ToolTipText     =   "Buscar trabajador"
+            Top             =   420
+            Width           =   240
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Año"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   89
+            Left            =   180
+            TabIndex        =   272
+            Top             =   1410
+            Width           =   285
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Mes"
+            ForeColor       =   &H00972E0B&
+            Height          =   195
+            Index           =   88
+            Left            =   180
+            TabIndex        =   271
+            Top             =   2010
+            Width           =   300
+         End
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Informe Mensual Días Trabajados"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   630
+         TabIndex        =   276
+         Top             =   390
+         Width           =   5595
+      End
+   End
    Begin VB.Frame FrameInfComprobacion 
       Height          =   5085
       Left            =   0
@@ -151,7 +344,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   34
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":000C
+         MouseIcon       =   "frmListNomina.frx":02B0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3450
@@ -161,7 +354,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   33
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":015E
+         MouseIcon       =   "frmListNomina.frx":0402
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3060
@@ -276,7 +469,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   21
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":02B0
+         MouseIcon       =   "frmListNomina.frx":0554
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -286,7 +479,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   19
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":0402
+         MouseIcon       =   "frmListNomina.frx":06A6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -296,7 +489,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   16
          Left            =   1560
-         Picture         =   "frmListNomina.frx":0554
+         Picture         =   "frmListNomina.frx":07F8
          Top             =   2520
          Width           =   240
       End
@@ -304,7 +497,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   15
          Left            =   1560
-         Picture         =   "frmListNomina.frx":05DF
+         Picture         =   "frmListNomina.frx":0883
          Top             =   2160
          Width           =   240
       End
@@ -552,7 +745,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   32
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":066A
+         MouseIcon       =   "frmListNomina.frx":090E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3810
@@ -562,7 +755,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   31
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":07BC
+         MouseIcon       =   "frmListNomina.frx":0A60
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3450
@@ -572,7 +765,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   24
          Left            =   1560
-         Picture         =   "frmListNomina.frx":090E
+         Picture         =   "frmListNomina.frx":0BB2
          Top             =   2670
          Width           =   240
       End
@@ -580,7 +773,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   23
          Left            =   1575
-         Picture         =   "frmListNomina.frx":0999
+         Picture         =   "frmListNomina.frx":0C3D
          Top             =   2340
          Width           =   240
       End
@@ -691,7 +884,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   18
          Left            =   1545
-         Picture         =   "frmListNomina.frx":0A24
+         Picture         =   "frmListNomina.frx":0CC8
          Top             =   2670
          Width           =   240
       End
@@ -699,7 +892,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   17
          Left            =   1560
-         Picture         =   "frmListNomina.frx":0AAF
+         Picture         =   "frmListNomina.frx":0D53
          Top             =   2340
          Width           =   240
       End
@@ -707,7 +900,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   18
          Left            =   1560
-         MouseIcon       =   "frmListNomina.frx":0B3A
+         MouseIcon       =   "frmListNomina.frx":0DDE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1680
@@ -717,7 +910,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   17
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":0C8C
+         MouseIcon       =   "frmListNomina.frx":0F30
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1320
@@ -973,7 +1166,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   3
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":0DDE
+         MouseIcon       =   "frmListNomina.frx":1082
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2685
@@ -983,7 +1176,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   2
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":0F30
+         MouseIcon       =   "frmListNomina.frx":11D4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2325
@@ -993,7 +1186,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   5
          Left            =   1575
-         Picture         =   "frmListNomina.frx":1082
+         Picture         =   "frmListNomina.frx":1326
          Top             =   3690
          Width           =   240
       End
@@ -1001,7 +1194,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   4
          Left            =   1575
-         Picture         =   "frmListNomina.frx":110D
+         Picture         =   "frmListNomina.frx":13B1
          Top             =   3345
          Width           =   240
       End
@@ -1009,7 +1202,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   0
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":1198
+         MouseIcon       =   "frmListNomina.frx":143C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -1019,7 +1212,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   1
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":12EA
+         MouseIcon       =   "frmListNomina.frx":158E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -1270,7 +1463,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   9
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":143C
+         MouseIcon       =   "frmListNomina.frx":16E0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1665
@@ -1280,7 +1473,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   8
          Left            =   1575
-         MouseIcon       =   "frmListNomina.frx":158E
+         MouseIcon       =   "frmListNomina.frx":1832
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1305
@@ -1290,7 +1483,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   8
          Left            =   1560
-         Picture         =   "frmListNomina.frx":16E0
+         Picture         =   "frmListNomina.frx":1984
          Top             =   2700
          Width           =   240
       End
@@ -1298,7 +1491,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   6
          Left            =   1575
-         Picture         =   "frmListNomina.frx":176B
+         Picture         =   "frmListNomina.frx":1A0F
          Top             =   2370
          Width           =   240
       End
@@ -1507,7 +1700,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   15
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":17F6
+         MouseIcon       =   "frmListNomina.frx":1A9A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -1517,7 +1710,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   14
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":1948
+         MouseIcon       =   "frmListNomina.frx":1BEC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -1527,7 +1720,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   3
          Left            =   1575
-         Picture         =   "frmListNomina.frx":1A9A
+         Picture         =   "frmListNomina.frx":1D3E
          Top             =   2745
          Width           =   240
       End
@@ -1535,7 +1728,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   2
          Left            =   1575
-         Picture         =   "frmListNomina.frx":1B25
+         Picture         =   "frmListNomina.frx":1DC9
          Top             =   2340
          Width           =   240
       End
@@ -1636,7 +1829,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   1
          Left            =   1575
-         Picture         =   "frmListNomina.frx":1BB0
+         Picture         =   "frmListNomina.frx":1E54
          Top             =   2745
          Width           =   240
       End
@@ -1644,7 +1837,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   0
          Left            =   1575
-         Picture         =   "frmListNomina.frx":1C3B
+         Picture         =   "frmListNomina.frx":1EDF
          Top             =   2340
          Width           =   240
       End
@@ -2025,7 +2218,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   6
          Left            =   1515
-         MouseIcon       =   "frmListNomina.frx":1CC6
+         MouseIcon       =   "frmListNomina.frx":1F6A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   2085
@@ -2035,7 +2228,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   7
          Left            =   1515
-         Picture         =   "frmListNomina.frx":1E18
+         Picture         =   "frmListNomina.frx":20BC
          Top             =   1605
          Width           =   240
       End
@@ -2043,7 +2236,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   5
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":1EA3
+         MouseIcon       =   "frmListNomina.frx":2147
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1125
@@ -2128,7 +2321,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   20
          Left            =   1290
-         MouseIcon       =   "frmListNomina.frx":1FF5
+         MouseIcon       =   "frmListNomina.frx":2299
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar almacén"
          Top             =   2220
@@ -2149,7 +2342,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   13
          Left            =   1320
-         Picture         =   "frmListNomina.frx":2147
+         Picture         =   "frmListNomina.frx":23EB
          Top             =   1290
          Width           =   240
       End
@@ -2321,7 +2514,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   10
             Left            =   1200
-            Picture         =   "frmListNomina.frx":21D2
+            Picture         =   "frmListNomina.frx":2476
             Top             =   900
             Width           =   240
          End
@@ -2329,7 +2522,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   9
             Left            =   1215
-            Picture         =   "frmListNomina.frx":225D
+            Picture         =   "frmListNomina.frx":2501
             Top             =   540
             Width           =   240
          End
@@ -2337,7 +2530,7 @@ Begin VB.Form frmListNomina
             Height          =   240
             Index           =   4
             Left            =   1215
-            MouseIcon       =   "frmListNomina.frx":22E8
+            MouseIcon       =   "frmListNomina.frx":258C
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar trabajador"
             Top             =   1320
@@ -2392,7 +2585,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   7
          Left            =   1545
-         MouseIcon       =   "frmListNomina.frx":243A
+         MouseIcon       =   "frmListNomina.frx":26DE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1125
@@ -2508,7 +2701,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   20
          Left            =   1605
-         Picture         =   "frmListNomina.frx":258C
+         Picture         =   "frmListNomina.frx":2830
          Top             =   2730
          Width           =   240
       End
@@ -2516,7 +2709,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   19
          Left            =   1605
-         Picture         =   "frmListNomina.frx":2617
+         Picture         =   "frmListNomina.frx":28BB
          Top             =   2385
          Width           =   240
       End
@@ -2524,7 +2717,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   23
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":26A2
+         MouseIcon       =   "frmListNomina.frx":2946
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1665
@@ -2534,7 +2727,7 @@ Begin VB.Form frmListNomina
          Height          =   240
          Index           =   22
          Left            =   1620
-         MouseIcon       =   "frmListNomina.frx":27F4
+         MouseIcon       =   "frmListNomina.frx":2A98
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar trabajador"
          Top             =   1305
@@ -2615,199 +2808,6 @@ Begin VB.Form frmListNomina
          TabIndex        =   210
          Top             =   1320
          Width           =   465
-      End
-   End
-   Begin VB.Frame FrameInfDiasTrabajados 
-      Height          =   4275
-      Left            =   30
-      TabIndex        =   261
-      Top             =   30
-      Width           =   6375
-      Begin VB.CheckBox Check6 
-         Caption         =   "Exportar Cadena para Excel"
-         Height          =   375
-         Left            =   570
-         TabIndex        =   277
-         Top             =   3420
-         Width           =   2775
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   13
-         Left            =   4770
-         TabIndex        =   263
-         Top             =   3375
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdDiasTrabajados 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3750
-         TabIndex        =   262
-         Top             =   3390
-         Width           =   975
-      End
-      Begin VB.Frame Frame7 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame1"
-         Height          =   2985
-         Left            =   420
-         TabIndex        =   264
-         Top             =   900
-         Width           =   5595
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   69
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   270
-            Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
-            Top             =   765
-            Width           =   750
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   68
-            Left            =   1380
-            MaxLength       =   6
-            TabIndex        =   269
-            Tag             =   "Código|N|N|0|999999|straba|codtraba|000000|S|"
-            Top             =   405
-            Width           =   750
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   68
-            Left            =   2220
-            Locked          =   -1  'True
-            TabIndex        =   268
-            Text            =   "Text5"
-            Top             =   405
-            Width           =   3015
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Height          =   285
-            Index           =   69
-            Left            =   2220
-            Locked          =   -1  'True
-            TabIndex        =   267
-            Text            =   "Text5"
-            Top             =   780
-            Width           =   3015
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   67
-            Left            =   1380
-            MaxLength       =   4
-            TabIndex        =   266
-            Top             =   1380
-            Width           =   840
-         End
-         Begin VB.ComboBox Combo1 
-            Height          =   315
-            Index           =   2
-            Left            =   1380
-            TabIndex        =   265
-            Text            =   "Combo2"
-            Top             =   1950
-            Width           =   1575
-         End
-         Begin VB.Label Label2 
-            Caption         =   "Desde"
-            Height          =   195
-            Index           =   92
-            Left            =   390
-            TabIndex        =   275
-            Top             =   420
-            Width           =   465
-         End
-         Begin VB.Label Label2 
-            Caption         =   "Hasta"
-            Height          =   195
-            Index           =   91
-            Left            =   390
-            TabIndex        =   274
-            Top             =   780
-            Width           =   420
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Trabajador"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   90
-            Left            =   180
-            TabIndex        =   273
-            Top             =   60
-            Width           =   765
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   30
-            Left            =   1080
-            MouseIcon       =   "frmListNomina.frx":2946
-            MousePointer    =   4  'Icon
-            ToolTipText     =   "Buscar trabajador"
-            Top             =   810
-            Width           =   240
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   29
-            Left            =   1080
-            MouseIcon       =   "frmListNomina.frx":2A98
-            MousePointer    =   4  'Icon
-            ToolTipText     =   "Buscar trabajador"
-            Top             =   420
-            Width           =   240
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Año"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   89
-            Left            =   180
-            TabIndex        =   272
-            Top             =   1410
-            Width           =   285
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Mes"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   88
-            Left            =   180
-            TabIndex        =   271
-            Top             =   2010
-            Width           =   300
-         End
-      End
-      Begin VB.Label Label17 
-         Caption         =   "Informe Mensual Días Trabajados"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   276
-         Top             =   390
-         Width           =   5595
       End
    End
    Begin VB.Frame FrameListMensAsesoria 
@@ -5188,7 +5188,7 @@ Dim cadSelect2 As String
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(tabla, cadSelect) Then
         If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Me.Check6.Value = 1 Then
-            If vParamAplic.Cooperativa = 4 Then ' Alzira
+            If vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 16 Then ' Alzira o Coopic
                 Shell App.Path & "\nomina.exe /E|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
             Else ' Picassent
                 Shell App.Path & "\nomina.exe /P|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus

@@ -17,7 +17,7 @@ Public Sub CopiarFicheroNorma43(Destino As String)
 End Sub
 
 Private Function CopiarEnDisquette(A_disquetera As Boolean, Intentos As Byte) As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim Cad As String
 
 On Error Resume Next
@@ -25,8 +25,8 @@ On Error Resume Next
     CopiarEnDisquette = False
     
     If A_disquetera Then
-        For I = 1 To Intentos
-            Cad = "Introduzca un disco vacio. (" & I & ")"
+        For i = 1 To Intentos
+            Cad = "Introduzca un disco vacio. (" & i & ")"
             MsgBox Cad, vbInformation
             FileCopy App.Path & "\norma34.txt", "a:\norma34.txt"
             If Err.Number <> 0 Then
@@ -35,7 +35,7 @@ On Error Resume Next
                 CopiarEnDisquette = True
                 Exit For
             End If
-        Next I
+        Next i
     Else
         If AuxD = "" Then
             Cad = Format(Now, "ddmmyyhhnn")
@@ -303,15 +303,15 @@ End Function
 
 
 
-Private Function RellenaABlancos(Cadena As String, PorLaDerecha As Boolean, longitud As Integer) As String
+Private Function RellenaABlancos(cadena As String, PorLaDerecha As Boolean, longitud As Integer) As String
 Dim Cad As String
     
     Cad = Space(longitud)
     If PorLaDerecha Then
-        Cad = Cadena & Cad
+        Cad = cadena & Cad
         RellenaABlancos = Left(Cad, longitud)
     Else
-        Cad = Cad & Cadena
+        Cad = Cad & cadena
         RellenaABlancos = Right(Cad, longitud)
     End If
     
@@ -319,15 +319,15 @@ End Function
 
 
 
-Private Function RellenaAceros(Cadena As String, PorLaDerecha As Boolean, longitud As Integer) As String
+Private Function RellenaAceros(cadena As String, PorLaDerecha As Boolean, longitud As Integer) As String
 Dim Cad As String
     
     Cad = Mid("00000000000000000000", 1, longitud)
     If PorLaDerecha Then
-        Cad = Cadena & Cad
+        Cad = cadena & Cad
         RellenaAceros = Left(Cad, longitud)
     Else
-        Cad = Cad & Cadena
+        Cad = Cad & cadena
         RellenaAceros = Right(Cad, longitud)
     End If
     
@@ -763,8 +763,8 @@ EGen2:
 End Function
 
 
-Public Function FrmtStr(Campo As String, longitud As Integer) As String
-    FrmtStr = Mid(Trim(Campo) & Space(longitud), 1, longitud)
+Public Function FrmtStr(campo As String, longitud As Integer) As String
+    FrmtStr = Mid(Trim(campo) & Space(longitud), 1, longitud)
 End Function
 
 
@@ -1228,11 +1228,11 @@ End Function
 
 
 
-Private Function XML(Cadena As String) As String
-Dim I As Integer
+Private Function XML(cadena As String) As String
+Dim i As Integer
 Dim Aux As String
 Dim Le As String
-Dim C As Integer
+Dim c As Integer
     'Carácter no permitido en XML  Representación ASCII
     '& (ampersand)          &amp;
     '< (menor que)          &lt;
@@ -1247,12 +1247,12 @@ Dim C As Integer
     '/ - ? : ( ) . , ' +
     'Espacio
     Aux = ""
-    For I = 1 To Len(Cadena)
-        Le = Mid(Cadena, I, 1)
-        C = Asc(Le)
+    For i = 1 To Len(cadena)
+        Le = Mid(cadena, i, 1)
+        c = Asc(Le)
 
 
-        Select Case C
+        Select Case c
         Case 40 To 57
             'Caracteres permitidos y numeros
 
@@ -1273,6 +1273,107 @@ Dim C As Integer
     XML = Aux
 End Function
 
+
+
+Public Function GeneraFicheroA3(EsAnticipo As Boolean, Contador As Long, FechaPago As Date) As Boolean
+Dim Regs As Integer
+Dim Im As Currency
+Dim Cad As String
+Dim Aux As String
+Dim NFic As Integer
+Dim EsPersonaJuridica2 As Boolean
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+Dim RegImpBruto As String
+Dim RegImpSS As String
+Dim RegImpIRPF As String
+
+Dim Importe As String
+Dim FecPag As String
+
+'Dim miRsAux As ADODB.Recordset
+
+    On Error GoTo EGen3
+    GeneraFicheroA3 = False
+
+    NFic = -1
+
+    NFic = FreeFile
+    Open App.Path & "\anticipoA3.txt" For Output As NFic
+
+    Cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
+    
+    FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
+
+    Sql = "select * from rrecibosnomina where fechahora = " & DBSet(FechaPago, "F") & " and idcontador = " & DBSet(Contador, "N")
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    Regs = 0
+    While Not Rs.EOF
+    
+        Regs = Regs + 1
+        
+        ' importe bruto
+        Importe = Format(Int(DBLet(Rs!Importe, "N")), "00000") & Format((DBLet(Rs!Importe, "N") - Int(DBLet(Rs!Importe, "N"))) * 100, "00")
+        If DBLet(Rs!Importe, "N") >= 0 Then
+            Importe = Importe & "+"
+        Else
+            Importe = Importe & "-"
+        End If
+        
+        Importe = Importe & "000000000+"
+        
+        RegImpBruto = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "250" & Importe 'cad+codtraba+fecha+incidencia+250+importe bruto
+        Print #NFic, RegImpBruto
+        
+        ' dto seguridad social
+        Importe = Format(Int(DBLet(Rs!importesegso1, "N")), "00000") & Format((DBLet(Rs!importesegso1, "N") - Int(DBLet(Rs!importesegso1, "N"))) * 100, "00")
+        If DBLet(Rs!importesegso1, "N") <= 0 Then
+            Importe = Importe & "+"
+        Else
+            Importe = Importe & "-"
+        End If
+        
+        Importe = Importe & "000000000+"
+        
+        RegImpSS = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "255" & Importe 'cad+codtraba+fecha+incidencia+255+dtoss
+        Print #NFic, RegImpSS
+        
+        
+        ' irpf
+        Importe = Format(Int(DBLet(Rs!importeirpf, "N")), "00000") & Format((DBLet(Rs!importeirpf, "N") - Int(DBLet(Rs!importeirpf, "N"))) * 100, "00")
+        If DBLet(Rs!importeirpf, "N") <= 0 Then
+            Importe = Importe & "+"
+        Else
+            Importe = Importe & "-"
+        End If
+        
+        Importe = Importe & "000000000+"
+        
+        RegImpIRPF = Cad & Format(Rs!CodTraba, "000000") & FecPag & "001" & "256" & Importe 'cad+codtraba+fecha+incidencia+256+irpf
+        Print #NFic, RegImpIRPF
+    
+    
+        Rs.MoveNext
+    Wend
+    
+    Set Rs = Nothing
+    
+
+    
+    Close (NFic)
+    NFic = -1
+    
+    If Regs > 0 Then GeneraFicheroA3 = True
+    Exit Function
+    
+EGen3:
+    MuestraError Err.Number, Err.Description
+    Set miRsAux = Nothing
+    If NFic > 0 Then Close (NFic)
+End Function
 
 
 
