@@ -585,15 +585,26 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                         End If
                     End If
                 End If
-        Case 14: frmImpRecibos.Show vbModal 'Impresión de Recibos
+                
+        Case 14:
+                If vParamAplic.Cooperativa = 16 Then
+                    frmPagoAnticiposCoopic.Show vbModal
+                Else
+                    frmImpRecibos.Show vbModal 'Impresión de Recibos
+                End If
         Case 16:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                  If vParamAplic.Cooperativa = 9 Then   ' caso de natural de montaña
                         frmPagoRecibos.OpcionListado = 2
                         frmPagoRecibos.Show vbModal 'Pago de Recibos
-                 Else ' caso de valsur y de alzira
+                 Else
+                    If vParamAplic.Cooperativa = 16 Then
+                        AbrirListadoNominas (37)
+                    Else
+                       'caso de valsur y de alzira
                         frmPagoRecibos.OpcionListado = 1
                         frmPagoRecibos.Show vbModal 'Pago de Recibos
+                    End If
                  End If
                  
         Case 17: frmImpAridoc.Tipo = 4 ' Integracion de aridoc: Recibos de Nóminas
@@ -1201,6 +1212,39 @@ Dim i As Integer
     MDIppal.mnRec_AlmTrasCampos(1).visible = (vParamAplic.Cooperativa = 1)
     
     
+    If vParamAplic.Cooperativa = 16 Then
+        MDIppal.mnP_PreNominas(5).Enabled = False
+        MDIppal.mnP_PreNominas(5).visible = False
+        MDIppal.mnP_PreNominas(10).Enabled = False
+        MDIppal.mnP_PreNominas(10).visible = False
+        MDIppal.mnP_PreNominas(9).visible = False
+        
+        MDIppal.mnP_PreNominas(21).Enabled = False
+        MDIppal.mnP_PreNominas(21).visible = False
+        
+        MDIppal.mnP_PreNominas(22).Enabled = False
+        MDIppal.mnP_PreNominas(22).visible = False
+        
+        MDIppal.mnP_PreNominas(14).Caption = "Generar Anticipo"
+        MDIppal.mnP_PreNominas(16).Caption = "Generar Nómina"
+    Else
+        MDIppal.mnP_PreNominas(5).Enabled = True
+        MDIppal.mnP_PreNominas(5).visible = True
+        MDIppal.mnP_PreNominas(10).Enabled = True
+        MDIppal.mnP_PreNominas(10).visible = True
+        MDIppal.mnP_PreNominas(9).visible = True
+        
+        MDIppal.mnP_PreNominas(21).Enabled = True
+        MDIppal.mnP_PreNominas(21).visible = True
+        
+        MDIppal.mnP_PreNominas(22).Enabled = True
+        MDIppal.mnP_PreNominas(22).visible = True
+        
+        MDIppal.mnP_PreNominas(14).Caption = "Impresión Recibos"
+        MDIppal.mnP_PreNominas(16).Caption = "Pago Recibos"
+    
+    End If
+    
 End Sub
 
 Public Sub BloqueoMenusSegunNivelUsuario()
@@ -1237,7 +1281,7 @@ Private Sub AbrirFormularioGlobalGAP()
     frmBas.Tag2 = "Descripción|T|N|||rglobalgap|descripcion|||"
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
-    frmBas.Tabla = "rglobalgap"
+    frmBas.tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "GlobalGap"

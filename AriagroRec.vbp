@@ -308,6 +308,7 @@ Form=frmManSociosPrev.frm
 Form=frmManCamposPrev.frm
 Form=frmManOrdRecogidaPrev.frm
 Form=frmEntBasculaPrev.frm
+Form=frmPagoAnticiposCoopic.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

@@ -30,9 +30,9 @@ Sub CargarTodosLosCampos()
             chv.BD_Org = "AGRO"
             '[Monica]16/11/2011: Solo si es Alzira es SCAMP1
             If vParamAplic.Cooperativa = 4 Then
-                chv.Tabla = "SCAMP1"
+                chv.tabla = "SCAMP1"
             Else
-                chv.Tabla = "SCAMPO"
+                chv.tabla = "SCAMPO"
             End If
             chv.Oper = "I"
             chv.Fecha = Format(Date, "dd/mm/yyyy")
@@ -67,15 +67,19 @@ Sub CargarUnCampo(codcampo As Long, Tipo As String, Optional OldCadena As String
         cmp.hanegada = 0 ' no interesa en trazatec
         cmp.numarbol = 0 ' tampoco interesa
         cmp.Poligono = Rs!Poligono
+        If vParamAplic.Cooperativa = 16 Then
+            cmp.TipoProdu = Rs!codigoggap
+        End If
+        
         '-- Y ahora el objeto chivato para grabar
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
         '[Monica]16/11/2011: solo en Alzira es la tabla SCAMP1
         If vParamAplic.Cooperativa = 4 Then
-            chv.Tabla = "SCAMP1"
+            chv.tabla = "SCAMP1"
         Else
-            chv.Tabla = "SCAMPO"
+            chv.tabla = "SCAMPO"
         End If
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
@@ -122,7 +126,7 @@ Sub CargarUnSocio(Codsocio As Long, Tipo As String)
         Set soc = New GRPTC_Socio
         '-- vamos cargando los diferentes valores
         soc.Codsocio = Rs!Codsocio
-        soc.nifsocio = Rs!nifsocio
+        soc.nifSocio = Rs!nifSocio
         soc.nomsocio = Rs!nomsocio
         soc.domsocio = Rs!dirsocio
         soc.telsocio = DBLet(Rs!telsoci1)
@@ -131,7 +135,7 @@ Sub CargarUnSocio(Codsocio As Long, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SSOCIO"
+        chv.tabla = "SSOCIO"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -170,7 +174,7 @@ Sub CargarUnaPoblacion(CodPobla As String, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SPOBLA"
+        chv.tabla = "SPOBLA"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -208,7 +212,7 @@ Sub CargarUnaCuadrilla(codcapat As Long, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SCAPAT"
+        chv.tabla = "SCAPAT"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -248,7 +252,7 @@ Sub CargarUnaPartida(codparti As Long, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SPARTI"
+        chv.tabla = "SPARTI"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -287,7 +291,7 @@ Sub CargarUnVehiculo(codTrans As String, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SCAMIO"
+        chv.tabla = "SCAMIO"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -327,7 +331,7 @@ Sub CargarUnProducto(codprodu As Long, Tipo As String)
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SPRODU"
+        chv.tabla = "SPRODU"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"
@@ -366,7 +370,7 @@ Sub CargarUnaVariedad(codvarie As Long, Tipo As String, Optional OldCadena As St
         Set chv = New GRPTC_Chivato
         chv.Id = 0 'ya lo montará en el momento de la grabación
         chv.BD_Org = "AGRO"
-        chv.Tabla = "SVARIE"
+        chv.tabla = "SVARIE"
         chv.Oper = Tipo
         chv.Fecha = Format(Date, "dd/mm/yyyy")
         chv.Sep = "&"

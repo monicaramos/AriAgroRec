@@ -505,7 +505,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -525,18 +525,18 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub Check1_Click(Index As Integer)
-Dim i As Integer
+Dim I As Integer
     Select Case Index
         Case 2
-            For i = 0 To 1
-                Check1(i).Enabled = (Check1(2).Value = 0)
-            Next i
+            For I = 0 To 1
+                Check1(I).Enabled = (Check1(2).Value = 0)
+            Next I
 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje daba error y lo he comentado
 '            Check1(3).Enabled = (Check1(2).Value = 0)
         Case 3
-            For i = 0 To 2
-                Check1(i).Enabled = (Check1(3).Value = 0)
-            Next i
+            For I = 0 To 2
+                Check1(I).Enabled = (Check1(3).Value = 0)
+            Next I
     End Select
 End Sub
 
@@ -624,7 +624,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                 cadNombreRPT = nomDocu
                 
                 frmImprimir.NombreRPT = cadNombreRPT '"rInfHorasMensNatural.rpt"
-                Tabla = "(rrecibosnomina INNER JOIN straba ON rrecibosnomina.codtraba = straba.codtraba) "
+                tabla = "(rrecibosnomina INNER JOIN straba ON rrecibosnomina.codtraba = straba.codtraba) "
                 
                 cadSelect = Replace(cadSelect, "horas.fecharec", "rrecibosnomina.fechahora")
                 cadFormula = Replace(cadFormula, "horas.fecharec", "rrecibosnomina.fechahora")
@@ -644,7 +644,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     numParam = numParam + 1
                     
                     
-                    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
+                    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
                                
                     If Me.Check1(0).Value = 0 Then
                         frmImprimir.NombreRPT = "rInfHorasMens.rpt"
@@ -656,8 +656,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     
                 Else
                     ' detallamos los costes de los partes
-                    Tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
-                    Tabla = "(" & Tabla & ") INNER JOIN rpartes_trabajador ON horas.nroparte = rpartes_trabajador.nroparte and rpartes_trabajador.codtraba = horas.codtraba "
+                    tabla = "(horas INNER JOIN straba ON horas.codtraba = straba.codtraba) "
+                    tabla = "(" & tabla & ") INNER JOIN rpartes_trabajador ON horas.nroparte = rpartes_trabajador.nroparte and rpartes_trabajador.codtraba = horas.codtraba "
                     
                     frmImprimir.NombreRPT = "rInfHorasMensDetalle.rpt"
                 
@@ -671,7 +671,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     End Select
     
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(Tabla, cadSelect) Then
+    If HayRegParaInforme(tabla, cadSelect) Then
         LlamarImprimir
     End If
 
@@ -701,7 +701,7 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
-Dim i As Integer
+Dim I As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -748,15 +748,15 @@ Dim i As Integer
     W = 6660
     FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
-    Tabla = "horas"
+    tabla = "horas"
         
     CargaCombo
         
-    For i = 0 To Check1.Count - 1
+    For I = 0 To Check1.Count - 1
         '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
-        Check1(i).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-        Check1(i).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
-    Next i
+        Check1(I).Enabled = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+        Check1(I).visible = (vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 9)
+    Next I
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
@@ -878,19 +878,19 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (indice)
+    imgFecha_Click (Indice)
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -981,35 +981,35 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmManTraba(indice As Integer)
-    indCodigo = indice + 4
+Private Sub AbrirFrmManTraba(Indice As Integer)
+    indCodigo = Indice + 4
     Set frmTra = New frmManTraba
     frmTra.DatosADevolverBusqueda = "0|2|"
     frmTra.Show vbModal
     Set frmTra = Nothing
 End Sub
 
-Private Sub AbrirFrmManFPago(indice As Integer)
+Private Sub AbrirFrmManFPago(Indice As Integer)
 
     Set frmFPa = New frmComercial
     
-    AyudaFPagoCom frmFPa, txtcodigo(indice)
+    AyudaFPagoCom frmFPa, txtcodigo(Indice)
     
     Set frmFPa = Nothing
     
-    PonerFoco txtcodigo(indice)
+    PonerFoco txtcodigo(Indice)
 End Sub
 
-Private Sub AbrirFrmManAlm(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmManAlm(Indice As Integer)
+    indCodigo = Indice
     
     Set frmAlm = New frmComercial
     
-    AyudaAlmacenCom frmAlm, txtcodigo(indice)
+    AyudaAlmacenCom frmAlm, txtcodigo(Indice)
     
     Set frmAlm = Nothing
     
-    PonerFoco txtcodigo(indice)
+    PonerFoco txtcodigo(Indice)
 End Sub
 
 
@@ -1017,7 +1017,7 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
