@@ -691,7 +691,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Tabla1 As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
@@ -699,7 +699,7 @@ Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
@@ -761,7 +761,7 @@ Dim nTabla As String
     nHasta = txtNombre(13).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codsocio}"
+        Codigo = "{" & tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
     End If
@@ -792,7 +792,7 @@ Dim nTabla As String
     nHasta = txtNombre(15).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codvarie}"
+        Codigo = "{" & tabla & ".codvarie}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
@@ -807,7 +807,7 @@ Dim nTabla As String
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codpobla}"
+        Codigo = "{" & tabla & ".codpobla}"
         TipCod = "T"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHPoblacion=""") Then Exit Sub
     End If
@@ -819,7 +819,7 @@ Dim nTabla As String
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".fecalbar}"
+        Codigo = "{" & tabla & ".fecalbar}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
@@ -833,7 +833,7 @@ Dim nTabla As String
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
                     'Cadena para seleccion Desde y Hasta
-            Codigo = "{" & Tabla & ".numalbar}"
+            Codigo = "{" & tabla & ".numalbar}"
             TipCod = "N"
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHAlbaran=""") Then Exit Sub
         End If
@@ -905,7 +905,13 @@ Dim nTabla As String
                 cadTitulo = "Extracto Entradas Almazara Socio/Variedad"
             
             Case 2 ' reimpresion de albaranes de almazara
-                cadNombreRPT = "CasAlmzAlbaran.rpt" '"CasAlmzAlbaran.rpt"
+                indRPT = 57 ' impresion de albaranes
+                
+                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+                
+                cadNombreRPT = nomDocu ' rAlmzExtSocEntradas.rpt
+                
+'                cadNombreRPT = "CasAlmzAlbaran.rpt" '"CasAlmzAlbaran.rpt"
                 cadTitulo = "Impresión Albaranes de Almazara"
         End Select
         
@@ -960,7 +966,7 @@ Dim List As Collection
     FrameEntradaBasculaVisible True, H, W
     indFrame = 1
     
-    Tabla = "rhisfruta"
+    tabla = "rhisfruta"
     
     
     Select Case OpcionListado
@@ -1028,7 +1034,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -1039,16 +1045,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1113,19 +1119,19 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 0, 1
-            indice = Index + 6
+            Indice = Index + 6
     End Select
 
 
-    imgFec(0).Tag = indice '<===
+    imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtcodigo(Indice) '<===
     ' ********************************************
 End Sub
 
@@ -1164,19 +1170,19 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -1283,8 +1289,8 @@ Private Sub LlamarImprimir()
 End Sub
 
 
-Private Sub AbrirFrmPoblacion(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmPoblacion(Indice As Integer)
+    indCodigo = Indice
     Set frmPob = New frmManPueblos
     frmPob.Caption = "Pueblos"
     frmPob.DatosADevolverBusqueda = "0|1|"
@@ -1293,26 +1299,26 @@ Private Sub AbrirFrmPoblacion(indice As Integer)
 End Sub
 
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmClase(indice As Integer)
-    indCodigo = indice + 14
+Private Sub AbrirFrmClase(Indice As Integer)
+    indCodigo = Indice + 14
     
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtcodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
