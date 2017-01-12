@@ -81,7 +81,7 @@ Public Function GenXML() As String
             mXML = mXML & "poligono=""" & CStr(mvarpoligono) & """ "
             
             If vParamAplic.Cooperativa = 16 Then
-                mXML = mXML & "tipoproducion=""" & CStr(mvarTipoProdu) & """ "
+                mXML = mXML & "tipoproduccion=""" & CStr(mvarTipoProdu) & """ "
             End If
             
         mXML = mXML & " />"

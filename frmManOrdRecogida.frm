@@ -117,7 +117,6 @@ Begin VB.Form frmManOrdRecogida
             EndProperty
             BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Ver Todos"
-               Object.Tag             =   "0"
             EndProperty
             BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Style           =   3
@@ -1102,7 +1101,7 @@ End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
 
-    If Index = 0 Then cmdAceptar.SetFocus
+    If Index = 0 Then CmdAceptar.SetFocus
 
 End Sub
 
@@ -1296,7 +1295,7 @@ Dim B As Boolean
     
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1

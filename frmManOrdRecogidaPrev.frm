@@ -108,7 +108,6 @@ Begin VB.Form frmManOrdRecogidaPrev
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Ver Todos"
-               Object.Tag             =   "0"
             EndProperty
          EndProperty
       End
@@ -497,7 +496,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

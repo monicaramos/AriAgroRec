@@ -371,8 +371,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     
 Dim cadSelect1 As String
 Dim cadSelect2 As String
-Dim ctabla As String
-Dim Sql As String
+Dim cTabla As String
+Dim SQL As String
 
     
     If Not DatosOK Then Exit Sub
@@ -434,7 +434,7 @@ End Sub
 
 
 Private Sub RepetirProcesoCoopic()
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
@@ -477,22 +477,22 @@ On Error GoTo eRepetirProcesoCoopic
     BorrarTMP
     CrearTMP
         
-    Sql = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F") & " and hayembargo = 0 "
-    IdContador = DevuelveValor(Sql)
+    SQL = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F") & " and hayembargo = 0 "
+    IdContador = DevuelveValor(SQL)
     
-    Sql = "select count(*) from rrecibosnomina where idcontador = " & DBSet(IdContador, "N") & " and hayembargo = 0"
-    If TotalRegistros(Sql) = 0 Then
+    SQL = "select count(*) from rrecibosnomina where idcontador = " & DBSet(IdContador, "N") & " and hayembargo = 0"
+    If TotalRegistros(SQL) = 0 Then
         Mens = "No hay anticipos, debe realizar el proceso."
         B = False
     Else
-        B = GeneraFicheroA3(True, IdContador, txtCodigo(20).Text)
+        B = GeneraFicheroA3(IdContador, txtCodigo(20).Text)
     End If
     
     
     If B Then
         Mens = "Copiar Fichero"
-        If CopiarFicheroA3 Then
-        
+        If CopiarFicheroA3("AnticipoA3.txt", txtCodigo(20).Text) Then
+            B = True
         Else
             B = False
         End If
@@ -512,8 +512,8 @@ eRepetirProcesoCoopic:
 End Sub
 
 
-Private Function DireccionesOk(ctabla As String, cwhere As String) As Boolean
-Dim Sql As String
+Private Function DireccionesOk(cTabla As String, cWhere As String) As Boolean
+Dim SQL As String
 Dim cadResult As String
 Dim Rs As ADODB.Recordset
 
@@ -521,11 +521,11 @@ Dim Rs As ADODB.Recordset
     
     DireccionesOk = False
 
-    Sql = "Select straba.* FROM " & ctabla & "  WHERE " & cwhere
-    Sql = Sql & " and (domtraba is null or domtraba = '' or codpobla is null or codpobla = ''  or pobtraba is null or pobtraba is null or protraba is null or protraba = '') "
+    SQL = "Select straba.* FROM " & cTabla & "  WHERE " & cWhere
+    SQL = SQL & " and (domtraba is null or domtraba = '' or codpobla is null or codpobla = ''  or pobtraba is null or pobtraba is null or protraba is null or protraba = '') "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cadResult = ""
     While Not Rs.EOF
@@ -1053,7 +1053,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -1076,22 +1076,22 @@ EDatosOK:
 End Function
 
 
-Private Function ActualizarRegistros(tabla As String, cwhere As String) As Boolean
-Dim Sql As String
+Private Function ActualizarRegistros(tabla As String, cWhere As String) As Boolean
+Dim SQL As String
     On Error GoTo eActualizarRegistros
     
     ActualizarRegistros = False
     
-    cwhere = QuitarCaracterACadena(cwhere, "{")
-    cwhere = QuitarCaracterACadena(cwhere, "}")
-    cwhere = QuitarCaracterACadena(cwhere, "_1")
+    cWhere = QuitarCaracterACadena(cWhere, "{")
+    cWhere = QuitarCaracterACadena(cWhere, "}")
+    cWhere = QuitarCaracterACadena(cWhere, "_1")
 
-    Sql = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
-    Sql = Sql & " where " & cwhere
-    Sql = Sql & " and horas.codtraba = straba.codtraba"
+    SQL = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
+    SQL = SQL & " where " & cWhere
+    SQL = SQL & " and horas.codtraba = straba.codtraba"
 '    (codtraba, fechahora) in (select horas.codtraba, horas.fechahora from " & tabla & " where " & cWhere & ")"
     
-    conn.Execute Sql
+    conn.Execute SQL
         
     ActualizarRegistros = True
     
@@ -1113,17 +1113,17 @@ End Sub
 Public Function CrearTMP() As Boolean
 'Crea una temporal donde inserta la clave primaria de las
 'facturas seleccionadas para facturar y trabaja siempre con ellas
-Dim Sql As String
+Dim SQL As String
     
     On Error GoTo ECrear
     
     CrearTMP = False
     
-    Sql = "CREATE TEMPORARY TABLE tmpImpor ( "
-    Sql = Sql & "codtraba int(6) unsigned NOT NULL default '0',"
-    Sql = Sql & "importe decimal(12,2)  NOT NULL default '0')"
+    SQL = "CREATE TEMPORARY TABLE tmpImpor ( "
+    SQL = SQL & "codtraba int(6) unsigned NOT NULL default '0',"
+    SQL = SQL & "importe decimal(12,2)  NOT NULL default '0')"
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     CrearTMP = True
     
@@ -1131,8 +1131,8 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMP = False
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmpImpor;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmpImpor;"
+        conn.Execute SQL
     End If
 End Function
 
@@ -1168,48 +1168,13 @@ ecopiarfichero:
     Err.Clear
 End Function
 
-Public Function CopiarFicheroA3() As Boolean
-Dim nomFich As String
-
-On Error GoTo ecopiarfichero
-
-    CopiarFicheroA3 = False
-    ' abrimos el commondialog para indicar donde guardarlo
-'    Me.CommonDialog1.InitDir = App.path
-
-'    Me.CommonDialog1.DefaultExt = "txt"
-'
-'    CommonDialog1.Filter = "Archivos txt|txt|"
-'    CommonDialog1.FilterIndex = 1
-'
-'    ' copiamos el primer fichero
-'    CommonDialog1.FileName = "anticipoA3.txt"
-'    Me.CommonDialog1.ShowSave
-    
-    If Dir("c:\ariadna\enlaceA3", vbDirectory) <> "" Then
-        
-        FileCopy App.Path & "\anticipoA3.txt", "C:\Ariadna\EnlaceA3\anticipoA3" & Format(txtCodigo(20).Text, "yyyymmdd") & ".txt"
-    Else
-        MkDir ("c:\ariadna\enlaceA3")
-        FileCopy App.Path & "\anticipoA3.txt", "C:\Ariadna\EnlaceA3\anticipoA3" & Format(txtCodigo(20).Text, "yyyymmdd") & ".txt"
-    End If
-    
-    CopiarFicheroA3 = True
-    Exit Function
-
-ecopiarfichero:
-    If Err.Number <> 0 Then
-        MuestraError Err.Number, Err.Description
-    End If
-    Err.Clear
-End Function
 
 
 
 
 
 Private Sub ProcesarCambiosCoopic(cadWHERE As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
@@ -1262,27 +1227,27 @@ On Error GoTo eProcesarCambiosCoopic
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    Sql = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    SQL = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Pb2.visible = True
     CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     
     Sql3 = "select max(idcontador) from rrecibosnomina"
     Max = DevuelveValor(Sql3) + 1
     
-    Sql = "select horas.codtraba, horas.fechahora , sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
-    Sql = Sql & " group by horas.codtraba, horas.fechahora "
-    Sql = Sql & " order by 1, 2 "
+    SQL = "select horas.codtraba, horas.fechahora , sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    SQL = SQL & " group by horas.codtraba, horas.fechahora "
+    SQL = SQL & " order by 1, 2 "
         
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Dim AntCodTraba As Long
     Dim ActCodTraba As Long
@@ -1465,7 +1430,7 @@ On Error GoTo eProcesarCambiosCoopic
     End If
     
     ' generamos el fichero plano del anticipo
-    B = GeneraFicheroA3(True, Max, txtCodigo(20).Text)
+    B = GeneraFicheroA3(Max, txtCodigo(20).Text)
     
     vSeccion.CerrarConta
     Set vSeccion = Nothing
@@ -1475,7 +1440,7 @@ On Error GoTo eProcesarCambiosCoopic
     If B Then
         Mens = "Copiar fichero"
         
-        CopiarFicheroA3
+        CopiarFicheroA3 "AnticipoA3.txt", txtCodigo(20).Text
         
         If B Then
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
@@ -1489,8 +1454,8 @@ On Error GoTo eProcesarCambiosCoopic
             LlamarImprimir
             
             '[Monica]17/10/2016: impresion de los impagados de Picassent
-            Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
-            If CInt(DevuelveValor(Sql)) <> 0 Then
+            SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
+            If CInt(DevuelveValor(SQL)) <> 0 Then
                 CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
                 CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(16).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=1|"
                 numParam = 4
@@ -1504,13 +1469,13 @@ On Error GoTo eProcesarCambiosCoopic
             
             If Not Repetir Then
                 If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                    Sql = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtCodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
-                    conn.Execute Sql
+                    SQL = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtCodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
+                    conn.Execute SQL
                 Else
-                    Sql = "delete from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F")
-                    Sql = Sql & " and idcontador = " & DBSet(Max, "N")
+                    SQL = "delete from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F")
+                    SQL = SQL & " and idcontador = " & DBSet(Max, "N")
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 End If
             End If
         Else
@@ -1535,11 +1500,11 @@ End Sub
 
 
 Private Function AnticiposPendientes(CodTraba As String) As Currency
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select sum(importe) from horasanticipos where codtraba = " & DBSet(CodTraba, "N")
-    Sql = Sql & " and descontado = 0 "
+    SQL = "select sum(importe) from horasanticipos where codtraba = " & DBSet(CodTraba, "N")
+    SQL = SQL & " and descontado = 0 "
     
-    AnticiposPendientes = DevuelveValor(Sql)
+    AnticiposPendientes = DevuelveValor(SQL)
     
 End Function

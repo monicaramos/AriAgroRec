@@ -59,7 +59,6 @@ Begin VB.Form frmManCalibrador
             EndProperty
             BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Ver Todos"
-               Object.Tag             =   "0"
             EndProperty
             BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Style           =   3
@@ -638,37 +637,37 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Integer
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
     BuscaChekc = ""
     
-    b = (Modo = 2)
-    If b Then
+    B = (Modo = 2)
+    If B Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not b
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not B
+    Next I
     
-    txtAux2(1).visible = Not b
-    txtAux2(2).visible = Not b
-    btnBuscar(0).visible = Not b
-    btnBuscar(1).visible = Not b
+    txtAux2(1).visible = Not B
+    txtAux2(2).visible = Not B
+    btnBuscar(0).visible = Not B
+    btnBuscar(1).visible = Not B
 
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    CmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -686,30 +685,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
     
-    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnImprimir.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnImprimir.Enabled = B
     
 End Sub
 
@@ -737,9 +736,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
 
@@ -760,9 +759,9 @@ Private Sub BotonBuscar()
     CargaGrid "rcalidad_calibrador.codvarie = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
@@ -771,13 +770,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -809,9 +808,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(1).Top = alto
@@ -823,7 +822,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -838,18 +837,18 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar la linea del Calibrador para la Calidad?"
-    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    Sql = Sql & vbCrLf & "Calidad: " & adodc1.Recordset.Fields(3)
-    Sql = Sql & vbCrLf & "Linea: " & adodc1.Recordset.Fields(4)
+    SQL = "¿Seguro que desea eliminar la linea del Calibrador para la Calidad?"
+    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    SQL = SQL & vbCrLf & "Calidad: " & adodc1.Recordset.Fields(3)
+    SQL = SQL & vbCrLf & "Linea: " & adodc1.Recordset.Fields(4)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rcalidad_calibrador where codvarie=" & adodc1.Recordset!codvarie
-        Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
-        Sql = Sql & " and numlinea = " & adodc1.Recordset!numlinea
-        conn.Execute Sql
+        SQL = "Delete from rcalidad_calibrador where codvarie=" & adodc1.Recordset!codvarie
+        SQL = SQL & " and codcalid = " & adodc1.Recordset!codcalid
+        SQL = SQL & " and numlinea = " & adodc1.Recordset!numlinea
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -884,24 +883,24 @@ Private Sub btnBuscar_Click(Index As Integer)
     Select Case Index
         Case 0 'variedades de comercial
             
-            indice = Index
+            Indice = Index
             Set frmVar = New frmComVar
             frmVar.DatosADevolverBusqueda = "0|1|"
-            frmVar.CodigoActual = txtAux(indice).Text
+            frmVar.CodigoActual = txtAux(Indice).Text
             frmVar.Show vbModal
             Set frmVar = Nothing
-            PonerFoco txtAux(indice)
+            PonerFoco txtAux(Indice)
     
         Case 1 'calidades
             
-            indice = Index
+            Indice = Index
             Set frmCal = New frmManCalidades
             If txtAux(0).Text <> "" Then frmCal.ParamVariedad = txtAux(0).Text
             frmCal.DatosADevolverBusqueda = "0|2|3|"
-            frmCal.CodigoActual = txtAux(indice).Text
+            frmCal.CodigoActual = txtAux(Indice).Text
             frmCal.Show vbModal
             Set frmCal = Nothing
-            PonerFoco txtAux(indice)
+            PonerFoco txtAux(Indice)
     
     End Select
     
@@ -910,7 +909,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim i As Integer
+    Dim I As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -923,7 +922,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOk Then
+            If DatosOK Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -942,10 +941,10 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 4 'MODIFICAR
-            If DatosOk Then
+            If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -955,7 +954,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -989,8 +988,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -998,18 +997,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1103,13 +1102,13 @@ End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Calidad
-    txtAux(indice).Text = Format(RecuperaValor(CadenaSeleccion, 2), "00") 'codcalid
+    txtAux(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 2), "00") 'codcalid
     txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 3) 'nombre calidad
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Variedad comercial
-    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
+    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
     txtAux2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
 End Sub
 
@@ -1174,24 +1173,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     
-    If ParamVariedad <> "" Then Sql = Sql & " and rcalidad_calibrador.codvarie = " & ParamVariedad
+    If ParamVariedad <> "" Then SQL = SQL & " and rcalidad_calibrador.codvarie = " & ParamVariedad
     
     
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY rcalidad_calibrador.codvarie, rcalidad_calibrador.codcalid, rcalidad_calibrador.numlinea"
+    SQL = SQL & " ORDER BY rcalidad_calibrador.codvarie, rcalidad_calibrador.codcalid, rcalidad_calibrador.numlinea"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Variedad|1100|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Denominación|2300|;"
@@ -1219,7 +1218,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
@@ -1250,62 +1249,62 @@ Private Sub txtAux_LostFocus(Index As Integer)
     
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
-Dim Sql As String
+Dim B As Boolean
+Dim SQL As String
 Dim Mens As String
 
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N", "numlinea", txtAux(2).Text, "N")
-        If Sql <> "" Then
+        SQL = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N", "numlinea", txtAux(2).Text, "N")
+        If SQL <> "" Then
             MsgBox "Linea de calibrador existente para esta calidad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
-            b = False
+            B = False
         End If
     End If
     
-    If b And (Modo = 3 Or Modo = 4) Then
-        Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        Sql = Sql & " and nomcalibrador1 = " & DBSet(txtAux(3).Text, "T")
+    If B And (Modo = 3 Or Modo = 4) Then
+        SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        SQL = SQL & " and nomcalibrador1 = " & DBSet(txtAux(3).Text, "T")
     
-        If TotalRegistros(Sql) <> 0 Then
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El nombre que utiliza el Calibrador 1 de esta calidad está asignada a otra. Revise.", vbExclamation
             PonerFoco txtAux(4)
-            b = False
+            B = False
         End If
     End If
     
-    If b And (Modo = 3 Or Modo = 4) Then
-        Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        Sql = Sql & " and nomcalibrador2 = " & DBSet(txtAux(4).Text, "T")
+    If B And (Modo = 3 Or Modo = 4) Then
+        SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        SQL = SQL & " and nomcalibrador2 = " & DBSet(txtAux(4).Text, "T")
     
-        If TotalRegistros(Sql) <> 0 Then
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El nombre que utiliza el Calibrador 2 de esta calidad está asignada a otra. Revise.", vbExclamation
             PonerFoco txtAux(5)
-            b = False
+            B = False
         End If
     End If
     
-    If b And (Modo = 3 Or Modo = 4) Then
+    If B And (Modo = 3 Or Modo = 4) Then
         If txtAux(5).Text <> "" Then
-            Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-            Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-            Sql = Sql & " and nomcalibrador3 = " & DBSet(txtAux(5).Text, "T")
+            SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+            SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+            SQL = SQL & " and nomcalibrador3 = " & DBSet(txtAux(5).Text, "T")
         
-            If TotalRegistros(Sql) <> 0 Then
+            If TotalRegistros(SQL) <> 0 Then
                 MsgBox "El nombre que utiliza el Calibrador 3 de esta calidad está asignada a otra. Revise.", vbExclamation
                 PonerFoco txtAux(5)
-                b = False
+                B = False
             End If
         End If
     End If
-    DatosOk = b
+    DatosOK = B
 End Function
 
 
@@ -1360,7 +1359,7 @@ End Sub
 'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpress KeyAscii
 'End Sub
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
@@ -1386,7 +1385,7 @@ Dim cerrar As Boolean
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (indice)
+    btnBuscar_Click (Indice)
 End Sub

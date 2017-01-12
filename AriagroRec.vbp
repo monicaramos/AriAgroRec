@@ -309,6 +309,7 @@ Form=frmManCamposPrev.frm
 Form=frmManOrdRecogidaPrev.frm
 Form=frmEntBasculaPrev.frm
 Form=frmPagoAnticiposCoopic.frm
+Module=ModNominaA3; ModNominaA3.bas
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

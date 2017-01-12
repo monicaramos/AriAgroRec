@@ -59,7 +59,6 @@ Begin VB.Form frmManSituacion
             EndProperty
             BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Ver Todos"
-               Object.Tag             =   "0"
             EndProperty
             BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Style           =   3
@@ -495,7 +494,7 @@ Dim B As Boolean
     
     Combo1(0).visible = Not B
     
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
