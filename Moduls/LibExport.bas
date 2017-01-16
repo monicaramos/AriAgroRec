@@ -3,13 +3,13 @@ Option Explicit
 
 Sub CargarTodosLosCampos()
     '-- Utilidad que carga todos los campos de la base de datos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim cmp As GRPTC_Campo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
@@ -24,6 +24,12 @@ Sub CargarTodosLosCampos()
             cmp.hanegada = 0 ' no interesa en trazatec
             cmp.numarbol = 0 ' tampoco interesa
             cmp.Poligono = Rs!Poligono
+            
+            If vParamAplic.Cooperativa = 16 Then
+                cmp.TipoProdu = DBLet(Rs!codigoggap, "N")
+            End If
+            
+            
             '-- Y ahora el objeto chivato para grabar
             Set chv = New GRPTC_Chivato
             chv.Id = 0 'ya lo montará en el momento de la grabación
@@ -47,14 +53,14 @@ Sub CargarTodosLosCampos()
 End Sub
 
 Sub CargarUnCampo(codcampo As Long, Tipo As String, Optional OldCadena As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim cmp As GRPTC_Campo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
-    Sql = Sql & " and a.codcampo = " & CStr(codcampo)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select a.*, b.codprodu from rcampos as a , variedades as b where b.codvarie = a.codvarie"
+    SQL = SQL & " and a.codcampo = " & CStr(codcampo)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set cmp = New GRPTC_Campo
@@ -67,8 +73,9 @@ Sub CargarUnCampo(codcampo As Long, Tipo As String, Optional OldCadena As String
         cmp.hanegada = 0 ' no interesa en trazatec
         cmp.numarbol = 0 ' tampoco interesa
         cmp.Poligono = Rs!Poligono
+        
         If vParamAplic.Cooperativa = 16 Then
-            cmp.TipoProdu = Rs!codigoggap
+            cmp.TipoProdu = DBLet(Rs!codigoggap, "N")
         End If
         
         '-- Y ahora el objeto chivato para grabar
@@ -113,14 +120,14 @@ End Sub
 
 
 Sub CargarUnSocio(Codsocio As Long, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim soc As GRPTC_Socio
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from rsocios "
-    Sql = Sql & " where codsocio = " & CStr(Codsocio)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from rsocios "
+    SQL = SQL & " where codsocio = " & CStr(Codsocio)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set soc = New GRPTC_Socio
@@ -156,14 +163,14 @@ End Sub
 
 
 Sub CargarUnaPoblacion(CodPobla As String, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim pob As GRPTC_Poblacion
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from rpueblos "
-    Sql = Sql & " where codpobla = '" & CodPobla & "'"
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from rpueblos "
+    SQL = SQL & " where codpobla = '" & CodPobla & "'"
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set pob = New GRPTC_Poblacion
@@ -194,14 +201,14 @@ Sub CargarUnaPoblacion(CodPobla As String, Tipo As String)
 End Sub
 
 Sub CargarUnaCuadrilla(codcapat As Long, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim cua As GRPTC_Cuadrilla
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from rcapataz "
-    Sql = Sql & " where codcapat = " & CStr(codcapat)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from rcapataz "
+    SQL = SQL & " where codcapat = " & CStr(codcapat)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set cua = New GRPTC_Cuadrilla
@@ -234,14 +241,14 @@ End Sub
 
 
 Sub CargarUnaPartida(codparti As Long, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim par As GRPTC_Partida
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from rpartida "
-    Sql = Sql & " where codparti = " & CStr(codparti)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from rpartida "
+    SQL = SQL & " where codparti = " & CStr(codparti)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set par = New GRPTC_Partida
@@ -273,14 +280,14 @@ End Sub
 
 
 Sub CargarUnVehiculo(codTrans As String, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim tra As GRPTC_Vehiculo
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from rtransporte "
-    Sql = Sql & " where codtrans = '" & codTrans & "'"
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from rtransporte "
+    SQL = SQL & " where codtrans = '" & codTrans & "'"
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set tra = New GRPTC_Vehiculo
@@ -313,14 +320,14 @@ End Sub
 
 
 Sub CargarUnProducto(codprodu As Long, Tipo As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim pro As GRPTC_Producto
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from productos "
-    Sql = Sql & " where codprodu = " & CStr(codprodu)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from productos "
+    SQL = SQL & " where codprodu = " & CStr(codprodu)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set pro = New GRPTC_Producto
@@ -351,14 +358,14 @@ Sub CargarUnProducto(codprodu As Long, Tipo As String)
 End Sub
 
 Sub CargarUnaVariedad(codvarie As Long, Tipo As String, Optional OldCadena As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim vari As GRPTC_Variedad
     Dim chv As GRPTC_Chivato
     '-- leemos mediante una consulta única todos los campos
-    Sql = "select * from variedades "
-    Sql = Sql & " where codvarie = " & CStr(codvarie)
-    Set Rs = dbAriagro.cursor(Sql)
+    SQL = "select * from variedades "
+    SQL = SQL & " where codvarie = " & CStr(codvarie)
+    Set Rs = dbAriagro.cursor(SQL)
     If Not Rs.EOF Then
         '-- creamos el objeto auxiliar que montará el XML de trazatec
         Set vari = New GRPTC_Variedad
