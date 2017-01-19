@@ -381,8 +381,8 @@ Dim SQL As String
                
                
     'D/H TRABAJADOR
-    cDesde = Trim(txtcodigo(18).Text)
-    cHasta = Trim(txtcodigo(19).Text)
+    cDesde = Trim(txtCodigo(18).Text)
+    cHasta = Trim(txtCodigo(19).Text)
     nDesde = txtNombre(18).Text
     nHasta = txtNombre(19).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -393,8 +393,8 @@ Dim SQL As String
     End If
             
     'D/H fecha
-    cDesde = Trim(txtcodigo(16).Text)
-    cHasta = Trim(txtcodigo(17).Text)
+    cDesde = Trim(txtCodigo(16).Text)
+    cHasta = Trim(txtCodigo(17).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{horas.fechahora}"
@@ -477,7 +477,7 @@ On Error GoTo eRepetirProcesoCoopic
     BorrarTMP
     CrearTMP
         
-    SQL = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtcodigo(20).Text, "F") & " and hayembargo = 0 "
+    SQL = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F") & " and hayembargo = 0 "
     IdContador = DevuelveValor(SQL)
     
     SQL = "select count(*) from rrecibosnomina where idcontador = " & DBSet(IdContador, "N") & " and hayembargo = 0"
@@ -485,13 +485,13 @@ On Error GoTo eRepetirProcesoCoopic
         Mens = "No hay anticipos, debe realizar el proceso."
         B = False
     Else
-        B = GeneraFicheroA3(IdContador, txtcodigo(20).Text)
+        B = GeneraFicheroA3(IdContador, txtCodigo(20).Text)
     End If
     
     
     If B Then
         Mens = "Copiar Fichero"
-        If CopiarFicheroA3("AnticipoA3.txt", txtcodigo(20).Text) Then
+        If CopiarFicheroA3("AnticipoA3.txt", txtCodigo(20).Text) Then
             B = True
         Else
             B = False
@@ -569,10 +569,10 @@ Private Sub Form_Activate()
                 PonerFocoCmb Combo1(1)
             
             Case 2 ' Pago de recibos de natural de montaña
-                txtcodigo(3).Text = Format(vParamAplic.PorcJornadaNOMI, "##0.00")
-                txtcodigo(4).Text = Format(vParamAplic.PorcSegSo1NOMI, "##0.00")
-                txtcodigo(5).Text = Format(vParamAplic.PorcSegSo2NOMI, "##0.00")
-                txtcodigo(6).Text = Format(vParamAplic.PorcIRPFNOMI, "##0.00")
+                txtCodigo(3).Text = Format(vParamAplic.PorcJornadaNOMI, "##0.00")
+                txtCodigo(4).Text = Format(vParamAplic.PorcSegSo1NOMI, "##0.00")
+                txtCodigo(5).Text = Format(vParamAplic.PorcSegSo2NOMI, "##0.00")
+                txtCodigo(6).Text = Format(vParamAplic.PorcIRPFNOMI, "##0.00")
             
                 Combo1(2).ListIndex = 0
                 Combo1(3).ListIndex = 0
@@ -628,25 +628,25 @@ Dim List As Collection
     
     
     
-    pb2.visible = False
+    Pb2.visible = False
 End Sub
 
 
 
 Private Sub frmBan_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de banco propio
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(CByte(imgFecha(2).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(CByte(imgFecha(2).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -658,7 +658,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             indCodigo = 0
             AbrirFrmManBanco (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub AbrirFrmManTraba(Indice As Integer)
@@ -702,13 +702,13 @@ Private Sub imgFecha_Click(Index As Integer)
 
     imgFecha(2).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(CByte(imgFecha(2).Tag)) '<===
+    PonerFoco txtCodigo(CByte(imgFecha(2).Tag)) '<===
     ' ********************************************
 End Sub
 
@@ -718,7 +718,7 @@ End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -761,7 +761,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -771,10 +771,10 @@ Dim cad As String, cadTipo As String 'tipo cliente
     Select Case Index
             
         Case 16, 17, 20   'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
         Case 18, 19 ' trabajador
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "straba", "nomtraba", "codtraba", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "straba", "nomtraba", "codtraba", "N")
             
             
     End Select
@@ -1004,11 +1004,11 @@ End Function
 Private Sub AbrirFrmManBanco(Indice As Integer)
     Set frmBan = New frmComercial
     
-    AyudaBancosCom frmBan, txtcodigo(indCodigo)
+    AyudaBancosCom frmBan, txtCodigo(indCodigo)
     
     Set frmBan = Nothing
     
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub AbrirVisReport()
@@ -1061,10 +1061,10 @@ Dim SQL As String
     B = True
 
     
-    If txtcodigo(20).Text = "" Then
+    If txtCodigo(20).Text = "" Then
         MsgBox "Debe introducir una Fecha de Anticipo.", vbExclamation
-        txtcodigo(20).Text = ""
-        PonerFoco txtcodigo(20)
+        txtCodigo(20).Text = ""
+        PonerFoco txtCodigo(20)
         B = False
     End If
     
@@ -1086,7 +1086,7 @@ Dim SQL As String
     cWhere = QuitarCaracterACadena(cWhere, "}")
     cWhere = QuitarCaracterACadena(cWhere, "_1")
 
-    SQL = "update horas, straba set fecharec = " & DBSet(txtcodigo(20).Text, "F")
+    SQL = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
     SQL = SQL & " where " & cWhere
     SQL = SQL & " and horas.codtraba = straba.codtraba"
 '    (codtraba, fechahora) in (select horas.codtraba, horas.fechahora from " & tabla & " where " & cWhere & ")"
@@ -1228,8 +1228,8 @@ On Error GoTo eProcesarCambiosCoopic
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb2.visible = True
-    CargarProgres pb2, Rs.Fields(0).Value
+    Pb2.visible = True
+    CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1239,9 +1239,9 @@ On Error GoTo eProcesarCambiosCoopic
     Sql3 = "select max(idcontador) from rrecibosnomina"
     Max = DevuelveValor(Sql3) + 1
     
-    SQL = "select horas.codtraba, horas.fechahora , sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
-    SQL = SQL & " group by horas.codtraba, horas.fechahora "
-    SQL = SQL & " order by 1, 2 "
+    SQL = "select horas.codtraba, 0, sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    SQL = SQL & " group by horas.codtraba, 2 "
+    SQL = SQL & " order by 1, 2"
         
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
@@ -1279,7 +1279,7 @@ On Error GoTo eProcesarCambiosCoopic
         ActCodTraba = DBLet(Rs!CodTraba, "N")
         
         If AntCodTraba <> ActCodTraba Then
-            IncrementarProgres pb2, 1
+            IncrementarProgres Pb2, 1
             Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & AntCodTraba & vbCrLf
             
             
@@ -1289,7 +1289,7 @@ On Error GoTo eProcesarCambiosCoopic
                 Sql3 = "insert into rrecibosnomina (codtraba, fechahora, importe, base34, porcsegso1, porcsegso2, porcirpf, "
                 Sql3 = Sql3 & "importesegso1, importesegso2, importeirpf, complemento, neto34, idcontador, hayembargo) values ("
                 Sql3 = Sql3 & DBSet(AntCodTraba, "N") & ","
-                Sql3 = Sql3 & DBSet(txtcodigo(20).Text, "F") & "," & DBSet(ImporteSinFormato(CStr(TImpbruto)), "N") & ","
+                Sql3 = Sql3 & DBSet(txtCodigo(20).Text, "F") & "," & DBSet(ImporteSinFormato(CStr(TImpbruto)), "N") & ","
                 Sql3 = Sql3 & DBSet(ImporteSinFormato(CStr(TImpBruto2)), "N") & ","
                 '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
                 'Sql3 = Sql3 & DBSet(0, "N") & ","
@@ -1304,7 +1304,7 @@ On Error GoTo eProcesarCambiosCoopic
                 conn.Execute Sql3
         
                 Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
-                Sql3 = Sql3 & DBSet(txtcodigo(20).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
+                Sql3 = Sql3 & DBSet(txtCodigo(20).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
                 
                 conn.Execute Sql3
         
@@ -1376,7 +1376,7 @@ On Error GoTo eProcesarCambiosCoopic
     Wend
     
     If HayReg Then
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & AntCodTraba & vbCrLf
         
         '[Monica]23/03/2016: si el importe es negativo no entra
@@ -1384,7 +1384,7 @@ On Error GoTo eProcesarCambiosCoopic
             Sql3 = "insert into rrecibosnomina (codtraba, fechahora, importe, base34, porcsegso1, porcsegso2, porcirpf, "
             Sql3 = Sql3 & "importesegso1, importesegso2, importeirpf, complemento, neto34, idcontador, hayembargo) values ("
             Sql3 = Sql3 & DBSet(AntCodTraba, "N") & ","
-            Sql3 = Sql3 & DBSet(txtcodigo(20).Text, "F") & "," & DBSet(ImporteSinFormato(CStr(TImpbruto)), "N") & ","
+            Sql3 = Sql3 & DBSet(txtCodigo(20).Text, "F") & "," & DBSet(ImporteSinFormato(CStr(TImpbruto)), "N") & ","
             Sql3 = Sql3 & DBSet(ImporteSinFormato(CStr(TImpBruto2)), "N") & ","
             '[Monica]05/01/2012: SegSoc pasa a ser porcentaje
             'Sql3 = Sql3 & DBSet(0, "N") & ","
@@ -1399,7 +1399,7 @@ On Error GoTo eProcesarCambiosCoopic
             conn.Execute Sql3
     
             Sql3 = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2) values (" & vUsu.Codigo & "," & DBSet(AntCodTraba, "N") & ","
-            Sql3 = Sql3 & DBSet(txtcodigo(20).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
+            Sql3 = Sql3 & DBSet(txtCodigo(20).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
             
             conn.Execute Sql3
             
@@ -1426,7 +1426,7 @@ On Error GoTo eProcesarCambiosCoopic
     End If
     
     ' generamos el fichero plano del anticipo
-    B = GeneraFicheroA3(Max, txtcodigo(20).Text)
+    B = GeneraFicheroA3(Max, txtCodigo(20).Text)
     
     vSeccion.CerrarConta
     Set vSeccion = Nothing
@@ -1436,11 +1436,11 @@ On Error GoTo eProcesarCambiosCoopic
     If B Then
         Mens = "Copiar fichero"
         
-        CopiarFicheroA3 "AnticipoA3.txt", txtcodigo(20).Text
+        CopiarFicheroA3 "AnticipoA3.txt", txtCodigo(20).Text
         
         If B Then
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
-            CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|" & "pImpagados=0|"
+            CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(16).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=0|"
             numParam = 4
             cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 0"
             cadNombreRPT = "rListadoPagos.rpt"
@@ -1453,7 +1453,7 @@ On Error GoTo eProcesarCambiosCoopic
             SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
             If CInt(DevuelveValor(SQL)) <> 0 Then
                 CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
-                CadParam = CadParam & "pFechaRecibo=""" & txtcodigo(16).Text & """|pFechaPago=""" & txtcodigo(20).Text & """|" & "pImpagados=1|"
+                CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(16).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=1|"
                 numParam = 4
                 cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 1"
                 cadNombreRPT = "rListadoPagos.rpt"
@@ -1465,10 +1465,10 @@ On Error GoTo eProcesarCambiosCoopic
             
             If Not Repetir Then
                 If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                    SQL = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtcodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
+                    SQL = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtCodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
                     conn.Execute SQL
                 Else
-                    SQL = "delete from rrecibosnomina where fechahora = " & DBSet(txtcodigo(20).Text, "F")
+                    SQL = "delete from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F")
                     SQL = SQL & " and idcontador = " & DBSet(Max, "N")
                     
                     conn.Execute SQL
