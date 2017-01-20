@@ -2991,6 +2991,7 @@ Dim Importe As Currency
             
                 Set frmTMP = New frmManPartesTMP
                 frmTMP.ParamVariedad = Text1(0).Text
+                frmTMP.FechaParte = Text1(1).Text
                 frmTMP.SoloTrabajador = 1
                 frmTMP.Show vbModal
                 Set frmTMP = Nothing
@@ -3769,7 +3770,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -3869,7 +3870,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -3877,7 +3878,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -4204,7 +4205,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not B
+    Me.cmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
@@ -4403,7 +4404,7 @@ Dim Rs As ADODB.Recordset
 
 
         Case 5 ' kilos
-            If PonerFormatoEntero(txtAux(Index)) Then CmdAceptar.SetFocus
+            If PonerFormatoEntero(txtAux(Index)) Then cmdAceptar.SetFocus
     
     End Select
 
@@ -4457,7 +4458,7 @@ Dim SQL As String
 
         Case 3 ' importe
             If txtAux2(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux2(Index), 3) Then CmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux2(Index), 3) Then cmdAceptar.SetFocus
             End If
     
     End Select
@@ -4890,7 +4891,7 @@ Dim ImporteTrab As Currency
         
         Case 4 ' importe
             If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
             End If
     End Select
     
