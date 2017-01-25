@@ -25,7 +25,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   10
       Left            =   9390
-      TabIndex        =   53
+      TabIndex        =   54
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -38,7 +38,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   9
       Left            =   8580
-      TabIndex        =   52
+      TabIndex        =   53
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -51,7 +51,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   8
       Left            =   7770
-      TabIndex        =   51
+      TabIndex        =   52
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -64,7 +64,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   7
       Left            =   6960
-      TabIndex        =   50
+      TabIndex        =   51
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -77,7 +77,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   6
       Left            =   6150
-      TabIndex        =   49
+      TabIndex        =   50
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -90,7 +90,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   5
       Left            =   5340
-      TabIndex        =   48
+      TabIndex        =   49
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -103,7 +103,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   4
       Left            =   4560
-      TabIndex        =   47
+      TabIndex        =   48
       Text            =   "Text3"
       Top             =   7590
       Width           =   785
@@ -116,7 +116,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   3
       Left            =   3750
-      TabIndex        =   46
+      TabIndex        =   47
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -129,7 +129,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   2
       Left            =   2970
-      TabIndex        =   45
+      TabIndex        =   46
       Text            =   "Text3"
       Top             =   7590
       Width           =   785
@@ -142,7 +142,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   1
       Left            =   2160
-      TabIndex        =   44
+      TabIndex        =   45
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -151,15 +151,26 @@ Begin VB.Form frmControlDestrio
       Height          =   1275
       Index           =   0
       Left            =   135
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   495
       Width           =   12225
+      Begin VB.TextBox Text1 
+         Height          =   285
+         Index           =   8
+         Left            =   11085
+         MaxLength       =   7
+         TabIndex        =   6
+         Tag             =   "Porc.Pixat|N|S|||rcontrol|porcpixat|##0.00||"
+         Text            =   "1234567"
+         Top             =   345
+         Width           =   720
+      End
       Begin VB.TextBox Text1 
          Height          =   285
          Index           =   6
          Left            =   11100
          MaxLength       =   7
-         TabIndex        =   6
+         TabIndex        =   7
          Tag             =   "Porc.Destrio|N|S|||rcontrol|porcdest|##0.00||"
          Text            =   "1234567"
          Top             =   720
@@ -205,7 +216,7 @@ Begin VB.Form frmControlDestrio
          Height          =   285
          Index           =   4
          Left            =   1950
-         TabIndex        =   28
+         TabIndex        =   29
          Text            =   "12345678901234567890"
          Top             =   720
          Width           =   3390
@@ -216,7 +227,7 @@ Begin VB.Form frmControlDestrio
          Height          =   285
          Index           =   3
          Left            =   1950
-         TabIndex        =   22
+         TabIndex        =   23
          Text            =   "12345678901234567890"
          Top             =   330
          Width           =   3390
@@ -261,18 +272,27 @@ Begin VB.Form frmControlDestrio
          Index           =   7
          Left            =   9090
          MaxLength       =   7
-         TabIndex        =   61
+         TabIndex        =   62
          Tag             =   "Ordinal|N|S|||rcontrol|ordinal|0000|S|"
          Text            =   "1234567"
          Top             =   330
          Width           =   720
       End
       Begin VB.Label Label1 
+         Caption         =   "%Pixat"
+         Height          =   255
+         Index           =   3
+         Left            =   10155
+         TabIndex        =   64
+         Top             =   375
+         Width           =   885
+      End
+      Begin VB.Label Label1 
          Caption         =   "%Destrio"
          Height          =   255
          Index           =   2
          Left            =   10170
-         TabIndex        =   60
+         TabIndex        =   61
          Top             =   750
          Width           =   885
       End
@@ -281,7 +301,7 @@ Begin VB.Form frmControlDestrio
          Height          =   255
          Index           =   1
          Left            =   7980
-         TabIndex        =   59
+         TabIndex        =   60
          Top             =   750
          Width           =   1095
       End
@@ -289,7 +309,7 @@ Begin VB.Form frmControlDestrio
          Caption         =   "Fecha"
          Height          =   255
          Left            =   5550
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   360
          Width           =   480
       End
@@ -307,7 +327,7 @@ Begin VB.Form frmControlDestrio
          Height          =   255
          Index           =   0
          Left            =   5520
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   705
          Width           =   690
       End
@@ -323,7 +343,7 @@ Begin VB.Form frmControlDestrio
          Caption         =   "Variedad"
          Height          =   255
          Left            =   180
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   375
          Width           =   690
       End
@@ -340,7 +360,7 @@ Begin VB.Form frmControlDestrio
          Height          =   255
          Index           =   1
          Left            =   180
-         TabIndex        =   21
+         TabIndex        =   22
          Top             =   750
          Width           =   690
       End
@@ -349,7 +369,7 @@ Begin VB.Form frmControlDestrio
          Height          =   255
          Index           =   0
          Left            =   7980
-         TabIndex        =   12
+         TabIndex        =   13
          Top             =   360
          Width           =   1095
       End
@@ -362,7 +382,7 @@ Begin VB.Form frmControlDestrio
       Height          =   285
       Index           =   0
       Left            =   1350
-      TabIndex        =   24
+      TabIndex        =   25
       Text            =   "Text3"
       Top             =   7590
       Width           =   790
@@ -381,7 +401,7 @@ Begin VB.Form frmControlDestrio
       ForeColor       =   &H00C00000&
       Height          =   6240
       Left            =   150
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   1800
       Width           =   12195
       Begin VB.TextBox txtAux 
@@ -392,7 +412,7 @@ Begin VB.Form frmControlDestrio
          Index           =   19
          Left            =   10680
          MaxLength       =   7
-         TabIndex        =   62
+         TabIndex        =   63
          Tag             =   "Ordinal|N|N|||rcontrol_plagas|ordinal|0000|S|"
          Text            =   "ordinal"
          Top             =   3030
@@ -407,7 +427,7 @@ Begin VB.Form frmControlDestrio
          Height          =   285
          Index           =   12
          Left            =   10830
-         TabIndex        =   58
+         TabIndex        =   59
          Text            =   "Text3"
          Top             =   5790
          Width           =   790
@@ -420,7 +440,7 @@ Begin VB.Form frmControlDestrio
          Height          =   285
          Index           =   11
          Left            =   10020
-         TabIndex        =   57
+         TabIndex        =   58
          Text            =   "Text3"
          Top             =   5790
          Width           =   790
@@ -433,7 +453,7 @@ Begin VB.Form frmControlDestrio
          Index           =   18
          Left            =   11580
          MaxLength       =   7
-         TabIndex        =   56
+         TabIndex        =   57
          Text            =   "Porcen"
          Top             =   2550
          Visible         =   0   'False
@@ -447,7 +467,7 @@ Begin VB.Form frmControlDestrio
          Index           =   17
          Left            =   10920
          MaxLength       =   7
-         TabIndex        =   55
+         TabIndex        =   56
          Text            =   "Totkilo"
          Top             =   2550
          Visible         =   0   'False
@@ -461,7 +481,7 @@ Begin VB.Form frmControlDestrio
          Index           =   0
          Left            =   3450
          MaxLength       =   10
-         TabIndex        =   43
+         TabIndex        =   44
          Text            =   "nomplag"
          Top             =   2550
          Visible         =   0   'False
@@ -475,7 +495,7 @@ Begin VB.Form frmControlDestrio
          Index           =   16
          Left            =   2790
          MaxLength       =   7
-         TabIndex        =   42
+         TabIndex        =   43
          Tag             =   "Plaga|N|N|||rcontrol_plagas|idplaga|000|S|"
          Text            =   "idplaga"
          Top             =   2550
@@ -490,7 +510,7 @@ Begin VB.Form frmControlDestrio
          Index           =   15
          Left            =   10260
          MaxLength       =   7
-         TabIndex        =   41
+         TabIndex        =   42
          Tag             =   "Kilos 11|N|S|||rcontrol_plagas|kilosplaga11|###,##0||"
          Text            =   "kilos11"
          Top             =   2550
@@ -505,7 +525,7 @@ Begin VB.Form frmControlDestrio
          Index           =   14
          Left            =   9660
          MaxLength       =   7
-         TabIndex        =   40
+         TabIndex        =   41
          Tag             =   "Kilos 10|N|S|||rcontrol_plagas|kilosplaga10|###,##0||"
          Text            =   "kilos10"
          Top             =   2550
@@ -520,7 +540,7 @@ Begin VB.Form frmControlDestrio
          Index           =   13
          Left            =   9030
          MaxLength       =   7
-         TabIndex        =   39
+         TabIndex        =   40
          Tag             =   "Kilos 9|N|S|||rcontrol_plagas|kilosplaga9|###,##0||"
          Text            =   "kilos9"
          Top             =   2550
@@ -535,7 +555,7 @@ Begin VB.Form frmControlDestrio
          Index           =   12
          Left            =   8400
          MaxLength       =   7
-         TabIndex        =   38
+         TabIndex        =   39
          Tag             =   "Kilos 8|N|S|||rcontrol_plagas|kilosplaga8|###,##0||"
          Text            =   "kilos8"
          Top             =   2550
@@ -550,7 +570,7 @@ Begin VB.Form frmControlDestrio
          Index           =   11
          Left            =   7800
          MaxLength       =   7
-         TabIndex        =   37
+         TabIndex        =   38
          Tag             =   "Kilos 7|N|S|||rcontrol_plagas|kilosplaga7|###,##0||"
          Text            =   "kilos7"
          Top             =   2550
@@ -565,7 +585,7 @@ Begin VB.Form frmControlDestrio
          Index           =   10
          Left            =   7200
          MaxLength       =   7
-         TabIndex        =   36
+         TabIndex        =   37
          Tag             =   "Kilos 6|N|S|||rcontrol_plagas|kilosplaga6|###,##0||"
          Text            =   "kilos6"
          Top             =   2550
@@ -580,7 +600,7 @@ Begin VB.Form frmControlDestrio
          Index           =   9
          Left            =   6570
          MaxLength       =   7
-         TabIndex        =   35
+         TabIndex        =   36
          Tag             =   "Kilos 5|N|S|||rcontrol_plagas|kilosplaga5|###,##0||"
          Text            =   "kilos5"
          Top             =   2550
@@ -595,7 +615,7 @@ Begin VB.Form frmControlDestrio
          Index           =   8
          Left            =   5970
          MaxLength       =   7
-         TabIndex        =   34
+         TabIndex        =   35
          Tag             =   "Kilos 4|N|S|||rcontrol_plagas|kilosplaga4|###,##0||"
          Text            =   "kilos4"
          Top             =   2550
@@ -610,7 +630,7 @@ Begin VB.Form frmControlDestrio
          Index           =   7
          Left            =   5400
          MaxLength       =   7
-         TabIndex        =   33
+         TabIndex        =   34
          Tag             =   "Kilos 3|N|S|||rcontrol_plagas|kilosplaga3|###,##0||"
          Text            =   "kilos3"
          Top             =   2550
@@ -625,7 +645,7 @@ Begin VB.Form frmControlDestrio
          Index           =   6
          Left            =   4800
          MaxLength       =   7
-         TabIndex        =   32
+         TabIndex        =   33
          Tag             =   "Kilos 2|N|S|||rcontrol_plagas|kilosplaga2|###,##0||"
          Text            =   "kilos2"
          Top             =   2550
@@ -640,7 +660,7 @@ Begin VB.Form frmControlDestrio
          Index           =   5
          Left            =   4140
          MaxLength       =   7
-         TabIndex        =   31
+         TabIndex        =   32
          Tag             =   "Kilos 1|N|S|||rcontrol_plagas|kilosplaga1|###,##0||"
          Text            =   "kilos1"
          Top             =   2550
@@ -655,7 +675,7 @@ Begin VB.Form frmControlDestrio
          Index           =   4
          Left            =   2130
          MaxLength       =   7
-         TabIndex        =   27
+         TabIndex        =   28
          Tag             =   "Campo|N|N|||rcontrol_plagas|codcampo|00000000|S|"
          Text            =   "campo"
          Top             =   2550
@@ -669,7 +689,7 @@ Begin VB.Form frmControlDestrio
          Index           =   2
          Left            =   1020
          MaxLength       =   6
-         TabIndex        =   25
+         TabIndex        =   26
          Tag             =   "Calidad|N|N|||rcontrol_plagas|codsocio|000000|S|"
          Text            =   "socio"
          Top             =   2565
@@ -684,7 +704,7 @@ Begin VB.Form frmControlDestrio
          Index           =   3
          Left            =   1440
          MaxLength       =   10
-         TabIndex        =   26
+         TabIndex        =   27
          Tag             =   "Fecha Entrada|F|N|||rcontrol_plagas|fechacla|dd/mm/yyyy|S|"
          Text            =   "fecha"
          Top             =   2550
@@ -698,7 +718,7 @@ Begin VB.Form frmControlDestrio
          Index           =   1
          Left            =   495
          MaxLength       =   6
-         TabIndex        =   18
+         TabIndex        =   19
          Tag             =   "Variedad|N|N|||rcontrol_plagas|codvarie|000000|S|"
          Text            =   "Var"
          Top             =   2565
@@ -713,7 +733,7 @@ Begin VB.Form frmControlDestrio
          Index           =   0
          Left            =   45
          MaxLength       =   16
-         TabIndex        =   17
+         TabIndex        =   18
          Tag             =   "Nro.Nota|N|N|||rcontrol_plagas|nroclasif|0000000|S|"
          Text            =   "nroclasif"
          Top             =   2565
@@ -724,7 +744,7 @@ Begin VB.Form frmControlDestrio
          Height          =   390
          Index           =   0
          Left            =   135
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   225
          Width           =   1200
          _ExtentX        =   2117
@@ -806,7 +826,7 @@ Begin VB.Form frmControlDestrio
          Height          =   5010
          Index           =   0
          Left            =   135
-         TabIndex        =   20
+         TabIndex        =   21
          Top             =   630
          Width           =   11850
          _ExtentX        =   20902
@@ -887,7 +907,7 @@ Begin VB.Form frmControlDestrio
          Height          =   240
          Index           =   0
          Left            =   120
-         TabIndex        =   54
+         TabIndex        =   55
          Top             =   5790
          Width           =   1365
       End
@@ -896,7 +916,7 @@ Begin VB.Form frmControlDestrio
       Height          =   555
       Index           =   0
       Left            =   120
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   8100
       Width           =   2865
       Begin VB.Label lblIndicador 
@@ -913,7 +933,7 @@ Begin VB.Form frmControlDestrio
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   180
          Width           =   2655
       End
@@ -923,7 +943,7 @@ Begin VB.Form frmControlDestrio
       Caption         =   "&Cancelar"
       Height          =   375
       Left            =   11325
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   8190
       Width           =   1035
    End
@@ -931,7 +951,7 @@ Begin VB.Form frmControlDestrio
       Caption         =   "&Aceptar"
       Height          =   375
       Left            =   10110
-      TabIndex        =   7
+      TabIndex        =   8
       Top             =   8190
       Width           =   1035
    End
@@ -986,7 +1006,7 @@ Begin VB.Form frmControlDestrio
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   14
+      TabIndex        =   15
       Top             =   0
       Width           =   12585
       _ExtentX        =   22199
@@ -1079,7 +1099,7 @@ Begin VB.Form frmControlDestrio
          Height          =   195
          Index           =   0
          Left            =   8520
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   120
          Width           =   1215
       End
@@ -1088,7 +1108,7 @@ Begin VB.Form frmControlDestrio
       Caption         =   "&Regresar"
       Height          =   375
       Left            =   11310
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   8190
       Visible         =   0   'False
       Width           =   1035
@@ -1249,7 +1269,7 @@ Dim NotaExistente As Boolean
 
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim CadB As String
 
 Dim VarieAnt As String
@@ -1280,7 +1300,7 @@ Private Sub btnBuscar_Click(Index As Integer)
 '            Set frmVar = Nothing
 '            PonerFoco txtAux(1)
         Case 1 'Incidencia
-            indice = 9
+            Indice = 9
             Set frmInc = New frmManInciden
             frmInc.DatosADevolverBusqueda = "0|1|"
             frmInc.CodigoActual = txtAux(9).Text
@@ -1288,7 +1308,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             Set frmInc = Nothing
             PonerFoco txtAux(9)
         Case 2 'calidades
-            indice = Index
+            Indice = Index
             Set frmCal = New frmManCalidades
             frmCal.DatosADevolverBusqueda = "2|3|"
             frmCal.CodigoActual = txtAux(2).Text
@@ -1310,7 +1330,7 @@ Private Sub cmdAceptar_Click()
             HacerBusqueda
             
         Case 3 'INSERTAR
-            If DatosOk Then
+            If DatosOK Then
                 NotaExistente = False
                 InsertarCabecera
             
@@ -1322,7 +1342,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 4  'MODIFICAR
-            If DatosOk Then
+            If DatosOK Then
 '                If Gastos Then CalcularGastos
 
                 If ModificaCabecera Then
@@ -1405,7 +1425,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1437,8 +1457,8 @@ Dim i As Integer
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
-    For i = 0 To ToolAux.Count - 1
-        With Me.ToolAux(i)
+    For I = 0 To ToolAux.Count - 1
+        With Me.ToolAux(I)
             .HotImageList = frmPpal.imgListComun_OM16
             .DisabledImageList = frmPpal.imgListComun_BN16
             .ImageList = frmPpal.imgListComun16
@@ -1446,13 +1466,13 @@ Dim i As Integer
             .Buttons(2).Image = 4   'Modificar
             .Buttons(3).Image = 5   'Borrar
         End With
-    Next i
+    Next I
     ' ***********************************
     
     'cargar IMAGES .Image =de busqueda
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
 '    Me.imgBuscar(8).Picture = frmPpal.imgListComun.ListImages(21).Picture
    
     'carga IMAGES de mail
@@ -1524,8 +1544,8 @@ End Sub
 '   En PONERMODO s'habiliten, o no, els diversos camps del
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Integer, NumReg As Byte
-Dim b As Boolean
+Dim I As Integer, NumReg As Byte
+Dim B As Boolean
 
     On Error GoTo EPonerModo
  
@@ -1547,28 +1567,28 @@ Dim b As Boolean
     
     
     '=======================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Posar Fleches de desplasament visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     '---------------------------------------------
     
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
     BloquearText1 Me, Modo
     
-    b = (Modo <> 1) And (Modo <> 3)
+    B = (Modo <> 1) And (Modo <> 3)
     'Campos Nº entrada bloqueado y en azul
-    For i = 0 To 4
-        BloquearTxt Text1(i), b, False
-    Next i
+    For I = 0 To 4
+        BloquearTxt Text1(I), B, False
+    Next I
     ' kilos mantenimiento y porcentaje de destrio solo se modifican
     BloquearTxt Text1(5), (Modo <> 1 And Modo <> 4), False
     BloquearTxt Text1(6), (Modo <> 1), False
@@ -1590,17 +1610,17 @@ Dim b As Boolean
 '    Frame4.Enabled = (Modo = 1)
 '  cambiado por esto
 '
-    For i = 0 To 1
-        imgBuscar(i).Enabled = (Modo = 1) Or (Modo = 3)
-        imgBuscar(i).visible = (Modo = 1) Or (Modo = 3)
-    Next i
+    For I = 0 To 1
+        imgBuscar(I).Enabled = (Modo = 1) Or (Modo = 3)
+        imgBuscar(I).visible = (Modo = 1) Or (Modo = 3)
+    Next I
     
     If (Modo < 2) Or (Modo = 3) Then
         CargaGrid 0, False
     End If
     
-    b = (Modo = 4) Or (Modo = 2)
-    DataGridAux(0).Enabled = b
+    B = (Modo = 4) Or (Modo = 2)
+    DataGridAux(0).Enabled = B
       
     ' ****************************************************************
     
@@ -1628,31 +1648,31 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
-Dim b As Boolean, bAux As Boolean
-Dim i As Byte
+Dim B As Boolean, bAux As Boolean
+Dim I As Byte
     
     'Barra de CAPÇALERA
     '------------------------------------------
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(4).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(7).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(7).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
     
-    b = (Modo = 2 And Data1.Recordset.RecordCount > 0) And Not DeConsulta
+    B = (Modo = 2 And Data1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(9).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(9).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     'Imprimir
     'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
@@ -1662,13 +1682,13 @@ Dim i As Byte
     ' *** si n'hi han llínies que tenen grids (en o sense tab) ***
 '++monica: si insertamos lo he quitado
 '    b = (Modo = 3 Or Modo = 4 Or Modo = 2) And Not DeConsulta
-    b = (Modo = 2) And Not DeConsulta
-    For i = 0 To ToolAux.Count - 1
-        ToolAux(i).Buttons(1).Enabled = b
-        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
-        ToolAux(i).Buttons(2).Enabled = bAux
-        ToolAux(i).Buttons(3).Enabled = bAux
-    Next i
+    B = (Modo = 2) And Not DeConsulta
+    For I = 0 To ToolAux.Count - 1
+        ToolAux(I).Buttons(1).Enabled = B
+        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
+        ToolAux(I).Buttons(2).Enabled = bAux
+        ToolAux(I).Buttons(3).Enabled = bAux
+    Next I
     
 End Sub
 
@@ -1688,8 +1708,8 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
-Dim Tabla As String
+Dim SQL As String
+Dim tabla As String
 Dim KilosTot As Long
 
     
@@ -1697,38 +1717,38 @@ Dim KilosTot As Long
     Select Case Index
                
         Case 0 'CLASIFICACION
-            Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-            Sql = Sql & " from rcontrol_plagas "
+            SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+            SQL = SQL & " from rcontrol_plagas "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE rcontrol_plagas.codvarie = -1"
+                SQL = SQL & " WHERE rcontrol_plagas.codvarie = -1"
             End If
-            Sql = Sql & " and idplaga <> 2 "
-            KilosTot = DevuelveValor(Sql)
+            SQL = SQL & " and idplaga <> 2 "
+            KilosTot = DevuelveValor(SQL)
         
-            Sql = "SELECT rcontrol_plagas.codvarie, rcontrol_plagas.fechacla, rcontrol_plagas.codsocio, rcontrol_plagas.codcampo, rcontrol_plagas.nroclasif, "
-            Sql = Sql & "rplagasaux.nomplaga, rcontrol_plagas.kilosplaga1, rcontrol_plagas.kilosplaga2, rcontrol_plagas.kilosplaga3, rcontrol_plagas.kilosplaga4, "
-            Sql = Sql & "rcontrol_plagas.kilosplaga5, rcontrol_plagas.kilosplaga6, rcontrol_plagas.kilosplaga7, rcontrol_plagas.kilosplaga8, "
-            Sql = Sql & "rcontrol_plagas.kilosplaga9, rcontrol_plagas.kilosplaga10, rcontrol_plagas.kilosplaga11, rcontrol_plagas.idplaga,"
-            Sql = Sql & "(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total, "
+            SQL = "SELECT rcontrol_plagas.codvarie, rcontrol_plagas.fechacla, rcontrol_plagas.codsocio, rcontrol_plagas.codcampo, rcontrol_plagas.nroclasif, "
+            SQL = SQL & "rplagasaux.nomplaga, rcontrol_plagas.kilosplaga1, rcontrol_plagas.kilosplaga2, rcontrol_plagas.kilosplaga3, rcontrol_plagas.kilosplaga4, "
+            SQL = SQL & "rcontrol_plagas.kilosplaga5, rcontrol_plagas.kilosplaga6, rcontrol_plagas.kilosplaga7, rcontrol_plagas.kilosplaga8, "
+            SQL = SQL & "rcontrol_plagas.kilosplaga9, rcontrol_plagas.kilosplaga10, rcontrol_plagas.kilosplaga11, rcontrol_plagas.idplaga,"
+            SQL = SQL & "(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total, "
             If KilosTot <> 0 Then
-                Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+                SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
             Else
-                Sql = Sql & "0 "
+                SQL = SQL & "0 "
             End If
-            Sql = Sql & ", ordinal "
-            Sql = Sql & " from rcontrol_plagas, rplagasaux "
+            SQL = SQL & ", ordinal "
+            SQL = SQL & " from rcontrol_plagas, rplagasaux "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE rcontrol_plagas.codvarie = -1"
+                SQL = SQL & " WHERE rcontrol_plagas.codvarie = -1"
             End If
-            Sql = Sql & " and rcontrol_plagas.idplaga = rplagasaux.idplaga "
+            SQL = SQL & " and rcontrol_plagas.idplaga = rplagasaux.idplaga "
                
     End Select
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -1762,15 +1782,15 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-Dim indice As Byte
-    indice = CByte(Me.imgFec(0).Tag)
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = CByte(Me.imgFec(0).Tag)
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Calidad
-    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codcalid
-    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codcalid
+    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmCam_DatoSeleccionado(CadenaSeleccion As String)
@@ -1786,8 +1806,8 @@ End Sub
 
 Private Sub frmInc_DatoSeleccionado(CadenaSeleccion As String)
 'Incidencias
-    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codincid
-    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codincid
+    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
@@ -1854,20 +1874,20 @@ Private Sub imgFec_Click(Index As Integer)
    frmC.NovaData = Now
    Select Case Index
         Case 0
-            indice = 1
+            Indice = 1
         Case 1
-            indice = 13
+            Indice = 13
    End Select
    
-   Me.imgFec(0).Tag = indice
+   Me.imgFec(0).Tag = Indice
    
-   PonerFormatoFecha Text1(indice)
-   If Text1(indice).Text <> "" Then frmC.NovaData = CDate(Text1(indice).Text)
+   PonerFormatoFecha Text1(Indice)
+   If Text1(Indice).Text <> "" Then frmC.NovaData = CDate(Text1(Indice).Text)
 
    Screen.MousePointer = vbDefault
    frmC.Show vbModal
    Set frmC = Nothing
-   PonerFoco Text1(indice)
+   PonerFoco Text1(Indice)
 
 End Sub
 
@@ -1876,20 +1896,20 @@ Private Sub imgZoom_Click(Index As Integer)
     Set frmZ = New frmZoom
 
     If Index = 0 Then
-        indice = 20
+        Indice = 20
         frmZ.pTitulo = "Observaciones de la Clasificación"
-        frmZ.pValor = Text1(indice).Text
+        frmZ.pValor = Text1(Indice).Text
         frmZ.pModo = Modo
     
         frmZ.Show vbModal
         Set frmZ = Nothing
             
-        PonerFoco Text1(indice)
+        PonerFoco Text1(Indice)
     End If
 End Sub
 
 Private Sub mnBuscar_Click()
-Dim i As Integer
+Dim I As Integer
     BotonBuscar
 End Sub
 
@@ -1974,7 +1994,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub BotonBuscar()
-Dim i As Integer
+Dim I As Integer
 ' ***** Si la clau primaria de la capçalera no es Text1(0), canviar-ho en <=== *****
     If Modo <> 1 Then
         LimpiarCampos
@@ -2017,27 +2037,27 @@ Private Sub HacerBusqueda()
 End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim Cad As String
+    Dim cad As String
         
     'Cridem al form
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    Cad = ""
-    Cad = Cad & "Fecha|fechacla|T||14·"  ' ParaGrid(Text1(1), 10, "Fecha")
-    Cad = Cad & "Cod|rcontrol.codsocio|T||10·" 'ParaGrid(Text1(4), 6, "Socio")
-    Cad = Cad & "Socio|nomsocio|T||30·"
-    Cad = Cad & "Cod|rcontrol.codvarie|T||10·" 'ParaGrid(Text1(3), 6, "Variedad")
-    Cad = Cad & "Variedad|nomvarie|T||20·"
-    Cad = Cad & "Campo|codcampo|T||10·" 'ParaGrid(Text1(2), 6, "Campo")
-    Cad = Cad & "Nro|nroclasif|T||6·" 'ParaGrid(Text1(0), 6, "Nro.Clasif")
+    cad = ""
+    cad = cad & "Fecha|fechacla|T||14·"  ' ParaGrid(Text1(1), 10, "Fecha")
+    cad = cad & "Cod|rcontrol.codsocio|T||10·" 'ParaGrid(Text1(4), 6, "Socio")
+    cad = cad & "Socio|nomsocio|T||30·"
+    cad = cad & "Cod|rcontrol.codvarie|T||10·" 'ParaGrid(Text1(3), 6, "Variedad")
+    cad = cad & "Variedad|nomvarie|T||20·"
+    cad = cad & "Campo|codcampo|T||10·" 'ParaGrid(Text1(2), 6, "Campo")
+    cad = cad & "Nro|nroclasif|T||6·" 'ParaGrid(Text1(0), 6, "Nro.Clasif")
     
-    If Cad <> "" Then
+    If cad <> "" Then
         
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
-        Cad = "(" & NombreTabla & " inner join variedades on rcontrol.codvarie = variedades.codvarie) inner join rsocios on rcontrol.codsocio = rsocios.codsocio "
-        frmB.vtabla = Cad 'NombreTabla
+        frmB.vCampos = cad
+        cad = "(" & NombreTabla & " inner join variedades on rcontrol.codvarie = variedades.codvarie) inner join rsocios on rcontrol.codsocio = rsocios.codsocio "
+        frmB.vtabla = cad 'NombreTabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
         frmB.vDevuelve = "0|1|3|5|6|" '*** els camps que volen que torne ***
@@ -2058,9 +2078,9 @@ Private Sub MandaBusquedaPrevia(CadB As String)
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
     If Data1.Recordset.EOF Then
@@ -2068,18 +2088,18 @@ Dim J As Integer
         Exit Sub
     End If
     
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            cad = cad & Text1(J).Text & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -2125,7 +2145,7 @@ End Sub
 
 Private Sub BotonAnyadir()
 Dim NumF As String
-Dim i As Integer
+Dim I As Integer
 
     LimpiarCampos 'Huida els TextBox
     PonerModo 3
@@ -2141,9 +2161,9 @@ Dim i As Integer
         NumF = ""
     End If
     '********************************************************************
-    For i = 0 To Text3.Count - 1
-        Text3(i).Text = ""
-    Next i
+    For I = 0 To Text3.Count - 1
+        Text3(I).Text = ""
+    Next I
        
     PonerFoco Text1(3) '*** 1r camp visible que siga PK ***
     
@@ -2163,7 +2183,7 @@ Private Sub BotonModificar()
 End Sub
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EEliminar
 
@@ -2177,10 +2197,10 @@ Dim Cad As String
     ' ***************************************************************************
 
     ' *************** canviar la pregunta ****************
-    Cad = "¿Seguro que desea eliminar el control destrio?"
-    Cad = Cad & vbCrLf & "Variedad: " & Data1.Recordset.Fields(0)
+    cad = "¿Seguro que desea eliminar el control destrio?"
+    cad = cad & vbCrLf & "Variedad: " & Data1.Recordset.Fields(0)
     
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -2202,7 +2222,7 @@ EEliminar:
 End Sub
 
 Private Sub BotonGastos()
-Dim i As Integer
+Dim I As Integer
 
     Gastos = True
 
@@ -2213,28 +2233,28 @@ Dim i As Integer
     PonerModo 4
 
     ' *** bloquejar els camps visibles de la clau primaria de la capçalera ***
-    For i = 0 To 13
-        BloquearTxt Text1(i), True
-    Next i
+    For I = 0 To 13
+        BloquearTxt Text1(I), True
+    Next I
     BloquearTxt Text1(20), True
     imgFec(0).Enabled = False
     imgFec(1).Enabled = False
-    For i = 0 To 5
-        BloquearImage imgBuscar(i), True
-    Next i
+    For I = 0 To 5
+        BloquearImage imgBuscar(I), True
+    Next I
     
-    For i = 14 To 16
-        BloquearTxt Text1(i), True
-        Text1(i).Enabled = False
-    Next i
+    For I = 14 To 16
+        BloquearTxt Text1(I), True
+        Text1(I).Enabled = False
+    Next I
     
     
     ' desbloqueamos el frame de gastos
     
-    For i = 17 To 19
-        BloquearTxt Text1(i), False
-        Text1(i).Enabled = True
-    Next i
+    For I = 17 To 19
+        BloquearTxt Text1(I), False
+        Text1(I).Enabled = True
+    Next I
     
     
 End Sub
@@ -2243,7 +2263,7 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim i As Integer
+Dim I As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
@@ -2254,11 +2274,11 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     ' *** si n'hi han llínies en datagrids ***
     'For i = 0 To DataGridAux.Count - 1
-    For i = 0 To 0
-        CargaGrid i, True
-        If Not Adoaux(i).Recordset.EOF Then _
-            PonerCamposForma2 Me, Adoaux(i), 2, "FrameAux" & i
-    Next i
+    For I = 0 To 0
+        CargaGrid I, True
+        If Not AdoAux(I).Recordset.EOF Then _
+            PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
+    Next I
 
     
     ' ************* configurar els camps de les descripcions de la capçalera *************
@@ -2276,7 +2296,7 @@ Dim CPostal As String, desProvi As String, desPais As String
 End Sub
 
 Private Sub cmdCancelar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim V
 
     Select Case Modo
@@ -2307,10 +2327,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
                         ' ***************************************************************
                     End If
             End Select
@@ -2318,7 +2338,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not Adoaux(NumTabMto).Recordset.EOF Then
+            If Not AdoAux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2326,23 +2346,23 @@ Dim V
     End Select
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
 Dim Nregs As Integer
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EDatosOK
 
-    DatosOk = False
+    DatosOK = False
     
-    b = CompForm2(Me, 1)
-    If Not b Then Exit Function
+    B = CompForm2(Me, 1)
+    If Not B Then Exit Function
     
-    If b Then
-        Sql = "select count(*) from rcampos where codvarie=" & DBSet(Text1(3).Text, "N") & " and codsocio=" & DBSet(Text1(4).Text, "N")
-        Sql = Sql & " and nrocampo= " & DBSet(Text1(2).Text, "N")
-        Sql = Sql & " and fecbajas is null "
-        Nregs = TotalRegistros(Sql)
+    If B Then
+        SQL = "select count(*) from rcampos where codvarie=" & DBSet(Text1(3).Text, "N") & " and codsocio=" & DBSet(Text1(4).Text, "N")
+        SQL = SQL & " and nrocampo= " & DBSet(Text1(2).Text, "N")
+        SQL = SQL & " and fecbajas is null "
+        Nregs = TotalRegistros(SQL)
         If Nregs = 0 Then
             MsgBox "No existen campos con variedad, socio y nro.orden dados de alta. Revise.", vbExclamation
             PonerFoco Text1(3)
@@ -2354,25 +2374,25 @@ Dim Sql As String
         End If
     End If
     ' ************************************************************************************
-    DatosOk = b
+    DatosOK = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(nroclasif=" & DBSet(Text1(0).Text, "N")
-    Cad = Cad & " and codvarie = " & DBSet(Text1(3).Text, "N")
-    Cad = Cad & " and codsocio = " & DBSet(Text1(4).Text, "N")
-    Cad = Cad & " and fechacla = " & DBSet(Text1(1).Text, "F")
-    Cad = Cad & " and codcampo = " & DBSet(Text1(2).Text, "N")
-    Cad = Cad & " and ordinal = " & DBSet(Text1(7).Text, "N") & ")"
+    cad = "(nroclasif=" & DBSet(Text1(0).Text, "N")
+    cad = cad & " and codvarie = " & DBSet(Text1(3).Text, "N")
+    cad = cad & " and codsocio = " & DBSet(Text1(4).Text, "N")
+    cad = cad & " and fechacla = " & DBSet(Text1(1).Text, "F")
+    cad = cad & " and codcampo = " & DBSet(Text1(2).Text, "N")
+    cad = cad & " and ordinal = " & DBSet(Text1(7).Text, "N") & ")"
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
-    If SituarDataMULTI(Data1, Cad, Indicador) Then
+    If SituarDataMULTI(Data1, cad, Indicador) Then
     'If SituarData(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
@@ -2423,7 +2443,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Nregs As Integer
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -2532,9 +2552,9 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -2550,9 +2570,9 @@ Dim cerrar As Boolean
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
@@ -2571,11 +2591,11 @@ End Sub
 
 Private Sub BotonModificarLinea(Index As Integer)
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     Dim J As Integer
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -2592,8 +2612,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 0 ' *** pose els index de llínies que tenen datagrid (en o sense tab) ***
             If DataGridAux(Index).Bookmark < DataGridAux(Index).FirstRow Or DataGridAux(Index).Bookmark > (DataGridAux(Index).FirstRow + DataGridAux(Index).VisibleRows - 1) Then
-                i = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
-                DataGridAux(Index).Scroll 0, i
+                I = DataGridAux(Index).Bookmark - DataGridAux(Index).FirstRow
+                DataGridAux(Index).Scroll 0, I
                 DataGridAux(Index).Refresh
             End If
               
@@ -2616,9 +2636,9 @@ Private Sub BotonModificarLinea(Index As Integer)
             txtAux(4).Text = DataGridAux(Index).Columns(3).Text
             txtAux(16).Text = DataGridAux(Index).Columns(17).Text
             txtAux(17).Text = DataGridAux(Index).Columns(18).Text
-            For i = 5 To 15
-                txtAux(i).Text = DataGridAux(Index).Columns(i + 1).Text
-            Next i
+            For I = 5 To 15
+                txtAux(I).Text = DataGridAux(Index).Columns(I + 1).Text
+            Next I
             
     End Select
     
@@ -2634,16 +2654,16 @@ End Sub
 
 Private Sub LLamaLineas(Index As Integer, xModo As Byte, Optional alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     ' *** si n'hi han tabs sense datagrid posar el If ***
     DeseleccionaGrid DataGridAux(Index)
        
-    b = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
+    B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'muestras
              For jj = 5 To 15
-                txtAux(jj).visible = b
+                txtAux(jj).visible = B
                 txtAux(jj).Top = alto
             Next jj
     End Select
@@ -2672,18 +2692,18 @@ Dim Nuevo As Boolean
     End Select
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
    If Not txtAux(Index).MultiLine Then ConseguirFocoLin txtAux(Index)
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
    KEYpress KeyAscii
 End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
-Dim b As Boolean
+Dim SQL As String
+Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
@@ -2693,11 +2713,11 @@ Dim vFact As Byte, vDocum As Byte
     Mens = ""
     DatosOkLlin = False
         
-    b = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
-    If Not b Then Exit Function
+    B = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
+    If Not B Then Exit Function
     
     ' ******************************************************************************
-    DatosOkLlin = b
+    DatosOkLlin = B
     
 EDatosOKLlin:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -2721,7 +2741,7 @@ End Function
 
 Private Sub imgBuscar_Click(Index As Integer)
     TerminaBloquear
-    indice = Index + 3
+    Indice = Index + 3
      Select Case Index
         Case 0 'variedades
             Set frmVar = New frmComVar
@@ -2771,7 +2791,7 @@ Private Sub imgBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub DataGridAux_RowColChange(Index As Integer, LastRow As Variant, ByVal LastCol As Integer)
-Dim i As Byte
+Dim I As Byte
 
     If ModoLineas <> 1 Then
         Select Case Index
@@ -2798,9 +2818,9 @@ Dim i As Byte
 '                txtAux(11).Text = ""
 '                txtAux(12).Text = ""
             Case 1 'departamentos
-                For i = 21 To 24
+                For I = 21 To 24
 '                   txtAux(i).Text = ""
-                Next i
+                Next I
 '               txtAux2(22).Text = ""
             Case 2 'Tarjetas
 '               txtAux(50).Text = ""
@@ -2821,16 +2841,16 @@ End Sub
 
 Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
-Dim i As Byte
+Dim I As Byte
 
-    Adoaux(Index).ConnectionString = conn
-    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    Adoaux(Index).CursorType = adOpenDynamic
-    Adoaux(Index).LockType = adLockPessimistic
-    Adoaux(Index).Refresh
+    AdoAux(Index).ConnectionString = conn
+    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    AdoAux(Index).CursorType = adOpenDynamic
+    AdoAux(Index).LockType = adLockPessimistic
+    AdoAux(Index).Refresh
     
-    If Not Adoaux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
+    If Not AdoAux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -2856,15 +2876,15 @@ Dim Control As Object
 End Sub
 
 Private Sub CargaGrid(Index As Integer, enlaza As Boolean)
-Dim b As Boolean
-Dim i As Byte
+Dim B As Boolean
+Dim I As Byte
 Dim tots As String
 
     On Error GoTo ECarga
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'controldestrio_plagas
@@ -2892,7 +2912,7 @@ Dim tots As String
             DataGridAux(0).Columns(18).Alignment = dbgRight
             DataGridAux(0).Columns(19).Alignment = dbgRight
         
-            b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
+            B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
             
             
     End Select
@@ -2929,7 +2949,7 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
-                    V = Adoaux(NumTabMto).Recordset.Fields(17) 'el 2 es el nº de llinia
+                    V = AdoAux(NumTabMto).Recordset.Fields(17) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -2938,7 +2958,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(17).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(17).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -3014,43 +3034,43 @@ End Sub
 
 Private Sub CalcularTotales()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim TotalEnvases As String
 Dim TotalCostes As String
 Dim Total As Long
 Dim Valor As Currency
-Dim i As Integer
+Dim I As Integer
 
     On Error Resume Next
 
     If Data1.Recordset.EOF Or Modo = 1 Then
-        For i = 0 To 10
-            Text3(i).Text = ""
-        Next i
+        For I = 0 To 10
+            Text3(I).Text = ""
+        Next I
         Exit Sub
     End If
 
-    Sql = "select sum(kilosplaga1) plaga1, sum(kilosplaga2) plaga2, sum(kilosplaga3) plaga3, sum(kilosplaga4) plaga4, "
-    Sql = Sql & " sum(kilosplaga5) plaga5, sum(kilosplaga6) plaga6, sum(kilosplaga7) plaga7, sum(kilosplaga8) plaga8, "
-    Sql = Sql & " sum(kilosplaga9) plaga9, sum(kilosplaga10) plaga10, sum(kilosplaga11) plaga11 "
-    Sql = Sql & " from rcontrol_plagas "
-    Sql = Sql & " where codvarie = " & Data1.Recordset!codvarie
-    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
-    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
-    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    Sql = Sql & " and nroclasif = " & Data1.Recordset!nroclasif
-    Sql = Sql & " and rcontrol_plagas.idplaga <> 2"
+    SQL = "select sum(kilosplaga1) plaga1, sum(kilosplaga2) plaga2, sum(kilosplaga3) plaga3, sum(kilosplaga4) plaga4, "
+    SQL = SQL & " sum(kilosplaga5) plaga5, sum(kilosplaga6) plaga6, sum(kilosplaga7) plaga7, sum(kilosplaga8) plaga8, "
+    SQL = SQL & " sum(kilosplaga9) plaga9, sum(kilosplaga10) plaga10, sum(kilosplaga11) plaga11 "
+    SQL = SQL & " from rcontrol_plagas "
+    SQL = SQL & " where codvarie = " & Data1.Recordset!codvarie
+    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
+    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
+    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    SQL = SQL & " and nroclasif = " & Data1.Recordset!nroclasif
+    SQL = SQL & " and rcontrol_plagas.idplaga <> 2"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Total = 0
     If Not Rs.EOF Then
-        For i = 0 To 10
-            Text3(i).Text = DBLet(Rs.Fields(i).Value, "N")
-            Text3(i).Text = Format(Text3(i).Text, "###,##0")
-            Total = Total + DBLet(Rs.Fields(i).Value, "N")
-        Next i
+        For I = 0 To 10
+            Text3(I).Text = DBLet(Rs.Fields(I).Value, "N")
+            Text3(I).Text = Format(Text3(I).Text, "###,##0")
+            Total = Total + DBLet(Rs.Fields(I).Value, "N")
+        Next I
     End If
     Text3(11).Text = Format(Total, "###,##0")
     Text3(12).Text = 100
@@ -3090,11 +3110,11 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGridAux(0).Bookmark < Me.Adoaux(0).Recordset.RecordCount Then
+    If Me.DataGridAux(0).Bookmark < Me.AdoAux(0).Recordset.RecordCount Then
 '        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGridAux(0).Bookmark = DataGridAux(0).Bookmark + 1
         BotonModificarLinea 0
-    ElseIf DataGridAux(0).Bookmark = Adoaux(0).Recordset.RecordCount Then
+    ElseIf DataGridAux(0).Bookmark = AdoAux(0).Recordset.RecordCount Then
 '        PonerFocoBtn Me.cmdAceptar
         BotonModificarLinea 0
     End If
@@ -3116,7 +3136,7 @@ End Sub
 
 
 Private Sub VisualizarDatosCampo(campo As String)
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -3126,11 +3146,11 @@ Dim Rs As ADODB.Recordset
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    Cad = "rcampos.codcampo = " & DBSet(campo, "N")
+    cad = "rcampos.codcampo = " & DBSet(campo, "N")
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla from rcampos, rpartida, rzonas, rpueblos "
-    Cad1 = Cad1 & " where " & Cad
+    Cad1 = Cad1 & " where " & cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codzonas = rzonas.codzonas "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla "
@@ -3151,7 +3171,7 @@ End Sub
 
 
 Private Sub PonerCamposSocioVariedad()
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -3161,16 +3181,16 @@ Dim Rs As ADODB.Recordset
     
     If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    Cad = "rcampos.codsocio = " & DBSet(Text1(4).Text, "N") & " and rcampos.fecbajas is null"
-    Cad = Cad & " and rcampos.codvarie = " & DBSet(Text1(3).Text, "N")
+    cad = "rcampos.codsocio = " & DBSet(Text1(4).Text, "N") & " and rcampos.fecbajas is null"
+    cad = cad & " and rcampos.codvarie = " & DBSet(Text1(3).Text, "N")
      
-    Cad1 = "select count(*) from rcampos where " & Cad
+    Cad1 = "select count(*) from rcampos where " & cad
      
     NumRegis = TotalRegistros(Cad1)
     
     If NumRegis = 0 Then Exit Sub
     If NumRegis = 1 Then
-        Cad1 = "select codcampo from rcampos where " & Cad
+        Cad1 = "select codcampo from rcampos where " & cad
         Set Rs = New ADODB.Recordset
         Rs.Open Cad1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not Rs.EOF Then
@@ -3179,7 +3199,7 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         Set frmMens = New frmMensajes
-        frmMens.cadWHERE = " and " & Cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
+        frmMens.cadWHERE = " and " & cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
         frmMens.campo = Text1(5).Text
         frmMens.OpcionMensaje = 6
         frmMens.Show vbModal
@@ -3189,7 +3209,7 @@ Dim Rs As ADODB.Recordset
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -3199,11 +3219,11 @@ Dim Rs As ADODB.Recordset
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    Cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla from rcampos, rpartida, rzonas, rpueblos "
-    Cad1 = Cad1 & " where " & Cad
+    Cad1 = Cad1 & " where " & cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codzonas = rzonas.codzonas "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla "
@@ -3227,21 +3247,21 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim Sql As String
+Dim SQL As String
 Dim actualiza As Boolean
 Dim NumF As Long
 
-    Sql = "select max(ordinal) from rcontrol where nroclasif = " & DBSet(Text1(0).Text, "N")
-    Sql = Sql & " and codvarie = " & DBSet(Text1(3).Text, "N")
-    Sql = Sql & " and codsocio = " & DBSet(Text1(4).Text, "N")
-    Sql = Sql & " and codcampo = " & DBSet(Text1(2).Text, "N")
-    Sql = Sql & " and fechacla = " & DBSet(Text1(1).Text, "F")
-    NumF = DevuelveValor(Sql)
+    SQL = "select max(ordinal) from rcontrol where nroclasif = " & DBSet(Text1(0).Text, "N")
+    SQL = SQL & " and codvarie = " & DBSet(Text1(3).Text, "N")
+    SQL = SQL & " and codsocio = " & DBSet(Text1(4).Text, "N")
+    SQL = SQL & " and codcampo = " & DBSet(Text1(2).Text, "N")
+    SQL = SQL & " and fechacla = " & DBSet(Text1(1).Text, "F")
+    NumF = DevuelveValor(SQL)
     
     Text1(7).Text = NumF + 1
         
-    Sql = CadenaInsertarDesdeForm(Me)
-    If InsertarOferta(Sql, vTipoMov, actualiza) Then
+    SQL = CadenaInsertarDesdeForm(Me)
+    If InsertarOferta(SQL, vTipoMov, actualiza) Then
         CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
         PonerCadenaBusqueda
         PonerModo 2
@@ -3316,29 +3336,29 @@ EInsertarOferta:
 End Function
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = " codvarie= " & Text1(3).Text
-    Sql = Sql & " and codsocio= " & Text1(4).Text
-    Sql = Sql & " and fechacla = " & DBSet(Text1(1).Text, "F")
-    Sql = Sql & " and codcampo = " & DBSet(Text1(2).Text, "N")
-    Sql = Sql & " and nroclasif = " & DBSet(Text1(0).Text, "N")
-    Sql = Sql & " and ordinal = " & DBSet(Text1(7).Text, "N")
+    SQL = " codvarie= " & Text1(3).Text
+    SQL = SQL & " and codsocio= " & Text1(4).Text
+    SQL = SQL & " and fechacla = " & DBSet(Text1(1).Text, "F")
+    SQL = SQL & " and codcampo = " & DBSet(Text1(2).Text, "N")
+    SQL = SQL & " and nroclasif = " & DBSet(Text1(0).Text, "N")
+    SQL = SQL & " and ordinal = " & DBSet(Text1(7).Text, "N")
     
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    If conWhere Then SQL = " WHERE " & SQL
+    ObtenerWhereCP = SQL
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
 
 Private Function InsertarLineasPlagas(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim KilosMuestra As Currency
 Dim TotalKilos As Currency
 Dim Calidad As Currency
@@ -3349,7 +3369,7 @@ Dim vTipoClasif As String
 Dim vCalidDest As String
 Dim CalidadClasif As String
 Dim CalidadVC As String
-Dim i As Integer
+Dim I As Integer
 
     On Error GoTo EInsertar
     
@@ -3358,11 +3378,11 @@ Dim i As Integer
     Sql1 = Sql1 & "kilosplaga6, kilosplaga7, kilosplaga8, kilosplaga9, kilosplaga10, kilosplaga11, ordinal) values "
     
                     '[Monica]30/01/2014: antes no estaba clareta (16)
-    For i = 1 To 16 '15 '14 [Monica]25/11/2011: antes no estaba la palga pixat (15)
+    For I = 1 To 16 '15 '14 [Monica]25/11/2011: antes no estaba la palga pixat (15)
         Sql1 = Sql1 & "(" & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!fechacla, "F") & "," & DBSet(Rs!Codsocio, "N") & ","
-        Sql1 = Sql1 & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!nroclasif, "N") & "," & DBSet(i, "N") & ","
+        Sql1 = Sql1 & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!nroclasif, "N") & "," & DBSet(I, "N") & ","
         Sql1 = Sql1 & "0,0,0,0,0,0,0,0,0,0,0, " & DBSet(Text1(7).Text, "N") & "),"
-    Next i
+    Next I
     
     ' quitamos la ultima coma
     Sql1 = Mid(Sql1, 1, Len(Sql1) - 1)
@@ -3381,35 +3401,35 @@ EInsertar:
 End Function
 
 Private Function ModificaCabecera() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim MenError As String
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EModificarCab
 
     conn.BeginTrans
     
-    b = True
+    B = True
     
-    If b Then b = ModificaDesdeFormulario1(Me, 1) 'ModificaDesdeFormulario2(Me, 2, "Frame2")
+    If B Then B = ModificaDesdeFormulario1(Me, 1) 'ModificaDesdeFormulario2(Me, 2, "Frame2")
 
-    If b Then
+    If B Then
         MenError = "Actualizar Destrion Clasificación Automática"
-        b = ActualizarDestrioClasAuto(MenError)
+        B = ActualizarDestrioClasAuto(MenError)
     End If
     
-    If b Then
+    If B Then
         MenError = "Insertar Plagas en Clasificación"
-        b = InsertaPlagasClasAuto(MenError)
+        B = InsertaPlagasClasAuto(MenError)
     End If
     
 EModificarCab:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         MenError = "Modificando Control Destrio." & vbCrLf & "----------------------------" & vbCrLf & MenError
         MuestraError Err.Number, MenError, Err.Description
-        b = False
+        B = False
     End If
-    If b Then
+    If B Then
         ModificaCabecera = True
         conn.CommitTrans
     Else
@@ -3421,28 +3441,28 @@ End Function
 
 
 Private Sub CalcularDestrio()
-Dim Sql As String
+Dim SQL As String
 Dim PorcDest As Currency
 Dim KilosTot As Long
 
 
-    Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-    Sql = Sql & " from rcontrol_plagas "
-    Sql = Sql & ObtenerWhereCab(True)
-    Sql = Sql & " and idplaga <> 2 "
-    KilosTot = DevuelveValor(Sql)
+    SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+    SQL = SQL & " from rcontrol_plagas "
+    SQL = SQL & ObtenerWhereCab(True)
+    SQL = SQL & " and idplaga <> 2 "
+    KilosTot = DevuelveValor(SQL)
 
-    Sql = "SELECT "
+    SQL = "SELECT "
     If KilosTot <> 0 Then
-        Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+        SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
     Else
-        Sql = Sql & "0 "
+        SQL = SQL & "0 "
     End If
-    Sql = Sql & " from rcontrol_plagas "
-    Sql = Sql & ObtenerWhereCab(True)
-    Sql = Sql & " and rcontrol_plagas.idplaga = 1 "
+    SQL = SQL & " from rcontrol_plagas "
+    SQL = SQL & ObtenerWhereCab(True)
+    SQL = SQL & " and rcontrol_plagas.idplaga = 1 "
 
-    PorcDest = Round2(100 - DevuelveValor(Sql), 2)
+    PorcDest = Round2(100 - DevuelveValor(SQL), 2)
     
     Text1(6).Text = PorcDest
     Text1(6).Text = Format(Text1(6).Text, "##0.00")
@@ -3451,25 +3471,25 @@ Dim KilosTot As Long
 End Sub
 
 Private Function ActualizarDestrioClasAuto(Mens As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim KilosTot As Long
-Dim i As Integer
+Dim I As Integer
 Dim Porcen As Currency
 
     On Error GoTo eActualizarDestrioClasAuto
     
     ActualizarDestrioClasAuto = False
 
-    Sql = "update rclasifauto set kilospeq = " & DBSet(Text1(5).Text, "N")
-    Sql = Sql & ", porcdest = " & DBSet(Text1(6).Text, "N")
-    Sql = Sql & " where numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
-    Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
-    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
-    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
-    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    Sql = Sql & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
+    SQL = "update rclasifauto set kilospeq = " & DBSet(Text1(5).Text, "N")
+    SQL = SQL & ", porcdest = " & DBSet(Text1(6).Text, "N")
+    SQL = SQL & " where numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
+    SQL = SQL & " and codvarie = " & Data1.Recordset!codvarie
+    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
+    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
+    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    SQL = SQL & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
 
     ActualizarDestrioClasAuto = True
     Exit Function
@@ -3482,111 +3502,111 @@ End Function
 
 
 Private Function InsertaPlagasClasAuto(Mens As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim KilosTot As Long
-Dim i As Integer
+Dim I As Integer
 Dim Porcen As Currency
     On Error GoTo eInsertaPlagasClasAuto
     
     InsertaPlagasClasAuto = False
 
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
-    Sql = "delete from rclasifauto_plagas where " 'numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
+    SQL = "delete from rclasifauto_plagas where " 'numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
     'SQL = SQL & " and codvarie = " & Data1.Recordset!CodVarie
-    Sql = Sql & " codVarie = " & Data1.Recordset!codvarie
-    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
-    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
-    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    Sql = Sql & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
+    SQL = SQL & " codVarie = " & Data1.Recordset!codvarie
+    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
+    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
+    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    SQL = SQL & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
 
 
-    Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-    Sql = Sql & " from rcontrol_plagas "
+    SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+    SQL = SQL & " from rcontrol_plagas "
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '    SQL = SQL & ObtenerWhereCab(True)
-    Sql = Sql & ObtenerWhereCab2(True)
-    Sql = Sql & " and idplaga <> 2 "
-    KilosTot = DevuelveValor(Sql)
+    SQL = SQL & ObtenerWhereCab2(True)
+    SQL = SQL & " and idplaga <> 2 "
+    KilosTot = DevuelveValor(SQL)
 
 
-    For i = 3 To 13
-        Sql = "SELECT "
+    For I = 3 To 13
+        SQL = "SELECT "
         If KilosTot <> 0 Then
-            Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+            SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
         Else
-            Sql = Sql & "0 "
+            SQL = SQL & "0 "
         End If
-        Sql = Sql & " from rcontrol_plagas "
+        SQL = SQL & " from rcontrol_plagas "
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '        SQL = SQL & ObtenerWhereCab(True)
-        Sql = Sql & ObtenerWhereCab2(True)
-        Sql = Sql & " and rcontrol_plagas.idplaga = " & DBSet(i, "N")
+        SQL = SQL & ObtenerWhereCab2(True)
+        SQL = SQL & " and rcontrol_plagas.idplaga = " & DBSet(I, "N")
     
-        Porcen = DevuelveValor(Sql)
+        Porcen = DevuelveValor(SQL)
         
-        Select Case i
+        Select Case I
             Case 3 ' piojo gris
                 Select Case Porcen
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 1"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 1"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "1)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "1)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 2"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 2"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "2)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "2)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 3"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 3"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "3)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "3)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 End Select
             
@@ -3596,61 +3616,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 4"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 4"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "4)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "4)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 5"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 5"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "5)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "5)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 6"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 6"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "6)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "6)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 End Select
             
@@ -3660,61 +3680,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 7"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 7"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "7)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "7)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 8"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 8"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "8)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "8)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 9"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 9"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "9)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "9)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 End Select
             
@@ -3724,61 +3744,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 16"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 16"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "16)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "16)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 17"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 17"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "17)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "17)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 18"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 18"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "18)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "18)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 End Select
             
@@ -3787,21 +3807,21 @@ Dim Porcen As Currency
                 If Porcen > 1 Then
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                    SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                    Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                    Sql = Sql & " and codplaga = 22"
-                    If TotalRegistros(Sql) = 0 Then
-                        Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                    SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                    SQL = SQL & " and codplaga = 22"
+                    If TotalRegistros(SQL) = 0 Then
+                        SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = SQL & Data1.Recordset!nroclasif & ","
-                        Sql = Sql & "1,"
-                        Sql = Sql & Data1.Recordset!codvarie & ","
-                        Sql = Sql & Data1.Recordset!Codsocio & ","
-                        Sql = Sql & Data1.Recordset!codcampo & ","
-                        Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                        Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                        Sql = Sql & "22)"
+                        SQL = SQL & "1,"
+                        SQL = SQL & Data1.Recordset!codvarie & ","
+                        SQL = SQL & Data1.Recordset!Codsocio & ","
+                        SQL = SQL & Data1.Recordset!codcampo & ","
+                        SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                        SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                        SQL = SQL & "22)"
                         
-                        conn.Execute Sql
+                        conn.Execute SQL
                     End If
                 End If
                 
@@ -3810,61 +3830,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 19"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 19"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "19)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "19)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 20"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 20"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "20)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "20)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 21"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 21"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "21)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "21)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 End Select
             
@@ -3874,66 +3894,66 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 10"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 10"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "10)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "10)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 11"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 11"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "11)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "11)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        Sql = Sql & " and codplaga = 12"
-                        If TotalRegistros(Sql) = 0 Then
-                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        SQL = SQL & " and codplaga = 12"
+                        If TotalRegistros(SQL) = 0 Then
+                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            Sql = Sql & "1,"
-                            Sql = Sql & Data1.Recordset!codvarie & ","
-                            Sql = Sql & Data1.Recordset!Codsocio & ","
-                            Sql = Sql & Data1.Recordset!codcampo & ","
-                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            Sql = Sql & "12)"
+                            SQL = SQL & "1,"
+                            SQL = SQL & Data1.Recordset!codvarie & ","
+                            SQL = SQL & Data1.Recordset!Codsocio & ","
+                            SQL = SQL & Data1.Recordset!codcampo & ","
+                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            SQL = SQL & "12)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                 
                 End Select
         End Select
-    Next i
+    Next I
 
     InsertaPlagasClasAuto = True
     Exit Function
