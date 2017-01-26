@@ -1578,7 +1578,7 @@ Dim B As Boolean
     
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1592,6 +1592,8 @@ Dim B As Boolean
     ' kilos mantenimiento y porcentaje de destrio solo se modifican
     BloquearTxt Text1(5), (Modo <> 1 And Modo <> 4), False
     BloquearTxt Text1(6), (Modo <> 1), False
+    
+    BloquearTxt Text1(8), (Modo <> 1), False
     
     
     '*** si n'hi han combos a la capçalera ***
@@ -1685,7 +1687,7 @@ Dim I As Byte
     B = (Modo = 2) And Not DeConsulta
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -1708,7 +1710,7 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
 Dim KilosTot As Long
 
@@ -1717,38 +1719,38 @@ Dim KilosTot As Long
     Select Case Index
                
         Case 0 'CLASIFICACION
-            SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-            SQL = SQL & " from rcontrol_plagas "
+            Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+            Sql = Sql & " from rcontrol_plagas "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rcontrol_plagas.codvarie = -1"
+                Sql = Sql & " WHERE rcontrol_plagas.codvarie = -1"
             End If
-            SQL = SQL & " and idplaga <> 2 "
-            KilosTot = DevuelveValor(SQL)
+            Sql = Sql & " and idplaga <> 2 "
+            KilosTot = DevuelveValor(Sql)
         
-            SQL = "SELECT rcontrol_plagas.codvarie, rcontrol_plagas.fechacla, rcontrol_plagas.codsocio, rcontrol_plagas.codcampo, rcontrol_plagas.nroclasif, "
-            SQL = SQL & "rplagasaux.nomplaga, rcontrol_plagas.kilosplaga1, rcontrol_plagas.kilosplaga2, rcontrol_plagas.kilosplaga3, rcontrol_plagas.kilosplaga4, "
-            SQL = SQL & "rcontrol_plagas.kilosplaga5, rcontrol_plagas.kilosplaga6, rcontrol_plagas.kilosplaga7, rcontrol_plagas.kilosplaga8, "
-            SQL = SQL & "rcontrol_plagas.kilosplaga9, rcontrol_plagas.kilosplaga10, rcontrol_plagas.kilosplaga11, rcontrol_plagas.idplaga,"
-            SQL = SQL & "(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total, "
+            Sql = "SELECT rcontrol_plagas.codvarie, rcontrol_plagas.fechacla, rcontrol_plagas.codsocio, rcontrol_plagas.codcampo, rcontrol_plagas.nroclasif, "
+            Sql = Sql & "rplagasaux.nomplaga, rcontrol_plagas.kilosplaga1, rcontrol_plagas.kilosplaga2, rcontrol_plagas.kilosplaga3, rcontrol_plagas.kilosplaga4, "
+            Sql = Sql & "rcontrol_plagas.kilosplaga5, rcontrol_plagas.kilosplaga6, rcontrol_plagas.kilosplaga7, rcontrol_plagas.kilosplaga8, "
+            Sql = Sql & "rcontrol_plagas.kilosplaga9, rcontrol_plagas.kilosplaga10, rcontrol_plagas.kilosplaga11, rcontrol_plagas.idplaga,"
+            Sql = Sql & "(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total, "
             If KilosTot <> 0 Then
-                SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+                Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
             Else
-                SQL = SQL & "0 "
+                Sql = Sql & "0 "
             End If
-            SQL = SQL & ", ordinal "
-            SQL = SQL & " from rcontrol_plagas, rplagasaux "
+            Sql = Sql & ", ordinal "
+            Sql = Sql & " from rcontrol_plagas, rplagasaux "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rcontrol_plagas.codvarie = -1"
+                Sql = Sql & " WHERE rcontrol_plagas.codvarie = -1"
             End If
-            SQL = SQL & " and rcontrol_plagas.idplaga = rplagasaux.idplaga "
+            Sql = Sql & " and rcontrol_plagas.idplaga = rplagasaux.idplaga "
                
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -2276,8 +2278,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     'For i = 0 To DataGridAux.Count - 1
     For I = 0 To 0
         CargaGrid I, True
-        If Not AdoAux(I).Recordset.EOF Then _
-            PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
+        If Not Adoaux(I).Recordset.EOF Then _
+            PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
     Next I
 
     
@@ -2327,10 +2329,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
                     PonerModo 4
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
                         ' ***************************************************************
                     End If
             End Select
@@ -2338,7 +2340,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not AdoAux(NumTabMto).Recordset.EOF Then
+            If Not Adoaux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2349,7 +2351,7 @@ End Sub
 Private Function DatosOK() As Boolean
 Dim B As Boolean
 Dim Nregs As Integer
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EDatosOK
 
@@ -2359,10 +2361,10 @@ Dim SQL As String
     If Not B Then Exit Function
     
     If B Then
-        SQL = "select count(*) from rcampos where codvarie=" & DBSet(Text1(3).Text, "N") & " and codsocio=" & DBSet(Text1(4).Text, "N")
-        SQL = SQL & " and nrocampo= " & DBSet(Text1(2).Text, "N")
-        SQL = SQL & " and fecbajas is null "
-        Nregs = TotalRegistros(SQL)
+        Sql = "select count(*) from rcampos where codvarie=" & DBSet(Text1(3).Text, "N") & " and codsocio=" & DBSet(Text1(4).Text, "N")
+        Sql = Sql & " and nrocampo= " & DBSet(Text1(2).Text, "N")
+        Sql = Sql & " and fecbajas is null "
+        Nregs = TotalRegistros(Sql)
         If Nregs = 0 Then
             MsgBox "No existen campos con variedad, socio y nro.orden dados de alta. Revise.", vbExclamation
             PonerFoco Text1(3)
@@ -2443,7 +2445,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Nregs As Integer
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -2527,12 +2529,15 @@ Dim Nregs As Integer
             PonerFormatoEntero Text1(Index)
     
         Case 5 'kilos manuales
-            If PonerFormatoEntero(Text1(5)) And Modo = 4 Then Me.cmdAceptar.SetFocus
+            If PonerFormatoEntero(Text1(5)) And Modo = 4 Then Me.CmdAceptar.SetFocus
             
         Case 6 ' porcentaje de destrio
             If Modo = 1 Then Exit Sub
             PonerFormatoDecimal Text1(6), 4
-            
+        Case 8 ' porcentaje de pixat
+            If Modo = 1 Then Exit Sub
+            PonerFormatoDecimal Text1(8), 4
+        
     End Select
     ' ***************************************************************************
 End Sub
@@ -2594,8 +2599,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
     
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -2687,7 +2692,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
             If Index = 15 And PonerFormatoEntero(txtAux(Index)) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
     End Select
 End Sub
@@ -2702,7 +2707,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2843,14 +2848,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim I As Byte
 
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
-    AdoAux(Index).Refresh
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
+    Adoaux(Index).Refresh
     
-    If Not AdoAux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
+    If Not Adoaux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -2884,7 +2889,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'controldestrio_plagas
@@ -2949,7 +2954,7 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
-                    V = AdoAux(NumTabMto).Recordset.Fields(17) 'el 2 es el nº de llinia
+                    V = Adoaux(NumTabMto).Recordset.Fields(17) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -2958,7 +2963,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(17).Name & " =" & V)
+            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(17).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -3034,7 +3039,7 @@ End Sub
 
 Private Sub CalcularTotales()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim TotalEnvases As String
 Dim TotalCostes As String
@@ -3051,19 +3056,19 @@ Dim I As Integer
         Exit Sub
     End If
 
-    SQL = "select sum(kilosplaga1) plaga1, sum(kilosplaga2) plaga2, sum(kilosplaga3) plaga3, sum(kilosplaga4) plaga4, "
-    SQL = SQL & " sum(kilosplaga5) plaga5, sum(kilosplaga6) plaga6, sum(kilosplaga7) plaga7, sum(kilosplaga8) plaga8, "
-    SQL = SQL & " sum(kilosplaga9) plaga9, sum(kilosplaga10) plaga10, sum(kilosplaga11) plaga11 "
-    SQL = SQL & " from rcontrol_plagas "
-    SQL = SQL & " where codvarie = " & Data1.Recordset!codvarie
-    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
-    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
-    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    SQL = SQL & " and nroclasif = " & Data1.Recordset!nroclasif
-    SQL = SQL & " and rcontrol_plagas.idplaga <> 2"
+    Sql = "select sum(kilosplaga1) plaga1, sum(kilosplaga2) plaga2, sum(kilosplaga3) plaga3, sum(kilosplaga4) plaga4, "
+    Sql = Sql & " sum(kilosplaga5) plaga5, sum(kilosplaga6) plaga6, sum(kilosplaga7) plaga7, sum(kilosplaga8) plaga8, "
+    Sql = Sql & " sum(kilosplaga9) plaga9, sum(kilosplaga10) plaga10, sum(kilosplaga11) plaga11 "
+    Sql = Sql & " from rcontrol_plagas "
+    Sql = Sql & " where codvarie = " & Data1.Recordset!codvarie
+    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
+    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
+    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    Sql = Sql & " and nroclasif = " & Data1.Recordset!nroclasif
+    Sql = Sql & " and rcontrol_plagas.idplaga <> 2"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Total = 0
     If Not Rs.EOF Then
         For I = 0 To 10
@@ -3110,11 +3115,11 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGridAux(0).Bookmark < Me.AdoAux(0).Recordset.RecordCount Then
+    If Me.DataGridAux(0).Bookmark < Me.Adoaux(0).Recordset.RecordCount Then
 '        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGridAux(0).Bookmark = DataGridAux(0).Bookmark + 1
         BotonModificarLinea 0
-    ElseIf DataGridAux(0).Bookmark = AdoAux(0).Recordset.RecordCount Then
+    ElseIf DataGridAux(0).Bookmark = Adoaux(0).Recordset.RecordCount Then
 '        PonerFocoBtn Me.cmdAceptar
         BotonModificarLinea 0
     End If
@@ -3247,21 +3252,21 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 Dim actualiza As Boolean
 Dim NumF As Long
 
-    SQL = "select max(ordinal) from rcontrol where nroclasif = " & DBSet(Text1(0).Text, "N")
-    SQL = SQL & " and codvarie = " & DBSet(Text1(3).Text, "N")
-    SQL = SQL & " and codsocio = " & DBSet(Text1(4).Text, "N")
-    SQL = SQL & " and codcampo = " & DBSet(Text1(2).Text, "N")
-    SQL = SQL & " and fechacla = " & DBSet(Text1(1).Text, "F")
-    NumF = DevuelveValor(SQL)
+    Sql = "select max(ordinal) from rcontrol where nroclasif = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(Text1(3).Text, "N")
+    Sql = Sql & " and codsocio = " & DBSet(Text1(4).Text, "N")
+    Sql = Sql & " and codcampo = " & DBSet(Text1(2).Text, "N")
+    Sql = Sql & " and fechacla = " & DBSet(Text1(1).Text, "F")
+    NumF = DevuelveValor(Sql)
     
     Text1(7).Text = NumF + 1
         
-    SQL = CadenaInsertarDesdeForm(Me)
-    If InsertarOferta(SQL, vTipoMov, actualiza) Then
+    Sql = CadenaInsertarDesdeForm(Me)
+    If InsertarOferta(Sql, vTipoMov, actualiza) Then
         CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
         PonerCadenaBusqueda
         PonerModo 2
@@ -3336,26 +3341,26 @@ EInsertarOferta:
 End Function
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " codvarie= " & Text1(3).Text
-    SQL = SQL & " and codsocio= " & Text1(4).Text
-    SQL = SQL & " and fechacla = " & DBSet(Text1(1).Text, "F")
-    SQL = SQL & " and codcampo = " & DBSet(Text1(2).Text, "N")
-    SQL = SQL & " and nroclasif = " & DBSet(Text1(0).Text, "N")
-    SQL = SQL & " and ordinal = " & DBSet(Text1(7).Text, "N")
+    Sql = " codvarie= " & Text1(3).Text
+    Sql = Sql & " and codsocio= " & Text1(4).Text
+    Sql = Sql & " and fechacla = " & DBSet(Text1(1).Text, "F")
+    Sql = Sql & " and codcampo = " & DBSet(Text1(2).Text, "N")
+    Sql = Sql & " and nroclasif = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " and ordinal = " & DBSet(Text1(7).Text, "N")
     
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
 
 Private Function InsertarLineasPlagas(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
@@ -3403,7 +3408,7 @@ End Function
 Private Function ModificaCabecera() As Boolean
 Dim B As Boolean
 Dim MenError As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificarCab
 
@@ -3414,7 +3419,7 @@ Dim SQL As String
     If B Then B = ModificaDesdeFormulario1(Me, 1) 'ModificaDesdeFormulario2(Me, 2, "Frame2")
 
     If B Then
-        MenError = "Actualizar Destrion Clasificación Automática"
+        MenError = "Actualizar Destrio Clasificación Automática"
         B = ActualizarDestrioClasAuto(MenError)
     End If
     
@@ -3441,37 +3446,63 @@ End Function
 
 
 Private Sub CalcularDestrio()
-Dim SQL As String
+Dim Sql As String
 Dim PorcDest As Currency
+Dim PorcPixat As Currency
 Dim KilosTot As Long
 
+Dim SqlPixat As String
 
-    SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-    SQL = SQL & " from rcontrol_plagas "
-    SQL = SQL & ObtenerWhereCab(True)
-    SQL = SQL & " and idplaga <> 2 "
-    KilosTot = DevuelveValor(SQL)
+    Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+    Sql = Sql & " from rcontrol_plagas "
+    Sql = Sql & ObtenerWhereCab(True)
+    Sql = Sql & " and idplaga <> 2 "
+    KilosTot = DevuelveValor(Sql)
 
-    SQL = "SELECT "
+    Sql = "SELECT "
     If KilosTot <> 0 Then
-        SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+        Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
     Else
-        SQL = SQL & "0 "
+        Sql = Sql & "0 "
     End If
-    SQL = SQL & " from rcontrol_plagas "
-    SQL = SQL & ObtenerWhereCab(True)
-    SQL = SQL & " and rcontrol_plagas.idplaga = 1 "
+    Sql = Sql & " from rcontrol_plagas "
+    Sql = Sql & ObtenerWhereCab(True)
+    Sql = Sql & " and rcontrol_plagas.idplaga = 1 "
 
-    PorcDest = Round2(100 - DevuelveValor(SQL), 2)
+    If SeAplicaPixat(Text1(3).Text, Text1(1).Text) Then
+        SqlPixat = "SELECT "
+        If KilosTot <> 0 Then
+            SqlPixat = SqlPixat & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+        Else
+            SqlPixat = SqlPixat & "0 "
+        End If
+        
+        SqlPixat = SqlPixat & " from rcontrol_plagas "
+        SqlPixat = SqlPixat & ObtenerWhereCab(True)
+        SqlPixat = SqlPixat & " and rcontrol_plagas.idplaga = 15 "
+    Else
+        SqlPixat = "SELECT 0 from rcontrol_plagas where " & ObtenerWhereCab(True)
+    End If
+
+
+    PorcDest = Round2(100 - DevuelveValor(Sql) - DevuelveValor(SqlPixat), 2)
+    PorcPixat = DevuelveValor(SqlPixat)
     
+'destrio
     Text1(6).Text = PorcDest
     Text1(6).Text = Format(Text1(6).Text, "##0.00")
-    
+'pixat
+    Text1(8).Text = PorcPixat
+    Text1(8).Text = Format(Text1(8).Text, "##0.00")
 
 End Sub
 
+
+
+
+
 Private Function ActualizarDestrioClasAuto(Mens As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim KilosTot As Long
 Dim I As Integer
 Dim Porcen As Currency
@@ -3480,16 +3511,18 @@ Dim Porcen As Currency
     
     ActualizarDestrioClasAuto = False
 
-    SQL = "update rclasifauto set kilospeq = " & DBSet(Text1(5).Text, "N")
-    SQL = SQL & ", porcdest = " & DBSet(Text1(6).Text, "N")
-    SQL = SQL & " where numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
-    SQL = SQL & " and codvarie = " & Data1.Recordset!codvarie
-    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
-    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
-    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    SQL = SQL & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
+    Sql = "update rclasifauto set kilospeq = " & DBSet(Text1(5).Text, "N")
+    Sql = Sql & ", porcdest = " & DBSet(Text1(6).Text, "N")
+    '[monica]26/01/2017: añadido el tema de pixat
+    Sql = Sql & ", porcpixat = " & DBSet(Text1(8).Text, "N")
+    Sql = Sql & " where numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
+    Sql = Sql & " and codvarie = " & Data1.Recordset!codvarie
+    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
+    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
+    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    Sql = Sql & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
 
     ActualizarDestrioClasAuto = True
     Exit Function
@@ -3502,7 +3535,7 @@ End Function
 
 
 Private Function InsertaPlagasClasAuto(Mens As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim KilosTot As Long
 Dim I As Integer
 Dim Porcen As Currency
@@ -3511,40 +3544,40 @@ Dim Porcen As Currency
     InsertaPlagasClasAuto = False
 
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
-    SQL = "delete from rclasifauto_plagas where " 'numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
+    Sql = "delete from rclasifauto_plagas where " 'numnotac = " & DBSet(Data1.Recordset!nroclasif, "N")
     'SQL = SQL & " and codvarie = " & Data1.Recordset!CodVarie
-    SQL = SQL & " codVarie = " & Data1.Recordset!codvarie
-    SQL = SQL & " and codsocio = " & Data1.Recordset!Codsocio
-    SQL = SQL & " and codcampo = " & Data1.Recordset!codcampo
-    SQL = SQL & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
-    SQL = SQL & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
+    Sql = Sql & " codVarie = " & Data1.Recordset!codvarie
+    Sql = Sql & " and codsocio = " & Data1.Recordset!Codsocio
+    Sql = Sql & " and codcampo = " & Data1.Recordset!codcampo
+    Sql = Sql & " and fechacla = " & DBSet(Data1.Recordset!fechacla, "F")
+    Sql = Sql & " and ordinal = " & DBSet(Data1.Recordset!Ordinal, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
 
 
-    SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-    SQL = SQL & " from rcontrol_plagas "
+    Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+    Sql = Sql & " from rcontrol_plagas "
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '    SQL = SQL & ObtenerWhereCab(True)
-    SQL = SQL & ObtenerWhereCab2(True)
-    SQL = SQL & " and idplaga <> 2 "
-    KilosTot = DevuelveValor(SQL)
+    Sql = Sql & ObtenerWhereCab2(True)
+    Sql = Sql & " and idplaga <> 2 "
+    KilosTot = DevuelveValor(Sql)
 
 
     For I = 3 To 13
-        SQL = "SELECT "
+        Sql = "SELECT "
         If KilosTot <> 0 Then
-            SQL = SQL & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+            Sql = Sql & " round((kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) * 100 / " & DBSet(KilosTot, "N") & ",2) "
         Else
-            SQL = SQL & "0 "
+            Sql = Sql & "0 "
         End If
-        SQL = SQL & " from rcontrol_plagas "
+        Sql = Sql & " from rcontrol_plagas "
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '        SQL = SQL & ObtenerWhereCab(True)
-        SQL = SQL & ObtenerWhereCab2(True)
-        SQL = SQL & " and rcontrol_plagas.idplaga = " & DBSet(I, "N")
+        Sql = Sql & ObtenerWhereCab2(True)
+        Sql = Sql & " and rcontrol_plagas.idplaga = " & DBSet(I, "N")
     
-        Porcen = DevuelveValor(SQL)
+        Porcen = DevuelveValor(Sql)
         
         Select Case I
             Case 3 ' piojo gris
@@ -3552,61 +3585,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 1"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 1"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "1)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "1)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 2"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 2"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "2)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "2)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 3"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 3"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "3)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "3)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 End Select
             
@@ -3616,61 +3649,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 4"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 4"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "4)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "4)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 5"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 5"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "5)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "5)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 6"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 6"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "6)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "6)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 End Select
             
@@ -3680,61 +3713,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 7"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 7"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "7)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "7)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 8"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 8"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "8)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "8)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 9"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 9"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "9)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "9)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 End Select
             
@@ -3744,61 +3777,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 16"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 16"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "16)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "16)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 17"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 17"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "17)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "17)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 18"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 18"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "18)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "18)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 End Select
             
@@ -3807,21 +3840,21 @@ Dim Porcen As Currency
                 If Porcen > 1 Then
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                    SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                    SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                    SQL = SQL & " and codplaga = 22"
-                    If TotalRegistros(SQL) = 0 Then
-                        SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                    Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                    Sql = Sql & " and codplaga = 22"
+                    If TotalRegistros(Sql) = 0 Then
+                        Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = SQL & Data1.Recordset!nroclasif & ","
-                        SQL = SQL & "1,"
-                        SQL = SQL & Data1.Recordset!codvarie & ","
-                        SQL = SQL & Data1.Recordset!Codsocio & ","
-                        SQL = SQL & Data1.Recordset!codcampo & ","
-                        SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                        SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                        SQL = SQL & "22)"
+                        Sql = Sql & "1,"
+                        Sql = Sql & Data1.Recordset!codvarie & ","
+                        Sql = Sql & Data1.Recordset!Codsocio & ","
+                        Sql = Sql & Data1.Recordset!codcampo & ","
+                        Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                        Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                        Sql = Sql & "22)"
                         
-                        conn.Execute SQL
+                        conn.Execute Sql
                     End If
                 End If
                 
@@ -3830,61 +3863,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 19"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 19"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "19)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "19)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 20"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 20"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "20)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "20)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 21"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 21"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "21)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "21)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 End Select
             
@@ -3894,61 +3927,61 @@ Dim Porcen As Currency
                     Case 1 To 5
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 10"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 10"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "10)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "10)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                         
                     Case 5.01 To 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 11"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 11"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "11)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "11)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
         
                     Case Is > 15
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                        SQL = "select count(*) from rclasifauto_plagas " & Replace(ObtenerWhereCab(True), "nroclasif", "numnotac")
-                        SQL = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
-                        SQL = SQL & " and codplaga = 12"
-                        If TotalRegistros(SQL) = 0 Then
-                            SQL = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
+                        Sql = "select count(*) from rclasifauto_plagas " & ObtenerWhereCab2(True)
+                        Sql = Sql & " and codplaga = 12"
+                        If TotalRegistros(Sql) = 0 Then
+                            Sql = "insert into rclasifauto_plagas (numnotac, codvarie, codsocio, codcampo, fechacla, ordinal, codplaga) values ("
 '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
 '                            SQL = SQL & Data1.Recordset!nroclasif & ","
-                            SQL = SQL & "1,"
-                            SQL = SQL & Data1.Recordset!codvarie & ","
-                            SQL = SQL & Data1.Recordset!Codsocio & ","
-                            SQL = SQL & Data1.Recordset!codcampo & ","
-                            SQL = SQL & DBSet(Data1.Recordset!fechacla, "F") & ","
-                            SQL = SQL & DBSet(Data1.Recordset!Ordinal, "N") & ","
-                            SQL = SQL & "12)"
+                            Sql = Sql & "1,"
+                            Sql = Sql & Data1.Recordset!codvarie & ","
+                            Sql = Sql & Data1.Recordset!Codsocio & ","
+                            Sql = Sql & Data1.Recordset!codcampo & ","
+                            Sql = Sql & DBSet(Data1.Recordset!fechacla, "F") & ","
+                            Sql = Sql & DBSet(Data1.Recordset!Ordinal, "N") & ","
+                            Sql = Sql & "12)"
                             
-                            conn.Execute SQL
+                            conn.Execute Sql
                         End If
                 
                 End Select
