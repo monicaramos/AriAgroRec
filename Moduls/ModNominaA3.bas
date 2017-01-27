@@ -165,7 +165,7 @@ Dim FecPag As String
         ' dias trabajados
         Dias = Format(Int(DBLet(Rs!importe2, "N")), "00")
         
-        RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & DBLet(Rs!Nombre1, "T") & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+        RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
         Print #NFic, RegDias
         
         Rs.MoveNext
