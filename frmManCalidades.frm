@@ -718,7 +718,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1189,7 +1189,7 @@ Private Sub Form_Load()
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT rcalidad.codvarie, variedades.nomvarie, rcalidad.codcalid,"
     CadenaConsulta = CadenaConsulta & "rcalidad.nomcalid, rcalidad.nomcalab, rcalidad.tipcalid, "
-    CadenaConsulta = CadenaConsulta & " CASE rcalidad.tipcalid WHEN 0 THEN ""Normal"" WHEN 1 THEN ""Destrio"" WHEN 2 THEN ""Venta Campo"" WHEN 3 THEN ""Mermas"" WHEN 4 THEN ""Pequeño"" END, "
+    CadenaConsulta = CadenaConsulta & " CASE rcalidad.tipcalid WHEN 0 THEN ""Normal"" WHEN 1 THEN ""Destrio"" WHEN 2 THEN ""Venta Campo"" WHEN 3 THEN ""Mermas"" WHEN 4 THEN ""Pequeño"" WHEN 5 THEN ""Pixat"" END, "
     CadenaConsulta = CadenaConsulta & "rcalidad.tipcalid1, "
     CadenaConsulta = CadenaConsulta & " CASE rcalidad.tipcalid1 WHEN 0 THEN ""Comercial"" WHEN 1 THEN ""No Comercial"" WHEN 2 THEN ""Retirada"" END, "
     CadenaConsulta = CadenaConsulta & " nomcalibrador1, nomcalibrador2, gastosrec, IF(gastosrec=1,'*','') as dgastorec, "

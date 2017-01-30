@@ -17,20 +17,6 @@ Begin VB.Form frmManPartesTMP
    ScaleWidth      =   7290
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.TextBox txtAux 
-      Alignment       =   1  'Right Justify
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      Height          =   290
-      Index           =   4
-      Left            =   5610
-      MaxLength       =   12
-      TabIndex        =   14
-      Tag             =   "Linea|N|N|||tmpliquidacion|contador|0||"
-      Text            =   "contador"
-      Top             =   4980
-      Width           =   900
-   End
    Begin VB.TextBox txtAux2 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
@@ -357,6 +343,20 @@ Begin VB.Form frmManPartesTMP
       Top             =   5400
       Width           =   900
    End
+   Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   290
+      Index           =   4
+      Left            =   5610
+      MaxLength       =   12
+      TabIndex        =   14
+      Tag             =   "Linea|N|N|||tmpliquidacion|contador|0||"
+      Text            =   "contador"
+      Top             =   3810
+      Width           =   900
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
       Begin VB.Menu mnBuscar 
@@ -495,7 +495,7 @@ Dim B As Boolean
     
     txtAux(1).visible = (SoloTrabajador = 0)
     txtAux(2).visible = (SoloTrabajador = 0)
-    txtAux(4).visible = False
+    txtAux(4).visible = (SoloTrabajador = 1)
     'el codigo de usuario no quiero mostrarlo
 '    txtAux(3).visible = False
     
