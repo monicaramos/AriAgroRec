@@ -5043,7 +5043,7 @@ End Function
 Private Sub CmdAcepDesF_Click()
 Dim Tipo As Byte
     If DatosOK Then
-        Pb2.visible = True
+        pb2.visible = True
         Select Case OpcionListado
             Case 5 ' anticipo
                 Tipo = 0
@@ -5058,7 +5058,7 @@ Dim Tipo As Byte
             Case 15 ' liquidacion
                 Tipo = 3
         End Select
-        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, Pb2) Then
+        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -6288,16 +6288,16 @@ Dim Tabla1 As String
 '                                        Exit Sub
 '                                    End If
                                 
-                                Me.Pb1.visible = True
-                                Me.Pb1.Max = Nregs
-                                Me.Pb1.Value = 0
+                                Me.pb1.visible = True
+                                Me.pb1.Max = Nregs
+                                Me.pb1.Value = 0
                                 Me.Refresh
                                 B = False
                                 If TipoPrec = 0 Then
-                                    B = FacturacionAnticiposCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1)
+                                    B = FacturacionAnticiposCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1)
                                 Else
                                     '[Monica]07/02/2012: pasamos a la funcion si es o no liquidacion complementaria
-                                    B = FacturacionLiquidacionesCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, (Check1(5).Value = 1), txtcodigo(6).Text, txtcodigo(7).Text, vFechas, (Check1(21).Value = 1))
+                                    B = FacturacionLiquidacionesCatadau(Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1, (Check1(5).Value = 1), txtcodigo(6).Text, txtcodigo(7).Text, vFechas, (Check1(21).Value = 1))
                                 End If
                                 If B Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -6856,31 +6856,31 @@ Dim MaxContador As String
                                 Exit Sub
                             End If
                             
-                            Me.Pb1.visible = True
-                            Me.Pb1.Max = Nregs
-                            Me.Pb1.Value = 0
+                            Me.pb1.visible = True
+                            Me.pb1.Max = Nregs
+                            Me.pb1.Value = 0
                             Me.Refresh
                             B = False
                             Select Case vParamAplic.Cooperativa
                                 Case 1, 3, 5  ' valsur / mogente
                                     If TipoPrec = 0 Then
-                                        B = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                        B = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
                                     Else
-                                        B = FacturacionLiquidacionesValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, Check1(5).Value)
+                                        B = FacturacionLiquidacionesValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, Check1(5).Value)
                                     End If
                                 Case 4 ' alzira
                                     If TipoPrec = 0 Then
                                         '[Monica]20/01/2012: alzira no ha hecho hasta el momento anticipos
                                         'b = FacturacionAnticiposValsur(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
-                                        B = FacturacionAnticiposAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                        B = FacturacionAnticiposAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
                                     Else
-                                        B = FacturacionLiquidacionesAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, TipoPrec)
+                                        B = FacturacionLiquidacionesAlzira(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, TipoPrec)
                                     End If
                                 Case 2 ' Picassent
                                     If TipoPrec = 0 Then
-                                        B = FacturacionAnticiposPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, Check1(14).Value = 1)
+                                        B = FacturacionAnticiposPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, Check1(14).Value = 1)
                                     Else
-                                        B = FacturacionLiquidacionesPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1)
+                                        B = FacturacionLiquidacionesPicassent(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, TipoPrec, Check1(14).Value = 1)
                                     End If
                                 
                                 
@@ -7309,16 +7309,16 @@ Dim vSeccion As CSeccion
                                 
                             If Nregs <> 0 Then
                                 
-                                Me.Pb1.visible = True
-                                Me.Pb1.Max = Nregs
-                                Me.Pb1.Value = 0
+                                Me.pb1.visible = True
+                                Me.pb1.Max = Nregs
+                                Me.pb1.Value = 0
                                 Me.Refresh
                                 B = False
                                 If TipoPrec = 0 Then
-                                    B = FacturacionAnticiposCatadau(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1)
+                                    B = FacturacionAnticiposCatadau(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1)
                                 Else
                                    '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
-                                    B = FacturacionLiquidacionesQuatretonda(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, (TipoPrec = 3), Seccion)
+                                    B = FacturacionLiquidacionesQuatretonda(Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1, (TipoPrec = 3), Seccion)
                                 End If
                                 If B Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7558,9 +7558,9 @@ Dim cadSelect1 As String
                             Exit Sub
                         End If
                         
-                        Me.Pb1.visible = True
-                        Me.Pb1.Max = Nregs
-                        Me.Pb1.Value = 0
+                        Me.pb1.visible = True
+                        Me.pb1.Max = Nregs
+                        Me.pb1.Value = 0
                         Me.Refresh
                         
                         cadSelect1 = " rhisfruta.tipoentr <> 1 and rhisfruta.recolect = 1 "
@@ -7568,7 +7568,7 @@ Dim cadSelect1 As String
                         If txtcodigo(7).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar <=" & DBSet(txtcodigo(7).Text, "F")
                         
                         
-                        B = FacturacionAnticiposGastos(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, cadSelect1)
+                        B = FacturacionAnticiposGastos(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, cadSelect1)
                         
                         If B Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7831,12 +7831,12 @@ Dim cadSelect1 As String
                             Exit Sub
                         End If
                         
-                        Me.Pb1.visible = True
-                        Me.Pb1.Max = Nregs
-                        Me.Pb1.Value = 0
+                        Me.pb1.visible = True
+                        Me.pb1.Max = Nregs
+                        Me.pb1.Value = 0
                         Me.Refresh
                         
-                        B = FacturacionAnticiposGenerico("tmpliquidacion", "codigo = " & vUsu.Codigo, txtcodigo(15).Text, Me.Pb1, txtcodigo(6).Text, txtcodigo(7).Text, Check1(12).Value = 1, Check1(22).Value = 1)
+                        B = FacturacionAnticiposGenerico("tmpliquidacion", "codigo = " & vUsu.Codigo, txtcodigo(15).Text, Me.pb1, txtcodigo(6).Text, txtcodigo(7).Text, Check1(12).Value = 1, Check1(22).Value = 1)
                         
                         If B Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -8127,11 +8127,11 @@ Dim CadenaAlbaranes As String
 '                                        Exit Sub
 '                                    End If
                                 
-                                Me.Pb1.visible = True
-                                Me.Pb1.Max = Nregs
-                                Me.Pb1.Value = 0
+                                Me.pb1.visible = True
+                                Me.pb1.Max = Nregs
+                                Me.pb1.Value = 0
                                 Me.Refresh
-                                B = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtcodigo(15).Text, Me.Pb1, CadenaAlbaranes)
+                                B = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtcodigo(15).Text, Me.pb1, CadenaAlbaranes)
                                 If B Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                                    
@@ -8439,7 +8439,7 @@ Private Sub Form_Activate()
                 
             Case 5    ' deshacer proceso de facturacion de anticipos
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(1) = 1 Then
@@ -8460,7 +8460,7 @@ Private Sub Form_Activate()
                 Check1(8).Value = 1
                 
             Case 7    ' deshacer proceso de facturacion de venta campo
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 Combo1(1).ListIndex = 0 ' por defecto anticipo
 '                txtCodigo(9).Text = vParamAplic.PrimFactAntVC
 '                txtCodigo(10).Text = vParamAplic.UltFactAntVC
@@ -8491,7 +8491,7 @@ Private Sub Form_Activate()
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(2) = 1 Then
@@ -8672,7 +8672,7 @@ Dim List As Collection
             Check1(28).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
             
         End If
-        Me.Pb1.visible = False
+        Me.pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         
@@ -8769,7 +8769,7 @@ Dim List As Collection
             End If
         End If
         
-        Me.Pb1.visible = False
+        Me.pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = False
@@ -8886,7 +8886,7 @@ Dim List As Collection
             
             End If
         End If
-        Me.Pb1.visible = False
+        Me.pb1.visible = False
         Me.Label2(10).Caption = ""
         Me.Label2(12).Caption = ""
         Me.FrameOpciones.visible = True
@@ -14630,9 +14630,9 @@ Dim HayPrecio As Boolean
     Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
-    Me.Pb1.visible = True
-    Me.Pb1.Max = Nregs
-    Me.Pb1.Value = 0
+    Me.pb1.visible = True
+    Me.pb1.Max = Nregs
+    Me.pb1.Value = 0
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
@@ -14644,7 +14644,7 @@ Dim HayPrecio As Boolean
                                     
     While Not Rs.EOF
         Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
-        IncrementarProgresNew Pb1, 1
+        IncrementarProgresNew pb1, 1
         Me.Refresh
         DoEvents
     
@@ -14842,7 +14842,7 @@ Dim HayPrecio As Boolean
     
     
                                     
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -14851,7 +14851,7 @@ Dim HayPrecio As Boolean
     Exit Function
     
 eCargarTemporal:
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -15228,9 +15228,9 @@ Dim ImporRet As Currency
     Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
-    Me.Pb1.visible = True
-    Me.Pb1.Max = Nregs
-    Me.Pb1.Value = 0
+    Me.pb1.visible = True
+    Me.pb1.Max = Nregs
+    Me.pb1.Value = 0
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
@@ -15243,7 +15243,7 @@ Dim ImporRet As Currency
     While Not Rs.EOF
     
         Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
-        IncrementarProgresNew Pb1, 1
+        IncrementarProgresNew pb1, 1
         Me.Refresh
         DoEvents
     
@@ -15389,7 +15389,7 @@ Dim ImporRet As Currency
 '
 '    conn.Execute Sql4
                                     
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -15398,7 +15398,7 @@ Dim ImporRet As Currency
     Exit Function
     
 eCargarTemporal:
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -16590,9 +16590,9 @@ Dim Sql5 As String
     Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
-    Me.Pb1.visible = True
-    Me.Pb1.Max = Nregs
-    Me.Pb1.Value = 0
+    Me.pb1.visible = True
+    Me.pb1.Max = Nregs
+    Me.pb1.Value = 0
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
@@ -16602,7 +16602,7 @@ Dim Sql5 As String
     While Not Rs.EOF
     
         Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
-        IncrementarProgresNew Pb1, 1
+        IncrementarProgresNew pb1, 1
         Me.Refresh
         DoEvents
     
@@ -16723,7 +16723,7 @@ Dim Sql5 As String
     conn.Execute Sql3
                                     
                                     
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -16732,7 +16732,7 @@ Dim Sql5 As String
     Exit Function
     
 eCargarTemporal:
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -17785,14 +17785,19 @@ Dim Tabla1 As String
         If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
         
+        
+        '[Monica]03/02/2017: para el caso de Picassent tb considera un socio como tercero si es:
+        '                    tipo de productor = socio y relacion con cooperativa = tercero
+        ' antes un socio era tercero si tipo de productor = tercero (1)
+        
         'Socio que no sea tercero
         If Check1(11).Value = 0 Then
-            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
         Else
             ' socio tercero de modulos
-            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1") Then Exit Sub
+            If Not AnyadirAFormula(cadSelect, "({rsocios.tipoprod} = 1 or ({rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "({rsocios.tipoprod} = 1 or ({rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
         End If
         
         'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA
@@ -18087,15 +18092,15 @@ Dim Tabla1 As String
                                     Exit Sub
                                 End If
                                 
-                                Me.Pb1.visible = True
-                                Me.Pb1.Max = Nregs
-                                Me.Pb1.Value = 0
+                                Me.pb1.visible = True
+                                Me.pb1.Max = Nregs
+                                Me.pb1.Value = 0
                                 Me.Refresh
                                 B = False
                                 If TipoPrec = 0 Then
-                                    B = FacturacionAnticiposPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, Check1(14).Value = 1, Check1(11).Value = 1)
+                                    B = FacturacionAnticiposPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1, Check1(14).Value = 1, Check1(11).Value = 1)
                                 Else
-                                    B = FacturacionLiquidacionesPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.Pb1, TipoPrec, Check1(14).Value = 1, Check1(11).Value = 1)
+                                    B = FacturacionLiquidacionesPicassentNew(Tabla1, cadSelect1, txtcodigo(15).Text, Me.pb1, TipoPrec, Check1(14).Value = 1, Check1(11).Value = 1)
                                 End If
                                 If B Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -18295,9 +18300,9 @@ Dim HayPrecio As Boolean
     Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
-    Me.Pb1.visible = True
-    Me.Pb1.Max = Nregs
-    Me.Pb1.Value = 0
+    Me.pb1.visible = True
+    Me.pb1.Max = Nregs
+    Me.pb1.Value = 0
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
@@ -18310,7 +18315,7 @@ Dim HayPrecio As Boolean
     While Not Rs.EOF
     
         Label2(12).Caption = "Socio " & Rs!Codsocio & " Variedad " & Rs!codvarie & "-" & Rs!codcalid & " Campo " & Rs!codcampo
-        IncrementarProgresNew Pb1, 1
+        IncrementarProgresNew pb1, 1
         Me.Refresh
         DoEvents
     
@@ -18373,7 +18378,7 @@ Dim HayPrecio As Boolean
                                         
                                     
                                     
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -18382,7 +18387,7 @@ Dim HayPrecio As Boolean
     Exit Function
     
 eCargarTemporal:
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
@@ -19944,7 +19949,7 @@ End Function
 
 
 
-Public Function InformeAnticiposPicassentNew(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, DescontarFVarias As Boolean, EsTerceros As Boolean) As Boolean
+Public Function InformeAnticiposPicassentNew(cTabla As String, cWhere As String, FecFac As String, pb1 As ProgressBar, DescontarFVarias As Boolean, EsTerceros As Boolean) As Boolean
 Dim SQL As String
 Dim Rs As ADODB.Recordset
 
@@ -20221,7 +20226,7 @@ Dim numfactu As Long
                 
             End If
                 
-            IncrementarProgresNew Pb1, 1
+            IncrementarProgresNew pb1, 1
             
             
             If B Then
@@ -20394,7 +20399,7 @@ Dim numfactu As Long
             B = True
         End If
         
-        IncrementarProgresNew Pb1, 1
+        IncrementarProgresNew pb1, 1
         
 '        vParamAplic.UltFactAnt = numfactu
         

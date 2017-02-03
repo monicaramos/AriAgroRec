@@ -30,8 +30,29 @@ Begin VB.Form frmEntBasculaPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   350
-      Index           =   4
-      Left            =   5910
+      Index           =   1
+      Left            =   1650
+      MaxLength       =   30
+      TabIndex        =   13
+      Tag             =   "Fecha Entrada|F|N|||rentradas|fechaent|dd/mm/yyyy||"
+      Top             =   4950
+      Width           =   1035
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   5
+      Left            =   7170
       MaxLength       =   30
       TabIndex        =   12
       Tag             =   "Nombre Variedad|T|N|||variedades|nomvarie|||"
@@ -51,8 +72,8 @@ Begin VB.Form frmEntBasculaPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   350
-      Index           =   3
-      Left            =   4350
+      Index           =   4
+      Left            =   5610
       MaxLength       =   10
       TabIndex        =   11
       Tag             =   "Variedad|N|N|1|999999|rentradas|codvarie|000000||"
@@ -72,8 +93,8 @@ Begin VB.Form frmEntBasculaPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   350
-      Index           =   2
-      Left            =   2820
+      Index           =   3
+      Left            =   4080
       MaxLength       =   10
       TabIndex        =   2
       Tag             =   "Nombre Socio|T|N|||rsocios|nomsocio|||"
@@ -164,8 +185,8 @@ Begin VB.Form frmEntBasculaPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   350
-      Index           =   1
-      Left            =   1590
+      Index           =   2
+      Left            =   2850
       MaxLength       =   7
       TabIndex        =   1
       Tag             =   "Código Socio|N|N|1|999999|rentradas|codsocio|000000|N|"
@@ -755,7 +776,7 @@ Private Sub Form_Load()
     End With
     
     
-    CadenaConsulta = "select numnotac, rentradas.codsocio, rsocios.nomsocio, rentradas.codvarie, variedades.nomvarie from rsocios, rentradas, variedades "
+    CadenaConsulta = "select numnotac, fechaent, rentradas.codsocio, rsocios.nomsocio, rentradas.codvarie, variedades.nomvarie from rsocios, rentradas, variedades "
     CadenaConsulta = CadenaConsulta & " where rentradas.codsocio = rsocios.codsocio and rentradas.codvarie = variedades.codvarie "
     
     If cWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & cWhere
@@ -812,7 +833,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Nombre|3870|;S|txtAux(2)|T|Nif|1250|;S|txtAux(3)|T|Teléfono|1300|;S|txtAux(4)|T|Móvil|1300|;S|txtAux(5)|T|Fecha Alta|1250|;"
+    tots = "S|txtAux(0)|T|Nota|1100|;S|txtAux(1)|T|Fecha|1300|;S|txtAux(2)|T|Socio|1000|;S|txtAux(3)|T|Nombre|3670|;S|txtAux(4)|T|Codigo|1000|;S|txtAux(5)|T|Variedad|1800|;"
     
     arregla tots, DataGrid1, Me
     

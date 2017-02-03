@@ -157,7 +157,6 @@ Begin VB.Form frmEntBascula
             EndProperty
             BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Ver Todos"
-               Object.Tag             =   "0"
             EndProperty
             BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Style           =   3
@@ -2266,8 +2265,8 @@ Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que tor
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmB As frmBuscaGrid
-Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmEntPrev As frmEntBasculaPrev
+Attribute frmEntPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmC1 As frmCal 'calendario fecha
@@ -2289,6 +2288,7 @@ Private WithEvents frmCamp As frmManCampos 'campos
 Attribute frmCamp.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'mensajes
 Attribute frmMens.VB_VarHelpID = -1
+
 
 ' *****************************************************
 Dim CodTipoMov As String
@@ -2813,7 +2813,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -2996,27 +2996,7 @@ Dim tabla As String
     MontaSQLCarga = SQL
 End Function
 
-Private Sub frmB_Selecionado(CadenaDevuelta As String)
-    Dim Aux As String
-    
-    If CadenaDevuelta <> "" Then
-        HaDevueltoDatos = True
-        Screen.MousePointer = vbHourglass
-        'Sabem quins camps son els que mos torna
-        'Creem una cadena consulta i posem els datos
-        CadB = ""
-        Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
-        '   Com la clau principal es única, en posar el sql apuntant
-        '   al valor retornat sobre la clau ppal es suficient
-        ' *** canviar o llevar el WHERE; repasar codEmpre ***
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
-        'CadenaConsulta = "select * from " & NombreTabla & " WHERE codempre = " & codEmpre & " AND " & CadB & " " & Ordenacion
-        ' **********************************
-        PonerCadenaBusqueda
-        Screen.MousePointer = vbDefault
-    End If
-End Sub
+
 
 Private Sub frmC_Selec(vFecha As Date)
 Dim Indice As Byte
@@ -3030,38 +3010,7 @@ Dim Indice As Byte
     Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
-'partidas
-Dim Zona As String
-Dim Poblacion As String
-Dim OtroCampo As String
-Dim CodPobla As String
 
-    Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
-    FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
-    Text3(3).Text = RecuperaValor(CadenaSeleccion, 5) 'codzona
-    Text4(3).Text = RecuperaValor(CadenaSeleccion, 6) 'nomzona
-    Text5(3).Text = RecuperaValor(CadenaSeleccion, 4)
-    
-    
-'    Zona = ""
-'    Text3(3).Text = ""
-'    Text4(3).Text = ""
-'    Text4(3).Text = ""
-'
-'    Zona = RecuperaValor(CadenaSeleccion, 3)
-'    Text3(3).Text = Zona
-'    otroCampo = "codpobla"
-'    If Zona <> "" Then
-'        Text4(3).Text = DevuelveDesdeBDNew(cAgro, "rzonas", "nomzonas", "codzona", Zona, "N", otroCampo)
-'        If otroCampo <> "" Then
-'            CodPobla = otroCampo
-'            If CodPobla <> "" Then Text5(3).Text = DevuelveDesdeBDNew(cAgro, "rpueblos", "despobla", "codpobla", CodPobla, "T")
-'        End If
-'    End If
-    
-End Sub
 
 Private Sub frmCamp_DatoSeleccionado(CadenaSeleccion As String)
     Text1(5).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de campo
@@ -3079,6 +3028,20 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
     Text1(12).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de capataz
     FormateaCampo Text1(12)
     Text2(12).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de capataz
+End Sub
+
+Private Sub frmEntPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    
+    If CadenaSeleccion <> "" Then
+        CadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
@@ -3423,42 +3386,51 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
-    Dim NombreTabla1 As String
-        
-    'Cridem al form
-    ' **************** arreglar-ho per a vore lo que es desije ****************
-    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & "Nota|rentradas.numnotac|N|0000000|10·"
-    cad = cad & "Socio|rentradas.codsocio|N|000000|9·"
-    cad = cad & "Nombre|rsocios.nomsocio|T||45·"
-    cad = cad & "Variedad|variedades.nomvarie|T||40·"
-    
-    NombreTabla1 = "(rentradas inner join rsocios on rentradas.codsocio = rsocios.codsocio) inner join variedades on rentradas.codvarie = variedades.codvarie "
-    
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = NombreTabla1
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-        frmB.vTitulo = "Entradas de Báscula" ' ***** repasa açò: títol de BuscaGrid *****
-        frmB.vSelElem = 0
+'    Dim cad As String
+'    Dim NombreTabla1 As String
+'
+'    'Cridem al form
+'    ' **************** arreglar-ho per a vore lo que es desije ****************
+'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
+'    cad = ""
+'    cad = cad & "Nota|rentradas.numnotac|N|0000000|10·"
+'    cad = cad & "Socio|rentradas.codsocio|N|000000|9·"
+'    cad = cad & "Nombre|rsocios.nomsocio|T||45·"
+'    cad = cad & "Variedad|variedades.nomvarie|T||40·"
+'
+'    NombreTabla1 = "(rentradas inner join rsocios on rentradas.codsocio = rsocios.codsocio) inner join variedades on rentradas.codvarie = variedades.codvarie "
+'
+'    If cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vtabla = NombreTabla1
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
+'        frmB.vTitulo = "Entradas de Báscula" ' ***** repasa açò: títol de BuscaGrid *****
+'        frmB.vSelElem = 0
+'
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
+'        'tindrem que tancar el form llançant l'event
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha retornat datos, es a decir NO ha retornat datos
+'            PonerFoco Text1(kCampo)
+'        End If
+'    End If
 
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-        'tindrem que tancar el form llançant l'event
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
+    Set frmEntPrev = New frmEntBasculaPrev
+    frmEntPrev.cWhere = CadB
+    frmEntPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmEntPrev.Show vbModal
+    
+    Set frmEntPrev = Nothing
+
+
 End Sub
 
 
