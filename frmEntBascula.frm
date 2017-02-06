@@ -2163,11 +2163,11 @@ Begin VB.Form frmEntBascula
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   14040
+      Left            =   14100
       TabIndex        =   101
       Top             =   150
-      Width           =   405
-      _ExtentX        =   714
+      Width           =   345
+      _ExtentX        =   609
       _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -2603,9 +2603,6 @@ Dim I As Integer
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 12
     End With
-    
-    
-    
     
     
 '    ' ******* si n'hi han llínies *******
@@ -3386,42 +3383,7 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-'    Dim cad As String
-'    Dim NombreTabla1 As String
-'
-'    'Cridem al form
-'    ' **************** arreglar-ho per a vore lo que es desije ****************
-'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-'    cad = ""
-'    cad = cad & "Nota|rentradas.numnotac|N|0000000|10·"
-'    cad = cad & "Socio|rentradas.codsocio|N|000000|9·"
-'    cad = cad & "Nombre|rsocios.nomsocio|T||45·"
-'    cad = cad & "Variedad|variedades.nomvarie|T||40·"
-'
-'    NombreTabla1 = "(rentradas inner join rsocios on rentradas.codsocio = rsocios.codsocio) inner join variedades on rentradas.codvarie = variedades.codvarie "
-'
-'    If cad <> "" Then
-'        Screen.MousePointer = vbHourglass
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        frmB.vtabla = NombreTabla1
-'        frmB.vSQL = CadB
-'        HaDevueltoDatos = False
-'        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-'        frmB.vTitulo = "Entradas de Báscula" ' ***** repasa açò: títol de BuscaGrid *****
-'        frmB.vSelElem = 0
-'
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-'        'tindrem que tancar el form llançant l'event
-'        If HaDevueltoDatos Then
-'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-'                cmdRegresar_Click
-'        Else   'de ha retornat datos, es a decir NO ha retornat datos
-'            PonerFoco Text1(kCampo)
-'        End If
-'    End If
+
 
     Set frmEntPrev = New frmEntBasculaPrev
     frmEntPrev.cWhere = CadB

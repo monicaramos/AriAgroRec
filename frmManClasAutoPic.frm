@@ -5,44 +5,165 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManClasAutoPic 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Clasificación Automática"
-   ClientHeight    =   7155
+   ClientHeight    =   7875
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   12960
+   ClientTop       =   30
+   ClientWidth     =   14280
    Icon            =   "frmManClasAutoPic.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7155
-   ScaleWidth      =   12960
+   ScaleHeight     =   7875
+   ScaleWidth      =   14280
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameAux2 
-      Caption         =   "Plagas"
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      Enabled         =   0   'False
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      Height          =   300
+      Index           =   0
+      Left            =   9870
+      TabIndex        =   61
+      Top             =   210
+      Visible         =   0   'False
+      Width           =   1605
+   End
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3690
+      TabIndex        =   59
+      Top             =   90
+      Width           =   1305
+      Begin MSComctlLib.Toolbar Toolbar2 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   60
+         Top             =   180
+         Width           =   1005
+         _ExtentX        =   1773
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Generación"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Actualizar Entradas"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   30
+      TabIndex        =   57
+      Top             =   90
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   58
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameAux2 
+      Caption         =   "Plagas"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00C00000&
-      Height          =   3000
-      Left            =   5580
-      TabIndex        =   40
-      Top             =   3510
-      Width           =   7200
+      Height          =   3180
+      Left            =   5610
+      TabIndex        =   38
+      Top             =   3990
+      Width           =   8595
       Begin VB.TextBox txtAux1 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   6
          Left            =   5970
          MaxLength       =   6
-         TabIndex        =   56
+         TabIndex        =   54
          Tag             =   "Ordinal|N|N|||rclasifauto_plagas|ordinal|0000000|S|"
          Text            =   "ordinal"
          Top             =   2580
@@ -54,10 +175,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   1
          Left            =   3570
-         TabIndex        =   53
+         TabIndex        =   51
          Top             =   2580
          Visible         =   0   'False
          Width           =   2340
@@ -66,11 +196,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   4
          Left            =   4530
          MaxLength       =   10
-         TabIndex        =   49
+         TabIndex        =   47
          Tag             =   "Fecha|F|N|||rclasifauto_plagas|fechacla|dd/mm/yyyy|S|"
          Text            =   "fecha"
          Top             =   2550
@@ -81,11 +220,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   2
          Left            =   3570
          MaxLength       =   10
-         TabIndex        =   48
+         TabIndex        =   46
          Tag             =   "Socio|N|N|||rclasifauto_plagas|codsocio|000000|S|"
          Text            =   "socio"
          Top             =   2550
@@ -96,11 +244,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   0
          Left            =   30
          MaxLength       =   16
-         TabIndex        =   46
+         TabIndex        =   44
          Tag             =   "Nro.Nota|N|N|||rclasifauto_plagas|numnotac|0000000|S|"
          Text            =   "nota"
          Top             =   2565
@@ -110,11 +267,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.TextBox txtAux1 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   5
          Left            =   495
          MaxLength       =   6
-         TabIndex        =   45
+         TabIndex        =   43
          Tag             =   "Plaga|N|N|||rclasifauto_plagas|codplaga|00|S|"
          Text            =   "Pla"
          Top             =   2565
@@ -126,10 +292,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   5
          Left            =   1155
-         TabIndex        =   44
+         TabIndex        =   42
          Top             =   2565
          Visible         =   0   'False
          Width           =   2340
@@ -141,7 +316,7 @@ Begin VB.Form frmManClasAutoPic
          Index           =   1
          Left            =   3060
          MaxLength       =   10
-         TabIndex        =   43
+         TabIndex        =   41
          Tag             =   "Variedad|N|N|||rclasifauto_plagas|codvarie|000000|S|"
          Text            =   "Va"
          Top             =   2565
@@ -151,11 +326,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   300
          Index           =   5
          Left            =   900
          MaskColor       =   &H00000000&
-         TabIndex        =   42
+         TabIndex        =   40
          ToolTipText     =   "Buscar Calidad"
          Top             =   2550
          Visible         =   0   'False
@@ -165,11 +349,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   3
          Left            =   4080
          MaxLength       =   10
-         TabIndex        =   41
+         TabIndex        =   39
          Tag             =   "Campo|N|N|||rclasifauto_plagas|codcampo|00000000|S|"
          Text            =   "campo"
          Top             =   2550
@@ -180,7 +373,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   390
          Index           =   2
          Left            =   120
-         TabIndex        =   47
+         TabIndex        =   45
          Top             =   255
          Width           =   1200
          _ExtentX        =   2117
@@ -260,7 +453,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   2310
          Index           =   2
          Left            =   120
-         TabIndex        =   50
+         TabIndex        =   48
          Top             =   600
          Width           =   6100
          _ExtentX        =   10769
@@ -269,19 +462,19 @@ Begin VB.Form frmManClasAutoPic
          AllowUpdate     =   0   'False
          BorderStyle     =   0
          HeadLines       =   1
-         RowHeight       =   15
+         RowHeight       =   19
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -332,32 +525,50 @@ Begin VB.Form frmManClasAutoPic
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   3
       Left            =   3630
       Locked          =   -1  'True
       MaxLength       =   7
-      TabIndex        =   37
+      TabIndex        =   35
       Tag             =   "Kilos Neto|N|S|||rclasifauto_clasif|kiloscal|###,##0.00||"
       Text            =   "neto"
-      Top             =   6720
+      Top             =   7290
       Width           =   1400
    End
    Begin VB.Frame FrameAux1 
-      Height          =   2985
+      Height          =   3105
       Left            =   30
       TabIndex        =   9
-      Top             =   510
-      Width           =   12765
+      Top             =   840
+      Width           =   14190
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   10
          Left            =   10260
          MaxLength       =   6
-         TabIndex        =   58
+         TabIndex        =   56
          Tag             =   "%Pixat|N|S|||rclasifauto|porcpixat|##0.00||"
          Text            =   "%"
          Top             =   630
@@ -368,11 +579,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   9
          Left            =   11010
          MaxLength       =   6
-         TabIndex        =   57
+         TabIndex        =   55
          Tag             =   "Observac|T|S|||rclasifauto|observac|||"
          Text            =   "observ"
          Top             =   660
@@ -383,11 +603,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   8
          Left            =   10440
          MaxLength       =   6
-         TabIndex        =   54
+         TabIndex        =   52
          Tag             =   "Ordinal|N|N|0|999999|rclasifauto|ordinal|000000|S|"
          Text            =   "ordina"
          Top             =   660
@@ -398,11 +627,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   7
          Left            =   9540
          MaxLength       =   6
-         TabIndex        =   52
+         TabIndex        =   50
          Tag             =   "%Destrio|N|S|||rclasifauto|porcdest|##0.00||"
          Text            =   "%"
          Top             =   630
@@ -413,11 +651,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   6
          Left            =   8790
          MaxLength       =   7
-         TabIndex        =   51
+         TabIndex        =   49
          Tag             =   "Kilos Manuales|N|S|||rclasifauto|kilospeq|###,##0||"
          Text            =   "kilos"
          Top             =   630
@@ -428,11 +675,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   6630
          MaxLength       =   10
-         TabIndex        =   39
+         TabIndex        =   37
          Tag             =   "Fecha Clasif|F|N|||rclasifauto|fechacla|dd/mm/yyyy|S|"
          Text            =   "fecha"
          Top             =   630
@@ -442,11 +698,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   300
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   4
          Left            =   6450
          MaskColor       =   &H00000000&
-         TabIndex        =   35
+         TabIndex        =   33
          ToolTipText     =   "Buscar Campo"
          Top             =   600
          Visible         =   0   'False
@@ -455,11 +720,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   300
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   3
          Left            =   3840
          MaskColor       =   &H00000000&
-         TabIndex        =   34
+         TabIndex        =   32
          ToolTipText     =   "Buscar Socio"
          Top             =   600
          Visible         =   0   'False
@@ -468,11 +742,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   300
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   1590
          MaskColor       =   &H00000000&
-         TabIndex        =   33
+         TabIndex        =   31
          ToolTipText     =   "Buscar Variedad"
          Top             =   600
          Visible         =   0   'False
@@ -480,7 +763,16 @@ Begin VB.Form frmManClasAutoPic
       End
       Begin VB.ComboBox Combo1 
          Appearance      =   0  'Flat
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   7380
          Style           =   2  'Dropdown List
@@ -494,7 +786,16 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   5
          Left            =   5670
          MaxLength       =   8
@@ -510,10 +811,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   4
          Left            =   3960
-         TabIndex        =   29
+         TabIndex        =   27
          Text            =   "12345678901234567890"
          Top             =   600
          Visible         =   0   'False
@@ -524,10 +834,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   3
          Left            =   1620
-         TabIndex        =   22
+         TabIndex        =   20
          Text            =   "12345678901234567890"
          Top             =   600
          Visible         =   0   'False
@@ -537,7 +856,16 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   3
          Left            =   960
          MaxLength       =   6
@@ -552,7 +880,16 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   2  'Center
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   4
          Left            =   3270
          MaxLength       =   6
@@ -565,31 +902,31 @@ Begin VB.Form frmManClasAutoPic
       End
       Begin MSDataGridLib.DataGrid DataGridAux 
          Bindings        =   "frmManClasAutoPic.frx":0024
-         Height          =   2610
+         Height          =   2770
          Index           =   1
          Left            =   120
-         TabIndex        =   36
+         TabIndex        =   34
          Top             =   210
-         Width           =   12465
-         _ExtentX        =   21987
-         _ExtentY        =   4604
+         Width           =   13865
+         _ExtentX        =   24448
+         _ExtentY        =   4895
          _Version        =   393216
          AllowUpdate     =   0   'False
          BorderStyle     =   0
          HeadLines       =   1
-         RowHeight       =   15
+         RowHeight       =   19
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -702,7 +1039,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   255
          Index           =   0
          Left            =   3990
-         TabIndex        =   30
+         TabIndex        =   28
          Top             =   270
          Width           =   615
       End
@@ -710,7 +1047,7 @@ Begin VB.Form frmManClasAutoPic
          Caption         =   "Variedad"
          Height          =   255
          Left            =   990
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   300
          Width           =   675
       End
@@ -719,7 +1056,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   255
          Index           =   2
          Left            =   5580
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   270
          Width           =   795
       End
@@ -728,7 +1065,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   255
          Index           =   1
          Left            =   3240
-         TabIndex        =   20
+         TabIndex        =   18
          Top             =   300
          Width           =   690
       End
@@ -736,7 +1073,7 @@ Begin VB.Form frmManClasAutoPic
          Caption         =   "Situación"
          Height          =   255
          Left            =   4710
-         TabIndex        =   14
+         TabIndex        =   12
          Top             =   270
          Width           =   1005
       End
@@ -753,29 +1090,38 @@ Begin VB.Form frmManClasAutoPic
    Begin VB.Frame FrameAux0 
       Caption         =   "Clasificación"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00C00000&
-      Height          =   3000
+      Height          =   3180
       Left            =   30
-      TabIndex        =   15
-      Top             =   3510
+      TabIndex        =   13
+      Top             =   3990
       Width           =   5505
       Begin VB.TextBox txtAux 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   3
          Left            =   4290
          MaxLength       =   7
-         TabIndex        =   28
+         TabIndex        =   26
          Tag             =   "Kilos Neto|N|S|||rclasifauto_clasif|kiloscal|###,##0||"
          Text            =   "neto"
          Top             =   2550
@@ -786,11 +1132,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   4
          Left            =   4680
          MaxLength       =   7
-         TabIndex        =   55
+         TabIndex        =   53
          Tag             =   "Ordinal|N|N|||rclasifauto_clasif|ordinal|000000|S|"
          Text            =   "ordinal"
          Top             =   2550
@@ -800,11 +1155,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   300
          Index           =   2
          Left            =   3420
          MaskColor       =   &H00000000&
-         TabIndex        =   31
+         TabIndex        =   29
          ToolTipText     =   "Buscar Calidad"
          Top             =   2565
          Visible         =   0   'False
@@ -813,11 +1177,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.TextBox txtAux 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   2
          Left            =   3060
          MaxLength       =   2
-         TabIndex        =   27
+         TabIndex        =   25
          Tag             =   "Calidad|N|N|||rclasifauto_clasif|codcalid|00|S|"
          Text            =   "Ca"
          Top             =   2565
@@ -829,10 +1202,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   2
          Left            =   3645
-         TabIndex        =   26
+         TabIndex        =   24
          Text            =   "Calidad"
          Top             =   2565
          Visible         =   0   'False
@@ -841,11 +1223,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.CommandButton btnBuscar 
          Appearance      =   0  'Flat
          Caption         =   "+"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   300
          Index           =   0
          Left            =   945
          MaskColor       =   &H00000000&
-         TabIndex        =   25
+         TabIndex        =   23
          ToolTipText     =   "Buscar Envase"
          Top             =   2565
          Visible         =   0   'False
@@ -856,10 +1247,19 @@ Begin VB.Form frmManClasAutoPic
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   0
          Left            =   1155
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   2565
          Visible         =   0   'False
          Width           =   1815
@@ -867,11 +1267,20 @@ Begin VB.Form frmManClasAutoPic
       Begin VB.TextBox txtAux 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   1
          Left            =   495
          MaxLength       =   6
-         TabIndex        =   17
+         TabIndex        =   15
          Tag             =   "Variedad|N|N|||rclasifauto_clasif|codvarie|000000|S|"
          Text            =   "Var"
          Top             =   2565
@@ -882,11 +1291,20 @@ Begin VB.Form frmManClasAutoPic
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   290
          Index           =   0
          Left            =   30
          MaxLength       =   16
-         TabIndex        =   16
+         TabIndex        =   14
          Tag             =   "Nro.Nota|N|N|||rclasifauto_clasif|numnotac|0000000|S|"
          Text            =   "nota"
          Top             =   2565
@@ -897,7 +1315,7 @@ Begin VB.Form frmManClasAutoPic
          Height          =   390
          Index           =   0
          Left            =   135
-         TabIndex        =   18
+         TabIndex        =   16
          Top             =   225
          Visible         =   0   'False
          Width           =   1200
@@ -973,31 +1391,31 @@ Begin VB.Form frmManClasAutoPic
       End
       Begin MSDataGridLib.DataGrid DataGridAux 
          Bindings        =   "frmManClasAutoPic.frx":003C
-         Height          =   2610
+         Height          =   2760
          Index           =   0
          Left            =   120
-         TabIndex        =   19
+         TabIndex        =   17
          Top             =   300
          Width           =   5220
          _ExtentX        =   9208
-         _ExtentY        =   4604
+         _ExtentY        =   4868
          _Version        =   393216
          AllowUpdate     =   0   'False
          BorderStyle     =   0
          HeadLines       =   1
-         RowHeight       =   15
+         RowHeight       =   19
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -1046,16 +1464,16 @@ Begin VB.Form frmManClasAutoPic
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   0
-      Left            =   45
+      Left            =   30
       TabIndex        =   7
-      Top             =   6525
+      Top             =   7170
       Width           =   2355
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1072,130 +1490,53 @@ Begin VB.Form frmManClasAutoPic
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   11715
+      Left            =   13155
       TabIndex        =   6
-      Top             =   6690
+      Top             =   7320
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
-      Height          =   375
-      Left            =   10620
-      TabIndex        =   5
-      Top             =   6690
-      Width           =   1035
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   12
-      Top             =   0
-      Width           =   12960
-      _ExtentX        =   22860
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   19
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Generacion"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Actualizar Entradas"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Enabled         =   0   'False
-         Height          =   195
-         Index           =   0
-         Left            =   7830
-         TabIndex        =   13
-         Top             =   60
-         Visible         =   0   'False
-         Width           =   1215
-      End
+      Height          =   375
+      Left            =   12060
+      TabIndex        =   5
+      Top             =   7320
+      Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   11730
+      Left            =   13170
       TabIndex        =   11
-      Top             =   6690
+      Top             =   7320
       Visible         =   0   'False
       Width           =   1035
    End
@@ -1204,17 +1545,36 @@ Begin VB.Form frmManClasAutoPic
       Index           =   2
       Left            =   3750
       MaxLength       =   250
-      TabIndex        =   32
-      Top             =   600
+      TabIndex        =   30
+      Top             =   870
       Width           =   2205
+   End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   13710
+      TabIndex        =   62
+      Top             =   210
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
    End
    Begin VB.Label Label2 
       Caption         =   "TOTAL :"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
@@ -1222,12 +1582,14 @@ Begin VB.Form frmManClasAutoPic
       Height          =   255
       Index           =   103
       Left            =   2730
-      TabIndex        =   38
-      Top             =   6750
+      TabIndex        =   36
+      Top             =   7320
       Width           =   1005
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -1301,6 +1663,10 @@ Attribute VB_Exposed = False
 Option Explicit
 
 'Dim T1 As Single
+Private Const IdPrograma = 4010
+
+
+
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
 Public Event DatoSeleccionado(CadenaSeleccion As String)
@@ -1538,28 +1904,60 @@ Dim I As Integer
     PrimeraVez = True
     
     ' ICONETS DE LA BARRA
-    btnPrimero = 16 'index del botó "primero"
+'    btnPrimero = 16 'index del botó "primero"
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        'l'1 i el 2 son separadors
+'        .Buttons(3).Image = 1   'Buscar
+'        .Buttons(4).Image = 2   'Totss
+'        'el 5 i el 6 son separadors
+'        .Buttons(7).Image = 3   'Insertar
+'        .Buttons(8).Image = 4   'Modificar
+'        .Buttons(9).Image = 5   'Borrar
+'        .Buttons(11).Image = 34 'Traspaso desde el calibrador
+'        'el 10 i el 11 son separadors
+'        .Buttons(12).Image = 33 'Actualizar la clasificacion
+'        .Buttons(13).Image = 11  'Eixir
+'        'el 13 i el 14 son separadors
+'        .Buttons(btnPrimero).Image = 6  'Primer
+'        .Buttons(btnPrimero + 1).Image = 7 'Anterior
+'        .Buttons(btnPrimero + 2).Image = 8 'Següent
+'        .Buttons(btnPrimero + 3).Image = 9 'Últim
+'    End With
+    
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         'l'1 i el 2 son separadors
-        .Buttons(3).Image = 1   'Buscar
-        .Buttons(4).Image = 2   'Totss
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
         'el 5 i el 6 son separadors
-        .Buttons(7).Image = 3   'Insertar
-        .Buttons(8).Image = 4   'Modificar
-        .Buttons(9).Image = 5   'Borrar
-        .Buttons(11).Image = 34 'Traspaso desde el calibrador
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
         'el 10 i el 11 son separadors
-        .Buttons(12).Image = 33 'Actualizar la clasificacion
-        .Buttons(13).Image = 11  'Eixir
-        'el 13 i el 14 son separadors
-        .Buttons(btnPrimero).Image = 6  'Primer
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Següent
-        .Buttons(btnPrimero + 3).Image = 9 'Últim
+'        .Buttons(11).Image = 26    'tarar tractor
+'        .Buttons(12).Image = 24  'paletizacion
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar2
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 34  'Traspaso desde el calibrador
+        .Buttons(2).Image = 33  'Actualizar la clasificacion
+    End With
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
+    End With
+    
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
@@ -1679,7 +2077,7 @@ Dim B As Boolean
     btnBuscar(1).visible = (Modo = 1) 'Not b And Not Modo = 4
     btnBuscar(3).visible = (Modo = 1) 'Not b And Not Modo = 4
     btnBuscar(4).visible = (Modo = 1) 'Not b And Not Modo = 4
-    btnBuscar(5).visible = Not B And Not Modo = 4
+'    btnBuscar(5).visible = Not B And Not Modo = 4
     Combo1(0).visible = Not B
     
     
@@ -1771,38 +2169,39 @@ Dim I As Byte
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(7).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = False 'B And Not DeConsulta
+    Me.mnNuevo.Enabled = False 'B And Not DeConsulta
     
     B = (Modo = 2 And Me.Adoaux(1).Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(9).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     'actualizar
-    Toolbar1.Buttons(12).Enabled = B
+    Toolbar2.Buttons(2).Enabled = B
     Me.mnActualizar.Enabled = B
     
     
     'Traspaso desde el calibrador
     'Toolbar1.Buttons(11).Enabled = True And Not DeConsulta
     'Imprimir
-    'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
-    'Toolbar1.Buttons(12).Enabled = True And Not DeConsulta
+    Toolbar1.Buttons(8).Enabled = False '(B Or Modo = 0)
+    Toolbar1.Buttons(8).Enabled = False 'True And Not DeConsulta
        
     ' *** si n'hi han llínies que tenen grids (en o sense tab) ***
 '++monica: si insertamos lo he quitado
 '    b = (Modo = 3 Or Modo = 4 Or Modo = 2) And Not DeConsulta
-    B = (Modo = 2) And Not DeConsulta
+    B = (Modo = 2) And Not DeConsulta And Me.Adoaux(1).Recordset.RecordCount > 0
+    
     For I = 0 To ToolAux.Count - 1
         If I <> 1 Then
             ToolAux(I).Buttons(1).Enabled = B
@@ -2077,23 +2476,21 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 3  'Búscar
+        Case 5  'Búscar
            mnBuscar_Click
-        Case 4  'Tots
+        Case 6  'Tots
             mnVerTodos_Click
-        Case 7  'Nou
+        Case 1  'Nou
             mnNuevo_Click
-        Case 8  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 9  'Borrar
+        Case 3  'Borrar
             mnEliminar_Click
         Case 11 ' Generacion
             mnGeneracion_Click
         
         Case 12 'Actualizar entradas
             mnActualizar_Click
-        Case 13    'Eixir
-            mnSalir_Click
             
 '        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
 '            Desplazamiento (Button.Index - btnPrimero)
@@ -2106,7 +2503,7 @@ Dim I As Integer
 ' ***** Si la clau primaria de la capçalera no es Text1(0), canviar-ho en <=== *****
     If Modo <> 1 Then
         LimpiarCampos
-        LLamaLineas 1, 1, DataGridAux(1).Top + 206 'Pone el form en Modo=1, Buscar
+        LLamaLineas 1, 1, DataGridAux(1).Top + 250 'Pone el form en Modo=1, Buscar
         PonerFoco Text1(0) ' <===
         Text1(0).BackColor = vbYellow ' <===
         ' *** si n'hi han combos a la capçalera ***
@@ -2894,6 +3291,7 @@ Dim I As Integer
                     BloquearTxt txtAux(2), False
                     BloquearTxt txtAux(3), False
                     BloquearbtnBuscar Me, Modo, ModoLineas, "FrameAux0"
+                    BloquearbtnBuscar Me, Modo, ModoLineas, "FrameAux2"
                     Me.btnBuscar(0).Enabled = False
                     Me.btnBuscar(0).visible = False
                     PonerFoco txtAux(2)
@@ -3044,6 +3442,9 @@ Dim B As Boolean
             Text1(7).Top = alto
             Text1(1).visible = B
             Text1(1).Top = alto
+            
+            Text1(10).visible = B
+            Text1(10).Top = alto
 
             Text1(8).visible = False
             Text1(9).visible = False
@@ -3058,14 +3459,14 @@ Dim B As Boolean
             Text2(3).Top = alto
             Text2(4).visible = B
             Text2(4).Top = alto
-'            btnBuscar(1).visible = (Modo = 1) 'b
-'            btnBuscar(1).Top = alto
-'            btnBuscar(3).visible = (Modo = 1) 'b
-'            btnBuscar(3).Top = alto
-'            btnBuscar(4).visible = (modo = 1)b
-'            btnBuscar(4).Top = alto
+            btnBuscar(1).visible = (Modo = 1) 'b
+            btnBuscar(1).Top = alto
+            btnBuscar(3).visible = (Modo = 1) 'b
+            btnBuscar(3).Top = alto
+            btnBuscar(4).visible = (Modo = 1) 'b
+            btnBuscar(4).Top = alto
             Combo1(0).visible = B
-            Combo1(0).Top = alto
+            Combo1(0).Top = alto + 10
         
         Case 2 'plagas
             B = (xModo = 5) 'Insertar o Modificar Llínies
@@ -3087,6 +3488,18 @@ Dim B As Boolean
     End Select
 End Sub
 
+
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1 ' Generacion
+            mnGeneracion_Click
+        
+        Case 2 'Actualizar entradas
+            mnActualizar_Click
+            
+    End Select
+
+End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
@@ -3402,7 +3815,7 @@ Dim tots As String
             tots = tots & "S|txtAux(2)|T|Calidad|1000|;S|btnBuscar(2)|B|||;S|txtAux2(2)|T|Nombre|2200|;"
             tots = tots & "S|txtAux(3)|T|Muestra|1400|;N|txtAux(4)|T|Ordinal|1400|;"
             
-            arregla tots, DataGridAux(Index), Me
+            arregla tots, DataGridAux(Index), Me, 350
             
 '            DataGridAux(0).Columns(3).Alignment = dbgLeft
 '            DataGridAux(0).Columns(5).NumberFormat = "###,##0"
@@ -3415,15 +3828,15 @@ Dim tots As String
         Case 1 'entradas
             'si es visible|control|tipo campo|nombre campo|ancho control|
             tots = "N||||0|;" 'numnotac
-            tots = tots & "S|Text1(3)|T|Codigo|700|;S|btnBuscar(1)|B|||;S|Text2(3)|T|Variedad|1000|;"
-            tots = tots & "S|Text1(4)|T|Socio|650|;S|btnBuscar(3)|B|||;S|Text2(4)|T|Nombre|3100|;"
-            tots = tots & "S|Text1(5)|T|Campo|800|;S|btnBuscar(4)|B|||;S|Text1(1)|T|Fecha|1100|;N||||0|;S|Combo1(0)|C|Situación|2100|;"
+            tots = tots & "S|Text1(3)|T|Codigo|800|;S|btnBuscar(1)|B|||;S|Text2(3)|T|Variedad|1100|;"
+            tots = tots & "S|Text1(4)|T|Socio|850|;S|btnBuscar(3)|B|||;S|Text2(4)|T|Nombre|3100|;"
+            tots = tots & "S|Text1(5)|T|Campo|1000|;S|btnBuscar(4)|B|||;S|Text1(1)|T|Fecha|1200|;N||||0|;S|Combo1(0)|C|Situación|2100|;"
             tots = tots & "N||||0|;"
             tots = tots & "N||||0|;"
             tots = tots & "N||||0|;"
-            tots = tots & "S|Text1(6)|T|Kil.Man|800|;S|Text1(7)|T|%Destrio|800|;S|Text1(10)|T|%Pixat|800|;N|Text1(8)|T|Ordinal|800|;N|Text1(9)|T|Observacion|800|;"
+            tots = tots & "S|Text1(6)|T|Kil.Man|900|;S|Text1(7)|T|%Destrio|1100|;S|Text1(10)|T|%Pixat|1100|;N|Text1(8)|T|Ordinal|800|;N|Text1(9)|T|Observacion|800|;"
             
-            arregla tots, DataGridAux(Index), Me
+            arregla tots, DataGridAux(Index), Me, 350
             
             DataGridAux(1).Columns(1).Alignment = dbgLeft
             DataGridAux(1).Columns(3).Alignment = dbgLeft
@@ -3438,7 +3851,7 @@ Dim tots As String
             tots = tots & "S|txtAux1(5)|T|Plaga|800|;S|btnBuscar(5)|B|||;S|txtAux2(5)|T|Nombre|3100|;"
             tots = tots & "N||||0|;S|txtAux2(1)|T|Tipo|1000|;N|txtAux1(6)|T|Ordinal|800|;"
             
-            arregla tots, DataGridAux(Index), Me
+            arregla tots, DataGridAux(Index), Me, 350
             
             DataGridAux(2).Columns(6).Alignment = dbgLeft
 '            DataGridAux(0).Columns(5).NumberFormat = "###,##0"
@@ -5102,4 +5515,12 @@ eActualizarEntradasPicassent:
         MuestraError Err.Number, "Actualizar entradas", Err.Description
     End If
 End Function
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
+
 
