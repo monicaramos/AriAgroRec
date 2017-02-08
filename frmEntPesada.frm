@@ -2642,23 +2642,10 @@ Private Sub chkAbonos_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
-'Private Sub Check1_GotFocus(Index As Integer)
-'    PonerFocoChk Me.Check1(Index)
-'End Sub
-'
-'Private Sub Check1_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
 
 Private Sub cmdAceptar_Click()
 Dim I As Integer
-
 Dim V As Integer
-'Dim cad As String
-'Dim SQL As String
-'Dim b As Boolean
-'Dim Mens As String
-
 
 
     Screen.MousePointer = vbHourglass
@@ -3653,17 +3640,33 @@ Private Sub Text1_GotFocus(Index As Integer)
     ConseguirFoco Text1(Index), Modo
 End Sub
 
-
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
 'Avanzar/Retroceder los campos con las flechas de desplazamiento del teclado.
     KEYdown KeyCode
 End Sub
 
-
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+            Select Case Index
+                Case 1: KEYFecha KeyAscii, 0 ' fecha
+                Case 3: KEYBusqueda KeyAscii, 0 'transportista
+            End Select
+        End If
+    Else
+        KEYpress KeyAscii
+    End If
 End Sub
 
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
+
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgBuscar_Click (Indice)
+End Sub
 
 '----------------------------------------------------------------
 '----------------------------------------------------------------
@@ -4284,10 +4287,8 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-  
     ConseguirFocoLin txtAux(Index)
 End Sub
-
 
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4297,7 +4298,25 @@ End Sub
 
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        If Modo = 5 Then
+            Select Case Index
+                Case 5: KEYImage KeyAscii, 0 'variedad
+                Case 6: KEYImage KeyAscii, 1 'socio
+                Case 7: KEYImage KeyAscii, 2 'campo
+                Case 0: KEYImage KeyAscii, 3 'capataz
+                Case 8: KEYImage KeyAscii, 4 'tarifa
+            End Select
+        End If
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+
+Private Sub KEYImage(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    btnBuscar_Click (Indice)
 End Sub
 
 

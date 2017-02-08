@@ -410,9 +410,14 @@ Dim SQL As String
     tabla = "horas INNER JOIN straba ON horas.codtraba = straba.codtraba "
                        
     AnyadirAFormula cadFormula, "isnull({horas.fecharec})"
-    AnyadirAFormula cadSelect, "isnull({horas.fecharec})"
+    AnyadirAFormula cadSelect, "horas.fecharec is null"
     
     AnyadirAFormula cadSelect, "horas.intconta = 0"
+    
+    
+    '[Monica]08/02/2017: los que han trabajado y se dan de baja no se anticipan, se manda la nomina hasta el momento
+    AnyadirAFormula cadSelect, "(straba.fechabaja is null or straba.fechabaja = '')"
+    
                        
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     Repetir = False

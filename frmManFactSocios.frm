@@ -35,9 +35,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0)=   "Frame3"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2)=   "FrameAnticipos"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -2985,6 +2985,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+
+Private Const IdPrograma = 6001
+
+
 
 '========== VBLES PUBLICAS ====================
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados

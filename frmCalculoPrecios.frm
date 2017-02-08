@@ -7,7 +7,7 @@ Begin VB.Form frmCalculoPrecios
    Caption         =   "Cálculo Precios"
    ClientHeight    =   8310
    ClientLeft      =   45
-   ClientTop       =   330
+   ClientTop       =   30
    ClientWidth     =   8715
    Icon            =   "frmCalculoPrecios.frx":0000
    LinkTopic       =   "Form1"
@@ -18,22 +18,61 @@ Begin VB.Form frmCalculoPrecios
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   180
+      TabIndex        =   35
+      Top             =   60
+      Width           =   1335
+      Begin MSComctlLib.Toolbar Toolbar2 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   36
+         Top             =   180
+         Width           =   1005
+         _ExtentX        =   1773
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Pedir Datos"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Generar Precios"
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.Frame FrameAux1 
       BorderStyle     =   0  'None
-      Height          =   3930
+      Height          =   4050
       Left            =   210
-      TabIndex        =   21
-      Top             =   3330
+      TabIndex        =   20
+      Top             =   3570
       Width           =   8340
       Begin VB.TextBox txtaux1 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   6
          Left            =   6180
          MaxLength       =   7
-         TabIndex        =   35
+         TabIndex        =   34
          Tag             =   "Kilos|N|N|||tmppreciosaux|kilosnet|##,###,##0||"
          Text            =   "Kilos"
          Top             =   2940
@@ -44,11 +83,20 @@ Begin VB.Form frmCalculoPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   5
          Left            =   7410
          MaxLength       =   7
-         TabIndex        =   30
+         TabIndex        =   29
          Tag             =   "Precio|N|N|||tmppreciosaux|precio|#0.0000||"
          Text            =   "Precio"
          Top             =   2925
@@ -58,11 +106,20 @@ Begin VB.Form frmCalculoPrecios
       Begin VB.TextBox txtaux1 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   4
          Left            =   180
          MaxLength       =   10
-         TabIndex        =   26
+         TabIndex        =   25
          Tag             =   "Usuario|N|N|||tmppreciosaux|codusu|000000|S|"
          Text            =   "usu"
          Top             =   2910
@@ -73,11 +130,20 @@ Begin VB.Form frmCalculoPrecios
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   3
          Left            =   6810
          MaxLength       =   7
-         TabIndex        =   29
+         TabIndex        =   28
          Tag             =   "Porcentaje|N|N|||tmppreciosaux|porcentaje|##0.00||"
          Text            =   "Porcen"
          Top             =   2940
@@ -87,11 +153,20 @@ Begin VB.Form frmCalculoPrecios
       Begin VB.TextBox txtaux1 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   2
          Left            =   1740
          MaxLength       =   6
-         TabIndex        =   25
+         TabIndex        =   24
          Tag             =   "Tipo Factura|N|N|0|1|tmppreciosaux|tipofact||S|"
          Text            =   "tipo"
          Top             =   2940
@@ -101,11 +176,20 @@ Begin VB.Form frmCalculoPrecios
       Begin VB.TextBox txtaux1 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   0
          Left            =   1050
          MaxLength       =   6
-         TabIndex        =   24
+         TabIndex        =   23
          Tag             =   "Código Variedad|N|N|1|999999|tmppreciosaux|codvarie|000000|S|"
          Text            =   "var"
          Top             =   2910
@@ -115,11 +199,20 @@ Begin VB.Form frmCalculoPrecios
       Begin VB.TextBox txtaux1 
          Appearance      =   0  'Flat
          BorderStyle     =   0  'None
-         Height          =   290
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   2385
          MaxLength       =   2
-         TabIndex        =   27
+         TabIndex        =   26
          Tag             =   "Calidad|N|N|||tmppreciosaux|codcalid|00|S|"
          Text            =   "cal"
          Top             =   2925
@@ -129,10 +222,19 @@ Begin VB.Form frmCalculoPrecios
       Begin VB.CommandButton cmdAux 
          Appearance      =   0  'Flat
          Caption         =   "+"
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   3060
-         TabIndex        =   23
+         TabIndex        =   22
          ToolTipText     =   "Buscar calidad"
          Top             =   2925
          Visible         =   0   'False
@@ -142,12 +244,21 @@ Begin VB.Form frmCalculoPrecios
          Appearance      =   0  'Flat
          BackColor       =   &H80000018&
          BorderStyle     =   0  'None
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   350
          Index           =   1
          Left            =   3240
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   22
+         TabIndex        =   21
          Text            =   "Nombre calidad"
          Top             =   2925
          Visible         =   0   'False
@@ -157,7 +268,7 @@ Begin VB.Form frmCalculoPrecios
          Height          =   390
          Index           =   1
          Left            =   45
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   0
          Width           =   1290
          _ExtentX        =   2275
@@ -236,31 +347,31 @@ Begin VB.Form frmCalculoPrecios
       End
       Begin MSDataGridLib.DataGrid DataGridAux 
          Bindings        =   "frmCalculoPrecios.frx":000C
-         Height          =   3225
+         Height          =   3465
          Index           =   1
          Left            =   45
-         TabIndex        =   31
+         TabIndex        =   30
          Top             =   450
          Width           =   8160
          _ExtentX        =   14393
-         _ExtentY        =   5689
+         _ExtentY        =   6112
          _Version        =   393216
          AllowUpdate     =   0   'False
          BorderStyle     =   0
          HeadLines       =   1
-         RowHeight       =   15
+         RowHeight       =   19
          BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -311,38 +422,74 @@ Begin VB.Form frmCalculoPrecios
       Index           =   0
       Left            =   180
       TabIndex        =   12
-      Top             =   570
+      Top             =   840
       Width           =   8370
       Begin VB.CheckBox Check1 
          Caption         =   "Cálculo por porcentajes"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   6060
+         Left            =   5640
          TabIndex        =   3
-         Top             =   1170
-         Width           =   2025
+         Top             =   1080
+         Width           =   2685
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   6060
+         Left            =   6330
          MaxLength       =   15
          TabIndex        =   7
-         Top             =   2100
+         Top             =   2070
          Width           =   1545
       End
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   4350
          Style           =   2  'Dropdown List
          TabIndex        =   6
          Tag             =   "Tipo Factura|N|N|0|1|rprecios|tipofact||S|"
          Top             =   2070
-         Width           =   1305
+         Width           =   1575
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
          Left            =   1440
          MaxLength       =   30
@@ -350,78 +497,141 @@ Begin VB.Form frmCalculoPrecios
          Tag             =   "Texto|T|N|||rprecios|textoper|||"
          Text            =   "123456789012345678901234567890"
          Top             =   1620
-         Width           =   4185
+         Width           =   4455
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
          Left            =   4080
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha Fin|F|S|||rprecios|fechafin|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   1170
-         Width           =   1110
+         Top             =   1080
+         Width           =   1290
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   1440
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha Inicio|F|N|||rprecios|fechaini|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   1170
-         Width           =   1200
+         Top             =   1080
+         Width           =   1380
       End
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1440
          Style           =   2  'Dropdown List
          TabIndex        =   5
          Tag             =   "Tipo Factura|N|N|0|1|rprecios|tipofact||S|"
          Top             =   2070
-         Width           =   1305
+         Width           =   1665
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1470
          MaxLength       =   6
          TabIndex        =   0
          Tag             =   "Código Variedad|N|N|1|999999|rprecios|codvarie|000000|S|"
-         Top             =   480
-         Width           =   1095
+         Top             =   390
+         Width           =   945
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   2640
+         Left            =   2490
          MaxLength       =   40
-         TabIndex        =   16
-         Top             =   480
-         Width           =   4950
+         TabIndex        =   15
+         Top             =   390
+         Width           =   5400
       End
       Begin VB.Label Label3 
          Caption         =   "Tipo Precio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Left            =   3210
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   2100
-         Width           =   1035
+         Width           =   1245
       End
       Begin VB.Label Label2 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
-         Left            =   240
-         TabIndex        =   33
-         Top             =   840
+         Left            =   180
+         TabIndex        =   32
+         Top             =   750
          Width           =   705
       End
       Begin VB.Label Label1 
@@ -438,17 +648,26 @@ Begin VB.Form frmCalculoPrecios
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   1
-         Left            =   6030
-         TabIndex        =   32
-         Top             =   1860
+         Left            =   6300
+         TabIndex        =   31
+         Top             =   1830
          Width           =   1215
       End
       Begin VB.Label Label8 
          Caption         =   "Texto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
-         Left            =   240
-         TabIndex        =   20
+         Left            =   180
+         TabIndex        =   19
          Top             =   1650
          Width           =   705
       End
@@ -458,7 +677,7 @@ Begin VB.Form frmCalculoPrecios
          Left            =   3780
          Picture         =   "frmCalculoPrecios.frx":0024
          ToolTipText     =   "Buscar fecha"
-         Top             =   1170
+         Top             =   1080
          Width           =   240
       End
       Begin VB.Image imgFec 
@@ -467,50 +686,86 @@ Begin VB.Form frmCalculoPrecios
          Left            =   1140
          Picture         =   "frmCalculoPrecios.frx":00AF
          ToolTipText     =   "Buscar fecha"
-         Top             =   1170
+         Top             =   1080
          Width           =   240
       End
       Begin VB.Label Label22 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   3090
-         TabIndex        =   19
-         Top             =   1200
+         TabIndex        =   18
+         Top             =   1110
          Width           =   585
       End
       Begin VB.Label Label18 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   450
-         TabIndex        =   18
-         Top             =   1200
+         TabIndex        =   17
+         Top             =   1110
          Width           =   930
       End
       Begin VB.Label Label9 
          Caption         =   "Recolectado"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
-         Left            =   240
-         TabIndex        =   17
+         Left            =   180
+         TabIndex        =   16
          Top             =   2100
-         Width           =   1035
+         Width           =   1275
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
          Left            =   1170
          ToolTipText     =   "Buscar Variedad"
-         Top             =   480
+         Top             =   390
          Width           =   240
       End
       Begin VB.Label Label4 
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
-         Left            =   240
+         Left            =   180
          TabIndex        =   13
-         Top             =   450
-         Width           =   690
+         Top             =   360
+         Width           =   900
       End
    End
    Begin VB.Frame Frame1 
@@ -518,14 +773,14 @@ Begin VB.Form frmCalculoPrecios
       Index           =   0
       Left            =   195
       TabIndex        =   10
-      Top             =   7350
+      Top             =   7620
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -542,24 +797,42 @@ Begin VB.Form frmCalculoPrecios
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7335
+      Left            =   7515
       TabIndex        =   9
-      Top             =   7440
+      Top             =   7770
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6120
+      Left            =   6300
       TabIndex        =   8
-      Top             =   7440
+      Top             =   7770
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
       Left            =   3690
-      Top             =   7485
+      Top             =   7125
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
@@ -603,122 +876,47 @@ Begin VB.Form frmCalculoPrecios
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   15
-      Top             =   0
-      Width           =   8715
-      _ExtentX        =   15372
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   20
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Pedir Datos"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Generar Precios"
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Generación Masiva"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button20 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
-      EndProperty
-      BorderStyle     =   1
-   End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   7320
+      Left            =   7530
       TabIndex        =   14
-      Top             =   7440
+      Top             =   7770
       Visible         =   0   'False
       Width           =   1035
    End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   8100
+      TabIndex        =   37
+      Top             =   150
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnPedirDatos 
          Caption         =   "&Pedir Datos"
          Shortcut        =   ^P
@@ -759,6 +957,9 @@ Attribute VB_Exposed = False
 ' 7. Posar els TABINDEXs
 
 Option Explicit
+
+Private Const IdPrograma = 5002
+
 
 'Dim T1 As Single
 
@@ -822,11 +1023,11 @@ Private HaDevueltoDatos As Boolean
 
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim CadB As String
 
 Dim vSeccion As CSeccion
-Dim b As Boolean
+Dim B As Boolean
 
 Private BuscaChekc As String
 
@@ -853,7 +1054,7 @@ Private Sub cmdAceptar_Click()
     Select Case Modo
             
         Case 3 'INSERTAR
-            If DatosOk Then
+            If DatosOK Then
                 CargarCalidades
                 PonerModo 2
             Else
@@ -942,28 +1143,19 @@ Dim i As Integer
     PrimeraVez = True
     
     ' ICONETS DE LA BARRA
-    btnPrimero = 17 'index del botó "primero"
-    With Me.Toolbar1
+    With Me.Toolbar2
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         'l'1 i el 2 son separadors
-        .Buttons(3).Image = 1   'Buscar
-        .Buttons(4).Image = 13   'Generar precios
-        'el 5 i el 6 son separadors
-        .Buttons(7).Image = 3   'Insertar
-        .Buttons(8).Image = 4   'Modificar
-        .Buttons(9).Image = 5   'Borrar
-        'el 10 i el 11 son separadors
-        .Buttons(11).Image = 17  ' generacion masiva
-        
-        .Buttons(13).Image = 10  'Imprimir
-        .Buttons(14).Image = 11  'Eixir
-        'el 13 i el 14 son separadors
-        .Buttons(btnPrimero).Image = 6  'Primer
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Següent
-        .Buttons(btnPrimero + 3).Image = 9 'Últim
+        .Buttons(1).Image = 1   'Buscar
+        .Buttons(2).Image = 13   'Generar precios
+    End With
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
     End With
     
     ' ******* si n'hi han llínies *******
@@ -1057,7 +1249,7 @@ End Sub
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
 Dim i As Integer, NumReg As Byte
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo EPonerModo
  
@@ -1078,18 +1270,18 @@ Dim b As Boolean
     End If
     
     '=======================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Posar Fleches de desplasament visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+'    DesplazamientoVisible Me.Toolbar2, btnPrimero, B, NumReg
     
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1098,8 +1290,8 @@ Dim b As Boolean
     
     BloquearChk Check1, (Modo = 0 Or Modo = 5)
     
-    Text1(1).Locked = Not b  '((Not b) And (Modo <> 1))
-    If b Then
+    Text1(1).Locked = Not B  '((Not b) And (Modo <> 1))
+    If B Then
           Text1(1).BackColor = vbWhite
     Else
           Text1(1).BackColor = &H80000018 'groc
@@ -1122,7 +1314,7 @@ Dim b As Boolean
     ' ********************************************************
     ' *** si n'hi han llínies i imagens de buscar que no estiguen als grids ******
     'Llínies Departaments
-    b = (Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) And (NumTabMto = 0))
+    B = (Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) And (NumTabMto = 0))
 '    BloquearImage imgBuscar(3), Not b
 '    BloquearImage imgBuscar(4), Not b
 '    BloquearImage imgBuscar(7), Not b
@@ -1138,21 +1330,21 @@ Dim b As Boolean
         CargaGrid 1, False
     End If
     
-    b = (Modo = 4) Or (Modo = 2)
+    B = (Modo = 4) Or (Modo = 2)
     
 
-    DataGridAux(1).Enabled = b
+    DataGridAux(1).Enabled = B
     
-    b = (Modo = 5) And (NumTabMto = 1) 'And (ModoLineas <> 3)
+    B = (Modo = 5) And (NumTabMto = 1) 'And (ModoLineas <> 3)
     For i = 1 To txtAux1.Count - 1
-        BloquearTxt txtAux1(i), Not b
+        BloquearTxt txtAux1(i), Not B
     Next i
-    b = (Modo = 5) And (NumTabMto = 1) And ModoLineas = 2
-    BloquearTxt txtAux1(1), b
-    BloquearBtn cmdAux(1), b
+    B = (Modo = 5) And (NumTabMto = 1) And ModoLineas = 2
+    BloquearTxt txtAux1(1), B
+    BloquearBtn cmdAux(1), B
      '-----------------------------
     PonerModoOpcionesMenu (Modo) 'Activar opcions menú según modo
-    PonerOpcionesMenu   'Activar opcions de menú según nivell
+'    PonerOpcionesMenu   'Activar opcions de menú según nivell
                         'de permisos de l'usuari
 
 EPonerModo:
@@ -1174,41 +1366,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
-Dim b As Boolean, bAux As Boolean
+Dim B As Boolean, bAux As Boolean
 Dim i As Byte
     
     'Barra de CAPÇALERA
     '------------------------------------------
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Pedir datos
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnPedirDatos.Enabled = b
+    Toolbar2.Buttons(1).Enabled = B
+    Me.mnPedirDatos.Enabled = B
     'Generar Precios
-    Toolbar1.Buttons(4).Enabled = b
-    Me.mnGenerarPrecios.Enabled = b
+    Toolbar2.Buttons(2).Enabled = B
+    Me.mnGenerarPrecios.Enabled = B
     
     ' *** si n'hi han llínies que tenen grids (en o sense tab) ***
-    b = (Modo = 3 Or Modo = 4 Or Modo = 2)
+    B = (Modo = 3 Or Modo = 4 Or Modo = 2)
     For i = 1 To ToolAux.Count
-        ToolAux(i).Buttons(1).Enabled = b
-        If b Then bAux = (b And Me.Adoaux(i).Recordset.RecordCount > 0)
+        ToolAux(i).Buttons(1).Enabled = B
+        If B Then bAux = (B And Me.Adoaux(i).Recordset.RecordCount > 0)
         ToolAux(i).Buttons(2).Enabled = bAux
         ToolAux(i).Buttons(3).Enabled = bAux
     Next i
     ' ****************************************
     
-'    ' *** si n'hi han tabs que no tenen grids ***
-'    i = 3
-'    If AdoAux(i).Recordset.EOF Then
-'        ToolAux(i).Buttons(1).Enabled = b
-'        ToolAux(i).Buttons(2).Enabled = False
-'        ToolAux(i).Buttons(3).Enabled = False
-'    Else
-'        ToolAux(i).Buttons(1).Enabled = False
-'        ToolAux(i).Buttons(2).Enabled = b
-'    End If
-    ' *******************************************
 End Sub
 
 
@@ -1228,42 +1409,42 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
-Dim Tabla As String
+Dim SQL As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' calidades
-            Tabla = "tmppreciosaux"
-            Sql = "SELECT tmppreciosaux.codusu, tmppreciosaux.codvarie, tmppreciosaux.tipofact, tmppreciosaux.codcalid, rcalidad.nomcalid, tmppreciosaux.kilosnet, "
-            Sql = Sql & "tmppreciosaux.porcentaje, tmppreciosaux.precio"
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rcalidad ON tmppreciosaux.codvarie = rcalidad.codvarie "
-            Sql = Sql & " and tmppreciosaux.codcalid = rcalidad.codcalid  "
+            tabla = "tmppreciosaux"
+            SQL = "SELECT tmppreciosaux.codusu, tmppreciosaux.codvarie, tmppreciosaux.tipofact, tmppreciosaux.codcalid, rcalidad.nomcalid, tmppreciosaux.kilosnet, "
+            SQL = SQL & "tmppreciosaux.porcentaje, tmppreciosaux.precio"
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rcalidad ON tmppreciosaux.codvarie = rcalidad.codvarie "
+            SQL = SQL & " and tmppreciosaux.codcalid = rcalidad.codcalid  "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE tmppreciosaux.codusu = -1"
+                SQL = SQL & " WHERE tmppreciosaux.codusu = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".codcalid "
+            SQL = SQL & " ORDER BY " & tabla & ".codcalid "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
 Private Sub frmC_Selec(vFecha As Date)
-Dim indice As Byte
-    indice = CByte(Me.cmdAux(0).Tag + 2)
-    txtAux1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = CByte(Me.cmdAux(0).Tag + 2)
+    txtAux1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmC1_Selec(vFecha As Date)
-Dim indice As Byte
-    indice = CByte(Me.imgFec(0).Tag)
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = CByte(Me.imgFec(0).Tag)
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCalid_DatoSeleccionado(CadenaSeleccion As String)
@@ -1280,7 +1461,7 @@ Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(indice).Text = vCampo
+     Text1(Indice).Text = vCampo
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -1314,18 +1495,18 @@ Private Sub imgFec_Click(Index As Integer)
        frmC1.NovaData = Now
        Select Case Index
             Case 0, 1
-                indice = Index + 2
+                Indice = Index + 2
        End Select
        
-       Me.imgFec(0).Tag = indice
+       Me.imgFec(0).Tag = Indice
        
-       PonerFormatoFecha Text1(indice)
-       If Text1(indice).Text <> "" Then frmC1.NovaData = CDate(Text1(indice).Text)
+       PonerFormatoFecha Text1(Indice)
+       If Text1(Indice).Text <> "" Then frmC1.NovaData = CDate(Text1(Indice).Text)
     
        Screen.MousePointer = vbDefault
        frmC1.Show vbModal
        Set frmC1 = Nothing
-       PonerFoco Text1(indice)
+       PonerFoco Text1(Indice)
     
 End Sub
 
@@ -1335,13 +1516,13 @@ Private Sub imgZoom_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            indice = 21
+            Indice = 21
             frmZ.pTitulo = "Observaciones del Campo"
-            frmZ.pValor = Text1(indice).Text
+            frmZ.pValor = Text1(Indice).Text
             frmZ.pModo = Modo
             frmZ.Show vbModal
             Set frmZ = Nothing
-            PonerFoco Text1(indice)
+            PonerFoco Text1(Indice)
     End Select
             
 End Sub
@@ -1360,18 +1541,13 @@ Private Sub mnSalir_Click()
 End Sub
 
 
-Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 3  'Búscar
+        Case 1  'Búscar
            mnPedirDatos_Click
-        Case 4  'Generar Precios
+        Case 2  'Generar Precios
             mnGenerarPrecios_Click
-        Case 14    'Eixir
-            mnSalir_Click
-            
-        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
-            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -1393,22 +1569,22 @@ Dim Nombre As String
 End Sub
 
 Private Function HayPrecios() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     HayPrecios = False
     
-    Sql = "select count(*) from tmppreciosaux where codusu = " & vUsu.Codigo & " and codvarie = " & DBSet(Text1(0).Text, "N")
-    Sql = Sql & " and precio <> 0 "
+    SQL = "select count(*) from tmppreciosaux where codusu = " & vUsu.Codigo & " and codvarie = " & DBSet(Text1(0).Text, "N")
+    SQL = SQL & " and precio <> 0 "
     
-    HayPrecios = (TotalRegistros(Sql) <> 0)
+    HayPrecios = (TotalRegistros(SQL) <> 0)
 
 End Function
 
 
 Private Sub BotonGenerarPrecios()
 Dim vFactu As CFacturaTer
-Dim Cad As String
-Dim Sql As String
+Dim cad As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim cadMen As String
@@ -1428,8 +1604,8 @@ Dim Rs As ADODB.Recordset
         Exit Sub
     Else
         If Me.Check1.Value Then
-            Sql = "select sum(porcentaje) from tmppreciosaux where codusu = " & vUsu.Codigo
-            If DevuelveValor(Sql) <> 100 Then
+            SQL = "select sum(porcentaje) from tmppreciosaux where codusu = " & vUsu.Codigo
+            If DevuelveValor(SQL) <> 100 Then
                 cadMen = "La suma de porcentajes es diferente al 100%."
                 cadMen = cadMen & vbCrLf & vbCrLf & " ¿ Desea continuar ?"
                 If MsgBox(cadMen, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
@@ -1440,33 +1616,33 @@ Dim Rs As ADODB.Recordset
     conn.BeginTrans
     
     
-    Sql = "select max(contador) "
-    Sql = Sql & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
-    Sql = Sql & " and fechaini = " & DBSet(Text1(2).Text, "F")
-    Sql = Sql & " and fechafin = " & DBSet(Text1(3).Text, "F")
-    Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
+    SQL = "select max(contador) "
+    SQL = SQL & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
+    SQL = SQL & " and fechaini = " & DBSet(Text1(2).Text, "F")
+    SQL = SQL & " and fechafin = " & DBSet(Text1(3).Text, "F")
+    SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
     
-    Contador = DevuelveValor(Sql)
+    Contador = DevuelveValor(SQL)
     If Contador <> 0 Then
-        Sql = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
-        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
-        Sql = Sql & " and contador = " & DBSet(Contador, "N")
+        SQL = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
+        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
+        SQL = SQL & " and contador = " & DBSet(Contador, "N")
         Select Case Combo1(0).ListIndex
             Case 0
-                Sql = Sql & " and precoop <> 0"
+                SQL = SQL & " and precoop <> 0"
             Case 1
-                Sql = Sql & " and presocio <> 0"
+                SQL = SQL & " and presocio <> 0"
         End Select
         
-        If TotalRegistros(Sql) = 0 Then
+        If TotalRegistros(SQL) = 0 Then
             ' no existen registros para ese tipo de precio : actualizamos o insertamos registros de calidad dependiendo
-            Sql = "select codcalid, precio from tmppreciosaux where codusu = " & vUsu.Codigo
-            Sql = Sql & " and codvarie = " & DBSet(Text1(0).Text, "N")
-            Sql = Sql & " and precio <> 0 "
-            Sql = Sql & " order by 1"
+            SQL = "select codcalid, precio from tmppreciosaux where codusu = " & vUsu.Codigo
+            SQL = SQL & " and codvarie = " & DBSet(Text1(0).Text, "N")
+            SQL = SQL & " and precio <> 0 "
+            SQL = SQL & " order by 1"
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
                     
             While Not Rs.EOF
                 Sql2 = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
@@ -1577,36 +1753,36 @@ Dim Rs As ADODB.Recordset
                     Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
                     
                     While Not Rs.EOF
-                        Sql = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
-                        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
-                        Sql = Sql & " and contador = " & DBSet(Contador, "N")
-                        Sql = Sql & " and codcalid = " & DBSet(Rs!codcalid, "N")
+                        SQL = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
+                        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
+                        SQL = SQL & " and contador = " & DBSet(Contador, "N")
+                        SQL = SQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
                         
-                        If TotalRegistros(Sql) <> 0 Then
-                            Sql = "update rprecios_calidad set "
+                        If TotalRegistros(SQL) <> 0 Then
+                            SQL = "update rprecios_calidad set "
                             Select Case Combo1(0).ListIndex
                                 Case 0
-                                    Sql = Sql & " precoop = " & DBSet(Rs!Precio, "N")
+                                    SQL = SQL & " precoop = " & DBSet(Rs!Precio, "N")
                                 Case 1
-                                    Sql = Sql & " presocio= " & DBSet(Rs!Precio, "N")
+                                    SQL = SQL & " presocio= " & DBSet(Rs!Precio, "N")
                             End Select
-                            Sql = Sql & " where codvarie = " & DBSet(Text1(0).Text, "N")
-                            Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
-                            Sql = Sql & " and contador = " & DBSet(Contador, "N")
-                            Sql = Sql & " and codcalid = " & DBSet(Rs!codcalid, "N")
+                            SQL = SQL & " where codvarie = " & DBSet(Text1(0).Text, "N")
+                            SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
+                            SQL = SQL & " and contador = " & DBSet(Contador, "N")
+                            SQL = SQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
                             
                         Else
-                            Sql = "insert into rprecios_calidad (codvarie,tipofact,contador,codcalid,precoop,presocio) values ("
-                            Sql = Sql & DBSet(Text1(0).Text, "N") & "," & Combo1(1).ListIndex & "," & DBSet(Contador, "N") & ","
-                            Sql = Sql & DBSet(Rs!codcalid, "N") & ","
+                            SQL = "insert into rprecios_calidad (codvarie,tipofact,contador,codcalid,precoop,presocio) values ("
+                            SQL = SQL & DBSet(Text1(0).Text, "N") & "," & Combo1(1).ListIndex & "," & DBSet(Contador, "N") & ","
+                            SQL = SQL & DBSet(Rs!codcalid, "N") & ","
                             Select Case Combo1(0).ListIndex
                                 Case 0
-                                    Sql = Sql & DBSet(Rs!Precio, "N") & ",0)" ' & ValorNulo & ")"
+                                    SQL = SQL & DBSet(Rs!Precio, "N") & ",0)" ' & ValorNulo & ")"
                                 Case 1
-                                    Sql = Sql & "0," & DBSet(Rs!Precio, "N") & ")"
+                                    SQL = SQL & "0," & DBSet(Rs!Precio, "N") & ")"
                             End Select
                         End If
-                        conn.Execute Sql
+                        conn.Execute SQL
 
                         Rs.MoveNext
                     Wend
@@ -1620,11 +1796,11 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         ' creamos un regitro nuevo
-        Sql = "select max(contador) "
-        Sql = Sql & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
-        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
+        SQL = "select max(contador) "
+        SQL = SQL & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
+        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
 
-        Contador = DevuelveValor(Sql)
+        Contador = DevuelveValor(SQL)
         Contador = Contador + 1
         
         Sql2 = "insert into rprecios (codvarie,tipofact,contador,fechaini,fechafin,textoper,precioindustria) values ("
@@ -1671,7 +1847,7 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
 Dim i As Integer
 Dim J As Integer
@@ -1681,7 +1857,7 @@ Dim J As Integer
         Exit Sub
     End If
     
-    Cad = ""
+    cad = ""
     i = 0
     Do
         J = i + 1
@@ -1689,10 +1865,10 @@ Dim J As Integer
         If i > 0 Then
             Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            cad = cad & Text1(J).Text & "|"
         End If
     Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1822,29 +1998,29 @@ Dim V
 End Sub
 
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim Sql As String
-Dim Cad As String
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim SQL As String
+Dim cad As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
 
-    DatosOk = False
-    b = CompForm2(Me, 1)
-    If Not b Then Exit Function
+    DatosOK = False
+    B = CompForm2(Me, 1)
+    If Not B Then Exit Function
     
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'pedir datos
         If Text1(1).Text = "" Then
             MsgBox "El importe debe de tener un valor. Reintroduzca.", vbExclamation
             PonerFoco Text1(1)
-            b = False
+            B = False
         End If
     End If
     
     ' ************************************************************************************
-    DatosOk = b
+    DatosOK = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -1852,15 +2028,15 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(codvarie=" & Text1(0).Text & " and codusu = " & vUsu.Codigo & " and codcalid = " & txtAux1(1).Text & " )"
+    cad = "(codvarie=" & Text1(0).Text & " and codusu = " & vUsu.Codigo & " and codcalid = " & txtAux1(1).Text & " )"
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarDataMULTI(Data1, Cad, Indicador) Then
+    If SituarDataMULTI(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2003,6 +2179,8 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
                 Case 0: KEYBusqueda KeyAscii, 0 'variedad
+                Case 2: KEYFecha KeyAscii, 0 ' fecha desde
+                Case 3: KEYFecha KeyAscii, 1 ' fecha hasta
             End Select
         End If
     Else
@@ -2023,10 +2201,14 @@ Dim cerrar As Boolean
 
 End Sub
 
-
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgFec_Click (Indice)
+End Sub
+
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgBuscar_Click (Indice)
 End Sub
 
 ' **** si n'hi han camps de descripció a la capçalera ****
@@ -2036,23 +2218,6 @@ Dim NomEmple As String
     On Error GoTo EPosarDescripcions
 
     Text2(0).Text = PonerNombreDeCod(Text1(0), "variedades", "nomvarie", "codvarie", "N")
-    
-'    PonerDatosPartida
-'
-'    If Text1(5).Text <> "" Then
-'        Text2(5).Text = Round2(ImporteSinFormato(Text1(5).Text) / cFaneca, 4)
-'        PonerFormatoDecimal Text2(5), 7
-'    End If
-'
-'    If Text1(6).Text <> "" Then
-'        Text2(6).Text = Round2(ImporteSinFormato(Text1(6).Text) / cFaneca, 4)
-'        PonerFormatoDecimal Text2(6), 7
-'    End If
-'
-'    If Text1(7).Text <> "" Then
-'        Text2(7).Text = Round2(ImporteSinFormato(Text1(7).Text) / cFaneca, 4)
-'        PonerFormatoDecimal Text2(7), 7
-'    End If
     
 EPosarDescripcions:
     If Err.Number <> 0 Then MuestraError Err.Number, "Poniendo descripciones", Err.Description
@@ -2078,7 +2243,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Sql As String
+Dim SQL As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2105,12 +2270,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'calidad
-            Sql = "¿Seguro que desea eliminar la calidad?"
-            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar la calidad?"
+            SQL = SQL & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rprecios_calidad "
-                Sql = Sql & vWhere & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
+                SQL = "DELETE FROM rprecios_calidad "
+                SQL = SQL & vWhere & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
             End If
         
     End Select
@@ -2118,7 +2283,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute Sql
+        conn.Execute SQL
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -2258,7 +2423,7 @@ Private Sub BotonModificarLinea(Index As Integer)
 
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
-                anc = anc + 210
+                anc = anc + 240
             Else
                 anc = anc + DataGridAux(Index).RowTop(DataGridAux(Index).Row) + 5
             End If
@@ -2295,18 +2460,18 @@ End Sub
 
 Private Sub LLamaLineas(Index As Integer, xModo As Byte, Optional alto As Single)
 Dim jj As Integer
-Dim b As Boolean
+Dim B As Boolean
 
     ' *** si n'hi han tabs sense datagrid posar el If ***
     If Index <> 3 Then DeseleccionaGrid DataGridAux(Index)
     ' ***************************************************
 
-    b = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
+    B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 1 'calidad
             For jj = 1 To txtAux1.Count - 1
                 If jj = 3 Then
-                    txtAux1(jj).visible = b
+                    txtAux1(jj).visible = B
                     txtAux1(jj).Top = alto
                 End If
             Next jj
@@ -2318,8 +2483,8 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
-Dim b As Boolean
+Dim SQL As String
+Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
 Dim vFact As Byte, vDocum As Byte
@@ -2331,17 +2496,17 @@ Dim vFact As Byte, vDocum As Byte
     Mens = ""
     DatosOkLlin = False
 
-    b = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
-    If Not b Then Exit Function
+    B = CompForm2(Me, 2, nomframe) 'Comprovar formato datos ok
+    If Not B Then Exit Function
     
-    If b And (Modo = 5 And ModoLineas = 1) Then  'insertar
+    If B And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        Sql = ""
+        SQL = ""
 '        SQL = DevuelveDesdeBDNew(cAgro, "rprecios_calidad", "codcalid", "codvarie", txtaux1(0).Text, "N", , "tipofact", txtaux1(2).Text, "N", "codcalid", txtaux1(1).Text, "N")
-        If Sql <> "" Then
+        If SQL <> "" Then
             MsgBox "Ya existe la calidad. Revise.", vbExclamation
             PonerFoco txtAux1(1)
-            b = False
+            B = False
         End If
     End If
     
@@ -2399,7 +2564,7 @@ Dim vFact As Byte, vDocum As Byte
 ''
 '    End Select
 '    ' ******************************************************************************
-    DatosOkLlin = b
+    DatosOkLlin = B
 
 EDatosOKLlin:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -2564,7 +2729,7 @@ End Sub
 
 
 Private Sub CargaGrid(Index As Integer, enlaza As Boolean)
-Dim b As Boolean
+Dim B As Boolean
 Dim i As Byte
 Dim tots As String
 
@@ -2572,7 +2737,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    b = DataGridAux(Index).Enabled
+    B = DataGridAux(Index).Enabled
     DataGridAux(Index).Enabled = False
     
     Adoaux(Index).ConnectionString = conn
@@ -2610,13 +2775,14 @@ Dim tots As String
             tots = tots & "S|txtaux1(6)|T|Kilos|1300|;"
             tots = tots & "S|txtaux1(3)|T|Porcentaje|1300|;"
             tots = tots & "S|txtaux1(5)|T|Precio|1300|;"
-            arregla tots, DataGridAux(Index), Me
+            arregla tots, DataGridAux(Index), Me, 350
+            
         
             DataGridAux(Index).Columns(4).Alignment = dbgLeft
             DataGridAux(Index).Columns(5).Alignment = dbgRight
             DataGridAux(Index).Columns(6).Alignment = dbgRight
             
-            b = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
+            B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
             If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             Else
@@ -2644,7 +2810,7 @@ End Sub
 Private Sub InsertarLinea()
 'Inserta registre en les taules de Llínies
 Dim nomframe As String
-Dim b As Boolean
+Dim B As Boolean
 
     On Error Resume Next
 
@@ -2659,7 +2825,7 @@ Dim b As Boolean
         If InsertarDesdeForm2(Me, 2, nomframe) Then
             ' *** si n'hi ha que fer alguna cosa abas d'insertar
             ' *************************************************
-            b = BLOQUEADesdeFormulario2(Me, Data1, 1)
+            B = BLOQUEADesdeFormulario2(Me, Data1, 1)
             
             '++monica: en caso de estar insertando seccion y que no existan las
             'cuentas contables hacemos esto para que las inserte en contabilidad.
@@ -2671,7 +2837,7 @@ Dim b As Boolean
             Select Case NumTabMto
                 Case 0, 1 ' *** els index de les llinies en grid (en o sense tab) ***
                     CargaGrid NumTabMto, True
-                    If b Then BotonAnyadirLinea NumTabMto
+                    If B Then BotonAnyadirLinea NumTabMto
 '                Case 3 ' *** els index dels tabs que NO tenen grid ***
 '                    CargaFrame 3, True
 '                    If b Then BotonModificar
@@ -2689,7 +2855,7 @@ Private Sub ModificarLinea()
 'Modifica registre en les taules de Llínies
 Dim nomframe As String
 Dim V As Integer
-Dim Cad As String
+Dim cad As String
     On Error Resume Next
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
@@ -2788,6 +2954,12 @@ Dim i As Integer
     
 End Sub
 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
 
 Private Sub txtAux1_LostFocus(Index As Integer)
 Dim cadMen As String
@@ -2908,7 +3080,7 @@ End Sub
 
 
 Private Function CargarCalidades() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim i As Integer
 Dim arrData()
@@ -2918,25 +3090,25 @@ Dim TotalPorc As Currency
        
     CargarCalidades = False
        
-    Sql = "delete from tmppreciosaux where codusu = " & vUsu.Codigo
+    SQL = "delete from tmppreciosaux where codusu = " & vUsu.Codigo
      
-    conn.Execute Sql
+    conn.Execute SQL
      
-    Sql = "insert into tmppreciosaux (codusu, codvarie, tipofact, codcalid, kilosnet, porcentaje, precio) "
-    Sql = Sql & " select " & vUsu.Codigo & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Combo1(1).ListIndex, "N")
-    Sql = Sql & ",rhisfruta_clasif.codcalid, sum(rhisfruta_clasif.kilosnet) kilosnet, 0, 0  from rhisfruta_clasif "
-    Sql = Sql & " where rhisfruta_clasif.codvarie = " & DBSet(Text1(0), "N")
-    Sql = Sql & " and rhisfruta_clasif.numalbar in (select numalbar from rhisfruta, rsocios where fecalbar >= "
-    Sql = Sql & DBSet(Text1(2).Text, "F") & " and fecalbar <= " & DBSet(Text1(3).Text, "F")
-    Sql = Sql & " and recolect = " & Combo1(0).ListIndex
-    Sql = Sql & " and tipoentr <> 1 and tipoentr <> 3 " ' entradas que no sean venta campo ni industria
-    Sql = Sql & " and rsocios.tipoprod <> 1 "  ' que el socio no sea tercero
-    Sql = Sql & " and rhisfruta.codsocio = rsocios.codsocio) "
-    Sql = Sql & " group by 1, 2, 3, 4 "
-    Sql = Sql & " having kilosnet <> 0 "
-    Sql = Sql & " order by 1, 2, 3, 4 "
+    SQL = "insert into tmppreciosaux (codusu, codvarie, tipofact, codcalid, kilosnet, porcentaje, precio) "
+    SQL = SQL & " select " & vUsu.Codigo & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Combo1(1).ListIndex, "N")
+    SQL = SQL & ",rhisfruta_clasif.codcalid, sum(rhisfruta_clasif.kilosnet) kilosnet, 0, 0  from rhisfruta_clasif "
+    SQL = SQL & " where rhisfruta_clasif.codvarie = " & DBSet(Text1(0), "N")
+    SQL = SQL & " and rhisfruta_clasif.numalbar in (select numalbar from rhisfruta, rsocios where fecalbar >= "
+    SQL = SQL & DBSet(Text1(2).Text, "F") & " and fecalbar <= " & DBSet(Text1(3).Text, "F")
+    SQL = SQL & " and recolect = " & Combo1(0).ListIndex
+    SQL = SQL & " and tipoentr <> 1 and tipoentr <> 3 " ' entradas que no sean venta campo ni industria
+    SQL = SQL & " and rsocios.tipoprod <> 1 "  ' que el socio no sea tercero
+    SQL = SQL & " and rhisfruta.codsocio = rsocios.codsocio) "
+    SQL = SQL & " group by 1, 2, 3, 4 "
+    SQL = SQL & " having kilosnet <> 0 "
+    SQL = SQL & " order by 1, 2, 3, 4 "
      
-    conn.Execute Sql
+    conn.Execute SQL
      
     CargaGrid 1, True
 
@@ -2950,7 +3122,7 @@ End Function
 
 
 Private Sub CalculodePrecios()
-Dim Sql As String
+Dim SQL As String
 Dim i As Currency
 Dim Rs As ADODB.Recordset
 Dim vCalcul As Currency
@@ -2960,15 +3132,15 @@ Dim Sql2 As String
 
     On Error GoTo eCalculodePrecios
 
-    Sql = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
-    Sql = Sql & " and porcentaje <>0 and porcentaje is not null "
-    Sql = Sql & " order by codcalid "
+    SQL = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
+    SQL = SQL & " and porcentaje <>0 and porcentaje is not null "
+    SQL = SQL & " order by codcalid "
 
     vCalcul = DevuelveValor("select sum(kilosnet * porcentaje / 100) from tmppreciosaux where codusu = " & vUsu.Codigo)
     vCalcul1 = Round2(ImporteSinFormato(Text1(1).Text) / vCalcul, 4)
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     While Not Rs.EOF
         
@@ -2995,7 +3167,7 @@ End Sub
 
 
 Private Sub CalculodePreciosPorcentaje()
-Dim Sql As String
+Dim SQL As String
 Dim i As Currency
 Dim Rs As ADODB.Recordset
 Dim vCalcul As Currency
@@ -3008,9 +3180,9 @@ Dim ImporteTotal As Currency
 
     On Error GoTo eCalculodePreciosPorcentaje
 
-    Sql = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
-    Sql = Sql & " and porcentaje <>0 and porcentaje is not null "
-    Sql = Sql & " order by codcalid "
+    SQL = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
+    SQL = SQL & " and porcentaje <>0 and porcentaje is not null "
+    SQL = SQL & " order by codcalid "
 
     vNetoTotal = DevuelveValor("select sum(kilosnet) from tmppreciosaux where codusu = " & vUsu.Codigo)
     ImporteTotal = ImporteSinFormato(Text1(1).Text)
@@ -3019,7 +3191,7 @@ Dim ImporteTotal As Currency
 '    vCalcul1 = Round2(ImporteSinFormato(Text1(1).Text) / vCalcul, 4)
 '
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     While Not Rs.EOF
         ImporteLin = Round2(ImporteTotal * Rs!Porcentaje / 100, 2)

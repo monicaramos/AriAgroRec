@@ -157,7 +157,7 @@ Begin VB.Form frmManOrdRecogida
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1320
+         Left            =   1350
          MaxLength       =   6
          TabIndex        =   3
          Tag             =   "Variedad|N|N|1|999999|rordrecogida|codvarie|000000||"
@@ -1703,9 +1703,6 @@ Private Sub mnVerTodos_Click()
     BotonVerTodos
 End Sub
 
-
-
-
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
@@ -1764,42 +1761,6 @@ Private Sub HacerBusqueda()
 End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-'    Dim cad As String
-'
-'    'Cridem al form
-'    ' **************** arreglar-ho per a vore lo que es desije ****************
-'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-'    cad = ""
-'    cad = cad & ParaGrid(Text1(0), 15, "Nro.Orden")
-'    cad = cad & ParaGrid(Text1(1), 15, "Fecha")
-'    cad = cad & ParaGrid(Text1(2), 15, "Nro.Campo")
-'    cad = cad & ParaGrid(Text1(3), 15, "Variedad")
-'
-'    If cad <> "" Then
-'
-'        Screen.MousePointer = vbHourglass
-'        Set frmB = New frmBuscaGrid
-'        frmB.vCampos = cad
-'        cad = NombreTabla
-'        frmB.vtabla = cad 'NombreTabla
-'        frmB.vSQL = CadB
-'        HaDevueltoDatos = False
-'        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-'        frmB.vTitulo = "Ordenes Recogida" ' ***** repasa açò: títol de BuscaGrid *****
-'        frmB.vSelElem = 1
-'
-'        frmB.Show vbModal
-'        Set frmB = Nothing
-'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-'        'tindrem que tancar el form llançant l'event
-'        If HaDevueltoDatos Then
-'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-'                cmdRegresar_Click
-'        Else   'de ha retornat datos, es a decir NO ha retornat datos
-'            PonerFoco Text1(kCampo)
-'        End If
-'    End If
-
     
     Set frmOrdPrev = New frmManOrdRecogidaPrev
     frmOrdPrev.cWhere = CadB
@@ -1807,9 +1768,6 @@ Private Sub MandaBusquedaPrevia(CadB As String)
     frmOrdPrev.Show vbModal
     
     Set frmOrdPrev = Nothing
-
-
-
 
 End Sub
 
@@ -2187,6 +2145,7 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
+                Case 1: KEYFecha KeyAscii, 0 'fecha
                 Case 3: KEYBusqueda KeyAscii, 2 'variedad
             End Select
         End If
@@ -2214,7 +2173,10 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     imgBuscar_Click (Indice)
 End Sub
 
-
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
 
 '************* LLINIES: ****************************
 Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
@@ -2482,8 +2444,20 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        Select Case Index
+            Case 9:  KEYImage KeyAscii, 1
+        End Select
+    Else
+        KEYpress KeyAscii
+    End If
 End Sub
+
+Private Sub KEYImage(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    btnBuscar_Click (Indice)
+End Sub
+
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
@@ -2519,47 +2493,6 @@ Private Sub txtaux_GotFocus(Index As Integer)
 End Sub
 
 
-
-'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
-'    If Not txtAux(Index).MultiLine Then
-'        If KeyAscii = teclaBuscar Then
-'            If Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) Then
-'                Select Case Index
-'                    Case 2: 'calidad
-'                        KeyAscii = 0
-'                        btnBuscar_Click (2)
-'                    Case 9: 'incidencia
-'                        KeyAscii = 0
-'                        btnBuscar_Click (1)
-'                End Select
-'            End If
-'        Else
-'            If Index = 3 Then ' estoy introduciendo la muestra
-'               If KeyAscii = 13 Then 'ENTER
-'                    PonerFormatoDecimal txtAux(Index), 3
-'                    If ModoLineas = 2 Then
-'                        '050509 cmdAceptar_Click 'ModificarExistencia
-'                        ModificarLinea
-'
-'                    End If
-'                    If ModoLineas = 1 Then
-'                        cmdAceptar.SetFocus
-'                    End If
-'
-'                    '050509
-''                    If ModoLineas = 1 Then
-''                        cmdAceptar.SetFocus
-''                    End If
-'               ElseIf KeyAscii = 27 Then
-'                    cmdCancelar_Click 'ESC
-'               End If
-'            Else
-'                KEYpress KeyAscii
-'            End If
-'        End If
-'    End If
-'End Sub
-'
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim SQL As String

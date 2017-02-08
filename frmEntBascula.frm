@@ -4141,6 +4141,10 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
+                Case 10: KEYFecha KeyAscii, 0 'fecha entrada
+                Case 2: KEYBusqueda KeyAscii, 2 'variedad
+                Case 1: KEYBusqueda KeyAscii, 1 'socio
+                Case 5: KEYBusqueda KeyAscii, 5 'campo
                 Case 12: KEYBusqueda KeyAscii, 0 'capataz
                 Case 6: KEYBusqueda KeyAscii, 3 'transportista
                 Case 7: KEYBusqueda KeyAscii, 4 'tarifa
@@ -4164,6 +4168,10 @@ Dim cerrar As Boolean
 
 End Sub
 
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
 
 Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0

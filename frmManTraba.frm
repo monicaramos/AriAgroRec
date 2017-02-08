@@ -1127,6 +1127,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Private Const IdPrograma = 8002
+
 'Dim T1 As Single
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
@@ -1187,7 +1189,7 @@ Private HaDevueltoDatos As Boolean
 
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim CadB As String
 
 Dim CategAnt As String
@@ -1246,7 +1248,7 @@ Private Sub cmdAceptar_Click()
             HacerBusqueda
             
         Case 3 'INSERTAR
-            If DatosOk Then
+            If DatosOK Then
                 If InsertarDesdeForm2(Me, 1) Then
                     ' *** canviar o llevar el WHERE, repasar codEmpre ****
                     Data1.RecordSource = "Select * from " & NombreTabla & Ordenacion
@@ -1259,7 +1261,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 4  'MODIFICAR
-            If DatosOk Then
+            If DatosOK Then
                 If ModificaDesdeFormulario2(Me, 1) Then
                     TerminaBloquear
                     PosicionarData
@@ -1307,7 +1309,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
@@ -1338,21 +1340,21 @@ Dim i As Integer
     
     
     'cargar IMAGES de busqueda
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
     'carga IMAGES de mail
-    For i = 0 To Me.imgMail.Count - 1
-        Me.imgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
-    Next i
+    For I = 0 To Me.imgMail.Count - 1
+        Me.imgMail(I).Picture = frmPpal.imgListImages16.ListImages(2).Picture
+    Next I
     'IMAGES para zoom
-    For i = 0 To Me.imgZoom.Count - 1
-        Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
-    Next i
+    For I = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next I
     ' Imagenes para ayuda
-    For i = 0 To imgAyuda.Count - 1
-        imgAyuda(i).Picture = frmPpal.ImageListB.ListImages(10).Picture
-    Next i
+    For I = 0 To imgAyuda.Count - 1
+        imgAyuda(I).Picture = frmPpal.ImageListB.ListImages(10).Picture
+    Next I
     
     ' Si hay control de costes el nro de tarjeta es requerido
     If vParamAplic.HayCCostes Then
@@ -1405,16 +1407,16 @@ End Sub
 
 
 Private Sub LimpiarCampos()
-Dim i As Integer
+Dim I As Integer
 
     On Error Resume Next
     
     limpiar Me   'Mètode general: Neteja els controls TextBox
     lblIndicador.Caption = ""
     
-    For i = 0 To Combo1.Count - 1
-        Combo1(i).ListIndex = -1
-    Next i
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).ListIndex = -1
+    Next I
     Me.chkAbonos(0).Value = 0
     Me.chkEmbarga(1).Value = 0
     
@@ -1429,8 +1431,8 @@ End Sub
 '   En PONERMODO s'habiliten, o no, els diversos camps del
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Integer, NumReg As Byte
-Dim b As Boolean
+Dim I As Integer, NumReg As Byte
+Dim B As Boolean
 
     On Error GoTo EPonerModo
  
@@ -1451,18 +1453,18 @@ Dim b As Boolean
     End If
     
     '=======================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Posar Fleches de desplasament visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
     
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1527,35 +1529,35 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
-Dim b As Boolean, bAux As Boolean
-Dim i As Byte
+Dim B As Boolean, bAux As Boolean
+Dim I As Byte
     
     'Barra de CAPÇALERA
     '------------------------------------------
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(4).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2 And Data1.Recordset.RecordCount > 0) 'And Not DeConsulta
+    B = (Modo = 2 And Data1.Recordset.RecordCount > 0) 'And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(9).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(9).Enabled = B
+    Me.mnEliminar.Enabled = B
     
     'Imprimir
     'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
-    Toolbar1.Buttons(12).Enabled = b
+    Toolbar1.Buttons(12).Enabled = B
        
     
 End Sub
@@ -1621,7 +1623,7 @@ Private Sub frmMSal_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(indice).Text = vCampo
+     Text1(Indice).Text = vCampo
 End Sub
 
 
@@ -1727,15 +1729,15 @@ Private Sub imgZoom_Click(Index As Integer)
     Set frmZ = New frmZoom
 
     If Index = 0 Then
-        indice = 21
+        Indice = 21
         frmZ.pTitulo = "Obsservaciones Trabajador"
-        frmZ.pValor = Text1(indice).Text
+        frmZ.pValor = Text1(Indice).Text
         frmZ.pModo = Modo
     
         frmZ.Show vbModal
         Set frmZ = Nothing
             
-        PonerFoco Text1(indice)
+        PonerFoco Text1(Indice)
     End If
 End Sub
 
@@ -1795,7 +1797,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub BotonBuscar()
-Dim i As Integer
+Dim I As Integer
 ' ***** Si la clau primaria de la capçalera no es Text1(0), canviar-ho en <=== *****
     If Modo <> 1 Then
         LimpiarCampos
@@ -1832,21 +1834,21 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim Cad As String
+    Dim cad As String
         
     'Cridem al form
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    Cad = ""
-    Cad = Cad & ParaGrid(Text1(2), 45, "Nombre")
-    Cad = Cad & ParaGrid(Text1(0), 10, "Cód.")
-    Cad = Cad & ParaGrid(Text1(3), 15, "NIF")
-    Cad = Cad & ParaGrid(Text1(11), 15, "Teléfono")
-    Cad = Cad & ParaGrid(Text1(12), 15, "Móvil")
-    If Cad <> "" Then
+    cad = ""
+    cad = cad & ParaGrid(Text1(2), 45, "Nombre")
+    cad = cad & ParaGrid(Text1(0), 10, "Cód.")
+    cad = cad & ParaGrid(Text1(3), 15, "NIF")
+    cad = cad & ParaGrid(Text1(11), 15, "Teléfono")
+    cad = cad & ParaGrid(Text1(12), 15, "Móvil")
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vtabla = NombreTabla
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -1869,9 +1871,9 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
     If Data1.Recordset.EOF Then
@@ -1879,18 +1881,18 @@ Dim J As Integer
         Exit Sub
     End If
     
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            cad = cad & Text1(J).Text & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1984,7 +1986,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EEliminar
 
@@ -1999,13 +2001,13 @@ Dim Cad As String
     ' ***************************************************************************
 
     ' *************** canviar la pregunta ****************
-    Cad = "¿Seguro que desea eliminar el Trabajador?"
-    Cad = Cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
-    Cad = Cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(1)
+    cad = "¿Seguro que desea eliminar el Trabajador?"
+    cad = cad & vbCrLf & "Código: " & Format(Data1.Recordset.Fields(0), FormatoCampo(Text1(0)))
+    cad = cad & vbCrLf & "Nombre: " & Data1.Recordset.Fields(1)
     ' **************************************************************************
     
     'borrem
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -2030,7 +2032,7 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim i As Integer
+Dim I As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
@@ -2067,7 +2069,7 @@ End Sub
 
 
 Private Sub cmdCancelar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim V
 
     Select Case Modo
@@ -2095,9 +2097,9 @@ Dim V
 End Sub
 
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim Sql As String
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim SQL As String
 Dim cadMen As String
 Dim cta As String
 Dim TipoForp As String
@@ -2106,17 +2108,17 @@ Dim TipoForp As String
 
     On Error GoTo EDatosOK
 
-    DatosOk = False
-    b = CompForm2(Me, 1)
-    If Not b Then Exit Function
+    DatosOK = False
+    B = CompForm2(Me, 1)
+    If Not B Then Exit Function
     
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
     
-    If b And (Modo = 3 Or Modo = 4) Then
+    If B And (Modo = 3 Or Modo = 4) Then
         TipoForp = ""
         TipoForp = DevuelveDesdeBDNew(cAgro, "forpago", "tipoforp", "codforpa", Text1(20).Text, "N")
         If CByte(TipoForp) = 1 Then ' transferencia
@@ -2125,17 +2127,17 @@ Dim TipoForp As String
                 Text1(19).Text = ""
                 Text1(8).Text = ""
                 Text1(7).Text = ""
-                b = False
+                B = False
                 cadMen = "El trabajador no tiene asignada cuenta bancaria."
             Else
                 cta = Format(Text1(1).Text, "0000") & Format(Text1(19).Text, "0000") & Format(Text1(8).Text, "00") & Format(Text1(7).Text, "0000000000")
                 If Val(ComprobarCero(cta)) = 0 Then
                     cadMen = "El trabajador no tiene asignada cuenta bancaria."
-                    b = False
+                    B = False
                 End If
                 If Not Comprueba_CC(cta) Then
                     cadMen = "La cuenta bancaria del trabajador no es correcta."
-                    b = False
+                    B = False
                 Else
     '                '[Monica]20/11/2013: añadimos el tema de la comprobacion del IBAN
     '                If Not Comprueba_CC_IBAN(cta, Text1(42).Text) Then
@@ -2162,7 +2164,7 @@ Dim TipoForp As String
                                 cta = "Error en codigo IBAN" & vbCrLf & cta & "Continuar?"
                                 If MsgBox(cta, vbQuestion + vbYesNo) = vbNo Then
                                     PonerFoco Text1(34)
-                                    b = False
+                                    B = False
                                 End If
                             End If
                         End If
@@ -2178,41 +2180,41 @@ Dim TipoForp As String
     End If
     
     'control de costes
-    If b And vParamAplic.HayCCostes Then
+    If B And vParamAplic.HayCCostes Then
         If Modo = 3 Or Modo = 4 Then
-            Sql = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
+            SQL = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
             If Text1(31).Text <> "" Then
-                Sql = Sql & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
+                SQL = SQL & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
             Else
-                Sql = Sql & " and idtarjeta is null "
+                SQL = SQL & " and idtarjeta is null "
             End If
     
-            If DevuelveValor(Sql) <> 0 Then
+            If DevuelveValor(SQL) <> 0 Then
                 If MsgBox("Hay otro trabajador con el mismo Nro.Tarjeta asignado." & vbCrLf & vbCrLf & "               ¿Desea Continuar?.", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    If b And vParamAplic.HayCCostes Then
+    If B And vParamAplic.HayCCostes Then
         If Modo = 3 Or Modo = 4 Then
             If Text1(32).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente un tipo de horario para el trabajador.", vbExclamation
                 PonerFoco Text1(32)
-                b = False
+                B = False
             Else
                 Text2(32).Text = PonerNombreDeCod(Text1(32), "cchorario", "descripc")
                 If Text2(32).Text = "" Then
                     MsgBox "Código de Horario no existe. Reintroduzca.", vbExclamation
                     PonerFoco Text1(32)
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    DatosOk = b
+    DatosOK = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -2220,15 +2222,15 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(codtraba=" & Text1(0).Text & ")"
+    cad = "(codtraba=" & Text1(0).Text & ")"
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarData(Data1, Cad, Indicador) Then
+    If SituarData(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -2279,7 +2281,7 @@ Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim campo2 As String
-Dim Sql As String
+Dim SQL As String
 
 
 
@@ -2322,9 +2324,9 @@ Dim Sql As String
                 Else ' traemos el porcentaje de irpf y de seguridad social
                     If Modo = 3 Or Modo = 4 Then
                         campo2 = "dtosegso"
-                        Sql = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
-                        If Sql <> "" Then
-                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(Sql), "##0.00")
+                        SQL = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
+                        If SQL <> "" Then
+                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(SQL), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(26).Text = Format(ImporteSinFormato(campo2), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = DevuelveDesdeBDNew(cAgro, "salarios", "pluscapataz", "codcateg", Text1(9).Text, "N")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = Format(ImporteSinFormato(Text1(27).Text), "###,##0.00")
@@ -2499,9 +2501,9 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 ' **** si n'hi han camps de descripció a la capçalera ****
@@ -2565,14 +2567,14 @@ Private Sub imgBuscar_Click(Index As Integer)
        Case 1 'Cuentas Contables (de contabilidad)
             If vParamAplic.NumeroConta = 0 Then Exit Sub
             
-            indice = Index + 22
+            Indice = Index + 22
             Set frmCtas = New frmCtasConta
             frmCtas.NumDigit = 0
             frmCtas.DatosADevolverBusqueda = "0|1|"
-            frmCtas.CodigoActual = Text1(indice).Text
+            frmCtas.CodigoActual = Text1(Indice).Text
             frmCtas.Show vbModal
             Set frmCtas = Nothing
-            PonerFoco Text1(indice)
+            PonerFoco Text1(Indice)
        
        Case 2 'formas de pago
 '            Set frmFPa = New frmComercial
@@ -2685,12 +2687,12 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For i = 0 To Combo1.Count - 1
-        Combo1(i).Clear
-    Next i
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
     
     Combo1(0).AddItem "Socio"
     Combo1(0).ItemData(Combo1(0).NewIndex) = 0
@@ -2706,14 +2708,14 @@ Dim i As Integer
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     SepuedeBorrar = False
     
     ' *** si cal comprovar alguna cosa abans de borrar ***
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
-    If Sql <> "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
+    If SQL <> "" Then
         MsgBox "No puede borrar el trabajador porque tiene horas asignadas.", vbExclamation
         Exit Function
     End If

@@ -609,6 +609,10 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
+Private Const IdPrograma = 4019
+
+
+
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
@@ -643,8 +647,8 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Long
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Long
 
 Dim CodTipoMov As String
 
@@ -652,36 +656,36 @@ Public ImpresoraDefecto As String
 
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
     BuscaChekc = ""
     
-    b = (Modo = 2)
-    If b Then
+    B = (Modo = 2)
+    If B Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not b
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not B
+    Next I
     txtAux1.Enabled = (Modo = 1 Or Modo = 3 Or Modo = 4)
-    txtAux2(0).visible = Not b
-    txtAux2(2).visible = Not b
-    txtAux2(3).visible = Not b
-    btnBuscar(0).visible = Not b
-    btnBuscar(1).visible = Not b
-    btnBuscar(2).visible = Not b
-    Combo1(0).visible = Not b
+    txtAux2(0).visible = Not B
+    txtAux2(2).visible = Not B
+    txtAux2(3).visible = Not B
+    btnBuscar(0).visible = Not B
+    btnBuscar(1).visible = Not B
+    btnBuscar(2).visible = Not B
+    Combo1(0).visible = Not B
 
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    CmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -694,33 +698,33 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(6).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
     
-    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = b
-    Me.mnImprimir.Enabled = b
+    Toolbar1.Buttons(11).Enabled = B
+    Me.mnImprimir.Enabled = B
     'Imprimir etiquetas
-    Toolbar1.Buttons(12).Enabled = b
-    Me.mnImpresionEtiquetas.Enabled = b
+    Toolbar1.Buttons(12).Enabled = B
+    Me.mnImpresionEtiquetas.Enabled = B
     
 End Sub
 
@@ -748,9 +752,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = ""
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     
     txtAux1.Text = ""
     
@@ -779,9 +783,9 @@ Private Sub BotonBuscar()
     CargaGrid "rhisfruta.numalbar is null"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux1.Text = ""
     txtAux2(0).Text = ""
     txtAux2(2).Text = ""
@@ -794,13 +798,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -823,9 +827,9 @@ Private Sub BotonModificar()
 '    txtAux(6).Text = DataGrid1.Columns(9).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = adodc1.Recordset!TipoEntr
+    I = adodc1.Recordset!TipoEntr
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), i
+    PosicionarCombo Me.Combo1(0), I
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -839,9 +843,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(2).Top = alto
@@ -856,7 +860,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 Dim vTipoMov As CTiposMov
 
@@ -872,22 +876,22 @@ Dim vTipoMov As CTiposMov
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar la Entrada?"
-    Sql = Sql & vbCrLf & "Albarán: " & adodc1.Recordset.Fields(0)
-    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(1)
+    SQL = "¿Seguro que desea eliminar la Entrada?"
+    SQL = SQL & vbCrLf & "Albarán: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        Sql = "delete from rhisfruta_clasif where numalbar = " & adodc1.Recordset!numalbar
-        conn.Execute Sql
+        SQL = "delete from rhisfruta_clasif where numalbar = " & adodc1.Recordset!numalbar
+        conn.Execute SQL
         
-        Sql = "delete from rhisfruta_entradas where numalbar = " & adodc1.Recordset!numalbar
-        conn.Execute Sql
+        SQL = "delete from rhisfruta_entradas where numalbar = " & adodc1.Recordset!numalbar
+        conn.Execute SQL
         
-        Sql = "Delete from rhisfruta where numalbar=" & adodc1.Recordset!numalbar
-        conn.Execute Sql
+        SQL = "Delete from rhisfruta where numalbar=" & adodc1.Recordset!numalbar
+        conn.Execute SQL
         
         conn.Execute "DELETE FROM trzpalets where numnotac = " & Trim(CStr(adodc1.Recordset!numalbar))
 
@@ -932,22 +936,22 @@ Private Sub btnBuscar_Click(Index As Integer)
     
     Select Case Index
         Case 0 'socios
-            indice = 2
-            PonerFoco txtAux(indice)
+            Indice = 2
+            PonerFoco txtAux(Indice)
             Set frmSoc = New frmManSocios
             frmSoc.DatosADevolverBusqueda = "0|1|"
             frmSoc.Show vbModal
             Set frmSoc = Nothing
-            PonerFoco txtAux(indice)
+            PonerFoco txtAux(Indice)
         
         Case 1 'variedades de comercial
-            indice = 3
+            Indice = 3
             Set frmVar = New frmComVar
             frmVar.DatosADevolverBusqueda = "0|1|"
-            frmVar.CodigoActual = txtAux(indice).Text
+            frmVar.CodigoActual = txtAux(Indice).Text
             frmVar.Show vbModal
             Set frmVar = Nothing
-            PonerFoco txtAux(indice)
+            PonerFoco txtAux(Indice)
     
         Case 2 ' fecha
             Dim esq As Long
@@ -990,7 +994,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim i As Long
+    Dim I As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1003,17 +1007,17 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOk Then InsertarCabecera
+            If DatosOK Then InsertarCabecera
                 
         Case 4 'MODIFICAR
-            If DatosOk Then
+            If DatosOK Then
                 If ModificaCabecera Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
                     
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1047,8 +1051,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1056,18 +1060,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1170,14 +1174,14 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
-    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
+    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
+    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Variedad comercial
-    txtAux(indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
-    txtAux2(indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
+    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codvarie
+    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1216,11 +1220,11 @@ Private Sub mnModificar_Click()
 End Sub
 
 Private Function EstaVolcado(Albaran As String) As Boolean
-Dim Sql As String
+Dim SQL As String
     
-    Sql = "select count(*) from trzlineas_cargas where idpalet in (select idpalet from trzpalets where numnotac = " & DBSet(Albaran, "N") & ")"
+    SQL = "select count(*) from trzlineas_cargas where idpalet in (select idpalet from trzpalets where numnotac = " & DBSet(Albaran, "N") & ")"
     
-    EstaVolcado = (TotalRegistros(Sql) <> 0)
+    EstaVolcado = (TotalRegistros(SQL) <> 0)
 
 End Function
 
@@ -1261,24 +1265,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     
-    If ParamVariedad <> "" Then Sql = Sql & " and rhisfruta.codvarie = " & ParamVariedad
+    If ParamVariedad <> "" Then SQL = SQL & " and rhisfruta.codvarie = " & ParamVariedad
     
     
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY rhisfruta.numalbar"
+    SQL = SQL & " ORDER BY rhisfruta.numalbar"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Albarán|800|;S|txtAux(1)|T|Fecha|1100|;S|btnBuscar(2)|B|||;"
@@ -1302,13 +1306,13 @@ Private Sub CargaGrid(Optional vSQL As String)
         txtAux1.Text = DevuelveDesdeBDNew(cAgro, "rhisfruta_entradas", "observac", "numalbar", adodc1.Recordset!numalbar, "N")
     End If
     
-    CalcularTotales Sql
+    CalcularTotales SQL
     
     
 '    DataGrid1.Columns(11).Alignment = dbgCenter
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
@@ -1390,26 +1394,26 @@ End Sub
 
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
-Dim Sql As String
+Dim B As Boolean
+Dim SQL As String
 Dim Mens As String
 
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = DevuelveDesdeBDNew(cAgro, "rcalidad", "codcalid", "codvarie", txtAux(3).Text, "N")
-        If Sql = "" Then
+        SQL = DevuelveDesdeBDNew(cAgro, "rcalidad", "codcalid", "codvarie", txtAux(3).Text, "N")
+        If SQL = "" Then
             MsgBox "No existe código de calidad para esta variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
-            b = False
+            B = False
         End If
     End If
     
     
-    DatosOk = b
+    DatosOK = B
 End Function
 
 
@@ -1419,7 +1423,7 @@ Private Sub PonerOpcionesMenu()
 End Sub
 
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
@@ -1444,9 +1448,9 @@ Dim cerrar As Boolean
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    btnBuscar_Click (indice)
+    btnBuscar_Click (Indice)
 End Sub
 
 
@@ -1468,21 +1472,21 @@ End Sub
 
 
 Private Function SepuedeBorrar() As Boolean
-Dim Sql As String
-Dim Cad As String
+Dim SQL As String
+Dim cad As String
 
     SepuedeBorrar = False
-    Sql = DevuelveDesdeBDNew(cAgro, "rfactsoc_albaran", "numfactu", "numalbar", adodc1.Recordset!numalbar, "N")
-    If Sql <> "" Then
-        Cad = "No se puede eliminar el albarán, "
-        MsgBox Cad & "está facturado al socio.", vbExclamation
+    SQL = DevuelveDesdeBDNew(cAgro, "rfactsoc_albaran", "numfactu", "numalbar", adodc1.Recordset!numalbar, "N")
+    If SQL <> "" Then
+        cad = "No se puede eliminar el albarán, "
+        MsgBox cad & "está facturado al socio.", vbExclamation
         Exit Function
         
     Else
         'miramos si el albaran ha sido volcado
         If EstaVolcado(CStr(adodc1.Recordset!numalbar)) Then
-            Cad = "No se puede eliminar el albarán, "
-            MsgBox Cad & "está volcado en traza.", vbExclamation
+            cad = "No se puede eliminar el albarán, "
+            MsgBox cad & "está volcado en traza.", vbExclamation
             Exit Function
         End If
     End If
@@ -1492,24 +1496,24 @@ End Function
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         If txtAux(0).Text = "" Then txtAux(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        Sql = CadenaInsertarDesdeForm(Me)
-        If Sql <> "" Then
-            If InsertarOferta(Sql, vTipoMov) Then
+        SQL = CadenaInsertarDesdeForm(Me)
+        If SQL <> "" Then
+            If InsertarOferta(SQL, vTipoMov) Then
                 
-                    i = txtAux(0).Text
+                    I = txtAux(0).Text
                     CargaGrid CadB
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
 '                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
                         If Not adodc1.Recordset.EOF Then
-                            adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                            adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                         End If
                         cmdRegresar_Click
                     Else
@@ -1613,7 +1617,7 @@ End Function
 
 
 Private Function ModificaCabecera() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim MenError As String
 
     On Error GoTo EModificarCab
@@ -1623,9 +1627,9 @@ Dim MenError As String
     
     
     MenError = "Modificando Lineas clasificacion: "
-    b = ModificandoClasificacion(adodc1.Recordset.Fields(0), "", MenError)
+    B = ModificandoClasificacion(adodc1.Recordset.Fields(0), "", MenError)
 
-    If b Then b = ModificaDesdeFormulario(Me)
+    If B Then B = ModificaDesdeFormulario(Me)
     
     
     '[Monica]08/02/2012: Si han modificado variedad socio o fecha en traza
@@ -1638,17 +1642,17 @@ Dim MenError As String
     End If
     
     MenError = "Actualizando Paletización: "
-    If b Then b = ActualizarPaletizacion(MenError)
+    If B Then B = ActualizarPaletizacion(MenError)
     
 
                 
 EModificarCab:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         MenError = "Modificando Albarán." & vbCrLf & "----------------------------" & vbCrLf & MenError
         MuestraError Err.Number, MenError, Err.Description
-        b = False
+        B = False
     End If
-    If b Then
+    If B Then
         ModificaCabecera = True
         conn.CommitTrans
     Else
@@ -1659,28 +1663,28 @@ End Function
 
 
 Private Function ModificandoClasificacion(numalbar As String, Variedad As String, Mens As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificandoClasificacion
 
     ModificandoClasificacion = False
 
-    Sql = "update rhisfruta_clasif set codvarie = " & DBSet(txtAux(3).Text, "N")
-    Sql = Sql & " , kilosnet = " & DBSet(txtAux(5).Text, "N")
-    Sql = Sql & " where numalbar = " & DBSet(numalbar, "N")
+    SQL = "update rhisfruta_clasif set codvarie = " & DBSet(txtAux(3).Text, "N")
+    SQL = SQL & " , kilosnet = " & DBSet(txtAux(5).Text, "N")
+    SQL = SQL & " where numalbar = " & DBSet(numalbar, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "update rhisfruta_entradas set fechaent = " & DBSet(txtAux(1).Text, "F")
-    Sql = Sql & ",horaentr = '" & Format(txtAux(1).Text, "yyyy-mm-dd") & " " & Format(Now, "hh:mm:ss") & "'"
-    Sql = Sql & ",kilosbru = " & DBSet(txtAux(5).Text, "N")
-    Sql = Sql & ",numcajon = " & DBSet(txtAux(4).Text, "N")
-    Sql = Sql & ",kilosnet = " & DBSet(txtAux(5).Text, "N")
-    Sql = Sql & ",kilostra = " & DBSet(txtAux(5).Text, "N")
-    Sql = Sql & ",observac = " & DBSet(txtAux1.Text, "T")
-    Sql = Sql & " where numalbar = " & DBSet(numalbar, "N")
+    SQL = "update rhisfruta_entradas set fechaent = " & DBSet(txtAux(1).Text, "F")
+    SQL = SQL & ",horaentr = '" & Format(txtAux(1).Text, "yyyy-mm-dd") & " " & Format(Now, "hh:mm:ss") & "'"
+    SQL = SQL & ",kilosbru = " & DBSet(txtAux(5).Text, "N")
+    SQL = SQL & ",numcajon = " & DBSet(txtAux(4).Text, "N")
+    SQL = SQL & ",kilosnet = " & DBSet(txtAux(5).Text, "N")
+    SQL = SQL & ",kilostra = " & DBSet(txtAux(5).Text, "N")
+    SQL = SQL & ",observac = " & DBSet(txtAux1.Text, "T")
+    SQL = SQL & " where numalbar = " & DBSet(numalbar, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
 
     ModificandoClasificacion = True
     Exit Function
@@ -1729,14 +1733,14 @@ Dim KilosNet As Currency
 Dim Arrobas As Currency
 
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = "select sum(numcajon) numcajon , sum(kilosnet) kilosnet, sum(round(kilosnet/13,2)) arrrobas from (" & cadena & ") aaaaa"
+    SQL = "select sum(numcajon) numcajon , sum(kilosnet) kilosnet, sum(round(kilosnet/13,2)) arrrobas from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Numcajon = 0
     KilosNet = 0
@@ -1766,25 +1770,25 @@ End Sub
 
 
 Private Sub mnImpresionEtiquetas_Click()
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim cajas As Currency
-Dim Cad As String
+Dim cad As String
 Dim nroPalets As Long
 Dim crear As Byte
 Dim Imprimir As Byte
-Dim b As Boolean
+Dim B As Boolean
 
 
     If vParamAplic.HayTraza = False Then Exit Sub
     
     crear = 1
     Imprimir = 1
-    Sql = "select count(*) from trzpalets where numnotac = " & Trim(Me.adodc1.Recordset!numalbar)
-    If TotalRegistros(Sql) <> 0 Then
-        Cad = "La paletización para esta entrada ya está realizada." & vbCrLf
-        Cad = Cad & vbCrLf & "            ¿ Desea imprimirla de nuevo ? "
-        If MsgBox(Cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+    SQL = "select count(*) from trzpalets where numnotac = " & Trim(Me.adodc1.Recordset!numalbar)
+    If TotalRegistros(SQL) <> 0 Then
+        cad = "La paletización para esta entrada ya está realizada." & vbCrLf
+        cad = cad & vbCrLf & "            ¿ Desea imprimirla de nuevo ? "
+        If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
             crear = 0
             Imprimir = 0
         Else
@@ -1793,14 +1797,14 @@ Dim b As Boolean
         End If
     End If
     
-    b = True
+    B = True
     If crear = 1 Then
         nroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
-        b = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!codvarie))
+        B = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!codvarie))
     End If
     
     If Imprimir = 1 Then
-        If b Then ImprimirEtiquetas
+        If B Then ImprimirEtiquetas
     End If
     
 End Sub
@@ -1812,12 +1816,12 @@ Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As
 Dim nroPalets As Long
 Dim Kilos As Long
 Dim cajas As Long
-Dim i As Long
+Dim I As Long
 Dim CRFID As String
 Dim NroCRFID As String
 Dim NumNota As Long
 Dim NumF As Long
-Dim Sql As String
+Dim SQL As String
 Dim Hora As String
 Dim KilosporPalet As Long
 Dim RestoCajas As Long
@@ -1839,25 +1843,25 @@ Dim TotKilos As Long
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
         
-        For i = 1 To nroPalets
-            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(i, "000")
+        For I = 1 To nroPalets
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
             TotKilos = TotKilos + KilosporPalet
             
-            Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-            Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            Sql = Sql & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
-            Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
-            Sql = Sql & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
+            SQL = SQL & DBSet(KilosporPalet, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
             
-            conn.Execute Sql
-        Next i
+            conn.Execute SQL
+        Next I
         
         If RestoCajas <> 0 Then ' insertamos el ultimo palet con el resto
-            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(i, "000")
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
@@ -1865,14 +1869,14 @@ Dim TotKilos As Long
             
             TotKilos = TotKilos + RestoKilos
             
-            Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-            Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            Sql = Sql & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(RestoCajas, "N") & ","
-            Sql = Sql & DBSet(RestoKilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
-            Sql = Sql & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(RestoCajas, "N") & ","
+            SQL = SQL & DBSet(RestoKilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
             
-            conn.Execute Sql
+            conn.Execute SQL
             
             nroPalets = nroPalets + 1
         End If
@@ -1880,10 +1884,10 @@ Dim TotKilos As Long
         RestoKilos = Numkilos - TotKilos
         
         If RestoKilos <> 0 Then ' actualizamos el ultimo registro si hay resto de kilos
-            Sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
-            Sql = Sql & " where idpalet = " & DBSet(NumF, "N")
+            SQL = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
+            SQL = SQL & " where idpalet = " & DBSet(NumF, "N")
             
-            conn.Execute Sql
+            conn.Execute SQL
         End If
     
     End If
@@ -1896,29 +1900,29 @@ Dim TotKilos As Long
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
         
-        For i = 1 To nroPalets
-            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(i, "000")
+        For I = 1 To nroPalets
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
             ' el tipo de trzpalets va a ser siempre 0, pq se piden palets
             
-            Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
-            Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            Sql = Sql & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
-            Sql = Sql & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
-            Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
-            Sql = Sql & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
+            SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
             
-            conn.Execute Sql
-        Next i
+            conn.Execute SQL
+        Next I
         
-        Sql = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
-        Sql = Sql & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
-        Sql = Sql & " where numnotac = " & DBSet(Albaran, "N")
-        Sql = Sql & " and idpalet = " & DBSet(NumF, "N")
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
+        SQL = SQL & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
+        SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
+        SQL = SQL & " and idpalet = " & DBSet(NumF, "N")
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     
@@ -2044,7 +2048,7 @@ End Sub
 
 Private Function ActualizarTraza2(Nota As String, Variedad As String, Socio As String, Fecha As String, MenError As String)
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim IdPalet As Currency
@@ -2055,13 +2059,13 @@ Dim IdPalet As Currency
 
     If vParamAplic.HayTraza = False Then Exit Function
     
-    Sql = "select idpalet from trzpalets where numnotac = " & DBSet(Nota, "N")
+    SQL = "select idpalet from trzpalets where numnotac = " & DBSet(Nota, "N")
     
     
     'Comprobamos si la fecha de abocamiento de alguno de sus palets es inferior a la de la entrada
     'para no permitir modificar la traza
     Sql2 = "select sum(resul) from (select if(date(fechahora)<" & DBSet(Fecha, "F") & ",1,0) as resul "
-    Sql2 = Sql2 & " from trzlineas_cargas where idpalet in (" & Sql & ")) aaaaa "
+    Sql2 = Sql2 & " from trzlineas_cargas where idpalet in (" & SQL & ")) aaaaa "
     If CLng(DevuelveValor(Sql2)) > 0 Then
         MenError = MenError & vbCrLf & "No se permite una fecha de entrada superior a la de abocamiento de ninguno de sus palets. Revise."
         ActualizarTraza2 = False
@@ -2069,7 +2073,7 @@ Dim IdPalet As Currency
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
+    Rs.Open SQL, conn, adOpenDynamic, adLockReadOnly, adCmdText
     
     While Not Rs.EOF
         
@@ -2097,7 +2101,7 @@ End Function
 
 Private Function ActualizarPaletizacion(MenError As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim KilosTotal As Currency
 Dim KilosNeto As Currency
@@ -2113,10 +2117,10 @@ Dim NumCajas As Long
 
     If vParamAplic.HayTraza = False Then Exit Function
     
-    Sql = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(adodc1.Recordset!numalbar)
+    SQL = "select numcajones, numkilos, idpalet from trzpalets where numnotac = " & Trim(adodc1.Recordset!numalbar)
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
+    Rs.Open SQL, conn, adOpenDynamic, adLockReadOnly, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
