@@ -703,11 +703,11 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2340
+         Left            =   2280
          MaxLength       =   30
          TabIndex        =   50
          Top             =   1740
-         Width           =   3255
+         Width           =   3315
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -863,11 +863,11 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2325
+         Left            =   2265
          MaxLength       =   30
          TabIndex        =   34
          Top             =   2535
-         Width           =   3255
+         Width           =   3315
       End
       Begin VB.TextBox Text5 
          BackColor       =   &H80000018&
@@ -2870,7 +2870,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 

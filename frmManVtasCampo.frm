@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManVtasCampo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Ventas Campo"
-   ClientHeight    =   6360
+   ClientHeight    =   6615
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   12585
+   ClientWidth     =   14775
    Icon            =   "frmManVtasCampo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6360
-   ScaleWidth      =   12585
+   ScaleHeight     =   6615
+   ScaleWidth      =   14775
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -84,14 +84,14 @@ Begin VB.Form frmManVtasCampo
       Left            =   3750
       TabIndex        =   26
       Top             =   0
-      Width           =   2865
+      Width           =   2595
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
          TabIndex        =   27
          Top             =   180
-         Width           =   2325
-         _ExtentX        =   4101
+         Width           =   2175
+         _ExtentX        =   3836
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -117,6 +117,7 @@ Begin VB.Form frmManVtasCampo
    End
    Begin VB.CheckBox chkVistaPrevia 
       Caption         =   "Vista previa"
+      Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -127,9 +128,10 @@ Begin VB.Form frmManVtasCampo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   8550
+      Left            =   10560
       TabIndex        =   25
       Top             =   210
+      Visible         =   0   'False
       Width           =   1605
    End
    Begin VB.TextBox txtAux2 
@@ -166,10 +168,10 @@ Begin VB.Form frmManVtasCampo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   675
-      Left            =   4110
+      Left            =   4020
       TabIndex        =   19
-      Top             =   5610
-      Width           =   5385
+      Top             =   5850
+      Width           =   6465
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
@@ -189,7 +191,7 @@ Begin VB.Form frmManVtasCampo
          TabIndex        =   21
          Text            =   "Text2"
          Top             =   210
-         Width           =   1455
+         Width           =   1755
       End
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
@@ -205,12 +207,12 @@ Begin VB.Form frmManVtasCampo
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   3480
+         Left            =   4080
          Locked          =   -1  'True
          TabIndex        =   20
          Text            =   "Text2"
          Top             =   210
-         Width           =   1455
+         Width           =   1785
       End
       Begin VB.Label Label1 
          Caption         =   "IMPORTE"
@@ -224,7 +226,7 @@ Begin VB.Form frmManVtasCampo
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   2520
+         Left            =   3090
          TabIndex        =   23
          Top             =   240
          Width           =   1335
@@ -259,7 +261,7 @@ Begin VB.Form frmManVtasCampo
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   2
       Left            =   9810
       MaskColor       =   &H00000000&
@@ -327,7 +329,7 @@ Begin VB.Form frmManVtasCampo
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   1
       Left            =   3780
       MaskColor       =   &H00000000&
@@ -404,6 +406,7 @@ Begin VB.Form frmManVtasCampo
       Width           =   735
    End
    Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -459,7 +462,7 @@ Begin VB.Form frmManVtasCampo
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   0
       Left            =   1170
       MaskColor       =   &H00000000&
@@ -503,9 +506,9 @@ Begin VB.Form frmManVtasCampo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10185
+      Left            =   12405
       TabIndex        =   8
-      Top             =   5745
+      Top             =   5985
       Visible         =   0   'False
       Width           =   1035
    End
@@ -522,9 +525,9 @@ Begin VB.Form frmManVtasCampo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11340
+      Left            =   13560
       TabIndex        =   9
-      Top             =   5745
+      Top             =   5985
       Visible         =   0   'False
       Width           =   1095
    End
@@ -575,13 +578,13 @@ Begin VB.Form frmManVtasCampo
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManVtasCampo.frx":0010
-      Height          =   4740
-      Left            =   90
+      Height          =   4900
+      Left            =   120
       TabIndex        =   12
       Top             =   780
-      Width           =   12315
-      _ExtentX        =   21722
-      _ExtentY        =   8361
+      Width           =   14520
+      _ExtentX        =   25612
+      _ExtentY        =   8652
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -655,18 +658,18 @@ Begin VB.Form frmManVtasCampo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11325
+      Left            =   13560
       TabIndex        =   13
-      Top             =   5745
+      Top             =   6000
       Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   1
-      Left            =   60
+      Left            =   120
       TabIndex        =   10
-      Top             =   5670
+      Top             =   5910
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -689,8 +692,8 @@ Begin VB.Form frmManVtasCampo
    End
    Begin MSAdodcLib.Adodc adodc1 
       Height          =   375
-      Left            =   2790
-      Top             =   0
+      Left            =   7110
+      Top             =   180
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
@@ -736,7 +739,7 @@ Begin VB.Form frmManVtasCampo
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   11910
+      Left            =   14190
       TabIndex        =   30
       Top             =   150
       Width           =   405
@@ -878,6 +881,9 @@ Private WithEvents frmVar As frmComVar    ' Variedades
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmSoc As frmManSocios ' Socios
 Attribute frmSoc.VB_VarHelpID = -1
+Private WithEvents frmC1 As frmCal 'calendario fecha
+Attribute frmC1.VB_VarHelpID = -1
+
 
 ' utilizado para buscar por checks
 Private BuscaChekc As String
@@ -893,7 +899,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 Dim cadSelGrid As String
 
 Private Sub PonerModo(vModo)
@@ -909,13 +915,13 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(i), (Modo = 0 Or Modo = 2)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(I), (Modo = 0 Or Modo = 2)
+    Next I
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not B
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not B
+    Next I
     
     txtAux2(0).visible = Not B
     txtAux2(1).visible = Not B
@@ -936,12 +942,12 @@ Dim B As Boolean
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     'Si estamos modo Modificar bloquear todo excepto el importe de anticipo
-    For i = 0 To txtAux.Count - 1
-        If i <> 6 Then txtAux(i).Enabled = (Modo <> 4)
-    Next i
-    For i = 0 To 2
-        BloquearBtn Me.btnBuscar(i), (Modo = 4)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        If I <> 6 Then txtAux(I).Enabled = (Modo <> 4)
+    Next I
+    For I = 0 To 2
+        BloquearBtn Me.btnBuscar(I), (Modo = 4)
+    Next I
     Combo1(0).Enabled = (Modo <> 4)
     
 End Sub
@@ -959,28 +965,32 @@ Dim B As Boolean
     Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     
-    'Factura de anticipo sin entrada
-    Toolbar1.Buttons(14).Enabled = B
-    Me.mnAnticipo.Enabled = B
-    
-    'Insertar
-    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
-    
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
+    
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = False 'B
+    Me.mnEliminar.Enabled = False 'B
+    'Insertar
+    Toolbar1.Buttons(1).Enabled = False ' B And Not DeConsulta
+    Me.mnNuevo.Enabled = False 'B And Not DeConsulta
+    'Impresion
+    Toolbar1.Buttons(8).Enabled = False ' B And Not DeConsulta
+    
     'Generar Factura
-    Toolbar1.Buttons(11).Enabled = B
+    Toolbar2.Buttons(1).Enabled = B
     Me.mnGenerarFactura.Enabled = B
     'Deshacer Factura
-    Toolbar1.Buttons(12).Enabled = B
+    Toolbar2.Buttons(2).Enabled = B
     Me.mnDeshacerFactura.Enabled = B
-    
+    'Factura de anticipo sin entrada
+    Toolbar2.Buttons(3).Enabled = B
+    Me.mnAnticipo.Enabled = B
+    'recalculo de importe
+    Toolbar2.Buttons(4).Enabled = B
+    Me.mnRecalculo.Enabled = B
     
     
 End Sub
@@ -1009,9 +1019,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
 
@@ -1032,26 +1042,26 @@ Private Sub BotonBuscar()
     CargaGrid "rhisfruta.numalbar = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(0).Text = ""
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
-    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -1075,9 +1085,9 @@ Private Sub BotonModificar()
     txtAux(6).Text = DataGrid1.Columns(11).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = adodc1.Recordset!Recolect
+    I = adodc1.Recordset!Recolect
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), i
+    PosicionarCombo Me.Combo1(0), I
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -1091,9 +1101,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
@@ -1183,12 +1193,69 @@ Private Sub btnBuscar_Click(Index As Integer)
             Set frmSoc = Nothing
             PonerFoco txtAux(Indice)
     
+        Case 2 ' fecha
+           Screen.MousePointer = vbHourglass
+           
+           Dim esq As Long
+           Dim dalt As Long
+           Dim menu As Long
+           Dim obj As Object
+        
+           Set frmC1 = New frmCal
+            
+           esq = btnBuscar(Index).Left
+           dalt = btnBuscar(Index).Top
+            
+           Set obj = btnBuscar(Index).Container
+        
+           While btnBuscar(Index).Parent.Name <> obj.Name
+                esq = esq + obj.Left
+                dalt = dalt + obj.Top
+                Set obj = obj.Container
+           Wend
+            
+           menu = Me.Height - Me.ScaleHeight 'ací tinc el heigth del menú i de la toolbar
+        
+           frmC1.Left = esq + btnBuscar(Index).Parent.Left + 30
+           frmC1.Top = dalt + btnBuscar(Index).Parent.Top + btnBuscar(Index).Height + menu - 40
+        
+           
+           frmC1.NovaData = Now
+           Select Case Index
+                Case 2
+                    Indice = 5
+           End Select
+           
+           Me.btnBuscar(2).Tag = Indice
+           
+           PonerFormatoFecha txtAux(Indice)
+           If txtAux(Indice).Text <> "" Then frmC1.NovaData = CDate(txtAux(Indice).Text)
+        
+           Screen.MousePointer = vbDefault
+           frmC1.Show vbModal
+           Set frmC1 = Nothing
+           PonerFoco txtAux(Indice)
+          'Para la fecha de la navegacion
+           If Index = 5 And txtAux(5).Text <> "" Then
+                btnBuscar(2).Tag = txtAux(5).Text
+           End If
+            
+        
     End Select
     
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.adodc1, 1
 End Sub
 
+Private Sub frmC1_Selec(vFecha As Date)
+Dim Indice As Byte
+    
+    Indice = CByte(Me.btnBuscar(2).Tag)
+    txtAux(Indice).Text = Format(vFecha, "dd/mm/yyyy")
+End Sub
 
+Private Sub imgFec_Click(Index As Integer)
+       
+End Sub
 Private Sub chkAux_Click(Index As Integer)
     If Modo = 1 Then
         'Buscqueda
@@ -1201,7 +1268,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Long
+    Dim I As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1241,7 +1308,7 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(9)
+                    I = adodc1.Recordset.Fields(9)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1251,7 +1318,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1286,7 +1353,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1295,16 +1362,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1528,11 +1595,11 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|800|;S|btnBuscar(0)|B|||;S|txtAux2(0)|T|Variedad|1500|;"
-    tots = tots & "S|txtAux(1)|T|Socio|800|;S|btnBuscar(1)|B|||;S|txtAux2(1)|T|Nombre|2100|;"
-    tots = tots & "S|txtAux(2)|T|Campo|900|;S|txtAux2(2)|T|Orden|600|;"
-    tots = tots & "N||||0|;S|Combo1(0)|C|Tipo|920|;S|txtAux(3)|T|Peso Neto|1000|;S|txtAux(4)|T|Albarán|800|;"
-    tots = tots & "S|txtAux(5)|T|Fecha|1100|;S|btnBuscar(2)|B|||;S|txtAux(6)|T|Imp.Entrada|1200|;"
+    tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B|||;S|txtAux2(0)|T|Variedad|1500|;"
+    tots = tots & "S|txtAux(1)|T|Socio|1000|;S|btnBuscar(1)|B|||;S|txtAux2(1)|T|Nombre|2300|;"
+    tots = tots & "S|txtAux(2)|T|Campo|1100|;S|txtAux2(2)|T|Orden|700|;"
+    tots = tots & "N||||0|;S|Combo1(0)|C|Tipo|1320|;S|txtAux(3)|T|Peso Neto|1200|;S|txtAux(4)|T|Albarán|1000|;"
+    tots = tots & "S|txtAux(5)|T|Fecha|1400|;S|btnBuscar(2)|B|||;S|txtAux(6)|T|Imp.Entrada|1400|;"
     
     arregla tots, DataGrid1, Me, 350
     
@@ -1630,8 +1697,6 @@ Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneralNew Me
 End Sub
 
-
-'
 '' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
 'Private Sub DataGrid1_GotFocus()
 '  WheelHook DataGrid1
@@ -1640,14 +1705,13 @@ End Sub
 '  WheelUnHook
 'End Sub
 
-'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 0: KEYBusqueda KeyAscii, 0 'variedad
+                Case 1: KEYBusqueda KeyAscii, 1 'socio
+                Case 5: KEYBusqueda KeyAscii, 2 ' fecha
             End Select
         End If
     Else
@@ -1673,6 +1737,10 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     btnBuscar_Click (Indice)
 End Sub
 
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
 
 Private Sub CargaCombo()
 

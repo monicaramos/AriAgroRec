@@ -847,11 +847,11 @@ Begin VB.Form frmEntBascula
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2460
+         Left            =   2430
          MaxLength       =   30
          TabIndex        =   52
          Top             =   1830
-         Width           =   3915
+         Width           =   3945
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -888,11 +888,11 @@ Begin VB.Form frmEntBascula
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   2400
+         Left            =   2430
          MaxLength       =   40
          TabIndex        =   46
          Top             =   960
-         Width           =   3975
+         Width           =   3945
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -947,11 +947,11 @@ Begin VB.Form frmEntBascula
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   2400
+         Left            =   2430
          MaxLength       =   30
          TabIndex        =   42
          Top             =   520
-         Width           =   3975
+         Width           =   3945
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1008,11 +1008,11 @@ Begin VB.Form frmEntBascula
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2445
+         Left            =   2415
          MaxLength       =   30
          TabIndex        =   36
          Top             =   2685
-         Width           =   3915
+         Width           =   3945
       End
       Begin VB.TextBox Text5 
          BackColor       =   &H80000018&
@@ -2166,8 +2166,8 @@ Begin VB.Form frmEntBascula
       Left            =   14100
       TabIndex        =   101
       Top             =   150
-      Width           =   345
-      _ExtentX        =   609
+      Width           =   435
+      _ExtentX        =   767
       _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
