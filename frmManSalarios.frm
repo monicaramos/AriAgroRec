@@ -509,7 +509,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -894,6 +894,13 @@ Private Sub Form_Unload(Cancel As Integer)
 '    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     If Modo = 4 Then TerminaBloquear
     Screen.MousePointer = vbDefault
+End Sub
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
 End Sub
 
 Private Sub mnBuscar_Click()

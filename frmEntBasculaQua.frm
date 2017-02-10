@@ -164,9 +164,9 @@ Begin VB.Form frmEntBasculaQua
       EndProperty
       Height          =   300
       Index           =   0
-      Left            =   11010
+      Left            =   12450
       TabIndex        =   122
-      Top             =   330
+      Top             =   240
       Width           =   1605
    End
    Begin VB.Frame Frame2 
@@ -2194,7 +2194,7 @@ Begin VB.Form frmEntBasculaQua
             EndProperty
             Height          =   360
             Index           =   11
-            Left            =   2175
+            Left            =   2145
             MaxLength       =   7
             TabIndex        =   21
             Tag             =   "Peso Neto|N|N|0|999999|rentradas|kilosnet|###,##0||"

@@ -642,8 +642,8 @@ Begin VB.Form frmManCampos
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
       Tab(8).ControlEnabled=   0   'False
-      Tab(8).Control(0)=   "ListView4"
-      Tab(8).Control(1)=   "FrameAux6"
+      Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(1)=   "ListView4"
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -4877,7 +4877,7 @@ Begin VB.Form frmManCampos
             TabIndex        =   16
             Tag             =   "Código Responsable|N|S|0|9999|rcampos|codcapat|0000||"
             Top             =   1110
-            Width           =   735
+            Width           =   765
          End
          Begin VB.TextBox Text2 
             BackColor       =   &H80000018&
@@ -4916,7 +4916,7 @@ Begin VB.Form frmManCampos
             TabIndex        =   30
             Tag             =   "Longitud|N|S|0|99.999999|rcampos|longitud|#0.000000||"
             Top             =   3510
-            Width           =   1200
+            Width           =   1230
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
@@ -9300,32 +9300,42 @@ Dim Nuevo As Boolean
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = teclaBuscar Then
-        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
-            Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 2 'variedad
-                Case 3: KEYBusqueda KeyAscii, 1 'partida
-                Case 10: KEYFecha KeyAscii, 0 ' fecha alta
-                Case 11: KEYFecha KeyAscii, 1 ' fecha baja
-                Case 12: KEYBusqueda KeyAscii, 0 'situacion
-                
-                Case 24: KEYBusqueda KeyAscii, 5 'responsable
-                Case 25: KEYBusqueda KeyAscii, 6 'marco de plantacion
-                Case 26: KEYBusqueda KeyAscii, 8 'desrrollo vegetativo
-                Case 27: KEYBusqueda KeyAscii, 7 'tipo de tierra
-                Case 29: KEYBusqueda KeyAscii, 9 'seguro opcion
-                Case 30: KEYBusqueda KeyAscii, 10 'procedencia de riego
-                Case 31: KEYBusqueda KeyAscii, 11 'patron pie
-                Case 34: KEYBusqueda KeyAscii, 12 'opcion seguro
-                Case 37: KEYBusqueda KeyAscii, 13 'zona
-                Case 38: KEYBusqueda KeyAscii, 14 'codigo de globalgap
-                Case 39: KEYBusqueda KeyAscii, 15 'cliente tienda
-                Case 42: KEYFecha KeyAscii, 2 'fecha de revision
-                Case 43: KEYFecha KeyAscii, 3 'fecha alta programa operativo
-            End Select
+    If Index <> 21 Then
+        If KeyAscii = teclaBuscar Then
+            If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+                Select Case Index
+                    Case 1: KEYBusqueda KeyAscii, 1 'socio
+                    Case 2: KEYBusqueda KeyAscii, 2 'variedad
+                    Case 3: KEYBusqueda KeyAscii, 3 'partida
+                    Case 10: KEYFecha KeyAscii, 0 ' fecha alta
+                    Case 11: KEYFecha KeyAscii, 1 ' fecha baja
+                    Case 12: KEYBusqueda KeyAscii, 0 'situacion
+                    
+                    Case 22: KEYBusqueda KeyAscii, 4 'propietario
+                    Case 24: KEYBusqueda KeyAscii, 5 'responsable
+                    Case 25: KEYBusqueda KeyAscii, 6 'marco de plantacion
+                    Case 26: KEYBusqueda KeyAscii, 8 'desrrollo vegetativo
+                    Case 27: KEYBusqueda KeyAscii, 7 'tipo de tierra
+                    Case 29: KEYBusqueda KeyAscii, 9 'seguro opcion
+                    Case 30: KEYBusqueda KeyAscii, 10 'procedencia de riego
+                    Case 31: KEYBusqueda KeyAscii, 11 'patron pie
+                    Case 34: KEYBusqueda KeyAscii, 12 'opcion seguro
+                    Case 37: KEYBusqueda KeyAscii, 13 'zona
+                    Case 38: KEYBusqueda KeyAscii, 14 'codigo de globalgap
+                    Case 39: KEYBusqueda KeyAscii, 15 'cliente tienda
+                    Case 42: KEYFecha KeyAscii, 2 'fecha de revision
+                    Case 43: KEYFecha KeyAscii, 3 'fecha alta programa operativo
+                End Select
+            End If
+        Else
+            KEYpress KeyAscii
         End If
     Else
-        If Index <> 21 Then KEYpress KeyAscii
+        If Text1(Index) = "" And KeyAscii = teclaBuscar Then
+            imgZoom_Click (0)
+        Else
+            KEYpress KeyAscii
+        End If
     End If
 End Sub
 
@@ -9532,7 +9542,7 @@ Dim Eliminar As Boolean
             vWhere = ObtenerWhereCab3(True)
             
             SQL = "¿Seguro que desea eliminar la Línea?"
-            SQL = SQL & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!fecha & " - Incidencia : " & Adoaux(Index).Recordset!nomincid
+            SQL = SQL & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!Fecha & " - Incidencia : " & Adoaux(Index).Recordset!nomincid
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 SQL = "DELETE FROM rcampos_seguros"
@@ -9565,7 +9575,7 @@ Dim Eliminar As Boolean
             
             SQL = "¿Seguro que desea eliminar la Línea?" & vbCrLf
             SQL = SQL & "Concepto: " & Format(Adoaux(Index).Recordset!Codgasto, "00") & " - " & Adoaux(Index).Recordset!NomGasto
-            SQL = SQL & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!fecha
+            SQL = SQL & vbCrLf & "Fecha: " & Adoaux(Index).Recordset!Fecha
             SQL = SQL & vbCrLf & "Importe: " & Adoaux(Index).Recordset!Importe
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
@@ -9591,7 +9601,7 @@ Dim Eliminar As Boolean
             
             
             SQL = "¿Seguro que desea eliminar la Línea?" & vbCrLf
-            SQL = SQL & "Fecha: " & Adoaux(Index).Recordset!fecha
+            SQL = SQL & "Fecha: " & Adoaux(Index).Recordset!Fecha
             SQL = SQL & vbCrLf & "Técnico: " & Adoaux(Index).Recordset!tecnico
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True

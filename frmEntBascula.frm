@@ -40,9 +40,9 @@ Begin VB.Form frmEntBascula
       EndProperty
       Height          =   300
       Index           =   0
-      Left            =   11070
+      Left            =   11820
       TabIndex        =   100
-      Top             =   240
+      Top             =   180
       Width           =   1605
    End
    Begin VB.Frame FrameDesplazamiento 

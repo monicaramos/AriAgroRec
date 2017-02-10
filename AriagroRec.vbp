@@ -312,6 +312,7 @@ Form=frmPagoAnticiposCoopic.frm
 Module=ModNominaA3; Moduls\ModNominaA3.bas
 Form=frmEntPesadaPrev.frm
 Form=frmManPreciosPrev.frm
+Form=frmManClasificaPrev.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

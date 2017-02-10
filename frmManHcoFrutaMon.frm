@@ -671,7 +671,7 @@ Dim B As Boolean
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
     Next I
-    txtAux1.Enabled = (Modo = 1 Or Modo = 3 Or Modo = 4)
+    txtaux1.Enabled = (Modo = 1 Or Modo = 3 Or Modo = 4)
     txtAux2(0).visible = Not B
     txtAux2(2).visible = Not B
     txtAux2(3).visible = Not B
@@ -680,7 +680,7 @@ Dim B As Boolean
     btnBuscar(2).visible = Not B
     Combo1(0).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -756,7 +756,7 @@ Private Sub BotonAnyadir()
         txtAux(I).Text = ""
     Next I
     
-    txtAux1.Text = ""
+    txtaux1.Text = ""
     
     txtAux(1).Text = Format(Now, "dd/mm/yyyy")
     
@@ -786,7 +786,7 @@ Private Sub BotonBuscar()
     For I = 0 To txtAux.Count - 1
         txtAux(I).Text = ""
     Next I
-    txtAux1.Text = ""
+    txtaux1.Text = ""
     txtAux2(0).Text = ""
     txtAux2(2).Text = ""
     txtAux2(3).Text = ""
@@ -1091,7 +1091,7 @@ Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If Modo = 2 Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
         If Not adodc1.Recordset.EOF Then
-            txtAux1.Text = DevuelveDesdeBDNew(cAgro, "rhisfruta_entradas", "observac", "numalbar", adodc1.Recordset!numalbar, "N")
+            txtaux1.Text = DevuelveDesdeBDNew(cAgro, "rhisfruta_entradas", "observac", "numalbar", adodc1.Recordset!numalbar, "N")
         End If
     End If
 End Sub
@@ -1165,6 +1165,13 @@ Private Sub Form_Unload(Cancel As Integer)
 '    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     Screen.MousePointer = vbDefault
     If Modo = 4 Then TerminaBloquear
+End Sub
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
@@ -1303,7 +1310,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(10).Alignment = dbgCenter
     
     If Not adodc1.Recordset.EOF Then
-        txtAux1.Text = DevuelveDesdeBDNew(cAgro, "rhisfruta_entradas", "observac", "numalbar", adodc1.Recordset!numalbar, "N")
+        txtaux1.Text = DevuelveDesdeBDNew(cAgro, "rhisfruta_entradas", "observac", "numalbar", adodc1.Recordset!numalbar, "N")
     End If
     
     CalcularTotales SQL
@@ -1374,7 +1381,7 @@ End Sub
 
 
 Private Sub txtAux1_GotFocus()
-    ConseguirFocoLin txtAux1
+    ConseguirFocoLin txtaux1
 End Sub
 
 
@@ -1385,9 +1392,9 @@ End Sub
 Private Sub txtAux1_LostFocus()
 Dim cadMen As String
 
-    If Not PerderFocoGnral(txtAux1, Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux1, Modo) Then Exit Sub
     
-    txtAux1.Text = UCase(txtAux1.Text)
+    txtaux1.Text = UCase(txtaux1.Text)
     
 End Sub
 
@@ -1584,7 +1591,7 @@ Dim Sql2 As String
     Sql2 = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,kilostra,observac) values ("
     Sql2 = Sql2 & DBSet(txtAux(0).Text, "N") & "," & DBSet(txtAux(0).Text, "N") & "," & DBSet(txtAux(1).Text, "F") & ","
     Sql2 = Sql2 & "'" & Format(txtAux(1).Text, "yyyy-mm-dd") & " " & Format(Now, "hh:mm:ss") & "'," & DBSet(txtAux(5).Text, "N") & ","
-    Sql2 = Sql2 & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux1.Text, "T") & ")"
+    Sql2 = Sql2 & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtaux1.Text, "T") & ")"
     
     conn.Execute Sql2
     
@@ -1681,7 +1688,7 @@ Dim SQL As String
     SQL = SQL & ",numcajon = " & DBSet(txtAux(4).Text, "N")
     SQL = SQL & ",kilosnet = " & DBSet(txtAux(5).Text, "N")
     SQL = SQL & ",kilostra = " & DBSet(txtAux(5).Text, "N")
-    SQL = SQL & ",observac = " & DBSet(txtAux1.Text, "T")
+    SQL = SQL & ",observac = " & DBSet(txtaux1.Text, "T")
     SQL = SQL & " where numalbar = " & DBSet(numalbar, "N")
     
     conn.Execute SQL
@@ -1746,7 +1753,7 @@ Dim SQL As String
     KilosNet = 0
     Arrobas = 0
     Text1.Text = ""
-    Text2.Text = ""
+    text2.Text = ""
     Text3.Text = ""
     
     If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
@@ -1757,7 +1764,7 @@ Dim SQL As String
         If Rs.Fields(2).Value <> 0 Then Arrobas = DBLet(Rs.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
     
         Text1.Text = Format(Numcajon, "###,###,##0")
-        Text2.Text = Format(KilosNet, "###,###,##0")
+        text2.Text = Format(KilosNet, "###,###,##0")
         Text3.Text = Format(Arrobas, "###,###,##0.00")
     End If
     Rs.Close

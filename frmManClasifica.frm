@@ -162,9 +162,9 @@ Begin VB.Form frmManClasifica
       EndProperty
       Height          =   300
       Index           =   0
-      Left            =   8940
+      Left            =   13230
       TabIndex        =   95
-      Top             =   240
+      Top             =   150
       Width           =   1605
    End
    Begin VB.TextBox Text3 
@@ -2437,8 +2437,8 @@ Public CodigoActual As String
 Public DeConsulta As Boolean
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmB As frmBuscaGrid
-Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmClasPrev As frmManClasificaPrev ' Socios vista previa
+Attribute frmClasPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmZ As frmZoom  'Zoom para campos Text
@@ -3088,6 +3088,20 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
     Text2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
+Private Sub frmClasPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    
+    If CadenaSeleccion <> "" Then
+        CadB = "numnotac = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+
+End Sub
+
 Private Sub frmInc_DatoSeleccionado(CadenaSeleccion As String)
 'Incidencias
     txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codincid
@@ -3357,43 +3371,16 @@ Private Sub HacerBusqueda()
 End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
-        
-    'Cridem al form
-    ' **************** arreglar-ho per a vore lo que es desije ****************
-    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & ParaGrid(Text1(0), 12, "Nro.Nota")
-    cad = cad & ParaGrid(Text1(1), 15, "Fecha")
-    cad = cad & "Socio|nomsocio|T||30·"
-'    cad = cad & ParaGrid(text1(2), 60, "Descripción")
-    cad = cad & "Variedad|nomvarie|T||30·"
-    cad = cad & ParaGrid(Text1(5), 15, "Campo")
-    
-    If cad <> "" Then
-        
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        cad = "(" & NombreTabla & " inner join variedades on rclasifica.codvarie = variedades.codvarie) inner join rsocios on rclasifica.codsocio = rsocios.codsocio "
-        frmB.vtabla = cad 'NombreTabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-        frmB.vTitulo = "Clasificación" ' ***** repasa açò: títol de BuscaGrid *****
-        frmB.vSelElem = 1
 
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-        'tindrem que tancar el form llançant l'event
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
+
+    Set frmClasPrev = New frmManClasificaPrev
+    frmClasPrev.cWhere = CadB
+    frmClasPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmClasPrev.Show vbModal
+    
+    Set frmClasPrev = Nothing
+
+
 End Sub
 
 Private Sub cmdRegresar_Click()
@@ -4089,20 +4076,28 @@ Dim SQL As String
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = teclaBuscar Then
-        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
-            Select Case Index
-                Case 3: KEYBusqueda KeyAscii, 0 'variedad
-                Case 4: KEYBusqueda KeyAscii, 1 'socio
-                Case 5: KEYBusqueda KeyAscii, 2 'campo
-                Case 6: KEYBusqueda KeyAscii, 3 'capataz
-                Case 7: KEYBusqueda KeyAscii, 4 'transportista
-                Case 8: KEYBusqueda KeyAscii, 5 'tarifa
-            End Select
+    If Index <> 20 Then
+        If KeyAscii = teclaBuscar Then
+            If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+                Select Case Index
+                    Case 3: KEYBusqueda KeyAscii, 0 'variedad
+                    Case 4: KEYBusqueda KeyAscii, 1 'socio
+                    Case 5: KEYBusqueda KeyAscii, 2 'campo
+                    Case 6: KEYBusqueda KeyAscii, 3 'capataz
+                    Case 7: KEYBusqueda KeyAscii, 4 'transportista
+                    Case 8: KEYBusqueda KeyAscii, 5 'tarifa
+                End Select
+            End If
+        Else
+    '        If Index <> 3 Or (Index = 3 And Text1(3).Text = "") Then KEYpress KeyAscii
+            KEYpress KeyAscii
         End If
     Else
-'        If Index <> 3 Or (Index = 3 And Text1(3).Text = "") Then KEYpress KeyAscii
-        KEYpress KeyAscii
+        If Text1(Index) = "" And KeyAscii = teclaBuscar Then
+            imgZoom_Click (0)
+        Else
+            KEYpress KeyAscii
+        End If
     End If
 End Sub
 
@@ -4460,6 +4455,13 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnGastos_Click
         Case 2 'Exportar/importar
             mnExporImpor_Click
+    End Select
+End Sub
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 

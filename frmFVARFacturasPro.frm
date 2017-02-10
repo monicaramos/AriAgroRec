@@ -1481,12 +1481,12 @@ Dim cad As String
                 
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(Text1(3)) Then
-                    Text2(3).Text = vSeccion.Nombre
+                    text2(3).Text = vSeccion.Nombre
                     If vSeccion.AbrirConta Then
                         PorRet = 0
                         If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
-                        Adoaux(0).Recordset.MoveFirst
-                        RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Text1(4).Text, Text1(0).Text
+                        AdoAux(0).Recordset.MoveFirst
+                        RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet, Text1(4).Text, Text1(0).Text
 
                         Text1(28).Text = ""
                         If ImpRet <> 0 Then Text1(28).Text = Format(ImpRet, "#,###,###,##0.00")
@@ -1702,6 +1702,13 @@ Dim Sql2 As String
 
 End Sub
 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
+
 Private Sub LimpiarCampos()
     On Error Resume Next
 
@@ -1751,7 +1758,7 @@ On Error GoTo EPonerModo
 
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     '---------------------------------------------
     
@@ -1919,7 +1926,7 @@ Dim I As Byte
     B = (Modo = 3 Or (Modo = 4 And Not ModificarTotales) Or Modo = 2) 'And (Check1(1).Value = 0)
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -1999,13 +2006,13 @@ End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
     Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nommacta
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nommacta
 End Sub
 
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 Dim cad As String
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codforpa
-    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsecci
+    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsecci
 End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
@@ -2022,7 +2029,7 @@ End Sub
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
 Dim cad As String
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codsecci
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsecci
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsecci
     
     cad = RecuperaValor(CadenaSeleccion, 3)  'numconta
     If cad <> "" Then BdConta = CInt(cad)  'numero de conta
@@ -2030,7 +2037,7 @@ End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
     Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
 End Sub
 
 Private Sub frmTipIVA_DatoSeleccionado(CadenaSeleccion As String)
@@ -2640,19 +2647,19 @@ Dim vSec As CSeccion
     
     'Recuperar Descripciones de los campos de Codigo
     '--------------------------------------------------
-    Text2(4).Text = PonerNombreDeCod(Text1(4), "rsocios", "nomsocio")
-    Text2(25).Text = PonerNombreDeCod(Text1(25), "forpago", "nomforpa")
+    text2(4).Text = PonerNombreDeCod(Text1(4), "rsocios", "nomsocio")
+    text2(25).Text = PonerNombreDeCod(Text1(25), "forpago", "nomforpa")
     
     BdConta = DevuelveDesdeBDNew(cAgro, "rseccion", "empresa_conta", "codsecci", Text1(3).Text, "N")
     
-    Text2(27).Text = ""
+    text2(27).Text = ""
     
     Set vSeccion = New CSeccion
     If vSeccion.LeerDatos(Text1(3)) Then
-        Text2(3).Text = vSeccion.Nombre
+        text2(3).Text = vSeccion.Nombre
         If vSeccion.AbrirConta Then
             If Text1(27).Text <> "" Then
-                Text2(27).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(27).Text, "T")
+                text2(27).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(27).Text, "T")
             End If
         End If
     End If
@@ -2698,16 +2705,16 @@ Dim V
                     DataGridAux(NumTabMto).Enabled = True
                     DataGridAux(NumTabMto).SetFocus
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llinies
                     ModoLineas = 0
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                     End If
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
             End Select
@@ -2738,11 +2745,11 @@ Dim UltNiv As Integer
     If B And Text1(27).Text <> "" Then
         Set vSeccion = New CSeccion
         If vSeccion.LeerDatos(Text1(3)) Then
-            Text2(3).Text = vSeccion.Nombre
+            text2(3).Text = vSeccion.Nombre
             If vSeccion.AbrirConta Then
                 If Text1(27).Text <> "" Then
-                    Text2(27).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(27).Text, "T")
-                    If Text2(27) = "" Then
+                    text2(27).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Text1(27).Text, "T")
+                    If text2(27) = "" Then
                         MsgBox "No existe la cuenta contable de Retención en la contabilidad asociada a la sección", vbExclamation
                         B = False
                     End If
@@ -2860,8 +2867,8 @@ Dim I As Integer
         Case 3 'Seccion
             If Text1(Index).Text <> "" Then
                 If PonerFormatoEntero(Text1(3)) Then
-                    Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N")
-                    If Text2(Index).Text = "" Then
+                    text2(Index).Text = PonerNombreDeCod(Text1(Index), "rseccion", "nomsecci", "codsecci", "N")
+                    If text2(Index).Text = "" Then
                         cad = "No existe la Sección: " & Text1(Index).Text & vbCrLf
                         cad = cad & "¿Desea crearla?" & vbCrLf
                         If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
@@ -2888,7 +2895,7 @@ Dim I As Integer
                         End If
                     End If
                 Else
-                    Text2(Index).Text = ""
+                    text2(Index).Text = ""
                 End If
             End If
             
@@ -2896,8 +2903,8 @@ Dim I As Integer
         Case 4 ' Socio
             If Text1(Index).Text <> "" Then
                 If PonerFormatoEntero(Text1(Index)) Then
-                    Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio", "N")
-                    If Text2(Index).Text = "" Then
+                    text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio", "N")
+                    If text2(Index).Text = "" Then
                         cad = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                         cad = cad & "¿Desea crearlo?" & vbCrLf
                         If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
@@ -2915,14 +2922,14 @@ Dim I As Integer
                     End If
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
         
         Case 25 'Forma pago
             If Text1(Index).Text = "" Then Exit Sub
             
-            Text2(25).Text = DevuelveDesdeBDNew(cAgro, "forpago", "nomforpa", "codforpa", Text1(25).Text, "N")
-            If Text2(25).Text = "" Then
+            text2(25).Text = DevuelveDesdeBDNew(cAgro, "forpago", "nomforpa", "codforpa", Text1(25).Text, "N")
+            If text2(25).Text = "" Then
                 MsgBox "No existe la Forma de Pago. Reintroduzca.", vbExclamation
                 Seguir = False
                 PonerFoco Text1(Index)
@@ -2961,14 +2968,14 @@ Dim I As Integer
            End If
               
         Case 27 'cuenta de retencion
-            Text2(Index).Text = ""
+            text2(Index).Text = ""
             If Text1(Index).Text = "" Then Exit Sub
             
             Set vSeccion = New CSeccion
             If vSeccion.LeerDatos(Text1(3).Text) Then
                 If vSeccion.AbrirConta Then
-                    Text2(27) = PonerNombreCuenta(Text1(27), Modo)
-                    If Text2(Index).Text = "" Then
+                    text2(27) = PonerNombreCuenta(Text1(27), Modo)
+                    If text2(Index).Text = "" Then
                         PonerFoco Text1(Index)
                     End If
                 End If
@@ -3083,7 +3090,7 @@ Dim Eliminar As Boolean
 '    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     
-    If Adoaux(Index).Recordset.RecordCount = 1 Then
+    If AdoAux(Index).Recordset.RecordCount = 1 Then
         MsgBox "No se puede borrar un única línea de factura, elimine la factura completa", vbExclamation
         PonerModo 2
         Exit Sub
@@ -3095,13 +3102,13 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'lineas de factura
             SQL = "¿Seguro que desea eliminar la línea?"
-            SQL = SQL & vbCrLf & "Nº línea: " & Format(DBLet(Adoaux(Index).Recordset!numlinea), FormatoCampo(txtAux(4)))
-            SQL = SQL & vbCrLf & "Concepto: " & DBLet(Adoaux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
+            SQL = SQL & vbCrLf & "Nº línea: " & Format(DBLet(AdoAux(Index).Recordset!numlinea), FormatoCampo(txtAux(4)))
+            SQL = SQL & vbCrLf & "Concepto: " & DBLet(AdoAux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
             If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-                NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+                NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
                 Eliminar = True
                 SQL = "DELETE FROM fvarlinfactpro"
-                SQL = SQL & Replace(ObtenerWhereCab(True), "fvarcabfactpro", "fvarlinfactpro") & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+                SQL = SQL & Replace(ObtenerWhereCab(True), "fvarcabfactpro", "fvarlinfactpro") & " AND numlinea= " & AdoAux(Index).Recordset!numlinea
             End If
     End Select
 
@@ -3120,7 +3127,7 @@ Dim Eliminar As Boolean
         
         'antes estaba debajo de situardata
         CargaGrid Index, True
-        SituarDataTrasEliminar Adoaux(Index), NumRegElim, True
+        SituarDataTrasEliminar AdoAux(Index), NumRegElim, True
         
         
         
@@ -3168,7 +3175,7 @@ Dim vSec As CSeccion
     NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 
     'Situamos el grid al final
-    AnyadirLinea DataGridAux(Index), Adoaux(Index)
+    AnyadirLinea DataGridAux(Index), AdoAux(Index)
 
     anc = DataGridAux(Index).Top
     If DataGridAux(Index).Row < 0 Then
@@ -3204,8 +3211,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim J As Integer
     Dim vSec As CSeccion
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
     
@@ -3219,7 +3226,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     
     Set vSeccion = New CSeccion
     If vSeccion.LeerDatos(Text1(3)) Then
-        Text2(3).Text = vSeccion.Nombre
+        text2(3).Text = vSeccion.Nombre
         If vSeccion.AbrirConta Then
         
         End If
@@ -3372,7 +3379,7 @@ Dim SQL As String
 '            End If
             'Es numerico
             If PonerFormatoDecimal(txtAux(Index), 3) Then
-                PonerFocoBtn Me.CmdAceptar
+                PonerFocoBtn Me.cmdAceptar
             Else
                 txtAux(Index).Text = ""
             End If
@@ -3425,7 +3432,7 @@ End Function
 Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
 
     SepuedeBorrar = False
-    If Adoaux(Index).Recordset.EOF Then Exit Function
+    If AdoAux(Index).Recordset.EOF Then Exit Function
 
     SepuedeBorrar = True
 End Function
@@ -3441,7 +3448,7 @@ Dim tots As String
     
     tots = MontaSQLCarga(Index, enlaza)
     
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'lineas de factura
@@ -3492,12 +3499,12 @@ Dim V As Integer
         If InsertarDesdeForm2(Me, 2, nomframe) Then
             B = BLOQUEADesdeFormulario2(Me, Data1, 1)
             CargaGrid NumTabMto, True
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
             DataGridAux(NumTabMto).SetFocus
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
             
 '            ' ### [Monica] 29/09/2006
 '            ' añadido el tema de de recalculo de bases
@@ -3505,12 +3512,12 @@ Dim V As Integer
             
             Set vSeccion = New CSeccion
             If vSeccion.LeerDatos(Text1(3)) Then
-                Text2(3).Text = vSeccion.Nombre
+                text2(3).Text = vSeccion.Nombre
                 If vSeccion.AbrirConta Then
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
                     
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
                 End If
             End If
             If Not vSeccion Is Nothing Then
@@ -3620,7 +3627,7 @@ Dim V As Currency
 
                 
             End If
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
@@ -3639,7 +3646,7 @@ Dim V As Currency
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
         
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
                     
                 End If
             End If
@@ -3860,7 +3867,7 @@ Dim SQL As String
             PorRet = 0
             If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
 
-            RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+            RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
 
 
             '13/02/2007 iniacializo los txt

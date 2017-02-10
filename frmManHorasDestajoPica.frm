@@ -795,7 +795,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1573,8 +1573,8 @@ Dim cadMen As String
         
         Case 7 'codigo de trabajador
             If PonerFormatoEntero(txtAux(Index)) Then
-                txtAux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
-                If txtAux3.Text = "" Then
+                txtaux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
+                If txtaux3.Text = "" Then
                     cadMen = "No existe el Trabajador: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -1780,7 +1780,7 @@ Private Sub CargaForaGrid()
     If DataGrid1.Columns.Count <= 2 Then Exit Sub
 
     txtAux(7).Text = DBLet(adodc1.Recordset!CodTraba, "N")
-    txtAux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
+    txtaux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
     ' **********************************************************************
  End Sub
 
@@ -1804,7 +1804,7 @@ Dim SQL As String
     Compleme = 0
     Penaliza = 0
     Text1.Text = ""
-    Text2.Text = ""
+    text2.Text = ""
     Text3.Text = ""
     
     If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
@@ -1815,7 +1815,7 @@ Dim SQL As String
         If Rs.Fields(2).Value <> 0 Then Penaliza = DBLet(Rs.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
     
         Text1.Text = Format(Importe, "###,###,##0.00")
-        Text2.Text = Format(Compleme, "###,###,##0.00")
+        text2.Text = Format(Compleme, "###,###,##0.00")
         Text3.Text = Format(Penaliza, "###,###,##0.00")
     End If
     Rs.Close
@@ -1826,6 +1826,11 @@ Dim SQL As String
     
 End Sub
 
-
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
 
 

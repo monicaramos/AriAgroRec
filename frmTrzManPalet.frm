@@ -117,7 +117,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Dim IdPalet As Long
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
@@ -153,24 +153,24 @@ Private Sub cmdConsultar_Click()
         Exit Sub
     End If
     
-    Sql = "select * from trzpalets where CRFID ='" & txtRFID & "'"
+    SQL = "select * from trzpalets where CRFID ='" & txtRFID & "'"
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         IdPalet = Rs!IdPalet '????? rafa
         'SQL = "select * from Palets where codPalet = " & CStr(IdPalet)
-        Sql = "select nomvarie from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        SQL = "select nomvarie from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
         Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        Sql = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!numnotac) & vbCrLf
-        Sql = Sql & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!Numkilos) & vbCrLf
-        Sql = Sql & "Variedad:" & RS1!nomvarie
+        SQL = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!numnotac) & vbCrLf
+        SQL = SQL & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!Numkilos) & vbCrLf
+        SQL = SQL & "Variedad:" & RS1!nomvarie
         'SQL = SQL & "Producto:" & rs!NomProdu & " Variedad:" & rs!nomvarie
         
         Set RS1 = Nothing
-        txtResul.Text = Sql
+        txtResul.Text = SQL
     Else
         IdPalet = 0
         txtResul.Text = "NO HAY NINGUN PALET CON ESTA TARJETA ASOCIADA"
@@ -186,8 +186,8 @@ Private Sub cmdDesAsign_Click()
         Exit Sub
     End If
     
-    Sql = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
-    conn.Execute Sql
+    SQL = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
+    conn.Execute SQL
     
     MsgBox "Tarjeta desasignada"
     
@@ -213,29 +213,35 @@ Private Sub txtRFID_Change()
 End Sub
 
 Private Function CargaLineaConfeccion(Linea As Long, RFID As String, FechaHora As Date) As Boolean
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim resultaddo As Boolean
     
     '-- Buscamos que el palet exista
-    Sql = "select * from trzpalets where CRFID = '" & RFID & "'"
+    SQL = "select * from trzpalets where CRFID = '" & RFID & "'"
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Rs.EOF Then
         MsgBox "El palet RFID: " & RFID & " leido en la línea " & CStr(Linea) & " no existe en el sistema"
         Exit Function
     End If
-    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
-    Sql = Sql & DBSet(Linea, "N") & ","
-    Sql = Sql & DBSet(Rs!IdPalet, "N") & ","
-    Sql = Sql & DBSet(FechaHora, "FH") & ","
-    Sql = Sql & DBSet(FechaHora, "F") & ","
-    Sql = Sql & DBSet(Rs!Tipo, "N") & ")"
-    conn.Execute Sql
+    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
+    SQL = SQL & DBSet(Linea, "N") & ","
+    SQL = SQL & DBSet(Rs!IdPalet, "N") & ","
+    SQL = SQL & DBSet(FechaHora, "FH") & ","
+    SQL = SQL & DBSet(FechaHora, "F") & ","
+    SQL = SQL & DBSet(Rs!Tipo, "N") & ")"
+    conn.Execute SQL
     
-    Sql = "update trzpalets set CRFID = null where IdPalet=" & DBSet(Rs!IdPalet, "N")
-    conn.Execute Sql
+    SQL = "update trzpalets set CRFID = null where IdPalet=" & DBSet(Rs!IdPalet, "N")
+    conn.Execute SQL
     
     CargaLineaConfeccion = True
 End Function
 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub

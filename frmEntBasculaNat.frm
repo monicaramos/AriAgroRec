@@ -31,9 +31,9 @@ Begin VB.Form frmEntBasculaNat
       EndProperty
       Height          =   300
       Index           =   0
-      Left            =   10470
+      Left            =   10800
       TabIndex        =   101
-      Top             =   240
+      Top             =   210
       Width           =   1605
    End
    Begin VB.Frame FrameDesplazamiento 
@@ -2730,7 +2730,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1

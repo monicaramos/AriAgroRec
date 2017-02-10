@@ -1446,8 +1446,8 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
             For jj = 0 To 8
-                txtAux3(jj).Height = DataGrid2.RowHeight
-                txtAux3(jj).Top = alto - 210
+                txtaux3(jj).Height = DataGrid2.RowHeight
+                txtaux3(jj).Top = alto - 210
 '                txtAux3(jj).visible = b
             Next jj
             
@@ -1743,7 +1743,7 @@ Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 3) 'porcentaje iva
     FormateaCampo Text1(4)
 End Sub
@@ -1751,13 +1751,13 @@ End Sub
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Variedades
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Socios
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Socios
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -2042,8 +2042,8 @@ Dim vSocio As cSocio
         Case 2 'Socio
             If Modo = 1 Then Exit Sub
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -2068,7 +2068,7 @@ Dim vSocio As cSocio
                             Set vSeccion = New CSeccion
                             If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                                 If vSeccion.AbrirConta Then
-                                    Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                                    text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                                     Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                                 End If
                             End If
@@ -2084,7 +2084,7 @@ Dim vSocio As cSocio
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                     If vSeccion.AbrirConta Then
-                        Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                        text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                         Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                     End If
                 End If
@@ -2235,14 +2235,14 @@ Dim vSeccion As CSeccion
     'poner descripcion campos
     Modo = 4
     
-    Text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
+    text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
     Set vSeccion = New CSeccion
     '[Monica]30/07/2015: antes ponia seccion de horto. CORREGIDO
     If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
         B = vSeccion.AbrirConta
         If B Then
-            Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+            text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
         End If
     End If
     Set vSeccion = Nothing
@@ -2349,20 +2349,20 @@ Dim b1 As Boolean
     
     
     For I = 0 To 7
-        BloquearTxt txtAux3(I), True
-        txtAux3(I).visible = False
+        BloquearTxt txtaux3(I), True
+        txtaux3(I).visible = False
     Next I
     For I = 3 To 7
         If I <> 4 Then
-            BloquearTxt txtAux3(I), (Modo <> 1)
-            txtAux3(I).visible = (Modo = 1)
+            BloquearTxt txtaux3(I), (Modo <> 1)
+            txtaux3(I).visible = (Modo = 1)
         End If
     Next I
     
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -2445,7 +2445,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -2453,7 +2453,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -2712,7 +2712,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not B
+    Me.cmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
@@ -3081,7 +3081,7 @@ Dim NroCopias As Integer
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtAux3(Index), Modo
+    ConseguirFoco txtaux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3093,7 +3093,7 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
 End Sub
 
 Private Sub CargaCombo()
@@ -3627,4 +3627,9 @@ Dim TotFac As Currency
     End If
 End Sub
 
-
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub

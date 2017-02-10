@@ -35,9 +35,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame3"
+      Tab(0).Control(0)=   "FrameAnticipos"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "FrameAnticipos"
+      Tab(0).Control(2)=   "Frame3"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -3096,10 +3096,10 @@ Private Sub btnBuscar_Click(Index As Integer)
         Case 0 'Conceptos de gastos
             Set frmGas = New frmManConcepGasto
             frmGas.DatosADevolverBusqueda = "0|1|"
-            frmGas.CodigoActual = txtAux3(14).Text
+            frmGas.CodigoActual = txtaux3(14).Text
             frmGas.Show vbModal
             Set frmGas = Nothing
-            PonerFoco txtAux3(14)
+            PonerFoco txtaux3(14)
     End Select
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 
@@ -3418,12 +3418,12 @@ Dim J As Byte
         End If
 
         For J = 10 To 13
-            txtAux3(J).Text = DataGrid4.Columns(J - 10).Text
+            txtaux3(J).Text = DataGrid4.Columns(J - 10).Text
         Next J
-        txtAux3(14).Text = DataGrid4.Columns(4).Text
+        txtaux3(14).Text = DataGrid4.Columns(4).Text
 
-        txtAux3(15).Text = DataGrid4.Columns(5).Text
-        txtAux3(16).Text = DataGrid4.Columns(6).Text
+        txtaux3(15).Text = DataGrid4.Columns(5).Text
+        txtaux3(16).Text = DataGrid4.Columns(6).Text
 
         ModificaLineas = 2 'Modificar
         LLamaLineas ModificaLineas, anc, "DataGrid4"
@@ -3435,7 +3435,7 @@ Dim J As Byte
         DataGrid4.Enabled = True
 
 '            PonerBotonCabecera False
-        PonerFoco txtAux3(16)
+        PonerFoco txtaux3(16)
         Me.DataGrid4.Enabled = False
 
 
@@ -3468,8 +3468,8 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
             For jj = 0 To 8
-                txtAux3(jj).Height = DataGrid2.RowHeight
-                txtAux3(jj).Top = alto - 210
+                txtaux3(jj).Height = DataGrid2.RowHeight
+                txtaux3(jj).Top = alto - 210
 '                txtAux3(jj).visible = b
             Next jj
             chkAux(0).Top = alto - 210
@@ -3479,9 +3479,9 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid4
             B = (xModo = 1 Or xModo = 2)
              For jj = 14 To 16
-                txtAux3(jj).Height = DataGrid3.RowHeight - 10
-                txtAux3(jj).Top = alto + 5
-                txtAux3(jj).visible = B
+                txtaux3(jj).Height = DataGrid3.RowHeight - 10
+                txtaux3(jj).Top = alto + 5
+                txtaux3(jj).visible = B
             Next jj
             btnBuscar(0).Height = DataGrid3.RowHeight - 10
             btnBuscar(0).Top = alto + 5
@@ -3787,6 +3787,12 @@ Dim I As Integer
 
 End Sub
 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
 
 Private Sub LimpiarCampos()
 Dim I As Integer
@@ -3851,8 +3857,8 @@ End Sub
 
 Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Concepto de gastos
-    txtAux3(14).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod Concepto
-    txtAux3(15).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Concepto de gasto
+    txtaux3(14).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod Concepto
+    txtaux3(15).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Concepto de gasto
 
 End Sub
 
@@ -3896,7 +3902,7 @@ Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 3) 'porcentaje iva
     FormateaCampo Text1(4)
 End Sub
@@ -3904,13 +3910,13 @@ End Sub
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Variedades
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Socios
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Socios
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -4254,8 +4260,8 @@ Dim vSocio As cSocio
         Case 2 'Socio
             If Modo = 1 Then Exit Sub
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -4280,7 +4286,7 @@ Dim vSocio As cSocio
                             Set vSeccion = New CSeccion
                             If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                                 If vSeccion.AbrirConta Then
-                                    Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                                    text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                                     Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                                 End If
                             End If
@@ -4296,7 +4302,7 @@ Dim vSocio As cSocio
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                     If vSeccion.AbrirConta Then
-                        Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                        text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                         Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                     End If
                 End If
@@ -4497,13 +4503,13 @@ Dim vSeccion As CSeccion
     'poner descripcion campos
     Modo = 4
     
-    Text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
+    text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
     Set vSeccion = New CSeccion
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         B = vSeccion.AbrirConta
         If B Then
-            Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+            text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
         End If
     End If
     Set vSeccion = Nothing
@@ -4645,13 +4651,13 @@ Dim b1 As Boolean
     txtAux(6).visible = False
     txtAux(6).Enabled = True
     For I = 0 To 7
-        BloquearTxt txtAux3(I), True
-        txtAux3(I).visible = False
+        BloquearTxt txtaux3(I), True
+        txtaux3(I).visible = False
     Next I
     For I = 3 To 8
         If I <> 4 Then
-            BloquearTxt txtAux3(I), (Modo <> 1)
-            txtAux3(I).visible = (Modo = 1)
+            BloquearTxt txtaux3(I), (Modo <> 1)
+            txtaux3(I).visible = (Modo = 1)
         End If
     Next I
     BloquearChk chkAux(0), (Modo <> 1)
@@ -4661,7 +4667,7 @@ Dim b1 As Boolean
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -4675,14 +4681,14 @@ Dim b1 As Boolean
     Me.chkVistaPrevia.Enabled = (Modo <= 2)
     
     B = (Modo = 5) And ModificaLineas = 1
-    BloquearTxt txtAux3(14), Not B
+    BloquearTxt txtaux3(14), Not B
     BloquearBtn Me.btnBuscar(0), Not B
     
-    txtAux3(15).visible = False
-    txtAux3(15).Enabled = False
+    txtaux3(15).visible = False
+    txtaux3(15).Enabled = False
     
     B = (Modo = 5) And (ModificaLineas = 1 Or ModificaLineas = 2)
-    BloquearTxt txtAux3(16), Not B
+    BloquearTxt txtaux3(16), Not B
        
        
     '[Monica]21/05/2013: introducimos el porcentaje de corredor en la factura
@@ -4776,7 +4782,7 @@ End Function
 
 Private Sub Text2_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
     If Index = 16 And KeyCode = 40 Then 'campo Amliacion Linea y Flecha hacia abajo
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     Else
         KEYdown KeyCode
     End If
@@ -4784,7 +4790,7 @@ End Sub
 
 Private Sub Text2_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 16 And KeyAscii = 13 Then 'campo Amliacion Linea y ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     End If
 End Sub
 
@@ -5103,7 +5109,7 @@ Private Sub PonerBotonCabecera(B As Boolean)
 'o Pone los botones de Aceptar y cancelar en Insert,update o delete lineas
     On Error Resume Next
 
-    Me.CmdAceptar.visible = Not B
+    Me.cmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
     Me.cmdRegresar.visible = B
     Me.cmdRegresar.Caption = "Cabecera"
@@ -5277,8 +5283,8 @@ Dim SQL As String
     Select Case Index
         Case 4 ' calidad
             If txtAux(Index) <> "" Then
-                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtAux(5), "N", , "codcalid", txtAux(6).Text, "N")
-                If Text2(6).Text = "" Then
+                text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtAux(5), "N", , "codcalid", txtAux(6).Text, "N")
+                If text2(6).Text = "" Then
                     cadMen = "No existe la Calidad: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -5297,13 +5303,13 @@ Dim SQL As String
                     PonerFoco txtAux(Index)
                 End If
             Else
-                Text2(6).Text = ""
+                text2(6).Text = ""
             End If
 
         Case 7 'peso neto
             If txtAux(Index) <> "" Then
                 PonerFormatoEntero txtAux(Index)
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
@@ -5870,7 +5876,7 @@ End Sub
 
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtAux3(Index), Modo
+    ConseguirFoco txtaux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -5884,44 +5890,44 @@ End Sub
 Private Sub TxtAux3_LostFocus(Index As Integer)
 Dim cadMen As String
 
-    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 14 ' codigo de concepto de gasto
-            If txtAux3(Index) <> "" Then
-                txtAux3(15).Text = DevuelveDesdeBDNew(cAgro, "rconcepgasto", "nomgasto", "codgasto", txtAux3(14), "N")
-                If txtAux3(15).Text = "" Then
-                    cadMen = "No existe el Concepto de Gasto: " & txtAux3(15).Text & vbCrLf
+            If txtaux3(Index) <> "" Then
+                txtaux3(15).Text = DevuelveDesdeBDNew(cAgro, "rconcepgasto", "nomgasto", "codgasto", txtaux3(14), "N")
+                If txtaux3(15).Text = "" Then
+                    cadMen = "No existe el Concepto de Gasto: " & txtaux3(15).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmGas = New frmManConcepGasto
                         frmGas.DatosADevolverBusqueda = "0|1|"
-                        frmGas.NuevoCodigo = txtAux3(14).Text
+                        frmGas.NuevoCodigo = txtaux3(14).Text
                         TerminaBloquear
                         frmGas.Show vbModal
                         Set frmGas = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtAux3(Index)
+                        PonerFoco txtaux3(Index)
                     Else
-                        txtAux3(Index).Text = ""
+                        txtaux3(Index).Text = ""
                     End If
-                    PonerFoco txtAux3(Index)
+                    PonerFoco txtaux3(Index)
                 Else
                     '[Monica]20/07/2016: el gasto puede no ser de factura
                     If vParamAplic.Cooperativa <> 0 Then
-                        If Not EsGastodeFactura(txtAux3(Index).Text) = True Then
+                        If Not EsGastodeFactura(txtaux3(Index).Text) = True Then
                             MsgBox "Este concepto de gasto no es de factura. Reintroduzca.", vbExclamation
-                            PonerFoco txtAux3(Index)
+                            PonerFoco txtaux3(Index)
                         End If
                     End If
                 End If
             Else
-                txtAux3(15).Text = ""
+                txtaux3(15).Text = ""
             End If
     
         Case 16 ' importe
-            If txtAux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtAux3(Index), 3) Then CmdAceptar.SetFocus
+            If txtaux3(Index) <> "" Then
+                If PonerFormatoDecimal(txtaux3(Index), 3) Then cmdAceptar.SetFocus
             End If
         
     End Select
@@ -6237,15 +6243,15 @@ Dim I As Integer
 
             LimpiarCamposLin "FrameGastos"
 
-            txtAux3(10).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
-            txtAux3(11).Text = Text1(0).Text 'nro de factura
-            txtAux3(12).Text = Text1(1).Text 'fecha de factura
-            txtAux3(13).Text = NumF ' nro. de linea
-            txtAux3(15).Text = ""
+            txtaux3(10).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
+            txtaux3(11).Text = Text1(0).Text 'nro de factura
+            txtaux3(12).Text = Text1(1).Text 'fecha de factura
+            txtaux3(13).Text = NumF ' nro. de linea
+            txtaux3(15).Text = ""
 
 '            BloquearTxt txtAux(14), False
 '                    BloquearTxt txtaux(12), False
-            PonerFoco txtAux3(14)
+            PonerFoco txtaux3(14)
 
 
     End Select
@@ -6318,9 +6324,9 @@ Dim vFact As Byte, vDocum As Byte
 
     Select Case nomframe
         Case "FrameGastos"
-            If txtAux3(16).Text = "" Then
+            If txtaux3(16).Text = "" Then
                 MsgBox "Debe introducir un importe. Reintroduzca.", vbExclamation
-                PonerFoco txtAux3(16)
+                PonerFoco txtaux3(16)
             End If
     
     End Select
@@ -6578,7 +6584,7 @@ End Sub
 '********** FACTURAS VARIAS
 '**********
 Private Sub TxtAux5_GotFocus(Index As Integer)
-    ConseguirFoco txtAux4(Index), Modo
+    ConseguirFoco txtaux4(Index), Modo
 End Sub
 
 Private Sub TxtAux5_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -6592,7 +6598,7 @@ End Sub
 Private Sub TxtAux5_LostFocus(Index As Integer)
 Dim cadMen As String
 
-    If Not PerderFocoGnral(txtAux5(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux5(Index), Modo) Then Exit Sub
     
     
 End Sub

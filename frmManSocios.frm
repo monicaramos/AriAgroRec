@@ -31,9 +31,9 @@ Begin VB.Form frmManSocios
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   9060
+      Left            =   11220
       TabIndex        =   174
-      Top             =   240
+      Top             =   210
       Width           =   1605
    End
    Begin VB.Frame FrameDesplazamiento 
@@ -494,7 +494,6 @@ Begin VB.Form frmManSocios
       TabPicture(2)   =   "frmManSocios.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAux0"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
@@ -4858,7 +4857,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -7108,7 +7107,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -7875,7 +7874,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -7934,7 +7933,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -8873,7 +8872,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select

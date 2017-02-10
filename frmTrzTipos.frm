@@ -415,7 +415,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -981,5 +981,12 @@ Dim cerrar As Boolean
     KEYpressGnral KeyAscii, Modo, cerrar
     If cerrar Then Unload Me
 
+End Sub
+
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
 End Sub
 
