@@ -414,6 +414,7 @@ Attribute VB_Exposed = False
 
 ' Ingresos a incluir en liquidacion de terceros y no terceros
 
+Private Const IdPrograma = 4019 '?????
 
 
 ' **************** PER A QUE FUNCIONE EN UN ATRE MANTENIMENT ********************
@@ -506,7 +507,7 @@ Dim B As Boolean
     btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
 
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

@@ -2000,6 +2000,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Const IdPrograma = 4019 '?????
+
+
+
 '========== VBLES PUBLICAS ====================
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
@@ -2143,8 +2147,8 @@ Private Sub cmdAceptar_Click()
 '                    CargaGrid2 DataGrid1, Data2
                     ModificaLineas = 0
                     PonerBotonCabecera True
-                    BloquearTxt text2(16), True
-                    BloquearTxt text2(17), True
+                    BloquearTxt Text2(16), True
+                    BloquearTxt Text2(17), True
            
                     LLamaLineas Modo, 0, "DataGrid1"
                     PosicionarData
@@ -2183,8 +2187,8 @@ Private Sub cmdCancelar_Click()
             
         Case 5 'Lineas Detalle
             TerminaBloquear
-            BloquearTxt text2(16), True
-            BloquearTxt text2(17), True
+            BloquearTxt Text2(16), True
+            BloquearTxt Text2(17), True
 '            If ModificaLineas = 1 Then 'INSERTAR
 '                ModificaLineas = 0
 '                DataGrid1.AllowAddNew = False
@@ -2341,10 +2345,10 @@ On Error GoTo eModificarLinea
     'Añadiremos el boton de aceptar y demas objetos para insertar
     Me.lblIndicador.Caption = "MODIFICAR LINEAS"
     PonerBotonCabecera False
-    BloquearTxt text2(16), False 'Campo Ampliacion Linea
-    BloquearTxt text2(17), False 'Campo Ampliacion Linea
+    BloquearTxt Text2(16), False 'Campo Ampliacion Linea
+    BloquearTxt Text2(17), False 'Campo Ampliacion Linea
 '    PonerFoco txtAux(4)
-    PonerFoco text2(16)
+    PonerFoco Text2(16)
 '    Me.DataGrid1.Enabled = False
 
 eModificarLinea:
@@ -2358,10 +2362,10 @@ Dim B As Boolean
     If grid = "DataGrid2" Then
         DeseleccionaGrid Me.DataGrid2
         B = (xModo = 1)
-         For jj = 0 To txtaux3.Count - 1
-            txtaux3(jj).Height = DataGrid2.RowHeight
-            txtaux3(jj).Top = alto
-            txtaux3(jj).visible = B
+         For jj = 0 To txtAux3.Count - 1
+            txtAux3(jj).Height = DataGrid2.RowHeight
+            txtAux3(jj).Top = alto
+            txtAux3(jj).visible = B
         Next jj
     End If
 End Sub
@@ -2490,8 +2494,8 @@ On Error GoTo Error1
 '            Text2(17).Text = DBLet(Data2.Recordset.Fields!numlotes)
         End If
     Else
-        text2(16).Text = ""
-        text2(17).Text = ""
+        Text2(16).Text = ""
+        Text2(17).Text = ""
     End If
 
 Error1:
@@ -2611,8 +2615,8 @@ Dim I As Byte
         For I = 0 To Text3.Count - 1
             If I <> 3 Then Text3(I).Text = ""
         Next I
-        text2(0).Text = ""
-        text2(1).Text = ""
+        Text2(0).Text = ""
+        Text2(1).Text = ""
     End If
     
 End Sub
@@ -2772,7 +2776,7 @@ End Sub
 
 Private Sub frmCargo_DatoSeleccionado(CadenaSeleccion As String)
     Text1(35).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod concepto
-    text2(35).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    Text2(35).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 '--monica
@@ -2793,7 +2797,7 @@ Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
 Dim Indice As Byte
     Indice = 10
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod Forma Pago
-    text2(10).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Forma Pago
+    Text2(10).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Forma Pago
 End Sub
 
 
@@ -3096,9 +3100,9 @@ Dim devuelve As String
         
         Case 10 'Forma de Pago
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa")
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 11, 12 'Descuentos
@@ -3121,9 +3125,9 @@ Dim devuelve As String
             
          Case 35 ' concepto de cargo
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "fvarconce", "nomconce", "codconce", "N")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "fvarconce", "nomconce", "codconce", "N")
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
          
             
@@ -3274,7 +3278,7 @@ Dim ImpTotal As Currency
 '    Text1(32).Text = Format(BrutoFac, FormatoImporte)
     
     'poner descripcion campos
-    text2(10).Text = PonerNombreDeCod(Text1(10), "forpago", "nomforpa")
+    Text2(10).Text = PonerNombreDeCod(Text1(10), "forpago", "nomforpa")
 '--monica
 '    Text2(13).Text = PonerNombreDeCod(Text1(13), conAri, "straba", "nomtraba", "codtraba")
     
@@ -3390,8 +3394,8 @@ Dim B As Boolean
 '    BloquearTxt txtAux(8), True
     
     'Si no es modo Busqueda Bloquear los TxtAux3 (son los txtaux de los albaranes de factura)
-    For I = 0 To txtaux3.Count - 1
-        BloquearTxt txtaux3(I), (Modo <> 1)
+    For I = 0 To txtAux3.Count - 1
+        BloquearTxt txtAux3(I), (Modo <> 1)
     Next I
 ''    For i = 0 To Text4.Count - 1
 ''        BloquearTxt Text4(i), (Modo <> 1)
@@ -3403,9 +3407,9 @@ Dim B As Boolean
 '    Me.Label1(35).visible = b
     Me.Label1(3).visible = B
 '    Me.Text2(16).visible = b
-    Me.text2(17).visible = B
-    BloquearTxt text2(16), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
-    BloquearTxt text2(17), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
+    Me.Text2(17).visible = B
+    BloquearTxt Text2(16), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
+    BloquearTxt Text2(17), (Modo <> 5) Or (Modo = 5 And ModificaLineas <> 1)
 
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2 And Modo <> 5)
@@ -4272,7 +4276,7 @@ End Function
 
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtaux3(Index), Modo
+    ConseguirFoco txtAux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4284,7 +4288,7 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
 End Sub
 
 

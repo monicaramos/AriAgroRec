@@ -4808,3 +4808,6 @@ Dim SQL As String
     SeAplicaPixat = (TotalRegistrosConsulta(SQL) > 0)
 
 End Function
+
+
+

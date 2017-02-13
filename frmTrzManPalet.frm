@@ -116,6 +116,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+
+Private Const IdPrograma = 9009
+
+
 Dim IdPalet As Long
 Dim SQL As String
 Dim Rs As ADODB.Recordset

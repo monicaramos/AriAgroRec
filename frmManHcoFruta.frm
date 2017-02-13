@@ -1105,12 +1105,12 @@ Begin VB.Form frmManHcoFruta
          Left            =   1380
          TabIndex        =   28
          Top             =   180
-         Width           =   780
+         Width           =   1020
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   2190
+         Left            =   2460
          Picture         =   "frmManHcoFruta.frx":000C
          ToolTipText     =   "Buscar fecha"
          Top             =   180
@@ -1891,7 +1891,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   6
             Left            =   4410
             MaxLength       =   7
@@ -1941,7 +1941,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   9
             Left            =   7050
             MaxLength       =   30
@@ -1966,7 +1966,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   8
             Left            =   6330
             MaxLength       =   30
@@ -1991,7 +1991,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   7
             Left            =   5745
             MaxLength       =   30
@@ -2016,7 +2016,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   5
             Left            =   3825
             MaxLength       =   7
@@ -2041,7 +2041,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   4
             Left            =   3105
             MaxLength       =   7
@@ -2066,7 +2066,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   3
             Left            =   2430
             MaxLength       =   30
@@ -2091,7 +2091,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   0
             Left            =   495
             MaxLength       =   7
@@ -2116,7 +2116,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   1
             Left            =   1170
             MaxLength       =   7
@@ -2141,7 +2141,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   2
             Left            =   1800
             MaxLength       =   10
@@ -2166,7 +2166,7 @@ Begin VB.Form frmManHcoFruta
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   315
+            Height          =   350
             Index           =   12
             Left            =   4950
             MaxLength       =   12
@@ -2853,8 +2853,8 @@ Public hcoCodTipoM As String 'Codigo detalle de Movimiento(ALC)
 Public hcoFechaMov As String 'fecha del movimiento
 
 '========== VBLES PRIVADAS ====================
-Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
-Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmHcoFrutaPrev As frmManHcoFrutaPrev 'Form para busquedas
+Attribute frmHcoFrutaPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmLHco As frmManLinHcoFruta 'Lineas de entradas de albaranes
@@ -3187,7 +3187,7 @@ Dim anc As Single
         'poner los txtaux para buscar por lineas de albaran
         anc = DataGrid2.Top
         If DataGrid2.Row < 0 Then
-            anc = anc + 440
+            anc = anc + 450
         Else
             anc = anc + DataGrid2.RowTop(DataGrid2.Row) + 20
         End If
@@ -3820,6 +3820,20 @@ Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
     Text2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
+Private Sub frmHcoFrutaPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    
+    If CadenaSeleccion <> "" Then
+        CadB = "numalbar = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+
+End Sub
+
 Private Sub frmLHco_DatoSeleccionado(CadenaSeleccion As String)
 Dim vWhere As String
              
@@ -4220,7 +4234,28 @@ End Sub
 
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    KEYpress KeyAscii
+    If KeyAscii = teclaBuscar Then
+        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+            Select Case Index
+                Case 1: KEYFecha KeyAscii, 0 ' fecha albaran
+                Case 2: KEYBusqueda KeyAscii, 0 'variedad
+                Case 3: KEYBusqueda KeyAscii, 1 'socio
+                Case 4: KEYBusqueda KeyAscii, 2 'campo
+            End Select
+        End If
+    Else
+        KEYpress KeyAscii
+    End If
+End Sub
+
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
+
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgBuscar_Click (Indice)
 End Sub
 
 
@@ -4386,61 +4421,15 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim cad As String
-Dim tabla As String
-Dim Titulo As String
-Dim Desc As String, devuelve As String
-    'Llamamos a al form
-    '##A mano
-    cad = ""
-    cad = cad & "Albaran|rhisfruta.numalbar|N||11·"
-    cad = cad & "Fecha|rhisfruta.fecalbar|F||14·"
+
+    Set frmHcoFrutaPrev = New frmManHcoFrutaPrev
     
-    cad = cad & "Cod|rhisfruta.codvarie|N||7·" 'ParaGrid(Text1(3), 10, "Cliente")
-    cad = cad & "Nombre|variedades.nomvarie|N||20·"
-    cad = cad & "Socio|rhisfruta.codsocio|N||10·" 'ParaGrid(Text1(3), 10, "Cliente")
-    cad = cad & "Nombre|rsocios.nomsocio|N||28·"
-    cad = cad & "Campo|rhisfruta.codcampo|N||10·"
+    frmHcoFrutaPrev.cWhere = CadB
+    frmHcoFrutaPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmHcoFrutaPrev.Show vbModal
     
-    tabla = NombreTabla & " INNER JOIN variedades ON rhisfruta.codvarie=variedades.codvarie "
-    tabla = "(" & tabla & ") INNER JOIN rsocios ON rhisfruta.codsocio=rsocios.codsocio "
-    
-    Titulo = "Histórico de Entradas"
-    devuelve = "0|"
-           
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = tabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = "0|1|"
-        frmB.vDevuelve = devuelve
-        frmB.vTitulo = Titulo
-        frmB.vSelElem = 0
-'        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
-'        frmB.vBuscaPrevia = chkVistaPrevia
-        '#
-        frmB.Show vbModal
-        Set frmB = Nothing
-'        If EsCabecera Then
-'            PonerCadenaBusqueda
-'            Text1(0).Text = Format(Text1(0).Text, "0000000")
-'        End If
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
-    Screen.MousePointer = vbDefault
+    Set frmHcoFrutaPrev = Nothing
+
 End Sub
 
 

@@ -1265,6 +1265,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Private Const IdPrograma = 4019 '?????
+
+
+
 '========== VBLES PUBLICAS ====================
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
@@ -1417,12 +1421,7 @@ Dim I As Integer
     PrimeraVez = False
 End Sub
 
-Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
-        Case 1
-            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
-    End Select
-End Sub
+
 
 Private Sub LimpiarCampos()
 On Error Resume Next
@@ -1445,7 +1444,7 @@ Private Sub frmBanPr_DatoSeleccionado(CadenaSeleccion As String)
     'Form de Mantenimiento de Bancos Propios
     Text1(5).Text = RecuperaValor(CadenaSeleccion, 1)
     Text1(5).Text = Format(Text1(5).Text, "0000")
-    text2(5).Text = RecuperaValor(CadenaSeleccion, 2)
+    Text2(5).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -1458,7 +1457,7 @@ End Sub
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod forpa
     FormateaCampo Text1(4)
-    text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom forpa
+    Text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom forpa
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
@@ -1466,7 +1465,7 @@ Dim Indice As Byte
     Indice = 3
     Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Socios
     FormateaCampo Text1(Indice)
-    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
+    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -1647,10 +1646,10 @@ Private Sub Text1_LostFocus(Index As Integer)
             
         Case 3 'Cod Socios
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio")
                 
                 ' comprobamos que el socio sea tercero
-                If text2(Index).Text <> "" Then
+                If Text2(Index).Text <> "" Then
                     Set vSocio = New cSocio
                     If vSocio.Estercero(Text1(Index).Text) Then
                         ' No debe existir el número de factura para el socio en hco
@@ -1693,32 +1692,32 @@ Private Sub Text1_LostFocus(Index As Integer)
                    Set vSocio = Nothing
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
         Case 5 'Cta Prevista de PAgo
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "banpropi", "nombanpr", "codbanpr")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "banpropi", "nombanpr", "codbanpr")
                 Text1(Index).Text = Format(Text1(Index).Text, "0000")
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
             
         Case 26 'Variedad
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "variedades", "nomvarie", "codvarie")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "variedades", "nomvarie", "codvarie")
                 Text1(Index).Text = Format(Text1(Index).Text, "000000")
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
         
         Case 4 'Forma de pago
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa", "codforpa")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa", "codforpa")
                 Text1(Index).Text = Format(Text1(Index).Text, "000")
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
             
 '            '++monica:080908
@@ -1791,15 +1790,15 @@ On Error GoTo EPonerModo
                     
     Me.chkVistaPrevia.Enabled = (Modo <= 2)
     
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), True
-        txtAux(I).visible = False
+    For I = 0 To txtaux.Count - 1
+        BloquearTxt txtaux(I), True
+        txtaux(I).visible = False
     Next I
         
     Me.FrameIntro.Enabled = (Modo = 3)
     Me.FrameAux0.Enabled = (Modo = 5)
        
-    text2(2).visible = False
+    Text2(2).visible = False
        
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor para adminir intervalos de busqueda.
@@ -2395,20 +2394,20 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         ' *** valor per defecte al modificar dels camps del grid ***
         Case 0 'importes
-            txtAux(0).Text = DataGridAux(Index).Columns(0).Text
-            txtAux(1).Text = DataGridAux(Index).Columns(1).Text
-            txtAux(6).Text = DataGridAux(Index).Columns(2).Text
-            text2(2).Text = DataGridAux(Index).Columns(3).Text
-            txtAux(3).Text = DataGridAux(Index).Columns(4).Text
-            txtAux(2).Text = DataGridAux(Index).Columns(5).Text
-            txtAux(4).Text = DataGridAux(Index).Columns(6).Text
-            txtAux(5).Text = DataGridAux(Index).Columns(7).Text
+            txtaux(0).Text = DataGridAux(Index).Columns(0).Text
+            txtaux(1).Text = DataGridAux(Index).Columns(1).Text
+            txtaux(6).Text = DataGridAux(Index).Columns(2).Text
+            Text2(2).Text = DataGridAux(Index).Columns(3).Text
+            txtaux(3).Text = DataGridAux(Index).Columns(4).Text
+            txtaux(2).Text = DataGridAux(Index).Columns(5).Text
+            txtaux(4).Text = DataGridAux(Index).Columns(6).Text
+            txtaux(5).Text = DataGridAux(Index).Columns(7).Text
             
             For I = 0 To 3
-                BloquearTxt txtAux(I), True
+                BloquearTxt txtaux(I), True
             Next I
-            BloquearTxt txtAux(4), False
-            BloquearTxt txtAux(5), True
+            BloquearTxt txtaux(4), False
+            BloquearTxt txtaux(5), True
        
     End Select
     
@@ -2417,7 +2416,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ' *** foco al 1r camp visible de les llinies en grids que no siga PK (en o sense tab) ***
     Select Case Index
         Case 0 'importes
-            PonerFoco txtAux(4)
+            PonerFoco txtaux(4)
     End Select
     ' ***************************************************************************************
     lblIndicador.Caption = "INSERTAR IMPORTE"
@@ -2448,7 +2447,7 @@ Dim tots As String
             DataGridAux(0).Columns(5).Alignment = dbgRight
         
             B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
-            BloquearTxt txtAux(3), Not B
+            BloquearTxt txtaux(3), Not B
 
     End Select
     DataGridAux(Index).ScrollBars = dbgAutomatic
@@ -2564,7 +2563,7 @@ Dim vWhere As String
     vWhere = ""
     If conW Then vWhere = " WHERE "
     ' *** canviar-ho per la clau primaria de la capçalera ***
-    vWhere = vWhere & " numalbar=" & Val(txtAux(0).Text)
+    vWhere = vWhere & " numalbar=" & Val(txtaux(0).Text)
     ' *******************************************************
     
     ObtenerWhereCab = vWhere
@@ -2597,16 +2596,16 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Llínies
     Select Case Index
         Case 0 'albaranes
-            txtAux(0).visible = False
-            txtAux(1).visible = False
-            txtAux(2).visible = False
-            txtAux(3).visible = False
+            txtaux(0).visible = False
+            txtaux(1).visible = False
+            txtaux(2).visible = False
+            txtaux(3).visible = False
             For jj = 4 To 4
-                txtAux(jj).visible = B
-                txtAux(jj).Top = alto
+                txtaux(jj).visible = B
+                txtaux(jj).Top = alto
             Next jj
             
-            text2(2).visible = False
+            Text2(2).visible = False
             
             
     End Select
@@ -2725,7 +2724,7 @@ Dim I As Byte
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFoco txtAux(Index), Modo
+    ConseguirFoco txtaux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -2743,11 +2742,11 @@ Dim Unidades As String
 Dim cantidad As String
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtAux(Index), ModoLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtaux(Index), ModoLineas) Then Exit Sub
     
     Select Case Index
         Case 4 ' Importe
-            If txtAux(Index).Text <> "" Then PonerFormatoDecimal txtAux(Index), 1
+            If txtaux(Index).Text <> "" Then PonerFormatoDecimal txtaux(Index), 1
             
     End Select
 End Sub
@@ -2767,4 +2766,10 @@ eLimpiarImportes:
     MuestraError Err.Number, "Limpiar Importes", Err.Description
 End Function
                                 
+Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
+    End Select
+End Sub
 

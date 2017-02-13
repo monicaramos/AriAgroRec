@@ -1639,8 +1639,13 @@ Dim devuelve As String
             .NombreRPT = cadNombreRPT
             .ConSubInforme = True
             .Opcion = 0
-            '[Monica]11/09/2013: ahora el nro de copias es 1
-            .NroCopias = 1
+            '[Monica]13/02/2017: ahora en el caso de alzira quieren 2 copias
+            If vParamAplic.Cooperativa = 4 Then
+                .NroCopias = 2
+            Else
+                '[Monica]11/09/2013: ahora el nro de copias es 1
+                .NroCopias = 1
+            End If
             .Show vbModal
         End With
     End If
