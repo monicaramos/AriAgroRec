@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManLinHcoFruta 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entradas de Histórico de Fruta Clasificada"
-   ClientHeight    =   8415
+   ClientHeight    =   8580
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   8190
@@ -13,26 +13,26 @@ Begin VB.Form frmManLinHcoFruta
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8415
+   ScaleHeight     =   8580
    ScaleWidth      =   8190
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameAux0 
       Caption         =   "Incidencias"
       BeginProperty Font 
-         Name            =   "MS Sans Serif"
+         Name            =   "Verdana"
          Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00972E0B&
       Height          =   2505
       Left            =   135
       TabIndex        =   34
-      Top             =   5265
+      Top             =   5415
       Width           =   7950
       Begin VB.TextBox txtAux 
          Alignment       =   1  'Right Justify
@@ -70,7 +70,7 @@ Begin VB.Form frmManLinHcoFruta
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   300
+         Height          =   350
          Index           =   0
          Left            =   2295
          MaskColor       =   &H00000000&
@@ -235,8 +235,8 @@ Begin VB.Form frmManLinHcoFruta
          Left            =   135
          TabIndex        =   36
          Top             =   630
-         Width           =   6195
-         _ExtentX        =   10927
+         Width           =   7495
+         _ExtentX        =   13229
          _ExtentY        =   2990
          _Version        =   393216
          AllowUpdate     =   0   'False
@@ -301,7 +301,7 @@ Begin VB.Form frmManLinHcoFruta
       End
    End
    Begin VB.Frame Frame2 
-      Height          =   4800
+      Height          =   4980
       Index           =   0
       Left            =   120
       TabIndex        =   29
@@ -323,7 +323,7 @@ Begin VB.Form frmManLinHcoFruta
          Style           =   2  'Dropdown List
          TabIndex        =   9
          Tag             =   "Tipo Recolección|N|N|0|1|rhisfruta_entradas|tiporecol||N|"
-         Top             =   1590
+         Top             =   1680
          Width           =   1680
       End
       Begin VB.TextBox Text1 
@@ -343,7 +343,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   11
          Tag             =   "Nro.Trabajadores|N|S|||rhisfruta_entradas|numtraba|##0||"
-         Top             =   1590
+         Top             =   1680
          Width           =   1665
       End
       Begin VB.TextBox Text1 
@@ -363,7 +363,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   10
          Tag             =   "Horas Trabajadas|N|S|||rhisfruta_entradas|horastra|#,##0.00||"
-         Top             =   1590
+         Top             =   1680
          Width           =   1665
       End
       Begin VB.TextBox Text2 
@@ -385,7 +385,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   40
          TabIndex        =   55
          Text            =   "Text2"
-         Top             =   3420
+         Top             =   3600
          Width           =   4995
       End
       Begin VB.TextBox Text1 
@@ -406,7 +406,7 @@ Begin VB.Form frmManLinHcoFruta
          TabIndex        =   18
          Tag             =   "Tarifa|N|S|||rhisfruta_entradas|codtarif|00||"
          Text            =   "Text1"
-         Top             =   3420
+         Top             =   3600
          Width           =   1110
       End
       Begin VB.TextBox Text1 
@@ -426,7 +426,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   7
          TabIndex        =   7
          Tag             =   "Peso Trans.|N|N|0|999999|rhisfruta_entradas|kilostra|###,##0||"
-         Top             =   1020
+         Top             =   1050
          Width           =   1515
       End
       Begin VB.TextBox Text1 
@@ -447,7 +447,7 @@ Begin VB.Form frmManLinHcoFruta
          TabIndex        =   17
          Tag             =   "Transportista|T|S|||rhisfruta_entradas|codtrans|||"
          Text            =   "Text1"
-         Top             =   3030
+         Top             =   3210
          Width           =   1110
       End
       Begin VB.TextBox Text2 
@@ -469,7 +469,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   40
          TabIndex        =   52
          Text            =   "Text2"
-         Top             =   3030
+         Top             =   3210
          Width           =   4995
       End
       Begin VB.TextBox Text2 
@@ -491,7 +491,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   40
          TabIndex        =   50
          Text            =   "Text2"
-         Top             =   2640
+         Top             =   2820
          Width           =   4995
       End
       Begin VB.TextBox Text1 
@@ -512,7 +512,7 @@ Begin VB.Form frmManLinHcoFruta
          TabIndex        =   16
          Tag             =   "Capataz|N|S|0|9999|rhisfruta_entradas|codcapat|0000||"
          Text            =   "Text1"
-         Top             =   2640
+         Top             =   2820
          Width           =   1110
       End
       Begin VB.TextBox Text1 
@@ -532,7 +532,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   12
          TabIndex        =   8
          Tag             =   "Pr.Estimado|N|S|||rhisfruta_entradas|prestimado|###,##0.0000||"
-         Top             =   1020
+         Top             =   1050
          Width           =   1515
       End
       Begin VB.TextBox Text1 
@@ -571,7 +571,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   15
          Tag             =   "Imp.Penalización|N|S|||rhisfruta_entradas|imppenal|#,##0.00||"
-         Top             =   2205
+         Top             =   2355
          Width           =   1665
       End
       Begin VB.TextBox Text1 
@@ -592,7 +592,7 @@ Begin VB.Form frmManLinHcoFruta
          ScrollBars      =   2  'Vertical
          TabIndex        =   19
          Tag             =   "Observaciones|T|S|||rhisfruta_entradas|observac|||"
-         Top             =   4080
+         Top             =   4290
          Width           =   7560
       End
       Begin VB.TextBox Text1 
@@ -612,7 +612,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   14
          Tag             =   "Imp.Recolec|N|S|||rhisfruta_entradas|imprecol|#,##0.00||"
-         Top             =   2205
+         Top             =   2355
          Width           =   1665
       End
       Begin VB.TextBox Text1 
@@ -632,7 +632,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   12
          Tag             =   "Imp.Transporte|N|S|||rhisfruta_entradas|imptrans|#,##0.00||"
-         Top             =   2205
+         Top             =   2355
          Width           =   1665
       End
       Begin VB.TextBox Text1 
@@ -652,7 +652,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   8
          TabIndex        =   13
          Tag             =   "Imp.Acarreo|N|S|||rhisfruta_entradas|impacarr|#,##0.00||"
-         Top             =   2205
+         Top             =   2355
          Width           =   1665
       End
       Begin VB.TextBox Text1 
@@ -672,7 +672,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   7
          TabIndex        =   4
          Tag             =   "Numero Cajas|N|N|0|999999|rhisfruta_entradas|numcajon|###,##0||"
-         Top             =   1020
+         Top             =   1050
          Width           =   1515
       End
       Begin VB.TextBox Text1 
@@ -703,7 +703,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   7
          TabIndex        =   6
          Tag             =   "Peso Neto|N|N|0|999999|rhisfruta_entradas|kilosnet|###,##0||"
-         Top             =   1020
+         Top             =   1050
          Width           =   1515
       End
       Begin VB.TextBox Text1 
@@ -723,7 +723,7 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   7
          TabIndex        =   5
          Tag             =   "Peso Bruto|N|N|0|999999|rhisfruta_entradas|kilosbru|###,##0||"
-         Top             =   1020
+         Top             =   1050
          Width           =   1515
       End
       Begin VB.TextBox Text1 
@@ -786,12 +786,12 @@ Begin VB.Form frmManLinHcoFruta
          MaxLength       =   7
          TabIndex        =   0
          Tag             =   "Número albaran|N|N|||rhisfruta_entradas|numalbar|0000000|S|"
-         Text            =   "123456"
+         Text            =   "1234567"
          Top             =   405
          Width           =   1335
       End
       Begin VB.Label Label1 
-         Caption         =   "Tipo Recolec."
+         Caption         =   "Tipo Recolección"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -805,7 +805,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   17
          Left            =   180
          TabIndex        =   59
-         Top             =   1350
+         Top             =   1440
          Width           =   1665
       End
       Begin VB.Label Label1 
@@ -823,7 +823,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   16
          Left            =   4035
          TabIndex        =   58
-         Top             =   1350
+         Top             =   1440
          Width           =   1725
       End
       Begin VB.Label Label1 
@@ -841,7 +841,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   15
          Left            =   2100
          TabIndex        =   57
-         Top             =   1350
+         Top             =   1440
          Width           =   1275
       End
       Begin VB.Label Label1 
@@ -859,7 +859,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   14
          Left            =   180
          TabIndex        =   56
-         Top             =   3465
+         Top             =   3645
          Width           =   765
       End
       Begin VB.Image imgBuscar 
@@ -867,7 +867,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   2
          Left            =   1290
          ToolTipText     =   "Buscar Tarifa"
-         Top             =   3450
+         Top             =   3630
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -885,7 +885,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   13
          Left            =   4740
          TabIndex        =   54
-         Top             =   795
+         Top             =   825
          Width           =   1485
       End
       Begin VB.Image imgBuscar 
@@ -893,7 +893,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   1
          Left            =   1290
          ToolTipText     =   "Buscar Tranportista"
-         Top             =   3060
+         Top             =   3240
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -911,7 +911,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   12
          Left            =   180
          TabIndex        =   53
-         Top             =   3075
+         Top             =   3255
          Width           =   1065
       End
       Begin VB.Label Label1 
@@ -929,7 +929,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   11
          Left            =   180
          TabIndex        =   51
-         Top             =   2685
+         Top             =   2865
          Width           =   975
       End
       Begin VB.Image imgBuscar 
@@ -937,7 +937,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   0
          Left            =   1290
          ToolTipText     =   "Buscar Capataz"
-         Top             =   2670
+         Top             =   2850
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -955,7 +955,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   9
          Left            =   6270
          TabIndex        =   49
-         Top             =   795
+         Top             =   825
          Width           =   1590
       End
       Begin VB.Label Label1 
@@ -973,7 +973,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   10
          Left            =   6090
          TabIndex        =   48
-         Top             =   1950
+         Top             =   2100
          Width           =   1230
       End
       Begin VB.Label Label29 
@@ -990,7 +990,7 @@ Begin VB.Form frmManLinHcoFruta
          Height          =   255
          Left            =   180
          TabIndex        =   47
-         Top             =   3810
+         Top             =   4020
          Width           =   1515
       End
       Begin VB.Image imgZoom 
@@ -998,7 +998,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   0
          Left            =   1695
          ToolTipText     =   "Zoom descripción"
-         Top             =   3810
+         Top             =   4020
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -1016,7 +1016,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   8
          Left            =   4035
          TabIndex        =   46
-         Top             =   1950
+         Top             =   2100
          Width           =   1680
       End
       Begin VB.Label Label1 
@@ -1034,7 +1034,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   7
          Left            =   180
          TabIndex        =   45
-         Top             =   1950
+         Top             =   2100
          Width           =   1665
       End
       Begin VB.Label Label1 
@@ -1052,7 +1052,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   6
          Left            =   2115
          TabIndex        =   44
-         Top             =   1950
+         Top             =   2100
          Width           =   1395
       End
       Begin VB.Label Label1 
@@ -1070,7 +1070,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   5
          Left            =   180
          TabIndex        =   43
-         Top             =   795
+         Top             =   825
          Width           =   960
       End
       Begin VB.Label Label1 
@@ -1106,7 +1106,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   3
          Left            =   3240
          TabIndex        =   40
-         Top             =   795
+         Top             =   825
          Width           =   1515
       End
       Begin VB.Label Label1 
@@ -1124,7 +1124,7 @@ Begin VB.Form frmManLinHcoFruta
          Index           =   2
          Left            =   1710
          TabIndex        =   39
-         Top             =   795
+         Top             =   825
          Width           =   1470
       End
       Begin VB.Label Label1 
@@ -1187,7 +1187,7 @@ Begin VB.Form frmManLinHcoFruta
       Index           =   0
       Left            =   120
       TabIndex        =   27
-      Top             =   7800
+      Top             =   7950
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1223,7 +1223,7 @@ Begin VB.Form frmManLinHcoFruta
       Height          =   375
       Left            =   7050
       TabIndex        =   21
-      Top             =   7935
+      Top             =   8085
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1240,7 +1240,7 @@ Begin VB.Form frmManLinHcoFruta
       Height          =   375
       Left            =   5925
       TabIndex        =   20
-      Top             =   7935
+      Top             =   8085
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -1406,7 +1406,7 @@ Begin VB.Form frmManLinHcoFruta
       Height          =   375
       Left            =   7050
       TabIndex        =   31
-      Top             =   7920
+      Top             =   8100
       Visible         =   0   'False
       Width           =   1035
    End
@@ -3100,12 +3100,9 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
         If KeyAscii = teclaBuscar Then
             If Modo = 5 And (ModoLineas = 1 Or ModoLineas = 2) Then
                 Select Case Index
-                    Case 1: 'articulo
+                    Case 2: 'incidencia
                         KeyAscii = 0
                         btnBuscar_Click (0)
-                    Case 9: 'coste
-                        KeyAscii = 0
-                        btnBuscar_Click (1)
                 End Select
             End If
         Else
@@ -3297,8 +3294,8 @@ Dim tots As String
         Case 0 'incidencias
             'si es visible|control|tipo campo|nombre campo|ancho control|
             tots = "N||||0|;N||||0|;" 'numalbar,numnotac,codincid,nomincid
-            tots = tots & "S|txtAux(2)|T|Incidencia|1100|;S|btnBuscar(0)|B|||;"
-            tots = tots & "S|txtAux2(2)|T|Denominación|4500|;"
+            tots = tots & "S|txtAux(2)|T|Código|1100|;S|btnBuscar(0)|B|||;"
+            tots = tots & "S|txtAux2(2)|T|Denominación|5800|;"
             
             arregla tots, DataGridAux(Index), Me, 350
         
