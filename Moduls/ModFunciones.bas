@@ -4431,7 +4431,31 @@ Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Opt
     
 End Sub
 
+Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Capataz|1200|;S|txtAux(2)|T|Nombre|4395|;"
+    frmBas.CadenaConsulta = "SELECT rcuadrilla.codcuadrilla, rcuadrilla.codcapat, rcapataz.nomcapat "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rcuadrilla inner join rcapataz on rcuadrilla.codcapat = rcapataz.codcapat "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    frmBas.Tag1 = "Código |N|N|||rcuadrilla|codcuadrilla|000000|S|"
+    frmBas.Tag2 = "Capataz|N|N|||rcuadrilla|codcapat|000000||"
+    frmBas.Tag3 = "Nombre|T|N|||rcapataz|nomcapat|||"
+    
+    frmBas.Maxlen1 = 4
+    frmBas.Maxlen2 = 60
+    frmBas.Maxlen3 = 124
+    
+    frmBas.tabla = "rcuadrilla"
+    frmBas.CampoCP = "codcuadrilla"
+    frmBas.Caption = "Cuadrillas"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    frmBas.Show vbModal
 
+    
+End Sub
 
 Public Function ActualizarTraza(Nota As String, Variedad As String, Socio As String, campo As String, Fecha As String, Hora As String, MenError As String)
 Dim Rs As ADODB.Recordset

@@ -2,85 +2,85 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
-Begin VB.Form frmManTarifaETT 
+Begin VB.Form frmManTrabaPrev 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Tarifas ETT"
-   ClientHeight    =   6210
+   Caption         =   "Trabajadores"
+   ClientHeight    =   6465
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   8310
-   Icon            =   "frmManTarifaETT.frx":0000
+   ClientWidth     =   10725
+   Icon            =   "frmManTrabaPrev.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6210
-   ScaleWidth      =   8310
+   ScaleHeight     =   6465
+   ScaleWidth      =   10725
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame FrameBotonGnral 
-      Height          =   705
-      Left            =   60
-      TabIndex        =   11
-      Top             =   90
-      Width           =   3585
-      Begin MSComctlLib.Toolbar Toolbar1 
-         Height          =   330
-         Left            =   210
-         TabIndex        =   12
-         Top             =   180
-         Width           =   3135
-         _ExtentX        =   5530
-         _ExtentY        =   582
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         AllowCustomize  =   0   'False
-         Style           =   1
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   10
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Nuevo"
-               Object.Tag             =   "2"
-            EndProperty
-            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Modificar"
-               Object.Tag             =   "2"
-            EndProperty
-            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Eliminar"
-               Object.Tag             =   "2"
-               Object.Width           =   1e-4
-            EndProperty
-            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Style           =   3
-            EndProperty
-            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Buscar"
-            EndProperty
-            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Ver Todos"
-            EndProperty
-            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Style           =   3
-            EndProperty
-            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Imprimir"
-            EndProperty
-            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Enabled         =   0   'False
-               Object.Visible         =   0   'False
-               Object.ToolTipText     =   "Salir"
-            EndProperty
-            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Enabled         =   0   'False
-               Object.Visible         =   0   'False
-               Style           =   3
-            EndProperty
-         EndProperty
-      End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   5
+      Left            =   7950
+      MaxLength       =   30
+      TabIndex        =   13
+      Tag             =   "Fecha Alta|F|N|||straba|fechaalta|dd/mm/yyyy||"
+      Top             =   4950
+      Width           =   1425
    End
    Begin VB.TextBox txtAux 
-      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   4
+      Left            =   5910
+      MaxLength       =   30
+      TabIndex        =   12
+      Tag             =   "Móvil|T|N|||straba|movtraba|||"
+      Top             =   4950
+      Width           =   1965
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
+      Index           =   3
+      Left            =   4410
+      MaxLength       =   10
+      TabIndex        =   11
+      Tag             =   "Teléfono|T|N|||straba|teltraba|||"
+      Top             =   4950
+      Width           =   1395
+   End
+   Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -94,77 +94,44 @@ Begin VB.Form frmManTarifaETT
       EndProperty
       Height          =   350
       Index           =   2
-      Left            =   4350
+      Left            =   2940
       MaxLength       =   10
       TabIndex        =   2
-      Tag             =   "Precio|N|N|0.00|999999.99|rtarifaett|precio|#,##0.0000||"
+      Tag             =   "Nif Traba|T|N|||straba|niftraba|||"
       Top             =   4950
-      Width           =   720
+      Width           =   1395
    End
-   Begin VB.TextBox txtAux2 
-      Appearance      =   0  'Flat
-      BackColor       =   &H80000018&
-      BorderStyle     =   0  'None
+   Begin VB.Frame FrameBotonGnral 
       Enabled         =   0   'False
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   350
-      Index           =   0
-      Left            =   1380
-      TabIndex        =   10
-      Top             =   4950
-      Visible         =   0   'False
-      Width           =   1815
-   End
-   Begin VB.TextBox txtAux 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   350
-      Index           =   1
-      Left            =   3270
-      MaxLength       =   10
-      TabIndex        =   1
-      Tag             =   "Código ETT|N|N|||rtarifaett|codigoett|0000|S|"
-      Top             =   4950
-      Width           =   720
-   End
-   Begin VB.CommandButton btnBuscar 
-      Appearance      =   0  'Flat
-      Caption         =   "+"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   350
-      Index           =   0
-      Left            =   1155
-      MaskColor       =   &H00000000&
+      Height          =   705
+      Left            =   120
       TabIndex        =   9
-      ToolTipText     =   "Buscar variedad"
-      Top             =   4950
+      Top             =   90
       Visible         =   0   'False
-      Width           =   195
+      Width           =   1545
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   10
+         Top             =   180
+         Width           =   1065
+         _ExtentX        =   1879
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+         EndProperty
+      End
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
@@ -178,9 +145,10 @@ Begin VB.Form frmManTarifaETT
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5880
+      Left            =   8295
       TabIndex        =   3
-      Top             =   5625
+      Tag             =   "   "
+      Top             =   5790
       Visible         =   0   'False
       Width           =   1035
    End
@@ -197,9 +165,9 @@ Begin VB.Form frmManTarifaETT
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7035
+      Left            =   9465
       TabIndex        =   4
-      Top             =   5610
+      Top             =   5790
       Visible         =   0   'False
       Width           =   1095
    End
@@ -216,27 +184,49 @@ Begin VB.Form frmManTarifaETT
          Strikethrough   =   0   'False
       EndProperty
       Height          =   350
+      Index           =   1
+      Left            =   1470
+      MaxLength       =   7
+      TabIndex        =   1
+      Tag             =   "Nombre|T|N|||straba|nomtraba|||"
+      Top             =   4950
+      Width           =   1395
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   350
       Index           =   0
-      Left            =   165
-      MaxLength       =   6
+      Left            =   630
+      MaxLength       =   3
       TabIndex        =   0
-      Tag             =   "Codigo Variedad|N|N|||rtarifaett|codvarie|000000|S|"
-      Top             =   4945
-      Width           =   945
+      Tag             =   "Código|N|N|||straba|codtraba|000000|S|"
+      Top             =   4950
+      Width           =   800
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
-      Height          =   4545
-      Left            =   90
+      Bindings        =   "frmManTrabaPrev.frx":000C
+      Height          =   5265
+      Left            =   120
       TabIndex        =   7
-      Top             =   870
-      Width           =   8025
-      _ExtentX        =   14155
-      _ExtentY        =   8017
+      Top             =   330
+      Width           =   10455
+      _ExtentX        =   18441
+      _ExtentY        =   9287
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   19
+      RowHeight       =   23
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Verdana"
          Size            =   9
@@ -305,19 +295,19 @@ Begin VB.Form frmManTarifaETT
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7050
+      Left            =   9480
       TabIndex        =   8
-      Top             =   5610
+      Top             =   5790
       Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   1
-      Left            =   90
+      Left            =   120
       TabIndex        =   5
-      Top             =   5490
-      Width           =   2385
+      Top             =   5760
+      Width           =   2985
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
@@ -325,7 +315,7 @@ Begin VB.Form frmManTarifaETT
             Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -333,13 +323,13 @@ Begin VB.Form frmManTarifaETT
          Height          =   255
          Left            =   45
          TabIndex        =   6
-         Top             =   210
-         Width           =   2295
+         Top             =   180
+         Width           =   2895
       End
    End
    Begin MSAdodcLib.Adodc adodc1 
       Height          =   375
-      Left            =   2790
+      Left            =   2205
       Top             =   0
       Visible         =   0   'False
       Width           =   2055
@@ -383,25 +373,6 @@ Begin VB.Form frmManTarifaETT
          Strikethrough   =   0   'False
       EndProperty
       _Version        =   393216
-   End
-   Begin MSComctlLib.Toolbar ToolbarAyuda 
-      Height          =   330
-      Left            =   7650
-      TabIndex        =   13
-      Top             =   150
-      Width           =   405
-      _ExtentX        =   714
-      _ExtentY        =   582
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   1
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ayuda"
-         EndProperty
-      EndProperty
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -449,7 +420,7 @@ Begin VB.Form frmManTarifaETT
       End
    End
 End
-Attribute VB_Name = "frmManTarifaETT"
+Attribute VB_Name = "frmManTrabaPrev"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -490,13 +461,8 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const IdPrograma = 8005
-
-
 Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que devuelva, empipados
 Public Event DatoSeleccionado(CadenaSeleccion As String)
-
-Public ParamVariedad As String
 
 'codi per al registe que s'afegix al cridar des d'atre formulari.
 'Obrir en modo Insertar i tornar datos del registre insertat
@@ -504,20 +470,17 @@ Public NuevoCodigo As String
 Public CodigoActual As String
 Public DeConsulta As Boolean
 
+Public cWhere As String
 
-Private WithEvents frmPob As frmManPueblos
-Attribute frmPob.VB_VarHelpID = -1
-Private WithEvents frmVar As frmComVar 'Ayuda variedades de comercial)
-Attribute frmVar.VB_VarHelpID = -1
-Private WithEvents frmC1 As frmCal 'calendario fecha
-Attribute frmC1.VB_VarHelpID = -1
+Public CadenaConsulta As String
 
 
-Private CadenaConsulta As String
+Public CadenaTots As String
+
 Private CadB As String
 
-
-
+Dim CampoOrden As String
+Dim TipoOrden As String
 Dim Modo As Byte
 '----------- MODOS --------------------------------
 '   0.-  Formulari net sense cap camp ple
@@ -530,6 +493,9 @@ Dim Modo As Byte
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim I As Integer
+Dim vTag1 As CTag
+Dim vTag3 As CTag
+
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
@@ -538,19 +504,20 @@ Dim B As Boolean
     
     B = (Modo = 2)
     If B Then
-        PonerContRegIndicador lblIndicador, adodc1, CadB
+        PonerContRegIndicador
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
+    Next I
+    
+    For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
     Next I
     
-    txtAux2(0).visible = Not B
-    btnBuscar(0).visible = Not B
-    
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -561,12 +528,8 @@ Dim B As Boolean
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     
-    'Si estamos modo Modificar bloquear clave primaria
-    BloquearTxt txtAux(0), (Modo = 4)
-    BloquearTxt txtAux(1), (Modo = 4)
-    BloquearBtn Me.btnBuscar(0), Not (Modo = 1 Or Modo = 3)
-    
 End Sub
+
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
@@ -574,26 +537,12 @@ Dim B As Boolean
 
     B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
+    Toolbar1.Buttons(1).Enabled = B
     Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnVerTodos.Enabled = B
     
-    'Insertar
-    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
-    
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
-    'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
-    'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
-    'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
     
 End Sub
 
@@ -601,30 +550,27 @@ Private Sub BotonAnyadir()
     Dim NumF As String
     Dim anc As Single
     
-'    CargaGrid 'primer de tot carregue tot el grid
-'    CadB = ""
+    CargaGrid 'primer de tot carregue tot el grid
+    CadB = ""
     '******************** canviar taula i camp **************************
-'    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-'        NumF = NuevoCodigo
-'    Else
-'        NumF = SugerirCodigoSiguienteStr("rpartida", "codparti")
-'    End If
+    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
+        NumF = NuevoCodigo
+    End If
     '********************************************************************
     'Situamos el grid al final
-    AnyadirLinea DataGrid1, adodc1
+'    AnyadirLinea DataGrid1, Adodc1
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
-        anc = anc + 240
+        anc = anc + 206
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-'   txtAux(0).Text = NumF
+    txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 0 To txtAux.Count - 1
+    For I = 1 To txtAux.Count - 1
         txtAux(I).Text = ""
     Next I
-    txtAux2(0).Text = ""
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -640,7 +586,7 @@ End Sub
 
 Private Sub BotonBuscar()
     ' ***************** canviar per la clau primaria ********
-    CargaGrid "rtarifaett.codvarie = -1"
+    CargaGrid "factcli.numserie is null "
     '*******************************************************************************
     'Buscar
     For I = 0 To txtAux.Count - 1
@@ -665,19 +611,19 @@ Private Sub BotonModificar()
     If DataGrid1.Row < 0 Then
         anc = 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top '545
+        anc = DataGrid1.RowTop(DataGrid1.Row) + 545
     End If
 
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
-    txtAux2(0).Text = DataGrid1.Columns(1).Text
-    txtAux(1).Text = DataGrid1.Columns(2).Text
-    txtAux(2).Text = DataGrid1.Columns(3).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(2).Text
+    
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonerFoco txtAux(2)
+    PonerFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -689,41 +635,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     For I = 0 To txtAux.Count - 1
         txtAux(I).Top = alto
     Next I
-    
     ' ### [Monica] 12/09/2006
-    txtAux2(0).Top = alto
-    btnBuscar(0).Top = alto - 5
-End Sub
-
-Private Sub BotonEliminar()
-Dim SQL As String
-Dim temp As Boolean
-
-    On Error GoTo Error2
-    'Ciertas comprobaciones
-    If adodc1.Recordset.EOF Then Exit Sub
-'    If Not SepuedeBorrar Then Exit Sub
-        
-    '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
-    
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-        'Hay que eliminar
-        NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rtarifaett where codvarie=" & adodc1.Recordset!codvarie & " and codigoett=" & DBSet(adodc1.Recordset!CodigoETT, "N")
-        conn.Execute SQL
-        CargaGrid CadB
-        temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
-        PonerModoOpcionesMenu
-        adodc1.Recordset.Cancel
-    End If
-    Exit Sub
-    
-Error2:
-    Screen.MousePointer = vbDefault
-    MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
 
 Private Sub PonerLongCampos()
@@ -735,26 +647,8 @@ Private Sub PonerLongCampos()
     PonerLongCamposGnral Me, Modo, 3
 End Sub
 
-Private Sub btnBuscar_Click(Index As Integer)
- TerminaBloquear
-    
-    Select Case Index
-        Case 0 ' variedad
-            Indice = Index
-            Set frmVar = New frmComVar
-            frmVar.DatosADevolverBusqueda = "0|1|"
-            frmVar.Show vbModal
-            Set frmVar = Nothing
-            PonerFoco txtAux(Indice)
-            
-    End Select
-    
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.adodc1, 1
-End Sub
-
-
 Private Sub cmdAceptar_Click()
-    Dim I As Long
+    Dim I As Variant ' Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -762,41 +656,9 @@ Private Sub cmdAceptar_Click()
             If CadB <> "" Then
                 CargaGrid CadB
                 PonerModo 2
-'                lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
                 PonerFocoGrid Me.DataGrid1
             End If
             
-        Case 3 'INSERTAR
-            If DatosOK Then
-                If InsertarDesdeForm(Me) Then
-                    CargaGrid CadB
-                    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-                        cmdCancelar_Click
-'                        If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveLast
-                        If Not adodc1.Recordset.EOF Then
-                             adodc1.Recordset.Find (adodc1.Recordset.Fields(2).Name & " =" & NuevoCodigo)
-                        End If
-                        cmdRegresar_Click
-                    Else
-                        BotonAnyadir
-                    End If
-                    CadB = ""
-                End If
-            End If
-            
-        Case 4 'MODIFICAR
-            If DatosOK Then
-                If ModificaDesdeFormulario(Me) Then
-                    TerminaBloquear
-                    I = adodc1.Recordset.AbsolutePosition
-                    PonerModo 2
-                    CargaGrid CadB
-                    SituarDataPosicion adodc1, I, Me.lblIndicador
-                    'adodc1.Recordset.Find (adodc1.Recordset.Fields(2).Name & "=" & i)
-                    
-                    PonerFocoGrid Me.DataGrid1
-                End If
-            End If
     End Select
 End Sub
 
@@ -806,15 +668,10 @@ Private Sub cmdCancelar_Click()
     Select Case Modo
         Case 1 'búsqueda
             CargaGrid CadB
-        Case 3 'insertar
-            DataGrid1.AllowAddNew = False
-            'CargaGrid
-            If Not adodc1.Recordset.EOF Then adodc1.Recordset.MoveFirst
-        Case 4 'modificar
-            TerminaBloquear
     End Select
     
     PonerModo 2
+    
     
     PonerFocoGrid Me.DataGrid1
     If Err.Number <> 0 Then Err.Clear
@@ -845,8 +702,37 @@ Dim Aux As String
     Unload Me
 End Sub
 
+Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
+End Sub
+
+Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
+Dim cad As String
+
+    If adodc1.Recordset Is Nothing Then Exit Sub
+    If adodc1.Recordset.EOF Then Exit Sub
+        
+    Me.Refresh
+    Screen.MousePointer = vbHourglass
+    
+    CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)
+    
+    Select Case TipoOrden
+        Case "ASC"
+            TipoOrden = "DESC"
+        Case "DESC"
+            TipoOrden = "ASC"
+        Case Else
+            TipoOrden = "ASC"
+    End Select
+            
+    CargaGrid
+    Screen.MousePointer = vbDefault
+
 End Sub
 
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
@@ -854,7 +740,7 @@ Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Modo = 2 Then PonerContRegIndicador lblIndicador, adodc1, CadB
+    PonerContRegIndicador
 End Sub
 
 Private Sub Form_Activate()
@@ -867,104 +753,46 @@ Private Sub Form_Activate()
         Else
             PonerModo 2
              If Me.CodigoActual <> "" Then
-                SituarData Me.adodc1, "codvarie=" & CodigoActual, "", True
+                SituarData Me.adodc1, "=", "", True
             End If
         End If
     End If
 End Sub
 
-Private Sub Form_Load()
 
+
+Private Sub Form_Load()
     'Icono del formulario
     Me.Icon = frmPpal.Icon
-
     PrimeraVez = True
 
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 3   'Insertar
-        .Buttons(2).Image = 4   'Modificar
-        .Buttons(3).Image = 5   'Borrar
-        'el 1 es separadors
-        .Buttons(5).Image = 1   'Buscar
-        .Buttons(6).Image = 2   'Todos
-        'el 9 i el 10 son separadors
-        .Buttons(8).Image = 10  'imprimir
+        .Buttons(1).Image = 1   'Buscar
+        .Buttons(2).Image = 2   'Todos
     End With
-
-    ' La Ayuda
-    With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 12
-    End With
-
-    '## A mano
-'    chkVistaPrevia.Value = CheckValueLeer(Name)
     
     
-    '****************** canviar la consulta *********************************+
-    CadenaConsulta = "SELECT rtarifaett.codvarie, variedades.nomvarie,  "
-    CadenaConsulta = CadenaConsulta & "rtarifaett.codigoett, rtarifaett.precio"
-    CadenaConsulta = CadenaConsulta & " FROM rtarifaett, variedades"
-    CadenaConsulta = CadenaConsulta & " WHERE rtarifaett.codvarie = variedades.codvarie "
-    
-    '************************************************************************
+    CadenaConsulta = "select codtraba, nomtraba, niftraba, teltraba, movtraba, fechaalta from straba where (1=1)"
+    If cWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & cWhere
     
     CadB = ""
     CargaGrid
-    
+            
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-'    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
+If Modo = 4 Then TerminaBloquear
     Screen.MousePointer = vbDefault
-    If Modo = 4 Then TerminaBloquear
+    Set vTag1 = Nothing
+    Set vTag3 = Nothing
 End Sub
 
-Private Sub frmC1_Selec(vFecha As Date)
-Dim Indice As Byte
-    Indice = CByte(Me.btnBuscar(1).Tag)
-    txtAux(Indice).Text = Format(vFecha, "dd/mm/yyyy")
-End Sub
-
-Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1) 'codvariedad
-    FormateaCampo txtAux(0)
-    txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre variedad
-End Sub
 
 Private Sub mnBuscar_Click()
     BotonBuscar
-End Sub
-
-Private Sub mnEliminar_Click()
-    BotonEliminar
-End Sub
-
-Private Sub mnImprimir_Click()
-    printNou
-End Sub
-
-Private Sub mnModificar_Click()
-    'Comprobaciones
-    '--------------
-    If adodc1.Recordset.EOF Then Exit Sub
-    
-    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
-    
-    'Preparamos para modificar
-    '-------------------------
-    If BLOQUEADesdeFormulario2(Me, adodc1, 1) Then BotonModificar
-End Sub
-
-Private Sub mnNuevo_Click()
-    BotonAnyadir
-End Sub
-
-Private Sub mnSalir_Click()
-    Unload Me
 End Sub
 
 Private Sub mnVerTodos_Click()
@@ -974,17 +802,9 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-                mnNuevo_Click
-        Case 2
-                mnModificar_Click
-        Case 3
-                mnEliminar_Click
-        Case 5
                 mnBuscar_Click
-        Case 6
+        Case 2
                 mnVerTodos_Click
-        Case 8
-                mnImprimir_Click
     End Select
 End Sub
 
@@ -992,77 +812,59 @@ Private Sub CargaGrid(Optional vSQL As String)
     Dim SQL As String
     Dim tots As String
     
-'    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " where " & vSQL
     Else
         SQL = CadenaConsulta
     End If
-    
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rtarifaett.codvarie, rtarifaett.codigoett"
+    If CampoOrden = "" Then
+        SQL = SQL & " ORDER BY codtraba "
+    Else
+        SQL = SQL & " order by " & CampoOrden & " " & TipoOrden
+    End If
     '**************************************************************++
     
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
+    
+    
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|1100|;S|btnBuscar(0)|B|||;"
-    tots = tots & "S|txtAux2(0)|T|Variedad|3650|;S|txtAux(1)|T|Codigo ETT|1250|;"
-    tots = tots & "S|txtAux(2)|T|Precio Tarifa|1460|;"
+    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Nombre|3870|;S|txtAux(2)|T|Nif|1250|;S|txtAux(3)|T|Teléfono|1300|;S|txtAux(4)|T|Móvil|1300|;S|txtAux(5)|T|Fecha Alta|1250|;"
     
-    arregla tots, DataGrid1, Me, 350
-    
+    arregla tots, DataGrid1, Me
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgLeft
-    DataGrid1.Columns(3).Alignment = dbgRight
+'    DataGrid1.Columns(5).Alignment = dbgRight
+'    DataGrid1.Columns(5).NumberFormat = "###,###,###,##0.00"
     
+    DataGrid1.RowHeight = 350
+
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-Dim cadMen As String
+Dim RC As String
 
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
-        Case 0 'codigo de variedad
-            If PonerFormatoEntero(txtAux(Index)) Then
-                txtAux2(Index).Text = PonerNombreDeCod(txtAux(Index), "variedades", "nomvarie")
-                If txtAux2(Index).Text = "" Then
-                    cadMen = "No existe la Variedad: " & txtAux(Index).Text & vbCrLf
-                    cadMen = cadMen & "¿Desea crearla?" & vbCrLf
-                    If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
-                        Set frmVar = New frmComVar
-                        frmVar.DatosADevolverBusqueda = "0|1|"
-'                        frmVar.NuevoCodigo = Text1(Index).Text
-                        txtAux(Index).Text = ""
-                        TerminaBloquear
-                        frmVar.Show vbModal
-                        Set frmVar = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, adodc1, 1
-                    Else
-                        txtAux(Index).Text = ""
-                    End If
-                    PonerFoco txtAux(Index)
-                Else
-                    If (Modo = 3 Or Modo = 4) And EsVariedadGrupo6(txtAux(Index).Text) Then
-                        MsgBox "Esta variedad es del Grupo de Bodega. Revise.", vbExclamation
-                        PonerFoco txtAux(Index)
-                    End If
-                End If
-            Else
-                txtAux2(Index).Text = ""
-            End If
-        
-        
-        Case 2 ' precio
-            If txtAux(Index).Text <> "" Then PonerFormatoDecimal txtAux(Index), 7
+        Case 0 ' letra de serie
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
             
+        Case 1 ' numfactu
+            PonerFormatoEntero txtAux(Index)
+            
+        Case 2 ' fecfactu
+            PonerFormatoFecha txtAux(Index)
+        
+        Case 3 ' codmacta
+            txtAux(Index).Text = RellenaCodigoCuenta(txtAux(Index).Text)
     End Select
     
 End Sub
@@ -1077,81 +879,40 @@ Dim Mens As String
     B = CompForm(Me)
     If Not B Then Exit Function
     
-    If (Modo = 3) Then 'insertar
-        'comprobar si existe ya el cod. del campo clave primaria
-        SQL = "select count(*) from rtarifaett where codvarie = " & DBSet(txtAux(0).Text, "N") & " and codigoett = " & DBSet(txtAux(1).Text, "F")
-        If TotalRegistros(SQL) <> 0 Then
-            MsgBox "Ya existe el registro para la variedad fecha. Revise.", vbExclamation
-            B = False
-        End If
-    End If
-    
-    
     DatosOK = B
 End Function
 
-
 Private Sub PonerOpcionesMenu()
     PonerOpcionesMenuGeneral Me
-    PonerOpcionesMenuGeneralNew Me
 End Sub
 
+Private Sub PonerContRegIndicador()
+'si estamos en modo ver registros muestra el numero de registro en el que estamos
+'situados del total de registros mostrados: 1 de 24
+Dim cadReg As String
 
-Private Sub printNou()
-    With frmImprimir2
-        .cadTabla2 = "rtarifaett"
-        .Informe2 = "rManTarifaETT.rpt"
-        If CadB <> "" Then
-            '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(CadB)
+    If (Modo = 2 Or Modo = 0) Then
+        cadReg = PonerContRegistros(Me.adodc1)
+        If CadB = "" Then
+            lblIndicador.Caption = cadReg
         Else
-            .cadRegSelec = ""
+            lblIndicador.Caption = "BUSQUEDA: " & cadReg
         End If
-        ' *** repasar el nom de l'adodc ***
-        '.cadRegActua = Replace(POS2SF(Data1, Me), "clientes", "clientes_1")
-        .cadRegActua = POS2SF(adodc1, Me)
-        '[Monica]13/07/2012: falla si hay un solo registro seleccionado y apretamos registros buscados
-        If adodc1.Recordset.RecordCount = 1 Then .cadRegSelec = .cadRegActua
-    
-        ' *** repasar codEmpre ***
-        .cadTodosReg = ""
-        '.cadTodosReg = "{itinerar.codempre} = " & codEmpre
-        ' *** repasar si li pose ordre o no ****
-        .OtrosParametros2 = "pEmpresa='" & vEmpresa.nomempre & "'|pOrden={rtarifaett.codvarie}|"
-        '.OtrosParametros2 = "pEmpresa='" & vEmpresa.NomEmpre & "'|"
-        ' *** posar el nº de paràmetres que he posat en OtrosParametros2 ***
-        '.NumeroParametros2 = 1
-        .NumeroParametros2 = 2
-        ' ******************************************************************
-        .MostrarTree2 = False
-        .InfConta2 = False
-        .ConSubInforme2 = False
-        .SubInformeConta = ""
-        .Show vbModal
-    End With
+    End If
 End Sub
 
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGrid1_GotFocus()
-'  WheelHook DataGrid1
-'End Sub
-'Private Sub DataGrid1_Lostfocus()
-'  WheelUnHook
-'End Sub
 
-'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
-'    KEYpress KeyAscii
-'End Sub
+' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
+Private Sub DataGrid1_GotFocus()
+  WheelHook DataGrid1
+End Sub
+
+Private Sub DataGrid1_LostFocus()
+  WheelUnHook
+End Sub
+
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = teclaBuscar Then
-        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
-            Select Case Index
-                Case 0: KEYBusqueda KeyAscii, 0 'codigo de variedad
-            End Select
-        End If
-    Else
-        KEYpress KeyAscii
-    End If
+    KEYpress KeyAscii
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1164,18 +925,7 @@ Dim cerrar As Boolean
 
     KEYpressGnral KeyAscii, Modo, cerrar
     If cerrar Then Unload Me
-
-End Sub
-
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
-    KeyAscii = 0
-    btnBuscar_Click (Indice)
 End Sub
 
 
-Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
-    Select Case Button.Index
-        Case 1
-            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
-    End Select
-End Sub
+

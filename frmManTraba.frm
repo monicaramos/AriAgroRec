@@ -1858,11 +1858,11 @@ Private Const IdPrograma = 8002
 'Dim T1 As Single
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
-Public Event DatoSeleccionado(CadenaSeleccion As String)
+Public Event DatoSeleccionado(Cadenaseleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmB As frmBuscaGrid
-Attribute frmB.VB_VarHelpID = -1
+Private WithEvents frmTraPrev As frmManTrabaPrev ' Trabajadores vista previa
+Attribute frmTraPrev.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmZ As frmZoom  'Zoom para campos Text
@@ -2140,6 +2140,20 @@ Dim I As Integer
     End If
 End Sub
 
+Private Sub frmTraPrev_DatoSeleccionado(Cadenaseleccion As String)
+Dim CadB As String
+    
+    If Cadenaseleccion <> "" Then
+        CadB = "codtraba = " & DBSet(RecuperaValor(Cadenaseleccion, 1), "N")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+
+End Sub
+
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
@@ -2320,55 +2334,32 @@ End Sub
 
 
 
-Private Sub frmAlm_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmAlm_DatoSeleccionado(Cadenaseleccion As String)
 'Mantenimiento alacenes propios
-    Text1(24).Text = RecuperaValor(CadenaSeleccion, 1) 'codalmac
+    Text1(24).Text = RecuperaValor(Cadenaseleccion, 1) 'codalmac
     FormateaCampo Text1(24)
-    Text2(24).Text = RecuperaValor(CadenaSeleccion, 2) 'nomalmac
+    Text2(24).Text = RecuperaValor(Cadenaseleccion, 2) 'nomalmac
 End Sub
 
-Private Sub frmB_Selecionado(CadenaDevuelta As String)
-    Dim Aux As String
-    
-    If CadenaDevuelta <> "" Then
-        HaDevueltoDatos = True
-        Screen.MousePointer = vbHourglass
-        'Sabem quins camps son els que mos torna
-        'Creem una cadena consulta i posem els datos
-        CadB = ""
-        Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 1)
-        CadB = Aux
-        '   Com la clau principal es única, en posar el sql apuntant
-        '   al valor retornat sobre la clau ppal es suficient
-        ' *** canviar o llevar el WHERE; repasar codEmpre ***
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
-        'CadenaConsulta = "select * from " & NombreTabla & " WHERE codempre = " & codEmpre & " AND " & CadB & " " & Ordenacion
-        ' **********************************
-        PonerCadenaBusqueda
-        Screen.MousePointer = vbDefault
-    End If
-End Sub
-
-
-Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmFPa_DatoSeleccionado(Cadenaseleccion As String)
 'Mantenimiento Formas de pago
-    Text1(20).Text = RecuperaValor(CadenaSeleccion, 1) 'codforpa
+    Text1(20).Text = RecuperaValor(Cadenaseleccion, 1) 'codforpa
     FormateaCampo Text1(20)
-    Text2(20).Text = RecuperaValor(CadenaSeleccion, 2) 'nomforpa
+    Text2(20).Text = RecuperaValor(Cadenaseleccion, 2) 'nomforpa
 End Sub
 
-Private Sub frmHor_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmHor_DatoSeleccionado(Cadenaseleccion As String)
 'Mantenimiento de horarios para costes
-    Text1(32).Text = RecuperaValor(CadenaSeleccion, 1) 'codhorario
+    Text1(32).Text = RecuperaValor(Cadenaseleccion, 1) 'codhorario
     FormateaCampo Text1(32)
-    Text2(32).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    Text2(32).Text = RecuperaValor(Cadenaseleccion, 2) 'descripcion
 End Sub
 
-Private Sub frmMSal_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmMSal_DatoSeleccionado(Cadenaseleccion As String)
 'Mantenimiento Salarios
-    Text1(9).Text = RecuperaValor(CadenaSeleccion, 1) 'codcateg
+    Text1(9).Text = RecuperaValor(Cadenaseleccion, 1) 'codcateg
     FormateaCampo Text1(9)
-    Text2(9).Text = RecuperaValor(CadenaSeleccion, 2) 'nomcateg
+    Text2(9).Text = RecuperaValor(Cadenaseleccion, 2) 'nomcateg
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -2579,39 +2570,48 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
-        
-    'Cridem al form
-    ' **************** arreglar-ho per a vore lo que es desije ****************
-    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & ParaGrid(Text1(2), 45, "Nombre")
-    cad = cad & ParaGrid(Text1(0), 10, "Cód.")
-    cad = cad & ParaGrid(Text1(3), 15, "NIF")
-    cad = cad & ParaGrid(Text1(11), 15, "Teléfono")
-    cad = cad & ParaGrid(Text1(12), 15, "Móvil")
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = NombreTabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        frmB.vDevuelve = "1|" '*** els camps que volen que torne ***
-        frmB.vTitulo = "Trabajadores" ' ***** repasa açò: títol de BuscaGrid *****
-        frmB.vSelElem = 0
-
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-        'tindrem que tancar el form llançant l'event
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
+'    Dim cad As String
+'
+'    'Cridem al form
+'    ' **************** arreglar-ho per a vore lo que es desije ****************
+'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
+'    cad = ""
+'    cad = cad & ParaGrid(Text1(2), 45, "Nombre")
+'    cad = cad & ParaGrid(Text1(0), 10, "Cód.")
+'    cad = cad & ParaGrid(Text1(3), 15, "NIF")
+'    cad = cad & ParaGrid(Text1(11), 15, "Teléfono")
+'    cad = cad & ParaGrid(Text1(12), 15, "Móvil")
+'    If cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vtabla = NombreTabla
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        frmB.vDevuelve = "1|" '*** els camps que volen que torne ***
+'        frmB.vTitulo = "Trabajadores" ' ***** repasa açò: títol de BuscaGrid *****
+'        frmB.vSelElem = 0
+'
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
+'        'tindrem que tancar el form llançant l'event
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha retornat datos, es a decir NO ha retornat datos
+'            PonerFoco Text1(kCampo)
+'        End If
+'    End If
+    
+    Set frmTraPrev = New frmManTrabaPrev
+    
+    frmTraPrev.cWhere = CadB
+    frmTraPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmTraPrev.Show vbModal
+    
+    Set frmTraPrev = Nothing
+    
 End Sub
 
 
@@ -3220,16 +3220,28 @@ Dim SQL As String
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = teclaBuscar Then
-        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
-            Select Case Index
-                Case 5: KEYBusqueda KeyAscii, 0 'poblacion
-                Case 7: KEYBusqueda KeyAscii, 1 'actividad
-                Case 8: KEYBusqueda KeyAscii, 2 'grupo
-            End Select
+    If Index <> 21 Then
+        If KeyAscii = teclaBuscar Then
+            If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+                Select Case Index
+                    Case 9: KEYBusqueda KeyAscii, 0 'categoria
+                    Case 24: KEYBusqueda KeyAscii, 3 'almacen
+                    Case 20: KEYBusqueda KeyAscii, 2 'forma de pago
+                    Case 32: KEYBusqueda KeyAscii, 4 'horario
+                    Case 10: KEYFecha KeyAscii, 0 'fecha de alta
+                    Case 15: KEYFecha KeyAscii, 1 'fecha de baja
+                    Case 16: KEYFecha KeyAscii, 2 'fecha antiguedad
+                End Select
+            End If
+        Else
+            KEYpress KeyAscii
         End If
     Else
-        If Index <> 21 Or (Index = 21 And Text1(21).Text = "") Then KEYpress KeyAscii
+        If Text1(21).Text = "" And KeyAscii = teclaBuscar Then
+            imgZoom_Click 0
+        Else
+            KEYpress KeyAscii
+        End If
     End If
 End Sub
 
@@ -3245,7 +3257,10 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
+    KeyAscii = 0
+    imgFec_Click (Indice)
+End Sub
 Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
     imgBuscar_Click (Indice)
@@ -3365,11 +3380,11 @@ End Sub
 
 
 
-Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
+Private Sub frmCtas_DatoSeleccionado(Cadenaseleccion As String)
 'Cuentas contables de la Contabilidad
-    Text1(23).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
+    Text1(23).Text = RecuperaValor(Cadenaseleccion, 1) 'codmacta
     FormateaCampo Text1(23)
-    Text2(23).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    Text2(23).Text = RecuperaValor(Cadenaseleccion, 2) 'descripcion
 End Sub
 
 ' *********************************************************************************
