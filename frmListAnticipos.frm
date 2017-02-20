@@ -17791,13 +17791,24 @@ Dim Tabla1 As String
         ' antes un socio era tercero si tipo de productor = tercero (1)
         
         'Socio que no sea tercero
-        If Check1(11).Value = 0 Then
-            If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
+        If vParamAplic.Cooperativa = 2 Then
+            If Check1(11).Value = 0 Then
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1 and not ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)") Then Exit Sub
+            Else
+                ' socio tercero de modulos
+                If Not AnyadirAFormula(cadSelect, "({rsocios.tipoprod} = 1 or ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "({rsocios.tipoprod} = 1 or ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
+            End If
         Else
-            ' socio tercero de modulos
-            If Not AnyadirAFormula(cadSelect, "({rsocios.tipoprod} = 1 or ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "({rsocios.tipoprod} = 1 or ({rsocios.tipoirpf = 2} and {rsocios.tipoprod} = 0 and {rsocios.tiporelacion} = 2)) ") Then Exit Sub
+            If Check1(11).Value = 0 Then
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} <> 1") Then Exit Sub
+            Else
+                ' socio tercero de modulos
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1") Then Exit Sub
+            End If
         End If
         
         'sólo entradas distintas de VENTA CAMPO y distintas de INDUSTRIA y distintas de RETIRADA

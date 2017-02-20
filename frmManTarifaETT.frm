@@ -199,7 +199,7 @@ Begin VB.Form frmManTarifaETT
       Height          =   375
       Left            =   7035
       TabIndex        =   4
-      Top             =   5610
+      Top             =   5640
       Visible         =   0   'False
       Width           =   1095
    End
@@ -307,7 +307,7 @@ Begin VB.Form frmManTarifaETT
       Height          =   375
       Left            =   7050
       TabIndex        =   8
-      Top             =   5610
+      Top             =   5640
       Visible         =   0   'False
       Width           =   1095
    End
@@ -550,7 +550,7 @@ Dim B As Boolean
     txtAux2(0).visible = Not B
     btnBuscar(0).visible = Not B
     
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

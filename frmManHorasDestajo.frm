@@ -5,27 +5,130 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasDestajo 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entrada de Horas Destajo Trabajadores"
-   ClientHeight    =   5925
+   ClientHeight    =   6120
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   14910
+   ClientTop       =   30
+   ClientWidth     =   16080
    Icon            =   "frmManHorasDestajo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5925
-   ScaleWidth      =   14910
+   ScaleHeight     =   6120
+   ScaleWidth      =   16080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3750
+      TabIndex        =   23
+      Top             =   30
+      Width           =   1485
+      Begin MSComctlLib.Toolbar Toolbar2 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   24
+         Top             =   180
+         Width           =   1065
+         _ExtentX        =   1879
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Actualizar Entradas"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Exportar Fichero Excel"
+               Object.Tag             =   "2"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   90
+      TabIndex        =   21
+      Top             =   30
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   22
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.TextBox txtAux2 
       Appearance      =   0  'Flat
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   2
       Left            =   7905
-      TabIndex        =   22
+      TabIndex        =   20
       Top             =   4950
       Visible         =   0   'False
       Width           =   825
@@ -34,7 +137,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   7
       Left            =   4530
       MaxLength       =   6
@@ -46,11 +158,20 @@ Begin VB.Form frmManHorasDestajo
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   340
       Index           =   3
       Left            =   5070
       MaskColor       =   &H00000000&
-      TabIndex        =   21
+      TabIndex        =   19
       ToolTipText     =   "Buscar variedad"
       Top             =   4920
       Visible         =   0   'False
@@ -61,10 +182,19 @@ Begin VB.Form frmManHorasDestajo
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   7
       Left            =   5280
-      TabIndex        =   20
+      TabIndex        =   18
       Top             =   4950
       Visible         =   0   'False
       Width           =   1125
@@ -73,7 +203,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   6
       Left            =   8760
       MaxLength       =   7
@@ -85,11 +224,20 @@ Begin VB.Form frmManHorasDestajo
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   340
       Index           =   2
       Left            =   7680
       MaskColor       =   &H00000000&
-      TabIndex        =   19
+      TabIndex        =   17
       ToolTipText     =   "Buscar forfait"
       Top             =   4950
       Visible         =   0   'False
@@ -98,11 +246,20 @@ Begin VB.Form frmManHorasDestajo
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   340
       Index           =   1
       Left            =   4305
       MaskColor       =   &H00000000&
-      TabIndex        =   18
+      TabIndex        =   16
       ToolTipText     =   "Buscar fecha"
       Top             =   4905
       Visible         =   0   'False
@@ -112,7 +269,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   5
       Left            =   11640
       MaxLength       =   8
@@ -125,7 +291,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   4
       Left            =   9690
       MaxLength       =   8
@@ -138,7 +313,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   3
       Left            =   10620
       MaxLength       =   8
@@ -152,10 +336,19 @@ Begin VB.Form frmManHorasDestajo
       BackColor       =   &H80000018&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   0
       Left            =   1125
-      TabIndex        =   17
+      TabIndex        =   15
       Top             =   4905
       Visible         =   0   'False
       Width           =   1815
@@ -163,11 +356,20 @@ Begin VB.Form frmManHorasDestajo
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   340
       Index           =   0
       Left            =   915
       MaskColor       =   &H00000000&
-      TabIndex        =   16
+      TabIndex        =   14
       ToolTipText     =   "Buscar trabajador"
       Top             =   4890
       Visible         =   0   'False
@@ -177,7 +379,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   2
       Left            =   6480
       MaxLength       =   16
@@ -188,27 +399,54 @@ Begin VB.Form frmManHorasDestajo
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   12465
+      Left            =   13665
       TabIndex        =   8
-      Top             =   5265
+      Top             =   5445
       Visible         =   0   'False
       Width           =   1035
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   13635
+      Left            =   14835
       TabIndex        =   9
-      Top             =   5265
+      Top             =   5445
       Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   1
       Left            =   2985
       MaxLength       =   10
@@ -221,7 +459,16 @@ Begin VB.Form frmManHorasDestajo
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
       Index           =   0
       Left            =   60
       MaxLength       =   6
@@ -232,30 +479,30 @@ Begin VB.Form frmManHorasDestajo
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManHorasDestajo.frx":000C
-      Height          =   4410
+      Height          =   4545
       Left            =   120
       TabIndex        =   12
-      Top             =   495
-      Width           =   14635
-      _ExtentX        =   25823
-      _ExtentY        =   7779
+      Top             =   765
+      Width           =   15840
+      _ExtentX        =   27940
+      _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -302,10 +549,19 @@ Begin VB.Form frmManHorasDestajo
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   13635
-      TabIndex        =   15
-      Top             =   5265
+      Left            =   14850
+      TabIndex        =   13
+      Top             =   5475
       Visible         =   0   'False
       Width           =   1095
    End
@@ -314,14 +570,14 @@ Begin VB.Form frmManHorasDestajo
       Index           =   1
       Left            =   120
       TabIndex        =   10
-      Top             =   5190
+      Top             =   5400
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -329,9 +585,9 @@ Begin VB.Form frmManHorasDestajo
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   40
+         Left            =   45
          TabIndex        =   11
-         Top             =   240
+         Top             =   210
          Width           =   2295
       End
    End
@@ -382,85 +638,29 @@ Begin VB.Form frmManHorasDestajo
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   13
-      Top             =   0
-      Width           =   14910
-      _ExtentX        =   26300
-      _ExtentY        =   635
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   15480
+      TabIndex        =   25
+      Top             =   180
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
       Style           =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   13
+         NumButtons      =   1
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Actualizar Entradas"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Exportar fichero Excel"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Object.ToolTipText     =   "Ayuda"
          EndProperty
       EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Left            =   5040
-         TabIndex        =   14
-         Top             =   90
-         Visible         =   0   'False
-         Width           =   1215
-      End
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -621,7 +821,7 @@ Dim B As Boolean
         btnBuscar(I).visible = Not B
     Next I
 
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -653,28 +853,28 @@ Dim B As Boolean
 
     B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(2).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(10).Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
     Me.mnImprimir.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
     
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
 
-    Toolbar1.Buttons(12).Enabled = B And UCase(Dir(App.Path & "\controlnomi.cfg")) = UCase("controlnomi.cfg")
+    Toolbar2.Buttons(2).Enabled = B And UCase(Dir(App.Path & "\controlnomi.cfg")) = UCase("controlnomi.cfg")
     Me.mnExportacion.Enabled = B And UCase(Dir(App.Path & "\controlnomi.cfg")) = UCase("controlnomi.cfg")
 
 
@@ -703,7 +903,7 @@ Private Sub BotonAnyadir()
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
-        anc = anc + 206
+        anc = anc + 240
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
@@ -739,7 +939,7 @@ Private Sub BotonBuscar()
     Me.txtAux2(2).Text = ""
     Me.txtAux2(7).Text = ""
     
-    LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -758,7 +958,7 @@ Private Sub BotonModificar()
     If DataGrid1.Row < 0 Then
         anc = 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + 495 '545
+        anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top '545
     End If
 
     'Llamamos al form
@@ -799,7 +999,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     txtAux2(2).Top = alto
     txtAux2(7).Top = alto
     For I = 0 To btnBuscar.Count - 1
-        btnBuscar(I).Top = alto - 15
+        btnBuscar(I).Top = alto - 10
     Next I
 
 End Sub
@@ -1097,7 +1297,6 @@ End Sub
 
 Private Sub Form_Load()
 
-
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
@@ -1107,23 +1306,35 @@ Private Sub Form_Load()
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        'el 1 es separadors
-        .Buttons(2).Image = 1   'Buscar
-        .Buttons(3).Image = 2   'Todos
-        'el 4 i el 5 son separadors
-        .Buttons(6).Image = 3   'Insertar
-        .Buttons(7).Image = 4   'Modificar
-        .Buttons(8).Image = 5   'Borrar
-        'el 9 i el 10 son separadors
-        .Buttons(10).Image = 33 'actualizar entradas
-        .Buttons(11).Image = 10  'imprimir
-        .Buttons(12).Image = 34  'exportacion a excel
-        .Buttons(13).Image = 11  'Salir
+        'l'1 i el 2 son separadors
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
+        'el 5 i el 6 son separadors
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar2
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 33 'actualizar entradas
+        .Buttons(2).Image = 34  'exportacion a excel
+    End With
+
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
+    End With
+    
+
 
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
-    
     
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT horasdestajo.codtraba, straba.nomtraba, horasdestajo.fechahora, horasdestajo.codvarie, variedades.nomvarie, "
@@ -1232,25 +1443,19 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 2
+        Case 5
                 mnBuscar_Click
-        Case 3
-                mnVerTodos_Click
         Case 6
+                mnVerTodos_Click
+        Case 1
                 mnNuevo_Click
-        Case 7
+        Case 2
                 mnModificar_Click
-        Case 8
+        Case 3
                 mnEliminar_Click
-        Case 10
-                mnActualizar_Click
-        Case 11
+        Case 8
                 'MsgBox "Imprimir...under construction"
                 mnImprimir_Click
-        Case 12
-                mnExportacion_Click
-        Case 13
-                mnSalir_Click
     End Select
 End Sub
 
@@ -1275,15 +1480,15 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|800|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Nombre Trabajador|2500|;"
-    tots = tots & "S|txtAux(1)|T|Fecha|1100|;S|btnBuscar(1)|B||195|;"
-    tots = tots & "S|txtAux(7)|T|Código|800|;S|btnBuscar(3)|B||195|;S|txtAux2(7)|T|Variedad|1700|;"
-    tots = tots & "S|txtAux(2)|T|Forfait|1500|;S|btnBuscar(2)|B||195|;S|txtAux2(2)|T|Descripción|1500|;"
-    tots = tots & "S|txtAux(6)|T|Cajones|900|;"
-    tots = tots & "S|txtAux(4)|T|Kilos|900|;"
+    tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Nombre Trabajador|2500|;"
+    tots = tots & "S|txtAux(1)|T|Fecha|1350|;S|btnBuscar(1)|B||195|;"
+    tots = tots & "S|txtAux(7)|T|Código|1000|;S|btnBuscar(3)|B||195|;S|txtAux2(7)|T|Variedad|1700|;"
+    tots = tots & "S|txtAux(2)|T|Forfait|1800|;S|btnBuscar(2)|B||195|;S|txtAux2(2)|T|Descripción|1500|;"
+    tots = tots & "S|txtAux(6)|T|Cajones|1100|;"
+    tots = tots & "S|txtAux(4)|T|Kilos|1000|;"
     tots = tots & "S|txtAux(3)|T|Importe|1200|;"
     tots = tots & "S|txtAux(5)|T|Horas |1100|;"
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgLeft
@@ -1292,10 +1497,18 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
 '    DataGrid1.Columns(12).Alignment = dbgCenter
 End Sub
 
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+            mnActualizar_Click
+        Case 2
+            mnExportacion_Click
+    End Select
+End Sub
+
 Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
-
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
@@ -1350,7 +1563,6 @@ Dim cadMen As String
                     PonerFoco txtAux(Index)
                 Else
                     If txtAux(6).Text <> "" Then RealizarCalculos
-                
                 End If
             End If
     
@@ -1391,9 +1603,7 @@ Dim cadMen As String
                  txtAux(5).Text = Horas(txtAux(3).Text, txtAux(0).Text)
                  PonerFormatoDecimal txtAux(5), 3
             End If
-        
     End Select
-    
 End Sub
 
 Private Function DatosOK() As Boolean
@@ -1453,7 +1663,10 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 0: KEYBusqueda KeyAscii, 0 'trabajador
+                Case 1: KEYBusqueda KeyAscii, 1 'fecha
+                Case 7: KEYBusqueda KeyAscii, 3 'variedad
+                Case 2: KEYBusqueda KeyAscii, 2 'forfait
             End Select
         End If
     Else

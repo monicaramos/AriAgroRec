@@ -3086,7 +3086,7 @@ Private Sub cmdCancelar_Click()
                     If ModificaLineas = 1 Then 'INSERTAR
                         ModificaLineas = 0
                         DataGrid3.AllowAddNew = False
-                        If Not Adoaux(0).Recordset.EOF Then Adoaux(0).Recordset.MoveFirst
+                        If Not AdoAux(0).Recordset.EOF Then AdoAux(0).Recordset.MoveFirst
                     End If
                     ModificaLineas = 0
                     LLamaLineas Modo, 0, "DataGrid3"
@@ -3104,7 +3104,7 @@ Private Sub cmdCancelar_Click()
                     If ModificaLineas = 1 Then 'INSERTAR
                         ModificaLineas = 0
                         DataGrid4.AllowAddNew = False
-                        If Not Adoaux(1).Recordset.EOF Then Adoaux(1).Recordset.MoveFirst
+                        If Not AdoAux(1).Recordset.EOF Then AdoAux(1).Recordset.MoveFirst
                     End If
                     ModificaLineas = 0
                     LLamaLineas Modo, 0, "DataGrid4"
@@ -3223,15 +3223,6 @@ Private Sub BotonVerTodos()
 End Sub
 
 
-Private Sub Desplazamiento(Index As Integer)
-'Botones de Desplazamiento de la Toolbar
-'Para desplazarse por los registros de control Data
-    If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
-    PonerCampos
-End Sub
-
-
 Private Sub BotonModificar()
 Dim DeVarios As Boolean
 
@@ -3277,13 +3268,13 @@ Dim J As Byte
     
     Select Case NumTabMto
         Case 0
-            If Adoaux(0).Recordset.EOF Then
+            If AdoAux(0).Recordset.EOF Then
                 TerminaBloquear
                 Exit Sub
             End If
     
         Case 1
-            If Adoaux(1).Recordset.EOF Then
+            If AdoAux(1).Recordset.EOF Then
                 TerminaBloquear
                 Exit Sub
             End If
@@ -3410,9 +3401,9 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
              For jj = 1 To 10 '09/09/2010
-                txtAux3(jj).Height = DataGrid2.RowHeight
-                txtAux3(jj).Top = alto - 210 '200
-                txtAux3(jj).visible = B
+                txtaux3(jj).Height = DataGrid2.RowHeight
+                txtaux3(jj).Top = alto - 210 '200
+                txtaux3(jj).visible = B
             Next jj
             
         Case "DataGrid3"
@@ -3566,11 +3557,11 @@ Dim I As Byte
     If Not Data3.Recordset.EOF Then
         'Datos de la tabla rhisfruta_incidencia
         CargaGrid DataGrid1, Data2, True
-        txtAux3(11).Text = DBLet(Data3.Recordset!Observac, "T")
+        txtaux3(11).Text = DBLet(Data3.Recordset!Observac, "T")
     Else
         'Datos de la tabla rhisfruta_incidencia
         CargaGrid DataGrid1, Data2, False
-        txtAux3(11).Text = ""
+        txtaux3(11).Text = ""
     End If
     
 End Sub
@@ -4490,15 +4481,15 @@ Dim I As Integer
                 '++
             Case 2  ' clasificacion
                 If Data1.Recordset.RecordCount > 0 Then
-                    CargaGrid DataGrid3, Adoaux(0), True
+                    CargaGrid DataGrid3, AdoAux(0), True
                 Else
-                    CargaGrid DataGrid3, Adoaux(0), False
+                    CargaGrid DataGrid3, AdoAux(0), False
                 End If
             Case 3  ' gastos
                 If Data1.Recordset.RecordCount > 0 Then
-                    CargaGrid DataGrid4, Adoaux(1), True
+                    CargaGrid DataGrid4, AdoAux(1), True
                 Else
-                    CargaGrid DataGrid4, Adoaux(1), False
+                    CargaGrid DataGrid4, AdoAux(1), False
                 End If
         End Select
     Next I
@@ -4614,16 +4605,16 @@ Dim B As Boolean
     Text2(6).visible = False
     Text2(6).Enabled = True
     For I = 1 To 10 '09/09/2010
-        BloquearTxt txtAux3(I), True
-        txtAux3(I).Enabled = False
+        BloquearTxt txtaux3(I), True
+        txtaux3(I).Enabled = False
     Next I
     For I = 1 To 10
-        BloquearTxt txtAux3(I), (Modo <> 1)
-        txtAux3(I).Enabled = (Modo = 1)
+        BloquearTxt txtaux3(I), (Modo <> 1)
+        txtaux3(I).Enabled = (Modo = 1)
     Next I
     
-    txtAux3(11).visible = True
-    txtAux3(11).Enabled = (Modo = 1)
+    txtaux3(11).visible = True
+    txtaux3(11).Enabled = (Modo = 1)
     
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
@@ -4936,22 +4927,22 @@ Dim SQL As String
        Case 1 'clasificacion
             ' *************** canviar la pregunta ****************
             cad = "¿Seguro que desea eliminar la Calidad?"
-            cad = cad & vbCrLf & "Albarán: " & Adoaux(0).Recordset.Fields(0)
-            cad = cad & vbCrLf & "Calidad: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
+            cad = cad & vbCrLf & "Albarán: " & AdoAux(0).Recordset.Fields(0)
+            cad = cad & vbCrLf & "Calidad: " & AdoAux(0).Recordset.Fields(2) & "-" & AdoAux(0).Recordset.Fields(3)
             
             If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
-                NumRegElim = Adoaux(0).Recordset.AbsolutePosition
+                NumRegElim = AdoAux(0).Recordset.AbsolutePosition
                 TerminaBloquear
-                SQL = "delete from rhisfruta_clasif where numalbar = " & Adoaux(0).Recordset.Fields(0)
-                SQL = SQL & " and codvarie = " & Adoaux(0).Recordset.Fields(1)
-                SQL = SQL & " and codcalid = " & Adoaux(0).Recordset.Fields(2)
+                SQL = "delete from rhisfruta_clasif where numalbar = " & AdoAux(0).Recordset.Fields(0)
+                SQL = SQL & " and codvarie = " & AdoAux(0).Recordset.Fields(1)
+                SQL = SQL & " and codcalid = " & AdoAux(0).Recordset.Fields(2)
                 conn.Execute SQL
                 
-                SituarDataTrasEliminar Adoaux(0), NumRegElim
+                SituarDataTrasEliminar AdoAux(0), NumRegElim
                 
-                CargaGrid DataGrid3, Adoaux(0), True
+                CargaGrid DataGrid3, AdoAux(0), True
 '                SSTab1.Tab = 1
 
                 ComprobarClasificacion
@@ -4961,22 +4952,22 @@ Dim SQL As String
        Case 2 'gastos
             ' *************** canviar la pregunta ****************
             cad = "¿Seguro que desea eliminar el Gasto?"
-            cad = cad & vbCrLf & "Albarán: " & Adoaux(1).Recordset.Fields(0)
-            cad = cad & vbCrLf & "Código: " & Adoaux(1).Recordset.Fields(2) & "-" & Adoaux(1).Recordset.Fields(3)
+            cad = cad & vbCrLf & "Albarán: " & AdoAux(1).Recordset.Fields(0)
+            cad = cad & vbCrLf & "Código: " & AdoAux(1).Recordset.Fields(2) & "-" & AdoAux(1).Recordset.Fields(3)
             
             If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
-                NumRegElim = Adoaux(0).Recordset.AbsolutePosition
+                NumRegElim = AdoAux(0).Recordset.AbsolutePosition
                 TerminaBloquear
-                SQL = "delete from rhisfruta_gastos where numalbar = " & Adoaux(1).Recordset.Fields(0)
-                SQL = SQL & " and numlinea = " & Adoaux(1).Recordset.Fields(1)
-                SQL = SQL & " and codgasto = " & Adoaux(1).Recordset.Fields(2)
+                SQL = "delete from rhisfruta_gastos where numalbar = " & AdoAux(1).Recordset.Fields(0)
+                SQL = SQL & " and numlinea = " & AdoAux(1).Recordset.Fields(1)
+                SQL = SQL & " and codgasto = " & AdoAux(1).Recordset.Fields(2)
                 conn.Execute SQL
                 
-                SituarDataTrasEliminar Adoaux(1), NumRegElim
+                SituarDataTrasEliminar AdoAux(1), NumRegElim
                 
-                CargaGrid DataGrid4, Adoaux(1), True
+                CargaGrid DataGrid4, AdoAux(1), True
 '                SSTab1.Tab = 1
 
             End If
@@ -5255,6 +5246,17 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
+End Sub
+
+Private Sub Desplazamiento(Index As Integer)
+'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
+    If Data1.Recordset.EOF Then Exit Sub
+    DesplazamientoData Data1, Index, True
+    PonerCampos
+End Sub
+
 Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
@@ -5450,8 +5452,8 @@ On Error Resume Next
 
     CargaGrid DataGrid2, Data3, False 'entradas e incidencias
     CargaGrid DataGrid1, Data2, False
-    CargaGrid DataGrid3, Me.Adoaux(0), False 'clasificacion
-    CargaGrid DataGrid4, Me.Adoaux(1), False 'gastos
+    CargaGrid DataGrid3, Me.AdoAux(0), False 'clasificacion
+    CargaGrid DataGrid4, Me.AdoAux(1), False 'gastos
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -5592,9 +5594,9 @@ Dim I As Integer
               Case 0
                 bAux = (B And Me.Data3.Recordset.RecordCount > 0)
               Case 1
-                bAux = (B And Me.Adoaux(0).Recordset.RecordCount > 0)
+                bAux = (B And Me.AdoAux(0).Recordset.RecordCount > 0)
               Case 2
-                bAux = (B And Me.Adoaux(1).Recordset.RecordCount > 0)
+                bAux = (B And Me.AdoAux(1).Recordset.RecordCount > 0)
             End Select
         End If
         ToolAux(I).Buttons(2).Enabled = bAux
@@ -5668,7 +5670,7 @@ Dim NroCopias As Integer
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtAux3(Index), Modo
+    ConseguirFoco txtaux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -5680,7 +5682,7 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
 End Sub
 
 Private Sub CargaCombo()
@@ -5769,9 +5771,9 @@ Dim SQL As String
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        txtAux3(11).visible = False
+        txtaux3(11).visible = False
         SQL = CadenaInsertarDesdeForm(Me)
-        txtAux3(11).visible = True
+        txtaux3(11).visible = True
         If SQL <> "" Then
             If InsertarOferta(SQL, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
@@ -5881,11 +5883,11 @@ Dim B As Boolean
             B = BloqueaRegistro("albaran", "numalbar = " & Data1.Recordset!numalbar)
             Select Case Index
                 Case 0  ' *** els index de les llinies en grid (en o sense tab) ***
-                    CargaGrid DataGrid3, Adoaux(0), True
+                    CargaGrid DataGrid3, AdoAux(0), True
                     If B Then BotonAnyadirLinea NumTabMto
 '                LLamaLineas NumTabMto, 0
                 Case 1
-                    CargaGrid DataGrid4, Adoaux(1), True
+                    CargaGrid DataGrid4, AdoAux(1), True
                     If B Then BotonAnyadirLinea Index
             End Select
 '            SSTab1.Tab = NumTabMto
@@ -5931,7 +5933,7 @@ Dim I As Integer
 '            NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
             ' ***************************************************************
 
-            AnyadirLinea DataGrid3, Adoaux(0)
+            AnyadirLinea DataGrid3, AdoAux(0)
     
             anc = DataGrid3.Top
             If DataGrid3.Row < 0 Then
@@ -5958,7 +5960,7 @@ Dim I As Integer
             NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
 
-            AnyadirLinea DataGrid4, Adoaux(1)
+            AnyadirLinea DataGrid4, AdoAux(1)
     
             anc = DataGrid4.Top
             If DataGrid4.Row < 0 Then
@@ -6026,25 +6028,25 @@ Dim cad As String
             Select Case NumTabMto
                 Case 0
 
-                    V = Adoaux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
-                    CargaGrid DataGrid3, Adoaux(0), True
+                    V = AdoAux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
+                    CargaGrid DataGrid3, AdoAux(0), True
 
                     ' *** si n'hi han tabs ***
 '                    SSTab1.Tab = 1
 
                     DataGrid3.SetFocus
-                    Adoaux(0).Recordset.Find (Adoaux(0).Recordset.Fields(1).Name & " =" & V)
+                    AdoAux(0).Recordset.Find (AdoAux(0).Recordset.Fields(1).Name & " =" & V)
 
                     LLamaLineas ModificaLineas, 0, "DataGrid3"
                 Case 1
-                    V = Adoaux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
-                    CargaGrid DataGrid4, Adoaux(1), True
+                    V = AdoAux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
+                    CargaGrid DataGrid4, AdoAux(1), True
 
                     ' *** si n'hi han tabs ***
 '                    SSTab1.Tab = 1
 
                     DataGrid4.SetFocus
-                    Adoaux(1).Recordset.Find (Adoaux(1).Recordset.Fields(1).Name & " =" & V)
+                    AdoAux(1).Recordset.Find (AdoAux(1).Recordset.Fields(1).Name & " =" & V)
 
                     LLamaLineas ModificaLineas, 0, "DataGrid4"
             End Select
