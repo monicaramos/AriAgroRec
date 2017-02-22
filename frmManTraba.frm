@@ -1858,7 +1858,7 @@ Private Const IdPrograma = 8002
 'Dim T1 As Single
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
-Public Event DatoSeleccionado(Cadenaseleccion As String)
+Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
 Private WithEvents frmTraPrev As frmManTrabaPrev ' Trabajadores vista previa
@@ -2140,11 +2140,11 @@ Dim I As Integer
     End If
 End Sub
 
-Private Sub frmTraPrev_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmTraPrev_DatoSeleccionado(CadenaSeleccion As String)
 Dim CadB As String
     
-    If Cadenaseleccion <> "" Then
-        CadB = "codtraba = " & DBSet(RecuperaValor(Cadenaseleccion, 1), "N")
+    If CadenaSeleccion <> "" Then
+        CadB = "codtraba = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -2220,7 +2220,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -2327,39 +2327,39 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 
 
 
 
-Private Sub frmAlm_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmAlm_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento alacenes propios
-    Text1(24).Text = RecuperaValor(Cadenaseleccion, 1) 'codalmac
+    Text1(24).Text = RecuperaValor(CadenaSeleccion, 1) 'codalmac
     FormateaCampo Text1(24)
-    Text2(24).Text = RecuperaValor(Cadenaseleccion, 2) 'nomalmac
+    text2(24).Text = RecuperaValor(CadenaSeleccion, 2) 'nomalmac
 End Sub
 
-Private Sub frmFPa_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Formas de pago
-    Text1(20).Text = RecuperaValor(Cadenaseleccion, 1) 'codforpa
+    Text1(20).Text = RecuperaValor(CadenaSeleccion, 1) 'codforpa
     FormateaCampo Text1(20)
-    Text2(20).Text = RecuperaValor(Cadenaseleccion, 2) 'nomforpa
+    text2(20).Text = RecuperaValor(CadenaSeleccion, 2) 'nomforpa
 End Sub
 
-Private Sub frmHor_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmHor_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento de horarios para costes
-    Text1(32).Text = RecuperaValor(Cadenaseleccion, 1) 'codhorario
+    Text1(32).Text = RecuperaValor(CadenaSeleccion, 1) 'codhorario
     FormateaCampo Text1(32)
-    Text2(32).Text = RecuperaValor(Cadenaseleccion, 2) 'descripcion
+    text2(32).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
-Private Sub frmMSal_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmMSal_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Salarios
-    Text1(9).Text = RecuperaValor(Cadenaseleccion, 1) 'codcateg
+    Text1(9).Text = RecuperaValor(CadenaSeleccion, 1) 'codcateg
     FormateaCampo Text1(9)
-    Text2(9).Text = RecuperaValor(Cadenaseleccion, 2) 'nomcateg
+    text2(9).Text = RecuperaValor(CadenaSeleccion, 2) 'nomcateg
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -2949,8 +2949,8 @@ Dim TipoForp As String
                 PonerFoco Text1(32)
                 B = False
             Else
-                Text2(32).Text = PonerNombreDeCod(Text1(32), "cchorario", "descripc")
-                If Text2(32).Text = "" Then
+                text2(32).Text = PonerNombreDeCod(Text1(32), "cchorario", "descripc")
+                If text2(32).Text = "" Then
                     MsgBox "Código de Horario no existe. Reintroduzca.", vbExclamation
                     PonerFoco Text1(32)
                     B = False
@@ -3049,8 +3049,8 @@ Dim SQL As String
                 
         Case 9 'CATEGORIA
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "salarios", "nomcateg")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "salarios", "nomcateg")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Salario: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -3081,13 +3081,13 @@ Dim SQL As String
                     End If
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 20 'FORMA DE PAGO
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "forpago", "nomforpa")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe la Forma de Pago: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -3105,7 +3105,7 @@ Dim SQL As String
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             
         Case 10, 15, 16 'Fechas
@@ -3114,9 +3114,9 @@ Dim SQL As String
         Case 23 'cuenta contable
             If Text1(Index).Text = "" Then Exit Sub
             If Modo = 3 Then
-                Text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, "") 'text1(0).Text)
+                text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, "") 'text1(0).Text)
             Else
-                Text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, Text1(2).Text)
+                text2(Index).Text = PonerNombreCuenta(Text1(Index), Modo, Text1(2).Text)
             End If
             
 '        Case 23, 26 'porcentajes de comision
@@ -3132,8 +3132,8 @@ Dim SQL As String
           
         Case 24 'ALMACENES PROPIOS
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "salmpr", "nomalmac")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "salmpr", "nomalmac")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el almacén: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -3151,7 +3151,7 @@ Dim SQL As String
                     PonerFoco Text1(Index)
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
           
        Case 25, 26 ' dtoirpf y dto seguridad social
@@ -3171,8 +3171,8 @@ Dim SQL As String
     
        Case 32 'CODIGO DE HORARIO
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "cchorario", "descripc")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "cchorario", "descripc")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Horario " & Text1(Index).Text & ". Reintroduzca." & vbCrLf
                     MsgBox cadMen, vbExclamation
                     PonerFoco Text1(Index)
@@ -3272,15 +3272,15 @@ Dim NomEmple As String
 
     On Error GoTo EPosarDescripcions
     
-    Text2(9).Text = PonerNombreDeCod(Text1(9), "salarios", "nomcateg", "codcateg", "N")
+    text2(9).Text = PonerNombreDeCod(Text1(9), "salarios", "nomcateg", "codcateg", "N")
     
-    Text2(20).Text = PonerNombreDeCod(Text1(20), "forpago", "nomforpa", "codforpa", "N")
+    text2(20).Text = PonerNombreDeCod(Text1(20), "forpago", "nomforpa", "codforpa", "N")
     If vParamAplic.NumeroConta <> 0 Then
-        Text2(23).Text = PonerNombreCuenta(Text1(23), Modo)
+        text2(23).Text = PonerNombreCuenta(Text1(23), Modo)
     End If
-    Text2(24).Text = PonerNombreDeCod(Text1(24), "salmpr", "nomalmac", "codalmac", "N")
+    text2(24).Text = PonerNombreDeCod(Text1(24), "salmpr", "nomalmac", "codalmac", "N")
    
-    Text2(32).Text = PonerNombreDeCod(Text1(32), "cchorario", "descripc", "codhorario", "N")
+    text2(32).Text = PonerNombreDeCod(Text1(32), "cchorario", "descripc", "codhorario", "N")
        
    
 EPosarDescripcions:
@@ -3380,11 +3380,11 @@ End Sub
 
 
 
-Private Sub frmCtas_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
-    Text1(23).Text = RecuperaValor(Cadenaseleccion, 1) 'codmacta
+    Text1(23).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
     FormateaCampo Text1(23)
-    Text2(23).Text = RecuperaValor(Cadenaseleccion, 2) 'descripcion
+    text2(23).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 ' *********************************************************************************
@@ -3485,3 +3485,6 @@ Dim SQL As String
     
 End Function
 
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
+End Sub

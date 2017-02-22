@@ -5,17 +5,107 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmManHorasAntNat 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Anticipos Trabajadores Natural "
-   ClientHeight    =   5835
+   ClientHeight    =   6105
    ClientLeft      =   195
-   ClientTop       =   480
-   ClientWidth     =   9765
+   ClientTop       =   180
+   ClientWidth     =   10560
    Icon            =   "frmManHorasAntNat.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5835
-   ScaleWidth      =   9765
+   ScaleHeight     =   6105
+   ScaleWidth      =   10560
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3690
+      TabIndex        =   17
+      Top             =   30
+      Width           =   885
+      Begin MSComctlLib.Toolbar Toolbar2 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   18
+         Top             =   180
+         Width           =   435
+         _ExtentX        =   767
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Generar Modelo"
+               Object.Tag             =   "2"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   60
+      TabIndex        =   15
+      Top             =   30
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   16
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
@@ -28,11 +118,11 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   2
       Left            =   6900
       MaskColor       =   &H00000000&
-      TabIndex        =   16
+      TabIndex        =   14
       ToolTipText     =   "Buscar fecha"
       Top             =   4920
       Visible         =   0   'False
@@ -50,11 +140,11 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   1
       Left            =   4305
       MaskColor       =   &H00000000&
-      TabIndex        =   15
+      TabIndex        =   13
       ToolTipText     =   "Buscar fecha"
       Top             =   4905
       Visible         =   0   'False
@@ -73,7 +163,7 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   3
       Left            =   5640
       MaxLength       =   10
@@ -115,7 +205,7 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   2
       Left            =   4710
       MaxLength       =   13
@@ -138,10 +228,10 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   0
       Left            =   1125
-      TabIndex        =   14
+      TabIndex        =   12
       Top             =   4905
       Visible         =   0   'False
       Width           =   1815
@@ -158,11 +248,11 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   300
+      Height          =   350
       Index           =   0
       Left            =   915
       MaskColor       =   &H00000000&
-      TabIndex        =   13
+      TabIndex        =   11
       ToolTipText     =   "Buscar trabajador"
       Top             =   4905
       Visible         =   0   'False
@@ -180,9 +270,9 @@ Begin VB.Form frmManHorasAntNat
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7290
+      Left            =   8070
       TabIndex        =   5
-      Top             =   5265
+      Top             =   5445
       Visible         =   0   'False
       Width           =   1035
    End
@@ -199,9 +289,9 @@ Begin VB.Form frmManHorasAntNat
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8460
+      Left            =   9240
       TabIndex        =   6
-      Top             =   5280
+      Top             =   5460
       Visible         =   0   'False
       Width           =   1095
    End
@@ -217,7 +307,7 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   2985
       MaxLength       =   10
@@ -239,7 +329,7 @@ Begin VB.Form frmManHorasAntNat
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   60
       MaxLength       =   6
@@ -250,30 +340,30 @@ Begin VB.Form frmManHorasAntNat
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManHorasAntNat.frx":000C
-      Height          =   4410
+      Height          =   4545
       Left            =   90
       TabIndex        =   9
-      Top             =   630
-      Width           =   9435
-      _ExtentX        =   16642
-      _ExtentY        =   7779
+      Top             =   780
+      Width           =   10235
+      _ExtentX        =   18045
+      _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -320,19 +410,28 @@ Begin VB.Form frmManHorasAntNat
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   8460
-      TabIndex        =   12
-      Top             =   5280
+      Left            =   9210
+      TabIndex        =   10
+      Top             =   5460
       Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   1
-      Left            =   150
+      Left            =   90
       TabIndex        =   7
-      Top             =   5190
+      Top             =   5370
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -400,84 +499,29 @@ Begin VB.Form frmManHorasAntNat
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   10
-      Top             =   0
-      Width           =   9765
-      _ExtentX        =   17224
-      _ExtentY        =   635
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   9870
+      TabIndex        =   19
+      Top             =   210
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
       Style           =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   13
+         NumButtons      =   1
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Generación Modelo"
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Object.ToolTipText     =   "Ayuda"
          EndProperty
       EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Left            =   5040
-         TabIndex        =   11
-         Top             =   90
-         Visible         =   0   'False
-         Width           =   1215
-      End
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -678,25 +722,25 @@ Dim B As Boolean
 
     B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(2).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
     Me.mnImprimir.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
     
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     
     
@@ -728,7 +772,7 @@ Private Sub BotonAnyadir()
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
-        anc = anc + 206
+        anc = anc + 240
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
@@ -766,7 +810,7 @@ Private Sub BotonBuscar()
     Me.txtAux2(0).Text = ""
     
     
-    LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -785,7 +829,7 @@ Private Sub BotonModificar()
     If DataGrid1.Row < 0 Then
         anc = 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + 565 '495 '545
+        anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top '495 '545
     End If
 
     'Llamamos al form
@@ -1085,18 +1129,32 @@ Private Sub Form_Load()
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        'el 1 es separadors
-        .Buttons(2).Image = 1   'Buscar
-        .Buttons(3).Image = 2   'Todos
-        'el 4 i el 5 son separadors
-        .Buttons(6).Image = 3   'Insertar
-        .Buttons(7).Image = 4   'Modificar
-        .Buttons(8).Image = 5   'Borrar
-        'el 9 i el 10 son separadors
-        .Buttons(10).Image = 22  'generar fichero banco
-        .Buttons(11).Image = 10  'imprimir
-        .Buttons(13).Image = 11  'Salir
+        'l'1 i el 2 son separadors
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
+        'el 5 i el 6 son separadors
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar2
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 22  'generar fichero
+    End With
+
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
+    End With
+
+
+
 
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -1189,23 +1247,19 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 2
-                mnBuscar_Click
-        Case 3
-                mnVerTodos_Click
+        Case 5
+            mnBuscar_Click
         Case 6
-                mnNuevo_Click
-        Case 7
-                mnModificar_Click
+            mnVerTodos_Click
+        Case 1
+            mnNuevo_Click
+        Case 2
+            mnModificar_Click
+        Case 3
+            mnEliminar_Click
         Case 8
-                mnEliminar_Click
-        Case 10 ' calculo de horas productivas
-               mnGenFichero_Click
-        Case 11
-                'MsgBox "Imprimir...under construction"
-                mnImprimir_Click
-        Case 13
-                mnSalir_Click
+            'MsgBox "Imprimir...under construction"
+            mnImprimir_Click
     End Select
 End Sub
 
@@ -1230,15 +1284,22 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|800|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Trabajador|3900|;"
-    tots = tots & "S|txtAux(1)|T|Fecha|1200|;S|btnBuscar(1)|B||195|;"
-    tots = tots & "S|txtAux(2)|T|Importe|1500|;"
-    tots = tots & "S|txtAux(3)|T|F.Pago|1100|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(0)|CB|D|360|;"
-    arregla tots, DataGrid1, Me
+    tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Trabajador|3900|;"
+    tots = tots & "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(1)|B||195|;"
+    tots = tots & "S|txtAux(2)|T|Importe|1600|;"
+    tots = tots & "S|txtAux(3)|T|F.Pago|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(0)|CB|D|360|;"
+    arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic
 '    DataGrid1.Columns(0).Alignment = dbgLeft
 '    DataGrid1.Columns(3).Alignment = dbgLeft
+End Sub
+
+Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1 ' calculo de horas productivas
+            mnGenFichero_Click
+    End Select
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
@@ -1335,7 +1396,9 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 0: KEYBusqueda KeyAscii, 0 'trabajador
+                Case 1: KEYBusqueda KeyAscii, 1 'fecha
+                Case 3: KEYBusqueda KeyAscii, 2 'fecha de pago
             End Select
         End If
     Else

@@ -2859,7 +2859,7 @@ Dim I As Byte
     'tara tractor
     Toolbar2.Buttons(1).Enabled = B
     'Paletizacion
-    Toolbar2.Buttons(2).Enabled = B And vParamAplic.HayTraza
+    Toolbar2.Buttons(2).Enabled = B 'And vParamAplic.HayTraza
     'Imprimir
     'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
     Toolbar1.Buttons(8).Enabled = B
@@ -3230,50 +3230,261 @@ Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim cajas As Currency
 Dim cad As String
+Dim crear As Integer
+Dim imprimir As Integer
+Dim NroPalets As Long
+Dim NumCajon As Long
 
-    If vParamAplic.HayTraza = False Then Exit Sub
+'    If vParamAplic.HayTraza = False Then Exit Sub
     
-    frmEntBascula2.crear = 1
-    
+'    frmEntBascula2.crear = 1
+'
+'    SQL = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
+'    If TotalRegistros(SQL) <> 0 Then
+'        cad = "La paletización para esta entrada ya está realizada." & vbCrLf
+'        cad = cad & vbCrLf & "            ¿ Desea crearla de nuevo ? "
+'        If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
+'            frmEntBascula2.crear = 0
+'        End If
+'    End If
+'
+'
+'    cajas = 0
+''    Cajas = DBLet(Data1.Recordset!numcajo1, "N") + _
+''            DBLet(Data1.Recordset!numcajo2, "N") + _
+''            DBLet(Data1.Recordset!numcajo3, "N") + _
+''            DBLet(Data1.Recordset!numcajo4, "N") + _
+''            DBLet(Data1.Recordset!numcajo5, "N")
+'
+'    ' ahora las cajas se suman si rparam.escaja es true
+'    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo1, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo1, "N")
+'    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo2, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo2, "N")
+'    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo3, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo3, "N")
+'    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo4, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo4, "N")
+'    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo5, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo5, "N")
+'
+'    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!numnotac)
+'    frmEntBascula2.NumCajones = CStr(cajas)
+'    frmEntBascula2.Numkilos = ImporteSinFormato(Text1(11).Text)
+'    frmEntBascula2.Codsocio = Text1(1).Text
+'    frmEntBascula2.codcampo = Text1(5).Text
+'    frmEntBascula2.codvarie = Text1(2).Text
+'    frmEntBascula2.Fecha = Text1(10).Text
+'    frmEntBascula2.Hora = Text1(22).Text
+'
+'
+'    frmEntBascula2.Show vbModal
+
+' de montifrut
+    crear = 1
+    imprimir = 1
     SQL = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     If TotalRegistros(SQL) <> 0 Then
         cad = "La paletización para esta entrada ya está realizada." & vbCrLf
-        cad = cad & vbCrLf & "            ¿ Desea crearla de nuevo ? "
+        cad = cad & vbCrLf & "            ¿ Desea imprimirla de nuevo ? "
         If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
-            frmEntBascula2.crear = 0
+            crear = 0
+            imprimir = 0
+        Else
+            crear = 0
+            imprimir = 1
         End If
     End If
     
+    B = True
+    If crear = 1 Then
+        NroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
+        NumCajon = 0
+        If Text1(13).Text <> "" Then
+            If Escajon(Combo15(0).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(13).Text)
+        End If
+        If Text1(14).Text <> "" Then
+            If Escajon(Combo15(1).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(14).Text)
+        End If
+        If Text1(15).Text <> "" Then
+            If Escajon(Combo15(2).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(15).Text)
+        End If
+        If Text1(16).Text <> "" Then
+            If Escajon(Combo15(3).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(16).Text)
+        End If
+        If Text1(17).Text <> "" Then
+            If Escajon(Combo15(4).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(17).Text)
+        End If
+        
+        B = InsertarPalets(Text1(0).Text, NroPalets, CStr(NumCajon), Text1(11).Text, Text1(10).Text, Text1(1).Text, Text1(2).Text)
+    End If
     
-    cajas = 0
-'    Cajas = DBLet(Data1.Recordset!numcajo1, "N") + _
-'            DBLet(Data1.Recordset!numcajo2, "N") + _
-'            DBLet(Data1.Recordset!numcajo3, "N") + _
-'            DBLet(Data1.Recordset!numcajo4, "N") + _
-'            DBLet(Data1.Recordset!numcajo5, "N")
-            
-    ' ahora las cajas se suman si rparam.escaja es true
-    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo1, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo1, "N")
-    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo2, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo2, "N")
-    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo3, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo3, "N")
-    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo4, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo4, "N")
-    If EsCaja(CStr(DBLet(Data1.Recordset!tipocajo5, "N"))) Then cajas = cajas + DBLet(Data1.Recordset!numcajo5, "N")
-    
-    frmEntBascula2.NumNota = ImporteSinFormato(Data1.Recordset!numnotac)
-    frmEntBascula2.NumCajones = CStr(cajas)
-    frmEntBascula2.Numkilos = ImporteSinFormato(Text1(11).Text)
-    frmEntBascula2.Codsocio = Text1(1).Text
-    frmEntBascula2.codcampo = Text1(5).Text
-    frmEntBascula2.codvarie = Text1(2).Text
-    frmEntBascula2.Fecha = Text1(10).Text
-    frmEntBascula2.Hora = Text1(22).Text
-
-    
-    frmEntBascula2.Show vbModal
-
+    If imprimir = 1 Then
+        If B Then ImprimirEtiquetas
+    End If
 
 End Sub
 
+Private Sub ImprimirEtiquetas()
+
+    If Data1.Recordset.EOF Then Exit Sub
+    
+    Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
+    Dim nomDocu As String 'Nombre de Informe rpt de crystal
+    Dim ImprimeDirecto As Integer
+     
+    indRPT = 93 'Ticket de Entrada
+     
+    If Not PonerParamRPT(indRPT, "", 1, nomDocu, , ImprimeDirecto) Then Exit Sub
+    'Nombre fichero .rpt a Imprimir
+    ' he añadido estas dos lineas para que llame al rpt correspondiente
+    
+    frmImprimir.NombreRPT = nomDocu
+    
+    ActivaTicket
+    
+    With frmVisReport
+        .FormulaSeleccion = "{trzpalets.numnotac}=" & Data1.Recordset!numnotac
+        .SoloImprimir = True
+        .OtrosParametros = ""
+        .NumeroParametros = 1
+        .MostrarTree = False
+        .Informe = App.Path & "\informes\" & nomDocu    ' "ValEntrada.rpt"
+        .InfConta = False
+        .ConSubInforme = False
+        .SubInformeConta = ""
+        .Opcion = 0
+        .ExportarPDF = True
+        .Show vbModal
+    End With
+    
+    DesactivaTicket
+
+End Sub
+
+
+
+
+
+Private Function Escajon(Codigo As Integer) As Boolean
+    Escajon = (DevuelveValor("select  escaja from confenva where codtipen = " & DBSet(Codigo, "N")) = 1)
+End Function
+
+Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, Numkilos As Long, Fecha As Date, Socio As String, Variedad As String)
+Dim NroPalets As Long
+Dim Kilos As Long
+Dim cajas As Long
+Dim I As Long
+Dim CRFID As String
+Dim NroCRFID As String
+Dim NumNota As Long
+Dim NumF As Long
+Dim SQL As String
+Dim Hora As String
+Dim KilosporPalet As Long
+Dim RestoCajas As Long
+Dim RestoKilos As Long
+Dim TotKilos As Long
+
+
+    On Error GoTo eInsertarPalets
+
+    InsertarPalets = False
+    
+    If Palets = 0 Then
+        NroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
+        RestoCajas = Val(NumCajones) Mod vParamAplic.CajasporPalet
+        
+        KilosporPalet = (vParamAplic.CajasporPalet * Numkilos) \ Val(NumCajones)
+        TotKilos = 0
+    
+        CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
+        Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
+        
+        For I = 1 To NroPalets
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
+            
+            NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
+            
+            TotKilos = TotKilos + KilosporPalet
+            
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
+            SQL = SQL & DBSet(KilosporPalet, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            
+            conn.Execute SQL
+        Next I
+        
+        If RestoCajas <> 0 Then ' insertamos el ultimo palet con el resto
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
+            
+            NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
+            
+            RestoKilos = Numkilos - (KilosporPalet * NroPalets)
+            
+            TotKilos = TotKilos + RestoKilos
+            
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(RestoCajas, "N") & ","
+            SQL = SQL & DBSet(RestoKilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(Text1(5).Text, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            
+            conn.Execute SQL
+            
+            NroPalets = NroPalets + 1
+        End If
+        
+        RestoKilos = Numkilos - TotKilos
+        
+        If RestoKilos <> 0 Then ' actualizamos el ultimo registro si hay resto de kilos
+            SQL = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
+            SQL = SQL & " where idpalet = " & DBSet(NumF, "N")
+            
+            conn.Execute SQL
+        End If
+    
+    End If
+    
+    If Palets > 0 Then
+        NroPalets = Palets
+        Kilos = Numkilos \ NroPalets
+        cajas = Val(NumCajones) \ NroPalets
+        
+        CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
+        Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
+        
+        For I = 1 To NroPalets
+            NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
+            
+            NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
+            
+            ' el tipo de trzpalets va a ser siempre 0, pq se piden palets
+            
+            SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
+            SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
+            SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(Text1(5).Text, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
+            
+            conn.Execute SQL
+        Next I
+        
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * NroPalets))
+        SQL = SQL & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * NroPalets)
+        SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
+        SQL = SQL & " and idpalet = " & DBSet(NumF, "N")
+        
+        conn.Execute SQL
+    End If
+    
+    
+    InsertarPalets = True
+    Exit Function
+
+eInsertarPalets:
+    MuestraError Err.Number, "Insertar Palets", Err.Description
+End Function
 
 Private Sub mnTararTractor_Click()
 
