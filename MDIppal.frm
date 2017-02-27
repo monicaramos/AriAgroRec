@@ -122,6 +122,7 @@ Begin VB.MDIForm MDIppal
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
+            Enabled         =   0   'False
             Object.Width           =   1323
             MinWidth        =   1323
             TextSave        =   "MAYÚS"
@@ -142,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:01"
+            TextSave        =   "10:25"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 

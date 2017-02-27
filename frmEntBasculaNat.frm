@@ -3231,11 +3231,11 @@ Dim Rs As ADODB.Recordset
 Dim cajas As Currency
 Dim cad As String
 Dim crear As Integer
-Dim imprimir As Integer
-Dim NroPalets As Long
-Dim NumCajon As Long
+Dim Imprimir As Integer
+Dim nroPalets As Long
+Dim Numcajon As Long
 
-'    If vParamAplic.HayTraza = False Then Exit Sub
+    If vParamAplic.HayTraza = False Then Exit Sub
     
 '    frmEntBascula2.crear = 1
 '
@@ -3277,44 +3277,44 @@ Dim NumCajon As Long
 
 ' de montifrut
     crear = 1
-    imprimir = 1
+    Imprimir = 1
     SQL = "select count(*) from trzpalets where numnotac = " & Trim(Data1.Recordset!numnotac)
     If TotalRegistros(SQL) <> 0 Then
         cad = "La paletización para esta entrada ya está realizada." & vbCrLf
         cad = cad & vbCrLf & "            ¿ Desea imprimirla de nuevo ? "
         If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
             crear = 0
-            imprimir = 0
+            Imprimir = 0
         Else
             crear = 0
-            imprimir = 1
+            Imprimir = 1
         End If
     End If
     
     B = True
     If crear = 1 Then
-        NroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
-        NumCajon = 0
+        nroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
+        Numcajon = 0
         If Text1(13).Text <> "" Then
-            If Escajon(Combo15(0).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(13).Text)
+            If Escajon(Combo15(0).ItemData(0) + 1) Then Numcajon = Numcajon + ComprobarCero(Text1(13).Text)
         End If
         If Text1(14).Text <> "" Then
-            If Escajon(Combo15(1).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(14).Text)
+            If Escajon(Combo15(1).ItemData(0) + 1) Then Numcajon = Numcajon + ComprobarCero(Text1(14).Text)
         End If
         If Text1(15).Text <> "" Then
-            If Escajon(Combo15(2).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(15).Text)
+            If Escajon(Combo15(2).ItemData(0) + 1) Then Numcajon = Numcajon + ComprobarCero(Text1(15).Text)
         End If
         If Text1(16).Text <> "" Then
-            If Escajon(Combo15(3).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(16).Text)
+            If Escajon(Combo15(3).ItemData(0) + 1) Then Numcajon = Numcajon + ComprobarCero(Text1(16).Text)
         End If
         If Text1(17).Text <> "" Then
-            If Escajon(Combo15(4).ItemData(0) + 1) Then NumCajon = NumCajon + ComprobarCero(Text1(17).Text)
+            If Escajon(Combo15(4).ItemData(0) + 1) Then Numcajon = Numcajon + ComprobarCero(Text1(17).Text)
         End If
         
-        B = InsertarPalets(Text1(0).Text, NroPalets, CStr(NumCajon), Text1(11).Text, Text1(10).Text, Text1(1).Text, Text1(2).Text)
+        B = InsertarPalets(Text1(0).Text, nroPalets, CStr(Numcajon), Text1(11).Text, Text1(10).Text, Text1(1).Text, Text1(2).Text)
     End If
     
-    If imprimir = 1 Then
+    If Imprimir = 1 Then
         If B Then ImprimirEtiquetas
     End If
 
@@ -3366,7 +3366,7 @@ Private Function Escajon(Codigo As Integer) As Boolean
 End Function
 
 Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, Numkilos As Long, Fecha As Date, Socio As String, Variedad As String)
-Dim NroPalets As Long
+Dim nroPalets As Long
 Dim Kilos As Long
 Dim cajas As Long
 Dim I As Long
@@ -3387,7 +3387,7 @@ Dim TotKilos As Long
     InsertarPalets = False
     
     If Palets = 0 Then
-        NroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
+        nroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
         RestoCajas = Val(NumCajones) Mod vParamAplic.CajasporPalet
         
         KilosporPalet = (vParamAplic.CajasporPalet * Numkilos) \ Val(NumCajones)
@@ -3396,7 +3396,7 @@ Dim TotKilos As Long
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
         
-        For I = 1 To NroPalets
+        For I = 1 To nroPalets
             NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
@@ -3418,7 +3418,7 @@ Dim TotKilos As Long
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
-            RestoKilos = Numkilos - (KilosporPalet * NroPalets)
+            RestoKilos = Numkilos - (KilosporPalet * nroPalets)
             
             TotKilos = TotKilos + RestoKilos
             
@@ -3431,7 +3431,7 @@ Dim TotKilos As Long
             
             conn.Execute SQL
             
-            NroPalets = NroPalets + 1
+            nroPalets = nroPalets + 1
         End If
         
         RestoKilos = Numkilos - TotKilos
@@ -3446,14 +3446,14 @@ Dim TotKilos As Long
     End If
     
     If Palets > 0 Then
-        NroPalets = Palets
-        Kilos = Numkilos \ NroPalets
-        cajas = Val(NumCajones) \ NroPalets
+        nroPalets = Palets
+        Kilos = Numkilos \ nroPalets
+        cajas = Val(NumCajones) \ nroPalets
         
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
         
-        For I = 1 To NroPalets
+        For I = 1 To nroPalets
             NroCRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000") & Format(I, "000")
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
@@ -3470,8 +3470,8 @@ Dim TotKilos As Long
             conn.Execute SQL
         Next I
         
-        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * NroPalets))
-        SQL = SQL & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * NroPalets)
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
+        SQL = SQL & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
         SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
         SQL = SQL & " and idpalet = " & DBSet(NumF, "N")
         
