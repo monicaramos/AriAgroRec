@@ -315,6 +315,7 @@ Form=frmManPreciosPrev.frm
 Form=frmManClasificaPrev.frm
 Form=frmManHcoFrutaPrev.frm
 Form=frmManTrabaPrev.frm
+Form=frmTrzManMovim.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

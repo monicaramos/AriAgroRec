@@ -627,6 +627,11 @@ End Sub
 
 
 ' *******  TRAZABILIDAD *********
+Public Sub SubmnC_RecoleccionG_Traza1_Click(Index As Integer)
+    Select Case Index
+        Case 1: AbrirListadoTrazabilidad (8) ' Asignacion automática a palets
+    End Select
+End Sub
 
 Public Sub SubmnC_RecoleccionG_Trazabilidad_Click(Index As Integer)
     Select Case Index
@@ -642,6 +647,7 @@ Public Sub SubmnC_RecoleccionG_Trazabilidad_Click(Index As Integer)
         
         Case 11: frmTrzManPalet.Show vbModal ' Manejo de Palets
         Case 12: AbrirListadoTrazabilidad (6) ' Modificacion de cargas de confeccion
+        Case 13: frmTrzManMovim.Show vbModal  ' modificacion de asignacion albaranes
     End Select
 End Sub
 
@@ -1244,6 +1250,13 @@ Dim i As Integer
         MDIppal.mnP_PreNominas(16).Caption = "Pago Recibos"
     
     End If
+    
+    '[Monica]28/02/2016: carga automatica de palets confeccionados para el caso de natural
+    MDIppal.mnRec_Trazabilidad(13).Enabled = (vParamAplic.Cooperativa = 9)
+    MDIppal.mnRec_Trazabilidad(13).visible = (vParamAplic.Cooperativa = 9)
+    
+    MDIppal.mnRec_Traza1(1).Enabled = (vParamAplic.Cooperativa = 9)
+    MDIppal.mnRec_Traza1(1).visible = (vParamAplic.Cooperativa = 9)
     
 End Sub
 

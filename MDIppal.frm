@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:25"
+            TextSave        =   "10:59"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1036,17 +1036,26 @@ Begin VB.MDIForm MDIppal
    End
    Begin VB.Menu mnTrazabilidad 
       Caption         =   "Trazabilidad"
-      Begin VB.Menu mnRec_Trazabilidad 
-         Caption         =   "&Tipos"
+      Begin VB.Menu mnRec_Traza1 
+         Caption         =   "Carga &Automática"
          Index           =   1
       End
       Begin VB.Menu mnRec_Trazabilidad 
+         Caption         =   "&Tipos"
+         Enabled         =   0   'False
+         Index           =   1
+         Visible         =   0   'False
+      End
+      Begin VB.Menu mnRec_Trazabilidad 
          Caption         =   "&Areas"
+         Enabled         =   0   'False
          Index           =   2
+         Visible         =   0   'False
       End
       Begin VB.Menu mnRec_Trazabilidad 
          Caption         =   "-"
          Index           =   3
+         Visible         =   0   'False
       End
       Begin VB.Menu mnRec_Trazabilidad 
          Caption         =   "&Detalles Palets en Entradas"
@@ -1083,6 +1092,10 @@ Begin VB.MDIForm MDIppal
       Begin VB.Menu mnRec_Trazabilidad 
          Caption         =   "Manejo Cargas Confección"
          Index           =   12
+      End
+      Begin VB.Menu mnRec_Trazabilidad 
+         Caption         =   "Manejo Asignacion Albaranes"
+         Index           =   13
       End
    End
    Begin VB.Menu mnAlmazara 
@@ -2033,6 +2046,10 @@ Private Sub mnRec_Transporte1_Click(Index As Integer)
     SubmnC_RecoleccionG_Transporte1_Click (Index)
 End Sub
 
+Private Sub mnRec_Traza1_Click(Index As Integer)
+     SubmnC_RecoleccionG_Traza1_Click (Index)
+End Sub
+
 Private Sub mnRec_Trazabilidad_Click(Index As Integer)
     SubmnC_RecoleccionG_Trazabilidad_Click (Index)
 End Sub
@@ -2236,14 +2253,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim SQL As String
+Dim sql As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    SQL = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2262,33 +2279,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim SQL As String
+Dim sql As String
 Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    SQL = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
+    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    sql = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            SQL = SQL & miRsAux.Fields(3) & "·"
+            sql = sql & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If SQL <> "" Then
-        SQL = "·" & SQL
+    If sql <> "" Then
+        sql = "·" & sql
         For Each T In Me.Controls
             If TypeOf T Is menu Then
                 c = DevuelveCadenaMenu(T)
                 c = "·" & c & "·"
-                If InStr(1, SQL, c) > 0 Then T.visible = False
+                If InStr(1, sql, c) > 0 Then T.visible = False
            
             End If
         Next
