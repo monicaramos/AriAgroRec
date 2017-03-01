@@ -236,17 +236,17 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim Cad As String
+Dim cad As String
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     Lanzado = False
     CargaICO
-    Cad = Dir(App.Path & "\impre.dat", vbArchive)
+    cad = Dir(App.Path & "\impre.dat", vbArchive)
 
     'ReestableceSoloImprimir = False
-    If Cad = "" Then
+    If cad = "" Then
         chkSoloImprimir.Value = 0
     Else
         chkSoloImprimir.Value = 1
@@ -467,11 +467,12 @@ On Error GoTo ErrOperacionesArchivoDefecto
     'crear = crear And ReestableceSoloImprimir
     If Not crear Then
         Kill App.Path & "\impre.dat"
-        Else
-            FileCopy App.Path & "\Vacio.dat", App.Path & "\impre.dat"
+    Else
+        FileCopy App.Path & "\Vacio.dat", App.Path & "\impre.dat"
     End If
+    
 ErrOperacionesArchivoDefecto:
-        If Err.Number <> 0 Then Err.Clear
+    If Err.Number <> 0 Then Err.Clear
 End Sub
 
 Private Sub Text1_DblClick()

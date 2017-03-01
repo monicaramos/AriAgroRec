@@ -141,24 +141,24 @@ End Function
 Public Function RegistrosAListar(vSQL As String, Optional vBD As Byte) As Byte
 'Devuelve si hay algun registro para mostrar en el Informe con la seleccion
 'realizada. Si no hay nada que mostrar devuelve 0 y no abrirá el informe
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 
     On Error Resume Next
     
-    Set RS = New ADODB.Recordset
+    Set Rs = New ADODB.Recordset
     If vBD = cConta Then
-        RS.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open vSQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     Else
-        RS.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     End If
 
     
     RegistrosAListar = 0
-    If Not RS.EOF Then
-        If RS.Fields(0).Value > 0 Then RegistrosAListar = 1 'Solo es para saber que hay registros que mostrar
+    If Not Rs.EOF Then
+        If Rs.Fields(0).Value > 0 Then RegistrosAListar = 1 'Solo es para saber que hay registros que mostrar
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
 
     If Err.Number <> 0 Then
         RegistrosAListar = 0
@@ -409,57 +409,57 @@ Dim Aux As String
 End Function
 
 
-Public Function PonerParamRPT(indice As Byte, cadparam As String, numParam As Byte, nomDocu As String, Optional EsAridoc As Boolean, Optional ImprimeDirecto As Integer) As Boolean
+Public Function PonerParamRPT(Indice As Byte, CadParam As String, numParam As Byte, nomDocu As String, Optional EsAridoc As Boolean, Optional ImprimeDirecto As Integer) As Boolean
 'EsAridoc = false usamos el nomdocum normal
 '           true usamos el rpt para aridoc
 'ImprimeDirecto = false usamos el crystal
 '                 true usamos el print
 
 Dim vParamRpt As CParamRpt 'Tipos de Documentos
-Dim Cad As String
+Dim cad As String
 
     Set vParamRpt = New CParamRpt
 
-    If vParamRpt.Leer(indice) = 1 Then
-        Cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
-        MsgBox Cad & "Debe configurar la aplicación.", vbExclamation
+    If vParamRpt.Leer(Indice) = 1 Then
+        cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
+        MsgBox cad & "Debe configurar la aplicación.", vbExclamation
         Set vParamRpt = Nothing
         PonerParamRPT = False
         Exit Function
     Else
-        If cadparam = "" Then
-            Cad = "|"
+        If CadParam = "" Then
+            cad = "|"
         Else
-            Cad = ""
+            cad = ""
         End If
-        Cad = Cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
+        cad = cad & "pCodigoISO=""" & vParamRpt.CodigoISO & """|"
         If vParamRpt.CodigoRevision = -1 Then
-            Cad = Cad & "pCodigoRev=""" & "" & """|"
+            cad = cad & "pCodigoRev=""" & "" & """|"
         Else
-            Cad = Cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
+            cad = cad & "pCodigoRev=""" & Format(vParamRpt.CodigoRevision, "00") & """|"
         End If
         numParam = numParam + 2
         If vParamRpt.LineaPie1 <> "" Then
-            Cad = Cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
+            cad = cad & "pLinea1=""" & vParamRpt.LineaPie1 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie2 <> "" Then
-            Cad = Cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
+            cad = cad & "pLinea2=""" & vParamRpt.LineaPie2 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie3 <> "" Then
-            Cad = Cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
+            cad = cad & "pLinea3=""" & vParamRpt.LineaPie3 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie4 <> "" Then
-            Cad = Cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
+            cad = cad & "pLinea4=""" & vParamRpt.LineaPie4 & """|"
             numParam = numParam + 1
         End If
         If vParamRpt.LineaPie5 <> "" Then
-            Cad = Cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
+            cad = cad & "pLinea5=""" & vParamRpt.LineaPie5 & """|"
             numParam = numParam + 1
         End If
-        cadparam = cadparam & Cad
+        CadParam = CadParam & cad
         If Not EsAridoc Then
             nomDocu = vParamRpt.Documento
         Else
@@ -474,7 +474,7 @@ Dim Cad As String
 End Function
 
 
-Public Sub PonerFrameVisible(ByRef vFrame As Frame, visible As Boolean, h As Integer, w As Integer)
+Public Sub PonerFrameVisible(ByRef vFrame As Frame, visible As Boolean, H As Integer, W As Integer)
 'Pone el Frame Visible y Ajustado al Formulario, y visualiza los controles
     
         vFrame.visible = visible
@@ -482,46 +482,46 @@ Public Sub PonerFrameVisible(ByRef vFrame As Frame, visible As Boolean, h As Int
             'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
             vFrame.Top = -90
             vFrame.Left = 0
-            vFrame.Width = w
-            vFrame.Height = h
+            vFrame.Width = W
+            vFrame.Height = H
         End If
 End Sub
 
 
-Public Function PonerParamEmpresa(cadparam As String, numParam As Byte) As Boolean
+Public Function PonerParamEmpresa(CadParam As String, numParam As Byte) As Boolean
 Dim DomiEmp As String
 Dim WebEmp As String
-Dim Cad As String
+Dim cad As String
 
         DomiEmp = vParam.DomicilioEmpresa & " - " & vParam.CPostal & " " & vParam.Poblacion
         If vParam.Provincia <> vParam.Poblacion Then DomiEmp = DomiEmp & " " & vParam.Provincia
         DomiEmp = DomiEmp & " - Telf. " & vParam.Telefono & " - Fax. " & vParam.Fax
         WebEmp = "Internet: " & vParam.WebEmpresa & " - E-mail: " & vParam.MailEmpresa
         'Resto parametros
-        Cad = ""
-        Cad = Cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
-        Cad = Cad & "pDomEmpre=""" & DomiEmp & """|"
-        Cad = Cad & "pWebEmpre=""" & WebEmp & """|"
+        cad = ""
+        cad = cad & "pNomEmpre=""" & vParam.NombreEmpresa & """|"
+        cad = cad & "pDomEmpre=""" & DomiEmp & """|"
+        cad = cad & "pWebEmpre=""" & WebEmp & """|"
         
         numParam = numParam + 3
-        cadparam = cadparam & Cad
+        CadParam = CadParam & cad
         PonerParamEmpresa = True
 End Function
 
-Public Function SaltosDeLinea(ByVal Cadena As String) As String
+Public Function SaltosDeLinea(ByVal cadena As String) As String
     Dim Devu As String
     Dim I As Integer
     
     Devu = ""
     Do
-        I = InStr(1, Cadena, vbCrLf)
+        I = InStr(1, cadena, vbCrLf)
         If I > 0 Then
             If Devu <> "" Then Devu = Devu & """ + chr(13) + """
-            Devu = Devu & Mid(Cadena, 1, I - 1)
-            Cadena = Mid(Cadena, I + 2)
+            Devu = Devu & Mid(cadena, 1, I - 1)
+            cadena = Mid(cadena, I + 2)
             
        Else
-            Devu = Devu & Cadena
+            Devu = Devu & cadena
        End If
     Loop While I > 0
     SaltosDeLinea = Devu
