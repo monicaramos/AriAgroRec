@@ -682,7 +682,7 @@ Dim B As Boolean
     
     chkAux(0).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1395,6 +1395,7 @@ End Sub
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
+            If Modo = 4 And (Index = 0 Or Index = 1) Then Exit Sub
             Select Case Index
                 Case 0: KEYBusqueda KeyAscii, 0 'trabajador
                 Case 1: KEYBusqueda KeyAscii, 1 'fecha

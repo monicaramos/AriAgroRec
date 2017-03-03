@@ -7556,7 +7556,7 @@ Private Sub FramePaseaBancoVisible(visible As Boolean, ByRef H As Integer, ByRef
     If visible = True Then
         Me.FramePaseABanco.Top = -90
         Me.FramePaseABanco.Left = 0
-        Me.FramePaseABanco.Height = 5490 '5130
+        Me.FramePaseABanco.Height = 5990 '5130
         Me.FramePaseABanco.Width = 6435
         W = Me.FramePaseABanco.Width
         H = Me.FramePaseABanco.Height

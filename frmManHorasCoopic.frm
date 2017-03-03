@@ -8,14 +8,36 @@ Begin VB.Form frmManHorasCoopic
    ClientHeight    =   6090
    ClientLeft      =   195
    ClientTop       =   180
-   ClientWidth     =   17445
+   ClientWidth     =   18525
    Icon            =   "frmManHorasCoopic.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6090
-   ScaleWidth      =   17445
+   ScaleWidth      =   18525
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   10
+      Left            =   14940
+      MaxLength       =   10
+      TabIndex        =   38
+      Tag             =   "Nro Parte|N|S|||horas|nroparte|0000000||"
+      Top             =   4590
+      Width           =   1170
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   90
@@ -611,7 +633,7 @@ Begin VB.Form frmManHorasCoopic
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15030
+      Left            =   16110
       TabIndex        =   11
       Top             =   5565
       Visible         =   0   'False
@@ -630,7 +652,7 @@ Begin VB.Form frmManHorasCoopic
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   16200
+      Left            =   17280
       TabIndex        =   13
       Top             =   5580
       Visible         =   0   'False
@@ -685,8 +707,8 @@ Begin VB.Form frmManHorasCoopic
       Left            =   90
       TabIndex        =   15
       Top             =   780
-      Width           =   17200
-      _ExtentX        =   30348
+      Width           =   18300
+      _ExtentX        =   32279
       _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -761,7 +783,7 @@ Begin VB.Form frmManHorasCoopic
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   16200
+      Left            =   17280
       TabIndex        =   16
       Top             =   5580
       Visible         =   0   'False
@@ -855,7 +877,7 @@ Begin VB.Form frmManHorasCoopic
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   16860
+      Left            =   17940
       TabIndex        =   37
       Top             =   120
       Width           =   405
@@ -1048,7 +1070,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1082,8 +1104,8 @@ Dim B As Boolean
     BloquearBtn btnBuscar(2), (Modo <> 1)
     
     'El nro de parte unicamente lo podemos buscar
-'    txtAux(8).Enabled = (Modo = 1)
-'    txtAux(8).visible = (Modo = 1)
+    txtAux(10).Enabled = (Modo = 1)
+    txtAux(10).visible = (Modo = 1)
     
 End Sub
 
@@ -1588,7 +1610,7 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " horas.codcapat, rcapataz.nomcapat, horas.horasdia,  horas.importe, horas.compleme, horas.penaliza, "
     CadenaConsulta = CadenaConsulta & " horas.fecharec, "
     CadenaConsulta = CadenaConsulta & " horas.pasaridoc,  IF(pasaridoc=1,'*','') as pasari, horas.intconta,  IF(intconta=1,'*','') as intcon, "
-    CadenaConsulta = CadenaConsulta & " horas.codalmac "
+    CadenaConsulta = CadenaConsulta & " horas.codalmac, horas.nroparte "
     CadenaConsulta = CadenaConsulta & " FROM  variedades, straba, horas, rcapataz  "
     CadenaConsulta = CadenaConsulta & " WHERE horas.codcapat = rcapataz.codcapat and  "
     CadenaConsulta = CadenaConsulta & " horas.codtraba = straba.codtraba and "
@@ -1746,6 +1768,8 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = tots & "S|txtAux(3)|T|Complemento|1500|;"
     tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
     tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(0)|CB|IA|360|;N||||0|;S|chkAux(1)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
+    tots = tots & "S|txtAux(10)|T|Nro.Parte|1100|;"
+    
     arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic

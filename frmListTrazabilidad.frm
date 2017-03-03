@@ -1871,7 +1871,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -1958,7 +1958,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -2057,7 +2057,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -2138,7 +2138,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -2166,9 +2166,9 @@ Dim vSQL As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHClase= """) Then Exit Sub
     End If
     
-    vSQL = ""
-    If txtCodigo(28).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(28).Text, "N")
-    If txtCodigo(29).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(29).Text, "N")
+    vSql = ""
+    If txtCodigo(28).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(28).Text, "N")
+    If txtCodigo(29).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(29).Text, "N")
     
      'D/H fecha
      cDesde = Trim(txtCodigo(2).Text)
@@ -2191,7 +2191,7 @@ Dim vSQL As String
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 16
-    frmMens.cadWHERE = vSQL
+    frmMens.cadWHERE = vSql
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -2242,7 +2242,7 @@ Dim vSQL As String
 
 End Sub
 
-Private Function CargarTemporalStocksNatural(vTabla As String, vWhere As String) As Boolean
+Private Function CargarTemporalStocksNatural(vtabla As String, vWhere As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eCargarTemporalStocksNatural
@@ -2320,7 +2320,7 @@ Dim FecFac As Date
 Dim B As Boolean
 Dim TipoPrec As Byte
 
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -2354,9 +2354,9 @@ Dim vSQL As String
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHClase=""") Then Exit Sub
         End If
         
-        vSQL = ""
-        If txtCodigo(0).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(0).Text, "N")
-        If txtCodigo(1).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(1).Text, "N")
+        vSql = ""
+        If txtCodigo(0).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(0).Text, "N")
+        If txtCodigo(1).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(1).Text, "N")
         
         
         'SECCION
@@ -2389,7 +2389,7 @@ Dim vSQL As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadWHERE = vSQL
+        frmMens.cadWHERE = vSql
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -3712,13 +3712,27 @@ End Function
 Private Sub CmdAcepCreacionPalet_Click()
 Dim Sql As String
 
-
+    If txtCodigo(16).Text = "" Then
+        MsgBox "Ha de introducir una fecha de creación. Reintroduzca.", vbExclamation
+        PonerFoco txtCodigo(16)
+        Exit Sub
+    End If
+    
     Sql = "select * from trzlineas_cargas where fecha = " & DBSet(txtCodigo(16).Text, "F")
     Sql = Sql & " and not idpalet in (select idpalet from palets where not idpalet is null) "
     
     If TotalRegistros(Sql) = 0 Then
         MsgBox "No se ha realizado ningún volcado esa fecha.", vbExclamation
     Else
+        If FechaVolcadoCargada Then
+            Exit Sub
+        End If
+    
+        If ComprobarExistenciasConAlbaranes(Sql) Then
+            Exit Sub
+        End If
+        
+        
         If ProcesoCarga(Sql) Then
             MsgBox "Proceso realizado correctamente.", vbExclamation
         End If
@@ -3726,16 +3740,69 @@ Dim Sql As String
 
 End Sub
 
-Private Function ProcesoCarga(vSQL As String) As Boolean
+Private Function FechaVolcadoCargada() As Boolean
+Dim Sql As String
+
+    FechaVolcadoCargada = False
+    
+    Sql = "select count(*) from palets where fechaini = " & DBSet(txtCodigo(16).Text, "F")
+    If DevuelveValor(Sql) <> 0 Then
+        MsgBox "Hay palets confeccionados con esa fecha. Revise.", vbExclamation
+        FechaVolcadoCargada = True
+    End If
+    
+    Sql = "select count(*) from trzmovim where fecha = " & DBSet(txtCodigo(16).Text, "F")
+    If DevuelveValor(Sql) <> 0 Then
+        MsgBox "Hay restos de palets con esa fecha. Revise.", vbExclamation
+        FechaVolcadoCargada = True
+    End If
+    
+
+End Function
+
+Private Function ComprobarExistenciasConAlbaranes(vSql As String) As Boolean
+Dim Sql As String
+
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    
+    ' kilos salidos en albaranes
+    Sql = "insert into tmpinformes (codusu, codigo1, importe1) "
+    Sql = Sql & " select " & vUsu.Codigo & ", codvarie, sum(coalesce(pesoneto)) pesoneto "
+    Sql = Sql & " from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    Sql = Sql & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " order by 1 "
+    conn.Execute Sql
+    
+    Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
+    Sql = "insert into tmpinformes2 (codusu, codigo1, importe1) "
+    Sql = Sql & " select " & vUsu.Codigo & ", aaaa.codvarie, sum(aaaa.kilos) from  "
+    Sql = Sql & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(txtCodigo(16).Text, "F")
+    Sql = Sql & " group by 1 "
+    Sql = Sql & " union "
+    Sql = Sql & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar = 0 "
+    Sql = Sql & " group by 1) aaaa "
+    Sql = Sql & " group by 1,2 "
+    conn.Execute Sql
+
+
+End Function
+
+Private Function ProcesoCarga(vSql As String) As Boolean
 Dim vMens As String
 
     On Error GoTo eProcesoCarga
     
     ProcesoCarga = False
+    
     conn.BeginTrans
     
     vMens = ""
-    If CargarPaletsConfeccionados(vSQL, vMens) Then
+    If CargarPaletsConfeccionados(vSql, vMens) Then
         If RepartoAlbaranes(vMens) Then
             ProcesoCarga = True
             conn.CommitTrans
@@ -3852,7 +3919,7 @@ eRepartoAlbaranes:
 End Function
 
 
-Private Function CargarPaletsConfeccionados(vSQL As String, vMens As String) As Boolean
+Private Function CargarPaletsConfeccionados(vSql As String, vMens As String) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
@@ -3886,7 +3953,7 @@ Dim vCodigo As Long
     vCodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open vSql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         NroPalet = NroPalet + 1
@@ -3954,7 +4021,7 @@ Private Sub FrameCreacionPaletsVisible(visible As Boolean, ByRef H As Integer, B
     End If
 End Sub
 
-Private Function CargarTemporalAlbaranes(vTabla As String, vWhere As String) As Boolean
+Private Function CargarTemporalAlbaranes(vtabla As String, vWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 Dim Sql1 As String
@@ -3986,7 +4053,7 @@ Dim CadValues As String
     Sql2 = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql2
 
-    Sql = "select albaran_variedad.numalbar, albaran_palets.numpalet, palets.fechaini, trzpalets.* from " & vTabla
+    Sql = "select albaran_variedad.numalbar, albaran_palets.numpalet, palets.fechaini, trzpalets.* from " & vtabla
     If vWhere <> "" Then Sql = Sql & " where " & vWhere
     Sql = Sql & " order by albaran_variedad.numalbar "
                                             'numpalet, fecha,  codsocio,codcampo, codvarie, nronota, numalbar
