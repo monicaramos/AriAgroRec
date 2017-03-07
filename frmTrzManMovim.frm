@@ -8,25 +8,125 @@ Begin VB.Form frmTrzManMovim
    ClientHeight    =   5925
    ClientLeft      =   45
    ClientTop       =   330
-   ClientWidth     =   9675
+   ClientWidth     =   15225
    Icon            =   "frmTrzManMovim.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5925
-   ScaleWidth      =   9675
+   ScaleWidth      =   15225
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkAux 
+      BackColor       =   &H80000005&
+      Height          =   255
+      Index           =   0
+      Left            =   12420
+      TabIndex        =   24
+      Tag             =   "Es Merma|N|N|0|1|trzmovim|esmerma|||"
+      Top             =   4620
+      Visible         =   0   'False
+      Width           =   255
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   290
+      Index           =   7
+      Left            =   5460
+      MaxLength       =   6
+      TabIndex        =   4
+      Tag             =   "Cliente|N|S|0|999999|trzmovim|codclien|000000||"
+      Top             =   4560
+      Width           =   540
+   End
+   Begin VB.CommandButton btnBuscar 
+      Appearance      =   0  'Flat
+      Caption         =   "+"
+      Height          =   300
+      Index           =   0
+      Left            =   6060
+      MaskColor       =   &H00000000&
+      TabIndex        =   23
+      ToolTipText     =   "Buscar cliente"
+      Top             =   4530
+      Visible         =   0   'False
+      Width           =   195
+   End
+   Begin VB.Frame Frame2 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
+      Height          =   645
+      Left            =   8490
+      TabIndex        =   20
+      Top             =   5100
+      Width           =   3885
+      Begin VB.TextBox txtAux2 
+         Alignment       =   1  'Right Justify
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000018&
+         BorderStyle     =   0  'None
+         Enabled         =   0   'False
+         Height          =   270
+         Index           =   4
+         Left            =   1860
+         TabIndex        =   21
+         Top             =   240
+         Width           =   1830
+      End
+      Begin VB.Label Label1 
+         Caption         =   "KILOS TOTALES: "
+         ForeColor       =   &H00000000&
+         Height          =   225
+         Left            =   270
+         TabIndex        =   22
+         Top             =   240
+         Width           =   1815
+      End
+   End
+   Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      Enabled         =   0   'False
+      Height          =   285
+      Index           =   0
+      Left            =   6390
+      TabIndex        =   19
+      Top             =   4560
+      Visible         =   0   'False
+      Width           =   1815
+   End
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      Height          =   290
+      Index           =   6
+      Left            =   1020
+      MaxLength       =   13
+      TabIndex        =   1
+      Tag             =   "Numero Traza|T|S|||trzmovim|nrotraza|||"
+      Top             =   4500
+      Width           =   945
+   End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       Height          =   290
       Index           =   5
-      Left            =   7290
+      Left            =   11340
       MaxLength       =   8
-      TabIndex        =   16
+      TabIndex        =   8
       Tag             =   "Kilos|N|N|||trzmovim|kilos|###,##00||"
-      Top             =   4560
+      Top             =   4620
       Width           =   945
    End
    Begin VB.CommandButton btnBuscar 
@@ -34,11 +134,11 @@ Begin VB.Form frmTrzManMovim
       Caption         =   "+"
       Height          =   300
       Index           =   2
-      Left            =   5040
+      Left            =   9090
       MaskColor       =   &H00000000&
-      TabIndex        =   15
+      TabIndex        =   18
       ToolTipText     =   "Buscar variedad"
-      Top             =   4530
+      Top             =   4590
       Visible         =   0   'False
       Width           =   195
    End
@@ -49,9 +149,9 @@ Begin VB.Form frmTrzManMovim
       Enabled         =   0   'False
       Height          =   285
       Index           =   2
-      Left            =   5310
-      TabIndex        =   14
-      Top             =   4560
+      Left            =   9360
+      TabIndex        =   17
+      Top             =   4620
       Visible         =   0   'False
       Width           =   1815
    End
@@ -62,7 +162,7 @@ Begin VB.Form frmTrzManMovim
       Index           =   1
       Left            =   4080
       MaskColor       =   &H00000000&
-      TabIndex        =   13
+      TabIndex        =   16
       ToolTipText     =   "Buscar fecha"
       Top             =   4560
       Visible         =   0   'False
@@ -73,11 +173,11 @@ Begin VB.Form frmTrzManMovim
       BorderStyle     =   0  'None
       Height          =   290
       Index           =   3
-      Left            =   1950
+      Left            =   4440
       MaxLength       =   13
       TabIndex        =   3
-      Tag             =   "Numero Albaran|N|N|||trzmovim|numalbar|000000||"
-      Top             =   4530
+      Tag             =   "Numero Albaran|N|S|||trzmovim|numalbar|000000||"
+      Top             =   4560
       Width           =   945
    End
    Begin VB.TextBox txtAux 
@@ -85,19 +185,19 @@ Begin VB.Form frmTrzManMovim
       BorderStyle     =   0  'None
       Height          =   290
       Index           =   2
-      Left            =   4410
-      MaxLength       =   4
-      TabIndex        =   2
+      Left            =   8490
+      MaxLength       =   6
+      TabIndex        =   7
       Tag             =   "Variedad|N|N|0|999999|trzmovim|codvarie|000000|S|"
-      Top             =   4560
+      Top             =   4620
       Width           =   540
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
       Height          =   375
-      Left            =   7290
-      TabIndex        =   5
-      Top             =   5220
+      Left            =   12870
+      TabIndex        =   6
+      Top             =   5160
       Visible         =   0   'False
       Width           =   1035
    End
@@ -105,9 +205,9 @@ Begin VB.Form frmTrzManMovim
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
       Height          =   375
-      Left            =   8490
-      TabIndex        =   6
-      Top             =   5220
+      Left            =   14010
+      TabIndex        =   9
+      Top             =   5160
       Visible         =   0   'False
       Width           =   1095
    End
@@ -118,7 +218,7 @@ Begin VB.Form frmTrzManMovim
       Index           =   1
       Left            =   3060
       MaxLength       =   16
-      TabIndex        =   1
+      TabIndex        =   2
       Tag             =   "Fecha|F|N|||trzmovim|fecha|dd/mm/yyyy||"
       Top             =   4530
       Width           =   900
@@ -129,21 +229,21 @@ Begin VB.Form frmTrzManMovim
       BorderStyle     =   0  'None
       Height          =   290
       Index           =   0
-      Left            =   990
+      Left            =   150
       MaxLength       =   6
       TabIndex        =   0
       Tag             =   "Nro Palet|N|N|0|999999|trzmovim|numpalet|000000||"
-      Top             =   4530
+      Top             =   4500
       Width           =   800
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmTrzManMovim.frx":000C
       Height          =   4410
       Left            =   120
-      TabIndex        =   9
+      TabIndex        =   12
       Top             =   540
-      Width           =   9450
-      _ExtentX        =   16669
+      Width           =   14950
+      _ExtentX        =   26379
       _ExtentY        =   7779
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -209,9 +309,9 @@ Begin VB.Form frmTrzManMovim
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       Height          =   375
-      Left            =   8490
-      TabIndex        =   12
-      Top             =   5220
+      Left            =   14010
+      TabIndex        =   15
+      Top             =   5160
       Visible         =   0   'False
       Width           =   1095
    End
@@ -219,7 +319,7 @@ Begin VB.Form frmTrzManMovim
       Height          =   555
       Index           =   1
       Left            =   120
-      TabIndex        =   7
+      TabIndex        =   10
       Top             =   5190
       Width           =   2385
       Begin VB.Label lblIndicador 
@@ -236,7 +336,7 @@ Begin VB.Form frmTrzManMovim
          EndProperty
          Height          =   255
          Left            =   40
-         TabIndex        =   8
+         TabIndex        =   11
          Top             =   240
          Width           =   2295
       End
@@ -292,10 +392,10 @@ Begin VB.Form frmTrzManMovim
       Align           =   1  'Align Top
       Height          =   360
       Left            =   0
-      TabIndex        =   10
+      TabIndex        =   13
       Top             =   0
-      Width           =   9675
-      _ExtentX        =   17066
+      Width           =   15225
+      _ExtentX        =   26855
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -340,7 +440,8 @@ Begin VB.Form frmTrzManMovim
             Style           =   3
          EndProperty
          BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
+            Object.ToolTipText     =   "Kilos Merma"
+            Object.Tag             =   "2"
          EndProperty
          BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
             Enabled         =   0   'False
@@ -356,7 +457,7 @@ Begin VB.Form frmTrzManMovim
          Caption         =   "Vista previa"
          Height          =   195
          Left            =   5040
-         TabIndex        =   11
+         TabIndex        =   14
          Top             =   90
          Visible         =   0   'False
          Width           =   1215
@@ -369,7 +470,7 @@ Begin VB.Form frmTrzManMovim
       Index           =   4
       Left            =   210
       MaxLength       =   10
-      TabIndex        =   4
+      TabIndex        =   5
       Tag             =   "Codigo|N|N|||trzmovim|codigo|00000000|S|"
       Top             =   4560
       Width           =   945
@@ -405,6 +506,11 @@ Begin VB.Form frmTrzManMovim
       Begin VB.Menu mnBarra2 
          Caption         =   "-"
       End
+      Begin VB.Menu mnKilosMerma 
+         Caption         =   "Kilos Mermas"
+         HelpContextID   =   2
+         Shortcut        =   ^K
+      End
       Begin VB.Menu mnImprimir 
          Caption         =   "&Imprimir"
          Enabled         =   0   'False
@@ -416,6 +522,21 @@ Begin VB.Form frmTrzManMovim
       Begin VB.Menu mnSalir 
          Caption         =   "&Salir"
          Shortcut        =   ^S
+      End
+   End
+   Begin VB.Menu mnFiltro 
+      Caption         =   "Filtro"
+      Begin VB.Menu mnFiltro1 
+         Caption         =   "Año Actual"
+      End
+      Begin VB.Menu mnFiltro2 
+         Caption         =   "Año Actual y Anterior"
+      End
+      Begin VB.Menu mnFiltro3 
+         Caption         =   "-"
+      End
+      Begin VB.Menu mnFiltro4 
+         Caption         =   "Sin Filtro"
       End
    End
 End
@@ -476,6 +597,10 @@ Private WithEvents frmVar As frmManVariedad 'variedades
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
+Private WithEvents frmCli As frmBasico 'Basico
+Attribute frmCli.VB_VarHelpID = -1
+
+Private BuscaChekc As String
 
 
 Dim Modo As Byte
@@ -491,10 +616,15 @@ Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim I As Integer
 
+Dim CadenaFiltro As String
+Dim Filtro As Byte
+
 Private Sub PonerModo(vModo)
 Dim B As Boolean
 
     Modo = vModo
+    
+    BuscaChekc = ""
     
     B = (Modo = 2)
     If B Then
@@ -507,9 +637,12 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     txtAux2(2).visible = Not B
+    txtAux2(0).visible = Not B
+    btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
     btnBuscar(2).visible = Not B
-    
+    chkAux(0).visible = Not B
+
     cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
@@ -547,6 +680,11 @@ Dim B As Boolean
     'Eliminar
     Toolbar1.Buttons(8).Enabled = B
     Me.mnEliminar.Enabled = B
+    
+    'Boton de Merma
+    Toolbar1.Buttons(10).Enabled = B
+    Me.mnKilosMerma.Enabled = B
+    
     'Imprimir
     Toolbar1.Buttons(11).Enabled = False
     Me.mnImprimir.Enabled = False
@@ -579,6 +717,7 @@ Private Sub BotonAnyadir()
         txtAux(I).Text = ""
     Next I
     txtAux2(2).Text = ""
+    txtAux2(0).Text = ""
     txtAux(4).Text = NumF
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -600,9 +739,85 @@ Private Sub BotonBuscar()
     For I = 0 To txtAux.Count - 1
         txtAux(I).Text = ""
     Next I
+    Me.chkAux(0).Value = 0
+    
+    Me.txtAux2(0).Text = ""
+    Me.txtAux2(2).Text = ""
+    
     LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
+
+
+Private Sub BotonMermar()
+Dim SQL As String
+Dim NumF As Long
+Dim Result As String
+Dim Totales As Long
+Dim resto As Long
+
+    On Error GoTo eBotonMermar
+
+
+   
+    
+    If ComprobarCero(DBLet(Me.adodc1.Recordset!numalbar, "N")) <> 0 Then
+        MsgBox "Este movimiento está asociado a un albarán.", vbExclamation
+        Exit Sub
+    End If
+    
+    If DBLet(Me.adodc1.Recordset!esmerma) = 1 Then
+        MsgBox "Este movimiento es de merma. No se puede realizar esta operación.", vbExclamation
+        Exit Sub
+    End If
+    
+    Result = InputBox("Kilos merma:", "Merma")
+    If ComprobarCero(Result) > 0 Then
+        
+        If CLng(DBLet(Me.adodc1.Recordset!Kilos)) < CLng(ComprobarCero(Result)) Then
+            MsgBox "Valor de kilos de mermados superior a los iniciales.", vbExclamation
+            Exit Sub
+        End If
+        
+        Screen.MousePointer = vbHourglass
+        
+        conn.BeginTrans
+    
+        Totales = DBLet(Me.adodc1.Recordset!Kilos, "N")
+        resto = Totales - ComprobarCero(Result)
+        'merma
+        SQL = "update trzmovim set kilos = " & DBSet(Result, "N") & ", esmerma = 1 where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
+        conn.Execute SQL
+        
+        'resto
+        NumF = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
+        NumF = NumF + 1
+        
+        SQL = "insert into trzmovim (codigo,numpalet,fecha,codvarie,kilos) select " & NumF & ",numpalet,fecha,codvarie," & DBSet(resto, "N")
+        SQL = SQL & " from trzmovim where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
+        
+        conn.Execute SQL
+        
+        conn.CommitTrans
+        
+        CargaGrid CadB
+        
+        
+    End If
+    
+    Screen.MousePointer = vbDefault
+    Exit Sub
+    
+eBotonMermar:
+    Screen.MousePointer = vbDefault
+    conn.RollbackTrans
+    MuestraError Err.Number, "Inserción de Merma", Err.Description
+End Sub
+
+
+
+
+
 
 Private Sub BotonModificar()
     Dim anc As Single
@@ -625,11 +840,14 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(4).Text = DataGrid1.Columns(0).Text
     txtAux(0).Text = DataGrid1.Columns(1).Text
-    txtAux(3).Text = DataGrid1.Columns(2).Text
+    txtAux(6).Text = DataGrid1.Columns(2).Text
     txtAux(1).Text = DataGrid1.Columns(3).Text
-    txtAux(2).Text = DataGrid1.Columns(4).Text
-    txtAux2(2).Text = DataGrid1.Columns(5).Text
-    txtAux(5).Text = DataGrid1.Columns(6).Text
+    txtAux(3).Text = DataGrid1.Columns(4).Text
+    txtAux(7).Text = DataGrid1.Columns(5).Text
+    txtAux2(0).Text = DataGrid1.Columns(6).Text
+    txtAux(2).Text = DataGrid1.Columns(7).Text
+    txtAux2(2).Text = DataGrid1.Columns(8).Text
+    txtAux(5).Text = DataGrid1.Columns(9).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
 '    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
@@ -651,8 +869,11 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
         If I <> 4 Then txtAux(I).Top = alto
     Next I
     txtAux2(2).Top = alto
+    txtAux2(0).Top = alto
+    btnBuscar(0).Top = alto - 15
     btnBuscar(1).Top = alto - 15
     btnBuscar(2).Top = alto - 15
+    Me.chkAux(0).Top = alto
 End Sub
 
 Private Sub BotonEliminar()
@@ -674,7 +895,7 @@ Dim temp As Boolean
     SQL = "¿Seguro que desea eliminar el Movimiento?"
     SQL = SQL & vbCrLf & "Codigo:    " & adodc1.Recordset.Fields(0)
     SQL = SQL & vbCrLf & "Palet:    " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Variedad:   " & adodc1.Recordset.Fields(4) & " - " & adodc1.Recordset.Fields(5)
+    SQL = SQL & vbCrLf & "Variedad:   " & adodc1.Recordset.Fields(7) & " - " & adodc1.Recordset.Fields(8)
     SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(3)
     
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
@@ -764,6 +985,12 @@ Dim obj As Object
             frmVar.Show vbModal
             Set frmVar = Nothing
             PonerFoco txtAux(Indice)
+        
+        Case 0 ' cliente
+            Set frmCli = New frmBasico
+            AyudaClienteCom frmCli, txtAux(7)
+            Set frmCli = Nothing
+            PonerFoco txtAux(7)
     
     End Select
     
@@ -771,12 +998,19 @@ Dim obj As Object
 End Sub
 
 
+Private Sub chkAux_Click(Index As Integer)
+    If Modo = 1 Then
+        'Buscqueda
+        If InStr(1, BuscaChekc, "chkAux(" & Index & ")") = 0 Then BuscaChekc = BuscaChekc & "chkAux(" & Index & ")|"
+    End If
+End Sub
+
 Private Sub cmdAceptar_Click()
     Dim I As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            CadB = ObtenerBusqueda(Me)
+            CadB = ObtenerBusqueda(Me, BuscaChekc)
             If CadB <> "" Then
                 CargaGrid CadB
                 PonerModo 2
@@ -917,6 +1151,7 @@ Private Sub Form_Load()
         .Buttons(7).Image = 4   'Modificar
         .Buttons(8).Image = 5   'Borrar
         'el 9 i el 10 son separadors
+        .Buttons(10).Image = 28   ' kilos de merma
         .Buttons(11).Image = 10  'imprimir
         .Buttons(12).Image = 11  'Salir
     End With
@@ -926,9 +1161,9 @@ Private Sub Form_Load()
     
     
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "SELECT trzmovim.codigo, trzmovim.numpalet, trzmovim.numalbar, trzmovim.fecha, trzmovim.codvarie, variedades.nomvarie, "
-    CadenaConsulta = CadenaConsulta & "trzmovim.kilos "
-    CadenaConsulta = CadenaConsulta & " FROM trzmovim, variedades "
+    CadenaConsulta = "SELECT trzmovim.codigo, trzmovim.numpalet, trzmovim.nrotraza, trzmovim.fecha, trzmovim.numalbar, trzmovim.codclien, clientes.nomclien, trzmovim.codvarie, variedades.nomvarie, "
+    CadenaConsulta = CadenaConsulta & "trzmovim.kilos, esmerma, IF(esmerma=1,'*','') as desmerma "
+    CadenaConsulta = CadenaConsulta & " FROM  variedades, trzmovim left join clientes on trzmovim.codclien = clientes.codclien  "
     CadenaConsulta = CadenaConsulta & " WHERE trzmovim.codvarie = variedades.codvarie "
     '************************************************************************
     
@@ -959,6 +1194,13 @@ Private Sub frmC_Selec(vFecha As Date)
     txtAux(1).Text = Format(vFecha, "dd/mm/yyyy")  '<===
     ' ********************************************
 End Sub
+
+Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
+'Form Mantenimiento de cliente
+    txtAux(7).Text = RecuperaValor(CadenaSeleccion, 1) 'Codigo de clientes
+    txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'Nombre
+End Sub
+
 Private Sub mnBuscar_Click()
     BotonBuscar
 End Sub
@@ -967,8 +1209,39 @@ Private Sub mnEliminar_Click()
     BotonEliminar
 End Sub
 
+Private Sub mnFiltro1_Click()
+    PonerFiltro 1
+End Sub
+
+Private Sub mnFiltro2_Click()
+    PonerFiltro 2
+End Sub
+
+Private Sub mnFiltro3_Click()
+    PonerFiltro 3
+End Sub
+
+Private Sub PonerFiltro(NumFilt As Byte)
+    Filtro = NumFilt
+    Me.mnFiltro1.Checked = (NumFilt = 1)
+    Me.mnFiltro2.Checked = (NumFilt = 2)
+    Me.mnFiltro3.Checked = (NumFilt = 3)
+End Sub
+
 Private Sub mnImprimir_Click()
     printNou
+End Sub
+
+Private Sub mnKilosMerma_Click()
+    If adodc1.Recordset.EOF Then Exit Sub
+    
+    If adodc1.Recordset.RecordCount < 1 Then Exit Sub
+    
+    
+    
+    'Preparamos para modificar
+    '-------------------------
+    If BLOQUEADesdeFormulario2(Me, adodc1, 1) Then BotonMermar
 End Sub
 
 Private Sub mnModificar_Click()
@@ -1013,6 +1286,9 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
                 mnModificar_Click
         Case 8
                 mnEliminar_Click
+        Case 10
+                'MsgBox "Imprimir...under construction"
+                mnKilosMerma_Click
         Case 11
                 'MsgBox "Imprimir...under construction"
                 mnImprimir_Click
@@ -1026,11 +1302,15 @@ Private Sub CargaGrid(Optional vSQL As String)
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
+    CadenaFiltro = AnyadeCadenaFiltro()
+'    adodc1.ConnectionString = Conn
+    
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " and " & CadenaFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        SQL = CadenaConsulta & " and " & CadenaFiltro & "  "
     End If
+
     '********************* canviar el ORDER BY *********************++
     SQL = SQL & " ORDER BY trzmovim.codigo "
     '**************************************************************++
@@ -1039,19 +1319,23 @@ Private Sub CargaGrid(Optional vSQL As String)
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "N|txtAux(0)|T|Codigo|1200|;"
-    tots = tots & "S|txtAux(0)|T|Palet|1250|;S|txtAux(3)|T|Albaran|1200|;S|txtAux(1)|T|Fecha|1200|;S|btnBuscar(1)|B|||;"
-    tots = tots & "S|txtAux(2)|T|Variedad|1000|;S|btnBuscar(2)|B|||;S|txtAux2(2)|T|Nombre Variedad|2500|;"
-    tots = tots & "S|txtAux(5)|T|Kilos|1500|;"
+    tots = tots & "S|txtAux(0)|T|Palet|1050|;S|txtAux(6)|T|Nro.Traza|2000|;S|txtAux(1)|T|Fecha|1200|;S|btnBuscar(1)|B|||;S|txtAux(3)|T|Albarán|1000|;S|txtAux(7)|T|Codigo|1000|;S|btnBuscar(0)|B|||;S|txtAux2(0)|T|Cliente|2700|;"
+    tots = tots & "S|txtAux(2)|T|Código|1000|;S|btnBuscar(2)|B|||;S|txtAux2(2)|T|Nombre Variedad|2500|;"
+    tots = tots & "S|txtAux(5)|T|Kilos|1500|;N||||0|;S|chkAux(0)|CB|Me|360|;"
     
     arregla tots, DataGrid1, Me
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgLeft
-    DataGrid1.Columns(2).Alignment = dbgRight
+    DataGrid1.Columns(1).Alignment = dbgRight
     DataGrid1.Columns(4).Alignment = dbgLeft
-    DataGrid1.Columns(6).Alignment = dbgRight
-'    DataGrid1.Columns(7).Alignment = dbgLeft
+    DataGrid1.Columns(5).Alignment = dbgLeft
+    DataGrid1.Columns(6).Alignment = dbgLeft
+    DataGrid1.Columns(7).Alignment = dbgLeft
 '   DataGrid1.Columns(2).Alignment = dbgRight
+
+    CalcularTotales SQL
+
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
@@ -1212,4 +1496,90 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 
+Private Sub CalcularTotales(cadena As String)
+Dim Kilos  As Currency
+Dim Compleme As Currency
+Dim Penaliza As Currency
+
+Dim Rs As ADODB.Recordset
+Dim SQL As String
+
+    On Error Resume Next
+    
+    SQL = "select sum(kilos) kilos from (" & cadena & ") aaaaa"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    txtAux2(4).Text = ""
+    
+    If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
+    
+    If Not Rs.EOF Then
+        If Rs.Fields(0).Value <> 0 Then Kilos = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
+    
+        txtAux2(4).Text = Format(Kilos, "###,###,###,##0")
+    End If
+    Rs.Close
+    Set Rs = Nothing
+    
+    DoEvents
+    
+End Sub
+
+Private Sub LeerFiltro(Leer As Boolean)
+Dim SQL As String
+
+    SQL = App.Path & "\filtronom.dat"
+    If Leer Then
+        Filtro = 3
+        If Dir(SQL) <> "" Then
+            AbrirFicheroFiltro True, SQL
+            If IsNumeric(Trim(SQL)) Then Filtro = CByte(SQL)
+        End If
+    Else
+        AbrirFicheroFiltro False, SQL
+    End If
+End Sub
+
+
+Private Sub AbrirFicheroFiltro(Leer As Boolean, Fichero As String)
+Dim SQL As String
+Dim I As Integer
+
+On Error GoTo EAbrir
+    I = FreeFile
+    If Leer Then
+        Open Fichero For Input As #I
+        Fichero = "3"
+        Line Input #I, Fichero
+    Else
+        Open Fichero For Output As #I
+        Print #I, Filtro
+    End If
+    Close #I
+    Exit Sub
+EAbrir:
+    Err.Clear
+End Sub
+
+Private Function AnyadeCadenaFiltro() As String
+Dim Aux As String
+'Filtro = 1: año actual
+'Filtro = 2: año actual y anterior
+'Filtro = 0: sin filtro
+    Aux = ""
+    If Filtro < 3 Then
+        I = Year(Now)
+        If Filtro = 1 Then
+            'Año actual
+            Aux = " year(fecha) >= " & I
+        Else
+            Aux = " year(fecha) >=" & I - 1
+        End If
+    Else
+        Aux = "(1=1)"
+    End If  'filtro=0
+    AnyadeCadenaFiltro = Aux
+End Function
 

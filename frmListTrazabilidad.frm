@@ -1871,7 +1871,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -1958,7 +1958,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -2057,7 +2057,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -2138,7 +2138,7 @@ Dim devuelve As String
 Dim Tipos As String
 Dim nTabla As String
 
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -2166,9 +2166,9 @@ Dim vSql As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHClase= """) Then Exit Sub
     End If
     
-    vSql = ""
-    If txtCodigo(28).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(28).Text, "N")
-    If txtCodigo(29).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(29).Text, "N")
+    vSQL = ""
+    If txtCodigo(28).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(28).Text, "N")
+    If txtCodigo(29).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(29).Text, "N")
     
      'D/H fecha
      cDesde = Trim(txtCodigo(2).Text)
@@ -2191,7 +2191,7 @@ Dim vSql As String
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 16
-    frmMens.cadWHERE = vSql
+    frmMens.cadWHERE = vSQL
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -2320,7 +2320,7 @@ Dim FecFac As Date
 Dim B As Boolean
 Dim TipoPrec As Byte
 
-Dim vSql As String
+Dim vSQL As String
 
     InicializarVbles
     
@@ -2354,9 +2354,9 @@ Dim vSql As String
             If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHClase=""") Then Exit Sub
         End If
         
-        vSql = ""
-        If txtCodigo(0).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(0).Text, "N")
-        If txtCodigo(1).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(1).Text, "N")
+        vSQL = ""
+        If txtCodigo(0).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(0).Text, "N")
+        If txtCodigo(1).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(1).Text, "N")
         
         
         'SECCION
@@ -2389,7 +2389,7 @@ Dim vSql As String
         Set frmMens = New frmMensajes
         
         frmMens.OpcionMensaje = 16
-        frmMens.cadWHERE = vSql
+        frmMens.cadWHERE = vSQL
         frmMens.Show vbModal
         
         Set frmMens = Nothing
@@ -3732,7 +3732,6 @@ Dim Sql As String
             Exit Sub
         End If
         
-        
         If ProcesoCarga(Sql) Then
             MsgBox "Proceso realizado correctamente.", vbExclamation
         End If
@@ -3753,15 +3752,24 @@ Dim Sql As String
     
     Sql = "select count(*) from trzmovim where fecha = " & DBSet(txtCodigo(16).Text, "F")
     If DevuelveValor(Sql) <> 0 Then
-        MsgBox "Hay restos de palets con esa fecha. Revise.", vbExclamation
+        MsgBox "Hay movimientos de palets con esa fecha. Revise.", vbExclamation
         FechaVolcadoCargada = True
     End If
     
 
 End Function
 
-Private Function ComprobarExistenciasConAlbaranes(vSql As String) As Boolean
+Private Function ComprobarExistenciasConAlbaranes(vSQL As String) As Boolean
 Dim Sql As String
+Dim KilosVolcados As Long
+Dim CadVariedades As String
+Dim Rs As ADODB.Recordset
+
+    On Error GoTo eComprobarExistenciasConAlbaranes
+
+
+    ComprobarExistenciasConAlbaranes = False
+
 
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
@@ -3779,20 +3787,54 @@ Dim Sql As String
     Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
     conn.Execute Sql
     
+    ' kilos volcados esa fecha + kilos que quedan
     Sql = "insert into tmpinformes2 (codusu, codigo1, importe1) "
     Sql = Sql & " select " & vUsu.Codigo & ", aaaa.codvarie, sum(aaaa.kilos) from  "
-    Sql = Sql & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(txtCodigo(16).Text, "F")
+    Sql = Sql & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet = trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(txtCodigo(16).Text, "F")
     Sql = Sql & " group by 1 "
     Sql = Sql & " union "
-    Sql = Sql & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar = 0 "
+    Sql = Sql & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar is null and esmerma = 0"
     Sql = Sql & " group by 1) aaaa "
-    Sql = Sql & " group by 1,2 "
+    Sql = Sql & " group by 1, 2 "
     conn.Execute Sql
 
 
+    CadVariedades = ""
+
+    ' montamos un cursor con las variedades que tengan mas kilos salidos que volcados
+    Sql = "select tmpinformes.* from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " order by codigo1"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+
+    While Not Rs.EOF
+        KilosVolcados = DevuelveValor("select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs!Codigo1, "N"))
+        
+        If KilosVolcados < DBLet(Rs!importe1) Then
+            CadVariedades = CadVariedades & DBLet(Rs!Codigo1) & ","
+        End If
+    
+        Rs.MoveNext
+    Wend
+    
+    If CadVariedades <> "" Then
+        CadVariedades = Mid(CadVariedades, 1, Len(CadVariedades) - 1)
+        MsgBox "No hay suficientes kilos de las siguientes variedades: " & CadVariedades, vbExclamation
+        ComprobarExistenciasConAlbaranes = False
+        Exit Function
+    End If
+    
+    Set Rs = Nothing
+
+    ComprobarExistenciasConAlbaranes = False
+    Exit Function
+
+eComprobarExistenciasConAlbaranes:
+    MuestraError Err.Number, "Comprobar Existencias con Albaranes Salida", Err.Description
 End Function
 
-Private Function ProcesoCarga(vSql As String) As Boolean
+Private Function ProcesoCarga(vSQL As String) As Boolean
 Dim vMens As String
 
     On Error GoTo eProcesoCarga
@@ -3802,7 +3844,7 @@ Dim vMens As String
     conn.BeginTrans
     
     vMens = ""
-    If CargarPaletsConfeccionados(vSql, vMens) Then
+    If CargarPaletsConfeccionados(vSQL, vMens) Then
         If RepartoAlbaranes(vMens) Then
             ProcesoCarga = True
             conn.CommitTrans
@@ -3827,7 +3869,7 @@ Dim Rs2 As ADODB.Recordset
 Dim Salir As Boolean
 Dim KilosVar As Long
 Dim numlinea As Integer
-Dim resto As Long
+Dim Resto As Long
 Dim vCodigo As Long
 
     On Error GoTo eRepartoAlbaranes
@@ -3835,23 +3877,23 @@ Dim vCodigo As Long
     RepartoAlbaranes = False
 
     ' para todos los albaranes que han salido repartimos
-    Sql = "select albaran.numalbar, codvarie, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    Sql = "select albaran.numalbar, albaran.codclien, codvarie, nrotraza, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
     Sql = Sql & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
-    Sql = Sql & " group by 1,2 "
-    Sql = Sql & " order by 1,2 "
+    Sql = Sql & " group by 1,2,3,4  "
+    Sql = Sql & " order by 1,2,3,4 "
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Sql2 = "select sum(kilos) from trzmovim where numalbar = 0 and codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql2 = "select sum(kilos) from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
         
         KilosVar = DBLet(Rs!PesoNeto)
         If DevuelveValor(Sql2) < DBLet(Rs!PesoNeto) Then
             MsgBox "No hay suficiente existencias de la variedad " & DBLet(Rs!codvarie), vbExclamation
             Exit Function
         Else
-            Sql2 = "select * from trzmovim where numalbar = 0 and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql2 = "select * from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
             Sql2 = Sql2 & " order by fecha desc "
             
             Set Rs2 = New ADODB.Recordset
@@ -3869,32 +3911,38 @@ Dim vCodigo As Long
                 
                 conn.Execute Sql
             
-                If DBLet(Rs2!Kilos) <= KilosVar Then
+                If DBLet(Rs2!Kilos) < KilosVar Then
                     
                     KilosVar = KilosVar - DBLet(Rs2!Kilos)
                     
                     Sql = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
+                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
                     Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
                     
                     conn.Execute Sql
                 Else
-                    resto = DBLet(Rs2!Kilos) - KilosVar
+                    Resto = DBLet(Rs2!Kilos) - KilosVar
                 
                     Sql = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
                     Sql = Sql & ", kilos =  " & DBSet(KilosVar, "N")
+                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
                     Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
                 
                     conn.Execute Sql
                     
                     ' insertamos una linea con la diferencia que nos queda
-                    vCodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
-                    vCodigo = vCodigo + 1
-                    
-                    Sql = "insert into trzmovim (codigo, numpalet, numalbar, fecha, codvarie, kilos) values "
-                    Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & ",0," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
-                    Sql = Sql & DBSet(resto, "N") & ")"
-                    
-                    conn.Execute Sql
+                    If Resto <> 0 Then
+                        vCodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
+                        vCodigo = vCodigo + 1
+                        
+                        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+                        Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+                        Sql = Sql & DBSet(Resto, "N") & ")"
+                        
+                        conn.Execute Sql
+                    End If
                     
                     Salir = True
                 End If
@@ -3919,7 +3967,7 @@ eRepartoAlbaranes:
 End Function
 
 
-Private Function CargarPaletsConfeccionados(vSql As String, vMens As String) As Boolean
+Private Function CargarPaletsConfeccionados(vSQL As String, vMens As String) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
@@ -3953,7 +4001,7 @@ Dim vCodigo As Long
     vCodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open vSql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         NroPalet = NroPalet + 1
@@ -3990,8 +4038,8 @@ Dim vCodigo As Long
         ' metemos en la tabla de movimientos de traza
         vCodigo = vCodigo + 1
         
-        Sql = "insert into trzmovim (codigo, numpalet, numalbar, fecha, codvarie, kilos) values "
-        Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & ",0," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!codvarie, "N") & ","
+        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+        Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!codvarie, "N") & ","
         Sql = Sql & DBSet(RS1!Numkilos, "N") & ")"
         
         conn.Execute Sql
