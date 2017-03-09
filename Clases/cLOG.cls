@@ -32,7 +32,7 @@ Option Explicit
 '       13.- Modificar factura varias
 '       14.- Modificacion registros BD
 '       15.- Insertamos los albaranes en las facturas de terceros
-
+'       16.- Eliminar volcado de traza
 
 Public Function Insertar(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String) As Boolean
 Dim SQL As String
@@ -76,13 +76,14 @@ Public Function DevuelveAcciones(ByRef ListaAcciones As Collection) As Boolean
     ListaAcciones.Add "13|Modificar Fra.Varias|"
     ListaAcciones.Add "14|Modificar Registros BD|"
     ListaAcciones.Add "15|Insertar Albaranes|"
+    ListaAcciones.Add "16|Eliminar Volcado|"
     DevuelveAcciones = True
     Exit Function
 EDevuelveAcciones:
     MuestraError Err.Number
 End Function
 
-Public Sub InsertarCambiosRegistros(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String, Tabla As String, CP As String)
+Public Sub InsertarCambiosRegistros(Accion As Byte, ByRef ElUsuario As Usuario, Descripcion As String, tabla As String, CP As String)
 Dim SQL As String
 Dim Sql2 As String
 
@@ -98,7 +99,7 @@ Dim Sql2 As String
         Sql2 = Sql2 & "'" & DevNombreSQL(Descripcion) & "',1,"
     End If
     
-    Sql2 = Sql2 & DBSet(Tabla, "T") & ","
+    Sql2 = Sql2 & DBSet(tabla, "T") & ","
     Sql2 = Sql2 & DBSet(CP, "T") & ","
     Sql2 = Sql2 & DBSet(SQL, "T") & ","
     If ValorAnterior = ValorNulo Then

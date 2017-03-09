@@ -3645,6 +3645,34 @@ Dim Total As Integer
     
 End Function
 
+
+Public Function ExisteAlbaran(Albaran As String) As Boolean
+Dim SQL As String
+Dim Total As Integer
+
+    ExisteNota = False
+    
+    SQL = "select count(*) from rentradas where numalbar = " & DBSet(Albaran, "N")
+    Total = TotalRegistros(SQL)
+    If Total = 0 Then
+        SQL = "select count(*) from rclasifica where numalbar = " & DBSet(Albaran, "N")
+        Total = TotalRegistros(SQL)
+        If Total = 0 Then
+            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Nota, "N")
+            Total = TotalRegistros(SQL)
+            ExisteNota = (Total <> 0)
+        Else
+            ExisteNota = True
+        End If
+    Else
+        ExisteNota = True
+    End If
+    
+    
+End Function
+
+
+
 Public Sub AyudaFamiliasCom(frmCom As frmComercial, Optional CodActual As String)
     frmCom.CadenaTots = "S|txtAux(0)|T|Código|600|;S|txtAux(1)|T|Descripción|4000|;"
     frmCom.CadenaConsulta = "SELECT sfamia.codfamia, sfamia.nomfamia "

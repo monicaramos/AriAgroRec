@@ -527,16 +527,10 @@ Begin VB.Form frmTrzManMovim
    Begin VB.Menu mnFiltro 
       Caption         =   "Filtro"
       Begin VB.Menu mnFiltro1 
-         Caption         =   "Año Actual"
+         Caption         =   "Pendiente de Asignar"
       End
       Begin VB.Menu mnFiltro2 
-         Caption         =   "Año Actual y Anterior"
-      End
-      Begin VB.Menu mnFiltro3 
-         Caption         =   "-"
-      End
-      Begin VB.Menu mnFiltro4 
-         Caption         =   "Sin Filtro"
+         Caption         =   "Todo"
       End
    End
 End
@@ -1167,8 +1161,11 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " WHERE trzmovim.codvarie = variedades.codvarie "
     '************************************************************************
     
+    LeerFiltro True
+    PonerFiltro Filtro
+    
     CadB = ""
-    CargaGrid
+    CargaGrid "trzmovim.codigo is null"
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
 '        BotonAnyadir
@@ -1180,6 +1177,8 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
 '    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     If Modo = 4 Then TerminaBloquear
+    LeerFiltro False
+    
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1217,15 +1216,12 @@ Private Sub mnFiltro2_Click()
     PonerFiltro 2
 End Sub
 
-Private Sub mnFiltro3_Click()
-    PonerFiltro 3
-End Sub
 
 Private Sub PonerFiltro(NumFilt As Byte)
     Filtro = NumFilt
     Me.mnFiltro1.Checked = (NumFilt = 1)
     Me.mnFiltro2.Checked = (NumFilt = 2)
-    Me.mnFiltro3.Checked = (NumFilt = 3)
+'    Me.mnFiltro3.Checked = (NumFilt = 3)
 End Sub
 
 Private Sub mnImprimir_Click()
@@ -1530,7 +1526,7 @@ End Sub
 Private Sub LeerFiltro(Leer As Boolean)
 Dim SQL As String
 
-    SQL = App.Path & "\filtronom.dat"
+    SQL = App.Path & "\filtrotrz.dat"
     If Leer Then
         Filtro = 3
         If Dir(SQL) <> "" Then
@@ -1565,18 +1561,12 @@ End Sub
 
 Private Function AnyadeCadenaFiltro() As String
 Dim Aux As String
-'Filtro = 1: año actual
-'Filtro = 2: año actual y anterior
-'Filtro = 0: sin filtro
+'Filtro = 1: pendiente de asignar
+'Filtro = 2: sin filtro (todo)
     Aux = ""
-    If Filtro < 3 Then
-        I = Year(Now)
-        If Filtro = 1 Then
-            'Año actual
-            Aux = " year(fecha) >= " & I
-        Else
-            Aux = " year(fecha) >=" & I - 1
-        End If
+    If Filtro = 1 Then
+        'pendiente de asignar
+        Aux = " numalbar is null and esmerma = 0"
     Else
         Aux = "(1=1)"
     End If  'filtro=0

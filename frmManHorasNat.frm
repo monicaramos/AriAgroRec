@@ -21,7 +21,7 @@ Begin VB.Form frmManHorasNat
       Left            =   5400
       TabIndex        =   33
       Top             =   60
-      Width           =   3105
+      Width           =   2895
       Begin VB.ComboBox cboFiltro 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -39,7 +39,7 @@ Begin VB.Form frmManHorasNat
          Style           =   2  'Dropdown List
          TabIndex        =   34
          Top             =   210
-         Width           =   2865
+         Width           =   2655
       End
    End
    Begin VB.Frame FrameBotonGnral2 
@@ -973,7 +973,7 @@ Dim I As Integer
 Private BuscaChekc As String
 
 Private Filtro As Byte
-Dim CadFiltro As String
+Dim cadFiltro As String
 
 
 
@@ -1353,7 +1353,13 @@ End Sub
 
 Private Sub cboFiltro_Change()
     CargarSqlFiltro
+    
 End Sub
+
+Private Sub cboFiltro_KeyPress(KeyAscii As Integer)
+    If Modo = 2 Then CargaGrid CadB
+End Sub
+
 
 Private Sub chkAux_Click(Index As Integer)
     If Modo = 1 Then
@@ -1721,9 +1727,9 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargarSqlFiltro
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " and " & CadFiltro & " AND " & vSQL
+        SQL = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " and " & CadFiltro & "  "
+        SQL = CadenaConsulta & " and " & cadFiltro & "  "
     End If
     If Ascendente Then
         SQL = SQL & " ORDER BY  horas.fechahora, horas.codtraba "
@@ -2124,19 +2130,19 @@ Private Sub CargarSqlFiltro()
 
     Screen.MousePointer = vbHourglass
     
-    CadFiltro = ""
+    cadFiltro = ""
     
     I = Year(Now)
     
     Select Case Me.cboFiltro.ListIndex
         Case -1, 0 ' sin filtro
-            CadFiltro = "(1=1)"
+            cadFiltro = "(1=1)"
         
         Case 1 ' año actual
-            CadFiltro = " year(fechahora) >= " & I
+            cadFiltro = " year(fechahora) >= " & I
         
         Case 2 ' año actual y anterior
-            CadFiltro = " year(fechahora) >=" & I - 1
+            cadFiltro = " year(fechahora) >=" & I - 1
     
     End Select
     

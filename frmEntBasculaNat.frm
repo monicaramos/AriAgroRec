@@ -32,20 +32,20 @@ Begin VB.Form frmEntBasculaNat
       Height          =   300
       Index           =   0
       Left            =   10800
-      TabIndex        =   101
+      TabIndex        =   102
       Top             =   210
       Width           =   1605
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   5280
-      TabIndex        =   99
+      TabIndex        =   100
       Top             =   60
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   100
+         TabIndex        =   101
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -79,13 +79,13 @@ Begin VB.Form frmEntBasculaNat
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
       Left            =   3900
-      TabIndex        =   97
+      TabIndex        =   98
       Top             =   60
       Width           =   1305
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
-         TabIndex        =   98
+         TabIndex        =   99
          Top             =   180
          Width           =   1005
          _ExtentX        =   1773
@@ -109,13 +109,13 @@ Begin VB.Form frmEntBasculaNat
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   240
-      TabIndex        =   95
+      TabIndex        =   96
       Top             =   60
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   96
+         TabIndex        =   97
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -172,9 +172,29 @@ Begin VB.Form frmEntBasculaNat
       Height          =   765
       Index           =   0
       Left            =   240
-      TabIndex        =   27
+      TabIndex        =   28
       Top             =   870
       Width           =   13155
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   25
+         Left            =   11280
+         MaxLength       =   7
+         TabIndex        =   3
+         Tag             =   "Nº Albarán|N|S|1|9999999|rentradas|numalbar|0000000||"
+         Top             =   270
+         Width           =   1245
+      End
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -198,7 +218,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   4
          Left            =   6660
          MaxLength       =   20
-         TabIndex        =   47
+         TabIndex        =   48
          Tag             =   "Hora|FH|N|||rentradas|horaentr|yyyy-mm-dd hh:mm:ss||"
          Top             =   270
          Width           =   1200
@@ -235,12 +255,30 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1320
+         Left            =   1380
          MaxLength       =   7
          TabIndex        =   0
          Tag             =   "Numero de Nota|N|S|1|9999999|rentradas|numnotac|0000000|S|"
          Top             =   270
          Width           =   1245
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Nº Albarán"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   10140
+         TabIndex        =   104
+         Top             =   300
+         Width           =   1185
       End
       Begin VB.Label Label26 
          Caption         =   "Hora"
@@ -255,7 +293,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   6075
-         TabIndex        =   48
+         TabIndex        =   49
          Top             =   270
          Width           =   570
       End
@@ -281,7 +319,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   3405
-         TabIndex        =   46
+         TabIndex        =   47
          Top             =   270
          Width           =   630
       End
@@ -299,7 +337,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   270
          Width           =   1035
       End
@@ -308,7 +346,7 @@ Begin VB.Form frmEntBasculaNat
       Height          =   555
       Index           =   0
       Left            =   240
-      TabIndex        =   25
+      TabIndex        =   26
       Top             =   6855
       Width           =   2865
       Begin VB.Label lblIndicador 
@@ -325,7 +363,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   180
          Width           =   2655
       End
@@ -344,7 +382,7 @@ Begin VB.Form frmEntBasculaNat
       EndProperty
       Height          =   375
       Left            =   12330
-      TabIndex        =   22
+      TabIndex        =   23
       Top             =   6990
       Width           =   1035
    End
@@ -361,7 +399,7 @@ Begin VB.Form frmEntBasculaNat
       EndProperty
       Height          =   375
       Left            =   11070
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   6990
       Width           =   1035
    End
@@ -378,7 +416,7 @@ Begin VB.Form frmEntBasculaNat
       EndProperty
       Height          =   375
       Left            =   12330
-      TabIndex        =   29
+      TabIndex        =   30
       Top             =   6990
       Visible         =   0   'False
       Width           =   1035
@@ -386,7 +424,7 @@ Begin VB.Form frmEntBasculaNat
    Begin TabDlg.SSTab SSTab1 
       Height          =   5130
       Left            =   240
-      TabIndex        =   31
+      TabIndex        =   32
       Top             =   1695
       Width           =   13155
       _ExtentX        =   23204
@@ -509,7 +547,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   0
          Left            =   4710
          MaxLength       =   4
-         TabIndex        =   88
+         TabIndex        =   89
          Top             =   1320
          Width           =   885
       End
@@ -527,7 +565,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   2
          Left            =   3960
          Style           =   2  'Dropdown List
-         TabIndex        =   11
+         TabIndex        =   12
          Tag             =   "Transportado por|N|N|0|1|rentradas|transportadopor||N|"
          Top             =   4470
          Width           =   1620
@@ -547,7 +585,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   7
          Left            =   1380
          MaxLength       =   2
-         TabIndex        =   8
+         TabIndex        =   9
          Tag             =   "Código Tarifa|N|S|0|99|rentradas|codtarif|00||"
          Top             =   3720
          Width           =   555
@@ -567,7 +605,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   360
          Index           =   7
          Left            =   1995
-         TabIndex        =   57
+         TabIndex        =   58
          Top             =   3720
          Width           =   3570
       End
@@ -586,7 +624,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   6
          Left            =   1380
          MaxLength       =   10
-         TabIndex        =   7
+         TabIndex        =   8
          Tag             =   "Código Transporte|T|S|||rentradas|codtrans|||"
          Top             =   3330
          Width           =   1005
@@ -606,7 +644,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   360
          Index           =   6
          Left            =   2430
-         TabIndex        =   55
+         TabIndex        =   56
          Top             =   3330
          Width           =   3120
       End
@@ -625,7 +663,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   12
          Left            =   1380
          MaxLength       =   4
-         TabIndex        =   6
+         TabIndex        =   7
          Tag             =   "Código Capataz|N|S|0|9999|rentradas|codcapat|0000||"
          Top             =   2940
          Width           =   555
@@ -645,7 +683,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   360
          Index           =   12
          Left            =   1995
-         TabIndex        =   53
+         TabIndex        =   54
          Top             =   2940
          Width           =   3570
       End
@@ -663,7 +701,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   1
          Left            =   2100
          Style           =   2  'Dropdown List
-         TabIndex        =   10
+         TabIndex        =   11
          Tag             =   "Recolectado|N|N|0|1|rentradas|recolect||N|"
          Top             =   4470
          Width           =   1680
@@ -685,7 +723,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   4
          Left            =   1380
          MaxLength       =   4
-         TabIndex        =   51
+         TabIndex        =   52
          Top             =   1740
          Width           =   855
       End
@@ -705,7 +743,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   3
          Left            =   2280
          MaxLength       =   30
-         TabIndex        =   50
+         TabIndex        =   51
          Top             =   1740
          Width           =   3315
       End
@@ -724,7 +762,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   5
          Left            =   1380
          MaxLength       =   8
-         TabIndex        =   5
+         TabIndex        =   6
          Tag             =   "Código Campo|N|N|1|99999999|rentradas|codcampo|00000000|N|"
          Top             =   1320
          Width           =   1155
@@ -745,7 +783,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   1
          Left            =   2280
          MaxLength       =   40
-         TabIndex        =   44
+         TabIndex        =   45
          Top             =   930
          Width           =   3315
       End
@@ -764,7 +802,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   1
          Left            =   1380
          MaxLength       =   6
-         TabIndex        =   4
+         TabIndex        =   5
          Tag             =   "Código Socio|N|N|1|999999|rentradas|codsocio|000000|N|"
          Top             =   930
          Width           =   855
@@ -783,7 +821,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   0
          Left            =   180
          Style           =   2  'Dropdown List
-         TabIndex        =   9
+         TabIndex        =   10
          Tag             =   "Tipo Entrada|N|N|0|3|rentradas|tipoentr||N|"
          Top             =   4470
          Width           =   1740
@@ -804,7 +842,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   2
          Left            =   2280
          MaxLength       =   30
-         TabIndex        =   40
+         TabIndex        =   41
          Top             =   520
          Width           =   3315
       End
@@ -823,7 +861,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   2
          Left            =   1380
          MaxLength       =   6
-         TabIndex        =   3
+         TabIndex        =   4
          Tag             =   "Variedad|N|N|1|9999|rentradas|codvarie|0000||"
          Top             =   520
          Width           =   840
@@ -845,7 +883,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   3
          Left            =   1380
          MaxLength       =   6
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   2535
          Width           =   855
       End
@@ -865,7 +903,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   3
          Left            =   2265
          MaxLength       =   30
-         TabIndex        =   34
+         TabIndex        =   35
          Top             =   2535
          Width           =   3315
       End
@@ -885,7 +923,7 @@ Begin VB.Form frmEntBasculaNat
          Index           =   3
          Left            =   1380
          MaxLength       =   30
-         TabIndex        =   33
+         TabIndex        =   34
          Top             =   2160
          Width           =   4200
       End
@@ -903,7 +941,7 @@ Begin VB.Form frmEntBasculaNat
          ForeColor       =   &H00972E0B&
          Height          =   4425
          Left            =   5895
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   405
          Width           =   7140
          Begin VB.ComboBox Combo15 
@@ -918,12 +956,12 @@ Begin VB.Form frmEntBasculaNat
             EndProperty
             Height          =   360
             Index           =   4
-            Left            =   270
+            Left            =   240
             Style           =   2  'Dropdown List
-            TabIndex        =   94
+            TabIndex        =   95
             Tag             =   "Tipo Cajon 5|N|S|||rentradas|tipocajo5||N|"
             Top             =   2610
-            Width           =   2340
+            Width           =   2370
          End
          Begin VB.ComboBox Combo15 
             BeginProperty Font 
@@ -939,7 +977,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   0
             Left            =   270
             Style           =   2  'Dropdown List
-            TabIndex        =   90
+            TabIndex        =   91
             Tag             =   "Tipo Cajon 1|N|S|||rentradas|tipocajo1||N|"
             Top             =   1050
             Width           =   2340
@@ -960,7 +998,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   24
             Left            =   5445
             MaxLength       =   7
-            TabIndex        =   20
+            TabIndex        =   21
             Tag             =   "Otras Taras|N|S|0|999999|rentradas|otrastaras|###,##0||"
             Top             =   3540
             Width           =   1155
@@ -982,7 +1020,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   23
             Left            =   2640
             MaxLength       =   7
-            TabIndex        =   23
+            TabIndex        =   24
             Tag             =   "Peso Trasnportista|N|S|0|999999|rentradas|kilostra|###,##0||"
             Top             =   3900
             Width           =   1215
@@ -1004,7 +1042,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   8
             Left            =   2640
             MaxLength       =   5
-            TabIndex        =   18
+            TabIndex        =   19
             Top             =   3120
             Width           =   1215
          End
@@ -1012,7 +1050,7 @@ Begin VB.Form frmEntBasculaNat
             BorderStyle     =   0  'None
             Height          =   2550
             Left            =   135
-            TabIndex        =   60
+            TabIndex        =   61
             Top             =   585
             Width           =   6690
             Begin VB.ComboBox Combo15 
@@ -1029,7 +1067,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   3
                Left            =   120
                Style           =   2  'Dropdown List
-               TabIndex        =   93
+               TabIndex        =   94
                Tag             =   "Tipo Cajon 4|N|S|||rentradas|tipocajo4||N|"
                Top             =   1650
                Width           =   2370
@@ -1048,7 +1086,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   2
                Left            =   120
                Style           =   2  'Dropdown List
-               TabIndex        =   92
+               TabIndex        =   93
                Tag             =   "Tipo Cajon 3|N|S|||rentradas|tipocajo3||N|"
                Top             =   1260
                Width           =   2370
@@ -1067,7 +1105,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   1
                Left            =   120
                Style           =   2  'Dropdown List
-               TabIndex        =   91
+               TabIndex        =   92
                Tag             =   "Tipo Cajon 2|N|S|||rentradas|tipocajo2||N|"
                Top             =   870
                Width           =   2370
@@ -1088,7 +1126,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   13
                Left            =   2505
                MaxLength       =   5
-               TabIndex        =   13
+               TabIndex        =   14
                Tag             =   "Nro.Cajas 1|N|S|||rentradas|numcajo1|#,##0||"
                Top             =   450
                Width           =   1215
@@ -1109,7 +1147,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   18
                Left            =   5325
                MaxLength       =   7
-               TabIndex        =   65
+               TabIndex        =   66
                Tag             =   "Tara 1|N|S|0|999999|rentradas|taracaja1|###,##0||"
                Top             =   480
                Width           =   1155
@@ -1130,7 +1168,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   19
                Left            =   5325
                MaxLength       =   7
-               TabIndex        =   64
+               TabIndex        =   65
                Tag             =   "Tara 2|N|S|0|999999|rentradas|taracaja2|###,##0||"
                Top             =   870
                Width           =   1155
@@ -1151,7 +1189,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   20
                Left            =   5325
                MaxLength       =   7
-               TabIndex        =   63
+               TabIndex        =   64
                Tag             =   "Tara 3|N|S|0|999999|rentradas|taracaja3|###,##0||"
                Top             =   1230
                Width           =   1155
@@ -1172,7 +1210,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   8
                Left            =   5325
                MaxLength       =   7
-               TabIndex        =   62
+               TabIndex        =   63
                Tag             =   "Tara 4|N|S|0|999999|rentradas|taracaja4|###,##0||"
                Top             =   1590
                Width           =   1155
@@ -1193,7 +1231,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   9
                Left            =   5325
                MaxLength       =   7
-               TabIndex        =   61
+               TabIndex        =   62
                Tag             =   "Tara 5|N|S|0|999999|rentradas|taracaja5|###,##0||"
                Top             =   1980
                Width           =   1155
@@ -1214,7 +1252,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   14
                Left            =   2505
                MaxLength       =   5
-               TabIndex        =   14
+               TabIndex        =   15
                Tag             =   "Nro.Cajas 2|N|S|||rentradas|numcajo2|#,##0||"
                Top             =   870
                Width           =   1215
@@ -1235,7 +1273,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   15
                Left            =   2505
                MaxLength       =   5
-               TabIndex        =   15
+               TabIndex        =   16
                Tag             =   "Nro.Cajas 3|N|S|||rentradas|numcajo3|#,##0||"
                Top             =   1260
                Width           =   1215
@@ -1256,7 +1294,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   16
                Left            =   2505
                MaxLength       =   5
-               TabIndex        =   16
+               TabIndex        =   17
                Tag             =   "Nro.Cajas 4|N|S|||rentradas|numcajo4|#,##0||"
                Top             =   1650
                Width           =   1215
@@ -1277,7 +1315,7 @@ Begin VB.Form frmEntBasculaNat
                Index           =   17
                Left            =   2505
                MaxLength       =   5
-               TabIndex        =   17
+               TabIndex        =   18
                Tag             =   "Nro.Cajas 5|N|S|||rentradas|numcajo5|#,##0||"
                Top             =   2010
                Width           =   1215
@@ -1307,7 +1345,7 @@ Begin VB.Form frmEntBasculaNat
                EndProperty
                Height          =   255
                Left            =   5340
-               TabIndex        =   83
+               TabIndex        =   84
                Top             =   150
                Width           =   1185
             End
@@ -1324,7 +1362,7 @@ Begin VB.Form frmEntBasculaNat
                EndProperty
                Height          =   255
                Left            =   4080
-               TabIndex        =   82
+               TabIndex        =   83
                Top             =   150
                Width           =   1185
             End
@@ -1342,8 +1380,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   0
                Left            =   3945
-               TabIndex        =   81
-               Top             =   510
+               TabIndex        =   82
+               Top             =   540
                Width           =   1110
             End
             Begin VB.Label Label15 
@@ -1351,7 +1389,7 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   0
                Left            =   135
-               TabIndex        =   80
+               TabIndex        =   81
                Top             =   510
                Width           =   1830
             End
@@ -1360,7 +1398,7 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   1
                Left            =   135
-               TabIndex        =   79
+               TabIndex        =   80
                Top             =   870
                Width           =   1830
             End
@@ -1369,7 +1407,7 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   2
                Left            =   135
-               TabIndex        =   78
+               TabIndex        =   79
                Top             =   1230
                Width           =   1830
             End
@@ -1378,7 +1416,7 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   3
                Left            =   135
-               TabIndex        =   77
+               TabIndex        =   78
                Top             =   1680
                Width           =   1830
             End
@@ -1387,7 +1425,7 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   4
                Left            =   195
-               TabIndex        =   76
+               TabIndex        =   77
                Top             =   2130
                Width           =   1830
             End
@@ -1404,7 +1442,7 @@ Begin VB.Form frmEntBasculaNat
                EndProperty
                Height          =   255
                Left            =   2505
-               TabIndex        =   75
+               TabIndex        =   76
                Top             =   150
                Width           =   1185
             End
@@ -1422,8 +1460,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   1
                Left            =   3945
-               TabIndex        =   74
-               Top             =   870
+               TabIndex        =   75
+               Top             =   930
                Width           =   1110
             End
             Begin VB.Label Label19 
@@ -1440,8 +1478,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   2
                Left            =   3945
-               TabIndex        =   73
-               Top             =   1230
+               TabIndex        =   74
+               Top             =   1290
                Width           =   1110
             End
             Begin VB.Label Label19 
@@ -1458,8 +1496,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   3
                Left            =   3945
-               TabIndex        =   72
-               Top             =   1590
+               TabIndex        =   73
+               Top             =   1650
                Width           =   1110
             End
             Begin VB.Label Label19 
@@ -1476,8 +1514,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   4
                Left            =   3945
-               TabIndex        =   71
-               Top             =   1950
+               TabIndex        =   72
+               Top             =   2010
                Width           =   1110
             End
             Begin VB.Label Label10 
@@ -1494,8 +1532,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   0
                Left            =   5115
-               TabIndex        =   70
-               Top             =   510
+               TabIndex        =   71
+               Top             =   540
                Width           =   150
             End
             Begin VB.Label Label10 
@@ -1512,8 +1550,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   1
                Left            =   5115
-               TabIndex        =   69
-               Top             =   870
+               TabIndex        =   70
+               Top             =   930
                Width           =   150
             End
             Begin VB.Label Label10 
@@ -1530,8 +1568,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   2
                Left            =   5115
-               TabIndex        =   68
-               Top             =   1230
+               TabIndex        =   69
+               Top             =   1290
                Width           =   150
             End
             Begin VB.Label Label10 
@@ -1548,8 +1586,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   3
                Left            =   5115
-               TabIndex        =   67
-               Top             =   1590
+               TabIndex        =   68
+               Top             =   1650
                Width           =   150
             End
             Begin VB.Label Label10 
@@ -1566,8 +1604,8 @@ Begin VB.Form frmEntBasculaNat
                Height          =   255
                Index           =   4
                Left            =   5115
-               TabIndex        =   66
-               Top             =   1950
+               TabIndex        =   67
+               Top             =   2010
                Width           =   150
             End
          End
@@ -1587,7 +1625,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   3
             Left            =   5445
             MaxLength       =   7
-            TabIndex        =   19
+            TabIndex        =   20
             Tag             =   "Tara Vehiculo|N|S|0|999999|rentradas|taravehi|###,##0||"
             Top             =   3120
             Width           =   1155
@@ -1608,7 +1646,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   11
             Left            =   5445
             MaxLength       =   7
-            TabIndex        =   24
+            TabIndex        =   25
             Tag             =   "Peso Neto|N|N|0|999999|rentradas|kilosnet|###,##0||"
             Top             =   3930
             Width           =   1155
@@ -1629,7 +1667,7 @@ Begin VB.Form frmEntBasculaNat
             Index           =   21
             Left            =   5475
             MaxLength       =   7
-            TabIndex        =   12
+            TabIndex        =   13
             Tag             =   "Peso Bruto|N|N|||rentradas|kilosbru|###,##0||"
             Top             =   270
             Width           =   1155
@@ -1646,8 +1684,8 @@ Begin VB.Form frmEntBasculaNat
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   4230
-            TabIndex        =   87
+            Left            =   3990
+            TabIndex        =   88
             Top             =   3585
             Width           =   1185
          End
@@ -1665,7 +1703,7 @@ Begin VB.Form frmEntBasculaNat
             Height          =   255
             Index           =   6
             Left            =   270
-            TabIndex        =   86
+            TabIndex        =   87
             Top             =   3930
             Width           =   1830
          End
@@ -1683,12 +1721,12 @@ Begin VB.Form frmEntBasculaNat
             Height          =   255
             Index           =   5
             Left            =   270
-            TabIndex        =   85
+            TabIndex        =   86
             Top             =   3150
             Width           =   1830
          End
          Begin VB.Label Label8 
-            Caption         =   "Tara Vehiculo"
+            Caption         =   "Tara Vehículo"
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -1699,10 +1737,10 @@ Begin VB.Form frmEntBasculaNat
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   4230
-            TabIndex        =   59
+            Left            =   3990
+            TabIndex        =   60
             Top             =   3165
-            Width           =   1185
+            Width           =   1425
          End
          Begin VB.Label Label17 
             Caption         =   "Peso Bruto"
@@ -1717,7 +1755,7 @@ Begin VB.Form frmEntBasculaNat
             EndProperty
             Height          =   255
             Left            =   4215
-            TabIndex        =   43
+            TabIndex        =   44
             Top             =   315
             Width           =   1185
          End
@@ -1733,8 +1771,8 @@ Begin VB.Form frmEntBasculaNat
                Strikethrough   =   0   'False
             EndProperty
             Height          =   255
-            Left            =   4230
-            TabIndex        =   42
+            Left            =   3990
+            TabIndex        =   43
             Top             =   3960
             Width           =   1185
          End
@@ -1762,7 +1800,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   3720
-         TabIndex        =   89
+         TabIndex        =   90
          Top             =   1365
          Width           =   960
       End
@@ -1779,7 +1817,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   3960
-         TabIndex        =   84
+         TabIndex        =   85
          Top             =   4230
          Width           =   1395
       End
@@ -1812,7 +1850,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   58
+         TabIndex        =   59
          Top             =   3720
          Width           =   705
       End
@@ -1837,7 +1875,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   56
+         TabIndex        =   57
          Top             =   3330
          Width           =   795
       End
@@ -1862,7 +1900,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   54
+         TabIndex        =   55
          Top             =   2940
          Width           =   855
       End
@@ -1879,7 +1917,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   2100
-         TabIndex        =   52
+         TabIndex        =   53
          Top             =   4230
          Width           =   1455
       End
@@ -1896,7 +1934,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   49
+         TabIndex        =   50
          Top             =   1365
          Width           =   1020
       End
@@ -1913,7 +1951,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   45
+         TabIndex        =   46
          Top             =   930
          Width           =   690
       End
@@ -1938,7 +1976,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   41
+         TabIndex        =   42
          Top             =   4200
          Width           =   1335
       End
@@ -1963,7 +2001,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   39
+         TabIndex        =   40
          Top             =   540
          Width           =   945
       End
@@ -1981,7 +2019,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   255
          Index           =   0
          Left            =   180
-         TabIndex        =   38
+         TabIndex        =   39
          Top             =   1770
          Width           =   735
       End
@@ -1998,7 +2036,7 @@ Begin VB.Form frmEntBasculaNat
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   37
+         TabIndex        =   38
          Top             =   2160
          Width           =   1095
       End
@@ -2016,7 +2054,7 @@ Begin VB.Form frmEntBasculaNat
          Height          =   255
          Index           =   26
          Left            =   180
-         TabIndex        =   36
+         TabIndex        =   37
          Top             =   2550
          Width           =   735
       End
@@ -2027,7 +2065,7 @@ Begin VB.Form frmEntBasculaNat
       Height          =   285
       Index           =   25
       Left            =   9600
-      TabIndex        =   30
+      TabIndex        =   31
       Top             =   1035
       Width           =   1425
    End
@@ -2081,7 +2119,7 @@ Begin VB.Form frmEntBasculaNat
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
       Left            =   12930
-      TabIndex        =   102
+      TabIndex        =   103
       Top             =   180
       Width           =   405
       _ExtentX        =   714
@@ -3296,28 +3334,34 @@ Dim Result As String
     
     B = True
     If crear = 1 Then
-        Result = InputBox("Nro de Palets:", "Número de Palets", 0)
+        Result = InputBox("Nro de Palets:", "Número de Palets", 1)
         If Result = "" Then
             Exit Sub
         Else
             nroPalets = ComprobarCero(Result)
         End If
         
+        If nroPalets = 0 Then
+            MsgBox "Debe introducir un nro de palets superior a 0. Revise.", vbExclamation
+            Exit Sub
+        End If
+        
+        
         Numcajon = 0
         If Text1(13).Text <> "" Then
-            If Escajon(ValorCombo(Combo15(0))) Then Numcajon = Numcajon + ComprobarCero(Text1(13).Text)
+            If EsCaja(ValorCombo(Combo15(0))) Then Numcajon = Numcajon + ComprobarCero(Text1(13).Text)
         End If
         If Text1(14).Text <> "" Then
-            If Escajon(ValorCombo(Combo15(1))) Then Numcajon = Numcajon + ComprobarCero(Text1(14).Text)
+            If EsCaja(ValorCombo(Combo15(1))) Then Numcajon = Numcajon + ComprobarCero(Text1(14).Text)
         End If
         If Text1(15).Text <> "" Then
-            If Escajon(ValorCombo(Combo15(2))) Then Numcajon = Numcajon + ComprobarCero(Text1(15).Text)
+            If EsCaja(ValorCombo(Combo15(2))) Then Numcajon = Numcajon + ComprobarCero(Text1(15).Text)
         End If
         If Text1(16).Text <> "" Then
-            If Escajon(ValorCombo(Combo15(3))) Then Numcajon = Numcajon + ComprobarCero(Text1(16).Text)
+            If EsCaja(ValorCombo(Combo15(3))) Then Numcajon = Numcajon + ComprobarCero(Text1(16).Text)
         End If
         If Text1(17).Text <> "" Then
-            If Escajon(ValorCombo(Combo15(4))) Then Numcajon = Numcajon + ComprobarCero(Text1(17).Text)
+            If EsCaja(ValorCombo(Combo15(4))) Then Numcajon = Numcajon + ComprobarCero(Text1(17).Text)
         End If
         
         B = InsertarPalets(Text1(0).Text, nroPalets, CStr(Numcajon), Text1(11).Text, Text1(10).Text, Text1(1).Text, Text1(2).Text)
@@ -3366,13 +3410,6 @@ Private Sub ImprimirEtiquetas()
 
 End Sub
 
-
-
-
-
-Private Function Escajon(Codigo As Integer) As Boolean
-    Escajon = (DevuelveValor("select  escaja from confenva where codtipen = " & DBSet(Codigo, "N")) = 1)
-End Function
 
 Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, Numkilos As Long, Fecha As Date, Socio As String, Variedad As String)
 Dim nroPalets As Long
@@ -4034,7 +4071,14 @@ Dim SQL As String
             End If
         End If
         
-        
+        '[Monica]09/03/2017: en el caso de natural
+        If B Then
+            If ExisteAlbaran(Text1(25).Text) Then
+                MsgBox "Nro de Albarán ya existe. Reintroduzca.", vbExclamation
+                B = False
+                PonerFoco Text1(25)
+            End If
+        End If
     End If
     ' ************************************************************************************
     DatosOK = B

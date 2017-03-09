@@ -399,7 +399,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -419,20 +419,20 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
 
-    DatosOk = False
+    DatosOK = False
     
     If vParamAplic.Cooperativa = 2 Then
-        If txtcodigo(4).Text = "" Or txtcodigo(5).Text = "" Then
+        If txtCodigo(4).Text = "" Or txtCodigo(5).Text = "" Then
             MsgBox "Debe introducir las fechas. Revise.", vbExclamation
-            PonerFoco txtcodigo(4)
+            PonerFoco txtCodigo(4)
             Exit Function
         Else
-            If txtcodigo(4).Text <> txtcodigo(5).Text Then
+            If txtCodigo(4).Text <> txtCodigo(5).Text Then
                 MsgBox "Debe introducir la misma fecha desde y hasta. Revise.", vbExclamation
-                PonerFoco txtcodigo(4)
+                PonerFoco txtCodigo(4)
                 Exit Function
             End If
         End If
@@ -449,7 +449,7 @@ Dim b As Boolean
         
     End If
     
-    DatosOk = True
+    DatosOK = True
     
 End Function
 
@@ -463,7 +463,7 @@ Dim HayReg As Boolean
 Dim cadena As String
     
     '[Monica]17/10/2016: si es Picassent obligamos a que me pongan una fecha de maximo 1 dia
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     
     InicializarVbles
@@ -476,8 +476,8 @@ Dim cadena As String
         Case 0
             '======== FORMULA  ====================================
             'D/H CLASE
-            cDesde = Trim(txtcodigo(0).Text)
-            cHasta = Trim(txtcodigo(1).Text)
+            cDesde = Trim(txtCodigo(0).Text)
+            cHasta = Trim(txtCodigo(1).Text)
             nDesde = txtNombre(0).Text
             nHasta = txtNombre(1).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -488,8 +488,8 @@ Dim cadena As String
             End If
             
             'D/H VARIEDAD
-            cDesde = Trim(txtcodigo(2).Text)
-            cHasta = Trim(txtcodigo(3).Text)
+            cDesde = Trim(txtCodigo(2).Text)
+            cHasta = Trim(txtCodigo(3).Text)
             nDesde = txtNombre(2).Text
             nHasta = txtNombre(3).Text
             If Not (cDesde = "" And cHasta = "") Then
@@ -502,8 +502,8 @@ Dim cadena As String
             CadFormulaImp = cadFormula
 
             'D/H fecha
-            cDesde = Trim(txtcodigo(4).Text)
-            cHasta = Trim(txtcodigo(5).Text)
+            cDesde = Trim(txtCodigo(4).Text)
+            cHasta = Trim(txtCodigo(5).Text)
             nDesde = ""
             nHasta = ""
             If Not (cDesde = "" And cHasta = "") Then
@@ -514,10 +514,10 @@ Dim cadena As String
             End If
             
             
-            Tabla = "(rentradas INNER JOIN variedades ON rentradas.codvarie = variedades.codvarie) "
+            tabla = "(rentradas INNER JOIN variedades ON rentradas.codvarie = variedades.codvarie) "
 
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(Tabla, cadSelect) Then
+            If HayRegParaInforme(tabla, cadSelect) Then
             
                 '[Monica]25/03/2014: para el caso de que no haya ausencia de plagas (entradas de quatretonda)
                 Dim cadSelect2 As String
@@ -527,7 +527,7 @@ Dim cadena As String
                 Else
                     cadSelect2 = cadSelect & "rentradas.ausenciaplagas = 0"
                 End If
-                Sql4 = "select count(*) from " & Tabla & " where " & cadSelect2
+                Sql4 = "select count(*) from " & tabla & " where " & cadSelect2
                 If TotalRegistros(Sql4) <> 0 And vParamAplic.CodIncidPlaga = 0 Then
                     MsgBox "Debe introducir un código de incidencia de plaga en parámetros.", vbExclamation
                     Exit Sub
@@ -535,7 +535,7 @@ Dim cadena As String
             
                 If vParamAplic.HayTraza Then
                     cadena = ""
-                    HayReg = HayEntradasSinCRFID(Tabla, cadSelect, cadena)
+                    HayReg = HayEntradasSinCRFID(tabla, cadSelect, cadena)
                     
                     If HayReg Then
                         Set frmMens = New frmMensajes
@@ -551,7 +551,7 @@ Dim cadena As String
                 End If
             
             
-                If ActualizarTabla(Tabla, cadSelect) Then
+                If ActualizarTabla(tabla, cadSelect) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                     cmdCancel_Click (0)
                 End If
@@ -567,7 +567,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(0)
+        PonerFoco txtCodigo(0)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -589,18 +589,18 @@ Dim List As Collection
     Me.Pb1.visible = False
     Me.lblProgres.visible = False
     
-    Tabla = "rentradas"
+    tabla = "rentradas"
  
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(CByte(imgFec(0).Tag) + 4).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(CByte(imgFec(0).Tag) + 4).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
@@ -608,7 +608,7 @@ End Sub
 
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -621,7 +621,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmVariedad (Index)
     
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -650,19 +650,19 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = Index '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(Index + 4).Text <> "" Then frmC.NovaData = txtcodigo(Index + 4).Text
+    If txtCodigo(Index + 4).Text <> "" Then frmC.NovaData = txtCodigo(Index + 4).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag) + 4) '<===
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag) + 4) '<===
     ' ********************************************
 
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -687,21 +687,21 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -710,20 +710,20 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0, 1 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
     
         Case 4, 5 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
             '[Monica]17/10/2016: obligamos a meter la misma fecha si es Picassent
             If vParamAplic.Cooperativa = 2 Then
-                If Index = 4 Then txtcodigo(5).Text = txtcodigo(4).Text
+                If Index = 4 Then txtCodigo(5).Text = txtCodigo(4).Text
             End If
             
         Case 2, 3 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
     End Select
 End Sub
 
@@ -779,17 +779,17 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmClase(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmClase(Indice As Integer)
+    indCodigo = Indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
@@ -950,12 +950,12 @@ End Sub
 
 Private Function ActualizarTabla(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim cadMen As String
-Dim i As Long
-Dim b As Boolean
+Dim I As Long
+Dim B As Boolean
 Dim CalidadVC As String
 Dim CalidadDES As String
 
@@ -972,13 +972,13 @@ Dim fr As frmVisReport
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rentradas.* FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rentradas.* FROM " & QuitarCaracterACadena(cTabla, "_1")
     Sql1 = "select count(*) from " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
         Sql1 = Sql1 & " WHERE " & cWhere
     End If
     
@@ -995,7 +995,7 @@ Dim fr As frmVisReport
     conn.BeginTrans
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
     '[Monica]17/10/2016: para el caso de Picassent vamos a imprimir las todas las entradas en un fichero pdf  yyyymmddhhmmss.pdf
@@ -1029,13 +1029,13 @@ Dim fr As frmVisReport
         fr.OtrosParametros = CadParam
         fr.ConSubInforme = True
         fr.Informe = App.Path & "\Informes\" & nomDocu
-        fr.FormulaSeleccion = "{rentradas.fechaent} = Date(" & Mid(txtcodigo(4).Text, 7, 4) & _
-                                                    "," & Mid(txtcodigo(4).Text, 4, 2) & _
-                                                    "," & Mid(txtcodigo(4).Text, 1, 2) & ")"
+        fr.FormulaSeleccion = "{rentradas.fechaent} = Date(" & Mid(txtCodigo(4).Text, 7, 4) & _
+                                                    "," & Mid(txtCodigo(4).Text, 4, 2) & _
+                                                    "," & Mid(txtCodigo(4).Text, 1, 2) & ")"
                                                     
         If CadFormulaImp <> "" Then fr.FormulaSeleccion = fr.FormulaSeleccion & " and " & CadFormulaImp
         
-        fr.FicheroPDF = vParamAplic.PathEntradas & "\" & Mid(txtcodigo(4), 7, 4) & Mid(txtcodigo(4), 4, 2) & Mid(txtcodigo(4), 1, 2) & "_" & Format(Now, "hhmmss") & ".pdf"
+        fr.FicheroPDF = vParamAplic.PathEntradas & "\" & Mid(txtCodigo(4), 7, 4) & Mid(txtCodigo(4), 4, 2) & Mid(txtCodigo(4), 1, 2) & "_" & Format(Now, "hhmmss") & ".pdf"
         Load fr 'trabaja sin mostrar el formulario
         
     End If
@@ -1043,13 +1043,13 @@ Dim fr As frmVisReport
     
     Pesadas = "("
     
-    i = 0
-    b = True
-    While Not Rs.EOF And b
-        i = i + 1
+    I = 0
+    B = True
+    While Not Rs.EOF And B
+        I = I + 1
         
         Me.Pb1.Value = Me.Pb1.Value + 1
-        lblProgres.Caption = "Linea: " & i & ". Entrada: " & Format(DBLet(Rs!numnotac, "N"), "00000000")
+        lblProgres.Caption = "Linea: " & I & ". Entrada: " & Format(DBLet(Rs!numnotac, "N"), "00000000")
         Me.Refresh
 
         OK = True
@@ -1079,68 +1079,66 @@ Dim fr As frmVisReport
                 End If
                 
                 If PorcenDestrio = 0 Or (PorcenDestrio <> 0 And CalidadDES <> "") Then
-                    b = InsertarCabecera(Rs, cadMen)
+                    B = InsertarCabecera(Rs, cadMen)
                     cadMen = "Insertando Cabecera: " & cadMen
                 
-                    If b Then
+                    If B Then
                         cadMen = ""
                         
                         If PorcenDestrio = 0 Then
-                            b = InsertarClasificacion(Rs, cadMen, CalidadVC)
+                            B = InsertarClasificacion(Rs, cadMen, CalidadVC)
                         Else
-                            b = InsertarClasificacionConDestrio(Rs, cadMen, CalidadVC, CalidadDES, CStr(PorcenDestrio))
+                            B = InsertarClasificacionConDestrio(Rs, cadMen, CalidadVC, CalidadDES, CStr(PorcenDestrio))
                         End If
                         
                         cadMen = "Insertando Clasificacion: " & cadMen
                     End If
                     
                     '[Monica]04/05/2010 Reparto de albaranes
-                    If b And vParamAplic.CooproenEntradas Then
-                        b = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
+                    If B And vParamAplic.CooproenEntradas Then
+                        B = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
                         cadMen = "Reparto Coopropietarios: " & cadMen
                     End If
                     
                     Pesadas = Pesadas & DBSet(Rs!nropesada, "N") & ","
                     
                     'Eliminamos la entrada
-                    If b Then
+                    If B Then
                         cadMen = ""
-                        b = EliminarRegistro(Rs, cadMen)
+                        B = EliminarRegistro(Rs, cadMen)
                         cadMen = "Eliminando Registro: " & cadMen
                     End If
-                    
                 End If
             End If
-        
         Else
             If DBLet(Rs!TipoEntr, "N") <> 1 Then ' si no es VC clasificamos por campo o almacen
-                b = InsertarCabecera(Rs, cadMen)
+                B = InsertarCabecera(Rs, cadMen)
                 cadMen = "Insertando Cabecera: " & cadMen
                 
-                If b Then
+                If B Then
                     cadMen = ""
-                    b = InsertarClasificacion(Rs, cadMen, "")
+                    B = InsertarClasificacion(Rs, cadMen, "")
                     cadMen = "Insertando Clasificacion: " & cadMen
                 End If
             
-                If b Then
+                If B Then
                     cadMen = ""
-                    b = ActualizarTransporte(Rs, cadMen)
+                    B = ActualizarTransporte(Rs, cadMen)
                     cadMen = "Actualizando Gastos de Transporte" & cadMen
                 End If
                 
                 '[Monica]04/05/2010 Reparto de albaranes
-                If b And vParamAplic.CooproenEntradas Then
-                    b = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
+                If B And vParamAplic.CooproenEntradas Then
+                    B = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
                     cadMen = "Reparto Coopropietarios: " & cadMen
                 End If
                 
                 Pesadas = Pesadas & DBSet(Rs!nropesada, "N") & ","
                 
                 'Eliminamos la entrada
-                If b Then
+                If B Then
                     cadMen = ""
-                    b = EliminarRegistro(Rs, cadMen)
+                    B = EliminarRegistro(Rs, cadMen)
                     cadMen = "Eliminando Registro: " & cadMen
                 End If
             Else   ' si es venta campo todos los kilos iran a la calidad de venta campo
@@ -1150,27 +1148,27 @@ Dim fr As frmVisReport
                     Sql1 = Sql1 & "," & DBSet(Rs!codvarie, "N") & " )"
                     conn.Execute Sql1
                 Else
-                    b = InsertarCabecera(Rs, cadMen)
+                    B = InsertarCabecera(Rs, cadMen)
                     cadMen = "Insertando Cabecera: " & cadMen
                     
-                    If b Then
+                    If B Then
                         cadMen = ""
-                        b = InsertarClasificacion(Rs, cadMen, CalidadVC)
+                        B = InsertarClasificacion(Rs, cadMen, CalidadVC)
                         cadMen = "Insertando Clasificacion: " & cadMen
                     End If
                     
                     '[Monica]04/05/2010 Reparto de albaranes
-                    If b And vParamAplic.CooproenEntradas Then
-                        b = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
+                    If B And vParamAplic.CooproenEntradas Then
+                        B = RepartoAlbaranesBascula(Rs!numnotac, cadMen)
                         cadMen = "Reparto Coopropietarios: " & cadMen
                     End If
                     
                     Pesadas = Pesadas & DBSet(Rs!nropesada, "N") & ","
                     
                     'Eliminamos la entrada
-                    If b Then
+                    If B Then
                         cadMen = ""
-                        b = EliminarRegistro(Rs, cadMen)
+                        B = EliminarRegistro(Rs, cadMen)
                         cadMen = "Eliminando Registro: " & cadMen
                     End If
                 End If
@@ -1179,17 +1177,17 @@ Dim fr As frmVisReport
         Rs.MoveNext
     Wend
 
-    If b And Len(Pesadas) > 1 Then
+    If B And Len(Pesadas) > 1 Then
         'quitamos la ultima coma y añadimos un parentesis de cierre
         Pesadas = Mid(Pesadas, 1, Len(Pesadas) - 1) & ")"
         
         cadMen = ""
-        b = EliminarPesada(Pesadas, cadMen)
+        B = EliminarPesada(Pesadas, cadMen)
         cadMen = "Eliminando Pesadas: " & cadMen
     End If
 
 
-    If b Then
+    If B Then
         If TotalRegistros("select count(*) from tmpErrEnt") <> 0 Then
             Set frmMens = New frmMensajes
             
@@ -1208,11 +1206,11 @@ Dim fr As frmVisReport
     End If
     
 eActualizarTabla:
-    If Err.Number <> 0 Or Not b Then
-        b = False
+    If Err.Number <> 0 Or Not B Then
+        B = False
         MuestraError Err.Number, "Actualizando Entrada: " & vbCrLf & Err.Description & cadMen
     End If
-    If b Then
+    If B Then
         conn.CommitTrans
         ActualizarTabla = True
     Else
@@ -1224,11 +1222,11 @@ End Function
 
 Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim NumCajones As Currency
 Dim Transporte As Currency
 Dim vPrecio As String
@@ -1236,9 +1234,9 @@ Dim Precio As Currency
 
     On Error GoTo EInsertar
     
-    Sql = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,"
-    Sql = Sql & "codtarif,kilosbru,numcajon,kilosnet,observac,transportadopor,"
-    Sql = Sql & "imptrans,impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso,kilostra,contrato) values "
+    SQL = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,"
+    SQL = SQL & "codtarif,kilosbru,numcajon,kilosnet,observac,transportadopor,"
+    SQL = SQL & "imptrans,impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso,kilostra,contrato) values "
 
     Sql1 = "select imptrans from rportespobla, rpartida, rcampos, variedades "
     Sql1 = Sql1 & " where rpartida.codparti = rcampos.codparti and "
@@ -1282,45 +1280,46 @@ Dim Precio As Currency
         
     Transporte = Round2(DBLet(Rs!KilosNet, "N") * Precio, 2)
     
-    Sql = Sql & "(" & DBSet(Rs!numnotac, "N") & ","
-    Sql = Sql & DBSet(Rs!FechaEnt, "F") & ","
-    Sql = Sql & DBSet(Rs!horaentr, "FH") & ","
-    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
-    Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-    Sql = Sql & DBSet(Rs!codcampo, "N") & ","
-    Sql = Sql & DBSet(Rs!TipoEntr, "N") & ","
-    Sql = Sql & DBSet(Rs!Recolect, "N") & ","
-    Sql = Sql & DBSet(Rs!codTrans, "T") & ","  ', "S") & "," [Monica] si es 0 metemos un 0
-    Sql = Sql & DBSet(Rs!codcapat, "N") & ","  ', "S") & "," en codtrans, codcapat, codtarif
-    Sql = Sql & DBSet(Rs!Codtarif, "N") & ","  ', "S") & ","
-    Sql = Sql & DBSet(Rs!KilosBru, "N") & ","
-    Sql = Sql & DBSet(NumCajones, "N") & ","
-    Sql = Sql & DBSet(Rs!KilosNet, "N") & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & DBSet(Rs!transportadopor, "N") & ","
-    Sql = Sql & DBSet(Transporte, "N") & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & "0," 'tiporecol 0=horas 1=destajo no admite valor nulo
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & ValorNulo & ","
-    Sql = Sql & "0," & DBSet(Rs!KilosTra, "N") & ","
+    SQL = SQL & "(" & DBSet(Rs!numnotac, "N") & ","
+    SQL = SQL & DBSet(Rs!FechaEnt, "F") & ","
+    SQL = SQL & DBSet(Rs!horaentr, "FH") & ","
+    SQL = SQL & DBSet(Rs!codvarie, "N") & ","
+    SQL = SQL & DBSet(Rs!Codsocio, "N") & ","
+    SQL = SQL & DBSet(Rs!codcampo, "N") & ","
+    SQL = SQL & DBSet(Rs!TipoEntr, "N") & ","
+    SQL = SQL & DBSet(Rs!Recolect, "N") & ","
+    SQL = SQL & DBSet(Rs!codTrans, "T") & ","  ', "S") & "," [Monica] si es 0 metemos un 0
+    SQL = SQL & DBSet(Rs!codcapat, "N") & ","  ', "S") & "," en codtrans, codcapat, codtarif
+    SQL = SQL & DBSet(Rs!Codtarif, "N") & ","  ', "S") & ","
+    SQL = SQL & DBSet(Rs!KilosBru, "N") & ","
+    SQL = SQL & DBSet(NumCajones, "N") & ","
+    SQL = SQL & DBSet(Rs!KilosNet, "N") & ","
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & DBSet(Rs!transportadopor, "N") & ","
+    SQL = SQL & DBSet(Transporte, "N") & ","
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & "0," 'tiporecol 0=horas 1=destajo no admite valor nulo
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & ValorNulo & ","
+    '[Monica]09/03/2017: metemos el nro de albarán si lo tenemos en la entrada (SOLO CASO NATURAL) antes metiamos ValorNulo
+    SQL = SQL & DBSet(Rs!numalbar, "N", "S") & ","
+    SQL = SQL & ValorNulo & ","
+    SQL = SQL & "0," & DBSet(Rs!KilosTra, "N") & ","
     '[Monica]04/10/2016: nueva columna de documento COOPIC
-    Sql = Sql & DBSet(Rs!contrato, "T") & ")"
+    SQL = SQL & DBSet(Rs!contrato, "T") & ")"
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     '[Monica]25/03/2014: en el caso de que no haya ausencia de plagas en la entrada (Quatretonda) se inserta la incidencia
     If DBLet(Rs!ausenciaplagas, "N") = 0 Then
-        Sql = "select count(*) from rclasifica_incidencia where numnotac = " & DBSet(Rs!numnotac, "N") & " and codincid = " & DBSet(vParamAplic.CodIncidPlaga, "N")
-        If TotalRegistros(Sql) = 0 Then
-            Sql = "insert into rclasifica_incidencia (numnotac, codincid)  values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(vParamAplic.CodIncidPlaga, "N") & ")"
+        SQL = "select count(*) from rclasifica_incidencia where numnotac = " & DBSet(Rs!numnotac, "N") & " and codincid = " & DBSet(vParamAplic.CodIncidPlaga, "N")
+        If TotalRegistros(SQL) = 0 Then
+            SQL = "insert into rclasifica_incidencia (numnotac, codincid)  values (" & DBSet(Rs!numnotac, "N") & "," & DBSet(vParamAplic.CodIncidPlaga, "N") & ")"
         End If
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     
@@ -1335,10 +1334,10 @@ EInsertar:
 End Function
 
 Private Function EsCaja(CodCaja As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select escaja from confenva where codtipen = " & DBSet(CodCaja, "N")
-    EsCaja = (DevuelveValor(Sql) = 1)
+    SQL = "select escaja from confenva where codtipen = " & DBSet(CodCaja, "N")
+    EsCaja = (DevuelveValor(SQL) = 1)
 
 
 End Function
@@ -1463,9 +1462,9 @@ End Function
 
 Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim Sql As String
+Dim SQL As String
 Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 Dim NumCajones As Currency
 Dim Transporte As Currency
 Dim vPrecio As String
@@ -1476,8 +1475,8 @@ Dim vPrecio As String
 '    Conn.Execute SQL
 '
     If Not Rs.EOF Then
-        Sql = "delete from rentradas where numnotac = " & DBSet(Rs!numnotac, "N")
-        conn.Execute Sql
+        SQL = "delete from rentradas where numnotac = " & DBSet(Rs!numnotac, "N")
+        conn.Execute SQL
     End If
 
 EEliminar:
@@ -1491,13 +1490,13 @@ End Function
 
 
 Private Function EliminarPesada(cadena As String, cadErr As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EEliminar
     
     If cadena <> "" Then
-        Sql = "delete from rpesadas where nropesada in " & Trim(cadena)
-        conn.Execute Sql
+        SQL = "delete from rpesadas where nropesada in " & Trim(cadena)
+        conn.Execute SQL
     End If
 
 EEliminar:
@@ -1549,17 +1548,17 @@ End Function
 Public Function CrearTMPErr() As Boolean
 'Crea una temporal donde insertara la clave primaria de las
 'entradas erroneas al clasificar
-Dim Sql As String
+Dim SQL As String
     
     On Error GoTo ECrear
     
     CrearTMPErr = False
     
-    Sql = "CREATE TEMPORARY TABLE tmpErrEnt ( "
-    Sql = Sql & "numnotac int(7) unsigned NOT NULL default '0',"
-    Sql = Sql & "codvarie int(6) unsigned )"
+    SQL = "CREATE TEMPORARY TABLE tmpErrEnt ( "
+    SQL = SQL & "numnotac int(7) unsigned NOT NULL default '0',"
+    SQL = SQL & "codvarie int(6) unsigned )"
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     CrearTMPErr = True
     
@@ -1567,8 +1566,8 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMPErr = False
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmpErrEnt;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmpErrEnt;"
+        conn.Execute SQL
     End If
 End Function
 
@@ -1644,8 +1643,8 @@ End Sub
 
 Private Function HayEntradasSinCRFID(cTabla As String, cWhere As String, cadena As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
-Dim Tabla As String
+Dim SQL As String
+Dim tabla As String
     
 '[Monica]21/10/2011: antes estaba esto *****  QUITO EL LEFT JOIN : con el left join el sql falla ****
 '    Tabla = "(" & cTabla & ") left join trzpalets on rentradas.numnotac = trzpalets.numnotac "
@@ -1670,7 +1669,7 @@ Dim Tabla As String
 
 '[Monica]21/10/2011: modificado por
 
-    Sql = "select count(*) from " & cTabla
+    SQL = "select count(*) from " & cTabla
     
     cadena = "select rentradas.numnotac, rentradas.codvarie, variedades.nomvarie "
     cadena = cadena & " from " & cTabla
@@ -1679,24 +1678,24 @@ Dim Tabla As String
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " where " & cWhere
+        SQL = SQL & " where " & cWhere
         cadena = cadena & " where " & cWhere
     End If
     
     If cWhere <> "" Then
-        Sql = Sql & " and "
+        SQL = SQL & " and "
         cadena = cadena & " and "
     End If
     
-    Sql = Sql & "(rentradas.numnotac in (select numnotac from trzpalets "
-    Sql = Sql & "  where  trzpalets.crfid Is Null and trzpalets.idpalet not in (select idpalet from trzlineas_cargas)) "
-    Sql = Sql & "  or numnotac not in (select numnotac from trzpalets))"
+    SQL = SQL & "(rentradas.numnotac in (select numnotac from trzpalets "
+    SQL = SQL & "  where  trzpalets.crfid Is Null and trzpalets.idpalet not in (select idpalet from trzlineas_cargas)) "
+    SQL = SQL & "  or numnotac not in (select numnotac from trzpalets))"
     
     cadena = cadena & "(rentradas.numnotac in (select numnotac from trzpalets "
     cadena = cadena & "  where  trzpalets.crfid Is Null and trzpalets.idpalet not in (select idpalet from trzlineas_cargas)) "
     cadena = cadena & "  or numnotac not in (select numnotac from trzpalets))"
     
-    If RegistrosAListar(Sql) = 0 Then
+    If RegistrosAListar(SQL) = 0 Then
         HayEntradasSinCRFID = False
     Else
         HayEntradasSinCRFID = True
