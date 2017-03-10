@@ -2837,6 +2837,12 @@ Dim B As Boolean
         End If
     Next I
     
+    '[Monica]10/03/2017: en el caso de busqueda limpiamos los combos de tipo de envase
+    If Modo = 1 Then
+        For I = 0 To 4
+            Combo15(I).ListIndex = -1
+        Next I
+    End If
     
     PonerLongCampos
 

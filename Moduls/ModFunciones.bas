@@ -3650,7 +3650,7 @@ Public Function ExisteAlbaran(Albaran As String) As Boolean
 Dim SQL As String
 Dim Total As Integer
 
-    ExisteNota = False
+    ExisteAlbaran = False
     
     SQL = "select count(*) from rentradas where numalbar = " & DBSet(Albaran, "N")
     Total = TotalRegistros(SQL)
@@ -3658,14 +3658,14 @@ Dim Total As Integer
         SQL = "select count(*) from rclasifica where numalbar = " & DBSet(Albaran, "N")
         Total = TotalRegistros(SQL)
         If Total = 0 Then
-            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Nota, "N")
+            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Albaran, "N")
             Total = TotalRegistros(SQL)
-            ExisteNota = (Total <> 0)
+            ExisteAlbaran = (Total <> 0)
         Else
-            ExisteNota = True
+            ExisteAlbaran = True
         End If
     Else
-        ExisteNota = True
+        ExisteAlbaran = True
     End If
     
     
