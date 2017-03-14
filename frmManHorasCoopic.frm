@@ -105,14 +105,14 @@ Begin VB.Form frmManHorasCoopic
       Left            =   3720
       TabIndex        =   33
       Top             =   0
-      Width           =   2415
+      Width           =   1545
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
          TabIndex        =   34
          Top             =   180
-         Width           =   1965
-         _ExtentX        =   3466
+         Width           =   1095
+         _ExtentX        =   1931
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -122,10 +122,14 @@ Begin VB.Form frmManHorasCoopic
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
             NumButtons      =   4
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Alta Rápida"
                Object.Tag             =   "2"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Eventuales"
                Object.Tag             =   "2"
             EndProperty
@@ -612,6 +616,15 @@ Begin VB.Form frmManHorasCoopic
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   330
       Index           =   2
       Left            =   10470
@@ -1294,7 +1307,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1309,23 +1322,23 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Registro?"
-    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(0)
-    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
-    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(3)
-    Sql = Sql & vbCrLf & "Capataz: " & adodc1.Recordset.Fields(4) & " " & adodc1.Recordset.Fields(5)
+    SQL = "¿Seguro que desea eliminar el Registro?"
+    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(3)
+    SQL = SQL & vbCrLf & "Capataz: " & adodc1.Recordset.Fields(4) & " " & adodc1.Recordset.Fields(5)
     
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from horas where codcapat=" & adodc1.Recordset!codcapat
-        Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        Sql = Sql & " and codtraba = " & DBLet(adodc1.Recordset!CodTraba)
-        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
+        SQL = "Delete from horas where codcapat=" & adodc1.Recordset!codcapat
+        SQL = SQL & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
+        SQL = SQL & " and codtraba = " & DBLet(adodc1.Recordset!CodTraba)
+        SQL = SQL & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
         
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1739,24 +1752,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     If Ascendente Then
-        Sql = Sql & " ORDER BY  horas.fechahora, horas.codvarie "
+        SQL = SQL & " ORDER BY  horas.fechahora, horas.codvarie "
     Else
         '********************* canviar el ORDER BY *********************++
-        Sql = Sql & " ORDER BY  horas.fechahora desc, horas.codvarie, horas.codtraba, horas.codcapat "
+        SQL = SQL & " ORDER BY  horas.fechahora desc, horas.codvarie, horas.codtraba, horas.codcapat "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
@@ -1776,7 +1789,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales Sql
+    CalcularTotales SQL
 
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
@@ -1888,7 +1901,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1896,11 +1909,11 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
-        Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-        Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-        Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(Sql) <> 0 Then
+        SQL = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
+        SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+        SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+        SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El capataz existe para esta fecha, codtraba, variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1979,6 +1992,7 @@ Private Sub BotonTrabajadores()
     vCadBusqueda = ""
     AbrirListadoNominas (41)
     CargaGrid vCadBusqueda
+    PonerModoOpcionesMenu
 End Sub
 
 Private Sub BotonBorradoMasivo()
@@ -2024,24 +2038,24 @@ End Sub
 
 
 Private Function ModificaDesdeForm() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    Sql = "update horas set "
-    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N", "S")
-    Sql = Sql & ", horasdia = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    Sql = Sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(9).Text), "N", "S")
-    Sql = Sql & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
-    Sql = Sql & " where codcapat = " & DBSet(txtAux(0).Text, "N")
-    Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-    Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+    SQL = "update horas set "
+    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N", "S")
+    SQL = SQL & ", horasdia = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    SQL = SQL & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(9).Text), "N", "S")
+    SQL = SQL & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
+    SQL = SQL & " where codcapat = " & DBSet(txtAux(0).Text, "N")
+    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+    SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ModificaDesdeForm = True
     Exit Function
@@ -2058,14 +2072,14 @@ Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = "select sum(importe) importe , sum(compleme) compleme ,sum(penaliza) penaliza from (" & cadena & ") aaaaa"
+    SQL = "select sum(importe) importe , sum(compleme) compleme ,sum(penaliza) penaliza from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Compleme = 0

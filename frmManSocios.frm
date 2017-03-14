@@ -455,35 +455,35 @@ Begin VB.Form frmManSocios
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label5"
+      Tab(0).Control(0)=   "Frame7"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label29"
+      Tab(0).Control(1)=   "Frame6"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(2)=   "Text1(7)"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "imgMail(0)"
+      Tab(0).Control(3)=   "Frame4"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label19"
+      Tab(0).Control(4)=   "Text1(12)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "imgFec(2)"
+      Tab(0).Control(5)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Label10"
+      Tab(0).Control(6)=   "Text1(20)"
       Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Text1(2)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Text1(20)"
+      Tab(0).Control(8)=   "Label10"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(9)=   "imgFec(2)"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Text1(12)"
+      Tab(0).Control(10)=   "Label19"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Frame4"
+      Tab(0).Control(11)=   "imgMail(0)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Text1(7)"
+      Tab(0).Control(12)=   "imgZoom(0)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Frame6"
+      Tab(0).Control(13)=   "Label29"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Frame7"
+      Tab(0).Control(14)=   "Label5"
       Tab(0).Control(14).Enabled=   0   'False
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
@@ -501,16 +501,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
-      Tab(3).Control(1)=   "Text3(0)"
-      Tab(3).Control(2)=   "Toolbar2"
-      Tab(3).Control(3)=   "lw1"
-      Tab(3).Control(4)=   "Toolbar3"
-      Tab(3).Control(5)=   "Frame5"
-      Tab(3).Control(6)=   "Toolbar4"
-      Tab(3).Control(7)=   "imgFec(3)"
-      Tab(3).Control(8)=   "Label17"
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(9)=   "Frame8"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -4232,7 +4232,7 @@ Private Const IdPrograma = 2004
 'Dim T1 As Single
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
-Public Event DatoSeleccionado(Cadenaseleccion As String)
+Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 Public Socio As String
 
@@ -4894,7 +4894,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -5224,21 +5224,21 @@ Dim Indice As Byte
     End If
 End Sub
 
-Private Sub frmCoop_DatoSeleccionado(Cadenaseleccion As String)
-    Text1(21).Text = RecuperaValor(Cadenaseleccion, 1) 'codigo cooperativa
+Private Sub frmCoop_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(21).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo cooperativa
     FormateaCampo Text1(21)
-    Text2(21).Text = RecuperaValor(Cadenaseleccion, 2) 'nombre cooperativa
+    Text2(21).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre cooperativa
 End Sub
 
-Private Sub frmGlo_DatoSeleccionado(Cadenaseleccion As String)
-    Text1(26).Text = RecuperaValor(Cadenaseleccion, 1) 'codigo globalgap
-    Text2(26).Text = RecuperaValor(Cadenaseleccion, 2) 'nombre globalgap
+Private Sub frmGlo_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(26).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo globalgap
+    Text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre globalgap
 End Sub
 
-Private Sub frmSec_DatoSeleccionado(Cadenaseleccion As String)
-    txtAux1(1).Text = RecuperaValor(Cadenaseleccion, 1) 'codseccion
+Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codseccion
     FormateaCampo txtAux1(1)
-    txtAux2(1).Text = RecuperaValor(Cadenaseleccion, 2) 'nomseccion
+    txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nomseccion
     
 '    Set vSeccion = New CSeccion
 '    If vSeccion.LeerDatos(txtaux1(1).Text) Then
@@ -5248,17 +5248,17 @@ Private Sub frmSec_DatoSeleccionado(Cadenaseleccion As String)
 '    End If
 End Sub
 
-Private Sub frmSit_DatoSeleccionado(Cadenaseleccion As String)
-    Text1(15).Text = RecuperaValor(Cadenaseleccion, 1) 'codigo situacion
+Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(15).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
     FormateaCampo Text1(15)
-    Text2(15).Text = RecuperaValor(Cadenaseleccion, 2) 'nombre situacion
+    Text2(15).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
 End Sub
 
-Private Sub frmSocPrev_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmSocPrev_DatoSeleccionado(CadenaSeleccion As String)
 Dim CadB As String
     
-    If Cadenaseleccion <> "" Then
-        CadB = "codsocio = " & DBSet(RecuperaValor(Cadenaseleccion, 1), "N")
+    If CadenaSeleccion <> "" Then
+        CadB = "codsocio = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -5267,11 +5267,11 @@ Dim CadB As String
     End If
 End Sub
 
-Private Sub frmTIva_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
-    txtAux1(6).Text = RecuperaValor(Cadenaseleccion, 1) 'codiva
+    txtAux1(6).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo txtAux1(6)
-    txtAux2(0).Text = RecuperaValor(Cadenaseleccion, 2) 'nomiva
+    txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -7109,7 +7109,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -7230,7 +7230,7 @@ Private Sub imgBuscar_Click(Index As Integer)
 '            AyudaGlobalGap frmGlo, Text1(indice)
             Set frmGlo = New frmManGlobalGap
             
-            frmGlo.DeConsulta = True
+            frmGlo.DeConsulta = False
             frmGlo.DatosADevolverBusqueda = "0|1|"
             frmGlo.CodigoActual = Text1(Indice).Text
             frmGlo.Show vbModal
@@ -7247,11 +7247,11 @@ Private Sub imgBuscar_Click(Index As Integer)
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
-Private Sub frmCtas_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
-    txtAux1(Indice).Text = RecuperaValor(Cadenaseleccion, 1) 'codiva
+    txtAux1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo txtAux1(Indice)
-    txtAux2(Indice).Text = RecuperaValor(Cadenaseleccion, 2) 'nomiva
+    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
 End Sub
 
 ' *********************************************************************************
@@ -7876,7 +7876,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtAux1(Index).Text, "N")
             End If
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -7935,7 +7935,7 @@ Dim cadena As String
             PonerFormatoDecimal txtAux3(Index), 10
         
         Case 3 'observaciones
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -8874,7 +8874,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtAux4(Index), 1) Then
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select
