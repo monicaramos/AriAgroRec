@@ -7,7 +7,7 @@ Begin VB.Form frmManHoras
    Caption         =   "Entrada de Horas Trabajadores"
    ClientHeight    =   6240
    ClientLeft      =   45
-   ClientTop       =   330
+   ClientTop       =   30
    ClientWidth     =   16110
    Icon            =   "frmManHoras.frx":0000
    LinkTopic       =   "Form1"
@@ -21,7 +21,7 @@ Begin VB.Form frmManHoras
       Height          =   705
       Left            =   5190
       TabIndex        =   28
-      Top             =   60
+      Top             =   90
       Width           =   2895
       Begin VB.ComboBox cboFiltro 
          BeginProperty Font 
@@ -194,7 +194,7 @@ Begin VB.Form frmManHoras
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   350
       Index           =   3
       Left            =   5070
       MaskColor       =   &H00000000&
@@ -260,7 +260,7 @@ Begin VB.Form frmManHoras
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   350
       Index           =   2
       Left            =   12150
       MaskColor       =   &H00000000&
@@ -282,7 +282,7 @@ Begin VB.Form frmManHoras
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   350
       Index           =   1
       Left            =   4305
       MaskColor       =   &H00000000&
@@ -414,7 +414,7 @@ Begin VB.Form frmManHoras
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   330
+      Height          =   350
       Index           =   0
       Left            =   915
       MaskColor       =   &H00000000&
@@ -708,6 +708,8 @@ Begin VB.Form frmManHoras
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -759,6 +761,8 @@ Begin VB.Form frmManHoras
    End
    Begin VB.Menu mnFiltro 
       Caption         =   "Filtro"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnFiltro1 
          Caption         =   "Año actual"
       End
@@ -855,6 +859,7 @@ Dim I As Integer
 Private BuscaChekc As String
 
 
+Dim cadFiltro As String
 
 
 Private Sub PonerModo(vModo)
@@ -1073,10 +1078,10 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
     txtAux2(7).Top = alto
-    btnBuscar(0).Top = alto - 15
-    btnBuscar(1).Top = alto - 15
-    btnBuscar(2).Top = alto - 15
-    btnBuscar(3).Top = alto - 15
+    btnBuscar(0).Top = alto - 5
+    btnBuscar(1).Top = alto - 5
+    btnBuscar(2).Top = alto - 5
+    btnBuscar(3).Top = alto - 5
     
     Me.chkAux(0).Top = alto
     Me.chkAux(1).Top = alto
@@ -1553,16 +1558,15 @@ End Sub
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     Dim SQL As String
     Dim tots As String
-    Dim cadFiltro As String
     
     CargarSqlFiltro
     
-'    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        SQL = CadenaConsulta & " and " & cadFiltro & "  "
     End If
+    
     If Ascendente Then
         SQL = SQL & " ORDER BY  horas.fechahora, horas.codtraba "
     Else
@@ -1747,7 +1751,10 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 0: KEYBusqueda KeyAscii, 0 'trabajador
+                Case 1: KEYBusqueda KeyAscii, 1 'fechahora
+                Case 7: KEYBusqueda KeyAscii, 3 'almacen
+                Case 5: KEYBusqueda KeyAscii, 2 'fecharecibo
             End Select
         End If
     Else

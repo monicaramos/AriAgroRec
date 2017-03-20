@@ -2243,7 +2243,7 @@ Dim vSQL As String
 End Sub
 
 Private Function CargarTemporalStocksNatural(vtabla As String, vWhere As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eCargarTemporalStocksNatural
 
@@ -2252,40 +2252,40 @@ Dim Sql As String
     CargarTemporalStocksNatural = False
 
 
-    Sql = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N")
-    conn.Execute Sql
+    SQL = "delete from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute SQL
     
-    Sql = "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute SQL
     
     
-    Sql = "insert into tmpinformes2 (codusu, codigo1, fecha1, importe1) "
-    Sql = Sql & " select " & vUsu.Codigo & ",trzpalets.codvarie, trzpalets.fecha, sum(coalesce(trzpalets.numkilos,0)) from trzpalets where "
-    Sql = Sql & "  not idpalet in (select idpalet from palets where not idpalet is null) "
-    Sql = Sql & " and trzpalets.codvarie in (" & CadVariedades & ")"
-    If txtCodigo(2).Text <> "" Then Sql = Sql & " and trzpalets.fecha >= " & DBSet(txtCodigo(2).Text, "F")
-    If txtCodigo(3).Text <> "" Then Sql = Sql & " and trzpalets.fecha <= " & DBSet(txtCodigo(3).Text, "F")
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " order by 1,2,3 "
+    SQL = "insert into tmpinformes2 (codusu, codigo1, fecha1, importe1) "
+    SQL = SQL & " select " & vUsu.Codigo & ",trzpalets.codvarie, trzpalets.fecha, sum(coalesce(trzpalets.numkilos,0)) from trzpalets where "
+    SQL = SQL & "  not idpalet in (select idpalet from palets where not idpalet is null) "
+    SQL = SQL & " and trzpalets.codvarie in (" & CadVariedades & ")"
+    If txtCodigo(2).Text <> "" Then SQL = SQL & " and trzpalets.fecha >= " & DBSet(txtCodigo(2).Text, "F")
+    If txtCodigo(3).Text <> "" Then SQL = SQL & " and trzpalets.fecha <= " & DBSet(txtCodigo(3).Text, "F")
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " order by 1,2,3 "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into tmpinformes2 (codusu, codigo1, fecha1, importe1) "
-    Sql = Sql & " select " & vUsu.Codigo & ", trzmovim.codvarie, trzmovim.fecha, sum(coalesce(trzmovim.kilos,0)) from trzmovim where numalbar = 0 "
-    Sql = Sql & " and trzmovim.codvarie in (" & CadVariedades & ")"
-    If txtCodigo(2).Text <> "" Then Sql = Sql & " and trzmovim.fecha >= " & DBSet(txtCodigo(2).Text, "F")
-    If txtCodigo(3).Text <> "" Then Sql = Sql & " and trzmovim.fecha <= " & DBSet(txtCodigo(3).Text, "F")
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " order by 1,2,3 "
+    SQL = "insert into tmpinformes2 (codusu, codigo1, fecha1, importe1) "
+    SQL = SQL & " select " & vUsu.Codigo & ", trzmovim.codvarie, trzmovim.fecha, sum(coalesce(trzmovim.kilos,0)) from trzmovim where numalbar = 0 "
+    SQL = SQL & " and trzmovim.codvarie in (" & CadVariedades & ")"
+    If txtCodigo(2).Text <> "" Then SQL = SQL & " and trzmovim.fecha >= " & DBSet(txtCodigo(2).Text, "F")
+    If txtCodigo(3).Text <> "" Then SQL = SQL & " and trzmovim.fecha <= " & DBSet(txtCodigo(3).Text, "F")
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " order by 1,2,3 "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1) "
-    Sql = Sql & " select " & vUsu.Codigo & ", codigo1, fecha1, sum(importe1) from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N")
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " order by 1,2,3 "
+    SQL = "insert into tmpinformes (codusu, codigo1, fecha1, importe1) "
+    SQL = SQL & " select " & vUsu.Codigo & ", codigo1, fecha1, sum(importe1) from tmpinformes2 where codusu = " & DBSet(vUsu.Codigo, "N")
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " order by 1,2,3 "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     CargarTemporalStocksNatural = True
     
@@ -2726,18 +2726,18 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
         CadVariedades = CadenaSeleccion
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
         CadVariedades = "-1"
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -3236,7 +3236,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -3272,26 +3272,26 @@ End Function
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     
-    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -3308,7 +3308,7 @@ Private Function CargarTemporal(codpalet As String, codEnvio As String) As Boole
 ' codpalet = palets.numpalet
 ' codenvio = palets.numpedid
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Rs2 As Recordset
@@ -3342,11 +3342,11 @@ Dim HayReg As Boolean
 '                            " and palets.numpalet = palets_variedad.numpalet "
 '24/05/2010: ahora puede ser por variedad o por linea
             If Me.Option1(0).Value Then ' si por variedad
-                Sql = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
+                SQL = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
                                 " and fechaconf <= " & DBSet(txtCodigo(5).Text, "F") & _
                                 " and palets.numpalet = palets_variedad.numpalet "
             Else ' si por linea
-                Sql = "select * from palets where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
+                SQL = "select * from palets where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
                                 " and fechaconf <= " & DBSet(txtCodigo(5).Text, "F")
             
             End If
@@ -3359,10 +3359,10 @@ Dim HayReg As Boolean
 '                            " and palets.numpalet = palets_variedad.numpalet "
 '24/05/2010: ahora puede ser por variedad o por linea
             If Me.Option1(0).Value Then ' si por variedad
-                Sql = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where palets.numpalet = " & DBSet(CStr(codpalet), "N") & _
+                SQL = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where palets.numpalet = " & DBSet(CStr(codpalet), "N") & _
                                 " and palets.numpalet = palets_variedad.numpalet "
             Else
-                Sql = "select * from palets where numpalet = " & DBSet(CStr(codpalet), "N")
+                SQL = "select * from palets where numpalet = " & DBSet(CStr(codpalet), "N")
             End If
         
         End If
@@ -3374,16 +3374,16 @@ Dim HayReg As Boolean
 '                            " and palets.numpalet = palets_variedad.numpalet "
 '24/05/2010: ahora puede ser por variedad o por linea
         If Me.Option1(0).Value Then ' si por variedad
-            Sql = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where palets.numpedid = " & DBSet(CStr(codEnvio), "N") & _
+            SQL = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where palets.numpedid = " & DBSet(CStr(codEnvio), "N") & _
                                " and palets.numpalet = palets_variedad.numpalet "
         Else
-            Sql = "select * from palets where numpedid = " & DBSet(CStr(codEnvio), "N")
+            SQL = "select * from palets where numpedid = " & DBSet(CStr(codEnvio), "N")
         End If
     End If
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
@@ -3412,46 +3412,46 @@ Dim HayReg As Boolean
 '            Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 '24/05/2010:  ahora puede ser por variedad o por linea
             If Option1(0).Value Then
-                Sql = "select * from trzlineas_cargas, trzpalets " & _
+                SQL = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
                         " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             Else
-                Sql = "select * from trzlineas_cargas " & _
+                SQL = "select * from trzlineas_cargas " & _
                     "where linea = " & CStr(Rs!linconfe) & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
 
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             End If
             
             If Not Rs2.EOF Then
                 Rs2.MoveFirst
                 While Not Rs2.EOF
-                    Sql = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, fechahora, fecha)"
-                    Sql = Sql & " values("
-                    Sql = Sql & DBSet(vUsu.Codigo, "N") & ","
-                    Sql = Sql & CStr(Rs!NumPalet) & ","
+                    SQL = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, fechahora, fecha)"
+                    SQL = SQL & " values("
+                    SQL = SQL & DBSet(vUsu.Codigo, "N") & ","
+                    SQL = SQL & CStr(Rs!NumPalet) & ","
 '14/12/2009
 '                    SQL = SQL & CStr(Rs2!linea) & ","
 '14/12/2009: no insertamos en la temporal la linea sino la variedad
 '                    Sql = Sql & CStr(Rs!codvarie) & ","
 '24/05/2010:  ahora puede ser por variedad o por linea
                     If Option1(0).Value Then ' si es por variedad
-                        Sql = Sql & CStr(Rs!codvarie) & ","
+                        SQL = SQL & CStr(Rs!codvarie) & ","
                     Else
-                        Sql = Sql & CStr(Rs2!Linea) & ","
+                        SQL = SQL & CStr(Rs2!Linea) & ","
                     End If
                     
-                    Sql = Sql & CStr(Rs2!IdPalet) & ","
-                    Sql = Sql & DBSet(Rs2!FechaHora, "FH") & ","
-                    Sql = Sql & DBSet(Rs2!Fecha, "F") & ")"
-                    conn.Execute Sql
+                    SQL = SQL & CStr(Rs2!IdPalet) & ","
+                    SQL = SQL & DBSet(Rs2!FechaHora, "FH") & ","
+                    SQL = SQL & DBSet(Rs2!Fecha, "F") & ")"
+                    conn.Execute SQL
                     Rs2.MoveNext
                 Wend
             End If
@@ -3477,7 +3477,7 @@ Private Function CargarTemporalDestinos() As Boolean
 Dim DFecHoraPalet As Date
 Dim HFecHoraPalet As Date
 Dim FecHoraCarga As Date
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim HoraPalet As String
@@ -3491,14 +3491,14 @@ Dim Variedad As String
     CargarTemporalDestinos = False
     
     '-- Primero borramos lo que hubiera.
-    Sql = "delete from trztmp_palets_lineas_cargas where codusu = " & DBSet(vUsu.Codigo, "N")
-    conn.Execute Sql
+    SQL = "delete from trztmp_palets_lineas_cargas where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute SQL
     '-- Buscamos palets abocados con ese código de referencia
     NumNota = txtCodigo(8).Text
-    Sql = "select * from trzlineas_cargas where idpalet in "
+    SQL = "select * from trzlineas_cargas where idpalet in "
     
     If Option2(0).Value Then
-        Sql = Sql & "(select IdPalet from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N") & ")" '& _
+        SQL = SQL & "(select IdPalet from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N") & ")" '& _
 '               " or idpalet in (select a.IdPalet from trzpalet_palets as a, trzpalets as b" & _
 '                " where b.numnotac = '5234252' and b.IdPalet = a.IdPalet2 )"
 
@@ -3507,7 +3507,7 @@ Dim Variedad As String
 
     '[Monica]05/02/2014: nuevo listado de destinos por campo
     Else
-        Sql = Sql & "(select IdPalet from trzpalets where codcampo = " & DBSet(txtCodigo(8).Text, "N") & ")"
+        SQL = SQL & "(select IdPalet from trzpalets where codcampo = " & DBSet(txtCodigo(8).Text, "N") & ")"
         
         '[Monica]04/06/2014: guardamos las variedad
         Variedad = DevuelveValor("select distinct codvarie from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N"))
@@ -3515,7 +3515,7 @@ Dim Variedad As String
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
@@ -3525,21 +3525,21 @@ Dim Variedad As String
             HoraPalet = Format(FecHoraCarga, "hh:mm:ss")
             '-- Cogemos todos los palets confeccionados en la fecha porque la
             '   selección por horas no funciona
-            Sql = "select * from palets where" & _
+            SQL = "select * from palets where" & _
                         " fechaini = " & DBSet(FecHoraCarga, "F") & _
                         " and linconfe = " & CStr(Rs!Linea)
             '[Monica]12/02/2014: introducimos el desde/hasta fecha de inicio de palet confeccionado
-            If txtCodigo(14).Text <> "" Then Sql = Sql & " and fechaini >= " & DBSet(txtCodigo(14).Text, "F")
-            If txtCodigo(15).Text <> "" Then Sql = Sql & " and fechaini <= " & DBSet(txtCodigo(15).Text, "F")
+            If txtCodigo(14).Text <> "" Then SQL = SQL & " and fechaini >= " & DBSet(txtCodigo(14).Text, "F")
+            If txtCodigo(15).Text <> "" Then SQL = SQL & " and fechaini <= " & DBSet(txtCodigo(15).Text, "F")
             
             '04/06/2014: miramos que sea la misma variedad
             If vParamAplic.Cooperativa = 12 Then
-                Sql = Sql & " and numpalet in (select numpalet from palets_variedad where codvarie = " & DBSet(Variedad, "N") & ")"
+                SQL = SQL & " and numpalet in (select numpalet from palets_variedad where codvarie = " & DBSet(Variedad, "N") & ")"
             End If
                         
                         
             Set Rs2 = New ADODB.Recordset
-            Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not Rs2.EOF Then
                 Rs2.MoveFirst
                 While Not Rs2.EOF
@@ -3547,17 +3547,17 @@ Dim Variedad As String
                     HoraFin = Format(Rs2!HoraFin, "hh:mm:ss")
                     If (HoraInicio <= HoraPalet) And (HoraFin >= HoraPalet) And (Not YaEstaPalet(Rs2!NumPalet, Rs!IdPalet)) Then
                         '-- este es un posible palet de confección
-                        Sql = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, codtipo, fechahora, fecha, numnotac)"
-                        Sql = Sql & " values("
-                        Sql = Sql & DBSet(vUsu.Codigo, "N") & ","
-                        Sql = Sql & CStr(Rs2!NumPalet) & ","
-                        Sql = Sql & CStr(Rs!Linea) & ","
-                        Sql = Sql & CStr(Rs!IdPalet) & ","
-                        Sql = Sql & CStr(Rs!Tipo) & ","
-                        Sql = Sql & DBSet(Rs!FechaHora, "FH") & ","
-                        Sql = Sql & DBSet(Rs!Fecha, "F") & ","
-                        Sql = Sql & DBSet(NumNota, "N") & ")"
-                        conn.Execute Sql
+                        SQL = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, codtipo, fechahora, fecha, numnotac)"
+                        SQL = SQL & " values("
+                        SQL = SQL & DBSet(vUsu.Codigo, "N") & ","
+                        SQL = SQL & CStr(Rs2!NumPalet) & ","
+                        SQL = SQL & CStr(Rs!Linea) & ","
+                        SQL = SQL & CStr(Rs!IdPalet) & ","
+                        SQL = SQL & CStr(Rs!Tipo) & ","
+                        SQL = SQL & DBSet(Rs!FechaHora, "FH") & ","
+                        SQL = SQL & DBSet(Rs!Fecha, "F") & ","
+                        SQL = SQL & DBSet(NumNota, "N") & ")"
+                        conn.Execute SQL
                     End If
                     Rs2.MoveNext
                 Wend
@@ -3581,14 +3581,14 @@ End Function
 
 Private Function YaEstaPalet(codpalet As Long, Palet As Long) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
     
-    Sql = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
+    SQL = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
             " and palet = " & CStr(Palet) & _
             " and codusu = " & vUsu.Codigo '[Monica]25/05/2016:faltaba esta condicion
             
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     YaEstaPalet = Not Rs.EOF
 
@@ -3600,7 +3600,7 @@ End Function
 
 Private Function CargarTemporalAbocamiento() As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Rs2 As Recordset
@@ -3622,17 +3622,17 @@ Dim HayReg As Boolean
     conn.Execute Sql2
 
     If Me.Option1(0).Value Then ' si por variedad
-        Sql = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
+        SQL = "select distinct palets.*, palets_variedad.codvarie from palets, palets_variedad where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
                         " and fechaconf <= " & DBSet(txtCodigo(5).Text, "F") & _
                         " and palets.numpalet = palets_variedad.numpalet "
     Else ' si por linea
-        Sql = "select * from palets where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
+        SQL = "select * from palets where fechaconf >= " & DBSet(txtCodigo(4).Text, "F") & _
                         " and fechaconf <= " & DBSet(txtCodigo(5).Text, "F")
     
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
@@ -3643,42 +3643,42 @@ Dim HayReg As Boolean
             
             '-- Buscamos las cargas en ese periodo
             If Option1(0).Value Then
-                Sql = "select * from trzlineas_cargas, trzpalets " & _
+                SQL = "select * from trzlineas_cargas, trzpalets " & _
                         "where 1=1 " & _
                         " and trzlineas_cargas.idpalet = trzpalets.idpalet " & _
                         " and trzpalets.codvarie = " & DBSet(Rs!codvarie, "N") & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             Else
-                Sql = "select * from trzlineas_cargas " & _
+                SQL = "select * from trzlineas_cargas " & _
                     "where linea = " & CStr(Rs!linconfe) & _
                         " and fechahora >= " & DBSet(DFecHoraPalet, "FH") & _
                         " and fechahora <= " & DBSet(HFecHoraPalet, "FH")
 
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             End If
             
             If Not Rs2.EOF Then
                 Rs2.MoveFirst
                 While Not Rs2.EOF
-                    Sql = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, fechahora, fecha)"
-                    Sql = Sql & " values("
-                    Sql = Sql & DBSet(vUsu.Codigo, "N") & ","
-                    Sql = Sql & CStr(Rs!NumPalet) & ","
+                    SQL = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, fechahora, fecha)"
+                    SQL = SQL & " values("
+                    SQL = SQL & DBSet(vUsu.Codigo, "N") & ","
+                    SQL = SQL & CStr(Rs!NumPalet) & ","
                     
                     If Option1(0).Value Then ' si es por variedad
-                        Sql = Sql & CStr(Rs!codvarie) & ","
+                        SQL = SQL & CStr(Rs!codvarie) & ","
                     Else
-                        Sql = Sql & CStr(Rs2!Linea) & ","
+                        SQL = SQL & CStr(Rs2!Linea) & ","
                     End If
                     
-                    Sql = Sql & CStr(Rs2!IdPalet) & ","
-                    Sql = Sql & DBSet(Rs2!FechaHora, "FH") & ","
-                    Sql = Sql & DBSet(Rs2!Fecha, "F") & ")"
-                    conn.Execute Sql
+                    SQL = SQL & CStr(Rs2!IdPalet) & ","
+                    SQL = SQL & DBSet(Rs2!FechaHora, "FH") & ","
+                    SQL = SQL & DBSet(Rs2!Fecha, "F") & ")"
+                    conn.Execute SQL
                     
                     Rs2.MoveNext
                 Wend
@@ -3710,7 +3710,7 @@ End Function
 '****************************************
 
 Private Sub CmdAcepCreacionPalet_Click()
-Dim Sql As String
+Dim SQL As String
 
     If txtCodigo(16).Text = "" Then
         MsgBox "Ha de introducir una fecha de creación. Reintroduzca.", vbExclamation
@@ -3718,21 +3718,21 @@ Dim Sql As String
         Exit Sub
     End If
     
-    Sql = "select * from trzlineas_cargas where fecha = " & DBSet(txtCodigo(16).Text, "F")
-    Sql = Sql & " and not idpalet in (select idpalet from palets where not idpalet is null) "
+    SQL = "select * from trzlineas_cargas where fecha = " & DBSet(txtCodigo(16).Text, "F")
+    SQL = SQL & " and not idpalet in (select idpalet from palets where not idpalet is null) "
     
-    If TotalRegistros(Sql) = 0 Then
+    If TotalRegistros(SQL) = 0 Then
         MsgBox "No se ha realizado ningún volcado esa fecha.", vbExclamation
     Else
         If FechaVolcadoCargada Then
             Exit Sub
         End If
     
-        If ComprobarExistenciasConAlbaranes(Sql) Then
+        If Not ComprobarExistenciasConAlbaranes(SQL) Then
             Exit Sub
         End If
         
-        If ProcesoCarga(Sql) Then
+        If ProcesoCarga(SQL) Then
             MsgBox "Proceso realizado correctamente.", vbExclamation
         End If
     End If
@@ -3740,18 +3740,18 @@ Dim Sql As String
 End Sub
 
 Private Function FechaVolcadoCargada() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     FechaVolcadoCargada = False
     
-    Sql = "select count(*) from palets where fechaini = " & DBSet(txtCodigo(16).Text, "F")
-    If DevuelveValor(Sql) <> 0 Then
+    SQL = "select count(*) from palets where fechaini = " & DBSet(txtCodigo(16).Text, "F")
+    If DevuelveValor(SQL) <> 0 Then
         MsgBox "Hay palets confeccionados con esa fecha. Revise.", vbExclamation
         FechaVolcadoCargada = True
     End If
     
-    Sql = "select count(*) from trzmovim where fecha = " & DBSet(txtCodigo(16).Text, "F")
-    If DevuelveValor(Sql) <> 0 Then
+    SQL = "select count(*) from trzmovim where fecha = " & DBSet(txtCodigo(16).Text, "F")
+    If DevuelveValor(SQL) <> 0 Then
         MsgBox "Hay movimientos de palets con esa fecha. Revise.", vbExclamation
         FechaVolcadoCargada = True
     End If
@@ -3760,7 +3760,7 @@ Dim Sql As String
 End Function
 
 Private Function ComprobarExistenciasConAlbaranes(vSQL As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim KilosVolcados As Long
 Dim CadVariedades As String
 Dim Rs As ADODB.Recordset
@@ -3771,42 +3771,42 @@ Dim Rs As ADODB.Recordset
     ComprobarExistenciasConAlbaranes = False
 
 
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     
     
     ' kilos salidos en albaranes
-    Sql = "insert into tmpinformes (codusu, codigo1, importe1) "
-    Sql = Sql & " select " & vUsu.Codigo & ", codvarie, sum(coalesce(pesoneto)) pesoneto "
-    Sql = Sql & " from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
-    Sql = Sql & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
-    Sql = Sql & " group by 1 "
-    Sql = Sql & " order by 1 "
-    conn.Execute Sql
+    SQL = "insert into tmpinformes (codusu, codigo1, importe1) "
+    SQL = SQL & " select " & vUsu.Codigo & ", codvarie, sum(coalesce(pesoneto)) pesoneto "
+    SQL = SQL & " from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    SQL = SQL & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
+    SQL = SQL & " group by 1,2 "
+    SQL = SQL & " order by 1,2 "
+    conn.Execute SQL
     
-    Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     
     ' kilos volcados esa fecha + kilos que quedan
-    Sql = "insert into tmpinformes2 (codusu, codigo1, importe1) "
-    Sql = Sql & " select " & vUsu.Codigo & ", aaaa.codvarie, sum(aaaa.kilos) from  "
-    Sql = Sql & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet = trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(txtCodigo(16).Text, "F")
-    Sql = Sql & " group by 1 "
-    Sql = Sql & " union "
-    Sql = Sql & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar is null and esmerma = 0"
-    Sql = Sql & " group by 1) aaaa "
-    Sql = Sql & " group by 1, 2 "
-    conn.Execute Sql
+    SQL = "insert into tmpinformes2 (codusu, codigo1, importe1) "
+    SQL = SQL & " select " & vUsu.Codigo & ", aaaa.codvarie, sum(aaaa.kilos) from  "
+    SQL = SQL & " (select codvarie, sum(coalesce(numkilos,0)) kilos from trzpalets inner join trzlineas_cargas on trzpalets.idpalet = trzlineas_cargas.idpalet where trzlineas_cargas.fecha = " & DBSet(txtCodigo(16).Text, "F")
+    SQL = SQL & " group by 1 "
+    SQL = SQL & " union "
+    SQL = SQL & " select codvarie, sum(coalesce(kilos,0)) kilos from trzmovim where numalbar is null and esmerma = 0"
+    SQL = SQL & " group by 1) aaaa "
+    SQL = SQL & " group by 1, 2 "
+    conn.Execute SQL
 
 
     CadVariedades = ""
 
     ' montamos un cursor con las variedades que tengan mas kilos salidos que volcados
-    Sql = "select tmpinformes.* from tmpinformes where codusu = " & vUsu.Codigo
-    Sql = Sql & " order by codigo1"
+    SQL = "select tmpinformes.* from tmpinformes where codusu = " & vUsu.Codigo
+    SQL = SQL & " order by codigo1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     While Not Rs.EOF
         KilosVolcados = DevuelveValor("select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & " and codigo1 = " & DBSet(Rs!Codigo1, "N"))
@@ -3827,7 +3827,7 @@ Dim Rs As ADODB.Recordset
     
     Set Rs = Nothing
 
-    ComprobarExistenciasConAlbaranes = False
+    ComprobarExistenciasConAlbaranes = True
     Exit Function
 
 eComprobarExistenciasConAlbaranes:
@@ -3862,14 +3862,14 @@ eProcesoCarga:
 End Function
 
 Private Function RepartoAlbaranes(vMens As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim Salir As Boolean
 Dim KilosVar As Long
 Dim numlinea As Integer
-Dim Resto As Long
+Dim resto As Long
 Dim vCodigo As Long
 
     On Error GoTo eRepartoAlbaranes
@@ -3877,13 +3877,13 @@ Dim vCodigo As Long
     RepartoAlbaranes = False
 
     ' para todos los albaranes que han salido repartimos
-    Sql = "select albaran.numalbar, albaran.codclien, codvarie, nrotraza, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
-    Sql = Sql & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
-    Sql = Sql & " group by 1,2,3,4  "
-    Sql = Sql & " order by 1,2,3,4 "
+    SQL = "select albaran.numalbar, albaran.codclien, codvarie, nrotraza, sum(numcajas), sum(pesoneto) pesoneto from albaran_variedad inner join albaran on albaran_variedad.numalbar = albaran.numalbar "
+    SQL = SQL & " where albaran.fechaalb = " & DBSet(txtCodigo(16).Text, "F")
+    SQL = SQL & " group by 1,2,3,4  "
+    SQL = SQL & " order by 1,2,3,4 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Sql2 = "select sum(kilos) from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
@@ -3901,47 +3901,47 @@ Dim vCodigo As Long
             
             Salir = False
             
-            numlinea = DevuelveValor("select coalesce(numlinea, 0) from albaran_palets where numalbar = " & DBSet(Rs!numalbar, "N"))
+            numlinea = DevuelveValor("select max(coalesce(numlinea, 0)) from albaran_palets where numalbar = " & DBSet(Rs!numalbar, "N"))
             
             While Not Rs2.EOF And Not Salir
                 numlinea = numlinea + 1
                 
-                Sql = "insert into albaran_palets (numalbar, numlinea, numpalet) values ("
-                Sql = Sql & DBSet(Rs!numalbar, "N") & "," & DBSet(numlinea, "N") & "," & DBSet(Rs2!NumPalet, "N") & ")"
+                SQL = "insert into albaran_palets (numalbar, numlinea, numpalet) values ("
+                SQL = SQL & DBSet(Rs!numalbar, "N") & "," & DBSet(numlinea, "N") & "," & DBSet(Rs2!NumPalet, "N") & ")"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             
                 If DBLet(Rs2!Kilos) < KilosVar Then
                     
                     KilosVar = KilosVar - DBLet(Rs2!Kilos)
                     
-                    Sql = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
-                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
-                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
-                    Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
+                    SQL = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
+                    SQL = SQL & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    SQL = SQL & ", codclien = " & DBSet(Rs!CodClien, "N")
+                    SQL = SQL & " where codigo = " & DBSet(Rs2!Codigo, "N")
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 Else
-                    Resto = DBLet(Rs2!Kilos) - KilosVar
+                    resto = DBLet(Rs2!Kilos) - KilosVar
                 
-                    Sql = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
-                    Sql = Sql & ", kilos =  " & DBSet(KilosVar, "N")
-                    Sql = Sql & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
-                    Sql = Sql & ", codclien = " & DBSet(Rs!CodClien, "N")
-                    Sql = Sql & " where codigo = " & DBSet(Rs2!Codigo, "N")
+                    SQL = "update trzmovim set numalbar = " & DBSet(Rs!numalbar, "N")
+                    SQL = SQL & ", kilos =  " & DBSet(KilosVar, "N")
+                    SQL = SQL & ", nrotraza = " & DBSet(Rs!nrotraza, "T")
+                    SQL = SQL & ", codclien = " & DBSet(Rs!CodClien, "N")
+                    SQL = SQL & " where codigo = " & DBSet(Rs2!Codigo, "N")
                 
-                    conn.Execute Sql
+                    conn.Execute SQL
                     
                     ' insertamos una linea con la diferencia que nos queda
-                    If Resto <> 0 Then
+                    If resto <> 0 Then
                         vCodigo = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
                         vCodigo = vCodigo + 1
                         
-                        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
-                        Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
-                        Sql = Sql & DBSet(Resto, "N") & ")"
+                        SQL = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+                        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(Rs2!NumPalet, "N") & "," & DBSet(Rs2!Fecha, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+                        SQL = SQL & DBSet(resto, "N") & ")"
                         
-                        conn.Execute Sql
+                        conn.Execute SQL
                     End If
                     
                     Salir = True
@@ -3968,7 +3968,7 @@ End Function
 
 
 Private Function CargarPaletsConfeccionados(vSQL As String, vMens As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim SqlInsert As String
@@ -4014,10 +4014,10 @@ Dim vCodigo As Long
     
         conn.Execute SqlInsert & SqlValues
     
-        Sql = "select * from trzpalets where idpalet = " & DBSet(Rs!IdPalet, "N")
+        SQL = "select * from trzpalets where idpalet = " & DBSet(Rs!IdPalet, "N")
         
         Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         If Not RS1.EOF Then
             Calibre = DevuelveValor("select min(codcalib) from calibres where codvarie = " & DBSet(RS1!codvarie, "N"))
@@ -4025,7 +4025,7 @@ Dim vCodigo As Long
             
             'palets_variedad
             SqlValues = "(" & DBSet(NroPalet, "N") & ",1," & DBSet(RS1!codvarie, "N") & "," & DBSet(RS1!codvarie, "N") & "," & DBSet(Marca, "N") & ","
-            SqlValues = SqlValues & DBSet(Forfait, "T") & "," & DBSet(RS1!Numkilos, "N") & "," & DBSet(RS1!Numkilos, "N") & "," & DBSet(RS1!NumCajones, "N") & ")"
+            SqlValues = SqlValues & DBSet(Forfait, "T") & "," & DBSet(RS1!NumKilos, "N") & "," & DBSet(RS1!NumKilos, "N") & "," & DBSet(RS1!NumCajones, "N") & ")"
             
             conn.Execute SqlInsert2 & SqlValues
             
@@ -4038,11 +4038,11 @@ Dim vCodigo As Long
         ' metemos en la tabla de movimientos de traza
         vCodigo = vCodigo + 1
         
-        Sql = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
-        Sql = Sql & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!codvarie, "N") & ","
-        Sql = Sql & DBSet(RS1!Numkilos, "N") & ")"
+        SQL = "insert into trzmovim (codigo, numpalet, fecha, codvarie, kilos) values "
+        SQL = SQL & "(" & DBSet(vCodigo, "N") & "," & DBSet(NroPalet, "N") & "," & DBSet(txtCodigo(16).Text, "F") & "," & DBSet(RS1!codvarie, "N") & ","
+        SQL = SQL & DBSet(RS1!NumKilos, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         Set RS1 = Nothing
         Rs.MoveNext
@@ -4071,7 +4071,7 @@ End Sub
 
 Private Function CargarTemporalAlbaranes(vtabla As String, vWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SqlValues As String
@@ -4091,7 +4091,7 @@ Dim CadValues As String
         vWhere = QuitarCaracterACadena(vWhere, "{")
         vWhere = QuitarCaracterACadena(vWhere, "}")
         vWhere = QuitarCaracterACadena(vWhere, "_1")
-        Sql = Sql & " WHERE " & vWhere
+        SQL = SQL & " WHERE " & vWhere
     End If
 
 
@@ -4101,15 +4101,15 @@ Dim CadValues As String
     Sql2 = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql2
 
-    Sql = "select albaran_variedad.numalbar, albaran_palets.numpalet, palets.fechaini, trzpalets.* from " & vtabla
-    If vWhere <> "" Then Sql = Sql & " where " & vWhere
-    Sql = Sql & " order by albaran_variedad.numalbar "
+    SQL = "select albaran_variedad.numalbar, albaran_palets.numpalet, palets.fechaini, trzpalets.* from " & vtabla
+    If vWhere <> "" Then SQL = SQL & " where " & vWhere
+    SQL = SQL & " order by albaran_variedad.numalbar "
                                             'numpalet, fecha,  codsocio,codcampo, codvarie, nronota, numalbar
                                             
     Sql1 = "insert into tmpinformes (codusu, importe1, fecha1, codigo1, importe2, importe3, importe4, importe5) values "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
@@ -4117,7 +4117,7 @@ Dim CadValues As String
         While Not Rs.EOF
             CadValues = CadValues & "(" & vUsu.Codigo & "," & DBSet(Rs!NumPalet, "N") & "," & DBSet(Rs!FechaIni, "F") & ","
             CadValues = CadValues & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & "," & DBSet(Rs!codvarie, "N") & ","
-            CadValues = CadValues & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!numalbar, "N") & "),"
+            CadValues = CadValues & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!numalbar, "N") & "),"
         
             Rs.MoveNext
         Wend
@@ -4142,7 +4142,7 @@ Private Function CargarTemporalDestinosNatural() As Boolean
 Dim DFecHoraPalet As Date
 Dim HFecHoraPalet As Date
 Dim FecHoraCarga As Date
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
 Dim HoraPalet As String
@@ -4156,14 +4156,14 @@ Dim Variedad As String
     CargarTemporalDestinosNatural = False
     
     '-- Primero borramos lo que hubiera.
-    Sql = "delete from trztmp_palets_lineas_cargas where codusu = " & DBSet(vUsu.Codigo, "N")
-    conn.Execute Sql
+    SQL = "delete from trztmp_palets_lineas_cargas where codusu = " & DBSet(vUsu.Codigo, "N")
+    conn.Execute SQL
     '-- Buscamos palets abocados con ese código de referencia
     NumNota = txtCodigo(8).Text
-    Sql = "select * from trzlineas_cargas where idpalet in "
+    SQL = "select * from trzlineas_cargas where idpalet in "
     
     If Option2(0).Value Then
-        Sql = Sql & "(select IdPalet from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N") & ")" '& _
+        SQL = SQL & "(select IdPalet from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N") & ")" '& _
 '               " or idpalet in (select a.IdPalet from trzpalet_palets as a, trzpalets as b" & _
 '                " where b.numnotac = '5234252' and b.IdPalet = a.IdPalet2 )"
 
@@ -4172,7 +4172,7 @@ Dim Variedad As String
 
     '[Monica]05/02/2014: nuevo listado de destinos por campo
     Else
-        Sql = Sql & "(select IdPalet from trzpalets where codcampo = " & DBSet(txtCodigo(8).Text, "N") & ")"
+        SQL = SQL & "(select IdPalet from trzpalets where codcampo = " & DBSet(txtCodigo(8).Text, "N") & ")"
         
         '[Monica]04/06/2014: guardamos las variedad
         Variedad = DevuelveValor("select distinct codvarie from trzpalets where numnotac = " & DBSet(txtCodigo(8).Text, "N"))
@@ -4180,7 +4180,7 @@ Dim Variedad As String
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Rs.MoveFirst
@@ -4190,20 +4190,20 @@ Dim Variedad As String
             HoraPalet = Format(FecHoraCarga, "hh:mm:ss")
             '-- Cogemos todos los palets confeccionados en la fecha porque la
             '   selección por horas no funciona
-            Sql = "select * from palets where" & _
+            SQL = "select * from palets where" & _
                         " fechaini = " & DBSet(FecHoraCarga, "F") & _
                         " and linconfe = " & CStr(Rs!Linea) & _
                         " and idpalet = " & DBSet(Rs!IdPalet, "N")
             '[Monica]12/02/2014: introducimos el desde/hasta fecha de inicio de palet confeccionado
-            If txtCodigo(14).Text <> "" Then Sql = Sql & " and fechaini >= " & DBSet(txtCodigo(14).Text, "F")
-            If txtCodigo(15).Text <> "" Then Sql = Sql & " and fechaini <= " & DBSet(txtCodigo(15).Text, "F")
+            If txtCodigo(14).Text <> "" Then SQL = SQL & " and fechaini >= " & DBSet(txtCodigo(14).Text, "F")
+            If txtCodigo(15).Text <> "" Then SQL = SQL & " and fechaini <= " & DBSet(txtCodigo(15).Text, "F")
             
             '04/06/2014: miramos que sea la misma variedad
-            Sql = Sql & " and numpalet in (select numpalet from palets_variedad where codvarie = " & DBSet(Variedad, "N") & ")"
+            SQL = SQL & " and numpalet in (select numpalet from palets_variedad where codvarie = " & DBSet(Variedad, "N") & ")"
                         
                         
             Set Rs2 = New ADODB.Recordset
-            Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not Rs2.EOF Then
                 Rs2.MoveFirst
                 While Not Rs2.EOF
@@ -4211,17 +4211,17 @@ Dim Variedad As String
                     HoraFin = Format(Rs2!HoraFin, "hh:mm:ss")
                     If (HoraInicio <= HoraPalet) And (HoraFin >= HoraPalet) And (Not YaEstaPalet(Rs2!NumPalet, Rs!IdPalet)) Then
                         '-- este es un posible palet de confección
-                        Sql = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, codtipo, fechahora, fecha, numnotac)"
-                        Sql = Sql & " values("
-                        Sql = Sql & DBSet(vUsu.Codigo, "N") & ","
-                        Sql = Sql & CStr(Rs2!NumPalet) & ","
-                        Sql = Sql & CStr(Rs!Linea) & ","
-                        Sql = Sql & CStr(Rs!IdPalet) & ","
-                        Sql = Sql & CStr(Rs!Tipo) & ","
-                        Sql = Sql & DBSet(Rs!FechaHora, "FH") & ","
-                        Sql = Sql & DBSet(Rs!Fecha, "F") & ","
-                        Sql = Sql & DBSet(NumNota, "N") & ")"
-                        conn.Execute Sql
+                        SQL = "insert into trztmp_palets_lineas_cargas (codusu, numpalet, linea, palet, codtipo, fechahora, fecha, numnotac)"
+                        SQL = SQL & " values("
+                        SQL = SQL & DBSet(vUsu.Codigo, "N") & ","
+                        SQL = SQL & CStr(Rs2!NumPalet) & ","
+                        SQL = SQL & CStr(Rs!Linea) & ","
+                        SQL = SQL & CStr(Rs!IdPalet) & ","
+                        SQL = SQL & CStr(Rs!Tipo) & ","
+                        SQL = SQL & DBSet(Rs!FechaHora, "FH") & ","
+                        SQL = SQL & DBSet(Rs!Fecha, "F") & ","
+                        SQL = SQL & DBSet(NumNota, "N") & ")"
+                        conn.Execute SQL
                     End If
                     Rs2.MoveNext
                 Wend

@@ -613,6 +613,9 @@ Dim I As Integer
 Dim CadenaFiltro As String
 Dim Filtro As Byte
 
+Dim Ordenacion As String
+
+
 Private Sub PonerModo(vModo)
 Dim B As Boolean
 
@@ -637,7 +640,7 @@ Dim B As Boolean
     btnBuscar(2).visible = Not B
     chkAux(0).visible = Not B
 
-    cmdAceptar.visible = Not B
+    CmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1106,6 +1109,23 @@ Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
 End Sub
 
+Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
+Dim cad As String
+
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
+
+Me.Refresh
+Screen.MousePointer = vbHourglass
+
+Ordenacion = "ORDER BY " & DataGrid1.Columns(ColIndex).DataField
+
+'ColIndexAnt = ColIndex
+CargaGrid CadB
+
+Screen.MousePointer = vbDefault
+End Sub
+
 Private Sub DataGrid1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
@@ -1163,6 +1183,10 @@ Private Sub Form_Load()
     
     LeerFiltro True
     PonerFiltro Filtro
+    
+    
+    Ordenacion = " ORDER BY trzmovim.codigo "
+    
     
     CadB = ""
     CargaGrid "trzmovim.codigo is null"
@@ -1308,7 +1332,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     End If
 
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY trzmovim.codigo "
+    'SQL = SQL & " ORDER BY trzmovim.codigo "
+    SQL = SQL & " " & Ordenacion
     '**************************************************************++
     
     CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
