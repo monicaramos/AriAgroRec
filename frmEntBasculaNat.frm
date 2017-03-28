@@ -2359,19 +2359,21 @@ Dim Mens As String
                     TerminaBloquear
                     PosicionarData
                     
-                    If HanModificadoCajas Then
-                        If BLOQUEADesdeFormulario2(Me, Data1, 1) Then
+'[Monica]24/03/2017: Para el caso de Natural tanto si modifican cajas como kilos creo una nueva paletizacion
+                    If HanModificadoCajas Or HanModificadoKilos Then
+'                        If BLOQUEADesdeFormulario2(Me, Data1, 1) Then
                             CrearPaletizacion
                             TerminaBloquear
-                        End If
-                    Else
-                        If HanModificadoKilos Then
-                            If BLOQUEADesdeFormulario2(Me, Data1, 1) Then
-                                ActualizarPaletizacion
-                                TerminaBloquear
-                            End If
-                        End If
+'                        End If
+'                    Else
+'                        If HanModificadoKilos Then
+'                           If BLOQUEADesdeFormulario2(Me, Data1, 1) Then
+'                                ActualizarPaletizacion
+'                                TerminaBloquear
+'                           End If
+'                        End If
                     End If
+                    
                     
                 End If
             Else

@@ -1916,7 +1916,7 @@ Private HaDevueltoDatos As Boolean
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim CadB As String
+Dim cadB As String
 
 Dim CategAnt As String
 
@@ -1962,6 +1962,8 @@ End Sub
 Private Sub chkEmbarga_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
+
+
 
 
 Private Sub cmdAceptar_Click()
@@ -2141,13 +2143,13 @@ Dim I As Integer
 End Sub
 
 Private Sub frmTraPrev_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
+Dim cadB As String
     
     If CadenaSeleccion <> "" Then
-        CadB = "codtraba = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        cadB = "codtraba = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
         
         'Se muestran en el mismo form
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
@@ -2554,12 +2556,12 @@ End Sub
 
 Private Sub HacerBusqueda()
 
-    CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
+    cadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
     If chkVistaPrevia(0) = 1 Then
-        MandaBusquedaPrevia CadB
-    ElseIf CadB <> "" Then
-        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        MandaBusquedaPrevia cadB
+    ElseIf cadB <> "" Then
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
         PonerCadenaBusqueda
     Else
         ' *** foco al 1r camp visible de la capçalera que siga clau primaria ***
@@ -2569,7 +2571,7 @@ Private Sub HacerBusqueda()
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 '    Dim cad As String
 '
 '    'Cridem al form
@@ -2606,7 +2608,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
     
     Set frmTraPrev = New frmManTrabaPrev
     
-    frmTraPrev.cWhere = CadB
+    frmTraPrev.cWhere = cadB
     frmTraPrev.DatosADevolverBusqueda = "0|1|2|"
     frmTraPrev.Show vbModal
     
@@ -2673,7 +2675,7 @@ End Sub
 Private Sub BotonVerTodos()
 'Vore tots
     LimpiarCampos 'Neteja els Text1
-    CadB = ""
+    cadB = ""
     
     If chkVistaPrevia(0).Value = 1 Then
         MandaBusquedaPrevia ""
@@ -2844,7 +2846,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cadMen As String
 Dim cta As String
 Dim TipoForp As String
@@ -2927,14 +2929,14 @@ Dim TipoForp As String
     'control de costes
     If B And vParamAplic.HayCCostes Then
         If Modo = 3 Or Modo = 4 Then
-            SQL = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
+            Sql = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
             If Text1(31).Text <> "" Then
-                SQL = SQL & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
+                Sql = Sql & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
             Else
-                SQL = SQL & " and idtarjeta is null "
+                Sql = Sql & " and idtarjeta is null "
             End If
     
-            If DevuelveValor(SQL) <> 0 Then
+            If DevuelveValor(Sql) <> 0 Then
                 If MsgBox("Hay otro trabajador con el mismo Nro.Tarjeta asignado." & vbCrLf & vbCrLf & "               ¿Desea Continuar?.", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                     B = False
                 End If
@@ -3026,7 +3028,7 @@ Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim campo2 As String
-Dim SQL As String
+Dim Sql As String
 
 
 
@@ -3069,9 +3071,9 @@ Dim SQL As String
                 Else ' traemos el porcentaje de irpf y de seguridad social
                     If Modo = 3 Or Modo = 4 Then
                         campo2 = "dtosegso"
-                        SQL = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
-                        If SQL <> "" Then
-                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(SQL), "##0.00")
+                        Sql = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
+                        If Sql <> "" Then
+                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(Sql), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(26).Text = Format(ImporteSinFormato(campo2), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = DevuelveDesdeBDNew(cAgro, "salarios", "pluscapataz", "codcateg", Text1(9).Text, "N")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = Format(ImporteSinFormato(Text1(27).Text), "###,##0.00")
@@ -3404,9 +3406,9 @@ Private Sub printNou()
     With frmImprimir2
         .cadTabla2 = "straba"
         .Informe2 = "rManTraba.rpt"
-        If CadB <> "" Then
+        If cadB <> "" Then
             '.cadRegSelec = Replace(SQL2SF(CadB), "clientes", "clientes_1")
-            .cadRegSelec = SQL2SF(CadB)
+            .cadRegSelec = SQL2SF(cadB)
         Else
             .cadRegSelec = ""
         End If
@@ -3468,14 +3470,14 @@ Dim I As Integer
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     SepuedeBorrar = False
     
     ' *** si cal comprovar alguna cosa abans de borrar ***
-    SQL = ""
-    SQL = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
-    If SQL <> "" Then
+    Sql = ""
+    Sql = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
+    If Sql <> "" Then
         MsgBox "No puede borrar el trabajador porque tiene horas asignadas.", vbExclamation
         Exit Function
     End If

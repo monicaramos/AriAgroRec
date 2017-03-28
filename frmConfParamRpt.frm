@@ -271,7 +271,7 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10035
+      Left            =   10050
       TabIndex        =   12
       Top             =   5280
       Width           =   1035
@@ -414,7 +414,7 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8640
+      Left            =   8880
       TabIndex        =   11
       Top             =   5280
       Visible         =   0   'False
@@ -422,6 +422,7 @@ Begin VB.Form frmConfParamRpt
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "&Salir"
+      Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -435,6 +436,7 @@ Begin VB.Form frmConfParamRpt
       Left            =   10035
       TabIndex        =   13
       Top             =   5280
+      Visible         =   0   'False
       Width           =   1035
    End
    Begin VB.TextBox Text1 
@@ -705,51 +707,58 @@ Dim Modo As Byte
 '3: Añadir
 '4: Modificar
 
+Dim cadB As String
+
+
 
 Private Sub cmdAceptar_Click()
 Dim vParamRpt As CParamRpt 'Clase Parametros para Reports
 Dim cad As String, Indicador As String
 Dim actualiza As Boolean
 
-    If DatosOK Then
-        'Modifica datos en la Tabla: scryst
-'        I = ModificaDesdeFormulario(Me)
-        'Actualizar campos de la clase
-            Set vParamRpt = New CParamRpt
-            vParamRpt.Codigo = Text1(0).Text
-            vParamRpt.Descripcion = Text1(1).Text
-            vParamRpt.Documento = Text1(2).Text
-            vParamRpt.AridocRpt = Text1(10).Text
-            vParamRpt.CodigoISO = Text1(3).Text
-            If Trim(Text1(4).Text) <> "" Then
-                vParamRpt.CodigoRevision = CInt(Text1(4).Text)
-            Else
-                vParamRpt.CodigoRevision = -1
+    Select Case Modo
+        Case 1  'BUSQUEDA
+            HacerBusqueda
+        Case 3, 4
+            If DatosOK Then
+                'Modifica datos en la Tabla: scryst
+        '        I = ModificaDesdeFormulario(Me)
+                'Actualizar campos de la clase
+                    Set vParamRpt = New CParamRpt
+                    vParamRpt.Codigo = Text1(0).Text
+                    vParamRpt.Descripcion = Text1(1).Text
+                    vParamRpt.Documento = Text1(2).Text
+                    vParamRpt.AridocRpt = Text1(10).Text
+                    vParamRpt.CodigoISO = Text1(3).Text
+                    If Trim(Text1(4).Text) <> "" Then
+                        vParamRpt.CodigoRevision = CInt(Text1(4).Text)
+                    Else
+                        vParamRpt.CodigoRevision = -1
+                    End If
+                    vParamRpt.LineaPie1 = Text1(5).Text
+                    vParamRpt.LineaPie2 = Text1(6).Text
+                    vParamRpt.LineaPie3 = Text1(7).Text
+                    vParamRpt.LineaPie4 = Text1(8).Text
+                    vParamRpt.LineaPie5 = Text1(9).Text
+                    
+                    vParamRpt.ImprimeDirecto = chkImpDirecto.Value
+                If Modo = 3 Then 'INSERTAR
+                    actualiza = vParamRpt.Insertar
+                ElseIf Modo = 4 Then 'MODIFICAR
+                    actualiza = vParamRpt.Modificar(Text1(0).Text)
+                    TerminaBloquear
+                End If
+                Set vParamRpt = Nothing
+                If actualiza = 0 Then 'Inserta o Modifica
+                    cad = "codcryst=" & Text1(0).Text
+                    If SituarData(Data1, cad, Indicador) Then
+                        PonerModo 2
+                        Me.lblIndicador.Caption = Indicador
+                    End If
+                End If
+'                PonerFocoBtn Me.cmdSalir
             End If
-            vParamRpt.LineaPie1 = Text1(5).Text
-            vParamRpt.LineaPie2 = Text1(6).Text
-            vParamRpt.LineaPie3 = Text1(7).Text
-            vParamRpt.LineaPie4 = Text1(8).Text
-            vParamRpt.LineaPie5 = Text1(9).Text
-            
-            vParamRpt.ImprimeDirecto = chkImpDirecto.Value
-
-        If Modo = 3 Then 'INSERTAR
-            actualiza = vParamRpt.Insertar
-        ElseIf Modo = 4 Then 'MODIFICAR
-            actualiza = vParamRpt.Modificar(Text1(0).Text)
-            TerminaBloquear
-        End If
-        Set vParamRpt = Nothing
-        If actualiza = 0 Then 'Inserta o Modifica
-            cad = "codcryst=" & Text1(0).Text
-            If SituarData(Data1, cad, Indicador) Then
-                PonerModo 2
-                Me.lblIndicador.Caption = Indicador
-            End If
-        End If
-        PonerFocoBtn Me.cmdSalir
-    End If
+    End Select
 End Sub
 
 
@@ -848,6 +857,7 @@ On Error GoTo EEPonerBusq
         Screen.MousePointer = vbDefault
         Me.Toolbar1.Buttons(2).Enabled = False
     Else
+        PonerModo 2
         Data1.Recordset.MoveFirst
         PonerCampos
     End If
@@ -862,12 +872,13 @@ EEPonerBusq:
 End Sub
 
 
+
 Private Sub frmTDoc_DatoSeleccionado(CadenaSeleccion As String)
-Dim CadB As String
-    CadB = "codcryst = " & RecuperaValor(CadenaSeleccion, 1)
+Dim cadB As String
+    cadB = "codcryst = " & RecuperaValor(CadenaSeleccion, 1)
     
     'Se muestran en el mismo form
-    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
     PonerCadenaBusqueda
     Screen.MousePointer = vbDefault
 
@@ -985,15 +996,15 @@ End Sub
 
 Private Sub HacerBusqueda()
 Dim cad As String
-Dim CadB As String
-CadB = ObtenerBusqueda(Me)
+Dim cadB As String
+cadB = ObtenerBusqueda(Me)
 
 If chkVistaPrevia = 1 Then
-    MandaBusquedaPrevia CadB
+    MandaBusquedaPrevia cadB
     Else
         'Se muestran en el mismo form
-        If CadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        If cadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
 End If
@@ -1018,7 +1029,7 @@ End Sub
 Private Sub PonerBotonCabecera(B As Boolean)
     Me.cmdAceptar.visible = Not B
     Me.cmdCancelar.visible = Not B
-    Me.cmdSalir.visible = B
+'    Me.cmdSalir.visible = B
     If B Then Me.lblIndicador.Caption = ""
 End Sub
 
@@ -1131,11 +1142,11 @@ Dim B As Boolean
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(CadB As String)
+Private Sub MandaBusquedaPrevia(cadB As String)
 
     Set frmTDoc = New frmBasico2
     
-    AyudaTiposDocumentos frmTDoc, , CadB
+    AyudaTiposDocumentos frmTDoc, , cadB
     
     Set frmTDoc = Nothing
 
