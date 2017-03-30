@@ -1166,7 +1166,7 @@ Dim B As Boolean
 End Sub
 
 Private Sub BotonAnyadir()
-    Dim NumF As String
+    Dim Numf As String
     Dim anc As Single
     
     CargaGrid CadB, True 'primer de tot carregue tot el grid
@@ -1307,7 +1307,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1322,23 +1322,23 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(3)
-    SQL = SQL & vbCrLf & "Capataz: " & adodc1.Recordset.Fields(4) & " " & adodc1.Recordset.Fields(5)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(3)
+    Sql = Sql & vbCrLf & "Capataz: " & adodc1.Recordset.Fields(4) & " " & adodc1.Recordset.Fields(5)
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from horas where codcapat=" & adodc1.Recordset!codcapat
-        SQL = SQL & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        SQL = SQL & " and codtraba = " & DBLet(adodc1.Recordset!CodTraba)
-        SQL = SQL & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
+        Sql = "Delete from horas where codcapat=" & adodc1.Recordset!codcapat
+        Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
+        Sql = Sql & " and codtraba = " & DBLet(adodc1.Recordset!CodTraba)
+        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
         
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1481,22 +1481,43 @@ Private Sub cmdAceptar_Click()
 '                If ModificaDesdeFormulario(Me) Then
                 If ModificaDesdeForm Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(1)
-                    PonerModo 2
-                    CargaGrid CadB
-'                    If CadB <> "" Then
-'                        CargaGrid CadB
-'                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-'                    Else
-'                        CargaGrid
-'                        lblIndicador.Caption = ""
-'                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & I)
-                    PonerFocoGrid Me.DataGrid1
+'                    I = adodc1.Recordset.Fields(1)
+'                    PonerModo 2
+'                    CargaGrid CadB
+''                    If CadB <> "" Then
+''                        CargaGrid CadB
+''                        lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
+''                    Else
+''                        CargaGrid
+''                        lblIndicador.Caption = ""
+''                    End If
+'                    adodc1.Recordset.Find (adodc1.Recordset.Fields(1).Name & " =" & I)
+'                    PonerFocoGrid Me.DataGrid1
+                    PosicionarData
                 End If
             End If
     End Select
 End Sub
+
+Private Sub PosicionarData()
+Dim cad As String, Indicador As String
+
+    ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
+    cad = "codtraba = " & adodc1.Recordset.Fields(3) & " and  codvarie = " & adodc1.Recordset.Fields(1) & " and fechahora = " & DBSet(adodc1.Recordset.Fields(0), "F")
+    ' ***************************************
+    CargaGrid CadB
+    ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
+    'If SituarDataMULTI(Data1, cad, Indicador) Then
+    If SituarDataMULTI(adodc1, cad, Indicador, True) Then
+        PonerModo 2
+        lblIndicador.Caption = Indicador
+    Else
+       PonerModo 0
+    End If
+   
+    ' ***********************************************************************************
+End Sub
+
 
 Private Sub cmdCancelar_Click()
     On Error Resume Next
@@ -1752,24 +1773,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     If Ascendente Then
-        SQL = SQL & " ORDER BY  horas.fechahora, horas.codvarie "
+        Sql = Sql & " ORDER BY  horas.fechahora, horas.codvarie "
     Else
         '********************* canviar el ORDER BY *********************++
-        SQL = SQL & " ORDER BY  horas.fechahora desc, horas.codvarie, horas.codtraba, horas.codcapat "
+        Sql = Sql & " ORDER BY  horas.fechahora desc, horas.codvarie, horas.codtraba, horas.codcapat "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
@@ -1789,7 +1810,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales SQL
+    CalcularTotales Sql
 
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
@@ -1901,7 +1922,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1909,11 +1930,11 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-        SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-        SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from horas where codcapat = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+        Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El capataz existe para esta fecha, codtraba, variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1991,7 +2012,8 @@ End Sub
 Private Sub BotonTrabajadores()
     vCadBusqueda = ""
     AbrirListadoNominas (41)
-    CargaGrid vCadBusqueda
+    CadB = vCadBusqueda
+    CargaGrid CadB
     PonerModoOpcionesMenu
 End Sub
 
@@ -2038,24 +2060,24 @@ End Sub
 
 
 Private Function ModificaDesdeForm() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    SQL = "update horas set "
-    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N", "S")
-    SQL = SQL & ", horasdia = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    SQL = SQL & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(9).Text), "N", "S")
-    SQL = SQL & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
-    SQL = SQL & " where codcapat = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-    SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+    Sql = "update horas set "
+    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N", "S")
+    Sql = Sql & ", horasdia = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    Sql = Sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(9).Text), "N", "S")
+    Sql = Sql & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
+    Sql = Sql & " where codcapat = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function
@@ -2072,14 +2094,14 @@ Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(importe) importe , sum(compleme) compleme ,sum(penaliza) penaliza from (" & cadena & ") aaaaa"
+    Sql = "select sum(importe) importe , sum(compleme) compleme ,sum(penaliza) penaliza from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Compleme = 0
