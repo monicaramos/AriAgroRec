@@ -516,7 +516,7 @@ Dim cOrden As String
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim numOp As Byte
-Dim SQL As String
+Dim Sql As String
 Dim HayReg As Boolean
 Dim cTabla As String
 
@@ -582,8 +582,8 @@ Dim cTabla As String
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
             If HayRegParaInforme(tabla, cadSelect) Then
                 
-                SQL = "delete from tmpclasifica where codusu = " & vUsu.Codigo
-                conn.Execute SQL
+                Sql = "delete from tmpclasifica where codusu = " & vUsu.Codigo
+                conn.Execute Sql
             
                 ' comprobamos que no existan las notas a actualizar en el hco de entradas
                 If vParamAplic.SeRespetaNota Then
@@ -697,7 +697,7 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
     
     Continuar = False
     If CadenaSeleccion <> "0" Then
@@ -955,7 +955,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
     
@@ -971,7 +971,7 @@ End Function
 
 Private Function ActualizarTabla(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim cadMen As String
@@ -1014,15 +1014,15 @@ Dim RS1 As ADODB.Recordset
     End If
     
     
-    SQL = "insert into tmpNotas (numnotac, kilosnet) select rclasifica.numnotac, "
-    SQL = SQL & "  sum(rclasifica_clasif.kilosnet) kilos from (" & QuitarCaracterACadena(QuitarCaracterACadena(cTabla, "{"), "}")
-    SQL = SQL & ") inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac "
+    Sql = "insert into tmpNotas (numnotac, kilosnet) select rclasifica.numnotac, "
+    Sql = Sql & "  sum(rclasifica_clasif.kilosnet) kilos from (" & QuitarCaracterACadena(QuitarCaracterACadena(cTabla, "{"), "}")
+    Sql = Sql & ") inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac "
     If cWhere <> "" Then
-        SQL = SQL & " where " & QuitarCaracterACadena(QuitarCaracterACadena(cWhere, "}"), "{")
+        Sql = Sql & " where " & QuitarCaracterACadena(QuitarCaracterACadena(cWhere, "}"), "{")
     End If
-    SQL = SQL & " group by 1  having sum(rclasifica_clasif.kilosnet) <> 0 "
+    Sql = Sql & " group by 1  having sum(rclasifica_clasif.kilosnet) <> 0 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     ' 04/06/2010 tendremos que enlazar en todas partes con tmpclasifica
 
 
@@ -1086,35 +1086,35 @@ Dim RS1 As ADODB.Recordset
             ' si no es tercero y se agrupan notas
             '[Monica]30/01/2014: en el caso de Alzira se rompe tambien por capataz
             If vParamAplic.Cooperativa = 4 Then
-                SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor, rclasifica.codcapat FROM " & QuitarCaracterACadena(cTabla, "_1")
+                Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor, rclasifica.codcapat FROM " & QuitarCaracterACadena(cTabla, "_1")
             Else
                 '[Monica]04/10/2016: Coopic rompe tb por nro de documento
                 If vParamAplic.Cooperativa = 16 Then
-                    SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor,rclasifica.contrato FROM " & QuitarCaracterACadena(cTabla, "_1")
+                    Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor,rclasifica.contrato FROM " & QuitarCaracterACadena(cTabla, "_1")
                 Else
-                    SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor FROM " & QuitarCaracterACadena(cTabla, "_1")
+                    Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio,rclasifica.transportadopor FROM " & QuitarCaracterACadena(cTabla, "_1")
                 End If
             End If
-            SQL = SQL & ", tmpNotas "
+            Sql = Sql & ", tmpNotas "
             If cWhere <> "" Then
                 cWhere = QuitarCaracterACadena(cWhere, "{")
                 cWhere = QuitarCaracterACadena(cWhere, "}")
                 cWhere = QuitarCaracterACadena(cWhere, "_1")
-                SQL = SQL & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
             Else
-                SQL = SQL & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
             End If
-            SQL = SQL & " and rclasifica.numnotac = tmpNotas.numnotac "
+            Sql = Sql & " and rclasifica.numnotac = tmpNotas.numnotac "
             '[Monica]30/01/2014: en el caso de Alzira se rompe tambien por capataz
             '        04/10/2016: coopic agrupado por contrato
             If vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 16 Then
-                SQL = SQL & " GROUP BY 1,2,3,4,5,6,7,8 "
+                Sql = Sql & " GROUP BY 1,2,3,4,5,6,7,8 "
             Else
-                SQL = SQL & " GROUP BY 1,2,3,4,5,6,7 "
+                Sql = Sql & " GROUP BY 1,2,3,4,5,6,7 "
             End If
                 
             Set Rs = New ADODB.Recordset
-            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs.EOF And B
                 Set vTipoMov = New CTiposMov
@@ -1202,34 +1202,34 @@ Dim RS1 As ADODB.Recordset
             ' o no se agrupan notas
             '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
             If vParamAplic.Cooperativa = 4 Then
-                SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor, rclasifica.codcapat FROM " & QuitarCaracterACadena(cTabla, "_1")
+                Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor, rclasifica.codcapat FROM " & QuitarCaracterACadena(cTabla, "_1")
             Else
                 If vParamAplic.Cooperativa = 16 Then
-                    SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor, rclasifica.contrato FROM " & QuitarCaracterACadena(cTabla, "_1")
+                    Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor, rclasifica.contrato FROM " & QuitarCaracterACadena(cTabla, "_1")
                 Else
-                    SQL = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor FROM " & QuitarCaracterACadena(cTabla, "_1")
+                    Sql = "Select rclasifica.fechaent,rclasifica.codcampo,rclasifica.tipoentr,rclasifica.recolect,rclasifica.codvarie,rclasifica.codsocio, rclasifica.numnotac,rclasifica.transportadopor FROM " & QuitarCaracterACadena(cTabla, "_1")
                 End If
             End If
-            SQL = SQL & ", tmpNotas "
+            Sql = Sql & ", tmpNotas "
             If cWhere <> "" Then
                 cWhere = QuitarCaracterACadena(cWhere, "{")
                 cWhere = QuitarCaracterACadena(cWhere, "}")
                 cWhere = QuitarCaracterACadena(cWhere, "_1")
-                SQL = SQL & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " WHERE " & cWhere & " and rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
             Else
-                SQL = SQL & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
+                Sql = Sql & " where rclasifica.codsocio = " & DBSet(RS1!Codsocio, "N")
             End If
-            SQL = SQL & " and rclasifica.numnotac = tmpNotas.numnotac "
+            Sql = Sql & " and rclasifica.numnotac = tmpNotas.numnotac "
             '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
             If vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 16 Then
-                SQL = SQL & " GROUP BY 1,2,3,4,5,6,7,8,9 "
+                Sql = Sql & " GROUP BY 1,2,3,4,5,6,7,8,9 "
             Else
-                SQL = SQL & " GROUP BY 1,2,3,4,5,6,7,8 "
+                Sql = Sql & " GROUP BY 1,2,3,4,5,6,7,8 "
             End If
                 
                 
             Set Rs = New ADODB.Recordset
-            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
             
             While Not Rs.EOF And B
@@ -1304,8 +1304,11 @@ Dim RS1 As ADODB.Recordset
                     
                     '[Monica]10/03/2017: para el caso de natural hay que cargar la entrada en el historico de ariagro2
                     If B And vParamAplic.Cooperativa = 9 And vEmpresa.BDAriagro = "ariagro1" Then
-                        B = InsertarHcoHortonature(Rs!NumNotac, numalbar, cadMen)
-                        cadMen = "Inserción en Hco de Entradas de Hortonature: " & cadMen
+                        'B = InsertarHcoHortonature(Rs!NumNotac, numalbar, cadMen)
+                        'cadMen = "Inserción en Hco de Entradas de Hortonature: " & cadMen
+                        '[Monica]03/04/2017: no insertamos en el hco sino en la clasificacion sin la datos de la clasificacion para que los introduzcan
+                        B = InsertarClasificaHortonature(Rs!NumNotac, numalbar, cadMen)
+                        cadMen = "Inserción en Entradas Clasificadas de Hortonature: " & cadMen
                     End If
                     
                     
@@ -1458,7 +1461,7 @@ End Function
 
 Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -1478,8 +1481,8 @@ Dim AlbaranE As String
 'numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,
 'imptrans , impacarr, imprecol, imppenal, impreso
     
-    SQL = "insert into rhisfruta (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,"
-    SQL = SQL & "numcajon,kilosnet,imptrans,impacarr,imprecol,imppenal,impreso,kilostra,contrato ) values "
+    Sql = "insert into rhisfruta (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,"
+    Sql = Sql & "numcajon,kilosnet,imptrans,impacarr,imprecol,imppenal,impreso,kilostra,contrato ) values "
 
     Sql1 = "select sum(kilosbru) as kilosbru ,sum(numcajon) as numcajon,sum(rclasifica.kilosnet) as kilosnet,sum(imptrans) as imptrans, sum(impacarr) as impacarr,"
     Sql1 = Sql1 & " sum(imprecol) as imprecol,sum(imppenal) as imppenal,sum(rclasifica.kilostra) as kilostra from rclasifica, tmpNotas "
@@ -1512,47 +1515,47 @@ Dim AlbaranE As String
     Rs2.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     
-    SQL = SQL & "(" & DBSet(Albaran, "N") & ","
-    SQL = SQL & DBSet(Rs!FechaEnt, "F") & ","
-    SQL = SQL & DBSet(Rs!codvarie, "N") & ","
-    SQL = SQL & DBSet(Rs!Codsocio, "N") & ","
-    SQL = SQL & DBSet(Rs!codcampo, "N") & ","
-    SQL = SQL & DBSet(Rs!TipoEntr, "N") & ","
-    SQL = SQL & DBSet(Rs!Recolect, "N") & ","
-    SQL = SQL & DBSet(Rs!transportadopor, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(0).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(1).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(2).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(3).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(4).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(5).Value, "N") & ","
-    SQL = SQL & DBSet(Rs2.Fields(6).Value, "N") & ","
-    SQL = SQL & "0,"
-    SQL = SQL & DBSet(Rs2.Fields(7).Value, "N")
+    Sql = Sql & "(" & DBSet(Albaran, "N") & ","
+    Sql = Sql & DBSet(Rs!FechaEnt, "F") & ","
+    Sql = Sql & DBSet(Rs!codvarie, "N") & ","
+    Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
+    Sql = Sql & DBSet(Rs!codcampo, "N") & ","
+    Sql = Sql & DBSet(Rs!TipoEntr, "N") & ","
+    Sql = Sql & DBSet(Rs!Recolect, "N") & ","
+    Sql = Sql & DBSet(Rs!transportadopor, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(0).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(1).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(2).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(3).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(4).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(5).Value, "N") & ","
+    Sql = Sql & DBSet(Rs2.Fields(6).Value, "N") & ","
+    Sql = Sql & "0,"
+    Sql = Sql & DBSet(Rs2.Fields(7).Value, "N")
     '[Monica]05/10/2016: nuevo campo de contrato para coopic
     If vParamAplic.Cooperativa <> 16 Then
-        SQL = SQL & "," & ValorNulo & ")"
+        Sql = Sql & "," & ValorNulo & ")"
     Else
-        SQL = SQL & "," & DBSet(Rs!contrato, "T") & ")"
+        Sql = Sql & "," & DBSet(Rs!contrato, "T") & ")"
     End If
     Set Rs2 = Nothing
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     '[Monica]10/03/2017: para el caso de natural, guardamos el nro de albaran que introdujeron en la nota de entrada
     If vParamAplic.Cooperativa = 9 Then
         AlbaranE = DevuelveValor("select numalbar from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N"))
         
-        SQL = "update rhisfruta set albarentrada = "
+        Sql = "update rhisfruta set albarentrada = "
         If AlbaranE = "0" Then
-            SQL = SQL & ValorNulo
+            Sql = Sql & ValorNulo
         Else
-            SQL = SQL & DBSet(AlbaranE, "N")
+            Sql = Sql & DBSet(AlbaranE, "N")
         End If
         
-        SQL = SQL & " where numalbar = " & DBSet(Albaran, "N")
+        Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     
@@ -1568,7 +1571,7 @@ End Function
 
 Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -1586,50 +1589,50 @@ Dim Precio As Currency
 'numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,observac,imptrans,impacarr,
 'imprecol,imppenal
 '
-    SQL = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,"
-    SQL = SQL & "observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba) "
+    Sql = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,"
+    Sql = Sql & "observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba) "
 
-    SQL = SQL & "select " & Albaran & ",rclasifica.numnotac,fechaent,horaentr,kilosbru,numcajon,"
-    SQL = SQL & "observac,rclasifica.kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif, codcapat, kilostra, "
+    Sql = Sql & "select " & Albaran & ",rclasifica.numnotac,fechaent,horaentr,kilosbru,numcajon,"
+    Sql = Sql & "observac,rclasifica.kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif, codcapat, kilostra, "
     '[Monica]28/02/2012: se graban tambien el tipo de recolecion, las horas y el nro de trabajadores
-    SQL = SQL & " tiporecol, horastra, numtraba "
-    SQL = SQL & " from rclasifica, tmpNotas "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = Sql & " tiporecol, horastra, numtraba "
+    Sql = Sql & " from rclasifica, tmpNotas "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: para el caso de Alzira se rompe tambien por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac "
+    Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
 
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     '[Monica] 18/11/2010: en el caso de alzira grabamos los kilos transportados para la factura de acarreo recoleccion socio
     If vParamAplic.Cooperativa = 4 Then
-        SQL = "update rhisfruta_entradas set kilostra = (select sum(kilosnet) from rclasifica_clasif, rcalidad "
-        SQL = SQL & " where rclasifica_clasif.codvarie = rcalidad.codvarie and "
-        SQL = SQL & " rclasifica_clasif.codcalid = rcalidad.codcalid and "
-        SQL = SQL & " rcalidad.gastosrec = 1 and "
-        SQL = SQL & " rclasifica_clasif.numnotac = rhisfruta_entradas.numnotac)"
-        SQL = SQL & " where rhisfruta_entradas.numalbar = " & Albaran
+        Sql = "update rhisfruta_entradas set kilostra = (select sum(kilosnet) from rclasifica_clasif, rcalidad "
+        Sql = Sql & " where rclasifica_clasif.codvarie = rcalidad.codvarie and "
+        Sql = Sql & " rclasifica_clasif.codcalid = rcalidad.codcalid and "
+        Sql = Sql & " rcalidad.gastosrec = 1 and "
+        Sql = Sql & " rclasifica_clasif.numnotac = rhisfruta_entradas.numnotac)"
+        Sql = Sql & " where rhisfruta_entradas.numalbar = " & Albaran
 
-        conn.Execute SQL
+        conn.Execute Sql
         
-        SQL = "update rhisfruta set kilostra = (select sum(kilostra) from rhisfruta_entradas where numalbar = " & Albaran & ")"
-        SQL = SQL & " where numalbar = " & Albaran
-        conn.Execute SQL
+        Sql = "update rhisfruta set kilostra = (select sum(kilostra) from rhisfruta_entradas where numalbar = " & Albaran & ")"
+        Sql = Sql & " where numalbar = " & Albaran
+        conn.Execute Sql
         
     End If
     
@@ -1646,7 +1649,7 @@ End Function
 
 Private Function RecalculaPrecioEstimadoCabecera(Albaran As Long, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
 Dim Precio As Currency
@@ -1655,10 +1658,10 @@ Dim Precio As Currency
     
     cadErr = ""
     
-    SQL = "select count(*), sum(prestimado) from rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N")
+    Sql = "select count(*), sum(prestimado) from rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N")
     
     Set RS1 = New ADODB.Recordset
-    RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     Precio = 0
     If Not RS1.EOF Then
@@ -1667,8 +1670,8 @@ Dim Precio As Currency
         End If
     End If
     
-    SQL = "update rhisfruta set prestimado = " & DBSet(Precio, "N") & " where numalbar = " & DBSet(Albaran, "N")
-    conn.Execute SQL
+    Sql = "update rhisfruta set prestimado = " & DBSet(Precio, "N") & " where numalbar = " & DBSet(Albaran, "N")
+    conn.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -1683,7 +1686,7 @@ End Function
 
 Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
@@ -1705,33 +1708,33 @@ Dim CalidadClasif As String
 'rhisfruta_clasif
 'numalbar , CodVarie, codcalid, KilosNet
 '
-    SQL = "insert into rhisfruta_clasif (numalbar, codvarie, codcalid, kilosnet)  "
+    Sql = "insert into rhisfruta_clasif (numalbar, codvarie, codcalid, kilosnet)  "
 
-    SQL = SQL & "select " & Albaran & ",rclasifica_clasif.codvarie, codcalid, sum(rclasifica_clasif.kilosnet) "
-    SQL = SQL & " from rclasifica_clasif, rclasifica, tmpNotas "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
-    SQL = SQL & " rclasifica.numnotac = rclasifica_clasif.numnotac and "
+    Sql = Sql & "select " & Albaran & ",rclasifica_clasif.codvarie, codcalid, sum(rclasifica_clasif.kilosnet) "
+    Sql = Sql & " from rclasifica_clasif, rclasifica, tmpNotas "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor = " & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = Sql & " rclasifica.numnotac = rclasifica_clasif.numnotac and "
     
     '[Monica]30/01/2014: para el caso de Alzira se rompia tambien por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac "
+    Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
-    SQL = SQL & " group by 1,2,3"
+    Sql = Sql & " group by 1,2,3"
 
-    conn.Execute SQL
+    conn.Execute Sql
 
 EInsertar:
     If Err.Number <> 0 Then
@@ -1744,7 +1747,7 @@ End Function
 
 
 Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
@@ -1766,33 +1769,33 @@ Dim CalidadClasif As String
 'rhisfruta_incidencia
 'numalbar , numnotac, codincid
 
-    SQL = "insert into rhisfruta_incidencia (numalbar, numnotac, codincid)  "
+    Sql = "insert into rhisfruta_incidencia (numalbar, numnotac, codincid)  "
 
-    SQL = SQL & "select " & Albaran & ",rclasifica_incidencia.numnotac, rclasifica_incidencia.codincid "
-    SQL = SQL & " from rclasifica_incidencia, rclasifica, tmpNotas "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = Sql & "select " & Albaran & ",rclasifica_incidencia.numnotac, rclasifica_incidencia.codincid "
+    Sql = Sql & " from rclasifica_incidencia, rclasifica, tmpNotas "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: para el caso de Alzira se agrupa tambien por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.numnotac = rclasifica_incidencia.numnotac and  "
-    SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac "
+    Sql = Sql & " rclasifica.numnotac = rclasifica_incidencia.numnotac and  "
+    Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
+        Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
-    SQL = SQL & " group by 1,2,3"
+    Sql = Sql & " group by 1,2,3"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -1804,7 +1807,7 @@ EInsertar:
 End Function
 
 Private Function CalculoGastosTransporte(Albaran As Long, cadErr As String, EsPicassent As Boolean) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim PrecTarifaAlm As Currency
 Dim PrecTarifaAlm2 As Currency
@@ -1823,18 +1826,18 @@ On Error GoTo EInsertar
 
     '[Monica]25/02/2011: Si no es Picassent
     If Not EsPicassent Then
-        SQL = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilosnet) as kilos "
+        Sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilosnet) as kilos "
     Else
-        SQL = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilostra) as kilos "
+        Sql = "select numnotac, rhisfruta_entradas.codtarif, rtarifatra.tipotarifa, sum(kilostra) as kilos "
     End If
     
-    SQL = SQL & " from rhisfruta_entradas, rtarifatra where numalbar = " & DBSet(Albaran, "N")
-    SQL = SQL & " and rhisfruta_entradas.codtarif = rtarifatra.codtarif "
-    SQL = SQL & " and rtarifatra.tipotarifa <> 2 " 'las tarifas que buscamos son del tipo 1 o 2 (no sin asignar)
-    SQL = SQL & " group by 1, 2, 3 order by 1, 2, 3 "
+    Sql = Sql & " from rhisfruta_entradas, rtarifatra where numalbar = " & DBSet(Albaran, "N")
+    Sql = Sql & " and rhisfruta_entradas.codtarif = rtarifatra.codtarif "
+    Sql = Sql & " and rtarifatra.tipotarifa <> 2 " 'las tarifas que buscamos son del tipo 1 o 2 (no sin asignar)
+    Sql = Sql & " group by 1, 2, 3 order by 1, 2, 3 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     PrecTarifaAlm = DevuelveValor("select preciokg from rtarifatra where codtarif = " & vParamAplic.TarifaTRA)
     PrecTarifaAlm2 = DevuelveValor("select preciokg from rtarifatra where codtarif = " & vParamAplic.TarifaTRA2)
@@ -1852,10 +1855,10 @@ On Error GoTo EInsertar
             
         '[Monica]25/02/2011: Si no es Picassent
         If Not EsPicassent Then
-            SQL = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
-            SQL = SQL & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!NumNotac, "N")
+            Sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!NumNotac, "N")
             
-            conn.Execute SQL
+            conn.Execute Sql
         End If
         
         If DBLet(Rs!tipotarifa, "N") = 0 Then ' Tarifa de Tipo 1
@@ -1876,10 +1879,10 @@ On Error GoTo EInsertar
     '[Monica]25/02/2011: Si no es Picassent
     If Not EsPicassent Then
         ' actualizamos cabecera
-        SQL = "update rhisfruta set imptrans = " & DBSet(TotImpTrans, "N")
-        SQL = SQL & " where numalbar = " & DBSet(Albaran, "N")
+        Sql = "update rhisfruta set imptrans = " & DBSet(TotImpTrans, "N")
+        Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     '[Monica] sólo insertamos cuando el importe total de gasto socio es positivo
@@ -1887,10 +1890,10 @@ On Error GoTo EInsertar
         NumF = ""
         NumF = SugerirCodigoSiguienteStr("rhisfruta_gastos", "numlinea", "numalbar = " & DBSet(Albaran, "N"))
         ' grabamos un registro en con los gastos del cliente
-        SQL = "insert into rhisfruta_gastos (numalbar, numlinea, codgasto, importe) values (" & DBSet(Albaran, "N") & ","
-        SQL = SQL & DBSet(NumF, "N") & "," & DBSet(vParamAplic.CodGastoTRA, "N") & "," & DBSet(ImpGastoSocio, "N") & ")"
+        Sql = "insert into rhisfruta_gastos (numalbar, numlinea, codgasto, importe) values (" & DBSet(Albaran, "N") & ","
+        Sql = Sql & DBSet(NumF, "N") & "," & DBSet(vParamAplic.CodGastoTRA, "N") & "," & DBSet(ImpGastoSocio, "N") & ")"
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
 EInsertar:
@@ -1907,7 +1910,7 @@ End Function
 
 Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, Estercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
 Dim NumCajones As Currency
@@ -1920,73 +1923,73 @@ Dim vPrecio As String
     cadErr = ""
 
     'RCLASIFICA_INCIDENCIA
-    SQL = "delete from rclasifica_incidencia where numnotac in (select rclasifica.numnotac from rclasifica, tmpNotas "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
-    SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac and "
+    Sql = "delete from rclasifica_incidencia where numnotac in (select rclasifica.numnotac from rclasifica, tmpNotas "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
     
-    conn.Execute SQL
+    conn.Execute Sql
 
     'RCLASIFICA_CLASIF
-    SQL = "delete from rclasifica_clasif where numnotac in (select rclasifica.numnotac from rclasifica, tmpNotas  "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
-    SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac and  "
+    Sql = "delete from rclasifica_clasif where numnotac in (select rclasifica.numnotac from rclasifica, tmpNotas  "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac and  "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
     
-    conn.Execute SQL
+    conn.Execute Sql
 
     'RCLASIFICA
-    SQL = "delete from rclasifica "
-    SQL = SQL & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
-    SQL = SQL & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
-    SQL = SQL & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
-    SQL = SQL & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
-    SQL = SQL & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
-    SQL = SQL & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
+    Sql = "delete from rclasifica "
+    Sql = Sql & " where rclasifica.fechaent =" & DBSet(Rs!FechaEnt, "F") & " and "
+    Sql = Sql & " rclasifica.codcampo =" & DBSet(Rs!codcampo, "N") & " and "
+    Sql = Sql & " rclasifica.tipoentr =" & DBSet(Rs!TipoEntr, "N") & " and "
+    Sql = Sql & " rclasifica.codsocio =" & DBSet(Rs!Codsocio, "N") & " and "
+    Sql = Sql & " rclasifica.codvarie =" & DBSet(Rs!codvarie, "N") & " and "
+    Sql = Sql & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     
     '[Monica]30/01/2014: en el caso de alzira se rompe por capataz
     If vParamAplic.Cooperativa = 4 Then
-        SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+        Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
-        SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
+        Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
-    SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
-    SQL = SQL & " rclasifica.numnotac in (select numnotac from tmpNotas) "
+    Sql = Sql & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
+    Sql = Sql & " rclasifica.numnotac in (select numnotac from tmpNotas) "
     
-    conn.Execute SQL
+    conn.Execute Sql
 
 EEliminar:
     If Err.Number <> 0 Then
@@ -2001,7 +2004,7 @@ End Function
 
 Public Function HayRegSinClasificacion(ByVal cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim vSQL As String
@@ -2015,24 +2018,24 @@ Dim vSQL As String
     
     cTabla = "(" & cTabla & ") inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac"
     
-    SQL = "select rclasifica.numnotac, rclasifica.codsocio, sum(rclasifica_clasif.kilosnet) from " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "select rclasifica.numnotac, rclasifica.codsocio, sum(rclasifica_clasif.kilosnet) from " & QuitarCaracterACadena(cTabla, "_1")
     vSQL = "select " & vUsu.Codigo & ", rclasifica.numnotac, rclasifica.codsocio, 0 from " & QuitarCaracterACadena(cTabla, "_1")
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
         vSQL = vSQL & " WHERE " & cWhere
     End If
     
-    SQL = SQL & " group by rclasifica.numnotac, rclasifica.codsocio "
-    SQL = SQL & " having sum(rclasifica_clasif.kilosnet) is null "
+    Sql = Sql & " group by rclasifica.numnotac, rclasifica.codsocio "
+    Sql = Sql & " having sum(rclasifica_clasif.kilosnet) is null "
     
     vSQL = vSQL & " group by rclasifica.numnotac, rclasifica.codsocio "
     vSQL = vSQL & " having sum(rclasifica_clasif.kilosnet) is null "
     
-    Sql2 = "select count(*) from (" & SQL & ") as a "
+    Sql2 = "select count(*) from (" & Sql & ") as a "
     
     If TotalRegistros(Sql2) <> 0 Then
         Sql3 = "insert into tmpclasifica (codusu, numnotac, codsocio, codclase) "
@@ -2053,7 +2056,7 @@ End Function
 
 Public Function HayRegSinGastosCorrectos(ByVal cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vSQL As String
 Dim Rs As ADODB.Recordset
@@ -2064,17 +2067,17 @@ Dim cad As String
     
     cTabla = "(" & cTabla & ") inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac"
     
-    SQL = "select distinct rclasifica.numnotac, rclasifica.codsocio from " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "select distinct rclasifica.numnotac, rclasifica.codsocio from " & QuitarCaracterACadena(cTabla, "_1")
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cad = ""
     
@@ -2094,10 +2097,10 @@ Dim cad As String
     If cad <> "" Then
         HayRegSinGastosCorrectos = True
     
-        SQL = "insert into tmpclasifica (codusu, numnotac, codsocio, codclase) values "
-        SQL = SQL & cad
+        Sql = "insert into tmpclasifica (codusu, numnotac, codsocio, codclase) values "
+        Sql = Sql & cad
      
-        conn.Execute SQL
+        conn.Execute Sql
     Else
         HayRegSinGastosCorrectos = False
     End If
@@ -2106,7 +2109,7 @@ End Function
 
 Public Function HayRegEnHcoEntradas(ByVal cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim vSQL As String
@@ -2120,21 +2123,21 @@ Dim vSQL As String
     
     cTabla = "(" & cTabla & ") inner join rclasifica_clasif on rclasifica.numnotac = rclasifica_clasif.numnotac"
     
-    SQL = "select count(*) from rhisfruta where numalbar in ("
-    SQL = SQL & "select rclasifica.numnotac from " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "select count(*) from rhisfruta where numalbar in ("
+    Sql = Sql & "select rclasifica.numnotac from " & QuitarCaracterACadena(cTabla, "_1")
     vSQL = "select distinct " & vUsu.Codigo & ", rclasifica.numnotac, rclasifica.codsocio, 2 from " & QuitarCaracterACadena(cTabla, "_1")
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
         vSQL = vSQL & " WHERE " & cWhere
     End If
     
-    SQL = SQL & ")"
+    Sql = Sql & ")"
     
-    If TotalRegistros(SQL) <> 0 Then
+    If TotalRegistros(Sql) <> 0 Then
         Sql3 = "insert into tmpclasifica (codusu, numnotac, codsocio, codclase) "
         Sql3 = Sql3 & vSQL
      
@@ -2259,18 +2262,18 @@ End Sub
 
 Private Function CrearTMPNotas() As Boolean
 ' temporal para selecccionar unicamente las notas con clasificacion
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo ECrear
     
     CrearTMPNotas = False
     
     'tmpNotas
-    SQL = "CREATE TEMPORARY TABLE tmpNotas ( "
-    SQL = SQL & "`numnotac` int(7) NOT NULL ,"
-    SQL = SQL & "`kilosnet` int(7) unsigned NOT NULL)"
+    Sql = "CREATE TEMPORARY TABLE tmpNotas ( "
+    Sql = Sql & "`numnotac` int(7) NOT NULL ,"
+    Sql = Sql & "`kilosnet` int(7) unsigned NOT NULL)"
        
-    conn.Execute SQL
+    conn.Execute Sql
      
     CrearTMPNotas = True
     
@@ -2278,8 +2281,8 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMPNotas = False
         'Borrar la tabla temporal
-        SQL = " DROP TABLE IF EXISTS tmpNotas;"
-        conn.Execute SQL
+        Sql = " DROP TABLE IF EXISTS tmpNotas;"
+        conn.Execute Sql
     End If
 End Function
 
@@ -2288,7 +2291,7 @@ End Function
 
 Private Function InsertarHcoHortonature(NumNotac As Long, Albaran As Long, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -2313,39 +2316,39 @@ Dim AlbaranE As String
     End If
     
     ' insertamos cabecera
-    SQL = "insert into ariagro2.rhisfruta (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,"
-    SQL = SQL & "numcajon,kilosnet,imptrans,impacarr,imprecol,imppenal,impreso,kilostra,contrato ) "
-    SQL = SQL & " select " & DBSet(AlbaranE, "N") & ",fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,numcajon,kilosnet,imptrans,impacarr,"
-    SQL = SQL & " imprecol,imppenal,impreso,kilostra,contrato from " & vEmpresa.BDAriagro & ".rhisfruta where numalbar = " & DBSet(Albaran, "N")
+    Sql = "insert into ariagro2.rhisfruta (numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,"
+    Sql = Sql & "numcajon,kilosnet,imptrans,impacarr,imprecol,imppenal,impreso,kilostra,contrato ) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ",fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,transportadopor,kilosbru,numcajon,kilosnet,imptrans,impacarr,"
+    Sql = Sql & " imprecol,imppenal,impreso,kilostra,contrato from " & vEmpresa.BDAriagro & ".rhisfruta where numalbar = " & DBSet(Albaran, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
 
     ' insertamos entradas
-    SQL = "insert into ariagro2.rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,"
-    SQL = SQL & " observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba) "
-    SQL = SQL & " select " & DBSet(AlbaranE, "N") & "," & DBSet(AlbaranE, "N") & ",fechaent,horaentr,kilosbru,numcajon,"
-    SQL = SQL & " observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba "
-    SQL = SQL & " from " & vEmpresa.BDAriagro & ".rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N")
+    Sql = "insert into ariagro2.rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,"
+    Sql = Sql & " observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & "," & DBSet(AlbaranE, "N") & ",fechaent,horaentr,kilosbru,numcajon,"
+    Sql = Sql & " observac,kilosnet,imptrans,impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat,kilostra, tiporecol, horastra, numtraba "
+    Sql = Sql & " from " & vEmpresa.BDAriagro & ".rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ' insertamos clasificacion
-    SQL = "insert into ariagro2.rhisfruta_clasif (numalbar, codvarie, codcalid, kilosnet)  "
-    SQL = SQL & " select " & DBSet(AlbaranE, "N") & ", codvarie, codcalid, kilosnet from " & vEmpresa.BDAriagro & ".rhisfruta_clasif where numalbar = " & DBSet(Albaran, "N")
+    Sql = "insert into ariagro2.rhisfruta_clasif (numalbar, codvarie, codcalid, kilosnet)  "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ", codvarie, codcalid, kilosnet from " & vEmpresa.BDAriagro & ".rhisfruta_clasif where numalbar = " & DBSet(Albaran, "N")
 
-    conn.Execute SQL
+    conn.Execute Sql
     
     ' insertamos en rhisfruta_gastos
-    SQL = "insert into ariagro2.rhisfruta_gastos (numalbar,numlinea,codgasto,importe) "
-    SQL = SQL & " select " & DBSet(AlbaranE, "N") & ", numlinea, codgasto, importe from " & vEmpresa.BDAriagro & ".rhisfruta_gastos where numalbar = " & DBSet(Albaran, "N")
+    Sql = "insert into ariagro2.rhisfruta_gastos (numalbar,numlinea,codgasto,importe) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ", numlinea, codgasto, importe from " & vEmpresa.BDAriagro & ".rhisfruta_gastos where numalbar = " & DBSet(Albaran, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ' insertamos en rhisfruta_incidencia
-    SQL = "insert into ariagro2.rhisfruta_incidencia (numalbar, numnotac, codincid) "
-    SQL = SQL & " select " & DBSet(AlbaranE, "N") & ", " & DBSet(AlbaranE, "N") & ", codincid from " & vEmpresa.BDAriagro & ".rhisfruta_incidencia where numalbar = " & DBSet(Albaran, "N")
+    Sql = "insert into ariagro2.rhisfruta_incidencia (numalbar, numnotac, codincid) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ", " & DBSet(AlbaranE, "N") & ", codincid from " & vEmpresa.BDAriagro & ".rhisfruta_incidencia where numalbar = " & DBSet(Albaran, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
 EInsertar:
     If Err.Number <> 0 Then
@@ -2355,5 +2358,67 @@ EInsertar:
         InsertarHcoHortonature = True
     End If
 End Function
+
+
+Private Function InsertarClasificaHortonature(NumNotac As Long, Albaran As Long, cadErr As String) As Boolean
+'Insertando en tabla conta.cabfact
+Dim Sql As String
+Dim Sql1 As String
+Dim RS1 As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim cad As String
+Dim NumCajones As Currency
+Dim Transporte As Currency
+Dim vPrecio As String
+Dim Precio As Currency
+Dim AlbaranE As String
+
+    On Error GoTo EInsertar
+
+    cadErr = ""
+
+'rhisfruta
+'numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,
+'imptrans , impacarr, imprecol, imppenal, impreso
+    AlbaranE = DevuelveValor("select numalbar from rclasifica where numnotac = " & NumNotac)
+    If ComprobarCero(AlbaranE) = 0 Then
+        InsertarClasificaHortonature = True
+        Exit Function
+    End If
+    
+    ' insertamos cabecera
+    Sql = "insert into ariagro2.rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,codtarif,kilosbru,numcajon,kilosnet,observac,imptrans,"
+    Sql = Sql & "impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso,prestimado,transportadopor,kilostra,contrato) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ",fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,codtrans,codcapat,codtarif,kilosbru,numcajon,kilosnet,observac,imptrans,"
+    Sql = Sql & "impacarr,imprecol,imppenal,tiporecol,horastra,numtraba,numalbar,fecalbar,impreso,prestimado,transportadopor,kilostra,contrato "
+    Sql = Sql & "  from " & vEmpresa.BDAriagro & ".rclasifica where numnotac = " & DBSet(NumNotac, "N")
+    
+    conn.Execute Sql
+
+    
+    ' insertamos clasificacion
+    Sql = "insert into ariagro2.rclasifica_clasif (numnotac, codvarie, codcalid)  "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ", codvarie, codcalid from " & vEmpresa.BDAriagro & ".rclasifica_clasif where numnotac = " & DBSet(NumNotac, "N")
+
+    conn.Execute Sql
+    
+    ' insertamos en rclasifica_incidencia
+    Sql = "insert into ariagro2.rclasifica_incidencia (numnotac, codincid) "
+    Sql = Sql & " select " & DBSet(AlbaranE, "N") & ", codincid from " & vEmpresa.BDAriagro & ".rclasifica_incidencia where numnotac = " & DBSet(Albaran, "N")
+    
+    conn.Execute Sql
+    
+    
+EInsertar:
+    If Err.Number <> 0 Then
+        InsertarClasificaHortonature = False
+        cadErr = Err.Description
+    Else
+        InsertarClasificaHortonature = True
+    End If
+End Function
+
+
+
 
 
