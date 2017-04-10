@@ -136,6 +136,37 @@ eInsertLinea:
 End Function
 
 
+'Insertar Linea de factura (variedad)
+Public Function InsertLineasIngresos(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, Socio As String) As Boolean
+Dim Sql As String
+Dim ImpLinea As Currency
+    
+    On Error GoTo eInsertLinea
+    
+    InsertLineasIngresos = False
+    
+    MensError = ""
+    
+    Sql = "insert into tmpFact_ingresos (codtipom, numfactu, fecfactu, codvarie, concepto, importe) "
+    Sql = Sql & " select '" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ", codvarie, concepto, importe "
+    Sql = Sql & " from ringresos where codsocio = " & DBSet(Socio, "N") & " and codvarie = " & DBSet(Variedad, "N")
+    
+    conn.Execute Sql
+
+    InsertLineasIngresos = True
+    Exit Function
+    
+eInsertLinea:
+    If Err.Number <> 0 Then
+        MensError = "Se ha producido un error en la inserción de lineas de ingresos"
+        MuestraError Err.Number, MensError, Err.Descripc
+    End If
+    
+End Function
+
+
+
+
 'Insertar Linea de factura (calidad)
 Public Function InsertLineaCalidad(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, campo As String, Calidad As String, Kilos As String, Importe As String, Optional Bonificacion As String) As Boolean
 '(rfacsoc_calidad)
@@ -390,7 +421,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -415,8 +446,8 @@ Dim vPrecio As Currency
     tipoMov = "FAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -512,7 +543,7 @@ Dim vPrecio As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -525,7 +556,7 @@ Dim vPrecio As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -534,9 +565,9 @@ Dim vPrecio As Currency
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -567,13 +598,13 @@ Dim vPrecio As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -654,17 +685,17 @@ Dim vPrecio As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
         
         baseimpo = baseimpo + vImporte
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -694,16 +725,16 @@ Dim vPrecio As Currency
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -713,7 +744,7 @@ Dim vPrecio As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposValsur = False
     Else
@@ -748,7 +779,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -773,8 +804,8 @@ Dim vPrecio As Currency
     tipoMov = "FAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -875,7 +906,7 @@ Dim vPrecio As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -888,7 +919,7 @@ Dim vPrecio As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -897,14 +928,14 @@ Dim vPrecio As Currency
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
             End If
             
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -935,22 +966,22 @@ Dim vPrecio As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
 'Mirar si quito lo de reclacular calidades
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
 'Recalculo de todos los importes de tmpfact_calidades y tmpfact_variedades para que cuadre con la base de cabecera
-            If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+            If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -1045,22 +1076,22 @@ Dim vPrecio As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
         
         baseimpo = baseimpo + vImporte
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
         End If
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -1090,26 +1121,26 @@ Dim vPrecio As Currency
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
 'Mirar si quito lo de reclacular calidades
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
 'Recalculo de todos los importes de rfactsoc_calidades y rfactsoc_variedades para que cuadre con la base de cabecera
-        If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+        If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
         
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -1119,7 +1150,7 @@ Dim vPrecio As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposAlzira = False
     Else
@@ -1154,7 +1185,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -1185,8 +1216,8 @@ Dim PorcComi As Currency
     tipoMov = "FAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -1285,7 +1316,7 @@ Dim PorcComi As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -1299,7 +1330,7 @@ Dim PorcComi As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
             KilosCal = 0
             vImporte = 0
             vBonifica = 0
@@ -1309,9 +1340,9 @@ Dim PorcComi As Currency
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -1343,18 +1374,18 @@ Dim PorcComi As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             '[Monica]15/04/2013: Introducimos las facturas varias a descontar
             If DescontarFVarias Then
-                If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
+                If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
             End If
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -1461,7 +1492,7 @@ Dim PorcComi As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -1469,10 +1500,10 @@ Dim PorcComi As Currency
         
         baseimpo = baseimpo + vImporte
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -1502,21 +1533,21 @@ Dim PorcComi As Currency
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]15/04/2013: Introducimos las facturas varias a descontar
         If DescontarFVarias Then
-            If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
+            If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
         End If
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -1526,7 +1557,7 @@ Dim PorcComi As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposPicassent = False
     Else
@@ -1651,7 +1682,7 @@ Dim Nregs As Long
 Dim tipoMov As String
 Dim HayReg As Boolean
 
-Dim b As Boolean
+Dim B As Boolean
 Dim vWhere As String
 Dim Sql3 As String
 
@@ -1696,7 +1727,7 @@ Dim Sql3 As String
     
     conn.BeginTrans
     
-    b = True
+    B = True
     HayReg = False
     
     Set vTipoMov = New CTiposMov
@@ -1704,12 +1735,12 @@ Dim Sql3 As String
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         IncrementarProgres Pb1, 1
         
-        b = (vTipoMov.DevolverContador(DBLet(Rs!CodTipom, "T"), DBLet(Rs!numfactu, "N")) = 1)
+        B = (vTipoMov.DevolverContador(DBLet(Rs!CodTipom, "T"), DBLet(Rs!numfactu, "N")) = 1)
     
-        If b Then
+        If B Then
             HayReg = True
             
             vWhere = "codtipom = " & DBSet(Rs!CodTipom, "T") & " and numfactu = " & DBLet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(FecFac, "F")
@@ -1728,7 +1759,7 @@ Dim Sql3 As String
                 Set Rs2 = New ADODB.Recordset
                 Rs2.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
-                While Not Rs2.EOF And b
+                While Not Rs2.EOF And B
                     ' desmarcar los anticipos como que no estan descontados
                     Sql3 = "update rfactsoc_variedad set descontado = 0 where "
                     Sql3 = Sql3 & " codtipom = " & DBSet(Rs2.Fields(0).Value, "T")
@@ -1755,7 +1786,7 @@ Dim Sql3 As String
                 Set Rs2 = New ADODB.Recordset
                 Rs2.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
-                While Not Rs2.EOF And b
+                While Not Rs2.EOF And B
                     ' desmarcar los anticipos como que no estan descontados
                     Sql3 = "update rfactsoc_variedad set descontado = 0 where "
                     Sql3 = Sql3 & " codtipom = " & DBSet(Rs2.Fields(0).Value, "T")
@@ -1786,7 +1817,7 @@ Dim Sql3 As String
                 Set Rs2 = New ADODB.Recordset
                 Rs2.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
-                While Not Rs2.EOF And b
+                While Not Rs2.EOF And B
                     Sql3 = "update fvarcabfact set intliqui = 0 where "
                     Sql3 = Sql3 & " codtipom = " & DBSet(Rs2.Fields(0).Value, "T")
                     Sql3 = Sql3 & " and numfactu = " & DBSet(Rs2.Fields(1).Value, "N")
@@ -1803,6 +1834,18 @@ Dim Sql3 As String
                 
                 Set Rs2 = Nothing
             End If
+            
+            '[Monica]10/04/2017: Incrementos de factura Picassent y Coopic
+            If Tipo = 3 Then
+                Sql3 = "insert into ringresos (codsocio, codvarie, concepto, importe) "
+                Sql3 = Sql3 & " select aa.codsocio, rfactsoc_ingresos.codvarie, rfactsoc_ingresos.concepto, rfactsoc_ingresos.importe  from rfactsoc_ingresos , (select codsocio from rfactsoc where " & vWhere & ") aa "
+                Sql3 = Sql3 & " where " & vWhere
+                
+                conn.Execute Sql3
+            End If
+            Sql = "delete from rfactsoc_ingresos where " & vWhere
+            conn.Execute Sql
+            
            
             Sql = "delete from rfactsoc_variedad where " & vWhere
             conn.Execute Sql
@@ -1879,10 +1922,10 @@ Dim Sql3 As String
                 vParamAplic.PrimFactLiqBOD = vParamAplic.UltFactLiqBOD
         End Select
 
-        b = (vParamAplic.Modificar = 1)
+        B = (vParamAplic.Modificar = 1)
     End If
     
-    If b Then
+    If B Then
         conn.CommitTrans
         DeshacerFacturacion = True
         Set vTipoMov = Nothing
@@ -1890,7 +1933,7 @@ Dim Sql3 As String
     End If
     
 eDeshacerFactAnt:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         Set vTipoMov = Nothing
         MuestraError Err.Number, "Error deshaciendo Facturacion", Err.Description
@@ -1920,7 +1963,7 @@ Dim tipoMov As String
 
 Dim Sql3 As String
 Dim devuelve As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Existe As Boolean
 
@@ -1928,8 +1971,8 @@ Dim Existe As Boolean
     
 '08052009 antes dentro de transaccion
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -1977,7 +2020,7 @@ Dim Existe As Boolean
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    b = False
+    B = False
     
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
@@ -2030,12 +2073,12 @@ Dim Existe As Boolean
                         vParamAplic.PrimFactLiqVC = numfactu
                 End Select
                     
-                b = True
+                B = True
             End If
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActSocio = DBSet(Rs!Codsocio, "N")
         If ActSocio <> AntSocio Then
         
@@ -2081,21 +2124,21 @@ Dim Existe As Boolean
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             '[Monica]15/04/2013: Introducimos las facturas varias a descontar
             If DescontarFVarias Then
-                If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, Tipo, 1)
+                If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, Tipo, 1)
             End If
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -2124,7 +2167,7 @@ Dim Existe As Boolean
                         tipoMov = vSocio.CodTipomLiqVC
                 End Select
                 
-                If b Then
+                If B Then
                     numfactu = vTipoMov.ConseguirContador(tipoMov)
                     Do
                         numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -2145,14 +2188,14 @@ Dim Existe As Boolean
         baseimpo = baseimpo + DBLet(Rs!Importe, "N")
         
         ' insertar linea de variedad, campo
-        b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")), 0)
+        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")), 0)
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!Codsocio, "N")), CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), cTabla, cWhere, 2)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!Codsocio, "N")), CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), cTabla, cWhere, 2)
         End If
         
-        If b Then
+        If B Then
             ' insertamos los totales en la calidad venta campo de la variedad (rfactsoc_calidad)
             Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")
             Sql2 = Sql2 & " and tipcalid = 2 " ' calidad de venta campo
@@ -2161,7 +2204,7 @@ Dim Existe As Boolean
             RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
             If Not RS1.EOF Then
-                b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")))
+                B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Rs!codvarie, "N")), CStr(DBLet(Rs!codcampo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(Rs!KilosNet, "N")), CStr(DBLet(Rs!Importe, "N")))
             End If
             Set RS1 = Nothing
         End If
@@ -2170,7 +2213,7 @@ Dim Existe As Boolean
         
         
         ' si es una factura de liquidacion hemos de descontar los anticipos de las variedades
-        If b And Tipo = 1 Then
+        If B And Tipo = 1 Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -2218,7 +2261,7 @@ Dim Existe As Boolean
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
         Select Case DBLet(vSocio.TipoIRPF, "N")
@@ -2261,19 +2304,19 @@ Dim Existe As Boolean
         IncrementarProgresNew Pb1, 1
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
         '[Monica]15/04/2013: Introducimos las facturas varias a descontar
         If DescontarFVarias Then
-            If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, Tipo, 1)
+            If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, Tipo, 1)
         End If
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         Select Case Tipo
             Case 0
@@ -2283,14 +2326,14 @@ Dim Existe As Boolean
         End Select
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
         
         ' si es anticipo o liquidacion de venta campo se vuelven los importes a null
-        If b Then
+        If B Then
             Sql = "update " & cTabla & " set rhisfruta.impentrada = 0 where " & cWhere
-            b = ActualizaRegistros(Sql)
+            B = ActualizaRegistros(Sql)
         End If
     End If
     
@@ -2301,7 +2344,7 @@ Dim Existe As Boolean
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionVentaCampo = False
     Else
@@ -2313,7 +2356,7 @@ End Function
 
 
 'Actualizar registros
-Private Function ActualizaRegistros(Cad As String) As Boolean
+Private Function ActualizaRegistros(cad As String) As Boolean
 Dim Precio As Currency
 
     Dim Sql As String
@@ -2325,7 +2368,7 @@ Dim Precio As Currency
     
     MensError = ""
     
-    conn.Execute Cad
+    conn.Execute cad
 
     ActualizaRegistros = True
     Exit Function
@@ -2340,7 +2383,7 @@ End Function
 Public Function FacturasGeneradas(Tipo As String) As String
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error GoTo eFacturasGeneradas
 
@@ -2372,18 +2415,18 @@ Dim Cad As String
     Set RS1 = New ADODB.Recordset
     RS1.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    Cad = ""
+    cad = ""
     While Not RS1.EOF
-        Cad = Cad & DBLet(RS1.Fields(1).Value, "N") & ","
+        cad = cad & DBLet(RS1.Fields(1).Value, "N") & ","
     
         RS1.MoveNext
     Wend
     Set RS1 = Nothing
     
     'si hay facturas quitamos la ultima coma
-    If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
+    If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
     
-    FacturasGeneradas = Cad
+    FacturasGeneradas = cad
     Exit Function
     
 eFacturasGeneradas:
@@ -2394,7 +2437,7 @@ End Function
 Public Function ListaFacturasGeneradas(Tipo As String) As String
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error GoTo eFacturasGeneradas
 
@@ -2406,18 +2449,18 @@ Dim Cad As String
     Set RS1 = New ADODB.Recordset
     RS1.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    Cad = ""
+    cad = ""
     While Not RS1.EOF
-        Cad = Cad & DBLet(RS1.Fields(1).Value, "N") & ","
+        cad = cad & DBLet(RS1.Fields(1).Value, "N") & ","
     
         RS1.MoveNext
     Wend
     Set RS1 = Nothing
     
     'si hay facturas quitamos la ultima coma
-    If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
+    If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
     
-    ListaFacturasGeneradas = Cad
+    ListaFacturasGeneradas = cad
     Exit Function
     
 eFacturasGeneradas:
@@ -2465,6 +2508,18 @@ Dim Sql As String
     Sql = Sql & "`imporgasto` decimal(8,2) NOT NULL default '0',"
     Sql = Sql & "`kilogrado` decimal(10,2) NOT NULL default '0',"
     Sql = Sql & "`preciorea` decimal(6,4) NOT NULL default '0.0000')"
+    
+    conn.Execute Sql
+    
+    '[Monica]10/04/2017: añadimos las lineas de ingreso de coopic
+    'rfactsoc_ingresos
+    Sql = "CREATE TEMPORARY TABLE tmpFact_ingresos ( "
+    Sql = Sql & "`codtipom` char(3) NOT NULL ,"
+    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
+    Sql = Sql & "`fecfactu` date NOT NULL,"
+    Sql = Sql & "`codvarie` int(6) NOT NULL,"
+    Sql = Sql & "`concepto` varchar(80),"
+    Sql = Sql & "`importe` decimal(10,2) NOT NULL)"
     
     conn.Execute Sql
     
@@ -2573,6 +2628,19 @@ Dim Sql As String
 
     conn.Execute Sql
     
+    
+'    'rfactsoc_incrementos
+'    Sql = "CREATE TEMPORARY TABLE tmpFact_ingresos ( "
+'    Sql = Sql & "`codtipom` char(3) NOT NULL ,"
+'    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
+'    Sql = Sql & "`fecfactu` date NOT NULL,"
+'    Sql = Sql & "`codvarie` int(6) NOT NULL,"
+'    Sql = Sql & "`concepto` varchar(80)"
+'
+'    conn.Execute Sql
+    
+    
+    
     CrearTMPs = True
     
 ECrear:
@@ -2591,6 +2659,11 @@ ECrear:
         conn.Execute Sql
         Sql = " DROP TABLE IF EXISTS tmpFact_fvarias;"
         conn.Execute Sql
+        Sql = " DROP TABLE IF EXISTS tmpFact_ingresos;"
+        conn.Execute Sql
+    
+    
+    
     End If
 End Function
 
@@ -2604,6 +2677,7 @@ On Error Resume Next
     conn.Execute " DROP TABLE IF EXISTS tmpFact_albarantra;"
     conn.Execute " DROP TABLE IF EXISTS tmpFact_retirada;"
     conn.Execute " DROP TABLE IF EXISTS tmpFact_fvarias;"
+    conn.Execute " DROP TABLE IF EXISTS tmpFact_ingresos;"
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -2619,6 +2693,9 @@ On Error GoTo ePasar
     conn.Execute " INSERT INTO rfactsoc_albaran  SELECT * FROM tmpfact_albaran ;" ' where (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc); "
     conn.Execute " INSERT INTO rfactsoc_retirada  SELECT * FROM tmpfact_retirada ;" ' where (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc); "
     conn.Execute " INSERT INTO rfactsoc_fvarias  SELECT * FROM tmpfact_fvarias ;" ' where (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc); "
+    
+    '10/04/2017: ingresos de la factura
+    conn.Execute " INSERT INTO rfactsoc_ingresos  SELECT * FROM tmpfact_ingresos ;" ' where (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc); "
     
     PasarTemporales = True
     Exit Function
@@ -2824,7 +2901,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -2856,8 +2933,8 @@ Dim vPorcGasto As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -2958,7 +3035,7 @@ Dim vPorcGasto As String
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -2971,7 +3048,7 @@ Dim vPorcGasto As String
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -2979,7 +3056,7 @@ Dim vPorcGasto As String
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -2993,7 +3070,7 @@ Dim vPorcGasto As String
                 
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
 '[MONICA] 08/09/2009 : los gastos de transporte se suman en ObtenerGastosAlbaranes, quito lo de David
 '                '17 AGOSTO 2009
 '                ' David###   Para VALSUR los gastos se suman
@@ -3012,11 +3089,11 @@ Dim vPorcGasto As String
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -3061,7 +3138,7 @@ Dim vPorcGasto As String
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -3099,15 +3176,15 @@ Dim vPorcGasto As String
             
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (Complementaria = 1))
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (Complementaria = 1))
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -3186,7 +3263,7 @@ Dim vPorcGasto As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -3194,10 +3271,10 @@ Dim vPorcGasto As String
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             GastosCoop = 0
             
             vPorcGasto = ""
@@ -3210,7 +3287,7 @@ Dim vPorcGasto As String
             baseimpo = baseimpo - GastosCoop
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
 '[MONICA] 08/09/2009 : los gastos de transporte se suman en ObtenerGastosAlbaranes, quito lo de David
 '            '17 AGOSTO 2009
 '            ' David###   Para VALSUR los gastos se suman
@@ -3233,10 +3310,10 @@ Dim vPorcGasto As String
         
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -3309,18 +3386,18 @@ Dim vPorcGasto As String
         
         '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (Complementaria = 1))
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (Complementaria = 1))
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -3330,7 +3407,7 @@ Dim vPorcGasto As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesValsur = False
     Else
@@ -3365,7 +3442,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -3398,8 +3475,8 @@ Dim vPorcGasto As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -3507,7 +3584,7 @@ Dim vPorcGasto As String
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -3520,7 +3597,7 @@ Dim vPorcGasto As String
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -3528,7 +3605,7 @@ Dim vPorcGasto As String
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -3543,7 +3620,7 @@ Dim vPorcGasto As String
                 End If
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
 '[MONICA] 08/09/2009 : los gastos de transporte se suman en ObtenerGastosAlbaranes, quito lo de David
 '                '17 AGOSTO 2009
 '                ' David###   Para VALSUR los gastos se suman
@@ -3563,16 +3640,16 @@ Dim vPorcGasto As String
             End If
             
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -3617,7 +3694,7 @@ Dim vPorcGasto As String
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -3654,23 +3731,23 @@ Dim vPorcGasto As String
             
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
 'Mirar si quito lo de reclacular calidades
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
 'Recalculo de todos los importes de tmpfact_calidades y tmpfact_variedades para que cuadre con la base de cabecera
-            If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+            If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
             
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -3741,7 +3818,7 @@ Dim vPorcGasto As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -3749,10 +3826,10 @@ Dim vPorcGasto As String
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             GastosCoop = 0
             
             vPorcGasto = ""
@@ -3767,7 +3844,7 @@ Dim vPorcGasto As String
             End If
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
 '[MONICA] 08/09/2009 : los gastos de transporte se suman en ObtenerGastosAlbaranes, quito lo de David
 '            '17 AGOSTO 2009
 '            ' David###   Para VALSUR los gastos se suman
@@ -3790,16 +3867,16 @@ Dim vPorcGasto As String
         End If
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
         End If
                     
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -3872,25 +3949,25 @@ Dim vPorcGasto As String
         
         '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
 'Mirar si quito lo de reclacular calidades
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
 'Recalculo de todos los importes de rfactsoc_calidades y rfactsoc_variedades para que cuadre con la base de cabecera
-        If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+        If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -3900,7 +3977,7 @@ Dim vPorcGasto As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesAlzira = False
     Else
@@ -4224,11 +4301,11 @@ End Function
 
 Public Function ComprobarFechaVenci(FechaVenci As Date, Dia1 As Byte, Dia2 As Byte, Dia3 As Byte) As Date
 Dim newFecha As Date
-Dim b As Boolean
+Dim B As Boolean
 
 '=== Modificada Laura: 23/01/2007
     On Error GoTo ErrObtFec
-    b = False
+    B = False
     
     '--- comprobar que tiene dias de pago para obtener nueva fecha
     If Not (Dia1 > 0 Or Dia2 > 0 Or Dia3 > 0) Then
@@ -4245,12 +4322,12 @@ Dim b As Boolean
         'si dia de la fecha vencimiento es uno de los 3 dias de pagos fecha es OK
         If Day(newFecha) = Dia1 Or Day(newFecha) = Dia2 Or Day(newFecha) = Dia3 Then
 '            newFecha = CStr(newFecha)
-            b = True
+            B = True
         Else
             'mientras esta en el mismo mes vamos aumentando dias hasta encontrar un dia de pago
             newFecha = DateAdd("d", 1, CDate(newFecha))
         End If
-    Loop Until b = True Or Year(newFecha) = Year(FechaVenci) + 3
+    Loop Until B = True Or Year(newFecha) = Year(FechaVenci) + 3
     
     ComprobarFechaVenci = newFecha
     Exit Function
@@ -4280,7 +4357,7 @@ Dim F As String
     ComprobarMesNoGira = FecVenci
 End Function
 
-Public Function FacturacionAnticiposGastos(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, Cad As String) As Boolean
+Public Function FacturacionAnticiposGastos(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, cad As String) As Boolean
 Dim Sql As String
 Dim Sql3 As String
 
@@ -4305,7 +4382,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -4331,8 +4408,8 @@ Dim ConGastos As Byte
     tipoMov = "FAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -4427,7 +4504,7 @@ Dim ConGastos As Byte
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
@@ -4436,18 +4513,18 @@ Dim ConGastos As Byte
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
             ' insertar linea de variedad, campo
             Sql3 = "select sum(imprecol) from rhisfruta where "
-            If Cad <> "" Then Sql3 = Sql3 & Cad & " and "
+            If cad <> "" Then Sql3 = Sql3 & cad & " and "
             Sql3 = Sql3 & " rhisfruta.codvarie = " & DBSet(AntVarie, "N")
             Sql3 = Sql3 & " and codcampo = " & DBSet(AntCampo, "N") & " and codsocio = " & DBSet(AntSocio, "N")
             
             Importe = DevuelveValor(Sql3)
             
             
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
             
             baseimpo = baseimpo + Importe
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -4478,13 +4555,13 @@ Dim ConGastos As Byte
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, True)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, True)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -4536,7 +4613,7 @@ Dim ConGastos As Byte
         Importe = vImporte
         
         If KilosCal <> 0 Then
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Rs!codcalid), CStr(DBLet(KilosCal, "N")), 0) ' CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Rs!codcalid), CStr(DBLet(KilosCal, "N")), 0) ' CStr(vImporte))
         End If
         
         HayReg = True
@@ -4545,18 +4622,18 @@ Dim ConGastos As Byte
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de variedad
-        If b Then
+        If B Then
             Sql3 = "select sum(imprecol) from rhisfruta where "
-            If Cad <> "" Then Sql3 = Sql3 & Cad & " and "
+            If cad <> "" Then Sql3 = Sql3 & cad & " and "
             Sql3 = Sql3 & " rhisfruta.codvarie = " & DBSet(ActVarie, "N")
             Sql3 = Sql3 & " and codcampo = " & DBSet(actCampo, "N") & " and codsocio = " & DBSet(ActSocio, "N")
             
             Importe = DevuelveValor(Sql3)
             
             
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(Kilos), CStr(Importe), "0")
             
             baseimpo = baseimpo + Importe
         End If
@@ -4589,19 +4666,19 @@ Dim ConGastos As Byte
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, True)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, True)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         
-        If b Then b = ModificarCalidadesFacturasGastos()
+        If B Then B = ModificarCalidadesFacturasGastos()
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -4611,7 +4688,7 @@ Dim ConGastos As Byte
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposGastos = False
     Else
@@ -4758,7 +4835,7 @@ Public Function TraspasoPartesFacturas(cadSQL As String, cadWHERE As String, Fec
 
 'Desde Albaranes Genera las Facturas correspondientes
 Dim RsAlb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 
 'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
@@ -4848,7 +4925,7 @@ Dim PgbVisible As Boolean
     'Partes(advpartes, advpartes_lineas) -> Factura (facturas, facturas_envases)
     '----------------------------------------------------
     'Agrupar albaranes en 1 factura por : codclien,codforpa
-    b = True
+    B = True
     
     AntSocio = 0 'socio
     
@@ -4875,7 +4952,7 @@ Dim PgbVisible As Boolean
                 cadW = cadW & ") "
                 
                 If Not vFactuADV.PasarPartesAFactura2(TipoAlb, cadW, TextosCSB, Forpa, ErroresAux, False) Then
-                    If b Then b = False
+                    If B Then B = False
                     AnyadirAvisos ErroresAux
                 Else 'añadirlo a la lista de facturas a imprimir
                     If ListFactu = "" Then
@@ -4934,7 +5011,7 @@ Dim PgbVisible As Boolean
         If PgbVisible Then LblBar.Caption = "Socio: " & Format(vFactuADV.Socio, "000000") & " - " & vFactuADV.NombreSocio
         
         If Not vFactuADV.PasarPartesAFactura2(TipoAlb, cadW, TextosCSB, Forpa, ErroresAux, False) Then
-            If b Then b = False
+            If B Then B = False
             AnyadirAvisos "Error Facturando el Socio: " & Format(vFactuADV.Socio, "000000") & " " & vFactuADV.NombreSocio & vbCrLf & ErroresAux
         Else 'añadirlo a la lista de facturas a imprimir
             If ListFactu = "" Then
@@ -4961,7 +5038,7 @@ Dim PgbVisible As Boolean
     Set vFactuADV = Nothing
     TraspasoPartesFacturas = True
     
-    If b Then
+    If B Then
         LblBar.Caption = "Proceso finalizado correctamente."
         '[Monica]18/05/2012
         If vParamAplic.Cooperativa = 3 Then
@@ -5214,7 +5291,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -5245,8 +5322,8 @@ Dim vPorcGasto As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -5362,7 +5439,7 @@ Dim vPorcGasto As String
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -5375,7 +5452,7 @@ Dim vPorcGasto As String
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -5383,7 +5460,7 @@ Dim vPorcGasto As String
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 Gastos = 0
                 
                 vPorcGasto = ""
@@ -5396,7 +5473,7 @@ Dim vPorcGasto As String
                 
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
                 Importe = Importe - Gastos
                 baseimpo = baseimpo - Gastos
@@ -5404,16 +5481,16 @@ Dim vPorcGasto As String
 
                         
             ' insertar linea de variedad, campo
-            If b Then
+            If B Then
                 '[Monica]05/03/2014: a tramos Alzira
                 If vParamAplic.Cooperativa = 4 Then
-                    b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(Gastos))
+                    B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(Gastos))
                 Else
-                    b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+                    B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
                 End If
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello ( que no sean de gastos )
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -5483,16 +5560,16 @@ Dim vPorcGasto As String
             End If
             
             '[Monica]10/05/2013: insertamos los albaranes
-            If b Then
+            If B Then
                 '[Monica]05/03/2014: alzira entra a tramos
                 If vParamAplic.Cooperativa = 4 Then
-                    b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+                    B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
                 Else
-                    b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "", "", 5)
+                    B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "", "", 5)
                 End If
             End If
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -5528,20 +5605,20 @@ Dim vPorcGasto As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
             
             If vParamAplic.Cooperativa = 4 Then
                 '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-                If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -5613,7 +5690,7 @@ Dim vPorcGasto As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -5621,10 +5698,10 @@ Dim vPorcGasto As String
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             Gastos = 0
             
             vPorcGasto = ""
@@ -5636,24 +5713,24 @@ Dim vPorcGasto As String
             baseimpo = baseimpo - Gastos
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
             Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
             Importe = Importe - Gastos
             baseimpo = baseimpo - Gastos
         End If
                     
         ' insertar linea de variedad
-        If b Then
+        If B Then
             '[Monica]05/03/2014: para el caso de alzira
             If vParamAplic.Cooperativa = 4 Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(Gastos))
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(Gastos))
             Else
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
             End If
         End If
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -5723,12 +5800,12 @@ Dim vPorcGasto As String
         End If
         
         '[Monica]10/05/2013: insertamos los albaranes
-        If b Then
+        If B Then
             '[Monica]05/03/2014: alzira entra a tramos
             If vParamAplic.Cooperativa = 4 Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
             Else
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, "", "", 5)
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, "", "", 5)
             End If
         End If
         
@@ -5761,23 +5838,23 @@ Dim vPorcGasto As String
         vParamAplic.UltFactLiq = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
         
         If vParamAplic.Cooperativa = 4 Then
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         End If
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -5787,7 +5864,7 @@ Dim vPorcGasto As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesCatadau = False
     Else
@@ -5850,7 +5927,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -5875,8 +5952,8 @@ Dim vPrecio As Currency
     tipoMov = "FAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -5986,7 +6063,7 @@ Dim vPrecio As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -5999,7 +6076,7 @@ Dim vPrecio As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -6008,19 +6085,19 @@ Dim vPrecio As Currency
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0")
             
             '[Monica]10/05/2013: insertamos los albaranes
-            If b Then
+            If B Then
                 '[Monica]05/03/2014: entra a tramos Alzira
                 If vParamAplic.Cooperativa = 4 Then
-                    b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+                    B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
                 Else
-                    b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "", "", 5)
+                    B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "", "", 5)
                 End If
             End If
 
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -6051,18 +6128,18 @@ Dim vPrecio As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             If vParamAplic.Cooperativa = 4 Then
                 '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-                If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -6136,26 +6213,26 @@ Dim vPrecio As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
         
         baseimpo = baseimpo + vImporte
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0")
         
         
         '[Monica]10/05/2013: insertamos los albaranes
-        If b Then
+        If B Then
             '[Monica]05/03/2014: entra a tramos alzira
             If vParamAplic.Cooperativa = 4 Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, cTabla, cWhere, 0)
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, cTabla, cWhere, 0)
             Else
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, "", "", 5)
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, actCampo, "", "", 5)
             End If
         End If
         
@@ -6187,21 +6264,21 @@ Dim vPrecio As Currency
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         If vParamAplic.Cooperativa = 4 Then
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         End If
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -6211,7 +6288,7 @@ Dim vPrecio As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposCatadau = False
     
@@ -6275,7 +6352,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -6300,8 +6377,8 @@ Dim Gastos As Currency
     FacturacionLiquidacionIndustria = False
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -6394,7 +6471,7 @@ Dim Gastos As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -6407,7 +6484,7 @@ Dim Gastos As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -6415,25 +6492,25 @@ Dim Gastos As Currency
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
                 Importe = Importe - Gastos
                 baseimpo = baseimpo - Gastos
             End If
             
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1)
             End If
             
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(Gastos))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(Gastos))
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -6470,18 +6547,18 @@ Dim Gastos As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 AntCampo = actCampo
                 
@@ -6542,7 +6619,7 @@ Dim Gastos As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -6550,21 +6627,21 @@ Dim Gastos As Currency
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
             Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
             Importe = Importe - Gastos
             baseimpo = baseimpo - Gastos
         End If
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1, CadenaAlbaranes)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1, CadenaAlbaranes)
         End If
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(Gastos))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(Gastos))
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -6595,21 +6672,21 @@ Dim Gastos As Currency
         vParamAplic.UltFactLiq = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -6619,7 +6696,7 @@ Dim Gastos As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionIndustria = False
     Else
@@ -6647,7 +6724,7 @@ Public Function TraspasoAlbaranesFacturas(cadSQL As String, cadWHERE As String, 
 
 'Desde Albaranes Genera las Facturas correspondientes
 Dim RsAlb As ADODB.Recordset 'Ordenados por: tipofac,clien,dpto,forma pago, dtoppago, dtognral
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 
 'Aqui Guardamos los datos del Albaran Anterior para comparar con el actual
@@ -6729,7 +6806,7 @@ Dim PgbVisible As Boolean
     'Calcular y Grabar Factura en la Tabla de Facturas
     'Albaranes de retirada(rbodalbaran, rbodalbaran_variedad) -> Factura (rbodfacturas, rbodfacturas_alb)
     '----------------------------------------------------
-    b = True
+    B = True
     
     AntSocio = 0 'socio
     
@@ -6751,7 +6828,7 @@ Dim PgbVisible As Boolean
                 cadW = cadW & ") "
                 
                 If Not vFactuBOD.PasarAlbaranesAFactura2(TAlmzBod, cadW, TextosCSB, Forpa, ErroresAux, False) Then
-                    If b Then b = False
+                    If B Then B = False
                     AnyadirAvisos ErroresAux
                 Else 'añadirlo a la lista de facturas a imprimir
                     If ListFactu = "" Then
@@ -6800,7 +6877,7 @@ Dim PgbVisible As Boolean
         If PgbVisible Then LblBar.Caption = "Socio: " & Format(vFactuBOD.Socio, "000000") & " - " & vFactuBOD.NombreSocio
         
         If Not vFactuBOD.PasarAlbaranesAFactura2(TAlmzBod, cadW, TextosCSB, Forpa, ErroresAux, False) Then
-            If b Then b = False
+            If B Then B = False
             AnyadirAvisos "Error Facturando el Socio: " & Format(vFactuBOD.Socio, "000000") & " " & vFactuBOD.NombreSocio & vbCrLf & ErroresAux
         Else 'añadirlo a la lista de facturas a imprimir
             If ListFactu = "" Then
@@ -6820,7 +6897,7 @@ Dim PgbVisible As Boolean
     Set vFactuBOD = Nothing
     TraspasoAlbaranesFacturas = True
     
-    If b Then
+    If B Then
         LblBar.Caption = "Proceso finalizado correctamente."
         MsgBox "Las Facturas de los Albaranes de Retirada seleccionados se generaron correctamente.", vbInformation
     Else
@@ -6878,7 +6955,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -6906,8 +6983,8 @@ Dim vPrecio As Currency
     tipoMov = "FNB"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -7018,13 +7095,13 @@ Dim vPrecio As Currency
                     
                     vParamAplic.PrimFactAntBOD = numfactu
                 Else
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
@@ -7041,7 +7118,7 @@ Dim vPrecio As Currency
 '            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             
             ' insertar en las lineas de albaran
-            If b Then b = InsertLineaAlbaranBodega(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, cTabla, cWhere)
+            If B Then B = InsertLineaAlbaranBodega(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, cTabla, cWhere)
             
             KilosCal = 0
             vImporte = 0
@@ -7089,13 +7166,13 @@ Dim vPrecio As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -7144,7 +7221,7 @@ Dim vPrecio As Currency
                         End If
                     Loop Until Not Existe
                 Else
-                    b = False
+                    B = False
                 End If
            End If
         End If
@@ -7161,7 +7238,7 @@ Dim vPrecio As Currency
         KilosCal = KilosCal + DBLet(Rs!KilosNet, "N") ' kilogrados
         Kilos2 = Kilos2 + DBLet(Rs!Kilosnet2, "N") ' kilos netos
         
-        b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, DBLet(Rs!codcampo, "N"), CStr(DBLet(Rs!Kilosnet2, "N")), CStr(Round2(DBLet(Rs!KilosNet, "N") * Rs!precioindustria, 2)), "0", CStr(DBLet(Rs!KilosNet, "N")))
+        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, DBLet(Rs!codcampo, "N"), CStr(DBLet(Rs!Kilosnet2, "N")), CStr(Round2(DBLet(Rs!KilosNet, "N") * Rs!precioindustria, 2)), "0", CStr(DBLet(Rs!KilosNet, "N")))
 '        AntVarie = ActVarie
 '        AntCampo = actCampo
 '
@@ -7172,7 +7249,7 @@ Dim vPrecio As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -7182,7 +7259,7 @@ Dim vPrecio As Currency
 '        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         ' insertar en las lineas de albaran
-        If b Then b = InsertLineaAlbaranBodega(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, cTabla, cWhere)
+        If B Then B = InsertLineaAlbaranBodega(tipoMov, CStr(numfactu), FecFac, ActSocio, ActVarie, cTabla, cWhere)
         
 '        ' insertar linea de variedad
 '        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), actCampo, CStr(Kilos2), CStr(vImporte), "0", CStr(Kilos))
@@ -7215,16 +7292,16 @@ Dim vPrecio As Currency
         vParamAplic.UltFactAntBOD = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -7234,7 +7311,7 @@ Dim vPrecio As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposBodega = False
     Else
@@ -7271,7 +7348,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -7305,8 +7382,8 @@ Dim vPorcGasto As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -7418,14 +7495,14 @@ Dim vPorcGasto As String
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -7442,7 +7519,7 @@ Dim vPorcGasto As String
                 
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
                 '[Monica]23/11/2012: añadida lo de si es complementaria
                 GastosAlb = 0
@@ -7454,11 +7531,11 @@ Dim vPorcGasto As String
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 '[Monica]23/11/2012: añadida lo de si es complementaria, solo descontamos los anticipos si no es complementaria
                 If Not EsComplementaria Then
                     ' tenemos que descontar los anticipos que tengamos para ello
@@ -7504,7 +7581,7 @@ Dim vPorcGasto As String
                 End If
             End If
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -7553,13 +7630,13 @@ Dim vPorcGasto As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, False, EsComplementaria)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, False, EsComplementaria)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -7615,7 +7692,7 @@ Dim vPorcGasto As String
             vImporte = Round2(DBLet(Rs!KilosNet, "N") * Rs!precioindustria, 2)
         End If
         
-        b = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte))
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte))
         
         Importe = Importe + vImporte
         baseimpo = baseimpo + vImporte
@@ -7627,8 +7704,8 @@ Dim vPorcGasto As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+    If B And HayReg Then
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             GastosCoop = 0
             
             vPorcGasto = ""
@@ -7642,7 +7719,7 @@ Dim vPorcGasto As String
             baseimpo = baseimpo - GastosCoop
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
             GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1)
             Importe = Importe - GastosAlb
             baseimpo = baseimpo - GastosAlb
@@ -7650,10 +7727,10 @@ Dim vPorcGasto As String
         
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             '[Monica]23/11/2012: añadida lo de si es complementaria
             If Not EsComplementaria Then
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
@@ -7723,16 +7800,16 @@ Dim vPorcGasto As String
         vParamAplic.UltFactLiqBOD = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, False, EsComplementaria)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, False, EsComplementaria)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -7742,7 +7819,7 @@ Dim vPorcGasto As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesBodega = False
     Else
@@ -7778,7 +7855,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -7804,8 +7881,8 @@ Dim campo As String
     tipoMov = "FNZ"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -7894,13 +7971,13 @@ Dim campo As String
                     
                     vParamAplic.PrimFactAntAlmz = numfactu
                 Else
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
@@ -7910,9 +7987,9 @@ Dim campo As String
             baseimpo = baseimpo + Importe
             
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -7942,13 +8019,13 @@ Dim campo As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -7984,7 +8061,7 @@ Dim campo As String
                         End If
                     Loop Until Not Existe
                 Else
-                    b = False
+                    B = False
                 End If
            End If
         End If
@@ -7993,7 +8070,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!precioindustria, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!PrEstimado, "N") / 100 * Rs!precioindustria, 2)
         
-        b = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
     
 '        vPrecio = DBLet(Rs!precioindustria, "N")
 '[Monica] hasta aqui
@@ -8008,11 +8085,11 @@ Dim campo As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         baseimpo = baseimpo + Importe
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -8038,16 +8115,16 @@ Dim campo As String
         vParamAplic.UltFactAntAlmz = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -8057,7 +8134,7 @@ Dim campo As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposAlmazara = False
     Else
@@ -8094,7 +8171,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -8129,8 +8206,8 @@ Dim campo As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -8223,12 +8300,12 @@ Dim campo As String
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
     campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
                 GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
@@ -8236,11 +8313,11 @@ Dim campo As String
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -8285,7 +8362,7 @@ Dim campo As String
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -8334,13 +8411,13 @@ Dim campo As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -8381,7 +8458,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!precioindustria, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!PrEstimado, "N") / 100 * Rs!precioindustria, 2)
         
-        b = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
         
         Importe = Importe + vImporte
         baseimpo = baseimpo + vImporte
@@ -8393,8 +8470,8 @@ Dim campo As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
-        If b Then ' descontamos los gastos de los albaranes
+    If B And HayReg Then
+        If B Then ' descontamos los gastos de los albaranes
             GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1, 1)
             Importe = Importe - GastosAlb
             baseimpo = baseimpo - GastosAlb
@@ -8402,10 +8479,10 @@ Dim campo As String
         
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -8490,16 +8567,16 @@ Dim campo As String
         vParamAplic.UltFactLiqAlmz = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -8509,7 +8586,7 @@ Dim campo As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesAlmazara = False
     Else
@@ -8665,7 +8742,7 @@ Dim ActVarie As String
 
 Dim AntCampo As String
 Dim actCampo As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Sql2 As String
 
@@ -8688,8 +8765,8 @@ On Error GoTo EFacturacionTransporte
 
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -8762,14 +8839,14 @@ On Error GoTo EFacturacionTransporte
                 
                 If vPorcIva = "" Then
                     MsgBox "El transportista " & vTrans.Codigo & " no tiene iva. Revise.", vbExclamation
-                    b = False
+                    B = False
                 Else
                     PorcIva = CCur(ImporteSinFormato(vPorcIva))
                 End If
                 
 '                tipoMov = vSocio.CodTipomLiq
                 
-                If b Then
+                If B Then
                     '[Monica] 27/07/2010 dependiendo del parametro hemos de coger el contador global o el del transportista
                     '[Monica]05/11/2012 si es una factura interna en Alzira cogemos el contador global, no el del transportista
                     If vParamAplic.TipoContadorTRA = 0 Or (vParamAplic.Cooperativa = 4 And vTrans.EsFactTraInterna) Then ' contador global
@@ -8805,11 +8882,11 @@ On Error GoTo EFacturacionTransporte
                     End If
                 End If
         Else
-            b = False
+            B = False
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActTrans = DBLet(Rs!codTrans, "T")
         ActAlbar = DBSet(Rs!numalbar, "N")
         ActVarie = DBSet(Rs!codvarie, "N")
@@ -8880,20 +8957,20 @@ On Error GoTo EFacturacionTransporte
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             'insertar cabecera de factura
-            b = InsertCabeceraTrans(tipoMov, CStr(numfactu), FecFac, vTrans)
+            B = InsertCabeceraTrans(tipoMov, CStr(numfactu), FecFac, vTrans)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu), vTrans.Codigo)
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu), vTrans.Codigo)
             
-            If b Then
+            If B Then
                 '[Monica]05/11/2012 si es una factura interna en Alzira cogemos el contador global, no el del transportista
                 If vParamAplic.TipoContadorTRA = 0 Or (vParamAplic.Cooperativa = 4 And vTrans.EsFactTraInterna) Then
-                    b = vTipoMov.IncrementarContador(tipoMov)
+                    B = vTipoMov.IncrementarContador(tipoMov)
                 Else
-                    b = vTrans.IncrementarContador()
+                    B = vTrans.IncrementarContador()
                 End If
             End If
             
-            If b Then
+            If B Then
                 AntTrans = ActTrans
                 
                 Set vTrans = Nothing
@@ -8908,13 +8985,13 @@ On Error GoTo EFacturacionTransporte
                     End If
                     If vPorcIva = "" Then
                         MsgBox "El transportista " & vTrans.Codigo & " no tiene iva. Revise.", vbExclamation
-                        b = False
+                        B = False
                         Exit Function
                     Else
                         PorcIva = CCur(ImporteSinFormato(vPorcIva))
                     End If
                 Else
-                    b = False
+                    B = False
                 End If
                 
                 baseimpo = 0
@@ -8924,7 +9001,7 @@ On Error GoTo EFacturacionTransporte
                 TotalFac = 0
                 
                 
-                If b Then
+                If B Then
                     '[Monica]05/11/2012 si es una factura interna en Alzira cogemos el contador global, no el del transportista
                     If vParamAplic.TipoContadorTRA = 0 Or (vParamAplic.Cooperativa = 4 And vTrans.EsFactTraInterna) Then ' contador global
                         If vTipoMov Is Nothing Then Set vTipoMov = New CTiposMov
@@ -8963,8 +9040,8 @@ On Error GoTo EFacturacionTransporte
            End If
         End If
         
-        If b Then
-            b = InsertLineaTrans(tipoMov, CStr(numfactu), FecFac, Rs)
+        If B Then
+            B = InsertLineaTrans(tipoMov, CStr(numfactu), FecFac, Rs)
         End If
         
         IncrementarProgresNew Pb1, 1
@@ -8977,7 +9054,7 @@ On Error GoTo EFacturacionTransporte
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         '[Monica]15/10/2010: Añadido que se descuente el importe bruto pagado como trabajador solo para Picassent
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
             Sql = "select codtraba from rtransporte where codtrans = " & DBSet(ActTrans, "T")
@@ -9029,21 +9106,21 @@ On Error GoTo EFacturacionTransporte
         IncrementarProgresNew Pb1, 1
         
         'insertar cabecera de factura
-        b = InsertCabeceraTrans(tipoMov, CStr(numfactu), FecFac, vTrans)
+        B = InsertCabeceraTrans(tipoMov, CStr(numfactu), FecFac, vTrans)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu), vTrans.Codigo)
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu), vTrans.Codigo)
         
-        If b Then
+        If B Then
             '[Monica]05/11/2012 si es una factura interna en Alzira cogemos el contador global, no el del transportista
             If vParamAplic.TipoContadorTRA = 0 Or (vParamAplic.Cooperativa = 4 And vTrans.EsFactTraInterna) Then
-                b = vTipoMov.IncrementarContador(tipoMov)
+                B = vTipoMov.IncrementarContador(tipoMov)
             Else
-                b = vTrans.IncrementarContador()
+                B = vTrans.IncrementarContador()
             End If
         End If
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporalesTrans()
+        If B Then B = PasarTemporalesTrans()
         
     End If
     
@@ -9051,7 +9128,7 @@ On Error GoTo EFacturacionTransporte
     If Not vTipoMov Is Nothing Then Set vTipoMov = Nothing
     
 EFacturacionTransporte:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         If Err.Number <> 0 Then MuestraError Err.Number, "Facturación Transporte:", Err.Description
         conn.RollbackTrans
         FacturacionTransporte = False
@@ -9134,9 +9211,9 @@ Dim Precio As Currency
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
     Sql = Sql & DBSet(Rs!numalbar, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcampo, "N") & ","
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
-        Sql = Sql & DBSet(DBLet(Rs!numnotac, "N"), "N") & "," & DBSet(DBLet(Rs!KilosTra, "N"), "N") & ","
+        Sql = Sql & DBSet(DBLet(Rs!NumNotac, "N"), "N") & "," & DBSet(DBLet(Rs!KilosTra, "N"), "N") & ","
     Else
-        Sql = Sql & DBSet(DBLet(Rs!numnotac, "N"), "N") & "," & DBSet(DBLet(Rs!KilosNet, "N"), "N") & ","
+        Sql = Sql & DBSet(DBLet(Rs!NumNotac, "N"), "N") & "," & DBSet(DBLet(Rs!KilosNet, "N"), "N") & ","
     End If
     Sql = Sql & DBSet(Precio, "N") & ","
     Sql = Sql & DBSet(DBLet(Rs!Importe, "N"), "N") & ","
@@ -9182,7 +9259,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -9248,8 +9325,8 @@ Dim cantidad As Currency
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -9357,7 +9434,7 @@ Dim cantidad As Currency
     campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     jj = 0
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
@@ -9425,7 +9502,7 @@ Dim cantidad As Currency
                 GastosCoop2 = 0
                 
                ' [Monica] 05/07/2010 descontamos los gastos de la cooperativa en la linea
-                If b Then ' descontamos el porcentaje de gastos de cooperativa
+                If B Then ' descontamos el porcentaje de gastos de cooperativa
                     GastosCoop = 0
 '                    GastosCoop = Round2((LitrosProducidos - LitrosConsumidos) * PrecioProducido * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
 '                    GastosCoop = Round2((LitrosConsumidos * PrecioConsumido) * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
@@ -9528,7 +9605,7 @@ Dim cantidad As Currency
                 jj = jj + 1
                 
                 GastosCoop = 0
-                If b Then ' descontamos el porcentaje de gastos de cooperativa
+                If B Then ' descontamos el porcentaje de gastos de cooperativa
                     GastosCoop = 0
                     GastosCoop = Round2(ImporteRetirado * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
                     
@@ -9577,7 +9654,7 @@ Dim cantidad As Currency
             End If
             
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
                 GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
@@ -9593,11 +9670,11 @@ Dim cantidad As Currency
             GastosAlb = GastosAlb + DevuelveValor(SqlGastos)
             
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -9642,7 +9719,7 @@ Dim cantidad As Currency
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -9677,13 +9754,13 @@ Dim cantidad As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -9757,7 +9834,7 @@ Dim cantidad As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         Sql3 = "select rbodalbaran_variedad.*, variedades.* "
         Sql3 = Sql3 & " from rbodalbaran_variedad, rbodalbaran, variedades where rbodalbaran.codsocio = " & DBSet(AntSocio, "N")
         Sql3 = Sql3 & " and rbodalbaran.fechaalb >= " & DBSet(FIni, "F") & " and rbodalbaran.fechaalb <= " & DBSet(FFin, "F")
@@ -9823,7 +9900,7 @@ Dim cantidad As Currency
             GastosCoop2 = 0
             
            ' [Monica] 05/07/2010 descontamos los gastos de la cooperativa en la linea
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
 '                    GastosCoop = Round2((LitrosProducidos - LitrosConsumidos) * PrecioProducido * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
 '                    GastosCoop = Round2((LitrosConsumidos * PrecioConsumido) * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
@@ -9927,7 +10004,7 @@ Dim cantidad As Currency
             jj = jj + 1
             
             GastosCoop = 0
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 GastosCoop = Round2(ImporteRetirado * CCur(ImporteSinFormato(vPorcGasto)) / 100, 2)
                 
@@ -9977,7 +10054,7 @@ Dim cantidad As Currency
         End If
         
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
             'Para el resto sigue como estaba
             GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
             Importe = Importe - GastosAlb
@@ -9996,10 +10073,10 @@ Dim cantidad As Currency
                     
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -10066,16 +10143,16 @@ Dim cantidad As Currency
         vParamAplic.UltFactLiqAlmz = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -10085,7 +10162,7 @@ Dim cantidad As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesAlmazaraValsur = False
     Else
@@ -10170,7 +10247,7 @@ Dim tipoMov As String
 
 Dim Sql3 As String
 Dim devuelve As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Existe As Boolean
 
@@ -10178,8 +10255,8 @@ Dim Existe As Boolean
     
 '08052009 antes dentro de transaccion
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -10256,9 +10333,9 @@ Dim Existe As Boolean
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
             
-            If b Then
+            If B Then
                 ' insertamos los totales en la calidad venta campo de la variedad (rfactsoc_calidad)
                 Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Variedad, "N")
                 Sql2 = Sql2 & " and tipcalid = 2 " ' calidad de venta campo
@@ -10267,24 +10344,24 @@ Dim Existe As Boolean
                 RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
                 If Not RS1.EOF Then
-                    b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
+                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
                 End If
                 Set RS1 = Nothing
             End If
             
             'insertar cabecera de factura
-            If b Then b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
             vParamAplic.UltFactAntVC = numfactu
             
             'pasamos las temporales a las tablas
-            If b Then b = PasarTemporales()
+            If B Then B = PasarTemporales()
             
-            If b Then b = (vParamAplic.Modificar = 1)
+            If B Then B = (vParamAplic.Modificar = 1)
             
         End If
     
@@ -10296,7 +10373,7 @@ Dim Existe As Boolean
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturaAnticipoVentaCampo = False
     Else
@@ -10321,7 +10398,7 @@ Dim ActVarie As String
 
 Dim AntCampo As String
 Dim actCampo As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Sql2 As String
 
@@ -10357,8 +10434,8 @@ On Error GoTo EFacturacionTransporteSocio
 
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -10409,12 +10486,12 @@ On Error GoTo EFacturacionTransporteSocio
     
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
-        AntAlbar = CStr(DBLet(Rs!numnotac, "N"))
+        AntAlbar = CStr(DBLet(Rs!NumNotac, "N"))
         AntVarie = CStr(DBLet(Rs!codvarie, "N"))
         AntCampo = CStr(DBLet(Rs!codcampo, "N"))
         
         ActSocio = CStr(DBLet(Rs!Codsocio, "N"))
-        ActAlbar = CStr(DBLet(Rs!numnotac, "N"))
+        ActAlbar = CStr(DBLet(Rs!NumNotac, "N"))
         ActVarie = CStr(DBLet(Rs!codvarie, "N"))
         actCampo = CStr(DBLet(Rs!codcampo, "N"))
     
@@ -10437,14 +10514,14 @@ On Error GoTo EFacturacionTransporteSocio
                 
                 If vPorcIva = "" Then
                     MsgBox "El socio " & vSocio.Codigo & " no tiene iva. Revise.", vbExclamation
-                    b = False
+                    B = False
                 Else
                     PorcIva = CCur(ImporteSinFormato(vPorcIva))
                 End If
                 
 '                tipoMov = vSocio.CodTipomLiq
                 
-                If b Then
+                If B Then
                     Set vTipoMov = New CTiposMov
                     
                     numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -10463,19 +10540,19 @@ On Error GoTo EFacturacionTransporteSocio
                 End If
             Else
                 MsgBox "El socio " & ActSocio & " no se encuentra en la sección de Horto. Revise.", vbExclamation
-                b = False
+                B = False
             End If
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActSocio = DBLet(Rs!Codsocio, "N")
-        ActAlbar = DBSet(Rs!numnotac, "N")
+        ActAlbar = DBSet(Rs!NumNotac, "N")
         ActVarie = DBSet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
         
         If ActSocio <> AntSocio Or ActVarie <> AntVarie Or actCampo <> AntCampo Then
-            If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(AntVarie, "N")), CStr(DBLet(AntCampo, "N")), CStr(KilosLin), CStr(ImporteLin), 0)
+            If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(AntVarie, "N")), CStr(DBLet(AntCampo, "N")), CStr(KilosLin), CStr(ImporteLin), 0)
             
             AntAlbar = ActAlbar
             AntVarie = ActVarie
@@ -10508,22 +10585,22 @@ On Error GoTo EFacturacionTransporteSocio
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             '                    solo si es Picassent y estamos facturando a socios terceros
-            If b And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then
-                b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then
+                B = vTipoMov.IncrementarContador(tipoMov)
             End If
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -10534,14 +10611,14 @@ On Error GoTo EFacturacionTransporteSocio
                         vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                         If vPorcIva = "" Then
                             MsgBox "El socio " & vSocio.Codigo & " no tiene iva. Revise.", vbExclamation
-                            b = False
+                            B = False
                             Exit Function
                         Else
                             PorcIva = CCur(ImporteSinFormato(vPorcIva))
                         End If
                     Else
                         MsgBox "El socio " & ActSocio & " no se encuentra en la sección de Horto. Revise.", vbExclamation
-                        b = False
+                        B = False
                     End If
                 End If
                 
@@ -10552,7 +10629,7 @@ On Error GoTo EFacturacionTransporteSocio
                 TotalFac = 0
                 
                 
-                If b Then
+                If B Then
                     numfactu = vTipoMov.ConseguirContador(tipoMov)
                     Do
                         numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -10611,7 +10688,7 @@ On Error GoTo EFacturacionTransporteSocio
                     '[Monica]18/12/2013: antes para Alzira el gasto de recoleccion era kilos por un precio de la variedad
                     '                    ahora se va a calcular pro el precio de la calidad
                     'Importe = Importe + Round2(DBLet(Rs!KilosTra, "N") * Precio, 2)
-                    ImporteNota = CalculoPorCalidad(CStr(Rs!numnotac), Rs!Tipo)
+                    ImporteNota = CalculoPorCalidad(CStr(Rs!NumNotac), Rs!Tipo)
                     
                     Importe = Importe + ImporteNota
                     
@@ -10628,8 +10705,8 @@ On Error GoTo EFacturacionTransporteSocio
             End If
         End If
         
-        If b Then
-            b = InsertLineaNota(tipoMov, CStr(numfactu), FecFac, Rs, CStr(Kilos), CStr(Precio), CStr(Importe), CStr(GasAcarreo), CStr(ImpPenal))
+        If B Then
+            B = InsertLineaNota(tipoMov, CStr(numfactu), FecFac, Rs, CStr(Kilos), CStr(Precio), CStr(Importe), CStr(GasAcarreo), CStr(ImpPenal))
         End If
             
         ImporteLin = ImporteLin + Importe
@@ -10645,8 +10722,8 @@ On Error GoTo EFacturacionTransporteSocio
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(ActVarie, "N")), CStr(DBLet(actCampo, "N")), CStr(KilosLin), CStr(ImporteLin), 0)
+    If B And HayReg Then
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(ActVarie, "N")), CStr(DBLet(actCampo, "N")), CStr(KilosLin), CStr(ImporteLin), 0)
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -10670,30 +10747,30 @@ On Error GoTo EFacturacionTransporteSocio
         IncrementarProgresNew Pb1, 1
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         '                    solo si es Picassent y estamos facturando a socios terceros
-        If b And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then
-             b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then
+             B = vTipoMov.IncrementarContador(tipoMov)
         End If
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
     End If
     
     Set vSocio = Nothing
     
 EFacturacionTransporteSocio:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         If Err.Number <> 0 Then MuestraError Err.Number, "Facturación Transporte/Recoleccion a Socio:", Err.Description
         conn.RollbackTrans
         FacturacionTransporteSocio = False
@@ -10802,7 +10879,7 @@ Dim Tipo As String
     Sql = "insert into tmpfact_albaran (codtipom, numfactu, fecfactu, numalbar, fecalbar, "
     Sql = Sql & "codvarie, codcampo, kilosbru, kilosnet, grado, precio, importe, imporgasto, imppenal) values ("
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    Sql = Sql & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+    Sql = Sql & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
     Sql = Sql & DBSet(Rs!codcampo, "N") & ","
     Sql = Sql & DBSet(Kilos, "N") & "," & DBSet(Kilos, "N") & ","
     Sql = Sql & DBSet(0, "N") & "," & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & ","
@@ -11089,7 +11166,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -11124,8 +11201,8 @@ Dim campo As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -11218,12 +11295,12 @@ Dim campo As String
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
     campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
                 GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
@@ -11231,11 +11308,11 @@ Dim campo As String
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -11280,7 +11357,7 @@ Dim campo As String
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -11329,13 +11406,13 @@ Dim campo As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -11376,7 +11453,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!Prliquidalmz, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!Prliquidalmz, "N"), 2)
         
-        b = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
         
         Importe = Importe + vImporte
         baseimpo = baseimpo + vImporte
@@ -11388,8 +11465,8 @@ Dim campo As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
-        If b Then ' descontamos los gastos de los albaranes
+    If B And HayReg Then
+        If B Then ' descontamos los gastos de los albaranes
             GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1, 1)
             Importe = Importe - GastosAlb
             baseimpo = baseimpo - GastosAlb
@@ -11397,10 +11474,10 @@ Dim campo As String
         
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -11485,16 +11562,16 @@ Dim campo As String
         vParamAplic.UltFactLiqAlmz = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -11504,7 +11581,7 @@ Dim campo As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesAlmazaraCastelduc = False
     Else
@@ -11539,7 +11616,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -11578,8 +11655,8 @@ Dim PorcComi As Currency
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -11685,7 +11762,7 @@ Dim PorcComi As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -11699,7 +11776,7 @@ Dim PorcComi As Currency
             
             baseimpo = baseimpo + vImporte + vBonifica
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
             KilosCal = 0
             vImporte = 0
             vBonifica = 0
@@ -11708,7 +11785,7 @@ Dim PorcComi As Currency
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -11743,16 +11820,16 @@ Dim PorcComi As Currency
 '            End If
             
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -11797,7 +11874,7 @@ Dim PorcComi As Currency
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -11840,9 +11917,9 @@ Dim PorcComi As Currency
             
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
 'Mirar si quito lo de reclacular calidades
 '            If b Then b = RecalcularCalidades(TipoMov, CStr(numfactu), FecFac)
@@ -11852,12 +11929,12 @@ Dim PorcComi As Currency
 
             '[Monica]15/04/2013: Descontamos facturas varias
             If DescontarFVarias Then
-                If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
+                If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
             End If
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -11971,7 +12048,7 @@ Dim PorcComi As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -11980,10 +12057,10 @@ Dim PorcComi As Currency
         baseimpo = baseimpo + vImporte + vBonifica
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             GastosCoop = 0
             
             vPorcGasto = ""
@@ -12021,16 +12098,16 @@ Dim PorcComi As Currency
 '        End If
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
         End If
                     
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -12107,14 +12184,14 @@ Dim PorcComi As Currency
         
         '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
         
         '[Monica]15/04/2013: Descontamos facturas varias
         If DescontarFVarias Then
-            If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
+            If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
         End If
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
 'Mirar si quito lo de reclacular calidades
 '        If b Then b = RecalcularCalidades(TipoMov, CStr(numfactu), FecFac)
@@ -12122,18 +12199,18 @@ Dim PorcComi As Currency
 'Recalculo de todos los importes de rfactsoc_calidades y rfactsoc_variedades para que cuadre con la base de cabecera
 '        If b Then b = CuadrarBasesFactura(TipoMov, CStr(numfactu), FecFac, BaseImpo)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
         '[Monica]23/07/2012: si no es complementaria se calculan los gastos
         If TipoPrec <> 3 Then
             ' solo para Picassent: he de insertar las lineas de gastos al pie de factura que estan como gastos de albaranes
-            If b Then b = DescontarGastosAPie()
+            If B Then B = DescontarGastosAPie()
         End If
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -12143,7 +12220,7 @@ Dim PorcComi As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesPicassent = False
     Else
@@ -12175,7 +12252,19 @@ Dim NumLin As Long
     Sql = "select distinct tmpfact_albaran.codtipom, tmpfact_albaran.numfactu, tmpfact_albaran.fecfactu, "
     Sql = Sql & " rhisfruta_gastos.codgasto, sum(rhisfruta_gastos.importe) impgasto "
     Sql = Sql & " from tmpfact_albaran inner join rhisfruta_gastos on tmpfact_albaran.numalbar = rhisfruta_gastos.numalbar "
+    
+    '[Monica]07/04/2017: para el caso de coopic no descontamos los gastos que sean de transporte
+    If vParamAplic.Cooperativa = 16 Then
+        Sql = Sql & " where rhisfruta_gastos.codgasto <> " & vParamAplic.CodGastoTRA
+    End If
+    
     Sql = Sql & " group by 1, 2, 3, 4"
+    
+    '[Monica]07/04/2017: para el caso de coopic no descontamos los gastos que sean de transporte
+    If vParamAplic.Cooperativa = 16 Then
+        Sql = Sql & " having impgasto <> 0"
+    End If
+    
     Sql = Sql & " order by 1, 2, 3, 4"
     
     Set Rs = New ADODB.Recordset
@@ -12303,7 +12392,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -12335,8 +12424,8 @@ Dim Precio As Currency
     If EsVetoRuso Then tipoMov = "VAA"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -12424,7 +12513,7 @@ Dim Precio As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
 '        actCampo = DBSet(Rs!codcampo, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
@@ -12452,13 +12541,13 @@ Dim Precio As Currency
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, DeRetirada)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, DeRetirada)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -12517,16 +12606,16 @@ Dim Precio As Currency
         
         Precio = DevuelveValor(Sql8)
         Importe = Round2(Kilos * Precio, 2)
-        b = InsertLinea(tipoMov, CStr(numfactu), FecFac, ActVarie, 0, CStr(Kilos), CStr(Importe), "0")
+        B = InsertLinea(tipoMov, CStr(numfactu), FecFac, ActVarie, 0, CStr(Kilos), CStr(Importe), "0")
         
         baseimpo = baseimpo + Importe
         
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, CStr(Rs!codvarie), 0, "", "fechaent between " & DBSet(FecIni, "F") & " and " & DBSet(FecFin, "F"), 3)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, CStr(Rs!codvarie), 0, "", "fechaent between " & DBSet(FecIni, "F") & " and " & DBSet(FecFin, "F"), 3)
         End If
         
         
-        If b Then
+        If B Then
             AntVarie = ActVarie
 '            AntCampo = actCampo
             Kilos = 0
@@ -12544,7 +12633,7 @@ Dim Precio As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de variedad
 '        If b Then
 '            ' insertar linea de variedad, campo
@@ -12590,19 +12679,19 @@ Dim Precio As Currency
         vParamAplic.UltFactAnt = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, DeRetirada)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, False, DeRetirada)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         
 '        If b Then b = ModificarCalidadesFacturasGastos()
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -12612,7 +12701,7 @@ Dim Precio As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposGenerico = False
     Else
@@ -12649,7 +12738,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -12686,8 +12775,8 @@ Dim ImporRet As Currency
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -12782,7 +12871,7 @@ Dim ImporRet As Currency
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
 '        actCampo = DBSet(Rs!codcampo, "N")
@@ -12795,7 +12884,7 @@ Dim ImporRet As Currency
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -12803,7 +12892,7 @@ Dim ImporRet As Currency
         End If
         
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 Gastos = 0
                 
                 vPorcGasto = ""
@@ -12816,7 +12905,7 @@ Dim ImporRet As Currency
                 
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
 '                Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
                 
                 ' kilos retirada
@@ -12886,16 +12975,16 @@ Dim ImporRet As Currency
             End If
 'demomento
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, 0, cTabla, cWhere, 4)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, 0, cTabla, cWhere, 4)
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, CStr(Kilos), CStr(Importe), "0")
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, CStr(Kilos), CStr(Importe), "0")
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello ( que no sean de gastos, que no sean de retirada )
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -12943,7 +13032,7 @@ Dim ImporRet As Currency
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -12982,15 +13071,15 @@ Dim ImporRet As Currency
             
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -13053,7 +13142,7 @@ Dim ImporRet As Currency
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -13061,10 +13150,10 @@ Dim ImporRet As Currency
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             Gastos = 0
             
             vPorcGasto = ""
@@ -13076,7 +13165,7 @@ Dim ImporRet As Currency
             baseimpo = baseimpo - Gastos
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
 '            Gastos = ObtenerGastosAlbaranesNew(AntSocio, AntVarie, AntCampo, cTabla, cWhere)
 '            Importe = Importe - Gastos
 '            baseimpo = baseimpo - Gastos
@@ -13142,15 +13231,15 @@ Dim ImporRet As Currency
         End If
 'demomento
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, 0, cTabla, cWhere, 4)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, 0, cTabla, cWhere, 4)
         End If
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(0), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(0), CStr(Kilos), CStr(Importe), "0")
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -13226,18 +13315,18 @@ Dim ImporRet As Currency
         
         '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , EsComplemen)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -13247,7 +13336,7 @@ Dim ImporRet As Currency
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesQuatretonda = False
     Else
@@ -13624,7 +13713,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -13657,8 +13746,8 @@ Dim vPorcGasto As String
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -13753,7 +13842,7 @@ Dim vPorcGasto As String
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -13766,7 +13855,7 @@ Dim vPorcGasto As String
             
             baseimpo = baseimpo + vImporte
             
-            b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+            B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
             KilosCal = 0
             vImporte = 0
             
@@ -13774,7 +13863,7 @@ Dim vPorcGasto As String
         End If
         
         If (ActVarie <> AntVarie Or actCampo <> AntCampo Or ActSocio <> AntSocio) Then
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -13786,23 +13875,23 @@ Dim vPorcGasto As String
                 baseimpo = baseimpo - GastosCoop
             End If
             
-            If b Then ' descontamos los gastos de los albaranes
+            If B Then ' descontamos los gastos de los albaranes
                 GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, "rhifruta", "rhifruta.numalbar = " & DBSet(Albaran, "N"), 1)
                 Importe = Importe - GastosAlb
                 baseimpo = baseimpo - GastosAlb
             End If
             
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "rhisfruta", "rhifruta.numalbar = " & DBSet(Albaran, "N"), 0)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "rhisfruta", "rhifruta.numalbar = " & DBSet(Albaran, "N"), 0)
             End If
                         
             ' insertar linea de variedad, campo
-            If b Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+            If B Then
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
-            If b Then
+            If B Then
                 ' tenemos que descontar los anticipos que tengamos para ello
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -13847,7 +13936,7 @@ Dim vPorcGasto As String
             End If
             
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -13883,23 +13972,23 @@ Dim vPorcGasto As String
             
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
 'Mirar si quito lo de reclacular calidades
-            If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
             
 'Recalculo de todos los importes de tmpfact_calidades y tmpfact_variedades para que cuadre con la base de cabecera
-            If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+            If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
             
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -13956,7 +14045,7 @@ Dim vPorcGasto As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         Kilos = Kilos + KilosCal
         Importe = Importe + vImporte
@@ -13964,10 +14053,10 @@ Dim vPorcGasto As String
         baseimpo = baseimpo + vImporte
         
         
-        If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
+        If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte))
         
         
-        If b Then ' descontamos el porcentaje de gastos de cooperativa
+        If B Then ' descontamos el porcentaje de gastos de cooperativa
             GastosCoop = 0
             
             vPorcGasto = ""
@@ -13980,7 +14069,7 @@ Dim vPorcGasto As String
             baseimpo = baseimpo - GastosCoop
         End If
         
-        If b Then ' descontamos los gastos de los albaranes
+        If B Then ' descontamos los gastos de los albaranes
             '[Monica]25/02/2011: Sólo hay gastos si no es complementaria ( Añadido el if )
             GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, "rhisfruta", "rhisfruta.numalbar = " & Albaran, 1)
             Importe = Importe - GastosAlb
@@ -13988,16 +14077,16 @@ Dim vPorcGasto As String
         End If
         
         '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-        If b Then
-            b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "rhisfruta", "rhisfruta.numalbar = " & Albaran, 0)
+        If B Then
+            B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, "rhisfruta", "rhisfruta.numalbar = " & Albaran, 0)
         End If
                     
                     
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
-        If b Then
+        If B Then
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -14069,25 +14158,25 @@ Dim vPorcGasto As String
         
         '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If b And vSocio.EmiteFact Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
 'Mirar si quito lo de reclacular calidades
-        If b Then b = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
+        If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
         
 'Recalculo de todos los importes de rfactsoc_calidades y rfactsoc_variedades para que cuadre con la base de cabecera
-        If b Then b = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
+        If B Then B = CuadrarBasesFactura(tipoMov, CStr(numfactu), FecFac, baseimpo)
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -14097,7 +14186,7 @@ Dim vPorcGasto As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionDirecta = False
     Else
@@ -14110,7 +14199,7 @@ End Function
 
 Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
 
-    Dim i As Integer
+    Dim I As Integer
     Dim Sql As String
     Dim baseimpo As Dictionary
     Dim CodIva As Integer
@@ -14124,15 +14213,15 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
     totimp = 0
     Base = 0
     ImpRet = 0
-    For i = 0 To 2
-         Tipiva(i) = 0
-         ImpTot(i) = 0
-         Impbas(i) = 0
-         impiva(i) = 0
-         PorIva(i) = 0
-         PorRec(i) = 0
-         ImpREC(i) = 0
-    Next i
+    For I = 0 To 2
+         Tipiva(I) = 0
+         ImpTot(I) = 0
+         Impbas(I) = 0
+         impiva(I) = 0
+         PorIva(I) = 0
+         PorRec(I) = 0
+         ImpREC(I) = 0
+    Next I
 
     ' recorremos todas las lineas de la factura
     If Not Rs.EOF Then Rs.MoveFirst
@@ -14143,17 +14232,17 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         Rs.MoveNext
     Wend
 
-    For i = 0 To baseimpo.Count - 1
-        If i <= 2 Then
-            Tipiva(i) = baseimpo.Keys(i)
-            Impbas(i) = baseimpo.Items(i)
+    For I = 0 To baseimpo.Count - 1
+        If I <= 2 Then
+            Tipiva(I) = baseimpo.Keys(I)
+            Impbas(I) = baseimpo.Items(I)
  
-            PorIva(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
-            PorRec(i) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(i)), "N")
-            impiva(i) = DBLet(Round2(Impbas(i) * PorIva(i) / 100, 2), "N")
-            ImpREC(i) = DBLet(Round2(Impbas(i) * PorRec(i) / 100, 2), "N")
-            ImpTot(i) = Impbas(i) + impiva(i) + ImpREC(i)
-            TotFac = TotFac + ImpTot(i)
+            PorIva(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(I)), "N")
+            PorRec(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(I)), "N")
+            impiva(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
+            ImpREC(I) = DBLet(Round2(Impbas(I) * PorRec(I) / 100, 2), "N")
+            ImpTot(I) = Impbas(I) + impiva(I) + ImpREC(I)
+            TotFac = TotFac + ImpTot(I)
  
 'antes el iva estaba incluido
 '            PorIva(i) = DevuelveDesdeBDNewFac(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(i)), "N")
@@ -14163,7 +14252,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
         
         
         End If
-    Next i
+    Next I
     'si hay retencion la calculamos
     If PorRet <> 0 Then
         Base = 0
@@ -14173,21 +14262,21 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
             If Socio <> "" Then Sql = DevuelveValor("select tipoirpf from rsocios where codsocio = " & DBSet(Socio, "N"))
             Select Case Sql
                 Case 0
-                    For i = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(i) + impiva(i)
-                    Next i
+                    For I = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(I) + impiva(I)
+                    Next I
                 Case 1
-                    For i = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(i)
-                    Next i
+                    For I = 0 To baseimpo.Count - 1
+                        Base = Base + Impbas(I)
+                    Next I
                 Case 2
                 
             End Select
         
         Else
-            For i = 0 To baseimpo.Count - 1
-                Base = Base + Impbas(i)
-            Next i
+            For I = 0 To baseimpo.Count - 1
+                Base = Base + Impbas(I)
+            Next I
         End If
         ImpRet = Round2(Base * PorRet / 100, 2)
         TotFac = TotFac - ImpRet
@@ -14220,7 +14309,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -14246,8 +14335,8 @@ Dim campo As String
     tipoMov = "FNZ"
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -14336,13 +14425,13 @@ Dim campo As String
                     
                     vParamAplic.PrimFactAntAlmz = numfactu
                 Else
-                    b = False
+                    B = False
                 End If
             End If
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
         ActSocio = DBSet(Rs!Codsocio, "N")
         
@@ -14352,9 +14441,9 @@ Dim campo As String
             baseimpo = baseimpo + Importe
             
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 Kilos = 0
                 Importe = 0
@@ -14384,13 +14473,13 @@ Dim campo As String
             IncrementarProgresNew Pb1, 1
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -14426,7 +14515,7 @@ Dim campo As String
                         End If
                     Loop Until Not Existe
                 Else
-                    b = False
+                    B = False
                 End If
            End If
         End If
@@ -14435,7 +14524,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!precioindustria, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * vPrecio, 2)
         
-        b = InsertLineaAlbaranNew(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), cTabla, cWhere)
+        B = InsertLineaAlbaranNew(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), cTabla, cWhere)
     
 '        vPrecio = DBLet(Rs!precioindustria, "N")
 '[Monica] hasta aqui
@@ -14450,11 +14539,11 @@ Dim campo As String
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         baseimpo = baseimpo + Importe
         
         ' insertar linea de variedad
-        If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -14480,16 +14569,16 @@ Dim campo As String
         vParamAplic.UltFactAntAlmz = numfactu
         
         'insertar cabecera de factura
-        b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+        B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -14499,7 +14588,7 @@ Dim campo As String
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposAlmazaraCastelduc = False
     Else
@@ -14602,7 +14691,7 @@ Dim tipoMov As String
 
 Dim Sql3 As String
 Dim devuelve As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Existe As Boolean
 
@@ -14610,8 +14699,8 @@ Dim Existe As Boolean
     
 '08052009 antes dentro de transaccion
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -14698,9 +14787,9 @@ Dim Existe As Boolean
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             ' insertar linea de variedad, campo
-            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
             
-            If b Then
+            If B Then
                 ' insertamos los totales en la calidad venta campo de la variedad (rfactsoc_calidad)
                 Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Variedad, "N")
 '                Sql2 = Sql2 & " and tipcalid = 2 " ' calidad de venta campo
@@ -14709,30 +14798,30 @@ Dim Existe As Boolean
                 RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
                 If Not RS1.EOF Then
-                    b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
+                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
                 End If
                 Set RS1 = Nothing
             End If
             
             'insertar cabecera de factura
-            If b Then b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]07/11/2013: si es tercero he de marcarla como contabilizada
             '                    en ppio solo es para Picassent
             If Estercero Then
-                If b Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
             
             vParamAplic.UltFactAnt = numfactu
             
             'pasamos las temporales a las tablas
-            If b Then b = PasarTemporales()
+            If B Then B = PasarTemporales()
             
-            If b Then b = (vParamAplic.Modificar = 1)
+            If B Then B = (vParamAplic.Modificar = 1)
             
         End If
     
@@ -14744,7 +14833,7 @@ Dim Existe As Boolean
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturaAnticipoSinEntrada = False
     Else
@@ -14781,7 +14870,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -14817,8 +14906,8 @@ Dim HayPrecio As Boolean
     End If
     
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
     
@@ -14915,7 +15004,7 @@ Dim HayPrecio As Boolean
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -14931,7 +15020,7 @@ Dim HayPrecio As Boolean
                 
                 baseimpo = baseimpo + vImporte
                 
-                b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
+                B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
             End If
             KilosCal = 0
             vImporte = 0
@@ -14944,10 +15033,10 @@ Dim HayPrecio As Boolean
             ' insertar linea de variedad, campo
             '[Monica]24/02/2014: añadida condicion
             If Kilos <> 0 Then
-                b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
             End If
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -14982,31 +15071,31 @@ Dim HayPrecio As Boolean
                 
                 
                 'insertar cabecera de factura
-                b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+                B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
                 
                 '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
                 If EsTerceros Then
-                    If b Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
                 End If
                 
                 
-                If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+                If B Then B = InsertResumen(tipoMov, CStr(numfactu))
                 
                 '[Monica]15/04/2013: Introducimos las facturas varias a descontar
                 If DescontarFVarias Then
-                    If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
+                    If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
                 End If
                 
-                If b Then b = vTipoMov.IncrementarContador(tipoMov)
+                If B Then B = vTipoMov.IncrementarContador(tipoMov)
             Else
-                b = True
+                B = True
                 
             End If
                 
             IncrementarProgresNew Pb1, 1
             
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -15106,7 +15195,7 @@ Dim HayPrecio As Boolean
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         '[Monica]24/02/2014: añadida condicion
         If HayPrecio Then
@@ -15116,13 +15205,13 @@ Dim HayPrecio As Boolean
             
             baseimpo = baseimpo + vImporte
             
-            If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
+            If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte), CStr(vBonifica))
         End If
         
         '[Monica]24/02/2014: añadida condicion
         If Kilos <> 0 Then
             ' insertar linea de variedad
-            If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
+            If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe), "0", CStr(Bonifica))
         End If
         
         '[Monica]24/02/2014: añadida condicion
@@ -15152,25 +15241,25 @@ Dim HayPrecio As Boolean
             
             
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
             '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
             If EsTerceros Then
-                If b Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
             
             '[Monica]15/04/2013: Introducimos las facturas varias a descontar
             If DescontarFVarias Then
-                If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
+                If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 0, 0)
             End If
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         Else
-            b = True
+            B = True
         End If
         
         IncrementarProgresNew Pb1, 1
@@ -15178,9 +15267,9 @@ Dim HayPrecio As Boolean
         vParamAplic.UltFactAnt = numfactu
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -15190,7 +15279,7 @@ Dim HayPrecio As Boolean
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionAnticiposPicassentNew = False
     Else
@@ -15225,7 +15314,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Kilos As Currency
 Dim KilosCal As Currency
@@ -15262,14 +15351,16 @@ Dim Incremento As Currency
 
 Dim HayPrecio As Boolean
 
+Dim Concepto As String
+
     On Error GoTo eFacturacion
 
     FacturacionLiquidacionesPicassentNew = False
     
 '08052009 antes dentro de transacciones
     BorrarTMPs
-    b = CrearTMPs()
-    If Not b Then
+    B = CrearTMPs()
+    If Not B Then
          Exit Function
     End If
 '08052009
@@ -15281,8 +15372,6 @@ Dim HayPrecio As Boolean
     Else
         tipoMov = "FAL"
     End If
-    
-    
     
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
@@ -15397,7 +15486,7 @@ Dim HayPrecio As Boolean
         End If
     End If
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         ActCalid = DBLet(Rs!codcalid, "N")
         ActVarie = DBLet(Rs!codvarie, "N")
         actCampo = DBSet(Rs!codcampo, "N")
@@ -15414,7 +15503,7 @@ Dim HayPrecio As Boolean
                 
                 baseimpo = baseimpo + vImporte + vBonifica
                 
-                b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
+                B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(AntCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
             
             End If
             
@@ -15430,7 +15519,7 @@ Dim HayPrecio As Boolean
             '[Monica]24/02/2014: añadida condicion
             If Kilos <> 0 Then
         
-                If b Then ' descontamos el porcentaje de gastos de cooperativa
+                If B Then ' descontamos el porcentaje de gastos de cooperativa
                     GastosCoop = 0
                     
                     vPorcGasto = ""
@@ -15447,18 +15536,18 @@ Dim HayPrecio As Boolean
                 
                 
                 '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-                If b Then
-                    b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+                If B Then
+                    B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
                 End If
                             
                 ' insertar linea de variedad, campo
-                If b Then
-                    b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
+                If B Then
+                    B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, AntCampo, CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
                 End If
             
             
                 '[Monica]10/01/2014: en el caso de que haya incremento hemos de insertarlo y aumentar la base
-                If b Then
+                If B Then
                     If ActVarie <> AntVarie Or ActSocio <> AntSocio Then
                         Sql4 = "select sum(ringresos.importe) from ringresos where codsocio = " & DBSet(AntSocio, "N")
                         Sql4 = Sql4 & " and codvarie = " & DBSet(AntVarie, "N")
@@ -15466,9 +15555,16 @@ Dim HayPrecio As Boolean
                         Incremento = DevuelveValor(Sql4)
         
                         If Incremento <> 0 Then
-                            b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, 0, CStr(Incremento), 0, 0)
+                            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, 0, CStr(Incremento), 0, 0)
                             baseimpo = baseimpo + Incremento
+                        
+                            '[Monica]10/04/2017: insertamos las lineas de ingresos que tiene que imprimir Coopic en la factura
+                            If B Then
+                                B = InsertLineasIngresos(tipoMov, CStr(numfactu), FecFac, AntVarie, AntSocio)
+                            End If
+                        
                         End If
+                        
                         'borramos la linea de ingresos para el socio variedad
                         Sql4 = "delete from ringresos where codsocio = " & DBSet(AntSocio, "N")
                         Sql4 = Sql4 & " and codvarie = " & DBSet(AntVarie, "N")
@@ -15477,7 +15573,7 @@ Dim HayPrecio As Boolean
                     End If
                 End If
                 
-                If b Then
+                If B Then
                     ' tenemos que descontar los anticipos que tengamos para ello
                     Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                     Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
@@ -15545,12 +15641,12 @@ Dim HayPrecio As Boolean
                 End If
             Else
 
-                b = True
+                B = True
 
             End If
                 
             
-            If b Then
+            If B Then
                 AntVarie = ActVarie
                 AntCampo = actCampo
                 Kilos = 0
@@ -15596,14 +15692,14 @@ Dim HayPrecio As Boolean
             
                 '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
                 'insertar cabecera de factura
-                b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+                B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
                 
                 '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
                 If EsTerceros Then
-                    If b Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
                 End If
                 
-                If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+                If B Then B = InsertResumen(tipoMov, CStr(numfactu))
                 
                 vParamAplic.UltFactLiq = numfactu
     
@@ -15616,21 +15712,21 @@ Dim HayPrecio As Boolean
     
                 '[Monica]15/04/2013: Descontamos facturas varias
                 If DescontarFVarias Then
-                    If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
+                    If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
                 End If
                 
                 
-                If b Then b = vTipoMov.IncrementarContador(tipoMov)
+                If B Then B = vTipoMov.IncrementarContador(tipoMov)
             Else
             
-                b = True
+                B = True
                 
             End If
             
             IncrementarProgresNew Pb1, 1
             
             
-            If b Then
+            If B Then
                 AntSocio = ActSocio
                 
                 Set vSocio = Nothing
@@ -15747,7 +15843,7 @@ Dim HayPrecio As Boolean
     Wend
     
     ' ultimo registro si ha entrado
-    If b And HayReg Then
+    If B And HayReg Then
         ' insertar linea de calidad
         
        '[Monica]24/02/2014: añadida condicion
@@ -15759,10 +15855,10 @@ Dim HayPrecio As Boolean
             baseimpo = baseimpo + vImporte + vBonifica
             
             
-            If b Then b = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
+            If B Then B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, ActVarie, actCampo, CStr(ActCalid), CStr(DBLet(KilosCal, "N")), CStr(vImporte + vBonifica))
         Else
             
-            b = True
+            B = True
         
         End If
         
@@ -15770,7 +15866,7 @@ Dim HayPrecio As Boolean
         '[Monica]24/02/2014: añadida condicion
         If Kilos <> 0 Then
         
-            If b Then ' descontamos el porcentaje de gastos de cooperativa
+            If B Then ' descontamos el porcentaje de gastos de cooperativa
                 GastosCoop = 0
                 
                 vPorcGasto = ""
@@ -15787,24 +15883,29 @@ Dim HayPrecio As Boolean
             
             
             '[Monica]08/04/2010: grabamos los albaranes que intervienen en la linea de factura
-            If b Then
-                b = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
+            If B Then
+                B = InsertarAlbaranesFactura(tipoMov, CStr(numfactu), FecFac, AntSocio, AntVarie, AntCampo, cTabla, cWhere, 0)
             End If
                         
                         
             ' insertar linea de variedad
-            If b Then b = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
+            If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(actCampo), CStr(Kilos), CStr(Importe + Bonifica), CStr(GastosAlb))
             
             '[Monica]10/01/2014: en el caso de que haya incremento hemos de insertarlo y aumentar la base
-            If b Then
+            If B Then
                 Sql4 = "select sum(ringresos.importe) from ringresos where codsocio = " & DBSet(ActSocio, "N")
                 Sql4 = Sql4 & " and codvarie = " & DBSet(ActVarie, "N")
                 
                 Incremento = DevuelveValor(Sql4)
     
                 If Incremento <> 0 Then
-                    b = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, 0, CStr(Incremento), 0, 0)
+                    B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, 0, 0, CStr(Incremento), 0, 0)
                     baseimpo = baseimpo + Incremento
+                
+                    '[Monica]10/04/2017: insertamos las lineas de ingresos que tiene que imprimir Coopic en la factura
+                    If B Then
+                        B = InsertLineasIngresos(tipoMov, CStr(numfactu), FecFac, ActVarie, ActSocio)
+                    End If
                 End If
                 
                 'borramos la linea de ingresos para el socio variedad
@@ -15815,7 +15916,7 @@ Dim HayPrecio As Boolean
             End If
             
             ' tenemos que descontar los anticipos que tengamos para ello
-            If b Then
+            If B Then
                 Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
                 Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
                 Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
@@ -15881,7 +15982,7 @@ Dim HayPrecio As Boolean
             
         Else
             
-            b = True
+            B = True
             
         End If
         
@@ -15921,19 +16022,19 @@ Dim HayPrecio As Boolean
         
             '[Monica]07/02/2012: indicamos si es una factura de liquidacion complementaria
             'insertar cabecera de factura
-            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
+            B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
             
             '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
             If EsTerceros Then
-                If b Then b = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
             '[Monica]15/04/2013: Descontamos facturas varias
             If DescontarFVarias Then
-                If b Then b = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
+                If B Then B = InsertFacturasVarias(tipoMov, CStr(numfactu), FecFac, 1, 0)
             End If
             
-            If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+            If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
 'Mirar si quito lo de reclacular calidades
 '        If b Then b = RecalcularCalidades(TipoMov, CStr(numfactu), FecFac)
@@ -15941,7 +16042,7 @@ Dim HayPrecio As Boolean
 'Recalculo de todos los importes de rfactsoc_calidades y rfactsoc_variedades para que cuadre con la base de cabecera
 '        If b Then b = CuadrarBasesFactura(TipoMov, CStr(numfactu), FecFac, BaseImpo)
         
-            If b Then b = vTipoMov.IncrementarContador(tipoMov)
+            If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         End If
         
@@ -15949,15 +16050,15 @@ Dim HayPrecio As Boolean
         
         
         'pasamos las temporales a las tablas
-        If b Then b = PasarTemporales()
+        If B Then B = PasarTemporales()
         
         '[Monica]23/07/2012: si no es complementaria se calculan los gastos
         If TipoPrec <> 3 Then
             ' solo para Picassent: he de insertar las lineas de gastos al pie de factura que estan como gastos de albaranes
-            If b Then b = DescontarGastosAPie()
+            If B Then B = DescontarGastosAPie()
         End If
         
-        If b Then b = (vParamAplic.Modificar = 1)
+        If B Then B = (vParamAplic.Modificar = 1)
     End If
     
 '    BorrarTMPs
@@ -15967,7 +16068,7 @@ Dim HayPrecio As Boolean
     Set vSocio = Nothing
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionLiquidacionesPicassentNew = False
     Else
