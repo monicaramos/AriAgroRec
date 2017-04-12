@@ -15,6 +15,201 @@ Begin VB.Form frmListTrazabilidad
    ScaleWidth      =   7290
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin MSComDlg.CommonDialog cd1 
+      Left            =   6030
+      Top             =   5160
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin MSComDlg.CommonDialog CommonDialog1 
+      Left            =   0
+      Top             =   0
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.Frame FrameDestinoNotas 
+      Height          =   4680
+      Left            =   0
+      TabIndex        =   67
+      Top             =   0
+      Width           =   6645
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   14
+         Left            =   1770
+         MaxLength       =   10
+         TabIndex        =   69
+         Top             =   2415
+         Width           =   1095
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   15
+         Left            =   1770
+         MaxLength       =   10
+         TabIndex        =   70
+         Top             =   2820
+         Width           =   1095
+      End
+      Begin VB.Frame Frame2 
+         Height          =   705
+         Left            =   480
+         TabIndex        =   107
+         Top             =   780
+         Width           =   5475
+         Begin VB.OptionButton Option2 
+            Caption         =   "Campo"
+            Height          =   255
+            Index           =   1
+            Left            =   3720
+            TabIndex        =   109
+            Top             =   270
+            Width           =   855
+         End
+         Begin VB.OptionButton Option2 
+            Caption         =   "Nota de campo"
+            Height          =   255
+            Index           =   0
+            Left            =   540
+            TabIndex        =   108
+            Top             =   270
+            Width           =   1845
+         End
+      End
+      Begin VB.CheckBox Check4 
+         Caption         =   "GlobalGap"
+         Height          =   285
+         Left            =   420
+         TabIndex        =   73
+         Top             =   3450
+         Width           =   1995
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   8
+         Left            =   1785
+         MaxLength       =   8
+         TabIndex        =   68
+         Tag             =   "Nº Factura|N|S|||facturas|numfactu|00000000|S|"
+         Top             =   1620
+         Width           =   1065
+      End
+      Begin VB.CommandButton CmdCancelDest 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   4860
+         TabIndex        =   72
+         Top             =   3765
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAceptarDest 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3690
+         TabIndex        =   71
+         Top             =   3765
+         Width           =   975
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   8
+         Left            =   1470
+         Picture         =   "frmListTrazabilidad.frx":000C
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2400
+         Width           =   240
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   9
+         Left            =   1470
+         Picture         =   "frmListTrazabilidad.frx":0097
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2820
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Hasta"
+         Height          =   195
+         Index           =   19
+         Left            =   840
+         TabIndex        =   113
+         Top             =   2835
+         Width           =   420
+      End
+      Begin VB.Label Label2 
+         Caption         =   "Desde"
+         Height          =   195
+         Index           =   18
+         Left            =   840
+         TabIndex        =   112
+         Top             =   2430
+         Width           =   465
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Fecha inicio Palet Confeccionado"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   17
+         Left            =   480
+         TabIndex        =   111
+         Top             =   2040
+         Width           =   2340
+      End
+      Begin VB.Label Label6 
+         Caption         =   "Destino de Notas de Campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   495
+         TabIndex        =   75
+         Top             =   315
+         Width           =   5940
+      End
+      Begin VB.Label Label4 
+         AutoSize        =   -1  'True
+         Caption         =   "Nota de Campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   5
+         Left            =   480
+         TabIndex        =   74
+         Top             =   1650
+         Width           =   1110
+      End
+   End
    Begin VB.Frame FrameOrigenAlbaranConf 
       Height          =   4170
       Left            =   0
@@ -99,7 +294,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   12
          Left            =   1470
-         Picture         =   "frmListTrazabilidad.frx":000C
+         Picture         =   "frmListTrazabilidad.frx":0122
          ToolTipText     =   "Buscar fecha"
          Top             =   1590
          Width           =   240
@@ -108,7 +303,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   11
          Left            =   1470
-         Picture         =   "frmListTrazabilidad.frx":0097
+         Picture         =   "frmListTrazabilidad.frx":01AD
          ToolTipText     =   "Buscar fecha"
          Top             =   1230
          Width           =   240
@@ -190,20 +385,6 @@ Begin VB.Form frmListTrazabilidad
          Top             =   2610
          Width           =   1155
       End
-   End
-   Begin MSComDlg.CommonDialog cd1 
-      Left            =   6030
-      Top             =   5160
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
-   End
-   Begin MSComDlg.CommonDialog CommonDialog1 
-      Left            =   0
-      Top             =   0
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
    End
    Begin VB.Frame FrameOrigenPaletConf 
       Height          =   4170
@@ -384,7 +565,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   1
          Left            =   1440
-         Picture         =   "frmListTrazabilidad.frx":0122
+         Picture         =   "frmListTrazabilidad.frx":0238
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -393,7 +574,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   0
          Left            =   1440
-         Picture         =   "frmListTrazabilidad.frx":01AD
+         Picture         =   "frmListTrazabilidad.frx":02C3
          ToolTipText     =   "Buscar fecha"
          Top             =   1200
          Width           =   240
@@ -460,7 +641,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command6 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":0238
+         Picture         =   "frmListTrazabilidad.frx":034E
          Style           =   1  'Graphical
          TabIndex        =   45
          Top             =   2215
@@ -470,7 +651,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command5 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":0542
+         Picture         =   "frmListTrazabilidad.frx":0658
          Style           =   1  'Graphical
          TabIndex        =   44
          Top             =   1440
@@ -508,7 +689,7 @@ Begin VB.Form frmListTrazabilidad
             Height          =   240
             Index           =   5
             Left            =   1110
-            Picture         =   "frmListTrazabilidad.frx":084C
+            Picture         =   "frmListTrazabilidad.frx":0962
             ToolTipText     =   "Buscar fecha"
             Top             =   660
             Width           =   240
@@ -517,7 +698,7 @@ Begin VB.Form frmListTrazabilidad
             Height          =   240
             Index           =   4
             Left            =   1125
-            Picture         =   "frmListTrazabilidad.frx":08D7
+            Picture         =   "frmListTrazabilidad.frx":09ED
             ToolTipText     =   "Buscar fecha"
             Top             =   270
             Width           =   240
@@ -692,7 +873,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   3
          Left            =   1440
-         Picture         =   "frmListTrazabilidad.frx":0962
+         Picture         =   "frmListTrazabilidad.frx":0A78
          ToolTipText     =   "Buscar fecha"
          Top             =   2730
          Width           =   240
@@ -701,7 +882,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   2
          Left            =   1440
-         Picture         =   "frmListTrazabilidad.frx":09ED
+         Picture         =   "frmListTrazabilidad.frx":0B03
          ToolTipText     =   "Buscar fecha"
          Top             =   2370
          Width           =   240
@@ -710,7 +891,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   29
          Left            =   1440
-         MouseIcon       =   "frmListTrazabilidad.frx":0A78
+         MouseIcon       =   "frmListTrazabilidad.frx":0B8E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   1680
@@ -720,7 +901,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   28
          Left            =   1440
-         MouseIcon       =   "frmListTrazabilidad.frx":0BCA
+         MouseIcon       =   "frmListTrazabilidad.frx":0CE0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   1290
@@ -890,7 +1071,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command1 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":0D1C
+         Picture         =   "frmListTrazabilidad.frx":0E32
          Style           =   1  'Graphical
          TabIndex        =   26
          Top             =   1440
@@ -900,7 +1081,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command2 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":1026
+         Picture         =   "frmListTrazabilidad.frx":113C
          Style           =   1  'Graphical
          TabIndex        =   24
          Top             =   2215
@@ -971,7 +1152,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   0
          Left            =   1350
-         MouseIcon       =   "frmListTrazabilidad.frx":1330
+         MouseIcon       =   "frmListTrazabilidad.frx":1446
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2070
@@ -981,7 +1162,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   1
          Left            =   1350
-         MouseIcon       =   "frmListTrazabilidad.frx":1482
+         MouseIcon       =   "frmListTrazabilidad.frx":1598
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2430
@@ -1020,7 +1201,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   9
          Left            =   1320
-         MouseIcon       =   "frmListTrazabilidad.frx":15D4
+         MouseIcon       =   "frmListTrazabilidad.frx":16EA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1140
@@ -1030,7 +1211,7 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   10
          Left            =   1320
-         MouseIcon       =   "frmListTrazabilidad.frx":1726
+         MouseIcon       =   "frmListTrazabilidad.frx":183C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1500
@@ -1238,7 +1419,7 @@ Begin VB.Form frmListTrazabilidad
             Height          =   240
             Index           =   7
             Left            =   1125
-            Picture         =   "frmListTrazabilidad.frx":1878
+            Picture         =   "frmListTrazabilidad.frx":198E
             ToolTipText     =   "Buscar fecha"
             Top             =   630
             Width           =   240
@@ -1247,7 +1428,7 @@ Begin VB.Form frmListTrazabilidad
             Height          =   240
             Index           =   6
             Left            =   1110
-            Picture         =   "frmListTrazabilidad.frx":1903
+            Picture         =   "frmListTrazabilidad.frx":1A19
             ToolTipText     =   "Buscar fecha"
             Top             =   240
             Width           =   240
@@ -1256,7 +1437,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command8 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":198E
+         Picture         =   "frmListTrazabilidad.frx":1AA4
          Style           =   1  'Graphical
          TabIndex        =   81
          Top             =   1440
@@ -1266,7 +1447,7 @@ Begin VB.Form frmListTrazabilidad
       Begin VB.CommandButton Command7 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListTrazabilidad.frx":1C98
+         Picture         =   "frmListTrazabilidad.frx":1DAE
          Style           =   1  'Graphical
          TabIndex        =   80
          Top             =   2215
@@ -1468,190 +1649,9 @@ Begin VB.Form frmListTrazabilidad
          Height          =   240
          Index           =   10
          Left            =   1320
-         Picture         =   "frmListTrazabilidad.frx":1FA2
+         Picture         =   "frmListTrazabilidad.frx":20B8
          Top             =   1290
          Width           =   240
-      End
-   End
-   Begin VB.Frame FrameDestinoNotas 
-      Height          =   4680
-      Left            =   0
-      TabIndex        =   67
-      Top             =   0
-      Width           =   6645
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   14
-         Left            =   1770
-         MaxLength       =   10
-         TabIndex        =   69
-         Top             =   2415
-         Width           =   1095
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   15
-         Left            =   1770
-         MaxLength       =   10
-         TabIndex        =   70
-         Top             =   2820
-         Width           =   1095
-      End
-      Begin VB.Frame Frame2 
-         Height          =   705
-         Left            =   480
-         TabIndex        =   107
-         Top             =   780
-         Width           =   5475
-         Begin VB.OptionButton Option2 
-            Caption         =   "Campo"
-            Height          =   255
-            Index           =   1
-            Left            =   3720
-            TabIndex        =   109
-            Top             =   270
-            Width           =   855
-         End
-         Begin VB.OptionButton Option2 
-            Caption         =   "Nota de campo"
-            Height          =   255
-            Index           =   0
-            Left            =   540
-            TabIndex        =   108
-            Top             =   270
-            Width           =   1845
-         End
-      End
-      Begin VB.CheckBox Check4 
-         Caption         =   "GlobalGap"
-         Height          =   285
-         Left            =   420
-         TabIndex        =   73
-         Top             =   3450
-         Width           =   1995
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   8
-         Left            =   1785
-         MaxLength       =   8
-         TabIndex        =   68
-         Tag             =   "Nº Factura|N|S|||facturas|numfactu|00000000|S|"
-         Top             =   1620
-         Width           =   1065
-      End
-      Begin VB.CommandButton CmdCancelDest 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   4860
-         TabIndex        =   72
-         Top             =   3765
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAceptarDest 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3690
-         TabIndex        =   71
-         Top             =   3765
-         Width           =   975
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   8
-         Left            =   1470
-         Picture         =   "frmListTrazabilidad.frx":202D
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2400
-         Width           =   240
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   9
-         Left            =   1470
-         Picture         =   "frmListTrazabilidad.frx":20B8
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2820
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Hasta"
-         Height          =   195
-         Index           =   19
-         Left            =   840
-         TabIndex        =   113
-         Top             =   2835
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         Caption         =   "Desde"
-         Height          =   195
-         Index           =   18
-         Left            =   840
-         TabIndex        =   112
-         Top             =   2430
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Fecha inicio Palet Confeccionado"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   17
-         Left            =   480
-         TabIndex        =   111
-         Top             =   2040
-         Width           =   2340
-      End
-      Begin VB.Label Label6 
-         Caption         =   "Destino de Notas de Campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   495
-         TabIndex        =   75
-         Top             =   315
-         Width           =   5940
-      End
-      Begin VB.Label Label4 
-         AutoSize        =   -1  'True
-         Caption         =   "Nota de Campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   5
-         Left            =   480
-         TabIndex        =   74
-         Top             =   1650
-         Width           =   1110
       End
    End
 End
@@ -4162,6 +4162,9 @@ Dim Variedad As String
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
     
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
+    
     
     '-- Buscamos palets abocados con ese código de referencia
     NumNota = txtCodigo(8).Text
@@ -4233,6 +4236,14 @@ Dim Variedad As String
                     Sql = Sql & " select " & vUsu.Codigo & ", numalbar, fechaalb, codclien, " & DBSet(Rs2!NumPalet, "N")
                     Sql = Sql & " from albaran where numalbar in (select numalbar from albaran_palets where numpalet = " & DBSet(Rs2!NumPalet, "N") & ")"
                     conn.Execute Sql
+
+                    Sql = "insert into tmpinformes2 (codusu, importe1, importe2, importe3) "
+                    Sql = Sql & " select " & vUsu.Codigo & ", importe1, importe2, kilos "
+                    Sql = Sql & " from tmpinformes tt, trzmovim mm "
+                    Sql = Sql & " where tt.importe1 = mm.numalbar And tt.importe2 = mm.numpalet "
+                    conn.Execute Sql
+
+
 
                     Rs2.MoveNext
                 Wend
