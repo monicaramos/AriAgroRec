@@ -3894,7 +3894,7 @@ Dim vCodigo As Long
             Exit Function
         Else
             Sql2 = "select * from trzmovim where numalbar is null and codvarie = " & DBSet(Rs!codvarie, "N") & " and esmerma = 0 "
-            Sql2 = Sql2 & " order by fecha desc "
+            Sql2 = Sql2 & " order by fecha asc "
             
             Set Rs2 = New ADODB.Recordset
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
