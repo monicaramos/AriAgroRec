@@ -1199,7 +1199,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -1229,7 +1229,7 @@ Dim vHayReg As Byte
     ' obligamos a introducir el codigo de articulo de gasto
     If txtNombre(13).Text = "" Then
         MsgBox "Debe de introducir un Artículo de Gasto. Revise.", vbExclamation
-        PonerFoco txtcodigo(13)
+        PonerFoco txtCodigo(13)
         Exit Sub
     End If
     
@@ -1238,8 +1238,8 @@ Dim vHayReg As Byte
     numParam = numParam + 1
     
     'D/H Parte
-    cDesde = Trim(txtcodigo(18).Text)
-    cHasta = Trim(txtcodigo(19).Text)
+    cDesde = Trim(txtCodigo(18).Text)
+    cHasta = Trim(txtCodigo(19).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advpartes.numparte}"
@@ -1248,8 +1248,8 @@ Dim vHayReg As Byte
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtcodigo(16).Text)
-    cHasta = Trim(txtcodigo(17).Text)
+    cDesde = Trim(txtCodigo(16).Text)
+    cHasta = Trim(txtCodigo(17).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advpartes.fechapar}"
@@ -1257,7 +1257,7 @@ Dim vHayReg As Byte
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
 
-    cTabla = Tabla & " INNER JOIN advpartes_lineas on advpartes.numparte = advpartes_lineas.numparte "
+    cTabla = tabla & " INNER JOIN advpartes_lineas on advpartes.numparte = advpartes_lineas.numparte "
     
     'sólo los tratamientos que no sean 0
     If Not AnyadirAFormula(cadSelect, "{advpartes.codtrata} <> '0'") Then Exit Sub
@@ -1295,7 +1295,7 @@ Dim cTabla As String
 Dim cWhere As String
 Dim CadPartes As String
 Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo eHayArticuloGastos
 
@@ -1311,7 +1311,7 @@ Dim Cad As String
         cWhere = QuitarCaracterACadena(vWhere, "}")
         cWhere = QuitarCaracterACadena(vWhere, "_1")
         Sql = Sql & " WHERE " & cWhere
-        Sql = Sql & " and advpartes_lineas.codartic = " & DBSet(txtcodigo(13).Text, "T")
+        Sql = Sql & " and advpartes_lineas.codartic = " & DBSet(txtCodigo(13).Text, "T")
     End If
     Sql = Sql & " order by 1 "
     
@@ -1327,11 +1327,11 @@ Dim Cad As String
         Wend
         Set Rs = Nothing
         
-        Cad = "Los siguientes albaranes ya tienen un Artículo de Gastos. Revise. "
-        Cad = Cad & vbCrLf & vbCrLf
-        Cad = Cad & Mid(CadPartes, 1, Len(CadPartes) - 2)
+        cad = "Los siguientes albaranes ya tienen un Artículo de Gastos. Revise. "
+        cad = cad & vbCrLf & vbCrLf
+        cad = cad & Mid(CadPartes, 1, Len(CadPartes) - 2)
         
-        MsgBox Cad, vbExclamation
+        MsgBox cad, vbExclamation
         
         HayArticuloGastos = True
     End If
@@ -1358,8 +1358,8 @@ Dim vHayReg As Byte
     numParam = numParam + 1
     
     'D/H Parte
-    cDesde = Trim(txtcodigo(6).Text)
-    cHasta = Trim(txtcodigo(7).Text)
+    cDesde = Trim(txtCodigo(6).Text)
+    cHasta = Trim(txtCodigo(7).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advpartes.numparte}"
@@ -1368,8 +1368,8 @@ Dim vHayReg As Byte
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtcodigo(8).Text)
-    cHasta = Trim(txtcodigo(9).Text)
+    cDesde = Trim(txtCodigo(8).Text)
+    cHasta = Trim(txtCodigo(9).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advpartes.fechapar}"
@@ -1378,8 +1378,8 @@ Dim vHayReg As Byte
     End If
 
     'D/H Tratamientos
-    cDesde = Trim(txtcodigo(10).Text)
-    cHasta = Trim(txtcodigo(11).Text)
+    cDesde = Trim(txtCodigo(10).Text)
+    cHasta = Trim(txtCodigo(11).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advpartes.codtrata}"
@@ -1388,7 +1388,7 @@ Dim vHayReg As Byte
     End If
 
 
-    cTabla = "((" & Tabla & " INNER JOIN advpartes_lineas ON advpartes.numparte = advpartes_lineas.numparte) "
+    cTabla = "((" & tabla & " INNER JOIN advpartes_lineas ON advpartes.numparte = advpartes_lineas.numparte) "
     cTabla = cTabla & " INNER JOIN advartic ON advpartes_lineas.codartic = advartic.codartic) "
     cTabla = cTabla & " INNER JOIN advtrata ON advpartes.codtrata = advtrata.codtrata "
 
@@ -1436,8 +1436,8 @@ Dim vHayReg As Byte
     End If
 
     'D/H Parte
-    cDesde = Trim(txtcodigo(4).Text)
-    cHasta = Trim(txtcodigo(5).Text)
+    cDesde = Trim(txtCodigo(4).Text)
+    cHasta = Trim(txtCodigo(5).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advfacturas_partes.numparte}"
@@ -1446,8 +1446,8 @@ Dim vHayReg As Byte
     End If
     
     'D/H Fecha
-    cDesde = Trim(txtcodigo(14).Text)
-    cHasta = Trim(txtcodigo(15).Text)
+    cDesde = Trim(txtCodigo(14).Text)
+    cHasta = Trim(txtCodigo(15).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advfacturas_partes.fechapar}"
@@ -1455,7 +1455,7 @@ Dim vHayReg As Byte
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
 
-    cTabla = Tabla & " INNER JOIN advfacturas_trabajador ON advfacturas_partes.codtipom = advfacturas_trabajador.codtipom "
+    cTabla = tabla & " INNER JOIN advfacturas_trabajador ON advfacturas_partes.codtipom = advfacturas_trabajador.codtipom "
     cTabla = cTabla & " and advfacturas_partes.numfactu = advfacturas_trabajador.numfactu and advfacturas_partes.fecfactu = advfacturas_trabajador.fecfactu "
     cTabla = cTabla & " and advfacturas_partes.numparte = advfacturas_trabajador.numparte "
 
@@ -1482,16 +1482,16 @@ Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim i As Byte
+Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 
 InicializarVbles
     
-    Tabla = "advfacturas_lineas"
+    tabla = "advfacturas_lineas"
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     '========= PARAMETROS  =============================
     'Añadir el parametro de Empresa
@@ -1500,54 +1500,54 @@ InicializarVbles
     
     '======== FORMULA  ====================================
     'D/H Articulos
-    cDesde = Trim(txtcodigo(0).Text)
-    cHasta = Trim(txtcodigo(1).Text)
+    cDesde = Trim(txtCodigo(0).Text)
+    cHasta = Trim(txtCodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codartic}"
+        Codigo = "{" & tabla & ".codartic}"
         TipCod = "T"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHArticulo= """) Then Exit Sub
     End If
     
     'D/H Fecha factura
-    cDesde = Trim(txtcodigo(2).Text)
-    cHasta = Trim(txtcodigo(3).Text)
+    cDesde = Trim(txtCodigo(2).Text)
+    cHasta = Trim(txtCodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".fecfactu}"
+        Codigo = "{" & tabla & ".fecfactu}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHFecha= """) Then Exit Sub
     End If
     
     'D/H Socio
-    cDesde = Trim(txtcodigo(153).Text)
-    cHasta = Trim(txtcodigo(154).Text)
+    cDesde = Trim(txtCodigo(153).Text)
+    cHasta = Trim(txtCodigo(154).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advfacturas.codsocio}"
-        TipCod = "F"
+        TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHSocio= """) Then Exit Sub
     End If
     
     'D/H Tratamiento
-    cDesde = Trim(txtcodigo(20).Text)
-    cHasta = Trim(txtcodigo(21).Text)
+    cDesde = Trim(txtCodigo(20).Text)
+    cHasta = Trim(txtCodigo(21).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{advfacturas_partes.codtrata}"
-        TipCod = "F"
+        TipCod = "T"
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHTrata= """) Then Exit Sub
     End If
     
     CadParam = CadParam & "pResumen=" & Check1.Value & "|"
     numParam = numParam + 1
     
-    Tabla = "(" & Tabla & ") inner join advfacturas on advfacturas_lineas.codtipom = advfacturas.codtipom and  advfacturas_lineas.numfactu = advfacturas.numfactu and advfacturas_lineas.fecfactu = advfacturas.fecfactu "
-    Tabla = "(" & Tabla & ") inner join advfacturas_partes on advfacturas_partes.codtipom = advfacturas.codtipom and advfacturas_partes.numfactu = advfacturas.numfactu and advfacturas_partes.fecfactu = advfacturas.fecfactu "
+    tabla = "(" & tabla & ") inner join advfacturas on advfacturas_lineas.codtipom = advfacturas.codtipom and  advfacturas_lineas.numfactu = advfacturas.numfactu and advfacturas_lineas.fecfactu = advfacturas.fecfactu "
+    tabla = "(" & tabla & ") inner join advfacturas_partes on advfacturas_partes.codtipom = advfacturas.codtipom and advfacturas_partes.numfactu = advfacturas.numfactu and advfacturas_partes.fecfactu = advfacturas.fecfactu "
     
-    If HayRegistros(Tabla, cadSelect) Then
+    If HayRegistros(tabla, cadSelect) Then
         'Nombre fichero .rpt a Imprimir
         If Option1.Value = True Then
             frmImprimir.NombreRPT = "rADVRdtoArticulo.rpt"
@@ -1576,13 +1576,13 @@ Private Sub Form_Activate()
     End If
     Select Case OpcionListado
         Case 0 ' rendimiento por articulo
-            PonerFoco txtcodigo(2)
+            PonerFoco txtCodigo(2)
         Case 1 ' Proceso de Pago de Partes de adv
-            PonerFoco txtcodigo(4)
+            PonerFoco txtCodigo(4)
         Case 2 ' Proceso de asignacion de precios de partes de adv (mogente)
-            PonerFoco txtcodigo(10)
+            PonerFoco txtCodigo(10)
         Case 3 ' proceso de insercion de gastos en partes de adv (Mogente)
-            PonerFoco txtcodigo(13)
+            PonerFoco txtCodigo(13)
         
     End Select
     Screen.MousePointer = vbDefault
@@ -1619,24 +1619,24 @@ Dim List As Collection
     Select Case OpcionListado
         Case 0 ' rendimiento por articulo
             FrameCobrosVisible True, H, W
-            Tabla = "advfacturas_lineas"
+            tabla = "advfacturas_lineas"
             Option1.Value = True
         
         Case 1 ' Proceso de Pago de Partes de adv
             FramePagoPartesADVVisible True, H, W
             indFrame = 0
-            Tabla = "advfacturas_partes"
+            tabla = "advfacturas_partes"
             
         Case 2 ' Asignacion de precios a albaranes de mogente (partes de adv)
             FrameAsignacionPreciosVisible True, H, W
             indFrame = 0
-            Tabla = "advpartes"
+            tabla = "advpartes"
         
         '[Monica]19/07/2013: insercion de gastos en los partes
         Case 3 ' Insercion de gastos a los albaranes de mogente ( partes de adv )
             FrameInsercionGastosVisible True, H, W
             indFrame = 0
-            Tabla = "advpartes"
+            tabla = "advpartes"
         
         
     End Select
@@ -1648,29 +1648,29 @@ Dim List As Collection
 End Sub
 
 Private Sub frmArt_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Socios
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmTto_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Tratamientos
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
-Dim indice As Integer
+Dim Indice As Integer
 
 'FEchas
     Dim esq, dalt As Long
@@ -1695,21 +1695,21 @@ Dim indice As Integer
     
     Select Case Index
         Case 0, 1
-            indice = Index + 14
+            Indice = Index + 14
         Case 4, 5
-            indice = Index + 4
+            Indice = Index + 4
         Case 6, 7
-            indice = Index + 10
+            Indice = Index + 10
         Case Else
-            indice = Index
+            Indice = Index
     End Select
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
-    imgFec(0).Tag = indice 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    imgFec(0).Tag = Indice 'independentment de les dates que tinga, sempre pose l'index en la 27
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag))
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag))
     ' ***************************
 End Sub
 
@@ -1731,12 +1731,12 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmSocios (Index + 49)
             
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1778,21 +1778,21 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -1802,19 +1802,19 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     Select Case Index
             
         Case 0, 1, 13 'articulo
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "advartic", "nomartic", "codartic", "T")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "advartic", "nomartic", "codartic", "T")
         
         Case 2, 3, 8, 9, 14, 15, 16, 17 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
         Case 4, 5, 6, 7 'partes
-            If txtcodigo(Index).Text <> "" Then PonerFormatoEntero txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoEntero txtCodigo(Index)
         
         Case 10, 11, 20, 21 'tratamientos
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "advtrata", "nomtrata", "codtrata", "T")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "advtrata", "nomtrata", "codtrata", "T")
             
         Case 153, 154 ' socios
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
         
     End Select
 End Sub
@@ -1926,24 +1926,24 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmArticulos(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmArticulos(Indice As Integer)
+    indCodigo = Indice
     Set frmArt = New frmADVArticulos
     frmArt.DatosADevolverBusqueda = "0|1|" 'Abrimos en Modo Busqueda
     frmArt.Show vbModal
     Set frmArt = Nothing
 End Sub
 
-Private Sub AbrirFrmTratamientos(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmTratamientos(Indice As Integer)
+    indCodigo = Indice
     Set frmTto = New frmADVTrataMoi
     frmTto.DatosADevolverBusqueda = "0|1|" 'Abrimos en Modo Busqueda
     frmTto.Show vbModal
     Set frmArt = Nothing
 End Sub
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
@@ -1978,9 +1978,9 @@ End Function
 Private Function ProcesarCambios(cadWHERE As String) As Boolean
 Dim Sql As String
 Dim Sql1 As String
-Dim i As Integer
+Dim I As Integer
 Dim HayReg As Integer
-Dim b As Boolean
+Dim B As Boolean
 
 On Error GoTo eProcesarCambios
 
@@ -2025,9 +2025,9 @@ Dim Sql1 As String
     
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 
-    DatosOk = True
+    DatosOK = True
 
 End Function
 
@@ -2268,16 +2268,16 @@ Dim CadValues As String
     
     Nregs = TotalRegistrosConsulta(Sql)
     
-    Me.pb2.visible = True
-    CargarProgres pb2, Nregs
+    Me.Pb2.visible = True
+    CargarProgres Pb2, Nregs
     Me.Refresh
     
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-    Precio = DevuelveDesdeBDNew(cAgro, "advartic", "preciove", "codartic", txtcodigo(13).Text, "T")
-    CodIva = DevuelveDesdeBDNew(cAgro, "advartic", "codigiva", "codartic", txtcodigo(13).Text, "T")
+    Precio = DevuelveDesdeBDNew(cAgro, "advartic", "preciove", "codartic", txtCodigo(13).Text, "T")
+    CodIva = DevuelveDesdeBDNew(cAgro, "advartic", "codigiva", "codartic", txtCodigo(13).Text, "T")
         
     Sql3 = "insert into advpartes_lineas (numparte,numlinea,codalmac,codartic,dosishab,cantidad,preciove,importel,ampliaci,codigiva) values "
         
@@ -2286,13 +2286,13 @@ Dim CadValues As String
     While Not Rs.EOF
         vHayReg = 1
     
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         DoEvents
     
         Importe = Round2(Precio * DBLet(Rs!bultos), 2)
     
         CadValues = CadValues & "(" & DBSet(Rs!Numparte, "N") & "," & DBSet(Rs!numlinea, "N") & "," & vParamAplic.AlmacenADV & ","
-        CadValues = CadValues & DBSet(txtcodigo(13).Text, "T") & "," & DBSet(Rs!bultos, "N") & "," & DBSet(Rs!bultos, "N") & ","
+        CadValues = CadValues & DBSet(txtCodigo(13).Text, "T") & "," & DBSet(Rs!bultos, "N") & "," & DBSet(Rs!bultos, "N") & ","
         CadValues = CadValues & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & "," & ValorNulo & ","
         CadValues = CadValues & DBSet(CodIva, "N") & "),"
     
@@ -2313,12 +2313,12 @@ Dim CadValues As String
     Screen.MousePointer = vbDefault
     
     ProcesoInsercionGastos = True
-    Me.pb2.visible = False
+    Me.Pb2.visible = False
     Exit Function
     
 eProcesoInsercionGastos:
     Screen.MousePointer = vbDefault
-    Me.pb2.visible = False
+    Me.Pb2.visible = False
     MuestraError Err.Number, "Proceso de Inserción de Gastos", Err.Description
 End Function
 

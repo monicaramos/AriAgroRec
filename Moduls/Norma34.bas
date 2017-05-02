@@ -555,7 +555,7 @@ Dim Im As Currency
 Dim cad As String
 Dim Aux As String
 Dim NF As Integer
-Dim SQL As String
+Dim Sql As String
 Dim Bic As String
 
 
@@ -630,14 +630,14 @@ Dim Bic As String
     
     '[Monica]22/11/2013: añadido
     If cadSQL = "" Then
-        SQL = "select tmpimpor.codtraba, tmpimpor.importe, straba.codbanco as entidad,straba.codsucur "
-        SQL = SQL & " as oficina,straba.digcontr as CC,straba.cuentaba as cuentaba ,straba.nomtraba as nommacta, "
-        SQL = SQL & " straba.domtraba as dirdatos, straba.codpobla as codposta,straba.pobtraba as despobla, straba.protraba as desprovi, "
-        SQL = SQL & " straba.niftraba as refbenef,straba.iban"
-        SQL = SQL & " from tmpimpor, straba"
-        SQL = SQL & " where tmpimpor.codtraba = straba.codtraba "
+        Sql = "select tmpimpor.codtraba, tmpimpor.importe, straba.codbanco as entidad,straba.codsucur "
+        Sql = Sql & " as oficina,straba.digcontr as CC,straba.cuentaba as cuentaba ,straba.nomtraba as nommacta, "
+        Sql = Sql & " straba.domtraba as dirdatos, straba.codpobla as codposta,straba.pobtraba as despobla, straba.protraba as desprovi, "
+        Sql = Sql & " straba.niftraba as refbenef,straba.iban"
+        Sql = Sql & " from tmpimpor, straba"
+        Sql = Sql & " where tmpimpor.codtraba = straba.codtraba "
         
-        cadSQL = SQL
+        cadSQL = Sql
     End If
 
     cad = cadSQL
@@ -1028,7 +1028,13 @@ Dim EsPersonaJuridica2 As Boolean
     Print #NFic, "       <FinInstnId>"
 
     cad = Mid(CuentaPropia2, 5, 4)
-    cad = DevuelveDesdeBDNew(cConta, "sbic", "bic", "entidad", cad, "T")
+    
+    '[Monica]02/05/2017: sbic es bics en ariconta
+    If vParamAplic.ContabilidadNueva Then
+        cad = DevuelveDesdeBDNew(cConta, "bics", "bic", "entidad", cad, "T")
+    Else
+        cad = DevuelveDesdeBDNew(cConta, "sbic", "bic", "entidad", cad, "T")
+    End If
     
 '    Dim SqlBic As String
 '    Dim RsBic As ADODB.Recordset
@@ -1056,16 +1062,16 @@ Dim EsPersonaJuridica2 As Boolean
 '        Cad = Cad & " FROM (tmpNorma34 INNER JOIN Trabajadores ON tmpNorma34.CodSoc = Trabajadores.IdTrabajador)"
 '        Cad = Cad & " LEFT JOIN sbic ON Trabajadores.entidad = sbic.entidad;"
     
-        Dim SQL As String
+        Dim Sql As String
     
-        SQL = "select tmpimpor.codtraba, tmpimpor.importe, straba.codbanco as entidad,straba.codsucur "
-        SQL = SQL & " as oficina,straba.digcontr as CC,straba.cuentaba as cuentaba ,straba.nomtraba as nombre, "
-        SQL = SQL & " straba.domtraba as dirdatos, straba.codpobla as codposta,straba.pobtraba as despobla, straba.protraba as desprovi, "
-        SQL = SQL & " straba.niftraba as refbenef,straba.iban"
-        SQL = SQL & " from tmpimpor, straba"
-        SQL = SQL & " where tmpimpor.codtraba = straba.codtraba "
+        Sql = "select tmpimpor.codtraba, tmpimpor.importe, straba.codbanco as entidad,straba.codsucur "
+        Sql = Sql & " as oficina,straba.digcontr as CC,straba.cuentaba as cuentaba ,straba.nomtraba as nombre, "
+        Sql = Sql & " straba.domtraba as dirdatos, straba.codpobla as codposta,straba.pobtraba as despobla, straba.protraba as desprovi, "
+        Sql = Sql & " straba.niftraba as refbenef,straba.iban"
+        Sql = Sql & " from tmpimpor, straba"
+        Sql = Sql & " where tmpimpor.codtraba = straba.codtraba "
     
-        cadSQL = SQL
+        cadSQL = Sql
     
     End If
 
@@ -1131,7 +1137,11 @@ Dim EsPersonaJuridica2 As Boolean
         Print #NFic, "          <FinInstnId>"
         
         Dim Bic As String
-        Bic = DevuelveDesdeBDNew(cConta, "sbic", "bic", "entidad", miRsAux!entidad, "N")
+        If vParamAplic.ContabilidadNueva Then
+            Bic = DevuelveDesdeBDNew(cConta, "bics", "bic", "entidad", miRsAux!entidad, "N")
+        Else
+            Bic = DevuelveDesdeBDNew(cConta, "sbic", "bic", "entidad", miRsAux!entidad, "N")
+        End If
         
         cad = DBLet(Bic, "T")
         If cad = "" Then Err.Raise 513, , "No existe BIC " & vbCrLf & "Entidad: " & miRsAux!entidad

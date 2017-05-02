@@ -647,7 +647,7 @@ Dim Sql As String
         mTercero = Rs!Codsocio
         mNumFactu = CStr(Rs!numfactu)
         mFecFactu = CStr(Rs!fecfactu)
-        mCodForpa = CStr(Rs!codforpa)
+        mCodForpa = CStr(Rs!Codforpa)
         mBrutofac = CStr(Rs!BrutoFac)
         mTotalfac = CStr(Rs!TotalFac)
         'obterner la ctaCble del proveedor
@@ -697,7 +697,7 @@ End Function
 
 Public Function InsertarEnTesoreria(MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
-Dim b As Boolean
+Dim B As Boolean
 Dim Rs As ADODB.Recordset
 Dim rsVenci As ADODB.Recordset
 Dim Sql As String
@@ -705,7 +705,7 @@ Dim cadValuesAux As String 'para insertar en svenci
 Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
-Dim i As Byte
+Dim I As Byte
 
 
 
@@ -739,11 +739,14 @@ Dim i As Byte
             If Not Rs.EOF Then
                'vamos creando la cadena para insertar en spagosp de la CONTA
                '[Monica]03/07/2013: añado trim(codmacta)
-               CadValuesAux2 = "('" & Trim(mCodmacta) & "', " & DBSet(numfactu, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
+               CadValuesAux2 = "("
+               If vParamAplic.ContabilidadNueva Then CadValuesAux2 = CadValuesAux2 & DBSet(SerieFraPro, "T") & ","
+               CadValuesAux2 = CadValuesAux2 & "'" & Trim(mCodmacta) & "', " & DBSet(numfactu, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
+                
 
               'Primer Vencimiento
               '------------------------------------------------------------
-              i = 1
+              I = 1
               'FECHA VTO
               FecVenci = CDate(fecfactu)
               '=== Modificado: Laura 23/01/2007
@@ -759,7 +762,7 @@ Dim i As Byte
                   FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
               End If
 
-              CadValues2 = CadValuesAux2 & i
+              CadValues2 = CadValuesAux2 & I
               CadValues2 = CadValues2 & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
               'IMPORTE del Vencimiento
@@ -807,7 +810,7 @@ Dim i As Byte
 
               'Resto Vencimientos
               '--------------------------------------------------------------------
-              For i = 2 To rsVenci!numerove
+              For I = 2 To rsVenci!numerove
                  'FECHA Resto Vencimientos
                   '==== Modificado: Laura 23/01/2007
                   'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
@@ -822,7 +825,7 @@ Dim i As Byte
                         FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
                   End If
 
-                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & i & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
+                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & I & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
                   'IMPORTE Resto de Vendimientos
                   ImpVenci = Round(TotalFac / rsVenci!numerove, 2)
@@ -855,7 +858,7 @@ Dim i As Byte
                             CadValues2 = CadValues2 & ") "
                         End If
                   End If
-              Next i
+              Next I
             End If
             Rs.Close
             Set Rs = Nothing
@@ -906,19 +909,19 @@ Dim i As Byte
                 Sql = Sql & ") "
             End If
         End If
-        Sql = Sql & " VALUES " & CadValues2
+        Sql = Sql & " VALUES " & Mid(CadValues2, 1, Len(CadValues2) - 1)
         ConnConta.Execute Sql
     End If
 
-    b = True
+    B = True
     Set vSoc = Nothing
 
 EInsertarTesoreria:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
-    InsertarEnTesoreria = b
+    InsertarEnTesoreria = B
 End Function
 
 
@@ -926,7 +929,7 @@ End Function
 Public Function TraspasoAlbaranesAFactura(cadSQL As String) As Boolean
 'IN -> cadSQL: cadena para seleccion de los Albaranes que vamos a Facturar
 'Desde Albaranes Genera las Facturas correspondientes
-Dim b As Boolean
+Dim B As Boolean
 Dim MenError As String
 Dim vSeccion As CSeccion
 
@@ -952,23 +955,23 @@ Dim vSeccion As CSeccion
     
     
     'Insertar la Factura
-    b = InsertarFactura(cadSQL, MenError)
+    B = InsertarFactura(cadSQL, MenError)
 
-    If b Then
+    If B Then
         'Insertar en Tesoreria
         '#### Laura 15/11/2006 Recuperar facturas ALZIRA
         If frmTercRecFact.Check1(0).Value = 1 Then
         '####
             '[Monica]27/05/2013: insertarmos los vencimientos dependiendo del porcentaje de corredor
             If vParamAplic.Cooperativa = 12 Then
-                b = InsertarEnTesoreriaMontifrut(MenError)
+                B = InsertarEnTesoreriaMontifrut(MenError)
             Else
-                b = InsertarEnTesoreria(MenError)
+                B = InsertarEnTesoreria(MenError)
             End If
         End If
         
-        If b Then
-            b = MarcarAlbaran(MenError)
+        If B Then
+            B = MarcarAlbaran(MenError)
         End If
         
 '        '#### Laura 15/11/2006 Recuperar facturas ALZIRA
@@ -981,7 +984,7 @@ Dim vSeccion As CSeccion
         
         
     End If
-    If b Then
+    If B Then
         conn.CommitTrans
         ConnConta.CommitTrans
         TraspasoAlbaranesAFactura = True
@@ -1018,37 +1021,37 @@ End Function
 
 Private Function InsertarFactura(cadSQL As String, cadError As String) As Boolean
 'Insertamos en las tablas de factura de tranportista: tcafpc, tcafpa, tlifpc
-Dim b As Boolean
+Dim B As Boolean
     
     InsertarFactura = False
     
     
     'Cabecera Factura
     cadError = ""
-    b = InsertarCabeceraFactu(cadError)
-    If Not b Then
+    B = InsertarCabeceraFactu(cadError)
+    If Not B Then
         Exit Function
     End If
     
     '[Monica]06/05/2013: si no hay cadena de albaranes no los metemos es un anticipo
     If cadSQL <> "" Then
             'Cabeceras Albaranes de la Factura
-            b = InsertarCabAlbaranesFactu(cadSQL, cadError)
-            If Not b Then
+            B = InsertarCabAlbaranesFactu(cadSQL, cadError)
+            If Not B Then
                 Exit Function
             
             '[Monica]23/09/2013: descontamos anticipos
             Else
                 If Anticipos <> "" Then
-                    b = InsertarAnticipos(cadError)
+                    B = InsertarAnticipos(cadError)
                 End If
             End If
     Else
-        If b Then b = InsertarAlbaran(cadError)
+        If B Then B = InsertarAlbaran(cadError)
         
-        If b Then
+        If B Then
             If Anticipos <> "" Then
-                b = InsertarAnticipos(cadError)
+                B = InsertarAnticipos(cadError)
             
             End If
 '        If b Then b = ActualizarFactura(cadError)
@@ -1328,7 +1331,7 @@ Public Function CalcularDatosFactura(cadWHERE As String, Socio As String, Option
 'nomTabla: nombre de la tabla de albaranes(scaalp) o de AlbaranesXFactura(scafpa)
 '           segun llamemos desde recepcion de facturas o desde Hco de Facturas
 Dim Rs As ADODB.Recordset
-Dim i As Integer
+Dim I As Integer
 
 Dim Sql As String
 Dim cadAux As String
@@ -1437,7 +1440,7 @@ Dim NumConta As String
                 Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
                 TotBruto = 0
-                i = 1
+                I = 1
                 While Not Rs.EOF
                     'Aqui vamos acumulando la suma del importe bruto de las lineas
                     TotBruto = TotBruto + Rs!Bruto
@@ -1462,7 +1465,7 @@ Dim NumConta As String
                     'los vamos acumulando
                     TotImpIVA = TotImpIVA + impiva
                     
-                    Select Case i
+                    Select Case I
                         Case 1  'IVA 1
                             TipoIVA1 = Rs!Codigiva
                             
@@ -1493,7 +1496,7 @@ Dim NumConta As String
                             'Importe total con IVA
                             ImpIVA3 = impiva
                     End Select
-                    i = i + 1
+                    I = I + 1
                     Rs.MoveNext
                 Wend
                 
@@ -1598,7 +1601,7 @@ End Function
 Public Function InsertarEnTesoreriaMontifrut(MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: ariges.svenci y en conta.scobros
 'Porcen: Porcentaje de corredor
-Dim b As Boolean
+Dim B As Boolean
 Dim Rs As ADODB.Recordset
 Dim rsVenci As ADODB.Recordset
 Dim Sql As String
@@ -1607,7 +1610,7 @@ Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
 Dim ImpVenci1 As Single
-Dim i As Byte
+Dim I As Byte
 
     On Error GoTo EInsertarTesoreria
 
@@ -1639,11 +1642,13 @@ Dim i As Byte
             If Not Rs.EOF Then
                'vamos creando la cadena para insertar en spagosp de la CONTA
                '[Monica]03/07/2013: añado trim(codmacta)
-               CadValuesAux2 = "('" & Trim(mCodmacta) & "', " & DBSet(numfactu, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
+               CadValuesAux2 = "("
+               If vParamAplic.ContabilidadNueva Then CadValuesAux2 = CadValuesAux2 & DBSet(SerieFraPro, "T") & ","
+               CadValuesAux2 = CadValuesAux2 & "'" & Trim(mCodmacta) & "', " & DBSet(numfactu, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
 
               'Primer Vencimiento
               '------------------------------------------------------------
-              i = 1
+              I = 1
               'FECHA VTO
               FecVenci = CDate(fecfactu)
               '=== Modificado: Laura 23/01/2007
@@ -1659,7 +1664,7 @@ Dim i As Byte
                   FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
               End If
 
-              CadValues2 = CadValuesAux2 & i
+              CadValues2 = CadValuesAux2 & I
               CadValues2 = CadValues2 & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
 '[Monica]14/10/2014: calculamos el importe de vencimientos
@@ -1712,7 +1717,7 @@ Dim i As Byte
 
               'Resto Vencimientos
               '--------------------------------------------------------------------
-              For i = 2 To rsVenci!numerove
+              For I = 2 To rsVenci!numerove
 '              If ImpVenci1 <> 0 Then
               
 '[Monica]14/10/2014: antes
@@ -1732,7 +1737,7 @@ Dim i As Byte
                         FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(Rs!mesnogir, "N"), DBSet(0, "N"), Rs!DiaPago1, Rs!DiaPago2, Rs!DiaPago3)
                   End If
 
-                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & i & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
+                  CadValues2 = CadValues2 & ", " & CadValuesAux2 & I & ", " & ForPago & ", '" & Format(FecVenci1, FormatoFecha) & "', "
 
 '[Monica]14/10/2014: ahora
                   'IMPORTE Resto de Vendimientos
@@ -1767,7 +1772,7 @@ Dim i As Byte
                             CadValues2 = CadValues2 & ") "
                         End If
                   End If
-              Next i
+              Next I
 '                End If
             End If
             Rs.Close
@@ -1823,15 +1828,15 @@ Dim i As Byte
         ConnConta.Execute Sql
     End If
 
-    b = True
+    B = True
     Set vSoc = Nothing
     
 EInsertarTesoreria:
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
-    InsertarEnTesoreriaMontifrut = b
+    InsertarEnTesoreriaMontifrut = B
 End Function
 
 
