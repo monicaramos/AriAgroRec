@@ -4993,7 +4993,7 @@ End Function
 ' FACTURAS SOCIOS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaSoc(cadWHERE As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Public Function PasarFacturaSoc(cadWHERE As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String, ByRef vContaFra As cContabilizarFacturas, IvaRea As Integer) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -5046,7 +5046,7 @@ Dim Obs As String
         cadMen = "Insertando Factura en Diario: " & cadMen
     Else
        '---- Insertar en la conta Cabecera Factura
-        B = InsertarCabFactSoc(cadWHERE, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM, ForpaPos, ForpaNeg, vContaFra)
+        B = InsertarCabFactSoc(cadWHERE, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM, ForpaPos, ForpaNeg, vContaFra, IvaRea)
         cadMen = "Insertando Cab. Factura: " & cadMen
     End If
     
@@ -5118,7 +5118,7 @@ End Function
 
 
 
-Private Function InsertarCabFactSoc(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String, FPPos As String, FPNeg As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Private Function InsertarCabFactSoc(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String, FPPos As String, FPNeg As String, ByRef vContaFra As cContabilizarFacturas, IvaRea As Integer) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim Sql As String
@@ -5267,14 +5267,12 @@ Dim CadenaInsertFaclin2 As String
                 End If
                 
                 '$$$
-                '[Monica]02/05/2017: Solo en el caso de modulos
-                If DBLet(Rs!TipoIRPF, "N") = 0 Then
-                
+                '[Monica]02/05/2017: Solo en el caso de que el tipo de iva sea REA
+                If DBLet(Rs!TipoIVA, "N") = IvaRea Then
                     TipoOpera = 5 ' REA
                     
                     '[Monica]21/04/2017: antes tenia un 0 en Aux
                     Aux = "X"
-                    If Rs!TotalFac < 0 Then Aux = "D"
                     'codopera,codconce340,codintra
                     Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                     
@@ -5283,7 +5281,6 @@ Dim CadenaInsertFaclin2 As String
                     
                     '[Monica]21/04/2017: antes tenia un 0 en Aux
                     Aux = "0"
-                    If Rs!TotalFac < 0 Then Aux = "D"
                     'codopera,codconce340,codintra
                     Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                 
@@ -5308,7 +5305,31 @@ Dim CadenaInsertFaclin2 As String
                 'totivas
                 Sql = Sql & DBSet(Rs!ImporIva, "N") & "," & DBSet(TotalFac, "N") & ","
                 If DBLet(Rs!porc_ret, "N") <> 0 Then
-                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2"
+                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ","
+                    
+                    '[Monica]03/05/2017: si es una factura de transporte de socio (idem a una fra de transportista)
+'               si retencion : Si REA + modulos ----> tipo retencion = 2 (act.agricola)
+'                              Si no REA + modulos--> tipo retencion = 1 (act.profesional)
+'                              si E.D.  ------------> tipo retencion = 4 (act.empresarial)
+                    If DBLet(Rs!CodTipom, "T") = "FTS" Then
+                        '[Monica]03/05/2017: tipo de retencion
+                        If Rs!TipoIVA = IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "2"
+                        If Rs!TipoIVA <> IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "1"
+                        If Rs!TipoIRPF = 1 Then Sql = Sql & "4"
+                    Else
+                        '[Monica]03/05/2017: dependiendo del tipo de irpf
+'                si retencion : Si modulos --> tipo retencion = 2 (act.agricola)
+'                               si E.D. -----> tipo retencion = 4 (act.empresarial)
+'                               si Entidad --> tipo retencion = 0 (sin retencion)
+                        Select Case Rs!TipoIRPF
+                            Case 0
+                                Sql = Sql & "2" ' si modulos entonces act.agricola
+                            Case 1
+                                Sql = Sql & "4" ' si e.d entonces act.empresarial
+                            Case 2
+                                Sql = Sql & "0" ' si entidad --> nada
+                        End Select
+                    End If
                 Else
                     Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
                 End If
@@ -5445,12 +5466,12 @@ Dim CadenaInsertFaclin2 As String
                 
                     '$$$
                     '[Monica]02/05/2017: Solo en el caso de modulos
-                    If DBLet(Rs!TipoIRPF, "N") = 0 Then
+                    If DBLet(Rs!TipoIVA, "N") = IvaRea Then
                         TipoOpera = 5 ' REA
                         
                         '[Monica]21/04/2017: antes tenia un 0 en Aux
                         Aux = "X"
-                        If Rs!TotalFac < 0 Then Aux = "D"
+'                        If Rs!TotalFac < 0 Then Aux = "D"
                         'codopera,codconce340,codintra
                         Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                     Else
@@ -5459,7 +5480,7 @@ Dim CadenaInsertFaclin2 As String
                         
                         '[Monica]21/04/2017: antes tenia un 0 en Aux
                         Aux = "0"
-                        If Rs!TotalFac < 0 Then Aux = "D"
+'                        If Rs!TotalFac < 0 Then Aux = "D"
                         'codopera,codconce340,codintra
                         Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                     End If
@@ -5483,7 +5504,17 @@ Dim CadenaInsertFaclin2 As String
                     'totivas
                     Sql = Sql & DBSet(Rs!ImporIva, "N") & "," & DBSet(TotalFac, "N") & ","
                     If DBLet(Rs!porc_ret, "N") <> 0 Then
-                        Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2"
+                        Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ","
+                        
+                        '[Monica]03/05/2017: dependiendo del tipo de irpf
+                        Select Case Rs!TipoIRPF
+                            Case 0
+                                Sql = Sql & "2" ' si modulos entonces act.agricola
+                            Case 1
+                                Sql = Sql & "4" ' si e.d entonces act.empresarial
+                            Case 2
+                                Sql = Sql & "0" ' si entidad --> nada
+                        End Select
                     Else
                         Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
                     End If
@@ -9527,7 +9558,7 @@ End Function
 ' FACTURAS TRANSPORTISTAS
 '----------------------------------------------------------------------
 
-Public Function PasarFacturaTra(cadWHERE As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Public Function PasarFacturaTra(cadWHERE As String, CodCCost As String, FechaFin As String, Seccion As String, TipoFact As Byte, FecRecep As Date, FecVto As Date, ForpaPos As String, ForpaNeg As String, CtaBanc As String, CtaRete As String, CtaApor As String, TipoM As String, ByRef vContaFra As cContabilizarFacturas, IvaRea As Integer) As Boolean
 'Insertar en tablas cabecera/lineas de la Contabilidad la factura PROVEEDOR
 ' ariagro.rfactsoc --> conta.cabfactprov
 ' ariagro.rfactsoc_variedad --> conta.linfactprov
@@ -9560,9 +9591,9 @@ Dim Mc As Contadores
         B = InsertarAsientoDiarioTRANS(cadWHERE, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM)
         cadMen = "Insertando Factura en Diario: " & cadMen
     Else
-    
+        CtaReten = CtaRete
         '---- Insertar en la conta Cabecera Factura
-        B = InsertarCabFactTra(cadWHERE, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM, vContaFra)
+        B = InsertarCabFactTra(cadWHERE, cadMen, Mc, CDate(FechaFin), Seccion, TipoFact, FecRecep, TipoM, vContaFra, IvaRea)
         cadMen = "Insertando Cab. Factura: " & cadMen
         
     End If
@@ -9625,7 +9656,7 @@ EContab:
 End Function
 
 
-Private Function InsertarCabFactTra(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Private Function InsertarCabFactTra(cadWHERE As String, cadErr As String, ByRef Mc As Contadores, FechaFin As Date, Secci As String, Tipo As Byte, FecRec As Date, TipoM As String, ByRef vContaFra As cContabilizarFacturas, IvaRea As Integer) As Boolean
 'Insertando en tabla conta.cabfact
 '(OUT) AnyoFacPr: aqui devolvemos el año de fecha recepcion para insertarlo en las lineas de factura de proveedor de la conta
 Dim Sql As String
@@ -9650,6 +9681,8 @@ Dim CadenaInsertFaclin2 As String
     Sql = Sql & "rtransporte.codtrans, rtransporte.nomtrans, rtransporte.codbanco, rtransporte.codsucur, rtransporte.digcontr, rtransporte.cuentaba "
     Sql = Sql & ",rtransporte.iban "
     Sql = Sql & ",rtransporte.dirtrans,rtransporte.pobtrans,rtransporte.codpostal,rtransporte.protrans,rtransporte.niftrans,rtransporte.codforpa  "
+    '[Monica]03/05/2017: como en socios
+    Sql = Sql & ",rfacttra.tipoirpf "
     Sql = Sql & " FROM (" & "rfacttra "
     Sql = Sql & "INNER JOIN rtransporte ON rfacttra.codtrans=rtransporte.codtrans) "
     Sql = Sql & " WHERE " & cadWHERE
@@ -9733,13 +9766,28 @@ Dim CadenaInsertFaclin2 As String
                 Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
             
                 '$$$
-                TipoOpera = 5 ' REA
+                '[Monica]02/05/2017: Solo en el caso de iva rea
+                If DBLet(Rs!TipoIVA, "N") = IvaRea Then
+               
+                    TipoOpera = 5 ' REA
+                    
+                    '[Monica]21/04/2017: antes tenia un 0 en Aux
+                    Aux = "X"
+'                    If Rs!TotalFac < 0 Then Aux = "D"
+                    'codopera,codconce340,codintra
+                    Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
+                    
+                Else
                 
-                '[Monica]21/04/2017: antes tenia un 0 en Aux
-                Aux = "X"
-                If Rs!TotalFac < 0 Then Aux = "D"
-                'codopera,codconce340,codintra
-                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
+                    TipoOpera = 0 ' general
+                    
+                    '[Monica]21/04/2017: antes tenia un 0 en Aux
+                    Aux = "0" ' estaba X
+'                    If Rs!TotalFac < 0 Then Aux = "D"
+                    'codopera,codconce340,codintra
+                    Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
+                    
+                End If
                 
                 '[Monica]10/11/2016: en totalfac llevabamos base + impiva pq antes retencion estaba en lineas
                 '                    en la nueva conta está en la cabecera
@@ -9760,7 +9808,16 @@ Dim CadenaInsertFaclin2 As String
                 'totivas
                 Sql = Sql & DBSet(Rs!ImporIva, "N") & "," & DBSet(TotalFac, "N") & ","
                 If DBLet(Rs!porc_ret, "N") <> 0 Then
-                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(vParamAplic.CtaRetenSoc, "T") & ",2"
+                    Sql = Sql & DBSet(Rs!porc_ret, "N") & "," & DBSet(Rs!ImpReten, "N") & "," & DBSet(CtaReten, "T") & ","
+                                        
+                    '[Monica]03/05/2017: tipo de retencion
+'               si retencion : Si REA + modulos ----> tipo retencion = 2 (act.agricola)
+'                              Si no REA + modulos--> tipo retencion = 1 (act.profesional)
+'                              si E.D.  ------------> tipo retencion = 4 (act.empresarial)
+                    If Rs!TipoIVA = IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "2"
+                    If Rs!TipoIVA <> IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "1"
+                    If Rs!TipoIRPF = 1 Then Sql = Sql & "4"
+                    
                 Else
                     Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
                 End If

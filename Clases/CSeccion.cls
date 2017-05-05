@@ -29,6 +29,8 @@ Private mRaizAsoc As String 'Raiz Asociado
 Private mRaizProv As String 'Raiz Proveedor
 Private mTipIvaExento As Integer ' tipo de iva exento de la contabilidad
 
+Private mTipIvaREA As Integer ' tipo de iva REA de la contabilidad
+
 
 '------------------------------------------------
 'Propiedades del modulo CSeccion
@@ -107,6 +109,17 @@ Public Property Get TipIvaExento() As Integer
 End Property
 
 
+'**** tipo de iva REA de la contabilidad
+
+Public Property Let TipIvaREA(ByVal vData As Integer)
+     mTipIvaREA = vData
+End Property
+
+Public Property Get TipIvaREA() As Integer
+     TipIvaREA = mTipIvaREA
+End Property
+
+
 '------------------------------------------------
 'Procedimientos del modulo Cseccion
 '------------------------------------------------
@@ -136,46 +149,47 @@ Public Function LeerDatos(vCodsecci As String) As Boolean
 'Leer los datos de una seccion dada
 'Lee de la BD: Ariagrorec, Tabla: rseccion
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 
     On Error GoTo ELeer
     
     LeerDatos = False
     
-    SQL = "SELECT codsecci, nomsecci, empresa_conta, raiz_cliente_socio, raiz_cliente_asociado, raiz_proveedor, codivaexe "
-    SQL = SQL & " FROM rseccion "
-    SQL = SQL & " WHERE codsecci=" & vCodsecci
+    Sql = "SELECT codsecci, nomsecci, empresa_conta, raiz_cliente_socio, raiz_cliente_asociado, raiz_proveedor, codivaexe, codivarea "
+    Sql = Sql & " FROM rseccion "
+    Sql = Sql & " WHERE codsecci=" & vCodsecci
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatos = False
     Else
-        mCodSecci = CStr(RS!codsecci)
+        mCodSecci = CStr(Rs!codsecci)
         
-        mNomSecci = RS!nomsecci
-        mCodigoConta = CStr(DBLet(RS!empresa_conta, "N"))
-        mRaizSocio = DBLet(RS!raiz_cliente_socio, "T")
-        mRaizAsoc = DBLet(RS!raiz_cliente_asociado, "T")
-        mRaizProv = DBLet(RS!raiz_proveedor, "T")
-        mTipIvaExento = DBLet(RS!codivaexe, "N")
+        mNomSecci = Rs!nomsecci
+        mCodigoConta = CStr(DBLet(Rs!empresa_conta, "N"))
+        mRaizSocio = DBLet(Rs!raiz_cliente_socio, "T")
+        mRaizAsoc = DBLet(Rs!raiz_cliente_asociado, "T")
+        mRaizProv = DBLet(Rs!raiz_proveedor, "T")
+        mTipIvaExento = DBLet(Rs!codivaexe, "N")
+        mTipIvaREA = DBLet(Rs!codivaREA, "N")
         
         
         LeerDatos = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos sección" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Sql = "Se ha producido un error. " & "Datos sección" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
+    Set Rs = Nothing
     LeerDatos = False
 End Function
 
@@ -192,7 +206,7 @@ End Function
 
 Public Function AbrirConta() As Boolean
 ' abrimos la bd de contabilidad
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ELeer
     
@@ -206,10 +220,10 @@ Dim SQL As String
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Abrir Conta" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
+    Sql = "Se ha producido un error. " & "Abrir Conta" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
     Set vEmpresa = Nothing
     AbrirConta = False
 End Function
@@ -223,7 +237,7 @@ End Function
 
 Public Function AbrirAriges() As Boolean
 ' abrimos la bd de ariges (suministros)
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ELeer
     
@@ -235,10 +249,10 @@ Dim SQL As String
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Abrir Ariges" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
+    Sql = "Se ha producido un error. " & "Abrir Ariges" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
     Set vEmpresa = Nothing
 End Function
 

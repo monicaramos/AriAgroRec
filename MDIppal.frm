@@ -122,7 +122,6 @@ Begin VB.MDIForm MDIppal
          EndProperty
          BeginProperty Panel5 {8E3867AB-8586-11D1-B16A-00C0F0283628} 
             Style           =   1
-            Enabled         =   0   'False
             Object.Width           =   1323
             MinWidth        =   1323
             TextSave        =   "MAYÚS"
@@ -143,7 +142,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "10:59"
+            TextSave        =   "18:18"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1865,7 +1864,7 @@ Dim cad As String
     '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
     If vParamAplic.Cooperativa = 10 Then
         If Dir("c:\indefa", vbDirectory) <> "" Then
-            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
+            LanzaVisorMimeDocumento Me.hwnd, "c:\indefa\ftpINDEFA.bat"
         Else
             If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
         End If
@@ -2253,14 +2252,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim sql As String
+Dim Sql As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2279,33 +2278,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim sql As String
+Dim Sql As String
 Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    sql = ""
+    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            sql = sql & miRsAux.Fields(3) & "·"
+            Sql = Sql & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If sql <> "" Then
-        sql = "·" & sql
+    If Sql <> "" Then
+        Sql = "·" & Sql
         For Each T In Me.Controls
             If TypeOf T Is menu Then
                 c = DevuelveCadenaMenu(T)
                 c = "·" & c & "·"
-                If InStr(1, sql, c) > 0 Then T.visible = False
+                If InStr(1, Sql, c) > 0 Then T.visible = False
            
             End If
         Next
