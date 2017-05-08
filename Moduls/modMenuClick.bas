@@ -5,8 +5,8 @@ Dim DeTransporte As Boolean
 Dim frmBas As frmBasico
 
 
-Private Sub Construc(nom As String)
-    MsgBox nom & ": en construcción..."
+Private Sub Construc(Nom As String)
+    MsgBox Nom & ": en construcción..."
 End Sub
 
 ' ******* DATOS BASICOS *********
@@ -140,6 +140,7 @@ Public Sub SubmnC_RecoleccionG_InforOfi_Click(Index As Integer)
     
         Case 4: AbrirListado (50) ' informe de diferencias de kilos
     
+        Case 5: AbrirListado (51) ' informe de campos sin entradas
     
     End Select
 End Sub
@@ -1068,8 +1069,8 @@ Public Sub SubmnE_Util_Click(Index As Integer)
 End Sub
 
 Public Sub BloqueoMenusSegunCooperativa()
-Dim b As Boolean
-Dim i As Integer
+Dim B As Boolean
+Dim I As Integer
 
     ' traspaso de facturas a cooperativas solo para Valsur
     MDIppal.mnE_Util(3).Enabled = (vParamAplic.Cooperativa = 1)
@@ -1081,10 +1082,10 @@ Dim i As Integer
     
 ' luego lo descomento
     ' telefonia solo para Valsur
-    For i = 8 To 10
-        MDIppal.mnE_Util(i).Enabled = (vParamAplic.Cooperativa = 1)
-        MDIppal.mnE_Util(i).visible = (vParamAplic.Cooperativa = 1)
-    Next i
+    For I = 8 To 10
+        MDIppal.mnE_Util(I).Enabled = (vParamAplic.Cooperativa = 1)
+        MDIppal.mnE_Util(I).visible = (vParamAplic.Cooperativa = 1)
+    Next I
     
 '    ' traspaso de datos a Almazara solo para Moixent
 '    MDIppal.mnE_Util(6).Enabled = (vParamAplic.Cooperativa = 3)
@@ -1270,7 +1271,7 @@ End Sub
 
 
 Public Sub BloqueoMenusSegunCampanya()
-Dim b As Boolean
+Dim B As Boolean
 
     ' actualizacion de datos de socios de suministros :
     '   si es campaña actual
@@ -1294,7 +1295,7 @@ Private Sub AbrirFormularioGlobalGAP()
     frmBas.Tag2 = "Descripción|T|N|||rglobalgap|descripcion|||"
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
-    frmBas.tabla = "rglobalgap"
+    frmBas.Tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "GlobalGap"

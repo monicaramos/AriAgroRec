@@ -22,6 +22,15 @@ Begin VB.Form frmListado
       TabIndex        =   861
       Top             =   0
       Width           =   6855
+      Begin VB.CheckBox Check28 
+         Caption         =   "Imprimir Resumen"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Left            =   4470
+         TabIndex        =   879
+         Top             =   2700
+         Width           =   1815
+      End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
          Height          =   285
@@ -51,7 +60,7 @@ Begin VB.Form frmListado
          Top             =   3870
          Width           =   975
       End
-      Begin VB.CommandButton Command1 
+      Begin VB.CommandButton CmdAcepCamposSinEntradas 
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4020
@@ -12550,7 +12559,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Tabla1 As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
@@ -12692,8 +12701,8 @@ Dim vSQL As String
      If Not AnyadirAFormula(cadSelect, "{rcampos.fecbajas} is null") Then Exit Sub
      If Not AnyadirAFormula(cadFormula, "isnull({rcampos.fecbajas})") Then Exit Sub
 
-     tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
-     tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
+     Tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
+     Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
      
      vSQL = ""
      If txtcodigo(25).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(25).Text, "N")
@@ -12708,8 +12717,8 @@ Dim vSQL As String
      Set frmMens = Nothing
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
-        B = GeneraFicheroAgriweb(tabla, cadSelect)
+     If HayRegParaInforme(Tabla, cadSelect) Then
+        B = GeneraFicheroAgriweb(Tabla, cadSelect)
         If B Then
             If CopiarFichero Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
@@ -12735,8 +12744,8 @@ Dim GGPro As String
 
     Sql = "select count(*) from rcampos where fecbajas is null  "
     
-    CargarProgres pb10, TotalRegistros(Sql)
-    Me.pb10.visible = True
+    CargarProgres Pb10, TotalRegistros(Sql)
+    Me.Pb10.visible = True
     
     Label2(238).Caption = "Calculando registros GlobalGap"
     Label2(262).Caption = ""
@@ -12753,7 +12762,7 @@ Dim GGPro As String
     
     While Not Rs.EOF
         Label2(262).Caption = "Campo : " & Rs!codcampo
-        IncrementarProgres pb10, 1
+        IncrementarProgres Pb10, 1
         Me.Refresh
     
         GGPar = ""
@@ -13066,6 +13075,246 @@ Dim Sql As String
 
 End Function
 
+Private Sub CmdAcepCamposSinEntradas_Click()
+Dim cOrden As String
+Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
+Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
+Dim numOp As Byte
+
+Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
+Dim nomDocu As String 'Nombre de Informe rpt de crystal
+Dim devuelve As String
+Dim B As Boolean
+Dim vSQL As String
+Dim I As Integer
+
+    InicializarVbles
+    
+    'Añadir el parametro de Empresa
+    CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
+    numParam = numParam + 1
+
+    'D/H SOCIO
+    cDesde = Trim(txtcodigo(182).Text)
+    cHasta = Trim(txtcodigo(183).Text)
+    nDesde = txtNombre(182).Text
+    nHasta = txtNombre(183).Text
+    If Not (cDesde = "" And cHasta = "") Then
+        'Cadena para seleccion Desde y Hasta
+        Codigo = "{rcampos.codsocio}"
+        TipCod = "N"
+        If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
+    End If
+    
+
+    'D/H fecha
+    cDesde = Trim(txtcodigo(190).Text)
+    cHasta = Trim(txtcodigo(191).Text)
+    nDesde = ""
+    nHasta = ""
+    If Not (cDesde = "" And cHasta = "") Then
+        Codigo = "{rhisfruta.fechaent}"
+        TipCod = "F"
+        If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
+    End If
+    
+    ' si hay resumen detallamos todos los campos con hanegadas
+    If Check28.Value Then
+        CadParam = CadParam & "pResumen=1|"
+        numParam = numParam + 1
+    End If
+            
+    
+    If CargarTemporalCamposSinEntradas() Then
+        If HayRegParaInforme("tmpinformes", "codusu = " & vUsu.Codigo) Then
+            
+            indRPT = 116 'informe de campos sin entradas
+            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+            
+            cadTitulo = "Informe de Campos sin Entradas"
+            cadNombreRPT = nomDocu '"rCamposSinEntradas.rpt"
+            cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
+            
+            LlamarImprimir
+        End If
+    End If
+
+
+End Sub
+
+Private Function CargarTemporalCamposSinEntradas()
+Dim Sql As String
+Dim vCampAnt As CCampAnt
+Dim ctabla1 As String
+Dim Sql2 As String
+Dim Sql4 As String
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim CadValues As String
+Dim BaseIva As Currency
+Dim ImpoIva As Currency
+Dim SocioAnt As Long
+Dim DifBase As Currency
+Dim DifRete As Currency
+Dim TipoIRPF As Byte
+Dim ImpoReten As Currency
+Dim BaseReten As Currency
+Dim Producto As Long
+
+Dim BDatos As Dictionary
+Dim SqlBd As String
+Dim RsBd As ADODB.Recordset
+
+Dim cTablaAnticip As String
+
+
+    On Error GoTo eCargarFacturas
+    
+    Screen.MousePointer = vbHourglass
+    
+    Set BDatos = New Dictionary
+    
+    Screen.MousePointer = vbHourglass
+    
+    ' borramos las tablas temporales donde insertaremos los campos que tienen entradas
+    Sql = "delete from tmpinformes2 where codusu= " & vUsu.Codigo
+    conn.Execute Sql
+    
+    ' tabla final donde insertaremos los campos sin entradas
+    Sql = "delete from tmpinformes where codusu= " & vUsu.Codigo
+    conn.Execute Sql
+    
+    Label2(268).visible = True
+    Label2(268).Caption = "Procesando campaña actual"
+    Me.Refresh
+    DoEvents
+    
+    ' insertamos los campos con entradas de la campaña actual sin fecha de baja
+    Sql = "insert into tmpinformes2 (codusu,importe1)"
+    Sql = Sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo "
+    Sql = Sql & " from ( "
+    
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo"
+    Sql = Sql & " from rentradas "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+    If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+    If txtcodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
+    If txtcodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
+    Sql = Sql & " union "
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo"
+    Sql = Sql & " from rclasifica "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+    If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+    If txtcodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
+    If txtcodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
+    Sql = Sql & " union "
+    Sql = Sql & "select distinct " & vUsu.Codigo & ", rhisfruta.codcampo"
+    Sql = Sql & " from rhisfruta "
+    Sql = Sql & " where codcampo in (select codcampo from rcampos where fecbajas is null) "
+    If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+    If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+    If txtcodigo(190).Text <> "" Then Sql = Sql & " and fecalbar >= " & DBSet(txtcodigo(190).Text, "F")
+    If txtcodigo(191).Text <> "" Then Sql = Sql & " and fecalbar <= " & DBSet(txtcodigo(191).Text, "F")
+    Sql = Sql & " ) aaaa "
+    
+    conn.Execute Sql
+    
+  
+' TODAS LAS CAMPAÑAS ANTERIORES
+
+'[Monica]17/10/2013: Si y solo si no es Montifrut que tiene en otro ariagro otra cosa
+    '[Monica]21/01/2015: añado el caso de Natural
+    '[Monica]25/01/2016: añado el caso de bolbaite
+If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+    SqlBd = "SHOW DATABASES like 'ariagro%' "
+    Set RsBd = New ADODB.Recordset
+    RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    While Not RsBd.EOF
+        If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
+        
+            Label2(268).Caption = "Procesando campaña " & DBLet(RsBd.Fields(0).Value)
+            DoEvents
+        
+        
+            ' borramos la tabla temporal de la campaña anterior
+            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 where codusu= " & vUsu.Codigo
+            conn.Execute Sql
+            
+            Sql = "insert into " & RsBd.Fields(0).Value & ".tmpinformes2 (codusu,importe1)"
+            Sql = Sql & " select distinct " & vUsu.Codigo & ", aaaa.codcampo "
+            Sql = Sql & " from ( "
+            
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rentradas.codcampo"
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rentradas "
+            Sql = Sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
+            If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+            If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+            If txtcodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
+            If txtcodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
+            Sql = Sql & " union "
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo"
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rclasifica "
+            Sql = Sql & " where codcampo in (select codcampo from " & RsBd.Fields(0).Value & ".rcampos where fecbajas is null) "
+            If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+            If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+            If txtcodigo(190).Text <> "" Then Sql = Sql & " and fechaent >= " & DBSet(txtcodigo(190).Text, "F")
+            If txtcodigo(191).Text <> "" Then Sql = Sql & " and fechaent <= " & DBSet(txtcodigo(191).Text, "F")
+            Sql = Sql & " union "
+            Sql = Sql & "select distinct " & vUsu.Codigo & ", rclasifica.codcampo"
+            Sql = Sql & " from " & RsBd.Fields(0).Value & ".rhisfruta "
+            Sql = Sql & " where codcampo in (select codcampo " & RsBd.Fields(0).Value & ".from rcampos where fecbajas is null) "
+            If txtcodigo(182).Text <> "" Then Sql = Sql & " and codsocio >= " & DBSet(txtcodigo(182).Text, "N")
+            If txtcodigo(183).Text <> "" Then Sql = Sql & " and codsocio <= " & DBSet(txtcodigo(183).Text, "N")
+            If txtcodigo(190).Text <> "" Then Sql = Sql & " and fecalbar >= " & DBSet(txtcodigo(190).Text, "F")
+            If txtcodigo(191).Text <> "" Then Sql = Sql & " and fecalbar <= " & DBSet(txtcodigo(191).Text, "F")
+            Sql = Sql & " ) aaaa"
+            
+            conn.Execute Sql
+        
+        
+            ' introducimos los campos con entradas en la temporal de la campaña actual
+            Sql = "insert into tmpinformes2 select * from " & Trim(RsBd.Fields(0).Value) & ".tmpinformes2 "
+            Sql = Sql & " where codusu = " & vUsu.Codigo
+            
+            conn.Execute Sql
+            
+        End If
+    
+        RsBd.MoveNext
+    Wend
+  
+    Set RsBd = Nothing
+End If ' Por Montifrut que tiene la otra en el ariagro2
+  
+    Label2(268).Caption = "Revisando con la campaña actual."
+    Me.Refresh
+    DoEvents
+
+  
+    ' una vez tenemos todos los campos que tienen entradas, insertamos en tmpinformes los que no tienen fecha de baja y no estan
+    ' en campos con entradas
+    Sql = "insert into tmpinformes (codusu, importe1, codigo1, importe2, importe3)  "
+    Sql = Sql & " select distinct " & vUsu.Codigo & ",rcampos.codcampo, rcampos.codsocio, rcampos.supcoope, rcampos.codvarie from rcampos "
+    Sql = Sql & " where fecbajas is null and not codcampo in (select importe1 from tmpinformes2 where codusu = " & vUsu.Codigo & ") "
+    
+    conn.Execute Sql
+    
+    CargarTemporalCamposSinEntradas = True
+    Screen.MousePointer = vbDefault
+    Label2(268).visible = False
+    
+    Exit Function
+    
+eCargarFacturas:
+    MuestraError Err.Number, "Cargar Campos con ", Err.Description
+    Screen.MousePointer = vbDefault
+    Label2(268).visible = False
+    CargarTemporalCamposSinEntradas = False
+End Function
+
+
 Private Sub CmdAcepContaGastos_Click()
 Dim cadWHERE As String
 Dim Sql As String
@@ -13147,7 +13396,7 @@ Dim vcad As String
     nHasta = txtNombre(87).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
     End If
@@ -13171,7 +13420,7 @@ Dim vcad As String
     nHasta = txtNombre(85).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codvarie}"
+        Codigo = "{" & Tabla & ".codvarie}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
@@ -13182,7 +13431,7 @@ Dim vcad As String
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
-        Codigo = "{" & tabla & ".fechacla}"
+        Codigo = "{" & Tabla & ".fechacla}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
@@ -13194,7 +13443,7 @@ Dim vcad As String
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codcampo}"
+        Codigo = "{" & Tabla & ".codcampo}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCampo=""") Then Exit Sub
     End If
@@ -13410,8 +13659,8 @@ Dim Tabla2 As String
      CadParam = CadParam & AnyadirParametroDH("pDHFecha=""", cDesde, cHasta, "", "")
      numParam = numParam + 1
 
-     tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
-     tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
+     Tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
+     Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
      
      
      '[Monica]13/11/2013: faltaria el tema de los coopropietarios
@@ -13433,8 +13682,8 @@ Dim Tabla2 As String
      Set frmMens = Nothing
             
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
-        If CargarTemporal7(tabla, cadSelect, Tabla2) Then
+     If HayRegParaInforme(Tabla, cadSelect) Then
+        If CargarTemporal7(Tabla, cadSelect, Tabla2) Then
            If HayRegParaInforme("tmpinfkilos", "codusu = " & vUsu.Codigo) Then
            
                 indRPT = 112 'informe de diferencias de kilos
@@ -13551,11 +13800,11 @@ Dim vSQL As String
     If Not AnyadirAFormula(cadSelect, "{rfactsoc.codtipom} = ""SIN""") Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "{rfactsoc.codtipom}  = ""SIN""") Then Exit Sub
      
-    tabla = "rfactsoc INNER JOIN rsocios ON rfactsoc.codsocio = rsocios.codsocio"
+    Tabla = "rfactsoc INNER JOIN rsocios ON rfactsoc.codsocio = rsocios.codsocio"
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
-        B = GenerarEntradasSIN(tabla, Replace(cadSelect, "rfactsoc", "aaa"))
+    If HayRegParaInforme(Tabla, cadSelect) Then
+        B = GenerarEntradasSIN(Tabla, Replace(cadSelect, "rfactsoc", "aaa"))
         If B Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancel_Click (16)
@@ -13635,9 +13884,9 @@ Dim vSQL As String
      End If
 
 
-     tabla = "(rcampos_gastos INNER JOIN rcampos ON rcampos_gastos.codcampo = rcampos.codcampo) "
-     tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
-     tabla = "(" & tabla & ") INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+     Tabla = "(rcampos_gastos INNER JOIN rcampos ON rcampos_gastos.codcampo = rcampos.codcampo) "
+     Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
+     Tabla = "(" & Tabla & ") INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
      
      ' agrupado por socio
      If Opcion1(5).Value Then
@@ -13669,7 +13918,7 @@ Dim vSQL As String
      
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
+     If HayRegParaInforme(Tabla, cadSelect) Then
 '         indRPT = 69 'informe de gastos por concepto
 '
 '         If Not PonerParamRPT(indRPT, "", 1, nomDocu) Then Exit Sub '   cadNombreRPT = "rInfKilosSocio.rpt"
@@ -13772,9 +14021,9 @@ Dim vSQL As String
      End If
     
 
-     tabla = "(rhisfruta INNER JOIN variedades ON rhisfruta.codvarie = variedades.codvarie) "
-     tabla = "(" & tabla & ") INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio "
-     tabla = "(" & tabla & ") INNER JOIN rhisfruta_gastos ON rhisfruta.numalbar = rhisfruta_gastos.numalbar "
+     Tabla = "(rhisfruta INNER JOIN variedades ON rhisfruta.codvarie = variedades.codvarie) "
+     Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rhisfruta.codsocio = rsocios.codsocio "
+     Tabla = "(" & Tabla & ") INNER JOIN rhisfruta_gastos ON rhisfruta.numalbar = rhisfruta_gastos.numalbar "
      
      vSQL = ""
      If txtcodigo(104).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtcodigo(104).Text, "N")
@@ -13812,7 +14061,7 @@ Dim vSQL As String
      End If
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
+     If HayRegParaInforme(Tabla, cadSelect) Then
          indRPT = 69 'informe de gastos por concepto
      
          If Not PonerParamRPT(indRPT, "", 1, nomDocu) Then Exit Sub '   cadNombreRPT = "rInfKilosSocio.rpt"
@@ -13893,8 +14142,8 @@ Dim Tabla2 As String
      nHasta = ""
      devuelve = CadenaDesdeHasta(cDesde, cHasta, "fecalbar", "F")
 
-     tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
-     tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
+     Tabla = "(rcampos INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
+     Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio "
      
      
      '[Monica]13/11/2013: faltaria el tema de los coopropietarios
@@ -13927,8 +14176,8 @@ Dim Tabla2 As String
      numParam = numParam + 1
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
-        If CargarTemporal5(tabla, cadSelect, Tabla2) Then
+     If HayRegParaInforme(Tabla, cadSelect) Then
+        If CargarTemporal5(Tabla, cadSelect, Tabla2) Then
            If HayRegParaInforme("tmpinfkilos", "codusu = " & vUsu.Codigo) Then
                
                 '[Monica]25/01/2017: Personalizacion del informe de kilos por producto
@@ -14025,16 +14274,16 @@ Dim I As Integer
     If Not AnyadirAFormula(cadFormula, "isnull({rsocios.fechabaja})") Then Exit Sub
 
     
-    tabla = "rcampos inner join rsocios on rsocios.codsocio = rcampos.codsocio"
-    tabla = "(" & tabla & ") inner join variedades on variedades.codvarie = rcampos.codvarie"
-    tabla = "(" & tabla & ") inner join productos on productos.codprodu = variedades.codprodu"
-    tabla = "(" & tabla & ") inner join grupopro on productos.codgrupo = grupopro.codgrupo"
+    Tabla = "rcampos inner join rsocios on rsocios.codsocio = rcampos.codsocio"
+    Tabla = "(" & Tabla & ") inner join variedades on variedades.codvarie = rcampos.codvarie"
+    Tabla = "(" & Tabla & ") inner join productos on productos.codprodu = variedades.codprodu"
+    Tabla = "(" & Tabla & ") inner join grupopro on productos.codgrupo = grupopro.codgrupo"
     
     
             
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
-        If CargarTemporalAtria(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
+        If CargarTemporalAtria(Tabla, cadSelect) Then
             cadNombreRPT = "rInfATRIA.rpt"
             cadTitulo = "Informe de Miembros ATRIA"
             
@@ -14159,10 +14408,10 @@ Dim I As Integer
         If Not AnyadirAFormula(cadSelect, "{rsocios_pozos.numfases} = " & Combo1(12).Text) Then Exit Sub
     End If
     
-    tabla = "rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio"
+    Tabla = "rsocios inner join rsocios_pozos on rsocios.codsocio = rsocios_pozos.codsocio"
             
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         cadNombreRPT = "rManSociosporFases.rpt"
         cadTitulo = "Informe de Socios por Fases"
         
@@ -14249,9 +14498,9 @@ Dim vcad As String
         numParam = numParam + 1
     End If
     
-    tabla = "((rcampos INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
-    tabla = tabla & " INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
-    tabla = tabla & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
+    Tabla = "((rcampos INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
+    Tabla = Tabla & " INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
+    Tabla = Tabla & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
             
             
     If Not AnyadirAFormula(cadSelect, "{rcampos.fecbajas} is null") Then Exit Sub
@@ -14259,7 +14508,7 @@ Dim vcad As String
             
             
      'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         
         cadTitulo = "Informe de Registro Aplicación de Fitosanitarios"
         
@@ -14347,7 +14596,7 @@ Dim vcad As String
 '    numOp = PonerGrupo(2, ListView1.ListItems(2).Text)
 ' ### [Monica] 10/11/2006    he sustituido las dos anteriores instrucciones por la siguiente
 
-    tabla = "rsocios"
+    Tabla = "rsocios"
 
     If Opcion(7).Value Then
         CadParam = CadParam & "pTitulo1=""Listado de Teléfonos de Socios""|"
@@ -14378,7 +14627,7 @@ Dim vcad As String
         
         
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         LlamarImprimir
     End If
 
@@ -14475,7 +14724,7 @@ Dim cadena As String
      
      Set frmMens = Nothing
             
-     tabla = "rcampos"
+     Tabla = "rcampos"
             
      '[Monica]29/05/2012: Cargamos todos los tipos de entrada de tipos de entrada en el parametro
      cadena = ""
@@ -14494,7 +14743,7 @@ Dim cadena As String
      numParam = numParam + 1
             
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If CargarTemporal6(tabla, cadSelect) Then
+     If CargarTemporal6(Tabla, cadSelect) Then
          If HayRegParaInforme("tmpclasifica", "codusu = " & vUsu.Codigo) Then
              indRPT = 62 'informe de Kilos Recolectados Socio/Cooperativa
      
@@ -14559,7 +14808,7 @@ Dim Sql As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
     
-    tabla = "rcampos INNER JOIN rcampos_ordrec ON rcampos.codcampo = rcampos_ordrec.codcampo "
+    Tabla = "rcampos INNER JOIN rcampos_ordrec ON rcampos.codcampo = rcampos_ordrec.codcampo "
         
     If Not AnyadirAFormula(cadSelect, "{rcampos.fecbajas} is null") Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "isnull({rcampos.fecbajas})") Then Exit Sub
@@ -14575,7 +14824,7 @@ Dim Sql As String
     cadTitulo = "Informe de Ordenes de Recolección"
    
      'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         With frmImprimir
             .FormulaSeleccion = cadFormula
             .OtrosParametros = CadParam
@@ -14682,7 +14931,7 @@ Dim Sql As String
         vSQL = vSQL & " and rcampos.codparti = " & DBSet(txtcodigo(142).Text, "N")
     End If
 
-    tabla = "rcampos"
+    Tabla = "rcampos"
         
     If Not AnyadirAFormula(cadSelect, "{rcampos.fecbajas} is null") Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "isnull({rcampos.fecbajas})") Then Exit Sub
@@ -14737,10 +14986,10 @@ Dim Sql As String
         
             
          'Comprobar si hay registros a Mostrar antes de abrir el Informe
-        If HayRegParaInforme(tabla, cadSelect) Then
+        If HayRegParaInforme(Tabla, cadSelect) Then
             cadTitulo = "Orden de Recolección"
             
-            If InsertarTemporal(tabla, cadSelect) Then
+            If InsertarTemporal(Tabla, cadSelect) Then
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                 
                 With frmImprimir
@@ -14782,7 +15031,7 @@ Dim Sql As String
     Else
         cadSelect = " codcampo in (select codcampo from rcampos where nrocampo in (select nrocampo from rordrecogida where nroorden = " & DBSet(txtcodigo(141).Text, "N") & ")) "
 
-        If InsertarTemporal2(tabla, cadSelect) Then
+        If InsertarTemporal2(Tabla, cadSelect) Then
             cadTitulo = "Reimpresión Orden de Recolección"
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
@@ -15058,9 +15307,9 @@ Dim vSQL As String
         If Not AnyadirAFormula(cadSelect, "rprecios.tipofact = " & Combo1(13).ListIndex) Then Exit Sub
     End If
     
-    tabla = "(rprecios inner join variedades on rprecios.codvarie = variedades.codvarie) inner join productos on variedades.codprodu = productos.codprodu "
+    Tabla = "(rprecios inner join variedades on rprecios.codvarie = variedades.codvarie) inner join productos on variedades.codprodu = productos.codprodu "
     
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         cadNombreRPT = "rManPrecios.rpt"
         cadTitulo = "Listado de Precios"
         
@@ -15135,14 +15384,14 @@ Dim vSQL As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
     
-    tabla = "rcampos inner join rcampos_revision on rcampos.codcampo = rcampos_revision.codcampo"
+    Tabla = "rcampos inner join rcampos_revision on rcampos.codcampo = rcampos_revision.codcampo"
     
     cadNombreRPT = "rRevisionCampos.rpt"
     
     cadTitulo = "Registro Diario de Visitas a Parcelas"
     
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
+    If HayRegParaInforme(Tabla, cadSelect) Then
         LlamarImprimir
     End If
 
@@ -15230,20 +15479,20 @@ Dim vSQL As String
     Tabla1 = "rsocios INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.Seccionhorto
     Tabla1 = Tabla1 & " and rsocios_seccion.fecbaja is null "
     
-    tabla = "((" & Tabla1 & ") INNER JOIN rcampos ON rcampos.codsocio = rsocios.codsocio and rcampos.fecbajas is null "
+    Tabla = "((" & Tabla1 & ") INNER JOIN rcampos ON rcampos.codsocio = rsocios.codsocio and rcampos.fecbajas is null "
     
     '[Monica]02/04/2014: para el caso de Picassent no miramos que no tenga supcoope <> 0
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
-        tabla = tabla & ") "
+        Tabla = Tabla & ") "
     Else
-        tabla = tabla & " and rcampos.supcoope <> 0) "
+        Tabla = Tabla & " and rcampos.supcoope <> 0) "
     End If
     
-    tabla = tabla & " INNER JOIN variedades on rcampos.codvarie = variedades.codvarie "
+    Tabla = Tabla & " INNER JOIN variedades on rcampos.codvarie = variedades.codvarie "
      
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(Tabla1, cadSelect1) Then
-        B = GeneraFicheroTraspasoROPAS(Tabla1, cadSelect1, tabla, cadSelect)
+        B = GeneraFicheroTraspasoROPAS(Tabla1, cadSelect1, Tabla, cadSelect)
         If B Then
             If CopiarFicheroROPAS() Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
@@ -15365,15 +15614,15 @@ Dim vCadena As String
             End If
     
     
-            tabla = "(((rcampos INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
-            tabla = tabla & " INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
-            tabla = tabla & " INNER JOIN rzonas ON rcampos.codzonas = rzonas.codzonas) "
-            tabla = tabla & " LEFT JOIN rcapataz ON rcampos.codcapat = rcapataz.codcapat "
+            Tabla = "(((rcampos INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
+            Tabla = Tabla & " INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie) "
+            Tabla = Tabla & " INNER JOIN rzonas ON rcampos.codzonas = rzonas.codzonas) "
+            Tabla = Tabla & " LEFT JOIN rcapataz ON rcampos.codcapat = rcapataz.codcapat "
             
             '[Monica]10/06/2013: añadimos las condiciones de las cartas de talla Solo Escalona y Utxera
             If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
-                tabla = "(" & tabla & ") INNER JOIN rsocios ON rcampos.codpropiet = rsocios.codsocio "
-                tabla = "(" & tabla & ") INNER JOIN rsituacion ON rsocios.codsitua = rsituacion.codsitua "
+                Tabla = "(" & Tabla & ") INNER JOIN rsocios ON rcampos.codpropiet = rsocios.codsocio "
+                Tabla = "(" & Tabla & ") INNER JOIN rsituacion ON rsocios.codsitua = rsituacion.codsitua "
                 
                 If Not AnyadirAFormula(cadSelect, "{rsituacion.bloqueo} = 0") Then Exit Sub
                 If Not AnyadirAFormula(cadFormula, "{rsituacion.bloqueo} = 0") Then Exit Sub
@@ -15458,9 +15707,9 @@ Dim vCadena As String
             Set frmMens = Nothing
             
              'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(tabla, cadSelect) Then
+            If HayRegParaInforme(Tabla, cadSelect) Then
                 If Opcion1(4).Value Then
-                    If CargarTemporalCampos(tabla, cadSelect) Then
+                    If CargarTemporalCampos(Tabla, cadSelect) Then
                         cadNombreRPT = "rInfCamposZonas.rpt"
                         indRPT = 66 'Informe de campos / huertos
                         If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
@@ -15503,7 +15752,7 @@ Dim vCadena As String
                                 .Show vbModal
                             End With
                     Else
-                        If CargarTemporal(tabla, cadSelect) Then
+                        If CargarTemporal(Tabla, cadSelect) Then
                             CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                             numParam = numParam + 1
         
@@ -15605,7 +15854,7 @@ Dim vCadena As String
             
             Set frmMens4 = Nothing
             
-            tabla = "rsocios_seccion"
+            Tabla = "rsocios_seccion"
         
             '[Monica]08/04/2015: para el caso de catadau miramos el combo1(15)
             If vParamAplic.Cooperativa = 0 And Opcion(0).Value Then
@@ -15673,17 +15922,17 @@ Dim vCadena As String
             End If
             numParam = numParam + 1
             
-            tabla = "rsocios_seccion INNER JOIN rsocios ON rsocios_seccion.codsocio = rsocios.codsocio "
+            Tabla = "rsocios_seccion INNER JOIN rsocios ON rsocios_seccion.codsocio = rsocios.codsocio "
             
             
             '[Monica]10/03/2015: socios o.p. control democrático
             
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(tabla, cadSelect) Then
+            If HayRegParaInforme(Tabla, cadSelect) Then
                 
                 '[Monica]21/05/2012: cargamos los votos si es escalona
                 If vParamAplic.Cooperativa = 10 Then
-                    If CargarVotos(tabla, cadSelect) Then
+                    If CargarVotos(Tabla, cadSelect) Then
                         cadTitulo = "Listado de Propietarios"
                         LlamarImprimir
                         Exit Sub
@@ -15698,7 +15947,7 @@ Dim vCadena As String
                         'Nombre fichero .rpt a Imprimir
                         cadNombreRPT = nomDocu
                         
-                        If CargarTemporalMiembros(tabla, cadSelect) Then
+                        If CargarTemporalMiembros(Tabla, cadSelect) Then
                             CadParam = CadParam & "pUsu=" & vUsu.Codigo & "|"
                             numParam = numParam + 1
                             ConSubInforme = True
@@ -15722,7 +15971,7 @@ Dim vCadena As String
             nHasta = txtNombre(19).Text
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-                Codigo = "{" & tabla & ".codvarie}"
+                Codigo = "{" & Tabla & ".codvarie}"
                 TipCod = "N"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad= """) Then Exit Sub
             End If
@@ -15734,7 +15983,7 @@ Dim vCadena As String
             nHasta = txtNombre(17).Text
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-                Codigo = "{" & tabla & ".codcalid}"
+                Codigo = "{" & Tabla & ".codcalid}"
                 TipCod = "N"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCalidad= """) Then Exit Sub
             End If
@@ -15753,7 +16002,7 @@ Dim vCadena As String
             If Opcion(3).Value Then cadTitulo = "Listado de Calidades"
             
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(tabla, cadSelect) Then
+            If HayRegParaInforme(Tabla, cadSelect) Then
                 LlamarImprimir
             End If
             
@@ -15767,7 +16016,7 @@ Dim vCadena As String
             nHasta = txtNombre(13).Text
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-                Codigo = "{" & tabla & ".codsocio}"
+                Codigo = "{" & Tabla & ".codsocio}"
                 TipCod = "N"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
             End If
@@ -15812,7 +16061,7 @@ Dim vCadena As String
             nHasta = txtNombre(15).Text
             If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-                Codigo = "{" & tabla & ".codvarie}"
+                Codigo = "{" & Tabla & ".codvarie}"
                 TipCod = "N"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
             End If
@@ -15832,10 +16081,10 @@ Dim vCadena As String
                 Select Case OpcionListado
                     Case 10, 14, 16
                         'Cadena para seleccion Desde y Hasta
-                        Codigo = "{" & tabla & ".fechaent}"
+                        Codigo = "{" & Tabla & ".fechaent}"
                     Case 17, 18
                         'Cadena para seleccion Desde y Hasta
-                        Codigo = "{" & tabla & ".fecalbar}"
+                        Codigo = "{" & Tabla & ".fecalbar}"
                 End Select
                 TipCod = "F"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
@@ -15988,7 +16237,7 @@ Dim vCadena As String
                     LlamarImprimir
                     
                     If MsgBox("¿ Impresión correcta para actualizar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
-                        If ActualizarRegistros(tabla, cadSelect) Then
+                        If ActualizarRegistros(Tabla, cadSelect) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
                             cmdCancel_Click (0)
                         End If
@@ -16188,7 +16437,7 @@ Dim vCadena As String
             nHasta = ""
             'Cadena para seleccion Desde y Hasta
             If Not (cDesde = "" And cHasta = "") Then
-                Codigo = "{" & tabla & ".fecpesada}"
+                Codigo = "{" & Tabla & ".fecpesada}"
                 TipCod = "F"
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
@@ -16656,11 +16905,11 @@ Dim vSQL As String
     If Not AnyadirAFormula(cadSelect, "{rfactsoc.codtipom} = """ & Mid(TextoCombo(Combo1(7)), 1, 3) & """") Then Exit Sub
     If Not AnyadirAFormula(cadFormula, "{rfactsoc.codtipom}  = """ & Mid(TextoCombo(Combo1(7)), 1, 3) & """") Then Exit Sub
      
-    tabla = "rfactsoc INNER JOIN rsocios ON rfactsoc.codsocio = rsocios.codsocio"
+    Tabla = "rfactsoc INNER JOIN rsocios ON rfactsoc.codsocio = rsocios.codsocio"
      
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-     If HayRegParaInforme(tabla, cadSelect) Then
-        B = GeneraFicheroTraspasoCoop(tabla, cadSelect)
+     If HayRegParaInforme(Tabla, cadSelect) Then
+        B = GeneraFicheroTraspasoCoop(Tabla, cadSelect)
         If B Then
             If CopiarFicheroCoop(txtcodigo(45).Text) Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
@@ -16760,10 +17009,10 @@ Dim B As Boolean
     lblProgres(4).Caption = "Comprobando datos: " & nomFich
     longitud = FileLen(nomFich)
     
-    pb9.visible = True
-    Me.pb9.Max = longitud
+    Pb9.visible = True
+    Me.Pb9.Max = longitud
     Me.Refresh
-    Me.pb9.Value = 0
+    Me.Pb9.Value = 0
 
     B = True
 
@@ -16774,7 +17023,7 @@ Dim B As Boolean
         
         B = ComprobarLinea(cad)
         
-        Me.pb9.Value = Me.pb9.Value + Len(cad)
+        Me.Pb9.Value = Me.Pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
         
@@ -16785,7 +17034,7 @@ Dim B As Boolean
     If cad <> "" Then
         I = I + 1
         
-        Me.pb9.Value = Me.pb9.Value + Len(cad)
+        Me.Pb9.Value = Me.Pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
         
@@ -16793,7 +17042,7 @@ Dim B As Boolean
         
     End If
     
-    pb9.visible = False
+    Pb9.visible = False
     lblProgres(4).Caption = ""
     lblProgres(5).Caption = ""
 
@@ -16998,10 +17247,10 @@ Dim NomFic As String
     lblProgres(4).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
     
-    pb9.visible = True
-    Me.pb9.Max = longitud
+    Pb9.visible = True
+    Me.Pb9.Max = longitud
     Me.Refresh
-    Me.pb9.Value = 0
+    Me.Pb9.Value = 0
         
     AlbaranAnterior = 0
         
@@ -17009,7 +17258,7 @@ Dim NomFic As String
     While Not EOF(NF)
         I = I + 1
         
-        Me.pb9.Value = Me.pb9.Value + Len(cad)
+        Me.Pb9.Value = Me.Pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
         
@@ -17038,7 +17287,7 @@ Dim NomFic As String
     
     ProcesarFicheroRetirada = B
     
-    pb9.visible = False
+    Pb9.visible = False
     lblProgres(4).Caption = ""
     lblProgres(5).Caption = ""
 
@@ -17296,7 +17545,7 @@ Dim vcad As String
     nHasta = txtNombre(114).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codsocio}"
+        Codigo = "{" & Tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
     End If
@@ -17308,7 +17557,7 @@ Dim vcad As String
     nHasta = txtNombre(118).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & tabla & ".codclien}"
+        Codigo = "{" & Tabla & ".codclien}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHCliente=""") Then Exit Sub
     End If
@@ -17331,7 +17580,7 @@ Dim vcad As String
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
-        Codigo = "{" & tabla & ".fecalbar}"
+        Codigo = "{" & Tabla & ".fecalbar}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
@@ -17360,6 +17609,10 @@ Dim vcad As String
         End If
     End If
 
+End Sub
+
+Private Sub CmdCan_Click(Index As Integer)
+    Unload Me
 End Sub
 
 Private Sub cmdCancel_Click(Index As Integer)
@@ -17586,10 +17839,7 @@ Dim List As Collection
     For H = 70 To 78
         Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Next H
-    For H = 80 To 122
-        Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next H
-    For H = 125 To 128
+    For H = 80 To 128
         Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Next H
     
@@ -17657,7 +17907,7 @@ Dim List As Collection
         Label3.Caption = "Reimpresión de Entradas Báscula"
         FrameEntradaBasculaVisible True, H, W
         indFrame = 1
-        tabla = "rentradas"
+        Tabla = "rentradas"
         Check2.visible = False
         Check2.Enabled = False
         Check5.visible = False
@@ -17682,13 +17932,13 @@ Dim List As Collection
     Case 11 ' Listado de entradas de pesadas
         FrameEntradaPesadaVisible True, H, W
         indFrame = 2
-        tabla = "rpesadas"
+        Tabla = "rpesadas"
     
     Case 12 ' Listado de Calidades
         FrameCalidadesVisible True, H, W
         CargarListViewOrden (2)
         indFrame = 2
-        tabla = "rcalidad"
+        Tabla = "rcalidad"
     
     Case 13 ' Listado de Socios por Seccion
         FrameSociosSeccionVisible True, H, W
@@ -17697,7 +17947,7 @@ Dim List As Collection
         Opcion(5).Value = True
         CargarListViewOrden (3)
         indFrame = 1
-        tabla = "rsocios_seccion"
+        Tabla = "rsocios_seccion"
         
         '[Monica]08/04/2015: tipo de socio por catadau
         Label2(233).visible = (vParamAplic.Cooperativa = 0)
@@ -17713,7 +17963,7 @@ Dim List As Collection
         FrameEntradaBasculaVisible True, H, W
 '        Opcion(0).Value = True
         indFrame = 1
-        tabla = "rentradas"
+        Tabla = "rentradas"
         Check2.visible = True
         Check2.Enabled = True
         Check5.visible = False
@@ -17742,7 +17992,7 @@ Dim List As Collection
         Combo1(11).ListIndex = 0
         FrameCamposVisible True, H, W
         Opcion1(0).Value = True
-        tabla = "rcampos"
+        Tabla = "rcampos"
         
         '[Monica]22/12/2011: solo para picassent pq tiene los informes en hanegadas
         Check16.Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
@@ -17775,7 +18025,7 @@ Dim List As Collection
         indFrame = 1
         Select Case OpcionListado
             Case 16
-                tabla = "rclasifica"
+                Tabla = "rclasifica"
                 Check2.visible = False
                 Check2.Enabled = False
                 Check5.visible = False
@@ -17799,7 +18049,7 @@ Dim List As Collection
                 FrameTipoAlbaran.visible = False
             
             Case 17, 18
-                tabla = "rhisfruta"
+                Tabla = "rhisfruta"
                 FrameTipo.Enabled = False
                 FrameTipo.visible = False
                 If OpcionListado = 17 Then
@@ -17918,28 +18168,28 @@ Dim List As Collection
         FrameInformeFasesVisible True, H, W
     
     Case 32
-        tabla = "rcontrol"
+        Tabla = "rcontrol"
         FrameControlDestrioVisible True, H, W
     
     Case 33
-        tabla = "rhisfruta"
+        Tabla = "rhisfruta"
         FrameGastosporConceptoVisible True, H, W
     
     Case 34
-        tabla = "rcampos"
+        Tabla = "rcampos"
         FrameCambioSocioVisible True, H, W
     
     Case 35 ' informe de comprobacion de venta fruta
-        tabla = "vtafrutacab"
+        Tabla = "vtafrutacab"
         FrameVentaFrutaVisible True, H, W
     
     Case 36 ' informe de gastos pendientes de integrar
-        tabla = "rcampos"
+        Tabla = "rcampos"
         FrameGastosCamposVisible True, H, W
         Opcion1(5).Value = True
         
     Case 37 ' Contabilizacion de gastos de campo
-        tabla = "rcampos"
+        Tabla = "rcampos"
         FrameContabGastosCamposVisible True, H, W
     
         ConexionConta
@@ -19588,39 +19838,39 @@ Dim nomCampo As String
         
         'Informe de variedades
         Case "Clase"
-            CadParam = CadParam & campo & "{" & tabla & ".codclase}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codclase}" & "|"
             CadParam = CadParam & nomCampo & " {" & "clases" & ".nomclase}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Producto""" & "|"
             numParam = numParam + 3
             
         Case "Producto"
-            CadParam = CadParam & campo & "{" & tabla & ".codprodu}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codprodu}" & "|"
             CadParam = CadParam & nomCampo & " {" & "productos" & ".nomprodu}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Clase""" & "|"
             numParam = numParam + 3
 
         'Informe de calibres
         Case "Seccion"
-            CadParam = CadParam & campo & "{" & tabla & ".codsecci}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codsecci}" & "|"
             CadParam = CadParam & nomCampo & "{rseccion.nomsecci}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Seccion""" & "|"
             numParam = numParam + 3
             
         Case "Socio"
-            CadParam = CadParam & campo & "{" & tabla & ".codsocio}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codsocio}" & "|"
             CadParam = CadParam & nomCampo & " {" & "rsocios" & ".nomsocio}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Socio""" & "|"
             numParam = numParam + 3
             
         'Informe de calidades
         Case "Variedad"
-            CadParam = CadParam & campo & "{" & tabla & ".codvarie}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codvarie}" & "|"
             CadParam = CadParam & nomCampo & "{variedades.nomvarie}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Variedad""" & "|"
             numParam = numParam + 3
             
         Case "Calidad"
-            CadParam = CadParam & campo & "{" & tabla & ".codcalid}" & "|"
+            CadParam = CadParam & campo & "{" & Tabla & ".codcalid}" & "|"
             CadParam = CadParam & nomCampo & " {" & "rcalidad" & ".nomcalid}" & "|"
             CadParam = CadParam & "pTitulo1" & "=""Calidad""" & "|"
             numParam = numParam + 3
@@ -19697,7 +19947,7 @@ Dim nomCampo As String
 
     Select Case cadgrupo
         Case "Codigo"
-            CadParam = CadParam & "Orden" & "= {" & tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".codclien}|"
@@ -19706,7 +19956,7 @@ Dim nomCampo As String
             End Select
             Tipo = "Código"
         Case "Alfabético"
-            CadParam = CadParam & "Orden" & "= {" & tabla
+            CadParam = CadParam & "Orden" & "= {" & Tabla
             Select Case OpcionListado
                 Case 10
                     CadParam = CadParam & ".nomclien}|"
@@ -22165,11 +22415,11 @@ Dim FechaEnvio As String
     End If
     Aux = Aux & " order by rsocios.codsocio "
     
-    pb7.Max = TotalRegistrosConsulta(Aux)
-    pb7.visible = True
+    Pb7.Max = TotalRegistrosConsulta(Aux)
+    Pb7.visible = True
     Label2(187).visible = True
     Label2(187).Caption = "Cargando Socios"
-    pb7.Value = 0
+    Pb7.Value = 0
     
     Set Rs = New ADODB.Recordset
     Rs.Open Aux, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -22186,7 +22436,7 @@ Dim FechaEnvio As String
         B = True
         Regs = 0
         While Not Rs.EOF And B
-            IncrementarProgresNew pb7, 1
+            IncrementarProgresNew Pb7, 1
             DoEvents
             
             Regs = Regs + 1
@@ -22240,7 +22490,7 @@ Dim FechaEnvio As String
     If Regs > 0 And B Then GeneraFicheroTraspasoROPAS = True
     Set Rs = Nothing
     Close (NFic)
-    pb7.visible = False
+    Pb7.visible = False
     Label2(187).visible = False
     DoEvents
     
@@ -22249,7 +22499,7 @@ Dim FechaEnvio As String
 EGen:
     Set Rs = Nothing
     Close (NFic)
-    pb7.visible = False
+    Pb7.visible = False
     Label2(187).visible = False
     DoEvents
     MuestraError Err.Number, Err.Description
@@ -22305,15 +22555,15 @@ Dim cad As String
             AntParcela = DBLet(Rs!Parcela, "N")
         End If
         
-        pb7.Max = TotalRegistrosConsulta(Aux)
-        pb7.visible = True
+        Pb7.Max = TotalRegistrosConsulta(Aux)
+        Pb7.visible = True
         Label2(187).visible = True
         Label2(187).Caption = "Cargando Campos"
-        pb7.Value = 0
+        Pb7.Value = 0
         
         
         While Not Rs.EOF And B
-            IncrementarProgresNew pb7, 1
+            IncrementarProgresNew Pb7, 1
             DoEvents
             
             Regs = Regs + 1
@@ -23527,16 +23777,16 @@ Dim vSQL As String
          If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio= """) Then Exit Sub
     End If
      
-    tabla = "rcampos INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio and rcampos.fecbajas is null  "
-    tabla = "(" & tabla & ") INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie "
-    tabla = "(" & tabla & ") INNER JOIN productos ON variedades.codprodu = productos.codprodu "
-    tabla = "(" & tabla & ") INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
-    tabla = tabla & " and grupopro.codgrupo = 5 " 'grupo de oliva
+    Tabla = "rcampos INNER JOIN rsocios ON rcampos.codsocio = rsocios.codsocio and rcampos.fecbajas is null  "
+    Tabla = "(" & Tabla & ") INNER JOIN variedades ON rcampos.codvarie = variedades.codvarie "
+    Tabla = "(" & Tabla & ") INNER JOIN productos ON variedades.codprodu = productos.codprodu "
+    Tabla = "(" & Tabla & ") INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
+    Tabla = Tabla & " and grupopro.codgrupo = 5 " 'grupo de oliva
     
       
       'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    If HayRegParaInforme(tabla, cadSelect) Then
-        B = GeneraFicheroTraspasoAlmazara(tabla, cadSelect)
+    If HayRegParaInforme(Tabla, cadSelect) Then
+        B = GeneraFicheroTraspasoAlmazara(Tabla, cadSelect)
         If B Then
             If CopiarFicheroDatosAlmz() Then
                 MsgBox "Proceso realizado correctamente", vbExclamation
@@ -23963,13 +24213,13 @@ Dim KilosAnt As Long
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb5.Max = TotalRegistrosConsulta(Sql)
-    pb5.visible = True
+    Pb5.Max = TotalRegistrosConsulta(Sql)
+    Pb5.visible = True
     Label2(136).visible = True
-    pb5.Value = 0
+    Pb5.Value = 0
     
     While Not Rs.EOF
-        IncrementarProgresNew pb5, 1
+        IncrementarProgresNew Pb5, 1
         DoEvents
         
         KilosAnt = 0
@@ -24000,12 +24250,12 @@ Dim KilosAnt As Long
     
     CargarTemporalCampos = True
     
-    pb5.visible = False
+    Pb5.visible = False
     Label2(136).visible = False
     Exit Function
     
 eCargarTemporalCampos:
-    pb5.visible = False
+    Pb5.visible = False
     MuestraError "Cargando temporal campos", Err.Description
 End Function
 
@@ -24417,15 +24667,15 @@ Dim Sql3 As String
             AntCodconse = DBLet(Rs!CodConse, "N")
         End If
         
-        pb7.Max = TotalRegistrosConsulta(Aux)
-        pb7.visible = True
+        Pb7.Max = TotalRegistrosConsulta(Aux)
+        Pb7.visible = True
         Label2(187).visible = True
         Label2(187).Caption = "Cargando Campos"
-        pb7.Value = 0
+        Pb7.Value = 0
         
         
         While Not Rs.EOF And B
-            IncrementarProgresNew pb7, 1
+            IncrementarProgresNew Pb7, 1
             DoEvents
             
             Regs = Regs + 1
@@ -24876,11 +25126,11 @@ Dim Sql4 As String
     Sql = Sql & " order by 1, 2"
     
     
-    pb11.visible = True
+    Pb11.visible = True
     Label2(267).visible = True
     
     Sql4 = "select count(*) from (" & Sql & ") aaaa"
-    CargarProgres pb11, DevuelveValor(Sql4)
+    CargarProgres Pb11, DevuelveValor(Sql4)
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -24889,7 +25139,7 @@ Dim Sql4 As String
     Sql2 = Sql2 & "canaforo, nroarbol) values "
     
     While Not Rs.EOF
-        IncrementarProgres pb11, 1
+        IncrementarProgres Pb11, 1
     
         SocioAct = DBLet(Rs.Fields(0).Value, "N")
         CampoAct = DBLet(Rs.Fields(1).Value, "N")
@@ -24992,13 +25242,13 @@ Dim Sql4 As String
     
     CargarTemporal7 = True
     
-    pb11.visible = False
+    Pb11.visible = False
     Label2(267).visible = False
     
     Exit Function
     
 eCargarTemporal:
-    pb11.visible = False
+    Pb11.visible = False
     Label2(267).visible = False
     MuestraError "Cargando temporal", Err.Description
 End Function

@@ -510,7 +510,7 @@ Dim Tipo As String
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim NumCampo As String
 
@@ -701,8 +701,53 @@ Dim devuelve As String
         If HayRegParaInforme("rcampos", cadSelect) Then
             LlamarImprimir
         End If
+        
+        '[Monica]08/05/2017: para el caso de Coopic, preguntamos
+        If vParamAplic.Cooperativa = 16 Then
+            If Opcion1(1).Value And Opcion(1).Value Then ' en el caso de baja de campos
+            
+                Dim vSql As String
+                
+            
+                vSql = "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
+                If MsgBox(vSql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+                    If InsertarMovimientoBajaCampo(cadSelect) Then
+                    
+                    End If
+                End If
+                
+            End If
+        End If
     End If
 End Sub
+
+Private Function InsertarMovimientoBajaCampo(vSelect As String) As Boolean
+Dim Sql As String
+Dim NumLin As Integer
+
+    On Error GoTo eInsertarMovimeientoBaja
+
+
+    conn.BeginTrans
+    ConnConta.BeginTrans
+    
+    Sql = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
+    NumLin = DevuelveValor(Sql)
+    
+    Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa) select codsocio, @NumF:=@Numf + 1, codcampo,supcoope," & DBSet(txtcodigo(7).Text, "F")
+    Sql = Sql & "round(supcoope * 3) importe," & DBSet(txtcodigo(8).Text, "T") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ")"
+    
+    conn.Execute Sql
+    
+    conn.CommitTrans
+    ConnConta.CommitTrans
+    
+eInsertarMovimeientoBaja:
+    MuestraError Err.Number, "Insertando movimientos de Baja", Err.Description
+    conn.RollbackTrans
+    ConnConta.RollbackTrans
+End Function
+
 
 Private Sub cmdBajar_Click()
 'Bajar el item seleccionado del listview2
@@ -804,7 +849,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -881,26 +926,26 @@ Private Sub imgFec_Click(Index As Integer)
     frmC.Top = dalt + imgFec(Index).Parent.Top + imgFec(Index).Height + menu - 40
 
     ' *** repasar si el camp es txtAux o Text1 ***
-    If Index = 1 Then indice = Index + 3
-    If Index = 0 Then indice = Index + 2
-    If Index = 3 Then indice = Index + 6
-    If Index = 2 Then indice = Index + 5
-    If Index = 4 Then indice = 1
+    If Index = 1 Then Indice = Index + 3
+    If Index = 0 Then Indice = Index + 2
+    If Index = 3 Then Indice = Index + 6
+    If Index = 2 Then Indice = Index + 5
+    If Index = 4 Then Indice = 1
     
-    imgFec(0).Tag = indice '<===
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    imgFec(0).Tag = Indice '<===
+    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtcodigo(Indice) '<===
     ' ********************************************
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub Opcion_Click(Index As Integer)
@@ -973,14 +1018,14 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -1011,12 +1056,12 @@ End Sub
 
 Private Sub MandaBusquedaPrevia(CadB As String)
 'Carga el formulario frmBuscaGrid con los valores correspondientes
-Dim Cad As String
+Dim cad As String
 Dim Tabla As String
 Dim Titulo As String
 
     'Llamamos a al form
-    Cad = ""
+    cad = ""
     Conexion = cAgro    'Conexión a BD: Ariges
 '    Select Case OpcionListado
 '        Case 7 'Traspaso de Almacenes
@@ -1036,12 +1081,12 @@ Dim Titulo As String
 '            titulo = "Articulos"
 '    End Select
           
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vtabla = Tabla
-        frmB.vSQL = CadB
+        frmB.vSql = CadB
         HaDevueltoDatos = False
         '###A mano
         'frmB.vDevuelve = "0|1|"
@@ -1293,8 +1338,8 @@ Dim nomCampo As String
 
 End Function
 
-Private Sub AbrirFrmCalidad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmCalidad(Indice As Integer)
+    indCodigo = Indice
     Set frmCal = New frmManCalidades
     frmCal.DatosADevolverBusqueda = "2|3|"
 '    frmCli.DeConsulta = True
@@ -1303,8 +1348,8 @@ Private Sub AbrirFrmCalidad(indice As Integer)
     Set frmCal = Nothing
 End Sub
 
-Private Sub AbrirFrmSeccion(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSeccion(Indice As Integer)
+    indCodigo = Indice
     Set frmSec = New frmManSeccion
     frmSec.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
@@ -1313,8 +1358,8 @@ Private Sub AbrirFrmSeccion(indice As Integer)
     Set frmSec = Nothing
 End Sub
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
@@ -1323,8 +1368,8 @@ Private Sub AbrirFrmSocios(indice As Integer)
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
