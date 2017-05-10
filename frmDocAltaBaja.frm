@@ -513,6 +513,9 @@ Dim Contabilizada As Byte
 Dim Indice As Integer
 
 Dim NumCampo As String
+Dim vSeccion As CSeccion
+
+Dim frmIns As frmIntTesorPago
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -545,18 +548,18 @@ Dim devuelve As String
     If Opcion(0).Value And Opcion1(0).Value Then
         cadTitulo = "Documento Alta de Socios"
         
-        If txtcodigo(4).Text <> "" Then
-            CadParam = CadParam & "pFecha=""" & txtcodigo(4).Text & """|"
+        If txtCodigo(4).Text <> "" Then
+            CadParam = CadParam & "pFecha=""" & txtCodigo(4).Text & """|"
             numParam = numParam + 1
         End If
         
-        CadParam = CadParam & "pImporte=""" & txtcodigo(5).Text & """|"
+        CadParam = CadParam & "pImporte=""" & txtCodigo(5).Text & """|"
         numParam = numParam + 1
         
         CadParam = CadParam & "pBanco=" & Check1(0).Value & "|"
         numParam = numParam + 1
         
-        CadParam = CadParam & "pObserva=""" & txtcodigo(3).Text & """|"
+        CadParam = CadParam & "pObserva=""" & txtCodigo(3).Text & """|"
         numParam = numParam + 1
         
         '[Monica]13/03/2014: distinguimos entre escalona y utxera y el resto
@@ -578,10 +581,10 @@ Dim devuelve As String
     If Opcion(1).Value And Opcion1(0).Value Then
         cadTitulo = "Documento Alta de Campos"
     
-        CadParam = CadParam & "pFecha=""" & txtcodigo(2).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(2).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pFechaCons=""" & txtcodigo(9).Text & """|"
+        CadParam = CadParam & "pFechaCons=""" & txtCodigo(9).Text & """|"
         numParam = numParam + 1
     
         If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
@@ -599,10 +602,10 @@ Dim devuelve As String
     
         cadTitulo = "Documento Baja de Socios"
         
-        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(7).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtCodigo(8).Text & """|"
         numParam = numParam + 1
         
         '[Monica]13/03/2014: para el caso de escalona y utxera enlazamos con el codpropiet del campo
@@ -622,10 +625,10 @@ Dim devuelve As String
     If Opcion(1).Value And Opcion1(1).Value Then
         cadTitulo = "Documento Baja de Campos"
          
-        CadParam = CadParam & "pFecha=""" & txtcodigo(7).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(7).Text & """|"
         numParam = numParam + 1
     
-        CadParam = CadParam & "pCausas=""" & txtcodigo(8).Text & """|"
+        CadParam = CadParam & "pCausas=""" & txtCodigo(8).Text & """|"
         numParam = numParam + 1
         
         
@@ -642,7 +645,7 @@ Dim devuelve As String
     
     'transmision de campos
     If Opcion1(2).Value Then
-        If txtcodigo(0).Text = "" Then
+        If txtCodigo(0).Text = "" Then
             MsgBox "Debe introducir un Socio Receptor. Reintroduzca.", vbExclamation
             Exit Sub
         End If
@@ -659,10 +662,10 @@ Dim devuelve As String
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod) Then Exit Sub
         End If
         
-        CadParam = CadParam & "pFecha=""" & txtcodigo(1).Text & """|"
+        CadParam = CadParam & "pFecha=""" & txtCodigo(1).Text & """|"
         numParam = numParam + 1
         
-        If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtcodigo(0).Text) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtCodigo(0).Text) Then Exit Sub
 
         Set frmMens = New frmMensajes
         
@@ -692,6 +695,26 @@ Dim devuelve As String
     
     frmImprimir.NombreRPT = nomDocu
     
+    Dim vTipoMov As CTiposMov
+    Dim Contador As Long
+    Dim CodTipoMov As String
+    If vParamAplic.Cooperativa = 16 And Opcion1(1).Value And Opcion(1).Value Then ' en el caso de baja de campos
+        CodTipoMov = "DOC"
+        Set vTipoMov = New CTiposMov
+        If vTipoMov.Leer(CodTipoMov) Then
+            'contador del albaran
+            Contador = vTipoMov.ConseguirContador(CodTipoMov)
+            
+            CadParam = CadParam & "|pContador=" & Contador & "|"
+            numParam = numParam + 1
+    '[Monica]03/01/2012: subo esta instruccion arriba dentro de : if ContCMR = "" then
+    '        vTipoMov.IncrementarContador (CodTipoMov)
+        
+            Set vTipoMov = Nothing
+        End If
+    End If
+    
+    
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If ((Opcion(0) And Opcion1(0)) Or (Opcion(0) And Opcion1(1))) And (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) Then
         If HayRegParaInforme("rsocios", cadSelect) Then
@@ -706,60 +729,106 @@ Dim devuelve As String
         If vParamAplic.Cooperativa = 16 Then
             If Opcion1(1).Value And Opcion(1).Value Then ' en el caso de baja de campos
             
-                Dim vSql As String
-                
-            
-                vSql = "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
-                If MsgBox(vSql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
-                    If InsertarMovimientoBajaCampo(cadSelect) Then
-                    
+                Dim vSQL As String
+                ' solo si mem han seleccionado campos
+                If NumCod <> "" Then
+                    vSQL = "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
+                    If MsgBox(vSQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+                        If InsertarMovimientoBajaCampo(cadSelect, Contador) Then
+                            MsgBox "Proceso realizado correctamente.", vbExclamation
+                        End If
                     End If
                 End If
-                
             End If
         End If
     End If
 End Sub
 
-Private Function InsertarMovimientoBajaCampo(vSelect As String) As Boolean
+Private Function InsertarMovimientoBajaCampo(vSelect As String, vCont As Long) As Boolean
 Dim Sql As String
+Dim Sql2 As String
 Dim NumLin As Integer
+Dim vMens As String
+Dim vTipoMov As CTiposMov
+    
+    On Error GoTo eInsertarMovimientoBaja
 
-    On Error GoTo eInsertarMovimeientoBaja
+    
+    InsertarMovimientoBajaCampo = False
 
+    Set vSeccion = New CSeccion
 
-    conn.BeginTrans
-    ConnConta.BeginTrans
+    If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
+        If vSeccion.AbrirConta Then
+
+            conn.BeginTrans
+            ConnConta.BeginTrans
+            
+            Sql = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
+            NumLin = DevuelveValor(Sql)
+            
+            
+            Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc ) "
+            Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supcoope," & DBSet(txtCodigo(7).Text, "F")
+            Sql2 = Sql2 & ",round(supcoope * 3, 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
+            Sql2 = Sql2 & " where " & vSelect
+            
+            conn.Execute Sql & Sql2
+            
+            ' insertamos en tesoreria y el asiento
+            ContabilizadoOk = False
+            
+            
+            Set frmIns = New frmIntTesorPago
+            
+            frmIns.CadTag = Sql2
+            frmIns.NumCod = txtCodigo(7).Text & "|" & NumCod & "|" & vCont & "|"
+            frmIns.Campos = NumCampo
+            frmIns.Show vbModal
+            
+            Set frmIns = Nothing
+            
+            If ContabilizadoOk Then
+                Sql = "update rsocios_movim set intconta = 1 where (codsocio, numlinea) in ("
+                Sql = Sql & "select codsocio, @NumF:=@Numf + 1 from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
+                Sql = Sql & " where " & vSelect & ")"
+            
+                conn.Execute Sql
+            
+                Sql = "update rcampos set fecbajas = " & DBSet(txtCodigo(7).Text, "F")
+                Sql = Sql & " where codcampo in (" & NumCampo & ")"
+                conn.Execute Sql
+            
+                conn.CommitTrans
+                ConnConta.CommitTrans
+                
+                InsertarMovimientoBajaCampo = True
+            Else
+                conn.RollbackTrans
+                ConnConta.RollbackTrans
+            
+                Set vTipoMov = New CTiposMov
+                vTipoMov.DevolverContador "DOC", vCont
+                Set vTipoMov = Nothing
+            End If
+        End If
+    End If
+    Set vSeccion = Nothing
+    Exit Function
     
-    Sql = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
-    NumLin = DevuelveValor(Sql)
     
-    Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa) select codsocio, @NumF:=@Numf + 1, codcampo,supcoope," & DBSet(txtcodigo(7).Text, "F")
-    Sql = Sql & "round(supcoope * 3) importe," & DBSet(txtcodigo(8).Text, "T") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ")"
-    
-    conn.Execute Sql
-    
-    conn.CommitTrans
-    ConnConta.CommitTrans
-    
-eInsertarMovimeientoBaja:
+eInsertarMovimientoBaja:
     MuestraError Err.Number, "Insertando movimientos de Baja", Err.Description
     conn.RollbackTrans
     ConnConta.RollbackTrans
+    
+    Set vTipoMov = New CTiposMov
+    vTipoMov.DevolverContador "DOC", vCont
+    Set vTipoMov = Nothing
 End Function
-
-
-Private Sub cmdBajar_Click()
-'Bajar el item seleccionado del listview2
-'    BajarItemList Me.ListView1
-End Sub
 
 Private Sub cmdCancel_Click(Index As Integer)
     Unload Me
-End Sub
-
-Private Sub cmdSubir_Click()
-'    SubirItemList Me.ListView1
 End Sub
 
 Private Sub Form_Activate()
@@ -767,10 +836,10 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 12 ' Listado de Calidades
-                PonerFoco txtcodigo(18)
+                PonerFoco txtCodigo(18)
         
             Case 13 ' Listado de Socios por seccion
-                PonerFoco txtcodigo(8)
+                PonerFoco txtCodigo(8)
                 
         End Select
     End If
@@ -849,7 +918,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -870,7 +939,7 @@ Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -894,7 +963,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 16, 17 'CALIDADES
             AbrirFrmCalidad (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub ListView1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -933,13 +1002,13 @@ Private Sub imgFec_Click(Index As Integer)
     If Index = 4 Then Indice = 1
     
     imgFec(0).Tag = Indice '<===
-    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(Indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 End Sub
 
@@ -992,7 +1061,7 @@ Private Sub Opcion1_Click(Index As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1028,7 +1097,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -1037,19 +1106,19 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 0 ' socio receptor
-            If txtcodigo(Index).Text <> "" Then
-                PonerFormatoEntero txtcodigo(Index)
-                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then
+                PonerFormatoEntero txtCodigo(Index)
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
             End If
             
         Case 1, 2, 4, 7 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
 
         Case 9 ' fechas
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), True
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), True
 
         Case 5 ' importe
-            If txtcodigo(Index).Text <> "" Then PonerFormatoDecimal txtcodigo(Index), 1
+            If txtCodigo(Index).Text <> "" Then PonerFormatoDecimal txtCodigo(Index), 1
             
     End Select
 End Sub
@@ -1086,7 +1155,7 @@ Dim Titulo As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vtabla = Tabla
-        frmB.vSql = CadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         'frmB.vDevuelve = "0|1|"
@@ -1307,36 +1376,6 @@ End Select
 
 End Function
 
-Private Function PonerOrden(cadgrupo As String) As Byte
-Dim campo As String
-Dim nomCampo As String
-
-    PonerOrden = 0
-
-    Select Case cadgrupo
-        Case "Codigo"
-            CadParam = CadParam & "Orden" & "= {" & Tabla
-            Select Case OpcionListado
-                Case 10
-                    CadParam = CadParam & ".codclien}|"
-                Case 11
-                    CadParam = CadParam & ".codprove}|"
-            End Select
-            Tipo = "Código"
-        Case "Alfabético"
-            CadParam = CadParam & "Orden" & "= {" & Tabla
-            Select Case OpcionListado
-                Case 10
-                    CadParam = CadParam & ".nomclien}|"
-                Case 11
-                    CadParam = CadParam & ".nomprove}|"
-            End Select
-            Tipo = "Alfabético"
-    End Select
-    
-    numParam = numParam + 1
-
-End Function
 
 Private Sub AbrirFrmCalidad(Indice As Integer)
     indCodigo = Indice
@@ -1543,9 +1582,9 @@ End Function
 
 Private Sub PonerFocoFrame()
 
-    If Me.FrameAltaCampo.visible Then PonerFoco txtcodigo(2)
-    If Me.FrameAltaSocio.visible Then PonerFoco txtcodigo(4)
-    If Me.FrameBajaSocio.visible Then PonerFoco txtcodigo(7)
-    If Me.FrameTransmision.visible Then PonerFoco txtcodigo(1)
+    If Me.FrameAltaCampo.visible Then PonerFoco txtCodigo(2)
+    If Me.FrameAltaSocio.visible Then PonerFoco txtCodigo(4)
+    If Me.FrameBajaSocio.visible Then PonerFoco txtCodigo(7)
+    If Me.FrameTransmision.visible Then PonerFoco txtCodigo(1)
 
 End Sub
