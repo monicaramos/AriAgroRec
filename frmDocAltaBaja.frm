@@ -772,7 +772,7 @@ Dim vTipoMov As CTiposMov
             Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supcoope," & DBSet(txtCodigo(7).Text, "F")
             Sql2 = Sql2 & ",round(supcoope * 3, 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
             Sql2 = Sql2 & " where " & vSelect
-            
+
             conn.Execute Sql & Sql2
             
             ' insertamos en tesoreria y el asiento
@@ -792,8 +792,9 @@ Dim vTipoMov As CTiposMov
                 Sql = "update rsocios_movim set intconta = 1 where (codsocio, numlinea) in ("
                 Sql = Sql & "select codsocio, @NumF:=@Numf + 1 from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
                 Sql = Sql & " where " & vSelect & ")"
-            
+
                 conn.Execute Sql
+            
             
                 Sql = "update rcampos set fecbajas = " & DBSet(txtCodigo(7).Text, "F")
                 Sql = Sql & " where codcampo in (" & NumCampo & ")"

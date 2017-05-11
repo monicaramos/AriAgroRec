@@ -246,7 +246,6 @@ Dim cadWHERE As String
     End If
     
     ContabilizarPagos (CadTag)
-    BorrarTMPErrComprob
     DesBloqueoManual ("CONTES") 'CONtabilizacion a TESoreria
     
     Pb1.visible = False
@@ -292,7 +291,7 @@ Dim List As Collection
     Pb1.visible = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 End Sub
@@ -500,8 +499,6 @@ Dim cadMen As String
     B = InsertarEnTesoreriaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos)
     IncrementarProgres Me.Pb1, 80
     Me.Refresh
-    If Not B Then Exit Sub
-    
     
     If Not B Then
         MuestraError Err.Number, "Contabilizar pagos.", cadMen
