@@ -9809,7 +9809,7 @@ Dim CadenaInsertFaclin2 As String
 '                              si E.D.  ------------> tipo retencion = 4 (act.empresarial)
                     If Rs!TipoIVA = IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "2"
                     If Rs!TipoIVA <> IvaRea And Rs!TipoIRPF = 0 Then Sql = Sql & "1"
-                    If Rs!TipoIRPF = 1 Then Sql = Sql & "4"
+                    If Rs!TipoIRPF = 1 Or Rs!TipoIRPF = 3 Then Sql = Sql & "4"
                     
                 Else
                     Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0"
