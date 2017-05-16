@@ -15,6 +15,112 @@ Begin VB.Form frmMensajes
    ScaleWidth      =   14160
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameNSeries 
+      Height          =   5000
+      Left            =   0
+      TabIndex        =   3
+      Top             =   -45
+      Width           =   6975
+      Begin VB.CommandButton cmdSelTodos 
+         Caption         =   "&Todos"
+         Height          =   315
+         Left            =   720
+         TabIndex        =   8
+         Top             =   4320
+         Visible         =   0   'False
+         Width           =   825
+      End
+      Begin VB.CommandButton cmdDeselTodos 
+         Caption         =   "&Ninguno"
+         Height          =   315
+         Left            =   1680
+         TabIndex        =   7
+         Top             =   4320
+         Visible         =   0   'False
+         Width           =   825
+      End
+      Begin VB.CommandButton CmdCancelar 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5040
+         TabIndex        =   6
+         Top             =   4320
+         Width           =   975
+      End
+      Begin VB.CommandButton cmdAceptarNSeries 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   3960
+         TabIndex        =   4
+         Top             =   4320
+         Width           =   975
+      End
+      Begin MSComctlLib.ListView ListView2 
+         Height          =   3015
+         Left            =   720
+         TabIndex        =   5
+         Top             =   840
+         Width           =   4020
+         _ExtentX        =   7091
+         _ExtentY        =   5318
+         View            =   3
+         LabelEdit       =   1
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         Checkboxes      =   -1  'True
+         GridLines       =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         Appearance      =   1
+         NumItems        =   2
+         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            Object.Width           =   2540
+         EndProperty
+         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
+            SubItemIndex    =   1
+            Object.Width           =   2540
+         EndProperty
+      End
+      Begin VB.Image imgCheck1 
+         Height          =   240
+         Index           =   0
+         Left            =   720
+         Picture         =   "frmMensajes.frx":000C
+         Top             =   4185
+         Visible         =   0   'False
+         Width           =   240
+      End
+      Begin VB.Image imgCheck1 
+         Height          =   240
+         Index           =   1
+         Left            =   1080
+         Picture         =   "frmMensajes.frx":0156
+         Top             =   4185
+         Visible         =   0   'False
+         Width           =   240
+      End
+      Begin VB.Label Label7 
+         Caption         =   "Empresas en el sistema"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   495
+         Index           =   1
+         Left            =   720
+         TabIndex        =   16
+         Top             =   240
+         Visible         =   0   'False
+         Width           =   5295
+      End
+   End
    Begin VB.Frame FrameCobrosPtes 
       Height          =   4935
       Left            =   0
@@ -38,7 +144,7 @@ Begin VB.Form frmMensajes
          Left            =   150
          MultiLine       =   -1  'True
          TabIndex        =   9
-         Text            =   "frmMensajes.frx":000C
+         Text            =   "frmMensajes.frx":02A0
          Top             =   210
          Width           =   6615
       End
@@ -400,7 +506,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0012
+         Picture         =   "frmMensajes.frx":02A6
          Top             =   5160
          Width           =   240
       End
@@ -408,7 +514,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":015C
+         Picture         =   "frmMensajes.frx":03F0
          Top             =   5160
          Width           =   240
       End
@@ -478,7 +584,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   240
-         Picture         =   "frmMensajes.frx":02A6
+         Picture         =   "frmMensajes.frx":053A
          Top             =   5160
          Width           =   240
       End
@@ -486,7 +592,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   600
-         Picture         =   "frmMensajes.frx":03F0
+         Picture         =   "frmMensajes.frx":0684
          Top             =   5160
          Width           =   240
       End
@@ -593,7 +699,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":053A
+         Picture         =   "frmMensajes.frx":07CE
          Top             =   5160
          Width           =   240
       End
@@ -601,7 +707,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0684
+         Picture         =   "frmMensajes.frx":0918
          Top             =   5160
          Width           =   240
       End
@@ -998,7 +1104,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":07CE
+         Picture         =   "frmMensajes.frx":0A62
          Top             =   5160
          Width           =   240
       End
@@ -1006,7 +1112,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0918
+         Picture         =   "frmMensajes.frx":0BAC
          Top             =   5160
          Width           =   240
       End
@@ -1219,7 +1325,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0A62
+         Picture         =   "frmMensajes.frx":0CF6
          Top             =   6960
          Width           =   240
       End
@@ -1227,7 +1333,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0BAC
+         Picture         =   "frmMensajes.frx":0E40
          Top             =   6960
          Width           =   240
       End
@@ -1921,7 +2027,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image1 
          Height          =   480
          Left            =   210
-         Picture         =   "frmMensajes.frx":0CF6
+         Picture         =   "frmMensajes.frx":0F8A
          Top             =   180
          Width           =   480
       End
@@ -2156,7 +2262,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":1138
+         Picture         =   "frmMensajes.frx":13CC
          Top             =   5160
          Width           =   240
       End
@@ -2164,7 +2270,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":1282
+         Picture         =   "frmMensajes.frx":1516
          Top             =   5160
          Width           =   240
       End
@@ -2185,112 +2291,6 @@ Begin VB.Form frmMensajes
          TabIndex        =   83
          Top             =   270
          Width           =   6495
-      End
-   End
-   Begin VB.Frame FrameNSeries 
-      Height          =   5000
-      Left            =   0
-      TabIndex        =   3
-      Top             =   -45
-      Width           =   6975
-      Begin VB.CommandButton cmdSelTodos 
-         Caption         =   "&Todos"
-         Height          =   315
-         Left            =   720
-         TabIndex        =   8
-         Top             =   4320
-         Visible         =   0   'False
-         Width           =   825
-      End
-      Begin VB.CommandButton cmdDeselTodos 
-         Caption         =   "&Ninguno"
-         Height          =   315
-         Left            =   1680
-         TabIndex        =   7
-         Top             =   4320
-         Visible         =   0   'False
-         Width           =   825
-      End
-      Begin VB.CommandButton CmdCancelar 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5040
-         TabIndex        =   6
-         Top             =   4320
-         Width           =   975
-      End
-      Begin VB.CommandButton cmdAceptarNSeries 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   3960
-         TabIndex        =   4
-         Top             =   4320
-         Width           =   975
-      End
-      Begin MSComctlLib.ListView ListView2 
-         Height          =   3015
-         Left            =   720
-         TabIndex        =   5
-         Top             =   840
-         Width           =   4020
-         _ExtentX        =   7091
-         _ExtentY        =   5318
-         View            =   3
-         LabelEdit       =   1
-         LabelWrap       =   -1  'True
-         HideSelection   =   -1  'True
-         Checkboxes      =   -1  'True
-         GridLines       =   -1  'True
-         _Version        =   393217
-         ForeColor       =   -2147483640
-         BackColor       =   -2147483643
-         Appearance      =   1
-         NumItems        =   2
-         BeginProperty ColumnHeader(1) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            Object.Width           =   2540
-         EndProperty
-         BeginProperty ColumnHeader(2) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
-            SubItemIndex    =   1
-            Object.Width           =   2540
-         EndProperty
-      End
-      Begin VB.Image imgCheck1 
-         Height          =   240
-         Index           =   0
-         Left            =   720
-         Picture         =   "frmMensajes.frx":13CC
-         Top             =   4185
-         Visible         =   0   'False
-         Width           =   240
-      End
-      Begin VB.Image imgCheck1 
-         Height          =   240
-         Index           =   1
-         Left            =   1080
-         Picture         =   "frmMensajes.frx":1516
-         Top             =   4185
-         Visible         =   0   'False
-         Width           =   240
-      End
-      Begin VB.Label Label7 
-         Caption         =   "Empresas en el sistema"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   15.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   495
-         Index           =   1
-         Left            =   720
-         TabIndex        =   16
-         Top             =   240
-         Visible         =   0   'False
-         Width           =   5295
       End
    End
    Begin VB.Frame FrameErrores 
@@ -2687,6 +2687,8 @@ Public OpcionMensaje As Byte
 
 '66 .- Mostramos el texto que se va a imprimir en el informe de campos/huerto de catadau
 
+'67 .- Seleccionamos los socios a facturar
+
 Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
@@ -3054,7 +3056,7 @@ Dim c1 As String * 10, c2 As String * 10, c3 As String * 10
             Seleccionados = 0
         Next J
                                                                                                  '[Monica]11/11/2013: castelduc
-    ElseIf OpcionMensaje = 8 Or OpcionMensaje = 9 Or OpcionMensaje = 17 Or OpcionMensaje = 42 Or OpcionMensaje = 55 Then
+    ElseIf OpcionMensaje = 8 Or OpcionMensaje = 9 Or OpcionMensaje = 17 Or OpcionMensaje = 42 Or OpcionMensaje = 55 Or OpcionMensaje = 67 Then
         'concatenar todos los clientes seleccionados para imprimir etiquetas
         If OpcionMensaje = 17 Then
             
@@ -3458,7 +3460,7 @@ Dim OK As Boolean
             CargarCamposSocio 2
             If campo <> "" Then SituarCampoSocio CLng(campo)
             
-        Case 8, 9, 17, 42, 55 'Etiquetas de clientes/Proveedores/Socios
+        Case 8, 9, 17, 42, 55, 67 'Etiquetas de clientes/Proveedores/Socios
             CargarListaClientes
         
         Case 10 'Errores al contabilizar facturas
@@ -3572,7 +3574,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -3681,13 +3683,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -3726,7 +3728,7 @@ On Error Resume Next
             Me.cmdSelTodos.visible = True
             Me.cmdDeselTodos.visible = True
             
-        Case 9, 42, 55  'Etiquetas de Socios
+        Case 9, 42, 55, 67  'Etiquetas de Socios
             PonerFrameNSeriesVisible True, H, W
             Me.Caption = "Socios"
             PulsadoSalir = False
@@ -3741,7 +3743,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -3759,7 +3761,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -3803,7 +3805,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.CmdSalir
+            PonerFocoBtn Me.cmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -3980,7 +3982,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -4074,47 +4076,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 8800
-            Me.cmdAceptarCobros.Top = 4000
-            Me.cmdAceptarCobros.Left = 4200
+            Me.CmdAceptarCobros.Top = 4000
+            Me.CmdAceptarCobros.Left = 4200
         Case 5 'Componentes
             W = 6000
             H = 5000
-            Me.cmdAceptarCobros.Left = 4000
+            Me.CmdAceptarCobros.Left = 4000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 7000
             H = 6000
-            Me.cmdAceptarCobros.Top = 5400
-            Me.cmdAceptarCobros.Left = 4600
+            Me.CmdAceptarCobros.Top = 5400
+            Me.CmdAceptarCobros.Left = 4600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             If OpcionMensaje = 12 Then
-                Me.cmdCancelarCobros.Top = 5300
-                Me.cmdCancelarCobros.Left = 4600
-                Me.cmdAceptarCobros.Left = 3300
+                Me.CmdCancelarCobros.Top = 5300
+                Me.CmdCancelarCobros.Left = 4600
+                Me.CmdAceptarCobros.Left = 3300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 3400
-                Me.cmdAceptarCobros.Caption = "&SI"
-                Me.cmdCancelarCobros.Caption = "&NO"
+                Me.CmdAceptarCobros.Caption = "&SI"
+                Me.CmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 8400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 4900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 4900
             
-            Me.cmdCancelarCobros.Top = 5300
-            Me.cmdCancelarCobros.Left = 4600
-            Me.cmdAceptarCobros.Left = 3300
+            Me.CmdCancelarCobros.Top = 5300
+            Me.CmdCancelarCobros.Left = 4600
+            Me.CmdAceptarCobros.Left = 3300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 3400
-            Me.cmdAceptarCobros.Caption = "&SI"
-            Me.cmdCancelarCobros.Caption = "&NO"
+            Me.CmdAceptarCobros.Caption = "&SI"
+            Me.CmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -4123,7 +4125,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -4523,7 +4525,13 @@ Dim Sql As String, Men As String
     
     Case 55
         Sql = cadWHERE
-    
+        
+    Case 67
+        Sql = cadWHERE
+        If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
+            Sql = Sql & " ORDER BY rsocios.nomsocio "
+            Men = "Socio"
+        End If
     
     End Select
     
@@ -4551,6 +4559,9 @@ Dim Sql As String, Men As String
              ItmX.Checked = False
              ItmX.SubItems(1) = Rs.Fields(1).Value 'Nom clien/prove
              ItmX.SubItems(2) = Rs.Fields(2).Value 'NIF clien/prove
+             
+             If OpcionMensaje = 67 Then ItmX.Checked = True
+             
              Rs.MoveNext
         Wend
     End If
@@ -6689,7 +6700,7 @@ Dim Nregs As Integer
     Sql = Sql & " and fechabaja is null order by 1 "
     
     Nregs = TotalRegistrosConsulta(Sql)
-    CargarProgres pb1, Nregs
+    CargarProgres Pb1, Nregs
 
     
     Set Rs = New ADODB.Recordset
@@ -6698,7 +6709,7 @@ Dim Nregs As Integer
     CadContadores = ""
     
     While Not Rs.EOF And Not PulsadoSalir
-        IncrementarProgres pb1, 1
+        IncrementarProgres Pb1, 1
         
         Label13.Caption = "Procesando contador: " & DBLet(Rs!Hidrante, "T")
         DoEvents
