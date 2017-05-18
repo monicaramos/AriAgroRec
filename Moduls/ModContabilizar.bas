@@ -3589,35 +3589,6 @@ Dim ImpREC As Currency
         End If
         
         vBaseIva(NumeroIVA) = vBaseIva(NumeroIVA) - ImpLinea   'Para ajustar el importe y que no haya descuadre
-        HayQueAjustar = False
-        If vBaseIva(NumeroIVA) <> 0 Then
-            'falta importe.
-            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
-            Rs.MoveNext
-            If Rs.EOF Then
-                'No hay mas lineas
-                'Hay que ajustar SI o SI
-                HayQueAjustar = True
-            Else
-                'Si que hay mas lineas.
-                'Son del mismo tipo de IVA
-                If Rs!Codigiva <> vTipoIva(0) Then
-                    'NO es el mismo tipo de IVA
-                    'Hay que ajustar
-                    HayQueAjustar = True
-                End If
-            End If
-            Rs.MovePrevious
-        End If
-        
-        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
-        
-        If HayQueAjustar Then
-            Stop
-        Else
-        
-        End If
-
         
         'Caluclo el importe de IVA y el de recargo de equivalencia
         ImpImva = vPorcIva(NumeroIVA) / 100
@@ -3630,6 +3601,38 @@ Dim ImpREC As Currency
         End If
         vImpIva(NumeroIVA) = vImpIva(NumeroIVA) - ImpImva
         vImpRec(NumeroIVA) = vImpRec(NumeroIVA) - ImpREC
+        
+        
+        
+        HayQueAjustar = False
+        If vBaseIva(NumeroIVA) <> 0 Or vImpIva(NumeroIVA) <> 0 Or vImpRec(NumeroIVA) <> 0 Then
+            'falta importe.
+            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
+            Rs.MoveNext
+            If Rs.EOF Then
+                'No hay mas lineas
+                'Hay que ajustar SI o SI
+                HayQueAjustar = True
+            Else
+                'Si que hay mas lineas.
+                'Son del mismo tipo de IVA
+                If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
+                    'NO es el mismo tipo de IVA
+                    'Hay que ajustar
+                    HayQueAjustar = True
+                End If
+            End If
+            Rs.MovePrevious
+        End If
+        
+        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
+        
+        If HayQueAjustar Then
+            If vBaseIva(NumeroIVA) <> 0 Then ImpLinea = ImpLinea + vBaseIva(NumeroIVA)
+            If vImpIva(NumeroIVA) <> 0 Then ImpImva = ImpImva + vImpIva(NumeroIVA)
+            If vImpRec(NumeroIVA) <> 0 Then ImpREC = ImpREC + vImpRec(NumeroIVA)
+        End If
+
         
         
         ' baseimpo , impoiva, imporec
@@ -6510,7 +6513,7 @@ Dim J As Integer
     TotalTesor1 = Round2(TotalTesor * PorcCorredor / 100, 2)
     TotalTesor = TotalTesor - Round2(TotalTesor * PorcCorredor / 100, 2)
     
-    If TotalTesor > 0 Then ' se insertara en la cartera de pagos (spagop)
+    If TotalTesor >= 0 Then ' se insertara en la cartera de pagos (spagop)
         
         '[Monica]09/05/2013: Añadido el nro de vencimientos
         CadValues2 = ""
@@ -6643,7 +6646,13 @@ Dim J As Integer
                             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                            
+                            If TotalTesor = 0 Then
+                                CadValues2 = CadValues2 & DBSet(fecfactu, "F") & "," & DBSet(0, "N") & ",1),"
+                            Else
+                                CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
+                            End If
                             
                           '[Monica]28/04/2017: nuevo pago pagado de los gastos y fras varias
                             If GastosPie <> 0 Then
@@ -6736,18 +6745,6 @@ Dim J As Integer
                       If TotalTesor1 <> 0 Then ' For i = 2 To rsVenci!numerove
                           I = UltimoVto + 1
                           
-'                         'FECHA Resto Vencimientos
-'                          FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
-'                          '==================================================
-'                          'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
-'                          FecVenci = ComprobarFechaVenci(FecVenci, DBLet(RS!DiaPago1, "N"), DBLet(RS!DiaPago2, "N"), DBLet(RS!DiaPago3, "N"))
-        
-                          'Comprobar si tiene mes a no girar
-'                          FecVenci1 = FecVenci
-
-'                          If DBSet(RS!mesnogir, "N") <> 0 Then
-'                                FecVenci1 = ComprobarMesNoGira(FecVenci1, DBSet(RS!mesnogir, "N"), DBSet(0, "N"), RS!DiaPago1, RS!DiaPago2, RS!DiaPago3)
-'                          End If
         
                           CadValues2 = CadValues2 & CadValuesAux2 & I & ", " & ForpaPosi & ", '" & Format(FecVenci1, FormatoFecha) & "', "
         
@@ -6961,12 +6958,12 @@ Dim J As Integer
                 '[Monica]28/04/2017: nuevo pago pagado de los gastos y fras varias
                 If vParamAplic.ContabilidadNueva Then
                     If GastosPie <> 0 Then
-                        CadValuesGastos = CadValuesGastos & DBSet(ImpVenci, "N") & ","
+                        CadValuesGastos = CadValuesGastos & DBSet(GastosPie * (-1), "N") & ","
                         CadValuesGastos = CadValuesGastos & DBSet(CtaBanco, "T") & ","
                     End If
                   
                     If GastosVarias <> 0 Then
-                        CadValuesVarias = CadValuesVarias & DBSet(ImpVenci, "N") & ","
+                        CadValuesVarias = CadValuesVarias & DBSet(GastosVarias * (-1), "N") & ","
                         CadValuesVarias = CadValuesVarias & DBSet(CtaBanco, "T") & ","
                     End If
                 End If
@@ -6983,7 +6980,14 @@ Dim J As Integer
                     CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                     CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                    CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                    CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                    
+                    
+                    If TotalTesor <> 0 Then
+                        CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
+                    Else
+                        CadValues2 = CadValues2 & DBSet(fecfactu, "F") & "," & DBSet(TotalTesor * (-1), "N") & ",1),"
+                    End If
                     
                     
                     '[Monica]28/04/2017: nuevo pago pagado de los gastos y fras varias
@@ -6993,7 +6997,7 @@ Dim J As Integer
                         CadValuesGastos = CadValuesGastos & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValuesGastos = CadValuesGastos & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie, "N") & ",1),"
+                        CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie * (-1), "N") & ",1),"
                     End If
                     If GastosVarias <> 0 Then
                         CadValuesVarias = CadValuesVarias & Text33csb & "," & DBSet(Text42csb, "T") & ",1,"
@@ -7001,7 +7005,7 @@ Dim J As Integer
                         CadValuesVarias = CadValuesVarias & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValuesVarias = CadValuesVarias & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosVarias, "N") & ",1),"
+                        CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosVarias * (-1), "N") & ",1),"
                     End If
                     
                 Else
@@ -7086,12 +7090,12 @@ Dim J As Integer
                 '[Monica]28/04/2017: nuevo pago pagado de los gastos y fras varias
                 If vParamAplic.ContabilidadNueva Then
                     If GastosPie <> 0 Then
-                        Sql = SqlGastos & " VALUES " & CadValuesGastos
+                        Sql = SqlGastos & " VALUES " & Mid(CadValuesGastos, 1, Len(CadValuesGastos) - 1)
                         ConnConta.Execute Sql
                     End If
                 
                     If GastosVarias <> 0 Then
-                        Sql = SqlGastos & " VALUES " & CadValuesVarias
+                        Sql = SqlGastos & " VALUES " & Mid(CadValuesVarias, 1, Len(CadValuesGastos) - 1)
                         ConnConta.Execute Sql
                     End If
                 End If
@@ -12892,35 +12896,6 @@ Dim ImpREC As Currency
         If cadTabla = "fvarcabfact" Then Sql = Sql & "," & DBSet(Rs!fecfactu, "F")
         
         vBaseIva(NumeroIVA) = vBaseIva(NumeroIVA) - ImpLinea   'Para ajustar el importe y que no haya descuadre
-        HayQueAjustar = False
-        If vBaseIva(NumeroIVA) <> 0 Then
-            'falta importe.
-            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
-            Rs.MoveNext
-            If Rs.EOF Then
-                'No hay mas lineas
-                'Hay que ajustar SI o SI
-                HayQueAjustar = True
-            Else
-                'Si que hay mas lineas.
-                'Son del mismo tipo de IVA
-                If Rs!TipoIVA <> vTipoIva(0) Then
-                    'NO es el mismo tipo de IVA
-                    'Hay que ajustar
-                    HayQueAjustar = True
-                End If
-            End If
-            Rs.MovePrevious
-        End If
-        
-        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
-        
-        If HayQueAjustar Then
-            Stop
-        Else
-        
-        End If
-
         
         'Caluclo el importe de IVA y el de recargo de equivalencia
         ImpImva = vPorcIva(NumeroIVA) / 100
@@ -12935,6 +12910,36 @@ Dim ImpREC As Currency
         vImpRec(NumeroIVA) = vImpRec(NumeroIVA) - ImpREC
         
         
+        HayQueAjustar = False
+        If vBaseIva(NumeroIVA) <> 0 Or vImpIva(NumeroIVA) <> 0 Or vImpRec(NumeroIVA) <> 0 Then
+            'falta importe.
+            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
+            Rs.MoveNext
+            If Rs.EOF Then
+                'No hay mas lineas
+                'Hay que ajustar SI o SI
+                HayQueAjustar = True
+            Else
+                'Si que hay mas lineas.
+                'Son del mismo tipo de IVA
+                If Rs!TipoIVA <> vTipoIva(NumeroIVA) Then
+                    'NO es el mismo tipo de IVA
+                    'Hay que ajustar
+                    HayQueAjustar = True
+                End If
+            End If
+            Rs.MovePrevious
+        End If
+        
+        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
+        
+        If HayQueAjustar Then
+            If vBaseIva(NumeroIVA) <> 0 Then ImpLinea = ImpLinea + vBaseIva(NumeroIVA)
+            If vImpIva(NumeroIVA) <> 0 Then ImpImva = ImpImva + vImpIva(NumeroIVA)
+            If vImpRec(NumeroIVA) <> 0 Then ImpREC = ImpREC + vImpRec(NumeroIVA)
+        End If
+
+        
         ' baseimpo , impoiva, imporec
         Sql = Sql & DBSet(ImpLinea, "N") & "," & DBSet(ImpImva, "N") & "," & DBSet(ImpREC, "N", "S") & ",1"
         
@@ -12948,56 +12953,11 @@ Dim ImpREC As Currency
     Set Rs = Nothing
     
     
-'    'comprtobar que la suma de los importes de las lineas insertadas suman la BImponible
-'    'de la factura
-'    If totimp <> BaseImp Then
-''        MsgBox "FALTA cuadrar bases imponibles!!!!!!!!!"
-'        'en SQL esta la ult linea introducida
-'        totimp = BaseImp - totimp
-'        totimp = ImpLinea + totimp '(+- diferencia)
-'        Sql2 = Sql2 & DBSet(totimp, "N") & ","
-'        If CCoste = "" Or CCoste = ValorNulo Then
-'            Sql2 = Sql2 & ValorNulo
-'        Else
-'            Sql2 = Sql2 & DBSet(CCoste, "T")
-'        End If
-'        If SQLaux <> "" Then 'hay mas de una linea
-'            Cad = SQLaux & "(" & Sql2 & ")" & ","
-'        Else 'solo una linea
-'            Cad = "(" & Sql2 & ")" & ","
-'        End If
-'
-''        Aux = Replace(SQL, DBSet(ImpLinea, "N"), DBSet(TotImp, "N"))
-''        cad = Replace(cad, SQL, Aux)
-'    End If
-
-'    If cadTabla = "fvarcabfactpro" Then
-'        ' las retenciones si las hay
-'        If ImpReten <> 0 Then
-'            Sql = NumRegis & "," & AnyoFacPr & "," & i & ","
-'            Sql = Sql & DBSet(Trim(CtaSocio), "T")
-'            Sql = Sql & "," & DBSet(ImpReten, "N") & ","
-'            Sql = Sql & ValorNulo ' no llevan centro de coste
-'
-'            Cad = Cad & "(" & Sql & ")" & ","
-'            i = i + 1
-'
-'            Sql = NumRegis & "," & AnyoFacPr & "," & i & ","
-'            Sql = Sql & DBSet(Trim(CtaReten), "T")
-'            Sql = Sql & "," & DBSet(ImpReten * (-1), "N") & ","
-'            Sql = Sql & ValorNulo ' no llevan centro de coste
-'
-'            Cad = Cad & "(" & Sql & ")" & ","
-'            i = i + 1
-'        End If
-'    End If
-
-
     'Insertar en la contabilidad
     If cad <> "" Then
         cad = Mid(cad, 1, Len(cad) - 1) 'quitar la ult. coma
         If cadTabla = "fvarcabfact" Then
-            Sql = "INSERT INTO factcli_lineas (numserie,numfactu,anofactu,numlinea,codmacta,codccost,fecfactu,codigiva,porciva,porcrec,baseimpo,impoiva,imporec) "
+            Sql = "INSERT INTO factcli_lineas (numserie,numfactu,anofactu,numlinea,codmacta,codccost,fecfactu,codigiva,porciva,porcrec,baseimpo,impoiva,imporec,aplicret) "
         Else
             Sql = "INSERT INTO factpro_lineas (numserie,numregis,fecharec,anofactu,numlinea,codmacta,codccost,codigiva,porciva,porcrec,baseimpo,impoiva,imporec,aplicret) "
         End If

@@ -1,18 +1,23 @@
 VERSION 5.00
 Begin VB.Form frmIdentifica 
-   BackColor       =   &H00E0E0E0&
+   BackColor       =   &H00FFFFFF&
    BorderStyle     =   0  'None
    Caption         =   "Form1"
-   ClientHeight    =   5490
+   ClientHeight    =   5550
    ClientLeft      =   0
    ClientTop       =   0
    ClientWidth     =   7965
    LinkTopic       =   "Form1"
    Picture         =   "frmIdentifica.frx":0000
-   ScaleHeight     =   5490
+   ScaleHeight     =   5550
    ScaleWidth      =   7965
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Timer Timer1 
+      Interval        =   1000
+      Left            =   390
+      Top             =   3960
+   End
    Begin VB.TextBox Text1 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
@@ -29,11 +34,11 @@ Begin VB.Form frmIdentifica
       Height          =   330
       IMEMode         =   3  'DISABLE
       Index           =   1
-      Left            =   4950
+      Left            =   4920
       PasswordChar    =   "*"
       TabIndex        =   1
       Text            =   "Text1"
-      Top             =   4995
+      Top             =   4980
       Width           =   2655
    End
    Begin VB.TextBox Text1 
@@ -57,6 +62,25 @@ Begin VB.Form frmIdentifica
       Top             =   4020
       Width           =   2655
    End
+   Begin VB.Label Label3 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Label3"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFFF&
+      Height          =   195
+      Left            =   300
+      TabIndex        =   6
+      Top             =   90
+      Width           =   7305
+   End
    Begin VB.Label Label2 
       Caption         =   "Label2"
       BeginProperty Font 
@@ -70,7 +94,7 @@ Begin VB.Form frmIdentifica
       EndProperty
       ForeColor       =   &H00400000&
       Height          =   195
-      Left            =   930
+      Left            =   870
       TabIndex        =   5
       Top             =   5250
       Width           =   1725
@@ -111,7 +135,7 @@ Begin VB.Form frmIdentifica
       Index           =   1
       Left            =   4920
       TabIndex        =   3
-      Top             =   4500
+      Top             =   4560
       Width           =   2175
    End
    Begin VB.Label Label1 
@@ -151,6 +175,8 @@ Option Explicit
 
 Dim PrimeraVez As Boolean
 Dim T1 As Single
+Dim vSegundos As Integer
+
 
 Private Sub Form_Activate()
     If PrimeraVez Then
@@ -168,7 +194,8 @@ Private Sub Form_Activate()
              Exit Sub
         End If
         
-         
+        Me.Timer1.Enabled = True
+        
          'Abrimos conexion para comprobar el usuario
          'Luego, en funcion del nivel de usuario que tenga cerraremos la conexion
          'y la abriremos con usuario-codigo ajustado a su nivel
@@ -215,6 +242,11 @@ Private Sub Form_Load()
     PrimeraVez = True
     CargaImagen
     Label2.Caption = "Ver. " & App.Major & "." & App.Minor & "." & App.Revision
+    
+    
+    Label3.Caption = ""
+    vSegundos = 60
+    Label3.Caption = ""
 
 End Sub
 
@@ -224,6 +256,7 @@ Private Sub CargaImagen()
     Me.Image1 = LoadPicture(App.Path & "\entrada.dat")
     Me.Height = Me.Image1.Height
     Me.Width = Me.Image1.Width
+    
     If Err.Number <> 0 Then
         MsgBox Err.Description & vbCrLf & vbCrLf & "Error cargando", vbCritical
         Set conn = Nothing
@@ -235,13 +268,6 @@ End Sub
 Private Sub Form_Unload(Cancel As Integer)
     NumeroEmpresaMemorizar False
 End Sub
-
-
-
-
-
-
-
 
 
 Private Sub Text1_GotFocus(Index As Integer)
@@ -316,7 +342,7 @@ Dim OK As Byte
 End Sub
 
 Private Sub HacerAccionesBD()
-Dim sql As String
+Dim Sql As String
 
 
     
@@ -386,4 +412,14 @@ On Error GoTo ENumeroEmpresaMemorizar
     End If
 ENumeroEmpresaMemorizar:
     Err.Clear
+End Sub
+
+Private Sub Timer1_Timer()
+    'Label3 = "Si no entra en " & vSegundos & " segundos. La aplicación se cerrará."
+    
+    Label3 = "Si no hace login, la pantalla se cerrará automáticamente en " & " " & vSegundos & " segundos"
+    Me.Refresh
+    DoEvents
+    vSegundos = vSegundos - 1
+    If vSegundos = -1 Then Unload Me
 End Sub
