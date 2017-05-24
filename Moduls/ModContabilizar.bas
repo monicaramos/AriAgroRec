@@ -2491,8 +2491,6 @@ Dim CadenaInsertFaclin2 As String
         cad = cad & "(" & Sql & ")"
 '        RS.MoveNext
     End If
-    Rs.Close
-    Set Rs = Nothing
     
     
     If vParamAplic.ContabilidadNueva Then
@@ -2558,6 +2556,11 @@ Dim CadenaInsertFaclin2 As String
         Sql = Sql & " VALUES " & cad
         ConnConta.Execute Sql
     End If
+    
+    Rs.Close
+    Set Rs = Nothing
+    
+    
 EInsertar:
     If Err.Number <> 0 Then
         InsertarCabFactADV = False
@@ -3519,9 +3522,9 @@ Dim ImpREC As Currency
         End If
         
         If vEmpresa.TieneAnalitica Then
-            Sql = " SELECT usuarios.stipom.letraser,advfacturas_lineas.codtipom,numfactu,fecfactu," & cadCampo & " as cuenta,advfacturas_lineas.codigiva, tiposiva.porciva,  tiposiva.porcrec,sum(importel) as importe, advfamia.codccost "
+            Sql = " SELECT usuarios.stipom.letraser,advfacturas_lineas.codtipom,numfactu,fecfactu," & cadCampo & " as cuenta,advfacturas_lineas.codigiva, tiposiva.porceiva porciva,  tiposiva.porcerec porcrec,sum(importel) as importe, advfamia.codccost "
         Else
-            Sql = " SELECT usuarios.stipom.letraser,advfacturas_lineas.codtipom,numfactu,fecfactu," & cadCampo & " as cuenta,advfacturas_lineas.codigiva, tiposiva.porciva,  tiposiva.porcrec,sum(importel) as importe "
+            Sql = " SELECT usuarios.stipom.letraser,advfacturas_lineas.codtipom,numfactu,fecfactu," & cadCampo & " as cuenta,advfacturas_lineas.codigiva, tiposiva.porceiva porciva,  tiposiva.porcerec porcrec,sum(importel) as importe "
         End If
         
         Sql = Sql & " FROM (((advfacturas_lineas inner join usuarios.stipom on advfacturas_lineas.codtipom=usuarios.stipom.codtipom) "
@@ -3567,7 +3570,7 @@ Dim ImpREC As Currency
         
         If cadTabla = "advfacturas" Then 'VENTAS a socios
             Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & Year(Rs!fecfactu) & "," & I & ","
-            Sql = Sql & DBSet(Rs!cuenta, "T")
+            Sql = Sql & DBSet(Rs!cuenta, "T") & ","
         End If
         
         'Vemos que tipo de IVA es en el vector de importes
@@ -3587,6 +3590,9 @@ Dim ImpREC As Currency
             Sql = Sql & ValorNulo
             CCoste = ValorNulo
         End If
+        
+        Sql = Sql & "," & DBSet(Rs!fecfactu, "F")
+        
         
         vBaseIva(NumeroIVA) = vBaseIva(NumeroIVA) - ImpLinea   'Para ajustar el importe y que no haya descuadre
         
@@ -7194,7 +7200,7 @@ Dim vSocio As cSocio
                     
                     If vParamAplic.ContabilidadNueva Then
                         CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ","
-                        CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & ",1" ')"
+                        CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & ",1," ')"
                     
                         vvIban = MiFormat(IbanSoc, "") & MiFormat(vSocio.Banco, "0000") & MiFormat(vSocio.Sucursal, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                         
@@ -7205,7 +7211,7 @@ Dim vSocio As cSocio
                         
                         Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
                         Sql = Sql & "ctabanc1, fecultco, impcobro, "
-                        Sql = Sql & " text33csb, text41csb, text42csb, agente, iban, " ') "
+                        Sql = Sql & " text33csb, text41csb, agente, iban, " ') "
                         Sql = Sql & "nomclien, domclien, pobclien, cpclien, proclien, nifclien, codpais"
                         Sql = Sql & ") "
                         
