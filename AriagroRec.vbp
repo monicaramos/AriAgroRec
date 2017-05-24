@@ -318,6 +318,7 @@ Form=frmManTrabaPrev.frm
 Form=frmTrzManMovim.frm
 Form=frmEntBasculaNat2.frm
 Form=frmIntTesorPago.frm
+Form=frmFVARFactPerso.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""
