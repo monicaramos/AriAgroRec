@@ -626,6 +626,20 @@ On Error GoTo EComprobarLetra
             ComprobarLetraSerie = True
     
     
+        Case "tmpfactvarias"
+            Sql = "Select distinct tiporegi from contadores where tiporegi = 'XX1'"
+            Set RSconta = New ADODB.Recordset
+            RSconta.Open Sql, ConnConta, adOpenDynamic, adLockPessimistic, adCmdText
+            If RSconta.EOF Then
+                RSconta.Close
+                Set RSconta = Nothing
+                Exit Function
+            End If
+            ComprobarLetraSerie = True
+    
+    
+    
+    
         Case "rtelmovil"
             'cargamos el RSConta con la tabla contadores de BD: Contabilidad
             'donde estan todas las letra de serie que existen en la contabilidad
@@ -984,10 +998,22 @@ Dim NumDigit3 As String
                                                 Sql = Sql & " FROM (fvarcabfactpro INNER JOIN rsocios_seccion ON fvarcabfactpro.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N") & " ) "
                                                 Sql = Sql & " INNER JOIN tmpFactu ON fvarcabfactpro.codtipom=tmpFactu.codtipom AND fvarcabfactpro.numfactu=tmpFactu.numfactu AND fvarcabfactpro.fecfactu=tmpFactu.fecfactu "
                                             Else
-                                                'Seleccionamos los distintos socios terceros, cuentas que vamos a facturar
-                                                Sql = "SELECT DISTINCT rcafter.codsocio, rsocios_seccion.codmacpro as codmacta "
-                                                Sql = Sql & " FROM (rcafter INNER JOIN rsocios_seccion ON rcafter.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.Seccionhorto & ") "
-                                                Sql = Sql & " INNER JOIN tmpFactu ON rcafter.codsocio=tmpFactu.codsocio AND rcafter.numfactu=tmpFactu.numfactu AND rcafter.fecfactu=tmpFactu.fecfactu "
+                                                If cadTabla = "tmpfactvarias" Then
+                                                    If Tipo = 0 Then ' seleccionamos primero los socios
+                                                        'Seleccionamos los distintos socios de facturas varias, cuentas que vamos a facturar
+                                                        Sql = "SELECT DISTINCT tmpfactvarias.codsoccli, rsocios_seccion.codmaccli as codmacta "
+                                                        Sql = Sql & " FROM (tmpfactvarias INNER JOIN rsocios_seccion ON tmpfactvarias.codsoccli=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & DBSet(Seccion, "N") & " and not tmpfactvarias.codsoccli is null and tmpfactvarias.codsoccli <> 0 and tmpfactvarias.codusu = " & vUsu.Codigo & ") "
+                                                    Else
+                                                        'Seleccionamos los distintos clientes de facturas varias, cuentas que vamos a facturar
+                                                        Sql = "SELECT DISTINCT tmpfactvarias.codsoccli, clientes.codmacta as codmacta "
+                                                        Sql = Sql & " FROM (tmpfactvarias INNER JOIN clientes ON tmpfactvarias.codsoccli=clientes.codclien and not tmpfactvarias.codsoccli is null and tmpfactvarias.codsoccli <> 0 and tmpfactvarias.codusu = " & vUsu.Codigo & ") "
+                                                    End If
+                                                Else
+                                                    'Seleccionamos los distintos socios terceros, cuentas que vamos a facturar
+                                                    Sql = "SELECT DISTINCT rcafter.codsocio, rsocios_seccion.codmacpro as codmacta "
+                                                    Sql = Sql & " FROM (rcafter INNER JOIN rsocios_seccion ON rcafter.codsocio=rsocios_seccion.codsocio and rsocios_seccion.codsecci = " & vParamAplic.Seccionhorto & ") "
+                                                    Sql = Sql & " INNER JOIN tmpFactu ON rcafter.codsocio=tmpFactu.codsocio AND rcafter.numfactu=tmpFactu.numfactu AND rcafter.fecfactu=tmpFactu.fecfactu "
+                                                End If
                                             End If
                                         End If
                                     End If
@@ -1086,8 +1112,14 @@ Dim NumDigit3 As String
                                             Sql = Sql & " INNER JOIN tmpFactu ON fvarlinfactpro.codtipom=tmpFactu.codtipom AND fvarlinfactpro.numfactu=tmpFactu.numfactu AND fvarlinfactpro.fecfactu=tmpFactu.fecfactu) "
                                             Sql = Sql & "INNER JOIN fvarconce ON fvarlinfactpro.codconce=fvarconce.codconce) "
                                         Else
-                                            Sql = "select distinct " & vParamAplic.CtaVentasAlmz & " as codmacta "
-                                            Sql = Sql & " FROM rcabfactalmz "
+                                            If cadTabla = "tmpfactvarias" Then
+                                                Sql = "select distinct fvarconce.codmacta as codmacta "
+                                                Sql = Sql & " FROM (tmpfactvarias "
+                                                Sql = Sql & "INNER JOIN fvarconce ON tmpfactvarias.codconce=fvarconce.codconce) "
+                                            Else
+                                                Sql = "select distinct " & vParamAplic.CtaVentasAlmz & " as codmacta "
+                                                Sql = Sql & " FROM rcabfactalmz "
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -1244,7 +1276,12 @@ Dim NumDigit3 As String
                         If cadTabla = "rfactsoc" Or cadTabla = "advfacturas" Or cadTabla = "rbodfact1" Or cadTabla = "rbodfact2" Or cadTabla = "rtelmovil" Or cadTabla = "rrecibpozos" Or cadTabla = "fvarcabfact" Or cadTabla = "fvarcabfactpro" Then
                             Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsocio, "000000")
                         Else
-                            Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsocio, "000000")
+                            If cadTabla = "tmpfactvarias" Then
+                                Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsoccli, "000000")
+                            
+                            Else
+                                Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsocio, "000000")
+                            End If
                         End If
                     End If
                 End If
@@ -3157,14 +3194,26 @@ Dim k As Byte
 Dim HayQueAjustar As Boolean
 Dim ImpImva As Currency
 Dim ImpREC As Currency
+Dim Intracom As String
+Dim vIntracom As Integer
+Dim EsIntracom As Boolean
 
     On Error GoTo EInLinea
     
-
+    Intracom = DevuelveValor("select intracom from rcafter where " & cadWHERE)
+    EsIntracom = (CInt(Intracom) = 1)
     If vEmpresa.TieneAnalitica Then
-         Sql = " SELECT 2, variedades.ctacomtercero as cuenta, variedades.codigiva, sum(rlifter.importel) as importe, variedades.codccost "
+         If EsIntracom Then
+            Sql = " SELECT 2, variedades.ctacomtercero as cuenta, " & DBSet(vParamAplic.CodIvaIntra, "N") & " codigiva, sum(rlifter.importel) as importe, variedades.codccost "
+         Else
+            Sql = " SELECT 2, variedades.ctacomtercero as cuenta, variedades.codigiva, sum(rlifter.importel) as importe, variedades.codccost "
+         End If
     Else
-         Sql = " SELECT 2, variedades.ctacomtercero as cuenta, variedades.codigiva, sum(rlifter.importel) as importe "
+        If EsIntracom Then
+            Sql = " SELECT 2, variedades.ctacomtercero as cuenta, " & DBSet(vParamAplic.CodIvaIntra, "N") & " codigiva, sum(rlifter.importel) as importe "
+        Else
+            Sql = " SELECT 2, variedades.ctacomtercero as cuenta, variedades.codigiva, sum(rlifter.importel) as importe "
+        End If
     End If
      
      Sql = Sql & " FROM rlifter, variedades "
@@ -3175,9 +3224,17 @@ Dim ImpREC As Currency
      '[Monica]23/09/2013: concepto de gasto
      Sql = Sql & " union "
      If vEmpresa.TieneAnalitica Then
-        Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, fvarconce.tipoiva codigiva, rcafter.impcargo as importe, '' "
+        If Intracom Then
+            Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, " & DBSet(vParamAplic.CodIvaIntra, "N") & " codigiva, rcafter.impcargo as importe, '' "
+        Else
+            Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, fvarconce.tipoiva codigiva, rcafter.impcargo as importe, '' "
+        End If
      Else
-        Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, fvarconce.tipoiva codigiva, rcafter.impcargo as importe "
+        If EsIntracom Then
+            Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, " & DBSet(vParamAplic.CodIvaIntra, "N") & " codigiva, rcafter.impcargo as importe "
+        Else
+            Sql = Sql & " select 1, fvarconce.codmacpr as cuenta, fvarconce.tipoiva codigiva, rcafter.impcargo as importe "
+        End If
      End If
      Sql = Sql & " FROM rcafter, fvarconce "
      Sql = Sql & " WHERE " & cadWHERE & " and"
@@ -3243,35 +3300,7 @@ Dim ImpREC As Currency
         If NumeroIVA > 100 Then Err.Raise 513, "Error obteniendo IVA: " & Rs!Codigiva
         
         vBaseIva(NumeroIVA) = vBaseIva(NumeroIVA) - ImpLinea   'Para ajustar el importe y que no haya descuadre
-        HayQueAjustar = False
-        If vBaseIva(NumeroIVA) <> 0 Then
-            'falta importe.
-            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
-            Rs.MoveNext
-            If Rs.EOF Then
-                'No hay mas lineas
-                'Hay que ajustar SI o SI
-                HayQueAjustar = True
-            Else
-                'Si que hay mas lineas.
-                'Son del mismo tipo de IVA
-                If Rs!Codigiva <> vTipoIva(0) Then
-                    'NO es el mismo tipo de IVA
-                    'Hay que ajustar
-                    HayQueAjustar = True
-                End If
-            End If
-            Rs.MovePrevious
-        End If
         
-        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
-        
-        If HayQueAjustar Then
-            Stop
-        Else
-        
-        End If
-
         'Caluclo el importe de IVA y el de recargo de equivalencia
         ImpImva = vPorcIva(NumeroIVA) / 100
         ImpImva = Round2(ImpLinea * ImpImva, 2)
@@ -3283,6 +3312,41 @@ Dim ImpREC As Currency
         End If
         vImpIva(NumeroIVA) = vImpIva(NumeroIVA) - ImpImva
         vImpRec(NumeroIVA) = vImpRec(NumeroIVA) - ImpREC
+        
+        
+        
+        HayQueAjustar = False
+        If vBaseIva(NumeroIVA) <> 0 Or vImpIva(NumeroIVA) <> 0 Or vImpRec(NumeroIVA) <> 0 Then
+            'falta importe.
+            'Puede ser que hayan mas lineas, o haya descuadre. Como esta ordenado por tipo de iva
+            Rs.MoveNext
+            If Rs.EOF Then
+                'No hay mas lineas
+                'Hay que ajustar SI o SI
+                HayQueAjustar = True
+            Else
+                'Si que hay mas lineas.
+                'Son del mismo tipo de IVA
+                If Rs!Codigiva <> vTipoIva(NumeroIVA) Then
+                    'NO es el mismo tipo de IVA
+                    'Hay que ajustar
+                    HayQueAjustar = True
+                End If
+            End If
+            Rs.MovePrevious
+        End If
+        
+        Sql = Sql & "," & vTipoIva(NumeroIVA) & "," & DBSet(vPorcIva(NumeroIVA), "N") & "," & DBSet(vPorcRec(NumeroIVA), "N", "S") & ","
+        
+
+        
+        If HayQueAjustar Then
+            If vBaseIva(NumeroIVA) <> 0 Then ImpLinea = ImpLinea + vBaseIva(NumeroIVA)
+            If vImpIva(NumeroIVA) <> 0 Then ImpImva = ImpImva + vImpIva(NumeroIVA)
+            If vImpRec(NumeroIVA) <> 0 Then ImpREC = ImpREC + vImpRec(NumeroIVA)
+        End If
+        
+        
         
         
         Sql2 = Sql & "," 'nos guardamos la linea sin el importe por si a la última hay q descontarle para q coincida con total factura
@@ -6299,10 +6363,20 @@ Dim ImporAux2 As Currency
             If vParamAplic.ContabilidadNueva Then
                 Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
                 Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
-                Sql = Sql & DBSet(Rs!nifSocio, "F", "S") & ",'ES',"
+                Sql = Sql & DBSet(Rs!nifSocio, "T", "S")
+                If DBLet(Rs!Intracom) = 1 Then
+                    Dim Pais As String
+                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                
+                    Sql = Sql & "," & DBSet(Pais, "T", "S") & ","
+                Else
+                    Sql = Sql & ",'ES',"
+                End If
                 Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
                 
                 TipoOpera = 0
+                
+                If DBLet(Rs!Intracom) = 1 Then TipoOpera = 1
                 
                 Aux = "0"
                 Select Case TipoOpera
@@ -6314,8 +6388,16 @@ Dim ImporAux2 As Currency
                     End If
                 End Select
                 
+                If DBLet(Rs!Intracom) = 1 Then Aux = "P"
+                
                 'codopera,codconce340,codintra
-                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & DBSet(Rs!intracom, "N") & ","
+                Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & ","
+                
+                If DBLet(Rs!Intracom) = 1 Then
+                    Sql = Sql & "'A',"
+                Else
+                    Sql = Sql & ValorNulo & ","
+                End If
                 
                 
                 'para las lineas
@@ -6403,7 +6485,7 @@ Dim ImporAux2 As Currency
                 Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & "," & DBSet(Rs!impoiva1, "N") & "," & DBSet(Rs!impoiva2, "N", Nulo2) & "," & DBSet(Rs!impoiva3, "N", Nulo3) & ","
                 Sql = Sql & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
                 Sql = Sql & DBSet(Rs!TotalFac, "N") & "," & DBSet(Rs!TipoIVA1, "N") & "," & DBSet(Rs!TipoIVA2, "N", Nulo2) & "," & DBSet(Rs!TipoIVA3, "N", Nulo3) & ","
-                Sql = Sql & DBSet(Rs!intracom, "N") & ","
+                Sql = Sql & DBSet(Rs!Intracom, "N") & ","
                 Sql = Sql & DBSet(Rs!retfacpr, "N", Nulo4) & "," & DBSet(Rs!trefacpr, "N", Nulo4) & ","
                 If Nulo4 = "S" Then
                     Sql = Sql & ValorNulo & ","

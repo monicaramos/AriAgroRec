@@ -706,6 +706,7 @@ Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
 Dim I As Byte
+Dim Pais As String
 
 
 
@@ -797,8 +798,18 @@ Dim I As Byte
                   CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                   'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                   CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                  CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
-              
+                  CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T")
+                  
+                  '[Monica]26/05/2017: si es intracomuntario cogemos el pais de la cuenta contable
+                  ' antes todos eran ES
+                  '& ",'ES'),"
+                  If mIntracomunitario = 1 Then
+                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                
+                    CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                  Else
+                    CadValues2 = CadValues2 & ",'ES') "
+                  End If
               Else
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
@@ -848,8 +859,18 @@ Dim I As Byte
                         CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
-                  
+                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T")
+                        
+                        '[Monica]26/05/2017: si es intracomuntario cogemos el pais de la cuenta contable
+                        ' antes todos eran ES
+                        '& ",'ES'),"
+                        If mIntracomunitario = 1 Then
+                            Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                        
+                            CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & "),"
+                        Else
+                            CadValues2 = CadValues2 & ",'ES'),"
+                        End If
                   Else
                         '[Monica]22/11/2013: Tema iban
                         If vEmpresa.HayNorma19_34Nueva = 1 Then
@@ -1611,6 +1632,8 @@ Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
 Dim ImpVenci1 As Single
 Dim I As Byte
+Dim Pais As String
+
 
     On Error GoTo EInsertarTesoreria
 
@@ -1703,8 +1726,19 @@ Dim I As Byte
                   CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                   'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                   CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                  CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
-              
+                  CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T")
+                  
+                  '[Monica]26/05/2017: si es intracomuntario cogemos el pais de la cuenta contable
+                  ' antes todos eran ES
+                  '& ",'ES') "
+                  If mIntracomunitario = 1 Then
+                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                
+                    CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                  Else
+                    CadValues2 = CadValues2 & ",'ES') "
+                  End If
+                  
               
               Else
                     '[Monica]22/11/2013: Tema iban
@@ -1762,8 +1796,18 @@ Dim I As Byte
                         CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
-                  
+                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T")
+                      
+                      '[Monica]26/05/2017: si es intracomuntario cogemos el pais de la cuenta contable
+                      ' antes todos eran ES
+                      '& ",'ES') "
+                      If mIntracomunitario = 1 Then
+                        Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                    
+                        CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                      Else
+                        CadValues2 = CadValues2 & ",'ES') "
+                      End If
                   Else
                         '[Monica]22/11/2013: Tema iban
                         If vEmpresa.HayNorma19_34Nueva = 1 Then

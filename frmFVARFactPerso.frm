@@ -44,14 +44,14 @@ Begin VB.Form frmFVARFactPerso
       Left            =   120
       TabIndex        =   17
       Top             =   60
-      Width           =   1785
+      Width           =   3315
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
          TabIndex        =   18
          Top             =   180
-         Width           =   1515
-         _ExtentX        =   2672
+         Width           =   2835
+         _ExtentX        =   5001
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -61,8 +61,6 @@ Begin VB.Form frmFVARFactPerso
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
             NumButtons      =   10
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Enabled         =   0   'False
-               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Nuevo"
                Object.Tag             =   "2"
             EndProperty
@@ -71,8 +69,6 @@ Begin VB.Form frmFVARFactPerso
                Object.Tag             =   "2"
             EndProperty
             BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Enabled         =   0   'False
-               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Eliminar"
                Object.Tag             =   "2"
                Object.Width           =   1e-4
@@ -121,9 +117,9 @@ Begin VB.Form frmFVARFactPerso
       EndProperty
       Height          =   330
       Index           =   5
-      Left            =   8250
+      Left            =   7260
       MaxLength       =   11
-      TabIndex        =   4
+      TabIndex        =   3
       Tag             =   "Cantidad|N|S|||tmpfactvarias|cantidad|###,##0.00||"
       Text            =   "cantidad"
       Top             =   4980
@@ -187,9 +183,9 @@ Begin VB.Form frmFVARFactPerso
       EndProperty
       Height          =   330
       Index           =   4
-      Left            =   7260
+      Left            =   8220
       MaxLength       =   12
-      TabIndex        =   3
+      TabIndex        =   4
       Tag             =   "Precio|N|S|||tmpfacvarias|precio|###,##0.0000||"
       Text            =   "precio"
       Top             =   4980
@@ -639,6 +635,12 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 Public ParamSeccion As String
 Public ParamTabla As String
+Public ParamConcepto As String
+Public ParamNomConcep As String
+Public ParamPrecio As String
+Public ParamCantidad As String
+Public ParamImporte As String
+Public ParamAmpliacion As String
 
 
 'codi per al registe que s'afegix al cridar des d'atre formulari.
@@ -690,9 +692,9 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    txtAux2(2).visible = False
+    txtAux2(2).visible = Not B
     txtAux2(1).visible = Not B
-    btnBuscar(0).visible = False
+    btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
 
     cmdAceptar.visible = Not B
@@ -727,16 +729,16 @@ Dim B As Boolean
     Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = False
-    Me.mnNuevo.Enabled = False
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
     Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = False
-    Me.mnEliminar.Enabled = False
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
     Toolbar1.Buttons(8).Enabled = False
     Me.mnImprimir.Enabled = False
@@ -765,12 +767,19 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    txtAux(0).Text = NumF
-    FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
+    
+    For I = 0 To txtAux.Count - 1
         txtAux(I).Text = ""
     Next I
-    txtAux2(1).Text = ""
+    
+    txtAux(2).Text = vUsu.Codigo
+    txtAux(1).Text = ParamConcepto
+    txtAux2(1).Text = ParamNomConcep
+    txtAux(3).Text = ParamAmpliacion
+    txtAux(5).Text = ParamCantidad
+    txtAux(4).Text = ParamPrecio
+    txtAux(6).Text = ParamImporte
+
     txtAux2(2).Text = ""
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
@@ -854,7 +863,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -869,18 +878,20 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar la linea del Calibrador para la Calidad?"
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Calidad: " & adodc1.Recordset.Fields(3)
-    SQL = SQL & vbCrLf & "Linea: " & adodc1.Recordset.Fields(4)
+    Sql = "¿Seguro que desea eliminar el registro para facturar?"
+    If ParamTabla = "rsocios" Then
+        Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+    Else
+        Sql = Sql & vbCrLf & "Cliente: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+    End If
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rcalidad_calibrador where codvarie=" & adodc1.Recordset!codvarie
-        SQL = SQL & " and codcalid = " & adodc1.Recordset!codcalid
-        SQL = SQL & " and numlinea = " & adodc1.Recordset!numlinea
-        conn.Execute SQL
+        Sql = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
+        Sql = Sql & " and codsoccli = " & adodc1.Recordset!Codsoccli
+        
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1071,18 +1082,12 @@ Private Sub Form_Activate()
 
     If PrimeraVez Then
         PrimeraVez = False
-        If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-            BotonAnyadir
-        Else
-            PonerModo 2
-             If Me.CodigoActual <> "" Then
-                SituarData Me.adodc1, "codusu=" & CodigoActual, "", True
-            End If
-        End If
+        BotonAnyadir
     End If
 End Sub
 
 Private Sub Form_Load()
+Dim Sql As String
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1110,11 +1115,10 @@ Private Sub Form_Load()
         .Buttons(1).Image = 12
     End With
 
-
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
-    
     '****************** canviar la consulta *********************************+
+    
     CadenaConsulta = "SELECT tmpfactvarias.codusu, tmpfactvarias.codsoccli, "
     If ParamTabla = "rsocios" Then
         CadenaConsulta = CadenaConsulta & " rsocios.nomsocio, "
@@ -1126,6 +1130,7 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.ampliaci,  "
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.cantidad, tmpfactvarias.precio, tmpfactvarias.importe "
     CadenaConsulta = CadenaConsulta & " FROM tmpfactvarias, fvarconce, " & ParamTabla
+    
     If ParamTabla = "rsocios" Then
         CadenaConsulta = CadenaConsulta & " WHERE rsocios.codsocio = tmpfactvarias.codsoccli and "
     Else
@@ -1134,15 +1139,14 @@ Private Sub Form_Load()
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.codconce = fvarconce.codconce "
     '************************************************************************
     
+    ' borramos la tabla de registros
+    Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     CadB = ""
     CargaGrid
     
-'    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
-'        BotonAnyadir
-'    Else
-'        PonerModo 2
-'    End If
+    
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -1151,9 +1155,15 @@ Private Sub Form_Unload(Cancel As Integer)
     If Modo = 4 Then TerminaBloquear
 End Sub
 
+Private Sub frmAux_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
+    txtAux2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre socio
+End Sub
 
-
-
+Private Sub frmAux1_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux(0).Text = RecuperaValor(CadenaSeleccion, 1) 'codclien
+    txtAux2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre cliente
+End Sub
 
 Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
 'concepto
@@ -1222,24 +1232,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
-    SQL = SQL & " and tmpfactvarias.codusu = " & vUsu.Codigo
+    Sql = Sql & " and tmpfactvarias.codusu = " & vUsu.Codigo
     
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
+    Sql = Sql & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     If ParamTabla = "rsocios" Then
@@ -1274,6 +1284,8 @@ End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
+Dim cad As String
+    
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
@@ -1284,6 +1296,11 @@ Private Sub txtAux_LostFocus(Index As Integer)
             Else
                 txtAux2(2).Text = PonerNombreDeCod(txtAux(Index), "clientes", "nomclien", "codclien", "N")
             End If
+            If txtAux2(2).Text = "" Then
+                MsgBox "Codigo no existe. Revise.", vbExclamation
+                PonerFoco txtAux(2)
+            End If
+        
         
         Case 1 'codigo de concepto
             If Modo = 1 Then Exit Sub
@@ -1293,30 +1310,46 @@ Private Sub txtAux_LostFocus(Index As Integer)
             If txtAux2(1).Text = "" Then
                 MsgBox "Concepto no existe. Reintroduzca.", vbExclamation
                 PonerFoco txtAux(Index)
+                
+            Else
+                cad = DevuelveDesdeBDNew(cAgro, "fvarconce", "codsecci", "codconce", txtAux(1).Text, "N")
+                If Int(ComprobarCero(cad)) <> Int(ParamSeccion) Then
+                    MsgBox "El concepto debe de ser de la misma seccion que se ha pedido. Reintroduzca.", vbExclamation
+                    PonerFoco txtAux(1)
+                End If
+        
+                
             End If
             
         Case 4 ' precio
             PonerFormatoDecimal txtAux(Index), 11
-            txtAux(6).Text = Round2(CCur(ComprobarCero(txtAux(4).Text)) * CCur(ComprobarCero(txtAux(5).Text)), 2)
-            PonerFormatoDecimal txtAux(6), 3
+'            txtAux(6).Text = Round2(CCur(ComprobarCero(txtAux(4).Text)) * CCur(ComprobarCero(txtAux(5).Text)), 2)
+'            PonerFormatoDecimal txtAux(6), 3
             
             
         Case 5 ' cantidad
             PonerFormatoDecimal txtAux(Index), 3
-            txtAux(6).Text = Round2(CCur(ComprobarCero(txtAux(4).Text)) * CCur(ComprobarCero(txtAux(5).Text)), 2)
-            PonerFormatoDecimal txtAux(6), 3
+'            txtAux(6).Text = Round2(CCur(ComprobarCero(txtAux(4).Text)) * CCur(ComprobarCero(txtAux(5).Text)), 2)
+'            PonerFormatoDecimal txtAux(6), 3
         
         Case 6 ' importe
             PonerFormatoDecimal txtAux(Index), 3
     
     End Select
     
+    ' solo lo calculamos si me han puesto cantidad y precio
+    If txtAux(4).Text <> "" And txtAux(5).Text <> "" Then
+        txtAux(6).Text = Round2(CCur(ComprobarCero(txtAux(4).Text)) * CCur(ComprobarCero(txtAux(5).Text)), 2)
+        PonerFormatoDecimal txtAux(6), 3
+    End If
+    
+    
 End Sub
 
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
