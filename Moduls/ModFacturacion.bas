@@ -1940,7 +1940,7 @@ eDeshacerFactAnt:
     End If
 End Function
 
-Public Function FacturacionVentaCampo(Tipo As Byte, cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, ConAFO As Byte, DescontarFVarias As Boolean) As Long
+Public Function FacturacionVentaCampo(Tipo As Byte, cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, ConAFO As Byte, DescontarFVarias As Boolean, EsTerceros As Boolean) As Long
 'Tipo: 0 -- factura de venta campo ANTICIPO
 'Tipo: 1 -- factura de venta campo LIQUIDACION
 Dim Sql As String
@@ -1979,14 +1979,22 @@ Dim Existe As Boolean
 
     conn.BeginTrans
 
+    If EsTerceros Then
+        Select Case Tipo
+            Case 0 'Anticipo
+                tipoMov = "CAT"
+            Case 1 'Liquidacion
+                tipoMov = "CLT"
+        End Select
+    Else
+        Select Case Tipo
+            Case 0 'Anticipo
+                tipoMov = "FAC"
+            Case 1 'Liquidacion
+                tipoMov = "FLC"
+        End Select
+    End If
 
-    Select Case Tipo
-        Case 0 'Anticipo
-            tipoMov = "FAC"
-        Case 1 'Liquidacion
-            tipoMov = "FLC"
-    End Select
-    
 
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
@@ -2044,13 +2052,22 @@ Dim Existe As Boolean
                 vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
                 PorcIva = CCur(ImporteSinFormato(vPorcIva))
                 
-                Select Case Tipo
-                    Case 0 ' anticipos
-                        tipoMov = vSocio.CodTipomAntVC
-                    Case 1 ' liquidacion
-                        tipoMov = vSocio.CodTipomLiqVC
-                End Select
-                
+                '[Monica]29/05/2017: solo si es picassent seleccionamos socios terceros
+                If EsTerceros Then
+                    Select Case Tipo
+                        Case 0 ' anticipos
+                            tipoMov = "CAT"
+                        Case 1 ' liquidacion
+                            tipoMov = "CLT"
+                    End Select
+                Else
+                    Select Case Tipo
+                        Case 0 ' anticipos
+                            tipoMov = vSocio.CodTipomAntVC
+                        Case 1 ' liquidacion
+                            tipoMov = vSocio.CodTipomLiqVC
+                    End Select
+                End If
                 Set vTipoMov = New CTiposMov
                 numfactu = vTipoMov.ConseguirContador(tipoMov)
                 Do
@@ -2129,6 +2146,13 @@ Dim Existe As Boolean
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
+            
+            '[Monica]29/05/2017: para el caso de picassent si es tercero se marca como contabilizada pdte de recibir factura
+            If EsTerceros Then
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            End If
+            
+            
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             '[Monica]15/04/2013: Introducimos las facturas varias a descontar
@@ -2160,12 +2184,21 @@ Dim Existe As Boolean
                 PorcAFO = 0
                 Anticipos = 0
                 
-                Select Case Tipo
-                    Case 0 ' anticipos
-                        tipoMov = vSocio.CodTipomAntVC
-                    Case 1 ' liquidacion
-                        tipoMov = vSocio.CodTipomLiqVC
-                End Select
+                If EsTerceros Then
+                    Select Case Tipo
+                        Case 0 ' anticipos
+                            tipoMov = "CAT"
+                        Case 1 ' liquidacion
+                            tipoMov = "CLT"
+                    End Select
+                Else
+                    Select Case Tipo
+                        Case 0 ' anticipos
+                            tipoMov = vSocio.CodTipomAntVC
+                        Case 1 ' liquidacion
+                            tipoMov = vSocio.CodTipomLiqVC
+                    End Select
+                End If
                 
                 If B Then
                     numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -2217,7 +2250,16 @@ Dim Existe As Boolean
             Sql2 = "select rfactsoc_variedad.imporvar, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu "
             Sql2 = Sql2 & " from rfactsoc_variedad INNER JOIN rfactsoc ON rfactsoc_variedad.codtipom = rfactsoc.codtipom and "
             Sql2 = Sql2 & " rfactsoc_variedad.numfactu = rfactsoc.numfactu and rfactsoc_variedad.fecfactu = rfactsoc.fecfactu "
-            Sql2 = Sql2 & " where rfactsoc_variedad.codtipom = " & DBSet(vSocio.CodTipomAntVC, "T") ' antes era 'FAC' "
+            
+            
+            '[Monica]29/05/2017: si estercero es solo para picassent
+            
+            If EsTerceros Then
+                Sql2 = Sql2 & " where rfactsoc_variedad.codtipom = 'CAT'"
+            Else
+                Sql2 = Sql2 & " where rfactsoc_variedad.codtipom = " & DBSet(vSocio.CodTipomAntVC, "T") ' antes era 'FAC' "
+            End If
+            
             Sql2 = Sql2 & " and rfactsoc.codsocio = " & DBSet(Rs!Codsocio, "N")
             Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
             Sql2 = Sql2 & " and codcampo = " & DBSet(Rs!codcampo, "N")
@@ -2231,7 +2273,15 @@ Dim Existe As Boolean
                 Anticipos = Anticipos + DBLet(RS1.Fields(0).Value, "N")
                 
                 ' indicamos que los anticipos ya han sido descontados
-                Sql3 = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(vSocio.CodTipomAntVC, "T") ' antes era 'FAC'
+                Sql3 = "update rfactsoc_variedad set descontado = 1 where codtipom = "
+                
+                '[Monica]29/05/2017: en el caso solo de picassent
+                If EsTerceros Then
+                    Sql3 = Sql3 & "'CAT' "  ' antes era 'FAC'
+                Else
+                    Sql3 = Sql3 & DBSet(vSocio.CodTipomAntVC, "T")  ' antes era 'FAC'
+                End If
+                
                 Sql3 = Sql3 & " and numfactu = " & DBSet(RS1!numfactu, "N")
                 Sql3 = Sql3 & " and fecfactu = " & DBSet(RS1!fecfactu, "F") & " and codvarie = " & DBSet(Rs!codvarie, "N")
                 Sql3 = Sql3 & " and codcampo = " & DBSet(Rs!codcampo, "N")
@@ -2240,9 +2290,18 @@ Dim Existe As Boolean
                 
                 ' insertamos en la tabla de anticipos de liquidacion venta campo
                 Sql3 = "insert into tmpFact_anticipos (codtipom, numfactu, fecfactu, codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti, baseimpo) values ("
-                Sql3 = Sql3 & DBSet(vSocio.CodTipomLiqVC, "T") & "," ' antes era 'FLC'
+                If EsTerceros Then
+                    Sql3 = Sql3 & "'CLT',"  ' liquidacion de terceros
+                Else
+                    Sql3 = Sql3 & DBSet(vSocio.CodTipomLiqVC, "T") & "," ' antes era 'FLC'
+                End If
+                
                 Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-                Sql3 = Sql3 & DBSet(vSocio.CodTipomAntVC, "T") & "," ' antes era 'FAC'
+                If EsTerceros Then
+                    Sql3 = Sql3 & DBSet("CAT", "T") & "," ' antes era 'FAC'
+                Else
+                    Sql3 = Sql3 & DBSet(vSocio.CodTipomAntVC, "T") & "," ' antes era 'FAC'
+                End If
                 Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
                 Sql3 = Sql3 & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!codcampo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                 
@@ -2308,6 +2367,11 @@ Dim Existe As Boolean
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        
+        '[Monica]29/05/2017: marcamos la factura esperando para ser recibida
+        If EsTerceros Then
+            If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        End If
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
@@ -2773,7 +2837,7 @@ End Function
 
 
 
-Public Function ComprobarTiposMovimiento(Tipo As Byte, cTabla As String, cWhere As String, Optional EsVetoRuso As Boolean) As Boolean
+Public Function ComprobarTiposMovimiento(Tipo As Byte, cTabla As String, cWhere As String, Optional EsVetoRuso As Boolean, Optional EsTerceros As Boolean) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 
@@ -2791,6 +2855,20 @@ Dim HayReg As Byte
         Sql = "select count(*) from usuarios.stipom where codtipom = 'VAA'" ' anticipo de veto ruso
         If TotalRegistros(Sql) = 0 Then
             MsgBox "No existe el Tipo de Movimiento : VAA", vbExclamation
+            Exit Function
+        End If
+    End If
+    
+    '[Monica]29/05/2017: si esterceros solo en el caso de picassent
+    If EsTerceros Then
+        Sql = "select count(*) from usuarios.stipom where codtipom = 'CAT'" ' anticipo v.campo tercero
+        If TotalRegistros(Sql) = 0 Then
+            MsgBox "No existe el Tipo de Movimiento : CAT", vbExclamation
+            Exit Function
+        End If
+        Sql = "select count(*) from usuarios.stipom where codtipom = 'CLT'" ' liquidacion v.campo tercero
+        If TotalRegistros(Sql) = 0 Then
+            MsgBox "No existe el Tipo de Movimiento : CLT", vbExclamation
             Exit Function
         End If
     End If
@@ -10224,7 +10302,7 @@ End Function
 '   proceso en donde se crea unicamente una factura de anticipo de vemta campo que posteriormente
 '   se descontará en la factura de liquidacion de venta campo
 '
-Public Function FacturaAnticipoVentaCampo(Socio As String, campo As String, Importe As String, FecFac As String) As Long
+Public Function FacturaAnticipoVentaCampo(Socio As String, campo As String, Importe As String, FecFac As String, EsTerceros As Boolean) As Long
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -10263,8 +10341,18 @@ Dim Existe As Boolean
 
     conn.BeginTrans
 
-    tipoMov = "FAC"
 
+    tipoMov = "FAC" ' Factura Anticipo Campo
+
+    '[Monica]29/05/2017: si es tercero se le generará un informe
+    If vParamAplic.Cooperativa = 2 Then
+        If EsTerceros Then
+            tipoMov = "CAT" ' Campo Anticipo Tercero
+        Else
+            tipoMov = "FAC" ' Factura Anticipo Campo
+        End If
+    End If
+    
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
 
@@ -10294,7 +10382,14 @@ Dim Existe As Boolean
             vPorcIva = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", vSocio.CodIva, "N")
             PorcIva = CCur(ImporteSinFormato(vPorcIva))
             
+            
             tipoMov = vSocio.CodTipomAntVC
+            
+            '[Monica]29/05/2017: si es picassent y terceros
+            If vParamAplic.Cooperativa = 2 Then
+                If EsTerceros Then tipoMov = "CAT"
+            End If
+            
             
             Set vTipoMov = New CTiposMov
             numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -10352,6 +10447,14 @@ Dim Existe As Boolean
             'insertar cabecera de factura
             If B Then B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
+            '[Monica]29/05/2017: en el caso de ser tercero se marca como contabililizada
+            If vParamAplic.Cooperativa = 2 Then
+                If EsTerceros Then
+                   If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                End If
+            End If
+            
+            
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             If B Then B = vTipoMov.IncrementarContador(tipoMov)
@@ -10384,7 +10487,7 @@ End Function
 
 
 
-Public Function FacturacionTransporteSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, FecFac As String, Pb1 As ProgressBar, Fdesde As String, Fhasta As String, Optional Estercero As Boolean) As Boolean
+Public Function FacturacionTransporteSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, FecFac As String, Pb1 As ProgressBar, Fdesde As String, Fhasta As String, Optional esTercero As Boolean) As Boolean
 Dim tipoMov As String
 
 Dim AntSocio As String
@@ -10443,7 +10546,7 @@ On Error GoTo EFacturacionTransporteSocio
     conn.BeginTrans
 
     '[Monica]10/10/2013: distinguimos si es tercero o no solo para Picassent
-    If Estercero Then
+    If esTercero Then
         tipoMov = "FTT"
     Else
         tipoMov = "FTS"
@@ -10589,7 +10692,7 @@ On Error GoTo EFacturacionTransporteSocio
             
             '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             '                    solo si es Picassent y estamos facturando a socios terceros
-            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
@@ -10751,7 +10854,7 @@ On Error GoTo EFacturacionTransporteSocio
         
         '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         '                    solo si es Picassent y estamos facturando a socios terceros
-        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
@@ -14668,7 +14771,7 @@ End Function
 
 '[Monica]07/11/2013: añadido el parametro de si es tercero solo para Picassent
 
-Public Function FacturaAnticipoSinEntrada(Socio As String, campo As String, Importe As String, FecFac As String, Optional Estercero As Boolean) As Long
+Public Function FacturaAnticipoSinEntrada(Socio As String, campo As String, Importe As String, FecFac As String, Optional esTercero As Boolean) As Long
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -14708,7 +14811,7 @@ Dim Existe As Boolean
     conn.BeginTrans
 
     '[Monica]07/11/2013: añadida la opcion de si es tercero
-    If Estercero Then
+    If esTercero Then
         tipoMov = "FAT"
     Else
         tipoMov = "FAA"
@@ -14744,7 +14847,7 @@ Dim Existe As Boolean
             PorcIva = CCur(ImporteSinFormato(vPorcIva))
             
             '[Monica]07/11/2013: depende de si es tercero
-            If Estercero Then
+            If esTercero Then
                 tipoMov = "FAT"
             Else
                 tipoMov = vSocio.CodTipomAnt
@@ -14808,7 +14911,7 @@ Dim Existe As Boolean
             
             '[Monica]07/11/2013: si es tercero he de marcarla como contabilizada
             '                    en ppio solo es para Picassent
-            If Estercero Then
+            If esTercero Then
                 If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             

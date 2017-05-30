@@ -8,16 +8,56 @@ Begin VB.Form frmFVARFactPerso
    ClientHeight    =   6225
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   14355
+   ClientWidth     =   16365
    Icon            =   "frmFVARFactPerso.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6225
-   ScaleWidth      =   14355
+   ScaleWidth      =   16365
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox text3 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   11670
+      TabIndex        =   21
+      Top             =   5550
+      Width           =   2160
+   End
+   Begin VB.ComboBox Combo1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Index           =   1
+      Left            =   10290
+      Style           =   2  'Dropdown List
+      TabIndex        =   6
+      Tag             =   "EnLiquidacion|N|N|0|2|tmpfactvarias|enliquidacion|||"
+      Top             =   4980
+      Width           =   1410
+   End
    Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -42,13 +82,13 @@ Begin VB.Form frmFVARFactPerso
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   120
-      TabIndex        =   17
+      TabIndex        =   18
       Top             =   60
       Width           =   3315
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   18
+         TabIndex        =   19
          Top             =   180
          Width           =   2835
          _ExtentX        =   5001
@@ -104,6 +144,7 @@ Begin VB.Form frmFVARFactPerso
       End
    End
    Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -141,7 +182,7 @@ Begin VB.Form frmFVARFactPerso
       Index           =   1
       Left            =   4710
       MaskColor       =   &H00000000&
-      TabIndex        =   16
+      TabIndex        =   17
       ToolTipText     =   "Buscar Concepto"
       Top             =   4950
       Visible         =   0   'False
@@ -164,12 +205,13 @@ Begin VB.Form frmFVARFactPerso
       Height          =   330
       Index           =   1
       Left            =   4980
-      TabIndex        =   15
+      TabIndex        =   16
       Top             =   4950
       Visible         =   0   'False
       Width           =   1005
    End
    Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -230,7 +272,7 @@ Begin VB.Form frmFVARFactPerso
       Height          =   330
       Index           =   2
       Left            =   2040
-      TabIndex        =   14
+      TabIndex        =   15
       Top             =   4950
       Visible         =   0   'False
       Width           =   1815
@@ -251,7 +293,7 @@ Begin VB.Form frmFVARFactPerso
       Index           =   0
       Left            =   1770
       MaskColor       =   &H00000000&
-      TabIndex        =   13
+      TabIndex        =   14
       ToolTipText     =   "Buscar Codigo"
       Top             =   4950
       Visible         =   0   'False
@@ -291,8 +333,8 @@ Begin VB.Form frmFVARFactPerso
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11940
-      TabIndex        =   6
+      Left            =   13980
+      TabIndex        =   7
       Top             =   5565
       Visible         =   0   'False
       Width           =   1035
@@ -310,8 +352,8 @@ Begin VB.Form frmFVARFactPerso
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13095
-      TabIndex        =   7
+      Left            =   15135
+      TabIndex        =   8
       Top             =   5565
       Visible         =   0   'False
       Width           =   1095
@@ -343,10 +385,10 @@ Begin VB.Form frmFVARFactPerso
       Bindings        =   "frmFVARFactPerso.frx":000C
       Height          =   4545
       Left            =   135
-      TabIndex        =   11
+      TabIndex        =   12
       Top             =   870
-      Width           =   14050
-      _ExtentX        =   24791
+      Width           =   16050
+      _ExtentX        =   28310
       _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -421,8 +463,8 @@ Begin VB.Form frmFVARFactPerso
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13110
-      TabIndex        =   12
+      Left            =   15120
+      TabIndex        =   13
       Top             =   5580
       Visible         =   0   'False
       Width           =   1095
@@ -431,7 +473,7 @@ Begin VB.Form frmFVARFactPerso
       Height          =   555
       Index           =   1
       Left            =   120
-      TabIndex        =   9
+      TabIndex        =   10
       Top             =   5520
       Width           =   2385
       Begin VB.Label lblIndicador 
@@ -448,7 +490,7 @@ Begin VB.Form frmFVARFactPerso
          EndProperty
          Height          =   255
          Left            =   45
-         TabIndex        =   10
+         TabIndex        =   11
          Top             =   210
          Width           =   2295
       End
@@ -502,9 +544,9 @@ Begin VB.Form frmFVARFactPerso
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   13740
-      TabIndex        =   19
-      Top             =   180
+      Left            =   15690
+      TabIndex        =   20
+      Top             =   120
       Width           =   405
       _ExtentX        =   714
       _ExtentY        =   582
@@ -535,11 +577,29 @@ Begin VB.Form frmFVARFactPerso
       Index           =   2
       Left            =   300
       MaxLength       =   10
-      TabIndex        =   8
+      TabIndex        =   9
       Tag             =   "Codusu|N|N|||tmpfactvarias|codusu||S|"
       Text            =   "usu"
       Top             =   4980
       Width           =   900
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Importe Total: "
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
+      Height          =   225
+      Left            =   9990
+      TabIndex        =   22
+      Top             =   5610
+      Width           =   1605
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -696,9 +756,9 @@ Dim B As Boolean
     txtAux2(1).visible = Not B
     btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
-
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    Combo1(1).visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -781,12 +841,19 @@ Private Sub BotonAnyadir()
     txtAux(6).Text = ParamImporte
 
     txtAux2(2).Text = ""
+    
+    Combo1(1).ListIndex = 0
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
     PonerFoco txtAux(0)
 End Sub
+
+Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
+    KEYpress KeyAscii
+End Sub
+
 
 Private Sub BotonVerTodos()
     CadB = ""
@@ -837,6 +904,8 @@ Private Sub BotonModificar()
     txtAux(4).Text = DataGrid1.Columns(7).Text
     txtAux(6).Text = DataGrid1.Columns(8).Text
     
+    PosicionarCombo Combo1(1), CInt(DataGrid1.Columns(9).Text)
+    
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
@@ -858,7 +927,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     txtAux2(2).Top = alto
     btnBuscar(0).Top = alto
     btnBuscar(1).Top = alto
-
+    Combo1(1).Top = alto
 End Sub
 
 
@@ -889,7 +958,7 @@ Dim temp As Boolean
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         Sql = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
-        Sql = Sql & " and codsoccli = " & adodc1.Recordset!Codsoccli
+        Sql = Sql & " and codsoccli = " & adodc1.Recordset!CODSOCCLI
         
         conn.Execute Sql
         CargaGrid CadB
@@ -1128,7 +1197,8 @@ Dim Sql As String
     
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.codconce, fvarconce.nomconce, "
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.ampliaci,  "
-    CadenaConsulta = CadenaConsulta & " tmpfactvarias.cantidad, tmpfactvarias.precio, tmpfactvarias.importe "
+    CadenaConsulta = CadenaConsulta & " tmpfactvarias.cantidad, tmpfactvarias.precio, tmpfactvarias.importe, "
+    CadenaConsulta = CadenaConsulta & " tmpfactvarias.enliquidacion, case tmpfactvarias.enliquidacion when 0 THEN 'No descuenta' when 1 Then 'Liquidacion' when 2 then 'Anticipo' end  aaaa "
     CadenaConsulta = CadenaConsulta & " FROM tmpfactvarias, fvarconce, " & ParamTabla
     
     If ParamTabla = "rsocios" Then
@@ -1139,9 +1209,20 @@ Dim Sql As String
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.codconce = fvarconce.codconce "
     '************************************************************************
     
-    ' borramos la tabla de registros
-    Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    CargaCombo
+    
+    
+    If TotalRegistrosConsulta("select * from tmpfactvarias where codusu = " & vUsu.Codigo) > 0 Then
+        If MsgBox("¿ Desea eliminar los registros anteriormente insertados ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+            Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
+            conn.Execute Sql
+        End If
+    End If
+    
+'
+'    ' borramos la tabla de registros
+'    Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
+'    conn.Execute Sql
     
     CadB = ""
     CargaGrid
@@ -1263,13 +1344,49 @@ Private Sub CargaGrid(Optional vSQL As String)
     tots = tots & "S|txtAux(5)|T|Cantidad|1000|;"
     tots = tots & "S|txtAux(4)|T|Precio|1000|;"
     tots = tots & "S|txtAux(6)|T|Importe|1400|;"
-    
+    tots = tots & "N|||||;S|Combo1(1)|C|Descuenta en|2000|;"
     
     arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgRight
+    
+    CalcularTotales
 End Sub
+
+Private Sub CalcularTotales()
+Dim Importe  As Currency
+Dim Compleme As Currency
+Dim Penaliza As Currency
+
+Dim Rs As ADODB.Recordset
+Dim Sql As String
+
+    On Error Resume Next
+    
+    Sql = "select sum(importe) importe from tmpfactvarias where codusu = " & vUsu.Codigo
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    Importe = 0
+    Text3.Text = ""
+    
+    If TotalRegistrosConsulta(Sql) = 0 Then Exit Sub
+    
+    If Not Rs.EOF Then
+        If Rs.Fields(0).Value <> 0 Then Importe = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
+    
+        Text3.Text = Format(Importe, "###,###,##0.00")
+    End If
+    
+    Rs.Close
+    Set Rs = Nothing
+    
+    DoEvents
+    
+End Sub
+
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -1440,3 +1557,26 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
     btnBuscar_Click (Indice)
 End Sub
+
+
+Private Sub CargaCombo()
+Dim Rs As ADODB.Recordset
+Dim Sql As String
+Dim I As Byte
+    
+    ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
+    For I = 1 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
+    
+    'donde se descuenta
+    Combo1(1).AddItem "No descuenta"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 0
+    Combo1(1).AddItem "Liquidación"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 1
+    Combo1(1).AddItem "Anticipo"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+
+End Sub
+
+

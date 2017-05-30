@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "11:06"
+            TextSave        =   "18:51"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2258,12 +2258,12 @@ End Sub
 
 Private Sub LeerEditorMenus()
 Dim Sql As String
-Dim miRsAux As ADODB.Recordset
+Dim miRsAux As adodb.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
     Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
-    Set miRsAux = New ADODB.Recordset
+    Set miRsAux = New adodb.Recordset
     miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
@@ -2285,12 +2285,12 @@ Private Sub PoneMenusDelEditor()
 Dim T As Control
 Dim Sql As String
 Dim c As String
-Dim miRsAux As ADODB.Recordset
+Dim miRsAux As adodb.Recordset
 
     On Error GoTo ELeerEditorMenus
     
     Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
-    Set miRsAux = New ADODB.Recordset
+    Set miRsAux = New adodb.Recordset
     miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     Sql = ""
 
@@ -2400,6 +2400,10 @@ Public Sub mnCambioEmpresa_Click()
 '        Set AntUSU = Nothing
 '        Exit Sub
 '    End If
+
+    If vParamAplic.NumeroConta <> 0 And vUsu.Nivel = 0 Then FrasPendientesContabilizar True
+
+
 
     Screen.MousePointer = vbHourglass
     'Cerramos la conexion

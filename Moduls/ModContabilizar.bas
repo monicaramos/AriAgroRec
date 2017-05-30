@@ -1277,7 +1277,7 @@ Dim NumDigit3 As String
                             Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsocio, "000000")
                         Else
                             If cadTabla = "tmpfactvarias" Then
-                                Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsoccli, "000000")
+                                Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!CODSOCCLI, "000000")
                             
                             Else
                                 Sql = DBLet(Rs!Codmacta, "T") & " del Socio " & Format(Rs!Codsocio, "000000")
@@ -1730,6 +1730,12 @@ Dim B As Boolean
         Case "rbodfacturas"
             Sql = "select distinct rbodfacturas.codforpa from rbodfacturas, tmpFactu where "
             Sql = Sql & " rbodfacturas.codtipom=tmpFactu.codtipom AND rbodfacturas.numfactu=tmpFactu.numfactu AND rbodfacturas.fecfactu=tmpFactu.fecfactu  "
+        Case "fvarcabfact"
+            Sql = "select distinct fvarcabfact.codforpa from fvarcabfact, tmpFactu where "
+            Sql = Sql & " fvarcabfact.codtipom=tmpFactu.codtipom AND fvarcabfact.numfactu=tmpFactu.numfactu AND fvarcabfact.fecfactu=tmpFactu.fecfactu  "
+        Case "fvarcabfactpro"
+            Sql = "select distinct fvarcabfactpro.codforpa from fvarcabfactpro, tmpFactu where "
+            Sql = Sql & " fvarcabfactpro.codtipom=tmpFactu.codtipom AND fvarcabfactpro.numfactu=tmpFactu.numfactu AND fvarcabfactpro.fecfactu=tmpFactu.fecfactu  "
     End Select
     
     Set Rs = New ADODB.Recordset
@@ -6365,10 +6371,10 @@ Dim ImporAux2 As Currency
                 Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
                 Sql = Sql & DBSet(Rs!nifSocio, "T", "S")
                 If DBLet(Rs!Intracom) = 1 Then
-                    Dim Pais As String
-                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                    Dim PAIS As String
+                    PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                 
-                    Sql = Sql & "," & DBSet(Pais, "T", "S") & ","
+                    Sql = Sql & "," & DBSet(PAIS, "T", "S") & ","
                 Else
                     Sql = Sql & ",'ES',"
                 End If
