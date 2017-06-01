@@ -13,31 +13,31 @@ Public Declare Function ShellExecute Lib "shell32.dll" Alias _
 'Definicion Conexión a BASE DE DATOS
 '---------------------------------------------------
 'Conexión a la BD Ariagro de la empresa
-Public conn As adodb.Connection
+Public conn As ADODB.Connection
 
 'Conexión a la BD de Usuarios
-Public ConnUsuarios As adodb.Connection
+Public ConnUsuarios As ADODB.Connection
 
 'Conexión a la BD de Contabilidad de la empresa conectada
-Public ConnConta As adodb.Connection
+Public ConnConta As ADODB.Connection
 
 'Conexión a la BD de Contabilidad de otra empresa distinta a la conectada
-Public ConnAuxCon As adodb.Connection
+Public ConnAuxCon As ADODB.Connection
 
 'Conexión a la BD de Aridoc de la empresa conectada
-Public ConnAridoc As adodb.Connection
+Public ConnAridoc As ADODB.Connection
 
 'Conexión a la BD de Ariges si tiene suministros
-Public ConnAriges As adodb.Connection
+Public ConnAriges As ADODB.Connection
 
 'Conexión a la BD Ariagro de la campaña anterior
-Public ConnCAnt As adodb.Connection
+Public ConnCAnt As ADODB.Connection
 
 'Conexion a la base de datos de indefa
-Public ConnIndefa As adodb.Connection
+Public ConnIndefa As ADODB.Connection
 
 'Conexion a la base de datos de sqlserver de castelduc
-Public CnnSqlServer As adodb.Connection
+Public CnnSqlServer As ADODB.Connection
 
 '[Monica] 06/09/2010: sustituida esta constante por el parametro vParamAplic.Faneca
 Public Const cFaneca As Single = 0.0833 ' hectareas
@@ -63,7 +63,7 @@ Public vSesion As CSesion   'Los datos del usuario que hizo login
 Public vUsu As Usuario  'Datos usuario
 Public vConfig As Configuracion
 
-Public miRsAux As adodb.Recordset
+Public miRsAux As ADODB.Recordset
 
 Public Const vbFPTransferencia = 1
 
@@ -274,7 +274,7 @@ Dim Sql As String
 Dim Sql2 As String
 Dim SqlBd As String
 Dim SqlInsert As String
-Dim RsBD As adodb.Recordset
+Dim RsBd As ADODB.Recordset
 Dim BBDD As String
 
 Dim frmMens As frmMensajes
@@ -292,15 +292,17 @@ Dim frmMens As frmMensajes
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
 
-    If EsRecoleccion Then
 
-        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-            BBDD = vEmpresa.BDAriagro
-        Else
-            BBDD = "ariagro1"
-        End If
-        
-        SqlInsert = "insert into " & BBDD & ".tmpinformes (codusu,nombre1,nombre2,nombre3,fecha1, text1) "
+    If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+        BBDD = vEmpresa.BDAriagro
+    Else
+        BBDD = "ariagro1"
+    End If
+    
+    SqlInsert = "insert into " & BBDD & ".tmpinformes (codusu,nombre1,nombre2,nombre3,fecha1, text1) "
+
+
+    If EsRecoleccion Then
 
         Sql = " select " & vUsu.Codigo & ",'Facturas ADV' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".advfacturas where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
         Sql = Sql & " union "
@@ -315,26 +317,40 @@ Dim frmMens As frmMensajes
         Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Pozos' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rrecibpozos where contabilizado = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
 
         conn.Execute SqlInsert & Sql
+        
+        
+    Else
+    
+        Sql = " select " & vUsu.Codigo & ",'Facturas Cliente' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturas where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Cliente a Socios' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturassocio where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, codprove codtipom ,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".scafpc where intconta = 0 and fecrecep <= " & DBSet(DateAdd("d", -7, Now), "F")
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact, codtrans codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".tcafpc where intconta = 0 and fecrecep <= " & DBSet(DateAdd("d", -7, Now), "F")
+
+        conn.Execute SqlInsert & Sql
+        
     End If
     
     
     If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
         SqlBd = "SHOW DATABASES like 'ariagro%' "
-        Set RsBD = New adodb.Recordset
-        RsBD.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RsBD.EOF
-            If Trim(DBLet(RsBD.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBD.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBD.Fields(0).Value), "ariagroutil") = 0 Then
+        Set RsBd = New ADODB.Recordset
+        RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not RsBd.EOF
+            If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
             
-                Sql2 = Replace(Sql, BBDD, DBLet(RsBD.Fields(0).Value))
+                Sql2 = Replace(Sql, BBDD, DBLet(RsBd.Fields(0).Value))
         
                 conn.Execute SqlInsert & Sql2
             
             End If
             
-            RsBD.MoveNext
+            RsBd.MoveNext
         Wend
         
-        Set RsBD = Nothing
+        Set RsBd = Nothing
         
     End If
     
@@ -352,7 +368,7 @@ Dim frmMens As frmMensajes
     Exit Sub
     
 eFrasPendientesContabilizar:
-    MuestraError Err.Number, "Facturas Pendientes de Intregrar a Contabilidad", Err.Description
+    MuestraError Err.Number, "Facturas Pendientes de Integrar a Contabilidad", Err.Description
 End Sub
 
 
@@ -1003,7 +1019,7 @@ Public Function DevuelveDesdeBD(kCampo As String, Ktabla As String, Kcodigo As S
     
     
     'Creamos el sql
-    Set Rs = New adodb.Recordset
+    Set Rs = New ADODB.Recordset
     Rs.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not Rs.EOF Then
         DevuelveDesdeBD = DBLet(Rs.Fields(0))
@@ -1180,7 +1196,7 @@ On Error GoTo EDevuelveDesdeBDnew
     
     
     'Creamos el sql
-    Set Rs = New adodb.Recordset
+    Set Rs = New ADODB.Recordset
     
     Select Case vBD
         Case cAgro 'BD 1: Ariagro
@@ -1251,7 +1267,7 @@ For v_aux = 1 To num
   Next v_aux
 
 'Creamos el sql
-Set Rs = New adodb.Recordset
+Set Rs = New ADODB.Recordset
 Select Case kBD
     Case 1
         Rs.Open cad, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -1375,7 +1391,7 @@ Dim MiRS As Recordset
 Dim cad As String
 Dim Equipo As String
 
-    Set MiRS = New adodb.Recordset
+    Set MiRS = New ADODB.Recordset
     cad = "show processlist"
     MiRS.Open cad, conn, adOpenKeyset, adLockOptimistic, adCmdText
     cad = ""
@@ -1580,7 +1596,7 @@ If CadenaDesdeOtroForm <> "" Then
     If FormatoFecha = "" Then
         NumRegElim = 0
         FormatoFecha = "Select max(codpc) from usuarios.pcs"
-        Set miRsAux = New adodb.Recordset
+        Set miRsAux = New ADODB.Recordset
         miRsAux.Open FormatoFecha, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not miRsAux.EOF Then
             NumRegElim = DBLet(miRsAux.Fields(0), "N")
@@ -1641,7 +1657,7 @@ Dim MiRS As Recordset
 Dim cad As String
 Dim Equipo As String
 
-    Set MiRS = New adodb.Recordset
+    Set MiRS = New ADODB.Recordset
     cad = "show processlist"
     MiRS.Open cad, conn, adOpenKeyset, adLockOptimistic, adCmdText
     cad = ""
@@ -1686,7 +1702,7 @@ cad = DevuelveDesdeBD("codusu", "usuarios.vbloqbd", "conta", Empresa, "T")
 If cad <> "" Then
     'En teoria esta bloqueada. Puedo comprobar k no se haya kedado el bloqueo a medias
     
-    Set miRsAux = New adodb.Recordset
+    Set miRsAux = New ADODB.Recordset
     cad = "show processlist"
     miRsAux.Open cad, conn, adOpenKeyset, adLockOptimistic, adCmdText
     cad = ""
