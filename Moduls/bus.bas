@@ -279,93 +279,125 @@ Dim BBDD As String
 
 Dim frmMens As frmMensajes
 
+Dim vSeccion As CSeccion
+
     On Error GoTo eFrasPendientesContabilizar
 
 
-    If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-        If vEmpresa.BDAriagro <> "ariagro" Then Exit Sub
-    Else
-        If vEmpresa.BDAriagro <> "ariagro1" Then Exit Sub
-    End If
 
-
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
-
-
-    If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-        BBDD = vEmpresa.BDAriagro
-    Else
-        BBDD = "ariagro1"
-    End If
+    Set vSeccion = New CSeccion
+    If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
+        If vSeccion.AbrirConta Then
+            If Not vEmpresa.TieneSII Then
+                vSeccion.CerrarConta
+                Set vSeccion = Nothing
+                Exit Sub
+            End If
+        End If
     
-    SqlInsert = "insert into " & BBDD & ".tmpinformes (codusu,nombre1,nombre2,nombre3,fecha1, text1) "
-
-
-    If EsRecoleccion Then
-
-        Sql = " select " & vUsu.Codigo & ",'Facturas ADV' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".advfacturas where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Varias Cliente' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".fvarcabfact where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Varias Proveedor' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".fvarcabfactpro where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Socio' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rfactsoc where contabilizado = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rfacttra where contabilizado = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Pozos' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rrecibpozos where contabilizado = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-
-        conn.Execute SqlInsert & Sql
+        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+            If vEmpresa.BDAriagro <> "ariagro" Then Exit Sub
+        Else
+            If vEmpresa.BDAriagro <> "ariagro1" Then Exit Sub
+        End If
+    
+    
+        Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+        conn.Execute Sql
+    
+    
+        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+            BBDD = vEmpresa.BDAriagro
+        Else
+            BBDD = "ariagro1"
+        End If
         
-        
-    Else
-    
-        Sql = " select " & vUsu.Codigo & ",'Facturas Cliente' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturas where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Cliente a Socios' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturassocio where intconta = 0 and fecfactu <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, codprove codtipom ,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".scafpc where intconta = 0 and fecrecep <= " & DBSet(DateAdd("d", -7, Now), "F")
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact, codtrans codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".tcafpc where intconta = 0 and fecrecep <= " & DBSet(DateAdd("d", -7, Now), "F")
-
-        conn.Execute SqlInsert & Sql
-        
-    End If
+        SqlInsert = "insert into " & BBDD & ".tmpinformes (codusu,nombre1,nombre2,nombre3,fecha1, text1) "
     
     
-    If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-        SqlBd = "SHOW DATABASES like 'ariagro%' "
-        Set RsBd = New ADODB.Recordset
-        RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-        While Not RsBd.EOF
-            If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
+        If EsRecoleccion Then
+    
+            Sql = " select " & vUsu.Codigo & ",'Facturas ADV' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".advfacturas where intconta = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Varias Cliente' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".fvarcabfact where intconta = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Varias Proveedor' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".fvarcabfactpro where intconta = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Socio' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rfactsoc where contabilizado = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rfacttra where contabilizado = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Pozos' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".rrecibpozos where contabilizado = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+    
+            conn.Execute SqlInsert & Sql
             
-                Sql2 = Replace(Sql, BBDD, DBLet(RsBd.Fields(0).Value))
-        
-                conn.Execute SqlInsert & Sql2
             
+        Else
+        
+            Sql = " select " & vUsu.Codigo & ",'Facturas Cliente' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturas where intconta = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Cliente a Socios' tipofact, codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".facturassocio where intconta = 0 and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, codprove codtipom ,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".scafpc where intconta = 0 and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " union "
+            Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact, codtrans codtipom,numfactu,fecfactu,'" & BBDD & "' aa from " & BBDD & ".tcafpc where intconta = 0 and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
+    
+            conn.Execute SqlInsert & Sql
+            
+        End If
+        
+        
+        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+            
+            
+            Dim vCampAnt As CCampAnt
+            
+            Set vCampAnt = New CCampAnt
+            
+        ' si solo tenemos que buscar en la campaña anterior
+            If vCampAnt.Leer = 0 Then
+            
+                SqlBd = "SHOW DATABASES like 'ariagro%' "
+                Set RsBd = New ADODB.Recordset
+                RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                While Not RsBd.EOF
+    '               If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
+                    If Trim(DBLet(RsBd.Fields(0).Value)) = vCampAnt.BaseDatos Then
+                    
+                        Sql2 = Replace(Sql, BBDD, DBLet(RsBd.Fields(0).Value))
+        
+                        conn.Execute SqlInsert & Sql2
+                    End If
+        
+                    RsBd.MoveNext
+                Wend
+        
+                Set RsBd = Nothing
+                
             End If
             
-            RsBd.MoveNext
-        Wend
+            Set vCampAnt = Nothing
+    
+        End If
         
-        Set RsBd = Nothing
+        Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
+        
+        If TotalRegistrosConsulta(Sql) > 0 Then
+            Set frmMens = New frmMensajes
+            
+            frmMens.OpcionMensaje = 68
+            frmMens.cadena = Sql
+            frmMens.Show vbModal
+        
+            Set frmMens = Nothing
+        End If
+        
+        CerrarConexionConta
+        Set vEmpresa = Nothing
+        Exit Sub
         
     End If
-    
-    Sql = "select * from tmpinformes where codusu = " & vUsu.Codigo
-    
-    If TotalRegistrosConsulta(Sql) > 0 Then
-        Set frmMens = New frmMensajes
-        
-        frmMens.OpcionMensaje = 68
-        frmMens.cadena = Sql
-        frmMens.Show vbModal
-    
-        Set frmMens = Nothing
-    End If
-    Exit Sub
+    Set vEmpresa = Nothing
     
 eFrasPendientesContabilizar:
     MuestraError Err.Number, "Facturas Pendientes de Integrar a Contabilidad", Err.Description

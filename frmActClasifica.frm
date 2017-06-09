@@ -491,7 +491,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim tabla As String
+Dim Tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -577,17 +577,17 @@ Dim cTabla As String
                 If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
             End If
             
-            tabla = "(rclasifica INNER JOIN variedades ON rclasifica.codvarie = variedades.codvarie) "
+            Tabla = "(rclasifica INNER JOIN variedades ON rclasifica.codvarie = variedades.codvarie) "
 
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(tabla, cadSelect) Then
+            If HayRegParaInforme(Tabla, cadSelect) Then
                 
                 Sql = "delete from tmpclasifica where codusu = " & vUsu.Codigo
                 conn.Execute Sql
             
                 ' comprobamos que no existan las notas a actualizar en el hco de entradas
                 If vParamAplic.SeRespetaNota Then
-                    HayReg = HayRegEnHcoEntradas(tabla, cadSelect)
+                    HayReg = HayRegEnHcoEntradas(Tabla, cadSelect)
                     If HayReg Then
                         Set frmMens1 = New frmMensajes
                         frmMens1.OpcionMensaje = 19
@@ -606,7 +606,7 @@ Dim cTabla As String
                     End If
                 End If
             
-                HayReg = HayRegSinClasificacion(tabla, cadSelect)
+                HayReg = HayRegSinClasificacion(Tabla, cadSelect)
                 If HayReg Then
 '[Monica]:04/06/2010 antes no dejabamos seguir si habian registros sin clasificacion
 '                    ahora preguntamos si quieren seguir actualizando solo los clasificados
@@ -622,7 +622,7 @@ Dim cTabla As String
                 '[Monica] 06/05/2010: si hay registros sin gastos correctos (acarreo, recoleccion)
                 '                     añadida la condicion de que no lo compruebe si es alzira
                 If vParamAplic.Cooperativa <> 4 Then
-                    HayReg = HayRegSinGastosCorrectos(tabla, cadSelect)
+                    HayReg = HayRegSinGastosCorrectos(Tabla, cadSelect)
                 End If
                     
                 If HayReg Then
@@ -635,13 +635,13 @@ Dim cTabla As String
                     Set frmMens = Nothing
                 
                     If Continuar Then
-                        If ActualizarTabla(tabla, cadSelect) Then
+                        If ActualizarTabla(Tabla, cadSelect) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
                             cmdCancel_Click (0)
                         End If
                     End If
                 Else
-                    If ActualizarTabla(tabla, cadSelect) Then
+                    If ActualizarTabla(Tabla, cadSelect) Then
                         MsgBox "Proceso realizado correctamente.", vbExclamation
                         cmdCancel_Click (0)
                     End If
@@ -680,7 +680,7 @@ Dim List As Collection
     Me.Pb1.visible = False
     Me.lblProgres.visible = False
     
-    tabla = "rclasifica"
+    Tabla = "rclasifica"
     CodTipoMov = "ALF"
     
 End Sub
@@ -945,6 +945,8 @@ Private Sub AbrirVisReport()
 '    '####Descomentar
 '        If CadenaDesdeOtroForm <> "" Then frmEMail.Show vbModal
 '    End If
+    Screen.MousePointer = vbDefault
+    
     Unload Me
 End Sub
 
@@ -1459,7 +1461,7 @@ eActualizarTabla:
 End Function
 
 
-Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
+Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, esTercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1505,7 +1507,7 @@ Dim AlbaranE As String
     Sql1 = Sql1 & " rclasifica.transportadopor =" & DBSet(Rs!transportadopor, "N") & " and "
     Sql1 = Sql1 & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql1 = Sql1 & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
@@ -1569,7 +1571,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
+Private Function InsertarEntradas(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, esTercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1613,7 +1615,7 @@ Dim Precio As Currency
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
 
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
@@ -1684,7 +1686,7 @@ End Function
 
 
 
-Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
+Private Function InsertarClasificacion(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, esTercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
@@ -1728,7 +1730,7 @@ Dim CalidadClasif As String
     
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
@@ -1746,7 +1748,7 @@ EInsertar:
 End Function
 
 
-Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, Estercero As Boolean) As Boolean
+Private Function InsertarIncidencias(ByRef Rs As ADODB.Recordset, Albaran As Long, cadErr As String, esTercero As Boolean) As Boolean
 Dim Sql As String
 Dim Sql1 As String
 Dim RS1 As ADODB.Recordset
@@ -1789,7 +1791,7 @@ Dim CalidadClasif As String
     Sql = Sql & " rclasifica.numnotac = rclasifica_incidencia.numnotac and  "
     Sql = Sql & " rclasifica.numnotac = tmpNotas.numnotac "
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " and rclasifica.numnotac = " & DBSet(Rs!NumNotac, "N")
     End If
     
@@ -1908,7 +1910,7 @@ End Function
 
 
 
-Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, Estercero As Boolean) As Boolean
+Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String, esTercero As Boolean) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
@@ -1937,7 +1939,7 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
@@ -1960,7 +1962,7 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
@@ -1982,7 +1984,7 @@ Dim vPrecio As String
         Sql = Sql & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
-    If Estercero Or Not vParamAplic.SeAgrupanNotas Then
+    If esTercero Or Not vParamAplic.SeAgrupanNotas Then
         Sql = Sql & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     

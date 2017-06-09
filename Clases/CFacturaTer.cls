@@ -706,7 +706,7 @@ Dim CadValues2 As String, CadValuesAux2 As String 'para insertar en conta.scobro
 Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
 Dim I As Byte
-Dim Pais As String
+Dim PAIS As String
 
 
 
@@ -804,9 +804,9 @@ Dim Pais As String
                   ' antes todos eran ES
                   '& ",'ES'),"
                   If mIntracomunitario = 1 Then
-                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                    PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                 
-                    CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                    CadValues2 = CadValues2 & "," & DBSet(PAIS, "T", "S") & ") "
                   Else
                     CadValues2 = CadValues2 & ",'ES') "
                   End If
@@ -865,9 +865,9 @@ Dim Pais As String
                         ' antes todos eran ES
                         '& ",'ES'),"
                         If mIntracomunitario = 1 Then
-                            Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                            PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                         
-                            CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & "),"
+                            CadValues2 = CadValues2 & "," & DBSet(PAIS, "T", "S") & "),"
                         Else
                             CadValues2 = CadValues2 & ",'ES'),"
                         End If
@@ -1121,8 +1121,9 @@ Dim Nulo6 As String
     Sql = Sql & DBSet(BaseIVA1, "N", "N") & "," & DBSet(BaseIVA2, "N", "S") & "," & DBSet(BaseIVA3, "N", "S") & ","
     Nulo2 = "N"
     Nulo3 = "N"
-    If BaseIVA2 = 0 Then Nulo2 = "S"
-    If BaseIVA3 = 0 Then Nulo3 = "S"
+    '[Monica]09/06/2017: antes se miraba si la base2 era nulo ahora se mira el tipoiva2
+    If TipoIVA2 = 0 Then Nulo2 = "S"
+    If TipoIVA3 = 0 Then Nulo3 = "S"
     Sql = Sql & DBSet(TipoIVA1, "N", "N") & "," & DBSet(TipoIVA2, "N", Nulo2) & "," & DBSet(TipoIVA3, "N", Nulo3) & ","
     Sql = Sql & DBSet(PorceIVA1, "N", "N") & "," & DBSet(PorceIVA2, "N", Nulo2) & "," & DBSet(PorceIVA3, "N", Nulo3) & ","
     Sql = Sql & DBSet(ImpIVA1, "N", "N") & "," & DBSet(ImpIVA2, "N", Nulo2) & "," & DBSet(ImpIVA3, "N", Nulo3) & ","
@@ -1632,7 +1633,7 @@ Dim FecVenci As Date, FecVenci1 As Date
 Dim ImpVenci As Single
 Dim ImpVenci1 As Single
 Dim I As Byte
-Dim Pais As String
+Dim PAIS As String
 
 
     On Error GoTo EInsertarTesoreria
@@ -1732,9 +1733,9 @@ Dim Pais As String
                   ' antes todos eran ES
                   '& ",'ES') "
                   If mIntracomunitario = 1 Then
-                    Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                    PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                 
-                    CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                    CadValues2 = CadValues2 & "," & DBSet(PAIS, "T", "S") & ") "
                   Else
                     CadValues2 = CadValues2 & ",'ES') "
                   End If
@@ -1802,9 +1803,9 @@ Dim Pais As String
                       ' antes todos eran ES
                       '& ",'ES') "
                       If mIntracomunitario = 1 Then
-                        Pais = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                        PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                     
-                        CadValues2 = CadValues2 & "," & DBSet(Pais, "T", "S") & ") "
+                        CadValues2 = CadValues2 & "," & DBSet(PAIS, "T", "S") & ") "
                       Else
                         CadValues2 = CadValues2 & ",'ES') "
                       End If

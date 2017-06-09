@@ -5352,6 +5352,10 @@ Dim CadenaInsertFaclin2 As String
                     
                     '[Monica]21/04/2017: antes tenia un 0 en Aux
                     Aux = "X"
+                    
+                    '[Monica]09/06/2017: en el caso de que sea rectificativa se marca
+                    If DBLet(Rs!CodTipom, "T") = "FRS" Then Aux = "D"
+                    
                     'codopera,codconce340,codintra
                     Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                     
@@ -5360,6 +5364,10 @@ Dim CadenaInsertFaclin2 As String
                     
                     '[Monica]21/04/2017: antes tenia un 0 en Aux
                     Aux = "0"
+                    
+                    '[Monica]09/06/2017: en el caso de que sea rectificativa se marca
+                    If DBLet(Rs!CodTipom, "T") = "FRS" Then Aux = "D"
+                    
                     'codopera,codconce340,codintra
                     Sql = Sql & TipoOpera & "," & DBSet(Aux, "T") & "," & ValorNulo & ","
                 
@@ -6359,8 +6367,9 @@ Dim ImporAux2 As Currency
             Nulo2 = "N"
             Nulo3 = "N"
             Nulo4 = "N"
-            If DBLet(Rs!BaseIVA2, "N") = "0" Then Nulo2 = "S"
-            If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
+            '[Monica]09/06/2017: antes se miraba la baseiva2 ahora se mira el tipoiva2
+            If DBLet(Rs!TipoIVA2, "N") = "0" Then Nulo2 = "S"
+            If DBLet(Rs!TipoIVA3, "N") = "0" Then Nulo3 = "S"
             If DBLet(Rs!trefacpr, "N") = "0" Then Nulo4 = "S"
             Sql = ""
             If vParamAplic.ContabilidadNueva Then Sql = "'" & SerieFraPro & "',"
@@ -6369,15 +6378,27 @@ Dim ImporAux2 As Currency
             If vParamAplic.ContabilidadNueva Then
                 Sql = Sql & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T", "S") & ","
                 Sql = Sql & DBSet(Rs!codpostal, "T", "S") & "," & DBSet(Rs!pobsocio, "T", "S") & "," & DBSet(Rs!prosocio, "T", "S") & ","
-                Sql = Sql & DBSet(Rs!nifSocio, "T", "S")
-                If DBLet(Rs!Intracom) = 1 Then
-                    Dim PAIS As String
-                    PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
                 
+                
+'                Sql = Sql & DBSet(Rs!nifSocio, "T", "S")
+                
+                
+'[Monica]09/06/2017: no hay que mirar si es o no intracomunitaria para grabar el pais
+'                If DBLet(Rs!Intracom) = 1 Then
+                    Dim PAIS As String
+                    Dim Nif As String
+                    
+                    PAIS = DevuelveDesdeBDNew(cConta, "cuentas", "codpais", "codmacta", mCodmacta, "T")
+                    If PAIS <> "ES" Then Nif = PAIS & DBLet(Rs!nifSocio, "T")
+                    
+                    Sql = Sql & DBSet(Nif, "T", "S") & ","
+                    
                     Sql = Sql & "," & DBSet(PAIS, "T", "S") & ","
-                Else
-                    Sql = Sql & ",'ES',"
-                End If
+'                Else
+'                    Sql = Sql & ",'ES',"
+'                End If
+                
+                
                 Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
                 
                 TipoOpera = 0
@@ -6385,14 +6406,15 @@ Dim ImporAux2 As Currency
                 If DBLet(Rs!Intracom) = 1 Then TipoOpera = 1
                 
                 Aux = "0"
-                Select Case TipoOpera
-                Case 0
-                    If Rs!TotalFac < 0 Then
-                        Aux = "D"
-                    Else
+'                Select Case TipoOpera
+'                Case 0
+'[Monica]08/06/2017: si es negativa no  es rectificativa
+'                    If Rs!TotalFac < 0 Then
+'                        Aux = "D"
+'                    Else
                         If Not IsNull(Rs!TipoIVA2) Then Aux = "C"
-                    End If
-                End Select
+'                    End If
+'                End Select
                 
                 If DBLet(Rs!Intracom) = 1 Then Aux = "P"
                 
@@ -6740,7 +6762,7 @@ Dim J As Integer
                             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES',"
                             
                             If TotalTesor = 0 Then
                                 CadValues2 = CadValues2 & DBSet(fecfactu, "F") & "," & DBSet(0, "N") & ",1),"
@@ -6753,13 +6775,13 @@ Dim J As Integer
                                 CadValuesGastos = CadValuesGastos & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValuesGastos = CadValuesGastos & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                                CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie, "N") & ",1),"
+                                CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie, "N") & ",1),"
                             End If
                             If GastosVarias <> 0 Then
                                 CadValuesVarias = CadValuesVarias & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValuesVarias = CadValuesVarias & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                                CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
+                                CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'),"
                             End If
                       Else
                             '[Monica]22/11/2013: Tema iban
@@ -6822,7 +6844,7 @@ Dim J As Integer
                                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
                           Else
                                 
                                 '[Monica]22/11/2013: Tema iban
@@ -6879,7 +6901,7 @@ Dim J As Integer
                                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
                           Else
                                 '[Monica]22/11/2013: Tema iban
                                 If vEmpresa.HayNorma19_34Nueva = 1 Then
@@ -7074,7 +7096,7 @@ Dim J As Integer
                     CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                     CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                    CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                    CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES',"
                     
                     
                     If TotalTesor <> 0 Then
@@ -7091,7 +7113,7 @@ Dim J As Integer
                         CadValuesGastos = CadValuesGastos & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValuesGastos = CadValuesGastos & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie * (-1), "N") & ",1),"
+                        CadValuesGastos = CadValuesGastos & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosPie * (-1), "N") & ",1),"
                     End If
                     If GastosVarias <> 0 Then
                         CadValuesVarias = CadValuesVarias & Text33csb & "," & DBSet(Text42csb, "T") & ",1,"
@@ -7099,7 +7121,7 @@ Dim J As Integer
                         CadValuesVarias = CadValuesVarias & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValuesVarias = CadValuesVarias & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosVarias * (-1), "N") & ",1),"
+                        CadValuesVarias = CadValuesVarias & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & DBSet(fecfactu, "F") & "," & DBSet(GastosVarias * (-1), "N") & ",1),"
                     End If
                     
                 Else
@@ -7149,7 +7171,7 @@ Dim J As Integer
                         CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                         CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                        CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
                     End If
                     
                 End If
@@ -10009,7 +10031,7 @@ Dim vvIban As String
             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
             CadValues2 = CadValues2 & DBSet(vTra.Nombre, "T") & "," & DBSet(vTra.Direccion, "T") & "," & DBSet(vTra.Poblacion, "T") & "," & DBSet(vTra.CPostal, "T") & ","
-            CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.nif, "T") & ",'ES') "
+            CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.Nif, "T") & ",'ES') "
         
         Else
             '[Monica]22/11/2013: Tema iban
@@ -10091,7 +10113,7 @@ Dim vvIban As String
                 CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                 CadValues2 = CadValues2 & DBSet(vTra.Nombre, "T") & "," & DBSet(vTra.Direccion, "T") & "," & DBSet(vTra.Poblacion, "T") & "," & DBSet(vTra.CPostal, "T") & ","
-                CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.nif, "T") & ",'ES'),"
+                CadValues2 = CadValues2 & DBSet(vTra.Provincia, "T") & "," & DBSet(vTra.Nif, "T") & ",'ES'),"
         
                 Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
                 Sql = Sql & "ctabanc1, fecultco, impcobro, "
@@ -10561,7 +10583,7 @@ Dim RS1 As ADODB.Recordset
     
         
         'Insertar en la conta Cabecera Factura
-        B = InsertarCabFactPOZ(cadWHERE, Observac, cadMen, Forpa, vContaFra)
+        B = InsertarCabFactPOZ(cadWHERE, Observac, cadMen, Forpa, vContaFra, TipoM)
         cadMen = "Insertando Cab. Factura: " & cadMen
         
         If B Then
@@ -10668,7 +10690,7 @@ EContab:
     End If
 End Function
 
-Private Function InsertarCabFactPOZ(cadWHERE As String, Observac As String, cadErr As String, FP As String, ByRef vContaFra As cContabilizarFacturas) As Boolean
+Private Function InsertarCabFactPOZ(cadWHERE As String, Observac As String, cadErr As String, FP As String, ByRef vContaFra As cContabilizarFacturas, TipoM As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Rs As ADODB.Recordset
@@ -10728,8 +10750,8 @@ Dim CadenaInsertFaclin2 As String
             If vParamAplic.ContabilidadNueva Then
                 ' para el caso de las rectificativas
                 Dim vTipM As String
-                vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
-                If vTipM = "FAR" Then
+                'vTipM = DevuelveValor("select codtipom from stipom where letraser = " & DBSet(Rs!letraser, "T"))
+                If TipoM = "RRT" Or TipoM = "RRC" Or TipoM = "RRM" Or TipoM = "RRV" Or TipoM = "RTA" Then
                     Sql = Sql & "'D',"
                 Else
                     Sql = Sql & "'0',"
@@ -10738,7 +10760,7 @@ Dim CadenaInsertFaclin2 As String
                 Sql = Sql & "0," & DBSet(FP, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(ImporIva, "N") & ","
                 Sql = Sql & ValorNulo & "," & DBSet(TotalFac, "N") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ",0,"
                 Sql = Sql & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                Sql = Sql & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',1"
+                Sql = Sql & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES',1"
             
                 cad = cad & "(" & Sql & ")"
             
@@ -12589,7 +12611,7 @@ Dim vSocio As cSocio
                         
                         If Tipo = 0 Then ' socio
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
+                            CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'),"
                         Else ' cliente
                             'nomclien,domclien,pobclien,codpobla,proclien,cifclien
                             CadValues2 = CadValues2 & DBSet(Rs4!nomclien, "T") & "," & DBSet(Rs4!domclien, "T") & "," & DBSet(Rs4!pobclien, "T") & ","
@@ -12631,7 +12653,7 @@ Dim vSocio As cSocio
                             
                             If Tipo = 0 Then ' socio
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'),"
+                                CadValues2 = CadValues2 & DBSet(vSoc.CPostal, "T") & "," & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'),"
                             Else ' cliente
                                 'nomclien,domclien,pobclien,codpobla,proclien,cifclien
                                 CadValues2 = CadValues2 & DBSet(Rs4!nomclien, "T") & "," & DBSet(Rs4!domclien, "T") & "," & DBSet(Rs4!pobclien, "T") & ","
@@ -13135,8 +13157,9 @@ Dim ImporAux2 As Currency
             
             Nulo2 = "N"
             Nulo3 = "N"
-            If DBLet(Rs!BaseIVA2, "N") = "0" Then Nulo2 = "S"
-            If DBLet(Rs!BaseIVA3, "N") = "0" Then Nulo3 = "S"
+            '[Monica]09/06/2017: antes se miraba la baseiva ahora se mira el tipoiva
+            If DBLet(Rs!TipoIVA2, "N") = "0" Then Nulo2 = "S"
+            If DBLet(Rs!TipoIVA3, "N") = "0" Then Nulo3 = "S"
             Sql = ""
             If vParamAplic.ContabilidadNueva Then Sql = "'" & SerieFraPro & "',"
             Sql = Sql & Mc.Contador & "," & DBSet(Rs!fecfactu, "F") & "," & Rs!anofacpr & "," & DBSet(FecRecep, "F") & "," & DBSet(FecRecep, "F") & "," & DBSet(Rs!numfactu, "T") & "," & DBSet(Trim(Rs!Codmacta), "T") & "," & ValorNulo & ","
@@ -13152,11 +13175,12 @@ Dim ImporAux2 As Currency
                 Aux = "0"
                 Select Case TipoOpera
                 Case 0
-                    If Rs!TotalFac < 0 Then
-                        Aux = "D"
-                    Else
+'[Monica]08/06/2017: si el total de factura es negativo no es rectificativa
+'                    If Rs!TotalFac < 0 Then
+'                        Aux = "D"
+'                    Else
                         If Not IsNull(Rs!TipoIVA2) Then Aux = "C"
-                    End If
+'                    End If
                 End Select
                 
                 'codopera,codconce340,codintra
@@ -13366,7 +13390,7 @@ Dim Socio As String
                 CadValues2 = CadValues2 & ", " & DBSet(vvIban, "T") & ","
                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES') "
+                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES') "
             
             
             Else
@@ -13432,7 +13456,7 @@ Dim Socio As String
                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES') "
+                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES') "
     
                 'Insertamos en la tabla scobro de la CONTA
                 Sql = "INSERT INTO cobros (numserie, numfactu, fecfactu, numorden, codmacta, codforpa, fecvenci, impvenci, "
@@ -13836,7 +13860,7 @@ Dim vSoc As cSocio
                             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
                             
                       Else
                             '[Monica]22/11/2013: Tema iban
@@ -13886,7 +13910,7 @@ Dim vSoc As cSocio
                                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.Nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
                           Else
                                 
                                 '[Monica]22/11/2013: Tema iban
