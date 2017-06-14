@@ -75,7 +75,7 @@ Private mvarNorma19_34Nueva As Byte
 Private mvarAplicarNorma19_34Nueva As Byte
 
 
-Private mvarTieneSII As Byte
+Private mvarTieneSII As Boolean
 Private mvarSIIFechaInicio As Date
 Private mvarSIIDiasAviso As Byte
 
@@ -329,7 +329,7 @@ End Property
 
 
 '[Monica]09/06/2017: fecha de inicio y dias de aviso del sii
-Public Property Get TieneSII() As Byte
+Public Property Get TieneSII() As Boolean
      TieneSII = mvarTieneSII
 End Property
 
@@ -536,7 +536,11 @@ Dim Sql As String
     
     LeerSII = True
     If Not Rs.EOF Then
-        mvarSIIFechaInicio = DBLet(Rs!SIIFechaInicio, "F")
+        If Not IsNull(Rs!SIIFechaInicio) Then
+            mvarSIIFechaInicio = CDate(Rs!SIIFechaInicio)
+        Else
+            mvarSIIFechaInicio = Rs!SIIFechaInicio
+        End If
         mvarSIIDiasAviso = DBLet(Rs!SIIDiasAviso, "N")
     End If
     Rs.Close

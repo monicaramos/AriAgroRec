@@ -3836,7 +3836,7 @@ On Error Resume Next
             Me.imgCheck1(1).visible = True
             
             Me.cmdAceptarNSeries.Left = 5960
-            Me.cmdCancelar.Left = 7040
+            Me.CmdCancelar.Left = 7040
         
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
@@ -3850,7 +3850,7 @@ On Error Resume Next
             Me.cmdSelTodos.visible = True
             Me.cmdDeselTodos.visible = True
             Me.cmdAceptarNSeries.Left = Me.cmdAceptarNSeries.Left + 1000
-            Me.cmdCancelar.Left = Me.cmdCancelar.Left + 1000
+            Me.CmdCancelar.Left = Me.CmdCancelar.Left + 1000
         
         Case 12 'Mensaje Partes de ADV que no se van a Facturar
             PonerFrameCobrosPtesVisible True, H, W
@@ -3903,7 +3903,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.cmdSalir
+            PonerFocoBtn Me.CmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -7681,6 +7681,7 @@ End Sub
 
 Private Sub CargarFacturasPendientesContabilizar()
 Dim Sql As String
+Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim It As ListItem
 
@@ -7693,10 +7694,10 @@ Dim It As ListItem
     ListView22.ColumnHeaders.Clear
 
     ListView22.ColumnHeaders.Add , , "Tipo Factura", 3200
-    ListView22.ColumnHeaders.Add , , "Tipo Mov", 1500
-    ListView22.ColumnHeaders.Add , , "NºFactura", 1500, 0
+    ListView22.ColumnHeaders.Add , , "Tipo Mov", 1400
+    ListView22.ColumnHeaders.Add , , "NºFactura", 1400, 0
     ListView22.ColumnHeaders.Add , , "Fecha", 1500, 0
-    ListView22.ColumnHeaders.Add , , "BBDD", 1500, 0
+    ListView22.ColumnHeaders.Add , , "Campaña", 1700, 0
     
     ListView22.ListItems.Clear
     
@@ -7710,15 +7711,23 @@ Dim It As ListItem
         It.SubItems(1) = DBLet(Rs!Nombre2, "T")
         It.SubItems(2) = DBLet(Rs!nombre3, "T")
         It.SubItems(3) = DBLet(Rs!fecha1, "F")
-        It.SubItems(4) = DBLet(Rs!Text1, "T")
+'        It.SubItems(4) = DBLet(Rs!Text1, "T")
         
-        If DBLet(Rs!fecha1, "F") < DateAdd("d", vEmpresa.SIIDiasAviso * (-1), Now) Then
-            It.ForeColor = vbRed
-            It.ListSubItems.item(1).ForeColor = vbRed
-            It.ListSubItems.item(2).ForeColor = vbRed
-            It.ListSubItems.item(3).ForeColor = vbRed
-            It.ListSubItems.item(4).ForeColor = vbRed
+        '[Monica]13/06/2017: tenemos que sacar el nombre de campaña de usuarios
+        Sql2 = DevuelveDesdeBDNew(cAgro, "usuarios.empresasariagro", "nomempre", "ariagro", DBLet(Rs!Text1, "T"), "T")
+        It.SubItems(4) = Sql2
+        
+        If vEmpresa.TieneSII Then
+            If DBLet(Rs!fecha1, "F") < DateAdd("d", vEmpresa.SIIDiasAviso * (-1), Now) Then
+                It.ForeColor = vbRed
+                It.ListSubItems.item(1).ForeColor = vbRed
+                It.ListSubItems.item(2).ForeColor = vbRed
+                It.ListSubItems.item(3).ForeColor = vbRed
+                It.ListSubItems.item(4).ForeColor = vbRed
+            End If
         End If
+        
+        ListView22.Refresh
         
         Rs.MoveNext
         TotalArray = TotalArray + 1

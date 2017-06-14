@@ -966,7 +966,7 @@ End Function
 '-----------------------------------------------------------
 '-----------------------------------------------------------
 '-----------------------------------------------------------
-Public Function IntegraLaFacturaProv(NumRegis As Long, Anofac As Integer) As String
+Public Function IntegraLaFacturaProv(NumRegis As Long, Anofac As Integer, Serie As String) As String
 Dim cad As String
 Dim Cad2 As String
 Dim Cad3 As String
@@ -1008,7 +1008,7 @@ Dim NoSumaIVA As Boolean
         Sql = "SELECT numserie, numfactu numfacpr, fecfactu fecfacpr,factpro.codmacta,fecharec fecrecpr,"
         Sql = Sql & " totfacpr ,factpro.observa confacpr,cuereten  , trefacpr ,numasien,factpro.nommacta,codopera"
         Sql = Sql & " FROM factpro" ',cuentas "
-        Sql = Sql & " WHERE numserie='" & SerieFraPro
+        Sql = Sql & " WHERE numserie='" & Serie
         Sql = Sql & "' AND numregis= " & NumRegis
         Sql = Sql & " AND anofactu=" & Anofac
 '        Sql = Sql & " AND factpro.codmacta = cuentas.codmacta"
@@ -1199,7 +1199,7 @@ Dim NoSumaIVA As Boolean
                 
         Sql = "SELECT numserie, numregis , fecharec fecfactu , baseimpo,codigiva,porciva, "
         Sql = Sql & "porcrec,impoiva,imporec  FROM factPRO_totales "
-        Sql = Sql & " WHERE numserie='" & SerieFraPro
+        Sql = Sql & " WHERE numserie='" & Serie
         Sql = Sql & "' AND NUMREGIS= " & NumRegis
         Sql = Sql & " AND anofactu=" & Anofac
         RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -1496,7 +1496,7 @@ Dim NoSumaIVA As Boolean
     
     If vParamAplic.ContabilidadNueva Then
         Sql = "Select factpro_lineas.codmacta codtbase,baseimpo impbaspr,codccost ,cuentas.codmacta"
-        Sql = Sql & " FROM  factpro_lineas,cuentas WHERE  numserie='" & SerieFraPro
+        Sql = Sql & " FROM  factpro_lineas,cuentas WHERE  numserie='" & Serie
         Sql = Sql & "' AND   numregis= " & NumRegis & " AND anofactu=" & Anofac
         Sql = Sql & " AND  factpro_lineas.codmacta = Cuentas.codmacta"
     Else
@@ -1550,7 +1550,7 @@ Dim NoSumaIVA As Boolean
     Sql = Sql & " SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento & " WHERE "
     Cad2 = "anofacpr"
     If vParamAplic.ContabilidadNueva Then
-        Sql = Sql & " numserie='" & SerieFraPro & "' AND "
+        Sql = Sql & " numserie='" & Serie & "' AND "
         Cad2 = "anofactu"
     End If
     Sql = Sql & " numregis = " & NumRegis
