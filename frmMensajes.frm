@@ -19,9 +19,9 @@ Begin VB.Form frmMensajes
       Height          =   5790
       Left            =   0
       TabIndex        =   170
-      Top             =   30
-      Width           =   10260
-      Begin VB.CommandButton cmdcancel 
+      Top             =   0
+      Width           =   13660
+      Begin VB.CommandButton cmdCerrarFras 
          Caption         =   "Continuar"
          BeginProperty Font 
             Name            =   "Verdana"
@@ -34,18 +34,39 @@ Begin VB.Form frmMensajes
          EndProperty
          Height          =   375
          Index           =   5
-         Left            =   8520
-         TabIndex        =   171
+         Left            =   12060
+         TabIndex        =   172
          Top             =   5280
          Width           =   1215
+      End
+      Begin VB.ComboBox Combo1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   0
+         ItemData        =   "frmMensajes.frx":000C
+         Left            =   240
+         List            =   "frmMensajes.frx":0016
+         Style           =   2  'Dropdown List
+         TabIndex        =   171
+         Tag             =   "Tipo de cliente|N|N|0|2|ssocio|tipsocio|||"
+         Top             =   240
+         Width           =   2055
       End
       Begin MSComctlLib.ListView ListView22 
          Height          =   4545
          Left            =   240
-         TabIndex        =   172
+         TabIndex        =   173
          Top             =   630
-         Width           =   9585
-         _ExtentX        =   16907
+         Width           =   13085
+         _ExtentX        =   23072
          _ExtentY        =   8017
          View            =   3
          LabelWrap       =   -1  'True
@@ -87,21 +108,22 @@ Begin VB.Form frmMensajes
          EndProperty
       End
       Begin VB.Label Label24 
-         Caption         =   "Facturas Pendientes de Integrar a Contabilidad"
+         Alignment       =   1  'Right Justify
+         Caption         =   "Facturas Pendientes de Contabilizar"
          BeginProperty Font 
             Name            =   "Verdana"
-            Size            =   12
+            Size            =   11.25
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H00800000&
+         ForeColor       =   &H00972E0B&
          Height          =   375
-         Left            =   270
-         TabIndex        =   173
-         Top             =   270
+         Left            =   4920
+         TabIndex        =   174
+         Top             =   300
          Width           =   8355
       End
    End
@@ -189,7 +211,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":000C
+         Picture         =   "frmMensajes.frx":002C
          Top             =   5160
          Width           =   240
       End
@@ -197,7 +219,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0156
+         Picture         =   "frmMensajes.frx":0176
          Top             =   5160
          Width           =   240
       End
@@ -273,7 +295,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   720
-         Picture         =   "frmMensajes.frx":02A0
+         Picture         =   "frmMensajes.frx":02C0
          Top             =   4185
          Visible         =   0   'False
          Width           =   240
@@ -282,7 +304,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   1080
-         Picture         =   "frmMensajes.frx":03EA
+         Picture         =   "frmMensajes.frx":040A
          Top             =   4185
          Visible         =   0   'False
          Width           =   240
@@ -331,7 +353,7 @@ Begin VB.Form frmMensajes
          Left            =   150
          MultiLine       =   -1  'True
          TabIndex        =   9
-         Text            =   "frmMensajes.frx":0534
+         Text            =   "frmMensajes.frx":0554
          Top             =   210
          Width           =   6615
       End
@@ -693,7 +715,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":053A
+         Picture         =   "frmMensajes.frx":055A
          Top             =   5160
          Width           =   240
       End
@@ -701,7 +723,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0684
+         Picture         =   "frmMensajes.frx":06A4
          Top             =   5160
          Width           =   240
       End
@@ -771,7 +793,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   3
          Left            =   240
-         Picture         =   "frmMensajes.frx":07CE
+         Picture         =   "frmMensajes.frx":07EE
          Top             =   5160
          Width           =   240
       End
@@ -779,7 +801,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   2
          Left            =   600
-         Picture         =   "frmMensajes.frx":0918
+         Picture         =   "frmMensajes.frx":0938
          Top             =   5160
          Width           =   240
       End
@@ -1194,7 +1216,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0A62
+         Picture         =   "frmMensajes.frx":0A82
          Top             =   5160
          Width           =   240
       End
@@ -1202,7 +1224,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0BAC
+         Picture         =   "frmMensajes.frx":0BCC
          Top             =   5160
          Width           =   240
       End
@@ -1415,7 +1437,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":0CF6
+         Picture         =   "frmMensajes.frx":0D16
          Top             =   6960
          Width           =   240
       End
@@ -1423,7 +1445,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":0E40
+         Picture         =   "frmMensajes.frx":0E60
          Top             =   6960
          Width           =   240
       End
@@ -2117,7 +2139,7 @@ Begin VB.Form frmMensajes
       Begin VB.Image Image1 
          Height          =   480
          Left            =   210
-         Picture         =   "frmMensajes.frx":0F8A
+         Picture         =   "frmMensajes.frx":0FAA
          Top             =   180
          Width           =   480
       End
@@ -2352,7 +2374,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   0
          Left            =   240
-         Picture         =   "frmMensajes.frx":13CC
+         Picture         =   "frmMensajes.frx":13EC
          Top             =   5160
          Width           =   240
       End
@@ -2360,7 +2382,7 @@ Begin VB.Form frmMensajes
          Height          =   240
          Index           =   1
          Left            =   600
-         Picture         =   "frmMensajes.frx":1516
+         Picture         =   "frmMensajes.frx":1536
          Top             =   5160
          Width           =   240
       End
@@ -2403,7 +2425,7 @@ Begin VB.Form frmMensajes
          MultiLine       =   -1  'True
          ScrollBars      =   3  'Both
          TabIndex        =   14
-         Text            =   "frmMensajes.frx":1660
+         Text            =   "frmMensajes.frx":1680
          Top             =   360
          Width           =   7695
       End
@@ -2821,6 +2843,9 @@ Dim Columna2 As Integer
 Dim Orden As Integer
 Dim Orden2 As Integer
 Dim PrimerCampo As Integer
+
+Dim vAnt As Integer
+
 
 Private Sub ChkVariedades_Click()
     CargarCamposSocio 1
@@ -3390,6 +3415,10 @@ Private Sub cmdCerrar_Click()
 End Sub
 
 
+Private Sub cmdCerrarFras_Click(Index As Integer)
+    Unload Me
+End Sub
+
 Private Sub CmdContinuar_Click()
     cadena = "1"
     RaiseEvent DatoSeleccionado(cadena)
@@ -3531,6 +3560,22 @@ End Sub
 
 
 
+
+
+Private Sub Combo1_Click(Index As Integer)
+   Select Case Index
+        Case 0
+            If vAnt <> Combo1(0).ListIndex Then CargarFacturasPendientesContabilizar
+            vAnt = Combo1(0).ListIndex
+    End Select
+End Sub
+
+Private Sub Combo1_GotFocus(Index As Integer)
+    Select Case Index
+        Case 0
+            vAnt = Combo1(0).ListIndex
+    End Select
+End Sub
 
 
 Private Sub Form_Activate()
@@ -3724,6 +3769,8 @@ Dim OK As Boolean
             CargarContratos desdeHco
         
         Case 68 ' facturas pendientes de contabilizar
+            Combo1(0).ListIndex = 0
+            
             CargarFacturasPendientesContabilizar
             
     End Select
@@ -4156,6 +4203,9 @@ On Error Resume Next
             H = Me.FrameFrasPteContabilizar.Height
             W = FrameFrasPteContabilizar.Width
             PonerFrameVisible FrameFrasPteContabilizar, True, H, W
+            
+            CargarCombo
+    
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
     Me.Height = H + 350
@@ -7687,19 +7737,42 @@ Dim It As ListItem
 
     Sql = cadena
     
+    Select Case Combo1(0).ListIndex
+        Case 0 'todos
+        
+        Case 1 ' adv
+            Sql2 = " and codigo1 = 0"
+        Case 2 ' varias cliente
+            Sql2 = " and codigo1 = 1"
+        Case 3 ' varias proveedor
+            Sql2 = " and codigo1 = 2"
+        Case 4 ' socio
+            Sql2 = " and codigo1 = 3"
+        Case 5 ' transporte
+            Sql2 = " and codigo1 = 4"
+        Case 6 ' pozos
+            Sql2 = " and codigo1 = 5"
+    End Select
+    
+    Sql = Sql & Sql2 & " order by 7,6 "
+    
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ListView22.ColumnHeaders.Clear
 
-    ListView22.ColumnHeaders.Add , , "Tipo Factura", 3200
-    ListView22.ColumnHeaders.Add , , "Tipo Mov", 1400
-    ListView22.ColumnHeaders.Add , , "NºFactura", 1400, 0
-    ListView22.ColumnHeaders.Add , , "Fecha", 1500, 0
-    ListView22.ColumnHeaders.Add , , "Campaña", 1700, 0
+    ListView22.ColumnHeaders.Add , , "Tipo Factura", 2600
+    ListView22.ColumnHeaders.Add , , "Fecha", 1400
+    ListView22.ColumnHeaders.Add , , "Factura", 1500, 0
+    ListView22.ColumnHeaders.Add , , "Nombre", 3400, 0
+    ListView22.ColumnHeaders.Add , , "Importe", 1800, 1
+    ListView22.ColumnHeaders.Add , , "Campaña", 2100, 0
     
     ListView22.ListItems.Clear
+    
+    ListView22.SmallIcons = frmPpal.imgListPpal
+    
     
     TotalArray = 0
     While Not Rs.EOF
@@ -7708,14 +7781,15 @@ Dim It As ListItem
             
         'It.Tag = DevNombreSQL(RS!codCampo)
         It.Text = DBLet(Rs!Nombre1, "T")
-        It.SubItems(1) = DBLet(Rs!Nombre2, "T")
-        It.SubItems(2) = DBLet(Rs!nombre3, "T")
-        It.SubItems(3) = DBLet(Rs!fecha1, "F")
-'        It.SubItems(4) = DBLet(Rs!Text1, "T")
+        It.SubItems(1) = DBLet(Rs!fecha1, "F")
+        It.SubItems(2) = DBLet(Rs!Nombre2, "T")
+        It.SubItems(3) = DBLet(Rs!nombre3, "T")
+        It.SubItems(4) = Format(DBLet(Rs!importe1, "N"), "###,###,##0.00")
+        'IT.SubItems(5) = DBLet(Rs!Text1, "T")
         
         '[Monica]13/06/2017: tenemos que sacar el nombre de campaña de usuarios
         Sql2 = DevuelveDesdeBDNew(cAgro, "usuarios.empresasariagro", "nomempre", "ariagro", DBLet(Rs!Text1, "T"), "T")
-        It.SubItems(4) = Sql2
+        It.SubItems(5) = Sql2
         
         If vEmpresa.TieneSII Then
             If DBLet(Rs!fecha1, "F") < DateAdd("d", vEmpresa.SIIDiasAviso * (-1), Now) Then
@@ -7724,8 +7798,19 @@ Dim It As ListItem
                 It.ListSubItems.item(2).ForeColor = vbRed
                 It.ListSubItems.item(3).ForeColor = vbRed
                 It.ListSubItems.item(4).ForeColor = vbRed
+                It.ListSubItems.item(5).ForeColor = vbRed
             End If
         End If
+        
+        Select Case DBLet(Rs!Codigo1, "N")
+            Case 0 ' adv
+            Case 1 ' facturas varias
+            Case 2 ' proveedor
+            Case 3 'socios
+                It.SmallIcon = 23
+            Case 4 ' facturas de transporte
+            Case 5 ' facturas pozos
+        End Select
         
         ListView22.Refresh
         
@@ -7738,5 +7823,26 @@ Dim It As ListItem
     Wend
     Rs.Close
     
+End Sub
+
+Private Sub CargarCombo()
+    ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
+    Combo1(0).Clear
+    
+    Combo1(0).AddItem "Todas"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 0
+    Combo1(0).AddItem "ADV"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 1
+    Combo1(0).AddItem "Varias Cliente"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 2
+    Combo1(0).AddItem "Varias Proveedor"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 3
+    Combo1(0).AddItem "Socio"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 4
+    Combo1(0).AddItem "Transporte"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 5
+    Combo1(0).AddItem "Pozos"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 6
+
 End Sub
 

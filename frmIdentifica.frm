@@ -416,10 +416,11 @@ End Sub
 
 Private Sub Timer1_Timer()
     'Label3 = "Si no entra en " & vSegundos & " segundos. La aplicación se cerrará."
-    
-    Label3 = "Si no hace login, la pantalla se cerrará automáticamente en " & " " & vSegundos & " segundos"
-    Me.Refresh
-    DoEvents
+    If vSegundos < 50 Then
+        Label3 = "Si no hace login, la pantalla se cerrará automáticamente en " & " " & vSegundos & " segundos"
+        Me.Refresh
+        DoEvents
+    End If
     vSegundos = vSegundos - 1
     If vSegundos = -1 Then Unload Me
 End Sub
