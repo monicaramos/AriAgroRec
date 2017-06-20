@@ -331,14 +331,14 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
@@ -383,9 +383,9 @@ End Sub
 
 Private Sub CmdAcep_Click()
 Dim Sql As String
-Dim i As Byte
+Dim I As Byte
 Dim cadWHERE As String
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
 Dim cadena1 As String
@@ -394,7 +394,7 @@ Dim cadTabla As String
 
 On Error GoTo eError
 
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
 
     Fichero1 = ""
@@ -409,8 +409,8 @@ On Error GoTo eError
     Me.CommonDialog2.ShowOpen
         
     BorrarTMPlineas
-    b = CrearTMPlineas()
-    If Not b Then
+    B = CrearTMPlineas()
+    If Not B Then
          Exit Sub
     End If
     
@@ -444,10 +444,10 @@ On Error GoTo eError
                         conn.RollbackTrans
                         Exit Sub
                     Else
-                        b = CargarFicheros()
+                        B = CargarFicheros()
                     End If
             Else
-                b = False
+                B = False
             End If
         Else
             cmdCancel_Click
@@ -456,13 +456,13 @@ On Error GoTo eError
         
     End If
 eError:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         MsgBox "No se ha podido realizar el proceso. LLame a Ariadna.", vbExclamation
     Else
         conn.CommitTrans
         MsgBox "Proceso realizado correctamente.", vbExclamation
-        pb2.visible = False
+        Pb2.visible = False
         lblProgres(2).Caption = ""
         lblProgres(3).Caption = ""
 '        BorrarArchivo Fichero1
@@ -509,7 +509,7 @@ Dim List As Collection
 '    CommitConexion
     
     FrameTraspasoVisible True, H, W
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
         
@@ -521,7 +521,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -542,12 +542,12 @@ End Sub
 
 
 Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -561,24 +561,24 @@ Dim vSeccion As CSeccion
             
         Case 1, 3 ' tipo de iva de contabilidad
             indCodigo = Index
-            PonerFoco txtcodigo(indCodigo)
+            PonerFoco txtCodigo(indCodigo)
             Set vSeccion = New CSeccion
             If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
                 If vSeccion.AbrirConta Then
                     Set frmTIva = New frmTipIVAConta
                     frmTIva.DeConsulta = True
                     frmTIva.DatosADevolverBusqueda = "0|1|"
-                    frmTIva.CodigoActual = txtcodigo(indCodigo).Text
+                    frmTIva.CodigoActual = txtCodigo(indCodigo).Text
                     frmTIva.Show vbModal
                     Set frmTIva = Nothing
-                    PonerFoco txtcodigo(indCodigo)
+                    PonerFoco txtCodigo(indCodigo)
                 End If
             End If
             Set vSeccion = Nothing
         
     
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
@@ -609,25 +609,25 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            indice = 2
+            Indice = 2
     End Select
 
 
-    imgFec(0).Tag = indice '<===
+    imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -651,23 +651,23 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 Dim vSeccion As CSeccion
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -677,22 +677,22 @@ Dim vSeccion As CSeccion
     Select Case Index
         Case 2 'FECHAS
             '[Monica]28/08/2013: comprobamos que la fecha esté en la campaña
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index), True
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index), True
             
         Case 1, 3 ' tipo de iva
-            If txtcodigo(Index).Text <> "" Then
+            If txtCodigo(Index).Text <> "" Then
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
                     If vSeccion.AbrirConta Then
-                        txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", txtcodigo(Index).Text, "N")
+                        txtNombre(Index).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", txtCodigo(Index).Text, "N")
                     End If
                 End If
                 Set vSeccion = Nothing
             End If
             
         Case 0 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
     End Select
 End Sub
@@ -765,8 +765,8 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
@@ -844,8 +844,8 @@ End Function
 
 Private Function ComprobarErrores() As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
@@ -856,7 +856,7 @@ Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 Dim Mens As String
 Dim Tipo As Integer
 
@@ -880,42 +880,42 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero1 For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     longitud = FileLen(Fichero1)
     
-    pb2.visible = True
-    Me.pb2.Max = longitud
+    Pb2.visible = True
+    Me.Pb2.Max = longitud
     Me.Refresh
-    Me.pb2.Value = 0
+    Me.Pb2.Value = 0
     
     ' PROCESO DEL FICHERO ACEITEC.TXT
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "ACEITEC.TXT")
+        B = ComprobarRegistro(cad, "ACEITEC.TXT")
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" And b Then
-        i = i + 1
+    If cad <> "" And B Then
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "ACEITEC.TXT")
+        B = ComprobarRegistro(cad, "ACEITEC.TXT")
     End If
     
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
 
@@ -926,42 +926,42 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero2 For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     longitud = FileLen(Fichero2)
     
-    pb2.visible = True
-    Me.pb2.Max = longitud
+    Pb2.visible = True
+    Me.Pb2.Max = longitud
     Me.Refresh
-    Me.pb2.Value = 0
+    Me.Pb2.Value = 0
     
     ' PROCESO DEL FICHERO ACEITUNC.TXT
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "ACEITUNC.TXT")
+        B = ComprobarRegistro(cad, "ACEITUNC.TXT")
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" And b Then
-        i = i + 1
+    If cad <> "" And B Then
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "ACEITUNC.TXT")
+        B = ComprobarRegistro(cad, "ACEITUNC.TXT")
     End If
     
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
 
@@ -973,46 +973,46 @@ Dim Tipo As Integer
     NF = FreeFile
     Open Fichero3 For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     longitud = FileLen(Fichero3)
     
-    pb2.visible = True
-    Me.pb2.Max = longitud
+    Pb2.visible = True
+    Me.Pb2.Max = longitud
     Me.Refresh
-    Me.pb2.Value = 0
+    Me.Pb2.Value = 0
     
     ' PROCESO DEL FICHERO STOCKC.TXT
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "STOCKC.TXT")
+        B = ComprobarRegistro(cad, "STOCKC.TXT")
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" And b Then
-        i = i + 1
+    If cad <> "" And B Then
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad, "STOCKC.TXT")
+        B = ComprobarRegistro(cad, "STOCKC.TXT")
     End If
     
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
 
-    ComprobarErrores = b
+    ComprobarErrores = B
     Exit Function
 
 eComprobarErrores:
@@ -1026,11 +1026,11 @@ Dim Rs As ADODB.Recordset
 Dim longitud As Long
 
 Dim cadMen As String
-Dim Cad As String
+Dim cad As String
 
 Dim NF As Integer
-Dim i As Integer
-Dim b As Boolean
+Dim I As Integer
+Dim B As Boolean
 
 
     On Error GoTo eCargarFicheros
@@ -1043,142 +1043,142 @@ Dim b As Boolean
     NF = FreeFile
     Open Fichero1 For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     longitud = FileLen(Fichero1)
     
-    pb2.visible = True
-    Me.pb2.Max = longitud
+    Pb2.visible = True
+    Me.Pb2.Max = longitud
     Me.Refresh
-    Me.pb2.Value = 0
+    Me.Pb2.Value = 0
     
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = InsertarRegistros(Cad, 0)
+        B = InsertarRegistros(cad, 0)
             
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" And b Then
-        i = i + 1
+    If cad <> "" And B Then
+        I = I + 1
         
-        Me.pb2.Value = Me.pb2.Value + Len(Cad)
-        lblProgres(3).Caption = "Linea " & i
+        Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+        lblProgres(3).Caption = "Linea " & I
         Me.Refresh
         
-        b = InsertarRegistros(Cad, 0)
+        B = InsertarRegistros(cad, 0)
     End If
     
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
 
     
-    If b Then
+    If B Then
         ' PROCESO DEL FICHERO ACEITUNC.TXT
         lblProgres(2).Caption = "Cargando Fichero ACEITUNC.TXT "
         
         NF = FreeFile
         Open Fichero2 For Input As #NF
         
-        Line Input #NF, Cad
-        i = 0
+        Line Input #NF, cad
+        I = 0
         
         longitud = FileLen(Fichero2)
         
-        pb2.visible = True
-        Me.pb2.Max = longitud
+        Pb2.visible = True
+        Me.Pb2.Max = longitud
         Me.Refresh
-        Me.pb2.Value = 0
+        Me.Pb2.Value = 0
         
-        While Not EOF(NF) And b
-            i = i + 1
+        While Not EOF(NF) And B
+            I = I + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(Cad)
-            lblProgres(3).Caption = "Linea " & i
+            Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+            lblProgres(3).Caption = "Linea " & I
             Me.Refresh
             
-            b = InsertarRegistros(Cad, 1)
+            B = InsertarRegistros(cad, 1)
                 
-            Line Input #NF, Cad
+            Line Input #NF, cad
         Wend
         Close #NF
         
-        If Cad <> "" And b Then
-            i = i + 1
+        If cad <> "" And B Then
+            I = I + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(Cad)
-            lblProgres(3).Caption = "Linea " & i
+            Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+            lblProgres(3).Caption = "Linea " & I
             Me.Refresh
             
-            b = InsertarRegistros(Cad, 1)
+            B = InsertarRegistros(cad, 1)
         End If
     End If
         
         
-    pb2.visible = False
+    Pb2.visible = False
     lblProgres(2).Caption = ""
     lblProgres(3).Caption = ""
 
 
-    If b Then
+    If B Then
         ' PROCESO DEL FICHERO STOCKC.TXT
         lblProgres(2).Caption = "Cargando Fichero STOCKC.TXT "
         
         NF = FreeFile
         Open Fichero3 For Input As #NF
         
-        Line Input #NF, Cad
-        i = 0
+        Line Input #NF, cad
+        I = 0
         
         longitud = FileLen(Fichero3)
         
-        pb2.visible = True
-        Me.pb2.Max = longitud
+        Pb2.visible = True
+        Me.Pb2.Max = longitud
         Me.Refresh
-        Me.pb2.Value = 0
+        Me.Pb2.Value = 0
         
-        While Not EOF(NF) And b
-            i = i + 1
+        While Not EOF(NF) And B
+            I = I + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(Cad)
-            lblProgres(3).Caption = "Linea " & i
+            Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+            lblProgres(3).Caption = "Linea " & I
             Me.Refresh
             
-            b = InsertarRegistros(Cad, 2)
+            B = InsertarRegistros(cad, 2)
                 
-            Line Input #NF, Cad
+            Line Input #NF, cad
         Wend
         Close #NF
         
-        If Cad <> "" And b Then
-            i = i + 1
+        If cad <> "" And B Then
+            I = I + 1
             
-            Me.pb2.Value = Me.pb2.Value + Len(Cad)
-            lblProgres(3).Caption = "Linea " & i
+            Me.Pb2.Value = Me.Pb2.Value + Len(cad)
+            lblProgres(3).Caption = "Linea " & I
             Me.Refresh
             
-            b = InsertarRegistros(Cad, 2)
+            B = InsertarRegistros(cad, 2)
         End If
         
-        pb2.visible = False
+        Pb2.visible = False
         lblProgres(2).Caption = ""
         lblProgres(3).Caption = ""
     End If
     
-    If b Then
-        b = InsertarTemporales
+    If B Then
+        B = InsertarTemporales
     End If
     
-    If b Then
+    If B Then
         CargarFicheros = True
     End If
     
@@ -1233,7 +1233,7 @@ eExistenFicheros:
 End Function
 
 
-Private Function ComprobarRegistro(Cad As String, Fichero As String) As Boolean
+Private Function ComprobarRegistro(cad As String, Fichero As String) As Boolean
 Dim Socio As String
 Dim Sql As String
 Dim Sql1 As String
@@ -1243,10 +1243,10 @@ Dim Mens As String
 
     ComprobarRegistro = True
 
-    If Mid(Cad, 1, 3) = "CAB" Then
-        Socio = Mid(Cad, 6, 5)
-        Fecha = Mid(Cad, 50, 10)
-        Factura = Mid(Cad, 60, 6)
+    If Mid(cad, 1, 3) = "CAB" Then
+        Socio = Mid(cad, 6, 5)
+        Fecha = Mid(cad, 50, 10)
+        Factura = Mid(cad, 60, 6)
         Select Case Fichero
             Case "ACEITEC.TXT"
                 Tipo = 0
@@ -1272,7 +1272,7 @@ Dim Mens As String
             If Fichero = "ACEITUNC.TXT" Then
                 ' comprobamos que el socio tiene un campo para la variedad introducida sin fecha de baja
                 Sql1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N")
-                Sql1 = Sql1 & " and codvarie = " & DBSet(txtcodigo(0).Text, "N")
+                Sql1 = Sql1 & " and codvarie = " & DBSet(txtCodigo(0).Text, "N")
                 Sql1 = Sql1 & " and fecbajas is null"
                 
                 If DevuelveValor(Sql1) = 0 Then
@@ -1324,7 +1324,7 @@ eComprobarRegistro:
 End Function
 
 
-Private Function InsertarRegistros(Cad As String, Tipo As Byte) As Boolean
+Private Function InsertarRegistros(cad As String, Tipo As Byte) As Boolean
 ' Tipo = 0 --> aceitec
 '        1 --> aceitunc
 '        2 --> stockc
@@ -1346,10 +1346,10 @@ Dim BaseReten As Currency
     
     InsertarRegistros = False
         
-    If Mid(Cad, 1, 3) = "CAB" Then
-        Socio = Mid(Cad, 6, 5)
-        Fecha = Mid(Cad, 50, 10)
-        Factura = Mid(Cad, 60, 6)
+    If Mid(cad, 1, 3) = "CAB" Then
+        Socio = Mid(cad, 6, 5)
+        Fecha = Mid(cad, 50, 10)
+        Factura = Mid(cad, 60, 6)
         
         numlinea = 0
         
@@ -1358,17 +1358,17 @@ Dim BaseReten As Currency
     End If
     
  
-    If Mid(Cad, 1, 3) = "DET" Then
+    If Mid(cad, 1, 3) = "DET" Then
         Concepto = ValorNulo
         cantidad = ValorNulo
         Precio = ValorNulo
         Importe = ValorNulo
             
         numlinea = numlinea + 1
-        Concepto = Mid(Cad, 12, 30)
-        cantidad = Mid(Cad, 43, 9)
-        Precio = Mid(Cad, 50, 8)
-        Importe = Mid(Cad, 58, 11)
+        Concepto = Mid(cad, 12, 30)
+        cantidad = Mid(cad, 43, 9)
+        Precio = Mid(cad, 50, 8)
+        Importe = Mid(cad, 58, 11)
     
         CantidadVar = CantidadVar + cantidad
         ImporteVar = ImporteVar + Importe
@@ -1391,18 +1391,18 @@ Dim BaseReten As Currency
     End If
     
     
-    If Mid(Cad, 1, 3) = "TOT" Then
-        Base = Mid(Cad, 4, 11)
-        iva = Mid(Cad, 20, 11)
-        TotFactu = Mid(Cad, 31, 11)
+    If Mid(cad, 1, 3) = "TOT" Then
+        Base = Mid(cad, 4, 11)
+        iva = Mid(cad, 20, 11)
+        TotFactu = Mid(cad, 31, 11)
         
         ImpReten = ""
         PorcReten = 0
         BaseReten = 0
         If Tipo = 1 Then ' fichero ACEITUNC.TXT
-            ImpReten = Mid(Cad, 36, 11)
-            TotFactu = Mid(Cad, 47, 11)
-            PorcReten = Mid(Cad, 31, 5)
+            ImpReten = Mid(cad, 36, 11)
+            TotFactu = Mid(cad, 47, 11)
+            PorcReten = Mid(cad, 31, 5)
         End If
         
         TipoIVA = ""
@@ -1412,7 +1412,7 @@ Dim BaseReten As Currency
         Set vSocio = New cSocio
         If vSocio.LeerDatosSeccion(CStr(Socio), vParamAplic.SeccionAlmaz) Then
             '[Monica]28/10/2015: ya no se coge el iva de la seccion de almazara del socio
-            TipoIVA = txtcodigo(3).Text 'vSocio.CodIva
+            TipoIVA = txtCodigo(3).Text 'vSocio.CodIva
             TipoIRPF = vSocio.TipoIRPF
             If TipoIVA <> "" Then
                 Set vSeccion = New CSeccion
@@ -1445,7 +1445,7 @@ Dim BaseReten As Currency
              Sql = Sql & "`esanticipogasto`) values ("
              Sql = Sql & DBSet(CodTipom, "T") & ","
              Sql = Sql & DBSet(Factura, "N") & ","
-             Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
+             Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
              Sql = Sql & DBSet(Socio, "N") & ","
              Sql = Sql & DBSet(Base, "N") & ","
              Sql = Sql & DBSet(TipoIVA, "N") & "," ' tipo de iva
@@ -1466,7 +1466,7 @@ Dim BaseReten As Currency
         
             'VARIEDAD DE FACTURA
             Sql1 = "select min(codcampo) from rcampos where codsocio = " & DBSet(Socio, "N") & " and "
-            Sql1 = Sql1 & " codvarie = " & DBSet(txtcodigo(0).Text, "N") & " and fecbajas is null "
+            Sql1 = Sql1 & " codvarie = " & DBSet(txtCodigo(0).Text, "N") & " and fecbajas is null "
             
             campo = DevuelveValor(Sql1)
             
@@ -1474,8 +1474,8 @@ Dim BaseReten As Currency
             Sql = Sql & "kilosnet, preciomed, imporvar, descontado) values ("
             Sql = Sql & DBSet(CodTipom, "T") & ","
             Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtcodigo(0).Text, "N") & ","
+            Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
+            Sql = Sql & DBSet(txtCodigo(0).Text, "N") & ","
             Sql = Sql & DBSet(campo, "N") & "," 'campo
             Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
             Sql = Sql & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
@@ -1483,15 +1483,15 @@ Dim BaseReten As Currency
             
             conn.Execute Sql
         
-            Calidad = CalidadPrimera(txtcodigo(0).Text)
+            Calidad = CalidadPrimera(txtCodigo(0).Text)
             
             'CALIDAD DE FACTURA
             Sql = "insert into temprfactsoc_calidad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
             Sql = Sql & "codcalid, kilosnet, precio, imporcal) values ("
             Sql = Sql & DBSet(CodTipom, "T") & ","
             Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtcodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtcodigo(0).Text, "N") & ","
+            Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
+            Sql = Sql & DBSet(txtCodigo(0).Text, "N") & ","
             Sql = Sql & DBSet(campo, "N") & "," 'campo
             Sql = Sql & DBSet(Calidad, "N") & "," ' calidad: ponemos la calidad primera
             Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
@@ -1504,7 +1504,7 @@ Dim BaseReten As Currency
             ImporteVar = 0
         
         Else
-            TipoIVA = txtcodigo(1).Text
+            TipoIVA = txtCodigo(1).Text
             
             Set vSeccion = New CSeccion
             If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
@@ -1664,29 +1664,47 @@ eInsertarTemporales:
     MuestraError Err.Number, "Insertar Temporales", Err.Description
 End Function
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim vSeccion As CSeccion
 
-    DatosOk = False
+    DatosOK = False
 
-    If txtcodigo(0).Text = "" Then
+    If txtCodigo(0).Text = "" Then
         MsgBox "Debe introducir la variedad.", vbExclamation
-        PonerFoco txtcodigo(2)
+        PonerFoco txtCodigo(2)
         Exit Function
     End If
     
-    If txtcodigo(1).Text = "" Or txtcodigo(3).Text = "" Then
+    If txtCodigo(1).Text = "" Or txtCodigo(3).Text = "" Then
         MsgBox "Debe introducir los tipos de iva.", vbExclamation
-        PonerFoco txtcodigo(1)
+        PonerFoco txtCodigo(1)
         Exit Function
     End If
     
-    If txtcodigo(2).Text = "" Then
+    If txtCodigo(2).Text = "" Then
         MsgBox "Introduzca la fecha de factura.", vbExclamation
-        PonerFoco txtcodigo(2)
+        PonerFoco txtCodigo(2)
         Exit Function
     End If
     
-    DatosOk = True
+    '[Monica]20/06/2017: control de fechas que antes no estaba
+    Set vSeccion = New CSeccion
+    If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
+        If vSeccion.AbrirConta Then
+            ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(2)))
+            If ResultadoFechaContaOK > 0 Then
+                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+                Exit Function
+            End If
+        End If
+    End If
+    Set vSeccion = Nothing
+    
+    
+    
+    
+    
+    DatosOK = True
 
 End Function

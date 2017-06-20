@@ -863,7 +863,7 @@ Dim I As Integer
 
 
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.CmdCancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 

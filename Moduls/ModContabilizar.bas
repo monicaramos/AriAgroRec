@@ -5475,6 +5475,7 @@ Dim CadenaInsertFaclin2 As String
             If Mc.ConseguirContador("1", (FecRec <= CDate(FechaFin) - 365), True) = 0 Then
                 vContaFra.NumeroFactura = Mc.Contador
                 vContaFra.Anofac = Year(FecRec)
+                vContaFra.Serie = SerieFraPro
             
                 'guardamos estos valores para utilizarlos cuando insertemos las lineas de la factura
                 BaseImp = DBLet(Rs!baseimpo, "N")

@@ -1446,8 +1446,8 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
             For jj = 0 To 8
-                txtaux3(jj).Height = DataGrid2.RowHeight
-                txtaux3(jj).Top = alto - 210
+                txtAux3(jj).Height = DataGrid2.RowHeight
+                txtAux3(jj).Top = alto - 210
 '                txtAux3(jj).visible = b
             Next jj
             
@@ -1743,7 +1743,7 @@ Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo Text1(3)
-    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
+    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 3) 'porcentaje iva
     FormateaCampo Text1(4)
 End Sub
@@ -1751,13 +1751,13 @@ End Sub
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Variedades
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Variedad
-    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
+    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Variedad
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Socios
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Socios
-    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -1935,15 +1935,15 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaAlb
     
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM scafac1 "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM scafac1 "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -1953,15 +1953,15 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea todas las lineas de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM slifac "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM slifac "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -2024,7 +2024,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 Dim vSeccion As CSeccion
 Dim vSocio As cSocio
 
@@ -2042,8 +2042,8 @@ Dim vSocio As cSocio
         Case 2 'Socio
             If Modo = 1 Then Exit Sub
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
-                If text2(Index).Text = "" Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
+                If Text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -2068,7 +2068,7 @@ Dim vSocio As cSocio
                             Set vSeccion = New CSeccion
                             If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                                 If vSeccion.AbrirConta Then
-                                    text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                                    Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                                     Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                                 End If
                             End If
@@ -2084,7 +2084,7 @@ Dim vSocio As cSocio
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                     If vSeccion.AbrirConta Then
-                        text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                        Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                         Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                     End If
                 End If
@@ -2235,14 +2235,14 @@ Dim vSeccion As CSeccion
     'poner descripcion campos
     Modo = 4
     
-    text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
+    Text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
     Set vSeccion = New CSeccion
     '[Monica]30/07/2015: antes ponia seccion de horto. CORREGIDO
     If vSeccion.LeerDatos(vParamAplic.SeccionAlmaz) Then
         B = vSeccion.AbrirConta
         If B Then
-            text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+            Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
         End If
     End If
     Set vSeccion = Nothing
@@ -2349,13 +2349,13 @@ Dim b1 As Boolean
     
     
     For I = 0 To 7
-        BloquearTxt txtaux3(I), True
-        txtaux3(I).visible = False
+        BloquearTxt txtAux3(I), True
+        txtAux3(I).visible = False
     Next I
     For I = 3 To 7
         If I <> 4 Then
-            BloquearTxt txtaux3(I), (Modo <> 1)
-            txtaux3(I).visible = (Modo = 1)
+            BloquearTxt txtAux3(I), (Modo <> 1)
+            txtAux3(I).visible = (Modo = 1)
         End If
     Next I
     
@@ -2408,12 +2408,29 @@ Private Function DatosOK() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
 Dim B As Boolean
+Dim vSeccion As CSeccion
 
     On Error GoTo EDatosOK
 
     DatosOK = False
     
 '    ComprobarDatosTotales
+
+    
+    '[Monica]20/06/2017: control de fechas que antes no estaba
+    Set vSeccion = New CSeccion
+    If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
+        If vSeccion.AbrirConta Then
+            ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(1)))
+            If ResultadoFechaContaOK > 0 Then
+                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+                Exit Function
+            End If
+        End If
+    End If
+    Set vSeccion = Nothing
+
+
 
     'comprobamos datos OK de la tabla scafac
     B = CompForm2(Me, 2, "Frame2") ' , 1) 'Comprobar formato datos ok de la cabecera: opcion=1
@@ -2523,7 +2540,7 @@ End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -2732,7 +2749,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargaGRid
 
@@ -2741,8 +2758,8 @@ Dim SQL As String
             Opcion = 2
     End Select
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     vDataGrid.RowHeight = 270
     
@@ -2791,7 +2808,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String, LEtra As String, Sql2 As String
+Dim Sql As String, LEtra As String, Sql2 As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -2804,14 +2821,14 @@ Dim Mens As String
         
     'Eliminar en tablas de cabecera de factura
     '------------------------------------------
-    SQL = " " & ObtenerWhereCP(True)
+    Sql = " " & ObtenerWhereCP(True)
     
     'Lineas de factura
-    conn.Execute "Delete from rlinfactalmz " & SQL
+    conn.Execute "Delete from rlinfactalmz " & Sql
     
     
     'Cabecera de factura (rcabfactalmz)
-    conn.Execute "Delete from " & NombreTabla & SQL
+    conn.Execute "Delete from " & NombreTabla & Sql
     
 '    'Decrementar contador si borramos el ultima factura
 '    Set vTipoMov = New CTiposMov
@@ -2834,7 +2851,7 @@ FinEliminar:
 End Function
 
 Private Function EliminarLinea() As Boolean
-Dim SQL As String, LEtra As String
+Dim Sql As String, LEtra As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -2849,13 +2866,13 @@ Dim Mens As String
     
     'Eliminar en tablas de variedades y calidades
     '------------------------------------------
-    SQL = " where tipofichero = " & Data3.Recordset.Fields(0) & "'"
-    SQL = SQL & " and numfactu = " & Data3.Recordset.Fields(1)
-    SQL = SQL & " and fecfactu = " & DBSet(Data3.Recordset.Fields(2), "F")
-    SQL = SQL & " and codsocio = " & DBSet(Data3.Recordset.Fields(3), "N")
+    Sql = " where tipofichero = " & Data3.Recordset.Fields(0) & "'"
+    Sql = Sql & " and numfactu = " & Data3.Recordset.Fields(1)
+    Sql = Sql & " and fecfactu = " & DBSet(Data3.Recordset.Fields(2), "F")
+    Sql = Sql & " and codsocio = " & DBSet(Data3.Recordset.Fields(3), "N")
     
     'Lineas de factura
-    conn.Execute "Delete from rlinfactalmz " & SQL
+    conn.Execute "Delete from rlinfactalmz " & Sql
 
     
 FinEliminar:
@@ -2903,17 +2920,17 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " tipofichero= " & Combo1(0).ListIndex
-    SQL = SQL & " and numfactu = " & Text1(0).Text
-    SQL = SQL & " and fecfactu = " & DBSet(Text1(1).Text, "F")
-    SQL = SQL & " and codsocio = " & DBSet(Text1(2).Text, "N")
+    Sql = " tipofichero= " & Combo1(0).ListIndex
+    Sql = Sql & " and numfactu = " & Text1(0).Text
+    Sql = Sql & " and fecfactu = " & DBSet(Text1(1).Text, "F")
+    Sql = Sql & " and codsocio = " & DBSet(Text1(2).Text, "N")
 
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -2928,24 +2945,24 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     Select Case Opcion
     Case 2  ' lineas
-        SQL = "SELECT rlinfactalmz.tipofichero, rlinfactalmz.numfactu, rlinfactalmz.fecfactu, "
-        SQL = SQL & " rlinfactalmz.codsocio, rlinfactalmz.numlinea, rlinfactalmz.concepto, "
-        SQL = SQL & " rlinfactalmz.cantidad, rlinfactalmz.precioar, rlinfactalmz.importel "
-        SQL = SQL & " FROM rlinfactalmz " 'lineas de factura
-        SQL = SQL & " WHERE 1 = 1 "
+        Sql = "SELECT rlinfactalmz.tipofichero, rlinfactalmz.numfactu, rlinfactalmz.fecfactu, "
+        Sql = Sql & " rlinfactalmz.codsocio, rlinfactalmz.numlinea, rlinfactalmz.concepto, "
+        Sql = Sql & " rlinfactalmz.cantidad, rlinfactalmz.precioar, rlinfactalmz.importel "
+        Sql = Sql & " FROM rlinfactalmz " 'lineas de factura
+        Sql = Sql & " WHERE 1 = 1 "
     End Select
     
     If enlaza Then
-        SQL = SQL & " and " & ObtenerWhereCP(False)
+        Sql = Sql & " and " & ObtenerWhereCP(False)
     Else
-        SQL = SQL & " and numfactu = -1"
+        Sql = Sql & " and numfactu = -1"
     End If
-    SQL = SQL & " ORDER BY tipofichero, numfactu"
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY tipofichero, numfactu"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -3081,7 +3098,7 @@ Dim NroCopias As Integer
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtaux3(Index), Modo
+    ConseguirFoco txtAux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3093,12 +3110,12 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
 End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -3154,16 +3171,16 @@ End Function
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        SQL = CadenaInsertarDesdeForm(Me)
-        If SQL <> "" Then
-            If InsertarOferta(SQL, vTipoMov) Then
+        Sql = CadenaInsertarDesdeForm(Me)
+        If Sql <> "" Then
+            If InsertarOferta(Sql, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                 PonerCadenaBusqueda
                 PonerModo 2
@@ -3430,7 +3447,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
