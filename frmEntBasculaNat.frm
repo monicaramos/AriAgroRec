@@ -4071,10 +4071,19 @@ Dim Sql As String
         
         '[Monica]09/03/2017: en el caso de natural
         If B Then
-            If ExisteAlbaran(Text1(25).Text) Then
+            If ExisteAlbaran(Text1(25).Text, vEmpresa.BDAriagro) Then
                 MsgBox "Nro de Albarán ya existe. Reintroduzca.", vbExclamation
                 B = False
                 PonerFoco Text1(25)
+            End If
+            '[Monica]22/06/2017: comprobamos que el nro de albaran no esté en ariagro2
+            If vEmpresa.BDAriagro = "ariagro1" Then
+                If ExisteAlbaran(Text1(25).Text, "ariagro2") Then
+                    MsgBox "Nro de Albarán ya existe en Hortonature. Revise.", vbExclamation
+                    B = False
+                    PonerFoco Text1(25)
+                End If
+                
             End If
         End If
     End If

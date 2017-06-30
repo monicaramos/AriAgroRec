@@ -5517,7 +5517,7 @@ Dim I As Byte
     B = (Modo = 3 Or Modo = 4 Or Modo = 2) And DatosADevolverBusqueda = ""
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -5671,12 +5671,12 @@ End Sub
 Private Sub frmCoop_DatoSeleccionado(CadenaSeleccion As String)
     Text1(21).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo cooperativa
     FormateaCampo Text1(21)
-    text2(21).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre cooperativa
+    Text2(21).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre cooperativa
 End Sub
 
 Private Sub frmGlo_DatoSeleccionado(CadenaSeleccion As String)
     Text1(26).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo globalgap
-    text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre globalgap
+    Text2(26).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre globalgap
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
@@ -5695,7 +5695,7 @@ End Sub
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
     Text1(15).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
     FormateaCampo Text1(15)
-    text2(15).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
+    Text2(15).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
 End Sub
 
 Private Sub frmSocPrev_DatoSeleccionado(CadenaSeleccion As String)
@@ -6023,7 +6023,7 @@ Dim vAdobe As String
 '        End With
 '   End If
 
-   Call ShellExecute(Me.hwnd, "Open", Me.lw1.SelectedItem.SubItems(2), "", "", 1)
+   Call ShellExecute(Me.hWnd, "Open", Me.lw1.SelectedItem.SubItems(2), "", "", 1)
    
 End Sub
 
@@ -6394,8 +6394,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     For I = 0 To DataGridAux.Count - 1
 '        If i <> 4 Then
             CargaGrid I, True
-            If Not AdoAux(I).Recordset.EOF Then _
-                PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
+            If Not Adoaux(I).Recordset.EOF Then _
+                PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
 '        End If
     Next I
     ' *******************************************
@@ -6412,7 +6412,7 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     '[Monica]21/05/2013: indicamos la situacion de bloqueo
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
-        Label31.Caption = text2(15).Text
+        Label31.Caption = Text2(15).Text
         Label31.visible = False
         Label31.visible = (ComprobarCero(Text1(15).Text) >= 1)
         If Label31.visible Then
@@ -6422,7 +6422,7 @@ Dim CPostal As String, desProvi As String, desPais As String
         
         End If
     Else
-        Label31.Caption = text2(15).Text
+        Label31.Caption = Text2(15).Text
         Label31.visible = SituacionBloqueo(Text1(15).Text)
     End If
     
@@ -6538,8 +6538,8 @@ Dim V
                     'SSTab2.Tab = NumTabMto
                     ' ************************
                     
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
-                        AdoAux(NumTabMto).Recordset.MoveFirst
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                        Adoaux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llínies
@@ -6552,10 +6552,10 @@ Dim V
                     ' ***********************
                     
                     PonerModo 4
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                         ' ***************************************************************
                     End If
 
@@ -6577,7 +6577,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not AdoAux(NumTabMto).Recordset.EOF Then
+            If Not Adoaux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -6800,8 +6800,8 @@ Dim Sql As String
                 
         Case 15 'situacion
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsituacion", "nomsitua")
-                If text2(Index).Text = "" Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsituacion", "nomsitua")
+                If Text2(Index).Text = "" Then
                     cadMen = "No existe la Situación: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6819,14 +6819,14 @@ Dim Sql As String
                     PonerFoco Text1(Index)
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
         
         
         Case 21 'cooperativa
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcoope", "nomcoope")
-                If text2(Index).Text = "" Then
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcoope", "nomcoope")
+                If Text2(Index).Text = "" Then
                     cadMen = "No existe la Cooperativa: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6844,7 +6844,7 @@ Dim Sql As String
                     PonerFoco Text1(Index)
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
         
         
@@ -6891,8 +6891,8 @@ Dim Sql As String
           
         Case 26
             If Text1(Index).Text <> "" Then
-                text2(Index).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(Index).Text, "T")
-                If text2(Index).Text = "" Then
+                Text2(Index).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(Index).Text, "T")
+                If Text2(Index).Text = "" Then
                     cadMen = "No existe el código de GlobalGap: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -6930,7 +6930,7 @@ Dim Sql As String
                     End If
                 End If
             Else
-                text2(Index).Text = ""
+                Text2(Index).Text = ""
             End If
     
         Case 27 ' codigo de iban
@@ -7027,9 +7027,9 @@ Dim NomEmple As String
 
     On Error GoTo EPosarDescripcions
 
-    text2(15).Text = PonerNombreDeCod(Text1(15), "rsituacion", "nomsitua", "codsitua", "N")
-    text2(21).Text = PonerNombreDeCod(Text1(21), "rcoope", "nomcoope", "codcoope", "N")
-    text2(26).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(26).Text, "T")
+    Text2(15).Text = PonerNombreDeCod(Text1(15), "rsituacion", "nomsitua", "codsitua", "N")
+    Text2(21).Text = PonerNombreDeCod(Text1(21), "rcoope", "nomcoope", "codcoope", "N")
+    Text2(26).Text = DevuelveDesdeBDNew(cAgro, "rglobalgap", "descripcion", "codigo", Text1(26).Text, "T")
     If vParamAplic.NumeroConta <> 0 Then
 '        lo hemos pasado a lineas
 '        Text2(20).Text = PonerNombreDeCod(Text1(20), "tiposiva", "porceiva", "codigiva", "N", cConta)
@@ -7075,7 +7075,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -7087,11 +7087,11 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'telefonos
             Sql = "¿Seguro que desea eliminar el telefono?"
-            Sql = Sql & vbCrLf & "Teléfono: " & AdoAux(Index).Recordset!idtelefono & " - " & AdoAux(Index).Recordset!imei
+            Sql = Sql & vbCrLf & "Teléfono: " & Adoaux(Index).Recordset!idtelefono & " - " & Adoaux(Index).Recordset!imei
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_telefonos"
-                Sql = Sql & vWhere & " AND idtelefono= " & DBLet(AdoAux(Index).Recordset!idtelefono, "T")
+                Sql = Sql & vWhere & " AND idtelefono= " & DBLet(Adoaux(Index).Recordset!idtelefono, "T")
                 
                 
                 CadenaCambio = "DELETE FROM rsocios_telefonos " & vWhere
@@ -7106,11 +7106,11 @@ Dim Eliminar As Boolean
             End If
         Case 1 'secciones
             Sql = "¿Seguro que desea eliminar la sección?"
-            Sql = Sql & vbCrLf & "Sección: " & AdoAux(Index).Recordset!codsecci & " - " & AdoAux(Index).Recordset!nomsecci
+            Sql = Sql & vbCrLf & "Sección: " & Adoaux(Index).Recordset!codsecci & " - " & Adoaux(Index).Recordset!nomsecci
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_seccion"
-                Sql = Sql & vWhere & " AND codsecci= " & DBLet(AdoAux(Index).Recordset!codsecci, "N")
+                Sql = Sql & vWhere & " AND codsecci= " & DBLet(Adoaux(Index).Recordset!codsecci, "N")
             
                 CadenaCambio = "DELETE FROM rsocios_seccion " & vWhere
                 '------------------------------------------------------------------------------
@@ -7124,11 +7124,11 @@ Dim Eliminar As Boolean
             End If
         Case 2 'pozos
             Sql = "¿Seguro que desea eliminar el registro?"
-            Sql = Sql & vbCrLf & "Numero Fase: " & AdoAux(Index).Recordset!numfases
+            Sql = Sql & vbCrLf & "Numero Fase: " & Adoaux(Index).Recordset!numfases
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_pozos"
-                Sql = Sql & vWhere & " AND numfases= " & DBLet(AdoAux(Index).Recordset!numfases, "N")
+                Sql = Sql & vWhere & " AND numfases= " & DBLet(Adoaux(Index).Recordset!numfases, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_pozos " & vWhere
                 '------------------------------------------------------------------------------
@@ -7141,11 +7141,11 @@ Dim Eliminar As Boolean
             End If
         Case 3 'miembros
             Sql = "¿Seguro que desea eliminar el miembro?"
-            Sql = Sql & vbCrLf & "NIF: " & AdoAux(Index).Recordset!nifmiembro
+            Sql = Sql & vbCrLf & "NIF: " & Adoaux(Index).Recordset!nifmiembro
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_miembros"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -7159,11 +7159,11 @@ Dim Eliminar As Boolean
         
         Case 4 'movimientos
             Sql = "¿Seguro que desea eliminar el campo de baja?"
-            Sql = Sql & vbCrLf & "Campo: " & AdoAux(Index).Recordset!codcampo
+            Sql = Sql & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codcampo
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rsocios_movim"
-                Sql = Sql & vWhere & " AND numlinea= " & DBLet(AdoAux(Index).Recordset!numlinea, "N")
+                Sql = Sql & vWhere & " AND numlinea= " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
                 
                 CadenaCambio = "DELETE FROM rsocios_miembros " & vWhere
                 '------------------------------------------------------------------------------
@@ -7180,14 +7180,14 @@ Dim Eliminar As Boolean
     End Select
 
     If Eliminar Then
-        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 4 Then _
             CargaGrid Index, True
         ' ***************************************************
-        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
@@ -7253,7 +7253,7 @@ Dim I As Integer
             End If
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7286,7 +7286,7 @@ Dim I As Integer
 '            End If
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7323,7 +7323,7 @@ Dim I As Integer
 '            End If
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7351,7 +7351,7 @@ Dim I As Integer
             End If
             ' ***************************************************************
             
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7376,7 +7376,7 @@ Dim I As Integer
             NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
             
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -7405,8 +7405,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
     
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -7601,7 +7601,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 
@@ -7798,16 +7798,16 @@ Dim I As Byte
                     txtAux2(5).Text = ""
                     txtAux2(0).Text = ""
                     Set vSeccion = New CSeccion
-                    If vSeccion.LeerDatos(AdoAux(1).Recordset!codsecci) Then
+                    If vSeccion.LeerDatos(Adoaux(1).Recordset!codsecci) Then
                         If vSeccion.AbrirConta Then
-                            If DBLet(AdoAux(1).Recordset!codmaccli, "T") <> "" Then
-                                txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", AdoAux(1).Recordset!codmaccli, "T")
+                            If DBLet(Adoaux(1).Recordset!codmaccli, "T") <> "" Then
+                                txtAux2(4).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Adoaux(1).Recordset!codmaccli, "T")
                             End If
-                            If DBLet(AdoAux(1).Recordset!codmacpro, "T") <> "" Then
-                                txtAux2(5).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", AdoAux(1).Recordset!codmacpro, "T")
+                            If DBLet(Adoaux(1).Recordset!codmacpro, "T") <> "" Then
+                                txtAux2(5).Text = DevuelveDesdeBDNew(cConta, "cuentas", "nommacta", "codmacta", Adoaux(1).Recordset!codmacpro, "T")
                             End If
                             
-                            txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", CStr(AdoAux(1).Recordset!CodIva), "N")
+                            txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", CStr(Adoaux(1).Recordset!CodIva), "N")
                             
                             vSeccion.CerrarConta
                         End If
@@ -7842,26 +7842,26 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim I As Byte
 
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
-    AdoAux(Index).Refresh
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
+    Adoaux(Index).Refresh
     
-    If Not AdoAux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
+    If Not Adoaux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         If (Index = 4) Then 'datos facturacion
-            tip = AdoAux(Index).Recordset!tipclien
+            tip = Adoaux(Index).Recordset!tipclien
             If (tip = 1) Then 'persona
-                txtAux2(27).Text = AdoAux(Index).Recordset!ape_raso & "," & AdoAux(Index).Recordset!Nom_Come
+                txtAux2(27).Text = Adoaux(Index).Recordset!ape_raso & "," & Adoaux(Index).Recordset!Nom_Come
             ElseIf (tip = 2) Then 'empresa
-                txtAux2(27).Text = AdoAux(Index).Recordset!Nom_Come
+                txtAux2(27).Text = Adoaux(Index).Recordset!Nom_Come
             End If
-            txtAux2(28).Text = DBLet(AdoAux(Index).Recordset!desforpa, "T")
-            txtAux2(29).Text = DBLet(AdoAux(Index).Recordset!desrutas, "T")
+            txtAux2(28).Text = DBLet(Adoaux(Index).Recordset!desforpa, "T")
+            txtAux2(29).Text = DBLet(Adoaux(Index).Recordset!desrutas, "T")
             'txtAux2(31).Text = DBLet(AdoAux(Index).Recordset!comision, "T") & " %"
-            txtAux2(32).Text = DBLet(AdoAux(Index).Recordset!nomrapel, "T")
+            txtAux2(32).Text = DBLet(Adoaux(Index).Recordset!nomrapel, "T")
             'Descripcion cuentas contables de la Contabilidad
             For I = 35 To 38
                 txtAux2(I).Text = PonerNombreDeCod(txtAux(I), "cuentas", "nommacta", "codmacta", , cConta)
@@ -7938,7 +7938,7 @@ Dim tots As String
 '        DataGridAux(Index).Columns(i).AllowSizing = False
 '    Next i
     
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     
     'DataGridAux(Index).Enabled = b
@@ -7962,7 +7962,7 @@ Dim tots As String
 '            BloquearTxt txtAux(14), Not b
 '            BloquearTxt txtAux(15), Not b
 
-            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
                 For I = 5 To 16
                     txtAux(I).Text = DataGridAux(Index).Columns(I).Text
                 Next I
@@ -7991,7 +7991,7 @@ Dim tots As String
 '            BloquearTxt txtAux(14), Not b
 '            BloquearTxt txtAux(15), Not b
 
-            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
 '                txtAux2(4).Text = PonerNombreCuenta(txtaux1(4), Modo)
 '                txtAux2(5).Text = PonerNombreCuenta(txtaux1(5), Modo)
 '                txtAux2(0).Text = PonerNombreDeCod(txtaux1(6), "tiposiva", "nombriva", "codigiva", "N", cConta)
@@ -8049,7 +8049,7 @@ Dim tots As String
     DataGridAux(Index).ScrollBars = dbgAutomatic
       
     ' **** si n'hi han llínies en grids i camps fora d'estos ****
-    If Not AdoAux(Index).Recordset.EOF Then
+    If Not Adoaux(Index).Recordset.EOF Then
         DataGridAux_RowColChange Index, 1, 1
     Else
         LimpiarCamposFrame Index
@@ -8192,7 +8192,7 @@ Dim TablaAux As String
             ModoLineas = 0
 
             If NumTabMto <> 4 Then
-                V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
                 CargaGrid NumTabMto, True
             End If
 
@@ -8202,7 +8202,7 @@ Dim TablaAux As String
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
             End If
             ' ***********************************************************
 
@@ -9297,12 +9297,23 @@ Dim vIban As String
                                     'Sql1 = Sql1 & " where cc.codmacta  in (" & Cuentas & ")  and (cc.codrem is null or cc.codrem = 0) and (cc.transfer is null or cc.transfer = 0)"
                                     Sql1 = Sql1 & " where cc.codmacta  in (" & Cuentas & ")  and (cc.siturem is null or cc.siturem <= 'Q')"
                                 End If
+                                
+                                If Not (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) Then
+                                    Sql1 = Sql1 & " and (impvenci + coalesce(gastos,0) - coalesce(impcobro, 0)) <> 0 "
+                                End If
+                                
                                 Sql1 = Sql1 & " union "
                                 Sql1 = Sql1 & " select count(*) total "
                                 Sql1 = Sql1 & " from pagos pp "
                                 '[Monica]09/09/2014: en los pagos cuando se contabiliza la transferencia desaparece el pago. Lo cambiamos
                                 'Sql1 = Sql1 & " where pp.ctaprove in (" & Cuentas & ") and  (pp.transfer is null or pp.transfer = 0)"
                                 Sql1 = Sql1 & " where pp.codmacta in (" & Cuentas & ") "
+                                
+                                If Not (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) Then
+                                    Sql1 = Sql1 & " and impefect - coalesce(imppagad,0) <> 0 "
+                                    Sql1 = Sql1 & " and codforpa in (select codforpa from formapago where tipforpa = 1) "
+                                End If
+                                
                                 Sql1 = Sql1 & ") aaaaaa "
                             End If
 
@@ -9369,12 +9380,19 @@ Dim vIban As String
                                             '[Monica]09/09/2014: la remesa no tiene que estar contabilizada. Lo cambiamos
                                             'Sql2 = Sql2 & " and (codrem is null or codrem = 0) and (transfer is null or transfer = 0)"
                                             Sql2 = Sql2 & " and (siturem is null or siturem <= 'Q')"
+                                            Sql2 = Sql2 & " and (impvenci + coalesce(gastos,0) - coalesce(impcobro, 0)) <> 0 "
+                                            
                                          End If
                                          
                                          ConnConta.Execute Sql2
                                          
                                          Sql2 = "update pagos set iban = " & DBSet(vIban, "T")
-                                         Sql2 = Sql2 & " where ctaprove in (" & Cuentas & ") "
+                                         Sql2 = Sql2 & " where codmacta in (" & Cuentas & ") "
+                                         
+                                        If Not (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) Then
+                                            Sql2 = Sql2 & " and impefect - coalesce(imppagad,0) <> 0 "
+                                            Sql2 = Sql2 & " and codforpa in (select codforpa from formapago where tipforpa = 1) "
+                                        End If
                                          '[Monica]09/09/2014: la remesa no tiene que estar contabilizada. Lo cambiamos
                                          'Sql2 = Sql2 & " and (transfer is null or transfer = 0)"
                                         

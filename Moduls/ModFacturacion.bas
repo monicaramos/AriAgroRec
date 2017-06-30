@@ -2782,7 +2782,7 @@ ePasar:
 End Function
 
 'Marcar Factura como contabilizada y como pendiente de recibir nro de factura
-Public Function MarcarFactura(tipoMov As String, numfactu As String, FecFac As String, Optional EsAnticipoGasto As Boolean, Optional EsAnticipoRetirada As Boolean) As Boolean
+Public Function MarcarFactura(tipoMov As String, numfactu As String, FecFac As String, Optional MarcarPdteRecibirFra As Boolean) As Boolean
 
     Dim Sql As String
     
@@ -2791,7 +2791,12 @@ Public Function MarcarFactura(tipoMov As String, numfactu As String, FecFac As S
     MensError = ""
     MarcarFactura = False
     
-    Sql = "update rfactsoc set contabilizado = 1, pdtenrofact = 1 where codtipom = " & DBSet(tipoMov, "T")
+    Sql = "update rfactsoc set contabilizado = 1 "
+    
+    '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada pq no integran en la contabilidad, y no esperan nro de fra
+    If MarcarPdteRecibirFra Then Sql = Sql & ", pdtenrofact = 1 "
+    
+    Sql = Sql & " where codtipom = " & DBSet(tipoMov, "T")
     Sql = Sql & " and numfactu = " & DBSet(numfactu, "N") & " and fecfactu = " & DBSet(FecFac, "F")
     
     conn.Execute Sql
@@ -5690,6 +5695,12 @@ Dim vPorcGasto As String
                 If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
+            '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
+            If vParamAplic.Cooperativa = 9 Then
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, False)
+            End If
+            
+            
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             If B Then B = RecalcularCalidades(tipoMov, CStr(numfactu), FecFac)
@@ -5921,6 +5932,11 @@ Dim vPorcGasto As String
         If vParamAplic.Cooperativa = 4 Then
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        End If
+        
+        '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
+        If vParamAplic.Cooperativa = 9 Then
+            If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, False)
         End If
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
@@ -6213,6 +6229,11 @@ Dim vPrecio As Currency
                 If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
             End If
             
+            '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
+            If vParamAplic.Cooperativa = 9 Then
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, False)
+            End If
+            
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
             If B Then B = vTipoMov.IncrementarContador(tipoMov)
@@ -6348,6 +6369,13 @@ Dim vPrecio As Currency
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
         End If
+        
+        
+        '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
+        If vParamAplic.Cooperativa = 9 Then
+            If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, False)
+        End If
+        
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
@@ -14300,7 +14328,7 @@ End Function
 
 
 
-Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
+Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef ImpIVA As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
 
     Dim I As Integer
     Dim Sql As String
@@ -14320,7 +14348,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
          Tipiva(I) = 0
          ImpTot(I) = 0
          Impbas(I) = 0
-         impiva(I) = 0
+         ImpIVA(I) = 0
          PorIva(I) = 0
          PorRec(I) = 0
          ImpREC(I) = 0
@@ -14342,9 +14370,9 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
  
             PorIva(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(I)), "N")
             PorRec(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(I)), "N")
-            impiva(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
+            ImpIVA(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
             ImpREC(I) = DBLet(Round2(Impbas(I) * PorRec(I) / 100, 2), "N")
-            ImpTot(I) = Impbas(I) + impiva(I) + ImpREC(I)
+            ImpTot(I) = Impbas(I) + ImpIVA(I) + ImpREC(I)
             TotFac = TotFac + ImpTot(I)
  
 'antes el iva estaba incluido
@@ -14366,7 +14394,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
             Select Case Sql
                 Case 0
                     For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I) + impiva(I)
+                        Base = Base + Impbas(I) + ImpIVA(I)
                     Next I
                 Case 1
                     For I = 0 To baseimpo.Count - 1

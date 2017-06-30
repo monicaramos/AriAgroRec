@@ -1530,13 +1530,13 @@ Private Sub btnBuscar_Click(Index As Integer)
         Case 0 'Conceptos
             Set frmCon = New frmFVARConceptos
             frmCon.DatosADevolverBusqueda = "0|1|2|4|"
-            frmCon.CodigoActual = txtAux(5).Text
+            frmCon.CodigoActual = txtaux(5).Text
             frmCon.Show vbModal
             Set frmCon = Nothing
             
     End Select
     
-    PonerFoco txtAux(5)
+    PonerFoco txtaux(5)
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
 
@@ -1606,8 +1606,8 @@ Dim Sql As String
                     If vSeccion.AbrirConta Then
                         PorRet = 0
                         If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
-                        Adoaux(0).Recordset.MoveFirst
-                        RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+                        AdoAux(0).Recordset.MoveFirst
+                        RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
 
                         Text1(28).Text = ""
                         If ImpRet <> 0 Then Text1(28).Text = Format(ImpRet, "#,###,###,##0.00")
@@ -1934,7 +1934,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 
@@ -2217,7 +2217,7 @@ Dim I As Byte
     B = (Modo = 3 Or (Modo = 4 And Not ModificarTotales) Or Modo = 2) 'And (Check1(1).Value = 0)
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -2244,11 +2244,11 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     Select Case Index
         Case 0 'Lineas de factura
-                Tabla = "fvarlinfact"
+                tabla = "fvarlinfact"
                 Sql = "SELECT codtipom,numfactu,fecfactu,numlinea,fvarlinfact.codconce,fvarconce.nomconce, fvarlinfact.tipoiva, ampliaci,"
                 Sql = Sql & "cantidad, precio, importe"
                 Sql = Sql & " FROM fvarlinfact, fvarconce "
@@ -2259,7 +2259,7 @@ Dim Tabla As String
                 Else
                     Sql = Sql & " AND fvarlinfact.codtipom is null"
                 End If
-                Sql = Sql & " ORDER BY " & Tabla & ".numlinea "
+                Sql = Sql & " ORDER BY " & tabla & ".numlinea "
     End Select
     MontaSQLCarga = Sql
 End Function
@@ -2316,7 +2316,7 @@ Private Sub frmCon_DatoSeleccionado(CadenaSeleccion As String)
 Dim BdConta As String
 Dim Tipiva As String
 
-    txtAux(5).Text = RecuperaValor(CadenaSeleccion, 1) 'codconce
+    txtaux(5).Text = RecuperaValor(CadenaSeleccion, 1) 'codconce
     txtAux2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'nomartic
     BdConta = RecuperaValor(CadenaSeleccion, 3) 'base de datos de conta
     Tipiva = RecuperaValor(CadenaSeleccion, 4) 'tipo de iva
@@ -2324,7 +2324,7 @@ Dim Tipiva As String
         Set vSeccion = New CSeccion
         If vSeccion.LeerDatos(Text1(3)) Then
             If vSeccion.AbrirConta Then
-                txtAux(8).Text = vSeccion.TipIvaExento
+                txtaux(8).Text = vSeccion.TipIvaExento
             End If
         End If
         If Not vSeccion Is Nothing Then
@@ -3067,16 +3067,16 @@ Dim V
                     DataGridAux(NumTabMto).Enabled = True
                     DataGridAux(NumTabMto).SetFocus
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llinies
                     ModoLineas = 0
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 1 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                     End If
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
             End Select
@@ -3162,6 +3162,19 @@ Dim UltNiv As Integer
 '            b = False
 '        End If
 '    End If
+
+
+    If B Then
+        If Modo = 3 Then
+            '[Monica]20/06/2017: control de fechas que antes no estaba
+            ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(2).Text))
+            If ResultadoFechaContaOK > 0 Then
+                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+                B = False
+            End If
+        End If
+    End If
+
     DatosOK = B
     
 EDatosOK:
@@ -3506,7 +3519,7 @@ Dim Eliminar As Boolean
 '    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     
-    If Adoaux(Index).Recordset.RecordCount = 1 Then
+    If AdoAux(Index).Recordset.RecordCount = 1 Then
         MsgBox "No se puede borrar un única línea de factura, elimine la factura completa", vbExclamation
         PonerModo 2
         Exit Sub
@@ -3518,13 +3531,13 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'lineas de factura
             Sql = "¿Seguro que desea eliminar la línea?"
-            Sql = Sql & vbCrLf & "Nº línea: " & Format(DBLet(Adoaux(Index).Recordset!numlinea), FormatoCampo(txtAux(4)))
-            Sql = Sql & vbCrLf & "Concepto: " & DBLet(Adoaux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
+            Sql = Sql & vbCrLf & "Nº línea: " & Format(DBLet(AdoAux(Index).Recordset!numlinea), FormatoCampo(txtaux(4)))
+            Sql = Sql & vbCrLf & "Concepto: " & DBLet(AdoAux(Index).Recordset!codConce) '& "  " & txtAux(4).Text
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
-                NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+                NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
                 Eliminar = True
                 Sql = "DELETE FROM fvarlinfact"
-                Sql = Sql & Replace(ObtenerWhereCab(True), "fvarcabfact", "fvarlinfact") & " AND numlinea= " & Adoaux(Index).Recordset!numlinea
+                Sql = Sql & Replace(ObtenerWhereCab(True), "fvarcabfact", "fvarlinfact") & " AND numlinea= " & AdoAux(Index).Recordset!numlinea
             End If
     End Select
 
@@ -3543,7 +3556,7 @@ Dim Eliminar As Boolean
         
         'antes estaba debajo de situardata
         CargaGrid Index, True
-        SituarDataTrasEliminar Adoaux(Index), NumRegElim, True
+        SituarDataTrasEliminar AdoAux(Index), NumRegElim, True
         
         
         
@@ -3591,7 +3604,7 @@ Dim vSec As CSeccion
     NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
 
     'Situamos el grid al final
-    AnyadirLinea DataGridAux(Index), Adoaux(Index)
+    AnyadirLinea DataGridAux(Index), AdoAux(Index)
 
     anc = DataGridAux(Index).Top
     If DataGridAux(Index).Row < 0 Then
@@ -3604,20 +3617,20 @@ Dim vSec As CSeccion
 
     Select Case Index
         Case 0 'lineas factura
-            txtAux(0).Text = Text1(3).Text 'seccion
-            txtAux(1).Text = Text1(0).Text 'tipo de movimiento
-            txtAux(2).Text = Text1(1).Text 'factura
-            txtAux(3).Text = Text1(2).Text 'fecha
-            txtAux(4).Text = NumF 'numlinea
+            txtaux(0).Text = Text1(3).Text 'seccion
+            txtaux(1).Text = Text1(0).Text 'tipo de movimiento
+            txtaux(2).Text = Text1(1).Text 'factura
+            txtaux(3).Text = Text1(2).Text 'fecha
+            txtaux(4).Text = NumF 'numlinea
 '            FormateaCampo txtAux(3)
-            For I = 5 To txtAux.Count - 1
-                txtAux(I).Text = ""
+            For I = 5 To txtaux.Count - 1
+                txtaux(I).Text = ""
             Next I
             txtAux2(0).Text = ""
 
             'desbloquear la linea (se bloquea al añadir)
 '            BloquearTxt txtAux(3), False
-            PonerFoco txtAux(5)
+            PonerFoco txtaux(5)
     End Select
 End Sub
 
@@ -3627,8 +3640,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim J As Integer
     Dim vSec As CSeccion
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
     
@@ -3668,21 +3681,21 @@ Private Sub BotonModificarLinea(Index As Integer)
     Select Case Index
         Case 0 'lineas de factura
             For J = 1 To 5
-                txtAux(J).Text = DataGridAux(Index).Columns(J - 1).Text
+                txtaux(J).Text = DataGridAux(Index).Columns(J - 1).Text
             Next J
             txtAux2(0).Text = DataGridAux(Index).Columns(5).Text 'DevuelveDesdeBDNew(cPTours, "concefact", "nomconce", "codconce", DataGridAux(Index).Columns(5).Text, "N")
-            txtAux(8).Text = DataGridAux(Index).Columns(6).Text 'DevuelveDesdeBDNew(cPTours, "concefact", "tipoiva", "codconce", DataGridAux(Index).Columns(5).Text, "N")
-            txtAux(6).Text = DataGridAux(Index).Columns(7).Text    ' ampliacion
-            txtAux(7).Text = DataGridAux(Index).Columns(10).Text   ' importe
-            txtAux(9).Text = DataGridAux(Index).Columns(8).Text    ' cantidad
-            txtAux(10).Text = DataGridAux(Index).Columns(9).Text  ' precio
+            txtaux(8).Text = DataGridAux(Index).Columns(6).Text 'DevuelveDesdeBDNew(cPTours, "concefact", "tipoiva", "codconce", DataGridAux(Index).Columns(5).Text, "N")
+            txtaux(6).Text = DataGridAux(Index).Columns(7).Text    ' ampliacion
+            txtaux(7).Text = DataGridAux(Index).Columns(10).Text   ' importe
+            txtaux(9).Text = DataGridAux(Index).Columns(8).Text    ' cantidad
+            txtaux(10).Text = DataGridAux(Index).Columns(9).Text  ' precio
     End Select
     
     LLamaLineas Index, ModoLineas, anc
    
     Select Case Index
         Case 0 'lineas de factura
-            PonerFoco txtAux(5)
+            PonerFoco txtaux(5)
     End Select
 End Sub
 
@@ -3697,12 +3710,12 @@ Dim B As Boolean
     B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Lineas
     Select Case Index
         Case 0 'lineas de factura
-            For jj = 5 To txtAux.Count - 1
-                txtAux(jj).Top = alto
-                txtAux(jj).visible = B
+            For jj = 5 To txtaux.Count - 1
+                txtaux(jj).Top = alto
+                txtaux(jj).visible = B
             Next jj
-            txtAux(8).visible = False
-            txtAux(8).Enabled = False
+            txtaux(8).visible = False
+            txtaux(8).Enabled = False
             
             txtAux2(0).Top = alto
             txtAux2(0).visible = B
@@ -3731,23 +3744,23 @@ End Sub
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Sql As String
-    txtAux(Index).Text = Trim(txtAux(Index).Text)
+    txtaux(Index).Text = Trim(txtaux(Index).Text)
 
     Select Case Index
         Case 6 ' Ampliacion
-            txtAux(Index).Text = UCase(txtAux(Index).Text)
+            txtaux(Index).Text = UCase(txtaux(Index).Text)
 
         Case 5 ' Concepto
-            If PonerFormatoEntero(txtAux(Index)) Then
-                txtAux2(0).Text = PonerNombreDeCod(txtAux(Index), "fvarconce", "nomconce", "codconce", "N")
-                txtAux(8).Text = PonerNombreDeCod(txtAux(Index), "fvarconce", "tipoiva", "codconce", "N")
+            If PonerFormatoEntero(txtaux(Index)) Then
+                txtAux2(0).Text = PonerNombreDeCod(txtaux(Index), "fvarconce", "nomconce", "codconce", "N")
+                txtaux(8).Text = PonerNombreDeCod(txtaux(Index), "fvarconce", "tipoiva", "codconce", "N")
                 
                 ' si la factura es de gastos no lleva iva
                 If Combo1(0).Text = "FVG" Then
                     Set vSeccion = New CSeccion
                     If vSeccion.LeerDatos(Text1(3)) Then
                         If vSeccion.AbrirConta Then
-                            txtAux(8).Text = vSeccion.TipIvaExento
+                            txtaux(8).Text = vSeccion.TipIvaExento
                         End If
                     End If
                     If Not vSeccion Is Nothing Then
@@ -3757,26 +3770,26 @@ Dim Sql As String
                 End If
                 
                 If txtAux2(0).Text = "" Then
-                    cadMen = "No existe el Concepto: " & txtAux(Index).Text & vbCrLf
+                    cadMen = "No existe el Concepto: " & txtaux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmCon = New frmFVARConceptos
                         frmCon.DatosADevolverBusqueda = "0|1|"
-                        frmCon.NuevoCodigo = txtAux(Index).Text
-                        txtAux(Index).Text = ""
+                        frmCon.NuevoCodigo = txtaux(Index).Text
+                        txtaux(Index).Text = ""
                         TerminaBloquear
                         frmCon.Show vbModal
                         Set frmCon = Nothing
                     Else
-                        txtAux(Index).Text = ""
+                        txtaux(Index).Text = ""
                     End If
-                    PonerFoco txtAux(Index)
+                    PonerFoco txtaux(Index)
                 Else
-                    cadMen = DevuelveDesdeBDNew(cAgro, "fvarconce", "codsecci", "codconce", txtAux(Index), "N")
+                    cadMen = DevuelveDesdeBDNew(cAgro, "fvarconce", "codsecci", "codconce", txtaux(Index), "N")
                     If CInt(ComprobarCero(cadMen)) <> CInt(Text1(3).Text) Then
                         MsgBox "El concepto ha de ser de la misma sección. Reintroduzca.", vbExclamation
-                        txtAux(Index).Text = ""
-                        PonerFoco txtAux(5)
+                        txtaux(Index).Text = ""
+                        PonerFoco txtaux(5)
                     End If
                 End If
             Else
@@ -3784,23 +3797,23 @@ Dim Sql As String
             End If
 
         Case 9 ' cantidad
-            If PonerFormatoDecimal(txtAux(Index), 3) Then
-                If PonerFormatoDecimal(txtAux(10), 11) Then
-                    txtAux(7).Text = Round2(CCur(txtAux(9).Text) * CCur(ComprobarCero(txtAux(10).Text)), 2)
-                    PonerFormatoDecimal txtAux(7), 3
+            If PonerFormatoDecimal(txtaux(Index), 3) Then
+                If PonerFormatoDecimal(txtaux(10), 11) Then
+                    txtaux(7).Text = Round2(CCur(txtaux(9).Text) * CCur(ComprobarCero(txtaux(10).Text)), 2)
+                    PonerFormatoDecimal txtaux(7), 3
                 End If
             Else
-                txtAux(Index).Text = ""
+                txtaux(Index).Text = ""
             End If
             
         Case 10 ' precio
-            If PonerFormatoDecimal(txtAux(Index), 11) Then
-                If PonerFormatoDecimal(txtAux(9), 3) Then
-                    txtAux(7).Text = Round2(CCur(ComprobarCero(txtAux(9).Text)) * CCur(txtAux(10).Text), 2)
-                    PonerFormatoDecimal txtAux(7), 3
+            If PonerFormatoDecimal(txtaux(Index), 11) Then
+                If PonerFormatoDecimal(txtaux(9), 3) Then
+                    txtaux(7).Text = Round2(CCur(ComprobarCero(txtaux(9).Text)) * CCur(txtaux(10).Text), 2)
+                    PonerFormatoDecimal txtaux(7), 3
                 End If
             Else
-                txtAux(Index).Text = ""
+                txtaux(Index).Text = ""
             End If
         
         Case 7 'Importe
@@ -3812,10 +3825,10 @@ Dim Sql As String
 '                Exit Sub
 '            End If
             'Es numerico
-            If PonerFormatoDecimal(txtAux(Index), 3) Then
+            If PonerFormatoDecimal(txtaux(Index), 3) Then
                 PonerFocoBtn Me.cmdAceptar
             Else
-                txtAux(Index).Text = ""
+                txtaux(Index).Text = ""
             End If
     End Select
     
@@ -3823,13 +3836,13 @@ End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
     ' si vamos a insertar el importe miramos si podemos calcularlo y no entrar en importe
-    If Index = 7 And (txtAux(9).Text <> "" Or txtAux(10).Text <> "") And txtAux(Index).Text = "" Then
-        txtAux(Index).Text = Round2(ComprobarCero(txtAux(9).Text) * ComprobarCero(txtAux(10).Text), 2)
+    If Index = 7 And (txtaux(9).Text <> "" Or txtaux(10).Text <> "") And txtaux(Index).Text = "" Then
+        txtaux(Index).Text = Round2(ComprobarCero(txtaux(9).Text) * ComprobarCero(txtaux(10).Text), 2)
 '        cmdAceptar.SetFocus
         Exit Sub
     End If
     
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFocoLin txtaux(Index)
 End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
@@ -3866,7 +3879,7 @@ End Function
 Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
 
     SepuedeBorrar = False
-    If Adoaux(Index).Recordset.EOF Then Exit Function
+    If AdoAux(Index).Recordset.EOF Then Exit Function
 
     SepuedeBorrar = True
 End Function
@@ -3882,7 +3895,7 @@ Dim tots As String
     
     tots = MontaSQLCarga(Index, enlaza)
     
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'lineas de factura
@@ -3933,12 +3946,12 @@ Dim V As Integer
         If InsertarDesdeForm2(Me, 2, nomframe) Then
             B = BLOQUEADesdeFormulario2(Me, Data1, 1)
             CargaGrid NumTabMto, True
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
             DataGridAux(NumTabMto).SetFocus
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(4).Name & " =" & V)
             
 '            ' ### [Monica] 29/09/2006
 '            ' añadido el tema de de recalculo de bases
@@ -3951,7 +3964,7 @@ Dim V As Integer
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
                     
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
                 End If
             End If
             If Not vSeccion Is Nothing Then
@@ -4061,7 +4074,7 @@ Dim V As Currency
 
                 
             End If
-            V = Adoaux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(4) 'el 2 es el nº de llinia
             ModoLineas = 0
             CargaGrid NumTabMto, True
 '            SituarTab (NumTabMto)
@@ -4080,7 +4093,7 @@ Dim V As Currency
                     PorRet = 0
                     If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
         
-                    RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+                    RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
                     
                 End If
             End If
@@ -4166,7 +4179,7 @@ Dim SumLin As Currency
     SumLin = 0
     Sql = "SELECT SUM(importe) FROM fvarlinfact "
     Sql = Sql & Replace(ObtenerWhereCab(True), "fvarcabfact", "fvarlinfact")
-    If NumLin <> "" Then Sql = Sql & " AND numlinea<>" & DBSet(txtAux(4).Text, "N") 'numlinea
+    If NumLin <> "" Then Sql = Sql & " AND numlinea<>" & DBSet(txtaux(4).Text, "N") 'numlinea
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
@@ -4306,7 +4319,7 @@ Dim Sql As String
             PorRet = 0
             If Text1(26).Text <> "" Then PorRet = CCur(ImporteSinFormato(Text1(26).Text))
 
-            RecalculoBasesIvaFactura Adoaux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
+            RecalculoBasesIvaFactura AdoAux(0).Recordset, ImpTot, Tipiva, Impbas, impiva, PorIva, TotFac, ImpREC, PorRec, PorRet, ImpRet
 
 
             '13/02/2007 iniacializo los txt

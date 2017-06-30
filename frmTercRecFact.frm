@@ -2229,6 +2229,12 @@ Dim cad As String
     Screen.MousePointer = vbHourglass
     On Error GoTo Error1
     
+    '[Monica]20/06/2017: control de fechas que antes no estaba
+    ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(2)))
+    If ResultadoFechaContaOK > 0 Then
+        If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+        Exit Sub
+    End If
     
     cad = ""
     If Text1(3).Text = "" Then
@@ -2770,7 +2776,7 @@ End Function
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 

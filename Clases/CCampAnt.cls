@@ -39,12 +39,12 @@ Private mvarBaseDatos As String    'base de datos (ariagro1, ariagro2...)
 
 
 
-Private SQL As String  'Para la sentencia
-Private SQL1 As String
+Private Sql As String  'Para la sentencia
+Private Sql1 As String
 Private Mens As String    'Para los mensajes
 Private Rs As Recordset
-Private Rs1 As Recordset
-Private Rc As Byte
+Private RS1 As Recordset
+Private RC As Byte
 
 
 
@@ -197,43 +197,43 @@ Dim Encontrado As Boolean
     Leer = 0
     
     
-    SQL = "SELECT * FROM usuarios.empresasariagro WHERE ariagro<>'" & vUsu.CadenaConexion & "'"
-    SQL = SQL & " order by codempre "
+    Sql = "SELECT * FROM usuarios.empresasariagro WHERE ariagro<>'" & vUsu.CadenaConexion & "'"
+    Sql = Sql & " order by codempre "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Mens = ""
     
     Encontrado = False
     
     While Not Rs.EOF And Not Encontrado
-        If AbrirConexionCampAnterior(DBLet(Rs!ariagro, "T")) Then
+        If AbrirConexionCampAnterior(DBLet(Rs!Ariagro, "T")) Then
         
-            SQL1 = "select * from empresas "
-            Set Rs1 = New ADODB.Recordset
-            Rs1.Open SQL1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
+            Sql1 = "select * from empresas "
+            Set RS1 = New ADODB.Recordset
+            RS1.Open Sql1, ConnCAnt, adOpenForwardOnly, adLockOptimistic, adCmdText
             
-            If DBLet(Rs1!FechaFin, "F") = (CDate(vParam.FecIniCam) - 1) Then
+            If DBLet(RS1!FechaFin, "F") = (CDate(vParam.FecIniCam) - 1) Then
                     Encontrado = True
                     
 'codempre,nomempre,domempre,codpobla,pobempre,proempre,cifempre,telempre,faxempre,wwwempre,maiempre,fechaini,fechafin,percontacto
                     
-                    mvarCodigo = ComprobarCero(Rs1!codempre)
-                    mvarNomempre = DBLet(Rs1!nomempre, "T")
-                    mvarDomempre = DBLet(Rs1!domempre, "T")
-                    mvarCodpobla = DBLet(Rs1!CodPobla, "T")
-                    mvarPobempre = DBLet(Rs1!pobempre, "T")
-                    mvarProempre = DBLet(Rs1!proempre, "T")
-                    mvarCifempre = DBLet(Rs1!cifempre, "T")
-                    mvarTelempre = DBLet(Rs1!telempre, "T")
-                    mvarFaxempre = DBLet(Rs1!faxempre, "T")
-                    mvarWwwempre = DBLet(Rs1!wwwempre, "T")
-                    mvarMaiempre = DBLet(Rs1!maiempre, "T")
-                    mvarPercontacto = DBLet(Rs1!PerContacto, "T")
-                    mvarFecIniCam = CStr(Rs1!FechaIni)
-                    mvarFecFinCam = CStr(Rs1!FechaFin)
+                    mvarCodigo = ComprobarCero(RS1!codempre)
+                    mvarNomempre = DBLet(RS1!nomempre, "T")
+                    mvarDomempre = DBLet(RS1!domempre, "T")
+                    mvarCodpobla = DBLet(RS1!CodPobla, "T")
+                    mvarPobempre = DBLet(RS1!pobempre, "T")
+                    mvarProempre = DBLet(RS1!proempre, "T")
+                    mvarCifempre = DBLet(RS1!CifEmpre, "T")
+                    mvarTelempre = DBLet(RS1!telempre, "T")
+                    mvarFaxempre = DBLet(RS1!faxempre, "T")
+                    mvarWwwempre = DBLet(RS1!wwwempre, "T")
+                    mvarMaiempre = DBLet(RS1!maiempre, "T")
+                    mvarPercontacto = DBLet(RS1!PerContacto, "T")
+                    mvarFecIniCam = CStr(RS1!FechaIni)
+                    mvarFecFinCam = CStr(RS1!FechaFin)
                     
-                    mvarBaseDatos = DBLet(Rs!ariagro, "T")
+                    mvarBaseDatos = DBLet(Rs!Ariagro, "T")
                     
                     Mens = "Datos de Ariagro Campaña anterior"
                     Leer = 0
@@ -266,29 +266,29 @@ Public Function LeerAnterior(Optional OcultarMens As Boolean) As String
 'Devuelve el nombre de la base de datos de la campaña anterior a la anterior campaña
 Dim Encontrado As Boolean
 Dim Rs As ADODB.Recordset
-Dim Rs1 As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
 
     On Error GoTo Err3
     
     LeerAnterior = ""
     
-    SQL = "SELECT * FROM usuarios.empresasariagro WHERE ariagro<>'" & vUsu.CadenaConexion & "'"
-    SQL = SQL & " order by codempre "
+    Sql = "SELECT * FROM usuarios.empresasariagro WHERE ariagro<>'" & vUsu.CadenaConexion & "'"
+    Sql = Sql & " order by codempre "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     Mens = ""
     Encontrado = False
     While Not Rs.EOF And Not Encontrado
-        If DBLet(Rs!ariagro, "T") <> "" Then
-            SQL1 = "select * from " & Rs!ariagro & ".empresas where fechafin = " & DBSet(mvarFecIniCam, "F") & " - INTERVAL 1 DAY"
-            Set Rs1 = New ADODB.Recordset
-            Rs1.Open SQL1, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-            If Not Rs1.EOF Then
-                LeerAnterior = DBLet(Rs1!ariagro, "T")
+        If DBLet(Rs!Ariagro, "T") <> "" Then
+            Sql1 = "select * from " & Rs!Ariagro & ".empresas where fechafin = " & DBSet(mvarFecIniCam, "F") & " - INTERVAL 1 DAY"
+            Set RS1 = New ADODB.Recordset
+            RS1.Open Sql1, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            If Not RS1.EOF Then
+                LeerAnterior = DBLet(RS1!Ariagro, "T")
                 Encontrado = True
             End If
-            Set Rs1 = Nothing
+            Set RS1 = Nothing
         End If
         Rs.MoveNext
     Wend

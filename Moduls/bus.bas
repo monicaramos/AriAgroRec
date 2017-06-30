@@ -298,23 +298,16 @@ Dim vSeccion As CSeccion
             Set vSeccion = Nothing
             Exit Sub
         End If
-    
-        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-            If vEmpresa.BDAriagro <> "ariagro" Then Exit Sub
-        Else
-            If vEmpresa.BDAriagro <> "ariagro1" Then Exit Sub
-        End If
-    
+        
+'[Monica]29/06/2017: sale lo que haya en esta campaña
+'        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
+'            If vEmpresa.BDAriagro <> "ariagro" Then Exit Sub '@@@
+'        End If
     
         Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
         conn.Execute Sql
     
-    
-        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 Then
-            BBDD = vEmpresa.BDAriagro
-        Else
-            BBDD = "ariagro1"
-        End If
+        BBDD = vEmpresa.BDAriagro
         
         SqlInsert = "insert into " & BBDD & ".tmpinformes (codusu, nombre1,codigo1,nombre2,fecha1, text1, nombre3, importe1) "
     
@@ -386,39 +379,40 @@ Dim vSeccion As CSeccion
         
     End If
         
-        
-        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 And vParamAplic.Cooperativa <> 16 Then
-            
-            
-            Dim vCampAnt As CCampAnt
-            
-            Set vCampAnt = New CCampAnt
-            
-        ' si solo tenemos que buscar en la campaña anterior
-            If vCampAnt.Leer = 0 Then
-            
-                SqlBd = "SHOW DATABASES like 'ariagro%' "
-                Set RsBd = New ADODB.Recordset
-                RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-                While Not RsBd.EOF
-    '               If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
-                    If Trim(DBLet(RsBd.Fields(0).Value)) = vCampAnt.BaseDatos Then
-                    
-                        Sql2 = Replace(Sql, BBDD, DBLet(RsBd.Fields(0).Value))
-        
-                        conn.Execute SqlInsert & Sql2
-                    End If
-        
-                    RsBd.MoveNext
-                Wend
-        
-                Set RsBd = Nothing
-                
-            End If
-            
-            Set vCampAnt = Nothing
-    
-        End If
+'[Monica]29/06/2017: quito lo de la campaña anterior
+'
+'        If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamAplic.Cooperativa <> 14 And vParamAplic.Cooperativa <> 16 Then
+'
+'
+'            Dim vCampAnt As CCampAnt
+'
+'            Set vCampAnt = New CCampAnt
+'
+'        ' si solo tenemos que buscar en la campaña anterior
+'            If vCampAnt.Leer = 0 Then
+'
+'                SqlBd = "SHOW DATABASES like 'ariagro' "
+'                Set RsBd = New ADODB.Recordset
+'                RsBd.Open SqlBd, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+'                While Not RsBd.EOF
+'    '               If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
+'                    If Trim(DBLet(RsBd.Fields(0).Value)) = vCampAnt.BaseDatos Then
+'
+'                        Sql2 = Replace(Sql, BBDD, DBLet(RsBd.Fields(0).Value))
+'
+'                        conn.Execute SqlInsert & Sql2
+'                    End If
+'
+'                    RsBd.MoveNext
+'                Wend
+'
+'                Set RsBd = Nothing
+'
+'            End If
+'
+'            Set vCampAnt = Nothing
+'
+'        End If
         
         Sql = "select codusu,nombre1,codigo1,nombre2,nombre3,fecha1,text1,importe1  from tmpinformes where codusu = " & vUsu.Codigo '& " order by 6,5 "
         

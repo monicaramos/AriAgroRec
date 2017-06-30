@@ -1469,6 +1469,17 @@ On Error GoTo EComprobar
         ComprobarFechasConta = True
     End If
             
+    '[Monica]20/06/2017: solo para el caso de Montifrut la fecha de recepcion es la de factura, en el resto es la de recepcion
+    If ComprobarFechasConta Then
+        If vParamAplic.Cooperativa <> 12 Then
+            ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(0)))
+            If ResultadoFechaContaOK > 0 Then
+                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+                ComprobarFechasConta = False
+            End If
+        End If
+    End If
+            
     
 EComprobar:
     If Err.Number <> 0 Then MuestraError Err.Number, "Comprobar Fechas", Err.Description

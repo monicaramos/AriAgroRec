@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:00"
+            TextSave        =   "12:51"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1869,7 +1869,7 @@ Dim cad As String
     '[Monica]08/10/2015: solo en el caso de escalona mandamos los datos a indefa
     If vParamAplic.Cooperativa = 10 Then
         If Dir("c:\indefa", vbDirectory) <> "" Then
-            LanzaVisorMimeDocumento Me.hwnd, "c:\indefa\ftpINDEFA.bat"
+            LanzaVisorMimeDocumento Me.hWnd, "c:\indefa\ftpINDEFA.bat"
         Else
             If MsgBox("No existe el directorio del traspaso. ¿ Continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then End
         End If
@@ -2401,8 +2401,8 @@ Public Sub mnCambioEmpresa_Click()
 '        Exit Sub
 '    End If
 
-    If vParamAplic.ContabilidadNueva And (vUsu.Nivel = 0 Or vUsu.Nivel = 1) Then FrasPendientesContabilizar True
-
+'[Monica]29/06/2017: quito lo de la campaña anterior
+'    If vParamAplic.ContabilidadNueva And (vUsu.Nivel = 0 Or vUsu.Nivel = 1) Then FrasPendientesContabilizar True
 
 
     Screen.MousePointer = vbHourglass
@@ -2436,6 +2436,9 @@ Public Sub mnCambioEmpresa_Click()
 '
     Set vEmpresa = Nothing
     LeerDatosEmpresa
+
+
+
 
     PonerDatosFormulario
     

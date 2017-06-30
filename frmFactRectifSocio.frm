@@ -334,7 +334,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -371,7 +371,7 @@ Dim devuelve As String
     
     InicializarVbles
     
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     'Añadir el parametro de Empresa
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
@@ -382,8 +382,8 @@ Dim devuelve As String
     If Not AnyadirAFormula(cadSelect, "{rfactsoc.codtipom}='" & Mid(Combo1(0).Text, 1, 3) & "'") Then Exit Sub
     
     'D/H factura
-    cDesde = Trim(txtcodigo(18).Text)
-    cHasta = Trim(txtcodigo(19).Text)
+    cDesde = Trim(txtCodigo(18).Text)
+    cHasta = Trim(txtCodigo(19).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -394,8 +394,8 @@ Dim devuelve As String
     End If
     
     'D/H fecha
-    cDesde = Trim(txtcodigo(16).Text)
-    cHasta = Trim(txtcodigo(17).Text)
+    cDesde = Trim(txtCodigo(16).Text)
+    cHasta = Trim(txtCodigo(17).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{rfactsoc.fecfactu}"
@@ -408,7 +408,7 @@ Dim devuelve As String
     cadSelect = cadSelect & "(select rectif_codtipom, rectif_numfactu, rectif_fecfactu from rfactsoc "
     cadSelect = cadSelect & " where not rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) "
 
-    ProcesoFacturacionRectificativa Tabla, cadSelect
+    ProcesoFacturacionRectificativa tabla, cadSelect
     
     DesBloqueoManual ("RECFAC") 'RECtificativas FACturas
     Pb1.visible = False
@@ -424,7 +424,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(18)
+        PonerFoco txtCodigo(18)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -441,10 +441,10 @@ Dim List As Collection
 '    CommitConexion
     CargaCombo
     
-    Tabla = "rfactsoc"
+    tabla = "rfactsoc"
     
     indFrame = 0
-    txtcodigo(10).Text = Format(Now, "dd/mm/yyyy")
+    txtCodigo(10).Text = Format(Now, "dd/mm/yyyy")
     Me.Pb1.visible = False
     Combo1(0).ListIndex = 0
     
@@ -467,7 +467,7 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(CByte(imgFecha(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(CByte(imgFecha(1).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
@@ -485,7 +485,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 6, 7  'Socios
             AbrirFrmSocios (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub imgFecha_Click(Index As Integer)
@@ -493,7 +493,7 @@ Private Sub imgFecha_Click(Index As Integer)
     Dim dalt As Long
     Dim menu As Long
     Dim obj As Object
-    Dim indice As Integer
+    Dim Indice As Integer
 
     Set frmC = New frmCal
     
@@ -515,25 +515,25 @@ Private Sub imgFecha_Click(Index As Integer)
 
     Select Case Index
         Case 1
-            indice = 10
+            Indice = 10
         Case 2, 3
-            indice = Index + 14
+            Indice = Index + 14
     End Select
 
-    imgFecha(1).Tag = indice '<===
+    imgFecha(1).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(CByte(imgFecha(1).Tag)) '<===
+    PonerFoco txtCodigo(CByte(imgFecha(1).Tag)) '<===
     ' ********************************************
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 
@@ -558,22 +558,22 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFecha_Click (indice)
+    imgFecha_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -582,19 +582,19 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 18, 19  ' Nro. Factura
-            PonerFormatoEntero txtcodigo(Index)
+            PonerFormatoEntero txtCodigo(Index)
             
         Case 10, 16, 17 'FECHAS
-            If txtcodigo(Index).Text <> "" Then
-                If PonerFormatoFecha(txtcodigo(Index)) Then
+            If txtCodigo(Index).Text <> "" Then
+                If PonerFormatoFecha(txtCodigo(Index)) Then
                 End If
             End If
             
     End Select
 End Sub
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
@@ -714,7 +714,7 @@ Dim devuelve As String
 Dim Nregs As Long
 Dim FecFac As Date
 
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql2 As String
 
 
@@ -733,19 +733,19 @@ Dim Sql2 As String
                 Me.Pb1.Max = Nregs
                 Me.Pb1.Value = 0
                 Me.Refresh
-                b = FacturacionRectificativa(nTabla, cadSelect, txtcodigo(10).Text, Me.Pb1)
-                If b Then
+                B = FacturacionRectificativa(nTabla, cadSelect, txtCodigo(10).Text, Me.Pb1)
+                If B Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     'IMPRESION DEL RESUMEN DE LA FACTURACION DE rectificativas
                     If Me.Check1(1).Value Then
                         cadFormula = ""
-                        CadParam = CadParam & "pFecFac= """ & txtcodigo(10).Text & """|"
+                        CadParam = CadParam & "pFecFac= """ & txtCodigo(10).Text & """|"
                         numParam = numParam + 1
                         CadParam = CadParam & "pTitulo= ""Resumen Facturación Rectificativa""|"
                         numParam = numParam + 1
                         
-                        FecFac = CDate(txtcodigo(10).Text)
+                        FecFac = CDate(txtCodigo(10).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         If Not AnyadirAFormula(cadFormula, "{tmpinformes.codusu} = " & vUsu.Codigo) Then Exit Sub
@@ -764,7 +764,7 @@ Dim Sql2 As String
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
 
                         'Fecha de Factura
-                        FecFac = CDate(txtcodigo(10).Text)
+                        FecFac = CDate(txtCodigo(10).Text)
                         cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = "{rfactsoc.fecfactu}='" & Format(FecFac, FormatoFecha) & "'"
@@ -833,7 +833,7 @@ Dim PrimFac As String
 Dim UltFac As String
 
 Dim tipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim vSeccion As CSeccion
 Dim Importe As Currency
 
@@ -921,9 +921,9 @@ Dim Tipo As Integer
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    b = True
+    B = True
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         HayReg = True
         
         numfactu = vTipoMov.ConseguirContador(tipoMov)
@@ -952,7 +952,7 @@ Dim Tipo As Integer
         Else
             Sql = Sql & ") values ("
         End If
-        Sql = Sql & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
         Sql = Sql & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
         Sql = Sql & DBSet(Rs!TipoIVA, "N") & ","
@@ -976,7 +976,7 @@ Dim Tipo As Integer
         Sql = Sql & DBSet(Rs!CodTipom, "T") & ","
         Sql = Sql & DBSet(Rs!numfactu, "N") & ","
         Sql = Sql & DBSet(Rs!fecfactu, "F") & ","
-        Sql = Sql & DBSet(txtcodigo(9).Text, "T")
+        Sql = Sql & DBSet(txtCodigo(9).Text, "T")
         
         If vParamAplic.Cooperativa = 12 Then
             Sql = Sql & "," & DBSet(Rs!esretirada, "N") & ","
@@ -992,7 +992,7 @@ Dim Tipo As Integer
         ' insertamos en la tabla rfactsoc_variedad
         Sql = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu,codvarie,codcampo,kilosnet,"
         Sql = Sql & "preciomed,imporvar,descontado,imporgasto) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & "codvarie,codcampo, kilosnet * (-1), preciomed, imporvar * (-1), descontado, imporgasto * (-1) "
         Sql = Sql & " from rfactsoc_variedad "
         Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
@@ -1004,7 +1004,7 @@ Dim Tipo As Integer
         ' insertamos en la tabla rfactsoc_albaran
         Sql = "insert into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
         Sql = Sql & "kilosnet,grado,precio, importe, imporgasto) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & "numalbar, fecalbar, codvarie, codcampo,  kilosbru * (-1), kilosnet * (-1), grado, precio, "
         Sql = Sql & "importe * (-1), imporgasto * (-1) from rfactsoc_albaran "
         Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
@@ -1016,7 +1016,7 @@ Dim Tipo As Integer
         ' insertamos en la tabla rfactsoc_anticipos
         Sql = "insert into rfactsoc_anticipos (codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,"
         Sql = Sql & "codvarieanti,codcampoanti,baseimpo) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & "codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo * (-1) "
         Sql = Sql & " from rfactsoc_anticipos "
         Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
@@ -1028,7 +1028,7 @@ Dim Tipo As Integer
         ' insertamos en la tabla rfactsoc_calidad
         Sql = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,"
         Sql = Sql & "imporcal,preciocalidad,imporcalidad) "
-        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & "codvarie, codcampo, codcalid, kilosnet * (-1), precio, imporcal * (-1), preciocalidad, imporcalidad * (-1) "
         Sql = Sql & " from rfactsoc_calidad "
         Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
@@ -1039,7 +1039,7 @@ Dim Tipo As Integer
         
         ' insertamos en la tabla rfactsoc_gastos
         Sql = "insert into rfactsoc_gastos (codtipom,numfactu,fecfactu,numlinea,codgasto,importe) "
-        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtcodigo(10).Text, "F") & ","
+        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
         Sql = Sql & "numlinea, codgasto, importe * (-1) "
         Sql = Sql & " from rfactsoc_gastos "
         Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
@@ -1096,9 +1096,9 @@ Dim Tipo As Integer
         End If
             
             
-        If b Then b = InsertResumen(tipoMov, CStr(numfactu))
+        If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
-        If b Then b = vTipoMov.IncrementarContador(tipoMov)
+        If B Then B = vTipoMov.IncrementarContador(tipoMov)
         
         
         Rs.MoveNext
@@ -1108,7 +1108,7 @@ Dim Tipo As Integer
     
     
 eFacturacion:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         FacturacionRectificativa = False
     Else
@@ -1137,24 +1137,34 @@ Dim Sql As String
 
 End Function
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 
     On Error GoTo EDatosOK
 
-    DatosOk = False
-    b = True
+    DatosOK = False
+    B = True
     
-    If txtcodigo(10).Text = "" Then
+    If txtCodigo(10).Text = "" Then
         MsgBox "Debe introducir un valor para la Fecha de Factura Rectificativa.", vbExclamation
-        PonerFoco txtcodigo(10)
-        b = False
+        PonerFoco txtCodigo(10)
+        B = False
     End If
     
-    DatosOk = b
+    '[Monica]20/06/2017: control de fechas que antes no estaba, solo para el caso de montifrut pq la integraciones entran con
+    '                    la fecha de factura, no con la fecha de recepcion que es la que se introduce
+    If vParamAplic.Cooperativa = 12 Then
+        ResultadoFechaContaOK = EsFechaOKConta(CDate(txtCodigo(10)))
+        If ResultadoFechaContaOK > 0 Then
+            If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+            B = False
+        End If
+    End If
+    
+    DatosOK = B
     
     
 EDatosOK:
@@ -1165,7 +1175,7 @@ End Function
 Private Function FacturasGeneradasRectificativas() As String
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
     
     On Error GoTo eFacturasGeneradas
 
@@ -1177,18 +1187,18 @@ Dim Cad As String
     Set RS1 = New ADODB.Recordset
     RS1.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
-    Cad = ""
+    cad = ""
     While Not RS1.EOF
-        Cad = Cad & DBLet(RS1.Fields(1).Value, "N") & ","
+        cad = cad & DBLet(RS1.Fields(1).Value, "N") & ","
     
         RS1.MoveNext
     Wend
     Set RS1 = Nothing
     
     'si hay facturas quitamos la ultima coma
-    If Cad <> "" Then Cad = Mid(Cad, 1, Len(Cad) - 1)
+    If cad <> "" Then cad = Mid(cad, 1, Len(cad) - 1)
     
-    FacturasGeneradasRectificativas = Cad
+    FacturasGeneradasRectificativas = cad
     Exit Function
     
 eFacturasGeneradas:
@@ -1199,26 +1209,26 @@ End Function
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
 Dim Sql As String
-Dim i As Byte
+Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For i = 0 To Combo1.Count - 1
-        Combo1(i).Clear
-    Next i
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
     
     'tipo de factura todas las facturas excepto las rectificativas
     Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu >= 1 and tipodocu < 11 "
 
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    i = 1
+    I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
         Sql = Rs.Fields(1).Value
         Sql = Rs.Fields(0).Value & " - " & Sql
         Combo1(0).AddItem Sql 'campo del codigo
-        Combo1(0).ItemData(Combo1(0).NewIndex) = i
-        i = i + 1
+        Combo1(0).ItemData(Combo1(0).NewIndex) = I
+        I = I + 1
         Rs.MoveNext
     Wend
     

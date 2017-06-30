@@ -35,9 +35,9 @@ Begin VB.Form frmManFactSocios
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Frame3"
+      Tab(0).Control(0)=   "FrameAnticipos"
       Tab(0).Control(1)=   "Frame4"
-      Tab(0).Control(2)=   "FrameAnticipos"
+      Tab(0).Control(2)=   "Frame3"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -3455,11 +3455,11 @@ Dim B As Boolean
     
             B = (xModo = 1 Or xModo = 2) 'Insertar o Modificar Lineas
     
-            For jj = 0 To txtAux.Count - 1
+            For jj = 0 To txtaux.Count - 1
                 If jj = 4 Or jj = 5 Or jj = 6 Or jj = 7 Or jj = 8 Then
-                    txtAux(jj).Height = DataGrid1.RowHeight
-                    txtAux(jj).Top = alto
-                    txtAux(jj).visible = B
+                    txtaux(jj).Height = DataGrid1.RowHeight
+                    txtaux(jj).Top = alto
+                    txtaux(jj).visible = B
                 End If
             Next jj
             
@@ -3881,8 +3881,8 @@ End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Calidades
-    txtAux(5).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") 'Cod Calidad
-    txtAux(6).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Calidad
+    txtaux(5).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") 'Cod Calidad
+    txtaux(6).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Calidad
 End Sub
 
 
@@ -4642,13 +4642,13 @@ Dim b1 As Boolean
     
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = False
-        BloquearTxt txtAux(I), True
+    For I = 0 To txtaux.Count - 1
+        txtaux(I).visible = False
+        BloquearTxt txtaux(I), True
     Next I
 
-    txtAux(6).visible = False
-    txtAux(6).Enabled = True
+    txtaux(6).visible = False
+    txtaux(6).Enabled = True
     For I = 0 To 7
         BloquearTxt txtAux3(I), True
         txtAux3(I).visible = False
@@ -4740,6 +4740,18 @@ Dim B As Boolean
     DatosOK = False
     
 '    ComprobarDatosTotales
+    If Modo = 3 Then
+        If vParamAplic.Cooperativa = 12 Then
+            '[Monica]20/06/2017: control de fechas que antes no estaba, solo para Montifrut que cuando integra no coge la fecha de recepcion
+            ResultadoFechaContaOK = EsFechaOKConta(CDate(Text1(1).Text))
+            If ResultadoFechaContaOK > 0 Then
+                If ResultadoFechaContaOK <> 4 Then MsgBox MensajeFechaOkConta, vbExclamation
+                Exit Function
+            End If
+        End If
+    End If
+
+
 
     'comprobamos datos OK de la tabla scafac
     B = CompForm2(Me, 2, "Frame2") ' , 1) 'Comprobar formato datos ok de la cabecera: opcion=1
@@ -4761,12 +4773,12 @@ Dim I As Byte
     DatosOkLinea = False
     B = True
 
-    For I = 0 To txtAux.Count - 1
+    For I = 0 To txtaux.Count - 1
         If I = 4 Or I = 6 Or I = 7 Then
-            If txtAux(I).Text = "" Then
-                MsgBox "El campo " & txtAux(I).Tag & " no puede ser nulo", vbExclamation
+            If txtaux(I).Text = "" Then
+                MsgBox "El campo " & txtaux(I).Tag & " no puede ser nulo", vbExclamation
                 B = False
-                PonerFoco txtAux(I)
+                PonerFoco txtaux(I)
                 Exit Function
             End If
         End If
@@ -5258,7 +5270,7 @@ End Sub
 
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFocoLin txtaux(Index)
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -5277,37 +5289,37 @@ Dim cadMen As String
 Dim Sql As String
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtAux(Index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtaux(Index), ModificaLineas) Then Exit Sub
 
     Select Case Index
         Case 4 ' calidad
-            If txtAux(Index) <> "" Then
-                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtAux(5), "N", , "codcalid", txtAux(6).Text, "N")
+            If txtaux(Index) <> "" Then
+                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtaux(5), "N", , "codcalid", txtaux(6).Text, "N")
                 If Text2(6).Text = "" Then
-                    cadMen = "No existe la Calidad: " & txtAux(Index).Text & vbCrLf
+                    cadMen = "No existe la Calidad: " & txtaux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmCal = New frmManCalidades
                         frmCal.DatosADevolverBusqueda = "2|3|"
-                        frmCal.ParamVariedad = txtAux(5).Text
-                        frmCal.NuevoCodigo = txtAux(6).Text
+                        frmCal.ParamVariedad = txtaux(5).Text
+                        frmCal.NuevoCodigo = txtaux(6).Text
                         TerminaBloquear
                         frmCal.Show vbModal
                         Set frmCal = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtAux(6)
+                        PonerFoco txtaux(6)
                     Else
-                        txtAux(Index).Text = ""
+                        txtaux(Index).Text = ""
                     End If
-                    PonerFoco txtAux(Index)
+                    PonerFoco txtaux(Index)
                 End If
             Else
                 Text2(6).Text = ""
             End If
 
         Case 7 'peso neto
-            If txtAux(Index) <> "" Then
-                PonerFormatoEntero txtAux(Index)
+            If txtaux(Index) <> "" Then
+                PonerFormatoEntero txtaux(Index)
                 cmdAceptar.SetFocus
             End If
 
