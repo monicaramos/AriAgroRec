@@ -2516,7 +2516,11 @@ Dim CadenaInsertFaclin2 As String
             If vTipM = "FAR" Then
                 Sql = Sql & "'D',"
             Else
-                Sql = Sql & "'0',"
+                If Not IsNull(Rs!porciva2) Then
+                    Sql = Sql & "'C',"
+                Else
+                    Sql = Sql & "'0',"
+                End If
             End If
             
             Sql = Sql & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
@@ -12421,7 +12425,12 @@ Dim CadenaInsertFaclin2 As String
             If vTipM = "FAR" Then
                 Sql = Sql & "'D',"
             Else
-                Sql = Sql & "'0',"
+                '[Monica]27/07/2017: si tiene mas de 1 iva se marca
+                If Not IsNull(Rs!porciva2) Then
+                    Sql = Sql & "'C',"
+                Else
+                    Sql = Sql & "'0',"
+                End If
             End If
             
             Sql = Sql & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","

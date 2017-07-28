@@ -969,7 +969,7 @@ Dim vPrecio As Currency
             B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
@@ -1124,7 +1124,7 @@ Dim vPrecio As Currency
         B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
@@ -2144,12 +2144,12 @@ Dim Existe As Boolean
             B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             
             '[Monica]29/05/2017: para el caso de picassent si es tercero se marca como contabilizada pdte de recibir factura
             If EsTerceros Then
-                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             
@@ -2366,11 +2366,11 @@ Dim Existe As Boolean
         B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         '[Monica]29/05/2017: marcamos la factura esperando para ser recibida
         If EsTerceros Then
-            If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         End If
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
@@ -2782,7 +2782,7 @@ ePasar:
 End Function
 
 'Marcar Factura como contabilizada y como pendiente de recibir nro de factura
-Public Function MarcarFactura(tipoMov As String, numfactu As String, FecFac As String, Optional MarcarPdteRecibirFra As Boolean) As Boolean
+Public Function MarcarFactura(tipoMov As String, numfactu As String, FecFac As String, MarcarPdteRecibirFra As Boolean) As Boolean
 
     Dim Sql As String
     
@@ -3817,7 +3817,7 @@ Dim vPorcGasto As String
             B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
@@ -4035,7 +4035,7 @@ Dim vPorcGasto As String
         B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , (TipoPrec = 3))
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
@@ -5066,7 +5066,7 @@ Dim PgbVisible As Boolean
             vFactuADV.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuADV.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuADV.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuADV.nif = DBLet(RsAlb!nifSocio, "T")
+            vFactuADV.nif = DBLet(RsAlb!nifsocio, "T")
             vFactuADV.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuADV.ForPago = Forpa
 '[Monica] 09/02/2010 la forma de pago está en la contabilidad de adv
@@ -5692,7 +5692,7 @@ Dim vPorcGasto As String
             
             If vParamAplic.Cooperativa = 4 Then
                 '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
@@ -5931,7 +5931,7 @@ Dim vPorcGasto As String
         
         If vParamAplic.Cooperativa = 4 Then
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         End If
         
         '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
@@ -6226,7 +6226,7 @@ Dim vPrecio As Currency
             
             If vParamAplic.Cooperativa = 4 Then
                 '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             '[Monica]22/06/2017: en el caso de natural de montaña se marca como contabilizada
@@ -6367,7 +6367,7 @@ Dim vPrecio As Currency
         
         If vParamAplic.Cooperativa = 4 Then
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         End If
         
         
@@ -6656,7 +6656,7 @@ Dim Gastos As Currency
             B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
@@ -6781,7 +6781,7 @@ Dim Gastos As Currency
         B = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
@@ -6961,7 +6961,7 @@ Dim PgbVisible As Boolean
             vFactuBOD.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuBOD.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuBOD.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuBOD.nif = DBLet(RsAlb!nifSocio, "T")
+            vFactuBOD.nif = DBLet(RsAlb!nifsocio, "T")
             vFactuBOD.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuBOD.ForPago = Forpa
             vFactuBOD.TipForPago = DBSet(DevuelveDesdeBDNew(cAgro, "forpago", "tipoforp", "codforpa", Forpa, "N"), "N")
@@ -10478,7 +10478,7 @@ Dim Existe As Boolean
             '[Monica]29/05/2017: en el caso de ser tercero se marca como contabililizada
             If vParamAplic.Cooperativa = 2 Then
                 If EsTerceros Then
-                   If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                   If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
                 End If
             End If
             
@@ -10720,10 +10720,10 @@ On Error GoTo EFacturacionTransporteSocio
             
             '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             '                    solo si es Picassent y estamos facturando a socios terceros
-            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
@@ -10882,10 +10882,10 @@ On Error GoTo EFacturacionTransporteSocio
         
         '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         '                    solo si es Picassent y estamos facturando a socios terceros
-        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
         
@@ -14106,7 +14106,7 @@ Dim vPorcGasto As String
             B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
             
             '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+            If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
             
@@ -14292,7 +14292,7 @@ Dim vPorcGasto As String
         B = InsertCabecera(tipoMov, CStr(numfactu), FecFac, , , False)
         
         '[Monica]04/01/2012: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
-        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+        If B And vSocio.EmiteFact Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         If B Then B = InsertResumen(tipoMov, CStr(numfactu))
 
@@ -14940,7 +14940,7 @@ Dim Existe As Boolean
             '[Monica]07/11/2013: si es tercero he de marcarla como contabilizada
             '                    en ppio solo es para Picassent
             If esTercero Then
-                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             If B Then B = InsertResumen(tipoMov, CStr(numfactu))
@@ -15206,7 +15206,7 @@ Dim HayPrecio As Boolean
                 
                 '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
                 If EsTerceros Then
-                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
                 End If
                 
                 
@@ -15376,7 +15376,8 @@ Dim HayPrecio As Boolean
         
             '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
             If EsTerceros Then
-                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                '[Monica]27/07/2017: antes no se ponia que se tuviera que recibir factura
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             
@@ -15827,7 +15828,7 @@ Dim Concepto As String
                 
                 '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
                 If EsTerceros Then
-                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                    If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
                 End If
                 
                 If B Then B = InsertResumen(tipoMov, CStr(numfactu))
@@ -16157,7 +16158,7 @@ Dim Concepto As String
             
             '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
             If EsTerceros Then
-                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac)
+                If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             
             '[Monica]15/04/2013: Descontamos facturas varias
