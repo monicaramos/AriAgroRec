@@ -14,6 +14,9 @@ Attribute VB_Exposed = False
 Option Explicit
 'variables locales que contienen valores de propiedad
 
+'PPPPP
+
+
 Private mvarTipoMov As String 'copia local
 Private mvarNombreMov As String 'copia local
 Private mvarMueveStock As Boolean
@@ -21,8 +24,8 @@ Private mvarContador As Long  'copia local
 Private mvarTipoDocu As Byte  'copia local
 Private mvarLetraSerie As String * 1 'Letra Serie Ariconta
 
-Private RS As ADODB.Recordset
-Private SQL As String
+Private Rs As ADODB.Recordset
+Private Sql As String
 Private Mens As String
 
 
@@ -87,25 +90,25 @@ End Property
 '//     Si es el ultimo numero de la serie devuelve el anterior
 Public Function DevolverContador(vCodigo As String, Contador As Long) As Byte
 Dim OK As Boolean
-Dim C1 As Long
+Dim c1 As Long
 On Error GoTo Err1
     
     'Abrimos bloqueando
-    SQL = "Select * from usuarios.stipom WHERE codtipom = '" & vCodigo & "' FOR UPDATE " ' "' FOR UPDATE"
+    Sql = "Select * from usuarios.stipom WHERE codtipom = '" & vCodigo & "' FOR UPDATE " ' "' FOR UPDATE"
     'Esto esba asi antes, sin comentar
     'Conn.Execute "Set autocommit = 0"
     DevolverContador = 1
     OK = False
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
         mvarTipoMov = vCodigo
-        mvarNombreMov = RS!nomtipom
-        C1 = RS!Contador
+        mvarNombreMov = Rs!nomtipom
+        c1 = Rs!Contador
         OK = True
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     If Not OK Then
         conn.Execute "commit"
         Exit Function
@@ -113,15 +116,15 @@ On Error GoTo Err1
 
     OK = False
 
-    OK = (C1 = Contador)
+    OK = (c1 = Contador)
     If OK Then
         'Actualizamos el contador
-        SQL = "UPDATE usuarios.stipom set "
+        Sql = "UPDATE usuarios.stipom set "
 
-        C1 = C1 - 1
-        SQL = SQL & " contador=" & C1
-        SQL = SQL & " WHERE codtipom = '" & vCodigo & "'"
-        conn.Execute SQL
+        c1 = c1 - 1
+        Sql = Sql & " contador=" & c1
+        Sql = Sql & " WHERE codtipom = '" & vCodigo & "'"
+        conn.Execute Sql
     End If
 
     'Desbloqueamos
@@ -140,32 +143,32 @@ End Function
 
 Public Function ConseguirContador(Tipo As String) As Long
 Dim OK As Boolean
-Dim C1 As Long 'contador
-Dim RS As ADODB.Recordset
+Dim c1 As Long 'contador
+Dim Rs As ADODB.Recordset
 On Error GoTo Err1
     
     ConseguirContador = 1
     
     'Abrimos bloqueando
-    SQL = "Select * from usuarios.stipom WHERE codtipom='" & Tipo & "' FOR UPDATE"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If Not RS.EOF Then
+    Sql = "Select * from usuarios.stipom WHERE codtipom='" & Tipo & "' FOR UPDATE"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Not Rs.EOF Then
         mvarTipoMov = Tipo
-        mvarNombreMov = RS!nomtipom
-        mvarMueveStock = RS!muevesto
-        mvarContador = RS!Contador
-        mvarTipoDocu = RS!TipoDocu
-        C1 = RS!Contador
+        mvarNombreMov = Rs!nomtipom
+        mvarMueveStock = Rs!muevesto
+        mvarContador = Rs!Contador
+        mvarTipoDocu = Rs!TipoDocu
+        c1 = Rs!Contador
         OK = True
     Else
         MsgBox "No existe contador para ese tipo de movimiento.", vbExclamation
         OK = False
     End If
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
      
-    If OK Then ConseguirContador = C1 + 1
+    If OK Then ConseguirContador = c1 + 1
     Exit Function
 Err1:
     Mens = "Error: " & Err.Number & " : " & Err.Description
@@ -175,19 +178,19 @@ End Function
 
 
 Public Function IncrementarContador(vCodigo As String) As Boolean
-Dim C1 As Long 'contador1: recibo de entrada
+Dim c1 As Long 'contador1: recibo de entrada
 On Error GoTo Err1
     
       
     'Actualizamos el contador
-    C1 = Contador
-    SQL = "UPDATE usuarios.stipom set "
-    C1 = C1 + 1
-    mvarContador = C1
-    SQL = SQL & " contador=" & C1
+    c1 = Contador
+    Sql = "UPDATE usuarios.stipom set "
+    c1 = c1 + 1
+    mvarContador = c1
+    Sql = Sql & " contador=" & c1
     
-    SQL = SQL & " WHERE codtipom='" & vCodigo & "'"
-    conn.Execute SQL
+    Sql = Sql & " WHERE codtipom='" & vCodigo & "'"
+    conn.Execute Sql
     IncrementarContador = True
     Exit Function
 Err1:
@@ -203,28 +206,28 @@ End Function
 Public Function Leer(vCodigo As String) As Boolean
 On Error GoTo Err3
     
-    SQL = "SELECT * FROM usuarios.stipom WHERE codtipom='" & vCodigo & "'"
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic
+    Sql = "SELECT * FROM usuarios.stipom WHERE codtipom='" & vCodigo & "'"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic
 
-    If RS.EOF Then
+    If Rs.EOF Then
         Leer = False
         'No existe el tipo de Movimiento
-        SQL = "No existe el Tipo de Movimiento: " & vCodigo & " en la tabla de parámetros stipom."
-        SQL = SQL & vbCrLf & "Consulte al Administrador."
-        MsgBox SQL, vbCritical
+        Sql = "No existe el Tipo de Movimiento: " & vCodigo & " en la tabla de parámetros stipom."
+        Sql = Sql & vbCrLf & "Consulte al Administrador."
+        MsgBox Sql, vbCritical
     Else
-        mvarTipoMov = RS!CodTipom
-        mvarNombreMov = RS!nomtipom
-        mvarMueveStock = RS!muevesto
-        mvarContador = RS!Contador
-        mvarLetraSerie = DBLet(RS!letraser, "T")
-        mvarTipoDocu = DBLet(RS!TipoDocu, "N")
+        mvarTipoMov = Rs!CodTipom
+        mvarNombreMov = Rs!nomtipom
+        mvarMueveStock = Rs!muevesto
+        mvarContador = Rs!Contador
+        mvarLetraSerie = DBLet(Rs!letraser, "T")
+        mvarTipoDocu = DBLet(Rs!TipoDocu, "N")
         Leer = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 Err3:
@@ -233,7 +236,7 @@ Err3:
         Mens = Mens & "Número: " & Err.Number & vbCrLf
         Mens = Mens & "Descripción: " & Err.Description
         MsgBox Mens, vbExclamation
-        RS.Close
+        Rs.Close
         Leer = False
     End If
 End Function
