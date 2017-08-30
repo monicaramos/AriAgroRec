@@ -138,6 +138,20 @@ Public Property Get Serie() As String
 End Property
 
 
+
+Public Property Let Observa(ByVal vData As String)
+      mvarobserva = vData
+End Property
+
+
+Public Property Get Observa() As String
+     Observa = mvarobserva
+End Property
+
+
+
+
+
 '-----------------------------------------------------------
 '-----------------------------------------------------------
 'Con esta funcion, fijaremos las variables inciales para la contabilizacion
@@ -396,7 +410,7 @@ Dim Cliente As String
     Case 2
         Cad2 = DevNombreSQL(DBLet(RF!Nommacta))
     Case Else
-        Cad2 = DBLet(RF!confaccl)
+        Cad2 = DBLet(Observa) 'DBLet(RF!confaccl)
     End Select
     
     '   Modificacion para k aparezca en la ampliacio el CC en la ampliacion de codmacta
@@ -996,6 +1010,9 @@ Dim NoSumaIVA As Boolean
     
     
     
+    
+    
+    
     On Error GoTo EIntegraLaFactura2
     
     
@@ -1121,7 +1138,7 @@ Dim NoSumaIVA As Boolean
     Case 2
         Cad2 = DevNombreSQL(DBLet(RF!Nommacta))
     Case Else
-        Cad2 = DBLet(RF!confacpr)
+        Cad2 = DBSet(Observa) 'DBLet(RF!confacpr)
     End Select
     
         
