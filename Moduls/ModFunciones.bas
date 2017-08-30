@@ -3567,10 +3567,11 @@ End Function
 
 
 
-Public Function EsCampoSocioVariedad(campo As String, Socio As String, Variedad As String) As Boolean
+Public Function EsCampoSocioVariedad(campo As String, Socio As String, Variedad As String, Optional EsDesdeClasifica As Boolean) As Boolean
 Dim Sql As String
 Dim Sql2 As String
-
+Dim Sql3 As String
+Dim VarRelacionada As Long
 
     EsCampoSocioVariedad = True
     
@@ -3585,7 +3586,18 @@ Dim Sql2 As String
     Sql2 = Sql2 & " and rcampos.codvarie = " & DBSet(Variedad, "N")
     
     
-    EsCampoSocioVariedad = (TotalRegistros(Sql) > 0) Or (TotalRegistros(Sql2) > 0)
+    '[Monica]23/08/2017: miramos si es de una variedad relacionada
+    If EsDesdeClasifica Then
+        VarRelacionada = DevuelveValor("select codvarie from variedades_rel where codvarie1 = " & DBSet(Variedad, "N"))
+        
+        Sql3 = "select count(*) from rcampos WHERE rcampos.codcampo = " & DBSet(campo, "N")
+        Sql3 = Sql3 & " and rcampos.codsocio = " & DBSet(Socio, "N")
+        Sql3 = Sql3 & " and rcampos.codvarie = " & DBSet(VarRelacionada, "N")
+        
+'        TieneVariedadRelacionada = (TotalRegistros(Sql3) > 0)
+    End If
+    
+    EsCampoSocioVariedad = (TotalRegistros(Sql) > 0) Or (TotalRegistros(Sql2) > 0) Or (TotalRegistros(Sql3) > 0)
 
 End Function
 

@@ -71,7 +71,7 @@ Public Sub ImprimirDirectoAlb(cadSelect As String)
     
     Dim Sql As String
     Dim Lin As String ' línea de impresión
-    Dim i As Integer
+    Dim I As Integer
     
     Dim Producto As String
     Dim Variedad As String
@@ -86,7 +86,7 @@ Public Sub ImprimirDirectoAlb(cadSelect As String)
     
     Dim Taras2 As Long
     
-    Dim vSocio As CSocio
+    Dim vSocio As cSocio
     
 On Error GoTo EImpD
     
@@ -100,9 +100,9 @@ On Error GoTo EImpD
         
         Producto = DevuelveValor("select nomprodu from variedades inner join productos on variedades.codprodu = productos.codprodu where codvarie = " & DBSet(RS1!codvarie, "N"))
         Variedad = DevuelveValor("select nomvarie from variedades where codvarie = " & DBSet(RS1!codvarie, "N"))
-        Termino = DevuelveValor("select despobla from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) inner join rpueblos on rpartida.codpobla = rpueblos.codpobla where codcampo = " & DBSet(RS1!CodCampo, "N"))
-        Partida = DevuelveValor("select nomparti from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) where codcampo = " & DBSet(RS1!CodCampo, "N"))
-        Has = DevuelveValor("select supcoope from rcampos where codcampo = " & DBSet(RS1!CodCampo, "N"))
+        Termino = DevuelveValor("select despobla from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) inner join rpueblos on rpartida.codpobla = rpueblos.codpobla where codcampo = " & DBSet(RS1!codcampo, "N"))
+        Partida = DevuelveValor("select nomparti from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) where codcampo = " & DBSet(RS1!codcampo, "N"))
+        Has = DevuelveValor("select supcoope from rcampos where codcampo = " & DBSet(RS1!codcampo, "N"))
         Hdas = Round2(Has / vParamAplic.Faneca, 4)
         
         
@@ -149,19 +149,19 @@ On Error GoTo EImpD
         
         Set Cabecera = New Collection
         
-        For i = 1 To 8 '[Monica]16/12/2011: antes 10
+        For I = 1 To 8 '[Monica]16/12/2011: antes 10
             Cabecera.Add " "
-        Next i
+        Next I
         
-        SegundaImpresion = EsSegundaImpresion(RS1!numnotac)
+        SegundaImpresion = EsSegundaImpresion(RS1!NumNotac)
         
         
-        Lin = Space(MargenIzdo) & Left("ALBARAN : " & Format(RS1!numnotac, "0000000") & Space(40), 40)
+        Lin = Space(MargenIzdo) & Left("ALBARAN : " & Format(RS1!NumNotac, "0000000") & Space(40), 40)
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
         'Añadairemos una linea en blanco
         
         If SegundaImpresion Then
-            Set vSocio = New CSocio
+            Set vSocio = New cSocio
             If vSocio.LeerDatos(RS1!Codsocio) Then
                 Lin = Lin & Left("No.Socio     : " & Format(RS1!Codsocio, "000000"), 40)
             End If
@@ -193,7 +193,7 @@ On Error GoTo EImpD
         '[Monica]25/03/2014: quito la linea en blanco pq la necesito para imprimir si tiene o no ausencia de plagas
 '        Cabecera.Add " "
 
-        Lin = Space(MargenIzdo) & "Huerto  : " & Format(RS1!CodCampo, "0000000")
+        Lin = Space(MargenIzdo) & "Huerto  : " & Format(RS1!codcampo, "0000000")
         Cabecera.Add Lin          '1234567890
         
         Lin = Space(MargenIzdo) & "Termino : " & Termino
@@ -230,6 +230,11 @@ On Error GoTo EImpD
         Lin = Space(MargenIzdo) & Left("Capataz : " & Format(RS1!codcapat, "0000") & Space(40), 40)
         Lin = Lin & Left("Kilos Brutos : " & Format(RS1!KilosBru, "###,##0") & Space(40), 40)
         Cabecera.Add Lin
+        
+        '[Monica]22/08/2017: Se muestra tb el transportista
+        Lin = Space(MargenIzdo) & Left("Transpor: " & Format(RS1!codTrans, "0000") & Space(40), 40)
+        Cabecera.Add Lin
+        
         
         Lin = Space(MargenIzdo) & Left("ENVASES ENTRADA      NRO.    TARA" & Space(40), 40)
                                        '123456789012345678901234567890123
@@ -399,7 +404,7 @@ End Sub
 
 
 Private Sub ImprimeEnPapel()
-    Dim i As Integer
+    Dim I As Integer
     Dim J As Integer
     Dim PagActual As Integer
     Dim Lin As String
@@ -408,7 +413,7 @@ Private Sub ImprimeEnPapel()
         'AHORA IMPRIMIMOS.
         'TEnemos cargada las lineas
         NumeroPaginas = ((Cabecera.Count - 1) \ LineasPorHoja) + 1
-        i = 0
+        I = 0
         PagActual = 1
         For J = 1 To Cabecera.Count
             
@@ -433,7 +438,7 @@ Private Sub ImprimeEnPapel()
 '            End If
             
             ImprimeLaLinea Cabecera(J)
-            i = i + 1
+            I = I + 1
             
 '            'Si es la ultima linea NO hacemos nada
 '            If J < Cabecera.Count Then
@@ -458,13 +463,13 @@ Private Sub ImprimeEnPapel()
         
         
         'Para situar el cabezal en la impresion
-        If i < LineasPorHoja And i <> 0 Then
+        If I < LineasPorHoja And I <> 0 Then
             'Ha impreso i lineas
             'Hasta las 10 que caben...
-            i = LineasPorHoja - i
-            While i > 0
+            I = LineasPorHoja - I
+            While I > 0
                 ImprimeLaLinea ""
-                i = i - 1
+                I = I - 1
             Wend
             
         End If
@@ -497,7 +502,7 @@ Private Sub ImprimeEnPapel()
 End Sub
 
 
-Private Function LineaImportes(BaseIva As Currency, PorceIVA As Currency, ImpIVA As Currency, IvaRE As Currency, ImpIVARE As Currency, TotalFac As String) As String
+Private Function LineaImportes(BaseIva As Currency, PorceIVA As Currency, impiva As Currency, IvaRE As Currency, ImpIVARE As Currency, TotalFac As String) As String
 Dim Lin As String
     
         Lin = Space(17) & Format(BaseIva, FormatoImporte)
@@ -505,7 +510,7 @@ Dim Lin As String
         Lin = Space(MargenIzdo + 16) & Lin
         Lin = Lin & "  " & Right(Space(5) & Format(PorceIVA, FormatoPorcen), 5)
          Lin = Lin & " "
-        Lin = Lin & Right(Space(11) & Format(ImpIVA, FormatoImporte), 11)
+        Lin = Lin & Right(Space(11) & Format(impiva, FormatoImporte), 11)
         If IvaRE = 0 Then
             'No lleva % retencion
             Lin = Lin & Space(17)
@@ -556,21 +561,21 @@ End Sub
 
 
 Private Function EsSegundaImpresion(Nota As Long) As Boolean
-Dim RS As ADODB.Recordset
+Dim Rs As ADODB.Recordset
 Dim Sql As String
 
     Sql = "select * from rentradas where numnotac = " & DBSet(Nota, "N")
     
-    Set RS = New ADODB.Recordset
-    RS.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     EsSegundaImpresion = False
     
-    If Not RS.EOF Then
-        EsSegundaImpresion = Not (IsNull(RS!taracajasa1) And IsNull(RS!taracajasa2) And IsNull(RS!taracajasa2) And IsNull(RS!taracajasa4) And IsNull(RS!taracajasa5) And IsNull(RS!TARAVEHISA) And IsNull(RS!otrastarasa))
+    If Not Rs.EOF Then
+        EsSegundaImpresion = Not (IsNull(Rs!taracajasa1) And IsNull(Rs!taracajasa2) And IsNull(Rs!taracajasa2) And IsNull(Rs!taracajasa4) And IsNull(Rs!taracajasa5) And IsNull(Rs!TARAVEHISA) And IsNull(Rs!otrastarasa))
     End If
 
-    Set RS = Nothing
+    Set Rs = Nothing
 
 End Function
 
@@ -1063,7 +1068,7 @@ Public Sub ImprimirDirectoAlbBodega(cadSelect As String)
     
     Dim Sql As String
     Dim Lin As String ' línea de impresión
-    Dim i As Integer
+    Dim I As Integer
     
     Dim Producto As String
     Dim Variedad As String
@@ -1076,7 +1081,7 @@ Public Sub ImprimirDirectoAlbBodega(cadSelect As String)
     Dim Mermas As Long
     Dim Taras As Long
     
-    Dim vSocio As CSocio
+    Dim vSocio As cSocio
     
 On Error GoTo EImpD
     
@@ -1090,9 +1095,9 @@ On Error GoTo EImpD
         
         Producto = DevuelveValor("select nomprodu from variedades inner join productos on variedades.codprodu = productos.codprodu where codvarie = " & DBSet(RS1!codvarie, "N"))
         Variedad = DevuelveValor("select nomvarie from variedades where codvarie = " & DBSet(RS1!codvarie, "N"))
-        Termino = DevuelveValor("select despobla from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) inner join rpueblos on rpartida.codpobla = rpueblos.codpobla where codcampo = " & DBSet(RS1!CodCampo, "N"))
-        Partida = DevuelveValor("select nomparti from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) where codcampo = " & DBSet(RS1!CodCampo, "N"))
-        Has = DevuelveValor("select supcoope from rcampos where codcampo = " & DBSet(RS1!CodCampo, "N"))
+        Termino = DevuelveValor("select despobla from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) inner join rpueblos on rpartida.codpobla = rpueblos.codpobla where codcampo = " & DBSet(RS1!codcampo, "N"))
+        Partida = DevuelveValor("select nomparti from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) where codcampo = " & DBSet(RS1!codcampo, "N"))
+        Has = DevuelveValor("select supcoope from rcampos where codcampo = " & DBSet(RS1!codcampo, "N"))
         Hdas = Round2(Has / vParamAplic.Faneca, 4)
         
         
@@ -1118,9 +1123,9 @@ On Error GoTo EImpD
         
         Set Cabecera = New Collection
         
-        For i = 1 To 10
+        For I = 1 To 10
             Cabecera.Add " "
-        Next i
+        Next I
         
         
         
@@ -1128,7 +1133,7 @@ On Error GoTo EImpD
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
         'Añadairemos una linea en blanco
         
-        Set vSocio = New CSocio
+        Set vSocio = New cSocio
         If vSocio.LeerDatos(RS1!Codsocio) Then
             Lin = Lin & Left("No.Socio     : " & Format(RS1!Codsocio, "000000"), 40)
         End If
@@ -1149,7 +1154,7 @@ On Error GoTo EImpD
         Cabecera.Add Lin          '1234567890
         
         Cabecera.Add " "
-        Lin = Space(MargenIzdo) & "Huerto  : " & Format(RS1!CodCampo, "0000000")
+        Lin = Space(MargenIzdo) & "Huerto  : " & Format(RS1!codcampo, "0000000")
         Cabecera.Add Lin          '1234567890
         
         Lin = Space(MargenIzdo) & "Termino : " & Termino
@@ -1266,7 +1271,7 @@ Public Sub ImprimirDirectoTickets(cadSelect As String)
     
     Dim Sql As String
     Dim Lin As String ' línea de impresión
-    Dim i As Integer
+    Dim I As Integer
     
     Dim Producto As String
     Dim Variedad As String
@@ -1296,9 +1301,9 @@ On Error GoTo EImpD
         
         Set Cabecera = New Collection
         
-        For i = 1 To 1
+        For I = 1 To 1
             Cabecera.Add " "
-        Next i
+        Next I
         
         Lin = Space(MargenIzdo) & Left(Socio & Space(40), 40)
         'EN la impresora se alineara la linea roja del cabezal con la linea superiror del papel impreso (en verde)
