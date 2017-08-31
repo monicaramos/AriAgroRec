@@ -73,6 +73,10 @@ Private mvarNumeroFactura As Long
 Private mvarAnofac As Integer
 Private mvarSerie As String
 
+Private mvarObserva As String
+
+
+
 Private mvarModoErrores As Byte
     '0. Inicial
     '1.  Mostrare un msg por cada una.
@@ -140,12 +144,12 @@ End Property
 
 
 Public Property Let Observa(ByVal vData As String)
-      mvarobserva = vData
+      mvarObserva = vData
 End Property
 
 
 Public Property Get Observa() As String
-     Observa = mvarobserva
+     Observa = mvarObserva
 End Property
 
 
@@ -1138,7 +1142,7 @@ Dim NoSumaIVA As Boolean
     Case 2
         Cad2 = DevNombreSQL(DBLet(RF!Nommacta))
     Case Else
-        Cad2 = DBSet(Observa) 'DBLet(RF!confacpr)
+        Cad2 = DBLet(Observa) 'DBLet(RF!confacpr)
     End Select
     
         
