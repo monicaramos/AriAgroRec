@@ -5,8 +5,8 @@ Dim DeTransporte As Boolean
 Dim frmBas As frmBasico
 
 
-Private Sub Construc(Nom As String)
-    MsgBox Nom & ": en construcción..."
+Private Sub Construc(nom As String)
+    MsgBox nom & ": en construcción..."
 End Sub
 
 ' ******* DATOS BASICOS *********
@@ -78,7 +78,13 @@ Public Sub SubmnC_RecoleccionG_Admon_Click(Index As Integer)
         Case 19: frmManProceRiego.Show vbModal ' procedencia de riego
         Case 20: frmManPatronaPie.Show vbModal ' patron a pie
         Case 21: frmManSeguroOpc.Show vbModal ' seguro opcion
-        Case 22: frmManCampos.Show vbModal 'Campos
+        Case 22: ' CAMPOS
+                 '[Monica]04/09/2017: entra Monasterios (Pozos)
+                 If vParamAplic.Cooperativa = 17 Then
+                    frmManCamposMonast.Show vbModal ' Campos de Monasterios
+                 Else
+                    frmManCampos.Show vbModal 'Campos
+                 End If
     
         Case 24: frmManPortesPobla.Show vbModal 'Portes por Poblacion
         Case 25: frmManCalibrador.Show vbModal 'Nombres Calibradores Catadau
@@ -1109,6 +1115,14 @@ Dim I As Integer
     '[Monica]10/01/2014: incremento de liquidacion para picassent
     MDIppal.mnRec_LiquFO(2).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
     MDIppal.mnRec_LiquFO(2).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) 'Solo para Picassent
+    
+    '[Monica]04/09/2017: comunidades
+    If vParamAplic.Cooperativa = 17 Then
+        MDIppal.mnRec_Pozos(1).Caption = "Comunidades"
+        MDIppal.mnRec_Pozos(2).Caption = "Contadores"
+        MDIppal.mnRecG_Admon(8).Caption = "Calles"
+        MDIppal.mnRecG_Admon(22).Caption = "Propiedades"
+    End If
     
     '[Monica]23/09/2011: la rectificacion de facturas de consumo de momento solo para Quatretonda
     MDIppal.mnRec_Pozos(28).Enabled = (vParamAplic.Cooperativa = 7)

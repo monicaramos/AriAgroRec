@@ -636,7 +636,7 @@ Dim B As Boolean
     txtAux2(3).visible = Not B
     btnBuscar(1).visible = Not B
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -796,7 +796,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -811,19 +811,19 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar la Partida?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar la Partida?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
         'chivato
         CargarUnaPartida CLng(adodc1.Recordset.Fields(0)), "D"
         
-        SQL = "Delete from rpartida where codparti=" & adodc1.Recordset!codparti
-        conn.Execute SQL
+        Sql = "Delete from rpartida where codparti=" & adodc1.Recordset!codparti
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1046,6 +1046,10 @@ Private Sub Form_Load()
         .Buttons(1).Image = 12
     End With
 
+    '[Monica]04/09/2017: las partidas son calles para Monasterios
+    If vParamAplic.Cooperativa = 17 Then
+        Me.Caption = "Calles"
+    End If
 
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -1160,21 +1164,21 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rpartida.codparti"
+    Sql = Sql & " ORDER BY rpartida.codparti"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|750|;"
@@ -1269,7 +1273,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1376,7 +1380,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim vCadena As String
 Dim Produ As Integer
 Dim B As Boolean
@@ -1389,12 +1393,12 @@ Dim B As Boolean
 
 
     If CLng(txtAux(3).Text) <> CLng(ZonaAnt) And vParamAplic.Cooperativa <> 0 And vParamAplic.Cooperativa <> 10 Then
-        SQL = "update rcampos "
-        SQL = SQL & " SET codzonas = " & DBSet(txtAux(3).Text, "N")
-        SQL = SQL & " where codzonas = " & DBSet(ZonaAnt, "N")
-        SQL = SQL & " and codparti = " & DBSet(txtAux(0).Text, "N")
+        Sql = "update rcampos "
+        Sql = Sql & " SET codzonas = " & DBSet(txtAux(3).Text, "N")
+        Sql = Sql & " where codzonas = " & DBSet(ZonaAnt, "N")
+        Sql = Sql & " and codparti = " & DBSet(txtAux(0).Text, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     B = True
