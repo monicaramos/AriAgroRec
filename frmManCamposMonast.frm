@@ -32,20 +32,20 @@ Begin VB.Form frmManCamposMonast
       Height          =   300
       Index           =   0
       Left            =   6345
-      TabIndex        =   38
+      TabIndex        =   32
       Top             =   270
       Width           =   1605
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   3780
-      TabIndex        =   36
+      TabIndex        =   30
       Top             =   30
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   37
+         TabIndex        =   31
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -79,13 +79,13 @@ Begin VB.Form frmManCamposMonast
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   150
-      TabIndex        =   34
+      TabIndex        =   28
       Top             =   30
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   35
+         TabIndex        =   29
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -146,46 +146,6 @@ Begin VB.Form frmManCamposMonast
       Top             =   780
       Width           =   8370
       Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   1620
-         MaxLength       =   6
-         TabIndex        =   1
-         Tag             =   "Código Socio|N|N|1|999999|rcampos|codsocio|000000|N|"
-         Top             =   450
-         Width           =   975
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   1
-         Left            =   2655
-         MaxLength       =   40
-         TabIndex        =   27
-         Top             =   450
-         Width           =   5265
-      End
-      Begin VB.TextBox Text1 
          Alignment       =   2  'Center
          BeginProperty Font 
             Name            =   "Verdana"
@@ -198,37 +158,12 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   225
+         Left            =   1350
          MaxLength       =   8
          TabIndex        =   0
          Tag             =   "Código Campo|N|N|1|99999999|rcampos|codcampo|00000000|S|"
-         Top             =   450
+         Top             =   315
          Width           =   1275
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   1
-         Left            =   2340
-         ToolTipText     =   "Buscar Socio"
-         Top             =   180
-         Width           =   240
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Socio"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   1665
-         TabIndex        =   15
-         Top             =   180
-         Width           =   1200
       End
       Begin VB.Label Label1 
          Caption         =   "Código"
@@ -246,7 +181,7 @@ Begin VB.Form frmManCamposMonast
          Index           =   0
          Left            =   225
          TabIndex        =   14
-         Top             =   180
+         Top             =   360
          Width           =   1005
       End
    End
@@ -324,7 +259,7 @@ Begin VB.Form frmManCamposMonast
       EndProperty
       Height          =   375
       Left            =   7470
-      TabIndex        =   16
+      TabIndex        =   15
       Top             =   7740
       Visible         =   0   'False
       Width           =   1065
@@ -332,7 +267,7 @@ Begin VB.Form frmManCamposMonast
    Begin TabDlg.SSTab SSTab1 
       Height          =   5835
       Left            =   150
-      TabIndex        =   17
+      TabIndex        =   16
       Top             =   1755
       Width           =   8370
       _ExtentX        =   14764
@@ -355,59 +290,41 @@ Begin VB.Form frmManCamposMonast
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCamposMonast.frx":000C
       Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Label1(26)"
+      Tab(0).Control(0)=   "Label28"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label28"
+      Tab(0).Control(1)=   "imgZoom(0)"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
+      Tab(0).Control(2)=   "Label29"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label29"
+      Tab(0).Control(3)=   "Label6(0)"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label6(0)"
+      Tab(0).Control(4)=   "imgBuscar(2)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "imgBuscar(3)"
+      Tab(0).Control(5)=   "Label4"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(13)"
+      Tab(0).Control(6)=   "imgBuscar(1)"
       Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "Label36"
+      Tab(0).Control(7)=   "Text1(7)"
       Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "FrameDatosDtoAdministracion"
+      Tab(0).Control(8)=   "Text1(8)"
       Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "Text5(3)"
+      Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Text4(3)"
+      Tab(0).Control(10)=   "Text5(3)"
       Tab(0).Control(10).Enabled=   0   'False
-      Tab(0).Control(11)=   "Text1(3)"
+      Tab(0).Control(11)=   "Text1(6)"
       Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "Text1(7)"
+      Tab(0).Control(12)=   "Text1(2)"
       Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text1(2)"
+      Tab(0).Control(13)=   "Text2(2)"
       Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text2(3)"
+      Tab(0).Control(14)=   "Text4(3)"
       Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text5(0)"
+      Tab(0).Control(15)=   "Text1(1)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).ControlCount=   16
-      Begin VB.TextBox Text5 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   0
-         Left            =   1530
-         MaxLength       =   30
-         TabIndex        =   31
-         Top             =   2160
-         Width           =   2055
-      End
+      Tab(0).Control(16)=   "Text2(1)"
+      Tab(0).Control(16).Enabled=   0   'False
+      Tab(0).ControlCount=   17
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
@@ -421,12 +338,12 @@ Begin VB.Form frmManCamposMonast
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   3
-         Left            =   2445
-         MaxLength       =   30
-         TabIndex        =   28
-         Top             =   735
-         Width           =   5505
+         Index           =   1
+         Left            =   2520
+         MaxLength       =   40
+         TabIndex        =   35
+         Top             =   495
+         Width           =   5445
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -440,54 +357,13 @@ Begin VB.Form frmManCamposMonast
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   2
-         Left            =   1560
-         MaxLength       =   4
-         TabIndex        =   2
-         Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
-         Top             =   735
-         Width           =   855
-      End
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   1020
-         Index           =   7
-         Left            =   225
-         MaxLength       =   250
-         MultiLine       =   -1  'True
-         ScrollBars      =   2  'Vertical
-         TabIndex        =   7
-         Tag             =   "Observaciones|T|S|||rcampos|observac|||"
-         Top             =   4320
-         Width           =   7710
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   3
-         Left            =   1560
+         Index           =   1
+         Left            =   1530
          MaxLength       =   6
-         TabIndex        =   3
-         Tag             =   "Zona|N|N|1|9999|rcampos|codzonas|0000||"
-         Top             =   1170
-         Width           =   855
+         TabIndex        =   1
+         Tag             =   "Código Socio|N|N|1|999999|rcampos|codsocio|000000|N|"
+         Top             =   495
+         Width           =   975
       End
       Begin VB.TextBox Text4 
          BackColor       =   &H80000018&
@@ -503,11 +379,72 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2445
+         Left            =   1530
          MaxLength       =   30
-         TabIndex        =   22
-         Top             =   1170
+         TabIndex        =   33
+         Top             =   1485
+         Width           =   915
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   2490
+         MaxLength       =   30
+         TabIndex        =   24
+         Top             =   1005
          Width           =   5505
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   2
+         Left            =   1515
+         MaxLength       =   4
+         TabIndex        =   2
+         Tag             =   "Partida|N|N|1|9999|rcampos|codparti|0000||"
+         Top             =   1005
+         Width           =   945
+      End
+      Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1920
+         Index           =   6
+         Left            =   225
+         MaxLength       =   250
+         MultiLine       =   -1  'True
+         ScrollBars      =   2  'Vertical
+         TabIndex        =   6
+         Tag             =   "Observaciones|T|S|||rcampos|observac|||"
+         Top             =   3555
+         Width           =   7710
       End
       Begin VB.TextBox Text5 
          BackColor       =   &H80000018&
@@ -523,11 +460,11 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1560
+         Left            =   2505
          MaxLength       =   30
-         TabIndex        =   21
-         Top             =   1665
-         Width           =   6390
+         TabIndex        =   20
+         Top             =   1485
+         Width           =   5490
       End
       Begin VB.Frame FrameDatosDtoAdministracion 
          Caption         =   "Datos Administrativos"
@@ -541,10 +478,10 @@ Begin VB.Form frmManCamposMonast
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   1320
+         Height          =   1185
          Left            =   180
-         TabIndex        =   18
-         Top             =   2655
+         TabIndex        =   17
+         Top             =   1935
          Width           =   7755
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -560,7 +497,7 @@ Begin VB.Form frmManCamposMonast
             Index           =   4
             Left            =   1710
             MaxLength       =   10
-            TabIndex        =   4
+            TabIndex        =   3
             Tag             =   "Fecha Alta|F|N|||rcampos|fecaltas|dd/mm/yyyy||"
             Top             =   330
             Width           =   1300
@@ -579,7 +516,7 @@ Begin VB.Form frmManCamposMonast
             Index           =   5
             Left            =   5190
             MaxLength       =   10
-            TabIndex        =   5
+            TabIndex        =   4
             Tag             =   "Fecha Baja|F|S|||rcampos|fecbajas|dd/mm/yyyy||"
             Top             =   330
             Width           =   1300
@@ -597,9 +534,9 @@ Begin VB.Form frmManCamposMonast
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   6
+            Index           =   3
             Left            =   2490
-            TabIndex        =   19
+            TabIndex        =   18
             Top             =   720
             Width           =   4020
          End
@@ -615,10 +552,10 @@ Begin VB.Form frmManCamposMonast
                Strikethrough   =   0   'False
             EndProperty
             Height          =   360
-            Index           =   6
+            Index           =   3
             Left            =   1710
             MaxLength       =   2
-            TabIndex        =   6
+            TabIndex        =   5
             Tag             =   "Código Situacion|N|N|0|99|rcampos|codsitua|00||"
             Top             =   720
             Width           =   765
@@ -631,16 +568,6 @@ Begin VB.Form frmManCamposMonast
             TabIndex        =   8
             Top             =   750
             Width           =   2445
-         End
-         Begin VB.Image imgDoc 
-            Enabled         =   0   'False
-            Height          =   465
-            Index           =   0
-            Left            =   3030
-            ToolTipText     =   "Impresión Documento Baja"
-            Top             =   210
-            Visible         =   0   'False
-            Width           =   510
          End
          Begin VB.Label Label18 
             Caption         =   "Fecha Alta"
@@ -655,7 +582,7 @@ Begin VB.Form frmManCamposMonast
             EndProperty
             Height          =   255
             Left            =   150
-            TabIndex        =   30
+            TabIndex        =   26
             Top             =   330
             Width           =   1245
          End
@@ -672,7 +599,7 @@ Begin VB.Form frmManCamposMonast
             EndProperty
             Height          =   255
             Left            =   3750
-            TabIndex        =   29
+            TabIndex        =   25
             Top             =   330
             Width           =   1125
          End
@@ -707,7 +634,7 @@ Begin VB.Form frmManCamposMonast
             EndProperty
             Height          =   255
             Left            =   150
-            TabIndex        =   20
+            TabIndex        =   19
             Top             =   720
             Width           =   945
          End
@@ -720,8 +647,56 @@ Begin VB.Form frmManCamposMonast
             Width           =   240
          End
       End
-      Begin VB.Label Label36 
-         Caption         =   "Nº Contador"
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   8
+         Left            =   1575
+         MaxLength       =   4
+         TabIndex        =   34
+         Tag             =   "Zonas|N|S|||rcampos|codzonas|0000||"
+         Top             =   1005
+         Width           =   855
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   7
+         Left            =   1530
+         MaxLength       =   6
+         TabIndex        =   7
+         Tag             =   "Código Propietario|N|S|||rcampos|codpropiet|000000|N|"
+         Top             =   495
+         Width           =   975
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   1
+         Left            =   1215
+         ToolTipText     =   "Buscar Socio"
+         Top             =   495
+         Width           =   240
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Socio"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -733,24 +708,16 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   32
-         Top             =   2190
-         Width           =   1290
+         TabIndex        =   36
+         Top             =   495
+         Width           =   660
       End
       Begin VB.Image imgBuscar 
          Height          =   240
-         Index           =   13
-         Left            =   1260
-         ToolTipText     =   "Buscar Zona"
-         Top             =   1185
-         Width           =   240
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   3
-         Left            =   1260
+         Index           =   2
+         Left            =   1215
          ToolTipText     =   "Buscar Partida"
-         Top             =   750
+         Top             =   1020
          Width           =   240
       End
       Begin VB.Label Label6 
@@ -767,8 +734,8 @@ Begin VB.Form frmManCamposMonast
          Height          =   255
          Index           =   0
          Left            =   180
-         TabIndex        =   26
-         Top             =   735
+         TabIndex        =   23
+         Top             =   1005
          Width           =   735
       End
       Begin VB.Label Label29 
@@ -784,8 +751,8 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   255
          Left            =   255
-         TabIndex        =   25
-         Top             =   4005
+         TabIndex        =   22
+         Top             =   3195
          Width           =   1530
       End
       Begin VB.Image imgZoom 
@@ -793,7 +760,7 @@ Begin VB.Form frmManCamposMonast
          Index           =   0
          Left            =   1815
          ToolTipText     =   "Zoom descripción"
-         Top             =   4005
+         Top             =   3195
          Width           =   240
       End
       Begin VB.Label Label28 
@@ -809,33 +776,15 @@ Begin VB.Form frmManCamposMonast
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   24
-         Top             =   1665
+         TabIndex        =   21
+         Top             =   1485
          Width           =   1035
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Zona"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   26
-         Left            =   180
-         TabIndex        =   23
-         Top             =   1185
-         Width           =   735
       End
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
       Left            =   8100
-      TabIndex        =   33
+      TabIndex        =   27
       Top             =   225
       Width           =   405
       _ExtentX        =   714
@@ -1028,13 +977,11 @@ Private WithEvents frmZ As frmZoom  'Zoom para campos Text
 Attribute frmZ.VB_VarHelpID = -1
 Private WithEvents frmZ2 As frmZoom  'Zoom para campos Text (observaciones de la revision)
 Attribute frmZ2.VB_VarHelpID = -1
-Private WithEvents frmCamPrev As frmManCamposPrev ' campos vista previa
+Private WithEvents frmCamPrev As frmManCamposMonastPrev ' campos vista previa
 Attribute frmCamPrev.VB_VarHelpID = -1
 
 Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
-Private WithEvents frmZon As frmManZonas 'zonas
-Attribute frmZon.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'situaciones de campos
@@ -1174,6 +1121,8 @@ Private Sub cmdAceptar_Click()
             
         Case 3 'INSERTAR
             If DatosOK Then
+                Text1(7).Text = Text1(1).Text
+                Text1(8).Text = 1
                 If InsertarDesdeForm2(Me, 1) Then
                     CargarUnCampo CLng(Text1(0)), "I"
                     ' *** canviar o llevar el WHERE, repasar codEmpre ****
@@ -1543,15 +1492,12 @@ Dim I As Integer
 '    Me.imgDoc(1).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
     
     
-    Me.imgDoc(0).Picture = frmPpal.imgListPpal.ListImages(24).Picture
     
     
     'cargar IMAGES de busqueda
-    For I = 0 To 1
+    For I = 0 To 2
         Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Next I
-    Me.imgBuscar(3).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Me.imgBuscar(13).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     
 '    'carga IMAGES de mail
 '    For i = 0 To Me.imgMail.Count - 1
@@ -1627,9 +1573,6 @@ Dim I As Integer
     Set dbAriagro = New BaseDatos
     dbAriagro.abrir_MYSQL vConfig.SERVER, vUsu.CadenaConexion, vConfig.User, vConfig.password
     
-    '[Monica]07/06/2013: cambio del nommbre de zona
-    Label1(26).Caption = vParamAplic.NomZonaPOZ
-    imgBuscar(13).ToolTipText = "Buscar " & vParamAplic.NomZonaPOZ
     
     '[Monica]23/09/2014: en el caso de alzira el campo poda lo usaran para indicar si el campo está sin Placa Identificativa
     If vParamAplic.Cooperativa = 4 Then
@@ -1712,8 +1655,8 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1749,10 +1692,6 @@ Dim B As Boolean
             
     chkVistaPrevia(0).Enabled = (Modo <= 2)
     
-    ' el codigo de socio solo se puede modificar de un campo si se hace un cambio de socio
-    BloquearTxt Text1(1), Not (Modo = 1 Or Modo = 3)
-    imgBuscar(1).Enabled = (Modo = 1 Or Modo = 3)
-    imgBuscar(1).visible = (Modo = 1 Or Modo = 3)
     
     
     PonerLongCampos
@@ -1819,26 +1758,9 @@ Dim B As Boolean
 '    BloquearBtn cmdAux(1), B
      '-----------------------------
      
-    Text1(3).Enabled = (Modo = 1)
-    imgBuscar(13).Enabled = (Modo = 1)
-    imgBuscar(13).visible = (Modo = 1)
-    
-    '[Monica]05/05/2017: levanto el control para Catadau para que pueda modificar la zona
-    If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or vParamAplic.Cooperativa = 0 Then
-        Text1(3).Enabled = (Modo = 1) Or (Modo = 3) Or (Modo = 4)
-        imgBuscar(13).Enabled = (Modo = 1) Or (Modo = 3) Or (Modo = 4)
-        imgBuscar(13).visible = (Modo = 1) Or (Modo = 3) Or (Modo = 4)
-    End If
-     
     PonerModoOpcionesMenu (Modo) 'Activar opcions menú según modo
     PonerOpcionesMenu   'Activar opcions de menú según nivell
                         'de permisos de l'usuari
-
-    '[Monica]06/05/2015: solo para el caso de alzira no dejamos modificar la superficie cooperativa si no tiene nivel 0
-    If vParamAplic.Cooperativa = 4 And Modo = 4 Then
-        Text1(5).Enabled = (vUsu.Nivel = 0)
-        Text2(5).Enabled = (vUsu.Nivel = 0)
-    End If
 
 
     ' bloqueo de todos los datos excepto de datos tecnicos cuando no es administrador y estamos modificando
@@ -1977,120 +1899,120 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
-            Sql = "select rcampos_cooprop.codcampo, rcampos_cooprop.numlinea, rcampos_cooprop.codsocio, rsocios.nomsocio, "
-            Sql = Sql & " rcampos_cooprop.porcentaje "
-            Sql = Sql & " FROM rcampos_cooprop INNER JOIN rsocios ON rcampos_cooprop.codsocio = rsocios.codsocio "
-            Sql = Sql & " and rcampos_cooprop.codsocio = rsocios.codsocio "
+            SQL = "select rcampos_cooprop.codcampo, rcampos_cooprop.numlinea, rcampos_cooprop.codsocio, rsocios.nomsocio, "
+            SQL = SQL & " rcampos_cooprop.porcentaje "
+            SQL = SQL & " FROM rcampos_cooprop INNER JOIN rsocios ON rcampos_cooprop.codsocio = rsocios.codsocio "
+            SQL = SQL & " and rcampos_cooprop.codsocio = rsocios.codsocio "
             If enlaza Then
                 '[Monica]08/07/2011
-                Sql = Sql & Replace(ObtenerWhereCab2(True), "rcampos_parcelas", "rcampos_cooprop")
+                SQL = SQL & Replace(ObtenerWhereCab2(True), "rcampos_parcelas", "rcampos_cooprop")
                 'Sql = Sql & " WHERE rcampos_cooprop.codcampo = " & Text1(0).Text
             Else
-                Sql = Sql & " WHERE rcampos_cooprop.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_cooprop.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY rcampos_cooprop.codsocio "
+            SQL = SQL & " ORDER BY rcampos_cooprop.codsocio "
        
        Case 1 ' clasificacion
             tabla = "rcampos_clasif"
-            Sql = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
-            Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
+            SQL = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
+            SQL = SQL & " and rcampos_clasif.codcalid = rcalidad.codcalid "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE rcampos_clasif.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_clasif.codcampo = -1"
             End If
-            Sql = Sql
-            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
+            SQL = SQL
+            SQL = SQL & " ORDER BY " & tabla & ".codcalid "
             
        Case 2 ' parcelas
             tabla = "rcampos_parcelas"
-            Sql = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
-            Sql = Sql & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
-            Sql = Sql & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
+            SQL = SQL & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
+            SQL = SQL & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
+            SQL = SQL & " FROM " & tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab2(True)
+                SQL = SQL & ObtenerWhereCab2(True)
             Else
-                Sql = Sql & " WHERE rcampos_parcelas.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_parcelas.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
             
        Case 3 ' agroseguro
             tabla = "rcampos_seguros"
-            Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
-            Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
-            Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
+            SQL = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
+            SQL = SQL & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
+            SQL = SQL & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab3(True)
+                SQL = SQL & ObtenerWhereCab3(True)
             Else
-                Sql = Sql & " WHERE rcampos_seguros.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_seguros.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
             
         Case 4 ' hco del campo
             tabla = "rcampos_hco"
-            Sql = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
-            Sql = Sql & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
-            Sql = Sql & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
-            Sql = Sql & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
+            SQL = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
+            SQL = SQL & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
+            SQL = SQL & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
+            SQL = SQL & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab4(True)
+                SQL = SQL & ObtenerWhereCab4(True)
             Else
-                Sql = Sql & " WHERE rcampos_hco.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_hco.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
         
         Case 5 ' gastos del campo
             tabla = "rcampos_gastos"
-            Sql = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
-            Sql = Sql & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+            SQL = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
+            SQL = SQL & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab5(True)
+                SQL = SQL & ObtenerWhereCab5(True)
             Else
-                Sql = Sql & " WHERE rcampos_gastos.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_gastos.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
     
         Case 6 ' impresion de ordenes de recoleccion del campo
             tabla = "rcampos_ordrec"
-            Sql = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
+            SQL = SQL & " FROM " & tabla
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab6(True)
+                SQL = SQL & ObtenerWhereCab6(True)
             Else
-                Sql = Sql & " WHERE rcampos_ordrec.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_ordrec.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".nroorden "
+            SQL = SQL & " ORDER BY " & tabla & ".nroorden "
     
         Case 7 ' revisiones
             tabla = "rcampos_revision"
-            Sql = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
+            SQL = SQL & " FROM " & tabla
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab7(True)
+                SQL = SQL & ObtenerWhereCab7(True)
             Else
-                Sql = Sql & " WHERE rcampos_revision.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_revision.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
     
     
     
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -2203,26 +2125,26 @@ End Sub
 'End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " rcampos.codcampo in (" & CadenaSeleccion & ")"
+        SQL = " rcampos.codcampo in (" & CadenaSeleccion & ")"
     Else
-        Sql = ""
+        SQL = ""
     End If
-    cadCampos = Sql
+    cadCampos = SQL
     
 End Sub
 
 Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " rpozos.hidrante in (" & CadenaSeleccion & ")"
+        SQL = " rpozos.hidrante in (" & CadenaSeleccion & ")"
     Else
-        Sql = ""
+        SQL = ""
     End If
-    cadHidrantes = Sql
+    cadHidrantes = SQL
     
 End Sub
 
@@ -2236,15 +2158,10 @@ Dim Poblacion As String
 Dim OtroCampo As String
 Dim CodPobla As String
 
-    Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
+    Text1(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
     FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
+    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
     
-    
-    '[Monica]23/05/2013: sustituyo esto por el ponerdatospartida
-'    Text1(37).Text = RecuperaValor(CadenaSeleccion, 5) 'codzona
-'    Text4(3).Text = RecuperaValor(CadenaSeleccion, 6) 'nomzona
-'    Text5(3).Text = RecuperaValor(CadenaSeleccion, 4)
     PonerDatosPartida
     
 End Sub
@@ -2280,9 +2197,9 @@ Private Sub frmSegOp_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(6).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
-    FormateaCampo Text1(6)
-    Text2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
+    Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo situacion
+    FormateaCampo Text1(3)
+    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre situacion
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
@@ -2313,7 +2230,7 @@ End Sub
 
 
 Private Sub frmZ_Actualizar(vCampo As String)
-    If Indice = 7 Then
+    If Indice = 6 Then
         Text1(Indice).Text = vCampo
     Else
 '        txtAux9(Indice).Text = vCampo
@@ -2321,99 +2238,7 @@ Private Sub frmZ_Actualizar(vCampo As String)
 
 End Sub
 
-Private Sub frmZon_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(37).Text = RecuperaValor(CadenaSeleccion, 1) 'codzona
-    FormateaCampo Text1(Indice)
-    Text4(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomzona
-End Sub
 
-Private Sub imgDoc_Click(Index As Integer)
-Dim Mens As String
-Dim vAux As String
-Dim vCampos As String
-Dim Rs As ADODB.Recordset
-Dim RS1 As ADODB.Recordset
-
-Dim Sql As String
-Dim indRPT As Byte
-Dim nomDocu As String
-Dim NroDoc As String
-
-    If Index = 0 Then
-        Sql = "select numerodoc, fecmovim, causa from rsocios_movim where codcampo = " & DBSet(Text1(0).Text, "N")
-        Set RS1 = New ADODB.Recordset
-        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    
-        If Not RS1.EOF Then
-            NroDoc = DBLet(RS1.Fields(0).Value, "N")
-            
-            vCampos = ""
-            Sql = "select codcampo from rsocios_movim where numerodoc = " & DBSet(NroDoc, "N")
-            
-            Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-            While Not Rs.EOF
-                vCampos = vCampos & Rs.Fields(0).Value & ","
-                Rs.MoveNext
-            Wend
-            
-            Set Rs = Nothing
-            If vCampos <> "" Then
-                vCampos = Mid(vCampos, 1, Len(vCampos) - 1)
-                
-                InicializarVbles
-                
-                'Añadir el parametro de Empresa
-                CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
-                numParam = numParam + 1
-                
-                
-                cadFormula = "{rcampos.codcampo} in [" & vCampos & "]  and {rsocios.codsocio} = " & DBSet(Text1(1).Text, "N")
-                
-                cadTitulo = "Documento Baja de Campos"
-                 
-                CadParam = CadParam & "pFecha=""" & DBLet(RS1.Fields(1)) & """|"
-                numParam = numParam + 1
-            
-                CadParam = CadParam & "pCausas=""" & DBLet(RS1.Fields(2)) & """|"
-                numParam = numParam + 1
-                
-                indRPT = 19 ' baja campos
-                
-                If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
-                
-                cadNombreRPT = nomDocu
-                
-                LlamarImprimir
-            End If
-            
-         End If
-    
-    
-    
-    
-    Else
-        Mens = "Se va a proceder a actualizar las superficies de la ficha de campo "
-        Mens = Mens & vbCrLf
-        Mens = Mens & "con los datos de las parcelas."
-        Mens = Mens & vbCrLf & vbCrLf
-        Mens = Mens & "¿ Desea continuar ? " & vbCrLf & vbCrLf
-    
-        If MsgBox(Mens, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
-        
-'            Text1(6).Text = txtAux2(10).Text
-'            Text1(7).Text = txtAux2(11).Text
-'            Text1(33).Text = txtAux2(12).Text
-'
-'            mnModificar_Click
-'            cmdAceptar_Click
-'            PonerModo 2
-'            PonerCampos
-'
-        End If
-    End If
-
-End Sub
 
 Private Sub imgFec_Click(Index As Integer)
        
@@ -2468,7 +2293,7 @@ Private Sub imgZoom_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            Indice = 7
+            Indice = 6
             frmZ.pTitulo = "Observaciones del Campo"
             frmZ.pValor = Text1(Indice).Text
             frmZ.pModo = Modo
@@ -2604,7 +2429,7 @@ Dim Municipio As String
 End Sub
 
 Private Sub mnVerificacionErr_Click()
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
     
     InicializarVbles
@@ -2613,14 +2438,14 @@ Dim Rs As ADODB.Recordset
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    Sql = "select rpueblos.codpobla, rcampos.poligono, rcampos.parcela, rcampos.recintos, count(*) "
-    Sql = Sql & " from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) "
-    Sql = Sql & " inner join rpueblos on rpartida.codpobla = rpueblos.codpobla"
-    Sql = Sql & " where rcampos.fecbajas is null "
-    Sql = Sql & " group by 1,2,3,4 "
-    Sql = Sql & " having count(*) > 1"
+    SQL = "select rpueblos.codpobla, rcampos.poligono, rcampos.parcela, rcampos.recintos, count(*) "
+    SQL = SQL & " from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) "
+    SQL = SQL & " inner join rpueblos on rpartida.codpobla = rpueblos.codpobla"
+    SQL = SQL & " where rcampos.fecbajas is null "
+    SQL = SQL & " group by 1,2,3,4 "
+    SQL = SQL & " having count(*) > 1"
     
-    If TotalRegistros(Sql) <> 0 Then
+    If TotalRegistros(SQL) <> 0 Then
         cadNombreRPT = "rErroresCampos.rpt"
         cadTitulo = "Campos con duplicidades"
         frmImprimir.Opcion = 0
@@ -2811,7 +2636,7 @@ Private Sub MandaBusquedaPrevia(CadB As String)
 '        End If
 '    End If
 
-    Set frmCamPrev = New frmManCamposPrev
+    Set frmCamPrev = New frmManCamposMonastPrev
     frmCamPrev.cWhere = CadB
     frmCamPrev.DatosADevolverBusqueda = "0|1|2|"
     frmCamPrev.Show vbModal
@@ -2910,14 +2735,9 @@ Private Sub BotonAnyadir()
     Text1(0).Text = SugerirCodigoSiguienteStr("rcampos", "codcampo")
     FormateaCampo Text1(0)
        
-    Text1(16).Text = "1"
-    Text1(5).Text = "0,0000"
-    Text1(6).Text = "0,0000"
-    Text1(7).Text = "0,0000"
-    Text1(33).Text = "0,0000"
-    
     Text1(4).Text = Format(Now, "dd/mm/yyyy")
-       
+    Text1(3).Text = 1
+    
     '[Monica]29/09/2014: comprobamos si vamos a dar de baja que no tenga fecha de alta en programa operativo
     FecBajaAnt = Text1(5).Text
        
@@ -2944,12 +2764,10 @@ Private Sub BotonModificar()
     BloquearTxt Text1(0), True
     ' *************************************************************************
     
-    VarieAnt = Text1(2).Text
     SocioAnt = Text1(1).Text
     '[Monica]29/09/2014: comprobamos si vamos a dar de baja que no tenga fecha de alta en programa operativo
     FecBajaAnt = Text1(5).Text
     ' *** foco al 1r camp visible que NO siga clau primaria ***
-    PonerFoco Text1(22)
     ' *********************************************************
     
     EstablecerOrden True
@@ -3039,8 +2857,6 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     '[Monica]09/05/2017: solo en el caso de que esté en documento de baja se visualiza
     B = EstaEnDocumentoBaja(Text1(0).Text)
-    Me.imgDoc(0).visible = B
-    Me.imgDoc(0).Enabled = B
     
     
     
@@ -3168,7 +2984,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cad As String
 Dim Rs As ADODB.Recordset
 'Dim Datos As String
@@ -3187,47 +3003,12 @@ Dim Rs As ADODB.Recordset
     
     'miramos si hay otros campos con la misma ubicacion
     If B And (Modo = 3 Or Modo = 4) Then
-        ' select que utilizamos para ello:
-        'select count(*)
-        'From rcampos
-        'Where rcampos.fecbajas Is Null
-        'and rcampos.poligono = 1
-        'and rcampos.parcela = 1
-        'and rcampos.recintos = 1
-        'and rcampos.codcampo <> 5
-        'and rcampos.codparti in
-        '(select codparti from rpartida where codpobla in (select codpobla from rpartida where codparti = 8));
-        Sql = "select count(*) "
-        Sql = Sql & " from rcampos "
-        Sql = Sql & " where rcampos.fecbajas is null "
-        Sql = Sql & " and rcampos.poligono = " & DBSet(Text1(13), "N")
-        Sql = Sql & " and rcampos.parcela = " & DBSet(Text1(14), "N")
-        Sql = Sql & " and rcampos.recintos = " & DBSet(Text1(16), "N")
-        Sql = Sql & " and rcampos.codcampo <> " & DBSet(Text1(0), "N")
-        
-        '[Monica]25/09/2012: para escalona tenemos que mirar la subparcela tambien
-        If vParamAplic.Cooperativa = 10 Then
-            Sql = Sql & " and rcampos.subparce = " & DBSet(Text1(15).Text, "T")
-        End If
-        
-        Sql = Sql & " and rcampos.codparti in (select codparti from rpartida where "
-        Sql = Sql & " codpobla in (select codpobla from rpartida where codparti = " & DBSet(Text1(3), "N") & "))"
-    
-        If TotalRegistros(Sql) <> 0 Then
-            Sql = "Existe otra parcela dada de alta en la misma ubicación. " & vbCrLf & vbCrLf
-            Sql = Sql & "                     ¿ Desea continuar ?"
-            
-            If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
-                 B = False
-            End If
-        End If
-        
         ' comprobamos que el socio no esté dado de baja
         If B Then
-            Sql = "select fechabaja from rsocios where codsocio = " & DBSet(Text1(1).Text, "N")
+            SQL = "select fechabaja from rsocios where codsocio = " & DBSet(Text1(1).Text, "N")
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If DBLet(Rs.Fields(0).Value, "F") <> "" Then
                 cad = "Este socio tiene fecha de baja. ¿ Desea continuar ?"
                 If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
@@ -3236,45 +3017,25 @@ Dim Rs As ADODB.Recordset
             End If
         End If
         
-        '[Monica]19/09/2012: introducimos la referencia catastral en el campo
-        ' y damos aviso si existe una parcela con la misma referencia catastral
-        If B Then
-            ' si han metido algun valor en el campo
-            If Text1(41).Text <> "" Then
-                Sql = "select count(*) "
-                Sql = Sql & " from rcampos "
-                Sql = Sql & " where rcampos.fecbajas is null and refercatas = " & DBSet(Trim(Text1(41).Text), "T")
-                Sql = Sql & " and rcampos.codcampo <> " & DBSet(Text1(0), "N")
-            
-                If TotalRegistros(Sql) <> 0 Then
-                    Sql = "Existe otra parcela con la misma Referencia Catastral. " & vbCrLf & vbCrLf
-                    Sql = Sql & "                     ¿ Desea continuar ?"
-                    
-                    If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
-                         B = False
-                    End If
-                End If
-            End If
-        End If
         
         '[Monica]31/10/2014: si la fecha de alta es superior a la fecha de alta del socio de la seccion de horto damos un aviso
         If B Then
-            Sql = "select fecalta from rsocios_seccion where codsocio = " & DBSet(Text1(1).Text, "N") & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
+            SQL = "select fecalta from rsocios_seccion where codsocio = " & DBSet(Text1(1).Text, "N") & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not Rs.EOF Then
                 If DBLet(Rs.Fields(0).Value, "F") > CDate(Text1(4).Text) Then
-                    Sql = "La fecha de alta del socio en la Seccion de Horto es superior a la fecha de alta del campo." & vbCrLf & vbCrLf
-                    Sql = Sql & "                     ¿ Desea continuar ?"
+                    SQL = "La fecha de alta del socio en la Seccion de Horto es superior a la fecha de alta del campo." & vbCrLf & vbCrLf
+                    SQL = SQL & "                     ¿ Desea continuar ?"
                     
-                    If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                    If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                         B = False
                     End If
                 End If
             Else
-                Sql = "El socio no se encuentra en la Sección de Horto." & vbCrLf & vbCrLf
-                Sql = Sql & "                     ¿ Desea continuar ?"
-                If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                SQL = "El socio no se encuentra en la Sección de Horto." & vbCrLf & vbCrLf
+                SQL = SQL & "                     ¿ Desea continuar ?"
+                If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                     B = False
                 End If
             End If
@@ -3284,70 +3045,6 @@ Dim Rs As ADODB.Recordset
     End If
     
     
-    If B And Modo = 4 Then
-        If CInt(Text1(2).Text) <> CInt(VarieAnt) Then
-            Sql = "select count(*) from rcampos_clasif where codcampo = " & DBSet(Text1(0).Text, "N")
-            If TotalRegistros(Sql) <> 0 Then
-                cad = "Si se modifica la variedad, perderá la clasificación." & vbCrLf
-                cad = cad & "               ¿ Desea continuar ?"
-                
-                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
-                    B = False
-                End If
-            End If
-        End If
-        
-        '[Monica]08/04/2015: si es alzira y hay entradas de esa variedad para el campo no dejamos cambiarlo
-        If B And (vParamAplic.Cooperativa = 4) And CInt(Text1(2).Text) <> CInt(VarieAnt) Then
-            Sql = "select count(*) from rentradas where codcampo = " & DBSet(Text1(0).Text, "N") & " and codvarie = " & DBSet(VarieAnt, "N")
-            If TotalRegistros(Sql) <> 0 Then
-                MsgBox "Existen entradas en báscula para este campo." & vbCrLf & "Debería crear otro campo.", vbExclamation
-                B = False
-            Else
-                Sql = "select count(*) from rclasifica where codcampo = " & DBSet(Text1(0).Text, "N") & " and codvarie = " & DBSet(VarieAnt, "N")
-                If TotalRegistros(Sql) <> 0 Then
-                    MsgBox "Existen entradas en clasificacion para este campo." & vbCrLf & "Debería crear otro campo.", vbExclamation
-                    B = False
-                Else
-                    Sql = "select count(*) from rhisfruta where codcampo = " & DBSet(Text1(0).Text, "N") & " and codvarie = " & DBSet(VarieAnt, "N")
-                    If TotalRegistros(Sql) <> 0 Then
-                        MsgBox "Existen entradas en el histórico para este campo." & vbCrLf & "Debería crear otro campo.", vbExclamation
-                        B = False
-                    End If
-                End If
-            End If
-        End If
-        
-        If B And (CInt(Text1(2).Text) <> CInt(VarieAnt) Or CLng(Text1(1).Text) <> CLng(SocioAnt)) Then
-            If HayEntradasCampoSocioVariedad(Text1(0).Text, SocioAnt, VarieAnt) Then
-                cad = "Exiten entradas del campo, para el socio, variedad anterior que se modificarán." & vbCrLf & vbCrLf
-                cad = cad & "                ¿ Desea continuar ?  "
-                If MsgBox(cad, vbQuestion + vbYesNo) = vbNo Then
-                    B = False
-                End If
-            End If
-            
-            If B And HayAnticiposPdtesCampoSocioVariedad(Text1(0).Text, SocioAnt, VarieAnt) Then
-                cad = "Exiten anticipos pendientes de descontar del campo, para el socio, variedad anterior. "
-                cad = cad & " Si posteriormente liquida no se descontarán. " & vbCrLf & vbCrLf
-                cad = cad & "       ¿ Seguro que desea continuar ?  "
-            
-                If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
-                    B = False
-                End If
-            End If
-        End If
-        
-    End If
-    
-    '[Monica]29/09/2014: no podemos poner de baja un campo que tenga fecha de alta en el programa operativo.
-    '                    Lo utiliza CATADAU
-    If B And (Modo = 3 Or Modo = 4) Then
-        If Text1(5).Text <> "" And Text1(43).Text <> "" Then
-            MsgBox "No se puede dar de baja un campo que tenga fecha de alta en el Programa Operativo, ni dar de alta en dicho Programa si el campo está dado de baja. Revise.", vbExclamation
-            B = False
-        End If
-    End If
     
     
     ' ************************************************************************************
@@ -3471,35 +3168,6 @@ Dim Nuevo As Boolean
                 Text2(Index).Text = ""
             End If
             
-            ' si estamos insertando ponemos el propietario iguasl que el socio
-            If Modo = 3 Then
-                Text1(22).Text = Text1(Index).Text
-                Text2(22).Text = Text2(Index).Text
-            End If
-        
-        Case 22 'PROPIETARIO
-            If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio", "N")
-                If Text2(Index).Text = "" Then
-                    cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
-                    cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
-                    If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
-                        Set frmSoc = New frmManSocios
-                        frmSoc.DatosADevolverBusqueda = "0|1|"
-'                        frmVar.NuevoCodigo = Text1(Index).Text
-                        Text1(Index).Text = ""
-                        TerminaBloquear
-                        frmSoc.Show vbModal
-                        Set frmSoc = Nothing
-                        If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                    Else
-                        Text1(Index).Text = ""
-                    End If
-                    PonerFoco Text1(Index)
-                End If
-            Else
-                Text2(Index).Text = ""
-            End If
         
                 
         Case 2 'PARTIDA
@@ -3529,7 +3197,7 @@ Dim Nuevo As Boolean
             End If
                 
                 
-        Case 6 'SITUACION Campo
+        Case 3 'SITUACION Campo
             If PonerFormatoEntero(Text1(Index)) Then
                 Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsituacioncampo", "nomsitua")
                 If Text2(Index).Text = "" Then
@@ -3559,14 +3227,6 @@ Dim Nuevo As Boolean
             If Modo = 1 Then Exit Sub
             PonerFormatoFecha Text1(Index), False
             
-            
-            
-        '[Monica]06/05/2013: Faltaba sacar la descripcion de la zona
-        Case 3 ' codigo de zona
-            If PonerFormatoEntero(Text1(Index)) Then
-                Text4(3).Text = DevuelveDesdeBDNew(cAgro, "rzonas", "nomzonas", "codzonas", Text1(Index).Text, "N")
-            End If
-            
     End Select
 End Sub
 
@@ -3576,26 +3236,10 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
             If Modo = 1 Or Modo = 3 Or Modo = 4 Then
                 Select Case Index
                     Case 1: KEYBusqueda KeyAscii, 1 'socio
-                    Case 2: KEYBusqueda KeyAscii, 2 'variedad
-                    Case 3: KEYBusqueda KeyAscii, 3 'partida
+                    Case 2: KEYBusqueda KeyAscii, 3 'partida
                     Case 4: KEYFecha KeyAscii, 0 ' fecha alta
                     Case 5: KEYFecha KeyAscii, 1 ' fecha baja
-                    Case 6: KEYBusqueda KeyAscii, 0 'situacion
-                    
-                    Case 22: KEYBusqueda KeyAscii, 4 'propietario
-                    Case 24: KEYBusqueda KeyAscii, 5 'responsable
-                    Case 25: KEYBusqueda KeyAscii, 6 'marco de plantacion
-                    Case 26: KEYBusqueda KeyAscii, 8 'desrrollo vegetativo
-                    Case 27: KEYBusqueda KeyAscii, 7 'tipo de tierra
-                    Case 29: KEYBusqueda KeyAscii, 9 'seguro opcion
-                    Case 30: KEYBusqueda KeyAscii, 10 'procedencia de riego
-                    Case 31: KEYBusqueda KeyAscii, 11 'patron pie
-                    Case 34: KEYBusqueda KeyAscii, 12 'opcion seguro
-                    Case 3: KEYBusqueda KeyAscii, 13 'zona
-                    Case 38: KEYBusqueda KeyAscii, 14 'codigo de globalgap
-                    Case 39: KEYBusqueda KeyAscii, 15 'cliente tienda
-                    Case 42: KEYFecha KeyAscii, 2 'fecha de revision
-                    Case 43: KEYFecha KeyAscii, 3 'fecha alta programa operativo
+                    Case 3: KEYBusqueda KeyAscii, 0 'situacion
                 End Select
             End If
         Else
@@ -3647,17 +3291,14 @@ Dim NomEmple As String
     On Error GoTo EPosarDescripcions
 
     Text2(1).Text = PonerNombreDeCod(Text1(1), "rsocios", "nomsocio", "codsocio", "N")
-    Text2(6).Text = PonerNombreDeCod(Text1(6), "rsituacioncampo", "nomsitua", "codsitua", "N")
-    Text2(3).Text = PonerNombreDeCod(Text1(3), "rpartida", "nomparti", "codparti", "N")
+    Text2(3).Text = PonerNombreDeCod(Text1(3), "rsituacioncampo", "nomsitua", "codsitua", "N")
+    Text2(2).Text = PonerNombreDeCod(Text1(2), "rpartida", "nomparti", "codparti", "N")
     
     '[Monica]14/02/2013: sacamos el codigo de conselleria de las lineas
 '    txtAux2(13).Text = DevuelveValor("select codconse from variedades where codvarie = " & DBSet(Text1(2).Text, "N"))
     
     PonerDatosPartida
     
-    
-    '[Monica]19/09/2011: si el campo está regado por un hidrante que aparezca el hidrante
-    Text5(0).Text = DevuelveDesdeBDNew(cAgro, "rpozos_campos", "hidrante", "codcampo", Text1(0).Text, "N")
     
     
 EPosarDescripcions:
@@ -4512,7 +4153,7 @@ End Function
 
 
 Private Function ActualisaCtaprpal(ByRef numlinea As Integer)
-Dim Sql As String
+Dim SQL As String
 'yo
 '    On Error Resume Next
 '    'tot lo que no siga un SELECT no fa falta un Record Set
@@ -4563,135 +4204,14 @@ Private Sub imgBuscar_Click(Index As Integer)
             Set frmSoc = Nothing
             PonerFoco Text1(Indice)
     
-       Case 4 ' Propietario
-            Indice = 22
-            Set frmSoc = New frmManSocios
-'            frmSoc.DeConsulta = True
-            frmSoc.DatosADevolverBusqueda = "0|1|"
-'            frmSoc.CodigoActual = Text1(1).Text
-            frmSoc.Show vbModal
-            Set frmSoc = Nothing
-            PonerFoco Text1(Indice)
-    
-       Case 2 'Variedades
-            Set frmVar = New frmComVar
-'            frmVar.DeConsulta = True
-            frmVar.DatosADevolverBusqueda = "0|1|"
-'            frmVar.CodigoActual = Text1(2).Text
-            frmVar.Show vbModal
-            Set frmVar = Nothing
-            PonerFoco Text1(2)
-    
-       Case 3 'Partidas
+       Case 2 'Partidas
             Set frmPar = New frmManPartidas
             frmPar.DeConsulta = True
             frmPar.DatosADevolverBusqueda = "0|1|2|3|4|5|"
-            frmPar.CodigoActual = Text1(3).Text
+            frmPar.CodigoActual = Text1(2).Text
             frmPar.Show vbModal
             Set frmPar = Nothing
-            PonerFoco Text1(3)
-    
-       Case 5 'Responsable
-            Set frmRes = New frmManCapataz
-            frmRes.DeConsulta = True
-            frmRes.DatosADevolverBusqueda = "0|1|"
-            frmRes.CodigoActual = Text1(24).Text
-            frmRes.Show vbModal
-            Set frmRes = Nothing
-            PonerFoco Text1(24)
-    
-       Case 6 'marco de plantacion
-            Set frmPlan = New frmManPlantacion
-            frmPlan.DeConsulta = False
-            frmPlan.DatosADevolverBusqueda = "0|1|"
-            frmPlan.CodigoActual = Text1(25).Text
-            frmPlan.Show vbModal
-            Set frmPlan = Nothing
-            PonerFoco Text1(25)
-    
-       Case 8 'desarrollo vegetativo
-            Set frmDesa = New frmManDesarrollo
-            frmDesa.DeConsulta = False
-            frmDesa.DatosADevolverBusqueda = "0|1|"
-            frmDesa.CodigoActual = Text1(26).Text
-            frmDesa.Show vbModal
-            Set frmDesa = Nothing
-            PonerFoco Text1(26)
-    
-       Case 7 'tipo de tierra
-            Set frmTie = New frmManTierra
-            frmTie.DeConsulta = False
-            frmTie.DatosADevolverBusqueda = "0|1|"
-            frmTie.CodigoActual = Text1(27).Text
-            frmTie.Show vbModal
-            Set frmTie = Nothing
-            PonerFoco Text1(27)
-    
-        Case 9, 12 ' Opcion seguro y campaña anterior
-            Select Case Index
-                Case 9
-                    indCodigo = 29
-                Case 12
-                    indCodigo = 34
-            End Select
-            
-            Set frmSegOp = New frmManSeguroOpc
-            frmSegOp.DeConsulta = False
-            frmSegOp.DatosADevolverBusqueda = "0|1|"
-            frmSegOp.CodigoActual = Text1(indCodigo).Text
-            frmSegOp.Show vbModal
-            Set frmSegOp = Nothing
-            PonerFoco Text1(indCodigo)
-        
-        Case 10 ' procedencia de riego
-            Set frmProc = New frmManProceRiego
-            frmProc.DeConsulta = False
-            frmProc.DatosADevolverBusqueda = "0|1|"
-            frmProc.CodigoActual = Text1(30).Text
-            frmProc.Show vbModal
-            Set frmProc = Nothing
-            PonerFoco Text1(30)
-    
-        Case 11 ' patrón pie
-            Set frmPat = New frmManPatronaPie
-            frmPat.DeConsulta = False
-            frmPat.DatosADevolverBusqueda = "0|1|"
-            frmPat.CodigoActual = Text1(31).Text
-            frmPat.Show vbModal
-            Set frmPat = Nothing
-            PonerFoco Text1(31)
-    
-        Case 13 ' codigo de zona
-            Set frmZon = New frmManZonas
-            frmZon.DeConsulta = True
-            frmZon.DatosADevolverBusqueda = "0|1|"
-            frmZon.CodigoActual = Text1(3).Text
-            frmZon.Show vbModal
-            Set frmZon = Nothing
-            PonerFoco Text1(3)
-        
-        Case 14 ' globalgap
-            Indice = 38
-            
-            '[Monica]25/04/2012
-            'Set frmGlo = New frmBasico
-            'AyudaGlobalGap frmGlo, Text1(indice)
-            Set frmGlo = New frmManGlobalGap
-            
-            frmGlo.DeConsulta = False
-            frmGlo.DatosADevolverBusqueda = "0|1|"
-            frmGlo.CodigoActual = Text1(38).Text
-            frmGlo.Show vbModal
-            
-            Set frmGlo = Nothing
-            PonerFoco Text1(Indice)
-    
-        Case 15 ' codigo de cliente de ariges (suministros)
-            Indice = 39
-            Set frmCli = New frmBasico
-            AyudaClienteAriges frmCli, Text1(Indice)
-            Set frmCli = Nothing
-            PonerFoco Text1(Indice)
+            PonerFoco Text1(2)
     End Select
     
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
@@ -5202,7 +4722,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim Sql As String
+Dim SQL As String
 Dim vCadena As String
 Dim Produ As Integer
 
@@ -5211,40 +4731,15 @@ Dim Produ As Integer
     conn.BeginTrans
 
     
-    If CLng(Text1(2).Text) <> CLng(VarieAnt) Then
-        ' borramos la clasificacion de este campo
-        Sql = "delete from rcampos_clasif "
-        Sql = Sql & " where codcampo = " & DBSet(Text1(0).Text, "N")
-        
-        conn.Execute Sql
-    End If
-    
     B = True
-    If CLng(Text1(2).Text) <> CLng(VarieAnt) Or CLng(Text1(1).Text) <> CLng(SocioAnt) Then
-        B = ModificarEntradas(Text1(0).Text, SocioAnt, VarieAnt, Text1(1).Text, Text1(2).Text)
-    End If
         
     ' modificamos los datos del campo
     If B Then
         If ModificaDesdeFormulario2(Me, 1) Then
             TerminaBloquear
             
-            '[Monica]17/09/2013:en el campo ant en picassent ponemos otra cosa
-            Produ = DevuelveValor("select codprodu from variedades where codvarie = " & VarieAnt)
-            vCadena = CLng(SocioAnt) & "&" & CLng(Text1(0).Text) & "&" & Produ & "&" & CInt(VarieAnt)
-            
-            CargarUnCampo CLng(Text1(0).Text), "U", vCadena
-            
             PosicionarData
-            CargaGrid 0, True
-            CargaGrid 1, True
-            CargaGrid 2, True
-            CargaGrid 3, True
-            CargaGrid 4, True
-            CargaGrid 5, True
-'[Monica]30/09/2013
-'            CargaGrid 6, True
-            VisualizaClasificacion
+        
         End If
     
         conn.CommitTrans
@@ -5582,26 +5077,16 @@ Dim OtroCampo As String
 Dim CodPobla As String
 
     Zona = ""
-'    Text3(3).Text = ""
-    Text4(3).Text = ""
     Text5(3).Text = ""
+    Text4(3).Text = ""
     
     OtroCampo = "codpobla"
-    Zona = DevuelveDesdeBDNew(cAgro, "rpartida", "codzonas", "codparti", Text1(3), "N", OtroCampo)
-'    Text3(3).Text = Zona
-    
-    '[Monica]16/05/2013: si no es utxera ni escalona
-    '[Monica]20/06/2012: si estamos en modo 2 no debo de mostrar la zona de la partida sino lo que hay grabado
-    '[Monica]03/04/2014:  quito la condicion and modo <> 4
-    If Modo <> 2 And vParamAplic.Cooperativa <> 8 And vParamAplic.Cooperativa <> 10 Then
-        Text1(3).Text = Zona
-    End If
-    Zona = Text1(3).Text
+    Zona = DevuelveDesdeBDNew(cAgro, "rpartida", "codzonas", "codparti", Text1(2), "N", OtroCampo)
     
     If Zona <> "" Then
-        Text4(3).Text = DevuelveDesdeBDNew(cAgro, "rzonas", "nomzonas", "codzonas", Zona, "N")
         If OtroCampo <> "" Then
             CodPobla = OtroCampo
+            Text4(3).Text = CodPobla
             If CodPobla <> "" Then Text5(3).Text = DevuelveDesdeBDNew(cAgro, "rpueblos", "despobla", "codpobla", CodPobla, "T")
         End If
     End If
@@ -5635,7 +5120,7 @@ End Sub
 
 
 Private Function VisualizaClasificacion() As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     If Data1.Recordset.EOF Then
@@ -5643,13 +5128,13 @@ Dim Sql As String
         Exit Function
     End If
 
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!codvarie, "N")
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!codvarie, "N")
     
-    SSTab1.TabEnabled(3) = (Sql = "0")
-    SSTab1.TabVisible(3) = (Sql = "0")
+    SSTab1.TabEnabled(3) = (SQL = "0")
+    SSTab1.TabVisible(3) = (SQL = "0")
     
-    VisualizaClasificacion = (Sql = "0")
+    VisualizaClasificacion = (SQL = "0")
 
 End Function
 
@@ -5789,7 +5274,7 @@ End Sub
 '*******************************
 
 Private Sub BotonCambioSocio()
-Dim Sql As String
+Dim SQL As String
 Dim campo As String
 Dim NroContadores As Long
 
@@ -5855,16 +5340,16 @@ End Sub
 '*******************************
 
 Private Sub ChequeoNroOrden()
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "and mid(right(concat('00000000',codcampo),8),1,6) <> nrocampo"
+    SQL = "and mid(right(concat('00000000',codcampo),8),1,6) <> nrocampo"
 
     cadCampos = ""
 
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 25
-    frmMens.cadWHERE = Sql
+    frmMens.cadWHERE = SQL
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -5876,11 +5361,11 @@ End Sub
 
 
 Private Sub ModificarNroOrden(vSQL As String)
-Dim Sql As String
+Dim SQL As String
     
     If BloqueaRegistro("rcampos", vSQL) Then
-        Sql = "update rcampos set nrocampo = mid(right(concat('00000000',codcampo),8),1,6) where " & vSQL
-        conn.Execute Sql
+        SQL = "update rcampos set nrocampo = mid(right(concat('00000000',codcampo),8),1,6) where " & vSQL
+        conn.Execute SQL
         
         TerminaBloquear
         

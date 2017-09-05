@@ -19,7 +19,6 @@ Begin VB.Form frmPOZHidrantes
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
-   WindowState     =   2  'Maximized
    Begin VB.Frame Frame2 
       Height          =   765
       Index           =   0
@@ -2484,7 +2483,7 @@ Dim CPostal As String, desProvi As String, desPais As String
 End Sub
 
 Private Sub CalcularConsumo()
-Dim Sql As String
+Dim SQL As String
 Dim Inicio As Long
 Dim Fin As Long
 Dim Consumo As Long
@@ -2624,7 +2623,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -2732,7 +2731,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -2861,7 +2860,7 @@ Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
 
     If campo = "" Then Exit Sub
@@ -2870,10 +2869,10 @@ Dim Sql As String
 
     '[Monica]22/11/2012: Preguntamos si quiere traer los datos del socio del campo
     If (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Modo = 4 Then
-        Sql = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(18).Text, "N")
+        SQL = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(18).Text, "N")
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
        
         If DBLet(Rs.Fields(0)) <> CLng(ComprobarCero(Text1(2).Text)) Then
             Text1(2).Text = Format(DBLet(Rs!Codsocio, "N"), "000000") ' codigo de socio del campo
@@ -3016,7 +3015,7 @@ End Sub
 Private Sub PosarDescripcions()
 Dim NomEmple As String
 Dim CodPobla As String
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EPosarDescripcions
 
@@ -3026,10 +3025,10 @@ Dim Sql As String
         
         
     If Text1(3).Text <> "" Then
-        Sql = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
-        Sql = Sql & " and rpueblos.codpobla = rpartida.codpobla "
+        SQL = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
+        SQL = SQL & " and rpueblos.codpobla = rpartida.codpobla "
         
-        Text2(1).Text = DevuelveValor(Sql) ' nombre de poblacion
+        Text2(1).Text = DevuelveValor(SQL) ' nombre de poblacion
     End If
     
 EPosarDescripcions:
@@ -3191,13 +3190,13 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim Sql As String
+Dim SQL As String
 
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        Sql = CadenaInsertarDesdeForm(Me)
-        If InsertarOferta(Sql, vTipoMov) Then
+        SQL = CadenaInsertarDesdeForm(Me)
+        If InsertarOferta(SQL, vTipoMov) Then
             CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
             PonerCadenaBusqueda
             PonerModo 2
@@ -3264,13 +3263,13 @@ EInsertarOferta:
 End Function
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = " numnotac= " & Text1(0).Text
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    SQL = " numnotac= " & Text1(0).Text
+    If conWhere Then SQL = " WHERE " & SQL
+    ObtenerWhereCP = SQL
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -3286,40 +3285,40 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
-            Sql = "select rpozos_cooprop.hidrante, rpozos_cooprop.numlinea, rpozos_cooprop.codsocio, rsocios.nomsocio, "
-            Sql = Sql & " rpozos_cooprop.porcentaje "
-            Sql = Sql & " FROM rpozos_cooprop INNER JOIN rsocios ON rpozos_cooprop.codsocio = rsocios.codsocio "
-            Sql = Sql & " and rpozos_cooprop.codsocio = rsocios.codsocio "
+            SQL = "select rpozos_cooprop.hidrante, rpozos_cooprop.numlinea, rpozos_cooprop.codsocio, rsocios.nomsocio, "
+            SQL = SQL & " rpozos_cooprop.porcentaje "
+            SQL = SQL & " FROM rpozos_cooprop INNER JOIN rsocios ON rpozos_cooprop.codsocio = rsocios.codsocio "
+            SQL = SQL & " and rpozos_cooprop.codsocio = rsocios.codsocio "
             If enlaza Then
-                Sql = Sql & " WHERE rpozos_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
+                SQL = SQL & " WHERE rpozos_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                Sql = Sql & " WHERE rpozos_cooprop.hidrante is null"
+                SQL = SQL & " WHERE rpozos_cooprop.hidrante is null"
             End If
-            Sql = Sql & " ORDER BY rpozos_cooprop.codsocio "
+            SQL = SQL & " ORDER BY rpozos_cooprop.codsocio "
         
         Case 1
-            Sql = "select rpozos_campos.hidrante, rpozos_campos.numlinea, rpozos_campos.codcampo, rpartida.nomparti, "
-            Sql = Sql & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
-            Sql = Sql & " FROM ((rpozos_campos INNER JOIN rcampos ON rpozos_campos.codcampo = rcampos.codcampo)"
-            Sql = Sql & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
-            Sql = Sql & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
+            SQL = "select rpozos_campos.hidrante, rpozos_campos.numlinea, rpozos_campos.codcampo, rpartida.nomparti, "
+            SQL = SQL & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
+            SQL = SQL & " FROM ((rpozos_campos INNER JOIN rcampos ON rpozos_campos.codcampo = rcampos.codcampo)"
+            SQL = SQL & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
+            SQL = SQL & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
             If enlaza Then
-                Sql = Sql & " WHERE rpozos_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
+                SQL = SQL & " WHERE rpozos_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                Sql = Sql & " WHERE rpozos_campos.hidrante is null"
+                SQL = SQL & " WHERE rpozos_campos.hidrante is null"
             End If
-            Sql = Sql & " ORDER BY rpozos_campos.codcampo "
+            SQL = SQL & " ORDER BY rpozos_campos.codcampo "
        
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 '************* LLINIES: ****************************
 Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
@@ -3339,7 +3338,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Sql As String
+Dim SQL As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -3366,22 +3365,22 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'coopropietarios
-            Sql = "¿Seguro que desea eliminar el coopropietario?"
-            Sql = Sql & vbCrLf & "Coopropietario: " & Adoaux(Index).Recordset!Codsocio & " - " & Adoaux(Index).Recordset!nomsocio
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el coopropietario?"
+            SQL = SQL & vbCrLf & "Coopropietario: " & Adoaux(Index).Recordset!Codsocio & " - " & Adoaux(Index).Recordset!nomsocio
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rpozos_cooprop"
-                Sql = Sql & " WHERE rpozos_cooprop.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
-                Sql = Sql & " and codsocio = " & Adoaux(Index).Recordset!Codsocio
+                SQL = "DELETE FROM rpozos_cooprop"
+                SQL = SQL & " WHERE rpozos_cooprop.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
+                SQL = SQL & " and codsocio = " & Adoaux(Index).Recordset!Codsocio
             End If
         Case 1 ' campos
-            Sql = "¿Seguro que desea eliminar el campo del hidrante?"
-            Sql = Sql & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codcampo
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            SQL = "¿Seguro que desea eliminar el campo del hidrante?"
+            SQL = SQL & vbCrLf & "Campo: " & Adoaux(Index).Recordset!codcampo
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM rpozos_campos"
-                Sql = Sql & " WHERE rpozos_campos.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
-                Sql = Sql & " and numlinea = " & Adoaux(Index).Recordset!numlinea
+                SQL = "DELETE FROM rpozos_campos"
+                SQL = SQL & " WHERE rpozos_campos.hidrante = " & DBSet(Adoaux(Index).Recordset!Hidrante, "T")
+                SQL = SQL & " and numlinea = " & Adoaux(Index).Recordset!numlinea
             End If
         
     End Select
@@ -3389,7 +3388,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute Sql
+        conn.Execute SQL
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -3690,7 +3689,7 @@ Private Sub TxtAux4_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim I As Integer
-Dim Sql As String
+Dim SQL As String
 
 
     If Not PerderFocoGnral(txtAux4(Index), Modo) Then Exit Sub
@@ -3704,9 +3703,9 @@ Dim Sql As String
     Select Case Index
         Case 2 ' campo
             If PonerFormatoEntero(txtAux4(Index)) Then
-                Sql = ""
-                Sql = DevuelveDesdeBDNew(cAgro, "rcampos", "codcampo", "codcampo", txtAux4(Index).Text, "N")
-                If Sql = "" Then
+                SQL = ""
+                SQL = DevuelveDesdeBDNew(cAgro, "rcampos", "codcampo", "codcampo", txtAux4(Index).Text, "N")
+                If SQL = "" Then
                     cadMen = "No existe el Campo: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -3761,7 +3760,7 @@ End Sub
 'AAAAAAAAAAAAAAAAAAAAAAA
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -4107,16 +4106,16 @@ End Sub
 
 
 Private Sub SumaTotalPorcentajes(numTab As Integer)
-Dim Sql As String
+Dim SQL As String
 Dim I As Currency
 Dim Rs As ADODB.Recordset
    
    Select Case numTab
         Case 0 ' coopropietarios
-            Sql = "select sum(porcentaje) from rpozos_cooprop where rpozos_cooprop.hidrante = " & DBSet(Data1.Recordset!Hidrante, "T")
+            SQL = "select sum(porcentaje) from rpozos_cooprop where rpozos_cooprop.hidrante = " & DBSet(Data1.Recordset!Hidrante, "T")
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
             
             I = 0
             If Not Rs.EOF Then

@@ -930,7 +930,11 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
                 If vParamAplic.Cooperativa = 10 Or vParamAplic.Cooperativa = 8 Then
                     frmPOZHidrantesIndefa.Show vbModal
                 Else
-                    frmPOZHidrantes.Show vbModal
+                    If vParamAplic.Cooperativa = 17 Then
+                        frmPOZHidrantesMonast.Show vbModal
+                    Else
+                        frmPOZHidrantes.Show vbModal
+                    End If
                 End If
         
         Case 4: AbrirListadoPOZ (1) ' Toma de lectura de contador
@@ -1309,7 +1313,7 @@ Private Sub AbrirFormularioGlobalGAP()
     frmBas.Tag2 = "Descripción|T|N|||rglobalgap|descripcion|||"
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
-    frmBas.Tabla = "rglobalgap"
+    frmBas.tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "GlobalGap"
