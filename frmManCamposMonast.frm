@@ -721,7 +721,7 @@ Begin VB.Form frmManCamposMonast
          Width           =   240
       End
       Begin VB.Label Label6 
-         Caption         =   "Partida"
+         Caption         =   "Calle"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -1655,8 +1655,8 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    CmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1

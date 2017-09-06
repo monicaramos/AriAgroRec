@@ -939,7 +939,13 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
         
         Case 4: AbrirListadoPOZ (1) ' Toma de lectura de contador
                 
-        Case 5: frmPOZLecturas.Show vbModal ' Introduccion de lectura
+        Case 5:
+                '[Monica]06/09/2017: caso de Monasterios
+                If vParamAplic.Cooperativa = 17 Then
+                    frmPOZLecturasMonast.Show vbModal ' Introduccion de lecturas Monasterios
+                Else
+                    frmPOZLecturas.Show vbModal ' Introduccion de lectura
+                End If
         
         Case 6: AbrirListadoPOZ (2)  ' Listado de comprobacion
         Case 8: AbrirListadoPOZ (3)  ' Generacion Recibos de consumo

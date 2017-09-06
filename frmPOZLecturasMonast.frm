@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
-Begin VB.Form frmPOZHidrantesMonast 
+Begin VB.Form frmPOZLecturasMonast 
    BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Contadores"
+   Caption         =   "Toma de Lecturas"
    ClientHeight    =   8565
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   8460
-   Icon            =   "frmPOZHidrantesMonast.frx":0000
+   Icon            =   "frmPOZLecturasMonast.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
@@ -359,7 +359,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Datos Generales"
-      TabPicture(0)   =   "frmPOZHidrantesMonast.frx":000C
+      TabPicture(0)   =   "frmPOZLecturasMonast.frx":000C
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label5"
       Tab(0).Control(0).Enabled=   0   'False
@@ -608,7 +608,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Height          =   240
             Index           =   1
             Left            =   4785
-            Picture         =   "frmPOZHidrantesMonast.frx":0028
+            Picture         =   "frmPOZLecturasMonast.frx":0028
             ToolTipText     =   "Buscar fecha"
             Top             =   630
             Width           =   240
@@ -668,7 +668,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Height          =   240
             Index           =   0
             Left            =   4785
-            Picture         =   "frmPOZHidrantesMonast.frx":00B3
+            Picture         =   "frmPOZLecturasMonast.frx":00B3
             ToolTipText     =   "Buscar fecha"
             Top             =   270
             Width           =   240
@@ -968,7 +968,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Height          =   240
          Index           =   3
          Left            =   1335
-         Picture         =   "frmPOZHidrantesMonast.frx":013E
+         Picture         =   "frmPOZLecturasMonast.frx":013E
          ToolTipText     =   "Buscar fecha"
          Top             =   3015
          Width           =   240
@@ -994,7 +994,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Height          =   240
          Index           =   2
          Left            =   1335
-         Picture         =   "frmPOZHidrantesMonast.frx":01C9
+         Picture         =   "frmPOZLecturasMonast.frx":01C9
          ToolTipText     =   "Buscar fecha"
          Top             =   2595
          Width           =   240
@@ -1225,7 +1225,7 @@ Begin VB.Form frmPOZHidrantesMonast
       End
    End
 End
-Attribute VB_Name = "frmPOZHidrantesMonast"
+Attribute VB_Name = "frmPOZLecturasMonast"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -1504,6 +1504,10 @@ Dim I As Integer
         Text1(0).BackColor = vbYellow 'codclien
         ' ****************************************************************************
     End If
+    
+    CargaCombo
+    
+    
 End Sub
 
 
@@ -2085,8 +2089,6 @@ Private Sub BotonAnyadir()
 
     ' *** si n'hi han tabs, em posicione al 1r ***
     Me.SSTab1.Tab = 0
-    
-    Text1(4).Text = 0
     ' ********************************************
 End Sub
 
@@ -2441,7 +2443,11 @@ Dim SQL As String
             '[Monica]28/08/2013: no comprobamos que la fecha esté en la campaña
             PonerFormatoFecha Text1(Index)
             
+        Case 14 ' calibre
+            PonerFormatoEntero Text1(Index)
             
+        Case 15 ' acciones
+            PonerFormatoEntero Text1(Index)
             
         Case 14, 6 ' fecha de alta y baja del contador
             PonerFormatoFecha Text1(Index), True
@@ -2450,7 +2456,7 @@ Dim SQL As String
             If PonerFormatoEntero(Text1(Index)) Then
                 Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rtipopozos", "nompozo", "codpozo", "N")
                 If Text2(Index).Text = "" Then
-                    cadMen = "No existe la Comunidad: " & Text1(Index).Text & vbCrLf
+                    cadMen = "No existe el Pozo: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmPoz = New frmPOZPozos
@@ -2739,3 +2745,29 @@ End Sub
 Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
     Desplazamiento (Button.Index)
 End Sub
+
+
+
+Private Sub CargaCombo()
+Dim miRsAux As ADODB.Recordset
+'
+'    Combo1.Clear
+'    'Conceptos
+'    Set miRsAux = New ADODB.Recordset
+'
+'    adodc1.ConnectionString = conn
+'    miRsAux.Open "Select * from rpozos order by destippa", ConnAriges, adOpenForwardOnly, adLockOptimistic, adCmdText
+'
+'
+''    miRsAux.Open "Select * from stipoformapago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+'    While Not miRsAux.EOF
+'        Combo1.AddItem miRsAux!destippa
+'        Combo1.ItemData(Combo1.NewIndex) = miRsAux!TipForpa
+'        miRsAux.MoveNext
+'    Wend
+'    miRsAux.Close
+'    Set miRsAux = Nothing
+    
+End Sub
+
+
