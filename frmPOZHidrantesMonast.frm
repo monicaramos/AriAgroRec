@@ -707,7 +707,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Left            =   1650
          MaxLength       =   8
          TabIndex        =   6
-         Tag             =   "Campo|N|N|1|99999999|rpozos|codcampo|00000000||"
+         Tag             =   "Campo|N|N|1|9999|rpozos|codcampo|0000||"
          Top             =   2070
          Width           =   1470
       End
@@ -2176,7 +2176,7 @@ Dim CPostal As String, desProvi As String, desPais As String
 End Sub
 
 Private Sub CalcularConsumo()
-Dim SQL As String
+Dim Sql As String
 Dim Inicio As Long
 Dim Fin As Long
 Dim Consumo As Long
@@ -2251,7 +2251,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -2359,7 +2359,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim SQL As String
+Dim Sql As String
 
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -2484,7 +2484,7 @@ Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
 
     If campo = "" Then Exit Sub
@@ -2493,10 +2493,10 @@ Dim SQL As String
 
     '[Monica]22/11/2012: Preguntamos si quiere traer los datos del socio del campo
     If (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Modo = 4 Then
-        SQL = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(5).Text, "N")
+        Sql = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(5).Text, "N")
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
        
         If DBLet(Rs.Fields(0)) <> CLng(ComprobarCero(Text1(2).Text)) Then
             Text1(2).Text = Format(DBLet(Rs!Codsocio, "N"), "000000") ' codigo de socio del campo
@@ -2590,7 +2590,7 @@ End Sub
 Private Sub PosarDescripcions()
 Dim NomEmple As String
 Dim CodPobla As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EPosarDescripcions
 
@@ -2600,10 +2600,10 @@ Dim SQL As String
         
         
     If Text1(3).Text <> "" Then
-        SQL = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
-        SQL = SQL & " and rpueblos.codpobla = rpartida.codpobla "
+        Sql = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
+        Sql = Sql & " and rpueblos.codpobla = rpartida.codpobla "
         
-        Text2(1).Text = DevuelveValor(SQL) ' nombre de poblacion
+        Text2(1).Text = DevuelveValor(Sql) ' nombre de poblacion
     End If
     
 EPosarDescripcions:
