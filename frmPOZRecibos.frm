@@ -2306,7 +2306,7 @@ Begin VB.Form frmPOZRecibos
       Caption         =   "P A G A D O"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
-         Size            =   15
+         Size            =   13.5
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -4711,7 +4711,7 @@ Private Sub CalculoTotales()
 Dim Base As Currency
 Dim Tiva As Currency
 Dim PorIva As Currency
-Dim ImpIVA As Currency
+Dim impiva As Currency
 Dim BaseReten As Currency
 Dim BaseAFO As Currency
 Dim PorRet As Currency
@@ -4722,15 +4722,15 @@ Dim TotFac As Currency
 
     Base = CCur(ComprobarCero(Text1(5).Text))
     PorIva = CCur(ComprobarCero(Text1(4).Text))
-    ImpIVA = Round2(Base * PorIva / 100, 2)
+    impiva = Round2(Base * PorIva / 100, 2)
     
     
-    TotFac = Base + ImpIVA
+    TotFac = Base + impiva
 
-    If ImpIVA = 0 Then
+    If impiva = 0 Then
         Text1(6).Text = "0"
     Else
-        Text1(6).Text = Format(ImpIVA, "###,##0.00")
+        Text1(6).Text = Format(impiva, "###,##0.00")
     End If
     
     If TotFac = 0 Then

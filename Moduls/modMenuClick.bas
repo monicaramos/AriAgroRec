@@ -1007,6 +1007,19 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
     End Select
 End Sub
 
+
+' *******  POZOS  *********
+Public Sub SubmnC_RecoleccionG_PozosMonast_Click(Index As Integer)
+    Select Case Index
+        Case 1: frmManPueblos.Show vbModal  ' pueblos
+        Case 2: frmManPartidas.Show vbModal ' partidas
+        Case 3: frmManSocios.Show vbModal 'Socios
+        Case 4: frmManCamposMonast.Show vbModal ' Campos de Monasterios
+    End Select
+End Sub
+
+
+
 ' *******  APORTACIONES  *********
 
 Public Sub SubmnC_RecoleccionG_Aport_Click(Index As Integer)
@@ -1133,6 +1146,19 @@ Dim I As Integer
         MDIppal.mnRecG_Admon(8).Caption = "Calles"
         MDIppal.mnRecG_Admon(22).Caption = "Propiedades"
     End If
+    
+    '[Monica]08/09/2017: solo lo ve Monasterios
+    MDIppal.mnRec_Monast(1).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(2).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(3).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(4).Enabled = (vParamAplic.Cooperativa = 17)
+    
+    MDIppal.mnRec_Monast(1).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(2).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(3).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Monast(4).visible = (vParamAplic.Cooperativa = 17)
+    
+    
     
     '[Monica]23/09/2011: la rectificacion de facturas de consumo de momento solo para Quatretonda
     MDIppal.mnRec_Pozos(28).Enabled = (vParamAplic.Cooperativa = 7)
