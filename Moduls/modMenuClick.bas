@@ -1003,7 +1003,8 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
                  
         Case 32: AbrirListadoPOZ (9) ' Rectificación de Lecturas
         
-        Case 33: frmPOZIndefa.Show vbModal  ' prueba de indefa
+        Case 33: 'frmPOZIndefa.Show vbModal  ' prueba de indefa
+                 AbrirListadoPOZ (21) ' Importacion de de lecturas
     End Select
 End Sub
 

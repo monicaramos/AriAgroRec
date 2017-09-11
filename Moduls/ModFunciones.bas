@@ -4497,6 +4497,34 @@ Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, O
     
 End Sub
 
+Public Sub AyudaConceptos(frmBas As frmBasico, Optional CodActual As String)
+
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Descripción|3930|;"
+    frmBas.CadenaConsulta = "SELECT rriego.codriego, rriego.nomriego "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rriego "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    frmBas.Tag1 = "Código|N|N|||rriego|codriego|00|S|"
+    frmBas.Tag2 = "Nombre|T|N|||rriego|nomriego|||"
+    frmBas.Maxlen1 = 6
+    frmBas.Maxlen2 = 40
+    frmBas.tabla = "rrigo"
+    frmBas.CampoCP = "codriego"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Conceptos"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    frmBas.Show vbModal
+    
+End Sub
+
+
+
+
+
+
+
 Public Function ActualizarTraza(Nota As String, Variedad As String, Socio As String, campo As String, Fecha As String, Hora As String, MenError As String)
 Dim Rs As ADODB.Recordset
 Dim Sql As String
