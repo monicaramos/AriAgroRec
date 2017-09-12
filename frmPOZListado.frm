@@ -7147,7 +7147,7 @@ Dim Calle As String
 Dim Propiedad As String
 Dim Tipo As String
 Dim Contador As String
-Dim Observa As String
+Dim observa As String
 Dim Concepto As String
 Dim Lectura As String
 
@@ -7173,9 +7173,9 @@ Dim Lectura As String
 
     Select Case Tipo
         Case "40"
-            Observa = Mid(cad, 14, 27)
+            observa = Mid(cad, 14, 27)
             
-            Sql = "update rcampos set observac = " & DBSet(Observa, "T") & " where codcampo = " & DBSet(Propiedad, "N")
+            Sql = "update rcampos set observac = " & DBSet(observa, "T") & " where codcampo = " & DBSet(Propiedad, "N")
             
             conn.Execute Sql
             
@@ -7186,6 +7186,9 @@ Dim Lectura As String
             
             Sql = "update rpozos set fech_ant = " & DBSet(txtCodigo(131), "F") & ", "
             Sql = Sql & " lect_ant = " & DBSet(Lectura, "N")
+            Sql = Sql & ", lect_act = " & ValorNulo
+            Sql = Sql & ", fech_act = " & ValorNulo
+            Sql = Sql & ", consumo = " & ValorNulo
             Sql = Sql & " where hidrante = " & DBSet(Contador, "T")
             
             conn.Execute Sql
@@ -7282,7 +7285,7 @@ Dim Tipo As String
 Dim Comunidad As String
 Dim Calle As String
 Dim Propiedad As String
-Dim Observa As String
+Dim observa As String
 Dim Concepto As String
 Dim Lectura As String
 Dim Aux As String
@@ -7307,7 +7310,7 @@ Dim Mens As String
     
     Select Case Tipo
         Case "40"
-            Observa = Mid(cad, 14, 27)
+            observa = Mid(cad, 14, 27)
         Case "60"
             Concepto = Mid(cad, 14, 2)
             Lectura = Mid(cad, 16, 7)
@@ -7422,12 +7425,7 @@ Dim B As Boolean
                   cadTitulo = "Errores de Traspaso de Lecturas"
                   cadNombreRPT = "rErroresLecturas.rpt"
                   LlamarImprimir
-                  If MsgBox("¿ Desea continuar con el proceso ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                        conn.BeginTrans
-                        B = ProcesarFichero(Me.cd1.FileName)
-                  Else
-                        Exit Sub
-                  End If
+                  Exit Sub
               Else
                   conn.BeginTrans
                   B = ProcesarFichero(Me.cd1.FileName)
@@ -13161,9 +13159,9 @@ Dim vSeccion As CSeccion
             
             ' comprobamos que no haya fech_ant con la misma fecha de carga
             If B Then
-                Sql = "select count(*) from rpozos where fech_ant = " & DBSet(txtCodigo(131).Text, "F")
+                Sql = "select count(*) from rpozos where not fech_act is null "
                 If TotalRegistros(Sql) <> 0 Then
-                    If MsgBox("Hay contadores que tienen la misma fecha anterior que la introducida. ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+                    If MsgBox("Hay contadores que tienen la fecha actual de lectura introducida. " & vbCrLf & vbCrLf & " ¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
                         B = True
                     Else
                         B = False

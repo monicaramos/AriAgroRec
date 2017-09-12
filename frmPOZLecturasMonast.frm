@@ -1,7 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
-Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmPOZLecturasMonast 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Toma de Lecturas"
@@ -27,77 +26,6 @@ Begin VB.Form frmPOZLecturasMonast
    ScaleWidth      =   11475
    ShowInTaskbar   =   0   'False
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
-   Begin MSDataGridLib.DataGrid DataGrid1 
-      Bindings        =   "frmPOZLecturasMonast.frx":000C
-      Height          =   6135
-      Left            =   225
-      TabIndex        =   4
-      Top             =   2475
-      Width           =   10590
-      _ExtentX        =   18680
-      _ExtentY        =   10821
-      _Version        =   393216
-      AllowUpdate     =   0   'False
-      Appearance      =   0
-      BorderStyle     =   0
-      HeadLines       =   1
-      RowHeight       =   29
-      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   14.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   -1  'True
-         Strikethrough   =   0   'False
-      EndProperty
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Verdana"
-         Size            =   15.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ColumnCount     =   2
-      BeginProperty Column00 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
-         EndProperty
-      EndProperty
-      BeginProperty Column01 
-         DataField       =   ""
-         Caption         =   ""
-         BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-            Type            =   0
-            Format          =   ""
-            HaveTrueFalseNull=   0
-            FirstDayOfWeek  =   0
-            FirstWeekOfYear =   0
-            LCID            =   3082
-            SubFormatType   =   0
-         EndProperty
-      EndProperty
-      SplitCount      =   1
-      BeginProperty Split0 
-         AllowFocus      =   0   'False
-         AllowRowSizing  =   0   'False
-         AllowSizing     =   0   'False
-         BeginProperty Column00 
-         EndProperty
-         BeginProperty Column01 
-         EndProperty
-      EndProperty
-   End
    Begin VB.Frame Frame3 
       Caption         =   "Lecturas"
       BeginProperty Font 
@@ -129,8 +57,9 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   495
          Index           =   0
          Left            =   5175
+         Locked          =   -1  'True
          MaxLength       =   10
-         TabIndex        =   32
+         TabIndex        =   31
          Tag             =   "Contador Actual|N|S|||rpozos|lect_act|######0||"
          Text            =   "0000000000"
          Top             =   2025
@@ -149,7 +78,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   825
          Left            =   3420
-         TabIndex        =   26
+         TabIndex        =   25
          Top             =   3510
          Width           =   3870
       End
@@ -166,7 +95,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   885
          Left            =   8505
-         TabIndex        =   25
+         TabIndex        =   24
          Top             =   3555
          Width           =   1980
       End
@@ -184,7 +113,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   0
          Left            =   7470
-         TabIndex        =   24
+         TabIndex        =   23
          Top             =   3555
          Width           =   945
       End
@@ -202,7 +131,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   3
          Left            =   9540
-         TabIndex        =   23
+         TabIndex        =   22
          Top             =   2610
          Width           =   945
       End
@@ -220,7 +149,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   2
          Left            =   8505
-         TabIndex        =   22
+         TabIndex        =   21
          Top             =   2610
          Width           =   945
       End
@@ -238,7 +167,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   1
          Left            =   7470
-         TabIndex        =   21
+         TabIndex        =   20
          Top             =   2610
          Width           =   945
       End
@@ -256,7 +185,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   6
          Left            =   9540
-         TabIndex        =   20
+         TabIndex        =   19
          Top             =   1665
          Width           =   945
       End
@@ -274,7 +203,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   5
          Left            =   8505
-         TabIndex        =   19
+         TabIndex        =   18
          Top             =   1665
          Width           =   945
       End
@@ -292,7 +221,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   4
          Left            =   7470
-         TabIndex        =   18
+         TabIndex        =   17
          Top             =   1665
          Width           =   945
       End
@@ -310,7 +239,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   9
          Left            =   9540
-         TabIndex        =   17
+         TabIndex        =   16
          Top             =   720
          Width           =   945
       End
@@ -328,7 +257,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   8
          Left            =   8505
-         TabIndex        =   16
+         TabIndex        =   15
          Top             =   720
          Width           =   945
       End
@@ -346,7 +275,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   885
          Index           =   7
          Left            =   7470
-         TabIndex        =   15
+         TabIndex        =   14
          Top             =   720
          Width           =   945
       End
@@ -363,11 +292,11 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   1
-         ItemData        =   "frmPOZLecturasMonast.frx":0021
+         ItemData        =   "frmPOZLecturasMonast.frx":000C
          Left            =   1845
-         List            =   "frmPOZLecturasMonast.frx":0023
+         List            =   "frmPOZLecturasMonast.frx":000E
          Style           =   2  'Dropdown List
-         TabIndex        =   14
+         TabIndex        =   13
          Tag             =   "Comunidad|N|N|||rpozos|codpozo|||"
          Top             =   2790
          Width           =   5460
@@ -385,7 +314,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   345
          Left            =   180
-         TabIndex        =   12
+         TabIndex        =   11
          Tag             =   "Cobrar Cuota|N|S|||rpozos|cobrarcuota|0|N|"
          Top             =   3690
          Width           =   2130
@@ -407,7 +336,7 @@ Begin VB.Form frmPOZLecturasMonast
          Left            =   1860
          Locked          =   -1  'True
          MaxLength       =   9
-         TabIndex        =   8
+         TabIndex        =   7
          Tag             =   "Lectura Anterior|N|S|||rpozos|lect_ant|######0||"
          Text            =   "123456789"
          Top             =   1125
@@ -428,7 +357,7 @@ Begin VB.Form frmPOZLecturasMonast
          Index           =   9
          Left            =   5175
          MaxLength       =   9
-         TabIndex        =   7
+         TabIndex        =   0
          Tag             =   "Contador Actual|N|S|||rpozos|lect_act|######0||"
          Text            =   "123456789"
          Top             =   1170
@@ -470,7 +399,7 @@ Begin VB.Form frmPOZLecturasMonast
          ForeColor       =   &H00800000&
          Height          =   390
          Left            =   180
-         TabIndex        =   36
+         TabIndex        =   35
          Top             =   495
          Width           =   7155
       End
@@ -478,7 +407,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   240
          Index           =   0
          Left            =   4905
-         Picture         =   "frmPOZLecturasMonast.frx":0025
+         Picture         =   "frmPOZLecturasMonast.frx":0010
          ToolTipText     =   "Buscar fecha"
          Top             =   2160
          Width           =   240
@@ -496,7 +425,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   390
          Left            =   3915
-         TabIndex        =   33
+         TabIndex        =   32
          Top             =   2055
          Width           =   1710
       End
@@ -513,7 +442,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   480
          Left            =   180
-         TabIndex        =   13
+         TabIndex        =   12
          Top             =   2835
          Width           =   1890
       End
@@ -530,7 +459,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   390
          Left            =   180
-         TabIndex        =   11
+         TabIndex        =   10
          Top             =   1140
          Width           =   1440
       End
@@ -547,7 +476,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   390
          Left            =   3915
-         TabIndex        =   10
+         TabIndex        =   9
          Top             =   1200
          Width           =   1710
       End
@@ -564,7 +493,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   390
          Left            =   180
-         TabIndex        =   9
+         TabIndex        =   8
          Top             =   2040
          Width           =   1620
       End
@@ -588,7 +517,7 @@ Begin VB.Form frmPOZLecturasMonast
       Height          =   2250
       Index           =   0
       Left            =   180
-      TabIndex        =   0
+      TabIndex        =   1
       Top             =   135
       Width           =   11010
       Begin VB.CheckBox ChkPendientes 
@@ -604,7 +533,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   345
          Left            =   180
-         TabIndex        =   37
+         TabIndex        =   36
          Top             =   1665
          Width           =   3570
       End
@@ -621,11 +550,11 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   2
-         ItemData        =   "frmPOZLecturasMonast.frx":00B0
+         ItemData        =   "frmPOZLecturasMonast.frx":009B
          Left            =   2115
-         List            =   "frmPOZLecturasMonast.frx":00B2
+         List            =   "frmPOZLecturasMonast.frx":009D
          Style           =   2  'Dropdown List
-         TabIndex        =   27
+         TabIndex        =   26
          Tag             =   "Calle|N|N|||rpozos|codparti|||"
          Top             =   1035
          Width           =   8205
@@ -643,11 +572,11 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   0
-         ItemData        =   "frmPOZLecturasMonast.frx":00B4
+         ItemData        =   "frmPOZLecturasMonast.frx":009F
          Left            =   2115
-         List            =   "frmPOZLecturasMonast.frx":00B6
+         List            =   "frmPOZLecturasMonast.frx":00A1
          Style           =   2  'Dropdown List
-         TabIndex        =   2
+         TabIndex        =   3
          Tag             =   "Comunidad|N|N|||rpozos|codpozo|||"
          Top             =   315
          Width           =   8205
@@ -655,7 +584,7 @@ Begin VB.Form frmPOZLecturasMonast
       Begin MSComctlLib.Toolbar ToolbarAyuda 
          Height          =   330
          Left            =   10395
-         TabIndex        =   29
+         TabIndex        =   28
          Top             =   360
          Visible         =   0   'False
          Width           =   450
@@ -685,7 +614,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   435
          Left            =   180
-         TabIndex        =   28
+         TabIndex        =   27
          Top             =   1035
          Width           =   1275
       End
@@ -702,7 +631,7 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   390
          Left            =   180
-         TabIndex        =   3
+         TabIndex        =   4
          Top             =   360
          Width           =   1815
       End
@@ -771,7 +700,7 @@ Begin VB.Form frmPOZLecturasMonast
       Index           =   0
       Left            =   690
       MaxLength       =   40
-      TabIndex        =   1
+      TabIndex        =   2
       Top             =   930
       Width           =   1035
    End
@@ -790,7 +719,7 @@ Begin VB.Form frmPOZLecturasMonast
       Index           =   0
       Left            =   225
       MaxLength       =   7
-      TabIndex        =   30
+      TabIndex        =   29
       Tag             =   "Propietario|N|S|||rpozos|codcampo|0000||"
       Text            =   "1234567"
       Top             =   1530
@@ -810,7 +739,7 @@ Begin VB.Form frmPOZLecturasMonast
       Index           =   1
       Left            =   1530
       MaxLength       =   7
-      TabIndex        =   31
+      TabIndex        =   30
       Tag             =   "Piso|T|S|||rcampos|observac|||"
       Text            =   "1234567"
       Top             =   1530
@@ -829,7 +758,7 @@ Begin VB.Form frmPOZLecturasMonast
       EndProperty
       Height          =   465
       Left            =   10350
-      TabIndex        =   35
+      TabIndex        =   34
       Top             =   1260
       Width           =   495
    End
@@ -847,11 +776,40 @@ Begin VB.Form frmPOZLecturasMonast
       Index           =   2
       Left            =   6930
       MaxLength       =   7
-      TabIndex        =   34
+      TabIndex        =   33
       Tag             =   "Piso|T|S|||rcampos|observac|||"
       Text            =   "1234567"
       Top             =   1530
       Width           =   3255
+   End
+   Begin MSComctlLib.ListView lw1 
+      Height          =   6150
+      Left            =   180
+      TabIndex        =   37
+      Top             =   2475
+      Width           =   10950
+      _ExtentX        =   19315
+      _ExtentY        =   10848
+      View            =   3
+      LabelEdit       =   1
+      LabelWrap       =   -1  'True
+      HideSelection   =   0   'False
+      FullRowSelect   =   -1  'True
+      _Version        =   393217
+      ForeColor       =   -2147483640
+      BackColor       =   -2147483643
+      BorderStyle     =   1
+      Appearance      =   1
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   17.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      NumItems        =   0
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -1022,6 +980,7 @@ Dim NF As Integer
 
 Dim UltimaLectura As String
 
+Dim SiguienteCont As String
 
 Private Sub ChkAusente_Click()
     If ChkAusente.Value = 1 Then
@@ -1034,9 +993,61 @@ Private Sub ChkPendientes_Click()
     cmdActualizar_Click
 End Sub
 
+
+Private Sub Form_Resize()
+    Me.Width = 11565
+    Me.Height = 14085
+End Sub
+
+Private Sub lw1_Click()
+'   If Me.Data1.Recordset.EOF Then Exit Sub
+    If lw1.ListItems.Count = 0 Then Exit Sub
+
+    Text1(7).Text = lw1.SelectedItem.ListSubItems(3) 'Data1.Recordset.Fields(3)
+    If ComprobarCero(lw1.SelectedItem.ListSubItems(4)) = 0 Then
+        Text1(9).Text = ""
+    Else
+        Text1(9).Text = lw1.SelectedItem.ListSubItems(4) 'DBLet(Data1.Recordset.Fields(4))
+    End If
+    Text1(4).Text = lw1.SelectedItem.ListSubItems(5) 'Data1.Recordset.Fields(5)
+    
+    Label5.Caption = lw1.SelectedItem.ListSubItems(7) 'Data1.Recordset.Fields(7)
+    
+    If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
+    If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
+
+End Sub
+
+Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+
+'    If Me.Data1.Recordset.EOF Then Exit Sub
+
+    If lw1.ListItems.Count = 0 Then Exit Sub
+
+    Text1(7).Text = lw1.SelectedItem.ListSubItems(3) 'Data1.Recordset.Fields(3)
+    
+    If ComprobarCero(lw1.SelectedItem.ListSubItems(4)) = 0 Then
+        Text1(9).Text = ""
+    Else
+        Text1(9).Text = lw1.SelectedItem.ListSubItems(4) 'DBLet(Data1.Recordset.Fields(4))
+    End If
+    Text1(4).Text = lw1.SelectedItem.ListSubItems(5) 'Data1.Recordset.Fields(5)
+    
+    Label5.Caption = lw1.SelectedItem.ListSubItems(7) 'Data1.Recordset.Fields(7)
+    
+    If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
+    If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
+
+    PonerFoco Text1(9)
+
+
+End Sub
+
 Private Sub TCC_Click()
 
-    If Data1.Recordset.EOF Then Exit Sub
+'    If Data1.Recordset.EOF Then Exit Sub
+
+    If Me.lw1.SelectedItem Is Nothing Then Exit Sub
 
     If Text1(kCampo).Text <> "" Then
         Text1(kCampo).Text = Mid(Text1(kCampo).Text, 1, Len(Text1(kCampo).Text) - 1)
@@ -1050,32 +1061,57 @@ Private Sub cmdAceptar_Click()
 Dim Sql As String
 Dim Hidrante As String
 Dim I As Long
+Dim J As String
     
     On Error GoTo Error1
     
-    If Data1.Recordset.EOF Then Exit Sub
-    
+'    If Data1.Recordset.EOF Then Exit Sub
+    If lw1.SelectedItem Is Nothing Then Exit Sub
     Screen.MousePointer = vbHourglass
     
-    I = DataGrid1.Columns(0)
+    
     
     If DatosOK Then
         Sql = "update rpozos set fech_act = " & DBSet(Text1(0).Text, "F") & ", lect_act = " & DBSet(Text1(9).Text, "N")
         Sql = Sql & ", consumo = " & DBSet(Text1(4).Text, "N")
         Sql = Sql & ", calibre = " & DBSet(Combo1(1).ListIndex, "N")
-        Sql = Sql & " where hidrante = " & DBSet(DataGrid1.Columns(2), "T")
+        Sql = Sql & " WHERE hidrante = " & DBSet(lw1.SelectedItem.ListSubItems(2), "T")
+        'Sql = Sql & " where hidrante = " & DBSet(DataGrid1.Columns(2), "T")
         
         conn.Execute Sql
         
         MsgBox "Lectura realizada correctamente", vbExclamation
+        lw1.SelectedItem.SubItems(5) = Text1(4).Text
+        lw1.SelectedItem.SubItems(4) = Text1(9).Text
+    
+        lw1.SelectedItem.ForeColor = &HC0C0C0
+        lw1.SelectedItem.ListSubItems(1).ForeColor = &HC0C0C0
+        lw1.SelectedItem.ListSubItems(5).ForeColor = &HC0C0C0
+        
+        If lw1.SelectedItem.SubItems(5) = "" Or lw1.SelectedItem.SubItems(4) = "" Then
+            lw1.SelectedItem.ForeColor = &H80000008
+            lw1.SelectedItem.ListSubItems(1).ForeColor = &H80000008
+            lw1.SelectedItem.ListSubItems(5).ForeColor = &H80000008
+        End If
+    
+    
+    End If
+    
+    If lw1.SelectedItem.Index + 1 <= lw1.ListItems.Count Then
+        Set lw1.SelectedItem = lw1.ListItems(lw1.SelectedItem.Index + 1)
+        lw1.SelectedItem.EnsureVisible
+        
+        lw1_Click
+        
+        Set lw1.SelectedItem = Nothing
         
     End If
     
-    cmdActualizar_Click
+'    SiguienteCont = lw1.SelectedItem.ListSubItems(2)
+'    cmdActualizar_Click
     
-    
-    Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " =" & I)
-    Data1.Recordset.MoveNext
+'    Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " =" & I)
+'    Data1.Recordset.MoveNext
     Me.ChkAusente.Value = 0
     
     Screen.MousePointer = vbDefault
@@ -1099,12 +1135,13 @@ Dim Consumo As Long
 Dim Limite As Long
 Dim Hidrante As String
 
-    If DataGrid1.Columns(2).Value = "" Then
+    If lw1.SelectedItem = "" Then
         MsgBox "No se ha seleccionado contador. Revise.", vbExclamation
         B = False
     End If
     
-    Hidrante = DataGrid1.Columns(2).Value
+'    Hidrante = DataGrid1.Columns(2).Value
+    Hidrante = Me.lw1.SelectedItem.ListSubItems(2)
     B = True
     If Text1(9).Text <> "" Then
          Inicio = 0
@@ -1148,9 +1185,9 @@ Dim Hidrante As String
     Else
         If Text1(9).Text = "" And Text1(0).Text = "" Then
             Text1(4).Text = ""
-            B = True
-        Else
             B = False
+        Else
+            B = True
         End If
     End If
     
@@ -1168,7 +1205,7 @@ Dim Sql As String
     If ChkPendientes.Value = 1 Then
         If Combo1(2).ListIndex <> -1 And Combo1(0).ListIndex <> -1 Then
             Sql = "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-            Sql = Sql & " and rpozos.fech_act <> " & DBSet(Text1(0).Text, "F")
+            Sql = Sql & " and rpozos.lect_act is null  "
         Else
             Sql = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
         End If
@@ -1179,7 +1216,8 @@ Dim Sql As String
             Sql = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
         End If
     End If
-    CargaGrid Sql
+'    CargaGrid Sql
+    CargaLW Sql
 
 End Sub
 
@@ -1190,19 +1228,19 @@ Private Sub Combo1_Click(Index As Integer)
     cmdActualizar_Click
 End Sub
 
-Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-
-    If Me.Data1.Recordset.EOF Then Exit Sub
-
-    Text1(7).Text = Data1.Recordset.Fields(3)
-    Text1(9).Text = Data1.Recordset.Fields(4)
-    Text1(4).Text = Data1.Recordset.Fields(5)
-    
-    Label5.Caption = Data1.Recordset.Fields(7)
-    
-    If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
-    If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
-End Sub
+'Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
+'
+'    If Me.Data1.Recordset.EOF Then Exit Sub
+'
+'    Text1(7).Text = Data1.Recordset.Fields(3)
+'    Text1(9).Text = DBLet(Data1.Recordset.Fields(4))
+'    Text1(4).Text = Data1.Recordset.Fields(5)
+'
+'    Label5.Caption = Data1.Recordset.Fields(7)
+'
+'    If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
+'    If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
+'End Sub
 
 Private Sub Form_Activate()
     Screen.MousePointer = vbDefault
@@ -1249,10 +1287,10 @@ Dim I As Integer
     'Mirem com està guardat el valor del check
     
     'ASignamos un SQL al DATA1
-    Data1.ConnectionString = conn
-    '***** canviar el nom de la PK de la capçalera; repasar codEmpre *************
-    Data1.RecordSource = "Select * from " & NombreTabla & " where hidrante is null"
-    Data1.Refresh
+'    Data1.ConnectionString = conn
+'    '***** canviar el nom de la PK de la capçalera; repasar codEmpre *************
+'    Data1.RecordSource = "Select * from " & NombreTabla & " where hidrante is null"
+'    Data1.Refresh
        
     ModoLineas = 0
          
@@ -1309,15 +1347,18 @@ Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
         
         
         If Combo1(0).ListIndex = -1 Or Combo1(2).ListIndex = -1 Then
-            CargaGrid "rpozos.codparti = -1 and rpozos.codpozo = -1"
+'            CargaGrid "rpozos.codparti = -1 and rpozos.codpozo = -1"
+            CargaLW "rpozos.codparti = -1 and rpozos.codpozo = -1"
         Else
-            CargaGrid "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+'            CargaGrid "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+            CargaLW "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
         End If
     Else
         Combo1(0).ListIndex = -1
         Combo1(2).ListIndex = -1
         
-        CargaGrid "rpozos.codparti = -1 and rpozos.codpozo = -1"
+'        CargaGrid "rpozos.codparti = -1 and rpozos.codpozo = -1"
+        CargaLW "rpozos.codparti = -1 and rpozos.codpozo = -1"
     End If
 
 
@@ -1430,26 +1471,6 @@ End Sub
 
 
 
-Private Sub PonerCampos()
-Dim I As Integer
-Dim CodPobla As String, desPobla As String
-Dim CPostal As String, desProvi As String, desPais As String
-
-    If Data1.Recordset.EOF Then Exit Sub
-    PonerCamposForma Me, Data1  'opcio=1: posa el format o els camps de la capçalera
-    
-    ' *** si n'hi han llínies en datagrids ***
-    
-    PosarDescripcions
-
-
-' lo he quitado de aqui pq el consumo está almacenado en un campo de la tabla rpozos
-'    CalcularConsumo
-    ' ********************************************************************************
-    
-    
-    
-End Sub
 
 Private Sub CalcularConsumo()
 Dim Sql As String
@@ -1471,7 +1492,8 @@ Dim Hidrante As String
     If Text1(7).Text <> "" Then Inicio = CLng(Text1(7).Text)
     If Text1(9).Text <> "" Then Fin = CLng(Text1(9).Text)
     
-    Hidrante = DataGrid1.Columns(2).Value
+'    Hidrante = DataGrid1.Columns(2).Value
+    Hidrante = lw1.SelectedItem.ListSubItems(2)
     
     NroDig = DevuelveValor("select digcontrol from rpozos where hidrante = " & DBSet(Hidrante, "T"))  'CCur(Text1(12).Text)
     Limite = (10 ^ NroDig)
@@ -1497,68 +1519,10 @@ Dim Hidrante As String
 End Sub
 
 
-Private Sub cmdCancelar_Click()
-Dim I As Integer
-Dim V
-
-    Select Case Modo
-        Case 1, 3 'Búsqueda, Insertar
-                LimpiarCampos
-                If Data1.Recordset.EOF Then
-                    PonerModo 0
-                Else
-                    PonerModo 2
-                    PonerCampos
-                End If
-                ' *** foco al primer camp visible de la capçalera ***
-                PonerFoco Text1(0)
-                ' ***************************************************
-
-        Case 4  'Modificar
-                TerminaBloquear
-                PonerModo 2
-                PonerCampos
-                ' *** primer camp visible de la capçalera ***
-                PonerFoco Text1(0)
-                ' *******************************************
-          
-          
-    End Select
-End Sub
-
-
-
-
-Private Function Eliminar() As Boolean
-Dim vWhere As String
-
-    On Error GoTo FinEliminar
-
-    conn.BeginTrans
-    ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE hidrante='" & Trim(Data1.Recordset!Hidrante) & "'"
-        ' ***********************************************************************
-        
-    conn.Execute "Delete from rpozos_cooprop " & vWhere
-    conn.Execute "Delete from rpozos_campos " & vWhere
-        
-    conn.Execute "Delete from " & NombreTabla & vWhere
-       
-FinEliminar:
-    If Err.Number <> 0 Then
-        MuestraError Err.Number, "Eliminar"
-        conn.RollbackTrans
-        Eliminar = False
-    Else
-        conn.CommitTrans
-        Eliminar = True
-    End If
-End Function
-
-
 Private Sub TC_Click(Index As Integer)
 
-    If Data1.Recordset.EOF Then Exit Sub
+'    If Data1.Recordset.EOF Then Exit Sub
+    If Me.lw1.SelectedItem = 0 Then Exit Sub
 
     Text1(kCampo).Text = Text1(kCampo).Text & Format(Index, "0")
     
@@ -1570,6 +1534,8 @@ Private Sub CalculaCasillaConsumo()
 Dim Inicio As Long
 Dim Fin As Long
 
+    If Text1(9).Text = "" Then Exit Sub
+
     Inicio = ComprobarCero(Text1(7).Text)
     Fin = ComprobarCero(Text1(9).Text)
     
@@ -1579,6 +1545,7 @@ End Sub
 Private Sub Text1_GotFocus(Index As Integer)
     kCampo = Index
     ConseguirFoco Text1(Index), Modo
+    If Index = 0 Then PonerFoco Text1(9)
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
@@ -1894,42 +1861,42 @@ Dim miRsAux As ADODB.Recordset
 End Sub
 
 
-Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
-    Dim tots As String
-
-
-    CadenaConsulta = "select rpozos.codcampo, rcampos.observac, rpozos.hidrante, rpozos.lect_ant, rpozos.lect_act,  "
-'    CadenaConsulta = CadenaConsulta & " if(rpozos.lect_act is null or rpozos.lect_act = 0, 0,rpozos.lect_act - rpozos.lect_ant) consumo, "
-    CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio "
-    CadenaConsulta = CadenaConsulta & " from (rpozos inner join rcampos on rpozos.codcampo = rcampos.codcampo) "
-    CadenaConsulta = CadenaConsulta & " inner join rsocios on rpozos.codsocio = rsocios.codsocio "
-    
-    If vSQL <> "" Then
-        CadenaConsulta = CadenaConsulta & " where " & vSQL
-    End If
-
-    Sql = CadenaConsulta
-
-    '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY rcampos.observac"
-    '**************************************************************++
-
-    CargaGridGnral Me.DataGrid1, Me.Data1, Sql, PrimeraVez
-
-    ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Propiedad|1800|;"
-    tots = tots & "S|txtAux(1)|T|Piso|6400|;N||||0|;N||||0|;N||||0|;S|txtAux(2)|T|Consumo|1800|;N||||0|;N||||0|;"
-
-    arregla tots, DataGrid1, Me, 510 '350
-
-    DataGrid1.ScrollBars = dbgAutomatic
-    DataGrid1.Columns(0).Alignment = dbgCenter
-    
-    PrimeraVez = False
-    
-    
-End Sub
+'Private Sub CargaGrid(Optional vSQL As String)
+'    Dim Sql As String
+'    Dim tots As String
+'
+'
+'    CadenaConsulta = "select rpozos.codcampo, rcampos.observac, rpozos.hidrante, rpozos.lect_ant, rpozos.lect_act,  "
+''    CadenaConsulta = CadenaConsulta & " if(rpozos.lect_act is null or rpozos.lect_act = 0, 0,rpozos.lect_act - rpozos.lect_ant) consumo, "
+'    CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio "
+'    CadenaConsulta = CadenaConsulta & " from (rpozos inner join rcampos on rpozos.codcampo = rcampos.codcampo) "
+'    CadenaConsulta = CadenaConsulta & " inner join rsocios on rpozos.codsocio = rsocios.codsocio "
+'
+'    If vSQL <> "" Then
+'        CadenaConsulta = CadenaConsulta & " where " & vSQL
+'    End If
+'
+'    Sql = CadenaConsulta
+'
+'    '********************* canviar el ORDER BY *********************++
+'    Sql = Sql & " ORDER BY rcampos.observac"
+'    '**************************************************************++
+'
+'    CargaGridGnral Me.DataGrid1, Me.Data1, Sql, PrimeraVez
+'
+'    ' *******************canviar els noms i si fa falta la cantitat********************
+'    tots = "S|txtAux(0)|T|Propiedad|1800|;"
+'    tots = tots & "S|txtAux(1)|T|Piso|6400|;N||||0|;N||||0|;N||||0|;S|txtAux(2)|T|Consumo|1800|;N||||0|;N||||0|;"
+'
+'    arregla tots, DataGrid1, Me, 510 '350
+'
+'    DataGrid1.ScrollBars = dbgAutomatic
+'    DataGrid1.Columns(0).Alignment = dbgCenter
+'
+'    PrimeraVez = False
+'
+'
+'End Sub
 
 Private Sub DatosaMemorizar(Leer As Boolean)
 Dim NF As Integer
@@ -1961,4 +1928,113 @@ On Error GoTo ENumeroEmpresaMemorizar
 ENumeroEmpresaMemorizar:
     Err.Clear
 End Sub
+
+
+
+Private Sub CargaLW(vSQL As String)
+Dim cad As String
+Dim Rs As ADODB.Recordset
+Dim It As ListItem
+Dim ElIcono As Integer
+Dim GroupBy As String
+Dim Orden As String
+Dim c As String
+Dim Sql As String
+
+Dim Encontrado As Boolean
+
+    On Error GoTo ECargaDatosLW
+    
+    
+    lw1.ColumnHeaders.Clear
+    
+    lw1.ColumnHeaders.Add , , "Propiedad", 2000
+    lw1.ColumnHeaders.Add , , "Piso", 6200
+    lw1.ColumnHeaders.Add , , "Contador", 0
+    lw1.ColumnHeaders.Add , , "Lect_ant", 0
+    lw1.ColumnHeaders.Add , , "Lect_act", 0
+    lw1.ColumnHeaders.Add , , "Consumo", 2300, 1
+    lw1.ColumnHeaders.Add , , "Socio", 0
+    lw1.ColumnHeaders.Add , , "Nombre", 0
+    
+    
+    
+    CadenaConsulta = "select rpozos.codcampo, rcampos.observac, rpozos.hidrante, rpozos.lect_ant, rpozos.lect_act,  "
+'    CadenaConsulta = CadenaConsulta & " if(rpozos.lect_act is null or rpozos.lect_act = 0, 0,rpozos.lect_act - rpozos.lect_ant) consumo, "
+    CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio, rpozos.fech_ant "
+    CadenaConsulta = CadenaConsulta & " from (rpozos inner join rcampos on rpozos.codcampo = rcampos.codcampo) "
+    CadenaConsulta = CadenaConsulta & " inner join rsocios on rpozos.codsocio = rsocios.codsocio "
+    
+    If vSQL <> "" Then
+        CadenaConsulta = CadenaConsulta & " where " & vSQL
+    End If
+
+    Sql = CadenaConsulta
+
+    '********************* canviar el ORDER BY *********************++
+    Sql = Sql & " ORDER BY rcampos.observac"
+    '**************************************************************++
+        
+    
+    lw1.ListItems.Clear
+    
+    Encontrado = True
+    If Sql <> "" Then
+        Set Rs = New ADODB.Recordset
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        While Not Rs.EOF
+            Set It = lw1.ListItems.Add()
+            
+            It.Text = DBLet(Rs!codcampo, "N")
+            It.SubItems(1) = DBLet(Rs!Observac, "T")
+            It.SubItems(2) = DBLet(Rs!Hidrante, "T")
+            It.SubItems(3) = Format(DBLet(Rs!lect_ant, "N"), "000000000")
+            It.SubItems(4) = Format(DBLet(Rs!lect_act, "N"), "000000000")
+            It.SubItems(5) = DBLet(Rs!Consumo, "N")
+            It.SubItems(6) = DBLet(Rs!Codsocio, "N")
+            It.SubItems(7) = DBLet(Rs!nomsocio, "T")
+            
+            If Not IsNull(Rs!lect_act) Then
+                It.ForeColor = &HC0C0C0
+                It.ListSubItems(1).ForeColor = &HC0C0C0
+                It.ListSubItems(5).ForeColor = &HC0C0C0
+            Else
+                It.ForeColor = &H80000008
+                It.ListSubItems(1).ForeColor = &H80000008
+                It.ListSubItems(5).ForeColor = &H80000008
+            End If
+            
+            If Encontrado Then
+                It.Selected = True
+                
+                Encontrado = False
+                
+                lw1_ItemClick It
+                
+            Else
+                It.Selected = False
+            End If
+            
+'            If DBLet(Rs!Hidrante, "T") = SiguienteCont Then
+'                Encontrado = True
+'            End If
+            
+            Rs.MoveNext
+        Wend
+        Rs.Close
+        Set Rs = Nothing
+    End If
+    
+    
+    Exit Sub
+ECargaDatosLW:
+    MuestraError Err.Number
+    Set Rs = Nothing
+    
+End Sub
+
+
+
+
+
 

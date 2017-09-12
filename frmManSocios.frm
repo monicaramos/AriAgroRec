@@ -439,7 +439,7 @@ Begin VB.Form frmManSocios
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   4
+      Tab             =   3
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -456,35 +456,20 @@ Begin VB.Form frmManSocios
       TabPicture(0)   =   "frmManSocios.frx":000C
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label5"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label29"
-      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "imgMail(0)"
-      Tab(0).Control(3).Enabled=   0   'False
       Tab(0).Control(4)=   "Label19"
-      Tab(0).Control(4).Enabled=   0   'False
       Tab(0).Control(5)=   "imgFec(2)"
-      Tab(0).Control(5).Enabled=   0   'False
       Tab(0).Control(6)=   "Label10"
-      Tab(0).Control(6).Enabled=   0   'False
       Tab(0).Control(7)=   "Text1(2)"
-      Tab(0).Control(7).Enabled=   0   'False
       Tab(0).Control(8)=   "Text1(20)"
-      Tab(0).Control(8).Enabled=   0   'False
       Tab(0).Control(9)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(9).Enabled=   0   'False
       Tab(0).Control(10)=   "Text1(12)"
-      Tab(0).Control(10).Enabled=   0   'False
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
       Tab(0).Control(12)=   "Text1(7)"
-      Tab(0).Control(12).Enabled=   0   'False
       Tab(0).Control(13)=   "Frame6"
-      Tab(0).Control(13).Enabled=   0   'False
       Tab(0).Control(14)=   "Frame7"
-      Tab(0).Control(14).Enabled=   0   'False
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
       TabPicture(1)   =   "frmManSocios.frx":0028
@@ -495,49 +480,45 @@ Begin VB.Form frmManSocios
       TabPicture(2)   =   "frmManSocios.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAux0"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
-      Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
+      Tab(3).ControlEnabled=   -1  'True
+      Tab(3).Control(0)=   "Label16"
       Tab(3).Control(0).Enabled=   0   'False
-      Tab(3).Control(1)=   "Text3(0)"
+      Tab(3).Control(1)=   "Label17"
       Tab(3).Control(1).Enabled=   0   'False
-      Tab(3).Control(2)=   "Toolbar2"
+      Tab(3).Control(2)=   "imgFec(3)"
       Tab(3).Control(2).Enabled=   0   'False
-      Tab(3).Control(3)=   "lw1"
+      Tab(3).Control(3)=   "Toolbar4"
       Tab(3).Control(3).Enabled=   0   'False
-      Tab(3).Control(4)=   "Toolbar3"
+      Tab(3).Control(4)=   "Frame5"
       Tab(3).Control(4).Enabled=   0   'False
-      Tab(3).Control(5)=   "Frame5"
+      Tab(3).Control(5)=   "Toolbar3"
       Tab(3).Control(5).Enabled=   0   'False
-      Tab(3).Control(6)=   "Toolbar4"
+      Tab(3).Control(6)=   "lw1"
       Tab(3).Control(6).Enabled=   0   'False
-      Tab(3).Control(7)=   "imgFec(3)"
+      Tab(3).Control(7)=   "Toolbar2"
       Tab(3).Control(7).Enabled=   0   'False
-      Tab(3).Control(8)=   "Label17"
+      Tab(3).Control(8)=   "Text3(0)"
       Tab(3).Control(8).Enabled=   0   'False
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).Control(9)=   "Frame8"
       Tab(3).Control(9).Enabled=   0   'False
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "FrameAux2"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).ControlCount=   1
       TabCaption(5)   =   "Miembros"
       TabPicture(5)   =   "frmManSocios.frx":0098
       Tab(5).ControlEnabled=   0   'False
       Tab(5).Control(0)=   "FrameAux3"
-      Tab(5).Control(0).Enabled=   0   'False
       Tab(5).ControlCount=   1
       TabCaption(6)   =   "Movimientos"
       TabPicture(6)   =   "frmManSocios.frx":00B4
       Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "FrameAux4"
-      Tab(6).Control(0).Enabled=   0   'False
       Tab(6).ControlCount=   1
       Begin VB.Frame FrameAux4 
          BorderStyle     =   0  'None
@@ -1205,7 +1186,7 @@ Begin VB.Form frmManSocios
          BorderStyle     =   0  'None
          Caption         =   "Frame8"
          Height          =   4395
-         Left            =   -65100
+         Left            =   9900
          TabIndex        =   145
          Top             =   420
          Visible         =   0   'False
@@ -1550,7 +1531,7 @@ Begin VB.Form frmManSocios
       Begin VB.Frame FrameAux2 
          BorderStyle     =   0  'None
          Height          =   5490
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   129
          Top             =   405
          Width           =   12360
@@ -1819,7 +1800,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -63660
+         Left            =   11340
          TabIndex        =   121
          Text            =   "Text4"
          Top             =   1050
@@ -4093,7 +4074,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   4350
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   118
          Top             =   450
          Width           =   615
@@ -4161,7 +4142,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.ListView lw1 
          Height          =   3855
-         Left            =   -74040
+         Left            =   960
          TabIndex        =   119
          Top             =   420
          Width           =   8745
@@ -4191,7 +4172,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar3 
          Height          =   2370
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   125
          Top             =   480
          Visible         =   0   'False
@@ -4240,7 +4221,7 @@ Begin VB.Form frmManSocios
       Begin VB.Frame Frame5 
          BorderStyle     =   0  'None
          Height          =   1005
-         Left            =   -64980
+         Left            =   10020
          TabIndex        =   128
          Top             =   1440
          Width           =   2760
@@ -4281,7 +4262,7 @@ Begin VB.Form frmManSocios
       End
       Begin MSComctlLib.Toolbar Toolbar4 
          Height          =   390
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   127
          Top             =   1590
          Visible         =   0   'False
@@ -4306,7 +4287,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   3
-         Left            =   -64140
+         Left            =   10860
          Picture         =   "frmManSocios.frx":1BEC
          ToolTipText     =   "Buscar fecha"
          Top             =   1050
@@ -4324,7 +4305,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -64860
+         Left            =   10140
          TabIndex        =   124
          Top             =   1050
          Width           =   735
@@ -4342,7 +4323,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   300
-         Left            =   -64920
+         Left            =   10080
          TabIndex        =   120
          Top             =   510
          Width           =   2865
@@ -4889,10 +4870,12 @@ Private Sub cmdAux_Click(Index As Integer)
         Case 4 'Secciones
             Set frmSec = New frmManSeccion
             frmSec.DatosADevolverBusqueda = "0|1|"
-            frmSec.CodigoActual = txtAux(1).Text
+            frmSec.CodigoActual = txtAux1(1).Text
             frmSec.Show vbModal
             Set frmSec = Nothing
-            PonerFoco txtAux(1)
+            PonerFoco txtAux1(1)
+            
+            If txtAux1(1).Text <> "" Then txtAux1_LostFocus (1)
         
         Case 0, 1 'fecha de alta y fecha de baja
            If ModoLineas = 0 Then Exit Sub

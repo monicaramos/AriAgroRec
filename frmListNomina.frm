@@ -7158,7 +7158,7 @@ Dim List As Collection
         
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel(0).Cancel = True
+    Me.CmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -8744,7 +8744,9 @@ Dim Porcentaje As Currency
     
     CodigoETT = DevuelveValor(Sql)
 
-    Sql = "select sum(kilostra) from rclasifica where fechaent = " & DBSet(txtCodigo(11).Text, "F") & " and codvarie = " & DBSet(txtCodigo(9), "N")
+    Sql = "select sum(kilostra) from rclasifica where fechaent = " & DBSet(txtCodigo(11).Text, "F") & " and (codvarie = " & DBSet(txtCodigo(9), "N")
+    '[Monica]11/09/2017: tenemos que traer los kilos de las variedades relacionadas, añadimos el or
+    Sql = Sql & " or codvarie in (select codvarie1 from variedades_rel where codvarie = " & DBSet(txtCodigo(9), "N") & ")) "
     Sql = Sql & " and codcapat = " & DBSet(txtCodigo(12).Text, "N")
 
     Porcentaje = 0

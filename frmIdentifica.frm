@@ -247,7 +247,8 @@ Private Sub Form_Load()
     Label3.Caption = ""
     vSegundos = 60
     Label3.Caption = ""
-
+    
+    
 End Sub
 
 

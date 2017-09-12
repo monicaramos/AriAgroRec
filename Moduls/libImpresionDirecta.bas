@@ -7,7 +7,7 @@ Private Const LineasPorHoja = 48
 Private Const MargenIzdo = 0   'Si las pruebas las estoy haciendo o no. Pruebas=6  Real=0
                 
                 
-Private Const ModoImpresion = 2
+Private Const ModoImpresion = 1
     ' 0 .- Solo en modo DEBUG. No envia a la impresora
     ' 1 .- Objeto PRINTER
     ' 2 .- Direcatamente sobre LPT
@@ -27,9 +27,6 @@ Dim LasObservaciones As String
 Dim NF As Integer
                 
     
-                
-                
-                
 Private Sub AccionesIniciales()
     
     If ModoImpresion = 1 Then
@@ -39,15 +36,10 @@ Private Sub AccionesIniciales()
         NF = FreeFile
         'Open "d:\t1.txt" For Output As #NF
         Open "LPT1" For Output As #NF
-        
-        
     End If
+    
     LasObservaciones = ""
 End Sub
-                
-                
-                
-                
                 
                 
                 
