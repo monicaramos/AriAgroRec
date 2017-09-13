@@ -399,7 +399,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -514,10 +514,10 @@ Dim cadena As String
             End If
             
             
-            Tabla = "(rentradas INNER JOIN variedades ON rentradas.codvarie = variedades.codvarie) "
+            tabla = "(rentradas INNER JOIN variedades ON rentradas.codvarie = variedades.codvarie) "
 
             'Comprobar si hay registros a Mostrar antes de abrir el Informe
-            If HayRegParaInforme(Tabla, cadSelect) Then
+            If HayRegParaInforme(tabla, cadSelect) Then
             
                 '[Monica]25/03/2014: para el caso de que no haya ausencia de plagas (entradas de quatretonda)
                 Dim cadSelect2 As String
@@ -527,7 +527,7 @@ Dim cadena As String
                 Else
                     cadSelect2 = cadSelect & "rentradas.ausenciaplagas = 0"
                 End If
-                Sql4 = "select count(*) from " & Tabla & " where " & cadSelect2
+                Sql4 = "select count(*) from " & tabla & " where " & cadSelect2
                 If TotalRegistros(Sql4) <> 0 And vParamAplic.CodIncidPlaga = 0 Then
                     MsgBox "Debe introducir un código de incidencia de plaga en parámetros.", vbExclamation
                     Exit Sub
@@ -535,7 +535,7 @@ Dim cadena As String
             
                 If vParamAplic.HayTraza Then
                     cadena = ""
-                    HayReg = HayEntradasSinCRFID(Tabla, cadSelect, cadena)
+                    HayReg = HayEntradasSinCRFID(tabla, cadSelect, cadena)
                     
                     If HayReg Then
                         Set frmMens = New frmMensajes
@@ -551,7 +551,7 @@ Dim cadena As String
                 End If
             
             
-                If ActualizarTabla(Tabla, cadSelect) Then
+                If ActualizarTabla(tabla, cadSelect) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                     cmdCancel_Click (0)
                 End If
@@ -589,7 +589,7 @@ Dim List As Collection
     Me.Pb1.visible = False
     Me.lblProgres.visible = False
     
-    Tabla = "rentradas"
+    tabla = "rentradas"
  
 End Sub
 
@@ -718,11 +718,13 @@ Dim cad As String, cadTipo As String 'tipo cliente
             If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
     
         Case 4, 5 'FECHAS
-            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
-            
-            '[Monica]17/10/2016: obligamos a meter la misma fecha si es Picassent
-            If vParamAplic.Cooperativa = 2 Then
-                If Index = 4 Then txtCodigo(5).Text = txtCodigo(4).Text
+            If txtCodigo(Index).Text <> "" Then
+                If PonerFormatoFecha(txtCodigo(Index)) Then
+                    '[Monica]17/10/2016: obligamos a meter la misma fecha si es Picassent
+                    If vParamAplic.Cooperativa = 2 Then
+                        If Index = 4 Then txtCodigo(5).Text = txtCodigo(4).Text
+                    End If
+                End If
             End If
             
         Case 2, 3 'VARIEDADES
@@ -953,7 +955,7 @@ End Sub
 '
 
 Private Function ActualizarTabla(cTabla As String, cWhere As String) As Boolean
-Dim Rs As ADODB.Recordset
+Dim Rs As adodb.Recordset
 Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
@@ -998,7 +1000,7 @@ Dim fr As frmVisReport
     
     conn.BeginTrans
     
-    Set Rs = New ADODB.Recordset
+    Set Rs = New adodb.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
@@ -1224,12 +1226,12 @@ eActualizarTabla:
 End Function
 
 
-Private Function InsertarCabecera(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
+Private Function InsertarCabecera(ByRef Rs As adodb.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
 Dim Sql1 As String
-Dim RS1 As ADODB.Recordset
-Dim Rs2 As ADODB.Recordset
+Dim RS1 As adodb.Recordset
+Dim Rs2 As adodb.Recordset
 Dim cad As String
 Dim NumCajones As Currency
 Dim Transporte As Currency
@@ -1250,7 +1252,7 @@ Dim Precio As Currency
     Sql1 = Sql1 & " rcampos.codcampo = " & DBSet(Rs!codcampo, "N") & " and "
     Sql1 = Sql1 & " rcampos.codvarie = variedades.codvarie "
     
-    Set Rs2 = New ADODB.Recordset
+    Set Rs2 = New adodb.Recordset
     Rs2.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Precio = 0
@@ -1464,10 +1466,10 @@ End Function
 
 
 
-Private Function EliminarRegistro(ByRef Rs As ADODB.Recordset, cadErr As String) As Boolean
+Private Function EliminarRegistro(ByRef Rs As adodb.Recordset, cadErr As String) As Boolean
 'Insertando en tabla conta.cabfact
 Dim Sql As String
-Dim RS1 As ADODB.Recordset
+Dim RS1 As adodb.Recordset
 Dim cad As String
 Dim NumCajones As Currency
 Dim Transporte As Currency
@@ -1513,7 +1515,7 @@ EEliminar:
 End Function
 
 
-Private Function InsertarClasificacionVC(ByRef Rs As ADODB.Recordset, cadErr As String, OK As Boolean) As Boolean
+Private Function InsertarClasificacionVC(ByRef Rs As adodb.Recordset, cadErr As String, OK As Boolean) As Boolean
 'Dim Sql As String
 'Dim Sql1 As String
 'Dim Rs1 As ADODB.Recordset
@@ -1648,7 +1650,7 @@ End Sub
 Private Function HayEntradasSinCRFID(cTabla As String, cWhere As String, cadena As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
 '[Monica]21/10/2011: antes estaba esto *****  QUITO EL LEFT JOIN : con el left join el sql falla ****
 '    Tabla = "(" & cTabla & ") left join trzpalets on rentradas.numnotac = trzpalets.numnotac "

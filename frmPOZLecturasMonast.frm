@@ -1018,7 +1018,7 @@ Private Sub lw1_Click()
 
 End Sub
 
-Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
+Private Sub lw1_ItemClick(ByVal item As MSComctlLib.ListItem)
 
 '    If Me.Data1.Recordset.EOF Then Exit Sub
 
@@ -1037,6 +1037,10 @@ Private Sub lw1_ItemClick(ByVal Item As MSComctlLib.ListItem)
     
     If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
     If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
+
+    Text1(0).Text = lw1.SelectedItem.ListSubItems(9)
+    
+    If Text1(0).Text = "" Then Text1(0).Text = Format(Now, "dd/mm/yyyy")
 
     PonerFoco Text1(9)
 
@@ -1069,8 +1073,6 @@ Dim J As String
     If lw1.SelectedItem Is Nothing Then Exit Sub
     Screen.MousePointer = vbHourglass
     
-    
-    
     If DatosOK Then
         Sql = "update rpozos set fech_act = " & DBSet(Text1(0).Text, "F") & ", lect_act = " & DBSet(Text1(9).Text, "N")
         Sql = Sql & ", consumo = " & DBSet(Text1(4).Text, "N")
@@ -1093,8 +1095,6 @@ Dim J As String
             lw1.SelectedItem.ListSubItems(1).ForeColor = &H80000008
             lw1.SelectedItem.ListSubItems(5).ForeColor = &H80000008
         End If
-    
-    
     End If
     
     If lw1.SelectedItem.Index + 1 <= lw1.ListItems.Count Then
@@ -1103,15 +1103,9 @@ Dim J As String
         
         lw1_Click
         
-        Set lw1.SelectedItem = Nothing
-        
+'        Set lw1.SelectedItem = Nothing
     End If
     
-'    SiguienteCont = lw1.SelectedItem.ListSubItems(2)
-'    cmdActualizar_Click
-    
-'    Data1.Recordset.Find (Data1.Recordset.Fields(0).Name & " =" & I)
-'    Data1.Recordset.MoveNext
     Me.ChkAusente.Value = 0
     
     Screen.MousePointer = vbDefault
@@ -1300,7 +1294,7 @@ Dim I As Integer
     
     PonerModo 1 'búsqueda
     
-    Text1(0).Text = Format(Now, "dd/mm/yyyy")
+'    Text1(0).Text = Format(Now, "dd/mm/yyyy")
 
 
 
@@ -1522,7 +1516,7 @@ End Sub
 Private Sub TC_Click(Index As Integer)
 
 '    If Data1.Recordset.EOF Then Exit Sub
-    If Me.lw1.SelectedItem = 0 Then Exit Sub
+    If lw1.SelectedItem Is Nothing Then Exit Sub
 
     Text1(kCampo).Text = Text1(kCampo).Text & Format(Index, "0")
     
@@ -1956,12 +1950,14 @@ Dim Encontrado As Boolean
     lw1.ColumnHeaders.Add , , "Consumo", 2300, 1
     lw1.ColumnHeaders.Add , , "Socio", 0
     lw1.ColumnHeaders.Add , , "Nombre", 0
+    lw1.ColumnHeaders.Add , , "FechAnt", 0
+    lw1.ColumnHeaders.Add , , "FechAct", 0
     
     
     
     CadenaConsulta = "select rpozos.codcampo, rcampos.observac, rpozos.hidrante, rpozos.lect_ant, rpozos.lect_act,  "
 '    CadenaConsulta = CadenaConsulta & " if(rpozos.lect_act is null or rpozos.lect_act = 0, 0,rpozos.lect_act - rpozos.lect_ant) consumo, "
-    CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio, rpozos.fech_ant "
+    CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio, rpozos.fech_ant, rpozos.fech_act "
     CadenaConsulta = CadenaConsulta & " from (rpozos inner join rcampos on rpozos.codcampo = rcampos.codcampo) "
     CadenaConsulta = CadenaConsulta & " inner join rsocios on rpozos.codsocio = rsocios.codsocio "
     
@@ -1993,6 +1989,8 @@ Dim Encontrado As Boolean
             It.SubItems(5) = DBLet(Rs!Consumo, "N")
             It.SubItems(6) = DBLet(Rs!Codsocio, "N")
             It.SubItems(7) = DBLet(Rs!nomsocio, "T")
+            It.SubItems(8) = DBLet(Rs!fech_ant, "F")
+            It.SubItems(9) = DBLet(Rs!fech_act, "F")
             
             If Not IsNull(Rs!lect_act) Then
                 It.ForeColor = &HC0C0C0
@@ -2009,7 +2007,7 @@ Dim Encontrado As Boolean
                 
                 Encontrado = False
                 
-                lw1_ItemClick It
+'                lw1_ItemClick It
                 
             Else
                 It.Selected = False
@@ -2021,6 +2019,10 @@ Dim Encontrado As Boolean
             
             Rs.MoveNext
         Wend
+        
+        lw1_ItemClick lw1.SelectedItem
+        
+        
         Rs.Close
         Set Rs = Nothing
     End If

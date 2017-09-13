@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "16:25"
+            TextSave        =   "17:36"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1612,6 +1612,10 @@ Begin VB.MDIForm MDIppal
       Begin VB.Menu mnRec_Pozos 
          Caption         =   "Importacion Lecturas"
          Index           =   33
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "Exportacion Lecturas"
+         Index           =   34
       End
    End
    Begin VB.Menu mnAportaciones 

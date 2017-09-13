@@ -167,8 +167,8 @@ Public MensajeFechaOkConta As String
 
 
 Dim frmLect As frmPOZLecturasMonast
-
-
+Public EsMonasterios As Boolean
+Public Semaforo As Byte
 
 'Inicio Aplicación
 Public Sub Main()
@@ -179,12 +179,14 @@ Public Sub Main()
 '     End If
      
 'cambiarlo por lo de abajo, cuando quiera quitar el login
-       
-'       AbrirConexionSqlMonasterios 0
-'       prueba
-       
+
+       AbrirConexionMonasterios
+
+
+
        Load frmIdentifica
        CadenaDesdeOtroForm = ""
+       
 
        'Necesitaremos el archivo arifon.dat
        frmIdentifica.Show vbModal
@@ -1920,6 +1922,50 @@ On Error GoTo EAbrirConexion
 EAbrirConexion:
     MuestraError Err.Number, "Abrir conexión usuarios.", Err.Description
 End Function
+
+
+Public Sub AbrirConexionMonasterios()
+Dim cad As String
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    On Error Resume Next
+    
+    Set conn = Nothing
+    Set conn = New Connection
+    'Conn.CursorLocation = adUseClient
+    conn.CursorLocation = adUseServer
+    
+'    cad = "DSN=vUsuarios;DESC=MySQL ODBC 3.51 Driver DSN;DATABASE=usuarios;"
+'    cad = cad & "SERVER=" & vConfig.SERVER & ";UID=" & vConfig.User & ";PASSWORD=" & vConfig.password & ";PORT=3306;OPTION=3;STMT=;"
+    
+    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATABASE=ariagro1;SERVER=localhost" '& vConfig.SERVER
+    cad = cad & ";UID=root" ' & vConfig.User
+    cad = cad & ";PWD=aritel" '& vConfig.password
+
+    '++monica: tema del vista
+    cad = cad & ";Persist Security Info=true"
+    '++
+    
+    conn.ConnectionString = cad
+    conn.Open
+    
+    EsMonasterios = False
+    
+    Sql = "select cooperativa from rparam "
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    If Not Rs.EOF Then
+        EsMonasterios = (DBLet(Rs.Fields(0), "N") = 17)
+    End If
+    
+    conn.Close
+    Set conn = Nothing
+End Sub
+
+
+
+
 
 Public Sub CommitConexion()
 On Error Resume Next

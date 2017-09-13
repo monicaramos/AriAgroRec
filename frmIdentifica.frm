@@ -182,6 +182,13 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         
+        
+        If EsMonasterios Then
+            Me.Top = 200
+        End If
+        
+        
+        
         espera 0.5
         Me.Refresh
         
@@ -193,6 +200,7 @@ Private Sub Form_Activate()
              End
              Exit Sub
         End If
+        
         
         Me.Timer1.Enabled = True
         
@@ -229,6 +237,8 @@ Private Sub Form_Activate()
             Text1(0).SetFocus
         End If
         
+        
+        
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -247,6 +257,11 @@ Private Sub Form_Load()
     Label3.Caption = ""
     vSegundos = 60
     Label3.Caption = ""
+    
+    If EsMonasterios Then
+         Me.Top = 200
+    End If
+    
     
     
 End Sub

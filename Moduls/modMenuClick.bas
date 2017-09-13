@@ -1004,7 +1004,11 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
         Case 32: AbrirListadoPOZ (9) ' Rectificación de Lecturas
         
         Case 33: 'frmPOZIndefa.Show vbModal  ' prueba de indefa
-                 AbrirListadoPOZ (21) ' Importacion de de lecturas
+                 AbrirListadoPOZ (21) ' Importacion de lecturas
+                 
+        Case 34: ' Exportacion de lecturas
+                 AbrirListadoPOZ (22) ' Exportacion de lecturas
+                 
     End Select
 End Sub
 
@@ -1147,6 +1151,13 @@ Dim I As Integer
         MDIppal.mnRecG_Admon(8).Caption = "Calles"
         MDIppal.mnRecG_Admon(22).Caption = "Propiedades"
     End If
+    
+    '[Monica]13/09/2017: programas de importacion y exportacion de monasterios
+    MDIppal.mnRec_Pozos(33).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(33).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(34).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(34).visible = (vParamAplic.Cooperativa = 17)
+    
     
     '[Monica]08/09/2017: solo lo ve Monasterios
     MDIppal.mnRec_Monast(1).Enabled = (vParamAplic.Cooperativa = 17)
