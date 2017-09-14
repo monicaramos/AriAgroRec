@@ -271,10 +271,10 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10050
+      Left            =   10005
       TabIndex        =   12
       Top             =   5280
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.Frame Frame1 
       Height          =   540
@@ -414,11 +414,11 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8880
+      Left            =   8790
       TabIndex        =   11
       Top             =   5280
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "&Salir"
@@ -433,11 +433,11 @@ Begin VB.Form frmConfParamRpt
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   10035
+      Left            =   9990
       TabIndex        =   13
       Top             =   5280
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
@@ -707,7 +707,7 @@ Dim Modo As Byte
 '3: Añadir
 '4: Modificar
 
-Dim cadB As String
+Dim CadB As String
 
 
 
@@ -874,11 +874,11 @@ End Sub
 
 
 Private Sub frmTDoc_DatoSeleccionado(CadenaSeleccion As String)
-Dim cadB As String
-    cadB = "codcryst = " & RecuperaValor(CadenaSeleccion, 1)
+Dim CadB As String
+    CadB = "codcryst = " & RecuperaValor(CadenaSeleccion, 1)
     
     'Se muestran en el mismo form
-    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+    CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
     PonerCadenaBusqueda
     Screen.MousePointer = vbDefault
 
@@ -996,15 +996,15 @@ End Sub
 
 Private Sub HacerBusqueda()
 Dim cad As String
-Dim cadB As String
-cadB = ObtenerBusqueda(Me)
+Dim CadB As String
+CadB = ObtenerBusqueda(Me)
 
 If chkVistaPrevia = 1 Then
-    MandaBusquedaPrevia cadB
+    MandaBusquedaPrevia CadB
     Else
         'Se muestran en el mismo form
-        If cadB <> "" Then
-            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & cadB & " " & Ordenacion
+        If CadB <> "" Then
+            CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
             PonerCadenaBusqueda
         End If
 End If
@@ -1142,11 +1142,11 @@ Dim B As Boolean
 End Sub
 
 
-Private Sub MandaBusquedaPrevia(cadB As String)
+Private Sub MandaBusquedaPrevia(CadB As String)
 
     Set frmTDoc = New frmBasico2
     
-    AyudaTiposDocumentos frmTDoc, , cadB
+    AyudaTiposDocumentos frmTDoc, , CadB
     
     Set frmTDoc = Nothing
 

@@ -807,10 +807,10 @@ Begin VB.Form frmCalculoPrecios
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7515
+      Left            =   7425
       TabIndex        =   9
       Top             =   7770
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
@@ -824,10 +824,10 @@ Begin VB.Form frmCalculoPrecios
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   6300
+      Left            =   6210
       TabIndex        =   8
       Top             =   7770
-      Width           =   1035
+      Width           =   1095
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
@@ -888,11 +888,11 @@ Begin VB.Form frmCalculoPrecios
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7530
+      Left            =   7440
       TabIndex        =   14
       Top             =   7770
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
@@ -1384,7 +1384,7 @@ Dim I As Byte
     B = (Modo = 3 Or Modo = 4 Or Modo = 2)
     For I = 1 To ToolAux.Count
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -1409,29 +1409,29 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' calidades
             tabla = "tmppreciosaux"
-            SQL = "SELECT tmppreciosaux.codusu, tmppreciosaux.codvarie, tmppreciosaux.tipofact, tmppreciosaux.codcalid, rcalidad.nomcalid, tmppreciosaux.kilosnet, "
-            SQL = SQL & "tmppreciosaux.porcentaje, tmppreciosaux.precio"
-            SQL = SQL & " FROM " & tabla & " INNER JOIN rcalidad ON tmppreciosaux.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and tmppreciosaux.codcalid = rcalidad.codcalid  "
+            Sql = "SELECT tmppreciosaux.codusu, tmppreciosaux.codvarie, tmppreciosaux.tipofact, tmppreciosaux.codcalid, rcalidad.nomcalid, tmppreciosaux.kilosnet, "
+            Sql = Sql & "tmppreciosaux.porcentaje, tmppreciosaux.precio"
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON tmppreciosaux.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and tmppreciosaux.codcalid = rcalidad.codcalid  "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE tmppreciosaux.codusu = -1"
+                Sql = Sql & " WHERE tmppreciosaux.codusu = -1"
             End If
-            SQL = SQL & " ORDER BY " & tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -1569,14 +1569,14 @@ Dim Nombre As String
 End Sub
 
 Private Function HayPrecios() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     HayPrecios = False
     
-    SQL = "select count(*) from tmppreciosaux where codusu = " & vUsu.Codigo & " and codvarie = " & DBSet(Text1(0).Text, "N")
-    SQL = SQL & " and precio <> 0 "
+    Sql = "select count(*) from tmppreciosaux where codusu = " & vUsu.Codigo & " and codvarie = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " and precio <> 0 "
     
-    HayPrecios = (TotalRegistros(SQL) <> 0)
+    HayPrecios = (TotalRegistros(Sql) <> 0)
 
 End Function
 
@@ -1584,7 +1584,7 @@ End Function
 Private Sub BotonGenerarPrecios()
 Dim vFactu As CFacturaTer
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim cadMen As String
@@ -1604,8 +1604,8 @@ Dim Rs As ADODB.Recordset
         Exit Sub
     Else
         If Me.Check1.Value Then
-            SQL = "select sum(porcentaje) from tmppreciosaux where codusu = " & vUsu.Codigo
-            If DevuelveValor(SQL) <> 100 Then
+            Sql = "select sum(porcentaje) from tmppreciosaux where codusu = " & vUsu.Codigo
+            If DevuelveValor(Sql) <> 100 Then
                 cadMen = "La suma de porcentajes es diferente al 100%."
                 cadMen = cadMen & vbCrLf & vbCrLf & " ¿ Desea continuar ?"
                 If MsgBox(cadMen, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then Exit Sub
@@ -1616,33 +1616,33 @@ Dim Rs As ADODB.Recordset
     conn.BeginTrans
     
     
-    SQL = "select max(contador) "
-    SQL = SQL & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
-    SQL = SQL & " and fechaini = " & DBSet(Text1(2).Text, "F")
-    SQL = SQL & " and fechafin = " & DBSet(Text1(3).Text, "F")
-    SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
+    Sql = "select max(contador) "
+    Sql = Sql & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " and fechaini = " & DBSet(Text1(2).Text, "F")
+    Sql = Sql & " and fechafin = " & DBSet(Text1(3).Text, "F")
+    Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
     
-    Contador = DevuelveValor(SQL)
+    Contador = DevuelveValor(Sql)
     If Contador <> 0 Then
-        SQL = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
-        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
-        SQL = SQL & " and contador = " & DBSet(Contador, "N")
+        Sql = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
+        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
+        Sql = Sql & " and contador = " & DBSet(Contador, "N")
         Select Case Combo1(0).ListIndex
             Case 0
-                SQL = SQL & " and precoop <> 0"
+                Sql = Sql & " and precoop <> 0"
             Case 1
-                SQL = SQL & " and presocio <> 0"
+                Sql = Sql & " and presocio <> 0"
         End Select
         
-        If TotalRegistros(SQL) = 0 Then
+        If TotalRegistros(Sql) = 0 Then
             ' no existen registros para ese tipo de precio : actualizamos o insertamos registros de calidad dependiendo
-            SQL = "select codcalid, precio from tmppreciosaux where codusu = " & vUsu.Codigo
-            SQL = SQL & " and codvarie = " & DBSet(Text1(0).Text, "N")
-            SQL = SQL & " and precio <> 0 "
-            SQL = SQL & " order by 1"
+            Sql = "select codcalid, precio from tmppreciosaux where codusu = " & vUsu.Codigo
+            Sql = Sql & " and codvarie = " & DBSet(Text1(0).Text, "N")
+            Sql = Sql & " and precio <> 0 "
+            Sql = Sql & " order by 1"
             
             Set Rs = New ADODB.Recordset
-            Rs.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
                     
             While Not Rs.EOF
                 Sql2 = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
@@ -1753,36 +1753,36 @@ Dim Rs As ADODB.Recordset
                     Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
                     
                     While Not Rs.EOF
-                        SQL = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
-                        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
-                        SQL = SQL & " and contador = " & DBSet(Contador, "N")
-                        SQL = SQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
+                        Sql = "select count(*) from rprecios_calidad where codvarie = " & DBSet(Text1(0).Text, "N")
+                        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
+                        Sql = Sql & " and contador = " & DBSet(Contador, "N")
+                        Sql = Sql & " and codcalid = " & DBSet(Rs!codcalid, "N")
                         
-                        If TotalRegistros(SQL) <> 0 Then
-                            SQL = "update rprecios_calidad set "
+                        If TotalRegistros(Sql) <> 0 Then
+                            Sql = "update rprecios_calidad set "
                             Select Case Combo1(0).ListIndex
                                 Case 0
-                                    SQL = SQL & " precoop = " & DBSet(Rs!Precio, "N")
+                                    Sql = Sql & " precoop = " & DBSet(Rs!Precio, "N")
                                 Case 1
-                                    SQL = SQL & " presocio= " & DBSet(Rs!Precio, "N")
+                                    Sql = Sql & " presocio= " & DBSet(Rs!Precio, "N")
                             End Select
-                            SQL = SQL & " where codvarie = " & DBSet(Text1(0).Text, "N")
-                            SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
-                            SQL = SQL & " and contador = " & DBSet(Contador, "N")
-                            SQL = SQL & " and codcalid = " & DBSet(Rs!codcalid, "N")
+                            Sql = Sql & " where codvarie = " & DBSet(Text1(0).Text, "N")
+                            Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
+                            Sql = Sql & " and contador = " & DBSet(Contador, "N")
+                            Sql = Sql & " and codcalid = " & DBSet(Rs!codcalid, "N")
                             
                         Else
-                            SQL = "insert into rprecios_calidad (codvarie,tipofact,contador,codcalid,precoop,presocio) values ("
-                            SQL = SQL & DBSet(Text1(0).Text, "N") & "," & Combo1(1).ListIndex & "," & DBSet(Contador, "N") & ","
-                            SQL = SQL & DBSet(Rs!codcalid, "N") & ","
+                            Sql = "insert into rprecios_calidad (codvarie,tipofact,contador,codcalid,precoop,presocio) values ("
+                            Sql = Sql & DBSet(Text1(0).Text, "N") & "," & Combo1(1).ListIndex & "," & DBSet(Contador, "N") & ","
+                            Sql = Sql & DBSet(Rs!codcalid, "N") & ","
                             Select Case Combo1(0).ListIndex
                                 Case 0
-                                    SQL = SQL & DBSet(Rs!Precio, "N") & ",0)" ' & ValorNulo & ")"
+                                    Sql = Sql & DBSet(Rs!Precio, "N") & ",0)" ' & ValorNulo & ")"
                                 Case 1
-                                    SQL = SQL & "0," & DBSet(Rs!Precio, "N") & ")"
+                                    Sql = Sql & "0," & DBSet(Rs!Precio, "N") & ")"
                             End Select
                         End If
-                        conn.Execute SQL
+                        conn.Execute Sql
 
                         Rs.MoveNext
                     Wend
@@ -1796,11 +1796,11 @@ Dim Rs As ADODB.Recordset
         End If
     Else
         ' creamos un regitro nuevo
-        SQL = "select max(contador) "
-        SQL = SQL & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
-        SQL = SQL & " and tipofact = " & Combo1(1).ListIndex
+        Sql = "select max(contador) "
+        Sql = Sql & " from rprecios where codvarie = " & DBSet(Text1(0).Text, "N")
+        Sql = Sql & " and tipofact = " & Combo1(1).ListIndex
 
-        Contador = DevuelveValor(SQL)
+        Contador = DevuelveValor(Sql)
         Contador = Contador + 1
         
         Sql2 = "insert into rprecios (codvarie,tipofact,contador,fechaini,fechafin,textoper,precioindustria) values ("
@@ -1914,8 +1914,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     For I = 1 To DataGridAux.Count ' - 1
         If I <> 3 Then
             CargaGrid I, True
-            If Not AdoAux(I).Recordset.EOF Then _
-                PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
+            If Not Adoaux(I).Recordset.EOF Then _
+                PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
         End If
     Next I
     ' *******************************************
@@ -1967,10 +1967,10 @@ Dim V
                     ' ***********************
 
                     PonerModo 2
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                         ' ***************************************************************
                     End If
 
@@ -2000,7 +2000,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 'Dim Datos As String
 
@@ -2243,7 +2243,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2259,7 +2259,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -2270,25 +2270,25 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'calidad
-            SQL = "¿Seguro que desea eliminar la calidad?"
-            SQL = SQL & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid & " - " & AdoAux(Index).Recordset!nomcalid
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la calidad?"
+            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rprecios_calidad "
-                SQL = SQL & vWhere & " and codcalid = " & DBLet(AdoAux(Index).Recordset!codcalid, "N")
+                Sql = "DELETE FROM rprecios_calidad "
+                Sql = Sql & vWhere & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
             End If
         
     End Select
 
     If Eliminar Then
-        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
         ' ***************************************************
-        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
@@ -2351,7 +2351,7 @@ Dim I As Integer
 '            End If
             ' ***************************************************************
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
 
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -2397,8 +2397,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
 
     ModoLineas = 2 'Modificar llínia
 
@@ -2483,7 +2483,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2501,9 +2501,9 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        SQL = ""
+        Sql = ""
 '        SQL = DevuelveDesdeBDNew(cAgro, "rprecios_calidad", "codcalid", "codvarie", txtaux1(0).Text, "N", , "tipofact", txtaux1(2).Text, "N", "codcalid", txtaux1(1).Text, "N")
-        If SQL <> "" Then
+        If Sql <> "" Then
             MsgBox "Ya existe la calidad. Revise.", vbExclamation
             PonerFoco txtAux1(1)
             B = False
@@ -2740,13 +2740,13 @@ Dim tots As String
     B = DataGridAux(Index).Enabled
     DataGridAux(Index).Enabled = False
     
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
     DataGridAux(Index).ScrollBars = dbgNone
-    AdoAux(Index).Refresh
-    Set DataGridAux(Index).DataSource = AdoAux(Index)
+    Adoaux(Index).Refresh
+    Set DataGridAux(Index).DataSource = Adoaux(Index)
     
     DataGridAux(Index).AllowRowSizing = False
     DataGridAux(Index).RowHeight = 290
@@ -2760,7 +2760,7 @@ Dim tots As String
         DataGridAux(Index).Columns(I).AllowSizing = False
     Next I
     
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     
     'DataGridAux(Index).Enabled = b
@@ -2784,7 +2784,7 @@ Dim tots As String
             
             B = (Modo = 4) And ((ModoLineas = 1) Or (ModoLineas = 2))
 
-            If (enlaza = True) And (Not AdoAux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
+            If (enlaza = True) And (Not Adoaux(Index).Recordset.EOF) Then 'per a que pose els valors de les arees de text la primera volta
             Else
                 For I = 0 To 4
                     txtAux1(I).Text = ""
@@ -2795,7 +2795,7 @@ Dim tots As String
     DataGridAux(Index).ScrollBars = dbgAutomatic
       
     ' **** si n'hi han llínies en grids i camps fora d'estos ****
-    If Not AdoAux(Index).Recordset.EOF Then
+    If Not Adoaux(Index).Recordset.EOF Then
         DataGridAux_RowColChange Index, 1, 1
     Else
         LimpiarCamposFrame Index
@@ -2875,14 +2875,14 @@ Dim cad As String
                 CalculodePreciosPorcentaje
             End If
 
-            V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+            V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
             CargaGrid NumTabMto, True
 
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             If NumTabMto <> 3 Then
                 DataGridAux(NumTabMto).SetFocus
-                AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
             End If
             ' ***********************************************************
 
@@ -3080,7 +3080,7 @@ End Sub
 
 
 Private Function CargarCalidades() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim I As Integer
 Dim arrData()
@@ -3090,25 +3090,25 @@ Dim TotalPorc As Currency
        
     CargarCalidades = False
        
-    SQL = "delete from tmppreciosaux where codusu = " & vUsu.Codigo
+    Sql = "delete from tmppreciosaux where codusu = " & vUsu.Codigo
      
-    conn.Execute SQL
+    conn.Execute Sql
      
-    SQL = "insert into tmppreciosaux (codusu, codvarie, tipofact, codcalid, kilosnet, porcentaje, precio) "
-    SQL = SQL & " select " & vUsu.Codigo & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Combo1(1).ListIndex, "N")
-    SQL = SQL & ",rhisfruta_clasif.codcalid, sum(rhisfruta_clasif.kilosnet) kilosnet, 0, 0  from rhisfruta_clasif "
-    SQL = SQL & " where rhisfruta_clasif.codvarie = " & DBSet(Text1(0), "N")
-    SQL = SQL & " and rhisfruta_clasif.numalbar in (select numalbar from rhisfruta, rsocios where fecalbar >= "
-    SQL = SQL & DBSet(Text1(2).Text, "F") & " and fecalbar <= " & DBSet(Text1(3).Text, "F")
-    SQL = SQL & " and recolect = " & Combo1(0).ListIndex
-    SQL = SQL & " and tipoentr <> 1 and tipoentr <> 3 " ' entradas que no sean venta campo ni industria
-    SQL = SQL & " and rsocios.tipoprod <> 1 "  ' que el socio no sea tercero
-    SQL = SQL & " and rhisfruta.codsocio = rsocios.codsocio) "
-    SQL = SQL & " group by 1, 2, 3, 4 "
-    SQL = SQL & " having kilosnet <> 0 "
-    SQL = SQL & " order by 1, 2, 3, 4 "
+    Sql = "insert into tmppreciosaux (codusu, codvarie, tipofact, codcalid, kilosnet, porcentaje, precio) "
+    Sql = Sql & " select " & vUsu.Codigo & "," & DBSet(Text1(0).Text, "N") & "," & DBSet(Combo1(1).ListIndex, "N")
+    Sql = Sql & ",rhisfruta_clasif.codcalid, sum(rhisfruta_clasif.kilosnet) kilosnet, 0, 0  from rhisfruta_clasif "
+    Sql = Sql & " where rhisfruta_clasif.codvarie = " & DBSet(Text1(0), "N")
+    Sql = Sql & " and rhisfruta_clasif.numalbar in (select numalbar from rhisfruta, rsocios where fecalbar >= "
+    Sql = Sql & DBSet(Text1(2).Text, "F") & " and fecalbar <= " & DBSet(Text1(3).Text, "F")
+    Sql = Sql & " and recolect = " & Combo1(0).ListIndex
+    Sql = Sql & " and tipoentr <> 1 and tipoentr <> 3 " ' entradas que no sean venta campo ni industria
+    Sql = Sql & " and rsocios.tipoprod <> 1 "  ' que el socio no sea tercero
+    Sql = Sql & " and rhisfruta.codsocio = rsocios.codsocio) "
+    Sql = Sql & " group by 1, 2, 3, 4 "
+    Sql = Sql & " having kilosnet <> 0 "
+    Sql = Sql & " order by 1, 2, 3, 4 "
      
-    conn.Execute SQL
+    conn.Execute Sql
      
     CargaGrid 1, True
 
@@ -3122,7 +3122,7 @@ End Function
 
 
 Private Sub CalculodePrecios()
-Dim SQL As String
+Dim Sql As String
 Dim I As Currency
 Dim Rs As ADODB.Recordset
 Dim vCalcul As Currency
@@ -3132,15 +3132,15 @@ Dim Sql2 As String
 
     On Error GoTo eCalculodePrecios
 
-    SQL = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
-    SQL = SQL & " and porcentaje <>0 and porcentaje is not null "
-    SQL = SQL & " order by codcalid "
+    Sql = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
+    Sql = Sql & " and porcentaje <>0 and porcentaje is not null "
+    Sql = Sql & " order by codcalid "
 
     vCalcul = DevuelveValor("select sum(kilosnet * porcentaje / 100) from tmppreciosaux where codusu = " & vUsu.Codigo)
     vCalcul1 = Round2(ImporteSinFormato(Text1(1).Text) / vCalcul, 4)
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     While Not Rs.EOF
         
@@ -3167,7 +3167,7 @@ End Sub
 
 
 Private Sub CalculodePreciosPorcentaje()
-Dim SQL As String
+Dim Sql As String
 Dim I As Currency
 Dim Rs As ADODB.Recordset
 Dim vCalcul As Currency
@@ -3180,9 +3180,9 @@ Dim ImporteTotal As Currency
 
     On Error GoTo eCalculodePreciosPorcentaje
 
-    SQL = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
-    SQL = SQL & " and porcentaje <>0 and porcentaje is not null "
-    SQL = SQL & " order by codcalid "
+    Sql = "select * from tmppreciosaux where codusu = " & vUsu.Codigo
+    Sql = Sql & " and porcentaje <>0 and porcentaje is not null "
+    Sql = Sql & " order by codcalid "
 
     vNetoTotal = DevuelveValor("select sum(kilosnet) from tmppreciosaux where codusu = " & vUsu.Codigo)
     ImporteTotal = ImporteSinFormato(Text1(1).Text)
@@ -3191,7 +3191,7 @@ Dim ImporteTotal As Currency
 '    vCalcul1 = Round2(ImporteSinFormato(Text1(1).Text) / vCalcul, 4)
 '
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     While Not Rs.EOF
         ImporteLin = Round2(ImporteTotal * Rs!Porcentaje / 100, 2)
@@ -3218,11 +3218,11 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGridAux(1).Bookmark < Me.AdoAux(1).Recordset.RecordCount Then
+    If Me.DataGridAux(1).Bookmark < Me.Adoaux(1).Recordset.RecordCount Then
 '        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGridAux(1).Bookmark = DataGridAux(1).Bookmark + 1
         BotonModificarLinea 1
-    ElseIf DataGridAux(1).Bookmark = AdoAux(1).Recordset.RecordCount Then
+    ElseIf DataGridAux(1).Bookmark = Adoaux(1).Recordset.RecordCount Then
 '        PonerFocoBtn Me.cmdAceptar
         BotonModificarLinea 1
     End If

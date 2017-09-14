@@ -250,7 +250,7 @@ Begin VB.Form frmEntBasculaNat2
       Tag             =   "   "
       Top             =   5895
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True

@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmPOZRecibos 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Histórico de Recibos "
-   ClientHeight    =   7245
+   ClientHeight    =   7350
    ClientLeft      =   45
    ClientTop       =   4335
    ClientWidth     =   9630
@@ -13,7 +13,7 @@ Begin VB.Form frmPOZRecibos
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7245
+   ScaleHeight     =   7350
    ScaleWidth      =   9630
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -36,6 +36,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   9165
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   45
          Left            =   180
@@ -47,6 +56,15 @@ Begin VB.Form frmPOZRecibos
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   47
          Left            =   2880
@@ -59,6 +77,15 @@ Begin VB.Form frmPOZRecibos
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   46
          Left            =   1800
@@ -80,6 +107,15 @@ Begin VB.Form frmPOZRecibos
       End
       Begin VB.Label Label1 
          Caption         =   "Tipo Recibo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   17
          Left            =   180
@@ -89,6 +125,15 @@ Begin VB.Form frmPOZRecibos
       End
       Begin VB.Label Label1 
          Caption         =   "Nº Recibo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   14
          Left            =   1800
@@ -98,6 +143,15 @@ Begin VB.Form frmPOZRecibos
       End
       Begin VB.Label Label22 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   2940
          TabIndex        =   148
@@ -118,6 +172,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Es Contado"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   195
       Index           =   3
       Left            =   4170
@@ -127,6 +190,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   1185
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   40
       Left            =   3060
@@ -138,6 +210,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   1050
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   39
       Left            =   1530
@@ -149,6 +230,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   990
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   38
       Left            =   7740
@@ -160,6 +250,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   1380
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   37
       Left            =   5250
@@ -171,6 +270,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   2460
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   36
       Left            =   4200
@@ -194,6 +302,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Pasa Aridoc"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   195
       Index           =   2
       Left            =   4170
@@ -204,6 +321,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   35
       Left            =   3060
@@ -216,6 +342,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   34
       Left            =   1530
@@ -227,6 +362,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   33
       Left            =   210
@@ -249,6 +393,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   32
       Left            =   3360
@@ -282,7 +435,16 @@ Begin VB.Form frmPOZRecibos
       Width           =   525
    End
    Begin VB.ComboBox Combo1 
-      Height          =   315
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   0
       Left            =   210
       Style           =   2  'Dropdown List
@@ -303,6 +465,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   4200
@@ -315,6 +486,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   14
       Left            =   210
@@ -327,6 +507,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   12
       Left            =   1530
@@ -338,6 +527,15 @@ Begin VB.Form frmPOZRecibos
       Width           =   885
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   645
       Index           =   15
       Left            =   5460
@@ -352,6 +550,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   13
       Left            =   2430
@@ -365,6 +572,15 @@ Begin VB.Form frmPOZRecibos
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
       BackColor       =   &H80000013&
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   2010
@@ -377,6 +593,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.TextBox Text1 
       Alignment       =   1  'Right Justify
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   3000
@@ -389,6 +614,15 @@ Begin VB.Form frmPOZRecibos
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   5010
@@ -401,6 +635,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Contabilizado"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   195
       Index           =   1
       Left            =   4170
@@ -411,6 +654,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.CheckBox Check1 
       Caption         =   "Impreso"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   195
       Index           =   0
       Left            =   4170
@@ -430,8 +682,8 @@ Begin VB.Form frmPOZRecibos
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -448,18 +700,36 @@ Begin VB.Form frmPOZRecibos
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   8280
       TabIndex        =   39
-      Top             =   6765
+      Top             =   6585
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   7080
       TabIndex        =   38
-      Top             =   6780
+      Top             =   6600
       Width           =   1035
    End
    Begin MSComctlLib.Toolbar Toolbar1 
@@ -553,6 +823,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   8280
       TabIndex        =   40
@@ -942,6 +1221,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   11
             Left            =   6720
@@ -956,6 +1244,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   10
             Left            =   6060
@@ -971,6 +1268,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   9
             Left            =   5460
@@ -986,6 +1292,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   8
             Left            =   4860
@@ -1001,6 +1316,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   7
             Left            =   4260
@@ -1016,6 +1340,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   6
             Left            =   3660
@@ -1031,6 +1364,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   3
             Left            =   2160
@@ -1045,6 +1387,15 @@ Begin VB.Form frmPOZRecibos
          Begin VB.TextBox txtAux5 
             Alignment       =   1  'Right Justify
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   2
             Left            =   1350
@@ -1060,6 +1411,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             BackColor       =   &H8000000E&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00000000&
             Height          =   315
             Index           =   1
@@ -1076,6 +1436,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   0
             Left            =   180
@@ -1091,6 +1460,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   5
             Left            =   3060
@@ -1106,6 +1484,15 @@ Begin VB.Form frmPOZRecibos
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   290
             Index           =   4
             Left            =   2580
@@ -1208,23 +1595,23 @@ Begin VB.Form frmPOZRecibos
             AllowUpdate     =   0   'False
             BorderStyle     =   0
             HeadLines       =   1
-            RowHeight       =   15
+            RowHeight       =   16
             BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
-               Italic          =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
                Strikethrough   =   0   'False
             EndProperty
             ColumnCount     =   2
@@ -2324,6 +2711,15 @@ Begin VB.Form frmPOZRecibos
    Begin VB.Label Label16 
       Alignment       =   2  'Center
       Caption         =   "/"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   2520
       TabIndex        =   136
@@ -2341,6 +2737,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Albarán / Fecha"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   12
       Left            =   240
@@ -2350,6 +2755,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Toma"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   11
       Left            =   7740
@@ -2359,6 +2773,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Parcelas"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   6
       Left            =   5250
@@ -2368,6 +2791,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Poligono"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   5
       Left            =   4200
@@ -2377,6 +2809,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Precio"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   4
       Left            =   3060
@@ -2386,6 +2827,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Importe"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   3
       Left            =   1530
@@ -2395,6 +2845,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "% Bon./Recargo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   2
       Left            =   210
@@ -2404,6 +2863,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label15 
       Caption         =   "Días"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   3390
       TabIndex        =   101
@@ -2412,6 +2880,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Nº Recibo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   28
       Left            =   2040
@@ -2429,6 +2906,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Socio"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   4230
@@ -2447,6 +2933,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Fecha "
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   29
       Left            =   3000
@@ -2456,6 +2951,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label1 
       Caption         =   "Tipo Recibo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   1
       Left            =   240
@@ -2465,6 +2969,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label3 
       Caption         =   "Consumo"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   1560
       TabIndex        =   62
@@ -2473,6 +2986,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label4 
       Caption         =   "Cuota"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   2460
       TabIndex        =   61
@@ -2481,6 +3003,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label5 
       Caption         =   "Hidrante"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   240
       TabIndex        =   60
@@ -2489,6 +3020,15 @@ Begin VB.Form frmPOZRecibos
    End
    Begin VB.Label Label6 
       Caption         =   "Concepto"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   5460
       TabIndex        =   59

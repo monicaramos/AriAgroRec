@@ -189,11 +189,11 @@ Begin VB.Form frmEntBascula
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13470
+      Left            =   13425
       TabIndex        =   31
       Top             =   7050
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.Frame Frame2 
       BeginProperty Font 
@@ -433,10 +433,10 @@ Begin VB.Form frmEntBascula
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   13470
+      Left            =   13425
       TabIndex        =   24
       Top             =   7050
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
@@ -453,7 +453,7 @@ Begin VB.Form frmEntBascula
       Left            =   12210
       TabIndex        =   23
       Top             =   7050
-      Width           =   1035
+      Width           =   1095
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
@@ -2953,38 +2953,38 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
 Dim Sql As String
-Dim Tabla As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0 'telefonos
-            Tabla = "rsocios_telefonos"
+            tabla = "rsocios_telefonos"
             Sql = "SELECT rsocios_telefonos.codsocio, rsocios_telefonos.idtelefono, rsocios_telefonos.nif, "
             Sql = Sql & " rsocios_telefonos.imei, rsocios_telefonos.codpostal, rsocios_telefonos.nombre, "
             Sql = Sql & " rsocios_telefonos.direccion, rsocios_telefonos.poblacion, rsocios_telefonos.provincia, "
             Sql = Sql & " rsocios_telefonos.telefono1, rsocios_telefonos.sim, rsocios_telefonos.mail, rsocios_telefonos.codbanco, "
             Sql = Sql & " rsocios_telefonos.codsucur, rsocios_telefonos.digcontr, rsocios_telefonos.cuentaba, "
             Sql = Sql & " rsocios_telefonos.observaciones,  rsocios_telefonos.inactivo "
-            Sql = Sql & " FROM " & Tabla
+            Sql = Sql & " FROM " & tabla
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".idtelefono "
+            Sql = Sql & " ORDER BY " & tabla & ".idtelefono "
             
             
        Case 1 ' secciones
-            Tabla = "rsocios_seccion"
+            tabla = "rsocios_seccion"
              Sql = "SELECT rsocios_seccion.codsocio, rsocios_seccion.codsecci, rseccion.nomsecci, rsocios_seccion.fecalta, "
              Sql = Sql & " rsocios_seccion.fecbaja, rsocios_seccion.codmaccli, rsocios_seccion.codmacpro, rsocios_seccion.codiva "
-            Sql = Sql & " FROM " & Tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rseccion ON rsocios_seccion.codsecci = rseccion.codsecci "
             If enlaza Then
                 Sql = Sql & ObtenerWhereCab(True)
             Else
                 Sql = Sql & " WHERE codsocio = -1"
             End If
-            Sql = Sql & " ORDER BY " & Tabla & ".codsecci "
+            Sql = Sql & " ORDER BY " & tabla & ".codsecci "
             
             
     End Select
@@ -6345,7 +6345,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 

@@ -144,12 +144,12 @@ Begin VB.Form frmConfParamGral
       TabCaption(1)   =   "Datos Campaña"
       TabPicture(1)   =   "frmConfParamGral.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label2"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label21"
-      Tab(1).Control(3)=   "imgFec(0)"
-      Tab(1).Control(4)=   "text1(12)"
-      Tab(1).Control(5)=   "text1(11)"
+      Tab(1).Control(0)=   "text1(11)"
+      Tab(1).Control(1)=   "text1(12)"
+      Tab(1).Control(2)=   "imgFec(0)"
+      Tab(1).Control(3)=   "Label21"
+      Tab(1).Control(4)=   "imgFec(1)"
+      Tab(1).Control(5)=   "Label2"
       Tab(1).ControlCount=   6
       Begin VB.TextBox text1 
          BeginProperty Font 
@@ -691,7 +691,7 @@ Begin VB.Form frmConfParamGral
       Left            =   6585
       TabIndex        =   14
       Top             =   6000
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.Frame Frame1 
       Height          =   630
@@ -734,7 +734,7 @@ Begin VB.Form frmConfParamGral
       TabIndex        =   13
       Top             =   6000
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "&Salir"
@@ -751,7 +751,7 @@ Begin VB.Form frmConfParamGral
       Left            =   6570
       TabIndex        =   16
       Top             =   6000
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.TextBox text1 
       Height          =   285
@@ -886,7 +886,7 @@ Dim Encontrado As Boolean
 
 Private Sub cmdAceptar_Click()
     If Modo = 3 Then
-        If DatosOk Then
+        If DatosOK Then
             'Cambiamos el path
             'CambiaPath True
             If InsertarDesdeForm(Me) Then
@@ -900,7 +900,7 @@ Private Sub cmdAceptar_Click()
     
     
     If Modo = 4 Then
-        If DatosOk Then
+        If DatosOK Then
             'Modifica datos en la Tabla: sparam
             If Not ModificaDesdeFormulario(Me) Then Exit Sub
             
@@ -954,7 +954,7 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -974,9 +974,9 @@ Dim i As Integer
     End With
     
     'carga IMAGES de mail
-    For i = 0 To Me.imgMail.Count - 1
-        Me.imgMail(i).Picture = frmPpal.imgListImages16.ListImages(2).Picture
-    Next i
+    For I = 0 To Me.imgMail.Count - 1
+        Me.imgMail(I).Picture = frmPpal.imgListImages16.ListImages(2).Picture
+    Next I
     
     VieneDeBuscar = False
     
@@ -1121,9 +1121,9 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
@@ -1163,11 +1163,11 @@ Private Sub BotonModificar()
     PonerFoco Text1(1)
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-    DatosOk = False
-    b = CompForm(Me)
-    DatosOk = b
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+    DatosOK = False
+    B = CompForm(Me)
+    DatosOK = B
 End Function
 '
 'Private Sub KEYpress(KeyAscii As Integer)
@@ -1177,29 +1177,29 @@ End Function
 '    If cerrar Then Unload Me
 'End Sub
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    Me.cmdSalir.visible = b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    Me.cmdSalir.visible = B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 Private Sub PonerModo(vModo As Byte)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
-    b = (Modo = 0)
+    B = (Modo = 0)
     PonerIndicador Me.lblIndicador, Modo
 '    If b Then Me.lblIndicador.Caption = ""
     
 ' ### [Monica] 13/11/2006
-    b = (Modo >= 3) '-->Luego not b sera kmodo<3
+    B = (Modo >= 3) '-->Luego not b sera kmodo<3
     If cmdCancelar.visible Then
         cmdCancelar.Cancel = True
     Else
         cmdCancelar.Cancel = False
     End If
-    PonerBotonCabecera Not b
+    PonerBotonCabecera Not B
 
     
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
@@ -1214,8 +1214,8 @@ Dim b As Boolean
     'cmdAceptar.Enabled = (vUsu.Nivel <= 1)
     
     'Modificar
-    Toolbar1.Buttons(1).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnModificar.Enabled = B
 
 ' ### [Monica] 13/11/2006
     PonerModoOpcionesMenu 'Activar opciones de menu según el Modo
@@ -1250,12 +1250,12 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub PonerModoOpcionesMenu()
-Dim b As Boolean
-    b = (Modo = 3) Or (Modo = 4)
-    Me.Toolbar1.Buttons(1).Enabled = Not Encontrado And Not b  'Añadir
-    Me.Toolbar1.Buttons(2).Enabled = Encontrado And Not b 'Modificar
-    Me.mnAñadir.Enabled = Not Encontrado And Not b
-    Me.mnModificar.Enabled = Encontrado And Not b
+Dim B As Boolean
+    B = (Modo = 3) Or (Modo = 4)
+    Me.Toolbar1.Buttons(1).Enabled = Not Encontrado And Not B  'Añadir
+    Me.Toolbar1.Buttons(2).Enabled = Encontrado And Not B 'Modificar
+    Me.mnAñadir.Enabled = Not Encontrado And Not B
+    Me.mnModificar.Enabled = Encontrado And Not B
 '    Me.Toolbar1.Buttons(2).Enabled = (Not b) 'Modificar
 End Sub
 

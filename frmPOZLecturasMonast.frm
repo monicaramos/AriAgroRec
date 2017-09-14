@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmPOZLecturasMonast 
-   BorderStyle     =   3  'Fixed Dialog
+   BorderStyle     =   1  'Fixed Single
    Caption         =   "Toma de Lecturas"
    ClientHeight    =   13665
    ClientLeft      =   45
@@ -24,7 +24,6 @@ Begin VB.Form frmPOZLecturasMonast
    Moveable        =   0   'False
    ScaleHeight     =   13665
    ScaleWidth      =   11475
-   ShowInTaskbar   =   0   'False
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
    Begin VB.Frame Frame3 
       Caption         =   "Lecturas"

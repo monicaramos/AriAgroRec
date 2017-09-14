@@ -602,8 +602,8 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
         Case 16:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
                  If vParamAplic.Cooperativa = 9 Then   ' caso de natural de montaña
-                        frmPagoRecibos.OpcionListado = 2
-                        frmPagoRecibos.Show vbModal 'Pago de Recibos
+                    frmPagoRecibos.OpcionListado = 2
+                    frmPagoRecibos.Show vbModal 'Pago de Recibos
                  Else
                     If vParamAplic.Cooperativa = 16 Then
                         AbrirListadoNominas (37)

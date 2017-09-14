@@ -71,7 +71,7 @@ Begin VB.MDIForm MDIppal
             Object.ToolTipText     =   "Facturas Socios"
          EndProperty
          BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   4
+            Object.ToolTipText     =   "Entrada de Lecturas"
             Object.Width           =   1e-4
          EndProperty
          BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "17:36"
+            TextSave        =   "18:08"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1861,7 +1861,9 @@ Dim cad As String
         ' el 11 separador
         .Buttons(12).Image = 9   'Mantenimiento de precios
         .Buttons(13).Image = 23   'Facturas de socios
-        ' el 14 separador
+        '
+        .Buttons(14).Image = 24   'entrada de lecturas
+        
         .Buttons(15).Image = 37   'Cambio de campaña
         ' el 16 separador
         .Buttons(17).Image = 1   'Salir
@@ -2150,6 +2152,8 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
             SubmnC_RecoleccionG_PagoSocios_Click (1)
         Case 13 ' Facturas de socios
             SubmnC_RecoleccionG_FacturasSocios_Click (1) '[Monica]15/02/2013: antes 3
+        Case 14 ' entrada de lecturas de pozos (solo para Monasterios)
+            SubmnC_RecoleccionG_Pozos_Click (5)
         Case 15 ' Cambio de campaña
             mnCambioEmpresa_Click
         Case 17 ' Salir de la aplicacion
@@ -2538,6 +2542,11 @@ Private Sub PoneBarraMenus()
     'facturas socios
     MDIppal.Toolbar1.Buttons(13).Enabled = MDIppal.mnRec_FacturasSocios(1).visible And mnFacturasSocios.visible
     MDIppal.Toolbar1.Buttons(13).visible = MDIppal.mnRec_FacturasSocios(1).visible And mnFacturasSocios.visible
+    
+    'Entrada de lecturas
+    MDIppal.Toolbar1.Buttons(14).Enabled = MDIppal.mnRec_Pozos(5).visible
+    MDIppal.Toolbar1.Buttons(14).visible = MDIppal.mnRec_Pozos(5).visible
+    
     'cambio de campaña
     MDIppal.Toolbar1.Buttons(15).Enabled = MDIppal.mnP_Generales(7).visible And mnParametros(1).visible
     MDIppal.Toolbar1.Buttons(15).visible = MDIppal.mnP_Generales(7).visible And mnParametros(1).visible

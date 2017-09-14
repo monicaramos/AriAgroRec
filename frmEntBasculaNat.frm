@@ -381,10 +381,10 @@ Begin VB.Form frmEntBasculaNat
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12330
+      Left            =   12285
       TabIndex        =   23
       Top             =   6990
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
@@ -401,7 +401,7 @@ Begin VB.Form frmEntBasculaNat
       Left            =   11070
       TabIndex        =   22
       Top             =   6990
-      Width           =   1035
+      Width           =   1095
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
@@ -415,11 +415,11 @@ Begin VB.Form frmEntBasculaNat
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12330
+      Left            =   12285
       TabIndex        =   30
       Top             =   6990
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1095
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   5130
