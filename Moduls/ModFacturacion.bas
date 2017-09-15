@@ -5066,7 +5066,7 @@ Dim PgbVisible As Boolean
             vFactuADV.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuADV.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuADV.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuADV.nif = DBLet(RsAlb!nifsocio, "T")
+            vFactuADV.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuADV.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuADV.ForPago = Forpa
 '[Monica] 09/02/2010 la forma de pago está en la contabilidad de adv
@@ -6961,7 +6961,7 @@ Dim PgbVisible As Boolean
             vFactuBOD.CPostal = DBLet(RsAlb!codpostal, "T")
             vFactuBOD.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuBOD.Provincia = DBLet(RsAlb!prosocio, "T")
-            vFactuBOD.nif = DBLet(RsAlb!nifsocio, "T")
+            vFactuBOD.nif = DBLet(RsAlb!nifSocio, "T")
             vFactuBOD.Telefono = DBLet(RsAlb!telsoci1, "T")
             vFactuBOD.ForPago = Forpa
             vFactuBOD.TipForPago = DBSet(DevuelveDesdeBDNew(cAgro, "forpago", "tipoforp", "codforpa", Forpa, "N"), "N")
@@ -10591,13 +10591,59 @@ On Error GoTo EFacturacionTransporteSocio
     
     Sql = "select rclasifica.codsocio, rclasifica.codvarie, "
     Sql = Sql & "rclasifica.codcampo, rclasifica.numnotac, rclasifica.fechaent, rclasifica.transportadopor, rclasifica.recolect, rclasifica.codtarif, sum(if(isnull(rclasifica.kilosnet),0,rclasifica.kilosnet)) kilosnet, sum(if(isnull(rclasifica.impacarr),0,rclasifica.impacarr)) impacarr, sum(if(isnull(rclasifica.imprecol),0,rclasifica.imprecol)) imprecol, sum(if(isnull(rclasifica.kilostra),0,rclasifica.kilostra)) kilostra, sum(if(isnull(rclasifica.imppenal),0,rclasifica.imppenal)) imppenal, 0 tipo from " & cTabla
-    If cWhere <> "" Then Sql = Sql & " where " & cWhere
+    If cWhere <> "" Then
+        Sql = Sql & " where " & cWhere
+    Else
+        Sql = Sql & " where (1=1) "
+    End If
+    '[Monica]11/09/2017: añadida esta condicion de que la variedad no esté en las relacionadas
+    Sql = Sql & " and not rclasifica.codvarie in (select codvarie1 from variedades_rel)"
     
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8"
     Sql = Sql & " union "
+    
+    '[Monica]11/09/2017: añadida toda esta parte de la union
+    Sql = "select rclasifica.codsocio, variedades_rel.codvarie, "
+    Sql = Sql & "rclasifica.codcampo, rclasifica.numnotac, rclasifica.fechaent, rclasifica.transportadopor, rclasifica.recolect, rclasifica.codtarif, sum(if(isnull(rclasifica.kilosnet),0,rclasifica.kilosnet)) kilosnet, sum(if(isnull(rclasifica.impacarr),0,rclasifica.impacarr)) impacarr, sum(if(isnull(rclasifica.imprecol),0,rclasifica.imprecol)) imprecol, sum(if(isnull(rclasifica.kilostra),0,rclasifica.kilostra)) kilostra, sum(if(isnull(rclasifica.imppenal),0,rclasifica.imppenal)) imppenal, 0 tipo from (" & cTabla & ") "
+    Sql = Sql & " INNER JOIN variedades_rel ON rclasifica.codvarie = variedades_rel.codvarie1 "
+    If cWhere <> "" Then
+        Sql = Sql & " where " & cWhere
+    Else
+        Sql = Sql & " where (1=1) "
+    End If
+    Sql = Sql & " and rclasifica.codvarie in (select codvarie1 from variedades_rel)"
+    
+    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8"
+    Sql = Sql & " union "
+    ' hasta aqui
+    
+    
     Sql = Sql & "select rhisfruta.codsocio, rhisfruta.codvarie, "
     Sql = Sql & "rhisfruta.codcampo, rhisfruta_entradas.numnotac, rhisfruta_entradas.fechaent, rhisfruta.transportadopor, rhisfruta.recolect, rhisfruta_entradas.codtarif, sum(if(isnull(rhisfruta_entradas.kilosnet),0,rhisfruta_entradas.kilosnet)) kilosnet, sum(if(isnull(rhisfruta_entradas.impacarr),0,rhisfruta_entradas.impacarr)) impacarr, sum(if(isnull(rhisfruta_entradas.imprecol),0,rhisfruta_entradas.imprecol)) imprecol, sum(if(isnull(rhisfruta_entradas.kilostra),0,rhisfruta_entradas.kilostra)) kilostra, sum(if(isnull(rhisfruta_entradas.imppenal),0,rhisfruta_entradas.imppenal)) imppenal, 1 tipo from " & ctabla1
-    If cwhere1 <> "" Then Sql = Sql & " where " & cwhere1
+    If cwhere1 <> "" Then
+        Sql = Sql & " where " & cwhere1
+    Else
+        Sql = Sql & " where (1=1) "
+    End If
+    '[Monica]11/09/2017: añadida esta condicion de que la variedad no esté en las relacionadas
+    Sql = Sql & " and not rhisfruta.codvarie in (select codvarie1 from variedades_rel)"
+    
+    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8"
+    
+    '[Monica]11/09/2017: añadida toda esta parte de la union
+    Sql = Sql & " union "
+    Sql = Sql & " select rhisfruta.codsocio, rhisfruta.codvarie, "
+    Sql = Sql & "rhisfruta.codcampo, rhisfruta_entradas.numnotac, rhisfruta_entradas.fechaent, rhisfruta.transportadopor, rhisfruta.recolect, rhisfruta_entradas.codtarif, sum(if(isnull(rhisfruta_entradas.kilosnet),0,rhisfruta_entradas.kilosnet)) kilosnet, sum(if(isnull(rhisfruta_entradas.impacarr),0,rhisfruta_entradas.impacarr)) impacarr, sum(if(isnull(rhisfruta_entradas.imprecol),0,rhisfruta_entradas.imprecol)) imprecol, sum(if(isnull(rhisfruta_entradas.kilostra),0,rhisfruta_entradas.kilostra)) kilostra, sum(if(isnull(rhisfruta_entradas.imppenal),0,rhisfruta_entradas.imppenal)) imppenal, 1 tipo from (" & ctabla1 & ") "
+    Sql = Sql & " INNER JOIN variedades_rel ON rhisfruta.codvarie = variedades_rel.codvarie1 "
+    
+    If cwhere1 <> "" Then
+        Sql = Sql & " where " & cwhere1
+    Else
+        Sql = Sql & " where (1=1) "
+    End If
+    Sql = Sql & " and rhisfruta.codvarie in (select codvarie1 from variedades_rel)"
+    ' hasta aqui
+    
     
     Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8"
     Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8"
@@ -14328,7 +14374,7 @@ End Function
 
 
 
-Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef ImpIVA As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
+Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As Variant, ByRef Tipiva As Variant, ByRef Impbas As Variant, ByRef impiva As Variant, ByRef PorIva As Variant, ByRef TotFac As Currency, ByRef ImpREC As Variant, ByRef PorRec As Variant, ByRef PorRet As Variant, ByRef ImpRet As Variant, Optional Socio As String, Optional Tipo As String)
 
     Dim I As Integer
     Dim Sql As String
@@ -14348,7 +14394,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
          Tipiva(I) = 0
          ImpTot(I) = 0
          Impbas(I) = 0
-         ImpIVA(I) = 0
+         impiva(I) = 0
          PorIva(I) = 0
          PorRec(I) = 0
          ImpREC(I) = 0
@@ -14370,9 +14416,9 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
  
             PorIva(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", CStr(Tipiva(I)), "N")
             PorRec(I) = DevuelveDesdeBDNew(cConta, "tiposiva", "porcerec", "codigiva", CStr(Tipiva(I)), "N")
-            ImpIVA(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
+            impiva(I) = DBLet(Round2(Impbas(I) * PorIva(I) / 100, 2), "N")
             ImpREC(I) = DBLet(Round2(Impbas(I) * PorRec(I) / 100, 2), "N")
-            ImpTot(I) = Impbas(I) + ImpIVA(I) + ImpREC(I)
+            ImpTot(I) = Impbas(I) + impiva(I) + ImpREC(I)
             TotFac = TotFac + ImpTot(I)
  
 'antes el iva estaba incluido
@@ -14394,7 +14440,7 @@ Public Sub RecalculoBasesIvaFactura(ByRef Rs As ADODB.Recordset, ByRef ImpTot As
             Select Case Sql
                 Case 0
                     For I = 0 To baseimpo.Count - 1
-                        Base = Base + Impbas(I) + ImpIVA(I)
+                        Base = Base + Impbas(I) + impiva(I)
                     Next I
                 Case 1
                     For I = 0 To baseimpo.Count - 1
