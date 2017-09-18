@@ -10603,7 +10603,7 @@ On Error GoTo EFacturacionTransporteSocio
     Sql = Sql & " union "
     
     '[Monica]11/09/2017: añadida toda esta parte de la union
-    Sql = "select rclasifica.codsocio, variedades_rel.codvarie, "
+    Sql = Sql & "select rclasifica.codsocio, variedades_rel.codvarie, "
     Sql = Sql & "rclasifica.codcampo, rclasifica.numnotac, rclasifica.fechaent, rclasifica.transportadopor, rclasifica.recolect, rclasifica.codtarif, sum(if(isnull(rclasifica.kilosnet),0,rclasifica.kilosnet)) kilosnet, sum(if(isnull(rclasifica.impacarr),0,rclasifica.impacarr)) impacarr, sum(if(isnull(rclasifica.imprecol),0,rclasifica.imprecol)) imprecol, sum(if(isnull(rclasifica.kilostra),0,rclasifica.kilostra)) kilostra, sum(if(isnull(rclasifica.imppenal),0,rclasifica.imppenal)) imppenal, 0 tipo from (" & cTabla & ") "
     Sql = Sql & " INNER JOIN variedades_rel ON rclasifica.codvarie = variedades_rel.codvarie1 "
     If cWhere <> "" Then

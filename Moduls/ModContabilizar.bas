@@ -2510,7 +2510,7 @@ Dim CadenaInsertFaclin2 As String
         Sql = Sql & DBSet(Observac, "T") & "," '& ValorNulo & ","
         
         '[Monica]30/08/2017
-        vContaFra.Observa = Observac
+        vContaFra.observa = Observac
         
         If vParamAplic.ContabilidadNueva Then
             ' para el caso de las rectificativas
@@ -4808,6 +4808,7 @@ Dim TotImpIVA As Currency
         
         ' si se trata de una liquidacion hemos de descontar los anticipos por variedad
         ' que no sean anticipo de gastos
+        '[Monica]18/09/2017: faltaba añadir el tipo = 11
         If (Tipo = 2 Or Tipo = 4 Or Tipo = 8 Or Tipo = 10) And TipoFact <> "FTS" Then
             Sql3 = "select sum(baseimpo) from rfactsoc_anticipos, variedades "
             Sql3 = Sql3 & " where " & Replace(cadWHERE, "rfactsoc", "rfactsoc_anticipos")
@@ -5372,7 +5373,7 @@ Dim CadenaInsertFaclin2 As String
             End Select
             
             '[Monica]30/08/2017
-            vContaFra.Observa = Concepto
+            vContaFra.observa = Concepto
             
             Sql = ""
             
@@ -5588,7 +5589,7 @@ Dim CadenaInsertFaclin2 As String
                 End Select
                     
                 '[Monica]30/08/2017
-                vContaFra.Observa = Concepto
+                vContaFra.observa = Concepto
                     
                 Sql = ""
                 If vParamAplic.ContabilidadNueva Then Sql = "'" & SerieFraPro & "',"
@@ -7829,7 +7830,7 @@ Dim CadenaInsertFaclin2 As String
             Concepto = "ALMAZARA ACEITE"
             
             '[Monica]30/08/2017
-            vContaFra.Observa = Concepto
+            vContaFra.observa = Concepto
             
             Sql = ""
             If vParamAplic.ContabilidadNueva Then Sql = Sql & DBSet(SerieFraPro, "T") & ","
@@ -8459,7 +8460,7 @@ Dim CadenaInsertFaclin2 As String
         End If
         
         '[Monica]30/08/2017
-        vContaFra.Observa = Concepto
+        vContaFra.observa = Concepto
 
         CtaSocio = Rs!codmacpro
         
@@ -9941,7 +9942,7 @@ Dim CadenaInsertFaclin2 As String
             End Select
             
             '[Monica]30/08/2017
-            vContaFra.Observa = Concepto
+            vContaFra.observa = Concepto
             
             
             Sql = ""
@@ -10841,7 +10842,7 @@ Dim CadenaInsertFaclin2 As String
             Sql = "'" & Rs!letraser & "'," & Rs!numfactu & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!fecfactu, "F") & "," & DBSet(Rs!Codmacta, "T") & "," & Year(Rs!fecfactu) & "," & DBSet(Observac, "T") & ","
             
             '[Monica]30/08/2017
-            vContaFra.Observa = Observac
+            vContaFra.observa = Observac
             
             
             

@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:08"
+            TextSave        =   "18:12"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1614,8 +1614,20 @@ Begin VB.MDIForm MDIppal
          Index           =   33
       End
       Begin VB.Menu mnRec_Pozos 
-         Caption         =   "Exportacion Lecturas"
+         Caption         =   "-"
          Index           =   34
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "Introducción Lecturas"
+         Index           =   35
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "-"
+         Index           =   36
+      End
+      Begin VB.Menu mnRec_Pozos 
+         Caption         =   "Exportacion Lecturas"
+         Index           =   37
       End
    End
    Begin VB.Menu mnAportaciones 
@@ -2544,8 +2556,13 @@ Private Sub PoneBarraMenus()
     MDIppal.Toolbar1.Buttons(13).visible = MDIppal.mnRec_FacturasSocios(1).visible And mnFacturasSocios.visible
     
     'Entrada de lecturas
-    MDIppal.Toolbar1.Buttons(14).Enabled = MDIppal.mnRec_Pozos(5).visible
-    MDIppal.Toolbar1.Buttons(14).visible = MDIppal.mnRec_Pozos(5).visible
+    If vParamAplic.Cooperativa = 17 Then
+        MDIppal.Toolbar1.Buttons(14).Enabled = MDIppal.mnRec_Pozos(35).visible
+        MDIppal.Toolbar1.Buttons(14).visible = MDIppal.mnRec_Pozos(35).visible
+    Else
+        MDIppal.Toolbar1.Buttons(14).Enabled = MDIppal.mnRec_Pozos(5).visible
+        MDIppal.Toolbar1.Buttons(14).visible = MDIppal.mnRec_Pozos(5).visible
+    End If
     
     'cambio de campaña
     MDIppal.Toolbar1.Buttons(15).Enabled = MDIppal.mnP_Generales(7).visible And mnParametros(1).visible

@@ -4,7 +4,6 @@ Attribute VB_Name = "Errores"
 '
 ' Si tiene error el objeto conn entonces lo mostramos
 '
-'
 '---------------------------------------------------------------
 
 Public Sub ControlamosError(ByRef cadena As String)
@@ -60,13 +59,13 @@ End Sub
 
 
 Private Function CadenaDesde(Inicio As Integer, cadena As String, Caracter As String) As String
-Dim i, J
+Dim I, J
 CadenaDesde = ""
-i = InStr(Inicio, cadena, Caracter)
-If i >= Inicio Then
-    J = InStr(i + 1, cadena, Caracter)
-    i = i + 1
-    If J > 0 Then CadenaDesde = Mid(cadena, i, J - i)
+I = InStr(Inicio, cadena, Caracter)
+If I >= Inicio Then
+    J = InStr(I + 1, cadena, Caracter)
+    I = I + 1
+    If J > 0 Then CadenaDesde = Mid(cadena, I, J - I)
 End If
 End Function
 

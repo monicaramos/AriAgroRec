@@ -1331,7 +1331,9 @@ Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
 
     
     ' el concepto
-    Combo1(1).ListIndex = 1
+    If Combo1(1).ListIndex = -1 Then
+        Combo1(1).ListIndex = 0
+    End If
     
     
     If UltimaLectura <> "" Then
