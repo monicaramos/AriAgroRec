@@ -1012,7 +1012,10 @@ Public Sub SubmnC_RecoleccionG_Pozos_Click(Index As Integer)
                 Else
                     frmPOZLecturas.Show vbModal ' Introduccion de lectura
                 End If
-        Case 37: ' Exportacion de lecturas
+                
+        Case 37: AbrirListadoPOZ (2)  ' Listado de comprobacion
+                
+        Case 39: ' Exportacion de lecturas
                  AbrirListadoPOZ (22) ' Exportacion de lecturas
                  
     End Select
@@ -1161,10 +1164,15 @@ Dim I As Integer
     '[Monica]13/09/2017: programas de importacion y exportacion de monasterios
     MDIppal.mnRec_Pozos(33).Enabled = (vParamAplic.Cooperativa = 17)
     MDIppal.mnRec_Pozos(33).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(34).visible = (vParamAplic.Cooperativa = 17)
     MDIppal.mnRec_Pozos(35).Enabled = (vParamAplic.Cooperativa = 17)
     MDIppal.mnRec_Pozos(35).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(36).visible = (vParamAplic.Cooperativa = 17)
     MDIppal.mnRec_Pozos(37).Enabled = (vParamAplic.Cooperativa = 17)
     MDIppal.mnRec_Pozos(37).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(38).visible = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(39).Enabled = (vParamAplic.Cooperativa = 17)
+    MDIppal.mnRec_Pozos(39).visible = (vParamAplic.Cooperativa = 17)
     
     
     '[Monica]08/09/2017: solo lo ve Monasterios
