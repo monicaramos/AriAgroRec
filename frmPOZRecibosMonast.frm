@@ -2,32 +2,21 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
-Begin VB.Form frmPOZRecibos 
+Begin VB.Form frmPOZRecibosMonast 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Histórico de Recibos "
-   ClientHeight    =   7635
+   ClientHeight    =   7530
    ClientLeft      =   45
    ClientTop       =   4035
    ClientWidth     =   10350
-   Icon            =   "frmPOZRecibos.frx":0000
+   Icon            =   "frmPOZRecibosMonast.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7635
+   ScaleHeight     =   7530
    ScaleWidth      =   10350
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.PictureBox cmdCuotas 
-      BorderStyle     =   0  'None
-      Height          =   435
-      Left            =   6525
-      ScaleHeight     =   435
-      ScaleWidth      =   525
-      TabIndex        =   157
-      ToolTipText     =   "Cuotas"
-      Top             =   510
-      Width           =   525
-   End
    Begin VB.Frame FrameRectifica 
       Caption         =   "Factura Rectificativa "
       BeginProperty Font 
@@ -44,7 +33,7 @@ Begin VB.Form frmPOZRecibos
       Left            =   180
       TabIndex        =   142
       Top             =   3135
-      Width           =   10050
+      Width           =   15
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -111,7 +100,7 @@ Begin VB.Form frmPOZRecibos
          Height          =   240
          Index           =   6
          Left            =   4035
-         Picture         =   "frmPOZRecibos.frx":000C
+         Picture         =   "frmPOZRecibosMonast.frx":000C
          ToolTipText     =   "Buscar fecha"
          Top             =   240
          Width           =   240
@@ -284,9 +273,9 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   7155
+      Left            =   6795
       TabIndex        =   150
-      Top             =   135
+      Top             =   180
       Width           =   1605
    End
    Begin VB.Frame Frame5 
@@ -533,7 +522,7 @@ Begin VB.Form frmPOZRecibos
    Begin VB.PictureBox cmdRectificativa 
       BorderStyle     =   0  'None
       Height          =   435
-      Left            =   7125
+      Left            =   6765
       ScaleHeight     =   435
       ScaleWidth      =   525
       TabIndex        =   141
@@ -663,7 +652,7 @@ Begin VB.Form frmPOZRecibos
    Begin VB.PictureBox cmdCampos 
       BorderStyle     =   0  'None
       Height          =   435
-      Left            =   7725
+      Left            =   7455
       ScaleHeight     =   435
       ScaleWidth      =   525
       TabIndex        =   114
@@ -754,7 +743,7 @@ Begin VB.Form frmPOZRecibos
    Begin VB.PictureBox cmdHidrantes 
       BorderStyle     =   0  'None
       Height          =   435
-      Left            =   8355
+      Left            =   8175
       ScaleHeight     =   435
       ScaleWidth      =   525
       TabIndex        =   100
@@ -786,7 +775,7 @@ Begin VB.Form frmPOZRecibos
    Begin VB.PictureBox cmdParticipa 
       BorderStyle     =   0  'None
       Height          =   435
-      Left            =   8985
+      Left            =   8895
       ScaleHeight     =   435
       ScaleWidth      =   525
       TabIndex        =   88
@@ -915,7 +904,7 @@ Begin VB.Form frmPOZRecibos
       ScrollBars      =   2  'Vertical
       TabIndex        =   16
       Tag             =   "Conceptol|T|S|||rrecibpozos|concepto|||"
-      Text            =   "frmPOZRecibos.frx":0097
+      Text            =   "frmPOZRecibosMonast.frx":0097
       Top             =   2250
       Width           =   4020
    End
@@ -1046,7 +1035,7 @@ Begin VB.Form frmPOZRecibos
       Index           =   0
       Left            =   210
       TabIndex        =   40
-      Top             =   7065
+      Top             =   6930
       Width           =   2220
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1082,7 +1071,7 @@ Begin VB.Form frmPOZRecibos
       Height          =   375
       Left            =   9090
       TabIndex        =   38
-      Top             =   7170
+      Top             =   7035
       Width           =   1095
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1099,7 +1088,7 @@ Begin VB.Form frmPOZRecibos
       Height          =   375
       Left            =   7935
       TabIndex        =   37
-      Top             =   7185
+      Top             =   7050
       Width           =   1095
    End
    Begin VB.CommandButton cmdRegresar 
@@ -1116,7 +1105,7 @@ Begin VB.Form frmPOZRecibos
       Height          =   375
       Left            =   9090
       TabIndex        =   39
-      Top             =   7185
+      Top             =   7050
       Visible         =   0   'False
       Width           =   1095
    End
@@ -1340,626 +1329,6 @@ Begin VB.Form frmPOZRecibos
          EndProperty
       EndProperty
    End
-   Begin VB.Frame Frame3 
-      Caption         =   "Lectura Anterior"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   -1  'True
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00800000&
-      Height          =   2835
-      Left            =   180
-      TabIndex        =   48
-      Top             =   4200
-      Width           =   3165
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   42
-         Left            =   1455
-         MaxLength       =   10
-         TabIndex        =   28
-         Tag             =   "Fecha lectura anterior2|F|S|||rrecibpozos|fech_ant2|dd/mm/yyyy||"
-         Text            =   "1234567890"
-         Top             =   1980
-         Width           =   1290
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   41
-         Left            =   1455
-         MaxLength       =   7
-         TabIndex        =   27
-         Tag             =   "Lectura Anterior2|N|S|||rrecibpozos|lect_ant2|0000000||"
-         Text            =   "1234567"
-         Top             =   1500
-         Width           =   1290
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   8
-         Left            =   1455
-         MaxLength       =   7
-         TabIndex        =   25
-         Tag             =   "Lectura Anterior|N|S|||rrecibpozos|lect_ant|0000000||"
-         Text            =   "1234567"
-         Top             =   420
-         Width           =   1290
-      End
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   11
-         Left            =   1455
-         MaxLength       =   10
-         TabIndex        =   26
-         Tag             =   "Fecha lectura anterior|F|S|||rrecibpozos|fech_ant|dd/mm/yyyy||"
-         Text            =   "1234567890"
-         Top             =   960
-         Width           =   1290
-      End
-      Begin VB.Label Label19 
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   195
-         TabIndex        =   137
-         Top             =   2010
-         Width           =   705
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   4
-         Left            =   1065
-         Picture         =   "frmPOZRecibos.frx":009F
-         ToolTipText     =   "Buscar fecha"
-         Top             =   2010
-         Width           =   240
-      End
-      Begin VB.Label Label17 
-         Caption         =   "Contador"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   195
-         TabIndex        =   136
-         Top             =   1530
-         Width           =   1125
-      End
-      Begin VB.Label Label23 
-         Caption         =   "Contador"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   195
-         TabIndex        =   50
-         Top             =   450
-         Width           =   1125
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   2
-         Left            =   1065
-         Picture         =   "frmPOZRecibos.frx":012A
-         ToolTipText     =   "Buscar fecha"
-         Top             =   990
-         Width           =   240
-      End
-      Begin VB.Label Label18 
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   195
-         TabIndex        =   49
-         Top             =   990
-         Width           =   660
-      End
-   End
-   Begin VB.Frame Frame4 
-      Caption         =   "Lectura Actual"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   -1  'True
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00800000&
-      Height          =   2835
-      Left            =   3435
-      TabIndex        =   51
-      Top             =   4200
-      Width           =   3375
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   44
-         Left            =   1410
-         MaxLength       =   7
-         TabIndex        =   31
-         Tag             =   "Contador Actual2|N|S|||rrecibpozos|lect_act2|0000000||"
-         Text            =   "1234567"
-         Top             =   1470
-         Width           =   1335
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   43
-         Left            =   1410
-         MaxLength       =   10
-         TabIndex        =   32
-         Tag             =   "Fecha Lectura Actual2|F|S|||rrecibpozos|fech_act2|dd/mm/yyyy||"
-         Text            =   "1234567890"
-         Top             =   1980
-         Width           =   1335
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   10
-         Left            =   1410
-         MaxLength       =   10
-         TabIndex        =   30
-         Tag             =   "Fecha Lectura Actual|F|S|||rrecibpozos|fech_act|dd/mm/yyyy||"
-         Text            =   "1234567890"
-         Top             =   960
-         Width           =   1335
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   9
-         Left            =   1410
-         MaxLength       =   7
-         TabIndex        =   29
-         Tag             =   "Contador Actual|N|S|||rrecibpozos|lect_act|0000000||"
-         Text            =   "1234567"
-         Top             =   420
-         Width           =   1335
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   5
-         Left            =   1050
-         Picture         =   "frmPOZRecibos.frx":01B5
-         ToolTipText     =   "Buscar fecha"
-         Top             =   1980
-         Width           =   240
-      End
-      Begin VB.Label Label21 
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   270
-         TabIndex        =   139
-         Top             =   1980
-         Width           =   705
-      End
-      Begin VB.Label Label20 
-         Caption         =   "Contador"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   270
-         TabIndex        =   138
-         Top             =   1500
-         Width           =   1035
-      End
-      Begin VB.Label Label9 
-         Caption         =   "Contador"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   270
-         TabIndex        =   53
-         Top             =   450
-         Width           =   1035
-      End
-      Begin VB.Label Label12 
-         Caption         =   "Fecha"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   270
-         TabIndex        =   52
-         Top             =   990
-         Width           =   705
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   1
-         Left            =   1050
-         Picture         =   "frmPOZRecibos.frx":0240
-         ToolTipText     =   "Buscar fecha"
-         Top             =   990
-         Width           =   240
-      End
-   End
-   Begin VB.Frame Frame6 
-      Caption         =   "Precios Aplicados"
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   -1  'True
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00800000&
-      Height          =   2835
-      Left            =   6900
-      TabIndex        =   54
-      Top             =   4200
-      Width           =   3270
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   55
-         Left            =   1515
-         MaxLength       =   8
-         TabIndex        =   171
-         Tag             =   "Consumo 2|N|S|||rrecibpozos|consumo2|0000000||"
-         Text            =   "m3"
-         Top             =   1980
-         Width           =   1380
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   54
-         Left            =   1515
-         MaxLength       =   9
-         TabIndex        =   170
-         Tag             =   "Precio 2|N|S|||rrecibpozos|precio2|#,##0.000||"
-         Text            =   "precio2"
-         Top             =   2385
-         Width           =   1380
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   16
-         Left            =   1500
-         MaxLength       =   8
-         TabIndex        =   33
-         Tag             =   "Consumo 1|N|S|||rrecibpozos|consumo1|0000000||"
-         Text            =   "m3"
-         Top             =   315
-         Width           =   1380
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   19
-         Left            =   1500
-         MaxLength       =   9
-         TabIndex        =   36
-         Tag             =   "Precio 2|N|S|||rrecibpozos|precio2|#,##0.000||"
-         Text            =   "precio2"
-         Top             =   1530
-         Width           =   1380
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   17
-         Left            =   1500
-         MaxLength       =   9
-         TabIndex        =   34
-         Tag             =   "Precio 1|N|S|||rrecibpozos|precio1|#,##0.000||"
-         Text            =   "precio1"
-         Top             =   735
-         Width           =   1380
-      End
-      Begin VB.TextBox Text1 
-         Alignment       =   1  'Right Justify
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   18
-         Left            =   1500
-         MaxLength       =   8
-         TabIndex        =   35
-         Tag             =   "Consumo 2|N|S|||rrecibpozos|consumo2|0000000||"
-         Text            =   "m3"
-         Top             =   1125
-         Width           =   1380
-      End
-      Begin VB.Label Label25 
-         Caption         =   "Hasta m3."
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   315
-         TabIndex        =   173
-         Top             =   2040
-         Width           =   1245
-      End
-      Begin VB.Label Label24 
-         Caption         =   "Precio"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   315
-         TabIndex        =   172
-         Top             =   2385
-         Width           =   1245
-      End
-      Begin VB.Label Label14 
-         Caption         =   "Precio"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   300
-         TabIndex        =   85
-         Top             =   1530
-         Width           =   1245
-      End
-      Begin VB.Label Label13 
-         Caption         =   "Hasta m3."
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   300
-         TabIndex        =   84
-         Top             =   1185
-         Width           =   1245
-      End
-      Begin VB.Label Label28 
-         Caption         =   "Hasta m3."
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   300
-         TabIndex        =   56
-         Top             =   345
-         Width           =   1245
-      End
-      Begin VB.Label Label27 
-         Caption         =   "Precio"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   285
-         Left            =   300
-         TabIndex        =   55
-         Top             =   735
-         Width           =   1245
-      End
-   End
    Begin VB.Frame FrameCampos 
       Caption         =   "Campos"
       Enabled         =   0   'False
@@ -1973,7 +1342,7 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00800000&
-      Height          =   2820
+      Height          =   2730
       Left            =   180
       TabIndex        =   115
       Top             =   4170
@@ -2351,7 +1720,7 @@ Begin VB.Form frmPOZRecibos
             _Version        =   393216
          End
          Begin MSDataGridLib.DataGrid DataGridAux 
-            Bindings        =   "frmPOZRecibos.frx":02CB
+            Bindings        =   "frmPOZRecibosMonast.frx":009F
             Height          =   1395
             Index           =   1
             Left            =   105
@@ -2436,7 +1805,7 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00800000&
-      Height          =   2865
+      Height          =   2730
       Left            =   180
       TabIndex        =   101
       Top             =   4170
@@ -2671,7 +2040,7 @@ Begin VB.Form frmPOZRecibos
             _Version        =   393216
          End
          Begin MSDataGridLib.DataGrid DataGridAux 
-            Bindings        =   "frmPOZRecibos.frx":02E3
+            Bindings        =   "frmPOZRecibosMonast.frx":00B7
             Height          =   1395
             Index           =   0
             Left            =   105
@@ -2755,7 +2124,7 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00800000&
-      Height          =   2835
+      Height          =   2745
       Left            =   180
       TabIndex        =   67
       Top             =   4170
@@ -3042,7 +2411,7 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00800000&
-      Height          =   2865
+      Height          =   2730
       Left            =   180
       TabIndex        =   87
       Top             =   4170
@@ -3300,7 +2669,7 @@ Begin VB.Form frmPOZRecibos
             _Version        =   393216
          End
          Begin MSDataGridLib.DataGrid DataGridAux 
-            Bindings        =   "frmPOZRecibos.frx":02FB
+            Bindings        =   "frmPOZRecibosMonast.frx":00CF
             Height          =   1335
             Index           =   2
             Left            =   105
@@ -3372,9 +2741,8 @@ Begin VB.Form frmPOZRecibos
          End
       End
    End
-   Begin VB.Frame FrameCuotas 
-      Caption         =   "Cuotas e Importes"
-      Enabled         =   0   'False
+   Begin VB.Frame Frame3 
+      Caption         =   "Lectura Anterior"
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -3385,12 +2753,11 @@ Begin VB.Form frmPOZRecibos
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00800000&
-      Height          =   2820
+      Height          =   2700
       Left            =   180
-      TabIndex        =   156
-      Top             =   4230
-      Visible         =   0   'False
-      Width           =   10035
+      TabIndex        =   48
+      Top             =   4200
+      Width           =   3165
       Begin VB.TextBox Text1 
          BeginProperty Font 
             Name            =   "Verdana"
@@ -3402,16 +2769,17 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   51
-         Left            =   5565
+         Index           =   42
+         Left            =   1455
          MaxLength       =   10
-         TabIndex        =   168
-         Tag             =   "Cuota Mantenimiento|N|S|||rrecibpozos|cuotamantenimiento|###,##0.00||"
+         TabIndex        =   28
+         Tag             =   "Fecha lectura anterior2|F|S|||rrecibpozos|fech_ant2|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   540
-         Width           =   1335
+         Top             =   1980
+         Width           =   1290
       End
       Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3422,16 +2790,17 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   48
-         Left            =   1830
-         MaxLength       =   10
-         TabIndex        =   166
-         Tag             =   "Coeficiente|N|S|||rrecibpozos|coeficiente|###,##0.00||"
-         Text            =   "1234567890"
-         Top             =   540
-         Width           =   1335
+         Index           =   41
+         Left            =   1455
+         MaxLength       =   7
+         TabIndex        =   27
+         Tag             =   "Lectura Anterior2|N|S|||rrecibpozos|lect_ant2|0000000||"
+         Text            =   "1234567"
+         Top             =   1500
+         Width           =   1290
       End
       Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3442,34 +2811,14 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   53
-         Left            =   5565
-         MaxLength       =   10
-         TabIndex        =   164
-         Tag             =   "Canon Contador|N|S|||rrecibpozos|cuotacanon|###,##0.00||"
-         Text            =   "1234567890"
-         Top             =   1755
-         Width           =   1335
-      End
-      Begin VB.TextBox Text1 
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   360
-         Index           =   52
-         Left            =   5565
-         MaxLength       =   10
-         TabIndex        =   162
-         Tag             =   "Cuota Servicio|N|S|||rrecibpozos|cuotaservicio|###,##0.00||"
-         Text            =   "1234567890"
-         Top             =   1170
-         Width           =   1335
+         Index           =   8
+         Left            =   1455
+         MaxLength       =   7
+         TabIndex        =   25
+         Tag             =   "Lectura Anterior|N|S|||rrecibpozos|lect_ant|0000000||"
+         Text            =   "1234567"
+         Top             =   420
+         Width           =   1290
       End
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -3482,16 +2831,121 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   50
-         Left            =   1830
+         Index           =   11
+         Left            =   1455
          MaxLength       =   10
-         TabIndex        =   160
-         Tag             =   "Cuota Suministro|N|S|||rrecibpozos|cuotasuministro|###,##0.00||"
+         TabIndex        =   26
+         Tag             =   "Fecha lectura anterior|F|S|||rrecibpozos|fech_ant|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   1755
-         Width           =   1335
+         Top             =   960
+         Width           =   1290
       End
+      Begin VB.Label Label19 
+         Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   195
+         TabIndex        =   137
+         Top             =   2010
+         Width           =   705
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   4
+         Left            =   1065
+         Picture         =   "frmPOZRecibosMonast.frx":00E7
+         ToolTipText     =   "Buscar fecha"
+         Top             =   2010
+         Width           =   240
+      End
+      Begin VB.Label Label17 
+         Caption         =   "Contador"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   195
+         TabIndex        =   136
+         Top             =   1530
+         Width           =   1125
+      End
+      Begin VB.Label Label23 
+         Caption         =   "Contador"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   195
+         TabIndex        =   50
+         Top             =   450
+         Width           =   1125
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   2
+         Left            =   1065
+         Picture         =   "frmPOZRecibosMonast.frx":0172
+         ToolTipText     =   "Buscar fecha"
+         Top             =   990
+         Width           =   240
+      End
+      Begin VB.Label Label18 
+         Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   195
+         TabIndex        =   49
+         Top             =   990
+         Width           =   660
+      End
+   End
+   Begin VB.Frame Frame4 
+      Caption         =   "Lectura Actual"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   2700
+      Left            =   3435
+      TabIndex        =   51
+      Top             =   4200
+      Width           =   3375
       Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3502,17 +2956,38 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Index           =   49
-         Left            =   1830
+         Index           =   44
+         Left            =   1410
+         MaxLength       =   7
+         TabIndex        =   31
+         Tag             =   "Contador Actual2|N|S|||rrecibpozos|lect_act2|0000000||"
+         Text            =   "1234567"
+         Top             =   1470
+         Width           =   1335
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   43
+         Left            =   1410
          MaxLength       =   10
-         TabIndex        =   158
-         Tag             =   "Cuota Consumo|N|S|||rrecibpozos|cuotaconsumo|###,##0.00||"
+         TabIndex        =   32
+         Tag             =   "Fecha Lectura Actual2|F|S|||rrecibpozos|fech_act2|dd/mm/yyyy||"
          Text            =   "1234567890"
-         Top             =   1170
+         Top             =   1980
          Width           =   1335
       End
-      Begin VB.Label Label1 
-         Caption         =   "Mantenimiento"
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3522,33 +2997,18 @@ Begin VB.Form frmPOZRecibos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   255
-         Index           =   19
-         Left            =   3870
-         TabIndex        =   169
-         Top             =   593
-         Width           =   1650
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Coeficiente"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   15
-         Left            =   225
-         TabIndex        =   167
-         Top             =   593
+         Height          =   360
+         Index           =   10
+         Left            =   1410
+         MaxLength       =   10
+         TabIndex        =   30
+         Tag             =   "Fecha Lectura Actual|F|S|||rrecibpozos|fech_act|dd/mm/yyyy||"
+         Text            =   "1234567890"
+         Top             =   960
          Width           =   1335
       End
-      Begin VB.Label Label1 
-         Caption         =   "Canon Contador"
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3558,33 +3018,27 @@ Begin VB.Form frmPOZRecibos
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   255
-         Index           =   21
-         Left            =   3870
-         TabIndex        =   165
-         Top             =   1815
-         Width           =   1650
+         Height          =   360
+         Index           =   9
+         Left            =   1410
+         MaxLength       =   7
+         TabIndex        =   29
+         Tag             =   "Contador Actual|N|S|||rrecibpozos|lect_act|0000000||"
+         Text            =   "1234567"
+         Top             =   420
+         Width           =   1335
       End
-      Begin VB.Label Label1 
-         Caption         =   "Cuota servicio"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Index           =   20
-         Left            =   3870
-         TabIndex        =   163
-         Top             =   1223
-         Width           =   1650
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   5
+         Left            =   1050
+         Picture         =   "frmPOZRecibosMonast.frx":01FD
+         ToolTipText     =   "Buscar fecha"
+         Top             =   1980
+         Width           =   240
       End
-      Begin VB.Label Label1 
-         Caption         =   "Suministro"
+      Begin VB.Label Label21 
+         Caption         =   "Fecha"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3595,14 +3049,13 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Index           =   18
-         Left            =   225
-         TabIndex        =   161
-         Top             =   1815
-         Width           =   1650
+         Left            =   270
+         TabIndex        =   139
+         Top             =   1980
+         Width           =   705
       End
-      Begin VB.Label Label1 
-         Caption         =   "Consumo"
+      Begin VB.Label Label20 
+         Caption         =   "Contador"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -3613,11 +3066,223 @@ Begin VB.Form frmPOZRecibos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
+         Left            =   270
+         TabIndex        =   138
+         Top             =   1500
+         Width           =   1035
+      End
+      Begin VB.Label Label9 
+         Caption         =   "Contador"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   270
+         TabIndex        =   53
+         Top             =   450
+         Width           =   1035
+      End
+      Begin VB.Label Label12 
+         Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   270
+         TabIndex        =   52
+         Top             =   990
+         Width           =   705
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   1
+         Left            =   1050
+         Picture         =   "frmPOZRecibosMonast.frx":0288
+         ToolTipText     =   "Buscar fecha"
+         Top             =   990
+         Width           =   240
+      End
+   End
+   Begin VB.Frame Frame6 
+      Caption         =   "Precios Aplicados"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   2700
+      Left            =   6900
+      TabIndex        =   54
+      Top             =   4200
+      Width           =   3270
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   16
-         Left            =   225
-         TabIndex        =   159
-         Top             =   1223
-         Width           =   1650
+         Left            =   1500
+         MaxLength       =   8
+         TabIndex        =   33
+         Tag             =   "Consumo 1|N|S|||rrecibpozos|consumo1|0000000||"
+         Text            =   "m3"
+         Top             =   450
+         Width           =   1380
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   19
+         Left            =   1500
+         MaxLength       =   9
+         TabIndex        =   36
+         Tag             =   "Precio 2|N|S|||rrecibpozos|precio2|#,##0.000||"
+         Text            =   "precio2"
+         Top             =   1980
+         Width           =   1380
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   17
+         Left            =   1500
+         MaxLength       =   9
+         TabIndex        =   34
+         Tag             =   "Precio 1|N|S|||rrecibpozos|precio1|#,##0.000||"
+         Text            =   "precio1"
+         Top             =   870
+         Width           =   1380
+      End
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   18
+         Left            =   1500
+         MaxLength       =   8
+         TabIndex        =   35
+         Tag             =   "Consumo 2|N|S|||rrecibpozos|consumo2|0000000||"
+         Text            =   "m3"
+         Top             =   1530
+         Width           =   1380
+      End
+      Begin VB.Label Label14 
+         Caption         =   "Precio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   300
+         TabIndex        =   85
+         Top             =   1980
+         Width           =   1245
+      End
+      Begin VB.Label Label13 
+         Caption         =   "Hasta m3."
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   300
+         TabIndex        =   84
+         Top             =   1590
+         Width           =   1245
+      End
+      Begin VB.Label Label28 
+         Caption         =   "Hasta m3."
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   300
+         TabIndex        =   56
+         Top             =   480
+         Width           =   1245
+      End
+      Begin VB.Label Label27 
+         Caption         =   "Precio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Left            =   300
+         TabIndex        =   55
+         Top             =   870
+         Width           =   1245
       End
    End
    Begin VB.Label Label1 
@@ -3637,7 +3302,7 @@ Begin VB.Form frmPOZRecibos
       Index           =   13
       Left            =   2460
       TabIndex        =   140
-      Top             =   7155
+      Top             =   7020
       Width           =   4515
    End
    Begin VB.Label Label16 
@@ -3662,7 +3327,7 @@ Begin VB.Form frmPOZRecibos
       Height          =   240
       Index           =   3
       Left            =   1440
-      Picture         =   "frmPOZRecibos.frx":0313
+      Picture         =   "frmPOZRecibosMonast.frx":0313
       ToolTipText     =   "Buscar fecha"
       Top             =   2700
       Width           =   240
@@ -3858,7 +3523,7 @@ Begin VB.Form frmPOZRecibos
       Height          =   240
       Index           =   0
       Left            =   4140
-      Picture         =   "frmPOZRecibos.frx":039E
+      Picture         =   "frmPOZRecibosMonast.frx":039E
       ToolTipText     =   "Buscar fecha"
       Top             =   720
       Width           =   240
@@ -4008,7 +3673,7 @@ Begin VB.Form frmPOZRecibos
       End
    End
 End
-Attribute VB_Name = "frmPOZRecibos"
+Attribute VB_Name = "frmPOZRecibosMonast"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
@@ -4045,7 +3710,7 @@ Private WithEvents frmSoc As frmManSocios 'Form Mto de socios
 Attribute frmSoc.VB_VarHelpID = -1
 Private WithEvents frmCal As frmManCalidades 'Form Mto de calidades
 Attribute frmCal.VB_VarHelpID = -1
-Private WithEvents frmPOZRecPrev As frmPOZRecibosPrev 'Form Mto de recibos de pozos
+Private WithEvents frmPOZRecPrev As frmPOZRecibosMonastPrev 'Form Mto de recibos de pozos
 Attribute frmPOZRecPrev.VB_VarHelpID = -1
 
 Private Modo As Byte
@@ -4474,14 +4139,6 @@ Private Sub cmdConceptos_Click()
     End If
 End Sub
 
-Private Sub cmdCuotas_Click()
-    Me.FrameCuotas.visible = Not (Me.FrameCuotas.visible)
-    Me.FrameCuotas.Enabled = Me.FrameCuotas.visible
-    Me.Frame3.visible = Not FrameCuotas.visible
-    Me.Frame4.visible = Not FrameCuotas.visible
-    Me.Frame6.visible = Not FrameCuotas.visible
-End Sub
-
 Private Sub cmdHidrantes_Click()
     If Text1(20).Text = "RMP" Then
         FrameHidrantes.visible = Not FrameHidrantes.visible
@@ -4733,7 +4390,6 @@ Dim I As Integer
     Me.cmdHidrantes.Picture = frmPpal.imgListPpal.ListImages(24).Picture
     Me.cmdCampos.Picture = frmPpal.imgListPpal.ListImages(24).Picture
     Me.cmdRectificativa.Picture = frmPpal.imgListPpal.ListImages(37).Picture
-    Me.cmdCuotas.Picture = frmPpal.imgListPpal.ListImages(24).Picture
 
     Me.FrameConceptos.visible = False
     Me.FrameConceptos.Enabled = False
@@ -4759,10 +4415,7 @@ Dim I As Integer
     Me.FrameRectifica.visible = False
 '    Me.FrameRectifica.Enabled = False
     
-    '[Monica]22/09/2017: datos de las cuotas de monasterios
-    Me.FrameCuotas.visible = False
-    Me.cmdCuotas.Enabled = (vParamAplic.Cooperativa = 17)
-    Me.cmdCuotas.visible = (vParamAplic.Cooperativa = 17)
+    
     
     LimpiarCampos   'Limpia los campos TextBox
     CargaCombo
@@ -4771,13 +4424,11 @@ Dim I As Integer
     VieneDeBuscar = False
     
     '[Monica]08/05/2012: añadida Escalona que funciona como Utxera
-    If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Or vParamAplic.Cooperativa = 17 Then
+    If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
         Label28.Caption = "Consumo m3."
         Label13.Caption = "Consumo m3."
-        Label25.Caption = "Consumo m3."
         Label27.Caption = "Precio 1"
         Label14.Caption = "Precio 2"
-        Label24.Caption = "Precio 3"
     End If
     
     '[Monica]20/07/2015: solo para Escalona
@@ -5031,11 +4682,6 @@ Private Sub imgZoom_Click(Index As Integer)
         PonerFoco Text1(Indice)
     End If
 End Sub
-
-
-
-
-
 
 
 Private Sub mnBuscar_Click()
@@ -5337,7 +4983,7 @@ Dim Desc As String, devuelve As String
 '    End If
 '    Screen.MousePointer = vbDefault
 
-    Set frmPOZRecPrev = New frmPOZRecibosPrev
+    Set frmPOZRecPrev = New frmPOZRecibosMonastPrev
     
     frmPOZRecPrev.cWhere = CadB
     frmPOZRecPrev.DatosADevolverBusqueda = "1|2|3|"

@@ -267,12 +267,17 @@ Private mvarCodIvaPOZ As String ' codigo de iva aplicado a pozos
 
 Private mvarPrecio1POZ As String ' precio rango 1
 Private mvarPrecio2POZ As String ' precio rango 2
+Private mvarPrecio3POZ As String ' precio rango 3
 
 Private mvarConsumo1POZ As String ' hasta m3 en rango 1
 Private mvarConsumo2POZ As String ' hasta m3 en rango 2
+Private mvarConsumo3POZ As String ' hasta m3 en rango 3
 
 Private mvarCuotaPOZ As String ' cuota pozos
 Private mvarDerramaPOZ As String ' derrama pozos
+Private mvarCanonPOZ As String ' canon contador pozos
+Private mvarCoefConsumoPOZ As String ' coeficiente consumo pozos
+Private mvarCoefSuministroPOZ As String ' coeficiente suministro pozos
 Private mvarCtaVentasConsPOZ As String ' cta ventas consumo de pozos
 Private mvarCtaVentasCuoPOZ As String ' cta ventas cuotas de pozos
 Private mvarCtaVentasTalPOZ As String ' cta ventas talla de pozos
@@ -282,8 +287,6 @@ Private mvarCtaVentasMantaPOZ As String ' cta ventas consumo a manta pozos
 
 Private mvarCtaRecargosPOZ As String ' cta recargos pozos
 
-
-
 Private mvarCodCCostPoz As String ' centro de coste de pozos
  
 Private mvarForpaConPOZ As String ' forma de pago contado pozos
@@ -291,7 +294,6 @@ Private mvarForpaRecPOZ As String ' forma de pago recibo pozos
  
 Private mvarCartaPOZ As Integer ' codigo de carta de reclamacion de pozos (solo utxera y escalona)
 Private mvarNomZonaPOZ As String ' nombre de la zona de pozos (braçal)
- 
  
  
 'Transporte
@@ -1827,6 +1829,16 @@ Public Property Get Precio2POZ() As String
      Precio2POZ = mvarPrecio2POZ
 End Property
 
+' Precio de rango 3
+Public Property Let Precio3POZ(ByVal vData As String)
+     mvarPrecio3POZ = vData
+End Property
+
+Public Property Get Precio3POZ() As String
+     Precio3POZ = mvarPrecio3POZ
+End Property
+
+
 ' Consumo de rango 1
 Public Property Let Consumo1POZ(ByVal vData As String)
      mvarConsumo1POZ = vData
@@ -1844,6 +1856,16 @@ End Property
 Public Property Get Consumo2POZ() As String
      Consumo2POZ = mvarConsumo2POZ
 End Property
+
+' Consumo de rango 3
+Public Property Let Consumo3POZ(ByVal vData As String)
+     mvarConsumo3POZ = vData
+End Property
+
+Public Property Get Consumo3POZ() As String
+     Consumo3POZ = mvarConsumo3POZ
+End Property
+
 
 
 ' Cuota pozos
@@ -1863,6 +1885,37 @@ End Property
 Public Property Get DerramaPOZ() As String
      DerramaPOZ = mvarDerramaPOZ
 End Property
+
+
+' Canon pozos
+Public Property Let CanonPOZ(ByVal vData As String)
+     mvarCanonPOZ = vData
+End Property
+
+Public Property Get CanonPOZ() As String
+     CanonPOZ = mvarCanonPOZ
+End Property
+
+' Coeficiente consumo pozos
+Public Property Let CoefConsumoPOZ(ByVal vData As String)
+     mvarCoefConsumoPOZ = vData
+End Property
+
+Public Property Get CoefConsumoPOZ() As String
+     CoefConsumoPOZ = mvarCoefConsumoPOZ
+End Property
+
+
+' Coeficiente suministro pozos
+Public Property Let CoefSuministroPOZ(ByVal vData As String)
+     mvarCoefSuministroPOZ = vData
+End Property
+
+Public Property Get CoefSuministroPOZ() As String
+     CoefSuministroPOZ = mvarCoefSuministroPOZ
+End Property
+
+
 
 ' cuenta contable consumo ventas pozos
 
@@ -2395,11 +2448,16 @@ On Error GoTo Err3
         ' pozos
         mvarConsumo1POZ = DBLet(Rs!hastametcub1poz, "N") ' hasta m3 del primer rango
         mvarConsumo2POZ = DBLet(Rs!hastametcub2poz, "N") ' hasta m3 del segundo rango
+        mvarConsumo3POZ = DBLet(Rs!hastametcub3poz, "N") ' hasta m3 del tercer rango
         mvarPrecio1POZ = DBLet(Rs!Precio1POZ, "N") ' precio del rango 1
         mvarPrecio2POZ = DBLet(Rs!Precio2POZ, "N") ' precio del rango 2
+        mvarPrecio3POZ = DBLet(Rs!Precio3POZ, "N") ' precio del rango 3 monasterios
         mvarCodIvaPOZ = DBLet(Rs!CodIvaPOZ, "N") ' codigo de iva de pozos
         mvarCuotaPOZ = DBLet(Rs!imporcuotapoz, "N") ' importe de cuota
         mvarDerramaPOZ = DBLet(Rs!imporderramapoz, "N") ' importe derrama
+        mvarCanonPOZ = DBLet(Rs!imporcanonpoz, "N") ' importe canon contador de monasterios
+        mvarCoefConsumoPOZ = DBLet(Rs!CoefConsumoPOZ, "N") ' coef consumo pozos monasterios
+        mvarCoefSuministroPOZ = DBLet(Rs!CoefSuministroPOZ, "N") ' coef consumo pozos monasterios
         mvarCtaVentasConsPOZ = DBLet(Rs!CtaVentasConsPOZ, "T") ' cta contable de ventas consumo de pozos
         mvarCtaVentasCuoPOZ = DBLet(Rs!CtaVentasCuoPOZ, "T") ' cta contable de ventas cuota de pozos
         mvarCtaVentasTalPOZ = DBLet(Rs!CtaVentasTalPOZ, "T") ' cta contable de ventas talla de pozos
@@ -2719,11 +2777,16 @@ On Error GoTo eModificar
     ' pozos
     Sql = Sql & ", hastametcub1poz= " & DBSet(mvarConsumo1POZ, "N") ' hasta m3 del primer rango
     Sql = Sql & ", hastametcub2poz= " & DBSet(mvarConsumo2POZ, "N") ' hasta m3 del segundo rango
+    Sql = Sql & ", hastametcub3poz= " & DBSet(mvarConsumo3POZ, "N") ' hasta m3 del tercer rango
     Sql = Sql & ", precio1poz= " & DBSet(mvarPrecio1POZ, "N") ' precio del rango 1
     Sql = Sql & ", precio2poz= " & DBSet(mvarPrecio2POZ, "N") ' precio del rango 2
+    Sql = Sql & ", precio3poz= " & DBSet(mvarPrecio3POZ, "N") ' precio del rango 3
     Sql = Sql & ", codivapoz= " & DBSet(mvarCodIvaPOZ, "N") ' codigo de iva de pozos
     Sql = Sql & ", imporcuotapoz= " & DBSet(mvarCuotaPOZ, "N") ' importe de cuota
     Sql = Sql & ", imporderramapoz= " & DBSet(mvarDerramaPOZ, "N") ' importe derrama
+    Sql = Sql & ", imporcanonpoz= " & DBSet(mvarCanonPOZ, "N") ' importe canon contador monasterios
+    Sql = Sql & ", coefconsumopoz= " & DBSet(mvarCoefConsumoPOZ, "N") ' coeficiente consumo pozos  monasterios
+    Sql = Sql & ", coefsuministropoz= " & DBSet(mvarCoefSuministroPOZ, "N") ' coeficiente suministro pozos monasterios
     Sql = Sql & ", ctaventasconspoz= " & DBSet(mvarCtaVentasConsPOZ, "T") ' cuenta contable de ventas consumo pozos
     Sql = Sql & ", ctaventascuopoz= " & DBSet(mvarCtaVentasCuoPOZ, "T") ' cuenta contable de ventas cuotas pozos
     Sql = Sql & ", ctaventastalpoz= " & DBSet(mvarCtaVentasTalPOZ, "T") ' cuenta contable de ventas talla pozos

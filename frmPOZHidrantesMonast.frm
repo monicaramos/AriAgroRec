@@ -21,13 +21,13 @@ Begin VB.Form frmPOZHidrantesMonast
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   45
-      TabIndex        =   48
+      TabIndex        =   49
       Top             =   90
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   49
+         TabIndex        =   50
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -83,13 +83,13 @@ Begin VB.Form frmPOZHidrantesMonast
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   3675
-      TabIndex        =   46
+      TabIndex        =   47
       Top             =   90
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   47
+         TabIndex        =   48
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -134,7 +134,7 @@ Begin VB.Form frmPOZHidrantesMonast
       Height          =   300
       Index           =   0
       Left            =   6240
-      TabIndex        =   45
+      TabIndex        =   46
       Top             =   330
       Width           =   1605
    End
@@ -142,7 +142,7 @@ Begin VB.Form frmPOZHidrantesMonast
       Height          =   765
       Index           =   0
       Left            =   15
-      TabIndex        =   18
+      TabIndex        =   19
       Top             =   840
       Width           =   8310
       Begin VB.TextBox Text1 
@@ -216,7 +216,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   6315
-         TabIndex        =   42
+         TabIndex        =   43
          Top             =   315
          Width           =   1455
       End
@@ -233,7 +233,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   3375
-         TabIndex        =   26
+         TabIndex        =   27
          Top             =   315
          Width           =   1080
       End
@@ -251,7 +251,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Height          =   255
          Index           =   0
          Left            =   240
-         TabIndex        =   19
+         TabIndex        =   20
          Top             =   315
          Width           =   1035
       End
@@ -260,7 +260,7 @@ Begin VB.Form frmPOZHidrantesMonast
       Height          =   555
       Index           =   0
       Left            =   30
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   7905
       Width           =   2865
       Begin VB.Label lblIndicador 
@@ -277,7 +277,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   240
          Left            =   120
-         TabIndex        =   17
+         TabIndex        =   18
          Top             =   180
          Width           =   2655
       End
@@ -296,7 +296,7 @@ Begin VB.Form frmPOZHidrantesMonast
       EndProperty
       Height          =   375
       Left            =   7230
-      TabIndex        =   15
+      TabIndex        =   16
       Top             =   8010
       Width           =   1035
    End
@@ -313,7 +313,7 @@ Begin VB.Form frmPOZHidrantesMonast
       EndProperty
       Height          =   375
       Left            =   6030
-      TabIndex        =   14
+      TabIndex        =   15
       Top             =   7995
       Width           =   1035
    End
@@ -330,7 +330,7 @@ Begin VB.Form frmPOZHidrantesMonast
       EndProperty
       Height          =   375
       Left            =   7230
-      TabIndex        =   20
+      TabIndex        =   21
       Top             =   8010
       Visible         =   0   'False
       Width           =   1035
@@ -338,7 +338,7 @@ Begin VB.Form frmPOZHidrantesMonast
    Begin TabDlg.SSTab SSTab1 
       Height          =   6150
       Left            =   45
-      TabIndex        =   21
+      TabIndex        =   22
       Top             =   1680
       Width           =   8295
       _ExtentX        =   14631
@@ -393,33 +393,57 @@ Begin VB.Form frmPOZHidrantesMonast
       Tab(0).Control(14).Enabled=   0   'False
       Tab(0).Control(15)=   "imgAyuda(0)"
       Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(2)"
+      Tab(0).Control(16)=   "Label3"
       Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Text2(2)"
+      Tab(0).Control(17)=   "Text1(2)"
       Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Text1(3)"
+      Tab(0).Control(18)=   "Text2(2)"
       Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(3)"
+      Tab(0).Control(19)=   "Text1(3)"
       Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text1(11)"
+      Tab(0).Control(20)=   "Text2(3)"
       Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Text2(13)"
+      Tab(0).Control(21)=   "Text1(11)"
       Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text1(13)"
+      Tab(0).Control(22)=   "Text2(13)"
       Tab(0).Control(22).Enabled=   0   'False
-      Tab(0).Control(23)=   "Text1(14)"
+      Tab(0).Control(23)=   "Text1(13)"
       Tab(0).Control(23).Enabled=   0   'False
-      Tab(0).Control(24)=   "Text1(6)"
+      Tab(0).Control(24)=   "Text1(14)"
       Tab(0).Control(24).Enabled=   0   'False
-      Tab(0).Control(25)=   "Text1(5)"
+      Tab(0).Control(25)=   "Text1(6)"
       Tab(0).Control(25).Enabled=   0   'False
-      Tab(0).Control(26)=   "Frame3"
+      Tab(0).Control(26)=   "Text1(5)"
       Tab(0).Control(26).Enabled=   0   'False
-      Tab(0).Control(27)=   "Text2(1)"
+      Tab(0).Control(27)=   "Frame3"
       Tab(0).Control(27).Enabled=   0   'False
-      Tab(0).Control(28)=   "Check1(0)"
+      Tab(0).Control(28)=   "Text2(1)"
       Tab(0).Control(28).Enabled=   0   'False
-      Tab(0).ControlCount=   29
+      Tab(0).Control(29)=   "Check1(0)"
+      Tab(0).Control(29).Enabled=   0   'False
+      Tab(0).Control(30)=   "Text1(15)"
+      Tab(0).Control(30).Enabled=   0   'False
+      Tab(0).ControlCount=   31
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   15
+         Left            =   6735
+         MaxLength       =   8
+         TabIndex        =   9
+         Tag             =   "Coeficiente|N|N|||rpozos|hanegada|#,##0.00||"
+         Top             =   3030
+         Width           =   1290
+      End
       Begin VB.CheckBox Check1 
          Caption         =   "Cobrar Cuota"
          BeginProperty Font 
@@ -434,7 +458,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Height          =   345
          Index           =   0
          Left            =   5820
-         TabIndex        =   44
+         TabIndex        =   45
          Tag             =   "Cobrar Cuota|N|S|||rpozos|cobrarcuota|0|N|"
          Top             =   5040
          Width           =   1680
@@ -455,7 +479,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Index           =   1
          Left            =   4170
          MaxLength       =   40
-         TabIndex        =   39
+         TabIndex        =   40
          Top             =   2055
          Width           =   3870
       End
@@ -472,10 +496,10 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   1515
-         Left            =   240
-         TabIndex        =   28
+         Left            =   150
+         TabIndex        =   29
          Top             =   3435
-         Width           =   7680
+         Width           =   7860
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
             BeginProperty Font 
@@ -491,7 +515,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Index           =   4
             Left            =   1230
             MaxLength       =   7
-            TabIndex        =   41
+            TabIndex        =   42
             Tag             =   "Consumo|N|S|||rpozos|consumo|######0||"
             Text            =   "1234567"
             Top             =   1035
@@ -512,7 +536,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Index           =   10
             Left            =   5085
             MaxLength       =   10
-            TabIndex        =   12
+            TabIndex        =   13
             Tag             =   "Fecha Lectura Actual|F|S|||rpozos|fech_act|dd/mm/yyyy||"
             Text            =   "1234567890"
             Top             =   630
@@ -533,7 +557,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Index           =   9
             Left            =   1230
             MaxLength       =   7
-            TabIndex        =   11
+            TabIndex        =   12
             Tag             =   "Contador Actual|N|S|||rpozos|lect_act|######0||"
             Text            =   "1234567"
             Top             =   600
@@ -554,7 +578,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Index           =   7
             Left            =   1230
             MaxLength       =   7
-            TabIndex        =   9
+            TabIndex        =   10
             Tag             =   "Lectura Anterior|N|S|||rpozos|lect_ant|######0||"
             Text            =   "1234567"
             Top             =   225
@@ -575,7 +599,7 @@ Begin VB.Form frmPOZHidrantesMonast
             Index           =   8
             Left            =   5085
             MaxLength       =   10
-            TabIndex        =   10
+            TabIndex        =   11
             Tag             =   "Fecha lectura anterior|F|S|||rpozos|fech_ant|dd/mm/yyyy||"
             Text            =   "1234567890"
             Top             =   270
@@ -600,7 +624,7 @@ Begin VB.Form frmPOZHidrantesMonast
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   38
+            TabIndex        =   39
             Top             =   1050
             Width           =   1035
          End
@@ -626,7 +650,7 @@ Begin VB.Form frmPOZHidrantesMonast
             EndProperty
             Height          =   255
             Left            =   3285
-            TabIndex        =   37
+            TabIndex        =   38
             Top             =   660
             Width           =   1605
          End
@@ -643,7 +667,7 @@ Begin VB.Form frmPOZHidrantesMonast
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   36
+            TabIndex        =   37
             Top             =   660
             Width           =   1035
          End
@@ -660,7 +684,7 @@ Begin VB.Form frmPOZHidrantesMonast
             EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   30
+            TabIndex        =   31
             Top             =   285
             Width           =   1125
          End
@@ -686,7 +710,7 @@ Begin VB.Form frmPOZHidrantesMonast
             EndProperty
             Height          =   255
             Left            =   3285
-            TabIndex        =   29
+            TabIndex        =   30
             Top             =   300
             Width           =   1560
          End
@@ -789,7 +813,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Index           =   13
          Left            =   2550
          MaxLength       =   30
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   1020
          Width           =   5475
       End
@@ -809,7 +833,7 @@ Begin VB.Form frmPOZHidrantesMonast
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
-         TabIndex        =   13
+         TabIndex        =   14
          Tag             =   "Observaciones|T|S|||rpozos|observac|||"
          Top             =   5430
          Width           =   7695
@@ -830,7 +854,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Index           =   3
          Left            =   2550
          MaxLength       =   40
-         TabIndex        =   24
+         TabIndex        =   25
          Top             =   1530
          Width           =   5490
       End
@@ -870,7 +894,7 @@ Begin VB.Form frmPOZHidrantesMonast
          Index           =   2
          Left            =   2550
          MaxLength       =   30
-         TabIndex        =   23
+         TabIndex        =   24
          Top             =   495
          Width           =   5475
       End
@@ -895,6 +919,23 @@ Begin VB.Form frmPOZHidrantesMonast
          Top             =   495
          Width           =   840
       End
+      Begin VB.Label Label3 
+         Caption         =   "Coeficiente"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   5355
+         TabIndex        =   52
+         Top             =   3060
+         Width           =   1095
+      End
       Begin VB.Image imgAyuda 
          Height          =   240
          Index           =   0
@@ -918,7 +959,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   3195
-         TabIndex        =   40
+         TabIndex        =   41
          Top             =   2055
          Width           =   990
       End
@@ -943,7 +984,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   225
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   2055
          Width           =   1095
       End
@@ -960,7 +1001,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   34
+         TabIndex        =   35
          Top             =   3000
          Width           =   1140
       End
@@ -986,7 +1027,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   33
+         TabIndex        =   34
          Top             =   2580
          Width           =   1140
       End
@@ -1020,7 +1061,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   225
-         TabIndex        =   32
+         TabIndex        =   33
          Top             =   1035
          Width           =   1140
       End
@@ -1046,7 +1087,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   240
-         TabIndex        =   27
+         TabIndex        =   28
          Top             =   5100
          Width           =   1590
       End
@@ -1063,7 +1104,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   225
-         TabIndex        =   25
+         TabIndex        =   26
          Top             =   510
          Width           =   735
       End
@@ -1096,7 +1137,7 @@ Begin VB.Form frmPOZHidrantesMonast
          EndProperty
          Height          =   255
          Left            =   225
-         TabIndex        =   22
+         TabIndex        =   23
          Top             =   1530
          Width           =   780
       End
@@ -1156,14 +1197,14 @@ Begin VB.Form frmPOZHidrantesMonast
       Index           =   0
       Left            =   690
       MaxLength       =   40
-      TabIndex        =   43
+      TabIndex        =   44
       Top             =   930
       Width           =   1035
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
       Left            =   7995
-      TabIndex        =   50
+      TabIndex        =   51
       Top             =   285
       Width           =   405
       _ExtentX        =   714
@@ -1569,7 +1610,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     
 ' cambio la siguiente expresion por la de abajo
