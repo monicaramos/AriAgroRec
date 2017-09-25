@@ -5198,13 +5198,21 @@ Dim I As Integer
     Combo1(1).ItemData(Combo1(1).NewIndex) = 0
     Combo1(1).AddItem "Socio"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
-  
+    '[Monica]25/09/2017: solo para coopic
+    If vParamAplic.Cooperativa = 16 Then
+        Combo1(1).AddItem "Otros"
+        Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+    End If
     'transportado por
     Combo1(2).AddItem "Cooperativa"
     Combo1(2).ItemData(Combo1(2).NewIndex) = 0
     Combo1(2).AddItem "Socio"
     Combo1(2).ItemData(Combo1(2).NewIndex) = 1
-
+    '[Monica]25/09/2017: solo para coopic
+    If vParamAplic.Cooperativa = 16 Then
+        Combo1(2).AddItem "Otros"
+        Combo1(2).ItemData(Combo1(2).NewIndex) = 2
+    End If
 End Sub
 
 

@@ -2985,7 +2985,7 @@ Dim I As Byte
     B = (Modo = 2) And Not DeConsulta
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -3609,8 +3609,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     'For i = 0 To DataGridAux.Count - 1
     For I = 0 To 1
         CargaGrid I, True
-        If Not Adoaux(I).Recordset.EOF Then _
-            PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
+        If Not AdoAux(I).Recordset.EOF Then _
+            PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
     Next I
 
     Text1(2).Text = Mid(Text1(21).Text, 12, 8)
@@ -3677,8 +3677,8 @@ Dim V
 '                    ' *** si n'hi han tabs ***
 '                    SituarTab (NumTabMto + 1)
 
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
                     
                     CalcularKilosNetos
@@ -3691,10 +3691,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
                     PonerModo 4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
                         ' ***************************************************************
                     End If
                     CalcularKilosNetos
@@ -3704,7 +3704,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not Adoaux(NumTabMto).Recordset.EOF Then
+            If Not AdoAux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -4163,7 +4163,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -4175,32 +4175,32 @@ Dim Eliminar As Boolean
     Select Case Index
         Case 0 'calidades
             Sql = "¿Seguro que desea eliminar la Calidad?"
-            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid
+            Sql = Sql & vbCrLf & "Calidad: " & AdoAux(Index).Recordset!codcalid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_clasif "
-                Sql = Sql & vWhere & " AND codvarie= " & Adoaux(Index).Recordset!codvarie
-                Sql = Sql & " and codcalid= " & Adoaux(Index).Recordset!codcalid
+                Sql = Sql & vWhere & " AND codvarie= " & AdoAux(Index).Recordset!codvarie
+                Sql = Sql & " and codcalid= " & AdoAux(Index).Recordset!codcalid
             End If
             
         Case 1 'incidencias
             Sql = "¿Seguro que desea eliminar la Incidencia?"
-            Sql = Sql & vbCrLf & "Nombre: " & Adoaux(Index).Recordset!nomincid
+            Sql = Sql & vbCrLf & "Nombre: " & AdoAux(Index).Recordset!nomincid
             If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
                 Sql = "DELETE FROM rclasifica_incidencia "
-                Sql = Sql & vWhere & " AND codincid= " & Adoaux(Index).Recordset!codincid
+                Sql = Sql & vWhere & " AND codincid= " & AdoAux(Index).Recordset!codincid
             End If
             
     End Select
 
     If Eliminar Then
-        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
         conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
-        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
@@ -4256,7 +4256,7 @@ Dim I As Integer
             
 '            If Index = 0 Then NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 
-            AnyadirLinea DataGridAux(Index), Adoaux(Index)
+            AnyadirLinea DataGridAux(Index), AdoAux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -4301,8 +4301,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -4442,6 +4442,11 @@ Dim I As Integer
     Combo1(1).ItemData(Combo1(1).NewIndex) = 0
     Combo1(1).AddItem "Socio"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
+    '[Monica]25/09/2017: solo para coopic
+    If vParamAplic.Cooperativa = 16 Then
+        Combo1(1).AddItem "Otros"
+        Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+    End If
     
     'tipo de recoleccion
     Combo1(2).AddItem "Horas"
@@ -4454,6 +4459,11 @@ Dim I As Integer
     Combo1(3).ItemData(Combo1(3).NewIndex) = 0
     Combo1(3).AddItem "Socio"
     Combo1(3).ItemData(Combo1(3).NewIndex) = 1
+    '[Monica]25/09/2017: solo para coopic
+    If vParamAplic.Cooperativa = 16 Then
+        Combo1(3).AddItem "Otros"
+        Combo1(3).ItemData(Combo1(3).NewIndex) = 2
+    End If
     
 End Sub
 
@@ -4770,14 +4780,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim I As Byte
 
-    Adoaux(Index).ConnectionString = conn
-    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    Adoaux(Index).CursorType = adOpenDynamic
-    Adoaux(Index).LockType = adLockPessimistic
-    Adoaux(Index).Refresh
+    AdoAux(Index).ConnectionString = conn
+    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    AdoAux(Index).CursorType = adOpenDynamic
+    AdoAux(Index).LockType = adLockPessimistic
+    AdoAux(Index).Refresh
     
-    If Not Adoaux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
+    If Not AdoAux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -4811,7 +4821,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'clasificacion
@@ -4921,9 +4931,9 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 0
-                    V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                    V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
                 Case 1
-                    V = Adoaux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
+                    V = AdoAux(NumTabMto).Recordset.Fields(2) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -4932,7 +4942,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -5182,11 +5192,11 @@ End Sub
 
 Private Sub PasarSigReg()
 'Nos situamos en el siguiente registro
-    If Me.DataGridAux(0).Bookmark < Me.Adoaux(0).Recordset.RecordCount Then
+    If Me.DataGridAux(0).Bookmark < Me.AdoAux(0).Recordset.RecordCount Then
 '        DataGridAux(0).Row = DataGridAux(0).Row + 1
         DataGridAux(0).Bookmark = DataGridAux(0).Bookmark + 1
         BotonModificarLinea 0
-    ElseIf DataGridAux(0).Bookmark = Adoaux(0).Recordset.RecordCount Then
+    ElseIf DataGridAux(0).Bookmark = AdoAux(0).Recordset.RecordCount Then
 '        PonerFocoBtn Me.cmdAceptar
         BotonModificarLinea 0
     End If

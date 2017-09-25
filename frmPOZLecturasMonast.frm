@@ -1895,6 +1895,7 @@ End Sub
 
 Private Sub DatosaMemorizar(Leer As Boolean)
 Dim NF As Integer
+Dim NF1 As Integer
 Dim cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
@@ -1914,11 +1915,11 @@ On Error GoTo ENumeroEmpresaMemorizar
     
         End If
     Else 'Escribir
-        NF = FreeFile
-        Open cad For Output As #NF
+        NF1 = FreeFile
+        Open cad For Output As #NF1
         cad = Combo1(0).ItemData(Combo1(0).ListIndex) & "|" & Combo1(2).ItemData(Combo1(2).ListIndex) & "|"
-        Print #NF, cad
-        Close #NF
+        Print #NF1, cad
+        Close #NF1
     End If
 ENumeroEmpresaMemorizar:
     Err.Clear
