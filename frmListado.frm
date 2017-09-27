@@ -16,6 +16,311 @@ Begin VB.Form frmListado
    ScaleWidth      =   13185
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBonificaciones 
+      Height          =   4800
+      Left            =   0
+      TabIndex        =   360
+      Top             =   -30
+      Width           =   7185
+      Begin VB.Frame Frame1 
+         BorderStyle     =   0  'None
+         Caption         =   "Frame1"
+         Height          =   2685
+         Left            =   270
+         TabIndex        =   371
+         Top             =   1680
+         Width           =   3615
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   74
+            Left            =   1845
+            MaxLength       =   10
+            TabIndex        =   362
+            Top             =   225
+            Width           =   1300
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   76
+            Left            =   1845
+            MaxLength       =   5
+            TabIndex        =   363
+            Tag             =   "Porcentaje Bonificación|N|N|||rbonifentradas|porcbonif|#,##0||"
+            Top             =   795
+            Width           =   1095
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   77
+            Left            =   1845
+            MaxLength       =   10
+            TabIndex        =   364
+            Top             =   1350
+            Width           =   1095
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   78
+            Left            =   1845
+            MaxLength       =   10
+            TabIndex        =   365
+            Top             =   1890
+            Width           =   1095
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Fecha Inicio"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   91
+            Left            =   30
+            TabIndex        =   375
+            Top             =   240
+            Width           =   1200
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   13
+            Left            =   1530
+            Picture         =   "frmListado.frx":000C
+            ToolTipText     =   "Buscar fecha"
+            Top             =   210
+            Width           =   240
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Nro.Días"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   106
+            Left            =   30
+            TabIndex        =   374
+            Top             =   810
+            Width           =   810
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Porcentaje inicio"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   107
+            Left            =   30
+            TabIndex        =   373
+            Top             =   1350
+            Width           =   1635
+         End
+         Begin VB.Label Label2 
+            AutoSize        =   -1  'True
+            Caption         =   "Indice Corrección"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   108
+            Left            =   30
+            TabIndex        =   372
+            Top             =   1920
+            Width           =   1725
+         End
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   75
+         Left            =   3255
+         Locked          =   -1  'True
+         TabIndex        =   368
+         Text            =   "Text5"
+         Top             =   1275
+         Width           =   3645
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   75
+         Left            =   2115
+         MaxLength       =   6
+         TabIndex        =   361
+         Top             =   1275
+         Width           =   1065
+      End
+      Begin VB.CommandButton CmdAcepBonifica 
+         Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Left            =   4515
+         TabIndex        =   366
+         Top             =   3945
+         Width           =   1095
+      End
+      Begin VB.CommandButton CmdCancel 
+         Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   6
+         Left            =   5760
+         TabIndex        =   367
+         Top             =   3945
+         Width           =   1095
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   21
+         Left            =   1800
+         MouseIcon       =   "frmListado.frx":0097
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar variedad"
+         Top             =   1275
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   240
+         Index           =   105
+         Left            =   300
+         TabIndex        =   370
+         Top             =   1290
+         Width           =   855
+      End
+      Begin VB.Label Label15 
+         Caption         =   "Alta Masiva Bonificaciones"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   315
+         TabIndex        =   369
+         Top             =   420
+         Width           =   5025
+      End
+   End
    Begin VB.Frame FrameEntradasCampo 
       Height          =   6690
       Left            =   30
@@ -437,7 +742,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   7
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":000C
+         MouseIcon       =   "frmListado.frx":01E9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -447,7 +752,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   6
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":015E
+         MouseIcon       =   "frmListado.frx":033B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -495,7 +800,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1620
-         Picture         =   "frmListado.frx":02B0
+         Picture         =   "frmListado.frx":048D
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -504,7 +809,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1620
-         Picture         =   "frmListado.frx":033B
+         Picture         =   "frmListado.frx":0518
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -513,7 +818,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   15
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":03C6
+         MouseIcon       =   "frmListado.frx":05A3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3600
@@ -523,7 +828,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   14
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":0518
+         MouseIcon       =   "frmListado.frx":06F5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -533,7 +838,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   13
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":066A
+         MouseIcon       =   "frmListado.frx":0847
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -543,7 +848,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   12
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":07BC
+         MouseIcon       =   "frmListado.frx":0999
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -803,7 +1108,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   9
             Left            =   900
-            Picture         =   "frmListado.frx":090E
+            Picture         =   "frmListado.frx":0AEB
             ToolTipText     =   "Buscar fecha"
             Top             =   240
             Width           =   240
@@ -1118,7 +1423,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   124
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":0999
+         MouseIcon       =   "frmListado.frx":0B76
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1635
@@ -1128,7 +1433,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   123
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":0AEB
+         MouseIcon       =   "frmListado.frx":0CC8
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1305
@@ -1138,7 +1443,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   38
          Left            =   1650
-         Picture         =   "frmListado.frx":0C3D
+         Picture         =   "frmListado.frx":0E1A
          ToolTipText     =   "Buscar fecha"
          Top             =   2640
          Width           =   240
@@ -1147,7 +1452,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   37
          Left            =   1650
-         Picture         =   "frmListado.frx":0CC8
+         Picture         =   "frmListado.frx":0EA5
          ToolTipText     =   "Buscar fecha"
          Top             =   2250
          Width           =   240
@@ -1239,7 +1544,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   23
          Left            =   2865
-         Picture         =   "frmListado.frx":0D53
+         Picture         =   "frmListado.frx":0F30
          ToolTipText     =   "Buscar fecha"
          Top             =   1950
          Width           =   240
@@ -1596,7 +1901,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   121
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":0DDE
+         MouseIcon       =   "frmListado.frx":0FBB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2400
@@ -1606,7 +1911,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   120
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":0F30
+         MouseIcon       =   "frmListado.frx":110D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2010
@@ -1616,7 +1921,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   119
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":1082
+         MouseIcon       =   "frmListado.frx":125F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1590
@@ -1626,7 +1931,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   118
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":11D4
+         MouseIcon       =   "frmListado.frx":13B1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1170
@@ -1730,7 +2035,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   113
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":1326
+         MouseIcon       =   "frmListado.frx":1503
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   3240
@@ -1740,7 +2045,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   112
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":1478
+         MouseIcon       =   "frmListado.frx":1655
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   2835
@@ -1817,7 +2122,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   107
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":15CA
+         MouseIcon       =   "frmListado.frx":17A7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar población"
          Top             =   4200
@@ -1836,7 +2141,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   106
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":171C
+         MouseIcon       =   "frmListado.frx":18F9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar población"
          Top             =   3810
@@ -2043,7 +2348,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   128
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":186E
+         MouseIcon       =   "frmListado.frx":1A4B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -2053,7 +2358,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   127
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":19C0
+         MouseIcon       =   "frmListado.frx":1B9D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -2101,7 +2406,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1650
-         Picture         =   "frmListado.frx":1B12
+         Picture         =   "frmListado.frx":1CEF
          ToolTipText     =   "Buscar fecha"
          Top             =   3630
          Width           =   240
@@ -2110,7 +2415,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1650
-         Picture         =   "frmListado.frx":1B9D
+         Picture         =   "frmListado.frx":1D7A
          ToolTipText     =   "Buscar fecha"
          Top             =   3240
          Width           =   240
@@ -2119,7 +2424,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   126
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1C28
+         MouseIcon       =   "frmListado.frx":1E05
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -2129,7 +2434,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   125
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1D7A
+         MouseIcon       =   "frmListado.frx":1F57
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -2711,7 +3016,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   83
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":1ECC
+         MouseIcon       =   "frmListado.frx":20A9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5880
@@ -2730,7 +3035,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   82
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":201E
+         MouseIcon       =   "frmListado.frx":21FB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar zona"
          Top             =   5520
@@ -2827,7 +3132,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   58
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":2170
+         MouseIcon       =   "frmListado.frx":234D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   5025
@@ -2837,7 +3142,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   57
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":22C2
+         MouseIcon       =   "frmListado.frx":249F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   4650
@@ -2847,7 +3152,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   59
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":2414
+         MouseIcon       =   "frmListado.frx":25F1
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   3780
@@ -2857,7 +3162,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   60
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":2566
+         MouseIcon       =   "frmListado.frx":2743
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   4155
@@ -3003,7 +3308,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":26B8
+         MouseIcon       =   "frmListado.frx":2895
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   3285
@@ -3013,7 +3318,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   4
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":280A
+         MouseIcon       =   "frmListado.frx":29E7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   2910
@@ -3117,7 +3422,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":295C
+         MouseIcon       =   "frmListado.frx":2B39
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1560
@@ -3127,7 +3432,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":2AAE
+         MouseIcon       =   "frmListado.frx":2C8B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1200
@@ -3137,7 +3442,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":2C00
+         MouseIcon       =   "frmListado.frx":2DDD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2400
@@ -3147,7 +3452,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":2D52
+         MouseIcon       =   "frmListado.frx":2F2F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2025
@@ -3303,7 +3608,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   39
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":2EA4
+         MouseIcon       =   "frmListado.frx":3081
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -3710,7 +4015,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   53
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":2FF6
+         MouseIcon       =   "frmListado.frx":31D3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -3720,7 +4025,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   54
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3148
+         MouseIcon       =   "frmListado.frx":3325
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -3730,7 +4035,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   51
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":329A
+         MouseIcon       =   "frmListado.frx":3477
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -3740,7 +4045,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   52
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":33EC
+         MouseIcon       =   "frmListado.frx":35C9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3600
@@ -3750,7 +4055,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   15
          Left            =   1620
-         Picture         =   "frmListado.frx":353E
+         Picture         =   "frmListado.frx":371B
          ToolTipText     =   "Buscar fecha"
          Top             =   4545
          Width           =   240
@@ -3759,7 +4064,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   14
          Left            =   1620
-         Picture         =   "frmListado.frx":35C9
+         Picture         =   "frmListado.frx":37A6
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -3806,7 +4111,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   55
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3654
+         MouseIcon       =   "frmListado.frx":3831
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -3816,7 +4121,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   56
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":37A6
+         MouseIcon       =   "frmListado.frx":3983
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -4086,7 +4391,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   37
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":38F8
+         MouseIcon       =   "frmListado.frx":3AD5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3210
@@ -4096,7 +4401,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   38
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3A4A
+         MouseIcon       =   "frmListado.frx":3C27
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3600
@@ -4200,7 +4505,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   33
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3B9C
+         MouseIcon       =   "frmListado.frx":3D79
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -4210,7 +4515,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   34
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3CEE
+         MouseIcon       =   "frmListado.frx":3ECB
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -4220,7 +4525,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   3
          Left            =   1620
-         Picture         =   "frmListado.frx":3E40
+         Picture         =   "frmListado.frx":401D
          ToolTipText     =   "Buscar fecha"
          Top             =   4455
          Width           =   240
@@ -4229,7 +4534,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   2
          Left            =   1620
-         Picture         =   "frmListado.frx":3ECB
+         Picture         =   "frmListado.frx":40A8
          ToolTipText     =   "Buscar fecha"
          Top             =   4050
          Width           =   240
@@ -4276,7 +4581,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   35
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":3F56
+         MouseIcon       =   "frmListado.frx":4133
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -4286,7 +4591,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   36
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":40A8
+         MouseIcon       =   "frmListado.frx":4285
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -4651,7 +4956,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   90
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":41FA
+         MouseIcon       =   "frmListado.frx":43D7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -4661,7 +4966,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   91
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":434C
+         MouseIcon       =   "frmListado.frx":4529
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1635
@@ -4671,7 +4976,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   94
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":449E
+         MouseIcon       =   "frmListado.frx":467B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   3360
@@ -4681,7 +4986,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   95
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":45F0
+         MouseIcon       =   "frmListado.frx":47CD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   3720
@@ -4691,7 +4996,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   22
          Left            =   1800
-         Picture         =   "frmListado.frx":4742
+         Picture         =   "frmListado.frx":491F
          ToolTipText     =   "Buscar fecha"
          Top             =   4650
          Width           =   240
@@ -4700,7 +5005,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   21
          Left            =   1800
-         Picture         =   "frmListado.frx":47CD
+         Picture         =   "frmListado.frx":49AA
          ToolTipText     =   "Buscar fecha"
          Top             =   4320
          Width           =   240
@@ -4747,7 +5052,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   92
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":4858
+         MouseIcon       =   "frmListado.frx":4A35
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar campo"
          Top             =   2280
@@ -4757,7 +5062,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   93
          Left            =   1800
-         MouseIcon       =   "frmListado.frx":49AA
+         MouseIcon       =   "frmListado.frx":4B87
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar campo"
          Top             =   2640
@@ -4962,7 +5267,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   81
          Left            =   1020
-         MouseIcon       =   "frmListado.frx":4AFC
+         MouseIcon       =   "frmListado.frx":4CD9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cuenta"
          Top             =   3150
@@ -4972,7 +5277,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   80
          Left            =   1020
-         MouseIcon       =   "frmListado.frx":4C4E
+         MouseIcon       =   "frmListado.frx":4E2B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   1710
@@ -5112,7 +5417,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command58 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":4DA0
+         Picture         =   "frmListado.frx":4F7D
          Style           =   1  'Graphical
          TabIndex        =   818
          Top             =   2215
@@ -5122,7 +5427,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command57 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":50AA
+         Picture         =   "frmListado.frx":5287
          Style           =   1  'Graphical
          TabIndex        =   817
          Top             =   1440
@@ -5361,7 +5666,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   181
             Left            =   1800
-            MouseIcon       =   "frmListado.frx":53B4
+            MouseIcon       =   "frmListado.frx":5591
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar situación"
             Top             =   240
@@ -5561,7 +5866,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   46
          Left            =   2340
-         MouseIcon       =   "frmListado.frx":5506
+         MouseIcon       =   "frmListado.frx":56E3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar situación"
          Top             =   1275
@@ -5571,7 +5876,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   5
          Left            =   2310
-         Picture         =   "frmListado.frx":5658
+         Picture         =   "frmListado.frx":5835
          ToolTipText     =   "Buscar fecha"
          Top             =   1830
          Width           =   240
@@ -5656,7 +5961,7 @@ Begin VB.Form frmListado
          Width           =   3375
       End
       Begin VB.Label Label21 
-         Caption         =   $"frmListado.frx":56E3
+         Caption         =   $"frmListado.frx":58C0
          BeginProperty Font 
             Name            =   "MS Sans Serif"
             Size            =   8.25
@@ -5697,7 +6002,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   20
          Left            =   1590
-         Picture         =   "frmListado.frx":577C
+         Picture         =   "frmListado.frx":5959
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -5744,7 +6049,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   71
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":5807
+         MouseIcon       =   "frmListado.frx":59E4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2145
@@ -5774,7 +6079,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   72
          Left            =   1590
-         MouseIcon       =   "frmListado.frx":5959
+         MouseIcon       =   "frmListado.frx":5B36
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar incidencia"
          Top             =   3090
@@ -5980,7 +6285,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command6 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":5AAB
+         Picture         =   "frmListado.frx":5C88
          Style           =   1  'Graphical
          TabIndex        =   12
          Top             =   1440
@@ -5990,7 +6295,7 @@ Begin VB.Form frmListado
       Begin VB.CommandButton Command5 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListado.frx":5DB5
+         Picture         =   "frmListado.frx":5F92
          Style           =   1  'Graphical
          TabIndex        =   11
          Top             =   2215
@@ -6155,7 +6460,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   11
          Left            =   1575
-         MouseIcon       =   "frmListado.frx":60BF
+         MouseIcon       =   "frmListado.frx":629C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2790
@@ -6165,7 +6470,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   10
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":6211
+         MouseIcon       =   "frmListado.frx":63EE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2400
@@ -6175,7 +6480,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   9
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":6363
+         MouseIcon       =   "frmListado.frx":6540
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar sección"
          Top             =   1680
@@ -6185,7 +6490,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   8
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":64B5
+         MouseIcon       =   "frmListado.frx":6692
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar sección"
          Top             =   1275
@@ -6348,7 +6653,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   122
          Left            =   1500
-         MouseIcon       =   "frmListado.frx":6607
+         MouseIcon       =   "frmListado.frx":67E4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar cooperativa"
          Top             =   1665
@@ -6578,7 +6883,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   117
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":6759
+         MouseIcon       =   "frmListado.frx":6936
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2610
@@ -6588,7 +6893,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   116
          Left            =   1515
-         MouseIcon       =   "frmListado.frx":68AB
+         MouseIcon       =   "frmListado.frx":6A88
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2280
@@ -6598,7 +6903,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   115
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":69FD
+         MouseIcon       =   "frmListado.frx":6BDA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1710
@@ -6608,7 +6913,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   114
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":6B4F
+         MouseIcon       =   "frmListado.frx":6D2C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1350
@@ -6858,7 +7163,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   24
          Left            =   1515
-         Picture         =   "frmListado.frx":6CA1
+         Picture         =   "frmListado.frx":6E7E
          ToolTipText     =   "Buscar fecha"
          Top             =   3660
          Width           =   240
@@ -6923,7 +7228,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   45
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":6D2C
+         MouseIcon       =   "frmListado.frx":6F09
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2640
@@ -6933,7 +7238,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   42
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":6E7E
+         MouseIcon       =   "frmListado.frx":705B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1350
@@ -6943,7 +7248,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   44
          Left            =   1515
-         MouseIcon       =   "frmListado.frx":6FD0
+         MouseIcon       =   "frmListado.frx":71AD
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2280
@@ -6953,7 +7258,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   43
          Left            =   1530
-         MouseIcon       =   "frmListado.frx":7122
+         MouseIcon       =   "frmListado.frx":72FF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1740
@@ -7299,7 +7604,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   70
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7274
+         MouseIcon       =   "frmListado.frx":7451
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   5460
@@ -7309,7 +7614,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   65
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":73C6
+         MouseIcon       =   "frmListado.frx":75A3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar concepto"
          Top             =   5100
@@ -7319,7 +7624,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   64
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7518
+         MouseIcon       =   "frmListado.frx":76F5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2610
@@ -7329,7 +7634,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   63
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":766A
+         MouseIcon       =   "frmListado.frx":7847
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -7377,7 +7682,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   17
          Left            =   1620
-         Picture         =   "frmListado.frx":77BC
+         Picture         =   "frmListado.frx":7999
          ToolTipText     =   "Buscar fecha"
          Top             =   4560
          Width           =   240
@@ -7386,7 +7691,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   16
          Left            =   1620
-         Picture         =   "frmListado.frx":7847
+         Picture         =   "frmListado.frx":7A24
          ToolTipText     =   "Buscar fecha"
          Top             =   4140
          Width           =   240
@@ -7395,7 +7700,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   62
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":78D2
+         MouseIcon       =   "frmListado.frx":7AAF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3600
@@ -7405,7 +7710,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   61
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7A24
+         MouseIcon       =   "frmListado.frx":7C01
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3210
@@ -7415,7 +7720,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   50
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7B76
+         MouseIcon       =   "frmListado.frx":7D53
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1665
@@ -7425,7 +7730,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   47
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7CC8
+         MouseIcon       =   "frmListado.frx":7EA5
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -7640,7 +7945,7 @@ Begin VB.Form frmListado
             Height          =   240
             Index           =   89
             Left            =   1170
-            MouseIcon       =   "frmListado.frx":7E1A
+            MouseIcon       =   "frmListado.frx":7FF7
             MousePointer    =   4  'Icon
             ToolTipText     =   "Buscar Nro.Orden"
             Top             =   210
@@ -7799,7 +8104,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   28
          Left            =   1620
-         Picture         =   "frmListado.frx":7F6C
+         Picture         =   "frmListado.frx":8149
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
          Width           =   240
@@ -7828,7 +8133,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   85
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":7FF7
+         MouseIcon       =   "frmListado.frx":81D4
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1635
@@ -7838,7 +8143,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   84
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":8149
+         MouseIcon       =   "frmListado.frx":8326
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar capataz"
          Top             =   1170
@@ -7926,7 +8231,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   86
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":829B
+         MouseIcon       =   "frmListado.frx":8478
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar partida"
          Top             =   2160
@@ -8210,7 +8515,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   111
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":83ED
+         MouseIcon       =   "frmListado.frx":85CA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1635
@@ -8220,7 +8525,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   110
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":853F
+         MouseIcon       =   "frmListado.frx":871C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1275
@@ -8230,7 +8535,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   109
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":8691
+         MouseIcon       =   "frmListado.frx":886E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2790
@@ -8240,7 +8545,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   108
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":87E3
+         MouseIcon       =   "frmListado.frx":89C0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   2430
@@ -8250,7 +8555,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   34
          Left            =   1650
-         Picture         =   "frmListado.frx":8935
+         Picture         =   "frmListado.frx":8B12
          ToolTipText     =   "Buscar fecha"
          Top             =   3915
          Width           =   240
@@ -8259,7 +8564,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   33
          Left            =   1650
-         Picture         =   "frmListado.frx":89C0
+         Picture         =   "frmListado.frx":8B9D
          ToolTipText     =   "Buscar fecha"
          Top             =   3510
          Width           =   240
@@ -8405,7 +8710,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   32
          Left            =   1545
-         Picture         =   "frmListado.frx":8A4B
+         Picture         =   "frmListado.frx":8C28
          ToolTipText     =   "Buscar fecha"
          Top             =   2625
          Width           =   240
@@ -8414,7 +8719,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   31
          Left            =   1545
-         Picture         =   "frmListado.frx":8AD6
+         Picture         =   "frmListado.frx":8CB3
          ToolTipText     =   "Buscar fecha"
          Top             =   2220
          Width           =   240
@@ -8443,7 +8748,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   103
          Left            =   1545
-         MouseIcon       =   "frmListado.frx":8B61
+         MouseIcon       =   "frmListado.frx":8D3E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1635
@@ -8453,7 +8758,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   102
          Left            =   1560
-         MouseIcon       =   "frmListado.frx":8CB3
+         MouseIcon       =   "frmListado.frx":8E90
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1290
@@ -8715,7 +9020,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   96
          Left            =   1500
-         MouseIcon       =   "frmListado.frx":8E05
+         MouseIcon       =   "frmListado.frx":8FE2
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1440
@@ -8725,7 +9030,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   97
          Left            =   1515
-         MouseIcon       =   "frmListado.frx":8F57
+         MouseIcon       =   "frmListado.frx":9134
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1830
@@ -8960,7 +9265,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   0
          Left            =   5580
-         Picture         =   "frmListado.frx":90A9
+         Picture         =   "frmListado.frx":9286
          ToolTipText     =   "Desmarcar todos"
          Top             =   3900
          Width           =   240
@@ -8969,7 +9274,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   1
          Left            =   5850
-         Picture         =   "frmListado.frx":9AAB
+         Picture         =   "frmListado.frx":9C88
          ToolTipText     =   "Marcar todos"
          Top             =   3900
          Width           =   240
@@ -8998,7 +9303,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   41
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":102FD
+         MouseIcon       =   "frmListado.frx":104DA
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3600
@@ -9008,7 +9313,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   32
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1044F
+         MouseIcon       =   "frmListado.frx":1062C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2580
@@ -9056,7 +9361,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   8
          Left            =   1620
-         Picture         =   "frmListado.frx":105A1
+         Picture         =   "frmListado.frx":1077E
          ToolTipText     =   "Buscar fecha"
          Top             =   4440
          Width           =   240
@@ -9065,7 +9370,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   7
          Left            =   1620
-         Picture         =   "frmListado.frx":1062C
+         Picture         =   "frmListado.frx":10809
          ToolTipText     =   "Buscar fecha"
          Top             =   4080
          Width           =   240
@@ -9074,7 +9379,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   31
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":106B7
+         MouseIcon       =   "frmListado.frx":10894
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2220
@@ -9084,7 +9389,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   28
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10809
+         MouseIcon       =   "frmListado.frx":109E6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1680
@@ -9188,7 +9493,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   27
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":1095B
+         MouseIcon       =   "frmListado.frx":10B38
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1290
@@ -9198,7 +9503,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   40
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10AAD
+         MouseIcon       =   "frmListado.frx":10C8A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   3210
@@ -9415,7 +9720,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   101
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10BFF
+         MouseIcon       =   "frmListado.frx":10DDC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3930
@@ -9425,7 +9730,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   100
          Left            =   1620
-         MouseIcon       =   "frmListado.frx":10D51
+         MouseIcon       =   "frmListado.frx":10F2E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   3570
@@ -9473,7 +9778,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   99
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":10EA3
+         MouseIcon       =   "frmListado.frx":11080
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2790
@@ -9483,7 +9788,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   98
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":10FF5
+         MouseIcon       =   "frmListado.frx":111D2
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar producto"
          Top             =   2430
@@ -9587,7 +9892,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   105
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":11147
+         MouseIcon       =   "frmListado.frx":11324
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1650
@@ -9597,7 +9902,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   104
          Left            =   1650
-         MouseIcon       =   "frmListado.frx":11299
+         MouseIcon       =   "frmListado.frx":11476
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1260
@@ -9661,7 +9966,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   27
          Left            =   1605
-         Picture         =   "frmListado.frx":113EB
+         Picture         =   "frmListado.frx":115C8
          ToolTipText     =   "Buscar fecha"
          Top             =   2520
          Width           =   240
@@ -9690,7 +9995,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   26
          Left            =   1620
-         Picture         =   "frmListado.frx":11476
+         Picture         =   "frmListado.frx":11653
          ToolTipText     =   "Buscar fecha"
          Top             =   1980
          Width           =   240
@@ -9699,7 +10004,7 @@ Begin VB.Form frmListado
          Height          =   240
          Index           =   25
          Left            =   1620
-         Picture         =   "frmListado.frx":11501
+         Picture         =   "frmListado.frx":116DE
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -9759,239 +10064,6 @@ Begin VB.Form frmListado
          TabIndex        =   616
          Top             =   1380
          Width           =   435
-      End
-   End
-   Begin VB.Frame FrameBonificaciones 
-      Height          =   4800
-      Left            =   0
-      TabIndex        =   360
-      Top             =   -30
-      Width           =   6735
-      Begin VB.Frame Frame1 
-         BorderStyle     =   0  'None
-         Caption         =   "Frame1"
-         Height          =   2685
-         Left            =   180
-         TabIndex        =   371
-         Top             =   1680
-         Width           =   3615
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   74
-            Left            =   1755
-            MaxLength       =   10
-            TabIndex        =   362
-            Top             =   225
-            Width           =   1095
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   76
-            Left            =   1755
-            MaxLength       =   5
-            TabIndex        =   363
-            Tag             =   "Porcentaje Bonificación|N|N|||rbonifentradas|porcbonif|#,##0||"
-            Top             =   795
-            Width           =   1095
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   77
-            Left            =   1755
-            MaxLength       =   10
-            TabIndex        =   364
-            Top             =   1350
-            Width           =   1095
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   78
-            Left            =   1755
-            MaxLength       =   10
-            TabIndex        =   365
-            Top             =   1890
-            Width           =   1095
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Fecha Inicio"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   91
-            Left            =   480
-            TabIndex        =   375
-            Top             =   240
-            Width           =   855
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   13
-            Left            =   1440
-            Picture         =   "frmListado.frx":1158C
-            ToolTipText     =   "Buscar fecha"
-            Top             =   210
-            Width           =   240
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Nro.Días"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   106
-            Left            =   480
-            TabIndex        =   374
-            Top             =   810
-            Width           =   615
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Porcentaje inicio"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   107
-            Left            =   480
-            TabIndex        =   373
-            Top             =   1350
-            Width           =   1170
-         End
-         Begin VB.Label Label2 
-            AutoSize        =   -1  'True
-            Caption         =   "Indice Corrección"
-            BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   195
-            Index           =   108
-            Left            =   480
-            TabIndex        =   372
-            Top             =   1920
-            Width           =   1245
-         End
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   75
-         Left            =   2760
-         Locked          =   -1  'True
-         TabIndex        =   368
-         Text            =   "Text5"
-         Top             =   1275
-         Width           =   3375
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   75
-         Left            =   1935
-         MaxLength       =   6
-         TabIndex        =   361
-         Top             =   1275
-         Width           =   750
-      End
-      Begin VB.CommandButton CmdAcepBonifica 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4020
-         TabIndex        =   366
-         Top             =   3945
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Index           =   6
-         Left            =   5130
-         TabIndex        =   367
-         Top             =   3945
-         Width           =   975
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   21
-         Left            =   1620
-         MouseIcon       =   "frmListado.frx":11617
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar variedad"
-         Top             =   1275
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Variedad"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   105
-         Left            =   660
-         TabIndex        =   370
-         Top             =   1290
-         Width           =   630
-      End
-      Begin VB.Label Label15 
-         Caption         =   "Alta Masiva Bonificaciones"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   369
-         Top             =   420
-         Width           =   5025
       End
    End
    Begin VB.Frame FrameGrabacionAgriweb 
@@ -18702,6 +18774,9 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 4, 5 ' Situacion de campo
             AbrirFrmSituacionCampo (Index)
             
+        Case 21 ' variedades
+            AbrirFrmVariedad (Index + 54)
+            
         Case 8, 9 'SECCION
             AbrirFrmSeccion (Index)
         
@@ -18949,6 +19024,8 @@ Private Sub imgFec_Click(Index As Integer)
             Indice = 72
         Case 12
             Indice = 73
+        Case 13
+            Indice = 74
         Case 14, 15
             Indice = Index + 74
         Case 16, 17
@@ -19678,7 +19755,7 @@ Private Sub FrameBonificacionesVisible(visible As Boolean, ByRef H As Integer, B
         Me.FrameBonificaciones.Top = -90
         Me.FrameBonificaciones.Left = 0
         Me.FrameBonificaciones.Height = 4800
-        Me.FrameBonificaciones.Width = 6615
+        Me.FrameBonificaciones.Width = 7185
         W = Me.FrameBonificaciones.Width
         H = Me.FrameBonificaciones.Height
     End If
@@ -24067,7 +24144,7 @@ Dim UltimaFecha As Date
 
     ExistenBonificaciones = False
 
-    Dias = CCur(txtCodigo(76).Text)
+    Dias = CCur(ComprobarCero(txtCodigo(76).Text))
     
     UltimaFecha = DateAdd("d", Dias, CDate(txtCodigo(74).Text))
     

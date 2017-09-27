@@ -618,7 +618,7 @@ Dim B As Boolean
     btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -779,7 +779,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -788,15 +788,15 @@ Dim temp As Boolean
 '    If Not SepuedeBorrar Then Exit Sub
         
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!codvarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
-        conn.Execute SQL
+        Sql = "Delete from rbonifentradas where codvarie=" & adodc1.Recordset!codvarie & " and fechaent=" & DBSet(adodc1.Recordset!FechaEnt, "F")
+        conn.Execute Sql
         CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
@@ -1147,26 +1147,26 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rbonifentradas.codvarie, rbonifentradas.fechaent"
+    Sql = Sql & " ORDER BY rbonifentradas.codvarie, rbonifentradas.fechaent"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|1100|;S|btnBuscar(0)|B|||;"
-    tots = tots & "S|txtAux2(0)|T|Variedad|3800|;S|txtAux(1)|T|Fec.Entrada|1500|;"
-    tots = tots & "S|btnBuscar(1)|B|||;S|txtAux(2)|T|Porcentaje|1200|;"
+    tots = "S|txtAux(0)|T|Código|1200|;S|btnBuscar(0)|B|||;"
+    tots = tots & "S|txtAux2(0)|T|Variedad|3900|;S|txtAux(1)|T|Fec.Entrada|1500|;"
+    tots = tots & "S|btnBuscar(1)|B|||;S|txtAux(2)|T|Porcentaje|1300|;"
     
     arregla tots, DataGrid1, Me, 350
     
@@ -1178,9 +1178,9 @@ End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 10
+        Case 1
                 mnAltaMasiva_Click
-        Case 11
+        Case 2
                 mnBajaMasiva_Click
     End Select
 End Sub
@@ -1245,7 +1245,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1254,8 +1254,8 @@ Dim Mens As String
     
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = "select count(*) from rbonifentradas where codvarie = " & DBSet(txtAux(0).Text, "N") & " and fechaent = " & DBSet(txtAux(1).Text, "F")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from rbonifentradas where codvarie = " & DBSet(txtAux(0).Text, "N") & " and fechaent = " & DBSet(txtAux(1).Text, "F")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "Ya existe el registro para la variedad fecha. Revise.", vbExclamation
             B = False
         End If

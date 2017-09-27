@@ -7306,10 +7306,6 @@ Private Sub FechaBajaVisible(Mostrar As Boolean)
 End Sub
 
 
-Private Sub FrameEntradasCapataz_DragDrop(Source As Control, X As Single, Y As Single)
-
-End Sub
-
 Private Sub frmAlm_DatoSeleccionado(CadenaSeleccion As String)
     txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
@@ -10004,8 +10000,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -10015,7 +10011,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
@@ -10569,8 +10565,8 @@ On Error GoTo eProcesoPaseABanco
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    Pb1.visible = True
-    CargarProgres Pb1, Rs.Fields(0).Value
+    pb1.visible = True
+    CargarProgres pb1, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -10580,7 +10576,7 @@ On Error GoTo eProcesoPaseABanco
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres Pb1, 1
+        IncrementarProgres pb1, 1
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If DBLet(Rs!Importe) >= 0 Then
