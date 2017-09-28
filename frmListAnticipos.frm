@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "comctl32.ocx"
+Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.3#0"; "COMCTL32.OCX"
 Begin VB.Form frmListAnticipos 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Informes"
@@ -12514,6 +12514,31 @@ Dim vGastos As Currency
             
             ImpoBonif = ImpoBonif + DevuelveValor(Sql4)
              
+             
+            '[Monica]24/02/2014: añadida condicion
+            If (vParamAplic.Cooperativa = 3) Then
+                ' gastos de los albaranes
+                Sql4 = "select sum(rhisfruta_gastos.importe) "
+                Sql4 = Sql4 & " from rhisfruta_gastos inner join rhisfruta on rhisfruta.numalbar = rhisfruta_gastos.numalbar"
+                Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
+                Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
+                Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
+                Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+                Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+                
+                ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
+                
+                '[Monica]23/07/2012: si es complementaria no hay gastos
+                If Check1(5).Value = 1 Then ' si es complementaria no hay gastos
+                    ImpoGastos = 0
+                End If
+            End If
+             
+             
+             
+             
+             
+             
             '[MONICA] : 15/03/2010 si es complementaria los gastos son 0
             If Check1(5).Value = 1 Then
                 ImpoBonif = 0
@@ -12523,6 +12548,18 @@ Dim vGastos As Currency
             
             CampoAnt = Rs!codcampo
         End If
+    
+    
+        
+                   
+    
+    
+    
+    
+    
+    
+    
+    
     
         ' 23/07/2009: añadido el or con la segunda condicion
         If VarieAnt <> Rs!codvarie Or SocioAnt <> Rs!Codsocio Then
