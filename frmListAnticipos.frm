@@ -12515,7 +12515,7 @@ Dim vGastos As Currency
             ImpoBonif = ImpoBonif + DevuelveValor(Sql4)
              
              
-            '[Monica]24/02/2014: añadida condicion
+            '[Monica]29/09/2017: añadida condicion
             If (vParamAplic.Cooperativa = 3) Then
                 ' gastos de los albaranes
                 Sql4 = "select sum(rhisfruta_gastos.importe) "
@@ -12772,6 +12772,28 @@ Dim vGastos As Currency
         
 '[Monica] 09/09/2009: el gasto de la cooperativa lo añado a la columna de gastos que no usa Valsur
         ImpoGastos = ImpoGastos + Round2(Bruto * ImporteSinFormato(vPorcGasto) / 100, 2)
+        
+        
+        '[Monica]29/09/2017: añadida condicion
+        If (vParamAplic.Cooperativa = 3) Then
+            ' gastos de los albaranes
+            Sql4 = "select sum(rhisfruta_gastos.importe) "
+            Sql4 = Sql4 & " from rhisfruta_gastos inner join rhisfruta on rhisfruta.numalbar = rhisfruta_gastos.numalbar"
+            Sql4 = Sql4 & " where codsocio = " & DBSet(SocioAnt, "N")
+            Sql4 = Sql4 & " and codvarie = " & DBSet(VarieAnt, "N")
+            Sql4 = Sql4 & " and codcampo = " & DBSet(CampoAnt, "N")
+            Sql4 = Sql4 & " and fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+            Sql4 = Sql4 & " and fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+            
+            ImpoGastos = ImpoGastos + DevuelveValor(Sql4)
+            
+            '[Monica]23/07/2012: si es complementaria no hay gastos
+            If Check1(5).Value = 1 Then ' si es complementaria no hay gastos
+                ImpoGastos = 0
+            End If
+        End If
+        
+        
         
         '[MONICA] : 15/03/2010 si es complementaria los gastos son 0
         If Check1(5).Value = 1 Then

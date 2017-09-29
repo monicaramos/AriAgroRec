@@ -3387,7 +3387,12 @@ Dim vPorcGasto As String
 '                baseimpo = baseimpo - GastosAlb
 '            End If
         
-            GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, , , Complementaria)
+            '[Monica]29/09/2017: Para el resto sigue como estaba
+            If vParamAplic.Cooperativa = 3 Then
+                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, 1, , Complementaria)
+            Else
+                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, AntCampo, cTabla, cWhere, , , Complementaria)
+            End If
             
             Importe = Importe - GastosAlb
             baseimpo = baseimpo - GastosAlb
