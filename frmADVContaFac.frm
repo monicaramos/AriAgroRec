@@ -148,7 +148,7 @@ Begin VB.Form frmADVContaFac
             Width           =   1440
          End
          Begin VB.Label Label4 
-            Caption         =   "Fecha Vencimiento"
+            Caption         =   "Fecha Vencim."
             BeginProperty Font 
                Name            =   "Verdana"
                Size            =   9.75
@@ -164,7 +164,7 @@ Begin VB.Form frmADVContaFac
             Left            =   180
             TabIndex        =   15
             Top             =   405
-            Width           =   1425
+            Width           =   1515
          End
          Begin VB.Image imgFec 
             Height          =   240
@@ -715,14 +715,14 @@ End Sub
 
 Private Sub Optcodigo_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     ElseIf KeyAscii = 27 Then Unload Me  'ESC
     End If
 End Sub
 
 Private Sub OptNombre_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
-        PonerFocoBtn Me.CmdAceptar
+        PonerFocoBtn Me.cmdAceptar
     ElseIf KeyAscii = 27 Then Unload Me  'ESC
     End If
 End Sub

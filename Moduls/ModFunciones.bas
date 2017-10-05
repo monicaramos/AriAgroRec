@@ -4507,7 +4507,7 @@ Public Sub AyudaConceptos(frmBas As frmBasico, Optional CodActual As String)
     frmBas.Tag2 = "Nombre|T|N|||rriego|nomriego|||"
     frmBas.Maxlen1 = 6
     frmBas.Maxlen2 = 40
-    frmBas.tabla = "rrigo"
+    frmBas.tabla = "rriego"
     frmBas.CampoCP = "codriego"
     'frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "Conceptos"

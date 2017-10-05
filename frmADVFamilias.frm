@@ -237,7 +237,7 @@ Begin VB.Form frmADVFamilias
          Width           =   1440
       End
       Begin VB.Label Label1 
-         Caption         =   "Cta. Contable Compras"
+         Caption         =   "Cta.Contable"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -252,7 +252,7 @@ Begin VB.Form frmADVFamilias
          Left            =   180
          TabIndex        =   22
          Top             =   345
-         Width           =   1815
+         Width           =   1680
       End
       Begin VB.Label Label1 
          Caption         =   "Cta. Abono Compras"
@@ -323,7 +323,7 @@ Begin VB.Form frmADVFamilias
          TabIndex        =   24
          Tag             =   "Centro Coste|T|S|||advfamia|codccost||N|"
          Text            =   "Text1"
-         Top             =   1185
+         Top             =   1230
          Width           =   1395
       End
       Begin VB.TextBox Text2 
@@ -345,7 +345,7 @@ Begin VB.Form frmADVFamilias
          MaxLength       =   30
          TabIndex        =   23
          Text            =   "Text2"
-         Top             =   1185
+         Top             =   1230
          Width           =   4350
       End
       Begin VB.TextBox Text2 
@@ -437,7 +437,7 @@ Begin VB.Form frmADVFamilias
          Index           =   4
          Left            =   2070
          ToolTipText     =   "Buscar centro de coste"
-         Top             =   1185
+         Top             =   1275
          Width           =   240
       End
       Begin VB.Label Label1 
@@ -455,7 +455,7 @@ Begin VB.Form frmADVFamilias
          Index           =   4
          Left            =   225
          TabIndex        =   25
-         Top             =   1185
+         Top             =   1230
          Width           =   1680
       End
       Begin VB.Label Label1 
@@ -541,7 +541,7 @@ Begin VB.Form frmADVFamilias
       EndProperty
       Height          =   360
       Index           =   0
-      Left            =   750
+      Left            =   885
       MaxLength       =   4
       TabIndex        =   0
       Tag             =   "Código familia de artículo|N|N|0|9999|advfamia|codfamia|0000|S|"
@@ -699,7 +699,7 @@ Begin VB.Form frmADVFamilias
    End
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
-      Caption         =   "Cod."
+      Caption         =   "Codigo"
       BeginProperty Font 
          Name            =   "Verdana"
          Size            =   9.75
@@ -714,7 +714,7 @@ Begin VB.Form frmADVFamilias
       Left            =   180
       TabIndex        =   12
       Top             =   900
-      Width           =   465
+      Width           =   645
    End
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
@@ -730,7 +730,7 @@ Begin VB.Form frmADVFamilias
       EndProperty
       Height          =   300
       Index           =   1
-      Left            =   1500
+      Left            =   1590
       TabIndex        =   11
       Top             =   900
       Width           =   1545
