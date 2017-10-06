@@ -10797,15 +10797,15 @@ Dim Sql2 As String
             SqlRec = SqlRec & "'RCP'," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(121).Text, "F") & ",1," & DBSet(Rs!Codsocio, "N") & ","
             SqlRec = SqlRec & DBSet(Rs!Hidrante, "T") & "," & DBSet(Importe, "N") & ","
             SqlRec = SqlRec & ValorNulo & "," & DBSet(Importe, "N") & "," & DBSet(Consumo, "N") & "," & DBSet(Rs!lect_ant, "N") & "," & DBSet(Rs!fech_ant, "F") & ","
-            SqlRec = SqlRec & DBSet(Rs!lect_act, "N") & "," & DBSet(txtCodigo(121).Text, "F") & "," & DBSet(TConsumo1, "N") & "," & DBSet(vParamAplic.Precio1POZ, "N") & ","
-            SqlRec = SqlRec & DBSet(TConsumo2, "N") & "," & DBSet(vParamAplic.Precio2POZ, "N") & ","
-            SqlRec = SqlRec & DBSet(TConsumo3, "N") & "," & DBSet(vParamAplic.Precio3POZ, "N") & ","
+            SqlRec = SqlRec & DBSet(Rs!lect_act, "N") & "," & DBSet(txtCodigo(121).Text, "F") & "," & DBSet(TConsumo1, "N") & "," & DBSet(ComprobarCero(Text1(87)), "N") & ","
+            SqlRec = SqlRec & DBSet(TConsumo2, "N") & "," & DBSet(ComprobarCero(Text1(89)), "N") & ","
+            SqlRec = SqlRec & DBSet(TConsumo3, "N") & "," & DBSet(ComprobarCero(Text1(137)), "N") & ","
             SqlRec = SqlRec & DBSet(Rs!hanegada, "N") & "," ' coeficiente
-            SqlRec = SqlRec & DBSet(Round2(Consumo * vParamAplic.CoefConsumoPOZ, 2), "N") & "," ' cuota consumo
-            SqlRec = SqlRec & DBSet(Round2(Consumo * vParamAplic.CoefSuministroPOZ, 2), "N") & "," ' cuota suministro
-            SqlRec = SqlRec & DBSet(vParamAplic.CuotaPOZ, "N") & "," ' cuota mantenimiento
-            SqlRec = SqlRec & DBSet(vParamAplic.DerramaPOZ, "N") & "," ' cuota servicio
-            SqlRec = SqlRec & DBSet(vParamAplic.CanonPOZ, "N") & "," ' cuota canon de contador
+            SqlRec = SqlRec & DBSet(Round2(Consumo * ComprobarCero(Text1(140)), 2), "N") & "," ' cuota consumo
+            SqlRec = SqlRec & DBSet(Round2(Consumo * ComprobarCero(Text1(141)), 2), "N") & "," ' cuota suministro
+            SqlRec = SqlRec & DBSet(ComprobarCero(Text1(91)), "N") & "," ' cuota mantenimiento
+            SqlRec = SqlRec & DBSet(ComprobarCero(Text1(92)), "N") & "," ' cuota servicio
+            SqlRec = SqlRec & DBSet(ComprobarCero(Text1(139)), "N") & "," ' cuota canon de contador
             SqlRec = SqlRec & "1)" ' lo marcamos como contabilizado
             
             conn.Execute SqlRec
@@ -10942,30 +10942,30 @@ Dim tConsumo As Currency
     TConsumo3 = 0
     
     ' tramo 1
-    If tConsumo <= vParamAplic.Consumo1POZ Then
-        tImporte = tImporte + Round2(tConsumo * vParamAplic.Precio1POZ, 2)
+    If tConsumo <= ComprobarCero(Text1(86)) Then 'vParamAplic.Consumo1POZ
+        tImporte = tImporte + Round2(tConsumo * ComprobarCero(Text1(87)), 2) ' vParamAplic.Precio1POZ
         TConsumo1 = tConsumo
         tConsumo = 0
     Else
-        tImporte = tImporte + Round2(vParamAplic.Consumo1POZ * vParamAplic.Precio1POZ, 2)
-        tConsumo = tConsumo - vParamAplic.Consumo1POZ
-        TConsumo1 = vParamAplic.Consumo1POZ
+        tImporte = tImporte + Round2(ComprobarCero(Text1(86)) * ComprobarCero(Text1(87)), 2) ' vParamAplic.Consumo1POZ * vParamAplic.Precio1POZ
+        tConsumo = tConsumo - ComprobarCero(Text1(86)) ' vParamAplic.Consumo1POZ
+        TConsumo1 = ComprobarCero(Text1(86)) 'vParamAplic.Consumo1POZ
     End If
     ' tramo 2
     If tConsumo > 0 Then
-        If tConsumo <= (vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ) Then
-            tImporte = tImporte + Round2(tConsumo * vParamAplic.Precio2POZ, 2)
+        If tConsumo <= (ComprobarCero(Text1(88)) - ComprobarCero(Text1(86))) Then ' vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ
+            tImporte = tImporte + Round2(tConsumo * ComprobarCero(Text1(89)), 2) ' vParamAplic.Precio2POZ
             TConsumo2 = tConsumo
             tConsumo = 0
         Else
-            tImporte = tImporte + Round2((vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ) * vParamAplic.Precio2POZ, 2)
-            tConsumo = tConsumo - (vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ)
-            TConsumo2 = vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ
+            tImporte = tImporte + Round2((ComprobarCero(Text1(88)) - ComprobarCero(Text1(86))) * ComprobarCero(Text1(89)), 2) ' (vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ) * vParamAplic.Precio2POZ
+            tConsumo = tConsumo - (ComprobarCero(Text1(88)) - ComprobarCero(Text1(86))) ' vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ
+            TConsumo2 = ComprobarCero(Text1(88)) - ComprobarCero(Text1(86)) 'vParamAplic.Consumo2POZ - vParamAplic.Consumo1POZ
         End If
     End If
     ' tramo 3
     If tConsumo > 0 Then
-        tImporte = tImporte + Round2(tConsumo * vParamAplic.Precio3POZ, 2)
+        tImporte = tImporte + Round2(tConsumo * ComprobarCero(Text1(137)), 2) ' vParamAplic.Precio3POZ
         TConsumo3 = tConsumo
     End If
     
@@ -10973,14 +10973,14 @@ Dim tConsumo As Currency
     tImporte = Round2(tImporte * Coeficiente, 2)
     
     ' cuota de consumo
-    tImporte = tImporte + Round2(Consumo * vParamAplic.CoefConsumoPOZ, 2)
+    tImporte = tImporte + Round2(Consumo * ComprobarCero(Text1(140)), 2) ' vParamAplic.CoefConsumoPOZ
     ' cuota de suministro
-    tImporte = tImporte + Round2(Consumo * vParamAplic.CoefSuministroPOZ, 2)
+    tImporte = tImporte + Round2(Consumo * ComprobarCero(Text1(141)), 2) ' vParamAplic.CoefSuministroPOZ
     
     ' cuotas fijas: mantenimiento, servicio, canon contador
-    tImporte = tImporte + vParamAplic.CuotaPOZ
-    tImporte = tImporte + vParamAplic.DerramaPOZ
-    tImporte = tImporte + vParamAplic.CanonPOZ
+    tImporte = tImporte + ComprobarCero(Text1(91)) 'vParamAplic.CuotaPOZ
+    tImporte = tImporte + ComprobarCero(Text1(92)) 'vParamAplic.DerramaPOZ
+    tImporte = tImporte + ComprobarCero(Text1(139)) 'vParamAplic.CanonPOZ
     
     CalculoImporte = tImporte
     
@@ -16895,12 +16895,12 @@ Dim vSeccion As CSeccion
 
                 End If
                 If B Then
-                    Dim a As String
+                    Dim A As String
                     Dim Pos As Integer
                     Pos = InStrRev(txtCodigo(134).Text, "\")
                     If Pos > 0 Then
-                        a = Mid(txtCodigo(134).Text, 1, Pos - 1)
-                        If Dir(a, vbDirectory) = "" Then
+                        A = Mid(txtCodigo(134).Text, 1, Pos - 1)
+                        If Dir(A, vbDirectory) = "" Then
                             MsgBox "No existe la ruta introducida. Revise.", vbExclamation
                             PonerFoco txtCodigo(134)
                             B = False

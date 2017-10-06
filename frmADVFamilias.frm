@@ -733,7 +733,7 @@ Begin VB.Form frmADVFamilias
       Left            =   1590
       TabIndex        =   11
       Top             =   900
-      Width           =   1545
+      Width           =   1455
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -1461,12 +1461,12 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     ' ************* configurar els camps de les descripcions de la capçalera *************
     If Not vSeccion Is Nothing Then
-        Text2(2).Text = PonerNombreCuenta(Text1(2), Modo)
-        Text2(3).Text = PonerNombreCuenta(Text1(3), Modo)
-        Text2(4).Text = PonerNombreCuenta(Text1(4), Modo)
-        Text2(5).Text = PonerNombreCuenta(Text1(5), Modo)
+        text2(2).Text = PonerNombreCuenta(Text1(2), Modo)
+        text2(3).Text = PonerNombreCuenta(Text1(3), Modo)
+        text2(4).Text = PonerNombreCuenta(Text1(4), Modo)
+        text2(5).Text = PonerNombreCuenta(Text1(5), Modo)
         
-        Text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
+        text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
     End If
     ' ********************************************************************************
     
@@ -1605,15 +1605,15 @@ Dim Nuevo As Boolean
             
             If vSeccion Is Nothing Then Exit Sub
         
-            If Text1(Index).Text <> "" Then Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
-            If Text2(Index).Text = "" Then
+            If Text1(Index).Text <> "" Then text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+            If text2(Index).Text = "" Then
                 MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
             
         Case 6 ' centro de coste
             If vSeccion Is Nothing Then Exit Sub
             
-            Text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
+            text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
         
     End Select
         ' ***************************************************************************
@@ -1685,13 +1685,13 @@ End Sub
 Private Sub frmCCos_DatoSeleccionado(CadenaSeleccion As String)
 'Centro de Coste de la contabilidad
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
-    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
-    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
+    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
 End Sub
 
 Private Function ObtenerWhereCab(conW As Boolean) As String

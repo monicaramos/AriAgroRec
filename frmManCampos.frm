@@ -536,7 +536,7 @@ Begin VB.Form frmManCampos
       _Version        =   393216
       Style           =   1
       Tabs            =   10
-      Tab             =   1
+      Tab             =   8
       TabsPerRow      =   11
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -552,70 +552,40 @@ Begin VB.Form frmManCampos
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManCampos.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(26)"
-      Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label28"
-      Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "imgZoom(0)"
-      Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Label29"
-      Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Label6(0)"
-      Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Label5"
-      Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "imgBuscar(2)"
-      Tab(0).Control(6).Enabled=   0   'False
-      Tab(0).Control(7)=   "imgBuscar(3)"
-      Tab(0).Control(7).Enabled=   0   'False
-      Tab(0).Control(8)=   "Label2"
-      Tab(0).Control(8).Enabled=   0   'False
-      Tab(0).Control(9)=   "imgBuscar(13)"
-      Tab(0).Control(9).Enabled=   0   'False
-      Tab(0).Control(10)=   "Label36"
-      Tab(0).Control(10).Enabled=   0   'False
+      Tab(0).Control(0)=   "Text5(0)"
+      Tab(0).Control(1)=   "Combo1(0)"
+      Tab(0).Control(2)=   "Text2(3)"
+      Tab(0).Control(3)=   "Text2(2)"
+      Tab(0).Control(4)=   "Text1(2)"
+      Tab(0).Control(5)=   "Text1(3)"
+      Tab(0).Control(6)=   "Text1(21)"
+      Tab(0).Control(7)=   "Text1(37)"
+      Tab(0).Control(8)=   "Text4(3)"
+      Tab(0).Control(9)=   "Text5(3)"
+      Tab(0).Control(10)=   "FrameDatosDtoAdministracion"
       Tab(0).Control(11)=   "Frame4"
-      Tab(0).Control(11).Enabled=   0   'False
-      Tab(0).Control(12)=   "FrameDatosDtoAdministracion"
-      Tab(0).Control(12).Enabled=   0   'False
-      Tab(0).Control(13)=   "Text5(3)"
-      Tab(0).Control(13).Enabled=   0   'False
-      Tab(0).Control(14)=   "Text4(3)"
-      Tab(0).Control(14).Enabled=   0   'False
-      Tab(0).Control(15)=   "Text1(37)"
-      Tab(0).Control(15).Enabled=   0   'False
-      Tab(0).Control(16)=   "Text1(21)"
-      Tab(0).Control(16).Enabled=   0   'False
-      Tab(0).Control(17)=   "Text1(3)"
-      Tab(0).Control(17).Enabled=   0   'False
-      Tab(0).Control(18)=   "Text1(2)"
-      Tab(0).Control(18).Enabled=   0   'False
-      Tab(0).Control(19)=   "Text2(2)"
-      Tab(0).Control(19).Enabled=   0   'False
-      Tab(0).Control(20)=   "Text2(3)"
-      Tab(0).Control(20).Enabled=   0   'False
-      Tab(0).Control(21)=   "Combo1(0)"
-      Tab(0).Control(21).Enabled=   0   'False
-      Tab(0).Control(22)=   "Text5(0)"
-      Tab(0).Control(22).Enabled=   0   'False
+      Tab(0).Control(12)=   "Label36"
+      Tab(0).Control(13)=   "imgBuscar(13)"
+      Tab(0).Control(14)=   "Label2"
+      Tab(0).Control(15)=   "imgBuscar(3)"
+      Tab(0).Control(16)=   "imgBuscar(2)"
+      Tab(0).Control(17)=   "Label5"
+      Tab(0).Control(18)=   "Label6(0)"
+      Tab(0).Control(19)=   "Label29"
+      Tab(0).Control(20)=   "imgZoom(0)"
+      Tab(0).Control(21)=   "Label28"
+      Tab(0).Control(22)=   "Label1(26)"
       Tab(0).ControlCount=   23
       TabCaption(1)   =   "Otros Datos"
       TabPicture(1)   =   "frmManCampos.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "Frame3"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "Frame5"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "Frame6"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "Frame7"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "Frame8"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "Frame9"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "Frame10"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).ControlCount=   7
       TabCaption(2)   =   "Coopropietarios"
       TabPicture(2)   =   "frmManCampos.frx":0044
@@ -649,9 +619,11 @@ Begin VB.Form frmManCampos
       Tab(7).ControlCount=   1
       TabCaption(8)   =   "Ordenes Rec."
       TabPicture(8)   =   "frmManCampos.frx":00EC
-      Tab(8).ControlEnabled=   0   'False
+      Tab(8).ControlEnabled=   -1  'True
       Tab(8).Control(0)=   "FrameAux6"
+      Tab(8).Control(0).Enabled=   0   'False
       Tab(8).Control(1)=   "ListView4"
+      Tab(8).Control(1).Enabled=   0   'False
       Tab(8).ControlCount=   2
       TabCaption(9)   =   "Registro Visitas"
       TabPicture(9)   =   "frmManCampos.frx":0108
@@ -671,7 +643,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   795
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   255
          Top             =   3540
          Width           =   7725
@@ -1101,7 +1073,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   735
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   221
          Top             =   4350
          Width           =   7755
@@ -1560,7 +1532,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   765
-         Left            =   8340
+         Left            =   -66660
          TabIndex        =   205
          Top             =   4320
          Width           =   6105
@@ -1641,7 +1613,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   795
-         Left            =   8340
+         Left            =   -66660
          TabIndex        =   202
          Top             =   3540
          Width           =   6105
@@ -2615,7 +2587,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1515
-         Left            =   8340
+         Left            =   -66660
          TabIndex        =   163
          Top             =   2010
          Width           =   6105
@@ -3907,7 +3879,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   3045
-         Left            =   150
+         Left            =   -74850
          TabIndex        =   115
          Top             =   510
          Width           =   7725
@@ -4392,7 +4364,7 @@ Begin VB.Form frmManCampos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1455
-         Left            =   8340
+         Left            =   -66660
          TabIndex        =   110
          Top             =   510
          Width           =   6105
@@ -5946,7 +5918,7 @@ Begin VB.Form frmManCampos
       End
       Begin MSComctlLib.ListView ListView4 
          Height          =   4155
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   243
          Top             =   600
          Width           =   14120
@@ -6020,7 +5992,7 @@ Begin VB.Form frmManCampos
          BorderStyle     =   0  'None
          Enabled         =   0   'False
          Height          =   3910
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   236
          Top             =   660
          Width           =   12210

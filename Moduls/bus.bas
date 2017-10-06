@@ -1852,13 +1852,13 @@ Dim Equipo As String
     OtrosPCsContraContabiliad = cad
 End Function
 
-Public Function ComprobarEmpresaBloqueada(CodUsu As Long, ByRef Empresa As String) As Boolean
+Public Function ComprobarEmpresaBloqueada(Codusu As Long, ByRef Empresa As String) As Boolean
 Dim cad As String
 
 ComprobarEmpresaBloqueada = False
 
 'Antes de nada, borramos las entradas de usuario, por si hubiera kedado algo
-conn.Execute "Delete from usuarios.vbloqbd where codusu=" & CodUsu
+conn.Execute "Delete from usuarios.vbloqbd where codusu=" & Codusu
 
 'Ahora comprobamos k nadie bloquea la BD
 cad = DevuelveDesdeBD("codusu", "usuarios.vbloqbd", "conta", Empresa, "T")
@@ -2034,14 +2034,16 @@ Dim F2 As Date
         'Si tiene SII
         If vParamAplic.ContabilidadNueva Then
             If vEmpresa.TieneSII Then
-                If DateDiff("d", Fecha, Now) > vEmpresa.SIIDiasAviso Then
+                '[Monica]06/10/2017: añadida la segunda condicion: fecha > vEmpresa.SIIFechaInicio
+                '                    fallaba cuando la fecha es anterior a la declaracion del SII.
+                '                    Caso de Coopic con una factura interna
+                If DateDiff("d", Fecha, Now) > vEmpresa.SIIDiasAviso And Fecha > vEmpresa.SIIFechaInicio Then
                     MensajeFechaOkConta = "Fecha fuera de periodo de comunicación SII."
                     'LLEVA SII y han trascurrido los dias
                     If vUsu.Nivel = 0 Then
                         If MsgBox(MensajeFechaOkConta & vbCrLf & "¿Continuar?", vbQuestion + vbYesNoCancel) <> vbYes Then
                             EsFechaOKConta = 4
                         End If
-                        
                     Else
                         'NO tienen nivel
                         EsFechaOKConta = 5
