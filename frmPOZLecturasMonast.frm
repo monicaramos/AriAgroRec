@@ -42,6 +42,24 @@ Begin VB.Form frmPOZLecturasMonast
       TabIndex        =   5
       Top             =   8775
       Width           =   10975
+      Begin VB.CheckBox ChkConsElevado 
+         Caption         =   "Consumo Elevado"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   15.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   345
+         Left            =   180
+         TabIndex        =   38
+         Tag             =   "Cobrar Cuota|N|S|||rpozos|cobrarcuota|0|N|"
+         Top             =   4095
+         Width           =   3210
+      End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BeginProperty Font 
@@ -76,10 +94,10 @@ Begin VB.Form frmPOZLecturasMonast
             Strikethrough   =   0   'False
          EndProperty
          Height          =   825
-         Left            =   3420
+         Left            =   3600
          TabIndex        =   25
-         Top             =   3510
-         Width           =   3870
+         Top             =   3600
+         Width           =   3690
       End
       Begin VB.CommandButton TCC 
          Caption         =   "<--"
@@ -300,8 +318,8 @@ Begin VB.Form frmPOZLecturasMonast
          Top             =   2790
          Width           =   5460
       End
-      Begin VB.CheckBox ChkAusente 
-         Caption         =   "Ausente"
+      Begin VB.CheckBox ChkAveriado 
+         Caption         =   "Contador Averiado"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   15.75
@@ -315,8 +333,8 @@ Begin VB.Form frmPOZLecturasMonast
          Left            =   180
          TabIndex        =   11
          Tag             =   "Cobrar Cuota|N|S|||rpozos|cobrarcuota|0|N|"
-         Top             =   3690
-         Width           =   2130
+         Top             =   3510
+         Width           =   3525
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -886,32 +904,8 @@ Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que tor
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
-Private WithEvents frmB As frmBuscaGrid
-Attribute frmB.VB_VarHelpID = -1
-Private WithEvents frmC As frmCal 'calendario fecha
-Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmC1 As frmCal 'calendario fecha
 Attribute frmC1.VB_VarHelpID = -1
-Private WithEvents frmZ As frmZoom  'Zoom para campos Text
-Attribute frmZ.VB_VarHelpID = -1
-
-Private WithEvents frmPar As frmManPartidas 'partidas
-Attribute frmPar.VB_VarHelpID = -1
-Private WithEvents frmPoz As frmPOZPozos 'tipos de Pozos
-Attribute frmPoz.VB_VarHelpID = -1
-Private WithEvents frmSoc As frmManSocios 'socios
-Attribute frmSoc.VB_VarHelpID = -1
-Private WithEvents frmSoc1 As frmManSocios 'socios
-Attribute frmSoc1.VB_VarHelpID = -1
-Private WithEvents frmMens As frmMensajes 'mensajes
-Attribute frmMens.VB_VarHelpID = -1
-Private WithEvents frmCam As frmManCamposMonast 'campos
-Attribute frmCam.VB_VarHelpID = -1
-Private WithEvents frmMen2 As frmMensajes ' orden de printnou
-Attribute frmMen2.VB_VarHelpID = -1
-
-Private WithEvents frmHidPrev As frmPOZHidrantesMonastPrev ' campos vista previa
-Attribute frmHidPrev.VB_VarHelpID = -1
 
 
 ' *****************************************************
@@ -957,7 +951,7 @@ Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres 
 Dim CadB As String
 
 Dim vSeccion As CSeccion
-Dim B As Boolean
+Dim b As Boolean
 
 Private BuscaChekc As String
 Private NumCajas As Currency
@@ -981,12 +975,12 @@ Dim UltimaLectura As String
 
 Dim SiguienteCont As String
 
-Private Sub ChkAusente_Click()
-    If ChkAusente.Value = 1 Then
-        Text1(9).Text = Text1(7).Text
-    End If
-    CalculaCasillaConsumo
-End Sub
+'Private Sub ChkAusente_Click()
+'    If ChkAusente.Value = 1 Then
+'        Text1(9).Text = Text1(7).Text
+'    End If
+'    CalculaCasillaConsumo
+'End Sub
 
 Private Sub ChkPendientes_Click()
     cmdActualizar_Click
@@ -1041,6 +1035,10 @@ Private Sub lw1_ItemClick(ByVal item As MSComctlLib.ListItem)
     
     If Text1(0).Text = "" Then Text1(0).Text = Format(Now, "dd/mm/yyyy")
 
+    '[Monica]10/10/2017: caso de ausente y de consumo elevado
+    Me.ChkAveriado.Value = lw1.SelectedItem.ListSubItems(10)
+    Me.ChkConsElevado.Value = lw1.SelectedItem.ListSubItems(11)
+
     PonerFoco Text1(9)
 
 
@@ -1076,6 +1074,9 @@ Dim J As String
         Sql = "update rpozos set fech_act = " & DBSet(Text1(0).Text, "F") & ", lect_act = " & DBSet(Text1(9).Text, "N")
         Sql = Sql & ", consumo = " & DBSet(Text1(4).Text, "N")
         Sql = Sql & ", calibre = " & DBSet(Combo1(1).ListIndex, "N")
+        '[Monica]10/10/2017: añadimos lo de averiado y consumo elevado
+        Sql = Sql & ", averiado = " & DBSet(ChkAveriado.Value, "N")
+        Sql = Sql & ", conselevado = " & DBSet(ChkConsElevado, "N")
         Sql = Sql & " WHERE hidrante = " & DBSet(lw1.SelectedItem.ListSubItems(2), "T")
         'Sql = Sql & " where hidrante = " & DBSet(DataGrid1.Columns(2), "T")
         
@@ -1105,7 +1106,9 @@ Dim J As String
 '        Set lw1.SelectedItem = Nothing
     End If
     
-    Me.ChkAusente.Value = 0
+'    Me.ChkAusente.Value = 0
+    Me.ChkAveriado.Value = 0
+    Me.ChkConsElevado.Value = 0
     
     Screen.MousePointer = vbDefault
     
@@ -1117,7 +1120,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim B As Boolean
+Dim b As Boolean
 Dim Sql As String
 Dim Mens As String
 Dim FechaAnt As Date
@@ -1130,12 +1133,12 @@ Dim Hidrante As String
 
     If lw1.SelectedItem = "" Then
         MsgBox "No se ha seleccionado contador. Revise.", vbExclamation
-        B = False
+        b = False
     End If
     
 '    Hidrante = DataGrid1.Columns(2).Value
     Hidrante = Me.lw1.SelectedItem.ListSubItems(2)
-    B = True
+    b = True
     If Text1(9).Text <> "" Then
          Inicio = 0
          Fin = 0
@@ -1159,36 +1162,36 @@ Dim Hidrante As String
          If Consumo > Limite - 1 Or Consumo < 0 Then
             MsgBox "Error en la lectura. Revise", vbExclamation
             PonerFoco Text1(9)
-            B = False
+            b = False
          Else
             
             If Text1(0).Text = "" Then
                 MsgBox "La fecha de lectura debe tener un valor. Revise.", vbExclamation
                 PonerFoco Text1(0)
-                B = False
+                b = False
             Else
                 FechaAnt = DevuelveValor("select fech_ant from rpozos where hidrante = " & DBSet(Hidrante, "T"))
                 If CDate(Text1(0).Text) < FechaAnt Then
                     MsgBox "La fecha de lectura actual es inferior a la de última lectura. Revise.", vbExclamation
                     PonerFoco Text1(0)
-                    B = False
+                    b = False
                 End If
             End If
          End If
     Else
         If Text1(9).Text = "" And Text1(0).Text = "" Then
             Text1(4).Text = ""
-            B = False
+            b = False
         Else
-            B = True
+            b = True
         End If
     End If
     
     
-    If B Then Text1(4).Text = Consumo
+    If b Then Text1(4).Text = Consumo
     
     
-    DatosOK = B
+    DatosOK = b
 End Function
 
 
@@ -1257,7 +1260,7 @@ Dim I As Integer
 
 
     'Icono del formulario
-    Me.Icon = frmPpal.Icon
+'    Me.Icon = frmPpal.Icon
 
     PrimeraVez = True
     
@@ -1265,10 +1268,10 @@ Dim I As Integer
     Me.Left = 0
     
     ' La Ayuda
-    With Me.ToolbarAyuda
-        .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 12
-    End With
+'    With Me.ToolbarAyuda
+'        .ImageList = frmPpal.imgListComun
+'        .Buttons(1).Image = 12
+'    End With
     
     LimpiarCampos   'Neteja els camps TextBox
     
@@ -1307,7 +1310,8 @@ Dim I As Integer
     
     limpiar Me   'Mètode general: Neteja els controls TextBox
     Me.ChkPendientes.Value = 0
-    Me.ChkAusente.Value = 0
+    Me.ChkAveriado.Value = 0
+    Me.ChkConsElevado.Value = 0
     
     ' *** si n'hi han combos a la capçalera ***
     ' *****************************************
@@ -1382,38 +1386,6 @@ Dim Indice As Byte
     Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
-Private Sub frmMen2_DatoSeleccionado(CadenaSeleccion As String)
-    Orden = CadenaSeleccion
-    If CadenaSeleccion = "" Then Orden = "pOrden={rpozos.hidrante}"
-End Sub
-
-Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(5).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de campo
-    FormateaCampo Text1(5)
-    PonerDatosCampo Text1(5).Text
-End Sub
-
-Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
-    FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
-End Sub
-
-Private Sub frmPoz_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(13).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de pozo
-    FormateaCampo Text1(13)
-    Text2(13).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de pozo
-End Sub
-
-Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    Text1(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
-    FormateaCampo Text1(2)
-    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
-End Sub
-
-Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(Indice).Text = vCampo
-End Sub
 
 
 Private Sub imgFec_Click(Index As Integer)
@@ -1541,6 +1513,10 @@ Private Sub Text1_GotFocus(Index As Integer)
     kCampo = Index
     ConseguirFoco Text1(Index), Modo
     If Index = 0 Then PonerFoco Text1(9)
+    '[Monica]10/10/2017: cuando me situo en introducir la lectura de nuevo que no me pinte nada pq voy a volver a leer
+    If Index = 9 Then Text1(9).Text = ""
+    '[Monica]10/10/2017: en el caso de que se metan en lectura anterior or consumo lo mando a lectura actual
+    If Index = 7 Or Index = 4 Then PonerFoco Text1(9)
 End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
@@ -1560,7 +1536,7 @@ Dim Sql As String
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
-Dim cad As String
+Dim Cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -1591,11 +1567,11 @@ Dim Sql As String
         
     End If
 
-    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    Cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rcampos.poligono, rcampos.parcela, rcampos.supcoope, rpueblos.despobla, rcampos.subparce, rcampos.codsocio "
     Cad1 = Cad1 & " from rcampos, rpartida, rpueblos "
-    Cad1 = Cad1 & " where " & cad
+    Cad1 = Cad1 & " where " & Cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla"
      
@@ -1629,16 +1605,7 @@ End Sub
 
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = teclaBuscar Then
-        If Modo = 1 Or Modo = 3 Or Modo = 4 Then
-            Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'socio
-                Case 3: KEYBusqueda KeyAscii, 1 'partida
-            End Select
-        End If
-    Else
-        KEYpress KeyAscii
-    End If
+    KEYpress KeyAscii
 End Sub
 
 Private Sub Text1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1654,11 +1621,6 @@ Dim cerrar As Boolean
 
 End Sub
 
-
-Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
-    KeyAscii = 0
-    imgBuscar_Click (Indice)
-End Sub
 
 ' **** si n'hi han camps de descripció a la capçalera ****
 Private Sub PosarDescripcions()
@@ -1687,98 +1649,8 @@ End Sub
 
 
 
-' *** si n'hi han formularis de buscar codi a les llínies ***
-Private Sub imgBuscar_Click(Index As Integer)
-    TerminaBloquear
-    
-    Select Case Index
-       Case 0 'Socios
-            Set frmSoc = New frmManSocios
-'            frmSoc.DeConsulta = True
-            frmSoc.DatosADevolverBusqueda = "0|1|"
-'            frmSoc.CodigoActual = Text1(1).Text
-            frmSoc.Show vbModal
-            Set frmSoc = Nothing
-            PonerFoco Text1(2)
-    
-       Case 1 'Partidas
-            Set frmPar = New frmManPartidas
-            frmPar.DeConsulta = True
-            frmPar.DatosADevolverBusqueda = "0|1|"
-            frmPar.CodigoActual = Text1(3).Text
-            frmPar.Show vbModal
-            Set frmPar = Nothing
-            PonerFoco Text1(3)
-    
-       Case 2 'Tipo de Pozos
-            Set frmPoz = New frmPOZPozos
-            frmPoz.DeConsulta = True
-            frmPoz.DatosADevolverBusqueda = "0|1|"
-            frmPoz.CodigoActual = Text1(3).Text
-            frmPoz.Show vbModal
-            Set frmPoz = Nothing
-            PonerFoco Text1(13)
-    
-       Case 3 'Campo
-            Set frmCam = New frmManCamposMonast
-            frmCam.DatosADevolverBusqueda = "0|1|"
-'            frmCam.CodigoActual = Text1(5).Text
-            frmCam.Show vbModal
-            Set frmCam = Nothing
-            PonerFoco Text1(5)
-    End Select
-    
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-End Sub
 
 
-
-Private Sub printNou()
-Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
-Dim nomDocu As String 'Nombre de Informe rpt de crystal
-    
-    
-    ' pedimos el orden del informe
-    Set frmMen2 = New frmMensajes
-    
-    frmMen2.OpcionMensaje = 38
-    frmMen2.Show vbModal
-    
-    Set frmMen2 = Nothing
-    
-    indRPT = 78 ' personalizacion del informe de hidrantes
-    
-    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
-    
-    '[Monica]12/03/2013: solo si es quatretonda tiene una impresion expandida de rpozos_campos
-    If vParamAplic.Cooperativa = 7 Then
-        If MsgBox("¿ Desea imprimir en formato expandido ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-            nomDocu = Replace(nomDocu, ".rpt", "1.rpt")
-        End If
-    End If
-    
-    
-    With frmImprimir2
-        .cadTabla2 = "rpozos"
-        .Informe2 = nomDocu
-        If CadB <> "" Then
-            .cadRegSelec = SQL2SF(CadB)
-        Else
-            .cadRegSelec = ""
-        End If
-        .cadRegActua = POS2SF(Data1, Me)
-        '[Monica]13/07/2012: falla si hay un solo registro seleccionado y apretamos registros buscados
-        If Data1.Recordset.RecordCount = 1 Then .cadRegSelec = .cadRegActua
-        .cadTodosReg = ""
-        .OtrosParametros2 = "pEmpresa='" & vEmpresa.nomempre & "'|" & Orden
-        .NumeroParametros2 = 2
-        .MostrarTree2 = False
-        .InfConta2 = False
-        .ConSubInforme2 = True
-        .SubInformeConta = ""
-        .Show vbModal
-    End With
-End Sub
 
 '' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
 'Private Sub DataGridAux_GotFocus(Index As Integer)
@@ -1787,21 +1659,6 @@ End Sub
 'Private Sub DataGridAux_LostFocus(Index As Integer)
 '  WheelUnHook
 'End Sub
-
-
-Private Sub LlamarImprimir()
-    With frmImprimir
-        .FormulaSeleccion = cadFormula
-        .OtrosParametros = CadParam
-        .NumeroParametros = numParam
-        .SoloImprimir = False
-        .EnvioEMail = False
-        .Titulo = cadTitulo
-        .NombreRPT = cadNombreRPT
-        .Opcion = 0
-        .Show vbModal
-    End With
-End Sub
 
 Private Sub InicializarVbles()
     cadFormula = ""
@@ -1896,29 +1753,29 @@ End Sub
 Private Sub DatosaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim NF1 As Integer
-Dim cad As String
+Dim Cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
         
-    cad = App.Path & "\ultLect.dat"
+    Cad = App.Path & "\ultLect.dat"
     If Leer Then
-        If Dir(cad) <> "" Then
+        If Dir(Cad) <> "" Then
             NF = FreeFile
-            Open cad For Input As #NF
-            Line Input #NF, cad
+            Open Cad For Input As #NF
+            Line Input #NF, Cad
             Close #NF
-            cad = Trim(cad)
+            Cad = Trim(Cad)
             
                 'El primer pipe es el usuario
-                UltimaLectura = cad
+                UltimaLectura = Cad
     
         End If
     Else 'Escribir
         NF1 = FreeFile
-        Open cad For Output As #NF1
-        cad = Combo1(0).ItemData(Combo1(0).ListIndex) & "|" & Combo1(2).ItemData(Combo1(2).ListIndex) & "|"
-        Print #NF1, cad
+        Open Cad For Output As #NF1
+        Cad = Combo1(0).ItemData(Combo1(0).ListIndex) & "|" & Combo1(2).ItemData(Combo1(2).ListIndex) & "|"
+        Print #NF1, Cad
         Close #NF1
     End If
 ENumeroEmpresaMemorizar:
@@ -1928,7 +1785,7 @@ End Sub
 
 
 Private Sub CargaLW(vSQL As String)
-Dim cad As String
+Dim Cad As String
 Dim Rs As ADODB.Recordset
 Dim It As ListItem
 Dim ElIcono As Integer
@@ -1954,12 +1811,16 @@ Dim Encontrado As Boolean
     lw1.ColumnHeaders.Add , , "Nombre", 0
     lw1.ColumnHeaders.Add , , "FechAnt", 0
     lw1.ColumnHeaders.Add , , "FechAct", 0
+    lw1.ColumnHeaders.Add , , "Averiado", 0
+    lw1.ColumnHeaders.Add , , "ConsElevado", 0
     
     
     
     CadenaConsulta = "select rpozos.codcampo, rcampos.observac, rpozos.hidrante, rpozos.lect_ant, rpozos.lect_act,  "
 '    CadenaConsulta = CadenaConsulta & " if(rpozos.lect_act is null or rpozos.lect_act = 0, 0,rpozos.lect_act - rpozos.lect_ant) consumo, "
     CadenaConsulta = CadenaConsulta & " rpozos.consumo, rpozos.codsocio, rsocios.nomsocio, rpozos.fech_ant, rpozos.fech_act "
+    '[Monica]10/10/2017: introducimos lo de contador averiado y consumo elevado
+    CadenaConsulta = CadenaConsulta & ", rpozos.averiado, rpozos.conselevado "
     CadenaConsulta = CadenaConsulta & " from (rpozos inner join rcampos on rpozos.codcampo = rcampos.codcampo) "
     CadenaConsulta = CadenaConsulta & " inner join rsocios on rpozos.codsocio = rsocios.codsocio "
     
@@ -1993,6 +1854,9 @@ Dim Encontrado As Boolean
             It.SubItems(7) = DBLet(Rs!nomsocio, "T")
             It.SubItems(8) = DBLet(Rs!fech_ant, "F")
             It.SubItems(9) = DBLet(Rs!fech_act, "F")
+            '[Moncia]10/10/2017: averiado y consumo elevado
+            It.SubItems(10) = DBLet(Rs!averiado, "N")
+            It.SubItems(11) = DBLet(Rs!conselevado, "N")
             
             If Not IsNull(Rs!lect_act) Then
                 It.ForeColor = &HC0C0C0

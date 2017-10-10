@@ -1049,7 +1049,7 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-    CheckValueGuardar Me.Name, Me.chkVistaPrevia(0).Value
+    CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -1128,7 +1128,7 @@ Dim I As Integer
     '************************************************
     
     'Mirem com està guardat el valor del check
-    chkVistaPrevia(0).Value = CheckValueLeer(Name)
+    chkVistaPrevia.Value = CheckValueLeer(Name)
     
     'ASignamos un SQL al DATA1
     Data1.ConnectionString = conn
@@ -1224,7 +1224,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1256,7 +1256,7 @@ Dim B As Boolean
 '    imgBuscar(3).visible = b
     ' ****************************************************************************
             
-    chkVistaPrevia(0).Enabled = (Modo <= 2)
+    chkVistaPrevia.Enabled = (Modo <= 2)
     
     PonerLongCampos
 
@@ -1587,7 +1587,7 @@ Private Sub HacerBusqueda()
 
     CadB = ObtenerBusqueda2(Me, BuscaChekc, 1)
     
-    If chkVistaPrevia(0) = 1 Then
+    If chkVistaPrevia = 1 Then
         MandaBusquedaPrevia CadB
     ElseIf CadB <> "" Then
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -1703,7 +1703,7 @@ Private Sub BotonVerTodos()
     
     PonerModo 0
     
-    If chkVistaPrevia(0).Value = 1 Then
+    If chkVistaPrevia.Value = 1 Then
         MandaBusquedaPrevia ""
     Else
         ' *** canviar o llevar, si cal, el WHERE; repasar codEmpre ***
@@ -2873,12 +2873,12 @@ Dim Nuevo As Boolean
         Case 3 'dosis habitual
             '[Monica]22/07/2013: antes era ponerformato decimal 12.
             If PonerFormatoDecimal(txtaux1(Index), 5) Then
-                If txtaux1(4).Enabled = False Then cmdAceptar.SetFocus
+                If txtaux1(4).Enabled = False Then CmdAceptar.SetFocus
             End If
             
             
         Case 4 'cantidad
-            If PonerFormatoDecimal(txtaux1(Index), 2) Then cmdAceptar.SetFocus
+            If PonerFormatoDecimal(txtaux1(Index), 2) Then CmdAceptar.SetFocus
 
     End Select
 

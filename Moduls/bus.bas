@@ -306,6 +306,10 @@ Public Sub Main()
 End Sub
 
 
+
+
+
+
 Private Sub prueba()
 Dim Rs As ADODB.Recordset
 Dim Sql As String
