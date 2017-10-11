@@ -165,7 +165,7 @@ Begin VB.Form frmADVListados
          TabIndex        =   39
          Tag             =   "Nº Parte|N|S|||rpartes|nroparte|0000000|S|"
          Top             =   2700
-         Width           =   1425
+         Width           =   1335
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
@@ -185,7 +185,7 @@ Begin VB.Form frmADVListados
          TabIndex        =   38
          Tag             =   "Nº Parte|N|S|||rpartes|nroparte|0000000|S|"
          Top             =   2310
-         Width           =   1425
+         Width           =   1335
       End
       Begin VB.CommandButton CmdAcepAsigPrecios 
          Caption         =   "&Aceptar"
@@ -1929,7 +1929,7 @@ End Sub
 
 
 Private Function HayArticuloGastos(vtabla As String, vWhere As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cTabla As String
 Dim cWhere As String
 Dim CadPartes As String
@@ -1944,20 +1944,20 @@ Dim cad As String
 
     cTabla = QuitarCaracterACadena(vtabla, "{")
     cTabla = QuitarCaracterACadena(vtabla, "}")
-    Sql = "Select distinct advpartes.numparte FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select distinct advpartes.numparte FROM " & QuitarCaracterACadena(cTabla, "_1")
     If vWhere <> "" Then
         cWhere = QuitarCaracterACadena(vWhere, "{")
         cWhere = QuitarCaracterACadena(vWhere, "}")
         cWhere = QuitarCaracterACadena(vWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
-        Sql = Sql & " and advpartes_lineas.codartic = " & DBSet(txtCodigo(13).Text, "T")
+        SQL = SQL & " WHERE " & cWhere
+        SQL = SQL & " and advpartes_lineas.codartic = " & DBSet(txtCodigo(13).Text, "T")
     End If
-    Sql = Sql & " order by 1 "
+    SQL = SQL & " order by 1 "
     
-    If TotalRegistrosConsulta(Sql) <> 0 Then
+    If TotalRegistrosConsulta(SQL) <> 0 Then
         CadPartes = ""
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             CadPartes = CadPartes & DBLet(Rs!Numparte, "N") & ", "
@@ -2591,19 +2591,19 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
-    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -2615,7 +2615,7 @@ Dim Rs As ADODB.Recordset
 End Function
 
 Private Function ProcesarCambios(cadWHERE As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim I As Integer
 Dim HayReg As Integer
@@ -2633,14 +2633,14 @@ On Error GoTo eProcesarCambios
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    Sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
-    Sql = Sql & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
-    Sql = Sql & " and albaran.numalbar = albaran_variedad.numalbar "
+    SQL = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
+    SQL = SQL & ", albaran.numalbar from albaran, albaran_variedad where albaran.numalbar not in (select numalbar from tcafpa) "
+    SQL = SQL & " and albaran.numalbar = albaran_variedad.numalbar "
     
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
     
     
-    conn.Execute Sql
+    conn.Execute SQL
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -2652,7 +2652,7 @@ End Function
 
 
 Private Sub InsertaLineaEnTemporal(ByRef ItmX As ListItem)
-Dim Sql As String
+Dim SQL As String
 Dim Codmacta As String
 Dim Rs As ADODB.Recordset
 Dim Sql1 As String
@@ -2671,7 +2671,7 @@ Private Function DatosOK() As Boolean
 End Function
 
 Private Function ProcesoCargaHoras(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -2680,10 +2680,10 @@ Dim Rs As ADODB.Recordset
     
     Screen.MousePointer = vbHourglass
     
-    Sql = "NOMADV" 'nominas de adv
+    SQL = "NOMADV" 'nominas de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se puede realizar el proceso de Carga de Nóminas de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2693,22 +2693,22 @@ Dim Rs As ADODB.Recordset
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, sum(advfacturas_trabajador.importel), sum(advfacturas_trabajador.horas) FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, sum(advfacturas_trabajador.importel), sum(advfacturas_trabajador.horas) FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2"
-    Sql = Sql & " order by 1, 2"
+    SQL = SQL & " group by 1, 2"
+    SQL = SQL & " order by 1, 2"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         
-    Sql = "insert into horas (codtraba, fechahora, horasdia, horasproduc, compleme,"
-    Sql = Sql & "intconta, pasaridoc, codalmac, nroparte) values "
+    SQL = "insert into horas (codtraba, fechahora, horasdia, horasproduc, compleme,"
+    SQL = SQL & "intconta, pasaridoc, codalmac, nroparte) values "
         
     Sql3 = ""
     vHayReg = 0
@@ -2738,9 +2738,9 @@ Dim Rs As ADODB.Recordset
     If Sql3 <> "" Then
         ' quitamos la ultima coma
         Sql3 = Mid(Sql3, 1, Len(Sql3) - 1)
-        Sql = Sql & Sql3
+        SQL = SQL & Sql3
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     DesBloqueoManual ("CARNOM") 'carga de nominas
@@ -2757,7 +2757,7 @@ End Function
 
 
 Private Function ProcesoAsignacionPrecios(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -2769,10 +2769,10 @@ Dim Importe As Currency
     
     Screen.MousePointer = vbHourglass
     
-    Sql = "PREADV" 'precios de adv
+    SQL = "PREADV" 'precios de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se puede realizar el proceso de Asignacion de Precios de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2794,16 +2794,16 @@ Dim Importe As Currency
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select advpartes_lineas.numparte, advpartes_lineas.numlinea, advpartes_lineas.codartic, advartic.preciove, advtrata.tipoprecio, advpartes_lineas.dosishab bultos, advpartes_lineas.cantidad FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select advpartes_lineas.numparte, advpartes_lineas.numlinea, advpartes_lineas.codartic, advartic.preciove, advtrata.tipoprecio, advpartes_lineas.dosishab bultos, advpartes_lineas.cantidad FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " order by 1, 2"
+    SQL = SQL & " order by 1, 2"
     
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Me.Pb1.visible = True
     CargarProgres Pb1, Nregs
@@ -2811,7 +2811,7 @@ Dim Importe As Currency
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     vHayReg = 0
     While Not Rs.EOF
@@ -2860,7 +2860,7 @@ End Function
 
 
 Private Function ProcesoInsercionGastos(cTabla As String, cWhere As String, vHayReg As Byte) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -2874,10 +2874,10 @@ Dim CadValues As String
     
     Screen.MousePointer = vbHourglass
     
-    Sql = "INSADV" 'insercion de gastos de adv
+    SQL = "INSADV" 'insercion de gastos de adv
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se puede realizar el proceso de Inserción de Gastos de ADV. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Function
@@ -2895,17 +2895,17 @@ Dim CadValues As String
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select advpartes.numparte, max(advpartes_lineas.numlinea) + 1  numlinea, sum(advpartes_lineas.dosishab) bultos FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select advpartes.numparte, max(advpartes_lineas.numlinea) + 1  numlinea, sum(advpartes_lineas.dosishab) bultos FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1 "
-    Sql = Sql & " order by 1 "
+    SQL = SQL & " group by 1 "
+    SQL = SQL & " order by 1 "
     
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Me.Pb2.visible = True
     CargarProgres Pb2, Nregs
@@ -2913,7 +2913,7 @@ Dim CadValues As String
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
     Precio = DevuelveDesdeBDNew(cAgro, "advartic", "preciove", "codartic", txtCodigo(13).Text, "T")
     CodIva = DevuelveDesdeBDNew(cAgro, "advartic", "codigiva", "codartic", txtCodigo(13).Text, "T")

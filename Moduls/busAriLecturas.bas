@@ -250,14 +250,16 @@ Dim OK As Byte
         'Gestionar el nombre del PC para la asignacion de PC en el entorno de red
         GestionaPC
 
-        
+        'Otras acciones
+        OtrasAcciones
+
      
      
         '[Monica]08/09/2017: para el caso de que se ejecute el programa de lecturas en la tableta
         If vParamAplic.Cooperativa = 17 Then
             Set frmLect = New frmPOZLecturasMonast
-            frmLect.Show vbModal
-            Set frmLect = Nothing
+            frmLect.Show 'vbModal
+            'Set frmLect = Nothing
         End If
 
 
@@ -273,9 +275,9 @@ End Sub
 
 Private Sub prueba()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select * from leccont.dbf"
+    SQL = "select * from leccont.dbf"
     
     
 '    Set Rs = New ADODB.Recordset
@@ -1332,7 +1334,7 @@ Public Function UsuariosConectados() As Boolean
 Dim I As Integer
 Dim Cad As String
 Dim metag As String
-Dim Sql As String
+Dim SQL As String
 Cad = OtrosPCsContraAplicacion
 UsuariosConectados = False
 If Cad <> "" Then
@@ -1340,12 +1342,12 @@ If Cad <> "" Then
     I = 1
     metag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
     Do
-        Sql = RecuperaValor(Cad, I)
-        If Sql <> "" Then
-            metag = metag & "    - " & Sql & vbCrLf
+        SQL = RecuperaValor(Cad, I)
+        If SQL <> "" Then
+            metag = metag & "    - " & SQL & vbCrLf
             I = I + 1
         End If
-    Loop Until Sql = ""
+    Loop Until SQL = ""
     MsgBox metag, vbExclamation
 End If
 End Function
@@ -1716,7 +1718,7 @@ End Function
 
 Public Sub AbrirConexionMonasterios()
 Dim Cad As String
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error Resume Next
@@ -1742,9 +1744,9 @@ Dim Rs As ADODB.Recordset
     
     EsMonasterios = False
     
-    Sql = "select cooperativa from rparam "
+    SQL = "select cooperativa from rparam "
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         EsMonasterios = (DBLet(Rs.Fields(0), "N") = 17)
     End If
@@ -1848,11 +1850,11 @@ Dim F2 As Date
 End Function
 
 
-Public Function ejecutar(ByRef Sql As String, OcultarMsg As Boolean) As Boolean
+Public Function ejecutar(ByRef SQL As String, OcultarMsg As Boolean) As Boolean
     On Error Resume Next
-    conn.Execute Sql
+    conn.Execute SQL
     If Err.Number <> 0 Then
-        If Not OcultarMsg Then MuestraError Err.Number, Err.Description, Sql
+        If Not OcultarMsg Then MuestraError Err.Number, Err.Description, SQL
         ejecutar = False
     Else
         ejecutar = True

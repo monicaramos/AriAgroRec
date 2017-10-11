@@ -32,6 +32,7 @@ Module=ModFechas; Moduls\ModFechas.bas
 Module=pcname; Moduls\pcname.bas
 Module=ExpresionBusqueda; Moduls\ExpresionBusqueda.bas
 Module=Errores; Moduls\Errores.bas
+IconForm="frmPOZLecturasMonast"
 Startup="Sub Main"
 HelpFile=""
 Title="AriLecturas"

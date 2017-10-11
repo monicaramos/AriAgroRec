@@ -1,4 +1,4 @@
-frmPOZLecturasMonast = 75, 75, 796, 627, Z, 100, 100, 821, 652, C
+frmPOZLecturasMonast = 75, 75, 796, 627, , 100, 100, 821, 652, C
 BaseDatos = 0, 0, 0, 0, C
 Cempresa = 25, 25, 796, 455, 
 Usuario = 25, 25, 746, 577, 
@@ -12,7 +12,7 @@ frmCal = 0, 0, 0, 0, C, 175, 175, 896, 727, C
 frmIdentifica = 125, 125, 846, 677, , 150, 150, 871, 702, C
 ModFormularios = 150, 150, 871, 702, 
 CTag = 0, 0, 0, 0, C
-busAriLecturas = 175, 175, 896, 727, 
+busAriLecturas = 175, 175, 896, 727, Z
 ModFechas = 0, 0, 0, 0, C
 pcname = 50, 50, 771, 602, 
 ExpresionBusqueda = 0, 0, 0, 0, C

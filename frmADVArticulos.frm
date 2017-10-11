@@ -291,6 +291,7 @@ Begin VB.Form frmADVArticulos
       _ExtentY        =   9631
       _Version        =   393216
       Style           =   1
+      Tab             =   1
       TabsPerRow      =   6
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -305,7 +306,7 @@ Begin VB.Form frmADVArticulos
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmADVArticulos.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label2(11)"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label2(2)"
@@ -395,13 +396,15 @@ Begin VB.Form frmADVArticulos
       Tab(0).ControlCount=   43
       TabCaption(1)   =   "Stocks Almacenes"
       TabPicture(1)   =   "frmADVArticulos.frx":0028
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameAux0"
+      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Materias Activas"
       TabPicture(2)   =   "frmADVArticulos.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAux1"
+      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       Begin VB.Frame FrameAux1 
          BorderStyle     =   0  'None
@@ -692,7 +695,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   22
-         Left            =   5835
+         Left            =   -69165
          MaxLength       =   15
          TabIndex        =   8
          Tag             =   "Nro.Serie|T|S|||advartic|numserie||N|"
@@ -712,7 +715,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   21
-         Left            =   1950
+         Left            =   -73050
          MaxLength       =   15
          TabIndex        =   7
          Tag             =   "ADR|T|S|||advartic|adr||N|"
@@ -732,7 +735,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1950
+         Left            =   -73050
          TabIndex        =   6
          Tag             =   "Cod. Tipo Artículo|N|N|0|2|advartic|tipoprod||N|"
          Text            =   "Combo2"
@@ -752,13 +755,13 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   10170
+         Left            =   -64875
          MaxLength       =   6
          TabIndex        =   17
          Tag             =   "Unidades por Caja|N|N|||advartic|unicajas|####0|N|"
          Text            =   "Text1"
          Top             =   3795
-         Width           =   1260
+         Width           =   1350
       End
       Begin VB.Frame FrameDatosAlmacen 
          Caption         =   "Datos Relacionados con Almacen"
@@ -773,7 +776,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2040
-         Left            =   7440
+         Left            =   -67560
          TabIndex        =   45
          Top             =   1665
          Width           =   4620
@@ -956,7 +959,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   2970
+         Left            =   -72030
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   44
@@ -977,7 +980,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   1950
+         Left            =   -73050
          MaxLength       =   2
          TabIndex        =   4
          Tag             =   "Cod. Tipo Unidad|N|N|0|99|advartic|codunida|00|N|"
@@ -998,7 +1001,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   1950
+         Left            =   -73050
          MaxLength       =   6
          TabIndex        =   2
          Tag             =   "Cod. Proveedor|N|N|0|999999|advartic|codprove|000000|N|"
@@ -1019,7 +1022,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1950
+         Left            =   -73050
          MaxLength       =   4
          TabIndex        =   3
          Tag             =   "Cod. Familia|N|N|0|9999|advartic|codfamia|0000|N|"
@@ -1040,7 +1043,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   1950
+         Left            =   -73050
          MaxLength       =   3
          TabIndex        =   5
          Tag             =   "Tipo de IVA|N|N|||advartic|codigiva|##0|N|"
@@ -1061,7 +1064,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   2970
+         Left            =   -72030
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   43
@@ -1082,7 +1085,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   2970
+         Left            =   -72030
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   42
@@ -1103,7 +1106,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   2970
+         Left            =   -72030
          Locked          =   -1  'True
          MaxLength       =   30
          TabIndex        =   41
@@ -1123,7 +1126,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   8
-         Left            =   10140
+         Left            =   -64860
          MaxLength       =   13
          TabIndex        =   11
          Tag             =   "Código de Barras|T|S|||advartic|codigoea||N|"
@@ -1143,7 +1146,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   10140
+         Left            =   -64860
          MaxLength       =   10
          TabIndex        =   12
          Tag             =   "Fecha de Alta|F|N|||advartic|fecaltas|dd/mm/yyyy|N|"
@@ -1164,7 +1167,7 @@ Begin VB.Form frmADVArticulos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   360
-         Left            =   9825
+         Left            =   -65175
          Locked          =   -1  'True
          MaxLength       =   13
          TabIndex        =   40
@@ -1185,7 +1188,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   315
          Index           =   0
-         Left            =   7695
+         Left            =   -67305
          TabIndex        =   18
          Tag             =   "Control de stock|N|N|0|1|advartic|ctrstock||N|"
          Top             =   4275
@@ -1203,7 +1206,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   735
          Index           =   20
-         Left            =   285
+         Left            =   -74715
          MaxLength       =   200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -1215,7 +1218,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.TextBox Text1 
          Height          =   735
          Index           =   19
-         Left            =   285
+         Left            =   -74715
          MaxLength       =   200
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -1227,7 +1230,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Frame FrameAux0 
          BorderStyle     =   0  'None
          Height          =   4710
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   38
          Top             =   480
          Width           =   12315
@@ -1697,7 +1700,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   6
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   2
          TabIndex        =   21
          Text            =   "Te"
@@ -1719,7 +1722,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   9
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   6
          TabIndex        =   60
          Text            =   "Text1"
@@ -1741,7 +1744,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   11
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   6
          TabIndex        =   61
          Text            =   "Text1"
@@ -1763,7 +1766,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   6
          TabIndex        =   62
          Text            =   "Text1"
@@ -1785,7 +1788,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   14
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   6
          TabIndex        =   63
          Text            =   "Text1"
@@ -1807,7 +1810,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   360
          Index           =   16
-         Left            =   10080
+         Left            =   -64920
          MaxLength       =   6
          TabIndex        =   64
          Text            =   "Text1"
@@ -1828,7 +1831,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   7710
+         Left            =   -67290
          TabIndex        =   79
          Top             =   3855
          Width           =   1965
@@ -1846,7 +1849,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   4875
+         Left            =   -70125
          TabIndex        =   71
          Top             =   2760
          Width           =   1095
@@ -1864,7 +1867,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   70
          Top             =   2730
          Width           =   1095
@@ -1872,7 +1875,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1650
+         Left            =   -73350
          ToolTipText     =   "Buscar tipo unidad"
          Top             =   1530
          Width           =   240
@@ -1890,7 +1893,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   17
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   59
          Top             =   1530
          Width           =   1335
@@ -1908,7 +1911,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   8
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   58
          Top             =   1920
          Width           =   1095
@@ -1926,7 +1929,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   6
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   57
          Top             =   1125
          Width           =   855
@@ -1944,7 +1947,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   5
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   56
          Top             =   720
          Width           =   1215
@@ -1952,7 +1955,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   1650
+         Left            =   -73350
          Tag             =   "-1"
          ToolTipText     =   "Buscar proveedor"
          Top             =   720
@@ -1961,7 +1964,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   1650
+         Left            =   -73350
          ToolTipText     =   "Buscar familia"
          Top             =   1125
          Width           =   240
@@ -1969,7 +1972,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1650
+         Left            =   -73350
          ToolTipText     =   "Buscar tipo IVA"
          Top             =   1920
          Width           =   240
@@ -1987,7 +1990,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   9
-         Left            =   270
+         Left            =   -74730
          TabIndex        =   55
          Top             =   2325
          Width           =   1335
@@ -2005,7 +2008,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   7680
+         Left            =   -67320
          TabIndex        =   54
          Top             =   765
          Width           =   1830
@@ -2023,7 +2026,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   255
          Index           =   16
-         Left            =   7680
+         Left            =   -67320
          TabIndex        =   53
          Top             =   1170
          Width           =   1095
@@ -2031,7 +2034,7 @@ Begin VB.Form frmADVArticulos
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   9780
+         Left            =   -65220
          Picture         =   "frmADVArticulos.frx":011B
          ToolTipText     =   "Buscar fecha"
          Top             =   1170
@@ -2049,7 +2052,7 @@ Begin VB.Form frmADVArticulos
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   7620
+         Left            =   -67380
          TabIndex        =   52
          Top             =   4680
          Width           =   2280
@@ -2067,7 +2070,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   240
          Index           =   2
-         Left            =   285
+         Left            =   -74715
          TabIndex        =   51
          Top             =   4155
          Width           =   2115
@@ -2085,7 +2088,7 @@ Begin VB.Form frmADVArticulos
          EndProperty
          Height          =   240
          Index           =   11
-         Left            =   285
+         Left            =   -74715
          TabIndex        =   50
          Top             =   3135
          Width           =   2160
@@ -2751,37 +2754,37 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
                
         Case 0 'stocks en almacenes
-            Sql = "SELECT codartic,advartic_salmac.codalmac,salmpr.nomalmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin,CASE statusin WHEN 0 THEN ""No"" WHEN 1 THEN ""Sí"" END "
-            Sql = Sql & " FROM advartic_salmac, salmpr "
+            SQL = "SELECT codartic,advartic_salmac.codalmac,salmpr.nomalmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin,CASE statusin WHEN 0 THEN ""No"" WHEN 1 THEN ""Sí"" END "
+            SQL = SQL & " FROM advartic_salmac, salmpr "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE advartic_salmac.codartic = '-1'"
+                SQL = SQL & " WHERE advartic_salmac.codartic = '-1'"
             End If
-            Sql = Sql & " and advartic_salmac.codalmac = salmpr.codalmac "
-            Sql = Sql & " ORDER BY advartic_salmac.codalmac"
+            SQL = SQL & " and advartic_salmac.codalmac = salmpr.codalmac "
+            SQL = SQL & " ORDER BY advartic_salmac.codalmac"
         
         Case 1 'materias activas
-            Sql = "SELECT advartic_matactiva.codartic,advartic_matactiva.codmatact,advmatactiva.nommatact ,advartic_matactiva.cantidad" ', advartic_matactiva.plazoent "
-            Sql = Sql & " FROM advartic_matactiva, advmatactiva "
+            SQL = "SELECT advartic_matactiva.codartic,advartic_matactiva.codmatact,advmatactiva.nommatact ,advartic_matactiva.cantidad" ', advartic_matactiva.plazoent "
+            SQL = SQL & " FROM advartic_matactiva, advmatactiva "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE advartic_matactiva.codartic = '-1'"
+                SQL = SQL & " WHERE advartic_matactiva.codartic = '-1'"
             End If
-            Sql = Sql & " and advartic_matactiva.codmatact = advmatactiva.codmatact "
-            Sql = Sql & " ORDER BY advartic_matactiva.codmatact "
+            SQL = SQL & " and advartic_matactiva.codmatact = advmatactiva.codmatact "
+            SQL = SQL & " ORDER BY advartic_matactiva.codmatact "
             
     End Select
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
@@ -3293,13 +3296,13 @@ End Sub
 
 Private Sub PonerSumaStocks()
 Dim rst As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
     
-    Sql = DevuelveDesdeBDNew(cAgro, "advartic_salmac", "codartic", "codartic", Text1(0).Text, "T")
-    If Sql <> "" Then
-        Sql = "select sum(canstock) from advartic_salmac where codartic=" & DBSet(Text1(0).Text, "T")
+    SQL = DevuelveDesdeBDNew(cAgro, "advartic_salmac", "codartic", "codartic", Text1(0).Text, "T")
+    If SQL <> "" Then
+        SQL = "select sum(canstock) from advartic_salmac where codartic=" & DBSet(Text1(0).Text, "T")
         Set rst = New ADODB.Recordset
-        rst.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        rst.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not rst.EOF Then
             Me.txtSumaStock.Text = rst.Fields(0).Value
         End If
@@ -3643,7 +3646,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim Sql As String
+Dim SQL As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -3670,25 +3673,25 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'articulo en almacen
-            Sql = "Seguro que desea eliminar de la BD el registro:"
-            Sql = Sql & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
-            Sql = Sql & vbCrLf & "Cod. Almacen: " & Adoaux(Index).Recordset.Fields(1)
+            SQL = "Seguro que desea eliminar de la BD el registro:"
+            SQL = SQL & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
+            SQL = SQL & vbCrLf & "Cod. Almacen: " & Adoaux(Index).Recordset.Fields(1)
 
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM advartic_salmac"
-                Sql = Sql & vWhere & " AND codalmac= " & Adoaux(Index).Recordset!codAlmac
+                SQL = "DELETE FROM advartic_salmac"
+                SQL = SQL & vWhere & " AND codalmac= " & Adoaux(Index).Recordset!codAlmac
             End If
     
         Case 1 'materia activa
-            Sql = "Seguro que desea eliminar de la BD el registro:"
-            Sql = Sql & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
-            Sql = Sql & vbCrLf & "Cod. Materia Activa: " & Adoaux(Index).Recordset.Fields(1)
+            SQL = "Seguro que desea eliminar de la BD el registro:"
+            SQL = SQL & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
+            SQL = SQL & vbCrLf & "Cod. Materia Activa: " & Adoaux(Index).Recordset.Fields(1)
 
-            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                Sql = "DELETE FROM advartic_matactiva"
-                Sql = Sql & vWhere & " AND codmatact= " & Adoaux(Index).Recordset!codmatact
+                SQL = "DELETE FROM advartic_matactiva"
+                SQL = SQL & vWhere & " AND codmatact= " & Adoaux(Index).Recordset!codmatact
             End If
     
     
@@ -3697,7 +3700,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute Sql
+        conn.Execute SQL
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
         
@@ -4001,7 +4004,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -4427,7 +4430,7 @@ EInsEnAlm:
 End Sub
 
 Private Function ModificarPreciosAlbaranes() As Boolean
-Dim Sql As String, Sql2 As String
+Dim SQL As String, Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Importe As Currency
     On Error GoTo eModificarPreciosAlbaranes
@@ -4435,10 +4438,10 @@ Dim Importe As Currency
     ModificarPreciosAlbaranes = False
 
 
-    Sql = "select * from advpartes_lineas where codartic = " & DBSet(Text1(0).Text, "T")
+    SQL = "select * from advpartes_lineas where codartic = " & DBSet(Text1(0).Text, "T")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Importe = Round2(DBLet(Rs!cantidad, "N") * TransformaPuntosComas(ImporteSinFormato(Text1(17).Text)), 2)

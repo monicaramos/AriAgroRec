@@ -309,9 +309,9 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   1
-         ItemData        =   "frmPOZLecturasMonast.frx":000C
+         ItemData        =   "frmPOZLecturasMonast.frx":EB6A
          Left            =   1845
-         List            =   "frmPOZLecturasMonast.frx":000E
+         List            =   "frmPOZLecturasMonast.frx":EB6C
          Style           =   2  'Dropdown List
          TabIndex        =   13
          Tag             =   "Comunidad|N|N|||rpozos|codpozo|||"
@@ -424,7 +424,7 @@ Begin VB.Form frmPOZLecturasMonast
          Height          =   240
          Index           =   0
          Left            =   4905
-         Picture         =   "frmPOZLecturasMonast.frx":0010
+         Picture         =   "frmPOZLecturasMonast.frx":EB6E
          ToolTipText     =   "Buscar fecha"
          Top             =   2160
          Width           =   240
@@ -567,9 +567,9 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   2
-         ItemData        =   "frmPOZLecturasMonast.frx":009B
+         ItemData        =   "frmPOZLecturasMonast.frx":EBF9
          Left            =   2115
-         List            =   "frmPOZLecturasMonast.frx":009D
+         List            =   "frmPOZLecturasMonast.frx":EBFB
          Style           =   2  'Dropdown List
          TabIndex        =   26
          Tag             =   "Calle|N|N|||rpozos|codparti|||"
@@ -589,9 +589,9 @@ Begin VB.Form frmPOZLecturasMonast
          EndProperty
          Height          =   495
          Index           =   0
-         ItemData        =   "frmPOZLecturasMonast.frx":009F
+         ItemData        =   "frmPOZLecturasMonast.frx":EBFD
          Left            =   2115
-         List            =   "frmPOZLecturasMonast.frx":00A1
+         List            =   "frmPOZLecturasMonast.frx":EBFF
          Style           =   2  'Dropdown List
          TabIndex        =   3
          Tag             =   "Comunidad|N|N|||rpozos|codpozo|||"
@@ -951,7 +951,7 @@ Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres 
 Dim CadB As String
 
 Dim vSeccion As CSeccion
-Dim b As Boolean
+Dim B As Boolean
 
 Private BuscaChekc As String
 Private NumCajas As Currency
@@ -1008,6 +1008,13 @@ Private Sub lw1_Click()
     
     If ComprobarCero(Text1(9).Text) = "0" Then Text1(9).Text = ""
     If ComprobarCero(Text1(4).Text) = "0" Then Text1(4).Text = ""
+
+    '[Monica]10/10/2017: caso de ausente y de consumo elevado
+    Me.ChkAveriado.Value = lw1.SelectedItem.ListSubItems(10)
+    Me.ChkConsElevado.Value = lw1.SelectedItem.ListSubItems(11)
+
+    PonerFoco Text1(9)
+
 
 End Sub
 
@@ -1086,6 +1093,9 @@ Dim J As String
         lw1.SelectedItem.SubItems(5) = Text1(4).Text
         lw1.SelectedItem.SubItems(4) = Text1(9).Text
     
+        lw1.SelectedItem.SubItems(10) = ChkAveriado.Value
+        lw1.SelectedItem.SubItems(11) = ChkConsElevado.Value
+    
         lw1.SelectedItem.ForeColor = &HC0C0C0
         lw1.SelectedItem.ListSubItems(1).ForeColor = &HC0C0C0
         lw1.SelectedItem.ListSubItems(5).ForeColor = &HC0C0C0
@@ -1095,20 +1105,22 @@ Dim J As String
             lw1.SelectedItem.ListSubItems(1).ForeColor = &H80000008
             lw1.SelectedItem.ListSubItems(5).ForeColor = &H80000008
         End If
-    End If
     
-    If lw1.SelectedItem.Index + 1 <= lw1.ListItems.Count Then
-        Set lw1.SelectedItem = lw1.ListItems(lw1.SelectedItem.Index + 1)
-        lw1.SelectedItem.EnsureVisible
-        
-        lw1_Click
-        
-'        Set lw1.SelectedItem = Nothing
-    End If
     
-'    Me.ChkAusente.Value = 0
-    Me.ChkAveriado.Value = 0
-    Me.ChkConsElevado.Value = 0
+        If lw1.SelectedItem.Index + 1 <= lw1.ListItems.Count Then
+            Set lw1.SelectedItem = lw1.ListItems(lw1.SelectedItem.Index + 1)
+            lw1.SelectedItem.EnsureVisible
+            
+            lw1_Click
+            
+    '        Set lw1.SelectedItem = Nothing
+        End If
+        
+    '    Me.ChkAusente.Value = 0
+        Me.ChkAveriado.Value = 0
+        Me.ChkConsElevado.Value = 0
+    
+    End If
     
     Screen.MousePointer = vbDefault
     
@@ -1120,7 +1132,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Mens As String
 Dim FechaAnt As Date
@@ -1133,12 +1145,12 @@ Dim Hidrante As String
 
     If lw1.SelectedItem = "" Then
         MsgBox "No se ha seleccionado contador. Revise.", vbExclamation
-        b = False
+        B = False
     End If
     
 '    Hidrante = DataGrid1.Columns(2).Value
     Hidrante = Me.lw1.SelectedItem.ListSubItems(2)
-    b = True
+    B = True
     If Text1(9).Text <> "" Then
          Inicio = 0
          Fin = 0
@@ -1162,36 +1174,43 @@ Dim Hidrante As String
          If Consumo > Limite - 1 Or Consumo < 0 Then
             MsgBox "Error en la lectura. Revise", vbExclamation
             PonerFoco Text1(9)
-            b = False
+            B = False
          Else
             
             If Text1(0).Text = "" Then
                 MsgBox "La fecha de lectura debe tener un valor. Revise.", vbExclamation
                 PonerFoco Text1(0)
-                b = False
+                B = False
             Else
                 FechaAnt = DevuelveValor("select fech_ant from rpozos where hidrante = " & DBSet(Hidrante, "T"))
                 If CDate(Text1(0).Text) < FechaAnt Then
                     MsgBox "La fecha de lectura actual es inferior a la de última lectura. Revise.", vbExclamation
                     PonerFoco Text1(0)
-                    b = False
+                    B = False
                 End If
             End If
          End If
     Else
         If Text1(9).Text = "" And Text1(0).Text = "" Then
             Text1(4).Text = ""
-            b = False
+            B = False
         Else
-            b = True
+            '[Monica]11/10/2017: debe introducir todas las lecturas
+            If ComprobarCero(Text1(9).Text) = "0" And ComprobarCero(Text1(7).Text) <> "0" Then
+                MsgBox "Dede introducir un valor en la lectura actual. Revise.", vbExclamation
+                PonerFoco Text1(0)
+                B = False
+            Else
+                B = True
+            End If
         End If
     End If
     
     
-    If b Then Text1(4).Text = Consumo
+    If B Then Text1(4).Text = Consumo
     
     
-    DatosOK = b
+    DatosOK = B
 End Function
 
 
@@ -1536,7 +1555,7 @@ Dim Sql As String
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -1567,11 +1586,11 @@ Dim Sql As String
         
     End If
 
-    Cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rcampos.poligono, rcampos.parcela, rcampos.supcoope, rpueblos.despobla, rcampos.subparce, rcampos.codsocio "
     Cad1 = Cad1 & " from rcampos, rpartida, rpueblos "
-    Cad1 = Cad1 & " where " & Cad
+    Cad1 = Cad1 & " where " & cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla"
      
@@ -1753,29 +1772,29 @@ End Sub
 Private Sub DatosaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim NF1 As Integer
-Dim Cad As String
+Dim cad As String
 On Error GoTo ENumeroEmpresaMemorizar
 
 
         
-    Cad = App.Path & "\ultLect.dat"
+    cad = App.Path & "\ultLect.dat"
     If Leer Then
-        If Dir(Cad) <> "" Then
+        If Dir(cad) <> "" Then
             NF = FreeFile
-            Open Cad For Input As #NF
-            Line Input #NF, Cad
+            Open cad For Input As #NF
+            Line Input #NF, cad
             Close #NF
-            Cad = Trim(Cad)
+            cad = Trim(cad)
             
                 'El primer pipe es el usuario
-                UltimaLectura = Cad
+                UltimaLectura = cad
     
         End If
     Else 'Escribir
         NF1 = FreeFile
-        Open Cad For Output As #NF1
-        Cad = Combo1(0).ItemData(Combo1(0).ListIndex) & "|" & Combo1(2).ItemData(Combo1(2).ListIndex) & "|"
-        Print #NF1, Cad
+        Open cad For Output As #NF1
+        cad = Combo1(0).ItemData(Combo1(0).ListIndex) & "|" & Combo1(2).ItemData(Combo1(2).ListIndex) & "|"
+        Print #NF1, cad
         Close #NF1
     End If
 ENumeroEmpresaMemorizar:
@@ -1785,7 +1804,7 @@ End Sub
 
 
 Private Sub CargaLW(vSQL As String)
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
 Dim It As ListItem
 Dim ElIcono As Integer
