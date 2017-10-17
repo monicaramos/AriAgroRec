@@ -246,6 +246,16 @@ Dim OK As Byte
             LeerParametros
         End If
                 
+        '[Monica]16/10/2017: para el caso de Monasterios control de que si la fecha fin de campaña es anterior o igual a la de
+        '                    a hoy salimos de la aplicacion
+        If vParamAplic.Cooperativa = 17 Then
+            If CDate(vParam.FecFinCam) <= Now Then
+                MsgBox "Error en las fechas de campaña. La aplicación no se ejecutará.", vbExclamation
+                End
+            End If
+        End If
+                
+                
 
         'Gestionar el nombre del PC para la asignacion de PC en el entorno de red
         GestionaPC

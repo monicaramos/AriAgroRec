@@ -718,9 +718,13 @@ Dim B As Boolean
     Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
 
+    
+    '[Monica]16/10/2017: la importacion de datos tiene que estar activa siempre, haya o no datos
     'Importacion
-    Toolbar2.Buttons(1).Enabled = B
-    Me.mnImportacion.Enabled = B
+    Toolbar2.Buttons(1).Enabled = True 'B
+    Me.mnImportacion.Enabled = True 'B
+    
+    
     'Generacion
     Toolbar2.Buttons(2).Enabled = B
     Me.mnGeneracion.Enabled = B
