@@ -3,47 +3,74 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmAlmzCambioRdto 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Informes"
-   ClientHeight    =   4560
+   ClientHeight    =   5055
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6630
+   ClientWidth     =   7170
    Icon            =   "frmAlmzCambioRdto.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   4560
-   ScaleWidth      =   6630
+   ScaleHeight     =   5055
+   ScaleWidth      =   7170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameEntradasCampo 
-      Height          =   4500
+      Height          =   5040
       Left            =   0
       TabIndex        =   0
       Top             =   0
-      Width           =   6615
+      Width           =   7155
       Begin VB.Frame Frame2 
          Caption         =   "Tipo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   870
          Left            =   540
          TabIndex        =   21
-         Top             =   3420
-         Width           =   3255
+         Top             =   3600
+         Width           =   3570
          Begin VB.OptionButton Option2 
             Caption         =   "Porcentaje"
-            Height          =   195
-            Left            =   1800
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
+            Left            =   1980
             TabIndex        =   23
             Top             =   405
-            Width           =   1230
+            Width           =   1500
          End
          Begin VB.OptionButton Option1 
             Caption         =   "Suma Directa"
-            Height          =   195
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
             Left            =   270
             TabIndex        =   22
             Top             =   405
-            Width           =   1365
+            Width           =   1725
          End
       End
       Begin VB.Frame Frame1 
@@ -55,25 +82,43 @@ Begin VB.Form frmAlmzCambioRdto
          Width           =   4935
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   2
             Left            =   1320
             MaxLength       =   6
             TabIndex        =   5
             Tag             =   "Porcentaje|N|S|||rhisfruta|numalbar|##0.00|S|"
-            Top             =   330
+            Top             =   465
             Width           =   1095
          End
          Begin VB.Label Label2 
             AutoSize        =   -1  'True
             Caption         =   "Aumento Rdto"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   240
             Index           =   5
-            Left            =   60
+            Left            =   15
             TabIndex        =   20
-            Top             =   90
-            Width           =   1020
+            Top             =   225
+            Width           =   1395
          End
       End
       Begin VB.CommandButton Command4 
@@ -99,7 +144,16 @@ Begin VB.Form frmAlmzCambioRdto
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   15
          Left            =   2760
          Locked          =   -1  'True
@@ -111,7 +165,16 @@ Begin VB.Form frmAlmzCambioRdto
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   14
          Left            =   2760
          Locked          =   -1  'True
@@ -122,60 +185,114 @@ Begin VB.Form frmAlmzCambioRdto
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   15
          Left            =   1935
          MaxLength       =   6
          TabIndex        =   4
          Top             =   2400
-         Width           =   735
+         Width           =   825
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   14
          Left            =   1935
          MaxLength       =   6
          TabIndex        =   3
          Top             =   2040
-         Width           =   735
+         Width           =   825
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4005
+         Left            =   4590
          TabIndex        =   6
-         Top             =   3870
+         Top             =   4455
          Width           =   975
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   1
-         Left            =   5130
+         Left            =   5715
          TabIndex        =   7
-         Top             =   3870
+         Top             =   4455
          Width           =   975
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   7
-         Left            =   4290
+         Left            =   4785
          MaxLength       =   10
          TabIndex        =   2
-         Top             =   1455
-         Width           =   1095
+         Top             =   1410
+         Width           =   1350
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   6
          Left            =   1965
          MaxLength       =   10
          TabIndex        =   1
-         Top             =   1440
-         Width           =   1095
+         Top             =   1395
+         Width           =   1350
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -183,16 +300,16 @@ Begin VB.Form frmAlmzCambioRdto
          Left            =   1635
          Picture         =   "frmAlmzCambioRdto.frx":0620
          ToolTipText     =   "Buscar fecha"
-         Top             =   1440
+         Top             =   1395
          Width           =   240
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   3975
+         Left            =   4470
          Picture         =   "frmAlmzCambioRdto.frx":06AB
          ToolTipText     =   "Buscar fecha"
-         Top             =   1455
+         Top             =   1410
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -217,21 +334,39 @@ Begin VB.Form frmAlmzCambioRdto
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   26
-         Left            =   1005
+         Left            =   915
          TabIndex        =   18
          Top             =   2475
-         Width           =   420
+         Width           =   600
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   25
-         Left            =   1005
+         Left            =   915
          TabIndex        =   17
          Top             =   2085
-         Width           =   465
+         Width           =   645
       End
       Begin VB.Label Label3 
          Caption         =   "Cambio de Rendimiento "
@@ -246,7 +381,7 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   630
+         Left            =   585
          TabIndex        =   16
          Top             =   420
          Width           =   5805
@@ -254,42 +389,78 @@ Begin VB.Form frmAlmzCambioRdto
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   24
-         Left            =   675
+         Left            =   585
          TabIndex        =   15
-         Top             =   1845
-         Width           =   630
+         Top             =   1755
+         Width           =   855
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   21
-         Left            =   3360
+         Left            =   3855
          TabIndex        =   14
-         Top             =   1455
-         Width           =   420
+         Top             =   1410
+         Width           =   600
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   20
-         Left            =   1020
+         Left            =   930
          TabIndex        =   13
-         Top             =   1500
-         Width           =   465
+         Top             =   1410
+         Width           =   645
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   19
-         Left            =   690
+         Left            =   600
          TabIndex        =   12
-         Top             =   1260
-         Width           =   450
+         Top             =   1080
+         Width           =   600
       End
    End
    Begin MSComDlg.CommonDialog cd1 
@@ -358,7 +529,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Tabla1 As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
@@ -366,7 +537,7 @@ Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
@@ -399,9 +570,9 @@ Dim nTabla As String
 
     InicializarVbles
     
-    If txtcodigo(2).Text = "" Then
+    If txtCodigo(2).Text = "" Then
         MsgBox "Debe poner un valor en el campo porcentaje. Revise.", vbExclamation
-        PonerFoco txtcodigo(2)
+        PonerFoco txtCodigo(2)
         Exit Sub
     End If
     
@@ -412,29 +583,29 @@ Dim nTabla As String
     
     '======== FORMULA  ====================================
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(14).Text)
-    cHasta = Trim(txtcodigo(15).Text)
+    cDesde = Trim(txtCodigo(14).Text)
+    cHasta = Trim(txtCodigo(15).Text)
     nDesde = txtNombre(14).Text
     nHasta = txtNombre(15).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codvarie}"
+        Codigo = "{" & tabla & ".codvarie}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
 
-    If txtcodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtcodigo(14).Text, "N")
-    If txtcodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtcodigo(15).Text, "N")
+    If txtCodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtCodigo(14).Text, "N")
+    If txtCodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtCodigo(15).Text, "N")
 
     
     'D/H fecha
-    cDesde = Trim(txtcodigo(6).Text)
-    cHasta = Trim(txtcodigo(7).Text)
+    cDesde = Trim(txtCodigo(6).Text)
+    cHasta = Trim(txtCodigo(7).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".fecalbar}"
+        Codigo = "{" & tabla & ".fecalbar}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
@@ -466,7 +637,7 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         
-        PonerFoco txtcodigo(12)
+        PonerFoco txtCodigo(12)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -501,7 +672,7 @@ Dim List As Collection
     FrameEntradaBasculaVisible True, H, W
     indFrame = 1
     
-    Tabla = "rhisfruta"
+    tabla = "rhisfruta"
     
     
     Frame1.visible = True
@@ -517,43 +688,43 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmPob_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) ' codigo de poblacion
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) ' codigo de poblacion
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' nombre
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -573,7 +744,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmVariedad (Index)
     
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -602,24 +773,24 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 0, 1
-            indice = Index + 6
+            Indice = Index + 6
     End Select
 
 
-    imgFec(0).Tag = indice '<===
+    imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -644,22 +815,22 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -668,15 +839,15 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 6, 7  'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
             
         Case 14, 15 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
         Case 2 ' Porcentaje de aumento o disminucion
-            PonerFormatoDecimal txtcodigo(2), 10
+            PonerFormatoDecimal txtCodigo(2), 10
         
     End Select
 End Sub
@@ -752,8 +923,8 @@ Private Sub LlamarImprimir()
 End Sub
 
 
-Private Sub AbrirFrmPoblacion(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmPoblacion(Indice As Integer)
+    indCodigo = Indice
     Set frmPob = New frmManPueblos
     frmPob.Caption = "Pueblos"
     frmPob.DatosADevolverBusqueda = "0|1|"
@@ -762,26 +933,26 @@ Private Sub AbrirFrmPoblacion(indice As Integer)
 End Sub
 
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmClase(indice As Integer)
-    indCodigo = indice + 14
+Private Sub AbrirFrmClase(Indice As Integer)
+    indCodigo = Indice + 14
     
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
@@ -944,26 +1115,26 @@ End Sub
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     
-    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -979,22 +1150,22 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistros = True
     Exit Function
@@ -1005,14 +1176,14 @@ End Function
 
 
 Private Function NombreCalidad(Var As String, Calid As String) As String
-Dim Sql As String
+Dim SQL As String
 
     NombreCalidad = ""
 
-    Sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
-    Sql = Sql & " and codcalid = " & DBSet(Calid, "N")
+    SQL = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
+    SQL = SQL & " and codcalid = " & DBSet(Calid, "N")
     
-    NombreCalidad = DevuelveValor(Sql)
+    NombreCalidad = DevuelveValor(SQL)
     
 End Function
 
@@ -1054,14 +1225,14 @@ End Function
 
 
 Private Function ProductoCampo(campo As String) As String
-Dim Sql As String
+Dim SQL As String
 
     ProductoCampo = ""
     
-    Sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
-    Sql = Sql & " where rcampos.codcampo = " & DBSet(campo, "N")
+    SQL = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
+    SQL = SQL & " where rcampos.codcampo = " & DBSet(campo, "N")
     
-    ProductoCampo = DevuelveValor(Sql)
+    ProductoCampo = DevuelveValor(SQL)
 
 End Function
 
@@ -1069,7 +1240,7 @@ End Function
 
 Private Function ModificarRdto(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim cWhere2 As String
 Dim Precio As Currency
@@ -1081,15 +1252,15 @@ Dim Rs As ADODB.Recordset
  
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    cWhere2 = " numalbar in (" & Sql & ")"
+    cWhere2 = " numalbar in (" & SQL & ")"
     
     If Not BloqueaRegistro("rhisfruta", cWhere2) Then
         MsgBox "No se pueden actualizar Entradas. Hay registros bloqueados.", vbExclamation
@@ -1097,17 +1268,17 @@ Dim Rs As ADODB.Recordset
         Exit Function
     Else
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             
             If Option1.Value Then
-                Precio = CCur(ImporteSinFormato(txtcodigo(2).Text))
+                Precio = CCur(ImporteSinFormato(txtCodigo(2).Text))
                 
                 Sql2 = "update rhisfruta set prestimado = round(prestimado + " & DBSet(Precio, "N") & ",2) "
                 Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
             Else
-                Precio = 1 + (CCur(ImporteSinFormato(txtcodigo(2).Text)) / 100)
+                Precio = 1 + (CCur(ImporteSinFormato(txtCodigo(2).Text)) / 100)
                 
                 Sql2 = "update rhisfruta set prestimado = round(prestimado * " & DBSet(Precio, "N") & ",2) "
                 Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
