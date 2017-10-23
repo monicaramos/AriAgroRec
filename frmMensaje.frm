@@ -357,18 +357,19 @@ Private Sub Form_Load()
     frameAcercaDE.visible = False
     FrameCobrosPtes.visible = False
 
+
     Select Case OpcionMensaje
         Case Is <= 3 ' Errores al hacer comprobaciones
             PonerFrameCobrosPtesVisible True, 1000, 2000
             CargarListaErrComprobacion
             Me.Caption = "Errores de Comprobacion: "
-            PonerFocoBtn Me.cmdSalir
+            PonerFocoBtn Me.CmdSalir
             
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, 1000, 2000
             CargarListaErrContab
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.CmdAceptarCobros
+            PonerFocoBtn Me.cmdAceptarCobros
             
         Case 6
             PonerFrameCobrosPtesVisible True, 1000, 2000
@@ -389,15 +390,15 @@ Private Sub CargarListaErrContab()
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargarList
 
-    Sql = " SELECT  * "
-    Sql = Sql & " FROM tmperrfac "
+    SQL = " SELECT  * "
+    SQL = SQL & " FROM tmperrfac "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         ListView1.Height = 4500
         ListView1.Width = 7400
@@ -449,7 +450,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             W = 9200
 '            Me.Label1(0).Top = 4800
 '            Me.Label1(0).Left = 3400
-            Me.cmdSalir.Caption = "&Salir"
+            Me.CmdSalir.Caption = "&Salir"
             PonerFrameVisible Me.FrameErrores, visible, H, W
             Me.frameAcercaDE.visible = False
             Me.FrameCobrosPtes.visible = False
@@ -458,8 +459,8 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
         Case 10  'Errores al contabilizar facturas
             H = 6000
             W = 8400
-            Me.CmdAceptarCobros.Top = 5300
-            Me.CmdAceptarCobros.Left = 4900
+            Me.cmdAceptarCobros.Top = 5300
+            Me.cmdAceptarCobros.Left = 4900
     
         Case 6 ' Acerca de
             H = 4485
@@ -492,15 +493,15 @@ Private Sub CargarListaErrComprobacion()
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargarListErrComprobacion
 
-    Sql = " SELECT  * "
-    Sql = Sql & " FROM tmperrcomprob "
+    SQL = " SELECT  * "
+    SQL = SQL & " FROM tmperrcomprob "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
 '        ListView1.Height = 4500
 '        ListView1.Width = 7400

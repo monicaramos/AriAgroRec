@@ -31,7 +31,7 @@ Private Sub AccionesIniciales()
     
     If ModoImpresion = 1 Then
             Printer.Font = "Courier New"
-            Printer.FontSize = "10"
+            Printer.FontSize = "12" '[Monica]23/10/2017: antes era 10
     ElseIf ModoImpresion = 2 Then
         NF = FreeFile
         'Open "d:\t1.txt" For Output As #NF
@@ -61,7 +61,7 @@ Public Sub ImprimirDirectoAlb(cadSelect As String)
     Dim rsIVA As ADODB.Recordset
 '    Dim vFactu As CFactura
     
-    Dim Sql As String
+    Dim SQL As String
     Dim Lin As String ' línea de impresión
     Dim I As Integer
     
@@ -87,8 +87,8 @@ On Error GoTo EImpD
         Set RS1 = New ADODB.Recordset
         
         'Cabecera de la entrada
-        Sql = "select * from rentradas WHERE " & cadSelect
-        RS1.Open Sql, conn, adOpenForwardOnly
+        SQL = "select * from rentradas WHERE " & cadSelect
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         Producto = DevuelveValor("select nomprodu from variedades inner join productos on variedades.codprodu = productos.codprodu where codvarie = " & DBSet(RS1!codvarie, "N"))
         Variedad = DevuelveValor("select nomvarie from variedades where codvarie = " & DBSet(RS1!codvarie, "N"))
@@ -554,12 +554,12 @@ End Sub
 
 Private Function EsSegundaImpresion(Nota As Long) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select * from rentradas where numnotac = " & DBSet(Nota, "N")
+    SQL = "select * from rentradas where numnotac = " & DBSet(Nota, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     EsSegundaImpresion = False
     
@@ -1058,7 +1058,7 @@ Public Sub ImprimirDirectoAlbBodega(cadSelect As String)
     Dim rsIVA As ADODB.Recordset
 '    Dim vFactu As CFactura
     
-    Dim Sql As String
+    Dim SQL As String
     Dim Lin As String ' línea de impresión
     Dim I As Integer
     
@@ -1082,8 +1082,8 @@ On Error GoTo EImpD
         Set RS1 = New ADODB.Recordset
         
         'Cabecera de la entrada
-        Sql = "select rhisfruta.*, rhisfruta_entradas.fechaent, rhisfruta_entradas.horaentr, rhisfruta_entradas.observac from rhisfruta inner join rhisfruta_entradas on rhisfruta.numalbar = rhisfruta_entradas.numalbar WHERE " & cadSelect
-        RS1.Open Sql, conn, adOpenForwardOnly
+        SQL = "select rhisfruta.*, rhisfruta_entradas.fechaent, rhisfruta_entradas.horaentr, rhisfruta_entradas.observac from rhisfruta inner join rhisfruta_entradas on rhisfruta.numalbar = rhisfruta_entradas.numalbar WHERE " & cadSelect
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         Producto = DevuelveValor("select nomprodu from variedades inner join productos on variedades.codprodu = productos.codprodu where codvarie = " & DBSet(RS1!codvarie, "N"))
         Variedad = DevuelveValor("select nomvarie from variedades where codvarie = " & DBSet(RS1!codvarie, "N"))
@@ -1261,7 +1261,7 @@ Public Sub ImprimirDirectoTickets(cadSelect As String)
     Dim rsIVA As ADODB.Recordset
 '    Dim vFactu As CFactura
     
-    Dim Sql As String
+    Dim SQL As String
     Dim Lin As String ' línea de impresión
     Dim I As Integer
     
@@ -1285,8 +1285,8 @@ On Error GoTo EImpD
         Set RS1 = New ADODB.Recordset
         
         'Cabecera de la entrada
-        Sql = "select * from trzpalets WHERE " & cadSelect
-        RS1.Open Sql, conn, adOpenForwardOnly
+        SQL = "select * from trzpalets WHERE " & cadSelect
+        RS1.Open SQL, conn, adOpenForwardOnly
         
         Socio = DevuelveValor("select nomsocio from rsocios where codsocio = " & DBSet(RS1!Codsocio, "N"))
         Variedad = DevuelveValor("select nomvarie from variedades where codvarie = " & DBSet(RS1!codvarie, "N"))

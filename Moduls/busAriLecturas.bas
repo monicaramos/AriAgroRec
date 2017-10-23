@@ -263,7 +263,13 @@ Dim OK As Byte
         'Otras acciones
         OtrasAcciones
 
-     
+        ' *** per als iconos XP ***
+        GetIconsFromLibrary App.Path & "\iconos.dll", 1, 24
+        GetIconsFromLibrary App.Path & "\iconos_BN.dll", 2, 24
+        GetIconsFromLibrary App.Path & "\iconos_OM.dll", 3, 24
+        
+        GetIconsFromLibrary App.Path & "\iconosAriagroRec.dll", 4, 24
+         
      
         '[Monica]08/09/2017: para el caso de que se ejecute el programa de lecturas en la tableta
         If vParamAplic.Cooperativa = 17 Then
@@ -1954,5 +1960,37 @@ EPonerOpcionesMenuGeneral:
 End Sub
 
 
+Public Sub PonerFrameVisible(ByRef vFrame As Frame, visible As Boolean, H As Integer, W As Integer)
+'Pone el Frame Visible y Ajustado al Formulario, y visualiza los controles
+    
+        vFrame.visible = visible
+        If visible = True Then
+            'Ajustar Tamaño del Frame para ajustar tamaño de Formulario al del Frame
+            vFrame.Top = -90
+            vFrame.Left = 0
+            vFrame.Width = W
+            vFrame.Height = H
+        End If
+End Sub
 
 
+Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
+    Dim I As Integer
+    Dim tRes As ResType, iCount As Integer
+        
+    opcio = op
+    tamany = tam
+    ghmodule = LoadLibraryEx(sLibraryFilePath, 0, DONT_RESOLVE_DLL_REFERENCES)
+
+    If ghmodule = 0 Then
+        MsgBox "Invalid library file.", vbCritical
+        Exit Sub
+    End If
+        
+    For tRes = RT_FIRST To RT_LAST
+        DoEvents
+        EnumResourceNames ghmodule, tRes, AddressOf EnumResNameProc, 0
+    Next
+    FreeLibrary ghmodule
+             
+End Sub

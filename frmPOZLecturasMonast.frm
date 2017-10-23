@@ -618,6 +618,26 @@ Begin VB.Form frmPOZLecturasMonast
             EndProperty
          EndProperty
       End
+      Begin MSComctlLib.Toolbar Toolbar3 
+         Height          =   330
+         Index           =   0
+         Left            =   9900
+         TabIndex        =   39
+         Top             =   1620
+         Width           =   510
+         _ExtentX        =   900
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   1
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imagen"
+            EndProperty
+         EndProperty
+      End
       Begin VB.Label Label3 
          Caption         =   "Calle"
          BeginProperty Font 
@@ -992,6 +1012,14 @@ Private Sub Form_Resize()
     Me.Height = 14085
 End Sub
 
+Private Sub Img1_Click()
+' boton para ver el historico de lecturas
+
+
+
+
+End Sub
+
 Private Sub lw1_Click()
 '   If Me.Data1.Recordset.EOF Then Exit Sub
     If lw1.ListItems.Count = 0 Then Exit Sub
@@ -1066,7 +1094,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
+Dim SQL As String
 Dim Hidrante As String
 Dim I As Long
 Dim J As String
@@ -1078,16 +1106,16 @@ Dim J As String
     Screen.MousePointer = vbHourglass
     
     If DatosOK Then
-        Sql = "update rpozos set fech_act = " & DBSet(Text1(0).Text, "F") & ", lect_act = " & DBSet(Text1(9).Text, "N")
-        Sql = Sql & ", consumo = " & DBSet(Text1(4).Text, "N")
-        Sql = Sql & ", calibre = " & DBSet(Combo1(1).ListIndex, "N")
+        SQL = "update rpozos set fech_act = " & DBSet(Text1(0).Text, "F") & ", lect_act = " & DBSet(Text1(9).Text, "N")
+        SQL = SQL & ", consumo = " & DBSet(Text1(4).Text, "N")
+        SQL = SQL & ", calibre = " & DBSet(Combo1(1).ListIndex, "N")
         '[Monica]10/10/2017: añadimos lo de averiado y consumo elevado
-        Sql = Sql & ", averiado = " & DBSet(ChkAveriado.Value, "N")
-        Sql = Sql & ", conselevado = " & DBSet(ChkConsElevado, "N")
-        Sql = Sql & " WHERE hidrante = " & DBSet(lw1.SelectedItem.ListSubItems(2), "T")
+        SQL = SQL & ", averiado = " & DBSet(ChkAveriado.Value, "N")
+        SQL = SQL & ", conselevado = " & DBSet(ChkConsElevado, "N")
+        SQL = SQL & " WHERE hidrante = " & DBSet(lw1.SelectedItem.ListSubItems(2), "T")
         'Sql = Sql & " where hidrante = " & DBSet(DataGrid1.Columns(2), "T")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         MsgBox "Lectura realizada correctamente", vbExclamation
         lw1.SelectedItem.SubItems(5) = Text1(4).Text
@@ -1133,7 +1161,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer
@@ -1215,24 +1243,24 @@ End Function
 
 
 Private Sub cmdActualizar_Click()
-Dim Sql As String
+Dim SQL As String
 
     If ChkPendientes.Value = 1 Then
         If Combo1(2).ListIndex <> -1 And Combo1(0).ListIndex <> -1 Then
-            Sql = "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-            Sql = Sql & " and rpozos.lect_act is null  "
+            SQL = "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+            SQL = SQL & " and rpozos.lect_act is null  "
         Else
-            Sql = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
+            SQL = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
         End If
     Else
         If Combo1(2).ListIndex <> -1 And Combo1(0).ListIndex <> -1 Then
-            Sql = "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+            SQL = "rpozos.codparti = " & DBSet(Combo1(2).ItemData(Combo1(2).ListIndex), "N") & " and rpozos.codpozo = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
         Else
-            Sql = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
+            SQL = "rpozos.codparti = -1 and rpozos.codpozo = - 1"
         End If
     End If
 '    CargaGrid Sql
-    CargaLW Sql
+    CargaLW SQL
 
 End Sub
 
@@ -1316,7 +1344,13 @@ Dim I As Integer
     PonerModo 1 'búsqueda
     
 '    Text1(0).Text = Format(Now, "dd/mm/yyyy")
-
+    
+    With Me.Toolbar3(0)
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 36   'camara
+    End With
 
 
 End Sub
@@ -1459,7 +1493,7 @@ End Sub
 
 
 Private Sub CalcularConsumo()
-Dim Sql As String
+Dim SQL As String
 Dim Inicio As Long
 Dim Fin As Long
 Dim Consumo As Long
@@ -1541,7 +1575,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim Sql As String
+Dim SQL As String
 
     Select Case Index
         Case 0 ' fecha
@@ -1559,7 +1593,7 @@ Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
 
     If campo = "" Then Exit Sub
@@ -1568,10 +1602,10 @@ Dim Sql As String
 
     '[Monica]22/11/2012: Preguntamos si quiere traer los datos del socio del campo
     If (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And Modo = 4 Then
-        Sql = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(5).Text, "N")
+        SQL = "select rcampos.codsocio, rsocios.nomsocio from rcampos inner join rsocios on rcampos.codsocio = rsocios.codsocio where rcampos.codcampo = " & DBSet(Text1(5).Text, "N")
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
        
         If DBLet(Rs.Fields(0)) <> CLng(ComprobarCero(Text1(2).Text)) Then
             Text1(2).Text = Format(DBLet(Rs!Codsocio, "N"), "000000") ' codigo de socio del campo
@@ -1645,7 +1679,7 @@ End Sub
 Private Sub PosarDescripcions()
 Dim NomEmple As String
 Dim CodPobla As String
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EPosarDescripcions
 
@@ -1655,10 +1689,10 @@ Dim Sql As String
         
         
     If Text1(3).Text <> "" Then
-        Sql = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
-        Sql = Sql & " and rpueblos.codpobla = rpartida.codpobla "
+        SQL = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
+        SQL = SQL & " and rpueblos.codpobla = rpartida.codpobla "
         
-        Text2(1).Text = DevuelveValor(Sql) ' nombre de poblacion
+        Text2(1).Text = DevuelveValor(SQL) ' nombre de poblacion
     End If
     
 EPosarDescripcions:
@@ -1698,8 +1732,8 @@ Dim miRsAux As ADODB.Recordset
 
     miRsAux.Open "Select * from rtipopozos order by nompozo", conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not miRsAux.EOF
-        Combo1(0).AddItem Format(miRsAux!codpozo, "0000") & " " & miRsAux!nompozo
-        Combo1(0).ItemData(Combo1(0).NewIndex) = miRsAux!codpozo
+        Combo1(0).AddItem Format(miRsAux!Codpozo, "0000") & " " & miRsAux!nompozo
+        Combo1(0).ItemData(Combo1(0).NewIndex) = miRsAux!Codpozo
         miRsAux.MoveNext
     Wend
     miRsAux.Close
@@ -1773,10 +1807,9 @@ Private Sub DatosaMemorizar(Leer As Boolean)
 Dim NF As Integer
 Dim NF1 As Integer
 Dim cad As String
-On Error GoTo ENumeroEmpresaMemorizar
 
-
-        
+    On Error GoTo ENumeroEmpresaMemorizar
+    
     cad = App.Path & "\ultLect.dat"
     If Leer Then
         If Dir(cad) <> "" Then
@@ -1786,8 +1819,7 @@ On Error GoTo ENumeroEmpresaMemorizar
             Close #NF
             cad = Trim(cad)
             
-                'El primer pipe es el usuario
-                UltimaLectura = cad
+            UltimaLectura = cad
     
         End If
     Else 'Escribir
@@ -1797,6 +1829,7 @@ On Error GoTo ENumeroEmpresaMemorizar
         Print #NF1, cad
         Close #NF1
     End If
+    
 ENumeroEmpresaMemorizar:
     Err.Clear
 End Sub
@@ -1811,7 +1844,7 @@ Dim ElIcono As Integer
 Dim GroupBy As String
 Dim Orden As String
 Dim c As String
-Dim Sql As String
+Dim SQL As String
 
 Dim Encontrado As Boolean
 
@@ -1847,19 +1880,19 @@ Dim Encontrado As Boolean
         CadenaConsulta = CadenaConsulta & " where " & vSQL
     End If
 
-    Sql = CadenaConsulta
+    SQL = CadenaConsulta
 
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY rcampos.observac"
+    SQL = SQL & " ORDER BY rcampos.observac"
     '**************************************************************++
         
     
     lw1.ListItems.Clear
     
     Encontrado = True
-    If Sql <> "" Then
+    If SQL <> "" Then
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs.EOF
             Set It = lw1.ListItems.Add()
             
@@ -1920,8 +1953,17 @@ ECargaDatosLW:
     
 End Sub
 
+Private Sub Toolbar3_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Button)
+Dim frmMen As frmMensajes2
 
+    If Me.lw1.SelectedItem Is Nothing Then Exit Sub
 
+    Set frmMen = New frmMensajes2
 
+    frmMen.cadena = lw1.SelectedItem.SubItems(2)
+    frmMen.OpcionMensaje = 1
+    frmMen.Show vbModal
 
+    Set frmMen = Nothing
 
+End Sub
