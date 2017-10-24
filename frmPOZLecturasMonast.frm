@@ -1962,6 +1962,7 @@ Dim frmMen As frmMensajes2
 
     frmMen.cadena = lw1.SelectedItem.SubItems(2)
     frmMen.OpcionMensaje = 1
+    frmMen.Icon = Me.Icon
     frmMen.Show vbModal
 
     Set frmMen = Nothing

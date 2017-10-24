@@ -629,6 +629,11 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                  
         Case 23: AbrirListadoNominas (38) ' Rendimiento por capataz
                  
+        '[Monica]24/10/2017: nuevo listado de trabajadores activos
+        Case 24: AbrirListadoNominas (42) ' Trabajadores Activos
+                 
+                 
+                 
     End Select
 End Sub
 

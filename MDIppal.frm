@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "16:29"
+            TextSave        =   "13:40"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1036,6 +1036,10 @@ Begin VB.MDIForm MDIppal
       Begin VB.Menu mnP_PreNominas 
          Caption         =   "Rendimiento por Capataz"
          Index           =   23
+      End
+      Begin VB.Menu mnP_PreNominas 
+         Caption         =   "Trabajadores Activos"
+         Index           =   24
       End
    End
    Begin VB.Menu mnTrazabilidad 

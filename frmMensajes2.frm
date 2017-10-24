@@ -6,20 +6,20 @@ Begin VB.Form frmMensajes2
    ClientHeight    =   5970
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   10455
+   ClientWidth     =   11055
    Icon            =   "frmMensajes2.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5970
-   ScaleWidth      =   10455
+   ScaleWidth      =   11055
    ShowInTaskbar   =   0   'False
    Begin VB.Frame FrameHcoFrasPozos 
       Height          =   5790
       Left            =   0
       TabIndex        =   0
       Top             =   45
-      Width           =   10350
+      Width           =   10950
       Begin VB.CommandButton cmdCerrarFras 
          Caption         =   "Continuar"
          BeginProperty Font 
@@ -33,7 +33,7 @@ Begin VB.Form frmMensajes2
          EndProperty
          Height          =   420
          Index           =   0
-         Left            =   8460
+         Left            =   9135
          TabIndex        =   3
          Top             =   5130
          Width           =   1575
@@ -43,8 +43,8 @@ Begin VB.Form frmMensajes2
          Left            =   240
          TabIndex        =   1
          Top             =   750
-         Width           =   9855
-         _ExtentX        =   17383
+         Width           =   10485
+         _ExtentX        =   18494
          _ExtentY        =   7329
          View            =   3
          LabelWrap       =   -1  'True
@@ -184,7 +184,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim cad As String
+Dim Cad As String
 On Error Resume Next
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -210,8 +210,8 @@ On Error Resume Next
             W = Me.FrameHcoFrasPozos.Width
             PonerFrameVisible FrameHcoFrasPozos, True, H, W
     
-            Me.Left = 300
-            Me.Top = 2900
+            Me.Left = 200
+            Me.Top = 2850
             DoEvents
     End Select
     'Me.cmdCancel(indFrame).Cancel = True
@@ -283,30 +283,30 @@ End Function
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
 Dim J As Integer
-Dim cad As String
+Dim Cad As String
 
     J = 0
-    cad = ""
+    Cad = ""
     
     'Cod Artic
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        cad = Mid(Grupo, 1, J - 1)
+        Cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
         J = 1
     End If
-    codArtic(Contador) = cad
+    codArtic(Contador) = Cad
     
     'Cantidad
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        cad = Mid(Grupo, 1, J - 1)
+        Cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
     Else
-        cad = Grupo
+        Cad = Grupo
         Grupo = ""
     End If
-    cantidad(Contador) = cad
+    cantidad(Contador) = Cad
 End Sub
 
 
@@ -343,10 +343,10 @@ Dim It As ListItem
     ListView23.ColumnHeaders.Clear
 
     ListView23.ColumnHeaders.Add , , "Fecha Actual", 2000
-    ListView23.ColumnHeaders.Add , , "Lectura", 1500, 1
+    ListView23.ColumnHeaders.Add , , "Lectura", 1900, 1
     ListView23.ColumnHeaders.Add , , "Fecha Anterior", 2000, 1
-    ListView23.ColumnHeaders.Add , , "Lectura", 1500, 1
-    ListView23.ColumnHeaders.Add , , "Consumo", 2000, 1
+    ListView23.ColumnHeaders.Add , , "Lectura", 1900, 1
+    ListView23.ColumnHeaders.Add , , "Consumo", 2200, 1
     
     ListView23.ListItems.Clear
     
