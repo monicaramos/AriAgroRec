@@ -1262,7 +1262,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -1402,13 +1402,16 @@ Dim Sql2 As String
         
         '[Monica]10/10/2013: añadimos la condicion de que el socio sea tercero si lo han marcado (solo PICASSENT)
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
+            
+            '[Monica]31/10/2017: para el caso de Picassent era el tipo de irpf (antes estaba tipoprod=1)
             If Check1(11).Value = 1 Then ' socios terceros
-                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
-                If Not AnyadirAFormula(cadSelect1, "{rsocios.tipoprod} = 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect1, "{rsocios.tipoirpf} = 2") Then Exit Sub
             Else  ' socios no terceros
-                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} <> 1") Then Exit Sub
-                If Not AnyadirAFormula(cadSelect1, "{rsocios.tipoprod} <> 1") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                If Not AnyadirAFormula(cadSelect1, "{rsocios.tipoirpf} <> 2") Then Exit Sub
             End If
+        
         End If
         
 ' no sé como
@@ -1759,7 +1762,7 @@ End Sub
 
 '#### Laura 14/11/2006 Recuperar facturas ALZIRA
 Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, FecFac As String, numFac As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim codMacta1 As String 'cliente factura ariges
 Dim codMacta2 As String 'cliente factura conta
@@ -1769,12 +1772,12 @@ Dim LEtra As String
     ComprobarCliente_RecuperarFac = False
     
     'codmacta del cliente del albaran a facturar en Ariges
-    Sql = "select scaalb.codclien,sclien.codmacta"
-    Sql = Sql & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
-    Sql = Sql & " Where " & cadSelAlb
+    SQL = "select scaalb.codclien,sclien.codmacta"
+    SQL = SQL & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
+    SQL = SQL & " Where " & cadSelAlb
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         codMacta1 = DBLet(Rs!Codmacta, "T")
     
@@ -1784,10 +1787,10 @@ Dim LEtra As String
     
     'codmacta en la contabilidad
     LEtra = ObtenerLetraSerie("FAV")
-    Sql = "SELECT codmacta FROM cabfact "
-    Sql = Sql & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(FecFac)
+    SQL = "SELECT codmacta FROM cabfact "
+    SQL = SQL & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(FecFac)
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         codMacta2 = DBLet(Rs!Codmacta, "T")
     End If
@@ -1988,7 +1991,7 @@ Dim indFrame As Single
             txtCodigo(9).Text = Format(CDate(txtCodigo(17).Text) - 1, "dd/mm/yyyy")
             indFrame = 6
             
-            Me.Pb2.visible = False
+            Me.pb2.visible = False
             Me.Check1(0).Value = 1
             Me.Check1(1).Value = 1
             
@@ -2003,7 +2006,7 @@ Dim indFrame As Single
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(0).Cancel = True
+    Me.cmdcancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
         
@@ -2029,35 +2032,35 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 
 Private Sub frmMens4_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {rtransporte.codtrans} in (" & CadenaSeleccion & ")"
+        SQL = " {rtransporte.codtrans} in (" & CadenaSeleccion & ")"
         Sql2 = " {rtransporte.codtrans} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {rtransporte.codtrans} = -1 "
+        SQL = " {rtransporte.codtrans} = -1 "
     End If
     
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -2527,7 +2530,7 @@ Private Sub txtCodigo_Validate(Index As Integer, Cancel As Boolean)
 End Sub
 
 Private Function ObtenerClientes(cadW As String, Importe As String) As String
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
@@ -2535,28 +2538,28 @@ Dim Rs As ADODB.Recordset
     cadW = Replace(cadW, "{", "")
     cadW = Replace(cadW, "}", "")
     
-    Sql = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
-    Sql = Sql & " From scafac "
-    If cadW <> "" Then Sql = Sql & " where " & cadW
-    Sql = Sql & " group by codclien "
-    If Importe <> "" Then Sql = Sql & "having baseimp>" & Importe
+    SQL = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
+    SQL = SQL & " From scafac "
+    If cadW <> "" Then SQL = SQL & " where " & cadW
+    SQL = SQL & " group by codclien "
+    If Importe <> "" Then SQL = SQL & "having baseimp>" & Importe
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
     While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            Sql = Sql & Rs!CodClien & ","
+            SQL = SQL & Rs!CodClien & ","
 '        End If
         Rs.MoveNext
     Wend
     Rs.Close
     Set Rs = Nothing
-    If Sql <> "" Then
-        Sql = Mid(Sql, 1, Len(Sql) - 1)
-        Sql = "( {scafac.codclien} IN [" & Sql & "] )"
+    If SQL <> "" Then
+        SQL = Mid(SQL, 1, Len(SQL) - 1)
+        SQL = "( {scafac.codclien} IN [" & SQL & "] )"
     End If
-    ObtenerClientes = Sql
+    ObtenerClientes = SQL
     
 EClientes:
    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
@@ -2567,21 +2570,21 @@ End Function
 
 Private Function ActualizarRegistrosFac(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistrosFac = False
-    Sql = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
-    Sql = Sql & " where usuarios.stipom.codtipom = rfacttra.codtipom "
+    SQL = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
+    SQL = SQL & " where usuarios.stipom.codtipom = rfacttra.codtipom "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " and " & cWhere
+        SQL = SQL & " and " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistrosFac = True
     Exit Function
@@ -2592,21 +2595,21 @@ End Function
 
 Private Function ActualizarRegistrosFacSoc(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistrosFacSoc = False
-    Sql = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
-    Sql = Sql & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
+    SQL = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
+    SQL = SQL & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " and " & cWhere
+        SQL = SQL & " and " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistrosFacSoc = True
     Exit Function
