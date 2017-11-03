@@ -97,7 +97,7 @@ eInsertCabe:
 End Function
 
 'Insertar Linea de factura (variedad)
-Public Function InsertLinea(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, campo As String, Kilos As String, Importe As String, Gastos As String, Optional KiloGrado As String) As Boolean
+Public Function InsertLinea(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, Campo As String, Kilos As String, Importe As String, Gastos As String, Optional KiloGrado As String) As Boolean
 Dim Precio As Currency
 
     Dim Sql As String
@@ -116,7 +116,7 @@ Dim Precio As Currency
     Sql = "insert into tmpFact_variedad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
     Sql = Sql & "kilosnet, preciomed, imporvar, imporgasto, kilogrado) values ("
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(campo, "N") & ","
+    Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Campo, "N") & ","
     Sql = Sql & DBSet(ImporteSinFormato(Kilos), "N") & "," & DBSet(Precio, "N") & ","
     Sql = Sql & DBSet(ImporteSinFormato(Importe), "N")
     Sql = Sql & "," & DBSet(ImporteSinFormato(Gastos), "N")
@@ -168,7 +168,7 @@ End Function
 
 
 'Insertar Linea de factura (calidad)
-Public Function InsertLineaCalidad(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, campo As String, Calidad As String, Kilos As String, Importe As String, Optional Bonificacion As String) As Boolean
+Public Function InsertLineaCalidad(tipoMov As String, numfactu As String, FecFac As String, Variedad As String, Campo As String, Calidad As String, Kilos As String, Importe As String, Optional Bonificacion As String) As Boolean
 '(rfacsoc_calidad)
 Dim Precio As Currency
 Dim Sql As String
@@ -199,7 +199,7 @@ Dim PrecioSinBonif As String
     Sql = "insert into tmpfact_calidad (codtipom, numfactu, fecfactu, codvarie, codcampo, "
     Sql = Sql & "codcalid, kilosnet, precio, imporcal, preciocalidad, imporcalidad) values ("
     Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
-    Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(campo, "N") & ","
+    Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Campo, "N") & ","
     Sql = Sql & DBSet(Calidad, "N") & "," & DBSet(Kilos, "N") & ","
     Sql = Sql & DBSet(Precio, "N") & "," & DBSet(Importe, "N") & ","
     
@@ -4096,7 +4096,7 @@ Dim Sql As String
 End Function
 
 
-Public Function ObtenerGastosAlbaranes(Socio As String, Varie As String, campo As String, cTabla As String, cWhere As String, Optional deTablaGastos As Byte, Optional deAlmazara As Byte, Optional Complementaria As Byte) As Currency
+Public Function ObtenerGastosAlbaranes(Socio As String, Varie As String, Campo As String, cTabla As String, cWhere As String, Optional deTablaGastos As Byte, Optional deAlmazara As Byte, Optional Complementaria As Byte) As Currency
 ' deTablaGastos = 0 indica que cogemos unicamente los gastos que tenemos en rhisfruta
 '               = 1 indica que cogemos los gastos que tenemos en la tabla rhisfruta_gastos
 ' deAlmazara = 0 indica que no viene de almazara :tenemos el campo
@@ -4130,7 +4130,7 @@ Dim RS1 As ADODB.Recordset
                 Sql = Sql & " where " & cWhere
                 Sql = Sql & " and rhisfruta.codsocio = " & DBSet(Socio, "N")
                 Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Varie, "N")
-                Sql = Sql & " and rhisfruta.codcampo = " & DBSet(campo, "N") & ")"
+                Sql = Sql & " and rhisfruta.codcampo = " & DBSet(Campo, "N") & ")"
         Case 1
                 Sql = "select sum(if(isnull(importe),0,importe)) from rhisfruta_gastos "
                 Sql = Sql & " where numalbar in (select rhisfruta.numalbar from " & cTabla
@@ -4139,7 +4139,7 @@ Dim RS1 As ADODB.Recordset
                 Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Varie, "N")
                 
                 If deAlmazara = 0 Then
-                    Sql = Sql & " and rhisfruta.codcampo = " & DBSet(campo, "N") & ")"
+                    Sql = Sql & " and rhisfruta.codcampo = " & DBSet(Campo, "N") & ")"
                 Else
                     Sql = Sql & ")"
                 End If
@@ -5072,7 +5072,7 @@ Dim PgbVisible As Boolean
             vFactuADV.Socio = RsAlb!Codsocio
             vFactuADV.NombreSocio = RsAlb!nomsocio
             vFactuADV.DomicilioSocio = DBLet(RsAlb!dirsocio, "T")
-            vFactuADV.CPostal = DBLet(RsAlb!codpostal, "T")
+            vFactuADV.CPostal = DBLet(RsAlb!codPostal, "T")
             vFactuADV.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuADV.Provincia = DBLet(RsAlb!prosocio, "T")
             vFactuADV.nif = DBLet(RsAlb!nifSocio, "T")
@@ -5978,7 +5978,7 @@ End Function
 
 
 
-Private Function ObtenerGastosAlbaranesNew(Socio As String, Varie As String, campo As String, cTabla As String, cWhere As String) As Currency
+Private Function ObtenerGastosAlbaranesNew(Socio As String, Varie As String, Campo As String, cTabla As String, cWhere As String) As Currency
 Dim Sql As String
 Dim RS1 As ADODB.Recordset
 
@@ -5990,7 +5990,7 @@ Dim RS1 As ADODB.Recordset
     Sql = Sql & " from tmpliquidacion1  "
     Sql = Sql & " where tmpliquidacion1.codsocio = " & DBSet(Socio, "N")
     Sql = Sql & " and  tmpliquidacion1.codvarie = " & DBSet(Varie, "N")
-    Sql = Sql & " and tmpliquidacion1.CodCampo = " & DBSet(campo, "N")
+    Sql = Sql & " and tmpliquidacion1.CodCampo = " & DBSet(Campo, "N")
     Sql = Sql & " and tmpliquidacion1.codusu = " & vUsu.Codigo
     
     
@@ -6967,7 +6967,7 @@ Dim PgbVisible As Boolean
             vFactuBOD.Socio = RsAlb!Codsocio
             vFactuBOD.NombreSocio = RsAlb!nomsocio
             vFactuBOD.DomicilioSocio = DBLet(RsAlb!dirsocio, "T")
-            vFactuBOD.CPostal = DBLet(RsAlb!codpostal, "T")
+            vFactuBOD.CPostal = DBLet(RsAlb!codPostal, "T")
             vFactuBOD.Poblacion = DBLet(RsAlb!pobsocio, "T")
             vFactuBOD.Provincia = DBLet(RsAlb!prosocio, "T")
             vFactuBOD.nif = DBLet(RsAlb!nifSocio, "T")
@@ -7987,7 +7987,7 @@ Dim Neto As Currency
 'Dim TotalFac As Currency
 Dim Recolect As Byte
 Dim vPrecio As Currency
-Dim campo As String
+Dim Campo As String
 
     On Error GoTo eFacturacion
 
@@ -8033,7 +8033,7 @@ Dim campo As String
     HayReg = False
     
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
-    campo = "0" 'DevuelveValor("select min(codcampo) from rcampos")
+    Campo = "0" 'DevuelveValor("select min(codcampo) from rcampos")
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -8102,7 +8102,7 @@ Dim campo As String
             baseimpo = baseimpo + Importe
             
             ' insertar linea de variedad, campo
-            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, Campo, CStr(Kilos), CStr(Importe), "0")
             
             If B Then
                 AntVarie = ActVarie
@@ -8185,7 +8185,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!precioindustria, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!PrEstimado, "N") / 100 * Rs!precioindustria, 2)
         
-        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), Campo)
     
 '        vPrecio = DBLet(Rs!precioindustria, "N")
 '[Monica] hasta aqui
@@ -8204,7 +8204,7 @@ Dim campo As String
         baseimpo = baseimpo + Importe
         
         ' insertar linea de variedad
-        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(Campo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -8313,7 +8313,7 @@ Dim GastosCoop As Currency
 Dim GastosAlb As Currency
 Dim vPorcGasto As String
 
-Dim campo As String
+Dim Campo As String
 
     On Error GoTo eFacturacion
 
@@ -8413,7 +8413,7 @@ Dim campo As String
     End If
    
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
-    campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
+    Campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     
     While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
@@ -8422,14 +8422,14 @@ Dim campo As String
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
             If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
-                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
+                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, Campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
                 baseimpo = baseimpo - GastosAlb
             End If
                         
             ' insertar linea de variedad, campo
             If B Then
-                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, Campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
             If B Then
@@ -8464,7 +8464,7 @@ Dim campo As String
                     Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                     Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & ","
                     Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                     
                     conn.Execute Sql3
                     
@@ -8573,7 +8573,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!precioindustria, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!PrEstimado, "N") / 100 * Rs!precioindustria, 2)
         
-        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), Campo)
         
         Importe = Importe + vImporte
         baseimpo = baseimpo + vImporte
@@ -8594,7 +8594,7 @@ Dim campo As String
         
                     
         ' insertar linea de variedad
-        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(Campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
         If B Then
@@ -8628,7 +8628,7 @@ Dim campo As String
                 Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                 Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & "," ' antes era 'FAA'
                 Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                 
                 conn.Execute Sql3
                 
@@ -8711,7 +8711,7 @@ eFacturacion:
 End Function
 
 
-Private Function InsertarAlbaranesFactura(cCodTipom As String, cNumfactu As String, cFecfactu As String, Socio As String, Varie As String, campo As String, cTabla As String, cWhere As String, Tipo As Byte, Optional CadenaAlbaranes As String) As Boolean
+Private Function InsertarAlbaranesFactura(cCodTipom As String, cNumfactu As String, cFecfactu As String, Socio As String, Varie As String, Campo As String, cTabla As String, cWhere As String, Tipo As Byte, Optional CadenaAlbaranes As String) As Boolean
 ' Tipo = 0 --> para facturas de liquidacion de Alzira
 ' Tipo = 1 --> para facturas de liquidacion de industria de Alzira
 
@@ -8733,7 +8733,7 @@ Dim Sql As String
             Sql = Sql & " where numalbar in (select rhisfruta.numalbar from " & cTabla & " where " & cWhere
             Sql = Sql & " and rhisfruta.codsocio = " & DBSet(Socio, "N")
             Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Varie, "N")
-            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(campo, "N") & ")"
+            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(Campo, "N") & ")"
             
             conn.Execute Sql
     
@@ -8747,7 +8747,7 @@ Dim Sql As String
             Sql = Sql & " where tmpliquidacion1.codusu = " & vUsu.Codigo
             Sql = Sql & " and tmpliquidacion1.codsocio = " & DBSet(Socio, "N")
             Sql = Sql & " and tmpliquidacion1.codvarie = " & DBSet(Varie, "N")
-            Sql = Sql & " and tmpliquidacion1.codcampo = " & DBSet(campo, "N")
+            Sql = Sql & " and tmpliquidacion1.codcampo = " & DBSet(Campo, "N")
             Sql = Sql & " and tmpliquidacion1.codsocio = rhisfruta.codsocio "
             Sql = Sql & " and tmpliquidacion1.codvarie = rhisfruta.codvarie "
             Sql = Sql & " and tmpliquidacion1.codcampo = rhisfruta.codcampo "
@@ -8770,7 +8770,7 @@ Dim Sql As String
             Sql = Sql & " where numalbar in (select rhisfruta.numalbar from " & cTabla & " where " & cWhere
             Sql = Sql & " and rhisfruta.codsocio = " & DBSet(Socio, "N")
             Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Varie, "N")
-            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(campo, "N") & ")"
+            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(Campo, "N") & ")"
             
             conn.Execute Sql
     
@@ -8825,7 +8825,7 @@ Dim Sql As String
             Sql = Sql & " where codusu = " & vUsu.Codigo
             Sql = Sql & " and rhisfruta.codsocio = " & DBSet(Socio, "N")
             Sql = Sql & " and rhisfruta.codvarie = " & DBSet(Varie, "N")
-            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(campo, "N")
+            Sql = Sql & " and rhisfruta.codcampo = " & DBSet(Campo, "N")
             Sql = Sql & " group by 1,2,3,4,5,6,7,9,10,12  "
             conn.Execute Sql
          
@@ -9403,7 +9403,7 @@ Dim GastosCoop2 As Currency
 Dim GastosAlb As Currency
 Dim vPorcGasto As String
 
-Dim campo As String
+Dim Campo As String
 
 Dim LitrosConsumidos As Currency
 Dim LitrosProducidos As Currency
@@ -9546,7 +9546,7 @@ Dim cantidad As Currency
     End If
    
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
-    campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
+    Campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     jj = 0
     
     While Not Rs.EOF And B
@@ -9771,7 +9771,7 @@ Dim cantidad As Currency
             
             If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
-                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
+                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, Campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
                 baseimpo = baseimpo - GastosAlb
             End If
@@ -9780,13 +9780,13 @@ Dim cantidad As Currency
                         
             SqlGastos = "select sum(grado) from tmpfact_albaran where codtipom = " & DBSet(tipoMov, "T") & " and numfactu = " & DBSet(numfactu, "N")
             SqlGastos = SqlGastos & " and fecfactu = " & DBSet(FecFac, "F") & " and codvarie = " & DBSet(AntVarie, "N")
-            SqlGastos = SqlGastos & " and codcampo = " & DBSet(campo, "N")
+            SqlGastos = SqlGastos & " and codcampo = " & DBSet(Campo, "N")
             
             GastosAlb = GastosAlb + DevuelveValor(SqlGastos)
             
             ' insertar linea de variedad, campo
             If B Then
-                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, Campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
             If B Then
@@ -9821,7 +9821,7 @@ Dim cantidad As Currency
                     Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                     Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & ","
                     Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                     
                     conn.Execute Sql3
                     
@@ -10171,7 +10171,7 @@ Dim cantidad As Currency
         
         If B Then ' descontamos los gastos de los albaranes
             'Para el resto sigue como estaba
-            GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
+            GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, Campo, cTabla, cWhere, 1, 1)
             Importe = Importe - GastosAlb
             baseimpo = baseimpo - GastosAlb
         End If
@@ -10182,13 +10182,13 @@ Dim cantidad As Currency
                     
         SqlGastos = "select sum(grado) from tmpfact_albaran where codtipom = " & DBSet(tipoMov, "T") & " and numfactu = " & DBSet(numfactu, "N")
         SqlGastos = SqlGastos & " and fecfactu = " & DBSet(FecFac, "F") & " and codvarie = " & DBSet(ActVarie, "N")
-        SqlGastos = SqlGastos & " and codcampo = " & DBSet(campo, "N")
+        SqlGastos = SqlGastos & " and codcampo = " & DBSet(Campo, "N")
         
         GastosAlb = GastosAlb + DevuelveValor(SqlGastos)
                     
                     
         ' insertar linea de variedad
-        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(Campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
         If B Then
@@ -10222,7 +10222,7 @@ Dim cantidad As Currency
                 Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                 Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & "," ' antes era 'FAA'
                 Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                 
                 conn.Execute Sql3
                 
@@ -10339,7 +10339,7 @@ End Function
 '   proceso en donde se crea unicamente una factura de anticipo de vemta campo que posteriormente
 '   se descontará en la factura de liquidacion de venta campo
 '
-Public Function FacturaAnticipoVentaCampo(Socio As String, campo As String, Importe As String, FecFac As String, EsTerceros As Boolean) As Long
+Public Function FacturaAnticipoVentaCampo(Socio As String, Campo As String, Importe As String, FecFac As String, EsTerceros As Boolean) As Long
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -10393,7 +10393,7 @@ Dim Existe As Boolean
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
 
-    Sql = "SELECT rcampos.codvarie from rcampos where codcampo = " & DBSet(campo, "N")
+    Sql = "SELECT rcampos.codvarie from rcampos where codcampo = " & DBSet(Campo, "N")
     Variedad = DevuelveValor(Sql)
     
     Set vSeccion = New CSeccion
@@ -10465,7 +10465,7 @@ Dim Existe As Boolean
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             ' insertar linea de variedad, campo
-            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(Campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
             
             If B Then
                 ' insertamos los totales en la calidad venta campo de la variedad (rfactsoc_calidad)
@@ -10476,7 +10476,7 @@ Dim Existe As Boolean
                 RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
                 If Not RS1.EOF Then
-                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
+                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(Campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
                 End If
                 Set RS1 = Nothing
             End If
@@ -10524,7 +10524,7 @@ End Function
 
 
 
-Public Function FacturacionTransporteSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, FecFac As String, Pb1 As ProgressBar, Fdesde As String, Fhasta As String, Optional esTercero As Boolean) As Boolean
+Public Function FacturacionTransporteSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, FecFac As String, Pb1 As ProgressBar, Fdesde As String, Fhasta As String, Optional Estercero As Boolean) As Boolean
 Dim tipoMov As String
 
 Dim AntSocio As String
@@ -10583,7 +10583,7 @@ On Error GoTo EFacturacionTransporteSocio
     conn.BeginTrans
 
     '[Monica]10/10/2013: distinguimos si es tercero o no solo para Picassent
-    If esTercero Then
+    If Estercero Then
         tipoMov = "FTT"
     Else
         tipoMov = "FTS"
@@ -10775,7 +10775,7 @@ On Error GoTo EFacturacionTransporteSocio
             
             '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             '                    solo si es Picassent y estamos facturando a socios terceros
-            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
+            If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             
             '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
             If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
@@ -10937,7 +10937,7 @@ On Error GoTo EFacturacionTransporteSocio
         
         '[Monica]10/10/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         '                    solo si es Picassent y estamos facturando a socios terceros
-        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And esTercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
+        If B And ((vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Estercero) Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
         
         '[Monica]07/11/2013: marcamos la factura como contabilizada y como pdte de recibir el nro de factura
         If B And vSocio.EmiteFact And vParamAplic.Cooperativa = 4 Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
@@ -11379,7 +11379,7 @@ Dim GastosCoop As Currency
 Dim GastosAlb As Currency
 Dim vPorcGasto As String
 
-Dim campo As String
+Dim Campo As String
 
     On Error GoTo eFacturacion
 
@@ -11479,7 +11479,7 @@ Dim campo As String
     End If
    
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
-    campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
+    Campo = "0" ' DevuelveValor("select min(codcampo) from rcampos")
     
     While Not Rs.EOF And B
         ActVarie = DBLet(Rs!codvarie, "N")
@@ -11488,14 +11488,14 @@ Dim campo As String
         If (ActVarie <> AntVarie Or ActSocio <> AntSocio) Then
             If B Then ' descontamos los gastos de los albaranes
                 'Para el resto sigue como estaba
-                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, campo, cTabla, cWhere, 1, 1)
+                GastosAlb = ObtenerGastosAlbaranes(AntSocio, AntVarie, Campo, cTabla, cWhere, 1, 1)
                 Importe = Importe - GastosAlb
                 baseimpo = baseimpo - GastosAlb
             End If
                         
             ' insertar linea de variedad, campo
             If B Then
-                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+                B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, Campo, CStr(Kilos), CStr(Importe), CStr(GastosAlb))
             End If
             
             If B Then
@@ -11530,7 +11530,7 @@ Dim campo As String
                     Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                     Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & ","
                     Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                    Sql3 = Sql3 & DBSet(AntVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                     
                     conn.Execute Sql3
                     
@@ -11639,7 +11639,7 @@ Dim campo As String
         vPrecio = DBLet(Rs!Prliquidalmz, "N")
         vImporte = Round2(DBLet(Rs!KilosNet, "N") * DBLet(Rs!Prliquidalmz, "N"), 2)
         
-        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), campo)
+        B = InsertLineaAlbaran(tipoMov, CStr(numfactu), FecFac, Rs, CStr(vPrecio), CStr(vImporte), Campo)
         
         Importe = Importe + vImporte
         baseimpo = baseimpo + vImporte
@@ -11660,7 +11660,7 @@ Dim campo As String
         
                     
         ' insertar linea de variedad
-        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(Campo), CStr(Kilos), CStr(Importe), CStr(GastosAlb))
         
         ' tenemos que descontar los anticipos que tengamos para ello
         If B Then
@@ -11694,7 +11694,7 @@ Dim campo As String
                 Sql3 = Sql3 & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & ","
                 Sql3 = Sql3 & DBSet(vSocio.CodTipomAntAlmz, "T") & "," ' antes era 'FAA'
                 Sql3 = Sql3 & DBSet(RS1!numfactu, "N") & "," & DBSet(RS1!fecfactu, "F") & ","
-                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
+                Sql3 = Sql3 & DBSet(ActVarie, "N") & "," & DBSet(Campo, "N") & "," & DBSet(RS1!imporvar, "N") & ")"
                 
                 conn.Execute Sql3
                 
@@ -14512,7 +14512,7 @@ Dim Neto As Currency
 'Dim TotalFac As Currency
 Dim Recolect As Byte
 Dim vPrecio As Currency
-Dim campo As String
+Dim Campo As String
 
     On Error GoTo eFacturacion
 
@@ -14558,7 +14558,7 @@ Dim campo As String
     HayReg = False
     
    ' en almazara no se insertan campos: metemos el minimo codcampo sin condiciones
-    campo = "0" 'DevuelveValor("select min(codcampo) from rcampos")
+    Campo = "0" 'DevuelveValor("select min(codcampo) from rcampos")
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
@@ -14627,7 +14627,7 @@ Dim campo As String
             baseimpo = baseimpo + Importe
             
             ' insertar linea de variedad, campo
-            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, campo, CStr(Kilos), CStr(Importe), "0")
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, AntVarie, Campo, CStr(Kilos), CStr(Importe), "0")
             
             If B Then
                 AntVarie = ActVarie
@@ -14729,7 +14729,7 @@ Dim campo As String
         baseimpo = baseimpo + Importe
         
         ' insertar linea de variedad
-        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(campo), CStr(Kilos), CStr(Importe), "0")
+        If B Then B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(ActVarie), CStr(Campo), CStr(Kilos), CStr(Importe), "0")
         
         ImpoIva = Round2(baseimpo * PorcIva / 100, 2)
 
@@ -14854,7 +14854,7 @@ End Function
 
 '[Monica]07/11/2013: añadido el parametro de si es tercero solo para Picassent
 
-Public Function FacturaAnticipoSinEntrada(Socio As String, campo As String, Importe As String, FecFac As String, Optional esTercero As Boolean) As Long
+Public Function FacturaAnticipoSinEntrada(Socio As String, Campo As String, Importe As String, FecFac As String, Optional Estercero As Boolean, Optional Varie As String) As Long
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -14894,7 +14894,7 @@ Dim Existe As Boolean
     conn.BeginTrans
 
     '[Monica]07/11/2013: añadida la opcion de si es tercero
-    If esTercero Then
+    If Estercero Then
         tipoMov = "FAT"
     Else
         tipoMov = "FAA"
@@ -14903,8 +14903,13 @@ Dim Existe As Boolean
     Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
     conn.Execute Sql
 
-    Sql = "SELECT rcampos.codvarie from rcampos where codcampo = " & DBSet(campo, "N")
-    Variedad = DevuelveValor(Sql)
+    '[Monica]02/11/2017: en el caso de que me pongan la variedad puede ser relacionada, no hace falta buscarla
+    If Varie = "" Then
+        Sql = "SELECT rcampos.codvarie from rcampos where codcampo = " & DBSet(Campo, "N")
+        Variedad = DevuelveValor(Sql)
+    Else
+        Variedad = Varie
+    End If
     
     Set vSeccion = New CSeccion
     
@@ -14930,7 +14935,7 @@ Dim Existe As Boolean
             PorcIva = CCur(ImporteSinFormato(vPorcIva))
             
             '[Monica]07/11/2013: depende de si es tercero
-            If esTercero Then
+            If Estercero Then
                 tipoMov = "FAT"
             Else
                 tipoMov = vSocio.CodTipomAnt
@@ -14973,7 +14978,7 @@ Dim Existe As Boolean
             TotalFac = baseimpo + ImpoIva - ImpoReten
             
             ' insertar linea de variedad, campo
-            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
+            B = InsertLinea(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(Campo, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")), 0)
             
             If B Then
                 ' insertamos los totales en la calidad venta campo de la variedad (rfactsoc_calidad)
@@ -14984,7 +14989,7 @@ Dim Existe As Boolean
                 RS1.Open Sql2, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
                 
                 If Not RS1.EOF Then
-                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
+                    B = InsertLineaCalidad(tipoMov, CStr(numfactu), FecFac, CStr(DBLet(Variedad, "N")), CStr(DBLet(Campo, "N")), CStr(DBLet(RS1!codcalid, "N")), CStr(DBLet(0, "N")), CStr(DBLet(Importe, "N")))
                 End If
                 Set RS1 = Nothing
             End If
@@ -14994,7 +14999,7 @@ Dim Existe As Boolean
             
             '[Monica]07/11/2013: si es tercero he de marcarla como contabilizada
             '                    en ppio solo es para Picassent
-            If esTercero Then
+            If Estercero Then
                 If B Then B = MarcarFactura(tipoMov, CStr(numfactu), FecFac, True)
             End If
             

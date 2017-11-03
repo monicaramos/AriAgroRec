@@ -17,6 +17,378 @@ Begin VB.Form frmListAnticipos
    ScaleWidth      =   6750
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameGenFactAnticipoVC 
+      Height          =   6270
+      Left            =   45
+      TabIndex        =   197
+      Top             =   -30
+      Width           =   6675
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   70
+         Left            =   3105
+         Locked          =   -1  'True
+         TabIndex        =   346
+         Text            =   "Text5"
+         Top             =   2775
+         Width           =   3255
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   70
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   203
+         Top             =   2775
+         Width           =   1050
+      End
+      Begin VB.CheckBox Check1 
+         Caption         =   "Tercero"
+         Height          =   195
+         Index           =   17
+         Left            =   420
+         TabIndex        =   303
+         Top             =   5670
+         Width           =   1545
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   0
+         Left            =   3075
+         MaxLength       =   30
+         TabIndex        =   223
+         Top             =   3240
+         Width           =   885
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   5
+         Left            =   1950
+         MaxLength       =   30
+         TabIndex        =   219
+         Top             =   3990
+         Width           =   4380
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   2
+         Left            =   3075
+         MaxLength       =   30
+         TabIndex        =   218
+         Top             =   4365
+         Width           =   3255
+      End
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   1
+         Left            =   1950
+         MaxLength       =   6
+         TabIndex        =   217
+         Top             =   4365
+         Width           =   1035
+      End
+      Begin VB.TextBox Text2 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   3
+         Left            =   3075
+         MaxLength       =   30
+         TabIndex        =   216
+         Top             =   3630
+         Width           =   3255
+      End
+      Begin VB.TextBox Text2 
+         Alignment       =   1  'Right Justify
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   4
+         Left            =   1950
+         MaxLength       =   4
+         TabIndex        =   215
+         Top             =   3630
+         Width           =   1035
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   45
+         Left            =   1980
+         MaxLength       =   15
+         TabIndex        =   205
+         Top             =   4830
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   51
+         Left            =   1950
+         MaxLength       =   10
+         TabIndex        =   201
+         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+         Top             =   1890
+         Width           =   1050
+      End
+      Begin VB.CommandButton CmdCancelAntVC 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5100
+         TabIndex        =   207
+         Top             =   5625
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAcepAntVC 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4020
+         TabIndex        =   206
+         Top             =   5640
+         Width           =   975
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   50
+         Left            =   1950
+         MaxLength       =   8
+         TabIndex        =   204
+         Top             =   3240
+         Width           =   1050
+      End
+      Begin VB.TextBox txtcodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   49
+         Left            =   1935
+         MaxLength       =   6
+         TabIndex        =   202
+         Top             =   2340
+         Width           =   1050
+      End
+      Begin VB.TextBox txtNombre 
+         BackColor       =   &H80000018&
+         Enabled         =   0   'False
+         Height          =   285
+         Index           =   49
+         Left            =   3075
+         Locked          =   -1  'True
+         TabIndex        =   200
+         Text            =   "Text5"
+         Top             =   2340
+         Width           =   3255
+      End
+      Begin VB.Frame Frame3 
+         BorderStyle     =   0  'None
+         Height          =   735
+         Left            =   390
+         TabIndex        =   198
+         Top             =   5070
+         Width           =   1965
+         Begin VB.CheckBox Check1 
+            Caption         =   "Imprimir Factura"
+            Height          =   195
+            Index           =   8
+            Left            =   30
+            TabIndex        =   199
+            Top             =   210
+            Width           =   1545
+         End
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Variedad"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   50
+         Left            =   360
+         TabIndex        =   347
+         Top             =   2745
+         Width           =   630
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   6
+         Left            =   1605
+         MouseIcon       =   "frmListAnticipos.frx":000C
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar variedad"
+         Top             =   2775
+         Width           =   240
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Zona"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   26
+         Left            =   810
+         TabIndex        =   222
+         Top             =   4380
+         Width           =   735
+      End
+      Begin VB.Label Label28 
+         Caption         =   "Poblacion"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Left            =   810
+         TabIndex        =   221
+         Top             =   4020
+         Width           =   735
+      End
+      Begin VB.Label Label6 
+         Caption         =   "Partida"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   0
+         Left            =   810
+         TabIndex        =   220
+         Top             =   3660
+         Width           =   735
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Importe Factura"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   15
+         Left            =   360
+         TabIndex        =   214
+         Top             =   4815
+         Width           =   1110
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "venta campo,sin entrada en campo asociada"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   240
+         Index           =   14
+         Left            =   390
+         TabIndex        =   213
+         Top             =   1230
+         Width           =   4680
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Proceso por el que generamos una factura de anticipo "
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000080&
+         Height          =   240
+         Index           =   13
+         Left            =   390
+         TabIndex        =   212
+         Top             =   870
+         Width           =   5700
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Fecha Factura"
+         ForeColor       =   &H00972E0B&
+         Height          =   255
+         Index           =   49
+         Left            =   360
+         TabIndex        =   211
+         Top             =   1920
+         Width           =   1095
+      End
+      Begin VB.Image imgFec 
+         Height          =   240
+         Index           =   16
+         Left            =   1620
+         Picture         =   "frmListAnticipos.frx":015E
+         ToolTipText     =   "Buscar fecha"
+         Top             =   1890
+         Width           =   240
+      End
+      Begin VB.Label Label10 
+         Caption         =   "Generación Factura Anticipo Venta Campo"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   300
+         TabIndex        =   210
+         Top             =   330
+         Width           =   6120
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   9
+         Left            =   1620
+         MouseIcon       =   "frmListAnticipos.frx":01E9
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar campo"
+         Top             =   3240
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Campo"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   26
+         Left            =   330
+         TabIndex        =   209
+         Top             =   3210
+         Width           =   495
+      End
+      Begin VB.Image imgBuscar 
+         Height          =   240
+         Index           =   49
+         Left            =   1620
+         MouseIcon       =   "frmListAnticipos.frx":033B
+         MousePointer    =   4  'Icon
+         ToolTipText     =   "Buscar socio"
+         Top             =   2340
+         Width           =   240
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   24
+         Left            =   360
+         TabIndex        =   208
+         Top             =   2310
+         Width           =   405
+      End
+   End
    Begin MSComDlg.CommonDialog CommonDialog1 
       Left            =   0
       Top             =   -60
@@ -43,7 +415,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   28
          Left            =   5100
-         TabIndex        =   343
+         TabIndex        =   344
          Top             =   4590
          Visible         =   0   'False
          Width           =   1305
@@ -51,7 +423,7 @@ Begin VB.Form frmListAnticipos
       Begin VB.Frame FrameTipo 
          Height          =   705
          Left            =   3300
-         TabIndex        =   335
+         TabIndex        =   336
          Top             =   270
          Visible         =   0   'False
          Width           =   2715
@@ -60,7 +432,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   26
             Left            =   1410
-            TabIndex        =   339
+            TabIndex        =   340
             Top             =   420
             Value           =   1  'Checked
             Width           =   1245
@@ -70,7 +442,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   25
             Left            =   120
-            TabIndex        =   338
+            TabIndex        =   339
             Top             =   420
             Value           =   1  'Checked
             Width           =   1035
@@ -80,7 +452,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   24
             Left            =   1410
-            TabIndex        =   337
+            TabIndex        =   338
             Top             =   180
             Value           =   1  'Checked
             Width           =   1155
@@ -90,7 +462,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   23
             Left            =   120
-            TabIndex        =   336
+            TabIndex        =   337
             Top             =   180
             Value           =   1  'Checked
             Width           =   1035
@@ -114,7 +486,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   22
          Left            =   1710
-         TabIndex        =   333
+         TabIndex        =   334
          Top             =   4320
          Visible         =   0   'False
          Width           =   1035
@@ -125,7 +497,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   21
          Left            =   3090
-         TabIndex        =   305
+         TabIndex        =   306
          Top             =   4830
          Visible         =   0   'False
          Width           =   2835
@@ -136,7 +508,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   16
          Left            =   5100
-         TabIndex        =   301
+         TabIndex        =   302
          Top             =   4290
          Visible         =   0   'False
          Width           =   1035
@@ -146,7 +518,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   14
          Left            =   3090
-         TabIndex        =   299
+         TabIndex        =   300
          Top             =   4530
          Width           =   1995
       End
@@ -156,7 +528,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   13
          Left            =   4710
-         TabIndex        =   280
+         TabIndex        =   281
          Top             =   3990
          Value           =   1  'Checked
          Visible         =   0   'False
@@ -181,7 +553,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   12
          Left            =   690
-         TabIndex        =   278
+         TabIndex        =   279
          Top             =   4320
          Visible         =   0   'False
          Width           =   1035
@@ -200,7 +572,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   5
          Left            =   3090
-         TabIndex        =   277
+         TabIndex        =   278
          Top             =   3690
          Width           =   1515
       End
@@ -209,7 +581,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   11
          Left            =   5100
-         TabIndex        =   276
+         TabIndex        =   277
          Top             =   3690
          Width           =   1035
       End
@@ -335,7 +707,7 @@ Begin VB.Form frmListAnticipos
             Height          =   240
             Index           =   2
             Left            =   960
-            Picture         =   "frmListAnticipos.frx":000C
+            Picture         =   "frmListAnticipos.frx":048D
             ToolTipText     =   "Buscar fecha"
             Top             =   240
             Width           =   240
@@ -399,7 +771,7 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command4 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":0097
+         Picture         =   "frmListAnticipos.frx":0518
          Style           =   1  'Graphical
          TabIndex        =   18
          Top             =   1440
@@ -409,7 +781,7 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command3 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":03A1
+         Picture         =   "frmListAnticipos.frx":0822
          Style           =   1  'Graphical
          TabIndex        =   17
          Top             =   2215
@@ -514,7 +886,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   49
          Left            =   420
-         TabIndex        =   334
+         TabIndex        =   335
          Top             =   5160
          Visible         =   0   'False
          Width           =   1065
@@ -538,7 +910,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   43
          Left            =   420
-         TabIndex        =   279
+         TabIndex        =   280
          Top             =   4620
          Visible         =   0   'False
          Width           =   1050
@@ -586,7 +958,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   21
          Left            =   1350
-         MouseIcon       =   "frmListAnticipos.frx":06AB
+         MouseIcon       =   "frmListAnticipos.frx":0B2C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2430
@@ -596,7 +968,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   20
          Left            =   1350
-         MouseIcon       =   "frmListAnticipos.frx":07FD
+         MouseIcon       =   "frmListAnticipos.frx":0C7E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2040
@@ -635,7 +1007,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   0
          Left            =   1350
-         Picture         =   "frmListAnticipos.frx":094F
+         Picture         =   "frmListAnticipos.frx":0DD0
          ToolTipText     =   "Buscar fecha"
          Top             =   2880
          Width           =   240
@@ -644,7 +1016,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   1
          Left            =   1350
-         Picture         =   "frmListAnticipos.frx":09DA
+         Picture         =   "frmListAnticipos.frx":0E5B
          ToolTipText     =   "Buscar fecha"
          Top             =   3285
          Width           =   240
@@ -653,7 +1025,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   13
          Left            =   1350
-         MouseIcon       =   "frmListAnticipos.frx":0A65
+         MouseIcon       =   "frmListAnticipos.frx":0EE6
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1485
@@ -663,7 +1035,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   12
          Left            =   1350
-         MouseIcon       =   "frmListAnticipos.frx":0BB7
+         MouseIcon       =   "frmListAnticipos.frx":1038
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1095
@@ -756,7 +1128,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "Duplicado"
          Height          =   225
          Left            =   540
-         TabIndex        =   342
+         TabIndex        =   343
          Top             =   4650
          Width           =   1965
       End
@@ -764,7 +1136,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "Impresión con Arrobas"
          Height          =   225
          Left            =   540
-         TabIndex        =   304
+         TabIndex        =   305
          Top             =   4350
          Width           =   1965
       End
@@ -906,7 +1278,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   1
          Left            =   6060
-         Picture         =   "frmListAnticipos.frx":0D09
+         Picture         =   "frmListAnticipos.frx":118A
          ToolTipText     =   "Desmarcar todos"
          Top             =   1020
          Width           =   240
@@ -915,7 +1287,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   0
          Left            =   5820
-         Picture         =   "frmListAnticipos.frx":170B
+         Picture         =   "frmListAnticipos.frx":1B8C
          ToolTipText     =   "Marcar todos"
          Top             =   1020
          Width           =   240
@@ -924,7 +1296,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   1
          Left            =   1470
-         MouseIcon       =   "frmListAnticipos.frx":7F5D
+         MouseIcon       =   "frmListAnticipos.frx":83DE
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   3780
@@ -934,7 +1306,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   0
          Left            =   1470
-         MouseIcon       =   "frmListAnticipos.frx":80AF
+         MouseIcon       =   "frmListAnticipos.frx":8530
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   3405
@@ -982,7 +1354,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   4
          Left            =   1485
-         Picture         =   "frmListAnticipos.frx":8201
+         Picture         =   "frmListAnticipos.frx":8682
          ToolTipText     =   "Buscar fecha"
          Top             =   2775
          Width           =   240
@@ -991,7 +1363,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   3
          Left            =   1485
-         Picture         =   "frmListAnticipos.frx":828C
+         Picture         =   "frmListAnticipos.frx":870D
          ToolTipText     =   "Buscar fecha"
          Top             =   2415
          Width           =   240
@@ -1177,7 +1549,7 @@ Begin VB.Form frmListAnticipos
             Height          =   240
             Index           =   13
             Left            =   1440
-            Picture         =   "frmListAnticipos.frx":8317
+            Picture         =   "frmListAnticipos.frx":8798
             ToolTipText     =   "Buscar fecha"
             Top             =   135
             Width           =   240
@@ -1206,7 +1578,7 @@ Begin VB.Form frmListAnticipos
             Height          =   255
             Index           =   27
             Left            =   0
-            TabIndex        =   340
+            TabIndex        =   341
             Top             =   1410
             Width           =   1965
          End
@@ -1215,7 +1587,7 @@ Begin VB.Form frmListAnticipos
             Height          =   255
             Index           =   20
             Left            =   0
-            TabIndex        =   303
+            TabIndex        =   304
             Top             =   1080
             Width           =   1965
          End
@@ -1224,7 +1596,7 @@ Begin VB.Form frmListAnticipos
             Height          =   255
             Index           =   9
             Left            =   0
-            TabIndex        =   237
+            TabIndex        =   238
             Top             =   750
             Width           =   2415
          End
@@ -1418,7 +1790,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   2
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":83A2
+         MouseIcon       =   "frmListAnticipos.frx":8823
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2055
@@ -1428,7 +1800,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   3
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":84F4
+         MouseIcon       =   "frmListAnticipos.frx":8975
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2430
@@ -1476,7 +1848,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   29
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":8646
+         MouseIcon       =   "frmListAnticipos.frx":8AC7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3420
@@ -1486,7 +1858,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   28
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":8798
+         MouseIcon       =   "frmListAnticipos.frx":8C19
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3030
@@ -1580,7 +1952,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   10
          Left            =   1440
-         Picture         =   "frmListAnticipos.frx":88EA
+         Picture         =   "frmListAnticipos.frx":8D6B
          ToolTipText     =   "Buscar fecha"
          Top             =   4680
          Width           =   240
@@ -1589,7 +1961,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   9
          Left            =   1440
-         Picture         =   "frmListAnticipos.frx":8975
+         Picture         =   "frmListAnticipos.frx":8DF6
          ToolTipText     =   "Buscar fecha"
          Top             =   4320
          Width           =   240
@@ -1636,7 +2008,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   25
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":8A00
+         MouseIcon       =   "frmListAnticipos.frx":8E81
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1485
@@ -1646,7 +2018,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   24
          Left            =   1440
-         MouseIcon       =   "frmListAnticipos.frx":8B52
+         MouseIcon       =   "frmListAnticipos.frx":8FD3
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1110
@@ -1656,7 +2028,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   2
          Left            =   5790
-         Picture         =   "frmListAnticipos.frx":8CA4
+         Picture         =   "frmListAnticipos.frx":9125
          ToolTipText     =   "Marcar todos"
          Top             =   3990
          Width           =   240
@@ -1665,7 +2037,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   3
          Left            =   6030
-         Picture         =   "frmListAnticipos.frx":F4F6
+         Picture         =   "frmListAnticipos.frx":F977
          ToolTipText     =   "Desmarcar todos"
          Top             =   3990
          Width           =   240
@@ -1684,14 +2056,14 @@ Begin VB.Form frmListAnticipos
    Begin VB.Frame FrameAnticiposPdtes 
       Height          =   5430
       Left            =   0
-      TabIndex        =   306
+      TabIndex        =   307
       Top             =   0
       Width           =   6615
       Begin VB.Frame Frame7 
          BorderStyle     =   0  'None
          Height          =   465
          Left            =   3210
-         TabIndex        =   322
+         TabIndex        =   323
          Top             =   3930
          Width           =   2865
       End
@@ -1700,7 +2072,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "Frame1"
          Height          =   645
          Left            =   690
-         TabIndex        =   321
+         TabIndex        =   322
          Top             =   5460
          Width           =   3045
       End
@@ -1711,7 +2083,7 @@ Begin VB.Form frmListAnticipos
          Index           =   67
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   320
+         TabIndex        =   321
          Text            =   "Text5"
          Top             =   2670
          Width           =   3375
@@ -1723,7 +2095,7 @@ Begin VB.Form frmListAnticipos
          Index           =   66
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   319
+         TabIndex        =   320
          Text            =   "Text5"
          Top             =   2310
          Width           =   3375
@@ -1734,7 +2106,7 @@ Begin VB.Form frmListAnticipos
          Index           =   67
          Left            =   1650
          MaxLength       =   3
-         TabIndex        =   312
+         TabIndex        =   313
          Top             =   2640
          Width           =   735
       End
@@ -1744,16 +2116,16 @@ Begin VB.Form frmListAnticipos
          Index           =   66
          Left            =   1650
          MaxLength       =   3
-         TabIndex        =   311
+         TabIndex        =   312
          Top             =   2310
          Width           =   735
       End
       Begin VB.CommandButton Command10 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":FEF8
+         Picture         =   "frmListAnticipos.frx":10379
          Style           =   1  'Graphical
-         TabIndex        =   318
+         TabIndex        =   319
          Top             =   1440
          Visible         =   0   'False
          Width           =   380
@@ -1761,9 +2133,9 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command7 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":10202
+         Picture         =   "frmListAnticipos.frx":10683
          Style           =   1  'Graphical
-         TabIndex        =   317
+         TabIndex        =   318
          Top             =   2215
          Visible         =   0   'False
          Width           =   380
@@ -1775,7 +2147,7 @@ Begin VB.Form frmListAnticipos
          Index           =   65
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   315
+         TabIndex        =   316
          Text            =   "Text5"
          Top             =   1695
          Width           =   3375
@@ -1787,7 +2159,7 @@ Begin VB.Form frmListAnticipos
          Index           =   64
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   313
+         TabIndex        =   314
          Text            =   "Text5"
          Top             =   1365
          Width           =   3375
@@ -1798,7 +2170,7 @@ Begin VB.Form frmListAnticipos
          Index           =   65
          Left            =   1650
          MaxLength       =   6
-         TabIndex        =   310
+         TabIndex        =   311
          Top             =   1710
          Width           =   750
       End
@@ -1808,7 +2180,7 @@ Begin VB.Form frmListAnticipos
          Index           =   64
          Left            =   1650
          MaxLength       =   6
-         TabIndex        =   309
+         TabIndex        =   310
          Top             =   1350
          Width           =   750
       End
@@ -1816,7 +2188,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4080
-         TabIndex        =   308
+         TabIndex        =   309
          Top             =   4590
          Width           =   975
       End
@@ -1824,7 +2196,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Cancelar"
          Height          =   375
          Left            =   5160
-         TabIndex        =   307
+         TabIndex        =   308
          Top             =   4575
          Width           =   975
       End
@@ -1834,7 +2206,7 @@ Begin VB.Form frmListAnticipos
          Index           =   63
          Left            =   1650
          MaxLength       =   10
-         TabIndex        =   316
+         TabIndex        =   317
          Top             =   3690
          Width           =   1095
       End
@@ -1844,7 +2216,7 @@ Begin VB.Form frmListAnticipos
          Index           =   62
          Left            =   1650
          MaxLength       =   10
-         TabIndex        =   314
+         TabIndex        =   315
          Top             =   3330
          Width           =   1095
       End
@@ -1852,7 +2224,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   66
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":1050C
+         MouseIcon       =   "frmListAnticipos.frx":1098D
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2310
@@ -1862,7 +2234,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   67
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":1065E
+         MouseIcon       =   "frmListAnticipos.frx":10ADF
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2670
@@ -1873,7 +2245,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   59
          Left            =   705
-         TabIndex        =   332
+         TabIndex        =   333
          Top             =   2745
          Width           =   420
       End
@@ -1882,7 +2254,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   58
          Left            =   705
-         TabIndex        =   331
+         TabIndex        =   332
          Top             =   2355
          Width           =   465
       End
@@ -1902,7 +2274,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   57
          Left            =   330
-         TabIndex        =   330
+         TabIndex        =   331
          Top             =   2100
          Width           =   390
       End
@@ -1910,7 +2282,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   19
          Left            =   1290
-         Picture         =   "frmListAnticipos.frx":107B0
+         Picture         =   "frmListAnticipos.frx":10C31
          ToolTipText     =   "Buscar fecha"
          Top             =   3690
          Width           =   240
@@ -1919,7 +2291,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   18
          Left            =   1290
-         Picture         =   "frmListAnticipos.frx":1083B
+         Picture         =   "frmListAnticipos.frx":10CBC
          ToolTipText     =   "Buscar fecha"
          Top             =   3315
          Width           =   240
@@ -1928,7 +2300,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   65
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":108C6
+         MouseIcon       =   "frmListAnticipos.frx":10D47
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1710
@@ -1938,7 +2310,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   64
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":10A18
+         MouseIcon       =   "frmListAnticipos.frx":10E99
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1350
@@ -1960,7 +2332,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   56
          Left            =   330
-         TabIndex        =   329
+         TabIndex        =   330
          Top             =   1140
          Width           =   375
       End
@@ -1978,7 +2350,7 @@ Begin VB.Form frmListAnticipos
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   420
-         TabIndex        =   328
+         TabIndex        =   329
          Top             =   345
          Width           =   5925
       End
@@ -1987,7 +2359,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   55
          Left            =   660
-         TabIndex        =   327
+         TabIndex        =   328
          Top             =   1740
          Width           =   420
       End
@@ -1996,7 +2368,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   54
          Left            =   660
-         TabIndex        =   326
+         TabIndex        =   327
          Top             =   1380
          Width           =   465
       End
@@ -2005,7 +2377,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   53
          Left            =   675
-         TabIndex        =   325
+         TabIndex        =   326
          Top             =   3705
          Width           =   420
       End
@@ -2014,7 +2386,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   52
          Left            =   675
-         TabIndex        =   324
+         TabIndex        =   325
          Top             =   3360
          Width           =   465
       End
@@ -2034,7 +2406,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   51
          Left            =   345
-         TabIndex        =   323
+         TabIndex        =   324
          Top             =   3120
          Width           =   435
       End
@@ -2056,9 +2428,9 @@ Begin VB.Form frmListAnticipos
             Appearance      =   0  'Flat
             Height          =   315
             Index           =   1
-            ItemData        =   "frmListAnticipos.frx":10B6A
+            ItemData        =   "frmListAnticipos.frx":10FEB
             Left            =   1380
-            List            =   "frmListAnticipos.frx":10B6C
+            List            =   "frmListAnticipos.frx":10FED
             Style           =   2  'Dropdown List
             TabIndex        =   56
             Tag             =   "Recolección|N|N|0|3|rhisfruta|recolect|||"
@@ -2258,7 +2630,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   6
          Left            =   1470
-         Picture         =   "frmListAnticipos.frx":10B6E
+         Picture         =   "frmListAnticipos.frx":10FEF
          ToolTipText     =   "Buscar fecha"
          Top             =   3360
          Width           =   240
@@ -2267,7 +2639,7 @@ Begin VB.Form frmListAnticipos
    Begin VB.Frame FrameRecalculoImporte 
       Height          =   3750
       Left            =   0
-      TabIndex        =   224
+      TabIndex        =   225
       Top             =   -30
       Width           =   6675
       Begin VB.TextBox txtNombre 
@@ -2277,7 +2649,7 @@ Begin VB.Form frmListAnticipos
          Index           =   48
          Left            =   2295
          MaxLength       =   30
-         TabIndex        =   234
+         TabIndex        =   235
          Top             =   1860
          Width           =   3855
       End
@@ -2287,7 +2659,7 @@ Begin VB.Form frmListAnticipos
          Index           =   48
          Left            =   1170
          MaxLength       =   7
-         TabIndex        =   232
+         TabIndex        =   233
          Top             =   1860
          Width           =   1050
       End
@@ -2297,7 +2669,7 @@ Begin VB.Form frmListAnticipos
          Index           =   46
          Left            =   1170
          MaxLength       =   12
-         TabIndex        =   233
+         TabIndex        =   234
          Top             =   2640
          Width           =   1050
       End
@@ -2307,7 +2679,7 @@ Begin VB.Form frmListAnticipos
          Index           =   52
          Left            =   1170
          MaxLength       =   6
-         TabIndex        =   231
+         TabIndex        =   232
          Top             =   1170
          Width           =   1050
       End
@@ -2318,7 +2690,7 @@ Begin VB.Form frmListAnticipos
          Index           =   52
          Left            =   2280
          Locked          =   -1  'True
-         TabIndex        =   230
+         TabIndex        =   231
          Text            =   "Text5"
          Top             =   1170
          Width           =   3855
@@ -2327,7 +2699,7 @@ Begin VB.Form frmListAnticipos
          BorderStyle     =   0  'None
          Height          =   735
          Left            =   390
-         TabIndex        =   225
+         TabIndex        =   226
          Top             =   5070
          Width           =   1965
       End
@@ -2335,7 +2707,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4020
-         TabIndex        =   235
+         TabIndex        =   236
          Top             =   3030
          Width           =   975
       End
@@ -2343,7 +2715,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Cancelar"
          Height          =   375
          Left            =   5100
-         TabIndex        =   236
+         TabIndex        =   237
          Top             =   3015
          Width           =   975
       End
@@ -2354,7 +2726,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   31
          Left            =   300
-         TabIndex        =   229
+         TabIndex        =   230
          Top             =   960
          Width           =   405
       End
@@ -2362,7 +2734,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   52
          Left            =   870
-         MouseIcon       =   "frmListAnticipos.frx":10BF9
+         MouseIcon       =   "frmListAnticipos.frx":1107A
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1170
@@ -2375,7 +2747,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   30
          Left            =   330
-         TabIndex        =   228
+         TabIndex        =   229
          Top             =   1650
          Width           =   630
       End
@@ -2383,7 +2755,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   48
          Left            =   870
-         MouseIcon       =   "frmListAnticipos.frx":10D4B
+         MouseIcon       =   "frmListAnticipos.frx":111CC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
          Top             =   1860
@@ -2403,7 +2775,7 @@ Begin VB.Form frmListAnticipos
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   300
-         TabIndex        =   227
+         TabIndex        =   228
          Top             =   330
          Width           =   6120
       End
@@ -2414,7 +2786,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   16
          Left            =   330
-         TabIndex        =   226
+         TabIndex        =   227
          Top             =   2400
          Width           =   525
       End
@@ -2422,14 +2794,14 @@ Begin VB.Form frmListAnticipos
    Begin VB.Frame FrameAportaciones 
       Height          =   6930
       Left            =   0
-      TabIndex        =   238
+      TabIndex        =   239
       Top             =   30
       Width           =   6615
       Begin VB.CheckBox Check2 
          Caption         =   "Resumen"
          Height          =   255
          Left            =   3420
-         TabIndex        =   275
+         TabIndex        =   276
          Top             =   5160
          Width           =   2385
       End
@@ -2439,7 +2811,7 @@ Begin VB.Form frmListAnticipos
          Index           =   58
          Left            =   1590
          MaxLength       =   10
-         TabIndex        =   254
+         TabIndex        =   255
          Top             =   4380
          Width           =   1095
       End
@@ -2449,7 +2821,7 @@ Begin VB.Form frmListAnticipos
          Index           =   57
          Left            =   1590
          MaxLength       =   10
-         TabIndex        =   253
+         TabIndex        =   254
          Top             =   4035
          Width           =   1095
       End
@@ -2457,7 +2829,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Cancelar"
          Height          =   375
          Left            =   5130
-         TabIndex        =   262
+         TabIndex        =   263
          Top             =   6225
          Width           =   975
       End
@@ -2465,7 +2837,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4050
-         TabIndex        =   260
+         TabIndex        =   261
          Top             =   6240
          Width           =   975
       End
@@ -2475,7 +2847,7 @@ Begin VB.Form frmListAnticipos
          Index           =   56
          Left            =   1590
          MaxLength       =   6
-         TabIndex        =   250
+         TabIndex        =   251
          Top             =   2415
          Width           =   750
       End
@@ -2485,7 +2857,7 @@ Begin VB.Form frmListAnticipos
          Index           =   55
          Left            =   1590
          MaxLength       =   6
-         TabIndex        =   249
+         TabIndex        =   250
          Top             =   2055
          Width           =   750
       End
@@ -2496,7 +2868,7 @@ Begin VB.Form frmListAnticipos
          Index           =   55
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   248
+         TabIndex        =   249
          Text            =   "Text5"
          Top             =   2055
          Width           =   3375
@@ -2508,7 +2880,7 @@ Begin VB.Form frmListAnticipos
          Index           =   56
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   247
+         TabIndex        =   248
          Text            =   "Text5"
          Top             =   2415
          Width           =   3375
@@ -2516,9 +2888,9 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command6 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":10E9D
+         Picture         =   "frmListAnticipos.frx":1131E
          Style           =   1  'Graphical
-         TabIndex        =   246
+         TabIndex        =   247
          Top             =   2215
          Visible         =   0   'False
          Width           =   380
@@ -2526,9 +2898,9 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command5 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":111A7
+         Picture         =   "frmListAnticipos.frx":11628
          Style           =   1  'Graphical
-         TabIndex        =   245
+         TabIndex        =   246
          Top             =   1440
          Visible         =   0   'False
          Width           =   380
@@ -2539,7 +2911,7 @@ Begin VB.Form frmListAnticipos
          Index           =   54
          Left            =   1590
          MaxLength       =   3
-         TabIndex        =   252
+         TabIndex        =   253
          Top             =   3390
          Width           =   735
       End
@@ -2549,7 +2921,7 @@ Begin VB.Form frmListAnticipos
          Index           =   53
          Left            =   1590
          MaxLength       =   3
-         TabIndex        =   251
+         TabIndex        =   252
          Top             =   3030
          Width           =   735
       End
@@ -2560,7 +2932,7 @@ Begin VB.Form frmListAnticipos
          Index           =   53
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   244
+         TabIndex        =   245
          Text            =   "Text5"
          Top             =   3030
          Width           =   3375
@@ -2572,7 +2944,7 @@ Begin VB.Form frmListAnticipos
          Index           =   54
          Left            =   2460
          Locked          =   -1  'True
-         TabIndex        =   243
+         TabIndex        =   244
          Text            =   "Text5"
          Top             =   3390
          Width           =   3375
@@ -2582,7 +2954,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "Frame1"
          Height          =   645
          Left            =   360
-         TabIndex        =   241
+         TabIndex        =   242
          Top             =   4830
          Width           =   3045
          Begin VB.TextBox txtcodigo 
@@ -2591,7 +2963,7 @@ Begin VB.Form frmListAnticipos
             Index           =   47
             Left            =   1230
             MaxLength       =   14
-            TabIndex        =   256
+            TabIndex        =   257
             Top             =   240
             Width           =   1095
          End
@@ -2602,7 +2974,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   17
             Left            =   0
-            TabIndex        =   242
+            TabIndex        =   243
             Top             =   0
             Width           =   1335
          End
@@ -2611,7 +2983,7 @@ Begin VB.Form frmListAnticipos
          BorderStyle     =   0  'None
          Height          =   465
          Left            =   3210
-         TabIndex        =   239
+         TabIndex        =   240
          Top             =   3930
          Width           =   2865
          Begin VB.ComboBox Combo1 
@@ -2619,7 +2991,7 @@ Begin VB.Form frmListAnticipos
             Index           =   5
             Left            =   1260
             Style           =   2  'Dropdown List
-            TabIndex        =   258
+            TabIndex        =   259
             Tag             =   "Recolectado|N|N|0|1|rhisfruta|recolect||N|"
             Top             =   120
             Width           =   1245
@@ -2630,7 +3002,7 @@ Begin VB.Form frmListAnticipos
             Height          =   255
             Index           =   2
             Left            =   150
-            TabIndex        =   240
+            TabIndex        =   241
             Top             =   150
             Width           =   1035
          End
@@ -2638,7 +3010,7 @@ Begin VB.Form frmListAnticipos
       Begin MSComctlLib.ProgressBar ProgressBar1 
          Height          =   255
          Left            =   300
-         TabIndex        =   255
+         TabIndex        =   256
          Top             =   5910
          Visible         =   0   'False
          Width           =   5760
@@ -2663,7 +3035,7 @@ Begin VB.Form frmListAnticipos
          Height          =   480
          Index           =   42
          Left            =   90
-         TabIndex        =   273
+         TabIndex        =   274
          Top             =   1260
          Width           =   6405
       End
@@ -2682,7 +3054,7 @@ Begin VB.Form frmListAnticipos
          ForeColor       =   &H00C00000&
          Height          =   285
          Left            =   90
-         TabIndex        =   272
+         TabIndex        =   273
          Top             =   960
          Width           =   6420
       End
@@ -2693,7 +3065,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   41
          Left            =   345
-         TabIndex        =   271
+         TabIndex        =   272
          Top             =   3840
          Width           =   450
       End
@@ -2702,7 +3074,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   40
          Left            =   675
-         TabIndex        =   270
+         TabIndex        =   271
          Top             =   4080
          Width           =   465
       End
@@ -2711,7 +3083,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   39
          Left            =   675
-         TabIndex        =   269
+         TabIndex        =   270
          Top             =   4425
          Width           =   420
       End
@@ -2720,7 +3092,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   38
          Left            =   660
-         TabIndex        =   268
+         TabIndex        =   269
          Top             =   2100
          Width           =   465
       End
@@ -2729,7 +3101,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   37
          Left            =   660
-         TabIndex        =   267
+         TabIndex        =   268
          Top             =   2460
          Width           =   420
       End
@@ -2747,7 +3119,7 @@ Begin VB.Form frmListAnticipos
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   420
-         TabIndex        =   266
+         TabIndex        =   267
          Top             =   345
          Width           =   5925
       End
@@ -2758,7 +3130,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   36
          Left            =   330
-         TabIndex        =   265
+         TabIndex        =   266
          Top             =   1860
          Width           =   405
       End
@@ -2766,7 +3138,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   56
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":114B1
+         MouseIcon       =   "frmListAnticipos.frx":11932
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2415
@@ -2776,7 +3148,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   55
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":11603
+         MouseIcon       =   "frmListAnticipos.frx":11A84
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2085
@@ -2786,7 +3158,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   17
          Left            =   1290
-         Picture         =   "frmListAnticipos.frx":11755
+         Picture         =   "frmListAnticipos.frx":11BD6
          ToolTipText     =   "Buscar fecha"
          Top             =   4035
          Width           =   240
@@ -2795,7 +3167,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   15
          Left            =   1290
-         Picture         =   "frmListAnticipos.frx":117E0
+         Picture         =   "frmListAnticipos.frx":11C61
          ToolTipText     =   "Buscar fecha"
          Top             =   4380
          Width           =   240
@@ -2807,7 +3179,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   35
          Left            =   330
-         TabIndex        =   264
+         TabIndex        =   265
          Top             =   2820
          Width           =   390
       End
@@ -2816,7 +3188,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   34
          Left            =   705
-         TabIndex        =   263
+         TabIndex        =   264
          Top             =   3075
          Width           =   465
       End
@@ -2825,7 +3197,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   33
          Left            =   705
-         TabIndex        =   261
+         TabIndex        =   262
          Top             =   3465
          Width           =   420
       End
@@ -2833,7 +3205,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   54
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":1186B
+         MouseIcon       =   "frmListAnticipos.frx":11CEC
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3390
@@ -2843,7 +3215,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   53
          Left            =   1290
-         MouseIcon       =   "frmListAnticipos.frx":119BD
+         MouseIcon       =   "frmListAnticipos.frx":11E3E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3060
@@ -2854,7 +3226,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   32
          Left            =   330
-         TabIndex        =   259
+         TabIndex        =   260
          Top             =   6240
          Visible         =   0   'False
          Width           =   3525
@@ -2864,7 +3236,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   29
          Left            =   330
-         TabIndex        =   257
+         TabIndex        =   258
          Top             =   6450
          Visible         =   0   'False
          Width           =   3615
@@ -2873,14 +3245,14 @@ Begin VB.Form frmListAnticipos
    Begin VB.Frame FrameLiqDirecta 
       Height          =   4200
       Left            =   0
-      TabIndex        =   281
+      TabIndex        =   282
       Top             =   0
       Width           =   6615
       Begin VB.CommandButton CmdCanLiqDirecta 
          Caption         =   "&Cancelar"
          Height          =   375
          Left            =   5100
-         TabIndex        =   290
+         TabIndex        =   291
          Top             =   3540
          Width           =   975
       End
@@ -2888,16 +3260,16 @@ Begin VB.Form frmListAnticipos
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4050
-         TabIndex        =   289
+         TabIndex        =   290
          Top             =   3540
          Width           =   975
       End
       Begin VB.CommandButton Command9 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":11B0F
+         Picture         =   "frmListAnticipos.frx":11F90
          Style           =   1  'Graphical
-         TabIndex        =   292
+         TabIndex        =   293
          Top             =   2215
          Visible         =   0   'False
          Width           =   380
@@ -2905,9 +3277,9 @@ Begin VB.Form frmListAnticipos
       Begin VB.CommandButton Command8 
          Height          =   440
          Left            =   7860
-         Picture         =   "frmListAnticipos.frx":11E19
+         Picture         =   "frmListAnticipos.frx":1229A
          Style           =   1  'Graphical
-         TabIndex        =   291
+         TabIndex        =   292
          Top             =   1440
          Visible         =   0   'False
          Width           =   380
@@ -2917,7 +3289,7 @@ Begin VB.Form frmListAnticipos
          Caption         =   "Frame1"
          Height          =   675
          Left            =   180
-         TabIndex        =   285
+         TabIndex        =   286
          Top             =   1650
          Width           =   3795
          Begin VB.TextBox txtcodigo 
@@ -2926,7 +3298,7 @@ Begin VB.Form frmListAnticipos
             Index           =   61
             Left            =   1830
             MaxLength       =   10
-            TabIndex        =   286
+            TabIndex        =   287
             Top             =   330
             Width           =   1095
          End
@@ -2937,7 +3309,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   44
             Left            =   210
-            TabIndex        =   287
+            TabIndex        =   288
             Top             =   330
             Width           =   1035
          End
@@ -2945,7 +3317,7 @@ Begin VB.Form frmListAnticipos
             Height          =   240
             Index           =   14
             Left            =   1530
-            Picture         =   "frmListAnticipos.frx":12123
+            Picture         =   "frmListAnticipos.frx":125A4
             ToolTipText     =   "Buscar fecha"
             Top             =   330
             Width           =   240
@@ -2955,7 +3327,7 @@ Begin VB.Form frmListAnticipos
          BorderStyle     =   0  'None
          Height          =   705
          Left            =   4080
-         TabIndex        =   282
+         TabIndex        =   283
          Top             =   1950
          Width           =   2115
          Begin VB.CheckBox Check1 
@@ -2963,7 +3335,7 @@ Begin VB.Form frmListAnticipos
             Height          =   195
             Index           =   19
             Left            =   270
-            TabIndex        =   284
+            TabIndex        =   285
             Top             =   390
             Width           =   1995
          End
@@ -2972,7 +3344,7 @@ Begin VB.Form frmListAnticipos
             Height          =   255
             Index           =   18
             Left            =   270
-            TabIndex        =   283
+            TabIndex        =   284
             Top             =   60
             Width           =   1965
          End
@@ -2983,7 +3355,7 @@ Begin VB.Form frmListAnticipos
          Index           =   60
          Left            =   2010
          MaxLength       =   11
-         TabIndex        =   288
+         TabIndex        =   289
          Tag             =   "Kilos Retirados|N|S|||rcampos|canaforo|###,###,###||"
          Top             =   2490
          Width           =   1095
@@ -2991,7 +3363,7 @@ Begin VB.Form frmListAnticipos
       Begin MSComctlLib.ProgressBar Pb4 
          Height          =   255
          Left            =   360
-         TabIndex        =   293
+         TabIndex        =   294
          Top             =   3120
          Visible         =   0   'False
          Width           =   5760
@@ -3015,7 +3387,7 @@ Begin VB.Form frmListAnticipos
          Height          =   705
          Index           =   48
          Left            =   390
-         TabIndex        =   298
+         TabIndex        =   299
          Top             =   930
          Width           =   5865
       End
@@ -3033,7 +3405,7 @@ Begin VB.Form frmListAnticipos
          ForeColor       =   &H00800000&
          Height          =   345
          Left            =   360
-         TabIndex        =   297
+         TabIndex        =   298
          Top             =   345
          Width           =   5925
       End
@@ -3042,7 +3414,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   47
          Left            =   390
-         TabIndex        =   296
+         TabIndex        =   297
          Top             =   3420
          Visible         =   0   'False
          Width           =   3525
@@ -3052,7 +3424,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   46
          Left            =   390
-         TabIndex        =   295
+         TabIndex        =   296
          Top             =   3630
          Visible         =   0   'False
          Width           =   3615
@@ -3064,7 +3436,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   45
          Left            =   390
-         TabIndex        =   294
+         TabIndex        =   295
          Top             =   2520
          Width           =   1020
       End
@@ -3080,7 +3452,7 @@ Begin VB.Form frmListAnticipos
          Height          =   255
          Index           =   29
          Left            =   4200
-         TabIndex        =   344
+         TabIndex        =   345
          Top             =   1560
          Visible         =   0   'False
          Width           =   1635
@@ -3090,7 +3462,7 @@ Begin VB.Form frmListAnticipos
          Height          =   255
          Index           =   15
          Left            =   4200
-         TabIndex        =   300
+         TabIndex        =   301
          Top             =   1290
          Visible         =   0   'False
          Width           =   1875
@@ -3100,7 +3472,7 @@ Begin VB.Form frmListAnticipos
          Height          =   255
          Index           =   10
          Left            =   4200
-         TabIndex        =   274
+         TabIndex        =   275
          Top             =   1020
          Visible         =   0   'False
          Width           =   1635
@@ -3243,9 +3615,9 @@ Begin VB.Form frmListAnticipos
          Appearance      =   0  'Flat
          Height          =   315
          Index           =   0
-         ItemData        =   "frmListAnticipos.frx":121AE
+         ItemData        =   "frmListAnticipos.frx":1262F
          Left            =   1920
-         List            =   "frmListAnticipos.frx":121B0
+         List            =   "frmListAnticipos.frx":12631
          Style           =   2  'Dropdown List
          TabIndex        =   76
          Tag             =   "Recolección|N|N|0|3|rhisfruta|recolect|||"
@@ -3352,7 +3724,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   17
          Left            =   1590
-         MouseIcon       =   "frmListAnticipos.frx":121B2
+         MouseIcon       =   "frmListAnticipos.frx":12633
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2400
@@ -3362,7 +3734,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   16
          Left            =   1590
-         MouseIcon       =   "frmListAnticipos.frx":12304
+         MouseIcon       =   "frmListAnticipos.frx":12785
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   2010
@@ -3372,7 +3744,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   8
          Left            =   1590
-         Picture         =   "frmListAnticipos.frx":12456
+         Picture         =   "frmListAnticipos.frx":128D7
          ToolTipText     =   "Buscar fecha"
          Top             =   4215
          Width           =   240
@@ -3381,7 +3753,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   7
          Left            =   1590
-         Picture         =   "frmListAnticipos.frx":124E1
+         Picture         =   "frmListAnticipos.frx":12962
          ToolTipText     =   "Buscar fecha"
          Top             =   3840
          Width           =   240
@@ -3419,7 +3791,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   19
          Left            =   1590
-         MouseIcon       =   "frmListAnticipos.frx":1256C
+         MouseIcon       =   "frmListAnticipos.frx":129ED
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   3300
@@ -3429,7 +3801,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   18
          Left            =   1590
-         MouseIcon       =   "frmListAnticipos.frx":126BE
+         MouseIcon       =   "frmListAnticipos.frx":12B3F
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
          Top             =   2910
@@ -3467,7 +3839,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   5
          Left            =   1590
-         Picture         =   "frmListAnticipos.frx":12810
+         Picture         =   "frmListAnticipos.frx":12C91
          ToolTipText     =   "Buscar fecha"
          Top             =   1560
          Width           =   240
@@ -3481,335 +3853,6 @@ Begin VB.Form frmListAnticipos
          TabIndex        =   73
          Top             =   1380
          Width           =   1815
-      End
-   End
-   Begin VB.Frame FrameGenFactAnticipoVC 
-      Height          =   6270
-      Left            =   0
-      TabIndex        =   197
-      Top             =   -30
-      Width           =   6675
-      Begin VB.CheckBox Check1 
-         Caption         =   "Tercero"
-         Height          =   195
-         Index           =   17
-         Left            =   420
-         TabIndex        =   302
-         Top             =   5670
-         Width           =   1545
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   0
-         Left            =   3075
-         MaxLength       =   30
-         TabIndex        =   222
-         Top             =   2790
-         Width           =   885
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   5
-         Left            =   1950
-         MaxLength       =   30
-         TabIndex        =   218
-         Top             =   3540
-         Width           =   4380
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   2
-         Left            =   3075
-         MaxLength       =   30
-         TabIndex        =   217
-         Top             =   3915
-         Width           =   3255
-      End
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   1
-         Left            =   1950
-         MaxLength       =   6
-         TabIndex        =   216
-         Top             =   3915
-         Width           =   1035
-      End
-      Begin VB.TextBox Text2 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   3
-         Left            =   3075
-         MaxLength       =   30
-         TabIndex        =   215
-         Top             =   3180
-         Width           =   3255
-      End
-      Begin VB.TextBox Text2 
-         Alignment       =   1  'Right Justify
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   4
-         Left            =   1950
-         MaxLength       =   4
-         TabIndex        =   214
-         Top             =   3180
-         Width           =   1035
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   45
-         Left            =   1980
-         MaxLength       =   15
-         TabIndex        =   204
-         Top             =   4650
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   51
-         Left            =   1950
-         MaxLength       =   10
-         TabIndex        =   201
-         Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   1890
-         Width           =   1050
-      End
-      Begin VB.CommandButton CmdCancelAntVC 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5100
-         TabIndex        =   206
-         Top             =   5625
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAcepAntVC 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4020
-         TabIndex        =   205
-         Top             =   5640
-         Width           =   975
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   50
-         Left            =   1950
-         MaxLength       =   8
-         TabIndex        =   203
-         Top             =   2790
-         Width           =   1050
-      End
-      Begin VB.TextBox txtcodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   49
-         Left            =   1950
-         MaxLength       =   6
-         TabIndex        =   202
-         Top             =   2340
-         Width           =   1050
-      End
-      Begin VB.TextBox txtNombre 
-         BackColor       =   &H80000018&
-         Enabled         =   0   'False
-         Height          =   285
-         Index           =   49
-         Left            =   3075
-         Locked          =   -1  'True
-         TabIndex        =   200
-         Text            =   "Text5"
-         Top             =   2340
-         Width           =   3255
-      End
-      Begin VB.Frame Frame3 
-         BorderStyle     =   0  'None
-         Height          =   735
-         Left            =   390
-         TabIndex        =   198
-         Top             =   5070
-         Width           =   1965
-         Begin VB.CheckBox Check1 
-            Caption         =   "Imprimir Factura"
-            Height          =   195
-            Index           =   8
-            Left            =   30
-            TabIndex        =   199
-            Top             =   210
-            Width           =   1545
-         End
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Zona"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   26
-         Left            =   810
-         TabIndex        =   221
-         Top             =   3930
-         Width           =   735
-      End
-      Begin VB.Label Label28 
-         Caption         =   "Poblacion"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Left            =   810
-         TabIndex        =   220
-         Top             =   3570
-         Width           =   735
-      End
-      Begin VB.Label Label6 
-         Caption         =   "Partida"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   0
-         Left            =   810
-         TabIndex        =   219
-         Top             =   3210
-         Width           =   735
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Importe Factura"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   15
-         Left            =   360
-         TabIndex        =   213
-         Top             =   4620
-         Width           =   1110
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "venta campo,sin entrada en campo asociada"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   240
-         Index           =   14
-         Left            =   390
-         TabIndex        =   212
-         Top             =   1230
-         Width           =   4680
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Proceso por el que generamos una factura de anticipo "
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00000080&
-         Height          =   240
-         Index           =   13
-         Left            =   390
-         TabIndex        =   211
-         Top             =   870
-         Width           =   5700
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Fecha Factura"
-         ForeColor       =   &H00972E0B&
-         Height          =   255
-         Index           =   49
-         Left            =   360
-         TabIndex        =   210
-         Top             =   1920
-         Width           =   1095
-      End
-      Begin VB.Image imgFec 
-         Height          =   240
-         Index           =   16
-         Left            =   1620
-         Picture         =   "frmListAnticipos.frx":1289B
-         ToolTipText     =   "Buscar fecha"
-         Top             =   1890
-         Width           =   240
-      End
-      Begin VB.Label Label10 
-         Caption         =   "Generación Factura Anticipo Venta Campo"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   300
-         TabIndex        =   209
-         Top             =   330
-         Width           =   6120
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   9
-         Left            =   1620
-         MouseIcon       =   "frmListAnticipos.frx":12926
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar campo"
-         Top             =   2790
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Campo"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   26
-         Left            =   330
-         TabIndex        =   208
-         Top             =   2760
-         Width           =   495
-      End
-      Begin VB.Image imgBuscar 
-         Height          =   240
-         Index           =   49
-         Left            =   1620
-         MouseIcon       =   "frmListAnticipos.frx":12A78
-         MousePointer    =   4  'Icon
-         ToolTipText     =   "Buscar socio"
-         Top             =   2340
-         Width           =   240
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   24
-         Left            =   330
-         TabIndex        =   207
-         Top             =   2310
-         Width           =   405
       End
    End
    Begin VB.Frame FrameGrabacionModelos 
@@ -4088,7 +4131,6 @@ Begin VB.Form frmListAnticipos
          BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
             NumPanels       =   1
             BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -4108,7 +4150,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   50
          Left            =   4830
-         TabIndex        =   341
+         TabIndex        =   342
          Top             =   3240
          Visible         =   0   'False
          Width           =   495
@@ -4119,7 +4161,7 @@ Begin VB.Form frmListAnticipos
          Height          =   195
          Index           =   48
          Left            =   480
-         TabIndex        =   223
+         TabIndex        =   224
          Top             =   4710
          Visible         =   0   'False
          Width           =   1605
@@ -4166,7 +4208,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   5
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":12BCA
+         MouseIcon       =   "frmListAnticipos.frx":12D1C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2580
@@ -4176,7 +4218,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   4
          Left            =   1425
-         MouseIcon       =   "frmListAnticipos.frx":12D1C
+         MouseIcon       =   "frmListAnticipos.frx":12E6E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar transportista"
          Top             =   2205
@@ -4205,7 +4247,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   35
          Left            =   1410
-         MouseIcon       =   "frmListAnticipos.frx":12E6E
+         MouseIcon       =   "frmListAnticipos.frx":12FC0
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1620
@@ -4215,7 +4257,7 @@ Begin VB.Form frmListAnticipos
          Height          =   240
          Index           =   34
          Left            =   1410
-         MouseIcon       =   "frmListAnticipos.frx":12FC0
+         MouseIcon       =   "frmListAnticipos.frx":13112
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar socio"
          Top             =   1245
@@ -4310,7 +4352,7 @@ Begin VB.Form frmListAnticipos
       Height          =   240
       Index           =   11
       Left            =   1020
-      Picture         =   "frmListAnticipos.frx":13112
+      Picture         =   "frmListAnticipos.frx":13264
       ToolTipText     =   "Buscar fecha"
       Top             =   255
       Width           =   240
@@ -4319,7 +4361,7 @@ Begin VB.Form frmListAnticipos
       Height          =   240
       Index           =   12
       Left            =   1020
-      Picture         =   "frmListAnticipos.frx":1319D
+      Picture         =   "frmListAnticipos.frx":132EF
       ToolTipText     =   "Buscar fecha"
       Top             =   645
       Width           =   240
@@ -4687,96 +4729,43 @@ Dim vSQL As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    If DatosOK Then
-        '======== FORMULA  ====================================
-        'SECCION
-        If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
-        If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+    '[Monica]02/11/2017: antes estaba if datosok then, ahora asi
+    If Not DatosOK Then Exit Sub
         
-        
-        nTabla = "rsocios INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio "
-        
-        
-        Select Case OpcionListado
-            Case 16 ' anticipo venta campo sin entrada
-                
-                '[Monica]29/05/2017: si picassent se mira si es no tercero
-                If vParamAplic.Cooperativa = 2 Then
-                    If Check1(17).Value = 0 Then
-                        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
-                        If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} <> 2") Then Exit Sub
-                    Else
-                        ' socio tercero
-                        If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
-                        If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} = 2") Then Exit Sub
-                    End If
-                
+    '======== FORMULA  ====================================
+    'SECCION
+    If Not AnyadirAFormula(cadSelect, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+    If Not AnyadirAFormula(cadFormula, "{rsocios_seccion.codsecci} = " & vParamAplic.Seccionhorto) Then Exit Sub
+    
+    
+    nTabla = "rsocios INNER JOIN rsocios_seccion ON rsocios.codsocio = rsocios_seccion.codsocio "
+    
+    
+    Select Case OpcionListado
+        Case 16 ' anticipo venta campo sin entrada
+            
+            '[Monica]29/05/2017: si picassent se mira si es no tercero
+            If vParamAplic.Cooperativa = 2 Then
+                If Check1(17).Value = 0 Then
+                    If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                    If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} <> 2") Then Exit Sub
+                Else
+                    ' socio tercero
+                    If Not AnyadirAFormula(cadSelect, "{rsocios.tipoirpf} = 2") Then Exit Sub
+                    If Not AnyadirAFormula(cadFormula, "{rsocios.tipoirpf} = 2") Then Exit Sub
                 End If
-        
-                If Not AnyadirAFormula(cadSelect, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
-                If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
-        
-        
-                If HayRegParaInforme(nTabla, cadSelect) Then
+            
+            End If
+    
+            If Not AnyadirAFormula(cadSelect, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & txtCodigo(49).Text) Then Exit Sub
+    
+    
+            If HayRegParaInforme(nTabla, cadSelect) Then
 
-                    If Not ComprobarTiposMovimiento(2, nTabla, cadSelect, , True) Then Exit Sub
-                            
-                    If FacturaAnticipoVentaCampo(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1) Then
-                        MsgBox "Proceso realizado correctamente.", vbExclamation
-                                       
+                If Not ComprobarTiposMovimiento(2, nTabla, cadSelect, , True) Then Exit Sub
                         
-                        'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE VENTA CAMPO
-                        If Me.Check1(8).Value Then
-                            cadFormula = ""
-                            cadSelect = ""
-                            
-                            '[Monica]29/05/2017: si es de terceros
-                            If vParamAplic.Cooperativa = 2 Then
-                                If Check1(17).Value = 1 Then
-                                    tipoMov = "CAT"
-                                Else
-                                    tipoMov = "FAC"
-                                End If
-                            End If
-                            
-                            cadAux = "({stipom.tipodocu} = 3)"
-                            cadTitulo = "Reimpresión Facturas Anticipos V.Campo"
-                            
-                            If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
-                            'Nº Factura
-                            cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAntVC & "])"
-                            If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                            cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
-                            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
-                            'Fecha de Factura
-                            FecFac = CDate(txtCodigo(51).Text)
-                            cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
-                            If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
-                            cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
-                            
-                            If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
-                                           
-                            indRPT = 23 'Impresion de facturas de socios
-                            If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
-                            'Nombre fichero .rpt a Imprimir
-                            cadNombreRPT = nomDocu
-                            ConSubInforme = True
-                            
-                            LlamarImprimir
-                            
-                            If frmVisReport.EstaImpreso Then
-                                ActualizarRegistrosFac "rfactsoc", cadSelect
-                            End If
-                        End If
-                    End If
-                End If
-                
-            Case 161 ' anticipo normal sin entrada
-        
-                If Not ComprobarTiposMovimiento(0, nTabla, cadSelect) Then Exit Sub
-                        
-                If FacturaAnticipoSinEntrada(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1) Then
+                If FacturaAnticipoVentaCampo(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
                                    
                     
@@ -4785,19 +4774,22 @@ Dim vSQL As String
                         cadFormula = ""
                         cadSelect = ""
                         
-                        '[Monica]07/11/2013: si esta marcado que es un socio tercero cogemos otro contador (Picassent)
-                        If Check1(17).Value = 1 Then
-                            tipoMov = "FAT"
-                        Else
-                            tipoMov = "FAA"
+                        '[Monica]29/05/2017: si es de terceros
+                        If vParamAplic.Cooperativa = 2 Then
+                            If Check1(17).Value = 1 Then
+                                tipoMov = "CAT"
+                            Else
+                                tipoMov = "FAC"
+                            End If
                         End If
-                        cadAux = "({stipom.tipodocu} = 1)"
-                        cadTitulo = "Reimpresión Facturas Anticipos"
+                        
+                        cadAux = "({stipom.tipodocu} = 3)"
+                        cadTitulo = "Reimpresión Facturas Anticipos V.Campo"
                         
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
                         'Nº Factura
-                        cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAnt & "])"
+                        cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAntVC & "])"
                         If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
                         cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
                         If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
@@ -4821,12 +4813,62 @@ Dim vSQL As String
                             ActualizarRegistrosFac "rfactsoc", cadSelect
                         End If
                     End If
-                                   
                 End If
-        End Select
+            End If
+            
+        Case 161 ' anticipo normal sin entrada
     
+            If Not ComprobarTiposMovimiento(0, nTabla, cadSelect) Then Exit Sub
+                    
+            If FacturaAnticipoSinEntrada(txtCodigo(49).Text, txtCodigo(50).Text, txtCodigo(45).Text, txtCodigo(51).Text, Check1(17).Value = 1, txtCodigo(70).Text) Then
+                MsgBox "Proceso realizado correctamente.", vbExclamation
+                               
+                
+                'IMPRESION DE LAS FACTURAS RESULTANTES DE LA FACTURACION DE VENTA CAMPO
+                If Me.Check1(8).Value Then
+                    cadFormula = ""
+                    cadSelect = ""
+                    
+                    '[Monica]07/11/2013: si esta marcado que es un socio tercero cogemos otro contador (Picassent)
+                    If Check1(17).Value = 1 Then
+                        tipoMov = "FAT"
+                    Else
+                        tipoMov = "FAA"
+                    End If
+                    cadAux = "({stipom.tipodocu} = 1)"
+                    cadTitulo = "Reimpresión Facturas Anticipos"
+                    
+                    If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
+                    'Nº Factura
+                    cadAux = "({rfactsoc.numfactu} IN [" & vParamAplic.UltFactAnt & "])"
+                    If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
+                    cadAux = Replace(Replace(cadAux, "]", ")"), "[", "(")
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
+                    'Fecha de Factura
+                    FecFac = CDate(txtCodigo(51).Text)
+                    cadAux = "{rfactsoc.fecfactu}= Date(" & Year(FecFac) & "," & Month(FecFac) & "," & Day(FecFac) & ")"
+                    If Not AnyadirAFormula(cadFormula, cadAux) Then Exit Sub
+                    cadAux = "{rfactsoc.fecfactu}= '" & Format(FecFac, FormatoFecha) & "'"
+                    
+                    If Not AnyadirAFormula(cadSelect, cadAux) Then Exit Sub
+                                   
+                    indRPT = 23 'Impresion de facturas de socios
+                    If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu) Then Exit Sub
+                    'Nombre fichero .rpt a Imprimir
+                    cadNombreRPT = nomDocu
+                    ConSubInforme = True
+                    
+                    LlamarImprimir
+                    
+                    If frmVisReport.EstaImpreso Then
+                        ActualizarRegistrosFac "rfactsoc", cadSelect
+                    End If
+                End If
+                               
+            End If
+    End Select
     
-    End If
     CmdCancelAntVC_Click
 
 End Sub
@@ -8595,7 +8637,7 @@ Dim List As Collection
     List.Add 18
     List.Add 19
     
-    For H = 0 To 5
+    For H = 0 To 6
         Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Next H
     For H = 12 To 13
@@ -9338,6 +9380,10 @@ Private Sub imgBuscar_Click(Index As Integer)
         
         Case 48 ' VARIEDAD
             AbrirFrmVariedad (Index)
+        
+        Case 6 ' VARIEDAD
+            AbrirFrmVariedad (70)
+            
     End Select
     PonerFoco txtCodigo(indCodigo)
 End Sub
@@ -9491,6 +9537,8 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
             Case 67: KEYBusqueda KeyAscii, 67 'clase hasta
             Case 62: KEYFecha KeyAscii, 18 'fecha
             Case 63: KEYFecha KeyAscii, 19 'fecha
+            '[Monica]02/11/2017
+            Case 70: KEYBusqueda KeyAscii, 6 'variedad
         End Select
     Else
         KEYpress KeyAscii
@@ -9525,8 +9573,6 @@ Dim B As Boolean
         Case 0, 1, 12, 13, 16, 17, 24, 25, 34, 35, 49, 52, 55, 56, 64, 65 'SOCIOS
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
             If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
-            
-            If Index = 49 Then PonerCamposSocio
             
         Case 41, 42, 43, 44 ' TRANSPORTISTAS
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rtransporte", "nomtrans", "codtrans", "T")
@@ -9623,9 +9669,12 @@ Dim B As Boolean
         Case 50 ' campo
             PonerDatosCampo txtCodigo(Index).Text
         
-        Case 48 ' variedad
+        Case 48, 70 ' variedad
             txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
             If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
+            
+            '[Monica]02/11/2017: antes estaba despues del socio ahora despues de la variedad
+            If Index = 70 Then PonerCamposSocio
     
         Case 47 ' Importe de aportacion a repartir
             PonerFormatoDecimal txtCodigo(Index), 3
@@ -10189,6 +10238,17 @@ Dim tipoMov As String
                 End If
             End If
             
+            '[Monica]02/11/2017: para el caso de que me metan la variedad, tengo que comprobar que es la del campo o relacionada
+            If B Then
+                If txtCodigo(70).Text <> "" Then
+                    If Not EsVariedadDelCampoORelacionada(txtCodigo(50), txtCodigo(70)) Then
+                        MsgBox "La variedad no es del campo, ni es variedad relacionada. Revise", vbExclamation
+                        B = False
+                        PonerFoco txtCodigo(70)
+                    End If
+                End If
+            End If
+            
         Case 17 ' recalculo de importe de venta campo
             If txtCodigo(52).Text = "" Then
                 MsgBox "Debe introducir obligatoriamente el campo del socio.", vbExclamation
@@ -10315,7 +10375,15 @@ Dim tipoMov As String
 
 End Function
 
+Private Function EsVariedadDelCampoORelacionada(Campo As String, Variedad As String) As Boolean
+Dim Sql As String
 
+    Sql = "select count(*) from rcampos where codcampo = " & DBSet(Campo, "N") & " and fecbajas is null "
+    Sql = Sql & " and (codvarie = " & DBSet(Variedad, "N") & " or codvarie in (select codvarie from variedades_rel where codvarie1 = " & DBSet(Variedad, "N") & "))"
+
+    EsVariedadDelCampoORelacionada = (TotalRegistros(Sql) <> 0)
+    
+End Function
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
@@ -15853,7 +15921,7 @@ Dim cTablaAnticip As String
         '[Monica]25/05/2015: tenemos que añadir los descuentos para el caso de montifrut
         If vParamAplic.Cooperativa = 12 And Check1(7).Value = 1 Then
             Dim Varie As Long
-            Dim campo As Long
+            Dim Campo As Long
             Dim TotalKilos As Long
             Dim ImporteTot As Currency
             Dim vImporte As Currency
@@ -15888,7 +15956,7 @@ Dim cTablaAnticip As String
                     vImporte = vImporte + Importe
                     
                     Varie = DBLet(Rs6!codvarie)
-                    campo = DBLet(Rs6!codcampo)
+                    Campo = DBLet(Rs6!codcampo)
                     
                     Sql = "update tmprfactsoc_variedad set imporvar = imporvar - " & DBSet(Importe, "N")
                     Sql = Sql & " where codusu = " & vUsu.Codigo
@@ -15896,7 +15964,7 @@ Dim cTablaAnticip As String
                     Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
                     Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(campo, "N")
+                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                     
                     conn.Execute Sql
                     
@@ -15912,7 +15980,7 @@ Dim cTablaAnticip As String
                     Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
                     Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(campo, "N")
+                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                 
                     conn.Execute Sql
                 End If
@@ -17048,7 +17116,7 @@ Dim Rs As ADODB.Recordset
     Else
         Set frmMens1 = New frmMensajes
         frmMens1.cadWHERE = " and " & cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
-        frmMens1.campo = txtCodigo(50).Text
+        frmMens1.Campo = txtCodigo(50).Text
         frmMens1.OpcionMensaje = 7
         frmMens1.Show vbModal
         Set frmMens1 = Nothing
@@ -17057,18 +17125,18 @@ Dim Rs As ADODB.Recordset
 End Sub
 
 
-Private Sub PonerDatosCampo(campo As String)
+Private Sub PonerDatosCampo(Campo As String)
 Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
 
 
-    If campo = "" Then Exit Sub
+    If Campo = "" Then Exit Sub
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(Campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla, rcampos.nrocampo from rcampos, rpartida, rzonas, rpueblos "
@@ -17088,7 +17156,7 @@ Dim Rs As ADODB.Recordset
     Text2(2).Text = ""
     Text2(5).Text = ""
     If Not Rs.EOF Then
-        txtCodigo(50).Text = campo
+        txtCodigo(50).Text = Campo
         PonerFormatoEntero txtCodigo(50)
         Text2(4).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If Text2(4).Text <> "" Then Text2(4).Text = Format(Text2(4).Text, "0000")
