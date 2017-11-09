@@ -244,7 +244,7 @@ Begin VB.Form frmADVReimpre
          TabIndex        =   3
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2565
-         Width           =   1410
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
@@ -264,7 +264,7 @@ Begin VB.Form frmADVReimpre
          TabIndex        =   2
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   2205
-         Width           =   1410
+         Width           =   1350
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
@@ -281,7 +281,7 @@ Begin VB.Form frmADVReimpre
          Left            =   4980
          TabIndex        =   9
          Top             =   5145
-         Width           =   975
+         Width           =   1035
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
@@ -298,7 +298,7 @@ Begin VB.Form frmADVReimpre
          Left            =   3810
          TabIndex        =   8
          Top             =   5145
-         Width           =   975
+         Width           =   1035
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify

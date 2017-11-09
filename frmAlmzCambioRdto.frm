@@ -236,7 +236,7 @@ Begin VB.Form frmAlmzCambioRdto
          Left            =   4590
          TabIndex        =   6
          Top             =   4455
-         Width           =   975
+         Width           =   1035
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
@@ -254,7 +254,7 @@ Begin VB.Form frmAlmzCambioRdto
          Left            =   5715
          TabIndex        =   7
          Top             =   4455
-         Width           =   975
+         Width           =   1035
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify

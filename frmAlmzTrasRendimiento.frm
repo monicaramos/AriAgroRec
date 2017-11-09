@@ -31,19 +31,37 @@ Begin VB.Form frmAlmzTrasRendimiento
       Width           =   6555
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4905
+         Left            =   5085
          TabIndex        =   1
          Top             =   3780
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3720
+         Left            =   3900
          TabIndex        =   0
          Top             =   3780
-         Width           =   975
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   255
@@ -67,10 +85,10 @@ Begin VB.Form frmAlmzTrasRendimiento
       Begin VB.Label Label2 
          Caption         =   "¿ Desea continuar ?"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -85,20 +103,20 @@ Begin VB.Form frmAlmzTrasRendimiento
       Begin VB.Label Label1 
          Caption         =   "Proceso que actualiza el Rendimiento en las entradas de Almazara."
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   765
-         Left            =   450
+         Left            =   270
          TabIndex        =   6
          Top             =   840
-         Width           =   5835
+         Width           =   6105
       End
       Begin VB.Label lblProgres 
          Height          =   375
@@ -163,7 +181,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
-Dim Cad As String
+Dim cad As String
 Dim cadTabla As String
 
 Dim vContad As Long
@@ -206,10 +224,10 @@ Private Sub cmdAceptar_Click()
 End Sub
 
 Private Sub ProcesoRendimiento()
-Dim Sql As String
-Dim i As Byte
+Dim SQL As String
+Dim I As Byte
 Dim cadWHERE As String
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
 Dim cadena1 As String
@@ -241,9 +259,9 @@ On Error GoTo eError
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                 
-                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                 
-                If TotalRegistros(Sql) <> 0 Then
+                If TotalRegistros(SQL) <> 0 Then
 '                If HayRegParaInforme(cadTABLA, cadSelect) Then
                     MsgBox "Hay errores en el Traspaso de Rendimiento. Debe corregirlos previamente.", vbExclamation
                     cadTitulo = "Errores de Traspaso Rendimiento"
@@ -253,7 +271,7 @@ On Error GoTo eError
                     Exit Sub
                 Else
                     conn.BeginTrans
-                    b = ProcesarFichero(Me.CommonDialog1.FileName)
+                    B = ProcesarFichero(Me.CommonDialog1.FileName)
                 End If
         End If
     Else
@@ -265,7 +283,7 @@ On Error GoTo eError
 eError:
     If Err.Number = 32755 Then Exit Sub ' le han dado a cancelar
 
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         MsgBox "No se ha podido realizar el proceso. LLame a Ariadna.", vbExclamation
     Else
@@ -287,10 +305,10 @@ End Sub
 
 
 Private Sub ProcesoRendimientoMoixent()
-Dim Sql As String
-Dim i As Byte
+Dim SQL As String
+Dim I As Byte
 Dim cadWHERE As String
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
 Dim cadena1 As String
@@ -321,9 +339,9 @@ On Error GoTo eError
                 cadTabla = "tmpinformes"
                 cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                 
-                Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                 
-                If TotalRegistros(Sql) <> 0 Then
+                If TotalRegistros(SQL) <> 0 Then
 '                If HayRegParaInforme(cadTABLA, cadSelect) Then
                     MsgBox "Hay errores en el Traspaso de Rendimiento. Debe corregirlos previamente.", vbExclamation
                     cadTitulo = "Errores de Traspaso Rendimiento"
@@ -333,7 +351,7 @@ On Error GoTo eError
                     Exit Sub
                 Else
                     conn.BeginTrans
-                    b = ProcesarFicheroMoixent(Me.CommonDialog1.FileName)
+                    B = ProcesarFicheroMoixent(Me.CommonDialog1.FileName)
                 End If
         '[Monica]13/01/2015: si hay error en la comprobacion que no haga nada
         Else
@@ -349,7 +367,7 @@ On Error GoTo eError
 eError:
     If Err.Number = 32755 Then Exit Sub ' le han dado a cancelar
 
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
         MsgBox "No se ha podido realizar el proceso. LLame a Ariadna.", vbExclamation
     Else
@@ -468,28 +486,28 @@ Dim NF As Integer
     RecuperaFichero = False
     NF = FreeFile
     Open App.Path For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
-    Line Input #NF, Cad
+    Line Input #NF, cad
     Close #NF
-    If Cad <> "" Then RecuperaFichero = True
+    If cad <> "" Then RecuperaFichero = True
     
 End Function
 
 
 Private Function ProcesarFichero(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 
     ProcesarFichero = False
@@ -497,8 +515,8 @@ Dim NomFic As String
     
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -508,25 +526,25 @@ Dim NomFic As String
     Me.Refresh
     Me.Pb1.Value = 0
         
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        b = ActualizarLinea(Cad)
+        B = ActualizarLinea(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" Then
-        b = ActualizarLinea(Cad)
+    If cad <> "" Then
+        B = ActualizarLinea(cad)
     End If
     
-    ProcesarFichero = b
+    ProcesarFichero = B
     
     Pb1.visible = False
     lblProgres(0).Caption = ""
@@ -536,19 +554,19 @@ End Function
                 
 Private Function ProcesarFichero2(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eProcesarFichero2
     
@@ -557,8 +575,8 @@ Dim b As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 0
+    Line Input #NF, cad
+    I = 0
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -568,29 +586,29 @@ Dim b As Boolean
     Me.Refresh
     Me.Pb1.Value = 0
 
-    b = True
+    B = True
 
-    While Not EOF(NF) And b
-        i = i + 1
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad)
+        B = ComprobarRegistro(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" Then
-        i = i + 1
+    If cad <> "" Then
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistro(Cad)
+        B = ComprobarRegistro(cad)
     
     End If
     
@@ -598,7 +616,7 @@ Dim b As Boolean
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
 
-    ProcesarFichero2 = b
+    ProcesarFichero2 = B
     Exit Function
 
 eProcesarFichero2:
@@ -606,8 +624,8 @@ eProcesarFichero2:
 End Function
                 
             
-Private Function ComprobarRegistro(Cad As String) As Boolean
-Dim Sql As String
+Private Function ComprobarRegistro(cad As String) As Boolean
+Dim SQL As String
 Dim Mens As String
 Dim cadena As String
 
@@ -615,59 +633,59 @@ Dim cadena As String
 
     ComprobarRegistro = True
 
-    CargarVariables Cad
+    CargarVariables cad
 
     'Comprobamos fechas
     If Not EsFechaOK(FechaDesde) Then
         Mens = "Fecha Desde incorrecta"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(FechaDesde, "F") & "," & DBSet(FechaHasta, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               DBSet(Variedad, "N") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     'Comprobamos fechas
     If Not EsFechaOK(FechaHasta) Then
         Mens = "Fecha Hasta incorrecta"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(FechaDesde, "F") & "," & DBSet(FechaHasta, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               DBSet(Variedad, "N") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     'Comprobamos que existe el socio
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Socio, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Socio, "N")
+    If SQL = "" Then
         Mens = "No existe el socio"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(FechaDesde, "F") & "," & DBSet(FechaHasta, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               DBSet(Variedad, "N") & "," & DBSet(Mens, "T") & ")"
               
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     
     'Comprobamos que existe la variedad
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "variedades", "codvarie", "codvarie", Variedad, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "codvarie", "codvarie", Variedad, "N")
+    If SQL = "" Then
         Mens = "No existe la variedad"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(FechaDesde, "F") & "," & DBSet(FechaHasta, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(Socio, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               DBSet(Variedad, "N") & "," & DBSet(Mens, "T") & ")"
               
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     
@@ -678,7 +696,7 @@ eComprobarRegistro:
 End Function
 
             
-Private Function ActualizarLinea(Cad As String) As Boolean
+Private Function ActualizarLinea(cad As String) As Boolean
 Dim NumLin As String
 Dim codpro As String
 Dim articulo As String
@@ -686,9 +704,9 @@ Dim Familia As String
 Dim Precio As String
 Dim ImpDes As String
 Dim CodIva As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Codclave As String
-Dim Sql As String
+Dim SQL As String
 
 Dim Import As Currency
 
@@ -706,20 +724,20 @@ Dim campo As String
 
     ActualizarLinea = True
     
-    CargarVariables Cad
+    CargarVariables cad
     
     ' actualizamos los registros de la tabla de rhisfruta
-    Sql = "update rhisfruta set prestimado = " & DBSet(Rendimiento, "N")
-    Sql = Sql & " where codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and fecalbar >= " & DBSet(FechaDesde, "F")
-    Sql = Sql & " and fecalbar <= " & DBSet(FechaHasta, "F")
-    Sql = Sql & " and codvarie in (select variedades.codvarie " ' la variedad sea del grupo de almazara
-    Sql = Sql & " from variedades, productos where variedades.codprodu = productos.codprodu "
-    Sql = Sql & " and productos.codgrupo = 5)"
+    SQL = "update rhisfruta set prestimado = " & DBSet(Rendimiento, "N")
+    SQL = SQL & " where codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and fecalbar >= " & DBSet(FechaDesde, "F")
+    SQL = SQL & " and fecalbar <= " & DBSet(FechaHasta, "F")
+    SQL = SQL & " and codvarie in (select variedades.codvarie " ' la variedad sea del grupo de almazara
+    SQL = SQL & " from variedades, productos where variedades.codprodu = productos.codprodu "
+    SQL = SQL & " and productos.codgrupo = 5)"
      
     
-    conn.Execute Sql
+    conn.Execute SQL
     Exit Function
     
 EActualizarLinea:
@@ -743,14 +761,14 @@ Private Sub LlamarImprimir()
 End Sub
 
 Private Sub InicializarTabla()
-Dim Sql As String
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+Dim SQL As String
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
     
-    conn.Execute Sql
+    conn.Execute SQL
 End Sub
 
 
-Private Sub CargarVariables(Cad As String)
+Private Sub CargarVariables(cad As String)
             
         Socio = ""
         Rendimiento = ""
@@ -758,16 +776,16 @@ Private Sub CargarVariables(Cad As String)
         FechaDesde = ""
         FechaHasta = ""
         
-        Socio = Mid(Cad, 1, 6)
-        Rendimiento = Mid(Cad, 7, 6)
-        Variedad = Mid(Cad, 13, 3)
-        FechaDesde = Mid(Cad, 16, 10)
-        FechaHasta = Mid(Cad, 26, 10)
+        Socio = Mid(cad, 1, 6)
+        Rendimiento = Mid(cad, 7, 6)
+        Variedad = Mid(cad, 13, 3)
+        FechaDesde = Mid(cad, 16, 10)
+        FechaHasta = Mid(cad, 26, 10)
 
 End Sub
 
 
-Private Sub CargarVariablesMoixent(Cad As String)
+Private Sub CargarVariablesMoixent(cad As String)
             
         Muestra = ""
         FechaRdto = ""
@@ -776,7 +794,7 @@ Private Sub CargarVariablesMoixent(Cad As String)
         Acidez = ""
         Humedad = ""
         
-        Muestra = Mid(Cad, 1, 8)
+        Muestra = Mid(cad, 1, 8)
         
         '[Monica]13/01/2014: el fichero ya no trae la fecha de muestra solo nro muestra y rdto
         FechaRdto = Format(Now, "dd/mm/yyyy") ' Mid(cad, 9, 19)
@@ -784,7 +802,7 @@ Private Sub CargarVariablesMoixent(Cad As String)
         Acidez = "0" ' Mid(cad, 46, 13)
         '[Monica]13/01/2014: lo modificamos
         Humedad = "0" ' Mid(cad, 39, 11)
-        Rendimiento = Mid(Cad, 15, 15) 'Mid(cad, 29, 10)
+        Rendimiento = Mid(cad, 15, 15) 'Mid(cad, 29, 10)
         
 
 End Sub
@@ -792,19 +810,19 @@ End Sub
 
 Private Function ProcesarFicheroMoixent2(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eProcesarFicheroMoixent2
     
@@ -813,8 +831,8 @@ Dim b As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 1
+    Line Input #NF, cad
+    I = 1
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -824,22 +842,22 @@ Dim b As Boolean
     Me.Refresh
     Me.Pb1.Value = 0
         
-    Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-    lblProgres(1).Caption = "Linea " & i
+    Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+    lblProgres(1).Caption = "Linea " & I
     Me.Refresh
 
-    b = True
+    B = True
 
-    While Not EOF(NF) And b
-        Line Input #NF, Cad
+    While Not EOF(NF) And B
+        Line Input #NF, cad
         
-        i = i + 1
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        b = ComprobarRegistroMoixent(Cad)
+        B = ComprobarRegistroMoixent(cad)
         
     Wend
     Close #NF
@@ -848,15 +866,15 @@ Dim b As Boolean
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
 
-    ProcesarFicheroMoixent2 = b
+    ProcesarFicheroMoixent2 = B
     Exit Function
 
 eProcesarFicheroMoixent2:
     ProcesarFicheroMoixent2 = False
 End Function
             
-Private Function ComprobarRegistroMoixent(Cad As String) As Boolean
-Dim Sql As String
+Private Function ComprobarRegistroMoixent(cad As String) As Boolean
+Dim SQL As String
 Dim Mens As String
 Dim cadena As String
 
@@ -864,60 +882,60 @@ Dim cadena As String
 
     ComprobarRegistroMoixent = True
 
-    CargarVariablesMoixent Cad
+    CargarVariablesMoixent cad
 
     'Comprobamos la fecha de rendimiento
     If Not EsFechaOK(Mid(FechaRdto, 1, 10)) Then
         Mens = "Fecha Hasta incorrecta"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(Mid(FechaRdto, 1, 10), "F") & "," & ValorNulo & ","
-        Sql = Sql & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               ValorNulo & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     '[Monica]13/01/2015: comprobamos que el numero de muestra es numerico
     ' Comprobamos que el nro de muestra sea numerico
     If Not IsNumeric(Muestra) Then
         Mens = "Muestra no numerico"
-        Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+        SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
               " values (" & _
               vUsu.Codigo & "," & DBSet(Mid(FechaRdto, 1, 10), "F") & "," & ValorNulo & ","
-        Sql = Sql & DBSet(0, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+        SQL = SQL & DBSet(0, "N") & "," & DBSet(Rendimiento, "N") & "," & _
               ValorNulo & "," & DBSet(Mens, "T") & ")"
               
-        conn.Execute Sql
+        conn.Execute SQL
     Else
     
         
         'Comprobamos que exista el nro de muestra
-        Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rhisfruta", "numalbar", "nromuestraalmz", Muestra, "N")
-        If Sql = "" Then
+        SQL = ""
+        SQL = DevuelveDesdeBDNew(cAgro, "rhisfruta", "numalbar", "nromuestraalmz", Muestra, "N")
+        If SQL = "" Then
             Mens = "No existe Nro.Muestra"
-            Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+            SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
                   " values (" & _
                   vUsu.Codigo & "," & DBSet(Mid(FechaRdto, 1, 10), "F") & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+            SQL = SQL & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
                   ValorNulo & "," & DBSet(Mens, "T") & ")"
                   
-            conn.Execute Sql
+            conn.Execute SQL
         End If
         
         'Comprobamos que no exista el nro de muestra albaran fecha en la tabla de rendimiento
-        Sql = ""
-        Sql = "select count(*) from rrendim where nromuestra = " & DBSet(Muestra, "N") & " and fecha = " & DBSet(FechaRdto, "FH") ' DevuelveDesdeBDNew(cAgro, "rrendim", "nromuestra", "nromuestra", Muestra, "N", , "fecha", Mid(FechaRdto, 1, 10), "F")
-        If TotalRegistros(Sql) > 0 Then
+        SQL = ""
+        SQL = "select count(*) from rrendim where nromuestra = " & DBSet(Muestra, "N") & " and fecha = " & DBSet(FechaRdto, "FH") ' DevuelveDesdeBDNew(cAgro, "rrendim", "nromuestra", "nromuestra", Muestra, "N", , "fecha", Mid(FechaRdto, 1, 10), "F")
+        If TotalRegistros(SQL) > 0 Then
             Mens = "Existe Muestra en Rendimientos"
-            Sql = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
+            SQL = "insert into tmpinformes (codusu, fecha1, fecha2, importe1, importe2, importe3, nombre1) " & _
                   " values (" & _
                   vUsu.Codigo & "," & DBSet(Mid(FechaRdto, 1, 10), "F") & "," & ValorNulo & ","
-            Sql = Sql & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
+            SQL = SQL & DBSet(Muestra, "N") & "," & DBSet(Rendimiento, "N") & "," & _
                   ValorNulo & "," & DBSet(Mens, "T") & ")"
                   
-            conn.Execute Sql
+            conn.Execute SQL
         End If
         
     End If
@@ -930,19 +948,19 @@ End Function
 
 Private Function ProcesarFicheroMoixent(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 
     ProcesarFicheroMoixent = False
@@ -950,8 +968,8 @@ Dim NomFic As String
     
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    i = 1
+    Line Input #NF, cad
+    I = 1
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -961,27 +979,27 @@ Dim NomFic As String
     Me.Refresh
     Me.Pb1.Value = 0
         
-    Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-    lblProgres(1).Caption = "Linea " & i
+    Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+    lblProgres(1).Caption = "Linea " & I
     Me.Refresh
         
-    b = True
-    While Not EOF(NF) And b
-        Line Input #NF, Cad
+    B = True
+    While Not EOF(NF) And B
+        Line Input #NF, cad
         
-        i = i + 1
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        b = ActualizarLineaMoixent(Cad)
+        B = ActualizarLineaMoixent(cad)
         
     Wend
     Close #NF
     
     
-    ProcesarFicheroMoixent = b
+    ProcesarFicheroMoixent = B
     
     Pb1.visible = False
     lblProgres(0).Caption = ""
@@ -991,7 +1009,7 @@ End Function
 
 
 
-Private Function ActualizarLineaMoixent(Cad As String) As Boolean
+Private Function ActualizarLineaMoixent(cad As String) As Boolean
 Dim NumLin As String
 Dim codpro As String
 Dim articulo As String
@@ -999,9 +1017,9 @@ Dim Familia As String
 Dim Precio As String
 Dim ImpDes As String
 Dim CodIva As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Codclave As String
-Dim Sql As String
+Dim SQL As String
 
 Dim Import As Currency
 
@@ -1019,23 +1037,23 @@ Dim campo As String
 
     ActualizarLineaMoixent = True
     
-    CargarVariablesMoixent Cad
+    CargarVariablesMoixent cad
     
     ' actualizamos los registros de la tabla de rhisfruta
-    Sql = "update rhisfruta set prestimado = " & DBSet(Rendimiento, "N")
-    Sql = Sql & " where nromuestraalmz = " & DBSet(Muestra, "N")
+    SQL = "update rhisfruta set prestimado = " & DBSet(Rendimiento, "N")
+    SQL = SQL & " where nromuestraalmz = " & DBSet(Muestra, "N")
      
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ' insertamos en la tabla de rendimiento
     
-    Sql = "insert ignore into rrendim (nromuestra, fecha, numalbar, acidez, humedad, rendimiento) "
-    Sql = Sql & " select nromuestraalmz, " & DBSet(Mid(FechaRdto, 1, 10) & " " & Mid(FechaRdto, 12, 8), "FH") & ", numalbar, "
-    Sql = Sql & DBSet(Acidez, "N") & "," & DBSet(Humedad, "N") & "," & DBSet(Rendimiento, "N") & " from rhisfruta "
-    Sql = Sql & " where nromuestraalmz = " & DBSet(Muestra, "N")
+    SQL = "insert ignore into rrendim (nromuestra, fecha, numalbar, acidez, humedad, rendimiento) "
+    SQL = SQL & " select nromuestraalmz, " & DBSet(Mid(FechaRdto, 1, 10) & " " & Mid(FechaRdto, 12, 8), "FH") & ", numalbar, "
+    SQL = SQL & DBSet(Acidez, "N") & "," & DBSet(Humedad, "N") & "," & DBSet(Rendimiento, "N") & " from rhisfruta "
+    SQL = SQL & " where nromuestraalmz = " & DBSet(Muestra, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     Exit Function
     

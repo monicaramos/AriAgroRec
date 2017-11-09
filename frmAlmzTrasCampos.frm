@@ -32,40 +32,76 @@ Begin VB.Form frmAlmzTrasCampos
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   2460
+         Left            =   2550
          Locked          =   -1  'True
          TabIndex        =   7
          Text            =   "Text5"
          Top             =   1035
-         Width           =   3375
+         Width           =   3645
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   1620
          MaxLength       =   6
          TabIndex        =   0
          Top             =   1035
-         Width           =   750
+         Width           =   885
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4905
+         Left            =   5085
          TabIndex        =   2
          Top             =   3780
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3720
+         Left            =   3900
          TabIndex        =   1
          Top             =   3780
-         Width           =   975
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   255
@@ -100,8 +136,8 @@ Begin VB.Form frmAlmzTrasCampos
          AutoSize        =   -1  'True
          Caption         =   "Variedad"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -109,12 +145,12 @@ Begin VB.Form frmAlmzTrasCampos
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   0
-         Left            =   330
+         Left            =   285
          TabIndex        =   8
          Top             =   1050
-         Width           =   630
+         Width           =   855
       End
       Begin VB.Label lblProgres 
          Height          =   375
@@ -181,7 +217,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
-Dim Cad As String
+Dim cad As String
 Dim cadTabla As String
 
 Dim vContad As Long
@@ -206,17 +242,17 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
-Dim i As Byte
+Dim SQL As String
+Dim I As Byte
 Dim cadWHERE As String
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
 Dim cadena1 As String
 
 On Error GoTo eError
 
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
     Me.CommonDialog1.Flags = cdlOFNExplorer + cdlOFNHideReadOnly + cdlOFNPathMustExist + cdlOFNFileMustExist
 
@@ -249,9 +285,9 @@ On Error GoTo eError
             cadTabla = "tmpinformes"
             cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
             
-            Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+            SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
             
-            If TotalRegistros(Sql) <> 0 Then
+            If TotalRegistros(SQL) <> 0 Then
                 MsgBox "Han habido errores en el Traspaso de Campos. ", vbExclamation
                 cadTitulo = "Errores en el Traspaso de Campos"
                 cadNombreRPT = "rErroresTrasCampos.rpt"
@@ -366,26 +402,26 @@ Dim devuelve2 As String
     End If
 End Function
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim Sql As String
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim SQL As String
     
-    b = True
+    B = True
  
-    If txtcodigo(2).Text = "" Then
+    If txtCodigo(2).Text = "" Then
         MsgBox "Debe introducir el código de variedad. Reintroduzca.", vbExclamation
-        b = False
-        PonerFoco txtcodigo(2)
+        B = False
+        PonerFoco txtCodigo(2)
     Else
-        Sql = "select count(*) from variedades where codvarie = " & DBSet(txtcodigo(2).Text, "N")
-        If TotalRegistros(Sql) = 0 Then
+        SQL = "select count(*) from variedades where codvarie = " & DBSet(txtCodigo(2).Text, "N")
+        If TotalRegistros(SQL) = 0 Then
             MsgBox "Código de variedad no existe. Reintroduzca.", vbExclamation
-            b = False
-            PonerFoco txtcodigo(2)
+            B = False
+            PonerFoco txtCodigo(2)
         End If
     End If
  
-    DatosOk = b
+    DatosOK = B
 
 End Function
 
@@ -397,28 +433,28 @@ Dim NF As Integer
     RecuperaFichero = False
     NF = FreeFile
     Open App.Path For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
-    Line Input #NF, Cad
+    Line Input #NF, cad
     Close #NF
-    If Cad <> "" Then RecuperaFichero = True
+    If cad <> "" Then RecuperaFichero = True
     
 End Function
 
 
 Private Function ProcesarFichero(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 Dim NomFic As String
 
     
@@ -430,9 +466,9 @@ Dim NomFic As String
     
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad ' saltamos la primera linea
-    Line Input #NF, Cad
-    i = 1
+    Line Input #NF, cad ' saltamos la primera linea
+    Line Input #NF, cad
+    I = 1
     
     lblProgres(0).Caption = "Procesando Fichero: " & nomFich
     longitud = FileLen(nomFich)
@@ -444,29 +480,29 @@ Dim NomFic As String
         
     NroCampo = DevuelveValor("select max(codcampo) from rcampos")
         
-    b = True
-    While Not EOF(NF) And b
-        i = i + 1
+    B = True
+    While Not EOF(NF) And B
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
         NroCampo = NroCampo + 1
         
-        If Cad <> ";;;;;;;;;" Then b = InsertarLinea(Cad)
+        If cad <> ";;;;;;;;;" Then B = InsertarLinea(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" And b Then
+    If cad <> "" And B Then
         NroCampo = NroCampo + 1
         
-        If Cad <> ";;;;;;;;;" Then b = InsertarLinea(Cad)
+        If cad <> ";;;;;;;;;" Then B = InsertarLinea(cad)
     End If
     
-    ProcesarFichero = b
+    ProcesarFichero = B
     
     Pb1.visible = False
     lblProgres(0).Caption = ""
@@ -476,19 +512,19 @@ End Function
                 
 Private Function ProcesarFichero2(nomFich As String) As Boolean
 Dim NF As Long
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
 Dim v_impo As Currency
 Dim v_prec As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     On Error GoTo eProcesarFichero2
     
@@ -497,9 +533,9 @@ Dim b As Boolean
     NF = FreeFile
     Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
     
-    Line Input #NF, Cad
-    Line Input #NF, Cad
-    i = 1
+    Line Input #NF, cad
+    Line Input #NF, cad
+    I = 1
     
     lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
     longitud = FileLen(nomFich)
@@ -509,30 +545,30 @@ Dim b As Boolean
     Me.Refresh
     Me.Pb1.Value = 0
 
-    b = True
+    B = True
 
-    While Not EOF(NF) And b
-        i = i + 1
+    While Not EOF(NF) And B
+        I = I + 1
         
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        If Cad <> ";;;;;;;;;" Then b = ComprobarRegistro(Cad)
+        If cad <> ";;;;;;;;;" Then B = ComprobarRegistro(cad)
         
-        Line Input #NF, Cad
+        Line Input #NF, cad
     Wend
     Close #NF
     
-    If Cad <> "" Then
-        i = i + 1
+    If cad <> "" Then
+        I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + Len(Cad)
-        lblProgres(1).Caption = "Linea " & i
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & I
         Me.Refresh
         
-        If Cad <> ";;;;;;;;;" Then b = ComprobarRegistro(Cad)
+        If cad <> ";;;;;;;;;" Then B = ComprobarRegistro(cad)
     
     End If
     
@@ -540,7 +576,7 @@ Dim b As Boolean
     lblProgres(0).Caption = ""
     lblProgres(1).Caption = ""
 
-    ProcesarFichero2 = b
+    ProcesarFichero2 = B
     Exit Function
 
 eProcesarFichero2:
@@ -548,8 +584,8 @@ eProcesarFichero2:
 End Function
                 
             
-Private Function ComprobarRegistro(Cad As String) As Boolean
-Dim Sql As String
+Private Function ComprobarRegistro(cad As String) As Boolean
+Dim SQL As String
 Dim Mens As String
 Dim cadena As String
 
@@ -557,65 +593,65 @@ Dim cadena As String
 
     ComprobarRegistro = True
 
-    CargarVariables Cad
+    CargarVariables cad
 
     ' comprobamos que me han puesto los datos de busqueda de parcela
     If Poligono = "" Or Parcela = "" Or Subparcela = "" Then
         Mens = "Datos de poligono/parcela/subparcela incorrectos"
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     Else
         cadena = Format(CCur(Poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
     End If
     
     
     'Comprobamos que el socio existe
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
+    If SQL = "" Then
         Mens = "No existe el socio"
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     'Comprobamos que la partida existe
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "rpartida", "codparti", "codparti", Municipio, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rpartida", "codparti", "codparti", Municipio, "N")
+    If SQL = "" Then
         Mens = "No existe la partida " & Municipio
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     
     
     ' comprobamos que el campo no está creado ya
     If ComprobarCero(Poligono) <> 0 And ComprobarCero(Parcela) <> 0 And ComprobarCero(Subparcela) <> 0 Then
-        Sql = "select codcampo from rcampos where poligono = " & DBSet(Poligono, "N")
-        Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
-        Sql = Sql & " and subparcela = " & DBSet(Subparcela, "N")
+        SQL = "select codcampo from rcampos where poligono = " & DBSet(Poligono, "N")
+        SQL = SQL & " and parcela = " & DBSet(Parcela, "N")
+        SQL = SQL & " and subparcela = " & DBSet(Subparcela, "N")
 
 
-        If DevuelveValor(Sql) <> 0 Then
-            Mens = "El campo existe Nº." & DevuelveValor(Sql)
-            Sql = "insert into tmpinformes (codusu, importe1, " & _
+        If DevuelveValor(SQL) <> 0 Then
+            Mens = "El campo existe Nº." & DevuelveValor(SQL)
+            SQL = "insert into tmpinformes (codusu, importe1, " & _
                   "importe2, nombre2, nombre1) values (" & _
                   vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-            Sql = Sql & "1," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+            SQL = SQL & "1," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
 
-            conn.Execute Sql
+            conn.Execute SQL
         End If
     End If
     
@@ -626,8 +662,8 @@ eComprobarRegistro:
 End Function
 
             
-Private Function InsertarLinea(Cad As String) As Boolean
-Dim Sql As String
+Private Function InsertarLinea(cad As String) As Boolean
+Dim SQL As String
 Dim CodZona As String
 Dim vSuperficie As Currency
 Dim HayError As Boolean
@@ -639,7 +675,7 @@ Dim cadena As String
     InsertarLinea = True
     
     
-    CargarVariables Cad
+    CargarVariables cad
     
     
     HayError = False
@@ -650,12 +686,12 @@ Dim cadena As String
     ' comprobamos que me han puesto los datos de busqueda de parcela
     If Poligono = "" Or Parcela = "" Or Subparcela = "" Then
         Mens = "Datos de poligono/parcela/subparcela incorrectos"
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         HayError = True
     Else
@@ -664,31 +700,31 @@ Dim cadena As String
     
     
     'Comprobamos que el socio existe
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
+    If SQL = "" Then
         Mens = "No existe el socio"
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         HayError = True
     End If
     
     'Comprobamos que la partida existe
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "rpartida", "codparti", "codparti", Municipio, "N")
-    If Sql = "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "rpartida", "codparti", "codparti", Municipio, "N")
+    If SQL = "" Then
         Mens = "No existe la partida " & Municipio
-        Sql = "insert into tmpinformes (codusu, importe1,  " & _
+        SQL = "insert into tmpinformes (codusu, importe1,  " & _
               "importe2, nombre2, nombre1) values (" & _
               vUsu.Codigo & "," & DBSet(Socio, "N") & ","
-        Sql = Sql & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
+        SQL = SQL & "0," & DBSet(cadena, "T") & "," & DBSet(Mens, "T") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         HayError = True
     End If
@@ -697,12 +733,12 @@ Dim cadena As String
     
     ' comprobamos que el campo no está creado ya
     If ComprobarCero(Poligono) <> 0 And ComprobarCero(Parcela) <> 0 And ComprobarCero(Subparcela) <> 0 Then
-        Sql = "select codcampo from rcampos where poligono = " & DBSet(Poligono, "N")
-        Sql = Sql & " and parcela = " & DBSet(Parcela, "N")
-        Sql = Sql & " and subparce = " & DBSet(Subparcela, "N")
+        SQL = "select codcampo from rcampos where poligono = " & DBSet(Poligono, "N")
+        SQL = SQL & " and parcela = " & DBSet(Parcela, "N")
+        SQL = SQL & " and subparce = " & DBSet(Subparcela, "N")
 
 
-        If DevuelveValor(Sql) <> 0 Then Exit Function
+        If DevuelveValor(SQL) <> 0 Then Exit Function
     End If
     
     
@@ -713,30 +749,30 @@ Dim cadena As String
     
     
     ' insertamos en la tabla de rhisfruta
-    Sql = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
-    Sql = Sql & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
-    Sql = Sql & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
-    Sql = Sql & DBSet(NroCampo, "N") & ","
-    Sql = Sql & DBSet(Socio, "N") & ","
-    Sql = Sql & DBSet(Socio, "N") & ","
-    Sql = Sql & DBSet(txtcodigo(2).Text, "N") & ","
-    Sql = Sql & DBSet(Municipio, "N") & ","
-    Sql = Sql & DBSet(CodZona, "N") & ","
-    Sql = Sql & DBSet(Now, "F") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & DBSet(vSuperficie, "N") & ","
-    Sql = Sql & "0," ' situacion
-    Sql = Sql & DBSet(Poligono, "N") & ","
-    Sql = Sql & DBSet(Parcela, "N") & ","
-    Sql = Sql & DBSet(Subparcela, "T") & ","
-    Sql = Sql & "0,0,0,"
-    Sql = Sql & DBSet(NroCampo, "N") & ","
-    Sql = Sql & "0)"
+    SQL = "insert into rcampos (codcampo, codsocio, codpropiet, codvarie, codparti, "
+    SQL = SQL & "codzonas, fecaltas, supsigpa, supcoope, supcatas, supculti, codsitua, "
+    SQL = SQL & "poligono, parcela, subparce, asegurado, tipoparc, recintos, nrocampo, recolect) VALUES ("
+    SQL = SQL & DBSet(NroCampo, "N") & ","
+    SQL = SQL & DBSet(Socio, "N") & ","
+    SQL = SQL & DBSet(Socio, "N") & ","
+    SQL = SQL & DBSet(txtCodigo(2).Text, "N") & ","
+    SQL = SQL & DBSet(Municipio, "N") & ","
+    SQL = SQL & DBSet(CodZona, "N") & ","
+    SQL = SQL & DBSet(Now, "F") & ","
+    SQL = SQL & DBSet(vSuperficie, "N") & "," ' superficie en hectareas
+    SQL = SQL & DBSet(vSuperficie, "N") & ","
+    SQL = SQL & DBSet(vSuperficie, "N") & ","
+    SQL = SQL & DBSet(vSuperficie, "N") & ","
+    SQL = SQL & "0," ' situacion
+    SQL = SQL & DBSet(Poligono, "N") & ","
+    SQL = SQL & DBSet(Parcela, "N") & ","
+    SQL = SQL & DBSet(Subparcela, "T") & ","
+    SQL = SQL & "0,0,0,"
+    SQL = SQL & DBSet(NroCampo, "N") & ","
+    SQL = SQL & "0)"
     
     
-    conn.Execute Sql
+    conn.Execute SQL
     Exit Function
     
 EInsertarLinea:
@@ -760,14 +796,14 @@ Private Sub LlamarImprimir()
 End Sub
 
 Private Sub InicializarTabla()
-Dim Sql As String
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+Dim SQL As String
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
     
-    conn.Execute Sql
+    conn.Execute SQL
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
@@ -775,7 +811,7 @@ Private Sub AbrirFrmVariedad(indice As Integer)
 End Sub
 
 
-Private Sub CargarVariables(Cad As String)
+Private Sub CargarVariables(cad As String)
     
         Socio = ""
         Municipio = ""
@@ -785,12 +821,12 @@ Private Sub CargarVariables(Cad As String)
         Variedad = ""
         Superficie = ""
 
-        Socio = RecuperaValorNew(Cad, ";", 1)
-        Municipio = RecuperaValorNew(Cad, ";", 3)
-        Poligono = RecuperaValorNew(Cad, ";", 4)
-        Parcela = RecuperaValorNew(Cad, ";", 5)
-        Subparcela = RecuperaValorNew(Cad, ";", 6)
-        Superficie = RecuperaValorNew(Cad, ";", 7)
+        Socio = RecuperaValorNew(cad, ";", 1)
+        Municipio = RecuperaValorNew(cad, ";", 3)
+        Poligono = RecuperaValorNew(cad, ";", 4)
+        Parcela = RecuperaValorNew(cad, ";", 5)
+        Subparcela = RecuperaValorNew(cad, ";", 6)
+        Superficie = RecuperaValorNew(cad, ";", 7)
         
     
     
@@ -798,7 +834,7 @@ End Sub
 
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -807,11 +843,11 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 2 'VARIEDADES
             AbrirFrmVariedad (Index)
     End Select
-    PonerFoco txtcodigo(Index)
+    PonerFoco txtCodigo(Index)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -829,17 +865,17 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -848,8 +884,8 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 2 'variedades
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
     
     
     End Select

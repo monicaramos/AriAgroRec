@@ -328,6 +328,7 @@ Form=frmPOZHidrantesPrev.frm
 Form=frmPOZRecibosPrev.frm
 Form=frmADVTratamientosPrev.frm
 Form=frmMensajes2.frm
+Form=frmAlmzFacturasPrev.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

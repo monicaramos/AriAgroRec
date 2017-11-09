@@ -3869,25 +3869,25 @@ Dim KilosDestrioComercial As Currency
                     conn.Execute Sql2
                 End If
                 
-'[Monica]07/11/2017: no lo incrementamos el factor de correccion, lo metemos en la calidad de merma comercial
-'                ' multiplicamos los kilos de podrido/merma por el factor de correccion
-'                Sql2 = "update rclasifauto_clasif set kiloscal = round(kiloscal * " & DBSet(FactCorrDest, "N") & ",2)"
+'[Monica]07/11/2017: LO DEJAMOS COMO ESTABA
+                ' multiplicamos los kilos de podrido/merma por el factor de correccion
+                Sql2 = "update rclasifauto_clasif set kiloscal = round(kiloscal * " & DBSet(FactCorrDest, "N") & ",2)"
+                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
+
+                conn.Execute Sql2
+
+'                Sql2 = "select round(kiloscal * (" & DBSet(FactCorrDest, "N") & " - 1) ,2) from rclasifauto_clasif "
 '                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!NumNotac, "N")
 '                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
 '                Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
 '
-'                conn.Execute Sql2
-
-                Sql2 = "select round(kiloscal * (" & DBSet(FactCorrDest, "N") & " - 1) ,2) from rclasifauto_clasif "
-                Sql2 = Sql2 & " where numnotac = " & DBSet(Rs!NumNotac, "N")
-                Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N")
-                Sql2 = Sql2 & " and codcalid = " & DBSet(CalPodrido, "N")
-                
-                KilosDestrioComercial = KilosDestrioComercial + DevuelveValor(Sql2)
+'                KilosDestrioComercial = KilosDestrioComercial + DevuelveValor(Sql2)
             
             End If
             
-            '[Monica]07/11/2017: los kilosdestriocomercial los tenemos que meter en la nueva variedad de destrio
+            '[Monica]07/11/2017: los kilosdestriocomercial los tenemos que meter en la nueva calidad de destrio
             If KilosDestrioComercial <> 0 Then
                 ' calidad de destrio comercial
                 Sql2 = "select codcalid from rcalidad where codvarie = " & DBSet(Rs!codvarie, "N")

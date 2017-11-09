@@ -7,13 +7,13 @@ Begin VB.Form frmAlmzTraspaso
    ClientHeight    =   4725
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6630
+   ClientWidth     =   6720
    Icon            =   "frmAlmzTraspaso.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   4725
-   ScaleWidth      =   6630
+   ScaleWidth      =   6720
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameTraspaso 
@@ -21,13 +21,22 @@ Begin VB.Form frmAlmzTraspaso
       Left            =   0
       TabIndex        =   6
       Top             =   0
-      Width           =   6555
+      Width           =   6690
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   2700
+         Left            =   3060
          Locked          =   -1  'True
          TabIndex        =   17
          Text            =   "Text5"
@@ -36,30 +45,57 @@ Begin VB.Form frmAlmzTraspaso
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   1920
+         Left            =   2145
          MaxLength       =   3
          TabIndex        =   2
          Top             =   2130
-         Width           =   735
+         Width           =   870
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   1920
+         Left            =   2145
          MaxLength       =   3
          TabIndex        =   1
          Top             =   1650
-         Width           =   735
+         Width           =   870
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   2700
+         Left            =   3060
          Locked          =   -1  'True
          TabIndex        =   14
          Text            =   "Text5"
@@ -68,20 +104,38 @@ Begin VB.Form frmAlmzTraspaso
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   1920
+         Left            =   2145
          MaxLength       =   10
          TabIndex        =   3
          Top             =   2610
-         Width           =   1095
+         Width           =   1350
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   2700
+         Left            =   3060
          Locked          =   -1  'True
          TabIndex        =   10
          Text            =   "Text5"
@@ -90,37 +144,64 @@ Begin VB.Form frmAlmzTraspaso
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   1920
+         Left            =   2145
          MaxLength       =   6
          TabIndex        =   0
          Top             =   1170
-         Width           =   735
+         Width           =   870
       End
       Begin VB.CommandButton CmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4905
+         Left            =   5355
          TabIndex        =   5
          Top             =   4110
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton CmdAcep 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3720
+         Left            =   4170
          TabIndex        =   4
          Top             =   4110
-         Width           =   975
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar pb2 
          Height          =   285
          Left            =   240
          TabIndex        =   7
          Top             =   3090
-         Width           =   6045
-         _ExtentX        =   10663
+         Width           =   6225
+         _ExtentX        =   10980
          _ExtentY        =   503
          _Version        =   393216
          Appearance      =   1
@@ -136,18 +217,27 @@ Begin VB.Form frmAlmzTraspaso
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "(Aceituna)"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   4
-         Left            =   480
+         Left            =   345
          TabIndex        =   19
          Top             =   2280
-         Width           =   720
+         Width           =   1050
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1620
+         Left            =   1890
          MouseIcon       =   "frmAlmzTraspaso.frx":000C
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar tipo iva"
@@ -157,40 +247,67 @@ Begin VB.Form frmAlmzTraspaso
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Tipo Iva Prov."
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   2
-         Left            =   420
+         Left            =   285
          TabIndex        =   18
          Top             =   2040
-         Width           =   1005
+         Width           =   1395
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "(Aceite Stock)"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   1
-         Left            =   480
+         Left            =   345
          TabIndex        =   16
          Top             =   1770
-         Width           =   1005
+         Width           =   1455
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Tipo Iva Cliente"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   0
-         Left            =   420
+         Left            =   285
          TabIndex        =   15
          Top             =   1560
-         Width           =   1110
+         Width           =   1560
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   1620
+         Left            =   1890
          MouseIcon       =   "frmAlmzTraspaso.frx":015E
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar tipo iva"
@@ -200,18 +317,27 @@ Begin VB.Form frmAlmzTraspaso
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Fecha Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   19
-         Left            =   420
+         Left            =   285
          TabIndex        =   13
          Top             =   2640
-         Width           =   1035
+         Width           =   1440
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   1620
+         Left            =   1890
          Picture         =   "frmAlmzTraspaso.frx":02B0
          ToolTipText     =   "Buscar fecha"
          Top             =   2610
@@ -230,7 +356,7 @@ Begin VB.Form frmAlmzTraspaso
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   420
+         Left            =   330
          TabIndex        =   12
          Top             =   450
          Width           =   5025
@@ -238,7 +364,7 @@ Begin VB.Form frmAlmzTraspaso
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   1620
+         Left            =   1890
          MouseIcon       =   "frmAlmzTraspaso.frx":033B
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar variedad"
@@ -248,13 +374,22 @@ Begin VB.Form frmAlmzTraspaso
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   3
-         Left            =   420
+         Left            =   330
          TabIndex        =   11
-         Top             =   1200
-         Width           =   630
+         Top             =   1155
+         Width           =   1080
       End
       Begin VB.Label lblProgres 
          Caption         =   "aa"
@@ -382,7 +517,7 @@ End Sub
 
 
 Private Sub CmdAcep_Click()
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
 Dim cadWHERE As String
 Dim B As Boolean
@@ -434,9 +569,9 @@ On Error GoTo eError
                     cadTabla = "tmpinformes"
                     cadFormula = "{tmpinformes.codusu} = " & vUsu.Codigo
                     
-                    Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
+                    SQL = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
                     
-                    If TotalRegistros(Sql) <> 0 Then
+                    If TotalRegistros(SQL) <> 0 Then
                         MsgBox "Hay errores en los ficheros de Traspaso. Debe corregirlos previamente.", vbExclamation
                         cadTitulo = "Errores de Traspaso"
                         cadNombreRPT = "rErroresTraspaso.rpt"
@@ -526,16 +661,16 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -705,7 +840,7 @@ Private Sub FrameTraspasoVisible(visible As Boolean, ByRef H As Integer, ByRef W
         Me.FrameTraspaso.Top = -90
         Me.FrameTraspaso.Left = 0
         Me.FrameTraspaso.Height = 4665
-        Me.FrameTraspaso.Width = 6555
+        Me.FrameTraspaso.Width = 6690
         W = Me.FrameTraspaso.Width
         H = Me.FrameTraspaso.Height
     End If
@@ -816,22 +951,22 @@ End Sub
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistros = True
     Exit Function
@@ -850,7 +985,7 @@ Dim longitud As Long
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 Dim NumReg As Long
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Total As Long
 Dim v_cant As Currency
@@ -871,8 +1006,8 @@ Dim Tipo As Integer
         Exit Function
     End If
     
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     
 'ACEITEC.TXT
     lblProgres(2).Caption = "Comprobando errores fichero ACEITEC.TXT "
@@ -1021,7 +1156,7 @@ End Function
 
 
 Private Function CargarFicheros() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim longitud As Long
 
@@ -1235,7 +1370,7 @@ End Function
 
 Private Function ComprobarRegistro(cad As String, Fichero As String) As Boolean
 Dim Socio As String
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Mens As String
 
@@ -1258,15 +1393,15 @@ Dim Mens As String
 
         'Comprobamos que el socio existe
         If Socio <> "" Then
-            Sql = ""
-            Sql = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
-            If Sql = "" Then
+            SQL = ""
+            SQL = DevuelveDesdeBDNew(cAgro, "rsocios", "codsocio", "codsocio", Socio, "N")
+            If SQL = "" Then
                 
                 Mens = "No existe el socio " & Format(Socio, "000000") & "-" & Fichero
-                Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                       vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
         
             If Fichero = "ACEITUNC.TXT" Then
@@ -1277,10 +1412,10 @@ Dim Mens As String
                 
                 If DevuelveValor(Sql1) = 0 Then
                     Mens = "No existe campo del socio " & Format(Socio, "000000") & "-" & Fichero
-                    Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                    SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 End If
                 
                 ' comprobamos que el socio es de la seccion de almazara
@@ -1288,10 +1423,10 @@ Dim Mens As String
                 Sql1 = Sql1 & " and codsecci = " & vParamAplic.SeccionAlmaz
                 If TotalRegistros(Sql1) = 0 Then
                     Mens = "El socio " & Format(Socio, "000000") & " no es de almazara"
-                    Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+                    SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                           vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                 
                 
                 End If
@@ -1308,10 +1443,10 @@ Dim Mens As String
         
         If TotalRegistros(Sql1) <> 0 Then
             Mens = "Existe la factura " & Format(Factura, "0000000") & "-" & Format(Fecha, "dd/mm/yyyy")
-            Sql = "insert into tmpinformes (codusu, nombre1) values (" & _
+            SQL = "insert into tmpinformes (codusu, nombre1) values (" & _
                   vUsu.Codigo & "," & DBSet(Mens, "T") & ")"
             
-            conn.Execute Sql
+            conn.Execute SQL
         End If
         
         
@@ -1328,7 +1463,7 @@ Private Function InsertarRegistros(cad As String, Tipo As Byte) As Boolean
 ' Tipo = 0 --> aceitec
 '        1 --> aceitunc
 '        2 --> stockc
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
 
@@ -1374,19 +1509,19 @@ Dim BaseReten As Currency
         ImporteVar = ImporteVar + Importe
     
         
-        Sql = "insert into tmprlinfactalmz (tipofichero, numfactu, fecfactu, codsocio, numlinea, "
-        Sql = Sql & " concepto, cantidad, precioar, importel) values ( "
-        Sql = Sql & DBSet(Tipo, "N") & ","
-        Sql = Sql & DBSet(Factura, "N") & ","
-        Sql = Sql & DBSet(Fecha, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & ","
-        Sql = Sql & DBSet(numlinea, "N") & ","
-        Sql = Sql & DBSet(Concepto, "T") & ","
-        Sql = Sql & DBSet(cantidad, "N") & ","
-        Sql = Sql & DBSet(Precio, "N") & ","
-        Sql = Sql & DBSet(Importe, "N") & ")"
+        SQL = "insert into tmprlinfactalmz (tipofichero, numfactu, fecfactu, codsocio, numlinea, "
+        SQL = SQL & " concepto, cantidad, precioar, importel) values ( "
+        SQL = SQL & DBSet(Tipo, "N") & ","
+        SQL = SQL & DBSet(Factura, "N") & ","
+        SQL = SQL & DBSet(Fecha, "F") & ","
+        SQL = SQL & DBSet(Socio, "N") & ","
+        SQL = SQL & DBSet(numlinea, "N") & ","
+        SQL = SQL & DBSet(Concepto, "T") & ","
+        SQL = SQL & DBSet(cantidad, "N") & ","
+        SQL = SQL & DBSet(Precio, "N") & ","
+        SQL = SQL & DBSet(Importe, "N") & ")"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
     End If
     
@@ -1438,30 +1573,30 @@ Dim BaseReten As Currency
         If Tipo = 1 Then ' fichero ACEITUNC.TXT
              
              'CABECERA DE FACTURA
-             Sql = "insert into rfactsoc (`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-             Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,"
-             Sql = Sql & "`basereten`,`porc_ret`,`impreten`,`baseaport`,`porc_apo`,"
-             Sql = Sql & "`impapor`,`totalfac`,`impreso`,`contabilizado`,`pasaridoc`,"
-             Sql = Sql & "`esanticipogasto`) values ("
-             Sql = Sql & DBSet(CodTipom, "T") & ","
-             Sql = Sql & DBSet(Factura, "N") & ","
-             Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
-             Sql = Sql & DBSet(Socio, "N") & ","
-             Sql = Sql & DBSet(Base, "N") & ","
-             Sql = Sql & DBSet(TipoIVA, "N") & "," ' tipo de iva
-             Sql = Sql & DBSet(PorcIva, "N") & "," ' porcentaje iva
-             Sql = Sql & DBSet(iva, "N") & "," ' importe iva
-             Sql = Sql & DBSet(TipoIRPF, "N") & "," ' tipo irfpf
-             Sql = Sql & DBSet(BaseReten, "N", "S") & "," ' base de retencion
-             Sql = Sql & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
-             Sql = Sql & DBSet(ImpReten, "N", "S") & ","
-             Sql = Sql & ValorNulo & "," ' base de aportacion
-             Sql = Sql & ValorNulo & "," ' porcentaje de aportacion
-             Sql = Sql & ValorNulo & "," ' importe de aportacion
-             Sql = Sql & DBSet(TotFactu, "N") & "," ' total factura
-             Sql = Sql & "0,1,0,0) " ' se introduce como contabilizada
+             SQL = "insert into rfactsoc (`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+             SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,"
+             SQL = SQL & "`basereten`,`porc_ret`,`impreten`,`baseaport`,`porc_apo`,"
+             SQL = SQL & "`impapor`,`totalfac`,`impreso`,`contabilizado`,`pasaridoc`,"
+             SQL = SQL & "`esanticipogasto`) values ("
+             SQL = SQL & DBSet(CodTipom, "T") & ","
+             SQL = SQL & DBSet(Factura, "N") & ","
+             SQL = SQL & DBSet(txtCodigo(2).Text, "F") & ","
+             SQL = SQL & DBSet(Socio, "N") & ","
+             SQL = SQL & DBSet(Base, "N") & ","
+             SQL = SQL & DBSet(TipoIVA, "N") & "," ' tipo de iva
+             SQL = SQL & DBSet(PorcIva, "N") & "," ' porcentaje iva
+             SQL = SQL & DBSet(iva, "N") & "," ' importe iva
+             SQL = SQL & DBSet(TipoIRPF, "N") & "," ' tipo irfpf
+             SQL = SQL & DBSet(BaseReten, "N", "S") & "," ' base de retencion
+             SQL = SQL & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
+             SQL = SQL & DBSet(ImpReten, "N", "S") & ","
+             SQL = SQL & ValorNulo & "," ' base de aportacion
+             SQL = SQL & ValorNulo & "," ' porcentaje de aportacion
+             SQL = SQL & ValorNulo & "," ' importe de aportacion
+             SQL = SQL & DBSet(TotFactu, "N") & "," ' total factura
+             SQL = SQL & "0,1,0,0) " ' se introduce como contabilizada
              
-             conn.Execute Sql
+             conn.Execute SQL
         
         
             'VARIEDAD DE FACTURA
@@ -1470,35 +1605,35 @@ Dim BaseReten As Currency
             
             campo = DevuelveValor(Sql1)
             
-            Sql = "insert into temprfactsoc_variedad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
-            Sql = Sql & "kilosnet, preciomed, imporvar, descontado) values ("
-            Sql = Sql & DBSet(CodTipom, "T") & ","
-            Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtCodigo(0).Text, "N") & ","
-            Sql = Sql & DBSet(campo, "N") & "," 'campo
-            Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
-            Sql = Sql & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
-            Sql = Sql & DBSet(ImporteVar, "N") & ",0)" ' importe y no descontado
+            SQL = "insert into temprfactsoc_variedad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
+            SQL = SQL & "kilosnet, preciomed, imporvar, descontado) values ("
+            SQL = SQL & DBSet(CodTipom, "T") & ","
+            SQL = SQL & DBSet(Factura, "N") & ","
+            SQL = SQL & DBSet(txtCodigo(2).Text, "F") & ","
+            SQL = SQL & DBSet(txtCodigo(0).Text, "N") & ","
+            SQL = SQL & DBSet(campo, "N") & "," 'campo
+            SQL = SQL & DBSet(CantidadVar, "N") & "," 'kilos
+            SQL = SQL & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
+            SQL = SQL & DBSet(ImporteVar, "N") & ",0)" ' importe y no descontado
             
-            conn.Execute Sql
+            conn.Execute SQL
         
             Calidad = CalidadPrimera(txtCodigo(0).Text)
             
             'CALIDAD DE FACTURA
-            Sql = "insert into temprfactsoc_calidad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
-            Sql = Sql & "codcalid, kilosnet, precio, imporcal) values ("
-            Sql = Sql & DBSet(CodTipom, "T") & ","
-            Sql = Sql & DBSet(Factura, "N") & ","
-            Sql = Sql & DBSet(txtCodigo(2).Text, "F") & ","
-            Sql = Sql & DBSet(txtCodigo(0).Text, "N") & ","
-            Sql = Sql & DBSet(campo, "N") & "," 'campo
-            Sql = Sql & DBSet(Calidad, "N") & "," ' calidad: ponemos la calidad primera
-            Sql = Sql & DBSet(CantidadVar, "N") & "," 'kilos
-            Sql = Sql & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
-            Sql = Sql & DBSet(ImporteVar, "N") & ")" ' importe y no descontado
+            SQL = "insert into temprfactsoc_calidad (codtipom,numfactu,fecfactu,codVarie,codCampo, "
+            SQL = SQL & "codcalid, kilosnet, precio, imporcal) values ("
+            SQL = SQL & DBSet(CodTipom, "T") & ","
+            SQL = SQL & DBSet(Factura, "N") & ","
+            SQL = SQL & DBSet(txtCodigo(2).Text, "F") & ","
+            SQL = SQL & DBSet(txtCodigo(0).Text, "N") & ","
+            SQL = SQL & DBSet(campo, "N") & "," 'campo
+            SQL = SQL & DBSet(Calidad, "N") & "," ' calidad: ponemos la calidad primera
+            SQL = SQL & DBSet(CantidadVar, "N") & "," 'kilos
+            SQL = SQL & DBSet(Round2(ImporteVar / CantidadVar, 4), "N") & "," ' precio
+            SQL = SQL & DBSet(ImporteVar, "N") & ")" ' importe y no descontado
             
-            conn.Execute Sql
+            conn.Execute SQL
         
             CantidadVar = 0
             ImporteVar = 0
@@ -1517,25 +1652,25 @@ Dim BaseReten As Currency
         End If
         
         ' insertamos cabecera de factura de almazara
-        Sql = "insert into rcabfactalmz (tipofichero, numfactu, fecfactu, codsocio, baseimpo, tipoiva, "
-        Sql = Sql & "porc_iva, imporiva, tipoirpf, basereten, porc_ret, impreten, totalfac, impreso, "
-        Sql = Sql & "contabilizado) values ("
-        Sql = Sql & DBSet(Tipo, "N") & ","
-        Sql = Sql & DBSet(Factura, "N") & ","
-        Sql = Sql & DBSet(Fecha, "F") & ","
-        Sql = Sql & DBSet(Socio, "N") & ","
-        Sql = Sql & DBSet(Base, "N") & ","
-        Sql = Sql & DBSet(TipoIVA, "N") & "," ' tipo iva
-        Sql = Sql & DBSet(PorcIva, "N") & "," 'porcentaje iva
-        Sql = Sql & DBSet(iva, "N") & "," ' importe iva
-        Sql = Sql & DBSet(TipoIRPF, "N") & "," ' tipo irpf
-        Sql = Sql & DBSet(BaseReten, "N", "S") & "," ' base de retencion
-        Sql = Sql & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
-        Sql = Sql & DBSet(ImpReten, "N", "S") & "," 'importe de retencion
-        Sql = Sql & DBSet(TotFactu, "N") & "," 'total factura
-        Sql = Sql & "0,0)" ' impreso y contabilizado
+        SQL = "insert into rcabfactalmz (tipofichero, numfactu, fecfactu, codsocio, baseimpo, tipoiva, "
+        SQL = SQL & "porc_iva, imporiva, tipoirpf, basereten, porc_ret, impreten, totalfac, impreso, "
+        SQL = SQL & "contabilizado) values ("
+        SQL = SQL & DBSet(Tipo, "N") & ","
+        SQL = SQL & DBSet(Factura, "N") & ","
+        SQL = SQL & DBSet(Fecha, "F") & ","
+        SQL = SQL & DBSet(Socio, "N") & ","
+        SQL = SQL & DBSet(Base, "N") & ","
+        SQL = SQL & DBSet(TipoIVA, "N") & "," ' tipo iva
+        SQL = SQL & DBSet(PorcIva, "N") & "," 'porcentaje iva
+        SQL = SQL & DBSet(iva, "N") & "," ' importe iva
+        SQL = SQL & DBSet(TipoIRPF, "N") & "," ' tipo irpf
+        SQL = SQL & DBSet(BaseReten, "N", "S") & "," ' base de retencion
+        SQL = SQL & DBSet(PorcReten, "N", "S") & "," ' porcentaje de retencion
+        SQL = SQL & DBSet(ImpReten, "N", "S") & "," 'importe de retencion
+        SQL = SQL & DBSet(TotFactu, "N") & "," 'total factura
+        SQL = SQL & "0,0)" ' impreso y contabilizado
         
-        conn.Execute Sql
+        conn.Execute SQL
         
     End If
     
@@ -1550,53 +1685,53 @@ End Function
 
 Private Function CrearTMPlineas() As Boolean
 ' temporales de lineas para insertar posteriormente en rfactsoc_variedad y rfactsoc_calidad
-Dim Sql As String
+Dim SQL As String
     
     On Error GoTo ECrear
     
     CrearTMPlineas = False
     
     'rfactsoc_variedad
-    Sql = "CREATE TEMPORARY TABLE temprfactsoc_variedad ( "
-    Sql = Sql & "`codtipom` char(3) NOT NULL ,"
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
-    Sql = Sql & "`fecfactu` date NOT NULL,"
-    Sql = Sql & "`codvarie` int(6) NOT NULL,"
-    Sql = Sql & "`codcampo` int(8) unsigned NOT NULL,"
-    Sql = Sql & "`kilosnet` int(6) NOT NULL,"
-    Sql = Sql & "`preciomed` decimal(6,4) NOT NULL,"
-    Sql = Sql & "`imporvar` decimal(8,2) NOT NULL,"
-    Sql = Sql & "`descontado` tinyint(1) NOT NULL default '0')"
+    SQL = "CREATE TEMPORARY TABLE temprfactsoc_variedad ( "
+    SQL = SQL & "`codtipom` char(3) NOT NULL ,"
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL,"
+    SQL = SQL & "`fecfactu` date NOT NULL,"
+    SQL = SQL & "`codvarie` int(6) NOT NULL,"
+    SQL = SQL & "`codcampo` int(8) unsigned NOT NULL,"
+    SQL = SQL & "`kilosnet` int(6) NOT NULL,"
+    SQL = SQL & "`preciomed` decimal(6,4) NOT NULL,"
+    SQL = SQL & "`imporvar` decimal(8,2) NOT NULL,"
+    SQL = SQL & "`descontado` tinyint(1) NOT NULL default '0')"
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     'rfactsoc_calidad
-    Sql = "CREATE TEMPORARY  TABLE temprfactsoc_calidad ( "
-    Sql = Sql & "`codtipom` char(3),"
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL,"
-    Sql = Sql & "`fecfactu` date NOT NULL,"
-    Sql = Sql & "`codvarie` int(6) NOT NULL,"
-    Sql = Sql & "`codcampo` int(8) unsigned NOT NULL,"
-    Sql = Sql & "`codcalid` smallint(2) NOT NULL,"
-    Sql = Sql & "`kilosnet` int(6) NOT NULL,"
-    Sql = Sql & "`precio` decimal(6,4) NOT NULL,"
-    Sql = Sql & "`imporcal` decimal(8,2) NOT NULL)"
+    SQL = "CREATE TEMPORARY  TABLE temprfactsoc_calidad ( "
+    SQL = SQL & "`codtipom` char(3),"
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL,"
+    SQL = SQL & "`fecfactu` date NOT NULL,"
+    SQL = SQL & "`codvarie` int(6) NOT NULL,"
+    SQL = SQL & "`codcampo` int(8) unsigned NOT NULL,"
+    SQL = SQL & "`codcalid` smallint(2) NOT NULL,"
+    SQL = SQL & "`kilosnet` int(6) NOT NULL,"
+    SQL = SQL & "`precio` decimal(6,4) NOT NULL,"
+    SQL = SQL & "`imporcal` decimal(8,2) NOT NULL)"
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     ' si es liquidacion venta campo o no se insertaran en los anticipos
-    Sql = "CREATE TEMPORARY  TABLE tmprlinfactalmz ( "
-    Sql = Sql & "`tipofichero` tinyint(1) unsigned NOT NULL, "
-    Sql = Sql & "`numfactu` int(7) unsigned NOT NULL, "
-    Sql = Sql & "`fecfactu` date NOT NULL, "
-    Sql = Sql & "`codsocio` int(6) unsigned NOT NULL,"
-    Sql = Sql & "`numlinea` smallint(4) unsigned NOT NULL,"
-    Sql = Sql & "`concepto` varchar(40) NOT NULL,"
-    Sql = Sql & "`cantidad` int(7) NOT NULL,"
-    Sql = Sql & "`precioar` decimal(8,4) NOT NULL,"
-    Sql = Sql & "`importel` decimal(8,2) NOT NULL) "
+    SQL = "CREATE TEMPORARY  TABLE tmprlinfactalmz ( "
+    SQL = SQL & "`tipofichero` tinyint(1) unsigned NOT NULL, "
+    SQL = SQL & "`numfactu` int(7) unsigned NOT NULL, "
+    SQL = SQL & "`fecfactu` date NOT NULL, "
+    SQL = SQL & "`codsocio` int(6) unsigned NOT NULL,"
+    SQL = SQL & "`numlinea` smallint(4) unsigned NOT NULL,"
+    SQL = SQL & "`concepto` varchar(40) NOT NULL,"
+    SQL = SQL & "`cantidad` int(7) NOT NULL,"
+    SQL = SQL & "`precioar` decimal(8,4) NOT NULL,"
+    SQL = SQL & "`importel` decimal(8,2) NOT NULL) "
     
-    conn.Execute Sql
+    conn.Execute SQL
      
     CrearTMPlineas = True
     
@@ -1604,12 +1739,12 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMPlineas = False
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmprlinfactalmz;"
-        conn.Execute Sql
-        Sql = " DROP TABLE IF EXISTS temprfactsoc_variedad;"
-        conn.Execute Sql
-        Sql = " DROP TABLE IF EXISTS temprfactsoc_calidad;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmprlinfactalmz;"
+        conn.Execute SQL
+        SQL = " DROP TABLE IF EXISTS temprfactsoc_variedad;"
+        conn.Execute SQL
+        SQL = " DROP TABLE IF EXISTS temprfactsoc_calidad;"
+        conn.Execute SQL
     End If
 End Function
 
@@ -1627,7 +1762,7 @@ End Sub
 
 
 Private Function InsertarTemporales() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
 
@@ -1643,19 +1778,19 @@ Dim PorcIva As String
     
     InsertarTemporales = False
         
-    Sql = "insert into rfactsoc_variedad (codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado) "
-    Sql = Sql & " select codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado from temprfactsoc_variedad "
+    SQL = "insert into rfactsoc_variedad (codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado) "
+    SQL = SQL & " select codtipom,numfactu,fecfactu,codvarie,codcampo,kilosnet,preciomed,imporvar,descontado from temprfactsoc_variedad "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
-    Sql = Sql & " select codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal from temprfactsoc_calidad "
+    SQL = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal) "
+    SQL = SQL & " select codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,imporcal from temprfactsoc_calidad "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "insert into rlinfactalmz (tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel) "
-    Sql = Sql & " select tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel from tmprlinfactalmz "
-    conn.Execute Sql
+    SQL = "insert into rlinfactalmz (tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel) "
+    SQL = SQL & " select tipofichero,numfactu,fecfactu,codsocio,numlinea,concepto,cantidad,precioar,importel from tmprlinfactalmz "
+    conn.Execute SQL
     
     InsertarTemporales = True
     Exit Function
