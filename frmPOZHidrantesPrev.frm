@@ -8,57 +8,15 @@ Begin VB.Form frmPOZHidrantesPrev
    ClientHeight    =   6465
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   10725
+   ClientWidth     =   9255
    Icon            =   "frmPOZHidrantesPrev.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6465
-   ScaleWidth      =   10725
+   ScaleWidth      =   9255
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.TextBox txtAux 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   350
-      Index           =   5
-      Left            =   7950
-      MaxLength       =   30
-      TabIndex        =   13
-      Tag             =   "Fecha Alta|F|N|||rsocios|fechaalta|dd/mm/yyyy||"
-      Top             =   4950
-      Width           =   1425
-   End
-   Begin VB.TextBox txtAux 
-      Appearance      =   0  'Flat
-      BorderStyle     =   0  'None
-      BeginProperty Font 
-         Name            =   "Verdana"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   350
-      Index           =   4
-      Left            =   5910
-      MaxLength       =   30
-      TabIndex        =   12
-      Tag             =   "Móvil|T|N|||rsocios|movsocio|||"
-      Top             =   4950
-      Width           =   1965
-   End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
@@ -76,7 +34,7 @@ Begin VB.Form frmPOZHidrantesPrev
       Left            =   4410
       MaxLength       =   10
       TabIndex        =   11
-      Tag             =   "Teléfono|T|N|||rsocios|telsoci1|||"
+      Tag             =   "Nro.Orden|N|S|0|9999999|rpozos|nroorden|0000000||"
       Top             =   4950
       Width           =   1395
    End
@@ -97,7 +55,7 @@ Begin VB.Form frmPOZHidrantesPrev
       Left            =   2940
       MaxLength       =   10
       TabIndex        =   2
-      Tag             =   "Hidrante|T|N|||rpozos|hidrante|||"
+      Tag             =   "Nombre Socio|T|N|||rsocios|nomsocio|||"
       Top             =   4950
       Width           =   1395
    End
@@ -145,7 +103,7 @@ Begin VB.Form frmPOZHidrantesPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8295
+      Left            =   6810
       TabIndex        =   3
       Tag             =   "   "
       Top             =   5790
@@ -165,7 +123,7 @@ Begin VB.Form frmPOZHidrantesPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9465
+      Left            =   7980
       TabIndex        =   4
       Top             =   5790
       Visible         =   0   'False
@@ -188,7 +146,7 @@ Begin VB.Form frmPOZHidrantesPrev
       Left            =   1470
       MaxLength       =   7
       TabIndex        =   1
-      Tag             =   "Nombre|T|N|||rsocios|nomsocio|||"
+      Tag             =   "Socio|N|N|1|999999|rpozos|codsocio|000000||"
       Top             =   4950
       Width           =   1395
    End
@@ -219,8 +177,8 @@ Begin VB.Form frmPOZHidrantesPrev
       Left            =   120
       TabIndex        =   7
       Top             =   330
-      Width           =   10455
-      _ExtentX        =   18441
+      Width           =   8910
+      _ExtentX        =   15716
       _ExtentY        =   9287
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -295,7 +253,7 @@ Begin VB.Form frmPOZHidrantesPrev
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9480
+      Left            =   7995
       TabIndex        =   8
       Top             =   5790
       Visible         =   0   'False
@@ -517,7 +475,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -775,7 +733,8 @@ Private Sub Form_Load()
     End With
     
     
-    CadenaConsulta = "select codsocio, nomsocio, nifsocio, telsoci1, movsocio, fechaalta from rsocios where (1=1)"
+    CadenaConsulta = "select rpozos.hidrante, rpozos.codsocio, rsocios.nomsocio,  rpozos.nroorden "
+    CadenaConsulta = CadenaConsulta & " from rpozos, rsocios where rpozos.codsocio = rsocios.codsocio  "
     If cWhere <> "" Then CadenaConsulta = CadenaConsulta & " and " & cWhere
     
     CadB = ""
@@ -809,28 +768,28 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " where " & vSQL
+        SQL = CadenaConsulta & " where " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
     If CampoOrden = "" Then
-        Sql = Sql & " ORDER BY codsocio "
+        SQL = SQL & " ORDER BY hidrante "
     Else
-        Sql = Sql & " order by " & CampoOrden & " " & TipoOrden
+        SQL = SQL & " order by " & CampoOrden & " " & TipoOrden
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Nombre|3870|;S|txtAux(2)|T|Nif|1250|;S|txtAux(3)|T|Teléfono|1300|;S|txtAux(4)|T|Móvil|1300|;S|txtAux(5)|T|Fecha Alta|1250|;"
+    tots = "S|txtAux(0)|T|Hidrante|1600|;S|txtAux(1)|T|Socio|1100|;S|txtAux(2)|T|Nombre|4200|;S|txtAux(3)|T|Orden|1400|;"
     
     arregla tots, DataGrid1, Me
     
@@ -872,7 +831,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 

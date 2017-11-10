@@ -6,28 +6,179 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmAlmzEntradas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entradas de Almazara"
-   ClientHeight    =   7275
+   ClientHeight    =   7605
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   10155
+   ClientTop       =   30
+   ClientWidth     =   10080
    Icon            =   "frmAlmzEntradas.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7275
-   ScaleWidth      =   10155
+   ScaleHeight     =   7605
+   ScaleWidth      =   10080
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   90
+      TabIndex        =   76
+      Top             =   135
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   77
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3750
+      TabIndex        =   74
+      Top             =   135
+      Width           =   1335
+      Begin MSComctlLib.Toolbar Toolbar5 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   75
+         Top             =   180
+         Width           =   1005
+         _ExtentX        =   1773
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Cambiar Rendimiento"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Asignación de Precios Masiva"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameDesplazamiento 
+      Height          =   705
+      Left            =   5160
+      TabIndex        =   72
+      Top             =   135
+      Width           =   2415
+      Begin MSComctlLib.Toolbar ToolbarDes 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   73
+         Top             =   180
+         Width           =   1965
+         _ExtentX        =   3466
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Primero"
+               ImageIndex      =   6
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Anterior"
+               ImageIndex      =   7
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Siguiente"
+               ImageIndex      =   8
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Último"
+               ImageIndex      =   9
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Index           =   0
+      Left            =   7695
+      TabIndex        =   71
+      Top             =   270
+      Width           =   1605
+   End
    Begin TabDlg.SSTab SSTab1 
       Height          =   2625
       Left            =   90
-      TabIndex        =   41
-      Top             =   3825
+      TabIndex        =   39
+      Top             =   4185
       Width           =   9855
       _ExtentX        =   17383
       _ExtentY        =   4630
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   4
       TabHeight       =   520
       ForeColor       =   12582912
@@ -42,13 +193,12 @@ Begin VB.Form frmAlmzEntradas
       EndProperty
       TabCaption(0)   =   "Incidencias"
       TabPicture(0)   =   "frmAlmzEntradas.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "FrameAux1"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Gastos"
       TabPicture(1)   =   "frmAlmzEntradas.frx":0028
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameAux2"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
@@ -65,21 +215,21 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2070
-         Left            =   -74910
-         TabIndex        =   48
+         Left            =   90
+         TabIndex        =   46
          Top             =   420
          Width           =   8830
          Begin VB.Frame FrameToolAux2 
             Height          =   600
             Left            =   45
-            TabIndex        =   70
+            TabIndex        =   68
             Top             =   0
             Width           =   1500
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   2
                Left            =   135
-               TabIndex        =   71
+               TabIndex        =   69
                Top             =   180
                Width           =   1110
                _ExtentX        =   1958
@@ -125,7 +275,7 @@ Begin VB.Form frmAlmzEntradas
             Left            =   6345
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   55
+            TabIndex        =   53
             Text            =   "Importe total"
             Top             =   135
             Width           =   1920
@@ -148,7 +298,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   8
             Left            =   4545
             MaxLength       =   10
-            TabIndex        =   54
+            TabIndex        =   52
             Tag             =   "Importe|N|S|||rhisfruta_gastos|importe|###,##0.00|N|"
             Text            =   "Importe"
             Top             =   1665
@@ -172,7 +322,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   9
             Left            =   1830
             MaxLength       =   2
-            TabIndex        =   53
+            TabIndex        =   51
             Tag             =   "Cod.Gasto|N|N|0|99|rhisfruta_gastos|codgasto|00||"
             Text            =   "Ga"
             Top             =   1665
@@ -186,7 +336,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   0
             Left            =   2565
             MaskColor       =   &H00000000&
-            TabIndex        =   52
+            TabIndex        =   50
             ToolTipText     =   "Buscar Gasto"
             Top             =   1665
             Visible         =   0   'False
@@ -211,7 +361,7 @@ Begin VB.Form frmAlmzEntradas
             Left            =   2790
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   51
+            TabIndex        =   49
             Text            =   "Nombre gasto"
             Top             =   1665
             Visible         =   0   'False
@@ -235,7 +385,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   10
             Left            =   180
             MaxLength       =   7
-            TabIndex        =   50
+            TabIndex        =   48
             Tag             =   "Num.Albaran|N|N|||rhisfruta_gastos|numalbar||S|"
             Text            =   "numalbar"
             Top             =   1665
@@ -259,7 +409,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   11
             Left            =   1080
             MaxLength       =   6
-            TabIndex        =   49
+            TabIndex        =   47
             Tag             =   "Linea|N|N|0|999999|rhisfruta_gastos|numlinea|000000|S|"
             Text            =   "linea"
             Top             =   1665
@@ -271,7 +421,7 @@ Begin VB.Form frmAlmzEntradas
             Height          =   1320
             Index           =   2
             Left            =   45
-            TabIndex        =   56
+            TabIndex        =   54
             Top             =   630
             Width           =   8595
             _ExtentX        =   15161
@@ -398,7 +548,7 @@ Begin VB.Form frmAlmzEntradas
             ForeColor       =   &H00800000&
             Height          =   285
             Left            =   4545
-            TabIndex        =   57
+            TabIndex        =   55
             Top             =   180
             Width           =   1875
          End
@@ -417,21 +567,21 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2160
-         Left            =   90
-         TabIndex        =   42
+         Left            =   -74910
+         TabIndex        =   40
          Top             =   360
          Width           =   9010
          Begin VB.Frame FrameToolAux1 
             Height          =   600
             Left            =   45
-            TabIndex        =   68
+            TabIndex        =   66
             Top             =   45
             Width           =   1185
             Begin MSComctlLib.Toolbar ToolAux 
                Height          =   330
                Index           =   1
                Left            =   135
-               TabIndex        =   69
+               TabIndex        =   67
                Top             =   180
                Width           =   930
                _ExtentX        =   1640
@@ -477,7 +627,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   0
             Left            =   330
             MaxLength       =   16
-            TabIndex        =   46
+            TabIndex        =   44
             Tag             =   "Nro.Albarán|N|N|||rhisfruta_incidencia|numalbar|0000000|S|"
             Text            =   "codfor"
             Top             =   1590
@@ -501,7 +651,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   1
             Left            =   1050
             MaxLength       =   4
-            TabIndex        =   45
+            TabIndex        =   43
             Tag             =   "Incidencia|N|N|||rhisfruta_incidencia|codincid|0000|S|"
             Text            =   "inci"
             Top             =   1590
@@ -525,7 +675,7 @@ Begin VB.Form frmAlmzEntradas
             Height          =   330
             Index           =   1
             Left            =   1950
-            TabIndex        =   44
+            TabIndex        =   42
             Text            =   "nombre"
             Top             =   1590
             Visible         =   0   'False
@@ -547,7 +697,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   1
             Left            =   1725
             MaskColor       =   &H00000000&
-            TabIndex        =   43
+            TabIndex        =   41
             ToolTipText     =   "Buscar Incidencia"
             Top             =   1590
             Visible         =   0   'False
@@ -558,7 +708,7 @@ Begin VB.Form frmAlmzEntradas
             Height          =   1320
             Index           =   1
             Left            =   45
-            TabIndex        =   47
+            TabIndex        =   45
             Top             =   675
             Width           =   8685
             _ExtentX        =   15319
@@ -689,7 +839,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   2
             Left            =   180
             MaxLength       =   4
-            TabIndex        =   72
+            TabIndex        =   70
             Tag             =   "NumNota|N|N|||rhisfruta_incidencia|numnotac|0000|S|"
             Text            =   "inci"
             Top             =   270
@@ -703,7 +853,7 @@ Begin VB.Form frmAlmzEntradas
       Index           =   0
       Left            =   90
       TabIndex        =   17
-      Top             =   510
+      Top             =   870
       Width           =   9885
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
@@ -720,7 +870,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   10
          Left            =   5805
-         TabIndex        =   64
+         TabIndex        =   62
          Top             =   1890
          Width           =   885
       End
@@ -739,7 +889,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   9
          Left            =   4395
-         TabIndex        =   63
+         TabIndex        =   61
          Top             =   1890
          Width           =   795
       End
@@ -758,7 +908,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   8
          Left            =   2925
-         TabIndex        =   62
+         TabIndex        =   60
          Top             =   1890
          Width           =   735
       End
@@ -777,7 +927,7 @@ Begin VB.Form frmAlmzEntradas
          Index           =   5
          Left            =   1395
          MaxLength       =   8
-         TabIndex        =   61
+         TabIndex        =   59
          Tag             =   "Campo|N|S|||rhisfruta|codcampo|00000000||"
          Text            =   "12345678"
          Top             =   1890
@@ -839,7 +989,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   2
          Left            =   8160
-         TabIndex        =   35
+         TabIndex        =   33
          Top             =   2745
          Width           =   1350
       End
@@ -936,7 +1086,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   6
          Left            =   2415
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   1500
          Width           =   4275
       End
@@ -975,7 +1125,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   4
          Left            =   2430
-         TabIndex        =   28
+         TabIndex        =   26
          Text            =   "12345678901234567890"
          Top             =   1125
          Width           =   4245
@@ -1015,7 +1165,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   360
          Index           =   3
          Left            =   2430
-         TabIndex        =   25
+         TabIndex        =   23
          Text            =   "12345678901234567890"
          Top             =   720
          Width           =   4245
@@ -1135,7 +1285,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   5295
-         TabIndex        =   67
+         TabIndex        =   65
          Top             =   1890
          Width           =   705
       End
@@ -1152,7 +1302,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   3840
-         TabIndex        =   66
+         TabIndex        =   64
          Top             =   1890
          Width           =   705
       End
@@ -1169,7 +1319,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   2445
-         TabIndex        =   65
+         TabIndex        =   63
          Top             =   1920
          Width           =   570
       End
@@ -1194,7 +1344,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   60
+         TabIndex        =   58
          Top             =   1920
          Width           =   705
       End
@@ -1211,7 +1361,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   4635
-         TabIndex        =   59
+         TabIndex        =   57
          Top             =   315
          Width           =   1020
       End
@@ -1229,7 +1379,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   4
          Left            =   6765
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   345
          Width           =   1185
       End
@@ -1247,7 +1397,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   0
          Left            =   6765
-         TabIndex        =   36
+         TabIndex        =   34
          Top             =   2775
          Width           =   1365
       End
@@ -1265,7 +1415,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   5
          Left            =   6765
-         TabIndex        =   34
+         TabIndex        =   32
          Top             =   2385
          Width           =   1185
       End
@@ -1282,7 +1432,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   2445
-         TabIndex        =   33
+         TabIndex        =   31
          Top             =   315
          Width           =   615
       End
@@ -1309,7 +1459,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   2
          Left            =   6765
-         TabIndex        =   32
+         TabIndex        =   30
          Top             =   780
          Width           =   1440
       End
@@ -1327,7 +1477,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   3
          Left            =   6765
-         TabIndex        =   31
+         TabIndex        =   29
          Top             =   1185
          Width           =   1350
       End
@@ -1344,9 +1494,9 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   30
+         TabIndex        =   28
          Top             =   1530
-         Width           =   705
+         Width           =   795
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -1378,7 +1528,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   3
          Left            =   180
-         TabIndex        =   27
+         TabIndex        =   25
          Top             =   315
          Width           =   1185
       End
@@ -1395,7 +1545,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   26
+         TabIndex        =   24
          Top             =   765
          Width           =   870
       End
@@ -1421,7 +1571,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   2
          Left            =   6765
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   1965
          Width           =   1095
       End
@@ -1439,7 +1589,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   1
          Left            =   6765
-         TabIndex        =   23
+         TabIndex        =   21
          Top             =   1545
          Width           =   1320
       End
@@ -1457,7 +1607,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Index           =   1
          Left            =   180
-         TabIndex        =   22
+         TabIndex        =   20
          Top             =   1125
          Width           =   690
       End
@@ -1474,7 +1624,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          Height          =   255
          Left            =   180
-         TabIndex        =   21
+         TabIndex        =   19
          Top             =   2310
          Width           =   1485
       End
@@ -1493,7 +1643,7 @@ Begin VB.Form frmAlmzEntradas
       Height          =   285
       Index           =   0
       Left            =   2715
-      TabIndex        =   38
+      TabIndex        =   36
       Text            =   "12345678901234567890"
       Top             =   1605
       Width           =   3300
@@ -1504,7 +1654,7 @@ Begin VB.Form frmAlmzEntradas
       Height          =   285
       Index           =   1
       Left            =   1860
-      TabIndex        =   37
+      TabIndex        =   35
       Text            =   "12345678901234567890"
       Top             =   1920
       Width           =   4140
@@ -1514,7 +1664,7 @@ Begin VB.Form frmAlmzEntradas
       Index           =   0
       Left            =   150
       TabIndex        =   15
-      Top             =   6570
+      Top             =   6885
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1550,7 +1700,7 @@ Begin VB.Form frmAlmzEntradas
       Height          =   375
       Left            =   8910
       TabIndex        =   14
-      Top             =   6720
+      Top             =   7035
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1567,7 +1717,7 @@ Begin VB.Form frmAlmzEntradas
       Height          =   375
       Left            =   7770
       TabIndex        =   13
-      Top             =   6720
+      Top             =   7035
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -1617,114 +1767,6 @@ Begin VB.Form frmAlmzEntradas
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   19
-      Top             =   0
-      Width           =   10155
-      _ExtentX        =   17912
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   21
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Cambiar Rdto"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Asignación Precios Masiva"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button20 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button21 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
-      EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Index           =   0
-         Left            =   6660
-         TabIndex        =   20
-         Top             =   120
-         Width           =   1215
-      End
-   End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
       BeginProperty Font 
@@ -1739,16 +1781,35 @@ Begin VB.Form frmAlmzEntradas
       Height          =   375
       Left            =   8910
       TabIndex        =   18
-      Top             =   6720
+      Top             =   7035
       Visible         =   0   'False
       Width           =   1035
+   End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   9510
+      TabIndex        =   78
+      Top             =   210
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
    End
    Begin VB.Label Label6 
       Caption         =   "Campo"
       Height          =   255
       Index           =   0
       Left            =   870
-      TabIndex        =   40
+      TabIndex        =   38
       Top             =   1590
       Width           =   690
    End
@@ -1765,12 +1826,14 @@ Begin VB.Form frmAlmzEntradas
       Height          =   255
       Index           =   2
       Left            =   870
-      TabIndex        =   39
+      TabIndex        =   37
       Top             =   1935
       Width           =   900
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -2065,23 +2128,45 @@ Dim I As Integer
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         'l'1 i el 2 son separadors
-        .Buttons(3).Image = 1   'Buscar
-        .Buttons(4).Image = 2   'Totss
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
         'el 5 i el 6 son separadors
-        .Buttons(7).Image = 3   'Insertar
-        .Buttons(8).Image = 4   'Modificar
-        .Buttons(9).Image = 5   'Borrar
-        .Buttons(11).Image = 31   'Expandir Añadir, Borrar y Modificar
-        .Buttons(12).Image = 13   'Asignacion masiva de precios de liquidacion de albaranes
-        'el 10 i el 11 son separadors
-        .Buttons(14).Image = 10  'Imprimir
-        .Buttons(15).Image = 11  'Eixir
-        'el 13 i el 14 son separadors
-        .Buttons(btnPrimero).Image = 6  'Primer
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Següent
-        .Buttons(btnPrimero + 3).Image = 9 'Últim
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar5
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 31  'Expandir Añadir, Borrar y Modificar
+        .Buttons(2).Image = 13  'Asignacion masiva de precios de liquidacion de albaranes
+    End With
+    
+    ' desplazamiento
+    With Me.ToolbarDes
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 6
+        .Buttons(2).Image = 7
+        .Buttons(3).Image = 8
+        .Buttons(4).Image = 9
+    End With
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
+    End With
+    
+    
+    
+    
+    
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
@@ -2241,7 +2326,10 @@ Dim B As Boolean
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+'    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
+
+
     '---------------------------------------------
     
     B = Modo <> 0 And Modo <> 2
@@ -2343,6 +2431,11 @@ EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
 
+Private Sub DesplazamientoVisible(bol As Boolean)
+    FrameDesplazamiento.visible = bol
+    FrameDesplazamiento.Enabled = bol
+End Sub
+
 Private Sub PonerLongCampos()
 'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
 'para los campos que permitan introducir criterios más largos del tamaño del campo
@@ -2367,40 +2460,36 @@ Dim I As Byte
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(7).Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
-    
     B = (Modo = 2 And Data1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(9).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     
     'cambio de rendimiento
-    Toolbar1.Buttons(11).Enabled = True And Not DeConsulta
+    Toolbar5.Buttons(1).Enabled = True And Not DeConsulta
     Me.mnCambiarRdto.Enabled = True And Not DeConsulta
     
     'asignacion de precios massiva ( sólo esta visible para Castelduc que liquida por precio de albaran )
-    Toolbar1.Buttons(12).Enabled = (vParamAplic.Cooperativa = 5) And Not DeConsulta
+    Toolbar5.Buttons(2).Enabled = (vParamAplic.Cooperativa = 5) And Not DeConsulta
     Me.mnAsignacion.Enabled = (vParamAplic.Cooperativa = 5) And Not DeConsulta
-    Toolbar1.Buttons(12).visible = (vParamAplic.Cooperativa = 5) And Not DeConsulta
+    Toolbar5.Buttons(2).visible = (vParamAplic.Cooperativa = 5) And Not DeConsulta
     Me.mnAsignacion.visible = (vParamAplic.Cooperativa = 5) And Not DeConsulta
     
-    
     'Imprimir
-    Toolbar1.Buttons(14).Enabled = True And Not DeConsulta
+    Toolbar1.Buttons(8).Enabled = True And Not DeConsulta
     Me.mnImprimir.Enabled = True And Not DeConsulta
-     
-     
      
     ' *** si n'hi han llínies que tenen grids (en o sense tab) ***
 '++monica: si insertamos lo he quitado
@@ -2418,7 +2507,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 
@@ -2677,27 +2766,22 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 3  'Búscar
+        Case 5  'Búscar
            mnBuscar_Click
-        Case 4  'Tots
+        Case 6  'Tots
             mnVerTodos_Click
-        Case 7  'Nou
+        Case 1  'Nou
             mnNuevo_Click
-        Case 8  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 9  'Borrar
+        Case 3  'Borrar
             mnEliminar_Click
-        Case 11 ' Cambio de Rendimiento
-            mnCambiarRdto_Click
-        Case 12 ' Asignacion de precios masiva
-            mnAsignacion_Click
-        Case 14 'Imprimir
+'        Case 11 ' Cambio de Rendimiento
+'            mnCambiarRdto_Click
+'        Case 12 ' Asignacion de precios masiva
+'            mnAsignacion_Click
+        Case 8 'Imprimir
             mnImprimir_Click
-        Case 15    'Eixir
-            mnSalir_Click
-            
-        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
-            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -3725,6 +3809,19 @@ Dim I As Integer
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
     
     
+End Sub
+
+Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1 ' Cambio de Rendimiento
+            mnCambiarRdto_Click
+        Case 2 ' Asignacion de precios masiva
+            mnAsignacion_Click
+    End Select
+End Sub
+
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
 End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)

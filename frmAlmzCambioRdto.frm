@@ -97,7 +97,7 @@ Begin VB.Form frmAlmzCambioRdto
             MaxLength       =   6
             TabIndex        =   5
             Tag             =   "Porcentaje|N|S|||rhisfruta|numalbar|##0.00|S|"
-            Top             =   465
+            Top             =   420
             Width           =   1095
          End
          Begin VB.Label Label2 
@@ -117,7 +117,7 @@ Begin VB.Form frmAlmzCambioRdto
             Index           =   5
             Left            =   15
             TabIndex        =   20
-            Top             =   225
+            Top             =   135
             Width           =   1395
          End
       End
@@ -155,12 +155,12 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          Height          =   360
          Index           =   15
-         Left            =   2760
+         Left            =   2805
          Locked          =   -1  'True
          TabIndex        =   9
          Text            =   "Text5"
          Top             =   2400
-         Width           =   3375
+         Width           =   3735
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
@@ -176,12 +176,12 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          Height          =   360
          Index           =   14
-         Left            =   2760
+         Left            =   2805
          Locked          =   -1  'True
          TabIndex        =   8
          Text            =   "Text5"
          Top             =   2040
-         Width           =   3375
+         Width           =   3735
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
@@ -233,7 +233,7 @@ Begin VB.Form frmAlmzCambioRdto
             Strikethrough   =   0   'False
          EndProperty
          Height          =   375
-         Left            =   4590
+         Left            =   4320
          TabIndex        =   6
          Top             =   4455
          Width           =   1035
@@ -251,7 +251,7 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          Height          =   375
          Index           =   1
-         Left            =   5715
+         Left            =   5445
          TabIndex        =   7
          Top             =   4455
          Width           =   1035
@@ -269,7 +269,7 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   4785
+         Left            =   5190
          MaxLength       =   10
          TabIndex        =   2
          Top             =   1410
@@ -306,7 +306,7 @@ Begin VB.Form frmAlmzCambioRdto
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   4470
+         Left            =   4875
          Picture         =   "frmAlmzCambioRdto.frx":06AB
          ToolTipText     =   "Buscar fecha"
          Top             =   1410
@@ -419,7 +419,7 @@ Begin VB.Form frmAlmzCambioRdto
          EndProperty
          Height          =   195
          Index           =   21
-         Left            =   3855
+         Left            =   4215
          TabIndex        =   14
          Top             =   1410
          Width           =   600
@@ -858,8 +858,8 @@ Private Sub FrameEntradaBasculaVisible(visible As Boolean, ByRef H As Integer, B
     If visible = True Then
         Me.FrameEntradasCampo.Top = -90
         Me.FrameEntradasCampo.Left = 0
-        Me.FrameEntradasCampo.Height = 4860
-        Me.FrameEntradasCampo.Width = 6720
+        Me.FrameEntradasCampo.Height = 5040
+        Me.FrameEntradasCampo.Width = 7155
         W = Me.FrameEntradasCampo.Width
         H = Me.FrameEntradasCampo.Height
     End If
