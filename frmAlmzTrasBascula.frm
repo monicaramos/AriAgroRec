@@ -1283,7 +1283,8 @@ Dim cadena As String
         conn.Execute SQL
 
     Else
-        cadena = Format(CCur(Poligono), "0000") & "-" & Format(CCur(Parcela), "0000") & "-" & Subparcela
+        '[Monica]14/11/2017: hay veces que nos viene "" pongo comprobar cero para poligono y parcela
+        cadena = Format(CCur(ComprobarCero(Poligono)), "0000") & "-" & Format(CCur(ComprobarCero(Parcela)), "0000") & "-" & Subparcela
     End If
     
 ' de momento lo quito pq hay una comprobacion previa que impide hacer nada si no existen los socios y variedades

@@ -1864,6 +1864,12 @@ Dim Precio As Currency
         SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
+    '[Monica]15/11/2017: para el caso de coopic faltaba romper por contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato =" & DBSet(Rs!contrato, "T") & " and "
+    End If
+    
+    
     SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac "
 
     
@@ -1980,6 +1986,11 @@ Dim CalidadClasif As String
         SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
+    '[Monica]15/11/2017: para el caso de coopic hay que romper por contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato = " & DBSet(Rs!contrato, "T") & " and "
+    End If
+    
     SQL = SQL & " rclasifica.numnotac = tmpNotas.numnotac "
     
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
@@ -2038,6 +2049,11 @@ Dim CalidadClasif As String
     '[Monica]30/01/2014: para el caso de Alzira se agrupa tambien por capataz
     If vParamAplic.Cooperativa = 4 Then
         SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
+    End If
+    
+    '[Monica]15/11/2017: para el caso de Coopic hay que romper por contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato =" & DBSet(Rs!contrato, "T") & " and "
     End If
     
     SQL = SQL & " rclasifica.numnotac = rclasifica_incidencia.numnotac and  "
@@ -2191,6 +2207,12 @@ Dim vPrecio As String
         SQL = SQL & " rclasifica.codcapat =" & DBSet(Rs!codcapat, "N") & " and "
     End If
     
+    '[Monica]15/11/2017: faltaba la condicion del contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato =" & DBSet(Rs!contrato, "T") & " and "
+    End If
+    
+    
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
         SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
@@ -2218,6 +2240,12 @@ Dim vPrecio As String
         SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
     
+    '[Monica]15/11/2017: faltaba la condicion de coopic con el contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato = " & DBSet(Rs!contrato, "T") & " and "
+    End If
+    
+    
     SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & ") "
     
     conn.Execute SQL
@@ -2239,6 +2267,12 @@ Dim vPrecio As String
     If Estercero Or Not vParamAplic.SeAgrupanNotas Then
         SQL = SQL & " rclasifica.numnotac =" & DBSet(Rs!NumNotac, "N") & " and "
     End If
+    
+    '[Monica]15/11/2017: faltaba la condicion de coopic con el contrato
+    If vParamAplic.Cooperativa = 16 Then
+        SQL = SQL & " rclasifica.contrato = " & DBSet(Rs!contrato, "T") & " and "
+    End If
+    
     
     SQL = SQL & " rclasifica.recolect =" & DBSet(Rs!Recolect, "N") & " and "
     SQL = SQL & " rclasifica.numnotac in (select numnotac from tmpNotas) "
