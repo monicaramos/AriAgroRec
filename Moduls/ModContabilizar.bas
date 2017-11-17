@@ -11393,6 +11393,22 @@ Dim ImpREC As Currency
                 TotImpIVA = TotImpIVA + ImpImva
                 
                 
+                'comprtobar que la suma de los importes de las lineas insertadas suman la BImponible
+                'de la factura
+                If TotImpIVA <> vImpIvaAux Then
+            '        MsgBox "FALTA cuadrar bases imponibles!!!!!!!!!"
+                    'en SQL esta la ult linea introducida
+                    totimp = vImpIvaAux - TotImpIVA
+                    totimp = ImpImva + totimp '(+- diferencia)
+                    Sql2 = Sql2 & DBSet(ImpLinea, "N") & "," & DBSet(totimp, "N") & "," & DBSet(ImpREC, "N", "S") & ",0"
+                    
+                    cad = "(" & Sql2 & ")" & ","
+                Else
+                    cad = "(" & SQL & ")" & ","
+                End If
+                
+                SQLaux = SQLaux & cad
+                
             End If
             
             
@@ -11402,21 +11418,6 @@ Dim ImpREC As Currency
         Rs.Close
         Set Rs = Nothing
         
-        'comprtobar que la suma de los importes de las lineas insertadas suman la BImponible
-        'de la factura
-        If TotImpIVA <> vImpIvaAux Then
-    '        MsgBox "FALTA cuadrar bases imponibles!!!!!!!!!"
-            'en SQL esta la ult linea introducida
-            totimp = vImpIvaAux - TotImpIVA
-            totimp = ImpImva + totimp '(+- diferencia)
-            Sql2 = Sql2 & DBSet(ImpLinea, "N") & "," & DBSet(totimp, "N") & "," & DBSet(ImpREC, "N", "S") & ",0"
-            
-            cad = "(" & Sql2 & ")" & ","
-        Else
-            cad = "(" & SQL & ")" & ","
-        End If
-        
-        SQLaux = SQLaux & cad
         
     
         'Insertar en la contabilidad
