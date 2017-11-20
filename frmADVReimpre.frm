@@ -451,7 +451,7 @@ Begin VB.Form frmADVReimpre
          Index           =   2
          Left            =   450
          TabIndex        =   19
-         Top             =   915
+         Top             =   870
          Width           =   930
       End
       Begin VB.Label Label4 
@@ -580,7 +580,7 @@ Begin VB.Form frmADVReimpre
          Index           =   11
          Left            =   450
          TabIndex        =   13
-         Top             =   2955
+         Top             =   2910
          Width           =   540
       End
       Begin VB.Image imgBuscar 

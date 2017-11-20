@@ -5,52 +5,235 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmAPOMtoQua 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Aportaciones"
-   ClientHeight    =   7635
+   ClientHeight    =   8130
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   9735
+   ClientTop       =   30
+   ClientWidth     =   10320
    Icon            =   "frmAPOMtoQua.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7635
-   ScaleWidth      =   9735
+   ScaleHeight     =   8130
+   ScaleWidth      =   10320
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   225
+      TabIndex        =   49
+      Top             =   135
+      Width           =   3540
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   50
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3795
+      TabIndex        =   47
+      Top             =   135
+      Width           =   2145
+      Begin MSComctlLib.Toolbar Toolbar5 
+         Height          =   330
+         Left            =   120
+         TabIndex        =   48
+         Top             =   180
+         Width           =   1905
+         _ExtentX        =   3360
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Calculo Aportaciones"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Borrado Masivo"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Integración Tesorería"
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Devolución Aportaciones"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameDesplazamiento 
+      Height          =   705
+      Left            =   5970
+      TabIndex        =   45
+      Top             =   135
+      Width           =   2415
+      Begin MSComctlLib.Toolbar ToolbarDes 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   46
+         Top             =   180
+         Width           =   1965
+         _ExtentX        =   3466
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Primero"
+               ImageIndex      =   6
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Anterior"
+               ImageIndex      =   7
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Siguiente"
+               ImageIndex      =   8
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Último"
+               ImageIndex      =   9
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Index           =   0
+      Left            =   8505
+      TabIndex        =   44
+      Top             =   540
+      Width           =   1605
+   End
    Begin VB.Frame Frame2 
       Height          =   765
       Index           =   0
       Left            =   240
-      TabIndex        =   38
-      Top             =   480
-      Width           =   9135
+      TabIndex        =   36
+      Top             =   885
+      Width           =   9900
       Begin VB.CheckBox Check1 
          Caption         =   "Contabilizado"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   0
-         Left            =   7260
+         Left            =   7215
          TabIndex        =   2
          Tag             =   "Contabilizado|N|N|0|1|raporhco|intconta|0||"
-         Top             =   330
-         Width           =   1305
+         Top             =   285
+         Width           =   1665
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   10
-         Left            =   4200
+         Left            =   4335
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha Alta|F|N|||raporhco|fecaport|dd/mm/yyyy||"
          Text            =   "1234567890"
          Top             =   270
-         Width           =   1035
+         Width           =   1350
       End
       Begin VB.TextBox Text1 
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   1410
+         Left            =   1680
          MaxLength       =   10
          TabIndex        =   0
          Tag             =   "Numero Aportacion|N|S|||raporhco|numaport|0000000|S|"
@@ -60,7 +243,7 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   3840
+         Left            =   3975
          Picture         =   "frmAPOMtoQua.frx":000C
          ToolTipText     =   "Buscar fecha"
          Top             =   300
@@ -68,20 +251,38 @@ Begin VB.Form frmAPOMtoQua
       End
       Begin VB.Label Label10 
          Caption         =   "Fecha "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   3270
-         TabIndex        =   34
-         Top             =   330
+         TabIndex        =   32
+         Top             =   285
          Width           =   720
       End
       Begin VB.Label Label1 
          Caption         =   "Nº Aportación"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
          Left            =   240
          TabIndex        =   18
          Top             =   300
-         Width           =   1035
+         Width           =   1485
       End
    End
    Begin VB.Frame Frame1 
@@ -89,14 +290,14 @@ Begin VB.Form frmAPOMtoQua
       Index           =   0
       Left            =   240
       TabIndex        =   16
-      Top             =   6960
+      Top             =   7365
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -113,147 +314,63 @@ Begin VB.Form frmAPOMtoQua
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   8310
+      Left            =   9075
       TabIndex        =   15
-      Top             =   7140
+      Top             =   7545
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
-      Height          =   375
-      Left            =   7080
-      TabIndex        =   14
-      Top             =   7140
-      Width           =   1035
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   20
-      Top             =   0
-      Width           =   9735
-      _ExtentX        =   17171
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   22
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Cálculo Aportaciones"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Borrado masivo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Integración Tesoreria"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Devolución Aportaciones"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button20 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button21 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button22 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Index           =   0
-         Left            =   7950
-         TabIndex        =   21
-         Top             =   60
-         Width           =   1215
-      End
+      Height          =   375
+      Left            =   7845
+      TabIndex        =   14
+      Top             =   7545
+      Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   8310
+      Left            =   9090
       TabIndex        =   19
-      Top             =   7140
+      Top             =   7515
       Visible         =   0   'False
       Width           =   1035
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   5580
       Left            =   240
-      TabIndex        =   22
-      Top             =   1320
-      Width           =   9135
-      _ExtentX        =   16113
+      TabIndex        =   20
+      Top             =   1725
+      Width           =   9900
+      _ExtentX        =   17463
       _ExtentY        =   9843
       _Version        =   393216
       Style           =   1
@@ -262,8 +379,8 @@ Begin VB.Form frmAPOMtoQua
       TabHeight       =   520
       ShowFocusRect   =   0   'False
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -337,25 +454,34 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.Frame Frame4 
          Caption         =   "Total Aportación"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1065
          Left            =   5610
-         TabIndex        =   44
+         TabIndex        =   42
          Top             =   2970
-         Width           =   3165
+         Width           =   3525
          Begin VB.TextBox Text1 
             Alignment       =   2  'Center
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   7
-            Left            =   1470
+            Left            =   1935
             MaxLength       =   13
             TabIndex        =   12
             Tag             =   "Importe Aportación|N|N|||raporhco|impaport|##,###,##0.00||"
@@ -365,9 +491,18 @@ Begin VB.Form frmAPOMtoQua
          End
          Begin VB.Label Label11 
             Caption         =   "Importe"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
-            Left            =   540
-            TabIndex        =   45
+            Left            =   360
+            TabIndex        =   43
             Top             =   510
             Width           =   825
          End
@@ -375,95 +510,131 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.Frame Frame3 
          Caption         =   "Superficie"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1065
          Left            =   120
-         TabIndex        =   39
+         TabIndex        =   37
          Top             =   2970
-         Width           =   4875
+         Width           =   5370
          Begin VB.TextBox Text2 
             Alignment       =   1  'Right Justify
             BackColor       =   &H00FFFF80&
             Enabled         =   0   'False
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   5
-            Left            =   3120
+            Left            =   3660
             MaxLength       =   10
-            TabIndex        =   40
+            TabIndex        =   38
             Text            =   "1234567890"
             Top             =   510
             Width           =   1305
          End
          Begin VB.TextBox Text1 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   1
-            Left            =   1245
+            Left            =   1470
             MaxLength       =   10
             TabIndex        =   11
             Tag             =   "Sup.Coop.|N|N|0|9999.9999|raporhco|supcoope|###0.0000||"
             Text            =   "1234567890"
             Top             =   510
-            Width           =   1245
+            Width           =   1335
          End
          Begin VB.Label Label16 
             Caption         =   "Hanegadas"
             BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
-               Weight          =   700
+               Weight          =   400
                Underline       =   0   'False
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            ForeColor       =   &H000040C0&
+            ForeColor       =   &H00800000&
             Height          =   255
-            Left            =   3120
-            TabIndex        =   43
+            Left            =   3660
+            TabIndex        =   41
             Top             =   240
-            Width           =   1155
+            Width           =   1290
          End
          Begin VB.Label Label7 
             Caption         =   "Hectáreas"
             BeginProperty Font 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
-               Weight          =   700
+               Weight          =   400
                Underline       =   0   'False
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            ForeColor       =   &H000040C0&
+            ForeColor       =   &H00800000&
             Height          =   255
-            Left            =   1245
-            TabIndex        =   42
+            Left            =   1515
+            TabIndex        =   40
             Top             =   240
             Width           =   1395
          End
          Begin VB.Label Label8 
             Caption         =   "Cooperativa"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Left            =   180
-            TabIndex        =   41
+            TabIndex        =   39
             Top             =   540
-            Width           =   1215
+            Width           =   1395
          End
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   6
          TabIndex        =   8
          Tag             =   "Parcela|N|S|||raporhco|parcela|000000|N|"
@@ -473,9 +644,18 @@ Begin VB.Form frmAPOMtoQua
       End
       Begin VB.TextBox Text1 
          Alignment       =   2  'Center
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   6
-         Left            =   3270
+         Left            =   3810
          MaxLength       =   4
          TabIndex        =   9
          Tag             =   "Ejercicio|N|N|||raporhco|ejercicio|0000|N|"
@@ -485,9 +665,18 @@ Begin VB.Form frmAPOMtoQua
       End
       Begin VB.TextBox Text1 
          Alignment       =   2  'Center
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   9
-         Left            =   7560
+         Left            =   8100
          MaxLength       =   4
          TabIndex        =   10
          Tag             =   "Año Plantacion|N|S|||raporhco|anoplant|0000||"
@@ -498,30 +687,57 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   3270
+         Left            =   3810
          MaxLength       =   40
-         TabIndex        =   32
+         TabIndex        =   30
          Top             =   2100
          Width           =   5175
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   8
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   8
          TabIndex        =   5
          Tag             =   "Campo|N|S|1|99999999|raporhco|codcampo|00000000||"
          Top             =   1320
-         Width           =   840
+         Width           =   1155
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   6
          TabIndex        =   3
          Tag             =   "Variedad|N|N|||raporhco|codvarie|000000||"
@@ -531,15 +747,33 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
-         Left            =   2280
+         Left            =   2550
          MaxLength       =   30
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   510
-         Width           =   6165
+         Width           =   6435
       End
       Begin VB.TextBox Text1 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   825
          Index           =   11
          Left            =   210
@@ -549,13 +783,22 @@ Begin VB.Form frmAPOMtoQua
          TabIndex        =   13
          Tag             =   "Observaciones|T|S|||raporhco|observac|||"
          Top             =   4440
-         Width           =   8535
+         Width           =   8670
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   3
          TabIndex        =   7
          Tag             =   "Polígono|N|N|||raporhco|poligono||N|"
@@ -566,19 +809,37 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   2340
+         Left            =   2610
          MaxLength       =   40
-         TabIndex        =   25
+         TabIndex        =   23
          Top             =   1710
-         Width           =   6105
+         Width           =   6375
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   4
          TabIndex        =   6
          Tag             =   "Partida|N|N|1|9999|raporhco|codparti|0000||"
@@ -588,19 +849,37 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   2280
+         Left            =   2550
          MaxLength       =   30
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   915
-         Width           =   6165
+         Width           =   6435
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   1380
+         Left            =   1650
          MaxLength       =   6
          TabIndex        =   4
          Tag             =   "Socio|N|N|1|999999|raporhco|codsocio|000000||"
@@ -609,72 +888,126 @@ Begin VB.Form frmAPOMtoQua
       End
       Begin VB.Label Label6 
          Caption         =   "Parcela"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   37
+         Left            =   195
+         TabIndex        =   35
          Top             =   2505
          Width           =   810
       End
       Begin VB.Label Label9 
          Caption         =   "Ejercicio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   2460
-         TabIndex        =   36
+         Left            =   2775
+         TabIndex        =   34
          Top             =   2505
          Width           =   810
       End
       Begin VB.Label Label17 
          Caption         =   "Año plantación"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   6180
-         TabIndex        =   35
+         Left            =   5910
+         TabIndex        =   33
          Top             =   2520
-         Width           =   1185
+         Width           =   1635
       End
       Begin VB.Label Label15 
          Caption         =   "Población"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   2460
-         TabIndex        =   33
+         Left            =   2775
+         TabIndex        =   31
          Top             =   2100
-         Width           =   810
+         Width           =   945
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   3
-         Left            =   1080
+         Left            =   1350
          ToolTipText     =   "Buscar Campo"
          Top             =   1305
          Width           =   240
       End
       Begin VB.Label Label13 
          Caption         =   "Campo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   31
+         Left            =   195
+         TabIndex        =   29
          Top             =   1305
          Width           =   690
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   2
-         Left            =   1080
+         Left            =   1350
          ToolTipText     =   "Buscar Variedad"
          Top             =   525
          Width           =   240
       End
       Begin VB.Label Label2 
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   30
+         Left            =   195
+         TabIndex        =   28
          Top             =   525
-         Width           =   690
+         Width           =   870
       End
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   1500
+         Left            =   1770
          Tag             =   "-1"
          ToolTipText     =   "Zoom descripción"
          Top             =   4110
@@ -682,32 +1015,59 @@ Begin VB.Form frmAPOMtoQua
       End
       Begin VB.Label Label29 
          Caption         =   "Observaciones"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   28
+         TabIndex        =   26
          Top             =   4140
-         Width           =   1140
+         Width           =   1455
       End
       Begin VB.Label Label3 
          Caption         =   "Polígono"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   27
+         Left            =   195
+         TabIndex        =   25
          Top             =   2085
          Width           =   810
       End
       Begin VB.Label Label4 
          Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   26
+         Left            =   195
+         TabIndex        =   24
          Top             =   930
          Width           =   690
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   1080
+         Left            =   1350
          ToolTipText     =   "Buscar Partida"
          Top             =   1710
          Width           =   240
@@ -715,16 +1075,25 @@ Begin VB.Form frmAPOMtoQua
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   1080
+         Left            =   1350
          ToolTipText     =   "Buscar Socio"
          Top             =   930
          Width           =   240
       End
       Begin VB.Label Label5 
          Caption         =   "Partida"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   240
-         TabIndex        =   23
+         Left            =   195
+         TabIndex        =   21
          Top             =   1710
          Width           =   735
       End
@@ -776,8 +1145,29 @@ Begin VB.Form frmAPOMtoQua
       EndProperty
       _Version        =   393216
    End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   9720
+      TabIndex        =   51
+      Top             =   135
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -922,11 +1312,11 @@ Private HaDevueltoDatos As Boolean
 
 Dim btnPrimero As Byte 'Variable que indica el nº del Botó PrimerRegistro en la Toolbar1
 'Dim CadAncho() As Boolean  'array, per a quan cridem al form de llínies
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
 Dim CadB As String
 
 Dim vSeccion As CSeccion
-Dim b As Boolean
+Dim B As Boolean
 
 Private BuscaChekc As String
 Private NumCajas As Currency
@@ -971,7 +1361,7 @@ Private Sub cmdAceptar_Click()
             
         Case 3 'INSERTAR
             
-            If DatosOk Then InsertarCabecera
+            If DatosOK Then InsertarCabecera
             
 '            If DatosOk Then
 '                If InsertarDesdeForm(Me) Then
@@ -986,7 +1376,7 @@ Private Sub cmdAceptar_Click()
 '            End If
             
         Case 4  'MODIFICAR
-            If DatosOk Then
+            If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
                     PosicionarData
@@ -1007,16 +1397,16 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        Sql = CadenaInsertarDesdeForm(Me)
-        If Sql <> "" Then
-            If InsertarOferta(Sql, vTipoMov) Then
+        SQL = CadenaInsertarDesdeForm(Me)
+        If SQL <> "" Then
+            If InsertarOferta(SQL, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                 PonerCadenaBusqueda
                 PonerModo 2
@@ -1101,7 +1491,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
 
     PrimeraVez = True
     
@@ -1111,41 +1501,77 @@ Dim i As Integer
     
     ' ICONETS DE LA BARRA
     btnPrimero = 19 'index del botó "primero"
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        'l'1 i el 2 son separadors
+'        .Buttons(3).Image = 1   'Buscar
+'        .Buttons(4).Image = 2   'Totss
+'        'el 5 i el 6 son separadors
+'        .Buttons(7).Image = 3   'Insertar
+'        .Buttons(8).Image = 4   'Modificar
+'        .Buttons(9).Image = 5   'Borrar
+'        'el 10 i el 11 son separadors
+'        .Buttons(11).Image = 10  'Imprimir
+'        .Buttons(12).Image = 32  'Actualizacion de aportaciones
+'        .Buttons(13).Image = 20  'Borrado Masivo
+'        .Buttons(14).Image = 33  'Integracion Tesoreria
+'        .Buttons(15).Image = 26  'Devolucion de aportaciones
+'
+'        .Buttons(16).Image = 11  'Eixir
+'        'el 13 i el 14 son separadors
+'        .Buttons(btnPrimero).Image = 6  'Primer
+'        .Buttons(btnPrimero + 1).Image = 7 'Anterior
+'        .Buttons(btnPrimero + 2).Image = 8 'Següent
+'        .Buttons(btnPrimero + 3).Image = 9 'Últim
+'    End With
+
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         'l'1 i el 2 son separadors
-        .Buttons(3).Image = 1   'Buscar
-        .Buttons(4).Image = 2   'Totss
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
         'el 5 i el 6 son separadors
-        .Buttons(7).Image = 3   'Insertar
-        .Buttons(8).Image = 4   'Modificar
-        .Buttons(9).Image = 5   'Borrar
-        'el 10 i el 11 son separadors
-        .Buttons(11).Image = 10  'Imprimir
-        .Buttons(12).Image = 32  'Actualizacion de aportaciones
-        .Buttons(13).Image = 20  'Borrado Masivo
-        .Buttons(14).Image = 33  'Integracion Tesoreria
-        .Buttons(15).Image = 26  'Devolucion de aportaciones
-        
-        .Buttons(16).Image = 11  'Eixir
-        'el 13 i el 14 son separadors
-        .Buttons(btnPrimero).Image = 6  'Primer
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Següent
-        .Buttons(btnPrimero + 3).Image = 9 'Últim
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
     
+    With Me.Toolbar5
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 32  'Actualizacion de aportaciones
+        .Buttons(2).Image = 20  'Borrado Masivo
+        .Buttons(3).Image = 33  'Integracion Tesoreria
+        .Buttons(4).Image = 26  'Devolucion de aportaciones
+    End With
+    
+    ' desplazamiento
+    With Me.ToolbarDes
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 6
+        .Buttons(2).Image = 7
+        .Buttons(3).Image = 8
+        .Buttons(4).Image = 9
+    End With
+
     
     'cargar IMAGES de busqueda
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
     
-    For i = 0 To Me.imgZoom.Count - 1
-        Me.imgZoom(i).Picture = frmPpal.imgListImages16.ListImages(3).Picture
-    Next i
+    For I = 0 To Me.imgZoom.Count - 1
+        Me.imgZoom(I).Picture = frmPpal.imgListImages16.ListImages(3).Picture
+    Next I
 
     ' *** si n'hi han tabs, per a que per defecte sempre es pose al 1r***
     Me.SSTab1.Tab = 0
@@ -1184,7 +1610,7 @@ End Sub
 
 
 Private Sub LimpiarCampos()
-Dim i As Integer
+Dim I As Integer
 
     On Error Resume Next
     
@@ -1204,8 +1630,8 @@ End Sub
 '   En PONERMODO s'habiliten, o no, els diversos camps del
 '   formulari en funció del modo en que anem a treballar
 Private Sub PonerModo(Kmodo As Byte, Optional indFrame As Integer)
-Dim i As Integer, NumReg As Byte
-Dim b As Boolean
+Dim I As Integer, NumReg As Byte
+Dim B As Boolean
 
     On Error GoTo EPonerModo
  
@@ -1226,49 +1652,50 @@ Dim b As Boolean
     End If
     
     '=======================================
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Posar Fleches de desplasament visibles
     NumReg = 1
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, b, NumReg
+'    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     '---------------------------------------------
-    b = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = b
-    cmdAceptar.visible = b
+    B = Modo <> 0 And Modo <> 2
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
     
-    b = (Modo <> 1)
+    B = (Modo <> 1)
     
     'Campos Nº Aportacion bloqueado y en azul
-    BloquearTxt Text1(0), b, True
+    BloquearTxt Text1(0), B, True
     
 ' cambio la siguiente expresion por la de abajo
 '   BloquearText1 Me, Modo
-    For i = 1 To Text1.Count - 1
-        BloquearTxt Text1(i), Not (Modo = 1 Or Modo = 3 Or Modo = 4)
-    Next i
+    For I = 1 To Text1.Count - 1
+        BloquearTxt Text1(I), Not (Modo = 1 Or Modo = 3 Or Modo = 4)
+    Next I
     
-    For i = 0 To Check1.Count - 1
-        Me.Check1(i).Enabled = (Modo = 1) Or (Modo = 4 And vUsu.Nivel = 0)
-    Next i
+    For I = 0 To Check1.Count - 1
+        Me.Check1(I).Enabled = (Modo = 1) Or (Modo = 4 And vUsu.Nivel = 0)
+    Next I
     
     ' **** si n'hi han imagens de buscar en la capçalera *****
     BloquearImgBuscar Me, Modo, ModoLineas
-    For i = 0 To imgFec.Count - 1
-        BloquearImgFec Me, i, Modo
-    Next i
+    For I = 0 To imgFec.Count - 1
+        BloquearImgFec Me, I, Modo
+    Next I
     BloquearImgZoom Me, Modo, ModoLineas
     
     chkVistaPrevia(0).Enabled = (Modo <= 2)
     
     PonerLongCampos
 
-    b = (Modo = 4) Or (Modo = 2)
+    B = (Modo = 4) Or (Modo = 2)
     
 
 '     '-----------------------------
@@ -1279,6 +1706,13 @@ Dim b As Boolean
 EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
+
+Private Sub DesplazamientoVisible(bol As Boolean)
+    FrameDesplazamiento.visible = bol
+    FrameDesplazamiento.Enabled = bol
+End Sub
+
+
 
 Private Sub PonerLongCampos()
 'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
@@ -1295,40 +1729,40 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu(Modo)
 'Actives unes Opcions de Menú i Toolbar según el modo en que estem
-Dim b As Boolean, bAux As Boolean
-Dim i As Byte
+Dim B As Boolean, bAux As Boolean
+Dim I As Byte
     
     'Barra de CAPÇALERA
     '------------------------------------------
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
-    b = (Modo = 2 Or Modo = 0)
+    B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnNuevo.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnNuevo.Enabled = B
     
-    b = (Modo = 2 And Data1.Recordset.RecordCount > 0) 'And Not DeConsulta
+    B = (Modo = 2 And Data1.Recordset.RecordCount > 0) 'And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(9).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = b Or (Modo = 0)
+    Toolbar1.Buttons(8).Enabled = B Or (Modo = 0)
     
     'Actualizacion de aportaciones
-    Toolbar1.Buttons(12).Enabled = b Or (Modo = 0)
+    Toolbar5.Buttons(1).Enabled = B Or (Modo = 0)
     'Borrado Masivo de aportaciones
-    Toolbar1.Buttons(13).Enabled = b Or (Modo = 0)
+    Toolbar5.Buttons(2).Enabled = B Or (Modo = 0)
     'Integracion de aportaciones en tesoreria
-    Toolbar1.Buttons(14).Enabled = b Or (Modo = 0)
+    Toolbar5.Buttons(3).Enabled = B Or (Modo = 0)
     
        
 End Sub
@@ -1336,7 +1770,7 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 
@@ -1363,9 +1797,9 @@ Private Sub frmB_Selecionado(CadenaDevuelta As String)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-Dim indice As Byte
-    indice = CByte(Me.imgFec(0).Tag)
-    Text1(indice).Text = Format(vFecha, "dd/mm/yyyy")
+Dim Indice As Byte
+    Indice = CByte(Me.imgFec(0).Tag)
+    Text1(Indice).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 Private Sub frmCam_DatoSeleccionado(CadenaSeleccion As String)
@@ -1399,7 +1833,7 @@ Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
-     Text1(indice).Text = vCampo
+     Text1(Indice).Text = vCampo
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -1433,18 +1867,18 @@ Private Sub imgFec_Click(Index As Integer)
        frmC.NovaData = Now
        Select Case Index
             Case 0
-                indice = 10
+                Indice = 10
        End Select
        
-       Me.imgFec(0).Tag = indice
+       Me.imgFec(0).Tag = Indice
        
-       PonerFormatoFecha Text1(indice)
-       If Text1(indice).Text <> "" Then frmC.NovaData = CDate(Text1(indice).Text)
+       PonerFormatoFecha Text1(Indice)
+       If Text1(Indice).Text <> "" Then frmC.NovaData = CDate(Text1(Indice).Text)
     
        Screen.MousePointer = vbDefault
        frmC.Show vbModal
        Set frmC = Nothing
-       PonerFoco Text1(indice)
+       PonerFoco Text1(Indice)
     
 End Sub
 
@@ -1453,13 +1887,13 @@ Private Sub imgZoom_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            indice = 11
+            Indice = 11
             frmZ.pTitulo = "Observaciones de la Aportación"
-            frmZ.pValor = Text1(indice).Text
+            frmZ.pValor = Text1(Indice).Text
             frmZ.pModo = Modo
             frmZ.Show vbModal
             Set frmZ = Nothing
-            PonerFoco Text1(indice)
+            PonerFoco Text1(Indice)
     End Select
 
 End Sub
@@ -1520,30 +1954,29 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 3  'Búscar
+        Case 5  'Búscar
            mnBuscar_Click
-        Case 4  'Tots
+        Case 6  'Tots
             mnVerTodos_Click
-        Case 7  'Nou
+        Case 1  'Nou
             mnNuevo_Click
-        Case 8  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 9  'Borrar
+        Case 3  'Borrar
             mnEliminar_Click
-        Case 11 'Imprimir
-'            AbrirListado (10)
+        Case 8 'Imprimir
             mnImprimir_Click
-        Case 12 ' actualizacion de aportaciones
-            mnCalculo_Click
-        Case 13 ' borrado masivo
-            mnBorrado_Click
-        Case 14 ' Integracion a tesoreria
-            mnIntTesoreria_Click
-        Case 15 ' devolucion de aportaciones
-            mnDevolucion_Click
-        Case 16   'Eixir
-            mnSalir_Click
-        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
+'        Case 12 ' actualizacion de aportaciones
+'            mnCalculo_Click
+'        Case 13 ' borrado masivo
+'            mnBorrado_Click
+'        Case 14 ' Integracion a tesoreria
+'            mnIntTesoreria_Click
+'        Case 15 ' devolucion de aportaciones
+'            mnDevolucion_Click
+'        Case 16   'Eixir
+'            mnSalir_Click
+'        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
             Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
@@ -1554,7 +1987,7 @@ End Sub
 
 
 Private Sub BotonBuscar()
-Dim i As Integer
+Dim I As Integer
 ' ***** Si la clau primaria de la capçalera no es Text1(0), canviar-ho en <=== *****
     If Modo <> 1 Then
         LimpiarCampos
@@ -1591,27 +2024,27 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim Cad As String
+    Dim cad As String
     Dim NombreTabla1 As String
         
     'Cridem al form
     ' **************** arreglar-ho per a vore lo que es desije ****************
     ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    Cad = ""
-    Cad = Cad & "Aportacion|raporhco.numaport|N||13·"
-    Cad = Cad & "Fecha|raporhco.fecaport|F||14·"
-    Cad = Cad & "Socio|raporhco.codsocio|N|000000|9·"
-    Cad = Cad & "Nombre|rsocios.nomsocio|T||29·"
-    Cad = Cad & "Codigo|raporhco.codvarie|T|000000|10·"
-    Cad = Cad & "Variedad|variedades.nomvarie|T||13·"
-    Cad = Cad & "Campo|raporhco.codcampo|N|00000000|12·"
+    cad = ""
+    cad = cad & "Aportacion|raporhco.numaport|N||13·"
+    cad = cad & "Fecha|raporhco.fecaport|F||14·"
+    cad = cad & "Socio|raporhco.codsocio|N|000000|9·"
+    cad = cad & "Nombre|rsocios.nomsocio|T||29·"
+    cad = cad & "Codigo|raporhco.codvarie|T|000000|10·"
+    cad = cad & "Variedad|variedades.nomvarie|T||13·"
+    cad = cad & "Campo|raporhco.codcampo|N|00000000|12·"
     
     NombreTabla1 = "(raporhco inner join rsocios on raporhco.codsocio = rsocios.codsocio) INNER JOIN variedades ON raporhco.codvarie = variedades.codvarie "
     
-    If Cad <> "" Then
+    If cad <> "" Then
         Screen.MousePointer = vbHourglass
         Set frmB = New frmBuscaGrid
-        frmB.vCampos = Cad
+        frmB.vCampos = cad
         frmB.vtabla = NombreTabla1
         frmB.vSQL = CadB
         HaDevueltoDatos = False
@@ -1634,9 +2067,9 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
+Dim cad As String
 Dim Aux As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 
     If Data1.Recordset.EOF Then
@@ -1644,18 +2077,18 @@ Dim J As Integer
         Exit Sub
     End If
     
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & Text1(J).Text & "|"
+            cad = cad & Text1(J).Text & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1751,7 +2184,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo EEliminar
 
@@ -1764,13 +2197,13 @@ Dim Cad As String
     ' ***************************************************************************
 
     ' *************** canviar la pregunta ****************
-    Cad = "¿Seguro que desea eliminar la Aportación?"
-    Cad = Cad & vbCrLf & "Número: " & Data1.Recordset.Fields(0)
-    Cad = Cad & vbCrLf & "Fecha: " & DBLet(Data1.Recordset!fecaport, "F")
+    cad = "¿Seguro que desea eliminar la Aportación?"
+    cad = cad & vbCrLf & "Número: " & Data1.Recordset.Fields(0)
+    cad = cad & vbCrLf & "Fecha: " & DBLet(Data1.Recordset!fecaport, "F")
     ' **************************************************************************
     
     'borrem
-    If MsgBox(Cad, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminar
         Screen.MousePointer = vbHourglass
         NumRegElim = Data1.Recordset.AbsolutePosition
@@ -1795,7 +2228,7 @@ End Sub
 
 
 Private Sub PonerCampos()
-Dim i As Integer
+Dim I As Integer
 Dim CodPobla As String, desPobla As String
 Dim CPostal As String, desProvi As String, desPais As String
 
@@ -1817,7 +2250,7 @@ End Sub
 
 
 Private Sub cmdCancelar_Click()
-Dim i As Integer
+Dim I As Integer
 Dim V
 
     Select Case Modo
@@ -1845,39 +2278,39 @@ Dim V
 End Sub
 
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim Sql As String
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim SQL As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
 
-    DatosOk = False
+    DatosOK = False
     
     
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
     
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el nro de aportacion
-        If ExisteCP(Text1(0)) Then b = False
+        If ExisteCP(Text1(0)) Then B = False
     End If
     
-    If b And (Modo = 3 Or Modo = 4) Then
-        Sql = "select count(*) from raporhco where codsocio= " & Text1(2).Text & " and codvarie = " & Text1(12).Text
-        Sql = Sql & " and codcampo = " & Text1(8).Text & " and fecaport = " & DBSet(Text1(10).Text, "F")
+    If B And (Modo = 3 Or Modo = 4) Then
+        SQL = "select count(*) from raporhco where codsocio= " & Text1(2).Text & " and codvarie = " & Text1(12).Text
+        SQL = SQL & " and codcampo = " & Text1(8).Text & " and fecaport = " & DBSet(Text1(10).Text, "F")
         
-        If Modo = 4 Then Sql = Sql & " and numaport <> " & DBSet(Text1(0).Text, "N")
+        If Modo = 4 Then SQL = SQL & " and numaport <> " & DBSet(Text1(0).Text, "N")
         
-        If TotalRegistros(Sql) <> 0 Then
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "Existe ya una aportación para ese socio, variedad, campo y fecha. Revise.", vbExclamation
             PonerFoco Text1(10)
-            b = False
+            B = False
         End If
     End If
     ' ************************************************************************************
-    DatosOk = b
+    DatosOK = B
     
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
@@ -1885,15 +2318,15 @@ End Function
 
 
 Private Sub PosicionarData()
-Dim Cad As String, Indicador As String
+Dim cad As String, Indicador As String
 
     ' *** canviar-ho per tota la PK de la capçalera, no llevar els () ***
-    Cad = "(numaport='" & Text1(0).Text & "')"
+    cad = "(numaport='" & Text1(0).Text & "')"
     ' ***************************************
     
     ' *** gastar SituarData o SituarDataMULTI depenent de si la PK es simple o composta ***
     'If SituarDataMULTI(Data1, cad, Indicador) Then
-    If SituarData(Data1, Cad, Indicador) Then
+    If SituarData(Data1, cad, Indicador) Then
         If ModoLineas <> 1 Then PonerModo 2
         lblIndicador.Caption = Indicador
     Else
@@ -1941,7 +2374,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -1979,9 +2412,9 @@ Dim Sql As String
                     PonerFoco Text1(Index)
                 Else
                 
-                    Sql = "select count(*) from rcampos where codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
+                    SQL = "select count(*) from rcampos where codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
                 
-                    If TotalRegistros(Sql) > 0 Then
+                    If TotalRegistros(SQL) > 0 Then
                         Set frmMens = New frmMensajes
                         frmMens.cadWHERE = "and rcampos.codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
                         frmMens.campo = Text1(Index).Text
@@ -2065,7 +2498,7 @@ Dim Sql As String
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -2075,11 +2508,11 @@ Dim Rs As ADODB.Recordset
     
     If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    Cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rcampos.poligono, rcampos.parcela, rcampos.supcoope, rpueblos.despobla, rcampos.anoplant, rcampos.codsocio, rcampos.codvarie "
     Cad1 = Cad1 & " from rcampos, rpartida, rpueblos "
-    Cad1 = Cad1 & " where " & Cad
+    Cad1 = Cad1 & " where " & cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla"
      
@@ -2128,9 +2561,9 @@ Dim Rs As ADODB.Recordset
     
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -2162,16 +2595,16 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 ' **** si n'hi han camps de descripció a la capçalera ****
 Private Sub PosarDescripcions()
 Dim NomEmple As String
 Dim CodPobla As String
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EPosarDescripcions
 
@@ -2181,10 +2614,10 @@ Dim Sql As String
         
         
     If Text1(3).Text <> "" Then
-        Sql = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
-        Sql = Sql & " and rpueblos.codpobla = rpartida.codpobla "
+        SQL = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
+        SQL = SQL & " and rpueblos.codpobla = rpartida.codpobla "
         
-        Text2(1).Text = DevuelveValor(Sql) ' nombre de poblacion
+        Text2(1).Text = DevuelveValor(SQL) ' nombre de poblacion
     
     End If
     
@@ -2303,13 +2736,13 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = " numaport= " & Text1(0).Text
-    If conWhere Then Sql = " WHERE " & Sql
-    ObtenerWhereCP = Sql
+    SQL = " numaport= " & Text1(0).Text
+    If conWhere Then SQL = " WHERE " & SQL
+    ObtenerWhereCP = SQL
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -2325,40 +2758,40 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
-Dim Tabla As String
+Dim SQL As String
+Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
-            Sql = "select raporhco_cooprop.hidrante, raporhco_cooprop.numlinea, raporhco_cooprop.codsocio, rsocios.nomsocio, "
-            Sql = Sql & " raporhco_cooprop.porcentaje "
-            Sql = Sql & " FROM raporhco_cooprop INNER JOIN rsocios ON raporhco_cooprop.codsocio = rsocios.codsocio "
-            Sql = Sql & " and raporhco_cooprop.codsocio = rsocios.codsocio "
+            SQL = "select raporhco_cooprop.hidrante, raporhco_cooprop.numlinea, raporhco_cooprop.codsocio, rsocios.nomsocio, "
+            SQL = SQL & " raporhco_cooprop.porcentaje "
+            SQL = SQL & " FROM raporhco_cooprop INNER JOIN rsocios ON raporhco_cooprop.codsocio = rsocios.codsocio "
+            SQL = SQL & " and raporhco_cooprop.codsocio = rsocios.codsocio "
             If enlaza Then
-                Sql = Sql & " WHERE raporhco_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
+                SQL = SQL & " WHERE raporhco_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                Sql = Sql & " WHERE raporhco_cooprop.hidrante is null"
+                SQL = SQL & " WHERE raporhco_cooprop.hidrante is null"
             End If
-            Sql = Sql & " ORDER BY raporhco_cooprop.codsocio "
+            SQL = SQL & " ORDER BY raporhco_cooprop.codsocio "
         
         Case 1
-            Sql = "select raporhco_campos.hidrante, raporhco_campos.numlinea, raporhco_campos.codcampo, rpartida.nomparti, "
-            Sql = Sql & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
-            Sql = Sql & " FROM ((raporhco_campos INNER JOIN rcampos ON raporhco_campos.codcampo = rcampos.codcampo)"
-            Sql = Sql & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
-            Sql = Sql & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
+            SQL = "select raporhco_campos.hidrante, raporhco_campos.numlinea, raporhco_campos.codcampo, rpartida.nomparti, "
+            SQL = SQL & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
+            SQL = SQL & " FROM ((raporhco_campos INNER JOIN rcampos ON raporhco_campos.codcampo = rcampos.codcampo)"
+            SQL = SQL & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
+            SQL = SQL & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
             If enlaza Then
-                Sql = Sql & " WHERE raporhco_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
+                SQL = SQL & " WHERE raporhco_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                Sql = Sql & " WHERE raporhco_campos.hidrante is null"
+                SQL = SQL & " WHERE raporhco_campos.hidrante is null"
             End If
-            Sql = Sql & " ORDER BY raporhco_campos.codcampo "
+            SQL = SQL & " ORDER BY raporhco_campos.codcampo "
        
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -2379,3 +2812,19 @@ Private Function SepuedeBorrar(ByRef Index As Integer) As Boolean
     SepuedeBorrar = True
 End Function
 
+Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1 ' actualizacion de aportaciones
+            mnCalculo_Click
+        Case 2 ' borrado masivo
+            mnBorrado_Click
+        Case 3 ' Integracion a tesoreria
+            mnIntTesoreria_Click
+        Case 4 ' devolucion de aportaciones
+            mnDevolucion_Click
+    End Select
+End Sub
+
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
+End Sub

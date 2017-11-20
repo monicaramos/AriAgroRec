@@ -1286,7 +1286,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Left            =   5295
          TabIndex        =   65
-         Top             =   1890
+         Top             =   1935
          Width           =   705
       End
       Begin VB.Label Label8 
@@ -1303,7 +1303,7 @@ Begin VB.Form frmAlmzEntradas
          Height          =   255
          Left            =   3840
          TabIndex        =   64
-         Top             =   1890
+         Top             =   1935
          Width           =   705
       End
       Begin VB.Label Label7 

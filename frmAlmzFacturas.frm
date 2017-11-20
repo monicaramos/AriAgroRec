@@ -5,7 +5,7 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmAlmzFacturas 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Facturas Almazara"
-   ClientHeight    =   7275
+   ClientHeight    =   7200
    ClientLeft      =   45
    ClientTop       =   4035
    ClientWidth     =   9750
@@ -13,20 +13,20 @@ Begin VB.Form frmAlmzFacturas
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7275
+   ScaleHeight     =   7200
    ScaleWidth      =   9750
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   90
-      TabIndex        =   52
+      TabIndex        =   51
       Top             =   45
       Width           =   2055
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   53
+         TabIndex        =   52
          Top             =   180
          Width           =   1695
          _ExtentX        =   2990
@@ -90,13 +90,13 @@ Begin VB.Form frmAlmzFacturas
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
       Left            =   2190
-      TabIndex        =   50
+      TabIndex        =   49
       Top             =   45
       Width           =   2415
       Begin MSComctlLib.Toolbar ToolbarDes 
          Height          =   330
          Left            =   240
-         TabIndex        =   51
+         TabIndex        =   50
          Top             =   180
          Width           =   1965
          _ExtentX        =   3466
@@ -140,7 +140,7 @@ Begin VB.Form frmAlmzFacturas
       EndProperty
       Height          =   300
       Left            =   7110
-      TabIndex        =   49
+      TabIndex        =   48
       Top             =   270
       Width           =   1605
    End
@@ -148,7 +148,7 @@ Begin VB.Form frmAlmzFacturas
       BorderStyle     =   0  'None
       Height          =   2955
       Left            =   30
-      TabIndex        =   32
+      TabIndex        =   31
       Top             =   855
       Width           =   9630
       Begin VB.ComboBox Combo1 
@@ -269,7 +269,7 @@ Begin VB.Form frmAlmzFacturas
          Left            =   2655
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   40
+         TabIndex        =   39
          Text            =   "Text2"
          Top             =   1875
          Width           =   2190
@@ -494,7 +494,7 @@ Begin VB.Form frmAlmzFacturas
          Left            =   1080
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   33
+         TabIndex        =   32
          Text            =   "Text2"
          Top             =   900
          Width           =   3870
@@ -513,7 +513,7 @@ Begin VB.Form frmAlmzFacturas
          ForeColor       =   &H00C00000&
          Height          =   1545
          Left            =   60
-         TabIndex        =   34
+         TabIndex        =   33
          Top             =   1365
          Width           =   9510
          Begin VB.Label Label1 
@@ -530,7 +530,7 @@ Begin VB.Form frmAlmzFacturas
             Height          =   255
             Index           =   10
             Left            =   180
-            TabIndex        =   48
+            TabIndex        =   47
             Top             =   270
             Width           =   1545
          End
@@ -548,7 +548,7 @@ Begin VB.Form frmAlmzFacturas
             Height          =   255
             Index           =   9
             Left            =   7185
-            TabIndex        =   47
+            TabIndex        =   46
             Top             =   270
             Width           =   1815
          End
@@ -566,7 +566,7 @@ Begin VB.Form frmAlmzFacturas
             Height          =   255
             Index           =   7
             Left            =   5715
-            TabIndex        =   46
+            TabIndex        =   45
             Top             =   270
             Width           =   1185
          End
@@ -592,7 +592,7 @@ Begin VB.Form frmAlmzFacturas
             Height          =   255
             Index           =   8
             Left            =   1890
-            TabIndex        =   45
+            TabIndex        =   44
             Top             =   270
             Width           =   330
          End
@@ -609,7 +609,7 @@ Begin VB.Form frmAlmzFacturas
             EndProperty
             Height          =   255
             Left            =   4935
-            TabIndex        =   44
+            TabIndex        =   43
             Top             =   270
             Width           =   630
          End
@@ -626,7 +626,7 @@ Begin VB.Form frmAlmzFacturas
             EndProperty
             Height          =   255
             Left            =   4935
-            TabIndex        =   43
+            TabIndex        =   42
             Top             =   855
             Width           =   675
          End
@@ -643,7 +643,7 @@ Begin VB.Form frmAlmzFacturas
             EndProperty
             Height          =   255
             Left            =   5715
-            TabIndex        =   42
+            TabIndex        =   41
             Top             =   855
             Width           =   1845
          End
@@ -661,7 +661,7 @@ Begin VB.Form frmAlmzFacturas
             Height          =   255
             Index           =   2
             Left            =   180
-            TabIndex        =   41
+            TabIndex        =   40
             Top             =   840
             Width           =   1635
          End
@@ -680,7 +680,7 @@ Begin VB.Form frmAlmzFacturas
          Height          =   255
          Index           =   3
          Left            =   5010
-         TabIndex        =   39
+         TabIndex        =   38
          Top             =   630
          Width           =   945
       End
@@ -698,7 +698,7 @@ Begin VB.Form frmAlmzFacturas
          Height          =   255
          Index           =   1
          Left            =   120
-         TabIndex        =   38
+         TabIndex        =   37
          Top             =   0
          Width           =   945
       End
@@ -716,7 +716,7 @@ Begin VB.Form frmAlmzFacturas
          Height          =   345
          Index           =   29
          Left            =   2685
-         TabIndex        =   37
+         TabIndex        =   36
          Top             =   0
          Width           =   1095
       End
@@ -743,7 +743,7 @@ Begin VB.Form frmAlmzFacturas
          Height          =   255
          Index           =   0
          Left            =   180
-         TabIndex        =   36
+         TabIndex        =   35
          Top             =   630
          Width           =   600
       End
@@ -769,7 +769,7 @@ Begin VB.Form frmAlmzFacturas
          Height          =   255
          Index           =   28
          Left            =   1500
-         TabIndex        =   35
+         TabIndex        =   34
          Top             =   0
          Width           =   1125
       End
@@ -786,7 +786,7 @@ Begin VB.Form frmAlmzFacturas
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00C00000&
-      Height          =   2790
+      Height          =   2700
       Left            =   90
       TabIndex        =   25
       Top             =   3855
@@ -833,7 +833,7 @@ Begin VB.Form frmAlmzFacturas
          Index           =   4
          Left            =   3090
          MaxLength       =   25
-         TabIndex        =   31
+         TabIndex        =   30
          Tag             =   "Num.Linea|N|N|||rlinfactalmz|numlinea|000|S|"
          Text            =   "linea"
          Top             =   1140
@@ -1015,44 +1015,13 @@ Begin VB.Form frmAlmzFacturas
          Visible         =   0   'False
          Width           =   810
       End
-      Begin MSComctlLib.Toolbar ToolAux 
-         Height          =   390
-         Index           =   0
-         Left            =   180
-         TabIndex        =   29
-         Top             =   225
-         Visible         =   0   'False
-         Width           =   1110
-         _ExtentX        =   1958
-         _ExtentY        =   688
-         ButtonWidth     =   609
-         ButtonHeight    =   582
-         AllowCustomize  =   0   'False
-         _Version        =   393216
-         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   3
-            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Nuevo"
-               Object.Tag             =   "2"
-            EndProperty
-            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Modificar"
-               Object.Tag             =   "2"
-            EndProperty
-            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Eliminar"
-               Object.Tag             =   "2"
-            EndProperty
-         EndProperty
-         Enabled         =   0   'False
-      End
       Begin MSDataGridLib.DataGrid DataGrid2 
          Bindings        =   "frmAlmzFacturas.frx":0097
          Height          =   2145
          Left            =   180
-         TabIndex        =   30
-         Top             =   255
-         Width           =   9020
+         TabIndex        =   29
+         Top             =   300
+         Width           =   9015
          _ExtentX        =   15901
          _ExtentY        =   3784
          _Version        =   393216
@@ -1115,13 +1084,52 @@ Begin VB.Form frmAlmzFacturas
             EndProperty
          EndProperty
       End
+      Begin VB.Frame FrameToolAux1 
+         Height          =   645
+         Left            =   180
+         TabIndex        =   54
+         Top             =   225
+         Width           =   1410
+         Begin MSComctlLib.Toolbar ToolAux 
+            Height          =   330
+            Index           =   0
+            Left            =   135
+            TabIndex        =   55
+            Top             =   225
+            Visible         =   0   'False
+            Width           =   1110
+            _ExtentX        =   1958
+            _ExtentY        =   582
+            ButtonWidth     =   609
+            ButtonHeight    =   582
+            AllowCustomize  =   0   'False
+            Style           =   1
+            _Version        =   393216
+            BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+               NumButtons      =   3
+               BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Nuevo"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Modificar"
+                  Object.Tag             =   "2"
+               EndProperty
+               BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+                  Object.ToolTipText     =   "Eliminar"
+                  Object.Tag             =   "2"
+               EndProperty
+            EndProperty
+            Enabled         =   0   'False
+         End
+      End
    End
    Begin VB.Frame Frame1 
       Height          =   475
       Index           =   0
       Left            =   90
       TabIndex        =   23
-      Top             =   6645
+      Top             =   6555
       Width           =   2175
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1157,7 +1165,7 @@ Begin VB.Form frmAlmzFacturas
       Height          =   375
       Left            =   8565
       TabIndex        =   21
-      Top             =   6720
+      Top             =   6675
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1174,7 +1182,7 @@ Begin VB.Form frmAlmzFacturas
       Height          =   375
       Left            =   7365
       TabIndex        =   20
-      Top             =   6750
+      Top             =   6675
       Width           =   1035
    End
    Begin VB.CommandButton cmdRegresar 
@@ -1189,9 +1197,9 @@ Begin VB.Form frmAlmzFacturas
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   8535
+      Left            =   8580
       TabIndex        =   22
-      Top             =   6750
+      Top             =   6675
       Visible         =   0   'False
       Width           =   1035
    End
@@ -1386,7 +1394,7 @@ Begin VB.Form frmAlmzFacturas
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
       Left            =   9105
-      TabIndex        =   54
+      TabIndex        =   53
       Top             =   270
       Width           =   405
       _ExtentX        =   714
@@ -1868,8 +1876,8 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
             For jj = 0 To 8
-                txtAux3(jj).Height = DataGrid2.RowHeight
-                txtAux3(jj).Top = alto - 210
+                txtaux3(jj).Height = DataGrid2.RowHeight
+                txtaux3(jj).Top = alto - 210
 '                txtAux3(jj).visible = b
             Next jj
             
@@ -2852,13 +2860,13 @@ Dim b1 As Boolean
     
     
     For I = 0 To 7
-        BloquearTxt txtAux3(I), True
-        txtAux3(I).visible = False
+        BloquearTxt txtaux3(I), True
+        txtaux3(I).visible = False
     Next I
     For I = 3 To 7
         If I <> 4 Then
-            BloquearTxt txtAux3(I), (Modo <> 1)
-            txtAux3(I).visible = (Modo = 1)
+            BloquearTxt txtaux3(I), (Modo <> 1)
+            txtaux3(I).visible = (Modo = 1)
         End If
     Next I
     
@@ -3604,7 +3612,7 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtAux3(Index), Modo
+    ConseguirFoco txtaux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3616,7 +3624,7 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
 End Sub
 
 Private Sub CargaCombo()
