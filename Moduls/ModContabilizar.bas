@@ -12412,7 +12412,7 @@ Dim CadenaInsertFaclin2 As String
         SQL = SQL & "baseiva1,baseiva2,baseiva3,porciva1,porciva2,porciva3,impoiva1,impoiva2,impoiva3,"
         SQL = SQL & "totalfac,tipoiva1,tipoiva2,tipoiva3, porcrec1, porcrec2, porcrec3, imporec1, imporec2, imporec3, "
         SQL = SQL & "retfaccl, trefaccl, cuereten, fvarcabfact.codforpa, "
-        SQL = SQL & "clientes.nomclien nomsocio,clientes.domclien dirsocio,clientes.pobclien pobsocio,clientes.codpobla codpostal,clientes.proclien prosocio,clientes.cifclien nifsocio "
+        SQL = SQL & "clientes.nomclien nomsocio,clientes.domclien dirsocio,clientes.pobclien pobsocio,clientes.codpobla codpostal,clientes.proclien prosocio,clientes.cifclien nifsocio, clientes.codpaise "
         SQL = SQL & " FROM ((" & "fvarcabfact inner join " & "usuarios.stipom on fvarcabfact.codtipom=usuarios.stipom.codtipom) "
         SQL = SQL & "INNER JOIN clientes ON fvarcabfact.codclien=clientes.codclien) "
         SQL = SQL & " WHERE " & cadWHERE
@@ -12455,7 +12455,30 @@ Dim CadenaInsertFaclin2 As String
                 End If
             End If
             
-            SQL = SQL & "0," & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
+            '[Monica]23/11/2017: vemos si el cliente es intracomunitario
+            If Tipo = 1 Then
+                Dim Intracom As Integer
+                Dim SqlIntra As String
+                
+                Intracom = 0
+                If Not DBSet(Rs!codpaise, "N", "S") = ValorNulo Then
+                    SqlIntra = ""
+                    SqlIntra = DevuelveDesdeBDNew(cAgro, "paises", "intracom", "codpaise", Rs!codpaise, "N")
+                    If SqlIntra <> "" Then Intracom = CInt(SqlIntra)
+                End If
+            
+                SQL = SQL & DBSet(Intracom, "N") & ","
+                If Intracom = 0 Then
+                    SQL = SQL & ValorNulo & ","
+                Else
+                    SQL = SQL & "'E',"
+                End If
+            Else
+                SQL = SQL & "0," & ValorNulo & ","
+            End If
+            
+            
+            SQL = SQL & DBSet(Rs!Codforpa, "N") & "," & DBSet(BaseImp, "N") & "," & ValorNulo & "," & DBSet(IvaImp, "N") & ","
             SQL = SQL & ValorNulo & "," & DBSet(Rs!TotalFac, "N") & ","
             SQL = SQL & DBSet(Rs!retfaccl, "N", "S") & "," & DBSet(Rs!trefaccl, "N", "S") & "," & DBSet(Rs!cuereten, "T", "S") & ","
             If DBLet(Rs!retfaccl, "N") = 0 Then
@@ -12464,11 +12487,23 @@ Dim CadenaInsertFaclin2 As String
                 SQL = SQL & "2,"
             End If
             SQL = SQL & DBSet(Rs!nomsocio, "T") & "," & DBSet(Rs!dirsocio, "T") & "," & DBSet(Rs!pobsocio, "T") & "," & DBSet(Rs!codPostal, "T") & ","
-            SQL = SQL & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T") & ",'ES',1"
+            SQL = SQL & DBSet(Rs!prosocio, "T") & "," & DBSet(Rs!nifSocio, "T")
+            
+            '[Monica]23/11/2017: faltaba ver que si es de cliente el pais depende de la ficha de cliente
+            If Tipo = 1 Then
+                Dim LetraPais As String
+                
+                LetraPais = DevuelveDesdeBDNew(cAgro, "paises", "letraspais", "codpaise", DBLet(Rs!codpaise, "N"), "N")
+                If LetraPais = "" Then LetraPais = "ES"
+            
+                SQL = SQL & "," & DBSet(LetraPais, "T") & ",1"
+            Else
+                SQL = SQL & ",'ES',1"
+            End If
             
             SQL = "(" & SQL & ")"
             
-            Sql2 = "INSERT INTO factcli (numserie,numfactu,fecfactu,fecliqcl,codmacta,anofactu,observa,codconce340,codopera,codforpa,totbases,totbasesret,totivas,"
+            Sql2 = "INSERT INTO factcli (numserie,numfactu,fecfactu,fecliqcl,codmacta,anofactu,observa,codconce340,codopera,codintra,codforpa,totbases,totbasesret,totivas,"
             Sql2 = Sql2 & "totrecargo,totfaccl, retfaccl,trefaccl,cuereten,tiporeten,nommacta,dirdatos,despobla,codpobla,desprovi,nifdatos,"
             Sql2 = Sql2 & "codpais,codagente)"
             Sql2 = Sql2 & " VALUES " & cad

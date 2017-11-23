@@ -2571,9 +2571,10 @@ Private Sub Text1_KeyPress(Index As Integer, KeyAscii As Integer)
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
                 Case 2: KEYBusqueda KeyAscii, 0 'socio
+                Case 12: KEYBusqueda KeyAscii, 2 'variedad
+                Case 8: KEYBusqueda KeyAscii, 3 'campo
                 Case 3: KEYBusqueda KeyAscii, 1 'partida
-                Case 8: KEYFecha KeyAscii, 0 'fecha desde
-                Case 10: KEYFecha KeyAscii, 1 'fecha desde
+                Case 10: KEYFecha KeyAscii, 0 'fecha aportacion
             End Select
         End If
     Else
