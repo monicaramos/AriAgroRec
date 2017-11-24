@@ -7,13 +7,13 @@ Begin VB.Form frmActClasifica
    ClientHeight    =   6375
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6750
+   ClientWidth     =   6915
    Icon            =   "frmActClasifica.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6375
-   ScaleWidth      =   6750
+   ScaleWidth      =   6915
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameEntradasCampo 
@@ -21,7 +21,7 @@ Begin VB.Form frmActClasifica
       Left            =   45
       TabIndex        =   10
       Top             =   45
-      Width           =   6615
+      Width           =   6795
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
          BeginProperty Font 

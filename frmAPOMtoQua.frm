@@ -481,13 +481,13 @@ Begin VB.Form frmAPOMtoQua
             EndProperty
             Height          =   360
             Index           =   7
-            Left            =   1935
+            Left            =   1620
             MaxLength       =   13
             TabIndex        =   12
             Tag             =   "Importe Aportación|N|N|||raporhco|impaport|##,###,##0.00||"
             Text            =   "1234567890123"
             Top             =   480
-            Width           =   1365
+            Width           =   1725
          End
          Begin VB.Label Label11 
             Caption         =   "Importe"
@@ -783,7 +783,7 @@ Begin VB.Form frmAPOMtoQua
          TabIndex        =   13
          Tag             =   "Observaciones|T|S|||raporhco|observac|||"
          Top             =   4440
-         Width           =   8670
+         Width           =   8940
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1274,6 +1274,8 @@ Attribute frmCam.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
 
+Private WithEvents frmApoPrev As frmAPOMtoQuaPrev ' mandabusquedaprevia de aportaciones
+Attribute frmApoPrev.VB_VarHelpID = -1
 
 ' *****************************************************
 Dim CodTipoMov As String
@@ -1774,6 +1776,19 @@ Private Sub Desplazamiento(Index As Integer)
     PonerCampos
 End Sub
 
+Private Sub frmApoPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    
+    If CadenaSeleccion <> "" Then
+        CadB = "numaport = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "N")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+End Sub
+
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
     Dim Aux As String
     
@@ -2024,45 +2039,55 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
-    Dim NombreTabla1 As String
-        
-    'Cridem al form
-    ' **************** arreglar-ho per a vore lo que es desije ****************
-    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & "Aportacion|raporhco.numaport|N||13·"
-    cad = cad & "Fecha|raporhco.fecaport|F||14·"
-    cad = cad & "Socio|raporhco.codsocio|N|000000|9·"
-    cad = cad & "Nombre|rsocios.nomsocio|T||29·"
-    cad = cad & "Codigo|raporhco.codvarie|T|000000|10·"
-    cad = cad & "Variedad|variedades.nomvarie|T||13·"
-    cad = cad & "Campo|raporhco.codcampo|N|00000000|12·"
-    
-    NombreTabla1 = "(raporhco inner join rsocios on raporhco.codsocio = rsocios.codsocio) INNER JOIN variedades ON raporhco.codvarie = variedades.codvarie "
-    
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = NombreTabla1
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-        frmB.vTitulo = "Aportaciones" ' ***** repasa açò: títol de BuscaGrid *****
-        frmB.vSelElem = 0
+'    Dim cad As String
+'    Dim NombreTabla1 As String
+'
+'    'Cridem al form
+'    ' **************** arreglar-ho per a vore lo que es desije ****************
+'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
+'    cad = ""
+'    cad = cad & "Aportacion|raporhco.numaport|N||13·"
+'    cad = cad & "Fecha|raporhco.fecaport|F||14·"
+'    cad = cad & "Socio|raporhco.codsocio|N|000000|9·"
+'    cad = cad & "Nombre|rsocios.nomsocio|T||29·"
+'    cad = cad & "Codigo|raporhco.codvarie|T|000000|10·"
+'    cad = cad & "Variedad|variedades.nomvarie|T||13·"
+'    cad = cad & "Campo|raporhco.codcampo|N|00000000|12·"
+'
+'    NombreTabla1 = "(raporhco inner join rsocios on raporhco.codsocio = rsocios.codsocio) INNER JOIN variedades ON raporhco.codvarie = variedades.codvarie "
+'
+'    If cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vtabla = NombreTabla1
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
+'        frmB.vTitulo = "Aportaciones" ' ***** repasa açò: títol de BuscaGrid *****
+'        frmB.vSelElem = 0
+'
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
+'        'tindrem que tancar el form llançant l'event
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha retornat datos, es a decir NO ha retornat datos
+'            PonerFoco Text1(kCampo)
+'        End If
+'    End If
 
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-        'tindrem que tancar el form llançant l'event
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
+    Set frmApoPrev = New frmAPOMtoQuaPrev
+    
+    frmApoPrev.cWhere = CadB
+    frmApoPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmApoPrev.Show vbModal
+    
+    Set frmApoPrev = Nothing
+
+
 End Sub
 
 
