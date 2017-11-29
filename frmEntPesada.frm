@@ -836,7 +836,7 @@ Begin VB.Form frmEntPesada
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   6630
+         Left            =   6660
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Código Transporte|T|S|||rpesadas|codtrans|||"
@@ -4049,10 +4049,39 @@ Dim Sql As String
     B = CompForm2(Me, 2, "Frame2") ' , 1) 'Comprobar formato datos ok de la cabecera: opcion=1
     If Not B Then Exit Function
     
+        
+    '[Monica]29/11/2017: comprobamos recolectado por y transportado por
+    '                    de momento solo para picassent, deberia generalizarlo
+    If B Then
+        If vParamAplic.Cooperativa = 2 Then
+            If CLng(ComprobarCero(Text1(3).Text)) = 0 And ExistenNotasSinTransportista(Text1(0).Text) Then
+                If MsgBox("Si la pesada está transportada por el socio, no deben existir notas transportadas por la cooperativa. " & vbCrLf & vbCrLf & "¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then B = False
+            End If
+            If CLng(ComprobarCero(Text1(3).Text)) <> 0 And Not ExistenNotasSinTransportista(Text1(0).Text) Then
+                If MsgBox("Si la pesada está transportada por la cooperativa, no deben existir notas transportadas por el socio. " & vbCrLf & vbCrLf & "¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then B = False
+                B = False
+            End If
+        End If
+    End If
+    
     DatosOK = B
+    
 EDatosOK:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Function
+
+
+Private Function ExistenNotasSinTransportista(Pesada As String) As Boolean
+Dim Sql As String
+
+    Sql = "select count(*) from rentradas where nropesada = " & DBSet(Pesada, "N")
+    Sql = Sql & " and (codtrans ='0' or codtrans is null)"
+    
+    ExistenNotasSinTransportista = (TotalRegistros(Sql) <> 0)
+
+End Function
+
+
 
 
 Private Function DatosOkLinea() As Boolean
@@ -5165,6 +5194,39 @@ Dim Cliente As String
             PonerFoco txtAux(4)
         End If
     End If
+    
+    '[Monica]29/11/2017: comprobamos recolectado por y transportado por
+    '                    de momento solo para picassent, deberia generalizarlo
+    If B Then
+        If vParamAplic.Cooperativa = 2 Then
+            If Combo1(1).ListIndex = 0 And (ComprobarCero(txtAux(0).Text) = 0) Then
+                MsgBox "Si la entrada está recolectada por la cooperativa, debe introducir capataz. Revise.", vbExclamation
+                B = False
+                PonerFoco txtAux(0)
+            End If
+            
+            If Combo1(1).ListIndex = 1 And (ComprobarCero(txtAux(0).Text) <> 0) Then
+                MsgBox "Si la entrada está recolectada por el socio, no debe introducir capataz. Revise.", vbExclamation
+                B = False
+                PonerFoco Text1(12)
+            End If
+        End If
+    End If
+    If B Then
+        If vParamAplic.Cooperativa = 2 Then
+            If Combo1(2).ListIndex = 0 And (ComprobarCero(Text1(3).Text) = 0) Then
+                MsgBox "Si la entrada está transportada por la cooperativa, debe introducir transportista. Revise.", vbExclamation
+                B = False
+                PonerFocoCmb Combo1(2)
+            End If
+            If Combo1(2).ListIndex = 1 And (ComprobarCero(Text1(3).Text) <> 0) Then
+                MsgBox "Si la entrada está transportada por el socio, no debe introducir transportista. Revise.", vbExclamation
+                B = False
+                PonerFocoCmb Combo1(2)
+            End If
+        End If
+    End If
+        
     
     DatosOkLlin = B
 

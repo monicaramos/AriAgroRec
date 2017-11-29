@@ -863,6 +863,7 @@ Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres 
 Dim I As Long
 
 Dim CodTipoMov As String
+Dim DarMensaje As Boolean
 
 Public ImpresoraDefecto As String
 
@@ -892,7 +893,7 @@ Dim B As Boolean
     btnBuscar(2).visible = Not B
     Combo1(0).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1228,6 +1229,12 @@ Private Sub cmdAceptar_Click()
                     
                     adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
+                    
+                    If DarMensaje Then
+                        MsgBox "El albaran " & I & " tiene hecha una clasificacion. Revísela.", vbExclamation
+                    End If
+                    
+                    
                 End If
             End If
     End Select
@@ -1887,11 +1894,19 @@ Dim SQL As String
 
     ModificandoClasificacion = False
 
-    SQL = "update rhisfruta_clasif set codvarie = " & DBSet(txtAux(3).Text, "N")
-    SQL = SQL & " , kilosnet = " & DBSet(txtAux(5).Text, "N")
-    SQL = SQL & " where numalbar = " & DBSet(numalbar, "N")
-    
-    conn.Execute SQL
+    '[Monica]28/11/2017: para el caso de que me haya metido una clasificacion no toco nada
+    DarMensaje = False
+    SQL = "select count(*) from rhisfruta_clasif where numalbar = " & DBSet(numalbar, "N")
+    If TotalRegistros(SQL) = 1 Then
+        SQL = "update rhisfruta_clasif set codvarie = " & DBSet(txtAux(3).Text, "N")
+        SQL = SQL & " , kilosnet = " & DBSet(txtAux(5).Text, "N")
+        SQL = SQL & " where numalbar = " & DBSet(numalbar, "N")
+        
+        conn.Execute SQL
+        
+    Else
+        DarMensaje = True
+    End If
     
     SQL = "update rhisfruta_entradas set fechaent = " & DBSet(txtAux(1).Text, "F")
     SQL = SQL & ",horaentr = '" & Format(txtAux(1).Text, "yyyy-mm-dd") & " " & Format(Now, "hh:mm:ss") & "'"
@@ -1990,7 +2005,7 @@ End Sub
 Private Sub mnImpresionEtiquetas_Click()
 Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim cajas As Currency
+Dim Cajas As Currency
 Dim cad As String
 Dim nroPalets As Long
 Dim crear As Byte
@@ -2030,10 +2045,10 @@ End Sub
 
 
 
-Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, Numkilos As Long, Fecha As Date, Socio As String, Variedad As String)
+Private Function InsertarPalets(Albaran As String, Palets As Long, NumCajones As Long, NumKilos As Long, Fecha As Date, Socio As String, Variedad As String)
 Dim nroPalets As Long
 Dim Kilos As Long
-Dim cajas As Long
+Dim Cajas As Long
 Dim I As Long
 Dim CRFID As String
 Dim NroCRFID As String
@@ -2055,7 +2070,7 @@ Dim TotKilos As Long
         nroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
         RestoCajas = Val(NumCajones) Mod vParamAplic.CajasporPalet
         
-        KilosporPalet = (vParamAplic.CajasporPalet * Numkilos) \ Val(NumCajones)
+        KilosporPalet = (vParamAplic.CajasporPalet * NumKilos) \ Val(NumCajones)
         TotKilos = 0
     
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
@@ -2083,7 +2098,7 @@ Dim TotKilos As Long
             
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
-            RestoKilos = Numkilos - (KilosporPalet * nroPalets)
+            RestoKilos = NumKilos - (KilosporPalet * nroPalets)
             
             TotKilos = TotKilos + RestoKilos
             
@@ -2099,7 +2114,7 @@ Dim TotKilos As Long
             nroPalets = nroPalets + 1
         End If
         
-        RestoKilos = Numkilos - TotKilos
+        RestoKilos = NumKilos - TotKilos
         
         If RestoKilos <> 0 Then ' actualizamos el ultimo registro si hay resto de kilos
             SQL = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
@@ -2112,8 +2127,8 @@ Dim TotKilos As Long
     
     If Palets > 0 Then
         nroPalets = Palets
-        Kilos = Numkilos \ nroPalets
-        cajas = Val(NumCajones) \ nroPalets
+        Kilos = NumKilos \ nroPalets
+        Cajas = Val(NumCajones) \ nroPalets
         
         CRFID = Format(Fecha, "yyyymmdd") & Format(Albaran, "0000000")
         Hora = Mid(Format(Now, "dd/mm/yyyy hh:mm:ss"), 12, 8)
@@ -2127,7 +2142,7 @@ Dim TotKilos As Long
             
             SQL = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
             SQL = SQL & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(cajas, "N") & ","
+            SQL = SQL & DBSet(NumF, "N") & "," & DBSet(0, "N") & "," & DBSet(Cajas, "N") & ","
             SQL = SQL & DBSet(Kilos, "N") & "," & DBSet(Socio, "N") & "," & DBSet(0, "N") & ","
             SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
             SQL = SQL & DBSet(Albaran, "N") & "," & DBSet(NroCRFID, "T") & ")"
@@ -2135,8 +2150,8 @@ Dim TotKilos As Long
             conn.Execute SQL
         Next I
         
-        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
-        SQL = SQL & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
+        SQL = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (Cajas * nroPalets))
+        SQL = SQL & ", numkilos = numkilos + " & CCur(NumKilos) - (Kilos * nroPalets)
         SQL = SQL & " where numnotac = " & DBSet(Albaran, "N")
         SQL = SQL & " and idpalet = " & DBSet(NumF, "N")
         

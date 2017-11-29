@@ -3843,6 +3843,37 @@ Dim Sql As String
             End If
         End If
         
+        '[Monica]29/11/2017: comprobamos recolectado por y transportado por
+        '                    de momento solo para picassent, deberia generalizarlo
+        If B Then
+            If vParamAplic.Cooperativa = 2 Then
+                If Combo1(1).ListIndex = 0 And (ComprobarCero(Text1(12).Text) = 0) Then
+                    MsgBox "Si la entrada está recolectada por la cooperativa, debe introducir capataz. Revise.", vbExclamation
+                    B = False
+                    PonerFoco Text1(12)
+                End If
+                
+                If Combo1(1).ListIndex = 1 And (ComprobarCero(Text1(12).Text) <> 0) Then
+                    MsgBox "Si la entrada está recolectada por el socio, no debe introducir capataz. Revise.", vbExclamation
+                    B = False
+                    PonerFoco Text1(12)
+                End If
+            End If
+        End If
+        If B Then
+            If vParamAplic.Cooperativa = 2 Then
+                If Combo1(2).ListIndex = 0 And (ComprobarCero(Text1(6).Text) = 0) Then
+                    MsgBox "Si la entrada está transportada por la cooperativa, debe introducir transportista. Revise.", vbExclamation
+                    B = False
+                    PonerFoco Text1(6)
+                End If
+                If Combo1(2).ListIndex = 1 And (ComprobarCero(Text1(6).Text) <> 0) Then
+                    MsgBox "Si la entrada está transportada por el socio, no debe introducir transportista. Revise.", vbExclamation
+                    B = False
+                    PonerFoco Text1(6)
+                End If
+            End If
+        End If
         
     End If
     ' ************************************************************************************

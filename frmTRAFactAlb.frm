@@ -1394,6 +1394,8 @@ Dim Sql2 As String
         cadSelect1 = Replace(Replace(cadSelect, "rclasifica", "rhisfruta_entradas"), "rhisfruta_entradas.codsocio", "rhisfruta.codsocio")
         
         If Not AnyadirAFormula(cadSelect, "({rclasifica.transportadopor} = 1 or {rclasifica.recolect} = 1)") Then Exit Sub
+        '[Monica]29/11/2017: faltaba la condicion en rhisfruta
+        If Not AnyadirAFormula(cadSelect1, "({rhisfruta.transportadopor} = 1 or {rhisfruta.recolect} = 1)") Then Exit Sub
         
         
         If Not AnyadirAFormula(cadSelect, "{rclasifica.tipoentr} <> 1 ") Then Exit Sub
@@ -1656,6 +1658,8 @@ Dim Sql4 As String
         cadSelect1 = Replace(cadSelect, "rclasifica", "rhisfruta_entradas")
         
         If Not AnyadirAFormula(cadSelect, "{rclasifica.transportadopor} = 0") Then Exit Sub
+        '[Monica]29/11/2017: faltaba esta condicion por si las entradas ya estaban en el hco
+        If Not AnyadirAFormula(cadSelect1, "{rhisfruta.transportadopor} = 0") Then Exit Sub
         
         
         If Not AnyadirAFormula(cadSelect, "{rclasifica.tipoentr} <> 1 ") Then Exit Sub
@@ -1991,7 +1995,7 @@ Dim indFrame As Single
             txtCodigo(9).Text = Format(CDate(txtCodigo(17).Text) - 1, "dd/mm/yyyy")
             indFrame = 6
             
-            Me.pb2.visible = False
+            Me.Pb2.visible = False
             Me.Check1(0).Value = 1
             Me.Check1(1).Value = 1
             
@@ -2006,7 +2010,7 @@ Dim indFrame As Single
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel(0).Cancel = True
+    Me.cmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
         
