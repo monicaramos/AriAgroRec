@@ -4131,6 +4131,7 @@ Begin VB.Form frmListAnticipos
          BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
             NumPanels       =   1
             BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -5015,7 +5016,7 @@ Dim MaxContador As String
 End Sub
 
 Private Function CargarAportaciones(cTabla As String, cWhere As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim TotalKilos As Long
 Dim ImporteSoc As Currency
@@ -5031,8 +5032,8 @@ Dim Reg As Long
 
     CargarAportaciones = False
 
-    Sql = "delete from raporreparto"
-    conn.Execute Sql
+    SQL = "delete from raporreparto"
+    conn.Execute SQL
 
     Me.Label2(32).visible = True
     Me.Refresh
@@ -5040,35 +5041,35 @@ Dim Reg As Long
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rhisfruta.codsocio, 0,sum(rhisfruta.kilosnet), 0, 0  FROM " & QuitarCaracterACadena(cTabla, "_1")
-    Sql = Sql & " where rhisfruta.tipoentr <> 1 "
+    SQL = "Select rhisfruta.codsocio, 0,sum(rhisfruta.kilosnet), 0, 0  FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = SQL & " where rhisfruta.tipoentr <> 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " and " & cWhere
+        SQL = SQL & " and " & cWhere
     End If
-    Sql = Sql & " group by 1, 2 "
-    Sql = Sql & " union "
-    Sql = Sql & "Select rhisfruta.codsocio, 1,sum(rhisfruta.kilosnet), 0, 0  FROM " & QuitarCaracterACadena(cTabla, "_1")
-    Sql = Sql & " where rhisfruta.tipoentr = 1 "
+    SQL = SQL & " group by 1, 2 "
+    SQL = SQL & " union "
+    SQL = SQL & "Select rhisfruta.codsocio, 1,sum(rhisfruta.kilosnet), 0, 0  FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = SQL & " where rhisfruta.tipoentr = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " and " & cWhere
+        SQL = SQL & " and " & cWhere
     End If
-    Sql = Sql & " group by 1, 2 "
+    SQL = SQL & " group by 1, 2 "
         
 
-    Sql2 = "insert into raporreparto (codsocio, tipoentr, kilosnet, importe, precio) " & Sql
+    Sql2 = "insert into raporreparto (codsocio, tipoentr, kilosnet, importe, precio) " & SQL
     conn.Execute Sql2
     
     TotalSocios = DevuelveValor("select count(*) from raporreparto")
     
     
-    Sql = "select sum(kilosnet) from raporreparto"
-    TotalKilos = DevuelveValor(Sql)
+    SQL = "select sum(kilosnet) from raporreparto"
+    TotalKilos = DevuelveValor(SQL)
     Importe = CCur(txtCodigo(47).Text)
     
     Precio = Round2(Importe / TotalKilos, 6)
@@ -5079,10 +5080,10 @@ Dim Reg As Long
     Me.Refresh
     DoEvents
     
-    Sql = "select codsocio, tipoentr, kilosnet from raporreparto order by codsocio"
+    SQL = "select codsocio, tipoentr, kilosnet from raporreparto order by codsocio"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Reg = Reg + 1
@@ -5094,11 +5095,11 @@ Dim Reg As Long
             ImporteSoc = Importe - TotImpor
         End If
         
-        Sql = "update raporreparto set importe = " & DBSet(ImporteSoc, "N")
-        Sql = Sql & ", precio = " & TransformaComasPuntos(ImporteSinFormato(CStr(Precio)))
-        Sql = Sql & " where codsocio= " & DBSet(Rs!Codsocio, "N")
-        Sql = Sql & " and tipoentr= " & DBSet(Rs!TipoEntr, "N")
-        conn.Execute Sql
+        SQL = "update raporreparto set importe = " & DBSet(ImporteSoc, "N")
+        SQL = SQL & ", precio = " & TransformaComasPuntos(ImporteSinFormato(CStr(Precio)))
+        SQL = SQL & " where codsocio= " & DBSet(Rs!Codsocio, "N")
+        SQL = SQL & " and tipoentr= " & DBSet(Rs!TipoEntr, "N")
+        conn.Execute SQL
         
         Rs.MoveNext
     Wend
@@ -5650,7 +5651,7 @@ Dim nTabla As String
 Dim nTabla2 As String
 Dim vSQL As String
 Dim Codigo1 As String
-Dim Sql As String
+Dim SQL As String
 
     
     InicializarVbles
@@ -5667,8 +5668,8 @@ Dim Sql As String
     
     If Not AnyadirAFormula(cadSelect, "rhisfruta.tipoentr = 1") Then Exit Sub
     
-    Sql = "select count(*) from rhisfruta where " & cadSelect
-    If TotalRegistros(Sql) = 0 Then
+    SQL = "select count(*) from rhisfruta where " & cadSelect
+    If TotalRegistros(SQL) = 0 Then
         MsgBox "No hay entradas de venta campo de este socio. Revise.", vbExclamation
     Else
         ' cargamos el listview para que se seleccionen que campos hemos de modificar
@@ -6489,7 +6490,7 @@ End Sub
 
 
 Private Function CargarFechasAnticiposPendientes(vtabla As String, vSelect As String) As String
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim cadena As String
 
@@ -6504,11 +6505,11 @@ Dim cadena As String
         vSelect = QuitarCaracterACadena(vSelect, "_1")
     End If
 
-    Sql = "select distinct fff.fecfactu from (rfactsoc_variedad fff inner join usuarios.stipom aaa on fff.codtipom = aaa.codtipom and aaa.tipodocu = 1) inner join rfactsoc ccc on ccc.codtipom = fff.codtipom and ccc.numfactu = fff.numfactu and ccc.fecfactu = fff.fecfactu   "
-    Sql = Sql & " where fff.descontado = 0 and ccc.esanticipogasto = 0 and (fff.codvarie, ccc.codsocio, fff.codcampo)  in (select distinct rhisfruta.codvarie, rhisfruta.codsocio, rhisfruta.codcampo from " & vtabla & " where " & vSelect & ") "
+    SQL = "select distinct fff.fecfactu from (rfactsoc_variedad fff inner join usuarios.stipom aaa on fff.codtipom = aaa.codtipom and aaa.tipodocu = 1) inner join rfactsoc ccc on ccc.codtipom = fff.codtipom and ccc.numfactu = fff.numfactu and ccc.fecfactu = fff.fecfactu   "
+    SQL = SQL & " where fff.descontado = 0 and ccc.esanticipogasto = 0 and (fff.codvarie, ccc.codsocio, fff.codcampo)  in (select distinct rhisfruta.codvarie, rhisfruta.codsocio, rhisfruta.codcampo from " & vtabla & " where " & vSelect & ") "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cadena = ""
     
@@ -9181,27 +9182,27 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect2, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect2, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
-    Variedades = Sql
+    Variedades = SQL
 
 
 End Sub
 
 Private Sub InsertarTemporal(Variedades As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     On Error GoTo eInsertarTemporal
@@ -9210,14 +9211,14 @@ Dim Sql2 As String
     conn.Execute Sql2
 
     If Variedades <> "" Then
-        Sql = "insert into tmpinformes (codusu, importe1, fecha1, fecha2, importe2)     "
-        Sql = Sql & " select " & vUsu.Codigo & ", rprecios.codvarie, rprecios.fechaini, rprecios.fechafin, max(contador) from rprecios inner join variedades on rprecios.codvarie = variedades.codvarie "
-        Sql = Sql & " where " & Replace(Replace(Variedades, "{", ""), "}", "")
-        Sql = Sql & " and rprecios.fechaini = " & DBSet(txtCodigo(6).Text, "F")
-        Sql = Sql & " and rprecios.fechafin = " & DBSet(txtCodigo(7).Text, "F")
-        Sql = Sql & " group by 1,2,3,4 "
+        SQL = "insert into tmpinformes (codusu, importe1, fecha1, fecha2, importe2)     "
+        SQL = SQL & " select " & vUsu.Codigo & ", rprecios.codvarie, rprecios.fechaini, rprecios.fechafin, max(contador) from rprecios inner join variedades on rprecios.codvarie = variedades.codvarie "
+        SQL = SQL & " where " & Replace(Replace(Variedades, "{", ""), "}", "")
+        SQL = SQL & " and rprecios.fechaini = " & DBSet(txtCodigo(6).Text, "F")
+        SQL = SQL & " and rprecios.fechafin = " & DBSet(txtCodigo(7).Text, "F")
+        SQL = SQL & " group by 1,2,3,4 "
         
-        conn.Execute Sql
+        conn.Execute SQL
         
     End If
     Exit Sub
@@ -9238,16 +9239,16 @@ Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens3_datoseleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {rclasifica.codsocio} in (" & CadenaSeleccion & ")"
+        SQL = " {rclasifica.codsocio} in (" & CadenaSeleccion & ")"
         Sql2 = " {rclasifica.codsocio} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {rclasifica.codsocio} = -1 "
+        SQL = " {rclasifica.codsocio} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
 
 
 End Sub
@@ -10112,7 +10113,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -10203,10 +10204,10 @@ Dim tipoMov As String
                     PonerFoco txtCodigo(49)
                 Else
                     ' el socio ha de ser obligatoriamente de la seccion de horto
-                    Sql = "select count(*) from rsocios_seccion where codsocio = " & DBSet(txtCodigo(49).Text, "N")
-                    Sql = Sql & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
+                    SQL = "select count(*) from rsocios_seccion where codsocio = " & DBSet(txtCodigo(49).Text, "N")
+                    SQL = SQL & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
                     
-                    If TotalRegistros(Sql) = 0 Then
+                    If TotalRegistros(SQL) = 0 Then
                         MsgBox "El socio ha de ser obligatoriamente de la sección de Horto.", vbExclamation
                         B = False
                     End If
@@ -10228,9 +10229,9 @@ Dim tipoMov As String
                     B = False
                     PonerFoco txtCodigo(50)
                 Else
-                    Sql = "select count(*) from rcampos where codcampo = " & DBSet(txtCodigo(50).Text, "N")
-                    Sql = Sql & " and codsocio = " & DBSet(txtCodigo(49).Text, "N")
-                    If TotalRegistros(Sql) = 0 Then
+                    SQL = "select count(*) from rcampos where codcampo = " & DBSet(txtCodigo(50).Text, "N")
+                    SQL = SQL & " and codsocio = " & DBSet(txtCodigo(49).Text, "N")
+                    If TotalRegistros(SQL) = 0 Then
                         MsgBox "El código del campo no existe o no es del socio.", vbExclamation
                         B = False
                         PonerFoco txtCodigo(50)
@@ -10375,38 +10376,38 @@ Dim tipoMov As String
 
 End Function
 
-Private Function EsVariedadDelCampoORelacionada(Campo As String, Variedad As String) As Boolean
-Dim Sql As String
+Private Function EsVariedadDelCampoORelacionada(campo As String, Variedad As String) As Boolean
+Dim SQL As String
 
-    Sql = "select count(*) from rcampos where codcampo = " & DBSet(Campo, "N") & " and fecbajas is null "
-    Sql = Sql & " and (codvarie = " & DBSet(Variedad, "N") & " or codvarie in (select codvarie from variedades_rel where codvarie1 = " & DBSet(Variedad, "N") & "))"
+    SQL = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N") & " and fecbajas is null "
+    SQL = SQL & " and (codvarie = " & DBSet(Variedad, "N") & " or codvarie in (select codvarie from variedades_rel where codvarie1 = " & DBSet(Variedad, "N") & "))"
 
-    EsVariedadDelCampoORelacionada = (TotalRegistros(Sql) <> 0)
+    EsVariedadDelCampoORelacionada = (TotalRegistros(SQL) <> 0)
     
 End Function
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     
-    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -10421,7 +10422,7 @@ End Function
 
 Private Function CargarTemporalAnticiposValsur(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -10458,27 +10459,27 @@ Dim HayReg As Boolean
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-     Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+     SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
     
     
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -10648,7 +10649,7 @@ End Function
 '[Monica]20/01/2012: nueva funcion de carga de anticipos de alzira que antes no tenia
 Private Function CargarTemporalAnticiposAlzira(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -10685,27 +10686,27 @@ Dim HayReg As Boolean
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-     Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+     SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
     
     
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -10889,7 +10890,7 @@ End Function
 
 Private Function CargarTemporalAnticiposPicassent(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SqlVar As String
@@ -10938,27 +10939,27 @@ Dim ImporteFVar As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+    SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
     
     
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
-    Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, Kneto, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -11031,9 +11032,9 @@ Dim ImporteFVar As Currency
         End If
         
         If Rs!Codsocio <> SocioAnt Then
-            '[Monica]15/04/2013: descontamos las facturas varias
-            If Check1(14).Value Then                                                                                                 'anticipos            no descontados   q no sean de ventacampo
-                ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0 ")
+            '[Monica]15/04/2013: descontamos las facturas varias                                                                                             '[Monica]30/11/2017: añadimos el or de en cualquier factura
+            If Check1(14).Value Then                                                                                                 'anticipos       q no sean de ventacampo   en cualquier fra     no descontados
+                ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 2 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0")
                                                     'usuario, codsocio, importe facturas varias
                 SqlVar = "insert into tmpsuperficies (codusu, codvarie, superficie1) values (" & vUsu.Codigo & ","
                 SqlVar = SqlVar & DBSet(SocioAnt, "N") & ","
@@ -11120,9 +11121,9 @@ Dim ImporteFVar As Currency
     
     ' ultimo registro si ha entrado
     If HayReg Then
-        '[Monica]15/04/2013: descontamos las facturas varias
-        If Check1(14).Value = 1 Then                                                                                            'anticipos             no descontados   que no sean de ventacampo
-            ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0")
+        '[Monica]15/04/2013: descontamos las facturas varias                                                                                           '[Monica]30/11/2017: añadimos lo de en cualquier fra
+        If Check1(14).Value = 1 Then                                                                                            'anticipos          que no sean de ventacampo  en cualquier fra. no descontados
+            ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 2 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
                                                 'usuario, codsocio, importe facturas varias
             SqlVar = "insert into tmpsuperficies (codusu, codvarie, superficie1) values (" & vUsu.Codigo & ","
             SqlVar = SqlVar & DBSet(SocioAnt, "N") & ","
@@ -11175,7 +11176,7 @@ End Function
 
 Private Function CargarTemporalAnticiposCalidadPicassent(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -11224,26 +11225,26 @@ Dim PorcComi As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
+    SQL = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-     Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+     SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
     
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & " FROM  " & cTabla
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
-    Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
     Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -11384,7 +11385,7 @@ End Function
 
 Private Function CargarTemporalAnticiposCatadau(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -11423,16 +11424,16 @@ Dim HayReg As Boolean
         Sql2 = "delete from tmpinformes where codusu = " & vUsu.Codigo
         conn.Execute Sql2
     
-        Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie, "
-        Sql = Sql & "sum(tmpliquidacion.kilosnet) as kilos, sum(tmpliquidacion.importe) as importe  "
-        Sql = Sql & " FROM  tmpliquidacion, variedades "
-        Sql = Sql & " WHERE codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpliquidacion.codvarie = variedades.codvarie "
-        Sql = Sql & " group by 1,2,3 "
-        Sql = Sql & " order by 1,2,3 "
+        SQL = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie, "
+        SQL = SQL & "sum(tmpliquidacion.kilosnet) as kilos, sum(tmpliquidacion.importe) as importe  "
+        SQL = SQL & " FROM  tmpliquidacion, variedades "
+        SQL = SQL & " WHERE codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpliquidacion.codvarie = variedades.codvarie "
+        SQL = SQL & " group by 1,2,3 "
+        SQL = SQL & " order by 1,2,3 "
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -11588,7 +11589,7 @@ Private Function HayPreciosVariedadesValsur(Tipo As Byte, cTabla As String, cWhe
 ' tipoprecio: 0 = precio recolectado cooperativa
 '             1 = precio recolectado socio
 '             2 = precio recolectado socio y cooperativa
-Dim Sql As String
+Dim SQL As String
 Dim vPrecios As CPrecios
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
@@ -11601,18 +11602,18 @@ Dim Sql2 As String
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    Sql = "Select distinct rhisfruta.codvarie FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select distinct rhisfruta.codvarie FROM " & QuitarCaracterACadena(cTabla, "_1")
     Sql2 = "Select distinct rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
         Sql2 = Sql2 & " where " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica]25/02/2011: Añadido esto en alzira quieren poder hacer una liquidacion complementaria
     ' si estamos hacendo una liquidacion complementaria, cogemos los precios correspondientes
@@ -11649,7 +11650,7 @@ Private Function HayPreciosVariedadesCatadau(Tipo As Byte, cTabla As String, cWh
 ' tipoprecio: 0 = precio recolectado cooperativa
 '             1 = precio recolectado socio
 '             2 = precio recolectado socio y cooperativa
-Dim Sql As String
+Dim SQL As String
 Dim vPrecios As CPrecios
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -11665,33 +11666,33 @@ Dim NumReg As Long
     
     conn.Execute " DROP TABLE IF EXISTS tmpVarie;"
     
-    Sql = "CREATE TEMPORARY TABLE tmpVarie ( " 'TEMPORARY
-    Sql = Sql & "codvarie INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
-    Sql = Sql & "UNIQUE KEY `codvarie` (`codvarie`) )  "
-    conn.Execute Sql
+    SQL = "CREATE TEMPORARY TABLE tmpVarie ( " 'TEMPORARY
+    SQL = SQL & "codvarie INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
+    SQL = SQL & "UNIQUE KEY `codvarie` (`codvarie`) )  "
+    conn.Execute SQL
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    Sql = "Select distinct rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid ,rhisfruta.fecalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select distinct rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid ,rhisfruta.fecalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     
 '    Sql2 = "Select distinct rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
 '[Monica]14/03/2014: añadida esta condicion y la de abajo
-        Sql = Sql & " and rhisfruta_clasif.kilosnet <> 0 and  rhisfruta_clasif.kilosnet is not null"
+        SQL = SQL & " and rhisfruta_clasif.kilosnet <> 0 and  rhisfruta_clasif.kilosnet is not null"
     Else
-        Sql = Sql & " where rhisfruta_clasif.kilosnet <> 0 and  rhisfruta_clasif.kilosnet is not null"
+        SQL = SQL & " where rhisfruta_clasif.kilosnet <> 0 and  rhisfruta_clasif.kilosnet is not null"
     End If
     
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " order by 1,2,3 "
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " order by 1,2,3 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     B = True
     
@@ -11784,40 +11785,40 @@ End Function
 
 
 Private Function TotalFacturas(cTabla As String, cWhere As String) As Long
-Dim Sql As String
+Dim SQL As String
 
     TotalFacturas = 0
     
-    Sql = "SELECT  count(distinct rhisfruta.codsocio) "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT  count(distinct rhisfruta.codsocio) "
+    SQL = SQL & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
 
-    TotalFacturas = TotalRegistros(Sql)
+    TotalFacturas = TotalRegistros(SQL)
 
 End Function
 
 Private Function TotalFacturasNew(cTabla As String, cWhere As String, cCampos As String) As Long
-Dim Sql As String
+Dim SQL As String
 
     TotalFacturasNew = 0
     
-    Sql = "SELECT  count(distinct " & cCampos & ") "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT  count(distinct " & cCampos & ") "
+    SQL = SQL & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
 
-    TotalFacturasNew = TotalRegistros(Sql)
+    TotalFacturasNew = TotalRegistros(SQL)
 
 End Function
 
@@ -11907,7 +11908,7 @@ Private Sub CargarListView(Index As Integer)
 'en un ListView
 Dim Rs As ADODB.Recordset
 Dim ItmX As ListItem
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo ECargarList
 
@@ -11917,13 +11918,13 @@ Dim Sql As String
  '   ListView1.ColumnHeaders.Add , , "Tipo", 650
     ListView1(Index).ColumnHeaders.Add , , "Tipo Movimiento", 2750
     
-    Sql = "SELECT codtipom, nomtipom "
-    Sql = Sql & " FROM usuarios.stipom "
-    Sql = Sql & " WHERE stipom.tipodocu in (1,2,3,4,5,6,7,8,9,10,11) or stipom.codtipom = 'FTR'"
-    Sql = Sql & " ORDER BY codtipom "
+    SQL = "SELECT codtipom, nomtipom "
+    SQL = SQL & " FROM usuarios.stipom "
+    SQL = SQL & " WHERE stipom.tipodocu in (1,2,3,4,5,6,7,8,9,10,11) or stipom.codtipom = 'FTR'"
+    SQL = SQL & " ORDER BY codtipom "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Set ItmX = ListView1(Index).ListItems.Add
@@ -11947,35 +11948,35 @@ Private Function NroTotalMovimientos(Tipo As Byte) As Long
 '       2 - liquidacion
 '       3 - anticipos venta campo
 '       4 - liquidacion venta campo
-Dim Sql As String
+Dim SQL As String
     
-    Sql = "select distinct "
+    SQL = "select distinct "
     Select Case Tipo
         Case 1
-            Sql = Sql & " CodTipomAnt "
+            SQL = SQL & " CodTipomAnt "
         Case 2
-            Sql = Sql & " codtipomliq "
+            SQL = SQL & " codtipomliq "
         Case 3
-            Sql = Sql & " codtipomantvc "
+            SQL = SQL & " codtipomantvc "
         Case 4
-            Sql = Sql & " codtipomliqvc "
+            SQL = SQL & " codtipomliqvc "
     End Select
     
-    Sql = Sql & " from rcoope, usuarios.stipom stipom "
-    Sql = Sql & " WHERE stipom.tipodocu=" & Tipo
-    Sql = Sql & " and stipom.codtipom = rcoope."
+    SQL = SQL & " from rcoope, usuarios.stipom stipom "
+    SQL = SQL & " WHERE stipom.tipodocu=" & Tipo
+    SQL = SQL & " and stipom.codtipom = rcoope."
     Select Case Tipo
         Case 1
-            Sql = Sql & "CodTipomAnt "
+            SQL = SQL & "CodTipomAnt "
         Case 2
-            Sql = Sql & "codtipomliq "
+            SQL = SQL & "codtipomliq "
         Case 3
-            Sql = Sql & "codtipomantvc "
+            SQL = SQL & "codtipomantvc "
         Case 4
-            Sql = Sql & "codtipomliqvc "
+            SQL = SQL & "codtipomliqvc "
     End Select
     
-    NroTotalMovimientos = TotalRegistrosConsulta(Sql)
+    NroTotalMovimientos = TotalRegistrosConsulta(SQL)
 
 End Function
 
@@ -11995,7 +11996,7 @@ Dim vSocio As cSocio
 Dim B As Boolean
 Dim Nregs As Long
 Dim Total As Variant
-Dim Sql As String
+Dim SQL As String
 
 Dim cTabla As String
 Dim vWhere As String
@@ -12026,18 +12027,18 @@ Dim CPostal As String
             ' previamente hemos de cargar una tabla intermedia donde sumemos base retencion por nif,
             ' cargaremos el nif del socio / transportista y nombre para cargar la linea 190
             
-            Sql = " DROP TABLE IF EXISTS tmpReten;"
-            conn.Execute Sql
+            SQL = " DROP TABLE IF EXISTS tmpReten;"
+            conn.Execute SQL
             
-            Sql = "CREATE TEMPORARY TABLE tmpReten ( " '
-            Sql = Sql & "`nif` char(9) NOT NULL ,"
-            Sql = Sql & "`codpostal` varchar(6) NOT NULL,"
-            Sql = Sql & "`nombre` varchar(40) NOT NULL,"
-            Sql = Sql & "`tipo` tinyint(1) NOT NULL,"
-            Sql = Sql & "`basereten` decimal(8,2) NOT NULL,"
-            Sql = Sql & "`impreten` decimal(8,2) NOT NULL default '0')"
+            SQL = "CREATE TEMPORARY TABLE tmpReten ( " '
+            SQL = SQL & "`nif` char(9) NOT NULL ,"
+            SQL = SQL & "`codpostal` varchar(6) NOT NULL,"
+            SQL = SQL & "`nombre` varchar(40) NOT NULL,"
+            SQL = SQL & "`tipo` tinyint(1) NOT NULL,"
+            SQL = SQL & "`basereten` decimal(8,2) NOT NULL,"
+            SQL = SQL & "`impreten` decimal(8,2) NOT NULL default '0')"
             
-            conn.Execute Sql
+            conn.Execute SQL
             
 '[Monica]20/01/2014: no enlazamos con los trasnportistas, pq en alzira han cambiado la codificacion
 '            Sql = " insert into tmpReten (nif, codpostal, nombre, tipo, basereten, impreten) "
@@ -12055,30 +12056,30 @@ Dim CPostal As String
 '            Sql = Sql & " group by 1,2,3,4 "
 '            Sql = Sql & " order by 1,2,3,4 "
             
-            Sql = " insert into tmpReten (nif, codpostal, nombre, tipo, basereten, impreten) "
-            Sql = Sql & "select nif, codpostal, tmprfactsoc.nomsocio, 0, sum(basereten), sum(impreten) "
-            Sql = Sql & " from tmprfactsoc where codusu = " & vUsu.Codigo
-            Sql = Sql & " and tmprfactsoc.tipo = 0 " ' solo los socios
-            Sql = Sql & " group by 1,2,3,4 "
-            Sql = Sql & " union"
-            Sql = Sql & " select nif, codpostal , nomsocio, if(tmprfactsoc.tipoirpf<=2,0,1), sum(basereten), sum(impreten) "
-            Sql = Sql & " from tmprfactsoc where codusu = " & vUsu.Codigo
-            Sql = Sql & " and tmprfactsoc.tipo = 1 " ' solo los transportistas
-            Sql = Sql & " group by 1,2,3,4 "
-            Sql = Sql & " union "
-            Sql = Sql & " select nif, codpostal , nomsocio, if(tmprfactsoc.tipoirpf<=2,0,1), sum(basereten), sum(impreten) "
-            Sql = Sql & " from tmprfactsoc where codusu = " & vUsu.Codigo
-            Sql = Sql & " and tmprfactsoc.tipo = 2 " ' socios terceros
-            Sql = Sql & " group by 1,2,3,4 "
-            Sql = Sql & " order by 1,2,3,4 "
+            SQL = " insert into tmpReten (nif, codpostal, nombre, tipo, basereten, impreten) "
+            SQL = SQL & "select nif, codpostal, tmprfactsoc.nomsocio, 0, sum(basereten), sum(impreten) "
+            SQL = SQL & " from tmprfactsoc where codusu = " & vUsu.Codigo
+            SQL = SQL & " and tmprfactsoc.tipo = 0 " ' solo los socios
+            SQL = SQL & " group by 1,2,3,4 "
+            SQL = SQL & " union"
+            SQL = SQL & " select nif, codpostal , nomsocio, if(tmprfactsoc.tipoirpf<=2,0,1), sum(basereten), sum(impreten) "
+            SQL = SQL & " from tmprfactsoc where codusu = " & vUsu.Codigo
+            SQL = SQL & " and tmprfactsoc.tipo = 1 " ' solo los transportistas
+            SQL = SQL & " group by 1,2,3,4 "
+            SQL = SQL & " union "
+            SQL = SQL & " select nif, codpostal , nomsocio, if(tmprfactsoc.tipoirpf<=2,0,1), sum(basereten), sum(impreten) "
+            SQL = SQL & " from tmprfactsoc where codusu = " & vUsu.Codigo
+            SQL = SQL & " and tmprfactsoc.tipo = 2 " ' socios terceros
+            SQL = SQL & " group by 1,2,3,4 "
+            SQL = SQL & " order by 1,2,3,4 "
             
-            conn.Execute Sql
+            conn.Execute SQL
             
-            Sql = "select count(distinct nif, tipo), sum(basereten), sum(impreten) "
-            Sql = Sql & " from tmpReten "
+            SQL = "select count(distinct nif, tipo), sum(basereten), sum(impreten) "
+            SQL = SQL & " from tmpReten "
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             
             ' CABECERA
@@ -12456,7 +12457,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionValsur(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -12502,25 +12503,25 @@ Dim vGastos As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-     Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & " FROM  " & cTabla
+     SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -12928,7 +12929,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionPicassent(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -13000,25 +13001,25 @@ Dim PorcComi As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
-    Sql = Sql & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
+    SQL = SQL & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid,"
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -13194,9 +13195,9 @@ Dim PorcComi As Currency
             End If
             
             '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-            ImpoFrasVarias = 0
-            If Check1(14).Value = 1 Then                                                                                      'en liquidacion       no descontada         que no sea vtacampo
-                ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+            ImpoFrasVarias = 0                                                                                                                             '[Monica]30/11/2017: añado lo de en cualquier fra.
+            If Check1(14).Value = 1 Then                                                                                      'en liquidacion              que no sea vtacampo   en cualquier fra.     no descontada
+                ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
             End If
             
             ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura '- ImpoFrasVarias
@@ -13437,9 +13438,9 @@ Dim PorcComi As Currency
         End If
         
         '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-        ImpoFrasVarias = 0
-        If Check1(14).Value = 1 Then                                                                                          'liquidacion          no descontada    que no sea vtacampo
-           ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+        ImpoFrasVarias = 0                                                                                                                              '[Monica]30/11/2017: añado en cualquier fra
+        If Check1(14).Value = 1 Then                                                                                          'liquidacion             que no sea vtacampo  en cualquier fra     no descontada
+           ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
         End If
         
         ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura ' - ImpoFrasVarias
@@ -13468,7 +13469,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionAlzira(cTabla As String, cWhere As String, TipoPrec As Byte) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -13514,24 +13515,24 @@ Dim vGastos As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"             '[Monica]28/03/2013: Añadida la condicion del if dentro del sum
-    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(if(rhisfruta_clasif.kilosnet is null, 0, rhisfruta_clasif.kilosnet)) as kilos "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid,"             '[Monica]28/03/2013: Añadida la condicion del if dentro del sum
+    SQL = SQL & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(if(rhisfruta_clasif.kilosnet is null, 0, rhisfruta_clasif.kilosnet)) as kilos "
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
-    Sql = Sql & " having sum(if(rhisfruta_clasif.kilosnet is null, 0, rhisfruta_clasif.kilosnet)) <> 0 " '[Monica]28/03/2013: no tienen que salir los que son 0
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
+    SQL = SQL & " having sum(if(rhisfruta_clasif.kilosnet is null, 0, rhisfruta_clasif.kilosnet)) <> 0 " '[Monica]28/03/2013: no tienen que salir los que son 0
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos,  anticipos, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -13884,28 +13885,28 @@ End Function
 
 
 Private Function CargarTemporalTotalesCatadau()
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes2 where codusu = " & vUsu.Codigo
+    conn.Execute SQL
     'comerciales
-    Sql = "insert into tmpinformes2 (codusu,codigo1,importe1) "
-    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
-    Sql = Sql & " and tipoentr in (0,2)"
-    Sql = Sql & " group by 1, 2 "
-    conn.Execute Sql
+    SQL = "insert into tmpinformes2 (codusu,codigo1,importe1) "
+    SQL = SQL & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    SQL = SQL & " and tipoentr in (0,2)"
+    SQL = SQL & " group by 1, 2 "
+    conn.Execute SQL
     'venta campo
-    Sql = "insert into tmpinformes2 (codusu,codigo1,importe2) "
-    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
-    Sql = Sql & " and tipoentr = 1 "
-    Sql = Sql & " group by 1, 2 "
-    conn.Execute Sql
+    SQL = "insert into tmpinformes2 (codusu,codigo1,importe2) "
+    SQL = SQL & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    SQL = SQL & " and tipoentr = 1 "
+    SQL = SQL & " group by 1, 2 "
+    conn.Execute SQL
     'kilos aportacion
-    Sql = "insert into tmpinformes2 (codusu,codigo1,importe3) "
-    Sql = Sql & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
-    Sql = Sql & " and codcalid = 0"
-    Sql = Sql & " group by 1, 2 "
-    conn.Execute Sql
+    SQL = "insert into tmpinformes2 (codusu,codigo1,importe3) "
+    SQL = SQL & "select " & vUsu.Codigo & ", codvarie, sum(coalesce(kilosnet,0)) from tmpliquidacion where codusu = " & DBSet(vUsu.Codigo, "N")
+    SQL = SQL & " and codcalid = 0"
+    SQL = SQL & " group by 1, 2 "
+    conn.Execute SQL
 
 
 End Function
@@ -13913,7 +13914,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionCatadau(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -13962,15 +13963,15 @@ Dim HayReg As Boolean
     
     
     
-        Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie,"
-        Sql = Sql & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
-        Sql = Sql & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpliquidacion.codvarie = variedades.codvarie "
-        Sql = Sql & " group by 1, 2, 3 "
-        Sql = Sql & " order by 1, 2, 3 "
+        SQL = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie,"
+        SQL = SQL & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
+        SQL = SQL & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpliquidacion.codvarie = variedades.codvarie "
+        SQL = SQL & " group by 1, 2, 3 "
+        SQL = SQL & " order by 1, 2, 3 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -14227,21 +14228,21 @@ End Function
 
 Private Function ActualizarRegistrosFac(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistrosFac = False
-    Sql = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
-    Sql = Sql & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
+    SQL = "update " & cTabla & ", usuarios.stipom set impreso = 1 "
+    SQL = SQL & " where usuarios.stipom.codtipom = rfactsoc.codtipom "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " and " & cWhere
+        SQL = SQL & " and " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistrosFac = True
     Exit Function
@@ -14254,7 +14255,7 @@ End Function
 
 Private Function CargarTemporalAnticiposGastos(cTabla As String, cWhere As String, cad As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -14292,23 +14293,23 @@ Dim Importe As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,  "
-    Sql = Sql & "rcalidad.gastosrec, " ' sum(rhisfruta.imprecol) as importe, "
-    Sql = Sql & "sum(rhisfruta_clasif.kilosnet) as kilos"
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,  "
+    SQL = SQL & "rcalidad.gastosrec, " ' sum(rhisfruta.imprecol) as importe, "
+    SQL = SQL & "sum(rhisfruta_clasif.kilosnet) as kilos"
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie,kggastos, baseimpo, porceiva, imporiva,
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -14464,7 +14465,7 @@ End Function
 
 Private Function CargarTemporalAnticiposGenericos(cTabla As String, cWhere As String, ConCampo As Boolean, DeRetirada As Boolean) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -14513,24 +14514,24 @@ Dim Sql8 As String
 
     ' en la tabla intermedia tenemos tanto los registros de rclasifica como los de rhisfruta
     If ConCampo Then
-        Sql = "SELECT codsocio, codvarie, nomvarie, codcampo, "
-        Sql = Sql & "sum(kilosnet) as kilos"
-        Sql = Sql & " FROM  tmpliquidacion "
-        Sql = Sql & " WHERE codusu = " & vUsu.Codigo
-        Sql = Sql & " group by 1, 2, 3, 4 "
-        Sql = Sql & " order by 1, 2, 3, 4 "
+        SQL = "SELECT codsocio, codvarie, nomvarie, codcampo, "
+        SQL = SQL & "sum(kilosnet) as kilos"
+        SQL = SQL & " FROM  tmpliquidacion "
+        SQL = SQL & " WHERE codusu = " & vUsu.Codigo
+        SQL = SQL & " group by 1, 2, 3, 4 "
+        SQL = SQL & " order by 1, 2, 3, 4 "
     Else
-        Sql = "SELECT codsocio, codvarie, nomvarie, "
-        Sql = Sql & "sum(kilosnet) as kilos"
-        Sql = Sql & " FROM  tmpliquidacion "
-        Sql = Sql & " WHERE codusu = " & vUsu.Codigo
-        Sql = Sql & " group by 1, 2, 3 "
-        Sql = Sql & " order by 1, 2, 3 "
+        SQL = "SELECT codsocio, codvarie, nomvarie, "
+        SQL = SQL & "sum(kilosnet) as kilos"
+        SQL = SQL & " FROM  tmpliquidacion "
+        SQL = SQL & " WHERE codusu = " & vUsu.Codigo
+        SQL = SQL & " group by 1, 2, 3 "
+        SQL = SQL & " order by 1, 2, 3 "
     End If
 
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu, codsocio, nomsocio, codvarie, nomvarie, kilos, porceiva, porcerete,precio
     Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, porcen1, porcen2, precio1) values "
@@ -14724,7 +14725,7 @@ Private Function CargarTemporalCatadau(cTabla As String, cWhere As String, Tipo 
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -14803,22 +14804,22 @@ Dim HayPrecio As Boolean
     conn.Execute Sql2
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
-    Sql = Sql & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-    Sql = Sql & " sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
+    SQL = SQL & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
+    SQL = SQL & " sum(rhisfruta_clasif.kilosnet) as kilos "
+    SQL = SQL & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
-    Sql = Sql & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
 
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
     Me.Pb1.visible = True
@@ -14827,7 +14828,7 @@ Dim HayPrecio As Boolean
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
     If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
@@ -14996,13 +14997,13 @@ Dim HayPrecio As Boolean
                                     
 '[Monica]27/01/2016: si es complementaria y se añaden lo de agroseguro
     If Check1(26).Value = 1 Then
-        Sql = "insert into tmpliquidacion (codusu,codcampo,codsocio,codvarie,kilosnet,precio) "
-        Sql = Sql & " select " & vUsu.Codigo & ",rcampos.codcampo,rcampos.codsocio,rcampos.codvarie,sum(coalesce(kilosaportacion,0))," & DBSet(vPrecio, "N")
-        Sql = Sql & " from rcampos_seguros inner  join rcampos on rcampos_seguros.codcampo = rcampos.codcampo "
-        Sql = Sql & " where rcampos.codvarie in (select distinct codvarie from tmpvarie) "
-        Sql = Sql & " group by 1, 2, 3, 4 "
-        Sql = Sql & " having sum(coalesce(kilosaportacion,0)) <> 0 "
-        conn.Execute Sql
+        SQL = "insert into tmpliquidacion (codusu,codcampo,codsocio,codvarie,kilosnet,precio) "
+        SQL = SQL & " select " & vUsu.Codigo & ",rcampos.codcampo,rcampos.codsocio,rcampos.codvarie,sum(coalesce(kilosaportacion,0))," & DBSet(vPrecio, "N")
+        SQL = SQL & " from rcampos_seguros inner  join rcampos on rcampos_seguros.codcampo = rcampos.codcampo "
+        SQL = SQL & " where rcampos.codvarie in (select distinct codvarie from tmpvarie) "
+        SQL = SQL & " group by 1, 2, 3, 4 "
+        SQL = SQL & " having sum(coalesce(kilosaportacion,0)) <> 0 "
+        conn.Execute SQL
         
 '        SQL = "update tmpliquidacion  dd, tmpliquidacion ff "
 '        SQL = SQL & " set dd.codsocio = ff.codsocio, dd.codvarie = ff.codvarie "
@@ -15054,7 +15055,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionQuatretonda(cTabla As String, cWhere As String, Seccion As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -15098,15 +15099,15 @@ Dim HayReg As Boolean
     conn.Execute Sql2
 
     If CargarTemporalQuatretonda(cTabla, cWhere, 1) Then
-        Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie,"
-        Sql = Sql & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
-        Sql = Sql & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpliquidacion.codvarie = variedades.codvarie "
-        Sql = Sql & " group by 1, 2, 3 "
-        Sql = Sql & " order by 1, 2, 3 "
+        SQL = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie,"
+        SQL = SQL & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
+        SQL = SQL & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpliquidacion.codvarie = variedades.codvarie "
+        SQL = SQL & " group by 1, 2, 3 "
+        SQL = SQL & " order by 1, 2, 3 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  retirada,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -15342,7 +15343,7 @@ Private Function CargarTemporalQuatretonda(cTabla As String, cWhere As String, T
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -15400,23 +15401,23 @@ Dim ImporRet As Currency
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
-    Sql = Sql & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-    Sql = Sql & " sum(if(rhisfruta_clasif.kilosnet is null,0,rhisfruta_clasif.kilosnet)) as kilos "
-    Sql = Sql & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
+    SQL = SQL & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
+    SQL = SQL & " sum(if(rhisfruta_clasif.kilosnet is null,0,rhisfruta_clasif.kilosnet)) as kilos "
+    SQL = SQL & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
-    Sql = Sql & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
 
 
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
     Me.Pb1.visible = True
@@ -15425,7 +15426,7 @@ Dim ImporRet As Currency
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
     If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
@@ -15600,7 +15601,7 @@ End Function
 
 
 Private Function ComprobarTiposIVA(tabla As String, cSelect As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim vSeccion As CSeccion
 Dim B As Boolean
@@ -15614,13 +15615,13 @@ Dim B As Boolean
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
             
-            Sql = "select distinct codiva from rsocios_seccion where codsecci = " & vParamAplic.Seccionhorto
-            Sql = Sql & " and codsocio in (select rhisfruta.codsocio from " & Trim(tabla) & " where " & Trim(cSelect) & ")"
-            Sql = Sql & " group by 1 "
-            Sql = Sql & " order by 1 "
+            SQL = "select distinct codiva from rsocios_seccion where codsecci = " & vParamAplic.Seccionhorto
+            SQL = SQL & " and codsocio in (select rhisfruta.codsocio from " & Trim(tabla) & " where " & Trim(cSelect) & ")"
+            SQL = SQL & " group by 1 "
+            SQL = SQL & " order by 1 "
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             B = True
             
@@ -15629,9 +15630,9 @@ Dim B As Boolean
                     B = False
                     MsgBox "Hay socios sin iva en la sección hortofrutícola. Revise.", vbExclamation
                 Else
-                    Sql = ""
-                    Sql = DevuelveDesdeBDNew(cConta, "tiposiva", "codigiva", "codigiva", DBLet(Rs.Fields(0).Value, "N"), "N")
-                    If Sql = "" Then
+                    SQL = ""
+                    SQL = DevuelveDesdeBDNew(cConta, "tiposiva", "codigiva", "codigiva", DBLet(Rs.Fields(0).Value, "N"), "N")
+                    If SQL = "" Then
                         B = False
                         MsgBox "No existe el codigo de iva " & DBLet(Rs.Fields(0).Value, "N") & ". Revise.", vbExclamation
                     End If
@@ -15657,7 +15658,7 @@ End Function
 
 
 Private Function HayFacturasConLineasDeDistintoGrupo(nTabla As String, cadSelect1 As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String
 
     tabla = "(" & nTabla & ") INNER JOIN productos on variedades.codprodu = productos.codprodu "
@@ -15671,21 +15672,21 @@ Dim tabla As String
         cadSelect1 = QuitarCaracterACadena(cadSelect1, "_1")
     End If
 
-    Sql = "select rfactsoc_variedad.codtipom, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu, count(distinct productos.gruporeten) "
-    Sql = Sql & " from " & tabla
-    Sql = Sql & " where " & cadSelect1
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " having count(distinct productos.gruporeten) > 1"
-    Sql = Sql & " order by 1,2,3 "
+    SQL = "select rfactsoc_variedad.codtipom, rfactsoc_variedad.numfactu, rfactsoc_variedad.fecfactu, count(distinct productos.gruporeten) "
+    SQL = SQL & " from " & tabla
+    SQL = SQL & " where " & cadSelect1
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " having count(distinct productos.gruporeten) > 1"
+    SQL = SQL & " order by 1,2,3 "
     
-    HayFacturasConLineasDeDistintoGrupo = (TotalRegistrosConsulta(Sql) > 0)
+    HayFacturasConLineasDeDistintoGrupo = (TotalRegistrosConsulta(SQL) > 0)
 
 End Function
 
 
 
 Private Function CargarFacturas(cTabla As String, cSelect As String, cTabla2 As String, cSelect2 As String, Optional cTabla3 As String, Optional cSelect3 As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim vCampAnt As CCampAnt
 Dim ctabla1 As String
 Dim Sql2 As String
@@ -15749,42 +15750,42 @@ Dim cTablaAnticip As String
     cTablaAnticip = vEmpresa.BDAriagro & ".rfactsoc_anticipos"
     
     ' borramos las tablas temporales donde insertaremos las facturas para los listados
-    Sql = "delete from tmprfactsoc where codusu= " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmprfactsoc where codusu= " & vUsu.Codigo
+    conn.Execute SQL
     
     
     ' insertamos las facturas correspondientes a la campaña actual
-    Sql = "insert into tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-    Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-    Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo, esretirada, impgastospie) "
-    Sql = Sql & "select " & vUsu.Codigo & ", `rfactsoc`.`codtipom`, `rfactsoc`.`numfactu`, `rfactsoc`.`fecfactu`, cast(`codsocio` as char), "
-    Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-    Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 0, `esretirada`, 0 from " '[Monica]24/07/2012: metemos si es de retirada
-    Sql = Sql & cTabla
-    Sql = Sql & " where " & cSelect
-    Sql = Sql & " group by 1,2,3,4 "
-    conn.Execute Sql
+    SQL = "insert into tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+    SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+    SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo, esretirada, impgastospie) "
+    SQL = SQL & "select " & vUsu.Codigo & ", `rfactsoc`.`codtipom`, `rfactsoc`.`numfactu`, `rfactsoc`.`fecfactu`, cast(`codsocio` as char), "
+    SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+    SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 0, `esretirada`, 0 from " '[Monica]24/07/2012: metemos si es de retirada
+    SQL = SQL & cTabla
+    SQL = SQL & " where " & cSelect
+    SQL = SQL & " group by 1,2,3,4 "
+    conn.Execute SQL
     
     '[Monica]03/03/2011: cargamos el nif del socio
-    Sql = "update tmprfactsoc set nif = (select nifsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
-    Sql = Sql & " where tipo = 0"
-    conn.Execute Sql
+    SQL = "update tmprfactsoc set nif = (select nifsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
+    SQL = SQL & " where tipo = 0"
+    conn.Execute SQL
     
     '[Monica]03/03/2011: cargamos el nombre del socio
-    Sql = "update tmprfactsoc set nomsocio = (select nomsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
-    Sql = Sql & " where tipo = 0"
-    conn.Execute Sql
+    SQL = "update tmprfactsoc set nomsocio = (select nomsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
+    SQL = SQL & " where tipo = 0"
+    conn.Execute SQL
     
     '[Monica]20/01/2014: cargamos el codigo postal del socio
-    Sql = "update tmprfactsoc set codpostal = (select codpostal from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
-    Sql = Sql & " where tipo = 0"
-    conn.Execute Sql
+    SQL = "update tmprfactsoc set codpostal = (select codpostal from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
+    SQL = SQL & " where tipo = 0"
+    conn.Execute SQL
     
     
     '[Monica]15/10/2013: borramos los registros FTT que no tengan numero de factura asignada
-    Sql = "delete from tmprfactsoc where codusu = " & vUsu.Codigo
-    Sql = Sql & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc where pdtenrofact = 1) " ' where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
-    conn.Execute Sql
+    SQL = "delete from tmprfactsoc where codusu = " & vUsu.Codigo
+    SQL = SQL & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc where pdtenrofact = 1) " ' where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
+    conn.Execute SQL
     
     
  '[Monica]12/01/2012: añado la condicion check1(9).value = 0 para que no me sume gastos en el informe de aportacion
@@ -15794,126 +15795,126 @@ Dim cTablaAnticip As String
     '                    con lo cual el totalfac será el total a pagar
     '
     If (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And Check1(9).Value = 0 Then
-        Sql = "update tmprfactsoc set impapor = if(impapor is null,0,impapor) + (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
-        Sql = Sql & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
-        Sql = Sql & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
-        Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+        SQL = "update tmprfactsoc set impapor = if(impapor is null,0,impapor) + (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
+        SQL = SQL & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
+        SQL = SQL & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
+        SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
         ' ahora el total factura es el total a pagar en Picassent
-        Sql = "update tmprfactsoc set totalfac = baseimpo + if(imporiva is null,0,imporiva) - if(impreten is null,0,impreten) - if(impapor is null,0,impapor)  "
-        Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+        SQL = "update tmprfactsoc set totalfac = baseimpo + if(imporiva is null,0,imporiva) - if(impreten is null,0,impreten) - if(impapor is null,0,impapor)  "
+        SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
         
-        conn.Execute Sql
+        conn.Execute SQL
     
     End If
     
     '[Monica]21/03/2016: si quieren que detallen los gastos los cargamos en la columna impgastopie
     If Check1(27) Then
-        Sql = "update tmprfactsoc set impgastospie = (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
-        Sql = Sql & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
-        Sql = Sql & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
-        Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+        SQL = "update tmprfactsoc set impgastospie = (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
+        SQL = SQL & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
+        SQL = SQL & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
+        SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
         
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (OpcionListado = 10 Or OpcionListado = 11)) Then
         ' insertamos las facturas correspondientes a la campaña actual - idem transporte
-        Sql = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-        Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-        Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
-        Sql = Sql & "select " & vUsu.Codigo & ", `rfacttra`.`codtipom`, `rfacttra`.`numfactu`, `rfacttra`.`fecfactu`, `rfacttra`.`codtrans`, "
-        Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-        Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 1 from "
-        Sql = Sql & cTabla2
-        Sql = Sql & " where " & cSelect2
-        Sql = Sql & " group by 1,2,3,4,5 "
-        conn.Execute Sql
+        SQL = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+        SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+        SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
+        SQL = SQL & "select " & vUsu.Codigo & ", `rfacttra`.`codtipom`, `rfacttra`.`numfactu`, `rfacttra`.`fecfactu`, `rfacttra`.`codtrans`, "
+        SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+        SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 1 from "
+        SQL = SQL & cTabla2
+        SQL = SQL & " where " & cSelect2
+        SQL = SQL & " group by 1,2,3,4,5 "
+        conn.Execute SQL
         
         '[Monica]03/03/2011: cargamos el nif del transportista
-        Sql = "update tmprfactsoc set nif = (select niftrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
-        Sql = Sql & " where tipo = 1"
-        conn.Execute Sql
+        SQL = "update tmprfactsoc set nif = (select niftrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
+        SQL = SQL & " where tipo = 1"
+        conn.Execute SQL
         
         '[Monica]03/03/2011: cargamos el nombre del transportista
-        Sql = "update tmprfactsoc set nomsocio = (select nomtrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
-        Sql = Sql & " where tipo = 1"
-        conn.Execute Sql
+        SQL = "update tmprfactsoc set nomsocio = (select nomtrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
+        SQL = SQL & " where tipo = 1"
+        conn.Execute SQL
         
         '[Monica]20/01/2014: cargamos el codigo postal del transportista
-        Sql = "update tmprfactsoc set codpostal = (select codpostal from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
-        Sql = Sql & " where tipo = 1"
-        conn.Execute Sql
+        SQL = "update tmprfactsoc set codpostal = (select codpostal from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
+        SQL = SQL & " where tipo = 1"
+        conn.Execute SQL
         
     End If
     
     
     '[Monica]20/01/2015: en el caso de ser modelo 190, añadimos las de terceros
     If OpcionListado = 10 Then
-        Sql = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-        Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-        Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
-        Sql = Sql & "select " & vUsu.Codigo & ", 'AAA', 1, `rcafter`.`fecfactu`, `rcafter`.`codsocio`, "
-        Sql = Sql & "coalesce(baseiva1,0) + coalesce(baseiva2,0) + coalesce(baseiva3,0),`tipoiva1`,`porciva1`,`impoiva1`,0,`basereten`,"
-        Sql = Sql & "`retfacpr`,`trefacpr`,0,0,0,`totalfac`, 2 from "
-        Sql = Sql & cTabla3
-        Sql = Sql & " where " & cSelect3
-        Sql = Sql & " group by 1,2,3,4,5 "
-        conn.Execute Sql
+        SQL = "insert into tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+        SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+        SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
+        SQL = SQL & "select " & vUsu.Codigo & ", 'AAA', 1, `rcafter`.`fecfactu`, `rcafter`.`codsocio`, "
+        SQL = SQL & "coalesce(baseiva1,0) + coalesce(baseiva2,0) + coalesce(baseiva3,0),`tipoiva1`,`porciva1`,`impoiva1`,0,`basereten`,"
+        SQL = SQL & "`retfacpr`,`trefacpr`,0,0,0,`totalfac`, 2 from "
+        SQL = SQL & cTabla3
+        SQL = SQL & " where " & cSelect3
+        SQL = SQL & " group by 1,2,3,4,5 "
+        conn.Execute SQL
     End If
     
     
     
     
     If OpcionListado = 11 Then ' caso del 346
-        Sql = "delete from tmp346 where codusu= " & vUsu.Codigo
-        conn.Execute Sql
+        SQL = "delete from tmp346 where codusu= " & vUsu.Codigo
+        conn.Execute SQL
         
         ctabla1 = "(" & cTabla & ") INNER JOIN variedades ON rfactsoc_variedad.codvarie = variedades.codvarie "
         ctabla1 = "(" & ctabla1 & ") INNER JOIN productos ON variedades.codprodu = productos.codprodu "
         ctabla1 = "(" & ctabla1 & ") INNER JOIN grupopro ON productos.codgrupo = grupopro.codgrupo "
         
-        Sql = "insert into tmp346 (`codusu`,`codsocio`,`codgrupo`,`importe`) "
-        Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codsocio, grupopro.codgrupo, sum(rfactsoc_variedad.imporvar) "
-        Sql = Sql & " from " & ctabla1
-        Sql = Sql & " where " & cSelect & " and grupopro.codgrupo in (4,5) " ' algarrobos y olivos
-        Sql = Sql & " group by rfactsoc.codsocio, grupopro.codgrupo  "
-        Sql = Sql & " union "
-        Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codsocio, 0, sum(rfactsoc_variedad.imporvar)"
-        Sql = Sql & " from " & ctabla1
-        Sql = Sql & " where " & cSelect & " and not grupopro.codgrupo in (4,5) " ' el resto
-        Sql = Sql & " group by rfactsoc.codsocio, grupopro.codgrupo  "
-        Sql = Sql & " order by 1,2 "
+        SQL = "insert into tmp346 (`codusu`,`codsocio`,`codgrupo`,`importe`) "
+        SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codsocio, grupopro.codgrupo, sum(rfactsoc_variedad.imporvar) "
+        SQL = SQL & " from " & ctabla1
+        SQL = SQL & " where " & cSelect & " and grupopro.codgrupo in (4,5) " ' algarrobos y olivos
+        SQL = SQL & " group by rfactsoc.codsocio, grupopro.codgrupo  "
+        SQL = SQL & " union "
+        SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codsocio, 0, sum(rfactsoc_variedad.imporvar)"
+        SQL = SQL & " from " & ctabla1
+        SQL = SQL & " where " & cSelect & " and not grupopro.codgrupo in (4,5) " ' el resto
+        SQL = SQL & " group by rfactsoc.codsocio, grupopro.codgrupo  "
+        SQL = SQL & " order by 1,2 "
     
-        conn.Execute Sql
+        conn.Execute SQL
     End If
     
     If OpcionListado = 8 Or OpcionListado = 9 Then
-        Sql = "delete from tmprfactsoc_variedad where codusu= " & vUsu.Codigo
-        conn.Execute Sql
+        SQL = "delete from tmprfactsoc_variedad where codusu= " & vUsu.Codigo
+        conn.Execute SQL
         
-        Sql = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
-        Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-        Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu,"
-        Sql = Sql & " rfactsoc_variedad.codvarie, rfactsoc_variedad.codcampo, rfactsoc_variedad.kilosnet,"
-        Sql = Sql & " rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.descontado"
-        Sql = Sql & " from " & cTabla
-        Sql = Sql & " where " & cSelect
+        SQL = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
+        SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+        SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu,"
+        SQL = SQL & " rfactsoc_variedad.codvarie, rfactsoc_variedad.codcampo, rfactsoc_variedad.kilosnet,"
+        SQL = SQL & " rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.descontado"
+        SQL = SQL & " from " & cTabla
+        SQL = SQL & " where " & cSelect
     
-        conn.Execute Sql
+        conn.Execute SQL
     
         '24/01/2011
         If Check1(7).Value = 1 Then  ' caso del certificado de retenciones
-            Sql = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
-            Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-            Sql = Sql & " select distinct " & vUsu.Codigo & ", rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu,"
-            Sql = Sql & " rfactsoc_anticipos.codvarieanti, rfactsoc_anticipos.codcampoanti, 0,rfactsoc_anticipos.numfactuanti,rfactsoc_anticipos.baseimpo * (-1),0 "
-            Sql = Sql & " from (" & cTabla & ") Inner join rfactsoc_anticipos on rfactsoc.codtipom = rfactsoc_anticipos.codtipom and rfactsoc.numfactu = rfactsoc_anticipos.numfactu and rfactsoc.fecfactu = rfactsoc_anticipos.fecfactu "
-            Sql = Sql & " where " & cSelect
+            SQL = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
+            SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+            SQL = SQL & " select distinct " & vUsu.Codigo & ", rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu,"
+            SQL = SQL & " rfactsoc_anticipos.codvarieanti, rfactsoc_anticipos.codcampoanti, 0,rfactsoc_anticipos.numfactuanti,rfactsoc_anticipos.baseimpo * (-1),0 "
+            SQL = SQL & " from (" & cTabla & ") Inner join rfactsoc_anticipos on rfactsoc.codtipom = rfactsoc_anticipos.codtipom and rfactsoc.numfactu = rfactsoc_anticipos.numfactu and rfactsoc.fecfactu = rfactsoc_anticipos.fecfactu "
+            SQL = SQL & " where " & cSelect
             
-            conn.Execute Sql
+            conn.Execute SQL
         
         
         End If
@@ -15921,7 +15922,7 @@ Dim cTablaAnticip As String
         '[Monica]25/05/2015: tenemos que añadir los descuentos para el caso de montifrut
         If vParamAplic.Cooperativa = 12 And Check1(7).Value = 1 Then
             Dim Varie As Long
-            Dim Campo As Long
+            Dim campo As Long
             Dim TotalKilos As Long
             Dim ImporteTot As Currency
             Dim vImporte As Currency
@@ -15930,43 +15931,43 @@ Dim cTablaAnticip As String
             Dim Rs6 As ADODB.Recordset
             
             
-            Sql = "select * from rfactsoc_gastos where (codtipom, numfactu, fecfactu) in (select rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu from " & cTabla & " where " & cSelect & ")"
-            Sql = Sql & " order by codtipom, numfactu, fecfactu "
+            SQL = "select * from rfactsoc_gastos where (codtipom, numfactu, fecfactu) in (select rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu from " & cTabla & " where " & cSelect & ")"
+            SQL = SQL & " order by codtipom, numfactu, fecfactu "
             
             Set RS5 = New ADODB.Recordset
-            RS5.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            RS5.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not RS5.EOF
-                Sql = "select sum(kilosnet) from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
+                SQL = "select sum(kilosnet) from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                 
-                TotalKilos = DevuelveValor(Sql)
+                TotalKilos = DevuelveValor(SQL)
                 ImporteTot = DBLet(RS5!Importe)
                 vImporte = 0
                 
-                Sql = "select * from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
+                SQL = "select * from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                 
                 Set Rs6 = New ADODB.Recordset
-                Rs6.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs6.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 While Not Rs6.EOF
                     Importe = Round2(DBLet(Rs6!KilosNet) * DBLet(RS5!Importe) / TotalKilos, 2)
                     vImporte = vImporte + Importe
                     
                     Varie = DBLet(Rs6!codvarie)
-                    Campo = DBLet(Rs6!codcampo)
+                    campo = DBLet(Rs6!codcampo)
                     
-                    Sql = "update tmprfactsoc_variedad set imporvar = imporvar - " & DBSet(Importe, "N")
-                    Sql = Sql & " where codusu = " & vUsu.Codigo
-                    Sql = Sql & " and codtipom = " & DBSet(RS5!CodTipom, "T")
-                    Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
-                    Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
-                    Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
+                    SQL = "update tmprfactsoc_variedad set imporvar = imporvar - " & DBSet(Importe, "N")
+                    SQL = SQL & " where codusu = " & vUsu.Codigo
+                    SQL = SQL & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                    SQL = SQL & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                    SQL = SQL & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
+                    SQL = SQL & " and codvarie = " & DBSet(Varie, "N")
+                    SQL = SQL & " and codcampo = " & DBSet(campo, "N")
                     
-                    conn.Execute Sql
+                    conn.Execute SQL
                     
                     Rs6.MoveNext
                 Wend
@@ -15974,15 +15975,15 @@ Dim cTablaAnticip As String
                 
                 ' si hay diferencia en el ultimo ponemos la diferencia
                 If vImporte <> ImporteTot Then
-                    Sql = "update tmprfactsoc_variedad set imporvar = imporvar + " & DBSet(vImporte - ImporteTot, "N")
-                    Sql = Sql & " where codusu = " & vUsu.Codigo
-                    Sql = Sql & " and codtipom = " & DBSet(RS5!CodTipom, "T")
-                    Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
-                    Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
-                    Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
+                    SQL = "update tmprfactsoc_variedad set imporvar = imporvar + " & DBSet(vImporte - ImporteTot, "N")
+                    SQL = SQL & " where codusu = " & vUsu.Codigo
+                    SQL = SQL & " and codtipom = " & DBSet(RS5!CodTipom, "T")
+                    SQL = SQL & " and numfactu = " & DBSet(RS5!numfactu, "N")
+                    SQL = SQL & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
+                    SQL = SQL & " and codvarie = " & DBSet(Varie, "N")
+                    SQL = SQL & " and codcampo = " & DBSet(campo, "N")
                 
-                    conn.Execute Sql
+                    conn.Execute SQL
                 End If
             
                 RS5.MoveNext
@@ -15995,22 +15996,22 @@ Dim cTablaAnticip As String
     
         ' - idem transporte
         If InStr(1, cSelect, "FTR") Then
-            Sql = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-            Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-            Sql = Sql & " select " & vUsu.Codigo & ", rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans,"
-            Sql = Sql & " rfacttra_albaran.codvarie, rfacttra_albaran.codcampo, sum(rfacttra_albaran.kilosnet) kilosnet,"
-            Sql = Sql & " 0, sum(rfacttra_albaran.importe) importe, 0"
-            Sql = Sql & " from " & cTabla2
-            Sql = Sql & " where " & cSelect2
-            Sql = Sql & " group by 1,2,3,4,5,6,7,9,11"
-            conn.Execute Sql
+            SQL = "insert into tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+            SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+            SQL = SQL & " select " & vUsu.Codigo & ", rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans,"
+            SQL = SQL & " rfacttra_albaran.codvarie, rfacttra_albaran.codcampo, sum(rfacttra_albaran.kilosnet) kilosnet,"
+            SQL = SQL & " 0, sum(rfacttra_albaran.importe) importe, 0"
+            SQL = SQL & " from " & cTabla2
+            SQL = SQL & " where " & cSelect2
+            SQL = SQL & " group by 1,2,3,4,5,6,7,9,11"
+            conn.Execute SQL
         End If
         
         
         '[Monica]15/10/2013: borramos los registros FTT que no tengan numero de factura asignada
-        Sql = "delete from tmprfactsoc_variedad where codusu = " & vUsu.Codigo
-        Sql = Sql & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc where pdtenrofact = 1) " 'where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
-        conn.Execute Sql
+        SQL = "delete from tmprfactsoc_variedad where codusu = " & vUsu.Codigo
+        SQL = SQL & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from rfactsoc where pdtenrofact = 1) " 'where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
+        conn.Execute SQL
     
     End If
     
@@ -16028,20 +16029,20 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
         If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
         
             ' borramos la tabla temporal de la campaña anterior
-            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc where codusu= " & vUsu.Codigo
-            conn.Execute Sql
+            SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc where codusu= " & vUsu.Codigo
+            conn.Execute SQL
             
             
-            Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-            Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-            Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo, esretirada, impgastospie) "
-            Sql = Sql & "select " & vUsu.Codigo & ", `rfactsoc`.`codtipom`, `rfactsoc`.`numfactu`, `rfactsoc`.`fecfactu`, `codsocio`, "
-            Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-            Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 0, `esretirada`, 0 " '[Monica]24/07/2012: metemos si es de retirada
-            Sql = Sql & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
-            Sql = Sql & " where " & cSelect
-            Sql = Sql & " group by 1,2,3,4 "
-            conn.Execute Sql
+            SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+            SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+            SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo, esretirada, impgastospie) "
+            SQL = SQL & "select " & vUsu.Codigo & ", `rfactsoc`.`codtipom`, `rfactsoc`.`numfactu`, `rfactsoc`.`fecfactu`, `codsocio`, "
+            SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+            SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 0, `esretirada`, 0 " '[Monica]24/07/2012: metemos si es de retirada
+            SQL = SQL & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
+            SQL = SQL & " where " & cSelect
+            SQL = SQL & " group by 1,2,3,4 "
+            conn.Execute SQL
         
             
             '[Monica]26/08/2011: Modificacion solo para Picassent
@@ -16049,28 +16050,28 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
             '                    con lo cual el totalfac será el total a pagar
             '
             If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set impapor = if(impapor is null,0,impapor) + (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
-                Sql = Sql & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
-                Sql = Sql & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
-                Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set impapor = if(impapor is null,0,impapor) + (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
+                SQL = SQL & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
+                SQL = SQL & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
+                SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             
                 ' ahora el total factura es el total a pagar en Picassent
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set totalfac = baseimpo + if(imporiva is null,0,imporiva) - if(impreten is null,0,impreten) - if(impapor is null,0,impapor)  "
-                Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set totalfac = baseimpo + if(imporiva is null,0,imporiva) - if(impreten is null,0,impreten) - if(impapor is null,0,impapor)  "
+                SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
             
             '[Monica]21/03/2016: si quieren que detallen los gastos los cargamos en la columna impgastopie
             If Check1(27) Then
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set impgastospie = (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
-                Sql = Sql & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
-                Sql = Sql & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
-                Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set impgastospie = (select if(sum(importe) is null,0,sum(importe)) from rfactsoc_gastos where "
+                SQL = SQL & " rfactsoc_gastos.codtipom = tmprfactsoc.codtipom and rfactsoc_gastos.numfactu = tmprfactsoc.numfactu "
+                SQL = SQL & " and rfactsoc_gastos.fecfactu = tmprfactsoc.fecfactu) "
+                SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo & " and tmprfactsoc.tipo = 0"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
             
             
@@ -16078,163 +16079,163 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 And vParamApli
             
             '[Monica]03/03/2011: cargamos el nif del socio
 '            Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set nif = (select nifsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
-            Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.nif = ff.nifsocio where ff.codsocio = dd.codsocio"
-            Sql = Sql & " and dd.tipo = 0"
-            conn.Execute Sql
+            SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.nif = ff.nifsocio where ff.codsocio = dd.codsocio"
+            SQL = SQL & " and dd.tipo = 0"
+            conn.Execute SQL
             
             '[Monica]03/03/2011: cargamos el nif del socio
 '            Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set nomsocio = (select nomsocio from rsocios where rsocios.codsocio = tmprfactsoc.codsocio)"
-            Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.nomsocio = ff.nomsocio where ff.codsocio = dd.codsocio"
-            Sql = Sql & " and dd.tipo = 0"
-            conn.Execute Sql
+            SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.nomsocio = ff.nomsocio where ff.codsocio = dd.codsocio"
+            SQL = SQL & " and dd.tipo = 0"
+            conn.Execute SQL
             
             '[Monica]20/01/2014: cargamos el codigo postal del socio
-            Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.codpostal = ff.codpostal where ff.codsocio = dd.codsocio"
-            Sql = Sql & " and dd.tipo = 0"
-            conn.Execute Sql
+            SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rsocios ff set dd.codpostal = ff.codpostal where ff.codsocio = dd.codsocio"
+            SQL = SQL & " and dd.tipo = 0"
+            conn.Execute SQL
             
             
             
             '[Monica]15/10/2013: borramos los registros FTT que no tengan numero de factura asignada
-            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc where codusu = " & vUsu.Codigo
-            Sql = Sql & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from " & Trim(RsBd.Fields(0).Value) & ".rfactsoc where pdtenrofact = 1) " 'where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
-            conn.Execute Sql
+            SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc where codusu = " & vUsu.Codigo
+            SQL = SQL & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from " & Trim(RsBd.Fields(0).Value) & ".rfactsoc where pdtenrofact = 1) " 'where codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
+            conn.Execute SQL
             
             
             If InStr(1, cSelect, "FTR") Or (cSelect2 <> "" And (OpcionListado = 10 Or OpcionListado = 11)) Then
-                Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-                Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-                Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
-                Sql = Sql & "select " & vUsu.Codigo & ", `rfacttra`.`codtipom`, `rfacttra`.`numfactu`, `rfacttra`.`fecfactu`, `rfacttra`.`codtrans`, "
-                Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-                Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 1 "
-                Sql = Sql & " from " & Replace(cTabla2, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
-                Sql = Sql & " where " & cSelect2
-                Sql = Sql & " group by 1,2,3,4,5 "
-                conn.Execute Sql
+                SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+                SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+                SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
+                SQL = SQL & "select " & vUsu.Codigo & ", `rfacttra`.`codtipom`, `rfacttra`.`numfactu`, `rfacttra`.`fecfactu`, `rfacttra`.`codtrans`, "
+                SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+                SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, 1 "
+                SQL = SQL & " from " & Replace(cTabla2, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
+                SQL = SQL & " where " & cSelect2
+                SQL = SQL & " group by 1,2,3,4,5 "
+                conn.Execute SQL
             
                 '[Monica]03/03/2011: cargamos el nif del transportista
 '                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set nif = (select niftrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.nif = ff.niftrans where ff.codtrans = dd.codsocio"
-                Sql = Sql & " and dd.tipo = 1"
-                conn.Execute Sql
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.nif = ff.niftrans where ff.codtrans = dd.codsocio"
+                SQL = SQL & " and dd.tipo = 1"
+                conn.Execute SQL
             
                 '[Monica]03/03/2011: cargamos el nif del transportista
 '                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc set nomsocio = (select nomtrans from rtransporte where rtransporte.codtrans = tmprfactsoc.codsocio)"
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.nomsocio = ff.nomtrans where ff.codtrans = dd.codsocio"
-                Sql = Sql & " and dd.tipo = 1"
-                conn.Execute Sql
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.nomsocio = ff.nomtrans where ff.codtrans = dd.codsocio"
+                SQL = SQL & " and dd.tipo = 1"
+                conn.Execute SQL
             
                 '[Monica]20/01/2014: cargamos el codigo postal del transportista
-                Sql = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.codpostal = ff.codpostal where ff.codtrans = dd.codsocio"
-                Sql = Sql & " and dd.tipo = 1"
-                conn.Execute Sql
+                SQL = "update " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc dd, " & Trim(RsBd.Fields(0).Value) & ".rtransporte ff set dd.codpostal = ff.codpostal where ff.codtrans = dd.codsocio"
+                SQL = SQL & " and dd.tipo = 1"
+                conn.Execute SQL
             
             End If
         
             '[Monica]20/01/2015: en el caso de ser modelo 190, añadimos las de terceros
             If OpcionListado = 10 Then
-                Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-                Sql = Sql & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
-                Sql = Sql & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
-                Sql = Sql & "select " & vUsu.Codigo & ", 'AAA', 1, `rcafter`.`fecfactu`, `rcafter`.`codsocio`, "
-                Sql = Sql & "coalesce(baseiva1,0) + coalesce(baseiva2,0) + coalesce(baseiva3,0),`tipoiva1`,`porciva1`,`impoiva1`,0,`basereten`,"
-                Sql = Sql & "`retfacpr`,`trefacpr`,0,0,0,`totalfac`, 2 from "
-                Sql = Sql & Replace(cTabla3, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
-                Sql = Sql & " where " & cSelect3
-                Sql = Sql & " group by 1,2,3,4,5 "
-                conn.Execute Sql
+                SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc(`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+                SQL = SQL & "`baseimpo`,`tipoiva`,`porc_iva`,`imporiva`,`tipoirpf`,`basereten`,"
+                SQL = SQL & "`porc_ret`,`impreten`,`baseaport`,`porc_apo`,`impapor`,`totalfac`, tipo) "
+                SQL = SQL & "select " & vUsu.Codigo & ", 'AAA', 1, `rcafter`.`fecfactu`, `rcafter`.`codsocio`, "
+                SQL = SQL & "coalesce(baseiva1,0) + coalesce(baseiva2,0) + coalesce(baseiva3,0),`tipoiva1`,`porciva1`,`impoiva1`,0,`basereten`,"
+                SQL = SQL & "`retfacpr`,`trefacpr`,0,0,0,`totalfac`, 2 from "
+                SQL = SQL & Replace(cTabla3, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
+                SQL = SQL & " where " & cSelect3
+                SQL = SQL & " group by 1,2,3,4,5 "
+                conn.Execute SQL
             End If
         
             If OpcionListado = 11 Then ' caso del 346
-                Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmp346 where codusu= " & vUsu.Codigo
-                conn.Execute Sql
+                SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmp346 where codusu= " & vUsu.Codigo
+                conn.Execute SQL
                 
                 ctabla1 = "(" & Replace(cTabla, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value)) & ") INNER JOIN " & Trim(RsBd.Fields(0).Value) & ".variedades ON rfactsoc_variedad.codvarie = variedades.codvarie "
                 ctabla1 = "(" & ctabla1 & ") INNER JOIN " & Trim(RsBd.Fields(0).Value) & ".productos ON variedades.codprodu = productos.codprodu "
                 ctabla1 = "(" & ctabla1 & ") INNER JOIN " & Trim(RsBd.Fields(0).Value) & ".grupopro ON productos.codgrupo = grupopro.codgrupo "
                 
-                Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmp346 (`codusu`,`codsocio`,`codgrupo`,`importe`) "
-                Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codsocio, grupopro.codgrupo, sum(rfactsoc_variedad.imporvar) "
-                Sql = Sql & " from " & ctabla1 '04/02/2014:antes estaba mal, Replace(ctabla1, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
-                Sql = Sql & " where " & cSelect & " and grupopro.codgrupo in (4,5) " ' algarrobos y olivos
-                Sql = Sql & " group by rfactsoc.codsocio, grupopro.codgrupo  "
-                Sql = Sql & " union "
-                Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codsocio, 0, sum(rfactsoc_variedad.imporvar)"
-                Sql = Sql & " from " & ctabla1 '04/02/2014:antes estaba mal, Replace(ctabla1, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
-                Sql = Sql & " where " & cSelect & " and not grupopro.codgrupo in (4,5) " ' el resto
-                Sql = Sql & " group by rfactsoc.codsocio, grupopro.codgrupo  "
-                Sql = Sql & " order by 1,2 "
+                SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmp346 (`codusu`,`codsocio`,`codgrupo`,`importe`) "
+                SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codsocio, grupopro.codgrupo, sum(rfactsoc_variedad.imporvar) "
+                SQL = SQL & " from " & ctabla1 '04/02/2014:antes estaba mal, Replace(ctabla1, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
+                SQL = SQL & " where " & cSelect & " and grupopro.codgrupo in (4,5) " ' algarrobos y olivos
+                SQL = SQL & " group by rfactsoc.codsocio, grupopro.codgrupo  "
+                SQL = SQL & " union "
+                SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codsocio, 0, sum(rfactsoc_variedad.imporvar)"
+                SQL = SQL & " from " & ctabla1 '04/02/2014:antes estaba mal, Replace(ctabla1, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
+                SQL = SQL & " where " & cSelect & " and not grupopro.codgrupo in (4,5) " ' el resto
+                SQL = SQL & " group by rfactsoc.codsocio, grupopro.codgrupo  "
+                SQL = SQL & " order by 1,2 "
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
             
             If OpcionListado = 8 Or OpcionListado = 9 Then
-                Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad where codusu= " & vUsu.Codigo
-                conn.Execute Sql
+                SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad where codusu= " & vUsu.Codigo
+                conn.Execute SQL
                 
-                Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
-                Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-                Sql = Sql & " select " & vUsu.Codigo & ", rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu,"
-                Sql = Sql & " rfactsoc_variedad.codvarie, rfactsoc_variedad.codcampo, rfactsoc_variedad.kilosnet,"
-                Sql = Sql & " rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.descontado "
-                Sql = Sql & " from " & Replace(cTabla, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
-                Sql = Sql & " where " & cSelect
+                SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
+                SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+                SQL = SQL & " select " & vUsu.Codigo & ", rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu,"
+                SQL = SQL & " rfactsoc_variedad.codvarie, rfactsoc_variedad.codcampo, rfactsoc_variedad.kilosnet,"
+                SQL = SQL & " rfactsoc_variedad.preciomed, rfactsoc_variedad.imporvar, rfactsoc_variedad.descontado "
+                SQL = SQL & " from " & Replace(cTabla, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
+                SQL = SQL & " where " & cSelect
             
-                conn.Execute Sql
+                conn.Execute SQL
                                        
                 If Check1(7).Value = 1 Then  ' caso del certificado de retenciones
-                    Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
-                    Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-                    Sql = Sql & " select distinct " & vUsu.Codigo & ", rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu,"
-                    Sql = Sql & " rfactsoc_anticipos.codvarieanti, rfactsoc_anticipos.codcampoanti, 0,rfactsoc_anticipos.numfactuanti,rfactsoc_anticipos.baseimpo * (-1),0 "
-                    Sql = Sql & " from (" & Replace(cTabla, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value)) & ") Inner join " & Replace(cTablaAnticip, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value)) & " on rfactsoc.codtipom = rfactsoc_anticipos.codtipom and rfactsoc.numfactu = rfactsoc_anticipos.numfactu and rfactsoc.fecfactu = rfactsoc_anticipos.fecfactu "
-                    Sql = Sql & " where " & cSelect
-                    conn.Execute Sql
+                    SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,"
+                    SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+                    SQL = SQL & " select distinct " & vUsu.Codigo & ", rfactsoc_anticipos.codtipom, rfactsoc_anticipos.numfactu, rfactsoc_anticipos.fecfactu,"
+                    SQL = SQL & " rfactsoc_anticipos.codvarieanti, rfactsoc_anticipos.codcampoanti, 0,rfactsoc_anticipos.numfactuanti,rfactsoc_anticipos.baseimpo * (-1),0 "
+                    SQL = SQL & " from (" & Replace(cTabla, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value)) & ") Inner join " & Replace(cTablaAnticip, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value)) & " on rfactsoc.codtipom = rfactsoc_anticipos.codtipom and rfactsoc.numfactu = rfactsoc_anticipos.numfactu and rfactsoc.fecfactu = rfactsoc_anticipos.fecfactu "
+                    SQL = SQL & " where " & cSelect
+                    conn.Execute SQL
                 
                 
                 End If
             
             
                 If InStr(1, cSelect, "FTR") Then
-                    Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
-                    Sql = Sql & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
-                    Sql = Sql & " select " & vUsu.Codigo & ", rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans,"
-                    Sql = Sql & " rfacttra_albaran.codvarie, rfacttra_albaran.codcampo, sum(rfacttra_albaran.kilosnet) kilosnet,"
-                    Sql = Sql & " 0, sum(rfacttra_albaran.importe) importe , 0 "
-                    Sql = Sql & " from " & Replace(cTabla2, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
-                    Sql = Sql & " where " & cSelect2
-                    Sql = Sql & " group by 1,2,3,4,5,6,7,9,11 "
-                    conn.Execute Sql
+                    SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad (`codusu`,`codtipom`,`numfactu`,`fecfactu`,`codsocio`,"
+                    SQL = SQL & "`codvarie`,`codcampo`,`kilosnet`,`preciomed`,`imporvar`,`descontado`) "
+                    SQL = SQL & " select " & vUsu.Codigo & ", rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans,"
+                    SQL = SQL & " rfacttra_albaran.codvarie, rfacttra_albaran.codcampo, sum(rfacttra_albaran.kilosnet) kilosnet,"
+                    SQL = SQL & " 0, sum(rfacttra_albaran.importe) importe , 0 "
+                    SQL = SQL & " from " & Replace(cTabla2, vEmpresa.BDAriagro, Trim(RsBd.Fields(0).Value))
+                    SQL = SQL & " where " & cSelect2
+                    SQL = SQL & " group by 1,2,3,4,5,6,7,9,11 "
+                    conn.Execute SQL
                 End If
             
                 '[Monica]15/10/2013: borramos los registros FTT que no tengan numero de factura asignada
-                Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad where codusu = " & vUsu.Codigo
-                Sql = Sql & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from " & Trim(RsBd.Fields(0).Value) & ".rfactsoc where pdtenrofact = 1) " 'codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
-                conn.Execute Sql
+                SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad where codusu = " & vUsu.Codigo
+                SQL = SQL & " and (codtipom, numfactu, fecfactu) in (select codtipom, numfactu, fecfactu from " & Trim(RsBd.Fields(0).Value) & ".rfactsoc where pdtenrofact = 1) " 'codtipom in ('FTT','FAT','FLT') and numfacrec is null)"
+                conn.Execute SQL
             End If
         
         
             ' introducimos las facturas de la campaña anterior en la temporal de la
             ' campaña actual
-            Sql = "insert into tmprfactsoc select * from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc "
-            Sql = Sql & " where codusu = " & vUsu.Codigo
+            SQL = "insert into tmprfactsoc select * from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc "
+            SQL = SQL & " where codusu = " & vUsu.Codigo
             
-            conn.Execute Sql
+            conn.Execute SQL
             
             
             If OpcionListado = 11 Then
-                Sql = "insert into tmp346 select * from " & Trim(RsBd.Fields(0).Value) & ".tmp346 "
-                Sql = Sql & " where codusu = " & vUsu.Codigo
+                SQL = "insert into tmp346 select * from " & Trim(RsBd.Fields(0).Value) & ".tmp346 "
+                SQL = SQL & " where codusu = " & vUsu.Codigo
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
             
             If OpcionListado = 8 Or OpcionListado = 9 Then
-                Sql = "insert into tmprfactsoc_variedad select * from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad "
-                Sql = Sql & " where codusu = " & vUsu.Codigo
+                SQL = "insert into tmprfactsoc_variedad select * from " & Trim(RsBd.Fields(0).Value) & ".tmprfactsoc_variedad "
+                SQL = SQL & " where codusu = " & vUsu.Codigo
                 
-                conn.Execute Sql
+                conn.Execute SQL
             
             End If
         End If
@@ -16247,26 +16248,26 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
   
     ' [Monica] 11/05/2010: hacemos todos los calculos aunque luego no los impriman
     If Check1(7).Value = 1 Then ' And vParamAplic.Cooperativa = 0  Then ' si estamos en el certificado de retenciones de Catadau
-        Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-        conn.Execute Sql
+        SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+        conn.Execute SQL
     
     
         '[Monica]19/01/2012: en Quatretonda lo quieren ordenado por variedad
         If vParamAplic.Cooperativa = 7 Then
-            Sql = "select nif, tipo , tmprfactsoc.codsocio codigo , variedades.codvarie codprodu, tmprfactsoc.porc_iva, max(tmprfactsoc.porc_ret) porc_ret, sum(tmprfactsoc_variedad.imporvar) importe "
+            SQL = "select nif, tipo , tmprfactsoc.codsocio codigo , variedades.codvarie codprodu, tmprfactsoc.porc_iva, max(tmprfactsoc.porc_ret) porc_ret, sum(tmprfactsoc_variedad.imporvar) importe "
         Else
-            Sql = "select nif, tipo , tmprfactsoc.codsocio codigo , variedades.codprodu, tmprfactsoc.porc_iva, max(tmprfactsoc.porc_ret) porc_ret, sum(tmprfactsoc_variedad.imporvar) importe "
+            SQL = "select nif, tipo , tmprfactsoc.codsocio codigo , variedades.codprodu, tmprfactsoc.porc_iva, max(tmprfactsoc.porc_ret) porc_ret, sum(tmprfactsoc_variedad.imporvar) importe "
         End If
-        Sql = Sql & " from (tmprfactsoc inner join tmprfactsoc_variedad on tmprfactsoc.codtipom = tmprfactsoc_variedad.codtipom "
-        Sql = Sql & " and tmprfactsoc.codusu = tmprfactsoc_variedad.codusu "
-        Sql = Sql & " and tmprfactsoc.numfactu = tmprfactsoc_variedad.numfactu  and tmprfactsoc.fecfactu = tmprfactsoc_variedad.fecfactu) "
-        Sql = Sql & " inner join variedades on tmprfactsoc_variedad.codvarie = variedades.codvarie "
-        Sql = Sql & " where tmprfactsoc.codusu = " & vUsu.Codigo
-        Sql = Sql & " group by 1,2,3,4,5 "
-        Sql = Sql & " order by 1,2,3,4,5"
+        SQL = SQL & " from (tmprfactsoc inner join tmprfactsoc_variedad on tmprfactsoc.codtipom = tmprfactsoc_variedad.codtipom "
+        SQL = SQL & " and tmprfactsoc.codusu = tmprfactsoc_variedad.codusu "
+        SQL = SQL & " and tmprfactsoc.numfactu = tmprfactsoc_variedad.numfactu  and tmprfactsoc.fecfactu = tmprfactsoc_variedad.fecfactu) "
+        SQL = SQL & " inner join variedades on tmprfactsoc_variedad.codvarie = variedades.codvarie "
+        SQL = SQL & " where tmprfactsoc.codusu = " & vUsu.Codigo
+        SQL = SQL & " group by 1,2,3,4,5 "
+        SQL = SQL & " order by 1,2,3,4,5"
 
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                                 'nif,    0/1   soc/trans, codprodu, basereten,impreten
         Sql2 = "insert into tmpinformes (codusu, nombre1,codigo1, nombre2, importe1, importe2, importe3) values "
@@ -16333,17 +16334,17 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
             While Not Rs.EOF
                 Select Case Rs.Fields(0).Value
                     Case 0
-                        Sql = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
-                        Sql = Sql & " and codsocio = " & DBSet(Rs!Codigo, "N")
-                        Sql = Sql & " and tipo = 0"
+                        SQL = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
+                        SQL = SQL & " and codsocio = " & DBSet(Rs!Codigo, "N")
+                        SQL = SQL & " and tipo = 0"
                     Case 1 '"B"
-                        Sql = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
-                        Sql = Sql & " and codsocio = " & DBSet(Rs!Codigo, "T")
-                        Sql = Sql & " and tipo = 1"
+                        SQL = "select sum(basereten) base, sum(impreten) reten from tmprfactsoc where codusu = " & vUsu.Codigo
+                        SQL = SQL & " and codsocio = " & DBSet(Rs!Codigo, "T")
+                        SQL = SQL & " and tipo = 1"
                 End Select
                 
                 Set Rs2 = New ADODB.Recordset
-                Rs2.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs2.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Not Rs2.EOF Then
                     DifBase = DBLet(Rs2!Base, "N") - DBLet(Rs!BaseReten, "N")
                     DifRete = DBLet(Rs2!Reten, "N") - DBLet(Rs!ImpReten, "N")
@@ -16390,7 +16391,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionIndustria(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -16430,15 +16431,15 @@ Dim HayReg As Boolean
     conn.Execute Sql2
 
     If CargarTemporalIndustria(cTabla, cWhere) Then
-        Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codcampo, tmpliquidacion.codvarie, variedades.nomvarie,"
-        Sql = Sql & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
-        Sql = Sql & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpliquidacion.codvarie = variedades.codvarie "
-        Sql = Sql & " group by 1, 2, 3, 4 "
-        Sql = Sql & " order by 1, 2, 3, 4 "
+        SQL = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codcampo, tmpliquidacion.codvarie, variedades.nomvarie,"
+        SQL = SQL & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
+        SQL = SQL & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpliquidacion.codvarie = variedades.codvarie "
+        SQL = SQL & " group by 1, 2, 3, 4 "
+        SQL = SQL & " order by 1, 2, 3, 4 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    codcampo, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -16620,7 +16621,7 @@ End Function
 
 Private Function HayPreciosVariedadesIndustria(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay precios para cada una de las variedades seleccionadas
-Dim Sql As String
+Dim SQL As String
 Dim vPrecios As CPrecios
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -16636,28 +16637,28 @@ Dim NumReg As Long
     
     conn.Execute " DROP TABLE IF EXISTS tmpVarie;"
     
-    Sql = "CREATE TEMPORARY TABLE tmpVarie ( " 'TEMPORARY
-    Sql = Sql & "codvarie INT(6) UNSIGNED  DEFAULT '0' NOT NULL) "
-    conn.Execute Sql
+    SQL = "CREATE TEMPORARY TABLE tmpVarie ( " 'TEMPORARY
+    SQL = SQL & "codvarie INT(6) UNSIGNED  DEFAULT '0' NOT NULL) "
+    conn.Execute SQL
     
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    Sql = "Select distinct rhisfruta.codvarie, rhisfruta.fecalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select distinct rhisfruta.codvarie, rhisfruta.fecalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     
 '    Sql2 = "Select distinct rhisfruta_clasif.codvarie, rhisfruta_clasif.codcalid FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
 '        Sql2 = Sql2 & " where " & cWhere
     End If
-    Sql = Sql & " group by 1,2 "
-    Sql = Sql & " order by 1,2 "
+    SQL = SQL & " group by 1,2 "
+    SQL = SQL & " order by 1,2 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     B = True
     
@@ -16705,7 +16706,7 @@ Private Function CargarTemporalIndustria(cTabla As String, cWhere As String) As 
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -16762,23 +16763,23 @@ Dim Sql5 As String
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
-    Sql = Sql & " rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-    Sql = Sql & " sum(rhisfruta_clasif.kilosnet) as kilos "
-    Sql = Sql & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
+    SQL = SQL & " rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
+    SQL = SQL & " sum(rhisfruta_clasif.kilosnet) as kilos "
+    SQL = SQL & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6 "
-    Sql = Sql & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6 "
+    SQL = SQL & " having sum(rhisfruta_clasif.kilosnet) <> 0 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6 "
 
 
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
     Me.Pb1.visible = True
@@ -16787,7 +16788,7 @@ Dim Sql5 As String
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     
     While Not Rs.EOF
@@ -17028,7 +17029,7 @@ End Sub
 
 Private Function TipoFacturaOk() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -17116,7 +17117,7 @@ Dim Rs As ADODB.Recordset
     Else
         Set frmMens1 = New frmMensajes
         frmMens1.cadWHERE = " and " & cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
-        frmMens1.Campo = txtCodigo(50).Text
+        frmMens1.campo = txtCodigo(50).Text
         frmMens1.OpcionMensaje = 7
         frmMens1.Show vbModal
         Set frmMens1 = Nothing
@@ -17125,18 +17126,18 @@ Dim Rs As ADODB.Recordset
 End Sub
 
 
-Private Sub PonerDatosCampo(Campo As String)
+Private Sub PonerDatosCampo(campo As String)
 Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
 
 
-    If Campo = "" Then Exit Sub
+    If campo = "" Then Exit Sub
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    cad = "rcampos.codcampo = " & DBSet(Campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla, rcampos.nrocampo from rcampos, rpartida, rzonas, rpueblos "
@@ -17156,7 +17157,7 @@ Dim Rs As ADODB.Recordset
     Text2(2).Text = ""
     Text2(5).Text = ""
     If Not Rs.EOF Then
-        txtCodigo(50).Text = Campo
+        txtCodigo(50).Text = campo
         PonerFormatoEntero txtCodigo(50)
         Text2(4).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If Text2(4).Text <> "" Then Text2(4).Text = Format(Text2(4).Text, "0000")
@@ -17175,7 +17176,7 @@ End Sub
  
 
 Private Function RecalculoImportes(Albar As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim ImpTotal As Currency
 Dim Albaran As Long
@@ -17196,14 +17197,14 @@ Dim Importe As Currency
         conn.BeginTrans
 
         ' Kilos Totales
-        Sql = "select sum(kilosnet) from rhisfruta where numalbar in (" & Trim(Albar) & ")"
-        KilosTot = DevuelveValor(Sql)
+        SQL = "select sum(kilosnet) from rhisfruta where numalbar in (" & Trim(Albar) & ")"
+        KilosTot = DevuelveValor(SQL)
     
         ImporteTotal = txtCodigo(46).Text
     
-        Sql = "select numalbar, kilosnet from rhisfruta where numalbar in (" & Trim(Albar) & ")"
+        SQL = "select numalbar, kilosnet from rhisfruta where numalbar in (" & Trim(Albar) & ")"
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         ImpTotal = 0
         
@@ -17214,20 +17215,20 @@ Dim Importe As Currency
             ImpTotal = ImpTotal + Importe
             
             ' actualizamos la entrada
-            Sql = "update rhisfruta set impentrada = " & DBSet(Importe, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
+            SQL = "update rhisfruta set impentrada = " & DBSet(Importe, "N")
+            SQL = SQL & " where numalbar = " & DBSet(Albaran, "N")
             
-            conn.Execute Sql
+            conn.Execute SQL
             
             Rs.MoveNext
         Wend
         Set Rs = Nothing
         
         If ImpTotal <> ImporteTotal And ImpTotal <> 0 Then
-            Sql = "update rhisfruta set impentrada = impentrada + " & DBSet(ImporteTotal - ImpTotal, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
+            SQL = "update rhisfruta set impentrada = impentrada + " & DBSet(ImporteTotal - ImpTotal, "N")
+            SQL = SQL & " where numalbar = " & DBSet(Albaran, "N")
         
-            conn.Execute Sql
+            conn.Execute SQL
         End If
         
         RecalculoImportes = True
@@ -17246,7 +17247,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionesCalidadPicassent(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -17290,26 +17291,26 @@ Dim PorcComi As Currency
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     
-    Sql = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-    Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
+    SQL = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+    SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, "
 '[Monica]01/09/2010 : sustituida la siguiente linea por
 '    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-     Sql = Sql & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
+     SQL = SQL & "rprecios.fechaini, rprecios.fechafin, rprecios_calidad.tipofact,max(rprecios.contador) contador, sum(rhisfruta_clasif.kilosnet) as kilos "
     
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & " FROM  " & cTabla
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
-    Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+    SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
 
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                     'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
     Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -17453,7 +17454,7 @@ End Function
 
 Private Function InsertarTablaIntermedia(cTabla As String, cWhere As String, ConCampo As Boolean) As Boolean
 Dim Sql2 As String
-Dim Sql As String
+Dim SQL As String
 Dim SqlTempo As String
 Dim KilosEntrados As Long
 Dim KilosRetirados As Long
@@ -17478,26 +17479,26 @@ Dim CampoAnt As String
     cTabla = QuitarCaracterACadena(cTabla, "}")
     
     If ConCampo Then
-        Sql = "SELECT " & vUsu.Codigo & ", rclasifica.codsocio, rclasifica.codvarie, variedades.nomvarie, rclasifica.codcampo, "
+        SQL = "SELECT " & vUsu.Codigo & ", rclasifica.codsocio, rclasifica.codvarie, variedades.nomvarie, rclasifica.codcampo, "
     Else
-        Sql = "SELECT " & vUsu.Codigo & ", rclasifica.codsocio, rclasifica.codvarie, variedades.nomvarie, "
+        SQL = "SELECT " & vUsu.Codigo & ", rclasifica.codsocio, rclasifica.codvarie, variedades.nomvarie, "
     End If
-    Sql = Sql & "sum(rclasifica.kilosnet) as kilos"
-    Sql = Sql & " FROM  " & cTabla
+    SQL = SQL & "sum(rclasifica.kilosnet) as kilos"
+    SQL = SQL & " FROM  " & cTabla
 
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     If ConCampo Then
-        Sql = Sql & " group by 1, 2, 3, 4, 5 "
-        Sql = Sql & " order by 1, 2, 3, 4, 5 "
+        SQL = SQL & " group by 1, 2, 3, 4, 5 "
+        SQL = SQL & " order by 1, 2, 3, 4, 5 "
     Else
-        Sql = Sql & " group by 1, 2, 3, 4 "
-        Sql = Sql & " order by 1, 2, 3, 4 "
+        SQL = SQL & " group by 1, 2, 3, 4 "
+        SQL = SQL & " order by 1, 2, 3, 4 "
     End If
     
     If ConCampo Then
@@ -17505,7 +17506,7 @@ Dim CampoAnt As String
     Else
         SqlTempo = "insert into tmpliquidacion (codusu, codsocio, codvarie, nomvarie, kilosnet) "
     End If
-    SqlTempo = SqlTempo & Sql
+    SqlTempo = SqlTempo & SQL
     conn.Execute SqlTempo
     
     If ConCampo Then
@@ -17513,7 +17514,7 @@ Dim CampoAnt As String
     Else
         SqlTempo = "insert into tmpliquidacion (codusu, codsocio, codvarie, nomvarie, kilosnet) "
     End If
-    SqlTempo = SqlTempo & Replace(Replace(Sql, "rclasifica", "rhisfruta"), "fechaent", "fecalbar")
+    SqlTempo = SqlTempo & Replace(Replace(SQL, "rclasifica", "rhisfruta"), "fechaent", "fecalbar")
     conn.Execute SqlTempo
 
     '[Monica]19/10/2011: si la factura es de retirada los kilos deben coincidir con los kilos de Retirada
@@ -17530,9 +17531,9 @@ Dim CampoAnt As String
         KilosRetirados = 0
     
         ' prorrateamos los kilos
-        Sql = "select * from tmpliquidacion where codusu = " & vUsu.Codigo & " order by codsocio"
+        SQL = "select * from tmpliquidacion where codusu = " & vUsu.Codigo & " order by codsocio"
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         While Not Rs.EOF
             Kilos = Round2(DBLet(Rs!KilosNet, "N") * TKilosRetirados / TKilosEntrados, 0)
             KilosRetirados = KilosRetirados + Kilos
@@ -17593,17 +17594,17 @@ End Sub
 
 
 Private Function HayVariedadesAlmazaraconHorto(mTabla As String, mSelect As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Totales As Integer
 
-    Sql = "select distinct rhisfruta.codvarie from " & mTabla
-    If mSelect <> "" Then Sql = Sql & " where " & Replace(Replace(mSelect, "{", ""), "}", "")
+    SQL = "select distinct rhisfruta.codvarie from " & mTabla
+    If mSelect <> "" Then SQL = SQL & " where " & Replace(Replace(mSelect, "{", ""), "}", "")
     
-    Sql2 = "select count(*) from productos where codgrupo = 5 and codprodu in (select codprodu from variedades where codvarie in (" & Sql & ")) "
+    Sql2 = "select count(*) from productos where codgrupo = 5 and codprodu in (select codprodu from variedades where codvarie in (" & SQL & ")) "
     Totales = TotalRegistros(Sql2)
-    Sql2 = "select count(*) from productos where codgrupo <> 5 and codprodu in (select codprodu from variedades where codvarie in (" & Sql & ")) "
+    Sql2 = "select count(*) from productos where codgrupo <> 5 and codprodu in (select codprodu from variedades where codvarie in (" & SQL & ")) "
     If TotalRegistros(Sql2) > 0 Then Totales = Totales + 1
 
     HayVariedadesAlmazaraconHorto = (Totales = 2)
@@ -17611,15 +17612,15 @@ Dim Totales As Integer
 End Function
 
 Private Function HayVariedadesAlmazara(mTabla As String, mSelect As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Totales As Integer
 
-    Sql = "select distinct rhisfruta.codvarie from " & mTabla
-    If mSelect <> "" Then Sql = Sql & " where " & Replace(Replace(mSelect, "{", ""), "}", "")
+    SQL = "select distinct rhisfruta.codvarie from " & mTabla
+    If mSelect <> "" Then SQL = SQL & " where " & Replace(Replace(mSelect, "{", ""), "}", "")
     
-    Sql2 = "select count(*) from productos where codgrupo = 5 and codprodu in (select codprodu from variedades where codvarie in (" & Sql & ")) "
+    Sql2 = "select count(*) from productos where codgrupo = 5 and codprodu in (select codprodu from variedades where codvarie in (" & SQL & ")) "
     Totales = TotalRegistros(Sql2)
 
     HayVariedadesAlmazara = (Totales = 1)
@@ -17627,7 +17628,7 @@ Dim Totales As Integer
 End Function
 
 Private Function AlbaranesFacturados(cTabla As String, cWhere As String, Optional CadenaAlbaranes As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cadena As String
 Dim Cadena2 As String
 Dim Rs As ADODB.Recordset
@@ -17636,14 +17637,14 @@ Dim Rs As ADODB.Recordset
     
     AlbaranesFacturados = True
     
-    Sql = "select rfactsoc_albaran.numalbar, rfactsoc_albaran.fecalbar "
-    Sql = Sql & " from rfactsoc_albaran "
-    Sql = Sql & " where numalbar in (select rhisfruta.numalbar from " & cTabla & " where " & cWhere & ")"
-    Sql = Sql & " order by 1"
+    SQL = "select rfactsoc_albaran.numalbar, rfactsoc_albaran.fecalbar "
+    SQL = SQL & " from rfactsoc_albaran "
+    SQL = SQL & " where numalbar in (select rhisfruta.numalbar from " & cTabla & " where " & cWhere & ")"
+    SQL = SQL & " order by 1"
             
-    If TotalRegistros(Sql) > 0 Then
+    If TotalRegistros(SQL) > 0 Then
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
         cadena = ""
     
@@ -18444,7 +18445,7 @@ Private Function CargarTemporalPicassent(cTabla As String, cWhere As String, Tip
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -18523,23 +18524,23 @@ Dim HayPrecio As Boolean
     conn.Execute Sql2
     
     
-    Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
-    Sql = Sql & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-    Sql = Sql & " sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
-    Sql = Sql & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
+    SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, "
+    SQL = SQL & " rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
+    SQL = SQL & " sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+    SQL = SQL & " FROM  (" & cTabla & ") inner join tmpvarie on rhisfruta.codvarie = tmpvarie.codvarie "
     
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
-    Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
-    Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
-    Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8 "
+    SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
+    SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8 "
 
 
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     
     Label2(10).Caption = "Cargando Tabla Temporal"
     Me.Pb1.visible = True
@@ -18548,7 +18549,7 @@ Dim HayPrecio As Boolean
     Me.Refresh
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     '[Monica] 14/12/2009 si es liquidacion complementaria: no se descuentan gastos(complementaria) ponemos gastos = 0
     If Tipo = 1 And Check1(5).Value = 1 Then Tipo = 3 'seleccionamos los precios de liquidacion complementaria
@@ -18639,7 +18640,7 @@ End Function
 
 Private Function CargarTemporalAnticiposPicassentNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SqlVar As String
@@ -18687,18 +18688,18 @@ Dim HayPrecio As Boolean
 
     If CargarTemporalPicassent(cTabla, cWhere, 0) Then
     
-        Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-        Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
-        Sql = Sql & " from (" & cTabla & ") inner join rcalidad on rhisfruta_clasif.codvarie = rcalidad.codvarie and rhisfruta_clasif.codcalid = rcalidad.codcalid "
-        Sql = Sql & " where " & cWhere
-        Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
-        Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
-        Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+        SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+        SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+        SQL = SQL & " from (" & cTabla & ") inner join rcalidad on rhisfruta_clasif.codvarie = rcalidad.codvarie and rhisfruta_clasif.codcalid = rcalidad.codcalid "
+        SQL = SQL & " where " & cWhere
+        SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+        SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
+        SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
         
         
         
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, Kneto, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, campo2, importe3, importe4, porcen1, importe5, "
@@ -18773,9 +18774,9 @@ Dim HayPrecio As Boolean
             End If
             
             If Rs!Codsocio <> SocioAnt Then
-                '[Monica]15/04/2013: descontamos las facturas varias
-                If Check1(14).Value Then                                                                                                 'anticipos            no descontados   q no sean de ventacampo
-                    ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0 ")
+                '[Monica]15/04/2013: descontamos las facturas varias                                                                                         '[Monica]30/11/2017: añado lo de en cualquier fra.
+                If Check1(14).Value Then                                                                                                 'anticipos    q no sean de ventacampo   en cualquier fra.     no descontados
+                    ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 2 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
                                                         'usuario, codsocio, importe facturas varias
                     SqlVar = "insert into tmpsuperficies (codusu, codvarie, superficie1) values (" & vUsu.Codigo & ","
                     SqlVar = SqlVar & DBSet(SocioAnt, "N") & ","
@@ -18849,9 +18850,9 @@ Dim HayPrecio As Boolean
         
         ' ultimo registro si ha entrado
         If HayReg Then
-            '[Monica]15/04/2013: descontamos las facturas varias
-            If Check1(14).Value = 1 Then                                                                                             'anticipos             no descontados   que no sean de ventacampo
-                ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 2 and intliqui = 0 and envtacampo = 0")
+            '[Monica]15/04/2013: descontamos las facturas varias                                                                                        '[Monica]30/11/2017: añado en cualquier fra
+            If Check1(14).Value = 1 Then                                                                                             'anticipos      que no sean de ventacampo  en cualquier fra   no descontados
+                ImporteFVar = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 2 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
                                                     'usuario, codsocio, importe facturas varias
                 SqlVar = "insert into tmpsuperficies (codusu, codvarie, superficie1) values (" & vUsu.Codigo & ","
                 SqlVar = SqlVar & DBSet(SocioAnt, "N") & ","
@@ -18894,9 +18895,9 @@ Dim HayPrecio As Boolean
             End If
             
             '[Monica]27/01/2017: habria que eliminar aquellos registros de fras varias que no esten en tmpinformes
-            Sql = "delete from tmpsuperficies where codusu = " & vUsu.Codigo & " and "
-            Sql = Sql & " not codvarie in (select distinct importe1 from tmpinformes where codusu = " & vUsu.Codigo & ")"
-            conn.Execute Sql
+            SQL = "delete from tmpsuperficies where codusu = " & vUsu.Codigo & " and "
+            SQL = SQL & " not codvarie in (select distinct importe1 from tmpinformes where codusu = " & vUsu.Codigo & ")"
+            conn.Execute SQL
             
             
         End If
@@ -18916,7 +18917,7 @@ End Function
 
 Private Function CargarTemporalAnticiposCalidadPicassentNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -18965,23 +18966,23 @@ Dim HayPrecio As Boolean
 
     If CargarTemporalPicassent(cTabla, cWhere, 0) Then
 
-        Sql = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-        Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
-        Sql = Sql & " FROM  (" & cTabla & ") inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
+        SQL = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+        SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rcalidad.nomcalid, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+        SQL = SQL & " FROM  (" & cTabla & ") inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
         
         If cWhere <> "" Then
             cWhere = QuitarCaracterACadena(cWhere, "{")
             cWhere = QuitarCaracterACadena(cWhere, "}")
             cWhere = QuitarCaracterACadena(cWhere, "_1")
-            Sql = Sql & " WHERE " & cWhere
+            SQL = SQL & " WHERE " & cWhere
         End If
-        Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
-        Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
-        Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+        SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
+        SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
+        SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect "
     
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
         Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -19117,7 +19118,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionPicassentNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -19202,25 +19203,25 @@ Dim HayPrecio As Boolean
     
     If CargarTemporalPicassent(cTabla, cWhere, 1) Then
         
-        Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
-        Sql = Sql & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+        SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
+        SQL = SQL & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
     ''[Monica]01/09/2010 : sustituida la siguiente linea por
     ''    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-        Sql = Sql & " FROM  (" & cTabla & " ) inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
+        SQL = SQL & " FROM  (" & cTabla & " ) inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
     
         
         If cWhere <> "" Then
             cWhere = QuitarCaracterACadena(cWhere, "{")
             cWhere = QuitarCaracterACadena(cWhere, "}")
             cWhere = QuitarCaracterACadena(cWhere, "_1")
-            Sql = Sql & " WHERE " & cWhere
+            SQL = SQL & " WHERE " & cWhere
         End If
-        Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
-        Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0"
-        Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
+        SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
+        SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0"
+        SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos, incremento, anticipos, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importeb6, importe4, porcen1, importe5, "
@@ -19422,9 +19423,9 @@ Dim HayPrecio As Boolean
                     End If
                     
                     '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-                    ImpoFrasVarias = 0
-                    If Check1(14).Value = 1 Then                                                                                      'en liquidacion       no descontada         que no sea vtacampo
-                        ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+                    ImpoFrasVarias = 0                                                                                                                              '[Monica]30/11/2017: añado en cualquier fra
+                    If Check1(14).Value = 1 Then                                                                                      'en liquidacion       que no sea vtacampo         en cualquier fra       no descontada
+                        ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
                     End If
                     
                     ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura '- ImpoFrasVarias
@@ -19659,9 +19660,9 @@ Dim HayPrecio As Boolean
                 End If
                 
                 '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-                ImpoFrasVarias = 0
-                If Check1(14).Value = 1 Then                                                                                          'liquidacion          no descontada    que no sea vtacampo
-                   ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+                ImpoFrasVarias = 0                                                                                                                                  '[Monica]30/11/2017: añado en cualquier fra
+                If Check1(14).Value = 1 Then                                                                                          '  liquidacion      que no sea vtacampo        en cualquier fra    no descontada
+                   ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3) and intliqui = 0 ")
                 End If
                 
                 ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura ' - ImpoFrasVarias
@@ -19693,7 +19694,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionesCalidadPicassentNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim SocioAnt As Long
@@ -19747,25 +19748,25 @@ Dim HayPrecio As Boolean
     
     If CargarTemporalPicassent(cTabla, cWhere, 1) Then
     
-        Sql = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
-        Sql = Sql & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
-        Sql = Sql & "rhisfruta.numalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+        SQL = "SELECT rhisfruta.codsocio,  rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo,"
+        SQL = SQL & "rhisfruta.recolect, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, "
+        SQL = SQL & "rhisfruta.numalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
         
-        Sql = Sql & " FROM  " & cTabla
+        SQL = SQL & " FROM  " & cTabla
         
         If cWhere <> "" Then
             cWhere = QuitarCaracterACadena(cWhere, "{")
             cWhere = QuitarCaracterACadena(cWhere, "}")
             cWhere = QuitarCaracterACadena(cWhere, "_1")
-            Sql = Sql & " WHERE " & cWhere
+            SQL = SQL & " WHERE " & cWhere
         End If
-        Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect, rhisfruta.numalbar "
-        Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
-        Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect, rhisfruta.numalbar "
+        SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect, rhisfruta.numalbar "
+        SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0 "
+        SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.fecalbar, rhisfruta.recolect, rhisfruta.numalbar "
     
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu,  codvarie, nomvarie, calidad, Kneto,  Precio, importe, bonificacion,
         Sql2 = "insert into tmpinformes (codusu,  importe1, nombre1, campo1, importe2, precio1, importe3, importe4, "
@@ -19912,7 +19913,7 @@ End Function
 
 Private Function CargarTemporalLiquidacionAlziraNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -19955,15 +19956,15 @@ Dim vAnticipos As Currency
         conn.Execute Sql2
 
     
-        Sql = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie, tmpliquidacion.codcampo,"
-        Sql = Sql & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
-        Sql = Sql & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
-        Sql = Sql & " and tmpliquidacion.codvarie = variedades.codvarie "
-        Sql = Sql & " group by 1, 2, 3, 4 "
-        Sql = Sql & " order by 1, 2, 3, 4 "
+        SQL = "SELECT tmpliquidacion.codsocio, tmpliquidacion.codvarie, variedades.nomvarie, tmpliquidacion.codcampo,"
+        SQL = SQL & " sum(tmpliquidacion.kilosnet) as kilos , sum(tmpliquidacion.importe) as importe "
+        SQL = SQL & " FROM tmpliquidacion, variedades where codusu = " & vUsu.Codigo
+        SQL = SQL & " and tmpliquidacion.codvarie = variedades.codvarie "
+        SQL = SQL & " group by 1, 2, 3, 4 "
+        SQL = SQL & " order by 1, 2, 3, 4 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  gastos,    anticipos, baseimpo, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importe4, porcen1, importe5, "
@@ -20202,7 +20203,7 @@ End Function
 
 
 Public Function InformeAnticiposPicassentNew(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar, DescontarFVarias As Boolean, EsTerceros As Boolean) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
 Dim AntSocio As String
@@ -20289,22 +20290,22 @@ Dim numfactu As Long
     
     conn.BeginTrans
     
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
-    Sql = "SELECT  rhisfruta.codsocio, rhisfruta.codvarie,"
-    Sql = Sql & "rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilosnet "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT  rhisfruta.codsocio, rhisfruta.codvarie,"
+    SQL = SQL & "rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilosnet "
+    SQL = SQL & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     ' ordenado por socio, variedad, campo, calidad
-    Sql = Sql & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar "
-    Sql = Sql & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar "
+    SQL = SQL & " group by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar "
+    SQL = SQL & " order by rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.codcampo, rhisfruta_clasif.codcalid, rhisfruta.numalbar, rhisfruta.fecalbar "
     
     Set vSeccion = New CSeccion
     
@@ -20317,7 +20318,7 @@ Dim numfactu As Long
     HayReg = False
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         AntSocio = CStr(DBLet(Rs!Codsocio, "N"))
@@ -20452,9 +20453,9 @@ Dim numfactu As Long
                 'insertar cabecera de factura
 '                b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
                 
-                Sql = "insert into tmpfact_fvarias (codtipom,numfactu,fecfactu,numfactufvar) select "
-                Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & vSocio.Codigo & ")"
-                conn.Execute Sql
+                SQL = "insert into tmpfact_fvarias (codtipom,numfactu,fecfactu,numfactufvar) select "
+                SQL = SQL & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & vSocio.Codigo & ")"
+                conn.Execute SQL
                 
                 
 '                '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
@@ -20626,9 +20627,9 @@ Dim numfactu As Long
 '            'insertar cabecera de factura
 '            b = InsertCabecera(tipoMov, CStr(numfactu), FecFac)
             
-                Sql = "insert into tmpfact_fvarias (codtipom,numfactu,fecfactu,numfactufvar) select "
-                Sql = Sql & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & vSocio.Codigo & ")"
-                conn.Execute Sql
+                SQL = "insert into tmpfact_fvarias (codtipom,numfactu,fecfactu,numfactufvar) select "
+                SQL = SQL & "'" & tipoMov & "'," & DBSet(numfactu, "N") & "," & DBSet(FecFac, "F") & "," & vSocio.Codigo & ")"
+                conn.Execute SQL
             
             
 '            '[Monica]24/12/2013: si es tercero he de marcarla como contabilizada
@@ -20660,14 +20661,14 @@ Dim numfactu As Long
 
         If B Then
             
-            Sql = "update tmpliquidacion tt, tmpfact_fvarias ss,  tmpfact_variedad vv, tmpfact_calidad cc "
-            Sql = Sql & " set tt.precio = cc.precio, tt.importe = cc.imporcal  "
-            Sql = Sql & " where vv.codtipom = cc.codtipom and vv.numfactu = cc.numfactu and vv.fecfactu = cc.fecfactu "
-            Sql = Sql & " and ss.codtipom = cc.codtipom and ss.numfactu = cc.numfactu and ss.fecfactu = cc.fecfactu"
-            Sql = Sql & " and tt.codusu = " & vUsu.Codigo & " and  vv.codvarie = tt.codvarie and cc.codcalid = tt.codcalid"
-            Sql = Sql & " and tt.codcampo = vv.codcampo and tt.codsocio = ss.numfactufvar "
+            SQL = "update tmpliquidacion tt, tmpfact_fvarias ss,  tmpfact_variedad vv, tmpfact_calidad cc "
+            SQL = SQL & " set tt.precio = cc.precio, tt.importe = cc.imporcal  "
+            SQL = SQL & " where vv.codtipom = cc.codtipom and vv.numfactu = cc.numfactu and vv.fecfactu = cc.fecfactu "
+            SQL = SQL & " and ss.codtipom = cc.codtipom and ss.numfactu = cc.numfactu and ss.fecfactu = cc.fecfactu"
+            SQL = SQL & " and tt.codusu = " & vUsu.Codigo & " and  vv.codvarie = tt.codvarie and cc.codcalid = tt.codcalid"
+            SQL = SQL & " and tt.codcampo = vv.codcampo and tt.codsocio = ss.numfactufvar "
         
-            conn.Execute Sql
+            conn.Execute SQL
         End If
          
         
@@ -20693,7 +20694,7 @@ End Function
 
 Private Function CargarTemporalInfAnticiposPicassentNew(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim Sql4 As String
@@ -20778,25 +20779,25 @@ Dim HayPrecio As Boolean
     
     If CargarTemporalPicassent(cTabla, cWhere, 0) Then
         
-        Sql = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
-        Sql = Sql & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
+        SQL = "SELECT rhisfruta.codsocio, rhisfruta.codvarie, variedades.nomvarie, rhisfruta.codcampo, rhisfruta.numalbar, rhisfruta.fecalbar, "
+        SQL = SQL & "rhisfruta.recolect,  rhisfruta_clasif.codcalid, rcalidad.nomcalid, sum(coalesce(rhisfruta_clasif.kilosnet,0)) as kilos "
     ''[Monica]01/09/2010 : sustituida la siguiente linea por
     ''    Sql = Sql & "rprecios_calidad.precoop, rprecios_calidad.presocio, rprecios_calidad.tipofact,sum(rhisfruta_clasif.kilosnet) as kilos "
-        Sql = Sql & " FROM  (" & cTabla & " ) inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
+        SQL = SQL & " FROM  (" & cTabla & " ) inner join rcalidad on rhisfruta_clasif.codcalid = rcalidad.codcalid and rhisfruta_clasif.codvarie = rcalidad.codvarie "
     
         
         If cWhere <> "" Then
             cWhere = QuitarCaracterACadena(cWhere, "{")
             cWhere = QuitarCaracterACadena(cWhere, "}")
             cWhere = QuitarCaracterACadena(cWhere, "_1")
-            Sql = Sql & " WHERE " & cWhere
+            SQL = SQL & " WHERE " & cWhere
         End If
-        Sql = Sql & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
-        Sql = Sql & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0"
-        Sql = Sql & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
+        SQL = SQL & " group by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
+        SQL = SQL & " having sum(coalesce(rhisfruta_clasif.kilosnet,0)) <> 0"
+        SQL = SQL & " order by 1, 2, 3, 4, 5, 6, 7, 8, 9 "
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
                                         'codusu, codsocio, nomsocio, codvarie, nomvarie, neto,  impbruto,  bonificacion, gastos, incremento, anticipos, porceiva, imporiva,
         Sql2 = "insert into tmpinformes (codusu, importe1, nombre1, importe2, nombre2, importe3, importeb3, importeb4, importeb5, importeb6, importe4, porcen1, importe5, "
@@ -20997,9 +20998,9 @@ Dim HayPrecio As Boolean
                     End If
                     
                     '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-                    ImpoFrasVarias = 0
-                    If Check1(14).Value = 1 Then                                                                                      'en liquidacion       no descontada         que no sea vtacampo
-                        ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+                    ImpoFrasVarias = 0                                                                                                                         '[Monica]30/11/2017: añado en cualquier fra
+                    If Check1(14).Value = 1 Then                                                                                      'en liquidacion          que no sea vtacampo      end cualquier fra      no descontada
+                        ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3)  and intliqui = 0 ")
                     End If
                     
                     ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura '- ImpoFrasVarias
@@ -21232,9 +21233,9 @@ Dim HayPrecio As Boolean
                 End If
                 
                 '[Monica]15/04/2013: si hay importe de facturas varias a descontar del socio
-                ImpoFrasVarias = 0
-                If Check1(14).Value = 1 Then                                                                                          'liquidacion          no descontada    que no sea vtacampo
-                   ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and enliquidacion = 1 and intliqui = 0 and envtacampo = 0")
+                ImpoFrasVarias = 0                                                                                                                          '[Monica]30/11/2017: añado en cualquier fra
+                If Check1(14).Value = 1 Then                                                                                          'liquidacion           que no sea vtacampo   en cualquier fra          no descontada
+                   ImpoFrasVarias = DevuelveValor("select sum(totalfac) from fvarcabfact where codsocio = " & DBSet(SocioAnt, "N") & " and ((enliquidacion = 1 and envtacampo = 0) or enliquidacion = 3)  and intliqui = 0 ")
                 End If
                 
                 ImpoTotalFactura = BaseImpoFactura + ImpoIvaFactura - ImpoRetenFactura - ImpoAporFactura - ImpoGastosFactura ' - ImpoFrasVarias

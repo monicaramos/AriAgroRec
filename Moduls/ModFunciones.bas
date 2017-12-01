@@ -505,55 +505,61 @@ Dim cad As String
     Izda = ""
     For Each Control In formulario.Controls
         'Si es texto monta esta parte de sql
-        If TypeOf Control Is TextBox And Control.visible = True Then
-            If Control.Tag <> "" Then
-                mTag.Cargar Control
-                If mTag.Cargado Then
-                    If mTag.columna <> "" Then
+        If TypeOf Control Is TextBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If mTag.Cargado Then
+                        If mTag.columna <> "" Then
+                            If Izda <> "" Then Izda = Izda & ","
+                            'Access
+                            'Izda = Izda & "[" & mTag.Columna & "]"
+                            Izda = Izda & "" & mTag.columna & ""
+                        
+                            'Parte VALUES
+                            cad = ValorParaSQL(Control.Text, mTag)
+                            If Der <> "" Then Der = Der & ","
+                            Der = Der & cad
+                        End If
+                    End If
+                End If
+           End If
+        'CheckBOX
+        ElseIf TypeOf Control Is CheckBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If Izda <> "" Then Izda = Izda & ","
+                    'Access
+                    'Izda = Izda & "[" & mTag.Columna & "]"
+                    Izda = Izda & "" & mTag.columna & ""
+                    If Control.Value = 1 Then
+                        cad = "1"
+                        Else
+                        cad = "0"
+                    End If
+                    If Der <> "" Then Der = Der & ","
+                    If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
+                    Der = Der & cad
+                End If
+            End If
+        'COMBO BOX
+        ElseIf TypeOf Control Is ComboBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If mTag.Cargado Then
                         If Izda <> "" Then Izda = Izda & ","
-                        'Access
                         'Izda = Izda & "[" & mTag.Columna & "]"
                         Izda = Izda & "" & mTag.columna & ""
-                    
-                        'Parte VALUES
-                        cad = ValorParaSQL(Control.Text, mTag)
+                        If Control.ListIndex = -1 Then
+                            cad = ValorNulo
+                        Else
+                            cad = Control.ItemData(Control.ListIndex)
+                        End If
                         If Der <> "" Then Der = Der & ","
                         Der = Der & cad
                     End If
-                End If
-            End If
-        'CheckBOX
-        ElseIf TypeOf Control Is CheckBox And Control.visible = True Then
-            If Control.Tag <> "" Then
-                mTag.Cargar Control
-                If Izda <> "" Then Izda = Izda & ","
-                'Access
-                'Izda = Izda & "[" & mTag.Columna & "]"
-                Izda = Izda & "" & mTag.columna & ""
-                If Control.Value = 1 Then
-                    cad = "1"
-                    Else
-                    cad = "0"
-                End If
-                If Der <> "" Then Der = Der & ","
-                If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
-                Der = Der & cad
-            End If
-        'COMBO BOX
-        ElseIf TypeOf Control Is ComboBox And Control.visible = True Then
-            If Control.Tag <> "" Then
-                mTag.Cargar Control
-                If mTag.Cargado Then
-                    If Izda <> "" Then Izda = Izda & ","
-                    'Izda = Izda & "[" & mTag.Columna & "]"
-                    Izda = Izda & "" & mTag.columna & ""
-                    If Control.ListIndex = -1 Then
-                        cad = ValorNulo
-                    Else
-                        cad = Control.ItemData(Control.ListIndex)
-                    End If
-                    If Der <> "" Then Der = Der & ","
-                    Der = Der & cad
                 End If
             End If
         End If

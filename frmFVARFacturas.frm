@@ -120,7 +120,7 @@ Begin VB.Form frmFVARFacturas
          Left            =   7410
          Style           =   2  'Dropdown List
          TabIndex        =   89
-         Tag             =   "EnLiquidacion|N|N|0|2|fvarcabfact|enliquidacion|||"
+         Tag             =   "EnLiquidacion|N|N|0|3|fvarcabfact|enliquidacion|||"
          Top             =   270
          Width           =   1410
       End
@@ -4449,6 +4449,8 @@ Dim I As Byte
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
     Combo1(1).AddItem "Anticipo"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+    Combo1(1).AddItem "En 1ªfactura"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 3
     
 
 End Sub

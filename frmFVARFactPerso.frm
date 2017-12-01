@@ -757,8 +757,8 @@ Dim B As Boolean
     btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
     Combo1(1).visible = Not B
-    CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -932,7 +932,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -947,20 +947,20 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el registro para facturar?"
+    SQL = "¿Seguro que desea eliminar el registro para facturar?"
     If ParamTabla = "rsocios" Then
-        Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
     Else
-        Sql = Sql & vbCrLf & "Cliente: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+        SQL = SQL & vbCrLf & "Cliente: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
     End If
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
-        Sql = Sql & " and codsoccli = " & adodc1.Recordset!CODSOCCLI
+        SQL = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
+        SQL = SQL & " and codsoccli = " & adodc1.Recordset!CODSOCCLI
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1156,7 +1156,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim Sql As String
+Dim SQL As String
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1198,7 +1198,7 @@ Dim Sql As String
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.codconce, fvarconce.nomconce, "
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.ampliaci,  "
     CadenaConsulta = CadenaConsulta & " tmpfactvarias.cantidad, tmpfactvarias.precio, tmpfactvarias.importe, "
-    CadenaConsulta = CadenaConsulta & " tmpfactvarias.enliquidacion, case tmpfactvarias.enliquidacion when 0 THEN 'No descuenta' when 1 Then 'Liquidacion' when 2 then 'Anticipo' end  aaaa "
+    CadenaConsulta = CadenaConsulta & " tmpfactvarias.enliquidacion, case tmpfactvarias.enliquidacion when 0 THEN 'No descuenta' when 1 Then 'Liquidacion' when 2 then 'Anticipo' when 3 then 'En 1ªfactura' end  aaaa "
     CadenaConsulta = CadenaConsulta & " FROM tmpfactvarias, fvarconce, " & ParamTabla
     
     If ParamTabla = "rsocios" Then
@@ -1214,8 +1214,8 @@ Dim Sql As String
     
     If TotalRegistrosConsulta("select * from tmpfactvarias where codusu = " & vUsu.Codigo) > 0 Then
         If MsgBox("¿ Desea eliminar los registros anteriormente insertados ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-            Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
-            conn.Execute Sql
+            SQL = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
+            conn.Execute SQL
         End If
     End If
     
@@ -1313,24 +1313,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     
-    Sql = Sql & " and tmpfactvarias.codusu = " & vUsu.Codigo
+    SQL = SQL & " and tmpfactvarias.codusu = " & vUsu.Codigo
     
     
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
+    SQL = SQL & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     If ParamTabla = "rsocios" Then
@@ -1360,19 +1360,19 @@ Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
     
-    Sql = "select sum(importe) importe from tmpfactvarias where codusu = " & vUsu.Codigo
+    SQL = "select sum(importe) importe from tmpfactvarias where codusu = " & vUsu.Codigo
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Text3.Text = ""
     
-    If TotalRegistrosConsulta(Sql) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(SQL) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
         If Rs.Fields(0).Value <> 0 Then Importe = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
@@ -1391,7 +1391,7 @@ End Sub
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
         Case 1
-            LanzaVisorMimeDocumento Me.hwnd, DireccionAyuda & IdPrograma & ".html"
+            LanzaVisorMimeDocumento Me.hWnd, DireccionAyuda & IdPrograma & ".html"
     End Select
 End Sub
 
@@ -1466,7 +1466,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
     B = CompForm(Me)
@@ -1561,7 +1561,7 @@ End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -1576,6 +1576,8 @@ Dim I As Byte
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1
     Combo1(1).AddItem "Anticipo"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 2
+    Combo1(1).AddItem "En 1ªfactura"
+    Combo1(1).ItemData(Combo1(1).NewIndex) = 3
 
 End Sub
 
