@@ -4073,7 +4073,7 @@ Dim SQL As String
                 If ExistenNotasSinTransportista(Text1(0).Text) And CLng(ComprobarCero(Text1(3).Text)) = 0 Then
                     If MsgBox("Si la pesada está transportada por el socio, no deben existir notas transportadas por la cooperativa. " & vbCrLf & vbCrLf & "¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then B = False
                 End If
-                If Not ExistenNotasSinTransportista(Text1(0).Text) And CLng(ComprobarCero(Text1(3).Text)) <> 0 Then
+                If ExistenNotasSinTransportista2(Text1(0).Text) And CLng(ComprobarCero(Text1(3).Text)) <> 0 Then
                     If MsgBox("Si la pesada está transportada por la cooperativa, no deben existir notas transportadas por el socio. " & vbCrLf & vbCrLf & "¿ Desea continuar ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then B = False
                     B = False
                 End If
@@ -4099,6 +4099,15 @@ Dim SQL As String
 End Function
 
 
+Private Function ExistenNotasSinTransportista2(Pesada As String) As Boolean
+Dim SQL As String
+
+    SQL = "select count(*) from rentradas where nropesada = " & DBSet(Pesada, "N")
+    SQL = SQL & " and (transportadopor=1)"
+    
+    ExistenNotasSinTransportista2 = (TotalRegistros(SQL) <> 0)
+
+End Function
 
 
 Private Function DatosOkLinea() As Boolean

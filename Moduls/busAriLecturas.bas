@@ -205,13 +205,14 @@ Dim OK As Byte
         Set vUsu = New Usuario
         
         If vUsu.Leer("Lectura") = 0 Then
+'[Monica]12/12/2017: no debemos mirar la contraseña
             'Con exito
-            If vUsu.PasswdPROPIO = "l" Then
-                OK = 0
-            Else
-                OK = 1
-            End If
-    
+'            If vUsu.PasswdPROPIO = "l" Then
+'                OK = 0
+'            Else
+'                OK = 1
+'            End If
+            OK = 0
         Else
             OK = 2
         End If
