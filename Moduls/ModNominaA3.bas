@@ -210,15 +210,23 @@ On Error GoTo ecopiarfichero
     
     If Dir("c:\ariadna\enlaceA3", vbDirectory) <> "" Then
     
-'        FicherAux = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd")
-'        I = 0
-'        While Dir("C:\Ariadna\EnlaceA3\" & FicherAux, vbArchive) <> ""
-'            I = I + 1
-'            FicherAux = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & I & ".txt"
-'        Wend
-'        FileCopy App.Path & "\" & vFicher, "C:\Ariadna\EnlaceA3\" & FicherAux
+        FicherAux = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd")
         
-        FileCopy App.Path & "\" & vFicher, "C:\Ariadna\EnlaceA3\" & Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & ".txt"
+        Dim i As Integer
+        Dim B As Boolean
+        Dim FicherAux1 As String
+        
+        i = 0
+        B = True
+        While Dir("C:\Ariadna\EnlaceA3\" & FicherAux & ".txt", vbArchive) <> "" And B
+            i = i + 1
+            FicherAux1 = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & "_" & i
+            If Dir("C:\Ariadna\EnlaceA3\" & FicherAux1 & ".txt", vbArchive) = "" Then B = False
+            FicherAux = FicherAux1
+        Wend
+        FileCopy App.Path & "\" & vFicher, "C:\Ariadna\EnlaceA3\" & FicherAux & ".txt"
+        
+        'FileCopy App.Path & "\" & vFicher, "C:\Ariadna\EnlaceA3\" & Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & ".txt"
 
     Else
         MkDir ("c:\ariadna\enlaceA3")

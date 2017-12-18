@@ -4,16 +4,16 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmFactRectifSocio 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Informes"
-   ClientHeight    =   6030
+   ClientHeight    =   6345
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6945
+   ClientWidth     =   7305
    Icon            =   "frmFactRectifSocio.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6030
-   ScaleWidth      =   6945
+   ScaleHeight     =   6345
+   ScaleWidth      =   7305
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -24,204 +24,357 @@ Begin VB.Form frmFactRectifSocio
       _Version        =   393216
    End
    Begin VB.Frame FrameGenFacturaRect 
-      Height          =   6015
+      Height          =   6240
       Left            =   0
       TabIndex        =   9
       Top             =   0
-      Width           =   6945
+      Width           =   7215
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1860
          Style           =   2  'Dropdown List
          TabIndex        =   0
          Top             =   1050
-         Width           =   3330
+         Width           =   4545
       End
       Begin VB.Frame Frame8 
          BorderStyle     =   0  'None
          Height          =   1665
-         Left            =   240
+         Left            =   195
          TabIndex        =   17
-         Top             =   3240
-         Width           =   6375
+         Top             =   3510
+         Width           =   6555
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   10
-            Left            =   1620
+            Left            =   1665
             MaxLength       =   10
             TabIndex        =   5
-            Top             =   180
-            Width           =   1005
+            Top             =   225
+            Width           =   1350
          End
          Begin VB.TextBox txtcodigo 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   825
             Index           =   9
-            Left            =   1620
+            Left            =   1665
             MaxLength       =   500
             MultiLine       =   -1  'True
             ScrollBars      =   2  'Vertical
             TabIndex        =   6
             Top             =   750
-            Width           =   4755
+            Width           =   4890
          End
          Begin VB.CheckBox Check1 
             Caption         =   "Imprimir Resumen"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   255
             Index           =   1
-            Left            =   4290
+            Left            =   4020
             TabIndex        =   19
             Top             =   60
-            Width           =   1965
+            Width           =   2235
          End
          Begin VB.CheckBox Check1 
             Caption         =   "Imprimir Factura"
-            Height          =   195
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   240
             Index           =   0
-            Left            =   4290
+            Left            =   4020
             TabIndex        =   18
             Top             =   420
-            Width           =   1995
+            Width           =   2265
          End
          Begin VB.Label Label2 
             AutoSize        =   -1  'True
             Caption         =   "Fecha Factura"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   240
             Index           =   10
             Left            =   360
             TabIndex        =   21
             Top             =   -30
-            Width           =   1035
+            Width           =   1440
          End
          Begin VB.Image imgFecha 
             Height          =   240
             Index           =   1
             Left            =   1260
             Picture         =   "frmFactRectifSocio.frx":000C
-            Top             =   180
+            Top             =   225
             Width           =   240
          End
          Begin VB.Label Label2 
             AutoSize        =   -1  'True
             Caption         =   "Concepto"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   240
             Index           =   9
-            Left            =   390
+            Left            =   360
             TabIndex        =   20
             Top             =   570
-            Width           =   690
+            Width           =   945
          End
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   0
-         Left            =   5610
+         Left            =   5700
          TabIndex        =   8
-         Top             =   5280
-         Width           =   975
+         Top             =   5640
+         Width           =   1065
       End
       Begin VB.CommandButton CmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   1
-         Left            =   4500
+         Left            =   4545
          TabIndex        =   7
-         Top             =   5280
-         Width           =   975
+         Top             =   5640
+         Width           =   1065
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   19
          Left            =   1875
          MaxLength       =   10
          TabIndex        =   2
-         Top             =   1935
-         Width           =   960
+         Top             =   1980
+         Width           =   1275
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   18
          Left            =   1875
          MaxLength       =   10
          TabIndex        =   1
          Top             =   1590
-         Width           =   960
+         Width           =   1275
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   17
          Left            =   1860
          MaxLength       =   10
          TabIndex        =   4
-         Top             =   2805
-         Width           =   1005
+         Top             =   3030
+         Width           =   1350
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   16
          Left            =   1860
          MaxLength       =   10
          TabIndex        =   3
-         Top             =   2460
-         Width           =   1005
+         Top             =   2640
+         Width           =   1350
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   255
          Left            =   540
          TabIndex        =   23
-         Top             =   4920
-         Width           =   6075
-         _ExtentX        =   10716
+         Top             =   5280
+         Width           =   6255
+         _ExtentX        =   11033
          _ExtentY        =   450
          _Version        =   393216
          Appearance      =   1
       End
       Begin VB.Label Label1 
          Caption         =   "Tipo Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   1
          Left            =   540
          TabIndex        =   22
-         Top             =   840
-         Width           =   945
+         Top             =   795
+         Width           =   1350
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   29
-         Left            =   900
+         Left            =   765
          TabIndex        =   16
          Top             =   1590
-         Width           =   465
+         Width           =   780
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   28
-         Left            =   900
+         Left            =   765
          TabIndex        =   15
-         Top             =   1950
-         Width           =   420
+         Top             =   1995
+         Width           =   735
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   27
          Left            =   540
          TabIndex        =   14
-         Top             =   1350
-         Width           =   540
+         Top             =   1305
+         Width           =   765
       End
       Begin VB.Label Label7 
          Caption         =   "Generación Factura Rectificativas"
@@ -236,46 +389,73 @@ Begin VB.Form frmFactRectifSocio
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   480
+         Left            =   525
          TabIndex        =   13
          Top             =   300
          Width           =   5925
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   26
-         Left            =   930
+         Left            =   795
          TabIndex        =   12
-         Top             =   2490
-         Width           =   465
+         Top             =   2670
+         Width           =   645
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   25
-         Left            =   930
+         Left            =   795
          TabIndex        =   11
-         Top             =   2820
-         Width           =   420
+         Top             =   3045
+         Width           =   555
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   24
          Left            =   570
          TabIndex        =   10
-         Top             =   2280
-         Width           =   450
+         Top             =   2370
+         Width           =   600
       End
       Begin VB.Image imgFecha 
          Height          =   240
          Index           =   3
          Left            =   1515
          Picture         =   "frmFactRectifSocio.frx":0097
-         Top             =   2805
+         Top             =   3030
          Width           =   240
       End
       Begin VB.Image imgFecha 
@@ -283,7 +463,7 @@ Begin VB.Form frmFactRectifSocio
          Index           =   2
          Left            =   1530
          Picture         =   "frmFactRectifSocio.frx":0122
-         Top             =   2460
+         Top             =   2640
          Width           =   240
       End
    End
@@ -815,7 +995,7 @@ End Sub
 
 
 Private Function FacturacionRectificativa(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -898,28 +1078,28 @@ Dim Tipo As Integer
     
     conn.BeginTrans
     
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
-    Sql = "SELECT * "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT * "
+    SQL = SQL & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     ' ordenado por socio, variedad, campo, calidad
-    Sql = Sql & " order by rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu "
+    SQL = SQL & " order by rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu "
     
     Set vTipoMov = New CTiposMov
     
     HayReg = False
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     B = True
     
@@ -943,131 +1123,131 @@ Dim Tipo As Integer
         IncrementarProgresNew Pb1, 1
         
         'insertar en la tabla de cabecera de facturas
-        Sql = "insert into rfactsoc (codtipom,numfactu,fecfactu,codsocio,baseimpo,tipoiva,porc_iva,imporiva,tipoirpf,basereten,porc_ret,"
-        Sql = Sql & "impreten,baseaport,porc_apo,impapor,totalfac,impreso,contabilizado,pasaridoc,esanticipogasto,"
-        Sql = Sql & " rectif_codtipom,rectif_numfactu,rectif_fecfactu,rectif_motivo "
+        SQL = "insert into rfactsoc (codtipom,numfactu,fecfactu,codsocio,baseimpo,tipoiva,porc_iva,imporiva,tipoirpf,basereten,porc_ret,"
+        SQL = SQL & "impreten,baseaport,porc_apo,impapor,totalfac,impreso,contabilizado,pasaridoc,esanticipogasto,"
+        SQL = SQL & " rectif_codtipom,rectif_numfactu,rectif_fecfactu,rectif_motivo "
         '[Monica]14/06/2013: Añadidos los campos que faltaban
         If vParamAplic.Cooperativa = 12 Then
-            Sql = Sql & ", esretirada, codforpa, porccorredor, tipoprecio) values ("
+            SQL = SQL & ", esretirada, codforpa, porccorredor, tipoprecio) values ("
         Else
-            Sql = Sql & ") values ("
+            SQL = SQL & ") values ("
         End If
-        Sql = Sql & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
-        Sql = Sql & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
-        Sql = Sql & DBSet(Rs!TipoIVA, "N") & ","
-        Sql = Sql & DBSet(Rs!porc_iva, "N") & ","
-        Sql = Sql & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
-        Sql = Sql & DBSet(Rs!TipoIRPF, "N") & ","
-        Sql = Sql & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo
-        Sql = Sql & DBSet(Rs!porc_ret, "N", "S") & ","
-        Sql = Sql & DBSet(DBLet(Rs!ImpReten, "N") * (-1), "N", "S") & "," ' importe de retencion en negativo
-        Sql = Sql & DBSet(DBLet(Rs!baseaport, "N") * (-1), "N", "S") & "," ' base de aportacion en negativo
-        Sql = Sql & DBSet(Rs!porc_apo, "N", "S") & ","
-        Sql = Sql & DBSet(DBLet(Rs!impapor, "N") * (-1), "N", "S") & "," ' importe de aportacion en negativo
-        Sql = Sql & DBSet(DBLet(Rs!TotalFac, "N") * (-1), "N") & "," ' total factura en negativo
+        SQL = SQL & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & DBSet(Rs!Codsocio, "N") & ","
+        SQL = SQL & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
+        SQL = SQL & DBSet(Rs!TipoIVA, "N") & ","
+        SQL = SQL & DBSet(Rs!porc_iva, "N") & ","
+        SQL = SQL & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
+        SQL = SQL & DBSet(Rs!TipoIRPF, "N") & ","
+        SQL = SQL & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo
+        SQL = SQL & DBSet(Rs!porc_ret, "N", "S") & ","
+        SQL = SQL & DBSet(DBLet(Rs!ImpReten, "N") * (-1), "N", "S") & "," ' importe de retencion en negativo
+        SQL = SQL & DBSet(DBLet(Rs!baseaport, "N") * (-1), "N", "S") & "," ' base de aportacion en negativo
+        SQL = SQL & DBSet(Rs!porc_apo, "N", "S") & ","
+        SQL = SQL & DBSet(DBLet(Rs!impapor, "N") * (-1), "N", "S") & "," ' importe de aportacion en negativo
+        SQL = SQL & DBSet(DBLet(Rs!TotalFac, "N") * (-1), "N") & "," ' total factura en negativo
         
         If vParamAplic.Cooperativa = 12 Then
-            Sql = Sql & "0,0,0," & DBSet(Rs!EsAnticipoGasto, "N") & ","
+            SQL = SQL & "0,0,0," & DBSet(Rs!EsAnticipoGasto, "N") & ","
         Else
-            Sql = Sql & "0,0,0,0,"
+            SQL = SQL & "0,0,0,0,"
         End If
         
-        Sql = Sql & DBSet(Rs!CodTipom, "T") & ","
-        Sql = Sql & DBSet(Rs!numfactu, "N") & ","
-        Sql = Sql & DBSet(Rs!fecfactu, "F") & ","
-        Sql = Sql & DBSet(txtCodigo(9).Text, "T")
+        SQL = SQL & DBSet(Rs!CodTipom, "T") & ","
+        SQL = SQL & DBSet(Rs!numfactu, "N") & ","
+        SQL = SQL & DBSet(Rs!fecfactu, "F") & ","
+        SQL = SQL & DBSet(txtCodigo(9).Text, "T")
         
         If vParamAplic.Cooperativa = 12 Then
-            Sql = Sql & "," & DBSet(Rs!esretirada, "N") & ","
-            Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
-            Sql = Sql & DBSet(Rs!PorcCorredor, "N") & ","
-            Sql = Sql & DBSet(Rs!TipoPrecio, "N") & ")"
+            SQL = SQL & "," & DBSet(Rs!esretirada, "N") & ","
+            SQL = SQL & DBSet(Rs!Codforpa, "N") & ","
+            SQL = SQL & DBSet(Rs!PorcCorredor, "N") & ","
+            SQL = SQL & DBSet(Rs!TipoPrecio, "N") & ")"
         Else
-            Sql = Sql & ")"
+            SQL = SQL & ")"
         End If
         
-        conn.Execute Sql
+        conn.Execute SQL
             
         ' insertamos en la tabla rfactsoc_variedad
-        Sql = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu,codvarie,codcampo,kilosnet,"
-        Sql = Sql & "preciomed,imporvar,descontado,imporgasto) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & "codvarie,codcampo, kilosnet * (-1), preciomed, imporvar * (-1), descontado, imporgasto * (-1) "
-        Sql = Sql & " from rfactsoc_variedad "
-        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        SQL = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu,codvarie,codcampo,kilosnet,"
+        SQL = SQL & "preciomed,imporvar,descontado,imporgasto) "
+        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & "codvarie,codcampo, kilosnet * (-1), preciomed, imporvar * (-1), descontado, imporgasto * (-1) "
+        SQL = SQL & " from rfactsoc_variedad "
+        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
             
         ' insertamos en la tabla rfactsoc_albaran
-        Sql = "insert into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
-        Sql = Sql & "kilosnet,grado,precio, importe, imporgasto) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & "numalbar, fecalbar, codvarie, codcampo,  kilosbru * (-1), kilosnet * (-1), grado, precio, "
-        Sql = Sql & "importe * (-1), imporgasto * (-1) from rfactsoc_albaran "
-        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        SQL = "insert into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
+        SQL = SQL & "kilosnet,grado,precio, importe, imporgasto) "
+        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & "numalbar, fecalbar, codvarie, codcampo,  kilosbru * (-1), kilosnet * (-1), grado, precio, "
+        SQL = SQL & "importe * (-1), imporgasto * (-1) from rfactsoc_albaran "
+        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         ' insertamos en la tabla rfactsoc_anticipos
-        Sql = "insert into rfactsoc_anticipos (codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,"
-        Sql = Sql & "codvarieanti,codcampoanti,baseimpo) "
-        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & "codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo * (-1) "
-        Sql = Sql & " from rfactsoc_anticipos "
-        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        SQL = "insert into rfactsoc_anticipos (codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,"
+        SQL = SQL & "codvarieanti,codcampoanti,baseimpo) "
+        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & "codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo * (-1) "
+        SQL = SQL & " from rfactsoc_anticipos "
+        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
                 
         ' insertamos en la tabla rfactsoc_calidad
-        Sql = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,"
-        Sql = Sql & "imporcal,preciocalidad,imporcalidad) "
-        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & "codvarie, codcampo, codcalid, kilosnet * (-1), precio, imporcal * (-1), preciocalidad, imporcalidad * (-1) "
-        Sql = Sql & " from rfactsoc_calidad "
-        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        SQL = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,"
+        SQL = SQL & "imporcal,preciocalidad,imporcalidad) "
+        SQL = SQL & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & "codvarie, codcampo, codcalid, kilosnet * (-1), precio, imporcal * (-1), preciocalidad, imporcalidad * (-1) "
+        SQL = SQL & " from rfactsoc_calidad "
+        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         ' insertamos en la tabla rfactsoc_gastos
-        Sql = "insert into rfactsoc_gastos (codtipom,numfactu,fecfactu,numlinea,codgasto,importe) "
-        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        Sql = Sql & "numlinea, codgasto, importe * (-1) "
-        Sql = Sql & " from rfactsoc_gastos "
-        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        SQL = "insert into rfactsoc_gastos (codtipom,numfactu,fecfactu,numlinea,codgasto,importe) "
+        SQL = SQL & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        SQL = SQL & "numlinea, codgasto, importe * (-1) "
+        SQL = SQL & " from rfactsoc_gastos "
+        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute Sql
+        conn.Execute SQL
         
         '[Monica]04/06/2014: en el caso de Montifrut es diferente
         If vParamAplic.Cooperativa = 12 Then
             If DBLet(Rs!EsAnticipoGasto) = 1 Then
                 '[Monica]04/06/2014: si la factura que rectifico es un anticipo tengo que marcarlo como que se ha descontado
                 ' pq sino en la proxima liquidacion se descontará este anticipo siendo que se ha rectificado.
-                Sql = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                SQL = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
                 
-                conn.Execute Sql
+                conn.Execute SQL
             
             Else
                 '[Monica]04/06/2014: si la factura que rectifico es una liquidacion que tiene descontados anticipos,
                 '                    los he de desmarcar como descontados para que en la proxima liquidacion se descuente
-                Sql = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
-                Sql = Sql & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
+                SQL = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
+                SQL = SQL & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             
             End If
         Else
@@ -1075,23 +1255,23 @@ Dim Tipo As Integer
             ' pq sino en la proxima liquidacion se descontará este anticipo siendo que se ha rectificado.
             Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Rs!CodTipom, "T"))
             If Tipo = 1 Or Tipo = 3 Then
-                Sql = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                SQL = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
             '[Monica]08/07/2011
         
             '[Monica]04/06/2014: si la factura que rectifico es una liquidacion que tiene descontados anticipos,
             '                    los he de desmarcar como descontados para que en la proxima liquidacion se descuente
             If Tipo = 2 Or Tipo = 4 Then
-                Sql = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
-                Sql = Sql & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
+                SQL = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
+                SQL = SQL & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
                 
-                conn.Execute Sql
+                conn.Execute SQL
             End If
         End If
             
@@ -1119,21 +1299,21 @@ eFacturacion:
 End Function
 
 Private Function TotalFacturasSocios(cTabla As String, cWhere As String) As Long
-Dim Sql As String
+Dim SQL As String
 
     TotalFacturasSocios = 0
     
-    Sql = "SELECT  count(distinct rpozos.codsocio) "
-    Sql = Sql & " FROM  " & cTabla
+    SQL = "SELECT  count(distinct rpozos.codsocio) "
+    SQL = SQL & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
 
-    TotalFacturasSocios = TotalRegistros(Sql)
+    TotalFacturasSocios = TotalRegistros(SQL)
 
 End Function
 
@@ -1141,7 +1321,7 @@ Private Function DatosOK() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EDatosOK
 
@@ -1173,7 +1353,7 @@ End Function
 
 
 Private Function FacturasGeneradasRectificativas() As String
-Dim Sql As String
+Dim SQL As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
     
@@ -1181,11 +1361,11 @@ Dim cad As String
 
     FacturasGeneradasRectificativas = ""
 
-    Sql = "select nombre1, importe1 from tmpinformes where codusu = " & vUsu.Codigo
-    Sql = Sql & " and nombre1 = 'FRS'"
+    SQL = "select nombre1, importe1 from tmpinformes where codusu = " & vUsu.Codigo
+    SQL = SQL & " and nombre1 = 'FRS'"
     
     Set RS1 = New ADODB.Recordset
-    RS1.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS1.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     cad = ""
     While Not RS1.EOF
@@ -1208,7 +1388,7 @@ End Function
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -1217,16 +1397,16 @@ Dim I As Byte
     Next I
     
     'tipo de factura todas las facturas excepto las rectificativas
-    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu >= 1 and tipodocu < 11 "
+    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu >= 1 and tipodocu < 11 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        Sql = Rs.Fields(1).Value
-        Sql = Rs.Fields(0).Value & " - " & Sql
-        Combo1(0).AddItem Sql 'campo del codigo
+        SQL = Rs.Fields(1).Value
+        SQL = Rs.Fields(0).Value & " - " & SQL
+        Combo1(0).AddItem SQL 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = I
         I = I + 1
         Rs.MoveNext

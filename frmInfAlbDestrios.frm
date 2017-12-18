@@ -4,7 +4,7 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmInfAlbDestrios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Informes"
-   ClientHeight    =   5970
+   ClientHeight    =   6420
    ClientLeft      =   45
    ClientTop       =   2430
    ClientWidth     =   6705
@@ -12,146 +12,247 @@ Begin VB.Form frmInfAlbDestrios
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5970
+   ScaleHeight     =   6420
    ScaleWidth      =   6705
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin MSComDlg.CommonDialog cd1 
-      Left            =   7800
-      Top             =   6480
-      _ExtentX        =   847
-      _ExtentY        =   847
-      _Version        =   393216
-   End
    Begin VB.Frame FrameFacturar 
-      Height          =   5940
+      Height          =   6435
       Left            =   0
       TabIndex        =   10
       Top             =   -30
-      Width           =   6615
+      Width           =   6660
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   2520
          Locked          =   -1  'True
          TabIndex        =   29
          Text            =   "Text5"
-         Top             =   4140
-         Width           =   3375
+         Top             =   4545
+         Width           =   3780
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   2520
          Locked          =   -1  'True
          TabIndex        =   28
          Text            =   "Text5"
-         Top             =   3780
-         Width           =   3375
+         Top             =   4140
+         Width           =   3780
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   1650
          MaxLength       =   3
          TabIndex        =   7
-         Top             =   4140
-         Width           =   735
+         Top             =   4545
+         Width           =   870
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1650
          MaxLength       =   3
          TabIndex        =   6
-         Top             =   3780
-         Width           =   735
+         Top             =   4140
+         Width           =   870
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Resumen"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   225
          Left            =   420
          TabIndex        =   27
-         Top             =   4620
+         Top             =   5025
          Width           =   3105
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   6
          Left            =   1650
          MaxLength       =   10
          TabIndex        =   4
-         Top             =   2880
-         Width           =   1095
+         Top             =   3150
+         Width           =   1350
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   7
          Left            =   1650
          MaxLength       =   10
          TabIndex        =   5
-         Top             =   3285
-         Width           =   1095
+         Top             =   3555
+         Width           =   1350
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Left            =   5190
          TabIndex        =   9
-         Top             =   5325
-         Width           =   975
+         Top             =   5790
+         Width           =   1065
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
          Left            =   1650
          MaxLength       =   6
          TabIndex        =   0
          Top             =   1095
-         Width           =   990
+         Width           =   900
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   13
          Left            =   1650
          MaxLength       =   6
          TabIndex        =   1
          Top             =   1455
-         Width           =   990
+         Width           =   900
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   12
-         Left            =   2700
+         Left            =   2565
          Locked          =   -1  'True
          TabIndex        =   16
          Text            =   "Text5"
          Top             =   1095
-         Width           =   3195
+         Width           =   3735
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   13
-         Left            =   2700
+         Left            =   2565
          Locked          =   -1  'True
          TabIndex        =   15
          Text            =   "Text5"
          Top             =   1455
-         Width           =   3195
+         Width           =   3735
       End
       Begin VB.CommandButton Command3 
          Height          =   440
@@ -174,64 +275,109 @@ Begin VB.Form frmInfAlbDestrios
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   20
          Left            =   1650
          MaxLength       =   3
          TabIndex        =   2
-         Top             =   2040
-         Width           =   735
+         Top             =   2085
+         Width           =   915
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   21
          Left            =   1650
          MaxLength       =   3
          TabIndex        =   3
-         Top             =   2400
-         Width           =   735
+         Top             =   2445
+         Width           =   915
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   20
-         Left            =   2520
+         Left            =   2565
          Locked          =   -1  'True
          TabIndex        =   12
          Text            =   "Text5"
-         Top             =   2040
-         Width           =   3375
+         Top             =   2085
+         Width           =   3735
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   21
-         Left            =   2520
+         Left            =   2565
          Locked          =   -1  'True
          TabIndex        =   11
          Text            =   "Text5"
-         Top             =   2400
-         Width           =   3375
+         Top             =   2445
+         Width           =   3735
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4110
+         Left            =   4020
          TabIndex        =   8
-         Top             =   5340
-         Width           =   975
+         Top             =   5790
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   255
          Left            =   390
          TabIndex        =   33
-         Top             =   4980
+         Top             =   5430
          Visible         =   0   'False
-         Width           =   5835
-         _ExtentX        =   10292
+         Width           =   5880
+         _ExtentX        =   10372
          _ExtentY        =   450
          _Version        =   393216
          Appearance      =   1
@@ -242,7 +388,7 @@ Begin VB.Form frmInfAlbDestrios
          Index           =   24
          Left            =   420
          TabIndex        =   34
-         Top             =   5280
+         Top             =   5730
          Visible         =   0   'False
          Width           =   1935
       End
@@ -253,7 +399,7 @@ Begin VB.Form frmInfAlbDestrios
          MouseIcon       =   "frmInfAlbDestrios.frx":0097
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar plaga"
-         Top             =   4170
+         Top             =   4530
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -263,37 +409,64 @@ Begin VB.Form frmInfAlbDestrios
          MouseIcon       =   "frmInfAlbDestrios.frx":01E9
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar plaga"
-         Top             =   3780
+         Top             =   4140
          Width           =   240
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   2
-         Left            =   765
+         Left            =   675
          TabIndex        =   32
-         Top             =   4215
-         Width           =   420
+         Top             =   4530
+         Width           =   600
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   1
-         Left            =   765
+         Left            =   675
          TabIndex        =   31
-         Top             =   3825
-         Width           =   465
+         Top             =   4140
+         Width           =   645
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Plaga"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   0
          Left            =   390
          TabIndex        =   30
-         Top             =   3570
-         Width           =   405
+         Top             =   3840
+         Width           =   525
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -301,55 +474,100 @@ Begin VB.Form frmInfAlbDestrios
          Left            =   1350
          Picture         =   "frmInfAlbDestrios.frx":033B
          ToolTipText     =   "Buscar fecha"
-         Top             =   3300
+         Top             =   3570
          Width           =   240
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   19
          Left            =   405
          TabIndex        =   26
-         Top             =   2700
-         Width           =   450
+         Top             =   2880
+         Width           =   600
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   20
-         Left            =   735
+         Left            =   645
          TabIndex        =   25
-         Top             =   2940
-         Width           =   465
+         Top             =   3165
+         Width           =   645
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   21
-         Left            =   735
+         Left            =   645
          TabIndex        =   24
-         Top             =   3285
-         Width           =   420
+         Top             =   3510
+         Width           =   600
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   22
-         Left            =   720
+         Left            =   630
          TabIndex        =   23
-         Top             =   1140
-         Width           =   465
+         Top             =   1095
+         Width           =   645
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   23
-         Left            =   720
+         Left            =   630
          TabIndex        =   22
-         Top             =   1500
-         Width           =   420
+         Top             =   1455
+         Width           =   600
       End
       Begin VB.Label Label3 
          Caption         =   "Informe de Destrios Varios"
@@ -372,13 +590,22 @@ Begin VB.Form frmInfAlbDestrios
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   27
          Left            =   390
          TabIndex        =   20
-         Top             =   900
-         Width           =   405
+         Top             =   855
+         Width           =   540
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -405,37 +632,64 @@ Begin VB.Form frmInfAlbDestrios
          Left            =   1350
          Picture         =   "frmInfAlbDestrios.frx":03CA
          ToolTipText     =   "Buscar fecha"
-         Top             =   2880
+         Top             =   3150
          Width           =   240
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Clase"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   11
          Left            =   390
          TabIndex        =   19
          Top             =   1830
-         Width           =   390
+         Width           =   525
       End
       Begin VB.Label Label2 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   18
-         Left            =   765
+         Left            =   675
          TabIndex        =   18
          Top             =   2085
-         Width           =   465
+         Width           =   645
       End
       Begin VB.Label Label2 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   28
-         Left            =   765
+         Left            =   675
          TabIndex        =   17
          Top             =   2475
-         Width           =   420
+         Width           =   600
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -444,7 +698,7 @@ Begin VB.Form frmInfAlbDestrios
          MouseIcon       =   "frmInfAlbDestrios.frx":0455
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
-         Top             =   2040
+         Top             =   2085
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -454,9 +708,16 @@ Begin VB.Form frmInfAlbDestrios
          MouseIcon       =   "frmInfAlbDestrios.frx":05A7
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar clase"
-         Top             =   2430
+         Top             =   2475
          Width           =   240
       End
+   End
+   Begin MSComDlg.CommonDialog cd1 
+      Left            =   7800
+      Top             =   6480
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
    End
 End
 Attribute VB_Name = "frmInfAlbDestrios"
@@ -506,14 +767,14 @@ Dim cadSelect1 As String
 Dim cadSelect2 As String
 Dim cadSelectBorra As String
 
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 
 
@@ -530,19 +791,19 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
     
-    b = True
+    B = True
     
-    DatosOk = b
+    DatosOK = B
 
 End Function
 
 
 Private Sub cmdAceptar_Click()
 'Facturacion de Albaranes
-Dim campo As String, Cad As String
+Dim campo As String, cad As String
 Dim cadFrom As String
 Dim cadSQL As String 'Para seleccionar los Albaranes del rango seleccion
                       'que no se van a facturar
@@ -564,7 +825,7 @@ Dim nTabla2 As String
 Dim Nregs As Long
 Dim FecFac As Date
 
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql2 As String
 Dim Sql3 As String
 
@@ -576,11 +837,11 @@ Dim CadFechas As String
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    If DatosOk Then
+    If DatosOK Then
         '======== FORMULA  ====================================
         'D/H Socios
-        cDesde = Trim(txtcodigo(12).Text)
-        cHasta = Trim(txtcodigo(13).Text)
+        cDesde = Trim(txtCodigo(12).Text)
+        cHasta = Trim(txtCodigo(13).Text)
         nDesde = txtNombre(12).Text
         nHasta = txtNombre(13).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -591,8 +852,8 @@ Dim CadFechas As String
         End If
         
         'D/H CLASE
-        cDesde = Trim(txtcodigo(20).Text)
-        cHasta = Trim(txtcodigo(21).Text)
+        cDesde = Trim(txtCodigo(20).Text)
+        cHasta = Trim(txtCodigo(21).Text)
         nDesde = txtNombre(20).Text
         nHasta = txtNombre(21).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -603,13 +864,13 @@ Dim CadFechas As String
         End If
         
         Sql2 = ""
-        If txtcodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtcodigo(20).Text, "N")
-        If txtcodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtcodigo(21).Text, "N")
+        If txtCodigo(20).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase >=" & DBSet(txtCodigo(20).Text, "N")
+        If txtCodigo(21).Text <> "" Then Sql2 = Sql2 & " and variedades.codclase <=" & DBSet(txtCodigo(21).Text, "N")
         
         
         'D/H fecha
-        cDesde = Trim(txtcodigo(6).Text)
-        cHasta = Trim(txtcodigo(7).Text)
+        cDesde = Trim(txtCodigo(6).Text)
+        cHasta = Trim(txtCodigo(7).Text)
         nDesde = ""
         nHasta = ""
         If Not (cDesde = "" And cHasta = "") Then
@@ -620,8 +881,8 @@ Dim CadFechas As String
         End If
         
         'D/H incidencia
-        cDesde = Trim(txtcodigo(0).Text)
-        cHasta = Trim(txtcodigo(1).Text)
+        cDesde = Trim(txtCodigo(0).Text)
+        cHasta = Trim(txtCodigo(1).Text)
         nDesde = txtNombre(0).Text
         nHasta = txtNombre(1).Text
         If Not (cDesde = "" And cHasta = "") Then
@@ -632,8 +893,8 @@ Dim CadFechas As String
         End If
         
         Sql3 = ""
-        If txtcodigo(0).Text <> "" Then Sql3 = Sql3 & " and rincidencia.codincid >=" & DBSet(txtcodigo(0).Text, "N")
-        If txtcodigo(1).Text <> "" Then Sql3 = Sql3 & " and rincidencia.codincid <=" & DBSet(txtcodigo(1).Text, "N")
+        If txtCodigo(0).Text <> "" Then Sql3 = Sql3 & " and rincidencia.codincid >=" & DBSet(txtCodigo(0).Text, "N")
+        If txtCodigo(1).Text <> "" Then Sql3 = Sql3 & " and rincidencia.codincid <=" & DBSet(txtCodigo(1).Text, "N")
         
         
         
@@ -651,8 +912,8 @@ Dim CadFechas As String
         cadDesde = "01/01/1900"
         cadhasta = "31/12/2500"
         
-        If txtcodigo(6).Text <> "" Then cadDesde = CDate(txtcodigo(6).Text)
-        If txtcodigo(7).Text <> "" Then cadhasta = CDate(txtcodigo(7).Text)
+        If txtCodigo(6).Text <> "" Then cadDesde = CDate(txtCodigo(6).Text)
+        If txtCodigo(7).Text <> "" Then cadhasta = CDate(txtCodigo(7).Text)
         
         CadParam = CadParam & "pFecDesde= Date(" & Year(cadDesde) & "," & Month(cadDesde) & "," & Day(cadDesde) & ")" & "|" 'txtcodigo(6).Text & """|"
         CadParam = CadParam & "pFecHasta= Date(" & Year(cadhasta) & "," & Month(cadhasta) & "," & Day(cadhasta) & ")" & "|" 'txtcodigo(7).Text & """|"
@@ -725,7 +986,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(12)
+        PonerFoco txtCodigo(12)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -733,7 +994,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim i As Integer
+Dim I As Integer
 Dim indFrame As Single
 
     'Icono del formulario
@@ -745,15 +1006,15 @@ Dim indFrame As Single
     'Ocultar todos los Frames de Formulario
     Me.FrameFacturar.visible = False
     
-    For i = 0 To 1
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
-    For i = 12 To 13
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
-    For i = 20 To 21
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 0 To 1
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 12 To 13
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
+    For I = 20 To 21
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
     
     NomTabla = "rhisfruta"
     NomTablaLin = "rhisfruta_entradas"
@@ -781,28 +1042,28 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect2, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect2, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -811,7 +1072,7 @@ End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-    txtcodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -853,37 +1114,37 @@ Private Sub imgFecha_Click(Index As Integer)
             indCodigo = 15
    End Select
    
-   PonerFormatoFecha txtcodigo(indCodigo)
-   If txtcodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtcodigo(indCodigo).Text)
+   PonerFormatoFecha txtCodigo(indCodigo)
+   If txtCodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtCodigo(indCodigo).Text)
 
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco txtcodigo(indCodigo)
+   PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
 Private Sub frmMens1_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     cadSelectBorra = ""
     If CadenaSeleccion <> "" Then
-        Sql = " {rincidencia.codincid} in (" & CadenaSeleccion & ")"
+        SQL = " {rincidencia.codincid} in (" & CadenaSeleccion & ")"
         Sql2 = " {rincidencia.codincid} in [" & CadenaSeleccion & "]"
         
         cadSelectBorra = "tmpinformes.campo1 not in (" & CadenaSeleccion & ")"
         
     Else
-        Sql = " {rincidencia.codincid} = -1 "
+        SQL = " {rincidencia.codincid} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -900,7 +1161,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         
         
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -929,31 +1190,31 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 0
-            indice = 6
+            Indice = 6
         Case 1
-            indice = 7
+            Indice = 7
         Case 2
-            indice = 15
+            Indice = 15
         Case 3, 4
-            indice = Index - 1
+            Indice = Index - 1
     End Select
 
-    imgFec(0).Tag = indice '<===
+    imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag)) '<===
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag)) '<===
     ' ********************************************
 
 
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -982,46 +1243,46 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim codcampo As String, nomCampo As String
-Dim Tabla As String
+Dim tabla As String
       
     Select Case Index
         'FECHA Desde Hasta
         Case 6, 7
-            If txtcodigo(Index).Text <> "" Then
-                PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then
+                PonerFormatoFecha txtCodigo(Index)
             End If
         
             
         Case 0, 1 'plagas
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rincidencia", "nomincid", "codincid", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rincidencia", "nomincid", "codincid", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "00")
             
         Case 20, 21
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
         
         
         Case 12, 13  'Cod. Socio
-            If PonerFormatoEntero(txtcodigo(Index)) Then
+            If PonerFormatoEntero(txtCodigo(Index)) Then
                 nomCampo = "nomsocio"
-                Tabla = "rsocios"
+                tabla = "rsocios"
                 codcampo = "codsocio"
-                txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), Tabla, nomCampo, codcampo, "N")
-                If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+                txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), tabla, nomCampo, codcampo, "N")
+                If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
             Else
                 txtNombre(Index).Text = ""
             End If
@@ -1033,7 +1294,7 @@ End Sub
 
 Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W As Integer)
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
-Dim Cad As String
+Dim cad As String
 
     H = 5940
     W = 6735
@@ -1100,17 +1361,17 @@ End Sub
 
 
 
-Private Sub AbrirFrmClase(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmClase(Indice As Integer)
+    indCodigo = Indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
@@ -1118,8 +1379,8 @@ Private Sub AbrirFrmSocios(indice As Integer)
 End Sub
 
 
-Private Sub AbrirFrmIncidencias(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmIncidencias(Indice As Integer)
+    indCodigo = Indice
     Set frmInc = New frmManInciden
     frmInc.DatosADevolverBusqueda = "0|1|"
     frmInc.Show vbModal
@@ -1130,7 +1391,7 @@ End Sub
 
 
 Private Function ProcesoEntradas(cTabla As String, cWhere As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -1141,8 +1402,8 @@ Dim Rs As ADODB.Recordset
     
     ProcesoEntradas = False
 
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -1151,15 +1412,15 @@ Dim Rs As ADODB.Recordset
     cWhere = QuitarCaracterACadena(cWhere, "}")
     
     If Check1.Value = 0 Then
-        Sql = "select " & vUsu.Codigo & ",rhisfruta.codsocio,rhisfruta.codvarie,rhisfruta.codcampo,rhisfruta_incidencia.codincid,rhisfruta.fecalbar,rhisfruta.numalbar from " & QuitarCaracterACadena(cTabla, "_1")
+        SQL = "select " & vUsu.Codigo & ",rhisfruta.codsocio,rhisfruta.codvarie,rhisfruta.codcampo,rhisfruta_incidencia.codincid,rhisfruta.fecalbar,rhisfruta.numalbar from " & QuitarCaracterACadena(cTabla, "_1")
         If cWhere <> "" Then
-            Sql = Sql & " WHERE " & cWhere
+            SQL = SQL & " WHERE " & cWhere
         End If
         
-        Sql = Sql & " order by 1, 2, 3, 5, 6 "
+        SQL = SQL & " order by 1, 2, 3, 5, 6 "
                                                'codsocio, codvarie,  codcampo, codincid, fecalbar, numalbar
         Sql2 = "insert into tmpinformes (codusu, importe1,  codigo1, importe2, importe3,  fecha1, importe4  ) "
-        Sql2 = Sql2 & Sql
+        Sql2 = Sql2 & SQL
         
         conn.Execute Sql2
     Else
@@ -1183,9 +1444,9 @@ End Function
 
 
 Private Function InsertaPlagasClasAuto(vWhere As String, vtabla As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim KilosTot As Long
-Dim i As Integer
+Dim I As Integer
 Dim Porcen As Currency
 Dim Rs As ADODB.Recordset
 Dim Nregs As Long
@@ -1196,100 +1457,100 @@ Dim Nregs As Long
     InsertaPlagasClasAuto = False
 
     '[Monica]16/11/2010: las plagas se calculan agrupando las clasificaciones y sacando la media
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
-    Sql = "select rhisfruta.codsocio, rhisfruta.codvarie, rcampos.nrocampo from "
-    Sql = Sql & "(" & vtabla & ") inner join rcampos on rhisfruta.codcampo = rcampos.codcampo "
-    Sql = Sql & " where " & vWhere
-    Sql = Sql & " group by 1,2,3 "
-    Sql = Sql & " order by 1,2,3 "
+    SQL = "select rhisfruta.codsocio, rhisfruta.codvarie, rcampos.nrocampo from "
+    SQL = SQL & "(" & vtabla & ") inner join rcampos on rhisfruta.codcampo = rcampos.codcampo "
+    SQL = SQL & " where " & vWhere
+    SQL = SQL & " group by 1,2,3 "
+    SQL = SQL & " order by 1,2,3 "
     
-    Nregs = TotalRegistrosConsulta(Sql)
+    Nregs = TotalRegistrosConsulta(SQL)
     CargarProgres Pb1, CInt(Nregs)
     Pb1.visible = True
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     While Not Rs.EOF
         IncrementarProgres Pb1, 1
         
-        Sql = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
-        Sql = Sql & " from rcontrol_plagas "
-        Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-        Sql = Sql & " and codcampo = " & DBSet(Rs!NroCampo, "N")
-        Sql = Sql & " and idplaga <> 2 "
-        If txtcodigo(6).Text <> "" Then Sql = Sql & " and fechacla >= " & DBSet(txtcodigo(6).Text, "F")
-        If txtcodigo(7).Text <> "" Then Sql = Sql & " and fechacla <= " & DBSet(txtcodigo(7).Text, "F")
+        SQL = "select sum(kilosplaga1+kilosplaga2+kilosplaga3+kilosplaga4+kilosplaga5+kilosplaga6+kilosplaga7+kilosplaga8+kilosplaga9+kilosplaga10+kilosplaga11) total "
+        SQL = SQL & " from rcontrol_plagas "
+        SQL = SQL & " where codsocio = " & DBSet(Rs!Codsocio, "N")
+        SQL = SQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        SQL = SQL & " and codcampo = " & DBSet(Rs!NroCampo, "N")
+        SQL = SQL & " and idplaga <> 2 "
+        If txtCodigo(6).Text <> "" Then SQL = SQL & " and fechacla >= " & DBSet(txtCodigo(6).Text, "F")
+        If txtCodigo(7).Text <> "" Then SQL = SQL & " and fechacla <= " & DBSet(txtCodigo(7).Text, "F")
         
-        KilosTot = DevuelveValor(Sql)
+        KilosTot = DevuelveValor(SQL)
 
 
-        For i = 3 To 13
-            Sql = "SELECT "
+        For I = 3 To 13
+            SQL = "SELECT "
             If KilosTot <> 0 Then
-                Sql = Sql & " round((sum(kilosplaga1)+sum(kilosplaga2)+sum(kilosplaga3)+sum(kilosplaga4)+sum(kilosplaga5)+sum(kilosplaga6)+sum(kilosplaga7)+sum(kilosplaga8)+sum(kilosplaga9)+sum(kilosplaga10)+sum(kilosplaga11)) * 100 / " & DBSet(KilosTot, "N") & ",2) "
+                SQL = SQL & " round((sum(kilosplaga1)+sum(kilosplaga2)+sum(kilosplaga3)+sum(kilosplaga4)+sum(kilosplaga5)+sum(kilosplaga6)+sum(kilosplaga7)+sum(kilosplaga8)+sum(kilosplaga9)+sum(kilosplaga10)+sum(kilosplaga11)) * 100 / " & DBSet(KilosTot, "N") & ",2) "
             Else
-                Sql = Sql & "0 "
+                SQL = SQL & "0 "
             End If
-            Sql = Sql & " from rcontrol_plagas "
-            Sql = Sql & " where codsocio = " & DBSet(Rs!Codsocio, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
-            Sql = Sql & " and codcampo = " & DBSet(Rs!NroCampo, "N")
-            Sql = Sql & " and rcontrol_plagas.idplaga = " & DBSet(i, "N")
-            If txtcodigo(6).Text <> "" Then Sql = Sql & " and fechacla >= " & DBSet(txtcodigo(6).Text, "F")
-            If txtcodigo(7).Text <> "" Then Sql = Sql & " and fechacla <= " & DBSet(txtcodigo(7).Text, "F")
+            SQL = SQL & " from rcontrol_plagas "
+            SQL = SQL & " where codsocio = " & DBSet(Rs!Codsocio, "N")
+            SQL = SQL & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            SQL = SQL & " and codcampo = " & DBSet(Rs!NroCampo, "N")
+            SQL = SQL & " and rcontrol_plagas.idplaga = " & DBSet(I, "N")
+            If txtCodigo(6).Text <> "" Then SQL = SQL & " and fechacla >= " & DBSet(txtCodigo(6).Text, "F")
+            If txtCodigo(7).Text <> "" Then SQL = SQL & " and fechacla <= " & DBSet(txtCodigo(7).Text, "F")
         
-            Porcen = DevuelveValor(Sql)
+            Porcen = DevuelveValor(SQL)
             
-            Select Case i
+            Select Case I
                 Case 3 ' piojo gris
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 1"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 1"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",1) "
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",1) "
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 2"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 2"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",2)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",2)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 3"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 3"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",3)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",3)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
                 
@@ -1297,48 +1558,48 @@ Dim Nregs As Long
                 Case 4 ' piojo rojo
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 4"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 4"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",4)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",4)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 5"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 5"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",5)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",5)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 6"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 6"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",6)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",6)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
                 
@@ -1346,48 +1607,48 @@ Dim Nregs As Long
                 Case 5 ' serpeta
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 7"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 7"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",7)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",7)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 8"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 8"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",8)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",8)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 9"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 9"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",9)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",9)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
                 
@@ -1395,114 +1656,114 @@ Dim Nregs As Long
                 Case 6 ' araña
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 16"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 16"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",16)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",16)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 17"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 17"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",17)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",17)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 18"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 18"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",18)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",18)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
                 
                 
                 Case 7 ' %piedra
                     If Porcen > 1 Then
-                        Sql = "select count(*) from tmpinformes "
-                        Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                        Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                        Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                        Sql = Sql & " and campo1 = 22"
-                        If TotalRegistros(Sql) = 0 Then
+                        SQL = "select count(*) from tmpinformes "
+                        SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                        SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                        SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                        SQL = SQL & " and campo1 = 22"
+                        If TotalRegistros(SQL) = 0 Then
                                                                    'codvarie,codsocio, codcampo, codplaga
-                            Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                            Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                            Sql = Sql & DBSet(Rs!NroCampo, "N") & ",22)"
+                            SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                            SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                            SQL = SQL & DBSet(Rs!NroCampo, "N") & ",22)"
                             
-                            conn.Execute Sql
+                            conn.Execute SQL
                         End If
                     End If
                     
                 Case 8 ' negrita
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 19"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 19"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",19)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",19)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 20"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 20"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",20)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",20)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 21"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 21"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",21)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",21)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
                 
@@ -1510,61 +1771,61 @@ Dim Nregs As Long
                 Case 13 ' mosca
                     Select Case Porcen
                         Case 1 To 5
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 10"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 10"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",10)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",10)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                             
                         Case 5.01 To 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 11"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 11"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",11)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",11)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
             
                         Case Is > 15
-                            Sql = "select count(*) from tmpinformes "
-                            Sql = Sql & " where importe1 = " & DBSet(Rs!Codsocio, "N")
-                            Sql = Sql & " and codigo1 = " & DBSet(Rs!codvarie, "N")
-                            Sql = Sql & " and importe2 = " & DBSet(Rs!NroCampo, "N")
-                            Sql = Sql & " and campo1 = 12"
-                            If TotalRegistros(Sql) = 0 Then
+                            SQL = "select count(*) from tmpinformes "
+                            SQL = SQL & " where importe1 = " & DBSet(Rs!Codsocio, "N")
+                            SQL = SQL & " and codigo1 = " & DBSet(Rs!codvarie, "N")
+                            SQL = SQL & " and importe2 = " & DBSet(Rs!NroCampo, "N")
+                            SQL = SQL & " and campo1 = 12"
+                            If TotalRegistros(SQL) = 0 Then
                                                                        'codvarie,codsocio, codcampo, codplaga
-                                Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
-                                Sql = Sql & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
-                                Sql = Sql & DBSet(Rs!NroCampo, "N") & ",12)"
+                                SQL = "insert into tmpinformes (codusu, codigo1, importe1, importe2, campo1) values ( "
+                                SQL = SQL & vUsu.Codigo & "," & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & ","
+                                SQL = SQL & DBSet(Rs!NroCampo, "N") & ",12)"
                                 
-                                conn.Execute Sql
+                                conn.Execute SQL
                             End If
                     End Select
             End Select
-        Next i
+        Next I
 
         Rs.MoveNext
     Wend
     
     Set Rs = Nothing
 
-    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    If cadSelectBorra <> "" Then Sql = Sql & " and " & cadSelectBorra
-    conn.Execute Sql
+    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    If cadSelectBorra <> "" Then SQL = SQL & " and " & cadSelectBorra
+    conn.Execute SQL
     
     InsertaPlagasClasAuto = True
     Exit Function

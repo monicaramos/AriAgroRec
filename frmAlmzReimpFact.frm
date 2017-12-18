@@ -399,7 +399,7 @@ Begin VB.Form frmAlmzReimpFact
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   16
-         Left            =   465
+         Left            =   510
          TabIndex        =   15
          Top             =   2340
          Width           =   1815

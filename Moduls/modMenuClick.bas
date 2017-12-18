@@ -581,11 +581,12 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 If vParamAplic.Cooperativa = 9 Then
                     frmManHorasNat.Show vbModal  'Entrada de Horas de trabajadores para natural de montaña
                 Else
-                    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
+                    If vParamAplic.Cooperativa = 2 Then 'Or vParamAplic.Cooperativa = 0 Then
                         If vParamAplic.Cooperativa = 0 Then frmManHorasPica.Caption = "Entrada de Horas"
                         frmManHorasPica.Show vbModal  'Entrada de Horas de trabajadores para picassent
                     Else
-                        If vParamAplic.Cooperativa = 16 Then
+                        '[Monica]14/12/2017: catadau va a tener el mto de horas de coopic
+                        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                             frmManHorasCoopic.Show vbModal ' entradas horas coopic
                         Else
                             frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
@@ -594,6 +595,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 End If
                 
         Case 14:
+                '[Monica]14/12/2017: para que Catadau funcione como Coopic
                 If vParamAplic.Cooperativa = 16 Then
                     frmPagoAnticiposCoopic.Show vbModal
                 Else
@@ -1300,7 +1302,6 @@ Dim I As Integer
     '[Monica]20/10/2015: solo para ABN traspaso de campos de almazara
     MDIppal.mnRec_AlmTrasCampos(1).Enabled = (vParamAplic.Cooperativa = 1)
     MDIppal.mnRec_AlmTrasCampos(1).visible = (vParamAplic.Cooperativa = 1)
-    
     
     If vParamAplic.Cooperativa = 16 Then
         MDIppal.mnP_PreNominas(5).Enabled = False

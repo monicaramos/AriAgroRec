@@ -48,7 +48,7 @@ Begin VB.Form frmADVReimpre
             EndProperty
             Height          =   360
             Index           =   6
-            Left            =   1485
+            Left            =   1530
             MaxLength       =   4
             TabIndex        =   6
             Top             =   315
@@ -87,7 +87,7 @@ Begin VB.Form frmADVReimpre
             EndProperty
             Height          =   360
             Index           =   7
-            Left            =   1485
+            Left            =   1530
             MaxLength       =   4
             TabIndex        =   7
             Top             =   720
@@ -136,7 +136,7 @@ Begin VB.Form frmADVReimpre
             Height          =   240
             Index           =   2
             Left            =   1230
-            Top             =   315
+            Top             =   360
             Width           =   240
          End
          Begin VB.Label Label4 
@@ -182,7 +182,7 @@ Begin VB.Form frmADVReimpre
             Height          =   240
             Index           =   3
             Left            =   1230
-            Top             =   720
+            Top             =   765
             Width           =   240
          End
       End

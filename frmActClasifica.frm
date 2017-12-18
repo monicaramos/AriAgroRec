@@ -334,7 +334,7 @@ Begin VB.Form frmActClasifica
          Left            =   1740
          MaxLength       =   10
          TabIndex        =   7
-         Top             =   4140
+         Top             =   4185
          Width           =   1320
       End
       Begin VB.TextBox txtCodigo 
@@ -353,7 +353,7 @@ Begin VB.Form frmActClasifica
          Left            =   1740
          MaxLength       =   10
          TabIndex        =   6
-         Top             =   3735
+         Top             =   3780
          Width           =   1320
       End
       Begin MSComctlLib.ProgressBar Pb1 
@@ -384,7 +384,7 @@ Begin VB.Form frmActClasifica
          Index           =   2
          Left            =   495
          TabIndex        =   32
-         Top             =   450
+         Top             =   360
          Width           =   540
       End
       Begin VB.Label Label2 
@@ -524,7 +524,7 @@ Begin VB.Form frmActClasifica
          Index           =   11
          Left            =   495
          TabIndex        =   23
-         Top             =   1485
+         Top             =   1440
          Width           =   525
       End
       Begin VB.Image imgFec 
@@ -533,7 +533,7 @@ Begin VB.Form frmActClasifica
          Left            =   1440
          Picture         =   "frmActClasifica.frx":0B68
          ToolTipText     =   "Buscar fecha"
-         Top             =   3735
+         Top             =   3780
          Width           =   240
       End
       Begin VB.Image imgFec 
@@ -542,7 +542,7 @@ Begin VB.Form frmActClasifica
          Left            =   1440
          Picture         =   "frmActClasifica.frx":0BF3
          ToolTipText     =   "Buscar fecha"
-         Top             =   4140
+         Top             =   4185
          Width           =   240
       End
       Begin VB.Image imgBuscar 
@@ -618,7 +618,7 @@ Begin VB.Form frmActClasifica
          Index           =   24
          Left            =   495
          TabIndex        =   18
-         Top             =   2520
+         Top             =   2475
          Width           =   855
       End
       Begin VB.Label Label2 
@@ -636,7 +636,7 @@ Begin VB.Form frmActClasifica
          Index           =   21
          Left            =   690
          TabIndex        =   17
-         Top             =   4140
+         Top             =   4185
          Width           =   645
       End
       Begin VB.Label Label2 
@@ -654,7 +654,7 @@ Begin VB.Form frmActClasifica
          Index           =   20
          Left            =   690
          TabIndex        =   16
-         Top             =   3795
+         Top             =   3840
          Width           =   690
       End
       Begin VB.Label Label2 
@@ -674,7 +674,7 @@ Begin VB.Form frmActClasifica
          Index           =   19
          Left            =   495
          TabIndex        =   15
-         Top             =   3510
+         Top             =   3555
          Width           =   600
       End
    End
