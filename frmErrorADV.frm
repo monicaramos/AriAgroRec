@@ -33,7 +33,7 @@ Begin VB.Form frmErrorADV
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   1980
+         Left            =   1845
          MaxLength       =   10
          TabIndex        =   2
          Top             =   2475
@@ -52,7 +52,7 @@ Begin VB.Form frmErrorADV
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   1980
+         Left            =   1845
          MaxLength       =   10
          TabIndex        =   1
          Top             =   2070
@@ -106,7 +106,7 @@ Begin VB.Form frmErrorADV
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1980
+         Left            =   1845
          MaxLength       =   7
          TabIndex        =   3
          Top             =   3105
@@ -125,7 +125,7 @@ Begin VB.Form frmErrorADV
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   1980
+         Left            =   1845
          MaxLength       =   16
          TabIndex        =   0
          Top             =   1410
@@ -145,12 +145,12 @@ Begin VB.Form frmErrorADV
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   3360
+         Left            =   3225
          Locked          =   -1  'True
          TabIndex        =   9
          Text            =   "Text5"
          Top             =   1410
-         Width           =   3375
+         Width           =   3645
       End
       Begin VB.CommandButton Command10 
          Height          =   440
@@ -187,9 +187,9 @@ Begin VB.Form frmErrorADV
          ForeColor       =   &H00972E0B&
          Height          =   240
          Index           =   39
-         Left            =   630
+         Left            =   315
          TabIndex        =   14
-         Top             =   2520
+         Top             =   2475
          Width           =   960
       End
       Begin VB.Label Label2 
@@ -207,14 +207,14 @@ Begin VB.Form frmErrorADV
          ForeColor       =   &H00972E0B&
          Height          =   240
          Index           =   50
-         Left            =   630
+         Left            =   315
          TabIndex        =   13
-         Top             =   2115
+         Top             =   2070
          Width           =   1200
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
-         Caption         =   "Articulo"
+         Caption         =   "Artículo"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -227,7 +227,7 @@ Begin VB.Form frmErrorADV
          ForeColor       =   &H00972E0B&
          Height          =   240
          Index           =   45
-         Left            =   630
+         Left            =   315
          TabIndex        =   12
          Top             =   1455
          Width           =   750
@@ -245,7 +245,7 @@ Begin VB.Form frmErrorADV
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   630
+         Left            =   315
          TabIndex        =   11
          Top             =   405
          Width           =   5025
@@ -265,7 +265,7 @@ Begin VB.Form frmErrorADV
          ForeColor       =   &H00972E0B&
          Height          =   240
          Index           =   42
-         Left            =   630
+         Left            =   315
          TabIndex        =   10
          Top             =   3105
          Width           =   1290
@@ -273,7 +273,7 @@ Begin VB.Form frmErrorADV
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   1710
+         Left            =   1575
          MouseIcon       =   "frmErrorADV.frx":0620
          MousePointer    =   4  'Icon
          ToolTipText     =   "Buscar articulo"
@@ -283,7 +283,7 @@ Begin VB.Form frmErrorADV
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   1710
+         Left            =   1575
          Picture         =   "frmErrorADV.frx":0772
          ToolTipText     =   "Buscar fecha"
          Top             =   2475
@@ -292,7 +292,7 @@ Begin VB.Form frmErrorADV
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   1710
+         Left            =   1575
          Picture         =   "frmErrorADV.frx":07FD
          ToolTipText     =   "Buscar fecha"
          Top             =   2070

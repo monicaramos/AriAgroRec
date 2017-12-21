@@ -384,7 +384,7 @@ Begin VB.Form frmListNomina
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   450
+         Left            =   405
          TabIndex        =   249
          Top             =   360
          Width           =   5595
@@ -10026,16 +10026,16 @@ Dim Nregs As Integer
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & Replace(Replace(cWhere, "horas", "rentradas"), "fechahora", "fechaent")
+        SQL = SQL & " WHERE  " & Replace(Replace(cWhere, "horas", "rentradas"), "fechahora", "fechaent")
     End If
     SQL = SQL & " group by 1,2,3 "
     SQL = SQL & " union "
     
     SQL = SQL & "select rclasifica.codcapat, rclasifica.fechaent, rclasifica.codvarie, sum(rclasifica.numcajon) as cajon, sum(rclasifica.kilostra) as kilos from " & Replace(QuitarCaracterACadena(cTabla, "_1"), "horas", "rclasifica")
     If cWhere <> "" Then
-        SQL = SQL & " WHERE " & Replace(Replace(cWhere, "horas", "rclasifica"), "fechahora", "fechaent")
+        SQL = SQL & " WHERE  " & Replace(Replace(cWhere, "horas", "rclasifica"), "fechahora", "fechaent")
     Else
-        SQL = SQL & " where (1=1)"
+        SQL = SQL & " WHERE (1=1) "
     End If
     '[Monica]11/09/2017
     SQL = SQL & " and not rclasifica.codvarie in (select codvarie1 from variedades_rel)"
@@ -10044,15 +10044,16 @@ Dim Nregs As Integer
     
     '[Monica]11/09/2017
     SQL = SQL & " union "
-    SQL = SQL & "select rclasifica.codcapat, rclasifica.fechaent, variedades_rel.codvarie, sum(rclasifica.numcajon) as cajon, sum(rclasifica.kilostra) as kilos from (" & Replace(QuitarCaracterACadena(cTabla, "_1"), "horas", "rclasifica")
-    SQL = SQL & ") inner join variedades_rel on rclasifica.codvarie = variedades_rel.codvarie1 "
+    SQL = SQL & "select rclasifica.codcapat, rclasifica.fechaent, "
+    '[Monica]21/12/2017: para el caso de las variedades de distinto precio de recoleccion (caso de picassent)
+    SQL = SQL & " if(vrel.eurdesta = vvar.eurdesta, variedades_rel.codvarie, variedades_rel.codvarie1) codvarie, "
+    SQL = SQL & " sum(rclasifica.numcajon) as cajon, sum(rclasifica.kilostra) as kilos from (((" & Replace(QuitarCaracterACadena(cTabla, "_1"), "horas", "rclasifica")
+    SQL = SQL & ") inner join variedades_rel on rclasifica.codvarie = variedades_rel.codvarie1) inner join variedades vrel on vrel.codvarie = variedades_rel.codvarie1) inner join variedades vvar on vvar.codvarie = variedades_rel.codvarie  "
     
     If cWhere <> "" Then
         SQL = SQL & " WHERE " & Replace(Replace(cWhere, "horas", "rclasifica"), "fechahora", "fechaent")
-    Else
-        SQL = SQL & " WHERE (1=1) "
     End If
-    SQL = SQL & " group by 1, 2, 3 "
+    SQL = SQL & " group by 1, 2, 3"
     
     
 '    Sql = Sql & " union "

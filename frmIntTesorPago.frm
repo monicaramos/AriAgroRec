@@ -9,13 +9,13 @@ Begin VB.Form frmIntTesorPago
    ClientHeight    =   4095
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6750
+   ClientWidth     =   7485
    Icon            =   "frmIntTesorPago.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   4095
-   ScaleWidth      =   6750
+   ScaleWidth      =   7485
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameCobros 
@@ -23,128 +23,201 @@ Begin VB.Form frmIntTesorPago
       Left            =   75
       TabIndex        =   4
       Top             =   120
-      Width           =   6555
+      Width           =   7275
       Begin VB.Frame Frame2 
          Caption         =   "Datos para la contabilización"
          BeginProperty Font 
-            Name            =   "Tahoma"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   1440
-         Left            =   270
+         Left            =   135
          TabIndex        =   5
          Top             =   300
-         Width           =   6075
+         Width           =   7020
          Begin VB.TextBox txtCodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   4
             Left            =   1980
             MaxLength       =   10
             TabIndex        =   1
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Text            =   "0000000000"
             Top             =   930
-            Width           =   1125
+            Width           =   1305
          End
          Begin VB.TextBox txtNombre 
             BackColor       =   &H80000018&
             Enabled         =   0   'False
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   4
-            Left            =   3195
+            Left            =   3330
             Locked          =   -1  'True
             TabIndex        =   11
             Top             =   930
-            Width           =   2685
+            Width           =   3450
          End
          Begin VB.TextBox txtCodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   3
             Left            =   1980
             MaxLength       =   10
             TabIndex        =   0
             Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
             Top             =   495
-            Width           =   1125
+            Width           =   1305
          End
          Begin VB.TextBox txtNombre 
             BackColor       =   &H80000018&
             Enabled         =   0   'False
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   3
-            Left            =   3195
+            Left            =   3330
             Locked          =   -1  'True
             TabIndex        =   9
             Top             =   495
-            Width           =   2685
+            Width           =   3450
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   4
             Left            =   1710
             ToolTipText     =   "Buscar Concepto"
-            Top             =   930
+            Top             =   975
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Cta.Banco Prevista"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   285
             Index           =   24
             Left            =   180
             TabIndex        =   12
             Top             =   975
-            Width           =   1395
+            Width           =   1665
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   3
             Left            =   1710
             ToolTipText     =   "Buscar Concepto"
-            Top             =   495
+            Top             =   540
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Forma de Pago"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   285
             Index           =   0
             Left            =   180
             TabIndex        =   10
             Top             =   540
-            Width           =   1395
+            Width           =   1665
          End
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   5145
+         Left            =   5955
          TabIndex        =   3
          Top             =   3075
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton CmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3960
+         Left            =   4770
          TabIndex        =   2
          Top             =   3075
-         Width           =   975
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   345
          Left            =   300
          TabIndex        =   6
          Top             =   2010
-         Width           =   5955
-         _ExtentX        =   10504
+         Width           =   6810
+         _ExtentX        =   12012
          _ExtentY        =   609
          _Version        =   393216
          Appearance      =   1
@@ -230,17 +303,17 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
 Dim cadWHERE As String
 
     If Not DatosOK Then Exit Sub
              
-    Sql = "SELECT count(*)" & _
+    SQL = "SELECT count(*)" & _
           " FROM (" & CadTag & ") aaaa "
           
              
-    If RegistrosAListar(Sql) = 0 Then
+    If RegistrosAListar(SQL) = 0 Then
         MsgBox "No existen datos a contabilizar.", vbExclamation
         Exit Sub
     End If
@@ -443,7 +516,7 @@ End Sub
 
 Private Sub ContabilizarPagos(cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
@@ -451,11 +524,11 @@ Dim cadTabla As String
 Dim FFin As Date
 Dim cadMen As String
 
-    Sql = "CONTES" 'contabilizar tesoreria
+    SQL = "CONTES" 'contabilizar tesoreria
 
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Contabilizar Pagos. Hay otro usuario contabilizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -539,14 +612,14 @@ End Function
 
 Private Function ActualizarCobros(cadWHERE As String, cadErr As String) As Boolean
 'Poner el movimiento como contabilizada
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo EActualizar
     
-    Sql = "UPDATE segpoliza SET inttesor=1 "
-    Sql = Sql & " WHERE " & cadWHERE
+    SQL = "UPDATE segpoliza SET inttesor=1 "
+    SQL = SQL & " WHERE " & cadWHERE
 
-    conn.Execute Sql
+    conn.Execute SQL
     
 EActualizar:
     If Err.Number <> 0 Then

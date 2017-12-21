@@ -23,68 +23,122 @@ Begin VB.Form frmListTraza
       Width           =   6015
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   14
          Left            =   1770
          MaxLength       =   7
          TabIndex        =   6
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000|S|"
          Top             =   2820
-         Width           =   1065
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   16
          Left            =   1770
          MaxLength       =   10
          TabIndex        =   1
          Top             =   1110
-         Width           =   1065
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   15
          Left            =   1770
          MaxLength       =   10
          TabIndex        =   3
          Top             =   1605
-         Width           =   1065
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   13
          Left            =   1770
          MaxLength       =   20
          TabIndex        =   5
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
          Top             =   2115
-         Width           =   1065
+         Width           =   1350
       End
       Begin VB.CommandButton CmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4800
+         Left            =   4710
          TabIndex        =   10
          Top             =   3375
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton CmdAcepInsAboca 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3690
+         Left            =   3510
          TabIndex        =   8
          Top             =   3375
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
          Caption         =   "Linea Abocamiento"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -92,19 +146,19 @@ Begin VB.Form frmListTraza
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   1
          Left            =   450
          TabIndex        =   11
          Top             =   2520
-         Width           =   1350
+         Width           =   1860
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
          Caption         =   "Hora"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -112,12 +166,12 @@ Begin VB.Form frmListTraza
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   7
          Left            =   450
          TabIndex        =   9
          Top             =   1620
-         Width           =   345
+         Width           =   450
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -141,7 +195,7 @@ Begin VB.Form frmListTraza
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   495
+         Left            =   450
          TabIndex        =   7
          Top             =   315
          Width           =   5220
@@ -150,8 +204,8 @@ Begin VB.Form frmListTraza
          AutoSize        =   -1  'True
          Caption         =   "CRFID"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -159,15 +213,24 @@ Begin VB.Form frmListTraza
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   6
          Left            =   450
          TabIndex        =   4
          Top             =   2100
-         Width           =   465
+         Width           =   585
       End
       Begin VB.Label Label4 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   4
@@ -275,14 +338,14 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
@@ -307,15 +370,15 @@ End Sub
 
 
 Private Sub CmdAcepInsAboca_Click()
-Dim Sql As String
+Dim SQL As String
 
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
     
-    Sql = "INSABO" 'insertar abocamiento
+    SQL = "INSABO" 'insertar abocamiento
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se puede realizar este proceso. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -331,7 +394,7 @@ Dim Sql As String
 End Sub
 
 Private Function InsertarAbocamiento() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim IdPalet As Long
 Dim FechaHora As String
 Dim LOG As cLOG
@@ -340,36 +403,36 @@ Dim LOG As cLOG
         
     InsertarAbocamiento = False
     
-    Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
-    IdPalet = DevuelveValor(Sql)
+    SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+    IdPalet = DevuelveValor(SQL)
     
     conn.BeginTrans
         
-    FechaHora = Format(txtcodigo(16).Text, "yyyy-mm-dd") & " " & Format(txtcodigo(15).Text, FormatoHora)
+    FechaHora = Format(txtCodigo(16).Text, "yyyy-mm-dd") & " " & Format(txtCodigo(15).Text, FormatoHora)
     
     ' Insertamos el abocamiento
-    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
-    Sql = Sql & DBSet(txtcodigo(14).Text, "N") & ","
-    Sql = Sql & DBSet(IdPalet, "N") & ","
-    Sql = Sql & "'" & Trim(FechaHora) & "',"
-    Sql = Sql & DBSet(txtcodigo(16).Text, "F") & ",0) "
+    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
+    SQL = SQL & DBSet(txtCodigo(14).Text, "N") & ","
+    SQL = SQL & DBSet(IdPalet, "N") & ","
+    SQL = SQL & "'" & Trim(FechaHora) & "',"
+    SQL = SQL & DBSet(txtCodigo(16).Text, "F") & ",0) "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtcodigo(13).Text) & " " & vbCrLf & Sql
+    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtCodigo(13).Text) & " " & vbCrLf & SQL
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
     
     
     ' liberamos la tarjeta CRFID
-    Sql = "update trzpalets set crfid = " & ValorNulo
-    Sql = Sql & " where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
-    Sql = Sql & " and idpalet = " & DBSet(IdPalet, "N")
+    SQL = "update trzpalets set crfid = " & ValorNulo
+    SQL = SQL & " where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+    SQL = SQL & " and idpalet = " & DBSet(IdPalet, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     
     
@@ -395,7 +458,7 @@ Private Sub Form_Activate()
         PrimeraVez = False
         Select Case OpcionListado
             Case 1 ' abocamiento manual de una linea
-                PonerFoco txtcodigo(16)
+                PonerFoco txtCodigo(16)
         End Select
     End If
     Screen.MousePointer = vbDefault
@@ -442,7 +505,7 @@ Dim List As Collection
     '---------------------
     Case 1  ' Insercion en la tabla de abocamientos
         FrameAbocamientoVisible True, H, W
-        Tabla = "trzlineas_cargas"
+        tabla = "trzlineas_cargas"
         
     
     End Select
@@ -454,59 +517,59 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 Private Sub frmCal_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de calidades
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmProd_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSec_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSit_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -527,7 +590,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmProducto (Index)
         
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
@@ -557,17 +620,17 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 9
-            indice = 16
+            Indice = 16
     End Select
 
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 
 End Sub
@@ -583,7 +646,7 @@ Private Sub Option4_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -606,22 +669,22 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
-Dim b As Boolean
+Dim cad As String, cadTipo As String 'tipo cliente
+Dim B As Boolean
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -630,35 +693,35 @@ Dim b As Boolean
 
     Select Case Index
         Case 6, 7, 8
-            PonerFormatoEntero txtcodigo(Index)
+            PonerFormatoEntero txtCodigo(Index)
         
         Case 60, 61 'productos
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "productos", "nomprodu", "codprodu", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "productos", "nomprodu", "codprodu", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
         Case 9, 10, 17, 24, 25   'SOCIOS
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
             
         Case 2, 3, 4, 5, 30, 31, 11, 12, 16 'FECHAS
-            b = True
-            If txtcodigo(Index).Text <> "" Then
-                b = PonerFormatoFecha(txtcodigo(Index))
+            B = True
+            If txtCodigo(Index).Text <> "" Then
+                B = PonerFormatoFecha(txtCodigo(Index))
             End If
             
         Case 0, 1, 28, 29 'CLASES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "clases", "nomclase", "codclase", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "clases", "nomclase", "codclase", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000")
             
         Case 18, 19 ' variedades
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
         Case 15 ' hora
-            PonerFormatoHora txtcodigo(Index)
+            PonerFormatoHora txtCodigo(Index)
             
         Case 14 'linea de abocamiento
-            PonerFormatoEntero txtcodigo(Index)
+            PonerFormatoEntero txtCodigo(Index)
         
         
     End Select
@@ -730,8 +793,8 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmCalidad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmCalidad(Indice As Integer)
+    indCodigo = Indice
     Set frmCal = New frmManCalidades
     frmCal.DatosADevolverBusqueda = "2|3|"
 '    frmCli.DeConsulta = True
@@ -740,16 +803,16 @@ Private Sub AbrirFrmCalidad(indice As Integer)
     Set frmCal = Nothing
 End Sub
 
-Private Sub AbrirFrmArea(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmArea(Indice As Integer)
+    indCodigo = Indice
     Set frmArea = New frmTrzAreas
     frmArea.DatosADevolverBusqueda = "0|1|"
     frmArea.Show vbModal
     Set frmArea = Nothing
 End Sub
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
 '    frmCli.DeConsulta = True
@@ -758,45 +821,45 @@ Private Sub AbrirFrmSocios(indice As Integer)
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmSituacion(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSituacion(Indice As Integer)
+    indCodigo = Indice
     Set frmSit = New frmManSituCamp
     frmSit.DatosADevolverBusqueda = "0|1|"
     frmSit.Show vbModal
     Set frmSit = Nothing
 End Sub
 
-Private Sub AbrirFrmSocio(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocio(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmClase(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmClase(Indice As Integer)
+    indCodigo = Indice
     Set frmCla = New frmComercial
     
-    AyudaClasesCom frmCla, txtcodigo(indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
         
     Set frmCla = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
     Set frmVar = Nothing
 End Sub
 
-Private Sub AbrirFrmProducto(indice As Integer)
+Private Sub AbrirFrmProducto(Indice As Integer)
     
-    indCodigo = indice + 58
+    indCodigo = Indice + 58
     Set frmProd = New frmComercial
     
-    AyudaProductosCom frmProd, txtcodigo(indCodigo).Text
+    AyudaProductosCom frmProd, txtCodigo(indCodigo).Text
     
     Set frmProd = Nothing
     
@@ -845,9 +908,9 @@ Private Sub AbrirEMail()
 End Sub
 
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
-Dim Sql As String
+Private Function DatosOK() As Boolean
+Dim B As Boolean
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -860,72 +923,72 @@ Dim tipoMov As String
 
 Dim Rs As ADODB.Recordset
 
-    b = True
+    B = True
     
     Select Case OpcionListado
         Case 1
             ' abocamiento manual de una entrada ( inserción en trzlineas_cargas )
-            If txtcodigo(16).Text = "" Then
+            If txtCodigo(16).Text = "" Then
                 MsgBox "Debe introducir la fecha de abocamiento.", vbExclamation
-                PonerFoco txtcodigo(16)
-                b = False
+                PonerFoco txtCodigo(16)
+                B = False
             End If
-            If txtcodigo(15).Text = "" Then
+            If txtCodigo(15).Text = "" Then
                 MsgBox "Debe introducir la hora de abocamiento.", vbExclamation
-                PonerFoco txtcodigo(15)
-                b = False
+                PonerFoco txtCodigo(15)
+                B = False
             End If
-            If txtcodigo(13).Text = "" Then
+            If txtCodigo(13).Text = "" Then
                 MsgBox "Debe introducir el Nro de CRFID.", vbExclamation
-                PonerFoco txtcodigo(13)
-                b = False
+                PonerFoco txtCodigo(13)
+                B = False
             End If
-            If txtcodigo(14).Text = "" Then
+            If txtCodigo(14).Text = "" Then
                 MsgBox "Debe introducir la linea de abocamiento.", vbExclamation
-                PonerFoco txtcodigo(14)
-                b = False
+                PonerFoco txtCodigo(14)
+                B = False
             End If
             
             ' Comprobamos que el nro de tarjeta no esté liberada
-            If b Then
-                Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtcodigo(13).Text), "T")
+            If B Then
+                SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
                 
                 Set Rs = New ADODB.Recordset
-                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Rs.EOF Then
                     MsgBox "El CRFID introducido no se encuentra asignado a ninguna entrada. Reintroduzca.", vbExclamation
-                    PonerFoco txtcodigo(13)
-                    b = False
+                    PonerFoco txtCodigo(13)
+                    B = False
                 End If
             End If
     End Select
-    DatosOk = b
+    DatosOK = B
 
 End Function
 
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     
-    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -942,13 +1005,13 @@ End Function
 
 Private Function YaEstaPalet(codpalet As Long, Palet As Long) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
     
-    Sql = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
+    SQL = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
             " and palet = " & CStr(Palet)
             
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     YaEstaPalet = Not Rs.EOF
 

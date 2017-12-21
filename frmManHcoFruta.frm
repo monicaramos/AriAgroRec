@@ -6634,6 +6634,11 @@ On Error GoTo eError
 
 '    If Not DatosOk Then Exit Sub
     
+'[Monica]19/11/2017: la variedad la pedimos
+    Variedad = InputBox("Introduzca la Variedad:", "", , 5000, 4000)
+    If Variedad = "" Then Exit Sub
+    
+    
     Me.CommonDialog1.Flags = cdlOFNExplorer + cdlOFNHideReadOnly + cdlOFNPathMustExist + cdlOFNFileMustExist
 
     Me.CommonDialog1.DefaultExt = "csv"
@@ -6837,17 +6842,19 @@ Private Sub CargarVariables(cad As String)
     FechaEnt = ""
     HoraEnt = ""
     Bruto = ""
-    Variedad = ""
+'[Monica]19/11/2017: la variedad la pedimos
+'    Variedad = ""
     Socio = ""
     Neto = ""
     nif = ""
     nomsocio = ""
     
-    NumNota = RecuperaValorNew(cad, ";", 1) + (9000000)
     FechaEnt = RecuperaValorNew(cad, ";", 12)
+    NumNota = RecuperaValorNew(cad, ";", 1) + (9000000) + (Mid(Format(Year(FechaEnt), "0000"), 3, 2) * 10000)
     HoraEnt = RecuperaValorNew(cad, ";", 13)
     Bruto = RecuperaValorNew(cad, ";", 9)
-    Variedad = 7001 ' RecuperaValorNew(Cad, ";", 7)
+'[Monica]19/11/2017: la variedad la pedimos
+'    Variedad = 7001 ' RecuperaValorNew(Cad, ";", 7)
     Socio = RecuperaValorNew(cad, ";", 2)
     Neto = RecuperaValorNew(cad, ";", 11)
     nif = RecuperaValorNew(cad, ";", 8)

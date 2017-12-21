@@ -77,6 +77,7 @@ Begin VB.Form frmConfParamGral
       _ExtentY        =   8731
       _Version        =   393216
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   2
       TabHeight       =   520
       WordWrap        =   0   'False
@@ -91,7 +92,7 @@ Begin VB.Form frmConfParamGral
       EndProperty
       TabCaption(0)   =   "Datos empresa"
       TabPicture(0)   =   "frmConfParamGral.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "ImgMail(0)"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "imgWeb"
@@ -143,13 +144,19 @@ Begin VB.Form frmConfParamGral
       Tab(0).ControlCount=   24
       TabCaption(1)   =   "Datos Campaña"
       TabPicture(1)   =   "frmConfParamGral.frx":0028
-      Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "text1(11)"
-      Tab(1).Control(1)=   "text1(12)"
-      Tab(1).Control(2)=   "imgFec(0)"
-      Tab(1).Control(3)=   "Label21"
-      Tab(1).Control(4)=   "imgFec(1)"
-      Tab(1).Control(5)=   "Label2"
+      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).Control(0)=   "Label2"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "imgFec(1)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "Label21"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "imgFec(0)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "text1(12)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "text1(11)"
+      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).ControlCount=   6
       Begin VB.TextBox text1 
          BeginProperty Font 
@@ -163,7 +170,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   13
-         Left            =   1725
+         Left            =   -73275
          MaxLength       =   40
          TabIndex        =   10
          Tag             =   "Persona Contacto|T|S|||empresas|percontacto|||"
@@ -183,7 +190,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   11
-         Left            =   -73020
+         Left            =   1980
          MaxLength       =   10
          TabIndex        =   11
          Tag             =   "F.Inicio Campaña|F|N|||empresas|fechaini|dd/mm/yyyy||"
@@ -204,7 +211,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -73020
+         Left            =   1980
          MaxLength       =   10
          TabIndex        =   12
          Tag             =   "F.Fin Campaña|F|N|||empresas|fechafin|dd/mm/yyyy||"
@@ -223,7 +230,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   1725
+         Left            =   -73275
          MaxLength       =   40
          TabIndex        =   0
          Tag             =   "Nombre de la Empresa|T|N|||empresas|nomempre|||"
@@ -242,7 +249,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   40
          TabIndex        =   1
          Tag             =   "Domicilio de la Empresa|T|N|||empresas|domempre|||"
@@ -261,7 +268,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   6
          TabIndex        =   2
          Tag             =   "CPostal|T|N|||empresas|codpobla|||"
@@ -280,7 +287,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   3540
+         Left            =   -71460
          MaxLength       =   35
          TabIndex        =   3
          Tag             =   "Población|T|N|||empresas|pobempre|||"
@@ -299,7 +306,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   35
          TabIndex        =   4
          Tag             =   "Provincia|T|N|||empresas|proempre|||"
@@ -318,7 +325,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   6
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   9
          TabIndex        =   5
          Tag             =   "C.I.F.|T|N|||empresas|cifempre|||"
@@ -337,7 +344,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   1725
+         Left            =   -73275
          MaxLength       =   10
          TabIndex        =   6
          Tag             =   "Teléfono|T|S|||empresas|telempre|||"
@@ -356,7 +363,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   8
-         Left            =   5010
+         Left            =   -69990
          MaxLength       =   10
          TabIndex        =   7
          Tag             =   "Fax|T|S|||empresas|faxempre|||"
@@ -375,7 +382,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   9
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   100
          TabIndex        =   8
          Tag             =   "Web|T|S|||empresas|wwwempre|||"
@@ -394,7 +401,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   360
          Index           =   10
-         Left            =   1710
+         Left            =   -73290
          MaxLength       =   100
          TabIndex        =   9
          Tag             =   "eMail|T|S|||empresas|maiempre|||"
@@ -414,7 +421,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   11
-         Left            =   510
+         Left            =   -74490
          TabIndex        =   33
          Top             =   4440
          Width           =   1080
@@ -423,7 +430,7 @@ Begin VB.Form frmConfParamGral
          Enabled         =   0   'False
          Height          =   240
          Index           =   0
-         Left            =   -73320
+         Left            =   1680
          Picture         =   "frmConfParamGral.frx":0044
          ToolTipText     =   "Buscar fecha"
          Top             =   765
@@ -442,7 +449,7 @@ Begin VB.Form frmConfParamGral
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   32
          Top             =   765
          Width           =   1695
@@ -451,7 +458,7 @@ Begin VB.Form frmConfParamGral
          Enabled         =   0   'False
          Height          =   240
          Index           =   1
-         Left            =   -73320
+         Left            =   1680
          Picture         =   "frmConfParamGral.frx":00CF
          ToolTipText     =   "Buscar fecha"
          Top             =   1260
@@ -470,7 +477,7 @@ Begin VB.Form frmConfParamGral
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74640
+         Left            =   360
          TabIndex        =   31
          Top             =   1260
          Width           =   1110
@@ -488,7 +495,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   30
          Top             =   735
          Width           =   1035
@@ -506,7 +513,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   29
          Top             =   1205
          Width           =   1005
@@ -524,7 +531,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   3
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   28
          Top             =   1675
          Width           =   885
@@ -542,7 +549,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   4
-         Left            =   2550
+         Left            =   -72450
          TabIndex        =   27
          Top             =   1665
          Width           =   975
@@ -560,7 +567,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   5
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   26
          Top             =   2145
          Width           =   1005
@@ -578,7 +585,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   6
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   25
          Top             =   2615
          Width           =   495
@@ -596,7 +603,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   7
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   24
          Top             =   3085
          Width           =   975
@@ -614,7 +621,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   8
-         Left            =   4320
+         Left            =   -70680
          TabIndex        =   23
          Top             =   3045
          Width           =   465
@@ -632,7 +639,7 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   9
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   22
          Top             =   3555
          Width           =   600
@@ -650,14 +657,14 @@ Begin VB.Form frmConfParamGral
          EndProperty
          Height          =   255
          Index           =   10
-         Left            =   525
+         Left            =   -74475
          TabIndex        =   21
          Top             =   4025
          Width           =   690
       End
       Begin VB.Image imgWeb 
          Height          =   255
-         Left            =   1380
+         Left            =   -73620
          Picture         =   "frmConfParamGral.frx":015A
          Stretch         =   -1  'True
          Tag             =   "-1"
@@ -668,7 +675,7 @@ Begin VB.Form frmConfParamGral
       Begin VB.Image ImgMail 
          Height          =   240
          Index           =   0
-         Left            =   1410
+         Left            =   -73590
          Tag             =   "-1"
          ToolTipText     =   "Enviar e-mail"
          Top             =   3990
