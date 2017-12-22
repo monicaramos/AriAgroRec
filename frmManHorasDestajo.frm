@@ -775,7 +775,7 @@ Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
-Private WithEvents frmFor As frmComercial 'forfaits
+Private WithEvents frmFor As frmBasico2 'forfaits
 Attribute frmFor.VB_VarHelpID = -1
 
 Dim Modo As Byte
@@ -821,7 +821,7 @@ Dim B As Boolean
         btnBuscar(I).visible = Not B
     Next I
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1005,7 +1005,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1020,22 +1020,22 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
-    SQL = SQL & vbCrLf & "Forfait: " & adodc1.Recordset.Fields(5) & " " & adodc1.Recordset.Fields(6)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
+    Sql = Sql & vbCrLf & "Forfait: " & adodc1.Recordset.Fields(5) & " " & adodc1.Recordset.Fields(6)
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from horasdestajo where codtraba=" & adodc1.Recordset!CodTraba
-        SQL = SQL & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        SQL = SQL & " and codvarie = " & adodc1.Recordset!codvarie
-        SQL = SQL & " and codforfait = " & DBSet(adodc1.Recordset!codforfait, "T")
+        Sql = "Delete from horasdestajo where codtraba=" & adodc1.Recordset!CodTraba
+        Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
+        Sql = Sql & " and codvarie = " & adodc1.Recordset!codvarie
+        Sql = Sql & " and codforfait = " & DBSet(adodc1.Recordset!codforfait, "T")
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1133,7 +1133,7 @@ End Sub
 
 Private Sub AbrirFrmManForfaits(Indice As Integer)
 
-    Set frmFor = New frmComercial
+    Set frmFor = New frmBasico2
     
     AyudaForfaitsCom frmFor, txtAux(Indice)
     
@@ -1460,24 +1460,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     If Ascendente Then
-        SQL = SQL & " ORDER BY  horasdestajo.fechahora, horasdestajo.codtraba "
+        Sql = Sql & " ORDER BY  horasdestajo.fechahora, horasdestajo.codtraba "
     Else
         '********************* canviar el ORDER BY *********************++
-        SQL = SQL & " ORDER BY  horasdestajo.fechahora desc, horasdestajo.codtraba "
+        Sql = Sql & " ORDER BY  horasdestajo.fechahora desc, horasdestajo.codtraba "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Nombre Trabajador|2500|;"
@@ -1609,7 +1609,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1617,12 +1617,12 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from horasdestajo where codtraba = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-        SQL = SQL & " and codvarie = " & DBSet(txtAux(7).Text, "N")
-        SQL = SQL & " and codforfait = " & DBSet(txtAux(2).Text, "T")
+        Sql = "select count(*) from horasdestajo where codtraba = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+        Sql = Sql & " and codvarie = " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & " and codforfait = " & DBSet(txtAux(2).Text, "T")
         
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El trabajador existe para esta fecha, variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1697,18 +1697,18 @@ Private Sub BotonActualizarEntradas()
     CargaGrid
 End Sub
 
-Private Function Kilos(cajas As String, Forfait As String) As String
+Private Function Kilos(Cajas As String, Forfait As String) As String
 Dim KilosCajon As String
 
     Kilos = ""
 
     ' si no hay cajas ni variedad, no podemos calcular los kilos
-    If cajas = "" Or Forfait = "" Then Exit Function
+    If Cajas = "" Or Forfait = "" Then Exit Function
     
     KilosCajon = 0
     KilosCajon = DevuelveValor("select kiloscaj from forfaits where codforfait = " & DBSet(Forfait, "T"))
     
-    Kilos = CStr(Round2(KilosCajon * CCur(ImporteSinFormato(cajas)), 0))
+    Kilos = CStr(Round2(KilosCajon * CCur(ImporteSinFormato(Cajas)), 0))
     
     
 End Function
@@ -1729,12 +1729,12 @@ End Function
 
 Private Function Horas(Importe As String, trabajador As String) As String
 Dim PrecHora As String
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
-    SQL = SQL & " where straba.codtraba = " & DBSet(trabajador, "N")
+    Sql = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
+    Sql = Sql & " where straba.codtraba = " & DBSet(trabajador, "N")
     
-    PrecHora = DevuelveValor(SQL)
+    PrecHora = DevuelveValor(Sql)
     
     Horas = 0
     
@@ -1759,7 +1759,7 @@ End Sub
 
 
 Private Function CargarCondicion() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NFic As Integer
 
     On Error GoTo eCargarCondicion

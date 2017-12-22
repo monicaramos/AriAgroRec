@@ -667,9 +667,9 @@ Private HaDevueltoDatos As Boolean
 
 Private WithEvents frmArt As frmADVArticulos
 Attribute frmArt.VB_VarHelpID = -1
-Private WithEvents frmFam As frmComercial
+Private WithEvents frmFam As frmBasico2
 Attribute frmFam.VB_VarHelpID = -1
-Private WithEvents frmPro As frmComercial
+Private WithEvents frmPro As frmBasico2
 Attribute frmPro.VB_VarHelpID = -1
 
 Private WithEvents frmB As frmBuscaGrid  'Busquedas
@@ -890,7 +890,7 @@ Dim I As Integer
     Combo1(0).ListIndex = 3
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(indFrame).Cancel = True
+    Me.CmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -939,7 +939,7 @@ Private Sub imgBuscar_Click(Index As Integer)
     Select Case Index
         Case 19, 20 'cod. FAMILIA
             indCodigo = Index + 43
-            Set frmFam = New frmComercial
+            Set frmFam = New frmBasico2
             
             AyudaFamiliasADV frmFam, txtCodigo(indCodigo).Text
             
@@ -957,7 +957,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 23, 24 'cod. PROVEEDOR
             indCodigo = Index + 43
             
-            Set frmPro = New frmComercial
+            Set frmPro = New frmBasico2
             
             AyudaProveedoresCom frmPro, txtCodigo(indCodigo).Text
             

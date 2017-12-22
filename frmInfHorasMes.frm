@@ -780,9 +780,9 @@ Private HaDevueltoDatos As Boolean
 
 Private WithEvents frmTra As frmManTraba 'mantenimiento de trabajadores
 Attribute frmTra.VB_VarHelpID = -1
-Private WithEvents frmFPa As frmComercial 'mantenimiento de formas de pago de comercial
+Private WithEvents frmFPa As frmBasico2 'mantenimiento de formas de pago de comercial
 Attribute frmFPa.VB_VarHelpID = -1
-Private WithEvents frmAlm As frmComercial 'mantenimiento de almacenes propios
+Private WithEvents frmAlm As frmBasico2 'mantenimiento de almacenes propios
 Attribute frmAlm.VB_VarHelpID = -1
 
 Private WithEvents frmB As frmBuscaGrid  'Busquedas
@@ -1058,7 +1058,7 @@ Dim I As Integer
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.CmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -1289,7 +1289,7 @@ End Sub
 
 Private Sub AbrirFrmManFPago(Indice As Integer)
 
-    Set frmFPa = New frmComercial
+    Set frmFPa = New frmBasico2
     
     AyudaFPagoCom frmFPa, txtCodigo(Indice)
     
@@ -1301,7 +1301,7 @@ End Sub
 Private Sub AbrirFrmManAlm(Indice As Integer)
     indCodigo = Indice
     
-    Set frmAlm = New frmComercial
+    Set frmAlm = New frmBasico2
     
     AyudaAlmacenCom frmAlm, txtCodigo(Indice)
     

@@ -699,7 +699,7 @@ Begin VB.Form frmManHorasETT
       TabIndex        =   11
       Top             =   5715
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
@@ -714,11 +714,11 @@ Begin VB.Form frmManHorasETT
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15630
+      Left            =   15615
       TabIndex        =   13
-      Top             =   5700
+      Top             =   5715
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -849,7 +849,7 @@ Begin VB.Form frmManHorasETT
       TabIndex        =   16
       Top             =   5700
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.Frame Frame1 
       BeginProperty Font 
@@ -1130,7 +1130,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

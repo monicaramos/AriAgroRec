@@ -1087,7 +1087,7 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 
 
@@ -1459,16 +1459,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1723,7 +1723,7 @@ End Sub
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice + 14
     
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice).Text
     

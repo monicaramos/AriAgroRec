@@ -1582,21 +1582,21 @@ End Sub
 
 Private Function EstaParametrizado(cad As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
     
     cad = Replace(cad, "*", "distinct advpartes.codsocio")
-    SQL = "select count(*)  from rsocios where esfactadvinterna = 1 and codsocio in (" & cad & ")"
+    Sql = "select count(*)  from rsocios where esfactadvinterna = 1 and codsocio in (" & cad & ")"
     
     EstaParametrizado = True
     
-    If TotalRegistros(SQL) > 0 Then
+    If TotalRegistros(Sql) > 0 Then
         Set vSeccion = New CSeccion
         If vSeccion.LeerDatos(vParamAplic.SeccionADV) Then
             If vSeccion.AbrirConta Then
                 ' codigo de iva de facturas internas de adv
-                SQL = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", vParamAplic.CodIvaExeADV, "N")
+                Sql = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", vParamAplic.CodIvaExeADV, "N")
                 
-                If SQL = "" Then
+                If Sql = "" Then
                     MsgBox "No está parametrizado el código de iva de socios con facturación interna o no existe en contabilidad. Revise.", vbExclamation
                     EstaParametrizado = False
                     Set vSeccion = Nothing
@@ -1616,7 +1616,7 @@ End Function
 
 '#### Laura 14/11/2006 Recuperar facturas ALZIRA
 Private Function ComprobarCliente_RecuperarFac(cadSelAlb As String, FecFac As String, numFac As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim codMacta1 As String 'cliente factura ariges
 Dim codMacta2 As String 'cliente factura conta
@@ -1626,12 +1626,12 @@ Dim LEtra As String
     ComprobarCliente_RecuperarFac = False
     
     'codmacta del cliente del albaran a facturar en Ariges
-    SQL = "select scaalb.codclien,sclien.codmacta"
-    SQL = SQL & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
-    SQL = SQL & " Where " & cadSelAlb
+    Sql = "select scaalb.codclien,sclien.codmacta"
+    Sql = Sql & " from scaalb inner join sclien on scaalb.codclien=sclien.codclien "
+    Sql = Sql & " Where " & cadSelAlb
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         codMacta1 = DBLet(Rs!Codmacta, "T")
     
@@ -1641,10 +1641,10 @@ Dim LEtra As String
     
     'codmacta en la contabilidad
     LEtra = ObtenerLetraSerie("FAV")
-    SQL = "SELECT codmacta FROM cabfact "
-    SQL = SQL & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(FecFac)
+    Sql = "SELECT codmacta FROM cabfact "
+    Sql = Sql & " WHERE numserie=" & DBSet(LEtra, "T") & " AND codfaccl=" & numFac & " AND anofaccl=" & Year(FecFac)
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         codMacta2 = DBLet(Rs!Codmacta, "T")
     End If
@@ -1979,7 +1979,7 @@ Dim indFrame As Single
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(indFrame).Cancel = True
+    Me.CmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
         
@@ -2073,7 +2073,7 @@ Private Sub imgBuscarOfer_Click(Index As Integer)
                 Case 29, 30: indCodigo = Index + 21
             End Select
             
-            Set frmFPa = New frmComercial
+            Set frmFPa = New frmBasico2
             
             AyudaFPagoCom frmFPa, txtCodigo(42).Text
             
@@ -2418,7 +2418,7 @@ Private Sub txtCodigo_Validate(Index As Integer, Cancel As Boolean)
 End Sub
 
 Private Function ObtenerClientes(cadW As String, Importe As String) As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EClientes
@@ -2426,28 +2426,28 @@ Dim Rs As ADODB.Recordset
     cadW = Replace(cadW, "{", "")
     cadW = Replace(cadW, "}", "")
     
-    SQL = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
-    SQL = SQL & " From scafac "
-    If cadW <> "" Then SQL = SQL & " where " & cadW
-    SQL = SQL & " group by codclien "
-    If Importe <> "" Then SQL = SQL & "having baseimp>" & Importe
+    Sql = "select codclien,nomclien,sum(baseimp1),sum(baseimp2),sum(baseimp3),sum(baseimp1)+ sum(if(isnull(baseimp2),0,baseimp2))+ sum(if(isnull(baseimp3),0,baseimp3)) as BaseImp"
+    Sql = Sql & " From scafac "
+    If cadW <> "" Then Sql = Sql & " where " & cadW
+    Sql = Sql & " group by codclien "
+    If Importe <> "" Then Sql = Sql & "having baseimp>" & Importe
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    SQL = ""
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Sql = ""
     While Not Rs.EOF
 '        If RS!BaseImp >= CCur(Importe) Then
-            SQL = SQL & Rs!CodClien & ","
+            Sql = Sql & Rs!CodClien & ","
 '        End If
         Rs.MoveNext
     Wend
     Rs.Close
     Set Rs = Nothing
-    If SQL <> "" Then
-        SQL = Mid(SQL, 1, Len(SQL) - 1)
-        SQL = "( {scafac.codclien} IN [" & SQL & "] )"
+    If Sql <> "" Then
+        Sql = Mid(Sql, 1, Len(Sql) - 1)
+        Sql = "( {scafac.codclien} IN [" & Sql & "] )"
     End If
-    ObtenerClientes = SQL
+    ObtenerClientes = Sql
     
 EClientes:
    If Err.Number <> 0 Then MuestraError Err.Number, , Err.Description
@@ -2486,7 +2486,7 @@ End Sub
 
 
 Private Function ProcesoCargaIntermedia(cTabla As String, cWhere As String, Partes As Boolean) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -2497,8 +2497,8 @@ Dim Rs As ADODB.Recordset
     
     ProcesoCargaIntermedia = False
 
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -2510,32 +2510,32 @@ Dim Rs As ADODB.Recordset
     
     
     If Partes Then
-        SQL = "select distinct " & vUsu.Codigo & ", advpartes.numparte from " & QuitarCaracterACadena(cTabla, "_1")
+        Sql = "select distinct " & vUsu.Codigo & ", advpartes.numparte from " & QuitarCaracterACadena(cTabla, "_1")
         If cWhere <> "" Then
-            SQL = SQL & " WHERE" & cWhere
+            Sql = Sql & " WHERE" & cWhere
         End If
         
-        Sql3 = "insert into tmpinformes (codusu,importe1) " & SQL
+        Sql3 = "insert into tmpinformes (codusu,importe1) " & Sql
         conn.Execute Sql3
     Else
-        SQL = "Select advpartes_trabajador.codtraba, advpartes.fechapar, advpartes.numparte, 0 as tipo, sum(advpartes_trabajador.horas) horas, sum(advpartes_trabajador.importel) importe FROM " & QuitarCaracterACadena(cTabla, "_1")
+        Sql = "Select advpartes_trabajador.codtraba, advpartes.fechapar, advpartes.numparte, 0 as tipo, sum(advpartes_trabajador.horas) horas, sum(advpartes_trabajador.importel) importe FROM " & QuitarCaracterACadena(cTabla, "_1")
         If cWhere <> "" Then
-            SQL = SQL & " WHERE " & cWhere
+            Sql = Sql & " WHERE " & cWhere
         End If
-        SQL = SQL & " group by 1, 2, 3, 4"
-        SQL = SQL & " union "
-        SQL = SQL & " Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, advfacturas_partes.numparte, 1 as tipo, sum(advfacturas_trabajador.horas) horas, sum(advfacturas_trabajador.importel) importe  "
-        SQL = SQL & " from " & Replace(Replace(QuitarCaracterACadena(cTabla, "_1"), "advpartes_trabajador", "advfacturas_trabajador"), "advpartes", "advfacturas_partes")
+        Sql = Sql & " group by 1, 2, 3, 4"
+        Sql = Sql & " union "
+        Sql = Sql & " Select advfacturas_trabajador.codtraba, advfacturas_partes.fechapar, advfacturas_partes.numparte, 1 as tipo, sum(advfacturas_trabajador.horas) horas, sum(advfacturas_trabajador.importel) importe  "
+        Sql = Sql & " from " & Replace(Replace(QuitarCaracterACadena(cTabla, "_1"), "advpartes_trabajador", "advfacturas_trabajador"), "advpartes", "advfacturas_partes")
         If cWhere <> "" Then
-            SQL = SQL & " WHERE " & Replace(Replace(cWhere, "advpartes_trabajador", "advfacturas_trabajador"), "advpartes", "advfacturas_partes")
+            Sql = Sql & " WHERE " & Replace(Replace(cWhere, "advpartes_trabajador", "advfacturas_trabajador"), "advpartes", "advfacturas_partes")
         End If
-        SQL = SQL & " group by 1, 2, 3, 4"
-        SQL = SQL & " order by 1, 2, 3, 4"
+        Sql = Sql & " group by 1, 2, 3, 4"
+        Sql = Sql & " order by 1, 2, 3, 4"
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                                                                 'horas,  numparte, tipo:0=parte/1=factura, Importe
-        SQL = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4) values "
+        Sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4) values "
             
         While Not Rs.EOF
             Sql2 = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo
@@ -2550,7 +2550,7 @@ Dim Rs As ADODB.Recordset
                 Sql3 = Sql3 & "," & DBSet(Rs.Fields(2).Value, "N") & "," & DBSet(Rs.Fields(3).Value, "N") & ","
                 Sql3 = Sql3 & DBSet(Rs.Fields(5).Value, "N") & ")"
                 
-                conn.Execute SQL & Sql3
+                conn.Execute Sql & Sql3
             Else
                 Sql3 = "update tmpinformes set importe1 = imnporte1 + " & DBSet(Rs.Fields(4).Value, "N")
                 Sql3 = Sql3 & ", importe4 = importe4 + " & DBSet(Rs.Fields(5).Value, "N")

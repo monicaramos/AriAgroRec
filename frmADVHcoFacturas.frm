@@ -2564,8 +2564,6 @@ Attribute frmB.VB_VarHelpID = -1
 
 Private WithEvents frmSoc As frmManSocios  'Form Mto socios
 Attribute frmSoc.VB_VarHelpID = -1
-Private WithEvents frmFP As frmComercial 'Form Mto Formas de Pago
-Attribute frmFP.VB_VarHelpID = -1
 Private WithEvents frmFPa As frmForpaConta
 Attribute frmFPa.VB_VarHelpID = -1
 '--monica
@@ -2920,18 +2918,18 @@ Dim B As Boolean
         If grid = "DataGrid2" Then
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1)
-             For jj = 0 To txtaux3.Count - 1
-                txtaux3(jj).Height = DataGrid2.RowHeight
-                txtaux3(jj).Top = alto
-                txtaux3(jj).visible = B
+             For jj = 0 To txtAux3.Count - 1
+                txtAux3(jj).Height = DataGrid2.RowHeight
+                txtAux3(jj).Top = alto
+                txtAux3(jj).visible = B
             Next jj
             
             '[Monica]18/05/2012
             If vParamAplic.Cooperativa = 3 Then
-                txtaux3(2).visible = False
-                txtaux3(2).Enabled = False
-                txtaux3(4).visible = False
-                txtaux3(4).Enabled = False
+                txtAux3(2).visible = False
+                txtAux3(2).Enabled = False
+                txtAux3(4).visible = False
+                txtAux3(4).Enabled = False
             End If
         End If
 '    End Select
@@ -3327,15 +3325,6 @@ End Sub
 '        Text1(Indice + 2).Text = devuelve
 'End Sub
 
-Private Sub frmFP_DatoSeleccionado(CadenaSeleccion As String)
-'Form Mantenimiento de Formas de Pago
-Dim Indice As Byte
-    Indice = 10
-    Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod Forma Pago
-    Text2(10).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom Forma Pago
-End Sub
-
-
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Mantenimiento de Formas de Pago de contabilidad
     Text1(10).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") 'Cod Forma Pago
@@ -3450,14 +3439,14 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim SQL As String
+Dim Sql As String
 On Error GoTo EBloqueaAlb
 
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM advfacturas_partes "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM advfacturas_partes "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -3467,16 +3456,16 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea TODAS las lineas de la factura
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM advfacturas_lineas "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM advfacturas_lineas "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -3850,8 +3839,8 @@ Dim B As Boolean
 '    BloquearTxt txtAux(8), True
     
     'Si no es modo Busqueda Bloquear los TxtAux3 (son los txtaux de los albaranes de factura)
-    For I = 0 To txtaux3.Count - 1
-        BloquearTxt txtaux3(I), (Modo <> 1)
+    For I = 0 To txtAux3.Count - 1
+        BloquearTxt txtAux3(I), (Modo <> 1)
     Next I
     
     'ampliacion linea
@@ -4055,7 +4044,7 @@ End Sub
     
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim B As Boolean
 
@@ -4069,18 +4058,18 @@ Dim B As Boolean
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
-        SQL = "UPDATE " & NomTablaLineas & " SET "
-        SQL = SQL & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
-        SQL = SQL & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
-        SQL = SQL & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
-        SQL = SQL & "importel= " & DBSet(txtAux(7).Text, "N")
-        SQL = SQL & ", numlotes=" & DBSet(Text2(17).Text, "T")
-        SQL = SQL & vWhere
+        Sql = "UPDATE " & NomTablaLineas & " SET "
+        Sql = Sql & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
+        Sql = Sql & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
+        Sql = Sql & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
+        Sql = Sql & "importel= " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & ", numlotes=" & DBSet(Text2(17).Text, "T")
+        Sql = Sql & vWhere
     End If
     
-    If SQL <> "" Then
+    If Sql <> "" Then
         'actualizar la factura y vencimientos
-        B = ModificarFactura(SQL)
+        B = ModificarFactura(Sql)
         ModificarLinea = B
     End If
     
@@ -4117,9 +4106,9 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
 '    b = DataGrid1.Enabled
 
@@ -4132,8 +4121,8 @@ Dim SQL As String
             Opcion = 3
     End Select
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
@@ -4144,7 +4133,7 @@ Dim SQL As String
     If PrimeraVezGrids Then PrimeraVez = True
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -4152,7 +4141,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
     
     vData.Refresh
     Select Case vDataGrid.Name
@@ -4212,7 +4201,7 @@ Dim tots As String
     
     vDataGrid.HoldFields
     Exit Sub
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -4281,7 +4270,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cta As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
@@ -4299,21 +4288,21 @@ Dim vTipoMov As CTiposMov
         'Eliminar en tablas de factura de ADV: advfacturas, advfacturas_partes, advfacturas_lineas
         '---------------------------------------------------------------
         If B Then
-            SQL = " " & ObtenerWhereCP(True)
+            Sql = " " & ObtenerWhereCP(True)
         
             'Lineas de facturas (slifpc)
-            conn.Execute "Delete from " & NomTablaLineas & SQL
+            conn.Execute "Delete from " & NomTablaLineas & Sql
         
             ' advfacturas_trabajador
-            conn.Execute "delete from advfacturas_trabajador " & SQL
+            conn.Execute "delete from advfacturas_trabajador " & Sql
             
             
             'Lineas de cabeceras de albaranes de la factura
-            conn.Execute "Delete from advfacturas_partes " & SQL
+            conn.Execute "Delete from advfacturas_partes " & Sql
             
             
             'Cabecera de facturas (scafpc)
-            conn.Execute "Delete from " & NombreTabla & SQL
+            conn.Execute "Delete from " & NombreTabla & Sql
         End If
         
         'Eliminar los movimientos generados por el albaran que genero la factura
@@ -4382,11 +4371,11 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 On Error Resume Next
-    SQL = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
 End Function
 
 
@@ -4399,32 +4388,32 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     Select Case Opcion
         Case 1
-            SQL = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, codalmac, advfacturas_lineas.codartic, nomartic, ampliaci, dosishab, cantidad, advfacturas_lineas.preciove, importel "
-            SQL = SQL & " FROM advfacturas_lineas inner join advartic on advfacturas_lineas.codartic = advartic.codartic " 'lineas de factura
+            Sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, codalmac, advfacturas_lineas.codartic, nomartic, ampliaci, dosishab, cantidad, advfacturas_lineas.preciove, importel "
+            Sql = Sql & " FROM advfacturas_lineas inner join advartic on advfacturas_lineas.codartic = advartic.codartic " 'lineas de factura
     
         Case 2
-            SQL = "SELECT codtipom,numfactu,fecfactu,numparte, fechapar,codcampo, codtrata, observac, litrosrea  "
-            SQL = SQL & " FROM advfacturas_partes " 'cabeceras partes de la factura
+            Sql = "SELECT codtipom,numfactu,fecfactu,numparte, fechapar,codcampo, codtrata, observac, litrosrea  "
+            Sql = Sql & " FROM advfacturas_partes " 'cabeceras partes de la factura
             
         Case 3
-            SQL = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, advfacturas_trabajador.codtraba, nomtraba, horas, precio, importel "
-            SQL = SQL & " FROM advfacturas_trabajador inner join straba on advfacturas_trabajador.codtraba = straba.codtraba " 'lineas de factura
+            Sql = "SELECT codtipom, numfactu, fecfactu, numparte, numlinea, advfacturas_trabajador.codtraba, nomtraba, horas, precio, importel "
+            Sql = Sql & " FROM advfacturas_trabajador inner join straba on advfacturas_trabajador.codtraba = straba.codtraba " 'lineas de factura
     End Select
     
     If enlaza Then
-        SQL = SQL & " " & ObtenerWhereCP(True)
+        Sql = Sql & " " & ObtenerWhereCP(True)
         'lineas factura proveedor
-        If Opcion = 1 Or Opcion = 3 Then SQL = SQL & " AND numparte=" & Data3.Recordset.Fields!Numparte
+        If Opcion = 1 Or Opcion = 3 Then Sql = Sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
     Else
-        SQL = SQL & " WHERE numfactu = -1"
+        Sql = Sql & " WHERE numfactu = -1"
     End If
-    SQL = SQL & " ORDER BY codtipom, numfactu, fecfactu, numparte "
-    If Opcion = 1 Or Opcion = 3 Then SQL = SQL & ", numlinea "
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY codtipom, numfactu, fecfactu, numparte "
+    If Opcion = 1 Or Opcion = 3 Then Sql = Sql & ", numlinea "
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -4544,7 +4533,7 @@ End Sub
    
 
 Private Function ModificaAlbxFac() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 On Error GoTo EModificaAlb
     
@@ -4558,15 +4547,15 @@ On Error GoTo EModificaAlb
 '    SQL = "UPDATE scafpa SET codtrab2=" & DBSet(Text3(0).Text, "N", "S") & ", "
 '    SQL = SQL & "codtrab1=" & DBSet(Text3(1).Text, "N", "S")
     If Me.FrameObserva.visible Then
-        SQL = "UPDATE advfacturas_partes SET "
-        SQL = SQL & " observac=" & DBSet(Text3(4).Text, "T")
+        Sql = "UPDATE advfacturas_partes SET "
+        Sql = Sql & " observac=" & DBSet(Text3(4).Text, "T")
 '        SQL = SQL & ", observa2=" & DBSet(Text3(5).Text, "T")
 '        SQL = SQL & ", observa3=" & DBSet(Text3(6).Text, "T")
 '        SQL = SQL & ", observa4=" & DBSet(Text3(7).Text, "T")
 '        SQL = SQL & ", observa5=" & DBSet(Text3(8).Text, "T")
-        SQL = SQL & ObtenerWhereCP(True)
-        SQL = SQL & " AND numparte=" & Data3.Recordset.Fields!Numparte
-        conn.Execute SQL
+        Sql = Sql & ObtenerWhereCP(True)
+        Sql = Sql & " AND numparte=" & Data3.Recordset.Fields!Numparte
+        conn.Execute Sql
     End If
 '--monica
 '    SQL = SQL & ObtenerWhereCP(True)
@@ -4584,7 +4573,7 @@ Private Function ModificarFactura(Optional sqlLineas As String) As Boolean
 'si se ha modificado la linea de slifac, añadir a la transaccion la modificación de la linea y recalcular
 Dim bol As Boolean
 Dim MenError As String
-Dim SQL As String
+Dim Sql As String
 Dim vFactuADV As CFacturaADV
 On Error GoTo EModFact
 
@@ -4705,7 +4694,7 @@ End Function
 
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtaux3(Index), Modo
+    ConseguirFoco txtAux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4717,7 +4706,7 @@ Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub TxtAux3_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
 End Sub
 
 

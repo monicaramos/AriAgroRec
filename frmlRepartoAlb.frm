@@ -531,8 +531,6 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
-Attribute frmCla.VB_VarHelpID = -1
 
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
@@ -549,7 +547,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Tabla1 As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
@@ -557,7 +555,7 @@ Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
 Dim Orden2 As String 'Campo de Ordenacion (por nombre) para Cristal Report
 Dim Tipo As String
 
-Dim indice As Integer
+Dim Indice As Integer
 
 Dim PrimeraVez As Boolean
 Dim Contabilizada As Byte
@@ -614,7 +612,7 @@ Dim Sql As String
     nHasta = txtNombre(13).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codsocio}"
+        Codigo = "{" & tabla & ".codsocio}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHSocio=""") Then Exit Sub
     End If
@@ -645,7 +643,7 @@ Dim Sql As String
     nHasta = txtNombre(15).Text
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".codvarie}"
+        Codigo = "{" & tabla & ".codvarie}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
@@ -661,7 +659,7 @@ Dim Sql As String
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".fecalbar}"
+        Codigo = "{" & tabla & ".fecalbar}"
         TipCod = "F"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHFecha=""") Then Exit Sub
     End If
@@ -674,7 +672,7 @@ Dim Sql As String
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
                 'Cadena para seleccion Desde y Hasta
-        Codigo = "{" & Tabla & ".numalbar}"
+        Codigo = "{" & tabla & ".numalbar}"
         TipCod = "N"
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHAlbaran=""") Then Exit Sub
     End If
@@ -723,7 +721,7 @@ Dim Sql As String
             Else
                 MsgBox "El proceso no se ha realizado.", vbExclamation
             End If
-            Me.pb2.visible = False
+            Me.Pb2.visible = False
         End If
     End If
     
@@ -771,9 +769,9 @@ Dim List As Collection
     FrameEntradaBasculaVisible True, H, W
     indFrame = 1
     
-    Tabla = "rhisfruta"
+    tabla = "rhisfruta"
     
-    Me.pb2.visible = False
+    Me.Pb2.visible = False
     
     ActivarCLAVE
     
@@ -786,15 +784,10 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
-
-Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
-    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
-End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 Dim Sql As String
@@ -865,19 +858,19 @@ Private Sub imgFec_Click(Index As Integer)
 
     Select Case Index
         Case 0, 1
-            indice = Index + 6
+            Indice = Index + 6
     End Select
 
 
-    imgFec(0).Tag = indice '<===
+    imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(indice).Text <> "" Then frmC.NovaData = txtcodigo(indice).Text
+    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(indice) '<===
+    PonerFoco txtcodigo(Indice) '<===
     ' ********************************************
 End Sub
 
@@ -916,19 +909,19 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
     txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
@@ -1027,16 +1020,16 @@ Dim devuelve2 As String
 End Function
 
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedad(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedad(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
     frmVar.Show vbModal
@@ -1120,49 +1113,49 @@ Dim Sql As String
 End Function
 
 Private Sub ActivarCLAVE()
-Dim i As Integer
+Dim I As Integer
     
-    For i = 12 To 15
-        txtcodigo(i).Enabled = False
-        imgBuscar(i).Enabled = False
-        imgBuscar(i).visible = False
-    Next i
-    For i = 2 To 3
-        txtcodigo(i).Enabled = False
-    Next i
-    For i = 6 To 7
-        txtcodigo(i).Enabled = False
-    Next i
-    For i = 0 To 1
-        imgFec(i).Enabled = False
-        imgFec(i).visible = False
-    Next i
+    For I = 12 To 15
+        txtcodigo(I).Enabled = False
+        imgBuscar(I).Enabled = False
+        imgBuscar(I).visible = False
+    Next I
+    For I = 2 To 3
+        txtcodigo(I).Enabled = False
+    Next I
+    For I = 6 To 7
+        txtcodigo(I).Enabled = False
+    Next I
+    For I = 0 To 1
+        imgFec(I).Enabled = False
+        imgFec(I).visible = False
+    Next I
     txtcodigo(8).Enabled = True
     cmdAceptar.Enabled = False
-    cmdCancel.Enabled = True
+    CmdCancel.Enabled = True
 End Sub
 
 Private Sub DesactivarCLAVE()
-Dim i As Integer
+Dim I As Integer
     
-    For i = 12 To 15
-        txtcodigo(i).Enabled = True
-        imgBuscar(i).Enabled = True
-        imgBuscar(i).visible = True
-    Next i
-    For i = 2 To 3
-        txtcodigo(i).Enabled = True
-    Next i
-    For i = 6 To 7
-        txtcodigo(i).Enabled = True
-    Next i
-    For i = 0 To 1
-        imgFec(i).Enabled = True
-        imgFec(i).visible = True
-    Next i
+    For I = 12 To 15
+        txtcodigo(I).Enabled = True
+        imgBuscar(I).Enabled = True
+        imgBuscar(I).visible = True
+    Next I
+    For I = 2 To 3
+        txtcodigo(I).Enabled = True
+    Next I
+    For I = 6 To 7
+        txtcodigo(I).Enabled = True
+    Next I
+    For I = 0 To 1
+        imgFec(I).Enabled = True
+        imgFec(I).visible = True
+    Next I
     txtcodigo(8).Enabled = True
     cmdAceptar.Enabled = True
-    cmdCancel.Enabled = True
+    CmdCancel.Enabled = True
 End Sub
 
 
@@ -1189,7 +1182,7 @@ Dim tImpRecol As Single
 Dim tImppenal As Single
 Dim tImpEntrada As Single
 Dim CodTipoMov As String
-Dim b As Boolean
+Dim B As Boolean
 Dim devuelve As String
 Dim Existe As Boolean
 Dim Mens As String
@@ -1212,21 +1205,21 @@ Dim NumReg As Long
     End If
     
     NumReg = TotalRegistrosConsulta(Sql)
-    pb2.visible = True
-    pb2.Max = NumReg
+    Pb2.visible = True
+    Pb2.Max = NumReg
     
-    CargarProgres pb2, CInt(NumReg)
+    CargarProgres Pb2, CInt(NumReg)
     conn.BeginTrans
     
     CodTipoMov = "ALF" 'albaranes de fruta
     
-    b = True
+    B = True
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF And b
-        IncrementarProgres pb2, 1
+    While Not Rs.EOF And B
+        IncrementarProgres Pb2, 1
         
         If TieneCopropietarios(Rs!codcampo) Then
             Set vTipoMov = New CTiposMov
@@ -1251,7 +1244,7 @@ Dim NumReg As Long
                 Set Rs2 = New ADODB.Recordset
                 Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 
-                While Not Rs2.EOF And b
+                While Not Rs2.EOF And B
                     If DBLet(Rs2!codcampo, "N") <> DBLet(Rs!codcampo, "N") Then
                         numalbar = vTipoMov.ConseguirContador(CodTipoMov)
                         Do
@@ -1273,7 +1266,7 @@ Dim NumReg As Long
                         
                         If Not rs3.EOF Then
                             If DBLet(rs3!codvarie, "N") <> DBLet(Rs!codvarie, "N") Then
-                                b = False
+                                B = False
                                 Mens = "El campo " & Rs2!codcampo & " no es de la misma variedad que el campo " & Rs!codcampo
                             Else
                                 vKilosBru = Round2(DBLet(Rs!KilosBru, "N") * DBLet(Rs2!Porcentaje, "N") / 100)
@@ -1322,16 +1315,16 @@ Dim NumReg As Long
                                 conn.Execute Sql4
                                 
                                 Mens = "Reparto de Entradas."
-                                If b Then b = RepartoEntradas(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If B Then B = RepartoEntradas(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                             
                                 Mens = "Reparto de Clasificación."
-                                If b Then b = RepartoClasificacion(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If B Then B = RepartoClasificacion(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                                 
                                 Mens = "Reparto de Gastos."
-                                If b Then b = RepartoGastos(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
+                                If B Then B = RepartoGastos(DBLet(Rs!numalbar, "N"), numalbar, DBLet(Rs2!Porcentaje, "N"), Mens)
                                 
                                 Mens = "Grabar Incidencias."
-                                If b Then b = GrabarIncidencias(DBLet(Rs!numalbar, "N"), numalbar, Mens)
+                                If B Then B = GrabarIncidencias(DBLet(Rs!numalbar, "N"), numalbar, Mens)
                             
                                 Albaranes = Albaranes & numalbar & ","
                             End If
@@ -1346,7 +1339,7 @@ Dim NumReg As Long
                 
                 Set Rs2 = Nothing
                 
-                If b Then
+                If B Then
                     ' ultimo registro la diferencia ( se updatean las tablas del registro de rhisfruta origen )
                     Sql4 = "update rhisfruta set kilosbru = " & DBSet(tKilosBru, "N") & ","
                     Sql4 = Sql4 & "numcajon = " & DBSet(tNumcajon, "N") & ","
@@ -1363,13 +1356,13 @@ Dim NumReg As Long
                     Albaranes = "(" & Mid(Albaranes, 1, Len(Albaranes) - 1) & ")"
                 
                     Mens = "Actualizar Entradas."
-                    If b Then b = ActualizarEntradas(Rs!numalbar, Albaranes, Mens)
+                    If B Then B = ActualizarEntradas(Rs!numalbar, Albaranes, Mens)
                 
                     Mens = "Actualizar Clasificación."
-                    If b Then b = ActualizarClasificacion(Rs!numalbar, Albaranes, Mens)
+                    If B Then B = ActualizarClasificacion(Rs!numalbar, Albaranes, Mens)
                     
                     Mens = "Actualizara Gastos."
-                    If b Then b = ActualizarGastosAlbaranes(Rs!numalbar, Albaranes, Mens)
+                    If B Then B = ActualizarGastosAlbaranes(Rs!numalbar, Albaranes, Mens)
                 
                 
                     vTipoMov.IncrementarContador (CodTipoMov)
@@ -1387,7 +1380,7 @@ Dim NumReg As Long
 
 
 eRepartoAlbaranes:
-    If Err.Number <> 0 Or Not b Then
+    If Err.Number <> 0 Or Not B Then
         conn.RollbackTrans
     
     Else
@@ -1466,12 +1459,12 @@ Dim NumNota As Long
         tImpRecol = tImpRecol - lImpRecol
         tImppenal = tImppenal - lImppenal
        
-        NumNota = Rs!numnotac
+        NumNota = Rs!NumNotac
         
         Sql2 = "insert into rhisfruta_entradas (numalbar,numnotac,fechaent,horaentr,kilosbru,numcajon,kilosnet,observac,imptrans,"
         Sql2 = Sql2 & "impacarr,imprecol,imppenal,prestimado,codtrans,codtarif,codcapat) values ("
         Sql2 = Sql2 & DBSet(numalbar, "N") & ","
-        Sql2 = Sql2 & DBSet(Rs!numnotac, "N") & ","
+        Sql2 = Sql2 & DBSet(Rs!NumNotac, "N") & ","
         Sql2 = Sql2 & DBSet(Rs!FechaEnt, "F") & ","
         Sql2 = Sql2 & DBSet(Rs!horaentr, "FH") & ","
         Sql2 = Sql2 & DBSet(lKilosBru, "N") & ","
@@ -1665,7 +1658,7 @@ Dim Sql2 As String
         Sql2 = Sql2 & ", imprecol = imprecol - " & DBSet(Rs!ImpREC, "N")
         Sql2 = Sql2 & ", imppenal = imppenal - " & DBSet(Rs!imppen, "N")
         Sql2 = Sql2 & " where numalbar = " & DBSet(AlbAnt, "N")
-        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!numnotac, "N")
+        Sql2 = Sql2 & " and numnotac = " & DBSet(Rs!NumNotac, "N")
     
         conn.Execute Sql2
         Rs.MoveNext

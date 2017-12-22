@@ -315,13 +315,13 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'Situacion campos
 Attribute frmSit.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
 Private WithEvents frmArea As frmTrzAreas 'Mensajes
 Attribute frmArea.VB_VarHelpID = -1
-Private WithEvents frmProd As frmComercial 'Productos
+Private WithEvents frmProd As frmBasico2 'Productos
 Attribute frmProd.VB_VarHelpID = -1
 
 
@@ -370,15 +370,15 @@ End Sub
 
 
 Private Sub CmdAcepInsAboca_Click()
-Dim SQL As String
+Dim Sql As String
 
     If Not DatosOK Then Exit Sub
     
-    SQL = "INSABO" 'insertar abocamiento
+    Sql = "INSABO" 'insertar abocamiento
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se puede realizar este proceso. Hay otro usuario realizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -394,7 +394,7 @@ Dim SQL As String
 End Sub
 
 Private Function InsertarAbocamiento() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim IdPalet As Long
 Dim FechaHora As String
 Dim LOG As cLOG
@@ -403,36 +403,36 @@ Dim LOG As cLOG
         
     InsertarAbocamiento = False
     
-    SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
-    IdPalet = DevuelveValor(SQL)
+    Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+    IdPalet = DevuelveValor(Sql)
     
     conn.BeginTrans
         
     FechaHora = Format(txtCodigo(16).Text, "yyyy-mm-dd") & " " & Format(txtCodigo(15).Text, FormatoHora)
     
     ' Insertamos el abocamiento
-    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
-    SQL = SQL & DBSet(txtCodigo(14).Text, "N") & ","
-    SQL = SQL & DBSet(IdPalet, "N") & ","
-    SQL = SQL & "'" & Trim(FechaHora) & "',"
-    SQL = SQL & DBSet(txtCodigo(16).Text, "F") & ",0) "
+    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values ("
+    Sql = Sql & DBSet(txtCodigo(14).Text, "N") & ","
+    Sql = Sql & DBSet(IdPalet, "N") & ","
+    Sql = Sql & "'" & Trim(FechaHora) & "',"
+    Sql = Sql & DBSet(txtCodigo(16).Text, "F") & ",0) "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Set LOG = New cLOG
-    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtCodigo(13).Text) & " " & vbCrLf & SQL
+    LOG.Insertar 6, vUsu, "Abocamiento Manual Traza, CRFID: " & Trim(txtCodigo(13).Text) & " " & vbCrLf & Sql
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
     
     
     ' liberamos la tarjeta CRFID
-    SQL = "update trzpalets set crfid = " & ValorNulo
-    SQL = SQL & " where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
-    SQL = SQL & " and idpalet = " & DBSet(IdPalet, "N")
+    Sql = "update trzpalets set crfid = " & ValorNulo
+    Sql = Sql & " where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+    Sql = Sql & " and idpalet = " & DBSet(IdPalet, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     
@@ -534,16 +534,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -839,7 +839,7 @@ End Sub
 
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice).Text
         
@@ -857,7 +857,7 @@ End Sub
 Private Sub AbrirFrmProducto(Indice As Integer)
     
     indCodigo = Indice + 58
-    Set frmProd = New frmComercial
+    Set frmProd = New frmBasico2
     
     AyudaProductosCom frmProd, txtCodigo(indCodigo).Text
     
@@ -910,7 +910,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -951,10 +951,10 @@ Dim Rs As ADODB.Recordset
             
             ' Comprobamos que el nro de tarjeta no esté liberada
             If B Then
-                SQL = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
+                Sql = "select idpalet from trzpalets where trim(crfid) = " & DBSet(Trim(txtCodigo(13).Text), "T")
                 
                 Set Rs = New ADODB.Recordset
-                Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                 If Rs.EOF Then
                     MsgBox "El CRFID introducido no se encuentra asignado a ninguna entrada. Reintroduzca.", vbExclamation
                     PonerFoco txtCodigo(13)
@@ -969,26 +969,26 @@ End Function
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -1005,13 +1005,13 @@ End Function
 
 Private Function YaEstaPalet(codpalet As Long, Palet As Long) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
     
-    SQL = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
+    Sql = "select * from trztmp_palets_lineas_cargas where numpalet = " & CStr(codpalet) & _
             " and palet = " & CStr(Palet)
             
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     YaEstaPalet = Not Rs.EOF
 

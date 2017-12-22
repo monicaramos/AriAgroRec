@@ -2260,11 +2260,11 @@ Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal 'calendario fecha
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmFam As frmComercial ' ayuda familias de comercial
+Private WithEvents frmFam As frmBasico2 ' ayuda familias de comercial
 Attribute frmFam.VB_VarHelpID = -1
-Private WithEvents frmPro As frmComercial ' ayuda proveedores de comercial
+Private WithEvents frmPro As frmBasico2 ' ayuda proveedores de comercial
 Attribute frmPro.VB_VarHelpID = -1
-Private WithEvents frmTUn As frmComercial ' ayuda tipos de unidad de comercial
+Private WithEvents frmTUn As frmBasico2 ' ayuda tipos de unidad de comercial
 Attribute frmTUn.VB_VarHelpID = -1
 Private WithEvents frmMat As frmADVMatActivas ' Materias activas
 Attribute frmMat.VB_VarHelpID = -1
@@ -2730,7 +2730,7 @@ Dim I As Byte
     B = (Modo = 3 Or Modo = 4 Or Modo = 2) And Not DeConsulta
     For I = 0 To ToolAux.Count - 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -2753,37 +2753,37 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
                
         Case 0 'stocks en almacenes
-            SQL = "SELECT codartic,advartic_salmac.codalmac,salmpr.nomalmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin,CASE statusin WHEN 0 THEN ""No"" WHEN 1 THEN ""Sí"" END "
-            SQL = SQL & " FROM advartic_salmac, salmpr "
+            Sql = "SELECT codartic,advartic_salmac.codalmac,salmpr.nomalmac,canstock,stockmin,puntoped,stockmax,stockinv,fechainv,horainve,statusin,CASE statusin WHEN 0 THEN ""No"" WHEN 1 THEN ""Sí"" END "
+            Sql = Sql & " FROM advartic_salmac, salmpr "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE advartic_salmac.codartic = '-1'"
+                Sql = Sql & " WHERE advartic_salmac.codartic = '-1'"
             End If
-            SQL = SQL & " and advartic_salmac.codalmac = salmpr.codalmac "
-            SQL = SQL & " ORDER BY advartic_salmac.codalmac"
+            Sql = Sql & " and advartic_salmac.codalmac = salmpr.codalmac "
+            Sql = Sql & " ORDER BY advartic_salmac.codalmac"
         
         Case 1 'materias activas
-            SQL = "SELECT advartic_matactiva.codartic,advartic_matactiva.codmatact,advmatactiva.nommatact ,advartic_matactiva.cantidad" ', advartic_matactiva.plazoent "
-            SQL = SQL & " FROM advartic_matactiva, advmatactiva "
+            Sql = "SELECT advartic_matactiva.codartic,advartic_matactiva.codmatact,advmatactiva.nommatact ,advartic_matactiva.cantidad" ', advartic_matactiva.plazoent "
+            Sql = Sql & " FROM advartic_matactiva, advmatactiva "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE advartic_matactiva.codartic = '-1'"
+                Sql = Sql & " WHERE advartic_matactiva.codartic = '-1'"
             End If
-            SQL = SQL & " and advartic_matactiva.codmatact = advmatactiva.codmatact "
-            SQL = SQL & " ORDER BY advartic_matactiva.codmatact "
+            Sql = Sql & " and advartic_matactiva.codmatact = advmatactiva.codmatact "
+            Sql = Sql & " ORDER BY advartic_matactiva.codmatact "
             
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmA_DatoSeleccionado(CadenaSeleccion As String)
@@ -3261,8 +3261,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     'For i = 0 To DataGridAux.Count - 1
     For I = 0 To 1
             CargaGrid I, True
-            If Not Adoaux(I).Recordset.EOF Then _
-                PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
+            If Not AdoAux(I).Recordset.EOF Then _
+                PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
     Next I
 
     
@@ -3295,13 +3295,13 @@ End Sub
 
 Private Sub PonerSumaStocks()
 Dim rst As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
     
-    SQL = DevuelveDesdeBDNew(cAgro, "advartic_salmac", "codartic", "codartic", Text1(0).Text, "T")
-    If SQL <> "" Then
-        SQL = "select sum(canstock) from advartic_salmac where codartic=" & DBSet(Text1(0).Text, "T")
+    Sql = DevuelveDesdeBDNew(cAgro, "advartic_salmac", "codartic", "codartic", Text1(0).Text, "T")
+    If Sql <> "" Then
+        Sql = "select sum(canstock) from advartic_salmac where codartic=" & DBSet(Text1(0).Text, "T")
         Set rst = New ADODB.Recordset
-        rst.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        rst.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         If Not rst.EOF Then
             Me.txtSumaStock.Text = rst.Fields(0).Value
         End If
@@ -3356,8 +3356,8 @@ Dim V
                     ' *** si n'hi han tabs ***
                     SituarTab (NumTabMto + 1)
                     
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
-                        Adoaux(NumTabMto).Recordset.MoveFirst
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                        AdoAux(NumTabMto).Recordset.MoveFirst
                     End If
 
                 Case 2 'modificar llínies
@@ -3367,10 +3367,10 @@ Dim V
                     SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar Text3
                     PonerModo 2 '4
-                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                    If Not AdoAux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
-                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+                        V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
                         ' ***************************************************************
                     End If
 
@@ -3379,7 +3379,7 @@ Dim V
             PosicionarData Data1.Recordset!codArtic
              
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not Adoaux(NumTabMto).Recordset.EOF Then
+            If Not AdoAux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -3645,7 +3645,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -3661,7 +3661,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -3672,38 +3672,38 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'articulo en almacen
-            SQL = "Seguro que desea eliminar de la BD el registro:"
-            SQL = SQL & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
-            SQL = SQL & vbCrLf & "Cod. Almacen: " & Adoaux(Index).Recordset.Fields(1)
+            Sql = "Seguro que desea eliminar de la BD el registro:"
+            Sql = Sql & vbCrLf & "Cod. Artículo: " & AdoAux(Index).Recordset.Fields(0)
+            Sql = Sql & vbCrLf & "Cod. Almacen: " & AdoAux(Index).Recordset.Fields(1)
 
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM advartic_salmac"
-                SQL = SQL & vWhere & " AND codalmac= " & Adoaux(Index).Recordset!codAlmac
+                Sql = "DELETE FROM advartic_salmac"
+                Sql = Sql & vWhere & " AND codalmac= " & AdoAux(Index).Recordset!codAlmac
             End If
     
         Case 1 'materia activa
-            SQL = "Seguro que desea eliminar de la BD el registro:"
-            SQL = SQL & vbCrLf & "Cod. Artículo: " & Adoaux(Index).Recordset.Fields(0)
-            SQL = SQL & vbCrLf & "Cod. Materia Activa: " & Adoaux(Index).Recordset.Fields(1)
+            Sql = "Seguro que desea eliminar de la BD el registro:"
+            Sql = Sql & vbCrLf & "Cod. Artículo: " & AdoAux(Index).Recordset.Fields(0)
+            Sql = Sql & vbCrLf & "Cod. Materia Activa: " & AdoAux(Index).Recordset.Fields(1)
 
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM advartic_matactiva"
-                SQL = SQL & vWhere & " AND codmatact= " & Adoaux(Index).Recordset!codmatact
+                Sql = "DELETE FROM advartic_matactiva"
+                Sql = Sql & vWhere & " AND codmatact= " & AdoAux(Index).Recordset!codmatact
             End If
     
     
     End Select
 
     If Eliminar Then
-        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
+        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
         
-        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
             PonerCampos
             
         End If
@@ -3758,7 +3758,7 @@ Dim I As Integer
 '                NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 '            End If
 
-            AnyadirLinea DataGridAux(Index), Adoaux(Index)
+            AnyadirLinea DataGridAux(Index), AdoAux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -3788,7 +3788,7 @@ Dim I As Integer
 '                NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 '            End If
 
-            AnyadirLinea DataGridAux(Index), Adoaux(Index)
+            AnyadirLinea DataGridAux(Index), AdoAux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -3818,8 +3818,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
     
-    If Adoaux(Index).Recordset.EOF Then Exit Sub
-    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -3885,7 +3885,7 @@ Private Sub BotonModificarLinea(Index As Integer)
                 BloquearTxt Text3(I), False
             Next I
             
-            PosicionarCombo cmbAux(0), Adoaux(Index).Recordset!statusin
+            PosicionarCombo cmbAux(0), AdoAux(Index).Recordset!statusin
             
         Case 1
             For J = 10 To 11
@@ -4003,7 +4003,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -4072,19 +4072,19 @@ Private Sub imgBuscar_Click(Index As Integer)
 
     Select Case Index
         Case 0 'Codigo Proveedor
-            Set frmPro = New frmComercial
+            Set frmPro = New frmBasico2
             AyudaProveedoresCom frmPro, Text1(2).Text
             Set frmPro = Nothing
             PonerFoco Text1(Index + 2)
         
         Case 1  'Cod. Familia
-            Set frmFam = New frmComercial
+            Set frmFam = New frmBasico2
             AyudaFamiliasADV frmFam, Text1(3).Text
             Set frmFam = Nothing
             PonerFoco Text1(Index + 2)
         
         Case 3  'Cod. Tipo Unidad
-            Set frmTUn = New frmComercial
+            Set frmTUn = New frmBasico2
             AyudaTUnidadesCom frmTUn, Text1(5).Text
             Set frmTUn = Nothing
             PonerFoco Text1(Index + 2)
@@ -4178,14 +4178,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim I As Byte
 
-    Adoaux(Index).ConnectionString = conn
-    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    Adoaux(Index).CursorType = adOpenDynamic
-    Adoaux(Index).LockType = adLockPessimistic
-    Adoaux(Index).Refresh
+    AdoAux(Index).ConnectionString = conn
+    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    AdoAux(Index).CursorType = adOpenDynamic
+    AdoAux(Index).LockType = adLockPessimistic
+    AdoAux(Index).Refresh
     
-    If Not Adoaux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
+    If Not AdoAux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -4219,7 +4219,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 0 'stocks en almacenes
@@ -4274,7 +4274,7 @@ Dim tots As String
     DataGridAux(Index).ScrollBars = dbgAutomatic
       
     ' **** si n'hi han llínies en grids i camps fora d'estos ****
-    If Not Adoaux(Index).Recordset.EOF Then
+    If Not AdoAux(Index).Recordset.EOF Then
         DataGridAux_RowColChange Index, 1, 1
     Else
 '        LimpiarCamposFrame Index
@@ -4341,7 +4341,7 @@ Dim V As Integer
         If ModificaDesdeFormulario2(Me, 2, nomframe) Then
             ModoLineas = 0
             
-            V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+            V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
             CargaGrid NumTabMto, True
             
             ' *** si n'hi han tabs ***
@@ -4349,7 +4349,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
         End If
@@ -4429,7 +4429,7 @@ EInsEnAlm:
 End Sub
 
 Private Function ModificarPreciosAlbaranes() As Boolean
-Dim SQL As String, Sql2 As String
+Dim Sql As String, Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Importe As Currency
     On Error GoTo eModificarPreciosAlbaranes
@@ -4437,10 +4437,10 @@ Dim Importe As Currency
     ModificarPreciosAlbaranes = False
 
 
-    SQL = "select * from advpartes_lineas where codartic = " & DBSet(Text1(0).Text, "T")
+    Sql = "select * from advpartes_lineas where codartic = " & DBSet(Text1(0).Text, "T")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         Importe = Round2(DBLet(Rs!cantidad, "N") * TransformaPuntosComas(ImporteSinFormato(Text1(17).Text)), 2)

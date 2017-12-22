@@ -839,7 +839,7 @@ Private WithEvents frmMens As frmManTraba 'mantenimiento de trabajadores
 Attribute frmMens.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmAlm As frmComercial 'mantenimiento de almacenes propios
+Private WithEvents frmAlm As frmBasico2 'mantenimiento de almacenes propios
 Attribute frmAlm.VB_VarHelpID = -1
 
 Dim Modo As Byte
@@ -1088,7 +1088,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1103,18 +1103,18 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Almacén: " & adodc1.Recordset.Fields(3)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Almacén: " & adodc1.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from horas where codtraba=" & adodc1.Recordset!CodTraba
-        SQL = SQL & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        SQL = SQL & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
-        conn.Execute SQL
+        Sql = "Delete from horas where codtraba=" & adodc1.Recordset!CodTraba
+        Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
+        Sql = Sql & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1199,7 +1199,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             ' ********************************************
      
         Case 3 'codigo de almacen
-            Set frmAlm = New frmComercial
+            Set frmAlm = New frmBasico2
             
             AyudaAlmacenCom frmAlm, txtAux(7).Text
             
@@ -1556,26 +1556,26 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
     CargarSqlFiltro
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
+        Sql = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " and " & cadFiltro & "  "
+        Sql = CadenaConsulta & " and " & cadFiltro & "  "
     End If
     
     If Ascendente Then
-        SQL = SQL & " ORDER BY  horas.fechahora, horas.codtraba "
+        Sql = Sql & " ORDER BY  horas.fechahora, horas.codtraba "
     Else
         '********************* canviar el ORDER BY *********************++
-        SQL = SQL & " ORDER BY  horas.fechahora desc, horas.codtraba "
+        Sql = Sql & " ORDER BY  horas.fechahora desc, horas.codtraba "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Nombre Trabajador|3000|;"
@@ -1700,7 +1700,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1708,9 +1708,9 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = ""
-        SQL = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", txtAux(0).Text, "N", , "fechahora", txtAux(1).Text, "F", "codalmac", txtAux(7).Text, "N")
-        If SQL <> "" Then
+        Sql = ""
+        Sql = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", txtAux(0).Text, "N", , "fechahora", txtAux(1).Text, "F", "codalmac", txtAux(7).Text, "N")
+        If Sql <> "" Then
             MsgBox "El trabajador existe para esta fecha en ese almacén. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1787,7 +1787,7 @@ End Sub
 
 
 Private Function CargarCondicion() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NFic As Integer
 
     On Error GoTo eCargarCondicion

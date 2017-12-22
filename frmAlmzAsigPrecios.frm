@@ -615,7 +615,7 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 
 
@@ -685,8 +685,8 @@ Dim nTabla As String
     
     '======== FORMULA  ====================================
     'D/H VARIEDAD
-    cDesde = Trim(txtcodigo(14).Text)
-    cHasta = Trim(txtcodigo(15).Text)
+    cDesde = Trim(txtCodigo(14).Text)
+    cHasta = Trim(txtCodigo(15).Text)
     nDesde = txtNombre(14).Text
     nHasta = txtNombre(15).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -696,13 +696,13 @@ Dim nTabla As String
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHVariedad=""") Then Exit Sub
     End If
 
-    If txtcodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtcodigo(14).Text, "N")
-    If txtcodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtcodigo(15).Text, "N")
+    If txtCodigo(14).Text <> "" Then vSQL = vSQL & " and variedades.codvarie >= " & DBSet(txtCodigo(14).Text, "N")
+    If txtCodigo(15).Text <> "" Then vSQL = vSQL & " and variedades.codvarie <= " & DBSet(txtCodigo(15).Text, "N")
 
     
     'D/H fecha
-    cDesde = Trim(txtcodigo(6).Text)
-    cHasta = Trim(txtcodigo(7).Text)
+    cDesde = Trim(txtCodigo(6).Text)
+    cHasta = Trim(txtCodigo(7).Text)
     nDesde = ""
     nHasta = ""
     If Not (cDesde = "" And cHasta = "") Then
@@ -739,7 +739,7 @@ Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
         
-        PonerFoco txtcodigo(12)
+        PonerFoco txtCodigo(12)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -789,43 +789,43 @@ End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
-    txtcodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtCodigo(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
     ' ********************************************
 End Sub
 
 
 Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000") ' codigo de clase
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' descripcion
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 Private Sub frmPob_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) ' codigo de poblacion
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) ' codigo de poblacion
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) ' nombre
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -845,7 +845,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmVariedad (Index)
     
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub imgFec_Click(Index As Integer)
@@ -880,13 +880,13 @@ Private Sub imgFec_Click(Index As Integer)
 
     imgFec(0).Tag = Indice '<===
     ' *** repasar si el camp es txtAux o Text1 ***
-    If txtcodigo(Indice).Text <> "" Then frmC.NovaData = txtcodigo(Indice).Text
+    If txtCodigo(Indice).Text <> "" Then frmC.NovaData = txtCodigo(Indice).Text
     ' ********************************************
 
     frmC.Show vbModal
     Set frmC = Nothing
     ' *** repasar si el camp es txtAux o Text1 ***
-    PonerFoco txtcodigo(Indice) '<===
+    PonerFoco txtCodigo(Indice) '<===
     ' ********************************************
 End Sub
 
@@ -896,13 +896,13 @@ Private Sub Option3_Click(Index As Integer)
     Frame1.Enabled = Option3(0).Value
     Frame3.Enabled = Not Option3(0).Value
     
-    If Option3(0).Value Then txtcodigo(0).Text = ""
-    If Not Option3(0).Value Then txtcodigo(2).Text = ""
+    If Option3(0).Value Then txtCodigo(0).Text = ""
+    If Not Option3(0).Value Then txtCodigo(2).Text = ""
     
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -942,7 +942,7 @@ Private Sub txtCodigo_LostFocus(Index As Integer)
 Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 '    If txtCodigo(Index).Text = "" Then Exit Sub
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
@@ -951,18 +951,18 @@ Dim cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 6, 7  'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
             
         Case 14, 15 'VARIEDADES
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
         Case 2 ' Precio de liquidacion
-            PonerFormatoDecimal txtcodigo(Index), 7
+            PonerFormatoDecimal txtCodigo(Index), 7
         
         Case 0 ' Aumento de precio
-            PonerFormatoDecimal txtcodigo(Index), 8
+            PonerFormatoDecimal txtCodigo(Index), 8
         
     End Select
 End Sub
@@ -1059,9 +1059,9 @@ End Sub
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice + 14
     
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
-    AyudaClasesCom frmCla, txtcodigo(Indice).Text
+    AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
     Set frmCla = Nothing
 End Sub
@@ -1116,26 +1116,26 @@ End Sub
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -1151,22 +1151,22 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ActualizarRegistros = True
     Exit Function
@@ -1177,14 +1177,14 @@ End Function
 
 
 Private Function NombreCalidad(Var As String, Calid As String) As String
-Dim SQL As String
+Dim Sql As String
 
     NombreCalidad = ""
 
-    SQL = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
-    SQL = SQL & " and codcalid = " & DBSet(Calid, "N")
+    Sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
+    Sql = Sql & " and codcalid = " & DBSet(Calid, "N")
     
-    NombreCalidad = DevuelveValor(SQL)
+    NombreCalidad = DevuelveValor(Sql)
     
 End Function
 
@@ -1226,14 +1226,14 @@ End Function
 
 
 Private Function ProductoCampo(campo As String) As String
-Dim SQL As String
+Dim Sql As String
 
     ProductoCampo = ""
     
-    SQL = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
-    SQL = SQL & " where rcampos.codcampo = " & DBSet(campo, "N")
+    Sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
+    Sql = Sql & " where rcampos.codcampo = " & DBSet(campo, "N")
     
-    ProductoCampo = DevuelveValor(SQL)
+    ProductoCampo = DevuelveValor(Sql)
 
 End Function
 
@@ -1241,7 +1241,7 @@ End Function
 
 Private Function ModificarPrecioLiq(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim cWhere2 As String
 Dim Precio As Currency
@@ -1253,15 +1253,15 @@ Dim Rs As ADODB.Recordset
  
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
-    cWhere2 = " numalbar in (" & SQL & ")"
+    cWhere2 = " numalbar in (" & Sql & ")"
     
     If Not BloqueaRegistro("rhisfruta", cWhere2) Then
         MsgBox "No se pueden actualizar Entradas. Hay registros bloqueados.", vbExclamation
@@ -1271,13 +1271,13 @@ Dim Rs As ADODB.Recordset
         conn.BeginTrans
     
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             
             If Option3(0).Value Then
             
-                Precio = CCur(ImporteSinFormato(txtcodigo(2).Text))
+                Precio = CCur(ImporteSinFormato(txtCodigo(2).Text))
                 
                 Sql2 = "update rhisfruta set prliquidalmz = " & DBSet(Precio, "N")
                 Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
@@ -1286,12 +1286,12 @@ Dim Rs As ADODB.Recordset
         
             Else
                 If Option1(0).Value Then
-                    Precio = CCur(ImporteSinFormato(txtcodigo(0).Text))
+                    Precio = CCur(ImporteSinFormato(txtCodigo(0).Text))
                     
                     Sql2 = "update rhisfruta set prliquidalmz = round(prliquidalmz + " & DBSet(Precio, "N") & ",4) "
                     Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
                 Else
-                    Precio = 1 + (CCur(ImporteSinFormato(txtcodigo(0).Text)) / 100)
+                    Precio = 1 + (CCur(ImporteSinFormato(txtCodigo(0).Text)) / 100)
                     
                     Sql2 = "update rhisfruta set prliquidalmz = round(prliquidalmz * " & DBSet(Precio, "N") & ",4) "
                     Sql2 = Sql2 & " where numalbar = " & DBSet(Rs!numalbar, "N")
@@ -1323,17 +1323,17 @@ Private Function DatosOK() As Boolean
     ' si estamos asignando precios
     If Option3(0).Value Then
     
-        If txtcodigo(2).Text = "" Then
+        If txtCodigo(2).Text = "" Then
             MsgBox "Debe poner un valor en el campo precio. Revise.", vbExclamation
-            PonerFoco txtcodigo(2)
+            PonerFoco txtCodigo(2)
             Exit Function
         End If
 
     Else
     ' si estamos aumentando precio
-        If txtcodigo(0).Text = "" Then
+        If txtCodigo(0).Text = "" Then
             MsgBox "Debe poner un valor en el campo de aumento de precio. Revise.", vbExclamation
-            PonerFoco txtcodigo(0)
+            PonerFoco txtCodigo(0)
             Exit Function
         End If
     End If

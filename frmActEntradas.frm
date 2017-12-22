@@ -569,7 +569,7 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'Situacion campos
 Attribute frmSit.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
@@ -775,7 +775,7 @@ Dim List As Collection
         Me.imgBuscar(H).Picture = frmPpal.imgListImages16.ListImages(1).Picture
     Next H
     
-    Me.Pb1.visible = False
+    Me.pb1.visible = False
     Me.lblProgres.visible = False
     
     tabla = "rentradas"
@@ -976,7 +976,7 @@ End Sub
 
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
@@ -1177,12 +1177,12 @@ Dim fr As frmVisReport
         Sql1 = Sql1 & " WHERE " & cWhere
     End If
     
-    Pb1.visible = True
+    pb1.visible = True
     lblProgres.visible = True
     
-    Me.Pb1.Max = TotalRegistros(Sql1)
+    Me.pb1.Max = TotalRegistros(Sql1)
     Me.Refresh
-    Me.Pb1.Value = 0
+    Me.pb1.Value = 0
     
     BorrarTMPErr
     CrearTMPErr
@@ -1243,7 +1243,7 @@ Dim fr As frmVisReport
     While Not Rs.EOF And B
         I = I + 1
         
-        Me.Pb1.Value = Me.Pb1.Value + 1
+        Me.pb1.Value = Me.pb1.Value + 1
         lblProgres.Caption = "Linea: " & I & ". Entrada: " & Format(DBLet(Rs!NumNotac, "N"), "00000000")
         Me.Refresh
 

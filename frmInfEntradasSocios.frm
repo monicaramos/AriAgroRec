@@ -726,7 +726,7 @@ Option Explicit
 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
-Private WithEvents frmCla As frmComercial 'Ayuda de Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
@@ -1185,7 +1185,7 @@ Dim indFrame As Single
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.CmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
         
@@ -1194,7 +1194,7 @@ End Sub
 Private Sub CargaCombo()
 Dim I As Integer
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
    ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
     For I = 0 To Combo1.Count - 1
@@ -1205,10 +1205,10 @@ Dim SQL As String
         Combo1(0).AddItem "Todos"
         Combo1(0).ItemData(Combo1(0).NewIndex) = 0
         
-        SQL = "select * from rglobalgap order by codigo"
+        Sql = "select * from rglobalgap order by codigo"
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             Combo1(0).ItemData(Combo1(0).NewIndex) = DBLet(Rs!Codigo, "N")
@@ -1251,18 +1251,18 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {variedades.codvarie} = -1 "
+        Sql = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect1, SQL) Then Exit Sub
-    If Not AnyadirAFormula(cadSelect2, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect1, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect2, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1495,8 +1495,8 @@ Private Sub PonerFrameFacVisible(visible As Boolean, ByRef H As Integer, ByRef W
 'Pone el Frame de Facturacion de Albaran Visible y Ajustado al Formulario, y visualiza los controles
 Dim cad As String
 
-    H = 6150 '5550
-    W = 6435
+    H = 7050 '6150 '5550
+    W = 7155 '6435
     
     PonerFrameVisible Me.FrameFacturar, visible, H, W
 End Sub
@@ -1560,7 +1560,7 @@ End Sub
 
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
@@ -1577,7 +1577,7 @@ End Sub
 
 
 Private Function ProcesoEntradasSocio(cTabla As String, cWhere As String, ctabla1 As String, cwhere1 As String, cTabla2 As String, cWhere2 As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Rs As ADODB.Recordset
@@ -1588,8 +1588,8 @@ Dim Rs As ADODB.Recordset
     
     ProcesoEntradasSocio = False
 
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
@@ -1611,78 +1611,78 @@ Dim Rs As ADODB.Recordset
     cWhere2 = QuitarCaracterACadena(cWhere2, "}")
     
     
-    SQL = "select " & vUsu.Codigo & ", rentradas.codsocio,rentradas.codvarie,rentradas.codcampo,rentradas.numnotac,rentradas.fechaent,rentradas.kilosnet,rentradas.kilostra,rentradas.kilosbru,rentradas.recolect, rentradas.tipoentr, "
+    Sql = "select " & vUsu.Codigo & ", rentradas.codsocio,rentradas.codvarie,rentradas.codcampo,rentradas.numnotac,rentradas.fechaent,rentradas.kilosnet,rentradas.kilostra,rentradas.kilosbru,rentradas.recolect, rentradas.tipoentr, "
     '[Monica]19/04/2013: añadidas las cajas por Montifrut (aunque solo tienen registros en rhisfruta)
-    SQL = SQL & " (if(numcajo1 is null, 0,numcajo1) + if(numcajo2 is null, 0,numcajo2) + if(numcajo3 is null, 0,numcajo3) + if(numcajo4 is null, 0,numcajo4) + if(numcajo5 is null, 0,numcajo5)) numcajon "
+    Sql = Sql & " (if(numcajo1 is null, 0,numcajo1) + if(numcajo2 is null, 0,numcajo2) + if(numcajo3 is null, 0,numcajo3) + if(numcajo4 is null, 0,numcajo4) + if(numcajo5 is null, 0,numcajo5)) numcajon "
     
     '[Monica]14/03/2017: añadido el codigo de ggap por catadau para el caso en que se quiere agrupar por productor(ggap)
     If Check6.Value Then
-        SQL = SQL & ", rcampos.codigoggap "
+        Sql = Sql & ", rcampos.codigoggap "
     Else
-        SQL = SQL & "," & ValorNulo
+        Sql = Sql & "," & ValorNulo
     End If
     
-    SQL = SQL & " from " & QuitarCaracterACadena(cTabla2, "_1")
+    Sql = Sql & " from " & QuitarCaracterACadena(cTabla2, "_1")
     If cWhere2 <> "" Then
-        SQL = SQL & " WHERE " & cWhere2
+        Sql = Sql & " WHERE " & cWhere2
     End If
-    SQL = SQL & " union "
-    SQL = SQL & "select " & vUsu.Codigo & ", rclasifica.codsocio,rclasifica.codvarie,rclasifica.codcampo,rclasifica.numnotac,rclasifica.fechaent,rclasifica.kilosnet,rclasifica.kilostra, rclasifica.kilosbru, rclasifica.recolect, rclasifica.tipoentr, rclasifica.numcajon "
+    Sql = Sql & " union "
+    Sql = Sql & "select " & vUsu.Codigo & ", rclasifica.codsocio,rclasifica.codvarie,rclasifica.codcampo,rclasifica.numnotac,rclasifica.fechaent,rclasifica.kilosnet,rclasifica.kilostra, rclasifica.kilosbru, rclasifica.recolect, rclasifica.tipoentr, rclasifica.numcajon "
     '[Monica]14/03/2017: añadido el codigo de ggap por catadau para el caso en que se quiere agrupar por productor(ggap)
     If Check6.Value Then
-        SQL = SQL & ", rcampos.codigoggap "
+        Sql = Sql & ", rcampos.codigoggap "
     Else
-        SQL = SQL & "," & ValorNulo
+        Sql = Sql & "," & ValorNulo
     End If
     
-    SQL = SQL & " from " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = Sql & " from " & QuitarCaracterACadena(cTabla, "_1")
     
     
     If cWhere <> "" Then
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
-    SQL = SQL & " union "
-    SQL = SQL & "select " & vUsu.Codigo & ", rhisfruta.codsocio,rhisfruta.codvarie,rhisfruta.codcampo,rhisfruta_entradas.numnotac,rhisfruta_entradas.fechaent,rhisfruta_entradas.kilosnet,rhisfruta_entradas.kilostra,rhisfruta_entradas.kilosbru, rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta.numcajon "
+    Sql = Sql & " union "
+    Sql = Sql & "select " & vUsu.Codigo & ", rhisfruta.codsocio,rhisfruta.codvarie,rhisfruta.codcampo,rhisfruta_entradas.numnotac,rhisfruta_entradas.fechaent,rhisfruta_entradas.kilosnet,rhisfruta_entradas.kilostra,rhisfruta_entradas.kilosbru, rhisfruta.recolect, rhisfruta.tipoentr, rhisfruta.numcajon "
     
     '[Monica]14/03/2017: añadido el codigo de ggap por catadau para el caso en que se quiere agrupar por productor(ggap)
     If Check6.Value Then
-        SQL = SQL & ", rcampos.codigoggap "
+        Sql = Sql & ", rcampos.codigoggap "
     Else
-        SQL = SQL & "," & ValorNulo
+        Sql = Sql & "," & ValorNulo
     End If
     
-    SQL = SQL & " from " & QuitarCaracterACadena(ctabla1, "_1")
+    Sql = Sql & " from " & QuitarCaracterACadena(ctabla1, "_1")
     
     
     If cwhere1 <> "" Then
-        SQL = SQL & " WHERE " & cwhere1
+        Sql = Sql & " WHERE " & cwhere1
     End If
     
     '[Monica]03/05/2013: incluimos las entradas que sean de las facturas de siniestro
     If Check4.Value = 1 Then
-        SQL = SQL & " union "
-        SQL = SQL & "select " & vUsu.Codigo & ", rhisfrutasin.codsocio,rhisfrutasin.codvarie,rhisfrutasin.codcampo,rhisfrutasin_entradas.numnotac,rhisfrutasin_entradas.fechaent,rhisfrutasin_entradas.kilosnet,rhisfrutasin_entradas.kilostra,rhisfrutasin_entradas.kilosbru, rhisfrutasin.recolect, rhisfrutasin.tipoentr, rhisfrutasin.numcajon "
+        Sql = Sql & " union "
+        Sql = Sql & "select " & vUsu.Codigo & ", rhisfrutasin.codsocio,rhisfrutasin.codvarie,rhisfrutasin.codcampo,rhisfrutasin_entradas.numnotac,rhisfrutasin_entradas.fechaent,rhisfrutasin_entradas.kilosnet,rhisfrutasin_entradas.kilostra,rhisfrutasin_entradas.kilosbru, rhisfrutasin.recolect, rhisfrutasin.tipoentr, rhisfrutasin.numcajon "
         
         '[Monica]14/03/2017: añadido el codigo de ggap por catadau para el caso en que se quiere agrupar por productor(ggap)
         If Check6.Value Then
-            SQL = SQL & ", rcampos.codigoggap "
+            Sql = Sql & ", rcampos.codigoggap "
         Else
-            SQL = SQL & "," & ValorNulo
+            Sql = Sql & "," & ValorNulo
         End If
         
-        SQL = SQL & " from " & Replace(QuitarCaracterACadena(ctabla1, "_1"), "rhisfruta", "rhisfrutasin")
+        Sql = Sql & " from " & Replace(QuitarCaracterACadena(ctabla1, "_1"), "rhisfruta", "rhisfrutasin")
         
         
         If cwhere1 <> "" Then
-            SQL = SQL & " WHERE " & Replace(cwhere1, "rhisfruta", "rhisfrutasin")
+            Sql = Sql & " WHERE " & Replace(cwhere1, "rhisfruta", "rhisfrutasin")
         End If
     End If
     
     
-    SQL = SQL & " order by 1, 2, 3 "
+    Sql = Sql & " order by 1, 2, 3 "
                                            'codsocio, codvarie,  codcampo, numnotac, fechaent, kilosnet,  kilostra, kilosbru,  recolect,  tipoentr,  numcajon  codigoggap
     Sql2 = "insert into tmpinformes (codusu, importe1,  codigo1, importe2, importeb2, fecha1,  importe3,  importe4, importeb1, importeb3, importeb4, importeb5, nombre1) "
-    Sql2 = Sql2 & SQL
+    Sql2 = Sql2 & Sql
     
     conn.Execute Sql2
     
@@ -1694,12 +1694,12 @@ Dim Rs As ADODB.Recordset
         '2º merma = (PB - Taras) * 0.04
         '3º resultado = PN + merma
     
-        SQL = "update tmpinformes tt, variedades vv set "
-        SQL = SQL & " tt.importe3 =  tt.importe3 + round((tt.importeb1 - round(tt.importeb1 - (tt.importe3 / round(1-(vv.porcmerm / 100),2)),0)) * round(vv.porcmerm / 100,2) ,0) "
-        SQL = SQL & " where tt.codusu = " & vUsu.Codigo
-        SQL = SQL & " and tt.codigo1 = vv.codvarie "
+        Sql = "update tmpinformes tt, variedades vv set "
+        Sql = Sql & " tt.importe3 =  tt.importe3 + round((tt.importeb1 - round(tt.importeb1 - (tt.importe3 / round(1-(vv.porcmerm / 100),2)),0)) * round(vv.porcmerm / 100,2) ,0) "
+        Sql = Sql & " where tt.codusu = " & vUsu.Codigo
+        Sql = Sql & " and tt.codigo1 = vv.codvarie "
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     Screen.MousePointer = vbDefault

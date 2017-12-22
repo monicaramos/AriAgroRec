@@ -566,11 +566,11 @@ Begin VB.Form frmManHorasNat
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15060
+      Left            =   14970
       TabIndex        =   11
       Top             =   5610
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
@@ -589,7 +589,7 @@ Begin VB.Form frmManHorasNat
       TabIndex        =   12
       Top             =   5610
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -948,11 +948,11 @@ Private WithEvents frmMens As frmManTraba 'mantenimiento de trabajadores
 Attribute frmMens.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmAlm As frmComercial 'mantenimiento de almacenes propios
+Private WithEvents frmAlm As frmBasico2 'mantenimiento de almacenes propios
 Attribute frmAlm.VB_VarHelpID = -1
 Private WithEvents frmVar As frmComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
-Private WithEvents frmFor As frmComercial 'mantenimiento de forfaits de comercial
+Private WithEvents frmFor As frmBasico2 'mantenimiento de forfaits de comercial
 Attribute frmFor.VB_VarHelpID = -1
 
 Dim Modo As Byte
@@ -1214,7 +1214,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1229,29 +1229,29 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Almacén: " & adodc1.Recordset.Fields(3)
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(9) & " " & adodc1.Recordset.Fields(10)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Trabajador: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Almacén: " & adodc1.Recordset.Fields(3)
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(9) & " " & adodc1.Recordset.Fields(10)
     
     If DBLet(adodc1.Recordset.Fields(12), "T") <> "" Then
-        SQL = SQL & vbCrLf & "Forfait: " & adodc1.Recordset.Fields(11) & " " & adodc1.Recordset.Fields(12)
+        Sql = Sql & vbCrLf & "Forfait: " & adodc1.Recordset.Fields(11) & " " & adodc1.Recordset.Fields(12)
     End If
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from horas where codtraba=" & adodc1.Recordset!CodTraba
-        SQL = SQL & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        SQL = SQL & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
-        SQL = SQL & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
+        Sql = "Delete from horas where codtraba=" & adodc1.Recordset!CodTraba
+        Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
+        Sql = Sql & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
+        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
         
         If DBLet(adodc1.Recordset.Fields(12), "T") <> "" Then
-            SQL = SQL & " and codforfait = " & DBLet(adodc1.Recordset!codforfait, "T")
+            Sql = Sql & " and codforfait = " & DBLet(adodc1.Recordset!codforfait, "T")
         End If
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1330,7 +1330,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             ' ********************************************
      
         Case 3 'codigo de almacen
-            Set frmAlm = New frmComercial
+            Set frmAlm = New frmBasico2
             
             AyudaAlmacenCom frmAlm, txtAux(7).Text
             
@@ -1718,7 +1718,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '@@--
@@ -1727,19 +1727,19 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargarSqlFiltro
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
+        Sql = CadenaConsulta & " and " & cadFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " and " & cadFiltro & "  "
+        Sql = CadenaConsulta & " and " & cadFiltro & "  "
     End If
     If Ascendente Then
-        SQL = SQL & " ORDER BY  horas.fechahora, horas.codtraba "
+        Sql = Sql & " ORDER BY  horas.fechahora, horas.codtraba "
     Else
         '********************* canviar el ORDER BY *********************++
-        SQL = SQL & " ORDER BY  horas.fechahora desc, horas.codtraba, horas.codalmac, horas.codvarie "
+        Sql = Sql & " ORDER BY  horas.fechahora desc, horas.codtraba, horas.codalmac, horas.codvarie "
         '**************************************************************++
     End If
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B||195|;S|txtAux2(0)|T|Trabajador|2100|;"
@@ -1878,7 +1878,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1886,11 +1886,11 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from horas where codtraba = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-        SQL = SQL & " and codalmac = " & DBSet(txtAux(7).Text, "N")
-        SQL = SQL & " and codvarie = " & DBSet(txtAux(8).Text, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from horas where codtraba = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+        Sql = Sql & " and codalmac = " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & " and codvarie = " & DBSet(txtAux(8).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El trabajador existe para esta fecha, almacén, variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1977,7 +1977,7 @@ Private Sub AbrirFrmVariedades(Indice As Integer)
 End Sub
 
 Private Sub AbrirFrmManForfaits(Indice As Integer)
-    Set frmFor = New frmComercial
+    Set frmFor = New frmBasico2
     AyudaForfaitsCom frmFor, txtAux(Indice)
     Set frmFor = Nothing
     
@@ -1985,30 +1985,30 @@ Private Sub AbrirFrmManForfaits(Indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    SQL = "update horas set "
-    SQL = SQL & " horasdia = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    SQL = SQL & ", horasproduc = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
-    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    SQL = SQL & ", horasext = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    SQL = SQL & " where codtraba = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    SQL = SQL & " and codalmac = " & DBSet(txtAux(7).Text, "N")
-    SQL = SQL & " and codvarie = " & DBSet(txtAux(8).Text, "N")
+    Sql = "update horas set "
+    Sql = Sql & " horasdia = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", horasproduc = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
+    Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    Sql = Sql & ", horasext = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    Sql = Sql & " where codtraba = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    Sql = Sql & " and codalmac = " & DBSet(txtAux(7).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(txtAux(8).Text, "N")
     
     
     If txtAux(9).Text = "" Then
-        SQL = SQL & " and codforfait = ' '"
+        Sql = Sql & " and codforfait = ' '"
     Else
-        SQL = SQL & " and codforfait = " & DBSet(txtAux(9).Text, "T")
+        Sql = Sql & " and codforfait = " & DBSet(txtAux(9).Text, "T")
     End If
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function
@@ -2019,7 +2019,7 @@ End Function
 
 
 Private Function CargarCondicion() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NFic As Integer
 
     On Error GoTo eCargarCondicion
@@ -2050,23 +2050,23 @@ eCargarCondicion:
 End Function
 
 Private Sub LeerFiltro(Leer As Boolean)
-Dim SQL As String
+Dim Sql As String
 
-    SQL = App.Path & "\filtronom.dat"
+    Sql = App.Path & "\filtronom.dat"
     If Leer Then
         Filtro = 3
-        If Dir(SQL) <> "" Then
-            AbrirFicheroFiltro True, SQL
-            If IsNumeric(Trim(SQL)) Then Filtro = CByte(SQL)
+        If Dir(Sql) <> "" Then
+            AbrirFicheroFiltro True, Sql
+            If IsNumeric(Trim(Sql)) Then Filtro = CByte(Sql)
         End If
     Else
-        AbrirFicheroFiltro False, SQL
+        AbrirFicheroFiltro False, Sql
     End If
 End Sub
 
 
 Private Sub AbrirFicheroFiltro(Leer As Boolean, Fichero As String)
-Dim SQL As String
+Dim Sql As String
 Dim I As Integer
 
 On Error GoTo EAbrir

@@ -665,11 +665,11 @@ Begin VB.Form frmManHorasDestajoPica
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   14250
+      Left            =   14160
       TabIndex        =   12
-      Top             =   5865
+      Top             =   5880
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
@@ -688,7 +688,7 @@ Begin VB.Form frmManHorasDestajoPica
       TabIndex        =   14
       Top             =   5880
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -819,7 +819,7 @@ Begin VB.Form frmManHorasDestajoPica
       TabIndex        =   17
       Top             =   5880
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.Frame Frame1 
       Height          =   555
@@ -1101,7 +1101,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1918,8 +1918,8 @@ Dim cadMen As String
         
         Case 7 'codigo de trabajador
             If PonerFormatoEntero(txtAux(Index)) Then
-                txtAux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
-                If txtAux3.Text = "" Then
+                txtaux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
+                If txtaux3.Text = "" Then
                     cadMen = "No existe el Trabajador: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -2129,7 +2129,7 @@ Private Sub CargaForaGrid()
     If DataGrid1.Columns.Count <= 2 Then Exit Sub
 
     txtAux(7).Text = DBLet(adodc1.Recordset!CodTraba, "N")
-    txtAux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
+    txtaux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
     ' **********************************************************************
  End Sub
 

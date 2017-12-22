@@ -116,7 +116,7 @@ Begin VB.Form frmManInciden
       TabIndex        =   6
       Top             =   5730
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
@@ -135,7 +135,7 @@ Begin VB.Form frmManInciden
       TabIndex        =   7
       Top             =   5730
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -489,7 +489,7 @@ Dim B As Boolean
     txtAux(1).visible = Not B
     Combo1.visible = Not B
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

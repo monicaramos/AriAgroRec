@@ -410,6 +410,8 @@ Public DeConsulta As Boolean
 
 Public CadenaConsulta As String
 
+Public pConn As Byte
+
 
 Public Tag1 As String
 Public Tag2 As String
@@ -804,6 +806,21 @@ Private Sub Form_Load()
     Set vTag3 = New CTag
     vTag3.Cargar txtAux(0)
             
+           
+    If pConn = 2 Then
+        FrameBotonGnral.visible = True
+        FrameBotonGnral.Enabled = True
+        
+        Me.DataGrid1.Top = Me.DataGrid1.Top + 500
+        Me.Frame1(1).Top = Me.Frame1(1).Top + 500
+        Me.cmdAceptar.Top = Me.cmdAceptar.Top + 500
+        Me.cmdCancelar.Top = Me.cmdCancelar.Top + 500
+        Me.cmdRegresar.Top = Me.cmdRegresar.Top + 500
+        
+        Me.Height = Me.Height + 500
+    End If
+                        
+            
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -857,6 +874,14 @@ Private Sub CargaGrid(Optional vSQL As String)
     Dim Sql As String
     Dim tots As String
     
+    
+    If pConn = 1 Then
+        adodc1.ConnectionString = conn
+    Else
+        adodc1.ConnectionString = ConnConta
+    End If
+    
+    
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
         Sql = CadenaConsulta & " AND " & vSQL
@@ -881,6 +906,37 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.RowHeight = 350
 
 End Sub
+
+Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
+On Error GoTo ECargaGrid
+
+    vDataGrid.Enabled = True
+    '    vdata.Recordset.Cancel
+'    vData.ConnectionString = conn
+    vData.RecordSource = Sql
+    vData.CursorType = adOpenDynamic
+    vData.LockType = adLockPessimistic
+    vDataGrid.ScrollBars = dbgNone
+    vData.Refresh
+    
+    Set vDataGrid.DataSource = vData
+    vDataGrid.AllowRowSizing = False
+    vDataGrid.AllowUpdate = False
+    vDataGrid.RowHeight = 290
+
+    If PrimeraVez Then
+        vDataGrid.ClearFields
+        vDataGrid.ReBind
+        vDataGrid.Refresh
+    End If
+    
+ECargaGrid:
+    If Err.Number <> 0 Then MuestraError Err.Number, "CargaGrid", Err.Description
+End Sub
+
+
+
+
 
 Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFoco txtAux(Index), Modo

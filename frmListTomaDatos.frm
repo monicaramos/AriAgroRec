@@ -2177,9 +2177,9 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'Situacion campos
 Attribute frmSit.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
-Private WithEvents frmPro As frmComercial 'Ayuda Productos de comercial
+Private WithEvents frmPro As frmBasico2 'Ayuda Productos de comercial
 Attribute frmPro.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
@@ -2715,7 +2715,7 @@ Dim vSQL As String
 End Sub
 
 Private Function CargarSubparcelas(nTabla, cadSelect) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eCargarSubparcelas
@@ -2723,21 +2723,21 @@ Dim Rs As ADODB.Recordset
 
     CargarSubparcelas = False
 
-    SQL = "delete from tmpinfkilos where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinfkilos where codusu = " & vUsu.Codigo
+    conn.Execute Sql
                                                                 'poligono,parcela
-    SQL = "insert into tmpinfkilos (codusu, codsocio, codcampo, codprodu, kilosnet) select " & vUsu.Codigo & ", importe1,"
-    SQL = SQL & " importe2, poligono, parcela from  rcampos_parcelas, tmpinformes where tmpinformes.codusu = " & vUsu.Codigo & " and  "
-    SQL = SQL & " rcampos_parcelas.codcampo = tmpinformes.importe2 "
+    Sql = "insert into tmpinfkilos (codusu, codsocio, codcampo, codprodu, kilosnet) select " & vUsu.Codigo & ", importe1,"
+    Sql = Sql & " importe2, poligono, parcela from  rcampos_parcelas, tmpinformes where tmpinformes.codusu = " & vUsu.Codigo & " and  "
+    Sql = Sql & " rcampos_parcelas.codcampo = tmpinformes.importe2 "
 
-    conn.Execute SQL
+    conn.Execute Sql
 
     'borramos los campos que tienen solo una parcela ( porque se ponen en la linea pppal del listado no en el subreport de anexos )
-    SQL = "delete from tmpinfkilos where (codusu, codcampo, codprodu, kilosnet) in (select " & vUsu.Codigo & ","
-    SQL = SQL & " rcampos.codcampo, rcampos.poligono, rcampos.parcela from rcampos "
-    SQL = SQL & " where rcampos.codcampo = tmpinfkilos.codcampo)"
+    Sql = "delete from tmpinfkilos where (codusu, codcampo, codprodu, kilosnet) in (select " & vUsu.Codigo & ","
+    Sql = Sql & " rcampos.codcampo, rcampos.poligono, rcampos.parcela from rcampos "
+    Sql = Sql & " where rcampos.codcampo = tmpinfkilos.codcampo)"
      
-    conn.Execute SQL
+    conn.Execute Sql
     CargarSubparcelas = True
     Exit Function
     
@@ -2912,32 +2912,32 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {rcampos.codvarie} = -1 "
+        Sql = " {rcampos.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
 
 
 Private Sub frmMens1_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {rcampos.codcampo} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.codcampo} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codcampo} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {rcampos.codcampo} = -1 "
+        Sql = " {rcampos.codcampo} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -3380,7 +3380,7 @@ End Sub
 
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice).Text
     
@@ -3389,7 +3389,7 @@ End Sub
 
 Private Sub AbrirFrmProducto(Indice As Integer)
     indCodigo = Indice
-    Set frmPro = New frmComercial
+    Set frmPro = New frmBasico2
     
     AyudaProductosCom frmPro, txtCodigo(Indice).Text
     
@@ -3407,7 +3407,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -3455,26 +3455,26 @@ End Function
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     
-    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -3489,7 +3489,7 @@ End Function
 
 Private Function CargarTemporalProdReal(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 
@@ -3516,30 +3516,30 @@ Dim HayReg As Boolean
         
     ' insertamos en la temporal con los kilos por defecto a cero
     '                                       codsocio, codcampo, kilos
-    SQL = "insert into tmpinformes (codusu, importe1, importe2, importe3)    "
-    SQL = SQL & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codsocio, rcampos.codcampo, 0 from " & cTabla
-    SQL = SQL & " where " & cWhere
-    SQL = SQL & " group by 1,2,3 "
-    SQL = SQL & " order by 1,2,3 "
+    Sql = "insert into tmpinformes (codusu, importe1, importe2, importe3)    "
+    Sql = Sql & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codsocio, rcampos.codcampo, 0 from " & cTabla
+    Sql = Sql & " where " & cWhere
+    Sql = Sql & " group by 1,2,3 "
+    Sql = Sql & " order by 1,2,3 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     If Option1(2).Value Then
         ' recordset para actualizar los kilos de la campaña anterior de la temporal
-        SQL = "SELECT rhisfruta.codsocio, rhisfruta.codcampo, sum(kilosnet) as kilos "
-        SQL = SQL & " FROM  (" & cTabla & ") INNER JOIN rhisfruta ON rhisfruta.codcampo = rcampos.codcampo "
-        SQL = SQL & " and rhisfruta.codsocio = rcampos.codsocio where " & cWhere
+        Sql = "SELECT rhisfruta.codsocio, rhisfruta.codcampo, sum(kilosnet) as kilos "
+        Sql = Sql & " FROM  (" & cTabla & ") INNER JOIN rhisfruta ON rhisfruta.codcampo = rcampos.codcampo "
+        Sql = Sql & " and rhisfruta.codsocio = rcampos.codsocio where " & cWhere
         
-        If txtCodigo(6).Text <> "" Then SQL = SQL & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
-        If txtCodigo(7).Text <> "" Then SQL = SQL & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
+        If txtCodigo(6).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar >= " & DBSet(txtCodigo(6).Text, "F")
+        If txtCodigo(7).Text <> "" Then Sql = Sql & " and rhisfruta.fecalbar <= " & DBSet(txtCodigo(7).Text, "F")
         
-        SQL = SQL & " group by 1,2 "
-        SQL = SQL & " order by 1,2 "
+        Sql = Sql & " group by 1,2 "
+        Sql = Sql & " order by 1,2 "
     
         '[Monica]01/04/2011: en el caso de informe para seguros se coge de la campaña actual
         If Check3.Value = 1 Then
             Set Rs = New ADODB.Recordset
-            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             cad = ""
             While Not Rs.EOF
@@ -3563,7 +3563,7 @@ Dim HayReg As Boolean
             If vCampAnt.Leer = 0 Then
                 If AbrirConexionCampAnterior(vCampAnt.BaseDatos) Then
                     Set Rs = New ADODB.Recordset
-                    Rs.Open SQL, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
+                    Rs.Open Sql, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
                     
                     cad = ""
                     While Not Rs.EOF
@@ -3620,22 +3620,22 @@ Private Sub CargaCombo()
 End Sub
     
 Private Sub ProcesarCambiosAforos(cTabla As String, cWhere As String)
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Porcentaje As Currency
 
     On Error GoTo eProcesarCambiosAforos
 
-    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     If Not BloqueaRegistro(cTabla, cWhere) Then
         MsgBox "No se puede realizar el proceso. Hay registros de campos bloqueados.", vbExclamation
@@ -3647,11 +3647,11 @@ Dim Porcentaje As Currency
     Porcentaje = CCur(ImporteSinFormato(txtCodigo(26).Text))
     
     
-    SQL = " update rcampos, variedades "
-    SQL = SQL & " set rcampos.canaforo = round(rcampos.canaforo * (1 + ((" & DBSet(Porcentaje, "N") & ") / 100)), 0)"
-    SQL = SQL & " where " & cWhere & " and rcampos.codvarie = variedades.codvarie"
+    Sql = " update rcampos, variedades "
+    Sql = Sql & " set rcampos.canaforo = round(rcampos.canaforo * (1 + ((" & DBSet(Porcentaje, "N") & ") / 100)), 0)"
+    Sql = Sql & " where " & cWhere & " and rcampos.codvarie = variedades.codvarie"
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     TerminaBloquear
     

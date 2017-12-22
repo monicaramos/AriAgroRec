@@ -18,7 +18,7 @@ Begin VB.Form frmManHorasPica
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
-      Left            =   3750
+      Left            =   3705
       TabIndex        =   34
       Top             =   60
       Width           =   2415
@@ -58,7 +58,7 @@ Begin VB.Form frmManHorasPica
    End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
-      Left            =   120
+      Left            =   75
       TabIndex        =   32
       Top             =   60
       Width           =   3585
@@ -602,7 +602,7 @@ Begin VB.Form frmManHorasPica
       TabIndex        =   10
       Top             =   5625
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
@@ -617,11 +617,11 @@ Begin VB.Form frmManHorasPica
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15150
+      Left            =   15195
       TabIndex        =   12
       Top             =   5625
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
@@ -1035,7 +1035,7 @@ Dim B As Boolean
     chkAux(0).visible = Not B
     chkAux(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

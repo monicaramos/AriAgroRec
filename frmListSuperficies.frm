@@ -851,9 +851,9 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 Private WithEvents frmSit As frmManSituCamp 'Situacion campos
 Attribute frmSit.VB_VarHelpID = -1
-Private WithEvents frmCla As frmComercial 'Ayuda Clases de comercial
+Private WithEvents frmCla As frmBasico2 'Ayuda Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
-Private WithEvents frmPro As frmComercial 'Ayuda Productos de comercial
+Private WithEvents frmPro As frmBasico2 'Ayuda Productos de comercial
 Attribute frmPro.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
@@ -1109,16 +1109,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        SQL = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
+        Sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        SQL = " {rcampos.codvarie} = -1 "
+        Sql = " {rcampos.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1313,7 +1313,7 @@ End Sub
 
 Private Sub AbrirFrmClase(Indice As Integer)
     indCodigo = Indice
-    Set frmCla = New frmComercial
+    Set frmCla = New frmBasico2
     
     AyudaClasesCom frmCla, txtCodigo(Indice)
     
@@ -1322,7 +1322,7 @@ End Sub
 
 Private Sub AbrirFrmProducto(Indice As Integer)
     indCodigo = Indice
-    Set frmPro = New frmComercial
+    Set frmPro = New frmBasico2
     
     AyudaProductosCom frmPro, txtCodigo(Indice).Text
     
@@ -1340,7 +1340,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -1381,7 +1381,7 @@ End Function
 
 Private Function CargarTemporalSuperficie(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim Sql2 As String
 
@@ -1410,23 +1410,23 @@ Dim Nregs As Long
         
     ' insertamos en la temporal con la suma de superficie a cero
     '                                       variedad
-    SQL = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
-    SQL = SQL & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
-    SQL = SQL & " where " & cWhere
-    SQL = SQL & " group by 1,2 "
-    SQL = SQL & " order by 1,2 "
+    Sql = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
+    Sql = Sql & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
+    Sql = Sql & " where " & cWhere
+    Sql = Sql & " group by 1,2 "
+    Sql = Sql & " order by 1,2 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
-    If Option3(0).Value Then SQL = "select rcampos.codvarie, sum(supcoope) from " & cTabla
-    If Option3(1).Value Then SQL = "select rcampos.codvarie, sum(supcatas) from " & cTabla
-    If Option3(2).Value Then SQL = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
-    If Option3(3).Value Then SQL = "select rcampos.codvarie, sum(supculti) from " & cTabla
-    SQL = SQL & " where " & cWhere
+    If Option3(0).Value Then Sql = "select rcampos.codvarie, sum(supcoope) from " & cTabla
+    If Option3(1).Value Then Sql = "select rcampos.codvarie, sum(supcatas) from " & cTabla
+    If Option3(2).Value Then Sql = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
+    If Option3(3).Value Then Sql = "select rcampos.codvarie, sum(supculti) from " & cTabla
+    Sql = Sql & " where " & cWhere
     
     If txtCodigo(2).Text <> "" Or txtCodigo(3).Text <> "" Then
         ' rango 1
-        Sql2 = SQL
+        Sql2 = Sql
         If txtCodigo(2).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(2).Text, "N")
         End If
@@ -1466,7 +1466,7 @@ Dim Nregs As Long
     
     If txtCodigo(4).Text <> "" Or txtCodigo(5).Text <> "" Then
         ' rango 2
-        Sql2 = SQL
+        Sql2 = Sql
         If txtCodigo(4).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(4).Text, "N")
         End If
@@ -1506,7 +1506,7 @@ Dim Nregs As Long
     
     If txtCodigo(6).Text <> "" Or txtCodigo(7).Text <> "" Then
         ' rango 3
-        Sql2 = SQL
+        Sql2 = Sql
         If txtCodigo(6).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(6).Text, "N")
         End If
@@ -1545,7 +1545,7 @@ Dim Nregs As Long
     
     If txtCodigo(8).Text <> "" Or txtCodigo(9).Text <> "" Then
         ' rango 4
-        Sql2 = SQL
+        Sql2 = Sql
         If txtCodigo(8).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(8).Text, "N")
         End If
