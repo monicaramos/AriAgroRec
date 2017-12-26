@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "13:40"
+            TextSave        =   "18:35"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2308,14 +2308,14 @@ End Sub
 ' añadida esta parte para la personalizacion de menus
 
 Private Sub LeerEditorMenus()
-Dim Sql As String
+Dim SQL As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     TieneEditorDeMenus = False
-    Sql = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
+    SQL = "Select count(*) from usuarios.appmenus where aplicacion='Ariagrorec'"
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not miRsAux.EOF Then
         If Not IsNull(miRsAux.Fields(0)) Then
             If miRsAux.Fields(0) > 0 Then TieneEditorDeMenus = True
@@ -2334,33 +2334,33 @@ End Sub
 
 Private Sub PoneMenusDelEditor()
 Dim T As Control
-Dim Sql As String
+Dim SQL As String
 Dim c As String
 Dim miRsAux As ADODB.Recordset
 
     On Error GoTo ELeerEditorMenus
     
-    Sql = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
+    SQL = "Select * from usuarios.appmenususuario where aplicacion='AriagroRec' and codusu = " & Val(Right(CStr(vUsu.Codigo - vUsu.DevuelveAumentoPC), 3))
     Set miRsAux = New ADODB.Recordset
-    miRsAux.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    miRsAux.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
 
     While Not miRsAux.EOF
         If Not IsNull(miRsAux.Fields(3)) Then
-            Sql = Sql & miRsAux.Fields(3) & "·"
+            SQL = SQL & miRsAux.Fields(3) & "·"
         End If
         miRsAux.MoveNext
     Wend
     miRsAux.Close
         
    
-    If Sql <> "" Then
-        Sql = "·" & Sql
+    If SQL <> "" Then
+        SQL = "·" & SQL
         For Each T In Me.Controls
             If TypeOf T Is menu Then
                 c = DevuelveCadenaMenu(T)
                 c = "·" & c & "·"
-                If InStr(1, Sql, c) > 0 Then T.visible = False
+                If InStr(1, SQL, c) > 0 Then T.visible = False
            
             End If
         Next

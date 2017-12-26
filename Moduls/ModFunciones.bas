@@ -1136,7 +1136,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
     Dim mTag As CTag
     Dim Aux As String
     Dim cad As String
-    Dim Sql As String
+    Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
 
@@ -1145,7 +1145,7 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
     'Exit Function
     Set mTag = New CTag
     ObtenerBusqueda = ""
-    Sql = ""
+    SQL = ""
 
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
@@ -1170,23 +1170,23 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
                                 cad = cad & mTag.columna & ")"
                         End Select
                         
-                        Sql = "Select " & cad & " from " & mTag.tabla
-                        If cadWHERE <> "" Then Sql = Sql & " WHERE " & cadWHERE
-                        Sql = ObtenerMaximoMinimo(Sql, vBD)
+                        SQL = "Select " & cad & " from " & mTag.tabla
+                        If cadWHERE <> "" Then SQL = SQL & " WHERE " & cadWHERE
+                        SQL = ObtenerMaximoMinimo(SQL, vBD)
                         Select Case mTag.TipoDato
                         Case "N"
-                            Sql = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(Sql)
+                            SQL = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(SQL)
                         Case "F"
-                            Sql = mTag.tabla & "." & mTag.columna & " = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         Case "FHF"
-                            Sql = "date(" & mTag.tabla & "." & mTag.columna & ") = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = "date(" & mTag.tabla & "." & mTag.columna & ") = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         Case "FHH"
-                            Sql = "time(" & mTag.tabla & "." & mTag.columna & ") = '" & Format(Sql, "hh:mm:ss") & "'"
+                            SQL = "time(" & mTag.tabla & "." & mTag.columna & ") = '" & Format(SQL, "hh:mm:ss") & "'"
                         Case Else
                             '[Monica]04/03/2013: quito las comillas
-                            Sql = mTag.tabla & "." & mTag.columna & " = " & DBSet(Sql, "T") ' & "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = " & DBSet(SQL, "T") ' & "'"
                         End Select
-                        Sql = "(" & Sql & ")"
+                        SQL = "(" & SQL & ")"
                     End If
                 End If
             End If
@@ -1203,8 +1203,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
-                    Sql = mTag.tabla & "." & mTag.columna & " is NULL"
-                    Sql = "(" & Sql & ")"
+                    SQL = mTag.tabla & "." & mTag.columna & " is NULL"
+                    SQL = "(" & SQL & ")"
                     Control.Text = ""
                 End If
             End If
@@ -1229,8 +1229,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
                         End If
                         RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
                         If RC = 0 Then
-                            If Sql <> "" Then Sql = Sql & " AND "
-                            Sql = Sql & "(" & cad & ")"
+                            If SQL <> "" Then SQL = SQL & " AND "
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 Else
@@ -1252,8 +1252,8 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
                             cad = ValorParaSQL(Control.List(Control.ListIndex), mTag)
                         End If
                         cad = mTag.tabla & "." & mTag.columna & " = " & cad
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
@@ -1276,15 +1276,15 @@ Public Function ObtenerBusqueda(ByRef formulario As Form, Optional CHECK As Stri
 '                    If Control.Value = 1 Then
                         cad = Control.Value
                         cad = mTag.tabla & "." & mTag.columna & " = " & cad
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
             '===================
         End If
     Next Control
-    ObtenerBusqueda = Sql
+    ObtenerBusqueda = SQL
 Exit Function
 EObtenerBusqueda:
     ObtenerBusqueda = ""
@@ -1299,7 +1299,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     Dim mTag As CTag
     Dim Aux As String
     Dim cad As String
-    Dim Sql As String
+    Dim SQL As String
     Dim tabla As String
     Dim RC As Byte
 
@@ -1308,7 +1308,7 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
     'Exit Function
     Set mTag = New CTag
     ObtenerBusqueda2 = ""
-    Sql = ""
+    SQL = ""
 
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
@@ -1323,18 +1323,18 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         Else
                             cad = " MIN(" & mTag.columna & ")"
                         End If
-                        Sql = "Select " & cad & " from " & mTag.tabla
-                        Sql = ObtenerMaximoMinimo(Sql)
+                        SQL = "Select " & cad & " from " & mTag.tabla
+                        SQL = ObtenerMaximoMinimo(SQL)
                         Select Case mTag.TipoDato
                         Case "N"
-                            Sql = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(Sql)
+                            SQL = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(SQL)
                         Case "F"
-                            Sql = mTag.tabla & "." & mTag.columna & " = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         Case Else
                             '[Monica]04/03/2013: quito las comillas y pongo el dbset
-                            Sql = mTag.tabla & "." & mTag.columna & " = " & DBSet(Sql, "T") ' & "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = " & DBSet(SQL, "T") ' & "'"
                         End Select
-                        Sql = "(" & Sql & ")"
+                        SQL = "(" & SQL & ")"
                     End If
                 End If
             End If
@@ -1350,8 +1350,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                 Carga = mTag.Cargar(Control)
                 If Carga Then
 
-                    Sql = mTag.tabla & "." & mTag.columna & " is NULL"
-                    Sql = "(" & Sql & ")"
+                    SQL = mTag.tabla & "." & mTag.columna & " is NULL"
+                    SQL = "(" & SQL & ")"
                     Control.Text = ""
                 End If
             End If
@@ -1375,8 +1375,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         End If
                         RC = SeparaCampoBusqueda(mTag.TipoDato, tabla & mTag.columna, Aux, cad)
                         If RC = 0 Then
-                            If Sql <> "" Then Sql = Sql & " AND "
-                            Sql = Sql & "(" & cad & ")"
+                            If SQL <> "" Then SQL = SQL & " AND "
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 End If
@@ -1396,8 +1396,8 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
                         If Control.ListIndex > -1 Then
                             cad = Control.ItemData(Control.ListIndex)
                             cad = mTag.tabla & "." & mTag.columna & " = " & cad
-                            If Sql <> "" Then Sql = Sql & " AND "
-                            Sql = Sql & "(" & cad & ")"
+                            If SQL <> "" Then SQL = SQL & " AND "
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 End If
@@ -1422,15 +1422,15 @@ Public Function ObtenerBusqueda2(ByRef formulario As Form, Optional CHECK As Str
 '                    If Control.Value = 1 Then
                         cad = Control.Value
                         cad = mTag.tabla & "." & mTag.columna & " = " & cad
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
             '===================
         End If
     Next Control
-    ObtenerBusqueda2 = Sql
+    ObtenerBusqueda2 = SQL
 Exit Function
 EObtenerBusqueda:
     ObtenerBusqueda2 = ""
@@ -1445,7 +1445,7 @@ Dim Carga As Boolean
 Dim mTag As CTag
 Dim Aux As String
 Dim cad As String
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String, columna As String
 Dim RC As Byte
 
@@ -1454,7 +1454,7 @@ Dim RC As Byte
     'Exit Function
     Set mTag = New CTag
     ObtenerBusqueda3 = ""
-    Sql = ""
+    SQL = ""
 
     'Recorremos los text en busca de ">>" o "<<"
     For Each Control In formulario.Controls
@@ -1477,33 +1477,33 @@ Dim RC As Byte
                         End If
                     End If
                     If Not paraRPT Then
-                        Sql = "Select " & cad & " from " & mTag.tabla
+                        SQL = "Select " & cad & " from " & mTag.tabla
                     Else
-                        Sql = "Select " & cad & " from {" & mTag.tabla & "}"
+                        SQL = "Select " & cad & " from {" & mTag.tabla & "}"
                     End If
-                    Sql = ObtenerMaximoMinimo(Sql)
+                    SQL = ObtenerMaximoMinimo(SQL)
                     Select Case mTag.TipoDato
                     Case "N"
-                        If Sql <> "" Then
+                        If SQL <> "" Then
                             If Not paraRPT Then
-                                Sql = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(Sql)
+                                SQL = mTag.tabla & "." & mTag.columna & " = " & TransformaComasPuntos(SQL)
                             Else
-                                Sql = "{" & mTag.tabla & "." & mTag.columna & "} = " & TransformaComasPuntos(Sql)
+                                SQL = "{" & mTag.tabla & "." & mTag.columna & "} = " & TransformaComasPuntos(SQL)
                             End If
                         End If
                     Case "F"
-                        If Sql = "" Then Sql = "0000-00-00"
+                        If SQL = "" Then SQL = "0000-00-00"
                         If Not paraRPT Then
-                            Sql = mTag.tabla & "." & mTag.columna & " = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         Else
-                            Sql = "{" & mTag.tabla & "." & mTag.columna & "} = '" & Format(Sql, "yyyy-mm-dd") & "'"
+                            SQL = "{" & mTag.tabla & "." & mTag.columna & "} = '" & Format(SQL, "yyyy-mm-dd") & "'"
                         End If
                     Case Else
                         '[Monica]04/03/2013: quito comillas
                         If Not paraRPT Then
-                            Sql = mTag.tabla & "." & mTag.columna & " = " & DBSet(Sql, "T") '& "'"
+                            SQL = mTag.tabla & "." & mTag.columna & " = " & DBSet(SQL, "T") '& "'"
                         Else
-                            Sql = "{" & mTag.tabla & "." & mTag.columna & "} = " & DBSet(Sql, "T") ' & "'"
+                            SQL = "{" & mTag.tabla & "." & mTag.columna & "} = " & DBSet(SQL, "T") ' & "'"
                         End If
                     End Select
                 End If
@@ -1519,11 +1519,11 @@ Dim RC As Byte
                 Carga = mTag.Cargar(Control)
                 If Carga Then
                     If Not paraRPT Then
-                        Sql = mTag.tabla & "." & mTag.columna & " is NULL"
+                        SQL = mTag.tabla & "." & mTag.columna & " is NULL"
                     Else
-                        Sql = "{" & mTag.tabla & "." & mTag.columna & "} is NULL"
+                        SQL = "{" & mTag.tabla & "." & mTag.columna & "} is NULL"
                     End If
-                    Sql = "(" & Sql & ")"
+                    SQL = "(" & SQL & ")"
                     Control.Text = ""
                 End If
             End If
@@ -1556,11 +1556,11 @@ Dim RC As Byte
                         End If
                     RC = SeparaCampoBusqueda3(mTag.TipoDato, tabla & columna, Aux, cad, paraRPT)
                     If RC = 0 Then
-                        If Sql <> "" Then Sql = Sql & " AND "
+                        If SQL <> "" Then SQL = SQL & " AND "
                         If Not paraRPT Then
-                            Sql = Sql & "(" & cad & ")"
+                            SQL = SQL & "(" & cad & ")"
                         Else
-                            Sql = Sql & "(" & cad & ")"
+                            SQL = SQL & "(" & cad & ")"
                         End If
                     End If
                 End If
@@ -1582,8 +1582,8 @@ Dim RC As Byte
                         Else
                             cad = "{" & mTag.tabla & "." & mTag.columna & "} = " & cad
                         End If
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     Else
                         cad = Control.List(Control.ListIndex)
                         If Not paraRPT Then
@@ -1591,8 +1591,8 @@ Dim RC As Byte
                         Else
                             cad = "{" & mTag.tabla & "." & mTag.columna & "} = '" & cad & "'"
                         End If
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     End If
                 End If
             End If
@@ -1622,15 +1622,15 @@ Dim RC As Byte
                         End If
                         
                         cad = cad & " = " & Aux
-                        If Sql <> "" Then Sql = Sql & " AND "
-                        Sql = Sql & "(" & cad & ")"
+                        If SQL <> "" Then SQL = SQL & " AND "
+                        SQL = SQL & "(" & cad & ")"
                     End If 'cargado
                 End If '<>""
             End If
         End If
     
     Next Control
-    ObtenerBusqueda3 = Sql
+    ObtenerBusqueda3 = SQL
 Exit Function
 EObtenerBusqueda3:
     ObtenerBusqueda3 = ""
@@ -2519,7 +2519,7 @@ End Function
 
 Public Function DesBloqueaRegistroForm(ByRef TextBoxConTag As TextBox) As Boolean
 Dim mTag As CTag
-Dim Sql As String
+Dim SQL As String
 
 'Solo me interesa la tabla
 On Error Resume Next
@@ -2527,7 +2527,7 @@ On Error Resume Next
     mTag.Cargar TextBoxConTag
     If mTag.Cargado Then
 '        SQL = "DELETE from zBloqueos where codusu=" & vUsu.Codigo & " and tabla='" & mTag.tabla & "'"
-        conn.Execute Sql
+        conn.Execute SQL
         If Err.Number <> 0 Then
             Err.Clear
         End If
@@ -2705,21 +2705,6 @@ On Error Resume Next
     End Select
     
 End Sub
-
-
-'Public Function PonerNomEmple(codEmp As String) As String
-'Dim nomEmp As String
-'Dim cad As String
-'
-'    'apellidos i nombre del empleado
-'    If (codEmp <> "") Then
-'        nomEmp = "nomemple"
-'        cad = DevuelveDesdeBDNew(cAgro, "empleado", "apeemple", "codemple", codEmp, "N", nomEmp, "codempre", CStr(vSesion.Empresa), "N", "codagenc", CStr(vSesion.Agencia), "N")
-'        If cad <> "" Then cad = cad & ", " & nomEmp
-'    End If
-'    PonerNomEmple = cad
-'End Function
-
 
 
 Public Function ExisteCP(T As TextBox) As Boolean
@@ -3011,13 +2996,13 @@ End Function
 
 
 Public Function DesBloqueoManual(cadTabla As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
 'Solo me interesa la tabla
 On Error Resume Next
 
-        Sql = "DELETE FROM zbloqueos WHERE codusu=" & vUsu.Codigo & " and tabla='" & cadTabla & "'"
-        conn.Execute Sql
+        SQL = "DELETE FROM zbloqueos WHERE codusu=" & vUsu.Codigo & " and tabla='" & cadTabla & "'"
+        conn.Execute SQL
         If Err.Number <> 0 Then
             Err.Clear
         End If
@@ -3119,20 +3104,20 @@ Public Function TipoFacturarForfaits(Albaran As String, Linea As String) As Byte
 ' devuelve 0: facturar por unidades
 '          1: facturar por kilos
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     TipoFacturarForfaits = 2
     
     If Trim(Albaran) = "" Or Trim(Linea) = "" Then Exit Function
 
-    Sql = "select forfaits.facturar from albaran_variedad, forfaits "
-    Sql = Sql & " where albaran_variedad.numalbar = " & DBSet(Albaran, "N")
-    Sql = Sql & " and albaran_variedad.numlinea = " & DBSet(Linea, "N")
-    Sql = Sql & " and forfaits.codforfait = albaran_variedad.codforfait "
-    Sql = Sql & " order by numlinea "
+    SQL = "select forfaits.facturar from albaran_variedad, forfaits "
+    SQL = SQL & " where albaran_variedad.numalbar = " & DBSet(Albaran, "N")
+    SQL = SQL & " and albaran_variedad.numlinea = " & DBSet(Linea, "N")
+    SQL = SQL & " and forfaits.codforfait = albaran_variedad.codforfait "
+    SQL = SQL & " order by numlinea "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     If Not Rs.EOF Then
         TipoFacturarForfaits = DBLet(Rs.Fields(0).Value, "N")
@@ -3143,18 +3128,18 @@ End Function
 
 Public Function CalidadDestrio(Variedad As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadDestrio = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select codcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.tipcalid = 1" ' tipo de calidad de destrio
+    SQL = "select codcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.tipcalid = 1" ' tipo de calidad de destrio
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadDestrio = DBLet(Rs.Fields(0).Value, "N")
@@ -3168,25 +3153,25 @@ End Function
 Public Function CalidadDestrioenClasificacion(Variedad As String, Nota As String, Optional ConKilos As Boolean) As String
 'conkilos = true --> miramos que el registro de esa clasificacion tenga kilos <> 0
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadDestrioenClasificacion = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select rcalidad.codcalid from rclasifica_clasif, rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.tipcalid = 1" ' tipo de calidad de destrio
-    Sql = Sql & " and rclasifica_clasif.numnotac = " & DBSet(Nota, "N")
-    Sql = Sql & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
-    Sql = Sql & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
+    SQL = "select rcalidad.codcalid from rclasifica_clasif, rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.tipcalid = 1" ' tipo de calidad de destrio
+    SQL = SQL & " and rclasifica_clasif.numnotac = " & DBSet(Nota, "N")
+    SQL = SQL & " and rclasifica_clasif.codvarie = rcalidad.codvarie "
+    SQL = SQL & " and rclasifica_clasif.codcalid = rcalidad.codcalid "
     
     If ConKilos Then
-        Sql = Sql & " and rclasifica_clasif.kilosnet <> 0"
+        SQL = SQL & " and rclasifica_clasif.kilosnet <> 0"
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadDestrioenClasificacion = DBLet(Rs.Fields(0).Value, "N")
@@ -3199,24 +3184,24 @@ End Function
 Public Function CalidadMaximaMuestraenClasificacion(Variedad As String, Nota As String, Optional ConKilos As Boolean) As String
 'conkilos = true --> miramos que el registro de esa clasificacion tenga kilos <> 0
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadMaximaMuestraenClasificacion = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select rclasifica_clasif.codcalid from rclasifica_clasif "
-    Sql = Sql & " where rclasifica_clasif.numnotac = " & DBSet(Nota, "N")
+    SQL = "select rclasifica_clasif.codcalid from rclasifica_clasif "
+    SQL = SQL & " where rclasifica_clasif.numnotac = " & DBSet(Nota, "N")
     
     If ConKilos Then
-        Sql = Sql & " and rclasifica_clasif.kilosnet <> 0"
+        SQL = SQL & " and rclasifica_clasif.kilosnet <> 0"
     End If
     
-    Sql = Sql & " and muestra = (select max(rclasifica_clasif.muestra) from rclasifica_clasif "
-    Sql = Sql & " where rclasifica_clasif.numnotac = " & DBSet(Nota, "N") & ")"
+    SQL = SQL & " and muestra = (select max(rclasifica_clasif.muestra) from rclasifica_clasif "
+    SQL = SQL & " where rclasifica_clasif.numnotac = " & DBSet(Nota, "N") & ")"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadMaximaMuestraenClasificacion = DBLet(Rs.Fields(0).Value, "N")
@@ -3323,7 +3308,7 @@ End Function
 
 
 Public Function ComprobacionRangoFechas(Varie As String, Tipo As String, Contador As String, fecha1 As String, fecha2 As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
 
@@ -3331,17 +3316,17 @@ Dim B As Boolean
     
     ComprobacionRangoFechas = False
     
-    Sql = "select rprecios.fechaini, rprecios.fechafin, max(contador) from rprecios "
-    Sql = Sql & " where codvarie = " & DBSet(Varie, "N")
-    Sql = Sql & " and tipofact = " & DBSet(Tipo, "N")
+    SQL = "select rprecios.fechaini, rprecios.fechafin, max(contador) from rprecios "
+    SQL = SQL & " where codvarie = " & DBSet(Varie, "N")
+    SQL = SQL & " and tipofact = " & DBSet(Tipo, "N")
     
     If Contador <> "" Then
-        Sql = Sql & " and contador <> " & DBSet(Contador, "N")
+        SQL = SQL & " and contador <> " & DBSet(Contador, "N")
     End If
-    Sql = Sql & " group by 1,2 "
+    SQL = SQL & " group by 1,2 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     B = False
     While Not Rs.EOF And Not B
@@ -3357,7 +3342,7 @@ Dim B As Boolean
     Wend
     
     Rs.Close
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     While Not Rs.EOF And Not B
         '[Monica]20/01/2014: añadido el if de que si coinciden no hacer nada
@@ -3382,18 +3367,18 @@ End Function
 
 Public Function PartidaCampo(codcampo As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     On Error Resume Next
 
     PartidaCampo = ""
     
-    Sql = "select nomparti from rpartida, rcampos where rcampos.codcampo = " & DBSet(codcampo, "N")
-    Sql = Sql & " and rcampos.codparti = rpartida.codparti "
+    SQL = "select nomparti from rpartida, rcampos where rcampos.codcampo = " & DBSet(codcampo, "N")
+    SQL = SQL & " and rcampos.codparti = rpartida.codparti "
     
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not Rs.EOF Then
         PartidaCampo = DBLet(Rs.Fields(0).Value, "T")
     End If
@@ -3404,19 +3389,19 @@ End Function
 
 Public Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
-    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -3457,61 +3442,61 @@ End Function
 
 
 Public Function EstaSocioDeAlta(Socio As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from rsocios where codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and fechabaja is null"
+    SQL = "select count(*) from rsocios where codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and fechabaja is null"
     
-    EstaSocioDeAlta = (TotalRegistros(Sql) > 0)
+    EstaSocioDeAlta = (TotalRegistros(SQL) > 0)
 
 End Function
 
 Public Function EstaCampoDeAlta(campo As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and fecbajas is null"
+    SQL = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and fecbajas is null"
     
-    EstaCampoDeAlta = (TotalRegistros(Sql) > 0)
+    EstaCampoDeAlta = (TotalRegistros(SQL) > 0)
 
 End Function
 
 Public Function EstaSocioDeAltaSeccion(Socio As String, Secc As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and codsecci = " & DBSet(Secc, "N")
-    Sql = Sql & " and fecbaja is null"
+    SQL = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and codsecci = " & DBSet(Secc, "N")
+    SQL = SQL & " and fecbaja is null"
     
-    EstaSocioDeAltaSeccion = (TotalRegistros(Sql) > 0)
+    EstaSocioDeAltaSeccion = (TotalRegistros(SQL) > 0)
 
 End Function
 
 Public Function EsSocioDeSeccion(Socio As String, Secc As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and codsecci = " & DBSet(Secc, "N")
+    SQL = "select count(*) from rsocios_seccion where codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and codsecci = " & DBSet(Secc, "N")
     
-    EsSocioDeSeccion = (TotalRegistros(Sql) > 0)
+    EsSocioDeSeccion = (TotalRegistros(SQL) > 0)
 
 End Function
 
 
 Public Function CalidadVentaCampo(Variedad As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadVentaCampo = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select codcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.tipcalid = 2" ' tipo de calidad de venta campo
+    SQL = "select codcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.tipcalid = 2" ' tipo de calidad de venta campo
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadVentaCampo = DBLet(Rs.Fields(0).Value, "N")
@@ -3523,18 +3508,18 @@ End Function
 
 Public Function CalidadRetirada(Variedad As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadRetirada = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select codcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.tipcalid1 = 2" ' tipo de calidad de retirada
+    SQL = "select codcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.tipcalid1 = 2" ' tipo de calidad de retirada
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadRetirada = DBLet(Rs.Fields(0).Value, "N")
@@ -3545,22 +3530,19 @@ Dim Sql As String
 End Function
 
 
-
-
-
 Public Function CalidadPrimera(Variedad As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadPrimera = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select min(codcalid) from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = "select min(codcalid) from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadPrimera = DBLet(Rs.Fields(0).Value, "N")
@@ -3571,10 +3553,8 @@ Dim Sql As String
 End Function
 
 
-
-
 Public Function EsCampoSocioVariedad(campo As String, Socio As String, Variedad As String, Optional EsDesdeClasifica As Boolean) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim VarRelacionada As Long
@@ -3583,9 +3563,9 @@ Dim VarRelacionada As Long
     
     If campo = "" Or Socio = "" Or Variedad = "" Then Exit Function
     
-    Sql = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+    SQL = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
     
     Sql2 = "select count(*) from rcampos INNER JOIN  rcampos_cooprop  ON rcampos.codcampo = rcampos_cooprop.codcampo and rcampos.codcampo = " & DBSet(campo, "N")
     Sql2 = Sql2 & " and rcampos_cooprop.codsocio = " & DBSet(Socio, "N")
@@ -3603,12 +3583,12 @@ Dim VarRelacionada As Long
 '        TieneVariedadRelacionada = (TotalRegistros(Sql3) > 0)
     End If
     
-    EsCampoSocioVariedad = (TotalRegistros(Sql) > 0) Or (TotalRegistros(Sql2) > 0) Or (TotalRegistros(Sql3) > 0)
+    EsCampoSocioVariedad = (TotalRegistros(SQL) > 0) Or (TotalRegistros(Sql2) > 0) Or (TotalRegistros(Sql3) > 0)
 
 End Function
 
 Public Function EsCampoSocio(campo As String, Socio As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
 
@@ -3616,20 +3596,20 @@ Dim Sql2 As String
     
     If campo = "" Or Socio = "" Then Exit Function
     
-    Sql = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
+    SQL = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(Socio, "N")
     
-    EsCampoSocio = (TotalRegistros(Sql) > 0) Or (TotalRegistros(Sql2) > 0)
+    EsCampoSocio = (TotalRegistros(SQL) > 0) Or (TotalRegistros(Sql2) > 0)
 
 End Function
 
 
 Public Function ContinuarSiAlbaranImpreso(Albaran As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     ContinuarSiAlbaranImpreso = True
-    Sql = "select impreso from rhisfruta where numalbar = " & DBSet(Albaran, "N")
-    If DevuelveValor(Sql) = 1 Then
+    SQL = "select impreso from rhisfruta where numalbar = " & DBSet(Albaran, "N")
+    If DevuelveValor(SQL) = 1 Then
         If MsgBox("Este Albarán ya ha sido impreso. ¿ Desea Continuar ? ", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
             ContinuarSiAlbaranImpreso = False
         End If
@@ -3639,19 +3619,19 @@ End Function
 
 
 Public Function ExisteNota(Nota As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Total As Integer
 
     ExisteNota = False
     
-    Sql = "select count(*) from rentradas where numnotac = " & DBSet(Nota, "N")
-    Total = TotalRegistros(Sql)
+    SQL = "select count(*) from rentradas where numnotac = " & DBSet(Nota, "N")
+    Total = TotalRegistros(SQL)
     If Total = 0 Then
-        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Nota, "N")
-        Total = TotalRegistros(Sql)
+        SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Nota, "N")
+        Total = TotalRegistros(SQL)
         If Total = 0 Then
-            Sql = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Nota, "N")
-            Total = TotalRegistros(Sql)
+            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Nota, "N")
+            Total = TotalRegistros(SQL)
             ExisteNota = (Total <> 0)
         Else
             ExisteNota = True
@@ -3665,19 +3645,19 @@ End Function
 
 
 Public Function ExisteAlbaran(Albaran As String, BBDD As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Total As Integer
 
     ExisteAlbaran = False
     
-    Sql = "select count(*) from " & BBDD & ".rentradas where numalbar = " & DBSet(Albaran, "N")
-    Total = TotalRegistros(Sql)
+    SQL = "select count(*) from " & BBDD & ".rentradas where numalbar = " & DBSet(Albaran, "N")
+    Total = TotalRegistros(SQL)
     If Total = 0 Then
-        Sql = "select count(*) from " & BBDD & ".rclasifica where numalbar = " & DBSet(Albaran, "N")
-        Total = TotalRegistros(Sql)
+        SQL = "select count(*) from " & BBDD & ".rclasifica where numalbar = " & DBSet(Albaran, "N")
+        Total = TotalRegistros(SQL)
         If Total = 0 Then
-            Sql = "select count(*) from " & BBDD & ".rhisfruta_entradas where numnotac = " & DBSet(Albaran, "N")
-            Total = TotalRegistros(Sql)
+            SQL = "select count(*) from " & BBDD & ".rhisfruta_entradas where numnotac = " & DBSet(Albaran, "N")
+            Total = TotalRegistros(SQL)
             ExisteAlbaran = (Total <> 0)
         Else
             ExisteAlbaran = True
@@ -3708,7 +3688,11 @@ Public Sub AyudaFamiliasCom(frmCom As frmBasico2, Optional CodActual As String, 
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "sfamia"
+    frmCom.CampoCP = "codfamia"
     frmCom.Caption = "Familias de Comercial"
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3735,12 +3719,12 @@ Public Sub AyudaFamiliasADV(frmCom As frmBasico2, Optional CodActual As String, 
     frmCom.Maxlen3 = 0
     
     frmCom.pConn = cAgro
-   
     
+    frmCom.tabla = "advfamia"
+    frmCom.CampoCP = "codfamia"
     frmCom.Caption = "Familias de Artículos ADV"
-'    frmCom.Orden = " ORDER BY advfamia.codfamia"
-'    frmCom.CadLimpia = "advfamia.codfamia = -1"
-'    frmCom.CadenaSituar = "codfamia="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3752,7 +3736,7 @@ End Sub
 
 
 Public Sub AyudaTiposDocumentos(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
-    frmBas.CadenaTots = "S|txtAux(0)|T|Código|1405|;S|txtAux(1)|T|Descripción|3000|;S|txtAux(2)|T|Fichero|2595|;"
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Descripción|3500|;S|txtAux(2)|T|Fichero|2595|;"
     frmBas.CadenaConsulta = "SELECT scryst.codcryst, scryst.nomcryst, scryst.documrpt "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM scryst "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
@@ -3775,7 +3759,7 @@ Public Sub AyudaTiposDocumentos(frmBas As frmBasico2, Optional CodActual As Stri
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
     
-    Redimensiona frmBas, -1500
+    Redimensiona frmBas, 0
     
     frmBas.Show vbModal
 End Sub
@@ -3799,10 +3783,10 @@ Public Sub AyudaTUnidadesCom(frmCom As frmBasico2, Optional CodActual As String,
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "sunida"
+    frmCom.CampoCP = "codunida"
     frmCom.Caption = "Tipos de Unidad de Comercial"
-'    frmCom.Orden = " ORDER BY sunida.codunida"
-'    frmCom.CadLimpia = "sunida.codunida = -1"
-'    frmCom.CadenaSituar = "codunida="
+    frmCom.DeConsulta = True
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3828,10 +3812,11 @@ Public Sub AyudaProveedoresCom(frmCom As frmBasico2, Optional CodActual As Strin
 
     frmCom.pConn = cAgro
 
+    frmCom.tabla = "proveedor"
+    frmCom.CampoCP = "codprove"
     frmCom.Caption = "Proveedores de Comercial"
-'    frmCom.Orden = " ORDER BY proveedor.codprove"
-'    frmCom.CadLimpia = "proveedor.codprove = -1"
-'    frmCom.CadenaSituar = "codprove="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3859,10 +3844,11 @@ Public Sub AyudaProductosCom(frmCom As frmBasico2, Optional CodActual As String,
     frmCom.pConn = cAgro
     
     
+    frmCom.tabla = "productos"
+    frmCom.CampoCP = "codprodu"
     frmCom.Caption = "Productos de Comercial"
-'    frmCom.Orden = " ORDER BY productos.codprodu"
-'    frmCom.CadLimpia = "productos.codprodu = -1"
-'    frmCom.CadenaSituar = "codprodu="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3888,13 +3874,15 @@ Public Sub AyudaForfaitsCom(frmCom As frmBasico2, Optional CodActual As String, 
     frmCom.Maxlen3 = 0
     
     frmCom.pConn = cAgro
-    
+
+    frmCom.tabla = "forfaits"
+    frmCom.CampoCP = "codforfait"
     frmCom.Caption = "Forfaits de Comercial"
-'    frmCom.Orden = " ORDER BY forfaits.codforfait"
-'    frmCom.CadLimpia = "forfaits.codforfait = ''"
-'    frmCom.CadenaSituar = "codforfait="
+    frmCom.DeConsulta = True
+
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
+    
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
     
     Redimensiona frmCom, -1600
@@ -3919,10 +3907,11 @@ Public Sub AyudaFPagoCom(frmCom As frmBasico2, Optional CodActual As String, Opt
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "forpago"
+    frmCom.CampoCP = "codforpa"
     frmCom.Caption = "Formas Pago de Comercial"
-'    frmCom.Orden = " ORDER BY forpago.codforpa"
-'    frmCom.CadLimpia = "forpago.codforpa = -1"
-'    frmCom.CadenaSituar = "codforpa="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3950,10 +3939,11 @@ Public Sub AyudaAlmacenCom(frmCom As frmBasico2, Optional CodActual As String, O
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "salmpr"
+    frmCom.CampoCP = "codalmac"
     frmCom.Caption = "Almacenes Propios de Comercial"
-'    frmCom.Orden = " ORDER BY salmpr.codalmac"
-'    frmCom.CadLimpia = "salmpr.codalmac = -1"
-'    frmCom.CadenaSituar = "codalmac="
+    frmCom.DeConsulta = True
+
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -3980,10 +3970,11 @@ Public Sub AyudaBancosCom(frmCom As frmBasico2, Optional CodActual As String, Op
 
     frmCom.pConn = cAgro
 
+    frmCom.tabla = "banpropi"
+    frmCom.CampoCP = "codbanpr"
     frmCom.Caption = "Bancos Propios de Comercial"
-'    frmCom.Orden = " ORDER BY banpropi.codbanpr"
-'    frmCom.CadLimpia = "banpropi.codbanpr = -1"
-'    frmCom.CadenaSituar = "codbanpr="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -4011,10 +4002,11 @@ Public Sub AyudaClasesCom(frmCom As frmBasico2, Optional CodActual As String, Op
     
     frmCom.pConn = cAgro
 
+    frmCom.tabla = "clases"
+    frmCom.CampoCP = "codclase"
     frmCom.Caption = "Clases de Comercial"
-'    frmCom.Orden = " ORDER BY clases.codclase"
-'    frmCom.CadLimpia = "clases.codclase = -1"
-'    frmCom.CadenaSituar = "codclase="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -4041,10 +4033,11 @@ Public Sub AyudaGrupoCom(frmCom As frmBasico2, Optional CodActual As String, Opt
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "grupopro"
+    frmCom.CampoCP = "codgrupo"
     frmCom.Caption = "Grupos de Producto de Comercial"
-'    frmCom.Orden = " ORDER BY grupopro.codgrupo"
-'    frmCom.CadLimpia = "grupopro.codgrupo = -1"
-'    frmCom.CadenaSituar = "codgrupo="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -4071,10 +4064,11 @@ Public Sub AyudaHorarioCom(frmCom As frmBasico2, Optional CodActual As String, O
     
     frmCom.pConn = cAgro
     
+    frmCom.tabla = "cchorario"
+    frmCom.CampoCP = "codhorario"
     frmCom.Caption = "Horarios Costes de Comercial"
-'    frmCom.Orden = " ORDER BY cchorario.codhorario"
-'    frmCom.CadLimpia = "cchorario.codhorario = -1"
-'    frmCom.CadenaSituar = "cchorario="
+    frmCom.DeConsulta = True
+    
     frmCom.DatosADevolverBusqueda = "0|1|"
     frmCom.CodigoActual = 0
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
@@ -4165,25 +4159,25 @@ End Function
 
 ' grupo 6 es del grupo de bodega (vino)
 Public Function EsVariedadGrupo6(Variedad As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from variedades inner join productos on variedades.codprodu = productos.codprodu "
-    Sql = Sql & " and variedades.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and productos.codgrupo = 6 "
+    SQL = "select count(*) from variedades inner join productos on variedades.codprodu = productos.codprodu "
+    SQL = SQL & " and variedades.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and productos.codgrupo = 6 "
     
-    EsVariedadGrupo6 = (TotalRegistros(Sql) > 0)
+    EsVariedadGrupo6 = (TotalRegistros(SQL) > 0)
 
 End Function
 
 ' grupo 5 es del grupo de almazara (olivos)
 Public Function EsVariedadGrupo5(Variedad As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select count(*) from variedades inner join productos on variedades.codprodu = productos.codprodu "
-    Sql = Sql & " and variedades.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and productos.codgrupo = 5 "
+    SQL = "select count(*) from variedades inner join productos on variedades.codprodu = productos.codprodu "
+    SQL = SQL & " and variedades.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and productos.codgrupo = 5 "
     
-    EsVariedadGrupo5 = (TotalRegistros(Sql) > 0)
+    EsVariedadGrupo5 = (TotalRegistros(SQL) > 0)
 
 End Function
 
@@ -4211,18 +4205,18 @@ End Function
 
 Public Function CalidadMenut(Variedad As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     CalidadMenut = ""
     
     If Trim(Variedad) = "" Then Exit Function
 
-    Sql = "select codcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.tipcalid = 4" ' tipo de calidad de menut
+    SQL = "select codcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.tipcalid = 4" ' tipo de calidad de menut
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If Not Rs.EOF Then
         CalidadMenut = DBLet(Rs.Fields(0).Value, "N")
@@ -4254,7 +4248,7 @@ Dim Encontrado As Boolean
 End Function
 
 Public Function ComprobacionRangoGrado(Varie As String, Desde As String, Hasta As String, Linea As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
 
@@ -4262,16 +4256,16 @@ Dim B As Boolean
     
     ComprobacionRangoGrado = False
     
-    Sql = "select rbonifica_lineas.desdegrado, rbonifica_lineas.hastagrado from rbonifica_lineas "
-    Sql = Sql & " where codvarie = " & DBSet(Varie, "N")
+    SQL = "select rbonifica_lineas.desdegrado, rbonifica_lineas.hastagrado from rbonifica_lineas "
+    SQL = SQL & " where codvarie = " & DBSet(Varie, "N")
     
     If Linea <> "" Then
-        Sql = Sql & " and numlinea <> " & DBSet(Linea, "N")
+        SQL = SQL & " and numlinea <> " & DBSet(Linea, "N")
     End If
     
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     B = False
     While Not Rs.EOF And Not B
@@ -4281,7 +4275,7 @@ Dim B As Boolean
     Wend
     
     Rs.Close
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     While Not Rs.EOF And Not B
         B = ((DBLet(Rs.Fields(0).Value, "N") <= CCur(Desde)) And (CCur(Desde) <= DBLet(Rs.Fields(1).Value, "N")))
@@ -4301,13 +4295,13 @@ End Function
 
 
 Public Function EsGastodeFactura(Codigo As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
     EsGastodeFactura = False
     
-    Sql = "select tipogasto from rconcepgasto where codgasto = " & DBSet(Codigo, "N")
+    SQL = "select tipogasto from rconcepgasto where codgasto = " & DBSet(Codigo, "N")
         
-    EsGastodeFactura = (DevuelveValor(Sql) = 1)
+    EsGastodeFactura = (DevuelveValor(SQL) = 1)
     
 End Function
 
@@ -4315,26 +4309,26 @@ End Function
 
 Public Function HayEntradasCampoSocioVariedad(campo As String, Socio As String, Variedad As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     HayEntradasCampoSocioVariedad = True
 
-    Sql = "Select count(*) FROM rentradas where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+    SQL = "Select count(*) FROM rentradas where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
     
-    If TotalRegistros(Sql) = 0 Then
-        Sql = "select count(*) from rclasifica where codcampo = " & DBSet(campo, "N")
-        Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
-        Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+    If TotalRegistros(SQL) = 0 Then
+        SQL = "select count(*) from rclasifica where codcampo = " & DBSet(campo, "N")
+        SQL = SQL & " and codsocio = " & DBSet(Socio, "N")
+        SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
         
-        If TotalRegistros(Sql) = 0 Then
-            Sql = "select count(*) from rhisfruta where codcampo = " & DBSet(campo, "N")
-            Sql = Sql & " and codsocio = " & DBSet(Socio, "N")
-            Sql = Sql & " and codvarie = " & DBSet(Variedad, "N")
+        If TotalRegistros(SQL) = 0 Then
+            SQL = "select count(*) from rhisfruta where codcampo = " & DBSet(campo, "N")
+            SQL = SQL & " and codsocio = " & DBSet(Socio, "N")
+            SQL = SQL & " and codvarie = " & DBSet(Variedad, "N")
         
-            HayEntradasCampoSocioVariedad = Not (TotalRegistros(Sql) = 0)
+            HayEntradasCampoSocioVariedad = Not (TotalRegistros(SQL) = 0)
         End If
     End If
     
@@ -4342,20 +4336,20 @@ End Function
 
 Public Function HayEntradasSocio(Socio As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     HayEntradasSocio = True
 
-    Sql = "Select count(*) FROM rentradas where codsocio = " & DBSet(Socio, "N")
+    SQL = "Select count(*) FROM rentradas where codsocio = " & DBSet(Socio, "N")
     
-    If TotalRegistros(Sql) = 0 Then
-        Sql = "select count(*) from rclasifica where codsocio = " & DBSet(Socio, "N")
+    If TotalRegistros(SQL) = 0 Then
+        SQL = "select count(*) from rclasifica where codsocio = " & DBSet(Socio, "N")
         
-        If TotalRegistros(Sql) = 0 Then
-            Sql = "select count(*) from rhisfruta where codsocio = " & DBSet(Socio, "N")
+        If TotalRegistros(SQL) = 0 Then
+            SQL = "select count(*) from rhisfruta where codsocio = " & DBSet(Socio, "N")
         
-            HayEntradasSocio = Not (TotalRegistros(Sql) = 0)
+            HayEntradasSocio = Not (TotalRegistros(SQL) = 0)
         End If
     End If
     
@@ -4364,22 +4358,22 @@ End Function
 
 Public Function HayAnticiposPdtesCampoSocioVariedad(campo As String, Socio As String, Variedad As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     HayAnticiposPdtesCampoSocioVariedad = True
 
-    Sql = "Select count(*) FROM rfactsoc_variedad, rfactsoc, usuarios.stipom stipom where rfactsoc_variedad.codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and rfactsoc.codsocio = " & DBSet(Socio, "N")
-    Sql = Sql & " and rfactsoc_variedad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rfactsoc_variedad.descontado = 0 "
-    Sql = Sql & " and rfactsoc.codtipom = rfactsoc_variedad.codtipom "
-    Sql = Sql & " and rfactsoc.numfactu = rfactsoc_variedad.numfactu "
-    Sql = Sql & " and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
-    Sql = Sql & " and rfactsoc.codtipom = stipom.codtipom "
-    Sql = Sql & " and stipom.tipodocu = 1 "
+    SQL = "Select count(*) FROM rfactsoc_variedad, rfactsoc, usuarios.stipom stipom where rfactsoc_variedad.codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and rfactsoc.codsocio = " & DBSet(Socio, "N")
+    SQL = SQL & " and rfactsoc_variedad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rfactsoc_variedad.descontado = 0 "
+    SQL = SQL & " and rfactsoc.codtipom = rfactsoc_variedad.codtipom "
+    SQL = SQL & " and rfactsoc.numfactu = rfactsoc_variedad.numfactu "
+    SQL = SQL & " and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
+    SQL = SQL & " and rfactsoc.codtipom = stipom.codtipom "
+    SQL = SQL & " and stipom.tipodocu = 1 "
     
-    HayAnticiposPdtesCampoSocioVariedad = (TotalRegistros(Sql) <> 0)
+    HayAnticiposPdtesCampoSocioVariedad = (TotalRegistros(SQL) <> 0)
     
 End Function
 
@@ -4387,39 +4381,39 @@ End Function
 
 Public Function ModificarEntradas(campo As String, SocAnt As String, VarAnt As String, SocNue As String, VarNue As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eModificarEntradas
 
     ModificarEntradas = False
 
-    Sql = "update rentradas "
-    Sql = Sql & " set codsocio = " & DBSet(SocNue, "N")
-    Sql = Sql & ", codvarie = " & DBSet(VarNue, "N")
-    Sql = Sql & "  where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(SocAnt, "N")
-    Sql = Sql & " and codvarie = " & DBSet(VarAnt, "N")
+    SQL = "update rentradas "
+    SQL = SQL & " set codsocio = " & DBSet(SocNue, "N")
+    SQL = SQL & ", codvarie = " & DBSet(VarNue, "N")
+    SQL = SQL & "  where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(SocAnt, "N")
+    SQL = SQL & " and codvarie = " & DBSet(VarAnt, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    Sql = "update rclasifica "
-    Sql = Sql & " set codsocio = " & DBSet(SocNue, "N")
-    Sql = Sql & ", codvarie = " & DBSet(VarNue, "N")
-    Sql = Sql & "  where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(SocAnt, "N")
-    Sql = Sql & " and codvarie = " & DBSet(VarAnt, "N")
+    SQL = "update rclasifica "
+    SQL = SQL & " set codsocio = " & DBSet(SocNue, "N")
+    SQL = SQL & ", codvarie = " & DBSet(VarNue, "N")
+    SQL = SQL & "  where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(SocAnt, "N")
+    SQL = SQL & " and codvarie = " & DBSet(VarAnt, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
         
-    Sql = "update rhisfruta "
-    Sql = Sql & " set codsocio = " & DBSet(SocNue, "N")
-    Sql = Sql & ", codvarie = " & DBSet(VarNue, "N")
-    Sql = Sql & "  where codcampo = " & DBSet(campo, "N")
-    Sql = Sql & " and codsocio = " & DBSet(SocAnt, "N")
-    Sql = Sql & " and codvarie = " & DBSet(VarAnt, "N")
+    SQL = "update rhisfruta "
+    SQL = SQL & " set codsocio = " & DBSet(SocNue, "N")
+    SQL = SQL & ", codvarie = " & DBSet(VarNue, "N")
+    SQL = SQL & "  where codcampo = " & DBSet(campo, "N")
+    SQL = SQL & " and codsocio = " & DBSet(SocAnt, "N")
+    SQL = SQL & " and codvarie = " & DBSet(VarAnt, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ModificarEntradas = True
     Exit Function
@@ -4472,34 +4466,34 @@ End Sub
 
 Public Function EsCalidadDestrio(Variedad As String, Calidad As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     EsCalidadDestrio = False
     
     If Trim(Variedad) = "" Or Trim(Calidad) = "" Then Exit Function
 
-    Sql = "select tipcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
+    SQL = "select tipcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
     
-    EsCalidadDestrio = (DevuelveValor(Sql) = 1)
+    EsCalidadDestrio = (DevuelveValor(SQL) = 1)
     
 End Function
 
 
 Public Function EsCalidadDestrioComercial(Variedad As String, Calidad As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     EsCalidadDestrioComercial = False
     
     If Trim(Variedad) = "" Or Trim(Calidad) = "" Then Exit Function
 
-    Sql = "select tipcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
+    SQL = "select tipcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
     
-    EsCalidadDestrioComercial = (DevuelveValor(Sql) = 6)
+    EsCalidadDestrioComercial = (DevuelveValor(SQL) = 6)
     
 End Function
 
@@ -4508,17 +4502,17 @@ End Function
 
 Public Function EsCalidadMerma(Variedad As String, Calidad As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
     EsCalidadMerma = False
     
     If Trim(Variedad) = "" Or Trim(Calidad) = "" Then Exit Function
 
-    Sql = "select tipcalid from rcalidad "
-    Sql = Sql & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
-    Sql = Sql & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
+    SQL = "select tipcalid from rcalidad "
+    SQL = SQL & " where rcalidad.codvarie = " & DBSet(Variedad, "N")
+    SQL = SQL & " and rcalidad.codcalid = " & DBSet(Calidad, "N")
     
-    EsCalidadMerma = (DevuelveValor(Sql) = 3)
+    EsCalidadMerma = (DevuelveValor(SQL) = 3)
     
 End Function
 
@@ -4535,6 +4529,7 @@ Public Sub AyudaGlobalGap(frmBas As frmBasico2, Optional CodActual As String, Op
     frmBas.Maxlen1 = 4
     frmBas.Maxlen2 = 40
     frmBas.Maxlen3 = 0
+    
     frmBas.tabla = "rglobalgap"
     frmBas.CampoCP = "codigo"
     frmBas.Report = "rManGlobalGap.rpt"
@@ -4642,6 +4637,7 @@ Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Opt
     frmBas.CampoCP = "codvarie"
     frmBas.Caption = "Variedades"
     frmBas.DeConsulta = True
+    
     frmBas.DatosADevolverBusqueda = "0|1|"
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
@@ -4670,6 +4666,7 @@ Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, O
     frmBas.CampoCP = "codcuadrilla"
     frmBas.Caption = "Cuadrillas"
     frmBas.DeConsulta = True
+    
     frmBas.DatosADevolverBusqueda = "0|1|"
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
@@ -4678,37 +4675,42 @@ Public Sub AyudaCuadrillas(frmBas As frmBasico2, Optional CodActual As String, O
     
 End Sub
 
-Public Sub AyudaConceptos(frmBas As frmBasico, Optional CodActual As String)
+Public Sub AyudaConceptos(frmBas As frmBasico2, Optional CodActual As String)
 
-    frmBas.CadenaTots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Descripción|3930|;"
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Descripción|4595|;"
     frmBas.CadenaConsulta = "SELECT rriego.codriego, rriego.nomriego "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rriego "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
     frmBas.Tag1 = "Código|N|N|||rriego|codriego|00|S|"
     frmBas.Tag2 = "Nombre|T|N|||rriego|nomriego|||"
+    frmBas.Tag3 = ""
     frmBas.Maxlen1 = 6
     frmBas.Maxlen2 = 40
+    frmBas.Maxlen3 = 0
+    
+    frmBas.pConn = cAgro
+    
     frmBas.tabla = "rriego"
     frmBas.CampoCP = "codriego"
-    'frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "Conceptos"
     frmBas.DeConsulta = True
+    
     frmBas.DatosADevolverBusqueda = "0|1|"
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, -1500
+    
     frmBas.Show vbModal
     
 End Sub
-
-
-
 
 
 
 
 Public Function ActualizarTraza(Nota As String, Variedad As String, Socio As String, campo As String, Fecha As String, Hora As String, MenError As String)
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 Dim IdPalet As Currency
@@ -4719,13 +4721,13 @@ Dim IdPalet As Currency
 
     If vParamAplic.HayTraza = False Then Exit Function
     
-    Sql = "select idpalet from trzpalets where numnotac = " & DBSet(Nota, "N")
+    SQL = "select idpalet from trzpalets where numnotac = " & DBSet(Nota, "N")
     
     
     'Comprobamos si la fecha de abocamiento de alguno de sus palets es inferior a la de la entrada
     'para no permitir modificar la traza
     Sql2 = "select sum(resul) from (select if(fechahora<" & DBSet(Hora, "FH") & ",1,0) as resul "
-    Sql2 = Sql2 & " from trzlineas_cargas where idpalet in (" & Sql & ")) aaaaa "
+    Sql2 = Sql2 & " from trzlineas_cargas where idpalet in (" & SQL & ")) aaaaa "
     If CLng(DevuelveValor(Sql2)) > 0 Then
         MenError = MenError & vbCrLf & "No se permite una fecha de entrada superior a la de abocamiento de ninguno de sus palets. Revise."
         ActualizarTraza = False
@@ -4733,7 +4735,7 @@ Dim IdPalet As Currency
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenDynamic, adLockReadOnly, adCmdText
+    Rs.Open SQL, conn, adOpenDynamic, adLockReadOnly, adCmdText
     
     While Not Rs.EOF
         
@@ -4761,7 +4763,7 @@ End Function
 
 
 Public Sub ActualizarClasificacionHco(Albaran As String, Kilos As String)
-Dim Sql As String
+Dim SQL As String
 Dim Variedad As String
 Dim Calidad As String
 Dim KilosNet As Long
@@ -4773,17 +4775,17 @@ Dim KilosNet As Long
         Calidad = DevuelveValor("select codcalid from rcalidad where codvarie = " & Variedad)
         
         If DevuelveValor("select count(*) from rhisfruta_clasif where numalbar = " & Albaran) = 0 Then
-            Sql = "insert into rhisfruta_clasif (numalbar,codvarie,codcalid,kilosnet) values (" & DBSet(Albaran, "N") & ","
-            Sql = Sql & DBSet(Variedad, "N") & "," & DBSet(Calidad, "N") & "," & DBSet(Kilos, "N") & ")"
+            SQL = "insert into rhisfruta_clasif (numalbar,codvarie,codcalid,kilosnet) values (" & DBSet(Albaran, "N") & ","
+            SQL = SQL & DBSet(Variedad, "N") & "," & DBSet(Calidad, "N") & "," & DBSet(Kilos, "N") & ")"
             
-            conn.Execute Sql
+            conn.Execute SQL
         Else
             KilosNet = DevuelveValor("select sum(kilosnet) from rhisfruta_entradas where numalbar = " & DBSet(Albaran, "N"))
             
-            Sql = "update rhisfruta_clasif set kilosnet = " & DBSet(KilosNet, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N")
+            SQL = "update rhisfruta_clasif set kilosnet = " & DBSet(KilosNet, "N")
+            SQL = SQL & " where numalbar = " & DBSet(Albaran, "N")
             
-            conn.Execute Sql
+            conn.Execute SQL
         End If
     
     End If
@@ -4796,7 +4798,7 @@ Public Sub ComprobarCobrosSocio(Codsocio As String, FechaDoc As String, Optional
 'Comprueba en la tabla de Cobros Pendientes (scobro) de la Base de datos de Contabilidad
 'si el cliente tiene alguna factura pendiente de cobro que ha vendido
 'con fecha de vencimiento anterior a la fecha del documento: Oferta, Pedido, ALbaran,...
-Dim Sql As String, vWhere As String
+Dim SQL As String, vWhere As String
 Dim Codmacta As String
 Dim Rs As ADODB.Recordset
 Dim cadMen As String
@@ -4813,19 +4815,19 @@ Dim vSeccion As CSeccion
     If CInt(ComprobarCero(vParamAplic.Seccionhorto)) <> 0 Then
         
         'Obtener la cuenta del socio de la tabla rsocios en Ariagrorec
-        Sql = "Select nomsocio, codmaccli from rsocios inner join rsocios_seccion on rsocios.codsocio = rsocios_seccion.codsocio "
-        Sql = Sql & " where rsocios_seccion.codsecci = " & DBSet(vParamAplic.Seccionhorto, "N") & " and rsocios.codsocio=" & Codsocio
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "Select nomsocio, codmaccli from rsocios inner join rsocios_seccion on rsocios.codsocio = rsocios_seccion.codsocio "
+        SQL = SQL & " where rsocios_seccion.codsecci = " & DBSet(vParamAplic.Seccionhorto, "N") & " and rsocios.codsocio=" & Codsocio
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
         If Rs.EOF Then
-            Sql = ""
+            SQL = ""
         Else
             Codsocio = Codsocio & " - " & Rs!nomsocio
             Codmacta = DBLet(Rs!codmaccli)
             ImporteCred = 0
-            If Codmacta = "" Then Sql = ""
+            If Codmacta = "" Then SQL = ""
         End If
         Rs.Close
-        If Sql = "" Then Exit Sub
+        If SQL = "" Then Exit Sub
         
         Set vSeccion = New CSeccion
         If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
@@ -4833,26 +4835,26 @@ Dim vSeccion As CSeccion
         
                 'AHORA FEBRERO 2010
                 If vParamAplic.ContabilidadNueva Then
-                    Sql = "SELECT cobros.* FROM cobros INNER JOIN formapago ON cobros.codforpa=formapago.codforpa "
+                    SQL = "SELECT cobros.* FROM cobros INNER JOIN formapago ON cobros.codforpa=formapago.codforpa "
                     vWhere = " WHERE cobros.codmacta = '" & Codmacta & "'"
     ' lo llamamos desde el mto de socios, campos y contadores
     '                vWhere = vWhere & " AND fecvenci <= ' " & Format(FechaDoc, FormatoFecha) & "' "
                     'Antes mayo 2010
                     'vWhere = vWhere & " AND (sforpa.tipforpa between 0 and 3)"
                     vWhere = vWhere & " AND recedocu=0 "
-                    Sql = Sql & vWhere & " ORDER BY fecfactu, numfactu "
+                    SQL = SQL & vWhere & " ORDER BY fecfactu, numfactu "
                 Else
-                    Sql = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
+                    SQL = "SELECT scobro.* FROM scobro INNER JOIN sforpa ON scobro.codforpa=sforpa.codforpa "
                     vWhere = " WHERE scobro.codmacta = '" & Codmacta & "'"
     ' lo llamamos desde el mto de socios, campos y contadores
     '                vWhere = vWhere & " AND fecvenci <= ' " & Format(FechaDoc, FormatoFecha) & "' "
                     'Antes mayo 2010
                     'vWhere = vWhere & " AND (sforpa.tipforpa between 0 and 3)"
                     vWhere = vWhere & " AND recedocu=0 "
-                    Sql = Sql & vWhere & " ORDER BY fecfaccl, codfaccl "
+                    SQL = SQL & vWhere & " ORDER BY fecfaccl, codfaccl "
                 End If
                 'Lee de la Base de Datos de CONTABILIDAD
-                Rs.Open Sql, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
                 Importe = 0
                 While Not Rs.EOF
                 
@@ -4906,24 +4908,32 @@ End Sub
 
 
 
-Public Sub AyudaIncidenciasOrdenesRecogida(frmBas As frmBasico, Optional CodActual As String)
+Public Sub AyudaIncidenciasOrdenesRecogida(frmBas As frmBasico2, Optional CodActual As String)
 
-    frmBas.CadenaTots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Descripción|3930|;"
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Descripción|4595|;"
     frmBas.CadenaConsulta = "SELECT rplagasaux.idplaga, rplagasaux.nomplaga "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rplagasaux "
     frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
     frmBas.Tag1 = "Código|N|N|||rplagasaux|idplaga|000000|S|"
     frmBas.Tag2 = "Nombre|T|N|||rplagasaux|nomplaga|||"
+    frmBas.Tag3 = ""
     frmBas.Maxlen1 = 6
     frmBas.Maxlen2 = 40
+    frmBas.Maxlen3 = 0
+    
+    frmBas.pConn = cAgro
+    
+    
     frmBas.tabla = "rplagasaux"
     frmBas.CampoCP = "idplaga"
-    'frmBas.Report = "rManGlobalGap.rpt"
     frmBas.Caption = "Incidencias Ordenes Recogida"
     frmBas.DeConsulta = True
     frmBas.DatosADevolverBusqueda = "0|1|"
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, -1500
+    
     frmBas.Show vbModal
     
 End Sub
@@ -4943,33 +4953,33 @@ End Sub
 Public Function ObtenerPrecioRecoldeCalidad(Variedad As String, Calidad As String, Tipo As Byte) As Currency
 'Tipo = 0, factura transporte socio gastos de recoleccion
 'Tipo = 1, gastos de recoleccion del recolector
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select "
+    SQL = "select "
     If Tipo = 0 Then
-        Sql = Sql & "eurrecsoc "
+        SQL = SQL & "eurrecsoc "
     Else
-        Sql = Sql & "eurreccoop "
+        SQL = SQL & "eurreccoop "
     End If
-    Sql = Sql & " from rcalidad where codvarie = " & DBSet(Variedad, "N") & " and codcalid = " & DBSet(Calidad, "N")
+    SQL = SQL & " from rcalidad where codvarie = " & DBSet(Variedad, "N") & " and codcalid = " & DBSet(Calidad, "N")
 
-    ObtenerPrecioRecoldeCalidad = DevuelveValor(Sql)
+    ObtenerPrecioRecoldeCalidad = DevuelveValor(SQL)
 
 End Function
 
 
 Public Function CodTipomAnticipos() As String
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Result As String
 
     CodTipomAnticipos = ""
 
-    Sql = "select codtipom from usuarios.stipom where tipodocu = 1"
+    SQL = "select codtipom from usuarios.stipom where tipodocu = 1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Result = ""
     
@@ -4990,11 +5000,11 @@ Dim Result As String
 End Function
 
 Public Function EsCaja(CodEnvase As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select escaja from confenva where codtipen = " & DBSet(CodEnvase, "N")
+    SQL = "select escaja from confenva where codtipen = " & DBSet(CodEnvase, "N")
     
-    EsCaja = DevuelveValor(Sql)
+    EsCaja = DevuelveValor(SQL)
 
 End Function
 
@@ -5002,40 +5012,40 @@ End Function
 ' FUNCIONES DE POZOS PARA SABER SI ES O NO CONTADO (ESCALONA Y UTXERA)
 
 Public Function EsSocioContadoPOZOS(Socio As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select cuentaba from rsocios where codsocio = " & DBSet(Socio, "N")
-    EsSocioContadoPOZOS = (DevuelveValor(Sql) = "8888888888")
+    SQL = "select cuentaba from rsocios where codsocio = " & DBSet(Socio, "N")
+    EsSocioContadoPOZOS = (DevuelveValor(SQL) = "8888888888")
 
 End Function
 
 
 Public Function EsReciboContadoPOZOS(vWhere As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select escontado from rrecibpozos where " & vWhere
-    EsReciboContadoPOZOS = (DevuelveValor(Sql) = "1")
+    SQL = "select escontado from rrecibpozos where " & vWhere
+    EsReciboContadoPOZOS = (DevuelveValor(SQL) = "1")
 
 End Function
 
 Public Function EntregadaFichaCultivo(campo As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select entregafichaculti from rcampos where codcampo = " & DBSet(campo, "N")
+    SQL = "select entregafichaculti from rcampos where codcampo = " & DBSet(campo, "N")
 
-    EntregadaFichaCultivo = (DevuelveValor(Sql) = "0")
+    EntregadaFichaCultivo = (DevuelveValor(SQL) = "0")
     
 End Function
 
 
 Public Function TrabajadorDeBaja(Traba As String, Optional Fecha As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
-    Sql = "select fechabaja from straba where codtraba = " & DBSet(Traba, "N")
+    SQL = "select fechabaja from straba where codtraba = " & DBSet(Traba, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         TrabajadorDeBaja = (DBLet(Rs!FechaBaja, "F") <> "")
@@ -5052,20 +5062,20 @@ End Function
 
 
 Public Function HayXML() As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select xml from rparam "
-    HayXML = (DevuelveValor(Sql) = 1)
+    SQL = "select xml from rparam "
+    HayXML = (DevuelveValor(SQL) = 1)
 
 
 End Function
 
 Public Function EsCalidadConBonificacion(Variedad As String, Calidad As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select seaplicabonif from rcalidad where codvarie = " & DBSet(Variedad, "N") & " and codcalid = " & DBSet(Calidad, "N")
+    SQL = "select seaplicabonif from rcalidad where codvarie = " & DBSet(Variedad, "N") & " and codcalid = " & DBSet(Calidad, "N")
     
-    EsCalidadConBonificacion = (DevuelveValor(Sql) = 1)
+    EsCalidadConBonificacion = (DevuelveValor(SQL) = 1)
 
 End Function
 
@@ -5083,20 +5093,20 @@ Public Function MiFormat(Valor As String, Formato As String) As String
 End Function
 
 Public Function SeAplicaPixat(Variedad As String, Fecha As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select * from variedades where codvarie = " & DBSet(Variedad, "N") & " and fecinipixat <= " & DBSet(Fecha, "F")
-    Sql = Sql & " and fecfinpixat >= " & DBSet(Fecha, "F")
+    SQL = "select * from variedades where codvarie = " & DBSet(Variedad, "N") & " and fecinipixat <= " & DBSet(Fecha, "F")
+    SQL = SQL & " and fecfinpixat >= " & DBSet(Fecha, "F")
 
-    SeAplicaPixat = (TotalRegistrosConsulta(Sql) > 0)
+    SeAplicaPixat = (TotalRegistrosConsulta(SQL) > 0)
 
 End Function
 
 
 Public Function EstaEnDocumentoBaja(vCampo As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "select * from rsocios_movim where codcampo = " & DBSet(vCampo, "N")
-    EstaEnDocumentoBaja = (TotalRegistrosConsulta(Sql) <> 0)
+    SQL = "select * from rsocios_movim where codcampo = " & DBSet(vCampo, "N")
+    EstaEnDocumentoBaja = (TotalRegistrosConsulta(SQL) <> 0)
     
 End Function

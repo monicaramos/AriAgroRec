@@ -514,7 +514,7 @@ Public FechaCarga As String
 
 Private WithEvents frmSoc As frmManSocios
 Attribute frmSoc.VB_VarHelpID = -1
-Private WithEvents frmVar As frmBasico2
+Private WithEvents frmVar As frmManVariedad 'Basico2
 Attribute frmVar.VB_VarHelpID = -1
 Private WithEvents frmB As frmBuscaGrid
 Attribute frmB.VB_VarHelpID = -1
@@ -726,7 +726,7 @@ Dim I As Byte
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -741,13 +741,13 @@ Dim temp As Boolean
 '    If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCampo(txtAux(0))) Then Exit Sub
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el volcado?"
-    Sql = Sql & vbCrLf & "IdPalet: " & adodc1.Recordset.Fields(1)
+    SQL = "¿Seguro que desea eliminar el volcado?"
+    SQL = SQL & vbCrLf & "IdPalet: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from trzlineas_cargas where idpalet=" & adodc1.Recordset!IdPalet
+        SQL = "Delete from trzlineas_cargas where idpalet=" & adodc1.Recordset!IdPalet
         
         '  LOG de acciones
         Set LOG = New cLOG
@@ -755,7 +755,7 @@ Dim temp As Boolean
         Set LOG = Nothing
         
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
@@ -769,15 +769,15 @@ Error2:
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo eSepuedeBorrar
 
     SepuedeBorrar = False
 
-    Sql = "select * from palets where idpalet = " & adodc1.Recordset.Fields(1)
-    If TotalRegistrosConsulta(Sql) <> 0 Then
+    SQL = "select * from palets where idpalet = " & adodc1.Recordset.Fields(1)
+    If TotalRegistrosConsulta(SQL) <> 0 Then
         MsgBox "Este palet ha sido traspasado a palets confeccionados. Revise.", vbExclamation
         Exit Function
     End If
@@ -1224,20 +1224,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " and " & vSQL
+        SQL = CadenaConsulta & " and " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY trzlineas_cargas.idpalet, trzlineas_cargas.fechahora"
+    SQL = SQL & " ORDER BY trzlineas_cargas.idpalet, trzlineas_cargas.fechahora"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     tots = "S|txtAux(0)|T|Linea|800|;S|txtAux(1)|T|Id.Palet|800|;S|txtAux(2)|T|Fecha|1150|;S|btnBuscar(2)|B||195|;S|txtAux(3)|T|Hora|700|;"
     tots = tots & "S|txtAux(5)|T|Socio|800|;S|btnBuscar(0)|B||195|;S|txtAux2(5)|T|Nombre|2700|;"
@@ -1348,7 +1348,7 @@ Dim Famia As String
                     cadMen = "No existe la Variedad: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
-                        Set frmVar = New frmComercial
+                        Set frmVar = New frmManVariedad
                         frmVar.DatosADevolverBusqueda = "0|1|"
                         frmVar.NuevoCodigo = txtAux(Index).Text
                         txtAux(Index).Text = ""
@@ -1385,7 +1385,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Fpag As String
 
     B = CompForm(Me)
@@ -1439,18 +1439,18 @@ End Sub
 
 Private Sub CalcularSumaPantalla()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
   If Not adodc1.Recordset.EOF And CadB = "" Then CadB = "codclave > 0"
   If CadB <> "" Then
-     Sql = "select sum(cantidad), sum(importel) FROM scaalb "
-     Sql = Sql & " WHERE " & CadB
+     SQL = "select sum(cantidad), sum(importel) FROM scaalb "
+     SQL = SQL & " WHERE " & CadB
      Set Rs = New ADODB.Recordset ' Crear objeto
-     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText ' abrir cursor
+     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText ' abrir cursor
       If Not Rs.EOF Then
-        Sql = "Cantidad: " & Format(Rs.Fields(0), "###,##0.000") & vbCrLf
-        Sql = Sql & " Importe : " & Format(Rs.Fields(1), "####,##0.00")
-        MsgBox "Totales Selección: " & vbCrLf & vbCrLf & Sql, vbInformation
+        SQL = "Cantidad: " & Format(Rs.Fields(0), "###,##0.000") & vbCrLf
+        SQL = SQL & " Importe : " & Format(Rs.Fields(1), "####,##0.00")
+        MsgBox "Totales Selección: " & vbCrLf & vbCrLf & SQL, vbInformation
       End If
      Rs.Close
      Set Rs = Nothing

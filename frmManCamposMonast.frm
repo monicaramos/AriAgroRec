@@ -998,8 +998,6 @@ Private WithEvents frmInc As frmManInciden 'incidencias
 Attribute frmInc.VB_VarHelpID = -1
 Private WithEvents frmGlo As frmManGlobalGap 'ayuda de globalgap
 Attribute frmGlo.VB_VarHelpID = -1
-Private WithEvents frmCli As frmBasico 'ayuda de cliente de ariges(suministros)
-Attribute frmCli.VB_VarHelpID = -1
 Private WithEvents frmGto As frmManConcepGasto ' ayuda de concepto de gasto
 Attribute frmGto.VB_VarHelpID = -1
 
@@ -1899,120 +1897,120 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim Sql As String
+Dim SQL As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
-            Sql = "select rcampos_cooprop.codcampo, rcampos_cooprop.numlinea, rcampos_cooprop.codsocio, rsocios.nomsocio, "
-            Sql = Sql & " rcampos_cooprop.porcentaje "
-            Sql = Sql & " FROM rcampos_cooprop INNER JOIN rsocios ON rcampos_cooprop.codsocio = rsocios.codsocio "
-            Sql = Sql & " and rcampos_cooprop.codsocio = rsocios.codsocio "
+            SQL = "select rcampos_cooprop.codcampo, rcampos_cooprop.numlinea, rcampos_cooprop.codsocio, rsocios.nomsocio, "
+            SQL = SQL & " rcampos_cooprop.porcentaje "
+            SQL = SQL & " FROM rcampos_cooprop INNER JOIN rsocios ON rcampos_cooprop.codsocio = rsocios.codsocio "
+            SQL = SQL & " and rcampos_cooprop.codsocio = rsocios.codsocio "
             If enlaza Then
                 '[Monica]08/07/2011
-                Sql = Sql & Replace(ObtenerWhereCab2(True), "rcampos_parcelas", "rcampos_cooprop")
+                SQL = SQL & Replace(ObtenerWhereCab2(True), "rcampos_parcelas", "rcampos_cooprop")
                 'Sql = Sql & " WHERE rcampos_cooprop.codcampo = " & Text1(0).Text
             Else
-                Sql = Sql & " WHERE rcampos_cooprop.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_cooprop.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY rcampos_cooprop.codsocio "
+            SQL = SQL & " ORDER BY rcampos_cooprop.codsocio "
        
        Case 1 ' clasificacion
             tabla = "rcampos_clasif"
-            Sql = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
-            Sql = Sql & " and rcampos_clasif.codcalid = rcalidad.codcalid "
+            SQL = "SELECT rcampos_clasif.codcampo, rcampos_clasif.codvarie, rcampos_clasif.codcalid, rcalidad.nomcalid, rcampos_clasif.muestra "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rcalidad ON rcampos_clasif.codvarie = rcalidad.codvarie "
+            SQL = SQL & " and rcampos_clasif.codcalid = rcalidad.codcalid "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab(True)
+                SQL = SQL & ObtenerWhereCab(True)
             Else
-                Sql = Sql & " WHERE rcampos_clasif.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_clasif.codcampo = -1"
             End If
-            Sql = Sql
-            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
+            SQL = SQL
+            SQL = SQL & " ORDER BY " & tabla & ".codcalid "
             
        Case 2 ' parcelas
             tabla = "rcampos_parcelas"
-            Sql = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
-            Sql = Sql & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
-            Sql = Sql & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_parcelas.codcampo, rcampos_parcelas.numlinea, rcampos_parcelas.poligono,rcampos_parcelas.parcela,rcampos_parcelas.subparce, "
+            SQL = SQL & "rcampos_parcelas.recintos,rcampos_parcelas.codsigpa,rcampos_parcelas.supsigpa,"
+            SQL = SQL & "rcampos_parcelas.supcultsigpa,rcampos_parcelas.supcatas,rcampos_parcelas.supcultcatas"
+            SQL = SQL & " FROM " & tabla
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab2(True)
+                SQL = SQL & ObtenerWhereCab2(True)
             Else
-                Sql = Sql & " WHERE rcampos_parcelas.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_parcelas.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
             
        Case 3 ' agroseguro
             tabla = "rcampos_seguros"
-            Sql = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
-            Sql = Sql & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
-            Sql = Sql & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
+            SQL = "SELECT rcampos_seguros.codcampo, rcampos_seguros.numlinea, rcampos_seguros.fecha, rcampos_seguros.codincid, rincidencia.nomincid, "
+            SQL = SQL & "rcampos_seguros.kilos,rcampos_seguros.kilosaportacion, rcampos_seguros.importe,rcampos_seguros.fechapago,"
+            SQL = SQL & "rcampos_seguros.essiniestro , IF(essiniestro=1,'*','') as dsiniestro "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rincidencia ON rcampos_seguros.codincid = rincidencia.codincid "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab3(True)
+                SQL = SQL & ObtenerWhereCab3(True)
             Else
-                Sql = Sql & " WHERE rcampos_seguros.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_seguros.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
             
         Case 4 ' hco del campo
             tabla = "rcampos_hco"
-            Sql = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
-            Sql = Sql & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
-            Sql = Sql & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
-            Sql = Sql & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
+            SQL = "SELECT rcampos_hco.codcampo, rcampos_hco.numlinea, rcampos_hco.codsocio, rsocios.nomsocio, rcampos_hco.fechaalta, "
+            SQL = SQL & "rcampos_hco.fechabaja, rcampos_hco.codincid, rincidencia.nomincid"
+            SQL = SQL & " FROM (" & tabla & " INNER JOIN rincidencia ON rcampos_hco.codincid = rincidencia.codincid) "
+            SQL = SQL & " INNER JOIN rsocios ON rcampos_hco.codsocio = rsocios.codsocio "
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab4(True)
+                SQL = SQL & ObtenerWhereCab4(True)
             Else
-                Sql = Sql & " WHERE rcampos_hco.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_hco.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
         
         Case 5 ' gastos del campo
             tabla = "rcampos_gastos"
-            Sql = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
-            Sql = Sql & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
-            Sql = Sql & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
+            SQL = "SELECT rcampos_gastos.codcampo, rcampos_gastos.numlinea, rcampos_gastos.codgasto, rconcepgasto.nomgasto, rcampos_gastos.fecha, "
+            SQL = SQL & "rcampos_gastos.importe, rcampos_gastos.contabilizado, IF(contabilizado=1,'*','') as dcontabilizado "
+            SQL = SQL & " FROM " & tabla & " INNER JOIN rconcepgasto ON rcampos_gastos.codgasto = rconcepgasto.codgasto "
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab5(True)
+                SQL = SQL & ObtenerWhereCab5(True)
             Else
-                Sql = Sql & " WHERE rcampos_gastos.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_gastos.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
     
         Case 6 ' impresion de ordenes de recoleccion del campo
             tabla = "rcampos_ordrec"
-            Sql = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_ordrec.codcampo, rcampos_ordrec.nroorden, rcampos_ordrec.fecimpre "
+            SQL = SQL & " FROM " & tabla
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab6(True)
+                SQL = SQL & ObtenerWhereCab6(True)
             Else
-                Sql = Sql & " WHERE rcampos_ordrec.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_ordrec.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".nroorden "
+            SQL = SQL & " ORDER BY " & tabla & ".nroorden "
     
         Case 7 ' revisiones
             tabla = "rcampos_revision"
-            Sql = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
-            Sql = Sql & " FROM " & tabla
+            SQL = "SELECT rcampos_revision.codcampo, rcampos_revision.numlinea, rcampos_revision.fecha, rcampos_revision.tecnico, rcampos_revision.observac "
+            SQL = SQL & " FROM " & tabla
             
             If enlaza Then
-                Sql = Sql & ObtenerWhereCab7(True)
+                SQL = SQL & ObtenerWhereCab7(True)
             Else
-                Sql = Sql & " WHERE rcampos_revision.codcampo = -1"
+                SQL = SQL & " WHERE rcampos_revision.codcampo = -1"
             End If
-            Sql = Sql & " ORDER BY " & tabla & ".numlinea "
+            SQL = SQL & " ORDER BY " & tabla & ".numlinea "
     
     
     
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = Sql
+    MontaSQLCarga = SQL
 End Function
 
 
@@ -2094,12 +2092,6 @@ Dim CadB As String
 
 End Sub
 
-Private Sub frmCli_DatoSeleccionado(CadenaSeleccion As String)
-'cliente de suministros
-    Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de cliente de suministros
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre
-End Sub
-
 Private Sub frmDesa_DatoSeleccionado(CadenaSeleccion As String)
     Text1(26).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo desarrollo vegetativo
     FormateaCampo Text1(26)
@@ -2125,26 +2117,26 @@ End Sub
 'End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " rcampos.codcampo in (" & CadenaSeleccion & ")"
+        SQL = " rcampos.codcampo in (" & CadenaSeleccion & ")"
     Else
-        Sql = ""
+        SQL = ""
     End If
-    cadCampos = Sql
+    cadCampos = SQL
     
 End Sub
 
 Private Sub frmMens2_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " rpozos.hidrante in (" & CadenaSeleccion & ")"
+        SQL = " rpozos.hidrante in (" & CadenaSeleccion & ")"
     Else
-        Sql = ""
+        SQL = ""
     End If
-    cadHidrantes = Sql
+    cadHidrantes = SQL
     
 End Sub
 
@@ -2429,7 +2421,7 @@ Dim Municipio As String
 End Sub
 
 Private Sub mnVerificacionErr_Click()
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
     
     InicializarVbles
@@ -2438,14 +2430,14 @@ Dim Rs As ADODB.Recordset
     CadParam = CadParam & "|pEmpresa=""" & vEmpresa.nomempre & """|"
     numParam = numParam + 1
     
-    Sql = "select rpueblos.codpobla, rcampos.poligono, rcampos.parcela, rcampos.recintos, count(*) "
-    Sql = Sql & " from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) "
-    Sql = Sql & " inner join rpueblos on rpartida.codpobla = rpueblos.codpobla"
-    Sql = Sql & " where rcampos.fecbajas is null "
-    Sql = Sql & " group by 1,2,3,4 "
-    Sql = Sql & " having count(*) > 1"
+    SQL = "select rpueblos.codpobla, rcampos.poligono, rcampos.parcela, rcampos.recintos, count(*) "
+    SQL = SQL & " from (rcampos inner join rpartida on rcampos.codparti = rpartida.codparti) "
+    SQL = SQL & " inner join rpueblos on rpartida.codpobla = rpueblos.codpobla"
+    SQL = SQL & " where rcampos.fecbajas is null "
+    SQL = SQL & " group by 1,2,3,4 "
+    SQL = SQL & " having count(*) > 1"
     
-    If TotalRegistros(Sql) <> 0 Then
+    If TotalRegistros(SQL) <> 0 Then
         cadNombreRPT = "rErroresCampos.rpt"
         cadTitulo = "Campos con duplicidades"
         frmImprimir.Opcion = 0
@@ -2984,7 +2976,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cad As String
 Dim Rs As ADODB.Recordset
 'Dim Datos As String
@@ -3005,10 +2997,10 @@ Dim Rs As ADODB.Recordset
     If B And (Modo = 3 Or Modo = 4) Then
         ' comprobamos que el socio no esté dado de baja
         If B Then
-            Sql = "select fechabaja from rsocios where codsocio = " & DBSet(Text1(1).Text, "N")
+            SQL = "select fechabaja from rsocios where codsocio = " & DBSet(Text1(1).Text, "N")
             
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If DBLet(Rs.Fields(0).Value, "F") <> "" Then
                 cad = "Este socio tiene fecha de baja. ¿ Desea continuar ?"
                 If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbNo Then
@@ -3020,22 +3012,22 @@ Dim Rs As ADODB.Recordset
         
         '[Monica]31/10/2014: si la fecha de alta es superior a la fecha de alta del socio de la seccion de horto damos un aviso
         If B Then
-            Sql = "select fecalta from rsocios_seccion where codsocio = " & DBSet(Text1(1).Text, "N") & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
+            SQL = "select fecalta from rsocios_seccion where codsocio = " & DBSet(Text1(1).Text, "N") & " and codsecci = " & DBSet(vParamAplic.Seccionhorto, "N")
             Set Rs = New ADODB.Recordset
-            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             If Not Rs.EOF Then
                 If DBLet(Rs.Fields(0).Value, "F") > CDate(Text1(4).Text) Then
-                    Sql = "La fecha de alta del socio en la Seccion de Horto es superior a la fecha de alta del campo." & vbCrLf & vbCrLf
-                    Sql = Sql & "                     ¿ Desea continuar ?"
+                    SQL = "La fecha de alta del socio en la Seccion de Horto es superior a la fecha de alta del campo." & vbCrLf & vbCrLf
+                    SQL = SQL & "                     ¿ Desea continuar ?"
                     
-                    If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                    If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                         B = False
                     End If
                 End If
             Else
-                Sql = "El socio no se encuentra en la Sección de Horto." & vbCrLf & vbCrLf
-                Sql = Sql & "                     ¿ Desea continuar ?"
-                If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+                SQL = "El socio no se encuentra en la Sección de Horto." & vbCrLf & vbCrLf
+                SQL = SQL & "                     ¿ Desea continuar ?"
+                If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                     B = False
                 End If
             End If
@@ -4153,7 +4145,7 @@ End Function
 
 
 Private Function ActualisaCtaprpal(ByRef numlinea As Integer)
-Dim Sql As String
+Dim SQL As String
 'yo
 '    On Error Resume Next
 '    'tot lo que no siga un SELECT no fa falta un Record Set
@@ -4722,7 +4714,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim Sql As String
+Dim SQL As String
 Dim vCadena As String
 Dim Produ As Integer
 
@@ -5120,7 +5112,7 @@ End Sub
 
 
 Private Function VisualizaClasificacion() As Boolean
-Dim Sql As String
+Dim SQL As String
 
 
     If Data1.Recordset.EOF Then
@@ -5128,13 +5120,13 @@ Dim Sql As String
         Exit Function
     End If
 
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!codvarie, "N")
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "tipoclasifica", "codvarie", Data1.Recordset!codvarie, "N")
     
-    SSTab1.TabEnabled(3) = (Sql = "0")
-    SSTab1.TabVisible(3) = (Sql = "0")
+    SSTab1.TabEnabled(3) = (SQL = "0")
+    SSTab1.TabVisible(3) = (SQL = "0")
     
-    VisualizaClasificacion = (Sql = "0")
+    VisualizaClasificacion = (SQL = "0")
 
 End Function
 
@@ -5274,7 +5266,7 @@ End Sub
 '*******************************
 
 Private Sub BotonCambioSocio()
-Dim Sql As String
+Dim SQL As String
 Dim campo As String
 Dim NroContadores As Long
 
@@ -5340,16 +5332,16 @@ End Sub
 '*******************************
 
 Private Sub ChequeoNroOrden()
-Dim Sql As String
+Dim SQL As String
 
-    Sql = "and mid(right(concat('00000000',codcampo),8),1,6) <> nrocampo"
+    SQL = "and mid(right(concat('00000000',codcampo),8),1,6) <> nrocampo"
 
     cadCampos = ""
 
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 25
-    frmMens.cadWHERE = Sql
+    frmMens.cadWHERE = SQL
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -5361,11 +5353,11 @@ End Sub
 
 
 Private Sub ModificarNroOrden(vSQL As String)
-Dim Sql As String
+Dim SQL As String
     
     If BloqueaRegistro("rcampos", vSQL) Then
-        Sql = "update rcampos set nrocampo = mid(right(concat('00000000',codcampo),8),1,6) where " & vSQL
-        conn.Execute Sql
+        SQL = "update rcampos set nrocampo = mid(right(concat('00000000',codcampo),8),1,6) where " & vSQL
+        conn.Execute SQL
         
         TerminaBloquear
         
