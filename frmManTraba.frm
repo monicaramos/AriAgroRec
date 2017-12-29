@@ -1268,7 +1268,7 @@ Begin VB.Form frmManTraba
       TabIndex        =   2
       Tag             =   "NIF / CIF|T|N|||straba|niftraba|||"
       Top             =   1620
-      Width           =   1200
+      Width           =   1920
    End
    Begin VB.TextBox Text1 
       BeginProperty Font 
@@ -2846,7 +2846,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim cadMen As String
 Dim cta As String
 Dim TipoForp As String
@@ -2929,14 +2929,14 @@ Dim TipoForp As String
     'control de costes
     If B And vParamAplic.HayCCostes Then
         If Modo = 3 Or Modo = 4 Then
-            Sql = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
+            SQL = "select count(*) from straba where codtraba <> " & DBSet(Text1(0).Text, "N")
             If Text1(31).Text <> "" Then
-                Sql = Sql & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
+                SQL = SQL & " and idtarjeta = " & DBSet(Text1(31).Text, "N")
             Else
-                Sql = Sql & " and idtarjeta is null "
+                SQL = SQL & " and idtarjeta is null "
             End If
     
-            If DevuelveValor(Sql) <> 0 Then
+            If DevuelveValor(SQL) <> 0 Then
                 If MsgBox("Hay otro trabajador con el mismo Nro.Tarjeta asignado." & vbCrLf & vbCrLf & "               ¿Desea Continuar?.", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                     B = False
                 End If
@@ -3028,7 +3028,7 @@ Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim campo2 As String
-Dim Sql As String
+Dim SQL As String
 
 
 
@@ -3071,9 +3071,9 @@ Dim Sql As String
                 Else ' traemos el porcentaje de irpf y de seguridad social
                     If Modo = 3 Or Modo = 4 Then
                         campo2 = "dtosegso"
-                        Sql = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
-                        If Sql <> "" Then
-                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(Sql), "##0.00")
+                        SQL = DevuelveDesdeBDNew(cAgro, "salarios", "dtosirpf", "codcateg", Text1(9).Text, "N", campo2)
+                        If SQL <> "" Then
+                            If Text1(9).Text <> CategAnt Then Text1(25).Text = Format(ImporteSinFormato(SQL), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(26).Text = Format(ImporteSinFormato(campo2), "##0.00")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = DevuelveDesdeBDNew(cAgro, "salarios", "pluscapataz", "codcateg", Text1(9).Text, "N")
                             If Text1(9).Text <> CategAnt Then Text1(27).Text = Format(ImporteSinFormato(Text1(27).Text), "###,##0.00")
@@ -3462,14 +3462,14 @@ Dim I As Integer
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     SepuedeBorrar = False
     
     ' *** si cal comprovar alguna cosa abans de borrar ***
-    Sql = ""
-    Sql = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
-    If Sql <> "" Then
+    SQL = ""
+    SQL = DevuelveDesdeBDNew(cAgro, "horas", "codtraba", "codtraba", Data1.Recordset!CodTraba, "N")
+    If SQL <> "" Then
         MsgBox "No puede borrar el trabajador porque tiene horas asignadas.", vbExclamation
         Exit Function
     End If

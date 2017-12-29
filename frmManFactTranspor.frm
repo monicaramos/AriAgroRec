@@ -6,24 +6,143 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmManFactTranspor 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Facturas Transportistas"
-   ClientHeight    =   8670
+   ClientHeight    =   9060
    ClientLeft      =   45
-   ClientTop       =   4335
-   ClientWidth     =   10665
+   ClientTop       =   4035
+   ClientWidth     =   10725
    Icon            =   "frmManFactTranspor.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8670
-   ScaleWidth      =   10665
+   ScaleHeight     =   9060
+   ScaleWidth      =   10725
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   45
+      TabIndex        =   67
+      Top             =   90
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   68
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameDesplazamiento 
+      Height          =   705
+      Left            =   3675
+      TabIndex        =   65
+      Top             =   90
+      Width           =   2415
+      Begin MSComctlLib.Toolbar ToolbarDes 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   66
+         Top             =   180
+         Width           =   1965
+         _ExtentX        =   3466
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Primero"
+               ImageIndex      =   6
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Anterior"
+               ImageIndex      =   7
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Siguiente"
+               ImageIndex      =   8
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Último"
+               ImageIndex      =   9
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   8145
+      TabIndex        =   64
+      Top             =   270
+      Width           =   1605
+   End
    Begin TabDlg.SSTab SSTab1 
       Height          =   4425
       Left            =   60
-      TabIndex        =   39
-      Top             =   3600
-      Width           =   10540
+      TabIndex        =   37
+      Top             =   3915
+      Width           =   10545
       _ExtentX        =   18600
       _ExtentY        =   7805
       _Version        =   393216
@@ -48,16 +167,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Combo1(2)"
-      Tab(1).Control(1)=   "Text1(12)"
-      Tab(1).Control(2)=   "Text1(13)"
-      Tab(1).Control(3)=   "Text1(14)"
-      Tab(1).Control(4)=   "Text1(15)"
-      Tab(1).Control(5)=   "Label1(11)"
-      Tab(1).Control(6)=   "Label1(12)"
-      Tab(1).Control(7)=   "Label1(13)"
-      Tab(1).Control(8)=   "imgFec(1)"
-      Tab(1).Control(9)=   "Label1(14)"
+      Tab(1).Control(0)=   "Label1(14)"
+      Tab(1).Control(1)=   "imgFec(1)"
+      Tab(1).Control(2)=   "Label1(13)"
+      Tab(1).Control(3)=   "Label1(12)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Text1(15)"
+      Tab(1).Control(6)=   "Text1(14)"
+      Tab(1).Control(7)=   "Text1(13)"
+      Tab(1).Control(8)=   "Text1(12)"
+      Tab(1).Control(9)=   "Combo1(2)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -73,7 +192,7 @@ Begin VB.Form frmManFactTranspor
          Index           =   2
          Left            =   -74520
          Style           =   2  'Dropdown List
-         TabIndex        =   57
+         TabIndex        =   55
          Top             =   1080
          Width           =   3330
       End
@@ -93,7 +212,7 @@ Begin VB.Form frmManFactTranspor
          Index           =   12
          Left            =   -71130
          MaxLength       =   7
-         TabIndex        =   56
+         TabIndex        =   54
          Tag             =   "Nº Factura Rectificada|N|S|||rfacttra|rectif_numfactu|0000000|N|"
          Text            =   "Text1"
          Top             =   1080
@@ -114,7 +233,7 @@ Begin VB.Form frmManFactTranspor
          Index           =   13
          Left            =   -69765
          MaxLength       =   10
-         TabIndex        =   55
+         TabIndex        =   53
          Tag             =   "Fecha Factura Rectificada|F|S|||rfacttra|rectif_fecfactu|dd/mm/yyyy|N|"
          Top             =   1080
          Width           =   1350
@@ -134,7 +253,7 @@ Begin VB.Form frmManFactTranspor
          Left            =   -74520
          MaxLength       =   100
          MultiLine       =   -1  'True
-         TabIndex        =   54
+         TabIndex        =   52
          Tag             =   "Motivo Rectif. Factura|T|S|||rfacttra|rectif_motivo|||"
          Text            =   "frmManFactTranspor.frx":0044
          Top             =   1830
@@ -154,7 +273,7 @@ Begin VB.Form frmManFactTranspor
          ForeColor       =   &H00C00000&
          Height          =   3720
          Left            =   60
-         TabIndex        =   40
+         TabIndex        =   38
          Top             =   540
          Width           =   10390
          Begin VB.TextBox txtAux1 
@@ -175,7 +294,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   10
             Left            =   1980
             MaxLength       =   7
-            TabIndex        =   65
+            TabIndex        =   63
             Tag             =   "Transportista|T|N|||rfacttra_albaran|codtrans||S|"
             Text            =   "transpo"
             Top             =   1140
@@ -198,7 +317,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   1
             Left            =   2850
             MaskColor       =   &H00000000&
-            TabIndex        =   51
+            TabIndex        =   49
             ToolTipText     =   "Buscar concepto gasto"
             Top             =   1170
             Visible         =   0   'False
@@ -222,7 +341,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   9
             Left            =   7110
             MaxLength       =   30
-            TabIndex        =   50
+            TabIndex        =   48
             Tag             =   "Importe|N|N|||rfacttra_albaran|importe|###,##0.00||"
             Text            =   "Importe"
             Top             =   1170
@@ -247,7 +366,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   8
             Left            =   6345
             MaxLength       =   30
-            TabIndex        =   49
+            TabIndex        =   47
             Tag             =   "Kilos Netos|N|N|||rfacttra_albaran|kilosnet|###,##0||"
             Text            =   "K.Neto"
             Top             =   1170
@@ -272,7 +391,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   7
             Left            =   5160
             MaxLength       =   30
-            TabIndex        =   48
+            TabIndex        =   46
             Tag             =   "NumNotac|N|N|||rfacttra_albaran|numnotac|0000000|S|"
             Text            =   "numnotac"
             Top             =   1170
@@ -296,7 +415,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   6
             Left            =   4365
             MaxLength       =   25
-            TabIndex        =   47
+            TabIndex        =   45
             Tag             =   "Campo|N|N|||rfacttra_albaran|codcampo|00000000|N|"
             Text            =   "campo"
             Top             =   1170
@@ -321,7 +440,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   3
             Left            =   2295
             MaxLength       =   7
-            TabIndex        =   46
+            TabIndex        =   44
             Tag             =   "Albaran|N|N|||rfacttra_albaran|numalbar|0000000|S|"
             Text            =   "albaran"
             Top             =   1170
@@ -346,7 +465,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   4
             Left            =   2970
             MaxLength       =   10
-            TabIndex        =   45
+            TabIndex        =   43
             Tag             =   "Fecha Alb|F|N|||rfacttra_albaran|fecalbar|dd/mm/yyyy|S|"
             Text            =   "fecalbar"
             Top             =   1170
@@ -371,7 +490,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   0
             Left            =   315
             MaxLength       =   7
-            TabIndex        =   44
+            TabIndex        =   42
             Tag             =   "Tipo Movim.|T|N|||rfacttra_albaran|codtipom||S|"
             Text            =   "tipof"
             Top             =   1170
@@ -396,7 +515,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   1
             Left            =   1035
             MaxLength       =   7
-            TabIndex        =   43
+            TabIndex        =   41
             Tag             =   "Nº.Factura|N|N|||rfacttra_albaran|numfactu|0000000|S|"
             Text            =   "numfact"
             Top             =   1170
@@ -421,7 +540,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   2
             Left            =   1665
             MaxLength       =   10
-            TabIndex        =   42
+            TabIndex        =   40
             Tag             =   "Fecha Fact.|F|N|||rfacttra_albaran|fecfactu|dd/mm/yyyy|S|"
             Text            =   "FecFact"
             Top             =   1155
@@ -445,7 +564,7 @@ Begin VB.Form frmManFactTranspor
             Index           =   5
             Left            =   3645
             MaxLength       =   25
-            TabIndex        =   41
+            TabIndex        =   39
             Tag             =   "Variedad|N|N|||rfacttra_albaran|codvarie|000000||"
             Text            =   "variedad"
             Top             =   1170
@@ -456,7 +575,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   390
             Index           =   0
             Left            =   180
-            TabIndex        =   52
+            TabIndex        =   50
             Top             =   30
             Visible         =   0   'False
             Width           =   1110
@@ -486,7 +605,7 @@ Begin VB.Form frmManFactTranspor
             Bindings        =   "frmManFactTranspor.frx":00A9
             Height          =   3540
             Left            =   180
-            TabIndex        =   53
+            TabIndex        =   51
             Top             =   45
             Width           =   10125
             _ExtentX        =   17859
@@ -558,7 +677,7 @@ Begin VB.Form frmManFactTranspor
          Index           =   15
          Left            =   -74250
          MaxLength       =   10
-         TabIndex        =   64
+         TabIndex        =   62
          Tag             =   "Tipo Movimiento|T|S|||rfacttra|rectif_codtipom||N|"
          Top             =   1080
          Width           =   795
@@ -577,7 +696,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   11
          Left            =   -74550
-         TabIndex        =   61
+         TabIndex        =   59
          Top             =   840
          Width           =   2070
       End
@@ -595,7 +714,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   12
          Left            =   -69765
-         TabIndex        =   60
+         TabIndex        =   58
          Top             =   840
          Width           =   1050
       End
@@ -613,7 +732,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   13
          Left            =   -71130
-         TabIndex        =   59
+         TabIndex        =   57
          Top             =   840
          Width           =   1215
       End
@@ -640,7 +759,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   14
          Left            =   -74520
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   1590
          Width           =   780
       End
@@ -649,8 +768,8 @@ Begin VB.Form frmManFactTranspor
       BorderStyle     =   0  'None
       Height          =   2895
       Left            =   30
-      TabIndex        =   22
-      Top             =   630
+      TabIndex        =   20
+      Top             =   900
       Width           =   10555
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -666,9 +785,9 @@ Begin VB.Form frmManFactTranspor
          Index           =   0
          Left            =   150
          Style           =   2  'Dropdown List
-         TabIndex        =   62
+         TabIndex        =   60
          Top             =   240
-         Width           =   1890
+         Width           =   1980
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -676,7 +795,7 @@ Begin VB.Form frmManFactTranspor
          Index           =   10
          Left            =   300
          MaxLength       =   10
-         TabIndex        =   63
+         TabIndex        =   61
          Tag             =   "Tipo Movimiento|T|N|||rfacttra|codtipom||S|"
          Top             =   240
          Width           =   855
@@ -759,7 +878,7 @@ Begin VB.Form frmManFactTranspor
          TabIndex        =   10
          Tag             =   "Importe Iva|N|N|||rfacttra|imporiva|###,##0.00||"
          Top             =   1770
-         Width           =   1605
+         Width           =   1650
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -799,7 +918,7 @@ Begin VB.Form frmManFactTranspor
          Left            =   2475
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   30
+         TabIndex        =   28
          Text            =   "Text2"
          Top             =   1770
          Width           =   2235
@@ -865,7 +984,7 @@ Begin VB.Form frmManFactTranspor
          Tag             =   "Importe Retención|N|S|||rfacttra|impreten|#,##0.00||"
          Text            =   "123"
          Top             =   2340
-         Width           =   1605
+         Width           =   1650
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -904,7 +1023,7 @@ Begin VB.Form frmManFactTranspor
          TabIndex        =   3
          Tag             =   "Tipo IRPF|N|N|0|3|rfacttra|tipoirpf|0|N|"
          Top             =   855
-         Width           =   2130
+         Width           =   2400
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Contabilizado"
@@ -1024,7 +1143,7 @@ Begin VB.Form frmManFactTranspor
          Left            =   1485
          Locked          =   -1  'True
          MaxLength       =   40
-         TabIndex        =   23
+         TabIndex        =   21
          Text            =   "Text2"
          Top             =   855
          Width           =   3240
@@ -1043,7 +1162,7 @@ Begin VB.Form frmManFactTranspor
          ForeColor       =   &H00C00000&
          Height          =   1575
          Left            =   45
-         TabIndex        =   24
+         TabIndex        =   22
          Top             =   1245
          Width           =   10435
          Begin VB.Label Label1 
@@ -1060,7 +1179,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   255
             Index           =   10
             Left            =   180
-            TabIndex        =   38
+            TabIndex        =   36
             Top             =   270
             Width           =   1590
          End
@@ -1078,7 +1197,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   255
             Index           =   9
             Left            =   8085
-            TabIndex        =   37
+            TabIndex        =   35
             Top             =   270
             Width           =   1815
          End
@@ -1096,7 +1215,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   255
             Index           =   7
             Left            =   5535
-            TabIndex        =   36
+            TabIndex        =   34
             Top             =   270
             Width           =   1185
          End
@@ -1122,7 +1241,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   255
             Index           =   8
             Left            =   1800
-            TabIndex        =   35
+            TabIndex        =   33
             Top             =   270
             Width           =   330
          End
@@ -1139,7 +1258,7 @@ Begin VB.Form frmManFactTranspor
             EndProperty
             Height          =   255
             Left            =   4755
-            TabIndex        =   34
+            TabIndex        =   32
             Top             =   270
             Width           =   630
          End
@@ -1156,7 +1275,7 @@ Begin VB.Form frmManFactTranspor
             EndProperty
             Height          =   255
             Left            =   4755
-            TabIndex        =   33
+            TabIndex        =   31
             Top             =   855
             Width           =   630
          End
@@ -1173,7 +1292,7 @@ Begin VB.Form frmManFactTranspor
             EndProperty
             Height          =   255
             Left            =   5535
-            TabIndex        =   32
+            TabIndex        =   30
             Top             =   855
             Width           =   1350
          End
@@ -1191,7 +1310,7 @@ Begin VB.Form frmManFactTranspor
             Height          =   255
             Index           =   2
             Left            =   180
-            TabIndex        =   31
+            TabIndex        =   29
             Top             =   840
             Width           =   1860
          End
@@ -1210,7 +1329,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   3
          Left            =   4860
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   585
          Width           =   945
       End
@@ -1228,7 +1347,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   1
          Left            =   120
-         TabIndex        =   28
+         TabIndex        =   26
          Top             =   0
          Width           =   1350
       End
@@ -1246,7 +1365,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   29
          Left            =   3420
-         TabIndex        =   27
+         TabIndex        =   25
          Top             =   0
          Width           =   1050
       End
@@ -1264,7 +1383,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   0
          Left            =   120
-         TabIndex        =   26
+         TabIndex        =   24
          Top             =   585
          Width           =   1335
       End
@@ -1290,7 +1409,7 @@ Begin VB.Form frmManFactTranspor
          Height          =   255
          Index           =   28
          Left            =   2160
-         TabIndex        =   25
+         TabIndex        =   23
          Top             =   0
          Width           =   1125
       End
@@ -1309,7 +1428,7 @@ Begin VB.Form frmManFactTranspor
       Index           =   0
       Left            =   45
       TabIndex        =   18
-      Top             =   8040
+      Top             =   8400
       Width           =   2175
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1345,7 +1464,7 @@ Begin VB.Form frmManFactTranspor
       Height          =   375
       Left            =   9555
       TabIndex        =   16
-      Top             =   8130
+      Top             =   8490
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1362,97 +1481,8 @@ Begin VB.Form frmManFactTranspor
       Height          =   375
       Left            =   8370
       TabIndex        =   15
-      Top             =   8130
+      Top             =   8490
       Width           =   1035
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   20
-      Top             =   0
-      Width           =   10665
-      _ExtentX        =   18812
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   16
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-            Object.Width           =   1e-4
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Añadir"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
-      EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Left            =   7410
-         TabIndex        =   21
-         Top             =   120
-         Width           =   1215
-      End
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
@@ -1468,7 +1498,7 @@ Begin VB.Form frmManFactTranspor
       Height          =   375
       Left            =   9540
       TabIndex        =   17
-      Top             =   8145
+      Top             =   8505
       Visible         =   0   'False
       Width           =   1035
    End
@@ -1754,8 +1784,29 @@ Begin VB.Form frmManFactTranspor
       EndProperty
       _Version        =   393216
    End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   10185
+      TabIndex        =   69
+      Top             =   210
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
+   End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -2100,7 +2151,7 @@ Private Sub Desplazamiento(Index As Integer)
 'Botones de Desplazamiento de la Toolbar
 'Para desplazarse por los registros de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
 
@@ -2377,22 +2428,54 @@ Dim I As Integer
     Next kCampo
 
     ' ICONITOS DE LA BARRA
-    btnPrimero = 13
+'    btnPrimero = 13
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        .Buttons(1).Image = 1   'Botón Buscar
+'        .Buttons(2).Image = 2   'Botón Todos
+'        .Buttons(4).Image = 3   'Insertar
+'        .Buttons(5).Image = 4   'Modificar
+'        .Buttons(6).Image = 5   'Borrar
+'        .Buttons(8).Image = 10  'Impresión de factura
+'        .Buttons(10).Image = 11  'Salir
+'        .Buttons(btnPrimero).Image = 6  'Primero
+'        .Buttons(btnPrimero + 1).Image = 7 'Anterior
+'        .Buttons(btnPrimero + 2).Image = 8 'Siguiente
+'        .Buttons(btnPrimero + 3).Image = 9 'Último
+'    End With
+    
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        .Buttons(1).Image = 1   'Botón Buscar
-        .Buttons(2).Image = 2   'Botón Todos
-        .Buttons(4).Image = 3   'Insertar
-        .Buttons(5).Image = 4   'Modificar
-        .Buttons(6).Image = 5   'Borrar
-        .Buttons(8).Image = 10  'Impresión de factura
-        .Buttons(10).Image = 11  'Salir
-        .Buttons(btnPrimero).Image = 6  'Primero
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Siguiente
-        .Buttons(btnPrimero + 3).Image = 9 'Último
+        'l'1 i el 2 son separadors
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
+        'el 5 i el 6 son separadors
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
+    End With
+    
+    ' desplazamiento
+    With Me.ToolbarDes
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 6
+        .Buttons(2).Image = 7
+        .Buttons(3).Image = 8
+        .Buttons(4).Image = 9
+    End With
+    
+    ' La Ayuda
+    With Me.ToolbarAyuda
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 12
     End With
     
     ' ******* si n'hi han llínies *******
@@ -3118,8 +3201,9 @@ Dim b1 As Boolean
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Solo es para saber q hay + de 1 registro
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
-          
+'    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
+
         
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
@@ -3268,6 +3352,11 @@ Dim b1 As Boolean
     
 EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
+End Sub
+
+Private Sub DesplazamientoVisible(bol As Boolean)
+    FrameDesplazamiento.visible = bol
+    FrameDesplazamiento.Enabled = bol
 End Sub
 
 
@@ -3493,22 +3582,18 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 1  'Buscar
+        Case 5  'Buscar
             mnBuscar_Click
-        Case 2  'Todos
+        Case 6  'Todos
             BotonVerTodos
-        Case 4  'Añadir
+        Case 1  'Añadir
             mnNuevo_Click
-        Case 5  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 6  'Borrar
+        Case 3  'Borrar
             mnEliminar_Click
         Case 8  ' Impresion de albaran
             mnImprimir_Click
-        Case 10   'Salir
-            mnSalir_Click
-        Case btnPrimero To btnPrimero + 3 'Flechas Desplazamiento
-            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -3595,7 +3680,7 @@ Dim B As Boolean
 Dim Opcion As Byte
 Dim SQL As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     B = DataGrid5.Enabled
     Select Case vDataGrid.Name
@@ -3617,7 +3702,7 @@ Dim SQL As String
    
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -3625,7 +3710,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
     
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     Select Case vDataGrid.Name
          Case "DataGrid5" 'rfactsoc_albaran
@@ -3633,7 +3718,7 @@ Dim tots As String
             tots = "N||||0|;N||||0|;N||||0|;"
             tots = tots & "S|txtAux1(3)|T|Albaran|1100|;S|btnBuscar(1)|B|||;S|txtAux1(4)|T|Fecha|1400|;N||||0|;"
             tots = tots & "S|txtAux1(5)|T|Variedad|2300|;"
-            tots = tots & "S|txtAux1(6)|T|Campo|1300|;S|txtAux1(7)|T|Nota|1000|;"
+            tots = tots & "S|txtAux1(6)|T|Campo|1300|;S|txtAux1(7)|T|Nota|1050|;"
             tots = tots & "S|txtAux1(8)|T|K.Neto|1200|;"
             tots = tots & "S|txtAux1(9)|T|Importe|1200|;"
             
@@ -3648,12 +3733,16 @@ Dim tots As String
     vDataGrid.HoldFields
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
 
 
+
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
+End Sub
 
 Private Sub txtAux1_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux1(Index)
@@ -3896,22 +3985,22 @@ Dim I As Integer
 
         B = ((Modo = 2) Or (Modo = 0)) And (hcoCodMovim = "") 'Or (Modo = 5 And ModificaLineas = 0)
         'Buscar
-        Toolbar1.Buttons(1).Enabled = B
+        Toolbar1.Buttons(5).Enabled = B
         Me.mnBuscar.Enabled = B
         'Vore Tots
-        Toolbar1.Buttons(2).Enabled = B
+        Toolbar1.Buttons(6).Enabled = B
         Me.mnVerTodos.Enabled = B
         'Añadir
-        Toolbar1.Buttons(4).Enabled = B
+        Toolbar1.Buttons(1).Enabled = B
         Me.mnModificar.Enabled = B
         
         
         B = (Modo = 2 And Data1.Recordset.RecordCount > 0) And (hcoCodMovim = "") And Not (Check1(0).Value = 1) And Not (Check1(1).Value = 1)
         'Modificar
-        Toolbar1.Buttons(5).Enabled = B And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16
+        Toolbar1.Buttons(2).Enabled = B And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16
         Me.mnModificar.Enabled = B And vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16
         'eliminar
-        Toolbar1.Buttons(6).Enabled = B
+        Toolbar1.Buttons(3).Enabled = B
         Me.mnEliminar.Enabled = B
         'Impresión de albaran
         Toolbar1.Buttons(8).Enabled = (Modo = 2) And Data1.Recordset.RecordCount > 0
