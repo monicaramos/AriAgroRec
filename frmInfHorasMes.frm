@@ -1042,8 +1042,8 @@ Dim I As Integer
     
     '###Descomentar
 '    CommitConexion
-    H = 6870
-    W = 6660
+    H = 7410
+    W = 6795
     FrameHorasTrabajadasVisible True, H, W
     indFrame = 0
     tabla = "horas"
@@ -1058,7 +1058,7 @@ Dim I As Integer
         
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -1219,8 +1219,8 @@ Private Sub FrameHorasTrabajadasVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.FrameHorasTrabajadas.Top = -90
         Me.FrameHorasTrabajadas.Left = 0
-        Me.FrameHorasTrabajadas.Height = 6555 '6870
-        Me.FrameHorasTrabajadas.Width = 6660
+        Me.FrameHorasTrabajadas.Height = 7410 '6870
+        Me.FrameHorasTrabajadas.Width = 6795
         W = Me.FrameHorasTrabajadas.Width
         H = Me.FrameHorasTrabajadas.Height
     End If

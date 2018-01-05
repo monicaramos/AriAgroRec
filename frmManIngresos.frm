@@ -1246,7 +1246,9 @@ Dim Mens As String
         If B Then
             'comprobamos que el socio tenga algun campo de la variedad indicada para que luego se puedan incluir en la liquidacion
             If txtAux(0).Text <> "" And txtAux(1).Text <> "" And Modo <> 1 Then
-                SQL = "select count(*) from rcampos where codsocio = " & DBSet(txtAux(0).Text, "N") & " and codvarie = " & DBSet(txtAux(1).Text, "N")
+                SQL = "select count(*) from rcampos where codsocio = " & DBSet(txtAux(0).Text, "N") & " and (codvarie = " & DBSet(txtAux(1).Text, "N")
+                '[Monica]02/01/2017: faltaba añadir que sea una variedad relacionada
+                SQL = SQL & " or codvarie in (select codvarie from variedades_rel where codvarie1 = " & DBSet(txtAux(1).Text, "N") & "))"
                 If TotalRegistros(SQL) = 0 Then
                     MsgBox "El socio introducido no tiene ningún campo de esa variedad. Revise.", vbExclamation
                     PonerFoco txtAux(0)

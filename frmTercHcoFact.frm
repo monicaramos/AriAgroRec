@@ -46,9 +46,9 @@ Begin VB.Form frmTercHcoFact
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmTercHcoFact.frx":0A0E
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(0)=   "Frame2(1)"
       Tab(0).Control(1)=   "Text1(15)"
-      Tab(0).Control(2)=   "Frame2(1)"
+      Tab(0).Control(2)=   "Label1(11)"
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmTercHcoFact.frx":0A2A
@@ -2883,6 +2883,8 @@ Dim Indice As Byte
             PonerFoco Text1(Indice)
             Set frmFP = New frmComFpa
             frmFP.DatosADevolverBusqueda = "0|"
+            '[Monica]04/01/2018: la seccion se la pasamos para que inserte en la conta correspondiente
+            frmFP.Seccion = CStr(vParamAplic.Seccionhorto)
             frmFP.Show vbModal
             Set frmFP = Nothing
             

@@ -198,7 +198,6 @@ Begin VB.Form frmManFactSocios
       _ExtentY        =   7805
       _Version        =   393216
       Tabs            =   5
-      Tab             =   4
       TabsPerRow      =   5
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -212,10 +211,13 @@ Begin VB.Form frmManFactSocios
       EndProperty
       TabCaption(0)   =   "Variedad/Calidad"
       TabPicture(0)   =   "frmManFactSocios.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "FrameAnticipos"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Frame4"
+      Tab(0).Control(1).Enabled=   0   'False
       Tab(0).Control(2)=   "Frame3"
+      Tab(0).Control(2).Enabled=   0   'False
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Gastos a Pie"
       TabPicture(1)   =   "frmManFactSocios.frx":0028
@@ -226,19 +228,16 @@ Begin VB.Form frmManFactSocios
       TabPicture(2)   =   "frmManFactSocios.frx":0044
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAlbaranes"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       TabCaption(3)   =   "Rectificativa"
       TabPicture(3)   =   "frmManFactSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Frame6"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).ControlCount=   1
       TabCaption(4)   =   "Facturas Varias"
       TabPicture(4)   =   "frmManFactSocios.frx":007C
-      Tab(4).ControlEnabled=   -1  'True
+      Tab(4).ControlEnabled=   0   'False
       Tab(4).Control(0)=   "FrameFVarias"
-      Tab(4).Control(0).Enabled=   0   'False
       Tab(4).ControlCount=   1
       Begin VB.Frame Frame6 
          BorderStyle     =   0  'None
@@ -434,7 +433,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   3720
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   134
          Top             =   360
          Width           =   10390
@@ -788,7 +787,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2190
-         Left            =   -74955
+         Left            =   45
          TabIndex        =   80
          Top             =   360
          Width           =   10390
@@ -1902,7 +1901,7 @@ Begin VB.Form frmManFactSocios
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   1755
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   94
          Top             =   2520
          Width           =   10345
@@ -2252,26 +2251,35 @@ Begin VB.Form frmManFactSocios
       Begin VB.Frame FrameAnticipos 
          Caption         =   "Anticipos"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   1755
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   107
          Top             =   2520
          Visible         =   0   'False
-         Width           =   9345
+         Width           =   10345
          Begin VB.TextBox txtAux4 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   8
             Left            =   5685
@@ -2288,6 +2296,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   9
             Left            =   6195
@@ -2304,6 +2321,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   6
             Left            =   3585
@@ -2319,6 +2345,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   2
             Left            =   1515
@@ -2335,6 +2370,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   1
             Left            =   945
@@ -2351,6 +2395,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   0
             Left            =   495
@@ -2366,6 +2419,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   5
             Left            =   3105
@@ -2382,6 +2444,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   4
             Left            =   2445
@@ -2398,6 +2469,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   3
             Left            =   1965
@@ -2414,6 +2494,15 @@ Begin VB.Form frmManFactSocios
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   7
             Left            =   4035
@@ -2430,28 +2519,28 @@ Begin VB.Form frmManFactSocios
             Left            =   150
             TabIndex        =   118
             Top             =   270
-            Width           =   9105
-            _ExtentX        =   16060
+            Width           =   10105
+            _ExtentX        =   17833
             _ExtentY        =   2461
             _Version        =   393216
             AllowUpdate     =   0   'False
             AllowArrows     =   -1  'True
             ColumnHeaders   =   -1  'True
             HeadLines       =   1
-            RowHeight       =   15
+            RowHeight       =   19
             FormatLocked    =   -1  'True
             BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
-               Italic          =   0   'False
+               Italic          =   -1  'True
                Strikethrough   =   0   'False
             EndProperty
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
@@ -6277,7 +6366,7 @@ Dim B As Boolean
 Dim Opcion As Byte
 Dim SQL As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     Select Case vDataGrid.Name
@@ -6309,7 +6398,7 @@ Dim SQL As String
    
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -6317,7 +6406,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
     
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     Select Case vDataGrid.Name
         Case "DataGrid1" 'rfactsoc_calidad
@@ -6352,12 +6441,12 @@ Dim tots As String
          Case "DataGrid3" 'rfactsoc_anticipos
 '           SQL = "SELECT codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codvarieanti,nomvarie,codcampoanti,baseimpo "
             tots = "N||||0|;N||||0|;N||||0|;"
-            tots = tots & "S|txtAux4(3)|T|Tipo Factura|1300|;"
-            tots = tots & "S|txtAux4(4)|T|Factura|700|;"
-            tots = tots & "S|txtAux4(5)|T|F.Factura|1000|;"
+            tots = tots & "S|txtAux4(3)|T|Tipo Factura|1400|;"
+            tots = tots & "S|txtAux4(4)|T|Factura|1000|;"
+            tots = tots & "S|txtAux4(5)|T|F.Factura|1200|;"
             tots = tots & "S|txtAux4(6)|T|Codigo|900|;"
             tots = tots & "S|txtAux4(7)|T|Variedad|2100|;"
-            tots = tots & "S|txtAux4(8)|T|Campo|800|;"
+            tots = tots & "S|txtAux4(8)|T|Campo|1200|;"
             tots = tots & "S|txtAux4(9)|T|Importe|1700|;"
             arregla tots, DataGrid3, Me, 350
             
@@ -6397,7 +6486,7 @@ Dim tots As String
     vDataGrid.HoldFields
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 

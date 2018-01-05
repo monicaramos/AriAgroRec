@@ -4939,6 +4939,105 @@ Public Sub AyudaIncidenciasOrdenesRecogida(frmBas As frmBasico2, Optional CodAct
 End Sub
 
 
+Public Sub AyudaFVarClientes(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Seccion|2795|;S|txtAux(2)|T|Tipo|800|;S|txtAux(3)|T|Factura|1000|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Fecha|1500|;S|txtAux(5)|T|Socio|1000|;S|txtAux(6)|T|Cliente|1000|;"
+    
+    frmBas.CadenaConsulta = "SELECT fvarcabfact.codsecci, rseccion.nomsecci, fvarcabfact.codtipom, fvarcabfact.numfactu, fvarcabfact.fecfactu, "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " fvarcabfact.codsocio, fvarcabfact.codclien "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM fvarcabfact inner join rseccion on fvarcabfact.codsecci = rseccion.codsecci "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Seccion|N|N|0|999|fvarcabfact|codsecci|000||"
+    frmBas.Tag2 = "Nombre|T|N|||clientes|nomclien|||"
+    frmBas.Tag3 = "Tipo Movimiento|T|N|||fvarcabfact|codtipom||S|"
+    frmBas.Tag4 = "Nº de Factura|N|S|0|9999999|fvarcabfact|numfactu|0000000|S|"
+    frmBas.Tag5 = "Fecha Factura|F|N|||fvarcabfact|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag6 = "Cod.Socio|N|S|||fvarcabfact|codsocio|000000||"
+    frmBas.Tag7 = "Cod.Cliente|N|S|||fvarcabfact|codclien|000000||"
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 40
+    frmBas.Maxlen3 = 3
+    frmBas.Maxlen4 = 7
+    frmBas.Maxlen5 = 10
+    frmBas.Maxlen6 = 6
+    frmBas.Maxlen7 = 6
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "fvarcabfact inner join rseccion"
+    frmBas.CampoCP = "codclien"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Facturas Varias"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|2|3|4|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2000
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
+
+
+
+Public Sub AyudaFVarProveedores(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Seccion|2795|;S|txtAux(2)|T|Tipo|800|;S|txtAux(3)|T|Factura|1000|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Fecha|1500|;S|txtAux(5)|T|Socio|1000|;S|txtAux(6)|T|Nombre|2500|;"
+    
+    frmBas.CadenaConsulta = "SELECT fvarcabfactpro.codsecci, rseccion.nomsecci, fvarcabfactpro.codtipom, fvarcabfactpro.numfactu, fvarcabfactpro.fecfactu, "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " fvarcabfactpro.codsocio, rsocios.nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM (fvarcabfactpro inner join rseccion on fvarcabfactpro.codsecci = rseccion.codsecci) inner join rsocios on fvarcabfactpro.codsocio = rsocios.codsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Seccion|N|N|0|999|fvarcabfactpro|codsecci|000||"
+    frmBas.Tag2 = "Nombre|T|N|||clientes|nomclien|||"
+    frmBas.Tag3 = "Tipo Movimiento|T|N|||fvarcabfactpro|codtipom||S|"
+    frmBas.Tag4 = "Nº de Factura|N|S|0|9999999|fvarcabfactpro|numfactu|0000000|S|"
+    frmBas.Tag5 = "Fecha Factura|F|N|||fvarcabfactpro|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag6 = "Socio|N|S|||fvarcabfactpro|codsocio|000000||"
+    frmBas.Tag7 = "Nombre|T|S|||rsocios|nomsocio|||"
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 30
+    frmBas.Maxlen3 = 3
+    frmBas.Maxlen4 = 7
+    frmBas.Maxlen5 = 10
+    frmBas.Maxlen6 = 6
+    frmBas.Maxlen7 = 40
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "(fvarcabfactpro inner join rseccion)"
+    frmBas.CampoCP = "codsecci"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Facturas Varias Proveedor"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|2|3|4|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 3500
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
+
+
+
+
+
+
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant

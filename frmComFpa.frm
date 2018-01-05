@@ -140,7 +140,7 @@ Begin VB.Form frmComFpa
       Left            =   3285
       MaxLength       =   3
       TabIndex        =   3
-      Tag             =   "Numero Vto|N|N|||forpago|numerove|##0||"
+      Tag             =   "Numero Vto|N|N|1|999|forpago|numerove|##0||"
       Text            =   "Vto"
       Top             =   4950
       Width           =   1395
@@ -521,6 +521,8 @@ Public NuevoCodigo As String
 Public CodigoActual As String
 Public DeConsulta As Boolean
 
+Public Seccion As String
+
 Private CadenaConsulta As String
 Private CadB As String
 
@@ -541,28 +543,28 @@ Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres 
 Dim I As Integer
 
 Private Sub PonerModo(vModo)
-Dim B As Boolean
+Dim b As Boolean
 
     Modo = vModo
     
-    B = (Modo = 2)
-    If B Then
+    b = (Modo = 2)
+    If b Then
         PonerContRegIndicador lblIndicador, Me.adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
     For I = 0 To txtaux.Count - 1
-        txtaux(I).visible = Not B
+        txtaux(I).visible = Not b
     Next I
-    Combo1(0).visible = Not B
+    Combo1(0).visible = Not b
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
-    DataGrid1.Enabled = B
+    cmdAceptar.visible = Not b
+    cmdCancelar.visible = Not b
+    DataGrid1.Enabled = b
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -575,30 +577,30 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim B As Boolean
+Dim b As Boolean
 
-    B = (Modo = 2)
+    b = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = B
-    Me.mnBuscar.Enabled = B
+    Toolbar1.Buttons(5).Enabled = b
+    Me.mnBuscar.Enabled = b
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = B
-    Me.mnVerTodos.Enabled = B
+    Toolbar1.Buttons(6).Enabled = b
+    Me.mnVerTodos.Enabled = b
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
-    Me.mnNuevo.Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
+    Me.mnNuevo.Enabled = b And Not DeConsulta
     
-    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = b
+    Me.mnModificar.Enabled = b
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = b
+    Me.mnEliminar.Enabled = b
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
+    Toolbar1.Buttons(8).Enabled = b
+    Me.mnImprimir.Enabled = b
     
 End Sub
 
@@ -719,7 +721,9 @@ Dim temp As Boolean
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
 '    If Not SepuedeBorrar Then Exit Sub
-        
+    
+    If Not PuedeModificarFPenContab Then Exit Sub
+    
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
     'El registre de codi 0 no es pot Modificar ni Eliminar
@@ -779,7 +783,9 @@ Private Sub cmdAceptar_Click()
             
         Case 3 'INSERTAR
             If DatosOK Then
-                If InsertarDesdeForm(Me) Then
+                'If InsertarDesdeForm(Me) Then
+                '[Monica]04/01/2018: no lo hacia como en comercial, ahora inserta en la contabilidad si no existe la forma de pago
+                If InsertarRegistro Then
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
@@ -797,7 +803,9 @@ Private Sub cmdAceptar_Click()
             
         Case 4 'MODIFICAR
             If DatosOK Then
-                If ModificaDesdeFormulario(Me) Then
+                'If ModificaDesdeFormulario(Me) Then
+                '[Monica]04/01/2018: no lo hacia como en comercial, ahora modifica en la contabilidad si no existe la forma de pago
+                If ModificaRegistro Then
                     TerminaBloquear
                     I = adodc1.Recordset.Fields(0)
                     PonerModo 2
@@ -815,6 +823,165 @@ Private Sub cmdAceptar_Click()
             End If
     End Select
 End Sub
+
+
+Private Function ModificaRegistro() As Boolean
+Dim b As Boolean
+Dim MenError As String
+Dim SQL As String
+Dim vWhere As String
+Dim vSeccion As CSeccion
+
+    On Error GoTo EModificarCab
+
+    conn.BeginTrans
+    b = ModificaDesdeFormulario(Me)
+    
+    'abrimos la contabilidad de la seccion que me pasan
+    If ComprobarCero(Seccion) <> "0" Then
+    
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Seccion) Then
+            If vSeccion.AbrirConta Then
+        
+                ConnConta.BeginTrans
+    
+                If b Then
+                    If vParamAplic.ContabilidadNueva Then
+                        SQL = "update formapago set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & ", numerove = " & DBSet(txtaux(2).Text, "N")
+                        SQL = SQL & ", primerve = " & DBSet(txtaux(3).Text, "N")
+                        SQL = SQL & ", restoven = " & DBSet(txtaux(4).Text, "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                    Else
+                        SQL = "update sforpa set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                    End If
+                    ConnConta.Execute SQL
+                End If
+            End If
+        End If
+        
+        If Not vSeccion Is Nothing Then
+            vSeccion.CerrarConta
+            Set vSeccion = Nothing
+        End If
+        
+    End If
+
+EModificarCab:
+    If Err.Number <> 0 Then
+        MenError = "Modificando Forma de Pago." & vbCrLf & "----------------------------" & vbCrLf & MenError
+        MuestraError Err.Number, MenError, Err.Description
+        b = False
+    End If
+    If b Then
+        ModificaRegistro = True
+        conn.CommitTrans
+        ConnConta.CommitTrans
+    Else
+        ModificaRegistro = False
+        conn.RollbackTrans
+        ConnConta.RollbackTrans
+    End If
+End Function
+
+
+
+
+Private Function InsertarRegistro() As Boolean
+Dim MenError As String
+Dim bol As Boolean, Existe As Boolean
+Dim cambiaSQL As Boolean
+Dim devuelve As String
+Dim vSQL As String
+Dim SQL As String
+Dim vSeccion As CSeccion
+
+    On Error GoTo EInsertar
+    
+    bol = True
+    
+    vSQL = CadenaInsertarDesdeForm(Me)
+    
+    'Aqui empieza transaccion
+    conn.BeginTrans
+    MenError = "Error al insertar en la tabla Formas de Pago (forpago)."
+    conn.Execute vSQL, , adCmdText
+    
+    
+    'abrimos la contabilidad de la seccion que me pasan
+    If ComprobarCero(Seccion) <> "0" Then
+    
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Seccion) Then
+            If vSeccion.AbrirConta Then
+        
+                ConnConta.BeginTrans
+                
+                If vParamAplic.ContabilidadNueva Then
+                    SQL = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtaux(0).Text, "N")
+                    
+                    If SQL = "" Then
+                        SQL = "insert into formapago (codforpa, nomforpa, tipforpa, numerove, primerve, restoven) values (" & DBSet(txtaux(0).Text, "N") & ","
+                        SQL = SQL & DBSet(txtaux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ","
+                        SQL = SQL & DBSet(txtaux(2).Text, "N") & "," & DBSet(txtaux(3).Text, "N") & "," & DBSet(txtaux(4).Text, "N") & ")"
+                        
+                        ConnConta.Execute SQL
+                    Else
+                        SQL = "update formapago set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & ", numerove = " & DBSet(txtaux(2).Text, "N")
+                        SQL = SQL & ", primerve = " & DBSet(txtaux(3).Text, "N")
+                        SQL = SQL & ", restoven = " & DBSet(txtaux(4).Text, "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        
+                        ConnConta.Execute SQL
+                    End If
+                
+                Else
+                    SQL = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtaux(0).Text, "N")
+                    If SQL = "" Then
+                        SQL = "insert into sforpa (codforpa, nomforpa, tipforpa) values (" & DBSet(txtaux(0).Text, "N") & ","
+                        SQL = SQL & DBSet(txtaux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ")"
+                        
+                        ConnConta.Execute SQL
+                    Else
+                        SQL = "update sforpa set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        
+                        ConnConta.Execute SQL
+                    End If
+                End If
+                
+            End If
+            
+        End If
+                
+        If Not vSeccion Is Nothing Then
+            vSeccion.CerrarConta
+            Set vSeccion = Nothing
+        End If
+        
+    End If
+        
+EInsertar:
+    If Err.Number <> 0 Then
+        MenError = "Insertando Forma de Pago." & vbCrLf & "----------------------------" & vbCrLf & MenError
+        MuestraError Err.Number, MenError, Err.Description
+        bol = False
+    End If
+    If bol Then
+        conn.CommitTrans
+        ConnConta.CommitTrans
+        InsertarRegistro = True
+    Else
+        conn.RollbackTrans
+        ConnConta.RollbackTrans
+        InsertarRegistro = False
+    End If
+End Function
+
+
 
 Private Sub cmdCancelar_Click()
     On Error Resume Next
@@ -1057,27 +1224,33 @@ Private Sub txtAux_LostFocus(Index As Integer)
             PonerFormatoEntero txtaux(Index)
         Case 1
             txtaux(Index).Text = UCase(txtaux(Index).Text)
-        
-            
     End Select
     
 End Sub
 
 Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim B As Boolean
+Dim b As Boolean
 Dim SQL As String
 Dim Mens As String
 
 
-    B = CompForm(Me)
-    If Not B Then Exit Function
+    b = CompForm(Me)
+    If Not b Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         If ExisteCP(txtaux(0)) Then B = False
+         If ExisteCP(txtaux(0)) Then b = False
     End If
     
-    DatosOK = B
+    'Comprobaciones de TESORERIA
+    If Modo = 4 Then
+        'Estoy modificando
+        If Not PuedeModificarFPenContab Then b = False
+    End If
+    
+    
+    
+    DatosOK = b
 End Function
 
 Private Sub CargaCombo()
@@ -1174,4 +1347,66 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 
 End Sub
+
+
+Private Function PuedeModificarFPenContab() As Boolean
+Dim cad As String
+Dim vSeccion As CSeccion
+    
+    
+    PuedeModificarFPenContab = False
+    Set miRsAux = New ADODB.Recordset
+
+    If ComprobarCero(Seccion) <> "0" Then
+    
+        Set vSeccion = New CSeccion
+        If vSeccion.LeerDatos(Seccion) Then
+            If vSeccion.AbrirConta Then
+        
+                NumRegElim = 0
+                If vParamAplic.ContabilidadNueva Then
+                    cad = "Select count(*) from cobros where codforpa=" & txtaux(0).Text
+                Else
+                    cad = "Select count(*) from scobro where codforpa=" & txtaux(0).Text
+                End If
+                
+                miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+                If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
+                miRsAux.Close
+                
+                
+                If vParamAplic.ContabilidadNueva Then
+                    cad = "Select count(*) from pagos where codforpa=" & txtaux(0).Text
+                Else
+                    cad = "Select count(*) from spagop where codforpa=" & txtaux(0).Text
+                End If
+                
+                
+                miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
+                If Not miRsAux.EOF Then NumRegElim = NumRegElim + DBLet(miRsAux.Fields(0), "N")
+                miRsAux.Close
+                
+                
+                If NumRegElim > 0 Then
+                    If Modo = 4 Then
+                        If MsgBox("Existen " & NumRegElim & " vencimientos en la tesoreria con esa forma de pago. ¿Continuar con el proceso?", vbQuestion + vbYesNo) = vbNo Then Exit Function
+                    Else
+                        'NO DEJO CONTINUAR
+                        MsgBox "Existen " & NumRegElim & " vencimientos en la tesoreria con esa forma de pago", vbExclamation
+                        Exit Function
+                    End If
+                End If
+            End If
+        End If
+        
+        If Not vSeccion Is Nothing Then
+            vSeccion.CerrarConta
+            Set vSeccion = Nothing
+        End If
+        
+    End If
+    'Si llega aqui puede seguir
+    PuedeModificarFPenContab = True
+End Function
+
 
