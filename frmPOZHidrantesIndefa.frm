@@ -778,17 +778,18 @@ Begin VB.Form frmPOZHidrantesIndefa
          _ExtentY        =   9181
          _Version        =   393216
          Tabs            =   5
-         Tab             =   1
+         Tab             =   4
          TabsPerRow      =   5
          TabHeight       =   520
          TabCaption(0)   =   "Contadores"
          TabPicture(0)   =   "frmPOZHidrantesIndefa.frx":028C
          Tab(0).ControlEnabled=   0   'False
          Tab(0).Control(0)=   "FrameAux2"
+         Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Hidrantes"
          TabPicture(1)   =   "frmPOZHidrantesIndefa.frx":02A8
-         Tab(1).ControlEnabled=   -1  'True
+         Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "FrameAux4"
          Tab(1).Control(0).Enabled=   0   'False
          Tab(1).ControlCount=   1
@@ -796,21 +797,24 @@ Begin VB.Form frmPOZHidrantesIndefa
          TabPicture(2)   =   "frmPOZHidrantesIndefa.frx":02C4
          Tab(2).ControlEnabled=   0   'False
          Tab(2).Control(0)=   "FrameAux5"
+         Tab(2).Control(0).Enabled=   0   'False
          Tab(2).ControlCount=   1
          TabCaption(3)   =   "Ventosas"
          TabPicture(3)   =   "frmPOZHidrantesIndefa.frx":02E0
          Tab(3).ControlEnabled=   0   'False
          Tab(3).Control(0)=   "FrameAux6"
+         Tab(3).Control(0).Enabled=   0   'False
          Tab(3).ControlCount=   1
          TabCaption(4)   =   "Desagües"
          TabPicture(4)   =   "frmPOZHidrantesIndefa.frx":02FC
-         Tab(4).ControlEnabled=   0   'False
+         Tab(4).ControlEnabled=   -1  'True
          Tab(4).Control(0)=   "FrameAux3"
+         Tab(4).Control(0).Enabled=   0   'False
          Tab(4).ControlCount=   1
          Begin VB.Frame FrameAux3 
             BorderStyle     =   0  'None
             Height          =   4695
-            Left            =   -74880
+            Left            =   120
             TabIndex        =   202
             Top             =   420
             Width           =   14280
@@ -1901,7 +1905,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          Begin VB.Frame FrameAux4 
             BorderStyle     =   0  'None
             Height          =   4560
-            Left            =   120
+            Left            =   -74880
             TabIndex        =   121
             Top             =   420
             Width           =   14280
@@ -3994,17 +3998,17 @@ Dim B As Boolean
     FrameAux4.Enabled = (Modo = 2)
     FrameAux5.Enabled = (Modo = 2)
     FrameAux6.Enabled = (Modo = 2)
-    For I = 0 To txtAux1.Count - 1
-        txtAux1(I).Locked = True
+    For I = 0 To txtaux1.Count - 1
+        txtaux1(I).Locked = True
     Next I
-    For I = 0 To txtAux5.Count - 1
-        txtAux5(I).Locked = True
+    For I = 0 To txtaux5.Count - 1
+        txtaux5(I).Locked = True
     Next I
     For I = 0 To txtaux6.Count - 1
         txtaux6(I).Locked = True
     Next I
-    For I = 0 To txtaux7.Count - 1
-        txtaux7(I).Locked = True
+    For I = 0 To txtAux7.Count - 1
+        txtAux7(I).Locked = True
     Next I
     'Campos Nº entrada bloqueado y en azul
 '    BloquearTxt Text1(0), Modo = 4
@@ -4821,7 +4825,7 @@ Dim I As Integer
 
     ' Limpiamos los campos de indefa
     For I = 0 To 19
-        txtAux1(I).Text = ""
+        txtaux1(I).Text = ""
     Next I
     
     Contador = Text1(0).Text
@@ -4843,10 +4847,10 @@ Dim I As Integer
     
     If Not Rs.EOF Then
         For I = 0 To 19
-            txtAux1(I).Text = DBLet(Rs.Fields(I).Value)
+            txtaux1(I).Text = DBLet(Rs.Fields(I).Value)
         Next I
     End If
-    If txtAux1(5).Text <> "" Then txtAux1(5).Text = Format(txtAux1(5).Text, "###,##0.00")
+    If txtaux1(5).Text <> "" Then txtaux1(5).Text = Format(txtaux1(5).Text, "###,##0.00")
     Set Rs = Nothing
     
 EPosarDescripcions:
@@ -4866,8 +4870,8 @@ Dim I As Integer
 
 
     ' Limpiamos los campos de indefa
-    For I = 0 To txtaux8.Count - 1
-        txtaux8(I).Text = ""
+    For I = 0 To txtAux8.Count - 1
+        txtAux8(I).Text = ""
     Next I
     
     Contador = Text1(0).Text
@@ -4886,8 +4890,8 @@ Dim I As Integer
     Me.Toolbar3(3).Tag = ""
     
     If Not Rs.EOF Then
-        For I = 0 To txtaux8.Count - 1
-            txtaux8(I).Text = DBLet(Rs.Fields(I).Value)
+        For I = 0 To txtAux8.Count - 1
+            txtAux8(I).Text = DBLet(Rs.Fields(I).Value)
         Next I
     
         If Dir(App.Path & "\FotosHts\" & Rs!foto_desague) <> "" Then
@@ -4925,8 +4929,8 @@ Dim vTabAnt As Integer
 
 
     ' Limpiamos los campos de indefa
-    For I = 0 To txtAux5.Count - 1
-        txtAux5(I).Text = ""
+    For I = 0 To txtaux5.Count - 1
+        txtaux5(I).Text = ""
     Next I
     
     Contador = Text1(0).Text
@@ -4950,8 +4954,8 @@ Dim vTabAnt As Integer
     
     If Not Rs.EOF Then
     
-        For I = 0 To txtAux5.Count - 1
-            txtAux5(I).Text = DBLet(Rs.Fields(I).Value)
+        For I = 0 To txtaux5.Count - 1
+            txtaux5(I).Text = DBLet(Rs.Fields(I).Value)
         Next I
         If Dir(App.Path & "\FotosHts\" & Rs!foto1 & ".jpg") <> "" Then
             Me.Toolbar3(0).Tag = App.Path & "\FotosHts\" & Rs!foto2 & ".jpg"
@@ -5061,8 +5065,8 @@ Dim I As Integer
 
 
     ' Limpiamos los campos de indefa
-    For I = 0 To txtaux7.Count - 1
-        txtaux7(I).Text = ""
+    For I = 0 To txtAux7.Count - 1
+        txtAux7(I).Text = ""
     Next I
     
     Contador = Text1(0).Text
@@ -5081,8 +5085,8 @@ Dim I As Integer
     Me.Toolbar3(7).Tag = ""
     
     If Not Rs.EOF Then
-        For I = 0 To txtaux7.Count - 1
-            txtaux7(I).Text = DBLet(Rs.Fields(I).Value)
+        For I = 0 To txtAux7.Count - 1
+            txtAux7(I).Text = DBLet(Rs.Fields(I).Value)
         Next I
         
         If InStr(1, Rs!foto_ventosa, "http") <> 0 Then
@@ -6963,7 +6967,7 @@ Dim SQL As String
                 Direccion = Replace(vParamAplic.SigPac, "NUMOID", DBLet(Rs!numeroid))
             End If
         Else
-            If txtAux1(3).Text <> "" And txtAux1(4).Text <> "" Then
+            If txtaux1(3).Text <> "" And txtaux1(4).Text <> "" Then
 '                Sql = "select codparti, recintos from rcampos where codcampo = " & DBSet(Text1(18).Text, "N")
 '
 '                Set Rs = New ADODB.Recordset
@@ -6979,13 +6983,13 @@ Dim SQL As String
                         Municipio = DevuelveDesdeBDNew(cAgro, "rpueblos", "codsigpa", "codpobla", Pobla, "T")
                         Direccion = Replace(vParamAplic.SigPac, "[PR]", Mid(Pobla, 1, 2))
                         Direccion = Replace(Direccion, "[MN]", CInt(Municipio))
-                        Direccion = Replace(Direccion, "[PL]", CInt(ComprobarCero(txtAux1(3).Text)))
+                        Direccion = Replace(Direccion, "[PL]", CInt(ComprobarCero(txtaux1(3).Text)))
                         
-                        If InStr(txtAux1(14).Text, ",") Then
+                        If InStr(txtaux1(14).Text, ",") Then
                             'cogemos unicamente la primera parcela
-                            Direccion = Replace(Direccion, "[PC]", CInt(ComprobarCero(Mid(txtAux1(4).Text, 1, InStr(txtAux1(4).Text, ",") - 1))))
+                            Direccion = Replace(Direccion, "[PC]", CInt(ComprobarCero(Mid(txtaux1(4).Text, 1, InStr(txtaux1(4).Text, ",") - 1))))
                         Else
-                            Direccion = Replace(Direccion, "[PC]", CInt(ComprobarCero(txtAux1(4).Text)))
+                            Direccion = Replace(Direccion, "[PC]", CInt(ComprobarCero(txtaux1(4).Text)))
                         End If
                         Direccion = Replace(Direccion, "[RC]", 1) 'CInt(ComprobarCero(Rs!recintos)))
                     End If

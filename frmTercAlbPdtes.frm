@@ -6,13 +6,13 @@ Begin VB.Form frmTercAlbPdtes
    ClientHeight    =   5805
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6840
+   ClientWidth     =   7095
    Icon            =   "frmTercAlbPdtes.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   5805
-   ScaleWidth      =   6840
+   ScaleWidth      =   7095
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -24,174 +24,318 @@ Begin VB.Form frmTercAlbPdtes
    End
    Begin VB.Frame FrameCobros 
       Height          =   5535
-      Left            =   120
+      Left            =   90
       TabIndex        =   11
       Top             =   120
-      Width           =   6555
+      Width           =   6825
       Begin VB.CheckBox Check2 
          Caption         =   "Agrupado por Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   3960
          TabIndex        =   8
-         Top             =   4440
-         Width           =   2235
+         Top             =   4530
+         Width           =   2640
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Incluir Entradas Socios"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   3960
          TabIndex        =   7
-         Top             =   4110
-         Width           =   2235
+         Top             =   4155
+         Width           =   2640
       End
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          ItemData        =   "frmTercAlbPdtes.frx":000C
-         Left            =   1830
+         Left            =   1845
          List            =   "frmTercAlbPdtes.frx":000E
          Style           =   2  'Dropdown List
          TabIndex        =   6
          Tag             =   "Tipo Parcela|N|N|0|1|rcampos|tipoparc||N|"
-         Top             =   4140
+         Top             =   4410
          Width           =   1845
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
          Left            =   2730
          Locked          =   -1  'True
          TabIndex        =   21
          Text            =   "Text5"
          Top             =   3585
-         Width           =   3135
+         Width           =   3810
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
          Left            =   2730
          Locked          =   -1  'True
          TabIndex        =   20
          Text            =   "Text5"
          Top             =   3210
-         Width           =   3135
+         Width           =   3810
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
          Left            =   1845
          MaxLength       =   6
          TabIndex        =   5
          Top             =   3600
-         Width           =   830
+         Width           =   870
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
          Left            =   1830
          MaxLength       =   6
          TabIndex        =   4
          Top             =   3210
-         Width           =   830
+         Width           =   870
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
          Left            =   1845
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   1605
-         Width           =   1050
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   1845
          MaxLength       =   10
          TabIndex        =   0
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   1245
-         Width           =   1050
+         Width           =   1350
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   4905
+         Left            =   5490
          TabIndex        =   10
          Top             =   4905
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3720
+         Left            =   4305
          TabIndex        =   9
          Top             =   4905
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   1845
          MaxLength       =   6
          TabIndex        =   2
          Top             =   2190
-         Width           =   830
+         Width           =   870
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   1845
          MaxLength       =   6
          TabIndex        =   3
          Top             =   2565
-         Width           =   830
+         Width           =   870
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   2745
          Locked          =   -1  'True
          TabIndex        =   13
          Text            =   "Text5"
          Top             =   2190
-         Width           =   3135
+         Width           =   3810
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   2745
          Locked          =   -1  'True
          TabIndex        =   12
          Text            =   "Text5"
          Top             =   2565
-         Width           =   3135
+         Width           =   3810
       End
       Begin VB.Label Label2 
          AutoSize        =   -1  'True
          Caption         =   "Tipo de Informe"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   36
-         Left            =   600
+         Left            =   510
          TabIndex        =   26
          Top             =   4140
-         Width           =   1110
+         Width           =   1560
       End
       Begin VB.Label Label1 
          Caption         =   "Albaranes de Terceros"
@@ -206,7 +350,7 @@ Begin VB.Form frmTercAlbPdtes
          EndProperty
          ForeColor       =   &H00800000&
          Height          =   345
-         Left            =   540
+         Left            =   495
          TabIndex        =   25
          Top             =   390
          Width           =   4680
@@ -235,8 +379,8 @@ Begin VB.Form frmTercAlbPdtes
          AutoSize        =   -1  'True
          Caption         =   "Variedad"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -244,58 +388,103 @@ Begin VB.Form frmTercAlbPdtes
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   2
-         Left            =   585
+         Left            =   510
          TabIndex        =   24
          Top             =   2970
-         Width           =   630
+         Width           =   855
       End
       Begin VB.Label Label4 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   1
-         Left            =   945
+         Left            =   855
          TabIndex        =   23
          Top             =   3585
-         Width           =   420
+         Width           =   600
       End
       Begin VB.Label Label4 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   0
-         Left            =   945
+         Left            =   855
          TabIndex        =   22
          Top             =   3210
-         Width           =   465
+         Width           =   645
       End
       Begin VB.Label Label4 
          Caption         =   "Fecha Albarán"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   16
-         Left            =   600
+         Left            =   510
          TabIndex        =   19
          Top             =   945
          Width           =   1815
       End
       Begin VB.Label Label4 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   15
-         Left            =   960
+         Left            =   870
          TabIndex        =   18
          Top             =   1245
-         Width           =   465
+         Width           =   645
       End
       Begin VB.Label Label4 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   14
-         Left            =   960
+         Left            =   870
          TabIndex        =   17
          Top             =   1605
-         Width           =   420
+         Width           =   600
       End
       Begin VB.Image imgFec 
          Height          =   240
@@ -317,28 +506,46 @@ Begin VB.Form frmTercAlbPdtes
       End
       Begin VB.Label Label4 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   13
-         Left            =   960
+         Left            =   870
          TabIndex        =   16
          Top             =   2190
-         Width           =   465
+         Width           =   645
       End
       Begin VB.Label Label4 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   12
-         Left            =   960
+         Left            =   870
          TabIndex        =   15
          Top             =   2565
-         Width           =   420
+         Width           =   600
       End
       Begin VB.Label Label4 
          AutoSize        =   -1  'True
          Caption         =   "Socio"
          BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   400
             Underline       =   0   'False
@@ -346,12 +553,12 @@ Begin VB.Form frmTercAlbPdtes
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   195
+         Height          =   240
          Index           =   11
-         Left            =   600
+         Left            =   510
          TabIndex        =   14
          Top             =   1950
-         Width           =   375
+         Width           =   540
       End
       Begin VB.Image imgBuscar 
          Height          =   240
@@ -417,7 +624,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -438,7 +645,7 @@ Private Sub cmdAceptar_Click()
 Dim cDesde As String, cHasta As String 'cadena codigo Desde/Hasta
 Dim nDesde As String, nHasta As String 'cadena Descripcion Desde/Hasta
 Dim cadTabla As String, cOrden As String
-Dim i As Byte
+Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
@@ -465,8 +672,8 @@ InicializarVbles
     
     
     'D/H Socio Tercero
-    cDesde = Trim(txtcodigo(0).Text)
-    cHasta = Trim(txtcodigo(1).Text)
+    cDesde = Trim(txtCodigo(0).Text)
+    cHasta = Trim(txtCodigo(1).Text)
     nDesde = txtNombre(0).Text
     nHasta = txtNombre(1).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -477,8 +684,8 @@ InicializarVbles
     End If
     
     'D/H Variedad
-    cDesde = Trim(txtcodigo(4).Text)
-    cHasta = Trim(txtcodigo(5).Text)
+    cDesde = Trim(txtCodigo(4).Text)
+    cHasta = Trim(txtCodigo(5).Text)
     nDesde = txtNombre(4).Text
     nHasta = txtNombre(5).Text
     If Not (cDesde = "" And cHasta = "") Then
@@ -489,8 +696,8 @@ InicializarVbles
     End If
     
     'D/H Fecha albaran
-    cDesde = Trim(txtcodigo(2).Text)
-    cHasta = Trim(txtcodigo(3).Text)
+    cDesde = Trim(txtCodigo(2).Text)
+    cHasta = Trim(txtCodigo(3).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{rhisfruta.fecalbar}"
@@ -518,7 +725,7 @@ InicializarVbles
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
     
-                cTabla = Tabla & " INNER JOIN rsocios On rhisfruta.codsocio = rsocios.codsocio"
+                cTabla = tabla & " INNER JOIN rsocios On rhisfruta.codsocio = rsocios.codsocio"
                 If HayRegistros(cTabla, cadSelect) Then
                     cadTitulo = "Albaranes Facturados "
                     If Check1.Value = 0 Then cadTitulo = cadTitulo & "Terceros"
@@ -531,7 +738,7 @@ InicializarVbles
                 If Not AnyadirAFormula(cadFormula, "{rsocios.tipoprod} = 1") Then Exit Sub
                 If Not AnyadirAFormula(cadSelect, "{rsocios.tipoprod} = 1") Then Exit Sub
     
-                cTabla = Tabla & " INNER JOIN rsocios On rhisfruta.codsocio = rsocios.codsocio"
+                cTabla = tabla & " INNER JOIN rsocios On rhisfruta.codsocio = rsocios.codsocio"
     
                 If HayRegistros(cTabla, cadSelect) Then
                       cadTitulo = "Albaranes Terceros"
@@ -587,7 +794,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(2)
+        PonerFoco txtCodigo(2)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -614,7 +821,7 @@ Dim List As Collection
          
     FrameCobrosVisible True, H, W
     indFrame = 5
-    Tabla = "rhisfruta"
+    tabla = "rhisfruta"
     
     CargaCombo
     
@@ -625,25 +832,25 @@ Dim List As Collection
     Check2.Enabled = (vParamAplic.Cooperativa = 9)
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.cmdcancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtcodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtCodigo(CByte(imgFec(2).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de socios
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Variedades
-    txtcodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -671,11 +878,11 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(2).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
+    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtcodigo(CByte(imgFec(2).Tag))
+    PonerFoco txtCodigo(CByte(imgFec(2).Tag))
     ' ***************************
 End Sub
 
@@ -692,7 +899,7 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmVariedades (Index)
         
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub Optcodigo_KeyPress(KeyAscii As Integer)
@@ -710,7 +917,7 @@ Private Sub OptNombre_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -735,21 +942,21 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -758,15 +965,15 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
     Select Case Index
         Case 0, 1 'socio tercero
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "000000")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "000000")
         
         Case 2, 3 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
         Case 4, 5 'VARIEDAD
-            txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "variedades", "nomvarie", "codvarie", "N")
-            If txtcodigo(Index).Text <> "" Then txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "00")
+            txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "variedades", "nomvarie", "codvarie", "N")
+            If txtCodigo(Index).Text <> "" Then txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "00")
     End Select
 End Sub
 
@@ -835,19 +1042,19 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmTerceros(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmTerceros(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmVariedades(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmVariedades(Indice As Integer)
+    indCodigo = Indice
     Set frmVar = New frmComVar
     frmVar.DatosADevolverBusqueda = "0|1|"
-    frmVar.CodigoActual = txtcodigo(indCodigo)
+    frmVar.CodigoActual = txtCodigo(indCodigo)
     frmVar.Show vbModal
     Set frmVar = Nothing
 End Sub
@@ -893,19 +1100,19 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
-    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -917,11 +1124,11 @@ Dim Rs As ADODB.Recordset
 End Function
 
 Private Function ProcesarCambios(cadWHERE As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
-Dim i As Integer
+Dim I As Integer
 Dim HayReg As Integer
-Dim b As Boolean
+Dim B As Boolean
 
 On Error GoTo eProcesarCambios
 
@@ -935,15 +1142,15 @@ On Error GoTo eProcesarCambios
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    Sql = "insert into tmpinformes (codusu, codigo1) "
+    SQL = "insert into tmpinformes (codusu, codigo1) "
     
-    Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar "
-    Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-    Sql = Sql & " where not numalbar in (select numalbar from rlifter) "
-    Sql = Sql & "  and rsocios.tipoprod = 1 "
-    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+    SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar "
+    SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+    SQL = SQL & " where not numalbar in (select numalbar from rlifter) "
+    SQL = SQL & "  and rsocios.tipoprod = 1 "
+    If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
     
-    conn.Execute Sql
+    conn.Execute SQL
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -956,11 +1163,11 @@ End Function
 
 
 Private Function ProcesarCambiosNew(cadWHERE As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
-Dim i As Integer
+Dim I As Integer
 Dim HayReg As Integer
-Dim b As Boolean
+Dim B As Boolean
 
 On Error GoTo eProcesarCambios
 
@@ -974,116 +1181,116 @@ On Error GoTo eProcesarCambios
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    Sql = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4, precio1, importe5, nombre1) "
+    SQL = "insert into tmpinformes (codusu, codigo1, fecha1, importe1, importe2, importe3, importe4, precio1, importe5, nombre1) "
     
     Select Case Combo1(0).ListIndex
         Case 0 ' no facturados
-            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
-            Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-            Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
-            Sql = Sql & "  and rsocios.tipoprod = 1 "
-            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
+            SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+            SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
+            SQL = SQL & "  and rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             
         
             If Check1.Value = 1 Then
-                Sql = Sql & " union "
-                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
-                Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-                Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
-                Sql = Sql & " and rsocios.tipoprod <> 1 "
-                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+                SQL = SQL & " union "
+                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
+                SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+                SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
+                SQL = SQL & " and rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             End If
         
         
         Case 1 ' facturados
-            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            Sql = Sql & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
-            Sql = Sql & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-            Sql = Sql & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
-            Sql = Sql & " where rsocios.tipoprod = 1 "
-            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            SQL = SQL & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
+            SQL = SQL & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+            SQL = SQL & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
+            SQL = SQL & " where rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             
             If Check1.Value = 1 Then
-                Sql = Sql & " union "
-                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                Sql = Sql & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
-                Sql = Sql & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-                Sql = Sql & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
-                Sql = Sql & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
+                SQL = SQL & " union "
+                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                SQL = SQL & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
+                SQL = SQL & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+                SQL = SQL & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
+                SQL = SQL & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
                 '[Monica]06/11/2013. Cambiado por lo de abajo
                 'sql = sql & " where rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) and "
-                Sql = Sql & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
-                Sql = Sql & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
-                Sql = Sql & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
-                Sql = Sql & " rsocios.tipoprod <> 1 "
-                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+                SQL = SQL & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
+                SQL = SQL & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
+                SQL = SQL & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
+                SQL = SQL & " rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
                 
-                Sql = Sql & " group by 1,2,3,4,5,6,7,10 "
+                SQL = SQL & " group by 1,2,3,4,5,6,7,10 "
                 
             End If
             
         Case 2 ' todos
             ' no facturados
-            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
-            Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-            Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
-            Sql = Sql & "  and rsocios.tipoprod = 1 "
-            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe , null "
+            SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+            SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fechaalb,codvarie from rlifter) "
+            SQL = SQL & "  and rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             
         
             If Check1.Value = 1 Then
-                Sql = Sql & " union "
-                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                Sql = Sql & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
-                Sql = Sql & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
-                Sql = Sql & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
-                Sql = Sql & " and rsocios.tipoprod <> 1 "
-                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+                SQL = SQL & " union "
+                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                SQL = SQL & " rhisfruta.prestimado,round(if(rhisfruta.prestimado is null, 0,rhisfruta.prestimado) * kilosnet,2) importe, null "
+                SQL = SQL & " from rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio "
+                SQL = SQL & " where not (numalbar,fecalbar,codvarie) in (select numalbar,fecalbar,codvarie from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu in (1,2))) "
+                SQL = SQL & " and rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             End If
         
             'facturados
-            Sql = Sql & " union "
-            Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-            Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-            Sql = Sql & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
-            Sql = Sql & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-            Sql = Sql & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
-            Sql = Sql & " where rsocios.tipoprod = 1 "
-            If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+            SQL = SQL & " union "
+            SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+            SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+            SQL = SQL & " round(rlifter.importel / rhisfruta.kilosnet,4) ,rlifter.importel importe, rlifter.numfactu "
+            SQL = SQL & " from (rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+            SQL = SQL & " inner join rlifter on rlifter.numalbar = rhisfruta.numalbar and rlifter.fechaalb = rhisfruta.fecalbar and rlifter.codvarie = rhisfruta.codvarie "
+            SQL = SQL & " where rsocios.tipoprod = 1 "
+            If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
             
             If Check1.Value = 1 Then
-                Sql = Sql & " union "
-                Sql = Sql & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
-                Sql = Sql & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
-                Sql = Sql & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
-                Sql = Sql & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
-                Sql = Sql & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar  and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
-                Sql = Sql & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
+                SQL = SQL & " union "
+                SQL = SQL & " select " & DBSet(vUsu.Codigo, "N") & ", rhisfruta.numalbar, rhisfruta.fecalbar, "
+                SQL = SQL & " rhisfruta.codsocio, rhisfruta.codvarie, rhisfruta.numcajon, rhisfruta.kilosnet, "
+                SQL = SQL & " round((sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto))/ rhisfruta.kilosnet,4), sum(rfactsoc_albaran.importe) - sum(rfactsoc_albaran.imporgasto)  importe, rfactsoc_albaran.numfactu    "
+                SQL = SQL & " from ((rhisfruta inner join rsocios on rhisfruta.codsocio = rsocios.codsocio) "
+                SQL = SQL & " inner join rfactsoc_albaran on rfactsoc_albaran.numalbar = rhisfruta.numalbar  and rfactsoc_albaran.fecalbar = rhisfruta.fecalbar and rfactsoc_albaran.codvarie = rhisfruta.codvarie) "
+                SQL = SQL & " inner join rfactsoc on rfactsoc_albaran.codtipom = rfactsoc.codtipom and rfactsoc_albaran.numfactu = rfactsoc.numfactu and rfactsoc_albaran.fecfactu = rfactsoc.fecfactu "
                 '[Monica]06/11/2013. Cambiado por lo de abajo
                 'sql = sql & " where rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) and "
-                Sql = Sql & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
-                Sql = Sql & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
+                SQL = SQL & " where (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 2) or  "
+                SQL = SQL & " (rfactsoc_albaran.codtipom in (select codtipom from usuarios.stipom where tipodocu = 1) and not rfactsoc_albaran.numalbar in (select numalbar from rfactsoc_albaran where codtipom in (select codtipom from usuarios.stipom where tipodocu = 2)))) and "
                 'hasta aqui
-                Sql = Sql & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
-                Sql = Sql & " rsocios.tipoprod <> 1 "
-                If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
+                SQL = SQL & " not (rfactsoc_albaran.codtipom, rfactsoc_albaran.numfactu, rfactsoc_albaran.fecfactu) in (select rectif_codtipom,rectif_numfactu,rectif_fecfactu from rfactsoc where not  rectif_codtipom is null and not rectif_numfactu is null and not rectif_fecfactu is null) and "
+                SQL = SQL & " rsocios.tipoprod <> 1 "
+                If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
                 
-                Sql = Sql & " group by 1,2,3,4,5,6,7,10 "
+                SQL = SQL & " group by 1,2,3,4,5,6,7,10 "
                 
             End If
             
     End Select
     
-    conn.Execute Sql
+    conn.Execute SQL
         
     ProcesarCambiosNew = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -1094,7 +1301,7 @@ eProcesarCambios:
 End Function
 
 Private Sub InsertaLineaEnTemporal(ByRef ItmX As ListItem)
-Dim Sql As String
+Dim SQL As String
 Dim Codmacta As String
 Dim Rs As ADODB.Recordset
 Dim Sql1 As String
@@ -1111,15 +1318,15 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For i = 0 To Combo1.Count - 1
-        Combo1(i).Clear
-    Next i
+    For I = 0 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
     
     'tipo de hectareas
     Combo1(0).AddItem "Pendientes Facturar"

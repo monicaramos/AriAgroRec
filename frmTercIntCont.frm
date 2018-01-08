@@ -24,43 +24,79 @@ Begin VB.Form frmTercIntCont
       Width           =   5805
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Left            =   2970
          TabIndex        =   11
          Top             =   2700
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   7
-         Left            =   4065
+         Left            =   4155
          TabIndex        =   12
          Top             =   2700
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.Frame Frame2 
          BorderStyle     =   0  'None
          Height          =   1455
-         Left            =   240
+         Left            =   270
          TabIndex        =   5
-         Top             =   1680
+         Top             =   1530
          Width           =   5100
          Begin VB.TextBox txtCodigo 
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   32
             Left            =   3660
             TabIndex        =   7
             Top             =   435
-            Width           =   1095
+            Width           =   1350
          End
          Begin VB.TextBox txtCodigo 
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   31
             Left            =   1200
             TabIndex        =   6
             Top             =   435
-            Width           =   1095
+            Width           =   1350
          End
          Begin VB.Image imgFecha 
             Height          =   240
@@ -82,39 +118,57 @@ Begin VB.Form frmTercIntCont
             AutoSize        =   -1  'True
             Caption         =   "Fecha Recepción:"
             BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
-               Weight          =   700
+               Weight          =   400
                Underline       =   0   'False
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            ForeColor       =   &H00000080&
-            Height          =   195
+            ForeColor       =   &H00972E0B&
+            Height          =   240
             Index           =   2
-            Left            =   360
+            Left            =   270
             TabIndex        =   10
-            Top             =   150
-            Width           =   1455
+            Top             =   45
+            Width           =   1770
          End
          Begin VB.Label Label3 
             Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   29
-            Left            =   2835
+            Left            =   2745
             TabIndex        =   9
             Top             =   435
-            Width           =   420
+            Width           =   600
          End
          Begin VB.Label Label2 
             Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   0
-            Left            =   360
+            Left            =   270
             TabIndex        =   8
             Top             =   435
-            Width           =   465
+            Width           =   645
          End
       End
       Begin VB.Frame FrameProgress 
@@ -137,6 +191,15 @@ Begin VB.Form frmTercIntCont
          End
          Begin VB.Label lblProgess 
             Caption         =   "Iniciando el proceso ..."
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   1
             Left            =   120
@@ -146,6 +209,15 @@ Begin VB.Form frmTercIntCont
          End
          Begin VB.Label lblProgess 
             Caption         =   "Comprobaciones:"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   0
             Left            =   120
@@ -273,12 +345,12 @@ Dim NomTabla As String
     'comprobar que se han rellenado los dos campos de fecha
     'sino rellenar con fechaini o fechafin del ejercicio
     'que guardamos en vbles Orden1,Orden2
-    If txtcodigo(31).Text = "" Then
-       txtcodigo(31).Text = Orden1 'fechaini del ejercicio de la conta
+    If txtCodigo(31).Text = "" Then
+       txtCodigo(31).Text = Orden1 'fechaini del ejercicio de la conta
     End If
 
-    If txtcodigo(32).Text = "" Then
-       txtcodigo(32).Text = Orden2 'fecha fin del ejercicio de la conta
+    If txtCodigo(32).Text = "" Then
+       txtCodigo(32).Text = Orden2 'fecha fin del ejercicio de la conta
     End If
 
      'Comprobar que el intervalo de fechas D/H esta dentro del ejercicio de la
@@ -294,7 +366,7 @@ Dim NomTabla As String
 '        End If
         
 
-    devuelve = CadenaDesdeHasta(txtcodigo(31).Text, txtcodigo(32).Text, Codigo, "F")
+    devuelve = CadenaDesdeHasta(txtCodigo(31).Text, txtCodigo(32).Text, Codigo, "F")
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Sub
     'Parametro D/H Fecha
     If devuelve <> "" And param <> "" Then
@@ -305,7 +377,7 @@ Dim NomTabla As String
 
     '===================================================
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
-    cadSelect = CadenaDesdeHastaBD(txtcodigo(31).Text, txtcodigo(32).Text, Codigo, "F")
+    cadSelect = CadenaDesdeHastaBD(txtCodigo(31).Text, txtCodigo(32).Text, Codigo, "F")
     cadSelect = cadSelect & " AND " & NomTabla & ".intconta=0 "
     
     If Not HayRegParaInforme(NomTabla, cadSelect) Then Exit Sub
@@ -342,7 +414,7 @@ Dim IndiceFoco As Integer
     If PrimeraVez Then
         PrimeraVez = False
         IndiceFoco = 31
-        If IndiceFoco >= 0 Then PonerFoco txtcodigo(IndiceFoco)
+        If IndiceFoco >= 0 Then PonerFoco txtCodigo(IndiceFoco)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -371,7 +443,7 @@ Dim H As Integer, W As Integer
     indFrame = 7
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(indFrame).Cancel = True
+    Me.cmdcancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -383,7 +455,7 @@ End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
 'Calendario de Fecha
-    txtcodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
+    txtCodigo(indCodigo).Text = Format(vFecha, "dd/mm/yyyy")
 End Sub
 
 
@@ -426,18 +498,18 @@ Private Sub imgFecha_Click(Index As Integer)
    End Select
    
    
-   PonerFormatoFecha txtcodigo(indCodigo)
-   If txtcodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtcodigo(indCodigo).Text)
+   PonerFormatoFecha txtCodigo(indCodigo)
+   If txtCodigo(indCodigo).Text <> "" Then frmF.NovaData = CDate(txtCodigo(indCodigo).Text)
    
    Screen.MousePointer = vbDefault
    frmF.Show vbModal
    Set frmF = Nothing
-   PonerFoco txtcodigo(indCodigo)
+   PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 
@@ -450,7 +522,7 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Tabla As String
+Dim tabla As String
 Dim codcampo As String, nomCampo As String
 Dim TipCampo As String, Formato As String
 Dim Titulo As String
@@ -458,7 +530,7 @@ Dim EsNomCod As Boolean 'Si es campo Cod-Descripcion llama a PonerNombreDeCod
 
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -472,16 +544,16 @@ Dim EsNomCod As Boolean 'Si es campo Cod-Descripcion llama a PonerNombreDeCod
     ElseIf Index = 3 Or Index = 4 Then
          '7: Informe Traspaso Almacenes
          '8: Informe Movimientos Almacen
-         txtcodigo(Index).Text = Format(txtcodigo(Index).Text, "0000000")
+         txtCodigo(Index).Text = Format(txtCodigo(Index).Text, "0000000")
     Else
         Select Case Index
         Case 31, 32 'FECHA Desde Hasta
-            If txtcodigo(Index).Text <> "" Then
-                    PonerFormatoFecha txtcodigo(Index)
-                    If OpcionListado = 223 And txtcodigo(Index).Text <> "" Then
+            If txtCodigo(Index).Text <> "" Then
+                    PonerFormatoFecha txtCodigo(Index)
+                    If OpcionListado = 223 And txtCodigo(Index).Text <> "" Then
                         'Contabilizar facturas
                         If Not ComprobarFechasConta(Index) Then
-                            PonerFoco txtcodigo(Index)
+                            PonerFoco txtCodigo(Index)
                         End If '++
                     End If
             End If
@@ -535,19 +607,19 @@ Private Sub PonerFrameRepxDiaVisible(visible As Boolean, ByRef H As Integer, ByR
 End Sub
 
 
-Private Function AnyadirParametroDH(Cad As String, indD As Byte, indH As Byte) As String
+Private Function AnyadirParametroDH(cad As String, indD As Byte, indH As Byte) As String
 On Error Resume Next
     
-     If txtcodigo(indD).Text <> "" Then
-        Cad = Cad & "desde " & txtcodigo(indD).Text
+     If txtCodigo(indD).Text <> "" Then
+        cad = cad & "desde " & txtCodigo(indD).Text
 '        If txtNombre(indD).Text <> "" Then Cad = Cad & " - " & txtNombre(indD).Text
     End If
-    If txtcodigo(indH).Text <> "" Then
-        Cad = Cad & "  hasta " & txtcodigo(indH).Text
+    If txtCodigo(indH).Text <> "" Then
+        cad = cad & "  hasta " & txtCodigo(indH).Text
 '        If txtNombre(indH).Text <> "" Then Cad = Cad & " - " & txtNombre(indH).Text
     End If
     
-    AnyadirParametroDH = Cad
+    AnyadirParametroDH = cad
     If Err.Number <> 0 Then Err.Clear
 End Function
 
@@ -565,10 +637,10 @@ End Sub
 
 Private Function PonerDesdeHasta(campo As String, Tipo As String, indD As Byte, indH As Byte, param As String) As Boolean
 Dim devuelve As String
-Dim Cad As String
+Dim cad As String
 
     PonerDesdeHasta = False
-    devuelve = CadenaDesdeHasta(txtcodigo(indD).Text, txtcodigo(indH).Text, campo, Tipo)
+    devuelve = CadenaDesdeHasta(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
     If devuelve = "Error" Then Exit Function
     If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
     
@@ -577,8 +649,8 @@ Dim Cad As String
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
         'Fecha para la Base de Datos
-        Cad = CadenaDesdeHastaBD(txtcodigo(indD).Text, txtcodigo(indH).Text, campo, Tipo)
-        If Not AnyadirAFormula(cadSelect, Cad) Then Exit Function
+        cad = CadenaDesdeHastaBD(txtCodigo(indD).Text, txtCodigo(indH).Text, campo, Tipo)
+        If Not AnyadirAFormula(cadSelect, cad) Then Exit Function
     End If
     
     If devuelve <> "" Then
@@ -615,7 +687,7 @@ Private Function ComprobarFechasConta(ind As Integer) As Boolean
 'comprobar que el periodo de fechas a contabilizar esta dentro del
 'periodo de fechas del ejercicio de la contabilidad
 Dim FechaIni As String, FechaFin As String
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
     
 Dim vSeccion As CSeccion
@@ -630,7 +702,7 @@ On Error GoTo EComprobar
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
         
-            If txtcodigo(ind).Text <> "" Then
+            If txtCodigo(ind).Text <> "" Then
                 FechaIni = "Select fechaini,fechafin From parametros"
                 Set Rs = New ADODB.Recordset
                 Rs.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -642,12 +714,12 @@ On Error GoTo EComprobar
                     Orden1 = FechaIni
                     Orden2 = FechaFin
                 
-                    If Not EntreFechas(FechaIni, txtcodigo(ind).Text, FechaFin) Then
-                         Cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
-                         Cad = Cad & "    Desde: " & FechaIni & vbCrLf
-                         Cad = Cad & "    Hasta: " & FechaFin
-                         MsgBox Cad, vbExclamation
-                         txtcodigo(ind).Text = ""
+                    If Not EntreFechas(FechaIni, txtCodigo(ind).Text, FechaFin) Then
+                         cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
+                         cad = cad & "    Desde: " & FechaIni & vbCrLf
+                         cad = cad & "    Hasta: " & FechaFin
+                         MsgBox cad, vbExclamation
+                         txtCodigo(ind).Text = ""
                     Else
                         ComprobarFechasConta = True
                     End If
@@ -672,18 +744,18 @@ End Function
 
 Private Sub ContabilizarFacturas(cadTabla As String, cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
-Dim b As Boolean
+Dim SQL As String
+Dim B As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
 
 Dim vSeccion As CSeccion
 
-    Sql = "TERCON" 'contabilizar facturas de terceros
+    SQL = "TERCON" 'contabilizar facturas de terceros
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Contabilizar Facturas de Terceros. Hay otro usuario contabilizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -693,12 +765,12 @@ Dim vSeccion As CSeccion
      'comprobar que se han rellenado los dos campos de fecha
      'sino rellenar con fechaini o fechafin del ejercicio
      'que guardamos en vbles Orden1,Orden2
-     If txtcodigo(31).Text = "" Then
-        txtcodigo(31).Text = Orden1 'fechaini del ejercicio de la conta
+     If txtCodigo(31).Text = "" Then
+        txtCodigo(31).Text = Orden1 'fechaini del ejercicio de la conta
      End If
 
-     If txtcodigo(32).Text = "" Then
-        txtcodigo(32).Text = Orden2 'fecha fin del ejercicio de la conta
+     If txtCodigo(32).Text = "" Then
+        txtCodigo(32).Text = Orden2 'fecha fin del ejercicio de la conta
      End If
 
 
@@ -710,11 +782,11 @@ Dim vSeccion As CSeccion
 
     'comprobar si existen en Ariges facturas anteriores al periodo solicitado
     'sin contabilizar
-    If Me.txtcodigo(31).Text <> "" Then 'anteriores a fechadesde
-        Sql = "SELECT COUNT(*) FROM " & cadTabla
-        Sql = Sql & " WHERE fecrecep <"
-        Sql = Sql & DBSet(txtcodigo(31), "F") & " AND intconta=0 "
-        If RegistrosAListar(Sql) > 0 Then
+    If Me.txtCodigo(31).Text <> "" Then 'anteriores a fechadesde
+        SQL = "SELECT COUNT(*) FROM " & cadTabla
+        SQL = SQL & " WHERE fecrecep <"
+        SQL = SQL & DBSet(txtCodigo(31), "F") & " AND intconta=0 "
+        If RegistrosAListar(SQL) > 0 Then
             MsgBox "Hay Facturas anteriores sin contabilizar.", vbExclamation
             Exit Sub
         End If
@@ -737,17 +809,17 @@ Dim vSeccion As CSeccion
 '    CargarProgres Me.ProgressBar1, 100
 
     'Cargar tabla TEMP con las Facturas que vamos a Trabajar
-    b = CrearTMPFacturas(cadTabla, cadWHERE)
-    If Not b Then Exit Sub
+    B = CrearTMPFacturas(cadTabla, cadWHERE)
+    If Not B Then Exit Sub
     
 
     'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
 '    TerminaBloquear
-    Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
-    Sql = Sql & ".codsocio=tmpFactu.codsocio AND "
+    SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
+    SQL = SQL & ".codsocio=tmpFactu.codsocio AND "
     
-    Sql = Sql & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
-    If Not BloqueaRegistro(Sql, cadWHERE) Then
+    SQL = SQL & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+    If Not BloqueaRegistro(SQL, cadWHERE) Then
         MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -774,7 +846,7 @@ Dim vSeccion As CSeccion
 '    End If
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
 
 
     'comprobar que no haya Nº FACTURAS en la contabilidad para esa fecha
@@ -787,7 +859,7 @@ Dim vSeccion As CSeccion
 '    End If
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
 
 
     'comprobar que todas las CUENTAS de los distintos socios terceros que vamos a
@@ -797,10 +869,10 @@ Dim vSeccion As CSeccion
     
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
-            b = ComprobarCtaContable_new(cadTabla, 1)
+            B = ComprobarCtaContable_new(cadTabla, 1)
         End If
         vSeccion.CerrarConta
     End If
@@ -808,7 +880,7 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
 
 
     'comprobar que todas las CUENTAS de compras terceros de las variedades que vamos a
@@ -816,12 +888,12 @@ Dim vSeccion As CSeccion
     '-----------------------------------------------------------------------------
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
             'comprobar que todas las CUENTAS de compras terceros de las variedades que vamos a
             'contabilizar existen en la Conta: (variedades.ctacomtercero) IN (conta.cuentas.codmacta)
-            b = ComprobarCtaContable_new(cadTabla, 8)
+            B = ComprobarCtaContable_new(cadTabla, 8)
         End If
         vSeccion.CerrarConta
     End If
@@ -829,7 +901,7 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
     
     
     '[Monica]23/09/2013
@@ -839,12 +911,12 @@ Dim vSeccion As CSeccion
     '-----------------------------------------------------------------------------
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
             'comprobar que todas las CUENTAS de compras terceros de las variedades que vamos a
             'contabilizar existen en la Conta: (fvarconcep.codmacpr) IN (conta.cuentas.codmacta)
-            b = ComprobarCtaContable_new(cadTabla, 13)
+            B = ComprobarCtaContable_new(cadTabla, 13)
         End If
         vSeccion.CerrarConta
     End If
@@ -852,17 +924,17 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
     
 
 
     ' comprobamos que existe las cuentas vparamaplic.ctatrareten
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
-            b = ComprobarCtaContable_new(cadTabla, 4)
+            B = ComprobarCtaContable_new(cadTabla, 4)
         End If
         vSeccion.CerrarConta
     End If
@@ -870,7 +942,7 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
 
 
 
@@ -882,10 +954,10 @@ Dim vSeccion As CSeccion
     Me.lblProgess(1).Caption = "Comprobando Tipos de IVA en contabilidad ..."
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
-            b = ComprobarTiposIVA(cadTabla)
+            B = ComprobarTiposIVA(cadTabla)
         End If
         vSeccion.CerrarConta
     End If
@@ -893,7 +965,7 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
-    If Not b Then Exit Sub
+    If Not B Then Exit Sub
 
 
     'comprobar si hay contabilidad ANALITICA: conta.parametros.autocoste=1
@@ -903,15 +975,15 @@ Dim vSeccion As CSeccion
     
     ' tenemos que abrir primero la conexion
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
             If vEmpresa.TieneAnalitica Then  'hay contab. analitica
                Me.lblProgess(1).Caption = "Comprobando Contabilidad Analítica ..."
                    
-               b = ComprobarCtaContable_new(cadTabla, 7)
+               B = ComprobarCtaContable_new(cadTabla, 7)
                
-               If Not b Then
+               If Not B Then
                     vSeccion.CerrarConta
                     Set vSeccion = Nothing
                     Exit Sub
@@ -919,8 +991,8 @@ Dim vSeccion As CSeccion
         
                '(si tiene analítica requiere un centro de coste para insertar en conta.linfact)
                CCoste = ""
-               b = ComprobarCCoste_new(CCoste, cadTabla)
-               If Not b Then Exit Sub
+               B = ComprobarCCoste_new(CCoste, cadTabla)
+               If Not B Then Exit Sub
     
                CCoste = ""
             End If
@@ -956,14 +1028,14 @@ Dim vSeccion As CSeccion
 
     '---- Pasar las Facturas a la Contabilidad
     Set vSeccion = New CSeccion
-    b = False
+    B = False
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         If vSeccion.AbrirConta Then
     
-            b = PasarFacturasAContab(cadTabla, CCoste)
+            B = PasarFacturasAContab(cadTabla, CCoste)
 
             '---- Mostrar ListView de posibles errores (si hay)
-            If Not b Then
+            If Not B Then
                 If tmpErrores Then
                     'Cargar un listview con la tabla TEMP de Errores y mostrar
                     'las facturas que fallaron
@@ -1015,10 +1087,10 @@ End Sub
 
 
 Private Function PasarFacturasAContab(cadTabla As String, CCoste As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
-Dim b As Boolean
-Dim i As Integer
+Dim B As Boolean
+Dim I As Integer
 Dim numfactu As Integer
 Dim Codigo1 As String
 
@@ -1027,14 +1099,14 @@ Dim Codigo1 As String
     PasarFacturasAContab = False
 
     '---- Obtener el total de Facturas a Insertar en la contabilidad
-    Sql = "SELECT count(*) "
-    Sql = Sql & " FROM " & cadTabla & " INNER JOIN tmpFactu "
+    SQL = "SELECT count(*) "
+    SQL = SQL & " FROM " & cadTabla & " INNER JOIN tmpFactu "
     Codigo1 = "codsocio"
-    Sql = Sql & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
-    Sql = Sql & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+    SQL = SQL & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
+    SQL = SQL & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         numfactu = Rs.Fields(0)
     Else
@@ -1048,18 +1120,18 @@ Dim Codigo1 As String
     '-----------------------------------------------------------
     ' Mosrtaremos para cada factura de PROVEEDOR
     ' que numregis le ha asignado
-    Sql = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
     Set cContaFra = New cContabilizarFacturas
     
     If Not cContaFra.EstablecerValoresInciales(ConnConta) Then
         'NO ha establcedio los valores de la conta.  Le dejaremos seguir, avisando que
         ' obviamente, no va a contabilizar las FRAS
-        Sql = "Si continua, las facturas se insertaran en el registro, pero no serán contabilizadas" & vbCrLf
-        Sql = Sql & "en este momento. Deberán ser contabilizadas desde el ARICONTA" & vbCrLf & vbCrLf
-        Sql = Sql & Space(50) & "¿Continuar?"
-        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+        SQL = "Si continua, las facturas se insertaran en el registro, pero no serán contabilizadas" & vbCrLf
+        SQL = SQL & "en este momento. Deberán ser contabilizadas desde el ARICONTA" & vbCrLf & vbCrLf
+        SQL = SQL & Space(50) & "¿Continuar?"
+        If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
     End If
 
 
@@ -1069,26 +1141,26 @@ Dim Codigo1 As String
         CargarProgres Me.ProgressBar1, numfactu
 
         'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
-        Sql = "SELECT * "
-        Sql = Sql & " FROM tmpFactu "
+        SQL = "SELECT * "
+        SQL = SQL & " FROM tmpFactu "
 
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenStatic, adLockPessimistic, adCmdText
-        i = 1
+        Rs.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
+        I = 1
 
-        b = True
+        B = True
         'pasar a contabilidad cada una de las facturas seleccionadas
         While Not Rs.EOF
-            Sql = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "N") & " and numfactu=" & DBSet(Rs!numfactu, "T")
-            Sql = Sql & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
-            If PasarFacturaTerc(Sql, CCoste, Orden2, cContaFra) = False And b Then b = False
+            SQL = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "N") & " and numfactu=" & DBSet(Rs!numfactu, "T")
+            SQL = SQL & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
+            If PasarFacturaTerc(SQL, CCoste, Orden2, cContaFra) = False And B Then B = False
 
             '---- Laura 26/10/2006
             'Al pasar cada factura al hacer el commit desbloqueamos los registros
             'que teniamos bloqueados y los volvemos a bloquear
             'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
-            Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
-            If Not BloqueaRegistro(Sql, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
+            SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+            If Not BloqueaRegistro(SQL, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
 '                MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
 '                Screen.MousePointer = vbDefault
 '                Exit Sub
@@ -1096,9 +1168,9 @@ Dim Codigo1 As String
             '----
 
             IncrementarProgres Me.ProgressBar1, 1
-            Me.lblProgess(1).Caption = "Insertando Facturas en Contabilidad...   (" & i & " de " & numfactu & ")"
+            Me.lblProgess(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
-            i = i + 1
+            I = I + 1
             Rs.MoveNext
         Wend
 
@@ -1108,9 +1180,9 @@ Dim Codigo1 As String
     Set cContaFra = Nothing
     
 EPasarFac:
-    If Err.Number <> 0 Then b = False
+    If Err.Number <> 0 Then B = False
 
-    If b Then
+    If B Then
         PasarFacturasAContab = True
     Else
         PasarFacturasAContab = False

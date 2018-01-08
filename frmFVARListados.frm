@@ -144,11 +144,11 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   64
-         Left            =   1755
+         Left            =   1725
          MaxLength       =   6
          TabIndex        =   1
          Top             =   1140
-         Width           =   915
+         Width           =   870
       End
       Begin VB.TextBox txtNombre 
          BackColor       =   &H80000018&
@@ -184,11 +184,11 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   65
-         Left            =   1755
+         Left            =   1725
          MaxLength       =   6
          TabIndex        =   2
          Top             =   1500
-         Width           =   915
+         Width           =   870
       End
       Begin VB.TextBox txtcodigo 
          Alignment       =   1  'Right Justify
@@ -397,7 +397,7 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   1755
+         Left            =   1725
          MaxLength       =   10
          TabIndex        =   5
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
@@ -417,7 +417,7 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   1755
+         Left            =   1725
          MaxLength       =   10
          TabIndex        =   6
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
@@ -437,7 +437,7 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   1770
+         Left            =   1725
          MaxLength       =   7
          TabIndex        =   3
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"
@@ -457,7 +457,7 @@ Begin VB.Form frmFVARListados
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   1755
+         Left            =   1725
          MaxLength       =   7
          TabIndex        =   4
          Tag             =   "Nº Factura|N|S|||facturas|numfactu|0000000|S|"

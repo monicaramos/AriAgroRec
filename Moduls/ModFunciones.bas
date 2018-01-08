@@ -5035,6 +5035,49 @@ End Sub
 
 
 
+Public Sub AyudaFrasTerceros(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Nro.Factura|1505|;S|txtAux(1)|T|Fecha|1495|;S|txtAux(2)|T|Socio|1000|;S|txtAux(3)|T|Nombre|5000|;"
+    
+    frmBas.CadenaConsulta = "SELECT rcafter.numfactu, rcafter.fecfactu, rcafter.codsocio, rcafter.nomsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rcafter"
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Nº Factura|T|N|||rcafter|numfactu||S|"
+    frmBas.Tag2 = "Fecha Factura|F|N|||rcafter|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag3 = "Cod.Tercero|N|N|0|999999|rcafter|codsocio|000000|S|"
+    frmBas.Tag4 = "Nombre Tercero|T|N|||rcafter|nomsocio||N|"
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 7
+    frmBas.Maxlen2 = 10
+    frmBas.Maxlen3 = 6
+    frmBas.Maxlen4 = 40
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rcafter"
+    frmBas.CampoCP = "numfactu"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Facturas Terceros"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|2|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2000
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
 
 
 

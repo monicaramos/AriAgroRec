@@ -6,16 +6,16 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmManPartes 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Partes de Campo"
-   ClientHeight    =   8445
+   ClientHeight    =   8640
    ClientLeft      =   45
    ClientTop       =   4335
-   ClientWidth     =   13665
+   ClientWidth     =   14670
    Icon            =   "frmManPartes.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8445
-   ScaleWidth      =   13665
+   ScaleHeight     =   8640
+   ScaleWidth      =   14670
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame2 
@@ -23,33 +23,60 @@ Begin VB.Form frmManPartes
       Left            =   90
       TabIndex        =   13
       Top             =   570
-      Width           =   13425
+      Width           =   14425
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   10170
+         Left            =   10665
          Style           =   2  'Dropdown List
          TabIndex        =   4
          Tag             =   "Tipo Parte|N|N|||rpartes|tipoparte|||"
          Top             =   450
-         Width           =   1305
+         Width           =   1485
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
          Left            =   8805
          MaxLength       =   10
          TabIndex        =   3
          Tag             =   "Fecha Entrada|F|N|||rpartes|fecentrada|dd/mm/yyyy||"
          Top             =   450
-         Width           =   1245
+         Width           =   1530
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   2385
+         Left            =   2610
          MaxLength       =   6
          TabIndex        =   2
          Tag             =   "Cod.Cuadrilla|N|N|0|999999|rpartes|codcuadrilla|000000||"
@@ -60,7 +87,16 @@ Begin VB.Form frmManPartes
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   225
          MaxLength       =   7
@@ -68,53 +104,89 @@ Begin VB.Form frmManPartes
          Tag             =   "Nº Parte|N|S|||rpartes|nroparte|0000000|S|"
          Text            =   "nropart"
          Top             =   450
-         Width           =   885
+         Width           =   975
       End
       Begin VB.CheckBox Check1 
          Caption         =   "Impreso"
-         Height          =   195
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   240
          Index           =   0
-         Left            =   12210
+         Left            =   12255
          TabIndex        =   5
          Top             =   480
-         Width           =   855
+         Width           =   1350
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   1170
+         Left            =   1260
          MaxLength       =   10
          TabIndex        =   1
          Tag             =   "Fecha Parte|F|N|||rpartes|fechapar|dd/mm/yyyy||"
          Top             =   450
-         Width           =   1065
+         Width           =   1260
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   3465
+         Left            =   3690
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   16
          Text            =   "Text2"
          Top             =   450
-         Width           =   5190
+         Width           =   4695
       End
       Begin VB.Label Label21 
          Caption         =   "Tipo Parte"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   10170
+         Left            =   10665
          TabIndex        =   58
          Top             =   165
-         Width           =   1275
+         Width           =   1455
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   9750
+         Left            =   10065
          Picture         =   "frmManPartes.frx":000C
          ToolTipText     =   "Buscar fecha"
          Top             =   180
@@ -122,26 +194,44 @@ Begin VB.Form frmManPartes
       End
       Begin VB.Label Label1 
          Caption         =   "Fec.Entrada"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   1
          Left            =   8805
          TabIndex        =   54
          Top             =   180
-         Width           =   915
+         Width           =   1230
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   29
-         Left            =   1170
+         Left            =   1305
          TabIndex        =   17
          Top             =   180
-         Width           =   780
+         Width           =   690
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   1980
+         Left            =   2250
          Picture         =   "frmManPartes.frx":0097
          ToolTipText     =   "Buscar fecha"
          Top             =   180
@@ -149,23 +239,41 @@ Begin VB.Form frmManPartes
       End
       Begin VB.Label Label1 
          Caption         =   "Cuadrilla"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
-         Left            =   2385
+         Left            =   2610
          TabIndex        =   15
          Top             =   225
-         Width           =   660
+         Width           =   840
       End
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   3105
+         Left            =   3510
          ToolTipText     =   "Buscar Variedad"
          Top             =   180
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Nº Parte"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   28
          Left            =   225
@@ -179,8 +287,8 @@ Begin VB.Form frmManPartes
       Left            =   60
       TabIndex        =   18
       Top             =   1710
-      Width           =   13530
-      _ExtentX        =   23865
+      Width           =   14530
+      _ExtentX        =   25638
       _ExtentY        =   10954
       _Version        =   393216
       Tabs            =   1
@@ -188,8 +296,8 @@ Begin VB.Form frmManPartes
       TabHeight       =   520
       ForeColor       =   9771019
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -199,201 +307,45 @@ Begin VB.Form frmManPartes
       TabCaption(0)   =   "Reparto Trabajadores"
       TabPicture(0)   =   "frmManPartes.frx":0122
       Tab(0).ControlEnabled=   -1  'True
-      Tab(0).Control(0)=   "Frame4"
+      Tab(0).Control(0)=   "Frame5"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Frame3"
+      Tab(0).Control(1)=   "Frame4"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "FrameAux0"
+      Tab(0).Control(2)=   "Frame3"
       Tab(0).Control(2).Enabled=   0   'False
-      Tab(0).Control(3)=   "Frame5"
+      Tab(0).Control(3)=   "FrameAux0"
       Tab(0).Control(3).Enabled=   0   'False
       Tab(0).ControlCount=   4
-      Begin VB.Frame Frame5 
-         Caption         =   "Resumen"
+      Begin VB.Frame FrameAux0 
+         Caption         =   "Gastos Generales Parte"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H00C00000&
-         Height          =   2565
-         Left            =   6780
-         TabIndex        =   61
-         Top             =   3540
-         Width           =   6600
-         Begin VB.TextBox txtAux4 
+         ForeColor       =   &H0095180B&
+         Height          =   2580
+         Left            =   7290
+         TabIndex        =   35
+         Top             =   3555
+         Width           =   7100
+         Begin VB.TextBox txtAux2 
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   1
-            Left            =   1350
-            MaxLength       =   15
-            TabIndex        =   67
-            Text            =   "nomvarie"
-            Top             =   1500
-            Visible         =   0   'False
-            Width           =   975
-         End
-         Begin VB.TextBox txtAux4 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   0
-            Left            =   420
-            MaxLength       =   7
-            TabIndex        =   66
-            Tag             =   "Variedad|N|N|||rpartes_variedad|codvarie|000000|N|"
-            Text            =   "codvari"
-            Top             =   1500
-            Visible         =   0   'False
-            Width           =   735
-         End
-         Begin VB.TextBox txtAux4 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   3
-            Left            =   3375
-            MaxLength       =   7
-            TabIndex        =   65
-            Tag             =   "Kilos Recol|N|S|||rpartes_trabajador|kilosrec|###,##0|N|"
-            Text            =   "Kilos"
-            Top             =   1500
-            Visible         =   0   'False
-            Width           =   540
-         End
-         Begin VB.TextBox txtAux4 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   4
-            Left            =   4785
-            MaxLength       =   10
-            TabIndex        =   64
-            Tag             =   "Importe|N|N|||rpartes_trabajador|importe|###,##0.00||"
-            Text            =   "Importe"
-            Top             =   1500
-            Visible         =   0   'False
-            Width           =   945
-         End
-         Begin VB.TextBox txtAux4 
-            Alignment       =   1  'Right Justify
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
-            Height          =   315
-            Index           =   2
-            Left            =   2460
-            MaxLength       =   7
-            TabIndex        =   63
-            Tag             =   "Cajas Recol|N|S|||rpartes_trabajador|numcajas|###,##0|N|"
-            Text            =   "Cajas"
-            Top             =   1500
-            Visible         =   0   'False
-            Width           =   540
-         End
-         Begin MSDataGridLib.DataGrid DataGrid4 
-            Bindings        =   "frmManPartes.frx":013E
-            Height          =   1725
-            Left            =   120
-            TabIndex        =   62
-            Top             =   720
-            Width           =   6300
-            _ExtentX        =   11113
-            _ExtentY        =   3043
-            _Version        =   393216
-            AllowUpdate     =   0   'False
-            AllowArrows     =   -1  'True
-            ColumnHeaders   =   -1  'True
-            HeadLines       =   1
-            RowHeight       =   15
-            FormatLocked    =   -1  'True
-            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
-               Charset         =   0
-               Weight          =   700
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            ColumnCount     =   2
-            BeginProperty Column00 
-               DataField       =   ""
-               Caption         =   ""
-               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                  Type            =   0
-                  Format          =   ""
-                  HaveTrueFalseNull=   0
-                  FirstDayOfWeek  =   0
-                  FirstWeekOfYear =   0
-                  LCID            =   3082
-                  SubFormatType   =   0
-               EndProperty
-            EndProperty
-            BeginProperty Column01 
-               DataField       =   ""
-               Caption         =   ""
-               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
-                  Type            =   0
-                  Format          =   ""
-                  HaveTrueFalseNull=   0
-                  FirstDayOfWeek  =   0
-                  FirstWeekOfYear =   0
-                  LCID            =   3082
-                  SubFormatType   =   0
-               EndProperty
-            EndProperty
-            SplitCount      =   1
-            BeginProperty Split0 
-               BeginProperty Column00 
-               EndProperty
-               BeginProperty Column01 
-               EndProperty
-            EndProperty
-         End
-      End
-      Begin VB.Frame FrameAux0 
-         Caption         =   "Gastos Generales Parte"
-         BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00C00000&
-         Height          =   2580
-         Left            =   6795
-         TabIndex        =   35
-         Top             =   3555
-         Width           =   6390
-         Begin VB.TextBox txtAux2 
-            Appearance      =   0  'Flat
-            BackColor       =   &H80000018&
-            BorderStyle     =   0  'None
             Height          =   315
             Index           =   1
             Left            =   1080
@@ -410,6 +362,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   0
             Left            =   180
@@ -425,6 +386,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   6
             Left            =   2790
@@ -439,6 +409,15 @@ Begin VB.Form frmManPartes
          Begin VB.CommandButton btnBuscar 
             Appearance      =   0  'Flat
             Caption         =   "+"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   300
             Index           =   0
             Left            =   2565
@@ -453,6 +432,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   2
             Left            =   1845
@@ -468,6 +456,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   3
             Left            =   4545
@@ -509,33 +506,33 @@ Begin VB.Form frmManPartes
             EndProperty
          End
          Begin MSDataGridLib.DataGrid DataGrid3 
-            Bindings        =   "frmManPartes.frx":0153
-            Height          =   1730
+            Bindings        =   "frmManPartes.frx":013E
+            Height          =   1680
             Left            =   90
             TabIndex        =   43
             Top             =   720
-            Width           =   5505
-            _ExtentX        =   9710
-            _ExtentY        =   3043
+            Width           =   6780
+            _ExtentX        =   11959
+            _ExtentY        =   2963
             _Version        =   393216
             AllowUpdate     =   0   'False
             AllowArrows     =   -1  'True
             ColumnHeaders   =   -1  'True
             HeadLines       =   1
-            RowHeight       =   15
+            RowHeight       =   19
             FormatLocked    =   -1  'True
             BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
-               Italic          =   0   'False
+               Italic          =   -1  'True
                Strikethrough   =   0   'False
             EndProperty
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
@@ -638,16 +635,25 @@ Begin VB.Form frmManPartes
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00C00000&
-         Height          =   3030
+         Height          =   3075
          Left            =   90
          TabIndex        =   24
          Top             =   330
-         Width           =   13170
+         Width           =   14265
          Begin VB.TextBox txtAux3 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   9
             Left            =   5820
@@ -664,6 +670,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   8
             Left            =   7200
@@ -680,6 +695,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   7
             Left            =   9000
@@ -695,9 +719,18 @@ Begin VB.Form frmManPartes
             Alignment       =   1  'Right Justify
             BackColor       =   &H80000018&
             Enabled         =   0   'False
-            Height          =   315
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   1
-            Left            =   11160
+            Left            =   12150
             Locked          =   -1  'True
             MaxLength       =   40
             TabIndex        =   55
@@ -710,6 +743,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   6
             Left            =   855
@@ -726,6 +768,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   5
             Left            =   4050
@@ -741,6 +792,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   0
             Left            =   4950
@@ -754,6 +814,15 @@ Begin VB.Form frmManPartes
          Begin VB.CommandButton btnBuscar 
             Appearance      =   0  'Flat
             Caption         =   "+"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   300
             Index           =   3
             Left            =   4725
@@ -767,6 +836,15 @@ Begin VB.Form frmManPartes
          Begin VB.CommandButton btnBuscar 
             Appearance      =   0  'Flat
             Caption         =   "+"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   300
             Index           =   2
             Left            =   3105
@@ -780,6 +858,15 @@ Begin VB.Form frmManPartes
          Begin VB.CommandButton btnBuscar 
             Appearance      =   0  'Flat
             Caption         =   "+"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   300
             Index           =   1
             Left            =   1755
@@ -795,6 +882,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   4
             Left            =   7935
@@ -811,6 +907,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   3
             Left            =   6525
@@ -826,6 +931,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   4
             Left            =   3330
@@ -841,6 +955,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   2
             Left            =   2430
@@ -857,6 +980,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   0
             Left            =   180
@@ -873,6 +1005,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   1
             Left            =   1170
@@ -888,6 +1029,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   3
             Left            =   1800
@@ -932,33 +1082,33 @@ Begin VB.Form frmManPartes
             EndProperty
          End
          Begin MSDataGridLib.DataGrid DataGrid2 
-            Bindings        =   "frmManPartes.frx":0168
-            Height          =   2325
-            Left            =   120
+            Bindings        =   "frmManPartes.frx":0153
+            Height          =   2370
+            Left            =   75
             TabIndex        =   34
             Top             =   675
-            Width           =   13065
-            _ExtentX        =   23045
-            _ExtentY        =   4101
+            Width           =   14070
+            _ExtentX        =   24818
+            _ExtentY        =   4180
             _Version        =   393216
             AllowUpdate     =   0   'False
             AllowArrows     =   -1  'True
             ColumnHeaders   =   -1  'True
             HeadLines       =   1
-            RowHeight       =   15
+            RowHeight       =   19
             FormatLocked    =   -1  'True
             BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
-               Italic          =   0   'False
+               Italic          =   -1  'True
                Strikethrough   =   0   'False
             EndProperty
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
@@ -1003,10 +1153,19 @@ Begin VB.Form frmManPartes
          Begin VB.Label Label1 
             Alignment       =   1  'Right Justify
             Caption         =   "TOTAL IMPORTE "
-            ForeColor       =   &H00C00000&
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H0095180B&
             Height          =   255
             Index           =   2
-            Left            =   9300
+            Left            =   10290
             TabIndex        =   56
             Top             =   225
             Width           =   1665
@@ -1015,25 +1174,34 @@ Begin VB.Form frmManPartes
       Begin VB.Frame Frame4 
          Caption         =   "Reparto Kilos"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H00C00000&
+         ForeColor       =   &H0095180B&
          Height          =   2580
          Left            =   90
          TabIndex        =   19
          Top             =   3555
-         Width           =   6645
+         Width           =   7145
          Begin VB.TextBox txtAux 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   6
             Left            =   5700
@@ -1050,6 +1218,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   2
             Left            =   2070
@@ -1066,6 +1243,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   1
             Left            =   1170
@@ -1082,6 +1268,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   0
             Left            =   270
@@ -1098,6 +1293,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   3
             Left            =   2880
@@ -1113,6 +1317,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   4
             Left            =   3825
@@ -1128,6 +1341,15 @@ Begin VB.Form frmManPartes
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
             BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   315
             Index           =   5
             Left            =   4860
@@ -1140,33 +1362,33 @@ Begin VB.Form frmManPartes
             Width           =   735
          End
          Begin MSDataGridLib.DataGrid DataGrid1 
-            Bindings        =   "frmManPartes.frx":017D
-            Height          =   1730
+            Bindings        =   "frmManPartes.frx":0168
+            Height          =   1680
             Left            =   90
             TabIndex        =   23
             Top             =   720
-            Width           =   6420
-            _ExtentX        =   11324
-            _ExtentY        =   3043
+            Width           =   6915
+            _ExtentX        =   12197
+            _ExtentY        =   2963
             _Version        =   393216
             AllowUpdate     =   0   'False
             AllowArrows     =   -1  'True
             ColumnHeaders   =   -1  'True
             HeadLines       =   1
-            RowHeight       =   15
+            RowHeight       =   19
             FormatLocked    =   -1  'True
             BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9
                Charset         =   0
                Weight          =   700
                Underline       =   0   'False
-               Italic          =   0   'False
+               Italic          =   -1  'True
                Strikethrough   =   0   'False
             EndProperty
             BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-               Name            =   "MS Sans Serif"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
@@ -1238,20 +1460,230 @@ Begin VB.Form frmManPartes
             EndProperty
          End
       End
+      Begin VB.Frame Frame5 
+         Caption         =   "Resumen"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H0095180B&
+         Height          =   2565
+         Left            =   7290
+         TabIndex        =   61
+         Top             =   3555
+         Width           =   7100
+         Begin VB.TextBox txtAux4 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   1
+            Left            =   1350
+            MaxLength       =   15
+            TabIndex        =   67
+            Text            =   "nomvarie"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   975
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   0
+            Left            =   420
+            MaxLength       =   7
+            TabIndex        =   66
+            Tag             =   "Variedad|N|N|||rpartes_variedad|codvarie|000000|N|"
+            Text            =   "codvari"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   735
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   3
+            Left            =   3375
+            MaxLength       =   7
+            TabIndex        =   65
+            Tag             =   "Kilos Recol|N|S|||rpartes_trabajador|kilosrec|###,##0|N|"
+            Text            =   "Kilos"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   540
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   4
+            Left            =   4785
+            MaxLength       =   10
+            TabIndex        =   64
+            Tag             =   "Importe|N|N|||rpartes_trabajador|importe|###,##0.00||"
+            Text            =   "Importe"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   945
+         End
+         Begin VB.TextBox txtAux4 
+            Alignment       =   1  'Right Justify
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000018&
+            BorderStyle     =   0  'None
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   2
+            Left            =   2460
+            MaxLength       =   7
+            TabIndex        =   63
+            Tag             =   "Cajas Recol|N|S|||rpartes_trabajador|numcajas|###,##0|N|"
+            Text            =   "Cajas"
+            Top             =   1500
+            Visible         =   0   'False
+            Width           =   540
+         End
+         Begin MSDataGridLib.DataGrid DataGrid4 
+            Bindings        =   "frmManPartes.frx":017D
+            Height          =   1680
+            Left            =   120
+            TabIndex        =   62
+            Top             =   720
+            Width           =   6795
+            _ExtentX        =   11986
+            _ExtentY        =   2963
+            _Version        =   393216
+            AllowUpdate     =   0   'False
+            AllowArrows     =   -1  'True
+            ColumnHeaders   =   -1  'True
+            HeadLines       =   1
+            RowHeight       =   19
+            FormatLocked    =   -1  'True
+            BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9
+               Charset         =   0
+               Weight          =   700
+               Underline       =   0   'False
+               Italic          =   -1  'True
+               Strikethrough   =   0   'False
+            EndProperty
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ColumnCount     =   2
+            BeginProperty Column00 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            BeginProperty Column01 
+               DataField       =   ""
+               Caption         =   ""
+               BeginProperty DataFormat {6D835690-900B-11D0-9484-00A0C91110ED} 
+                  Type            =   0
+                  Format          =   ""
+                  HaveTrueFalseNull=   0
+                  FirstDayOfWeek  =   0
+                  FirstWeekOfYear =   0
+                  LCID            =   3082
+                  SubFormatType   =   0
+               EndProperty
+            EndProperty
+            SplitCount      =   1
+            BeginProperty Split0 
+               BeginProperty Column00 
+               EndProperty
+               BeginProperty Column01 
+               EndProperty
+            EndProperty
+         End
+      End
    End
    Begin VB.Frame Frame1 
       Height          =   475
       Index           =   0
       Left            =   90
       TabIndex        =   9
-      Top             =   7905
+      Top             =   8040
       Width           =   2175
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -1268,19 +1700,37 @@ Begin VB.Form frmManPartes
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   12480
+      Left            =   13515
       TabIndex        =   7
-      Top             =   7950
-      Width           =   1035
+      Top             =   8130
+      Width           =   1065
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   11310
+      Left            =   12345
       TabIndex        =   6
-      Top             =   7965
-      Width           =   1035
+      Top             =   8145
+      Width           =   1065
    End
    Begin MSComctlLib.Toolbar Toolbar1 
       Align           =   1  'Align Top
@@ -1288,8 +1738,8 @@ Begin VB.Form frmManPartes
       Left            =   0
       TabIndex        =   11
       Top             =   0
-      Width           =   13665
-      _ExtentX        =   24104
+      Width           =   14670
+      _ExtentX        =   25876
       _ExtentY        =   635
       ButtonWidth     =   609
       ButtonHeight    =   582
@@ -1380,12 +1830,21 @@ Begin VB.Form frmManPartes
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   12480
+      Left            =   13500
       TabIndex        =   8
-      Top             =   7935
+      Top             =   8145
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin MSAdodcLib.Adodc Data3 
       Height          =   330
@@ -1759,14 +2218,14 @@ Private Sub btnBuscar_Click(Index As Integer)
 '            frmTra.CodigoActual = txtAux3(1).Text
             frmTra.Show vbModal
             Set frmTra = Nothing
-            PonerFoco txtaux3(1)
+            PonerFoco txtAux3(1)
         Case 2 'Conceptos de gastos
             Set frmGas = New frmManCGastosNom
             frmGas.DatosADevolverBusqueda = "0|1|"
-            frmGas.CodigoActual = txtaux3(3).Text
+            frmGas.CodigoActual = txtAux3(3).Text
             frmGas.Show vbModal
             Set frmGas = Nothing
-            PonerFoco txtaux3(3)
+            PonerFoco txtAux3(3)
     End Select
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 
@@ -1872,7 +2331,7 @@ Private Sub cmdCancelar_Click()
                     If ModificaLineas = 1 Then 'INSERTAR
                         ModificaLineas = 0
                         DataGrid3.AllowAddNew = False
-                        If Not AdoAux(0).Recordset.EOF Then AdoAux(0).Recordset.MoveFirst
+                        If Not Adoaux(0).Recordset.EOF Then Adoaux(0).Recordset.MoveFirst
                     End If
                     ModificaLineas = 0
                     LLamaLineas Modo, 0, "DataGrid3"
@@ -2029,7 +2488,7 @@ Dim J As Byte
             SePuedeModificar = SePuedeModificarLinea(CStr(Data3.Recordset.Fields(0).Value), CStr(Data3.Recordset.Fields(1).Value))
         
         Case 1
-            If AdoAux(0).Recordset.EOF Then
+            If Adoaux(0).Recordset.EOF Then
                 TerminaBloquear
                 Exit Sub
             End If
@@ -2066,24 +2525,24 @@ Dim J As Byte
                 anc = anc + DataGrid2.RowTop(DataGrid2.Row) + 10
             End If
         
-            txtaux3(0).Text = DataGrid2.Columns(0).Text
-            txtaux3(6).Text = DataGrid2.Columns(1).Text
-            txtaux3(1).Text = DataGrid2.Columns(2).Text
-            text2(3).Text = DataGrid2.Columns(3).Text
-            txtaux3(2).Text = DataGrid2.Columns(4).Text
-            text2(4).Text = DataGrid2.Columns(5).Text
-            txtaux3(5).Text = DataGrid2.Columns(6).Text
-            text2(0).Text = DataGrid2.Columns(7).Text
-            txtaux3(9).Text = DataGrid2.Columns(8).Text
-            txtaux3(4).Text = DataGrid2.Columns(11).Text
+            txtAux3(0).Text = DataGrid2.Columns(0).Text
+            txtAux3(6).Text = DataGrid2.Columns(1).Text
+            txtAux3(1).Text = DataGrid2.Columns(2).Text
+            Text2(3).Text = DataGrid2.Columns(3).Text
+            txtAux3(2).Text = DataGrid2.Columns(4).Text
+            Text2(4).Text = DataGrid2.Columns(5).Text
+            txtAux3(5).Text = DataGrid2.Columns(6).Text
+            Text2(0).Text = DataGrid2.Columns(7).Text
+            txtAux3(9).Text = DataGrid2.Columns(8).Text
+            txtAux3(4).Text = DataGrid2.Columns(11).Text
             
-            txtaux3(3).Text = DataGrid2.Columns(9).Text
-            txtaux3(8).Text = DataGrid2.Columns(10).Text
+            txtAux3(3).Text = DataGrid2.Columns(9).Text
+            txtAux3(8).Text = DataGrid2.Columns(10).Text
             
             
             '[Monica]01/03/2012: me guardo los kilos iniciales por si los modifica
-            KilosAnt = CLng(txtaux3(3).Text)
-            ImporteAnt = CCur(ComprobarCero(txtaux3(4).Text))
+            KilosAnt = CLng(txtAux3(3).Text)
+            ImporteAnt = CCur(ComprobarCero(txtAux3(4).Text))
             
             ModificaLineas = 2 'Modificar
             LLamaLineas ModificaLineas, anc, "DataGrid2"
@@ -2095,10 +2554,10 @@ Dim J As Byte
             DataGrid2.Enabled = True
             
 '            PonerBotonCabecera False
-            If txtaux3(5).Text = "" Then
-                PonerFoco txtaux3(4)
+            If txtAux3(5).Text = "" Then
+                PonerFoco txtAux3(4)
             Else
-                PonerFoco txtaux3(3)
+                PonerFoco txtAux3(3)
             End If
             
             Me.DataGrid2.Enabled = False
@@ -2126,7 +2585,7 @@ Dim J As Byte
             For J = 0 To 2
                 txtAux2(J).Text = DataGrid3.Columns(J).Text
             Next J
-            text2(6).Text = DataGrid3.Columns(3).Text
+            Text2(6).Text = DataGrid3.Columns(3).Text
             
             txtAux2(3).Text = DataGrid3.Columns(4).Text
             
@@ -2208,14 +2667,14 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid2
             B = (xModo = 1 Or xModo = 2) And Modo = 5
             For jj = 1 To 5
-                txtaux3(jj).Height = DataGrid2.RowHeight
-                txtaux3(jj).Top = alto + 10 '- 210 '200
-                txtaux3(jj).visible = B
+                txtAux3(jj).Height = DataGrid2.RowHeight
+                txtAux3(jj).Top = alto + 10 '- 210 '200
+                txtAux3(jj).visible = B
             Next jj
             For jj = 8 To 9
-                txtaux3(jj).Height = DataGrid2.RowHeight
-                txtaux3(jj).Top = alto + 10 '- 210 '200
-                txtaux3(jj).visible = B
+                txtAux3(jj).Height = DataGrid2.RowHeight
+                txtAux3(jj).Top = alto + 10 '- 210 '200
+                txtAux3(jj).visible = B
             Next jj
             For jj = 1 To 2
                 btnBuscar(jj).Height = DataGrid3.RowHeight - 10
@@ -2223,13 +2682,13 @@ Dim B As Boolean
                 btnBuscar(jj).visible = B
             Next jj
             For jj = 3 To 4
-                text2(jj).Height = DataGrid2.RowHeight - 10
-                text2(jj).Top = alto + 5
-                text2(jj).visible = B
+                Text2(jj).Height = DataGrid2.RowHeight - 10
+                Text2(jj).Top = alto + 5
+                Text2(jj).visible = B
             Next jj
-            text2(0).Height = DataGrid2.RowHeight - 10
-            text2(0).Top = alto + 5
-            text2(0).visible = B
+            Text2(0).Height = DataGrid2.RowHeight - 10
+            Text2(0).Top = alto + 5
+            Text2(0).visible = B
             
             
         Case "DataGrid3"
@@ -2243,9 +2702,9 @@ Dim B As Boolean
             btnBuscar(0).Height = DataGrid3.RowHeight - 10
             btnBuscar(0).Top = alto + 5
             btnBuscar(0).visible = B
-            text2(6).Height = DataGrid3.RowHeight - 10
-            text2(6).Top = alto + 5
-            text2(6).visible = B
+            Text2(6).Height = DataGrid3.RowHeight - 10
+            Text2(6).Top = alto + 5
+            Text2(6).visible = B
             
             btnBuscar(0).Top = alto + 5
             btnBuscar(0).visible = B
@@ -2535,20 +2994,20 @@ Dim SQL As String
     Text1(2).Text = RecuperaValor(CadenaSeleccion, 1)
     
     SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(RecuperaValor(CadenaSeleccion, 2), "N")
-    text2(2).Text = DevuelveValor(SQL)
+    Text2(2).Text = DevuelveValor(SQL)
 
 End Sub
 
 Private Sub frmGas_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Conceptos de gastos
-    txtaux3(2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") 'Cod concepto de gasto
-    text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    txtAux3(2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") 'Cod concepto de gasto
+    Text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmGas1_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Conceptos de gastos
     txtAux2(2).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00") 'Cod concepto de gasto
-    text2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    Text2(6).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 
@@ -2568,8 +3027,8 @@ End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Trabajadores
-    txtaux3(1).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod trabajador
-    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    txtAux3(1).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod trabajador
+    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -2858,12 +3317,12 @@ Dim NumF As String
         While Not Rs.EOF
             ' solo si no está insertada la nota de campo en otro parte la insertamos de nuevas
             SQL = "select count(*) from rpartes_variedad where nroparte <> " & Data1.Recordset.Fields(0).Value
-            SQL = SQL & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            SQL = SQL & " and numnotac = " & DBSet(Rs!NumNotac, "N")
             
             If TotalRegistros(SQL) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
                 cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec, numcajon) values "
-                cad = cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!numnotac, "N") & ","
+                cad = cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!NumNotac, "N") & ","
                 cad = cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Numcajon, "N") & ")"
                 
                 conn.Execute cad
@@ -3444,9 +3903,9 @@ Dim SQL As String
             
         Case 2 'cuadrilla
             If PonerFormatoEntero(Text1(Index)) Then
-                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcuadrilla", "codcapat")
+                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rcuadrilla", "codcapat")
                 If Modo = 1 Then Exit Sub
-                If text2(Index).Text = "" Then
+                If Text2(Index).Text = "" Then
                     cadMen = "No existe la Cuadrilla: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -3462,8 +3921,8 @@ Dim SQL As String
                     End If
                     PonerFoco Text1(Index)
                 Else
-                    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(text2(Index).Text, "N")
-                    text2(Index) = DevuelveValor(SQL)
+                    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(Index).Text, "N")
+                    Text2(Index) = DevuelveValor(SQL)
                 End If
             End If
     End Select
@@ -3613,13 +4072,13 @@ Dim I As Integer
     If Data1.Recordset.RecordCount > 0 Then
         CargaGrid DataGrid2, Data3, True ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, True ' rpartes_variedad
-        CargaGrid DataGrid3, AdoAux(0), True ' rpartes_gastos
+        CargaGrid DataGrid3, Adoaux(0), True ' rpartes_gastos
         CargaGrid DataGrid4, Data4, True ' rpartes_variedad
         
     Else
         CargaGrid DataGrid2, Data3, False ' rpartes_trabajador
         CargaGrid DataGrid1, Data2, False ' rpartes_variedad
-        CargaGrid DataGrid3, AdoAux(0), False ' rpartes_gastos
+        CargaGrid DataGrid3, Adoaux(0), False ' rpartes_gastos
         CargaGrid DataGrid4, Data4, False ' rpartes_gastos
     End If
     
@@ -3645,9 +4104,9 @@ Dim SQL As String
     B = PonerCamposForma2(Me, Data1, 2, "Frame2")
     
 '    FormatoDatosTotales
-    text2(2).Text = PonerNombreDeCod(Text1(2), "rcuadrilla", "codcapat")
-    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(text2(2).Text, "N")
-    text2(2).Text = DevuelveValor(SQL)
+    Text2(2).Text = PonerNombreDeCod(Text1(2), "rcuadrilla", "codcapat")
+    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(2).Text, "N")
+    Text2(2).Text = DevuelveValor(SQL)
     
     Modo = 2
     
@@ -3720,9 +4179,9 @@ Dim B As Boolean
         btnBuscar(I).visible = False
         btnBuscar(I).Enabled = True
     Next I
-    For I = 0 To txtaux3.Count - 1
-        txtaux3(I).visible = False
-        BloquearTxt txtaux3(I), True
+    For I = 0 To txtAux3.Count - 1
+        txtAux3(I).visible = False
+        BloquearTxt txtAux3(I), True
     Next I
     For I = 0 To txtAux2.Count - 1
         txtAux2(I).visible = False
@@ -3734,31 +4193,31 @@ Dim B As Boolean
         txtAux2(I).Enabled = (Modo = 5 And NumTabMto = 1)
     Next I
     
-    text2(6).visible = False
-    text2(6).Enabled = False
+    Text2(6).visible = False
+    Text2(6).Enabled = False
     
     For I = 1 To 4
         If (I = 1 Or I = 2) Then
-            BloquearTxt txtaux3(I), Not (Modo = 5 And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1) And NumTabMto = 0)
-            txtaux3(I).Enabled = (Modo = 5 And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1) And NumTabMto = 0)
+            BloquearTxt txtAux3(I), Not (Modo = 5 And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1) And NumTabMto = 0)
+            txtAux3(I).Enabled = (Modo = 5 And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1) And NumTabMto = 0)
         End If
         If I = 3 Then
-            BloquearTxt txtaux3(I), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
-            txtaux3(I).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+            BloquearTxt txtAux3(I), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+            txtAux3(I).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
         End If
         If I = 4 Then
-            BloquearTxt txtaux3(I), Not (Modo = 5) ' And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1))
-            txtaux3(I).Enabled = (Modo = 5) ' And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1))
+            BloquearTxt txtAux3(I), Not (Modo = 5) ' And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1))
+            txtAux3(I).Enabled = (Modo = 5) ' And ((SePuedeModificar And ModificaLineas = 2) Or ModificaLineas = 1))
         End If
     Next I
     
     '[Monica]17/06/2013
-    BloquearTxt txtaux3(8), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
-    txtaux3(8).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+    BloquearTxt txtAux3(8), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+    txtAux3(8).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
     
     '[Monica]23/12/2016
-    BloquearTxt txtaux3(9), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
-    txtaux3(9).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+    BloquearTxt txtAux3(9), Not (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
+    txtAux3(9).Enabled = (Modo = 5 And (Not SePuedeModificar And ModificaLineas = 2) And NumTabMto = 0)
     
     
     For I = 1 To 2
@@ -4106,21 +4565,21 @@ Dim SQL As String
        Case 1 'gastos del parte
             ' *************** canviar la pregunta ****************
             cad = "¿Seguro que desea eliminar el Gasto del Parte?"
-            cad = cad & vbCrLf & "Parte: " & AdoAux(0).Recordset.Fields(0)
-            cad = cad & vbCrLf & "Código: " & AdoAux(0).Recordset.Fields(2) & "-" & AdoAux(0).Recordset.Fields(3)
+            cad = cad & vbCrLf & "Parte: " & Adoaux(0).Recordset.Fields(0)
+            cad = cad & vbCrLf & "Código: " & Adoaux(0).Recordset.Fields(2) & "-" & Adoaux(0).Recordset.Fields(3)
             
             If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
                 On Error GoTo EEliminarLinea
                 Screen.MousePointer = vbHourglass
-                NumRegElim = AdoAux(0).Recordset.AbsolutePosition
+                NumRegElim = Adoaux(0).Recordset.AbsolutePosition
                 TerminaBloquear
-                SQL = "delete from rpartes_gastos where nroparte = " & AdoAux(0).Recordset.Fields(0)
-                SQL = SQL & " and numlinea = " & AdoAux(0).Recordset.Fields(1)
+                SQL = "delete from rpartes_gastos where nroparte = " & Adoaux(0).Recordset.Fields(0)
+                SQL = SQL & " and numlinea = " & Adoaux(0).Recordset.Fields(1)
                 conn.Execute SQL
                 
-                SituarDataTrasEliminar AdoAux(0), NumRegElim
+                SituarDataTrasEliminar Adoaux(0), NumRegElim
                 
-                CargaGrid DataGrid3, AdoAux(0), True
+                CargaGrid DataGrid3, Adoaux(0), True
 '                SSTab1.Tab = 1
 
             End If
@@ -4231,7 +4690,7 @@ Dim B As Boolean
 Dim Opcion As Byte
 Dim SQL As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     Select Case vDataGrid.Name
@@ -4259,13 +4718,13 @@ Dim SQL As String
     
     
     If Opcion = 1 And Data1.Recordset.RecordCount > 0 Then
-        text2(1).Text = DevuelveValor("select sum(importe) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value)
-        text2(1).Text = Format(text2(1).Text, "###,###,##0.00")
+        Text2(1).Text = DevuelveValor("select sum(importe) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value)
+        Text2(1).Text = Format(Text2(1).Text, "###,###,##0.00")
     End If
     
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -4273,53 +4732,53 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
     
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     Select Case vDataGrid.Name
         Case "DataGrid1" 'rpartes_variedad
 '           SQL = "SELECT nroparte, codvarie, nomvarie, kilosrec
             tots = "N||||0|;N||||0|;S|txtAux(2)|T|Nota|1000|;"
-            tots = tots & "S|txtAux(3)|T|Codigo|800|;"
+            tots = tots & "S|txtAux(3)|T|Codigo|900|;"
             If vParamAplic.Cooperativa = 16 Then
-                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1800|;S|txtAux(6)|T|Cajas|1000|;S|txtAux(5)|T|Kilos|1250|;"
+                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1900|;S|txtAux(6)|T|Cajas|1000|;S|txtAux(5)|T|Kilos|1500|;"
             Else
-                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1800|;S|txtAux(6)|T|Horas|1000|;S|txtAux(5)|T|Kilos|1250|;"
+                tots = tots & "S|txtAux(4)|T|Nombre Variedad|1900|;S|txtAux(6)|T|Horas|1000|;S|txtAux(5)|T|Kilos|1500|;"
             End If
-            arregla tots, DataGrid1, Me
+            arregla tots, DataGrid1, Me, 350
          
          Case "DataGrid2" 'rpartes_trabajador
 '           SQL = "SELECT nroparte, numlinea, codtraba, nomtraba, codcoste, nomcoste, importe
             tots = "N||||0|;N||||0|;"
-            tots = tots & "S|txtAux3(1)|T|Codigo|750|;S|btnBuscar(1)|B|||;"
-            tots = tots & "S|Text2(3)|T|Nombre Trabajador|3000|;S|txtAux3(2)|T|Gasto|600|;S|btnBuscar(2)|B|||;S|Text2(4)|T|Descripcion Gasto|2435|;"
-            tots = tots & "S|txtAux3(5)|T|Cód|600|;S|Text2(0)|T|Variedad|1500|;"
-            tots = tots & "S|txtAux3(9)|T|Cajas|830|;S|txtAux3(3)|T|KilosRec|1000|;S|txtAux3(8)|T|Horas|720|;S|txtAux3(4)|T|Importe|1050|;N||||0|;"
-            arregla tots, DataGrid2, Me
+            tots = tots & "S|txtAux3(1)|T|Codigo|950|;S|btnBuscar(1)|B|||;"
+            tots = tots & "S|Text2(3)|T|Nombre Trabajador|3000|;S|txtAux3(2)|T|Gasto|800|;S|btnBuscar(2)|B|||;S|Text2(4)|T|Descripcion Gasto|2435|;"
+            tots = tots & "S|txtAux3(5)|T|Código|850|;S|Text2(0)|T|Variedad|1650|;"
+            tots = tots & "S|txtAux3(9)|T|Cajas|930|;S|txtAux3(3)|T|KilosRec|1000|;S|txtAux3(8)|T|Horas|720|;S|txtAux3(4)|T|Importe|1150|;N||||0|;"
+            arregla tots, DataGrid2, Me, 350
             
          Case "DataGrid3" 'rpartes_gastos (gastos generales del parte)
 '       SQL = SELECT nroparte, numlinea, codgasto, nomgasto, importe
             tots = "N||||0|;N||||0|;"
-            tots = tots & "S|txtAux2(2)|T|Codigo|800|;S|btnBuscar(0)|B|||;"
-            tots = tots & "S|Text2(6)|T|Descripción Gasto|3000|;"
-            tots = tots & "S|txtAux2(3)|T|Importe|1100|;"
-            arregla tots, DataGrid3, Me
+            tots = tots & "S|txtAux2(2)|T|Codigo|900|;S|btnBuscar(0)|B|||;"
+            tots = tots & "S|Text2(6)|T|Descripción Gasto|3700|;"
+            tots = tots & "S|txtAux2(3)|T|Importe|1570|;"
+            arregla tots, DataGrid3, Me, 350
          
          Case "DataGrid4" 'rpartes_gastos (gastos generales del parte)
 '       SQL = SELECT nroparte, numlinea, codgasto, nomgasto, importe
             tots = ""
-            tots = tots & "S|txtAux4(0)|T|Codigo|700|;"
-            tots = tots & "S|txtAux4(1)|T|Nombre Variedad|1800|;"
-            tots = tots & "S|txtAux4(2)|T|Cajas|1000|;"
-            tots = tots & "S|txtAux4(3)|T|Kilos|1000|;"
-            tots = tots & "S|txtAux4(4)|T|Importe|1200|;"
-            arregla tots, DataGrid4, Me
+            tots = tots & "S|txtAux4(0)|T|Codigo|900|;"
+            tots = tots & "S|txtAux4(1)|T|Nombre Variedad|1900|;"
+            tots = tots & "S|txtAux4(2)|T|Cajas|900|;"
+            tots = tots & "S|txtAux4(3)|T|Kilos|1100|;"
+            tots = tots & "S|txtAux4(4)|T|Importe|1400|;"
+            arregla tots, DataGrid4, Me, 350
     
     End Select
     
     vDataGrid.HoldFields
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -4437,8 +4896,8 @@ Dim SQL As String
     Select Case Index
         Case 2 ' codigo de gasto
             If PonerFormatoEntero(txtAux2(Index)) Then
-                text2(6) = DevuelveDesdeBDNew(cAgro, "rconcepgastonom", "nomgasto", "codgasto", txtAux2(Index), "N")
-                If text2(6).Text = "" Then
+                Text2(6) = DevuelveDesdeBDNew(cAgro, "rconcepgastonom", "nomgasto", "codgasto", txtAux2(Index), "N")
+                If Text2(6).Text = "" Then
                     cadMen = "No existe el Concepto de Gasto: " & txtAux2(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -4456,7 +4915,7 @@ Dim SQL As String
                     PonerFoco txtAux2(Index)
                 End If
             Else
-                text2(6).Text = ""
+                Text2(6).Text = ""
             End If
 
 
@@ -4567,7 +5026,7 @@ On Error Resume Next
 
     CargaGrid DataGrid2, Data3, False 'entradas e incidencias
     CargaGrid DataGrid1, Data2, False
-    CargaGrid DataGrid3, Me.AdoAux(0), False 'clasificacion
+    CargaGrid DataGrid3, Me.Adoaux(0), False 'clasificacion
     CargaGrid DataGrid4, Data4, False 'clasificacion
     
     If Err.Number <> 0 Then Err.Clear
@@ -4719,7 +5178,7 @@ Dim I As Integer
               Case 0
                 bAux = (B And Me.Data3.Recordset.RecordCount > 0)
               Case 1
-                bAux = (B And Me.AdoAux(0).Recordset.RecordCount > 0)
+                bAux = (B And Me.Adoaux(0).Recordset.RecordCount > 0)
               Case 2
                 bAux = (B And Me.Data2.Recordset.RecordCount > 0)
             End Select
@@ -4795,7 +5254,7 @@ Dim NroCopias As Integer
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-    ConseguirFoco txtaux3(Index), Modo
+    ConseguirFoco txtAux3(Index), Modo
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -4812,14 +5271,14 @@ Dim Precio As Currency
 Dim ImporteTrab As Currency
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtaux3(Index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtAux3(Index), ModificaLineas) Then Exit Sub
 
     Select Case Index
         Case 1 ' codigo de trabajador
-            If txtaux3(Index) <> "" Then
-                text2(3) = DevuelveDesdeBDNew(cAgro, "straba", "nomtraba", "codtraba", txtaux3(Index), "N")
-                If text2(3).Text = "" Then
-                    cadMen = "No existe el Trabajador: " & txtaux3(Index).Text & vbCrLf
+            If txtAux3(Index) <> "" Then
+                Text2(3) = DevuelveDesdeBDNew(cAgro, "straba", "nomtraba", "codtraba", txtAux3(Index), "N")
+                If Text2(3).Text = "" Then
+                    cadMen = "No existe el Trabajador: " & txtAux3(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmTra = New frmManTraba
@@ -4828,47 +5287,47 @@ Dim ImporteTrab As Currency
                         frmTra.Show vbModal
                         Set frmTra = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtaux3(Index)
+                        PonerFoco txtAux3(Index)
                     Else
-                        txtaux3(Index).Text = ""
+                        txtAux3(Index).Text = ""
                     End If
-                    PonerFoco txtaux3(Index)
+                    PonerFoco txtAux3(Index)
                 Else
                     '[Monica]28/10/2015: si el trabajador esta de baja no le dejamos salir
-                    If TrabajadorDeBaja(txtaux3(Index).Text, Text1(1).Text) Then
+                    If TrabajadorDeBaja(txtAux3(Index).Text, Text1(1).Text) Then
                         MsgBox "El trabajador está de baja. Revise.", vbExclamation
-                        txtaux3(Index).Text = ""
-                        PonerFoco txtaux3(Index)
+                        txtAux3(Index).Text = ""
+                        PonerFoco txtAux3(Index)
                     End If
                 End If
             Else
-                txtaux3(Index).Text = ""
+                txtAux3(Index).Text = ""
             End If
         
     
     
         Case 2 ' codigo de gasto
-            If txtaux3(Index) <> "" Then
-                text2(4) = DevuelveDesdeBDNew(cAgro, "rconcepgastonom", "nomgasto", "codgasto", txtaux3(Index), "N")
-                If text2(4).Text = "" Then
-                    cadMen = "No existe el Concepto de Gasto: " & txtaux3(Index).Text & vbCrLf
+            If txtAux3(Index) <> "" Then
+                Text2(4) = DevuelveDesdeBDNew(cAgro, "rconcepgastonom", "nomgasto", "codgasto", txtAux3(Index), "N")
+                If Text2(4).Text = "" Then
+                    cadMen = "No existe el Concepto de Gasto: " & txtAux3(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmGas = New frmManCGastosNom
                         frmGas.DatosADevolverBusqueda = "0|1|"
-                        frmGas.NuevoCodigo = txtaux3(3).Text
+                        frmGas.NuevoCodigo = txtAux3(3).Text
                         TerminaBloquear
                         frmGas.Show vbModal
                         Set frmGas = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtaux3(3)
+                        PonerFoco txtAux3(3)
                     Else
-                        txtaux3(Index).Text = ""
+                        txtAux3(Index).Text = ""
                     End If
-                    PonerFoco txtaux3(Index)
+                    PonerFoco txtAux3(Index)
                 End If
             Else
-                txtaux3(Index).Text = ""
+                txtAux3(Index).Text = ""
             End If
 
         Case 3 '[Monica]01/03/2012:
@@ -4876,26 +5335,26 @@ Dim ImporteTrab As Currency
             If Combo1(0).ListIndex = 0 Then
                 '[Monica]17/06/2013: añadida la condicion de si es un parte a destajo
                 If vParamAplic.Cooperativa = 0 Then
-                    Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(txtaux3(5).Text, "N"))
+                    Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(txtAux3(5).Text, "N"))
                 Else
-                    Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(txtaux3(5).Text, "N"))
+                    Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(txtAux3(5).Text, "N"))
                 End If
-                ImporteTrab = Round2(ComprobarCero(txtaux3(Index).Text) * Precio, 2)
-                txtaux3(4).Text = Format(ImporteTrab, "###,##0.00")
+                ImporteTrab = Round2(ComprobarCero(txtAux3(Index).Text) * Precio, 2)
+                txtAux3(4).Text = Format(ImporteTrab, "###,##0.00")
             End If
             
         Case 8 ' horas
             'solo en el caso de que sea un parte a horas
-            PonerFormatoDecimal txtaux3(Index), 10
+            PonerFormatoDecimal txtAux3(Index), 10
             If Combo1(0).ListIndex = 1 Then
-                Precio = DevuelveValor("select impsalar  from salarios inner join straba on salarios.codcateg = straba.codcateg where straba.codtraba = " & DBSet(txtaux3(1).Text, "N"))
-                ImporteTrab = Round2(HorasDecimal(ComprobarCero(txtaux3(Index).Text)) * Precio, 2)
-                txtaux3(4).Text = Format(ImporteTrab, "###,##0.00")
+                Precio = DevuelveValor("select impsalar  from salarios inner join straba on salarios.codcateg = straba.codcateg where straba.codtraba = " & DBSet(txtAux3(1).Text, "N"))
+                ImporteTrab = Round2(HorasDecimal(ComprobarCero(txtAux3(Index).Text)) * Precio, 2)
+                txtAux3(4).Text = Format(ImporteTrab, "###,##0.00")
             End If
         
         Case 4 ' importe
-            If txtaux3(Index) <> "" Then
-                If PonerFormatoDecimal(txtaux3(Index), 3) Then cmdAceptar.SetFocus
+            If txtAux3(Index) <> "" Then
+                If PonerFormatoDecimal(txtAux3(Index), 3) Then cmdAceptar.SetFocus
             End If
     End Select
     
@@ -5045,7 +5504,7 @@ Dim B As Boolean
                     If B Then BotonAnyadirLinea NumTabMto
 '                LLamaLineas NumTabMto, 0
                 Case 1
-                    CargaGrid DataGrid3, AdoAux(0), True
+                    CargaGrid DataGrid3, Adoaux(0), True
                     If B Then BotonAnyadirLinea NumTabMto
                 Case 2
                     CargaGrid DataGrid1, Data2, True
@@ -5109,22 +5568,22 @@ Dim I As Integer
         
             LimpiarCamposLin "Frame3"
             
-            txtaux3(0).Text = Text1(0).Text 'nroparte
-            txtaux3(6).Text = NumF ' numero de linea
-            txtaux3(1).Text = "" ' codtraba
-            txtaux3(2).Text = "" ' codconce
-            txtaux3(3).Text = "0" ' kilos
-            txtaux3(4).Text = "" ' importe
-            txtaux3(5).Text = "" ' codvarie
-            text2(3).Text = "" ' nomtraba
-            text2(4).Text = "" ' nomconce
-            text2(0).Text = "" ' nomvarie
-            txtaux3(7).Text = "0" ' modificado
-            txtaux3(8).Text = "0" ' modificado
-            txtaux3(9).Text = "0" ' modificado
-            BloquearTxt txtaux3(1), False
+            txtAux3(0).Text = Text1(0).Text 'nroparte
+            txtAux3(6).Text = NumF ' numero de linea
+            txtAux3(1).Text = "" ' codtraba
+            txtAux3(2).Text = "" ' codconce
+            txtAux3(3).Text = "0" ' kilos
+            txtAux3(4).Text = "" ' importe
+            txtAux3(5).Text = "" ' codvarie
+            Text2(3).Text = "" ' nomtraba
+            Text2(4).Text = "" ' nomconce
+            Text2(0).Text = "" ' nomvarie
+            txtAux3(7).Text = "0" ' modificado
+            txtAux3(8).Text = "0" ' modificado
+            txtAux3(9).Text = "0" ' modificado
+            BloquearTxt txtAux3(1), False
 '                    BloquearTxt txtaux(12), False
-            PonerFoco txtaux3(1)
+            PonerFoco txtAux3(1)
                     
                     
         Case 1 ' *** pose els index dels tabs de llínies que tenen datagrid ***
@@ -5133,7 +5592,7 @@ Dim I As Integer
             NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
             ' ***************************************************************
 
-            AnyadirLinea DataGrid3, AdoAux(0)
+            AnyadirLinea DataGrid3, Adoaux(0)
     
             anc = DataGrid3.Top
             If DataGrid3.Row < 0 Then
@@ -5149,7 +5608,7 @@ Dim I As Integer
             txtAux2(0).Text = Text1(0).Text 'nroparte
             txtAux2(1).Text = NumF
             txtAux2(2).Text = ""
-            text2(6).Text = ""
+            Text2(6).Text = ""
             txtAux2(3).Text = ""
             
             BloquearTxt txtAux2(3), False
@@ -5214,9 +5673,9 @@ Dim cad As String
             
             '[Monica]01/03/2012: si me han modificado los kilos o importe lo pongo que está modificado
             '                    solo en el caso de lineas que sean de variedad (automaticas)
-            txtaux3(7).Text = "0"
-            If ComprobarCero(txtaux3(5).Text) <> 0 And (CLng(txtaux3(3).Text) <> KilosAnt Or CCur(ComprobarCero(txtaux3(4).Text)) <> ImporteAnt) Then
-                txtaux3(7).Text = "1"
+            txtAux3(7).Text = "0"
+            If ComprobarCero(txtAux3(5).Text) <> 0 And (CLng(txtAux3(3).Text) <> KilosAnt Or CCur(ComprobarCero(txtAux3(4).Text)) <> ImporteAnt) Then
+                txtAux3(7).Text = "1"
             End If
             
         Case 1:
@@ -5243,14 +5702,14 @@ Dim cad As String
             Select Case NumTabMto
                 Case 1
 
-                    V = AdoAux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
-                    CargaGrid DataGrid3, AdoAux(0), True
+                    V = Adoaux(0).Recordset.Fields(1) 'el 2 es el nº de llinia
+                    CargaGrid DataGrid3, Adoaux(0), True
 
                     ' *** si n'hi han tabs ***
 '                    SSTab1.Tab = 1
 
                     DataGrid3.SetFocus
-                    AdoAux(0).Recordset.Find (AdoAux(0).Recordset.Fields(1).Name & " =" & V)
+                    Adoaux(0).Recordset.Find (Adoaux(0).Recordset.Fields(1).Name & " =" & V)
 
                     LLamaLineas ModificaLineas, 0, "DataGrid3"
                 Case 0

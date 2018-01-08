@@ -116,7 +116,7 @@ Begin VB.Form frmDocAltaBaja
          Index           =   2
          Left            =   4200
          TabIndex        =   4
-         Top             =   5295
+         Top             =   5310
          Width           =   1065
       End
       Begin VB.CommandButton Command8 

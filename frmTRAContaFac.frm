@@ -7,13 +7,13 @@ Begin VB.Form frmTRAContaFac
    ClientHeight    =   6675
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6315
+   ClientWidth     =   7425
    Icon            =   "frmTRAContaFac.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6675
-   ScaleWidth      =   6315
+   ScaleWidth      =   7425
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog cd1 
@@ -28,16 +28,16 @@ Begin VB.Form frmTRAContaFac
       Left            =   0
       TabIndex        =   0
       Top             =   -90
-      Width           =   6330
+      Width           =   7365
       Begin VB.Frame Frame1 
          Caption         =   "Datos para Selección"
          BeginProperty Font 
-            Name            =   "Tahoma"
+            Name            =   "Verdana"
             Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
-            Italic          =   0   'False
+            Italic          =   -1  'True
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00800000&
@@ -45,32 +45,59 @@ Begin VB.Form frmTRAContaFac
          Left            =   90
          TabIndex        =   1
          Top             =   225
-         Width           =   6060
+         Width           =   7140
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   5
             Left            =   1500
             MaxLength       =   10
             TabIndex        =   18
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1290
-            Width           =   1050
+            Width           =   1350
          End
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   6
-            Left            =   3630
+            Left            =   3945
             MaxLength       =   10
             TabIndex        =   19
             Tag             =   "Código Postal|T|S|||clientes|codposta|||"
             Top             =   1320
-            Width           =   1050
+            Width           =   1350
          End
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   7
             Left            =   1500
             MaxLength       =   7
@@ -81,9 +108,18 @@ Begin VB.Form frmTRAContaFac
          End
          Begin VB.TextBox txtcodigo 
             Alignment       =   1  'Right Justify
-            Height          =   285
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   8
-            Left            =   3630
+            Left            =   3945
             MaxLength       =   7
             TabIndex        =   17
             Tag             =   "Nº de Factura|N|N|0|9999999|schfac|numfactu|0000000|S|"
@@ -91,16 +127,34 @@ Begin VB.Form frmTRAContaFac
             Width           =   1035
          End
          Begin VB.ComboBox Combo1 
-            Height          =   315
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
             Index           =   0
-            Left            =   1500
+            Left            =   2130
             Style           =   2  'Dropdown List
             TabIndex        =   20
-            Top             =   1680
+            Top             =   1725
             Width           =   3180
          End
          Begin VB.Label Label4 
             Caption         =   "Fecha Factura"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
             Height          =   255
             Index           =   2
@@ -111,21 +165,39 @@ Begin VB.Form frmTRAContaFac
          End
          Begin VB.Label Label4 
             Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   15
-            Left            =   645
+            Left            =   555
             TabIndex        =   32
-            Top             =   1260
-            Width           =   465
+            Top             =   1305
+            Width           =   600
          End
          Begin VB.Label Label4 
             Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   14
-            Left            =   2820
+            Left            =   2910
             TabIndex        =   31
-            Top             =   1350
-            Width           =   420
+            Top             =   1305
+            Width           =   645
          End
          Begin VB.Image imgFec 
             Height          =   240
@@ -139,7 +211,7 @@ Begin VB.Form frmTRAContaFac
          Begin VB.Image imgFec 
             Height          =   240
             Index           =   6
-            Left            =   3360
+            Left            =   3675
             Picture         =   "frmTRAContaFac.frx":0097
             ToolTipText     =   "Buscar fecha"
             Top             =   1320
@@ -147,28 +219,310 @@ Begin VB.Form frmTRAContaFac
          End
          Begin VB.Label Label4 
             Caption         =   "Desde"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   13
-            Left            =   615
+            Left            =   525
             TabIndex        =   30
             Top             =   630
-            Width           =   465
+            Width           =   690
          End
          Begin VB.Label Label4 
             Caption         =   "Hasta"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             Height          =   195
             Index           =   12
-            Left            =   2790
+            Left            =   2880
             TabIndex        =   29
             Top             =   630
-            Width           =   420
+            Width           =   645
          End
          Begin VB.Label Label4 
             AutoSize        =   -1  'True
             Caption         =   "Factura"
             BeginProperty Font 
-               Name            =   "Tahoma"
-               Size            =   8.25
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   240
+            Index           =   11
+            Left            =   255
+            TabIndex        =   28
+            Top             =   390
+            Width           =   765
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Tipo de Factura"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   5
+            Left            =   240
+            TabIndex        =   27
+            Top             =   1785
+            Width           =   1740
+         End
+      End
+      Begin VB.Frame Frame2 
+         Caption         =   "Datos para la contabilización"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   2850
+         Left            =   90
+         TabIndex        =   2
+         Top             =   2460
+         Width           =   7155
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   10
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   26
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   2445
+            Width           =   1350
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   10
+            Left            =   3825
+            Locked          =   -1  'True
+            TabIndex        =   14
+            Top             =   2445
+            Width           =   3180
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   9
+            Left            =   3825
+            Locked          =   -1  'True
+            TabIndex        =   12
+            Top             =   1665
+            Width           =   3180
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   9
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   24
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   1665
+            Width           =   1350
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   0
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   21
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   480
+            Width           =   1350
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   3
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   23
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   1260
+            Width           =   1350
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   3
+            Left            =   3825
+            Locked          =   -1  'True
+            TabIndex        =   9
+            Top             =   1260
+            Width           =   3180
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   1
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   22
+            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
+            Top             =   855
+            Width           =   1350
+         End
+         Begin VB.TextBox txtNombre 
+            BackColor       =   &H80000018&
+            Enabled         =   0   'False
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   4
+            Left            =   3825
+            Locked          =   -1  'True
+            TabIndex        =   3
+            Top             =   2070
+            Width           =   3180
+         End
+         Begin VB.TextBox txtcodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   4
+            Left            =   2430
+            MaxLength       =   10
+            TabIndex        =   25
+            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
+            Top             =   2070
+            Width           =   1350
+         End
+         Begin VB.Image imgBuscar 
+            Height          =   240
+            Index           =   10
+            Left            =   2160
+            ToolTipText     =   "Buscar Cuenta Contable"
+            Top             =   2445
+            Width           =   240
+         End
+         Begin VB.Label Label1 
+            Caption         =   "Cta.Retención"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
                Charset         =   0
                Weight          =   400
                Underline       =   0   'False
@@ -177,200 +531,62 @@ Begin VB.Form frmTRAContaFac
             EndProperty
             ForeColor       =   &H00972E0B&
             Height          =   195
-            Index           =   11
-            Left            =   255
-            TabIndex        =   28
-            Top             =   390
-            Width           =   555
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Tipo de Factura"
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   5
-            Left            =   240
-            TabIndex        =   27
-            Top             =   1740
-            Width           =   1245
-         End
-      End
-      Begin VB.Frame Frame2 
-         Caption         =   "Datos para la contabilización"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   2715
-         Left            =   90
-         TabIndex        =   2
-         Top             =   2460
-         Width           =   6075
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   10
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   26
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   2220
-            Width           =   1125
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   10
-            Left            =   3195
-            Locked          =   -1  'True
-            TabIndex        =   14
-            Top             =   2220
-            Width           =   2685
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   9
-            Left            =   3195
-            Locked          =   -1  'True
-            TabIndex        =   12
-            Top             =   1530
-            Width           =   2685
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   9
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   24
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   1530
-            Width           =   1125
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   0
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   21
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   480
-            Width           =   1140
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   3
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   23
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   1170
-            Width           =   1125
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   3
-            Left            =   3195
-            Locked          =   -1  'True
-            TabIndex        =   9
-            Top             =   1170
-            Width           =   2685
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   1
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   22
-            Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-            Top             =   810
-            Width           =   1140
-         End
-         Begin VB.TextBox txtNombre 
-            BackColor       =   &H80000018&
-            Enabled         =   0   'False
-            Height          =   285
-            Index           =   4
-            Left            =   3195
-            Locked          =   -1  'True
-            TabIndex        =   3
-            Top             =   1890
-            Width           =   2685
-         End
-         Begin VB.TextBox txtcodigo 
-            Alignment       =   1  'Right Justify
-            Height          =   285
-            Index           =   4
-            Left            =   1980
-            MaxLength       =   10
-            TabIndex        =   25
-            Tag             =   "Cta.Contable|T|S|||sparam|ctaconta|||"
-            Top             =   1890
-            Width           =   1125
-         End
-         Begin VB.Image imgBuscar 
-            Height          =   240
-            Index           =   10
-            Left            =   1710
-            ToolTipText     =   "Buscar Cuenta Contable"
-            Top             =   2220
-            Width           =   240
-         End
-         Begin VB.Label Label1 
-            Caption         =   "Cta.Retención"
-            ForeColor       =   &H00972E0B&
-            Height          =   195
             Index           =   3
             Left            =   180
             TabIndex        =   15
-            Top             =   2265
+            Top             =   2490
             Width           =   1395
          End
          Begin VB.Label Label1 
             Caption         =   "F.Pago Negativas"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   285
             Index           =   2
             Left            =   180
             TabIndex        =   13
-            Top             =   1575
-            Width           =   1485
+            Top             =   1710
+            Width           =   1890
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   9
-            Left            =   1710
+            Left            =   2160
             ToolTipText     =   "Buscar Forma Pago"
-            Top             =   1530
+            Top             =   1665
             Width           =   240
          End
          Begin VB.Label Label4 
             Caption         =   "Fecha Recepción"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
             Height          =   255
             Index           =   1
             Left            =   180
             TabIndex        =   11
             Top             =   480
-            Width           =   1485
+            Width           =   1845
          End
          Begin VB.Image imgFec 
             Height          =   240
             Index           =   0
-            Left            =   1710
+            Left            =   2160
             Picture         =   "frmTRAContaFac.frx":0122
             ToolTipText     =   "Buscar fecha"
             Top             =   480
@@ -379,82 +595,127 @@ Begin VB.Form frmTRAContaFac
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   3
-            Left            =   1710
+            Left            =   2160
             ToolTipText     =   "Buscar Forma Pago"
-            Top             =   1170
+            Top             =   1260
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "F.Pago Positivas"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
-            Height          =   195
+            Height          =   240
             Index           =   0
             Left            =   180
             TabIndex        =   10
-            Top             =   1215
-            Width           =   1575
+            Top             =   1305
+            Width           =   1890
          End
          Begin VB.Label Label4 
             Caption         =   "Fecha Vencimiento"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
             Height          =   255
             Index           =   0
             Left            =   180
             TabIndex        =   8
-            Top             =   855
-            Width           =   1425
+            Top             =   900
+            Width           =   1965
          End
          Begin VB.Image imgFec 
             Height          =   240
             Index           =   1
-            Left            =   1710
+            Left            =   2160
             Picture         =   "frmTRAContaFac.frx":01AD
             ToolTipText     =   "Buscar fecha"
-            Top             =   810
+            Top             =   855
             Width           =   240
          End
          Begin VB.Label Label1 
             Caption         =   "Cta.Banco Prevista"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
             ForeColor       =   &H00972E0B&
             Height          =   195
             Index           =   24
             Left            =   180
             TabIndex        =   4
-            Top             =   1935
-            Width           =   1395
+            Top             =   2115
+            Width           =   1935
          End
          Begin VB.Image imgBuscar 
             Height          =   240
             Index           =   4
-            Left            =   1710
+            Left            =   2160
             ToolTipText     =   "Buscar Cuenta Contable"
-            Top             =   1890
+            Top             =   2070
             Width           =   240
          End
       End
       Begin VB.CommandButton cmdCancel 
          Caption         =   "&Cancelar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   5100
+         Left            =   6180
          TabIndex        =   35
          Top             =   6240
-         Width           =   975
+         Width           =   1065
       End
       Begin VB.CommandButton cmdAceptar 
          Caption         =   "&Aceptar"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
-         Left            =   3915
+         Left            =   4995
          TabIndex        =   34
          Top             =   6240
-         Width           =   975
+         Width           =   1065
       End
       Begin MSComctlLib.ProgressBar Pb1 
          Height          =   315
          Left            =   120
          TabIndex        =   5
          Top             =   5280
-         Width           =   6045
-         _ExtentX        =   10663
+         Width           =   7125
+         _ExtentX        =   12568
          _ExtentY        =   556
          _Version        =   393216
          Appearance      =   1
@@ -465,7 +726,7 @@ Begin VB.Form frmTRAContaFac
          Left            =   90
          TabIndex        =   7
          Top             =   5610
-         Width           =   5940
+         Width           =   7155
       End
       Begin VB.Label lblProgres 
          Height          =   285
@@ -473,7 +734,7 @@ Begin VB.Form frmTRAContaFac
          Left            =   90
          TabIndex        =   6
          Top             =   5880
-         Width           =   5925
+         Width           =   7140
       End
    End
 End
@@ -545,7 +806,7 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
 Dim cadWHERE As String
 Dim cDesde As String
@@ -662,7 +923,7 @@ Dim I As Integer
     PosicionarCombo Me.Combo1(0), 0
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.cmdcancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 
@@ -1083,19 +1344,19 @@ End Function
 
 Private Sub ContabilizarFacturas(cadTabla As String, cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
+Dim SQL As String
 Dim B As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
 
 
 
-    Sql = "CONTRA" 'contabilizar facturas de transporte
+    SQL = "CONTRA" 'contabilizar facturas de transporte
     
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Contabilizar Facturas de Transporte. Hay otro usuario contabilizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -1121,10 +1382,10 @@ Dim CCoste As String
     'comprobar si existen  facturas anteriores al periodo solicitado
     'sin contabilizar
     If Me.txtCodigo(5).Text <> "" Then 'anteriores a fechadesde
-        Sql = "SELECT COUNT(*) FROM " & cadTabla
-        Sql = Sql & " WHERE fecfactu <"
-        Sql = Sql & DBSet(txtCodigo(5), "F") & " AND contabilizado=0 and codtipom = " & DBSet(Mid(Combo1(0).Text, 1, 3), "T")
-        If RegistrosAListar(Sql) > 0 Then
+        SQL = "SELECT COUNT(*) FROM " & cadTabla
+        SQL = SQL & " WHERE fecfactu <"
+        SQL = SQL & DBSet(txtCodigo(5), "F") & " AND contabilizado=0 and codtipom = " & DBSet(Mid(Combo1(0).Text, 1, 3), "T")
+        If RegistrosAListar(SQL) > 0 Then
             MsgBox "Hay Facturas anteriores sin contabilizar.", vbExclamation
             Exit Sub
         End If
@@ -1153,11 +1414,11 @@ Dim CCoste As String
 
     'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
 '    TerminaBloquear
-    Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
-    Sql = Sql & ".codtipom=tmpFactu.codtipom AND "
+    SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla
+    SQL = SQL & ".codtipom=tmpFactu.codtipom AND "
     
-    Sql = Sql & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu AND " & cadTabla & ".codtrans=tmpfactu.codtrans"
-    If Not BloqueaRegistro(Sql, cadWHERE) Then
+    SQL = SQL & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu AND " & cadTabla & ".codtrans=tmpfactu.codtrans"
+    If Not BloqueaRegistro(SQL, cadWHERE) Then
         MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -1310,7 +1571,7 @@ Dim CCoste As String
 End Sub
 
 Private Function PasarFacturasAContab(cadTabla As String, CCoste As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
 Dim I As Integer
@@ -1322,15 +1583,15 @@ Dim Codigo1 As String
     PasarFacturasAContab = False
 
     '---- Obtener el total de Facturas a Insertar en la contabilidad
-    Sql = "SELECT count(*) "
-    Sql = Sql & " FROM " & cadTabla & " INNER JOIN tmpFactu "
+    SQL = "SELECT count(*) "
+    SQL = SQL & " FROM " & cadTabla & " INNER JOIN tmpFactu "
     Codigo1 = "codtipom"
-    Sql = Sql & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
-    Sql = Sql & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
-    Sql = Sql & " and " & cadTabla & ".codtrans=tmpfactu.codtrans"
+    SQL = SQL & " ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1
+    SQL = SQL & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+    SQL = SQL & " and " & cadTabla & ".codtrans=tmpfactu.codtrans"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         numfactu = Rs.Fields(0)
     Else
@@ -1344,18 +1605,18 @@ Dim Codigo1 As String
     '-----------------------------------------------------------
     ' Mosrtaremos para cada factura de PROVEEDOR
     ' que numregis le ha asignado
-    Sql = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
-    conn.Execute Sql
+    SQL = "DELETE FROM tmpinformes WHERE codusu = " & vUsu.Codigo
+    conn.Execute SQL
 
     Set cContaFra = New cContabilizarFacturas
     
     If Not cContaFra.EstablecerValoresInciales(ConnConta) Then
         'NO ha establcedio los valores de la conta.  Le dejaremos seguir, avisando que
         ' obviamente, no va a contabilizar las FRAS
-        Sql = "Si continua, las facturas se insertaran en el registro, pero no serán contabilizadas" & vbCrLf
-        Sql = Sql & "en este momento. Deberán ser contabilizadas desde el ARICONTA" & vbCrLf & vbCrLf
-        Sql = Sql & Space(50) & "¿Continuar?"
-        If MsgBox(Sql, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
+        SQL = "Si continua, las facturas se insertaran en el registro, pero no serán contabilizadas" & vbCrLf
+        SQL = SQL & "en este momento. Deberán ser contabilizadas desde el ARICONTA" & vbCrLf & vbCrLf
+        SQL = SQL & Space(50) & "¿Continuar?"
+        If MsgBox(SQL, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Function
     End If
 
     '---- Pasar cada una de las facturas seleccionadas a la Conta
@@ -1363,28 +1624,28 @@ Dim Codigo1 As String
         CargarProgres Me.Pb1, numfactu
 
         'seleccinar todas las facturas que hemos insertado en la temporal (las que vamos a contabilizar)
-        Sql = "SELECT * "
-        Sql = Sql & " FROM tmpFactu "
+        SQL = "SELECT * "
+        SQL = SQL & " FROM tmpFactu "
 
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenStatic, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenStatic, adLockPessimistic, adCmdText
         I = 1
 
         B = True
         'pasar a contabilidad cada una de las facturas seleccionadas
         While Not Rs.EOF
-            Sql = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "T") & " and numfactu=" & DBSet(Rs!numfactu, "T")
-            Sql = Sql & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
-            Sql = Sql & " and " & cadTabla & ".codtrans=" & DBSet(Rs!codTrans, "T")
+            SQL = cadTabla & "." & Codigo1 & "=" & DBSet(Rs.Fields(0), "T") & " and numfactu=" & DBSet(Rs!numfactu, "T")
+            SQL = SQL & " and fecfactu=" & DBSet(Rs!fecfactu, "F")
+            SQL = SQL & " and " & cadTabla & ".codtrans=" & DBSet(Rs!codTrans, "T")
             
-            If PasarFacturaTra(Sql, CCoste, Orden2, vParamAplic.Seccionhorto, Tipo, CDate(txtCodigo(0).Text), CDate(txtCodigo(1).Text), txtCodigo(3).Text, txtCodigo(9).Text, txtCodigo(4).Text, txtCodigo(10).Text, "", Mid(Combo1(0).Text, 1, 3), cContaFra, vSeccion.TipIvaREA) = False And B Then B = False
+            If PasarFacturaTra(SQL, CCoste, Orden2, vParamAplic.Seccionhorto, Tipo, CDate(txtCodigo(0).Text), CDate(txtCodigo(1).Text), txtCodigo(3).Text, txtCodigo(9).Text, txtCodigo(4).Text, txtCodigo(10).Text, "", Mid(Combo1(0).Text, 1, 3), cContaFra, vSeccion.TipIvaREA) = False And B Then B = False
 
             '---- Laura 26/10/2006
             'Al pasar cada factura al hacer el commit desbloqueamos los registros
             'que teniamos bloqueados y los volvemos a bloquear
             'Laura: 11/10/2006 bloquear los registros q vamos a contabilizar
-            Sql = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
-            If Not BloqueaRegistro(Sql, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
+            SQL = cadTabla & " INNER JOIN tmpFactu ON " & cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu "
+            If Not BloqueaRegistro(SQL, cadTabla & "." & Codigo1 & "=tmpFactu." & Codigo1 & " AND " & cadTabla & ".numfactu=tmpFactu.numfactu AND " & cadTabla & ".fecfactu=tmpFactu.fecfactu") Then
 '                MsgBox "No se pueden Contabilizar Facturas. Hay registros bloqueados.", vbExclamation
 '                Screen.MousePointer = vbDefault
 '                Exit Sub
@@ -1416,7 +1677,7 @@ End Function
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim I As Byte
 
     'tipo de IRPF
