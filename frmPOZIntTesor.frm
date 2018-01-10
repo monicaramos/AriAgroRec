@@ -706,7 +706,7 @@ Dim List As Collection
     Pb1.visible = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     
     CargaCombo
     If vParamAplic.Cooperativa = 7 Then
@@ -988,6 +988,8 @@ Dim cadTabla As String
     B = ComprobarCtaContable_new("rrecibpozos", 1)
     IncrementarProgres Me.Pb1, 100
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
    
     '===========================================================================
@@ -1121,6 +1123,8 @@ Dim Codmacta As String
                 IncrementarProgres Me.Pb1, 1
                 Me.lblProgres(1).Caption = "Insertando registro en Tesorería...   (" & I & " de " & numlinea & ")"
                 Me.Refresh
+                DoEvents
+                
                 I = I + 1
                 cadMen = "Insertando en Tesoreria: "
                 B = InsertarEnTesoreriaPOZOS(cadMen, Rs, CDate(txtCodigo(2).Text), CInt(txtCodigo(3).Text), txtCodigo(4).Text)
@@ -1323,6 +1327,8 @@ Dim CCoste As String
     B = ComprobarLetraSerie(cadTabla)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
     '[Monica]04/06/2014:
@@ -1332,6 +1338,8 @@ Dim CCoste As String
     B = ComprobarSociosSeccion(cadTabla, vParamAplic.SeccionPOZOS)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -1346,6 +1354,8 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -1357,6 +1367,8 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 1)
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -1367,12 +1379,16 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 2, 1)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
     Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble Venta Cuotas en contabilidad ..."
     B = ComprobarCtaContable_new(cadTabla, 2, 2)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
     '[Monica]21/01/2016: comprobamos la cuenta de recargo (escalona)
@@ -1381,6 +1397,8 @@ Dim CCoste As String
         B = ComprobarCtaContable_new(cadTabla, 2, 6)
         IncrementarProgres Me.Pb1, 10
         Me.Refresh
+        DoEvents
+        
         If Not B Then Exit Sub
     End If
 
@@ -1394,6 +1412,8 @@ Dim CCoste As String
             B = ComprobarCtaContable_new(cadTabla, 2, 4)
             IncrementarProgres Me.Pb1, 10
             Me.Refresh
+            DoEvents
+            
             If Not B Then Exit Sub
         End If
         
@@ -1404,6 +1424,8 @@ Dim CCoste As String
             B = ComprobarCtaContable_new(cadTabla, 2, 3)
             IncrementarProgres Me.Pb1, 10
             Me.Refresh
+            DoEvents
+            
             If Not B Then Exit Sub
         End If
         
@@ -1414,6 +1436,8 @@ Dim CCoste As String
             B = ComprobarCtaContable_new(cadTabla, 2, 5)
             IncrementarProgres Me.Pb1, 10
             Me.Refresh
+            DoEvents
+            
             If Not B Then Exit Sub
         End If
         
@@ -1427,6 +1451,8 @@ Dim CCoste As String
     B = ComprobarTiposIVA(cadTabla)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -1449,6 +1475,8 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
 
 '    If b Then
 '       Me.lblProgres(1).Caption = "Comprobando Forma de Pago ..."
@@ -1457,6 +1485,8 @@ Dim CCoste As String
 '    End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
 
 
     '===========================================================================
@@ -1613,6 +1643,8 @@ Dim CCoste As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
+            
             I = I + 1
             Rs.MoveNext
         Wend

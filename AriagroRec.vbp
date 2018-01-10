@@ -331,6 +331,7 @@ Form=frmMensajes2.frm
 Form=frmAlmzFacturasPrev.frm
 Form=frmAPOMtoQuaPrev.frm
 Form=frmBodEntradasPrev.frm
+Module=ModBasico; Moduls\ModBasico.bas
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

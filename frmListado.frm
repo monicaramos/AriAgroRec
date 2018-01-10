@@ -18165,6 +18165,7 @@ Dim GGPro As String
         Label2(262).Caption = "Campo : " & Rs!codcampo
         IncrementarProgres pb10, 1
         Me.Refresh
+        DoEvents
     
         GGPar = ""
         GGPro = ""
@@ -22462,6 +22463,8 @@ Dim B As Boolean
     pb9.visible = True
     Me.pb9.Max = longitud
     Me.Refresh
+    DoEvents
+    
     Me.pb9.Value = 0
 
     B = True
@@ -22476,6 +22479,7 @@ Dim B As Boolean
         Me.pb9.Value = Me.pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         Line Input #NF, cad
     Wend
@@ -22487,6 +22491,7 @@ Dim B As Boolean
         Me.pb9.Value = Me.pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarLinea(cad)
         
@@ -22701,6 +22706,7 @@ Dim NomFic As String
     Me.pb9.Max = longitud
     Me.Refresh
     Me.pb9.Value = 0
+    DoEvents
         
     AlbaranAnterior = 0
         
@@ -22711,6 +22717,7 @@ Dim NomFic As String
         Me.pb9.Value = Me.pb9.Value + Len(cad)
         lblProgres(5).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         
@@ -27044,7 +27051,7 @@ Dim Tipo As Integer
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
-    
+    DoEvents
     
     SQL = "select * from tmpentrada"
     Set Rs = New ADODB.Recordset
@@ -27059,6 +27066,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + 1
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
 
         ' comprobamos que no exista el albaran en rclasifica
         SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
@@ -27164,7 +27172,8 @@ Dim Tipo As Integer
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
-
+    DoEvents
+    
     SQL = "select * from tmpclasific"
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -27177,7 +27186,8 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + 1
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
-
+        DoEvents
+        
         ' comprobamos que no exista el albaran en rclasifica
         SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numalbar, "N")
         If TotalRegistros(SQL) > 0 Then
@@ -27267,6 +27277,7 @@ Dim campo As String
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    dovents
 
     SQL = "insert into tmpentrada(codsocio, codcampo, numalbar, codvarie, fecalbar, "
     SQL = SQL & "horalbar, kilosbru, kilosnet, numcajon) values  "
@@ -27278,6 +27289,7 @@ Dim campo As String
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         Variedad = Format(RecuperaValor(cad, 4), "00") & Format(RecuperaValor(cad, 5), "00")
         HoraEntrada = DBSet(RecuperaValor(cad, 6) & " " & RecuperaValor(cad, 7), "FH")
@@ -27344,6 +27356,7 @@ Dim campo As String
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    DoEvents
 
     SQL = "insert into tmpclasific(numalbar, codvarie, codcalir, porcenta) values  "
     Sql2 = ""
@@ -27354,6 +27367,7 @@ Dim campo As String
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         Variedad = Format(RecuperaValor(cad, 2), "00") & Format(RecuperaValor(cad, 3), "00")
         
@@ -27374,6 +27388,7 @@ Dim campo As String
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         Variedad = Format(RecuperaValor(cad, 2), "00") & Format(RecuperaValor(cad, 3), "00")
         
@@ -27439,6 +27454,7 @@ Dim cadMen As String
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    DoEvents
     
     
     SQL = "select * from tmpentrada order by numalbar"
@@ -27450,6 +27466,7 @@ Dim cadMen As String
         Me.Pb2.Value = Me.Pb2.Value + 1
         lblProgres(3).Caption = "Albarán " & DBLet(Rs!numalbar, "N")
         Me.Refresh
+        DoEvents
         
         
         Transporte = 0
@@ -27539,6 +27556,7 @@ Dim cadMen As String
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    DoEvents
     
     
     SQL = "select *, tmpentrada.kilosnet as kilosent from tmpclasific, tmpentrada "
@@ -27561,6 +27579,7 @@ Dim cadMen As String
         Me.Pb2.Value = Me.Pb2.Value + 1
         lblProgres(3).Caption = "Albarán " & DBLet(Rs!numalbar, "N") & " Variedad " & DBLet(Rs!codvarie, "N") & " Calidad " & DBLet(Rs!codcalir, "N")
         Me.Refresh
+        DoEvents
         
         Kilos = Round2(DBLet(Rs!Kilosent, "N") * DBLet(Rs!porcenta, "N") / 100, 0)
         
@@ -29528,7 +29547,8 @@ Dim Rs2 As ADODB.Recordset
     Pb4.visible = True
     Pb4.Max = TotalRegistrosConsulta(SQL)
     'Me.Refresh
-    DoEvents
+    'DoEvents
+    
     Pb4.Value = 0
     Label2(117).visible = True
     

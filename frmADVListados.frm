@@ -2808,6 +2808,8 @@ Dim Importe As Currency
     Me.Pb1.visible = True
     CargarProgres Pb1, Nregs
     Me.Refresh
+    DoEvents
+    
     
     
     Set Rs = New ADODB.Recordset
@@ -2819,6 +2821,8 @@ Dim Importe As Currency
     
         IncrementarProgres Pb1, 1
         Me.Refresh
+        DoEvents
+        
     
         If DBLet(Rs!TipoPrecio) = 0 Then ' cantidad
             Importe = Round2(DBLet(Rs!preciove) * DBLet(Rs!cantidad), 2)
@@ -2910,6 +2914,8 @@ Dim CadValues As String
     Me.Pb2.visible = True
     CargarProgres Pb2, Nregs
     Me.Refresh
+    DoEvents
+    
     
     
     Set Rs = New ADODB.Recordset

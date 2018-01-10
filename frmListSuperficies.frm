@@ -1088,7 +1088,7 @@ Dim H As Integer, W As Integer
 
     FrameSuperficiesVisible True, H, W
     tabla = "rcampos"
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
 '    Me.cmdCancel(indFrame).Cancel = True
@@ -1109,16 +1109,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {rcampos.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {rcampos.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {rcampos.codvarie} = -1 "
+        SQL = " {rcampos.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -1340,7 +1340,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vClien As cSocio
 ' añadido
@@ -1381,7 +1381,7 @@ End Function
 
 Private Function CargarTemporalSuperficie(cTabla As String, cWhere As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 Dim Sql2 As String
 
@@ -1393,7 +1393,7 @@ Dim Nregs As Long
     
     CargarTemporalSuperficie = False
 
-    pb1.visible = True
+    Pb1.visible = True
     Label2(0).visible = True
 
     Sql2 = "delete from tmpsuperficies where codusu = " & vUsu.Codigo
@@ -1410,23 +1410,23 @@ Dim Nregs As Long
         
     ' insertamos en la temporal con la suma de superficie a cero
     '                                       variedad
-    Sql = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
-    Sql = Sql & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
-    Sql = Sql & " where " & cWhere
-    Sql = Sql & " group by 1,2 "
-    Sql = Sql & " order by 1,2 "
+    SQL = "insert into tmpsuperficies (codusu, codvarie, superficie1, superficie2, superficie3, superficie4)    "
+    SQL = SQL & "select " & DBSet(vUsu.Codigo, "N") & ",rcampos.codvarie,0,0,0,0 from " & cTabla
+    SQL = SQL & " where " & cWhere
+    SQL = SQL & " group by 1,2 "
+    SQL = SQL & " order by 1,2 "
     
-    conn.Execute Sql
+    conn.Execute SQL
     
-    If Option3(0).Value Then Sql = "select rcampos.codvarie, sum(supcoope) from " & cTabla
-    If Option3(1).Value Then Sql = "select rcampos.codvarie, sum(supcatas) from " & cTabla
-    If Option3(2).Value Then Sql = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
-    If Option3(3).Value Then Sql = "select rcampos.codvarie, sum(supculti) from " & cTabla
-    Sql = Sql & " where " & cWhere
+    If Option3(0).Value Then SQL = "select rcampos.codvarie, sum(supcoope) from " & cTabla
+    If Option3(1).Value Then SQL = "select rcampos.codvarie, sum(supcatas) from " & cTabla
+    If Option3(2).Value Then SQL = "select rcampos.codvarie, sum(supsigpa) from " & cTabla
+    If Option3(3).Value Then SQL = "select rcampos.codvarie, sum(supculti) from " & cTabla
+    SQL = SQL & " where " & cWhere
     
     If txtCodigo(2).Text <> "" Or txtCodigo(3).Text <> "" Then
         ' rango 1
-        Sql2 = Sql
+        Sql2 = SQL
         If txtCodigo(2).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(2).Text, "N")
         End If
@@ -1436,19 +1436,19 @@ Dim Nregs As Long
         Sql2 = Sql2 & " group by 1 "
         Sql2 = Sql2 & " order by 1 "
         
-        pb1.visible = True
+        Pb1.visible = True
         Label2(0).Caption = "Actualizando Rango 1"
         Nregs = TotalRegistrosConsulta(Sql2)
         If Nregs <> 0 Then
-            pb1.Max = Nregs
-            pb1.Value = 0
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
         
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1466,7 +1466,7 @@ Dim Nregs As Long
     
     If txtCodigo(4).Text <> "" Or txtCodigo(5).Text <> "" Then
         ' rango 2
-        Sql2 = Sql
+        Sql2 = SQL
         If txtCodigo(4).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(4).Text, "N")
         End If
@@ -1479,8 +1479,8 @@ Dim Nregs As Long
         Label2(0).Caption = "Actualizando Rango 2"
         Nregs = TotalRegistrosConsulta(Sql2)
         If Nregs <> 0 Then
-            pb1.Max = Nregs
-            pb1.Value = 0
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
         
         
@@ -1488,7 +1488,7 @@ Dim Nregs As Long
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1506,7 +1506,7 @@ Dim Nregs As Long
     
     If txtCodigo(6).Text <> "" Or txtCodigo(7).Text <> "" Then
         ' rango 3
-        Sql2 = Sql
+        Sql2 = SQL
         If txtCodigo(6).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(6).Text, "N")
         End If
@@ -1519,15 +1519,15 @@ Dim Nregs As Long
         Label2(0).Caption = "Actualizando Rango 3"
         Nregs = TotalRegistrosConsulta(Sql2)
         If Nregs <> 0 Then
-            pb1.Max = Nregs
-            pb1.Value = 0
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
     
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1545,7 +1545,7 @@ Dim Nregs As Long
     
     If txtCodigo(8).Text <> "" Or txtCodigo(9).Text <> "" Then
         ' rango 4
-        Sql2 = Sql
+        Sql2 = SQL
         If txtCodigo(8).Text <> "" Then
             Sql2 = Sql2 & " and year(" & DBSet(Now, "F") & ") - anoplant >= " & DBSet(txtCodigo(8).Text, "N")
         End If
@@ -1558,15 +1558,15 @@ Dim Nregs As Long
         Label2(0).Caption = "Actualizando Rango 4"
         Nregs = TotalRegistrosConsulta(Sql2)
         If Nregs <> 0 Then
-            pb1.Max = Nregs
-            pb1.Value = 0
+            Pb1.Max = Nregs
+            Pb1.Value = 0
         End If
     
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql2, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
         While Not Rs.EOF
-            IncrementarProgresNew pb1, 1
+            IncrementarProgresNew Pb1, 1
             Me.Refresh
             DoEvents
             
@@ -1582,8 +1582,9 @@ Dim Nregs As Long
         Set Rs = Nothing
     End If
     Me.Label2(0).visible = False
-    Me.pb1.visible = False
+    Me.Pb1.visible = False
     Me.Refresh
+    DoEvents
     
     
     Sql1 = "delete from tmpsuperficies where superficie1=0 and superficie2=0 and superficie3=0 and superficie4=0"

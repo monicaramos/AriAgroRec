@@ -604,6 +604,8 @@ Dim Col As Collection
     Screen.MousePointer = vbHourglass
     Image2.visible = True
     Me.Refresh
+    DoEvents
+    
 '[Monica]11/01/2012: envio de por outlook
 '                    cambio Enviar Nothing por lo siguiente
 '    Enviar Nothing
@@ -988,6 +990,7 @@ On Error GoTo EMulti
     Text1(3).Text = RecuperaValor(Me.DatosEnvio, 2)
     
     Me.Refresh
+    DoEvents
     
     cad = "SELECT * from tmpMail WHERE codusu=" & vUsu.Codigo
     Set Rs = New ADODB.Recordset
@@ -1081,12 +1084,15 @@ On Error GoTo EMulti
     
     I = 1
     Me.Refresh
+    DoEvents
+    
     While Not Rs.EOF
         Screen.MousePointer = vbHourglass
         Text1(0).Text = Rs!nomprove
         Text1(1).Text = Rs!EMail
         Caption = "Enviar E-MAIL (" & I & " de " & cont & ")"
         Me.Refresh
+        DoEvents
         
         'De momento volvemos a copiar el archivo como docum.pdf
         If EsCartaTalla Then
@@ -1095,6 +1101,8 @@ On Error GoTo EMulti
             FileCopy App.Path & "\temp\" & Rs!codProve & ".pdf", App.Path & "\docum.pdf"
         End If
         Me.Refresh
+        DoEvents
+        
         NumRegElim = 0
         
         
@@ -1143,6 +1151,7 @@ On Error GoTo EMulti
     Text1(3).Text = RecuperaValor(Me.DatosEnvio, 2)
     
     Me.Refresh
+    DoEvents
     
     cad = "SELECT * from tmpMail WHERE codusu=" & vUsu.Codigo
     Set Rs = New ADODB.Recordset
@@ -1181,12 +1190,15 @@ On Error GoTo EMulti
     
     I = 1
     Me.Refresh
+    DoEvents
+    
     While Not Rs.EOF
         Screen.MousePointer = vbHourglass
         Text1(0).Text = Rs!nomprove
         Text1(1).Text = Rs!EMail
         Caption = "Enviar E-MAIL (" & I & " de " & cont & ")"
         Me.Refresh
+        DoEvents
         
         '[Monica]21/06/2017: no refresca la pantalla y pone que que no responde, añado doevents
         DoEvents
@@ -1287,6 +1299,7 @@ On Error GoTo EMulti2
 
            
             Me.Refresh
+            DoEvents
             '
             'De momento volvemos a copiar el archivo como docum.pdf
             If Opcion = 4 Then

@@ -606,6 +606,7 @@ Dim NomFic As String
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
         
     B = True
@@ -615,6 +616,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = InsertarLinea(cad)
         
@@ -676,6 +678,7 @@ Dim NomFic As String
     Line Input #NF, cad
     lblProgres(1).Caption = "Linea " & I
     Me.Refresh
+    DoEvents
     I = 1
     
         
@@ -685,6 +688,7 @@ Dim NomFic As String
         
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         If Mid(cad, 1, 6) <> ";;;;;;" Then B = InsertarLineaPreviaABN(cad)
@@ -788,6 +792,7 @@ Dim NomFic As String
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
         
     ' salto la primera linea que es la cabecera
@@ -795,6 +800,7 @@ Dim NomFic As String
     Me.Pb1.Value = Me.Pb1.Value + Len(cad)
     lblProgres(1).Caption = "Linea " & I
     Me.Refresh
+    DoEvents
     I = 1
     
     
@@ -817,6 +823,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         If Mid(cad, 1, 6) <> ";;;;;;" Then B = InsertarLineaABN(cad)
@@ -883,12 +890,14 @@ Dim NomFic As String
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
         
     ' salto la primera linea que es la cabecera
     Line Input #NF, cad
     Me.Pb1.Value = Me.Pb1.Value + Len(cad)
     lblProgres(1).Caption = "Linea " & I
     Me.Refresh
+    DoEvents
     I = 1
     
     SociosNoExisten = ""
@@ -901,6 +910,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         B = CompruebaSociosVariedades(cad)
@@ -963,6 +973,7 @@ Dim B As Boolean
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
 
     B = True
 
@@ -972,6 +983,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad)
         
@@ -985,6 +997,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad)
     

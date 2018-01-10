@@ -327,8 +327,8 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim Sql As String
-Dim i As Byte
+Dim SQL As String
+Dim I As Byte
 Dim cadWHERE As String
 Dim cDesde As String
 Dim cHasta As String
@@ -336,11 +336,11 @@ Dim cTabla As String
 Dim vSQL As String
 
 
-    If Not DatosOk Then Exit Sub
+    If Not DatosOK Then Exit Sub
 
     'D/H Socio
-    cDesde = Trim(txtcodigo(1).Text)
-    cHasta = Trim(txtcodigo(2).Text)
+    cDesde = Trim(txtCodigo(1).Text)
+    cHasta = Trim(txtCodigo(2).Text)
     If Not (cDesde = "" And cHasta = "") Then
         'Cadena para seleccion Desde y Hasta
         Codigo = "{rsocios.codsocio}"
@@ -390,7 +390,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(5)
+        PonerFoco txtCodigo(5)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -398,7 +398,7 @@ End Sub
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
 Dim List As Collection
-Dim i As Integer
+Dim I As Integer
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -408,9 +408,9 @@ Dim i As Integer
     limpiar Me
 
     'IMAGES para busqueda
-    For i = 1 To 3
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 1 To 3
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
     
     ConexionAriges
     
@@ -441,14 +441,14 @@ End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de Cuentas contables
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de formas de pago de contabilidad
-    txtcodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
-    txtcodigo(indCodigo).Text = Format(txtcodigo(indCodigo).Text, "000")
+    txtCodigo(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1)
+    txtCodigo(indCodigo).Text = Format(txtCodigo(indCodigo).Text, "000")
     txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
@@ -459,7 +459,7 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 3 'forma de pago de ariges
             AbrirFrmForpaSumi (Index)
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub Optcodigo_KeyPress(KeyAscii As Integer)
@@ -477,7 +477,7 @@ Private Sub OptNombre_KeyPress(KeyAscii As Integer)
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -500,16 +500,16 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -517,10 +517,10 @@ Dim Cad As String, cadTipo As String 'tipo cliente
 
     Select Case Index
         Case 1, 2 ' socios
-            If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreDeCod(txtcodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
+            If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = PonerNombreDeCod(txtCodigo(Index), "rsocios", "nomsocio", "codsocio", "N")
 
         Case 3 ' FORMAS DE PAGO DE suministros
-            If txtcodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cAriges, "sforpa", "nomforpa", "codforpa", txtcodigo(Index).Text, "N")
+            If txtCodigo(Index).Text <> "" Then txtNombre(Index).Text = DevuelveDesdeBDNew(cAriges, "sforpa", "nomforpa", "codforpa", txtCodigo(Index).Text, "N")
             If txtNombre(Index).Text = "" Then
                 MsgBox "Forma de Pago  no existe en suministros. Reintroduzca.", vbExclamation
             End If
@@ -562,56 +562,56 @@ Dim devuelve2 As String
     End If
 End Function
 
-Private Sub AbrirFrmSocios(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmSocios(Indice As Integer)
+    indCodigo = Indice
     Set frmSoc = New frmManSocios
     frmSoc.DatosADevolverBusqueda = "0|1|"
     frmSoc.Show vbModal
     Set frmSoc = Nothing
 End Sub
 
-Private Sub AbrirFrmForpaSumi(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmForpaSumi(Indice As Integer)
+    indCodigo = Indice
     Set frmFPa = New frmForpaSumi
     frmFPa.DatosADevolverBusqueda = "0|1|"
-    frmFPa.CodigoActual = txtcodigo(indCodigo)
+    frmFPa.CodigoActual = txtCodigo(indCodigo)
 '    frmFpa.Conexion = cContaFacSoc
     frmFPa.Show vbModal
     Set frmFPa = Nothing
 End Sub
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
 Dim Orden1 As String
 Dim Orden2 As String
 Dim FFin As Date
 Dim cta As String
 
-   b = True
+   B = True
 
-   If txtcodigo(3).Text = "" Then
+   If txtCodigo(3).Text = "" Then
         MsgBox "Introduzca la Forma de pago del Socio.", vbExclamation
-        b = False
-        PonerFoco txtcodigo(3)
+        B = False
+        PonerFoco txtCodigo(3)
    End If
    
-   If b Then
-        b = ComprobarReferenciales
+   If B Then
+        B = ComprobarReferenciales
    End If
    
-   DatosOk = b
+   DatosOK = B
 
 End Function
 
 Private Sub ActualizarSocios(cadTabla As String, cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim vSQL As String
 Dim Rs As ADODB.Recordset
 Dim rsAriges As ADODB.Recordset
 Dim Rs4 As ADODB.Recordset
-Dim b As Boolean
+Dim B As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
 Dim CtaClien As String
@@ -621,11 +621,11 @@ Dim Sql4 As String
     On Error GoTo eActualizarSocios
 
 
-    Sql = "ACTSOC" 'ACTualizar datos de SOCios de suminitros
+    SQL = "ACTSOC" 'ACTualizar datos de SOCios de suminitros
     
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (Sql)
-    If Not BloqueoManual(Sql, "1") Then
+    DesBloqueoManual (SQL)
+    If Not BloqueoManual(SQL, "1") Then
         MsgBox "No se pueden Actualizar Datos de Socios de Suministros. Hay otro usuario actualizando.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -639,10 +639,10 @@ Dim Sql4 As String
     Set LOG = Nothing
     '-----------------------------------------------------------------------------
 
-    Sql = "select * from " & cadTabla & " where " & cadWHERE
+    SQL = "select * from " & cadTabla & " where " & cadWHERE
 
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     'Visualizar la barra de Progreso
     Me.Pb1.visible = True
@@ -655,18 +655,21 @@ Dim Sql4 As String
         Me.Pb1.Value = Me.Pb1.Value + 1
         Me.lblProgres(1).Caption = "Socio: " & DBLet(Rs!Codsocio, "N") & "-" & UCase(DBLet(Rs!nomsocio, "T"))
         Me.Refresh
+        DoEvents
     
         If ExisteCliente(CStr(DBLet(Rs!Codsocio, "N"))) Then
             ' si solo insertar
             If Option1(0).Value Then
                 Me.lblProgres(0).Caption = "Anteriormente insertado"
                 Me.Refresh
+                DoEvents
                 ' no hacemos nada
             End If
             
             If Option1(1).Value Then
                 Me.lblProgres(0).Caption = "Modificando"
                 Me.Refresh
+                DoEvents
                 
                 CtaClien = ""
                 Sql4 = "select codmaccli from rsocios_seccion where codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -682,11 +685,11 @@ Dim Sql4 As String
                 Sql2 = "update " & vParamAplic.BDAriges & ".sclien "
                 Sql2 = Sql2 & " set nomclien = " & DBSet(Rs!nomsocio, "T")
                 Sql2 = Sql2 & ", domclien = " & DBSet(Rs!dirsocio, "T")
-                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!codpostal, "T")
+                Sql2 = Sql2 & ", codpobla = " & DBSet(Rs!codPostal, "T")
                 Sql2 = Sql2 & ", pobclien = " & DBSet(Rs!pobsocio, "T")
                 Sql2 = Sql2 & ", proclien = " & DBSet(Rs!prosocio, "T")
                 Sql2 = Sql2 & ", nifclien = " & DBSet(Rs!nifSocio, "T")
-                Sql2 = Sql2 & ", codforpa = " & DBSet(txtcodigo(3).Text, "N")
+                Sql2 = Sql2 & ", codforpa = " & DBSet(txtCodigo(3).Text, "N")
                 Sql2 = Sql2 & ", codbanco = " & DBSet(Rs!CodBanco, "N")
                 Sql2 = Sql2 & ", codsucur = " & DBSet(Rs!CodSucur, "N")
                 Sql2 = Sql2 & ", digcontr = " & DBSet(Rs!digcontr, "T")
@@ -722,6 +725,7 @@ Dim Sql4 As String
             If Not rsAriges.EOF Then
                 Me.lblProgres(0).Caption = "Insertando"
                 Me.Refresh
+                DoEvents
             
                 ' tanto si solo insertar o insertar y modificar
                 Sql2 = "insert into " & vParamAplic.BDAriges & ".sclien ("
@@ -734,7 +738,7 @@ Dim Sql4 As String
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nomclien
                 Sql2 = Sql2 & DBSet(Rs!nomsocio, "T") & "," 'nombre comercial
                 Sql2 = Sql2 & DBSet(Rs!dirsocio, "T") & "," 'direccion
-                Sql2 = Sql2 & DBSet(Rs!codpostal, "T") & "," 'codigo postal
+                Sql2 = Sql2 & DBSet(Rs!codPostal, "T") & "," 'codigo postal
                 Sql2 = Sql2 & DBSet(Rs!pobsocio, "T") & "," 'poblacion
                 Sql2 = Sql2 & DBSet(DBLet(Rs!prosocio, "T"), "T", "N") & "," 'provincia
                 Sql2 = Sql2 & DBSet(Rs!nifSocio, "T") & "," 'nifsocio
@@ -744,7 +748,7 @@ Dim Sql4 As String
                 Sql2 = Sql2 & DBSet(rsAriges!defzona, "N") & "," 'codzonas
                 Sql2 = Sql2 & DBSet(rsAriges!defruta, "N") & "," 'codrutas
                 Sql2 = Sql2 & DBSet(rsAriges!defagente, "N") & "," 'codigo de agente
-                Sql2 = Sql2 & DBSet(txtcodigo(3).Text, "N") & "," 'codigo de forma de pago
+                Sql2 = Sql2 & DBSet(txtCodigo(3).Text, "N") & "," 'codigo de forma de pago
                 Sql2 = Sql2 & DBSet(Rs!CodBanco, "N") & "," 'codigo de banco
                 Sql2 = Sql2 & DBSet(Rs!CodSucur, "N") & "," 'codigo de sucursal
                 Sql2 = Sql2 & DBSet(Rs!digcontr, "T") & "," 'digcontr
@@ -783,7 +787,7 @@ Private Function ComprobarFechasConta(ind As Integer) As Boolean
 'comprobar que el periodo de fechas a contabilizar esta dentro del
 'periodo de fechas del ejercicio de la contabilidad
 Dim FechaIni As String, FechaFin As String
-Dim Cad As String
+Dim cad As String
 Dim Rs As ADODB.Recordset
     
 Dim vSeccion As CSeccion
@@ -793,7 +797,7 @@ On Error GoTo EComprobar
     ComprobarFechasConta = False
     
     
-    If txtcodigo(ind).Text <> "" Then
+    If txtCodigo(ind).Text <> "" Then
         FechaIni = "Select fechaini,fechafin From parametros"
         Set Rs = New ADODB.Recordset
         Rs.Open FechaIni, ConnConta, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -805,12 +809,12 @@ On Error GoTo EComprobar
             Orden1 = FechaIni
             Orden2 = FechaFin
         
-            If Not EntreFechas(FechaIni, txtcodigo(ind).Text, FechaFin) Then
-                 Cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
-                 Cad = Cad & "    Desde: " & FechaIni & vbCrLf
-                 Cad = Cad & "    Hasta: " & FechaFin
-                 MsgBox Cad, vbExclamation
-                 txtcodigo(ind).Text = ""
+            If Not EntreFechas(FechaIni, txtCodigo(ind).Text, FechaFin) Then
+                 cad = "El período de contabilización debe estar dentro del ejercicio:" & vbCrLf & vbCrLf
+                 cad = cad & "    Desde: " & FechaIni & vbCrLf
+                 cad = cad & "    Hasta: " & FechaFin
+                 MsgBox cad, vbExclamation
+                 txtCodigo(ind).Text = ""
             Else
                 ComprobarFechasConta = True
             End If
@@ -869,17 +873,17 @@ End Function
 
 
 Private Function ExisteCliente(Socio As String) As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eExisteCliente
     
     ExisteCliente = False
     
-    Sql = "select * from sclien where codclien = " & DBSet(Socio, "N")
+    SQL = "select * from sclien where codclien = " & DBSet(Socio, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, ConnAriges, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, ConnAriges, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         ExisteCliente = True
@@ -893,7 +897,7 @@ End Function
 
 Private Function ComprobarReferenciales() As Boolean
 Dim vSQL As String
-Dim b As Boolean
+Dim B As Boolean
 Dim rsAriges As ADODB.Recordset
 
     On Error GoTo EComprobarReferenciales
@@ -908,66 +912,66 @@ Dim rsAriges As ADODB.Recordset
     rsAriges.Open vSQL, ConnAriges, adOpenForwardOnly, adLockPessimistic, adCmdText
 
     ' comprobamos que se cumplan las claves referenciales
-    b = True
+    B = True
     'actividad
     vSQL = ""
     vSQL = DevuelveDesdeBDNew(cAriges, "sactiv", "nomactiv", "codactiv", rsAriges!defactividad, "N")
     If vSQL = "" Then
         MsgBox "No existe la actividad por defecto en suministros: " & DBLet(rsAriges!defactividad, "N"), vbExclamation
-        b = False
+        B = False
     End If
     'envio
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "senvio", "nomenvio", "codenvio", rsAriges!defenvio, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de envio por defecto en suministros: " & DBLet(rsAriges!defenvio, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     'zona
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "szonas", "nomzonas", "codzonas", rsAriges!defzona, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de zona por defecto en suministros: " & DBLet(rsAriges!defzona, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     'rutas
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "srutas", "nomrutas", "codrutas", rsAriges!defruta, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de ruta por defecto en suministros: " & DBLet(rsAriges!defrutas, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     'situacion
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "ssitua", "nomsitua", "codsitua", rsAriges!defstituacion, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de situación por defecto en suministros: " & DBLet(rsAriges!defstituacion, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     'agente
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "sagent", "nomagent", "codagent", rsAriges!defagente, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de agente por defecto en suministros: " & DBLet(rsAriges!defagente, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     ' tarifa
-    If b Then
+    If B Then
         vSQL = ""
         vSQL = DevuelveDesdeBDNew(cAriges, "starif", "nomlista", "codlista", rsAriges!deftarifa, "N")
         If vSQL = "" Then
             MsgBox "No existe el codigo de tarifa por defecto en suministros: " & DBLet(rsAriges!deftarifa, "N"), vbExclamation
-            b = False
+            B = False
         End If
     End If
     
@@ -975,7 +979,7 @@ Dim rsAriges As ADODB.Recordset
     
     Set rsAriges = Nothing
     
-    ComprobarReferenciales = b
+    ComprobarReferenciales = B
     Exit Function
     
 EComprobarReferenciales:

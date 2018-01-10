@@ -1024,6 +1024,7 @@ Dim Tipo As Integer
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    DoEvents
     
     ' PROCESO DEL FICHERO ACEITEC.TXT
     B = True
@@ -1033,6 +1034,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "ACEITEC.TXT")
         
@@ -1046,6 +1048,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "ACEITEC.TXT")
     End If
@@ -1069,6 +1072,7 @@ Dim Tipo As Integer
     Pb2.visible = True
     Me.Pb2.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb2.Value = 0
     
     ' PROCESO DEL FICHERO ACEITUNC.TXT
@@ -1079,6 +1083,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "ACEITUNC.TXT")
         
@@ -1092,6 +1097,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "ACEITUNC.TXT")
     End If
@@ -1116,6 +1122,7 @@ Dim Tipo As Integer
     Pb2.visible = True
     Me.Pb2.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb2.Value = 0
     
     ' PROCESO DEL FICHERO STOCKC.TXT
@@ -1126,6 +1133,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "STOCKC.TXT")
         
@@ -1139,6 +1147,7 @@ Dim Tipo As Integer
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad, "STOCKC.TXT")
     End If
@@ -1187,6 +1196,7 @@ Dim B As Boolean
     Me.Pb2.Max = longitud
     Me.Refresh
     Me.Pb2.Value = 0
+    DoEvents
     
     B = True
     While Not EOF(NF) And B
@@ -1195,6 +1205,7 @@ Dim B As Boolean
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = InsertarRegistros(cad, 0)
             
@@ -1208,6 +1219,7 @@ Dim B As Boolean
         Me.Pb2.Value = Me.Pb2.Value + Len(cad)
         lblProgres(3).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = InsertarRegistros(cad, 0)
     End If
@@ -1232,6 +1244,7 @@ Dim B As Boolean
         Pb2.visible = True
         Me.Pb2.Max = longitud
         Me.Refresh
+        DoEvents
         Me.Pb2.Value = 0
         
         While Not EOF(NF) And B
@@ -1240,6 +1253,7 @@ Dim B As Boolean
             Me.Pb2.Value = Me.Pb2.Value + Len(cad)
             lblProgres(3).Caption = "Linea " & I
             Me.Refresh
+            DoEvents
             
             B = InsertarRegistros(cad, 1)
                 
@@ -1253,6 +1267,7 @@ Dim B As Boolean
             Me.Pb2.Value = Me.Pb2.Value + Len(cad)
             lblProgres(3).Caption = "Linea " & I
             Me.Refresh
+            DoEvents
             
             B = InsertarRegistros(cad, 1)
         End If
@@ -1279,6 +1294,7 @@ Dim B As Boolean
         Pb2.visible = True
         Me.Pb2.Max = longitud
         Me.Refresh
+        DoEvents
         Me.Pb2.Value = 0
         
         While Not EOF(NF) And B
@@ -1287,7 +1303,7 @@ Dim B As Boolean
             Me.Pb2.Value = Me.Pb2.Value + Len(cad)
             lblProgres(3).Caption = "Linea " & I
             Me.Refresh
-            
+            DoEvents
             B = InsertarRegistros(cad, 2)
                 
             Line Input #NF, cad
@@ -1300,7 +1316,7 @@ Dim B As Boolean
             Me.Pb2.Value = Me.Pb2.Value + Len(cad)
             lblProgres(3).Caption = "Linea " & I
             Me.Refresh
-            
+            DoEvents
             B = InsertarRegistros(cad, 2)
         End If
         

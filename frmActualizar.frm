@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
-Object = "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.1#0"; "comct232.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{FE0065C0-1B7B-11CF-9D53-00AA003C9CB6}#1.1#0"; "COMCT232.OCX"
 Begin VB.Form frmActualizar2 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Actualizar diario"
@@ -218,7 +218,7 @@ Private Anyo As Integer
 Dim Fecha As String  'TENDRA la fecha ya formateada en yyy-mm-dd
 Dim PrimeraVez As Boolean
 Dim SQL As String
-Dim RS As Recordset
+Dim Rs As Recordset
 
 Dim INC As Long
 
@@ -284,6 +284,8 @@ On Error Resume Next
 Me.ProgressBar1.Value = Me.ProgressBar1.Value + (Veces * INC)
 If Err.Number <> 0 Then Err.Clear
 Me.Refresh
+DoEvents
+
 End Sub
 
 
@@ -297,7 +299,7 @@ If Dir(App.Path & "\ErrActua.txt") = "" Then
     Exit Sub
 End If
 
-Me.frameResultados.visible = True
+Me.FrameResultados.visible = True
 'Los encabezados
 ListView1.ColumnHeaders.Clear
 ListView1.ColumnHeaders.Add , , "Diario", 800
@@ -333,6 +335,8 @@ Dim bol As Boolean
 If PrimeraVez Then
     PrimeraVez = False
     Me.Refresh
+    DoEvents
+    
     bol = False
     
     'TEnemos que eliminar el archivo de errores
@@ -376,12 +380,12 @@ Private Sub Form_DblClick()
 End Sub
 
 Private Sub Form_Load()
-Dim b As Boolean
+Dim B As Boolean
     ErroresAbiertos = False
     limpiar Me
  
     PrimeraVez = True
-    Me.frameResultados.visible = False
+    Me.FrameResultados.visible = False
     NumErrores = 0
     ListView1.ListItems.Clear
     Select Case OpcionActualizar
@@ -396,7 +400,7 @@ Dim b As Boolean
         End If
         'Tamaño
         Me.Height = 3200
-        b = True
+        B = True
     Case 4, 5, 13
         Me.Height = 4665
 
@@ -407,7 +411,7 @@ Dim b As Boolean
             'La opcion 5: Actualizar
 
         End If
-        b = False
+        B = False
     Case 6, 7, 8, 9
         '// Estamos en Facturas
         Label1.Caption = "Nº factura"
@@ -426,14 +430,14 @@ Dim b As Boolean
         Me.Caption = "Actualizar facturas"
         'Tamaño
         Me.Height = 3315
-        b = True
+        B = True
     Case 10, 11
 
     Case 12
 
     End Select
-    Me.frame1Asiento.visible = b
-    Me.Animation1.visible = b
+    Me.frame1Asiento.visible = B
+    Me.Animation1.visible = B
 End Sub
 
 
@@ -564,11 +568,11 @@ Private Function AsientoExiste(EnHistorico As Boolean) As Boolean
     SQL = SQL & " WHERE numdiari =" & numdiari
     SQL = SQL & " AND fechaent='" & Fecha & "'"
     SQL = SQL & " AND numasien=" & Numasiento
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, ConnConta, adOpenKeyset, adLockOptimistic, adCmdText
-    If RS.EOF Then AsientoExiste = False
-    RS.Close
-    Set RS = Nothing
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, ConnConta, adOpenKeyset, adLockOptimistic, adCmdText
+    If Rs.EOF Then AsientoExiste = False
+    Rs.Close
+    Set Rs = Nothing
 End Function
 
 
@@ -702,7 +706,7 @@ Dim AD As Currency
 Dim AH As Currency
 Dim TD As Currency
 Dim TH As Currency
-Dim b As Boolean
+Dim B As Boolean
 
     HacerReparto = False
     TD = ImporteD
@@ -734,11 +738,11 @@ Dim b As Boolean
             AH = AH + ImporteH
         End If
         If Actualizar Then
-            b = CalcularSaldosAnal
+            B = CalcularSaldosAnal
         Else
-            b = CalcularSaldosAnalDesactualizar
+            B = CalcularSaldosAnalDesactualizar
         End If
-        If Not b Then
+        If Not B Then
             RR.Close
             Exit Function
         End If
@@ -931,18 +935,18 @@ Private Function CalcularSaldos1Nivel(Nivel As Integer) As Boolean
     cta = Mid(cuenta, 1, I)
     SQL = "Select Impmesde,impmesha from hsaldos where "
     SQL = SQL & " Codmacta = '" & cta & "' AND Anopsald = " & Anyo & " AND mespsald = " & mes
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
         I = 0   'Nuevo
         ImpD = 0
         ImpH = 0
     Else
         I = 1
-        ImpD = RS.Fields(0)
-        ImpH = RS.Fields(1)
+        ImpD = Rs.Fields(0)
+        ImpH = Rs.Fields(1)
     End If
-    RS.Close
+    Rs.Close
     
     'Acumulamos
     ImpD = ImpD + ImporteD
@@ -998,18 +1002,18 @@ Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
     SQL = "Select debccost,habccost from hsaldosanal where "
     SQL = SQL & " codccost='" & CCost & "' AND"
     SQL = SQL & " Codmacta = '" & cta & "' AND anoccost = " & Anyo & " AND mesccost = " & mes
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
         I = 0   'Nuevo
         ImpD = 0
         ImpH = 0
     Else
         I = 1
-        ImpD = RS.Fields(0)
-        ImpH = RS.Fields(1)
+        ImpD = Rs.Fields(0)
+        ImpH = Rs.Fields(1)
     End If
-    RS.Close
+    Rs.Close
     'Acumulamos
     ImpD = ImpD + ImporteD
     ImpH = ImpH + ImporteH
@@ -1046,18 +1050,18 @@ Private Function CalcularSaldos1NivelAnalDesactualizar(Nivel As Integer) As Bool
     SQL = "Select debccost,habccost from hsaldosanal where "
     SQL = SQL & " codccost='" & CCost & "' AND"
     SQL = SQL & " Codmacta = '" & cta & "' AND anoccost = " & Anyo & " AND mesccost = " & mes
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open SQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
         MsgBox "Error grave. No habia saldos en analitica para la cuenta: " & cta
-        RS.Close
+        Rs.Close
         Exit Function
     Else
         I = 1
-        ImpD = RS.Fields(0)
-        ImpH = RS.Fields(1)
+        ImpD = Rs.Fields(0)
+        ImpH = Rs.Fields(1)
     End If
-    RS.Close
+    Rs.Close
     'Acumulamos
     ImpD = ImpD - ImporteD 'Con respecto a ACTUALIZAR CAMBIA EL SIGNO
     ImpH = ImpH - ImporteH
@@ -1127,22 +1131,22 @@ End Sub
 ' se generaran desde TESORERIA.
 'YA los hemos metido en tmoactualziar
 Private Function ObtenerRegistrosParaActualizar() As Boolean
-Dim Cad As String
+Dim cad As String
     Label1.Caption = "Prepara proceso."
     Label1.Refresh
     ObtenerRegistrosParaActualizar = False
     'Borramos temporal
     'Conn.Execute "Delete From tmpactualizarError where codusu = " & vUsu.Codigo
     
-    Set RS = New ADODB.Recordset
-    RS.Open "Select count(*) from tmpActualizar WHERE codusu =" & vUsu.Codigo, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
-    If RS.EOF Then
+    Set Rs = New ADODB.Recordset
+    Rs.Open "Select count(*) from tmpActualizar WHERE codusu =" & vUsu.Codigo, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    If Rs.EOF Then
         'NINGUN REGISTTRO A ACTUALIZAR
         Numasiento = 0
     Else
-        Numasiento = RS.Fields(0)
+        Numasiento = Rs.Fields(0)
     End If
-    RS.Close
+    Rs.Close
     If Numasiento = 0 Then
         MsgBox "Ningún asiento para actualizar desde tesoreria.", vbExclamation
         Exit Function
@@ -1166,32 +1170,32 @@ Dim Cad As String
     Me.frame1Asiento.visible = True
     Me.Refresh
     Me.Height = 3315
-    Me.Refresh
+    DoEvents
     
-    RS.Open "Select * from tmpactualizar  WHERE codusu =" & vUsu.Codigo, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
-    While Not RS.EOF
+    Rs.Open "Select * from tmpactualizar  WHERE codusu =" & vUsu.Codigo, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    While Not Rs.EOF
         IncrementaProgres 1
         'Para poder acceder a ellos desde cualquier sitio
-        Numasiento = RS!numasien
-        Fecha = Format(RS!FechaEnt, FormatoFecha)
-        numdiari = RS!numdiari
+        Numasiento = Rs!numasien
+        Fecha = Format(Rs!FechaEnt, FormatoFecha)
+        numdiari = Rs!numdiari
         'No esta bloqueado
         'Comprobamos que esta cuadrado
-        Cad = RegistroCuadrado
-        If Cad <> "" Then
-            InsertaError Cad
+        cad = RegistroCuadrado
+        If cad <> "" Then
+            InsertaError cad
             'Borramos de tmpactualizar
-            Cad = "delete from tmpactualizar where codusu =" & vUsu.Codigo
-            Cad = Cad & " AND numdiari =" & RS!numdiari & " AND numasien =" & RS!numasien
-            Cad = Cad & " AND fechaent ='" & Format(RS!FechaEnt, FormatoFecha) & "'"
-            conn.Execute Cad
+            cad = "delete from tmpactualizar where codusu =" & vUsu.Codigo
+            cad = cad & " AND numdiari =" & Rs!numdiari & " AND numasien =" & Rs!numasien
+            cad = cad & " AND fechaent ='" & Format(Rs!FechaEnt, FormatoFecha) & "'"
+            conn.Execute cad
         End If
         
 
         'Siguiente
-        RS.MoveNext
+        Rs.MoveNext
     Wend
-    RS.Close
+    Rs.Close
     
     
     'ACtualizarRegistros
@@ -1205,8 +1209,10 @@ Dim Cad As String
     Me.Height = 4965
     frame1Asiento.visible = False
     
-    Me.frameResultados.visible = True
+    Me.FrameResultados.visible = True
     Me.Refresh
+    DoEvents
+    
     Screen.MousePointer = vbHourglass
     If NumErrores > 0 Then
         Close #NE
@@ -1215,6 +1221,8 @@ Dim Cad As String
     Else
        Label7.Caption = "NO se han producido errores."
        Me.Refresh
+       DoEvents
+       
        ObtenerRegistrosParaActualizar = True
     End If
     
@@ -1302,7 +1310,7 @@ Private Function RegistroCuadrado() As String
 
 End Function
 
-Private Function InsertaError(ByRef Cadena As String)
+Private Function InsertaError(ByRef cadena As String)
 Dim vS As String
     'Insertamos en errores
     'Esta lo tratamos con error especifico
@@ -1314,7 +1322,7 @@ Dim vS As String
         vS = numdiari & "|"
         vS = vS & Fecha & "|"
         vS = vS & Numasiento & "|"
-        vS = vS & Cadena & "|"
+        vS = vS & cadena & "|"
     
 
     'Modificacion del 10 de marzo

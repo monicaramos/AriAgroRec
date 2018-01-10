@@ -476,6 +476,7 @@ Dim NomFic As String
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
         
     NroCampo = DevuelveValor("select max(codcampo) from rcampos")
@@ -487,6 +488,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         NroCampo = NroCampo + 1
         
@@ -543,6 +545,7 @@ Dim B As Boolean
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
 
     B = True
@@ -554,6 +557,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         If cad <> ";;;;;;;;;" Then B = ComprobarRegistro(cad)
         
@@ -567,6 +571,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         If cad <> ";;;;;;;;;" Then B = ComprobarRegistro(cad)
     

@@ -6691,6 +6691,7 @@ Dim Reg As Long
 eCargarAportaciones:
     Me.Label2(32).visible = False
     Me.Refresh
+    DoEvents
 
     MuestraError Err.Number, "Cargar Aportaciones", Err.Description
 End Function
@@ -6850,6 +6851,7 @@ Dim vSQL As String
                 Me.Pb3.Max = Nregs
                 Me.Pb3.Value = 0
                 Me.Refresh
+                DoEvents
                         
                 If FacturacionVentaCampo(Combo1(0).ListIndex, nTabla, cadSelect, txtCodigo(14).Text, Me.Pb3, Check1(10).Value, Check1(15).Value = 1, Check1(29).Value = 1) Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -7970,6 +7972,8 @@ Dim Tabla1 As String
                                 Me.Pb1.Max = Nregs
                                 Me.Pb1.Value = 0
                                 Me.Refresh
+                                DoEvents
+                                
                                 B = False
                                 If TipoPrec = 0 Then
                                     B = FacturacionAnticiposCatadau(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1)
@@ -8538,6 +8542,7 @@ Dim MaxContador As String
                             Me.Pb1.Max = Nregs
                             Me.Pb1.Value = 0
                             Me.Refresh
+                            DoEvents
                             B = False
                             Select Case vParamAplic.Cooperativa
                                 Case 1, 3, 5  ' valsur / mogente
@@ -8991,6 +8996,7 @@ Dim vSeccion As CSeccion
                                 Me.Pb1.Max = Nregs
                                 Me.Pb1.Value = 0
                                 Me.Refresh
+                                DoEvents
                                 B = False
                                 If TipoPrec = 0 Then
                                     B = FacturacionAnticiposCatadau(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1)
@@ -9240,6 +9246,7 @@ Dim cadSelect1 As String
                         Me.Pb1.Max = Nregs
                         Me.Pb1.Value = 0
                         Me.Refresh
+                        DoEvents
                         
                         cadSelect1 = " rhisfruta.tipoentr <> 1 and rhisfruta.recolect = 1 "
                         If txtCodigo(6).Text <> "" Then cadSelect1 = cadSelect1 & " and rhisfruta.fecalbar >=" & DBSet(txtCodigo(6).Text, "F")
@@ -9513,6 +9520,7 @@ Dim cadSelect1 As String
                         Me.Pb1.Max = Nregs
                         Me.Pb1.Value = 0
                         Me.Refresh
+                        DoEvents
                         
                         B = FacturacionAnticiposGenerico("tmpliquidacion", "codigo = " & vUsu.Codigo, txtCodigo(15).Text, Me.Pb1, txtCodigo(6).Text, txtCodigo(7).Text, Check1(12).Value = 1, Check1(22).Value = 1)
                         
@@ -9809,6 +9817,8 @@ Dim CadenaAlbaranes As String
                                 Me.Pb1.Max = Nregs
                                 Me.Pb1.Value = 0
                                 Me.Refresh
+                                DoEvents
+                                
                                 B = FacturacionLiquidacionIndustria(nTabla, cadSelect, txtCodigo(15).Text, Me.Pb1, CadenaAlbaranes)
                                 If B Then
                                     MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -16401,6 +16411,7 @@ Dim HayPrecio As Boolean
     Me.Pb1.Max = Nregs
     Me.Pb1.Value = 0
     Me.Refresh
+    DoEvents
 
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -16613,6 +16624,7 @@ Dim HayPrecio As Boolean
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
                                     
     CargarTemporalCatadau = True
     Exit Function
@@ -16622,6 +16634,7 @@ eCargarTemporal:
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
     
     MuestraError "Cargando temporal", Err.Description
 End Function
@@ -16999,6 +17012,7 @@ Dim ImporRet As Currency
     Me.Pb1.Max = Nregs
     Me.Pb1.Value = 0
     Me.Refresh
+    DoEvents
 
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -17160,6 +17174,7 @@ Dim ImporRet As Currency
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
                                     
     CargarTemporalQuatretonda = True
     Exit Function
@@ -17169,6 +17184,7 @@ eCargarTemporal:
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
     
     MuestraError "Cargando temporal", Err.Description
 End Function
@@ -18361,6 +18377,7 @@ Dim Sql5 As String
     Me.Pb1.Max = Nregs
     Me.Pb1.Value = 0
     Me.Refresh
+    DoEvents
 
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -18494,6 +18511,7 @@ Dim Sql5 As String
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
                                     
     CargarTemporalIndustria = True
     Exit Function
@@ -18503,6 +18521,7 @@ eCargarTemporal:
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
     
     MuestraError "Cargando temporal Industria", Err.Description
 End Function
@@ -19914,6 +19933,8 @@ Dim Tabla1 As String
                                 Me.Pb1.Max = Nregs
                                 Me.Pb1.Value = 0
                                 Me.Refresh
+                                DoEvents
+                                
                                 B = False
                                 If TipoPrec = 0 Then
                                     B = FacturacionAnticiposPicassentNew(Tabla1, cadSelect1, txtCodigo(15).Text, Me.Pb1, Check1(14).Value = 1, Check1(11).Value = 1)
@@ -20122,6 +20143,7 @@ Dim HayPrecio As Boolean
     Me.Pb1.Max = Nregs
     Me.Pb1.Value = 0
     Me.Refresh
+    DoEvents
 
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -20200,6 +20222,7 @@ Dim HayPrecio As Boolean
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
                                     
     CargarTemporalPicassent = True
     Exit Function
@@ -20209,6 +20232,7 @@ eCargarTemporal:
     Me.Label2(10).Caption = ""
     Me.Label2(12).Caption = ""
     Me.Refresh
+    DoEvents
     
     MuestraError "Cargando temporal", Err.Description
 End Function

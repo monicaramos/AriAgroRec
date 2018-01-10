@@ -525,6 +525,7 @@ Dim NomFic As String
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
         
     B = True
     While Not EOF(NF) And B
@@ -533,6 +534,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ActualizarLinea(cad)
         
@@ -585,6 +587,8 @@ Dim B As Boolean
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
+    
 
     B = True
 
@@ -594,6 +598,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad)
         
@@ -607,6 +612,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistro(cad)
     
@@ -841,10 +847,12 @@ Dim B As Boolean
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
         
     Me.Pb1.Value = Me.Pb1.Value + Len(cad)
     lblProgres(1).Caption = "Linea " & I
     Me.Refresh
+    DoEvents
 
     B = True
 
@@ -856,6 +864,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ComprobarRegistroMoixent(cad)
         
@@ -977,11 +986,13 @@ Dim NomFic As String
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
         
     Me.Pb1.Value = Me.Pb1.Value + Len(cad)
     lblProgres(1).Caption = "Linea " & I
     Me.Refresh
+    DoEvents
         
     B = True
     While Not EOF(NF) And B
@@ -992,6 +1003,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         
         B = ActualizarLineaMoixent(cad)
         

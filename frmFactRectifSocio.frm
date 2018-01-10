@@ -913,6 +913,7 @@ Dim Sql2 As String
                 Me.Pb1.Max = Nregs
                 Me.Pb1.Value = 0
                 Me.Refresh
+                DoEvents
                 B = FacturacionRectificativa(nTabla, cadSelect, txtCodigo(10).Text, Me.Pb1)
                 If B Then
                     MsgBox "Proceso realizado correctamente.", vbExclamation

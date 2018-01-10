@@ -2903,7 +2903,10 @@ On Error GoTo EEnviar
                         conn.Execute SQL
                 
                         Me.Refresh
+                        doeevents
+                        
                         espera 0.4
+                        
                         cont = cont + 1
                         'Se ha generado bien el documento
                         'Lo copiamos sobre app.path & \temp
@@ -2921,6 +2924,8 @@ On Error GoTo EEnviar
                     conn.Execute SQL
             
                     Me.Refresh
+                    DoEvents
+                    
                     espera 0.4
                     cont = cont + 1
                     'Se ha generado bien el documento
@@ -3180,8 +3185,8 @@ Private Sub PonerTamnyosMail(peque As Boolean)
     Me.Width = Me.Width + 120
     Me.FrameEnvioMail.visible = peque
     Me.FrameEnvioFacMail.visible = Not peque
-    DoEvents
     Me.Refresh
+    DoEvents
 End Sub
 
 Private Sub CargarCombo()

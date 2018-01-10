@@ -517,7 +517,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -717,6 +717,8 @@ Dim cad As String
     If adodc1.Recordset.EOF Then Exit Sub
         
     Me.Refresh
+    DoEvents
+
     Screen.MousePointer = vbHourglass
     
     CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)

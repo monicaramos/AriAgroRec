@@ -718,6 +718,7 @@ Dim cad As String
     If adodc1.Recordset.EOF Then Exit Sub
         
     Me.Refresh
+    DoEvents
     Screen.MousePointer = vbHourglass
     
     CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)
@@ -812,23 +813,23 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " where " & vSQL
+        SQL = CadenaConsulta & " where " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
     If CampoOrden = "" Then
-        Sql = Sql & " ORDER BY codsocio "
+        SQL = SQL & " ORDER BY codsocio "
     Else
-        Sql = Sql & " order by " & CampoOrden & " " & TipoOrden
+        SQL = SQL & " order by " & CampoOrden & " " & TipoOrden
     End If
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     
     
@@ -875,7 +876,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 

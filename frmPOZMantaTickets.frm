@@ -673,14 +673,14 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Integer
 
 Dim FechaAnt As String
 Dim OK As Boolean
 Dim CadB1 As String
 Dim Filtro As Byte
-Dim Sql As String
+Dim SQL As String
 
 Dim CodTipoMov As String
 
@@ -707,22 +707,22 @@ Dim Continuar As Boolean
 Dim EsTicketContado As Boolean
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
     
-    b = (Modo = 2)
-    If b Then
+    B = (Modo = 2)
+    If B Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
         If Not adodc1.Recordset.EOF Then Text2(1).Text = DBLet(adodc1.Recordset!Concepto, "T")
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = (Modo = 1)
-        txtAux(i).Enabled = (Modo = 1)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = (Modo = 1)
+        txtAux(I).Enabled = (Modo = 1)
+    Next I
     
     'hdas
     txtAux(7).visible = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
@@ -746,10 +746,10 @@ Dim b As Boolean
     Text2(1).Enabled = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
     
     
-    For i = 0 To Me.btnBuscar.Count - 1
-        btnBuscar(i).visible = (Modo = 1)
-        btnBuscar(i).Enabled = (Modo = 1)
-    Next i
+    For I = 0 To Me.btnBuscar.Count - 1
+        btnBuscar(I).visible = (Modo = 1)
+        btnBuscar(I).Enabled = (Modo = 1)
+    Next I
     btnBuscar(3).visible = (Modo = 1 Or Modo = 4)
     btnBuscar(3).Enabled = (Modo = 1 Or Modo = 4)
     btnBuscar(4).visible = (Modo = 1 Or (Modo = 4 And PagoTicket))
@@ -758,12 +758,12 @@ Dim b As Boolean
     Text2(0).visible = (Modo = 1)
     Text2(2).visible = (Modo = 1)
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -776,36 +776,36 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnVerTodos.Enabled = B
     'Busqueda facturados
-    Toolbar1.Buttons(4).Enabled = b
-    Me.mnBuscarFacturados.Enabled = b
+    Toolbar1.Buttons(4).Enabled = B
+    Me.mnBuscarFacturados.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(6).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
     
-    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(7).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = b
-    Me.mnImprimir.Enabled = b
+    Toolbar1.Buttons(11).Enabled = B
+    Me.mnImprimir.Enabled = B
     'Pago de ticket
-    Toolbar1.Buttons(12).Enabled = b
-    Me.mnPagoTicket.Enabled = b
+    Toolbar1.Buttons(12).Enabled = B
+    Me.mnPagoTicket.Enabled = B
     
 End Sub
 
@@ -833,9 +833,9 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -845,7 +845,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim Sql2 As String
-Dim Sql As String
+Dim SQL As String
     
     CadenaB = " WHERE rpozticketsmanta.fecpago is null "
 
@@ -860,9 +860,9 @@ Private Sub BotonBuscar()
     CargaGrid "rpozticketsmanta.codsocio is null"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     
     Text2(0).Text = ""
     Text2(2).Text = ""
@@ -882,9 +882,9 @@ Private Sub BotonBuscarFacturados()
     '*******************************************************************************
     
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     
     Text2(0).Text = ""
     Text2(2).Text = ""
@@ -899,15 +899,15 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     PagoTicket = False
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -950,7 +950,7 @@ End Sub
 
 Private Sub BotonPagoTicket()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     If Me.adodc1.Recordset.EOF Then Exit Sub
     
@@ -984,8 +984,8 @@ Private Sub BotonPagoTicket()
     PagoTicket = True
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -1029,21 +1029,21 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     Text2(0).Top = alto
     Text2(2).Top = alto
-    For i = 0 To Me.btnBuscar.Count - 1
-        btnBuscar(i).Top = alto
-    Next i
+    For I = 0 To Me.btnBuscar.Count - 1
+        btnBuscar(I).Top = alto
+    Next I
     ' ### [Monica] 12/09/2006
     
 End Sub
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 Dim vTipoMov As CTiposMov
 
@@ -1061,10 +1061,10 @@ Dim vTipoMov As CTiposMov
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Ticket?"
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = "¿Seguro que desea eliminar el Ticket?"
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
@@ -1073,8 +1073,8 @@ Dim vTipoMov As CTiposMov
         vTipoMov.DevolverContador "ALV", adodc1.Recordset!numalbar
         Set vTipoMov = Nothing
         
-        Sql = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
-        conn.Execute Sql
+        SQL = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
+        conn.Execute SQL
         CargaGrid CadB
         
         
@@ -1192,7 +1192,7 @@ Private Sub btnBuscar_Click(Index As Integer)
         
             Set frmC = New frmCal
             
-            indice = Index
+            Indice = Index
             
             esq = btnBuscar(Index).Left
             dalt = btnBuscar(Index).Top
@@ -1213,22 +1213,22 @@ Private Sub btnBuscar_Click(Index As Integer)
             
             Select Case Index
                 Case 1
-                    indice = 10
+                    Indice = 10
                 Case 3
-                    indice = 9
+                    Indice = 9
                 Case 4
-                    indice = 12
+                    Indice = 12
             End Select
             
             btnBuscar(3).Tag = Index '<===
             ' *** repasar si el camp es txtAux o Text1 ***
-            If txtAux(indice).Text <> "" Then frmC.NovaData = txtAux(indice).Text
+            If txtAux(Indice).Text <> "" Then frmC.NovaData = txtAux(Indice).Text
             
             ' ********************************************
             frmC.Show vbModal
             Set frmC = Nothing
             ' *** repasar si el camp es txtAux o Text1 ***
-            PonerFoco txtAux(indice) '<===
+            PonerFoco txtAux(Indice) '<===
             ' ********************************************
             
     End Select
@@ -1237,9 +1237,9 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim i As Long
+    Dim I As Long
     Dim NReg As Long
-    Dim Sql As String
+    Dim SQL As String
     Dim Sql2 As String
     
     
@@ -1256,7 +1256,7 @@ Private Sub cmdAceptar_Click()
             End If
             
         Case 3 'INSERTAR
-            If DatosOk Then
+            If DatosOK Then
                 If InsertarDesdeForm(Me) Then
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -1275,16 +1275,16 @@ Private Sub cmdAceptar_Click()
             
         Case 4 'MODIFICAR
             OK = False
-            If DatosOk Then
+            If DatosOK Then
                 If Not PagoTicket Then
                     If ModificaDesdeFormulario2(Me, 0) Then
                         OK = True
                         
                         TerminaBloquear
-                        i = adodc1.Recordset.Fields(0)
+                        I = adodc1.Recordset.Fields(0)
                         PonerModo 2
                         CargaGrid "" 'CadB
-                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i & "")
+                        adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I & "")
                         PonerFocoGrid Me.DataGrid1
                     End If
                 Else
@@ -1302,7 +1302,7 @@ Private Function ModificarRegistro() As Boolean
 Dim bol As Boolean
 Dim MenError As String
 Dim devuelve As String
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EModifica
@@ -1398,37 +1398,37 @@ Dim Concepto As String
     
     
     'insertar en la tabla de recibos de pozos
-    Sql = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
-    Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
-    Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
-    Sql = Sql & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-    Sql = Sql & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
-    Sql = Sql & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
-    Sql = Sql & ValorNulo & "," & ValorNulo & ","
-    Sql = Sql & ValorNulo & "," & ValorNulo & ","
-    Sql = Sql & ValorNulo & "," & ValorNulo & ","
-    Sql = Sql & ValorNulo & "," & ValorNulo & ","
-    Sql = Sql & DBSet(Concepto, "T") & ",0,"
-    Sql = Sql & DBSet(0, "N") & ","
-    Sql = Sql & DBSet(0, "N") & ","
-    Sql = Sql & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
-    Sql = Sql & DBSet(txtAux(2).Text, "N") & ","
-    Sql = Sql & DBSet(txtAux(10).Text, "F") & ","
-    Sql = Sql & DBSet(EsTicketContado, "B") & ")"
+    SQL = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
+    SQL = SQL & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
+    SQL = SQL & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
+    SQL = SQL & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
+    SQL = SQL & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+    SQL = SQL & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
+    SQL = SQL & ValorNulo & "," & ValorNulo & ","
+    SQL = SQL & ValorNulo & "," & ValorNulo & ","
+    SQL = SQL & ValorNulo & "," & ValorNulo & ","
+    SQL = SQL & ValorNulo & "," & ValorNulo & ","
+    SQL = SQL & DBSet(Concepto, "T") & ",0,"
+    SQL = SQL & DBSet(0, "N") & ","
+    SQL = SQL & DBSet(0, "N") & ","
+    SQL = SQL & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
+    SQL = SQL & DBSet(txtAux(2).Text, "N") & ","
+    SQL = SQL & DBSet(txtAux(10).Text, "F") & ","
+    SQL = SQL & DBSet(EsTicketContado, "B") & ")"
     
-    conn.Execute Sql
+    conn.Execute SQL
         
         
     ' Introducimos en la tabla de lineas de campos que intervienen en la factura para la impresion
     ' SOLO HABRA UN CAMPO
-    Sql = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
+    SQL = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
     
-    Sql = Sql & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
-    Sql = Sql & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
-    Sql = Sql & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
-    Sql = Sql & ")"
+    SQL = SQL & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
+    SQL = SQL & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
+    SQL = SQL & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
+    SQL = SQL & ")"
 
-    conn.Execute Sql
+    conn.Execute SQL
 
     vTipoMov.IncrementarContador (CodTipom)
     Set vTipoMov = Nothing
@@ -1467,8 +1467,8 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1476,18 +1476,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -1496,12 +1496,13 @@ Private Sub Command1_Click()
 End Sub
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
-Dim Cad As String
+Dim cad As String
     
     If adodc1.Recordset Is Nothing Then Exit Sub
     If adodc1.Recordset.EOF Then Exit Sub
     
     Me.Refresh
+    DoEvents
     Screen.MousePointer = vbHourglass
     
     Ordenacion = "ORDER BY " & DataGrid1.Columns(0).DataField
@@ -1603,7 +1604,7 @@ Private Sub Form_Unload(Cancel As Integer)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
-    txtAux(indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
+    txtAux(Indice).Text = Format(vFecha, "dd/mm/yyyy") '<===
 End Sub
 
 
@@ -1708,21 +1709,21 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     Dim Sql2 As String
     
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " " & CadenaB & " AND " & vSQL
+        SQL = CadenaConsulta & " " & CadenaB & " AND " & vSQL
     Else
-        Sql = CadenaConsulta & " " & CadenaB
+        SQL = CadenaConsulta & " " & CadenaB
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " " & Ordenacion
+    SQL = SQL & " " & Ordenacion
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(2)|T|Albarán|800|;S|txtAux(10)|T|Fecha|1100|;S|btnBuscar(1)|B|||;S|txtAux(0)|T|Socio|800|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|2450|;S|txtAux(1)|T|Campo|1000|;"
@@ -1742,7 +1743,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
@@ -1786,10 +1787,10 @@ Private Sub txtAux_LostFocus(Index As Integer)
     End If
 End Sub
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
-Dim Sql As String
+Dim B As Boolean
+Dim SQL As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer
@@ -1798,23 +1799,23 @@ Dim Fin As Long
 Dim Consumo As Long
 Dim Limite As Long
 
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         If ExisteCP(txtAux(0)) Then b = False
+         If ExisteCP(txtAux(0)) Then B = False
     End If
     
     'comprobamos que la fecha de factura que se va a generar está dentro del periodo de liquidacion
     If Modo = 4 And PagoTicket Then
         If txtAux(12).Text = "" Then
             MsgBox "Debe introducir una fecha de recibo. Reintroduzca.", vbInformation
-            b = False
+            B = False
             PonerFoco txtAux(12)
         End If
     End If
     
-    DatosOk = b
+    DatosOK = B
 End Function
 
 Private Sub PonerOpcionesMenu()
@@ -1831,7 +1832,7 @@ End Sub
 'End Sub
 
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
    KEYpress KeyAscii
 End Sub
 

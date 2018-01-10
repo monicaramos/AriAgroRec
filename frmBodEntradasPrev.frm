@@ -696,6 +696,7 @@ Dim cad As String
     If adodc1.Recordset.EOF Then Exit Sub
         
     Me.Refresh
+    DoEvents
     Screen.MousePointer = vbHourglass
     
     CampoOrden = RecuperaValor(txtAux(ColIndex).Tag, 7)

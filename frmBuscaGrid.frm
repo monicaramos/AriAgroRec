@@ -216,7 +216,7 @@ Option Explicit
 Public Event Selecionado(CadenaDevuelta As String)
 
 'Variables publicas para montar datos
-Public vTabla As String
+Public vtabla As String
 Public vCampos As String 'columnas en la tabla.Empipados
 Public vSelElem As Integer
 Public vTitulo As String
@@ -244,25 +244,25 @@ Private DbClick As Boolean
 
 Private Sub Adodc1_MoveComplete(ByVal adReason As ADODB.EventReasonEnum, ByVal pError As ADODB.Error, adStatus As ADODB.EventStatusEnum, ByVal pRecordset As ADODB.Recordset)
 Dim columna As String
-Dim j As Integer
+Dim J As Integer
 
     If Busca Then
         Busca = False
         Exit Sub
     End If
     DbClick = True
-    If Adodc1.Recordset.BOF Then
-        If Adodc1.Recordset.RecordCount > 0 Then Adodc1.Recordset.MoveFirst
+    If adodc1.Recordset.BOF Then
+        If adodc1.Recordset.RecordCount > 0 Then adodc1.Recordset.MoveFirst
     End If
 
-    If Adodc1.Recordset.RecordCount > 0 Then
+    If adodc1.Recordset.RecordCount > 0 Then
         columna = CabTablas(vSelElem)
-        j = InStr(1, columna, ".")
-        If j > 0 Then columna = Mid(columna, j + 1)
+        J = InStr(1, columna, ".")
+        If J > 0 Then columna = Mid(columna, J + 1)
         '---- Añade: Laura 28/04/2005
-        j = InStr(1, columna, " as ") 'si columna tiene if o case renombramos ( as nomcolum )
-        If j > 0 Then
-            columna = Mid(columna, j + 4)
+        J = InStr(1, columna, " as ") 'si columna tiene if o case renombramos ( as nomcolum )
+        If J > 0 Then
+            columna = Mid(columna, J + 4)
             columna = Trim(columna)
         End If
         '---- Modifica: LAura 27/04/2005 ------------------------
@@ -270,9 +270,9 @@ Dim j As Integer
         'Antes:
         'Text1.Text = Adodc1.Recordset.Fields(columna)
         If FormatoCampo(vSelElem) <> "" Then
-            Text1.Text = Format(Adodc1.Recordset.Fields(columna), FormatoCampo(vSelElem))
+            Text1.Text = Format(adodc1.Recordset.Fields(columna), FormatoCampo(vSelElem))
         Else
-            Text1.Text = DBLet(Adodc1.Recordset.Fields(columna), TipoCampo(vSelElem))
+            Text1.Text = DBLet(adodc1.Recordset.Fields(columna), TipoCampo(vSelElem))
         End If
         '--------------------------------------------------------
     End If
@@ -280,30 +280,30 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim vDes As String
-Dim i, j As Integer
+Dim I, J As Integer
 Dim k As Byte
 Dim V As String
 Dim NomColum As String
 
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
-i = 0
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
+I = 0
 vDes = ""
 Do
-    j = i + 1
-    i = InStr(j, vDevuelve, "|")
-    If i > 0 Then
-        V = Mid(vDevuelve, j, i - j)
+    J = I + 1
+    I = InStr(J, vDevuelve, "|")
+    If I > 0 Then
+        V = Mid(vDevuelve, J, I - J)
         If V <> "" Then
             If IsNumeric(V) Then
                 NomColum = CabTablas(Val(V))
                 k = InStr(1, NomColum, ".")
                 If k > 0 Then NomColum = Mid(NomColum, k + 1)
-                If Val(V) <= TotalArray Then vDes = vDes & Adodc1.Recordset(NomColum) & "|"
+                If Val(V) <= TotalArray Then vDes = vDes & adodc1.Recordset(NomColum) & "|"
             End If
         End If
     End If
-Loop Until i = 0
+Loop Until I = 0
 RaiseEvent Selecionado(vDes)
 Unload Me
 End Sub
@@ -313,21 +313,22 @@ Unload Me
 End Sub
 
 Private Sub DataGrid1_DblClick()
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
 cmdRegresar_Click
 End Sub
 
 Private Sub DataGrid1_HeadClick(ByVal ColIndex As Integer)
 Dim cad As String
 
-If Adodc1.Recordset Is Nothing Then Exit Sub
-If Adodc1.Recordset.EOF Then Exit Sub
+If adodc1.Recordset Is Nothing Then Exit Sub
+If adodc1.Recordset.EOF Then Exit Sub
 If vSelElem = ColIndex Then Exit Sub
 'cad = "¿Desea reordenar por el concepto " & DataGrid1.Columns(ColIndex).Caption & "?"
 'If MsgBox(cad, vbQuestion + vbYesNoCancel) <> vbYes Then Exit Sub
 If ColIndex <= TotalArray Then
     Me.Refresh
+    DoEvents
     Screen.MousePointer = vbHourglass
     vSelElem = ColIndex
     CargaGrid
@@ -338,13 +339,13 @@ End If
 End Sub
 
 Private Sub Form_Activate()
-Dim Ok As Boolean
+Dim OK As Boolean
 If PrimeraVez Then
     PrimeraVez = False
     Screen.MousePointer = vbHourglass
-    Ok = ObtenerTamanyosArray
-    If Ok Then Ok = SeparaCampos
-    If Not Ok Then
+    OK = ObtenerTamanyosArray
+    If OK Then OK = SeparaCampos
+    If Not OK Then
         'Error en SQL
         'Salimos
         Unload Me
@@ -365,49 +366,49 @@ End Sub
 Private Function SeparaCampos() As Boolean
 Dim cad As String
 Dim Grupo As String
-Dim i As Integer
-Dim j As Integer
+Dim I As Integer
+Dim J As Integer
 Dim c As Integer 'Contrador dentro del array
 
 SeparaCampos = False
-i = 0
+I = 0
 c = 0
 Do
-    j = i + 1
-    i = InStr(j, vCampos, "·")
-    If i > 0 Then
-        Grupo = Mid(vCampos, j, i - j)
+    J = I + 1
+    I = InStr(J, vCampos, "·")
+    If I > 0 Then
+        Grupo = Mid(vCampos, J, I - J)
         'Y en la martriz
         InsertaGrupo Grupo, c
         c = c + 1
     End If
-Loop Until i = 0
+Loop Until I = 0
 SeparaCampos = True
 End Function
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
-Dim i As Integer
-Dim j As Integer
+Dim I As Integer
+Dim J As Integer
 Dim cad As String
-j = 0
+J = 0
 
 
     cad = ""
     
     'Cabeceras
-    j = InStr(1, Grupo, "|")
-    If j > 0 Then
-        cad = Mid(Grupo, 1, j - 1)
-        Grupo = Mid(Grupo, j + 1)
-        j = 1
+    J = InStr(1, Grupo, "|")
+    If J > 0 Then
+        cad = Mid(Grupo, 1, J - 1)
+        Grupo = Mid(Grupo, J + 1)
+        J = 1
     End If
     Cabeceras(Contador) = cad
     
     'TAblas BD
-    j = InStr(1, Grupo, "|")
-    If j > 0 Then
-        cad = Mid(Grupo, 1, j - 1)
-        Grupo = Mid(Grupo, j + 1)
+    J = InStr(1, Grupo, "|")
+    If J > 0 Then
+        cad = Mid(Grupo, 1, J - 1)
+        Grupo = Mid(Grupo, J + 1)
     Else
         cad = ""
         Grupo = ""
@@ -416,10 +417,10 @@ j = 0
     CabTablas(Contador) = cad
     
     'El tipo
-    j = InStr(1, Grupo, "|")
-    If j > 0 Then
-        cad = Mid(Grupo, 1, j - 1)
-        Grupo = Mid(Grupo, j + 1)
+    J = InStr(1, Grupo, "|")
+    If J > 0 Then
+        cad = Mid(Grupo, 1, J - 1)
+        Grupo = Mid(Grupo, J + 1)
         Else
             cad = ""
             Grupo = ""
@@ -427,10 +428,10 @@ j = 0
     TipoCampo(Contador) = cad
     
     'El formato
-    j = InStr(1, Grupo, "|")
-    If j > 0 Then
-        cad = Mid(Grupo, 1, j - 1)
-        Grupo = Mid(Grupo, j + 1)
+    J = InStr(1, Grupo, "|")
+    If J > 0 Then
+        cad = Mid(Grupo, 1, J - 1)
+        Grupo = Mid(Grupo, J + 1)
     Else
         cad = ""
         Grupo = ""
@@ -444,19 +445,19 @@ j = 0
 End Sub
 
 Private Function ObtenerTamanyosArray() As Boolean
-Dim i As Integer
-Dim j As Integer
+Dim I As Integer
+Dim J As Integer
 Dim Grupo As String
 
 ObtenerTamanyosArray = False
 'Primero a los campos de la tabla
 TotalArray = -1
-j = 0
+J = 0
 Do
-    i = j + 1
-    j = InStr(i, vCampos, "·")
-    If j > 0 Then TotalArray = TotalArray + 1
-Loop Until j = 0
+    I = J + 1
+    J = InStr(I, vCampos, "·")
+    If J > 0 Then TotalArray = TotalArray + 1
+Loop Until J = 0
 If TotalArray < 0 Then Exit Function
 'Las redimensionaremos
 ReDim Cabeceras(TotalArray)
@@ -470,66 +471,66 @@ End Function
 
 Private Sub CargaGrid()
 Dim cad As String, Orden As String
-Dim i As Integer
+Dim I As Integer
 Dim anc As Single
 
 
     'On Error GoTo ECargaGRid '##QUITAR
     'Generamos SQL
     cad = ""
-    For i = 0 To TotalArray
+    For I = 0 To TotalArray
         If cad <> "" Then cad = cad & ","
-        cad = cad & CabTablas(i)
-    Next i
-    cad = "SELECT " & cad & " FROM " & vTabla
+        cad = cad & CabTablas(I)
+    Next I
+    cad = "SELECT " & cad & " FROM " & vtabla
     If vSQL <> "" Then cad = cad & " WHERE " & vSQL
     '---- Modifica: Laura 28/04/2005  ----------------------
     'antes:
     'cad = cad & " ORDER BY " & CabTablas(vSelElem)
     Orden = CabTablas(vSelElem)
-    i = InStr(1, Orden, " as ")
-    If i > 0 Then Orden = Mid(Orden, i + 4)
+    I = InStr(1, Orden, " as ")
+    If I > 0 Then Orden = Mid(Orden, I + 4)
     cad = cad & " ORDER BY " & Orden
     '--------------------------------------------------------
     
     DataGrid1.AllowRowSizing = False
-    Adodc1.ConnectionString = conn
-    Adodc1.RecordSource = cad
-    Adodc1.Refresh
+    adodc1.ConnectionString = conn
+    adodc1.RecordSource = cad
+    adodc1.Refresh
     
     DataGrid1.visible = True
     'Cargamos el grid
     'anc = DataGrid1.Width - 640
     anc = DataGrid1.Width - 582
 
-    For i = 0 To TotalArray
-        DataGrid1.Columns(i).AllowSizing = False
-        DataGrid1.Columns(i).Caption = Cabeceras(i)
-        If FormatoCampo(i) <> "" Then
-            DataGrid1.Columns(i).NumberFormat = FormatoCampo(i)
+    For I = 0 To TotalArray
+        DataGrid1.Columns(I).AllowSizing = False
+        DataGrid1.Columns(I).Caption = Cabeceras(I)
+        If FormatoCampo(I) <> "" Then
+            DataGrid1.Columns(I).NumberFormat = FormatoCampo(I)
         End If
-        If CabAncho(i) = 0 Then
-            DataGrid1.Columns(i).visible = False
+        If CabAncho(I) = 0 Then
+            DataGrid1.Columns(I).visible = False
             Else
-            DataGrid1.Columns(i).Width = anc * (CabAncho(i) / 100)
+            DataGrid1.Columns(I).Width = anc * (CabAncho(I) / 100)
         End If
-    Next i
+    Next I
 
 
     'Habilitamos el text1 para que escriban
     Text1.Enabled = True
-    If Not Adodc1.Recordset.EOF Then
+    If Not adodc1.Recordset.EOF Then
         'Le ponemos el 1er registro
         cad = CabTablas(vSelElem)
         'si hay punto en nombre columa lo quitamos: tabla.colum -> colum
-        i = InStr(1, cad, ".")
-        If i > 0 Then cad = Mid(cad, i + 1)
+        I = InStr(1, cad, ".")
+        If I > 0 Then cad = Mid(cad, I + 1)
         
         '---- Añade: LAura 28/04/2005
         'Si hay if/case en nombre columna cogemos el renombrado: if(colum=x,,) as colum
-        i = InStr(1, cad, " as ")
-        If i > 0 Then
-            cad = Mid(cad, i + 4)
+        I = InStr(1, cad, " as ")
+        If I > 0 Then
+            cad = Mid(cad, I + 4)
             cad = Trim(cad)
         End If
         
@@ -538,10 +539,10 @@ Dim anc As Single
         'antes:
         'Text1.Text = Adodc1.Recordset(cad)
         If FormatoCampo(vSelElem) <> "" Then
-            Text1.Text = Format(Adodc1.Recordset(cad), FormatoCampo(vSelElem))
+            Text1.Text = Format(adodc1.Recordset(cad), FormatoCampo(vSelElem))
         Else
             'Text1.Text = DBSet(Adodc1.Recordset(cad), TipoCampo(vSelElem))
-            Text1.Text = DBLet(Adodc1.Recordset(cad), TipoCampo(vSelElem))
+            Text1.Text = DBLet(adodc1.Recordset(cad), TipoCampo(vSelElem))
         End If
         '-----------------------------------------------
         PonerFoco Text1
@@ -551,7 +552,7 @@ Dim anc As Single
     
     DataGrid1.Columns(vSelElem).Caption = Cabeceras(vSelElem) & " (*)"
 Exit Sub
-ECargaGRid:
+ECargaGrid:
     MuestraError Err.Number, "Carga grid." & vbCrLf & Err.Description
 End Sub
 
@@ -561,7 +562,7 @@ End Sub
 
 Private Sub Text1_Change()
 Dim SQLDBGRID As String
-Dim i As Byte
+Dim I As Byte
 
     If DbClick Then
         DbClick = False
@@ -571,21 +572,21 @@ Dim i As Byte
     SQLDBGRID = CabTablas(vSelElem)
     
     '---- Añade: Laura 16/03/2006
-    i = InStr(1, SQLDBGRID, " as ") 'si columna tiene if o case renombramos ( as nomcolum )
-    If i > 0 Then
-        SQLDBGRID = Mid(SQLDBGRID, i + 4)
+    I = InStr(1, SQLDBGRID, " as ") 'si columna tiene if o case renombramos ( as nomcolum )
+    If I > 0 Then
+        SQLDBGRID = Mid(SQLDBGRID, I + 4)
         SQLDBGRID = Trim(SQLDBGRID)
     End If
     
     '----- si hay punto en nombre columa lo quitamos: tabla.colum -> colum
-    i = InStr(1, SQLDBGRID, ".")
-    If i > 0 Then SQLDBGRID = Mid(SQLDBGRID, i + 1)
+    I = InStr(1, SQLDBGRID, ".")
+    If I > 0 Then SQLDBGRID = Mid(SQLDBGRID, I + 1)
     '-----------------------------------------------------------------------
     
     Select Case TipoCampo(vSelElem)
         Case "N"
             If Not IsNumeric(Text1.Text) Then
-                If Adodc1.Recordset.RecordCount > 0 Then Adodc1.Recordset.MoveFirst
+                If adodc1.Recordset.RecordCount > 0 Then adodc1.Recordset.MoveFirst
                 Exit Sub
             End If
             '---- Modifica: Laura 27/04/2005  -------------------
@@ -605,7 +606,7 @@ Dim i As Byte
     
     
         
-    Adodc1.Recordset.Find SQLDBGRID, , adSearchForward, 1
+    adodc1.Recordset.Find SQLDBGRID, , adSearchForward, 1
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -624,7 +625,7 @@ End Sub
 Private Sub DataGrid1_GotFocus()
   WheelHook DataGrid1
 End Sub
-Private Sub DataGrid1_Lostfocus()
+Private Sub DataGrid1_LostFocus()
   WheelUnHook
 End Sub
 

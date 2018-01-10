@@ -184,7 +184,7 @@ End Sub
 
 Private Sub Form_Load()
 Dim H As Integer, W As Integer
-Dim Cad As String
+Dim cad As String
 On Error Resume Next
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -283,30 +283,30 @@ End Function
 
 Private Sub InsertaGrupo(Grupo As String, Contador As Integer)
 Dim J As Integer
-Dim Cad As String
+Dim cad As String
 
     J = 0
-    Cad = ""
+    cad = ""
     
     'Cod Artic
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        Cad = Mid(Grupo, 1, J - 1)
+        cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
         J = 1
     End If
-    codArtic(Contador) = Cad
+    codArtic(Contador) = cad
     
     'Cantidad
     J = InStr(1, Grupo, "|")
     If J > 0 Then
-        Cad = Mid(Grupo, 1, J - 1)
+        cad = Mid(Grupo, 1, J - 1)
         Grupo = Mid(Grupo, J + 1)
     Else
-        Cad = Grupo
+        cad = Grupo
         Grupo = ""
     End If
-    cantidad(Contador) = Cad
+    cantidad(Contador) = cad
 End Sub
 
 

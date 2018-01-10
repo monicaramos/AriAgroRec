@@ -191,6 +191,7 @@ Private Sub Form_Activate()
         
         espera 0.5
         Me.Refresh
+        DoEvents
         
         'Vemos datos de ConfigAgro.ini
         Set vConfig = New Configuracion
@@ -350,6 +351,7 @@ Dim OK As Byte
         Label1(2).Caption = ""  'Si tarda pondremos texto aquin
         PonerVisible False
         Me.Refresh
+        DoEvents
         Screen.MousePointer = vbHourglass
         HacerAccionesBD
         Unload Me
@@ -358,7 +360,7 @@ Dim OK As Byte
 End Sub
 
 Private Sub HacerAccionesBD()
-Dim Sql As String
+Dim SQL As String
 
 
     

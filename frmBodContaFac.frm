@@ -953,6 +953,7 @@ Dim CCoste As String
     B = ComprobarLetraSerie(cadTabla)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -966,6 +967,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -981,6 +983,7 @@ Dim CCoste As String
     End Select
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -997,6 +1000,7 @@ Dim CCoste As String
     End Select
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1008,6 +1012,7 @@ Dim CCoste As String
     B = ComprobarTiposIVA(cadTabla)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
     
     
@@ -1036,6 +1041,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
 
     If B Then
        Me.lblProgres(1).Caption = "Comprobando Forma de Pago ..."
@@ -1044,7 +1050,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
-
+    DoEvents
 
 
 
@@ -1202,6 +1208,7 @@ Dim CCoste As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
             I = I + 1
             Rs.MoveNext
         Wend

@@ -2035,7 +2035,7 @@ Dim devuelve As String
             If OpcionListado = 305 Then
                 H = 5325
                 Me.cmdAceptarEtiqProv.Top = Me.cmdAceptarEtiqProv.Top - 2000
-                Me.CmdCancel(9).Top = CmdCancel(9).Top - 2000
+                Me.cmdCancel(9).Top = cmdCancel(9).Top - 2000
             End If
             PonerFrameVisible Me.FrameEtiqProv, True, H, W
             Me.Frame2.visible = (OpcionListado = 306)
@@ -2076,7 +2076,7 @@ Dim devuelve As String
             chkMail(3).visible = OpcionListado = 316 'Solo para facturae
             If OpcionListado = 316 Then
                 cmdEnvioMail.Left = 3240
-                CmdCancel(indFrame).Left = 4320
+                cmdCancel(indFrame).Left = 4320
                 Label14(16).Caption = "Facturacion E"
                 cmdEnvioMail.TabIndex = 474
                 Check4.Enabled = True
@@ -2093,7 +2093,7 @@ Dim devuelve As String
     End Select
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.CmdCancel(indFrame).Cancel = True
+    Me.cmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
     
@@ -2525,7 +2525,7 @@ End Sub
 
 
 Private Sub EnviarSMS(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String, ByRef EstaOk As Boolean)
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -2549,13 +2549,13 @@ On Error GoTo EEnviar
        cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
         'seleccionamos todos los socios a los que queremos enviar un SMS
-        Sql = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
+        SQL = "SELECT distinct rsocios.codsocio,nomsocio,rsocios.movsocio "
     End If
-    Sql = Sql & "FROM " & cadTabla
-    Sql = Sql & " WHERE " & cadWHERE
+    SQL = SQL & "FROM " & cadTabla
+    SQL = SQL & " WHERE " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cont = 0
     lista = ""
@@ -2598,13 +2598,14 @@ On Error GoTo EEnviar
                     espera 2
                 
                     Me.Refresh
+                    DoEvents
                     espera 0.4
                     cont = cont + 1
                     
-                    Sql = "INSERT INTO rsmsenviados (codsocio, movsocio, fechaenvio, horaenvio, texto)"
-                    Sql = Sql & " VALUES (" & DBSet(Rs.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
-                    Sql = Sql & DBSet(txtCodigo(0).Text, "F") & "," & DBSet(txtCodigo(1).Text, "H") & "," & DBSet(txtCodigo(2).Text, "T") & ")"
-                    conn.Execute Sql
+                    SQL = "INSERT INTO rsmsenviados (codsocio, movsocio, fechaenvio, horaenvio, texto)"
+                    SQL = SQL & " VALUES (" & DBSet(Rs.Fields(0), "N") & "," & DBSet(Cad1, "T") & ","
+                    SQL = SQL & DBSet(txtCodigo(0).Text, "F") & "," & DBSet(txtCodigo(1).Text, "H") & "," & DBSet(txtCodigo(2).Text, "T") & ")"
+                    conn.Execute SQL
             
             
                 Case "-1"
@@ -2669,7 +2670,7 @@ DownloadError:
 End Sub
 
 Private Sub InsertarTemporal(cadWHERE As String)
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -2680,15 +2681,15 @@ Dim Sql2 As String
     conn.Execute Sql2
     
     'seleccionamos todos los socios a los que queremos enviar e-mail
-    Sql = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadWHERE & ")"
+    SQL = "SELECT distinct " & vUsu.Codigo & ", rsocios.codsocio from rsocios where codsocio in (" & cadWHERE & ")"
     
-    Sql2 = "insert into tmpinformes (codusu, codigo1) " & Sql
+    Sql2 = "insert into tmpinformes (codusu, codigo1) " & SQL
     conn.Execute Sql2
 
 End Sub
 
 Private Sub EnviarEMailMulti(cadWHERE As String, cadTit As String, cadRpt As String, cadTabla As String)
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim Cad1 As String, Cad2 As String, lista As String
 Dim cont As Integer
@@ -2702,34 +2703,34 @@ On Error GoTo EEnviar
        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
        
         'seleccionamos todos los socios a los que queremos enviar e-mail
-        Sql = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
+        SQL = "SELECT distinct rsocios.codsocio,nomsocio,maisocio, maisocio "
         If ImpresionNormal Then
-            Sql = Sql & "FROM " & cadTabla
+            SQL = SQL & "FROM " & cadTabla
         Else
-            Sql = Sql & "FROM " & "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
+            SQL = SQL & "FROM " & "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio"
         End If
     ElseIf cadTabla = "sclien" Then
         'seleccionamos todos los clientes a los que queremos enviar e-mail
-        Sql = "SELECT codclien,nomclien,maiclie1,maiclie2 "
-        Sql = Sql & "FROM " & cadTabla
+        SQL = "SELECT codclien,nomclien,maiclie1,maiclie2 "
+        SQL = SQL & "FROM " & cadTabla
     End If
-    Sql = Sql & " WHERE " & cadWHERE
+    SQL = SQL & " WHERE " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     ' Primero la borro por si acaso
-    Sql = " DROP TABLE IF EXISTS tmpMail;"
-    conn.Execute Sql
+    SQL = " DROP TABLE IF EXISTS tmpMail;"
+    conn.Execute SQL
     
     'creamos una temporal donde guardamos para cada proveedor que SI tiene
     'e-mail, el mail1 o el mail2 al que vamos a enviar
-    Sql = "CREATE TEMPORARY TABLE tmpMail ( "
-    Sql = Sql & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
-    Sql = Sql & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
-    Sql = Sql & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
-    Sql = Sql & "email varchar(40)  DEFAULT '' NOT NULL) "
-    conn.Execute Sql
+    SQL = "CREATE TEMPORARY TABLE tmpMail ( "
+    SQL = SQL & "codusu INT(7) UNSIGNED  DEFAULT '0' NOT NULL, "
+    SQL = SQL & "codprove INT(6) UNSIGNED  DEFAULT '0' NOT NULL, "
+    SQL = SQL & "nomprove varchar(40)  DEFAULT '' NOT NULL, "
+    SQL = SQL & "email varchar(40)  DEFAULT '' NOT NULL) "
+    conn.Execute SQL
     
     cont = 0
     lista = ""
@@ -2767,13 +2768,13 @@ On Error GoTo EEnviar
                     If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
                        cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
                        cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
-                        Sql = "{rsocios.codsocio}=" & Rs.Fields(0)
+                        SQL = "{rsocios.codsocio}=" & Rs.Fields(0)
                         .Opcion = 306
                     Else
-                        Sql = "{sclien.codclien}=" & Rs.Fields(0)
+                        SQL = "{sclien.codclien}=" & Rs.Fields(0)
                         .Opcion = 91
                     End If
-                    .FormulaSeleccion = Sql
+                    .FormulaSeleccion = SQL
                     .EnvioEMail = True
                     CadenaDesdeOtroForm = "GENERANDO"
                     .Titulo = cadTit
@@ -2783,17 +2784,18 @@ On Error GoTo EEnviar
     
                     If CadenaDesdeOtroForm = "" Then
                     'si se ha generado el .pdf para enviar
-                        Sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                        Sql = Sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
-                        conn.Execute Sql
+                        SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
+                        SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                        conn.Execute SQL
                 
                         Me.Refresh
+                        DoEvents
                         espera 0.4
                         cont = cont + 1
                         'Se ha generado bien el documento
                         'Lo copiamos sobre app.path & \temp
-                        Sql = Rs.Fields(0) & ".pdf"
-                        FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & Sql
+                        SQL = Rs.Fields(0) & ".pdf"
+                        FileCopy App.Path & "\docum.pdf", App.Path & "\temp\" & SQL
                     End If
                 End With
                 Label9(10).Caption = ""
@@ -2801,11 +2803,12 @@ On Error GoTo EEnviar
             Else
                 If CadenaDesdeOtroForm = "" Then
                 'si se ha generado el .pdf para enviar
-                    Sql = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
-                    Sql = Sql & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
-                    conn.Execute Sql
+                    SQL = "INSERT INTO tmpMail (codusu,codprove,nomprove,email)"
+                    SQL = SQL & " VALUES (" & vUsu.Codigo & "," & DBSet(Rs.Fields(0), "N") & "," & DBSet(Rs.Fields(1), "T") & "," & DBSet(Cad1, "T") & ")"
+                    conn.Execute SQL
             
                     Me.Refresh
+                    DoEvents
                     
 '[Monica]28/06/2013: quito el espera para agilizar el proceso
 '                    espera 0.4
@@ -2831,16 +2834,16 @@ On Error GoTo EEnviar
         If cadTabla = "(rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio) inner join rcampos on rsocios.codsocio = rcampos.codsocio " Or _
            cadTabla = "rsocios_seccion inner join rsocios on rsocios_seccion.codsocio = rsocios.codsocio" Or _
            cadTabla = "rsocios_pozos inner join rsocios on rsocios_pozos.codsocio = rsocios.codsocio" Then
-            Sql = "Carta: " & txtNombre(63).Text & "|"
+            SQL = "Carta: " & txtNombre(63).Text & "|"
             
             '[Monica]08/07/2011: si no hay a la atencion no se pone nada en el cuerpo del mensaje
             '                    añadida la condicion
             If txtCodigo(62).Text <> "" Then
-                Sql = Sql & "Att : " & txtCodigo(62).Text & "|"
+                SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
             End If
         Else
-            Sql = "Carta: " & txtNombre(63).Text & "|"
-            Sql = Sql & "Att : " & txtCodigo(62).Text & "|"
+            SQL = "Carta: " & txtNombre(63).Text & "|"
+            SQL = SQL & "Att : " & txtCodigo(62).Text & "|"
         End If
        
         If Not ImpresionNormal Then
@@ -2853,7 +2856,7 @@ On Error GoTo EEnviar
         End If
        
         frmEMail.Opcion = 2
-        frmEMail.DatosEnvio = Sql
+        frmEMail.DatosEnvio = SQL
         frmEMail.CodCryst = IndRptReport
         If Not ImpresionNormal Then
             frmEMail.Opcion = 5
@@ -2864,8 +2867,8 @@ On Error GoTo EEnviar
         frmEMail.Show vbModal
 
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute SQL
         
         'Borrar la carpeta con temporales
         If ImpresionNormal Then Kill App.Path & "\temp\*.pdf"
@@ -2889,8 +2892,8 @@ EEnviar:
     If Err.Number <> 0 Then
         MuestraError Err.Number, "Enviando Informe por e-mail", Err.Description
         'Borrar la tabla temporal
-        Sql = " DROP TABLE IF EXISTS tmpMail;"
-        conn.Execute Sql
+        SQL = " DROP TABLE IF EXISTS tmpMail;"
+        conn.Execute SQL
     End If
 End Sub
 
@@ -3203,8 +3206,8 @@ Private Sub PonerTamnyosMail(peque As Boolean)
     Me.Width = Me.Width + 120
     Me.FrameEnvioMail.visible = peque
     Me.FrameEnvioFacMail.visible = Not peque
-    DoEvents
     Me.Refresh
+    DoEvents
 End Sub
 
 Private Sub CargarComboTipoMov(Indice As Integer)
@@ -3215,16 +3218,16 @@ Private Sub CargarComboTipoMov(Indice As Integer)
 ' o marcamos la opcion sorted del combo
 
 'Lo cargamos con los valores de la tabla stipom que tengan tipo de documento=Albaranes (tipodocu=1)
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 Dim I As Byte
 
     On Error GoTo ECargaCombo
     
     '[Monica]18/02/2013: excluimos los movimientos de facturas varias
-    Sql = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
+    SQL = "select codtipom, nomtipom from usuarios.stipom where (tipodocu <> 0) and tipodocu <> 12"
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     I = 0
     
     ListTipoMov(Indice).Clear
@@ -3247,7 +3250,7 @@ End Sub
 
 
 Private Function SituacionesBloqueo() As String
-Dim Sql As String
+Dim SQL As String
 Dim cadena As String
 Dim Rs As ADODB.Recordset
 
@@ -3255,10 +3258,10 @@ Dim Rs As ADODB.Recordset
 
     SituacionesBloqueo = cadena
 
-    Sql = "select codsitua from rsituacion where bloqueo = 1"
+    SQL = "select codsitua from rsituacion where bloqueo = 1"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         cadena = cadena & DBLet(Rs!codsitua) & ","
@@ -3276,23 +3279,23 @@ Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
 Dim I As Integer
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     Combo1(0).Clear
     
-    Sql = "select distinct numfases from rsocios_pozos "
+    SQL = "select distinct numfases from rsocios_pozos "
 
     Combo1(0).AddItem "Todas" 'campo del codigo
     Combo1(0).ItemData(Combo1(0).NewIndex) = 0
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        Sql = "Fase " & Rs.Fields(0).Value
+        SQL = "Fase " & Rs.Fields(0).Value
         
-        Combo1(0).AddItem Sql 'campo del codigo
+        Combo1(0).AddItem SQL 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = Rs.Fields(0).Value
         
         Rs.MoveNext

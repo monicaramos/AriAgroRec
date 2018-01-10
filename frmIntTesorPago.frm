@@ -560,6 +560,7 @@ Dim cadMen As String
     B = ComprobarCtaContable_new("", 15, , vParamAplic.Seccionhorto, cta)
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
     
     
@@ -572,6 +573,7 @@ Dim cadMen As String
     B = InsertarEnTesoreriaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos)
     IncrementarProgres Me.Pb1, 80
     Me.Refresh
+    DoEvents
     
     If Not B Then
         MuestraError Err.Number, "Contabilizar pagos.", cadMen

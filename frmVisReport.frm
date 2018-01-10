@@ -699,6 +699,7 @@ Dim J As Integer
             
             
             Me.Refresh
+            DoEvents
             Screen.MousePointer = vbHourglass
             espera 0.5
             

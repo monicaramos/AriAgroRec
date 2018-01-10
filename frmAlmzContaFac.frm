@@ -820,7 +820,7 @@ Dim I As Integer
 
 
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 
@@ -1295,6 +1295,7 @@ Dim CCoste As String
     B = (SQL <> "")
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1306,6 +1307,7 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 1)
     IncrementarProgres Me.Pb1, 30
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1317,6 +1319,7 @@ Dim CCoste As String
     If B Then B = ComprobarCtaContable_new(cadTabla, 3)
     IncrementarProgres Me.Pb1, 30
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1327,6 +1330,7 @@ Dim CCoste As String
     B = ComprobarIVA(cadTabla)
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1352,6 +1356,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
 
 
     '===========================================================================
@@ -1530,6 +1535,7 @@ Dim AntFecha As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Facturas Almazara en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
             I = I + 1
             Rs.MoveNext
         Wend

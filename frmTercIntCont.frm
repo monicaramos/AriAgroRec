@@ -443,7 +443,7 @@ Dim H As Integer, W As Integer
     indFrame = 7
         
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel(indFrame).Cancel = True
+    Me.cmdCancel(indFrame).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -846,6 +846,8 @@ Dim vSeccion As CSeccion
 '    End If
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -859,6 +861,8 @@ Dim vSeccion As CSeccion
 '    End If
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -880,6 +884,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -901,6 +907,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
     
     
@@ -924,6 +932,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
     
 
@@ -942,6 +952,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 20
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -965,6 +977,8 @@ Dim vSeccion As CSeccion
     Set vSeccion = Nothing
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -1005,6 +1019,7 @@ Dim vSeccion As CSeccion
        
     IncrementarProgres Me.ProgressBar1, 10
     Me.Refresh
+    DoEvents
 
 
     '===========================================================================
@@ -1170,6 +1185,8 @@ Dim Codigo1 As String
             IncrementarProgres Me.ProgressBar1, 1
             Me.lblProgess(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
+            
             I = I + 1
             Rs.MoveNext
         Wend

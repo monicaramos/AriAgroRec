@@ -1732,6 +1732,7 @@ Dim CCoste As String
 '    b = ComprobarLetraSerie(cadTABLA)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1743,12 +1744,14 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 1, , CInt(txtCodigo(2).Text))
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
     '[Monica]08/04/2015: para el caso de catadau comprobamos las cuentas de asociados en el caso de que lo sean
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     
     If vParamAplic.Cooperativa = 0 Then
         Me.lblProgres(1).Caption = "Comprobando Cuentas Contables asociados en contabilidad ..."
@@ -1770,6 +1773,7 @@ Dim CCoste As String
             
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
     
     Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(Combo1(0).Text, 1, 3), "T"))
@@ -1786,12 +1790,14 @@ Dim CCoste As String
     
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
     'comprobar que todas las CUENTAS de gastos a pie de factura
     B = ComprobarCtaContable_new(cadTabla, 12, Tipo, CInt(txtCodigo(2).Text))
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
     'comprobar que todos las TIPO IVA de las distintas fecturas que vamos a
@@ -1801,6 +1807,7 @@ Dim CCoste As String
     B = ComprobarIVA(cadTabla)
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1823,6 +1830,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
 
 
     '===========================================================================
@@ -1975,6 +1983,7 @@ Dim Codigo1 As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
             I = I + 1
             Rs.MoveNext
         Wend

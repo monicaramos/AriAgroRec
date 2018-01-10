@@ -5233,7 +5233,7 @@ Dim B As Boolean
 Dim Opcion As Byte
 Dim SQL As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     B = DataGrid1.Enabled
     Select Case vDataGrid.Name
@@ -5263,7 +5263,7 @@ Dim SQL As String
    
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -5271,7 +5271,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
     
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     Select Case vDataGrid.Name
         Case "DataGrid1" 'rhisfruta_incidencia
@@ -5316,7 +5316,7 @@ Dim tots As String
     vDataGrid.HoldFields
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -6767,6 +6767,7 @@ Dim NomFic As String
     ' salto la primera linea que es la cabecera
     Line Input #NF, cad
     Me.Refresh
+    DoEvents
     I = 1
     
         
@@ -6776,6 +6777,7 @@ Dim NomFic As String
         
         lblProgres(0).Caption = "Carga inicial fichero. Linea " & I
         Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         If Mid(cad, 1, 6) <> ";;;;;;" Then B = InsertarLineaPrevia(cad)
@@ -6959,11 +6961,13 @@ Dim NomFic As String
     Me.Pb1.Max = longitud
     Me.Refresh
     Me.Pb1.Value = 0
+    DoEvents
         
     ' salto la primera linea que es la cabecera
     Line Input #NF, cad
     Me.Pb1.Value = Me.Pb1.Value + Len(cad)
     Me.Refresh
+    DoEvents
     I = 1
     
         
@@ -6973,7 +6977,8 @@ Dim NomFic As String
         
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(0).Caption = "Procesando Fichero. Linea " & I
-            Me.Refresh
+        Me.Refresh
+        DoEvents
         
         cad = cad & ";"
         If Mid(cad, 1, 6) <> ";;;;;;" Then B = InsertarLineaTraspasoEntradas(cad)

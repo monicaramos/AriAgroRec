@@ -10361,6 +10361,7 @@ Dim NomFic As String
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
         
     B = True
@@ -10370,7 +10371,7 @@ Dim NomFic As String
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
-        
+        DoEvents
         B = InsertarLinea(cad)
         
         If B = False Then
@@ -10502,6 +10503,7 @@ Dim B As Boolean
     Pb1.visible = True
     Me.Pb1.Max = longitud
     Me.Refresh
+    DoEvents
     Me.Pb1.Value = 0
     ' PROCESO DEL FICHERO VENTAS.TXT
 
@@ -10513,6 +10515,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         B = ComprobarRegistro(cad)
         
         Line Input #NF, cad
@@ -10525,6 +10528,7 @@ Dim B As Boolean
         Me.Pb1.Value = Me.Pb1.Value + Len(cad)
         lblProgres(1).Caption = "Linea " & I
         Me.Refresh
+        DoEvents
         B = ComprobarRegistro(cad)
     End If
     
@@ -15390,6 +15394,8 @@ Dim Sql2 As String
                 Me.Pb1.Max = Nregs
                 Me.Pb1.Value = 0
                 Me.Refresh
+                DoEvents
+                
                 Mens = "Proceso Facturación Consumo: " & vbCrLf & vbCrLf
                 If vParamAplic.Cooperativa = 7 Then ' QUATRETONDA
                     B = FacturacionConsumoQUATRETONDA(nTabla, cadSelect, FecFac, Me.Pb1, Mens, Consumo, EsRectificativa)
@@ -17020,6 +17026,7 @@ Dim Sql2 As String
         Me.Pb2.Max = Nregs
         Me.Pb2.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Mantenimiento: " & vbCrLf & vbCrLf
         B = FacturacionMantenimiento(nTabla, cadSelect, txtCodigo(10).Text, Me.Pb2, Mens)
@@ -17119,6 +17126,7 @@ Dim Sql2 As String
         Me.Pb2.Max = Nregs
         Me.Pb2.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Mantenimiento: " & vbCrLf & vbCrLf
         B = FacturacionMantenimientoUTXERA(nTabla, cadSelect, txtCodigo(10).Text, Me.Pb2, Mens)
@@ -17224,6 +17232,7 @@ Dim Sql2 As String
         Me.Pb2.Max = Nregs
         Me.Pb2.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Mantenimiento: " & vbCrLf & vbCrLf
         B = FacturacionMantenimientoESCALONA(nTabla, cadSelect, txtCodigo(10).Text, Me.Pb2, Mens)
@@ -17332,6 +17341,7 @@ Dim cadena As String
         Me.Pb4.Value = 0
         Me.Label2(78).visible = True
         Me.Refresh
+        DoEvents
         
         '------------------------------------------------------------------------------
         '  LOG de acciones
@@ -17356,13 +17366,17 @@ Dim cadena As String
         Else
             Me.Label2(78).Caption = "Comprobando recibos ..."
             Me.Refresh
+            DoEvents
+            
             If Not HayFactContabilizadas(nTabla, cadSelect) Then
                 Me.Label2(78).Caption = "Actualizando recibos ..."
                 Me.Refresh
+                DoEvents
                 B = ActualizacionTallaESCALONA(nTabla, cadSelect, txtCodigo(73).Text, Me.Pb4, Mens)
             Else
                 Me.Pb4.visible = False
                 Me.Label2(78).visible = False
+                Me.Refresh
                 DoEvents
                 Exit Sub
             End If
@@ -17470,6 +17484,7 @@ Dim Sql2 As String
         Me.pb7.Max = Nregs
         Me.pb7.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Mantenimiento: " & vbCrLf & vbCrLf
         B = FacturacionConsumoMantaESCALONA(nTabla, cadSelect, txtCodigo(114).Text, Me.pb7, Mens)
@@ -17575,6 +17590,7 @@ Dim Sql2 As String
         Me.pb7.Max = Nregs
         Me.pb7.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Mantenimiento: " & vbCrLf & vbCrLf
         B = FacturacionConsumoMantaESCALONANew(nTabla, cadSelect, txtCodigo(114).Text, Me.pb7, Mens)
@@ -19009,6 +19025,7 @@ Dim Sql2 As String
         Me.Pb3.Max = Nregs
         Me.Pb3.Value = 0
         Me.Refresh
+        DoEvents
         
         Mens = "Proceso Facturación Contadores: " & vbCrLf & vbCrLf
         B = FacturacionContadores(nTabla, cadSelect, txtCodigo(22).Text, Me.Pb3, Mens)
@@ -19433,6 +19450,8 @@ Dim Sql2 As String
                 Me.Pb1.Max = Nregs
                 Me.Pb1.Value = 0
                 Me.Refresh
+                DoEvents
+                
                 Mens = "Proceso Facturación Consumo: " & vbCrLf & vbCrLf
                 B = FacturacionConsumoUTXERA(nTabla, cadSelect, txtCodigo(14).Text, Me.Pb1, Mens)
                 If B Then
@@ -20608,6 +20627,8 @@ On Error GoTo EEnviar
                     conn.Execute SQL
             
                     Me.Refresh
+                    DoEvents
+                    
                     espera 0.4
                     cont = cont + 1
                     'Se ha generado bien el documento

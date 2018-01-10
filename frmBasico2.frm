@@ -514,7 +514,7 @@ Public tabla As String
 Public CampoCP As String
 Public Report As String
 
-Private cadB As String
+Private CadB As String
 
 Dim CampoOrden As String
 Dim TipoOrden As String
@@ -588,7 +588,7 @@ Private Sub BotonAnyadir()
     Dim anc As Single
     
     CargaGrid 'primer de tot carregue tot el grid
-    cadB = ""
+    CadB = ""
     '******************** canviar taula i camp **************************
     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
         NumF = NuevoCodigo
@@ -613,7 +613,7 @@ Private Sub BotonAnyadir()
 End Sub
 
 Private Sub BotonVerTodos()
-    cadB = ""
+    CadB = ""
     CargaGrid ""
     PonerModo 2
 End Sub
@@ -689,7 +689,7 @@ Dim temp As Boolean
         NumRegElim = adodc1.Recordset.AbsolutePosition
         SQL = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
         conn.Execute SQL
-        CargaGrid cadB
+        CargaGrid CadB
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
     End If
@@ -714,9 +714,9 @@ Private Sub cmdAceptar_Click()
 
     Select Case Modo
         Case 1 'BUSQUEDA
-            cadB = ObtenerBusqueda(Me)
-            If cadB <> "" Then
-                CargaGrid cadB
+            CadB = ObtenerBusqueda(Me)
+            If CadB <> "" Then
+                CargaGrid CadB
                 PonerModo 2
                 PonerFocoGrid Me.DataGrid1
             End If
@@ -734,7 +734,7 @@ Private Sub cmdAceptar_Click()
                     Else
                         BotonAnyadir
                     End If
-                    cadB = ""
+                    CadB = ""
                 End If
             End If
             
@@ -744,7 +744,7 @@ Private Sub cmdAceptar_Click()
                     TerminaBloquear
                     I = adodc1.Recordset.Fields(0)
                     PonerModo 2
-                    CargaGrid cadB
+                    CargaGrid CadB
 
                     adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(I, RecuperaValor(Tag1, 2)))
                     PonerFocoGrid Me.DataGrid1
@@ -758,7 +758,7 @@ Private Sub cmdCancelar_Click()
     
     Select Case Modo
         Case 1 'búsqueda
-            CargaGrid cadB
+            CargaGrid CadB
         Case 3 'insertar
             DataGrid1.AllowAddNew = False
             'CargaGrid
@@ -814,6 +814,7 @@ Dim cad As String
     If adodc1.Recordset.EOF Then Exit Sub
     If ColIndex <= 6 Then
         Me.Refresh
+        DoEvents
         Screen.MousePointer = vbHourglass
         Select Case ColIndex
             Case 0
@@ -904,7 +905,7 @@ Private Sub Form_Load()
     CampoOrden = CampoCP
     TipoOrden = "ASC"
     
-    cadB = ""
+    CadB = ""
     CargaGrid
     
     Set vTag1 = New CTag
@@ -1100,7 +1101,7 @@ Dim cadReg As String
 
     If (Modo = 2 Or Modo = 0) Then
         cadReg = PonerContRegistros(Me.adodc1)
-        If cadB = "" Then
+        If CadB = "" Then
             lblIndicador.Caption = cadReg
         Else
             lblIndicador.Caption = "BUSQUEDA: " & cadReg

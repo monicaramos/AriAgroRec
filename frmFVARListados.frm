@@ -4341,6 +4341,7 @@ Dim CodTipoMov As String
         IncrementarProgresNew Me.Pb1, 1
         Me.lblProgres(1).Caption = "Procesando Código ..."
         Me.Refresh
+        DoEvents
         
         
         Set vTipoMov = New CTiposMov
@@ -4620,6 +4621,8 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb2, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -4631,6 +4634,7 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 1, 0, CInt(txtCodigo(6).Text))
     IncrementarProgres Me.Pb2, 30
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -4642,12 +4646,16 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 2, , CInt(txtCodigo(6).Text))
     IncrementarProgres Me.Pb2, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
     
 '    'comprobar que todas las CUENTAS de gastos a pie de factura
 '    b = ComprobarCtaContable_new(cadTabla, 12, tipo, CInt(txtcodigo(2).Text))
     IncrementarProgres Me.Pb2, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
     'comprobar que todos las TIPO IVA de las distintas fecturas que vamos a
@@ -4657,6 +4665,8 @@ Dim CCoste As String
     B = ComprobarTiposIVA2(cadTabla)
     IncrementarProgres Me.Pb2, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -4664,6 +4674,8 @@ Dim CCoste As String
     B = ComprobarFormadePago(cadTabla)
     IncrementarProgres Me.Pb2, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -4688,6 +4700,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb2, 20
     Me.Refresh
+    DoEvents
 
 
     '===========================================================================
@@ -4855,6 +4868,8 @@ Dim Codigo1 As String
             IncrementarProgres Me.Pb2, 1
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
+            
             I = I + 1
             Rs.MoveNext
         Wend
@@ -5180,6 +5195,8 @@ Dim CCoste As String
     
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then
         MsgBox "No existe la letra de serie XX1", vbExclamation
         Exit Sub
@@ -5197,6 +5214,8 @@ Dim CCoste As String
     B = ComprobarCtaContable_new("tmpfactvarias", 1, Tipo, CInt(txtCodigo(52).Text))
     IncrementarProgres Me.Pb1, 30
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -5207,12 +5226,16 @@ Dim CCoste As String
     B = ComprobarCtaContable_new("tmpfactvarias", 2, , CInt(txtCodigo(52).Text))
     IncrementarProgres Me.Pb1, 30
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
     
 '    'comprobar que todas las CUENTAS de gastos a pie de factura
 '    b = ComprobarCtaContable_new(cadTabla, 12, tipo, CInt(txtcodigo(2).Text))
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
     'comprobar que todos las TIPO IVA de las distintas fecturas que vamos a
@@ -5222,6 +5245,8 @@ Dim CCoste As String
     B = ComprobarTiposIVA3()
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
+    
     If Not B Then Exit Sub
 
 
@@ -5320,6 +5345,8 @@ Dim Codigo1 As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Cobros ...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
+            
             I = I + 1
             Rs.MoveNext
         Wend

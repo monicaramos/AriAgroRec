@@ -923,7 +923,7 @@ Dim I As Integer
     PosicionarCombo Me.Combo1(0), 0
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 
@@ -1438,6 +1438,7 @@ Dim CCoste As String
 '    b = ComprobarLetraSerie(cadTABLA)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
 '    If Not b Then Exit Sub
 
 
@@ -1449,6 +1450,7 @@ Dim CCoste As String
     B = ComprobarCtaContable_new(cadTabla, 1, , CInt(vParamAplic.Seccionhorto))
     IncrementarProgres Me.Pb1, 30
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1460,6 +1462,7 @@ Dim CCoste As String
             
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
     
     Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Mid(Combo1(0).Text, 1, 3), "T"))
@@ -1471,12 +1474,14 @@ Dim CCoste As String
     
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 '    'comprobar que todas las CUENTAS de gastos a pie de factura
 '    b = ComprobarCtaContable_new(cadTABLA, 12, tipo, CInt(txtcodigo(2).Text))
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
     'comprobar que todos las TIPO IVA de las distintas fecturas que vamos a
@@ -1486,6 +1491,7 @@ Dim CCoste As String
     B = ComprobarIVA(cadTabla)
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
+    DoEvents
     If Not B Then Exit Sub
 
 
@@ -1508,7 +1514,7 @@ Dim CCoste As String
     End If
     IncrementarProgres Me.Pb1, 20
     Me.Refresh
-
+    DoEvents
 
     '===========================================================================
     'CONTABILIZAR FACTURAS
@@ -1655,6 +1661,7 @@ Dim Codigo1 As String
             IncrementarProgres Me.Pb1, 1
             Me.lblProgres(1).Caption = "Insertando Facturas en Contabilidad...   (" & I & " de " & numfactu & ")"
             Me.Refresh
+            DoEvents
             I = I + 1
             Rs.MoveNext
         Wend
