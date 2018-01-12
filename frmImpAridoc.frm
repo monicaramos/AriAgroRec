@@ -16,22 +16,49 @@ Begin VB.Form frmImpAridoc
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdSalir 
       Caption         =   "Salir"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   3960
       TabIndex        =   2
-      Top             =   3810
+      Top             =   3855
       Width           =   1695
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   2040
       TabIndex        =   1
-      Top             =   3810
+      Top             =   3855
       Width           =   1695
    End
    Begin VB.Frame Frame1 
       Caption         =   "Carpeta de destino: "
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1215
       Left            =   135
       TabIndex        =   3
@@ -40,7 +67,16 @@ Begin VB.Form frmImpAridoc
       Begin VB.TextBox txtCarp 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
          Left            =   1560
          TabIndex        =   5
@@ -49,7 +85,16 @@ Begin VB.Form frmImpAridoc
       End
       Begin VB.TextBox txtCarp 
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   495
          TabIndex        =   0
@@ -57,12 +102,21 @@ Begin VB.Form frmImpAridoc
          Width           =   975
       End
       Begin VB.Label Label2 
-         Caption         =   "Código:"
+         Caption         =   "Código"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
          Left            =   240
          TabIndex        =   4
-         Top             =   360
+         Top             =   315
          Width           =   975
       End
    End
@@ -73,77 +127,131 @@ Begin VB.Form frmImpAridoc
       Top             =   1650
       Width           =   5640
       Begin VB.ComboBox Combo1 
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   1560
+         Left            =   1620
          Style           =   2  'Dropdown List
          TabIndex        =   13
          Tag             =   "Tipo|N|N|||straba|codsecci||N|"
          Top             =   240
-         Width           =   1350
+         Width           =   2745
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   2520
+         Left            =   3015
          MaxLength       =   10
          TabIndex        =   9
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
          Top             =   1170
-         Width           =   1050
+         Width           =   1350
       End
       Begin VB.TextBox txtCodigo 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   2520
+         Left            =   3015
          MaxLength       =   10
          TabIndex        =   8
          Tag             =   "Código Postal|T|S|||clientes|codposta|||"
-         Top             =   825
-         Width           =   1050
+         Top             =   780
+         Width           =   1350
       End
       Begin VB.Label Label8 
          Caption         =   "Tipo Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Left            =   270
          TabIndex        =   14
          Top             =   270
-         Width           =   1065
+         Width           =   1290
       End
       Begin VB.Label Label4 
          Caption         =   "Desde"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   15
-         Left            =   1590
+         Left            =   2085
          TabIndex        =   12
-         Top             =   810
-         Width           =   465
+         Top             =   765
+         Width           =   645
       End
       Begin VB.Label Label4 
          Caption         =   "Hasta"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   195
          Index           =   14
-         Left            =   1590
+         Left            =   2085
          TabIndex        =   11
          Top             =   1170
-         Width           =   420
+         Width           =   645
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   0
-         Left            =   2250
+         Left            =   2745
          Picture         =   "frmImpAridoc.frx":000C
          ToolTipText     =   "Buscar fecha"
-         Top             =   810
+         Top             =   765
          Width           =   240
       End
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   1
-         Left            =   2250
+         Left            =   2745
          Picture         =   "frmImpAridoc.frx":0097
          ToolTipText     =   "Buscar fecha"
          Top             =   1170
@@ -151,13 +259,22 @@ Begin VB.Form frmImpAridoc
       End
       Begin VB.Label Label4 
          Caption         =   "Fecha Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   16
          Left            =   270
          TabIndex        =   10
-         Top             =   690
-         Width           =   1185
+         Top             =   735
+         Width           =   1680
       End
    End
    Begin VB.Frame Frame2 
@@ -228,6 +345,15 @@ Begin VB.Form frmImpAridoc
    Begin VB.Label lblInf 
       Alignment       =   2  'Center
       Caption         =   "Información del proceso"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   240
       TabIndex        =   6
@@ -260,7 +386,7 @@ Private WithEvents frmC As frmCal 'calendario fechas
 Attribute frmC.VB_VarHelpID = -1
 
 Private Sub cmdAceptar_Click()
-    If Not DatosOk() Then Exit Sub
+    If Not DatosOK() Then Exit Sub
     '-- Cargar facturas  entre las fechas seleccionadas
     Select Case Tipo
         Case 0 ' facturas
@@ -299,9 +425,9 @@ Private Sub cmdSalir_Click()
     Unload Me
 End Sub
 
-Private Function DatosOk() As Boolean
-    DesdeFecha = CDate(txtcodigo(0).Text)
-    Hastafecha = CDate(txtcodigo(1).Text)
+Private Function DatosOK() As Boolean
+    DesdeFecha = CDate(txtCodigo(0).Text)
+    Hastafecha = CDate(txtCodigo(1).Text)
     If DesdeFecha > Hastafecha Then
         MsgBox "La fecha desde debe ser menor que la fecha hasta", vbInformation
         Exit Function
@@ -310,7 +436,7 @@ Private Function DatosOk() As Boolean
         MsgBox "Debe seleccionar una carpeta de importación.", vbInformation
         Exit Function
     End If
-    DatosOk = True
+    DatosOK = True
 End Function
 
 
@@ -361,8 +487,8 @@ Private Sub Form_Load()
     'Icono del formulario
     Me.Icon = frmPpal.Icon
 
-    txtcodigo(0).Text = Date
-    txtcodigo(1).Text = Date
+    txtCodigo(0).Text = Date
+    txtCodigo(1).Text = Date
     Set impor = New ArdImportador
     
     Set ardDB = New BaseDatos
@@ -451,17 +577,17 @@ Private Sub imgFec_Click(Index As Integer)
 
     ' ***canviar l'index de imgFec pel 1r index de les imagens de buscar data***
     imgFec(0).Tag = Index 'independentment de les dates que tinga, sempre pose l'index en la 27
-    If txtcodigo(Index).Text <> "" Then frmC.NovaData = txtcodigo(Index).Text
+    If txtCodigo(Index).Text <> "" Then frmC.NovaData = txtCodigo(Index).Text
 
     frmC.Show vbModal
     Set frmC = Nothing
-    PonerFoco txtcodigo(CByte(imgFec(0).Tag))
+    PonerFoco txtCodigo(CByte(imgFec(0).Tag))
     ' ***************************
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
  'Fecha
-    txtcodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
+    txtCodigo(CByte(imgFec(0).Tag)).Text = Format(vFecha, "dd/MM/yyyy")
 End Sub
 
 Private Sub txtCarp_GotFocus(Index As Integer)
@@ -477,18 +603,18 @@ Private Sub txtCarp_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub txtCarp_LostFocus(Index As Integer)
-Dim Cad As String
+Dim cad As String
     If Index = 0 Then
         If txtCarp(0) <> "" Then
             'txtCarp(1) = impor.nombreCarpeta(CLng(txtCarp(0))) '  CargaPath(CLng(txtCarp(0))) 'impor.nombreCarpeta(CLng(txtCarp(0)))
-            Cad = CargaPath(txtCarp(Index))
-            txtCarp(1).Text = Mid(Cad, 2, Len(Cad))
+            cad = CargaPath(txtCarp(Index))
+            txtCarp(1).Text = Mid(cad, 2, Len(cad))
         End If
     End If
 End Sub
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -510,9 +636,9 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYFecha(KeyAscii As Integer, indice As Integer)
+Private Sub KEYFecha(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgFec_Click (indice)
+    imgFec_Click (Indice)
 End Sub
 
 Private Sub KEYpress(KeyAscii As Integer)
@@ -524,10 +650,10 @@ Dim cerrar As Boolean
 End Sub
 
 Private Sub txtCodigo_LostFocus(Index As Integer)
-Dim Cad As String, cadTipo As String 'tipo cliente
+Dim cad As String, cadTipo As String 'tipo cliente
 
     'Quitar espacios en blanco por los lados
-    txtcodigo(Index).Text = Trim(txtcodigo(Index).Text)
+    txtCodigo(Index).Text = Trim(txtCodigo(Index).Text)
     
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -536,7 +662,7 @@ Dim Cad As String, cadTipo As String 'tipo cliente
     
     Select Case Index
         Case 0, 1, 2 'FECHAS
-            If txtcodigo(Index).Text <> "" Then PonerFormatoFecha txtcodigo(Index)
+            If txtCodigo(Index).Text <> "" Then PonerFormatoFecha txtCodigo(Index)
             
     End Select
 End Sub
@@ -547,10 +673,10 @@ Private Sub CargaFacturas(TipoFact As Byte, DFecha As Date, HFecha As Date)
 '           1 = Liquidacion
 
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -580,30 +706,30 @@ Dim CadParam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select rfactsoc.*, stipom.letraser " & _
-            " from rfactsoc, usuarios.stipom where rfactsoc.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
-            " and rfactsoc.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
+    SQL = "select rfactsoc.*, stipom.letraser " & _
+            " from rfactsoc, usuarios.stipom where rfactsoc.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
+            " and rfactsoc.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
             " and rfactsoc.codtipom = stipom.codtipom " & _
             " and rfactsoc.pasaridoc = 0"
             
     Select Case TipoFact
         Case 0 ' anticipos
             '[Monica]01/04/2011 añadidas 7,9 anticipos de almazara y de bodega
-            Sql = Sql & " and stipom.tipodocu in (1,3,7,9)"
+            SQL = SQL & " and stipom.tipodocu in (1,3,7,9)"
         Case 1 ' liquidaciones
             '[Monica]01/04/2011 añadidas 8,10 liquidaciones de almazara y de bodega
-            Sql = Sql & " and stipom.tipodocu in (2,4,5,6,8,10)" ' [Monica]26/04/2010: añadidas 5 y 6
+            SQL = SQL & " and stipom.tipodocu in (2,4,5,6,8,10)" ' [Monica]26/04/2010: añadidas 5 y 6
         Case 2 ' rectificativas
-            Sql = Sql & " and stipom.tipodocu = 11 "
+            SQL = SQL & " and stipom.tipodocu = 11 "
     End Select
             
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -650,27 +776,27 @@ Dim CadParam As String
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(SQL)
             
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            Sql = "select count(distinct codvarie) from rfactsoc_variedad where "
-            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
+            SQL = "select count(distinct codvarie) from rfactsoc_variedad where "
+            SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+            SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(Sql) > 1 Then
+            If TotalRegistros(SQL) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                Sql = "select nomvarie from variedades where codvarie in ( "
-                Sql = Sql & "select codvarie from rfactsoc_variedad where "
-                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
+                SQL = "select nomvarie from variedades where codvarie in ( "
+                SQL = SQL & "select codvarie from rfactsoc_variedad where "
+                SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+                SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(Sql)
+                Variedad = DevuelveValor(SQL)
             End If
 
             Select Case TipoFact
@@ -703,12 +829,12 @@ Dim CadParam As String
             End Select
             
             '[Monica]20/04/2011: en el importe total factura no estan incluidos los gastos
-            Sql = "select sum(importe) from rfactsoc_gastos where "
-            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
+            SQL = "select sum(importe) from rfactsoc_gastos where "
+            SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+            SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-            Gastos = DevuelveValor(Sql)
+            Gastos = DevuelveValor(SQL)
             '[Monica]20/04/2011
             
             
@@ -717,9 +843,9 @@ Dim CadParam As String
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                Sql = "update rfactsoc set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-                db.ejecutar Sql
+                SQL = "update rfactsoc set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -738,10 +864,10 @@ End Sub
 Private Sub CargaFacturasADV(DFecha As Date, HFecha As Date)
     
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -768,19 +894,19 @@ Dim CadParam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select advfacturas.*, stipom.letraser " & _
-            " from advfacturas, usuarios.stipom where advfacturas.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
-            " and advfacturas.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
+    SQL = "select advfacturas.*, stipom.letraser " & _
+            " from advfacturas, usuarios.stipom where advfacturas.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
+            " and advfacturas.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
             " and advfacturas.codtipom = stipom.codtipom " & _
             " and advfacturas.pasaridoc = 0"
     
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -811,8 +937,8 @@ Dim CadParam As String
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(SQL)
 
             c1 = CargaParametroFacADV(vParamAplic.C1ADV, Rs, Rs2)
             c2 = CargaParametroFacADV(vParamAplic.C2ADV, Rs, Rs2)
@@ -824,9 +950,9 @@ Dim CadParam As String
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                Sql = "update advfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-                db.ejecutar Sql
+                SQL = "update advfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -844,10 +970,10 @@ End Sub
 
 Private Sub CargaRecibos(DFecha As Date, HFecha As Date)
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -871,20 +997,20 @@ Dim CadParam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select horas.codtraba " & _
-            " from horas where fecharec = " & db.Fecha(CDate(txtcodigo(2).Text)) & _
+    SQL = "select horas.codtraba " & _
+            " from horas where fecharec = " & db.Fecha(CDate(txtCodigo(2).Text)) & _
             " and horas.pasaridoc = 0 " & _
             " and codtraba in (select codtraba from straba where codsecci = " & Combo1(0).ListIndex & ")" & _
             " group by codtraba "
             
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -900,7 +1026,7 @@ Dim CadParam As String
             indRPT = 13 'Impresion de Factura
             If Not PonerParamRPT(indRPT, CadParam, numParam, nomDocu, True) Then Exit Sub
             '++
-            CadParam = CadParam & "|pFecha=""" & txtcodigo(2).Text & """|"
+            CadParam = CadParam & "|pFecha=""" & txtCodigo(2).Text & """|"
             numParam = numParam + 1
             CadParam = CadParam & "|pTitulo=""" & "Recibo Horas " & Combo1(0).Text & """|"
             numParam = numParam + 1
@@ -914,9 +1040,9 @@ Dim CadParam As String
             fr.ConSubInforme = False
             fr.Informe = App.Path & "\Informes\" & nomDocu
             fr.FormulaSeleccion = "{horas.codtraba} = " & Rs!CodTraba & " and " & _
-                                           "{horas.fecharec} = Date(" & Format(CDate(txtcodigo(2).Text), "yyyy") & _
-                                                                    "," & Format(CDate(txtcodigo(2).Text), "mm") & _
-                                                                    "," & Format(CDate(txtcodigo(2).Text), "dd") & ") and " & _
+                                           "{horas.fecharec} = Date(" & Format(CDate(txtCodigo(2).Text), "yyyy") & _
+                                                                    "," & Format(CDate(txtCodigo(2).Text), "mm") & _
+                                                                    "," & Format(CDate(txtCodigo(2).Text), "dd") & ") and " & _
                                            "{horas.pasaridoc} = 0 "
                                                                     
             fr.FicheroPDF = FicheroPDF
@@ -930,8 +1056,8 @@ Dim CadParam As String
 '            c3 = "ARIAGRO"
 '            c4 = RS!CodClien
 '++monica: c1 a c4 esta parametrizado
-            Sql = "select * from straba where codtraba = " & db.numero(Rs!CodTraba)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from straba where codtraba = " & db.numero(Rs!CodTraba)
+            Set Rs2 = db.cursor(SQL)
             c1 = CargaParametroRec(vParamAplic.C1Recibo, Rs, Rs2)
             c2 = CargaParametroRec(vParamAplic.C2Recibo, Rs, Rs2)
             c3 = CargaParametroRec(vParamAplic.C3Recibo, Rs, Rs2)
@@ -939,15 +1065,15 @@ Dim CadParam As String
             
 '            f1 = RS!fechahora
 '            i1 = RS!TotalFac
-            f1 = CDate(txtcodigo(2).Text)
+            f1 = CDate(txtCodigo(2).Text)
             i1 = 0
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas
-                Sql = "update horas set pasaridoc = 1 where codtraba = " & DBSet(Rs!CodTraba, "N")
-                Sql = Sql & " and fecharec = " & db.Fecha(CDate(txtcodigo(2).Text))
+                SQL = "update horas set pasaridoc = 1 where codtraba = " & DBSet(Rs!CodTraba, "N")
+                SQL = SQL & " and fecharec = " & db.Fecha(CDate(txtCodigo(2).Text))
     '            SQL = SQL & " and fechahora = " & DBSet(RS!fechahora, "F")
-                db.ejecutar Sql
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -972,10 +1098,10 @@ Private Sub CargaFacturasBod(DFecha As Date, HFecha As Date, Tipo As Byte)
 
     
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -1010,20 +1136,20 @@ Dim codigoTipom As String
             
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select rbodfacturas.*, stipom.letraser " & _
-            " from rbodfacturas, usuarios.stipom where rbodfacturas.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
-            " and rbodfacturas.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
+    SQL = "select rbodfacturas.*, stipom.letraser " & _
+            " from rbodfacturas, usuarios.stipom where rbodfacturas.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
+            " and rbodfacturas.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
             " and rbodfacturas.codtipom = stipom.codtipom " & _
             " and rbodfacturas.pasaridoc = 0 " & _
             " and mid(rbodfacturas.codtipom,2,2) = " & DBSet(codigoTipom, "T")
     
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1059,26 +1185,26 @@ Dim codigoTipom As String
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            Sql = "select count(distinct codvarie) from rbodfacturas_lineas where "
-            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
+            SQL = "select count(distinct codvarie) from rbodfacturas_lineas where "
+            SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+            SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(Sql) > 1 Then
+            If TotalRegistros(SQL) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                Sql = "select nomvarie from variedades where codvarie in ( "
-                Sql = Sql & "select codvarie from rbodfacturas_lineas where "
-                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
+                SQL = "select nomvarie from variedades where codvarie in ( "
+                SQL = SQL & "select codvarie from rbodfacturas_lineas where "
+                SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+                SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(Sql)
+                Variedad = DevuelveValor(SQL)
             End If
             
             
-            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(SQL)
 
             Select Case Tipo
                 Case 0 ' almazara
@@ -1099,9 +1225,9 @@ Dim codigoTipom As String
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                Sql = "update rbodfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-                db.ejecutar Sql
+                SQL = "update rbodfacturas set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -1123,10 +1249,10 @@ Private Sub CargaFacturasTransporte(TipoFact As Byte, DFecha As Date, HFecha As 
 '           1 = Liquidacion
 
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -1155,19 +1281,19 @@ Dim CadParam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select rfacttra.*, stipom.letraser " & _
-            " from rfacttra, usuarios.stipom where rfacttra.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
-            " and rfacttra.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
+    SQL = "select rfacttra.*, stipom.letraser " & _
+            " from rfacttra, usuarios.stipom where rfacttra.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
+            " and rfacttra.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
             " and rfacttra.codtipom = stipom.codtipom " & _
             " and rfacttra.pasaridoc = 0"
             
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1200,27 +1326,27 @@ Dim CadParam As String
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            Sql = "select * from rtransporte where codtrans = " & db.Texto(Rs!codTrans)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from rtransporte where codtrans = " & db.Texto(Rs!codTrans)
+            Set Rs2 = db.cursor(SQL)
             
             '++monica: si hay mas una variedad meter agrupada
             '          si solo hay una meter la variedad
             
-            Sql = "select count(distinct codvarie) from rfacttra_albaran where "
-            Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-            Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-            Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F")
+            SQL = "select count(distinct codvarie) from rfacttra_albaran where "
+            SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+            SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+            SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F")
             
-            If TotalRegistros(Sql) > 1 Then
+            If TotalRegistros(SQL) > 1 Then
                 Variedad = "AGRUPADA"
             Else
-                Sql = "select nomvarie from variedades where codvarie in ( "
-                Sql = Sql & "select codvarie from rfacttra_variedad where "
-                Sql = Sql & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
-                Sql = Sql & " numfactu = " & CStr(Rs!numfactu) & " and "
-                Sql = Sql & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
+                SQL = "select nomvarie from variedades where codvarie in ( "
+                SQL = SQL & "select codvarie from rfacttra_variedad where "
+                SQL = SQL & " codtipom = " & DBSet(Rs!CodTipom, "T") & " and "
+                SQL = SQL & " numfactu = " & CStr(Rs!numfactu) & " and "
+                SQL = SQL & " fecfactu = " & DBSet(Rs!fecfactu, "F") & " ) "
             
-                Variedad = DevuelveValor(Sql)
+                Variedad = DevuelveValor(SQL)
             End If
 
             c1 = CargaParametroFacTra(vParamAplic.C1Transporte, Rs, Rs2, Variedad)
@@ -1251,9 +1377,9 @@ Dim CadParam As String
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                Sql = "update rfacttra set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-                db.ejecutar Sql
+                SQL = "update rfacttra set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -1276,10 +1402,10 @@ Private Sub CargaFacturasPozos(TipoFact As Byte, DFecha As Date, HFecha As Date)
 '           1 = mantenimiento
 
     Dim db As BaseDatos
-    Dim Sql As String
+    Dim SQL As String
     Dim Rs As ADODB.Recordset
     Dim Rs2 As ADODB.Recordset
-    Dim i As Long
+    Dim I As Long
     Dim FicheroPDF As String
     Dim c1 As String
     Dim c2 As String
@@ -1309,33 +1435,33 @@ Dim CadParam As String
 
 
 '    db.abrir "accArigasol", "", ""
-    Sql = "select rrecibpozos.*, stipom.letraser " & _
-            " from rrecibpozos, usuarios.stipom where rrecibpozos.fecfactu >= " & db.Fecha(CDate(txtcodigo(0).Text)) & _
-            " and rrecibpozos.fecfactu <= " & db.Fecha(CDate(txtcodigo(1).Text)) & _
+    SQL = "select rrecibpozos.*, stipom.letraser " & _
+            " from rrecibpozos, usuarios.stipom where rrecibpozos.fecfactu >= " & db.Fecha(CDate(txtCodigo(0).Text)) & _
+            " and rrecibpozos.fecfactu <= " & db.Fecha(CDate(txtCodigo(1).Text)) & _
             " and rrecibpozos.codtipom = stipom.codtipom " & _
             " and rrecibpozos.pasaridoc = 0"
             
     Select Case TipoFact
         Case 0 ' consumo
             '[Monica]01/04/2011 añadidas 7,9 anticipos de almazara y de bodega
-            Sql = Sql & " and rrecibpozos.codtipom in ('RCP')"
+            SQL = SQL & " and rrecibpozos.codtipom in ('RCP')"
         Case 1 ' mantenimiento
             '[Monica]01/04/2011 añadidas 8,10 liquidaciones de almazara y de bodega
-            Sql = Sql & " and rrecibpozos.codtipom in ('RMP')" ' [Monica]26/04/2010: añadidas 5 y 6
+            SQL = SQL & " and rrecibpozos.codtipom in ('RMP')" ' [Monica]26/04/2010: añadidas 5 y 6
         Case 2 ' facturas de talla
-            Sql = Sql & " and rrecibpozos.codtipom in ('TAL')" ' [Monica]29/06/2012: añadidas facturas de talla
+            SQL = SQL & " and rrecibpozos.codtipom in ('TAL')" ' [Monica]29/06/2012: añadidas facturas de talla
         Case 3 ' contadores
-            Sql = Sql & " and rrecibpozos.codtipom in ('RVP')" ' [Monica]27/06/2013: añadidas facturas de contadores
+            SQL = SQL & " and rrecibpozos.codtipom in ('RVP')" ' [Monica]27/06/2013: añadidas facturas de contadores
         
     End Select
             
-    Set Rs = db.cursor(Sql)
+    Set Rs = db.cursor(SQL)
     
     If Not Rs.EOF Then
         Rs.MoveFirst
         While Not Rs.EOF
-            i = i + 1
-            lblInf.Caption = "Procesando registro " & CStr(i)
+            I = I + 1
+            lblInf.Caption = "Procesando registro " & CStr(I)
             lblInf.Refresh
             '-- Creamos el pdf
             FicheroPDF = App.Path & "\ExpAriDoc.pdf"
@@ -1378,8 +1504,8 @@ Dim CadParam As String
             Load fr 'trabaja sin mostrar el formulario
             Screen.MousePointer = vbDefault
 
-            Sql = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
-            Set Rs2 = db.cursor(Sql)
+            SQL = "select * from rsocios where codsocio = " & db.numero(Rs!Codsocio)
+            Set Rs2 = db.cursor(SQL)
             
             Variedad = ""
 
@@ -1406,9 +1532,9 @@ Dim CadParam As String
             f3 = Now
             If impor.importaFicheroPDF(FicheroPDF, CLng(txtCarp(0)), c1, c2, c3, c4, f1, f3, i1) Then
                 'actualizamos el pasaridoc de facturas socios
-                Sql = "update rrecibpozos set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
-                db.ejecutar Sql
+                SQL = "update rrecibpozos set pasaridoc = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N") & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                db.ejecutar SQL
             End If
             
             Unload fr
@@ -1446,7 +1572,7 @@ Private Function CargaParametroFac(param As Byte, ByRef Rs As ADODB.Recordset, B
 End Function
 
 Private Function CargaParametroFacADV(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset) As String
-Dim Sql As String
+Dim SQL As String
 Dim rs3 As ADODB.Recordset
 Dim db As BaseDatos
 
@@ -1489,7 +1615,7 @@ Private Function CargaParametroRec(param As Byte, ByRef Rs As ADODB.Recordset, B
 End Function
 
 Private Function CargaParametroFacBOD(param As Byte, ByRef Rs As ADODB.Recordset, ByRef Rs2 As ADODB.Recordset, NomVar As String) As String
-Dim Sql As String
+Dim SQL As String
 Dim rs3 As ADODB.Recordset
 Dim db As BaseDatos
 
@@ -1534,7 +1660,7 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
 '    For I = 0 To Combo1.Count - 1
@@ -1583,19 +1709,19 @@ End Sub
 Private Function CargaPath(Codigo As Integer) As String
 Dim Nod As Node
 Dim J As Integer
-Dim i As Integer
+Dim I As Integer
 Dim c As String
 Dim campo1 As String
 Dim padre As String
 Dim A As String
 
-Dim Sql As String
+Dim SQL As String
 Dim Rs As ADODB.Recordset
 
     'distinto del cargapath de parametros de aplicacion
 
-    Sql = "select nombre, padre from carpetas where codcarpeta = " & DBSet(Codigo, "N")
-    Set Rs = ardDB.cursor(Sql)
+    SQL = "select nombre, padre from carpetas where codcarpeta = " & DBSet(Codigo, "N")
+    Set Rs = ardDB.cursor(SQL)
 
     If Not Rs.EOF Then
         c = "\" & Rs!Nombre
@@ -1610,26 +1736,26 @@ End Function
 
 
 Private Function IntentaMatar(FicheroPDF As String) As Boolean
-Dim i As Integer
+Dim I As Integer
 
     On Error Resume Next
-    i = 1
+    I = 1
     IntentaMatar = False
     Do
         If Dir(FicheroPDF, vbArchive) <> "" Then
             Kill FicheroPDF
             If Err.Number <> 0 Then
                 Err.Clear
-                i = i + 1
+                I = I + 1
             Else
                 IntentaMatar = True
-                i = 6
+                I = 6
             End If
         Else
             IntentaMatar = True
-            i = 6
+            I = 6
         End If
-    Loop Until i < 5 Or IntentaMatar = True
+    Loop Until I < 5 Or IntentaMatar = True
     
     
 End Function

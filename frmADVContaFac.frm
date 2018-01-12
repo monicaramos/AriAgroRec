@@ -1095,7 +1095,7 @@ Dim CCoste As String
     B = ComprobarTiposIVA(cadTabla)
     IncrementarProgres Me.Pb1, 10
     Me.Refresh
-    dovents
+    DoEvents
     If Not B Then Exit Sub
     
     

@@ -812,6 +812,58 @@ Public Sub AyudaIncidenciasOrdenesRecogida(frmBas As frmBasico2, Optional CodAct
     
 End Sub
 
+Public Sub AyudaControlDestrio(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Fecha|1305|;S|txtAux(1)|T|Socio|900|;S|txtAux(2)|T|Nombre|3430|;S|txtAux(3)|T|Variedad|1050|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Nombre|1600|;S|txtAux(5)|T|Campo|1200|;S|txtAux(6)|T|Número|1000|;"
+    
+    frmBas.CadenaConsulta = "SELECT rcontrol.fechacla, rcontrol.codsocio, rsocios.nomsocio, rcontrol.codvarie, variedades.nomvarie, "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " rcontrol.codcampo, rcontrol.nroclasif "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM (rcontrol inner join rsocios on rcontrol.codsocio = rsocios.codsocio) inner join variedades on rcontrol.codvarie = variedades.codvarie "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Fecha Entrada|F|N|||rcontrol|fechacla|dd/mm/yyyy|S|"
+    frmBas.Tag2 = "Socio|N|N|||rcontrol|codsocio|000000|S|"
+    frmBas.Tag3 = "NomSocio|T|N|||rsocios|nomsocio|||"
+    frmBas.Tag4 = "Variedad|N|N|0|999999|rcontrol|codvarie|000000|S|"
+    frmBas.Tag5 = "NomVariedad|T|N|||variedades|nomvarie|||"
+    frmBas.Tag6 = "Campo|N|N|||rcontrol|codcampo|00000000|S|"
+    frmBas.Tag7 = "Nro.Clasif|N|S|||rcontrol|nroclasif|0000000|S|"
+    frmBas.Maxlen1 = 10
+    frmBas.Maxlen2 = 6
+    frmBas.Maxlen3 = 40
+    frmBas.Maxlen4 = 6
+    frmBas.Maxlen5 = 25
+    frmBas.Maxlen6 = 8
+    frmBas.Maxlen7 = 7
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "(rcontrol inner join rsocios on rcontrol.codsocio = rsocios.codsocio) inner join variedades on rcontrol.codvarie = variedades.codvarie"
+    frmBas.CampoCP = "rcontrol.codsocio"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Control de Destrio"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|3|5|6|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 3500
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
+
+
+
+
+
+
+
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant
     frmBas.DataGrid1.Width = frmBas.DataGrid1.Width + Cant

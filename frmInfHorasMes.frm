@@ -34,7 +34,7 @@ Begin VB.Form frmInfHorasMes
          EndProperty
          Height          =   195
          Index           =   2
-         Left            =   510
+         Left            =   420
          TabIndex        =   34
          Top             =   5685
          Width           =   2130
@@ -130,7 +130,7 @@ Begin VB.Form frmInfHorasMes
          EndProperty
          Height          =   240
          Index           =   1
-         Left            =   510
+         Left            =   420
          TabIndex        =   28
          Top             =   6285
          Width           =   2895
@@ -149,7 +149,7 @@ Begin VB.Form frmInfHorasMes
          ForeColor       =   &H00000000&
          Height          =   330
          Index           =   0
-         Left            =   510
+         Left            =   420
          TabIndex        =   27
          Top             =   5925
          Width           =   2310

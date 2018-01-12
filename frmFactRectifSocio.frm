@@ -45,7 +45,7 @@ Begin VB.Form frmFactRectifSocio
          Style           =   2  'Dropdown List
          TabIndex        =   0
          Top             =   1050
-         Width           =   4545
+         Width           =   4860
       End
       Begin VB.Frame Frame8 
          BorderStyle     =   0  'None
@@ -315,7 +315,7 @@ Begin VB.Form frmFactRectifSocio
          ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   1
-         Left            =   540
+         Left            =   570
          TabIndex        =   22
          Top             =   795
          Width           =   1350
@@ -371,7 +371,7 @@ Begin VB.Form frmFactRectifSocio
          ForeColor       =   &H00972E0B&
          Height          =   240
          Index           =   27
-         Left            =   540
+         Left            =   570
          TabIndex        =   14
          Top             =   1305
          Width           =   765

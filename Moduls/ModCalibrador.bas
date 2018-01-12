@@ -224,7 +224,6 @@ Dim HayReg As Boolean
         
         Pb1.Value = Pb1.Value + 1 ' Len(Cad)
         Label2.Caption = "Linea " & I
-        Me.Refresh
         DoEvents
         
         NSep = NumeroSubcadenasInStr(cad, ";")
@@ -531,7 +530,7 @@ Dim HayReg As Boolean
                 
                 Pb1.Value = Pb1.Value + 1
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 Nombre1 = DBLet(Rs!nomcalid, "T")
@@ -918,7 +917,7 @@ Dim Nota As String
                 
                 Pb1.visible = True
                 Pb1.Max = longitud
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 Pb1.Value = 0
                     
@@ -949,7 +948,7 @@ Dim Nota As String
                 
                 Pb1.visible = True
                 Pb1.Max = longitud
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 Pb1.Value = 0
                     
@@ -1090,7 +1089,7 @@ Dim Linea As String
         Pb1.Value = Pb1.Value + Len(cad)
         Label2.Caption = "Linea " & I
         DoEvents
-        Me.Refresh
+'        Me.Refresh
         
         NSep = NumeroSubcadenasInStr(cad, ";")
         
@@ -1411,7 +1410,7 @@ Dim CalPeque As String
             
             Pb1.Value = Pb1.Value + 1
             Label2.Caption = "Linea " & I
-            Me.Refresh
+'            Me.Refresh
             DoEvents
             
             Nombre1 = DBLet(Rs!nomcalid, "T")
@@ -1698,7 +1697,7 @@ Dim PorcenDestrio As String
         
         Pb1.Value = Pb1.Value + Len(cad)
         Label2.Caption = "Linea " & I
-        Me.Refresh
+'        Me.Refresh
         DoEvents
     Next J
     
@@ -1723,7 +1722,7 @@ Dim PorcenDestrio As String
     
         Pb1.Value = Pb1.Value + Len(cad)
         Label2.Caption = "Linea " & I
-        Me.Refresh
+'        Me.Refresh
         DoEvents
     Next J
     
@@ -1737,7 +1736,7 @@ Dim PorcenDestrio As String
         
         Pb1.Value = Pb1.Value + Len(cad)
         Label2.Caption = "Linea " & I
-        Me.Refresh
+'        Me.Refresh
         DoEvents
             
         J = J + 1
@@ -1975,7 +1974,7 @@ Dim NomFic As String
     
     Pb1.visible = True
     Pb1.Max = longitud
-    Me.Refresh
+'    Me.Refresh
     DoEvents
     Pb1.Value = 0
         
@@ -1986,7 +1985,7 @@ Dim NomFic As String
         
         Pb1.Value = Pb1.Value + Len(cad)
         Label2.Caption = "Linea " & I
-        Me.Refresh
+'        Me.Refresh
         DoEvents
         
         If vParamAplic.Cooperativa = 1 Then ' si es valsur
@@ -2122,7 +2121,7 @@ Dim SeInserta As Boolean
                 
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 ' salto tipo c
@@ -2130,7 +2129,7 @@ Dim SeInserta As Boolean
                 
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 NGrupos = RecuperaValorNew(cad, ",", 4)
@@ -2140,7 +2139,7 @@ Dim SeInserta As Boolean
                 
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 cad = cad & ","
@@ -2173,14 +2172,14 @@ Dim SeInserta As Boolean
                 
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
             
                 ' salto tipo f: pesos de la calidad
                 Line Input #NF, cad
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 cad = cad & ","
@@ -2575,7 +2574,7 @@ Dim NomFic As String
             
             Pb1.visible = True
             Pb1.Max = longitud
-            Me.Refresh
+'            Me.Refresh
             DoEvents
             Pb1.Value = 0
                 
@@ -2586,7 +2585,7 @@ Dim NomFic As String
                 
                 Pb1.Value = Pb1.Value + Len(cad)
                 Label2.Caption = "Linea " & I
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 
                 B = ProcesarLineaCatadau(NF, cad, 1, Pb1, Label1, Label2) '1=calibrador pequeño
@@ -2745,7 +2744,7 @@ Dim Nota As String
 
             Pb1.visible = True
             Pb1.Max = longitud
-            Me.Refresh
+'            Me.Refresh
             DoEvents
             Pb1.Value = 0
 
@@ -2868,7 +2867,7 @@ Dim longitud As Long
     
     Pb1.visible = True
     Pb1.Max = longitud
-    Me.Refresh
+'    Me.Refresh
     DoEvents
     Pb1.Value = 0
         
@@ -2882,7 +2881,7 @@ Dim longitud As Long
             
             Pb1.Value = Pb1.Value + Len(cad)
             Label2.Caption = "Linea " & I
-            Me.Refresh
+'            Me.Refresh
             DoEvents
         
             ' inicializamos las variables
@@ -3172,7 +3171,7 @@ Dim Nota As String
                 
                 Pb1.visible = True
                 Pb1.Max = longitud
-                Me.Refresh
+'                Me.Refresh
                 DoEvents
                 Pb1.Value = 0
                     
@@ -3661,7 +3660,7 @@ Dim Ordinal As Integer
     
     Pb1.visible = True
     Pb1.Max = longitud
-    Me.Refresh
+'    Me.Refresh
     DoEvents
     Pb1.Value = 0
         
@@ -3690,7 +3689,7 @@ Dim Ordinal As Integer
             
             Pb1.Value = Pb1.Value + Len(cad)
             Label2.Caption = "Linea " & J
-            Me.Refresh
+'            Me.Refresh
             DoEvents
         
             ' inicializamos las variables

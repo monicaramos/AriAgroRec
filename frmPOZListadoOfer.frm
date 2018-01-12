@@ -2903,7 +2903,7 @@ On Error GoTo EEnviar
                         conn.Execute SQL
                 
                         Me.Refresh
-                        doeevents
+                        DoEvents
                         
                         espera 0.4
                         
