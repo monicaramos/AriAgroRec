@@ -12939,6 +12939,22 @@ InicializarVbles
             Tipos = "{rrecibpozos.codtipom} = 'RMT'"
             If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
             If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
+        Case 6
+            Tipos = "{rrecibpozos.codtipom} = 'RRC'"
+            If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
+        Case 7
+            Tipos = "{rrecibpozos.codtipom} = 'RRM'"
+            If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
+        Case 8
+            Tipos = "{rrecibpozos.codtipom} = 'RRV'"
+            If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
+        Case 9
+            Tipos = "{rrecibpozos.codtipom} = 'RTA'"
+            If Not AnyadirAFormula(cadSelect, Tipos) Then Exit Sub
+            If Not AnyadirAFormula(cadFormula, Tipos) Then Exit Sub
     End Select
      
     

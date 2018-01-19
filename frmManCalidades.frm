@@ -307,7 +307,7 @@ Begin VB.Form frmManCalidades
       Left            =   3060
       MaxLength       =   2
       TabIndex        =   1
-      Tag             =   "Codigo Calidad|N|S|0|99|rcalidad|codcalid|00|S|"
+      Tag             =   "Codigo Calidad|N|S|1|20|rcalidad|codcalid|00|S|"
       Text            =   "Ca"
       Top             =   4950
       Width           =   1425
