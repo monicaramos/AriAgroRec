@@ -13951,8 +13951,14 @@ Dim cad As String
     
     '[Monica]18/01/2017: antes eran p.255 space(246) relleno todo a blancos
     cad = cad & " "                                             'p.255 signo
-    cad = cad & String(39, "0")
-    cad = cad & Space(206)                                      'p.295 - 500 se rellenan a blancos 'antes 246
+    '[Monica]25/01/2018: antes 39 ceros
+    cad = cad & String(26, "0")
+    cad = cad & " "                                             'p.282 signo
+    cad = cad & String(39, "0")                                 'p.283 a 321
+    
+    '[Monica]25/01/2018:
+    'cad = cad & Space(206)                                      'p.295 - 500 se rellenan a blancos 'antes 246
+    cad = cad & Space(179)                                      'p.322 a 500 antes eran 206
     
     Print #NFich, cad
 End Sub
