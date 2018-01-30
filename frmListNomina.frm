@@ -7128,7 +7128,8 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     cadNombreRPT = nomDocu '"rInfAsesoriaNomiMes.rpt"
     cadTitulo = "Informe para Asesoria Mensual"
     If Me.Check2.Value = 1 Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "1.rpt") '"rInfAsesoriaNomiMes1.rpt"
-    If vParamAplic.Cooperativa = 16 Then
+                                    '[Monica]29/01/2018: tb catadau
+    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
         
         cadNombreRPT = nomDocu '"rInfAsesoriaNomiMes.rpt"
         cadTitulo = "Informe de Generacion de Nómina"
@@ -7160,11 +7161,12 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
     'Comprobar si hay registros a Mostrar antes de abrir el Informe
     If HayRegParaInforme(tabla, cadSelect) Then
         If (vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0) And Me.Check2.Value = 1 Then
-            '[Monica]14/12/2017: para el caso de Catadau
-            If vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 0 Then ' Alzira
+            
+            If vParamAplic.Cooperativa = 4 Then  ' Alzira
                 Shell App.Path & "\nomina.exe /E|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
             Else
-                If vParamAplic.Cooperativa = 16 Then
+                '[Monica]29/01/2018: para el caso de Catadau
+                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                     '[Monica]07/02/2017: modificacion para los dados de baja
                     Dim Fec1 As Date
                     Dim mes As Integer
@@ -8384,9 +8386,9 @@ Dim List As Collection
     
     Case 37 ' Informe de horas mensual para asesoria
     
-        If vParamAplic.Cooperativa = 16 Then Label15.Caption = "Pago Nómina"
+        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then Label15.Caption = "Pago Nómina"
     
-        FechaBajaVisible vParamAplic.Cooperativa = 16
+        FechaBajaVisible vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0
     
         CargaCombo
     
@@ -8394,7 +8396,7 @@ Dim List As Collection
         indFrame = 0
         tabla = "rrecasesoria"
         
-        If vParamAplic.Cooperativa = 16 Then Check2.Caption = "Generar Fichero A3"
+        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then Check2.Caption = "Generar Fichero A3"
     
     Case 38 ' Rendimiento por Capataz
         Label12.Caption = "Rendimiento por Capataz"

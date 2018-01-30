@@ -102,10 +102,10 @@ Begin VB.Form frmBodEntradas
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
             NumButtons      =   2
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Baja de Socios"
+               Object.ToolTipText     =   "Cálculo grado bonificado"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Imprimir Fases"
+               Object.ToolTipText     =   "Tarar"
             EndProperty
          EndProperty
       End
@@ -1100,7 +1100,6 @@ Begin VB.Form frmBodEntradas
       TabPicture(0)   =   "frmBodEntradas.frx":0097
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "FrameAux1"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Gastos"
       TabPicture(1)   =   "frmBodEntradas.frx":00B3

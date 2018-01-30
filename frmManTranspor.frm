@@ -1395,7 +1395,7 @@ Dim B As Boolean
 '    Combo1(0).Enabled = Not b
 '
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -2595,7 +2595,7 @@ Dim Nregs As Integer
     If (Nregs > 0 And Modo = 3) Then
         Set frmMens = New frmMensajes
         frmMens.OpcionMensaje = 60
-        frmMens.Label4(4).Caption = "Matrículas del tranportista NIF: " & txtAux1(7).Text
+        frmMens.Label4(4).Caption = "Matrículas del transportista NIF: " & txtAux1(7).Text
         frmMens.cadWHERE = "niftrans = " & DBSet(txtAux1(7).Text, "T")
         frmMens.Show vbModal
         Set frmMens = Nothing

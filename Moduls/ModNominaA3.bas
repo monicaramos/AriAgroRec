@@ -30,6 +30,10 @@ Dim FecPag As String
     Open App.Path & "\anticipoA3.txt" For Output As NFic
 
     cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
+    '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
+    If vParamAplic.Cooperativa = 0 Then
+        cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
+    End If
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
@@ -135,6 +139,10 @@ Dim FecPag As String
     Open App.Path & "\nominaA3.txt" For Output As NFic
 
     cad = "03" & "00017" & "00000" ' tipo de registro + codigo de empresa + centro o codigo de trabajador
+    '[Monica]29/01/2018: en el caso de catadau el codigo de empresa no es 17, lo parametrizo
+    If vParamAplic.Cooperativa = 0 Then
+        cad = "03" & Format(vParamAplic.CodEmpreA3, "00000") & "00000"
+    End If
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
@@ -159,7 +167,14 @@ Dim FecPag As String
         
         Importe = Importe & "000000000+"
         
-        RegImpBruto = cad & Format(Rs!Codigo1, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+        '[Monica]29/01/2018: para el caso de Catadau damos el codigo de asesoria,
+'        If vParamAplic.Cooperativa = 0 Then
+'            Dim CodAse As String
+'            CodAse = DevuelveValor("select codasesoria from straba where codtraba = " & DBLet(Rs!Codigo1, "N"))
+'            RegImpBruto = cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+'        Else
+            RegImpBruto = cad & Format(Rs!Codigo1, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+'        End If
         Print #NFic, RegImpBruto
         
         ' dias trabajados
@@ -212,15 +227,15 @@ On Error GoTo ecopiarfichero
     
         FicherAux = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd")
         
-        Dim i As Integer
+        Dim I As Integer
         Dim B As Boolean
         Dim FicherAux1 As String
         
-        i = 0
+        I = 0
         B = True
         While Dir("C:\Ariadna\EnlaceA3\" & FicherAux & ".txt", vbArchive) <> "" And B
-            i = i + 1
-            FicherAux1 = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & "_" & i
+            I = I + 1
+            FicherAux1 = Replace(vFicher, ".txt", "") & Format(vFecha, "yyyymmdd") & "_" & I
             If Dir("C:\Ariadna\EnlaceA3\" & FicherAux1 & ".txt", vbArchive) = "" Then B = False
             FicherAux = FicherAux1
         Wend

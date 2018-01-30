@@ -929,7 +929,7 @@ Dim SQL As String
     
     'La forma de pago tiene que ser de tipo Transferencia
     '[Monica]15/12/2016: en el caso de coopic no miro la fp
-    If vParamAplic.Cooperativa <> 16 Then
+    If vParamAplic.Cooperativa <> 16 And vParamAplic.Cooperativa <> 0 Then
         AnyadirAFormula cadSelect, "forpago.tipoforp = 1"
     End If
     
@@ -956,7 +956,7 @@ Dim SQL As String
 
         'Comprobar si hay registros a Mostrar antes de abrir el Informe
         If HayRegParaInforme(tabla, cadSelect) Then
-            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
+            If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                 ProcesarCambiosPicassent (cadSelect)
             Else
                 ProcesarCambios (cadSelect)
@@ -964,7 +964,7 @@ Dim SQL As String
         Else
             Repetir = True
             If MsgBox("¿Desea repetir el proceso?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then ' si la cooperativa es picassent repite norma como natural
+                If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then ' si la cooperativa es picassent repite norma como natural
                     RepetirNormaPicassent cadSelect
                 Else
                     '[Monica]03/11/2010: anteriormente en Alzira no grababamos en rrecibosnomina, ahora sí
@@ -1234,8 +1234,8 @@ On Error GoTo eProcesarCambios
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb2.visible = True
-    CargarProgres pb2, Rs.Fields(0).Value
+    Pb2.visible = True
+    CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1251,7 +1251,7 @@ On Error GoTo eProcesarCambios
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         Sql2 = "select salarios.*, straba.porc_antig, straba.dtosegso, straba.dtosirpf from salarios, straba where straba.codtraba = " & DBSet(Rs!CodTraba, "N")
@@ -1546,8 +1546,8 @@ On Error GoTo eRepetirNormaNatural
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb2.visible = True
-    CargarProgres pb2, Rs.Fields(0).Value
+    Pb2.visible = True
+    CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1558,7 +1558,7 @@ On Error GoTo eRepetirNormaNatural
     
     While Not Rs.EOF
     
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         Sql3 = "insert into tmpImpor (codtraba, importe) values ("
@@ -1705,8 +1705,8 @@ On Error GoTo eRepetirNormaPicassent
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb2.visible = True
-    CargarProgres pb2, Rs.Fields(0).Value
+    Pb2.visible = True
+    CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -1717,7 +1717,7 @@ On Error GoTo eRepetirNormaPicassent
     
     While Not Rs.EOF
     
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & Rs!CodTraba & vbCrLf
         
         TieneEmbargo = DevuelveValor("select hayembargo from straba where codtraba = " & DBSet(Rs!CodTraba, "N"))
@@ -2010,13 +2010,13 @@ Dim List As Collection
             W = 6660
             FrameHorasTrabajadasVisible True, H, W
             indFrame = 0
-            Me.cmdcancel(0).Cancel = True
+            Me.cmdCancel(0).Cancel = True
         Case 2
             H = 7530
             W = 6660
             FramePagoRecibosNaturalVisible True, H, W
             indFrame = 0
-            Me.cmdcancel(1).Cancel = True
+            Me.cmdCancel(1).Cancel = True
     End Select
         
     tabla = "horas"
@@ -2033,7 +2033,7 @@ Dim List As Collection
     
     
     Pb1.visible = False
-    pb2.visible = False
+    Pb2.visible = False
 End Sub
 
 
@@ -2739,8 +2739,8 @@ On Error GoTo eProcesarCambiosPicassent
     Set Rs = New ADODB.Recordset
     Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    pb2.visible = True
-    CargarProgres pb2, Rs.Fields(0).Value
+    Pb2.visible = True
+    CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
@@ -2790,7 +2790,7 @@ On Error GoTo eProcesarCambiosPicassent
         ActCodTraba = DBLet(Rs!CodTraba, "N")
         
         If AntCodTraba <> ActCodTraba Then
-            IncrementarProgres pb2, 1
+            IncrementarProgres Pb2, 1
             Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & AntCodTraba & vbCrLf
             
             
@@ -2892,7 +2892,7 @@ On Error GoTo eProcesarCambiosPicassent
     Wend
     
     If HayReg Then
-        IncrementarProgres pb2, 1
+        IncrementarProgres Pb2, 1
         Mens = "Calculando Importes" & vbCrLf & vbCrLf & "Trabajador: " & AntCodTraba & vbCrLf
         
         '[Monica]23/03/2016: si el importe es negativo no entra

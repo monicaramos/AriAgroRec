@@ -596,7 +596,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 
         Case 14:
                 '[Monica]14/12/2017: para que Catadau funcione como Coopic
-                If vParamAplic.Cooperativa = 16 Then
+                If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                     frmPagoAnticiposCoopic.Show vbModal
                 Else
                     frmImpRecibos.Show vbModal 'Impresión de Recibos
@@ -607,7 +607,8 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                     frmPagoRecibos.OpcionListado = 2
                     frmPagoRecibos.Show vbModal 'Pago de Recibos
                  Else
-                    If vParamAplic.Cooperativa = 16 Then
+                    '[Monica]29/01/2017: para el caso de Catadau igual que coopic
+                    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                         AbrirListadoNominas (37)
                     Else
                        'caso de valsur y de alzira
@@ -1303,7 +1304,7 @@ Dim I As Integer
     MDIppal.mnRec_AlmTrasCampos(1).Enabled = (vParamAplic.Cooperativa = 1)
     MDIppal.mnRec_AlmTrasCampos(1).visible = (vParamAplic.Cooperativa = 1)
     
-    If vParamAplic.Cooperativa = 16 Then
+    If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
         MDIppal.mnP_PreNominas(5).Enabled = False
         MDIppal.mnP_PreNominas(5).visible = False
         MDIppal.mnP_PreNominas(10).Enabled = False
