@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:35"
+            TextSave        =   "17:25"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -945,6 +945,10 @@ Begin VB.MDIForm MDIppal
    End
    Begin VB.Menu mnGestPrenom 
       Caption         =   "&Prenómina"
+      Begin VB.Menu mnP_PreNomCateg 
+         Caption         =   "&Categorias"
+         Index           =   1
+      End
       Begin VB.Menu mnP_PreNominas 
          Caption         =   "&Salarios"
          Index           =   1
@@ -1793,7 +1797,7 @@ Private PrimeraVez As Boolean
 Dim TieneEditorDeMenus As Boolean
 
 Public Sub GetIconsFromLibrary(ByVal sLibraryFilePath As String, ByVal op As Integer, ByVal tam As Integer)
-    Dim I As Integer
+    Dim i As Integer
     Dim tRes As ResType, iCount As Integer
         
     opcio = op
@@ -1950,6 +1954,10 @@ Private Sub mnE_Soporte4_Click()
 '     frmPOZMantaAux.Show vbModal
     frmVARIOS.Show vbModal
     
+End Sub
+
+Private Sub mnP_PreNomCateg_Click(Index As Integer)
+    SubmnP_PreNominasCateg_click (Index)
 End Sub
 
 Private Sub mnP_PreNominas_Click(Index As Integer)
@@ -2382,7 +2390,7 @@ EDevuelveCadenaMenu:
 End Function
 
 Private Sub LanzaHome(Opcion As String)
-    Dim I As Integer
+    Dim i As Integer
     Dim cad As String
     On Error GoTo ELanzaHome
     
@@ -2393,11 +2401,11 @@ Private Sub LanzaHome(Opcion As String)
         Exit Sub
     End If
         
-    I = FreeFile
+    i = FreeFile
     cad = ""
-    Open App.Path & "\lanzaexp.dat" For Input As #I
-    Line Input #I, cad
-    Close #I
+    Open App.Path & "\lanzaexp.dat" For Input As #i
+    Line Input #i, cad
+    Close #i
     
     'Lanzamos
     If cad <> "" Then Shell cad & " " & CadenaDesdeOtroForm, vbMaximizedFocus

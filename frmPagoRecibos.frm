@@ -2965,8 +2965,8 @@ On Error GoTo eProcesarCambiosPicassent
         End If
     End If
     
-    
-    If vParamAplic.Cooperativa = 2 Then
+    '[Monica]02/02/2018: Catadau ha de generar el fichero
+    If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
         If vEmpresa.AplicarNorma19_34Nueva = 1 Then
             If HayXML Then
                 B = GeneraFicheroNorma34SEPA_XML(vParam.CifEmpresa, CDate(txtCodigo(20).Text), CuentaPropia, "", "Pago Nómina", Combo1(0).ListIndex, CodigoOrden34)
@@ -2988,8 +2988,8 @@ On Error GoTo eProcesarCambiosPicassent
 '    b = GeneraFicheroNorma34New(vParam.CifEmpresa, CDate(txtcodigo(20).Text), CuentaPropia, 9, 0, "Pago Nómina", CodigoOrden34, Combo1(0).ListIndex)
     If B Then
         Mens = "Copiar fichero"
-        
-        If vParamAplic.Cooperativa = 2 Then
+        '[Monica]02/02/2018: Catadau pasa a funcionar como Picassent
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Then
             CopiarFichero
         Else
             CopiarFicheroA3

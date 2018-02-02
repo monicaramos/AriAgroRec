@@ -550,6 +550,13 @@ End Sub
 
 
 ' *******  GESTION DE PRENOMINA *******
+Public Sub SubmnP_PreNominasCateg_click(Index As Integer)
+    Select Case Index
+        Case 1: frmManCategorias.Show vbModal  'Mantenimiento de categorias
+    End Select
+End Sub
+
+
 Public Sub SubmnP_PreNominas_click(Index As Integer)
     Select Case Index
         Case 1: frmManSalarios.Show vbModal 'Mantenimiento de salarios
@@ -586,10 +593,14 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                         frmManHorasPica.Show vbModal  'Entrada de Horas de trabajadores para picassent
                     Else
                         '[Monica]14/12/2017: catadau va a tener el mto de horas de coopic
-                        If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
+                        If vParamAplic.Cooperativa = 16 Then
                             frmManHorasCoopic.Show vbModal ' entradas horas coopic
                         Else
-                            frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                            If vParamAplic.Cooperativa = 0 Then
+                                frmManHorasCata.Show vbModal ' entradas horas catadau
+                            Else
+                                frmManHoras.Show vbModal  'Entrada de Horas de trabajadores
+                            End If
                         End If
                     End If
                 End If
@@ -1343,6 +1354,11 @@ Dim I As Integer
     
     MDIppal.mnRec_Traza1(1).Enabled = (vParamAplic.Cooperativa = 9)
     MDIppal.mnRec_Traza1(1).visible = (vParamAplic.Cooperativa = 9)
+    
+    '[Monica]02/02/2018: categorias de catadau
+    MDIppal.mnP_PreNomCateg(1).Enabled = (vParamAplic.Cooperativa = 0)
+    MDIppal.mnP_PreNomCateg(1).visible = (vParamAplic.Cooperativa = 0)
+    
     
 End Sub
 
