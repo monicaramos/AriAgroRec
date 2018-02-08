@@ -603,7 +603,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     

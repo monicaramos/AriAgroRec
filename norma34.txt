@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20171215T125338</MsgId>
-      <CreDtTm>2017-12-15T12:53:38</CreDtTm>
+      <MsgId>TRANPAG000000F20180208T132626</MsgId>
+      <CreDtTm>2018-02-08T13:26:26</CreDtTm>
       <NbOfTxs>1</NbOfTxs>
-      <CtrlSum>75.70</CtrlSum>
+      <CtrlSum>10.85</CtrlSum>
       <InitgPty>
          <Nm>Catadau</Nm>
          <Id>
@@ -18,9 +18,9 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20171215125338F46038881</PmtInfId>
+      <PmtInfId>20180208132626F46038881</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2017-12-15</ReqdExctnDt>
+      <ReqdExctnDt>2018-02-15</ReqdExctnDt>
       <Dbtr>
          <Nm>Catadau</Nm>
          <PstlAdr>
@@ -55,11 +55,11 @@
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">75.7</InstdAmt>
+          <InstdAmt Ccy="EUR">10.85</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
-             <BIC>CAIXESBBXXX</BIC>
+             <BIC>CCRIES2AXXX</BIC>
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
@@ -74,14 +74,14 @@
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES2821007187282100024195</IBAN>
+              <IBAN>ES9430582008482720000171</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 15/12/2017 Importe 75,70</Ustrd>
+         <Ustrd>Pago N mina 15/02/2018 Importe 10,85</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

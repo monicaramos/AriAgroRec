@@ -610,7 +610,11 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                 If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                     frmPagoAnticiposCoopic.Show vbModal
                 Else
-                    frmImpRecibos.Show vbModal 'Impresión de Recibos
+                    If vParamAplic.Cooperativa = 0 Then
+                        frmPagoAnticiposCoopic.Show vbModal
+                    Else
+                        frmImpRecibos.Show vbModal 'Impresión de Recibos
+                    End If
                 End If
         Case 16:
                 '[Monica]29/02/2012: Natural era la cooperativa 0 junto con Catadau ahora es la 9
@@ -618,7 +622,7 @@ Public Sub SubmnP_PreNominas_click(Index As Integer)
                     frmPagoRecibos.OpcionListado = 2
                     frmPagoRecibos.Show vbModal 'Pago de Recibos
                  Else
-                    '[Monica]29/01/2017: para el caso de Catadau igual que coopic
+                    '[Monica]29/01/2018: para el caso de Catadau igual que coopic
                     If vParamAplic.Cooperativa = 16 Or vParamAplic.Cooperativa = 0 Then
                         AbrirListadoNominas (37)
                     Else

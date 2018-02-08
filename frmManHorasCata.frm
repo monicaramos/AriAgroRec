@@ -1455,7 +1455,8 @@ Dim temp As Boolean
     On Error GoTo Error2
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
-'    If Not SepuedeBorrar Then Exit Sub
+    
+    If Not SePuedeBorrar Then Exit Sub
         
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -1499,6 +1500,12 @@ Error2:
     Screen.MousePointer = vbDefault
     MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
+
+Private Function SePuedeBorrar() As Boolean
+
+    SePuedeBorrar = (Me.adodc1.Recordset!fecharec = "" And Me.adodc1.Recordset!intconta = 0)
+
+End Function
 
 Private Sub PonerLongCampos()
 'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
