@@ -62,15 +62,6 @@ Begin VB.Form frmPOZListadoOfer
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.CheckBox chkMail 
-      Caption         =   "Enviar SMS"
-      Height          =   345
-      Index           =   1
-      Left            =   4920
-      TabIndex        =   70
-      Top             =   6630
-      Width           =   1935
-   End
    Begin VB.Frame FrameEnvioFacMail 
       Height          =   6015
       Left            =   0
@@ -632,7 +623,7 @@ Begin VB.Form frmPOZListadoOfer
       Height          =   6975
       Left            =   0
       TabIndex        =   14
-      Top             =   30
+      Top             =   45
       Width           =   7035
       Begin VB.Frame Frame13 
          Height          =   900
@@ -1409,6 +1400,15 @@ Begin VB.Form frmPOZListadoOfer
          Top             =   270
          Width           =   5340
       End
+   End
+   Begin VB.CheckBox chkMail 
+      Caption         =   "Enviar SMS"
+      Height          =   345
+      Index           =   1
+      Left            =   4920
+      TabIndex        =   70
+      Top             =   6630
+      Width           =   1935
    End
 End
 Attribute VB_Name = "frmPOZListadoOfer"

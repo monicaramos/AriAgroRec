@@ -178,7 +178,6 @@ Begin VB.Form frmAlmzEntradas
       _ExtentY        =   4630
       _Version        =   393216
       Tabs            =   2
-      Tab             =   1
       TabsPerRow      =   4
       TabHeight       =   520
       ForeColor       =   12582912
@@ -193,14 +192,14 @@ Begin VB.Form frmAlmzEntradas
       EndProperty
       TabCaption(0)   =   "Incidencias"
       TabPicture(0)   =   "frmAlmzEntradas.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "FrameAux1"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Gastos"
       TabPicture(1)   =   "frmAlmzEntradas.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameAux2"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       Begin VB.Frame FrameAux2 
          BorderStyle     =   0  'None
@@ -215,7 +214,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2070
-         Left            =   90
+         Left            =   -74910
          TabIndex        =   46
          Top             =   420
          Width           =   8830
@@ -567,7 +566,7 @@ Begin VB.Form frmAlmzEntradas
          EndProperty
          ForeColor       =   &H00C00000&
          Height          =   2160
-         Left            =   -74910
+         Left            =   90
          TabIndex        =   40
          Top             =   360
          Width           =   9010
@@ -709,7 +708,7 @@ Begin VB.Form frmAlmzEntradas
             Index           =   1
             Left            =   45
             TabIndex        =   45
-            Top             =   675
+            Top             =   720
             Width           =   8685
             _ExtentX        =   15319
             _ExtentY        =   2328
@@ -2526,7 +2525,7 @@ Dim tabla As String
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 1 'INCIDENCIAS
-            SQL = "SELECT rhisfruta_incidencia.numalbar, rhisfruta_incidencia.codincid, rincidencia.nomincid "
+            SQL = "SELECT rhisfruta_incidencia.numalbar, rhisfruta_incidencia.numnotac, rhisfruta_incidencia.codincid, rincidencia.nomincid "
             SQL = SQL & " FROM rhisfruta_incidencia, rincidencia "
             If enlaza Then
                 SQL = SQL & ObtenerWhereCab(True)
@@ -4127,7 +4126,7 @@ Dim tots As String
     Select Case Index
         Case 1 'incidencias
             'si es visible|control|tipo campo|nombre campo|ancho control|
-            tots = "N||||0|;S|txtAux(1)|T|Incidencia|1500|;S|btnBuscar(1)|B||195|;"
+            tots = "N||||0|;N||||0|;S|txtAux(1)|T|Incidencia|1500|;S|btnBuscar(1)|B||195|;"
             tots = tots & "S|txtAux2(1)|T|Denominación|6600|;"
 
             arregla tots, DataGridAux(Index), Me, 350

@@ -501,6 +501,38 @@ eFrasPendientesContabilizar:
 End Sub
 
 
+Public Function UltimaFechaCorrectaSII(DiasAVisoSII As Integer, FechaPresentacion As Date) As Date
+Dim DiaSemanaPresen As Integer
+Dim DiaSemanaUltimoDiaPresentar As Integer
+Dim F As Date
+Dim Resta As Integer
+    
+    If DiasAVisoSII > 5 Then
+        UltimaFechaCorrectaSII = DateAdd("d", -DiasAVisoSII, FechaPresentacion)
+    Else
+        DiaSemanaPresen = Weekday(FechaPresentacion, vbMonday)
+        If DiaSemanaPresen >= 6 Then
+            'Si presento el sabado o el domingo tengo mas dias
+            If DiaSemanaPresen = 6 Then
+                Resta = DiasAVisoSII
+            Else
+                Resta = DiasAVisoSII + 1
+            End If
+        Else
+            F = DateAdd("d", -DiasAVisoSII, FechaPresentacion)
+            DiaSemanaUltimoDiaPresentar = Weekday(F, vbMonday)
+            If DiaSemanaUltimoDiaPresentar > DiaSemanaPresen Then
+                Resta = DiasAVisoSII + 2
+            Else
+                'Directamente la resta son 4
+                Resta = DiasAVisoSII
+            End If
+        End If
+        UltimaFechaCorrectaSII = DateAdd("d", -Resta, FechaPresentacion)
+    End If
+    UltimaFechaCorrectaSII = Format(UltimaFechaCorrectaSII, "dd/mm/yyyy")
+
+End Function
 
 
 
@@ -1867,13 +1899,13 @@ Dim Equipo As String
     OtrosPCsContraContabiliad = cad
 End Function
 
-Public Function ComprobarEmpresaBloqueada(Codusu As Long, ByRef Empresa As String) As Boolean
+Public Function ComprobarEmpresaBloqueada(CodUsu As Long, ByRef Empresa As String) As Boolean
 Dim cad As String
 
 ComprobarEmpresaBloqueada = False
 
 'Antes de nada, borramos las entradas de usuario, por si hubiera kedado algo
-conn.Execute "Delete from usuarios.vbloqbd where codusu=" & Codusu
+conn.Execute "Delete from usuarios.vbloqbd where codusu=" & CodUsu
 
 'Ahora comprobamos k nadie bloquea la BD
 cad = DevuelveDesdeBD("codusu", "usuarios.vbloqbd", "conta", Empresa, "T")
@@ -2052,7 +2084,9 @@ Dim F2 As Date
                 '[Monica]06/10/2017: añadida la segunda condicion: fecha > vEmpresa.SIIFechaInicio
                 '                    fallaba cuando la fecha es anterior a la declaracion del SII.
                 '                    Caso de Coopic con una factura interna
-                If DateDiff("d", Fecha, Now) > vEmpresa.SIIDiasAviso And Fecha > vEmpresa.SIIFechaInicio Then
+                'If DateDiff("d", Fecha, Now) > vEmpresa.SIIDiasAviso And Fecha > vEmpresa.SIIFechaInicio Then
+                '[Monica]19/02/2018: fines de semana
+                If Fecha < UltimaFechaCorrectaSII(vEmpresa.SIIDiasAviso, Now) Then
                     MensajeFechaOkConta = "Fecha fuera de periodo de comunicación SII."
                     'LLEVA SII y han trascurrido los dias
                     If vUsu.Nivel = 0 Then
