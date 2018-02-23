@@ -334,6 +334,7 @@ Form=frmBodEntradasPrev.frm
 Module=ModBasico; Moduls\ModBasico.bas
 Form=frmManCategorias.frm
 Form=frmManHorasCata.frm
+Form=frmManClasAux.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

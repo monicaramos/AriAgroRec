@@ -84,14 +84,14 @@ Begin VB.Form frmManClasifica
       Left            =   3780
       TabIndex        =   98
       Top             =   30
-      Width           =   1335
+      Width           =   2010
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
          TabIndex        =   99
          Top             =   180
-         Width           =   1005
-         _ExtentX        =   1773
+         Width           =   1545
+         _ExtentX        =   2725
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -99,19 +99,22 @@ Begin VB.Form frmManClasifica
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   2
+            NumButtons      =   3
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Cálcula Gastos"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Importar Excel"
             EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Reproducir Clasificación"
+            EndProperty
          EndProperty
       End
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
-      Left            =   5190
+      Left            =   5820
       TabIndex        =   96
       Top             =   30
       Width           =   2415
@@ -2681,6 +2684,7 @@ Dim I As Integer
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 31   'Expandir Añadir, Borrar y Modificar
         .Buttons(2).Image = 35  'Importar clasificacion a excel
+        .Buttons(3).Image = 32 'Reproducir clasificacion
     End With
     
     ' desplazamiento
@@ -2975,6 +2979,15 @@ Dim I As Byte
     Toolbar2.Buttons(2).Enabled = (Modo = 0 Or Modo = 2) And vParamAplic.Cooperativa = 4
     Me.mnExporImpor.Enabled = (Modo = 0 Or Modo = 2) And vParamAplic.Cooperativa = 4
     
+    
+    '[Monica]23/02/2018: solo en el caso de castelduc se puede reproducir clasificacion
+    If Data1.Recordset.RecordCount > 0 Then
+        Toolbar2.Buttons(3).Enabled = (B And vParamAplic.Cooperativa = 5) And EntradaClasificada(Data1.Recordset!NumNotac)
+    Else
+        Toolbar2.Buttons(3).Enabled = False
+    End If
+    
+    
     'Imprimir
     'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
     Toolbar1.Buttons(8).Enabled = False ' True And Not DeConsulta
@@ -3243,6 +3256,212 @@ Private Sub mnExporImpor_Click()
     End If
 
 End Sub
+
+Private Sub mnReproducirClasifica_Click()
+Dim frmAux As frmManClasAux
+Dim Sql As String
+
+    Set frmAux = New frmManClasAux
+    
+    frmAux.Show vbModal
+    
+    Set frmAux = Nothing
+    
+    Sql = "select * from tmpclasifica where codusu = " & vUsu.Codigo
+    If TotalRegistrosConsulta(Sql) > 0 Then
+        If MsgBox("¿ Desea continuar con el proceso de reproducir la clasificacion ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
+            If ActualizarEntradasCastelduc(Text1(0).Text) Then
+                MsgBox "Proceso realizado correctamente", vbExclamation
+            End If
+        End If
+    End If
+
+End Sub
+
+
+
+
+
+Private Function ActualizarEntradasCastelduc(NotaOrigen As Long) As Boolean
+Dim Rs As ADODB.Recordset
+Dim Rs2 As ADODB.Recordset
+Dim RsGastos As ADODB.Recordset
+Dim I As Integer
+Dim Sql As String
+Dim Sql2 As String
+
+Dim KilosNet As Currency
+Dim FactCorrDest As Currency
+Dim CalDestrio As Currency
+Dim CalPodrido As Currency
+Dim KilDestrio As Currency
+Dim KilMuestra As Currency
+Dim KilPodrido As Currency
+Dim KilosTot As Currency
+Dim Kilos As Currency
+
+Dim UltCalidad As Currency
+Dim PrimCalidad As Currency
+
+Dim B As Boolean
+Dim cadErr As String
+
+Dim EntClasif As String
+
+    On Error GoTo eActualizarEntradasCastelduc
+
+    conn.BeginTrans
+    
+    ActualizarEntradasCastelduc = False
+    
+    Sql = "select * from tmpclasifica where codusu = " & vUsu.Codigo & " order by numnotac"
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    B = True
+    EntClasif = ""
+    While Not Rs.EOF And B
+        If EntradaClasificada(DBLet(Rs!NumNotac)) Then
+            EntClasif = EntClasif & DBLet(Rs!NumNotac) & ", "
+        Else
+            ' kilos de la entrada
+            Sql2 = "select kilosnet from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
+            KilosNet = DevuelveValor(Sql2)
+            
+        
+            Sql2 = "select sum(muestra) from rclasifica_clasif where numnotac = " & DBSet(NotaOrigen, "N")
+            KilMuestra = DevuelveValor(Sql2)
+            
+            
+            If KilMuestra <> 0 Then
+                Sql2 = "select * from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
+                Sql2 = Sql2 & " order by codcalid "
+            
+                Set Rs2 = New ADODB.Recordset
+                Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                
+                
+                KilosTot = 0
+                
+                KilDestrio = DBLet(Rs!kilonet, "N")
+                
+                While Not Rs2.EOF
+                    '[Monica] 04/06/2010
+                    ' comprobamos si es la calidad de destrio a la que le ponemos el total de kilos
+                    Sql = "select count(*) from rcalidad where codvarie = " & DBSet(Rs2!codvarie, "N")
+                    Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                    Sql = Sql & " and tipcalid = 1 "
+                    
+                    If TotalRegistros(Sql) > 0 Then
+                        Kilos = DBLet(Rs2!KilosNet, "N")
+                        KilosTot = KilosTot + Kilos
+                    Else
+                        UltCalidad = Rs2!codcalid
+                        '[Monica]25/07/2016: la regla de 3 es sobre los kilos de muestra sin los de destrio
+                        Kilos = Round2((KilosNet - KilDestrio) * DBLet(Rs2!Muestra, "N") / (KilMuestra - KilDestrio), 0)
+                        KilosTot = KilosTot + Kilos
+                    End If
+                    
+                    '[Monica] 04/06/2010
+                    Sql = "select count(*) from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                    
+                    If TotalRegistros(Sql) = 0 Then
+                        Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+                        Sql = Sql & " values (" & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & "," & DBSet(Rs2!codcalid, "N") & "," & DBSet(Rs2!Muestra, "N")
+                        Sql = Sql & "," & DBSet(Kilos, "N") & ")"
+                        
+                        conn.Execute Sql
+                    Else
+                        Sql = "update rclasifica_clasif set muestra = " & DBSet(Rs2!Muestra, "N") & ","
+                        Sql = Sql & " kilosnet = " & DBSet(Kilos, "N")
+                        Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                        Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                        Sql = Sql & " and codcalid = " & DBSet(Rs2!codcalid, "N")
+                    
+                        conn.Execute Sql
+                    End If
+                    
+                    Rs2.MoveNext
+                Wend
+                
+                Set Rs2 = Nothing
+                
+'[Monica]22/07/2016: problema que le dio en albaricoques
+' si hay diferencia no hacemos nada pq meten en el calibrador un cajon no la entrada completa como en melocotones
+                ' si la diferencia es positiva se suma a la ultima calidad
+                If KilosNet - KilosTot > 0 Then
+                    Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " and codcalid = " & DBSet(UltCalidad, "N")
+
+                    conn.Execute Sql
+                Else
+                ' si es negativa a la primera
+                    Sql = "select min(codcalid) from rclasifica_clasif "
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " and kilosnet >= " & DBSet((KilosNet - KilosTot) * (-1), "N")
+
+                    PrimCalidad = DevuelveValor(Sql)
+
+                    Sql = "update rclasifica_clasif set kilosnet = kilosnet + " & DBSet(KilosNet - KilosTot, "N")
+                    Sql = Sql & " where numnotac = " & DBSet(Rs!NumNotac, "N")
+                    Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql = Sql & " and codcalid = " & DBSet(PrimCalidad, "N")
+
+                    conn.Execute Sql
+                End If
+            End If
+        
+            Sql = "delete from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
+            Sql = Sql & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and kilosnet is null "
+            conn.Execute Sql
+            
+            '++ 20-05-2009: calculamos los gastos de recoleccion para la entrada clasificadaç
+            Sql = "select * from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
+            
+            Set RsGastos = New ADODB.Recordset
+            RsGastos.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
+            If Not RsGastos.EOF Then
+                cadErr = "Actualizando Gastos"
+                B = ActualizarGastos(RsGastos, cadErr)
+            End If
+            
+            Set RsGastos = Nothing
+            '++
+        End If
+        Rs.MoveNext
+            
+    Wend
+
+    If EntClasif <> "" Then
+        MsgBox "Las siguientes notas no han sido actualizadas, porque tenían clasificacion. Revise." & _
+            vbCrLf & vbCrLf & Mid(EntClasif, 1, Len(EntClasif) - 2), vbExclamation
+    End If
+
+    Set Rs = Nothing
+
+    If B Then
+        ActualizarEntradasCastelduc = True
+        conn.CommitTrans
+        Exit Function
+    End If
+
+eActualizarEntradasCastelduc:
+    If Err.Number <> 0 Or Not B Then
+        conn.RollbackTrans
+        MuestraError Err.Number, "Actualizar entradas", Err.Description & cadErr
+    End If
+End Function
+
+
+
+
 
 Private Sub mnGastos_Click()
 Dim Rs As ADODB.Recordset
@@ -4506,6 +4725,8 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnGastos_Click
         Case 2 'Exportar/importar
             mnExporImpor_Click
+        Case 3 ' Reproducir clasificacion
+            mnReproducirClasifica_Click
     End Select
 End Sub
 
