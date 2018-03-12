@@ -587,6 +587,7 @@ Public DatosADevolverBusqueda As String    'Tendra el nº de text que quiere que 
 Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 Public ParamVariedad As String
+Public ParamNota As String
 
 'codi per al registe que s'afegix al cridar des d'atre formulari.
 'Obrir en modo Insertar i tornar datos del registre insertat
@@ -675,8 +676,8 @@ Dim B As Boolean
     Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = B
-    Me.mnImprimir.Enabled = B
+    Toolbar1.Buttons(8).Enabled = False
+    Me.mnImprimir.Enabled = False
     
 End Sub
 
@@ -764,13 +765,13 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(1).Text
-    txtAux2(0).Text = DataGrid1.Columns(1).Text
-    txtAux2(1).Text = DataGrid1.Columns(2).Text
-    txtAux2(2).Text = DataGrid1.Columns(3).Text
-    txtAux2(3).Text = DataGrid1.Columns(4).Text
-    txtAux2(4).Text = DataGrid1.Columns(5).Text
-    txtAux2(5).Text = DataGrid1.Columns(6).Text
-    txtAux(2).Text = DataGrid1.Columns(7).Text
+    txtAux2(0).Text = DataGrid1.Columns(2).Text
+    txtAux2(1).Text = DataGrid1.Columns(3).Text
+    txtAux2(2).Text = DataGrid1.Columns(4).Text
+    txtAux2(3).Text = DataGrid1.Columns(5).Text
+    txtAux2(4).Text = DataGrid1.Columns(6).Text
+    txtAux2(5).Text = DataGrid1.Columns(7).Text
+    txtAux(2).Text = DataGrid1.Columns(8).Text
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -1154,8 +1155,8 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "N||||0|;S|txtAux(1)|T|Nota|1100|;S|txtAux2(0)|T|Fecha|1400|;S|txtAux2(1)|T|Código|1000|;S|txtAux2(2)|T|Variedad|2000|;S|txtAux2(3)|T|Codigo|1200|;"
-    tots = tots & "S|txtAux2(4)|T|Socio|2500|;"
+    tots = "N||||0|;S|txtAux(1)|T|Nota|1100|;S|txtAux2(0)|T|Fecha|1400|;S|txtAux2(1)|T|Código|1000|;S|txtAux2(2)|T|Variedad|2200|;S|txtAux2(3)|T|Codigo|1000|;"
+    tots = tots & "S|txtAux2(4)|T|Socio|3400|;"
     tots = tots & "S|txtAux2(5)|T|Campo|1200|;"
     tots = tots & "S|txtAux(2)|T|Destrio|1200|;"
     
@@ -1183,8 +1184,47 @@ Private Sub txtAux_LostFocus(Index As Integer)
     Select Case Index
         Case 0, 1 'numero de nota, destrio
             PonerFormatoEntero txtAux(Index)
+            If Index = 1 Then
+                PonerDatosNota (txtAux(1).Text)
+            End If
     End Select
     
+End Sub
+
+Private Sub PonerDatosNota(Nota As String)
+Dim Sql As String
+Dim Rs As ADODB.Recordset
+
+    Sql = "SELECT rclasifica.fechaent, rclasifica.codvarie, variedades.nomvarie,"
+    Sql = Sql & "rclasifica.codsocio, rsocios.nomsocio, rclasifica.codcampo "
+    Sql = Sql & " FROM rclasifica, variedades, rsocios"
+    Sql = Sql & " WHERE rclasifica.codvarie = variedades.codvarie "
+    Sql = Sql & " and rclasifica.codsocio = rsocios.codsocio "
+    Sql = Sql & " and rclasifica.numnotac = " & DBSet(txtAux(1).Text, "N")
+            
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    txtAux2(0).Text = ""
+    txtAux2(1).Text = ""
+    txtAux2(2).Text = ""
+    txtAux2(3).Text = ""
+    txtAux2(4).Text = ""
+    txtAux2(5).Text = ""
+
+    
+    If Not Rs.EOF Then
+        txtAux2(0).Text = Rs.Fields(0)
+        txtAux2(1).Text = Rs.Fields(1)
+        txtAux2(2).Text = Rs.Fields(2)
+        txtAux2(3).Text = Rs.Fields(3)
+        txtAux2(4).Text = Rs.Fields(4)
+        txtAux2(5).Text = Rs.Fields(5)
+    End If
+    
+    Set Rs = Nothing
+
+
 End Sub
 
 Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -1219,8 +1259,25 @@ Dim Mens As String
         End If
     End If
     
-    If B And (Modo = 3 Or Modo = 4) Then
+    If B And (Modo = 3) Then
+        If CLng(ComprobarCero(txtAux(1).Text)) = ParamNota Then
+            MsgBox "La nota introducida no puede ser la misma que la de partida. Revise.", vbExclamation
+            PonerFoco txtAux(1)
+            B = False
+        End If
+    End If
     
+    
+    
+    ' Comprobamos que la nota introducida tiene la misma variedad
+    If B And (Modo = 3 Or Modo = 4) Then
+        Sql = DevuelveDesdeBDNew(cAgro, "rclasifica", "codvarie", "numnotac", txtAux(1).Text, "N")
+        If CLng(ComprobarCero(Sql)) <> CLng(ParamVariedad) Then
+            MsgBox "La nota no tiene la misma variedad que la de partida. Revise.", vbExclamation
+            PonerFoco txtAux(1)
+            B = False
+        End If
+        
     End If
     
     DatosOK = B

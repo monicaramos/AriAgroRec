@@ -348,6 +348,7 @@ Private mvarContabilidadNueva As Boolean
 Private mvarCodEmpreA3 As Long ' Codigo de empresa A3
 
 
+Private mvarEurCapSocial As String ' euros capital social
 
 '------------------------------------------------
 'Propiedades del modulo CParamAplic
@@ -2231,6 +2232,14 @@ Public Property Get CodEmpreA3() As Long
 End Property
 
 
+'euros capital social
+Public Property Let EurCapSocial(ByVal vData As String)
+     mvarEurCapSocial = vData
+End Property
+
+Public Property Get EurCapSocial() As String
+     EurCapSocial = mvarEurCapSocial
+End Property
 
 
 
@@ -2533,6 +2542,8 @@ On Error GoTo Err3
         '[Monica]29/01/2018: codigo de empresa A3
         mvarCodEmpreA3 = DBLet(Rs!CodEmpreA3, "N")
         
+        '[Monica]12/03/2018: euros capital social
+        mvarEurCapSocial = DBLet(Rs!EurCapSocial, "N")
         
         Leer = 0
     End If
@@ -2850,6 +2861,8 @@ On Error GoTo eModificar
     '[Monica]29/01/2018: codigo de empresa de a3
     SQL = SQL & ", codemprea3 = " & DBSet(mvarCodEmpreA3, "N")
     
+    '[Monica]12/03/2018: euros de capital social
+    SQL = SQL & ", eurcapsocial = " & DBSet(mvarEurCapSocial, "N")
     
 '    SQL = SQL & " WHERE codparam =" & Codigo & ";"
 

@@ -12306,7 +12306,7 @@ Dim BrutoAnt As Currency
     
     BrutoAnticipado = 0
     
-    SQL = "select sum(coalesce(neto34,0)) from rrecibnominas where codtraba = " & DBSet(vTrabajador, "N")
+    SQL = "select sum(coalesce(neto34,0)) from rrecibosnomina where codtraba = " & DBSet(vTrabajador, "N")
     SQL = SQL & " and month(fechahora) = " & Combo1(1).ListIndex & " and year(fechahora) = " & DBSet(txtCodigo(61).Text, "N")
     
     Set Rs = New ADODB.Recordset

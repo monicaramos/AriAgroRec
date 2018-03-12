@@ -767,7 +767,7 @@ Private WithEvents frmMens As frmMensajes 'mensajes
 Attribute frmMens.VB_VarHelpID = -1
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
-Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
+Private cadformula As String 'Cadena con la FormulaSelection para Crystal Report
 Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
@@ -846,12 +846,12 @@ Dim devuelve As String
 '[Monica]04/06/2014: no tiene pq tener campos
 '            If Not AnyadirAFormula(cadFormula, "{rcampos.codpropiet} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
 '            If Not AnyadirAFormula(cadSelect, "rcampos.codpropiet = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & NumCod) Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rsocios.codsocio} = " & NumCod) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rsocios.codsocio = " & NumCod) Then Exit Sub
         
         
         Else
-            If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
         End If
     End If
@@ -866,7 +866,7 @@ Dim devuelve As String
         CadParam = CadParam & "pFechaCons=""" & txtCodigo(9).Text & """|"
         numParam = numParam + 1
     
-        If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
+        If Not AnyadirAFormula(cadformula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
         If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
     End If
     
@@ -892,10 +892,10 @@ Dim devuelve As String
 '[Monica]04/06/2014: no tiene pq tener campos
 '            If Not AnyadirAFormula(cadFormula, "{rcampos.codpropiet} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
 '            If Not AnyadirAFormula(cadSelect, "rcampos.codpropiet = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
-            If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & NumCod) Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rsocios.codsocio} = " & NumCod) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rsocios.codsocio = " & NumCod) Then Exit Sub
         Else
-            If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
         End If
     End If
@@ -917,7 +917,7 @@ Dim devuelve As String
         frmMens.Show vbModal
         Set frmMens = Nothing
         
-        If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and {rcampos.codcampo} in [" & NumCampo & "]") Then Exit Sub
+        If Not AnyadirAFormula(cadformula, "{rcampos.codsocio} = " & NumCod & " and {rcampos.codcampo} in [" & NumCampo & "]") Then Exit Sub
         If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod & " and rcampos.codcampo in (" & NumCampo & ")") Then Exit Sub
          
     End If
@@ -934,17 +934,17 @@ Dim devuelve As String
         
         '[Monica]13/03/2014: para el caso de escalona y utxera enlazamos con el codpropiet del campo
         If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
-            If Not AnyadirAFormula(cadFormula, "{rcampos.codpropiet} = " & NumCod) Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rcampos.codpropiet} = " & NumCod) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rcampos.codpropiet = " & NumCod) Then Exit Sub
         Else
-            If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod) Then Exit Sub
+            If Not AnyadirAFormula(cadformula, "{rcampos.codsocio} = " & NumCod) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod) Then Exit Sub
         End If
         
         CadParam = CadParam & "pFecha=""" & txtCodigo(1).Text & """|"
         numParam = numParam + 1
         
-        If Not AnyadirAFormula(cadFormula, "{rsocios_alias.codsocio} = " & txtCodigo(0).Text) Then Exit Sub
+        If Not AnyadirAFormula(cadformula, "{rsocios_alias.codsocio} = " & txtCodigo(0).Text) Then Exit Sub
 
         Set frmMens = New frmMensajes
         
@@ -958,7 +958,7 @@ Dim devuelve As String
         frmMens.Show vbModal
         Set frmMens = Nothing
     
-        If Not AnyadirAFormula(cadFormula, "{rcampos.codcampo} in [" & NumCampo & "]") Then Exit Sub
+        If Not AnyadirAFormula(cadformula, "{rcampos.codcampo} in [" & NumCampo & "]") Then Exit Sub
         If Not AnyadirAFormula(cadSelect, "{rcampos.codcampo} in (" & NumCampo & ")") Then Exit Sub
     
     End If
@@ -1011,7 +1011,8 @@ Dim devuelve As String
                 Dim vSQL As String
                 ' solo si mem han seleccionado campos
                 If NumCod <> "" Then
-                    vSQL = "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
+                    vSQL = "El precio por hanegada cultivable es de " & vParamAplic.EurCapSocial & " euros." & vbCrLf & vbCrLf
+                    vSQL = vSQL & "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
                     If MsgBox(vSQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
                         If InsertarMovimientoBajaCampo(cadSelect, Contador) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -1046,10 +1047,10 @@ Dim vTipoMov As CTiposMov
             SQL = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
             NumLin = DevuelveValor(SQL)
             
-            
+            '[Monica]12/03/2018: en la baja de campo la superficie es la cultivable, antes estaba la supcoope
             SQL = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc ) "
-            Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supcoope," & DBSet(txtCodigo(7).Text, "F")
-            Sql2 = Sql2 & ",round(supcoope * 3, 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
+            Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supculti," & DBSet(txtCodigo(7).Text, "F")
+            Sql2 = Sql2 & ",round(supculti * " & DBSet(vParamAplic.EurCapSocial, "N") & ", 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
             Sql2 = Sql2 & " where " & vSelect
 
             conn.Execute SQL & Sql2
@@ -1466,7 +1467,7 @@ Private Sub FrameCalidadesVisible(visible As Boolean, ByRef H As Integer, ByRef 
         Me.FrameCalidades.Top = -90
         Me.FrameCalidades.Left = 0
         Me.FrameCalidades.Height = 6255
-        Me.FrameCalidades.Width = 6390
+        Me.FrameCalidades.Width = 6790
         W = Me.FrameCalidades.Width
         H = Me.FrameCalidades.Height
     End If
@@ -1523,7 +1524,7 @@ Dim ItmX As ListItem
 End Sub
 
 Private Sub InicializarVbles()
-    cadFormula = ""
+    cadformula = ""
     cadSelect = ""
     CadParam = ""
     numParam = 0
@@ -1542,7 +1543,7 @@ Dim devuelve2 As String
     PonerDesdeHasta = False
     devuelve = CadenaDesdeHasta(codD, codH, Codigo, TipCod)
     If devuelve = "Error" Then Exit Function
-    If Not AnyadirAFormula(cadFormula, devuelve) Then Exit Function
+    If Not AnyadirAFormula(cadformula, devuelve) Then Exit Function
     If TipCod <> "F" Then 'Fecha
         If Not AnyadirAFormula(cadSelect, devuelve) Then Exit Function
     Else
@@ -1562,7 +1563,7 @@ End Function
 
 Private Sub LlamarImprimir()
     With frmImprimir
-        .FormulaSeleccion = cadFormula
+        .FormulaSeleccion = cadformula
         .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
@@ -1701,7 +1702,7 @@ Private Sub AbrirVisReport()
     Screen.MousePointer = vbHourglass
     CadenaDesdeOtroForm = ""
     With frmVisReport
-        .FormulaSeleccion = cadFormula
+        .FormulaSeleccion = cadformula
 '        .SoloImprimir = (Me.OptVisualizar(indFrame).Value = 1)
         .OtrosParametros = CadParam
         .NumeroParametros = numParam

@@ -429,12 +429,12 @@ Dim vSeccion As CSeccion
         End If
             
         SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, 2,numfactu,fecfactu,'" & BBDD & "' aa, nomprove, totalfac  from " & BBDD & ".scafpc where intconta = 0 "
+        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, 2,numfactu,fecrecep,'" & BBDD & "' aa, nomprove, totalfac  from " & BBDD & ".scafpc where intconta = 0 "
         If vEmpresa.TieneSII Then
             SQL = SQL & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
         SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact,3, numfactu,fecfactu,'" & BBDD & "' aa, nomtrans, totalfac from " & BBDD & ".tcafpc where intconta = 0 "
+        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact,3, numfactu,fecrecep,'" & BBDD & "' aa, nomtrans, totalfac from " & BBDD & ".tcafpc where intconta = 0 "
         If vEmpresa.TieneSII Then
             SQL = SQL & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If

@@ -1391,7 +1391,6 @@ Private Sub EnvioNuevo(ListaArch As Collection)
         If Opcion = 0 And DatosEnvio <> "" Then Me.DatosEnvio = "OK"
     Else
     
-    
         'El que habia
         Enviar2 ListaArch
     End If
