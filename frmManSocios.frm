@@ -56,7 +56,7 @@ Begin VB.Form frmManSocios
          Strikethrough   =   0   'False
       EndProperty
       Height          =   705
-      Left            =   5310
+      Left            =   5760
       TabIndex        =   170
       Top             =   30
       Width           =   2415
@@ -108,14 +108,14 @@ Begin VB.Form frmManSocios
       Left            =   3900
       TabIndex        =   168
       Top             =   30
-      Width           =   1335
+      Width           =   1785
       Begin MSComctlLib.Toolbar Toolbar5 
          Height          =   330
          Left            =   210
          TabIndex        =   169
          Top             =   180
-         Width           =   1005
-         _ExtentX        =   1773
+         Width           =   1410
+         _ExtentX        =   2487
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -123,12 +123,15 @@ Begin VB.Form frmManSocios
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   2
+            NumButtons      =   3
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Baja de Socios"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Imprimir Fases"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Socios de Baja"
             EndProperty
          EndProperty
       End
@@ -502,7 +505,6 @@ Begin VB.Form frmManSocios
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   6
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -517,7 +519,7 @@ Begin VB.Form frmManSocios
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label5"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label29"
@@ -585,7 +587,7 @@ Begin VB.Form frmManSocios
       Tab(5).ControlCount=   1
       TabCaption(6)   =   "Movimientos"
       TabPicture(6)   =   "frmManSocios.frx":00B4
-      Tab(6).ControlEnabled=   -1  'True
+      Tab(6).ControlEnabled=   0   'False
       Tab(6).Control(0)=   "FrameAux4"
       Tab(6).Control(0).Enabled=   0   'False
       Tab(6).ControlCount=   1
@@ -601,7 +603,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   5430
-         Left            =   240
+         Left            =   -74760
          TabIndex        =   181
          Top             =   510
          Width           =   12360
@@ -1386,7 +1388,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1485
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   141
          Top             =   915
          Width           =   6255
@@ -1534,7 +1536,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1485
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   137
          Top             =   2460
          Width           =   6255
@@ -1977,7 +1979,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   -69960
+         Left            =   5040
          MaxLength       =   10
          TabIndex        =   4
          Tag             =   "Fecha Nacimiento|F|S|||rsocios|fechanac|dd/mm/yyyy||"
@@ -2623,7 +2625,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1215
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   94
          Top             =   3990
          Width           =   6255
@@ -2787,7 +2789,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -73605
+         Left            =   1395
          MaxLength       =   50
          TabIndex        =   17
          Tag             =   "E-mail|T|S|||rsocios|maisocio|||"
@@ -3530,7 +3532,7 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   4790
-         Left            =   -68475
+         Left            =   6525
          TabIndex        =   74
          Top             =   420
          Width           =   7110
@@ -4329,7 +4331,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   20
-         Left            =   -68310
+         Left            =   6690
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
@@ -4350,7 +4352,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -73590
+         Left            =   1410
          MaxLength       =   15
          TabIndex        =   3
          Tag             =   "NIF / CIF|T|N|||rsocios|nifsocio|||"
@@ -4634,7 +4636,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -71550
+         Left            =   3450
          TabIndex        =   104
          Top             =   525
          Width           =   1275
@@ -4642,7 +4644,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   2
-         Left            =   -70215
+         Left            =   4785
          Picture         =   "frmManSocios.frx":1D02
          ToolTipText     =   "Buscar fecha"
          Top             =   525
@@ -4660,7 +4662,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74625
+         Left            =   375
          TabIndex        =   93
          Top             =   5505
          Width           =   705
@@ -4668,14 +4670,14 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgMail 
          Height          =   240
          Index           =   0
-         Left            =   -73890
+         Left            =   1110
          Top             =   5505
          Width           =   240
       End
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   -66690
+         Left            =   8310
          Tag             =   "-1"
          ToolTipText     =   "Zoom descripción"
          Top             =   5235
@@ -4693,7 +4695,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -68310
+         Left            =   6690
          TabIndex        =   73
          Top             =   5205
          Width           =   1515
@@ -4710,7 +4712,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74610
+         Left            =   390
          TabIndex        =   71
          Top             =   525
          Width           =   735
@@ -4978,7 +4980,7 @@ Private BuscaChekc As String
 Private Const CarpetaIMG = "ImgFicFT"
 
 'GENERALES PARA PASARLE A CRYSTAL REPORT
-Private cadformula As String 'Cadena con la FormulaSelection para Crystal Report
+Private cadFormula As String 'Cadena con la FormulaSelection para Crystal Report
 Private CadParam As String 'Cadena con los parametros para Crystal Report
 Private numParam As Byte 'Numero de parametros que se pasan a Crystal Report
 Private cadSelect As String 'Cadena para comprobar si hay datos antes de abrir Informe
@@ -5302,7 +5304,7 @@ Dim nomDocu As String
             numParam = numParam + 1
             
             
-            cadformula = "{rcampos.codcampo} in [" & vCampos & "]  and {rsocios.codsocio} = " & DBSet(Text1(0).Text, "N")
+            cadFormula = "{rcampos.codcampo} in [" & vCampos & "]  and {rsocios.codsocio} = " & DBSet(Text1(0).Text, "N")
             
             cadTitulo = "Documento Baja de Campos"
              
@@ -5380,6 +5382,7 @@ Dim I As Integer
         .ImageList = frmPpal.imgListComun
         .Buttons(1).Image = 20  'baja de socio
         .Buttons(2).Image = 25  'imprimir fases
+        .Buttons(3).Image = 16  'socios de baja
     End With
     
     ' desplazamiento
@@ -5801,6 +5804,10 @@ Dim I As Byte
     'dar de baja un socio
     Toolbar5.Buttons(1).Enabled = B
     Me.mnBajaSocio.Enabled = B
+    
+    '[Monica]13/03/2018: solo para Coopic
+    'informe de socios de baja
+    Toolbar5.Buttons(3).Enabled = (vParamAplic.Cooperativa = 16)
     
     'Imprimir
     'Toolbar1.Buttons(12).Enabled = (b Or Modo = 0)
@@ -6341,6 +6348,12 @@ End Sub
 Private Sub mnImprimirFases_Click()
     AbrirListado (31)
 End Sub
+
+Private Sub mnSociosBaja_Click()
+    AbrirListado (52)
+End Sub
+
+
 
 Private Sub mnModificar_Click()
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -7893,6 +7906,8 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
             mnBajaSocio_Click
         Case 2 'Imprimir fases
             mnImprimirFases_Click
+        Case 3 ' socios dados de baja
+            mnSociosBaja_Click
     End Select
 End Sub
 
@@ -9404,10 +9419,10 @@ InicializarVbles
     End If
         
     If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
-        If Not AnyadirAFormula(cadformula, "{rsocios.codsocio}=" & Data1.Recordset!Codsocio) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio}=" & Data1.Recordset!Codsocio) Then Exit Sub
     Else
-        If Not AnyadirAFormula(cadformula, "{rhisfruta.codsocio}=" & Data1.Recordset!Codsocio) Then Exit Sub
-        If Not AnyadirAFormula(cadformula, "{rhisfruta.fecalbar}>=Date(""" & Text3(0).Text & """)") Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rhisfruta.codsocio}=" & Data1.Recordset!Codsocio) Then Exit Sub
+        If Not AnyadirAFormula(cadFormula, "{rhisfruta.fecalbar}>=Date(""" & Text3(0).Text & """)") Then Exit Sub
     End If
     indRPT = 40 'Impresion de Factura Socio
     ConSubInforme = True
@@ -9422,7 +9437,7 @@ End Sub
 
 Private Sub LlamarImprimir()
     With frmImprimir
-        .FormulaSeleccion = cadformula
+        .FormulaSeleccion = cadFormula
         .OtrosParametros = CadParam
         .NumeroParametros = numParam
         .SoloImprimir = False
@@ -9437,7 +9452,7 @@ End Sub
 
 
 Private Sub InicializarVbles()
-    cadformula = ""
+    cadFormula = ""
     cadSelect = ""
     CadParam = ""
     numParam = 0
