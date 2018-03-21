@@ -392,31 +392,32 @@ Dim Modo As Byte
 '-----------------------------------------------
 Dim PrimeraVez As Boolean
 Dim vtabla As String
+Dim vTabla2 As String
 
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
 '    PonerIndicador lblIndicador, Modo
-    b = (Modo = 2)
+    B = (Modo = 2)
     
-    If b Then
+    If B Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    txtAux(0).visible = Not b
-    txtAux(1).visible = Not b
-    Combo1.visible = Not b
+    txtAux(0).visible = Not B
+    txtAux(1).visible = Not B
+    Combo1.visible = Not B
         
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
     
     'Poner el tamaño de los campos. Si es modo Busqueda el MaxLength del campo
     'debe ser mayor.
@@ -441,16 +442,16 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
 '    mnOpciones.Enabled = b
     'Buscar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
     Toolbar1.Buttons(6).Enabled = False
@@ -465,7 +466,7 @@ Dim b As Boolean
     Me.mnEliminar.Enabled = False
     
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = b
+    Toolbar1.Buttons(11).Enabled = B
 End Sub
 
 
@@ -533,8 +534,8 @@ End Sub
 
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -542,18 +543,18 @@ Dim Aux As String
         MsgBox "Ningún registro devuelto.", vbExclamation
         Exit Sub
     End If
-    Cad = ""
-    i = 0
+    cad = ""
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
-            Cad = Cad & adodc1.Recordset.Fields(J) & "|"
+            cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
-    RaiseEvent DatoSeleccionado(Cad)
+    Loop Until I = 0
+    RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
 
@@ -618,8 +619,10 @@ Private Sub Form_Load()
       
     If vParamAplic.ContabilidadNueva Then
         vtabla = "formapago"
+        vTabla2 = "tipofpago"
     Else
         vtabla = "sforpa"
+        vTabla2 = "stipoformapago"
     End If
 
     txtAux(0).Tag = "Código de Forma de Pago|N|N|||" & vtabla & "|codforpa|000|S|"
@@ -629,7 +632,7 @@ Private Sub Form_Load()
 
 '    PonerOpcionesMenu  'En funcion del usuario
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM " & vtabla & ", stipoformapago where " & vtabla & ".tipforpa = stipoformapago.tipoformapago "
+    CadenaConsulta = "Select codforpa, nomforpa, tipforpa, descformapago FROM " & vtabla & ", " & vTabla2 & " where " & vtabla & ".tipforpa = " & vTabla2 & ".tipoformapago "
     '************************************************************************
     
     CadB = ""
@@ -683,20 +686,20 @@ End Sub
 
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String, tots As String
+    Dim SQL As String, tots As String
     
     adodc1.ConnectionString = ConnConta
     
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY codforpa"
+    SQL = SQL & " ORDER BY codforpa"
     '**************************************************************++
     
-    adodc1.RecordSource = Sql
+    adodc1.RecordSource = SQL
     adodc1.CursorType = adOpenDynamic
     adodc1.LockType = adLockOptimistic
     adodc1.Refresh
@@ -718,11 +721,11 @@ Private Sub CargaGrid(Optional vSQL As String)
 '
 End Sub
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
@@ -749,7 +752,7 @@ End Sub
 Private Sub DataGrid1_GotFocus()
   WheelHook DataGrid1
 End Sub
-Private Sub DataGrid1_Lostfocus()
+Private Sub DataGrid1_LostFocus()
   WheelUnHook
 End Sub
 
@@ -761,7 +764,12 @@ Dim miRsAux As ADODB.Recordset
     Set miRsAux = New ADODB.Recordset
     
     adodc1.ConnectionString = ConnConta
-    miRsAux.Open "Select * from stipoformapago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    
+    If vParamAplic.ContabilidadNueva Then
+        miRsAux.Open "Select * from tipofpago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Else
+        miRsAux.Open "Select * from stipoformapago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+    End If
 
     
 '    miRsAux.Open "Select * from stipoformapago order by descformapago", ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText

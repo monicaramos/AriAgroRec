@@ -800,16 +800,16 @@ Private Sub frmCla_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 
     If CadenaSeleccion <> "" Then
-        Sql = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
+        SQL = " {variedades.codvarie} in (" & CadenaSeleccion & ")"
         Sql2 = " {variedades.codvarie} in [" & CadenaSeleccion & "]"
     Else
-        Sql = " {variedades.codvarie} = -1 "
+        SQL = " {variedades.codvarie} = -1 "
     End If
-    If Not AnyadirAFormula(cadSelect, Sql) Then Exit Sub
+    If Not AnyadirAFormula(cadSelect, SQL) Then Exit Sub
     If Not AnyadirAFormula(cadFormula, Sql2) Then Exit Sub
 
 End Sub
@@ -973,7 +973,7 @@ Private Sub FrameEntradaBasculaVisible(visible As Boolean, ByRef H As Integer, B
     If visible = True Then
         Me.FrameEntradasCampo.Top = -90
         Me.FrameEntradasCampo.Left = 0
-        Me.FrameEntradasCampo.Height = 5610
+        Me.FrameEntradasCampo.Height = 6330 '5610
         Me.FrameEntradasCampo.Width = 6720
         W = Me.FrameEntradasCampo.Width
         H = Me.FrameEntradasCampo.Height
@@ -1116,26 +1116,26 @@ End Sub
 
 Private Function ConcatenarCampos(cTabla As String, cWhere As String) As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Sql1 As String
 
     ConcatenarCampos = ""
 
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select rcampos.codcampo FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
     
-    Sql = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
+    SQL = "select distinct rcampos.codcampo  from " & cTabla & " where " & cWhere
     Set Rs = New ADODB.Recordset
     
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Sql1 = ""
     While Not Rs.EOF
@@ -1151,22 +1151,22 @@ End Function
 
 Private Function ActualizarRegistros(cTabla As String, cWhere As String) As Boolean
 'Actualizar la marca de impreso
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eActualizarRegistros
 
     ActualizarRegistros = False
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
+    SQL = "update " & QuitarCaracterACadena(cTabla, "_1") & " set impreso = 1 "
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ActualizarRegistros = True
     Exit Function
@@ -1177,14 +1177,14 @@ End Function
 
 
 Private Function NombreCalidad(Var As String, Calid As String) As String
-Dim Sql As String
+Dim SQL As String
 
     NombreCalidad = ""
 
-    Sql = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
-    Sql = Sql & " and codcalid = " & DBSet(Calid, "N")
+    SQL = "select nomcalab from rcalidad where codvarie = " & DBSet(Var, "N")
+    SQL = SQL & " and codcalid = " & DBSet(Calid, "N")
     
-    NombreCalidad = DevuelveValor(Sql)
+    NombreCalidad = DevuelveValor(SQL)
     
 End Function
 
@@ -1226,14 +1226,14 @@ End Function
 
 
 Private Function ProductoCampo(campo As String) As String
-Dim Sql As String
+Dim SQL As String
 
     ProductoCampo = ""
     
-    Sql = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
-    Sql = Sql & " where rcampos.codcampo = " & DBSet(campo, "N")
+    SQL = "select variedades.codprodu from rcampos inner join variedades on rcampos.codvarie = variedades.codvarie "
+    SQL = SQL & " where rcampos.codcampo = " & DBSet(campo, "N")
     
-    ProductoCampo = DevuelveValor(Sql)
+    ProductoCampo = DevuelveValor(SQL)
 
 End Function
 
@@ -1241,7 +1241,7 @@ End Function
 
 Private Function ModificarPrecioLiq(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim Sql As String
+Dim SQL As String
 Dim Sql2 As String
 Dim cWhere2 As String
 Dim Precio As Currency
@@ -1253,15 +1253,15 @@ Dim Rs As ADODB.Recordset
  
     cTabla = QuitarCaracterACadena(cTabla, "{")
     cTabla = QuitarCaracterACadena(cTabla, "}")
-    Sql = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
+    SQL = "Select numalbar FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        Sql = Sql & " WHERE " & cWhere
+        SQL = SQL & " WHERE " & cWhere
     End If
     
-    cWhere2 = " numalbar in (" & Sql & ")"
+    cWhere2 = " numalbar in (" & SQL & ")"
     
     If Not BloqueaRegistro("rhisfruta", cWhere2) Then
         MsgBox "No se pueden actualizar Entradas. Hay registros bloqueados.", vbExclamation
@@ -1271,7 +1271,7 @@ Dim Rs As ADODB.Recordset
         conn.BeginTrans
     
         Set Rs = New ADODB.Recordset
-        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             

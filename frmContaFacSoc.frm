@@ -1178,7 +1178,7 @@ Dim I As Integer
 
 
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.cmdcancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 
@@ -1276,14 +1276,14 @@ End Sub
 
 Private Sub Optcodigo_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     ElseIf KeyAscii = 27 Then Unload Me  'ESC
     End If
 End Sub
 
 Private Sub OptNombre_KeyPress(KeyAscii As Integer)
     If KeyAscii = 13 Then 'ENTER
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     ElseIf KeyAscii = 27 Then Unload Me  'ESC
     End If
 End Sub
