@@ -19654,7 +19654,9 @@ Dim Tabla2 As String
                 cadNombreRPT = nomDocu '"rInfDiferencias.rpt"
                 
                 If Opcion1(15).Value Then cadNombreRPT = Replace(cadNombreRPT, ".rpt", "Var.rpt")
-                cadFormula = "{tmpinfkilos.codusu} = " & vUsu.Codigo & " and {tmpinfkilos.kilosnet} <> 0 "
+                cadFormula = "{tmpinfkilos.codusu} = " & vUsu.Codigo
+                '[Monica]22/03/2018: solo en el caso de que no sea catadau sacamos los socios que tengan kilos 0
+                If vParamAplic.Cooperativa <> 0 Then cadFormula = cadFormula & " and {tmpinfkilos.kilosnet} <> 0 "
                 LlamarImprimir
            End If
         End If
@@ -31332,7 +31334,7 @@ Dim B As Boolean
     
     SQL = "select distinct rcampos.codsocio, rcampos.codcampo "
     SQL = SQL & " from " & cTabla
-    SQL = SQL & " where rcampos.fecbajas is null "
+    SQL = SQL & " where (rcampos.fecbajas is null or rcampos.fecbajas = '') "
     If cWhere <> "" Then
         SQL = SQL & " and " & cWhere
     End If
@@ -31393,6 +31395,7 @@ Dim B As Boolean
             
         Sql3 = "(" & vUsu.Codigo & "," & DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "N") & ","
         
+        KilosTot = 0
         
         If Me.Check30.Value = 1 Then
              SQLaux = "select sum(kilosnet) from " & vCant.BaseDatos & ".rhisfruta where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
@@ -31416,7 +31419,6 @@ Dim B As Boolean
              
              KilosTot = KilosTot + DevuelveValor(SQLaux)
             
-             Sql3 = Sql3 & DBSet(KilosTot, "N") & "," 'kilosnet
         
         Else
              SQLaux = "select sum(kilosnet) from rhisfruta where codsocio = " & DBSet(Rs.Fields(0).Value, "N")
@@ -31441,8 +31443,10 @@ Dim B As Boolean
              KilosTot = KilosTot + DevuelveValor(SQLaux)
              
             
-             Sql3 = Sql3 & DBSet(KilosTot, "N") & "," 'kilosnet
         End If
+            
+        Sql3 = Sql3 & DBSet(KilosTot, "N") & "," 'kilosnet
+            
             
         SqlAux2 = "select canaforo, kilosase "
         SqlAux2 = SqlAux2 & " from rcampos where codcampo = " & DBSet(Rs.Fields(1).Value, "N")
