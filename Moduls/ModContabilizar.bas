@@ -189,12 +189,12 @@ End Sub
 
 
 
-Private Sub InsertarTMPErrFac(Menerror As String, cadWHERE As String)
+Private Sub InsertarTMPErrFac(MenError As String, cadWHERE As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codprove,numfactu,fecfactu,error) "
-    SQL = SQL & " Select *," & DBSet(Mid(Menerror, 1, 200), "T") & " as error From tmpFactu "
+    SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
     SQL = SQL & " WHERE " & Replace(cadWHERE, "rfactsoc", "tmpFactu")
     conn.Execute SQL
     
@@ -202,12 +202,12 @@ Dim SQL As String
 End Sub
 
 
-Private Sub InsertarTMPErrFacSoc(Menerror As String, cadWHERE As String)
+Private Sub InsertarTMPErrFacSoc(MenError As String, cadWHERE As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
-    SQL = SQL & " Select *," & DBSet(Mid(Menerror, 1, 200), "T") & " as error From tmpFactu "
+    SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
     SQL = SQL & " WHERE " & Replace(cadWHERE, "rfactsoc", "tmpFactu")
     conn.Execute SQL
     
@@ -215,12 +215,12 @@ Dim SQL As String
 End Sub
 
 
-Private Sub InsertarTMPErrFacFVAR(Menerror As String, cadWHERE As String)
+Private Sub InsertarTMPErrFacFVAR(MenError As String, cadWHERE As String)
 Dim SQL As String
 
     On Error Resume Next
     SQL = "Insert into tmpErrFac(codtipom,numfactu,fecfactu,error) "
-    SQL = SQL & " Select *," & DBSet(Mid(Menerror, 1, 200), "T") & " as error From tmpFactu "
+    SQL = SQL & " Select *," & DBSet(Mid(MenError, 1, 200), "T") & " as error From tmpFactu "
     SQL = SQL & " WHERE " & Replace(cadWHERE, "fvarcabfact", "tmpFactu")
     conn.Execute SQL
     
@@ -6635,7 +6635,7 @@ EInsertar:
 End Function
 
 
-Public Function InsertarEnTesoreriaSoc(cadWHERE As String, Menerror As String, numfactu As String, fecfactu As Date) As Boolean
+Public Function InsertarEnTesoreriaSoc(cadWHERE As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -7341,13 +7341,13 @@ Dim J As Integer
 EInsertarTesoreriaSoc:
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria: " & Err.Description
+        MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
     InsertarEnTesoreriaSoc = B
 End Function
 
 ' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewADV(cadWHERE As String, CtaBan As String, FecVen As String, Menerror As String) As Boolean
+Public Function InsertarEnTesoreriaNewADV(cadWHERE As String, CtaBan As String, FecVen As String, MenError As String) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 Dim B As Boolean
 Dim SQL As String, Text33csb As String, Text41csb As String
@@ -7492,7 +7492,7 @@ Dim vSocio As cSocio
 EInsertarTesoreriaNew:
     If Err.Number <> 0 Then
         B = False
-        Menerror = Err.Description
+        MenError = Err.Description
     End If
     InsertarEnTesoreriaNewADV = B
 End Function
@@ -7500,7 +7500,7 @@ End Function
 
 
 ' ### [Monica] 16/01/2008
-Public Function InsertarEnTesoreriaNewBOD(cadWHERE As String, CtaBan As String, FecVen As String, Menerror As String, Tipo As Byte) As Boolean
+Public Function InsertarEnTesoreriaNewBOD(cadWHERE As String, CtaBan As String, FecVen As String, MenError As String, Tipo As Byte) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 ' Tipo: 0 = almazara
 '       1 = bodega
@@ -7654,7 +7654,7 @@ Dim Seccion As Integer
 EInsertarTesoreriaNew:
     If Err.Number <> 0 Then
         B = False
-        Menerror = Err.Description
+        MenError = Err.Description
     End If
     InsertarEnTesoreriaNewBOD = B
 End Function
@@ -7950,7 +7950,7 @@ EInsertar:
     End If
 End Function
 
-Public Function InsertarEnTesoreriaAlmz(Menerror As String, Socio As Long, numfactu As String, fecfactu As Date, TotalTesor As Currency, FecVenci As Date, FecRecep As Date, ForpaPosi As Integer, ForpaNega As Integer, CtaBanco As String, LetraSerie As String) As Boolean
+Public Function InsertarEnTesoreriaAlmz(MenError As String, Socio As Long, numfactu As String, fecfactu As Date, TotalTesor As Currency, FecVenci As Date, FecRecep As Date, ForpaPosi As Integer, ForpaNega As Integer, CtaBanco As String, LetraSerie As String) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -8156,7 +8156,7 @@ EInsertarTesoreriaAlmz:
     
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria de Almazara: " & Err.Description
+        MenError = "Error al insertar en Tesoreria de Almazara: " & Err.Description
     End If
     InsertarEnTesoreriaAlmz = B
 End Function
@@ -8787,7 +8787,7 @@ End Function
 '?????????????? POZOS
 '??????????????
 
-Public Function InsertarEnTesoreriaPOZOS(Menerror As String, ByRef RS1 As ADODB.Recordset, FecVenci As Date, Forpa As String, CtaBanco As String) As Boolean
+Public Function InsertarEnTesoreriaPOZOS(MenError As String, ByRef RS1 As ADODB.Recordset, FecVenci As Date, Forpa As String, CtaBanco As String) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -9718,7 +9718,7 @@ Dim cad As String
         B = True
         
     Else
-        Menerror = "No se ha encontrado socio " & DBLet(RS1!Codsocio, "N") & " o no tiene seccion asignada. Revise. "
+        MenError = "No se ha encontrado socio " & DBLet(RS1!Codsocio, "N") & " o no tiene seccion asignada. Revise. "
     End If
     
     
@@ -9726,7 +9726,7 @@ EInsertarTesoreriaPOZ:
     
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria de POZOS: " & Err.Description
+        MenError = "Error al insertar en Tesoreria de POZOS: " & Err.Description
     End If
     InsertarEnTesoreriaPOZOS = B
 End Function
@@ -10074,7 +10074,7 @@ EInsertar:
 End Function
 
 
-Public Function InsertarEnTesoreriaTra(cadWHERE As String, Menerror As String, numfactu As String, fecfactu As Date) As Boolean
+Public Function InsertarEnTesoreriaTra(cadWHERE As String, MenError As String, numfactu As String, fecfactu As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -10234,7 +10234,7 @@ Dim vvIban As String
 EInsertarTesoreriaTra:
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria: " & Err.Description
+        MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
     InsertarEnTesoreriaTra = B
 End Function
@@ -12599,7 +12599,7 @@ End Function
 
 
 
-Public Function InsertarEnTesoreriaNewFVAR(cadWHERE As String, CtaBan As String, FecVen As String, Menerror As String, Tipo As Byte, vSeccion As String) As Boolean
+Public Function InsertarEnTesoreriaNewFVAR(cadWHERE As String, CtaBan As String, FecVen As String, MenError As String, Tipo As Byte, vSeccion As String) As Boolean
 'Guarda datos de Tesoreria en tablas: conta.scobros
 Dim B As Boolean
 Dim SQL As String, Text33csb As String, Text41csb As String
@@ -12843,7 +12843,7 @@ Dim vSocio As cSocio
 EInsertarTesoreriaNewFac:
     If Err.Number <> 0 Then
         B = False
-        Menerror = Err.Description
+        MenError = Err.Description
     End If
     InsertarEnTesoreriaNewFVAR = B
 End Function
@@ -13466,7 +13466,7 @@ End Function
 
 
 
-Private Function InsertarEnTesoreriaNewFVARPro(cadWHERE As String, Menerror As String, CtaBanco As String, FecVenci As Date) As Boolean
+Private Function InsertarEnTesoreriaNewFVARPro(cadWHERE As String, MenError As String, CtaBanco As String, FecVenci As Date) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -13645,7 +13645,7 @@ Dim Socio As String
 EInsertarTesoreria:
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria: " & Err.Description
+        MenError = "Error al insertar en Tesoreria: " & Err.Description
     End If
     InsertarEnTesoreriaNewFVARPro = B
 End Function
@@ -13885,7 +13885,7 @@ End Function
 
 
 
-Public Function InsertarEnTesoreriaBajaCampo(cadWHERE As String, Menerror As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String, Campos As String) As Boolean
+Public Function InsertarEnTesoreriaBajaCampo(cadWHERE As String, MenError As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String, Campos As String) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -14105,7 +14105,7 @@ Dim vSoc As cSocio
 EInsertarTesoreriaSoc:
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria Baja Campo: " & Err.Description
+        MenError = "Error al insertar en Tesoreria Baja Campo: " & Err.Description
     End If
     InsertarEnTesoreriaBajaCampo = B
 End Function
@@ -14113,7 +14113,7 @@ End Function
 
 
 
-Public Function InsertarEnTesoreriaBajaSocios(Menerror As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String) As Boolean
+Public Function InsertarEnTesoreriaBajaSocios(MenError As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim SQL As String
@@ -14333,7 +14333,7 @@ Dim vSoc As cSocio
 EInsertarTesoreriaSoc:
     If Err.Number <> 0 Then
         B = False
-        Menerror = "Error al insertar en Tesoreria Baja Socios: " & Err.Description
+        MenError = "Error al insertar en Tesoreria Baja Socios: " & Err.Description
     End If
     InsertarEnTesoreriaBajaSocios = B
 End Function

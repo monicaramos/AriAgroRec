@@ -106,7 +106,7 @@ Dim ImporteH As Currency
 Dim cuenta As String
 Dim CCost As String
 Dim Rs As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 
 
 Dim ColErrores As Collection
@@ -170,15 +170,15 @@ On Error GoTo EEstablecerValoresInciales
         mvarRealizarContabilizacion = False
         ParametroContabilizacion = False
         Set Rs = New ADODB.Recordset
-        Sql = "Select * from parametros"
+        SQL = "Select * from parametros"
         Set miConexion = mConn
         
         
-        Rs.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Sql = ""
-        If Rs.EOF Then Sql = "Falta configurar parametros"
+        Rs.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+        SQL = ""
+        If Rs.EOF Then SQL = "Falta configurar parametros"
         
-        If Sql = "" Then
+        If SQL = "" Then
         
             'SI EL PARAMETRO de contabilziaccion autmatica de facturas  no esta habilitado entonces
             ' NO la contabilizo
@@ -189,15 +189,15 @@ On Error GoTo EEstablecerValoresInciales
             End If
         
             If Not ASignarConceptosFacturas Then
-                Sql = "Error al asignar los conceptos de facturas"
+                SQL = "Error al asignar los conceptos de facturas"
             Else
-                Sql = ""
+                SQL = ""
             End If
         End If
                
-        If Sql = "" Then
+        If SQL = "" Then
             'hasta ahora va todo bien
-            Sql = "Ampliacion, CC,abononeg,analitica,fechaFinEjercicio,diario facturas(cli,pro)"
+            SQL = "Ampliacion, CC,abononeg,analitica,fechaFinEjercicio,diario facturas(cli,pro)"
             AmpliacionParametros = Rs!nctafact
             CCenFacturas = DBLet(Rs!CCenFacturas, "N") = 1
             Abononeg = DBLet(Rs!Abononeg, "N") = 1
@@ -206,26 +206,26 @@ On Error GoTo EEstablecerValoresInciales
             NumgeisEnAmpliacionPRO = Rs!CodiNume = 1
             Diarios = Rs!numdiacl & "|" & Rs!numdiapr & "|"
             
-            Sql = ""
+            SQL = ""
         End If
         Rs.Close
         
-        If Sql <> "" Then
-            MsgBox Sql, vbExclamation
+        If SQL <> "" Then
+            MsgBox SQL, vbExclamation
             Exit Function
         End If
         
         
         'Cargo los niveles desde la tabla empresa
-        Sql = "numdigi1,numdigi2,numdigi3,numdigi4,numdigi5,numdigi6,numdigi7,numdigi8,numdigi9,numdigi10,numnivel"
-        Sql = "Select " & Sql & " from empresa"
-        Rs.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
-        Sql = ""
-        If Rs.EOF Then Sql = "Falta configurar empresa"
+        SQL = "numdigi1,numdigi2,numdigi3,numdigi4,numdigi5,numdigi6,numdigi7,numdigi8,numdigi9,numdigi10,numnivel"
+        SQL = "Select " & SQL & " from empresa"
+        Rs.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+        SQL = ""
+        If Rs.EOF Then SQL = "Falta configurar empresa"
         
-        If Sql = "" Then
+        If SQL = "" Then
             'Asigno niveles
-            Sql = "Datos basicos empresa en contabilidad."
+            SQL = "Datos basicos empresa en contabilidad."
             NumNiveles = Rs!numnivel
             
             'DigitosNiveles(0) = RS!numdigi1
@@ -248,14 +248,14 @@ On Error GoTo EEstablecerValoresInciales
         
         Exit Function
 EEstablecerValoresInciales:
-    MsgBox "Error estableciendo valores iniciales: " & vbCrLf & Err.Description & vbCrLf & Sql, vbExclamation
+    MsgBox "Error estableciendo valores iniciales: " & vbCrLf & Err.Description & vbCrLf & SQL, vbExclamation
 End Function
 
 Public Sub AnyadeElError(CadenaError As String)
     CadenaError = Trim(CadenaError)
     If CadenaError <> "" Then
-        Sql = mvarSerie & "|" & mvarNumeroFactura & "|" & mvarAnofac & "|" & CadenaError & "|"
-        ColErrores.Add Sql
+        SQL = mvarSerie & "|" & mvarNumeroFactura & "|" & mvarAnofac & "|" & CadenaError & "|"
+        ColErrores.Add SQL
     End If
 End Sub
 
@@ -304,25 +304,25 @@ Dim Cliente As String
     Set RF = New ADODB.Recordset
     
     If vParamAplic.ContabilidadNueva Then
-        Sql = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl,factcli.codmacta"
-        Sql = Sql & ", totfaccl ,factcli.observa confaccl  ,cuereten  , trefaccl"
-        Sql = Sql & " ,numasien,factcli.nommacta FROM factcli" ',cuentas"
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND numfactu= " & numFac
-        Sql = Sql & " AND anofactu=" & Anofac
+        SQL = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl,factcli.codmacta"
+        SQL = SQL & ", totfaccl ,factcli.observa confaccl  ,cuereten  , trefaccl"
+        SQL = SQL & " ,numasien,factcli.nommacta FROM factcli" ',cuentas"
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
 '        Sql = Sql & " AND factcli.codmacta = cuentas.codmacta"
     
     Else
-        Sql = "SELECT *,nommacta FROM cabfact,cuentas"
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND codfaccl= " & numFac
-        Sql = Sql & " AND anofaccl=" & Anofac
-        Sql = Sql & " AND cabfact.codmacta = cuentas.codmacta"
+        SQL = "SELECT *,nommacta FROM cabfact,cuentas"
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
+        SQL = SQL & " AND cabfact.codmacta = cuentas.codmacta"
     
     End If
         
     
-    RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     If RF.EOF Then
         IntegraLaFacturaCliente = "No se encuentra la factura: " & vbCrLf & A_Donde
@@ -358,13 +358,13 @@ Dim Cliente As String
     
     'Cabecera del hco de apuntes
     A_Donde = "Inserta cabecera hco apuntes"
-    Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & ",feccreacion,usucreacion,desdeaplicacion"
-    Sql = Sql & ") VALUES ("
-    Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
-    Sql = Sql & "," & DBSet(Observaciones, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
-    miConexion.Execute Sql & ")"
+    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & ",feccreacion,usucreacion,desdeaplicacion"
+    SQL = SQL & ") VALUES ("
+    SQL = SQL & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
+    SQL = SQL & "," & DBSet(Observaciones, "T", "S")
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
+    miConexion.Execute SQL & ")"
     
     'Lineas fijas, es decir la linea de cliente, importes y tal y tal
     'Para el sql
@@ -383,11 +383,11 @@ Dim Cliente As String
     
     'Guardo unos datos
     DatosRetencion = ""
-    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & RF!trefaccl & "|"
+    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & DBLet(RF!trefaccl, "N") & "|"
     
     '-------------------------------------------------------------------
     'LINEA Cliente
-    Sql = numlinea & ",'" & RF!Codmacta & "',"
+    SQL = numlinea & ",'" & RF!Codmacta & "',"
     
 
     ' en AmpliacionFacurasCli_ van:
@@ -434,7 +434,7 @@ Dim Cliente As String
     A_Donde = "Linea cliente. Ampliacion2"
     
     
-    Sql = Sql & DocConcAmp & Amplia2 & "'"
+    SQL = SQL & DocConcAmp & Amplia2 & "'"
     DocConcAmp = DocConcAmp & Cad2 & "'"   'DocConcAmp Sirve para el IVA
     
     'Esta variable sirve para las demas
@@ -443,18 +443,18 @@ Dim Cliente As String
     'Importes, atencion importes negativos
     '  antes --> Cad2 = CadenaImporte(ImporteNegativo, True, RF!totfaccl)
     Cad2 = CadenaImporte(True, RF!totfaccl, Importe0)
-    Sql = Sql & "," & Cad2 & ",NULL,"
+    SQL = SQL & "," & Cad2 & ",NULL,"
     
     'Contrpartida. 28 Marzo 2006
     If PrimeraContrapartida <> "" Then
-        Sql = Sql & "'" & PrimeraContrapartida & "'"
+        SQL = SQL & "'" & PrimeraContrapartida & "'"
     Else
-        Sql = Sql & "NULL"
+        SQL = SQL & "NULL"
     End If
-    Sql = Sql & ",'FRACLI',0)"
+    SQL = SQL & ",'FRACLI',0)"
     
     
-    miConexion.Execute cad & Sql
+    miConexion.Execute cad & SQL
     numlinea = numlinea + 1 'Es el contador de lineaapunteshco
     Cliente = RF!Codmacta
     
@@ -465,12 +465,12 @@ Dim Cliente As String
         
         'Abrimos el RF con las lineas del IVA
                 
-        Sql = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl"
-        Sql = Sql & ", baseimpo,codigiva,porciva,porcrec,impoiva,imporec  FROM factcli_totales "
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND numfactu= " & numFac
-        Sql = Sql & " AND anofactu=" & Anofac
-        RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "SELECT numserie, numfactu codfaccl, fecfactu fecfaccl"
+        SQL = SQL & ", baseimpo,codigiva,porciva,porcrec,impoiva,imporec  FROM factcli_totales "
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
+        RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RF.EOF
             
             
@@ -478,24 +478,24 @@ Dim Cliente As String
             Cad3 = "cuentarr"
             Cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!Codigiva, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = numlinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = numlinea & ",'" & Cad2 & "'," & DocConcAmp
                 Cad2 = CadenaImporte(False, RF!ImpoIva, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & Cliente & "','FRACLI',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & Cliente & "','FRACLI',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     numlinea = numlinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!ImpoREC) Then
-                         Sql = numlinea & "," & Cad3 & "," & DocConcAmp
+                         SQL = numlinea & "," & Cad3 & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(False, RF!ImpoREC, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & Cliente & "','FRACLI',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & Cliente & "','FRACLI',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             numlinea = numlinea + 1
                         End If
                 End If
@@ -515,24 +515,24 @@ Dim Cliente As String
         Cad3 = "cuentarr"
         Cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp1faccl, "N", Cad3)
         If Cad2 <> "" Then
-            Sql = numlinea & ",'" & Cad2 & "'," & DocConcAmp
+            SQL = numlinea & ",'" & Cad2 & "'," & DocConcAmp
             Cad2 = CadenaImporte(False, RF!ti1faccl, Importe0)
-            Sql = Sql & "," & Cad2 & ","
-            Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+            SQL = SQL & "," & Cad2 & ","
+            SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
             If Not Importe0 Then
-                miConexion.Execute cad & Sql
+                miConexion.Execute cad & SQL
                 numlinea = numlinea + 1
             End If
             
             'La de recargo  1-----------------
             If Not IsNull(RF!tr1faccl) Then
-                     Sql = numlinea & "," & Cad3 & "," & DocConcAmp
+                     SQL = numlinea & "," & Cad3 & "," & DocConcAmp
                     'Importes, atencion importes negativos
                     Cad2 = CadenaImporte(False, RF!tr1faccl, Importe0)
-                    Sql = Sql & "," & Cad2 & ","
-                    Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+                    SQL = SQL & "," & Cad2 & ","
+                    SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
                     If Not Importe0 Then
-                        miConexion.Execute cad & Sql
+                        miConexion.Execute cad & SQL
                         numlinea = numlinea + 1
                     End If
             End If
@@ -555,25 +555,25 @@ Dim Cliente As String
             Cad3 = "cuentarr"
             Cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp2faccl, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = numlinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = numlinea & ",'" & Cad2 & "'," & DocConcAmp
                 'Importes, atencion importes negativos
                 Cad2 = CadenaImporte(False, RF!ti2faccl, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     numlinea = numlinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!tr2faccl) Then
-                        Sql = numlinea & ",'" & Cad3 & "'," & DocConcAmp
+                        SQL = numlinea & ",'" & Cad3 & "'," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(False, RF!tr2faccl, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             numlinea = numlinea + 1
                         End If
                 End If
@@ -594,25 +594,25 @@ Dim Cliente As String
             Cad3 = "cuentarr"
             Cad2 = DevuelveDesdeBDModulo("cuentare", "tiposiva", "codigiva", RF!tp3faccl, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = numlinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = numlinea & ",'" & Cad2 & "'," & DocConcAmp
                 'Importes, atencion importes negativos
                 Cad2 = CadenaImporte(False, RF!ti3faccl, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     numlinea = numlinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!tr3faccl) Then
-                         Sql = numlinea & ",'" & Cad3 & "'," & DocConcAmp
+                         SQL = numlinea & ",'" & Cad3 & "'," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(False, RF!tr3faccl, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRACLI',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             numlinea = numlinea + 1
                         End If
                 End If
@@ -636,13 +636,13 @@ Dim Cliente As String
     
     If DatosRetencion <> "" Then
         
-        Sql = numlinea & ",'" & RecuperaValor(DatosRetencion, 1) & "'," & DocConcAmp
+        SQL = numlinea & ",'" & RecuperaValor(DatosRetencion, 1) & "'," & DocConcAmp
         'Importes, atencion importes negativos
         Cad2 = CadenaImporte(True, RecuperaValor(DatosRetencion, 2), Importe0)
-        Sql = Sql & "," & Cad2 & ","
-        Sql = Sql & "NULL,NULL,'FRACLI',0)"
+        SQL = SQL & "," & Cad2 & ","
+        SQL = SQL & "NULL,NULL,'FRACLI',0)"
        
-        miConexion.Execute cad & Sql
+        miConexion.Execute cad & SQL
         numlinea = numlinea + 1 'Es el contador de lineaapunteshco
     End If
     
@@ -654,37 +654,37 @@ Dim Cliente As String
     
     
     If vParamAplic.ContabilidadNueva Then
-        Sql = "SELECT codmacta codtbase, baseimpo impbascl,codccost  FROM factcli_lineas "
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND numfactu= " & numFac
-        Sql = Sql & " AND anofactu=" & Anofac
+        SQL = "SELECT codmacta codtbase, baseimpo impbascl,codccost  FROM factcli_lineas "
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
         
     Else
-        Sql = "Select linfact.* , codmacta FROM linfact,Cuentas "
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND codfaccl= " & numFac
-        Sql = Sql & " AND anofaccl=" & Anofac
-        Sql = Sql & " AND linfact.codtbase = Cuentas.codmacta"
+        SQL = "Select linfact.* , codmacta FROM linfact,Cuentas "
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
+        SQL = SQL & " AND linfact.codtbase = Cuentas.codmacta"
     End If
-    RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     'Para cada linea insertamos
     Cad2 = ""
     A_Donde = "Procesando lineas"
     While Not RF.EOF
         'Importes, atencion importes negativos
         If Cad2 = "" Then PrimeraContrapartida = RF!codtbase
-        Sql = numlinea & ",'" & RF!codtbase & "'," & DocConcAmp
+        SQL = numlinea & ",'" & RF!codtbase & "'," & DocConcAmp
         Cad2 = CadenaImporte(False, RF!impbascl, Importe0)
-        Sql = Sql & "," & Cad2 & ","
+        SQL = SQL & "," & Cad2 & ","
         If IsNull(RF!CodCCost) Then
             Cad2 = "NULL"
         Else
             Cad2 = "'" & RF!CodCCost & "'"
         End If
         
-        Sql = Sql & Cad2 & ",'" & Cliente & "','FRACLI',0)"
+        SQL = SQL & Cad2 & ",'" & Cliente & "','FRACLI',0)"
     
-        miConexion.Execute cad & Sql
+        miConexion.Execute cad & SQL
         numlinea = numlinea + 1 'Es el contador de lineaapunteshco
         
 
@@ -700,10 +700,10 @@ Dim Cliente As String
     'Si el valor fuera true YA lo habria insertado en la cabcera
     If CCenFacturas Then
         If PrimeraContrapartida <> "" Then
-            Sql = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
-            Sql = Sql & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
-            Sql = Sql & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
-            miConexion.Execute Sql  '
+            SQL = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
+            SQL = SQL & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
+            SQL = SQL & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
+            miConexion.Execute SQL  '
         End If
     End If
         
@@ -712,17 +712,17 @@ Dim Cliente As String
     
     'Actualimos en factura, el nº de asiento
     If vParamAplic.ContabilidadNueva Then
-        Sql = "UPDATE factcli SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND numfactu= " & numFac
-        Sql = Sql & " AND anofactu=" & Anofac
+        SQL = "UPDATE factcli SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND numfactu= " & numFac
+        SQL = SQL & " AND anofactu=" & Anofac
     Else
-        Sql = "UPDATE cabfact SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND codfaccl= " & numFac
-        Sql = Sql & " AND anofaccl=" & Anofac
+        SQL = "UPDATE cabfact SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
     End If
-    miConexion.Execute Sql
+    miConexion.Execute SQL
     
     'Para los saldos ponemos el numero de asiento donde toca
     If Not vParamAplic.ContabilidadNueva Then
@@ -733,7 +733,7 @@ Dim Cliente As String
     
     Exit Function
 EIntegraLaFactura:
-    IntegraLaFacturaCliente = A_Donde & vbCrLf & Err.Description & vbCrLf & Sql
+    IntegraLaFacturaCliente = A_Donde & vbCrLf & Err.Description & vbCrLf & SQL
     Set RF = Nothing
 End Function
 
@@ -790,18 +790,18 @@ Dim Importe As Currency
     
     'Cabecera del hco de apuntes
     A_Donde = "Inserta cabecera hco apuntes"
-    Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & ",feccreacion,usucreacion,desdeaplicacion"
-    Sql = Sql & ") VALUES ("
+    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & ",feccreacion,usucreacion,desdeaplicacion"
+    SQL = SQL & ") VALUES ("
     'Ant 17/OCT/2005
     'SQL = SQL & vParam.numdiacl & ",'" & Fecha & "'," & NumAsiento
-    Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
+    SQL = SQL & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
     cad = Observaciones & vbCrLf & "Factura interna: " & Format(RCab!numfactu, "00000") & " - " & RCab!fecfactu
-    Sql = Sql & "," & DBSet(cad, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
-    Sql = Sql & ")"
+    SQL = SQL & "," & DBSet(cad, "T", "S")
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
+    SQL = SQL & ")"
     cad = ""
-    miConexion.Execute Sql
+    miConexion.Execute SQL
     
     'Lineas fijas, es decir la linea de cliente, importes y tal y tal
     'Para el sql
@@ -816,7 +816,7 @@ Dim Importe As Currency
     A_Donde = "Linea cliente"
     '-------------------------------------------------------------------
     'LINEA Cliente
-    Sql = numlinea & ",'" & RCab!Codmacta & "',"
+    SQL = numlinea & ",'" & RCab!Codmacta & "',"
     
 
     ' en AmpliacionFacurasCli_ van:
@@ -866,7 +866,7 @@ Dim Importe As Currency
     A_Donde = "Linea cliente. Ampliacion2"
     
     
-    Sql = Sql & DocConcAmp & Amplia2 & "'"
+    SQL = SQL & DocConcAmp & Amplia2 & "'"
     DocConcAmp = DocConcAmp & Cad2 & "'"   'DocConcAmp Sirve para el IVA
     
     'Esta variable sirve para las demas
@@ -875,18 +875,18 @@ Dim Importe As Currency
     'Importes, atencion importes negativos
     '  antes --> Cad2 = CadenaImporte(ImporteNegativo, True, RF!totfaccl)
     Cad2 = CadenaImporte(True, RCab!TotalFac, Importe0)
-    Sql = Sql & "," & Cad2 & ",NULL,"
+    SQL = SQL & "," & Cad2 & ",NULL,"
     
     'Contrpartida. 28 Marzo 2006
     If PrimeraContrapartida <> "" Then
-        Sql = Sql & "'" & PrimeraContrapartida & "'"
+        SQL = SQL & "'" & PrimeraContrapartida & "'"
     Else
-        Sql = Sql & "NULL"
+        SQL = SQL & "NULL"
     End If
-    Sql = Sql & ",'CONTAB',0)"
+    SQL = SQL & ",'CONTAB',0)"
     
     
-    miConexion.Execute cad & Sql
+    miConexion.Execute cad & SQL
     numlinea = numlinea + 1 'Es el contador de lineaapunteshco
     
     
@@ -917,18 +917,18 @@ Dim Importe As Currency
     While Not RLin.EOF
         'Importes, atencion importes negativos
         If Cad2 = "" Then PrimeraContrapartida = RLin!cuenta
-        Sql = numlinea & ",'" & RLin!cuenta & "'," & DocConcAmp
+        SQL = numlinea & ",'" & RLin!cuenta & "'," & DocConcAmp
         Cad2 = CadenaImporte(False, RLin!Importe, Importe0)
-        Sql = Sql & "," & Cad2 & ","
+        SQL = SQL & "," & Cad2 & ","
         Cad2 = "NULL"
         'Llevara CC
         If RLin.Fields.Count > 6 Then
             If Not IsNull(RLin!CodCCost) Then Cad2 = "'" & RLin!CodCCost & "'"
         End If
         
-        Sql = Sql & Cad2 & ",'" & cuenta & "','contab',0)"
+        SQL = SQL & Cad2 & ",'" & cuenta & "','contab',0)"
     
-        miConexion.Execute cad & Sql
+        miConexion.Execute cad & SQL
         numlinea = numlinea + 1 'Es el contador de lineaapunteshco
         
 
@@ -944,10 +944,10 @@ Dim Importe As Currency
     'Si el valor fuera true YA lo habria insertado en la cabcera
     If numlinea = 3 Then
         If PrimeraContrapartida <> "" Then
-            Sql = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
-            Sql = Sql & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
-            Sql = Sql & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
-            miConexion.Execute Sql  '
+            SQL = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
+            SQL = SQL & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
+            SQL = SQL & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
+            miConexion.Execute SQL  '
         End If
     End If
         
@@ -964,7 +964,7 @@ Dim Importe As Currency
     
     Exit Function
 eIntegraLaFacturaClienteINTERNA:
-    IntegraLaFacturaClienteINTERNA = A_Donde & vbCrLf & Err.Description & vbCrLf & Sql
+    IntegraLaFacturaClienteINTERNA = A_Donde & vbCrLf & Err.Description & vbCrLf & SQL
 End Function
 
 
@@ -1026,22 +1026,22 @@ Dim NoSumaIVA As Boolean
     
     
     If vParamAplic.ContabilidadNueva Then
-        Sql = "SELECT numserie, numfactu numfacpr, fecfactu fecfacpr,factpro.codmacta,fecharec fecrecpr,"
-        Sql = Sql & " totfacpr ,factpro.observa confacpr,cuereten  , trefacpr ,numasien,factpro.nommacta,codopera"
-        Sql = Sql & " FROM factpro" ',cuentas "
-        Sql = Sql & " WHERE numserie='" & Serie
-        Sql = Sql & "' AND numregis= " & NumRegis
-        Sql = Sql & " AND anofactu=" & Anofac
+        SQL = "SELECT numserie, numfactu numfacpr, fecfactu fecfacpr,factpro.codmacta,fecharec fecrecpr,"
+        SQL = SQL & " totfacpr ,factpro.observa confacpr,cuereten  , trefacpr ,numasien,factpro.nommacta,codopera"
+        SQL = SQL & " FROM factpro" ',cuentas "
+        SQL = SQL & " WHERE numserie='" & Serie
+        SQL = SQL & "' AND numregis= " & NumRegis
+        SQL = SQL & " AND anofactu=" & Anofac
 '        Sql = Sql & " AND factpro.codmacta = cuentas.codmacta"
     
     Else
     
-        Sql = "SELECT *,nommacta FROM cabfactprov,cuentas"
-        Sql = Sql & " WHERE numregis = " & NumRegis
-        Sql = Sql & " AND anofacpr=" & Anofac
-        Sql = Sql & " AND cabfactprov.codmacta = cuentas.codmacta"
+        SQL = "SELECT *,nommacta FROM cabfactprov,cuentas"
+        SQL = SQL & " WHERE numregis = " & NumRegis
+        SQL = SQL & " AND anofacpr=" & Anofac
+        SQL = SQL & " AND cabfactprov.codmacta = cuentas.codmacta"
     End If
-    RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     If RF.EOF Then
         IntegraLaFacturaProv = "No se encuentra la factura: " & A_Donde
         RF.Close
@@ -1074,14 +1074,14 @@ Dim NoSumaIVA As Boolean
     
     'Cabecera del hco de apuntes
     A_Donde = "Inserta cabecera hco apuntes"
-    Sql = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & ",feccreacion,usucreacion,desdeaplicacion"
-    Sql = Sql & ") VALUES ("
-    Sql = Sql & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
-    Sql = Sql & "," & DBSet(Observaciones, "T", "S")
-    If vParamAplic.ContabilidadNueva Then Sql = Sql & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
-    Sql = Sql & ")"
-    miConexion.Execute Sql
+    SQL = "INSERT INTO hcabapu (numdiari, fechaent, numasien, obsdiari"
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & ",feccreacion,usucreacion,desdeaplicacion"
+    SQL = SQL & ") VALUES ("
+    SQL = SQL & DiarioFacturas & ",'" & Format(FechaAsi, FormatoFecha) & "'," & Numasiento
+    SQL = SQL & "," & DBSet(Observaciones, "T", "S")
+    If vParamAplic.ContabilidadNueva Then SQL = SQL & "," & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & ",'ARIAGRO RECOLECCION'"
+    SQL = SQL & ")"
+    miConexion.Execute SQL
     
     
     If vParamAplic.ContabilidadNueva Then
@@ -1109,7 +1109,7 @@ Dim NoSumaIVA As Boolean
     A_Donde = "Linea proveedor"
     '-------------------------------------------------------------------
     'LINEA Proveedor
-    Sql = contLinea & ",'" & RF!Codmacta & "',"
+    SQL = contLinea & ",'" & RF!Codmacta & "',"
     
     
     'Documento "numdocum"
@@ -1164,32 +1164,32 @@ Dim NoSumaIVA As Boolean
     A_Donde = "Linea cliente"
     
     
-    Sql = Sql & DocConcAmp & Amplia2 & "'"
+    SQL = SQL & DocConcAmp & Amplia2 & "'"
     DocConcAmp = DocConcAmp & Cad2 & "'"   'DocConcAmp Sirve para el IVA
     
     
     'Importes, atencion importes negativos
     Cad2 = CadenaImporte(False, RF!totfacpr, Importe0)
-    Sql = Sql & "," & Cad2 & ",NULL,"
+    SQL = SQL & "," & Cad2 & ",NULL,"
     
     'Contrpartida. 28 Marzo 2006
     If PrimeraContrapartida <> "" Then
-        Sql = Sql & "'" & PrimeraContrapartida & "'"
+        SQL = SQL & "'" & PrimeraContrapartida & "'"
     Else
-        Sql = Sql & "NULL"
+        SQL = SQL & "NULL"
     End If
-    Sql = Sql & ",'FRAPRO',0)"
+    SQL = SQL & ",'FRAPRO',0)"
     
-    miConexion.Execute cad & Sql
+    miConexion.Execute cad & SQL
     contLinea = contLinea + 1 'Es el contador de lineaapunteshco
     
     
     DatosRetencion = ""
-    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & RF!trefacpr & "|"
+    If Not IsNull(RF!cuereten) Then DatosRetencion = RF!cuereten & "|" & DBLet(RF!trefacpr, "N") & "|"
     
     '-------------------------------------------------------------------
     'LINEA Cliente
-    Sql = contLinea & ",'" & RF!Codmacta & "',"
+    SQL = contLinea & ",'" & RF!Codmacta & "',"
     
     
     
@@ -1218,12 +1218,12 @@ Dim NoSumaIVA As Boolean
         
         'Abrimos el RF con las lineas del IVA
                 
-        Sql = "SELECT numserie, numregis , fecharec fecfactu , baseimpo,codigiva,porciva, "
-        Sql = Sql & "porcrec,impoiva,imporec  FROM factPRO_totales "
-        Sql = Sql & " WHERE numserie='" & Serie
-        Sql = Sql & "' AND NUMREGIS= " & NumRegis
-        Sql = Sql & " AND anofactu=" & Anofac
-        RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+        SQL = "SELECT numserie, numregis , fecharec fecfactu , baseimpo,codigiva,porciva, "
+        SQL = SQL & "porcrec,impoiva,imporec  FROM factPRO_totales "
+        SQL = SQL & " WHERE numserie='" & Serie
+        SQL = SQL & "' AND NUMREGIS= " & NumRegis
+        SQL = SQL & " AND anofactu=" & Anofac
+        RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
         While Not RF.EOF
             
             
@@ -1231,24 +1231,24 @@ Dim NoSumaIVA As Boolean
             Cad3 = "cuentasr"
             Cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!Codigiva, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = contLinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = contLinea & ",'" & Cad2 & "'," & DocConcAmp
                 Cad2 = CadenaImporte(True, RF!ImpoIva, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & cuenta & "','FRAPRO',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & cuenta & "','FRAPRO',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     contLinea = contLinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!ImpoREC) Then
-                         Sql = contLinea & "," & Cad3 & "," & DocConcAmp
+                         SQL = contLinea & "," & Cad3 & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(True, RF!ImpoREC, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & cuenta & "','FRAPRO',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & cuenta & "','FRAPRO',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             contLinea = contLinea + 1
                         End If
                 End If
@@ -1270,24 +1270,24 @@ Dim NoSumaIVA As Boolean
         Cad3 = "cuentasr"
         Cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!tp1facpr, "N", Cad3)
         If Cad2 <> "" Then
-            Sql = contLinea & ",'" & Cad2 & "'," & DocConcAmp
+            SQL = contLinea & ",'" & Cad2 & "'," & DocConcAmp
             Cad2 = CadenaImporte(True, RF!ti1facpr, Importe0)
-            Sql = Sql & "," & Cad2 & ","
-            Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+            SQL = SQL & "," & Cad2 & ","
+            SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
             If Not Importe0 Then
-                miConexion.Execute cad & Sql
+                miConexion.Execute cad & SQL
                 contLinea = contLinea + 1
             End If
             
             'La de recargo  1-----------------
             If Not IsNull(RF!tr1facpr) Then
-                     Sql = contLinea & "," & Cad3 & "," & DocConcAmp
+                     SQL = contLinea & "," & Cad3 & "," & DocConcAmp
                     'Importes, atencion importes negativos
                     Cad2 = CadenaImporte(True, RF!tr1facpr, Importe0)
-                    Sql = Sql & "," & Cad2 & ","
-                    Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                    SQL = SQL & "," & Cad2 & ","
+                    SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                     If Not Importe0 Then
-                        miConexion.Execute cad & Sql
+                        miConexion.Execute cad & SQL
                         contLinea = contLinea + 1
                     End If
             End If
@@ -1303,23 +1303,23 @@ Dim NoSumaIVA As Boolean
                 Cad3 = Cad2 & "|" & Cad3 & "|"
                 
                 
-                Sql = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
+                SQL = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
                 Cad2 = CadenaImporte(False, RF!ti1facpr, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     contLinea = contLinea + 1
                 End If
                
                 If Not IsNull(RF!tr1facpr) Then
-                     Sql = contLinea & "," & RecuperaValor(Cad3, 2) & "," & DocConcAmp
+                     SQL = contLinea & "," & RecuperaValor(Cad3, 2) & "," & DocConcAmp
                     'Importes, atencion importes negativos
                     Cad2 = CadenaImporte(False, RF!tr1facpr, Importe0)
-                    Sql = Sql & "," & Cad2 & ","
-                    Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                    SQL = SQL & "," & Cad2 & ","
+                    SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                     If Not Importe0 Then
-                        miConexion.Execute cad & Sql
+                        miConexion.Execute cad & SQL
                         contLinea = contLinea + 1
                     End If
                 End If
@@ -1346,25 +1346,25 @@ Dim NoSumaIVA As Boolean
             Cad3 = "cuentasr"
             Cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!tp2facpr, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = contLinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = contLinea & ",'" & Cad2 & "'," & DocConcAmp
                 'Importes, atencion importes negativos
                 Cad2 = CadenaImporte(True, RF!ti2facpr, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     contLinea = contLinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!tr2facpr) Then
-                         Sql = contLinea & "," & Cad3 & "," & DocConcAmp
+                         SQL = contLinea & "," & Cad3 & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(True, RF!tr2facpr, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             contLinea = contLinea + 1
                         End If
                 End If
@@ -1380,23 +1380,23 @@ Dim NoSumaIVA As Boolean
                     Cad3 = Cad2 & "|" & Cad3 & "|"
                     
                     
-                    Sql = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
+                    SQL = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
                     Cad2 = CadenaImporte(False, RF!ti2facpr, Importe0)
-                    Sql = Sql & "," & Cad2 & ","
-                    Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                    SQL = SQL & "," & Cad2 & ","
+                    SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                     If Not Importe0 Then
-                        miConexion.Execute cad & Sql
+                        miConexion.Execute cad & SQL
                         contLinea = contLinea + 1
                     End If
                    
                     If Not IsNull(RF!tr2facpr) Then
-                         Sql = contLinea & "," & RecuperaValor(Cad3, 1) & "," & DocConcAmp
+                         SQL = contLinea & "," & RecuperaValor(Cad3, 1) & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(False, RF!tr2facpr, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             contLinea = contLinea + 1
                         End If
                     End If
@@ -1422,25 +1422,25 @@ Dim NoSumaIVA As Boolean
             Cad3 = "cuentasr"
             Cad2 = DevuelveDesdeBDModulo(ColumnaIVA, "tiposiva", "codigiva", RF!tp3facpr, "N", Cad3)
             If Cad2 <> "" Then
-                Sql = contLinea & ",'" & Cad2 & "'," & DocConcAmp
+                SQL = contLinea & ",'" & Cad2 & "'," & DocConcAmp
                 'Importes, atencion importes negativos
                 Cad2 = CadenaImporte(True, RF!ti3facpr, Importe0)
-                Sql = Sql & "," & Cad2 & ","
-                Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                SQL = SQL & "," & Cad2 & ","
+                SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                 If Not Importe0 Then
-                    miConexion.Execute cad & Sql
+                    miConexion.Execute cad & SQL
                     contLinea = contLinea + 1
                 End If
                 
                 'La de recargo  1-----------------
                 If Not IsNull(RF!tr3facpr) Then
-                         Sql = contLinea & "," & Cad3 & "," & DocConcAmp
+                         SQL = contLinea & "," & Cad3 & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(True, RF!tr3facpr, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             contLinea = contLinea + 1
                         End If
                 End If
@@ -1455,23 +1455,23 @@ Dim NoSumaIVA As Boolean
                     Cad3 = Cad2 & "|" & Cad3 & "|"
                     
                     
-                    Sql = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
+                    SQL = contLinea & ",'" & RecuperaValor(Cad3, 1) & "'," & DocConcAmp
                     Cad2 = CadenaImporte(False, RF!ti3facpr, Importe0)
-                    Sql = Sql & "," & Cad2 & ","
-                    Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                    SQL = SQL & "," & Cad2 & ","
+                    SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                     If Not Importe0 Then
-                        miConexion.Execute cad & Sql
+                        miConexion.Execute cad & SQL
                         contLinea = contLinea + 1
                     End If
                    
                     If Not IsNull(RF!tr3facpr) Then
-                         Sql = contLinea & "," & RecuperaValor(Cad3, 1) & "," & DocConcAmp
+                         SQL = contLinea & "," & RecuperaValor(Cad3, 1) & "," & DocConcAmp
                         'Importes, atencion importes negativos
                         Cad2 = CadenaImporte(False, RF!tr3facpr, Importe0)
-                        Sql = Sql & "," & Cad2 & ","
-                        Sql = Sql & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
+                        SQL = SQL & "," & Cad2 & ","
+                        SQL = SQL & "NULL,'" & RF!Codmacta & "','FRAPRO',0)"
                         If Not Importe0 Then
-                            miConexion.Execute cad & Sql
+                            miConexion.Execute cad & SQL
                             contLinea = contLinea + 1
                         End If
                     End If
@@ -1495,13 +1495,13 @@ Dim NoSumaIVA As Boolean
     ' RETENCION
     A_Donde = "Retencion"
     If DatosRetencion <> "" Then
-        Sql = contLinea & ",'" & RecuperaValor(DatosRetencion, 1) & "'," & DocConcAmp
+        SQL = contLinea & ",'" & RecuperaValor(DatosRetencion, 1) & "'," & DocConcAmp
         'Importes, atencion importes negativos
         Cad2 = CadenaImporte(False, CCur(RecuperaValor(DatosRetencion, 2)), Importe0)
-        Sql = Sql & "," & Cad2 & ","
-        Sql = Sql & "NULL,NULL,'FRAPRO',0)"
+        SQL = SQL & "," & Cad2 & ","
+        SQL = SQL & "NULL,NULL,'FRAPRO',0)"
        
-        miConexion.Execute cad & Sql
+        miConexion.Execute cad & SQL
         contLinea = contLinea + 1 'Es el contador de lineaapunteshco
     End If
     
@@ -1516,36 +1516,36 @@ Dim NoSumaIVA As Boolean
     A_Donde = "Leyendo lineas factura"
     
     If vParamAplic.ContabilidadNueva Then
-        Sql = "Select factpro_lineas.codmacta codtbase,baseimpo impbaspr,codccost ,cuentas.codmacta"
-        Sql = Sql & " FROM  factpro_lineas,cuentas WHERE  numserie='" & Serie
-        Sql = Sql & "' AND   numregis= " & NumRegis & " AND anofactu=" & Anofac
-        Sql = Sql & " AND  factpro_lineas.codmacta = Cuentas.codmacta"
+        SQL = "Select factpro_lineas.codmacta codtbase,baseimpo impbaspr,codccost ,cuentas.codmacta"
+        SQL = SQL & " FROM  factpro_lineas,cuentas WHERE  numserie='" & Serie
+        SQL = SQL & "' AND   numregis= " & NumRegis & " AND anofactu=" & Anofac
+        SQL = SQL & " AND  factpro_lineas.codmacta = Cuentas.codmacta"
     Else
-        Sql = "Select linfactprov.* , codmacta FROM linfactprov,Cuentas WHERE "
-        Sql = Sql & "  numregis= " & NumRegis & " AND anofacpr=" & Anofac
-        Sql = Sql & " AND  linfactprov.codtbase = Cuentas.codmacta"
+        SQL = "Select linfactprov.* , codmacta FROM linfactprov,Cuentas WHERE "
+        SQL = SQL & "  numregis= " & NumRegis & " AND anofacpr=" & Anofac
+        SQL = SQL & " AND  linfactprov.codtbase = Cuentas.codmacta"
     End If
  
     
-    RF.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RF.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     'Para cada linea insertamos
     A_Donde = "Procesando lineas"
     Cad2 = ""
     While Not RF.EOF
         'Importes, atencion importes negativos
         If Cad2 = "" Then PrimeraContrapartida = RF!codtbase
-        Sql = contLinea & ",'" & RF!codtbase & "'," & DocConcAmp
+        SQL = contLinea & ",'" & RF!codtbase & "'," & DocConcAmp
         Cad2 = CadenaImporte(True, RF!impbaspr, Importe0)
-        Sql = Sql & "," & Cad2 & ","
+        SQL = SQL & "," & Cad2 & ","
         If IsNull(RF!CodCCost) Then
             Cad2 = "NULL"
         Else
             Cad2 = "'" & RF!CodCCost & "'"
         End If
         
-        Sql = Sql & Cad2 & ",'" & cuenta & "','FRAPRO',0)"
+        SQL = SQL & Cad2 & ",'" & cuenta & "','FRAPRO',0)"
     
-        miConexion.Execute cad & Sql
+        miConexion.Execute cad & SQL
         contLinea = contLinea + 1 'Es el contador de lineaapunteshco
         
         RF.MoveNext
@@ -1559,31 +1559,31 @@ Dim NoSumaIVA As Boolean
     A_Donde = "Grabando CC en factura"
     If Not CCenFacturas Then
         If PrimeraContrapartida <> "" Then
-            Sql = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
-            Sql = Sql & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
-            Sql = Sql & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
-            miConexion.Execute Sql  'Lo hacemos aqui para controlar el error y que no explote
+            SQL = "UPDATE hlinapu SET ctacontr ='" & PrimeraContrapartida & "'"
+            SQL = SQL & " WHERE numdiari = " & DiarioFacturas & " AND fechaent ='" & Format(FechaAsi, FormatoFecha) & "' and numasien = " & Numasiento
+            SQL = SQL & " AND linliapu =1 " 'LA PRIMERA LINEA SIEMPRE ES LA DE LA CUENTA
+            miConexion.Execute SQL  'Lo hacemos aqui para controlar el error y que no explote
         End If
     End If
     
     'Actualimos en factura, el nº de asiento
-    Sql = "UPDATE " & IIf(vParamAplic.ContabilidadNueva, "factpro", "cabfactprov")
-    Sql = Sql & " SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento & " WHERE "
+    SQL = "UPDATE " & IIf(vParamAplic.ContabilidadNueva, "factpro", "cabfactprov")
+    SQL = SQL & " SET numdiari = " & DiarioFacturas & ", fechaent = '" & Format(FechaAsi, FormatoFecha) & "', numasien =" & Numasiento & " WHERE "
     Cad2 = "anofacpr"
     If vParamAplic.ContabilidadNueva Then
-        Sql = Sql & " numserie='" & Serie & "' AND "
+        SQL = SQL & " numserie='" & Serie & "' AND "
         Cad2 = "anofactu"
     End If
-    Sql = Sql & " numregis = " & NumRegis
-    Sql = Sql & " AND " & Cad2 & "=" & Anofac
+    SQL = SQL & " numregis = " & NumRegis
+    SQL = SQL & " AND " & Cad2 & "=" & Anofac
    
-    miConexion.Execute Sql
+    miConexion.Execute SQL
     
     
     
     'MAYO 2011   Guarda tb el asiento en el que esta
-    Sql = "UPDATE tmpinformes set importeb5 = " & Numasiento & " WHERE codusu = " & vUsu.Codigo & " AND codigo1=" & NumRegis
-    ejecutar Sql, True 'Me da lo mismo que de error
+    SQL = "UPDATE tmpinformes set importeb5 = " & Numasiento & " WHERE codusu = " & vUsu.Codigo & " AND codigo1=" & NumRegis
+    ejecutar SQL, True 'Me da lo mismo que de error
     
     
     'Actualizaremos los saldos
@@ -1599,7 +1599,7 @@ Dim NoSumaIVA As Boolean
     
     Exit Function
 EIntegraLaFactura2:
-    IntegraLaFacturaProv = A_Donde & vbCrLf & Err.Description & vbCrLf & Sql
+    IntegraLaFacturaProv = A_Donde & vbCrLf & Err.Description & vbCrLf & SQL
     
     
 End Function
@@ -1620,27 +1620,27 @@ End Function
 'Funciones necesarias
 Private Function DevuelveCentroCosteFactura(Cliente As Boolean, LaPrimeraContrapartida As String, numFac As Long, Anofac As Integer, numserie As String) As String
 Dim r As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
     DevuelveCentroCosteFactura = ""
     If Cliente Then
-        Sql = "SELECT codccost,numlinea,codtbase FROM linfact"
-        Sql = Sql & " WHERE numserie='" & numserie
-        Sql = Sql & "' AND codfaccl= " & numFac
-        Sql = Sql & " AND anofaccl=" & Anofac
-        Sql = Sql & " AND not (codccost is null)"   'El primero k devuelva
-        Sql = Sql & " ORDER BY numlinea"
+        SQL = "SELECT codccost,numlinea,codtbase FROM linfact"
+        SQL = SQL & " WHERE numserie='" & numserie
+        SQL = SQL & "' AND codfaccl= " & numFac
+        SQL = SQL & " AND anofaccl=" & Anofac
+        SQL = SQL & " AND not (codccost is null)"   'El primero k devuelva
+        SQL = SQL & " ORDER BY numlinea"
     Else
         
-        Sql = "SELECT codccost,numlinea,codtbase FROM linfactprov"
-        Sql = Sql & " WHERE numregis = " & numFac
-        Sql = Sql & " AND anofacpr=" & Anofac
-        Sql = Sql & " AND not (codccost is null)"   'El primero k devuelva
-        Sql = Sql & " ORDER BY numlinea"
+        SQL = "SELECT codccost,numlinea,codtbase FROM linfactprov"
+        SQL = SQL & " WHERE numregis = " & numFac
+        SQL = SQL & " AND anofacpr=" & Anofac
+        SQL = SQL & " AND not (codccost is null)"   'El primero k devuelva
+        SQL = SQL & " ORDER BY numlinea"
     End If
     
     
     Set r = New ADODB.Recordset
-    r.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+    r.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not r.EOF Then
         If Not IsNull(r.Fields(0)) Then DevuelveCentroCosteFactura = r.Fields(0)
         LaPrimeraContrapartida = r!codtbase
@@ -1689,10 +1689,10 @@ Dim f1 As Date
     On Error GoTo Err1
     'Abrimos bloqueando
     ConseguirContador = 0 'ERROR
-    Sql = "Select * from contadores WHERE TipoRegi = '0' FOR UPDATE"
+    SQL = "Select * from contadores WHERE TipoRegi = '0' FOR UPDATE"
     c1 = 0
     Set RT = New ADODB.Recordset
-    RT.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RT.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Not RT.EOF Then
         If EjercicioActual Then
             c1 = RT!Contado1
@@ -1711,48 +1711,48 @@ Dim f1 As Date
 
     
 
-        Sql = "Select numasien from hcabapu where numasien = " & c1
+        SQL = "Select numasien from hcabapu where numasien = " & c1
         
         'Las fechas
         If EjercicioActual Then
             f1 = DateAdd("yyyy", -1, FechaFinEjercicio)
-            Sql = Sql & " AND fechaent > " & DBSet(f1, "F") 'Mayor estricto
-            Sql = Sql & " AND fechaent <= " & DBSet(FechaFinEjercicio, "F")
+            SQL = SQL & " AND fechaent > " & DBSet(f1, "F") 'Mayor estricto
+            SQL = SQL & " AND fechaent <= " & DBSet(FechaFinEjercicio, "F")
         Else
             f1 = DateAdd("yyyy", 1, FechaFinEjercicio)
-            Sql = Sql & " AND fechaent > " & DBSet(DateAdd("yyyy", 1, FechaFinEjercicio), "F")
-            Sql = Sql & " AND fechaent <= " & DBSet(DateAdd("yyyy", 1, f1), "F")
+            SQL = SQL & " AND fechaent > " & DBSet(DateAdd("yyyy", 1, FechaFinEjercicio), "F")
+            SQL = SQL & " AND fechaent <= " & DBSet(DateAdd("yyyy", 1, f1), "F")
         End If
 
         
-        RT.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RT.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
         If RT.EOF Then
             'OK. Todo bien
         Else
             
             'Error. Saldremos con el error
             PosibleError = "Ya existe el asiento: " & c1 & "    No se ha podido contabilizar desde el registro de facturas"
-            Sql = ""
+            SQL = ""
         End If
         RT.Close
     
     
-    If Sql = "" Then
+    If SQL = "" Then
         'Ha habido un error . Ya exise asiento
         c1 = 0
         Exit Function
     End If
     
     'Actualizamos el contador
-    Sql = "UPDATE contadores set "
+    SQL = "UPDATE contadores set "
     If EjercicioActual Then
-        Sql = Sql & " contado1="
+        SQL = SQL & " contado1="
     Else
-        Sql = Sql & " contado2="
+        SQL = SQL & " contado2="
     End If
-    Sql = Sql & c1
-    Sql = Sql & " WHERE TipoRegi = '0'"
-    miConexion.Execute Sql
+    SQL = SQL & c1
+    SQL = SQL & " WHERE TipoRegi = '0'"
+    miConexion.Execute SQL
     
     ConseguirContador = c1
     
@@ -1783,16 +1783,16 @@ Private Function CalcularLineasYSaldosFacturas(Integrar As Boolean) As String
     
     '------------------------------------------
     'SALDOS
-    Sql = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta"
-    Sql = Sql & " From hlinapu"
-    Sql = Sql & " WHERE (((hlinapu.numdiari)= " & DiarioFacturas
-    Sql = Sql & ") AND ((hlinapu.fechaent)='" & Format(FechaAsi, FormatoFecha) & "'"
-    Sql = Sql & ") AND ((hlinapu.numasien)=" & Numasiento
-    Sql = Sql & "));"
+    SQL = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta"
+    SQL = SQL & " From hlinapu"
+    SQL = SQL & " WHERE (((hlinapu.numdiari)= " & DiarioFacturas
+    SQL = SQL & ") AND ((hlinapu.fechaent)='" & Format(FechaAsi, FormatoFecha) & "'"
+    SQL = SQL & ") AND ((hlinapu.numasien)=" & Numasiento
+    SQL = SQL & "));"
     
    
     Set RL = New ADODB.Recordset
-    RL.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RL.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RL.EOF
         cuenta = RL!Codmacta
         If IsNull(RL!sD) Then
@@ -1835,14 +1835,14 @@ Private Function CalcularLineasYSaldosFacturas(Integrar As Boolean) As String
     
     '------------------------------------------
     '       ANALITICA
-    Sql = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta,"
-    Sql = Sql & " hlinapu.fechaent, hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost,idsubcos"
-    Sql = Sql & " From hlinapu,cabccost WHERE cabccost.codccost=hlinapu.codccost"
-    Sql = Sql & " AND hlinapu.numdiari =" & DiarioFacturas
-    Sql = Sql & " AND hlinapu.fechaent='" & FechaAsi & "'"
-    Sql = Sql & " AND hlinapu.numasien=" & Numasiento
-    Sql = Sql & " AND hlinapu.codccost Is Not Null;"
-    RL.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    SQL = "SELECT hlinapu.timporteD AS SD, hlinapu.timporteH AS SH, hlinapu.codmacta,"
+    SQL = SQL & " hlinapu.fechaent, hlinapu.numdiari, hlinapu.numasien, hlinapu.codccost,idsubcos"
+    SQL = SQL & " From hlinapu,cabccost WHERE cabccost.codccost=hlinapu.codccost"
+    SQL = SQL & " AND hlinapu.numdiari =" & DiarioFacturas
+    SQL = SQL & " AND hlinapu.fechaent='" & FechaAsi & "'"
+    SQL = SQL & " AND hlinapu.numasien=" & Numasiento
+    SQL = SQL & " AND hlinapu.codccost Is Not Null;"
+    RL.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     While Not RL.EOF
         cuenta = RL!Codmacta
         CCost = RL!CodCCost
@@ -1905,10 +1905,10 @@ Private Function CalcularSaldos1Nivel(Nivel As Integer) As Boolean
     If I <= 0 Then Exit Function
     
     cta = Mid(cuenta, 1, I)
-    Sql = "Select Impmesde,impmesha from hsaldos where "
-    Sql = Sql & " Codmacta = '" & cta & "' AND Anopsald = " & Year(FechaAsi) & " AND mespsald = " & Month(FechaAsi)
+    SQL = "Select Impmesde,impmesha from hsaldos where "
+    SQL = SQL & " Codmacta = '" & cta & "' AND Anopsald = " & Year(FechaAsi) & " AND mespsald = " & Month(FechaAsi)
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Rs.EOF Then
         I = 0   'Nuevo
         ImpD = 0
@@ -1928,12 +1928,12 @@ Private Function CalcularSaldos1Nivel(Nivel As Integer) As Boolean
     TH = TransformaComasPuntos(CStr(ImpH))
     If I = 0 Then
         'Nueva insercion
-        Sql = "INSERT INTO hsaldos VALUES('" & cta & "'," & Year(FechaAsi) & "," & Month(FechaAsi) & "," & TD & "," & TH & ")"
+        SQL = "INSERT INTO hsaldos VALUES('" & cta & "'," & Year(FechaAsi) & "," & Month(FechaAsi) & "," & TD & "," & TH & ")"
         Else
-        Sql = "UPDATE hsaldos SET Impmesde=" & TD & ", Impmesha = " & TH
-        Sql = Sql & " WHERE Codmacta = '" & cta & "' AND Anopsald = " & Year(FechaAsi) & " AND mespsald = " & Month(FechaAsi)
+        SQL = "UPDATE hsaldos SET Impmesde=" & TD & ", Impmesha = " & TH
+        SQL = SQL & " WHERE Codmacta = '" & cta & "' AND Anopsald = " & Year(FechaAsi) & " AND mespsald = " & Month(FechaAsi)
     End If
-    miConexion.Execute Sql
+    miConexion.Execute SQL
     CalcularSaldos1Nivel = True
 End Function
 
@@ -1951,8 +1951,8 @@ Dim B As Boolean
     AD = 0
     AH = 0
     Set RR = New ADODB.Recordset
-    Sql = "Select * from linccost WHERE codccost = '" & CCost & "'"
-    RR.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "Select * from linccost WHERE codccost = '" & CCost & "'"
+    RR.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not RR.EOF
         'Cargamos los porcentajes
         CCost = RR!subccost
@@ -2001,25 +2001,25 @@ Dim Aux As String
     
     'FACTURAS PROVEEDORES
     Aux = "tipoconce"
-    Sql = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!concefpr), "N", Aux)
-    If Sql = "" And Aux = "tipoconce" Then Exit Function
-    AmpliacionFacurasPro = Rs!concefpr & "|" & Sql & "|"
+    SQL = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!concefpr), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
+    AmpliacionFacurasPro = Rs!concefpr & "|" & SQL & "|"
         
     Aux = "tipoconce"
-    Sql = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!conceapr), "N", Aux)
-    If Sql = "" And Aux = "tipoconce" Then Exit Function
-    AmpliacionFacurasPro = AmpliacionFacurasPro & Rs!concefpr & "|" & Sql & "|"
+    SQL = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!conceapr), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
+    AmpliacionFacurasPro = AmpliacionFacurasPro & Rs!concefpr & "|" & SQL & "|"
     
     'FACTURAS CLIENTES
     Aux = "tipoconce"
-    Sql = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!concefcl), "N", Aux)
-    If Sql = "" And Aux = "tipoconce" Then Exit Function
-    AmpliacionFacurasCli = Rs!concefcl & "|" & Sql & "|"
+    SQL = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!concefcl), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
+    AmpliacionFacurasCli = Rs!concefcl & "|" & SQL & "|"
         
     Aux = "tipoconce"
-    Sql = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!conceacl), "N", Aux)
-    If Sql = "" And Aux = "tipoconce" Then Exit Function
-    AmpliacionFacurasCli = AmpliacionFacurasCli & Rs!concefcl & "|" & Sql & "|"
+    SQL = DevuelveDesdeBDModulo("nomconce", "conceptos", "codconce", CStr(Rs!conceacl), "N", Aux)
+    If SQL = "" And Aux = "tipoconce" Then Exit Function
+    AmpliacionFacurasCli = AmpliacionFacurasCli & Rs!concefcl & "|" & SQL & "|"
     
     
     
@@ -2060,11 +2060,11 @@ Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
     If I < 0 Then Exit Function
     
     cta = Mid(cuenta, 1, I)
-    Sql = "Select debccost,habccost from hsaldosanal where "
-    Sql = Sql & " codccost='" & CCost & "' AND"
-    Sql = Sql & " Codmacta = '" & cta & "' AND anoccost = " & Year(FechaAsi) & " AND mesccost = " & Month(FechaAsi)
+    SQL = "Select debccost,habccost from hsaldosanal where "
+    SQL = SQL & " codccost='" & CCost & "' AND"
+    SQL = SQL & " Codmacta = '" & cta & "' AND anoccost = " & Year(FechaAsi) & " AND mesccost = " & Month(FechaAsi)
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Rs.EOF Then
         I = 0   'Nuevo
         ImpD = 0
@@ -2082,14 +2082,14 @@ Private Function CalcularSaldos1NivelAnal(Nivel As Integer) As Boolean
     TH = TransformaComasPuntos(CStr(ImpH))
     If I = 0 Then
         'Nueva insercion
-        Sql = "INSERT INTO hsaldosanal(codccost,codmacta,anoccost,mesccost,debccost,habccost)"
-        Sql = Sql & " VALUES('" & CCost & "','" & cta & "'," & Year(FechaAsi) & "," & Month(FechaAsi) & "," & TD & "," & TH & ")"
+        SQL = "INSERT INTO hsaldosanal(codccost,codmacta,anoccost,mesccost,debccost,habccost)"
+        SQL = SQL & " VALUES('" & CCost & "','" & cta & "'," & Year(FechaAsi) & "," & Month(FechaAsi) & "," & TD & "," & TH & ")"
         Else
-        Sql = "UPDATE hsaldosanal SET debccost=" & TD & ", habccost = " & TH
-        Sql = Sql & " WHERE Codmacta = '" & cta & "' AND Anoccost = " & Year(FechaAsi) & " AND mesccost = " & Month(FechaAsi)
-        Sql = Sql & " AND codccost = '" & CCost & "';"
+        SQL = "UPDATE hsaldosanal SET debccost=" & TD & ", habccost = " & TH
+        SQL = SQL & " WHERE Codmacta = '" & cta & "' AND Anoccost = " & Year(FechaAsi) & " AND mesccost = " & Month(FechaAsi)
+        SQL = SQL & " AND codccost = '" & CCost & "';"
     End If
-    miConexion.Execute Sql
+    miConexion.Execute SQL
     CalcularSaldos1NivelAnal = True
 End Function
 
@@ -2158,11 +2158,11 @@ End Function
 Public Sub MuestraErroresContabilizacion()
 Dim I As Integer
     
-    Sql = ""
+    SQL = ""
     For I = 1 To ColErrores.Count
-        Sql = Sql & ColErrores.item(I) & vbCrLf
+        SQL = SQL & ColErrores.item(I) & vbCrLf
     Next I
-    MsgBox Sql, vbQuestion
+    MsgBox SQL, vbQuestion
 
 End Sub
 
@@ -2184,11 +2184,11 @@ Dim EjercicioActual As Boolean
 
     PreComprobacionNumeroAsiento = False
 
-    Sql = "Select * from contadores WHERE TipoRegi = '0'"
+    SQL = "Select * from contadores WHERE TipoRegi = '0'"
     c1 = 0
     EjercicioActual = Fecha <= FechaFinEjercicio
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open SQL, miConexion, adOpenForwardOnly, adLockOptimistic, adCmdText
     If Rs.EOF Then
         c1 = 0
         MsgBox "No se ecuentra el contador de asientos (0)", vbExclamation
@@ -2207,26 +2207,26 @@ Dim EjercicioActual As Boolean
     If c1 = 0 Then Exit Function
     
     'Vemos si existe un asiento entre el numero de contador y los numeros consecutivos de asiento
-    Sql = "Select numasien from hcabapu where numasien >= " & c1 & " AND numasien <= " & c1 + TotaAsientosGenerar - 1
+    SQL = "Select numasien from hcabapu where numasien >= " & c1 & " AND numasien <= " & c1 + TotaAsientosGenerar - 1
     If EjercicioActual Then
         f1 = DateAdd("yyyy", -1, FechaFinEjercicio)
-        Sql = Sql & " AND fechaent > " & DBSet(f1, "F") 'Mayor estricto
-        Sql = Sql & " AND fechaent <= " & DBSet(FechaFinEjercicio, "F")
+        SQL = SQL & " AND fechaent > " & DBSet(f1, "F") 'Mayor estricto
+        SQL = SQL & " AND fechaent <= " & DBSet(FechaFinEjercicio, "F")
     Else
         f1 = DateAdd("yyyy", 1, FechaFinEjercicio)
-        Sql = Sql & " AND fechaent > " & DBSet(DateAdd("yyyy", 1, FechaFinEjercicio), "F")
-        Sql = Sql & " AND fechaent <= " & DBSet(DateAdd("yyyy", 1, f1), "F")
+        SQL = SQL & " AND fechaent > " & DBSet(DateAdd("yyyy", 1, FechaFinEjercicio), "F")
+        SQL = SQL & " AND fechaent <= " & DBSet(DateAdd("yyyy", 1, f1), "F")
     End If
-    Rs.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
-    Sql = ""
+    Rs.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = ""
     If Rs.EOF Then
         'Perfecto. NO deberian dar errores los contadores
         PreComprobacionNumeroAsiento = True
     Else
         'Tenemos problemas.
-        Sql = "Ariconta. Error contadores." & vbCrLf
+        SQL = "Ariconta. Error contadores." & vbCrLf
         If TotaAsientosGenerar = 1 Then
-            Sql = Sql & "Ya existe el asiento " & c1
+            SQL = SQL & "Ya existe el asiento " & c1
         Else
             cuenta = ""
             While Not Rs.EOF
@@ -2234,14 +2234,14 @@ Dim EjercicioActual As Boolean
                 Rs.MoveNext
             Wend
             cuenta = Mid(cuenta, 2)
-            Sql = Sql & "Contadores: " & c1 & vbCrLf
-            Sql = Sql & "Nº asientos:" & TotaAsientosGenerar & vbCrLf
-            Sql = Sql & "Asiento ya existentes: " & cuenta
+            SQL = SQL & "Contadores: " & c1 & vbCrLf
+            SQL = SQL & "Nº asientos:" & TotaAsientosGenerar & vbCrLf
+            SQL = SQL & "Asiento ya existentes: " & cuenta
             cuenta = ""
             
         End If
-        Sql = Sql & vbCrLf & vbCrLf & "¿Continuar?"
-        If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then PreComprobacionNumeroAsiento = True
+        SQL = SQL & vbCrLf & vbCrLf & "¿Continuar?"
+        If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then PreComprobacionNumeroAsiento = True
     End If
     Rs.Close
     Exit Function
@@ -2260,7 +2260,7 @@ End Function
 '-------------------------------------------------------------------------------------
 Public Function EliminarFRACLIcontab(EliminaElCobro As Boolean, FechaFac As Date) As Boolean
 Dim RF As ADODB.Recordset
-Dim Sql As String
+Dim SQL As String
 Dim Existe As Boolean
 
     On Error GoTo EEliminarFRACLIcontab
@@ -2270,17 +2270,17 @@ Dim Existe As Boolean
     
     'cobros
     If EliminaElCobro Then
-        Sql = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
-        Sql = Sql & " AND fecfaccl='" & Format(FechaFac, FormatoFecha) & "'"
-        miConexion.Execute "Delete from scobro WHERE " & Sql
+        SQL = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
+        SQL = SQL & " AND fecfaccl='" & Format(FechaFac, FormatoFecha) & "'"
+        miConexion.Execute "Delete from scobro WHERE " & SQL
     End If
     
     Set RF = New ADODB.Recordset
-    Sql = "SELECT numasien,fechaent,numdiari,codfaccl FROM cabfact"
-    Sql = Sql & " WHERE numserie='" & Serie
-    Sql = Sql & "' AND codfaccl= " & NumeroFactura
-    Sql = Sql & " AND anofaccl= " & Anofac
-    RF.Open Sql, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
+    SQL = "SELECT numasien,fechaent,numdiari,codfaccl FROM cabfact"
+    SQL = SQL & " WHERE numserie='" & Serie
+    SQL = SQL & "' AND codfaccl= " & NumeroFactura
+    SQL = SQL & " AND anofaccl= " & Anofac
+    RF.Open SQL, miConexion, adOpenForwardOnly, adLockPessimistic, adCmdText
     DiarioFacturas = -1
     Existe = False
     If Not RF.EOF Then
@@ -2299,31 +2299,31 @@ Dim Existe As Boolean
         If DiarioFacturas > 0 Then
             'OK. HAY que eliminar el apunte
     
-            Sql = CalcularLineasYSaldosFacturas(False)
-            If Sql <> "" Then
-                MsgBox Sql, vbExclamation
+            SQL = CalcularLineasYSaldosFacturas(False)
+            If SQL <> "" Then
+                MsgBox SQL, vbExclamation
                 Exit Function
             End If
             
-            Sql = " WHERE numdiari= " & DiarioFacturas
-            Sql = Sql & " AND fechaent='" & Format(FechaAsi, FormatoFecha) & "'"
-            Sql = Sql & " AND numasien=" & Numasiento
+            SQL = " WHERE numdiari= " & DiarioFacturas
+            SQL = SQL & " AND fechaent='" & Format(FechaAsi, FormatoFecha) & "'"
+            SQL = SQL & " AND numasien=" & Numasiento
             
-            miConexion.Execute "DELETE FROM hlinapu " & Sql
-            miConexion.Execute "DELETE FROM hcabapu " & Sql
+            miConexion.Execute "DELETE FROM hlinapu " & SQL
+            miConexion.Execute "DELETE FROM hcabapu " & SQL
         End If
     
     
     
     
-        Sql = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
-        Sql = Sql & " AND anofaccl = " & Anofac
+        SQL = " numserie='" & Serie & "' AND codfaccl=" & NumeroFactura
+        SQL = SQL & " AND anofaccl = " & Anofac
 
         'Lineas
-        miConexion.Execute "Delete from linfact WHERE " & Sql
+        miConexion.Execute "Delete from linfact WHERE " & SQL
 
         'cabecera
-        miConexion.Execute "Delete from cabfact WHERE " & Sql
+        miConexion.Execute "Delete from cabfact WHERE " & SQL
 
         
     End If

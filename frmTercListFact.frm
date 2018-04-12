@@ -372,7 +372,7 @@ Begin VB.Form frmTercListFact
          Index           =   3
          Left            =   510
          TabIndex        =   25
-         Top             =   1980
+         Top             =   1935
          Width           =   1815
       End
       Begin VB.Label Label1 
@@ -430,7 +430,7 @@ Begin VB.Form frmTercListFact
          Index           =   2
          Left            =   495
          TabIndex        =   23
-         Top             =   3960
+         Top             =   3915
          Width           =   855
       End
       Begin VB.Label Label4 
@@ -485,7 +485,7 @@ Begin VB.Form frmTercListFact
          Index           =   16
          Left            =   510
          TabIndex        =   18
-         Top             =   945
+         Top             =   900
          Width           =   1815
       End
       Begin VB.Label Label4 
@@ -595,7 +595,7 @@ Begin VB.Form frmTercListFact
          Index           =   11
          Left            =   510
          TabIndex        =   13
-         Top             =   2940
+         Top             =   2895
          Width           =   540
       End
       Begin VB.Image imgBuscar 
@@ -774,7 +774,7 @@ InicializarVbles
 End Sub
 
 Private Function CargarFacturas(cTabla As String, cSelect As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vCampAnt As CCampAnt
 Dim ctabla1 As String
 Dim Sql2 As String
@@ -815,34 +815,34 @@ Dim cTablaAnticip As String
     End If
     
     ' borramos las tablas temporales donde insertaremos las facturas para los listados
-    SQL = "delete from tmprcafter where codusu= " & vUsu.Codigo
-    conn.Execute SQL
-    SQL = "delete from tmprlifter where codusu= " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmprcafter where codusu= " & vUsu.Codigo
+    conn.Execute Sql
+    Sql = "delete from tmprlifter where codusu= " & vUsu.Codigo
+    conn.Execute Sql
     
     ' insertamos las facturas correspondientes a la campaña actual
-    SQL = "insert into tmprcafter (codusu,codsocio,numfactu,fecrecep,nomsocio,domsocio,codpobla,pobsocio,prosocio,nifsocio,"
-    SQL = SQL & "telsocio,codforpa,brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,"
-    SQL = SQL & "porciva1,porciva2,porciva3,porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,"
-    SQL = SQL & "retfacpr,basereten,trefacpr,totalfac,intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo) "
-    SQL = SQL & "select " & vUsu.Codigo & ",rcafter.codsocio,rcafter.numfactu,rcafter.fecrecep,rcafter.nomsocio,rcafter.domsocio,rcafter.codpobla,rcafter.pobsocio,rcafter.prosocio,rcafter.nifsocio,rcafter.telsocio,rcafter.codforpa, "
-    SQL = SQL & "brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,"
-    SQL = SQL & "porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,retfacpr,basereten,trefacpr,totalfac,"
-    SQL = SQL & "intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo from "
-    SQL = SQL & cTabla
-    If cSelect <> "" Then SQL = SQL & " where " & cSelect
-    SQL = SQL & " group by 1,2,3,4 "
+    Sql = "insert into tmprcafter (codusu,codsocio,numfactu,fecrecep,nomsocio,domsocio,codpobla,pobsocio,prosocio,nifsocio,"
+    Sql = Sql & "telsocio,codforpa,brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,"
+    Sql = Sql & "porciva1,porciva2,porciva3,porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,"
+    Sql = Sql & "retfacpr,basereten,trefacpr,totalfac,intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo) "
+    Sql = Sql & "select " & vUsu.Codigo & ",rcafter.codsocio,rcafter.numfactu,rcafter.fecrecep,rcafter.nomsocio,rcafter.domsocio,rcafter.codpobla,rcafter.pobsocio,rcafter.prosocio,rcafter.nifsocio,rcafter.telsocio,rcafter.codforpa, "
+    Sql = Sql & "brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,"
+    Sql = Sql & "porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,retfacpr,basereten,trefacpr,totalfac,"
+    Sql = Sql & "intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo from "
+    Sql = Sql & cTabla
+    If cSelect <> "" Then Sql = Sql & " where " & cSelect
+    Sql = Sql & " group by 1,2,3,4 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ' insertamos las lineas de las facturas
-    SQL = "insert into tmprlifter (codusu,codsocio,numfactu,fecfactu,numalbar,fechaalb,codvarie,kilosnet,importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado) "
-    SQL = SQL & " select " & vUsu.Codigo & ",rlifter.codsocio,rlifter.numfactu,rlifter.fecfactu,rlifter.numalbar,rlifter.fechaalb,rlifter.codvarie,rlifter.kilosnet,rlifter.importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado "
-    SQL = SQL & " from " & cTabla
-    If cSelect <> "" Then SQL = SQL & " where " & cSelect
-    SQL = SQL & " group by 1,2,3,4 "
+    Sql = "insert into tmprlifter (codusu,codsocio,numfactu,fecfactu,numalbar,fechaalb,codvarie,kilosnet,importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado) "
+    Sql = Sql & " select " & vUsu.Codigo & ",rlifter.codsocio,rlifter.numfactu,rlifter.fecfactu,rlifter.numalbar,rlifter.fechaalb,rlifter.codvarie,rlifter.kilosnet,rlifter.importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado "
+    Sql = Sql & " from " & cTabla
+    If cSelect <> "" Then Sql = Sql & " where " & cSelect
+    Sql = Sql & " group by 1,2,3,4 "
     
-    conn.Execute SQL
+    conn.Execute Sql
   
 ' TODAS LAS CAMPAÑAS ANTERIORES
 
@@ -857,44 +857,44 @@ If vParamAplic.Cooperativa <> 12 And vParamAplic.Cooperativa <> 9 Then
         If Trim(DBLet(RsBd.Fields(0).Value)) <> vEmpresa.BDAriagro And Trim(DBLet(RsBd.Fields(0).Value)) <> "" And InStr(1, DBLet(RsBd.Fields(0).Value), "ariagroutil") = 0 Then
         
             ' borramos la tabla temporal de la campaña anterior
-            SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprcafter where codusu= " & vUsu.Codigo
-            conn.Execute SQL
-            SQL = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprlifter where codusu= " & vUsu.Codigo
-            conn.Execute SQL
+            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprcafter where codusu= " & vUsu.Codigo
+            conn.Execute Sql
+            Sql = "delete from " & Trim(RsBd.Fields(0).Value) & ".tmprlifter where codusu= " & vUsu.Codigo
+            conn.Execute Sql
             
-            SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprcafter (codusu,codsocio,numfactu,fecrecep,nomsocio,domsocio,codpobla,pobsocio,prosocio,nifsocio,"
-            SQL = SQL & "telsocio,codforpa,brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,"
-            SQL = SQL & "porciva1,porciva2,porciva3,porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,"
-            SQL = SQL & "retfacpr,basereten,trefacpr,totalfac,intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo) "
-            SQL = SQL & "select " & vUsu.Codigo & ",rcafter.codsocio,rcafter.numfactu,rcafter.fecrecep,rcafter.nomsocio,rcafter.domsocio,rcafter.codpobla,rcafter.pobsocio,rcafter.prosocio,rcafter.nifsocio,rcafter.telsocio,rcafter.codforpa, "
-            SQL = SQL & "brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,"
-            SQL = SQL & "porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,retfacpr,basereten,trefacpr,totalfac,"
-            SQL = SQL & "intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo"
-            SQL = SQL & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
-            If cSelect <> "" Then SQL = SQL & " where " & cSelect
-            SQL = SQL & " group by 1,2,3,4 "
-            conn.Execute SQL
+            Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprcafter (codusu,codsocio,numfactu,fecrecep,nomsocio,domsocio,codpobla,pobsocio,prosocio,nifsocio,"
+            Sql = Sql & "telsocio,codforpa,brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,"
+            Sql = Sql & "porciva1,porciva2,porciva3,porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,"
+            Sql = Sql & "retfacpr,basereten,trefacpr,totalfac,intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo) "
+            Sql = Sql & "select " & vUsu.Codigo & ",rcafter.codsocio,rcafter.numfactu,rcafter.fecrecep,rcafter.nomsocio,rcafter.domsocio,rcafter.codpobla,rcafter.pobsocio,rcafter.prosocio,rcafter.nifsocio,rcafter.telsocio,rcafter.codforpa, "
+            Sql = Sql & "brutofac,dtoppago,dtognral,impppago,impgnral,baseiva1,baseiva2,baseiva3,tipoiva1,tipoiva2,tipoiva3,porciva1,porciva2,porciva3,"
+            Sql = Sql & "porcrec1,porcrec2,porcrec3,impoiva1,impoiva2,impoiva3,imporec1,imporec2,imporec3,retfacpr,basereten,trefacpr,totalfac,"
+            Sql = Sql & "intconta,intracom,esanticipo,porccorredor,concepcargo,impcargo"
+            Sql = Sql & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
+            If cSelect <> "" Then Sql = Sql & " where " & cSelect
+            Sql = Sql & " group by 1,2,3,4 "
+            conn.Execute Sql
             
             ' insertamos las lineas de las facturas
-            SQL = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprlifter (codusu,codsocio,numfactu,fecfactu,numalbar,fechaalb,codvarie,kilosnet,importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado) "
-            SQL = SQL & " select " & vUsu.Codigo & ",rlifter.codsocio,rlifter.numfactu,rlifter.fecfactu,rlifter.numalbar,rlifter.fechaalb,rlifter.codvarie,rlifter.kilosnet,rlifter.importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado "
-            SQL = SQL & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
-            If cSelect <> "" Then SQL = SQL & " where " & cSelect
-            SQL = SQL & " group by 1,2,3,4 "
+            Sql = "insert into " & Trim(RsBd.Fields(0).Value) & ".tmprlifter (codusu,codsocio,numfactu,fecfactu,numalbar,fechaalb,codvarie,kilosnet,importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado) "
+            Sql = Sql & " select " & vUsu.Codigo & ",rlifter.codsocio,rlifter.numfactu,rlifter.fecfactu,rlifter.numalbar,rlifter.fechaalb,rlifter.codvarie,rlifter.kilosnet,rlifter.importel,observa1,observa2,observa3,observa4,observa5,prestimado,descontado "
+            Sql = Sql & " from " & Replace(cTabla, vEmpresa.BDAriagro, RsBd.Fields(0).Value)
+            If cSelect <> "" Then Sql = Sql & " where " & cSelect
+            Sql = Sql & " group by 1,2,3,4 "
             
-            conn.Execute SQL
+            conn.Execute Sql
             
             ' introducimos las facturas de la campaña anterior en la temporal de la
             ' campaña actual
-            SQL = "insert into tmprcafter select * from " & Trim(RsBd.Fields(0).Value) & ".tmprcafter "
-            SQL = SQL & " where codusu = " & vUsu.Codigo
+            Sql = "insert into tmprcafter select * from " & Trim(RsBd.Fields(0).Value) & ".tmprcafter "
+            Sql = Sql & " where codusu = " & vUsu.Codigo
             
-            conn.Execute SQL
+            conn.Execute Sql
             
-            SQL = "insert into tmprlifter select * from " & Trim(RsBd.Fields(0).Value) & ".tmprlifter "
-            SQL = SQL & " where codusu = " & vUsu.Codigo
+            Sql = "insert into tmprlifter select * from " & Trim(RsBd.Fields(0).Value) & ".tmprlifter "
+            Sql = Sql & " where codusu = " & vUsu.Codigo
             
-            conn.Execute SQL
+            conn.Execute Sql
             
             
         End If
@@ -958,7 +958,7 @@ Dim List As Collection
     
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdcancel.Cancel = True
+    Me.cmdCancel.Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -1227,19 +1227,19 @@ End Sub
 
 Private Function HayRegistros(cTabla As String, cWhere As String) As Boolean
 'Comprobar si hay registros a Mostrar antes de abrir el Informe
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
-    SQL = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
+    Sql = "Select * FROM " & QuitarCaracterACadena(cTabla, "_1")
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Rs.EOF Then
         MsgBox "No hay datos para mostrar en el Informe.", vbInformation
@@ -1251,7 +1251,7 @@ Dim Rs As ADODB.Recordset
 End Function
 
 Private Function ProcesarCambios(cadWHERE As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim I As Integer
 Dim HayReg As Integer
@@ -1269,14 +1269,14 @@ On Error GoTo eProcesarCambios
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    SQL = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
-    SQL = SQL & ", rhisfruta.numalbar from rhisfruta, rsocios where  numalbar not in (select numalbar from rlifter) "
-    SQL = SQL & " and rsocios.tipoprod = 1 and rhisfruta.codsocio = rsocios.codsocio "
+    Sql = "insert into tmpinformes (codusu, codigo1) select " & DBSet(vUsu.Codigo, "N")
+    Sql = Sql & ", rhisfruta.numalbar from rhisfruta, rsocios where  numalbar not in (select numalbar from rlifter) "
+    Sql = Sql & " and rsocios.tipoprod = 1 and rhisfruta.codsocio = rsocios.codsocio "
     
-    If cadWHERE <> "" Then SQL = SQL & " and " & cadWHERE
+    If cadWHERE <> "" Then Sql = Sql & " and " & cadWHERE
     
     
-    conn.Execute SQL
+    conn.Execute Sql
         
     ProcesarCambios = HayRegistros("tmpinformes", "codusu = " & vUsu.Codigo)
 
@@ -1288,7 +1288,7 @@ End Function
 
 
 Private Sub InsertaLineaEnTemporal(ByRef ItmX As ListItem)
-Dim SQL As String
+Dim Sql As String
 Dim Codmacta As String
 Dim Rs As ADODB.Recordset
 Dim Sql1 As String

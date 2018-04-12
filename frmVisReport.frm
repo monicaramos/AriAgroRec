@@ -619,9 +619,17 @@ Dim I As Byte
                             End If
                         End If
                     ElseIf smrpt.Database.Tables(I).ConnectionProperties.item("DSN") = "vConta" Then
-                        smrpt.Database.Tables(I).SetLogOnInfo "vConta", "conta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
-                        If (InStr(1, smrpt.Database.Tables(I).Name, "_") = 0) Then
-                           smrpt.Database.Tables(I).Location = "conta" & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(I).Name
+                        '[Monica]12/04/2018:
+                        If vParamAplic.ContabilidadNueva Then
+                            smrpt.Database.Tables(I).SetLogOnInfo "vConta", "ariconta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                            If (InStr(1, smrpt.Database.Tables(I).Name, "_") = 0) Then
+                               smrpt.Database.Tables(I).Location = "ariconta" & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(I).Name
+                            End If
+                        Else
+                            smrpt.Database.Tables(I).SetLogOnInfo "vConta", "conta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                            If (InStr(1, smrpt.Database.Tables(I).Name, "_") = 0) Then
+                               smrpt.Database.Tables(I).Location = "conta" & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(I).Name
+                            End If
                         End If
                     ElseIf smrpt.Database.Tables(I).ConnectionProperties.item("DSN") = "vUsuarios" Then
                         smrpt.Database.Tables(I).SetLogOnInfo "vUsuarios", "usuarios", vParamAplic.UsuarioConta, vParamAplic.PasswordConta

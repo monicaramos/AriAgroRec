@@ -860,6 +860,51 @@ End Sub
 
 
 
+Public Sub AyudaVtaFruta(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Albarán|1505|;S|txtAux(1)|T|Código|1000|;S|txtAux(2)|T|Nombre Cliente/Socio|5000|;S|txtAux(3)|T|Fecha|1495|;"
+    
+    frmBas.CadenaConsulta = "SELECT vtafrutacab.numalbar, concat(if(vtafrutacab.codclien is null,'',vtafrutacab.codclien),if(vtafrutacab.codsocio is null,'',vtafrutacab.codsocio)) as codigo,"
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " concat(if(clientes.nomclien is null,'',clientes.nomclien), if(rsocios.nomsocio is null,'',rsocios.nomsocio)) as nombre, vtafrutacab.fecalbar "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM (vtafrutacab LEFT JOIN clientes ON vtafrutacab.codclien=clientes.codclien) left join rsocios On vtafrutacab.codsocio = rsocios.codsocio "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Albarán|T|N|||vtafrutacab|numalbar|0000000|S|"
+    frmBas.Tag2 = "Cliente/Socio|N|N|0|999999|vtafrutacab|codigo|000000||"
+    frmBas.Tag3 = "Nombre Cliente/Socio|T|N|||vtafrutacab|nomsocio||N|"
+    frmBas.Tag4 = "Fecha|F|N|||vtafrutacab|fecalbar|dd/mm/yyyy||"
+    frmBas.Tag5 = ""
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 7
+    frmBas.Maxlen2 = 6
+    frmBas.Maxlen3 = 40
+    frmBas.Maxlen4 = 10
+    frmBas.Maxlen5 = 0
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "(vtafrutacab LEFT JOIN clientes ON vtafrutacab.codclien=clientes.codclien) left join rsocios On vtafrutacab.codsocio = rsocios.codsocio "
+    frmBas.CampoCP = "numalbar"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Venta de Fruta Báscula"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|2|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2000
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
 
 
 
