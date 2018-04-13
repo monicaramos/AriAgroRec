@@ -621,7 +621,7 @@ Dim I As Byte
                     ElseIf smrpt.Database.Tables(I).ConnectionProperties.item("DSN") = "vConta" Then
                         '[Monica]12/04/2018:
                         If vParamAplic.ContabilidadNueva Then
-                            smrpt.Database.Tables(I).SetLogOnInfo "vConta", "ariconta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
+                            smrpt.Database.Tables(I).SetLogOnInfo "Ariconta6", "ariconta" & vParamAplic.NumeroConta, vParamAplic.UsuarioConta, vParamAplic.PasswordConta
                             If (InStr(1, smrpt.Database.Tables(I).Name, "_") = 0) Then
                                smrpt.Database.Tables(I).Location = "ariconta" & vParamAplic.NumeroConta & "." & smrpt.Database.Tables(I).Name
                             End If

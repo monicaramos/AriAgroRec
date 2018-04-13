@@ -5,33 +5,165 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmPOZMantaTickets 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Tickets de Riego a Manta"
-   ClientHeight    =   5925
+   ClientHeight    =   6270
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   15735
+   ClientTop       =   30
+   ClientWidth     =   17310
    Icon            =   "frmPOZMantaTickets.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   5925
-   ScaleWidth      =   15735
+   ScaleHeight     =   6270
+   ScaleWidth      =   17310
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   90
+      TabIndex        =   32
+      Top             =   90
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   33
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3750
+      TabIndex        =   30
+      Top             =   90
+      Width           =   1785
+      Begin MSComctlLib.Toolbar Toolbar5 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   31
+         Top             =   180
+         Width           =   1410
+         _ExtentX        =   2487
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   3
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar Facturados"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Pago Ticket"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Socios de Baja"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   14895
+      TabIndex        =   29
+      Top             =   270
+      Visible         =   0   'False
+      Width           =   1605
+   End
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   285
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
       Index           =   1
-      Left            =   3840
+      Left            =   4920
       MaxLength       =   20
-      TabIndex        =   29
+      TabIndex        =   27
       Tag             =   "Concepto|T|N|||rpozticketsmanta|concepto|||"
-      Top             =   5340
+      Top             =   5745
       Width           =   5475
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   12
       Left            =   14250
@@ -48,7 +180,7 @@ Begin VB.Form frmPOZMantaTickets
       Index           =   4
       Left            =   15180
       MaskColor       =   &H00000000&
-      TabIndex        =   28
+      TabIndex        =   26
       ToolTipText     =   "Buscar fecha"
       Top             =   3840
       Visible         =   0   'False
@@ -57,11 +189,20 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   300
       Index           =   3
       Left            =   14040
       MaskColor       =   &H00000000&
-      TabIndex        =   27
+      TabIndex        =   25
       ToolTipText     =   "Buscar fecha"
       Top             =   3840
       Visible         =   0   'False
@@ -70,6 +211,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   11
       Left            =   11400
@@ -83,6 +233,15 @@ Begin VB.Form frmPOZMantaTickets
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   2
       Left            =   -60
@@ -96,6 +255,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   10
       Left            =   810
@@ -109,6 +277,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   9
       Left            =   13140
@@ -121,6 +298,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   8
       Left            =   12270
@@ -133,17 +319,35 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   0
       Left            =   6750
       MaxLength       =   40
-      TabIndex        =   26
+      TabIndex        =   24
       Top             =   3840
       Width           =   1485
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   7
       Left            =   10320
@@ -156,6 +360,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   6
       Left            =   9630
@@ -168,11 +381,20 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   300
       Index           =   0
       Left            =   3570
       MaskColor       =   &H00000000&
-      TabIndex        =   24
+      TabIndex        =   22
       ToolTipText     =   "Buscar socio"
       Top             =   3780
       Visible         =   0   'False
@@ -181,12 +403,21 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   300
       Index           =   1
       Left            =   2250
       MaskColor       =   &H00000000&
-      TabIndex        =   23
-      ToolTipText     =   "Buscar partida"
+      TabIndex        =   21
+      ToolTipText     =   "Buscar fecha"
       Top             =   3780
       Visible         =   0   'False
       Width           =   195
@@ -194,12 +425,21 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   300
       Index           =   2
       Left            =   6480
       MaskColor       =   &H00000000&
-      TabIndex        =   22
-      ToolTipText     =   "Buscar fecha"
+      TabIndex        =   20
+      ToolTipText     =   "Buscar braçal"
       Top             =   3840
       Visible         =   0   'False
       Width           =   195
@@ -208,6 +448,15 @@ Begin VB.Form frmPOZMantaTickets
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   3
       Left            =   5700
@@ -221,6 +470,15 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   4
       Left            =   8280
@@ -235,6 +493,15 @@ Begin VB.Form frmPOZMantaTickets
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   5
       Left            =   8850
@@ -249,6 +516,15 @@ Begin VB.Form frmPOZMantaTickets
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   1
       Left            =   4950
@@ -261,17 +537,35 @@ Begin VB.Form frmPOZMantaTickets
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   2
       Left            =   3810
       MaxLength       =   30
-      TabIndex        =   21
+      TabIndex        =   19
       Top             =   3810
       Width           =   1125
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Index           =   0
       Left            =   2490
@@ -283,49 +577,67 @@ Begin VB.Form frmPOZMantaTickets
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
-      Height          =   375
-      Left            =   13350
-      TabIndex        =   13
-      Tag             =   "   "
-      Top             =   5280
-      Visible         =   0   'False
-      Width           =   1035
-   End
-   Begin VB.CommandButton cmdCancelar 
-      Cancel          =   -1  'True
-      Caption         =   "&Cancelar"
-      Height          =   375
-      Left            =   14490
-      TabIndex        =   14
-      Top             =   5265
-      Visible         =   0   'False
-      Width           =   1095
-   End
-   Begin MSDataGridLib.DataGrid DataGrid1 
-      Height          =   4410
-      Left            =   120
-      TabIndex        =   17
-      Top             =   675
-      Width           =   15435
-      _ExtentX        =   27226
-      _ExtentY        =   7779
-      _Version        =   393216
-      AllowUpdate     =   0   'False
-      BorderStyle     =   0
-      HeadLines       =   1
-      RowHeight       =   15
-      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
-         Weight          =   700
+         Weight          =   400
          Underline       =   0   'False
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      Height          =   375
+      Left            =   14925
+      TabIndex        =   13
+      Tag             =   "   "
+      Top             =   5685
+      Visible         =   0   'False
+      Width           =   1065
+   End
+   Begin VB.CommandButton cmdCancelar 
+      Cancel          =   -1  'True
+      Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   16110
+      TabIndex        =   14
+      Top             =   5670
+      Visible         =   0   'False
+      Width           =   1065
+   End
+   Begin MSDataGridLib.DataGrid DataGrid1 
+      Height          =   4545
+      Left            =   120
+      TabIndex        =   17
+      Top             =   945
+      Width           =   17035
+      _ExtentX        =   30057
+      _ExtentY        =   8017
+      _Version        =   393216
+      AllowUpdate     =   0   'False
+      BorderStyle     =   0
+      HeadLines       =   1
+      RowHeight       =   19
+      BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Verdana"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -372,26 +684,35 @@ Begin VB.Form frmPOZMantaTickets
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   14490
-      TabIndex        =   20
-      Top             =   5280
+      Left            =   16065
+      TabIndex        =   18
+      Top             =   5670
       Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.Frame Frame1 
-      Height          =   555
+      Height          =   600
       Index           =   1
       Left            =   120
       TabIndex        =   15
-      Top             =   5190
-      Width           =   2385
+      Top             =   5595
+      Width           =   3330
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -399,10 +720,10 @@ Begin VB.Form frmPOZMantaTickets
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   40
+         Left            =   45
          TabIndex        =   16
          Top             =   240
-         Width           =   2295
+         Width           =   3150
       End
    End
    Begin MSAdodcLib.Adodc adodc1 
@@ -452,103 +773,64 @@ Begin VB.Form frmPOZMantaTickets
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   18
-      Top             =   0
-      Width           =   15735
-      _ExtentX        =   27755
-      _ExtentY        =   635
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   16755
+      TabIndex        =   34
+      Top             =   255
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
       ButtonWidth     =   609
       ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
       Style           =   1
       _Version        =   393216
       BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   13
+         NumButtons      =   1
          BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar Facturados"
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Impresión Ticket"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Pago Ticket"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
+            Object.ToolTipText     =   "Ayuda"
          EndProperty
       EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Left            =   3735
-         TabIndex        =   19
-         Top             =   90
-         Visible         =   0   'False
-         Width           =   1215
-      End
    End
    Begin VB.Label Label2 
       Caption         =   "Concepto:"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
-      Left            =   3060
-      TabIndex        =   30
-      Top             =   5370
+      Left            =   3870
+      TabIndex        =   28
+      Top             =   5775
       Width           =   975
    End
    Begin VB.Label Label1 
       Caption         =   "Procesando Registro:"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   225
-      Left            =   9540
-      TabIndex        =   25
-      Top             =   5370
+      Left            =   10620
+      TabIndex        =   23
+      Top             =   5775
       Visible         =   0   'False
       Width           =   3375
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -680,7 +962,7 @@ Dim FechaAnt As String
 Dim OK As Boolean
 Dim CadB1 As String
 Dim Filtro As Byte
-Dim SQL As String
+Dim Sql As String
 
 Dim CodTipoMov As String
 
@@ -780,31 +1062,31 @@ Dim B As Boolean
 
     B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(2).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     'Busqueda facturados
-    Toolbar1.Buttons(4).Enabled = B
+    Toolbar5.Buttons(1).Enabled = B
     Me.mnBuscarFacturados.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(6).Enabled = B And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
     
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(7).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(11).Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
     Me.mnImprimir.Enabled = B
     'Pago de ticket
-    Toolbar1.Buttons(12).Enabled = B
+    Toolbar5.Buttons(2).Enabled = B
     Me.mnPagoTicket.Enabled = B
     
 End Sub
@@ -845,7 +1127,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim Sql2 As String
-Dim SQL As String
+Dim Sql As String
     
     CadenaB = " WHERE rpozticketsmanta.fecpago is null "
 
@@ -869,7 +1151,7 @@ Private Sub BotonBuscar()
     
     SoloFacturado = False
     
-    LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(2)
 End Sub
 
@@ -891,7 +1173,7 @@ Private Sub BotonBuscarFacturados()
     
     SoloFacturado = True
     
-    LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(2)
 End Sub
 
@@ -1043,7 +1325,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 Dim vTipoMov As CTiposMov
 
@@ -1052,7 +1334,7 @@ Dim vTipoMov As CTiposMov
     
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
-    If Not SepuedeBorrar Then Exit Sub
+    If Not SePuedeBorrar Then Exit Sub
         
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -1061,10 +1343,10 @@ Dim vTipoMov As CTiposMov
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Ticket?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = "¿Seguro que desea eliminar el Ticket?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
@@ -1073,8 +1355,8 @@ Dim vTipoMov As CTiposMov
         vTipoMov.DevolverContador "ALV", adodc1.Recordset!numalbar
         Set vTipoMov = Nothing
         
-        SQL = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
-        conn.Execute SQL
+        Sql = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
+        conn.Execute Sql
         CargaGrid CadB
         
         
@@ -1089,15 +1371,15 @@ Error2:
     MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
 
-Private Function SepuedeBorrar() As Boolean
-    SepuedeBorrar = False
+Private Function SePuedeBorrar() As Boolean
+    SePuedeBorrar = False
     
     If DBLet(Me.adodc1.Recordset!fecpago) <> "" Then
         MsgBox "No puede borrar un ticket con fecha de pago. Revise.", vbExclamation
         Exit Function
     End If
     
-    SepuedeBorrar = True
+    SePuedeBorrar = True
 End Function
 
 
@@ -1239,7 +1521,7 @@ End Sub
 Private Sub cmdAceptar_Click()
     Dim I As Long
     Dim NReg As Long
-    Dim SQL As String
+    Dim Sql As String
     Dim Sql2 As String
     
     
@@ -1302,7 +1584,7 @@ Private Function ModificarRegistro() As Boolean
 Dim bol As Boolean
 Dim MenError As String
 Dim devuelve As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EModifica
@@ -1398,37 +1680,37 @@ Dim Concepto As String
     
     
     'insertar en la tabla de recibos de pozos
-    SQL = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
-    SQL = SQL & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
-    SQL = SQL & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
-    SQL = SQL & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-    SQL = SQL & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
-    SQL = SQL & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & DBSet(Concepto, "T") & ",0,"
-    SQL = SQL & DBSet(0, "N") & ","
-    SQL = SQL & DBSet(0, "N") & ","
-    SQL = SQL & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
-    SQL = SQL & DBSet(txtAux(2).Text, "N") & ","
-    SQL = SQL & DBSet(txtAux(10).Text, "F") & ","
-    SQL = SQL & DBSet(EsTicketContado, "B") & ")"
+    Sql = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
+    Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
+    Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
+    Sql = Sql & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
+    Sql = Sql & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+    Sql = Sql & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & DBSet(Concepto, "T") & ",0,"
+    Sql = Sql & DBSet(0, "N") & ","
+    Sql = Sql & DBSet(0, "N") & ","
+    Sql = Sql & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
+    Sql = Sql & DBSet(txtAux(2).Text, "N") & ","
+    Sql = Sql & DBSet(txtAux(10).Text, "F") & ","
+    Sql = Sql & DBSet(EsTicketContado, "B") & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
         
         
     ' Introducimos en la tabla de lineas de campos que intervienen en la factura para la impresion
     ' SOLO HABRA UN CAMPO
-    SQL = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
+    Sql = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
     
-    SQL = SQL & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
-    SQL = SQL & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
-    SQL = SQL & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
-    SQL = SQL & ")"
+    Sql = Sql & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
+    Sql = Sql & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
+    Sql = Sql & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
+    Sql = Sql & ")"
 
-    conn.Execute SQL
+    conn.Execute Sql
 
     vTipoMov.IncrementarContador (CodTipom)
     Set vTipoMov = Nothing
@@ -1549,26 +1831,52 @@ Dim Sql2 As String
     Me.Icon = frmPpal.Icon
 
 
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        'el 1 es separadors
+'        .Buttons(2).Image = 1   'Buscar
+'        .Buttons(3).Image = 2   'Todos
+'        .Buttons(4).Image = 21   'Buscar Facturados
+'
+'        'el 4 i el 5 son separadors
+'        .Buttons(6).Image = 3   'Insertar
+'        .Buttons(7).Image = 4   'Modificar
+'        .Buttons(8).Image = 5   'Borrar
+'        'el 9 i el 10 son separadors
+'        .Buttons(11).Image = 10  'Impresión del ticket
+'
+'        .Buttons(12).Image = 13  'Pago del Ticket
+'
+'        .Buttons(13).Image = 11  'Salir
+'    End With
+
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        'el 1 es separadors
-        .Buttons(2).Image = 1   'Buscar
-        .Buttons(3).Image = 2   'Todos
-        .Buttons(4).Image = 21   'Buscar Facturados
-        
-        'el 4 i el 5 son separadors
-        .Buttons(6).Image = 3   'Insertar
-        .Buttons(7).Image = 4   'Modificar
-        .Buttons(8).Image = 5   'Borrar
-        'el 9 i el 10 son separadors
-        .Buttons(11).Image = 10  'Impresión del ticket
-        
-        .Buttons(12).Image = 13  'Pago del Ticket
-        
-        .Buttons(13).Image = 11  'Salir
+        'l'1 i el 2 son separadors
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
+        'el 5 i el 6 son separadors
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar5
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 21   'Buscar Facturados
+        .Buttons(2).Image = 13  'Pago del Ticket
+    End With
+
+
+
 
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
@@ -1687,51 +1995,53 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 2
-                mnBuscar_Click
-        Case 3
-                mnVerTodos_Click
-        Case 4
-                mnBuscarFacturados_Click
-        Case 6
+        Case 1
                 mnNuevo_Click
-        Case 7
+        Case 2
                 mnModificar_Click
-        Case 8
+        Case 3
                 mnEliminar_Click
-        Case 11
+        Case 5
+                mnBuscar_Click
+        Case 6
+                mnVerTodos_Click
+        Case 8
                 mnImprimir_Click
-        Case 12
-                mnPagoTicket_Click
-        Case 13
-                mnSalir_Click
     End Select
 End Sub
 
+Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1
+                mnBuscarFacturados_Click
+        Case 2
+                mnPagoTicket_Click
+    End Select
+End Sub
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     Dim Sql2 As String
     
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " " & CadenaB & " AND " & vSQL
+        Sql = CadenaConsulta & " " & CadenaB & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " " & CadenaB
+        Sql = CadenaConsulta & " " & CadenaB
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " " & Ordenacion
+    Sql = Sql & " " & Ordenacion
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(2)|T|Albarán|800|;S|txtAux(10)|T|Fecha|1100|;S|btnBuscar(1)|B|||;S|txtAux(0)|T|Socio|800|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|2450|;S|txtAux(1)|T|Campo|1000|;"
+    tots = "S|txtAux(2)|T|Albarán|1000|;S|txtAux(10)|T|Fecha|1300|;S|btnBuscar(1)|B|||;S|txtAux(0)|T|Socio|1000|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|2450|;S|txtAux(1)|T|Campo|1200|;"
     tots = tots & "S|txtAux(3)|T|Cód|600|;S|btnBuscar(2)|B||195|;S|Text2(0)|T|Braçal|1500|;"
     tots = tots & "S|txtAux(4)|T|Pol|500|;S|txtAux(5)|T|Parc|800|;S|txtAux(6)|T|Sb|500|;"
-    tots = tots & "S|txtAux(7)|T|Hdas|800|;S|txtAux(11)|T|Precio|800|;S|txtAux(8)|T|Importe|1000|;S|txtAux(9)|T|Fec.Riego|1100|;S|btnBuscar(3)|B|||;S|txtAux(12)|T|Fec.Pago|1100|;S|btnBuscar(4)|B|||;N|Text2(1)(8)|T|Importe|1000|;"
+    tots = tots & "S|txtAux(7)|T|Hdas|800|;S|txtAux(11)|T|Precio|1000|;S|txtAux(8)|T|Importe|1200|;S|txtAux(9)|T|Fec.Riego|1300|;S|btnBuscar(3)|B|||;S|txtAux(12)|T|Fec.Pago|1300|;S|btnBuscar(4)|B|||;N|Text2(1)(8)|T|Importe|1000|;"
     
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgLeft
@@ -1790,7 +2100,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer

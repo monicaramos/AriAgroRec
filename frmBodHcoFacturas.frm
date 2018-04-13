@@ -151,6 +151,7 @@ Begin VB.Form frmBodHcoFacturas
       _Version        =   393216
       Style           =   1
       Tabs            =   2
+      Tab             =   1
       TabsPerRow      =   4
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -164,7 +165,7 @@ Begin VB.Form frmBodHcoFacturas
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmBodHcoFacturas.frx":000C
-      Tab(0).ControlEnabled=   -1  'True
+      Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "Label1(11)"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label1(12)"
@@ -182,7 +183,7 @@ Begin VB.Form frmBodHcoFacturas
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Albaranes"
       TabPicture(1)   =   "frmBodHcoFacturas.frx":0028
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameObserva"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "DataGrid2"
@@ -213,7 +214,7 @@ Begin VB.Form frmBodHcoFacturas
       Begin VB.Frame Frame2 
          Height          =   4230
          Index           =   1
-         Left            =   60
+         Left            =   -74940
          TabIndex        =   45
          Top             =   420
          Width           =   12175
@@ -1029,7 +1030,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   -72960
+         Left            =   2040
          MaxLength       =   30
          TabIndex        =   30
          Tag             =   "Fecha Albarán|F|N|||rbodfacturas_alb|fechaalb|dd/mm/yyyy|N|"
@@ -1054,7 +1055,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -73920
+         Left            =   1080
          MaxLength       =   15
          TabIndex        =   29
          Tag             =   "Nº Albarán|N|N|||rbodfacturas_alb|numalbar|0|N|"
@@ -1079,7 +1080,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   -71760
+         Left            =   3240
          MaxLength       =   12
          TabIndex        =   23
          Tag             =   "Cantidad|N|N|0||rbodfacturas_lineas|cantidad|#,###,###,##0.00|N|"
@@ -1103,7 +1104,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -72840
+         Left            =   2160
          MaxLength       =   12
          TabIndex        =   22
          Text            =   "nomvarie"
@@ -1127,7 +1128,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   1
-         Left            =   -73680
+         Left            =   1320
          MaxLength       =   12
          TabIndex        =   21
          Tag             =   "Variedad|N|N|||rbodfacturas_lineas|codvarie|000000|N|"
@@ -1152,7 +1153,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   -74640
+         Left            =   360
          MaxLength       =   12
          TabIndex        =   20
          Tag             =   "Linea|N|N|0|999|rbodfacturas_lineas|numlinea|000|N|"
@@ -1164,7 +1165,7 @@ Begin VB.Form frmBodHcoFacturas
       Begin VB.CommandButton cmdObserva 
          Enabled         =   0   'False
          Height          =   375
-         Left            =   -63375
+         Left            =   11625
          Style           =   1  'Graphical
          TabIndex        =   19
          Top             =   2130
@@ -1187,7 +1188,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   4
-         Left            =   -70905
+         Left            =   4095
          MaxLength       =   12
          TabIndex        =   24
          Tag             =   "Precio|N|N|0|999999.0000|rbodfacturas_lineas|precioar|###,##0.0000|N|"
@@ -1212,7 +1213,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   5
-         Left            =   -69240
+         Left            =   5760
          MaxLength       =   5
          TabIndex        =   25
          Tag             =   "Dto|N|N|0|99.90|rbodfacturas_lineas|dtolinea|##,##0.000|N|"
@@ -1237,7 +1238,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   6
-         Left            =   -67920
+         Left            =   7080
          MaxLength       =   12
          TabIndex        =   28
          Tag             =   "Importe|N|N|0||rbodfacturas_lineas|importel|#,###,###,##0.00|N|"
@@ -1249,7 +1250,7 @@ Begin VB.Form frmBodHcoFacturas
       Begin MSDataGridLib.DataGrid DataGrid1 
          Bindings        =   "frmBodHcoFacturas.frx":0044
          Height          =   2025
-         Left            =   -74760
+         Left            =   240
          TabIndex        =   15
          Top             =   2670
          Width           =   11935
@@ -1321,7 +1322,7 @@ Begin VB.Form frmBodHcoFacturas
       Begin MSDataGridLib.DataGrid DataGrid2 
          Bindings        =   "frmBodHcoFacturas.frx":0059
          Height          =   1995
-         Left            =   -74775
+         Left            =   225
          TabIndex        =   16
          Top             =   495
          Width           =   3570
@@ -1404,7 +1405,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   2085
-         Left            =   -68670
+         Left            =   6330
          TabIndex        =   17
          Tag             =   "Observación 4|T|S|||scafac1|observa4||N|"
          Top             =   450
@@ -1425,7 +1426,7 @@ Begin VB.Form frmBodHcoFacturas
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   15
-         Left            =   750
+         Left            =   -74250
          MaxLength       =   15
          TabIndex        =   87
          Text            =   "Text1 7"
@@ -1436,7 +1437,7 @@ Begin VB.Form frmBodHcoFacturas
          Alignment       =   1  'Right Justify
          Height          =   285
          Index           =   16
-         Left            =   2550
+         Left            =   -72450
          MaxLength       =   15
          TabIndex        =   88
          Text            =   "Text1 7"
@@ -1456,7 +1457,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   255
          Index           =   31
-         Left            =   2310
+         Left            =   -72690
          TabIndex        =   92
          Top             =   3420
          Width           =   135
@@ -1474,7 +1475,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   255
          Index           =   30
-         Left            =   510
+         Left            =   -74490
          TabIndex        =   91
          Top             =   3420
          Width           =   135
@@ -1483,7 +1484,7 @@ Begin VB.Form frmBodHcoFacturas
          Caption         =   "Imp. Dto Gn"
          Height          =   255
          Index           =   12
-         Left            =   2670
+         Left            =   -72330
          TabIndex        =   90
          Top             =   3300
          Width           =   855
@@ -1492,7 +1493,7 @@ Begin VB.Form frmBodHcoFacturas
          Caption         =   "Imp. Dto PP"
          Height          =   255
          Index           =   11
-         Left            =   870
+         Left            =   -74130
          TabIndex        =   89
          Top             =   3300
          Width           =   855
@@ -1564,7 +1565,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   10995
+         Left            =   11040
          TabIndex        =   8
          Tag             =   "Contabilizado|N|N|0|1|rbodfacturas|impreso||N|"
          Top             =   375
@@ -1583,7 +1584,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   255
          Index           =   1
-         Left            =   10005
+         Left            =   10050
          TabIndex        =   7
          Tag             =   "Contabilizado|N|N|0|1|rbodfacturas|pasaridoc||N|"
          Top             =   375
@@ -1622,7 +1623,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   4440
+         Left            =   4530
          MaxLength       =   40
          TabIndex        =   4
          Tag             =   "Nombre Socio|T|N|||rbodfacturas|nomsocio||N|"
@@ -1649,7 +1650,7 @@ Begin VB.Form frmBodHcoFacturas
          Tag             =   "Cod. socio|N|N|0|999999|rbodfacturas|codsocio|000000|S|"
          Text            =   "Text1"
          Top             =   390
-         Width           =   780
+         Width           =   870
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1669,7 +1670,7 @@ Begin VB.Form frmBodHcoFacturas
          TabIndex        =   2
          Tag             =   "Fecha Factura|F|N|||rbodfacturas|fecfactu|dd/mm/yyyy|S|"
          Top             =   390
-         Width           =   1350
+         Width           =   1305
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -1706,7 +1707,7 @@ Begin VB.Form frmBodHcoFacturas
          EndProperty
          Height          =   255
          Index           =   0
-         Left            =   8310
+         Left            =   8355
          TabIndex        =   6
          Tag             =   "Contabilizado|N|N|0|1|rbodfacturas|intconta||N|"
          Top             =   375
@@ -3042,7 +3043,25 @@ End Sub
 
 Private Sub mnImprimir_Click()
 'Imprimir Factura
-'    BotonImprimir (53) '53: Informe de Facturas
+Dim frmBodRe As frmBodReimpre
+
+    Set frmBodRe = New frmBodReimpre
+
+    frmBodRe.Tipo = 0
+    frmBodRe.Label1 = "Reimpresión de Facturas de Almazara"
+    frmBodRe.txtCodigo(4) = Text1(0).Text
+    frmBodRe.txtCodigo(5) = Text1(0).Text
+    frmBodRe.txtCodigo(2) = Text1(1).Text
+    frmBodRe.txtCodigo(3) = Text1(1).Text
+    frmBodRe.txtCodigo(0) = Text1(2).Text
+    frmBodRe.txtCodigo(1) = Text1(2).Text
+    frmBodRe.txtNombre(0) = Text1(3).Text
+    frmBodRe.txtNombre(1) = Text1(3).Text
+    
+    frmBodRe.Show vbModal
+    
+    Set frmBodRe = Nothing
+    
 End Sub
 
 
@@ -3073,14 +3092,14 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim SQL As String
+Dim Sql As String
 On Error GoTo EBloqueaAlb
 
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM rbodfacturas_alb "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM rbodfacturas_alb "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -3090,16 +3109,16 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea TODAS las lineas de la factura
-Dim SQL As String
+Dim Sql As String
     
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM rbodfacturas_lineas "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM rbodfacturas_lineas "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -3676,7 +3695,7 @@ End Sub
     
 Private Function ModificarLinea() As Boolean
 'Modifica un registro en la tabla de lineas de Albaran: slialb
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim B As Boolean
 
@@ -3690,18 +3709,18 @@ Dim B As Boolean
     vWhere = vWhere & " AND numlinea=" & Data2.Recordset.Fields!numlinea
     
     If DatosOkLinea() Then
-        SQL = "UPDATE " & NomTablaLineas & " SET "
-        SQL = SQL & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
-        SQL = SQL & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
-        SQL = SQL & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
-        SQL = SQL & "importel= " & DBSet(txtAux(7).Text, "N")
-        SQL = SQL & ", numlotes=" & DBSet(Text2(17).Text, "T")
-        SQL = SQL & vWhere
+        Sql = "UPDATE " & NomTablaLineas & " SET "
+        Sql = Sql & " ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
+        Sql = Sql & "precioar= " & DBSet(txtAux(4).Text, "N") & ", "
+        Sql = Sql & "dtoline1= " & DBSet(txtAux(5).Text, "N") & ", dtoline2= " & DBSet(txtAux(6).Text, "N") & ", "
+        Sql = Sql & "importel= " & DBSet(txtAux(7).Text, "N")
+        Sql = Sql & ", numlotes=" & DBSet(Text2(17).Text, "T")
+        Sql = Sql & vWhere
     End If
     
-    If SQL <> "" Then
+    If Sql <> "" Then
         'actualizar la factura y vencimientos
-        B = ModificarFactura(SQL)
+        B = ModificarFactura(Sql)
         ModificarLinea = B
     End If
     
@@ -3738,9 +3757,9 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
 '    b = DataGrid1.Enabled
 
@@ -3750,8 +3769,8 @@ Dim SQL As String
         Opcion = 2
     End If
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     CargaGrid2 vDataGrid, vData
     vDataGrid.ScrollBars = dbgAutomatic
@@ -3761,7 +3780,7 @@ Dim SQL As String
     PrimeraVez = False
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -3769,7 +3788,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
     
     vData.Refresh
     Select Case vDataGrid.Name
@@ -3799,7 +3818,7 @@ Dim tots As String
     
     vDataGrid.HoldFields
     Exit Sub
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -3868,7 +3887,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cta As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
@@ -3886,16 +3905,16 @@ Dim vTipoMov As CTiposMov
         'Eliminar en tablas de factura de Retirada de Bodega / Almazara: rbodfacturas, rbodfacturas_alb, rbodfacturas_lineas
         '---------------------------------------------------------------
         If B Then
-            SQL = " " & ObtenerWhereCP(True)
+            Sql = " " & ObtenerWhereCP(True)
         
             'Lineas de facturas (slifpc)
-            conn.Execute "Delete from " & NomTablaLineas & SQL
+            conn.Execute "Delete from " & NomTablaLineas & Sql
         
             'Lineas de cabeceras de albaranes de la factura
-            conn.Execute "Delete from rbodfacturas_alb " & SQL
+            conn.Execute "Delete from rbodfacturas_alb " & Sql
             
             'Cabecera de facturas (scafpc)
-            conn.Execute "Delete from " & NombreTabla & SQL
+            conn.Execute "Delete from " & NombreTabla & Sql
         End If
         
         'Eliminar los movimientos generados por el albaran que genero la factura
@@ -3962,11 +3981,11 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 On Error Resume Next
-    SQL = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = "codtipom= '" & Text1(17).Text & "' and numfactu= " & Text1(0).Text & " and fecfactu='" & Format(Text1(1).Text, FormatoFecha) & "' "
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
 End Function
 
 
@@ -3979,26 +3998,26 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     If Opcion = 1 Then
-        SQL = "SELECT codtipom, numfactu, fecfactu, numalbar, numlinea, rbodfacturas_lineas.codvarie, nomvarie, ampliaci, cantidad, rbodfacturas_lineas.precioar, dtolinea, importel "
-        SQL = SQL & " FROM rbodfacturas_lineas inner join variedades on rbodfacturas_lineas.codvarie = variedades.codvarie " 'lineas de factura
+        Sql = "SELECT codtipom, numfactu, fecfactu, numalbar, numlinea, rbodfacturas_lineas.codvarie, nomvarie, ampliaci, cantidad, rbodfacturas_lineas.precioar, dtolinea, importel "
+        Sql = Sql & " FROM rbodfacturas_lineas inner join variedades on rbodfacturas_lineas.codvarie = variedades.codvarie " 'lineas de factura
     ElseIf Opcion = 2 Then
-        SQL = "SELECT codtipom,numfactu,fecfactu,numalbar, fechaalb, observac  "
-        SQL = SQL & " FROM rbodfacturas_alb " 'cabeceras albaranes de la factura
+        Sql = "SELECT codtipom,numfactu,fecfactu,numalbar, fechaalb, observac  "
+        Sql = Sql & " FROM rbodfacturas_alb " 'cabeceras albaranes de la factura
     End If
     
     If enlaza Then
-        SQL = SQL & " " & ObtenerWhereCP(True)
+        Sql = Sql & " " & ObtenerWhereCP(True)
         'lineas factura proveedor
-        If Opcion = 1 Then SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!numalbar
+        If Opcion = 1 Then Sql = Sql & " AND numalbar=" & Data3.Recordset.Fields!numalbar
     Else
-        SQL = SQL & " WHERE numfactu = -1"
+        Sql = Sql & " WHERE numfactu = -1"
     End If
-    SQL = SQL & " ORDER BY codtipom, numfactu, fecfactu,numalbar "
-    If Opcion = 1 Then SQL = SQL & ", numlinea "
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY codtipom, numfactu, fecfactu,numalbar "
+    If Opcion = 1 Then Sql = Sql & ", numlinea "
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -4119,7 +4138,7 @@ End Sub
    
 
 Private Function ModificaAlbxFac() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 On Error GoTo EModificaAlb
     
@@ -4133,15 +4152,15 @@ On Error GoTo EModificaAlb
 '    SQL = "UPDATE scafpa SET codtrab2=" & DBSet(Text3(0).Text, "N", "S") & ", "
 '    SQL = SQL & "codtrab1=" & DBSet(Text3(1).Text, "N", "S")
     If Me.FrameObserva.visible Then
-        SQL = "UPDATE rbodfacturas_alb SET "
-        SQL = SQL & " observac=" & DBSet(Text3(4).Text, "T")
+        Sql = "UPDATE rbodfacturas_alb SET "
+        Sql = Sql & " observac=" & DBSet(Text3(4).Text, "T")
 '        SQL = SQL & ", observa2=" & DBSet(Text3(5).Text, "T")
 '        SQL = SQL & ", observa3=" & DBSet(Text3(6).Text, "T")
 '        SQL = SQL & ", observa4=" & DBSet(Text3(7).Text, "T")
 '        SQL = SQL & ", observa5=" & DBSet(Text3(8).Text, "T")
-        SQL = SQL & ObtenerWhereCP(True)
-        SQL = SQL & " AND numalbar=" & Data3.Recordset.Fields!numalbar
-        conn.Execute SQL
+        Sql = Sql & ObtenerWhereCP(True)
+        Sql = Sql & " AND numalbar=" & Data3.Recordset.Fields!numalbar
+        conn.Execute Sql
     End If
 '--monica
 '    SQL = SQL & ObtenerWhereCP(True)
@@ -4159,7 +4178,7 @@ Private Function ModificarFactura(Optional sqlLineas As String) As Boolean
 'si se ha modificado la linea de slifac, añadir a la transaccion la modificación de la linea y recalcular
 Dim bol As Boolean
 Dim MenError As String
-Dim SQL As String
+Dim Sql As String
 Dim vFactuBOD As CFacturaBOD
 On Error GoTo EModFact
 
