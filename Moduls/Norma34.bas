@@ -865,11 +865,15 @@ Dim EsPersonaJuridica2 As Boolean
 
     cad = RecuperaValor(CuentaPropia2, 5) & RecuperaValor(CuentaPropia2, 1) & RecuperaValor(CuentaPropia2, 2) & RecuperaValor(CuentaPropia2, 3) & RecuperaValor(CuentaPropia2, 4)
     CuentaPropia2 = cad
+    If DBLet(SufijoOEM, "T") <> "" Then SufijoOEM = Right("000" & SufijoOEM, 3)
+
 
     If Len(cad) <> 24 Then
         MsgBox "Error IBAN banco : " & CuentaPropia2, vbExclamation
         Exit Function
     End If
+
+
 
     'Esta comprobacion deberia hacerla antes
 '

@@ -84,14 +84,14 @@ Begin VB.Form frmPOZMantaTickets
       Left            =   3750
       TabIndex        =   30
       Top             =   90
-      Width           =   1785
+      Width           =   1290
       Begin MSComctlLib.Toolbar Toolbar5 
          Height          =   330
          Left            =   210
          TabIndex        =   31
          Top             =   180
-         Width           =   1410
-         _ExtentX        =   2487
+         Width           =   960
+         _ExtentX        =   1693
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -99,15 +99,12 @@ Begin VB.Form frmPOZMantaTickets
          Style           =   1
          _Version        =   393216
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-            NumButtons      =   3
+            NumButtons      =   2
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Buscar Facturados"
             EndProperty
             BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
                Object.ToolTipText     =   "Pago Ticket"
-            EndProperty
-            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-               Object.ToolTipText     =   "Socios de Baja"
             EndProperty
          EndProperty
       End
@@ -317,7 +314,9 @@ Begin VB.Form frmPOZMantaTickets
       Width           =   885
    End
    Begin VB.TextBox Text2 
+      Appearance      =   0  'Flat
       BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "Verdana"
@@ -535,7 +534,9 @@ Begin VB.Form frmPOZMantaTickets
       Width           =   705
    End
    Begin VB.TextBox Text2 
+      Appearance      =   0  'Flat
       BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
       Enabled         =   0   'False
       BeginProperty Font 
          Name            =   "Verdana"
@@ -1334,7 +1335,7 @@ Dim vTipoMov As CTiposMov
     
     'Ciertas comprobaciones
     If adodc1.Recordset.EOF Then Exit Sub
-    If Not SePuedeBorrar Then Exit Sub
+    If Not SepuedeBorrar Then Exit Sub
         
     ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
     ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
@@ -1371,15 +1372,15 @@ Error2:
     MuestraError Err.Number, "Eliminando registro", Err.Description
 End Sub
 
-Private Function SePuedeBorrar() As Boolean
-    SePuedeBorrar = False
+Private Function SepuedeBorrar() As Boolean
+    SepuedeBorrar = False
     
     If DBLet(Me.adodc1.Recordset!fecpago) <> "" Then
         MsgBox "No puede borrar un ticket con fecha de pago. Revise.", vbExclamation
         Exit Function
     End If
     
-    SePuedeBorrar = True
+    SepuedeBorrar = True
 End Function
 
 

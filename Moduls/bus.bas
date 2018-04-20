@@ -39,17 +39,15 @@ Public ConnIndefa As ADODB.Connection
 'Conexion a la base de datos de sqlserver de castelduc
 Public CnnSqlServer As ADODB.Connection
 
-
 'Conexion a la base de datos de dbf de Monasterios
 Public CnnSqlMonast As ADODB.Connection
 
+'Conexión a la BD de App
+Public ConnApp As ADODB.Connection
 
 
-'[Monica] 06/09/2010: sustituida esta constante por el parametro vParamAplic.Faneca
+'[Monica] 06/09/2010: suºstituida esta constante por el parametro vParamAplic.Faneca
 Public Const cFaneca As Single = 0.0833 ' hectareas
-
-
-
 
 
 'Que conexion a base de datos se va a utilizar
@@ -57,6 +55,7 @@ Public Const cAgro As Byte = 1 'trabajaremos con conn (conexion a BD Ariagro)
 Public Const cConta As Byte = 2 'trabajaremos con connConta (cxion a BD Contabilidad)
 Public Const cAridoc As Byte = 3 'trabajaremos con connAridoc (cxion a BD Aridoc)
 Public Const cAriges As Byte = 4 'trabajaremos con connAriges (conexion a BD Suministros)
+Public Const cAPP As Byte = 5 'trabajaremos con connApp (cxion a BD Aripush)
 
 'LOG de acciones relevantes
 Public LOG As cLOG   'Se instancia , se ejecuta LOG.insertar y se elimina :LOG=nothing   Ver ejemplo borre facturas
@@ -323,9 +322,9 @@ End Sub
 
 Private Sub prueba()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select * from leccont.dbf"
+    Sql = "select * from leccont.dbf"
     
     
 '    Set Rs = New ADODB.Recordset
@@ -341,7 +340,7 @@ End Sub
 
 
 Public Sub FrasPendientesContabilizar(EsRecoleccion As Boolean)
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim SqlBd As String
 Dim SqlInsert As String
@@ -368,8 +367,8 @@ Dim vSeccion As CSeccion
 '            If vEmpresa.BDAriagro <> "ariagro" Then Exit Sub '@@@
 '        End If
     
-        SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-        conn.Execute SQL
+        Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+        conn.Execute Sql
     
         BBDD = vEmpresa.BDAriagro
         
@@ -378,68 +377,68 @@ Dim vSeccion As CSeccion
     
     If EsRecoleccion Then
 
-        SQL = " select " & vUsu.Codigo & ",'Facturas ADV' tipofact, 0, concat(advfacturas.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomsocio, totalfac  from " & BBDD & ".advfacturas where intconta = 0 "
+        Sql = " select " & vUsu.Codigo & ",'Facturas ADV' tipofact, 0, concat(advfacturas.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomsocio, totalfac  from " & BBDD & ".advfacturas where intconta = 0 "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Fras Varias Cliente' tipofact,1, concat(fvarcabfact.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".fvarcabfact, " & BBDD & ".rsocios  where intconta = 0 and fvarcabfact.codsocio = rsocios.codsocio "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Fras Varias Cliente' tipofact,1, concat(fvarcabfact.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".fvarcabfact, " & BBDD & ".rsocios  where intconta = 0 and fvarcabfact.codsocio = rsocios.codsocio "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Fras Varias Cliente' tipofact,1, concat(fvarcabfact.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, clientes.nomclien, totalfac from " & BBDD & ".fvarcabfact, " & BBDD & ".clientes  where intconta = 0 and fvarcabfact.codclien = clientes.codclien "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Fras Varias Cliente' tipofact,1, concat(fvarcabfact.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, clientes.nomclien, totalfac from " & BBDD & ".fvarcabfact, " & BBDD & ".clientes  where intconta = 0 and fvarcabfact.codclien = clientes.codclien "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
         
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Fras Varias Proveedor' tipofact,2, concat(fvarcabfactpro.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".fvarcabfactpro, " & BBDD & ".rsocios where intconta = 0 and fvarcabfactpro.codsocio = rsocios.codsocio "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Fras Varias Proveedor' tipofact,2, concat(fvarcabfactpro.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".fvarcabfactpro, " & BBDD & ".rsocios where intconta = 0 and fvarcabfactpro.codsocio = rsocios.codsocio "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Socio' tipofact,3, concat(rfactsoc.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".rfactsoc, " & BBDD & ".rsocios where contabilizado = 0 and rfactsoc.codsocio = rsocios.codsocio"
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Socio' tipofact,3, concat(rfactsoc.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfac from " & BBDD & ".rfactsoc, " & BBDD & ".rsocios where contabilizado = 0 and rfactsoc.codsocio = rsocios.codsocio"
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Fras Transportistas' tipofact,4, concat(codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rtransporte.nomtrans, totalfac from " & BBDD & ".rfacttra, " & BBDD & ".rtransporte where contabilizado = 0 and rfacttra.codtrans = rtransporte.codtrans "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Fras Transportistas' tipofact,4, concat(codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rtransporte.nomtrans, totalfac from " & BBDD & ".rfacttra, " & BBDD & ".rtransporte where contabilizado = 0 and rfacttra.codtrans = rtransporte.codtrans "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Pozos' tipofact,5, concat(rrecibpozos.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfact from " & BBDD & ".rrecibpozos, " & BBDD & ".rsocios where contabilizado = 0 and rrecibpozos.codsocio = rsocios.codsocio "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Pozos' tipofact,5, concat(rrecibpozos.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, rsocios.nomsocio, totalfact from " & BBDD & ".rrecibpozos, " & BBDD & ".rsocios where contabilizado = 0 and rrecibpozos.codsocio = rsocios.codsocio "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
 
-        conn.Execute SqlInsert & SQL
+        conn.Execute SqlInsert & Sql
         
     Else
     
-        SQL = " select " & vUsu.Codigo & ",'Facturas Cliente' tipofact, 0,concat(facturas.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomclien, totalfac from " & BBDD & ".facturas, " & BBDD & ".clientes  where intconta = 0 and facturas.codclien = clientes.codclien "
+        Sql = " select " & vUsu.Codigo & ",'Facturas Cliente' tipofact, 0,concat(facturas.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomclien, totalfac from " & BBDD & ".facturas, " & BBDD & ".clientes  where intconta = 0 and facturas.codclien = clientes.codclien "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Cliente a Socios' tipofact, 1,concat(facturassocio.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomsocio, totalfac from " & BBDD & ".facturassocio, " & BBDD & ".rsocios where intconta = 0 and facturassocio.codsocio = rsocios.codsocio "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Cliente a Socios' tipofact, 1,concat(facturassocio.codtipom,right(concat('0000000',numfactu),7)),fecfactu,'" & BBDD & "' aa, nomsocio, totalfac from " & BBDD & ".facturassocio, " & BBDD & ".rsocios where intconta = 0 and facturassocio.codsocio = rsocios.codsocio "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecfactu >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecfactu <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
             
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, 2,numfactu,fecrecep,'" & BBDD & "' aa, nomprove, totalfac  from " & BBDD & ".scafpc where intconta = 0 "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Proveedor' tipofact, 2,numfactu,fecrecep,'" & BBDD & "' aa, nomprove, totalfac  from " & BBDD & ".scafpc where intconta = 0 "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
-        SQL = SQL & " union "
-        SQL = SQL & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact,3, numfactu,fecrecep,'" & BBDD & "' aa, nomtrans, totalfac from " & BBDD & ".tcafpc where intconta = 0 "
+        Sql = Sql & " union "
+        Sql = Sql & " select " & vUsu.Codigo & ",'Facturas Transportistas' tipofact,3, numfactu,fecrecep,'" & BBDD & "' aa, nomtrans, totalfac from " & BBDD & ".tcafpc where intconta = 0 "
         If vEmpresa.TieneSII Then
-            SQL = SQL & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
+            Sql = Sql & " and fecrecep >= " & DBSet(vEmpresa.SIIFechaInicio, "F") & " and fecrecep <= " & DBSet(DateAdd("d", -1, Now), "F")
         End If
 
-        conn.Execute SqlInsert & SQL
+        conn.Execute SqlInsert & Sql
         
     End If
         
@@ -478,13 +477,13 @@ Dim vSeccion As CSeccion
 '
 '        End If
         
-        SQL = "select codusu,nombre1,codigo1,nombre2,nombre3,fecha1,text1,importe1  from tmpinformes where codusu = " & vUsu.Codigo '& " order by 6,5 "
+        Sql = "select codusu,nombre1,codigo1,nombre2,nombre3,fecha1,text1,importe1  from tmpinformes where codusu = " & vUsu.Codigo '& " order by 6,5 "
         
-        If TotalRegistrosConsulta(SQL) > 0 Then
+        If TotalRegistrosConsulta(Sql) > 0 Then
             Set frmMens = New frmMensajes
             
             frmMens.OpcionMensaje = 68
-            frmMens.cadena = SQL
+            frmMens.cadena = Sql
             frmMens.Show vbModal
         
             Set frmMens = Nothing
@@ -773,6 +772,37 @@ EAbrirConexion:
     MuestraError Err.Number, "Abrir conexión Contabilidad.", Err.Description
 End Function
 
+
+Public Function AbrirConexionApp() As Boolean
+'Abre
+Dim cad As String
+On Error GoTo EAbrirConexion
+
+    
+    AbrirConexionApp = False
+    Set ConnApp = Nothing
+    Set ConnApp = New Connection
+'    Conn.CursorLocation = adUseClient   'Si ponemos este hay opciones k no van ej select con rs!campo
+    ConnApp.CursorLocation = adUseServer   'Si ponemos esta alguns errores de Conn no se muestran correctamente
+                        
+    cad = "DRIVER={MySQL ODBC 3.51 Driver};DESC=;DATABASE=aripush;SERVER=" & vConfig.SERVER & ";"
+    cad = cad & ";UID=" & vConfig.User
+    cad = cad & ";PWD=" & vConfig.password
+'++monica: tema del vista
+    cad = cad & ";Persist Security Info=true"
+ 
+    ConnAridoc.ConnectionString = cad
+    ConnAridoc.Open
+    ConnAridoc.Execute "Set AUTOCOMMIT = 1"
+    AbrirConexionApp = True
+    Exit Function
+    
+EAbrirConexion:
+    MuestraError Err.Number, "Abrir conexión APP Ariagro.", Err.Description
+End Function
+
+
+
 Public Function CerrarConexionConta()
   'Cerramos la conexion con BD: Contabilidad
   On Error Resume Next
@@ -834,6 +864,12 @@ Public Function CerrarConexionSqlSERVER()
    If Err.Number <> 0 Then Err.Clear
 End Function
 
+Public Function CerrarConexionApp()
+  'Cerramos la conexion con BD: Aripush
+  On Error Resume Next
+   ConnApp.Close
+   If Err.Number <> 0 Then Err.Clear
+End Function
 
 
 
@@ -1368,6 +1404,8 @@ On Error GoTo EDevuelveDesdeBDnew
             Rs.Open cad, ConnAridoc, adOpenForwardOnly, adLockOptimistic, adCmdText
         Case cAriges 'BD 4: Ariges (suministros)
             Rs.Open cad, ConnAriges, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Case cAPP 'BD 5: Aripush (app de ariagro)
+            Rs.Open cad, ConnApp, adOpenForwardOnly, adLockOptimistic, adCmdText
         
     End Select
     
@@ -1589,7 +1627,7 @@ Public Function UsuariosConectados() As Boolean
 Dim I As Integer
 Dim cad As String
 Dim metag As String
-Dim SQL As String
+Dim Sql As String
 cad = OtrosPCsContraAplicacion
 UsuariosConectados = False
 If cad <> "" Then
@@ -1597,12 +1635,12 @@ If cad <> "" Then
     I = 1
     metag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
     Do
-        SQL = RecuperaValor(cad, I)
-        If SQL <> "" Then
-            metag = metag & "    - " & SQL & vbCrLf
+        Sql = RecuperaValor(cad, I)
+        If Sql <> "" Then
+            metag = metag & "    - " & Sql & vbCrLf
             I = I + 1
         End If
-    Loop Until SQL = ""
+    Loop Until Sql = ""
     MsgBox metag, vbExclamation
 End If
 End Function
@@ -1973,7 +2011,7 @@ End Function
 
 Public Sub AbrirConexionMonasterios()
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error Resume Next
@@ -1999,9 +2037,9 @@ Dim Rs As ADODB.Recordset
     
     EsMonasterios = False
     
-    SQL = "select cooperativa from rparam "
+    Sql = "select cooperativa from rparam "
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Not Rs.EOF Then
         EsMonasterios = (DBLet(Rs.Fields(0), "N") = 17)
     End If
@@ -2107,11 +2145,11 @@ Dim F2 As Date
 End Function
 
 
-Public Function ejecutar(ByRef SQL As String, OcultarMsg As Boolean) As Boolean
+Public Function ejecutar(ByRef Sql As String, OcultarMsg As Boolean) As Boolean
     On Error Resume Next
-    conn.Execute SQL
+    conn.Execute Sql
     If Err.Number <> 0 Then
-        If Not OcultarMsg Then MuestraError Err.Number, Err.Description, SQL
+        If Not OcultarMsg Then MuestraError Err.Number, Err.Description, Sql
         ejecutar = False
     Else
         ejecutar = True

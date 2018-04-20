@@ -6,24 +6,174 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmPOZHidrantesIndefa 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Hidrantes Indefa"
-   ClientHeight    =   10110
+   ClientHeight    =   10455
    ClientLeft      =   45
-   ClientTop       =   330
+   ClientTop       =   30
    ClientWidth     =   16560
    Icon            =   "frmPOZHidrantesIndefa.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   10110
+   ScaleHeight     =   10455
    ScaleWidth      =   16560
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Cuenta Principal|N|N|0|1|cltebanc|ctaprpal|0||"
+   Begin VB.Frame FrameBotonGnral 
+      Height          =   705
+      Left            =   225
+      TabIndex        =   228
+      Top             =   135
+      Width           =   3585
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   229
+         Top             =   180
+         Width           =   3135
+         _ExtentX        =   5530
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   10
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Nuevo"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar"
+               Object.Tag             =   "2"
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Eliminar"
+               Object.Tag             =   "2"
+               Object.Width           =   1e-4
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar"
+            EndProperty
+            BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Ver Todos"
+            EndProperty
+            BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Style           =   3
+            EndProperty
+            BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Imprimir"
+            EndProperty
+            BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Object.ToolTipText     =   "Salir"
+            EndProperty
+            BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
+               Style           =   3
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   3885
+      TabIndex        =   226
+      Top             =   135
+      Width           =   1245
+      Begin MSComctlLib.Toolbar Toolbar5 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   227
+         Top             =   180
+         Width           =   945
+         _ExtentX        =   1667
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Buscar Diferencias"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Actualizar Registros"
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.Frame FrameDesplazamiento 
+      Height          =   705
+      Left            =   5205
+      TabIndex        =   224
+      Top             =   135
+      Width           =   2415
+      Begin MSComctlLib.Toolbar ToolbarDes 
+         Height          =   330
+         Left            =   240
+         TabIndex        =   225
+         Top             =   180
+         Width           =   1965
+         _ExtentX        =   3466
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   4
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Primero"
+               ImageIndex      =   6
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Anterior"
+               ImageIndex      =   7
+            EndProperty
+            BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Siguiente"
+               ImageIndex      =   8
+            EndProperty
+            BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Último"
+               ImageIndex      =   9
+            EndProperty
+         EndProperty
+      End
+   End
+   Begin VB.CheckBox chkVistaPrevia 
+      Caption         =   "Vista previa"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Index           =   0
+      Left            =   13950
+      TabIndex        =   223
+      Top             =   180
+      Width           =   1605
+   End
    Begin VB.Frame Frame2 
       Height          =   2925
-      Left            =   210
+      Left            =   255
       TabIndex        =   23
-      Top             =   660
+      Top             =   930
       Width           =   16185
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -173,11 +323,20 @@ Begin VB.Form frmPOZHidrantesIndefa
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   360
          Index           =   1
          Left            =   3705
          MaxLength       =   40
-         TabIndex        =   64
+         TabIndex        =   62
          Top             =   2115
          Width           =   3405
       End
@@ -217,7 +376,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          Index           =   3
          Left            =   2220
          MaxLength       =   40
-         TabIndex        =   62
+         TabIndex        =   60
          Top             =   1755
          Width           =   4890
       End
@@ -237,7 +396,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          Index           =   13
          Left            =   2220
          MaxLength       =   30
-         TabIndex        =   60
+         TabIndex        =   58
          Top             =   1380
          Width           =   4890
       End
@@ -422,7 +581,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          Index           =   2
          Left            =   2220
          MaxLength       =   30
-         TabIndex        =   52
+         TabIndex        =   50
          Top             =   660
          Width           =   4890
       End
@@ -498,7 +657,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          Index           =   19
          Left            =   11145
          MaxLength       =   9
-         TabIndex        =   111
+         TabIndex        =   109
          Tag             =   "Consumo|N|S|||rpozos|consumo|########0||"
          Text            =   "1234567"
          Top             =   1395
@@ -523,7 +682,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   10185
-         TabIndex        =   110
+         TabIndex        =   108
          Top             =   1455
          Width           =   1035
       End
@@ -549,7 +708,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   12645
-         TabIndex        =   109
+         TabIndex        =   107
          Top             =   945
          Width           =   1605
       End
@@ -566,7 +725,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   10185
-         TabIndex        =   108
+         TabIndex        =   106
          Top             =   945
          Width           =   1035
       End
@@ -583,7 +742,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   10185
-         TabIndex        =   107
+         TabIndex        =   105
          Top             =   570
          Width           =   1125
       End
@@ -609,7 +768,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   12645
-         TabIndex        =   106
+         TabIndex        =   104
          Top             =   570
          Width           =   1605
       End
@@ -627,7 +786,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          ForeColor       =   &H00972E0B&
          Height          =   195
          Left            =   10185
-         TabIndex        =   105
+         TabIndex        =   103
          Top             =   180
          Width           =   945
       End
@@ -656,7 +815,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   10155
-         TabIndex        =   68
+         TabIndex        =   66
          Top             =   1860
          Width           =   1545
       End
@@ -682,7 +841,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   67
+         TabIndex        =   65
          Top             =   2475
          Width           =   810
       End
@@ -699,7 +858,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   66
+         TabIndex        =   64
          Top             =   2100
          Width           =   810
       End
@@ -716,7 +875,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   2730
-         TabIndex        =   65
+         TabIndex        =   63
          Top             =   2115
          Width           =   990
       End
@@ -741,7 +900,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   63
+         TabIndex        =   61
          Top             =   1755
          Width           =   735
       End
@@ -758,7 +917,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   61
+         TabIndex        =   59
          Top             =   1395
          Width           =   690
       End
@@ -783,7 +942,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   59
+         TabIndex        =   57
          Top             =   1005
          Width           =   690
       End
@@ -808,7 +967,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   7260
-         TabIndex        =   58
+         TabIndex        =   56
          Top             =   1365
          Width           =   1095
       End
@@ -825,7 +984,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   7260
-         TabIndex        =   57
+         TabIndex        =   55
          Top             =   1755
          Width           =   810
       End
@@ -842,7 +1001,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   7260
-         TabIndex        =   56
+         TabIndex        =   54
          Top             =   2085
          Width           =   930
       End
@@ -868,7 +1027,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   7260
-         TabIndex        =   55
+         TabIndex        =   53
          Top             =   420
          Width           =   1275
       End
@@ -894,7 +1053,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   7260
-         TabIndex        =   54
+         TabIndex        =   52
          Top             =   825
          Width           =   1185
       End
@@ -919,7 +1078,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   210
-         TabIndex        =   53
+         TabIndex        =   51
          Top             =   645
          Width           =   690
       End
@@ -936,7 +1095,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   5460
-         TabIndex        =   39
+         TabIndex        =   37
          Top             =   270
          Width           =   1455
       End
@@ -953,7 +1112,7 @@ Begin VB.Form frmPOZHidrantesIndefa
          EndProperty
          Height          =   255
          Left            =   3015
-         TabIndex        =   29
+         TabIndex        =   27
          Top             =   270
          Width           =   900
       End
@@ -981,7 +1140,7 @@ Begin VB.Form frmPOZHidrantesIndefa
       Index           =   0
       Left            =   270
       TabIndex        =   21
-      Top             =   9405
+      Top             =   9765
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1017,7 +1176,7 @@ Begin VB.Form frmPOZHidrantesIndefa
       Height          =   375
       Left            =   15360
       TabIndex        =   20
-      Top             =   9585
+      Top             =   9945
       Width           =   1065
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1034,106 +1193,8 @@ Begin VB.Form frmPOZHidrantesIndefa
       Height          =   375
       Left            =   14160
       TabIndex        =   19
-      Top             =   9585
+      Top             =   9945
       Width           =   1065
-   End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   26
-      Top             =   0
-      Width           =   16560
-      _ExtentX        =   29210
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   19
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Ver todos"
-            ImageIndex      =   2
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Buscar Diferencias Indefa"
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Actualizar Registro"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Eliminar"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button13 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-         BeginProperty Button14 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button15 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button16 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Primero"
-            ImageIndex      =   6
-         EndProperty
-         BeginProperty Button17 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Anterior"
-            ImageIndex      =   7
-         EndProperty
-         BeginProperty Button18 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Siguiente"
-            ImageIndex      =   8
-         EndProperty
-         BeginProperty Button19 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Último"
-            ImageIndex      =   9
-         EndProperty
-      EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Index           =   0
-         Left            =   11160
-         TabIndex        =   27
-         Top             =   60
-         Width           =   1215
-      End
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
@@ -1149,21 +1210,21 @@ Begin VB.Form frmPOZHidrantesIndefa
       Height          =   375
       Left            =   15315
       TabIndex        =   25
-      Top             =   9585
+      Top             =   9945
       Visible         =   0   'False
       Width           =   1065
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   5700
       Left            =   270
-      TabIndex        =   28
-      Top             =   3645
+      TabIndex        =   26
+      Top             =   4005
       Width           =   16155
       _ExtentX        =   28496
       _ExtentY        =   10054
       _Version        =   393216
       Style           =   1
-      Tab             =   2
+      Tab             =   1
       TabsPerRow      =   6
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -1180,24 +1241,22 @@ Begin VB.Form frmPOZHidrantesIndefa
       TabPicture(0)   =   "frmPOZHidrantesIndefa.frx":0238
       Tab(0).ControlEnabled=   0   'False
       Tab(0).Control(0)=   "SSTab2"
-      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Coopropietarios"
       TabPicture(1)   =   "frmPOZHidrantesIndefa.frx":0254
-      Tab(1).ControlEnabled=   0   'False
+      Tab(1).ControlEnabled=   -1  'True
       Tab(1).Control(0)=   "FrameAux0"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Campos"
       TabPicture(2)   =   "frmPOZHidrantesIndefa.frx":0270
-      Tab(2).ControlEnabled=   -1  'True
+      Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "FrameAux1"
-      Tab(2).Control(0).Enabled=   0   'False
       Tab(2).ControlCount=   1
       Begin TabDlg.SSTab SSTab2 
          Height          =   5205
          Left            =   -74880
-         TabIndex        =   70
+         TabIndex        =   68
          Top             =   420
          Width           =   15780
          _ExtentX        =   27834
@@ -1220,25 +1279,21 @@ Begin VB.Form frmPOZHidrantesIndefa
          TabPicture(0)   =   "frmPOZHidrantesIndefa.frx":028C
          Tab(0).ControlEnabled=   0   'False
          Tab(0).Control(0)=   "FrameAux2"
-         Tab(0).Control(0).Enabled=   0   'False
          Tab(0).ControlCount=   1
          TabCaption(1)   =   "Hidrantes"
          TabPicture(1)   =   "frmPOZHidrantesIndefa.frx":02A8
          Tab(1).ControlEnabled=   0   'False
          Tab(1).Control(0)=   "FrameAux4"
-         Tab(1).Control(0).Enabled=   0   'False
          Tab(1).ControlCount=   1
          TabCaption(2)   =   "Válvulas"
          TabPicture(2)   =   "frmPOZHidrantesIndefa.frx":02C4
          Tab(2).ControlEnabled=   0   'False
          Tab(2).Control(0)=   "FrameAux5"
-         Tab(2).Control(0).Enabled=   0   'False
          Tab(2).ControlCount=   1
          TabCaption(3)   =   "Ventosas"
          TabPicture(3)   =   "frmPOZHidrantesIndefa.frx":02E0
          Tab(3).ControlEnabled=   0   'False
          Tab(3).Control(0)=   "FrameAux6"
-         Tab(3).Control(0).Enabled=   0   'False
          Tab(3).ControlCount=   1
          TabCaption(4)   =   "Desagües"
          TabPicture(4)   =   "frmPOZHidrantesIndefa.frx":02FC
@@ -1250,7 +1305,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             BorderStyle     =   0  'None
             Height          =   4695
             Left            =   120
-            TabIndex        =   202
+            TabIndex        =   200
             Top             =   420
             Width           =   15405
             Begin VB.TextBox txtaux8 
@@ -1270,7 +1325,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   250
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   213
+               TabIndex        =   211
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   4080
                Width           =   12720
@@ -1291,7 +1346,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Left            =   2460
                MaxLength       =   250
                ScrollBars      =   2  'Vertical
-               TabIndex        =   212
+               TabIndex        =   210
                Tag             =   "the_geom|T|S|||rae_visitas_hidtomas|the_geom||N|"
                Top             =   3180
                Width           =   2865
@@ -1311,7 +1366,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   5
                Left            =   2460
                MaxLength       =   50
-               TabIndex        =   211
+               TabIndex        =   209
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|observaciones||N|"
                Top             =   2250
                Width           =   2865
@@ -1331,7 +1386,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   4
                Left            =   2460
                MaxLength       =   250
-               TabIndex        =   210
+               TabIndex        =   208
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_emisor_impulsos||N|"
                Top             =   1785
                Width           =   2865
@@ -1351,7 +1406,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   3
                Left            =   2460
                MaxLength       =   250
-               TabIndex        =   209
+               TabIndex        =   207
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_contador||N|"
                Top             =   1350
                Width           =   2865
@@ -1371,7 +1426,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   2
                Left            =   2460
                MaxLength       =   250
-               TabIndex        =   208
+               TabIndex        =   206
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_vavulas_3vias||N|"
                Top             =   915
                Width           =   2865
@@ -1391,7 +1446,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   1
                Left            =   2460
                MaxLength       =   10
-               TabIndex        =   207
+               TabIndex        =   205
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|dn_valvula_esfera||N|"
                Top             =   555
                Width           =   2865
@@ -1411,7 +1466,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   0
                Left            =   2460
                MaxLength       =   10
-               TabIndex        =   206
+               TabIndex        =   204
                Tag             =   "dn_contador|T|S|||rae_visitas_hidtomas|dn_contador||N|"
                Top             =   210
                Width           =   2865
@@ -1431,7 +1486,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   6
                Left            =   2460
                MaxLength       =   250
-               TabIndex        =   205
+               TabIndex        =   203
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   2715
                Width           =   2865
@@ -1488,7 +1543,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   2
                Left            =   6165
-               TabIndex        =   203
+               TabIndex        =   201
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -1508,7 +1563,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   3
                Left            =   10740
-               TabIndex        =   204
+               TabIndex        =   202
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -1537,7 +1592,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   224
+               TabIndex        =   222
                Top             =   2295
                Width           =   2625
             End
@@ -1554,7 +1609,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   223
+               TabIndex        =   221
                Top             =   3195
                Width           =   1815
             End
@@ -1571,7 +1626,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   222
+               TabIndex        =   220
                Top             =   1845
                Width           =   1815
             End
@@ -1588,7 +1643,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   221
+               TabIndex        =   219
                Top             =   1395
                Width           =   1815
             End
@@ -1605,7 +1660,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   220
+               TabIndex        =   218
                Top             =   4170
                Width           =   1635
             End
@@ -1622,7 +1677,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   219
+               TabIndex        =   217
                Top             =   2745
                Width           =   2175
             End
@@ -1655,7 +1710,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   10740
-               TabIndex        =   218
+               TabIndex        =   216
                Top             =   60
                Width           =   1035
             End
@@ -1672,7 +1727,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   6165
-               TabIndex        =   217
+               TabIndex        =   215
                Top             =   60
                Width           =   1005
             End
@@ -1690,7 +1745,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   216
+               TabIndex        =   214
                Top             =   915
                Width           =   1875
             End
@@ -1708,7 +1763,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   215
+               TabIndex        =   213
                Top             =   240
                Width           =   1875
             End
@@ -1726,7 +1781,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   214
+               TabIndex        =   212
                Top             =   555
                Width           =   1875
             End
@@ -1735,7 +1790,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             BorderStyle     =   0  'None
             Height          =   4710
             Left            =   -74880
-            TabIndex        =   175
+            TabIndex        =   173
             Top             =   420
             Width           =   15450
             Begin VB.TextBox txtaux7 
@@ -1755,7 +1810,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   250
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   186
+               TabIndex        =   184
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   4080
                Width           =   12720
@@ -1776,7 +1831,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Left            =   2640
                MaxLength       =   250
                ScrollBars      =   2  'Vertical
-               TabIndex        =   185
+               TabIndex        =   183
                Tag             =   "the_geom|T|S|||rae_visitas_hidtomas|the_geom||N|"
                Top             =   2880
                Width           =   2865
@@ -1796,7 +1851,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   5
                Left            =   2640
                MaxLength       =   50
-               TabIndex        =   184
+               TabIndex        =   182
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|observaciones||N|"
                Top             =   2130
                Width           =   2865
@@ -1816,7 +1871,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   4
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   183
+               TabIndex        =   181
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_emisor_impulsos||N|"
                Top             =   1725
                Width           =   2865
@@ -1836,7 +1891,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   3
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   182
+               TabIndex        =   180
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_contador||N|"
                Top             =   1350
                Width           =   2865
@@ -1856,7 +1911,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   2
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   181
+               TabIndex        =   179
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_vavulas_3vias||N|"
                Top             =   915
                Width           =   2865
@@ -1876,7 +1931,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   1
                Left            =   2640
                MaxLength       =   10
-               TabIndex        =   180
+               TabIndex        =   178
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|dn_valvula_esfera||N|"
                Top             =   555
                Width           =   2865
@@ -1896,7 +1951,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   0
                Left            =   2640
                MaxLength       =   10
-               TabIndex        =   179
+               TabIndex        =   177
                Tag             =   "dn_contador|T|S|||rae_visitas_hidtomas|dn_contador||N|"
                Top             =   210
                Width           =   2865
@@ -1916,7 +1971,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   8
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   178
+               TabIndex        =   176
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   3270
                Width           =   2865
@@ -1936,7 +1991,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   6
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   177
+               TabIndex        =   175
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   2505
                Width           =   2865
@@ -1956,7 +2011,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   9
                Left            =   2640
                MaxLength       =   250
-               TabIndex        =   176
+               TabIndex        =   174
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   3705
                Width           =   2865
@@ -2013,7 +2068,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   6
                Left            =   10965
-               TabIndex        =   187
+               TabIndex        =   185
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -2033,7 +2088,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   7
                Left            =   6435
-               TabIndex        =   188
+               TabIndex        =   186
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -2062,7 +2117,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   201
+               TabIndex        =   199
                Top             =   2175
                Width           =   2295
             End
@@ -2079,7 +2134,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   200
+               TabIndex        =   198
                Top             =   2955
                Width           =   1815
             End
@@ -2096,7 +2151,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   199
+               TabIndex        =   197
                Top             =   1785
                Width           =   1815
             End
@@ -2113,7 +2168,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   198
+               TabIndex        =   196
                Top             =   1395
                Width           =   1815
             End
@@ -2130,7 +2185,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   197
+               TabIndex        =   195
                Top             =   4170
                Width           =   1635
             End
@@ -2147,7 +2202,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   196
+               TabIndex        =   194
                Top             =   3360
                Width           =   1635
             End
@@ -2164,7 +2219,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   195
+               TabIndex        =   193
                Top             =   2565
                Width           =   2760
             End
@@ -2197,7 +2252,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   10965
-               TabIndex        =   194
+               TabIndex        =   192
                Top             =   60
                Width           =   990
             End
@@ -2214,7 +2269,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   6390
-               TabIndex        =   193
+               TabIndex        =   191
                Top             =   60
                Width           =   1005
             End
@@ -2232,7 +2287,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   192
+               TabIndex        =   190
                Top             =   915
                Width           =   1875
             End
@@ -2250,7 +2305,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   191
+               TabIndex        =   189
                Top             =   240
                Width           =   1875
             End
@@ -2268,7 +2323,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   190
+               TabIndex        =   188
                Top             =   555
                Width           =   1875
             End
@@ -2285,7 +2340,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   189
+               TabIndex        =   187
                Top             =   3750
                Width           =   1635
             End
@@ -2294,7 +2349,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             BorderStyle     =   0  'None
             Height          =   4680
             Left            =   -74880
-            TabIndex        =   146
+            TabIndex        =   144
             Top             =   420
             Width           =   15450
             Begin VB.TextBox txtaux6 
@@ -2312,7 +2367,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   10
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   158
+               TabIndex        =   156
                Tag             =   "x|T|S|||rae_visitas_hidtomas|x||N|"
                Top             =   3720
                Width           =   2865
@@ -2332,7 +2387,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   7
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   157
+               TabIndex        =   155
                Tag             =   "x|T|S|||rae_visitas_hidtomas|x||N|"
                Top             =   2670
                Width           =   2865
@@ -2354,7 +2409,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   250
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   156
+               TabIndex        =   154
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   4080
                Width           =   12405
@@ -2374,7 +2429,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   0
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   155
+               TabIndex        =   153
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_solenoide||N|"
                Top             =   210
                Width           =   2865
@@ -2394,7 +2449,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   1
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   154
+               TabIndex        =   152
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_contador||N|"
                Top             =   555
                Width           =   2865
@@ -2414,7 +2469,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   2
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   153
+               TabIndex        =   151
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_emisor_impulsos||N|"
                Top             =   915
                Width           =   2865
@@ -2434,7 +2489,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   3
                Left            =   2730
                MaxLength       =   50
-               TabIndex        =   152
+               TabIndex        =   150
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|observaciones||N|"
                Top             =   1260
                Width           =   2865
@@ -2454,7 +2509,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   4
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   151
+               TabIndex        =   149
                Tag             =   "x|T|S|||rae_visitas_hidtomas|x||N|"
                Top             =   1620
                Width           =   2865
@@ -2475,7 +2530,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Left            =   2730
                MaxLength       =   250
                ScrollBars      =   2  'Vertical
-               TabIndex        =   150
+               TabIndex        =   148
                Tag             =   "the_geom|T|S|||rae_visitas_hidtomas|the_geom||N|"
                Top             =   1965
                Width           =   2865
@@ -2495,7 +2550,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   6
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   149
+               TabIndex        =   147
                Tag             =   "Parcelas|T|S|||rae_visitas_hidtomas|parcelas||N|"
                Top             =   2310
                Width           =   2865
@@ -2515,7 +2570,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   9
                Left            =   2730
                MaxLength       =   250
-               TabIndex        =   148
+               TabIndex        =   146
                Tag             =   "Superficie|N|S|||rae_visitas_hidtomas|superficie||N|"
                Top             =   3375
                Width           =   2865
@@ -2535,7 +2590,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   8
                Left            =   2730
                MaxLength       =   255
-               TabIndex        =   147
+               TabIndex        =   145
                Tag             =   "Poligono|N|S|||rae_visitas_hidtomas|poligono||N|"
                Top             =   3015
                Width           =   2865
@@ -2592,7 +2647,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   4
                Left            =   10740
-               TabIndex        =   159
+               TabIndex        =   157
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -2612,7 +2667,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   5
                Left            =   6165
-               TabIndex        =   160
+               TabIndex        =   158
                Top             =   270
                Width           =   825
                _ExtentX        =   1455
@@ -2641,7 +2696,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   174
+               TabIndex        =   172
                Top             =   3720
                Width           =   1875
             End
@@ -2658,7 +2713,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   6165
-               TabIndex        =   173
+               TabIndex        =   171
                Top             =   60
                Width           =   975
             End
@@ -2675,7 +2730,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   172
+               TabIndex        =   170
                Top             =   2670
                Width           =   2595
             End
@@ -2692,7 +2747,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   171
+               TabIndex        =   169
                Top             =   4080
                Width           =   1635
             End
@@ -2710,7 +2765,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   170
+               TabIndex        =   168
                Top             =   555
                Width           =   1875
             End
@@ -2728,7 +2783,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   169
+               TabIndex        =   167
                Top             =   240
                Width           =   1875
             End
@@ -2746,7 +2801,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   315
                Left            =   30
-               TabIndex        =   168
+               TabIndex        =   166
                Top             =   915
                Width           =   1875
             End
@@ -2763,7 +2818,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   10740
-               TabIndex        =   167
+               TabIndex        =   165
                Top             =   60
                Width           =   945
             End
@@ -2780,7 +2835,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   166
+               TabIndex        =   164
                Top             =   1965
                Width           =   1875
             End
@@ -2797,7 +2852,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   165
+               TabIndex        =   163
                Top             =   1260
                Width           =   1875
             End
@@ -2814,7 +2869,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   164
+               TabIndex        =   162
                Top             =   1620
                Width           =   1875
             End
@@ -2831,7 +2886,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   163
+               TabIndex        =   161
                Top             =   3015
                Width           =   1875
             End
@@ -2848,7 +2903,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   162
+               TabIndex        =   160
                Top             =   3375
                Width           =   1875
             End
@@ -2865,7 +2920,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   161
+               TabIndex        =   159
                Top             =   2310
                Width           =   2730
             End
@@ -2890,7 +2945,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             BorderStyle     =   0  'None
             Height          =   4560
             Left            =   -74880
-            TabIndex        =   121
+            TabIndex        =   119
             Top             =   420
             Width           =   15360
             Begin VB.TextBox txtaux5 
@@ -2908,7 +2963,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   7
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   131
+               TabIndex        =   129
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   2835
                Width           =   3915
@@ -2928,7 +2983,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   5
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   130
+               TabIndex        =   128
                Tag             =   "Instaladora|T|S|||rae_visitas_hidtomas|instaladora||N|"
                Top             =   2070
                Width           =   3915
@@ -2948,7 +3003,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   4
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   129
+               TabIndex        =   127
                Tag             =   "x|T|S|||rae_visitas_hidtomas|x||N|"
                Top             =   1710
                Width           =   3915
@@ -2968,7 +3023,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   3
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   128
+               TabIndex        =   126
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_estanqueidad||N|"
                Top             =   1350
                Width           =   3915
@@ -2988,7 +3043,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   6
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   127
+               TabIndex        =   125
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|prueba_solenoide||N|"
                Top             =   2445
                Width           =   3915
@@ -3008,7 +3063,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   0
                Left            =   2490
                MaxLength       =   10
-               TabIndex        =   126
+               TabIndex        =   124
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|dn_toma||N|"
                Top             =   150
                Width           =   1350
@@ -3028,7 +3083,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   2
                Left            =   2490
                MaxLength       =   10
-               TabIndex        =   125
+               TabIndex        =   123
                Tag             =   "dn_contador|T|S|||rae_visitas_hidtomas|dn_contador||N|"
                Top             =   990
                Width           =   1350
@@ -3048,7 +3103,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   1
                Left            =   2490
                MaxLength       =   40
-               TabIndex        =   124
+               TabIndex        =   122
                Tag             =   "Falta Bypass|T|N|||rae_visitas_hidtomas|falta_bypass||S|"
                Top             =   630
                Width           =   1350
@@ -3068,7 +3123,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   8
                Left            =   2490
                MaxLength       =   250
-               TabIndex        =   123
+               TabIndex        =   121
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   3195
                Width           =   3915
@@ -3090,7 +3145,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   250
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   122
+               TabIndex        =   120
                Tag             =   "x|T|S|||rae_visitas_hidtomas|x||N|"
                Top             =   3645
                Width           =   3945
@@ -3147,7 +3202,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   0
                Left            =   8430
-               TabIndex        =   132
+               TabIndex        =   130
                Top             =   30
                Width           =   735
                _ExtentX        =   1296
@@ -3167,7 +3222,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Height          =   330
                Index           =   1
                Left            =   12555
-               TabIndex        =   133
+               TabIndex        =   131
                Top             =   30
                Width           =   825
                _ExtentX        =   1455
@@ -3196,7 +3251,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   145
+               TabIndex        =   143
                Top             =   2475
                Width           =   2265
             End
@@ -3213,7 +3268,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   144
+               TabIndex        =   142
                Top             =   2865
                Width           =   2520
             End
@@ -3230,7 +3285,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   143
+               TabIndex        =   141
                Top             =   2130
                Width           =   1755
             End
@@ -3247,7 +3302,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   11505
-               TabIndex        =   142
+               TabIndex        =   140
                Top             =   180
                Width           =   1125
             End
@@ -3264,7 +3319,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   7290
-               TabIndex        =   141
+               TabIndex        =   139
                Top             =   150
                Width           =   1185
             End
@@ -3281,7 +3336,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   140
+               TabIndex        =   138
                Top             =   1770
                Width           =   1680
             End
@@ -3299,7 +3354,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   255
                Left            =   30
-               TabIndex        =   139
+               TabIndex        =   137
                Top             =   240
                Width           =   1035
             End
@@ -3316,7 +3371,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   255
                Left            =   30
-               TabIndex        =   138
+               TabIndex        =   136
                Top             =   1380
                Width           =   2625
             End
@@ -3333,7 +3388,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   255
                Left            =   30
-               TabIndex        =   137
+               TabIndex        =   135
                Top             =   990
                Width           =   1860
             End
@@ -3350,7 +3405,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   255
                Left            =   30
-               TabIndex        =   136
+               TabIndex        =   134
                Top             =   630
                Width           =   1575
             End
@@ -3367,7 +3422,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   135
+               TabIndex        =   133
                Top             =   3255
                Width           =   2175
             End
@@ -3384,7 +3439,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   30
-               TabIndex        =   134
+               TabIndex        =   132
                Top             =   3675
                Width           =   1575
             End
@@ -3409,7 +3464,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             BorderStyle     =   0  'None
             Height          =   4410
             Left            =   -74880
-            TabIndex        =   71
+            TabIndex        =   69
             Top             =   420
             Width           =   15405
             Begin VB.TextBox txtaux1 
@@ -3427,7 +3482,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   2
                Left            =   1995
                MaxLength       =   255
-               TabIndex        =   120
+               TabIndex        =   118
                Top             =   1230
                Width           =   3375
             End
@@ -3446,7 +3501,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   3
                Left            =   1995
                MaxLength       =   5
-               TabIndex        =   117
+               TabIndex        =   115
                Tag             =   "Poligono|N|S|||rae_visitas_hidtomas|poligono||N|"
                Top             =   1680
                Width           =   3375
@@ -3466,7 +3521,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   11
                Left            =   8520
                MaxLength       =   20
-               TabIndex        =   116
+               TabIndex        =   114
                Tag             =   "Fecha Entrada|F|S|||rae_visitas_hidtomas|fecha_entrada||N|"
                Top             =   1313
                Width           =   1605
@@ -3486,7 +3541,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   9
                Left            =   8520
                MaxLength       =   10
-               TabIndex        =   113
+               TabIndex        =   111
                Tag             =   "Toma|T|S|||rae_visitas_hidtomas|toma||N|"
                Top             =   531
                Width           =   1575
@@ -3494,7 +3549,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Begin MSComctlLib.Toolbar Toolbar2 
                Height          =   330
                Left            =   13470
-               TabIndex        =   104
+               TabIndex        =   102
                Top             =   30
                Width           =   675
                _ExtentX        =   1191
@@ -3525,7 +3580,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   0
                Left            =   1995
                MaxLength       =   40
-               TabIndex        =   87
+               TabIndex        =   85
                Tag             =   "Contador|T|N|||rae_visitas_hidtomas|contador||S|"
                Top             =   270
                Width           =   1245
@@ -3545,7 +3600,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   6
                Left            =   1995
                MaxLength       =   10
-               TabIndex        =   86
+               TabIndex        =   84
                Tag             =   "dn_contador|T|S|||rae_visitas_hidtomas|dn_contador||N|"
                Top             =   2880
                Width           =   3345
@@ -3565,7 +3620,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   7
                Left            =   1995
                MaxLength       =   125
-               TabIndex        =   85
+               TabIndex        =   83
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|dn_valvula_esfera||N|"
                Top             =   3270
                Width           =   3315
@@ -3585,7 +3640,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   8
                Left            =   1995
                MaxLength       =   125
-               TabIndex        =   84
+               TabIndex        =   82
                Tag             =   "dn_toma|T|S|||rae_visitas_hidtomas|dn_toma||N|"
                Top             =   3660
                Width           =   3285
@@ -3605,7 +3660,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   4
                Left            =   1995
                MaxLength       =   125
-               TabIndex        =   83
+               TabIndex        =   81
                Tag             =   "Parcelas|T|S|||rae_visitas_hidtomas|parcelas||N|"
                Top             =   2070
                Width           =   3375
@@ -3625,7 +3680,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   12
                Left            =   8520
                MaxLength       =   20
-               TabIndex        =   82
+               TabIndex        =   80
                Tag             =   "Instaladora|T|S|||rae_visitas_hidtomas|instaladora||N|"
                Top             =   1704
                Width           =   1605
@@ -3645,7 +3700,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   5
                Left            =   1995
                MaxLength       =   20
-               TabIndex        =   81
+               TabIndex        =   79
                Tag             =   "Hanegadas|N|S|||rae_visitas_hidtomas|hanegadas||N|"
                Top             =   2430
                Width           =   1275
@@ -3665,7 +3720,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   10
                Left            =   8520
                MaxLength       =   20
-               TabIndex        =   80
+               TabIndex        =   78
                Tag             =   "Recibido|T|S|||rae_visitas_hidtomas|Recibido||N|"
                Top             =   922
                Width           =   1605
@@ -3685,7 +3740,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   13
                Left            =   8520
                MaxLength       =   20
-               TabIndex        =   79
+               TabIndex        =   77
                Tag             =   "Fecha Revision|F|S|||rae_visitas_hidtomas|fecha_revision||N|"
                Top             =   2095
                Width           =   1605
@@ -3698,7 +3753,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   255
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   78
+               TabIndex        =   76
                Tag             =   "dn_valvula|T|S|||rae_visitas_hidtomas|observaciones_RAE||N|"
                Top             =   510
                Width           =   4665
@@ -3718,7 +3773,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   14
                Left            =   8520
                MaxLength       =   255
-               TabIndex        =   77
+               TabIndex        =   75
                Tag             =   "Fecha Turno|T|S|||rae_visitas_hidtomas|fecha_turno||N|"
                Top             =   2486
                Width           =   1635
@@ -3738,7 +3793,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   17
                Left            =   8520
                MaxLength       =   255
-               TabIndex        =   76
+               TabIndex        =   74
                Tag             =   "Verificacion|T|S|||rae_visitas_hidtomas|verificacion||N|"
                Top             =   3660
                Width           =   1635
@@ -3751,7 +3806,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                MaxLength       =   255
                MultiLine       =   -1  'True
                ScrollBars      =   2  'Vertical
-               TabIndex        =   75
+               TabIndex        =   73
                Tag             =   "Comentarios Indefa|T|S|||rae_visitas_hidtomas|Comentarios_INDEFA||N|"
                Top             =   2610
                Width           =   4665
@@ -3771,7 +3826,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   15
                Left            =   8520
                MaxLength       =   255
-               TabIndex        =   74
+               TabIndex        =   72
                Tag             =   "Turno|T|S|||rae_visitas_hidtomas|turno||N|"
                Top             =   2877
                Width           =   1635
@@ -3791,7 +3846,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   16
                Left            =   8520
                MaxLength       =   255
-               TabIndex        =   73
+               TabIndex        =   71
                Tag             =   "q_instantaneo|T|S|||rae_visitas_hidtomas|q_instantaneo||N|"
                Top             =   3268
                Width           =   1635
@@ -3811,7 +3866,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                Index           =   1
                Left            =   1995
                MaxLength       =   255
-               TabIndex        =   72
+               TabIndex        =   70
                Tag             =   "Nro socio|N|S|||rae_visitas_hidtomas|socio_revisado||N|"
                Top             =   825
                Width           =   1245
@@ -3877,7 +3932,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   119
+               TabIndex        =   117
                Top             =   1665
                Width           =   1995
             End
@@ -3894,7 +3949,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   118
+               TabIndex        =   116
                Top             =   1305
                Width           =   1665
             End
@@ -3911,7 +3966,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   115
+               TabIndex        =   113
                Top             =   2865
                Width           =   1530
             End
@@ -3928,7 +3983,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   114
+               TabIndex        =   112
                Top             =   540
                Width           =   1035
             End
@@ -3946,7 +4001,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                ForeColor       =   &H00972E0B&
                Height          =   255
                Left            =   30
-               TabIndex        =   103
+               TabIndex        =   101
                Top             =   240
                Width           =   1035
             End
@@ -3963,7 +4018,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   102
+               TabIndex        =   100
                Top             =   1215
                Width           =   1440
             End
@@ -3980,7 +4035,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   101
+               TabIndex        =   99
                Top             =   3270
                Width           =   1395
             End
@@ -3997,7 +4052,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   100
+               TabIndex        =   98
                Top             =   3660
                Width           =   1485
             End
@@ -4014,7 +4069,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   99
+               TabIndex        =   97
                Top             =   840
                Width           =   1815
             End
@@ -4031,7 +4086,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   98
+               TabIndex        =   96
                Top             =   2055
                Width           =   1155
             End
@@ -4048,7 +4103,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   97
+               TabIndex        =   95
                Top             =   1695
                Width           =   2100
             End
@@ -4065,7 +4120,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   30
-               TabIndex        =   96
+               TabIndex        =   94
                Top             =   2445
                Width           =   1995
             End
@@ -4082,7 +4137,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5955
-               TabIndex        =   95
+               TabIndex        =   93
                Top             =   915
                Width           =   1440
             End
@@ -4099,7 +4154,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   94
+               TabIndex        =   92
                Top             =   2085
                Width           =   2700
             End
@@ -4116,7 +4171,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   315
                Left            =   10260
-               TabIndex        =   93
+               TabIndex        =   91
                Top             =   210
                Width           =   5115
             End
@@ -4133,7 +4188,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   270
                Left            =   10305
-               TabIndex        =   92
+               TabIndex        =   90
                Top             =   2295
                Width           =   2490
             End
@@ -4150,7 +4205,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   91
+               TabIndex        =   89
                Top             =   2865
                Width           =   1815
             End
@@ -4167,7 +4222,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   90
+               TabIndex        =   88
                Top             =   3270
                Width           =   2085
             End
@@ -4184,7 +4239,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   89
+               TabIndex        =   87
                Top             =   2475
                Width           =   2535
             End
@@ -4201,7 +4256,7 @@ Begin VB.Form frmPOZHidrantesIndefa
                EndProperty
                Height          =   360
                Left            =   5925
-               TabIndex        =   88
+               TabIndex        =   86
                Top             =   3660
                Width           =   2355
             End
@@ -4210,10 +4265,10 @@ Begin VB.Form frmPOZHidrantesIndefa
       Begin VB.Frame FrameAux1 
          BorderStyle     =   0  'None
          Height          =   4350
-         Left            =   90
-         TabIndex        =   40
+         Left            =   -74910
+         TabIndex        =   38
          Top             =   450
-         Width           =   6780
+         Width           =   7780
          Begin VB.TextBox txtAux2 
             Appearance      =   0  'Flat
             BackColor       =   &H80000018&
@@ -4232,7 +4287,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   6570
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   51
+            TabIndex        =   49
             Text            =   "Par"
             Top             =   2940
             Visible         =   0   'False
@@ -4256,7 +4311,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   6180
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   50
+            TabIndex        =   48
             Text            =   "Pol"
             Top             =   2940
             Visible         =   0   'False
@@ -4281,7 +4336,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   5700
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   49
+            TabIndex        =   47
             Text            =   "Hdas"
             Top             =   2940
             Visible         =   0   'False
@@ -4305,7 +4360,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   4350
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   48
+            TabIndex        =   46
             Text            =   "Poblacion"
             Top             =   2940
             Visible         =   0   'False
@@ -4329,7 +4384,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   2565
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   45
+            TabIndex        =   43
             Text            =   "Partida"
             Top             =   2925
             Visible         =   0   'False
@@ -4350,7 +4405,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   315
             Index           =   1
             Left            =   2385
-            TabIndex        =   44
+            TabIndex        =   42
             ToolTipText     =   "Buscar campo"
             Top             =   2925
             Visible         =   0   'False
@@ -4372,7 +4427,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   2
             Left            =   1710
             MaxLength       =   8
-            TabIndex        =   43
+            TabIndex        =   41
             Tag             =   "Campo|N|N|||rpozos_campos|codcampo|00000000|N|"
             Text            =   "campo"
             Top             =   2925
@@ -4395,7 +4450,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   0
             Left            =   225
             MaxLength       =   10
-            TabIndex        =   42
+            TabIndex        =   40
             Tag             =   "Hidrante|T|N|||rpozos_campos|hidrante||S|"
             Text            =   "Hidrante"
             Top             =   2925
@@ -4418,7 +4473,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   41
+            TabIndex        =   39
             Tag             =   "Linea|N|N|||rpozos_campos|numlinea|000|N|"
             Text            =   "linea"
             Top             =   2925
@@ -4429,7 +4484,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   390
             Index           =   1
             Left            =   45
-            TabIndex        =   46
+            TabIndex        =   44
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -4507,10 +4562,10 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   3810
             Index           =   1
             Left            =   30
-            TabIndex        =   47
+            TabIndex        =   45
             Top             =   480
-            Width           =   6660
-            _ExtentX        =   11748
+            Width           =   7660
+            _ExtentX        =   13520
             _ExtentY        =   6720
             _Version        =   393216
             AllowUpdate     =   0   'False
@@ -4577,10 +4632,10 @@ Begin VB.Form frmPOZHidrantesIndefa
       Begin VB.Frame FrameAux0 
          BorderStyle     =   0  'None
          Height          =   3930
-         Left            =   -74910
-         TabIndex        =   30
+         Left            =   90
+         TabIndex        =   28
          Top             =   450
-         Width           =   6780
+         Width           =   7780
          Begin VB.TextBox txtaux3 
             Alignment       =   1  'Right Justify
             Appearance      =   0  'Flat
@@ -4598,7 +4653,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   3
             Left            =   5940
             MaxLength       =   6
-            TabIndex        =   36
+            TabIndex        =   34
             Tag             =   "Porcentaje|N|N|0|100|rpozos_cooprop|porcentaje|##0.00||"
             Text            =   "porc"
             Top             =   2940
@@ -4621,7 +4676,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   1
             Left            =   945
             MaxLength       =   6
-            TabIndex        =   35
+            TabIndex        =   33
             Tag             =   "Linea|N|N|||rpozos_cooprop|numlinea|000|S|"
             Text            =   "linea"
             Top             =   2925
@@ -4644,7 +4699,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   0
             Left            =   225
             MaxLength       =   10
-            TabIndex        =   34
+            TabIndex        =   32
             Tag             =   "Hidrante|T|N|||rpozos_cooprop|hidrante||S|"
             Text            =   "Hidrante"
             Top             =   2925
@@ -4667,7 +4722,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Index           =   2
             Left            =   1710
             MaxLength       =   6
-            TabIndex        =   33
+            TabIndex        =   31
             Tag             =   "Socio|N|N|||rpozos_cooprop|codsocio|000000|N|"
             Text            =   "socio"
             Top             =   2925
@@ -4689,7 +4744,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   315
             Index           =   0
             Left            =   2385
-            TabIndex        =   32
+            TabIndex        =   30
             ToolTipText     =   "Buscar socio"
             Top             =   2925
             Visible         =   0   'False
@@ -4713,7 +4768,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Left            =   2565
             Locked          =   -1  'True
             MaxLength       =   40
-            TabIndex        =   31
+            TabIndex        =   29
             Text            =   "Nombre socio"
             Top             =   2925
             Visible         =   0   'False
@@ -4723,7 +4778,7 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   390
             Index           =   0
             Left            =   45
-            TabIndex        =   37
+            TabIndex        =   35
             Top             =   0
             Width           =   1290
             _ExtentX        =   2275
@@ -4801,10 +4856,10 @@ Begin VB.Form frmPOZHidrantesIndefa
             Height          =   3195
             Index           =   0
             Left            =   30
-            TabIndex        =   38
+            TabIndex        =   36
             Top             =   450
-            Width           =   6450
-            _ExtentX        =   11377
+            Width           =   7450
+            _ExtentX        =   13150
             _ExtentY        =   5636
             _Version        =   393216
             AllowUpdate     =   0   'False
@@ -4924,9 +4979,28 @@ Begin VB.Form frmPOZHidrantesIndefa
       Index           =   0
       Left            =   1710
       MaxLength       =   40
-      TabIndex        =   112
+      TabIndex        =   110
       Top             =   990
       Width           =   1035
+   End
+   Begin MSComctlLib.Toolbar ToolbarAyuda 
+      Height          =   330
+      Left            =   15990
+      TabIndex        =   230
+      Top             =   120
+      Width           =   405
+      _ExtentX        =   714
+      _ExtentY        =   582
+      ButtonWidth     =   609
+      ButtonHeight    =   582
+      Style           =   1
+      _Version        =   393216
+      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+         NumButtons      =   1
+         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+            Object.ToolTipText     =   "Ayuda"
+         EndProperty
+      EndProperty
    End
    Begin VB.Image Image1 
       Height          =   525
@@ -4948,13 +5022,15 @@ Begin VB.Form frmPOZHidrantesIndefa
       ForeColor       =   &H00000000&
       Height          =   345
       Left            =   3510
-      TabIndex        =   69
-      Top             =   9525
+      TabIndex        =   67
+      Top             =   9885
       Visible         =   0   'False
       Width           =   4215
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnBuscar 
          Caption         =   "&Buscar"
          Shortcut        =   ^F
@@ -5063,6 +5139,9 @@ Attribute frmMen2.VB_VarHelpID = -1
 Private WithEvents frmMen3 As frmMensajes ' busqueda de diferencias
 Attribute frmMen3.VB_VarHelpID = -1
 Private frmMensImg As frmMensajes ' visualizacion de la imagen
+
+Private WithEvents frmHidPrev As frmPOZHidrantesPrev ' contadores vista previa
+Attribute frmHidPrev.VB_VarHelpID = -1
 
 ' *****************************************************
 Dim CodTipoMov As String
@@ -5457,28 +5536,64 @@ Dim I As Integer
     
     ' ICONETS DE LA BARRA
     btnPrimero = 16 'index del botó "primero"
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        'l'1 i el 2 son separadors
+'        .Buttons(3).Image = 1   'Buscar
+'        .Buttons(4).Image = 2   'Tots
+'        .Buttons(5).Image = 21  'Buscar diferencias
+'        .Buttons(6).Image = 26  'Actualizar desde datos de indefa
+'        'el 5 i el 6 son separadors
+'        .Buttons(8).Image = 3   'Insertar
+'        .Buttons(9).Image = 4   'Modificar
+'        .Buttons(10).Image = 5   'Borrar
+'        'el 10 i el 11 son separadors
+'        .Buttons(12).Image = 10  'Imprimir
+'        .Buttons(13).Image = 11  'Eixir
+'        'el 13 i el 14 son separadors
+'        .Buttons(btnPrimero).Image = 6  'Primer
+'        .Buttons(btnPrimero + 1).Image = 7 'Anterior
+'        .Buttons(btnPrimero + 2).Image = 8 'Següent
+'        .Buttons(btnPrimero + 3).Image = 9 'Últim
+'    End With
+    
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
         'l'1 i el 2 son separadors
-        .Buttons(3).Image = 1   'Buscar
-        .Buttons(4).Image = 2   'Tots
-        .Buttons(5).Image = 21  'Buscar diferencias
-        .Buttons(6).Image = 26  'Actualizar desde datos de indefa
+        .Buttons(5).Image = 1   'Buscar
+        .Buttons(6).Image = 2   'Totss
         'el 5 i el 6 son separadors
-        .Buttons(8).Image = 3   'Insertar
-        .Buttons(9).Image = 4   'Modificar
-        .Buttons(10).Image = 5   'Borrar
-        'el 10 i el 11 son separadors
-        .Buttons(12).Image = 10  'Imprimir
-        .Buttons(13).Image = 11  'Eixir
-        'el 13 i el 14 son separadors
-        .Buttons(btnPrimero).Image = 6  'Primer
-        .Buttons(btnPrimero + 1).Image = 7 'Anterior
-        .Buttons(btnPrimero + 2).Image = 8 'Següent
-        .Buttons(btnPrimero + 3).Image = 9 'Últim
+        .Buttons(1).Image = 3   'Insertar
+        .Buttons(2).Image = 4   'Modificar
+        .Buttons(3).Image = 5   'Borrar
+        'el 10  son separadors
+        .Buttons(8).Image = 10  'Imprimir
     End With
+    
+    With Me.Toolbar5
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 21  'Buscar diferencias
+        .Buttons(2).Image = 26  'Actualizar desde datos de indefa
+    End With
+    
+    ' desplazamiento
+    With Me.ToolbarDes
+        .HotImageList = frmPpal.imgListComun_OM
+        .DisabledImageList = frmPpal.imgListComun_BN
+        .ImageList = frmPpal.imgListComun
+        .Buttons(1).Image = 6
+        .Buttons(2).Image = 7
+        .Buttons(3).Image = 8
+        .Buttons(4).Image = 9
+    End With
+    
+    
     
     ' ******* si n'hi han llínies *******
     'ICONETS DE LES BARRES ALS TABS DE LLÍNIA
@@ -5623,7 +5738,8 @@ Dim B As Boolean
     If Not Data1.Recordset.EOF Then
         If Data1.Recordset.RecordCount > 1 Then NumReg = 2 'Només es per a saber que n'hi ha + d'1 registre
     End If
-    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+'    DesplazamientoVisible Me.Toolbar1, btnPrimero, B, NumReg
+    DesplazamientoVisible B And Data1.Recordset.RecordCount > 1
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
@@ -5712,6 +5828,11 @@ EPonerModo:
     If Err.Number <> 0 Then MsgBox Err.Number & ": " & Err.Description, vbExclamation
 End Sub
 
+Private Sub DesplazamientoVisible(bol As Boolean)
+    FrameDesplazamiento.visible = bol
+    FrameDesplazamiento.Enabled = bol
+End Sub
+
 Private Sub PonerLongCampos()
 'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
 'para los campos que permitan introducir criterios más largos del tamaño del campo
@@ -5735,33 +5856,33 @@ Dim I As Byte
     'b = (Modo = 2 Or Modo = 0 Or Modo = 1)
     B = (Modo = 2 Or Modo = 0)
     'Buscar
-    Toolbar1.Buttons(3).Enabled = B
+    Toolbar1.Buttons(5).Enabled = B
     Me.mnBuscar.Enabled = B
     'Vore Tots
-    Toolbar1.Buttons(4).Enabled = B
+    Toolbar1.Buttons(6).Enabled = B
     Me.mnVerTodos.Enabled = B
     'Buscar diferencias con indefa
-    Toolbar1.Buttons(5).Enabled = B And ConexionIndefa
+    Toolbar5.Buttons(1).Enabled = B And ConexionIndefa
     Me.mnDiferencias.Enabled = B And ConexionIndefa
     
     'Insertar
-    Toolbar1.Buttons(8).Enabled = B
+    Toolbar1.Buttons(1).Enabled = B
     Me.mnNuevo.Enabled = B
     
     B = (Modo = 2 And Data1.Recordset.RecordCount > 0) 'And Not DeConsulta
     
     'actualizar registro con datos de indefa         '[Monica]27/01/2014: solo para el caso de escalona
-    Toolbar1.Buttons(6).Enabled = B And ConexionIndefa And (vParamAplic.Cooperativa = 10)
+    Toolbar5.Buttons(2).Enabled = B And ConexionIndefa And (vParamAplic.Cooperativa = 10)
     Me.mnActualizar.Enabled = B And ConexionIndefa And (vParamAplic.Cooperativa = 10)
     
     'Modificar
-    Toolbar1.Buttons(9).Enabled = B
+    Toolbar1.Buttons(2).Enabled = B
     Me.mnModificar.Enabled = B
     'eliminar
-    Toolbar1.Buttons(10).Enabled = B
+    Toolbar1.Buttons(3).Enabled = B
     Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(12).Enabled = B
+    Toolbar1.Buttons(8).Enabled = B
        
        
        
@@ -5782,16 +5903,9 @@ End Sub
 Private Sub Desplazamiento(Index As Integer)
 'Botons de Desplaçament; per a desplaçar-se pels registres de control Data
     If Data1.Recordset.EOF Then Exit Sub
-    DesplazamientoData Data1, Index
+    DesplazamientoData Data1, Index, True
     PonerCampos
 End Sub
-
-
-
-
-
-
-
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
     Dim Aux As String
@@ -5841,6 +5955,20 @@ Private Sub frmCam1_DatoSeleccionado(CadenaSeleccion As String)
 
 End Sub
 
+
+Private Sub frmHidPrev_DatoSeleccionado(CadenaSeleccion As String)
+Dim CadB As String
+    
+    If CadenaSeleccion <> "" Then
+        CadB = "hidrante = " & DBSet(RecuperaValor(CadenaSeleccion, 1), "T")
+        
+        'Se muestran en el mismo form
+        CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
+        PonerCadenaBusqueda
+        Screen.MousePointer = vbDefault
+    End If
+
+End Sub
 
 Private Sub frmMen2_DatoSeleccionado(CadenaSeleccion As String)
     Orden = CadenaSeleccion
@@ -6016,28 +6144,18 @@ End Sub
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 
     Select Case Button.Index
-        Case 3  'Búscar
-           mnBuscar_Click
-        Case 4  'Tots
-            mnVerTodos_Click
-        Case 5 ' buscar diferencias
-            mnDiferencias_Click
-        Case 6 ' Actualizar registro con datos de indefa
-            mnActualizar_Click
-        Case 8  'Nou
+        Case 1  'Nou
             mnNuevo_Click
-        Case 9  'Modificar
+        Case 2  'Modificar
             mnModificar_Click
-        Case 10  'Borrar
+        Case 3  'Borrar
             mnEliminar_Click
-        Case 12 'Imprimir
-'            AbrirListado (10)
+        Case 5  'Búscar
+            mnBuscar_Click
+        Case 6  'Tots
+            mnVerTodos_Click
+        Case 8 'Imprimir
             mnImprimir_Click
-        Case 13    'Eixir
-            mnSalir_Click
-            
-        Case btnPrimero To btnPrimero + 3 'Fleches Desplaçament
-            Desplazamiento (Button.Index - btnPrimero)
     End Select
 End Sub
 
@@ -6210,42 +6328,51 @@ End Sub
 
 
 Private Sub MandaBusquedaPrevia(CadB As String)
-    Dim cad As String
-    Dim NombreTabla1 As String
-        
-    'Cridem al form
-    ' **************** arreglar-ho per a vore lo que es desije ****************
-    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
-    cad = ""
-    cad = cad & "Hidrante|rpozos.hidrante|N||18·"
-    cad = cad & "Socio|rpozos.codsocio|N|000000|12·"
-    cad = cad & "Nombre|rsocios.nomsocio|T||55·"
-    cad = cad & "Nro.Orden|rpozos.nroorden|T||15·"
-    
-    NombreTabla1 = "(rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio)"
-    
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = NombreTabla1
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
-        frmB.vTitulo = "Hidrantes" ' ***** repasa açò: títol de BuscaGrid *****
-        frmB.vSelElem = 0
+'    Dim cad As String
+'    Dim NombreTabla1 As String
+'
+'    'Cridem al form
+'    ' **************** arreglar-ho per a vore lo que es desije ****************
+'    ' NOTA: el total d'amples de ParaGrid, ha de sumar 100
+'    cad = ""
+'    cad = cad & "Hidrante|rpozos.hidrante|N||18·"
+'    cad = cad & "Socio|rpozos.codsocio|N|000000|12·"
+'    cad = cad & "Nombre|rsocios.nomsocio|T||55·"
+'    cad = cad & "Nro.Orden|rpozos.nroorden|T||15·"
+'
+'    NombreTabla1 = "(rpozos inner join rsocios on rpozos.codsocio = rsocios.codsocio)"
+'
+'    If cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vtabla = NombreTabla1
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        frmB.vDevuelve = "0|" '*** els camps que volen que torne ***
+'        frmB.vTitulo = "Hidrantes" ' ***** repasa açò: títol de BuscaGrid *****
+'        frmB.vSelElem = 0
+'
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+'        'Si ha posat valors i tenim que es formulari de búsqueda llavors
+'        'tindrem que tancar el form llançant l'event
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha retornat datos, es a decir NO ha retornat datos
+'            PonerFoco Text1(kCampo)
+'        End If
+'    End If
 
-        frmB.Show vbModal
-        Set frmB = Nothing
-        'Si ha posat valors i tenim que es formulari de búsqueda llavors
-        'tindrem que tancar el form llançant l'event
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha retornat datos, es a decir NO ha retornat datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
+    Set frmHidPrev = New frmPOZHidrantesPrev
+    
+    frmHidPrev.cWhere = CadB
+    frmHidPrev.DatosADevolverBusqueda = "0|1|2|"
+    frmHidPrev.Show vbModal
+    
+    Set frmHidPrev = Nothing
+
 End Sub
 
 
@@ -8059,6 +8186,19 @@ Private Sub Toolbar3_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.B
      
 End Sub
 
+Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Select Case Button.Index
+        Case 1 ' buscar diferencias
+            mnDiferencias_Click
+        Case 2 ' Actualizar registro con datos de indefa
+            mnActualizar_Click
+    End Select
+End Sub
+
+Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
+    Desplazamiento (Button.Index)
+End Sub
+
 Private Sub TxtAux3_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
@@ -8334,9 +8474,9 @@ Dim tots As String
     
     Select Case Index
         Case 0 ' coopropietarios
-            tots = "N||||0|;N||||0|;S|txtaux3(2)|T|Cód.|1000|;S|cmdAux(0)|B|||;" 'codsocio,numlinea
-            tots = tots & "S|txtAux2(0)|T|Nombre|3870|;"
-            tots = tots & "S|txtaux3(3)|T|Porcentaje|1200|;"
+            tots = "N||||0|;N||||0|;S|txtaux3(2)|T|Código|1200|;S|cmdAux(0)|B|||;" 'codsocio,numlinea
+            tots = tots & "S|txtAux2(0)|T|Nombre|4270|;"
+            tots = tots & "S|txtaux3(3)|T|Porcentaje|1500|;"
             arregla tots, DataGridAux(Index), Me
         
             DataGridAux(Index).Columns(4).Alignment = dbgRight
@@ -8355,12 +8495,12 @@ Dim tots As String
                 txtAux2(0).Text = ""
             End If
         Case 1 ' CAMPOS
-            tots = "N||||0|;N||||0|;S|txtaux4(2)|T|Campo|1000|;S|cmdAux(1)|B|||;" 'codsocio,numlinea
-            tots = tots & "S|txtAux2(1)|T|Partida|1800|;"
-            tots = tots & "S|txtAux2(2)|T|Población|1470|;"
+            tots = "N||||0|;N||||0|;S|txtaux4(2)|T|Campo|1200|;S|cmdAux(1)|B|||;" 'codsocio,numlinea
+            tots = tots & "S|txtAux2(1)|T|Partida|2000|;"
+            tots = tots & "S|txtAux2(2)|T|Población|1670|;"
             tots = tots & "S|txtAux2(3)|T|Hdas|800|;"
-            tots = tots & "S|txtAux2(4)|T|Pol|400|;"
-            tots = tots & "S|txtAux2(5)|T|Par|600|;"
+            tots = tots & "S|txtAux2(4)|T|Pol|600|;"
+            tots = tots & "S|txtAux2(5)|T|Par|800|;"
             
             arregla tots, DataGridAux(Index), Me
         

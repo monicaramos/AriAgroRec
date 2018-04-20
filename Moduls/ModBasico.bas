@@ -40,7 +40,7 @@ Public Sub AyudaBancosCom(frmCom As frmBasico2, Optional CodActual As String, Op
     frmCom.CadenaConsulta = frmCom.CadenaConsulta & " WHERE (1=1) "
     If cWhere <> "" Then frmCom.CadenaConsulta = frmCom.CadenaConsulta & " and " & cWhere
     
-    frmCom.Tag1 = "Código|N|N|0|999|banpropi|codbanpr|000|S|"
+    frmCom.Tag1 = "Código|N|N|0|99|banpropi|codbanpr|00|S|"
     frmCom.Tag2 = "Nombre|T|N|||banpropi|nombanpr|||"
     frmCom.Tag3 = ""
     frmCom.Maxlen1 = 3
@@ -59,6 +59,13 @@ Public Sub AyudaBancosCom(frmCom As frmBasico2, Optional CodActual As String, Op
     If CodActual <> "" Then frmCom.CodigoActual = CodActual
     
     Redimensiona frmCom, -1500
+    
+    '[Monica]17/04/2018: añadimos en este caso los botones de busqueda
+    frmCom.DataGrid1.Height = 4900
+    frmCom.DataGrid1.Top = 870
+    frmCom.FrameBotonGnral.visible = True
+    frmCom.FrameBotonGnral.Enabled = True
+    ' hasta aqui
     
     frmCom.Show vbModal
 End Sub
@@ -219,6 +226,13 @@ Public Sub AyudaClienteCom(frmBas As frmBasico2, Optional CodActual As String, O
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
     
     Redimensiona frmBas, -1500
+    
+    '[Monica]17/04/2018: añadimos en este caso los botones de busqueda
+    frmBas.DataGrid1.Height = 4900
+    frmBas.DataGrid1.Top = 870
+    frmBas.FrameBotonGnral.visible = True
+    frmBas.FrameBotonGnral.Enabled = True
+    ' hasta aqui
     
     frmBas.Show vbModal
     

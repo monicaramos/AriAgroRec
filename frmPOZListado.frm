@@ -11273,7 +11273,11 @@ Dim NConta As Integer
     NConta = DevuelveValor("select empresa_conta from rseccion where codsecci = " & vParamAplic.SeccionPOZOS)
     
     ' recibos de consumo
-    ctabla1 = "conta" & NConta & ".scobro cc, " & vEmpresa.BDAriagro & ".rrecibpozos rr, " & vEmpresa.BDAriagro & ".rsocios ss, usuarios.stipom tt "
+    If vParamAplic.ContabilidadNueva Then
+        ctabla1 = "ariconta" & NConta & ".cobros cc, " & vEmpresa.BDAriagro & ".rrecibpozos rr, " & vEmpresa.BDAriagro & ".rsocios ss, usuarios.stipom tt "
+    Else
+        ctabla1 = "conta" & NConta & ".scobro cc, " & vEmpresa.BDAriagro & ".rrecibpozos rr, " & vEmpresa.BDAriagro & ".rsocios ss, usuarios.stipom tt "
+    End If
     
 '[Monica]07/01/2015: cambiamos la condicion
 '    Sql1 = "where ((cc.codforpa = 1 and (cc.codrem is null or cc.codrem = 0)) or (cc.codforpa = 0))"
@@ -11282,8 +11286,13 @@ Dim NConta As Integer
     Sql1 = Sql1 & " and rr.codtipom = 'RCP'"
     Sql1 = Sql1 & " and rr.codtipom = tt.codtipom "
     Sql1 = Sql1 & " and cc.numserie = tt.letraser "
-    Sql1 = Sql1 & " and cc.codfaccl = rr.numfactu"
-    Sql1 = Sql1 & " and cc.fecfaccl = rr.fecfactu"
+    If vParamAplic.ContabilidadNueva Then
+        Sql1 = Sql1 & " and cc.numfactu = rr.numfactu"
+        Sql1 = Sql1 & " and cc.fecfactu = rr.fecfactu"
+    Else
+        Sql1 = Sql1 & " and cc.codfaccl = rr.numfactu"
+        Sql1 = Sql1 & " and cc.fecfaccl = rr.fecfactu"
+    End If
     Sql1 = Sql1 & " and mid(cc.codmacta,5,6) = ss.codsocio"
     
     '
@@ -12869,15 +12878,24 @@ Dim SqlInsert As String
     conn.Execute SqlInsert & Sql
 
     '[Monica]13/01/2015: cargamos el nro de reclamaciones que han hecho
-    Sql = "update tmpinformes tt, usuarios.stipom ss "
-    Sql = Sql & " set tt.importe1 = (select count(*) from conta" & NConta & ".shcocob aa where tt.importeb2 = aa.codfaccl "
-    Sql = Sql & " and tt.fecha1 = aa.fecfaccl and ss.letraser = aa.numserie) "
-    Sql = Sql & " where tt.codusu = " & vUsu.Codigo
-    Sql = Sql & " and tt.nombre3 = ss.codtipom "
-    
-    conn.Execute Sql
-
-
+                '[Monica]16/04/2018: no hay un hco de cobros en la contabilidad nueva
+    If vParamAplic.ContabilidadNueva Then
+        Sql = "update tmpinformes tt, usuarios.stipom ss "
+        Sql = Sql & " set tt.importe1 = (select count(*) from ariconta" & NConta & ".reclama_facturas aa where tt.importeb2 = aa.numfactu "
+        Sql = Sql & " and tt.fecha1 = aa.fecfactu and ss.letraser = aa.numserie) "
+        Sql = Sql & " where tt.codusu = " & vUsu.Codigo
+        Sql = Sql & " and tt.nombre3 = ss.codtipom "
+        
+        conn.Execute Sql
+    Else
+        Sql = "update tmpinformes tt, usuarios.stipom ss "
+        Sql = Sql & " set tt.importe1 = (select count(*) from conta" & NConta & ".shcocob aa where tt.importeb2 = aa.codfaccl "
+        Sql = Sql & " and tt.fecha1 = aa.fecfaccl and ss.letraser = aa.numserie) "
+        Sql = Sql & " where tt.codusu = " & vUsu.Codigo
+        Sql = Sql & " and tt.nombre3 = ss.codtipom "
+        
+        conn.Execute Sql
+    End If
 
     CargarTemporalRecibosConsumoPdtes = True
     Exit Function
