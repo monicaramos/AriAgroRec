@@ -2,10 +2,10 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20180420T103448</MsgId>
-      <CreDtTm>2018-04-20T10:34:48</CreDtTm>
-      <NbOfTxs>8</NbOfTxs>
-      <CtrlSum>999.60</CtrlSum>
+      <MsgId>TRANPAG000000F20180423T141251</MsgId>
+      <CreDtTm>2018-04-23T14:12:51</CreDtTm>
+      <NbOfTxs>4</NbOfTxs>
+      <CtrlSum>340.77</CtrlSum>
       <InitgPty>
          <Nm>Catadau</Nm>
          <Id>
@@ -18,7 +18,7 @@
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20180420103448F46038881</PmtInfId>
+      <PmtInfId>20180423141251F46038881</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
       <ReqdExctnDt>2018-04-18</ReqdExctnDt>
       <Dbtr>
@@ -55,7 +55,7 @@
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">106.11</InstdAmt>
+          <InstdAmt Ccy="EUR">70.74</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -81,7 +81,7 @@
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 106,11</Ustrd>
+         <Ustrd>Pago N mina 18/04/2018 Importe 70,74</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
@@ -93,7 +93,7 @@
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">175.68</InstdAmt>
+          <InstdAmt Ccy="EUR">96.46</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -119,83 +119,7 @@
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 175,68</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>73772451C</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">141.66</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BARBERA GARCIA,JUAN CARLOS</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>73772451C</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES8130821315863191952419</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 141,66</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>73549602H</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">41.46</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BAGUENA BISBAL,JOSE</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>73549602H</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES7730582268522810009198</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 41,46</Ustrd>
+         <Ustrd>Pago N mina 18/04/2018 Importe 96,46</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
@@ -207,7 +131,7 @@
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">156.39</InstdAmt>
+          <InstdAmt Ccy="EUR">77.17</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -233,7 +157,7 @@
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 156,39</Ustrd>
+         <Ustrd>Pago N mina 18/04/2018 Importe 77,17</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    <CdtTrfTxInf>
@@ -245,7 +169,7 @@
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">226.26</InstdAmt>
+          <InstdAmt Ccy="EUR">96.4</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -271,83 +195,7 @@
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 226,26</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X4155048Y</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">76.02</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CAHMESMMXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BIYAH, EL HABIB</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X4155048Y</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES7420386004613000554174</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 76,02</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>X5907790X</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">76.02</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>BCOEESMM096</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>BIYAH, MOHAMMED</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>X5907790X</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES3630960001962049084516</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 76,02</Ustrd>
+         <Ustrd>Pago N mina 18/04/2018 Importe 96,40</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

@@ -35,7 +35,7 @@ Begin VB.Form frmManCategorias
       Left            =   4770
       MaxLength       =   6
       TabIndex        =   4
-      Tag             =   "Código Banco|N|S|0|99|bancopr|codbanpr|00||"
+      Tag             =   "Código Banco|N|S|0|99|rcategorias|codbanpr|00||"
       Text            =   "Banco"
       Top             =   4950
       Width           =   825
@@ -192,7 +192,7 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5895
+      Left            =   7875
       TabIndex        =   5
       Top             =   5775
       Visible         =   0   'False
@@ -211,7 +211,7 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7155
+      Left            =   9135
       TabIndex        =   6
       Top             =   5775
       Visible         =   0   'False
@@ -342,9 +342,9 @@ Begin VB.Form frmManCategorias
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7155
+      Left            =   9135
       TabIndex        =   10
-      Top             =   5760
+      Top             =   5805
       Visible         =   0   'False
       Width           =   1095
    End
@@ -423,7 +423,7 @@ Begin VB.Form frmManCategorias
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   7785
+      Left            =   9675
       TabIndex        =   13
       Top             =   180
       Width           =   405
@@ -555,7 +555,7 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim IndCodigo As Integer
+Dim indCodigo As Integer
 
 Dim I As Integer
 
@@ -739,7 +739,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim sql As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -754,15 +754,15 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    sql = "¿Seguro que desea eliminar la Categoria?"
-    sql = sql & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
-    sql = sql & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar la Categoria?"
+    Sql = Sql & vbCrLf & "Código: " & Adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & Adodc1.Recordset.Fields(1)
     
-    If MsgBox(sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = Adodc1.Recordset.AbsolutePosition
-        sql = "Delete from rcategorias where codcateg=" & Adodc1.Recordset!Codcateg
-        conn.Execute sql
+        Sql = "Delete from rcategorias where codcateg=" & Adodc1.Recordset!Codcateg
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -796,13 +796,13 @@ Private Sub btnBuscar_Click(Index As Integer)
     
     Select Case Index
         Case 0 'banco propio de comercial
-            IndCodigo = Index + 3
+            indCodigo = Index + 3
             
             Set frmBan = New frmBasico2
-            AyudaBancosCom frmBan, txtAux(IndCodigo)
+            AyudaBancosCom frmBan, txtAux(indCodigo)
             Set frmBan = Nothing
             
-            PonerFoco txtAux(IndCodigo)
+            PonerFoco txtAux(indCodigo)
     End Select
     
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.Adodc1, 1
@@ -995,8 +995,8 @@ End Sub
 
 
 Private Sub frmBan_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(IndCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
-    txtAux2(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtAux(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtAux2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -1059,18 +1059,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 
-Private Sub CargaGrid(Optional vSql As String)
-    Dim sql As String
+Private Sub CargaGrid(Optional vSQL As String)
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
-    If vSql <> "" Then
-        sql = CadenaConsulta & " AND " & vSql
+    If vSQL <> "" Then
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        sql = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    sql = sql & " ORDER BY codcateg"
+    Sql = Sql & " ORDER BY codcateg"
     '**************************************************************++
     
 '    adodc1.RecordSource = SQL
@@ -1082,7 +1082,7 @@ Private Sub CargaGrid(Optional vSql As String)
 '    DataGrid1.AllowRowSizing = False
 '    DataGrid1.RowHeight = 290
     
-    CargaGridGnral Me.DataGrid1, Me.Adodc1, sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.Adodc1, Sql, PrimeraVez
     
     
     ' *******************canviar els noms i si fa falta la cantitat********************
@@ -1136,7 +1136,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim sql As String
+Dim Sql As String
 Dim Mens As String
 
 

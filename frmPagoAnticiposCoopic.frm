@@ -613,7 +613,7 @@ Private cadTitulo As String 'Titulo para la ventana frmImprimir
 Private cadNombreRPT As String 'Nombre del informe
 Private ConSubInforme As Boolean
 
-Dim IndCodigo As Integer 'indice para txtCodigo
+Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
@@ -647,7 +647,7 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim cadSelect1 As String
 Dim cadSelect2 As String
 Dim cTabla As String
-Dim sql As String
+Dim Sql As String
 
     
     If Not DatosOK Then Exit Sub
@@ -699,7 +699,7 @@ Dim sql As String
         '[Monica]20/04/2018: solo vamos a anticipar a los del banco que toque y los que no tengan categoria
         Dim SqlNue As String
         SqlNue = "(horas.codcateg in (select codcateg from rcategorias where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
-        SqlNue = SqlNue & " or horas.codcateg is null or horas.codcateg = '')"
+        SqlNue = SqlNue & ") or horas.codcateg is null or horas.codcateg = '')"
         
         AnyadirAFormula cadSelect, SqlNue
     End If
@@ -725,7 +725,7 @@ End Sub
 
 
 Private Sub RepetirProcesoCoopic()
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
@@ -768,20 +768,20 @@ On Error GoTo eRepetirProcesoCoopic
     BorrarTMP
     CrearTMP
         
-    sql = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F") & " and hayembargo = 0 "
-    IdContador = DevuelveValor(sql)
+    Sql = "select max(idcontador) from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F") & " and hayembargo = 0 "
+    IdContador = DevuelveValor(Sql)
     
-    sql = "select count(*) from rrecibosnomina where idcontador = " & DBSet(IdContador, "N") & " and hayembargo = 0"
-    If TotalRegistros(sql) = 0 Then
+    Sql = "select count(*) from rrecibosnomina where idcontador = " & DBSet(IdContador, "N") & " and hayembargo = 0"
+    If TotalRegistros(Sql) = 0 Then
         Mens = "No hay anticipos, debe realizar el proceso."
         B = False
     Else
         If vParamAplic.Cooperativa = 0 Then
         
-            sql = "select * from rrecibosnomina where idcontador = " & DBSet(IdContador, "N")
+            Sql = "select * from rrecibosnomina where idcontador = " & DBSet(IdContador, "N")
             
             Set Rs = New ADODB.Recordset
-            Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs.EOF
             
@@ -811,9 +811,9 @@ On Error GoTo eRepetirProcesoCoopic
             End If
         
             '[Monica]22/11/2013: iban
-            sql = "select codbanco, codsucur, digcontr, cuentaba, codorden34, iban from banpropi where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
+            Sql = "select codbanco, codsucur, digcontr, cuentaba, codorden34, iban from banpropi where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
             Set Rs = New ADODB.Recordset
-            Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             CodigoOrden34 = ""
             
@@ -888,7 +888,7 @@ End Sub
 
 
 Private Function DireccionesOk(cTabla As String, cWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
 Dim cadResult As String
 Dim Rs As ADODB.Recordset
 
@@ -896,11 +896,11 @@ Dim Rs As ADODB.Recordset
     
     DireccionesOk = False
 
-    sql = "Select straba.* FROM " & cTabla & "  WHERE " & cWhere
-    sql = sql & " and (domtraba is null or domtraba = '' or codpobla is null or codpobla = ''  or pobtraba is null or pobtraba is null or protraba is null or protraba = '') "
+    Sql = "Select straba.* FROM " & cTabla & "  WHERE " & cWhere
+    Sql = Sql & " and (domtraba is null or domtraba = '' or codpobla is null or codpobla = ''  or pobtraba is null or pobtraba is null or protraba is null or protraba = '') "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     cadResult = ""
     While Not Rs.EOF
@@ -1000,8 +1000,8 @@ End Sub
 
 Private Sub frmBan_DatoSeleccionado(CadenaSeleccion As String)
 'Form de Consulta de banco propio
-    txtCodigo(IndCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
-    txtNombre(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "00")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmC_Selec(vFecha As Date)
@@ -1011,8 +1011,8 @@ Private Sub frmC_Selec(vFecha As Date)
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtCodigo(IndCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
-    txtNombre(IndCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
+    txtCodigo(indCodigo).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000")
+    txtNombre(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -1020,14 +1020,14 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 14, 15  'Banco propio
             AbrirFrmManTraba (Index)
         Case 0
-            IndCodigo = 0
+            indCodigo = 0
             AbrirFrmManBanco (Index)
     End Select
-    PonerFoco txtCodigo(IndCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub AbrirFrmManTraba(Indice As Integer)
-    IndCodigo = Indice + 4
+    indCodigo = Indice + 4
     Set frmTra = New frmManTraba
     frmTra.DatosADevolverBusqueda = "0|2|"
     frmTra.Show vbModal
@@ -1183,7 +1183,7 @@ Dim Titulo As String
         Set frmB = New frmBuscaGrid
         frmB.vCampos = cad
         frmB.vtabla = tabla
-        frmB.vSql = CadB
+        frmB.vSQL = CadB
         HaDevueltoDatos = False
         '###A mano
         'frmB.vDevuelve = "0|1|"
@@ -1375,11 +1375,11 @@ End Function
 Private Sub AbrirFrmManBanco(Indice As Integer)
     Set frmBan = New frmBasico2
     
-    AyudaBancosCom frmBan, txtCodigo(IndCodigo)
+    AyudaBancosCom frmBan, txtCodigo(indCodigo)
     
     Set frmBan = Nothing
     
-    PonerFoco txtCodigo(IndCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 Private Sub AbrirVisReport()
@@ -1432,7 +1432,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim sql As String
+Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -1472,7 +1472,7 @@ End Function
 
 
 Private Function ActualizarRegistros(tabla As String, cWhere As String) As Boolean
-Dim sql As String
+Dim Sql As String
     On Error GoTo eActualizarRegistros
     
     ActualizarRegistros = False
@@ -1481,12 +1481,12 @@ Dim sql As String
     cWhere = QuitarCaracterACadena(cWhere, "}")
     cWhere = QuitarCaracterACadena(cWhere, "_1")
 
-    sql = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
-    sql = sql & " where " & cWhere
-    sql = sql & " and horas.codtraba = straba.codtraba"
+    Sql = "update horas, straba set fecharec = " & DBSet(txtCodigo(20).Text, "F")
+    Sql = Sql & " where " & cWhere
+    Sql = Sql & " and horas.codtraba = straba.codtraba"
 '    (codtraba, fechahora) in (select horas.codtraba, horas.fechahora from " & tabla & " where " & cWhere & ")"
     
-    conn.Execute sql
+    conn.Execute Sql
         
     ActualizarRegistros = True
     
@@ -1508,17 +1508,17 @@ End Sub
 Public Function CrearTMP() As Boolean
 'Crea una temporal donde inserta la clave primaria de las
 'facturas seleccionadas para facturar y trabaja siempre con ellas
-Dim sql As String
+Dim Sql As String
     
     On Error GoTo ECrear
     
     CrearTMP = False
     
-    sql = "CREATE TEMPORARY TABLE tmpImpor ( "
-    sql = sql & "codtraba int(6) unsigned NOT NULL default '0',"
-    sql = sql & "importe decimal(12,2)  NOT NULL default '0')"
+    Sql = "CREATE TEMPORARY TABLE tmpImpor ( "
+    Sql = Sql & "codtraba int(6) unsigned NOT NULL default '0',"
+    Sql = Sql & "importe decimal(12,2)  NOT NULL default '0')"
     
-    conn.Execute sql
+    conn.Execute Sql
      
     CrearTMP = True
     
@@ -1526,8 +1526,8 @@ ECrear:
      If Err.Number <> 0 Then
         CrearTMP = False
         'Borrar la tabla temporal
-        sql = " DROP TABLE IF EXISTS tmpImpor;"
-        conn.Execute sql
+        Sql = " DROP TABLE IF EXISTS tmpImpor;"
+        conn.Execute Sql
     End If
 End Function
 
@@ -1565,7 +1565,7 @@ End Function
 
 
 Private Sub ProcesarCambiosCoopic(cadWHERE As String)
-Dim sql As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim cad As String
@@ -1618,27 +1618,27 @@ On Error GoTo eProcesarCambiosCoopic
         cadWHERE = QuitarCaracterACadena(cadWHERE, "_1")
     End If
         
-    sql = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = "select count(distinct horas.codtraba) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
     
     Set Rs = New ADODB.Recordset
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Pb2.visible = True
     CargarProgres Pb2, Rs.Fields(0).Value
     
     Rs.Close
     
-    sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute sql
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
     Sql3 = "select max(idcontador) from rrecibosnomina"
     Max = DevuelveValor(Sql3) + 1
     
-    sql = "select horas.codtraba, 0, sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
-    sql = sql & " group by horas.codtraba, 2 "
-    sql = sql & " order by 1, 2"
+    Sql = "select horas.codtraba, 0, sum(if(horasdia is null,0,horasdia)), sum(if(compleme is null,0,compleme)), sum(if(penaliza is null,0,penaliza)), sum(if(importe is null,0,importe)) from (horas inner join straba on horas.codtraba = straba.codtraba) inner join forpago on straba.codforpa = forpago.codforpa where " & cadWHERE
+    Sql = Sql & " group by horas.codtraba, 2 "
+    Sql = Sql & " order by 1, 2"
         
-    Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Dim AntCodTraba As Long
     Dim ActCodTraba As Long
@@ -1702,8 +1702,6 @@ On Error GoTo eProcesarCambiosCoopic
                 Sql3 = Sql3 & DBSet(txtCodigo(20).Text, "F") & "," & DBSet(TNeto34, "N") & "," & DBSet(Rs2!HayEmbargo, "N") & ")"
                 
                 conn.Execute Sql3
-        
-        
         
                 '[Monica]26/09/2016: si no hay embargo le pagamos
                 If DBLet(Rs2!HayEmbargo) = 0 Then
@@ -1823,9 +1821,9 @@ On Error GoTo eProcesarCambiosCoopic
     If vParamAplic.Cooperativa = 0 Then
 '*************
         '[Monica]22/11/2013: iban
-        sql = "select codbanco, codsucur, digcontr, cuentaba, codorden34, iban from banpropi where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
+        Sql = "select codbanco, codsucur, digcontr, cuentaba, codorden34, iban from banpropi where codbanpr = " & DBSet(txtCodigo(0).Text, "N")
         Set Rs = New ADODB.Recordset
-        Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         CodigoOrden34 = ""
         
@@ -1882,6 +1880,13 @@ On Error GoTo eProcesarCambiosCoopic
             CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
             CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(20).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=0|"
             numParam = 4
+            
+            '[Monica]23/04/2018: mostramos el banco
+            If vParamAplic.Cooperativa = 0 Then
+                CadParam = CadParam & "pBanco=""" & txtCodigo(0).Text & " " & txtNombre(0).Text & """|"
+                numParam = numParam + 1
+            End If
+                
             cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 0"
             cadNombreRPT = "rListadoPagos.rpt"
             cadTitulo = "Impresion de Pagos"
@@ -1890,11 +1895,16 @@ On Error GoTo eProcesarCambiosCoopic
             LlamarImprimir
             
             '[Monica]17/10/2016: impresion de los impagados de Picassent
-            sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
-            If CInt(DevuelveValor(sql)) <> 0 Then
+            Sql = "select count(*) from tmpinformes where codusu = " & vUsu.Codigo & " and importe2 = 1"
+            If CInt(DevuelveValor(Sql)) <> 0 Then
                 CadParam = "|pEmpresa=""" & vEmpresa.nomempre & """|"
                 CadParam = CadParam & "pFechaRecibo=""" & txtCodigo(20).Text & """|pFechaPago=""" & txtCodigo(20).Text & """|" & "pImpagados=1|"
                 numParam = 4
+                '[Monica]23/04/2018: mostramos el banco
+                If vParamAplic.Cooperativa = 0 Then
+                    CadParam = CadParam & "pBanco=""" & txtCodigo(0).Text & " " & txtNombre(0).Text & """|"
+                    numParam = numParam + 1
+                End If
                 cadFormula = "{tmpinformes.codusu}=" & vUsu.Codigo & " and {tmpinformes.importe2} = 1"
                 cadNombreRPT = "rListadoPagos.rpt"
                 cadTitulo = "Impresion de Impagos"
@@ -1905,13 +1915,13 @@ On Error GoTo eProcesarCambiosCoopic
             
             If Not Repetir Then
                 If MsgBox("¿Proceso realizado correctamente para actualizar?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-                    sql = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtCodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
-                    conn.Execute sql
+                    Sql = "update horas, straba, forpago set horas.intconta = 1, horas.fecharec = " & DBSet(txtCodigo(20).Text, "F") & " where horas.codtraba = straba.codtraba and straba.codforpa = forpago.codforpa and " & cadWHERE
+                    conn.Execute Sql
                 Else
-                    sql = "delete from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F")
-                    sql = sql & " and idcontador = " & DBSet(Max, "N")
+                    Sql = "delete from rrecibosnomina where fechahora = " & DBSet(txtCodigo(20).Text, "F")
+                    Sql = Sql & " and idcontador = " & DBSet(Max, "N")
                     
-                    conn.Execute sql
+                    conn.Execute Sql
                 End If
             End If
         Else
@@ -1936,11 +1946,11 @@ End Sub
 
 
 Private Function AnticiposPendientes(CodTraba As String) As Currency
-Dim sql As String
+Dim Sql As String
 
-    sql = "select sum(importe) from horasanticipos where codtraba = " & DBSet(CodTraba, "N")
-    sql = sql & " and descontado = 0 "
+    Sql = "select sum(importe) from horasanticipos where codtraba = " & DBSet(CodTraba, "N")
+    Sql = Sql & " and descontado = 0 "
     
-    AnticiposPendientes = DevuelveValor(sql)
+    AnticiposPendientes = DevuelveValor(Sql)
     
 End Function
