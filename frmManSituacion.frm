@@ -151,7 +151,7 @@ Begin VB.Form frmManSituacion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   20
@@ -173,7 +173,7 @@ Begin VB.Form frmManSituacion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   0
       Left            =   90
       MaxLength       =   4
@@ -494,7 +494,7 @@ Dim B As Boolean
     
     Combo1(0).visible = Not B
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -591,7 +591,7 @@ Private Sub BotonBuscar()
     Combo1(0).ListIndex = -1
     
 '    PosicionarCombo Combo1, "724"
-    LLamaLineas DataGrid1.Top + 250, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -807,6 +807,14 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub Combo1_GotFocus(Index As Integer)
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus(Index As Integer)
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
+End Sub
+
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
 End Sub
@@ -983,7 +991,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

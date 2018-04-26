@@ -1032,7 +1032,7 @@ Dim temp As Boolean
         NumRegElim = adodc1.Recordset.AbsolutePosition
         Sql = "Delete from horasdestajo where codtraba=" & adodc1.Recordset!CodTraba
         Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
-        Sql = Sql & " and codvarie = " & adodc1.Recordset!codvarie
+        Sql = Sql & " and codvarie = " & adodc1.Recordset!Codvarie
         Sql = Sql & " and codforfait = " & DBSet(adodc1.Recordset!codforfait, "T")
         
         conn.Execute Sql
@@ -1507,7 +1507,7 @@ Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)

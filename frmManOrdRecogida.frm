@@ -1026,7 +1026,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             Set frmInc = Nothing
             PonerFoco txtAux(9)
     End Select
-    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.AdoAux, 1
+    If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Me.Adoaux, 1
 End Sub
 
 
@@ -1118,7 +1118,7 @@ Private Sub Form_Activate()
             Else
                 PonerModo 1 'búsqueda
                 ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-                Text1(0).BackColor = vbYellow 'nro nota
+                Text1(0).BackColor = vbLightBlue 'nro nota
                 ' ****************************************************************************
             End If
         End If
@@ -1228,7 +1228,7 @@ Dim I As Integer
 '    Else
 '        PonerModo 1 'búsqueda
 '        ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-'        Text1(0).BackColor = vbYellow 'codforfait
+'        Text1(0).BackColor = vblightblue 'codforfait
 '        ' ****************************************************************************
 '    End If
 End Sub
@@ -1408,7 +1408,7 @@ Dim I As Byte
     B = (Modo = 2) And Not DeConsulta
     For I = 1 To 1
         ToolAux(I).Buttons(1).Enabled = B
-        If B Then bAux = (B And Me.AdoAux(I).Recordset.RecordCount > 0)
+        If B Then bAux = (B And Me.Adoaux(I).Recordset.RecordCount > 0)
         ToolAux(I).Buttons(2).Enabled = bAux
         ToolAux(I).Buttons(3).Enabled = bAux
     Next I
@@ -1431,26 +1431,26 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 1 'INCIDENCIAS
-            SQL = "SELECT rordrecogida_incid.nroorden, rordrecogida_incid.idplaga, rplagasaux.nomplaga, rordrecogida_incid.nivel, "
-            SQL = SQL & " CASE rordrecogida_incid.nivel WHEN 0 THEN ""<10"" WHEN 1 THEN ""10 a 20"" WHEN 2 THEN "">20"" END "
-            SQL = SQL & " FROM rordrecogida_incid, rplagasaux "
+            Sql = "SELECT rordrecogida_incid.nroorden, rordrecogida_incid.idplaga, rplagasaux.nomplaga, rordrecogida_incid.nivel, "
+            Sql = Sql & " CASE rordrecogida_incid.nivel WHEN 0 THEN ""<10"" WHEN 1 THEN ""10 a 20"" WHEN 2 THEN "">20"" END "
+            Sql = Sql & " FROM rordrecogida_incid, rplagasaux "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rordrecogida_incid.nroorden = -1"
+                Sql = Sql & " WHERE rordrecogida_incid.nroorden = -1"
             End If
-            SQL = SQL & " and rordrecogida_incid.idplaga = rplagasaux.idplaga"
-            SQL = SQL & " ORDER BY rordrecogida_incid.idplaga"
+            Sql = Sql & " and rordrecogida_incid.idplaga = rplagasaux.idplaga"
+            Sql = Sql & " ORDER BY rordrecogida_incid.idplaga"
             
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -1656,7 +1656,7 @@ End Sub
 
 
 Private Function InsertarTemporal2(cTabla As String, cSelect As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim NumF As Long
@@ -1667,14 +1667,14 @@ Dim NumF As Long
     InsertarTemporal2 = False
 
 
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
-    SQL = "insert into tmpinformes (codusu, importe1, importe2, importe3) "
-    SQL = SQL & " select " & vUsu.Codigo & ",nrocampo, codcampo, " & DBSet(Text1(0).Text, "N") & "  from rcampos where " & cSelect ' copia 1
-    SQL = SQL & " order by 1,2,3 "
+    Sql = "insert into tmpinformes (codusu, importe1, importe2, importe3) "
+    Sql = Sql & " select " & vUsu.Codigo & ",nrocampo, codcampo, " & DBSet(Text1(0).Text, "N") & "  from rcampos where " & cSelect ' copia 1
+    Sql = Sql & " order by 1,2,3 "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     
     InsertarTemporal2 = True
@@ -1736,13 +1736,13 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -1935,8 +1935,8 @@ Dim CPostal As String, desProvi As String, desPais As String
     'For i = 0 To DataGridAux.Count - 1
     For I = 1 To 1
         CargaGrid I, True
-        If Not AdoAux(I).Recordset.EOF Then _
-            PonerCamposForma2 Me, AdoAux(I), 2, "FrameAux" & I
+        If Not Adoaux(I).Recordset.EOF Then _
+            PonerCamposForma2 Me, Adoaux(I), 2, "FrameAux" & I
     Next I
 
     '-- Esto permanece para saber donde estamos
@@ -1990,8 +1990,8 @@ Dim V
 '                    ' *** si n'hi han tabs ***
 '                    SituarTab (NumTabMto + 1)
 
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
-                        AdoAux(NumTabMto).Recordset.MoveFirst
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
+                        Adoaux(NumTabMto).Recordset.MoveFirst
                     End If
                     
 
@@ -2002,10 +2002,10 @@ Dim V
 '                    SituarTab (NumTabMto + 1)
                     LLamaLineas NumTabMto, ModoLineas 'ocultar txtAux
                     PonerModo 4
-                    If Not AdoAux(NumTabMto).Recordset.EOF Then
+                    If Not Adoaux(NumTabMto).Recordset.EOF Then
                         ' *** l'Index de Fields es el que canvie de la PK de llínies ***
-                        V = AdoAux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
-                        AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
+                        V = Adoaux(NumTabMto).Recordset.Fields(3) 'el 2 es el nº de llinia
+                        Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(3).Name & " =" & V)
                         ' ***************************************************************
                     End If
             End Select
@@ -2013,7 +2013,7 @@ Dim V
             PosicionarData
             
             ' *** si n'hi han llínies en grids i camps fora d'estos ***
-            If Not AdoAux(NumTabMto).Recordset.EOF Then
+            If Not Adoaux(NumTabMto).Recordset.EOF Then
                 DataGridAux_RowColChange NumTabMto, 1, 1
             Else
                 LimpiarCamposFrame NumTabMto
@@ -2114,7 +2114,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim SQL As String
+Dim Sql As String
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
@@ -2200,7 +2200,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2216,7 +2216,7 @@ Dim Eliminar As Boolean
     NumTabMto = Index
     PonerModo 5, Index
 
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
     If Not SepuedeBorrar(Index) Then Exit Sub
     NumTabMto = Index
     Eliminar = False
@@ -2228,24 +2228,24 @@ Dim Eliminar As Boolean
     Select Case Index
             
         Case 1 'incidencias
-            SQL = "¿Seguro que desea eliminar la Incidencia de la Orden?"
-            SQL = SQL & vbCrLf & "Nro.Orden: " & AdoAux(Index).Recordset!nroorden
-            SQL = SQL & vbCrLf & "Incidencia: " & AdoAux(Index).Recordset!nomplaga
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la Incidencia de la Orden?"
+            Sql = Sql & vbCrLf & "Nro.Orden: " & Adoaux(Index).Recordset!nroorden
+            Sql = Sql & vbCrLf & "Incidencia: " & Adoaux(Index).Recordset!nomplaga
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rordrecogida_incid "
-                SQL = SQL & vWhere & " AND idplaga= " & AdoAux(Index).Recordset!idplaga
+                Sql = "DELETE FROM rordrecogida_incid "
+                Sql = Sql & vWhere & " AND idplaga= " & Adoaux(Index).Recordset!idplaga
             End If
             
     End Select
 
     If Eliminar Then
-        NumRegElim = AdoAux(Index).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         CargaGrid Index, True
-        If Not SituarDataTrasEliminar(AdoAux(Index), NumRegElim, True) Then
+        If Not SituarDataTrasEliminar(Adoaux(Index), NumRegElim, True) Then
 '            PonerCampos
             
         End If
@@ -2297,7 +2297,7 @@ Dim I As Integer
             
 '            If Index = 0 Then NumF = SugerirCodigoSiguienteStr(vTabla, "numlinea", vWhere)
 
-            AnyadirLinea DataGridAux(Index), AdoAux(Index)
+            AnyadirLinea DataGridAux(Index), Adoaux(Index)
     
             anc = DataGridAux(Index).Top
             If DataGridAux(Index).Row < 0 Then
@@ -2331,8 +2331,8 @@ Private Sub BotonModificarLinea(Index As Integer)
     Dim I As Integer
     Dim J As Integer
     
-    If AdoAux(Index).Recordset.EOF Then Exit Sub
-    If AdoAux(Index).Recordset.RecordCount < 1 Then Exit Sub
+    If Adoaux(Index).Recordset.EOF Then Exit Sub
+    If Adoaux(Index).Recordset.RecordCount < 1 Then Exit Sub
     
     ModoLineas = 2 'Modificar llínia
        
@@ -2500,7 +2500,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2517,14 +2517,14 @@ Dim vFact As Byte, vDocum As Byte
     '[Monica]23/09/2014: si me insertan el concepto de no hay incidencias no puede haber ningun otro concepto
     If B Then
         If ComprobarCero(txtAux(9).Text) = 8 Then
-            SQL = "select count(*) from rordrecogida_incid where nroorden = " & DBSet(Text1(0).Text, "N") & " and idplaga < 8"
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rordrecogida_incid where nroorden = " & DBSet(Text1(0).Text, "N") & " and idplaga < 8"
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "No puede haber una incidencia junto con Revisión realizada sin incidencias. Revise.", vbExclamation
                 B = False
             End If
         Else
-            SQL = "select count(*) from rordrecogida_incid where nroorden = " & DBSet(Text1(0).Text, "N") & " and idplaga = 8"
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rordrecogida_incid where nroorden = " & DBSet(Text1(0).Text, "N") & " and idplaga = 8"
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "No puede haber una incidencia junto con Revisión realizada sin incidencias. Revise.", vbExclamation
                 B = False
             End If
@@ -2625,14 +2625,14 @@ Private Sub CargaFrame(Index As Integer, enlaza As Boolean)
 Dim tip As Integer
 Dim I As Byte
 
-    AdoAux(Index).ConnectionString = conn
-    AdoAux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
-    AdoAux(Index).CursorType = adOpenDynamic
-    AdoAux(Index).LockType = adLockPessimistic
-    AdoAux(Index).Refresh
+    Adoaux(Index).ConnectionString = conn
+    Adoaux(Index).RecordSource = MontaSQLCarga(Index, enlaza)
+    Adoaux(Index).CursorType = adOpenDynamic
+    Adoaux(Index).LockType = adLockPessimistic
+    Adoaux(Index).Refresh
     
-    If Not AdoAux(Index).Recordset.EOF Then
-        PonerCamposForma2 Me, AdoAux(Index), 2, "FrameAux" & Index
+    If Not Adoaux(Index).Recordset.EOF Then
+        PonerCamposForma2 Me, Adoaux(Index), 2, "FrameAux" & Index
     Else
         ' *** si n'hi han tabs sense datagrids, li pose els valors als camps ***
         NetejaFrameAux "FrameAux3" 'neteja només lo que te TAG
@@ -2666,7 +2666,7 @@ Dim tots As String
 
     tots = MontaSQLCarga(Index, enlaza)
 
-    CargaGridGnral Me.DataGridAux(Index), Me.AdoAux(Index), tots, PrimeraVez
+    CargaGridGnral Me.DataGridAux(Index), Me.Adoaux(Index), tots, PrimeraVez
     
     Select Case Index
         Case 1 'incidencias
@@ -2742,7 +2742,7 @@ Dim V As Integer
             ModoLineas = 0
             Select Case NumTabMto
                 Case 1
-                    V = AdoAux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
+                    V = Adoaux(NumTabMto).Recordset.Fields(1) 'el 2 es el nº de llinia
             End Select
             CargaGrid NumTabMto, True
             
@@ -2751,7 +2751,7 @@ Dim V As Integer
 
             ' *** si n'hi han tabs que no tenen datagrid, posar el if ***
             PonerFocoGrid Me.DataGridAux(NumTabMto)
-            AdoAux(NumTabMto).Recordset.Find (AdoAux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
+            Adoaux(NumTabMto).Recordset.Find (Adoaux(NumTabMto).Recordset.Fields(1).Name & " =" & V)
             
             LLamaLineas NumTabMto, 0
             ModificarLinea = True
@@ -2835,7 +2835,7 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 Dim actualiza As Boolean
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
@@ -2846,8 +2846,8 @@ Dim actualiza As Boolean
             actualiza = False
         End If
         
-        SQL = CadenaInsertarDesdeForm(Me)
-        If InsertarOferta(SQL, vTipoMov, actualiza) Then
+        Sql = CadenaInsertarDesdeForm(Me)
+        If InsertarOferta(Sql, vTipoMov, actualiza) Then
             CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
             PonerCadenaBusqueda
             PonerModo 2
@@ -2961,13 +2961,13 @@ EInsertarOferta:
 End Function
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " numnotac= " & Text1(0).Text
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = " numnotac= " & Text1(0).Text
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -2975,7 +2975,7 @@ End Function
 Private Function ModificaCabecera() As Boolean
 Dim B As Boolean
 Dim MenError As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EModificarCab
 

@@ -1256,11 +1256,11 @@ End Sub
 
 ' *** si n'hi han combos a la capçalera ***
 Private Sub Combo1_GotFocus(Index As Integer)
-    If Modo = 1 Then Combo1(Index).BackColor = vbYellow
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
 End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
-    If Combo1(Index).BackColor = vbYellow Then Combo1(Index).BackColor = vbWhite
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
     
     ' ofertamos el siguiente contador para la variedad / tipo
     If Text1(0).Text <> "" And Modo = 3 Then
@@ -1457,7 +1457,7 @@ Dim I As Integer
     Else
         PonerModo 1 'búsqueda
         ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-        Text1(0).BackColor = vbYellow 'codclien
+        Text1(0).BackColor = vbLightBlue 'codclien
         ' ****************************************************************************
     End If
 End Sub
@@ -1530,7 +1530,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -1696,28 +1696,28 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' calidades
             tabla = "rprecios_calidad"
-            SQL = "SELECT rprecios_calidad.codvarie, rprecios_calidad.tipofact, rprecios_calidad.contador, rprecios_calidad.codcalid, rcalidad.nomcalid, rprecios_calidad.precoop, rprecios_calidad.presocio "
-            SQL = SQL & " FROM " & tabla & " INNER JOIN rcalidad ON rprecios_calidad.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and rprecios_calidad.codcalid = rcalidad.codcalid "
+            Sql = "SELECT rprecios_calidad.codvarie, rprecios_calidad.tipofact, rprecios_calidad.contador, rprecios_calidad.codcalid, rcalidad.nomcalid, rprecios_calidad.precoop, rprecios_calidad.presocio "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN rcalidad ON rprecios_calidad.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and rprecios_calidad.codcalid = rcalidad.codcalid "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rprecios_calidad.codvarie = -1"
+                Sql = Sql & " WHERE rprecios_calidad.codvarie = -1"
             End If
-            SQL = SQL & " ORDER BY " & tabla & ".codcalid "
+            Sql = Sql & " ORDER BY " & tabla & ".codcalid "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -1958,7 +1958,7 @@ End Sub
 
 
 Private Sub mnGeneracionMasiva_Click()
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
     
     Set frmGen = New frmGeneraPrecios
@@ -1999,13 +1999,13 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2392,7 +2392,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 'Dim Datos As String
 
@@ -2405,8 +2405,8 @@ Dim cad As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = DevuelveDesdeBDNew(cAgro, "rprecios", "codvarie", "codvarie", Text1(0).Text, "N", , "tipofact", Combo1(0).ListIndex, "N", "contador", Text1(1).Text, "N")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "rprecios", "codvarie", "codvarie", Text1(0).Text, "N", , "tipofact", Combo1(0).ListIndex, "N", "contador", Text1(1).Text, "N")
+        If Sql <> "" Then
             MsgBox "Ya existe el contador para este variedad. Revise.", vbExclamation
             B = False
         End If
@@ -2477,7 +2477,7 @@ Dim vWhere As String
 
     conn.BeginTrans
     ' ***** canviar el nom de la PK de la capçalera, repasar codEmpre *******
-    vWhere = " WHERE codvarie=" & Data1.Recordset!codvarie
+    vWhere = " WHERE codvarie=" & Data1.Recordset!Codvarie
     vWhere = vWhere & " and tipofact = " & Data1.Recordset!TipoFact
     vWhere = vWhere & " and contador = " & Data1.Recordset!Contador
         ' ***********************************************************************
@@ -2690,7 +2690,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2717,12 +2717,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'calidad
-            SQL = "¿Seguro que desea eliminar la calidad?"
-            SQL = SQL & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la calidad?"
+            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid & " - " & Adoaux(Index).Recordset!nomcalid
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rprecios_calidad "
-                SQL = SQL & vWhere & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
+                Sql = "DELETE FROM rprecios_calidad "
+                Sql = Sql & vWhere & " and codcalid = " & DBLet(Adoaux(Index).Recordset!codcalid, "N")
             End If
         
     End Select
@@ -2730,7 +2730,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -2934,7 +2934,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2952,9 +2952,9 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        SQL = ""
+        Sql = ""
 '        SQL = DevuelveDesdeBDNew(cAgro, "rprecios_calidad", "codcalid", "codvarie", txtaux1(0).Text, "N", , "tipofact", txtaux1(2).Text, "N", "codcalid", txtaux1(1).Text, "N")
-        If SQL <> "" Then
+        If Sql <> "" Then
             MsgBox "Ya existe la calidad. Revise.", vbExclamation
             PonerFoco txtAux1(1)
             B = False
@@ -3364,7 +3364,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificar
 
@@ -3514,10 +3514,10 @@ Dim Nuevo As Boolean
                 'If vParamAplic.Cooperativa = 2 And Index = 3 And txtaux1(5).Text = "" And ModoLineas = 1 Then txtaux1(5).Text = txtaux1(3).Text
                 If Me.Check1.Value = 1 And Index = 3 Then
                     txtAux1(5).Text = txtAux1(3).Text
-                    CmdAceptar.SetFocus
+                    cmdAceptar.SetFocus
                 End If
                 
-                If Index = 5 Then CmdAceptar.SetFocus
+                If Index = 5 Then cmdAceptar.SetFocus
             End If
 
     End Select
@@ -3600,7 +3600,7 @@ Private Sub InicializarVbles()
 End Sub
 
 Private Sub PonerClasificacionGrafica()
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim I As Integer
 Dim arrData()
@@ -3657,7 +3657,7 @@ End Sub
 
 
 Private Sub SumaTotalPorcentajes()
-Dim SQL As String
+Dim Sql As String
 Dim I As Currency
 Dim Rs As ADODB.Recordset
    
@@ -3679,7 +3679,7 @@ End Sub
 
 
 Private Function VisualizaClasificacion() As Boolean
-Dim SQL As String
+Dim Sql As String
 
 
 '    SQL = ""

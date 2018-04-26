@@ -989,7 +989,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1004,24 +1004,24 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset!fecaport
-    SQL = SQL & vbCrLf & "Tipo Aportación: " & adodc1.Recordset!Codaport & " " & adodc1.Recordset!nomaport
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset!fecaport
+    Sql = Sql & vbCrLf & "Tipo Aportación: " & adodc1.Recordset!Codaport & " " & adodc1.Recordset!nomaport
     If DBLet(adodc1.Recordset!numfactu) <> 0 Then
-        SQL = SQL & vbCrLf & "Factura: " & adodc1.Recordset!numfactu
+        Sql = Sql & vbCrLf & "Factura: " & adodc1.Recordset!numfactu
     End If
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
-        SQL = SQL & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
-        SQL = SQL & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
-        SQL = SQL & " and numfactu = " & DBSet(adodc1.Recordset!numfactu, "N")
+        Sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
+        Sql = Sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
+        Sql = Sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
+        Sql = Sql & " and numfactu = " & DBSet(adodc1.Recordset!numfactu, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1227,7 +1227,7 @@ End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
 Dim I As Integer
-    If Combo1(Index).BackColor = vbYellow Then Combo1(Index).BackColor = vbWhite
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
     Select Case Index
         Case 0
             I = Combo1(Index).ListIndex
@@ -1439,18 +1439,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
+    Sql = Sql & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|730|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2700|;"
@@ -1467,7 +1467,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales SQL
+    CalcularTotales Sql
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
 '    DataGrid1.Columns(12).Alignment = dbgCenter
@@ -1486,7 +1486,7 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1547,7 +1547,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1556,10 +1556,10 @@ Dim Mens As String
     
     If Modo = 3 Then   'Estamos insertando
         If txtAux(3).Text <> "" And txtAux(4).Text <> "" Then
-            SQL = "select count(*) from raportacion where fecha = " & DBSet(txtAux(1).Text, "F")
-            SQL = SQL & " and codtipom = " & DBSet(txtAux(3).Text, "T")
-            SQL = SQL & " and numfactu = " & DBSet(txtAux(4).Text, "N")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from raportacion where fecha = " & DBSet(txtAux(1).Text, "F")
+            Sql = Sql & " and codtipom = " & DBSet(txtAux(3).Text, "T")
+            Sql = Sql & " and numfactu = " & DBSet(txtAux(4).Text, "N")
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "Ya existe una aportación para esta factura. Reintroduzca.", vbExclamation
                 PonerFoco txtAux(0)
                 B = False
@@ -1685,14 +1685,14 @@ Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
 Dim Kilos As Long
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(importe) importe from (" & cadena & ") aaaaa"
+    Sql = "select sum(importe) importe from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     txtAux2(2).Text = ""
@@ -1715,7 +1715,7 @@ End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -1724,16 +1724,16 @@ Dim I As Byte
     Next I
     
     'tipo de factura
-    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu < 4"
+    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu < 4"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        SQL = Rs.Fields(1).Value
-        SQL = Rs.Fields(0).Value '& " - " & sql
-        Combo1(0).AddItem SQL 'campo del codigo
+        Sql = Rs.Fields(1).Value
+        Sql = Rs.Fields(0).Value '& " - " & sql
+        Combo1(0).AddItem Sql 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = I
         I = I + 1
         Rs.MoveNext

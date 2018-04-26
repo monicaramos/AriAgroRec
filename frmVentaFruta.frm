@@ -2241,12 +2241,12 @@ Dim anc As Single
         'Si pasamos el control aqui lo ponemos en amarillo
         Text1(21).Text = CodTipoMov
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2481,7 +2481,7 @@ Dim cad As String
 End Sub
 
 Private Sub Combo1_GotFocus(Index As Integer)
-    If Modo = 1 Then Combo1(Index).BackColor = vbYellow
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
 End Sub
 
 Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -2490,7 +2490,7 @@ End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
 Dim I As Integer
-    If Combo1(Index).BackColor = vbYellow Then Combo1(Index).BackColor = vbWhite
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
     Select Case Index
         Case 0
             I = Combo1(Index).ListIndex
@@ -3336,7 +3336,7 @@ Private Sub PonerCadenaBusqueda()
         Screen.MousePointer = vbDefault
         If Modo = 1 Then
             PonerFoco Text1(kCampo)
-'            Text1(0).BackColor = vbYellow
+'            Text1(0).BackColor = vbLightBlue
         End If
         Exit Sub
     Else

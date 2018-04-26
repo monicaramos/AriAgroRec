@@ -21,7 +21,7 @@ Begin VB.Form frmPOZMantaAux
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   10
       Left            =   7800
       MaxLength       =   4
@@ -47,7 +47,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   285
+      Height          =   330
       Index           =   1
       Left            =   8730
       MaxLength       =   40
@@ -58,7 +58,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   9
       Left            =   14790
       MaxLength       =   5
@@ -70,7 +70,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   8
       Left            =   13650
       MaxLength       =   10
@@ -82,7 +82,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   285
+      Height          =   330
       Index           =   0
       Left            =   6690
       MaxLength       =   40
@@ -93,7 +93,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   7
       Left            =   12420
       MaxLength       =   8
@@ -105,7 +105,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   6
       Left            =   11700
       MaxLength       =   5
@@ -117,7 +117,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      Height          =   330
       Index           =   0
       Left            =   1200
       MaskColor       =   &H00000000&
@@ -130,7 +130,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      Height          =   330
       Index           =   1
       Left            =   4020
       MaskColor       =   &H00000000&
@@ -143,7 +143,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   300
+      Height          =   330
       Index           =   2
       Left            =   6480
       MaskColor       =   &H00000000&
@@ -157,7 +157,7 @@ Begin VB.Form frmPOZMantaAux
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   3
       Left            =   5730
       MaxLength       =   4
@@ -170,7 +170,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   4
       Left            =   9870
       MaxLength       =   3
@@ -184,7 +184,7 @@ Begin VB.Form frmPOZMantaAux
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   5
       Left            =   10860
       MaxLength       =   6
@@ -198,7 +198,7 @@ Begin VB.Form frmPOZMantaAux
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   1
       Left            =   2610
       MaxLength       =   8
@@ -210,7 +210,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   285
+      Height          =   330
       Index           =   2
       Left            =   1470
       MaxLength       =   30
@@ -222,7 +222,7 @@ Begin VB.Form frmPOZMantaAux
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   2
       Left            =   3390
       MaxLength       =   6
@@ -234,7 +234,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox Text2 
       BackColor       =   &H80000018&
       Enabled         =   0   'False
-      Height          =   285
+      Height          =   330
       Index           =   3
       Left            =   4260
       MaxLength       =   40
@@ -245,7 +245,7 @@ Begin VB.Form frmPOZMantaAux
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   285
+      Height          =   330
       Index           =   0
       Left            =   120
       MaxLength       =   6
@@ -803,7 +803,7 @@ Private Sub BotonBuscar()
     Text2(3).Text = ""
     Text2(1).Text = ""
     
-    LLamaLineas DataGrid1.Top + 206, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 
 End Sub

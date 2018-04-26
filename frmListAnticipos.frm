@@ -5415,6 +5415,7 @@ Begin VB.Form frmListAnticipos
          BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
             NumPanels       =   1
             BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -18219,9 +18220,6 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
             Sql = Sql & " group by 1,2,3,4,5,6 "
             Sql = Sql & " order by 1,2,3,4,5,6 "
         End If
-        
-        
-        
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText

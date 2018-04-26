@@ -209,7 +209,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   0
       Left            =   10590
       TabIndex        =   19
@@ -294,7 +294,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   3
       Left            =   6780
       TabIndex        =   16
@@ -315,7 +315,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   5
       Left            =   9660
       MaxLength       =   7
@@ -338,7 +338,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   4
       Left            =   8700
       MaxLength       =   7
@@ -382,7 +382,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   3
       Left            =   5580
       MaxLength       =   6
@@ -406,7 +406,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   2
       Left            =   3690
       TabIndex        =   15
@@ -448,7 +448,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   345
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   10
@@ -507,7 +507,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   2
       Left            =   2580
       MaxLength       =   12
@@ -530,7 +530,7 @@ Begin VB.Form frmManHcoFrutaMon
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   340
+      Height          =   330
       Index           =   0
       Left            =   30
       MaxLength       =   7
@@ -1002,7 +1002,7 @@ Private Sub BotonBuscar()
     txtAux2(3).Text = ""
     Combo1(0).ListIndex = -1
     
-    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -1295,6 +1295,14 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub Combo1_GotFocus(Index As Integer)
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus(Index As Integer)
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
+End Sub
+
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
 End Sub
@@ -1535,7 +1543,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1858,7 +1866,7 @@ Dim MenError As String
     
     
     '[Monica]08/02/2012: Si han modificado variedad socio o fecha en traza
-    If CLng(adodc1.Recordset!codvarie) <> CLng(txtAux(3).Text) Or CLng(adodc1.Recordset!Codsocio) <> CLng(txtAux(2).Text) Or _
+    If CLng(adodc1.Recordset!Codvarie) <> CLng(txtAux(3).Text) Or CLng(adodc1.Recordset!Codsocio) <> CLng(txtAux(2).Text) Or _
        DBLet(adodc1.Recordset!Fecalbar, "F") <> CDate(txtAux(1).Text) Then
          MenError = "No se han realizado los cambios en Trazabilidad. " & vbCrLf
          If Not ActualizarTraza2(txtAux(0).Text, txtAux(3).Text, txtAux(2).Text, txtAux(1).Text, MenError) Then
@@ -2033,7 +2041,7 @@ Dim B As Boolean
     B = True
     If crear = 1 Then
         nroPalets = InputBox("Nro de Palets:", "Número de Palets", 0)
-        B = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!codvarie))
+        B = InsertarPalets(CStr(adodc1.Recordset!numalbar), nroPalets, CStr(adodc1.Recordset!Numcajon), CStr(adodc1.Recordset!KilosNet), adodc1.Recordset!Fecalbar, CStr(adodc1.Recordset!Codsocio), CStr(adodc1.Recordset!Codvarie))
     End If
     
     If Imprimir = 1 Then

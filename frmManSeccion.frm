@@ -82,7 +82,7 @@ Begin VB.Form frmManSeccion
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   290
+      Height          =   330
       Index           =   3
       Left            =   7335
       MaskColor       =   &H00000000&
@@ -104,7 +104,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   9
       Left            =   6660
       MaxLength       =   3
@@ -126,7 +126,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   5
       Left            =   5760
       MaxLength       =   10
@@ -152,7 +152,7 @@ Begin VB.Form frmManSeccion
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   5535
       MaskColor       =   &H00000000&
@@ -321,7 +321,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   3
       Left            =   3780
       MaxLength       =   10
@@ -334,7 +334,7 @@ Begin VB.Form frmManSeccion
    Begin VB.CommandButton btnBuscar 
       Appearance      =   0  'Flat
       Caption         =   "+"
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   4635
       MaskColor       =   &H00000000&
@@ -357,7 +357,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   0
       Left            =   135
       MaxLength       =   3
@@ -379,7 +379,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   1
       Left            =   810
       MaxLength       =   30
@@ -401,7 +401,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   4
       Left            =   4860
       MaxLength       =   10
@@ -424,7 +424,7 @@ Begin VB.Form frmManSeccion
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   2
       Left            =   3150
       MaxLength       =   2
@@ -797,7 +797,7 @@ Dim I As Integer
     BloquearTxt txtAux(10), True
     ' ********************************************************
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -910,7 +910,7 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
 
-    LLamaLineas DataGrid1.Top + 250, 1
+    LLamaLineas DataGrid1.Top + 240, 1
     
     ' *** posar el foco al 1r camp visible que siga PK ***
     PonerFoco txtAux(0)
@@ -1415,7 +1415,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

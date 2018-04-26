@@ -662,7 +662,7 @@ Dim B As Boolean
     btnBuscar(0).visible = Not B
     btnBuscar(1).visible = Not B
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -822,7 +822,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -837,18 +837,18 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar la linea del Calibrador para la Calidad?"
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Calidad: " & adodc1.Recordset.Fields(3)
-    SQL = SQL & vbCrLf & "Linea: " & adodc1.Recordset.Fields(4)
+    Sql = "¿Seguro que desea eliminar la linea del Calibrador para la Calidad?"
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Calidad: " & adodc1.Recordset.Fields(3)
+    Sql = Sql & vbCrLf & "Linea: " & adodc1.Recordset.Fields(4)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rcalidad_calibrador where codvarie=" & adodc1.Recordset!codvarie
-        SQL = SQL & " and codcalid = " & adodc1.Recordset!codcalid
-        SQL = SQL & " and numlinea = " & adodc1.Recordset!numlinea
-        conn.Execute SQL
+        Sql = "Delete from rcalidad_calibrador where codvarie=" & adodc1.Recordset!Codvarie
+        Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
+        Sql = Sql & " and numlinea = " & adodc1.Recordset!numlinea
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1173,24 +1173,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
-    If ParamVariedad <> "" Then SQL = SQL & " and rcalidad_calibrador.codvarie = " & ParamVariedad
+    If ParamVariedad <> "" Then Sql = Sql & " and rcalidad_calibrador.codvarie = " & ParamVariedad
     
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rcalidad_calibrador.codvarie, rcalidad_calibrador.codcalid, rcalidad_calibrador.numlinea"
+    Sql = Sql & " ORDER BY rcalidad_calibrador.codvarie, rcalidad_calibrador.codcalid, rcalidad_calibrador.numlinea"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Variedad|1100|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Denominación|2300|;"
@@ -1219,7 +1219,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1252,15 +1252,15 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N", "numlinea", txtAux(2).Text, "N")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N", "numlinea", txtAux(2).Text, "N")
+        If Sql <> "" Then
             MsgBox "Linea de calibrador existente para esta calidad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1268,11 +1268,11 @@ Dim Mens As String
     End If
     
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and nomcalibrador1 = " & DBSet(txtAux(3).Text, "T")
+        Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and nomcalibrador1 = " & DBSet(txtAux(3).Text, "T")
     
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El nombre que utiliza el Calibrador 1 de esta calidad está asignada a otra. Revise.", vbExclamation
             PonerFoco txtAux(4)
             B = False
@@ -1280,11 +1280,11 @@ Dim Mens As String
     End If
     
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and nomcalibrador2 = " & DBSet(txtAux(4).Text, "T")
+        Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and nomcalibrador2 = " & DBSet(txtAux(4).Text, "T")
     
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El nombre que utiliza el Calibrador 2 de esta calidad está asignada a otra. Revise.", vbExclamation
             PonerFoco txtAux(5)
             B = False
@@ -1293,11 +1293,11 @@ Dim Mens As String
     
     If B And (Modo = 3 Or Modo = 4) Then
         If txtAux(5).Text <> "" Then
-            SQL = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
-            SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-            SQL = SQL & " and nomcalibrador3 = " & DBSet(txtAux(5).Text, "T")
+            Sql = "select count(*) from rcalidad_calibrador where codvarie = " & DBSet(txtAux(0).Text, "N")
+            Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+            Sql = Sql & " and nomcalibrador3 = " & DBSet(txtAux(5).Text, "T")
         
-            If TotalRegistros(SQL) <> 0 Then
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "El nombre que utiliza el Calibrador 3 de esta calidad está asignada a otra. Revise.", vbExclamation
                 PonerFoco txtAux(5)
                 B = False

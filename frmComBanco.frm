@@ -1508,7 +1508,7 @@ End Sub
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
     txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -1660,7 +1660,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -1712,7 +1712,7 @@ Dim cadMen As String
         
         Case 12 'cuenta contable
             If txtAux(Index).Text = "" Then Exit Sub
-            Text2(Index).Text = PonerNombreCuenta(txtAux(Index), Modo)
+            text2(Index).Text = PonerNombreCuenta(txtAux(Index), Modo)
 
 '       Case 6, 7 'dates
 '           If txtAux(Index).Text <> "" Then PonerFormatoFecha txtAux(Index)
@@ -1833,7 +1833,7 @@ On Error Resume Next
         txtAux(I).Text = ""
     Next I
     ' ****************************************************
-    Text2(12).Text = "" ' el nombre de la cuenta contable la ponemos a cero
+    text2(12).Text = "" ' el nombre de la cuenta contable la ponemos a cero
 
     If Err.Number <> 0 Then Err.Clear
 End Sub

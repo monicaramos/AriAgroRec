@@ -786,7 +786,7 @@ Private Const IdPrograma = 8003
 Public vCondicion As String
 
 Public DatosADevolverBusqueda As String    'Tindrà el nº de text que vol que torne, empipat
-Public Event DatoSeleccionado(Cadenaseleccion As String)
+Public Event DatoSeleccionado(CadenaSeleccion As String)
 
 ' *** declarar els formularis als que vaig a cridar ***
 Private WithEvents frmCua As frmBasico2
@@ -1095,14 +1095,14 @@ Dim I As Integer
     Else
         PonerModo 1 'búsqueda
         ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-        Text1(0).BackColor = vbYellow 'codclien
+        Text1(0).BackColor = vbLightBlue 'codclien
         ' ****************************************************************************
     End If
 End Sub
 
-Private Sub frmCua_DatoSeleccionado(Cadenaseleccion As String)
+Private Sub frmCua_DatoSeleccionado(CadenaSeleccion As String)
 Dim CadB As String
-    CadB = "codcuadrilla = " & RecuperaValor(Cadenaseleccion, 1)
+    CadB = "codcuadrilla = " & RecuperaValor(CadenaSeleccion, 1)
     
     'Se muestran en el mismo form
     CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
@@ -1180,7 +1180,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     cmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
     
     BloquearCmb Combo1(0), Not B
     
@@ -1311,40 +1311,40 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' trabajadores
             tabla = "rcuadrilla_trabajador"
-            SQL = "SELECT rcuadrilla_trabajador.codcuadrilla, rcuadrilla_trabajador.numlinea, rcuadrilla_trabajador.codtraba, straba.nomtraba "
-            SQL = SQL & " FROM (" & tabla & " INNER JOIN straba ON rcuadrilla_trabajador.codtraba = straba.codtraba) "
-            SQL = SQL & "INNER JOIN " & NombreTabla & " ON rcuadrilla.codcuadrilla = rcuadrilla_trabajador.codcuadrilla "
+            Sql = "SELECT rcuadrilla_trabajador.codcuadrilla, rcuadrilla_trabajador.numlinea, rcuadrilla_trabajador.codtraba, straba.nomtraba "
+            Sql = Sql & " FROM (" & tabla & " INNER JOIN straba ON rcuadrilla_trabajador.codtraba = straba.codtraba) "
+            Sql = Sql & "INNER JOIN " & NombreTabla & " ON rcuadrilla.codcuadrilla = rcuadrilla_trabajador.codcuadrilla "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE rcuadrilla_trabajador.codcuadrilla = -1"
+                Sql = Sql & " WHERE rcuadrilla_trabajador.codcuadrilla = -1"
             End If
-            SQL = SQL & " ORDER BY " & NombreTabla & ".codcuadrilla, rcuadrilla_trabajador.numlinea "
+            Sql = Sql & " ORDER BY " & NombreTabla & ".codcuadrilla, rcuadrilla_trabajador.numlinea "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
-Private Sub frmTra_DatoSeleccionado(Cadenaseleccion As String)
-    txtAux1(1).Text = RecuperaValor(Cadenaseleccion, 1) 'codigo trabajador
-    txtAux2(1).Text = RecuperaValor(Cadenaseleccion, 2) 'nombre trabajador
+Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo trabajador
+    txtAux2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre trabajador
 End Sub
 
 
-Private Sub frmCap_DatoSeleccionado(Cadenaseleccion As String)
-    Text1(1).Text = RecuperaValor(Cadenaseleccion, 1) 'codcapataz
+Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
+    Text1(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codcapataz
     FormateaCampo Text1(1)
-    Text2(1).Text = RecuperaValor(Cadenaseleccion, 2) 'nombre capataz
+    Text2(1).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -1410,7 +1410,7 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
         
         LLamaLineas 1, 1, DataGridAux(1).Top + 240
@@ -1418,7 +1418,7 @@ Dim I As Integer
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -1793,7 +1793,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 'Dim Datos As String
 
@@ -1805,9 +1805,9 @@ Dim cad As String
     
     ' ************************************************************************************
     If Modo = 3 Or Modo = 4 Then
-        SQL = "select count(*) from rcuadrilla where codcapat = " & DBSet(Text1(1).Text, "N")
-        SQL = SQL & " and codcuadrilla <> " & DBSet(Text1(0).Text, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from rcuadrilla where codcapat = " & DBSet(Text1(1).Text, "N")
+        Sql = Sql & " and codcuadrilla <> " & DBSet(Text1(0).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "Este capataz está asignado a otra cuadrilla. Revise.", vbExclamation
             PonerFoco Text1(1)
             B = False
@@ -1984,7 +1984,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2011,13 +2011,13 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'calidad
-            SQL = "¿Seguro que desea eliminar el Trabajador de la Cuadrilla?"
-            SQL = SQL & vbCrLf & "Trabajador: " & Adoaux(Index).Recordset!CodTraba & " - " & Adoaux(Index).Recordset!nomtraba
-            SQL = SQL & vbCrLf & "Cuadrilla : " & Adoaux(Index).Recordset!codcuadrilla
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar el Trabajador de la Cuadrilla?"
+            Sql = Sql & vbCrLf & "Trabajador: " & Adoaux(Index).Recordset!CodTraba & " - " & Adoaux(Index).Recordset!nomtraba
+            Sql = Sql & vbCrLf & "Cuadrilla : " & Adoaux(Index).Recordset!codcuadrilla
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rcuadrilla_trabajador "
-                SQL = SQL & Replace(vWhere, "rcuadrilla", "rcuadrilla_trabajador") & " and numlinea = " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = "DELETE FROM rcuadrilla_trabajador "
+                Sql = Sql & Replace(vWhere, "rcuadrilla", "rcuadrilla_trabajador") & " and numlinea = " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
             End If
         
     End Select
@@ -2025,7 +2025,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -2207,7 +2207,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2225,9 +2225,9 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        SQL = ""
-        SQL = DevuelveDesdeBDNew(cAgro, "rcuadrilla_trabajador", "codtraba", "codcuadrilla", txtAux1(0).Text, "N", , "codtraba", txtAux1(1).Text, "N")
-        If SQL <> "" Then
+        Sql = ""
+        Sql = DevuelveDesdeBDNew(cAgro, "rcuadrilla_trabajador", "codtraba", "codcuadrilla", txtAux1(0).Text, "N", , "codtraba", txtAux1(1).Text, "N")
+        If Sql <> "" Then
             MsgBox "Ya existe el trabajador en la Cuadrilla. Revise.", vbExclamation
             PonerFoco txtAux1(1)
             B = False
@@ -2465,7 +2465,7 @@ Private Sub Modificar()
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificar
 
@@ -2611,7 +2611,7 @@ Dim Nuevo As Boolean
             Else
                 txtAux2(Index).Text = ""
             End If
-            Me.CmdAceptar.SetFocus
+            Me.cmdAceptar.SetFocus
 
     End Select
 

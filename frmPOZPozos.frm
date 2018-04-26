@@ -766,7 +766,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -781,15 +781,15 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el tipo de Pozo?"
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    SQL = "¿Seguro que desea eliminar el tipo de Pozo?"
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from rtipopozos where codpozo=" & adodc1.Recordset!Codpozo
+        SQL = "Delete from rtipopozos where codpozo=" & adodc1.Recordset!Codpozo
         
-        conn.Execute Sql
+        conn.Execute SQL
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1083,18 +1083,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
-    Sql = Sql & " ORDER BY  rtipopozos.codpozo "
+    SQL = SQL & " ORDER BY  rtipopozos.codpozo "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     If vParamAplic.Cooperativa = 17 Then
@@ -1152,7 +1152,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1184,7 +1184,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 
@@ -1192,8 +1192,8 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        Sql = "select count(*) from rtipopozos where codpozo= " & DBSet(txtAux(0).Text, "N")
-        If TotalRegistros(Sql) <> 0 Then
+        SQL = "select count(*) from rtipopozos where codpozo= " & DBSet(txtAux(0).Text, "N")
+        If TotalRegistros(SQL) <> 0 Then
             MsgBox "El codigo de pozo existe. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1285,24 +1285,24 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim Sql As String
+Dim SQL As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    Sql = "update rtipopozos set "
-    Sql = Sql & " nompozo = " & DBSet(ImporteSinFormato(txtAux(1).Text), "T")
-    Sql = Sql & ", hastametcub1 = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    Sql = Sql & ", precio1 = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    Sql = Sql & ", hastametcub2 = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    Sql = Sql & ", precio2 = " & DBSet(ImporteSinFormato(txtAux(5).Text), "N")
-    Sql = Sql & ", imporcuota = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
-    Sql = Sql & ", imporcuotahda = " & DBSet(ImporteSinFormato(txtAux(7).Text), "N")
+    SQL = "update rtipopozos set "
+    SQL = SQL & " nompozo = " & DBSet(ImporteSinFormato(txtAux(1).Text), "T")
+    SQL = SQL & ", hastametcub1 = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    SQL = SQL & ", precio1 = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    SQL = SQL & ", hastametcub2 = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    SQL = SQL & ", precio2 = " & DBSet(ImporteSinFormato(txtAux(5).Text), "N")
+    SQL = SQL & ", imporcuota = " & DBSet(ImporteSinFormato(txtAux(6).Text), "N")
+    SQL = SQL & ", imporcuotahda = " & DBSet(ImporteSinFormato(txtAux(7).Text), "N")
     
-    Sql = Sql & " where codpozo = " & DBSet(txtAux(0).Text, "N")
+    SQL = SQL & " where codpozo = " & DBSet(txtAux(0).Text, "N")
     
-    conn.Execute Sql
+    conn.Execute SQL
     
     ModificaDesdeForm = True
     Exit Function

@@ -167,16 +167,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Label1(14)"
-      Tab(1).Control(1)=   "imgFec(1)"
-      Tab(1).Control(2)=   "Label1(13)"
-      Tab(1).Control(3)=   "Label1(12)"
-      Tab(1).Control(4)=   "Label1(11)"
-      Tab(1).Control(5)=   "Text1(15)"
-      Tab(1).Control(6)=   "Text1(14)"
-      Tab(1).Control(7)=   "Text1(13)"
-      Tab(1).Control(8)=   "Text1(12)"
-      Tab(1).Control(9)=   "Combo1(2)"
+      Tab(1).Control(0)=   "Combo1(2)"
+      Tab(1).Control(1)=   "Text1(12)"
+      Tab(1).Control(2)=   "Text1(13)"
+      Tab(1).Control(3)=   "Text1(14)"
+      Tab(1).Control(4)=   "Text1(15)"
+      Tab(1).Control(5)=   "Label1(11)"
+      Tab(1).Control(6)=   "Label1(12)"
+      Tab(1).Control(7)=   "Label1(13)"
+      Tab(1).Control(8)=   "imgFec(1)"
+      Tab(1).Control(9)=   "Label1(14)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -2120,12 +2120,12 @@ Dim anc As Single
         
         'Si pasamos el control aqui lo ponemos en amarillo
         Combo1(0).SetFocus
-        Combo1(0).BackColor = vbYellow
+        Combo1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2353,7 +2353,7 @@ Dim cad As String
 End Sub
 
 Private Sub Combo1_GotFocus(Index As Integer)
-    If Modo = 1 Then Combo1(Index).BackColor = vbYellow
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
 End Sub
 
 Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -2362,7 +2362,7 @@ End Sub
 
 Private Sub Combo1_LostFocus(Index As Integer)
 Dim I As Integer
-    If Combo1(Index).BackColor = vbYellow Then Combo1(Index).BackColor = vbWhite
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
     Select Case Index
         Case 0
 '            Select Case Combo1(Index).ListIndex
@@ -2808,15 +2808,15 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaAlb
     
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM scafac1 "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM scafac1 "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -2826,15 +2826,15 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea todas las lineas de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM slifac "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM slifac "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -2897,7 +2897,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 Dim vSeccion As CSeccion
 Dim vSocio As cSocio
 
@@ -3072,7 +3072,7 @@ Private Sub PonerCadenaBusqueda()
         Screen.MousePointer = vbDefault
         If Modo = 1 Then
             PonerFoco Text1(kCampo)
-'            Text1(0).BackColor = vbYellow
+'            Text1(0).BackColor = vblightblue
         End If
         Exit Sub
     Else
@@ -3486,7 +3486,7 @@ End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -3678,7 +3678,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargaGrid
 
@@ -3688,8 +3688,8 @@ Dim SQL As String
             Opcion = 5
     End Select
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     vDataGrid.RowHeight = 270
     
@@ -3761,7 +3761,7 @@ End Sub
 
 Private Sub txtAux1_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 
     'Quitar espacios en blanco
     If Not PerderFocoGnralLineas(txtAux1(Index), ModificaLineas) Then Exit Sub
@@ -3806,7 +3806,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String, LEtra As String, Sql2 As String
+Dim Sql As String, LEtra As String, Sql2 As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim vTrans As CTransportista
@@ -3820,13 +3820,13 @@ Dim Mens As String
         
     'Eliminar en tablas de cabecera de factura
     '------------------------------------------
-    SQL = " " & ObtenerWhereCP(True)
+    Sql = " " & ObtenerWhereCP(True)
     
     'Lineas de albaranes (rfacttra_albaran)
-    conn.Execute "Delete from rfacttra_albaran " & SQL
+    conn.Execute "Delete from rfacttra_albaran " & Sql
     
     'Cabecera de factura (rfacttra)
-    conn.Execute "Delete from " & NombreTabla & SQL
+    conn.Execute "Delete from " & NombreTabla & Sql
     
     'Decrementar contador si borramos el ultima factura
     
@@ -3855,7 +3855,7 @@ FinEliminar:
 End Function
 
 Private Function EliminarLinea(Aux As Integer) As Boolean
-Dim SQL As String, LEtra As String
+Dim Sql As String, LEtra As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -3874,14 +3874,14 @@ Dim Mens As String
             Mens = ""
             
             
-            SQL = " where codtipom = '" & Data6.Recordset.Fields(0) & "'"
-            SQL = SQL & " and numfactu = " & Data6.Recordset.Fields(1)
-            SQL = SQL & " and fecfactu = " & DBSet(Data6.Recordset.Fields(2), "F")
-            SQL = SQL & " and numalbar = " & DBSet(Data6.Recordset.Fields(3), "N")
-            SQL = SQL & " and numnotac = " & Data6.Recordset.Fields(8)
+            Sql = " where codtipom = '" & Data6.Recordset.Fields(0) & "'"
+            Sql = Sql & " and numfactu = " & Data6.Recordset.Fields(1)
+            Sql = Sql & " and fecfactu = " & DBSet(Data6.Recordset.Fields(2), "F")
+            Sql = Sql & " and numalbar = " & DBSet(Data6.Recordset.Fields(3), "N")
+            Sql = Sql & " and numnotac = " & Data6.Recordset.Fields(8)
             
             'Lineas de albaranes (rfacttra_albaran)
-            conn.Execute "Delete from rfacttra_albaran " & SQL
+            conn.Execute "Delete from rfacttra_albaran " & Sql
         
     End Select
     
@@ -3930,17 +3930,17 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " codtipom= '" & Text1(10).Text & "'"
-    SQL = SQL & " and numfactu = " & Text1(0).Text
-    SQL = SQL & " and fecfactu = " & DBSet(Text1(1).Text, "F")
-    SQL = SQL & " and codtrans = '" & Trim(Text1(2).Text) & "'"
+    Sql = " codtipom= '" & Text1(10).Text & "'"
+    Sql = Sql & " and numfactu = " & Text1(0).Text
+    Sql = Sql & " and fecfactu = " & DBSet(Text1(1).Text, "F")
+    Sql = Sql & " and codtrans = '" & Trim(Text1(2).Text) & "'"
 
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -3955,26 +3955,26 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     Select Case Opcion
     Case 5  ' albaranes de la factura
-        SQL = "SELECT rfacttra_albaran.codtipom, rfacttra_albaran.numfactu, rfacttra_albaran.fecfactu, "
-        SQL = SQL & " rfacttra_albaran.numalbar, rfacttra_albaran.fecalbar, rfacttra_albaran.codvarie, "
-        SQL = SQL & " variedades.nomvarie, rfacttra_albaran.codcampo, rfacttra_albaran.numnotac, "
-        SQL = SQL & " rfacttra_albaran.kilosnet, rfacttra_albaran.importe "
-        SQL = SQL & " FROM rfacttra_albaran, variedades " 'lineas de albaranes de la factura socio
-        SQL = SQL & " WHERE rfacttra_albaran.codvarie = variedades.codvarie "
+        Sql = "SELECT rfacttra_albaran.codtipom, rfacttra_albaran.numfactu, rfacttra_albaran.fecfactu, "
+        Sql = Sql & " rfacttra_albaran.numalbar, rfacttra_albaran.fecalbar, rfacttra_albaran.codvarie, "
+        Sql = Sql & " variedades.nomvarie, rfacttra_albaran.codcampo, rfacttra_albaran.numnotac, "
+        Sql = Sql & " rfacttra_albaran.kilosnet, rfacttra_albaran.importe "
+        Sql = Sql & " FROM rfacttra_albaran, variedades " 'lineas de albaranes de la factura socio
+        Sql = Sql & " WHERE rfacttra_albaran.codvarie = variedades.codvarie "
     End Select
     
     If enlaza Then
-        SQL = SQL & " and " & ObtenerWhereCP(False)
+        Sql = Sql & " and " & ObtenerWhereCP(False)
     Else
-        SQL = SQL & " and numfactu = -1"
+        Sql = Sql & " and numfactu = -1"
     End If
-    SQL = SQL & " ORDER BY numfactu"
-    If Opcion = 5 Then SQL = SQL & ", fecalbar "
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY numfactu"
+    If Opcion = 5 Then Sql = Sql & ", fecalbar "
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -4127,7 +4127,7 @@ End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -4155,16 +4155,16 @@ Dim I As Byte
     Combo1(1).ItemData(Combo1(1).NewIndex) = 3
     
     'tipo de factura
-    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu <> 11"
+    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 and tipodocu <> 11"
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        SQL = Rs.Fields(1).Value
-        SQL = Rs.Fields(0).Value & " - " & SQL
-        Combo1(2).AddItem SQL 'campo del codigo
+        Sql = Rs.Fields(1).Value
+        Sql = Rs.Fields(0).Value & " - " & Sql
+        Combo1(2).AddItem Sql 'campo del codigo
         Combo1(2).ItemData(Combo1(2).NewIndex) = I
         I = I + 1
         Rs.MoveNext
@@ -4203,7 +4203,7 @@ End Function
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
 Dim vTrans As CTransportista ' clase de transportista
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarCab
     
@@ -4213,9 +4213,9 @@ Dim SQL As String
         Set vTipoMov = New CTiposMov
         If vTipoMov.Leer(CodTipoMov) Then
             Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-            SQL = CadenaInsertarDesdeForm(Me)
-            If SQL <> "" Then
-                If InsertarOferta(SQL, vTipoMov) Then
+            Sql = CadenaInsertarDesdeForm(Me)
+            If Sql <> "" Then
+                If InsertarOferta(Sql, vTipoMov) Then
                     CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                     PonerCadenaBusqueda
                     PonerModo 2
@@ -4244,9 +4244,9 @@ Dim SQL As String
         Set vTrans = New CTransportista
         If vTrans.LeerDatos(Text1(2).Text) Then
             Text1(0).Text = vTrans.ConseguirContador()
-            SQL = CadenaInsertarDesdeForm(Me)
-            If SQL <> "" Then
-                If InsertarOferta2(SQL, vTrans) Then
+            Sql = CadenaInsertarDesdeForm(Me)
+            If Sql <> "" Then
+                If InsertarOferta2(Sql, vTrans) Then
                     CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                     PonerCadenaBusqueda
                     PonerModo 2
@@ -4533,7 +4533,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -4581,16 +4581,16 @@ End Function
 Private Sub CalcularTotales()
 Dim Importe  As Currency
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
 
-    SQL = "select sum(importe) from rfacttra_albaran where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
-    SQL = SQL & " and numfactu = " & Data1.Recordset.Fields(1).Value
-    SQL = SQL & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
-    SQL = SQL & " and codtrans = " & DBSet(Data1.Recordset!codTrans, "N")
+    Sql = "select sum(importe) from rfacttra_albaran where codtipom = " & DBSet(Data1.Recordset.Fields(0).Value, "T")
+    Sql = Sql & " and numfactu = " & Data1.Recordset.Fields(1).Value
+    Sql = Sql & " and fecfactu = " & DBSet(Data1.Recordset.Fields(2).Value, "F")
+    Sql = Sql & " and codtrans = " & DBSet(Data1.Recordset!codTrans, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     If Not Rs.EOF Then

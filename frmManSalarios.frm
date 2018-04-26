@@ -92,7 +92,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   8
       Left            =   9240
       MaxLength       =   10
@@ -114,7 +114,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   7
       Left            =   8490
       MaxLength       =   10
@@ -136,7 +136,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   6
       Left            =   7695
       MaxLength       =   25
@@ -158,7 +158,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   5
       Left            =   6885
       MaxLength       =   25
@@ -180,7 +180,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   4
       Left            =   5400
       MaxLength       =   25
@@ -202,7 +202,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   3
       Left            =   3915
       MaxLength       =   25
@@ -224,7 +224,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   2
       Left            =   2430
       MaxLength       =   25
@@ -283,7 +283,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   15
@@ -305,7 +305,7 @@ Begin VB.Form frmManSalarios
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   60
       MaxLength       =   2
@@ -628,8 +628,8 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
-    CmdCancelar.visible = Not B
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -722,7 +722,7 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
 '    PosicionarCombo Combo1, "724"
-    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -1121,7 +1121,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

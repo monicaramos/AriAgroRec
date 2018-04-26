@@ -1245,7 +1245,7 @@ Dim temp As Boolean
         Sql = "Delete from horas where codtraba=" & adodc1.Recordset!CodTraba
         Sql = Sql & " and fechahora = " & DBSet(adodc1.Recordset!FechaHora, "F")
         Sql = Sql & " and codalmac = " & DBLet(adodc1.Recordset!codAlmac)
-        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!codvarie, "N")
+        Sql = Sql & " and codvarie = " & DBLet(adodc1.Recordset!Codvarie, "N")
         
         If DBLet(adodc1.Recordset.Fields(12), "T") <> "" Then
             Sql = Sql & " and codforfait = " & DBLet(adodc1.Recordset!codforfait, "T")
@@ -1777,7 +1777,7 @@ Private Sub txtaux_GotFocus(Index As Integer)
         txtAux(Index).Enabled = False
     End If
 
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

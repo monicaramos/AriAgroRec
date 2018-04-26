@@ -1007,7 +1007,7 @@ Dim I As Integer
     Else
         PonerModo 1 'búsqueda
         ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-        Text1(0).BackColor = vbYellow 'codclien
+        Text1(0).BackColor = vbLightBlue 'codclien
         ' ****************************************************************************
     End If
 End Sub
@@ -1254,12 +1254,12 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -1461,12 +1461,12 @@ Dim CPostal As String, desProvi As String, desPais As String
     
     ' ************* configurar els camps de les descripcions de la capçalera *************
     If Not vSeccion Is Nothing Then
-        text2(2).Text = PonerNombreCuenta(Text1(2), Modo)
-        text2(3).Text = PonerNombreCuenta(Text1(3), Modo)
-        text2(4).Text = PonerNombreCuenta(Text1(4), Modo)
-        text2(5).Text = PonerNombreCuenta(Text1(5), Modo)
+        Text2(2).Text = PonerNombreCuenta(Text1(2), Modo)
+        Text2(3).Text = PonerNombreCuenta(Text1(3), Modo)
+        Text2(4).Text = PonerNombreCuenta(Text1(4), Modo)
+        Text2(5).Text = PonerNombreCuenta(Text1(5), Modo)
         
-        text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
+        Text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
     End If
     ' ********************************************************************************
     
@@ -1605,15 +1605,15 @@ Dim Nuevo As Boolean
             
             If vSeccion Is Nothing Then Exit Sub
         
-            If Text1(Index).Text <> "" Then text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
-            If text2(Index).Text = "" Then
+            If Text1(Index).Text <> "" Then Text2(Index).Text = PonerNombreCuenta(Text1(Index), 2)
+            If Text2(Index).Text = "" Then
                 MsgBox "Número de Cuenta contable no existe en la contabilidad. Reintroduzca.", vbExclamation
             End If
             
         Case 6 ' centro de coste
             If vSeccion Is Nothing Then Exit Sub
             
-            text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
+            Text2(6).Text = PonerNombreDeCod(Text1(6), "cabccost", "nomccost", "codccost", "T", cConta)
         
     End Select
         ' ***************************************************************************
@@ -1685,13 +1685,13 @@ End Sub
 Private Sub frmCCos_DatoSeleccionado(CadenaSeleccion As String)
 'Centro de Coste de la contabilidad
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo
-    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
+    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'descripcion
 End Sub
 
 Private Sub frmCtas_DatoSeleccionado(CadenaSeleccion As String)
 'Cuentas contables de la Contabilidad
     Text1(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codmacta
-    text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
+    Text2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'des macta
 End Sub
 
 Private Function ObtenerWhereCab(conW As Boolean) As String

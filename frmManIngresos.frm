@@ -729,7 +729,7 @@ Private Sub BotonBuscar()
     Me.txtAux2(1).Text = ""
     
     
-    LLamaLineas DataGrid1.Top + 235, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -811,7 +811,7 @@ Dim temp As Boolean
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         SQL = "Delete from ringresos where codsocio=" & adodc1.Recordset!Codsocio
-        SQL = SQL & " and codvarie = " & adodc1.Recordset!codvarie
+        SQL = SQL & " and codvarie = " & adodc1.Recordset!Codvarie
         SQL = SQL & " and concepto = " & DBSet(adodc1.Recordset!Concepto, "T")
         conn.Execute SQL
         CargaGrid CadB
@@ -1177,7 +1177,7 @@ Private Sub txtaux_GotFocus(Index As Integer)
         txtAux(Index).Enabled = False
     End If
 
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

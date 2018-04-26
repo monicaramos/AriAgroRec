@@ -2008,7 +2008,7 @@ Private Sub cmdCancelar_Click()
             If ModificaLineas = 1 Then 'INSERTAR
                 ModificaLineas = 0
                 DataGrid3.AllowAddNew = False
-                If Not AdoAux(1).Recordset.EOF Then AdoAux(1).Recordset.MoveFirst
+                If Not Adoaux(1).Recordset.EOF Then Adoaux(1).Recordset.MoveFirst
             End If
             ModificaLineas = 0
             LLamaLineas Modo, 0, "DataGrid3"
@@ -2076,12 +2076,12 @@ Dim anc As Single
         
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2160,7 +2160,7 @@ Dim J As Byte
 
     
     vWhere = ObtenerWhereCP(False)
-    vWhere = vWhere & " and numlinea=" & AdoAux(1).Recordset!numlinea
+    vWhere = vWhere & " and numlinea=" & Adoaux(1).Recordset!numlinea
     If Not BloqueaRegistro("rbodalbaran_variedad", vWhere) Then
         TerminaBloquear
         Exit Sub
@@ -2331,8 +2331,8 @@ End Sub
 
 
 Private Sub DataGrid3_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
-    If Not AdoAux(1).Recordset.EOF Then
-        Text2(16).Text = DBLet(AdoAux(1).Recordset!ampliaci, "T")
+    If Not Adoaux(1).Recordset.EOF Then
+        Text2(16).Text = DBLet(Adoaux(1).Recordset!ampliaci, "T")
     End If
 End Sub
 
@@ -2707,15 +2707,15 @@ End Sub
 
 Private Function BloqueaLineasAlb() As Boolean
 'bloquea todas las lineas de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaLin
 
     BloqueaLineasAlb = False
     'bloquear cabecera albaranes
-    SQL = "select * FROM slialb "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM slialb "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasAlb = True
 
 EBloqueaLin:
@@ -2779,7 +2779,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 Dim Nregs As Long
 
         
@@ -2951,7 +2951,7 @@ Private Sub PonerCadenaBusqueda()
         Screen.MousePointer = vbDefault
         If Modo = 1 Then
             PonerFoco Text1(kCampo)
-'            Text1(0).BackColor = vbYellow
+'            Text1(0).BackColor = vbLightBlue
         End If
         Exit Sub
     Else
@@ -2986,12 +2986,12 @@ Dim I As Integer
     Screen.MousePointer = vbHourglass
     
     If Data1.Recordset.RecordCount > 0 Then
-        CargaGrid DataGrid3, AdoAux(1), True
+        CargaGrid DataGrid3, Adoaux(1), True
     Else
-        CargaGrid DataGrid3, AdoAux(1), False
+        CargaGrid DataGrid3, Adoaux(1), False
     End If
-    If Not AdoAux(1).Recordset.EOF Then
-        Text2(16).Text = DBLet(AdoAux(1).Recordset!ampliaci, "T")
+    If Not Adoaux(1).Recordset.EOF Then
+        Text2(16).Text = DBLet(Adoaux(1).Recordset!ampliaci, "T")
     Else
         Text2(16).Text = ""
     End If
@@ -3164,7 +3164,7 @@ Private Function DatosOK() As Boolean
 'la cabecera del Pedido
 Dim B As Boolean
 Dim Serie As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EDatosOK
 
@@ -3248,7 +3248,7 @@ End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim B As Boolean
 
@@ -3267,20 +3267,20 @@ Dim B As Boolean
 
     ' *************** canviar la pregunta ****************
     cad = "¿Seguro que desea eliminar la Variedad?"
-    cad = cad & vbCrLf & "Albarán: " & AdoAux(1).Recordset.Fields(0)
-    cad = cad & vbCrLf & "Variedad: " & AdoAux(1).Recordset.Fields(3) & " - " & AdoAux(1).Recordset.Fields(4)
+    cad = cad & vbCrLf & "Albarán: " & Adoaux(1).Recordset.Fields(0)
+    cad = cad & vbCrLf & "Variedad: " & Adoaux(1).Recordset.Fields(3) & " - " & Adoaux(1).Recordset.Fields(4)
     
     If MsgBox(cad, vbQuestion + vbYesNo) = vbYes Then
         On Error GoTo EEliminarLinea
         Screen.MousePointer = vbHourglass
-        NumRegElim = AdoAux(1).Recordset.AbsolutePosition
+        NumRegElim = Adoaux(1).Recordset.AbsolutePosition
         
         If Not EliminarLinea Then
             Screen.MousePointer = vbDefault
             Exit Sub
         Else
             CalcularDatosAlbaran
-            If SituarDataTrasEliminar(AdoAux(1), NumRegElim) Then
+            If SituarDataTrasEliminar(Adoaux(1), NumRegElim) Then
                 PonerCampos
             Else
                 PonerCampos
@@ -3367,9 +3367,9 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     B = DataGrid3.Enabled
     Select Case vDataGrid.Name
@@ -3377,8 +3377,8 @@ Dim SQL As String
             Opcion = 1
     End Select
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     vDataGrid.RowHeight = 270
     
@@ -3390,7 +3390,7 @@ Dim SQL As String
     
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -3398,7 +3398,7 @@ End Sub
 Private Sub CargaGrid2(ByRef vDataGrid As DataGrid, ByRef vData As Adodc)
 Dim tots As String
     
-    On Error GoTo ECargaGRid
+    On Error GoTo ECargaGrid
 
     Select Case vDataGrid.Name
          Case "DataGrid3" 'rbodalbaran_variedad lineas de albaran de bodega
@@ -3415,7 +3415,7 @@ Dim tots As String
     vDataGrid.HoldFields
     Exit Sub
     
-ECargaGRid:
+ECargaGrid:
     If Err.Number <> 0 Then MuestraError Err.Number, "Cargando datos grid", Err.Description
 End Sub
 
@@ -3451,7 +3451,7 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 Dim devuelve As String
 Dim B As Boolean
 Dim TipoDto As Byte
@@ -3483,8 +3483,8 @@ Dim TipoDto As Byte
                     txtAux(10).Text = DevuelveDesdeBDNew(cAgro, "variedades", "codigiva", "codvarie", txtAux(5), "N")
                     'unidades
                     cantidad = 0
-                    SQL = DevuelveDesdeBDNew(cAgro, "variedades", "kgscajon", "codvarie", txtAux(5), "N")
-                    If SQL <> "" Then cantidad = CCur(SQL)
+                    Sql = DevuelveDesdeBDNew(cAgro, "variedades", "kgscajon", "codvarie", txtAux(5), "N")
+                    If Sql <> "" Then cantidad = CCur(Sql)
                     PonerFoco txtAux(4)
                 End If
             End If
@@ -3523,7 +3523,7 @@ Dim TipoDto As Byte
 End Sub
 
 Private Function Eliminar() As Boolean
-Dim SQL As String, LEtra As String, Sql2 As String
+Dim Sql As String, LEtra As String, Sql2 As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -3536,13 +3536,13 @@ Dim Mens As String
         
     'Eliminar en tablas de cabecera de albaran
     '------------------------------------------
-    SQL = " " & ObtenerWhereCP(True)
+    Sql = " " & ObtenerWhereCP(True)
     
     'Lineas de variedades (rbodalbaran_variedad)
-    conn.Execute "Delete from rbodalbaran_variedad " & SQL
+    conn.Execute "Delete from rbodalbaran_variedad " & Sql
     
     'Cabecera de factura
-    conn.Execute "Delete from " & NombreTabla & SQL
+    conn.Execute "Delete from " & NombreTabla & Sql
     
     'Decrementar contador si borramos el ult. albaran de retirada de bodega
     If Not vParamAplic.AlbRetiradaManual Then
@@ -3568,14 +3568,14 @@ FinEliminar:
 End Function
 
 Private Function EliminarLinea() As Boolean
-Dim SQL As String, LEtra As String
+Dim Sql As String, LEtra As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
 
     On Error GoTo FinEliminar
 
-    If AdoAux(1).Recordset.EOF Then Exit Function
+    If Adoaux(1).Recordset.EOF Then Exit Function
         
     conn.BeginTrans
         
@@ -3583,11 +3583,11 @@ Dim Mens As String
     
     'Eliminar en tablas de slialb
     '------------------------------------------
-    SQL = " where numalbar = " & AdoAux(1).Recordset.Fields(0)
-    SQL = SQL & " and numlinea = " & AdoAux(1).Recordset.Fields(1)
+    Sql = " where numalbar = " & Adoaux(1).Recordset.Fields(0)
+    Sql = Sql & " and numlinea = " & Adoaux(1).Recordset.Fields(1)
 
     'Lineas de variedades
-    conn.Execute "Delete from rbodalbaran_variedad " & SQL
+    conn.Execute "Delete from rbodalbaran_variedad " & Sql
     
 FinEliminar:
     If Err.Number <> 0 Then
@@ -3604,7 +3604,7 @@ Private Sub LimpiarDataGrids()
 'Pone los Grids sin datos, apuntando a ningún registro
 On Error Resume Next
 
-    CargaGrid DataGrid3, Me.AdoAux(1), False 'variedades
+    CargaGrid DataGrid3, Me.Adoaux(1), False 'variedades
     
     If Err.Number <> 0 Then Err.Clear
 End Sub
@@ -3635,13 +3635,13 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "numalbar= " & DBSet(Text1(0).Text, "N")
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = "numalbar= " & DBSet(Text1(0).Text, "N")
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -3656,24 +3656,24 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     Select Case Opcion
         Case 1  'variedades
 'select codtipom,numfactu,fecfactu,numlinea,codalmac,codartic,sartic.nomartic,cantidad,precioar,dtolinea,importel,ampliaci,codigiva
-            SQL = "SELECT rbodalbaran_variedad.numalbar,rbodalbaran_variedad.numlinea,rbodalbaran_variedad.codvarie,variedades.nomvarie,rbodalbaran_variedad.unidades, rbodalbaran_variedad.cantidad,"
-            SQL = SQL & "precioar,dtolinea,importel,ampliaci,rbodalbaran_variedad.codigiva"
-            SQL = SQL & " FROM rbodalbaran_variedad, variedades "
-            SQL = SQL & " WHERE rbodalbaran_variedad.codvarie = variedades.codvarie "
+            Sql = "SELECT rbodalbaran_variedad.numalbar,rbodalbaran_variedad.numlinea,rbodalbaran_variedad.codvarie,variedades.nomvarie,rbodalbaran_variedad.unidades, rbodalbaran_variedad.cantidad,"
+            Sql = Sql & "precioar,dtolinea,importel,ampliaci,rbodalbaran_variedad.codigiva"
+            Sql = Sql & " FROM rbodalbaran_variedad, variedades "
+            Sql = Sql & " WHERE rbodalbaran_variedad.codvarie = variedades.codvarie "
     End Select
     
     If enlaza Then
-        SQL = SQL & " and " & ObtenerWhereCP(False)
+        Sql = Sql & " and " & ObtenerWhereCP(False)
     Else
-        SQL = SQL & " and numalbar = -1"
+        Sql = Sql & " and numalbar = -1"
     End If
-    SQL = SQL & " ORDER BY numalbar,numlinea"
-    MontaSQLCarga = SQL
+    Sql = Sql & " ORDER BY numalbar,numlinea"
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -3722,9 +3722,9 @@ Dim I As Integer
         If B Then
             Select Case I
               Case 0
-                bAux = (B And Me.AdoAux(0).Recordset.RecordCount > 0)
+                bAux = (B And Me.Adoaux(0).Recordset.RecordCount > 0)
               Case 1
-                bAux = (B And Me.AdoAux(1).Recordset.RecordCount > 0)
+                bAux = (B And Me.Adoaux(1).Recordset.RecordCount > 0)
             End Select
         End If
         ToolAux(I).Buttons(2).Enabled = bAux
@@ -3822,7 +3822,7 @@ End Function
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarCab
     
@@ -3833,9 +3833,9 @@ Dim SQL As String
         Set vTipoMov = New CTiposMov
         If vTipoMov.Leer(CodTipoMov) Then
             Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-            SQL = CadenaInsertarDesdeForm(Me)
-            If SQL <> "" Then
-                If InsertarOferta(SQL, vTipoMov) Then
+            Sql = CadenaInsertarDesdeForm(Me)
+            If Sql <> "" Then
+                If InsertarOferta(Sql, vTipoMov) Then
                     CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                     PonerCadenaBusqueda
                     PonerModo 2
@@ -3848,8 +3848,8 @@ Dim SQL As String
         End If
         Set vTipoMov = Nothing
     Else
-            SQL = CadenaInsertarDesdeForm(Me)
-            conn.Execute SQL
+            Sql = CadenaInsertarDesdeForm(Me)
+            conn.Execute Sql
 
             CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
             PonerCadenaBusqueda
@@ -3950,7 +3950,7 @@ Dim Mens As String
         If InsertarLineaEnv(txtAux(3).Text) Then
             CalcularDatosAlbaran
             B = BloqueaRegistro("scaalb", "numalbar = " & Data1.Recordset!numalbar)
-            CargaGrid DataGrid3, AdoAux(1), True
+            CargaGrid DataGrid3, Adoaux(1), True
             If B Then BotonAnyadirLinea 1
         End If
     End If
@@ -3988,7 +3988,7 @@ Dim I As Integer
     NumF = SugerirCodigoSiguienteStr(vtabla, "numlinea", vWhere)
     ' ***************************************************************
 
-    AnyadirLinea DataGrid3, AdoAux(1)
+    AnyadirLinea DataGrid3, Adoaux(1)
 
     anc = DataGrid3.Top
     If DataGrid3.Row < 0 Then
@@ -4031,14 +4031,14 @@ Private Function ModificarLinea() As Boolean
 Dim nomframe As String
 Dim V As Integer
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Mens As String
     
     On Error GoTo eModificarLinea
 
     ModificarLinea = False
-    SQL = ""
+    Sql = ""
 
     ' *** posa els noms del frames, tant si son de grid com si no ***
     nomframe = "FrameAux1" 'envases
@@ -4053,29 +4053,29 @@ Dim Mens As String
 '            conn.BeginTrans
            
            'actualizar la linea de Albaran
-            SQL = "UPDATE rbodalbaran_variedad Set unidades = " & DBSet(txtAux(4).Text, "N") & ", codvarie=" & DBSet(txtAux(5).Text, "N") & ", "
-            SQL = SQL & "ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
-            SQL = SQL & "cantidad= " & DBSet(txtAux(6).Text, "N") & ", "
-            SQL = SQL & "precioar= " & DBSet(txtAux(7).Text, "N") & ", " 'precio
-            SQL = SQL & "dtolinea= " & DBSet(txtAux(8).Text, "N") & ", "
-            SQL = SQL & "importel= " & DBSet(txtAux(9).Text, "N") & ", " 'Importe
-            SQL = SQL & "codigiva= " & DBSet(txtAux(10).Text, "N") & " " 'codigo de iva
-            SQL = SQL & Replace(ObtenerWhereCP(True), NombreTabla, "rbodalbaran_variedad") & " AND numlinea=" & AdoAux(1).Recordset!numlinea
-            conn.Execute SQL
+            Sql = "UPDATE rbodalbaran_variedad Set unidades = " & DBSet(txtAux(4).Text, "N") & ", codvarie=" & DBSet(txtAux(5).Text, "N") & ", "
+            Sql = Sql & "ampliaci=" & DBSet(Text2(16).Text, "T") & ", "
+            Sql = Sql & "cantidad= " & DBSet(txtAux(6).Text, "N") & ", "
+            Sql = Sql & "precioar= " & DBSet(txtAux(7).Text, "N") & ", " 'precio
+            Sql = Sql & "dtolinea= " & DBSet(txtAux(8).Text, "N") & ", "
+            Sql = Sql & "importel= " & DBSet(txtAux(9).Text, "N") & ", " 'Importe
+            Sql = Sql & "codigiva= " & DBSet(txtAux(10).Text, "N") & " " 'codigo de iva
+            Sql = Sql & Replace(ObtenerWhereCP(True), NombreTabla, "rbodalbaran_variedad") & " AND numlinea=" & Adoaux(1).Recordset!numlinea
+            conn.Execute Sql
         End If
             
         ModificaLineas = 0
         
         CalcularDatosAlbaran
         
-        V = AdoAux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
-        CargaGrid DataGrid3, AdoAux(1), True
+        V = Adoaux(1).Recordset.Fields(1) 'el 2 es el nº de llinia
+        CargaGrid DataGrid3, Adoaux(1), True
 
         ' *** si n'hi han tabs ***
 '            SSTab1.Tab = 1
 
         DataGrid3.SetFocus
-        AdoAux(1).Recordset.Find (AdoAux(1).Recordset.Fields(1).Name & " =" & V)
+        Adoaux(1).Recordset.Find (Adoaux(1).Recordset.Fields(1).Name & " =" & V)
 
         LLamaLineas ModificaLineas, 0, "DataGrid3"
 
@@ -4095,7 +4095,7 @@ End Function
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -4211,13 +4211,13 @@ End Sub
 
 Private Function InsertarLineaEnv(numlinea As String) As Boolean
 'Inserta un registro en la tabla de lineas de Albaranes: slialb
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim B As Boolean
 Dim DentroTRANS As Boolean
 
     InsertarLineaEnv = False
-    SQL = ""
+    Sql = ""
     DentroTRANS = False
     
     'Conseguir el siguiente numero de linea
@@ -4227,26 +4227,26 @@ Dim DentroTRANS As Boolean
     
     If DatosOkLineaEnv() Then 'Lineas de factura
         'Inserta en tabla "rbodalbaran_variedad"
-        SQL = "INSERT INTO rbodalbaran_variedad "
-        SQL = SQL & "(numalbar,numlinea,codvarie,unidades,cantidad,precioar,dtolinea,importel,ampliaci,codigiva) "
-        SQL = SQL & "VALUES (" & DBSet(txtAux(1).Text, "N") & ", " & numlinea & ","
-        SQL = SQL & DBSet(txtAux(5).Text, "T") & "," & DBSet(txtAux(4).Text, "N") & ","
-        SQL = SQL & DBSet(txtAux(6).Text, "N") & ","
-        SQL = SQL & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(8).Text, "N") & ","
-        SQL = SQL & DBSet(txtAux(9).Text, "N") & ","
-        SQL = SQL & DBSet(Text2(16).Text, "T") & ","
-        SQL = SQL & DBSet(txtAux(10).Text, "N") & ")"
+        Sql = "INSERT INTO rbodalbaran_variedad "
+        Sql = Sql & "(numalbar,numlinea,codvarie,unidades,cantidad,precioar,dtolinea,importel,ampliaci,codigiva) "
+        Sql = Sql & "VALUES (" & DBSet(txtAux(1).Text, "N") & ", " & numlinea & ","
+        Sql = Sql & DBSet(txtAux(5).Text, "T") & "," & DBSet(txtAux(4).Text, "N") & ","
+        Sql = Sql & DBSet(txtAux(6).Text, "N") & ","
+        Sql = Sql & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(8).Text, "N") & ","
+        Sql = Sql & DBSet(txtAux(9).Text, "N") & ","
+        Sql = Sql & DBSet(Text2(16).Text, "T") & ","
+        Sql = Sql & DBSet(txtAux(10).Text, "N") & ")"
      Else
         Exit Function
      End If
     
-    If SQL <> "" Then
+    If Sql <> "" Then
         On Error GoTo EInsertarLineaEnv
         conn.BeginTrans
         DentroTRANS = True
         
         'insertar la linea
-        conn.Execute SQL
+        conn.Execute Sql
         B = True
     End If
     
@@ -4295,7 +4295,7 @@ End Function
 
 Private Sub CalcularDatosAlbaran()
 Dim I As Integer
-Dim cadWHERE As String, SQL As String
+Dim cadWHERE As String, Sql As String
 
     'Limpiar en el form los datos calculados de la factura
     'y volvemos a recalcular
@@ -4305,11 +4305,11 @@ Dim cadWHERE As String, SQL As String
     
     'Comprobar que hay lineas de facturas_variedad para calcular totales
     cadWHERE = ObtenerWhereCP(False)
-    SQL = "Select count(*) from " & NomTablaLineas & " Where " & Replace(cadWHERE, NombreTabla, NomTablaLineas)
-    If RegistrosAListar(SQL) = 0 Then
+    Sql = "Select count(*) from " & NomTablaLineas & " Where " & Replace(cadWHERE, NombreTabla, NomTablaLineas)
+    If RegistrosAListar(Sql) = 0 Then
         'Comprobar que hay lineas de rbodalbaran_variedad para calcular totales
-        SQL = "Select count(*) from rbodalbaran_variedad Where " & Replace(cadWHERE, NombreTabla, "rbodalbaran_variedad")
-        If RegistrosAListar(SQL) = 0 Then Exit Sub
+        Sql = "Select count(*) from rbodalbaran_variedad Where " & Replace(cadWHERE, NombreTabla, "rbodalbaran_variedad")
+        If RegistrosAListar(Sql) = 0 Then Exit Sub
     End If
     
     
@@ -4332,7 +4332,7 @@ Private Function CalcularDatosAlbaranVenta(cadWHERE As String, NomTabla As Strin
 Dim Rs As ADODB.Recordset
 Dim I As Integer
 
-Dim SQL As String
+Dim Sql As String
 Dim cadAux As String
 Dim cadAux1 As String
 
@@ -4423,14 +4423,14 @@ Dim vSeccion As CSeccion
 
     'Agrupar el importe bruto por tipos de iva
     cadWhere1 = Replace(cadWHERE, "rbodalbaran", "rbodalbaran_variedad")
-    SQL = SQL & "SELECT rbodalbaran_variedad.codigiva, sum(importel) as bruto"
-    SQL = SQL & " FROM rbodalbaran_variedad "
-    SQL = SQL & " WHERE " & cadWhere1
-    SQL = SQL & " GROUP BY 1 "
-    SQL = SQL & " ORDER BY 1 "
+    Sql = Sql & "SELECT rbodalbaran_variedad.codigiva, sum(importel) as bruto"
+    Sql = Sql & " FROM rbodalbaran_variedad "
+    Sql = Sql & " WHERE " & cadWhere1
+    Sql = Sql & " GROUP BY 1 "
+    Sql = Sql & " ORDER BY 1 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
     TotBruto = 0
     TotNeto = 0

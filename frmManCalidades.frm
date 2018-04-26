@@ -899,7 +899,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo EEliminar
@@ -914,17 +914,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar la Calidad?"
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(3)
+    Sql = "¿Seguro que desea eliminar la Calidad?"
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rcalidad where codvarie=" & adodc1.Recordset!codvarie
-        SQL = SQL & " and codcalid = " & adodc1.Recordset!codcalid
-        conn.Execute SQL
+        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!Codvarie
+        Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1126,6 +1126,14 @@ Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub Combo1_GotFocus(Index As Integer)
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus(Index As Integer)
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
+End Sub
+
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
 End Sub
@@ -1285,24 +1293,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
-    If ParamVariedad <> "" Then SQL = SQL & " and rcalidad.codvarie = " & ParamVariedad
+    If ParamVariedad <> "" Then Sql = Sql & " and rcalidad.codvarie = " & ParamVariedad
     
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rcalidad.codvarie, rcalidad.codcalid"
+    Sql = Sql & " ORDER BY rcalidad.codvarie, rcalidad.codcalid"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Variedad|1000|;S|btnBuscar(0)|B|||;S|txtAux2(2)|T|Denominación|2700|;"
@@ -1329,7 +1337,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1373,15 +1381,15 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = DevuelveDesdeBDNew(cAgro, "rcalidad", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "rcalidad", "codcalid", "codvarie", txtAux(0).Text, "N", , "codcalid", txtAux(1).Text, "N")
+        If Sql <> "" Then
             MsgBox "Código de calidad existente para esta variedad. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1389,11 +1397,11 @@ Dim Mens As String
     End If
     
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and nomcalibrador1 = " & DBSet(txtAux(4).Text, "T")
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and nomcalibrador1 = " & DBSet(txtAux(4).Text, "T")
         '[Monica]23/01/2014: preguntamos si queremos continuar
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             If MsgBox("El nombre que utiliza el Calibrador 1 está asignado a otra calidad. " & vbCrLf & "¿ Desea continuar ?" & vbCrLf, vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
                 PonerFoco txtAux(4)
                 B = False
@@ -1404,11 +1412,11 @@ Dim Mens As String
     If B And (Modo = 3 Or Modo = 4) Then
         '[Monica]23/01/2014: añado la condicion de que el nombre del calibrador 2 no sea blanco
         If txtAux(5).Text <> "" Then
-            SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-            SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-            SQL = SQL & " and nomcalibrador2 = " & DBSet(txtAux(5).Text, "T")
+            Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+            Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+            Sql = Sql & " and nomcalibrador2 = " & DBSet(txtAux(5).Text, "T")
         
-            If TotalRegistros(SQL) <> 0 Then
+            If TotalRegistros(Sql) <> 0 Then
                 MsgBox "El nombre que utiliza el Calibrador 2 de esta calidad está asignada a otra. Revise.", vbExclamation
                 PonerFoco txtAux(5)
                 B = False
@@ -1418,11 +1426,11 @@ Dim Mens As String
     
     ' solo puede haber una calidad de destrio en una variedad
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and tipcalid = 1"
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and tipcalid = 1"
     
-        If TotalRegistros(SQL) <> 0 And Combo1(0).ListIndex = 1 Then
+        If TotalRegistros(Sql) <> 0 And Combo1(0).ListIndex = 1 Then
             MsgBox "Sólo puede haber una calidad de destrio para la variedad. Revise.", vbExclamation
             Combo1(0).SetFocus
             B = False
@@ -1431,11 +1439,11 @@ Dim Mens As String
     
     ' solo puede haber una calidad de venta campo en una variedad
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and tipcalid = 2"
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and tipcalid = 2"
     
-        If TotalRegistros(SQL) <> 0 And Combo1(0).ListIndex = 2 Then
+        If TotalRegistros(Sql) <> 0 And Combo1(0).ListIndex = 2 Then
             MsgBox "Sólo puede haber una calidad de venta campo para la variedad. Revise.", vbExclamation
             Combo1(0).SetFocus
             B = False
@@ -1444,11 +1452,11 @@ Dim Mens As String
     
     ' solo puede haber una calidad de mermas en una variedad
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and tipcalid = 3"
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and tipcalid = 3"
     
-        If TotalRegistros(SQL) <> 0 And Combo1(0).ListIndex = 3 Then
+        If TotalRegistros(Sql) <> 0 And Combo1(0).ListIndex = 3 Then
             MsgBox "Sólo puede haber una calidad de mermas para la variedad. Revise.", vbExclamation
             Combo1(0).SetFocus
             B = False
@@ -1457,11 +1465,11 @@ Dim Mens As String
     
     ' solo puede haber una calidad de pequeño en una variedad
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
-        SQL = SQL & " and tipcalid = 4"
+        Sql = "select count(*) from rcalidad where codvarie = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and codcalid <> " & DBSet(txtAux(1).Text, "N")
+        Sql = Sql & " and tipcalid = 4"
     
-        If TotalRegistros(SQL) <> 0 And Combo1(0).ListIndex = 4 Then
+        If TotalRegistros(Sql) <> 0 And Combo1(0).ListIndex = 4 Then
             MsgBox "Sólo puede haber una calidad de pequeños para la variedad. Revise.", vbExclamation
             Combo1(0).SetFocus
             B = False
@@ -1547,12 +1555,12 @@ End Sub
 
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 
     SepuedeBorrar = False
-    SQL = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", adodc1.Recordset!codvarie, "N", , "codcalid", adodc1.Recordset!codcalid, "N")
-    If SQL <> "" Then
+    Sql = DevuelveDesdeBDNew(cAgro, "rcalidad_calibrador", "codcalid", "codvarie", adodc1.Recordset!Codvarie, "N", , "codcalid", adodc1.Recordset!codcalid, "N")
+    If Sql <> "" Then
         cad = "No se puede eliminar la fila, "
         MsgBox cad & "tiene Calibradores asociados.", vbExclamation
         Exit Function

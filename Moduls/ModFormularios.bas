@@ -843,7 +843,7 @@ On Error Resume Next
 
     If (Modo <> 0 And Modo <> 2) Then
         If Modo = 1 Then 'Modo 1: Busqueda
-            Text.BackColor = vbYellow
+            Text.BackColor = vbLightBlue 'vblightblue
         End If
         Text.SelStart = 0
         Text.SelLength = Len(Text.Text)
@@ -859,7 +859,7 @@ On Error Resume Next
 
 '    If (Modo <> 0 And Modo <> 2) Then
 '        If Modo = 1 Then 'Modo 1: Busqueda
-'            Text.BackColor = vbYellow
+'            Text.BackColor = vbLightBlue
 '        End If
         With Text
             .SelStart = 0
@@ -886,7 +886,7 @@ Dim Comprobar As Boolean
         .Text = Trim(.Text)
         
         
-         If .BackColor = vbYellow Then
+         If .BackColor = vbLightBlue Then
             If .Locked Then
                 .BackColor = &H80000018
             Else
@@ -932,7 +932,7 @@ Public Function PerderFocoGnralLineas(ByRef Txt As TextBox, ModoLineas As Byte) 
         'Quitamos blancos por los lados
         .Text = Trim(.Text)
 
-        If .BackColor = vbYellow Then
+        If .BackColor = vbLightBlue Then
 '    '        Text1(Index).BackColor = &H80000018
             .BackColor = vbWhite
         End If
@@ -956,7 +956,7 @@ Public Function PerderFocoGnralLineas(ByRef Txt As TextBox, ModoLineas As Byte) 
 '        'Quitamos blancos por los lados
 '        .Text = Trim(.Text)
 '
-'        If .BackColor = vbYellow Then
+'        If .BackColor = vblightblue Then
 '    '        Text1(Index).BackColor = &H80000018
 '            .BackColor = vbWhite
 '        End If

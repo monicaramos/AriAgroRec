@@ -467,7 +467,7 @@ Private HaDevueltoDatos As Boolean
 
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo Error1
     
@@ -481,14 +481,14 @@ Dim Cad As String
                     PonerModo 4
                     CargaTxtAux True, True
                 Else 'No existen registros en la tabla sinven para ese criterio de búsqueda
-                    Cad = "No hay campos de alta para este socio."
-                    MsgBox Cad, vbInformation
+                    cad = "No hay campos de alta para este socio."
+                    MsgBox cad, vbInformation
                     PonerFoco Text1(0)
                 End If
             Else
-                Cad = "Criterio de Búsqueda incompleto." & vbCrLf
-                Cad = Cad & "Debe introducir el socio "
-                MsgBox Cad, vbExclamation
+                cad = "Criterio de Búsqueda incompleto." & vbCrLf
+                cad = cad & "Debe introducir el socio "
+                MsgBox cad, vbExclamation
                 PonerFoco Text1(0)
             End If
             
@@ -546,7 +546,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
     
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -563,9 +563,9 @@ Dim i As Integer
         .Buttons(6).Image = 11 'Salir
     End With
     
-    For i = 0 To imgBuscar.Count - 1
-        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next i
+    For I = 0 To imgBuscar.Count - 1
+        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next I
     
     CargaCombo
     LimpiarCampos   'Limpia los campos TextBox
@@ -583,7 +583,7 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim i As Byte
+Dim I As Byte
 Dim Sql As String
 On Error GoTo ECarga
 
@@ -672,10 +672,10 @@ On Error GoTo ECarga
     End If
     
     
-    For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-        DataGrid1.Columns(i).Locked = True
-    Next i
+    For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+        DataGrid1.Columns(I).Locked = True
+    Next I
     
     DataGrid1.ScrollBars = dbgAutomatic
     gridCargado = True
@@ -804,7 +804,7 @@ End Sub
 
 Private Sub Text1_LostFocus(Index As Integer)
 Dim campo As String
-Dim Tabla As String
+Dim tabla As String
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
     
@@ -819,15 +819,15 @@ Dim Tabla As String
         Select Case Index
             Case 0 'Codigo Socio
                 campo = "nomsocio"
-                Tabla = "rsocios"
+                tabla = "rsocios"
         End Select
-        Text2(Index).Text = PonerNombreDeCod(Text1(Index), Tabla, campo)
+        Text2(Index).Text = PonerNombreDeCod(Text1(Index), tabla, campo)
         If Text1(Index).Text <> "" And Text2(Index).Text = "" Then PonerFoco Text1(Index)
      End If
 End Sub
 
 
-Private Sub txtAux_GotFocus()
+Private Sub txtaux_GotFocus()
     ConseguirFocoLin txtAux
 End Sub
 
@@ -850,7 +850,7 @@ On Error GoTo EKeyD
 '                End If
         Case 40 'Desplazamiento Flecha Hacia Abajo
 '                PasarSigReg
-                 txtAux_KeyPress (13)
+                 txtaux_KeyPress (13)
                
     End Select
     
@@ -860,7 +860,7 @@ EKeyD:
 End Sub
 
 
-Private Sub txtAux_KeyPress(KeyAscii As Integer)
+Private Sub txtaux_KeyPress(KeyAscii As Integer)
 
 '    KEYpress KeyAscii
     
@@ -909,8 +909,8 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
-Dim b As Boolean
+Dim I As Byte
+Dim B As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
@@ -921,11 +921,11 @@ Dim b As Boolean
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
 '    BloquearText1 Me, Modo
-    b = (Modo <> 1)
-    BloquearTxt Text1(0), b
+    B = (Modo <> 1)
+    BloquearTxt Text1(0), B
     
-    b = (Modo = 0) Or (Modo = 2)
-    PonerBotonCabecera b
+    B = (Modo = 0) Or (Modo = 2)
+    PonerBotonCabecera B
    
     Select Case Kmodo
 '    Case 0    'Modo Inicial
@@ -943,15 +943,15 @@ Dim b As Boolean
 '        lblIndicador.Caption = "MODIFICAR"
     End Select
            
-    b = Modo <> 0 And Modo <> 2 And Modo <> 4
+    B = Modo <> 0 And Modo <> 2 And Modo <> 4
    
-    For i = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(i).Enabled = b
-    Next i
+    For I = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(I).Enabled = B
+    Next I
 
-    b = (Modo = 1)
-    Toolbar1.Buttons(1).Enabled = Not b
-    Toolbar1.Buttons(4).Enabled = Not b And (Not (Modo = 0 Or Modo = 4))
+    B = (Modo = 1)
+    Toolbar1.Buttons(1).Enabled = Not B
+    Toolbar1.Buttons(4).Enabled = Not B And (Not (Modo = 0 Or Modo = 4))
 
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -1020,13 +1020,13 @@ Private Sub BotonBuscar()
         'Ponemos el grid lineasfacturas enlazando a ningun sitio
         CargaGrid False
         CargaTxtAux False, False
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         'Ya estamos en Modo de Busqueda
 '        HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -1045,7 +1045,7 @@ Private Sub BotonIncrementarDecrementar()
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Solo se actualiza el campo de Existencia Real
     txtAux.Text = Trim(txtAux.Text)
 
@@ -1053,25 +1053,25 @@ Private Function DatosOk() As Boolean
         If PonerFormatoEntero(txtAux) Then
             If AforoSuperiorARdtoMaximo(txtAux) Then
                 If MsgBox("El aforo introducido es superior al rendimiento máximo por Hanegada." & vbCrLf & " ¿ Desea continuar ? ", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
-                    DatosOk = False
+                    DatosOK = False
                     Exit Function
                 End If
             End If
-            DatosOk = True
+            DatosOK = True
         Else
-            DatosOk = False
+            DatosOK = False
         End If
         'DatosOk = True
     Else
-        DatosOk = False
+        DatosOK = False
     End If
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 
@@ -1129,7 +1129,7 @@ Private Function ModificarExistencia() As Boolean
 Dim NumReg As Long
 Dim Indicador As String
 
-    If DatosOk Then
+    If DatosOK Then
         If ActualizarExistencia(Combo1(1).ListIndex, txtAux.Text) Then
             TerminaBloquear
             NumReg = Data1.Recordset.AbsolutePosition
@@ -1148,12 +1148,12 @@ End Function
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim i As Integer
+Dim I As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For i = 1 To Combo1.Count - 1
-        Combo1(i).Clear
-    Next i
+    For I = 1 To Combo1.Count - 1
+        Combo1(I).Clear
+    Next I
     
     'tipo de recoleccion
     Combo1(1).AddItem "Cooper"

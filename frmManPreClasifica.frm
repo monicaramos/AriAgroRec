@@ -161,7 +161,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   5
       Left            =   2340
       MaxLength       =   6
@@ -206,7 +206,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   5
       Left            =   3090
       TabIndex        =   17
@@ -227,7 +227,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   6
       Left            =   8730
       MaxLength       =   7
@@ -293,7 +293,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   4
       Left            =   9660
       MaxLength       =   8
@@ -315,7 +315,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   3
       Left            =   -330
       MaxLength       =   8
@@ -338,7 +338,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   5355
       TabIndex        =   14
@@ -381,7 +381,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   2
       Left            =   7230
       MaxLength       =   16
@@ -439,7 +439,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   1
       Left            =   765
       MaxLength       =   10
@@ -461,7 +461,7 @@ Begin VB.Form frmManPreClasifica
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   4290
       MaxLength       =   6
@@ -813,7 +813,7 @@ Dim B As Boolean
         btnBuscar(I).visible = Not B
     Next I
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     chkAux(0).visible = Not B
@@ -928,7 +928,7 @@ Private Sub BotonBuscar()
     Me.txtAux2(5).Text = ""
     chkAux(0).Value = 0
     
-    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(3)
 End Sub
 
@@ -1012,7 +1012,7 @@ Dim temp As Boolean
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!numnotac
+        SQL = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!NumNotac
         
         conn.Execute SQL
         CargaGrid CadB
@@ -1478,7 +1478,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1706,11 +1706,11 @@ Dim Sql2 As String
     While Not Rs.EOF
         'Comprobamos que el numero de nota no exista ya en rclasifica  or rhisfruta_entradas
         YaExiste = False
-        SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!numnotac, "N")
+        SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
         If TotalRegistros(SQL) <> 0 Then
             YaExiste = True
         Else
-            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!numnotac, "N")
+            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!NumNotac, "N")
             If TotalRegistros(SQL) <> 0 Then
                 YaExiste = True
             End If
@@ -1718,17 +1718,17 @@ Dim Sql2 As String
         
         If YaExiste Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",0)"
             
             conn.Execute Sql2
         End If
         
         'Comprobamos que exista la variedad
-        SQL = "select count(*) from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        SQL = "select count(*) from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
         If TotalRegistros(SQL) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",1)"
             
             conn.Execute Sql2
@@ -1738,7 +1738,7 @@ Dim Sql2 As String
         SQL = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
         If TotalRegistros(SQL) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",2)"
             
             conn.Execute Sql2
@@ -1746,10 +1746,10 @@ Dim Sql2 As String
         
         'Comprobamos que exista el campo para el socio / variedad
         SQL = "select count(*) from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
-        SQL = SQL & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N")
+        SQL = SQL & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N")
         If TotalRegistros(SQL) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
-            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!codvarie, "N") & ","
+            Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",3)"
             
             conn.Execute Sql2
@@ -1814,18 +1814,18 @@ End Function
 
 
 
-Private Function Kilos(cajas As String, Forfait As String) As String
+Private Function Kilos(Cajas As String, Forfait As String) As String
 Dim KilosCajon As String
 
     Kilos = ""
 
     ' si no hay cajas ni variedad, no podemos calcular los kilos
-    If cajas = "" Or Forfait = "" Then Exit Function
+    If Cajas = "" Or Forfait = "" Then Exit Function
     
     KilosCajon = 0
     KilosCajon = DevuelveValor("select kiloscaj from forfaits where codforfait = " & DBSet(Forfait, "T"))
     
-    Kilos = CStr(Round2(KilosCajon * CCur(ImporteSinFormato(cajas)), 0))
+    Kilos = CStr(Round2(KilosCajon * CCur(ImporteSinFormato(Cajas)), 0))
     
     
 End Function

@@ -1172,7 +1172,7 @@ Dim I As Integer
     Else
         PonerModo 1 'búsqueda
         ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-        Text1(0).BackColor = vbYellow 'codclien
+        Text1(0).BackColor = vbLightBlue 'codclien
         ' ****************************************************************************
     End If
 End Sub
@@ -1401,28 +1401,28 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
        Case 1 ' lineas de tratamiento
             tabla = "advtrata_lineas"
-            SQL = "SELECT advtrata_lineas.codtrata, advtrata_lineas.numlinea, advtrata_lineas.codartic, advartic.nomartic, "
-            SQL = SQL & " advtrata_lineas.dosishab, advtrata_lineas.cantidad "
-            SQL = SQL & " FROM " & tabla & " INNER JOIN advartic ON advtrata_lineas.codartic = advartic.codartic "
+            Sql = "SELECT advtrata_lineas.codtrata, advtrata_lineas.numlinea, advtrata_lineas.codartic, advartic.nomartic, "
+            Sql = Sql & " advtrata_lineas.dosishab, advtrata_lineas.cantidad "
+            Sql = Sql & " FROM " & tabla & " INNER JOIN advartic ON advtrata_lineas.codartic = advartic.codartic "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(True)
+                Sql = Sql & ObtenerWhereCab(True)
             Else
-                SQL = SQL & " WHERE advtrata_lineas.codtrata = '-1'"
+                Sql = Sql & " WHERE advtrata_lineas.codtrata = '-1'"
             End If
-            SQL = SQL & " ORDER BY " & tabla & ".codtrata "
+            Sql = Sql & " ORDER BY " & tabla & ".codtrata "
             
             
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -1607,13 +1607,13 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2009,7 +2009,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 'Dim Datos As String
 
@@ -2022,8 +2022,8 @@ Dim cad As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = DevuelveDesdeBDNew(cAgro, "advtrata", "codtrata", "codtrata", Text1(0).Text, "T")
-        If SQL <> "" Then
+        Sql = DevuelveDesdeBDNew(cAgro, "advtrata", "codtrata", "codtrata", Text1(0).Text, "T")
+        If Sql <> "" Then
             MsgBox "Ya existe el codigo de tratamiento. Revise.", vbExclamation
             B = False
         End If
@@ -2192,7 +2192,7 @@ End Sub
 
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 
@@ -2219,12 +2219,12 @@ Dim Eliminar As Boolean
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 1 'linea de tratamiento
-            SQL = "¿Seguro que desea eliminar la línea de tratamiento?"
-            SQL = SQL & vbCrLf & "Código: " & Adoaux(Index).Recordset!codtrata & " - " & Adoaux(Index).Recordset!numlinea
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la línea de tratamiento?"
+            Sql = Sql & vbCrLf & "Código: " & Adoaux(Index).Recordset!codtrata & " - " & Adoaux(Index).Recordset!numlinea
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM advtrata_lineas "
-                SQL = SQL & vWhere & " and numlinea = " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
+                Sql = "DELETE FROM advtrata_lineas "
+                Sql = Sql & vWhere & " and numlinea = " & DBLet(Adoaux(Index).Recordset!numlinea, "N")
             End If
         
     End Select
@@ -2232,7 +2232,7 @@ Dim Eliminar As Boolean
     If Eliminar Then
         NumRegElim = Adoaux(Index).Recordset.AbsolutePosition
         TerminaBloquear
-        conn.Execute SQL
+        conn.Execute Sql
         ' *** si n'hi han tabs sense datagrid, posar l'If ***
         If Index <> 3 Then _
             CargaGrid Index, True
@@ -2435,7 +2435,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2455,9 +2455,9 @@ Dim vArtADV As CArticuloADV
     
     If B And (Modo = 5 And ModoLineas = 1) Then  'insertar
         'comprobar si existe ya el cod. de la calidad para ese campo
-        SQL = ""
-        SQL = DevuelveDesdeBDNew(cAgro, "advtrata_lineas", "codartic", "codtrata", txtAux1(0).Text, "T", , "codartic", txtAux1(1).Text, "T")
-        If SQL <> "" Then
+        Sql = ""
+        Sql = DevuelveDesdeBDNew(cAgro, "advtrata_lineas", "codartic", "codtrata", txtAux1(0).Text, "T", , "codartic", txtAux1(1).Text, "T")
+        If Sql <> "" Then
             MsgBox "Ya existe el artículo en el Tratamiento. Revise.", vbExclamation
             PonerFoco txtAux1(1)
             B = False

@@ -1305,7 +1305,7 @@ Private Sub txtaux_GotFocus(Index As Integer)
         txtAux(Index).Enabled = False
     End If
 
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

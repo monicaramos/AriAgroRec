@@ -1155,12 +1155,12 @@ Private Sub BotonBuscar()
         PonerModo 1
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -1209,16 +1209,16 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 
     'Ciertas comprobaciones
     If Data1.Recordset.EOF Then Exit Sub
        
-    SQL = SQL & "¿Desea Eliminar la Carta? " & vbCrLf
-    SQL = SQL & vbCrLf & "Código : " & Format(Text1(0).Text, "000")
-    SQL = SQL & vbCrLf & "Descripción : " & Text1(1).Text
+    Sql = Sql & "¿Desea Eliminar la Carta? " & vbCrLf
+    Sql = Sql & vbCrLf & "Código : " & Format(Text1(0).Text, "000")
+    Sql = Sql & vbCrLf & "Descripción : " & Text1(1).Text
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         On Error GoTo Error2
         NumRegElim = Data1.Recordset.AbsolutePosition

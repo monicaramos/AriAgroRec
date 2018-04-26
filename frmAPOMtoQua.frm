@@ -1399,16 +1399,16 @@ End Sub
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        SQL = CadenaInsertarDesdeForm(Me)
-        If SQL <> "" Then
-            If InsertarOferta(SQL, vTipoMov) Then
+        Sql = CadenaInsertarDesdeForm(Me)
+        If Sql <> "" Then
+            If InsertarOferta(Sql, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                 PonerCadenaBusqueda
                 PonerModo 2
@@ -1605,7 +1605,7 @@ Dim I As Integer
     Else
         PonerModo 1 'búsqueda
         ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-        Text1(0).BackColor = vbYellow 'codclien
+        Text1(0).BackColor = vbLightBlue 'codclien
         ' ****************************************************************************
     End If
 End Sub
@@ -2008,13 +2008,13 @@ Dim I As Integer
         LimpiarCampos
         PonerModo 1
         PonerFoco Text1(0) ' <===
-        Text1(0).BackColor = vbYellow ' <===
+        Text1(0).BackColor = vbLightBlue ' <===
         ' *** si n'hi han combos a la capçalera ***
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -2305,7 +2305,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -2323,12 +2323,12 @@ Dim SQL As String
     End If
     
     If B And (Modo = 3 Or Modo = 4) Then
-        SQL = "select count(*) from raporhco where codsocio= " & Text1(2).Text & " and codvarie = " & Text1(12).Text
-        SQL = SQL & " and codcampo = " & Text1(8).Text & " and fecaport = " & DBSet(Text1(10).Text, "F")
+        Sql = "select count(*) from raporhco where codsocio= " & Text1(2).Text & " and codvarie = " & Text1(12).Text
+        Sql = Sql & " and codcampo = " & Text1(8).Text & " and fecaport = " & DBSet(Text1(10).Text, "F")
         
-        If Modo = 4 Then SQL = SQL & " and numaport <> " & DBSet(Text1(0).Text, "N")
+        If Modo = 4 Then Sql = Sql & " and numaport <> " & DBSet(Text1(0).Text, "N")
         
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "Existe ya una aportación para ese socio, variedad, campo y fecha. Revise.", vbExclamation
             PonerFoco Text1(10)
             B = False
@@ -2399,7 +2399,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
-Dim SQL As String
+Dim Sql As String
 
 
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -2437,9 +2437,9 @@ Dim SQL As String
                     PonerFoco Text1(Index)
                 Else
                 
-                    SQL = "select count(*) from rcampos where codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
+                    Sql = "select count(*) from rcampos where codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
                 
-                    If TotalRegistros(SQL) > 0 Then
+                    If TotalRegistros(Sql) > 0 Then
                         Set frmMens = New frmMensajes
                         frmMens.cadWHERE = "and rcampos.codsocio = " & DBSet(Text1(Index).Text, "N") & " and codvarie = " & DBSet(Text1(12).Text, "N")
                         frmMens.campo = Text1(Index).Text
@@ -2630,7 +2630,7 @@ End Sub
 Private Sub PosarDescripcions()
 Dim NomEmple As String
 Dim CodPobla As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EPosarDescripcions
 
@@ -2640,10 +2640,10 @@ Dim SQL As String
         
         
     If Text1(3).Text <> "" Then
-        SQL = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
-        SQL = SQL & " and rpueblos.codpobla = rpartida.codpobla "
+        Sql = "select despobla from rpueblos, rpartida where rpartida.codparti = " & DBSet(Text1(3).Text, "N")
+        Sql = Sql & " and rpueblos.codpobla = rpartida.codpobla "
         
-        Text2(1).Text = DevuelveValor(SQL) ' nombre de poblacion
+        Text2(1).Text = DevuelveValor(Sql) ' nombre de poblacion
     
     End If
     
@@ -2762,13 +2762,13 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " numaport= " & Text1(0).Text
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = " numaport= " & Text1(0).Text
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -2784,40 +2784,40 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
         Case 0
-            SQL = "select raporhco_cooprop.hidrante, raporhco_cooprop.numlinea, raporhco_cooprop.codsocio, rsocios.nomsocio, "
-            SQL = SQL & " raporhco_cooprop.porcentaje "
-            SQL = SQL & " FROM raporhco_cooprop INNER JOIN rsocios ON raporhco_cooprop.codsocio = rsocios.codsocio "
-            SQL = SQL & " and raporhco_cooprop.codsocio = rsocios.codsocio "
+            Sql = "select raporhco_cooprop.hidrante, raporhco_cooprop.numlinea, raporhco_cooprop.codsocio, rsocios.nomsocio, "
+            Sql = Sql & " raporhco_cooprop.porcentaje "
+            Sql = Sql & " FROM raporhco_cooprop INNER JOIN rsocios ON raporhco_cooprop.codsocio = rsocios.codsocio "
+            Sql = Sql & " and raporhco_cooprop.codsocio = rsocios.codsocio "
             If enlaza Then
-                SQL = SQL & " WHERE raporhco_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
+                Sql = Sql & " WHERE raporhco_cooprop.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                SQL = SQL & " WHERE raporhco_cooprop.hidrante is null"
+                Sql = Sql & " WHERE raporhco_cooprop.hidrante is null"
             End If
-            SQL = SQL & " ORDER BY raporhco_cooprop.codsocio "
+            Sql = Sql & " ORDER BY raporhco_cooprop.codsocio "
         
         Case 1
-            SQL = "select raporhco_campos.hidrante, raporhco_campos.numlinea, raporhco_campos.codcampo, rpartida.nomparti, "
-            SQL = SQL & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
-            SQL = SQL & " FROM ((raporhco_campos INNER JOIN rcampos ON raporhco_campos.codcampo = rcampos.codcampo)"
-            SQL = SQL & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
-            SQL = SQL & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
+            Sql = "select raporhco_campos.hidrante, raporhco_campos.numlinea, raporhco_campos.codcampo, rpartida.nomparti, "
+            Sql = Sql & " rpueblos.despobla, round(rcampos.supcoope / " & DBSet(vParamAplic.Faneca, "N") & ",2) supcoope, rcampos.poligono, rcampos.parcela "
+            Sql = Sql & " FROM ((raporhco_campos INNER JOIN rcampos ON raporhco_campos.codcampo = rcampos.codcampo)"
+            Sql = Sql & " INNER JOIN rpartida ON rcampos.codparti = rpartida.codparti) "
+            Sql = Sql & " INNER JOIN rpueblos ON rpartida.codpobla = rpueblos.codpobla "
             If enlaza Then
-                SQL = SQL & " WHERE raporhco_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
+                Sql = Sql & " WHERE raporhco_campos.hidrante = '" & Trim(Text1(0).Text) & "'"
             Else
-                SQL = SQL & " WHERE raporhco_campos.hidrante is null"
+                Sql = Sql & " WHERE raporhco_campos.hidrante is null"
             End If
-            SQL = SQL & " ORDER BY raporhco_campos.codcampo "
+            Sql = Sql & " ORDER BY raporhco_campos.codcampo "
        
     End Select
     ' ********************************************************************************
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 

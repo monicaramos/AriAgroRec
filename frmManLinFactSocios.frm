@@ -1379,7 +1379,7 @@ Dim I As Integer
 '    Else
 '        PonerModo 1 'búsqueda
 '        ' *** posar de groc els camps visibles de la clau primaria de la capçalera ***
-'        Text1(0).BackColor = vbYellow 'codforfait
+'        Text1(0).BackColor = vblightblue 'codforfait
 '        ' ****************************************************************************
 '    End If
 End Sub
@@ -1577,29 +1577,29 @@ Private Function MontaSQLCarga(Index As Integer, enlaza As Boolean) As String
 ' Si ENLAZA -> Enlaça en el data1
 '           -> Si no el carreguem sense enllaçar a cap camp
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
 Dim tabla As String
     
     ' ********* si n'hi han tabs, dona igual si en datagrid o no ***********
     Select Case Index
                
         Case 0 'CALIDADES
-            SQL = "SELECT rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu, rfactsoc_calidad.fecfactu, "
-            SQL = SQL & " rfactsoc_calidad.codvarie, rfactsoc_calidad.codcampo, rfactsoc_calidad.codcalid, "
-            SQL = SQL & " rcalidad.nomcalid, rfactsoc_calidad.kilosnet, rfactsoc_calidad.precio, rfactsoc_calidad.imporcal "
-            SQL = SQL & " FROM rfactsoc_calidad, rcalidad "
-            SQL = SQL & " where rfactsoc_calidad.codvarie = rcalidad.codvarie "
-            SQL = SQL & " and rfactsoc_calidad.codcalid = rcalidad.codcalid and "
+            Sql = "SELECT rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu, rfactsoc_calidad.fecfactu, "
+            Sql = Sql & " rfactsoc_calidad.codvarie, rfactsoc_calidad.codcampo, rfactsoc_calidad.codcalid, "
+            Sql = Sql & " rcalidad.nomcalid, rfactsoc_calidad.kilosnet, rfactsoc_calidad.precio, rfactsoc_calidad.imporcal "
+            Sql = Sql & " FROM rfactsoc_calidad, rcalidad "
+            Sql = Sql & " where rfactsoc_calidad.codvarie = rcalidad.codvarie "
+            Sql = Sql & " and rfactsoc_calidad.codcalid = rcalidad.codcalid and "
             If enlaza Then
-                SQL = SQL & ObtenerWhereCab(False)
+                Sql = Sql & ObtenerWhereCab(False)
             Else
-                SQL = SQL & " rfactsoc_calidad.numfactu = -1"
+                Sql = Sql & " rfactsoc_calidad.numfactu = -1"
             End If
-            SQL = SQL & " ORDER BY rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu "
+            Sql = Sql & " ORDER BY rfactsoc_calidad.codtipom, rfactsoc_calidad.numfactu "
                
     End Select
     
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 Private Sub frmB_Selecionado(CadenaDevuelta As String)
@@ -1754,13 +1754,13 @@ Dim I As Integer
 '        LimpiarCampos
 '        PonerModo 1
 '        PonerFoco Text1(0) ' <===
-'        Text1(0).BackColor = vbYellow ' <===
+'        Text1(0).BackColor = vblightblue ' <===
 '        ' *** si n'hi han combos a la capçalera ***
 '    Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
 '    End If
@@ -2080,7 +2080,7 @@ End Sub
 
 Private Function DatosOK() As Boolean
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 'Dim Datos As String
 
     On Error GoTo EDatosOK
@@ -2093,13 +2093,13 @@ Dim SQL As String
     ' *** canviar els arguments de la funcio, el mensage i repasar si n'hi ha codEmpre ***
     If (Modo = 3) Then 'insertar
 '        'comprobar si existe ya el cod. del campo clave primaria
-        SQL = "select count(*) from rfactsoc_variedad where codtipom = " & DBSet(tipoMov, "T")
-        SQL = SQL & " and numfactu = " & Factura
-        SQL = SQL & " and fecfactu = " & DBSet(fecfactu, "F")
-        SQL = SQL & " and codvarie = " & DBSet(Text1(2).Text, "N")
-        SQL = SQL & " and codcampo = " & DBSet(Text1(7).Text, "N")
+        Sql = "select count(*) from rfactsoc_variedad where codtipom = " & DBSet(tipoMov, "T")
+        Sql = Sql & " and numfactu = " & Factura
+        Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F")
+        Sql = Sql & " and codvarie = " & DBSet(Text1(2).Text, "N")
+        Sql = Sql & " and codcampo = " & DBSet(Text1(7).Text, "N")
         
-        If TotalRegistros(SQL) > 0 Then
+        If TotalRegistros(Sql) > 0 Then
             MsgBox "Ya existe la Variedad/Campo para esta factura. Reintroduzca.", vbExclamation
             PonerFoco Text1(2)
             B = False
@@ -2108,10 +2108,10 @@ Dim SQL As String
     '[Monica]28/11/2013: solo si es campo a 0 no compruebo que exista
     If B And Modo = 3 And DBSet(Text1(7).Text, "N") <> 0 Then
         ' comprobamos que el campo sea de la variedad introducida
-        SQL = "select count(*) from rcampos where codcampo = " & DBSet(Text1(7).Text, "N")
-        SQL = SQL & " and codvarie = " & DBSet(Text1(2).Text, "N")
+        Sql = "select count(*) from rcampos where codcampo = " & DBSet(Text1(7).Text, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Text1(2).Text, "N")
         
-        If TotalRegistros(SQL) = 0 Then
+        If TotalRegistros(Sql) = 0 Then
             MsgBox "El campo introducido no es de la variedad. Revise.", vbExclamation
             PonerFoco Text1(7)
             B = False
@@ -2301,7 +2301,7 @@ Private Sub ToolAux_ButtonClick(Index As Integer, ByVal Button As MSComctlLib.Bu
 End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
-Dim SQL As String
+Dim Sql As String
 Dim vWhere As String
 Dim Eliminar As Boolean
 Dim bol As Boolean
@@ -2331,12 +2331,12 @@ Dim cadena As String
     ' canviar els noms, els formats i el DELETE *****
     Select Case Index
         Case 0 'calidad
-            SQL = "¿Seguro que desea eliminar la Calidad?"
-            SQL = SQL & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid
-            If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+            Sql = "¿Seguro que desea eliminar la Calidad?"
+            Sql = Sql & vbCrLf & "Calidad: " & Adoaux(Index).Recordset!codcalid
+            If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
                 Eliminar = True
-                SQL = "DELETE FROM rfactsoc_calidad "
-                SQL = SQL & vWhere & " AND codcalid= " & Adoaux(Index).Recordset!codcalid
+                Sql = "DELETE FROM rfactsoc_calidad "
+                Sql = Sql & vWhere & " AND codcalid= " & Adoaux(Index).Recordset!codcalid
             End If
             
     End Select
@@ -2358,7 +2358,7 @@ Dim cadena As String
         
         
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         
         
@@ -2556,7 +2556,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
 Dim Nuevo As Boolean
 Dim Forfait As String
-Dim SQL As String
+Dim Sql As String
 Dim KilosUni As Currency
 
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
@@ -2654,7 +2654,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -2669,13 +2669,13 @@ Dim vFact As Byte, vDocum As Byte
     If Not B Then Exit Function
     
     ' comprobamos que no exista ya la calidad para la variedad
-    SQL = "select count(*) from rfactsoc_calidad where codtipom = " & DBSet(tipoMov, "T")
-    SQL = SQL & " and numfactu = " & Factura & " and fecfactu = " & DBSet(fecfactu, "F")
-    SQL = SQL & " and codvarie = " & Text1(2).Text
-    SQL = SQL & " and codcampo = " & Text1(7).Text
-    SQL = SQL & " and codcalid = " & txtAux(4).Text
+    Sql = "select count(*) from rfactsoc_calidad where codtipom = " & DBSet(tipoMov, "T")
+    Sql = Sql & " and numfactu = " & Factura & " and fecfactu = " & DBSet(fecfactu, "F")
+    Sql = Sql & " and codvarie = " & Text1(2).Text
+    Sql = Sql & " and codcampo = " & Text1(7).Text
+    Sql = Sql & " and codcalid = " & txtAux(4).Text
     
-    If TotalRegistros(SQL) > 0 Then
+    If TotalRegistros(Sql) > 0 Then
         MsgBox "Código de calidad ya existe para la variedad en la factura. Reintroduzca.", vbExclamation
         B = False
         PonerFoco txtAux(4)
@@ -3049,7 +3049,7 @@ End Sub
 
 Private Sub CalcularTotales()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim KNetoTotal As String
 Dim ImporteTotal As String
 Dim PreTotal As String
@@ -3059,15 +3059,15 @@ Dim ModoAnt As Integer
     On Error Resume Next
 
     'total importes de envases para ese forfait
-    SQL = "select sum(kilosnet), sum(imporcal) "
-    SQL = SQL & " from rfactsoc_calidad where codtipom = '" & Trim(tipoMov) & "'"
-    SQL = SQL & " and numfactu = " & Factura
-    SQL = SQL & " and fecfactu = " & DBSet(fecfactu, "F")
-    SQL = SQL & " and codvarie = " & DBSet(Text1(2).Text, "N")
-    SQL = SQL & " and codcampo = " & DBSet(Text1(7).Text, "N")
+    Sql = "select sum(kilosnet), sum(imporcal) "
+    Sql = Sql & " from rfactsoc_calidad where codtipom = '" & Trim(tipoMov) & "'"
+    Sql = Sql & " and numfactu = " & Factura
+    Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F")
+    Sql = Sql & " and codvarie = " & DBSet(Text1(2).Text, "N")
+    Sql = Sql & " and codcampo = " & DBSet(Text1(7).Text, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     KNetoTotal = 0
     ImporteTotal = 0
@@ -3101,24 +3101,24 @@ Dim ModoAnt As Integer
 End Sub
 
 Private Function ObtenerWhereCP(conW As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 On Error Resume Next
     
-    SQL = ""
-    If conW Then SQL = " WHERE "
-    SQL = SQL & NombreTabla & ".codtipom= " & DBSet(tipoMov, "T")
-    SQL = SQL & " and " & NombreTabla & ".numfactu = " & Factura
-    SQL = SQL & " and " & NombreTabla & ".fecfactu = " & DBSet(fecfactu, "F")
-    SQL = SQL & " and " & NombreTabla & ".codvarie = " & Val(Text1(2).Text)
-    SQL = SQL & " and " & NombreTabla & ".codcampo = " & Val(Text1(7).Text)
+    Sql = ""
+    If conW Then Sql = " WHERE "
+    Sql = Sql & NombreTabla & ".codtipom= " & DBSet(tipoMov, "T")
+    Sql = Sql & " and " & NombreTabla & ".numfactu = " & Factura
+    Sql = Sql & " and " & NombreTabla & ".fecfactu = " & DBSet(fecfactu, "F")
+    Sql = Sql & " and " & NombreTabla & ".codvarie = " & Val(Text1(2).Text)
+    Sql = Sql & " and " & NombreTabla & ".codcampo = " & Val(Text1(7).Text)
     
-    ObtenerWhereCP = SQL
+    ObtenerWhereCP = Sql
 End Function
 
 
 
 Private Function ActualizarVariedades(Variedad As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Sql1 As String
 Dim PrecMed As Currency
@@ -3141,15 +3141,15 @@ Dim PrecMed As Currency
             PrecMed = Round2(DBLet(Rs.Fields(1).Value, "N") / DBLet(Rs.Fields(0).Value, "N"), 4)
         End If
         
-        SQL = "update rfactsoc_variedad set kilosnet = " & DBSet(Rs.Fields(0).Value, "N") & ","
-        SQL = SQL & " imporvar = " & DBSet(Rs.Fields(1).Value, "N") & ","
-        SQL = SQL & " preciomed = " & DBSet(PrecMed, "N")
-        SQL = SQL & " where codtipom = " & DBSet(tipoMov, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Factura, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(fecfactu, "F")
-        SQL = SQL & " and codvarie = " & Variedad
+        Sql = "update rfactsoc_variedad set kilosnet = " & DBSet(Rs.Fields(0).Value, "N") & ","
+        Sql = Sql & " imporvar = " & DBSet(Rs.Fields(1).Value, "N") & ","
+        Sql = Sql & " preciomed = " & DBSet(PrecMed, "N")
+        Sql = Sql & " where codtipom = " & DBSet(tipoMov, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Factura, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F")
+        Sql = Sql & " and codvarie = " & Variedad
 
-        conn.Execute SQL
+        conn.Execute Sql
     End If
     
     Rs.Close
@@ -3170,7 +3170,7 @@ Dim V As Integer
 Dim bol As Boolean
 Dim MenError As String
 Dim Forfait As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificar
 
@@ -3181,24 +3181,24 @@ Dim SQL As String
     
 '    ModificaDesdeFormulario2 Me, 1
 
-    SQL = "update rfactsoc_variedad set codvarie = " & DBSet(Text1(2).Text, "N")
-    SQL = SQL & ", kilosnet = " & DBSet(Text1(3).Text, "N")
-    SQL = SQL & ", preciomed = " & DBSet(Text1(4).Text, "N")
-    SQL = SQL & ", imporvar = " & DBSet(Text1(5).Text, "N")
-    SQL = SQL & " where numfactu = " & DBSet(Factura, "N")
-    SQL = SQL & " and codvarie = " & DBSet(Text1(2).Text, "N") '[Monica]21/04/2015: antes variedad
-    SQL = SQL & " and codtipom = " & DBSet(tipoMov, "T")
-    SQL = SQL & " and fecfactu = " & DBSet(fecfactu, "F")
-    SQL = SQL & " and codcampo = " & DBSet(Text1(7).Text, "N")
+    Sql = "update rfactsoc_variedad set codvarie = " & DBSet(Text1(2).Text, "N")
+    Sql = Sql & ", kilosnet = " & DBSet(Text1(3).Text, "N")
+    Sql = Sql & ", preciomed = " & DBSet(Text1(4).Text, "N")
+    Sql = Sql & ", imporvar = " & DBSet(Text1(5).Text, "N")
+    Sql = Sql & " where numfactu = " & DBSet(Factura, "N")
+    Sql = Sql & " and codvarie = " & DBSet(Text1(2).Text, "N") '[Monica]21/04/2015: antes variedad
+    Sql = Sql & " and codtipom = " & DBSet(tipoMov, "T")
+    Sql = Sql & " and fecfactu = " & DBSet(fecfactu, "F")
+    Sql = Sql & " and codcampo = " & DBSet(Text1(7).Text, "N")
 
-    conn.Execute SQL
+    conn.Execute Sql
 
 
     '------------------------------------------------------------------------------
     '  LOG de acciones
     Dim cadena As String
-    If CLng(Me.Data1.Recordset!codvarie) <> CLng(Text1(2).Text) Then
-        cadena = Trim(Text1(6).Text) & " " & Text1(0).Text & " " & Text1(1).Text & " de " & Me.Data1.Recordset!codvarie & " a " & CInt(Text1(2).Text)
+    If CLng(Me.Data1.Recordset!Codvarie) <> CLng(Text1(2).Text) Then
+        cadena = Trim(Text1(6).Text) & " " & Text1(0).Text & " " & Text1(1).Text & " de " & Me.Data1.Recordset!Codvarie & " a " & CInt(Text1(2).Text)
         
         Set LOG = New cLOG
         LOG.Insertar 12, vUsu, "Modificar Variedad : " & cadena & vbCrLf
@@ -3221,7 +3221,7 @@ End Function
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -3230,16 +3230,16 @@ Dim I As Byte
     Next I
     
     'tipo de factura
-    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 "
+    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu > 0 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        SQL = Rs.Fields(1).Value
-        SQL = Rs.Fields(0).Value & " - " & SQL
-        Combo1(0).AddItem SQL 'campo del codigo
+        Sql = Rs.Fields(1).Value
+        Sql = Rs.Fields(0).Value & " - " & Sql
+        Combo1(0).AddItem Sql 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = I
         I = I + 1
         Rs.MoveNext

@@ -153,7 +153,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   7
       Left            =   9660
       MaxLength       =   250
@@ -174,7 +174,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   6
       Left            =   8490
       MaxLength       =   250
@@ -262,7 +262,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   3
       Left            =   5700
       MaxLength       =   7
@@ -284,7 +284,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   4
       Left            =   6480
       MaxLength       =   10
@@ -307,7 +307,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   5
       Left            =   7680
       MaxLength       =   7
@@ -330,7 +330,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   1
       Left            =   1260
       MaxLength       =   6
@@ -353,7 +353,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   2
       Left            =   2220
       MaxLength       =   30
@@ -374,7 +374,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   2
       Left            =   3390
       MaxLength       =   4
@@ -397,7 +397,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   3
       Left            =   4200
       MaxLength       =   40
@@ -417,7 +417,7 @@ Begin VB.Form frmPOZLecturas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
+      Height          =   330
       Index           =   0
       Left            =   120
       MaxLength       =   250
@@ -836,7 +836,7 @@ Dim FechaAnt As String
 Dim OK As Boolean
 Dim CadB1 As String
 Dim Filtro As Integer
-Dim Sql As String
+Dim SQL As String
 
 
 Dim CadB2 As String
@@ -959,7 +959,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim Sql2 As String
-Dim Sql As String
+Dim SQL As String
 
     CadB = AnyadeCadenaFiltro(False)
     
@@ -1063,7 +1063,7 @@ End Sub
 
 
 Private Sub BotonCargarLecturas()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1078,8 +1078,8 @@ Dim temp As Boolean
         If Dir(App.Path & "\Escalona\escalona.z") = "" Then
             MsgBox "El proceso de carga debe de estar realizandose. Espere.", vbExclamation
         Else
-            Sql = "Se va a proceder a realizar la carga de la tabla intermedia. " & vbCrLf & vbCrLf & "¿ Desea continuar ?"
-            If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+            SQL = "Se va a proceder a realizar la carga de la tabla intermedia. " & vbCrLf & vbCrLf & "¿ Desea continuar ?"
+            If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
             
                 '------------------------------------------------------------------------------
                 '  LOG de acciones
@@ -1089,8 +1089,8 @@ Dim temp As Boolean
                 '-----------------------------------------------------------------------------
                      
                 ' Primero eliminamos todos los registros rpozos_lectura que no tengan la fecha de proceso
-                Sql = "delete from rpozos_lectura where fecproceso is null"
-                conn.Execute Sql
+                SQL = "delete from rpozos_lectura where fecproceso is null"
+                conn.Execute SQL
                     
                 ' eliminamos el registro chivato
                 Kill App.Path & "\Escalona\escalona.z"
@@ -1110,7 +1110,7 @@ End Sub
 
 
 Private Sub BotonActualizar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1123,25 +1123,25 @@ Dim temp As Boolean
     
     Else
         If Dir(App.Path & "\Escalona\escalona.z", vbDirectory) = "" Then
-            Sql = "No se puede realizar una actualización sin que haya realizado la carga."
-            MsgBox Sql, vbInformation
+            SQL = "No se puede realizar una actualización sin que haya realizado la carga."
+            MsgBox SQL, vbInformation
         Else
-            Sql = "select count(*) from rpozos_lectura where fecproceso is null"
-            If TotalRegistros(Sql) = 0 Then
+            SQL = "select count(*) from rpozos_lectura where fecproceso is null"
+            If TotalRegistros(SQL) = 0 Then
                 MsgBox "No hay cargas pendientes de procesar.", vbExclamation
                 Exit Sub
             End If
         
-            Sql = "Se va a proceder a realizar la actualización de los contadores. " & vbCrLf & vbCrLf
+            SQL = "Se va a proceder a realizar la actualización de los contadores. " & vbCrLf & vbCrLf
             '[Monica]17/05/2013: indicamos que tipo de lectura se va a actualizar
             ' leemos la lectura de la base de datos
             If vParamAplic.TipoLecturaPoz Then
-                Sql = Sql & "Se va a utilizar la LECTURA de la BASE DE DATOS." & vbCrLf & vbCrLf
+                SQL = SQL & "Se va a utilizar la LECTURA de la BASE DE DATOS." & vbCrLf & vbCrLf
             Else
-                Sql = Sql & "Se va a utilizar la LECTURA del CONTADOR." & vbCrLf & vbCrLf
+                SQL = SQL & "Se va a utilizar la LECTURA del CONTADOR." & vbCrLf & vbCrLf
             End If
-            Sql = Sql & "¿ Desea continuar ?"
-            If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+            SQL = SQL & "¿ Desea continuar ?"
+            If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
             
                 '------------------------------------------------------------------------------
                 '  LOG de acciones
@@ -1166,7 +1166,7 @@ Error2:
 End Sub
 
 Private Function ActualizarContadores() As Boolean
-Dim Sql As String, Sql2 As String, Sql3 As String
+Dim SQL As String, Sql2 As String, Sql3 As String
 Dim Rs As ADODB.Recordset, Rs2 As ADODB.Recordset
 Dim B As Boolean
 Dim Hidrante As String
@@ -1185,12 +1185,12 @@ Dim NroDig As Long
     Screen.MousePointer = vbHourglass
     Label1.visible = True
     
-    Sql = "select * from rpozos_lectura where fecproceso is null order by hidrante"
+    SQL = "select * from rpozos_lectura where fecproceso is null order by hidrante"
     
     B = True
     
     Set Rs = New ADODB.Recordset
-    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF And B
         
@@ -1285,7 +1285,7 @@ End Function
 
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1300,15 +1300,15 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el Hidrante?"
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = "¿Seguro que desea eliminar el Hidrante?"
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        Sql = "Delete from rpozos where hidrante='" & adodc1.Recordset!Hidrante & "'"
-        conn.Execute Sql
+        SQL = "Delete from rpozos where hidrante='" & adodc1.Recordset!Hidrante & "'"
+        conn.Execute SQL
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1410,7 +1410,7 @@ End Sub
 Private Sub cmdAceptar_Click()
     Dim I As String
     Dim NReg As Long
-    Dim Sql As String
+    Dim SQL As String
     Dim Sql2 As String
     
     Select Case Modo
@@ -1767,23 +1767,23 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     Dim Sql2 As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
 '        Sql = Sql & " ORDER BY rpozos.nroorden"
-    Sql = Sql & " " & Ordenacion
+    SQL = SQL & " " & Ordenacion
     '**************************************************************++
     
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Hidrante|1000|;S|txtAux(6)|T|Orden|1000|;S|txtAux(1)|T|Socio|1000|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|3000|;"
@@ -1805,7 +1805,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1829,7 +1829,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer
@@ -2059,12 +2059,12 @@ End Sub
 
 
 Private Sub LeerFiltro(Leer As Boolean)
-    Sql = App.Path & "\filtro.dat"
+    SQL = App.Path & "\filtro.dat"
     If Leer Then
         Filtro = 0
-        If Dir(Sql) <> "" Then
+        If Dir(SQL) <> "" Then
             AbrirFicheroFiltro True
-            If IsNumeric(Sql) Then Filtro = CByte(Sql)
+            If IsNumeric(SQL) Then Filtro = CByte(SQL)
         End If
     Else
         AbrirFicheroFiltro False
@@ -2076,11 +2076,11 @@ Private Sub AbrirFicheroFiltro(Leer As Boolean)
 On Error GoTo EAbrir
     I = FreeFile
     If Leer Then
-        Open Sql For Input As #I
-        Sql = "0"
-        Line Input #I, Sql
+        Open SQL For Input As #I
+        SQL = "0"
+        Line Input #I, SQL
     Else
-        Open Sql For Output As #I
+        Open SQL For Output As #I
         Print #I, Filtro
     End If
     Close #I

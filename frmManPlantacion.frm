@@ -470,7 +470,7 @@ Dim B As Boolean
         txtAux(I).visible = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -949,7 +949,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -961,7 +961,6 @@ Private Sub txtAux_LostFocus(Index As Integer)
             PonerFormatoEntero txtAux(Index)
         Case 1
             txtAux(Index).Text = UCase(txtAux(Index).Text)
-            
     End Select
     
 End Sub

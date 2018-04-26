@@ -781,7 +781,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo EEliminar
@@ -796,19 +796,19 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Muestra: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Albarán: " & adodc1.Recordset.Fields(3)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Muestra: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Albarán: " & adodc1.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rrendim where nromuestra=" & adodc1.Recordset!NroMuestra
-        SQL = SQL & " and fecha = " & DBSet(adodc1.Recordset!Fecha, "FH")
-        SQL = SQL & " and numalbar = " & adodc1.Recordset!numalbar
+        Sql = "Delete from rrendim where nromuestra=" & adodc1.Recordset!NroMuestra
+        Sql = Sql & " and fecha = " & DBSet(adodc1.Recordset!Fecha, "FH")
+        Sql = Sql & " and numalbar = " & adodc1.Recordset!numalbar
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1174,24 +1174,24 @@ End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
     
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     txtAux(1).Tag = "Fecha|FHF|N|||rrendim|fecha|dd/mm/yyyy||"
     txtAux(5).Tag = "Hora|FHH|N|||rrendim|fecha|hh:mm:ss||"
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rrendim.nromuestra, rrendim.fecha, rrendim.numalbar "
+    Sql = Sql & " ORDER BY rrendim.nromuestra, rrendim.fecha, rrendim.numalbar "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Muestra|1100|;S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B|||;S|txtAux(5)|T|Hora|1100|;"
@@ -1208,7 +1208,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1247,15 +1247,15 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from rrendim where nromuestra = " & txtAux(0).Text & " and fecha = '" & txtAux(7).Text & "' and numalbar = " & txtAux(2).Text
-        If TotalRegistros(SQL) > 0 Then
+        Sql = "select count(*) from rrendim where nromuestra = " & txtAux(0).Text & " and fecha = '" & txtAux(7).Text & "' and numalbar = " & txtAux(2).Text
+        If TotalRegistros(Sql) > 0 Then
             MsgBox "Código ya existe. Revise.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1351,7 +1351,7 @@ End Sub
 
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 
     SepuedeBorrar = False

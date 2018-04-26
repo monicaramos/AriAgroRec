@@ -833,7 +833,7 @@ Dim B As Boolean
         cmdAux(I).Enabled = Not B
     Next I
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -997,7 +997,7 @@ Dim jj As Integer
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1012,17 +1012,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro Coopropietario?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Linea : " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Registro Coopropietario?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Linea : " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        SQL = "Delete from rcopropiedad where codpropiedad=" & DBSet(adodc1.Recordset!codpropiedad, "N")
-        SQL = SQL & " and numlinea = " & DBSet(adodc1.Recordset!numlinea, "N")
-        conn.Execute SQL
+        Sql = "Delete from rcopropiedad where codpropiedad=" & DBSet(adodc1.Recordset!codpropiedad, "N")
+        Sql = Sql & " and numlinea = " & DBSet(adodc1.Recordset!numlinea, "N")
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1330,20 +1330,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rcopropiedad.codpropiedad, rcopropiedad.numlinea "
+    Sql = Sql & " ORDER BY rcopropiedad.codpropiedad, rcopropiedad.numlinea "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtaux(0)|T|Código|1700|;S|txtaux(1)|T|Linea|800|;S|txtaux(2)|T|Campo|1800|;S|cmdAux(0)|B|||;S|txtaux(3)|T|Porcentaje|1200|;"
@@ -1375,7 +1375,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1412,7 +1412,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1580,11 +1580,11 @@ End Sub
 
 
 Private Sub SumaPorcentajes(NroRegistro As Long)
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select sum(porcentaje) from rcopropiedad where codpropiedad = " & DBSet(NroRegistro, "N")
+    Sql = "select sum(porcentaje) from rcopropiedad where codpropiedad = " & DBSet(NroRegistro, "N")
     
-    If DevuelveValor(SQL) <> 100 Then
+    If DevuelveValor(Sql) <> 100 Then
         MsgBox "La suma de porcentajes de coopropiedad no suma el 100%. Revise.", vbExclamation
     End If
 

@@ -327,7 +327,7 @@ Private HaDevueltoDatos As Boolean
 Dim DVariedad  As Dictionary
 
 Private Sub cmdAceptar_Click()
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo Error1
     
@@ -376,7 +376,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim i As Integer
+Dim I As Integer
     
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -457,7 +457,7 @@ End Sub
 
 
 Private Sub CargaGrid(enlaza As Boolean)
-Dim i As Byte
+Dim I As Byte
 Dim Sql As String
 On Error GoTo ECarga
 
@@ -488,10 +488,10 @@ On Error GoTo ECarga
     DataGrid1.Columns(4).Alignment = dbgCenter
     
     
-    For i = 0 To DataGrid1.Columns.Count - 1
-        DataGrid1.Columns(i).AllowSizing = False
-        DataGrid1.Columns(i).Locked = True
-    Next i
+    For I = 0 To DataGrid1.Columns.Count - 1
+        DataGrid1.Columns(I).AllowSizing = False
+        DataGrid1.Columns(I).Locked = True
+    Next I
     
     DataGrid1.ScrollBars = dbgAutomatic
     gridCargado = True
@@ -575,8 +575,8 @@ Dim Rs As ADODB.Recordset
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
-        If DVariedad(DBLet(Rs!codvarie)) <> DBLet(Rs.Fields(2)) Then
-            Mens = Mens & "Variedad " & Rs.Fields(1) & " cajas asignadas " & Rs.Fields(2) & ", reales " & DVariedad(DBLet(Rs!codvarie)) & vbCrLf
+        If DVariedad(DBLet(Rs!Codvarie)) <> DBLet(Rs.Fields(2)) Then
+            Mens = Mens & "Variedad " & Rs.Fields(1) & " cajas asignadas " & Rs.Fields(2) & ", reales " & DVariedad(DBLet(Rs!Codvarie)) & vbCrLf
         End If
         Rs.MoveNext
     Wend
@@ -605,7 +605,7 @@ End Sub
 
 
 
-Private Sub txtAux_GotFocus()
+Private Sub txtaux_GotFocus()
     ConseguirFocoLin txtAux
 End Sub
 
@@ -635,7 +635,7 @@ EKeyD:
 End Sub
 
 
-Private Sub txtAux_KeyPress(KeyAscii As Integer)
+Private Sub txtaux_KeyPress(KeyAscii As Integer)
 
 '    KEYpress KeyAscii
     
@@ -691,8 +691,8 @@ End Sub
 
 
 Private Sub PonerModo(Kmodo As Byte)
-Dim i As Byte
-Dim b As Boolean
+Dim I As Byte
+Dim B As Boolean
        
     Modo = Kmodo
     PonerIndicador lblIndicador, Modo
@@ -703,12 +703,12 @@ Dim b As Boolean
     'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
     'Si estamos en Insertar además limpia los campos Text1
 '    BloquearText1 Me, Modo
-    b = (Modo <> 1)
-    BloquearTxt Text1(0), b
-    BloquearTxt Text1(1), b
+    B = (Modo <> 1)
+    BloquearTxt Text1(0), B
+    BloquearTxt Text1(1), B
     
-    b = (Modo = 0) Or (Modo = 2)
-    PonerBotonCabecera b
+    B = (Modo = 0) Or (Modo = 2)
+    PonerBotonCabecera B
    
     Select Case Kmodo
 '    Case 0    'Modo Inicial
@@ -726,12 +726,12 @@ Dim b As Boolean
 '        lblIndicador.Caption = "MODIFICAR"
     End Select
            
-    b = Modo <> 0 And Modo <> 2 And Modo <> 4
+    B = Modo <> 0 And Modo <> 2 And Modo <> 4
    
 
-    b = (Modo = 1)
-    Toolbar1.Buttons(1).Enabled = Not b
-    Toolbar1.Buttons(4).Enabled = Not b And (Not (Modo = 0 Or Modo = 4))
+    B = (Modo = 1)
+    Toolbar1.Buttons(1).Enabled = Not B
+    Toolbar1.Buttons(4).Enabled = Not B And (Not (Modo = 0 Or Modo = 4))
 
     PonerOpcionesMenu   'Activar opciones de menu según nivel
                         'de permisos del usuario
@@ -781,13 +781,13 @@ Private Sub BotonBuscar()
         'Ponemos el grid lineasfacturas enlazando a ningun sitio
         CargaGrid False
         CargaTxtAux False, False
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         'Ya estamos en Modo de Busqueda
 '        HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -801,7 +801,7 @@ Private Sub BotonModificar()
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Solo se actualiza el campo de Existencia Real
     txtAux.Text = Trim(txtAux.Text)
 
@@ -811,22 +811,22 @@ Private Function DatosOk() As Boolean
 '                MsgBox "Ha sobrepasado el numero de cajas por variedad. Revise.", vbExclamation
 '                DatosOk = False
 '            Else
-                DatosOk = True
+                DatosOK = True
 '            End If
         Else
-            DatosOk = False
+            DatosOK = False
         End If
         'DatosOk = True
     Else
-        DatosOk = False
+        DatosOK = False
     End If
 End Function
 
 
-Private Sub PonerBotonCabecera(b As Boolean)
-    Me.cmdAceptar.visible = Not b
-    Me.cmdCancelar.visible = Not b
-    If b Then Me.lblIndicador.Caption = ""
+Private Sub PonerBotonCabecera(B As Boolean)
+    Me.cmdAceptar.visible = Not B
+    Me.cmdCancelar.visible = Not B
+    If B Then Me.lblIndicador.Caption = ""
 End Sub
 
 
@@ -848,7 +848,7 @@ Dim ADonde As String
     ADonde = "Modificando datos de Cajas."
     Sql = "UPDATE rpartes_trabajador Set numcajas = " & DBSet(Canti, "N")
     Sql = Sql & " WHERE codtraba =" & DBSet(Data1.Recordset!CodTraba, "N") & " AND "
-    Sql = Sql & " codvarie = " & Data1.Recordset!codvarie & " and "
+    Sql = Sql & " codvarie = " & Data1.Recordset!Codvarie & " and "
     Sql = Sql & " nroparte =" & Val(Text1(0).Text)
     conn.Execute Sql
     
@@ -893,7 +893,7 @@ Private Function ModificarExistencia() As Boolean
 Dim NumReg As Long
 Dim Indicador As String
 
-    If DatosOk Then
+    If DatosOK Then
         If ActualizarExistencia(txtAux.Text) Then
         
             TerminaBloquear

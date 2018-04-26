@@ -1048,7 +1048,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1063,20 +1063,20 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
     
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
-        SQL = SQL & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
-        SQL = SQL & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
+        Sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
+        Sql = Sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
+        Sql = Sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1412,7 +1412,7 @@ Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Function ProcesoCargaKilos(Campaña As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim vCampAnt As CCampAnt
 Dim Sql2 As String
 Dim Campanya As String
@@ -1429,9 +1429,9 @@ Dim vFecha As Date
     conn.BeginTrans
 
 
-    SQL = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
-    SQL = SQL & " inner join productos on variedades.codprodu = productos.codprodu "
-    SQL = SQL & " where productos.codgrupo = 5 group by 1 order by 1 "
+    Sql = "select codsocio, sum(kilosnet) kilos from (rhisfruta inner join variedades on rhisfruta.codvarie = variedades.codvarie) "
+    Sql = Sql & " inner join productos on variedades.codprodu = productos.codprodu "
+    Sql = Sql & " where productos.codgrupo = 5 group by 1 order by 1 "
     
 '    Campanya = Mid(CStr(Year(vParam.FecIniCam) - 1), 3, 2) & "/" & Mid(CStr(Year(vParam.FecFinCam) - 1), 3, 2)
     
@@ -1449,7 +1449,7 @@ Dim vFecha As Date
     
     
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF And B
             Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1478,7 +1478,7 @@ Dim vFecha As Date
         If vCampAnt.Leer = 0 Then
             If AbrirConexionCampAnterior(vCampAnt.BaseDatos) Then
                 Set Rs = New ADODB.Recordset
-                Rs.Open SQL, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
+                Rs.Open Sql, ConnCAnt, adOpenForwardOnly, adLockPessimistic, adCmdText
             
                 While Not Rs.EOF And B
                     Sql2 = "select * from raportacion where codaport = 1 and fecaport = " & DBSet(vFecha, "F") & " and codsocio = " & DBSet(Rs!Codsocio, "N")
@@ -1502,9 +1502,9 @@ Dim vFecha As Date
 
     If B And CadValues <> "" Then
         CadValues = Mid(CadValues, 1, Len(CadValues) - 1)
-        SQL = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
+        Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe) values  " & CadValues
         
-        conn.Execute SQL
+        conn.Execute Sql
     End If
 
 eCargaKilos:
@@ -1631,18 +1631,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
+    Sql = Sql & " ORDER BY  raportacion.fecaport, raportacion.codsocio, raportacion.codaport "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Codigo|1030|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2900|;"
@@ -1659,7 +1659,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     DataGrid1.Columns(0).Alignment = dbgLeft
     DataGrid1.Columns(3).Alignment = dbgLeft
     
-    CalcularTotales SQL
+    CalcularTotales Sql
     
 '    DataGrid1.Columns(10).Alignment = dbgCenter
 '    DataGrid1.Columns(12).Alignment = dbgCenter
@@ -1681,7 +1681,7 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
@@ -1743,7 +1743,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1751,10 +1751,10 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
-        SQL = SQL & " and fecha = " & DBSet(txtAux(1).Text, "F")
-        SQL = SQL & " and codaport = " & DBSet(txtAux(6).Text, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from raportacion where codsocio = " & DBSet(txtAux(0).Text, "N")
+        Sql = Sql & " and fecha = " & DBSet(txtAux(1).Text, "F")
+        Sql = Sql & " and codaport = " & DBSet(txtAux(6).Text, "N")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "El socio existe para esta fecha, tipo de aportación. Reintroduzca.", vbExclamation
             PonerFoco txtAux(0)
             B = False
@@ -1875,22 +1875,22 @@ Private Sub AbrirFrmSocio(Indice As Integer)
 End Sub
 
 Private Function ModificaDesdeForm() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eModificaDesdeForm
     
     ModificaDesdeForm = False
     
-    SQL = "update raportacion set "
-    SQL = SQL & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
-    SQL = SQL & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
-    SQL = SQL & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
-    SQL = SQL & " where codcapat = " & DBSet(txtAux(0).Text, "N")
-    SQL = SQL & " and fechahora = " & DBSet(txtAux(1).Text, "F")
-    SQL = SQL & " and codtraba = " & DBSet(txtAux(7).Text, "N")
-    SQL = SQL & " and codvarie = " & DBSet(txtAux(6).Text, "N")
+    Sql = "update raportacion set "
+    Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
+    Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N")
+    Sql = Sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
+    Sql = Sql & " where codcapat = " & DBSet(txtAux(0).Text, "N")
+    Sql = Sql & " and fechahora = " & DBSet(txtAux(1).Text, "F")
+    Sql = Sql & " and codtraba = " & DBSet(txtAux(7).Text, "N")
+    Sql = Sql & " and codvarie = " & DBSet(txtAux(6).Text, "N")
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     ModificaDesdeForm = True
     Exit Function
@@ -1903,14 +1903,14 @@ Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
 Dim Kilos As Long
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(kilos) kilos , sum(importe) importe from (" & cadena & ") aaaaa"
+    Sql = "select sum(kilos) kilos , sum(importe) importe from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Kilos = 0

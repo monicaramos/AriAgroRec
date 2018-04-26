@@ -166,19 +166,19 @@ Begin VB.Form frmBodHcoFacturas
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmBodHcoFacturas.frx":000C
       Tab(0).ControlEnabled=   0   'False
-      Tab(0).Control(0)=   "Label1(11)"
+      Tab(0).Control(0)=   "Frame2(1)"
       Tab(0).Control(0).Enabled=   0   'False
-      Tab(0).Control(1)=   "Label1(12)"
+      Tab(0).Control(1)=   "Text1(15)"
       Tab(0).Control(1).Enabled=   0   'False
-      Tab(0).Control(2)=   "Label1(30)"
+      Tab(0).Control(2)=   "Text1(16)"
       Tab(0).Control(2).Enabled=   0   'False
       Tab(0).Control(3)=   "Label1(31)"
       Tab(0).Control(3).Enabled=   0   'False
-      Tab(0).Control(4)=   "Text1(16)"
+      Tab(0).Control(4)=   "Label1(30)"
       Tab(0).Control(4).Enabled=   0   'False
-      Tab(0).Control(5)=   "Text1(15)"
+      Tab(0).Control(5)=   "Label1(12)"
       Tab(0).Control(5).Enabled=   0   'False
-      Tab(0).Control(6)=   "Frame2(1)"
+      Tab(0).Control(6)=   "Label1(11)"
       Tab(0).Control(6).Enabled=   0   'False
       Tab(0).ControlCount=   7
       TabCaption(1)   =   "Albaranes"
@@ -2446,12 +2446,12 @@ Dim anc As Single
         
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If

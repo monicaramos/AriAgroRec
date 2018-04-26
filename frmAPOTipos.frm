@@ -91,7 +91,7 @@ Begin VB.Form frmAPOTipos
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   3
       Left            =   3750
       MaxLength       =   3
@@ -112,7 +112,7 @@ Begin VB.Form frmAPOTipos
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   2
       Left            =   2340
       MaxLength       =   7
@@ -171,7 +171,7 @@ Begin VB.Form frmAPOTipos
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   30
@@ -193,7 +193,7 @@ Begin VB.Form frmAPOTipos
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   90
       MaxLength       =   4
@@ -961,7 +961,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

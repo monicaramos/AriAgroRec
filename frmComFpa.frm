@@ -91,7 +91,7 @@ Begin VB.Form frmComFpa
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   4
       Left            =   6345
       MaxLength       =   3
@@ -113,7 +113,7 @@ Begin VB.Form frmComFpa
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   3
       Left            =   4815
       MaxLength       =   3
@@ -135,7 +135,7 @@ Begin VB.Form frmComFpa
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   2
       Left            =   3285
       MaxLength       =   3
@@ -214,7 +214,7 @@ Begin VB.Form frmComFpa
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   30
@@ -237,7 +237,7 @@ Begin VB.Form frmComFpa
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   60
       MaxLength       =   3
@@ -543,64 +543,64 @@ Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres 
 Dim I As Integer
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
     
-    b = (Modo = 2)
-    If b Then
+    B = (Modo = 2)
+    If B Then
         PonerContRegIndicador lblIndicador, Me.adodc1, CadB
     Else
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).visible = Not b
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not B
     Next I
-    Combo1(0).visible = Not b
+    Combo1(0).visible = Not B
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
-    DataGrid1.Enabled = b
+    cmdAceptar.visible = Not B
+    cmdCancelar.visible = Not B
+    DataGrid1.Enabled = B
     
     'Si es regresar
-    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = b
+    If DatosADevolverBusqueda <> "" Then cmdRegresar.visible = B
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     
     'Si estamos modo Modificar bloquear clave primaria
-    BloquearTxt txtaux(0), (Modo = 4)
+    BloquearTxt txtAux(0), (Modo = 4)
 End Sub
 
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
+    B = (Modo = 2)
     'Busqueda
-    Toolbar1.Buttons(5).Enabled = b
-    Me.mnBuscar.Enabled = b
+    Toolbar1.Buttons(5).Enabled = B
+    Me.mnBuscar.Enabled = B
     'Ver Todos
-    Toolbar1.Buttons(6).Enabled = b
-    Me.mnVerTodos.Enabled = b
+    Toolbar1.Buttons(6).Enabled = B
+    Me.mnVerTodos.Enabled = B
     
     'Insertar
-    Toolbar1.Buttons(1).Enabled = b And Not DeConsulta
-    Me.mnNuevo.Enabled = b And Not DeConsulta
+    Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
+    Me.mnNuevo.Enabled = B And Not DeConsulta
     
-    b = (b And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
+    B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnModificar.Enabled = B
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = b
-    Me.mnEliminar.Enabled = b
+    Toolbar1.Buttons(3).Enabled = B
+    Me.mnEliminar.Enabled = B
     'Imprimir
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnImprimir.Enabled = b
+    Toolbar1.Buttons(8).Enabled = B
+    Me.mnImprimir.Enabled = B
     
 End Sub
 
@@ -626,17 +626,17 @@ Private Sub BotonAnyadir()
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
-    txtaux(0).Text = NumF
-    FormateaCampo txtaux(0)
-    For I = 1 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    txtAux(0).Text = NumF
+    FormateaCampo txtAux(0)
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
     Combo1(0).ListIndex = -1
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
     'Ponemos el foco
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonVerTodos()
@@ -650,15 +650,15 @@ Private Sub BotonBuscar()
     CargaGrid "forpago.codforpa = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Text = ""
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
     Next I
 '    PosicionarCombo Combo1, "724"
     For I = 0 To Combo1.Count - 1
         Combo1(I).ListIndex = -1
     Next I
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
-    PonerFoco txtaux(0)
+    PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
@@ -680,11 +680,11 @@ Private Sub BotonModificar()
     End If
 
     'Llamamos al form
-    txtaux(0).Text = DataGrid1.Columns(0).Text
-    txtaux(1).Text = DataGrid1.Columns(1).Text
-    txtaux(2).Text = DataGrid1.Columns(4).Text
-    txtaux(3).Text = DataGrid1.Columns(5).Text
-    txtaux(4).Text = DataGrid1.Columns(6).Text
+    txtAux(0).Text = DataGrid1.Columns(0).Text
+    txtAux(1).Text = DataGrid1.Columns(1).Text
+    txtAux(2).Text = DataGrid1.Columns(4).Text
+    txtAux(3).Text = DataGrid1.Columns(5).Text
+    txtAux(4).Text = DataGrid1.Columns(6).Text
     ' ***** canviar-ho pel nom del camp del combo *********
 '    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
     PosicionarCombo Combo1(0), DataGrid1.Columns(2).Text
@@ -696,7 +696,7 @@ Private Sub BotonModificar()
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
     'Como es modificar
-    PonerFoco txtaux(1)
+    PonerFoco txtAux(1)
     Screen.MousePointer = vbDefault
 End Sub
 
@@ -705,8 +705,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtaux.Count - 1
-        txtaux(I).Top = alto
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
     Next I
     Combo1(0).Top = alto - 15
     
@@ -826,7 +826,7 @@ End Sub
 
 
 Private Function ModificaRegistro() As Boolean
-Dim b As Boolean
+Dim B As Boolean
 Dim MenError As String
 Dim SQL As String
 Dim vWhere As String
@@ -835,7 +835,7 @@ Dim vSeccion As CSeccion
     On Error GoTo EModificarCab
 
     conn.BeginTrans
-    b = ModificaDesdeFormulario(Me)
+    B = ModificaDesdeFormulario(Me)
     
     'abrimos la contabilidad de la seccion que me pasan
     If ComprobarCero(Seccion) <> "0" Then
@@ -846,16 +846,16 @@ Dim vSeccion As CSeccion
         
                 ConnConta.BeginTrans
     
-                If b Then
+                If B Then
                     If vParamAplic.ContabilidadNueva Then
-                        SQL = "update formapago set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-                        SQL = SQL & ", numerove = " & DBSet(txtaux(2).Text, "N")
-                        SQL = SQL & ", primerve = " & DBSet(txtaux(3).Text, "N")
-                        SQL = SQL & ", restoven = " & DBSet(txtaux(4).Text, "N")
-                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        SQL = "update formapago set nomforpa = " & DBSet(txtAux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & ", numerove = " & DBSet(txtAux(2).Text, "N")
+                        SQL = SQL & ", primerve = " & DBSet(txtAux(3).Text, "N")
+                        SQL = SQL & ", restoven = " & DBSet(txtAux(4).Text, "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtAux(0).Text, "N")
                     Else
-                        SQL = "update sforpa set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        SQL = "update sforpa set nomforpa = " & DBSet(txtAux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtAux(0).Text, "N")
                     End If
                     ConnConta.Execute SQL
                 End If
@@ -873,9 +873,9 @@ EModificarCab:
     If Err.Number <> 0 Then
         MenError = "Modificando Forma de Pago." & vbCrLf & "----------------------------" & vbCrLf & MenError
         MuestraError Err.Number, MenError, Err.Description
-        b = False
+        B = False
     End If
-    If b Then
+    If B Then
         ModificaRegistro = True
         conn.CommitTrans
         ConnConta.CommitTrans
@@ -920,34 +920,34 @@ Dim vSeccion As CSeccion
                 ConnConta.BeginTrans
                 
                 If vParamAplic.ContabilidadNueva Then
-                    SQL = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtaux(0).Text, "N")
+                    SQL = DevuelveDesdeBDNew(cConta, "formapago", "nomforpa", "codforpa", txtAux(0).Text, "N")
                     
                     If SQL = "" Then
-                        SQL = "insert into formapago (codforpa, nomforpa, tipforpa, numerove, primerve, restoven) values (" & DBSet(txtaux(0).Text, "N") & ","
-                        SQL = SQL & DBSet(txtaux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ","
-                        SQL = SQL & DBSet(txtaux(2).Text, "N") & "," & DBSet(txtaux(3).Text, "N") & "," & DBSet(txtaux(4).Text, "N") & ")"
+                        SQL = "insert into formapago (codforpa, nomforpa, tipforpa, numerove, primerve, restoven) values (" & DBSet(txtAux(0).Text, "N") & ","
+                        SQL = SQL & DBSet(txtAux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ","
+                        SQL = SQL & DBSet(txtAux(2).Text, "N") & "," & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & ")"
                         
                         ConnConta.Execute SQL
                     Else
-                        SQL = "update formapago set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-                        SQL = SQL & ", numerove = " & DBSet(txtaux(2).Text, "N")
-                        SQL = SQL & ", primerve = " & DBSet(txtaux(3).Text, "N")
-                        SQL = SQL & ", restoven = " & DBSet(txtaux(4).Text, "N")
-                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        SQL = "update formapago set nomforpa = " & DBSet(txtAux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & ", numerove = " & DBSet(txtAux(2).Text, "N")
+                        SQL = SQL & ", primerve = " & DBSet(txtAux(3).Text, "N")
+                        SQL = SQL & ", restoven = " & DBSet(txtAux(4).Text, "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtAux(0).Text, "N")
                         
                         ConnConta.Execute SQL
                     End If
                 
                 Else
-                    SQL = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtaux(0).Text, "N")
+                    SQL = DevuelveDesdeBDNew(cConta, "sforpa", "nomforpa", "codforpa", txtAux(0).Text, "N")
                     If SQL = "" Then
-                        SQL = "insert into sforpa (codforpa, nomforpa, tipforpa) values (" & DBSet(txtaux(0).Text, "N") & ","
-                        SQL = SQL & DBSet(txtaux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ")"
+                        SQL = "insert into sforpa (codforpa, nomforpa, tipforpa) values (" & DBSet(txtAux(0).Text, "N") & ","
+                        SQL = SQL & DBSet(txtAux(1).Text, "T") & "," & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N") & ")"
                         
                         ConnConta.Execute SQL
                     Else
-                        SQL = "update sforpa set nomforpa = " & DBSet(txtaux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
-                        SQL = SQL & " where codforpa = " & DBSet(txtaux(0).Text, "N")
+                        SQL = "update sforpa set nomforpa = " & DBSet(txtAux(1).Text, "T") & ", tipforpa = " & DBSet(Combo1(0).ItemData(Combo1(0).ListIndex), "N")
+                        SQL = SQL & " where codforpa = " & DBSet(txtAux(0).Text, "N")
                         
                         ConnConta.Execute SQL
                     End If
@@ -1037,6 +1037,15 @@ End Sub
 Private Sub Combo1_KeyPress(Index As Integer, KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
+
+Private Sub Combo1_GotFocus(Index As Integer)
+    If Modo = 1 Then Combo1(Index).BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus(Index As Integer)
+    If Combo1(Index).BackColor = vbLightBlue Then Combo1(Index).BackColor = vbWhite
+End Sub
+
 
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
@@ -1212,45 +1221,45 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtaux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 
 Private Sub txtAux_LostFocus(Index As Integer)
-    If Not PerderFocoGnral(txtaux(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
     
     Select Case Index
         Case 0, 2, 3, 4
-            PonerFormatoEntero txtaux(Index)
+            PonerFormatoEntero txtAux(Index)
         Case 1
-            txtaux(Index).Text = UCase(txtaux(Index).Text)
+            txtAux(Index).Text = UCase(txtAux(Index).Text)
     End Select
     
 End Sub
 
 Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
+Dim B As Boolean
 Dim SQL As String
 Dim Mens As String
 
 
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         If ExisteCP(txtaux(0)) Then b = False
+         If ExisteCP(txtAux(0)) Then B = False
     End If
     
     'Comprobaciones de TESORERIA
     If Modo = 4 Then
         'Estoy modificando
-        If Not PuedeModificarFPenContab Then b = False
+        If Not PuedeModificarFPenContab Then B = False
     End If
     
     
     
-    DatosOK = b
+    DatosOK = B
 End Function
 
 Private Sub CargaCombo()
@@ -1365,9 +1374,9 @@ Dim vSeccion As CSeccion
         
                 NumRegElim = 0
                 If vParamAplic.ContabilidadNueva Then
-                    cad = "Select count(*) from cobros where codforpa=" & txtaux(0).Text
+                    cad = "Select count(*) from cobros where codforpa=" & txtAux(0).Text
                 Else
-                    cad = "Select count(*) from scobro where codforpa=" & txtaux(0).Text
+                    cad = "Select count(*) from scobro where codforpa=" & txtAux(0).Text
                 End If
                 
                 miRsAux.Open cad, ConnConta, adOpenForwardOnly, adLockPessimistic
@@ -1376,9 +1385,9 @@ Dim vSeccion As CSeccion
                 
                 
                 If vParamAplic.ContabilidadNueva Then
-                    cad = "Select count(*) from pagos where codforpa=" & txtaux(0).Text
+                    cad = "Select count(*) from pagos where codforpa=" & txtAux(0).Text
                 Else
-                    cad = "Select count(*) from spagop where codforpa=" & txtaux(0).Text
+                    cad = "Select count(*) from spagop where codforpa=" & txtAux(0).Text
                 End If
                 
                 

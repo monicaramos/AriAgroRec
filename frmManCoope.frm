@@ -620,7 +620,7 @@ Begin VB.Form frmManCoope
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   2
       Left            =   6210
       MaxLength       =   6
@@ -642,7 +642,7 @@ Begin VB.Form frmManCoope
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   240
       MaxLength       =   2
@@ -757,7 +757,7 @@ Begin VB.Form frmManCoope
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   1215
       MaxLength       =   40
@@ -1256,7 +1256,7 @@ Dim I As Integer
     
     ' ********************************************************
 
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -1367,7 +1367,7 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
 
-    LLamaLineas DataGrid1.Top + 250, 1 '206, 1
+    LLamaLineas DataGrid1.Top + 240, 1 '206, 1
     
     ' *** posar el foco al 1r camp visible que siga PK ***
     PonerFoco txtAux(0)
@@ -1813,7 +1813,7 @@ End Sub
 
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)

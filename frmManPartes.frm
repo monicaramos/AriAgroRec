@@ -2497,12 +2497,12 @@ Dim anc As Single
         
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If
@@ -3112,11 +3112,11 @@ End Sub
 
 
 Private Sub frmCua_DatoSeleccionado(CadenaSeleccion As String)
-Dim SQL As String
+Dim Sql As String
     Text1(2).Text = RecuperaValor(CadenaSeleccion, 1)
     
-    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(RecuperaValor(CadenaSeleccion, 2), "N")
-    Text2(2).Text = DevuelveValor(SQL)
+    Sql = "select nomcapat from rcapataz where codcapat = " & DBSet(RecuperaValor(CadenaSeleccion, 2), "N")
+    Text2(2).Text = DevuelveValor(Sql)
 
 End Sub
 
@@ -3253,7 +3253,7 @@ End Sub
 
 Private Sub mnInforme_Click()
 Dim Capataz As String
-Dim SQL As String
+Dim Sql As String
     
     If vParamAplic.Cooperativa = 16 Then
     
@@ -3263,9 +3263,9 @@ Dim SQL As String
         frmListNomina.txtCodigo(70) = Text1(1).Text
         frmListNomina.txtCodigo(71) = Text1(1).Text
         
-        SQL = DevuelveValor("select codcapat from rcuadrilla where codcuadrilla = " & DBSet(Text1(2).Text, "N"))
-        If SQL = "0" Then SQL = ""
-        Capataz = SQL
+        Sql = DevuelveValor("select codcapat from rcuadrilla where codcuadrilla = " & DBSet(Text1(2).Text, "N"))
+        If Sql = "0" Then Sql = ""
+        Capataz = Sql
         
         frmListNomina.txtCodigo(72) = Capataz
         frmListNomina.txtNombre(72) = DevuelveValor("select nomcapat from rcapataz where codcapat = " & Capataz)
@@ -3291,7 +3291,7 @@ End Sub
 
 Private Sub BotonRecalcularImportes()
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Capataz As Long
@@ -3316,7 +3316,7 @@ End Sub
 
 Private Sub BotonTraerEntradas()
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Capataz As Long
@@ -3333,7 +3333,7 @@ End Sub
 
 Private Function TraerEntradas() As Boolean
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
 Dim Sql4 As String
@@ -3374,96 +3374,96 @@ Dim NumF As String
         conn.BeginTrans
         
         ' borramos los registros de horas que hubieran
-        SQL = "delete from horas where nroparte = " & Data1.Recordset.Fields(0).Value
+        Sql = "delete from horas where nroparte = " & Data1.Recordset.Fields(0).Value
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         ' borramos los registros de rpartes_trabajador que hubieran
         ' son los que tienen codconcep = 0
-        SQL = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-        SQL = SQL & " and automatico = 1 "
+        Sql = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+        Sql = Sql & " and automatico = 1 "
         
-        conn.Execute SQL
+        conn.Execute Sql
     
         cad = "select codcapat from rcuadrilla where codcuadrilla = " & Data1.Recordset.Fields(2).Value
         Capataz = DevuelveValor(cad)
         
         ' borramos anteriormente los registros de rpartes_variedad que hubieran
-        SQL = "delete from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
-        conn.Execute SQL
+        Sql = "delete from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
+        conn.Execute Sql
         
         ' insertamos en rpartes_variedad
-        SQL = "select " & Data1.Recordset.Fields(0).Value & ",rhisfruta_entradas.numnotac, rhisfruta.codvarie, rhisfruta_entradas.horastra, "
+        Sql = "select " & Data1.Recordset.Fields(0).Value & ",rhisfruta_entradas.numnotac, rhisfruta.codvarie, rhisfruta_entradas.horastra, "
         
         '[Monica]26/07/2010 si es picassent sacamos los kilostra
         '[Monica]19/11/2010 si es alzira tambien sacamos los kilostra
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 4 Or vParamAplic.Cooperativa = 16 Then
-            SQL = SQL & " rhisfruta_entradas.kilostra kilosnet " ' en kilosnet tenemos los kilostra
+            Sql = Sql & " rhisfruta_entradas.kilostra kilosnet " ' en kilosnet tenemos los kilostra
         Else
-            SQL = SQL & " rhisfruta_entradas.kilosnet kilosnet "
+            Sql = Sql & " rhisfruta_entradas.kilosnet kilosnet "
         End If
         '[Monica]27/12/2016: añado las cajas de todas las tablas
-        SQL = SQL & ", rhisfruta_entradas.numcajon "
+        Sql = Sql & ", rhisfruta_entradas.numcajon "
         
-        SQL = SQL & " from rhisfruta_entradas, rhisfruta "
-        SQL = SQL & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
-        SQL = SQL & " and codcapat = " & DBSet(Capataz, "N")
-        SQL = SQL & " and rhisfruta.numalbar = rhisfruta_entradas.numalbar "
+        Sql = Sql & " from rhisfruta_entradas, rhisfruta "
+        Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
+        Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
+        Sql = Sql & " and rhisfruta.numalbar = rhisfruta_entradas.numalbar "
         
         '[Monica]26/07/2010: añadido si es picassent tenemos que sacar los kilos sin clasificar
         If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
-            SQL = SQL & " union "
-            SQL = SQL & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra,"
-            SQL = SQL & " rclasifica.kilostra kilosnet " ' los kilostra
+            Sql = Sql & " union "
+            Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra,"
+            Sql = Sql & " rclasifica.kilostra kilosnet " ' los kilostra
             '[Monica]27/12/2016: añado las cajas de todas las tablas
-            SQL = SQL & ", rclasifica.numcajon "
+            Sql = Sql & ", rclasifica.numcajon "
             
-            SQL = SQL & " from rclasifica "
-            SQL = SQL & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
-            SQL = SQL & " and codcapat = " & DBSet(Capataz, "N")
+            Sql = Sql & " from rclasifica "
+            Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
+            Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
         End If
         
         '[Monica]25/09/2012: añadido si es Catadau tenemos que sacar los kilos sin clasificar
         If vParamAplic.Cooperativa = 0 Then
-            SQL = SQL & " union "
-            SQL = SQL & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
-            SQL = SQL & " rclasifica.kilosnet kilosnet " ' los kilostra
+            Sql = Sql & " union "
+            Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
+            Sql = Sql & " rclasifica.kilosnet kilosnet " ' los kilostra
             '[Monica]27/12/2016: añado las cajas de todas las tablas
-            SQL = SQL & ", rclasifica.numcajon "
-            SQL = SQL & " from rclasifica "
-            SQL = SQL & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
-            SQL = SQL & " and codcapat = " & DBSet(Capataz, "N")
+            Sql = Sql & ", rclasifica.numcajon "
+            Sql = Sql & " from rclasifica "
+            Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
+            Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
         End If
         
         '[Monica]12/12/2012: añadido si es Alzira tenemos que sacar los kilos sin clasificar pero netos
         If vParamAplic.Cooperativa = 4 Then
-            SQL = SQL & " union "
-            SQL = SQL & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
-            SQL = SQL & " rclasifica.kilosnet kilosnet " ' los kilostra
+            Sql = Sql & " union "
+            Sql = Sql & "select " & Data1.Recordset.Fields(0).Value & ",rclasifica.numnotac, rclasifica.codvarie, rclasifica.horastra, "
+            Sql = Sql & " rclasifica.kilosnet kilosnet " ' los kilostra
             '[Monica]27/12/2016: añado las cajas de todas las tablas
-            SQL = SQL & ", rclasifica.numcajon "
-            SQL = SQL & " from rclasifica "
-            SQL = SQL & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
-            SQL = SQL & " and codcapat = " & DBSet(Capataz, "N")
+            Sql = Sql & ", rclasifica.numcajon "
+            Sql = Sql & " from rclasifica "
+            Sql = Sql & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
+            Sql = Sql & " and codcapat = " & DBSet(Capataz, "N")
         End If
         
-        SQL = SQL & " order by 1, 2, 3 "
+        Sql = Sql & " order by 1, 2, 3 "
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         cad = ""
         NumF = ""
         While Not Rs.EOF
             ' solo si no está insertada la nota de campo en otro parte la insertamos de nuevas
-            SQL = "select count(*) from rpartes_variedad where nroparte <> " & Data1.Recordset.Fields(0).Value
-            SQL = SQL & " and numnotac = " & DBSet(Rs!NumNotac, "N")
+            Sql = "select count(*) from rpartes_variedad where nroparte <> " & Data1.Recordset.Fields(0).Value
+            Sql = Sql & " and numnotac = " & DBSet(Rs!NumNotac, "N")
             
-            If TotalRegistros(SQL) = 0 Then
+            If TotalRegistros(Sql) = 0 Then
                 NumF = SugerirCodigoSiguienteStr("rpartes_variedad", "numlinea", "nroparte = " & Data1.Recordset.Fields(0))
                 cad = "insert into rpartes_variedad (nroparte, numlinea, numnotac, codvarie, horastra, kilosrec, numcajon) values "
                 cad = cad & "(" & Data1.Recordset.Fields(0) & "," & DBSet(NumF, "N") & "," & DBSet(Rs!NumNotac, "N") & ","
-                cad = cad & DBSet(Rs!codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Numcajon, "N") & ")"
+                cad = cad & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!horastra, "N") & "," & DBSet(Rs!KilosNet, "N") & "," & DBSet(Rs!Numcajon, "N") & ")"
                 
                 conn.Execute cad
             End If
@@ -3491,28 +3491,28 @@ eBotonTraerEntradas:
 End Function
 
 Function SecuenciaTrabajadores() As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo eSecuenciaTrabajadores
 
 
-    SQL = "select distinct codtraba from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+    Sql = "select distinct codtraba from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    SQL = ""
+    Sql = ""
     While Not Rs.EOF
-        SQL = SQL & DBSet(Rs!CodTraba, "N") & ","
+        Sql = Sql & DBSet(Rs!CodTraba, "N") & ","
         
         Rs.MoveNext
     Wend
     Set Rs = Nothing
     
-    If SQL <> "" Then SQL = Mid(SQL, 1, Len(SQL) - 1)
+    If Sql <> "" Then Sql = Mid(Sql, 1, Len(Sql) - 1)
     
-    SecuenciaTrabajadores = SQL
+    SecuenciaTrabajadores = Sql
     Exit Function
     
 eSecuenciaTrabajadores:
@@ -3521,7 +3521,7 @@ End Function
 
 
 Function RecalcularImportes() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql4 As String
 Dim Rs As ADODB.Recordset
@@ -3642,40 +3642,40 @@ Dim Importe As Currency
         
         ' borramos los registros de rpartes_trabajador que hubieran
         ' son los que tienen codconcep = 0
-        SQL = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-        SQL = SQL & " and automatico = 1 "
+        Sql = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+        Sql = Sql & " and automatico = 1 "
         '[Monica]01/03/2012: excluimos del borrado los que he modificado
-        SQL = SQL & " and modificado = 0 "
-        conn.Execute SQL
+        Sql = Sql & " and modificado = 0 "
+        conn.Execute Sql
         
         
         ' insertamos en rpartes_trabajador: todos los trabajadores de la cuadrilla
         ' con todas las variedades de las entradas
-        SQL = "select codvarie, sum(kilosrec) as kilosrec from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
-        SQL = SQL & " group by 1 order by 1 "
+        Sql = "select codvarie, sum(kilosrec) as kilosrec from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
+        Sql = Sql & " group by 1 order by 1 "
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             '[Monica]01/03/2012: los kilos deben ser menos los de los registros modificados
             Sql4 = "select sum(kilosrec) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
             KilosInicio = DevuelveValor(Sql4)
             KilosRec = DBLet(Rs!KilosRec, "N") - KilosInicio
         
             '[Monica]01/03/2012: vemos cuantos trabajadores hemos modificado para no realizar el prorrateo
             Sql4 = "select count(*) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
             Sql4 = Sql4 & " and modificado = 1 "
             
             NroTrabajadores2 = NroTrabajadores - TotalRegistros(Sql4)
         
             '[Monica]29/02/2012: Para el caso de Catadau el precio es eursegsoc
             If vParamAplic.Cooperativa = 0 Then
-                Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                Precio = DevuelveValor("select eursegsoc from variedades where codvarie = " & DBSet(Rs!Codvarie, "N"))
             Else
-                Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!codvarie, "N"))
+                Precio = DevuelveValor("select eurdesta from variedades where codvarie = " & DBSet(Rs!Codvarie, "N"))
             End If
             ' si es Picassent
             If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 0 Or vParamAplic.Cooperativa = 16 Then
@@ -3704,7 +3704,7 @@ Dim Importe As Currency
             While Not Rs2.EOF
                 '[Monica]01/03/2012: no insertamos los modificados
                 Sql4 = "select count(*) from rpartes_trabajador where codtraba = " & DBSet(Rs2!CodTraba, "N")
-                Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and modificado = 1 "
+                Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!Codvarie, "N") & " and modificado = 1 "
                 Sql4 = Sql4 & " and nroparte = " & Data1.Recordset.Fields(0).Value
                 If TotalRegistros(Sql4) = 0 Then
                 
@@ -3713,7 +3713,7 @@ Dim Importe As Currency
                     Sql2 = "insert into rpartes_trabajador (nroparte, numlinea, codtraba, codvarie, kilosrec, importe, automatico) values "
                     Sql2 = Sql2 & "(" & Data1.Recordset.Fields(0).Value & "," & DBSet(NumF, "N") & ","
                     Sql2 = Sql2 & DBSet(Rs2!CodTraba, "N") & ","
-                    Sql2 = Sql2 & DBSet(Rs!codvarie, "N") & ","
+                    Sql2 = Sql2 & DBSet(Rs!Codvarie, "N") & ","
                     Sql2 = Sql2 & DBSet(KilosTrab, "N") & "," & DBSet(ImporteTrab, "N") & ",1)"
                     
                     conn.Execute Sql2
@@ -3731,7 +3731,7 @@ Dim Importe As Currency
                 SqlNue = "select sum(importe) from ("
                 SqlNue = SqlNue & "select rhisfruta_clasif.codcalid, round(rcalidad.eurreccoop * sum(kilosnet),2) importe from rhisfruta_clasif, rcalidad "
                 SqlNue = SqlNue & " where rhisfruta_clasif.codvarie = rcalidad.codvarie and rhisfruta_clasif.codcalid = rcalidad.codcalid and "
-                SqlNue = SqlNue & " rhisfruta_clasif.codvarie = " & DBSet(Rs!codvarie, "N") & " and rhisfruta_clasif.numalbar in "
+                SqlNue = SqlNue & " rhisfruta_clasif.codvarie = " & DBSet(Rs!Codvarie, "N") & " and rhisfruta_clasif.numalbar in "
                 SqlNue = SqlNue & " (select rhisfruta_entradas.numalbar "
                 SqlNue = SqlNue & " from rhisfruta_entradas, rhisfruta "
                 SqlNue = SqlNue & " where fechaent = " & DBSet(Data1.Recordset.Fields(3), "F") ' fecentrada
@@ -3760,12 +3760,12 @@ Dim Importe As Currency
                 ImporteVariedad = DevuelveValor(SqlNue)
                 
                 Sql4 = "select sum(kilosrec) from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-                Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
                 KilosInicio = DevuelveValor(Sql4)
                 
                 ' A continuacion se prorratea el importe por los kilos de cada trabajador
                 SqlNue = "select numlinea, codtraba, kilosrec from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-                SqlNue = SqlNue & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                SqlNue = SqlNue & " and codvarie = " & DBSet(Rs!Codvarie, "N")
                 SqlNue = SqlNue & " order by 1"
                 
                 ImpTot = 0
@@ -3779,7 +3779,7 @@ Dim Importe As Currency
             
                     Sql5 = "update rpartes_trabajador set importe = " & DBSet(ImporteTrab, "N")
                     Sql5 = Sql5 & " where nroparte = " & Data1.Recordset.Fields(0).Value & " and codtraba = " & DBSet(Rs2!CodTraba, "N")
-                    Sql5 = Sql5 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql5 = Sql5 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
                     Sql5 = Sql5 & " and numlinea = " & DBSet(Rs2!numlinea, "N")
                     
                     conn.Execute Sql5
@@ -3808,10 +3808,10 @@ Dim Importe As Currency
         
         ' insertamos en rpartes_trabajador: todos los trabajadores de la cuadrilla
         ' con todas los gastos prorrateados del parte
-        SQL = "select numlinea, codgasto, importe from rpartes_gastos where nroparte=" & Data1.Recordset.Fields(0).Value
+        Sql = "select numlinea, codgasto, importe from rpartes_gastos where nroparte=" & Data1.Recordset.Fields(0).Value
         
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
         
@@ -3851,9 +3851,9 @@ Dim Importe As Currency
         
         
         ' insertamos en rpartes_trabajador: el plus del capataz
-        SQL = "select codtraba, pluscapataz from straba where " & cadSelect
+        Sql = "select codtraba, pluscapataz from straba where " & cadSelect
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
         While Not Rs.EOF
             If DBLet(Rs!PlusCapataz, "N") <> 0 Then
@@ -3866,9 +3866,9 @@ Dim Importe As Currency
                 
                 If vParamAplic.Cooperativa = 16 Then
                     Dim NroCapataces As Integer
-                    SQL = "select count(*) from straba where " & cadSelect & " and pluscapataz <> 0"
+                    Sql = "select count(*) from straba where " & cadSelect & " and pluscapataz <> 0"
                     
-                    NroCapataces = DevuelveValor(SQL)
+                    NroCapataces = DevuelveValor(Sql)
                     If NroCapataces > 0 Then
                         Importe = Round2((DBLet(Rs!PlusCapataz, "N") * (NroTrabajadores - NroCapataces)) / NroCapataces, 2)
                     
@@ -3934,15 +3934,15 @@ End Sub
 
 Private Function BloqueaAlbxFac() As Boolean
 'bloquea todos los albaranes de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaAlb
     
     BloqueaAlbxFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM scafac1 "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM scafac1 "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaAlbxFac = True
 
 EBloqueaAlb:
@@ -3952,15 +3952,15 @@ End Function
 
 Private Function BloqueaLineasFac() As Boolean
 'bloquea todas las lineas de la factura
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EBloqueaLin
 
     BloqueaLineasFac = False
     'bloquear cabecera albaranes x factura
-    SQL = "select * FROM slifac "
-    SQL = SQL & ObtenerWhereCP(True) & " FOR UPDATE"
-    conn.Execute SQL, , adCmdText
+    Sql = "select * FROM slifac "
+    Sql = Sql & ObtenerWhereCP(True) & " FOR UPDATE"
+    conn.Execute Sql, , adCmdText
     BloqueaLineasFac = True
 
 EBloqueaLin:
@@ -4026,7 +4026,7 @@ End Sub
 Private Sub Text1_LostFocus(Index As Integer)
 Dim devuelve As String
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 
         
     If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
@@ -4061,8 +4061,8 @@ Dim SQL As String
                     End If
                     PonerFoco Text1(Index)
                 Else
-                    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(Index).Text, "N")
-                    Text2(Index) = DevuelveValor(SQL)
+                    Sql = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(Index).Text, "N")
+                    Text2(Index) = DevuelveValor(Sql)
                 End If
             End If
     End Select
@@ -4188,7 +4188,7 @@ Private Sub PonerCadenaBusqueda()
         Screen.MousePointer = vbDefault
         If Modo = 1 Then
             PonerFoco Text1(kCampo)
-'            Text1(0).BackColor = vbYellow
+'            Text1(0).BackColor = vblightblue
         End If
         Exit Sub
     Else
@@ -4247,7 +4247,7 @@ End Sub
 Private Sub PonerCampos()
 Dim BrutoFac As Single
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
 
@@ -4256,8 +4256,8 @@ Dim SQL As String
     
 '    FormatoDatosTotales
     Text2(2).Text = PonerNombreDeCod(Text1(2), "rcuadrilla", "codcapat")
-    SQL = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(2).Text, "N")
-    Text2(2).Text = DevuelveValor(SQL)
+    Sql = "select nomcapat from rcapataz where codcapat = " & DBSet(Text2(2).Text, "N")
+    Text2(2).Text = DevuelveValor(Sql)
     
     Modo = 2
     
@@ -4592,7 +4592,7 @@ Dim frmPartesCajas As frmManPartesCajas
 End Sub
 
 Private Sub RepartoxCajas()
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim TotalCajas As Currency
 Dim TotalImporte As Currency
@@ -4609,17 +4609,17 @@ Dim Importe As Currency
 Dim Kilos As Long
 
     
-    SQL = "select codvarie, sum(coalesce(numcajas,0)) numcajas, sum(coalesce(kilosrec,0)) kilos, sum(coalesce(importe,0)) importe from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
-    SQL = SQL & " group by 1 order by 1"
+    Sql = "select codvarie, sum(coalesce(numcajas,0)) numcajas, sum(coalesce(kilosrec,0)) kilos, sum(coalesce(importe,0)) importe from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
+    Sql = Sql & " group by 1 order by 1"
     
-    Sql2 = "select sum(numcajas) from (" & SQL & ") aaaaa"
+    Sql2 = "select sum(numcajas) from (" & Sql & ") aaaaa"
     If DevuelveValor(Sql2) = 0 Then Exit Sub
     
     
     
     Set Rs = New ADODB.Recordset
     
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     While Not Rs.EOF
         TotalCajas = DBLet(Rs.Fields(1))
         TotalKilos = DBLet(Rs.Fields(2))
@@ -4629,7 +4629,7 @@ Dim Kilos As Long
         TKilos = 0
         
         Sql2 = "select * from rpartes_trabajador where nroparte = " & DBSet(Text1(0).Text, "N")
-        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!codvarie, "N") & " order by numlinea "
+        Sql2 = Sql2 & " and codvarie = " & DBSet(Rs!Codvarie, "N") & " order by numlinea "
         
         Set Rs2 = New ADODB.Recordset
         
@@ -4638,12 +4638,12 @@ Dim Kilos As Long
             Importe = Round2(DBLet(Rs2!NumCajas, "N") * TotalImporte / TotalCajas, 2)
             Kilos = Round2(DBLet(Rs2!NumCajas, "N") * TotalKilos / TotalCajas, 0)
             
-            SQL = "update rpartes_trabajador set importe = " & DBSet(Importe, "N")
-            SQL = SQL & " , kilosrec = " & DBSet(Kilos, "N")
-            SQL = SQL & " where nroparte = " & DBSet(Text1(0).Text, "N")
-            SQL = SQL & " and numlinea = " & DBSet(Rs2!numlinea, "N")
+            Sql = "update rpartes_trabajador set importe = " & DBSet(Importe, "N")
+            Sql = Sql & " , kilosrec = " & DBSet(Kilos, "N")
+            Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
+            Sql = Sql & " and numlinea = " & DBSet(Rs2!numlinea, "N")
             
-            conn.Execute SQL
+            conn.Execute Sql
             
             TImporte = TImporte + Importe
             TKilos = TKilos + Kilos
@@ -4655,12 +4655,12 @@ Dim Kilos As Long
         Set Rs2 = Nothing
         
         If TImporte <> TotalImporte Or TKilos <> TotalKilos Then
-            SQL = "update rpartes_trabajador set importe = importe + " & DBSet(TotalImporte - TImporte, "N")
-            SQL = SQL & ", kilosrec = kilosrec + " & DBSet(TotalKilos - TKilos, "N")
-            SQL = SQL & " where nroparte = " & DBSet(Text1(0).Text, "N")
-            SQL = SQL & " and numlinea = " & DBSet(NumLin, "N")
+            Sql = "update rpartes_trabajador set importe = importe + " & DBSet(TotalImporte - TImporte, "N")
+            Sql = Sql & ", kilosrec = kilosrec + " & DBSet(TotalKilos - TKilos, "N")
+            Sql = Sql & " where nroparte = " & DBSet(Text1(0).Text, "N")
+            Sql = Sql & " and numlinea = " & DBSet(NumLin, "N")
             
-            conn.Execute SQL
+            conn.Execute Sql
         End If
     
         Rs.MoveNext
@@ -4676,7 +4676,7 @@ End Sub
 
 Private Sub BotonEliminarLinea(Index As Integer)
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EEliminarLinea
 
@@ -4731,9 +4731,9 @@ Dim SQL As String
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Adoaux(0).Recordset.AbsolutePosition
                 TerminaBloquear
-                SQL = "delete from rpartes_gastos where nroparte = " & Adoaux(0).Recordset.Fields(0)
-                SQL = SQL & " and numlinea = " & Adoaux(0).Recordset.Fields(1)
-                conn.Execute SQL
+                Sql = "delete from rpartes_gastos where nroparte = " & Adoaux(0).Recordset.Fields(0)
+                Sql = Sql & " and numlinea = " & Adoaux(0).Recordset.Fields(1)
+                conn.Execute Sql
                 
                 SituarDataTrasEliminar Adoaux(0), NumRegElim
                 
@@ -4754,9 +4754,9 @@ Dim SQL As String
                 Screen.MousePointer = vbHourglass
                 NumRegElim = Data2.Recordset.AbsolutePosition
                 TerminaBloquear
-                SQL = "delete from rpartes_variedad where nroparte = " & Data2.Recordset.Fields(0)
-                SQL = SQL & " and numlinea = " & Data2.Recordset.Fields(1)
-                conn.Execute SQL
+                Sql = "delete from rpartes_variedad where nroparte = " & Data2.Recordset.Fields(0)
+                Sql = Sql & " and numlinea = " & Data2.Recordset.Fields(1)
+                conn.Execute Sql
                 
                 SituarDataTrasEliminar Data2, NumRegElim
                 
@@ -4846,7 +4846,7 @@ End Sub
 Private Sub CargaGrid(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, enlaza As Boolean)
 Dim B As Boolean
 Dim Opcion As Byte
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo ECargaGrid
 
@@ -4862,8 +4862,8 @@ Dim SQL As String
             Opcion = 4
     End Select
     
-    SQL = MontaSQLCarga(enlaza, Opcion)
-    CargaGridGnral vDataGrid, vData, SQL, PrimeraVez
+    Sql = MontaSQLCarga(enlaza, Opcion)
+    CargaGridGnral vDataGrid, vData, Sql, PrimeraVez
     
     vDataGrid.RowHeight = 270
     
@@ -4979,7 +4979,7 @@ Dim Capataz As String
 Dim CapatazParte  As String
 Dim numalbar As String
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
 
@@ -5003,10 +5003,10 @@ Dim Rs As ADODB.Recordset
                         PonerFoco txtAux(Index)
                     Else
                     
-                        SQL = "select codcapat, kilosnet, fechaent from rhisfruta_entradas where numnotac = " & DBSet(txtAux(Index), "N")
+                        Sql = "select codcapat, kilosnet, fechaent from rhisfruta_entradas where numnotac = " & DBSet(txtAux(Index), "N")
                         
                         Set Rs = New ADODB.Recordset
-                        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+                        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
                         
                         If Not Rs.EOF Then
                             Capataz = DBLet(Rs!codcapat, "N")
@@ -5061,7 +5061,7 @@ End Sub
 
 Private Sub txtAux2_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 
     'Quitar espacios en blanco
     If Not PerderFocoGnralLineas(txtAux2(Index), ModificaLineas) Then Exit Sub
@@ -5105,7 +5105,7 @@ End Sub
 
 
 Private Function Eliminar() As Boolean
-Dim SQL As String, LEtra As String, Sql2 As String
+Dim Sql As String, LEtra As String, Sql2 As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -5118,19 +5118,19 @@ Dim Mens As String
         
     'Eliminar en tablas de cabecera de albaran
     '------------------------------------------
-    SQL = " " & ObtenerWhereCP(True)
+    Sql = " " & ObtenerWhereCP(True)
     
     'Lineas de clasificacion (rpartes_gastos)
-    conn.Execute "Delete from rpartes_gastos " & SQL
+    conn.Execute "Delete from rpartes_gastos " & Sql
     
     'Lineas de incidencias de notas (rpartes_trabajador)
-    conn.Execute "Delete from rpartes_trabajador " & SQL
+    conn.Execute "Delete from rpartes_trabajador " & Sql
     
     'Lineas de entradas (rpartes_variedad)
-    conn.Execute "Delete from rpartes_variedad " & SQL
+    conn.Execute "Delete from rpartes_variedad " & Sql
 
     'Cabecera de partes (rpartes)
-    conn.Execute "Delete from " & NombreTabla & SQL
+    conn.Execute "Delete from " & NombreTabla & Sql
     
     'Decrementar contador si borramos el ult. palet
     Set vTipoMov = New CTiposMov
@@ -5153,7 +5153,7 @@ FinEliminar:
 End Function
 
 Private Function EliminarLinea(Indice As Integer) As Boolean
-Dim SQL As String, LEtra As String
+Dim Sql As String, LEtra As String
 Dim B As Boolean
 Dim vTipoMov As CTiposMov
 Dim Mens As String
@@ -5169,17 +5169,17 @@ Dim Mens As String
     Select Case Indice
         Case 0
             'Lineas de gastos individuales del trabajador (rpartes_trabajador)
-            SQL = " where nroparte = " & Data3.Recordset.Fields(0)
-            SQL = SQL & " and numlinea  = " & Data3.Recordset.Fields(1)
+            Sql = " where nroparte = " & Data3.Recordset.Fields(0)
+            Sql = Sql & " and numlinea  = " & Data3.Recordset.Fields(1)
             
-            conn.Execute "Delete from rpartes_trabajador " & SQL
+            conn.Execute "Delete from rpartes_trabajador " & Sql
         Case 1
             'Eliminar en tablas de rpartes_gastos
             '------------------------------------------
-            SQL = " where nroparte = " & Data3.Recordset.Fields(0)
-            SQL = SQL & " and numlinea = " & Data3.Recordset.Fields(1)
+            Sql = " where nroparte = " & Data3.Recordset.Fields(0)
+            Sql = Sql & " and numlinea = " & Data3.Recordset.Fields(1)
             
-            conn.Execute "Delete from rpartes_gastos " & SQL
+            conn.Execute "Delete from rpartes_gastos " & Sql
     End Select
     
 FinEliminar:
@@ -5231,13 +5231,13 @@ End Sub
 
 
 Private Function ObtenerWhereCP(conWhere As Boolean) As String
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = " nroparte= " & Text1(0).Text 'Data1.Recordset!numalbar 'Text1(0).Text
-    If conWhere Then SQL = " WHERE " & SQL
-    ObtenerWhereCP = SQL
+    Sql = " nroparte= " & Text1(0).Text 'Data1.Recordset!numalbar 'Text1(0).Text
+    If conWhere Then Sql = " WHERE " & Sql
+    ObtenerWhereCP = Sql
     
     If Err.Number <> 0 Then MuestraError Err.Number, "Obteniendo cadena WHERE.", Err.Description
 End Function
@@ -5252,57 +5252,57 @@ Private Function MontaSQLCarga(enlaza As Boolean, Opcion As Byte) As String
 ' Si ENLAZA -> Enlaza con el data1
 '           -> Si no lo cargamos sin enlazar a ningun campo
 '--------------------------------------------------------------------
-Dim SQL As String
+Dim Sql As String
     
     Select Case Opcion
     Case 1  ' rpartes_variedad
-        SQL = "SELECT rpartes_variedad.nroparte,rpartes_variedad.numlinea,rpartes_variedad.numnotac, "
+        Sql = "SELECT rpartes_variedad.nroparte,rpartes_variedad.numlinea,rpartes_variedad.numnotac, "
         If vParamAplic.Cooperativa = 16 Then
-            SQL = SQL & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.numcajon, rpartes_variedad.kilosrec "
+            Sql = Sql & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.numcajon, rpartes_variedad.kilosrec "
         Else
-            SQL = SQL & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.horastra, rpartes_variedad.kilosrec "
+            Sql = Sql & " rpartes_variedad.codvarie, variedades.nomvarie, rpartes_variedad.horastra, rpartes_variedad.kilosrec "
         End If
-        SQL = SQL & " FROM rpartes_variedad, variedades WHERE rpartes_variedad.codvarie = variedades.codvarie "
+        Sql = Sql & " FROM rpartes_variedad, variedades WHERE rpartes_variedad.codvarie = variedades.codvarie "
         
     Case 2  ' rpartes_trabajador
-        SQL = "SELECT rpartes_trabajador.nroparte, rpartes_trabajador.numlinea, rpartes_trabajador.codtraba, straba.nomtraba, rpartes_trabajador.codgasto, "
-        SQL = SQL & " rconcepgastonom.nomgasto, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.numcajas, rpartes_trabajador.kilosrec, rpartes_trabajador.horastra, rpartes_trabajador.importe, rpartes_trabajador.modificado "
-        SQL = SQL & " FROM ((rpartes_trabajador INNER JOIN straba ON rpartes_trabajador.codtraba = straba.codtraba) "
-        SQL = SQL & " LEFT JOIN rconcepgastonom ON rpartes_trabajador.codgasto = rconcepgastonom.codgasto) "
-        SQL = SQL & " LEFT JOIN variedades ON rpartes_trabajador.codvarie = variedades.codvarie"
-        SQL = SQL & " WHERE (1=1)"
+        Sql = "SELECT rpartes_trabajador.nroparte, rpartes_trabajador.numlinea, rpartes_trabajador.codtraba, straba.nomtraba, rpartes_trabajador.codgasto, "
+        Sql = Sql & " rconcepgastonom.nomgasto, rpartes_trabajador.codvarie, variedades.nomvarie, rpartes_trabajador.numcajas, rpartes_trabajador.kilosrec, rpartes_trabajador.horastra, rpartes_trabajador.importe, rpartes_trabajador.modificado "
+        Sql = Sql & " FROM ((rpartes_trabajador INNER JOIN straba ON rpartes_trabajador.codtraba = straba.codtraba) "
+        Sql = Sql & " LEFT JOIN rconcepgastonom ON rpartes_trabajador.codgasto = rconcepgastonom.codgasto) "
+        Sql = Sql & " LEFT JOIN variedades ON rpartes_trabajador.codvarie = variedades.codvarie"
+        Sql = Sql & " WHERE (1=1)"
         
     Case 3  ' rpartes_gastos
-        SQL = "SELECT rpartes_gastos.nroparte, rpartes_gastos.numlinea, rpartes_gastos.codgasto, rconcepgastonom.nomgasto, rpartes_gastos.importe "
-        SQL = SQL & " FROM rpartes_gastos, rconcepgastonom "
-        SQL = SQL & " WHERE rpartes_gastos.codgasto = rconcepgastonom.codgasto "
+        Sql = "SELECT rpartes_gastos.nroparte, rpartes_gastos.numlinea, rpartes_gastos.codgasto, rconcepgastonom.nomgasto, rpartes_gastos.importe "
+        Sql = Sql & " FROM rpartes_gastos, rconcepgastonom "
+        Sql = Sql & " WHERE rpartes_gastos.codgasto = rconcepgastonom.codgasto "
         
     Case 4  ' resumen
-        SQL = "select rpartes_trabajador.codvarie, variedades.nomvarie, sum(numcajas) cajas, sum(kilosrec) kilos , sum(importe) importe"
-        SQL = SQL & "  from rpartes_trabajador, variedades "
-        SQL = SQL & " where rpartes_trabajador.codvarie = variedades.codvarie "
+        Sql = "select rpartes_trabajador.codvarie, variedades.nomvarie, sum(numcajas) cajas, sum(kilosrec) kilos , sum(importe) importe"
+        Sql = Sql & "  from rpartes_trabajador, variedades "
+        Sql = Sql & " where rpartes_trabajador.codvarie = variedades.codvarie "
         
         
     End Select
     
     If enlaza Then
-        SQL = SQL & " and " & ObtenerWhereCP(False)
+        Sql = Sql & " and " & ObtenerWhereCP(False)
     Else
-        SQL = SQL & " and nroparte = -1"
+        Sql = Sql & " and nroparte = -1"
     End If
     Select Case Opcion
         Case 1
-            SQL = SQL & " ORDER BY nroparte, numlinea "
+            Sql = Sql & " ORDER BY nroparte, numlinea "
         Case 2
-            SQL = SQL & " ORDER BY nroparte, codtraba, codvarie "
+            Sql = Sql & " ORDER BY nroparte, codtraba, codvarie "
         Case 3
-            SQL = SQL & " ORDER BY nroparte, numlinea "
+            Sql = Sql & " ORDER BY nroparte, numlinea "
         Case 4
-            SQL = SQL & " group by 1, 2 "
-            SQL = SQL & " ORDER BY 1 "
+            Sql = Sql & " group by 1, 2 "
+            Sql = Sql & " ORDER BY 1 "
             
     End Select
-    MontaSQLCarga = SQL
+    MontaSQLCarga = Sql
 End Function
 
 
@@ -5565,16 +5565,16 @@ End Function
 
 Private Sub InsertarCabecera()
 Dim vTipoMov As CTiposMov 'Clase Tipo Movimiento
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EInsertarCab
     
     Set vTipoMov = New CTiposMov
     If vTipoMov.Leer(CodTipoMov) Then
         Text1(0).Text = vTipoMov.ConseguirContador(CodTipoMov)
-        SQL = CadenaInsertarDesdeForm(Me)
-        If SQL <> "" Then
-            If InsertarOferta(SQL, vTipoMov) Then
+        Sql = CadenaInsertarDesdeForm(Me)
+        If Sql <> "" Then
+            If InsertarOferta(Sql, vTipoMov) Then
                 CadenaConsulta = "Select * from " & NombreTabla & ObtenerWhereCP(True) & Ordenacion
                 PonerCadenaBusqueda
                 PonerModo 2
@@ -5916,7 +5916,7 @@ End Sub
 
 Private Function DatosOkLlin(nomframe As String) As Boolean
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim Cant As Integer
 Dim Mens As String
@@ -6019,17 +6019,17 @@ End Sub
 
 
 Private Function SePuedeModificarLinea(Parte As String, Linea As String) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Valor As Variant
 Dim Rs As ADODB.Recordset
 
     SePuedeModificarLinea = False
     
-    SQL = "select codvarie, codgasto from rpartes_trabajador where nroparte = " & DBSet(Parte, "N")
-    SQL = SQL & " and numlinea = " & DBSet(Linea, "N")
+    Sql = "select codvarie, codgasto from rpartes_trabajador where nroparte = " & DBSet(Parte, "N")
+    Sql = Sql & " and numlinea = " & DBSet(Linea, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
     
     If Not Rs.EOF Then
         ' antes RS.Fields(0).Value > 0
@@ -6044,22 +6044,22 @@ End Function
 
 
 Private Function EstaPartePagado(Numparte) As Boolean
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select count(*) from horas where nroparte = " & DBLet(Numparte, "N")
-    SQL = SQL & " and fecharec is not null"
+    Sql = "select count(*) from horas where nroparte = " & DBLet(Numparte, "N")
+    Sql = Sql & " and fecharec is not null"
 
-    EstaPartePagado = (TotalRegistros(SQL) <> 0)
+    EstaPartePagado = (TotalRegistros(Sql) <> 0)
     
 End Function
 
 
 Private Function EstaParteenHoras(Numparte) As Boolean
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select count(*) from horas where nroparte = " & DBLet(Numparte, "N")
+    Sql = "select count(*) from horas where nroparte = " & DBLet(Numparte, "N")
 
-    EstaParteenHoras = (TotalRegistros(SQL) <> 0)
+    EstaParteenHoras = (TotalRegistros(Sql) <> 0)
     
 End Function
 
@@ -6088,7 +6088,7 @@ End Sub
 
 Private Function RecalcularImportesHoras() As Boolean
 Dim cad As String
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Sql4 As String
 Dim NroHoras As Currency
@@ -6128,8 +6128,8 @@ Dim KilosTrab As Long
     If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
         'mostramos cuales son los trabajadores de la cuadrilla que han de seleccionar para hacer el reparto
         
-        SQL = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
-        conn.Execute SQL
+        Sql = "delete from rpartes_trabajador where nroparte = " & Data1.Recordset.Fields(0).Value
+        conn.Execute Sql
 
         Sql2 = "delete from tmpliquidacion where codusu = " & vUsu.Codigo
         conn.Execute Sql2
@@ -6141,22 +6141,22 @@ Dim KilosTrab As Long
         Set frmTMP = Nothing
     
         'hacemos el reparto de kilos segun las horas que hay introducidas
-        SQL = "select count(*) from tmpliquidacion where codusu = " & vUsu.Codigo
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from tmpliquidacion where codusu = " & vUsu.Codigo
+        If TotalRegistros(Sql) = 0 Then
             MsgBox "No hay trabajadores a repartir. No se ha realizado el proceso.", vbExclamation
             RecalcularImportesHoras = True
             Exit Function
         Else
-            SQL = "select codvarie, sum(kilosrec) as kilosrec from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
-            SQL = SQL & " group by 1 order by 1 "
+            Sql = "select codvarie, sum(kilosrec) as kilosrec from rpartes_variedad where nroparte = " & Data1.Recordset.Fields(0).Value
+            Sql = Sql & " group by 1 order by 1 "
             
-            TotalKilos = DevuelveValor("select sum(kilosrec) from (" & SQL & ") aaaaa ")
+            TotalKilos = DevuelveValor("select sum(kilosrec) from (" & Sql & ") aaaaa ")
             
             TotalHoras = DevuelveValor("select sum(gastos) from tmpliquidacion where codusu = " & vUsu.Codigo)
             TotalHoras = HorasDecimal(CStr(Horas(CStr(TotalHoras))))
             
             Set Rs = New ADODB.Recordset
-            Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             THorasVarie = 0
             While Not Rs.EOF
                 HorasVarie = Round2(DBLet(Rs!KilosRec, "N") * TotalHoras / TotalKilos, 2)
@@ -6186,15 +6186,15 @@ Dim KilosTrab As Long
                     End If
                    
                     SqlPre = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
-                    SqlPre = SqlPre & " where straba.codtraba = " & DBSet(Rs2!codvarie, "N") ' trabajador
+                    SqlPre = SqlPre & " where straba.codtraba = " & DBSet(Rs2!Codvarie, "N") ' trabajador
                     
                     Precio = DevuelveValor(SqlPre)
                     
                     ImporteTrab = Round2(HorasTrab * Precio, 2)
 
                     '[Monica]01/03/2012: no insertamos los modificados
-                    Sql4 = "select count(*) from rpartes_trabajador where codtraba = " & DBSet(Rs2!codvarie, "N") ' codigo de trabajador
-                    Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+                    Sql4 = "select count(*) from rpartes_trabajador where codtraba = " & DBSet(Rs2!Codvarie, "N") ' codigo de trabajador
+                    Sql4 = Sql4 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
                     Sql4 = Sql4 & " and nroparte = " & Data1.Recordset.Fields(0).Value
                     If TotalRegistros(Sql4) = 0 Then
 
@@ -6203,9 +6203,9 @@ Dim KilosTrab As Long
                         Sql2 = "insert into rpartes_trabajador (nroparte, numlinea, codtraba, codvarie, horastra, kilosrec, importe, automatico) values "
                         Sql2 = Sql2 & "(" & Data1.Recordset.Fields(0).Value & "," & DBSet(NumF, "N") & ","
                         ' este es el trabajador
-                        Sql2 = Sql2 & DBSet(Rs2!codvarie, "N") & ","
+                        Sql2 = Sql2 & DBSet(Rs2!Codvarie, "N") & ","
                         ' esta la variedad
-                        Sql2 = Sql2 & DBSet(Rs!codvarie, "N") & "," & DBSet(DecimalHoras(HorasTrab), "N") & ","
+                        Sql2 = Sql2 & DBSet(Rs!Codvarie, "N") & "," & DBSet(DecimalHoras(HorasTrab), "N") & ","
                         Sql2 = Sql2 & DBSet(KilosTrab, "N") & "," & DBSet(ImporteTrab, "N") & ",1)"
 'Decimalhoras(ImporteSinFormato(CStr(Format(HorasTrab, "##,##0.00"))))
                         conn.Execute Sql2

@@ -92,7 +92,7 @@ Begin VB.Form frmManTarifaETT
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   2
       Left            =   4350
       MaxLength       =   10
@@ -115,7 +115,7 @@ Begin VB.Form frmManTarifaETT
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   1380
       TabIndex        =   10
@@ -135,7 +135,7 @@ Begin VB.Form frmManTarifaETT
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   1
       Left            =   3270
       MaxLength       =   10
@@ -215,7 +215,7 @@ Begin VB.Form frmManTarifaETT
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   165
       MaxLength       =   6
@@ -550,7 +550,7 @@ Dim B As Boolean
     txtAux2(0).visible = Not B
     btnBuscar(0).visible = Not B
     
-    CmdAceptar.visible = Not B
+    cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
@@ -646,7 +646,7 @@ Private Sub BotonBuscar()
     For I = 0 To txtAux.Count - 1
         txtAux(I).Text = ""
     Next I
-    LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -712,7 +712,7 @@ Dim temp As Boolean
     If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rtarifaett where codvarie=" & adodc1.Recordset!codvarie & " and codigoett=" & DBSet(adodc1.Recordset!CodigoETT, "N")
+        SQL = "Delete from rtarifaett where codvarie=" & adodc1.Recordset!Codvarie & " and codigoett=" & DBSet(adodc1.Recordset!CodigoETT, "N")
         conn.Execute SQL
         CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1020,7 +1020,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

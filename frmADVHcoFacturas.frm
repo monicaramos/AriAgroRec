@@ -230,39 +230,39 @@ Begin VB.Form frmADVHcoFacturas
       TabCaption(1)   =   "Partes"
       TabPicture(1)   =   "frmADVHcoFacturas.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "FrameObserva"
+      Tab(1).Control(0)=   "FrameCuadrilla"
       Tab(1).Control(0).Enabled=   0   'False
-      Tab(1).Control(1)=   "DataGrid2"
+      Tab(1).Control(1)=   "txtAux3(4)"
       Tab(1).Control(1).Enabled=   0   'False
-      Tab(1).Control(2)=   "DataGrid1"
+      Tab(1).Control(2)=   "txtAux3(3)"
       Tab(1).Control(2).Enabled=   0   'False
-      Tab(1).Control(3)=   "txtAux(6)"
+      Tab(1).Control(3)=   "txtAux3(2)"
       Tab(1).Control(3).Enabled=   0   'False
-      Tab(1).Control(4)=   "txtAux(5)"
+      Tab(1).Control(4)=   "txtAux3(1)"
       Tab(1).Control(4).Enabled=   0   'False
-      Tab(1).Control(5)=   "txtAux(4)"
+      Tab(1).Control(5)=   "txtAux3(0)"
       Tab(1).Control(5).Enabled=   0   'False
-      Tab(1).Control(6)=   "cmdObserva"
+      Tab(1).Control(6)=   "txtAux(3)"
       Tab(1).Control(6).Enabled=   0   'False
-      Tab(1).Control(7)=   "txtAux(0)"
+      Tab(1).Control(7)=   "txtAux(2)"
       Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "txtAux(1)"
       Tab(1).Control(8).Enabled=   0   'False
-      Tab(1).Control(9)=   "txtAux(2)"
+      Tab(1).Control(9)=   "txtAux(0)"
       Tab(1).Control(9).Enabled=   0   'False
-      Tab(1).Control(10)=   "txtAux(3)"
+      Tab(1).Control(10)=   "cmdObserva"
       Tab(1).Control(10).Enabled=   0   'False
-      Tab(1).Control(11)=   "txtAux3(0)"
+      Tab(1).Control(11)=   "txtAux(4)"
       Tab(1).Control(11).Enabled=   0   'False
-      Tab(1).Control(12)=   "txtAux3(1)"
+      Tab(1).Control(12)=   "txtAux(5)"
       Tab(1).Control(12).Enabled=   0   'False
-      Tab(1).Control(13)=   "txtAux3(2)"
+      Tab(1).Control(13)=   "txtAux(6)"
       Tab(1).Control(13).Enabled=   0   'False
-      Tab(1).Control(14)=   "txtAux3(3)"
+      Tab(1).Control(14)=   "DataGrid1"
       Tab(1).Control(14).Enabled=   0   'False
-      Tab(1).Control(15)=   "txtAux3(4)"
+      Tab(1).Control(15)=   "DataGrid2"
       Tab(1).Control(15).Enabled=   0   'False
-      Tab(1).Control(16)=   "FrameCuadrilla"
+      Tab(1).Control(16)=   "FrameObserva"
       Tab(1).Control(16).Enabled=   0   'False
       Tab(1).ControlCount=   17
       Begin VB.Frame FrameCuadrilla 
@@ -2759,12 +2759,12 @@ Dim anc As Single
         
         'Si pasamos el control aqui lo ponemos en amarillo
         PonerFoco Text1(0)
-        Text1(0).BackColor = vbYellow
+        Text1(0).BackColor = vbLightBlue
     Else
         HacerBusqueda
         If Data1.Recordset.EOF Then
             Text1(kCampo).Text = ""
-            Text1(kCampo).BackColor = vbYellow
+            Text1(kCampo).BackColor = vbLightBlue
             PonerFoco Text1(kCampo)
         End If
     End If

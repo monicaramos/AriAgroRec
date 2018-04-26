@@ -145,7 +145,7 @@ Begin VB.Form frmConfTipoMov
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   3
       Left            =   4920
       MaxLength       =   3
@@ -168,7 +168,7 @@ Begin VB.Form frmConfTipoMov
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   2
       Left            =   3480
       MaxLength       =   7
@@ -190,7 +190,7 @@ Begin VB.Form frmConfTipoMov
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   1080
       MaxLength       =   30
@@ -212,7 +212,7 @@ Begin VB.Form frmConfTipoMov
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   240
       MaxLength       =   3
@@ -463,8 +463,25 @@ Private Sub CboMueveStock_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub Cbomuevestock_GotFocus()
+    If Modo = 1 Then CboMueveStock.BackColor = vbLightBlue
+End Sub
+
+Private Sub Cbomuevestock_LostFocus()
+    If CboMueveStock.BackColor = vbLightBlue Then CboMueveStock.BackColor = vbWhite
+End Sub
+
+
 Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
+End Sub
+
+Private Sub Combo1_GotFocus()
+    If Modo = 1 Then Combo1.BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus()
+    If Combo1.BackColor = vbLightBlue Then Combo1.BackColor = vbWhite
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -800,7 +817,7 @@ Private Sub BotonBuscar()
     txtAux(0).Text = "":    txtAux(1).Text = "": txtAux(2).Text = "": txtAux(3).Text = ""
     Combo1.ListIndex = -1
     CboMueveStock.ListIndex = -1
-    LLamaLineas DataGrid1.Top + 250, 1
+    LLamaLineas DataGrid1.Top + 240, 1
     PonerFoco txtAux(0)
 End Sub
 

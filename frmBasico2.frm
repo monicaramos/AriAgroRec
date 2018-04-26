@@ -29,7 +29,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   6
       Left            =   6345
       MaxLength       =   30
@@ -49,7 +49,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   5
       Left            =   5580
       MaxLength       =   30
@@ -69,7 +69,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   4
       Left            =   4770
       MaxLength       =   30
@@ -89,7 +89,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   3
       Left            =   3870
       MaxLength       =   30
@@ -109,7 +109,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   2
       Left            =   2370
       MaxLength       =   30
@@ -201,7 +201,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   30
@@ -222,7 +222,7 @@ Begin VB.Form frmBasico2
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   350
+      Height          =   330
       Index           =   0
       Left            =   60
       MaxLength       =   3
@@ -529,7 +529,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 Dim vTag1 As CTag
 Dim vTag3 As CTag
 
@@ -546,17 +546,17 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).BackColor = vbWhite
+    Next I
     
-    For i = 0 To txtAux.Count - 1
-        If txtAux(i).Tag <> "" Then
-            txtAux(i).visible = Not B
+    For I = 0 To txtAux.Count - 1
+        If txtAux(I).Tag <> "" Then
+            txtAux(I).visible = Not B
         Else
-            txtAux(i).visible = False
+            txtAux(I).visible = False
         End If
-    Next i
+    Next I
     
     cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
@@ -606,9 +606,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
 
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -627,22 +627,22 @@ Private Sub BotonBuscar()
     CargaGrid CampoCP & " is null "
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     LLamaLineas DataGrid1.Top + 230, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -669,14 +669,14 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     ' ### [Monica] 12/09/2006
 End Sub
 
 Private Sub BotonEliminar()
-Dim Sql As String
+Dim SQL As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -684,15 +684,15 @@ Dim temp As Boolean
     If adodc1.Recordset.EOF Then Exit Sub
     
     '*************** canviar els noms i el DELETE **********************************
-    Sql = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
-    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    SQL = "¿Seguro que desea eliminar el registro de " & Me.Caption & "?"
+    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        Sql = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
-        conn.Execute Sql
+        SQL = "Delete from " & tabla & " where " & CampoCP & "=" & adodc1.Recordset.Fields(0).Value
+        conn.Execute SQL
         CargaGrid CadB
         PonerModoOpcionesMenu
         adodc1.Recordset.Cancel
@@ -714,7 +714,7 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Variant ' Integer
+    Dim I As Variant ' Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -746,11 +746,11 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(i, RecuperaValor(Tag1, 2)))
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & DBSet(I, RecuperaValor(Tag1, 2)))
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -780,7 +780,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -789,16 +789,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -982,7 +982,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim Sql As String
+    Dim SQL As String
     Dim tots As String
     
     
@@ -995,15 +995,15 @@ Private Sub CargaGrid(Optional vSQL As String)
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        Sql = CadenaConsulta & " AND " & vSQL
+        SQL = CadenaConsulta & " AND " & vSQL
     Else
-        Sql = CadenaConsulta
+        SQL = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    Sql = Sql & " ORDER BY " & CampoOrden & " " & TipoOrden
+    SQL = SQL & " ORDER BY " & CampoOrden & " " & TipoOrden
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
     
     
     
@@ -1018,13 +1018,13 @@ Private Sub CargaGrid(Optional vSQL As String)
 
 End Sub
 
-Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, Sql As String, PrimeraVez As Boolean)
+Private Sub CargaGridGnral(ByRef vDataGrid As DataGrid, ByRef vData As Adodc, SQL As String, PrimeraVez As Boolean)
 On Error GoTo ECargaGrid
 
     vDataGrid.Enabled = True
     '    vdata.Recordset.Cancel
 '    vData.ConnectionString = conn
-    vData.RecordSource = Sql
+    vData.RecordSource = SQL
     vData.CursorType = adOpenDynamic
     vData.LockType = adLockPessimistic
     vDataGrid.ScrollBars = dbgNone
@@ -1079,7 +1079,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim Sql As String
+Dim SQL As String
 Dim Mens As String
 
 

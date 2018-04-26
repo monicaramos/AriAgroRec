@@ -132,7 +132,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   5
       Left            =   6690
       MaxLength       =   30
@@ -154,7 +154,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   4
       Left            =   5250
       MaxLength       =   30
@@ -175,7 +175,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   3
       Left            =   3810
       MaxLength       =   30
@@ -197,7 +197,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   2
       Left            =   2340
       MaxLength       =   30
@@ -256,7 +256,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   30
@@ -278,7 +278,7 @@ Begin VB.Form frmManZonas
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   315
+      Height          =   330
       Index           =   0
       Left            =   90
       MaxLength       =   4
@@ -702,7 +702,7 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
 '    PosicionarCombo Combo1, "724"
-    LLamaLineas DataGrid1.Top + 250, 1 'Pone el form en Modo=1, Buscar
+    LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
 End Sub
 
@@ -1132,7 +1132,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

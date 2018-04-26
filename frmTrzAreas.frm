@@ -40,7 +40,7 @@ Begin VB.Form frmTrzAreas
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   900
       MaxLength       =   50
@@ -53,7 +53,7 @@ Begin VB.Form frmTrzAreas
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   90
       MaxLength       =   6
@@ -884,7 +884,7 @@ Private Sub CargaGrid(Optional vSQL As String)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 

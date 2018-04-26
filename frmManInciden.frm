@@ -149,7 +149,7 @@ Begin VB.Form frmManInciden
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   1
       Left            =   990
       MaxLength       =   25
@@ -171,7 +171,7 @@ Begin VB.Form frmManInciden
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   290
+      Height          =   330
       Index           =   0
       Left            =   120
       MaxLength       =   4
@@ -797,6 +797,14 @@ Private Sub Combo1_KeyPress(KeyAscii As Integer)
     KEYpress KeyAscii
 End Sub
 
+Private Sub Combo1_GotFocus()
+    If Modo = 1 Then Combo1.BackColor = vbLightBlue
+End Sub
+
+Private Sub Combo1_LostFocus()
+    If Combo1.BackColor = vbLightBlue Then Combo1.BackColor = vbWhite
+End Sub
+
 Private Sub DataGrid1_DblClick()
     If cmdRegresar.visible Then cmdRegresar_Click
 End Sub
@@ -985,7 +993,7 @@ Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtaux_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux(Index)
+    ConseguirFoco txtAux(Index), Modo
 End Sub
 
 Private Sub txtAux_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
