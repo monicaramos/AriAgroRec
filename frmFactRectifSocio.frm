@@ -630,8 +630,8 @@ Dim List As Collection
     
     Me.FrameGenFacturaRect.Top = -90
     Me.FrameGenFacturaRect.Left = 0
-    Me.FrameGenFacturaRect.Height = 6015
-    Me.FrameGenFacturaRect.Width = 6945
+    Me.FrameGenFacturaRect.Height = 6240
+    Me.FrameGenFacturaRect.Width = 7215
     W = Me.FrameGenFacturaRect.Width
     H = Me.FrameGenFacturaRect.Height
     
@@ -639,7 +639,7 @@ Dim List As Collection
     Me.Check1(1).Value = 1
     
     'Esto se consigue poniendo el cancel en el opcion k corresponda
-    Me.cmdCancel(0).Cancel = True
+    Me.CmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
@@ -996,7 +996,7 @@ End Sub
 
 
 Private Function FacturacionRectificativa(cTabla As String, cWhere As String, FecFac As String, Pb1 As ProgressBar) As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
@@ -1079,28 +1079,28 @@ Dim Tipo As Integer
     
     conn.BeginTrans
     
-    SQL = "delete from tmpinformes where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpinformes where codusu = " & vUsu.Codigo
+    conn.Execute Sql
 
-    SQL = "SELECT * "
-    SQL = SQL & " FROM  " & cTabla
+    Sql = "SELECT * "
+    Sql = Sql & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
     
     ' ordenado por socio, variedad, campo, calidad
-    SQL = SQL & " order by rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu "
+    Sql = Sql & " order by rfactsoc.codtipom, rfactsoc.numfactu, rfactsoc.fecfactu "
     
     Set vTipoMov = New CTiposMov
     
     HayReg = False
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     B = True
     
@@ -1124,131 +1124,131 @@ Dim Tipo As Integer
         IncrementarProgresNew Pb1, 1
         
         'insertar en la tabla de cabecera de facturas
-        SQL = "insert into rfactsoc (codtipom,numfactu,fecfactu,codsocio,baseimpo,tipoiva,porc_iva,imporiva,tipoirpf,basereten,porc_ret,"
-        SQL = SQL & "impreten,baseaport,porc_apo,impapor,totalfac,impreso,contabilizado,pasaridoc,esanticipogasto,"
-        SQL = SQL & " rectif_codtipom,rectif_numfactu,rectif_fecfactu,rectif_motivo "
+        Sql = "insert into rfactsoc (codtipom,numfactu,fecfactu,codsocio,baseimpo,tipoiva,porc_iva,imporiva,tipoirpf,basereten,porc_ret,"
+        Sql = Sql & "impreten,baseaport,porc_apo,impapor,totalfac,impreso,contabilizado,pasaridoc,esanticipogasto,"
+        Sql = Sql & " rectif_codtipom,rectif_numfactu,rectif_fecfactu,rectif_motivo "
         '[Monica]14/06/2013: Añadidos los campos que faltaban
         If vParamAplic.Cooperativa = 12 Then
-            SQL = SQL & ", esretirada, codforpa, porccorredor, tipoprecio) values ("
+            Sql = Sql & ", esretirada, codforpa, porccorredor, tipoprecio) values ("
         Else
-            SQL = SQL & ") values ("
+            Sql = Sql & ") values ("
         End If
-        SQL = SQL & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & DBSet(Rs!Codsocio, "N") & ","
-        SQL = SQL & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
-        SQL = SQL & DBSet(Rs!TipoIVA, "N") & ","
-        SQL = SQL & DBSet(Rs!porc_iva, "N") & ","
-        SQL = SQL & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
-        SQL = SQL & DBSet(Rs!TipoIRPF, "N") & ","
-        SQL = SQL & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo
-        SQL = SQL & DBSet(Rs!porc_ret, "N", "S") & ","
-        SQL = SQL & DBSet(DBLet(Rs!ImpReten, "N") * (-1), "N", "S") & "," ' importe de retencion en negativo
-        SQL = SQL & DBSet(DBLet(Rs!baseaport, "N") * (-1), "N", "S") & "," ' base de aportacion en negativo
-        SQL = SQL & DBSet(Rs!porc_apo, "N", "S") & ","
-        SQL = SQL & DBSet(DBLet(Rs!impapor, "N") * (-1), "N", "S") & "," ' importe de aportacion en negativo
-        SQL = SQL & DBSet(DBLet(Rs!TotalFac, "N") * (-1), "N") & "," ' total factura en negativo
+        Sql = Sql & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & DBSet(Rs!Codsocio, "N") & ","
+        Sql = Sql & DBSet(DBLet(Rs!baseimpo, "N") * (-1), "N") & "," ' baseimponible en negativo
+        Sql = Sql & DBSet(Rs!TipoIVA, "N") & ","
+        Sql = Sql & DBSet(Rs!porc_iva, "N") & ","
+        Sql = Sql & DBSet(DBLet(Rs!ImporIva, "N") * (-1), "N") & "," ' importe iva en negativo
+        Sql = Sql & DBSet(Rs!TipoIRPF, "N") & ","
+        Sql = Sql & DBSet(DBLet(Rs!BaseReten, "N") * (-1), "N", "S") & "," ' base retencion en negativo
+        Sql = Sql & DBSet(Rs!porc_ret, "N", "S") & ","
+        Sql = Sql & DBSet(DBLet(Rs!ImpReten, "N") * (-1), "N", "S") & "," ' importe de retencion en negativo
+        Sql = Sql & DBSet(DBLet(Rs!baseaport, "N") * (-1), "N", "S") & "," ' base de aportacion en negativo
+        Sql = Sql & DBSet(Rs!porc_apo, "N", "S") & ","
+        Sql = Sql & DBSet(DBLet(Rs!impapor, "N") * (-1), "N", "S") & "," ' importe de aportacion en negativo
+        Sql = Sql & DBSet(DBLet(Rs!TotalFac, "N") * (-1), "N") & "," ' total factura en negativo
         
         If vParamAplic.Cooperativa = 12 Then
-            SQL = SQL & "0,0,0," & DBSet(Rs!EsAnticipoGasto, "N") & ","
+            Sql = Sql & "0,0,0," & DBSet(Rs!EsAnticipoGasto, "N") & ","
         Else
-            SQL = SQL & "0,0,0,0,"
+            Sql = Sql & "0,0,0,0,"
         End If
         
-        SQL = SQL & DBSet(Rs!CodTipom, "T") & ","
-        SQL = SQL & DBSet(Rs!numfactu, "N") & ","
-        SQL = SQL & DBSet(Rs!fecfactu, "F") & ","
-        SQL = SQL & DBSet(txtCodigo(9).Text, "T")
+        Sql = Sql & DBSet(Rs!CodTipom, "T") & ","
+        Sql = Sql & DBSet(Rs!numfactu, "N") & ","
+        Sql = Sql & DBSet(Rs!fecfactu, "F") & ","
+        Sql = Sql & DBSet(txtCodigo(9).Text, "T")
         
         If vParamAplic.Cooperativa = 12 Then
-            SQL = SQL & "," & DBSet(Rs!esretirada, "N") & ","
-            SQL = SQL & DBSet(Rs!Codforpa, "N") & ","
-            SQL = SQL & DBSet(Rs!PorcCorredor, "N") & ","
-            SQL = SQL & DBSet(Rs!TipoPrecio, "N") & ")"
+            Sql = Sql & "," & DBSet(Rs!esretirada, "N") & ","
+            Sql = Sql & DBSet(Rs!Codforpa, "N") & ","
+            Sql = Sql & DBSet(Rs!PorcCorredor, "N") & ","
+            Sql = Sql & DBSet(Rs!TipoPrecio, "N") & ")"
         Else
-            SQL = SQL & ")"
+            Sql = Sql & ")"
         End If
         
-        conn.Execute SQL
+        conn.Execute Sql
             
         ' insertamos en la tabla rfactsoc_variedad
-        SQL = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu,codvarie,codcampo,kilosnet,"
-        SQL = SQL & "preciomed,imporvar,descontado,imporgasto) "
-        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & "codvarie,codcampo, kilosnet * (-1), preciomed, imporvar * (-1), descontado, imporgasto * (-1) "
-        SQL = SQL & " from rfactsoc_variedad "
-        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "insert into rfactsoc_variedad (codtipom, numfactu, fecfactu,codvarie,codcampo,kilosnet,"
+        Sql = Sql & "preciomed,imporvar,descontado,imporgasto) "
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & "codvarie,codcampo, kilosnet * (-1), preciomed, imporvar * (-1), descontado, imporgasto * (-1) "
+        Sql = Sql & " from rfactsoc_variedad "
+        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
             
         ' insertamos en la tabla rfactsoc_albaran
-        SQL = "insert into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
-        SQL = SQL & "kilosnet,grado,precio, importe, imporgasto) "
-        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & "numalbar, fecalbar, codvarie, codcampo,  kilosbru * (-1), kilosnet * (-1), grado, precio, "
-        SQL = SQL & "importe * (-1), imporgasto * (-1) from rfactsoc_albaran "
-        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "insert into rfactsoc_albaran (codtipom,numfactu,fecfactu,numalbar,fecalbar,codvarie,codcampo,kilosbru,"
+        Sql = Sql & "kilosnet,grado,precio, importe, imporgasto) "
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & "numalbar, fecalbar, codvarie, codcampo,  kilosbru * (-1), kilosnet * (-1), grado, precio, "
+        Sql = Sql & "importe * (-1), imporgasto * (-1) from rfactsoc_albaran "
+        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         ' insertamos en la tabla rfactsoc_anticipos
-        SQL = "insert into rfactsoc_anticipos (codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,"
-        SQL = SQL & "codvarieanti,codcampoanti,baseimpo) "
-        SQL = SQL & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & "codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo * (-1) "
-        SQL = SQL & " from rfactsoc_anticipos "
-        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "insert into rfactsoc_anticipos (codtipom,numfactu,fecfactu,codtipomanti,numfactuanti,fecfactuanti,"
+        Sql = Sql & "codvarieanti,codcampoanti,baseimpo) "
+        Sql = Sql & " select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & "codtipomanti,numfactuanti,fecfactuanti,codvarieanti,codcampoanti,baseimpo * (-1) "
+        Sql = Sql & " from rfactsoc_anticipos "
+        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
                 
         ' insertamos en la tabla rfactsoc_calidad
-        SQL = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,"
-        SQL = SQL & "imporcal,preciocalidad,imporcalidad) "
-        SQL = SQL & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & "codvarie, codcampo, codcalid, kilosnet * (-1), precio, imporcal * (-1), preciocalidad, imporcalidad * (-1) "
-        SQL = SQL & " from rfactsoc_calidad "
-        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "insert into rfactsoc_calidad (codtipom,numfactu,fecfactu,codvarie,codcampo,codcalid,kilosnet,precio,"
+        Sql = Sql & "imporcal,preciocalidad,imporcalidad) "
+        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & "codvarie, codcampo, codcalid, kilosnet * (-1), precio, imporcal * (-1), preciocalidad, imporcalidad * (-1) "
+        Sql = Sql & " from rfactsoc_calidad "
+        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         ' insertamos en la tabla rfactsoc_gastos
-        SQL = "insert into rfactsoc_gastos (codtipom,numfactu,fecfactu,numlinea,codgasto,importe) "
-        SQL = SQL & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
-        SQL = SQL & "numlinea, codgasto, importe * (-1) "
-        SQL = SQL & " from rfactsoc_gastos "
-        SQL = SQL & " where codtipom = " & DBSet(Rs!CodTipom, "T")
-        SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-        SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = "insert into rfactsoc_gastos (codtipom,numfactu,fecfactu,numlinea,codgasto,importe) "
+        Sql = Sql & "select " & DBSet(tipoMov, "T") & "," & DBSet(numfactu, "N") & "," & DBSet(txtCodigo(10).Text, "F") & ","
+        Sql = Sql & "numlinea, codgasto, importe * (-1) "
+        Sql = Sql & " from rfactsoc_gastos "
+        Sql = Sql & " where codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         '[Monica]04/06/2014: en el caso de Montifrut es diferente
         If vParamAplic.Cooperativa = 12 Then
             If DBLet(Rs!EsAnticipoGasto) = 1 Then
                 '[Monica]04/06/2014: si la factura que rectifico es un anticipo tengo que marcarlo como que se ha descontado
                 ' pq sino en la proxima liquidacion se descontará este anticipo siendo que se ha rectificado.
-                SQL = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                Sql = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
                 
-                conn.Execute SQL
+                conn.Execute Sql
             
             Else
                 '[Monica]04/06/2014: si la factura que rectifico es una liquidacion que tiene descontados anticipos,
                 '                    los he de desmarcar como descontados para que en la proxima liquidacion se descuente
-                SQL = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
-                SQL = SQL & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
+                Sql = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
+                Sql = Sql & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
                 
-                conn.Execute SQL
+                conn.Execute Sql
             
             End If
         Else
@@ -1256,23 +1256,23 @@ Dim Tipo As Integer
             ' pq sino en la proxima liquidacion se descontará este anticipo siendo que se ha rectificado.
             Tipo = DevuelveValor("select tipodocu from usuarios.stipom where codtipom = " & DBSet(Rs!CodTipom, "T"))
             If Tipo = 1 Or Tipo = 3 Then
-                SQL = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+                Sql = "update rfactsoc_variedad set descontado = 1 where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
                 
-                conn.Execute SQL
+                conn.Execute Sql
             End If
             '[Monica]08/07/2011
         
             '[Monica]04/06/2014: si la factura que rectifico es una liquidacion que tiene descontados anticipos,
             '                    los he de desmarcar como descontados para que en la proxima liquidacion se descuente
             If Tipo = 2 Or Tipo = 4 Then
-                SQL = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
-                SQL = SQL & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
-                SQL = SQL & " and numfactu = " & DBSet(Rs!numfactu, "N")
-                SQL = SQL & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
+                Sql = "update rfactsoc_variedad  set descontado = 0 where (codtipom,numfactu,fecfactu,codvarie,codcampo) in "
+                Sql = Sql & " (select codtipomanti, numfactuanti, fecfactuanti, codvarieanti, codcampoanti from rfactsoc_anticipos where codtipom = " & DBSet(Rs!CodTipom, "T")
+                Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+                Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F") & ")"
                 
-                conn.Execute SQL
+                conn.Execute Sql
             End If
         End If
             
@@ -1300,21 +1300,21 @@ eFacturacion:
 End Function
 
 Private Function TotalFacturasSocios(cTabla As String, cWhere As String) As Long
-Dim SQL As String
+Dim Sql As String
 
     TotalFacturasSocios = 0
     
-    SQL = "SELECT  count(distinct rpozos.codsocio) "
-    SQL = SQL & " FROM  " & cTabla
+    Sql = "SELECT  count(distinct rpozos.codsocio) "
+    Sql = Sql & " FROM  " & cTabla
 
     If cWhere <> "" Then
         cWhere = QuitarCaracterACadena(cWhere, "{")
         cWhere = QuitarCaracterACadena(cWhere, "}")
         cWhere = QuitarCaracterACadena(cWhere, "_1")
-        SQL = SQL & " WHERE " & cWhere
+        Sql = Sql & " WHERE " & cWhere
     End If
 
-    TotalFacturasSocios = TotalRegistros(SQL)
+    TotalFacturasSocios = TotalRegistros(Sql)
 
 End Function
 
@@ -1322,7 +1322,7 @@ Private Function DatosOK() As Boolean
 'Comprobar que los datos de la cabecera son correctos antes de Insertar o Modificar
 'la cabecera del Pedido
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EDatosOK
 
@@ -1354,7 +1354,7 @@ End Function
 
 
 Private Function FacturasGeneradasRectificativas() As String
-Dim SQL As String
+Dim Sql As String
 Dim RS1 As ADODB.Recordset
 Dim cad As String
     
@@ -1362,11 +1362,11 @@ Dim cad As String
 
     FacturasGeneradasRectificativas = ""
 
-    SQL = "select nombre1, importe1 from tmpinformes where codusu = " & vUsu.Codigo
-    SQL = SQL & " and nombre1 = 'FRS'"
+    Sql = "select nombre1, importe1 from tmpinformes where codusu = " & vUsu.Codigo
+    Sql = Sql & " and nombre1 = 'FRS'"
     
     Set RS1 = New ADODB.Recordset
-    RS1.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    RS1.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     
     cad = ""
     While Not RS1.EOF
@@ -1389,7 +1389,7 @@ End Function
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
@@ -1398,16 +1398,16 @@ Dim I As Byte
     Next I
     
     'tipo de factura todas las facturas excepto las rectificativas
-    SQL = "select codtipom, nomtipom from usuarios.stipom where tipodocu >= 1 and tipodocu < 11 "
+    Sql = "select codtipom, nomtipom from usuarios.stipom where tipodocu >= 1 and tipodocu < 11 "
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     I = 1
     While Not Rs.EOF
 '        Sql = Replace(Rs.Fields(1).Value, "Factura", "Fac.")
-        SQL = Rs.Fields(1).Value
-        SQL = Rs.Fields(0).Value & " - " & SQL
-        Combo1(0).AddItem SQL 'campo del codigo
+        Sql = Rs.Fields(1).Value
+        Sql = Rs.Fields(0).Value & " - " & Sql
+        Combo1(0).AddItem Sql 'campo del codigo
         Combo1(0).ItemData(Combo1(0).NewIndex) = I
         I = I + 1
         Rs.MoveNext

@@ -665,9 +665,6 @@ End Sub
 
 Public Sub SubmnC_RecoleccionG_Trazabilidad_Click(Index As Integer)
     Select Case Index
-        Case 1: frmTrzTipos.Show vbModal ' Mantenimiento de Tipos
-        Case 2: frmTrzAreas.Show vbModal ' Construc ("Mantenimiento de Areas")   'Informe de toma de datos
-        
         Case 4: AbrirListadoTrazabilidad (1) ' informe de palets entrados
         Case 5: AbrirListadoTrazabilidad (2) ' informe de cargas linea confeccion
         Case 6: AbrirListadoTrazabilidad (7) ' cargas linea por fecha/producto

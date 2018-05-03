@@ -1980,7 +1980,11 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 1: KEYBusqueda KeyAscii, 0 'fecha
+                Case 6: KEYBusqueda KeyAscii, 3 'variedad
+                Case 7: KEYBusqueda KeyAscii, 4 'trabajador
+                Case 0: KEYBusqueda KeyAscii, 1 'capataz
+                Case 5: KEYBusqueda KeyAscii, 2 'fecha de recibo
             End Select
         End If
     Else

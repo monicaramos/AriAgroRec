@@ -319,8 +319,6 @@ Private WithEvents frmCla As frmBasico2 'Ayuda de Clases de comercial
 Attribute frmCla.VB_VarHelpID = -1
 Private WithEvents frmMens As frmMensajes 'Mensajes
 Attribute frmMens.VB_VarHelpID = -1
-Private WithEvents frmArea As frmTrzAreas 'Mensajes
-Attribute frmArea.VB_VarHelpID = -1
 Private WithEvents frmProd As frmBasico2 'Productos
 Attribute frmProd.VB_VarHelpID = -1
 
@@ -803,13 +801,6 @@ Private Sub AbrirFrmCalidad(Indice As Integer)
     Set frmCal = Nothing
 End Sub
 
-Private Sub AbrirFrmArea(Indice As Integer)
-    indCodigo = Indice
-    Set frmArea = New frmTrzAreas
-    frmArea.DatosADevolverBusqueda = "0|1|"
-    frmArea.Show vbModal
-    Set frmArea = Nothing
-End Sub
 
 Private Sub AbrirFrmSocios(Indice As Integer)
     indCodigo = Indice

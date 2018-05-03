@@ -16,6 +16,15 @@ Begin VB.Form frmTrzManPalet
    StartUpPosition =   2  'CenterScreen
    Begin VB.CommandButton cmdDesAsign 
       Caption         =   "Desasignar la tarjeta del palet sin mas"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   495
       Left            =   510
       TabIndex        =   11
@@ -24,6 +33,15 @@ Begin VB.Form frmTrzManPalet
    End
    Begin VB.Frame Frame1 
       Caption         =   "Resultado consulta "
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1485
       Left            =   240
       TabIndex        =   3
@@ -31,6 +49,15 @@ Begin VB.Form frmTrzManPalet
       Width           =   5175
       Begin VB.TextBox txtResul 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   975
          Left            =   120
          MultiLine       =   -1  'True
@@ -63,6 +90,15 @@ Begin VB.Form frmTrzManPalet
    End
    Begin VB.CommandButton cmdSalir 
       Caption         =   "Salir"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   3510
       TabIndex        =   5
@@ -71,6 +107,15 @@ Begin VB.Form frmTrzManPalet
    End
    Begin VB.CommandButton cmdConsultar 
       Caption         =   "Consultar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   3720
       TabIndex        =   2
@@ -78,8 +123,17 @@ Begin VB.Form frmTrzManPalet
       Width           =   1695
    End
    Begin VB.TextBox txtRFID 
-      Height          =   285
-      Left            =   1560
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   1665
       TabIndex        =   1
       Top             =   360
       Width           =   1935
@@ -102,10 +156,19 @@ Begin VB.Form frmTrzManPalet
    End
    Begin VB.Label Label1 
       Caption         =   "COD.TARJETA:"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   240
       TabIndex        =   0
-      Top             =   360
+      Top             =   405
       Width           =   1335
    End
 End
@@ -121,7 +184,7 @@ Private Const IdPrograma = 9009
 
 
 Dim IdPalet As Long
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim RS1 As ADODB.Recordset
 
@@ -157,24 +220,24 @@ Private Sub cmdConsultar_Click()
         Exit Sub
     End If
     
-    SQL = "select * from trzpalets where CRFID ='" & txtRFID & "'"
+    Sql = "select * from trzpalets where CRFID ='" & txtRFID & "'"
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         IdPalet = Rs!IdPalet '????? rafa
         'SQL = "select * from Palets where codPalet = " & CStr(IdPalet)
-        SQL = "select nomvarie from variedades where codvarie = " & DBSet(Rs!codvarie, "N")
+        Sql = "select nomvarie from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
         Set RS1 = New ADODB.Recordset
-        RS1.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        RS1.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         
-        SQL = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!numnotac) & vbCrLf
-        SQL = SQL & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!Numkilos) & vbCrLf
-        SQL = SQL & "Variedad:" & RS1!nomvarie
+        Sql = "Palet:" & CStr(IdPalet) & " Fecha:" & Format(Rs!Fecha, "dd/mm/yyyy") & " Partida = " & CStr(Rs!NumNotac) & vbCrLf
+        Sql = Sql & "Socio:" & CStr(Rs!Codsocio) & " Campo:" & CStr(Rs!codcampo) & " Cajones:" & CStr(Rs!NumCajones) & " Kilos:" & CStr(Rs!NumKilos) & vbCrLf
+        Sql = Sql & "Variedad:" & RS1!nomvarie
         'SQL = SQL & "Producto:" & rs!NomProdu & " Variedad:" & rs!nomvarie
         
         Set RS1 = Nothing
-        txtResul.Text = SQL
+        txtResul.Text = Sql
     Else
         IdPalet = 0
         txtResul.Text = "NO HAY NINGUN PALET CON ESTA TARJETA ASOCIADA"
@@ -190,8 +253,8 @@ Private Sub cmdDesAsign_Click()
         Exit Sub
     End If
     
-    SQL = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
-    conn.Execute SQL
+    Sql = "update trzpalets set CRFID = null where IdPalet = " & CStr(IdPalet)
+    conn.Execute Sql
     
     MsgBox "Tarjeta desasignada"
     
@@ -217,28 +280,28 @@ Private Sub txtRFID_Change()
 End Sub
 
 Private Function CargaLineaConfeccion(Linea As Long, RFID As String, FechaHora As Date) As Boolean
-    Dim SQL As String
+    Dim Sql As String
     Dim Rs As ADODB.Recordset
     Dim resultaddo As Boolean
     
     '-- Buscamos que el palet exista
-    SQL = "select * from trzpalets where CRFID = '" & RFID & "'"
+    Sql = "select * from trzpalets where CRFID = '" & RFID & "'"
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     If Rs.EOF Then
         MsgBox "El palet RFID: " & RFID & " leido en la línea " & CStr(Linea) & " no existe en el sistema"
         Exit Function
     End If
-    SQL = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
-    SQL = SQL & DBSet(Linea, "N") & ","
-    SQL = SQL & DBSet(Rs!IdPalet, "N") & ","
-    SQL = SQL & DBSet(FechaHora, "FH") & ","
-    SQL = SQL & DBSet(FechaHora, "F") & ","
-    SQL = SQL & DBSet(Rs!Tipo, "N") & ")"
-    conn.Execute SQL
+    Sql = "insert into trzlineas_cargas(linea,idpalet,fechahora,fecha,tipo) values("
+    Sql = Sql & DBSet(Linea, "N") & ","
+    Sql = Sql & DBSet(Rs!IdPalet, "N") & ","
+    Sql = Sql & DBSet(FechaHora, "FH") & ","
+    Sql = Sql & DBSet(FechaHora, "F") & ","
+    Sql = Sql & DBSet(Rs!Tipo, "N") & ")"
+    conn.Execute Sql
     
-    SQL = "update trzpalets set CRFID = null where IdPalet=" & DBSet(Rs!IdPalet, "N")
-    conn.Execute SQL
+    Sql = "update trzpalets set CRFID = null where IdPalet=" & DBSet(Rs!IdPalet, "N")
+    conn.Execute Sql
     
     CargaLineaConfeccion = True
 End Function

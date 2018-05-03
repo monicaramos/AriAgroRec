@@ -801,13 +801,13 @@ Begin VB.Form frmManHorasCata
    End
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmManHorasCata.frx":000C
-      Height          =   5220
+      Height          =   5265
       Left            =   90
       TabIndex        =   17
       Top             =   780
-      Width           =   18100
+      Width           =   18105
       _ExtentX        =   31935
-      _ExtentY        =   9208
+      _ExtentY        =   9287
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
@@ -1176,7 +1176,7 @@ Private WithEvents frmCat As frmManCategorias 'mantenimiento de categorias
 Attribute frmCat.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
-Private WithEvents frmVar As frmComVar 'variedades
+Private WithEvents frmVar As frmBasico2 'ComVar 'variedades
 Attribute frmVar.VB_VarHelpID = -1
 
 Dim Modo As Byte
@@ -1835,6 +1835,11 @@ Private Sub frmCap_DatoSeleccionado(CadenaSeleccion As String)
     txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
 End Sub
 
+Private Sub frmCat_DatoSeleccionado(CadenaSeleccion As String)
+    txtAux(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo categoria
+    txtAux2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre categoria
+End Sub
+
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo capataz
     txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
@@ -2226,7 +2231,12 @@ Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = teclaBuscar Then
         If Modo = 1 Or Modo = 3 Or Modo = 4 Then
             Select Case Index
-                Case 2: KEYBusqueda KeyAscii, 0 'cuenta contable
+                Case 1: KEYBusqueda KeyAscii, 0 'fecha
+                Case 6: KEYBusqueda KeyAscii, 3 'variedad
+                Case 7: KEYBusqueda KeyAscii, 4 'trabajador
+                Case 0: KEYBusqueda KeyAscii, 1 'capataz
+                Case 11: KEYBusqueda KeyAscii, 1 'categoria
+                Case 5: KEYBusqueda KeyAscii, 2 'fecha de recibo
             End Select
         End If
     Else
@@ -2250,6 +2260,8 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
     btnBuscar_Click (Indice)
 End Sub
+
+
 
 Private Sub BotonAltaRapida()
     AbrirListadoNominas (24)
@@ -2276,10 +2288,13 @@ End Sub
 
 Private Sub AbrirFrmVariedades(Indice As Integer)
     indCodigo = 6
-    Set frmVar = New frmComVar
-    frmVar.DatosADevolverBusqueda = "0|1|"
-    frmVar.CodigoActual = txtAux(indCodigo)
-    frmVar.Show vbModal
+    
+    Set frmVar = New frmBasico2
+    
+    AyudaVariedad frmVar
+'    frmVar.DatosADevolverBusqueda = "0|1|"
+'    frmVar.CodigoActual = txtAux(indCodigo)
+'    frmVar.Show vbModal
     Set frmVar = Nothing
     
     PonerFoco txtAux(indCodigo)

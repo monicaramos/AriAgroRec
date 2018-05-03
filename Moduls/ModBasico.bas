@@ -265,6 +265,16 @@ Public Sub AyudaVariedad(frmBas As frmBasico2, Optional CodActual As String, Opt
     frmBas.DatosADevolverBusqueda = "0|1|"
     frmBas.CodigoActual = 0
     If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    '[Monica]17/04/2018: añadimos en este caso los botones de busqueda
+    frmBas.DataGrid1.Height = 4900
+    frmBas.DataGrid1.Top = 870
+    frmBas.FrameBotonGnral.visible = True
+    frmBas.FrameBotonGnral.Enabled = True
+    ' hasta aqui
+    
+    
+    
     frmBas.Show vbModal
 
     
