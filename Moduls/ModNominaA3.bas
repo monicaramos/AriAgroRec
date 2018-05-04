@@ -9,7 +9,7 @@ Dim cad As String
 Dim Aux As String
 Dim NFic As Integer
 Dim EsPersonaJuridica2 As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
 Dim RegImpBruto As String
@@ -37,12 +37,12 @@ Dim FecPag As String
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
-    SQL = "select * from rrecibosnomina where fechahora = " & DBSet(FechaPago, "F") & " and idcontador = " & DBSet(Contador, "N")
+    Sql = "select * from rrecibosnomina where fechahora = " & DBSet(FechaPago, "F") & " and idcontador = " & DBSet(Contador, "N")
     ' añado la condicion de q solo se pasa a A3 si no hay embargo
-    SQL = SQL & " and hayembargo = 0 "
+    Sql = Sql & " and hayembargo = 0 "
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Regs = 0
     While Not Rs.EOF
@@ -118,7 +118,7 @@ Dim cad As String
 Dim Aux As String
 Dim NFic As Integer
 Dim EsPersonaJuridica2 As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
 Dim RegImpBruto As String
@@ -146,10 +146,10 @@ Dim FecPag As String
     
     FecPag = Format(Year(FechaPago), "0000") & Format(Month(FechaPago), "00") & Format(Day(FechaPago), "00")
 
-    SQL = "select * from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
+    Sql = "select * from tmpinformes where codusu = " & DBSet(vUsu.Codigo, "N")
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Regs = 0
     While Not Rs.EOF
@@ -168,19 +168,23 @@ Dim FecPag As String
         Importe = Importe & "000000000+"
         
         '[Monica]29/01/2018: para el caso de Catadau damos el codigo de asesoria,
-'        If vParamAplic.Cooperativa = 0 Then
-'            Dim CodAse As String
-'            CodAse = DevuelveValor("select codasesoria from straba where codtraba = " & DBLet(Rs!Codigo1, "N"))
-'            RegImpBruto = cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
-'        Else
+        If vParamAplic.Cooperativa = 0 Then
+            Dim CodAse As String
+            CodAse = DevuelveValor("select codasesoria from straba where codtraba = " & DBLet(Rs!Codigo1, "N"))
+            RegImpBruto = cad & Format(CodAse, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
+        Else
             RegImpBruto = cad & Format(Rs!Codigo1, "000000") & FecPag & "001" & "001" & Importe 'cad+codtraba+fecha+incidencia+001+importe bruto
-'        End If
+        End If
         Print #NFic, RegImpBruto
         
         ' dias trabajados
         Dias = Format(Int(DBLet(Rs!importe2, "N")), "00")
         
-        RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+        If vParamAplic.Cooperativa = 0 Then
+            RegDias = cad & Format(CodAse, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+        Else
+            RegDias = cad & Format(Rs!Codigo1, "000000") & FecPag & "016" & Format(Dias, "00") & "00" & Left(DBLet(Rs!Nombre1, "T") & "NNN", 31) & "00000000000000" 'cad+codtraba+fecha+016+dias+00+SSNNS..+"
+        End If
         Print #NFic, RegDias
         
         Rs.MoveNext

@@ -364,6 +364,23 @@ Begin VB.Form frmListNomina
             Width           =   765
          End
       End
+      Begin VB.Label Label2 
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   107
+         Left            =   360
+         TabIndex        =   322
+         Top             =   4050
+         Width           =   3195
+      End
       Begin VB.Label Label15 
          Caption         =   "Informe Mensual Asesoria"
          BeginProperty Font 
@@ -7182,8 +7199,32 @@ Dim nomDocu As String 'Nombre de Informe rpt de crystal
                     If txtCodigo(78).Text <> "" Then Fec1 = CDate(txtCodigo(78).Text)
                     
                     If GeneraNominaA3(Fec1) Then
-                        If CopiarFicheroA3("NominaA3.txt", CStr(Fec1)) Then
-                            MsgBox "Proceso realizado correctamente", vbExclamation
+                        '[Monica]04/05/2018: generamos 2 ficheros
+                        If vParamAplic.Cooperativa = 0 Then
+                            ' cargamos las hojas excel
+                            
+                            If Dir(App.Path & "\nomina.z") <> "" Then Kill App.Path & "\nomina.z"
+            
+                            Shell App.Path & "\nomina.exe /R|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
+                            
+                            While Dir(App.Path & "\nomina.z") = ""
+                                Me.Label2(107).Caption = "Procesando Fichero "
+                                DoEvents
+            
+                                espera 1
+                            Wend
+                            
+                            If Dir(App.Path & "\nomina.z") <> "" Then Kill App.Path & "\nomina.z"
+                            
+                            Shell App.Path & "\nomina.exe /S|" & vUsu.CadenaConexion & "|" & vUsu.Codigo & "|", vbNormalFocus
+                            
+                            Label2(107).Caption = ""
+                            DoEvents
+                            Me.Refresh
+                        Else
+                            If CopiarFicheroA3("NominaA3.txt", CStr(Fec1)) Then
+                                MsgBox "Proceso realizado correctamente", vbExclamation
+                            End If
                         End If
                     End If
                 Else
@@ -8434,7 +8475,7 @@ Dim List As Collection
         
     End Select
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel(0).Cancel = True
+    Me.CmdCancel(0).Cancel = True
     Me.Width = W + 70
     Me.Height = H + 350
 End Sub
