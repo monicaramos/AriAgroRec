@@ -16,6 +16,27 @@ Begin VB.Form frmManHorasCata
    ScaleHeight     =   7980
    ScaleWidth      =   18345
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux2 
+      Appearance      =   0  'Flat
+      BackColor       =   &H80000018&
+      BorderStyle     =   0  'None
+      Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   4
+      Left            =   1935
+      TabIndex        =   46
+      Top             =   6660
+      Width           =   510
+   End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
@@ -992,6 +1013,24 @@ Begin VB.Form frmManHorasCata
          EndProperty
       EndProperty
    End
+   Begin VB.Label Label7 
+      Caption         =   "Grupo Trabajador"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000000&
+      Height          =   270
+      Left            =   135
+      TabIndex        =   47
+      Top             =   6705
+      Width           =   2025
+   End
    Begin VB.Label Label6 
       Caption         =   "Categoria"
       BeginProperty Font 
@@ -1211,6 +1250,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
 '    txtAux2(0).visible = Not B
@@ -1853,6 +1893,8 @@ End Sub
 
 
 
+
+
 Private Sub mnAltaRapida_Click()
     BotonAltaRapida
 End Sub
@@ -1991,6 +2033,7 @@ Private Sub CargaForaGrid()
     txtAux2(6).Text = DataGrid1.Columns(2).Text
     txtAux2(0).Text = DataGrid1.Columns(6).Text
     txtAux2(11).Text = DataGrid1.Columns(8).Text
+    txtAux2(4).Text = GrupoTrabajo(DataGrid1.Columns(3).Text)
 End Sub
 
 Private Sub Toolbar2_ButtonClick(ByVal Button As MSComctlLib.Button)
@@ -2111,6 +2154,8 @@ Dim Tipo As String
                         txtAux(Index).Text = ""
                     End If
                     PonerFoco txtAux(Index)
+                Else
+                    txtAux2(4).Text = GrupoTrabajo(txtAux(7).Text)
                 End If
             End If
         

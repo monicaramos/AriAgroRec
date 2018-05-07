@@ -8,13 +8,13 @@ Begin VB.Form frmPOZMantaTickets
    ClientHeight    =   6270
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   17310
+   ClientWidth     =   17610
    Icon            =   "frmPOZMantaTickets.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6270
-   ScaleWidth      =   17310
+   ScaleWidth      =   17610
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -588,7 +588,7 @@ Begin VB.Form frmPOZMantaTickets
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   14925
+      Left            =   15195
       TabIndex        =   13
       Tag             =   "   "
       Top             =   5685
@@ -608,7 +608,7 @@ Begin VB.Form frmPOZMantaTickets
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   16110
+      Left            =   16380
       TabIndex        =   14
       Top             =   5670
       Visible         =   0   'False
@@ -619,8 +619,8 @@ Begin VB.Form frmPOZMantaTickets
       Left            =   120
       TabIndex        =   17
       Top             =   945
-      Width           =   17035
-      _ExtentX        =   30057
+      Width           =   17335
+      _ExtentX        =   30586
       _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -695,7 +695,7 @@ Begin VB.Form frmPOZMantaTickets
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   16065
+      Left            =   16335
       TabIndex        =   18
       Top             =   5670
       Visible         =   0   'False
@@ -776,7 +776,7 @@ Begin VB.Form frmPOZMantaTickets
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   16755
+      Left            =   17010
       TabIndex        =   34
       Top             =   255
       Width           =   405
@@ -821,7 +821,7 @@ Begin VB.Form frmPOZMantaTickets
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   225
+      Height          =   360
       Left            =   10620
       TabIndex        =   23
       Top             =   5775
@@ -963,7 +963,7 @@ Dim FechaAnt As String
 Dim OK As Boolean
 Dim CadB1 As String
 Dim Filtro As Byte
-Dim SQL As String
+Dim Sql As String
 
 Dim CodTipoMov As String
 
@@ -997,7 +997,7 @@ Dim B As Boolean
     B = (Modo = 2)
     If B Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
-        If Not adodc1.Recordset.EOF Then text2(1).Text = DBLet(adodc1.Recordset!Concepto, "T")
+        If Not adodc1.Recordset.EOF Then Text2(1).Text = DBLet(adodc1.Recordset!Concepto, "T")
     Else
         PonerIndicador lblIndicador, Modo
     End If
@@ -1005,6 +1005,7 @@ Dim B As Boolean
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = (Modo = 1)
         txtAux(I).Enabled = (Modo = 1)
+        txtAux(I).BackColor = vbWhite
     Next I
     
     'hdas
@@ -1026,7 +1027,7 @@ Dim B As Boolean
     txtAux(12).Enabled = (Modo = 4 And PagoTicket And Not SoloFacturado)
     
     'concepto
-    text2(1).Enabled = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
+    Text2(1).Enabled = (Modo = 1 Or (Modo = 4 And Not PagoTicket And Not SoloFacturado))
     
     
     For I = 0 To Me.btnBuscar.Count - 1
@@ -1038,8 +1039,8 @@ Dim B As Boolean
     btnBuscar(4).visible = (Modo = 1 Or (Modo = 4 And PagoTicket))
     btnBuscar(4).Enabled = (Modo = 1 Or (Modo = 4 And PagoTicket))
     
-    text2(0).visible = (Modo = 1)
-    text2(2).visible = (Modo = 1)
+    Text2(0).visible = (Modo = 1)
+    Text2(2).visible = (Modo = 1)
     
     cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
@@ -1128,7 +1129,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim Sql2 As String
-Dim SQL As String
+Dim Sql As String
     
     CadenaB = " WHERE rpozticketsmanta.fecpago is null "
 
@@ -1147,8 +1148,8 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
     
-    text2(0).Text = ""
-    text2(2).Text = ""
+    Text2(0).Text = ""
+    Text2(2).Text = ""
     
     SoloFacturado = False
     
@@ -1169,8 +1170,8 @@ Private Sub BotonBuscarFacturados()
         txtAux(I).Text = ""
     Next I
     
-    text2(0).Text = ""
-    text2(2).Text = ""
+    Text2(0).Text = ""
+    Text2(2).Text = ""
     
     SoloFacturado = True
     
@@ -1197,17 +1198,17 @@ Private Sub BotonModificar()
     If DataGrid1.Row < 0 Then
         anc = 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + 670 '545
+        anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top ' DataGrid1.RowTop(DataGrid1.Row) + 670 '545
     End If
 
     'Llamamos al form
     txtAux(2).Text = DataGrid1.Columns(0).Text
     txtAux(10).Text = DataGrid1.Columns(1).Text
     txtAux(0).Text = DataGrid1.Columns(2).Text
-    text2(2).Text = DataGrid1.Columns(3).Text
+    Text2(2).Text = DataGrid1.Columns(3).Text
     txtAux(1).Text = DataGrid1.Columns(4).Text
     txtAux(3).Text = DataGrid1.Columns(5).Text
-    text2(0).Text = DataGrid1.Columns(6).Text
+    Text2(0).Text = DataGrid1.Columns(6).Text
     txtAux(4).Text = DataGrid1.Columns(7).Text
     txtAux(5).Text = DataGrid1.Columns(8).Text
     txtAux(6).Text = DataGrid1.Columns(9).Text
@@ -1275,17 +1276,17 @@ Private Sub BotonPagoTicket()
     If DataGrid1.Row < 0 Then
         anc = 320
     Else
-        anc = DataGrid1.RowTop(DataGrid1.Row) + 670 '545
+        anc = DataGrid1.RowTop(DataGrid1.Row) + DataGrid1.Top 'DataGrid1.RowTop(DataGrid1.Row) + 670 '545
     End If
 
     'Llamamos al form
     txtAux(2).Text = DataGrid1.Columns(0).Text
     txtAux(10).Text = DataGrid1.Columns(1).Text
     txtAux(0).Text = DataGrid1.Columns(2).Text
-    text2(2).Text = DataGrid1.Columns(3).Text
+    Text2(2).Text = DataGrid1.Columns(3).Text
     txtAux(1).Text = DataGrid1.Columns(4).Text
     txtAux(3).Text = DataGrid1.Columns(5).Text
-    text2(0).Text = DataGrid1.Columns(6).Text
+    Text2(0).Text = DataGrid1.Columns(6).Text
     txtAux(4).Text = DataGrid1.Columns(7).Text
     txtAux(5).Text = DataGrid1.Columns(8).Text
     txtAux(6).Text = DataGrid1.Columns(9).Text
@@ -1315,8 +1316,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     For I = 0 To txtAux.Count - 1
         txtAux(I).Top = alto
     Next I
-    text2(0).Top = alto
-    text2(2).Top = alto
+    Text2(0).Top = alto
+    Text2(2).Top = alto
     For I = 0 To Me.btnBuscar.Count - 1
         btnBuscar(I).Top = alto
     Next I
@@ -1326,7 +1327,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 Dim vTipoMov As CTiposMov
 
@@ -1344,10 +1345,10 @@ Dim vTipoMov As CTiposMov
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Ticket?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = "¿Seguro que desea eliminar el Ticket?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
@@ -1356,8 +1357,8 @@ Dim vTipoMov As CTiposMov
         vTipoMov.DevolverContador "ALV", adodc1.Recordset!numalbar
         Set vTipoMov = Nothing
         
-        SQL = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
-        conn.Execute SQL
+        Sql = "Delete from rpozticketsmanta where numalbar=" & adodc1.Recordset!numalbar
+        conn.Execute Sql
         CargaGrid CadB
         
         
@@ -1522,7 +1523,7 @@ End Sub
 Private Sub cmdAceptar_Click()
     Dim I As Long
     Dim NReg As Long
-    Dim SQL As String
+    Dim Sql As String
     Dim Sql2 As String
     
     
@@ -1585,7 +1586,7 @@ Private Function ModificarRegistro() As Boolean
 Dim bol As Boolean
 Dim MenError As String
 Dim devuelve As String
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
 
     On Error GoTo EModifica
@@ -1677,41 +1678,41 @@ Dim Concepto As String
         Exit Function
     End If
     
-    Concepto = text2(1).Text & " Nro-" & txtAux(2).Text & " Fecha Riego " & txtAux(9).Text
+    Concepto = Text2(1).Text & " Nro-" & txtAux(2).Text & " Fecha Riego " & txtAux(9).Text
     
     
     'insertar en la tabla de recibos de pozos
-    SQL = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
-    SQL = SQL & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
-    SQL = SQL & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
-    SQL = SQL & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
-    SQL = SQL & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
-    SQL = SQL & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & ValorNulo & "," & ValorNulo & ","
-    SQL = SQL & DBSet(Concepto, "T") & ",0,"
-    SQL = SQL & DBSet(0, "N") & ","
-    SQL = SQL & DBSet(0, "N") & ","
-    SQL = SQL & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
-    SQL = SQL & DBSet(txtAux(2).Text, "N") & ","
-    SQL = SQL & DBSet(txtAux(10).Text, "F") & ","
-    SQL = SQL & DBSet(EsTicketContado, "B") & ")"
+    Sql = "insert into rrecibpozos (codtipom, numfactu, fecfactu, codsocio, hidrante, baseimpo, tipoiva, porc_iva, imporiva, "
+    Sql = Sql & "totalfact , consumo, impcuota, lect_ant, fech_ant, lect_act, fech_act, consumo1, precio1, consumo2, precio2, "
+    Sql = Sql & "concepto, contabilizado, porcdto, impdto, precio, numalbar, fecalbar, escontado) "
+    Sql = Sql & " values ('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & "," & DBSet(txtAux(0).Text, "N") & ","
+    Sql = Sql & ValorNulo & "," & DBSet(txtAux(8).Text, "N") & "," & DBSet(vParamAplic.CodIvaPOZ, "N") & "," & DBSet(PorcIva, "N") & "," & DBSet(ImpoIva, "N") & ","
+    Sql = Sql & DBSet(txtAux(8).Text, "N") & "," & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & ValorNulo & "," & ValorNulo & ","
+    Sql = Sql & DBSet(Concepto, "T") & ",0,"
+    Sql = Sql & DBSet(0, "N") & ","
+    Sql = Sql & DBSet(0, "N") & ","
+    Sql = Sql & DBSet(CCur(ImporteSinFormato(txtAux(11).Text)), "N") & ","
+    Sql = Sql & DBSet(txtAux(2).Text, "N") & ","
+    Sql = Sql & DBSet(txtAux(10).Text, "F") & ","
+    Sql = Sql & DBSet(EsTicketContado, "B") & ")"
     
-    conn.Execute SQL
+    conn.Execute Sql
         
         
     ' Introducimos en la tabla de lineas de campos que intervienen en la factura para la impresion
     ' SOLO HABRA UN CAMPO
-    SQL = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
+    Sql = "insert into rrecibpozos_cam (codtipom, numfactu, fecfactu, codcampo, hanegada, precio1, codzonas, poligono, parcela, subparce) values  "
     
-    SQL = SQL & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
-    SQL = SQL & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
-    SQL = SQL & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
-    SQL = SQL & ")"
+    Sql = Sql & "('" & CodTipom & "'," & DBSet(numfactu, "N") & "," & DBSet(txtAux(12).Text, "F") & ","
+    Sql = Sql & DBSet(txtAux(1).Text, "N") & "," & DBSet(txtAux(7).Text, "N") & "," & DBSet(txtAux(11).Text, "N") & ","
+    Sql = Sql & DBSet(txtAux(3).Text, "N") & "," & DBSet(txtAux(4).Text, "N") & "," & DBSet(txtAux(5).Text, "N") & "," & DBSet(txtAux(5).Text, "T")
+    Sql = Sql & ")"
 
-    conn.Execute SQL
+    conn.Execute Sql
 
     vTipoMov.IncrementarContador (CodTipom)
     Set vTipoMov = Nothing
@@ -1803,7 +1804,7 @@ End Sub
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     If Modo = 2 Then
         PonerContRegIndicador lblIndicador, adodc1, CadB
-        text2(1).Text = adodc1.Recordset!Concepto
+        Text2(1).Text = adodc1.Recordset!Concepto
     End If
 End Sub
 
@@ -1929,7 +1930,7 @@ End Sub
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
     FormateaCampo txtAux(1)
-    text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
+    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
 End Sub
 
 Private Sub mnActualizar_Click()
@@ -1938,7 +1939,7 @@ End Sub
 Private Sub frmZon_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de zona
     FormateaCampo txtAux(3)
-    text2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de zona
+    Text2(0).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de zona
 End Sub
 
 Private Sub mnBuscar_Click()
@@ -2020,27 +2021,27 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     Dim Sql2 As String
     
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " " & CadenaB & " AND " & vSQL
+        Sql = CadenaConsulta & " " & CadenaB & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " " & CadenaB
+        Sql = CadenaConsulta & " " & CadenaB
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " " & Ordenacion
+    Sql = Sql & " " & Ordenacion
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(2)|T|Albarán|1000|;S|txtAux(10)|T|Fecha|1300|;S|btnBuscar(1)|B|||;S|txtAux(0)|T|Socio|1000|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|2450|;S|txtAux(1)|T|Campo|1200|;"
+    tots = "S|txtAux(2)|T|Albarán|1000|;S|txtAux(10)|T|Fecha|1400|;S|btnBuscar(1)|B|||;S|txtAux(0)|T|Socio|1000|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|2450|;S|txtAux(1)|T|Campo|1200|;"
     tots = tots & "S|txtAux(3)|T|Cód|600|;S|btnBuscar(2)|B||195|;S|Text2(0)|T|Braçal|1500|;"
     tots = tots & "S|txtAux(4)|T|Pol|500|;S|txtAux(5)|T|Parc|800|;S|txtAux(6)|T|Sb|500|;"
-    tots = tots & "S|txtAux(7)|T|Hdas|800|;S|txtAux(11)|T|Precio|1000|;S|txtAux(8)|T|Importe|1200|;S|txtAux(9)|T|Fec.Riego|1300|;S|btnBuscar(3)|B|||;S|txtAux(12)|T|Fec.Pago|1300|;S|btnBuscar(4)|B|||;N|Text2(1)(8)|T|Importe|1000|;"
+    tots = tots & "S|txtAux(7)|T|Hdas|800|;S|txtAux(11)|T|Precio|1000|;S|txtAux(8)|T|Importe|1200|;S|txtAux(9)|T|Fec.Riego|1400|;S|btnBuscar(3)|B|||;S|txtAux(12)|T|Fec.Pago|1400|;S|btnBuscar(4)|B|||;N|Text2(1)(8)|T|Importe|1000|;"
     
     arregla tots, DataGrid1, Me, 350
     
@@ -2080,11 +2081,11 @@ Private Sub txtAux_LostFocus(Index As Integer)
             
         Case 0 'socio
             If txtAux(Index).Text <> "" Then txtAux(Index).Text = Format(txtAux(Index).Text, "000000")
-            text2(2).Text = PonerNombreDeCod(txtAux(Index), "rsocios", "nomsocio", "codsocio", "N")
+            Text2(2).Text = PonerNombreDeCod(txtAux(Index), "rsocios", "nomsocio", "codsocio", "N")
 
         Case 3 'zona
             If txtAux(Index).Text <> "" Then txtAux(Index).Text = Format(txtAux(Index).Text, "0000")
-            text2(0).Text = PonerNombreDeCod(txtAux(Index), "rzonas", "nomzonas", "codzonas", "N")
+            Text2(0).Text = PonerNombreDeCod(txtAux(Index), "rzonas", "nomzonas", "codzonas", "N")
         
         Case 11 'precio
             PonerFormatoDecimal txtAux(Index), 7
@@ -2101,7 +2102,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer

@@ -751,6 +751,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     txtAux2(2).visible = Not B
@@ -943,7 +944,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -958,20 +959,20 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el registro para facturar?"
+    Sql = "¿Seguro que desea eliminar el registro para facturar?"
     If ParamTabla = "rsocios" Then
-        SQL = SQL & vbCrLf & "Socio: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+        Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
     Else
-        SQL = SQL & vbCrLf & "Cliente: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
+        Sql = Sql & vbCrLf & "Cliente: " & adodc1.Recordset.Fields(1) & " " & adodc1.Recordset.Fields(2)
     End If
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
-        SQL = SQL & " and codsoccli = " & adodc1.Recordset!CODSOCCLI
+        Sql = "Delete from tmpfactvarias where codusu=" & vUsu.Codigo
+        Sql = Sql & " and codsoccli = " & adodc1.Recordset!CODSOCCLI
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1167,7 +1168,7 @@ Private Sub Form_Activate()
 End Sub
 
 Private Sub Form_Load()
-Dim SQL As String
+Dim Sql As String
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -1225,8 +1226,8 @@ Dim SQL As String
     
     If TotalRegistrosConsulta("select * from tmpfactvarias where codusu = " & vUsu.Codigo) > 0 Then
         If MsgBox("¿ Desea eliminar los registros anteriormente insertados ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbYes Then
-            SQL = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
-            conn.Execute SQL
+            Sql = "delete from tmpfactvarias where codusu = " & vUsu.Codigo
+            conn.Execute Sql
         End If
     End If
     
@@ -1324,24 +1325,24 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
-    SQL = SQL & " and tmpfactvarias.codusu = " & vUsu.Codigo
+    Sql = Sql & " and tmpfactvarias.codusu = " & vUsu.Codigo
     
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
+    Sql = Sql & " ORDER BY tmpfactvarias.codusu, tmpfactvarias.codsoccli "
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     If ParamTabla = "rsocios" Then
@@ -1371,19 +1372,19 @@ Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(importe) importe from tmpfactvarias where codusu = " & vUsu.Codigo
+    Sql = "select sum(importe) importe from tmpfactvarias where codusu = " & vUsu.Codigo
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     Importe = 0
     Text3.Text = ""
     
-    If TotalRegistrosConsulta(SQL) = 0 Then Exit Sub
+    If TotalRegistrosConsulta(Sql) = 0 Then Exit Sub
     
     If Not Rs.EOF Then
         If Rs.Fields(0).Value <> 0 Then Importe = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
@@ -1477,7 +1478,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
@@ -1572,7 +1573,7 @@ End Sub
 
 Private Sub CargaCombo()
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
     
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***

@@ -632,6 +632,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     txtAux2(2).visible = Not B
     txtAux2(0).visible = Not B
@@ -747,7 +748,7 @@ End Sub
 
 
 Private Sub BotonMermar()
-Dim SQL As String
+Dim Sql As String
 Dim NumF As Long
 Dim Result As String
 Dim Totales As Long
@@ -783,17 +784,17 @@ Dim resto As Long
         Totales = DBLet(Me.adodc1.Recordset!Kilos, "N")
         resto = Totales - ComprobarCero(Result)
         'merma
-        SQL = "update trzmovim set kilos = " & DBSet(Result, "N") & ", esmerma = 1 where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
-        conn.Execute SQL
+        Sql = "update trzmovim set kilos = " & DBSet(Result, "N") & ", esmerma = 1 where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
+        conn.Execute Sql
         
         'resto
         NumF = DevuelveValor("select max(coalesce(codigo,0)) from trzmovim")
         NumF = NumF + 1
         
-        SQL = "insert into trzmovim (codigo,numpalet,fecha,codvarie,kilos) select " & NumF & ",numpalet,fecha,codvarie," & DBSet(resto, "N")
-        SQL = SQL & " from trzmovim where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
+        Sql = "insert into trzmovim (codigo,numpalet,fecha,codvarie,kilos) select " & NumF & ",numpalet,fecha,codvarie," & DBSet(resto, "N")
+        Sql = Sql & " from trzmovim where codigo = " & DBSet(Me.adodc1.Recordset!Codigo, "N")
         
-        conn.Execute SQL
+        conn.Execute Sql
         
         conn.CommitTrans
         
@@ -874,7 +875,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -889,19 +890,19 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Movimiento?"
-    SQL = SQL & vbCrLf & "Codigo:    " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Palet:    " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Variedad:   " & adodc1.Recordset.Fields(7) & " - " & adodc1.Recordset.Fields(8)
-    SQL = SQL & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(3)
+    Sql = "¿Seguro que desea eliminar el Movimiento?"
+    Sql = Sql & vbCrLf & "Codigo:    " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Palet:    " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Variedad:   " & adodc1.Recordset.Fields(7) & " - " & adodc1.Recordset.Fields(8)
+    Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from trzmovim where codigo= " & adodc1.Recordset.Fields(0)
+        Sql = "Delete from trzmovim where codigo= " & adodc1.Recordset.Fields(0)
         
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1319,7 +1320,7 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
@@ -1327,17 +1328,17 @@ Private Sub CargaGrid(Optional vSQL As String)
 '    adodc1.ConnectionString = Conn
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " and " & CadenaFiltro & " AND " & vSQL
+        Sql = CadenaConsulta & " and " & CadenaFiltro & " AND " & vSQL
     Else
-        SQL = CadenaConsulta & " and " & CadenaFiltro & "  "
+        Sql = CadenaConsulta & " and " & CadenaFiltro & "  "
     End If
 
     '********************* canviar el ORDER BY *********************++
     'SQL = SQL & " ORDER BY trzmovim.codigo "
-    SQL = SQL & " " & Ordenacion
+    Sql = Sql & " " & Ordenacion
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "N|txtAux(0)|T|Codigo|1200|;"
@@ -1356,7 +1357,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(7).Alignment = dbgLeft
 '   DataGrid1.Columns(2).Alignment = dbgRight
 
-    CalcularTotales SQL
+    CalcularTotales Sql
 
 End Sub
 
@@ -1405,7 +1406,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1413,9 +1414,9 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-         SQL = ""
-         SQL = DevuelveDesdeBDNew(cAgro, "codigoean", "codclien", "codclien", txtAux(0).Text, "N", , "codforfait", txtAux(1), "T", "codvarie", txtAux(2), "N")
-         If SQL <> "" Then
+         Sql = ""
+         Sql = DevuelveDesdeBDNew(cAgro, "codigoean", "codclien", "codclien", txtAux(0).Text, "N", , "codforfait", txtAux(1), "T", "codvarie", txtAux(2), "N")
+         If Sql <> "" Then
             MsgBox "Código Ean existente para el cliente, forfait y variedad. Revise.", vbExclamation
             B = False
          End If
@@ -1524,14 +1525,14 @@ Dim Compleme As Currency
 Dim Penaliza As Currency
 
 Dim Rs As ADODB.Recordset
-Dim SQL As String
+Dim Sql As String
 
     On Error Resume Next
     
-    SQL = "select sum(kilos) kilos from (" & cadena & ") aaaaa"
+    Sql = "select sum(kilos) kilos from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     txtAux2(4).Text = ""
     
@@ -1550,23 +1551,23 @@ Dim SQL As String
 End Sub
 
 Private Sub LeerFiltro(Leer As Boolean)
-Dim SQL As String
+Dim Sql As String
 
-    SQL = App.Path & "\filtrotrz.dat"
+    Sql = App.Path & "\filtrotrz.dat"
     If Leer Then
         Filtro = 3
-        If Dir(SQL) <> "" Then
-            AbrirFicheroFiltro True, SQL
-            If IsNumeric(Trim(SQL)) Then Filtro = CByte(SQL)
+        If Dir(Sql) <> "" Then
+            AbrirFicheroFiltro True, Sql
+            If IsNumeric(Trim(Sql)) Then Filtro = CByte(Sql)
         End If
     Else
-        AbrirFicheroFiltro False, SQL
+        AbrirFicheroFiltro False, Sql
     End If
 End Sub
 
 
 Private Sub AbrirFicheroFiltro(Leer As Boolean, Fichero As String)
-Dim SQL As String
+Dim Sql As String
 Dim I As Integer
 
 On Error GoTo EAbrir

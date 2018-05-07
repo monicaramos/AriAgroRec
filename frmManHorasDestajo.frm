@@ -811,6 +811,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     txtAux2(0).visible = Not B
@@ -1727,12 +1728,12 @@ Dim PrecKilo As String
 End Function
 
 
-Private Function Horas(Importe As String, trabajador As String) As String
+Private Function Horas(Importe As String, Trabajador As String) As String
 Dim PrecHora As String
 Dim Sql As String
 
     Sql = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
-    Sql = Sql & " where straba.codtraba = " & DBSet(trabajador, "N")
+    Sql = Sql & " where straba.codtraba = " & DBSet(Trabajador, "N")
     
     PrecHora = DevuelveValor(Sql)
     

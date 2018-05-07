@@ -908,6 +908,7 @@ Dim I As Integer
     ' **** posar tots els controls (botons inclosos) que siguen del Grid
     For I = 0 To 4
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     txtAux(8).visible = Not B ' centro de coste
     txtAux(10).visible = Not B ' centro de coste

@@ -601,7 +601,7 @@ End Sub
 
 
 Private Sub Form_Load()
-Dim SQL As String
+Dim Sql As String
 
     'Icono del formulario
     Me.Icon = frmPpal.Icon
@@ -634,10 +634,10 @@ Dim SQL As String
     AscAnt = True
     
     'ASignamos un SQL al DATA1
-    SQL = "Select codtipom, nomtipom, If(muevesto=1,""Si"",""No"") AS MovStock, contador, letraser, CASE tipodocu WHEN 0 THEN ""Sin Asignar"" WHEN 1 THEN ""Anticipo"" "
-    SQL = SQL & " WHEN 2 THEN ""Liquidacion""  WHEN 3 THEN ""Ant.VC"" WHEN 4 THEN ""Liq.VC"" WHEN 5 THEN ""Subvención"" WHEN 6 THEN ""Siniestro""  "
-    SQL = SQL & " WHEN 7 THEN ""Ant.ALMZ"" WHEN 8 THEN ""Liq.ALMZ"" WHEN 9 THEN ""Ant.BOD"" WHEN 10 THEN ""Liq.BOD"" WHEN 11 THEN ""Rectific"" END, tipodocu "
-    CadenaConsulta = SQL & " from " & NombreTabla & " where tipodocu <> 12 "
+    Sql = "Select codtipom, nomtipom, If(muevesto=1,""Si"",""No"") AS MovStock, contador, letraser, CASE tipodocu WHEN 0 THEN ""Sin Asignar"" WHEN 1 THEN ""Anticipo"" "
+    Sql = Sql & " WHEN 2 THEN ""Liquidacion""  WHEN 3 THEN ""Ant.VC"" WHEN 4 THEN ""Liq.VC"" WHEN 5 THEN ""Subvención"" WHEN 6 THEN ""Siniestro""  "
+    Sql = Sql & " WHEN 7 THEN ""Ant.ALMZ"" WHEN 8 THEN ""Liq.ALMZ"" WHEN 9 THEN ""Ant.BOD"" WHEN 10 THEN ""Liq.BOD"" WHEN 11 THEN ""Rectific"" END, tipodocu "
+    CadenaConsulta = Sql & " from " & NombreTabla & " where tipodocu <> 12 "
  
     CargaGrid "", Ordenacion
     
@@ -773,7 +773,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -782,15 +782,15 @@ Dim temp As Boolean
     If Not SepuedeBorrar Then Exit Sub
     
     '### a mano
-    SQL = "¿Seguro que desea eliminar el Tipo de Movimiento?"
-    SQL = SQL & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Denominación: " & Data1.Recordset.Fields(1)
-    If MsgBox(SQL, vbQuestion + vbYesNoCancel) = vbYes Then
+    Sql = "¿Seguro que desea eliminar el Tipo de Movimiento?"
+    Sql = Sql & vbCrLf & "Código: " & Data1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Denominación: " & Data1.Recordset.Fields(1)
+    If MsgBox(Sql, vbQuestion + vbYesNoCancel) = vbYes Then
         'Hay que eliminar
         NumRegElim = Data1.Recordset.AbsolutePosition
 
-        SQL = "Delete from usuarios.stipom where codtipom='" & Data1.Recordset!CodTipom & "'"
-        conn.Execute SQL
+        Sql = "Delete from usuarios.stipom where codtipom='" & Data1.Recordset!CodTipom & "'"
+        conn.Execute Sql
         CancelaADODC Me.Data1
         CargaGrid ""
         temp = SituarDataTrasEliminar(Me.Data1, NumRegElim, True)
@@ -836,18 +836,18 @@ End Sub
 Private Sub CargaGrid(Optional vSQL As String, Optional Orden As String)
 Dim I As Byte
 Dim tots As String
-Dim SQL As String
+Dim Sql As String
 
     
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " and " & vSQL
+        Sql = CadenaConsulta & " and " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
-    If Orden <> "" Then SQL = SQL & " ORDER BY " & Orden
+    If Orden <> "" Then Sql = Sql & " ORDER BY " & Orden
     
-    CargaGridGnral DataGrid1, Me.Data1, SQL, PrimeraVez
+    CargaGridGnral DataGrid1, Me.Data1, Sql, PrimeraVez
     
     
     tots = "S|txtAux(0)|T|Código|800|;S|txtAux(1)|T|Denominación|3300|;S|CboMueveStock|C|Mueve Stock|1400|;"
@@ -957,6 +957,7 @@ Dim I As Byte
 
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     txtAux(4).visible = False
     
@@ -1142,7 +1143,7 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 Private Function SepuedeBorrar() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Sql1 As String
 Dim cad As String
 Dim Rs As ADODB.Recordset
@@ -1150,10 +1151,10 @@ Dim B As Boolean
 
     SepuedeBorrar = False
     
-    SQL = "select ariagro from usuarios.empresasariagro order by codempre"
+    Sql = "select ariagro from usuarios.empresasariagro order by codempre"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     B = True
     While Not Rs.EOF And B
         Sql1 = "select count(*) from " & Trim(Rs.Fields(0).Value) & ".rfactsoc where codtipom= "

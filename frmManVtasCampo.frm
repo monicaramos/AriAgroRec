@@ -899,7 +899,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 Dim cadSelGrid As String
 
 Private Sub PonerModo(vModo)
@@ -915,13 +915,14 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(I), (Modo = 0 Or Modo = 2)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(i), (Modo = 0 Or Modo = 2)
+    Next i
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     txtAux2(0).visible = Not B
     txtAux2(1).visible = Not B
@@ -942,12 +943,12 @@ Dim B As Boolean
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     'Si estamos modo Modificar bloquear todo excepto el importe de anticipo
-    For I = 0 To txtAux.Count - 1
-        If I <> 6 Then txtAux(I).Enabled = (Modo <> 4)
-    Next I
-    For I = 0 To 2
-        BloquearBtn Me.btnBuscar(I), (Modo = 4)
-    Next I
+    For i = 0 To txtAux.Count - 1
+        If i <> 6 Then txtAux(i).Enabled = (Modo <> 4)
+    Next i
+    For i = 0 To 2
+        BloquearBtn Me.btnBuscar(i), (Modo = 4)
+    Next i
     Combo1(0).Enabled = (Modo <> 4)
     
 End Sub
@@ -1023,9 +1024,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
 
@@ -1046,9 +1047,9 @@ Private Sub BotonBuscar()
     CargaGrid "rhisfruta.numalbar = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     txtAux2(0).Text = ""
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
@@ -1059,13 +1060,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1089,9 +1090,9 @@ Private Sub BotonModificar()
     txtAux(6).Text = DataGrid1.Columns(11).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    I = adodc1.Recordset!Recolect
+    i = adodc1.Recordset!Recolect
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), I
+    PosicionarCombo Me.Combo1(0), i
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -1105,9 +1106,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
@@ -1122,7 +1123,7 @@ End Sub
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1137,17 +1138,17 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar la Calidad?"
-    SQL = SQL & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(2)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(3)
+    Sql = "¿Seguro que desea eliminar la Calidad?"
+    Sql = Sql & vbCrLf & "Variedad: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(2)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(3)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rcalidad where codvarie=" & adodc1.Recordset!Codvarie
-        SQL = SQL & " and codcalid = " & adodc1.Recordset!codcalid
-        conn.Execute SQL
+        Sql = "Delete from rcalidad where codvarie=" & adodc1.Recordset!Codvarie
+        Sql = Sql & " and codcalid = " & adodc1.Recordset!codcalid
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1272,7 +1273,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Long
+    Dim i As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1312,7 +1313,7 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(9)
+                    i = adodc1.Recordset.Fields(9)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1322,7 +1323,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1357,7 +1358,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1366,16 +1367,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1523,11 +1524,11 @@ Private Sub mnEliminar_Click()
 End Sub
 
 Private Sub mnGenerarFactura_Click()
-Dim SQL As String
+Dim Sql As String
 
-    SQL = CadB
+    Sql = CadB
     AbrirListadoAnticipos (6)
-    CargaGrid SQL
+    CargaGrid Sql
     
 End Sub
 
@@ -1586,14 +1587,14 @@ End Sub
 
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     cadSelGrid = vSQL
@@ -1602,10 +1603,10 @@ Private Sub CargaGrid(Optional vSQL As String)
 '    If ParamVariedad <> "" Then SQL = SQL & " and rcalidad.codvarie = " & ParamVariedad
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rhisfruta.codvarie, rhisfruta.codsocio, rhisfruta.codcampo, rhisfruta.numalbar"
+    Sql = Sql & " ORDER BY rhisfruta.codvarie, rhisfruta.codsocio, rhisfruta.codcampo, rhisfruta.numalbar"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|btnBuscar(0)|B|||;S|txtAux2(0)|T|Variedad|1500|;"
@@ -1683,7 +1684,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
     B = CompForm(Me)
@@ -1775,18 +1776,18 @@ End Sub
 Private Sub CalcularTotales()
 'calcula la cantidad total y el importe total para los
 'registros mostrados de cada artículo
-Dim SQL As String
+Dim Sql As String
 Dim Rs As ADODB.Recordset
     
     On Error GoTo ErrTotales
 '    If cadSelGrid = "" Then Exit Sub
     
-    SQL = "SELECT sum(impentrada) as totImporte,sum(kilosnet) as totKilos from rhisfruta "
-    SQL = SQL & " where rhisfruta.tipoentr = 1 "
-    If cadSelGrid <> "" Then SQL = SQL & " and " & cadSelGrid
+    Sql = "SELECT sum(impentrada) as totImporte,sum(kilosnet) as totKilos from rhisfruta "
+    Sql = Sql & " where rhisfruta.tipoentr = 1 "
+    If cadSelGrid <> "" Then Sql = Sql & " and " & cadSelGrid
 
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     If Not Rs.EOF Then
         Text2(4).Text = DBLet(Rs!totImporte, "N")
@@ -1806,18 +1807,18 @@ End Sub
 
 
 Private Sub MostrarFacturasAnticiposSinKilos(CadB As String)
-Dim SQL As String
+Dim Sql As String
 Dim Facturas As String
 Dim cadWHERE As String
 Dim Rs As ADODB.Recordset
 
 
-    SQL = "select distinct rfactsoc.numfactu, rfactsoc.fecfactu from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and  rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
-    SQL = SQL & " where rfactsoc.codtipom = 'FAC' and " & Replace(Replace(CadB, "rhisfruta.codsocio", "rfactsoc.codsocio"), "rhisfruta.codvarie", "rfactsoc_variedad.codvarie")
-    SQL = SQL & " and rfactsoc_variedad.kilosnet = 0"
-    If TotalRegistrosConsulta(SQL) <> 0 Then
+    Sql = "select distinct rfactsoc.numfactu, rfactsoc.fecfactu from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and  rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
+    Sql = Sql & " where rfactsoc.codtipom = 'FAC' and " & Replace(Replace(CadB, "rhisfruta.codsocio", "rfactsoc.codsocio"), "rhisfruta.codvarie", "rfactsoc_variedad.codvarie")
+    Sql = Sql & " and rfactsoc_variedad.kilosnet = 0"
+    If TotalRegistrosConsulta(Sql) <> 0 Then
         Set Rs = New ADODB.Recordset
-        Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+        Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
    
         Facturas = "Facturas de Anticipos sin Kilos Entrados: " & vbCrLf & vbCrLf
         Facturas = ""
@@ -1837,3 +1838,4 @@ Dim Rs As ADODB.Recordset
     End If
 
 End Sub
+

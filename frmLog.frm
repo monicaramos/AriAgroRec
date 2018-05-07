@@ -482,7 +482,7 @@ Dim Modo As Byte
 
 Private Sub PonerModo(vModo As Byte)
 Dim B As Boolean
-
+Dim i As Integer
     Modo = vModo
     B = (Modo = 2)
     PonerIndicador Me.lblIndicador, Modo
@@ -491,6 +491,10 @@ Dim B As Boolean
     txtAux(1).visible = Not B
     txtAux(2).visible = Not B
     txtAux(3).visible = Not B
+    
+    For i = 0 To 3
+      txtAux(i).BackColor = vbWhite
+    Next i
     
     CboTipoSitu.visible = Not B
     cmdAceptar.visible = Not B

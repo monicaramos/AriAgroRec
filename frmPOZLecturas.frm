@@ -836,7 +836,7 @@ Dim FechaAnt As String
 Dim OK As Boolean
 Dim CadB1 As String
 Dim Filtro As Integer
-Dim SQL As String
+Dim Sql As String
 
 
 Dim CadB2 As String
@@ -856,6 +856,7 @@ Dim B As Boolean
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = (Modo = 1)
         txtAux(I).Enabled = (Modo = 1)
+        txtAux(I).BackColor = vbWhite
     Next I
     
     For I = 4 To 5
@@ -871,8 +872,8 @@ Dim B As Boolean
     btnBuscar(2).visible = (Modo <> 2)
     btnBuscar(2).Enabled = (Modo <> 2)
     
-    Text2(2).visible = (Modo = 1)
-    Text2(3).visible = (Modo = 1)
+    text2(2).visible = (Modo = 1)
+    text2(3).visible = (Modo = 1)
     
     cmdAceptar.visible = Not B
     cmdCancelar.visible = Not B
@@ -959,7 +960,7 @@ End Sub
 
 Private Sub BotonVerTodos()
 Dim Sql2 As String
-Dim SQL As String
+Dim Sql As String
 
     CadB = AnyadeCadenaFiltro(False)
     
@@ -987,8 +988,8 @@ Private Sub BotonBuscar()
         txtAux(I).Text = ""
     Next I
     
-    Text2(2).Text = ""
-    Text2(3).Text = ""
+    text2(2).Text = ""
+    text2(3).Text = ""
     
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
@@ -1015,9 +1016,9 @@ Private Sub BotonModificar()
     'Llamamos al form
     txtAux(0).Text = DataGrid1.Columns(0).Text
     txtAux(1).Text = DataGrid1.Columns(2).Text 'codsocio
-    Text2(2).Text = DataGrid1.Columns(3).Text
+    text2(2).Text = DataGrid1.Columns(3).Text
     txtAux(2).Text = DataGrid1.Columns(4).Text
-    Text2(3).Text = DataGrid1.Columns(5).Text
+    text2(3).Text = DataGrid1.Columns(5).Text
     txtAux(3).Text = DataGrid1.Columns(6).Text
     
     If FechaAnt = "" Then
@@ -1052,8 +1053,8 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     For I = 0 To txtAux.Count - 1
         txtAux(I).Top = alto
     Next I
-    Text2(2).Top = alto
-    Text2(3).Top = alto
+    text2(2).Top = alto
+    text2(3).Top = alto
     For I = 0 To Me.btnBuscar.Count - 1
         btnBuscar(I).Top = alto
     Next I
@@ -1063,7 +1064,7 @@ End Sub
 
 
 Private Sub BotonCargarLecturas()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1078,8 +1079,8 @@ Dim temp As Boolean
         If Dir(App.Path & "\Escalona\escalona.z") = "" Then
             MsgBox "El proceso de carga debe de estar realizandose. Espere.", vbExclamation
         Else
-            SQL = "Se va a proceder a realizar la carga de la tabla intermedia. " & vbCrLf & vbCrLf & "¿ Desea continuar ?"
-            If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+            Sql = "Se va a proceder a realizar la carga de la tabla intermedia. " & vbCrLf & vbCrLf & "¿ Desea continuar ?"
+            If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
             
                 '------------------------------------------------------------------------------
                 '  LOG de acciones
@@ -1089,8 +1090,8 @@ Dim temp As Boolean
                 '-----------------------------------------------------------------------------
                      
                 ' Primero eliminamos todos los registros rpozos_lectura que no tengan la fecha de proceso
-                SQL = "delete from rpozos_lectura where fecproceso is null"
-                conn.Execute SQL
+                Sql = "delete from rpozos_lectura where fecproceso is null"
+                conn.Execute Sql
                     
                 ' eliminamos el registro chivato
                 Kill App.Path & "\Escalona\escalona.z"
@@ -1110,7 +1111,7 @@ End Sub
 
 
 Private Sub BotonActualizar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1123,25 +1124,25 @@ Dim temp As Boolean
     
     Else
         If Dir(App.Path & "\Escalona\escalona.z", vbDirectory) = "" Then
-            SQL = "No se puede realizar una actualización sin que haya realizado la carga."
-            MsgBox SQL, vbInformation
+            Sql = "No se puede realizar una actualización sin que haya realizado la carga."
+            MsgBox Sql, vbInformation
         Else
-            SQL = "select count(*) from rpozos_lectura where fecproceso is null"
-            If TotalRegistros(SQL) = 0 Then
+            Sql = "select count(*) from rpozos_lectura where fecproceso is null"
+            If TotalRegistros(Sql) = 0 Then
                 MsgBox "No hay cargas pendientes de procesar.", vbExclamation
                 Exit Sub
             End If
         
-            SQL = "Se va a proceder a realizar la actualización de los contadores. " & vbCrLf & vbCrLf
+            Sql = "Se va a proceder a realizar la actualización de los contadores. " & vbCrLf & vbCrLf
             '[Monica]17/05/2013: indicamos que tipo de lectura se va a actualizar
             ' leemos la lectura de la base de datos
             If vParamAplic.TipoLecturaPoz Then
-                SQL = SQL & "Se va a utilizar la LECTURA de la BASE DE DATOS." & vbCrLf & vbCrLf
+                Sql = Sql & "Se va a utilizar la LECTURA de la BASE DE DATOS." & vbCrLf & vbCrLf
             Else
-                SQL = SQL & "Se va a utilizar la LECTURA del CONTADOR." & vbCrLf & vbCrLf
+                Sql = Sql & "Se va a utilizar la LECTURA del CONTADOR." & vbCrLf & vbCrLf
             End If
-            SQL = SQL & "¿ Desea continuar ?"
-            If MsgBox(SQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
+            Sql = Sql & "¿ Desea continuar ?"
+            If MsgBox(Sql, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
             
                 '------------------------------------------------------------------------------
                 '  LOG de acciones
@@ -1166,7 +1167,7 @@ Error2:
 End Sub
 
 Private Function ActualizarContadores() As Boolean
-Dim SQL As String, Sql2 As String, Sql3 As String
+Dim Sql As String, Sql2 As String, Sql3 As String
 Dim Rs As ADODB.Recordset, Rs2 As ADODB.Recordset
 Dim B As Boolean
 Dim Hidrante As String
@@ -1185,12 +1186,12 @@ Dim NroDig As Long
     Screen.MousePointer = vbHourglass
     Label1.visible = True
     
-    SQL = "select * from rpozos_lectura where fecproceso is null order by hidrante"
+    Sql = "select * from rpozos_lectura where fecproceso is null order by hidrante"
     
     B = True
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF And B
         
@@ -1285,7 +1286,7 @@ End Function
 
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1300,15 +1301,15 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Hidrante?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = "¿Seguro que desea eliminar el Hidrante?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
-        SQL = "Delete from rpozos where hidrante='" & adodc1.Recordset!Hidrante & "'"
-        conn.Execute SQL
+        Sql = "Delete from rpozos where hidrante='" & adodc1.Recordset!Hidrante & "'"
+        conn.Execute Sql
         CargaGrid CadB
         
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
@@ -1410,7 +1411,7 @@ End Sub
 Private Sub cmdAceptar_Click()
     Dim I As String
     Dim NReg As Long
-    Dim SQL As String
+    Dim Sql As String
     Dim Sql2 As String
     
     Select Case Modo
@@ -1671,13 +1672,13 @@ End Sub
 Private Sub frmPar_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(2).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo de partida
     FormateaCampo txtAux(2)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre de partida
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
     txtAux(1).Text = RecuperaValor(CadenaSeleccion, 1) 'codsocio
     FormateaCampo txtAux(1)
-    Text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
+    text2(2).Text = RecuperaValor(CadenaSeleccion, 2) 'nomsocio
 End Sub
 
 Private Sub mnActualizar_Click()
@@ -1767,23 +1768,23 @@ Private Sub Toolbar5_ButtonClick(ByVal Button As MSComctlLib.Button)
     End Select
 End Sub
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     Dim Sql2 As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
 '        Sql = Sql & " ORDER BY rpozos.nroorden"
-    SQL = SQL & " " & Ordenacion
+    Sql = Sql & " " & Ordenacion
     '**************************************************************++
     
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Hidrante|1000|;S|txtAux(6)|T|Orden|1000|;S|txtAux(1)|T|Socio|1000|;S|btnBuscar(0)|B||195|;S|Text2(2)|T|Nombre|3000|;"
@@ -1829,7 +1830,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim FechaAnt As Date
 Dim NroDig As Integer
@@ -2059,12 +2060,12 @@ End Sub
 
 
 Private Sub LeerFiltro(Leer As Boolean)
-    SQL = App.Path & "\filtro.dat"
+    Sql = App.Path & "\filtro.dat"
     If Leer Then
         Filtro = 0
-        If Dir(SQL) <> "" Then
+        If Dir(Sql) <> "" Then
             AbrirFicheroFiltro True
-            If IsNumeric(SQL) Then Filtro = CByte(SQL)
+            If IsNumeric(Sql) Then Filtro = CByte(Sql)
         End If
     Else
         AbrirFicheroFiltro False
@@ -2076,11 +2077,11 @@ Private Sub AbrirFicheroFiltro(Leer As Boolean)
 On Error GoTo EAbrir
     I = FreeFile
     If Leer Then
-        Open SQL For Input As #I
-        SQL = "0"
-        Line Input #I, SQL
+        Open Sql For Input As #I
+        Sql = "0"
+        Line Input #I, Sql
     Else
-        Open SQL For Output As #I
+        Open Sql For Output As #I
         Print #I, Filtro
     End If
     Close #I

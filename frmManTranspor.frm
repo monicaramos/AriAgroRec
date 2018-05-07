@@ -1366,6 +1366,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     ' **** si n'hi han camps fora del grid, bloquejar-los ****
@@ -1608,7 +1609,7 @@ Dim jj As Integer
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1623,19 +1624,19 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Transportista?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Transportista?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
         
         'chivato
         CargarUnVehiculo CStr(adodc1.Recordset!codTrans), "D"
         
-        SQL = "Delete from rtransporte where codtrans=" & DBSet(adodc1.Recordset!codTrans, "T")
-        conn.Execute SQL
+        Sql = "Delete from rtransporte where codtrans=" & DBSet(adodc1.Recordset!codTrans, "T")
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -2079,20 +2080,20 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rtransporte.codtrans"
+    Sql = Sql & " ORDER BY rtransporte.codtrans"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1000|;S|txtAux(1)|T|Descripción|3850|;S|txtAux(2)|T|Matrícula|1300|;S|txtAux(3)|T|Tara Vehículo|1500|;"
@@ -2204,7 +2205,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 Dim cta As String
 Dim cadMen As String
@@ -2478,7 +2479,7 @@ End Sub
 
 Private Sub txtAux1_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 
     If Not PerderFocoGnral(txtAux1(Index), Modo) Then Exit Sub
     
@@ -2587,11 +2588,11 @@ Dim SQL As String
 End Sub
 
 Private Sub VisualizarMatriculas()
-Dim SQL As String
+Dim Sql As String
 Dim Nregs As Integer
 
-    SQL = "select count(*) from rtransporte where niftrans = " & DBSet(txtAux1(7).Text, "T")
-    Nregs = TotalRegistros(SQL)
+    Sql = "select count(*) from rtransporte where niftrans = " & DBSet(txtAux1(7).Text, "T")
+    Nregs = TotalRegistros(Sql)
     If (Nregs > 0 And Modo = 3) Then
         Set frmMens = New frmMensajes
         frmMens.OpcionMensaje = 60
@@ -2606,7 +2607,7 @@ End Sub
 
 
 Private Sub ModificarDatosCuentaContable()
-Dim SQL As String
+Dim Sql As String
 Dim cad As String
 
     On Error GoTo eModificarDatosCuentaContable
@@ -2655,17 +2656,17 @@ Dim cad As String
 
         If MsgBox(cad, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
 
-            SQL = "update cuentas set nommacta = " & DBSet(Trim(txtAux(1).Text), "T")
-            SQL = SQL & ", razosoci = " & DBSet(Trim(txtAux(1).Text), "T")
-            SQL = SQL & ", dirdatos = " & DBSet(Trim(txtAux1(14).Text), "T")
-            SQL = SQL & ", codposta = " & DBSet(Trim(txtAux1(10).Text), "T")
-            SQL = SQL & ", despobla = " & DBSet(Trim(txtAux1(13).Text), "T")
-            SQL = SQL & ", desprovi = " & DBSet(Trim(txtAux1(12).Text), "T")
-            SQL = SQL & ", nifdatos = " & DBSet(Trim(txtAux1(7).Text), "T")
-            SQL = SQL & ", maidatos = " & DBSet(Trim(txtAux1(11).Text), "T")
+            Sql = "update cuentas set nommacta = " & DBSet(Trim(txtAux(1).Text), "T")
+            Sql = Sql & ", razosoci = " & DBSet(Trim(txtAux(1).Text), "T")
+            Sql = Sql & ", dirdatos = " & DBSet(Trim(txtAux1(14).Text), "T")
+            Sql = Sql & ", codposta = " & DBSet(Trim(txtAux1(10).Text), "T")
+            Sql = Sql & ", despobla = " & DBSet(Trim(txtAux1(13).Text), "T")
+            Sql = Sql & ", desprovi = " & DBSet(Trim(txtAux1(12).Text), "T")
+            Sql = Sql & ", nifdatos = " & DBSet(Trim(txtAux1(7).Text), "T")
+            Sql = Sql & ", maidatos = " & DBSet(Trim(txtAux1(11).Text), "T")
 
             '[Monica]26/03/2015: antes no grababamos la forma de pago de la cuenta
-            SQL = SQL & ", forpa = " & DBSet(Trim(txtAux1(4).Text), "N", "S")
+            Sql = Sql & ", forpa = " & DBSet(Trim(txtAux1(4).Text), "N", "S")
 
 
             If vParamAplic.ContabilidadNueva Then
@@ -2673,22 +2674,22 @@ Dim cad As String
 
                 vIban = MiFormat(txtAux1(2).Text, "") & MiFormat(txtAux1(15).Text, "0000") & MiFormat(txtAux1(16).Text, "0000") & MiFormat(txtAux1(17).Text, "00") & MiFormat(txtAux1(18).Text, "0000000000")
 
-                SQL = SQL & ", iban = " & DBSet(vIban, "T")
-                SQL = SQL & ", codpais = 'ES' "
+                Sql = Sql & ", iban = " & DBSet(vIban, "T")
+                Sql = Sql & ", codpais = 'ES' "
             Else
-                SQL = SQL & ", entidad = " & DBSet(Trim(txtAux1(15).Text), "T", "S")
-                SQL = SQL & ", oficina = " & DBSet(Trim(txtAux1(16).Text), "T", "S")
-                SQL = SQL & ", cc = " & DBSet(Trim(txtAux1(17).Text), "T", "S")
-                SQL = SQL & ", cuentaba = " & DBSet(Trim(txtAux1(18).Text), "T", "S")
+                Sql = Sql & ", entidad = " & DBSet(Trim(txtAux1(15).Text), "T", "S")
+                Sql = Sql & ", oficina = " & DBSet(Trim(txtAux1(16).Text), "T", "S")
+                Sql = Sql & ", cc = " & DBSet(Trim(txtAux1(17).Text), "T", "S")
+                Sql = Sql & ", cuentaba = " & DBSet(Trim(txtAux1(18).Text), "T", "S")
 
                 '[Monica]22/11/2013: tema iban
                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                    SQL = SQL & ", iban = " & DBSet(Trim(txtAux1(2).Text), "T", "S")
+                    Sql = Sql & ", iban = " & DBSet(Trim(txtAux1(2).Text), "T", "S")
                 End If
             End If
-            SQL = SQL & " where codmacta = " & DBSet(Trim(txtAux1(5).Text), "T")
+            Sql = Sql & " where codmacta = " & DBSet(Trim(txtAux1(5).Text), "T")
 
-            ConnConta.Execute SQL
+            ConnConta.Execute Sql
 
 '            MsgBox "Datos de Cuenta modificados correctamente.", vbExclamation
 

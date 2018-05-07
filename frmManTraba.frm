@@ -4,7 +4,7 @@ Object = "{67397AA1-7FB1-11D0-B148-00A0C922E820}#6.0#0"; "MSADODC.OCX"
 Begin VB.Form frmManTraba 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Trabajadores"
-   ClientHeight    =   7005
+   ClientHeight    =   7575
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   13950
@@ -12,7 +12,7 @@ Begin VB.Form frmManTraba
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7005
+   ScaleHeight     =   7575
    ScaleWidth      =   13950
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -187,11 +187,31 @@ Begin VB.Form frmManTraba
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00972E0B&
-      Height          =   4785
+      Height          =   5100
       Left            =   5820
       TabIndex        =   45
       Top             =   1620
       Width           =   7980
+      Begin VB.TextBox Text1 
+         Alignment       =   1  'Right Justify
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   35
+         Left            =   4095
+         MaxLength       =   3
+         TabIndex        =   90
+         Tag             =   "Código Gr|N|S|0|999|straba|codbanpr|000||"
+         Top             =   4455
+         Width           =   915
+      End
       Begin VB.CheckBox chkEmbarga 
          Caption         =   "Hay Embargo"
          BeginProperty Font 
@@ -203,13 +223,13 @@ Begin VB.Form frmManTraba
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   270
          Index           =   1
          Left            =   180
          TabIndex        =   35
          Tag             =   "Hay embargo|N|N|||straba|hayembargo||N|"
-         Top             =   4350
-         Width           =   1995
+         Top             =   4440
+         Width           =   1815
       End
       Begin VB.TextBox Text1 
          BeginProperty Font 
@@ -782,6 +802,23 @@ Begin VB.Form frmManTraba
          Top             =   2040
          Width           =   1245
       End
+      Begin VB.Label Label31 
+         Caption         =   "Grupo trabajo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   2385
+         TabIndex        =   91
+         Top             =   4455
+         Width           =   1425
+      End
       Begin VB.Label Label30 
          Caption         =   "Pr.Coste Hora"
          BeginProperty Font 
@@ -852,7 +889,7 @@ Begin VB.Form frmManTraba
          Width           =   1185
       End
       Begin VB.Label Label25 
-         Caption         =   "Código.Asesoria"
+         Caption         =   "Código Asesoria"
          BeginProperty Font 
             Name            =   "Verdana"
             Size            =   9.75
@@ -863,7 +900,7 @@ Begin VB.Form frmManTraba
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   2430
+         Left            =   2385
          TabIndex        =   77
          Top             =   3660
          Width           =   1635
@@ -1299,7 +1336,7 @@ Begin VB.Form frmManTraba
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1455
+      Height          =   1815
       Index           =   21
       Left            =   300
       MultiLine       =   -1  'True
@@ -1464,7 +1501,7 @@ Begin VB.Form frmManTraba
       Index           =   0
       Left            =   300
       TabIndex        =   38
-      Top             =   6405
+      Top             =   6900
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -1500,7 +1537,7 @@ Begin VB.Form frmManTraba
       Height          =   375
       Left            =   12735
       TabIndex        =   37
-      Top             =   6510
+      Top             =   7005
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -1517,7 +1554,7 @@ Begin VB.Form frmManTraba
       Height          =   375
       Left            =   11535
       TabIndex        =   36
-      Top             =   6510
+      Top             =   7005
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
@@ -1581,7 +1618,7 @@ Begin VB.Form frmManTraba
       Height          =   375
       Left            =   12720
       TabIndex        =   43
-      Top             =   6510
+      Top             =   7005
       Visible         =   0   'False
       Width           =   1035
    End
@@ -2140,6 +2177,14 @@ Dim I As Integer
         Text1(0).BackColor = vbLightBlue 'codtraba
         ' ****************************************************************************
     End If
+    
+    '[Monica]07/05/2018: banco propio que es la categoria
+    Label31.Enabled = (vParamAplic.Cooperativa = 0)
+    Label31.visible = (vParamAplic.Cooperativa = 0)
+    Text1(35).Enabled = (vParamAplic.Cooperativa = 0)
+    Text1(35).visible = (vParamAplic.Cooperativa = 0)
+    
+    
 End Sub
 
 Private Sub frmTraPrev_DatoSeleccionado(CadenaSeleccion As String)
@@ -2155,6 +2200,7 @@ Dim CadB As String
     End If
 
 End Sub
+
 
 Private Sub ToolbarAyuda_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
@@ -3187,8 +3233,8 @@ Dim Sql As String
        Case 34 ' codigo de iban
             Text1(Index).Text = UCase(Text1(Index).Text)
             
-       Case 35 ' Importe embargo
-            PonerFormatoDecimal Text1(Index), 3
+       Case 35
+            PonerFormatoEntero Text1(Index)
     End Select
     
     '[Monica]: calculo del iban si no lo ponen

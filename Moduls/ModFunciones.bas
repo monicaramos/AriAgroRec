@@ -4497,3 +4497,15 @@ Dim Sql As String
     EntradaClasificada = (DevuelveValor(Sql) <> 0)
 
 End Function
+
+Public Function GrupoTrabajo(Trabajador As String) As String
+Dim Sql As String
+
+    Sql = DevuelveValor("select codbanpr from straba where codtraba = " & DBSet(Trabajador, "N"))
+    If Sql = "0" Then Sql = ""
+    
+    GrupoTrabajo = Sql
+
+End Function
+
+

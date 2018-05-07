@@ -1089,6 +1089,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     txtAux2(0).visible = Not B
@@ -1914,8 +1915,8 @@ Dim cadMen As String
         
         Case 7 'codigo de trabajador
             If PonerFormatoEntero(txtAux(Index)) Then
-                txtaux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
-                If txtaux3.Text = "" Then
+                txtAux3.Text = PonerNombreDeCod(txtAux(Index), "straba", "nomtraba")
+                If txtAux3.Text = "" Then
                     cadMen = "No existe el Trabajador: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -2125,7 +2126,7 @@ Private Sub CargaForaGrid()
     If DataGrid1.Columns.Count <= 2 Then Exit Sub
 
     txtAux(7).Text = DBLet(adodc1.Recordset!CodTraba, "N")
-    txtaux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
+    txtAux3.Text = DevuelveDesdeBDNew(1, "straba", "nomtraba", "codtraba", txtAux(7).Text, "N")
     ' **********************************************************************
  End Sub
 

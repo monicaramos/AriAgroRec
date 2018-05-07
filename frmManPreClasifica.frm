@@ -804,6 +804,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     txtAux2(0).visible = Not B
@@ -991,7 +992,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -1006,15 +1007,15 @@ Dim temp As Boolean
     ' ***************************************************************************
     
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Num.Nota: " & adodc1.Recordset.Fields(0)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Num.Nota: " & adodc1.Recordset.Fields(0)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!NumNotac
+        Sql = "Delete from rclasifica_imp where numnotac=" & adodc1.Recordset!NumNotac
         
-        conn.Execute SQL
+        conn.Execute Sql
         CargaGrid CadB
 '        If CadB <> "" Then
 '            CargaGrid CadB
@@ -1375,7 +1376,7 @@ Private Sub mnImportacion_Click()
 End Sub
 
 Private Sub mnImprimir_Click()
-Dim SQL As String
+Dim Sql As String
 
     printNou
 
@@ -1427,18 +1428,18 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
-    SQL = SQL & " ORDER BY  rclasifica_imp.numnotac "
+    Sql = Sql & " ORDER BY  rclasifica_imp.numnotac "
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(3)|T|Nota|1200|;S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(1)|B||195|;"
@@ -1484,7 +1485,7 @@ End Sub
 
 Private Sub txtAux_LostFocus(Index As Integer)
 Dim cadMen As String
-Dim SQL As String
+Dim Sql As String
 
 
     If Not PerderFocoGnral(txtAux(Index), Modo) Then Exit Sub
@@ -1542,9 +1543,9 @@ Dim SQL As String
         Case 2 'Campo
             If PonerFormatoEntero(txtAux(Index)) Then
                 If Modo = 1 Then Exit Sub
-                SQL = ""
-                SQL = DevuelveDesdeBDNew(cAgro, "rcampos", "codcampo", "codcampo", txtAux(Index).Text, "N")
-                If SQL = "" Then
+                Sql = ""
+                Sql = DevuelveDesdeBDNew(cAgro, "rcampos", "codcampo", "codcampo", txtAux(Index).Text, "N")
+                If Sql = "" Then
                     cadMen = "No existe el Campo: " & txtAux(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -1591,7 +1592,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1599,9 +1600,9 @@ Dim Mens As String
     If Not B Then Exit Function
     
     If Modo = 3 Then   'Estamos insertando
-        SQL = "select count(*) from rclasifica_imp where numnotac = " & DBSet(txtAux(3).Text, "N")
+        Sql = "select count(*) from rclasifica_imp where numnotac = " & DBSet(txtAux(3).Text, "N")
         
-        If TotalRegistros(SQL) <> 0 Then
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "Número de nota ya existe.", vbExclamation
             PonerFoco txtAux(3)
             B = False
@@ -1665,11 +1666,11 @@ Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
 End Sub
 
 Private Sub BotonActualizarEntradas()
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select * from rclasifica_imp "
+    Sql = "select * from rclasifica_imp "
     
-    If TotalRegistrosConsulta(SQL) = 0 Then
+    If TotalRegistrosConsulta(Sql) = 0 Then
         MsgBox "No hay entradas para actualizar.", vbExclamation
         Exit Sub
     Else
@@ -1685,7 +1686,7 @@ Dim SQL As String
 End Sub
 
 Private Function HayEntradasErroneas() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim RS1 As ADODB.Recordset
 Dim YaExiste As Boolean
 Dim Rs As ADODB.Recordset
@@ -1695,23 +1696,23 @@ Dim Sql2 As String
 
     HayEntradasErroneas = True
 
-    SQL = "delete from tmpexcel where codusu = " & vUsu.Codigo
-    conn.Execute SQL
+    Sql = "delete from tmpexcel where codusu = " & vUsu.Codigo
+    conn.Execute Sql
     
-    SQL = "select * from rclasifica_imp order by numnotac"
+    Sql = "select * from rclasifica_imp order by numnotac"
     
     Set Rs = New ADODB.Recordset
-    Rs.Open SQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     While Not Rs.EOF
         'Comprobamos que el numero de nota no exista ya en rclasifica  or rhisfruta_entradas
         YaExiste = False
-        SQL = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from rclasifica where numnotac = " & DBSet(Rs!NumNotac, "N")
+        If TotalRegistros(Sql) <> 0 Then
             YaExiste = True
         Else
-            SQL = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!NumNotac, "N")
-            If TotalRegistros(SQL) <> 0 Then
+            Sql = "select count(*) from rhisfruta_entradas where numnotac = " & DBSet(Rs!NumNotac, "N")
+            If TotalRegistros(Sql) <> 0 Then
                 YaExiste = True
             End If
         End If
@@ -1725,8 +1726,8 @@ Dim Sql2 As String
         End If
         
         'Comprobamos que exista la variedad
-        SQL = "select count(*) from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from variedades where codvarie = " & DBSet(Rs!Codvarie, "N")
+        If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
             Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",1)"
@@ -1735,8 +1736,8 @@ Dim Sql2 As String
         End If
         
         'Comprobamos que exita el socio
-        SQL = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from rsocios where codsocio = " & DBSet(Rs!Codsocio, "N")
+        If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
             Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",2)"
@@ -1745,9 +1746,9 @@ Dim Sql2 As String
         End If
         
         'Comprobamos que exista el campo para el socio / variedad
-        SQL = "select count(*) from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
-        SQL = SQL & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N")
-        If TotalRegistros(SQL) = 0 Then
+        Sql = "select count(*) from rcampos where codcampo = " & DBSet(Rs!codcampo, "N")
+        Sql = Sql & " and codsocio = " & DBSet(Rs!Codsocio, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        If TotalRegistros(Sql) = 0 Then
             Sql2 = "insert into tmpexcel (codusu,numalbar,fecalbar,codvarie,codsocio,codcampo,tipoentr) values ("
             Sql2 = Sql2 & vUsu.Codigo & "," & DBSet(Rs!NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!Codvarie, "N") & ","
             Sql2 = Sql2 & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ",3)"
@@ -1760,8 +1761,8 @@ Dim Sql2 As String
     
     Set Rs = Nothing
     
-    SQL = "select count(*) from tmpexcel where codusu = " & vUsu.Codigo
-    If TotalRegistros(SQL) <> 0 Then
+    Sql = "select count(*) from tmpexcel where codusu = " & vUsu.Codigo
+    If TotalRegistros(Sql) <> 0 Then
         Set frmMens = frmMensajes
         frmMens.OpcionMensaje = 41
         frmMens.Show vbModal
@@ -1780,7 +1781,7 @@ eHayEntradasErroneas:
 End Function
 
 Private Function ActualizarEntradas() As Boolean
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo eActualizarEntradas
 
@@ -1789,17 +1790,17 @@ Dim SQL As String
     conn.BeginTrans
 
 
-    SQL = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,tiporecol,impreso,transportadopor,kilostra) "
-    SQL = SQL & " select numnotac,fechaent,concat(fechaent , ' 12:00:00'), codvarie, codsocio, codcampo, 0,0,kilosnet,numcajon,kilosnet,0,0,0,kilosnet from rclasifica_imp "
+    Sql = "insert into rclasifica (numnotac,fechaent,horaentr,codvarie,codsocio,codcampo,tipoentr,recolect,kilosbru,numcajon,kilosnet,tiporecol,impreso,transportadopor,kilostra) "
+    Sql = Sql & " select numnotac,fechaent,concat(fechaent , ' 12:00:00'), codvarie, codsocio, codcampo, 0,0,kilosnet,numcajon,kilosnet,0,0,0,kilosnet from rclasifica_imp "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     '[Monica]16/01/2014: insertamos las calidades de la variedad a cero
-    SQL = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
-    SQL = SQL & " select cc.numnotac, cc.codvarie, dd.codcalid, 0, 0  "
-    SQL = SQL & " from rclasifica_imp cc inner join rcalidad dd on cc.codvarie = dd.codvarie "
+    Sql = "insert into rclasifica_clasif (numnotac, codvarie, codcalid, muestra, kilosnet) "
+    Sql = Sql & " select cc.numnotac, cc.codvarie, dd.codcalid, 0, 0  "
+    Sql = Sql & " from rclasifica_imp cc inner join rcalidad dd on cc.codvarie = dd.codvarie "
     
-    conn.Execute SQL
+    conn.Execute Sql
     
     conn.Execute "delete from rclasifica_imp"
     
@@ -1844,14 +1845,14 @@ Dim PrecKilo As String
 End Function
 
 
-Private Function Horas(Importe As String, trabajador As String) As String
+Private Function Horas(Importe As String, Trabajador As String) As String
 Dim PrecHora As String
-Dim SQL As String
+Dim Sql As String
 
-    SQL = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
-    SQL = SQL & " where straba.codtraba = " & DBSet(trabajador, "N")
+    Sql = "select impsalar from straba inner join salarios on straba.codcateg = salarios.codcateg "
+    Sql = Sql & " where straba.codtraba = " & DBSet(Trabajador, "N")
     
-    PrecHora = DevuelveValor(SQL)
+    PrecHora = DevuelveValor(Sql)
     
     Horas = 0
     
@@ -1862,7 +1863,7 @@ End Function
 
 
 Private Function CargarCondicion() As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim NFic As Integer
 
     On Error GoTo eCargarCondicion

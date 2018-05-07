@@ -545,6 +545,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     
     txtAux2(0).visible = Not B
@@ -696,7 +697,7 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
 End Sub
 
 Private Sub BotonEliminar()
-Dim SQL As String
+Dim Sql As String
 Dim temp As Boolean
 
     On Error GoTo Error2
@@ -705,15 +706,15 @@ Dim temp As Boolean
 '    If Not SepuedeBorrar Then Exit Sub
         
     '*************** canviar els noms i el DELETE **********************************
-    SQL = "¿Seguro que desea eliminar el Registro?"
-    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-    SQL = SQL & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
+    Sql = "¿Seguro que desea eliminar el Registro?"
+    Sql = Sql & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
+    Sql = Sql & vbCrLf & "Descripción: " & adodc1.Recordset.Fields(1)
     
-    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
+    If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
         'Hay que eliminar
         NumRegElim = adodc1.Recordset.AbsolutePosition
-        SQL = "Delete from rtarifaett where codvarie=" & adodc1.Recordset!Codvarie & " and codigoett=" & DBSet(adodc1.Recordset!CodigoETT, "N")
-        conn.Execute SQL
+        Sql = "Delete from rtarifaett where codvarie=" & adodc1.Recordset!Codvarie & " and codigoett=" & DBSet(adodc1.Recordset!CodigoETT, "N")
+        conn.Execute Sql
         CargaGrid CadB
         temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
         PonerModoOpcionesMenu
@@ -989,21 +990,21 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub CargaGrid(Optional vSQL As String)
-    Dim SQL As String
+    Dim Sql As String
     Dim tots As String
     
 '    adodc1.ConnectionString = Conn
     If vSQL <> "" Then
-        SQL = CadenaConsulta & " AND " & vSQL
+        Sql = CadenaConsulta & " AND " & vSQL
     Else
-        SQL = CadenaConsulta
+        Sql = CadenaConsulta
     End If
     
     '********************* canviar el ORDER BY *********************++
-    SQL = SQL & " ORDER BY rtarifaett.codvarie, rtarifaett.codigoett"
+    Sql = Sql & " ORDER BY rtarifaett.codvarie, rtarifaett.codigoett"
     '**************************************************************++
     
-    CargaGridGnral Me.DataGrid1, Me.adodc1, SQL, PrimeraVez
+    CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
     tots = "S|txtAux(0)|T|Código|1100|;S|btnBuscar(0)|B|||;"
@@ -1070,7 +1071,7 @@ End Sub
 Private Function DatosOK() As Boolean
 'Dim Datos As String
 Dim B As Boolean
-Dim SQL As String
+Dim Sql As String
 Dim Mens As String
 
 
@@ -1079,8 +1080,8 @@ Dim Mens As String
     
     If (Modo = 3) Then 'insertar
         'comprobar si existe ya el cod. del campo clave primaria
-        SQL = "select count(*) from rtarifaett where codvarie = " & DBSet(txtAux(0).Text, "N") & " and codigoett = " & DBSet(txtAux(1).Text, "F")
-        If TotalRegistros(SQL) <> 0 Then
+        Sql = "select count(*) from rtarifaett where codvarie = " & DBSet(txtAux(0).Text, "N") & " and codigoett = " & DBSet(txtAux(1).Text, "F")
+        If TotalRegistros(Sql) <> 0 Then
             MsgBox "Ya existe el registro para la variedad fecha. Revise.", vbExclamation
             B = False
         End If

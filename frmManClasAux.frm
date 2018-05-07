@@ -631,6 +631,7 @@ Dim B As Boolean
     
     For I = 0 To txtAux.Count - 1
         txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
     Next I
     For I = 0 To txtAux2.Count - 1
         txtAux2(I).visible = Not B
