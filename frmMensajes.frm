@@ -3282,7 +3282,7 @@ Public OpcionMensaje As Byte
 
 '69 .- Historico de recibos de un contador (Monasterios)
 
-
+'70 .- Facturas pendientes de contabilizar de escalona y utxera (solo mostramos cuantas hay de cada tipo)
 
 Private WithEvents frmPar As frmManPartidas 'partidas
 Attribute frmPar.VB_VarHelpID = -1
@@ -4190,7 +4190,7 @@ Dim OK As Boolean
             CargarAnticiposSinDescontar
             
         Case 49
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
             
         Case 50 ' contadores a no facturar (POZOS)
             CargarContadoresANoFacturar
@@ -4244,7 +4244,7 @@ Dim OK As Boolean
         Case 64 ' Contratos
             CargarContratos desdeHco
         
-        Case 68 ' facturas pendientes de contabilizar
+        Case 68  ' facturas pendientes de contabilizar
             Combo1(0).ListIndex = 0
             
             CargarFacturasPendientesContabilizar
@@ -4252,6 +4252,13 @@ Dim OK As Boolean
         Case 69
             CargarFrasConsumoPozos
             
+        Case 70 ' [Monica]09/05/2018: facturas pendientes de contabilizar de escalonea y utxera,
+                '                     MA quiere que saque unicamente nro de facturas y el total de facturas
+                '                     pendientes de contabilizar de cada tipo
+            Combo1(0).ListIndex = 0
+            Combo1(0).Enabled = False
+            Combo1(0).visible = False
+            CargarFacturasPendientesContabilizarEscalona
     End Select
     
     Screen.MousePointer = vbDefault
@@ -4311,13 +4318,13 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCobrosPtes
             Me.Caption = "Cobros Pendientes"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 2 'Mensaje de no hay suficiente Stock
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaArtSinStock (vCampos)
             Me.Caption = "Artículos sin stock suficiente"
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         
 '        Case 4 'Listado Nº Series Articulo
@@ -4371,7 +4378,7 @@ On Error Resume Next
         Case 10 'Errores al contabilizar facturas
             PonerFrameCobrosPtesVisible True, H, W
             Me.Caption = "Facturas NO contabilizadas: "
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
         
         Case 11 'Lineas Factura a Rectificar
             PonerFrameNSeriesVisible True, H, W
@@ -4389,7 +4396,7 @@ On Error Resume Next
             Me.Label1(0).Caption = "Existen Partes que NO se van a Facturar:"
             Me.Label1(0).Top = 260
             Me.Label1(0).Left = 480
-            PonerFocoBtn Me.cmdAceptarCobros
+            PonerFocoBtn Me.CmdAceptarCobros
             
         Case 13 'Muestra Errores
             H = 6000
@@ -4433,7 +4440,7 @@ On Error Resume Next
             PonerFrameEntradasSinCRFIDVisible True, H, W
             CargarListaEntradasSinCRFID cadena
             Me.Label1(3).Caption = "Entradas Sin CRFID: "
-            PonerFocoBtn Me.CmdSalir
+            PonerFocoBtn Me.cmdSalir
         
         Case 22 ' Trabajadores de la cuadrilla
             H = FrameVariedades.Height
@@ -4610,7 +4617,7 @@ On Error Resume Next
             PonerFrameCobrosPtesVisible True, H, W
             CargarListaCamposSinPrecioZona
             Me.Caption = "Zonas sin precio €/Hda:"
-            PonerFocoBtn Me.cmdCancelarCobros
+            PonerFocoBtn Me.CmdCancelarCobros
         
         
         Case 50 'Contadores con Consumo inferior al minimo y superior al maximo que no se van a facturar (POZOS)
@@ -4682,7 +4689,7 @@ On Error Resume Next
             W = Me.FrameContratos.Width
             PonerFrameVisible FrameContratos, True, H, W
         
-        Case 68   ' 68-facturas de pendientes de contabilizar
+        Case 68, 70   ' 68-facturas de pendientes de contabilizar
             H = Me.FrameFrasPteContabilizar.Height
             W = FrameFrasPteContabilizar.Width
             PonerFrameVisible FrameFrasPteContabilizar, True, H, W
@@ -4726,47 +4733,47 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
             Me.Label1(0).Caption = "SOCIO: " & vCampos
         Case 2
             W = 10800
-            Me.cmdAceptarCobros.Top = 4000
-            Me.cmdAceptarCobros.Left = 6200
+            Me.CmdAceptarCobros.Top = 4000
+            Me.CmdAceptarCobros.Left = 6200
         Case 5 'Componentes
             W = 8000
             H = 5000
-            Me.cmdAceptarCobros.Left = 6000
+            Me.CmdAceptarCobros.Left = 6000
 
         Case 6, 7 'Prefacturar Albaranes
             W = 9000
             H = 6000
-            Me.cmdAceptarCobros.Top = 5400
-            Me.cmdAceptarCobros.Left = 6600
+            Me.CmdAceptarCobros.Top = 5400
+            Me.CmdAceptarCobros.Left = 6600
 
         Case 10, 12 'Errores al contabilizar facturas
             H = 6000
             W = 10400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 6900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 6900
             If OpcionMensaje = 12 Then
-                Me.cmdCancelarCobros.Top = 5300
-                Me.cmdCancelarCobros.Left = 6600
-                Me.cmdAceptarCobros.Left = 5300
+                Me.CmdCancelarCobros.Top = 5300
+                Me.CmdCancelarCobros.Left = 6600
+                Me.CmdAceptarCobros.Left = 5300
                 Me.Label1(1).Top = 4800
                 Me.Label1(1).Left = 5400
-                Me.cmdAceptarCobros.Caption = "&SI"
-                Me.cmdCancelarCobros.Caption = "&NO"
+                Me.CmdAceptarCobros.Caption = "&SI"
+                Me.CmdCancelarCobros.Caption = "&NO"
             End If
             
         Case 49
             H = 6000
             W = 10400
-            Me.cmdAceptarCobros.Top = 5300
-            Me.cmdAceptarCobros.Left = 6900
+            Me.CmdAceptarCobros.Top = 5300
+            Me.CmdAceptarCobros.Left = 6900
             
-            Me.cmdCancelarCobros.Top = 5300
-            Me.cmdCancelarCobros.Left = 6600
-            Me.cmdAceptarCobros.Left = 7300
+            Me.CmdCancelarCobros.Top = 5300
+            Me.CmdCancelarCobros.Left = 6600
+            Me.CmdAceptarCobros.Left = 7300
             Me.Label1(1).Top = 4800
             Me.Label1(1).Left = 5400
-            Me.cmdAceptarCobros.Caption = "&SI"
-            Me.cmdCancelarCobros.Caption = "&NO"
+            Me.CmdAceptarCobros.Caption = "&SI"
+            Me.CmdCancelarCobros.Caption = "&NO"
             Me.Label1(0).Caption = ""
     End Select
             
@@ -4775,7 +4782,7 @@ Private Sub PonerFrameCobrosPtesVisible(visible As Boolean, ByRef H As Integer, 
     If visible = True Then
         Me.txtParam.visible = (OpcionMensaje = 6 Or OpcionMensaje = 7)
         Me.Label1(0).visible = (OpcionMensaje = 1) Or (OpcionMensaje = 5) Or (OpcionMensaje = 12) Or (OpcionMensaje = 49)
-        Me.cmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
+        Me.CmdCancelarCobros.visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
         Me.Label1(1).visible = (OpcionMensaje = 12) Or (OpcionMensaje = 49)
     End If
 End Sub
@@ -5311,20 +5318,20 @@ Dim Sql As String
         ListView2.ColumnHeaders.Add , , "T.Alb", 660
         ListView2.ColumnHeaders.Add , , "Nº Alb", 840
         ListView2.ColumnHeaders.Add , , "Lin.", 450
-         ListView2.ColumnHeaders.Item(3).Alignment = lvwColumnRight
+         ListView2.ColumnHeaders.item(3).Alignment = lvwColumnRight
         ListView2.ColumnHeaders.Add , , "Alm", 460
         ListView2.ColumnHeaders.Add , , "Artic", 1380
         ListView2.ColumnHeaders.Add , , "Desc. Artic.", 2500
         ListView2.ColumnHeaders.Add , , "Cant.", 600
-        ListView2.ColumnHeaders.Item(7).Alignment = lvwColumnRight
+        ListView2.ColumnHeaders.item(7).Alignment = lvwColumnRight
         ListView2.ColumnHeaders.Add , , "Precio", 960
-        ListView2.ColumnHeaders.Item(8).Alignment = lvwColumnRight
+        ListView2.ColumnHeaders.item(8).Alignment = lvwColumnRight
         ListView2.ColumnHeaders.Add , , "Dto 1", 600
-        ListView2.ColumnHeaders.Item(9).Alignment = lvwColumnRight
+        ListView2.ColumnHeaders.item(9).Alignment = lvwColumnRight
         ListView2.ColumnHeaders.Add , , "Dto 2", 600
-        ListView2.ColumnHeaders.Item(10).Alignment = lvwColumnRight
+        ListView2.ColumnHeaders.item(10).Alignment = lvwColumnRight
         ListView2.ColumnHeaders.Add , , "Importe", 950
-        ListView2.ColumnHeaders.Item(11).Alignment = lvwColumnRight
+        ListView2.ColumnHeaders.item(11).Alignment = lvwColumnRight
     
         While Not Rs.EOF
              Set ItmX = ListView2.ListItems.Add
@@ -6671,16 +6678,16 @@ Dim B As Boolean
     Next TotalArray
 End Sub
 
-Private Sub ListView3_ItemCheck(ByVal Item As MSComctlLib.ListItem)
+Private Sub ListView3_ItemCheck(ByVal item As MSComctlLib.ListItem)
     If OpcionMensaje = 51 Then
-        If Item.ToolTipText = 0 Then Item.Checked = False
+        If item.ToolTipText = 0 Then item.Checked = False
     End If
 
 End Sub
 
-Private Sub ListView3_ItemClick(ByVal Item As MSComctlLib.ListItem)
+Private Sub ListView3_ItemClick(ByVal item As MSComctlLib.ListItem)
     If OpcionMensaje = 51 Then
-        If ComprobarCero(Item.ToolTipText) = 0 Then Item.Checked = False
+        If ComprobarCero(item.ToolTipText) = 0 Then item.Checked = False
     End If
 End Sub
 
@@ -8278,6 +8285,8 @@ Dim It As ListItem
             Sql2 = " and codigo1 = 4"
         Case 6 ' pozos
             Sql2 = " and codigo1 = 5"
+        Case 7 ' retirada
+            Sql2 = " and codigo1 = 6"
     End Select
     
     Sql = Sql & Sql2 & " order by 7,6 "
@@ -8324,19 +8333,19 @@ Dim It As ListItem
             '[Monica]19/02/2018
             If DBLet(Rs!fecha1, "F") < UltimaFechaCorrectaSII(vEmpresa.SIIDiasAviso, Now) Then
                 It.ForeColor = vbRed
-                It.ListSubItems.Item(1).ForeColor = vbRed
-                It.ListSubItems.Item(2).ForeColor = vbRed
-                It.ListSubItems.Item(3).ForeColor = vbRed
-                It.ListSubItems.Item(4).ForeColor = vbRed
+                It.ListSubItems.item(1).ForeColor = vbRed
+                It.ListSubItems.item(2).ForeColor = vbRed
+                It.ListSubItems.item(3).ForeColor = vbRed
+                It.ListSubItems.item(4).ForeColor = vbRed
 '[Monica]29/06/2017: quitamos la campaña
 '                It.ListSubItems.item(5).ForeColor = vbRed
             Else
                 If DBLet(Rs!fecha1, "F") = UltimaFechaCorrectaSII(vEmpresa.SIIDiasAviso, Now) Then
                     It.ForeColor = vbBlue
-                    It.ListSubItems.Item(1).ForeColor = vbBlue
-                    It.ListSubItems.Item(2).ForeColor = vbBlue
-                    It.ListSubItems.Item(3).ForeColor = vbBlue
-                    It.ListSubItems.Item(4).ForeColor = vbBlue
+                    It.ListSubItems.item(1).ForeColor = vbBlue
+                    It.ListSubItems.item(2).ForeColor = vbBlue
+                    It.ListSubItems.item(3).ForeColor = vbBlue
+                    It.ListSubItems.item(4).ForeColor = vbBlue
                 End If
             End If
         End If
@@ -8364,6 +8373,121 @@ Dim It As ListItem
     
 End Sub
 
+
+
+
+Private Sub CargarFacturasPendientesContabilizarEscalona()
+Dim Sql As String
+Dim Sql2 As String
+Dim Rs As ADODB.Recordset
+Dim It As ListItem
+
+    Sql = cadena
+    
+    Select Case Combo1(0).ListIndex
+        Case 0 'todos
+        
+        Case 1 ' adv
+            Sql2 = " and codigo1 = 0"
+        Case 2 ' varias cliente
+            Sql2 = " and codigo1 = 1"
+        Case 3 ' varias proveedor
+            Sql2 = " and codigo1 = 2"
+        Case 4 ' socio
+            Sql2 = " and codigo1 = 3"
+        Case 5 ' transporte
+            Sql2 = " and codigo1 = 4"
+        Case 6 ' pozos
+            Sql2 = " and codigo1 = 5"
+    End Select
+    
+    Sql = Sql & Sql2 & " order by 7,6 "
+    
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    ListView22.ColumnHeaders.Clear
+
+    ListView22.ColumnHeaders.Add , , "Tipo Factura", 7000
+    ListView22.ColumnHeaders.Add , , "Fecha", 0
+    ListView22.ColumnHeaders.Add , , "Factura", 0, 0
+    ListView22.ColumnHeaders.Add , , "Nro Facturas", 2400, 1 '3400, 0
+    ListView22.ColumnHeaders.Add , , "Importe Total", 3000, 1 '1800, 1
+    
+    ListView22.ListItems.Clear
+    
+    ListView22.SmallIcons = frmPpal.imgListPpal
+    
+    
+    TotalArray = 0
+    While Not Rs.EOF
+        Set It = ListView22.ListItems.Add
+            
+            
+        'It.Tag = DevNombreSQL(RS!codCampo)
+        It.Text = DBLet(Rs!Nombre1, "T")
+        It.SubItems(1) = DBLet(Rs!fecha1, "F")
+        It.SubItems(2) = DBLet(Rs!Nombre2, "T")
+        It.SubItems(3) = DBLet(Rs!nombre3, "T")
+        It.SubItems(4) = Format(DBLet(Rs!importe1, "N"), "###,###,##0.00")
+        'IT.SubItems(5) = DBLet(Rs!Text1, "T")
+        
+'[Monica]29/06/2017: quitamos la campaña anterior
+'        '[Monica]13/06/2017: tenemos que sacar el nombre de campaña de usuarios
+'        Sql2 = DevuelveDesdeBDNew(cAgro, "usuarios.empresasariagro", "nomempre", "ariagro", DBLet(Rs!Text1, "T"), "T")
+'        It.SubItems(5) = Sql2
+        
+        If vEmpresa.TieneSII Then
+'            If DBLet(Rs!fecha1, "F") < DateAdd("d", vEmpresa.SIIDiasAviso * (-1), Now) Then
+            '[Monica]19/02/2018
+            If DBLet(Rs!fecha1, "F") < UltimaFechaCorrectaSII(vEmpresa.SIIDiasAviso, Now) Then
+                It.ForeColor = vbRed
+                It.ListSubItems.item(1).ForeColor = vbRed
+                It.ListSubItems.item(2).ForeColor = vbRed
+                It.ListSubItems.item(3).ForeColor = vbRed
+                It.ListSubItems.item(4).ForeColor = vbRed
+'[Monica]29/06/2017: quitamos la campaña
+'                It.ListSubItems.item(5).ForeColor = vbRed
+            Else
+                If DBLet(Rs!fecha1, "F") = UltimaFechaCorrectaSII(vEmpresa.SIIDiasAviso, Now) Then
+                    It.ForeColor = vbBlue
+                    It.ListSubItems.item(1).ForeColor = vbBlue
+                    It.ListSubItems.item(2).ForeColor = vbBlue
+                    It.ListSubItems.item(3).ForeColor = vbBlue
+                    It.ListSubItems.item(4).ForeColor = vbBlue
+                End If
+            End If
+        End If
+        
+        Select Case DBLet(Rs!Codigo1, "N")
+            Case 0 ' adv
+            Case 1 ' facturas varias
+            Case 2 ' proveedor
+            Case 3 'socios
+                It.SmallIcon = 23
+            Case 4 ' facturas de transporte
+            Case 5 ' facturas pozos
+        End Select
+        
+        ListView22.Refresh
+        
+        Rs.MoveNext
+        TotalArray = TotalArray + 1
+        If TotalArray > 300 Then
+            TotalArray = 0
+            DoEvents
+        End If
+    Wend
+    Rs.Close
+    
+End Sub
+
+
+
+
+
+
 Private Sub CargarCombo()
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
     Combo1(0).Clear
@@ -8382,6 +8506,9 @@ Private Sub CargarCombo()
     Combo1(0).ItemData(Combo1(0).NewIndex) = 5
     Combo1(0).AddItem "Pozos"
     Combo1(0).ItemData(Combo1(0).NewIndex) = 6
+    '[Monica]09/05/2018: faltaban las facturas de retirada
+    Combo1(0).AddItem "Retirada"
+    Combo1(0).ItemData(Combo1(0).NewIndex) = 7
 
 End Sub
 

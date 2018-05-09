@@ -33,6 +33,10 @@ Private Const COLOR_16 = 2
 Private Const COLOR_24 = 3
 Private Const COLOR_32 = 4
 
+Public Declare Function LoadImage Lib "user32" Alias "LoadImageA" (ByVal hInst As Long, ByVal lpsz As String, ByVal dwImageType As Long, ByVal dwDesiredWidth As Long, ByVal dwDesiredHeight As Long, ByVal dwFlags As Long) As Long
+
+
+
 Public Declare Function LoadLibraryEx Lib "kernel32" Alias "LoadLibraryExA" (ByVal lpLibFileName As String, ByVal hFile As Long, ByVal dwFlags As Long) As Long
 Public Const DONT_RESOLVE_DLL_REFERENCES = &H1
 Public Const LOAD_LIBRARY_AS_DATAFILE = &H2
@@ -86,8 +90,7 @@ Private Const LR_LOADMAP3DCOLORS As Long = &H1000
 'Private Const LR_SHARED As Long = &H8000
 'Private Const LR_VGACOLOR As Long = &H80
 
-'/ mie
-Private Declare Function LoadImage Lib "user32" Alias "LoadImageA" (ByVal hInst As Long, ByVal lpsz As String, ByVal dwImageType As Long, ByVal dwDesiredWidth As Long, ByVal dwDesiredHeight As Long, ByVal dwFlags As Long) As Long
+
 'Private Declare Function DrawIconEx Lib "user32.dll" (ByVal hdc As Long, ByVal xLeft As Long, ByVal yTop As Long, ByVal hIcon As Long, ByVal cxWidth As Long, ByVal cyWidth As Long, ByVal istepIfAniCur As Long, ByVal hbrFlickerFreeDraw As Long, ByVal diFlags As Long) As Long
 'Private Declare Function DestroyIcon Lib "user32" (ByVal hIcon As Long) As Long
 'Private Declare Function GetLastError Lib "kernel32.dll" () As Long

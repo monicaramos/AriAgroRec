@@ -9160,8 +9160,8 @@ Dim cad As String
                                 I = I + 1
 
                                 If I > 1 Then cad = cad & "/"
-
-                                cad = cad & Format(CLng(DBLet(Rs6!Hidrante, "T")), "00000")
+                                '[Monica]09/05/2018: añadido el comprobar cero
+                                cad = cad & Format(CLng(ComprobarCero(DBLet(Rs6!Hidrante, "T"))), "00000")
                                 
                                 Rs4.MoveNext
                             Wend
@@ -9463,7 +9463,7 @@ Dim cad As String
                          
                          '[Monica]19/04/2018: no habiamos desdoblado por contabilidad nueva
                          If vParamAplic.ContabilidadNueva Then
-                            Sql = "update cobros set impcobro = coalesce(impvenci,0) + coalesce(gastos,0), fecultco = " & DBSet(FecVenci, "F")
+                            Sql = "update cobros set impcobro = coalesce(impvenci,0) + coalesce(gastos,0), fecultco = " & DBSet(FecVenci, "F") & ", situacion = 1 "
                             Sql = Sql & " where numserie = " & DBSet(LSer, "T") & " and numfactu = " & DBSet(RS1!numfacturec, "N")
                             Sql = Sql & " and fecfactu = " & DBSet(RS1!fecfacturec, "F")
                          Else
@@ -9473,12 +9473,16 @@ Dim cad As String
                          End If
                          
                          ConnConta.Execute Sql
+                         
+                         
+                         
                     End If
                 End If
                 
                 
                 InsertarEnTesoreriaPOZOS = True
-                Exit Function
+                '[Monica]09/05/2018: la rectificativa la damos como cobrada, antes no la intrdouciamos en tesoreria
+                If Not vParamAplic.ContabilidadNueva Then Exit Function
                 
         End Select
         
@@ -9559,6 +9563,19 @@ Dim cad As String
         Sql = Sql & " VALUES " & CadValues2
         ConnConta.Execute Sql
 
+        '[Monica]09/05/2018: la rectificativa la damos como cobrada
+        If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
+            If vParamAplic.ContabilidadNueva Then
+                If DBLet(RS1!CodTipom, "T") = "RRC" Or DBLet(RS1!CodTipom, "T") = "RRM" Or DBLet(RS1!CodTipom, "T") = "RRT" Or _
+                   DBLet(RS1!CodTipom, "T") = "RRV" Then
+                       Sql = "update cobros set impcobro = coalesce(impvenci,0) + coalesce(gastos,0), fecultco = " & DBSet(FecVenci, "F") & ", situacion = 1 "
+                       Sql = Sql & " where numserie = " & DBSet(LetraSerie, "T") & " and numfactu = " & DBSet(UltimaFactura, "N")
+                       Sql = Sql & " and fecfactu = " & DBSet(RS1!fecfactu, "F")
+                    
+                       ConnConta.Execute Sql
+                End If
+            End If
+        End If
 
 
         B = True
