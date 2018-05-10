@@ -9424,7 +9424,7 @@ Dim cad As String
                 Set Rs6 = Nothing
             
             '[Monica]15/01/2016: todas las facturas rectificativas de escalona
-            Case "RRC", "RRM", "RRT", "RRV" ', "RTA"
+            Case "RRC", "RRM", "RRT", "RRV", "RTA"
                  Text33csb = ""
                  Text41csb = ""
                  
@@ -9567,7 +9567,7 @@ Dim cad As String
         If vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10 Then
             If vParamAplic.ContabilidadNueva Then
                 If DBLet(RS1!CodTipom, "T") = "RRC" Or DBLet(RS1!CodTipom, "T") = "RRM" Or DBLet(RS1!CodTipom, "T") = "RRT" Or _
-                   DBLet(RS1!CodTipom, "T") = "RRV" Then
+                   DBLet(RS1!CodTipom, "T") = "RRV" Or DBLet(RS1!CodTipom, "T") = "RTA" Then
                        Sql = "update cobros set impcobro = coalesce(impvenci,0) + coalesce(gastos,0), fecultco = " & DBSet(FecVenci, "F") & ", situacion = 1 "
                        Sql = Sql & " where numserie = " & DBSet(LetraSerie, "T") & " and numfactu = " & DBSet(UltimaFactura, "N")
                        Sql = Sql & " and fecfactu = " & DBSet(RS1!fecfactu, "F")

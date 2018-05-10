@@ -7,13 +7,13 @@ Begin VB.Form frmPOZFraRecargo
    ClientHeight    =   7500
    ClientLeft      =   45
    ClientTop       =   4035
-   ClientWidth     =   7965
+   ClientWidth     =   8535
    Icon            =   "frmPOZFraRecargo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7500
-   ScaleWidth      =   7965
+   ScaleWidth      =   8535
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral 
@@ -61,7 +61,7 @@ Begin VB.Form frmPOZFraRecargo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   300
-      Left            =   6120
+      Left            =   6525
       TabIndex        =   21
       Top             =   270
       Visible         =   0   'False
@@ -84,7 +84,7 @@ Begin VB.Form frmPOZFraRecargo
       Left            =   120
       TabIndex        =   4
       Top             =   780
-      Width           =   7695
+      Width           =   8010
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          Enabled         =   0   'False
@@ -99,7 +99,7 @@ Begin VB.Form frmPOZFraRecargo
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   6030
+         Left            =   6255
          MaxLength       =   10
          TabIndex        =   3
          Tag             =   "Importe Factura|T|N|||tcafpc|numfactu||S|"
@@ -128,7 +128,7 @@ Begin VB.Form frmPOZFraRecargo
          TabIndex        =   8
          Text            =   "Text2"
          Top             =   390
-         Width           =   5400
+         Width           =   5625
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -184,7 +184,7 @@ Begin VB.Form frmPOZFraRecargo
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   4440
+         Left            =   4485
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Porcentaje Recargo|T|N|||tcafpc|numfactu||S|"
@@ -206,7 +206,7 @@ Begin VB.Form frmPOZFraRecargo
          EndProperty
          Height          =   255
          Index           =   2
-         Left            =   5235
+         Left            =   5370
          TabIndex        =   16
          Top             =   960
          Visible         =   0   'False
@@ -289,7 +289,7 @@ Begin VB.Form frmPOZFraRecargo
       Left            =   120
       TabIndex        =   10
       Top             =   2190
-      Width           =   7710
+      Width           =   8010
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
@@ -309,7 +309,7 @@ Begin VB.Form frmPOZFraRecargo
          TabIndex        =   20
          Tag             =   "Fecha Factura|F|N|||tcafpc|fecfactu|dd/mm/yyyy|S|"
          Top             =   4590
-         Width           =   1830
+         Width           =   1965
       End
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
@@ -329,7 +329,7 @@ Begin VB.Form frmPOZFraRecargo
          MaxLength       =   10
          TabIndex        =   17
          Top             =   4170
-         Width           =   1830
+         Width           =   1965
       End
       Begin VB.Frame Frame1 
          Height          =   555
@@ -362,8 +362,8 @@ Begin VB.Form frmPOZFraRecargo
          Left            =   150
          TabIndex        =   15
          Top             =   540
-         Width           =   7305
-         _ExtentX        =   12885
+         Width           =   7605
+         _ExtentX        =   13414
          _ExtentY        =   6059
          View            =   3
          LabelEdit       =   1
@@ -404,7 +404,7 @@ Begin VB.Form frmPOZFraRecargo
          BeginProperty ColumnHeader(4) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   3
             Text            =   "Fecha"
-            Object.Width           =   1942
+            Object.Width           =   2471
          EndProperty
          BeginProperty ColumnHeader(5) {BDD1F052-858B-11D1-B16A-00C0F0283628} 
             SubItemIndex    =   4
@@ -451,7 +451,7 @@ Begin VB.Form frmPOZFraRecargo
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   0
-         Left            =   6540
+         Left            =   7125
          Picture         =   "frmPOZFraRecargo.frx":0097
          Top             =   210
          Width           =   240
@@ -459,7 +459,7 @@ Begin VB.Form frmPOZFraRecargo
       Begin VB.Image imgCheck 
          Height          =   240
          Index           =   1
-         Left            =   6900
+         Left            =   7485
          Picture         =   "frmPOZFraRecargo.frx":01E1
          Top             =   210
          Width           =   240
@@ -1717,7 +1717,7 @@ Private Sub InicializarListView()
     ListView1.ColumnHeaders.Add , , "Tipo", 800
     ListView1.ColumnHeaders.Add , , "Descripción", 2400
     ListView1.ColumnHeaders.Add , , "Factura", 1100
-    ListView1.ColumnHeaders.Add , , "Fecha", 1100
+    ListView1.ColumnHeaders.Add , , "Fecha", 1400
     ListView1.ColumnHeaders.Add , , "Importe", 1600, 1
     
 End Sub

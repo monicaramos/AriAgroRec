@@ -1881,8 +1881,8 @@ Private Sub frmCat_DatoSeleccionado(CadenaSeleccion As String)
 End Sub
 
 Private Sub frmTra_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo capataz
-    txtAux2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre capataz
+    txtAux(indCodigo).Text = RecuperaValor(CadenaSeleccion, 1) 'codigo trabajador
+    txtAux2(indCodigo).Text = RecuperaValor(CadenaSeleccion, 2) 'nombre trabajador
 End Sub
 
 Private Sub frmVar_DatoSeleccionado(CadenaSeleccion As String)
@@ -2360,7 +2360,7 @@ End Sub
 Private Sub AbrirFrmTrabajador(Indice As Integer)
     indCodigo = 7
     Set frmTra = New frmManTraba
-    frmTra.DatosADevolverBusqueda = "0|1|"
+    frmTra.DatosADevolverBusqueda = "0|2|"
 '    frmTra.CodigoActual = txtAux(indCodigo)
     frmTra.Show vbModal
     Set frmTra = Nothing
