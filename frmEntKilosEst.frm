@@ -1151,7 +1151,7 @@ Dim Sql As String
     If Option1(2).Value Then Sql = Sql & " round(rcampos.supcatas / " & DBSet(vParamAplic.Faneca, "N") & ",2) hdas, rcampos.supcatas has, "
     If Option1(3).Value Then Sql = Sql & " round(rcampos.supculti / " & DBSet(vParamAplic.Faneca, "N") & ",2) hdas, rcampos.supculti has, "
         
-    Sql = Sql & " rcampos.nroarbol,recolect, CASE rcampos.recolect when 0 then ""Cooper"" when 1 then ""Socio"" end as desrecolect, "
+    Sql = Sql & " rcampos.nroarbol,recolect, CASE rcampos.recolect when 0 then ""Cooperativa"" when 1 then ""Socio"" end as desrecolect, "
     Sql = Sql & " round(rcampos.canaforo * (1 + " & DBSet(vParamAplic.PorcIncreAforo, "N") & "/ 100 ), 0) canaforo, rcampos.canaforo canafororeal "
     
     If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
@@ -1318,7 +1318,7 @@ Dim I As Integer
     Next I
     
     'tipo de recoleccion
-    Combo1(1).AddItem "Cooper"
+    Combo1(1).AddItem "Cooperativa"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 0
     Combo1(1).AddItem "Socio"
     Combo1(1).ItemData(Combo1(1).NewIndex) = 1

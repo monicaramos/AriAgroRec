@@ -932,6 +932,86 @@ End Sub
 
 
 
+Public Sub AyudaBonificaciones(frmCom As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+    frmCom.CadenaTots = "S|txtAux(0)|T|Código|905|;S|txtAux(1)|T|Nombre|4595|;"
+    frmCom.CadenaConsulta = "SELECT rbonifica.codvarie, variedades.nomvarie "
+    frmCom.CadenaConsulta = frmCom.CadenaConsulta & " FROM rbonifica inner join variedades  on rbonifica.codvarie = variedades.codvarie "
+    frmCom.CadenaConsulta = frmCom.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmCom.CadenaConsulta = frmCom.CadenaConsulta & " and " & cWhere
+    
+    frmCom.Tag1 = "Código Variedad|N|N|1|999999|rbonifica|codvarie|000000|S|"
+    frmCom.Tag2 = "Nombre|T|N|||variedades|nomvarie|||"
+    frmCom.Tag3 = ""
+    frmCom.Maxlen1 = 3
+    frmCom.Maxlen2 = 15
+    frmCom.Maxlen3 = 0
+    
+    frmCom.pConn = cAgro
+    
+    frmCom.tabla = "rbonifica"
+    frmCom.CampoCP = "codvarie"
+    frmCom.Caption = "Bonificaciones"
+    frmCom.DeConsulta = True
+
+    frmCom.DatosADevolverBusqueda = "0|1|"
+    frmCom.CodigoActual = 0
+    If CodActual <> "" Then frmCom.CodigoActual = CodActual
+    
+    Redimensiona frmCom, -1500
+    
+    frmCom.Show vbModal
+End Sub
+
+
+Public Sub AyudaFrasTransporte(frmBas As frmBasico2, Optional CodActual As String, Optional cWhere As String)
+' en total son 7000 = 905 + 4595 hay que quitarle al width 1500
+    
+    frmBas.CadenaTots = "S|txtAux(0)|T|Tipo|905|;S|txtAux(1)|T|Factura|1195|;S|txtAux(2)|T|Fecha|1400|;S|txtAux(3)|T|Transportista|1800|;"
+    frmBas.CadenaTots = frmBas.CadenaTots & "S|txtAux(4)|T|Nombre|3700|;"
+    
+    frmBas.CadenaConsulta = "SELECT rfacttra.codtipom, rfacttra.numfactu, rfacttra.fecfactu, rfacttra.codtrans, rtransporte.nomtrans "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " FROM rfacttra inner join rtransporte on rfacttra.codtrans = rtransporte.codtrans "
+    frmBas.CadenaConsulta = frmBas.CadenaConsulta & " WHERE (1=1) "
+    If cWhere <> "" Then frmBas.CadenaConsulta = frmBas.CadenaConsulta & " and " & cWhere
+    
+    frmBas.Tag1 = "Tipo Movimiento|T|N|||rfacttra|codtipom||S|"
+    frmBas.Tag2 = "Nº Factura|N|S|||rfacttra|numfactu|0000000|S|"
+    frmBas.Tag3 = "Fecha Factura|F|N|||rfacttra|fecfactu|dd/mm/yyyy|S|"
+    frmBas.Tag4 = "Cod.Transportista|T|N|||rfacttra|codtrans||S|"
+    frmBas.Tag5 = "Descripción|T|N|||rtransporte|nomtrans|||"
+    frmBas.Tag6 = ""
+    frmBas.Tag7 = ""
+    frmBas.Maxlen1 = 3
+    frmBas.Maxlen2 = 7
+    frmBas.Maxlen3 = 10
+    frmBas.Maxlen4 = 10
+    frmBas.Maxlen5 = 40
+    frmBas.Maxlen6 = 0
+    frmBas.Maxlen7 = 0
+    
+    
+    frmBas.pConn = cAgro
+    
+    frmBas.tabla = "rfacttra inner join rtransporte"
+    frmBas.CampoCP = "numfactu"
+    'frmBas.Report = "rManGlobalGap.rpt"
+    frmBas.Caption = "Facturas de Transporte"
+    frmBas.DeConsulta = True
+    frmBas.DatosADevolverBusqueda = "0|1|2|3|"
+    frmBas.CodigoActual = 0
+    If CodActual <> "" Then frmBas.CodigoActual = CodActual
+    
+    Redimensiona frmBas, 2000
+    
+    frmBas.Show vbModal
+    
+    
+End Sub
+
+
+
+
+
 
 Private Sub Redimensiona(frmBas As frmBasico2, Cant As Integer)
     frmBas.Width = frmBas.Width + Cant

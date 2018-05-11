@@ -15,6 +15,24 @@ Begin VB.Form frmManLinFactTranspor
    ScaleWidth      =   7830
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton cmdRegresar 
+      Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   6570
+      TabIndex        =   14
+      Top             =   3195
+      Visible         =   0   'False
+      Width           =   1035
+   End
    Begin VB.Frame Frame2 
       Height          =   2475
       Index           =   0
@@ -24,7 +42,16 @@ Begin VB.Form frmManLinFactTranspor
       Width           =   7485
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   9
          Left            =   2370
          MaxLength       =   10
@@ -35,7 +62,16 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   8
          Left            =   3510
          MaxLength       =   8
@@ -47,7 +83,16 @@ Begin VB.Form frmManLinFactTranspor
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   7
          Left            =   2340
          Locked          =   -1  'True
@@ -59,9 +104,18 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   7
-         Left            =   1320
+         Left            =   1365
          MaxLength       =   8
          TabIndex        =   4
          Tag             =   "Campo|N|N|0|99999999|rfacttra_albaran|codcampo|00000000|S|"
@@ -71,7 +125,16 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.ComboBox Combo1 
          BackColor       =   &H80000013&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   120
          Style           =   2  'Dropdown List
@@ -81,32 +144,59 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   1320
+         Left            =   1365
          MaxLength       =   6
          TabIndex        =   3
          Tag             =   "Variedad|N|N|0|999999|rfacttra_albaran|codvarie|000000|S|"
          Text            =   "Text1"
-         Top             =   1020
+         Top             =   975
          Width           =   960
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
          Left            =   2340
          Locked          =   -1  'True
          MaxLength       =   40
          TabIndex        =   23
          Text            =   "Text2"
-         Top             =   1020
+         Top             =   975
          Width           =   4830
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
          Left            =   4710
          MaxLength       =   8
@@ -117,7 +207,16 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
          Left            =   1110
          MaxLength       =   8
@@ -128,7 +227,16 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
          Left            =   5940
          MaxLength       =   10
@@ -140,7 +248,16 @@ Begin VB.Form frmManLinFactTranspor
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   3540
          MaxLength       =   7
@@ -148,19 +265,28 @@ Begin VB.Form frmManLinFactTranspor
          Tag             =   "Nº Factura|N|S|||rfacttra_albaran|numfactu|0000000|S|"
          Text            =   "Text1"
          Top             =   480
-         Width           =   885
+         Width           =   1110
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
-         Height          =   315
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   4500
+         Left            =   4770
          MaxLength       =   10
          TabIndex        =   2
          Tag             =   "Fecha Factura|F|N|||rfacttra_albaran|fecfactu|dd/mm/yyyy|S|"
          Top             =   480
-         Width           =   1065
+         Width           =   1435
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
@@ -176,6 +302,15 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Albarán"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   4
          Left            =   1140
@@ -185,6 +320,15 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   3
          Left            =   2400
@@ -194,6 +338,15 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Nota"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   2
          Left            =   3510
@@ -203,9 +356,18 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Campo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   1
-         Left            =   210
+         Left            =   165
          TabIndex        =   27
          Top             =   1380
          Width           =   675
@@ -213,7 +375,7 @@ Begin VB.Form frmManLinFactTranspor
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   1
-         Left            =   960
+         Left            =   1095
          ToolTipText     =   "Buscar Variedad"
          Top             =   1410
          Width           =   240
@@ -221,22 +383,40 @@ Begin VB.Form frmManLinFactTranspor
       Begin VB.Image imgBuscar 
          Height          =   240
          Index           =   0
-         Left            =   960
+         Left            =   1095
          ToolTipText     =   "Buscar Variedad"
-         Top             =   1050
+         Top             =   1005
          Width           =   240
       End
       Begin VB.Label Label1 
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
-         Left            =   210
+         Left            =   165
          TabIndex        =   24
-         Top             =   1020
-         Width           =   795
+         Top             =   975
+         Width           =   885
       End
       Begin VB.Label Label1 
          Caption         =   "Kilos Netos"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   6
          Left            =   4710
@@ -246,6 +426,15 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Importe Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   10
          Left            =   5940
@@ -255,36 +444,63 @@ Begin VB.Form frmManLinFactTranspor
       End
       Begin VB.Label Label1 
          Caption         =   "Tipo Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   9
          Left            =   150
          TabIndex        =   20
-         Top             =   240
-         Width           =   945
+         Top             =   195
+         Width           =   2160
       End
       Begin VB.Label Label1 
          Caption         =   "Fecha Fac"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   29
-         Left            =   4530
+         Left            =   4800
          TabIndex        =   19
-         Top             =   240
-         Width           =   780
+         Top             =   195
+         Width           =   1275
       End
       Begin VB.Label Label1 
          Caption         =   "Nº Factura"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   28
          Left            =   3540
          TabIndex        =   18
-         Top             =   240
-         Width           =   855
+         Top             =   195
+         Width           =   1125
       End
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   0
-      Left            =   240
+      Left            =   105
       TabIndex        =   12
       Top             =   3120
       Width           =   2865
@@ -292,8 +508,8 @@ Begin VB.Form frmManLinFactTranspor
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -310,24 +526,42 @@ Begin VB.Form frmManLinFactTranspor
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   6690
+      Left            =   6555
       TabIndex        =   11
       Top             =   3210
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5580
+      Left            =   5445
       TabIndex        =   10
       Top             =   3210
-      Width           =   1035
+      Width           =   1065
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   1140
-      Top             =   3120
+      Left            =   960
+      Top             =   3165
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
@@ -472,15 +706,6 @@ Begin VB.Form frmManLinFactTranspor
          Top             =   90
          Width           =   1215
       End
-   End
-   Begin VB.CommandButton cmdRegresar 
-      Caption         =   "&Regresar"
-      Height          =   375
-      Left            =   6690
-      TabIndex        =   14
-      Top             =   3210
-      Visible         =   0   'False
-      Width           =   1035
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"

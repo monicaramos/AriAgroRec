@@ -23,14 +23,14 @@ Begin VB.Form frmManFactTranspor
       Left            =   45
       TabIndex        =   67
       Top             =   90
-      Width           =   3585
+      Width           =   3045
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
          TabIndex        =   68
          Top             =   180
-         Width           =   3135
-         _ExtentX        =   5530
+         Width           =   2640
+         _ExtentX        =   4657
          _ExtentY        =   582
          ButtonWidth     =   609
          ButtonHeight    =   582
@@ -40,6 +40,8 @@ Begin VB.Form frmManFactTranspor
          BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
             NumButtons      =   10
             BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Enabled         =   0   'False
+               Object.Visible         =   0   'False
                Object.ToolTipText     =   "Nuevo"
                Object.Tag             =   "2"
             EndProperty
@@ -82,7 +84,7 @@ Begin VB.Form frmManFactTranspor
    End
    Begin VB.Frame FrameDesplazamiento 
       Height          =   705
-      Left            =   3675
+      Left            =   3150
       TabIndex        =   65
       Top             =   90
       Width           =   2415
@@ -167,16 +169,16 @@ Begin VB.Form frmManFactTranspor
       TabCaption(1)   =   "Rectificativa"
       TabPicture(1)   =   "frmManFactTranspor.frx":0028
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "Combo1(2)"
-      Tab(1).Control(1)=   "Text1(12)"
-      Tab(1).Control(2)=   "Text1(13)"
-      Tab(1).Control(3)=   "Text1(14)"
-      Tab(1).Control(4)=   "Text1(15)"
-      Tab(1).Control(5)=   "Label1(11)"
-      Tab(1).Control(6)=   "Label1(12)"
-      Tab(1).Control(7)=   "Label1(13)"
-      Tab(1).Control(8)=   "imgFec(1)"
-      Tab(1).Control(9)=   "Label1(14)"
+      Tab(1).Control(0)=   "Label1(14)"
+      Tab(1).Control(1)=   "imgFec(1)"
+      Tab(1).Control(2)=   "Label1(13)"
+      Tab(1).Control(3)=   "Label1(12)"
+      Tab(1).Control(4)=   "Label1(11)"
+      Tab(1).Control(5)=   "Text1(15)"
+      Tab(1).Control(6)=   "Text1(14)"
+      Tab(1).Control(7)=   "Text1(13)"
+      Tab(1).Control(8)=   "Text1(12)"
+      Tab(1).Control(9)=   "Combo1(2)"
       Tab(1).ControlCount=   10
       Begin VB.ComboBox Combo1 
          BeginProperty Font 
@@ -783,10 +785,10 @@ Begin VB.Form frmManFactTranspor
          EndProperty
          Height          =   360
          Index           =   0
-         Left            =   150
+         Left            =   180
          Style           =   2  'Dropdown List
          TabIndex        =   60
-         Top             =   240
+         Top             =   225
          Width           =   1980
       End
       Begin VB.TextBox Text1 
@@ -1055,7 +1057,7 @@ Begin VB.Form frmManFactTranspor
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   405
+         Height          =   360
          Index           =   2
          Left            =   150
          MaxLength       =   10
@@ -1867,7 +1869,7 @@ Public hcoCodTipoM As String 'Codigo detalle de Movimiento(ALC)
 Public hcoFechaMov As String 'fecha del movimiento
 
 '========== VBLES PRIVADAS ====================
-Private WithEvents frmB As frmBuscaGrid 'Form para busquedas
+Private WithEvents frmB As frmBasico2 'Form para busquedas
 Attribute frmB.VB_VarHelpID = -1
 Private WithEvents frmC As frmCal
 Attribute frmC.VB_VarHelpID = -1
@@ -1955,7 +1957,7 @@ Private Sub btnBuscar_Click(Index As Integer)
             frmMens.Show vbModal
             Set frmMens = Nothing
             
-            PonerFoco txtAux1(3)
+            PonerFoco txtaux1(3)
     End Select
     If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
 End Sub
@@ -2227,11 +2229,11 @@ Dim J As Byte
         End If
 
         For J = 3 To 4
-            txtAux1(J).Text = DataGrid5.Columns(J).Text
+            txtaux1(J).Text = DataGrid5.Columns(J).Text
         Next J
 
         For J = 5 To 9
-            txtAux1(J).Text = DataGrid5.Columns(J + 1).Text
+            txtaux1(J).Text = DataGrid5.Columns(J + 1).Text
         Next J
 
         ModificaLineas = 2 'Modificar
@@ -2244,7 +2246,7 @@ Dim J As Byte
         DataGrid5.Enabled = True
 
 '            PonerBotonCabecera False
-        PonerFoco txtAux1(9)
+        PonerFoco txtaux1(9)
         Me.DataGrid5.Enabled = False
 
 
@@ -2262,9 +2264,9 @@ Dim B As Boolean
             DeseleccionaGrid Me.DataGrid5
             B = (xModo = 1)
              For jj = 3 To 10
-                txtAux1(jj).Height = DataGrid5.RowHeight - 10
-                txtAux1(jj).Top = alto + 5
-                txtAux1(jj).visible = B
+                txtaux1(jj).Height = DataGrid5.RowHeight - 10
+                txtaux1(jj).Top = alto + 5
+                txtaux1(jj).visible = B
             Next jj
 '            btnBuscar(1).Height = DataGrid5.RowHeight - 10
 '            btnBuscar(1).Top = alto + 5
@@ -2565,35 +2567,35 @@ Dim I As Integer
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
-
 Private Sub Form_Unload(Cancel As Integer)
     CheckValueGuardar Me.Name, Me.chkVistaPrevia.Value
     If Modo = 4 Then TerminaBloquear
 End Sub
 
 
-Private Sub frmB_Selecionado(CadenaDevuelta As String)
+Private Sub frmB_DatoSeleccionado(CadenaSeleccion As String)
 Dim CadB As String
 Dim Aux As String
       
-    If CadenaDevuelta <> "" Then
+    If CadenaSeleccion <> "" Then
         HaDevueltoDatos = True
         Screen.MousePointer = vbHourglass
         CadB = ""
-        Aux = ValorDevueltoFormGrid(Text1(10), CadenaDevuelta, 1)
+        Aux = ValorDevueltoFormGrid(Text1(10), CadenaSeleccion, 1)
         CadB = CadB & Aux
-        Aux = ValorDevueltoFormGrid(Text1(0), CadenaDevuelta, 2)
+        Aux = ValorDevueltoFormGrid(Text1(0), CadenaSeleccion, 2)
         CadB = CadB & " and " & Aux
-        Aux = ValorDevueltoFormGrid(Text1(1), CadenaDevuelta, 3)
+        Aux = ValorDevueltoFormGrid(Text1(1), CadenaSeleccion, 3)
+        CadB = CadB & " and " & Aux
+        Aux = ValorDevueltoFormGrid(Text1(2), CadenaSeleccion, 4)
         CadB = CadB & " and " & Aux
         CadenaConsulta = "select * from " & NombreTabla & " WHERE " & CadB & " " & Ordenacion
         PonerCadenaBusqueda
         Screen.MousePointer = vbDefault
     End If
     Screen.MousePointer = vbDefault
+
 End Sub
-
-
 
 Private Sub frmC_Selec(vFecha As Date)
     ' *** repasar si el camp es txtAux o Text1 ***
@@ -2625,19 +2627,19 @@ End Sub
 
 
 Private Sub frmMens_DatoSeleccionado(CadenaSeleccion As String)
-    txtAux1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'numero de albaran
-    FormateaCampo txtAux1(3)
-    txtAux1(4).Text = RecuperaValor(CadenaSeleccion, 2) 'fecha de albaran
-    FormateaCampo txtAux1(4)
-    txtAux1(5).Text = RecuperaValor(CadenaSeleccion, 3) 'variedad
-    txtAux1(6).Text = RecuperaValor(CadenaSeleccion, 4) 'campo
-    FormateaCampo txtAux1(6)
-    txtAux1(7).Text = RecuperaValor(CadenaSeleccion, 5) 'numero de nota
-    FormateaCampo txtAux1(7)
-    txtAux1(8).Text = RecuperaValor(CadenaSeleccion, 6) 'kilos
-    FormateaCampo txtAux1(8)
-    txtAux1(9).Text = RecuperaValor(CadenaSeleccion, 7) 'importe
-    FormateaCampo txtAux1(9)
+    txtaux1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'numero de albaran
+    FormateaCampo txtaux1(3)
+    txtaux1(4).Text = RecuperaValor(CadenaSeleccion, 2) 'fecha de albaran
+    FormateaCampo txtaux1(4)
+    txtaux1(5).Text = RecuperaValor(CadenaSeleccion, 3) 'variedad
+    txtaux1(6).Text = RecuperaValor(CadenaSeleccion, 4) 'campo
+    FormateaCampo txtaux1(6)
+    txtaux1(7).Text = RecuperaValor(CadenaSeleccion, 5) 'numero de nota
+    FormateaCampo txtaux1(7)
+    txtaux1(8).Text = RecuperaValor(CadenaSeleccion, 6) 'kilos
+    FormateaCampo txtaux1(8)
+    txtaux1(9).Text = RecuperaValor(CadenaSeleccion, 7) 'importe
+    FormateaCampo txtaux1(9)
 End Sub
 
 Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
@@ -3013,50 +3015,59 @@ Dim Titulo As String
 Dim Desc As String, devuelve As String
     'Llamamos a al form
     '##A mano
-    cad = ""
-'    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
-    cad = cad & "Tipo Factura|stipom.nomtipom|T||22·"
-    cad = cad & "Tipo|rfacttra.codtipom|T||7·"
-    cad = cad & "Nº.Factura|rfacttra.numfactu|N||10·"
-    cad = cad & "Fecha|rfacttra.fecfactu|F||15·"
-    cad = cad & "Transportista|rfacttra.codtrans|N||15·"
-    cad = cad & "Nombre Transportista|rtransporte.nomtrans|T||30·"
-    tabla = NombreTabla & " INNER JOIN rtransporte ON rfacttra.codtrans=rtransporte.codtrans "
-    tabla = "(" & tabla & ") INNER JOIN usuarios.stipom stipom ON rfacttra.codtipom = stipom.codtipom "
-    Titulo = "Facturas Transportistas"
-    devuelve = "1|2|3|"
-           
-    If cad <> "" Then
-        Screen.MousePointer = vbHourglass
-        Set frmB = New frmBuscaGrid
-        frmB.vCampos = cad
-        frmB.vtabla = tabla
-        frmB.vSQL = CadB
-        HaDevueltoDatos = False
-        '###A mano
-        frmB.vDevuelve = devuelve
-        frmB.vTitulo = Titulo
-        frmB.vSelElem = 0
-'        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
-        If Not EsCabecera Then frmB.Label1.FontSize = 11
-'        frmB.vBuscaPrevia = chkVistaPrevia
-        '#
-        frmB.Show vbModal
-        Set frmB = Nothing
-'        If EsCabecera Then
-'            PonerCadenaBusqueda
-'            Text1(0).Text = Format(Text1(0).Text, "0000000")
+'    cad = ""
+''    Cad = Cad & "Tipo|if(rfactsoc.codtipom='FAA','Anticipo','Liquidación') as a|T||10·"
+'    cad = cad & "Tipo Factura|stipom.nomtipom|T||22·"
+'    cad = cad & "Tipo|rfacttra.codtipom|T||7·"
+'    cad = cad & "Nº.Factura|rfacttra.numfactu|N||10·"
+'    cad = cad & "Fecha|rfacttra.fecfactu|F||15·"
+'    cad = cad & "Transportista|rfacttra.codtrans|N||15·"
+'    cad = cad & "Nombre Transportista|rtransporte.nomtrans|T||30·"
+'    tabla = NombreTabla & " INNER JOIN rtransporte ON rfacttra.codtrans=rtransporte.codtrans "
+'    tabla = "(" & tabla & ") INNER JOIN usuarios.stipom stipom ON rfacttra.codtipom = stipom.codtipom "
+'    Titulo = "Facturas Transportistas"
+'    devuelve = "1|2|3|"
+'
+'    If cad <> "" Then
+'        Screen.MousePointer = vbHourglass
+'        Set frmB = New frmBuscaGrid
+'        frmB.vCampos = cad
+'        frmB.vtabla = tabla
+'        frmB.vSQL = CadB
+'        HaDevueltoDatos = False
+'        '###A mano
+'        frmB.vDevuelve = devuelve
+'        frmB.vTitulo = Titulo
+'        frmB.vSelElem = 0
+''        frmB.vConexionGrid = cAgro  'Conexión a BD: Ariagro
+'        If Not EsCabecera Then frmB.Label1.FontSize = 11
+''        frmB.vBuscaPrevia = chkVistaPrevia
+'        '#
+'        frmB.Show vbModal
+'        Set frmB = Nothing
+''        If EsCabecera Then
+''            PonerCadenaBusqueda
+''            Text1(0).Text = Format(Text1(0).Text, "0000000")
+''        End If
+'        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
+'        'tendremos que cerrar el form lanzando el evento
+'        If HaDevueltoDatos Then
+'            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
+'                cmdRegresar_Click
+'        Else   'de ha devuelto datos, es decir NO ha devuelto datos
+'            PonerFoco Text1(kCampo)
 '        End If
-        'Si ha puesto valores y tenemos que es formulario de busqueda entonces
-        'tendremos que cerrar el form lanzando el evento
-        If HaDevueltoDatos Then
-            If (Not Data1.Recordset.EOF) And DatosADevolverBusqueda <> "" Then _
-                cmdRegresar_Click
-        Else   'de ha devuelto datos, es decir NO ha devuelto datos
-            PonerFoco Text1(kCampo)
-        End If
-    End If
-    Screen.MousePointer = vbDefault
+'    End If
+'    Screen.MousePointer = vbDefault
+'
+
+    Set frmB = New frmBasico2
+    
+    AyudaFrasTransporte frmB
+    
+    Set frmB = Nothing
+
+
 End Sub
 
 
@@ -3249,19 +3260,19 @@ Dim b1 As Boolean
     'Campos Nº Pedido bloqueado y en azul
     BloquearTxt Text1(0), B, True
          
-    BloquearTxt Text1(2), (Modo <> 1) '<= 2)
+    BloquearTxt Text1(2), (Modo <> 1) And Modo <> 3 '<= 2)
     
-    For I = 0 To txtAux1.Count - 1
-         BloquearTxt txtAux1(I), True
-         txtAux1(I).visible = False
+    For I = 0 To txtaux1.Count - 1
+         BloquearTxt txtaux1(I), True
+         txtaux1(I).visible = False
     Next
     
     
     'Si no es modo lineas Boquear los TxtAux
-    For I = 3 To txtAux1.Count - 1
+    For I = 3 To txtaux1.Count - 1
         If I <> 5 Then
-            txtAux1(I).visible = (Modo = 1)
-            BloquearTxt txtAux1(I), Not (Modo = 1)
+            txtaux1(I).visible = (Modo = 1)
+            BloquearTxt txtaux1(I), Not (Modo = 1)
         End If
     Next I
 
@@ -3413,12 +3424,12 @@ Dim I As Byte
     DatosOkLinea = False
     B = True
 
-    For I = 0 To txtAux1.Count - 1
+    For I = 0 To txtaux1.Count - 1
         If I = 4 Or I = 6 Or I = 7 Then
-            If txtAux1(I).Text = "" Then
-                MsgBox "El campo " & txtAux1(I).Tag & " no puede ser nulo", vbExclamation
+            If txtaux1(I).Text = "" Then
+                MsgBox "El campo " & txtaux1(I).Tag & " no puede ser nulo", vbExclamation
                 B = False
-                PonerFoco txtAux1(I)
+                PonerFoco txtaux1(I)
                 Exit Function
             End If
         End If
@@ -3745,7 +3756,7 @@ Private Sub ToolbarDes_ButtonClick(ByVal Button As MSComctlLib.Button)
 End Sub
 
 Private Sub txtAux1_GotFocus(Index As Integer)
-    ConseguirFocoLin txtAux1(Index)
+    ConseguirFocoLin txtaux1(Index)
 End Sub
 
 Private Sub txtAux1_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -3764,37 +3775,37 @@ Dim cadMen As String
 Dim Sql As String
 
     'Quitar espacios en blanco
-    If Not PerderFocoGnralLineas(txtAux1(Index), ModificaLineas) Then Exit Sub
+    If Not PerderFocoGnralLineas(txtaux1(Index), ModificaLineas) Then Exit Sub
 
     Select Case Index
         Case 4 ' calidad
-            If txtAux1(Index) <> "" Then
-                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtAux1(5), "N", , "codcalid", txtAux1(6).Text, "N")
+            If txtaux1(Index) <> "" Then
+                Text2(6) = DevuelveDesdeBDNew(cAgro, "rcalidad", "nomcalid", "codvarie", txtaux1(5), "N", , "codcalid", txtaux1(6).Text, "N")
                 If Text2(6).Text = "" Then
-                    cadMen = "No existe la Calidad: " & txtAux1(Index).Text & vbCrLf
+                    cadMen = "No existe la Calidad: " & txtaux1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearla?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
                         Set frmCal = New frmManCalidades
                         frmCal.DatosADevolverBusqueda = "2|3|"
-                        frmCal.ParamVariedad = txtAux1(5).Text
-                        frmCal.NuevoCodigo = txtAux1(6).Text
+                        frmCal.ParamVariedad = txtaux1(5).Text
+                        frmCal.NuevoCodigo = txtaux1(6).Text
                         TerminaBloquear
                         frmCal.Show vbModal
                         Set frmCal = Nothing
                         If Modo = 4 Then BLOQUEADesdeFormulario2 Me, Data1, 1
-                        PonerFoco txtAux1(6)
+                        PonerFoco txtaux1(6)
                     Else
-                        txtAux1(Index).Text = ""
+                        txtaux1(Index).Text = ""
                     End If
-                    PonerFoco txtAux1(Index)
+                    PonerFoco txtaux1(Index)
                 End If
             Else
                 Text2(6).Text = ""
             End If
 
         Case 7 'peso neto
-            If txtAux1(Index) <> "" Then
-                PonerFormatoEntero txtAux1(Index)
+            If txtaux1(Index) <> "" Then
+                PonerFormatoEntero txtaux1(Index)
                 cmdAceptar.SetFocus
             End If
 
@@ -3990,9 +4001,11 @@ Dim I As Integer
         'Vore Tots
         Toolbar1.Buttons(6).Enabled = B
         Me.mnVerTodos.Enabled = B
+        
+        '[Monica]11/05/2018: no funcionaba y la he quitado
         'Añadir
-        Toolbar1.Buttons(1).Enabled = B
-        Me.mnModificar.Enabled = B
+        Toolbar1.Buttons(1).Enabled = False 'B
+        Me.mnModificar.Enabled = False 'B
         
         
         B = (Modo = 2 And Data1.Recordset.RecordCount > 0) And (hcoCodMovim = "") And Not (Check1(0).Value = 1) And Not (Check1(1).Value = 1)
@@ -4472,13 +4485,13 @@ Dim I As Integer
 
             LimpiarCamposLin "FrameAlbaranes"
 
-            txtAux1(0).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
-            txtAux1(1).Text = Text1(0).Text 'nro de factura
-            txtAux1(2).Text = Text1(1).Text 'fecha de factura
+            txtaux1(0).Text = Mid(Combo1(0).Text, 1, 3) 'tipo de movimiento
+            txtaux1(1).Text = Text1(0).Text 'nro de factura
+            txtaux1(2).Text = Text1(1).Text 'fecha de factura
             
 '            BloquearTxt txtAux(14), False
 '                    BloquearTxt txtaux(12), False
-            PonerFoco txtAux1(3)
+            PonerFoco txtaux1(3)
 
 
     End Select
