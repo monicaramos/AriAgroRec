@@ -89,6 +89,7 @@ Private mEmiteFact As Byte
 
 Private mvarNoDevolverApor As Byte  'Sin devolucion de aportaciones
 
+Private mvarHayEmbargo As Byte 'hay embargo
 
 '------------------------------------------------
 'Propiedades del modulo Csocio
@@ -531,6 +532,17 @@ Public Property Get EmiteFact() As Byte
 End Property
 
 
+'**** Hay embargo
+
+Public Property Let HayEmbargo(ByVal vData As Byte)
+     mvarHayEmbargo = vData
+End Property
+
+Public Property Get HayEmbargo() As Byte
+     HayEmbargo = mvarHayEmbargo
+End Property
+
+
 '**** No devolver aportaciones
 Public Property Let NoDevolverApor(ByVal vData As Byte)
      mvarNoDevolverApor = vData
@@ -570,82 +582,86 @@ Public Function LeerDatos(vCodsocio As String) As Boolean
 'Leer los datos de un socio dado
 'Lee de la BD: Ariagrorec, Tabla: rsocio
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
-Dim SQL As String
-Dim b As Boolean
+Dim Rs As ADODB.Recordset
+Dim Sql As String
+Dim B As Boolean
 
     On Error GoTo ELeer
     
     LeerDatos = False
     
-    SQL = "SELECT codsocio, nifsocio, nomsocio, dirsocio, pobsocio, prosocio, codpostal, "
-    SQL = SQL & "fechanac, telsoci1, telsoci2, telsoci3, movsocio, maisocio, codbanco, codsucur, "
-    SQL = SQL & "digcontr , cuentaba, fechaalta, fechabaja, correo, tipoIRPF, tipoprod, codsitua, codcoope, "
-    SQL = SQL & "observaciones, esfactadvinterna, emitefact, iban, nodevolverapor "
-    SQL = SQL & " FROM rsocios "
-    SQL = SQL & " WHERE codsocio=" & vCodsocio
+    Sql = "SELECT codsocio, nifsocio, nomsocio, dirsocio, pobsocio, prosocio, codpostal, "
+    Sql = Sql & "fechanac, telsoci1, telsoci2, telsoci3, movsocio, maisocio, codbanco, codsucur, "
+    Sql = Sql & "digcontr , cuentaba, fechaalta, fechabaja, correo, tipoIRPF, tipoprod, codsitua, codcoope, "
+    Sql = Sql & "observaciones, esfactadvinterna, emitefact, iban, nodevolverapor "
+    Sql = Sql & " FROM rsocios "
+    Sql = Sql & " WHERE codsocio=" & vCodsocio
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatos = False
     Else
         
-        mCodsocio = CStr(RS!Codsocio)
-        mNomsocio = DBLet(RS!nomsocio, "T")
+        mCodsocio = CStr(Rs!Codsocio)
+        mNomsocio = DBLet(Rs!nomsocio, "T")
         
-        mDirsocio = DBLet(RS!dirsocio, "T")
-        mCodposta = DBLet(RS!codPostal, "T")
-        mPobsocio = DBLet(RS!pobsocio, "T")
-        mProsocio = DBLet(RS!prosocio, "T")
-        mNIFsocio = RS!nifSocio
-        mTfno1 = DBLet(RS!telsoci1, "T")
-        mTfno2 = DBLet(RS!telsoci2, "T")
-        mTfno3 = DBLet(RS!telsoci3, "T")
-        mMovsocio = DBLet(RS!movsocio, "T")
-        mMaisocio = DBLet(RS!maisocio, "T")
+        mDirsocio = DBLet(Rs!dirsocio, "T")
+        mCodposta = DBLet(Rs!codPostal, "T")
+        mPobsocio = DBLet(Rs!pobsocio, "T")
+        mProsocio = DBLet(Rs!prosocio, "T")
+        mNIFsocio = Rs!nifSocio
+        mTfno1 = DBLet(Rs!telsoci1, "T")
+        mTfno2 = DBLet(Rs!telsoci2, "T")
+        mTfno3 = DBLet(Rs!telsoci3, "T")
+        mMovsocio = DBLet(Rs!movsocio, "T")
+        mMaisocio = DBLet(Rs!maisocio, "T")
         
-        mFecNacim = DBLet(RS!FechaNac, "T")
-        mFecAlta = RS!FechaAlta
-        mFecBaja = DBLet(RS!FechaBaja, "T")
+        mFecNacim = DBLet(Rs!FechaNac, "T")
+        mFecAlta = Rs!FechaAlta
+        mFecBaja = DBLet(Rs!FechaBaja, "T")
         
         '[Monica]22/11/2013: tema iban
-        mIban = CStr(DBLet(RS!Iban, "T"))
+        mIban = CStr(DBLet(Rs!Iban, "T"))
         
-        mCodbanco = CStr(Format(ComprobarCero(DBLet(RS!CodBanco, "N")), "0000"))
-        mCodsucur = CStr(Format(ComprobarCero(DBLet(RS!CodSucur, "N")), "0000"))
-        mDigContr = DBLet(RS!digcontr, "T")
-        mCuentaba = DBLet(RS!CuentaBa, "T")
+        mCodbanco = CStr(Format(ComprobarCero(DBLet(Rs!CodBanco, "N")), "0000"))
+        mCodsucur = CStr(Format(ComprobarCero(DBLet(Rs!CodSucur, "N")), "0000"))
+        mDigContr = DBLet(Rs!digcontr, "T")
+        mCuentaba = DBLet(Rs!CuentaBa, "T")
         
-        mCodSitua = CStr(DBLet(RS!codsitua, "N"))
-        mTipoIRPF = CStr(DBLet(RS!TipoIRPF, "N"))
-        mTipoProd = CStr(DBLet(RS!TipoProd, "N"))
-        mCorreo = CStr(DBLet(RS!Correo, "N"))
-        mCodCoope = CStr(DBLet(RS!codcoope, "N"))
-        mEsFactADVInt = CStr(DBLet(RS!EsFactADVInterna, "N"))
-        mEmiteFact = CStr(DBLet(RS!EmiteFact, "N"))
+        mCodSitua = CStr(DBLet(Rs!codsitua, "N"))
+        mTipoIRPF = CStr(DBLet(Rs!TipoIRPF, "N"))
+        mTipoProd = CStr(DBLet(Rs!TipoProd, "N"))
+        mCorreo = CStr(DBLet(Rs!Correo, "N"))
+        mCodCoope = CStr(DBLet(Rs!codcoope, "N"))
+        mEsFactADVInt = CStr(DBLet(Rs!EsFactADVInterna, "N"))
+        mEmiteFact = CStr(DBLet(Rs!EmiteFact, "N"))
         
-        mObservac = DBLet(RS!Observaciones, "T")
+        mObservac = DBLet(Rs!Observaciones, "T")
         
         '[Monica]27/10/2015
-        mvarNoDevolverApor = DBLet(RS!NoDevolverApor, "N") ' No devolver aportaciones
+        mvarNoDevolverApor = DBLet(Rs!NoDevolverApor, "N") ' No devolver aportaciones
        
-        b = LeerTipoMovimientos
+        '[Monica]14/05/2018: hay embargo
+        mvarHayEmbargo = DBLet(Rs!HayEmbargo, "N") ' Hay embargo
+       
+       
+        B = LeerTipoMovimientos
         
-        LeerDatos = b
+        LeerDatos = B
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos socio" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Sql = "Se ha producido un error. " & "Datos socio" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
+    Set Rs = Nothing
     LeerDatos = False
 End Function
 
@@ -680,43 +696,43 @@ Public Function LeerDatosSeccion(vCodsocio As String, vCodsecci As String) As Bo
 'Leer los datos de la seccion del socio
 'Lee de la BD: Ariagrorec, Tabla: rsocio_seccion
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 
     On Error GoTo ELeer
     
     LeerDatosSeccion = False
     
-    SQL = "SELECT codmaccli, codmacpro, codiva "
-    SQL = SQL & " FROM rsocios_seccion "
-    SQL = SQL & " WHERE codsocio=" & vCodsocio & " and codsecci = " & vCodsecci
+    Sql = "SELECT codmaccli, codmacpro, codiva "
+    Sql = Sql & " FROM rsocios_seccion "
+    Sql = Sql & " WHERE codsocio=" & vCodsocio & " and codsecci = " & vCodsecci
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerDatosSeccion = False
     Else
         mCodsocio = CStr(vCodsocio)
         mCodSecci = CStr(vCodsecci)
         '[Monica]03/07/2013: añado trim(codmacta)
-        mCtaCli = DBLet(Trim(RS!codmaccli), "T")
-        mCtaPro = DBLet(Trim(RS!codmacpro), "T")
-        mCodIva = CStr(RS!CodIva)
+        mCtaCli = DBLet(Trim(Rs!codmaccli), "T")
+        mCtaPro = DBLet(Trim(Rs!codmacpro), "T")
+        mCodIva = CStr(Rs!CodIva)
         
         LeerDatosSeccion = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Datos socio/sección" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Sql = "Se ha producido un error. " & "Datos socio/sección" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
+    Set Rs = Nothing
     LeerDatosSeccion = False
 End Function
 
@@ -724,49 +740,49 @@ Private Function LeerTipoMovimientos() As Boolean
 'Leer los tipos de movimiento de la cooperativa a la que pertenece
 'Lee de la BD: Ariagrorec, Tabla: rcoope
 'OUT: True si lee los datos correctamente
-Dim RS As ADODB.Recordset
-Dim SQL As String
+Dim Rs As ADODB.Recordset
+Dim Sql As String
 
     On Error GoTo ELeer
     
     LeerTipoMovimientos = False
     
-    SQL = "SELECT codtipomant, codtipomliq, codtipomantvc, codtipomliqvc, codtipomfacalmz, codtipomfacbod, "
-    SQL = SQL & " codtipomantalmz, codtipomliqalmz, codtipomantbod, codtipomliqbod "
-    SQL = SQL & " FROM rcoope "
-    SQL = SQL & " WHERE codcoope=" & mCodCoope
+    Sql = "SELECT codtipomant, codtipomliq, codtipomantvc, codtipomliqvc, codtipomfacalmz, codtipomfacbod, "
+    Sql = Sql & " codtipomantalmz, codtipomliqalmz, codtipomantbod, codtipomliqbod "
+    Sql = Sql & " FROM rcoope "
+    Sql = Sql & " WHERE codcoope=" & mCodCoope
     
-    Set RS = New ADODB.Recordset
-    RS.Open SQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
 
-    If RS.EOF Then
+    If Rs.EOF Then
         LeerTipoMovimientos = False
     Else
-        mCodTipomAnt = CStr(DBLet(RS!CodTipomAnt, "T"))
-        mCodTipomLiq = CStr(DBLet(RS!CodTipomLiq, "T"))
-        mCodTipomAntVC = CStr(DBLet(RS!CodTipomAntVC, "T"))
-        mCodTipomLiqVC = CStr(DBLet(RS!CodTipomLiqVC, "T"))
-        mCodTipomFacAlmz = CStr(DBLet(RS!CodTipomFacAlmz, "T"))
-        mCodTipomFacBod = CStr(DBLet(RS!CodTipomFacBod, "T"))
+        mCodTipomAnt = CStr(DBLet(Rs!CodTipomAnt, "T"))
+        mCodTipomLiq = CStr(DBLet(Rs!CodTipomLiq, "T"))
+        mCodTipomAntVC = CStr(DBLet(Rs!CodTipomAntVC, "T"))
+        mCodTipomLiqVC = CStr(DBLet(Rs!CodTipomLiqVC, "T"))
+        mCodTipomFacAlmz = CStr(DBLet(Rs!CodTipomFacAlmz, "T"))
+        mCodTipomFacBod = CStr(DBLet(Rs!CodTipomFacBod, "T"))
         
-        mCodTipomAntAlmz = CStr(DBLet(RS!CodTipomAntAlmz, "T"))
-        mCodTipomLiqAlmz = CStr(DBLet(RS!CodTipomLiqAlmz, "T"))
-        mCodTipomAntBod = CStr(DBLet(RS!CodTipomAntBod, "T"))
-        mCodTipomLiqBod = CStr(DBLet(RS!CodTipomLiqBod, "T"))
+        mCodTipomAntAlmz = CStr(DBLet(Rs!CodTipomAntAlmz, "T"))
+        mCodTipomLiqAlmz = CStr(DBLet(Rs!CodTipomLiqAlmz, "T"))
+        mCodTipomAntBod = CStr(DBLet(Rs!CodTipomAntBod, "T"))
+        mCodTipomLiqBod = CStr(DBLet(Rs!CodTipomLiqBod, "T"))
         
         LeerTipoMovimientos = True
     End If
 
-    RS.Close
-    Set RS = Nothing
+    Rs.Close
+    Set Rs = Nothing
     Exit Function
 
 ELeer:
-    SQL = "Se ha producido un error. " & "Tipos movimiento socio/cooperativa" & vbCrLf
-    SQL = SQL & "Número: " & Err.Number & vbCrLf
-    SQL = SQL & "Descripción: " & Err.Description
-    MsgBox SQL, vbExclamation
-    Set RS = Nothing
+    Sql = "Se ha producido un error. " & "Tipos movimiento socio/cooperativa" & vbCrLf
+    Sql = Sql & "Número: " & Err.Number & vbCrLf
+    Sql = Sql & "Descripción: " & Err.Description
+    MsgBox Sql, vbExclamation
+    Set Rs = Nothing
     LeerTipoMovimientos = False
 End Function
 

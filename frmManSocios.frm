@@ -6,7 +6,7 @@ Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TABCTL32.OCX"
 Begin VB.Form frmManSocios 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Socios"
-   ClientHeight    =   8370
+   ClientHeight    =   8640
    ClientLeft      =   45
    ClientTop       =   30
    ClientWidth     =   14145
@@ -23,7 +23,7 @@ Begin VB.Form frmManSocios
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   8370
+   ScaleHeight     =   8640
    ScaleWidth      =   14145
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
@@ -373,7 +373,7 @@ Begin VB.Form frmManSocios
       Index           =   0
       Left            =   240
       TabIndex        =   65
-      Top             =   7680
+      Top             =   7995
       Width           =   2865
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -409,7 +409,7 @@ Begin VB.Form frmManSocios
       Height          =   375
       Left            =   13020
       TabIndex        =   40
-      Top             =   7800
+      Top             =   8115
       Width           =   1035
    End
    Begin VB.CommandButton cmdAceptar 
@@ -426,12 +426,12 @@ Begin VB.Form frmManSocios
       Height          =   375
       Left            =   11820
       TabIndex        =   39
-      Top             =   7800
+      Top             =   8115
       Width           =   1035
    End
    Begin MSAdodcLib.Adodc Data1 
       Height          =   330
-      Left            =   6525
+      Left            =   4230
       Top             =   6930
       Visible         =   0   'False
       Width           =   2055
@@ -490,22 +490,21 @@ Begin VB.Form frmManSocios
       Height          =   375
       Left            =   13020
       TabIndex        =   72
-      Top             =   7800
+      Top             =   8115
       Visible         =   0   'False
       Width           =   1035
    End
    Begin TabDlg.SSTab SSTab1 
-      Height          =   6060
+      Height          =   6375
       Left            =   240
       TabIndex        =   67
       Top             =   1590
       Width           =   13830
       _ExtentX        =   24395
-      _ExtentY        =   10689
+      _ExtentY        =   11245
       _Version        =   393216
       Style           =   1
       Tabs            =   7
-      Tab             =   1
       TabsPerRow      =   8
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -520,7 +519,7 @@ Begin VB.Form frmManSocios
       EndProperty
       TabCaption(0)   =   "Datos básicos"
       TabPicture(0)   =   "frmManSocios.frx":000C
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label5"
       Tab(0).Control(0).Enabled=   0   'False
       Tab(0).Control(1)=   "Label29"
@@ -554,7 +553,7 @@ Begin VB.Form frmManSocios
       Tab(0).ControlCount=   15
       TabCaption(1)   =   "Secciones"
       TabPicture(1)   =   "frmManSocios.frx":0028
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameAux1"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
@@ -566,16 +565,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Frame8"
-      Tab(3).Control(1)=   "Text3(0)"
-      Tab(3).Control(2)=   "Toolbar2"
-      Tab(3).Control(3)=   "lw1"
-      Tab(3).Control(4)=   "Toolbar3"
-      Tab(3).Control(5)=   "Frame5"
-      Tab(3).Control(6)=   "Toolbar4"
-      Tab(3).Control(7)=   "imgFec(3)"
-      Tab(3).Control(8)=   "Label17"
-      Tab(3).Control(9)=   "Label16"
+      Tab(3).Control(0)=   "Label16"
+      Tab(3).Control(1)=   "Label17"
+      Tab(3).Control(2)=   "imgFec(3)"
+      Tab(3).Control(3)=   "Toolbar4"
+      Tab(3).Control(4)=   "Frame5"
+      Tab(3).Control(5)=   "Toolbar3"
+      Tab(3).Control(6)=   "lw1"
+      Tab(3).Control(7)=   "Toolbar2"
+      Tab(3).Control(8)=   "Text3(0)"
+      Tab(3).Control(9)=   "Frame8"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -1388,8 +1387,8 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   1485
-         Left            =   -74850
+         Height          =   1620
+         Left            =   150
          TabIndex        =   141
          Top             =   915
          Width           =   6255
@@ -1536,10 +1535,10 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   1485
-         Left            =   -74850
+         Height          =   1620
+         Left            =   150
          TabIndex        =   137
-         Top             =   2460
+         Top             =   2595
          Width           =   6255
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -1980,7 +1979,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   7
-         Left            =   -69960
+         Left            =   5040
          MaxLength       =   10
          TabIndex        =   4
          Tag             =   "Fecha Nacimiento|F|S|||rsocios|fechanac|dd/mm/yyyy||"
@@ -1999,7 +1998,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   5490
-         Left            =   45
+         Left            =   -74955
          TabIndex        =   99
          Top             =   405
          Width           =   13165
@@ -2626,9 +2625,9 @@ Begin VB.Form frmManSocios
          EndProperty
          ForeColor       =   &H00972E0B&
          Height          =   1215
-         Left            =   -74850
+         Left            =   150
          TabIndex        =   94
-         Top             =   3990
+         Top             =   4260
          Width           =   6255
          Begin VB.TextBox Text1 
             BeginProperty Font 
@@ -2790,11 +2789,11 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   12
-         Left            =   -73605
+         Left            =   1395
          MaxLength       =   50
          TabIndex        =   17
          Tag             =   "E-mail|T|S|||rsocios|maisocio|||"
-         Top             =   5475
+         Top             =   5790
          Width           =   4860
       End
       Begin VB.Frame FrameAux0 
@@ -3532,11 +3531,30 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H00972E0B&
-         Height          =   4790
-         Left            =   -68475
+         Height          =   5055
+         Left            =   6525
          TabIndex        =   74
          Top             =   420
          Width           =   7110
+         Begin VB.CheckBox chkAbonos 
+            Caption         =   "Hay embargo"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   5
+            Left            =   495
+            TabIndex        =   195
+            Tag             =   "Hay embargo|N|N|||rsocios|hayempbargo||N|"
+            Top             =   4680
+            Width           =   2070
+         End
          Begin VB.ComboBox Combo1 
             BeginProperty Font 
                Name            =   "Verdana"
@@ -4003,6 +4021,16 @@ Begin VB.Form frmManSocios
             Top             =   330
             Width           =   1260
          End
+         Begin VB.Image imgAyuda 
+            Height          =   240
+            Index           =   1
+            Left            =   180
+            MousePointer    =   4  'Icon
+            Tag             =   "-1"
+            ToolTipText     =   "Ayuda"
+            Top             =   4725
+            Width           =   240
+         End
          Begin VB.Label Label40 
             Caption         =   "Tipo de Contrato"
             BeginProperty Font 
@@ -4332,13 +4360,13 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   20
-         Left            =   -68310
+         Left            =   6690
          MaxLength       =   250
          MultiLine       =   -1  'True
          ScrollBars      =   2  'Vertical
          TabIndex        =   38
          Tag             =   "Observaciones|T|S|||rsocios|observaciones|||"
-         Top             =   5475
+         Top             =   5790
          Width           =   6915
       End
       Begin VB.TextBox Text1 
@@ -4353,7 +4381,7 @@ Begin VB.Form frmManSocios
          EndProperty
          Height          =   360
          Index           =   2
-         Left            =   -73590
+         Left            =   1410
          MaxLength       =   15
          TabIndex        =   3
          Tag             =   "NIF / CIF|T|N|||rsocios|nifsocio|||"
@@ -4637,7 +4665,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -71550
+         Left            =   3450
          TabIndex        =   104
          Top             =   525
          Width           =   1275
@@ -4645,7 +4673,7 @@ Begin VB.Form frmManSocios
       Begin VB.Image imgFec 
          Height          =   240
          Index           =   2
-         Left            =   -70215
+         Left            =   4785
          Picture         =   "frmManSocios.frx":1D02
          ToolTipText     =   "Buscar fecha"
          Top             =   525
@@ -4663,25 +4691,25 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74625
+         Left            =   375
          TabIndex        =   93
-         Top             =   5505
+         Top             =   5820
          Width           =   705
       End
       Begin VB.Image imgMail 
          Height          =   240
          Index           =   0
-         Left            =   -73890
-         Top             =   5505
+         Left            =   1110
+         Top             =   5820
          Width           =   240
       End
       Begin VB.Image imgZoom 
          Height          =   240
          Index           =   0
-         Left            =   -66690
+         Left            =   8310
          Tag             =   "-1"
          ToolTipText     =   "Zoom descripción"
-         Top             =   5235
+         Top             =   5550
          Width           =   240
       End
       Begin VB.Label Label29 
@@ -4696,9 +4724,9 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -68310
+         Left            =   6690
          TabIndex        =   73
-         Top             =   5205
+         Top             =   5520
          Width           =   1515
       End
       Begin VB.Label Label5 
@@ -4713,7 +4741,7 @@ Begin VB.Form frmManSocios
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   -74610
+         Left            =   390
          TabIndex        =   71
          Top             =   525
          Width           =   735
@@ -4801,7 +4829,7 @@ Begin VB.Form frmManSocios
       Height          =   465
       Left            =   3300
       TabIndex        =   151
-      Top             =   7740
+      Top             =   8055
       Visible         =   0   'False
       Width           =   2715
    End
@@ -5711,7 +5739,7 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
+    CmdCancelar.visible = B
     cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
@@ -5825,15 +5853,15 @@ Dim B As Boolean
     'pozos
     B = (Modo = 5) And NumTabMto = 2
     For I = 1 To 3
-        BloquearTxt txtAux3(I), Not B
+        BloquearTxt txtaux3(I), Not B
     Next I
     B = (Modo = 5) And NumTabMto = 2 And ModoLineas = 2
-    BloquearTxt txtAux3(1), B
+    BloquearTxt txtaux3(1), B
     
     'miembros
     B = (Modo = 5) And NumTabMto = 3
     For I = 2 To 5
-        BloquearTxt txtAux4(I), Not B
+        BloquearTxt txtaux4(I), Not B
     Next I
     
 '    ' capital y votos enabled solo si el socio es entidad
@@ -6163,6 +6191,16 @@ Dim vCadena As String
                           "Cuando se reciba el documento se podrá cambiar el nro de factura y " & vbCrLf & _
                           "contabilizar en un proceso específico. " & vbCrLf & vbCrLf
             End If
+                      
+                      
+        Case 1
+           ' "____________________________________________________________"
+            '[Monica]15/05/2018:
+                vCadena = "Si está cuando se integren las facturas de anticipo y liquidación no " & vbCrLf & _
+                          "se grabará el IBAN en el cobro/pago." & vbCrLf & _
+                          "" & vbCrLf & vbCrLf
+                      
+                      
                       
     End Select
     MsgBox vCadena, vbInformation, "Descripción de Ayuda"
@@ -6933,8 +6971,8 @@ Dim V
                                     BloquearTxt txtAux(I), True
                                 Next I
                             Case 3 'miembros
-                                For I = 0 To txtAux4.Count
-                                    BloquearTxt txtAux4(I), True
+                                For I = 0 To txtaux4.Count
+                                    BloquearTxt txtaux4(I), True
                                 Next I
                         End Select
                     ' *** els tabs que no tenen datagrid ***
@@ -7745,13 +7783,13 @@ Dim I As Integer
             
             LLamaLineas Index, ModoLineas, anc
         
-            For I = 0 To txtAux3.Count - 1
-                txtAux3(I).Text = ""
+            For I = 0 To txtaux3.Count - 1
+                txtaux3(I).Text = ""
             Next I
             
-            txtAux3(0).Text = Text1(0).Text 'codsocio
-            txtAux3(1).Text = NumF 'numero de fase
-            PonerFoco txtAux3(1)
+            txtaux3(0).Text = Text1(0).Text 'codsocio
+            txtaux3(1).Text = NumF 'numero de fase
+            PonerFoco txtaux3(1)
         
         Case 3
             'pasar a "" si no volem que mos sugerixca res a l'afegir ***
@@ -7773,13 +7811,13 @@ Dim I As Integer
             
             LLamaLineas Index, ModoLineas, anc
         
-            For I = 0 To txtAux4.Count - 1
-                txtAux4(I).Text = ""
+            For I = 0 To txtaux4.Count - 1
+                txtaux4(I).Text = ""
             Next I
             
-            txtAux4(0).Text = Text1(0).Text 'codsocio
-            txtAux4(1).Text = NumF 'numero de fase
-            PonerFoco txtAux4(2) 'nif
+            txtaux4(0).Text = Text1(0).Text 'codsocio
+            txtaux4(1).Text = NumF 'numero de fase
+            PonerFoco txtaux4(2) 'nif
             
             
         Case 4
@@ -7798,13 +7836,13 @@ Dim I As Integer
             
             LLamaLineas Index, ModoLineas, anc
         
-            For I = 0 To txtAux4.Count - 1
-                txtAux5(I).Text = ""
+            For I = 0 To txtaux4.Count - 1
+                txtaux5(I).Text = ""
             Next I
             
-            txtAux5(0).Text = Text1(0).Text 'codsocio
-            txtAux5(1).Text = NumF 'numero de fase
-            PonerFoco txtAux5(2) 'nif
+            txtaux5(0).Text = Text1(0).Text 'codsocio
+            txtaux5(1).Text = NumF 'numero de fase
+            PonerFoco txtaux5(2) 'nif
             
             
     End Select
@@ -7872,21 +7910,21 @@ Private Sub BotonModificarLinea(Index As Integer)
         
         Case 2 'pozos
             For I = 0 To 3
-                txtAux3(I).Text = DataGridAux(Index).Columns(I).Text
+                txtaux3(I).Text = DataGridAux(Index).Columns(I).Text
             Next I
         
             CargarValoresAnteriores Me, 2, "FrameAux2"
         
         Case 3 'miembros
             For I = 0 To 5
-                txtAux4(I).Text = DataGridAux(Index).Columns(I).Text
+                txtaux4(I).Text = DataGridAux(Index).Columns(I).Text
             Next I
         
             CargarValoresAnteriores Me, 2, "FrameAux3"
         
         Case 4 'movimientos
             For I = 0 To 7
-                txtAux5(I).Text = DataGridAux(Index).Columns(I).Text
+                txtaux5(I).Text = DataGridAux(Index).Columns(I).Text
             Next I
         
             CargarValoresAnteriores Me, 2, "FrameAux4"
@@ -7918,9 +7956,9 @@ Private Sub BotonModificarLinea(Index As Integer)
                 End If
             End If
         Case 2 ' pozos
-            PonerFoco txtAux3(2)
+            PonerFoco txtaux3(2)
         Case 3 ' miembros
-            PonerFoco txtAux4(2)
+            PonerFoco txtaux4(2)
     End Select
     ' ***************************************************************************************
 End Sub
@@ -7974,20 +8012,20 @@ Dim B As Boolean
             
         Case 2 ' pozos
             For jj = 1 To 3
-                txtAux3(jj).visible = B
-                txtAux3(jj).Top = alto
+                txtaux3(jj).visible = B
+                txtaux3(jj).Top = alto
             Next jj
     
         Case 3 ' miembros
             For jj = 2 To 5
-                txtAux4(jj).visible = B
-                txtAux4(jj).Top = alto
+                txtaux4(jj).visible = B
+                txtaux4(jj).Top = alto
             Next jj
             
         Case 4 ' movim
             For jj = 2 To 5
-                txtAux5(jj).visible = B
-                txtAux5(jj).Top = alto
+                txtaux5(jj).visible = B
+                txtaux5(jj).Top = alto
             Next jj
     
     End Select
@@ -8096,21 +8134,21 @@ Dim vFact As Byte, vDocum As Byte
     
     If B And NumTabMto = 2 And ModoLineas = 1 Then
         Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_pozos", "acciones", "codsocio", txtAux3(0).Text, "N", , "numfases", txtAux3(1).Text, "N")
+        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_pozos", "acciones", "codsocio", txtaux3(0).Text, "N", , "numfases", txtaux3(1).Text, "N")
         If Sql <> "" Then
             MsgBox "El número de fase ya existe. Reintroduzca.", vbExclamation
             B = False
-            PonerFoco txtAux3(1)
+            PonerFoco txtaux3(1)
         End If
     End If
     
     If B And NumTabMto = 3 And ModoLineas = 1 Then
         Sql = ""
-        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_miembros", "nifmiembro", "codsocio", txtAux4(0).Text, "N", , "nifmiembro", txtAux4(2).Text)
+        Sql = DevuelveDesdeBDNew(cAgro, "rsocios_miembros", "nifmiembro", "codsocio", txtaux4(0).Text, "N", , "nifmiembro", txtaux4(2).Text)
         If Sql <> "" Then
             MsgBox "El nif ya existe para este socio. Reintroduzca.", vbExclamation
             B = False
-            PonerFoco txtAux4(2)
+            PonerFoco txtaux4(2)
         End If
     End If
     
@@ -8656,8 +8694,8 @@ Dim I As Integer
                 txtaux1(I).Text = ""
             Next I
         Case 2 'pozos
-            For I = 0 To txtAux3.Count - 1
-                txtAux3(I).Text = ""
+            For I = 0 To txtaux3.Count - 1
+                txtaux3(I).Text = ""
             Next I
     End Select
     
@@ -8881,7 +8919,7 @@ Dim cadMen As String
 Dim Nuevo As Boolean
 Dim cadena As String
     
-    If Not PerderFocoGnral(txtAux3(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux3(Index), Modo) Then Exit Sub
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -8891,10 +8929,10 @@ Dim cadena As String
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 1 ' numfases
-            PonerFormatoEntero txtAux3(Index)
+            PonerFormatoEntero txtaux3(Index)
             
         Case 2
-            PonerFormatoDecimal txtAux3(Index), 10
+            PonerFormatoDecimal txtaux3(Index), 10
         
         Case 3 'observaciones
             cmdAceptar.SetFocus
@@ -8905,11 +8943,11 @@ Dim cadena As String
 End Sub
 
 Private Sub TxtAux3_GotFocus(Index As Integer)
-   If Not txtAux3(Index).MultiLine Then ConseguirFocoLin txtAux3(Index)
+   If Not txtaux3(Index).MultiLine Then ConseguirFocoLin txtaux3(Index)
 End Sub
 
 Private Sub TxtAux3_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not txtAux3(Index).MultiLine Then KEYdown KeyCode
+    If Not txtaux3(Index).MultiLine Then KEYdown KeyCode
 End Sub
 
 Private Sub TxtAux3_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -9870,11 +9908,11 @@ End Sub
 '******** M I E M B R O S
 '**************************************************
 Private Sub TxtAux4_GotFocus(Index As Integer)
-   If Not txtAux4(Index).MultiLine Then ConseguirFocoLin txtAux4(Index)
+   If Not txtaux4(Index).MultiLine Then ConseguirFocoLin txtaux4(Index)
 End Sub
 
 Private Sub TxtAux4_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
-    If Not txtAux4(Index).MultiLine Then KEYdown KeyCode
+    If Not txtaux4(Index).MultiLine Then KEYdown KeyCode
 End Sub
 
 Private Sub TxtAux4_KeyPress(Index As Integer, KeyAscii As Integer)
@@ -9886,7 +9924,7 @@ Dim cadMen As String
 Dim Nuevo As Boolean
 Dim cadena As String
     
-    If Not PerderFocoGnral(txtAux4(Index), Modo) Then Exit Sub
+    If Not PerderFocoGnral(txtaux4(Index), Modo) Then Exit Sub
 
     'Si se ha abierto otro formulario, es que se ha pinchado en prismaticos y no
     'mostrar mensajes ni hacer nada
@@ -9896,14 +9934,14 @@ Dim cadena As String
     ' ******* configurar el LostFocus dels camps de llínies (dins i fora grid) ********
     Select Case Index
         Case 2 ' nif
-            txtAux4(Index).Text = UCase(txtAux4(Index).Text)
-            ValidarNIF txtAux4(Index).Text
+            txtaux4(Index).Text = UCase(txtaux4(Index).Text)
+            ValidarNIF txtaux4(Index).Text
         
         Case 4 ' votos
-            PonerFormatoDecimal txtAux4(Index), 1
+            PonerFormatoDecimal txtaux4(Index), 1
         
         Case 5 ' capital
-            If PonerFormatoDecimal(txtAux4(Index), 1) Then
+            If PonerFormatoDecimal(txtaux4(Index), 1) Then
                 cmdAceptar.SetFocus
             End If
 

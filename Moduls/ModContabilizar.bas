@@ -6799,9 +6799,16 @@ Dim J As Integer
                       End If
                 
                       If Not vParamAplic.ContabilidadNueva Then
+                        '[Monica]14/05/2018: si hay embargo no grabamos nada
+                        If vSoc.HayEmbargo Then
+                            'David. Para que ponga la cuenta bancaria (SI LA tiene)
+                            CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                            CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                        Else
                             'David. Para que ponga la cuenta bancaria (SI LA tiene)
                             CadValues2 = CadValues2 & DBSet(vBancoSoc, "T", "S") & "," & DBSet(vSucurSoc, "T", "S") & ","
                             CadValues2 = CadValues2 & DBSet(DigcoSoc, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+                        End If
                       End If
                 
                       'David. JUNIO 07.   Los dos textos de grabacion de datos de csb
@@ -6848,6 +6855,10 @@ Dim J As Integer
 
                             vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                             
+                            '[Monica]14/05/2018: si hay embargo no metemos nada en el iban
+                            If vSoc.HayEmbargo Then vvIban = ""
+                            
+                            
                             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
@@ -6875,7 +6886,12 @@ Dim J As Integer
                       Else
                             '[Monica]22/11/2013: Tema iban
                             If vEmpresa.HayNorma19_34Nueva = 1 Then
-                                CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                '[Monica]14/05/2018: si tiene embargo no se graba el iban
+                                If vSoc.HayEmbargo Then
+                                    CadValues2 = CadValues2 & ", " & DBSet(ValorNulo, "T", "S") & "),"
+                                Else
+                                    CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                End If
                             Else
                                 CadValues2 = CadValues2 & "),"
                             End If
@@ -6901,9 +6917,15 @@ Dim J As Integer
                           CadValues2 = CadValues2 & DBSet(ImpVenci, "N") & "," & DBSet(CtaBanco, "T") & ","
                           
                           If Not vParamAplic.ContabilidadNueva Then
+                          '[Monica]14/05/2018: si hay embargo no se manda cuenta
+                            If vSoc.HayEmbargo Then
+                                CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                                CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                            Else
                                 'David. Para que ponga la cuenta bancaria (SI LA tiene)
                                 CadValues2 = CadValues2 & DBSet(vBancoSoc, "T", "S") & "," & DBSet(vSucurSoc, "T", "S") & ","
                                 CadValues2 = CadValues2 & DBSet(DigcoSoc, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+                            End If
                           End If
                           'David. JUNIO 07.   Los dos textos de grabacion de datos de csb
                           Select Case TipoFact
@@ -6930,6 +6952,9 @@ Dim J As Integer
                                 
                                 vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                                 
+                                '[Monica]14/05/2018: si hay embargo no grabamos iban
+                                If vSoc.HayEmbargo Then vvIban = ""
+                                
                                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
@@ -6938,7 +6963,12 @@ Dim J As Integer
                                 
                                 '[Monica]22/11/2013: Tema iban
                                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                                    CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                    '[Monica]14/05/2018: si hay embargo no se graba iban
+                                    If vSoc.HayEmbargo Then
+                                        CadValues2 = CadValues2 & ", " & DBSet(ValorNulo, "T", "S") & "),"
+                                    Else
+                                        CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                    End If
                                 Else
                                     CadValues2 = CadValues2 & "),"
                                 End If
@@ -6959,9 +6989,15 @@ Dim J As Integer
                           CadValues2 = CadValues2 & DBSet(ImpVenci, "N") & ", " & DBSet(CtaBanco, "T") & ","
                           
                           If Not vParamAplic.ContabilidadNueva Then
+                            '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                            If vSoc.HayEmbargo Then
+                                CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                                CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                            Else
                                 'David. Para que ponga la cuenta bancaria (SI LA tiene)
                                 CadValues2 = CadValues2 & DBSet(vBancoSoc, "T", "S") & "," & DBSet(vSucurSoc, "T", "S") & ","
                                 CadValues2 = CadValues2 & DBSet(DigcoSoc, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+                            End If
                           End If
                           
                           'David. JUNIO 07.   Los dos textos de grabacion de datos de csb
@@ -6987,6 +7023,9 @@ Dim J As Integer
                           If vParamAplic.ContabilidadNueva Then
                                 vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                                 
+                                '[Monica]14/05/2018: si hay empbargo no se graba cuenta
+                                If vSoc.HayEmbargo Then vvIban = ""
+                                
                                 CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                                 'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
@@ -6994,7 +7033,12 @@ Dim J As Integer
                           Else
                                 '[Monica]22/11/2013: Tema iban
                                 If vEmpresa.HayNorma19_34Nueva = 1 Then
-                                    CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                    '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                                    If vSoc.HayEmbargo Then
+                                        CadValues2 = CadValues2 & ", " & DBSet(ValorNulo, "T", "S") & "),"
+                                    Else
+                                        CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                                    End If
                                 Else
                                     CadValues2 = CadValues2 & "),"
                                 End If
@@ -7182,6 +7226,9 @@ Dim J As Integer
                     
                     vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
                     
+                    '[Monica]14/05/2018: si hay embargo no se graba la cuenta
+                    If vSoc.HayEmbargo Then vvIban = ""
+                    
                     CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                     'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                     CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
@@ -7214,13 +7261,24 @@ Dim J As Integer
                     End If
                     
                 Else
-                    CadValues2 = CadValues2 & DBSet(vBancoSoc, "T", "S") & "," & DBSet(vSucurSoc, "T", "S") & ","
-                    CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+                    '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                    If vSoc.HayEmbargo Then
+                        CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                        CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & ","
+                    Else
+                        CadValues2 = CadValues2 & DBSet(vBancoSoc, "T", "S") & "," & DBSet(vSucurSoc, "T", "S") & ","
+                        CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & ","
+                    End If
                     CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
                     CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1" '),"
                     '[Monica]22/11/2013: Tema iban
                     If vEmpresa.HayNorma19_34Nueva = 1 Then
-                        CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                        '[Monica]14/05/2018: si hay embargo ho se graba cuenta
+                        If vSoc.HayEmbargo Then
+                            CadValues2 = CadValues2 & ", " & DBSet(ValorNulo, "T", "S") & "),"
+                        Else
+                            CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                        End If
                     Else
                         CadValues2 = CadValues2 & "),"
                     End If
@@ -7242,12 +7300,24 @@ Dim J As Integer
                     CadValues2 = CadValues2 & DBSet(ImpVenci, "N") & ","
                     
                     If Not vParamAplic.ContabilidadNueva Then
-                        CadValues2 = CadValues2 & DBSet(CtaBanco, "T") & "," & DBSet(vBancoSoc, "N", "S") & "," & DBSet(vSucurSoc, "N", "S") & ","
-                        CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                        CadValues2 = CadValues2 & DBSet(CtaBanco, "T") & ","
+                        '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                        If vSoc.HayEmbargo Then
+                            CadValues2 = CadValues2 & DBSet(ValorNulo, "N", "S") & "," & DBSet(ValorNulo, "N", "S") & ","
+                            CadValues2 = CadValues2 & DBSet(ValorNulo, "T", "S") & "," & DBSet(ValorNulo, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                        Else
+                            CadValues2 = CadValues2 & DBSet(vBancoSoc, "N", "S") & "," & DBSet(vSucurSoc, "N", "S") & ","
+                            CadValues2 = CadValues2 & DBSet(CC, "T", "S") & "," & DBSet(CtaBaSoc, "T", "S") & "," & ValorNulo & "," & ValorNulo & "," & ValorNulo & ","
+                        End If
                         CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text41csb, "T") & "," & DBSet(Text42csb, "T") & ",1" '),"
                         '[Monica]22/11/2013: Tema iban
                         If vEmpresa.HayNorma19_34Nueva = 1 Then
-                            CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                            '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                            If vSoc.HayEmbargo Then
+                                CadValues2 = CadValues2 & ", " & DBSet(ValorNulo, "T", "S") & "),"
+                            Else
+                                CadValues2 = CadValues2 & ", " & DBSet(IbanSoc, "T", "S") & "),"
+                            End If
                         Else
                             CadValues2 = CadValues2 & "),"
                         End If
@@ -7256,6 +7326,10 @@ Dim J As Integer
                         CadValues2 = CadValues2 & Text33csb & "," & DBSet(Text42csb, "T") & ",1,"
                         
                         vvIban = MiFormat(IbanSoc, "") & MiFormat(vBancoSoc, "0000") & MiFormat(vSucurSoc, "0000") & MiFormat(DigcoSoc, "00") & MiFormat(CtaBaSoc, "0000000000")
+                        
+                        '[Monica]14/05/2018: si hay embargo no se graba cuenta
+                        If vSoc.HayEmbargo Then vvIban = ""
+                        
                         
                         CadValues2 = CadValues2 & DBSet(vvIban, "T") & ","
                         'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
