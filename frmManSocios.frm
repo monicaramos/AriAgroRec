@@ -555,7 +555,6 @@ Begin VB.Form frmManSocios
       TabPicture(1)   =   "frmManSocios.frx":0028
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameAux1"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Teléfonos"
       TabPicture(2)   =   "frmManSocios.frx":0044
@@ -3551,7 +3550,7 @@ Begin VB.Form frmManSocios
             Index           =   5
             Left            =   495
             TabIndex        =   195
-            Tag             =   "Hay embargo|N|N|||rsocios|hayempbargo||N|"
+            Tag             =   "Hay embargo|N|N|||rsocios|hayembargo||N|"
             Top             =   4680
             Width           =   2070
          End
@@ -5740,13 +5739,13 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     CmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
     BloquearText1 Me, Modo
     BloquearCombo Me, Modo
-    For I = 0 To 4
+    For I = 0 To chkAbonos.Count - 1
         BloquearChk Me.chkAbonos(I), (Modo = 0 Or Modo = 2 Or Modo = 5)
     Next I
     
@@ -6196,8 +6195,8 @@ Dim vCadena As String
         Case 1
            ' "____________________________________________________________"
             '[Monica]15/05/2018:
-                vCadena = "Si está cuando se integren las facturas de anticipo y liquidación no " & vbCrLf & _
-                          "se grabará el IBAN en el cobro/pago." & vbCrLf & _
+                vCadena = "Si está marcado cuando se integren las facturas de anticipo y liquidación no " & vbCrLf & _
+                          "se grabará el IBAN en el pago." & vbCrLf & _
                           "" & vbCrLf & vbCrLf
                       
                       
@@ -8084,7 +8083,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -8876,7 +8875,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtaux1(Index).Text, "N")
             End If
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -8935,7 +8934,7 @@ Dim cadena As String
             PonerFormatoDecimal txtaux3(Index), 10
         
         Case 3 'observaciones
-            cmdAceptar.SetFocus
+            CmdAceptar.SetFocus
 
     End Select
     
@@ -9942,7 +9941,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtaux4(Index), 1) Then
-                cmdAceptar.SetFocus
+                CmdAceptar.SetFocus
             End If
 
     End Select

@@ -742,7 +742,7 @@ Private Sub frmBanPr_DatoSeleccionado(CadenaSeleccion As String)
     'Form de Mantenimiento de Bancos Propios
     Text1(5).Text = RecuperaValor(CadenaSeleccion, 1)
     Text1(5).Text = Format(Text1(5).Text, "0000")
-    Text2(5).Text = RecuperaValor(CadenaSeleccion, 2)
+    text2(5).Text = RecuperaValor(CadenaSeleccion, 2)
 End Sub
 
 Private Sub frmF_Selec(vFecha As Date)
@@ -755,7 +755,7 @@ End Sub
 Private Sub frmFPa_DatoSeleccionado(CadenaSeleccion As String)
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod forpa
     FormateaCampo Text1(4)
-    Text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom forpa
+    text2(4).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom forpa
 End Sub
 
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
@@ -763,7 +763,7 @@ Dim Indice As Byte
     Indice = 3
     Text1(Indice).Text = RecuperaValor(CadenaSeleccion, 1) 'Cod Socios
     FormateaCampo Text1(Indice)
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Nom socio
 End Sub
 
 Private Sub imgBuscar_Click(Index As Integer)
@@ -905,14 +905,14 @@ Private Sub Text1_LostFocus(Index As Integer)
         
         Case 3 'Cod Socios
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio")
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio", "codsocio")
                 
-                If Text2(Index).Text <> "" Then
+                If text2(Index).Text <> "" Then
                     CargarFacturas Text1(Index)
                     CalcularTotales
                 End If
             Else
-                Text2(Index).Text = ""
+                text2(Index).Text = ""
             End If
             PonerFoco Text1(1)
             
@@ -1818,7 +1818,7 @@ Dim Rs As ADODB.Recordset
         'Nombre fichero .rpt a Imprimir
         frmImprimir.NombreRPT = nomDocu
         
-        If vParamAplic.ContabilidadNueva And UCase(Mid(frmImprimir.NombreRPT, 1, 3)) = "ESC" Then frmImprimir.NombreRPT = Replace(frmImprimir.NombreRPT, ".rpt", "6.rpt")
+'        If vParamAplic.ContabilidadNueva And UCase(Mid(frmImprimir.NombreRPT, 1, 3)) = "ESC" Then frmImprimir.NombreRPT = Replace(frmImprimir.NombreRPT, ".rpt", "6.rpt")
             
         '===================================================
         '================= FORMULA =========================
@@ -1909,8 +1909,8 @@ Dim I As Integer
         End If
     Next I
     
-    Text2(0).Text = Format(importe1, "###,###,##0.00")
-    Text2(1).Text = Format(importe2, "###,###,##0.00")
+    text2(0).Text = Format(importe1, "###,###,##0.00")
+    text2(1).Text = Format(importe2, "###,###,##0.00")
     
     
     DoEvents

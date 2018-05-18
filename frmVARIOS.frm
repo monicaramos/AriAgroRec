@@ -2,16 +2,16 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmVARIOS 
    BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   1485
+   ClientHeight    =   8100
    ClientLeft      =   45
    ClientTop       =   2430
-   ClientWidth     =   6690
+   ClientWidth     =   6660
    Icon            =   "frmVARIOS.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   1485
-   ScaleWidth      =   6690
+   ScaleHeight     =   8100
+   ScaleWidth      =   6660
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame Frame1 
@@ -20,7 +20,7 @@ Begin VB.Form frmVARIOS
       TabIndex        =   22
       Top             =   0
       Width           =   6645
-      Begin VB.CommandButton CmdAceptar 
+      Begin VB.CommandButton CmdAceptar1 
          Caption         =   "&Aceptar"
          Height          =   375
          Left            =   4200
@@ -299,6 +299,142 @@ Begin VB.Form frmVARIOS
          Width           =   45
       End
    End
+   Begin VB.Frame FrameMSGBOX 
+      Height          =   4425
+      Left            =   0
+      TabIndex        =   27
+      Top             =   45
+      Width           =   6585
+      Begin VB.Frame FrameAceptar 
+         Height          =   870
+         Left            =   1980
+         TabIndex        =   35
+         Top             =   3195
+         Width           =   1500
+         Begin VB.CommandButton CmdAceptar 
+            Caption         =   "Aceptar"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   2
+            Left            =   180
+            TabIndex        =   36
+            Top             =   270
+            Width           =   1065
+         End
+      End
+      Begin VB.Frame FrameSiNoCancelar 
+         Height          =   870
+         Left            =   1935
+         TabIndex        =   31
+         Top             =   2070
+         Width           =   4065
+         Begin VB.CommandButton CmdCancelar 
+            Caption         =   "Cancelar"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   0
+            Left            =   2610
+            TabIndex        =   34
+            Top             =   270
+            Width           =   1065
+         End
+         Begin VB.CommandButton CmdSi 
+            Caption         =   "Si"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   1
+            Left            =   180
+            TabIndex        =   33
+            Top             =   270
+            Width           =   1065
+         End
+         Begin VB.CommandButton CmdNo 
+            Caption         =   "No"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   1
+            Left            =   1395
+            TabIndex        =   32
+            Top             =   270
+            Width           =   1065
+         End
+      End
+      Begin VB.Frame FrameSiNo 
+         Height          =   870
+         Left            =   3690
+         TabIndex        =   28
+         Top             =   3195
+         Width           =   2670
+         Begin VB.CommandButton CmdNo 
+            Caption         =   "No"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   0
+            Left            =   1395
+            TabIndex        =   30
+            Top             =   270
+            Width           =   1065
+         End
+         Begin VB.CommandButton CmdSi 
+            Caption         =   "Si"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   420
+            Index           =   0
+            Left            =   180
+            TabIndex        =   29
+            Top             =   270
+            Width           =   1065
+         End
+      End
+   End
 End
 Attribute VB_Name = "frmVARIOS"
 Attribute VB_GlobalNameSpace = False
@@ -349,7 +485,7 @@ Dim indCodigo As Integer 'indice para txtCodigo
 Dim indFrame As Single 'nº de frame en el que estamos
  
 'Se inicializan para cada Informe (tabla de BD a la que hace referencia
-Dim Tabla As String
+Dim tabla As String
 Dim Codigo As String 'Código para FormulaSelection de Crystal Report
 Dim TipCod As String
 Dim Orden1 As String 'Campo de Ordenacion (por codigo) para Cristal Report
@@ -372,7 +508,7 @@ Dim cerrar As Boolean
 End Sub
 
 
-Private Sub cmdAceptar_Click()
+Private Sub cmdAceptar1_Click()
 Dim Sql As String
 Dim Sql2 As String
 Dim Sql3 As String
@@ -406,7 +542,7 @@ Dim RstaGlobal As Boolean
         KilosDestrio = Round(Rs!KilosNet * Rs!pordestrio / 100, 0)
         KilosPixat = Round(Rs!KilosNet * Rs!PORPIXAT / 100, 0)
         
-        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!codvarie, "N") & " and codcalid = 5")
+        KilosDes = DevuelveValor("select kilosnet from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " and codvarie = " & DBSet(Rs!Codvarie, "N") & " and codcalid = 5")
         
         
         Sql2 = "select * from rhisfruta_clasif where numalbar = " & DBSet(Rs!numalbar, "N") & " order by codvarie, codcalid "
@@ -434,7 +570,7 @@ Dim RstaGlobal As Boolean
             
            
             Sql3 = " where numalbar = " & DBSet(Rs!numalbar, "N")
-            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!codvarie, "N")
+            Sql3 = Sql3 & " and codvarie = " & DBSet(Rs!Codvarie, "N")
             Sql3 = Sql3 & " and codcalid = " & DBSet(Rs2!codcalid, "N")
             Rs2.MoveNext
             
@@ -484,7 +620,7 @@ Dim Rs As ADODB.Recordset
 Dim Ent As String ' Entidad
 Dim Suc As String ' Oficina
 Dim DC As String ' Digitos de control
-Dim i, i2, i3, i4 As Integer
+Dim I, i2, i3, i4 As Integer
 Dim NumCC As String ' Número de cuenta propiamente dicho
 Dim CC As String
 Dim cadResult As String
@@ -531,16 +667,16 @@ Dim NFich As Integer
                     If Not Comprueba_CC(CC) Then
                         
                         '-- Calculamos el primer dígito de control
-                        i = Val(Mid(CC, 1, 1)) * 4
-                        i = i + Val(Mid(CC, 2, 1)) * 8
-                        i = i + Val(Mid(CC, 3, 1)) * 5
-                        i = i + Val(Mid(CC, 4, 1)) * 10
-                        i = i + Val(Mid(CC, 5, 1)) * 9
-                        i = i + Val(Mid(CC, 6, 1)) * 7
-                        i = i + Val(Mid(CC, 7, 1)) * 3
-                        i = i + Val(Mid(CC, 8, 1)) * 6
-                        i2 = Int(i / 11)
-                        i3 = i - (i2 * 11)
+                        I = Val(Mid(CC, 1, 1)) * 4
+                        I = I + Val(Mid(CC, 2, 1)) * 8
+                        I = I + Val(Mid(CC, 3, 1)) * 5
+                        I = I + Val(Mid(CC, 4, 1)) * 10
+                        I = I + Val(Mid(CC, 5, 1)) * 9
+                        I = I + Val(Mid(CC, 6, 1)) * 7
+                        I = I + Val(Mid(CC, 7, 1)) * 3
+                        I = I + Val(Mid(CC, 8, 1)) * 6
+                        i2 = Int(I / 11)
+                        i3 = I - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -552,18 +688,18 @@ Dim NFich As Integer
                         DC = i4
                         
                         '-- Calculamos el segundo dígito de control
-                        i = Val(Mid(CC, 11, 1)) * 1
-                        i = i + Val(Mid(CC, 12, 1)) * 2
-                        i = i + Val(Mid(CC, 13, 1)) * 4
-                        i = i + Val(Mid(CC, 14, 1)) * 8
-                        i = i + Val(Mid(CC, 15, 1)) * 5
-                        i = i + Val(Mid(CC, 16, 1)) * 10
-                        i = i + Val(Mid(CC, 17, 1)) * 9
-                        i = i + Val(Mid(CC, 18, 1)) * 7
-                        i = i + Val(Mid(CC, 19, 1)) * 3
-                        i = i + Val(Mid(CC, 20, 1)) * 6
-                        i2 = Int(i / 11)
-                        i3 = i - (i2 * 11)
+                        I = Val(Mid(CC, 11, 1)) * 1
+                        I = I + Val(Mid(CC, 12, 1)) * 2
+                        I = I + Val(Mid(CC, 13, 1)) * 4
+                        I = I + Val(Mid(CC, 14, 1)) * 8
+                        I = I + Val(Mid(CC, 15, 1)) * 5
+                        I = I + Val(Mid(CC, 16, 1)) * 10
+                        I = I + Val(Mid(CC, 17, 1)) * 9
+                        I = I + Val(Mid(CC, 18, 1)) * 7
+                        I = I + Val(Mid(CC, 19, 1)) * 3
+                        I = I + Val(Mid(CC, 20, 1)) * 6
+                        i2 = Int(I / 11)
+                        i3 = I - (i2 * 11)
                         i4 = 11 - i3
                         Select Case i4
                             Case 11
@@ -619,6 +755,8 @@ eError:
 
 End Sub
 
+
+
 Private Sub cmdCancel_Click()
     Unload Me
 End Sub
@@ -635,7 +773,7 @@ End Sub
 Private Sub Form_Activate()
     If PrimeraVez Then
         PrimeraVez = False
-        PonerFoco txtcodigo(1)
+        PonerFoco txtCodigo(1)
     End If
     Screen.MousePointer = vbDefault
 End Sub
@@ -649,7 +787,7 @@ Dim List As Collection
     PrimeraVez = True
     limpiar Me
 
-    Tabla = "rhisfruta"
+    tabla = "rhisfruta"
     
     ' Necesitamos la conexion a la contabilidad de la seccion de adv
     ' para sacar los porcentajes de iva de los articulos y calcular
@@ -685,12 +823,12 @@ Private Sub imgBuscar_Click(Index As Integer)
             AbrirFrmArticuloADV (Index)
     
     End Select
-    PonerFoco txtcodigo(indCodigo)
+    PonerFoco txtCodigo(indCodigo)
 End Sub
 
 
 Private Sub txtCodigo_GotFocus(Index As Integer)
-    ConseguirFoco txtcodigo(Index), 3
+    ConseguirFoco txtCodigo(Index), 3
 End Sub
 
 Private Sub txtCodigo_KeyDown(Index As Integer, KeyCode As Integer, Shift As Integer)
@@ -711,9 +849,9 @@ Private Sub txtCodigo_KeyPress(Index As Integer, KeyAscii As Integer)
 
 End Sub
 
-Private Sub KEYBusqueda(KeyAscii As Integer, indice As Integer)
+Private Sub KEYBusqueda(KeyAscii As Integer, Indice As Integer)
     KeyAscii = 0
-    imgBuscar_Click (indice)
+    imgBuscar_Click (Indice)
 End Sub
 
 
@@ -795,8 +933,8 @@ Private Sub LlamarImprimir()
     End With
 End Sub
 
-Private Sub AbrirFrmArticuloADV(indice As Integer)
-    indCodigo = indice
+Private Sub AbrirFrmArticuloADV(Indice As Integer)
+    indCodigo = Indice
     Set frmArtADV = New frmADVArticulos
     frmArtADV.DatosADevolverBusqueda = "0|1|"
     frmArtADV.Show vbModal
@@ -842,8 +980,8 @@ Private Sub AbrirEMail()
 End Sub
 
 
-Private Function DatosOk() As Boolean
-Dim b As Boolean
+Private Function DatosOK() As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim vClien As cSocio
@@ -852,18 +990,18 @@ Dim Mens As String
 Dim numfactu As String
 Dim numser As String
 Dim Fecha As Date
-Dim Cad As String
+Dim cad As String
 
-    b = True
+    B = True
     
-    If b Then
-        If (txtcodigo(1).Text = "" Or txtcodigo(2).Text = "") Then
+    If B Then
+        If (txtCodigo(1).Text = "" Or txtCodigo(2).Text = "") Then
             MsgBox "El rango de albaranes debe de tener un valor. Reintroduzca.", vbExclamation
-            b = False
+            B = False
         End If
     End If
     
-    DatosOk = b
+    DatosOK = B
 
 End Function
 
@@ -903,7 +1041,7 @@ Public Function GeneraRegistros(vDesde As String, vHasta As String) As Boolean
 ' ariges.scafac --> conta.cabfact
 ' ariges.slifac --> conta.linfact
 'Actualizar la tabla ariges.scafac.inconta=1 para indicar que ya esta contabilizada
-Dim b As Boolean
+Dim B As Boolean
 Dim cadMen As String
 Dim Sql As String
 Dim NumF As Currency
@@ -915,13 +1053,13 @@ Dim cadErr As String
 
 Dim Desde As Long
 Dim Hasta As Long
-Dim i As Long
+Dim I As Long
 
     On Error GoTo EContab
 
     conn.BeginTrans
     
-    b = True
+    B = True
     
     Desde = CLng(vDesde)
     Hasta = CLng(vHasta)
@@ -933,11 +1071,11 @@ Dim i As Long
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         Label2(2).Caption = Rs!numalbar
         DoEvents
     
-        b = CalculoGastosTransporte(Rs!numalbar, cadErr)
+        B = CalculoGastosTransporte(Rs!numalbar, cadErr)
         
         Rs.MoveNext
     Wend
@@ -958,10 +1096,10 @@ Dim i As Long
 EContab:
     
     If Err.Number <> 0 Then
-        b = False
+        B = False
         MuestraError Err.Number, "Modificando Registros", Err.Description & " " & cadErr
     End If
-    If b Then
+    If B Then
         conn.CommitTrans
         GeneraRegistros = True
     Else
@@ -1017,7 +1155,7 @@ On Error GoTo EInsertar
         TotImpTrans = TotImpTrans + ImpTrans
         If vParamAplic.Cooperativa <> 2 And vParamAplic.Cooperativa <> 16 Then
             Sql = "update rhisfruta_entradas set imptrans = " & DBSet(ImpTrans, "N")
-            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!numnotac, "N")
+            Sql = Sql & " where numalbar = " & DBSet(Albaran, "N") & " and numnotac = " & DBSet(Rs!NumNotac, "N")
             
             conn.Execute Sql
         End If

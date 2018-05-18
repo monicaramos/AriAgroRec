@@ -593,7 +593,7 @@ Dim B As Boolean
     Sql = "SELECT codsocio, nifsocio, nomsocio, dirsocio, pobsocio, prosocio, codpostal, "
     Sql = Sql & "fechanac, telsoci1, telsoci2, telsoci3, movsocio, maisocio, codbanco, codsucur, "
     Sql = Sql & "digcontr , cuentaba, fechaalta, fechabaja, correo, tipoIRPF, tipoprod, codsitua, codcoope, "
-    Sql = Sql & "observaciones, esfactadvinterna, emitefact, iban, nodevolverapor "
+    Sql = Sql & "observaciones, esfactadvinterna, emitefact, iban, nodevolverapor, hayembargo "
     Sql = Sql & " FROM rsocios "
     Sql = Sql & " WHERE codsocio=" & vCodsocio
     
@@ -608,7 +608,7 @@ Dim B As Boolean
         mNomsocio = DBLet(Rs!nomsocio, "T")
         
         mDirsocio = DBLet(Rs!dirsocio, "T")
-        mCodposta = DBLet(Rs!codPostal, "T")
+        mCodposta = DBLet(Rs!codpostal, "T")
         mPobsocio = DBLet(Rs!pobsocio, "T")
         mProsocio = DBLet(Rs!prosocio, "T")
         mNIFsocio = Rs!nifSocio

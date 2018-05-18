@@ -4322,7 +4322,7 @@ Dim B As Boolean
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         B = vSeccion.AbrirConta
         If B Then
-            Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+            text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
             Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
             FormateaCampo Text1(4)
         End If
@@ -4943,7 +4943,7 @@ Private Sub frmTIva_DatoSeleccionado(CadenaSeleccion As String)
 'Mantenimiento Tipo de iva
     Text1(3).Text = RecuperaValor(CadenaSeleccion, 1) 'codiva
     FormateaCampo Text1(3)
-    Text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
+    text2(3).Text = RecuperaValor(CadenaSeleccion, 2) 'nomiva
     Text1(4).Text = RecuperaValor(CadenaSeleccion, 3) 'porcentaje iva
     FormateaCampo Text1(4)
 End Sub
@@ -4952,7 +4952,7 @@ End Sub
 Private Sub frmSoc_DatoSeleccionado(CadenaSeleccion As String)
 'Form Mantenimiento de Socios
     Text1(Indice).Text = Format(RecuperaValor(CadenaSeleccion, 1), "000000") 'Cod Socios
-    Text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
+    text2(Indice).Text = RecuperaValor(CadenaSeleccion, 2) 'Descripcion
 End Sub
 
 Private Sub frmZ_Actualizar(vCampo As String)
@@ -5197,8 +5197,8 @@ Dim Rs As ADODB.Recordset
         Case 2 'Socio
             If Modo = 1 Then Exit Sub
             If PonerFormatoEntero(Text1(Index)) Then
-                Text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
-                If Text2(Index).Text = "" Then
+                text2(Index).Text = PonerNombreDeCod(Text1(Index), "rsocios", "nomsocio")
+                If text2(Index).Text = "" Then
                     cadMen = "No existe el Socio: " & Text1(Index).Text & vbCrLf
                     cadMen = cadMen & "¿Desea crearlo?" & vbCrLf
                     If MsgBox(cadMen, vbQuestion + vbYesNo) = vbYes Then
@@ -5229,7 +5229,7 @@ Dim Rs As ADODB.Recordset
                 Set vSeccion = New CSeccion
                 If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
                     If vSeccion.AbrirConta Then
-                        Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+                        text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
                         Text1(4).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "porceiva", "codigiva", Text1(3).Text, "N")
                         
                         CalculoTotales
@@ -5479,13 +5479,13 @@ Dim vSeccion As CSeccion
     'poner descripcion campos
     Modo = 4
     
-    Text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
+    text2(2).Text = PonerNombreDeCod(Text1(2), "rsocios", "nomsocio", "codsocio", "N") 'socios
     
     Set vSeccion = New CSeccion
     If vSeccion.LeerDatos(vParamAplic.Seccionhorto) Then
         B = vSeccion.AbrirConta
         If B Then
-            Text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
+            text2(3).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", Text1(3).Text, "N")
         End If
     End If
     Set vSeccion = Nothing
@@ -5578,8 +5578,8 @@ Dim b1 As Boolean
     
     '---------------------------------------------
     B = (Modo <> 0 And Modo <> 2)
-    CmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdCancelar.visible = B
+    cmdAceptar.visible = B
     
     BloquearImgBuscar Me, Modo, ModificaLineas
     BloquearImgFec Me, 0, Modo
@@ -6001,7 +6001,7 @@ Dim NroCopias As Integer
     frmImprimir.NombreRPT = nomDocu
     
     
-    If vParamAplic.ContabilidadNueva And UCase(Mid(frmImprimir.NombreRPT, 1, 3)) = "ESC" Then frmImprimir.NombreRPT = Replace(frmImprimir.NombreRPT, ".rpt", "6.rpt")
+'    If vParamAplic.ContabilidadNueva And UCase(Mid(frmImprimir.NombreRPT, 1, 3)) = "ESC" Then frmImprimir.NombreRPT = Replace(frmImprimir.NombreRPT, ".rpt", "6.rpt")
     
         
     '===================================================
@@ -7037,7 +7037,7 @@ Dim cadena As String
             PonerFormatoDecimal txtaux3(Index), 10
         
         Case 3 'observaciones
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -7084,7 +7084,7 @@ Dim cadena As String
         Case 5
             PonerFormatoDecimal txtaux4(Index), 11
         
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
     ' ******************************************************************************
 End Sub
@@ -7119,7 +7119,7 @@ Dim cadena As String
             PonerFormatoDecimal txtaux5(Index), 11
         
         Case 10
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
     ' ******************************************************************************
 End Sub
