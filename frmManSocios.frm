@@ -5739,7 +5739,7 @@ Dim B As Boolean
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
     CmdCancelar.visible = B
-    CmdAceptar.visible = B
+    cmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -8083,7 +8083,7 @@ Dim Nuevo As Boolean
             PonerFormatoEntero txtAux(Index)
             
         Case 16
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
     End Select
     
     ' ******************************************************************************
@@ -8875,7 +8875,7 @@ Dim cadena As String
             If Not vSeccion Is Nothing Then
                   txtAux2(0).Text = DevuelveDesdeBDNew(cConta, "tiposiva", "nombriva", "codigiva", txtaux1(Index).Text, "N")
             End If
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -8934,7 +8934,7 @@ Dim cadena As String
             PonerFormatoDecimal txtaux3(Index), 10
         
         Case 3 'observaciones
-            CmdAceptar.SetFocus
+            cmdAceptar.SetFocus
 
     End Select
     
@@ -9941,7 +9941,7 @@ Dim cadena As String
         
         Case 5 ' capital
             If PonerFormatoDecimal(txtaux4(Index), 1) Then
-                CmdAceptar.SetFocus
+                cmdAceptar.SetFocus
             End If
 
     End Select

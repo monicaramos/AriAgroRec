@@ -39,7 +39,32 @@ End Function
 
 
 
-
+Public Function MsgBoxB(Texto As String, Botones As Long, Optional Titulo As String, Optional Extendido As Boolean) As Long
+'   Botones
+'--------------------------------------------------------
+'    vbOKOnly 0 Sólo el botón Aceptar (predeterminado)
+'    vbOKCancel 1 Los botones Aceptar y Cancelar
+'    vbYesNoCancel 3 Los botones Sí, No y Cancelar.
+'    VbYesNo 4 Los botones Sí y No
+'   vbCritical 16 Mensaje crítico
+'   vbQuestion 32 Consulta de advertencia
+'   vbExclamation 48 Mensaje de advertencia
+'   vbInformation 64 Mensaje de información
+    
+Dim frmMs As frmMSG
+    
+    Set frmMs = New frmMSG
+    
+    frmMs.NumCod = Botones
+    frmMs.Text1 = Texto
+    
+    frmMs.Show vbModal
+    
+    Set frmMs = Nothing
+        
+    MsgBoxB = ValorDevuelto
+    
+End Function
 
 
 

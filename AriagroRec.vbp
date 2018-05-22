@@ -335,6 +335,7 @@ Form=frmManHorasCata.frm
 Form=frmManClasAux.frm
 Form=frmMenBox.frm
 Module=libMensajes; Moduls\libMensajesCodejok.bas
+Form=frmMSG.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

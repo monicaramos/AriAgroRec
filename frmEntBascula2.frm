@@ -5,29 +5,68 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmEntBascula2 
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Entrada de Paletización"
-   ClientHeight    =   7635
+   ClientHeight    =   8430
    ClientLeft      =   45
-   ClientTop       =   330
-   ClientWidth     =   6810
+   ClientTop       =   30
+   ClientWidth     =   8280
    Icon            =   "frmEntBascula2.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   7635
-   ScaleWidth      =   6810
+   ScaleHeight     =   8430
+   ScaleWidth      =   8280
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.Frame FrameBotonGnral2 
+      Height          =   705
+      Left            =   45
+      TabIndex        =   47
+      Top             =   90
+      Width           =   1470
+      Begin MSComctlLib.Toolbar Toolbar1 
+         Height          =   330
+         Left            =   210
+         TabIndex        =   48
+         Top             =   180
+         Width           =   1095
+         _ExtentX        =   1931
+         _ExtentY        =   582
+         ButtonWidth     =   609
+         ButtonHeight    =   582
+         AllowCustomize  =   0   'False
+         Style           =   1
+         _Version        =   393216
+         BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
+            NumButtons      =   2
+            BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Modificar Líneas"
+            EndProperty
+            BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
+               Object.ToolTipText     =   "Palets/Palots"
+            EndProperty
+         EndProperty
+      End
+   End
    Begin VB.Frame FramePalets 
       BorderStyle     =   0  'None
       Height          =   555
-      Left            =   3240
+      Left            =   4950
       TabIndex        =   44
-      Top             =   2655
+      Top             =   2925
       Width           =   3030
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   10
          Left            =   180
          MaxLength       =   3
@@ -38,7 +77,16 @@ Begin VB.Form frmEntBascula2
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   11
          Left            =   1665
          MaxLength       =   7
@@ -49,10 +97,10 @@ Begin VB.Form frmEntBascula2
       Begin VB.Label Label2 
          Caption         =   "Palets"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -66,10 +114,10 @@ Begin VB.Form frmEntBascula2
       Begin VB.Label Label8 
          Caption         =   "Palots"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
@@ -84,6 +132,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   10
       Left            =   6075
@@ -97,6 +154,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   9
       Left            =   5670
@@ -110,6 +176,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   8
       Left            =   5220
@@ -123,6 +198,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   7
       Left            =   4455
@@ -136,6 +220,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   6
       Left            =   4050
@@ -149,6 +242,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   5
       Left            =   3510
@@ -163,6 +265,15 @@ Begin VB.Form frmEntBascula2
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   3
       Left            =   2295
@@ -175,220 +286,409 @@ Begin VB.Form frmEntBascula2
    End
    Begin VB.Frame Frame2 
       Enabled         =   0   'False
-      Height          =   2820
+      Height          =   3225
       Index           =   0
       Left            =   60
       TabIndex        =   19
-      Top             =   480
-      Width           =   6525
+      Top             =   885
+      Width           =   8055
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   8
          Left            =   180
          MaxLength       =   3
          TabIndex        =   40
-         Top             =   2385
-         Width           =   1215
+         Top             =   2700
+         Width           =   1305
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   30
          TabIndex        =   34
-         Top             =   1770
-         Width           =   4200
+         Top             =   2085
+         Width           =   5595
       End
       Begin VB.TextBox Text3 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   6
-         Left            =   945
+         Left            =   1170
          MaxLength       =   6
          TabIndex        =   33
-         Top             =   1755
-         Width           =   765
+         Top             =   2070
+         Width           =   900
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   3
-         Left            =   945
+         Left            =   1170
          MaxLength       =   6
          TabIndex        =   32
-         Top             =   810
-         Width           =   750
+         Top             =   855
+         Width           =   885
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   30
          TabIndex        =   31
-         Top             =   810
-         Width           =   4215
+         Top             =   855
+         Width           =   5610
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   4
-         Left            =   945
+         Left            =   1170
          MaxLength       =   6
          TabIndex        =   30
-         Top             =   1125
-         Width           =   765
+         Top             =   1260
+         Width           =   900
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   40
          TabIndex        =   29
-         Top             =   1140
-         Width           =   4215
+         Top             =   1275
+         Width           =   5610
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   7
-         Left            =   4815
+         Left            =   6525
          MaxLength       =   8
          TabIndex        =   28
          Top             =   405
-         Width           =   1215
+         Width           =   1260
       End
       Begin VB.TextBox Text2 
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   30
          TabIndex        =   27
-         Top             =   1440
-         Width           =   4200
+         Top             =   1665
+         Width           =   5595
       End
       Begin VB.TextBox Text2 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
          Enabled         =   0   'False
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   5
-         Left            =   945
+         Left            =   1170
          MaxLength       =   4
          TabIndex        =   26
-         Top             =   1440
-         Width           =   765
+         Top             =   1665
+         Width           =   900
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   0
          Left            =   180
          MaxLength       =   7
          TabIndex        =   22
          Top             =   405
-         Width           =   1500
+         Width           =   1365
       End
       Begin VB.TextBox Text1 
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   1
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   10
          TabIndex        =   21
          Top             =   405
-         Width           =   975
+         Width           =   1260
       End
       Begin VB.TextBox Text1 
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   2
-         Left            =   2835
+         Left            =   3780
          MaxLength       =   10
          TabIndex        =   20
          Top             =   405
-         Width           =   750
+         Width           =   1155
       End
       Begin VB.TextBox Text1 
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000018&
-         Height          =   285
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
          Index           =   9
-         Left            =   1800
+         Left            =   2160
          MaxLength       =   7
          TabIndex        =   42
-         Top             =   2385
-         Width           =   1200
+         Top             =   2700
+         Width           =   1650
       End
       Begin VB.Label Label7 
          Caption         =   "Peso Neto"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   1800
+         Left            =   2160
          TabIndex        =   43
-         Top             =   2160
-         Width           =   915
+         Top             =   2475
+         Width           =   1320
       End
       Begin VB.Label Label13 
          Caption         =   "Nro. Cajas"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   180
          TabIndex        =   41
-         Top             =   2160
+         Top             =   2475
          Width           =   1185
       End
       Begin VB.Label Label1 
          Caption         =   "Zona"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   26
          Left            =   180
          TabIndex        =   39
-         Top             =   1800
+         Top             =   2115
          Width           =   645
       End
       Begin VB.Label Label6 
          Caption         =   "Partida"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
          Left            =   180
          TabIndex        =   38
-         Top             =   1485
+         Top             =   1710
          Width           =   735
       End
       Begin VB.Label Label5 
          Caption         =   "Variedad"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   180
          TabIndex        =   37
-         Top             =   855
-         Width           =   735
+         Top             =   900
+         Width           =   960
       End
       Begin VB.Label Label4 
          Caption         =   "Socio"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   180
          TabIndex        =   36
-         Top             =   1170
+         Top             =   1305
          Width           =   690
       End
       Begin VB.Label Label3 
          Caption         =   "Nº Campo"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   4815
+         Left            =   6525
          TabIndex        =   35
          Top             =   180
          Width           =   1035
@@ -396,34 +696,52 @@ Begin VB.Form frmEntBascula2
       Begin VB.Label Label1 
          Caption         =   "Nota"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
-            Weight          =   700
+            Weight          =   400
             Underline       =   0   'False
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H00C00000&
+         ForeColor       =   &H00972E0B&
          Height          =   255
          Index           =   0
-         Left            =   225
+         Left            =   180
          TabIndex        =   25
          Top             =   180
          Width           =   735
       End
       Begin VB.Label Label18 
          Caption         =   "Fecha"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   1800
+         Left            =   2160
          TabIndex        =   24
          Top             =   180
-         Width           =   570
+         Width           =   885
       End
       Begin VB.Label Label26 
          Caption         =   "Hora"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
-         Left            =   2835
+         Left            =   3780
          TabIndex        =   23
          Top             =   180
          Width           =   570
@@ -433,6 +751,15 @@ Begin VB.Form frmEntBascula2
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   2
       Left            =   1440
@@ -446,6 +773,15 @@ Begin VB.Form frmEntBascula2
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   4
       Left            =   3015
@@ -458,27 +794,54 @@ Begin VB.Form frmEntBascula2
    End
    Begin VB.CommandButton cmdAceptar 
       Caption         =   "&Aceptar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   4275
+      Left            =   5850
       TabIndex        =   13
       Tag             =   "   "
-      Top             =   7110
+      Top             =   7965
       Visible         =   0   'False
-      Width           =   1035
+      Width           =   1065
    End
    Begin VB.CommandButton cmdCancelar 
       Cancel          =   -1  'True
       Caption         =   "&Cancelar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5370
+      Left            =   6990
       TabIndex        =   14
-      Top             =   7110
+      Top             =   7965
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.TextBox txtAux 
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   1
       Left            =   810
@@ -493,6 +856,15 @@ Begin VB.Form frmEntBascula2
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   290
       Index           =   0
       Left            =   315
@@ -508,27 +880,27 @@ Begin VB.Form frmEntBascula2
       Height          =   3510
       Left            =   90
       TabIndex        =   17
-      Top             =   3330
-      Width           =   6480
-      _ExtentX        =   11430
+      Top             =   4185
+      Width           =   7980
+      _ExtentX        =   14076
       _ExtentY        =   6191
       _Version        =   393216
       AllowUpdate     =   0   'False
       BorderStyle     =   0
       HeadLines       =   1
-      RowHeight       =   15
+      RowHeight       =   19
       BeginProperty HeadFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
-         Italic          =   0   'False
+         Italic          =   -1  'True
          Strikethrough   =   0   'False
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
+         Name            =   "Verdana"
+         Size            =   9.75
          Charset         =   0
          Weight          =   400
          Underline       =   0   'False
@@ -575,26 +947,35 @@ Begin VB.Form frmEntBascula2
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   5355
+      Left            =   6975
       TabIndex        =   18
-      Top             =   7110
+      Top             =   7965
       Visible         =   0   'False
-      Width           =   1095
+      Width           =   1065
    End
    Begin VB.Frame Frame1 
       Height          =   555
       Index           =   1
       Left            =   90
       TabIndex        =   15
-      Top             =   6930
+      Top             =   7785
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
          Caption         =   "Label2"
          BeginProperty Font 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
+            Name            =   "Verdana"
+            Size            =   9.75
             Charset         =   0
             Weight          =   700
             Underline       =   0   'False
@@ -602,16 +983,16 @@ Begin VB.Form frmEntBascula2
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   40
+         Left            =   45
          TabIndex        =   16
-         Top             =   240
+         Top             =   195
          Width           =   2295
       End
    End
    Begin MSAdodcLib.Adodc adodc1 
       Height          =   375
       Left            =   3150
-      Top             =   630
+      Top             =   945
       Visible         =   0   'False
       Width           =   2055
       _ExtentX        =   3625
@@ -655,89 +1036,10 @@ Begin VB.Form frmEntBascula2
       EndProperty
       _Version        =   393216
    End
-   Begin MSComctlLib.Toolbar Toolbar1 
-      Align           =   1  'Align Top
-      Height          =   360
-      Left            =   0
-      TabIndex        =   47
-      Top             =   0
-      Width           =   6810
-      _ExtentX        =   12012
-      _ExtentY        =   635
-      ButtonWidth     =   609
-      ButtonHeight    =   582
-      AllowCustomize  =   0   'False
-      Appearance      =   1
-      Style           =   1
-      _Version        =   393216
-      BeginProperty Buttons {66833FE8-8583-11D1-B16A-00C0F0283628} 
-         NumButtons      =   12
-         BeginProperty Button1 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button2 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Buscar"
-         EndProperty
-         BeginProperty Button3 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Ver todos"
-         EndProperty
-         BeginProperty Button4 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button5 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button6 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Nuevo"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button7 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Modificar Lineas"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button8 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Palets / Palots"
-            Object.Tag             =   "2"
-         EndProperty
-         BeginProperty Button9 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.Visible         =   0   'False
-            Style           =   3
-         EndProperty
-         BeginProperty Button10 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Style           =   3
-         EndProperty
-         BeginProperty Button11 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Enabled         =   0   'False
-            Object.Visible         =   0   'False
-            Object.ToolTipText     =   "Imprimir"
-         EndProperty
-         BeginProperty Button12 {66833FEA-8583-11D1-B16A-00C0F0283628} 
-            Object.ToolTipText     =   "Salir"
-         EndProperty
-      EndProperty
-      BorderStyle     =   1
-      Begin VB.CheckBox chkVistaPrevia 
-         Caption         =   "Vista previa"
-         Height          =   195
-         Left            =   8400
-         TabIndex        =   48
-         Top             =   120
-         Visible         =   0   'False
-         Width           =   1215
-      End
-   End
    Begin VB.Menu mnOpciones 
       Caption         =   "Opciones"
+      Enabled         =   0   'False
+      Visible         =   0   'False
       Begin VB.Menu mnModificar 
          Caption         =   "Modificar"
          Shortcut        =   ^M
@@ -774,10 +1076,10 @@ Public Event DatoSeleccionado(CadenaSeleccion As String)
 Public crear As Byte ' 0=false 1=true
 Public NumNota As String
 Public NumCajones As String
-Public Numkilos As String
+Public NumKilos As String
 Public Codsocio As String
 Public codcampo As String
-Public codvarie As String
+Public Codvarie As String
 Public Fecha As String
 Public Hora As String
 
@@ -795,24 +1097,24 @@ Dim Modo As Byte
 '   4.-  Modificar
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
-Dim indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
+Dim I As Integer
 
 Private Sub PonerModo(vModo)
-Dim b As Boolean
+Dim B As Boolean
 
     Modo = vModo
     
-    b = (Modo = 2)
-    If b Then
+    B = (Modo = 2)
+    If B Then
         PonerContRegIndicador
     Else
         PonerIndicador lblIndicador, Modo
     End If
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Enabled = False
-        txtAux(i).visible = False
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Enabled = False
+        txtAux(I).visible = False
+    Next I
     
 '    txtAux(0).Enabled = (Modo = 4)
     txtAux(0).visible = (Modo = 4)
@@ -823,8 +1125,8 @@ Dim b As Boolean
     txtAux(10).visible = (Modo = 4)
     txtAux(10).Enabled = (Modo = 4)
     
-    cmdAceptar.visible = Not b
-    cmdCancelar.visible = Not b
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
 '    DataGrid1.Enabled = b
     
     FramePalets.Enabled = (Modo = 5)
@@ -832,7 +1134,7 @@ Dim b As Boolean
     Text1(11).Enabled = (Modo = 5) And Val(NumCajones) = 0
     'Si es regresar
     'If DatosADevolverBusqueda <> "" Then
-    cmdRegresar.visible = b
+    cmdRegresar.visible = B
     
     PonerLongCampos
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
@@ -845,55 +1147,42 @@ End Sub
 
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
-Dim b As Boolean
+Dim B As Boolean
 
-    b = (Modo = 2)
-'    'Busqueda
-'    Toolbar1.Buttons(2).Enabled = b
-'    Me.mnBuscar.Enabled = b
-'    'Ver Todos
-'    Toolbar1.Buttons(3).Enabled = b
-'    Me.mnVerTodos.Enabled = b
-'
-'    'Insertar
-'    Toolbar1.Buttons(6).Enabled = b
-'    Me.mnNuevo.Enabled = b
+    B = (Modo = 2)
 
-    b = (b And adodc1.Recordset.RecordCount > 0)
+    B = (B And adodc1.Recordset.RecordCount > 0)
     'Modificar
-    Toolbar1.Buttons(7).Enabled = b
-    Me.mnModificar.Enabled = b
+    Toolbar1.Buttons(1).Enabled = B
+    Me.mnModificar.Enabled = B
     'Modificar Palets/Palots
-    Toolbar1.Buttons(8).Enabled = b
-    Me.mnPaletsPalots.Enabled = b
-'    'Imprimir
-'    Toolbar1.Buttons(11).Enabled = b
-'    Me.mnImprimir.Enabled = b
+    Toolbar1.Buttons(2).Enabled = B
+    Me.mnPaletsPalots.Enabled = B
 
 End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
     If DataGrid1.Row < 0 Then
-        anc = anc + 210 ' 320
+        anc = anc + 240 ' 320
     Else
-        anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 3330 'DataGrid1.RowTop(DataGrid1.Row) + 545
+        anc = anc + DataGrid1.Top + DataGrid1.RowTop(DataGrid1.Row) + 5 'DataGrid1.RowTop(DataGrid1.Row) + 3330 'DataGrid1.RowTop(DataGrid1.Row) + 545
     End If
 
     'Llamamos al form
-    For i = 0 To 10
-        txtAux(i).Text = DataGrid1.Columns(i).Text
-    Next i
+    For I = 0 To 10
+        txtAux(I).Text = DataGrid1.Columns(I).Text
+    Next I
     
     ' ***** canviar-ho pel nom del camp del combo *********
 '    SelComboBool DataGrid1.Columns(2).Text, Combo1(0)
@@ -914,56 +1203,12 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     ' ### [Monica] 12/09/2006
 End Sub
 
-Private Sub BotonEliminar()
-Dim Sql As String
-Dim temp As Boolean
-
-'    On Error GoTo Error2
-'    'Ciertas comprobaciones
-'    If adodc1.Recordset.EOF Then Exit Sub
-'    If Not SepuedeBorrar Then Exit Sub
-'
-'    ' ### [Monica] 26/09/2006 dejamos modificar y eliminar el codigo 0
-'    ' *** repasar el nom de l'adodc, l'index del Field i el camp que te la PK ***
-'    'El registre de codi 0 no es pot Modificar ni Eliminar
-'    'If EsCodigoCero(CStr(adodc1.Recordset.Fields(0).Value), FormatoCampo(txtAux(0))) Then Exit Sub
-'    ' ***************************************************************************
-'
-'    '*************** canviar els noms i el DELETE **********************************
-'    SQL = "¿Seguro que desea eliminar el Palet?"
-'    SQL = SQL & vbCrLf & "Código: " & adodc1.Recordset.Fields(0)
-'    SQL = SQL & vbCrLf & "Nombre: " & adodc1.Recordset.Fields(1)
-'
-'    If MsgBox(SQL, vbQuestion + vbYesNo) = vbYes Then
-'        'Hay que eliminar
-'        NumRegElim = adodc1.Recordset.AbsolutePosition
-'        SQL = "Delete from trzpalets where numnotac=" & DBLet(adodc1.Recordset!numnotac, "N")
-'        SQL = SQL & " and idpalet = " & DBLet(adodc1.Recordset!idpalet, "N")
-'        Conn.Execute SQL
-'        CargaGrid CadB
-''        If CadB <> "" Then
-''            CargaGrid CadB
-''            lblIndicador.Caption = "BUSQUEDA: " & PonerContRegistros(Me.adodc1)
-''        Else
-''            CargaGrid ""
-''            lblIndicador.Caption = ""
-''        End If
-'        temp = SituarDataTrasEliminar(adodc1, NumRegElim, True)
-'        PonerModoOpcionesMenu
-'        adodc1.Recordset.Cancel
-'    End If
-'    Exit Sub
-'
-'Error2:
-'    Screen.MousePointer = vbDefault
-'    MuestraError Err.Number, "Eliminando registro", Err.Description
-End Sub
 
 Private Sub PonerLongCampos()
 'Modificar el MaxLength del campo en funcion de si es modo de búsqueda o no
@@ -975,17 +1220,17 @@ Private Sub PonerLongCampos()
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Double
+    Dim I As Double
 
     Select Case Modo
         Case 4 'MODIFICAR lineas
             If DatosOkLin Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(0)
+                    I = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                     
                     PasarSigReg
@@ -1028,12 +1273,12 @@ Private Sub cmdCancelar_Click()
 End Sub
 
 Private Sub cmdRegresar_Click()
-Dim Cad As String
-Dim i As Integer
+Dim cad As String
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
-    If DatosOk Then
+    If DatosOK Then
         Unload Me
     Else
         mnPaletsPalots_Click
@@ -1058,27 +1303,11 @@ Private Sub Form_Activate()
 
     If PrimeraVez Then
         
-'        If Val(NumCajones) <> 0 Then
-'            cadB = ""
-'            CargaGrid
-'            BotonModificar
-'        Else
-''            TerminaBloquear
-'            cadB = ""
-'            CargaGrid
-'            If crear = 1 Then
-'                mnPaletsPalots_Click
-'            Else
-'                mnModificar_Click
-'            End If
-'        End If
         PrimeraVez = False
         CadB = ""
         CargaGrid
         mnPaletsPalots_Click
 
-        
-    
     End If
 End Sub
 
@@ -1090,20 +1319,28 @@ Dim Sql As String
 
     PrimeraVez = True
 
+'    With Me.Toolbar1
+'        .HotImageList = frmPpal.imgListComun_OM
+'        .DisabledImageList = frmPpal.imgListComun_BN
+'        .ImageList = frmPpal.imgListComun
+'        'el 1 es separadors
+'        .Buttons(2).Image = 1   'Buscar
+'        .Buttons(3).Image = 2   'Todos
+'        'el 4 i el 5 son separadors
+'        .Buttons(6).Image = 3   'Insertar
+'        .Buttons(7).Image = 4   'Modificar
+'        .Buttons(8).Image = 19   'Modificar Palets / Palots
+'        'el 9 i el 10 son separadors
+'        .Buttons(11).Image = 10  'imprimir
+'        .Buttons(12).Image = 11  'Salir
+'    End With
+    
     With Me.Toolbar1
         .HotImageList = frmPpal.imgListComun_OM
         .DisabledImageList = frmPpal.imgListComun_BN
         .ImageList = frmPpal.imgListComun
-        'el 1 es separadors
-        .Buttons(2).Image = 1   'Buscar
-        .Buttons(3).Image = 2   'Todos
-        'el 4 i el 5 son separadors
-        .Buttons(6).Image = 3   'Insertar
-        .Buttons(7).Image = 4   'Modificar
-        .Buttons(8).Image = 19   'Modificar Palets / Palots
-        'el 9 i el 10 son separadors
-        .Buttons(11).Image = 10  'imprimir
-        .Buttons(12).Image = 11  'Salir
+        .Buttons(1).Image = 4    'Modificar
+        .Buttons(2).Image = 19   'Modificar Palets / Palots
     End With
     
 
@@ -1189,7 +1426,7 @@ Private Sub mnPaletsPalots_Click()
 End Sub
 
 Private Sub mnSalir_Click()
-    If DatosOk Then Unload Me
+    If DatosOK Then Unload Me
 End Sub
 
 
@@ -1214,7 +1451,7 @@ If Not PerderFocoGnral(Text1(Index), Modo) Then Exit Sub
         Case 10, 11 'palets y palots
             If PonerFormatoEntero(Text1(Index)) Then
                 If CCur(Text1(Index).Text) <> 0 Then
-                    cmdAceptar.SetFocus
+                    CmdAceptar.SetFocus
                 Else
                     MsgBox "Debe introducir un valor distinto de cero", vbExclamation
                     Text1(Index).Text = ""
@@ -1232,12 +1469,10 @@ End Sub
 
 Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
     Select Case Button.Index
-        Case 7
+        Case 1
                 mnModificar_Click
-        Case 8
+        Case 2
                 mnPaletsPalots_Click
-        Case 12
-                mnSalir_Click
     End Select
 End Sub
 
@@ -1258,12 +1493,12 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Id.Palet|1200|;N|||||;"
-    tots = tots & "S|txtAux(2)|T|Cajas|1200|;S|txtAux(3)|T|Kilos|1500|;N|||||;"
+    tots = "S|txtAux(0)|T|Id.Palet|1500|;N|||||;"
+    tots = tots & "S|txtAux(2)|T|Cajas|1500|;S|txtAux(3)|T|Kilos|1800|;N|||||;"
     tots = tots & "N|||||;N|||||;N|||||;N|||||;N|||||;"
-    tots = tots & "S|txtAux(10)|T|CRFID|2000|;"
+    tots = tots & "S|txtAux(10)|T|CRFID|2600|;"
     
-    arregla tots, DataGrid1, Me
+    arregla tots, DataGrid1, Me, 350
     
     DataGrid1.ScrollBars = dbgAutomatic
     DataGrid1.Columns(0).Alignment = dbgRight
@@ -1271,12 +1506,10 @@ Private Sub CargaGrid(Optional vSQL As String)
     DataGrid1.Columns(3).Alignment = dbgRight
     DataGrid1.Columns(10).Alignment = dbgLeft
     
-    
-'   DataGrid1.Columns(2).Alignment = dbgRight
 End Sub
 
 
-Private Sub txtAux_GotFocus(Index As Integer)
+Private Sub txtaux_GotFocus(Index As Integer)
     ConseguirFocoLin txtAux(Index)
 End Sub
 
@@ -1295,11 +1528,6 @@ On Error GoTo EKeyD
                     DataGrid1.Bookmark = DataGrid1.Bookmark - 1
                 End If
 
-'                If DataGrid1.Row > 0 Then
-'                    DataGrid1.Row = DataGrid1.Row - 1
-'                    CargaTxtAux True, True
-''                elseif
-'                End If
         Case 40 'Desplazamiento Flecha Hacia Abajo
                 PasarSigReg
 
@@ -1308,7 +1536,7 @@ EKeyD:
     If Err.Number <> 0 Then Err.Clear
 End Sub
 
-Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
+Private Sub txtaux_KeyPress(Index As Integer, KeyAscii As Integer)
 
    
    If Index <> 10 Then
@@ -1318,7 +1546,6 @@ Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 
    If KeyAscii = 13 Then 'ENTER
         cmdAceptar_Click 'ModificarExistencia
-'        PasarSigReg
    ElseIf KeyAscii = 27 Then
         cmdCancelar_Click 'ESC
    End If
@@ -1340,19 +1567,12 @@ Private Sub txtAux_LostFocus(Index As Integer)
 End Sub
 
 
-Private Function DatosOk() As Boolean
+Private Function DatosOK() As Boolean
 'Dim Datos As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Mens As String
 Dim Rs As ADODB.Recordset
-
-'    b = CompForm(Me)
-'    If Not b Then Exit Function
-'
-'    If Modo = 3 Then   'Estamos insertando
-'         If ExisteCP(txtAux(0)) Then b = False
-'    End If
 
     Sql = "select numnotac, sum(numcajones), sum(numkilos) from trzpalets where numnotac = " & DBSet(NumNota, "N")
     Sql = Sql & " group by 1 order by 1"
@@ -1360,7 +1580,7 @@ Dim Rs As ADODB.Recordset
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    b = False
+    B = False
     
     If Rs.EOF Then
         MsgBox "Debe haber un reparto de cajas y kilos", vbExclamation
@@ -1369,44 +1589,30 @@ Dim Rs As ADODB.Recordset
         If DBLet(Rs.Fields(1).Value, "N") <> Val(NumCajones) Then
             MsgBox "La suma de número de cajas no cuadra con el total. Revise.", vbExclamation
         Else
-            If DBLet(Rs.Fields(2).Value, "N") <> Val(Numkilos) Then
+            If DBLet(Rs.Fields(2).Value, "N") <> Val(NumKilos) Then
                 MsgBox "La suma de número de kilos no cuadra con el total. Revise.", vbExclamation
             Else
-                b = True
+                B = True
             End If
         End If
     End If
     Rs.Close
         
         
-'    If b Then
-'        ' todos los registros deberian tener la nota
-'        sql = "select crfid from trzpalets where numnotac = " & DBSet(NumNota, "N")
-'        Rs.Open sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
-'        While Not Rs.EOF And b
-'            If DBLet(Rs.Fields(0).Value, "T") = "" Then
-'                MsgBox "Todos los registros deben de tener el CRFID. Revise. ", vbExclamation
-'                b = False
-'            End If
-'            Rs.MoveNext
-'        Wend
-'        Set Rs = Nothing
-'    End If
-'
-    DatosOk = b
+    DatosOK = B
 End Function
 
 
 
 Private Function DatosOkLin() As Boolean
 'Dim Datos As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Sql As String
 Dim Mens As String
 Dim Rs As ADODB.Recordset
 
-    b = CompForm(Me)
-    If Not b Then Exit Function
+    B = CompForm(Me)
+    If Not B Then Exit Function
 
     Sql = "select count(*) from trzpalets where idpalet <> " & DBSet(txtAux(0).Text, "N")
     Sql = Sql & " and crfid = " & DBSet(txtAux(10).Text, "T")
@@ -1414,10 +1620,10 @@ Dim Rs As ADODB.Recordset
     If TotalRegistros(Sql) <> 0 Then
         MsgBox "Este Numero CRFID está asignado a otro palet. Revise.", vbExclamation
         txtAux(10).Text = ""
-        b = False
+        B = False
     End If
     
-    DatosOkLin = b
+    DatosOkLin = B
 End Function
 
 
@@ -1443,14 +1649,6 @@ Dim cadReg As String
 End Sub
 
 
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGrid1_GotFocus()
-'  WheelHook DataGrid1
-'End Sub
-'Private Sub DataGrid1_Lostfocus()
-'  WheelUnHook
-'End Sub
-
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -1465,7 +1663,7 @@ Private Sub InsertarPalets(Palets As Long)
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim Kilos As Currency
-Dim cajas As Currency
+Dim Cajas As Currency
 Dim nroPalets As Integer
 Dim RestoCajas As Currency
 Dim KilosporPalet As Currency
@@ -1485,10 +1683,10 @@ Dim Tipo As Byte
             nroPalets = Val(NumCajones) \ vParamAplic.CajasporPalet
             RestoCajas = Val(NumCajones) Mod vParamAplic.CajasporPalet
             
-            KilosporPalet = (vParamAplic.CajasporPalet * Numkilos) \ Val(NumCajones)
+            KilosporPalet = (vParamAplic.CajasporPalet * NumKilos) \ Val(NumCajones)
             TotKilos = 0
         
-            For i = 1 To nroPalets
+            For I = 1 To nroPalets
                 NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
                 
                 TotKilos = TotKilos + KilosporPalet
@@ -1497,16 +1695,16 @@ Dim Tipo As Byte
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
                 Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(vParamAplic.CajasporPalet, "N") & ","
                 Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(Codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
-            Next i
+            Next I
             
             If RestoCajas <> 0 Then ' insertamos el ultimo palet con el resto
                 NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
                 
-                RestoKilos = Numkilos - (KilosporPalet * nroPalets)
+                RestoKilos = NumKilos - (KilosporPalet * nroPalets)
                 
                 TotKilos = TotKilos + RestoKilos
                 
@@ -1514,7 +1712,7 @@ Dim Tipo As Byte
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
                 Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(RestoCajas, "N") & ","
                 Sql = Sql & DBSet(RestoKilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(Codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "T") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
@@ -1522,7 +1720,7 @@ Dim Tipo As Byte
                 nroPalets = nroPalets + 1
             End If
             
-            RestoKilos = Numkilos - TotKilos
+            RestoKilos = NumKilos - TotKilos
             
             If RestoKilos <> 0 Then ' actualizamos el ultimo registro si hay resto de kilos
                 Sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
@@ -1532,24 +1730,24 @@ Dim Tipo As Byte
             End If
         Else ' partimos del nro de palets
             nroPalets = Palets
-            Kilos = Numkilos \ nroPalets
-            cajas = Val(NumCajones) \ nroPalets
+            Kilos = NumKilos \ nroPalets
+            Cajas = Val(NumCajones) \ nroPalets
             
-            For i = 1 To nroPalets
+            For I = 1 To nroPalets
                 NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
                 
                 Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
                 Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
-                Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(cajas, "N") & ","
+                Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & "," & DBSet(Cajas, "N") & ","
                 Sql = Sql & DBSet(Kilos, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-                Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+                Sql = Sql & DBSet(Codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
                 Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
                 
                 conn.Execute Sql
-            Next i
+            Next I
             
-            Sql = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (cajas * nroPalets))
-            Sql = Sql & ", numkilos = numkilos + " & CCur(Numkilos) - (Kilos * nroPalets)
+            Sql = "update trzpalets set numcajones = numcajones + " & (CCur(NumCajones) - (Cajas * nroPalets))
+            Sql = Sql & ", numkilos = numkilos + " & CCur(NumKilos) - (Kilos * nroPalets)
             Sql = Sql & " where numnotac = " & DBSet(NumNota, "N")
             Sql = Sql & " and idpalet = " & DBSet(NumF, "N")
             
@@ -1566,21 +1764,21 @@ Dim Tipo As Byte
         Tipo = 1
         
         nroPalets = Val(Text1(11).Text) ' en realidad son palots
-        KilosporPalet = Numkilos \ nroPalets
-        RestoKilos = Numkilos - (KilosporPalet * nroPalets)
+        KilosporPalet = NumKilos \ nroPalets
+        RestoKilos = NumKilos - (KilosporPalet * nroPalets)
     
-        For i = 1 To nroPalets
+        For I = 1 To nroPalets
             NumF = SugerirCodigoSiguienteStr("trzpalets", "idpalet")
             
             Sql = "insert into trzpalets (idpalet,tipo,numcajones,numkilos,"
             Sql = Sql & "codsocio,codcampo,codvarie,fecha,hora,numnotac,CRFID) values ("
             Sql = Sql & DBSet(NumF, "N") & "," & DBSet(Tipo, "N") & ",0,"
             Sql = Sql & DBSet(KilosporPalet, "N") & "," & DBSet(Codsocio, "N") & "," & DBSet(codcampo, "N") & ","
-            Sql = Sql & DBSet(codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
+            Sql = Sql & DBSet(Codvarie, "N") & "," & DBSet(Fecha, "F") & "," & DBSet(Fecha & " " & Hora, "FH", "S") & ","
             Sql = Sql & DBSet(NumNota, "N") & "," & ValorNulo & ")"
             
             conn.Execute Sql
-        Next i
+        Next I
         
         If RestoKilos <> 0 Then ' actualizamos los kilos del ultimo palot
             Sql = "update trzpalets set numkilos = numkilos + " & DBSet(RestoKilos, "N")
@@ -1601,21 +1799,21 @@ Private Sub CargarDatosCabecera()
 
     Text1(0).Text = NumNota
     Text1(8).Text = Val(NumCajones)
-    Text1(9).Text = Numkilos
+    Text1(9).Text = NumKilos
     Text1(4).Text = Codsocio
     Text1(7).Text = codcampo
-    Text1(3).Text = codvarie
+    Text1(3).Text = Codvarie
     Text1(1).Text = Fecha
     Text1(2).Text = Hora
     Text2(0).Text = DevuelveDesdeBDNew(cAgro, "rsocios", "nomsocio", "codsocio", Codsocio, "N")
-    Text2(1).Text = DevuelveDesdeBDNew(cAgro, "variedades", "nomvarie", "codvarie", codvarie, "N")
+    Text2(1).Text = DevuelveDesdeBDNew(cAgro, "variedades", "nomvarie", "codvarie", Codvarie, "N")
 
     PonerDatosCampo codcampo
 
 End Sub
 
 Private Sub PonerDatosCampo(campo As String)
-Dim Cad As String
+Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
@@ -1625,11 +1823,11 @@ Dim Rs As ADODB.Recordset
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    Cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla from rcampos, rpartida, rzonas, rpueblos "
-    Cad1 = Cad1 & " where " & Cad
+    Cad1 = Cad1 & " where " & cad
     Cad1 = Cad1 & " and rcampos.codparti = rpartida.codparti "
     Cad1 = Cad1 & " and rpartida.codzonas = rzonas.codzonas "
     Cad1 = Cad1 & " and rpartida.codpobla = rpueblos.codpobla "
@@ -1661,7 +1859,7 @@ Private Sub PasarSigReg()
         DataGrid1.Bookmark = DataGrid1.Bookmark + 1
         BotonModificar
     ElseIf DataGrid1.Bookmark = adodc1.Recordset.RecordCount Then
-        PonerFocoBtn Me.cmdAceptar
+        PonerFocoBtn Me.CmdAceptar
     End If
 End Sub
 
@@ -1669,7 +1867,7 @@ Private Function ModificarExistencia() As Boolean
 Dim NumReg As Long
 Dim Indicador As String
 
-    If DatosOk Then
+    If DatosOK Then
         If ModificaDesdeFormulario(Me) Then
             TerminaBloquear
             NumReg = adodc1.Recordset.AbsolutePosition
@@ -1688,35 +1886,35 @@ End Function
 
 Private Function SalirFormulario() As Boolean
 Dim Sql As String
-Dim b As Boolean
+Dim B As Boolean
 Dim Rs As ADODB.Recordset
-Dim Cad As String
+Dim cad As String
 
     On Error GoTo eSalirFormulario
 
     SalirFormulario = True
     
-    b = True
+    B = True
     
-    Cad = "Todos los registros deben de tener el CRFID. "
+    cad = "Todos los registros deben de tener el CRFID. "
     
     Set Rs = New ADODB.Recordset
     Sql = "select crfid from trzpalets where numnotac = " & DBSet(NumNota, "N")
     
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
-    If Rs.EOF Then b = False
+    If Rs.EOF Then B = False
     
-    While Not Rs.EOF And b
+    While Not Rs.EOF And B
         If DBLet(Rs.Fields(0).Value, "T") = "" Then
-            b = False
+            B = False
         End If
         Rs.MoveNext
     Wend
     Set Rs = Nothing
     
-    If Not b Then
-        If MsgBox(Cad & "¿ Desea salir de todos modos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
+    If Not B Then
+        If MsgBox(cad & "¿ Desea salir de todos modos ?", vbQuestion + vbYesNo + vbDefaultButton1) = vbNo Then
             SalirFormulario = False
         Else
             ' borramos los registros antes de salir

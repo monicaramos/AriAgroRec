@@ -350,7 +350,14 @@ Public Sub LoadIconRes(ByVal sResType As ResType, ByVal sResNumber As String, By
     H = iSize
        
     If Not hPicture Is Nothing Then
-        If tamany = 32 Then
+        If tamany = 48 Then
+            If opcio = 1 Then
+                frmPpal.ImageList1.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
+'            ElseIf opcio = 2 Then
+'                frmPpal.imgListPpal.ListImages.Add , sResName & " " & CStr(arrSize) & " " & w & "x" & h, hPicture
+            End If
+        
+        ElseIf tamany = 32 Then
             If opcio = 1 Then
                 frmPpal.imgListComun32.ListImages.Add , sResName & " " & CStr(arrSize) & " " & W & "x" & H, hPicture
 '            ElseIf opcio = 2 Then

@@ -14,190 +14,6 @@ Begin VB.Form frmVARIOS
    ScaleWidth      =   6660
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
-   Begin VB.Frame Frame1 
-      Height          =   1455
-      Left            =   -30
-      TabIndex        =   22
-      Top             =   0
-      Width           =   6645
-      Begin VB.CommandButton CmdAceptar1 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Left            =   4200
-         TabIndex        =   24
-         Top             =   930
-         Width           =   975
-      End
-      Begin VB.CommandButton Command1 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5280
-         TabIndex        =   23
-         Top             =   945
-         Width           =   975
-      End
-      Begin VB.Label Label4 
-         Caption         =   "Label4"
-         Height          =   225
-         Left            =   390
-         TabIndex        =   26
-         Top             =   750
-         Width           =   2625
-      End
-      Begin VB.Label Label3 
-         Caption         =   "Recálculo de nuevas calidades de destrio y pixat"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   12
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         Height          =   255
-         Left            =   330
-         TabIndex        =   25
-         Top             =   240
-         Width           =   5895
-      End
-   End
-   Begin VB.Frame FrameGeneraPreciosMasiva 
-      Height          =   5310
-      Left            =   0
-      TabIndex        =   4
-      Top             =   0
-      Width           =   6615
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   2
-         Left            =   1980
-         MaxLength       =   10
-         TabIndex        =   1
-         Top             =   2475
-         Width           =   1095
-      End
-      Begin VB.TextBox txtCodigo 
-         Alignment       =   1  'Right Justify
-         Height          =   285
-         Index           =   1
-         Left            =   1980
-         MaxLength       =   10
-         TabIndex        =   0
-         Top             =   2070
-         Width           =   1095
-      End
-      Begin VB.CommandButton cmdCancel 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5190
-         TabIndex        =   3
-         Top             =   4545
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdAcepGen 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Index           =   0
-         Left            =   4110
-         TabIndex        =   2
-         Top             =   4530
-         Width           =   975
-      End
-      Begin VB.CommandButton Command10 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":000C
-         Style           =   1  'Graphical
-         TabIndex        =   6
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command9 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":0316
-         Style           =   1  'Graphical
-         TabIndex        =   5
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   2
-         Left            =   630
-         TabIndex        =   12
-         Top             =   3990
-         Width           =   45
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Albarán : "
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   1
-         Left            =   660
-         TabIndex        =   11
-         Top             =   3660
-         Width           =   765
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Desde"
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   0
-         Left            =   1050
-         TabIndex        =   10
-         Top             =   2100
-         Width           =   465
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Hasta"
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   39
-         Left            =   1050
-         TabIndex        =   9
-         Top             =   2520
-         Width           =   420
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Albarán"
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   50
-         Left            =   600
-         TabIndex        =   8
-         Top             =   1650
-         Width           =   540
-      End
-      Begin VB.Label Calculo 
-         Caption         =   "Recálculo de Importes de Transporte"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   7
-         Top             =   405
-         Width           =   5775
-      End
-   End
    Begin MSComDlg.CommonDialog cd1 
       Left            =   6075
       Top             =   4770
@@ -205,111 +21,37 @@ Begin VB.Form frmVARIOS
       _ExtentY        =   847
       _Version        =   393216
    End
-   Begin VB.Frame FrameRecalculoDC 
-      Height          =   2670
-      Left            =   0
-      TabIndex        =   13
-      Top             =   0
-      Width           =   6615
-      Begin VB.CommandButton Command3 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":0620
-         Style           =   1  'Graphical
-         TabIndex        =   17
-         Top             =   1440
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton Command2 
-         Height          =   440
-         Left            =   7860
-         Picture         =   "frmVARIOS.frx":092A
-         Style           =   1  'Graphical
-         TabIndex        =   16
-         Top             =   2215
-         Visible         =   0   'False
-         Width           =   380
-      End
-      Begin VB.CommandButton CmdAcepRec 
-         Caption         =   "&Aceptar"
-         Height          =   375
-         Index           =   1
-         Left            =   3990
-         TabIndex        =   15
-         Top             =   1590
-         Width           =   975
-      End
-      Begin VB.CommandButton CmdCancel2 
-         Caption         =   "&Cancelar"
-         Height          =   375
-         Left            =   5130
-         TabIndex        =   14
-         Top             =   1590
-         Width           =   975
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         Caption         =   "Socio : "
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   4
-         Left            =   660
-         TabIndex        =   21
-         Top             =   1920
-         Visible         =   0   'False
-         Width           =   1530
-      End
-      Begin VB.Label Label1 
-         Caption         =   "Recálculo de Dígito de Control"
-         BeginProperty Font 
-            Name            =   "Tahoma"
-            Size            =   14.25
-            Charset         =   0
-            Weight          =   700
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00800000&
-         Height          =   345
-         Left            =   630
-         TabIndex        =   20
-         Top             =   405
-         Width           =   5775
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         ForeColor       =   &H00972E0B&
-         Height          =   195
-         Index           =   7
-         Left            =   600
-         TabIndex        =   19
-         Top             =   1650
-         Width           =   45
-      End
-      Begin VB.Label Label2 
-         AutoSize        =   -1  'True
-         ForeColor       =   &H00000000&
-         Height          =   195
-         Index           =   3
-         Left            =   630
-         TabIndex        =   18
-         Top             =   3990
-         Width           =   45
-      End
-   End
    Begin VB.Frame FrameMSGBOX 
       Height          =   4425
       Left            =   0
       TabIndex        =   27
       Top             =   45
       Width           =   6585
+      Begin VB.TextBox Text1 
+         BackColor       =   &H8000000F&
+         BorderStyle     =   0  'None
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2220
+         Left            =   1440
+         MultiLine       =   -1  'True
+         TabIndex        =   37
+         Text            =   "frmVARIOS.frx":000C
+         Top             =   495
+         Width           =   4740
+      End
       Begin VB.Frame FrameAceptar 
          Height          =   870
-         Left            =   1980
+         Left            =   4860
          TabIndex        =   35
-         Top             =   3195
+         Top             =   3285
          Width           =   1500
          Begin VB.CommandButton CmdAceptar 
             Caption         =   "Aceptar"
@@ -332,9 +74,9 @@ Begin VB.Form frmVARIOS
       End
       Begin VB.Frame FrameSiNoCancelar 
          Height          =   870
-         Left            =   1935
+         Left            =   2340
          TabIndex        =   31
-         Top             =   2070
+         Top             =   3285
          Width           =   4065
          Begin VB.CommandButton CmdCancelar 
             Caption         =   "Cancelar"
@@ -434,6 +176,291 @@ Begin VB.Form frmVARIOS
             Width           =   1065
          End
       End
+      Begin VB.Image imgMsg 
+         Height          =   465
+         Left            =   270
+         ToolTipText     =   "Impresión Documento Alta/Baja"
+         Top             =   405
+         Width           =   510
+      End
+   End
+   Begin VB.Frame Frame1 
+      Height          =   1455
+      Left            =   -30
+      TabIndex        =   22
+      Top             =   0
+      Width           =   6645
+      Begin VB.CommandButton CmdAceptar1 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Left            =   4200
+         TabIndex        =   24
+         Top             =   930
+         Width           =   975
+      End
+      Begin VB.CommandButton Command1 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5280
+         TabIndex        =   23
+         Top             =   945
+         Width           =   975
+      End
+      Begin VB.Label Label4 
+         Caption         =   "Label4"
+         Height          =   225
+         Left            =   390
+         TabIndex        =   26
+         Top             =   750
+         Width           =   2625
+      End
+      Begin VB.Label Label3 
+         Caption         =   "Recálculo de nuevas calidades de destrio y pixat"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   12
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   330
+         TabIndex        =   25
+         Top             =   240
+         Width           =   5895
+      End
+   End
+   Begin VB.Frame FrameGeneraPreciosMasiva 
+      Height          =   5310
+      Left            =   0
+      TabIndex        =   4
+      Top             =   0
+      Width           =   6615
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   2
+         Left            =   1980
+         MaxLength       =   10
+         TabIndex        =   1
+         Top             =   2475
+         Width           =   1095
+      End
+      Begin VB.TextBox txtCodigo 
+         Alignment       =   1  'Right Justify
+         Height          =   285
+         Index           =   1
+         Left            =   1980
+         MaxLength       =   10
+         TabIndex        =   0
+         Top             =   2070
+         Width           =   1095
+      End
+      Begin VB.CommandButton cmdCancel 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5190
+         TabIndex        =   3
+         Top             =   4545
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdAcepGen 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Index           =   0
+         Left            =   4110
+         TabIndex        =   2
+         Top             =   4530
+         Width           =   975
+      End
+      Begin VB.CommandButton Command10 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":0012
+         Style           =   1  'Graphical
+         TabIndex        =   6
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command9 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":031C
+         Style           =   1  'Graphical
+         TabIndex        =   5
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   2
+         Left            =   630
+         TabIndex        =   12
+         Top             =   3990
+         Width           =   45
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Albarán : "
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   1
+         Left            =   660
+         TabIndex        =   11
+         Top             =   3660
+         Width           =   765
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Desde"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   0
+         Left            =   1050
+         TabIndex        =   10
+         Top             =   2100
+         Width           =   465
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Hasta"
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   39
+         Left            =   1050
+         TabIndex        =   9
+         Top             =   2520
+         Width           =   420
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Albarán"
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   50
+         Left            =   600
+         TabIndex        =   8
+         Top             =   1650
+         Width           =   540
+      End
+      Begin VB.Label Calculo 
+         Caption         =   "Recálculo de Importes de Transporte"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   630
+         TabIndex        =   7
+         Top             =   405
+         Width           =   5775
+      End
+   End
+   Begin VB.Frame FrameRecalculoDC 
+      Height          =   2670
+      Left            =   0
+      TabIndex        =   13
+      Top             =   0
+      Width           =   6615
+      Begin VB.CommandButton Command3 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":0626
+         Style           =   1  'Graphical
+         TabIndex        =   17
+         Top             =   1440
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton Command2 
+         Height          =   440
+         Left            =   7860
+         Picture         =   "frmVARIOS.frx":0930
+         Style           =   1  'Graphical
+         TabIndex        =   16
+         Top             =   2215
+         Visible         =   0   'False
+         Width           =   380
+      End
+      Begin VB.CommandButton CmdAcepRec 
+         Caption         =   "&Aceptar"
+         Height          =   375
+         Index           =   1
+         Left            =   3990
+         TabIndex        =   15
+         Top             =   1590
+         Width           =   975
+      End
+      Begin VB.CommandButton CmdCancel2 
+         Caption         =   "&Cancelar"
+         Height          =   375
+         Left            =   5130
+         TabIndex        =   14
+         Top             =   1590
+         Width           =   975
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         Caption         =   "Socio : "
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   4
+         Left            =   660
+         TabIndex        =   21
+         Top             =   1920
+         Visible         =   0   'False
+         Width           =   1530
+      End
+      Begin VB.Label Label1 
+         Caption         =   "Recálculo de Dígito de Control"
+         BeginProperty Font 
+            Name            =   "Tahoma"
+            Size            =   14.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00800000&
+         Height          =   345
+         Left            =   630
+         TabIndex        =   20
+         Top             =   405
+         Width           =   5775
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         ForeColor       =   &H00972E0B&
+         Height          =   195
+         Index           =   7
+         Left            =   600
+         TabIndex        =   19
+         Top             =   1650
+         Width           =   45
+      End
+      Begin VB.Label Label2 
+         AutoSize        =   -1  'True
+         ForeColor       =   &H00000000&
+         Height          =   195
+         Index           =   3
+         Left            =   630
+         TabIndex        =   18
+         Top             =   3990
+         Width           =   45
+      End
    End
 End
 Attribute VB_Name = "frmVARIOS"
@@ -498,6 +525,8 @@ Dim Contabilizada As Byte
 
 
 Dim vSeccion As CSeccion
+
+
 
 Private Sub KEYpress(KeyAscii As Integer)
 Dim cerrar As Boolean
@@ -769,6 +798,7 @@ End Sub
 Private Sub CmdCancel2_Click()
     Unload Me
 End Sub
+
 
 Private Sub Form_Activate()
     If PrimeraVez Then

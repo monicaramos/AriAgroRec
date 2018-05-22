@@ -21,7 +21,6 @@ Begin VB.MDIForm MDIppal
       _ExtentX        =   21378
       _ExtentY        =   635
       ButtonWidth     =   609
-      ButtonHeight    =   582
       Appearance      =   1
       Style           =   1
       _Version        =   393216
@@ -143,7 +142,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "14:05"
+            TextSave        =   "14:15"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1863,6 +1862,10 @@ Dim cad As String
                   " - Campaña: " & vParam.FecIniCam & " - " & vParam.FecFinCam & "   -  Usuario: " & vUsu.Nombre
     End If
 
+    GetIconsFromLibrary App.Path & "\iconos.dll", 1, 48
+    
+
+
     ' *** per als iconos XP ***
     GetIconsFromLibrary App.Path & "\iconos.dll", 1, 24
     GetIconsFromLibrary App.Path & "\iconos_BN.dll", 2, 24
@@ -1904,8 +1907,6 @@ Dim cad As String
     GetIconsFromLibrary App.Path & "\iconos_OM.dll", 3, 16
 
     GetIconsFromLibrary App.Path & "\iconosAriagroRec.dll", 4, 16
-    
-
 
     LeerEditorMenus
 
@@ -1953,7 +1954,7 @@ Private Sub mnE_Soporte4_Click()
 '     frmPOZMantaTickets.Show vbModal
 '     frmPOZMantaAux.Show vbModal
 '    frmVARIOS.Show vbModal
-    MsgBox "hola", vbExclamation
+    MsgBox "Hola" & vbCrLf & "Qué tal?", vbQuestion + vbYesNo + vbDefaultButton2
 End Sub
 
 Private Sub mnP_PreNomCateg_Click(Index As Integer)

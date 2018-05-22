@@ -1224,7 +1224,6 @@ Begin VB.Form frmPOZHidrantesIndefa
       _ExtentY        =   10054
       _Version        =   393216
       Style           =   1
-      Tab             =   1
       TabsPerRow      =   6
       TabHeight       =   520
       ShowFocusRect   =   0   'False
@@ -1239,14 +1238,14 @@ Begin VB.Form frmPOZHidrantesIndefa
       EndProperty
       TabCaption(0)   =   "Datos Indefa"
       TabPicture(0)   =   "frmPOZHidrantesIndefa.frx":0238
-      Tab(0).ControlEnabled=   0   'False
+      Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "SSTab2"
+      Tab(0).Control(0).Enabled=   0   'False
       Tab(0).ControlCount=   1
       TabCaption(1)   =   "Coopropietarios"
       TabPicture(1)   =   "frmPOZHidrantesIndefa.frx":0254
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "FrameAux0"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).ControlCount=   1
       TabCaption(2)   =   "Campos"
       TabPicture(2)   =   "frmPOZHidrantesIndefa.frx":0270
@@ -1255,7 +1254,7 @@ Begin VB.Form frmPOZHidrantesIndefa
       Tab(2).ControlCount=   1
       Begin TabDlg.SSTab SSTab2 
          Height          =   5205
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   68
          Top             =   420
          Width           =   15780
@@ -4632,7 +4631,7 @@ Begin VB.Form frmPOZHidrantesIndefa
       Begin VB.Frame FrameAux0 
          BorderStyle     =   0  'None
          Height          =   3930
-         Left            =   90
+         Left            =   -74910
          TabIndex        =   28
          Top             =   450
          Width           =   7780
@@ -5219,7 +5218,7 @@ Dim NF As Integer
 
 Dim MostradoAviso As Boolean
 
-Private Sub cmdAceptar_Click()
+Private Sub CmdAceptar_Click()
 Dim Diferencias As String
 Dim I As Integer
 
@@ -5743,8 +5742,8 @@ Dim B As Boolean
     
     '---------------------------------------------
     B = Modo <> 0 And Modo <> 2
-    cmdCancelar.visible = B
-    cmdAceptar.visible = B
+    CmdCancelar.visible = B
+    CmdAceptar.visible = B
        
     'Bloqueja els camps Text1 si no estem modificant/Insertant Datos
     'Si estem en Insertar a més neteja els camps Text1
@@ -6953,7 +6952,7 @@ Dim Limite As Long
 End Sub
 
 
-Private Sub cmdCancelar_Click()
+Private Sub CmdCancelar_Click()
 Dim I As Integer
 Dim V
 
@@ -7860,7 +7859,7 @@ Dim Eliminar As Boolean
     ModoLineas = 3 'Posem Modo Eliminar Llínia
     
     If Modo = 4 Then 'Modificar Capçalera
-        cmdAceptar_Click
+        CmdAceptar_Click
         If ModoLineas = 0 Then Exit Sub
     End If
        
@@ -7937,7 +7936,7 @@ Dim I As Integer
     ModoLineas = 1 'Posem Modo Afegir Llínia
 
     If (Modo = 3) Or (Modo = 4) Then 'Insertar o Modificar Capçalera
-        cmdAceptar_Click
+        CmdAceptar_Click
         If ModoLineas = 0 Then Exit Sub
     End If
 
@@ -8029,7 +8028,7 @@ Private Sub BotonModificarLinea(Index As Integer)
     ModoLineas = 2 'Modificar llínia
 
     If Modo = 4 Then 'Modificar Capçalera
-        cmdAceptar_Click
+        CmdAceptar_Click
         If ModoLineas = 0 Then Exit Sub
     End If
 
@@ -8247,7 +8246,7 @@ Dim Nuevo As Boolean
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux3(Index), 4
-            If txtAux3(2).Text <> "" Then cmdAceptar.SetFocus
+            If txtAux3(2).Text <> "" Then CmdAceptar.SetFocus
     
     End Select
 
@@ -8320,7 +8319,7 @@ Dim Sql As String
             
         Case 3 'porcentaje de
             PonerFormatoDecimal txtAux4(Index), 4
-            If txtAux4(2).Text <> "" Then cmdAceptar.SetFocus
+            If txtAux4(2).Text <> "" Then CmdAceptar.SetFocus
     
     End Select
 

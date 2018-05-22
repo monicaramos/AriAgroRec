@@ -188,6 +188,15 @@ Begin VB.Form frmPpal
          EndProperty
       EndProperty
    End
+   Begin MSComctlLib.ImageList ImageList1 
+      Left            =   4860
+      Top             =   4590
+      _ExtentX        =   1005
+      _ExtentY        =   1005
+      BackColor       =   -2147483643
+      MaskColor       =   12632256
+      _Version        =   393216
+   End
    Begin VB.Label Label1 
       Caption         =   "32x32"
       Height          =   255

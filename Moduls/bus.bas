@@ -173,6 +173,8 @@ Public Semaforo As Byte
 Public RespuestaMsgBox As Integer  'Para el msgbox del codejock
 
 
+Public ValorDevuelto As Long
+
 
 'Inicio Aplicación
 Public Sub Main()
