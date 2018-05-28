@@ -2,25 +2,25 @@
 <Document xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.03">
 <CstmrCdtTrfInitn>
    <GrpHdr>
-      <MsgId>TRANPAG000000F20180423T141251</MsgId>
-      <CreDtTm>2018-04-23T14:12:51</CreDtTm>
-      <NbOfTxs>4</NbOfTxs>
-      <CtrlSum>340.77</CtrlSum>
+      <MsgId>TRANPAG000000F20180525T140641</MsgId>
+      <CreDtTm>2018-05-25T14:06:41</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>68.98</CtrlSum>
       <InitgPty>
          <Nm>Catadau</Nm>
          <Id>
            <OrgId>
                <Othr>
-                  <Id>F46038881252</Id>
+                  <Id>F46038881AN0</Id>
                </Othr>
            </OrgId>
          </Id>
       </InitgPty>
    </GrpHdr>
    <PmtInf>
-      <PmtInfId>20180423141251F46038881</PmtInfId>
+      <PmtInfId>20180525140641F46038881</PmtInfId>
       <PmtMtd>TRF</PmtMtd>
-      <ReqdExctnDt>2018-04-18</ReqdExctnDt>
+      <ReqdExctnDt>2018-06-15</ReqdExctnDt>
       <Dbtr>
          <Nm>Catadau</Nm>
          <PstlAdr>
@@ -30,7 +30,7 @@
          <Id>
             <OrgId>
                <Othr>
-                  <Id>F46038881252</Id>
+                  <Id>F46038881AN0</Id>
                </Othr>
             </OrgId>
          </Id>
@@ -48,14 +48,14 @@
     </DbtrAgt>
    <CdtTrfTxInf>
       <PmtId>
-         <EndToEndId>20778221K</EndToEndId>
+         <EndToEndId>73939701Z</EndToEndId>
       </PmtId>
       <PmtTpInf>
           <SvcLvl><Cd>SEPA</Cd></SvcLvl>
           <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
        </PmtTpInf>
        <Amt>
-          <InstdAmt Ccy="EUR">70.74</InstdAmt>
+          <InstdAmt Ccy="EUR">68.98</InstdAmt>
        </Amt>
        <CdtrAgt>
           <FinInstnId>
@@ -63,139 +63,25 @@
           </FinInstnId>
        </CdtrAgt>
        <Cdtr>
-          <Nm>ESTEVE SABATER,JOSE SALVADOR</Nm>
+          <Nm>MARTINEZ DELGADO,ALFONSO</Nm>
            <Id>
                <OrgId>
                   <Othr>
-                     <Id>20778221K</Id>
+                     <Id>73939701Z</Id>
                   </Othr>
                </OrgId>
            </Id>
         </Cdtr>
         <CdtrAcct>
            <Id>
-              <IBAN>ES9230587100072810000878</IBAN>
+              <IBAN>ES2530582268582810017212</IBAN>
            </Id>
         </CdtrAcct>
       <Purp>
          <Cd>SALA</Cd>
       </Purp>
       <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 70,74</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>20818013T</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">96.46</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>YUSTE OREA,JORGE</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>20818013T</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES7730582268512720003141</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 96,46</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>05129847L</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">77.17</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>ROSILLO MORENO,J. ANTONIO</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>05129847L</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES4230582268572810009389</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 77,17</Ustrd>
-      </RmtInf>
-   </CdtTrfTxInf>
-   <CdtTrfTxInf>
-      <PmtId>
-         <EndToEndId>73756536K</EndToEndId>
-      </PmtId>
-      <PmtTpInf>
-          <SvcLvl><Cd>SEPA</Cd></SvcLvl>
-          <CtgyPurp><Cd>SALA</Cd></CtgyPurp>
-       </PmtTpInf>
-       <Amt>
-          <InstdAmt Ccy="EUR">96.4</InstdAmt>
-       </Amt>
-       <CdtrAgt>
-          <FinInstnId>
-             <BIC>CCRIES2AXXX</BIC>
-          </FinInstnId>
-       </CdtrAgt>
-       <Cdtr>
-          <Nm>TARAZONA SOBREVELA, ERNESTO</Nm>
-           <Id>
-               <OrgId>
-                  <Othr>
-                     <Id>73756536K</Id>
-                  </Othr>
-               </OrgId>
-           </Id>
-        </Cdtr>
-        <CdtrAcct>
-           <Id>
-              <IBAN>ES9730582268512810002388</IBAN>
-           </Id>
-        </CdtrAcct>
-      <Purp>
-         <Cd>SALA</Cd>
-      </Purp>
-      <RmtInf>
-         <Ustrd>Pago N mina 18/04/2018 Importe 96,40</Ustrd>
+         <Ustrd>Pago N mina 15/06/2018 Importe 68,98</Ustrd>
       </RmtInf>
    </CdtTrfTxInf>
    </PmtInf>

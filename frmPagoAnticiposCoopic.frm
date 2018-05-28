@@ -824,7 +824,7 @@ On Error GoTo eRepetirProcesoCoopic
                     cad = ""
                 Else
                     '[Monica]22/11/2013: iban
-                    cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+                    cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
                 End If
                 CodigoOrden34 = DBLet(Rs!codorden34, "T")
             End If
@@ -988,7 +988,7 @@ Dim List As Collection
     Me.FramePago.Enabled = (vParamAplic.Cooperativa = 0)
     
     If vParamAplic.Cooperativa <> 0 Then
-        Me.cmdAceptar(0).Top = Me.cmdAceptar(0).Top - 1200
+        Me.CmdAceptar(0).Top = Me.CmdAceptar(0).Top - 1200
         Me.cmdCancel(0).Top = Me.cmdCancel(0).Top - 1200
         Me.Pb2.Top = Me.Pb2.Top - 1200
     End If
@@ -1603,7 +1603,7 @@ Dim Sql5 As String
 Dim RS5 As ADODB.Recordset
 
 Dim Dias As Long
-
+Dim Anticipo As Currency
 
 On Error GoTo eProcesarCambiosCoopic
     
@@ -1680,6 +1680,13 @@ On Error GoTo eProcesarCambiosCoopic
             
             '[Monica]23/03/2016: si el importe es negativo no entra
             If TNeto34 >= 0 Then
+        
+                '[Monica]25/05/2018: anticipos pendientes de descuento
+                Sql = "update horasanticipos set descontado = 1, fechahora = " & DBSet(txtCodigo(1).Text, "F") & ", idcontador = " & DBSet(Max, "N")
+                Sql = Sql & " where codtraba = " & DBSet(AntCodTraba, "N") & " and descontado = 0 "
+                conn.Execute Sql
+        
+        
         
                 Sql3 = "insert into rrecibosnomina (codtraba, fechahora, importe, base34, porcsegso1, porcsegso2, porcirpf, "
                 Sql3 = Sql3 & "importesegso1, importesegso2, importeirpf, complemento, neto34, idcontador, hayembargo) values ("
@@ -1762,6 +1769,11 @@ On Error GoTo eProcesarCambiosCoopic
         Neto34 = ImpBruto2 - IRPF - Retencion
         
         
+        '[Monica]25/05/2018: anticipos pendientes de descuento, como en natural
+        Anticipo = AnticiposPendientes(Rs!CodTraba)
+        Neto34 = Neto34 - Anticipo
+        
+        
         TNeto34 = TNeto34 + Neto34
         
         Rs.MoveNext
@@ -1773,6 +1785,15 @@ On Error GoTo eProcesarCambiosCoopic
         
         '[Monica]23/03/2016: si el importe es negativo no entra
         If TNeto34 >= 0 Then
+        
+            '[Monica]25/05/2018: anticipos pendientes de descuento
+            Sql = "update horasanticipos set descontado = 1, fechahora = " & DBSet(txtCodigo(20).Text, "F") & ", idcontador = " & DBSet(Max, "N")
+            Sql = Sql & " where codtraba = " & DBSet(AntCodTraba, "N") & " and descontado = 0 "
+            conn.Execute Sql
+                        
+        
+        
+        
             Sql3 = "insert into rrecibosnomina (codtraba, fechahora, importe, base34, porcsegso1, porcsegso2, porcirpf, "
             Sql3 = Sql3 & "importesegso1, importesegso2, importeirpf, complemento, neto34, idcontador, hayembargo) values ("
             Sql3 = Sql3 & DBSet(AntCodTraba, "N") & ","
@@ -1834,7 +1855,7 @@ On Error GoTo eProcesarCambiosCoopic
                 cad = ""
             Else
                 '[Monica]22/11/2013: iban
-                cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!Iban, "T") & "|"
+                cad = Format(Rs!CodBanco, "0000") & "|" & Format(DBLet(Rs!CodSucur, "T"), "0000") & "|" & DBLet(Rs!digcontr, "T") & "|" & Format(DBLet(Rs!CuentaBa, "T"), "0000000000") & "|" & DBLet(Rs!IBAN, "T") & "|"
             End If
             CodigoOrden34 = DBLet(Rs!codorden34, "T")
         End If

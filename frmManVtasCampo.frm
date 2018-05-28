@@ -899,7 +899,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim i As Integer
+Dim I As Integer
 Dim cadSelGrid As String
 
 Private Sub PonerModo(vModo)
@@ -915,14 +915,14 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For i = 0 To txtAux.Count - 1
-        BloquearTxt txtAux(i), (Modo = 0 Or Modo = 2)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        BloquearTxt txtAux(I), (Modo = 0 Or Modo = 2)
+    Next I
     
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).visible = Not B
-        txtAux(i).BackColor = vbWhite
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).visible = Not B
+        txtAux(I).BackColor = vbWhite
+    Next I
     
     txtAux2(0).visible = Not B
     txtAux2(1).visible = Not B
@@ -943,12 +943,12 @@ Dim B As Boolean
     PonerModoOpcionesMenu 'Activar/Desact botones de menu segun Modo
     PonerOpcionesMenu  'En funcion del usuario
     'Si estamos modo Modificar bloquear todo excepto el importe de anticipo
-    For i = 0 To txtAux.Count - 1
-        If i <> 6 Then txtAux(i).Enabled = (Modo <> 4)
-    Next i
-    For i = 0 To 2
-        BloquearBtn Me.btnBuscar(i), (Modo = 4)
-    Next i
+    For I = 0 To txtAux.Count - 1
+        If I <> 6 Then txtAux(I).Enabled = (Modo <> 4)
+    Next I
+    For I = 0 To 2
+        BloquearBtn Me.btnBuscar(I), (Modo = 4)
+    Next I
     Combo1(0).Enabled = (Modo <> 4)
     
 End Sub
@@ -1024,9 +1024,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For i = 1 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 1 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(2).Text = ""
     Combo1(0).ListIndex = -1
 
@@ -1047,9 +1047,9 @@ Private Sub BotonBuscar()
     CargaGrid "rhisfruta.numalbar = -1"
     '*******************************************************************************
     'Buscar
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Text = ""
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Text = ""
+    Next I
     txtAux2(0).Text = ""
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
@@ -1060,13 +1060,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim i As Integer
+    Dim I As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        i = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, i
+        I = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, I
         DataGrid1.Refresh
     End If
     
@@ -1090,9 +1090,9 @@ Private Sub BotonModificar()
     txtAux(6).Text = DataGrid1.Columns(11).Text
     
     ' ***** canviar-ho pel nom del camp del combo *********
-    i = adodc1.Recordset!Recolect
+    I = adodc1.Recordset!Recolect
     ' *****************************************************
-    PosicionarCombo Me.Combo1(0), i
+    PosicionarCombo Me.Combo1(0), I
     
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
    
@@ -1106,9 +1106,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For i = 0 To txtAux.Count - 1
-        txtAux(i).Top = alto
-    Next i
+    For I = 0 To txtAux.Count - 1
+        txtAux(I).Top = alto
+    Next I
     
     ' ### [Monica] 12/09/2006
     txtAux2(0).Top = alto
@@ -1273,7 +1273,7 @@ Private Sub chkAux_KeyPress(Index As Integer, KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim i As Long
+    Dim I As Long
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1313,7 +1313,7 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                    i = adodc1.Recordset.Fields(9)
+                    I = adodc1.Recordset.Fields(9)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1323,7 +1323,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & i)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(9).Name & " =" & I)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1358,7 +1358,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim i As Integer
+Dim I As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1367,16 +1367,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    i = 0
+    I = 0
     Do
-        J = i + 1
-        i = InStr(J, DatosADevolverBusqueda, "|")
-        If i > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, i - J)
+        J = I + 1
+        I = InStr(J, DatosADevolverBusqueda, "|")
+        If I > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, I - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until i = 0
+    Loop Until I = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1812,9 +1812,9 @@ Dim Facturas As String
 Dim cadWHERE As String
 Dim Rs As ADODB.Recordset
 
-
-    Sql = "select distinct rfactsoc.numfactu, rfactsoc.fecfactu from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and  rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
-    Sql = Sql & " where rfactsoc.codtipom = 'FAC' and " & Replace(Replace(CadB, "rhisfruta.codsocio", "rfactsoc.codsocio"), "rhisfruta.codvarie", "rfactsoc_variedad.codvarie")
+    '[Monica]23/05/2018: solo tenia en cuenta las facturas de anticipos sin kilos de FAC, no las CAT. CORREGIDO
+    Sql = "select distinct rfactsoc.numfactu, rfactsoc.fecfactu, rfactsoc.codtipom from rfactsoc inner join rfactsoc_variedad on rfactsoc.codtipom = rfactsoc_variedad.codtipom and  rfactsoc.numfactu = rfactsoc_variedad.numfactu and rfactsoc.fecfactu = rfactsoc_variedad.fecfactu "
+    Sql = Sql & " where rfactsoc.codtipom in ('FAC','CAT') and " & Replace(Replace(CadB, "rhisfruta.codsocio", "rfactsoc.codsocio"), "rhisfruta.codvarie", "rfactsoc_variedad.codvarie")
     Sql = Sql & " and rfactsoc_variedad.kilosnet = 0"
     If TotalRegistrosConsulta(Sql) <> 0 Then
         Set Rs = New ADODB.Recordset
@@ -1823,7 +1823,7 @@ Dim Rs As ADODB.Recordset
         Facturas = "Facturas de Anticipos sin Kilos Entrados: " & vbCrLf & vbCrLf
         Facturas = ""
         While Not Rs.EOF
-            Facturas = Facturas & "('FAC'," & DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "F") & "),"
+            Facturas = Facturas & "(" & DBSet(Rs.Fields(2).Value, "T") & "," & DBSet(Rs.Fields(0).Value, "N") & "," & DBSet(Rs.Fields(1).Value, "F") & "),"
         
             Rs.MoveNext
         Wend

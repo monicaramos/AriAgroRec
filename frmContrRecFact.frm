@@ -3004,10 +3004,10 @@ On Error GoTo EPonerModo
     '=========================================
     B = (Modo = 2)
         
-    cmdAceptar.visible = (ModoLineas = 2)
-    cmdAceptar.Enabled = (ModoLineas = 2)
-    cmdCancelar.visible = (ModoLineas = 2)
-    cmdCancelar.Enabled = (ModoLineas = 2)
+    CmdAceptar.visible = (ModoLineas = 2)
+    CmdAceptar.Enabled = (ModoLineas = 2)
+    CmdCancelar.visible = (ModoLineas = 2)
+    CmdCancelar.Enabled = (ModoLineas = 2)
     
 '    'Bloquea los campos Text1 sino estamos modificando/Insertando Datos
 '    'Si estamos en Insertar además limpia los campos Text1
@@ -3318,14 +3318,14 @@ Private Sub Toolbar1_ButtonClick(ByVal Button As MSComctlLib.Button)
         Case 1  'Pedir datos
              mnPedirDatos_Click
             
-        Case 2
-             mnModificarDto_Click
+'        Case 2
+'             mnModificarDto_Click
             
-        Case 3 'Generar Factura
+        Case 2 'Generar Factura
             mnGenerarFac_Click
 
-        Case 6    'Salir
-            mnSalir_Click
+'        Case 6    'Salir
+'            mnSalir_Click
     End Select
 End Sub
 
@@ -3403,10 +3403,10 @@ Dim I As Integer
     'desBloqueo Manual de las tablas
 '    DesBloqueoManual ("scaalp")
     
-    Me.cmdAceptar.visible = True
-    Me.cmdAceptar.Enabled = True
-    Me.cmdCancelar.visible = True
-    Me.cmdCancelar.Enabled = True
+    Me.CmdAceptar.visible = True
+    Me.CmdAceptar.Enabled = True
+    Me.CmdCancelar.visible = True
+    Me.CmdCancelar.Enabled = True
     
     
     PonerFoco Text1(3)
@@ -4706,7 +4706,7 @@ Dim CadFact As String
     vFactu.numfactu = Text1(0).Text
     vFactu.fecfactu = Text1(1).Text
     vFactu.FecRecep = Text1(2).Text
-    vFactu.trabajador = Text1(4).Text
+    vFactu.Trabajador = Text1(4).Text
     vFactu.BancoPr = Text1(5).Text
     vFactu.BrutoFac = ImporteFormateado(Text1(9).Text) + ImporteFormateado(Text1(32).Text) 'ImporteFormateado(Text1(6).Text) + ImporteFormateado(Text1(32).Text)
     vFactu.ForPago = Text1(4).Text
