@@ -833,8 +833,8 @@ Dim B As Boolean
         btnBuscar(I).visible = Not B
     Next I
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -943,7 +943,7 @@ Private Sub BotonAnyadir()
     If DataGrid1.Row < 0 Then
         anc = anc + 240
     Else
-        anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
+        anc = anc + DataGrid1.RowTop(DataGrid1.Row) '+ 5
     End If
     For I = 0 To txtAux.Count - 1
         txtAux(I).Text = ""
@@ -1363,6 +1363,14 @@ Private Sub Form_Load()
     '[Monica]18/01/2016: si viene de socios cargamos la tabla
     If CodigoActual <> "" Then CadenaConsulta = CadenaConsulta & " and raportacion.codsocio = " & DBSet(CodigoActual, "N")
     '************************************************************************
+    
+    
+    '[Monica]04/06/2018:en el caso de coopic los kilos llevan las hanegadas
+    If vParamAplic.Cooperativa = 16 Then
+        txtAux(4).Tag = "Hanegadas|N|N|||raportacion|kilos|###,##0.##||"
+    End If
+    
+    
     '[Monica]18/01/2016: si viene de socios cargamos la tabla
     If CodigoActual <> "" Then
         CadB = ""
@@ -1377,6 +1385,7 @@ Private Sub Form_Load()
         Me.FrameBotonGnral2.Width = 1400
         Me.Toolbar5.Width = 1100
     End If
+    
     
 '    If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
 '        BotonAnyadir
@@ -1651,7 +1660,14 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = tots & "S|txtAux(6)|T|Codigo|800|;S|btnBuscar(2)|B||195|;S|txtAux2(6)|T|Tipo Aportación|2100|;"
     tots = tots & "S|txtAux(2)|T|Descripcion|3000|;"
     tots = tots & "S|txtAux(3)|T|Campaña|1100|;"
-    tots = tots & "S|txtAux(4)|T|Kilos|1500|;"
+    
+    '[Monica]04/06/2018: aportaciones de coopic
+    If vParamAplic.Cooperativa = 16 Then
+        tots = tots & "S|txtAux(4)|T|Hanegadas|1500|;"
+    Else
+        tots = tots & "S|txtAux(4)|T|Kilos|1500|;"
+    End If
+    
     tots = tots & "S|txtAux(5)|T|Importe|1500|;"
     
     arregla tots, DataGrid1, Me, 350
@@ -1713,7 +1729,11 @@ Dim cadMen As String
             PonerFormatoDecimal txtAux(Index), 3
     
         Case 4 'kilos
-            PonerFormatoEntero txtAux(Index)
+            If vParamAplic.Cooperativa = 16 Then
+                PonerFormatoDecimal txtAux(Index), 3
+            Else
+                PonerFormatoEntero txtAux(Index)
+            End If
     
         Case 6 'codigo de tipo de aportacion
             If PonerFormatoEntero(txtAux(Index)) Then
@@ -1902,7 +1922,7 @@ End Function
 
 Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
-Dim Kilos As Long
+Dim Kilos As Currency
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 
@@ -1924,7 +1944,12 @@ Dim Sql As String
         If Rs.Fields(0).Value <> 0 Then Kilos = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
         If Rs.Fields(1).Value <> 0 Then Importe = DBLet(Rs.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
     
-        txtAux2(1).Text = Format(Kilos, "###,###,##0")
+        '[Monica]04/06/2018: caso de coopic
+        If vParamAplic.Cooperativa = 16 Then
+            txtAux2(1).Text = Format(Kilos, "#,###,##0.00")
+        Else
+            txtAux2(1).Text = Format(Kilos, "###,###,##0")
+        End If
         txtAux2(2).Text = Format(Importe, "###,###,##0.00")
     End If
     Rs.Close

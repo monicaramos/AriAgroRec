@@ -8,25 +8,46 @@ Begin VB.Form frmAPOTipos
    ClientHeight    =   6060
    ClientLeft      =   45
    ClientTop       =   30
-   ClientWidth     =   7980
+   ClientWidth     =   9375
    Icon            =   "frmAPOTipos.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   6060
-   ScaleWidth      =   7980
+   ScaleWidth      =   9375
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   4
+      Left            =   5220
+      MaxLength       =   10
+      TabIndex        =   4
+      Tag             =   "Precio Hda|N|S|||rtipoapor|preciohda|###,##0.00||"
+      Top             =   4905
+      Width           =   1395
+   End
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   90
-      TabIndex        =   10
+      TabIndex        =   11
       Top             =   45
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   11
+         TabIndex        =   12
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -133,8 +154,8 @@ Begin VB.Form frmAPOTipos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   5550
-      TabIndex        =   4
+      Left            =   6945
+      TabIndex        =   5
       Tag             =   "   "
       Top             =   5460
       Visible         =   0   'False
@@ -153,8 +174,8 @@ Begin VB.Form frmAPOTipos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   6810
-      TabIndex        =   5
+      Left            =   8205
+      TabIndex        =   6
       Top             =   5460
       Visible         =   0   'False
       Width           =   1065
@@ -206,10 +227,10 @@ Begin VB.Form frmAPOTipos
       Bindings        =   "frmAPOTipos.frx":000C
       Height          =   4545
       Left            =   120
-      TabIndex        =   8
+      TabIndex        =   9
       Top             =   810
-      Width           =   7735
-      _ExtentX        =   13653
+      Width           =   9135
+      _ExtentX        =   16113
       _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -284,8 +305,8 @@ Begin VB.Form frmAPOTipos
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   6795
-      TabIndex        =   9
+      Left            =   8190
+      TabIndex        =   10
       Top             =   5445
       Visible         =   0   'False
       Width           =   1065
@@ -294,7 +315,7 @@ Begin VB.Form frmAPOTipos
       Height          =   555
       Index           =   1
       Left            =   120
-      TabIndex        =   6
+      TabIndex        =   7
       Top             =   5415
       Width           =   2385
       Begin VB.Label lblIndicador 
@@ -311,7 +332,7 @@ Begin VB.Form frmAPOTipos
          EndProperty
          Height          =   255
          Left            =   45
-         TabIndex        =   7
+         TabIndex        =   8
          Top             =   195
          Width           =   2295
       End
@@ -492,8 +513,8 @@ Dim B As Boolean
         txtAux(I).BackColor = vbWhite
     Next I
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -555,7 +576,7 @@ Private Sub BotonAnyadir()
          
     anc = DataGrid1.Top
     If DataGrid1.Row < 0 Then
-        anc = anc + 206
+        anc = anc + 240
     Else
         anc = anc + DataGrid1.RowTop(DataGrid1.Row) + 5
     End If
@@ -853,7 +874,7 @@ Private Sub Form_Load()
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
     
     '****************** canviar la consulta *********************************+
-    CadenaConsulta = "SELECT rtipoapor.codaport, rtipoapor.nomaport, rtipoapor.numero, rtipoapor.letraser "
+    CadenaConsulta = "SELECT rtipoapor.codaport, rtipoapor.nomaport, rtipoapor.numero, rtipoapor.letraser, rtipoapor.preciohda "
     CadenaConsulta = CadenaConsulta & " FROM rtipoapor"
     CadenaConsulta = CadenaConsulta & " WHERE 1 = 1 "
     '************************************************************************
@@ -951,7 +972,7 @@ Private Sub CargaGrid(Optional vSQL As String)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Descripción|4350|;S|txtAux(2)|T|Número|1200|;S|txtAux(3)|T|Serie|700|;"
+    tots = "S|txtAux(0)|T|Código|900|;S|txtAux(1)|T|Descripción|4350|;S|txtAux(2)|T|Número|1200|;S|txtAux(3)|T|Serie|700|;S|txtAux(4)|T|Precio Hda|1400|;"
     
     arregla tots, DataGrid1, Me, 350
     
@@ -975,6 +996,9 @@ Private Sub txtAux_LostFocus(Index As Integer)
         Case 1
             txtAux(Index).Text = UCase(txtAux(Index).Text)
             
+        '[Monica]04/06/2018:
+        Case 4 ' precio por hda
+            PonerFormatoDecimal txtAux(4), 3
     End Select
     
 End Sub

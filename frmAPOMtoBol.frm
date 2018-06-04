@@ -5,16 +5,16 @@ Object = "{CDE57A40-8B86-11D0-B3C6-00A0C90AEA82}#1.0#0"; "MSDATGRD.OCX"
 Begin VB.Form frmAPOMtoBol 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Aportaciones"
-   ClientHeight    =   6075
+   ClientHeight    =   6705
    ClientLeft      =   195
    ClientTop       =   180
-   ClientWidth     =   13635
+   ClientWidth     =   14640
    Icon            =   "frmAPOMtoBol.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6075
-   ScaleWidth      =   13635
+   ScaleHeight     =   6705
+   ScaleWidth      =   14640
    StartUpPosition =   2  'CenterScreen
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
@@ -162,10 +162,10 @@ Begin VB.Form frmAPOMtoBol
       EndProperty
       Height          =   330
       Index           =   2
-      Left            =   11580
+      Left            =   11835
       TabIndex        =   21
-      Top             =   4875
-      Width           =   1215
+      Top             =   5625
+      Width           =   2025
    End
    Begin VB.TextBox txtAux 
       Alignment       =   1  'Right Justify
@@ -349,9 +349,9 @@ Begin VB.Form frmAPOMtoBol
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   11190
+      Left            =   12180
       TabIndex        =   8
-      Top             =   5475
+      Top             =   6105
       Visible         =   0   'False
       Width           =   1065
    End
@@ -368,9 +368,9 @@ Begin VB.Form frmAPOMtoBol
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12360
+      Left            =   13350
       TabIndex        =   9
-      Top             =   5490
+      Top             =   6120
       Visible         =   0   'False
       Width           =   1125
    End
@@ -420,11 +420,11 @@ Begin VB.Form frmAPOMtoBol
    Begin MSDataGridLib.DataGrid DataGrid1 
       Bindings        =   "frmAPOMtoBol.frx":0010
       Height          =   4545
-      Left            =   90
+      Left            =   135
       TabIndex        =   13
-      Top             =   810
-      Width           =   13380
-      _ExtentX        =   23601
+      Top             =   855
+      Width           =   14380
+      _ExtentX        =   25374
       _ExtentY        =   8017
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -489,10 +489,19 @@ Begin VB.Form frmAPOMtoBol
    End
    Begin VB.CommandButton cmdRegresar 
       Caption         =   "&Regresar"
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
-      Left            =   12390
+      Left            =   13410
       TabIndex        =   14
-      Top             =   5490
+      Top             =   6120
       Visible         =   0   'False
       Width           =   1095
    End
@@ -501,7 +510,7 @@ Begin VB.Form frmAPOMtoBol
       Index           =   1
       Left            =   60
       TabIndex        =   11
-      Top             =   5370
+      Top             =   6000
       Width           =   2385
       Begin VB.Label lblIndicador 
          Alignment       =   2  'Center
@@ -583,7 +592,7 @@ Begin VB.Form frmAPOMtoBol
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   13050
+      Left            =   14040
       TabIndex        =   26
       Top             =   225
       Width           =   405
@@ -611,11 +620,11 @@ Begin VB.Form frmAPOMtoBol
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   225
-      Left            =   10680
+      Height          =   315
+      Left            =   10710
       TabIndex        =   20
-      Top             =   5040
-      Width           =   945
+      Top             =   5670
+      Width           =   1125
    End
    Begin VB.Menu mnOpciones 
       Caption         =   "&Opciones"
@@ -785,8 +794,8 @@ Dim B As Boolean
         btnBuscar(I).visible = Not B
     Next I
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -1454,13 +1463,13 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     CargaGridGnral Me.DataGrid1, Me.adodc1, Sql, PrimeraVez
     
     ' *******************canviar els noms i si fa falta la cantitat********************
-    tots = "S|txtAux(0)|T|Codigo|730|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2700|;"
+    tots = "S|txtAux(0)|T|Codigo|930|;S|btnBuscar(1)|B||195|;S|txtAux2(0)|T|Socio|2900|;"
     tots = tots & "S|Combo1(0)|C|Tipo|800|;" 'S|txtAux(3)|T|TipoM|600|;"
-    tots = tots & "S|txtAux(4)|T|Factura|800|;"
-    tots = tots & "S|txtAux(1)|T|Fecha|1100|;S|btnBuscar(0)|B||195|;"
+    tots = tots & "S|txtAux(4)|T|Factura|1000|;"
+    tots = tots & "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
     tots = tots & "S|txtAux(6)|T|Codigo|800|;S|btnBuscar(2)|B||195|;S|txtAux2(6)|T|Tipo Aport.|1600|;"
-    tots = tots & "S|txtAux(2)|T|Descripcion|2800|;"
-    tots = tots & "S|txtAux(5)|T|Importe|1140|;N||||0|;S|chkAux(0)|CB|IC|340|;"
+    tots = tots & "S|txtAux(2)|T|Descripcion|2600|;"
+    tots = tots & "S|txtAux(5)|T|Importe|1440|;N||||0|;S|chkAux(0)|CB|IC|340|;"
     
     arregla tots, DataGrid1, Me, 350
     

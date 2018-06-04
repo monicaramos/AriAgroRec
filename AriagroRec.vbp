@@ -336,6 +336,7 @@ Form=frmManClasAux.frm
 Form=frmMenBox.frm
 Module=libMensajes; Moduls\libMensajesCodejok.bas
 Form=frmMSG.frm
+Form=frmMenBoxAriadna.frm
 IconForm="MDIppal"
 Startup="Sub Main"
 HelpFile=""

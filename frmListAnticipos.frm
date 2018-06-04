@@ -6012,6 +6012,7 @@ Begin VB.Form frmListAnticipos
          BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
             NumPanels       =   1
             BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+               Key             =   ""
                Object.Tag             =   ""
             EndProperty
          EndProperty
@@ -7041,7 +7042,7 @@ End Function
 Private Sub CmdAcepDesF_Click()
 Dim Tipo As Byte
     If DatosOK Then
-        Pb2.visible = True
+        pb2.visible = True
         Select Case OpcionListado
             Case 5 ' anticipo
                 Tipo = 0
@@ -7056,7 +7057,7 @@ Dim Tipo As Byte
             Case 15 ' liquidacion
                 Tipo = 3
         End Select
-        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, Pb2) Then
+        If DeshacerFacturacion(Tipo, txtcodigo(9).Text, txtcodigo(10).Text, txtcodigo(11).Text, pb2) Then
             MsgBox "Proceso realizado correctamente", vbExclamation
             cmdCancelDesF_Click
         End If
@@ -10468,7 +10469,7 @@ Private Sub Form_Activate()
                 
             Case 5    ' deshacer proceso de facturacion de anticipos
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de anticipo
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(1) = 1 Then
@@ -10489,7 +10490,7 @@ Private Sub Form_Activate()
                 Check1(8).Value = 1
                 
             Case 7    ' deshacer proceso de facturacion de venta campo
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 Combo1(1).ListIndex = 0 ' por defecto anticipo
 '                txtCodigo(9).Text = vParamAplic.PrimFactAntVC
 '                txtCodigo(10).Text = vParamAplic.UltFactAntVC
@@ -10520,7 +10521,7 @@ Private Sub Form_Activate()
             
             Case 15    ' deshacer proceso de facturacion de liquidacion
                 PonerFoco txtcodigo(8)
-                Me.Pb2.visible = False
+                Me.pb2.visible = False
                 ' si solo hay un tipo de movimiento de liquidacion
                 ' mostramos cual fue la ultima facturacion
                 If NroTotalMovimientos(2) = 1 Then
@@ -12302,10 +12303,10 @@ Dim tipoMov As String
 
 End Function
 
-Private Function EsVariedadDelCampoORelacionada(campo As String, Variedad As String) As Boolean
+Private Function EsVariedadDelCampoORelacionada(Campo As String, Variedad As String) As Boolean
 Dim Sql As String
 
-    Sql = "select count(*) from rcampos where codcampo = " & DBSet(campo, "N") & " and fecbajas is null "
+    Sql = "select count(*) from rcampos where codcampo = " & DBSet(Campo, "N") & " and fecbajas is null "
     Sql = Sql & " and (codvarie = " & DBSet(Variedad, "N") & " or codvarie in (select codvarie from variedades_rel where codvarie1 = " & DBSet(Variedad, "N") & "))"
 
     EsVariedadDelCampoORelacionada = (TotalRegistros(Sql) <> 0)
@@ -17862,7 +17863,7 @@ Dim Termino As String
         '[Monica]25/05/2015: tenemos que añadir los descuentos para el caso de montifrut
         If vParamAplic.Cooperativa = 12 And Check1(7).Value = 1 Then
             Dim Varie As Long
-            Dim campo As Long
+            Dim Campo As Long
             Dim TotalKilos As Long
             Dim ImporteTot As Currency
             Dim vImporte As Currency
@@ -17897,7 +17898,7 @@ Dim Termino As String
                     vImporte = vImporte + Importe
                     
                     Varie = DBLet(Rs6!Codvarie)
-                    campo = DBLet(Rs6!codcampo)
+                    Campo = DBLet(Rs6!codcampo)
                     
                     Sql = "update tmprfactsoc_variedad set imporvar = imporvar - " & DBSet(Importe, "N")
                     Sql = Sql & " where codusu = " & vUsu.Codigo
@@ -17905,7 +17906,7 @@ Dim Termino As String
                     Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
                     Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(campo, "N")
+                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                     
                     conn.Execute Sql
                     
@@ -17921,7 +17922,7 @@ Dim Termino As String
                     Sql = Sql & " and numfactu = " & DBSet(RS5!numfactu, "N")
                     Sql = Sql & " and fecfactu = " & DBSet(RS5!fecfactu, "F")
                     Sql = Sql & " and codvarie = " & DBSet(Varie, "N")
-                    Sql = Sql & " and codcampo = " & DBSet(campo, "N")
+                    Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
                 
                     conn.Execute Sql
                 End If
@@ -18233,6 +18234,13 @@ End If ' Por Montifrut que tiene la otra en el ariagro2
         
         '[Monica]24/04/2018: para el caso de picassent agrupamos tb por termino municipal
         If vParamAplic.Cooperativa = 2 Then
+        
+            '[Monica]31/05/2018: tenemos que quitar lo que haya del campo 0
+            EliminarCamposCero
+        
+        
+        
+        
             Sql = "select nif, tipo , tmprfactsoc.codsocio codigo , tmprfactsoc_variedad.codpobla , variedades.codprodu, tmprfactsoc.porc_iva, max(tmprfactsoc.porc_ret) porc_ret, sum(tmprfactsoc_variedad.imporvar) importe "
             Sql = Sql & " from ((tmprfactsoc inner join tmprfactsoc_variedad on tmprfactsoc.codtipom = tmprfactsoc_variedad.codtipom "
             Sql = Sql & " and tmprfactsoc.codusu = tmprfactsoc_variedad.codusu "
@@ -18409,6 +18417,53 @@ eCargarFacturas:
     Screen.MousePointer = vbDefault
     CargarFacturas = False
 End Function
+
+Private Sub EliminarCamposCero()
+Dim Sql As String
+Dim Campo As String
+Dim Rs As ADODB.Recordset
+
+    Sql = "Select * from tmprfactsoc_variedad where codusu = " & vUsu.Codigo & " and codcampo = 0"
+    
+    Set Rs = New ADODB.Recordset
+    Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    
+    While Not Rs.EOF
+        Sql = "select min(codcampo) from tmprfactsoc_variedad where codusu = " & DBSet(vUsu.Codigo, "N")
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        Sql = Sql & " and codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = Sql & " and imporvar + " & DBSet(Rs!imporvar, "N") & " > 0 "
+        Campo = DevuelveValor(Sql)
+        
+        Sql = "update tmprfactsoc_variedad set imporvar = imporvar + " & DBSet(Rs!imporvar, "N")
+        Sql = Sql & " where codusu = " & vUsu.Codigo
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        Sql = Sql & " and codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = Sql & " and codcampo = " & DBSet(Campo, "N")
+        
+        conn.Execute Sql
+        
+        Sql = "delete from tmprfactsoc_variedad where codusu = " & vUsu.Codigo
+        Sql = Sql & " and codvarie = " & DBSet(Rs!Codvarie, "N")
+        Sql = Sql & " and codtipom = " & DBSet(Rs!CodTipom, "T")
+        Sql = Sql & " and numfactu = " & DBSet(Rs!numfactu, "N")
+        Sql = Sql & " and fecfactu = " & DBSet(Rs!fecfactu, "F")
+        Sql = Sql & " and codcampo = 0"
+        
+        conn.Execute Sql
+        
+        
+        Rs.MoveNext
+    Wend
+    Set Rs = Nothing
+
+
+End Sub
+
 
 
 Private Function CargarTemporalLiquidacionIndustria(cTabla As String, cWhere As String) As Boolean
@@ -19142,7 +19197,7 @@ Dim Rs As ADODB.Recordset
     Else
         Set frmMens1 = New frmMensajes
         frmMens1.cadWHERE = " and " & cad '"rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null"
-        frmMens1.campo = txtcodigo(50).Text
+        frmMens1.Campo = txtcodigo(50).Text
         frmMens1.OpcionMensaje = 7
         frmMens1.Show vbModal
         Set frmMens1 = Nothing
@@ -19151,18 +19206,18 @@ Dim Rs As ADODB.Recordset
 End Sub
 
 
-Private Sub PonerDatosCampo(campo As String)
+Private Sub PonerDatosCampo(Campo As String)
 Dim cad As String
 Dim Cad1 As String
 Dim NumRegis As Long
 Dim Rs As ADODB.Recordset
 
 
-    If campo = "" Then Exit Sub
+    If Campo = "" Then Exit Sub
     
 '    If Not (Modo = 3 Or Modo = 4) Then Exit Sub
 
-    cad = "rcampos.codcampo = " & DBSet(campo, "N") & " and rcampos.fecbajas is null"
+    cad = "rcampos.codcampo = " & DBSet(Campo, "N") & " and rcampos.fecbajas is null"
      
     Cad1 = "select rcampos.codparti, rpartida.nomparti, rpartida.codzonas, rzonas.nomzonas, "
     Cad1 = Cad1 & " rpueblos.despobla, rcampos.nrocampo from rcampos, rpartida, rzonas, rpueblos "
@@ -19182,7 +19237,7 @@ Dim Rs As ADODB.Recordset
     Text2(2).Text = ""
     Text2(5).Text = ""
     If Not Rs.EOF Then
-        txtcodigo(50).Text = campo
+        txtcodigo(50).Text = Campo
         PonerFormatoEntero txtcodigo(50)
         Text2(4).Text = DBLet(Rs.Fields(0).Value, "N") ' codigo de partida
         If Text2(4).Text <> "" Then Text2(4).Text = Format(Text2(4).Text, "0000")
