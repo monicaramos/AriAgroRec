@@ -183,6 +183,110 @@ Begin VB.Form frmDocAltaBaja
             Width           =   1020
          End
       End
+      Begin VB.Frame FrameBajaSocio 
+         Caption         =   "Baja de Socios"
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   -1  'True
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00972E0B&
+         Height          =   3180
+         Left            =   450
+         TabIndex        =   12
+         Top             =   1800
+         Width           =   5970
+         Begin VB.TextBox txtCodigo 
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   1950
+            Index           =   8
+            Left            =   2025
+            MaxLength       =   800
+            MultiLine       =   -1  'True
+            ScrollBars      =   2  'Vertical
+            TabIndex        =   14
+            Top             =   855
+            Width           =   3720
+         End
+         Begin VB.TextBox txtCodigo 
+            Alignment       =   1  'Right Justify
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Index           =   7
+            Left            =   2025
+            MaxLength       =   10
+            TabIndex        =   13
+            Top             =   405
+            Width           =   1350
+         End
+         Begin VB.Label Label2 
+            Caption         =   "Motivos de Baja"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   330
+            Index           =   5
+            Left            =   270
+            TabIndex        =   16
+            Top             =   900
+            Width           =   1635
+         End
+         Begin VB.Image imgFec 
+            Height          =   240
+            Index           =   2
+            Left            =   1710
+            Picture         =   "frmDocAltaBaja.frx":0620
+            ToolTipText     =   "Buscar fecha"
+            Top             =   405
+            Width           =   240
+         End
+         Begin VB.Label Label4 
+            Caption         =   "Fecha Baja"
+            BeginProperty Font 
+               Name            =   "Verdana"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            ForeColor       =   &H00972E0B&
+            Height          =   255
+            Index           =   1
+            Left            =   270
+            TabIndex        =   15
+            Top             =   420
+            Width           =   1185
+         End
+      End
       Begin VB.Frame FrameAltaSocio 
          Caption         =   "Alta de Socios"
          BeginProperty Font 
@@ -356,7 +460,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   1
             Left            =   1845
-            Picture         =   "frmDocAltaBaja.frx":0620
+            Picture         =   "frmDocAltaBaja.frx":06AB
             ToolTipText     =   "Buscar fecha"
             Top             =   405
             Width           =   240
@@ -459,7 +563,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   3
             Left            =   1755
-            Picture         =   "frmDocAltaBaja.frx":06AB
+            Picture         =   "frmDocAltaBaja.frx":0736
             ToolTipText     =   "Buscar fecha"
             Top             =   1305
             Width           =   240
@@ -468,7 +572,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   0
             Left            =   1755
-            Picture         =   "frmDocAltaBaja.frx":0736
+            Picture         =   "frmDocAltaBaja.frx":07C1
             ToolTipText     =   "Buscar fecha"
             Top             =   405
             Width           =   240
@@ -599,7 +703,7 @@ Begin VB.Form frmDocAltaBaja
             Height          =   240
             Index           =   4
             Left            =   1290
-            Picture         =   "frmDocAltaBaja.frx":07C1
+            Picture         =   "frmDocAltaBaja.frx":084C
             ToolTipText     =   "Buscar fecha"
             Top             =   420
             Width           =   240
@@ -622,110 +726,6 @@ Begin VB.Form frmDocAltaBaja
             TabIndex        =   30
             Top             =   960
             Width           =   960
-         End
-      End
-      Begin VB.Frame FrameBajaSocio 
-         Caption         =   "Baja de Socios"
-         BeginProperty Font 
-            Name            =   "Verdana"
-            Size            =   9.75
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   -1  'True
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   &H00972E0B&
-         Height          =   3180
-         Left            =   450
-         TabIndex        =   12
-         Top             =   1800
-         Width           =   5970
-         Begin VB.TextBox txtCodigo 
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   1950
-            Index           =   8
-            Left            =   2025
-            MaxLength       =   800
-            MultiLine       =   -1  'True
-            ScrollBars      =   2  'Vertical
-            TabIndex        =   14
-            Top             =   855
-            Width           =   3720
-         End
-         Begin VB.TextBox txtCodigo 
-            Alignment       =   1  'Right Justify
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   360
-            Index           =   7
-            Left            =   2025
-            MaxLength       =   10
-            TabIndex        =   13
-            Top             =   405
-            Width           =   1350
-         End
-         Begin VB.Label Label2 
-            Caption         =   "Motivos de Baja"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   330
-            Index           =   5
-            Left            =   270
-            TabIndex        =   16
-            Top             =   900
-            Width           =   1635
-         End
-         Begin VB.Image imgFec 
-            Height          =   240
-            Index           =   2
-            Left            =   1710
-            Picture         =   "frmDocAltaBaja.frx":084C
-            ToolTipText     =   "Buscar fecha"
-            Top             =   405
-            Width           =   240
-         End
-         Begin VB.Label Label4 
-            Caption         =   "Fecha Baja"
-            BeginProperty Font 
-               Name            =   "Verdana"
-               Size            =   9.75
-               Charset         =   0
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            ForeColor       =   &H00972E0B&
-            Height          =   255
-            Index           =   1
-            Left            =   270
-            TabIndex        =   15
-            Top             =   420
-            Width           =   1185
          End
       End
       Begin VB.Label Label8 
@@ -890,8 +890,6 @@ Dim devuelve As String
 '            If Not AnyadirAFormula(cadSelect, "rcampos.codpropiet = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
             If Not AnyadirAFormula(cadFormula, "{rsocios.codsocio} = " & NumCod) Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rsocios.codsocio = " & NumCod) Then Exit Sub
-        
-        
         Else
             If Not AnyadirAFormula(cadFormula, "{rcampos.codsocio} = " & NumCod & " and isnull({rcampos.fecbajas}) ") Then Exit Sub
             If Not AnyadirAFormula(cadSelect, "rcampos.codsocio = " & NumCod & " and rcampos.fecbajas is null ") Then Exit Sub
@@ -1053,8 +1051,11 @@ Dim devuelve As String
                 Dim vSQL As String
                 ' solo si mem han seleccionado campos
                 If NumCod <> "" Then
-                    vSQL = "El precio por hanegada cultivable es de " & vParamAplic.EurCapSocial & " euros." & vbCrLf & vbCrLf
-                    vSQL = vSQL & "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
+                    '[Monica]07/06/2018:ahora se van a devolver los tres tipos de aportaciones
+                    'vSQL = "El precio por hanegada cultivable es de " & vParamAplic.EurCapSocial & " euros." & vbCrLf & vbCrLf
+                    'vSQL = vSQL & "¿ Desea crear el movimiento de devolución de la cuota obligatoria ?"
+                    
+                    vSQL = "¿ Desea crear los movimientos de devolución de aportaciones ?"
                     If MsgBox(vSQL, vbQuestion + vbYesNo + vbDefaultButton2) = vbYes Then
                         If InsertarMovimientoBajaCampo(cadSelect, Contador) Then
                             MsgBox "Proceso realizado correctamente.", vbExclamation
@@ -1069,10 +1070,15 @@ End Sub
 Private Function InsertarMovimientoBajaCampo(vSelect As String, vCont As Long) As Boolean
 Dim Sql As String
 Dim Sql2 As String
+Dim Sql1 As String
+Dim Rs As ADODB.Recordset
 Dim NumLin As Integer
 Dim vMens As String
 Dim vTipoMov As CTiposMov
-    
+Dim Importe As Currency
+Dim TotalImporte As Currency
+Dim CadValues2 As String
+
     On Error GoTo eInsertarMovimientoBaja
 
     
@@ -1085,21 +1091,49 @@ Dim vTipoMov As CTiposMov
 
             conn.BeginTrans
             ConnConta.BeginTrans
-            
-            Sql = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
-            NumLin = DevuelveValor(Sql)
-            
-            '[Monica]12/03/2018: en la baja de campo la superficie es la cultivable, antes estaba la supcoope
-            Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc ) "
-            Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supculti," & DBSet(txtCodigo(7).Text, "F")
-            Sql2 = Sql2 & ",round(supculti * " & DBSet(vParamAplic.EurCapSocial, "N") & ", 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
-            Sql2 = Sql2 & " where " & vSelect
 
-            conn.Execute Sql & Sql2
+'[Monica]07/06/2018: antes insertabamos en la tabla de movimientos, ahora hay que insertar en raportacion 3 movimientos
+'            Sql = "select max(numlinea) from rsocios_movim where codsocio = " & DBSet(NumCod, "N")
+'            NumLin = DevuelveValor(Sql)
+'
+'            '[Monica]12/03/2018: en la baja de campo la superficie es la cultivable, antes estaba la supcoope
+'            Sql = "insert into rsocios_movim(codsocio,numlinea,codcampo,supcoope,fecmovim,importe,causa,numerodoc ) "
+'            Sql2 = "select codsocio, @NumF:=@Numf + 1, codcampo,supculti," & DBSet(txtCodigo(7).Text, "F")
+'            Sql2 = Sql2 & ",round(supculti * " & DBSet(vParamAplic.EurCapSocial, "N") & ", 2 ) importe," & DBSet(txtCodigo(8).Text, "T") & "," & DBSet(vCont, "N") & " from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
+'            Sql2 = Sql2 & " where " & vSelect
+'
+'            conn.Execute Sql & Sql2
+
+            Sql = "insert into raportacion (codsocio,fecaport,codaport,descripcion,campanya,kilos,importe,intconta,numfactu) values "
+            
+            Sql1 = "select rcampos.codsocio, rcampos.codcampo, rcampos.supculti, rtipoapor.codaport, rtipoapor.preciohda from rcampos, rtipoapor where " & vSelect
+            Set Rs = New ADODB.Recordset
+            Rs.Open Sql1, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+            
+            TotalImporte = 0
+            CadValues2 = ""
+            
+            While Not Rs.EOF
+                Importe = Round2(DBLet(Rs!supculti, "N") * DBLet(Rs!preciohda, "N"), 2)
+                TotalImporte = TotalImporte + Importe
+                
+                CadValues2 = CadValues2 & ",(" & DBSet(Rs!Codsocio, "N") & "," & DBSet(txtCodigo(7).Text, "F") & "," & DBSet(Rs!codaport, "N") & ","
+                CadValues2 = CadValues2 & DBSet(txtCodigo(8).Text, "T") & "," & Year(CDate(txtCodigo(7).Text)) & "," & DBSet(Rs!supculti, "N") & ","
+                CadValues2 = CadValues2 & DBSet(Importe, "N") & ",0," & DBSet(Rs!codcampo, "N") & ")"
+                
+                Rs.MoveNext
+            Wend
+            
+            If CadValues2 <> "" Then conn.Execute Sql & Mid(CadValues2, 2)
+            
+            
             
             ' insertamos en tesoreria y el asiento
             ContabilizadoOk = False
             
+            '[Monica]07/06/2018:añado esto aqui pq lo ha quitado de arriba
+            Sql2 = "select * from raportacion"
+            Sql2 = Sql2 & " where codsocio = " & DBSet(NumCod, "N") & " and numfactu in (" & NumCampo & ") and fecaport = " & DBSet(txtCodigo(7), "F")
             
             Set frmIns = New frmIntTesorPago
             
@@ -1111,9 +1145,12 @@ Dim vTipoMov As CTiposMov
             Set frmIns = Nothing
             
             If ContabilizadoOk Then
-                Sql = "update rsocios_movim set intconta = 1 where (codsocio, numlinea) in ("
-                Sql = Sql & "select codsocio, @NumF:=@Numf + 1 from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
-                Sql = Sql & " where " & vSelect & ")"
+'[Monica]07/06/2018: se marcan como contabilizados
+'                Sql = "update rsocios_movim set intconta = 1 where (codsocio, numlinea) in ("
+'                Sql = Sql & "select codsocio, @NumF:=@Numf + 1 from rcampos, (select @Numf:=" & DBSet(NumLin, "N") & ") bb "
+'                Sql = Sql & " where " & vSelect & ")"
+                Sql = "update raportacion set intconta = 1 where codsocio = " & DBSet(NumCod, "N")
+                Sql = Sql & " and fecaport = " & DBSet(txtCodigo(7).Text, "F")
 
                 conn.Execute Sql
             

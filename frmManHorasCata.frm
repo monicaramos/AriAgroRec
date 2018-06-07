@@ -8,20 +8,42 @@ Begin VB.Form frmManHorasCata
    ClientHeight    =   7980
    ClientLeft      =   195
    ClientTop       =   180
-   ClientWidth     =   18345
+   ClientWidth     =   19770
    Icon            =   "frmManHorasCata.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
    ScaleHeight     =   7980
-   ScaleWidth      =   18345
+   ScaleWidth      =   19770
    StartUpPosition =   2  'CenterScreen
+   Begin VB.TextBox txtAux 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "Verdana"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   330
+      Index           =   13
+      Left            =   10755
+      MaxLength       =   11
+      TabIndex        =   9
+      Tag             =   "Importe Kilómetros|N|S|||horas|importekms|###,##0.00||"
+      Top             =   4590
+      Width           =   810
+   End
    Begin VB.CheckBox chkAux 
       BackColor       =   &H80000005&
       Height          =   255
       Index           =   1
       Left            =   13545
-      TabIndex        =   47
+      TabIndex        =   48
       Tag             =   "Es Horas Capataz|N|N|||horas|escapataz|||"
       Top             =   4620
       Visible         =   0   'False
@@ -44,7 +66,7 @@ Begin VB.Form frmManHorasCata
       Height          =   330
       Index           =   4
       Left            =   1935
-      TabIndex        =   45
+      TabIndex        =   46
       Top             =   6660
       Width           =   510
    End
@@ -108,7 +130,7 @@ Begin VB.Form frmManHorasCata
       Index           =   5
       Left            =   7530
       MaskColor       =   &H00000000&
-      TabIndex        =   44
+      TabIndex        =   45
       ToolTipText     =   "Buscar categoria"
       Top             =   4590
       Visible         =   0   'False
@@ -131,7 +153,7 @@ Begin VB.Form frmManHorasCata
       Height          =   330
       Index           =   11
       Left            =   4005
-      TabIndex        =   42
+      TabIndex        =   43
       Top             =   7425
       Width           =   4785
    End
@@ -152,7 +174,7 @@ Begin VB.Form frmManHorasCata
       Index           =   10
       Left            =   14535
       MaxLength       =   10
-      TabIndex        =   39
+      TabIndex        =   40
       Tag             =   "Nro Parte|N|S|||horas|nroparte|0000000||"
       Top             =   4635
       Width           =   1170
@@ -160,13 +182,13 @@ Begin VB.Form frmManHorasCata
    Begin VB.Frame FrameBotonGnral 
       Height          =   705
       Left            =   90
-      TabIndex        =   36
+      TabIndex        =   37
       Top             =   0
       Width           =   3585
       Begin MSComctlLib.Toolbar Toolbar1 
          Height          =   330
          Left            =   210
-         TabIndex        =   37
+         TabIndex        =   38
          Top             =   180
          Width           =   3135
          _ExtentX        =   5530
@@ -222,13 +244,13 @@ Begin VB.Form frmManHorasCata
    Begin VB.Frame FrameBotonGnral2 
       Height          =   705
       Left            =   3720
-      TabIndex        =   34
+      TabIndex        =   35
       Top             =   0
       Width           =   1545
       Begin MSComctlLib.Toolbar Toolbar2 
          Height          =   330
          Left            =   210
-         TabIndex        =   35
+         TabIndex        =   36
          Top             =   180
          Width           =   1095
          _ExtentX        =   1931
@@ -280,7 +302,7 @@ Begin VB.Form frmManHorasCata
       Index           =   9
       Left            =   11160
       MaxLength       =   11
-      TabIndex        =   9
+      TabIndex        =   10
       Tag             =   "Penalizacion|N|S|||horas|penaliza|###,##0.00||"
       Top             =   4590
       Width           =   810
@@ -321,9 +343,31 @@ Begin VB.Form frmManHorasCata
       ForeColor       =   &H00000000&
       Height          =   1005
       Left            =   9045
-      TabIndex        =   27
+      TabIndex        =   28
       Top             =   6750
-      Width           =   5235
+      Width           =   6765
+      Begin VB.TextBox txtAux2 
+         Alignment       =   1  'Right Justify
+         Appearance      =   0  'Flat
+         BackColor       =   &H80000018&
+         BorderStyle     =   0  'None
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   360
+         Index           =   5
+         Left            =   3375
+         TabIndex        =   49
+         Top             =   495
+         Width           =   1560
+      End
       Begin VB.TextBox txtAux2 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
@@ -341,8 +385,8 @@ Begin VB.Form frmManHorasCata
          EndProperty
          Height          =   360
          Index           =   3
-         Left            =   3420
-         TabIndex        =   32
+         Left            =   4995
+         TabIndex        =   33
          Top             =   495
          Width           =   1560
       End
@@ -364,7 +408,7 @@ Begin VB.Form frmManHorasCata
          Height          =   360
          Index           =   2
          Left            =   1755
-         TabIndex        =   29
+         TabIndex        =   30
          Top             =   495
          Width           =   1560
       End
@@ -386,9 +430,27 @@ Begin VB.Form frmManHorasCata
          Height          =   360
          Index           =   1
          Left            =   135
-         TabIndex        =   28
+         TabIndex        =   29
          Top             =   495
          Width           =   1560
+      End
+      Begin VB.Label Label8 
+         Caption         =   "Kilómetros: "
+         BeginProperty Font 
+            Name            =   "Verdana"
+            Size            =   9.75
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   225
+         Left            =   3375
+         TabIndex        =   50
+         Top             =   225
+         Width           =   1335
       End
       Begin VB.Label Label3 
          Caption         =   "Penalización: "
@@ -403,8 +465,8 @@ Begin VB.Form frmManHorasCata
          EndProperty
          ForeColor       =   &H00000000&
          Height          =   225
-         Left            =   3420
-         TabIndex        =   33
+         Left            =   4995
+         TabIndex        =   34
          Top             =   225
          Width           =   1335
       End
@@ -422,7 +484,7 @@ Begin VB.Form frmManHorasCata
          ForeColor       =   &H00000000&
          Height          =   225
          Left            =   1755
-         TabIndex        =   31
+         TabIndex        =   32
          Top             =   225
          Width           =   1395
       End
@@ -440,7 +502,7 @@ Begin VB.Form frmManHorasCata
          ForeColor       =   &H00000000&
          Height          =   225
          Left            =   180
-         TabIndex        =   30
+         TabIndex        =   31
          Top             =   240
          Width           =   945
       End
@@ -462,7 +524,7 @@ Begin VB.Form frmManHorasCata
       Height          =   330
       Index           =   7
       Left            =   3585
-      TabIndex        =   25
+      TabIndex        =   26
       Top             =   4590
       Visible         =   0   'False
       Width           =   1815
@@ -483,7 +545,7 @@ Begin VB.Form frmManHorasCata
       Index           =   4
       Left            =   3345
       MaskColor       =   &H00000000&
-      TabIndex        =   24
+      TabIndex        =   25
       ToolTipText     =   "Buscar trabajador"
       Top             =   4590
       Visible         =   0   'False
@@ -506,7 +568,7 @@ Begin VB.Form frmManHorasCata
       Height          =   330
       Index           =   6
       Left            =   4005
-      TabIndex        =   23
+      TabIndex        =   24
       Top             =   6660
       Width           =   4785
    End
@@ -526,7 +588,7 @@ Begin VB.Form frmManHorasCata
       Index           =   3
       Left            =   2580
       MaskColor       =   &H00000000&
-      TabIndex        =   22
+      TabIndex        =   23
       ToolTipText     =   "Buscar variedad"
       Top             =   4560
       Visible         =   0   'False
@@ -592,7 +654,7 @@ Begin VB.Form frmManHorasCata
       Index           =   2
       Left            =   13320
       MaskColor       =   &H00000000&
-      TabIndex        =   21
+      TabIndex        =   22
       ToolTipText     =   "Buscar fecha"
       Top             =   4590
       Visible         =   0   'False
@@ -614,7 +676,7 @@ Begin VB.Form frmManHorasCata
       Index           =   1
       Left            =   6375
       MaskColor       =   &H00000000&
-      TabIndex        =   20
+      TabIndex        =   21
       ToolTipText     =   "Buscar capataz"
       Top             =   4560
       Visible         =   0   'False
@@ -637,7 +699,7 @@ Begin VB.Form frmManHorasCata
       Index           =   5
       Left            =   12060
       MaxLength       =   10
-      TabIndex        =   10
+      TabIndex        =   11
       Tag             =   "Fecha Recibo|F|S|||horas|fecharec|dd/mm/yyyy||"
       Top             =   4590
       Width           =   1170
@@ -647,7 +709,7 @@ Begin VB.Form frmManHorasCata
       Height          =   255
       Index           =   0
       Left            =   14205
-      TabIndex        =   11
+      TabIndex        =   12
       Tag             =   "Int.Contable|N|N|||horas|intconta|||"
       Top             =   4620
       Visible         =   0   'False
@@ -692,7 +754,7 @@ Begin VB.Form frmManHorasCata
       Height          =   330
       Index           =   0
       Left            =   4005
-      TabIndex        =   19
+      TabIndex        =   20
       Top             =   7035
       Width           =   4785
    End
@@ -712,7 +774,7 @@ Begin VB.Form frmManHorasCata
       Index           =   0
       Left            =   1410
       MaskColor       =   &H00000000&
-      TabIndex        =   18
+      TabIndex        =   19
       ToolTipText     =   "Buscar fecha"
       Top             =   4530
       Visible         =   0   'False
@@ -752,8 +814,8 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   15885
-      TabIndex        =   12
+      Left            =   17280
+      TabIndex        =   13
       Top             =   7185
       Visible         =   0   'False
       Width           =   1035
@@ -771,8 +833,8 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   17055
-      TabIndex        =   14
+      Left            =   18450
+      TabIndex        =   15
       Top             =   7200
       Visible         =   0   'False
       Width           =   1095
@@ -824,10 +886,10 @@ Begin VB.Form frmManHorasCata
       Bindings        =   "frmManHorasCata.frx":000C
       Height          =   5265
       Left            =   90
-      TabIndex        =   16
+      TabIndex        =   17
       Top             =   780
-      Width           =   18105
-      _ExtentX        =   31935
+      Width           =   19505
+      _ExtentX        =   34396
       _ExtentY        =   9287
       _Version        =   393216
       AllowUpdate     =   0   'False
@@ -902,8 +964,8 @@ Begin VB.Form frmManHorasCata
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   17055
-      TabIndex        =   17
+      Left            =   18450
+      TabIndex        =   18
       Top             =   7200
       Visible         =   0   'False
       Width           =   1095
@@ -912,7 +974,7 @@ Begin VB.Form frmManHorasCata
       Height          =   615
       Index           =   1
       Left            =   60
-      TabIndex        =   13
+      TabIndex        =   14
       Top             =   7200
       Width           =   2385
       Begin VB.Label lblIndicador 
@@ -929,7 +991,7 @@ Begin VB.Form frmManHorasCata
          EndProperty
          Height          =   255
          Left            =   40
-         TabIndex        =   15
+         TabIndex        =   16
          Top             =   240
          Width           =   2295
       End
@@ -989,15 +1051,15 @@ Begin VB.Form frmManHorasCata
       Index           =   8
       Left            =   13980
       MaxLength       =   6
-      TabIndex        =   26
+      TabIndex        =   27
       Tag             =   "Código|N|N|0|99|horas|codalmac|00|S|"
       Top             =   4080
       Width           =   465
    End
    Begin MSComctlLib.Toolbar ToolbarAyuda 
       Height          =   330
-      Left            =   17640
-      TabIndex        =   38
+      Left            =   19170
+      TabIndex        =   39
       Top             =   180
       Width           =   405
       _ExtentX        =   714
@@ -1027,7 +1089,7 @@ Begin VB.Form frmManHorasCata
       ForeColor       =   &H00000000&
       Height          =   270
       Left            =   135
-      TabIndex        =   46
+      TabIndex        =   47
       Top             =   6705
       Width           =   2025
    End
@@ -1045,7 +1107,7 @@ Begin VB.Form frmManHorasCata
       ForeColor       =   &H00000000&
       Height          =   270
       Left            =   2880
-      TabIndex        =   43
+      TabIndex        =   44
       Top             =   7470
       Width           =   945
    End
@@ -1063,7 +1125,7 @@ Begin VB.Form frmManHorasCata
       ForeColor       =   &H00000000&
       Height          =   225
       Left            =   2880
-      TabIndex        =   41
+      TabIndex        =   42
       Top             =   7110
       Width           =   945
    End
@@ -1081,7 +1143,7 @@ Begin VB.Form frmManHorasCata
       ForeColor       =   &H00000000&
       Height          =   225
       Left            =   2880
-      TabIndex        =   40
+      TabIndex        =   41
       Top             =   6705
       Width           =   945
    End
@@ -1387,6 +1449,8 @@ Private Sub BotonAnyadir()
     txtAux(3).Text = 0
     txtAux(4).Text = 0
     txtAux(9).Text = 0
+    '[Monica]07/06/2018: importe kms
+    txtAux(13).Text = 0
     
     LLamaLineas anc, 3 'Pone el form en Modo=3, Insertar
        
@@ -1411,6 +1475,9 @@ Private Sub BotonBuscar()
     chkAux(0).Value = 0
     chkAux(1).Value = 0
     Me.txtAux2(0).Text = ""
+    Me.txtAux2(1).Text = ""
+    Me.txtAux2(2).Text = ""
+    Me.txtAux2(5).Text = ""
     Me.txtAux2(6).Text = ""
     Me.txtAux2(7).Text = ""
     
@@ -1456,14 +1523,13 @@ Private Sub BotonModificar()
     
     txtAux(2).Text = DataGrid1.Columns(11).Text 'importe
     txtAux(3).Text = DataGrid1.Columns(12).Text 'complemento
+    txtAux(13).Text = DataGrid1.Columns(13).Text 'importe kms
     txtAux(4).Text = DataGrid1.Columns(9).Text 'horas
-    txtAux(9).Text = DataGrid1.Columns(13).Text 'penalizacion
-    txtAux(5).Text = DataGrid1.Columns(14).Text 'fecharecep
+    txtAux(9).Text = DataGrid1.Columns(14).Text 'penalizacion
+    txtAux(5).Text = DataGrid1.Columns(15).Text 'fecharecep
     
     Me.chkAux(0).Value = Me.adodc1.Recordset!intconta
     Me.chkAux(1).Value = Me.adodc1.Recordset!escapataz
-    
-   
     
 
     LLamaLineas anc, 4 'Pone el form en Modo=4, Modificar
@@ -1835,7 +1901,7 @@ Private Sub Form_Load()
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT horas.fechahora, horas.codvarie, variedades.nomvarie, horas.codtraba, straba.nomtraba, "
     CadenaConsulta = CadenaConsulta & " horas.codcapat, rcapataz.nomcapat, horas.codcateg, rcategorias.nomcateg, "
-    CadenaConsulta = CadenaConsulta & " horas.horasdia, horas.kilos, horas.importe, horas.compleme, horas.penaliza, "
+    CadenaConsulta = CadenaConsulta & " horas.horasdia, horas.kilos, horas.importe, horas.compleme, horas.importekms, horas.penaliza, "
     CadenaConsulta = CadenaConsulta & " horas.fecharec, "
     CadenaConsulta = CadenaConsulta & " horas.escapataz,  IF(escapataz=1,'*','') as escapa, "
     CadenaConsulta = CadenaConsulta & " horas.intconta,  IF(intconta=1,'*','') as intcon, "
@@ -2012,6 +2078,7 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = tots & "S|txtAux(4)|T|Horas|800|;S|txtAux(12)|T|Kilos|1200|;"
     tots = tots & "S|txtAux(2)|T|Importe|1200|;"
     tots = tots & "S|txtAux(3)|T|Complemento|1500|;"
+    tots = tots & "S|txtAux(13)|T|Kilómetros(€)|1400|;"
     tots = tots & "S|txtAux(9)|T|Penalización|1400|;"
     tots = tots & "S|txtAux(5)|T|F.Recibo|1400|;S|btnBuscar(2)|B||195|;N||||0|;S|chkAux(1)|CB|Cap|460|;N||||0|;S|chkAux(0)|CB|IC|360|;N|txtAux(8)|T|Almacen|800|;"
     tots = tots & "S|txtAux(10)|T|Nro.Parte|1100|;"
@@ -2099,7 +2166,7 @@ Dim Tipo As String
             '[Monica]28/08/2013: comprobamos que la fecha esté en la campaña
             PonerFormatoFecha txtAux(Index), True
             
-        Case 2, 3, 9 'importe, complemento
+        Case 2, 3, 9, 13 'importe, complemento, importekms
             PonerFormatoDecimal txtAux(Index), 3
     
         Case 4 ' horas
@@ -2273,14 +2340,6 @@ End Sub
 
 
 
-'' ### [DavidV] 26/04/2006: Activar/desactivar la rueda del ratón.
-'Private Sub DataGrid1_GotFocus()
-'  WheelHook DataGrid1
-'End Sub
-'Private Sub DataGrid1_Lostfocus()
-'  WheelUnHook
-'End Sub
-
 'Private Sub txtAux_KeyPress(Index As Integer, KeyAscii As Integer)
 '    KEYpress KeyAscii
 'End Sub
@@ -2415,6 +2474,9 @@ Dim Sql As String
     Sql = "update horas set "
     Sql = Sql & " importe = " & DBSet(ImporteSinFormato(txtAux(2).Text), "N")
     Sql = Sql & ", compleme = " & DBSet(ImporteSinFormato(txtAux(3).Text), "N", "S")
+    '[Monica]07/06/2018: importe de kms
+    Sql = Sql & ", importekms = " & DBSet(ImporteSinFormato(txtAux(13).Text), "N", "S")
+    
     Sql = Sql & ", horasdia = " & DBSet(ImporteSinFormato(txtAux(4).Text), "N")
     Sql = Sql & ", penaliza = " & DBSet(ImporteSinFormato(txtAux(9).Text), "N", "S")
     Sql = Sql & ", fecharec = " & DBSet(txtAux(5).Text, "F", "S")
@@ -2440,13 +2502,14 @@ Private Sub CalcularTotales(cadena As String)
 Dim Importe  As Currency
 Dim Compleme As Currency
 Dim Penaliza As Currency
+Dim ImporteKms As Currency
 
 Dim Rs As ADODB.Recordset
 Dim Sql As String
 
     On Error Resume Next
     
-    Sql = "select sum(importe) importe , sum(compleme) compleme ,sum(penaliza) penaliza from (" & cadena & ") aaaaa"
+    Sql = "select sum(importe) importe , sum(coalesce(compleme,0)) compleme ,sum(coalesce(penaliza,0)) penaliza, sum(coalesce(importekms,0)) from (" & cadena & ") aaaaa"
     
     Set Rs = New ADODB.Recordset
     Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -2456,6 +2519,7 @@ Dim Sql As String
     txtAux2(1).Text = ""
     txtAux2(2).Text = ""
     txtAux2(3).Text = ""
+    txtAux2(5).Text = ""
     
     If TotalRegistrosConsulta(cadena) = 0 Then Exit Sub
     
@@ -2463,10 +2527,13 @@ Dim Sql As String
         If Rs.Fields(0).Value <> 0 Then Importe = DBLet(Rs.Fields(0).Value, "N") 'Solo es para saber que hay registros que mostrar
         If Rs.Fields(1).Value <> 0 Then Compleme = DBLet(Rs.Fields(1).Value, "N") 'Solo es para saber que hay registros que mostrar
         If Rs.Fields(2).Value <> 0 Then Penaliza = DBLet(Rs.Fields(2).Value, "N") 'Solo es para saber que hay registros que mostrar
+        '[Monica]07/06/2018: importekms
+        If Rs.Fields(3).Value <> 0 Then ImporteKms = DBLet(Rs.Fields(3).Value, "N") 'Solo es para saber que hay registros que mostrar
     
         txtAux2(1).Text = Format(Importe, "###,###,##0.00")
         txtAux2(2).Text = Format(Compleme, "###,###,##0.00")
         txtAux2(3).Text = Format(Penaliza, "###,###,##0.00")
+        txtAux2(5).Text = Format(ImporteKms, "###,###,##0.00")
     End If
     Rs.Close
     Set Rs = Nothing

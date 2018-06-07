@@ -303,17 +303,17 @@ Private Sub KEYpress(KeyAscii As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-Dim SQL As String
+Dim Sql As String
 Dim I As Byte
 Dim cadWHERE As String
 
     If Not DatosOK Then Exit Sub
              
-    SQL = "SELECT count(*)" & _
+    Sql = "SELECT count(*)" & _
           " FROM (" & CadTag & ") aaaa "
           
              
-    If RegistrosAListar(SQL) = 0 Then
+    If RegistrosAListar(Sql) = 0 Then
         MsgBox "No existen datos a contabilizar.", vbExclamation
         Exit Sub
     End If
@@ -516,7 +516,7 @@ End Sub
 
 Private Sub ContabilizarPagos(cadWHERE As String)
 'Contabiliza Facturas de Clientes o de Proveedores
-Dim SQL As String
+Dim Sql As String
 Dim B As Boolean
 Dim tmpErrores As Boolean 'Indica si se creo correctamente la tabla de errores
 Dim CCoste As String
@@ -524,11 +524,11 @@ Dim cadTabla As String
 Dim FFin As Date
 Dim cadMen As String
 
-    SQL = "CONTES" 'contabilizar tesoreria
+    Sql = "CONTES" 'contabilizar tesoreria
 
     'Bloquear para que nadie mas pueda contabilizar
-    DesBloqueoManual (SQL)
-    If Not BloqueoManual(SQL, "1") Then
+    DesBloqueoManual (Sql)
+    If Not BloqueoManual(Sql, "1") Then
         MsgBox "No se pueden Contabilizar Pagos. Hay otro usuario contabilizándolo.", vbExclamation
         Screen.MousePointer = vbDefault
         Exit Sub
@@ -614,14 +614,14 @@ End Function
 
 Private Function ActualizarCobros(cadWHERE As String, cadErr As String) As Boolean
 'Poner el movimiento como contabilizada
-Dim SQL As String
+Dim Sql As String
 
     On Error GoTo EActualizar
     
-    SQL = "UPDATE segpoliza SET inttesor=1 "
-    SQL = SQL & " WHERE " & cadWHERE
+    Sql = "UPDATE segpoliza SET inttesor=1 "
+    Sql = Sql & " WHERE " & cadWHERE
 
-    conn.Execute SQL
+    conn.Execute Sql
     
 EActualizar:
     If Err.Number <> 0 Then
