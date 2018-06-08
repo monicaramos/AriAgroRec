@@ -266,6 +266,8 @@ Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en
 
 Public Campos As String
 
+Public EsAlta  As Boolean
+
 Private Conexion As Byte
 '1.- Conexión a BD Ariges  2.- Conexión a BD Conta
 
@@ -554,6 +556,7 @@ Dim cadMen As String
     Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble de Socio ..."
     
     Dim cta As String
+    
     cta = "1501" & Format(RecuperaValor(NumCod, 2), String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0"))
     
     'Obtener los dias de pago de la tabla de parametros: spara1
@@ -570,7 +573,7 @@ Dim cadMen As String
     Me.lblProgres(0).Caption = "Contabilizar Pago: "
     Me.lblProgres(1).Caption = "Insertando Registro en Tesorería..."
     cadMen = "Insertando en Tesoreria"
-    B = InsertarEnTesoreriaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos)
+    B = InsertarEnTesoreriaAltaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos, EsAlta)
     IncrementarProgres Me.Pb1, 80
     Me.Refresh
     DoEvents
