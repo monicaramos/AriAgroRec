@@ -13837,7 +13837,7 @@ End Function
 
 
 
-Public Function InsertarEnTesoreriaAltaBajaCampo(cadWHERE As String, MenError As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String, Campos As String, EsAlta) As Boolean
+Public Function InsertarEnTesoreriaAltaBajaCampo(cadWHERE As String, MenError As String, Fra As String, fecfactu As String, ForpaPosi As String, CtaBanco As String, Socio As String, Campos As String, esAlta) As Boolean
 'Guarda datos de Tesoreria en tablas: spagop o scobro dependiendo del signo de la factura
 Dim B As Boolean
 Dim Sql As String
@@ -13866,6 +13866,7 @@ Dim CadValuesVarias As String
 Dim SqlGastos As String
 Dim J As Integer
 Dim CtaSocio As String
+Dim CtaSocio1 As String
 Dim cadena As String
 Dim vSoc As cSocio
 
@@ -13877,8 +13878,15 @@ Dim vSoc As cSocio
     
     Sql = "select sum(importe) from (" & cadWHERE & ") aa"
     
-    If Not EsAlta Then
+    If Not esAlta Then
         TotalTesor = DevuelveValor(Sql) * (-1)
+    Else
+        Sql = "select sum(importe) from (" & cadWHERE & " and codaport = 1 " & ") aa"
+        TotalTesor = DevuelveValor(Sql)
+    
+        Sql = "select sum(importe) from (" & cadWHERE & " and codaport > 1 " & ") aa"
+        TotalTesor1 = DevuelveValor(Sql)
+    
     End If
     
     
@@ -13900,13 +13908,19 @@ Dim vSoc As cSocio
                     'Obtener los dias de pago de la tabla de parametros: spara1
                     cadena = String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0")
                     'La raiz de aportacion está fija
-                    CtaSocio = "1501" & Format(Socio, cadena)
-                
+                    CtaSocio = DevuelveDesdeBDNew(cAgro, "rtipoapor", "raizsocio", "codaport", 1, "N") & Format(Socio, cadena)
+                    CtaSocio1 = DevuelveDesdeBDNew(cAgro, "rtipoapor", "raizsocio", "codaport", 2, "N") & Format(Socio, cadena)
                     
                     '[Monica]27/01/2012: Cogemos el nro de factura recibido si lo hay, antes: letraser & "-" & numfactu
                     '[Monica]03/07/2013: añado trim(codmacta)
                     CadValuesAux2 = "("
-                    If vParamAplic.ContabilidadNueva Then CadValuesAux2 = CadValuesAux2 & DBSet(SerieFraPro, "T") & ","
+                    
+                    If Not esAlta Then
+                        If vParamAplic.ContabilidadNueva Then CadValuesAux2 = CadValuesAux2 & DBSet(SerieFraPro, "T") & ","
+                    Else
+                        CadValuesAux2 = CadValuesAux2 & DBSet("X", "T") & ","
+                    End If
+                    
                     CadValuesAux2 = CadValuesAux2 & "'" & Trim(CtaSocio) & "', " & DBSet(Fra, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
                     
                       'Primer Vencimiento
@@ -13946,7 +13960,137 @@ Dim vSoc As cSocio
                             CadValues2 = CadValues2 & DBSet(vSoc.Digcontrol, "T", "S") & "," & DBSet(vSoc.CuentaBan, "T", "S") & ","
                       End If
                 
-                      Sql = "Pago Capital Social Campos " & Fra & "-" & Format(fecfactu, "dd/mm/yyyy")
+                      Sql = "Aportaciones Campos " & Fra & "-" & Format(fecfactu, "dd/mm/yyyy")
+                        
+                      CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "',"
+                    
+                      Sql = "Campos: " & Campos
+                      CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "'" '),"
+                      
+                      If vParamAplic.ContabilidadNueva Then
+                            vvIban = MiFormat(vSoc.IBAN, "") & MiFormat(vSoc.Banco, "0000") & MiFormat(vSoc.Sucursal, "0000") & MiFormat(vSoc.Digcontrol, "00") & MiFormat(vSoc.CuentaBan, "0000000000")
+                            
+                            CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
+                            'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
+                            CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
+                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                            If esAlta Then
+                                CadValues2 = CadValues2 & "1),"
+                            Else
+                                CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
+                            End If
+                      Else
+                            '[Monica]22/11/2013: Tema iban
+                            If vEmpresa.HayNorma19_34Nueva = 1 Then
+                                CadValues2 = CadValues2 & ", " & DBSet(vSoc.IBAN, "T", "S") & "),"
+                            Else
+                                CadValues2 = CadValues2 & "),"
+                            End If
+                      
+                      End If
+                      'Resto Vencimientos
+                      '--------------------------------------------------------------------
+                      UltimoVto = I
+                      For J = 2 To rsVenci!numerove
+                          UltimoVto = I + J - 1
+                         'FECHA Resto Vencimientos
+                          '==== Modificado: Laura 23/01/2007
+                          'FecVenci = FecVenci + DBSet(rsVenci!restoven, "N")
+                          FecVenci = DateAdd("d", DBLet(rsVenci!restoven, "N"), FecVenci)
+                          '==================================================
+        
+                          CadValues2 = CadValues2 & CadValuesAux2 & UltimoVto 'i
+                          CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
+        
+                          'IMPORTE Resto de Vendimientos
+                          ImpVenci = Round(TotalTesor / rsVenci!numerove, 2)
+        
+                          CadValues2 = CadValues2 & DBSet(ImpVenci, "N") & "," & DBSet(CtaBanco, "T") & ","
+                          
+                          If Not vParamAplic.ContabilidadNueva Then
+                                'David. Para que ponga la cuenta bancaria (SI LA tiene)
+                                CadValues2 = CadValues2 & DBSet(vSoc.Banco, "T", "S") & "," & DBSet(vSoc.Sucursal, "T", "S") & ","
+                                CadValues2 = CadValues2 & DBSet(vSoc.Digcontrol, "T", "S") & "," & DBSet(vSoc.CuentaBan, "T", "S") & ","
+                          End If
+                          
+                          Sql = "Aportaciones Campos " & FactuRec & "-" & Format(fecfactu, "dd/mm/yyyy")
+                            
+                          CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "',"
+                        
+                          Sql = "Campos: " & Campos
+                          CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "'" '),"
+                          
+                          If vParamAplic.ContabilidadNueva Then
+                                
+                                vvIban = MiFormat(vSoc.IBAN, "") & MiFormat(vSoc.Banco, "0000") & MiFormat(vSoc.Sucursal, "0000") & MiFormat(vSoc.Digcontrol, "00") & MiFormat(vSoc.CuentaBan, "0000000000")
+                                
+                                CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
+                                'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
+                                CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
+                                CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                                
+                                If esAlta Then
+                                    CadValues2 = CadValues2 & "1),"
+                                Else
+                                    CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
+                                End If
+                          Else
+                                If esAlta Then
+                                    CadValues2 = CadValues2 & ",1),"
+                                Else
+                                    '[Monica]22/11/2013: Tema iban
+                                    If vEmpresa.HayNorma19_34Nueva = 1 Then
+                                        CadValues2 = CadValues2 & ", " & DBSet(vSoc.IBAN, "T", "S") & "),"
+                                    Else
+                                        CadValues2 = CadValues2 & "),"
+                                    End If
+                                End If
+                          End If
+                      Next J
+                      
+                    
+                    If esAlta Then
+'*****empieza esalta
+                      CadValuesAux2 = "("
+                      CadValuesAux2 = CadValuesAux2 & DBSet("X", "T") & ","
+                      CadValuesAux2 = CadValuesAux2 & "'" & Trim(CtaSocio1) & "', " & DBSet(Fra, "T") & ", '" & Format(fecfactu, FormatoFecha) & "', "
+                     
+                      
+                      I = I + 1
+                      'FECHA VTO
+                      FecVenci = CDate(fecfactu)
+                      '=== Modificado: Laura 23/01/2007
+        '              FecVenci = FecVenci + CByte(DBLet(rsVenci!primerve, "N"))
+                      FecVenci = DateAdd("d", DBLet(rsVenci!primerve, "N"), FecVenci)
+                      '==================================
+                      'comprobar si tiene dias de pago y obtener la fecha del vencimiento correcta
+                      
+                      FecVenci1 = FecVenci
+                    
+                      CadValues2 = CadValues2 & CadValuesAux2 & I
+                      CadValues2 = CadValues2 & ", " & ForpaPosi & ", '" & Format(FecVenci, FormatoFecha) & "', "
+                      
+                      
+                      'IMPORTE del Vencimiento
+                      If rsVenci!numerove = 1 Then
+                          ImpVenci = TotalTesor1
+                      Else
+                          ImpVenci = Round(TotalTesor1 / rsVenci!numerove, 2)
+                          'Comprobar que la suma de los vencimientos cuadra con el total de la factura
+                          If ImpVenci * rsVenci!numerove <> TotalTesor1 Then
+                              ImpVenci = Round(ImpVenci + (TotalTesor1 - ImpVenci * rsVenci!numerove), 2)
+                          End If
+                      End If
+                      
+                      CadValues2 = CadValues2 & DBSet(ImpVenci, "N") & ", " & DBSet(CtaBanco, "T") & ","
+                
+                      If Not vParamAplic.ContabilidadNueva Then
+                            'David. Para que ponga la cuenta bancaria (SI LA tiene)
+                            CadValues2 = CadValues2 & DBSet(vSoc.Banco, "T", "S") & "," & DBSet(vSoc.Sucursal, "T", "S") & ","
+                            CadValues2 = CadValues2 & DBSet(vSoc.Digcontrol, "T", "S") & "," & DBSet(vSoc.CuentaBan, "T", "S") & ","
+                      End If
+                
+                      Sql = "Aportaciones Campos " & Fra & "-" & Format(fecfactu, "dd/mm/yyyy")
                         
                       CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "',"
                     
@@ -13960,7 +14104,13 @@ Dim vSoc As cSocio
                             CadValues2 = CadValues2 & "," & DBSet(vvIban, "T") & ","
                             'nomprove, domprove, pobprove, cpprove, proprove, nifprove, codpais
                             CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
-                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES'," & ValorNulo & "," & ValorNulo & ",0),"
+                            CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
+                            
+                            If esAlta Then
+                                CadValues2 = CadValues2 & "1),"
+                            Else
+                                CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
+                            End If
                             
                       Else
                             '[Monica]22/11/2013: Tema iban
@@ -13996,7 +14146,7 @@ Dim vSoc As cSocio
                                 CadValues2 = CadValues2 & DBSet(vSoc.Digcontrol, "T", "S") & "," & DBSet(vSoc.CuentaBan, "T", "S") & ","
                           End If
                           
-                          Sql = "Pago Capital Social Campos " & FactuRec & "-" & Format(fecfactu, "dd/mm/yyyy")
+                          Sql = "Aportaciones Campos " & FactuRec & "-" & Format(fecfactu, "dd/mm/yyyy")
                             
                           CadValues2 = CadValues2 & "'" & DevNombreSQL(Sql) & "',"
                         
@@ -14012,13 +14162,13 @@ Dim vSoc As cSocio
                                 CadValues2 = CadValues2 & DBSet(vSoc.Nombre, "T") & "," & DBSet(vSoc.Direccion, "T") & "," & DBSet(vSoc.Poblacion, "T") & "," & DBSet(vSoc.CPostal, "T") & ","
                                 CadValues2 = CadValues2 & DBSet(vSoc.Provincia, "T") & "," & DBSet(vSoc.nif, "T") & ",'ES',"
                                 
-                                If EsAlta Then
+                                If esAlta Then
                                     CadValues2 = CadValues2 & "1),"
                                 Else
                                     CadValues2 = CadValues2 & ValorNulo & "," & ValorNulo & ",0),"
                                 End If
                           Else
-                                If EsAlta Then
+                                If esAlta Then
                                     CadValues2 = CadValues2 & ",1),"
                                 Else
                                     '[Monica]22/11/2013: Tema iban
@@ -14030,18 +14180,23 @@ Dim vSoc As cSocio
                                 End If
                           End If
                       Next J
-                      
+'*****acaba esalta
+                    End If
+                    
+                    
+                    
+                    
                     If CadValues2 <> "" Then
                         CadValues2 = Mid(CadValues2, 1, Len(CadValues2) - 1)
                     
                         'Insertamos en la tabla spagop de la CONTA
                         'David. Cuenta bancaria y descripcion textos
-                        If EsAlta Then
+                        If esAlta Then
                             If vParamAplic.ContabilidadNueva Then
                                 Sql = "INSERT INTO cobros (numserie, codmacta, numfactu, fecfactu, numorden,  codforpa, fecvenci, impvenci, "
                                 Sql = Sql & "ctabanc1, "
                                 Sql = Sql & " text33csb, text41csb, iban, " ') "
-                                Sql = Sql & "nomclien, domclien, pobclien, cpclien, proclien, nifclien, codpais, agente, "
+                                Sql = Sql & "nomclien, domclien, pobclien, cpclien, proclien, nifclien, codpais, agente "
                                 Sql = Sql & ") "
                             
                             Else

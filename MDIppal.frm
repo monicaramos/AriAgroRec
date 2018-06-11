@@ -21,6 +21,7 @@ Begin VB.MDIForm MDIppal
       _ExtentX        =   21378
       _ExtentY        =   635
       ButtonWidth     =   609
+      ButtonHeight    =   582
       Appearance      =   1
       Style           =   1
       _Version        =   393216
@@ -142,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "14:15"
+            TextSave        =   "19:04"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 

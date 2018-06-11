@@ -1086,6 +1086,8 @@ Public Sub SubmnC_RecoleccionG_Aport_Click(Index As Integer)
                 'Construc ("Certificado de aportaciones")
                 If vParamAplic.Cooperativa = 14 Then ' Bolbaite
                     AbrirListadoAPOR (15)
+                ElseIf vParamAplic.Cooperativa = 16 Then ' Coopic
+                    AbrirListadoAPOR (18)
                 Else
                     frmAPOListados.OpcionListado = 3
                     frmAPOListados.Show vbModal
@@ -1260,10 +1262,10 @@ Dim I As Integer
     '[Monica]18/01/2012: bloqueamos todo lo de aportaciones que no sea el mantenimiento para Quatretonda
     MDIppal.mnE_Aport(1).Enabled = (vParamAplic.Cooperativa <> 7)
     MDIppal.mnE_Aport(1).visible = (vParamAplic.Cooperativa <> 7)
-    MDIppal.mnE_Aport(4).Enabled = (vParamAplic.Cooperativa <> 7)
-    MDIppal.mnE_Aport(4).visible = (vParamAplic.Cooperativa <> 7)
-    MDIppal.mnE_Aport(5).Enabled = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 14)
-    MDIppal.mnE_Aport(5).visible = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 14)
+    MDIppal.mnE_Aport(4).Enabled = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 16)
+    MDIppal.mnE_Aport(4).visible = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 16)
+    MDIppal.mnE_Aport(5).Enabled = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 14) And (vParamAplic.Cooperativa <> 16)
+    MDIppal.mnE_Aport(5).visible = (vParamAplic.Cooperativa <> 7) And (vParamAplic.Cooperativa <> 14) And (vParamAplic.Cooperativa <> 16)
     MDIppal.mnE_Aport(6).Enabled = (vParamAplic.Cooperativa <> 7)
     MDIppal.mnE_Aport(6).visible = (vParamAplic.Cooperativa <> 7)
     MDIppal.mnE_Aport(7).Enabled = (vParamAplic.Cooperativa = 14)

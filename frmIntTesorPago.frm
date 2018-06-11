@@ -266,7 +266,7 @@ Public CadTag As String 'Cadena con el Tag del campo que se va a poner en D/H en
 
 Public Campos As String
 
-Public EsAlta  As Boolean
+Public esAlta  As Boolean
 
 Private Conexion As Byte
 '1.- Conexión a BD Ariges  2.- Conexión a BD Conta
@@ -366,7 +366,7 @@ Dim List As Collection
     Pb1.visible = False
     
     'Esto se consigue poneinedo el cancel en el opcion k corresponda
-    Me.cmdCancel.Cancel = True
+    Me.cmdcancel.Cancel = True
 '   Me.Width = w + 70
 '   Me.Height = h + 350
 End Sub
@@ -556,12 +556,31 @@ Dim cadMen As String
     Me.lblProgres(1).Caption = "Comprobando Cuenta Ctble de Socio ..."
     
     Dim cta As String
+    Dim Raiz As String
     
-    cta = "1501" & Format(RecuperaValor(NumCod, 2), String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0"))
-    
+    Raiz = DevuelveDesdeBDNew(cAgro, "rtipoapor", "raizsocio", "codaport", 1, "N")
+    cta = Raiz & Format(RecuperaValor(NumCod, 2), String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0"))
     'Obtener los dias de pago de la tabla de parametros: spara1
     B = ComprobarCtaContable_new("", 15, , vParamAplic.Seccionhorto, cta)
-    IncrementarProgres Me.Pb1, 20
+    IncrementarProgres Me.Pb1, 10
+    Me.Refresh
+    DoEvents
+    If Not B Then Exit Sub
+    
+    Raiz = DevuelveDesdeBDNew(cAgro, "rtipoapor", "raizsocio", "codaport", 2, "N")
+    cta = Raiz & Format(RecuperaValor(NumCod, 2), String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0"))
+    'Obtener los dias de pago de la tabla de parametros: spara1
+    B = ComprobarCtaContable_new("", 15, , vParamAplic.Seccionhorto, cta)
+    IncrementarProgres Me.Pb1, 10
+    Me.Refresh
+    DoEvents
+    If Not B Then Exit Sub
+    
+    Raiz = DevuelveDesdeBDNew(cAgro, "rtipoapor", "raizsocio", "codaport", 3, "N")
+    cta = Raiz & Format(RecuperaValor(NumCod, 2), String(vEmpresa.DigitosUltimoNivel - vEmpresa.DigitosNivelAnterior, "0"))
+    'Obtener los dias de pago de la tabla de parametros: spara1
+    B = ComprobarCtaContable_new("", 15, , vParamAplic.Seccionhorto, cta)
+    IncrementarProgres Me.Pb1, 10
     Me.Refresh
     DoEvents
     If Not B Then Exit Sub
@@ -573,7 +592,7 @@ Dim cadMen As String
     Me.lblProgres(0).Caption = "Contabilizar Pago: "
     Me.lblProgres(1).Caption = "Insertando Registro en Tesorería..."
     cadMen = "Insertando en Tesoreria"
-    B = InsertarEnTesoreriaAltaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos, EsAlta)
+    B = InsertarEnTesoreriaAltaBajaCampo(CadTag, cadMen, RecuperaValor(NumCod, 3), RecuperaValor(NumCod, 1), txtCodigo(3).Text, txtCodigo(4).Text, RecuperaValor(NumCod, 2), Campos, esAlta)
     IncrementarProgres Me.Pb1, 80
     Me.Refresh
     DoEvents

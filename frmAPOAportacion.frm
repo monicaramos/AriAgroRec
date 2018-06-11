@@ -1068,6 +1068,11 @@ Dim temp As Boolean
     Sql = Sql & vbCrLf & "Socio: " & adodc1.Recordset.Fields(0) & " " & adodc1.Recordset.Fields(1)
     Sql = Sql & vbCrLf & "Fecha: " & adodc1.Recordset.Fields(2)
     Sql = Sql & vbCrLf & "Tipo Aportación: " & adodc1.Recordset.Fields(3) & " " & adodc1.Recordset.Fields(4)
+    '[Monica]11/06/2018:
+    If vParamAplic.Cooperativa = 16 Then
+        Sql = Sql & vbCrLf & "Campo: " & adodc1.Recordset.Fields(6)
+    End If
+        
     
     
     If MsgBox(Sql, vbQuestion + vbYesNo) = vbYes Then
@@ -1076,6 +1081,7 @@ Dim temp As Boolean
         Sql = "Delete from raportacion where codsocio=" & adodc1.Recordset!Codsocio
         Sql = Sql & " and fecaport = " & DBSet(adodc1.Recordset!fecaport, "F")
         Sql = Sql & " and codaport = " & DBLet(adodc1.Recordset!Codaport, "N")
+        Sql = Sql & " and numfactu = " & DBLet(adodc1.Recordset!numfactu, "N")
         
         conn.Execute Sql
         CargaGrid CadB
@@ -1355,7 +1361,15 @@ Private Sub Form_Load()
     
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT raportacion.codsocio, rsocios.nomsocio, raportacion.fecaport, raportacion.codaport, rtipoapor.nomaport, "
-    CadenaConsulta = CadenaConsulta & " raportacion.descripcion, raportacion.campanya, raportacion.kilos, raportacion.importe   "
+    CadenaConsulta = CadenaConsulta & " raportacion.descripcion, "
+    
+    '[Monica]11/06/2018: en numfactu llevamos el codigo de campo
+    If vParamAplic.Cooperativa = 16 Then
+        CadenaConsulta = CadenaConsulta & " raportacion.numfactu, raportacion.kilos, raportacion.importe   "
+    Else
+        CadenaConsulta = CadenaConsulta & " raportacion.campanya, raportacion.kilos, raportacion.importe   "
+    End If
+    
     CadenaConsulta = CadenaConsulta & " FROM  raportacion, rsocios, rtipoapor  "
     CadenaConsulta = CadenaConsulta & " WHERE raportacion.codsocio = rsocios.codsocio and  "
     CadenaConsulta = CadenaConsulta & " raportacion.codaport = rtipoapor.codaport "
@@ -1367,6 +1381,7 @@ Private Sub Form_Load()
     
     '[Monica]04/06/2018:en el caso de coopic los kilos llevan las hanegadas
     If vParamAplic.Cooperativa = 16 Then
+        txtAux(3).Tag = "Campo|N|N|||raportacion|numfactu|000000000||"
         txtAux(4).Tag = "Hanegadas|N|N|||raportacion|kilos|###,##0.##||"
     End If
     
@@ -1659,12 +1674,14 @@ Private Sub CargaGrid(Optional vSQL As String, Optional Ascendente As Boolean)
     tots = tots & "S|txtAux(1)|T|Fecha|1400|;S|btnBuscar(0)|B||195|;"
     tots = tots & "S|txtAux(6)|T|Codigo|800|;S|btnBuscar(2)|B||195|;S|txtAux2(6)|T|Tipo Aportación|2100|;"
     tots = tots & "S|txtAux(2)|T|Descripcion|3000|;"
-    tots = tots & "S|txtAux(3)|T|Campaña|1100|;"
+    
     
     '[Monica]04/06/2018: aportaciones de coopic
     If vParamAplic.Cooperativa = 16 Then
-        tots = tots & "S|txtAux(4)|T|Hanegadas|1500|;"
+        tots = tots & "S|txtAux(3)|T|Campo|1200|;"
+        tots = tots & "S|txtAux(4)|T|Hanegadas|1400|;"
     Else
+        tots = tots & "S|txtAux(3)|T|Campaña|1100|;"
         tots = tots & "S|txtAux(4)|T|Kilos|1500|;"
     End If
     
