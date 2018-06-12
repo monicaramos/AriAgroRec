@@ -579,6 +579,121 @@ EInsertarF:
 End Function
 
 
+Public Function CadenaModificarDesdeForm(ByRef formulario As Form, vTabla As String) As String
+'Equivale a InsertarDesdeForm, excepto que devuelve la candena SQL y hace el execute fuera de la función.
+Dim Control As Object
+Dim mTag As CTag
+Dim Izda As String
+Dim Der As String
+Dim cad As String
+    
+    On Error GoTo EInsertarF
+    
+    'Exit Function
+    Set mTag = New CTag
+    CadenaModificarDesdeForm = ""
+    Der = ""
+    Izda = ""
+    For Each Control In formulario.Controls
+        'Si es texto monta esta parte de sql
+        If TypeOf Control Is TextBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If mTag.Cargado Then
+                        If UCase(mTag.tabla) = UCase(vTabla) Then
+                            If mTag.columna <> "" Then
+                                If Izda <> "" Then Izda = Izda & ","
+                                'Access
+                                'Izda = Izda & "[" & mTag.Columna & "]"
+                                Izda = Izda & "" & mTag.columna & "="
+                            
+                                cad = ValorParaSQL(Control.Text, mTag)
+                                Izda = Izda & cad
+                                '++
+                                If mTag.EsClave Then
+                                    If Der <> "" Then Der = Der & " AND "
+                                    Der = Der & mTag.columna & "=" & cad
+                                End If
+                                    
+                            End If
+                        End If
+                    End If
+                End If
+           End If
+        'CheckBOX
+        ElseIf TypeOf Control Is CheckBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If UCase(mTag.tabla) = UCase(vTabla) Then
+                        If Izda <> "" Then Izda = Izda & ","
+                        'Access
+                        'Izda = Izda & "[" & mTag.Columna & "]"
+                        Izda = Izda & "" & mTag.columna & "="
+                        If Control.Value = 1 Then
+                            cad = "1"
+                            Else
+                            cad = "0"
+                        End If
+                        If mTag.TipoDato = "N" Then cad = Abs(CBool(cad))
+                        Izda = Izda & cad
+                    
+                        '++
+                        If mTag.EsClave Then
+                            If Der <> "" Then Der = Der & " AND "
+                            Der = Der & mTag.columna & "=" & cad
+                        End If
+                    End If
+                End If
+            End If
+        'COMBO BOX
+        ElseIf TypeOf Control Is ComboBox Then
+            If Control.visible = True Then
+                If Control.Tag <> "" Then
+                    mTag.Cargar Control
+                    If mTag.Cargado Then
+                        If UCase(mTag.tabla) = UCase(vTabla) Then
+                            If Izda <> "" Then Izda = Izda & ","
+                            'Izda = Izda & "[" & mTag.Columna & "]"
+                            Izda = Izda & "" & mTag.columna & "="
+                            If Control.ListIndex = -1 Then
+                                cad = ValorNulo
+                            Else
+                                cad = Control.ItemData(Control.ListIndex)
+                            End If
+                            Izda = Izda & cad
+                        
+                            '++
+                            If mTag.EsClave Then
+                                If Der <> "" Then Der = Der & " AND "
+                                Der = Der & mTag.columna & "=" & cad
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        End If
+    Next Control
+    'Construimos el SQL
+    'Ejemplo
+    'INSERT INTO Empleados (Nombre,Apellido, Cargo) VALUES ('Carlos', 'Sesma', 'Prácticas');
+    
+    cad = "UPDATE " & vTabla & " SET "
+    cad = cad & Izda & " WHERE " & Der & ""
+'    Conn.Execute cad, , adCmdText
+    
+    CadenaModificarDesdeForm = cad
+Exit Function
+EInsertarF:
+    MuestraError Err.Number, "Modificar. "
+End Function
+
+
+
+
+
+
 Public Function PonerCamposForma(ByRef formulario As Form, ByRef vData As Adodc) As Boolean
 Dim Control As Object
 Dim mTag As CTag
@@ -976,14 +1091,14 @@ End Function
 'End Function
 
 
-Private Function ObtenerMaximoMinimo(vSQL As String, Optional vBD As Byte) As String
+Private Function ObtenerMaximoMinimo(vSql As String, Optional vBD As Byte) As String
 Dim Rs As Recordset
     ObtenerMaximoMinimo = ""
     Set Rs = New ADODB.Recordset
     If vBD = cConta Then
-        Rs.Open vSQL, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Rs.Open vSql, ConnConta, adOpenForwardOnly, adLockOptimistic, adCmdText
     Else
-        Rs.Open vSQL, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
+        Rs.Open vSql, conn, adOpenForwardOnly, adLockOptimistic, adCmdText
     End If
     If Not Rs.EOF Then
         If Not IsNull(Rs.Fields(0)) Then
@@ -2742,7 +2857,7 @@ End Function
 
 
 
-Public Function TotalRegistros(vSQL As String) As Long
+Public Function TotalRegistros(vSql As String) As Long
 'Devuelve el valor de la SQL
 'para obtener COUNT(*) de la tabla
 Dim Rs As ADODB.Recordset
@@ -2750,7 +2865,7 @@ Dim Rs As ADODB.Recordset
     On Error Resume Next
 
     Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
+    Rs.Open vSql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
     
     TotalRegistros = 0
     If Not Rs.EOF Then
@@ -3046,14 +3161,14 @@ End Function
 
 
 
-Public Function DevuelveValor(vSQL As String) As Variant
+Public Function DevuelveValor(vSql As String) As Variant
 'Devuelve el valor de la SQL
 Dim Rs As ADODB.Recordset
 
     On Error Resume Next
 
     Set Rs = New ADODB.Recordset
-    Rs.Open vSQL, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
+    Rs.Open vSql, conn, adOpenForwardOnly, adLockReadOnly, adCmdText
     
     DevuelveValor = 0
     If Not Rs.EOF Then

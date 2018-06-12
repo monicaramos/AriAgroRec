@@ -9248,7 +9248,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -9324,7 +9324,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -9422,7 +9422,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -9457,15 +9457,15 @@ Dim vSQL As String
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHClase= """) Then Exit Sub
     End If
     
-    vSQL = ""
-    If txtCodigo(109).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtCodigo(109).Text, "N")
-    If txtCodigo(110).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtCodigo(110).Text, "N")
+    vSql = ""
+    If txtCodigo(109).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(109).Text, "N")
+    If txtCodigo(110).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(110).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSQL
+    frmMens2.cadWHERE = vSql
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -9521,7 +9521,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
     InicializarVbles
     
@@ -9590,7 +9590,7 @@ Dim vSQL As String
 
 End Sub
 
-Private Function ActualizarDevoluciones(vtabla As String, vSelect As String) As Boolean
+Private Function ActualizarDevoluciones(vTabla As String, vSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -9667,7 +9667,7 @@ eActualizarDevoluciones:
     
 End Function
 
-Private Function InsertarTemporal(vtabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporal(vTabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -9679,7 +9679,7 @@ Dim Sql As String
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
     Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
     Sql = Sql & " select " & vUsu.Codigo & ", raportacion.codsocio, fecaport, codaport, numfactu, codtipom, importe "
-    Sql = Sql & " from " & vtabla
+    Sql = Sql & " from " & vTabla
     Sql = Sql & " where " & vSelect
     
     conn.Execute Sql
@@ -9693,7 +9693,7 @@ End Function
 
 
 
-Private Function InsertarTemporal2(vtabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporal2(vTabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -9705,7 +9705,7 @@ Dim Sql As String
                                             'socio, fecaport,codaport,numfactu, codtipom, importe
     Sql = "insert into tmpinformes (codusu, codigo1, fecha1, campo1, importe1, nombre1, importe2)"
     Sql = Sql & " select " & vUsu.Codigo & ", codsocio, " & DBSet(txtCodigo(74).Text, "F") & "," & DBSet(txtCodigo(71).Text, "N") & ", 0, null," & DBSet(txtCodigo(73).Text, "N")
-    Sql = Sql & " from " & vtabla
+    Sql = Sql & " from " & vTabla
     Sql = Sql & " where " & vSelect
     
     conn.Execute Sql
@@ -9846,7 +9846,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
 InicializarVbles
     
@@ -9892,15 +9892,15 @@ InicializarVbles
         If Not PonerDesdeHasta(cDesde, cHasta, "", "", "pDHClase= """) Then Exit Sub
     End If
     
-    vSQL = ""
-    If txtCodigo(27).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtCodigo(27).Text, "N")
-    If txtCodigo(28).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtCodigo(28).Text, "N")
+    vSql = ""
+    If txtCodigo(27).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(27).Text, "N")
+    If txtCodigo(28).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(28).Text, "N")
     
                 
     Set frmMens1 = New frmMensajes
     
     frmMens1.OpcionMensaje = 16
-    frmMens1.cadWHERE = vSQL
+    frmMens1.cadWHERE = vSql
     frmMens1.Show vbModal
     
     Set frmMens1 = Nothing
@@ -9919,7 +9919,7 @@ InicializarVbles
 
 End Sub
 
-Private Function CalculoAportacionQuatretonda(vtabla As String, vWhere As String) As Boolean
+Private Function CalculoAportacionQuatretonda(vTabla As String, vWhere As String) As Boolean
 Dim Sql As String
 Dim Importe As Currency
 Dim Rs As ADODB.Recordset
@@ -9946,7 +9946,7 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    Sql = "select rcampos.* from " & vtabla
+    Sql = "select rcampos.* from " & vTabla
     Sql = Sql & " where " & vWhere
     
     CargarProgres pb5, TotalRegistrosConsulta(Sql)
@@ -10040,7 +10040,7 @@ Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim B As Boolean
-Dim vSQL As String
+Dim vSql As String
 
 InicializarVbles
     
@@ -10125,7 +10125,7 @@ Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
 Dim B As Boolean
-Dim vSQL As String
+Dim vSql As String
 
 InicializarVbles
     
@@ -10174,15 +10174,15 @@ InicializarVbles
     If Not AnyadirAFormula(cadFormula, "{raporhco.intconta} = 0") Then Exit Sub
     If Not AnyadirAFormula(cadSelect, "{raporhco.intconta} = 0") Then Exit Sub
     
-    vSQL = ""
-    If txtCodigo(43).Text <> "" Then vSQL = vSQL & " and clases.codclase >= " & DBSet(txtCodigo(43).Text, "N")
-    If txtCodigo(48).Text <> "" Then vSQL = vSQL & " and clases.codclase <= " & DBSet(txtCodigo(48).Text, "N")
+    vSql = ""
+    If txtCodigo(43).Text <> "" Then vSql = vSql & " and clases.codclase >= " & DBSet(txtCodigo(43).Text, "N")
+    If txtCodigo(48).Text <> "" Then vSql = vSql & " and clases.codclase <= " & DBSet(txtCodigo(48).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSQL
+    frmMens2.cadWHERE = vSql
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -10229,7 +10229,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
 InicializarVbles
     
@@ -10275,15 +10275,15 @@ InicializarVbles
         If Not PonerDesdeHasta(cDesde, cHasta, nDesde, nHasta, "pDHAportacion= """) Then Exit Sub
     End If
     
-    vSQL = ""
-    If txtCodigo(13).Text <> "" Then vSQL = vSQL & " and rtipoapor.codaport >= " & DBSet(txtCodigo(13).Text, "N")
-    If txtCodigo(19).Text <> "" Then vSQL = vSQL & " and rtipoapor.codaport <= " & DBSet(txtCodigo(19).Text, "N")
+    vSql = ""
+    If txtCodigo(13).Text <> "" Then vSql = vSql & " and rtipoapor.codaport >= " & DBSet(txtCodigo(13).Text, "N")
+    If txtCodigo(19).Text <> "" Then vSql = vSql & " and rtipoapor.codaport <= " & DBSet(txtCodigo(19).Text, "N")
     
                 
     Set frmMens = New frmMensajes
     
     frmMens.OpcionMensaje = 32
-    frmMens.cadWHERE = vSQL
+    frmMens.cadWHERE = vSql
     frmMens.Show vbModal
     
     Set frmMens = Nothing
@@ -10326,7 +10326,7 @@ Dim I As Byte
 Dim indRPT As Byte 'Indica el tipo de Documento en la tabla "scryst"
 Dim nomDocu As String 'Nombre de Informe rpt de crystal
 Dim devuelve As String
-Dim vSQL As String
+Dim vSql As String
 
 InicializarVbles
     
@@ -10374,15 +10374,15 @@ InicializarVbles
         End If
     End If
     
-    vSQL = ""
-    If txtCodigo(38).Text <> "" Then vSQL = vSQL & " and variedades.codclase >= " & DBSet(txtCodigo(38).Text, "N")
-    If txtCodigo(39).Text <> "" Then vSQL = vSQL & " and variedades.codclase <= " & DBSet(txtCodigo(39).Text, "N")
+    vSql = ""
+    If txtCodigo(38).Text <> "" Then vSql = vSql & " and variedades.codclase >= " & DBSet(txtCodigo(38).Text, "N")
+    If txtCodigo(39).Text <> "" Then vSql = vSql & " and variedades.codclase <= " & DBSet(txtCodigo(39).Text, "N")
     
                 
     Set frmMens2 = New frmMensajes
     
     frmMens2.OpcionMensaje = 16
-    frmMens2.cadWHERE = vSQL
+    frmMens2.cadWHERE = vSql
     frmMens2.Show vbModal
     
     Set frmMens2 = Nothing
@@ -10574,7 +10574,7 @@ InicializarVbles
 
 End Sub
 
-Private Function SociosEnSeccion(vtabla As String, vWhere As String, Seccion As Integer) As Boolean
+Private Function SociosEnSeccion(vTabla As String, vWhere As String, Seccion As Integer) As Boolean
 Dim Sql As String
 Dim Rs As ADODB.Recordset
 Dim B As Boolean
@@ -10584,8 +10584,8 @@ Dim B As Boolean
     SociosEnSeccion = False
 
     'Seleccionamos los distintos socios, cuentas que vamos a facturar
-    Sql = "SELECT DISTINCT " & vtabla & ".codigo1 codsocio"
-    Sql = Sql & " from " & vtabla
+    Sql = "SELECT DISTINCT " & vTabla & ".codigo1 codsocio"
+    Sql = Sql & " from " & vTabla
     If vWhere <> "" Then Sql = Sql & " where " & vWhere
     Sql = Sql & " order by 1 "
 
@@ -11641,6 +11641,9 @@ Dim Indice As Integer
         Case 34
             Indice = 112
             
+        ' certificado de aportaciones de coopic
+        Case 35, 36, 37
+            Indice = Index + 81
             
         Case Else
             Indice = Index
@@ -11769,6 +11772,13 @@ Private Sub imgBuscar_Click(Index As Integer)
         Case 52
             AbrirFrmTipoAportacion (Index + 44)
                 
+        'certificado de aportaciones de coopic
+        Case 58
+            AbrirFrmSocios (119)
+        Case 53
+            AbrirFrmSocios (120)
+        Case 59, 60 ' tipo de aportacion
+            AbrirFrmTipoAportacion (Index + 62)
     End Select
     
     PonerFoco txtCodigo(indCodigo)
@@ -14564,7 +14574,7 @@ End Function
 
 
 
-Private Function InsertarDevolucionesQua(vtabla As String, vSelect As String) As Boolean
+Private Function InsertarDevolucionesQua(vTabla As String, vSelect As String) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Rs As ADODB.Recordset
@@ -14620,7 +14630,7 @@ Dim Existe As Boolean
     SqlInsert = "insert into ariagro.raporhco (numaport,codsocio,codcampo,poligono,parcela,codparti,codvarie,impaport," & _
                 "fecaport,anoplant,observac,supcoope,ejercicio,intconta) values "
     
-    Sql = "select raporhco.* from " & vtabla
+    Sql = "select raporhco.* from " & vTabla
     Sql = Sql & " where " & vSelect
     
     CargarProgres pb12, TotalRegistrosConsulta(Sql)
@@ -14695,7 +14705,7 @@ eActualizarDevoluciones:
 End Function
 
 
-Private Function InsertarTemporalDevolQua(vtabla As String, vSelect As String) As Boolean
+Private Function InsertarTemporalDevolQua(vTabla As String, vSelect As String) As Boolean
 Dim Sql As String
 
     On Error GoTo eInsertarTemporal
@@ -14707,7 +14717,7 @@ Dim Sql As String
                                             'socio,  campo,    variedad,  importe
     Sql = "insert into tmpinformes (codusu, codigo1, importe1, importe2, importe3)"
     Sql = Sql & " select " & vUsu.Codigo & ", rapohco.codsocio, raporhco.codcampo, raporhco.codvarie, sum(coalesce(raporhco.impaport,0)) importe "
-    Sql = Sql & " from " & vtabla
+    Sql = Sql & " from " & vTabla
     Sql = Sql & " where " & vSelect
     Sql = Sql & " group by 1,2,3,4 "
     Sql = Sql & " order by 1,2,3,4 "
