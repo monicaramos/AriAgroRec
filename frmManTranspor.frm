@@ -1297,7 +1297,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 'Cambio en cuentas de la contabilidad
 Dim IbanAnt As String
@@ -1364,24 +1364,24 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     
     ' **** si n'hi han camps fora del grid, bloquejar-los ****
     BloquearTxt txtAux1(0), B
     BloquearTxt txtAux1(1), B
     BloquearTxt txtAux1(2), B
-    For I = 4 To 18
-        BloquearTxt txtAux1(I), B
-    Next I
+    For i = 4 To 18
+        BloquearTxt txtAux1(i), B
+    Next i
     
     BloquearCmb Me.Combo1(0), B
-    For I = 0 To 3
-        Me.imgBuscar(I).Enabled = Not B
-        Me.imgBuscar(I).visible = Not B
-    Next I
+    For i = 0 To 3
+        Me.imgBuscar(i).Enabled = Not B
+        Me.imgBuscar(i).visible = Not B
+    Next i
     
     BloquearChk Me.chkAbonos(0), (Modo = 0 Or Modo = 2)
     BloquearChk Me.chkAbonos(1), (Modo = 0 Or Modo = 2)
@@ -1396,8 +1396,8 @@ Dim B As Boolean
 '    Combo1(0).Enabled = Not b
 '
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -1415,6 +1415,7 @@ End Sub
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
 Dim B As Boolean
+Dim vCodtra As String
 
     B = (Modo = 2)
     'Busqueda
@@ -1428,13 +1429,21 @@ Dim B As Boolean
     Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
     
+    vCodtra = ""
+    If Not Me.adodc1.Recordset.EOF Then
+        vCodtra = adodc1.Recordset.Fields(0).Value
+        If vParamAplic.Cooperativa = 2 Then vCodtra = "C" & vCodtra
+        If vParamAplic.Cooperativa = 16 Then vCodtra = "A" & vCodtra
+    End If
+    
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = B And EsTransportistaCooperativa(vCodtra)
+    Me.mnModificar.Enabled = B And EsTransportistaCooperativa(vCodtra)
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = B And EsTransportistaCooperativa(vCodtra)
+    Me.mnEliminar.Enabled = B And EsTransportistaCooperativa(vCodtra)
+    
     'Imprimir
     Toolbar1.Buttons(8).Enabled = B
     Me.mnImprimir.Enabled = B
@@ -1465,15 +1474,15 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     Me.chkAbonos(0).Value = 0
     Me.chkAbonos(1).Value = 0
 
-    For I = 4 To 6
-        txtAux2(I).Text = ""
-    Next I
+    For i = 4 To 6
+        txtAux2(i).Text = ""
+    Next i
     
     Combo1(0).ListIndex = 0
     
@@ -1494,16 +1503,16 @@ Private Sub BotonBuscar()
     CargaGrid "rtransporte.codtrans = '-1'"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 
-    For I = 0 To 2
-        txtAux1(I).Text = ""
-    Next I
-    For I = 4 To 18
-        txtAux1(I).Text = ""
-    Next I
+    For i = 0 To 2
+        txtAux1(i).Text = ""
+    Next i
+    For i = 4 To 18
+        txtAux1(i).Text = ""
+    Next i
     Me.Combo1(0).ListIndex = -1
     
     chkAbonos(0).Value = 0
@@ -1517,13 +1526,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -1539,9 +1548,9 @@ Private Sub BotonModificar()
     txtAux(2).Text = DataGrid1.Columns(2).Text
     txtAux(3).Text = DataGrid1.Columns(3).Text
     
-    For I = 4 To 7
-        txtAux1(I).Text = DataGrid1.Columns(I + 1).Text
-    Next I
+    For i = 4 To 7
+        txtAux1(i).Text = DataGrid1.Columns(i + 1).Text
+    Next i
     txtAux1(14).Text = DataGrid1.Columns(9).Text
     txtAux1(13).Text = DataGrid1.Columns(10).Text
     txtAux1(12).Text = DataGrid1.Columns(11).Text
@@ -1549,9 +1558,9 @@ Private Sub BotonModificar()
     txtAux1(8).Text = DataGrid1.Columns(13).Text
     txtAux1(9).Text = DataGrid1.Columns(14).Text
     txtAux1(11).Text = DataGrid1.Columns(15).Text
-    For I = 15 To 18
-        txtAux1(I).Text = DataGrid1.Columns(I + 1).Text
-    Next I
+    For i = 15 To 18
+        txtAux1(i).Text = DataGrid1.Columns(i + 1).Text
+    Next i
     txtAux1(1).Text = DataGrid1.Columns(22).Text
     txtAux1(2).Text = DataGrid1.Columns(24).Text
     ' ***** canviar-ho pel nom del camp del combo *********
@@ -1594,9 +1603,9 @@ Dim jj As Integer
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     
 '    For jj = 0 To cmdAux.Count - 1
 '        cmdAux(jj).visible = (Modo = 1 Or Modo = 3 Or Modo = 4)
@@ -1668,7 +1677,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-    Dim I As String
+    Dim i As String
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -1691,6 +1700,8 @@ Private Sub cmdAceptar_Click()
                     'chivato
                     CargarUnVehiculo txtAux(0).Text, "I"
                 
+                    ComunicaDatos "I"
+                
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
                         cmdCancelar_Click
@@ -1710,16 +1721,18 @@ Private Sub cmdAceptar_Click()
             If DatosOK Then
                 If ModificaDesdeFormulario(Me) Then
                     TerminaBloquear
-                
+                    
                     'chivato
                     CargarUnVehiculo txtAux(0).Text, "U"
+                
+                    ComunicaDatos "U"
                 
 ' De momento lo dejo comentado, pq no se permite crear la cuenta desde el transportista
 '                    '[Monica]08/11/2016: Si han cambiado nombre o CCC pregunto si quieren cambiar los datos de la cuenta en la seccion de horto
                     ModificarDatosCuentaContable
                 
                 
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -1729,7 +1742,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " ='" & I & "'")
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " ='" & i & "'")
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -1805,7 +1818,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -1814,16 +1827,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -1893,9 +1906,9 @@ Private Sub Form_Load()
     '## A mano
 '    chkVistaPrevia.Value = CheckValueLeer(Name)
     
-    For I = 0 To Me.imgBuscar.Count - 1
-        Me.imgBuscar(I).Picture = frmPpal.imgListImages16.ListImages(1).Picture
-    Next I
+    For i = 0 To Me.imgBuscar.Count - 1
+        Me.imgBuscar(i).Picture = frmPpal.imgListImages16.ListImages(1).Picture
+    Next i
     
     '****************** canviar la consulta *********************************+
     CadenaConsulta = "SELECT rtransporte.codtrans, rtransporte.nomtrans, rtransporte.matricula, rtransporte.taravehi, "
@@ -2217,6 +2230,19 @@ Dim cadMen As String
          If ExisteCP(txtAux(0)) Then B = False
     End If
     
+    '[Monica]12/06/2018: en el caso de que sean coopic-picassent no pueden insertar transportistas A o C dependiendo
+    If B And Modo = 3 Then
+        If (vParamAplic.Cooperativa = 2) And Mid(txtAux(0), 1, 1) = "C" Then
+            MsgBox "No puede insertar un transportista con codigo comenzado por C.", vbExclamation
+            PonerFoco txtAux(0)
+            B = False
+        ElseIf (vParamAplic.Cooperativa = 16) And Mid(txtAux(0), 1, 1) = "A" Then
+            MsgBox "No puede insertar un transportista con codigo comenzado por A.", vbExclamation
+            PonerFoco txtAux(0)
+            B = False
+        End If
+    End If
+    
     '[Monica]09/03/2015: visualizamos las matriculas del nif introducido
     If Modo = 3 Then VisualizarMatriculas
     
@@ -2344,12 +2370,12 @@ End Sub
 Private Sub CargaCombo()
 Dim Ini As Integer
 Dim Fin As Integer
-Dim I As Integer
+Dim i As Integer
 
     ' *** neteje els combos, els pose valor i seleccione el valor per defecte ***
-    For I = 0 To Combo1.Count - 1
-        Combo1(I).Clear
-    Next I
+    For i = 0 To Combo1.Count - 1
+        Combo1(i).Clear
+    Next i
     
     'tipo irpf
     Combo1(0).AddItem "Módulo Agrario"
@@ -2385,7 +2411,7 @@ End Sub
 
 
 Private Sub CargaForaGrid()
-Dim I As Integer
+Dim i As Integer
 
     If DataGrid1.Columns.Count <= 2 Then Exit Sub
     
@@ -2397,9 +2423,9 @@ Dim I As Integer
     txtAux(2).Text = DataGrid1.Columns(2).Text
     txtAux(3).Text = DataGrid1.Columns(3).Text
     
-    For I = 4 To 7
-        txtAux1(I).Text = DataGrid1.Columns(I + 1).Text
-    Next I
+    For i = 4 To 7
+        txtAux1(i).Text = DataGrid1.Columns(i + 1).Text
+    Next i
     txtAux1(14).Text = DataGrid1.Columns(9).Text
     txtAux1(13).Text = DataGrid1.Columns(10).Text
     txtAux1(12).Text = DataGrid1.Columns(11).Text
@@ -2407,9 +2433,9 @@ Dim I As Integer
     txtAux1(8).Text = DataGrid1.Columns(13).Text
     txtAux1(9).Text = DataGrid1.Columns(14).Text
     txtAux1(11).Text = DataGrid1.Columns(15).Text
-    For I = 15 To 18
-        txtAux1(I).Text = DataGrid1.Columns(I + 1).Text
-    Next I
+    For i = 15 To 18
+        txtAux1(i).Text = DataGrid1.Columns(i + 1).Text
+    Next i
     
     If DataGrid1.Columns(20).Text <> "" Then
         Me.chkAbonos(0).Value = DataGrid1.Columns(20).Text
@@ -2720,4 +2746,40 @@ End Sub
 
 
 
+Private Sub ComunicaDatos(vOpera As String)
+Dim Sql As String
+Dim codTrans As String
+Dim vLetra As String
+
+    vLetra = ""
+    If vParamAplic.Cooperativa = 2 Then vLetra = "A"
+    If vParamAplic.Cooperativa = 16 Then vLetra = "C"
+    
+    If vLetra = "" Then Exit Sub
+    
+    codTrans = vLetra & txtAux(0).Text
+
+    If vOpera = "I" Then
+        Sql = "insert ignore into rtransporte (codtrans,nomtrans,niftrans,dirtrans,pobtrans,protrans,codpostal) values ("
+        Sql = Sql & DBSet(codTrans, "T") & "," & DBSet(txtAux(1), "T") & "," & DBSet(txtAux1(7), "T") & ","
+        Sql = Sql & DBSet(txtAux1(14), "T") & "," & DBSet(txtAux1(13), "T") & "," & DBSet(txtAux1(12), "N") & ","
+        Sql = Sql & DBSet(txtAux1(10), "T") & ")"
+            
+        ComunicaCooperativa "rtransporte", Sql, "I"
+            
+    Else
+        Sql = "update rtransporte set "
+        Sql = Sql & " nomtrans = " & DBSet(txtAux(1), "T")
+        Sql = Sql & ", niftrans = " & DBSet(txtAux1(7), "T")
+        Sql = Sql & ", dirtrans = " & DBSet(txtAux1(14), "T")
+        Sql = Sql & ", pobtrans = " & DBSet(txtAux1(13), "T")
+        Sql = Sql & ", protrans = " & DBSet(txtAux1(12), "T")
+        Sql = Sql & ", codpostal = " & DBSet(txtAux1(10), "T")
+        Sql = Sql & " where codtrans = " & DBSet(codTrans, "T")
+        
+        ComunicaCooperativa "rtransporte", Sql, "U"
+        
+    End If
+
+End Sub
 

@@ -544,7 +544,7 @@ Dim Modo As Byte
 '--------------------------------------------------
 Dim PrimeraVez As Boolean
 Dim Indice As Byte 'Index del text1 on es poses els datos retornats des d'atres Formularis de Mtos
-Dim I As Integer
+Dim i As Integer
 
 Private Sub PonerModo(vModo)
 Dim B As Boolean
@@ -558,16 +558,16 @@ Dim B As Boolean
         PonerIndicador lblIndicador, Modo
     End If
     
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).visible = Not B
-        txtAux(I).BackColor = vbWhite
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).visible = Not B
+        txtAux(i).BackColor = vbWhite
+    Next i
     txtAux2(3).visible = Not B
     btnBuscar(0).visible = Not B
     
     
-    cmdAceptar.visible = Not B
-    cmdCancelar.visible = Not B
+    CmdAceptar.visible = Not B
+    CmdCancelar.visible = Not B
     DataGrid1.Enabled = B
     
     'Si es regresar
@@ -585,6 +585,8 @@ End Sub
 Private Sub PonerModoOpcionesMenu()
 'Activa/Desactiva botones del la toobar y del menu, segun el modo en que estemos
 Dim B As Boolean
+Dim vCodCap As String
+
 
     B = (Modo = 2)
     'Busqueda
@@ -598,13 +600,19 @@ Dim B As Boolean
     Toolbar1.Buttons(1).Enabled = B And Not DeConsulta
     Me.mnNuevo.Enabled = B And Not DeConsulta
     
+    vCodCap = ""
+    If Not adodc1.Recordset.EOF Then
+        vCodCap = CLng(DBLet(adodc1.Recordset!codcapat, "N"))
+    End If
+    
+    
     B = (B And adodc1.Recordset.RecordCount > 0) And Not DeConsulta
     'Modificar
-    Toolbar1.Buttons(2).Enabled = B
-    Me.mnModificar.Enabled = B
+    Toolbar1.Buttons(2).Enabled = B And EsCapatazCooperativa(vCodCap)
+    Me.mnModificar.Enabled = B And EsCapatazCooperativa(vCodCap)
     'Eliminar
-    Toolbar1.Buttons(3).Enabled = B
-    Me.mnEliminar.Enabled = B
+    Toolbar1.Buttons(3).Enabled = B And EsCapatazCooperativa(vCodCap)
+    Me.mnEliminar.Enabled = B And EsCapatazCooperativa(vCodCap)
     'Imprimir
     Toolbar1.Buttons(8).Enabled = B
     Me.mnImprimir.Enabled = B
@@ -622,6 +630,9 @@ Private Sub BotonAnyadir()
         NumF = NuevoCodigo
     Else
         NumF = SugerirCodigoSiguienteStr("rcapataz", "codcapat")
+        If vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16 Then
+            NumF = DevuelveValor("select max(coalesce(codcapat,0))+ 1 from rcapataz where codcapat < " & DBSet(cMaxCapa, "N"))
+        End If
     End If
     '********************************************************************
     'Situamos el grid al final
@@ -635,9 +646,9 @@ Private Sub BotonAnyadir()
     End If
     txtAux(0).Text = NumF
     FormateaCampo txtAux(0)
-    For I = 1 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 1 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
     
     txtAux2(3).Text = ""
     
@@ -658,9 +669,9 @@ Private Sub BotonBuscar()
     CargaGrid "rcapataz.codcapat = -1"
     '*******************************************************************************
     'Buscar
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Text = ""
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Text = ""
+    Next i
 '    PosicionarCombo Combo1, "724"
     LLamaLineas DataGrid1.Top + 240, 1 'Pone el form en Modo=1, Buscar
     PonerFoco txtAux(0)
@@ -668,13 +679,13 @@ End Sub
 
 Private Sub BotonModificar()
     Dim anc As Single
-    Dim I As Integer
+    Dim i As Integer
     
     Screen.MousePointer = vbHourglass
     
     If DataGrid1.Bookmark < DataGrid1.FirstRow Or DataGrid1.Bookmark > (DataGrid1.FirstRow + DataGrid1.VisibleRows - 1) Then
-        I = DataGrid1.Bookmark - DataGrid1.FirstRow
-        DataGrid1.Scroll 0, I
+        i = DataGrid1.Bookmark - DataGrid1.FirstRow
+        DataGrid1.Scroll 0, i
         DataGrid1.Refresh
     End If
     
@@ -711,9 +722,9 @@ Private Sub LLamaLineas(alto As Single, xModo As Byte)
     PonerModo xModo
     
     'Fijamos el ancho
-    For I = 0 To txtAux.Count - 1
-        txtAux(I).Top = alto
-    Next I
+    For i = 0 To txtAux.Count - 1
+        txtAux(i).Top = alto
+    Next i
     txtAux2(3).Top = alto
     btnBuscar(0).Top = alto
     
@@ -796,7 +807,7 @@ Private Sub btnBuscar_Click(Index As Integer)
 End Sub
 
 Private Sub cmdAceptar_Click()
-    Dim I As Integer
+    Dim i As Integer
 
     Select Case Modo
         Case 1 'BUSQUEDA
@@ -813,6 +824,9 @@ Private Sub cmdAceptar_Click()
                 If InsertarDesdeForm(Me) Then
                     'chivato
                     CargarUnaCuadrilla CLng(txtAux(0).Text), "I"
+                    
+                    ComunicaDatos "I"
+                    
                     
                     CargaGrid
                     If (DatosADevolverBusqueda <> "") And NuevoCodigo <> "" Then
@@ -835,8 +849,10 @@ Private Sub cmdAceptar_Click()
                     'chivato
                     CargarUnaCuadrilla CLng(txtAux(0).Text), "U"
                     
+                    ComunicaDatos "U"
+                    
                     TerminaBloquear
-                    I = adodc1.Recordset.Fields(0)
+                    i = adodc1.Recordset.Fields(0)
                     PonerModo 2
                     CargaGrid CadB
 '                    If CadB <> "" Then
@@ -846,7 +862,7 @@ Private Sub cmdAceptar_Click()
 '                        CargaGrid
 '                        lblIndicador.Caption = ""
 '                    End If
-                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & I)
+                    adodc1.Recordset.Find (adodc1.Recordset.Fields(0).Name & " =" & i)
                     PonerFocoGrid Me.DataGrid1
                 End If
             End If
@@ -881,7 +897,7 @@ End Sub
 
 Private Sub cmdRegresar_Click()
 Dim cad As String
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 Dim Aux As String
 
@@ -890,16 +906,16 @@ Dim Aux As String
         Exit Sub
     End If
     cad = ""
-    I = 0
+    i = 0
     Do
-        J = I + 1
-        I = InStr(J, DatosADevolverBusqueda, "|")
-        If I > 0 Then
-            Aux = Mid(DatosADevolverBusqueda, J, I - J)
+        J = i + 1
+        i = InStr(J, DatosADevolverBusqueda, "|")
+        If i > 0 Then
+            Aux = Mid(DatosADevolverBusqueda, J, i - J)
             J = Val(Aux)
             cad = cad & adodc1.Recordset.Fields(J) & "|"
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     RaiseEvent DatoSeleccionado(cad)
     Unload Me
 End Sub
@@ -918,6 +934,7 @@ End Sub
 
 Private Sub DataGrid1_RowColChange(LastRow As Variant, ByVal LastCol As Integer)
     PonerContRegIndicador
+    PonerModoOpcionesMenu
 End Sub
 
 Private Sub Form_Activate()
@@ -1153,6 +1170,14 @@ Dim Mens As String
     B = CompForm(Me)
     If Not B Then Exit Function
     
+    '[Monica]12/06/2018: en el caso de que sean coopic-picassent no pueden insertar socios superiores a cMaxSocio=10000
+    If B And Modo = 3 And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And CLng(txtAux(0).Text) > cMaxCapa Then
+        MsgBox "No puede insertar un capataz con codigo superior a " & cMaxCapa & ".", vbExclamation
+        PonerFoco txtAux(0)
+        B = False
+    End If
+    
+    
     If Modo = 3 Then   'Estamos insertando
          If ExisteCP(txtAux(0)) Then B = False
     End If
@@ -1251,4 +1276,32 @@ Dim cerrar As Boolean
     If cerrar Then Unload Me
 
 End Sub
+
+
+
+Private Sub ComunicaDatos(vOpera As String)
+Dim Sql As String
+Dim CodCapa As String
+Dim vLetra As String
+
+    
+    CodCapa = CLng(txtAux(0).Text) + cMaxCapa
+
+    If vOpera = "I" Then
+        Sql = "insert ignore into rcapataz (codcapat,nomcapat) values ("
+        Sql = Sql & DBSet(CodCapa, "N") & "," & DBSet(txtAux(1), "T") & ")"
+            
+        ComunicaCooperativa "rcapataz", Sql, "I"
+            
+    Else
+        Sql = "update rcapataz set "
+        Sql = Sql & " nomcapat = " & DBSet(txtAux(1), "T")
+        Sql = Sql & " where codcapat = " & DBSet(CodCapa, "T")
+        
+        ComunicaCooperativa "rcapataz", Sql, "U"
+    
+    End If
+
+End Sub
+
 

@@ -1130,12 +1130,17 @@ Public Sub SubmnE_Util_Click(Index As Integer)
     
         Case 19: frmLog.Show vbModal ' ver acciones
         
+        '[Monica]14/06/2018: nuevo punto de descarga de datos a csv
+        Case 21: AbrirListadoOfer (320)
+        
+        
+        
     End Select
 End Sub
 
 Public Sub BloqueoMenusSegunCooperativa()
 Dim B As Boolean
-Dim I As Integer
+Dim i As Integer
 
     ' traspaso de facturas a cooperativas solo para Valsur
     MDIppal.mnE_Util(3).Enabled = (vParamAplic.Cooperativa = 1)
@@ -1147,10 +1152,10 @@ Dim I As Integer
     
 ' luego lo descomento
     ' telefonia solo para Valsur
-    For I = 8 To 10
-        MDIppal.mnE_Util(I).Enabled = (vParamAplic.Cooperativa = 1)
-        MDIppal.mnE_Util(I).visible = (vParamAplic.Cooperativa = 1)
-    Next I
+    For i = 8 To 10
+        MDIppal.mnE_Util(i).Enabled = (vParamAplic.Cooperativa = 1)
+        MDIppal.mnE_Util(i).visible = (vParamAplic.Cooperativa = 1)
+    Next i
     
 '    ' traspaso de datos a Almazara solo para Moixent
 '    MDIppal.mnE_Util(6).Enabled = (vParamAplic.Cooperativa = 3)
@@ -1313,6 +1318,12 @@ Dim I As Integer
     '[Monica]29/06/2015: traspaso de albaranes de retirada solo para ABN
     MDIppal.mnE_Util(17).Enabled = (vParamAplic.Cooperativa = 1)
     MDIppal.mnE_Util(17).visible = (vParamAplic.Cooperativa = 1)
+    
+    
+    '[Monica]14/06/2018: creacion de fichero csv de descarga de datos de comunica
+    MDIppal.mnE_Util(21).Enabled = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
+    MDIppal.mnE_Util(21).visible = (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16)
+    
     
     '[Monica]20/10/2015: solo para ABN traspaso de campos de almazara
     MDIppal.mnRec_AlmTrasCampos(1).Enabled = (vParamAplic.Cooperativa = 1)

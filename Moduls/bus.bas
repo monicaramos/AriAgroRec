@@ -167,6 +167,8 @@ Public MensajeFechaOkConta As String
 ' constante a partir de los cuales son socios de la otra cooperativa
 ' coopic y picassent
 Public Const cMaxSocio = 10000
+Public Const cMaxCampo = 100000
+Public Const cMaxCapa = 1000
 
 Dim frmLect As frmPOZLecturasMonast
 Public EsMonasterios As Boolean
@@ -1131,28 +1133,28 @@ End Sub
 '   Cogemos un numero formateado: 1.256.256,98  y deevolvemos 1256256,98
 '   Tiene que venir numérico
 Public Function ImporteFormateado(Importe As String) As Currency
-Dim I As Integer
+Dim i As Integer
 
     If Importe = "" Then
         ImporteFormateado = 0
     Else
         'Primero quitamos los puntos
         Do
-            I = InStr(1, Importe, ".")
-            If I > 0 Then Importe = Mid(Importe, 1, I - 1) & Mid(Importe, I + 1)
-        Loop Until I = 0
+            i = InStr(1, Importe, ".")
+            If i > 0 Then Importe = Mid(Importe, 1, i - 1) & Mid(Importe, i + 1)
+        Loop Until i = 0
         ImporteFormateado = Importe
     End If
 End Function
 
 ' ### [Monica] 11/09/2006
 Public Function ImporteSinFormato(cadena As String) As String
-Dim I As Integer
+Dim i As Integer
 'Quitamos puntos
 Do
-    I = InStr(1, cadena, ".")
-    If I > 0 Then cadena = Mid(cadena, 1, I - 1) & Mid(cadena, I + 1)
-Loop Until I = 0
+    i = InStr(1, cadena, ".")
+    If i > 0 Then cadena = Mid(cadena, 1, i - 1) & Mid(cadena, i + 1)
+Loop Until i = 0
 ImporteSinFormato = TransformaPuntosComas(cadena)
 End Function
 
@@ -1161,30 +1163,30 @@ End Function
 'Cambia los puntos de los numeros decimales
 'por comas
 Public Function TransformaComasPuntos(cadena As String) As String
-Dim I As Integer
+Dim i As Integer
     Do
-        I = InStr(1, cadena, ",")
-        If I > 0 Then
-            cadena = Mid(cadena, 1, I - 1) & "." & Mid(cadena, I + 1)
+        i = InStr(1, cadena, ",")
+        If i > 0 Then
+            cadena = Mid(cadena, 1, i - 1) & "." & Mid(cadena, i + 1)
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     TransformaComasPuntos = cadena
 End Function
 
 'Para los nombre que pueden tener ' . Para las comillas habra que hacer dentro otro INSTR
 Public Sub NombreSQL(ByRef cadena As String)
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
     J = 1
     Do
-        I = InStr(J, cadena, "'")
-        If I > 0 Then
-            Aux = Mid(cadena, 1, I - 1) & "\"
-            cadena = Aux & Mid(cadena, I)
-            J = I + 2
+        i = InStr(J, cadena, "'")
+        If i > 0 Then
+            Aux = Mid(cadena, 1, i - 1) & "\"
+            cadena = Aux & Mid(cadena, i)
+            J = i + 2
         End If
-    Loop Until I = 0
+    Loop Until i = 0
 End Sub
 
 Public Function EsFechaOKString(ByRef T As String) As Boolean
@@ -1208,17 +1210,17 @@ End Function
 
 Public Function DevNombreSQL(cadena As String) As String
 Dim J As Integer
-Dim I As Integer
+Dim i As Integer
 Dim Aux As String
     J = 1
     Do
-        I = InStr(J, cadena, "'")
-        If I > 0 Then
-            Aux = Mid(cadena, 1, I - 1) & "\"
-            cadena = Aux & Mid(cadena, I)
-            J = I + 2
+        i = InStr(J, cadena, "'")
+        If i > 0 Then
+            Aux = Mid(cadena, 1, i - 1) & "\"
+            cadena = Aux & Mid(cadena, i)
+            J = i + 2
         End If
-    Loop Until I = 0
+    Loop Until i = 0
     DevNombreSQL = cadena
 End Function
 
@@ -1520,8 +1522,8 @@ End Function
 
 
 Public Function EsEntero(Texto As String) As Boolean
-Dim I As Integer
-Dim c As Integer
+Dim i As Integer
+Dim C As Integer
 Dim L As Integer
 Dim res As Boolean
 
@@ -1532,28 +1534,28 @@ Dim res As Boolean
         res = False
     Else
         'Vemos si ha puesto mas de un punto
-        c = 0
+        C = 0
         L = 1
         Do
-            I = InStr(L, Texto, ".")
-            If I > 0 Then
-                L = I + 1
-                c = c + 1
+            i = InStr(L, Texto, ".")
+            If i > 0 Then
+                L = i + 1
+                C = C + 1
             End If
-        Loop Until I = 0
-        If c > 1 Then res = False
+        Loop Until i = 0
+        If C > 1 Then res = False
         
         'Si ha puesto mas de una coma y no tiene puntos
-        If c = 0 Then
+        If C = 0 Then
             L = 1
             Do
-                I = InStr(L, Texto, ",")
-                If I > 0 Then
-                    L = I + 1
-                    c = c + 1
+                i = InStr(L, Texto, ",")
+                If i > 0 Then
+                    L = i + 1
+                    C = C + 1
                 End If
-            Loop Until I = 0
-            If c > 1 Then res = False
+            Loop Until i = 0
+            If C > 1 Then res = False
         End If
         
     End If
@@ -1561,13 +1563,13 @@ Dim res As Boolean
 End Function
 
 Public Function TransformaPuntosComas(cadena As String) As String
-    Dim I As Integer
+    Dim i As Integer
     Do
-        I = InStr(1, cadena, ".")
-        If I > 0 Then
-            cadena = Mid(cadena, 1, I - 1) & "," & Mid(cadena, I + 1)
+        i = InStr(1, cadena, ".")
+        If i > 0 Then
+            cadena = Mid(cadena, 1, i - 1) & "," & Mid(cadena, i + 1)
         End If
-        Loop Until I = 0
+        Loop Until i = 0
     TransformaPuntosComas = cadena
 End Function
 
@@ -1657,7 +1659,7 @@ End Function
 
 
 Public Function UsuariosConectados() As Boolean
-Dim I As Integer
+Dim i As Integer
 Dim cad As String
 Dim metag As String
 Dim Sql As String
@@ -1665,13 +1667,13 @@ cad = OtrosPCsContraAplicacion
 UsuariosConectados = False
 If cad <> "" Then
     UsuariosConectados = True
-    I = 1
+    i = 1
     metag = "Los siguientes PC's están conectados a: " & vEmpresa.nomempre & " (" & vUsu.CadenaConexion & ")" & vbCrLf & vbCrLf
     Do
-        Sql = RecuperaValor(cad, I)
+        Sql = RecuperaValor(cad, i)
         If Sql <> "" Then
             metag = metag & "    - " & Sql & vbCrLf
-            I = I + 1
+            i = i + 1
         End If
     Loop Until Sql = ""
     MsgBox metag, vbExclamation

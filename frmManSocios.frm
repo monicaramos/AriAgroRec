@@ -564,16 +564,16 @@ Begin VB.Form frmManSocios
       TabCaption(3)   =   "Documentos"
       TabPicture(3)   =   "frmManSocios.frx":0060
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "Label16"
-      Tab(3).Control(1)=   "Label17"
-      Tab(3).Control(2)=   "imgFec(3)"
-      Tab(3).Control(3)=   "Toolbar4"
-      Tab(3).Control(4)=   "Frame5"
-      Tab(3).Control(5)=   "Toolbar3"
-      Tab(3).Control(6)=   "lw1"
-      Tab(3).Control(7)=   "Toolbar2"
-      Tab(3).Control(8)=   "Text3(0)"
-      Tab(3).Control(9)=   "Frame8"
+      Tab(3).Control(0)=   "Frame8"
+      Tab(3).Control(1)=   "Text3(0)"
+      Tab(3).Control(2)=   "Toolbar2"
+      Tab(3).Control(3)=   "lw1"
+      Tab(3).Control(4)=   "Toolbar3"
+      Tab(3).Control(5)=   "Frame5"
+      Tab(3).Control(6)=   "Toolbar4"
+      Tab(3).Control(7)=   "imgFec(3)"
+      Tab(3).Control(8)=   "Label17"
+      Tab(3).Control(9)=   "Label16"
       Tab(3).ControlCount=   10
       TabCaption(4)   =   "Pozos"
       TabPicture(4)   =   "frmManSocios.frx":007C
@@ -5112,7 +5112,7 @@ End Sub
 
 
 Private Sub cmdAceptar_Click()
-Dim Cadena1 As String
+Dim cadena1 As String
 
     Screen.MousePointer = vbHourglass
     
@@ -5139,6 +5139,9 @@ Dim Cadena1 As String
                     CargarUnSocio CLng(Text1(0).Text), "I"
                     ' *** canviar o llevar el WHERE, repasar codEmpre ****
                     
+                    
+                    
+                    
                     If vParamAplic.HayAppAriagro Then PushSocio Text1(0).Text, "I"
                     
                     Data1.RecordSource = "Select * from " & NombreTabla & Ordenacion
@@ -5154,10 +5157,6 @@ Dim Cadena1 As String
             
         Case 4  'MODIFICAR
             If DatosOK Then
-'                Text1(0).Text = CInt(Text1(0).Text) + cMaxSocio
-'                Cadena1 = CadenaModificarDesdeForm(Me, "rsocios")
-'                Text1(0).Text = CInt(Text1(0).Text) - cMaxSocio
-
             
                 If ModificaDesdeFormulario2(Me, 1) Then
                     TerminaBloquear
@@ -5172,8 +5171,8 @@ Dim Cadena1 As String
                     
                     '[Monica]11/06/2018: si es un socio < 10000 se comunica a otra cooperativa
                     If Text1(0).Text < cMaxSocio And TieneCamposVariedadComercializada(Text1(0).Text) Then
-                        Cadena1 = GeneraCadenaUpdate
-                        ComunicaCooperativa "rsocios", Cadena1, "U", ""
+                        cadena1 = GeneraCadenaUpdate
+                        ComunicaCooperativa "rsocios", cadena1, "U", ""
                     End If
                     
                     
@@ -5216,16 +5215,6 @@ Dim Sql As String
     Sql = Sql & ",codpostal=" & DBSet(Text1(4), "T")
     Sql = Sql & ",pobsocio=" & DBSet(Text1(5), "T")
     Sql = Sql & ",prosocio=" & DBSet(Text1(6), "T")
-    Sql = Sql & ",dirsociocorreo=''"
-    Sql = Sql & ",codpostalcorreo=''"
-    Sql = Sql & ",pobsociocorreo=''"
-    Sql = Sql & ",prosociocorreo='',"
-    Sql = Sql & ",codcoope=01"
-    Sql = Sql & ",tipoprod=0"
-    Sql = Sql & ",tipoirpf=0"
-    Sql = Sql & ",tiporelacion=0"
-    Sql = Sql & ",codsitua=0"
-    Sql = Sql & ",fechaalta='2000-01-01'"
     Sql = Sql & ",nifsocio= " & DBSet(Text1(2), "T")
     Sql = Sql & " WHERE codsocio=" & DBSet(ComprobarCero(Text1(0).Text) + cMaxSocio, "N")
 
@@ -7116,8 +7105,8 @@ Dim cadMen As String
     End If
     
     '[Monica]12/06/2018: en el caso de que sean coopic-picassent no pueden insertar socios superiores a cMaxSocio=10000
-    If B And (Modo = 3 Or Modo = 4) And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And CLng(Text1(0).Text) > cMaxSocio Then
-        MsgBox "No puede insertar/modificar un socio con codigo superior a " & cMaxSocio & ".", vbExclamation
+    If B And Modo = 3 And (vParamAplic.Cooperativa = 2 Or vParamAplic.Cooperativa = 16) And CLng(Text1(0).Text) > cMaxSocio Then
+        MsgBox "No puede insertar un socio con codigo superior a " & cMaxSocio & ".", vbExclamation
         PonerFoco Text1(0)
         B = False
     End If

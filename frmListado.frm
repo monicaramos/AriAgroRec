@@ -18528,6 +18528,7 @@ Public OpcionListado As Byte
     
     ' 52 .- Informe/Carta/pago  de socios dados de baja entre 2 fechas
     
+    ' 53
     
 Public NumCod As String 'Para indicar cod. Traspaso,Movimiento, etc. que llama
                         'Para indicar nº oferta a imprimir
@@ -22662,7 +22663,7 @@ Dim cadWHERE As String
 Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
-Dim Cadena1 As String
+Dim cadena1 As String
 Dim Directorio As String
 Dim fec As String
 
@@ -23122,7 +23123,7 @@ Dim cadWHERE As String
 Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
-Dim Cadena1 As String
+Dim cadena1 As String
 Dim Directorio As String
 Dim fec As String
 Dim cadTabla As String
@@ -23630,7 +23631,7 @@ Dim cadWHERE As String
 Dim B As Boolean
 Dim NomFic As String
 Dim cadena As String
-Dim Cadena1 As String
+Dim cadena1 As String
 Dim nompath As String
 Dim Fichero1 As String
 Dim Fichero2 As String
@@ -30311,7 +30312,7 @@ Dim vWhere As String
             cad = cad & RellenaABlancos(Rs!nomsocio, True, 51)
             cad = cad & RellenaABlancos(Rs!prosocio, True, 15)
             cad = cad & RellenaABlancos(Rs!dirsocio, True, 44)
-            cad = cad & RellenaABlancos(Rs!codpostal, True, 12)
+            cad = cad & RellenaABlancos(Rs!codPostal, True, 12)
             cad = cad & RellenaABlancos(Rs!pobsocio, True, 25)
             cad = cad & RellenaABlancos(Format(Rs!codcampo, "00000000"), True, 9)
             cad = cad & RellenaABlancos(Format(Rs!codparti, "0000"), True, 5)

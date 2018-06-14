@@ -780,23 +780,23 @@ Private Sub Text1_GotFocus(Index As Integer)
 End Sub
 
 Private Function DatosOK() As Boolean
-Dim I As Integer
+Dim i As Integer
 
     DatosOK = False
 '    If Opcion = 0 Or Opcion = 3 Then
     If Opcion <> 1 Then
                 'Pocas cosas a comprobar
-                For I = 0 To 2
-                    Text1(I).Text = Trim(Text1(I).Text)
-                    If Text1(I).Text = "" Then
-                        MsgBox "El campo: " & Label1(I).Caption & " no puede estar vacio.", vbExclamation
+                For i = 0 To 2
+                    Text1(i).Text = Trim(Text1(i).Text)
+                    If Text1(i).Text = "" Then
+                        MsgBox "El campo: " & Label1(i).Caption & " no puede estar vacio.", vbExclamation
                         Exit Function
                     End If
-                Next I
+                Next i
                 
                 'EL del mail tiene k tener la arroba @
-                I = InStr(1, Text1(1).Text, "@")
-                If I = 0 Then
+                i = InStr(1, Text1(1).Text, "@")
+                If i = 0 Then
                     MsgBox "Direccion e-mail erronea", vbExclamation
                     Exit Function
                 End If
@@ -833,19 +833,19 @@ End Sub
 
 'El procedimiento servira para ir buscando los vbcrlf y cambiarlos por </p><p>
 Private Sub FijarTextoMensaje()
-Dim I As Integer
+Dim i As Integer
 Dim J As Integer
 
     J = 1
     Do
-        I = InStr(J, Text1(3).Text, vbCrLf)
-        If I > 0 Then
-              cad = cad & Mid(Text1(3).Text, J, I - J) & "</P><P>"
+        i = InStr(J, Text1(3).Text, vbCrLf)
+        If i > 0 Then
+              cad = cad & Mid(Text1(3).Text, J, i - J) & "</P><P>"
         Else
             cad = cad & Mid(Text1(3).Text, J)
         End If
-        J = I + 2
-    Loop Until I = 0
+        J = i + 2
+    Loop Until i = 0
 End Sub
 
 Private Sub HabilitarText()
@@ -978,13 +978,13 @@ End Sub
 Private Sub HacerMultiEnvio()
 Dim cad As String
 Dim Rs As ADODB.Recordset
-Dim I As Integer, cont As Integer
+Dim i As Integer, cont As Integer
 '[Monica]09/02/2012
 Dim Lis As Collection
 Dim FormatoHtml As Boolean
 On Error GoTo EMulti
 
-        'Campos comunes
+    'Campos comunes
     'ENVIO MASIVO DE EMAILS
     Text1(2).Text = RecuperaValor(Me.DatosEnvio, 1)
     Text1(3).Text = RecuperaValor(Me.DatosEnvio, 2)
@@ -1010,79 +1010,8 @@ On Error GoTo EMulti
         If Not vParamAplic.EnvioDesdeOutlook Then FormatoHtml = True
     End If
  
-' [Monica] 04/07/2012 : lo quito pq en utxera salia 2 veces
- 
-'    cad = "<!DOCTYPE HTML PUBLIC " & Chr(34) & "-//W3C//DTD HTML 4.0 Transitional//EN" & Chr(34) & ">"
-'    cad = cad & "<HTML><HEAD><TITLE>Mensaje</TITLE></HEAD>"
-'    cad = cad & "<TABLE BORDER=""0"" CELLSPACING=1 CELLPADDING=0 WIDTH=576>"
-'    'Cuerpo del mensaje
-'    cad = cad & "<TR><TD VALIGN=""TOP""><P><FONT FACE=""Tahoma""><FONT SIZE=3>"
-'    FijarTextoMensaje
-'
-'    cad = cad & "</FONT></FONT></P></TD></TR><TR><TD VALIGN=""TOP"">"
-'
-'    ' [Monica]08/07/2011: añadido esto
-'    ' esta opcion es solo para utxera pq quieren poner lo que hay en las lineas de la scryst en el cuerpo del
-'    ' mensaje
-'
-'    '[Monica]08/05/2012: añadida Escalona que funciona como Utxera
-'    If (vParamAplic.Cooperativa = 8 Or vParamAplic.Cooperativa = 10) And CodCryst <> 0 Then
-'        Dim vParamRpt As CParamRpt
-'
-'        Set vParamRpt = New CParamRpt
-'
-'        If vParamRpt.Leer(CByte(CodCryst)) = 1 Then
-'            cad = "No se han podido cargar los Parámetros de Tipos de Documentos." & vbCrLf
-'            MsgBox cad & "Debe configurar la aplicación.", vbExclamation
-'            Set vParamRpt = Nothing
-'            Exit Sub
-'        Else
-'            cad = cad & "<BR> </BR>" ' <P> </P>"
-'            cad = cad & "<FONT FACE=""Tahoma""><FONT SIZE=3>"
-'
-'            If vParamRpt.LineaPie1 <> "" Then
-'                cad = cad & "<P>" & vParamRpt.LineaPie1 & "</P>" & "<P> </P>"
-'            End If
-'            If vParamRpt.LineaPie2 <> "" Then
-'                cad = cad & "<P>" & vParamRpt.LineaPie2 & "</P>" & "<P> </P>"
-'            End If
-'            If vParamRpt.LineaPie3 <> "" Then
-'                cad = cad & "<P>" & vParamRpt.LineaPie3 & "</P>" & "<P> </P>"
-'            End If
-'            If vParamRpt.LineaPie4 <> "" Then
-'                cad = cad & "<P>" & vParamRpt.LineaPie4 & "</P>" & "<P> </P>"
-'            End If
-'            If vParamRpt.LineaPie5 <> "" Then
-'                cad = cad & "<P>" & vParamRpt.LineaPie5 & "</P>" & "<P> </P>"
-'            End If
-'            cad = cad & "</FONT></FONT>"
-'
-'        End If
-'        Set vParamRpt = Nothing
-'    End If
-'
-'
-'    cad = cad & "<P><hr></P>"
-'    'La imagen
-'    'cad = cad & "<P ALIGN=""CENTER""><IMG SRC=" & Chr(34) & "cid:" & imageContentID & Chr(34) & "></P>"
-''--monica: no tiene que salir
-''    cad = cad & "<P ALIGN=""CENTER""><FONT SIZE=2>Mensaje creado desde el programa " & App.EXEName & " de "
-''    cad = cad & "<A HREF=""http://www.ariadnasoftware.com/"">Ariadna&nbsp;"
-''    cad = cad & "Software S.L.</A></P><P ALIGN=""CENTER""></P>"
-'
-'    cad = cad & "<P>Este correo electrónico y sus documentos adjuntos estan dirigidos EXCLUSIVAMENTE a "
-'    cad = cad & " los destinatarios especificados. La información contenida puesde ser CONFIDENCIAL"
-'    cad = cad & " y/o estar LEGALMENTE PROTEGIDA.</P>"
-'    cad = cad & "<P>Si usted recibe este mensaje por ERROR, por favor comuníqueselo inmediatamente al"
-'    cad = cad & " remitente y ELIMINELO ya que usted NO ESTA AUTORIZADO al uso, revelación, distribución"
-'    cad = cad & " impresión o copia de toda o alguna parte de la información contenida, Gracias "
-'    cad = cad & ".</FONT></P><P><HR ALIGN=""LEFT"" SIZE=1></TD>"
-'    cad = cad & "</TR></TABLE></BODY></HTML>"
-'
-'
-'    If FormatoHtml Then Text1(3).Text = cad
     
-    I = 1
+    i = 1
     Me.Refresh
     DoEvents
     
@@ -1090,7 +1019,7 @@ On Error GoTo EMulti
         Screen.MousePointer = vbHourglass
         Text1(0).Text = Rs!nomprove
         Text1(1).Text = Rs!EMail
-        Caption = "Enviar E-MAIL (" & I & " de " & cont & ")"
+        Caption = "Enviar E-MAIL (" & i & " de " & cont & ")"
         Me.Refresh
         DoEvents
         
@@ -1120,7 +1049,7 @@ On Error GoTo EMulti
 '        End If
         'Siguiente
         Rs.MoveNext
-        I = I + 1
+        i = i + 1
     Wend
     Rs.Close
     
@@ -1134,7 +1063,7 @@ Private Sub HacerMultiEnvioCartas()
 
 Dim cad As String
 Dim Rs As ADODB.Recordset
-Dim I As Integer, cont As Integer
+Dim i As Integer, cont As Integer
 '[Monica]09/02/2012
 Dim Lis As Collection
 Dim FormatoHtml As Boolean
@@ -1188,7 +1117,7 @@ On Error GoTo EMulti
     Loop
     
     
-    I = 1
+    i = 1
     Me.Refresh
     DoEvents
     
@@ -1196,7 +1125,7 @@ On Error GoTo EMulti
         Screen.MousePointer = vbHourglass
         Text1(0).Text = Rs!nomprove
         Text1(1).Text = Rs!EMail
-        Caption = "Enviar E-MAIL (" & I & " de " & cont & ")"
+        Caption = "Enviar E-MAIL (" & i & " de " & cont & ")"
         Me.Refresh
         DoEvents
         
@@ -1210,7 +1139,7 @@ On Error GoTo EMulti
         
         'Siguiente
         Rs.MoveNext
-        I = I + 1
+        i = i + 1
     Wend
     Rs.Close
     
@@ -1227,7 +1156,7 @@ End Sub
 Private Sub HacerMultiEnvioFacturacion()
 Dim cad As String
 Dim Rs As ADODB.Recordset
-Dim I As Integer, cont As Integer
+Dim i As Integer, cont As Integer
 Dim Lis As Collection
 Dim ListaArchivos As Collection
 
@@ -1265,11 +1194,11 @@ On Error GoTo EMulti2
     End If
     
     T1 = Timer
-    For I = 1 To Lis.Count
-         Caption = "Enviar E-MAIL (" & I & " de " & Lis.Count & ")"
+    For i = 1 To Lis.Count
+         Caption = "Enviar E-MAIL (" & i & " de " & Lis.Count & ")"
         DoEvents
         cad = RecuperaValor(DatosEnvio, 4)
-        cad = cad & " and codigo1 =" & Lis.item(I)
+        cad = cad & " and codigo1 =" & Lis.item(i)
         Rs.Open cad, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
         Screen.MousePointer = vbHourglass
         Text1(0).Text = Rs!nomsocio
@@ -1372,7 +1301,7 @@ On Error GoTo EMulti2
         End If
         T1 = Timer
         
-    Next I
+    Next i
     Set Lis = Nothing
     Exit Sub
 EMulti2:
@@ -1396,6 +1325,7 @@ Private Sub EnvioNuevo(ListaArch As Collection)
     End If
 
 End Sub
+
 Private Sub EnvioDesdeExeNuestro(ListaArchivos As Collection)
 Dim Lanza As String
 Dim J As Integer
