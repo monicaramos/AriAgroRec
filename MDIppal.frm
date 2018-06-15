@@ -143,7 +143,7 @@ Begin VB.MDIForm MDIppal
             Style           =   5
             Object.Width           =   1058
             MinWidth        =   1058
-            TextSave        =   "18:04"
+            TextSave        =   "18:05"
          EndProperty
       EndProperty
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1770,7 +1770,7 @@ Begin VB.MDIForm MDIppal
          Index           =   20
       End
       Begin VB.Menu mnE_Util 
-         Caption         =   "Descarga Fichero Datos"
+         Caption         =   "Comunicación de Datos"
          Index           =   21
       End
    End

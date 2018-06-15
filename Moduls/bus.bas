@@ -167,7 +167,7 @@ Public MensajeFechaOkConta As String
 ' constante a partir de los cuales son socios de la otra cooperativa
 ' coopic y picassent
 Public Const cMaxSocio = 10000
-Public Const cMaxCampo = 100000
+Public Const cMaxCampo = 1000000
 Public Const cMaxCapa = 1000
 
 Dim frmLect As frmPOZLecturasMonast

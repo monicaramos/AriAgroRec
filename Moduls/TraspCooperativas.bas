@@ -21,7 +21,7 @@ Dim vValues As String
         
     Sql = "INSERT INTO comunica_env (fechacreacion,usuariocreacion,tipo,tabla,sqlaejecutar,  "
     Sql = Sql & "observaciones,fechadescarga,usuariodescarga) VALUES ("
-    Sql = Sql & DBSet(Now, "FH") & "," & vUsu.Codigo & "," & DBSet(vOperacion, "T") & "," & DBSet(vtabla, "T") & ","
+    Sql = Sql & DBSet(Now, "FH") & "," & DBSet(vUsu.Login, "T") & "," & DBSet(vOperacion, "T") & "," & DBSet(vtabla, "T") & ","
     Sql = Sql & DBSet(vSQL, "T") & "," & DBSet(vObservaciones, "T", "S") & "," & ValorNulo & "," & ValorNulo & ")"
     
     conn.Execute Sql
@@ -111,7 +111,7 @@ Dim Sql As String
 End Function
 
 
-Public Function CargarFicheroCsv(vDesFec As String, vHasFec As String) As Boolean
+Public Function CargarFicheroCsv(vDesFecEnt As String, vHasFecEnt As String, vDesFecAlb As String, vHasFecAlb As String, Entradas As Boolean, Albaranes As Boolean) As Boolean
 Dim Sql As String
 Dim Sql2 As String
 Dim Mens As String
@@ -120,7 +120,7 @@ Dim B As Boolean
 Dim Rs As ADODB.Recordset
 Dim NFic As Integer
 Dim Regs As Long
-Dim v_Cadena As String
+Dim v_cadena As String
 
     On Error GoTo eCargarFicheroCsv
 
@@ -128,17 +128,25 @@ Dim v_Cadena As String
 
     CargarFicheroCsv = False
     
-    B = CargarEntradasClasificadas(vDesFec, vHasFec)
+    B = True
     
-    If B Then B = CargarAlbaranesVenta(vDesFec, vHasFec)
+    If Entradas Then
+        ' cargamos el fichero para luego copiarlo
+        B = CargarEntradasClasificadas(vDesFecEnt, vHasFecEnt)
+    End If
+    
+    If Albaranes Then
+        If B Then B = CargarAlbaranesVenta(vDesFecAlb, vHasFecAlb)
+    End If
     
     If B Then
-        ' cargamos el fichero para luego copiarlo
-        Sql = "select * from comunica_env where fechadescarga is null and  (( true "
-        If vDesFec <> "" Then Sql = Sql & " and fechacreacion >= " & DBSet(vDesFec, "F")
-        If vHasFec <> "" Then Sql = Sql & " and fechacreacion <= " & DBSet(vHasFec, "F")
-        Sql = Sql & ") or tabla in ('rclasifica','rclasifica_clasif','rclasifica_incidencia','albaran','albaran_variedad',"
-        Sql = Sql & "'albaran_calibre','albaran_envase','albaran_palets'))"
+        
+        Sql = "select * from comunica_env where fechadescarga is null"
+'        and  (( true "
+'        If vDesFec <> "" Then Sql = Sql & " and fechacreacion >= " & DBSet(vDesFec, "F")
+'        If vHasFec <> "" Then Sql = Sql & " and fechacreacion <= " & DBSet(vHasFec, "F")
+'        Sql = Sql & ") or tabla in ('rclasifica','rclasifica_clasif','rclasifica_incidencia','albaran','albaran_variedad',"
+'        Sql = Sql & "'albaran_calibre','albaran_envase','albaran_palets'))"
         
         Set Rs = New ADODB.Recordset
         Rs.Open Sql, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
@@ -147,19 +155,19 @@ Dim v_Cadena As String
         Open App.Path & "\comunica.txt" For Output As NFic
         
         Regs = 0
-        v_Cadena = ""
+        v_cadena = ""
         While Not Rs.EOF
             Regs = Regs + 1
             
-            v_Cadena = DBLet(Rs!Id, "N") & ";" & DBLet(Rs!fechacreacion, "FH") & ";"
-            v_Cadena = v_Cadena & DBLet(Rs!usuariocreacion, "N") & "," & DBLet(Rs!Tipo, "T") & ";"
-            v_Cadena = v_Cadena & DBLet(Rs!tabla, "T") & ";" & DBLet(Rs!sqlaejecutar, "T") & ";"
-            v_Cadena = v_Cadena & DBLet(Rs!Observaciones, "T") & ";" & Now() & ";" & vUsu.Codigo & ";"
+            v_cadena = DBLet(Rs!Id, "N") & ";" & DBLet(Rs!fechacreacion, "FH") & ";"
+            v_cadena = v_cadena & DBLet(Rs!usuariocreacion, "N") & ";" & DBLet(Rs!Tipo, "T") & ";"
+            v_cadena = v_cadena & DBLet(Rs!tabla, "T") & ";" & DBLet(Rs!sqlaejecutar, "T") & ";"
+            v_cadena = v_cadena & DBLet(Rs!Observaciones, "T") & ";" & Now() & ";" & vUsu.Login & ";"
             
-            Print #NFic, v_Cadena
+            Print #NFic, v_cadena
             
             Sql2 = "update comunica_env set fechadescarga = " & DBSet(Now(), "FH")
-            Sql2 = Sql2 & ", usuariodescarga = " & DBSet(vUsu.Codigo, "N")
+            Sql2 = Sql2 & ", usuariodescarga = " & DBSet(vUsu.Login, "T")
             Sql2 = Sql2 & " where id = " & DBSet(Rs!Id, "N")
             
             conn.Execute Sql2
@@ -176,11 +184,14 @@ Dim v_Cadena As String
             Exit Function
         End If
         
+        If CopiarFichero Then
+            MsgBox "Proceso realizado correctamente", vbExclamation
         
-        CargarFicheroCsv = True
-        conn.CommitTrans
+            CargarFicheroCsv = True
+            conn.CommitTrans
+            Exit Function
+        End If
         
-        Exit Function
     End If
     
 eCargarFicheroCsv:
@@ -188,37 +199,38 @@ eCargarFicheroCsv:
     conn.RollbackTrans
 End Function
 
-'Private Function CopiarFichero() As Boolean
-'Dim nomFich As String
-'
-'On Error GoTo ecopiarfichero
-'
-'    CopiarFichero = False
-'    ' abrimos el commondialog para indicar donde guardarlo
-''    Me.CommonDialog1.InitDir = App.path
-'
-'    CommonDialog1.DefaultExt = "txt"
-'
-'    CommonDialog1.Filter = "Archivos txt|txt|"
-'    CommonDialog1.FilterIndex = 1
-'
-'    ' copiamos el primer fichero
-'    CommonDialog1.FileName = "comunica.txt"
-'    Me.CommonDialog1.ShowSave
-'
-'    If CommonDialog1.FileName <> "" Then
-'        FileCopy App.Path & "\comunica.txt", CommonDialog1.FileName
-'    End If
-'
-'    CopiarFichero = True
-'    Exit Function
-'
-'ecopiarfichero:
-'    If Err.Number <> 0 Then
-'        MuestraError Err.Number, Err.Description
-'    End If
-'    Err.Clear
-'End Function
+Private Function CopiarFichero() As Boolean
+Dim nomFich As String
+
+On Error GoTo ecopiarfichero
+
+    CopiarFichero = False
+    ' abrimos el commondialog para indicar donde guardarlo
+'    Me.CommonDialog1.InitDir = App.path
+
+    cd1.DefaultExt = "csv"
+    
+    cd1.Filter = "Archivos csv|csv|"
+    cd1.FilterIndex = 1
+    
+    ' copiamos el primer fichero
+    cd1.FileName = "comunica.csv"
+    Me.cd1.ShowSave
+    
+    If cd1.FileName <> "" Then
+        FileCopy App.Path & "\comunica.csv", cd1.FileName
+    End If
+    
+    CopiarFichero = True
+    Exit Function
+
+ecopiarfichero:
+    If Err.Number <> 0 Then
+        MuestraError Err.Number, Err.Description
+    End If
+    Err.Clear
+End Function
+
 
 
 Private Function CargarEntradasClasificadas(vDFec As String, vHFec As String) As Boolean
@@ -239,7 +251,7 @@ Dim CadVal6 As String
 
 Dim Rs As ADODB.Recordset
 Dim Rs2 As ADODB.Recordset
-Dim Numnotac As Long
+Dim NumNotac As Long
 
     On Error GoTo eCargarEntradasClasificadas
 
@@ -266,13 +278,16 @@ Dim Numnotac As Long
     ' rclasifica_incidencia
     CadIns3 = "insert into rclasifica_incidencia (numnotac,codincid) values ("
     
-    Numnotac = DBSet(Rs!Numnotac, "N") + 1000000
     
     While Not Rs.EOF
     
-        If EntradaClasificada(DBLet(Rs!Numnotac, "N")) Then
+        If EntradaClasificada(DBLet(Rs!NumNotac, "N")) Then
     
-            CadValues = DBSet(Numnotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "H") & ","
+    
+            NumNotac = DBSet(Rs!NumNotac, "N") + 1000000
+    
+    
+            CadValues = DBSet(NumNotac, "N") & "," & DBSet(Rs!FechaEnt, "F") & "," & DBSet(Rs!horaentr, "H") & ","
             CadValues = CadValues & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!Codsocio, "N") & "," & DBSet(Rs!codcampo, "N") & ","
             CadValues = CadValues & DBSet(Rs!TipoEntr, "N") & "," & DBSet(Rs!Recolect, "N") & "," & DBSet(Rs!codTrans, "T") & ","
             CadValues = CadValues & DBSet(Rs!codcapat, "N") & "," & DBSet(Rs!Codtarif, "N") & "," & DBSet(Rs!KilosBru, "N") & ","
@@ -288,12 +303,12 @@ Dim Numnotac As Long
             ComunicaCooperativa "rclasifica", CadValues, "I"
         
             ' rclasifica_clasif
-            Sql2 = "select * from rclasifica_clasif where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = "select * from rclasifica_clasif where numnotac = " & DBSet(Rs!NumNotac, "N")
             Set Rs2 = New ADODB.Recordset
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal2 = DBSet(Numnotac, "N") & "," & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Rs!Muestra, "N") & ","
+                CadVal2 = DBSet(NumNotac, "N") & "," & DBSet(Rs!Codvarie, "N") & "," & DBSet(Rs!codcalid, "N") & "," & DBSet(Rs!Muestra, "N") & ","
                 CadVal2 = CadVal2 & DBSet(Rs!KilosNet, "N") & ")"
             
                 CadVal2 = CadIns2 & CadVal2
@@ -305,12 +320,12 @@ Dim Numnotac As Long
             Set Rs2 = Nothing
             
             ' rclasifica_incidencia
-            Sql2 = "select * from rclasifica_incidencia where numnotac = " & DBSet(Rs!Numnotac, "N")
+            Sql2 = "select * from rclasifica_incidencia where numnotac = " & DBSet(Rs!NumNotac, "N")
             Set Rs2 = New ADODB.Recordset
             Rs2.Open Sql2, conn, adOpenForwardOnly, adLockPessimistic, adCmdText
             
             While Not Rs2.EOF
-                CadVal3 = DBSet(Numnotac, "N") & "," & DBSet(Rs!codincid, "N") & ")"
+                CadVal3 = DBSet(NumNotac, "N") & "," & DBSet(Rs!codincid, "N") & ")"
             
                 CadVal3 = CadIns3 & CadVal3
             
@@ -498,3 +513,119 @@ eCargarAlbaranesVenta:
     MuestraError Err.Number, "Cargar Albaranes Venta", Err.Description
 End Function
 
+
+
+Private Function ProcesarFicheroComunicacion2(nomFich As String) As Boolean
+Dim NF As Long
+Dim cad As String
+Dim i As Integer
+Dim longitud As Long
+Dim Rs As ADODB.Recordset
+Dim RS1 As ADODB.Recordset
+Dim NumReg As Long
+Dim Sql As String
+Dim Sql1 As String
+Dim Total As Long
+Dim v_cant As Currency
+Dim v_impo As Currency
+Dim v_prec As Currency
+Dim B As Boolean
+
+    On Error GoTo eProcesarFichero2
+    
+    ProcesarFicheroComunicacion2 = False
+    
+    NF = FreeFile
+    Open nomFich For Input As #NF ' & "\BV" & Format(CDate(txtcodigo(0).Text), "ddmmyy") & "." & Format(txtcodigo(1).Text, "000") For Input As #NF
+    
+    Line Input #NF, cad
+    i = 0
+    
+    lblProgres(0).Caption = "Insertando en Tabla temporal: " & nomFich
+    longitud = FileLen(nomFich)
+    
+    Pb1.visible = True
+    Me.Pb1.Max = longitud
+    Me.Refresh
+    Me.Pb1.Value = 0
+    DoEvents
+    ' PROCESO DEL FICHERO VENTAS.TXT
+
+    B = True
+
+    While Not EOF(NF) And B
+        i = i + 1
+        
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & i
+        Me.Refresh
+        DoEvents
+        B = ComprobarRegistro(cad)
+        
+        Line Input #NF, cad
+    Wend
+    Close #NF
+    
+    If cad <> "" Then
+        i = i + 1
+        
+        Me.Pb1.Value = Me.Pb1.Value + Len(cad)
+        lblProgres(1).Caption = "Linea " & i
+        Me.Refresh
+        DoEvents
+        B = ComprobarRegistro(cad)
+    End If
+    
+    Pb1.visible = False
+    lblProgres(0).Caption = ""
+    lblProgres(1).Caption = ""
+
+    ProcesarFicheroComunicacion2 = B
+    Exit Function
+
+eProcesarFicheroComunicacion2:
+    ProcesarFicheroComunicacion2 = False
+End Function
+
+
+Private Function ComprobarRegistro(cad As String) As Boolean
+Dim Sql As String
+
+    On Error GoTo eComprobarRegistro
+
+    ComprobarRegistro = True
+
+    Fecha = RecuperaValorNew(cad, ";", 1)
+    codsoc = RecuperaValor(cad, 4)
+    numfactu = RecuperaValor(cad, 2)
+    numfactu = Replace(numfactu, "-", "|") & "|"
+    Digito = RecuperaValor(numfactu, 1)
+    numfactu = RecuperaValor(numfactu, 4)
+    numfactu = Format((CInt(Digito) * 1000000) + CLng(numfactu), "0000000")
+    
+    
+    baseimpo = RecuperaValor(cad, 6)
+    CuotaIva = RecuperaValor(cad, 7)
+    TotalFac = RecuperaValor(cad, 8)
+    
+    c_BaseImpo = CCur(TransformaPuntosComas(baseimpo))
+    c_CuotaIva = CCur(TransformaPuntosComas(CuotaIva))
+    c_TotalFac = CCur(TransformaPuntosComas(TotalFac))
+    
+    
+    'Comprobamos fechas
+    If Not EsFechaOK(Fecha) Then
+        Mens = "Fecha incorrecta"
+        Sql = "insert into tmpinformes (codusu, fecha1, importe1, importe2, importe3, " & _
+              "importe4, importe5, nombre1) values (" & _
+              vUsu.Codigo & "," & DBSet(Fecha, "F") & _
+              "," & DBSet(codsoc, "N") & "," & _
+              DBSet(numfactu, "N") & "," & _
+              DBSet(c_BaseImpo, "N") & "," & _
+              DBSet(c_CuotaIva, "N") & "," & _
+              DBSet(c_TotalFac, "N") & "," & DBSet(Mens, "T") & ")"
+        
+        conn.Execute Sql
+    End If
+
+End Function
